@@ -142,7 +142,7 @@ export const json: any = {
       "name": "javascript",
       "description": "JavaScript",
       "readOnly": true,
-      "rows": 10
+      "rows": 14
      }
     ]
    }

@@ -19,7 +19,7 @@ export class EmbedModel extends Base {
     FunctionFactory.Instance.register("htmlMarkup", (params: any) => {
       switch(params[0]) { 
         case "angular": return "<ng-app></ng-app>";
-        case "vue": return '<div id="surveyElement"><survey' + (params[1] === "window" ? "-window" : "") + ' :survey=\"survey\"/></div>';
+        case "vue": return '<div id="surveyContainer"><survey' + (params[1] === "window" ? "-window" : "") + ' :survey=\"survey\"/></div>';
         default: return '<div id="surveyContainer"></div>';
       };
     });
@@ -40,6 +40,21 @@ export class EmbedModel extends Base {
       if (framework === "angular") {
           result += `@Component({\n    selector: "ng-app",\n    template: '<div id="surveyElement"></div>'\n})`;
           result += '\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);\n        survey.onComplete.add(sendDataToServer);\n        Survey.Survey' + (show === "window" ? "Window" : "") + 'NG.render("surveyElement", { model: survey });\n    }\n}';
+      }
+      if (framework === "jquery") {
+        result += "var survey = new Survey.Model(surveyJSON);\n";
+        result += `$("#surveyContainer").Survey${show === "window" ? "Window" : ""}({\n    model: survey,\n    onComplete: sendDataToServer\n});`;
+      }
+      if (framework === "knockout") {
+        result += `var survey = new Survey.Model${show === "window" ? "Window" : ""}(surveyJSON${show === "page" ? ', "surveyContainer"' : ""});\n`;
+        result += show === "window" ? "survey.show();\n" : "";
+        result += "survey.onComplete.add(sendDataToServer);";
+      }
+      if (framework === "react") {
+        result += `ReactDOM.render(<Survey.Survey${show === "window" ? "Window" : ""} json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById("surveyContainer"));`
+      }
+      if (framework === "vue") {
+        result += 'var survey = new Survey.Model(surveyJSON);\nsurvey.onComplete.add(sendDataToServer);\nnew Vue({ el: "#surveyContainer", data: { survey: survey } });';
       }
       return result;
     });
