@@ -109,7 +109,7 @@ export const json: any = {
       "type": "expression",
       "name": "scripts_expression",
       "visible": false,
-      "expression": "scriptsMarkup({framework}, {theme})"
+      "expression": "surveyjsEmbedScriptsMarkup({framework}, {theme})"
      },
      {
       "type": "comment",
@@ -121,7 +121,7 @@ export const json: any = {
       "type": "expression",
       "name": "html_expression",
       "visible": false,
-      "expression": "htmlMarkup({framework}, {show})"
+      "expression": "surveyjsEmbedHtmlMarkup({framework}, {show})"
      },
      {
       "type": "comment",
@@ -135,7 +135,7 @@ export const json: any = {
       "type": "expression",
       "name": "javascript_expression",
       "visible": false,
-      "expression": "javascriptMarkup({framework}, {theme}, {show})"
+      "expression": "surveyjsEmbedJavascriptMarkup({framework}, {theme}, {show})"
      },
      {
       "type": "comment",

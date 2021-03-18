@@ -10,7 +10,7 @@ export class EmbedModel extends Base {
     super();
   }
   public init(creator: CreatorBase<SurveyModel>): void {
-    FunctionFactory.Instance.register("scriptsMarkup", (params: [string, string]) => {
+    FunctionFactory.Instance.register("surveyjsEmbedScriptsMarkup", (params: [string, string]) => {
       const [framework, theme]: [string, string] = params;
       let result: string = `<!-- Your platform (${framework}) scripts -->\n\n`;
       if (theme !== "bootstrap") {
@@ -18,7 +18,7 @@ export class EmbedModel extends Base {
       }
       return result + `\n<script src="https://unpkg.com/survey-${framework}@${Version}/survey.${framework}.min.js"></script>`;
     });
-    FunctionFactory.Instance.register("htmlMarkup", (params: [string, string]) => {
+    FunctionFactory.Instance.register("surveyjsEmbedHtmlMarkup", (params: [string, string]) => {
       const [framework, show]: [string, string] = params;
       switch(framework) { 
         case "angular": return "<ng-app></ng-app>";
@@ -26,7 +26,7 @@ export class EmbedModel extends Base {
         default: return '<div id="surveyContainer"></div>';
       };
     });
-    FunctionFactory.Instance.register("javascriptMarkup", (params: [string, string, string]) => {
+    FunctionFactory.Instance.register("surveyjsEmbedJavascriptMarkup", (params: [string, string, string]) => {
       const [framework, theme, show]: [string, string, string] = params;
       let result: string = `Survey.StylesManager.applyTheme("${theme}");\n\n`;
       result += `var surveyJSON = ${JSON.stringify(creator.JSON)};\n\n`;
