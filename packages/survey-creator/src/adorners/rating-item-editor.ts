@@ -130,7 +130,7 @@ var createAddItemHandler = (
 
 export var ratingItemAdorner = {
   getMarkerClass: (model) => {
-    return !!model.visibleRateValues ? "item_editable" : "";
+    return !!model.parent && !!model.visibleRateValues ? "item_editable" : "";
   },
   getElementName: (model) => "itemText",
   afterRender: (
