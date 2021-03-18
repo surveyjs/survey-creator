@@ -85,6 +85,7 @@ export class TabEmbedPlugin implements ICreatorPlugin {
     this.model.init(this.creator);
   }
   public deactivate(): boolean {
+    this.model.survey = undefined;
     return true;
   }
 }
