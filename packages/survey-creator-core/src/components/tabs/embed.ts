@@ -5,9 +5,11 @@ import { json } from "./embed-json";
 import "./embed.scss";
 
 export class EmbedModel extends Base {
-  @property() survey: SurveyModel;
-  constructor(creator: CreatorBase<SurveyModel>) {
+  @property() public survey: SurveyModel;
+  constructor() {
     super();
+  }
+  public init(creator: CreatorBase<SurveyModel>): void {
     FunctionFactory.Instance.register("scriptsMarkup", (params: any) => {
       //change to string interpolation
       let result: string = "<!-- Your platform (" + params[0] + ") scripts -->\n\n";
@@ -29,10 +31,7 @@ export class EmbedModel extends Base {
       let show = params[2];
       let result = 'Survey.StylesManager.applyTheme("' + theme + '");\n\n';
       result += "var surveyJSON = ";
-      //carry to activate
-      //use negative look-ahead or look-behind to avoid replacing spaces inside strings
-      //this.creator.text.replace(/ /g, "").replace(/\n/g, " ").replace(/:/g, ": ")
-      //result += JSON.stringify(creator.getSurveyJSON(), null, " ").replace(/ /g, "").replace(/\n/g, " ").replace(/:/g, ": ") + ";\n\n";
+      result += JSON.stringify(creator.JSON) + ";\n\n";
       result += "function sendDataToServer(survey) {\n";
       result += "    //send Ajax request to your web server\n";
       result += '    alert("The results are: " + JSON.stringify(survey.data));';
@@ -63,14 +62,14 @@ export class EmbedModel extends Base {
       if (options.question.getType() === "comment") {
         options.cssClasses.title = "sv-question-embed__title";
       }
-  }));
+    }));
   }
 }
 
 export class TabEmbedPlugin implements ICreatorPlugin {
   public model: EmbedModel;
   constructor(private creator: CreatorBase<SurveyModel>) {
-    this.model = new EmbedModel(creator);
+    this.model = new EmbedModel();
     creator.tabs.push({
       id: "embed-new",
       title: getLocString("ed.embedSurvey"),
@@ -85,6 +84,7 @@ export class TabEmbedPlugin implements ICreatorPlugin {
     creator.plugins["embed-new"] = this;
   }
   public activate(): void {
+    this.model.init(this.creator);
   }
   public deactivate(): boolean {
     return true;
