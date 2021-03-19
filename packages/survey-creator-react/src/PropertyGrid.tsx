@@ -1,10 +1,10 @@
-import { PropertyGridModel, PropertyGridViewModel } from "@survey/creator";
+import { PropertyGridModel, PropertyGridViewModel, CreatorBase } from "@survey/creator";
 import React, { Component } from "react";
-import { Base } from "survey-core";
-import { Survey, SurveyElementBase } from "survey-react-ui";
+import { Base, SurveyModel } from "survey-core";
+import { Survey, SurveyElementBase,   SurveyActionBar} from "survey-react-ui";
 
 interface IPropertyGridComponentProps {
-  model: PropertyGridModel;
+  model: CreatorBase<SurveyModel>;
   title: string;
 }
 class PropertyGridComponent extends SurveyElementBase<
@@ -14,7 +14,10 @@ class PropertyGridComponent extends SurveyElementBase<
   model: PropertyGridViewModel;
   constructor(props: IPropertyGridComponentProps) {
     super(props);
-    this.model = new PropertyGridViewModel(this.props.model, this.props.title);
+    var creator = this.props.model;
+    this.model = new PropertyGridViewModel(creator.propertyGrid, this.props.title, (obj: Base): void => {
+      creator.selectElement(obj);
+    });
   }
   protected getStateElement(): Base {
     return this.model;
@@ -22,6 +25,8 @@ class PropertyGridComponent extends SurveyElementBase<
   render() {
     return (
       <div className="svc-property-panel">
+       <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
+
         <div className="svc-property-panel__header">{this.model.title}</div>
         <div className="svc-property-panel__expander">
           <Survey model={this.model.survey}></Survey>

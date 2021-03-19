@@ -19,7 +19,9 @@ test("Go to next/prev", () => {
     ],
   });
   var propertyGrid = new PropertyGridModel(survey);
-  var model = new PropertyGridViewModel(propertyGrid, "");
+  var model = new PropertyGridViewModel(propertyGrid, "", (obj: Base): void => {
+    propertyGrid.obj = obj;
+  });
   expect(model.hasPrev).toBeFalsy();
   expect(model.hasNext).toBeFalsy();
   propertyGrid.obj = survey.pages[0];
@@ -60,7 +62,9 @@ test("Reset history on changing survey", () => {
   });
   var survey2 = new SurveyModel();
   var propertyGrid = new PropertyGridModel(survey1);
-  var model = new PropertyGridViewModel(propertyGrid, "");
+  var model = new PropertyGridViewModel(propertyGrid, "", (obj: Base): void => {
+    propertyGrid.obj = obj;
+  });
   expect(model.hasPrev).toBeFalsy();
   expect(model.hasNext).toBeFalsy();
   propertyGrid.obj = survey1.pages[0];
@@ -97,7 +101,9 @@ test("Update history on deleting elements", () => {
     ],
   });
   var propertyGrid = new PropertyGridModel(survey);
-  var model = new PropertyGridViewModel(propertyGrid, "");
+  var model = new PropertyGridViewModel(propertyGrid, "", (obj: Base): void => {
+    propertyGrid.obj = obj;
+  });
   var page = survey.pages[1];
   propertyGrid.obj = page;
   var question = survey.getQuestionByName("question1");

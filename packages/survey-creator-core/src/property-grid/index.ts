@@ -807,7 +807,11 @@ export class PropertyGridViewModel extends Base {
   @property({ defaultValue: false }) hasPrev: boolean;
   @property({ defaultValue: false }) hasNext: boolean;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
-  constructor(private model: PropertyGridModel, public title: string) {
+  constructor(
+    private model: PropertyGridModel,
+    public title: string,
+    private onAction: (obj: Base) => void
+  ) {
     super();
     this.historyItems = [];
     this.model.objValueChangedCallback = () => {
@@ -863,7 +867,9 @@ export class PropertyGridViewModel extends Base {
       this.historyItems.push({ obj: this.prevObj });
       this.prevObj = null;
     }
-    this.model.obj = this.historyItems[index].obj;
+    if (!!this.onAction) {
+      this.onAction(this.historyItems[index].obj);
+    }
     this.isInternalUpdate = false;
   }
   private updateHistoryItems() {
