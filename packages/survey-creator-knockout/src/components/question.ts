@@ -1,22 +1,68 @@
 import * as ko from "knockout";
-import { Question, SurveyElementViewModel } from "survey-core";
+import {
+  Question,
+  SurveyElementTemplateData,
+  SurveyElementViewModel,
+  SurveyModel,
+} from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { QuestionAdornerViewModel } from "@survey/creator";
+import { CreatorBase, QuestionAdornerViewModel } from "@survey/creator";
+import { KnockoutMouseEvent, KnockoutDragEvent } from "../events";
 //import "./question.scss";
 const template = require("./question.html");
 // import template from "./question.html";
+
+class KnockoutQuestionAdornerViewModel extends QuestionAdornerViewModel {
+  constructor(
+    creator: CreatorBase<SurveyModel>,
+    question: Question,
+    templateData: SurveyElementTemplateData
+  ) {
+    super(creator, question, templateData);
+  }
+
+  koSelect(model: QuestionAdornerViewModel, event: MouseEvent) {
+    return super.select(model, this.wrapMouseEvent(event));
+  }
+  koDragStart(model: QuestionAdornerViewModel, event: DragEvent) {
+    return super.dragStart(model, this.wrapDragEvent(event));
+  }
+  koDragOver(model: QuestionAdornerViewModel, event: DragEvent) {
+    return super.dragOver(model, this.wrapDragEvent(event));
+  }
+  koDrop(model: QuestionAdornerViewModel, event: DragEvent) {
+    return super.drop(model, this.wrapDragEvent(event));
+  }
+  koDragEnd(model: QuestionAdornerViewModel, event: DragEvent) {
+    return super.dragEnd(model, this.wrapDragEvent(event));
+  }
+  private wrapMouseEvent(event: MouseEvent): KnockoutMouseEvent {
+    return new KnockoutMouseEvent(event);
+  }
+  private wrapDragEvent(event: DragEvent): KnockoutDragEvent {
+    return new KnockoutDragEvent(event);
+  }
+}
 
 ko.components.register("svc-question", {
   viewModel: {
     createViewModel: (params: SurveyElementViewModel, componentInfo: any) => {
       const creator = params.componentData;
       const question = params.templateData.data;
+
+      const markup = componentInfo.element.nextSibling.querySelector(
+        ".svc-question__content"
+      );
+      if (markup) {
+        markup.dataset.questionName = question.name;
+      }
+
       const scrollSubscription = ko.computed(() => {
         if (creator.isElementSelected(question)) {
           // componentInfo.element.scrollIntoView();
         }
       });
-      const model = new QuestionAdornerViewModel(
+      const model = new KnockoutQuestionAdornerViewModel(
         params.componentData,
         params.templateData.data as Question,
         params.templateData

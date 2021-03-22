@@ -6,6 +6,7 @@ import { IQuestionToolboxItem } from "@survey/creator";
 //import "./toolbox-item.scss";
 import { AdaptiveActionBarItemWrapper } from "survey-core";
 import { ToolboxViewModel } from "./toolbox";
+import { KnockoutDragEvent } from "src/events";
 const template = require("./toolbox-item.html");
 // import template from "./toolbox-item.html";
 
@@ -28,16 +29,19 @@ export class ToolboxItemViewModel {
   get ariaLabel() {
     return this.item.tooltip + " " + getLocString("toolbox") + " item";
   }
-  click = (model: ToolboxItemViewModel) => {
-    this._creator.clickToolboxItem(this.item.json);
-  };
-  dragstart = (model: ToolboxItemViewModel, e: DragEvent) => {
-    this._creator.dragToolboxItem(this.item.json, e);
+  click(model: ToolboxItemViewModel) {
+    model._creator.clickToolboxItem(model.item.json);
+  }
+  dragstart(model: ToolboxItemViewModel, e: DragEvent) {
+    model._creator.dragDropHelper.dragToolboxItem(
+      JSON.stringify(model.item.json),
+      new KnockoutDragEvent(e)
+    );
     return true;
-  };
-  dragend = (model: ToolboxItemViewModel, e: DragEvent) => {
-    this._creator.dragDropHelper.end();
-  };
+  }
+  dragend(model: ToolboxItemViewModel, e: DragEvent) {
+    model._creator.dragDropHelper.end();
+  }
 }
 
 ko.components.register("svc-toolbox-item", {

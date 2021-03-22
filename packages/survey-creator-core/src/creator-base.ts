@@ -87,7 +87,8 @@ export class CreatorBase<T extends SurveyModel>
 
   @property() surveyValue: T;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
-  public dragDropHelper: DragDropHelper;
+  public dragDropHelper: DragDropHelper<T>;
+
   @property() selection: Base;
 
   private newQuestions: Array<any> = [];
@@ -456,6 +457,7 @@ export class CreatorBase<T extends SurveyModel>
         ? this.options.questionTypes
         : null
     );
+    this.dragDropHelper = new DragDropHelper<T>(this);
     this.propertyGrid = new PropertyGridModel(
       (this.survey as any) as Base,
       this
@@ -749,10 +751,6 @@ export class CreatorBase<T extends SurveyModel>
   public setSurvey(survey: T) {
     survey.setDesignMode(true);
     this.surveyValue = survey;
-    this.dragDropHelper = new DragDropHelper(
-      <any>survey,
-      (options?: any) => {}
-    );
     this.selectElement(survey);
     this.pagesController.currentPage = survey.currentPage;
   }
@@ -1049,15 +1047,7 @@ export class CreatorBase<T extends SurveyModel>
       this.selectElement(newElement);
     }
   }
-  public dragToolboxItem(json: any, e: DragEvent) {
-    if (!this.readOnly) {
-      this.dragDropHelper.startDragToolboxItem(
-        e,
-        json["type"], //this.getNewName(json["type"]),
-        json
-      );
-    }
-  }
+
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
     var parent = obj["parent"];
     var elements = parent.elements;

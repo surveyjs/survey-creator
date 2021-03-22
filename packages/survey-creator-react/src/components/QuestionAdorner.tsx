@@ -1,10 +1,12 @@
 import { QuestionAdornerViewModel } from "@survey/creator";
 import React from "react";
+import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, Question } from "survey-core";
 import {
   SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
+  SurveyQuestion,
 } from "survey-react-ui";
 
 interface QuestionAdornerComponentProps {
@@ -12,6 +14,7 @@ interface QuestionAdornerComponentProps {
   question: Question;
   componentData: any;
 }
+
 export class QuestionAdornerComponent extends SurveyElementBase<
   QuestionAdornerComponentProps,
   any
@@ -30,20 +33,48 @@ export class QuestionAdornerComponent extends SurveyElementBase<
   }
 
   render(): JSX.Element {
+    if (this.model.isDragged) {
+      return null;
+    }
+
     return (
-      <div
-        className={"svc-question__content " + this.model.css()}
-        onClick={(e) => this.model.select(this.model, e.nativeEvent)}
-        onDragStart={(e) => this.model.dragStart(this.model, e.nativeEvent)}
-        onDragOver={(e) => this.model.dragOver(this.model, e.nativeEvent)}
-        onDragEnd={(e) => this.model.dragEnd(this.model, e.nativeEvent)}
-        onDrop={(e) => this.model.drop(this.model, e.nativeEvent)}
-        draggable={this.model.isDraggable}
-      >
-        {this.props.element}
-        <div className="svc-question__content-actions">
-          <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+      <>
+        {this.renderDragOverFeedback(this.model.showDragOverFeedbackAbove)}
+        <div
+          className={"svc-question__content " + this.model.css()}
+          onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
+          onDragStart={(e) =>
+            this.model.dragStart(this.model, new ReactDragEvent(e))
+          }
+          onDragOver={(e) => {
+            this.model.dragOver(this.model, new ReactDragEvent(e));
+          }}
+          onDragEnd={(e) =>
+            this.model.dragEnd(this.model, new ReactDragEvent(e))
+          }
+          onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
+          draggable={this.model.isDraggable}
+        >
+          {this.props.element}
+          <div className="svc-question__content-actions">
+            <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+          </div>
         </div>
+        {this.renderDragOverFeedback(this.model.showDragOverFeedbackBelow)}
+      </>
+    );
+  }
+  renderDragOverFeedback(shouldRender: boolean): JSX.Element {
+    if (!shouldRender) {
+      return null;
+    }
+
+    return (
+      <div style={{ pointerEvents: "none" }}>
+        <SurveyQuestion
+          creator={this.model.creator}
+          element={this.model.dragOverFeedback.data}
+        ></SurveyQuestion>
       </div>
     );
   }

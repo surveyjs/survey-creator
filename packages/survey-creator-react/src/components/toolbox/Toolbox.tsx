@@ -1,20 +1,19 @@
 import {
   CreatorBase,
   getLocString,
+  IQuestionToolboxItem,
 } from "@survey/creator";
 import React, { CSSProperties } from "react";
+import { ReactDragEvent } from "../../events";
 import {
   AdaptiveActionBarItemWrapper,
   AdaptiveElement,
   Base,
   IActionBarItem,
   VerticalResponsibilityManager,
-  SurveyModel
+  SurveyModel,
 } from "survey-core";
-import {
-  SurveyElementBase,
-  SvgIcon,
-} from "survey-react-ui";
+import { SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 // export class SurveyCreatorToolbox extends ActionBar {
 //   constructor(props: any) {
@@ -29,7 +28,7 @@ import {
 interface ISurveyCreatorToolboxProps {
   categories: Array<any>;
   creator: CreatorBase<SurveyModel>;
-  items: Array<IActionBarItem>;
+  items: Array<IQuestionToolboxItem>;
 }
 
 export class SurveyCreatorToolbox extends SurveyElementBase<
@@ -44,9 +43,9 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   constructor(props: ISurveyCreatorToolboxProps) {
     super(props);
 
-    const sourceItems: Array<IActionBarItem> = this.props.items;
+    const sourceItems: Array<IQuestionToolboxItem> = this.props.items;
     this.adaptiveElement.items = sourceItems.map(
-      (item: IActionBarItem, itemIndex: number) => {
+      (item: IQuestionToolboxItem, itemIndex: number) => {
         return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
       }
     );
@@ -155,6 +154,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     //const toolboxItem: any = item.wrappedItem as any;
     const className = "svc-toolbox__item svc-toolbox__item--" + item.iconName;
     //click: click, event: { dragstart: dragstart, dragend: dragend }
+    const toolboxItem: IQuestionToolboxItem = item.wrappedItem as any;
     return (
       <div
         className={className}
@@ -163,12 +163,17 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
         title={item.tooltip}
         role="button"
         aria-label={item.tooltip + " " + getLocString("toolbox") + " item"}
-        // onClick={() => creator.clickToolboxItem(item.json)}
-        // onDragStart={(e) => {
-        //   creator.dragToolboxItem(item.json, e);
-        //   return true;
-        // }}
-        // onDragEnd={() => creator.dragDropHelper.end()}
+        onClick={() => this.props.creator.clickToolboxItem(toolboxItem.json)}
+        onDragStart={(e) => {
+          this.props.creator.dragDropHelper.dragToolboxItem(
+            JSON.stringify(toolboxItem.json),
+            new ReactDragEvent(e)
+          );
+          return true;
+        }}
+        onDragEnd={() => {
+          this.props.creator.dragDropHelper.end();
+        }}
       >
         <span className="svc-toolbox__item-container">
           <SvgIcon size={24} iconName={item.iconName}></SvgIcon>

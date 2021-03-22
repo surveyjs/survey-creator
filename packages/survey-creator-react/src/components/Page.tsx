@@ -6,6 +6,7 @@ import {
 } from "survey-react-ui";
 import { CreatorBase, PageViewModel } from "@survey/creator";
 import React from "react";
+import { ReactDragEvent, ReactMouseEvent } from "../events";
 
 interface ICreatorSurveyPageComponentProps {
   creator: CreatorBase<SurveyModel>;
@@ -33,9 +34,13 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     return (
       <div
         className={"svc-page__content " + this.model.css}
-        onClick={(e) => this.model.select(this.model, e.nativeEvent)}
-        onDragOver={(e) => this.model.dragOver(this.model, e.nativeEvent)}
-        onDrop={(e) => this.model.drop(this.model, e.nativeEvent)}
+        onClick={(e) => {
+          return this.model.select(this.model, new ReactMouseEvent(e));
+        }}
+        onDragOver={(e) =>
+          this.model.dragOver(this.model, new ReactDragEvent(e))
+        }
+        onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
         // data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
       >
         <SurveyPage
@@ -46,7 +51,9 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
         ></SurveyPage>
         <div
           className="svc-page__add-new-question"
-          onClick={(e) => this.model.addNewQuestion(this.model, e.nativeEvent)}
+          onClick={(e) =>
+            this.model.addNewQuestion(this.model, new ReactMouseEvent(e))
+          }
           data-bind="click: addNewQuestion"
         >
           <span className="svc-text svc-text--normal svc-text--bold">

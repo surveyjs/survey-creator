@@ -5,8 +5,11 @@ import {
   Base,
   SurveyModel,
   SurveyElementTemplateData,
+  property,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
+import { DragDropHelper } from "../dragdrophelper";
+import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
 import "./question.scss";
 
 export class QuestionAdornerViewModel extends Base {
@@ -14,6 +17,7 @@ export class QuestionAdornerViewModel extends Base {
   public question: Question;
 
   @propertyArray() actions;
+  @property() isDragged: boolean;
 
   constructor(
     creator: CreatorBase<SurveyModel>,
@@ -25,7 +29,7 @@ export class QuestionAdornerViewModel extends Base {
     this.question = question;
     this.actions = creator.getContextActions(question);
   }
-  select(model: QuestionAdornerViewModel, event: Event) {
+  select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
     event.stopPropagation();
     event.cancelBubble = true;
     model.creator.selectElement(model.question);
@@ -40,59 +44,33 @@ export class QuestionAdornerViewModel extends Base {
   get isDraggable() {
     return true;
   }
-  dragStart(model: QuestionAdornerViewModel, event: DragEvent) {
-    var target: any = event.target || event.srcElement;
-    if (
-      !!target &&
-      !!target.contains &&
-      target !== document.activeElement &&
-      target.contains(document.activeElement)
-    ) {
-      event.preventDefault();
-      return false;
-    }
-    if (!model.isDraggable) return false;
-    if (!event["markEvent"]) {
-      event["markEvent"] = true;
-      model.creator.dragDropHelper.startDragQuestion(event, model.question);
-    }
-    event.cancelBubble = true;
 
-    event.dataTransfer.setData("svc-item-json", JSON.stringify(""));
-    return true;
+  private get dragDropHelper(): DragDropHelper<SurveyModel> {
+    return this.creator.dragDropHelper;
   }
-  dragOver(model: QuestionAdornerViewModel, event: DragEvent) {
-    if (!model.isDraggable) return false;
-    if (!event["markEvent"]) {
-      event["markEvent"] = true;
-      model.creator.dragDropHelper.doDragDropOver(event, model.question, true);
-      return false;
-    }
 
-    // event.dataTransfer.dropEffect = "move";
-    // event.preventDefault();
+  public get showDragOverFeedbackAbove(): boolean {
+    return this.dragDropHelper.showDragOverFeedbackAbove(this.question);
   }
-  drop(model: QuestionAdornerViewModel, event: DragEvent) {
-    var helper = model.creator.dragDropHelper;
-    var preventDefault = !(
-      !!helper.ddTarget &&
-      !!helper.ddTarget.source &&
-      <any>helper.ddTarget.source.parent == model.question
-    );
-    if (!event["markEvent"]) {
-      event["markEvent"] = true;
-      helper.doDrop(event, preventDefault);
-    }
-
-    // var data = event.dataTransfer.getData("svc-item-json");
-    // if(!!data) {
-    // }
-    // event.preventDefault();
+  public get showDragOverFeedbackBelow(): boolean {
+    return this.dragDropHelper.showDragOverFeedbackBelow(this.question);
   }
-  dragEnd(model: QuestionAdornerViewModel, event: DragEvent) {
-    delete model.question["isDragStarted"];
-    model.creator.dragDropHelper.end();
+  public get dragOverFeedback(): SurveyElementTemplateData {
+    return this.dragDropHelper.dragOverFeedback;
+  }
 
-    event.preventDefault();
+  dragStart(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
+    setTimeout(() => (model.isDragged = true), 1);
+    return model.dragDropHelper.dragStart(model.question, event);
+  }
+  dragOver(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
+    model.dragDropHelper.dragOver(model.question, event);
+  }
+  drop(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
+    model.dragDropHelper.drop(model.question, event);
+  }
+  dragEnd(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
+    setTimeout(() => (model.isDragged = false), 1);
+    model.dragDropHelper.dragEnd(model.question, event);
   }
 }

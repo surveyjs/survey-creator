@@ -26,6 +26,14 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
 
   render(): JSX.Element {
+    return (
+      <ReactDragDropHelperComponent
+        creator={this.props.creator}
+        renderContent={() => this.renderContent()}
+      ></ReactDragDropHelperComponent>
+    );
+  }
+  renderContent(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const survey: SurveyModel = this.props.survey;
     const className = "svc-tab-designer " + survey.css.root;
@@ -88,6 +96,28 @@ export class TabDesignerComponent extends SurveyElementBase<
         params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"
         ></svc-page-navigator>
        */
+  }
+}
+
+interface ReactDragDropHelperComponentProps {
+  creator: CreatorBase<SurveyModel>;
+  renderContent: () => JSX.Element;
+}
+
+class ReactDragDropHelperComponent extends SurveyElementBase<
+  ReactDragDropHelperComponentProps,
+  any
+> {
+  constructor(props: ReactDragDropHelperComponentProps) {
+    super(props);
+  }
+
+  protected getStateElement(): Base {
+    return this.props.creator.dragDropHelper;
+  }
+
+  render(): JSX.Element {
+    return this.props.renderContent();
   }
 }
 
