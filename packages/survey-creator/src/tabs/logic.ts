@@ -499,7 +499,7 @@ export class SurveyLogicItem {
 
 export class SurveyLogic implements ISurveyLogicItemOwner {
   public static visibleActions = [];
-  public static types = [
+  public static types: Array<any> = [
     {
       name: "page_visibility",
       baseClass: "page",

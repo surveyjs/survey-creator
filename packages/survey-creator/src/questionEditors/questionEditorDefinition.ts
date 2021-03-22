@@ -184,6 +184,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "hasSelectAll", tab: "choices" },
         { name: "selectAllText", tab: "choices" },
+        { name: "maxSelectedChoices", tab: "choices" },
       ],
     },
     radiogroup: {
@@ -304,6 +305,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "hasSelectAll", tab: "choices" },
         { name: "hasNone", tab: "choices" },
         { name: "noneText", tab: "choices" },
+        { name: "maxSelectedChoices", tab: "choices" },
       ],
       tabs: [
         { name: "choices", index: 10 },

@@ -65,7 +65,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         </div>
         <div className="svc-flex-column" style={style}>
           <PropertyGridComponent
-            model={creator.propertyGrid}
+            model={creator}
             title="Question Properties"
           ></PropertyGridComponent>
         </div>

@@ -10,6 +10,9 @@ import {
   settings,
   QuestionMatrixDynamicModel,
   property,
+  ISurvey,
+  IActionBarItem,
+  propertyArray,
 } from "survey-core";
 import {
   SurveyQuestionEditorTabDefinition,
@@ -622,9 +625,10 @@ export class PropertyGridModel {
     return this.options.createSurvey(json, "property-grid");
   }
   protected getSurveyJSON(): any {
-    return {
-      showNavigationButtons: "none",
-    };
+    var res = {};
+    setSurveyJSONForPropertyGrid(res);
+    delete res["textUpdateMode"];
+    return res;
   }
   private onValidateQuestion(options: any) {
     var q = options.question;
@@ -789,18 +793,133 @@ export class PropertyGridModel {
   }
 }
 
-export class PropertyGridViewModel extends Base {
-  @property() survey: SurveyModel;
+interface IPropertyGridHistoryItem {
+  obj: Base;
+  propertyName?: string;
+}
 
-  constructor(private model: PropertyGridModel, public title: string) {
+export class PropertyGridViewModel extends Base {
+  private historyItems: Array<IPropertyGridHistoryItem>;
+  private prevObj: Base;
+  private isInternalUpdate: boolean;
+  private prevSurvey: ISurvey;
+  @property() survey: SurveyModel;
+  @property({ defaultValue: false }) hasPrev: boolean;
+  @property({ defaultValue: false }) hasNext: boolean;
+  @propertyArray() toolbarItems: Array<IActionBarItem>;
+  constructor(
+    private model: PropertyGridModel,
+    public title: string,
+    private onAction: (obj: Base) => void
+  ) {
     super();
+    this.historyItems = [];
     this.model.objValueChangedCallback = () => {
+      this.updateHistoryItems();
       this.survey = this.model.survey;
-      this.survey.showQuestionNumbers = "off";
       // AM: TODO need to fix creatorCss content, it breaks survey appearance in the PropertyGrid
       // this.survey.css = creatorCss;
     };
+    this.toolbarItems.push({
+      id: "svd-grid-history-prev",
+      title: "Prev", //TODO editorLocalization.getString("pe.edit"),
+      component: "sv-action-bar-item",
+      enabled: this.hasPrev,
+      action: () => {
+        this.prev();
+      },
+    });
+    this.toolbarItems.push({
+      id: "svd-grid-history-next",
+      title: "Next", //TODO editorLocalization.getString("pe.edit"),
+      component: "sv-action-bar-item",
+      enabled: this.hasNext,
+      action: () => {
+        this.next();
+      },
+    });
     this.model.objValueChangedCallback();
+  }
+  public next() {
+    this.updateHistoryActionState();
+    if (!this.hasNext) return;
+    var index = this.findCurrentIndex() + 1;
+    if (index < this.historyItems.length) {
+      this.setObjInternally(index);
+    }
+  }
+  public prev() {
+    this.updateHistoryActionState();
+    if (!this.hasPrev) return;
+    var index = this.findCurrentIndex();
+    if (index < 0) index = this.historyItems.length - 1;
+    else index--;
+    if (index > -1) {
+      this.setObjInternally(index);
+    }
+  }
+  public hasInHistory(obj: Base): boolean {
+    return this.findIndex(obj) > -1;
+  }
+  private setObjInternally(index: number) {
+    this.isInternalUpdate = true;
+    if (!!this.prevObj) {
+      this.historyItems.push({ obj: this.prevObj });
+      this.prevObj = null;
+    }
+    if (!!this.onAction) {
+      this.onAction(this.historyItems[index].obj);
+    }
+    this.isInternalUpdate = false;
+  }
+  private updateHistoryItems() {
+    if (this.prevObj == this.model.obj) return;
+    if (
+      !!this.model.obj &&
+      !!this.prevSurvey &&
+      this.prevSurvey != this.model.obj.getSurvey()
+    ) {
+      this.historyItems = [];
+      this.prevObj = null;
+    }
+    if (!!this.model.obj) {
+      var survey = this.model.obj.getSurvey();
+      if (!!survey) {
+        this.prevSurvey = survey;
+      }
+    }
+    if (!!this.prevObj) {
+      this.historyItems.push({ obj: this.prevObj });
+    }
+    this.prevObj = !this.isInternalUpdate ? this.model.obj : null;
+    this.updateHistoryActionState(!this.isInternalUpdate);
+  }
+  private updateHistoryActionState(removeItem: boolean = false) {
+    var index = this.findCurrentIndex();
+    if (removeItem && index > -1) {
+      this.historyItems.splice(index, 1);
+      index = -1;
+    }
+    this.hasPrev = index != 0 && this.historyItems.length > 0;
+    this.hasNext = index >= 0 && index < this.historyItems.length - 1;
+  }
+  private removeDeletedItemsFromHistory() {
+    for (var i = this.historyItems.length - 1; i >= 0; i--) {
+      if (!this.historyItems[i].obj.inSurvey) {
+        this.historyItems.splice(i, 1);
+      }
+    }
+  }
+  private findCurrentIndex(): number {
+    return this.findIndex(this.model.obj);
+  }
+  private findIndex(obj: Base): number {
+    this.removeDeletedItemsFromHistory();
+    if (!obj) return -1;
+    for (var i = 0; i < this.historyItems.length; i++) {
+      if (this.historyItems[i].obj == obj) return i;
+    }
+    return -1;
   }
 }
 
