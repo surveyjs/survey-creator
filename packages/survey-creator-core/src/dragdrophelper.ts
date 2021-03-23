@@ -76,7 +76,12 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
   @property() _showDragOverFeedbackAbove: boolean;
   @property() _showDragOverFeedbackBelow: boolean;
   @property() draggedOverQuestion: Question;
+  @property() draggedOverPage: PageModel;
+
   private draggedQuestion: Question;
+  public showDragOverPage(page: PageModel): boolean {
+    return this.draggedOverPage !== undefined && page.elements.length <= 0;
+  }
   public showDragOverFeedbackAbove(question: Question): boolean {
     return (
       question === this.draggedOverQuestion && this._showDragOverFeedbackAbove
@@ -90,6 +95,7 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
 
   public clearDragFeedback() {
     this.draggedOverQuestion = undefined;
+    this.draggedOverPage = undefined;
     this.dragOverFeedbackInstance = undefined;
     this._showDragOverFeedbackAbove = false;
     this._showDragOverFeedbackBelow = false;
@@ -117,9 +123,21 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
     return true;
   }
 
+  public dragOverPage(page: PageModel, event: IPortableDragEvent) {
+    event.preventDefault();
+    event.cancelBubble = true;
+    event.stopPropagation();
+
+    this.draggedOverQuestion = undefined;
+    this.draggedOverPage = page;
+  }
   public dragOver(question: Question, event: IPortableDragEvent) {
     event.preventDefault();
+    event.cancelBubble = true;
+    event.stopPropagation();
+
     this.draggedOverQuestion = question;
+    this.draggedOverPage = undefined;
 
     const isBelow = this.isAtLowerPartOfCurrentTarget(event);
     this._showDragOverFeedbackAbove = !isBelow;
