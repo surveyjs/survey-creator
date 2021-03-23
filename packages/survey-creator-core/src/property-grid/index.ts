@@ -258,6 +258,7 @@ export class PropertyGridTitleActionsCreator {
       title: "",
       id: "property-grid-clear",
       icon: "icon-property_grid_clear",
+      showTitle: false,
       iconName: "icon-property_grid_clear",
       enabled: enabled,
       action: () => {
@@ -297,6 +298,7 @@ export class PropertyGridTitleActionsCreator {
       icon: "icon-property_grid_modal",
       iconName: "icon-property_grid_modal",
       enabled: enabled,
+      showTitle: false,
       action: () => {
         this.showModalPropertyEditor(editor, property, question);
       },
@@ -564,6 +566,7 @@ export class PropertyGridModel {
       json.mode = "display";
     }
     this.surveyValue = this.createSurvey(json);
+    this.surveyValue.css = creatorCss;
     var page = this.surveyValue.createNewPage("p1");
     new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
       page,
@@ -942,7 +945,12 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return { type: "boolean", default: false };
+    return {
+      type: "boolean",
+      default: false,
+      renderAs: "checkbox",
+      titleLocation: "hidden",
+    };
   }
 }
 export class PropertyGridEditorString extends PropertyGridEditor {
@@ -1054,6 +1062,9 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
+    if (question.choices.length < 5) {
+      question.renderAs = "button-group";
+    }
   }
   private setChoicesCore(
     question: Question,
