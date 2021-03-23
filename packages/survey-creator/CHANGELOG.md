@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.37](https://github.com/surveyjs/survey-creator/compare/v1.8.36...v1.8.37) (2021-03-23)
+
+
+### Bug Fixes
+
+* checkbox question maxSelectedChoices property is in "other" category [#1114](https://github.com/surveyjs/survey-creator/issues/1114) ([126faba](https://github.com/surveyjs/survey-creator/commit/126faba62b089f8e1c6d858b941328dda997252e))
+
 ### [1.8.36](https://github.com/surveyjs/survey-creator/compare/v1.8.35...v1.8.36) (2021-03-15)
 
 ### [1.8.35](https://github.com/surveyjs/survey-creator/compare/v1.8.34...v1.8.35) (2021-03-11)
