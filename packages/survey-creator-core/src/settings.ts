@@ -26,6 +26,7 @@ export var settings = {
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
   },
   visibleLogicActions: [],
+  defaultNewSurveyJSON: { pages: [{ name: "page1" }] },
 
   //TODO add maximumColumnCount
 };
