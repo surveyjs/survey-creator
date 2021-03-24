@@ -18,6 +18,13 @@
   font-weight: normal;
   margin: 0;
   box-sizing: border-box;
+  .sv-action:not(.sv-action--hidden):not(:last-of-type) {
+    padding-right: 0;
+  }
+  .sv-action-bar,
+  sv-action-bar {
+    padding: 0;
+  }
 }
 
 .svc-survey-question__content {

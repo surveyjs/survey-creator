@@ -1,4 +1,4 @@
-.svc-survey-text {
+.svc-survey-input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -14,15 +14,15 @@
   color: $foreground;
 }
 
-.svc-survey-text::placeholder {
+.svc-survey-input::placeholder {
   color: $foreground-light;
 }
 
-.svc-survey-text:focus {
+.svc-survey-input:focus {
   border: 2px solid #19b394;
 }
 
-.svc-survey-text:disabled,
-.svc-survey-text:disabled::placeholder {
+.svc-survey-input:disabled,
+.svc-survey-input:disabled::placeholder {
   color: $foreground-disabled;
 }

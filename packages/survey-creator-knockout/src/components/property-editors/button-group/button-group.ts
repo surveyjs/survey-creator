@@ -1,4 +1,5 @@
 import * as ko from "knockout";
+import { QuestionSelectBase, RendererFactory } from "survey-core";
 import {
   ButtonGroupItemViewModel,
   IButtonGroupItem,
@@ -13,25 +14,42 @@ export class ButtonGroupViewModel {
   public title: string;
   public choices: ko.MaybeObservableArray<IButtonGroupItem>;
 
-  constructor(model: any) {
+  constructor(model: QuestionSelectBase) {
     this.model = model;
     this.readOnly = model.readOnly;
     this.title = model.title;
     this.choices = model.choices;
   }
 
-  public onItemSelected = (item: ButtonGroupItemViewModel) => {
-    this.model.value(item.value);
-  };
+  public onItemSelected: (item: ButtonGroupItemViewModel) => void;
 }
 
-ko.components.register("svc-button-group", {
+ko.components.register("svc-button-group-question", {
   viewModel: {
     createViewModel: (params: any) => {
-      const model = params.model;
-      const viewModel = new ButtonGroupViewModel(model);
+      const question = params.question;
+      const viewModel = new ButtonGroupViewModel(question);
+      viewModel.onItemSelected = (item: IButtonGroupItem) => {
+        question.value = item.value;
+      };
       return viewModel;
     },
   },
   template: template,
 });
+
+RendererFactory.Instance.registerRenderer(
+  "checkbox",
+  "button-group",
+  "svc-button-group-question"
+);
+RendererFactory.Instance.registerRenderer(
+  "radiogroup",
+  "button-group",
+  "svc-button-group-question"
+);
+RendererFactory.Instance.registerRenderer(
+  "dropdown",
+  "button-group",
+  "svc-button-group-question"
+);

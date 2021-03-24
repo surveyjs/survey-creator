@@ -1,0 +1,45 @@
+.svc-survey-checkbox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.svc-survey-checkbox--disabled {
+  cursor: default;
+}
+.svc-survey-checkbox__caption {
+  font-family: $font-family;
+  font-size: calcSize(2);
+  color: $foreground;
+  margin-left: calcSize(1);
+}
+.svc-survey-checkbox__rectangle {
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  box-sizing: border-box;
+  width: calcSize(3);
+  height: calcSize(3);
+  flex-shrink: 0;
+  padding: 4px;
+}
+.svc-survey-checkbox--checked .svc-survey-checkbox__rectangle:after {
+  display: block;
+  content: " ";
+  width: calcSize(2);
+  height: calcSize(2);
+  background-repeat: no-repeat;
+  background-size: calcSize(2) calcSize(2);
+  //todo: icons should appear inside html-template to change its color
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='11' viewBox='0 0 16 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 10.8L0.599998 5.4L2 4L6 8L14 0L15.4 1.4L6 10.8Z' fill='%2319B394'/%3E%3C/svg%3E%0A");
+}
+.svc-survey-checkbox__control {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+}
+//todo: need to hide unneeded icons
+.svc-survey-checkbox__hidden {
+  display: none;
+}
