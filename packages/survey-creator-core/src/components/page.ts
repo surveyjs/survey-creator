@@ -4,6 +4,7 @@ import {
   PageModel,
   property,
   propertyArray,
+  SurveyElementTemplateData,
   SurveyModel,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
@@ -62,18 +63,19 @@ export class PageViewModel<T extends SurveyModel> extends Base {
       ? "svc-page__content--selected"
       : "";
   }
-  dragOver(model: PageViewModel<T>, event: IPortableDragEvent) {
-    event.preventDefault();
-    //model.creator.dragDropHelper2.dragOver(, event)
-    /*
-    if (!event["markEvent"]) {
-      event["markEvent"] = true;
-      model.creator.dragDropHelper.ddTarget.moveToPage(<any>model.page);
-      model.creator.dragDropHelper.doDragDropOver(event, model.page, true);
-      return false;
-    }
-    */
+
+  get showDragOverFeedback() {
+    return  this.creator.dragDropHelper.showDragOverPage(this.page);
   }
+
+  dragOver(model: PageViewModel<T>, event: IPortableDragEvent) {
+    this.creator.dragDropHelper.dragOverPage(model.page, event);
+  }
+
+  public get dragOverFeedback(): SurveyElementTemplateData {
+    return this.creator.dragDropHelper.dragOverFeedback;
+  }
+
   binarySearchIndexByY(questionNodes, y) {
     let lo = 0;
     let hi = questionNodes.length - 1;
