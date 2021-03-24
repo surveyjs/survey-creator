@@ -29,6 +29,7 @@ export * from "../tabs/translation";
 export * from "../textWorker";
 export * from "../toolbox";
 export * from "../utils/utils";
+export * from "../utils/events";
 export { creatorCss } from "../survey-theme/creator-css";
 
 import "../components/tabbed-menu/tabbed-menu.scss";

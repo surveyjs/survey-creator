@@ -4,12 +4,15 @@ import {
   Base,
   SurveyModel,
   ListModel,
+  Question,
+  PanelModel,
   PageModel,
   PopupModel,
   property,
   propertyArray,
+  IElement,
 } from "survey-core";
-import { ISurveyCreatorOptions } from "./settings";
+import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropHelper } from "./dragdrophelper";
@@ -87,14 +90,31 @@ export class CreatorBase<T extends SurveyModel>
 
   @property() surveyValue: T;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
-  public dragDropHelper: DragDropHelper;
+  public dragDropHelper: DragDropHelper<T>;
+
   @property() selection: Base;
 
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private newQuestionChangedNames: {};
+  private saveSurveyFuncValue: (
+    no: number,
+    onSaveCallback: (no: number, isSuccess: boolean) => void
+  ) => void;
 
   @property({ defaultValue: "designer" }) viewType: string;
+  public get isDesignerShowing(): boolean {
+    return this.viewType === "designer";
+  }
+  public showDesigner() {
+    this.viewType = "designer";
+  }
+  public get isTestSurveyShowing(): boolean {
+    return this.viewType === "test";
+  }
+  public showTestSurvey() {
+    this.viewType = "test";
+  }
 
   public plugins: { [name: string]: ICreatorPlugin } = {};
 
@@ -305,6 +325,104 @@ export class CreatorBase<T extends SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
+   * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options object contains the information about certain modifications
+   * <br/> options.type contains string constant describing certain modification
+   * <br/> Available values:
+   * <br/>
+   * <br/> options.type: "ADDED_FROM_TOOLBOX"
+   * <br/> options.question: newly added question
+   * <br/>
+   * <br/> options.type: "PAGE_ADDED"
+   * <br/> options.newValue: newly created page
+   * <br/>
+   * <br/> options.type: "PAGE_MOVED"
+   * <br/> options.page: page has been moved
+   * <br/> options.indexFrom: pevious index
+   * <br/> options.indexTo: new index
+   * <br/>
+   * <br/> options.type: "QUESTION_CONVERTED"
+   * <br/> options.className: the converted class name
+   * <br/> options.oldValue: pevious object
+   * <br/> options.newValue: the new object, converted from oldVale to the given class name
+   * <br/>
+   * <br/> options.type: "QUESTION_CHANGED_BY_EDITOR"
+   * <br/> options.question: question has been edited in the popup question editor
+   * <br/>
+   * <br/> options.type: "PROPERTY_CHANGED"
+   * <br/> options.name: the name of the property has been changed
+   * <br/> options.target: the object containing the changed property
+   * <br/> options.oldValue: the previous value of the changed property
+   * <br/> options.newValue: the new value of the changed property
+   * <br/>
+   * <br/> options.type: "OBJECT_DELETED"
+   * <br/> options.target: deleted object
+   * <br/>
+   * <br/> options.type: "VIEW_TYPE_CHANGED"
+   * <br/> options.newType: new type of the creator view: editor or designer
+   * <br/>
+   * <br/> options.type: "DO_DROP"
+   * <br/> options.page: the page of the drap/drop operation
+   * <br/> options.source: the source dragged object
+   * <br/> options.target: the drop target
+   * <br/> options.newElement: a new element. It is defined if a user drops question or panel from the toolbox
+   * <br/>
+   * <br/> options.type: "TRANSLATIONS_CHANGED"
+   */
+  public onModified: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called on adding a new question into the survey. Typically, when a user dropped a Question from the Question Toolbox into designer Survey area.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.question a new added survey question. Survey.Question object
+   * <br/> options.page the survey Page object where question has been added.
+   */
+  public onQuestionAdded: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called on adding a new panel into the survey.  Typically, when a user dropped a Panel from the Question Toolbox into designer Survey area.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.panel a new added survey panel. Survey.Panel object
+   * <br/> options.page the survey Page object where question has been added.
+   */
+  public onPanelAdded: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called on adding a new page into the survey.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.page the new survey Page object.
+   */
+  public onPageAdded: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.survey  the survey object showing in the creator.
+   */
+  public onDesignerSurveyCreated: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is fired when the survey creator runs the survey in the test mode.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.survey  the survey object showing in the "Test survey" tab.
+   */
+  public onTestSurveyCreated: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  /**
    * This callback is used internally for providing survey JSON text.
    */
   public getSurveyJSONTextCallback: () => { text: string; isModified: boolean };
@@ -456,6 +574,7 @@ export class CreatorBase<T extends SurveyModel>
         ? this.options.questionTypes
         : null
     );
+    this.dragDropHelper = new DragDropHelper<T>(this);
     this.propertyGrid = new PropertyGridModel(
       (this.survey as any) as Base,
       this
@@ -743,16 +862,91 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   protected initSurveyWithJSON(json: any, clearState: boolean) {
-    this.setSurvey(this.createSurvey(json));
+    var survey = this.createSurvey({});
+    survey.setDesignMode(true);
+    survey.setJsonObject(json);
+    if (survey.isEmpty) {
+      survey.setJsonObject(this.getDefaultSurveyJson());
+    }
+    this.onDesignerSurveyCreated.fire(this, { survey: survey });
+    // this.survey.render(this.surveyjs);
+    /*
+    survey.onSelectedElementChanged.add((sender: SurveyModel, options) => {
+      if (this.disableSurveySelectedElementChanging) return;
+      this.selectedElement = sender["selectedElement"];
+    });
+    */
+    survey.onQuestionAdded.add((sender: SurveyModel, options) => {
+      this.doOnQuestionAdded(options.question, options.parentPanel);
+    });
+    survey.onPanelAdded.add((sender: SurveyModel, options) => {
+      this.doOnPanelAdded(options.panel, options.parentPanel);
+    });
+    survey.onPageAdded.add((sender: SurveyModel, options) => {
+      this.doOnPageAdded(options.page);
+    });
+    /*
+    survey.onPanelRemoved.add((sender: SurveyModel, options) => {
+      this.doOnElementRemoved(options.panel);
+    });
+    survey.onQuestionRemoved.add((sender: SurveyModel, options) => {
+      this.doOnElementRemoved(options.question);
+    });
+    */
+    this.setSurvey(survey);
+  }
+  private addingObject: Survey.Base;
+  private doOnQuestionAdded(question: Question, parentPanel: any) {
+    question.name = this.generateUniqueName(question, question.name);
+    var page = this.getPageByElement(question);
+    var options = { question: question, page: page };
+    this.addingObject = question;
+    this.onQuestionAdded.fire(this, options);
+    this.addingObject = null;
+    /*
+    if (parentPanel.elements.indexOf(question) !== -1) {
+      this.surveyObjects.addElement(question, parentPanel);
+    }
+    */
+  }
+  private doOnPanelAdded(panel: PanelModel, parentPanel: any) {
+    var page = this.getPageByElement(panel);
+    var options = { panel: panel, page: page };
+    this.addingObject = panel;
+    this.onPanelAdded.fire(this, options);
+    this.addingObject = null;
+    /*
+    if (parentPanel.elements.indexOf(panel) !== -1) {
+      this.surveyObjects.addElement(panel, parentPanel);
+    }
+    */
+  }
+  private doOnPageAdded(page: PageModel) {
+    var options = { page: page };
+    this.addingObject = page;
+    this.onPageAdded.fire(this, options);
+    this.addingObject = null;
+    this.setModified({ type: "PAGE_ADDED", newValue: options.page });
+  }
+  private getPageByElement(obj: Base): PageModel {
+    return this.survey.getPageByElement(<IElement>(<any>obj));
   }
 
-  public setSurvey(survey: T) {
-    survey.setDesignMode(true);
+  private getDefaultSurveyJson(): any {
+    var json = settings.defaultNewSurveyJSON;
+    if (
+      json["pages"] &&
+      json["pages"]["length"] > 0 &&
+      json["pages"][0]["name"]
+    ) {
+      json["pages"][0]["name"] =
+        editorLocalization.getString("ed.newPageName") + "1";
+    }
+    return json;
+  }
+
+  protected setSurvey(survey: T) {
     this.surveyValue = survey;
-    this.dragDropHelper = new DragDropHelper(
-      <any>survey,
-      (options?: any) => {}
-    );
     this.selectElement(survey);
     this.pagesController.currentPage = survey.currentPage;
   }
@@ -778,6 +972,12 @@ export class CreatorBase<T extends SurveyModel>
    */
   public changeText(value: string, clearState = false) {
     this.setTextValue(value);
+    var textWorker = new SurveyTextWorker(value);
+    if (textWorker.isJsonCorrect) {
+      this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
+    } else {
+      this.viewType = "editor";
+    }
   }
 
   /**
@@ -830,8 +1030,21 @@ export class CreatorBase<T extends SurveyModel>
   protected createSurveyCore(json: any = {}): T {
     throw new Error("createSurveyCore method should be overridden/implemented");
   }
+  /**
+   * Returns the creator state. It may return empty string or "saving" and "saved".
+   */
+  public get state(): string {
+    return this.getPropertyValue("state");
+  }
+  protected setState(value: string) {
+    this.setPropertyValue("state", value);
+  }
 
-  public setModified(options: any = null) {}
+  public setModified(options: any = null) {
+    this.setState("modified");
+    this.onModified.fire(this, options);
+    this.isAutoSave && this.doAutoSave();
+  }
 
   protected convertCurrentObject(obj: Survey.Question, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
@@ -859,7 +1072,7 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   protected doClickQuestionCore(
-    element: Survey.IElement,
+    element: IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX"
   ) {
     var parent = this.currentPage;
@@ -888,7 +1101,7 @@ export class CreatorBase<T extends SurveyModel>
       survey.addPage(<Survey.PageModel>element);
     } else {
       survey.addNewPage("p1");
-      survey.pages[0].addElement(<Survey.IElement>element);
+      survey.pages[0].addElement(<IElement>element);
     }
     var logic = new SurveyLogic(survey);
     for (var key in this.newQuestionChangedNames) {
@@ -962,14 +1175,14 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
-  protected createNewElement(json: any): Survey.IElement {
+  protected createNewElement(json: any): IElement {
     var newElement = Survey.Serializer.createClass(json["type"]);
     new Survey.JsonObject().toObject(json, newElement);
     this.setNewNames(newElement);
     return newElement;
   }
 
-  public copyElement(element: Survey.Base): Survey.IElement {
+  public copyElement(element: Survey.Base): IElement {
     var json = new Survey.JsonObject().toJsonObject(element);
     json.type = element.getType();
     return this.createNewElement(json);
@@ -983,13 +1196,50 @@ export class CreatorBase<T extends SurveyModel>
     var newElement = this.copyElement(question);
     this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
   }
-
+  /**
+   * Get or set the current selected object in the Creator. It can be a question, panel, page or survey itself.
+   */
+  public get selectedElement(): Base {
+    return this.selection;
+  }
+  public set selectedElement(val: Base) {
+    this.selectElement(val);
+  }
+  /**
+   * Obsolete. Please use deleteCurrentElement.
+   * @see deleteCurrentElement
+   */
+  public deleteCurrentObject() {
+    this.deleteCurrentElement();
+  }
+  /**
+   * Delete a currently selected element in the survey. It can be a question, a panel or a page.
+   */
+  public deleteCurrentElement() {
+    this.deleteObject(this.selection);
+  }
   /**
    * Delete an element in the survey. It can be a question, a panel or a page.
    * @param element a survey element.
    */
   public deleteElement(element: Survey.Base) {
     this.deleteObject(element);
+  }
+  /**
+   * Create a new page with the same elements and place it next to the current one. It returns the new created Survey.Page
+   * @param page A copied Survey.Page
+   */
+  public copyPage(page: PageModel): PageModel {
+    var newPage = <PageModel>(<any>this.copyElement(page));
+    var index = this.survey.pages.indexOf(page);
+    if (index > -1) {
+      this.survey.pages.splice(index + 1, 0, newPage);
+    } else {
+      this.survey.pages.push(newPage);
+    }
+    //TODO
+    //this.addPageToUI(newPage);
+    return newPage;
   }
 
   protected deleteObjectCore(obj: any) {
@@ -1007,7 +1257,14 @@ export class CreatorBase<T extends SurveyModel>
       this.updateConditionsOnRemove(obj.getValueName());
     }
   }
-
+  private getNextPage(page: PageModel): PageModel {
+    var index = this.survey.pages.indexOf(page);
+    if (index < this.survey.pages.length - 1) index++;
+    else index--;
+    if (index < 0) index = 0;
+    if (index < this.survey.pages.length) return this.survey.pages[index];
+    return null;
+  }
   protected deleteObject(obj: any) {
     var options = {
       element: obj,
@@ -1049,15 +1306,7 @@ export class CreatorBase<T extends SurveyModel>
       this.selectElement(newElement);
     }
   }
-  public dragToolboxItem(json: any, e: DragEvent) {
-    if (!this.readOnly) {
-      this.dragDropHelper.startDragToolboxItem(
-        e,
-        json["type"], //this.getNewName(json["type"]),
-        json
-      );
-    }
-  }
+
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
     var parent = obj["parent"];
     var elements = parent.elements;
@@ -1297,6 +1546,64 @@ export class CreatorBase<T extends SurveyModel>
   }
   stopUndoRedoTransaction() {
     //TODO
+  }
+  /**
+   * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
+   * If during this period of time an end-user modify survey, then the last version will be saved only. Set to 0 to save immediately.
+   * @see isAutoSave
+   */
+  public autoSaveDelay: number = 500;
+  private autoSaveTimerId = null;
+  protected doAutoSave() {
+    if (this.autoSaveDelay <= 0) {
+      this.doSave();
+      return;
+    }
+    if (!!this.autoSaveTimerId) {
+      clearTimeout(this.autoSaveTimerId);
+    }
+    var self = this;
+    this.autoSaveTimerId = setTimeout(function () {
+      clearTimeout(self.autoSaveTimerId);
+      self.autoSaveTimerId = null;
+      self.doSave();
+    }, this.autoSaveDelay);
+  }
+  saveNo: number = 0;
+  protected doSave() {
+    this.setState("saving");
+    if (this.saveSurveyFunc) {
+      this.saveNo++;
+      var self = this;
+      this.saveSurveyFunc(
+        this.saveNo,
+        function doSaveCallback(no: number, isSuccess: boolean) {
+          if (self.saveNo === no) {
+            if (isSuccess) {
+              self.setState("saved");
+            } else {
+              if (self.showErrorOnFailedSave) {
+                this.notify(self.getLocString("ed.saveError"));
+              }
+              self.setState("modified");
+            }
+          }
+        }
+      );
+    }
+  }
+
+  /**
+   * Assign to this property a function that will be called on clicking the 'Save' button or on any change if isAutoSave equals true.
+   * @see isAutoSave
+   */
+  public get saveSurveyFunc() {
+    return this.saveSurveyFuncValue;
+  }
+  public set saveSurveyFunc(value: any) {
+    this.saveSurveyFuncValue = value;
+    //TODO
+    //this.koShowSaveButton(value != null && !this.isAutoSave);
   }
 
   public getContextActions(

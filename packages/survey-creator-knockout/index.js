@@ -7,7 +7,7 @@ if (!window["%hammerhead%"]) {
     // showJSONEditorTab: false
     showLogicTab: true,
     showTranslationTab: true,
-    showEmbededSurveyTab: true
+    showEmbededSurveyTab: true,
   };
   let creator = new SurveyCreatorKnockout.SurveyCreator(options);
   let json = {
@@ -31,6 +31,10 @@ if (!window["%hammerhead%"]) {
         title: "page1 -- title",
         description: "page1 -- description",
         elements: [
+          {
+            type: "text",
+            name: "question11",
+          },
           {
             type: "rating",
             name: "nps_score",

@@ -1,11 +1,34 @@
 <div
-  class="svc-question__content"
-  data-bind="click: select, clickBubble: false, css: css(), attr: { draggable: isDraggable }, event: { dragstart: dragStart, dragover: dragOver, drop: drop, dragend: dragEnd }"
+  class="svc-question__adorner"
+  data-bind="event: { dragover: koDragOver, drop: koDrop, dragend: koDragEnd }"
 >
-  <!-- ko component: { name: 'survey-element-component', params: { componentData: null, templateData: templateData } } -->
+  <!-- ko if: showDragOverFeedbackAbove -->
+  <div style="pointer-events: none;">
+    <!-- ko with: dragOverFeedback.data, as: 'question' -->
+    <!-- ko component: { name: 'survey-element-component', params: { componentData: null, templateData: $parent.dragOverFeedback } } -->
+    <!-- /ko -->
+    <!-- /ko -->
+  </div>
   <!-- /ko -->
 
-  <div class="svc-question__content-actions">
-    <sv-action-bar params="items: actions"></sv-action-bar>
+  <div
+    class="svc-question__content"
+    data-bind="click: koSelect, clickBubble: false, css: css(), attr: { draggable: isDraggable }, event: { dragstart: koDragStart }, hidden: isDragged"
+  >
+    <!-- ko component: { name: 'survey-element-component', params: { componentData: null, templateData: templateData } } -->
+    <!-- /ko -->
+
+    <div class="svc-question__content-actions">
+      <sv-action-bar params="items: actions"></sv-action-bar>
+    </div>
   </div>
+
+  <!-- ko if: showDragOverFeedbackBelow -->
+  <div style="pointer-events: none;">
+    <!-- ko with: dragOverFeedback.data, as: 'question' -->
+    <!-- ko component: { name: 'survey-element-component', params: { componentData: null, templateData: $parent.dragOverFeedback } } -->
+    <!-- /ko -->
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
 </div>
