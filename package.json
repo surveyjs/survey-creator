@@ -14,11 +14,13 @@
     "test": "lerna run test"
   },
   "devDependencies": {
+    "husky": "^4.3.8",
     "lerna": "^3.22.1"
   },
+  "dependencies": {},
   "husky": {
     "hooks": {
-      "pre-push": "npm run test"
+      "pre-push": "npm test"
     }
-  }
+  }  
 }
