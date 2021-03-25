@@ -8,6 +8,7 @@ import {
   SurveyElementBase,
   SurveyQuestion,
 } from "survey-react-ui";
+import {DragOverFeedbackComponent} from "./DragOverFeedback";
 
 interface QuestionAdornerComponentProps {
   element: JSX.Element;
@@ -38,8 +39,12 @@ export class QuestionAdornerComponent extends SurveyElementBase<
     }
 
     return (
-      <>
-        {this.renderDragOverFeedback(this.model.showDragOverFeedbackAbove)}
+      <React.Fragment>
+        <DragOverFeedbackComponent 
+          shouldRender={this.model.showDragOverFeedbackAbove}
+          creator={this.model.creator}
+          feedback={this.model.dragOverFeedback}>
+        </DragOverFeedbackComponent>
         <div
           className={"svc-question__content " + this.model.css()}
           onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
@@ -60,22 +65,12 @@ export class QuestionAdornerComponent extends SurveyElementBase<
             <SurveyActionBar items={this.model.actions}></SurveyActionBar>
           </div>
         </div>
-        {this.renderDragOverFeedback(this.model.showDragOverFeedbackBelow)}
-      </>
-    );
-  }
-  renderDragOverFeedback(shouldRender: boolean): JSX.Element {
-    if (!shouldRender) {
-      return null;
-    }
-
-    return (
-      <div style={{ pointerEvents: "none" }}>
-        <SurveyQuestion
+        <DragOverFeedbackComponent 
+          shouldRender={this.model.showDragOverFeedbackBelow}
           creator={this.model.creator}
-          element={this.model.dragOverFeedback.data}
-        ></SurveyQuestion>
-      </div>
+          feedback={this.model.dragOverFeedback}>
+        </DragOverFeedbackComponent>
+      </React.Fragment>
     );
   }
 }
