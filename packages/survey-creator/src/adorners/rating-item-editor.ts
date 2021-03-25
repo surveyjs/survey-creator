@@ -154,7 +154,6 @@ export var ratingItemAdorner = {
         },
         decoration
       );
-      ko.tasks.runEarly();
       editor.onAdornerRenderedCallback(model, "rating-item", decoration, item);
     }
 

@@ -106,7 +106,6 @@ export var imageAdorner = {
         },
         decoration
       );
-      ko.tasks.runEarly();
       editor.onAdornerRenderedCallback(model, "image", decoration, model);
     }
   },

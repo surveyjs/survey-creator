@@ -338,7 +338,6 @@ export var titleAdorner = {
     )}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
-    ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "title", decoration);
   },
 };
@@ -360,7 +359,6 @@ export var itemTitleAdorner = {
         "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
       elements[i].appendChild(decoration);
       ko.applyBindings({ model: model.items[i], editor: editor }, decoration);
-      ko.tasks.runEarly();
       editor.onAdornerRenderedCallback(
         model,
         "item-title",
@@ -408,7 +406,6 @@ export var descriptionAdorner = {
     )}", model: model, editor: editor'></title-editor>`;
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
-    ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "description", decoration);
   },
 };

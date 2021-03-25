@@ -57,7 +57,6 @@ export var titleImageAdorner = {
           },
           decoration
         );
-        ko.tasks.runEarly();
         editor.onAdornerRenderedCallback(
           <any>model,
           "title-image",
@@ -91,7 +90,6 @@ export var titleImageAdorner = {
       { model: model, input: input, allowImageChooser: allowImageChooser },
       decoration
     );
-    ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(
       <any>model,
       "title-actions",

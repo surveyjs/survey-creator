@@ -292,8 +292,10 @@ export function createAfterRenderHandler(
       }
     }
     if (creator.readOnly) {
-      ko.tasks.runEarly();
-      addAdorner(domElement, surveyElement);
+      setTimeout(() => {
+        ko.tasks.runEarly();
+        addAdorner(domElement, surveyElement);
+      }, 1);
       return;
     }
 
@@ -329,8 +331,10 @@ export function createAfterRenderHandler(
         setTabIndex(elements[i]);
       }
     });
-    ko.tasks.runEarly();
-    addAdorner(domElement, surveyElement);
+    setTimeout(() => {
+      ko.tasks.runEarly();
+      addAdorner(domElement, surveyElement);
+    }, 1);
   };
 }
 
