@@ -186,6 +186,7 @@ function elementOnCreating(surveyElement: any) {
   surveyElement.allowingOptions = {
     allowDelete: true,
     allowEdit: true,
+    allowShowEditor: true,
     allowCopy: true,
     allowAddToToolbox: true,
     allowDragging: true,

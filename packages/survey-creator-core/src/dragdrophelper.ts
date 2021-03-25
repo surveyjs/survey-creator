@@ -130,6 +130,8 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
     event.cancelBubble = true;
     event.stopPropagation();
 
+    if (page.elements.length > 0) return;
+
     this.draggedOverQuestion = undefined;
     this.draggedOverPage = page;
   }

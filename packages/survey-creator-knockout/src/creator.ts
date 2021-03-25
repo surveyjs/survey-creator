@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { property, Question, SurveyElement } from "survey-core";
-import { Survey, ImplementorBase, Panel } from "survey-knockout-ui";
+import { Survey, ImplementorBase, Panel, QuestionRow } from "survey-knockout-ui";
 import { ICreatorOptions, CreatorBase } from "@survey/creator";
 
 if (!!ko.options) {
@@ -40,6 +40,13 @@ class DesignTimeSurveyModel extends Survey {
       }
     }
     return super.getElementWrapperComponentData(element);
+  }
+
+  public getSurveyRowComponentName(row: QuestionRow): string {
+    return "svc-row";
+  }
+  public getSurveyRowComponentData(row: QuestionRow): any {
+    return row;
   }
 }
 

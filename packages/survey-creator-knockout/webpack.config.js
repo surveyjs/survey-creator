@@ -15,9 +15,12 @@ var svgStoreUtils = require(path.resolve(
   "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
 ));
 
+const today = new Date();
+const year = today.getFullYear();
+
 var banner = [
   "SurveyJS Creator v" + packageJson.version,
-  "(c) 2015-2021 Devsoft Baltic OÜ - http://surveyjs.io/",
+  "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
 ].join("\n");
@@ -25,7 +28,7 @@ var banner = [
 var dts_banner = [
   "Type definitions for SurveyJS Creator JavaScript library v" +
     packageJson.version,
-  "(c) 2015-2021 Devsoft Baltic OÜ - http://surveyjs.io/",
+  "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
   "",
