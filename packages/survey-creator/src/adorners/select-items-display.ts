@@ -39,7 +39,6 @@ export var renderDisplayMode = (elements: HTMLElement[], model: QuestionSelectBa
       },
       decoration
     );
-    ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "select-choices", decoration);
   }
 

@@ -2313,14 +2313,19 @@ export class SurveyCreator
     element: HTMLElement,
     context?: any
   ) {
-    var options = {
-      survey: this.survey,
-      question: question,
-      adorner: adorner,
-      element: element,
-      context: context,
-    };
-    this.onAdornerRendered.fire(this, options);
+    if(!this.onAdornerRendered.isEmpty) {
+      setTimeout(() => {
+        ko.tasks.runEarly();
+        var options = {
+          survey: this.survey,
+          question: question,
+          adorner: adorner,
+          element: element,
+          context: context,
+        };
+        this.onAdornerRendered.fire(this, options);
+      }, 1);
+    }
   }
   /**
    * Clear the files on a server

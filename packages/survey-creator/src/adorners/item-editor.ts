@@ -226,7 +226,6 @@ export var itemAdorner = {
         },
         decoration
       );
-      ko.tasks.runEarly();
       editor.onAdornerRenderedCallback(
         model,
         "choices-label",

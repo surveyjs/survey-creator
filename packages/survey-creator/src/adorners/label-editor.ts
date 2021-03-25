@@ -19,7 +19,6 @@ export var labelAdorner = {
     elements[0].onclick = e => e.preventDefault();
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
-    ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "label", decoration);
   }
 };
