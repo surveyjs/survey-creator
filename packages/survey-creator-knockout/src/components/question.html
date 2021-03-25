@@ -15,6 +15,15 @@
     class="svc-question__content"
     data-bind="click: koSelect, clickBubble: false, css: css(), attr: { draggable: isDraggable }, event: { dragstart: koDragStart }, hidden: isDragged"
   >
+    <!-- ko if: isEmptyElement -->
+    <div class="svc-panel__placeholder_frame">
+      <div
+        class="svc-panel__placeholder"
+        data-bind="text: placeholderText"
+      ></div>
+    </div>
+    <!-- /ko -->
+
     <!-- ko component: { name: 'survey-element-component', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
 

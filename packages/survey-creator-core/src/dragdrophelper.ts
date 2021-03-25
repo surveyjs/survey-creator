@@ -75,21 +75,23 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
   }
   @property() _showDragOverFeedbackAbove: boolean;
   @property() _showDragOverFeedbackBelow: boolean;
-  @property() draggedOverQuestion: Question;
+  @property() draggedOverQuestion: SurveyElement;
   @property() draggedOverPage: PageModel;
 
-  private draggedQuestion: Question;
+  private draggedSurveyElement: SurveyElement;
   public showDragOverPage(page: PageModel): boolean {
     return this.draggedOverPage !== undefined && page.elements.length <= 0;
   }
-  public showDragOverFeedbackAbove(question: Question): boolean {
+  public showDragOverFeedbackAbove(surveyElement: SurveyElement): boolean {
     return (
-      question === this.draggedOverQuestion && this._showDragOverFeedbackAbove
+      surveyElement === this.draggedOverQuestion &&
+      this._showDragOverFeedbackAbove
     );
   }
-  public showDragOverFeedbackBelow(question: Question): boolean {
+  public showDragOverFeedbackBelow(surveyElement: SurveyElement): boolean {
     return (
-      question === this.draggedOverQuestion && this._showDragOverFeedbackBelow
+      surveyElement === this.draggedOverQuestion &&
+      this._showDragOverFeedbackBelow
     );
   }
 
@@ -100,7 +102,7 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
     this._showDragOverFeedbackAbove = false;
     this._showDragOverFeedbackBelow = false;
     this.cachedJsonText = undefined;
-    this.draggedQuestion = undefined;
+    this.draggedSurveyElement = undefined;
   }
 
   // /Drag-drop feedback
@@ -115,11 +117,11 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
     }
   }
 
-  public dragStart(question: Question, event: IPortableDragEvent) {
-    const jsonText = this.createDragDataJsonText(question);
+  public dragStart(surveyElement: SurveyElement, event: IPortableDragEvent) {
+    const jsonText = this.createDragDataJsonText(surveyElement);
     event.cancelBubble = true;
     this.dragToolboxItem(jsonText, event);
-    this.draggedQuestion = question;
+    this.draggedSurveyElement = surveyElement;
     return true;
   }
 
@@ -131,12 +133,12 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
     this.draggedOverQuestion = undefined;
     this.draggedOverPage = page;
   }
-  public dragOver(question: Question, event: IPortableDragEvent) {
+  public dragOver(surveyElement: SurveyElement, event: IPortableDragEvent) {
     event.preventDefault();
     event.cancelBubble = true;
     event.stopPropagation();
 
-    this.draggedOverQuestion = question;
+    this.draggedOverQuestion = surveyElement;
     this.draggedOverPage = undefined;
 
     const isBelow = this.isAtLowerPartOfCurrentTarget(event);
@@ -144,8 +146,8 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
     this._showDragOverFeedbackBelow = isBelow;
   }
 
-  drop(question: Question, event: IPortableDragEvent) {
-    this.dropAt(question, event, this._showDragOverFeedbackBelow);
+  drop(surveyElement: SurveyElement, event: IPortableDragEvent) {
+    this.dropAt(surveyElement, event, this._showDragOverFeedbackBelow);
   }
   public dropAtPage(page: PageModel, event: IPortableDragEvent) {
     event.stopPropagation();
@@ -157,12 +159,16 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
       this.end();
     }
   }
-  public dropAt(question: Question, event: IPortableDragEvent, below: boolean) {
+  public dropAt(
+    surveyElement: SurveyElement,
+    event: IPortableDragEvent,
+    below: boolean
+  ) {
     event.stopPropagation();
-    if (!question) {
-      question = this.draggedOverQuestion as Question;
+    if (!surveyElement) {
+      surveyElement = this.draggedOverQuestion as Question;
     }
-    if (!question) {
+    if (!surveyElement) {
       return;
     }
 
@@ -173,11 +179,11 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
     const jsonText = event.dataTransfer.getData("svc-item-json");
     if (!!jsonText) {
       const instance = this.createElementFromJsonText(jsonText);
-      const parent: any = question.parent;
+      const parent: any = surveyElement.parent;
       if (below) {
-        parent.insertElementAfter(instance, question);
+        parent.insertElementAfter(instance, surveyElement);
       } else {
-        parent.insertElementBefore(instance, question);
+        parent.insertElementBefore(instance, surveyElement);
       }
 
       this.removeDraggedQuestion();
@@ -185,14 +191,16 @@ export class DragDropHelper<T extends SurveyModel> extends Base {
     this.end();
   }
 
-  public dragEnd(question: Question, event: IPortableDragEvent) {
+  public dragEnd(surveyElement: SurveyElement, event: IPortableDragEvent) {
     this.clearDragFeedback();
     this.end();
   }
 
   private removeDraggedQuestion() {
-    if (this.draggedQuestion && this.draggedQuestion.parent) {
-      this.draggedQuestion.parent.removeElement(this.draggedQuestion);
+    if (this.draggedSurveyElement && this.draggedSurveyElement.parent) {
+      this.draggedSurveyElement.parent.removeElement(
+        <IElement>(<any>this.draggedSurveyElement)
+      );
     }
   }
 

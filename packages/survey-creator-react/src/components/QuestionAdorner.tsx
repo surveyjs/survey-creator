@@ -55,6 +55,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
           onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
           draggable={this.model.isDraggable}
         >
+          {this.renderPanelPlaceholder()}
           {this.props.element}
           <div className="svc-question__content-actions">
             <SurveyActionBar items={this.model.actions}></SurveyActionBar>
@@ -62,6 +63,19 @@ export class QuestionAdornerComponent extends SurveyElementBase<
         </div>
         {this.renderDragOverFeedback(this.model.showDragOverFeedbackBelow)}
       </>
+    );
+  }
+  renderPanelPlaceholder(): JSX.Element {
+    if (!this.model.isEmptyElement) {
+      return null;
+    }
+
+    return (
+      <div className="svc-panel__placeholder_frame">
+        <div className="svc-panel__placeholder">
+          {this.model.placeholderText}
+        </div>
+      </div>
     );
   }
   renderDragOverFeedback(shouldRender: boolean): JSX.Element {
@@ -79,6 +93,15 @@ export class QuestionAdornerComponent extends SurveyElementBase<
     );
   }
 }
+
+// <!-- ko if: isEmptyElement -->
+// <div class="svc-panel__placeholder_frame">
+//   <div
+//     class="svc-panel__placeholder"
+//     data-bind="text: placeholderText"
+//   ></div>
+// </div>
+// <!-- /ko -->
 
 ReactElementFactory.Instance.registerElement(
   "svc-question",

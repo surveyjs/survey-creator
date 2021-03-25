@@ -18,6 +18,11 @@ class DesignTimeSurveyModel extends Survey {
           return "svc-question";
         }
       }
+      if (element instanceof Panel) {
+        if (element.koElementType() == "survey-panel") {
+          return "svc-panel";
+        }
+      }
     }
     return super.getElementWrapperComponentName(element);
   }
@@ -25,6 +30,11 @@ class DesignTimeSurveyModel extends Survey {
     if (element.isDesignMode) {
       if (element instanceof Question) {
         if (element.koElementType() == "survey-question") {
+          return this.creator;
+        }
+      }
+      if (element instanceof Panel) {
+        if (element.koElementType() == "survey-panel") {
           return this.creator;
         }
       }

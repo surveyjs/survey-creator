@@ -6,6 +6,7 @@ import {
   Base,
   IActionBarItem,
   Question,
+  PanelModel,
   StylesManager,
   SurveyError,
   unwrap,
@@ -118,12 +119,18 @@ class DesignTimeSurveyModel extends Model {
       if (element instanceof Question) {
         return "svc-question";
       }
+      if (element instanceof PanelModel) {
+        return "svc-question";
+      }
     }
     return super.getElementWrapperComponentName(element);
   }
   public getElementWrapperComponentData(element: SurveyElement): any {
     if (element.isDesignMode) {
       if (element instanceof Question) {
+        return this.creator;
+      }
+      if (element instanceof PanelModel) {
         return this.creator;
       }
     }

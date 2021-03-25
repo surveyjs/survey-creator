@@ -22,6 +22,15 @@ svc-question {
   box-sizing: border-box;
 }
 
+.svc-panel__placeholder_frame {
+  border: 1px dashed grey;
+  margin: 4px;
+}
+
+.svc-panel__placeholder {
+  padding: 5%;
+}
+
 .svc-question__content-actions {
   position: absolute;
   display: none;
