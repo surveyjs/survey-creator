@@ -1793,7 +1793,7 @@ export class SurveyCreator
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
 
-      if (this.showModalOnElementEditing && opts.allowEdit) {
+      if (this.showModalOnElementEditing && opts.allowShowEditor) {
         options.items.push({
           name: "editelement",
           text: this.getLocString("survey.edit"),
@@ -1944,7 +1944,7 @@ export class SurveyCreator
         });
       }
 
-      if (!this.showModalOnElementEditing && opts.allowEdit) {
+      if (!this.showModalOnElementEditing && opts.allowShowEditor) {
         options.items.push({
           name: "editelement",
           text: this.getLocString("ed.property-grid"),
