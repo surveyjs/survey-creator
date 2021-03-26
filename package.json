@@ -10,7 +10,7 @@
   "version": "0.0.1",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build:prod",
+    "build": "lerna run build",
     "test": "lerna run test"
   },
   "devDependencies": {
