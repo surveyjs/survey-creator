@@ -1,4 +1,4 @@
-import { Selector, ClientFunction } from "testcafe";
+import { ClientFunction } from "testcafe";
 
 export const url = "http://127.0.0.1:7777/example/";
 

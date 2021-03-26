@@ -1,4 +1,4 @@
-import { url, init } from "../../settings";
+import { url, init } from "../../helper";
 import { Selector } from "testcafe";
 const title = `old-property-grid`;
 
