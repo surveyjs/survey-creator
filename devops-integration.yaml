@@ -44,6 +44,17 @@ steps:
     npm install
   displayName: 'npm install'
   
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'specific'
+    project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+    pipeline: '7'
+    specificBuildWithTriggering: true
+    buildVersionToDownload: 'latest'
+    downloadType: 'single'
+    artifactName: 'SurveyJSLibraryBuild'
+    downloadPath: '$(System.ArtifactsDirectory)'
+
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
@@ -65,17 +76,6 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm install
   displayName: 'npm install'
-
-- task: DownloadBuildArtifacts@0
-  inputs:
-    buildType: 'specific'
-    project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
-    pipeline: '7'
-    specificBuildWithTriggering: true
-    buildVersionToDownload: 'latest'
-    downloadType: 'single'
-    artifactName: 'SurveyJSLibraryBuild'
-    downloadPath: '$(System.ArtifactsDirectory)'
 
 - task: CopyFiles@2
   inputs:
