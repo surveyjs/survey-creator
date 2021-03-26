@@ -43,6 +43,28 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm install
   displayName: 'npm install'
+  
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+    Contents: '**'
+    TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+    OverWrite: true
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm install
+  displayName: 'npm install'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm install
+  displayName: 'npm install'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm install
+  displayName: 'npm install'
 
 - task: DownloadBuildArtifacts@0
   inputs:
