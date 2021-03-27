@@ -14,7 +14,7 @@ export const init = ClientFunction((creatorOptions) => {
   Survey.Survey.cssType = "bootstrap";
   Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
   if (!creatorOptions) creatorOptions = null;
-  var creator = new SurveyCreator.SurveyCreator(
+  const creator = new SurveyCreator.SurveyCreator(
     "editorElement",
     creatorOptions
   );

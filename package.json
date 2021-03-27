@@ -11,11 +11,15 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome testCafe/ --selector-timeout 1500 --reporter minimal\""
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
+    "http-server": "^0.12.3",
     "husky": "^4.3.8",
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "testcafe": "^1.9.2"
   },
   "dependencies": {},
   "husky": {
