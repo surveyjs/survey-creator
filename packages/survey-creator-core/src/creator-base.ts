@@ -946,6 +946,9 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   protected setSurvey(survey: T) {
+    if (!!this.surveyValue) {
+      this.surveyValue.dispose();
+    }
     this.surveyValue = survey;
     this.selectElement(survey);
     this.pagesController.currentPage = survey.currentPage;

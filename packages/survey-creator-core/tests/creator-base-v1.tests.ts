@@ -360,458 +360,29 @@ test("generateValidJSON should be true by default, bug #135", () => {
   var creator = new CreatorTester();
   expect(creator.generateValidJSON).toBeTruthy();
 });
+test("Element name should be unique - property grid + Question Editor", () => {
+  var creator = new CreatorTester();
+  creator.survey.currentPage.addNewQuestion("text", "question1");
+  creator.survey.currentPage.addNewQuestion("text", "question2");
+  var question = creator.survey.currentPage.addNewQuestion("text", "question");
+  creator.selectElement(question);
+  expect(creator.propertyGrid.obj).toBeTruthy();
+  expect(creator.propertyGrid.obj).toEqual(question);
+  var questionName = creator.propertyGrid.survey.getQuestionByName("name");
+  expect(questionName).toBeTruthy();
+  expect(questionName.value).toEqual("question");
+  questionName.value = "question2";
+  expect(questionName.value).toEqual("question2");
+  expect(questionName.hasErrors()).toBeTruthy();
+  expect(question.name).toEqual("question");
+  questionName.value = "question";
+  expect(questionName.hasErrors()).toBeFalsy();
+  expect(question.name).toEqual("question");
+  questionName.value = "question4";
+  expect(questionName.hasErrors()).toBeFalsy();
+  expect(question.name).toEqual("question4");
+});
 /*
-test("onCustomPropertySort event", () => {
-  var creator = new CreatorTester("", {
-    showElementEditorAsPropertyGrid: false,
-  });
-  creator.onCustomSortProperty.add(function (editor, options) {
-    if (options.property1.name == "name") options.result = -1;
-    if (options.property2.name == "name") options.result = 1;
-  });
-  creator.propertyGridObjectEditorModel.selectedObject = creator.survey.pages[0];
-  expect(
-    (<any>(
-      creator.propertyGridObjectEditorModel.koElementEditor()
-    )).koProperties()[0].name,
-    "name",
-    "The name property is now the first"
-  );
-});
-
-test("onQuestionEditorChanged method", () => {
-  var jsonText = JSON.stringify({
-    pages: [
-      {
-        name: "page1",
-        elements: [
-          {
-            type: "html",
-            name: "question3",
-            html: '<img src="https://placehold.it/300x100" alt="test"/>',
-          },
-        ],
-      },
-    ],
-  });
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  creator.text = jsonText;
-
-  creator.selectedElement = creator.survey.pages[0];
-  var pageClass = pagescreator.getPageMenuIconClass(creator.survey.pages[0]);
-  expect(pageClass, "icon-gearactive");
-  expect(creator.koSelectedObject().value, creator.survey.pages[0]);
-  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
-
-  creator.survey.selectedElement = <any>creator.survey.pages[0].elements[0];
-  expect(
-    creator.koSelectedObject().value,
-    creator.survey.pages[0].elements[0]
-  );
-  pageClass = pagescreator.getPageMenuIconClass(creator.survey.pages[0]);
-  expect(pageClass, "icon-gear");
-  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
-
-  creator.onQuestionEditorChanged(<any>creator.survey.pages[0].elements[0]);
-  pageClass = pagescreator.getPageMenuIconClass(creator.survey.pages[0]);
-  expect(pageClass, "icon-gear");
-  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
-
-  creator.selectedElement = creator.survey.pages[0];
-  pageClass = pagescreator.getPageMenuIconClass(creator.survey.pages[0]);
-  expect(pageClass, "icon-gearactive");
-  expect(creator.koSelectedObject().value, creator.survey.pages[0]);
-  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
-});
-
-test("pagesEditor activePage when question selected", () => {
-  var jsonText = JSON.stringify({
-    pages: [
-      {
-        name: "page1",
-        elements: [],
-      },
-      {
-        name: "page2",
-        elements: [
-          {
-            type: "html",
-            name: "question3",
-            html: '<img src="https://placehold.it/300x100" alt="test"/>',
-          },
-        ],
-      },
-    ],
-  });
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  creator.text = jsonText;
-
-  var currentPage = creator.survey.pages[1];
-
-  creator.selectedElement = currentPage;
-
-  var pageClass = pagescreator.getPageMenuIconClass(currentPage);
-  expect(pageClass, "icon-gearactive");
-  expect(creator.koSelectedObject().value, currentPage);
-  expect(pagescreator.model.selectedPage(), currentPage);
-
-  creator.survey.selectedElement = <any>creator.survey.pages[1].elements[0];
-  expect(
-    creator.koSelectedObject().value,
-    creator.survey.pages[1].elements[0]
-  );
-  pageClass = pagescreator.getPageMenuIconClass(currentPage);
-  expect(pageClass, "icon-gear");
-  expect(pagescreator.model.selectedPage(), currentPage);
-});
-
-test("pagesEditor addNewPage in the dropdown", () => {
-  var jsonText = JSON.stringify({
-    pages: [
-      {
-        name: "page1",
-        elements: [],
-      },
-    ],
-  });
-  var creator = new CreatorTester();
-  creator.text = jsonText;
-
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-
-  expect(1, creator.survey.pages.length);
-
-  expect(
-    pagescreator.model.selectedPage().name,
-    creator.survey.pages[0].name
-  );
-  expect(pagescreator.model.pagesForSelection().length, 2);
-  expect(creator.survey.currentPage.name, creator.survey.pages[0].name);
-
-  pagescreator.model.selectedPage(
-    pagescreator.model.pagesForSelection()[1].value
-  );
-
-  expect(pagescreator.model.pagesForSelection().length, 3);
-  expect(
-    creator.survey.pages[1].name,
-    pagescreator.model.selectedPage().name
-  );
-  expect(creator.survey.currentPage.name, creator.survey.pages[1].name);
-});
-
-test(
-  "pagesEditor selectedPage keep currantPage in survey - Survey page shows wrong content after page reordering via drag/drop #1009",
-  () => {
-    var jsonText = JSON.stringify({
-      pages: [
-        {
-          name: "page1",
-          elements: [],
-        },
-        {
-          name: "page2",
-          elements: [],
-        },
-      ],
-    });
-    var creator = new CreatorTester();
-    creator.text = jsonText;
-
-    var pagesEditor = new PagesEditorViewModel(
-      creator.pagesEditorModel,
-      document.createElement("div")
-    );
-
-    expect(2, creator.survey.pages.length);
-
-    const movedPage = creator.survey.pages[0];
-    creator.selectedElement = movedPage;
-
-    expect(
-      pagescreator.model.selectedPage().name,
-      movedPage.name,
-      "initial selection - page editor selectedPage"
-    );
-    expect(
-      creator.survey.currentPage.name,
-      movedPage.name,
-      "initial selection - survey.currentPage"
-    );
-
-    // Emulate unsync during drag/drop pages
-    creator.pagesEditorModel.blockPagesRebuilt(true);
-    SurveyHelper.moveItemInArray(pagescreator.model.pages, movedPage, 1);
-    creator.pagesEditorModel.blockPagesRebuilt(false);
-
-    pagescreator.model.selectedPage(movedPage);
-
-    expect(
-      pagescreator.model.selectedPage().name,
-      movedPage.name,
-      "page editor selectedPage after selection"
-    );
-    expect(
-      creator.survey.currentPage.name,
-      movedPage.name,
-      "survey.currentPage after selection"
-    );
-  }
-);
-
-test("pagescreator.readOnly", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.readOnly,
-    false,
-    "page editor is not read-only by default"
-  );
-
-  creator.readOnly = true;
-  pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.readOnly,
-    true,
-    "page editor is read-only creator.readOnly"
-  );
-
-  creator.readOnly = false;
-  pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.readOnly,
-    false,
-    "page editor is not read-only again"
-  );
-
-  expect(
-    creator.allowModifyPages,
-    true,
-    "The property is true by default"
-  );
-  var creator = new CreatorTester(null, { allowModifyPages: false });
-  expect(creator.allowModifyPages, false, "The parameter set correctly");
-  pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.readOnly,
-    true,
-    "page editor is read-only allowModifyPages"
-  );
-});
-
-test("PagesEditor change question's page", () => {
-  var jsonText = JSON.stringify({
-    pages: [
-      {
-        name: "page1",
-        elements: [
-          {
-            type: "html",
-            name: "question3",
-            html: '<img src="https://placehold.it/300x100" alt="test"/>',
-          },
-        ],
-      },
-      {
-        name: "page2",
-        elements: [],
-      },
-    ],
-  });
-  var creator = new CreatorTester();
-  creator.text = jsonText;
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-
-  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
-
-  var question = <Survey.Question>creator.survey.pages[0].elements[0];
-  question.page = creator.survey.pages[1];
-  creator.onPropertyValueChanged(
-    <any>{ name: "page", isDefaultValue: () => false },
-    question,
-    creator.survey.pages[1]
-  );
-  expect(pagescreator.model.selectedPage(), creator.survey.pages[1]);
-});
-
-test("pagescreator.canAddPage", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.canAddPage,
-    true,
-    "page adding is allowed by default"
-  );
-
-  var handler = function (s, o) {
-    if (o.obj.getType() === "page") {
-      o.allowAdd = false;
-    }
-  };
-  creator.onElementAllowOperations.add(handler);
-  expect(pagescreator.model.canAddPage, false, "page adding is disabled");
-  creator.onElementAllowOperations.remove(handler);
-  expect(pagescreator.model.canAddPage, false, "page adding is enabled");
-});
-
-test("pagescreator.canCopyPage", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.canCopyPage,
-    true,
-    "page copying is allowed by default"
-  );
-
-  var handler = function (s, o) {
-    if (o.obj.getType() === "page") {
-      o.allowCopy = false;
-    }
-  };
-  creator.onElementAllowOperations.add(handler);
-  expect(
-    pagescreator.model.canCopyPage,
-    false,
-    "page copying is disabled"
-  );
-  creator.onElementAllowOperations.remove(handler);
-  expect(pagescreator.model.canCopyPage, false, "page copying is enabled");
-});
-
-test("pagescreator.canEditPage", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.canEditPage,
-    true,
-    "page editing is allowed by default"
-  );
-
-  var handler = function (s, o) {
-    if (o.obj.getType() === "page") {
-      o.allowEdit = false;
-    }
-  };
-  creator.onElementAllowOperations.add(handler);
-  expect(
-    pagescreator.model.canEditPage,
-    false,
-    "page editing is disabled"
-  );
-  creator.onElementAllowOperations.remove(handler);
-  expect(pagescreator.model.canEditPage, false, "page editing is enabled");
-});
-
-test("pagescreator.canDeletePage", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.canDeletePage,
-    false,
-    "page deleting is disallowed by default"
-  );
-
-  pagescreator.model.addPage();
-
-  expect(
-    pagescreator.model.canDeletePage,
-    true,
-    "page deleting is allowed"
-  );
-
-  var handler = function (s, o) {
-    if (o.obj.getType() === "page") {
-      o.allowDelete = false;
-    }
-  };
-  creator.onElementAllowOperations.add(handler);
-  expect(
-    pagescreator.model.canDeletePage,
-    false,
-    "page deleting is disabled"
-  );
-  creator.onElementAllowOperations.remove(handler);
-  expect(
-    pagescreator.model.canDeletePage,
-    false,
-    "page deleting is enabled"
-  );
-});
-
-test(
-  "Element name should be unique - property grid + Question Editor",
-  () => {
-    var creator = new CreatorTester();
-    creator.survey.currentPage.addNewQuestion("text", "question1");
-    creator.survey.currentPage.addNewQuestion("text", "question2");
-    var question = creator.survey.currentPage.addNewQuestion("text", "question");
-    creator.propertyGridObjectEditorModel.selectedObject = question;
-    var namePropertyEditor = creator.propertyGridObjectEditorModel.getPropertyEditorByName(
-      "name"
-    ).editor;
-    namePropertycreator.koValue("question2");
-    expect(
-      namePropertycreator.koValue(),
-      "question2",
-      "The name is changed in editor"
-    );
-    expect(namePropertycreator.hasError(), true, "It shows errror");
-    expect(question.name, "question", "the name is not changed");
-    namePropertycreator.koValue("question");
-    expect(namePropertycreator.hasError(), false, "There is no error now");
-    expect(question.name, "question", "the name is still question");
-    namePropertycreator.koValue("question4");
-    expect(
-      namePropertycreator.hasError(),
-      false,
-      "There is no error again"
-    );
-    expect(
-      question.name,
-      "question4",
-      "the name is changed to question4"
-    );
-  }
-);
-
 test("Validate Selected Element Errors", () => {
   var titleProp = Survey.Serializer.findProperty("question", "title");
   var oldIsRequired = titleProp.isRequired;
@@ -2021,6 +1592,422 @@ test("Update expressions in copyElements", () => {
   expect(newPanel.questions[1].visibleIf).toEqual("{question3} = 'a'");
   expect(newPanel.questions[1].visible).toBeTruthy();
 });
+/*
+//Not implemented
+test("onCustomPropertySort event", () => {
+  var creator = new CreatorTester({
+    showElementEditorAsPropertyGrid: false,
+  });
+  creator.onCustomSortProperty.add(function (editor, options) {
+    if (options.property1.name == "name") options.result = -1;
+    if (options.property2.name == "name") options.result = 1;
+  });
+  creator.propertyGridObjectEditorModel.selectedObject = creator.survey.pages[0];
+  expect(
+    (<any>(
+      creator.propertyGridObjectEditorModel.koElementEditor()
+    )).koProperties()[0].name,
+    "name",
+    "The name property is now the first"
+  );
+});
+test("onQuestionEditorChanged method", () => {
+  var jsonText = JSON.stringify({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "html",
+            name: "question3",
+            html: '<img src="https://placehold.it/300x100" alt="test"/>',
+          },
+        ],
+      },
+    ],
+  });
+  var creator = new CreatorTester();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  creator.text = jsonText;
+
+  creator.selectedElement = creator.survey.pages[0];
+  var pageClass = pagescreator.getPageMenuIconClass(creator.survey.pages[0]);
+  expect(pageClass, "icon-gearactive");
+  expect(creator.koSelectedObject().value, creator.survey.pages[0]);
+  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
+
+  creator.survey.selectedElement = <any>creator.survey.pages[0].elements[0];
+  expect(
+    creator.koSelectedObject().value,
+    creator.survey.pages[0].elements[0]
+  );
+  pageClass = pagescreator.getPageMenuIconClass(creator.survey.pages[0]);
+  expect(pageClass, "icon-gear");
+  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
+
+  creator.onQuestionEditorChanged(<any>creator.survey.pages[0].elements[0]);
+  pageClass = pagescreator.getPageMenuIconClass(creator.survey.pages[0]);
+  expect(pageClass, "icon-gear");
+  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
+
+  creator.selectedElement = creator.survey.pages[0];
+  pageClass = pagescreator.getPageMenuIconClass(creator.survey.pages[0]);
+  expect(pageClass, "icon-gearactive");
+  expect(creator.koSelectedObject().value, creator.survey.pages[0]);
+  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
+});
+
+test("pagesEditor activePage when question selected", () => {
+  var jsonText = JSON.stringify({
+    pages: [
+      {
+        name: "page1",
+        elements: [],
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "html",
+            name: "question3",
+            html: '<img src="https://placehold.it/300x100" alt="test"/>',
+          },
+        ],
+      },
+    ],
+  });
+  var creator = new CreatorTester();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  creator.text = jsonText;
+
+  var currentPage = creator.survey.pages[1];
+
+  creator.selectedElement = currentPage;
+
+  var pageClass = pagescreator.getPageMenuIconClass(currentPage);
+  expect(pageClass, "icon-gearactive");
+  expect(creator.koSelectedObject().value, currentPage);
+  expect(pagescreator.model.selectedPage(), currentPage);
+
+  creator.survey.selectedElement = <any>creator.survey.pages[1].elements[0];
+  expect(
+    creator.koSelectedObject().value,
+    creator.survey.pages[1].elements[0]
+  );
+  pageClass = pagescreator.getPageMenuIconClass(currentPage);
+  expect(pageClass, "icon-gear");
+  expect(pagescreator.model.selectedPage(), currentPage);
+});
+test("pagesEditor addNewPage in the dropdown", () => {
+  var jsonText = JSON.stringify({
+    pages: [
+      {
+        name: "page1",
+        elements: [],
+      },
+    ],
+  });
+  var creator = new CreatorTester();
+  creator.text = jsonText;
+
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+
+  expect(1, creator.survey.pages.length);
+
+  expect(
+    pagescreator.model.selectedPage().name,
+    creator.survey.pages[0].name
+  );
+  expect(pagescreator.model.pagesForSelection().length, 2);
+  expect(creator.survey.currentPage.name, creator.survey.pages[0].name);
+
+  pagescreator.model.selectedPage(
+    pagescreator.model.pagesForSelection()[1].value
+  );
+
+  expect(pagescreator.model.pagesForSelection().length, 3);
+  expect(
+    creator.survey.pages[1].name,
+    pagescreator.model.selectedPage().name
+  );
+  expect(creator.survey.currentPage.name, creator.survey.pages[1].name);
+});
+
+test(
+  "pagesEditor selectedPage keep currantPage in survey - Survey page shows wrong content after page reordering via drag/drop #1009",
+  () => {
+    var jsonText = JSON.stringify({
+      pages: [
+        {
+          name: "page1",
+          elements: [],
+        },
+        {
+          name: "page2",
+          elements: [],
+        },
+      ],
+    });
+    var creator = new CreatorTester();
+    creator.text = jsonText;
+
+    var pagesEditor = new PagesEditorViewModel(
+      creator.pagesEditorModel,
+      document.createElement("div")
+    );
+
+    expect(2, creator.survey.pages.length);
+
+    const movedPage = creator.survey.pages[0];
+    creator.selectedElement = movedPage;
+
+    expect(
+      pagescreator.model.selectedPage().name,
+      movedPage.name,
+      "initial selection - page editor selectedPage"
+    );
+    expect(
+      creator.survey.currentPage.name,
+      movedPage.name,
+      "initial selection - survey.currentPage"
+    );
+
+    // Emulate unsync during drag/drop pages
+    creator.pagesEditorModel.blockPagesRebuilt(true);
+    SurveyHelper.moveItemInArray(pagescreator.model.pages, movedPage, 1);
+    creator.pagesEditorModel.blockPagesRebuilt(false);
+
+    pagescreator.model.selectedPage(movedPage);
+
+    expect(
+      pagescreator.model.selectedPage().name,
+      movedPage.name,
+      "page editor selectedPage after selection"
+    );
+    expect(
+      creator.survey.currentPage.name,
+      movedPage.name,
+      "survey.currentPage after selection"
+    );
+  }
+);
+
+test("pagescreator.readOnly", () => {
+  var creator = new CreatorTester();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  expect(
+    pagescreator.model.readOnly,
+    false,
+    "page editor is not read-only by default"
+  );
+
+  creator.readOnly = true;
+  pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  expect(
+    pagescreator.model.readOnly,
+    true,
+    "page editor is read-only creator.readOnly"
+  );
+
+  creator.readOnly = false;
+  pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  expect(
+    pagescreator.model.readOnly,
+    false,
+    "page editor is not read-only again"
+  );
+
+  expect(
+    creator.allowModifyPages,
+    true,
+    "The property is true by default"
+  );
+  var creator = new CreatorTester(null, { allowModifyPages: false });
+  expect(creator.allowModifyPages, false, "The parameter set correctly");
+  pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  expect(
+    pagescreator.model.readOnly,
+    true,
+    "page editor is read-only allowModifyPages"
+  );
+});
+
+test("PagesEditor change question's page", () => {
+  var jsonText = JSON.stringify({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "html",
+            name: "question3",
+            html: '<img src="https://placehold.it/300x100" alt="test"/>',
+          },
+        ],
+      },
+      {
+        name: "page2",
+        elements: [],
+      },
+    ],
+  });
+  var creator = new CreatorTester();
+  creator.text = jsonText;
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+
+  expect(pagescreator.model.selectedPage(), creator.survey.pages[0]);
+
+  var question = <Survey.Question>creator.survey.pages[0].elements[0];
+  question.page = creator.survey.pages[1];
+  creator.onPropertyValueChanged(
+    <any>{ name: "page", isDefaultValue: () => false },
+    question,
+    creator.survey.pages[1]
+  );
+  expect(pagescreator.model.selectedPage(), creator.survey.pages[1]);
+});
+
+test("pagescreator.canAddPage", () => {
+  var creator = new CreatorTester();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  expect(
+    pagescreator.model.canAddPage,
+    true,
+    "page adding is allowed by default"
+  );
+
+  var handler = function (s, o) {
+    if (o.obj.getType() === "page") {
+      o.allowAdd = false;
+    }
+  };
+  creator.onElementAllowOperations.add(handler);
+  expect(pagescreator.model.canAddPage, false, "page adding is disabled");
+  creator.onElementAllowOperations.remove(handler);
+  expect(pagescreator.model.canAddPage, false, "page adding is enabled");
+});
+
+test("pagescreator.canCopyPage", () => {
+  var creator = new CreatorTester();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  expect(
+    pagescreator.model.canCopyPage,
+    true,
+    "page copying is allowed by default"
+  );
+
+  var handler = function (s, o) {
+    if (o.obj.getType() === "page") {
+      o.allowCopy = false;
+    }
+  };
+  creator.onElementAllowOperations.add(handler);
+  expect(
+    pagescreator.model.canCopyPage,
+    false,
+    "page copying is disabled"
+  );
+  creator.onElementAllowOperations.remove(handler);
+  expect(pagescreator.model.canCopyPage, false, "page copying is enabled");
+});
+
+test("pagescreator.canEditPage", () => {
+  var creator = new CreatorTester();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  expect(
+    pagescreator.model.canEditPage,
+    true,
+    "page editing is allowed by default"
+  );
+
+  var handler = function (s, o) {
+    if (o.obj.getType() === "page") {
+      o.allowEdit = false;
+    }
+  };
+  creator.onElementAllowOperations.add(handler);
+  expect(
+    pagescreator.model.canEditPage,
+    false,
+    "page editing is disabled"
+  );
+  creator.onElementAllowOperations.remove(handler);
+  expect(pagescreator.model.canEditPage, false, "page editing is enabled");
+});
+
+test("pagescreator.canDeletePage", () => {
+  var creator = new CreatorTester();
+  var pagesEditor = new PagesEditorViewModel(
+    creator.pagesEditorModel,
+    document.createElement("div")
+  );
+  expect(
+    pagescreator.model.canDeletePage,
+    false,
+    "page deleting is disallowed by default"
+  );
+
+  pagescreator.model.addPage();
+
+  expect(
+    pagescreator.model.canDeletePage,
+    true,
+    "page deleting is allowed"
+  );
+
+  var handler = function (s, o) {
+    if (o.obj.getType() === "page") {
+      o.allowDelete = false;
+    }
+  };
+  creator.onElementAllowOperations.add(handler);
+  expect(
+    pagescreator.model.canDeletePage,
+    false,
+    "page deleting is disabled"
+  );
+  creator.onElementAllowOperations.remove(handler);
+  expect(
+    pagescreator.model.canDeletePage,
+    false,
+    "page deleting is enabled"
+  );
+});
+*/
+
 /* TODO refactor
 test("onModified options", function(assert) {
   var creator = new CreatorTester();

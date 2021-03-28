@@ -1,20 +1,21 @@
 <div>
-    <!-- ko if: $data.logic -->
-      <!-- ko template: { name: 'svd-logic-tab', data: $data.logic} -->
-      <!-- /ko -->
-    <!-- /ko -->
-  </div>
-  <script type="text/html" id="svd-logic-tab">
-  <div class="form-group svd-logic-tab" style="width: 100%">
+  <div>Show some text</div>
+  <!-- ko if: $data.showing  -->
+  <div
+    class="form-group svd-logic-tab"
+    style="width: 100%;"
+    data-bind="with: $data.logic"
+  >
     <!-- ko if: $data.mode == "view" -->
-        <sv-action-bar params="items: toolbarItems"></sv-action-bar>
-        <!-- ko template: { name: 'survey-content', data: $data.itemsSurvey  } --><!-- /ko -->
+    <sv-action-bar params="items: toolbarItems"></sv-action-bar>
+    <!-- ko template: { name: 'survey-content', data: $data.itemsSurvey  } --><!-- /ko -->
     <!-- /ko -->
     <!-- ko if: $data.mode != "view" -->
-        <!-- ko template: { name: 'survey-content', data: $data.expressionSurvey  } --><!-- /ko -->
-        <!-- ko template: { name: 'survey-content', data: $data.itemEditorSurvey  } --><!-- /ko -->
-        <div><span data-bind="text: errorText"></span></div>
-        <sv-action-bar params="items: toolbarEditItems"></sv-action-bar>
+    <!-- ko template: { name: 'survey-content', data: $data.expressionSurvey  } --><!-- /ko -->
+    <!-- ko template: { name: 'survey-content', data: $data.itemEditorSurvey  } --><!-- /ko -->
+    <div><span data-bind="text: errorText"></span></div>
+    <sv-action-bar params="items: toolbarEditItems"></sv-action-bar>
     <!-- /ko -->
   </div>
-  </script>
+  <!-- /ko -->
+</div>
