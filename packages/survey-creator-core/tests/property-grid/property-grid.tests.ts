@@ -1308,3 +1308,19 @@ test("Change cellType in the column in property grid", () => {
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
   expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeTruthy();
 });
+test("Validate Selected Element Errors", () => {
+  var titleProp = Serializer.findProperty("question", "title");
+  var oldIsRequired = titleProp.isRequired;
+  titleProp.isRequired = true;
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  expect(propertyGrid.validate()).toBeFalsy();
+  var titleQuestion = propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.errors).toHaveLength(1);
+  titleQuestion.value = "Question 1";
+  expect(propertyGrid.validate()).toBeTruthy();
+  expect(titleQuestion.errors).toHaveLength(0);
+  expect(question.title).toEqual("Question 1");
+  titleProp.isRequired = oldIsRequired;
+});

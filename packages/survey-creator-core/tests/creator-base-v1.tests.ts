@@ -4,6 +4,7 @@ import {
   QuestionHtmlModel,
   ElementFactory,
   QuestionTextModel,
+  Serializer,
 } from "survey-core";
 import { CreatorBase, ICreatorOptions } from "../src/creator-base";
 import {
@@ -382,123 +383,71 @@ test("Element name should be unique - property grid + Question Editor", () => {
   expect(questionName.hasErrors()).toBeFalsy();
   expect(question.name).toEqual("question4");
 });
-/*
+
 test("Validate Selected Element Errors", () => {
-  var titleProp = Survey.Serializer.findProperty("question", "title");
+  var titleProp = Serializer.findProperty("question", "title");
   var oldIsRequired = titleProp.isRequired;
   titleProp.isRequired = true;
   var creator = new CreatorTester();
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");
   creator.selectedElement = question;
-  creator.validateSelectedElement();
-  var titlePropertyEditor = creator.propertyGridObjectEditorModel.getPropertyEditorByName(
-    "title"
-  ).editor;
-  expect(
-    titlePropertycreator.koHasError(),
-    true,
-    "There is error in title editor"
-  );
+  expect(creator.validateSelectedElement()).toBeFalsy();
+  var titleQuestion = creator.propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.errors).toHaveLength(1);
   question.title = "My title";
-  creator.validateSelectedElement();
-  expect(
-    titlePropertycreator.koHasError(),
-    false,
-    "There is no errors in title editor"
-  );
+  expect(creator.validateSelectedElement()).toBeTruthy();
+  expect(titleQuestion.errors).toHaveLength(0);
   titleProp.isRequired = oldIsRequired;
 });
+test("Update conditions/expressions on changing question.name", () => {
+  var creator = new CreatorTester();
+  creator.survey.currentPage.addNewQuestion("text", "question1");
+  creator.survey.currentPage.addNewQuestion("text", "question2");
+  var q1 = creator.survey.getAllQuestions()[0];
+  var q2 = creator.survey.getAllQuestions()[1];
+  q2.visibleIf = "{question1} = 1";
+  creator.selectElement(q1);
+  var nameQuestion = creator.propertyGrid.survey.getQuestionByName("name");
+  nameQuestion.value = "myUpdatedQuestion1";
+  expect(q2.visibleIf).toEqual("{myUpdatedQuestion1} = 1");
+});
 
-test(
-  "Update conditions/expressions on changing question.name",
-  () => {
-    var creator = new CreatorTester();
-    creator.survey.currentPage.addNewQuestion("text", "question1");
-    creator.survey.currentPage.addNewQuestion("text", "question2");
-    var q1 = <Survey.Question>creator.survey.getAllQuestions()[0];
-    var q2 = <Survey.Question>creator.survey.getAllQuestions()[1];
-    q2.visibleIf = "{question1} = 1";
-    creator.propertyGridObjectEditorModel.selectedObject = q1;
-    var namePropertyEditor = creator.propertyGridObjectEditorModel.getPropertyEditorByName(
-      "name"
-    ).editor;
-    namePropertycreator.koValue("myUpdatedQuestion1");
-    expect(
-      q2.visibleIf,
-      "{myUpdatedQuestion1} = 1",
-      "Update the condition accordingly"
-    );
-  }
-);
+test("Update conditions/expressions on changing question.valueName", () => {
+  var creator = new CreatorTester();
+  creator.survey.currentPage.addNewQuestion("text", "question1");
+  creator.survey.currentPage.addNewQuestion("text", "question2");
+  var q1 = creator.survey.getAllQuestions()[0];
+  var q2 = creator.survey.getAllQuestions()[1];
+  q2.visibleIf = "{question1} = 1";
+  creator.selectElement(q1);
+  var nameQuestion = creator.propertyGrid.survey.getQuestionByName("name");
+  var valueNameQuestion = creator.propertyGrid.survey.getQuestionByName(
+    "valueName"
+  );
+  valueNameQuestion.value = "valueName1";
+  expect(q2.visibleIf).toEqual("{valueName1} = 1");
+  valueNameQuestion.value = "valueName2";
+  expect(q2.visibleIf).toEqual("{valueName2} = 1");
+  valueNameQuestion.value = "";
+  expect(q2.visibleIf).toEqual("{question1} = 1");
+  valueNameQuestion.value = "valueName3";
+  expect(q2.visibleIf).toEqual("{valueName3} = 1");
+  nameQuestion.value = "valueName3";
+  nameQuestion.value = "question11";
+  expect(q2.visibleIf).toEqual("{valueName3} = 1");
+});
 
-test(
-  "Update conditions/expressions on changing question.valueName",
-  () => {
-    var creator = new CreatorTester();
-    creator.survey.currentPage.addNewQuestion("text", "question1");
-    creator.survey.currentPage.addNewQuestion("text", "question2");
-    var q1 = <Survey.Question>creator.survey.getAllQuestions()[0];
-    var q2 = <Survey.Question>creator.survey.getAllQuestions()[1];
-    q2.visibleIf = "{question1} = 1";
-    creator.propertyGridObjectEditorModel.selectedObject = q1;
-    var namePropertyEditor = creator.propertyGridObjectEditorModel.getPropertyEditorByName(
-      "name"
-    ).editor;
-    var valuePropertyEditor = creator.propertyGridObjectEditorModel.getPropertyEditorByName(
-      "valueName"
-    ).editor;
-    valuePropertycreator.koValue("valueName1");
-    expect(
-      q2.visibleIf,
-      "{valueName1} = 1",
-      "valueName from empty to valueName1"
-    );
-    valuePropertycreator.koValue("valueName2");
-    expect(
-      q2.visibleIf,
-      "{valueName2} = 1",
-      "valueName from valueName1 to valueName2"
-    );
-    valuePropertycreator.koValue("");
-    expect(
-      q2.visibleIf,
-      "{question1} = 1",
-      "valueName from valueName2 to empty"
-    );
-    valuePropertycreator.koValue("valueName3");
-    expect(
-      q2.visibleIf,
-      "{valueName3} = 1",
-      "valueName from empty to valueName3"
-    );
-    namePropertycreator.koValue("valueName3");
-    namePropertycreator.koValue("question11");
-    expect(
-      q2.visibleIf,
-      "{valueName3} = 1",
-      "ignore changing name if valueName is not empty"
-    );
-  }
-);
+test("Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/details/T1106", () => {
+  var creator = new CreatorTester();
+  creator.onPanelAdded.add(function (sender, options) {
+    let parent = options.panel.parent;
+    parent.removeElement(options.panel);
+  });
 
-test(
-  "Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/details/T1106",
-  () => {
-    var creator = new CreatorTester();
-    creator.onPanelAdded.add(function (sender, options) {
-      let parent = options.panel.parent;
-      parent.removeElement(options.panel);
-    });
-
-    creator.clickToolboxItem({ json: { name: "q1", type: "panel" } });
-    expect(
-      editor["surveyObjects"].koObjects().length,
-      2,
-      "panel has not been added"
-    );
-  }
-);
-
+  creator.clickToolboxItem({ name: "q1", type: "panel" });
+  expect(creator.survey.getAllPanels()).toHaveLength(0);
+});
+/*
 test(
   "Change page on changing survey.selectedElement if needed, Bug#424",
   () => {

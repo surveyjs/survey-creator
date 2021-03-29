@@ -29,6 +29,7 @@ import { TabTestPlugin } from "./components/tabs/test";
 import { TabTranslationPlugin } from "./tabs/translation";
 import { TabLogicPlugin } from "./tabs/logic-ui";
 import { ObjType, SurveyHelper } from "./surveyHelper";
+import {UndoRedoManager, IUndoRedoChange} from "./undoredomanager";
 import "./components/creator.scss";
 
 export interface ICreatorOptions {
@@ -97,6 +98,8 @@ export class CreatorBase<T extends SurveyModel>
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private newQuestionChangedNames: {};
+  private undoRedoManagerValue: UndoRedoManager;
+
   private saveSurveyFuncValue: (
     no: number,
     onSaveCallback: (no: number, isSuccess: boolean) => void
@@ -421,6 +424,38 @@ export class CreatorBase<T extends SurveyModel>
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called before undo happens.
+   * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
+   */
+   public onBeforeUndo: Survey.Event<
+   (sender: CreatorBase<T>, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+ /**
+  * The event is called before redo happens.
+  * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
+  */
+ public onBeforeRedo: Survey.Event<
+   (sender: CreatorBase<T>, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+ /**
+  * The event is called after undo happens.
+  * <br/> options.state is an undo/redo item.
+  */
+ public onAfterUndo: Survey.Event<
+   (sender: CreatorBase<T>, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+ /**
+  * The event is called after redo happens.
+  * <br/> options.state is an undo/redo item.
+  */
+ public onAfterRedo: Survey.Event<
+   (sender: CreatorBase<T>, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
 
   /**
    * This callback is used internally for providing survey JSON text.
@@ -580,7 +615,7 @@ export class CreatorBase<T extends SurveyModel>
       this
     );
   }
-
+  public get undoRedoManager(): UndoRedoManager { return this.undoRedoManagerValue;}
   protected initTabs() {
     const tabs: Array<Survey.IActionBarItem> = [];
     if (this.showDesignerTab) {
@@ -642,22 +677,35 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   private initToolbar() {
-    const items: Array<IActionBarItem> = [];
-    items.push(
-      ...[
+    const items: Array<IActionBarItem> =  [
         {
           id: "icon-undo",
           iconName: "icon-undo",
-          action: () => {},
           title: "Undo",
           showTitle: false,
+          active: () => { return this.undoRedoManager && this.undoRedoManager.canUndo()},
+          action: () => {
+            var options = { canUndo: true };
+            this.onBeforeUndo.fire(self, options);
+            if (options.canUndo) {
+              var item = this.undoRedoManager.undo();
+              this.onAfterUndo.fire(self, { state: item });
+            }
+          },
         },
         {
           id: "icon-redo",
           iconName: "icon-redo",
-          action: () => {},
           title: "Redo",
           showTitle: false,
+          active: () => { return this.undoRedoManager && this.undoRedoManager.canRedo()},
+          action: () => {
+            var options = { canRedo: true };
+            this.onBeforeRedo.fire(self, options);
+            if (options.canRedo) {
+              var item = this.undoRedoManager.redo();
+              this.onAfterRedo.fire(self, { state: item });
+            }
         },
         {
           id: "icon-settings",
@@ -700,9 +748,7 @@ export class CreatorBase<T extends SurveyModel>
           active: false,
           title: "Preview",
         },
-      ]
-    );
-
+      ];
     this.toolbarItems = items;
   }
 
@@ -893,9 +939,89 @@ export class CreatorBase<T extends SurveyModel>
       this.doOnElementRemoved(options.question);
     });
     */
+    this.undoRedoManagerValue = new UndoRedoManager();
+    survey.onPropertyValueChangedCallback = (
+      name: string,
+      oldValue: any,
+      newValue: any,
+      sender: Survey.Base,
+      arrayChanges: Survey.ArrayChanges
+    ) => {
+      this.onSurveyPropertyValueChangedCallback(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
+    };
+    this.undoRedoManager.canUndoRedoCallback = () => {
+      //this.updateKoCanUndoRedo();
+    };
+    this.undoRedoManager.changesFinishedCallback = (
+      changes: IUndoRedoChange
+    ) => {
+      this.setModified({
+        type: "PROPERTY_CHANGED",
+        name: changes.propertyName,
+        target: changes.object,
+        oldValue: changes.oldValue,
+        newValue: changes.newValue,
+      });
+    };
+
     this.setSurvey(survey);
   }
   private addingObject: Survey.Base;
+  private onSurveyPropertyValueChangedCallback(
+    name: string,
+    oldValue: any,
+    newValue: any,
+    sender: Survey.Base,
+    arrayChanges: Survey.ArrayChanges
+  ) {
+    if (this.addingObject == sender) return;
+    this.undoRedoManager.startTransaction(name + " changed");
+    this.undoRedoManager.onPropertyValueChanged(
+      name,
+      oldValue,
+      newValue,
+      sender,
+      arrayChanges
+    );
+    this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
+    this.undoRedoManager.stopTransaction();
+  }
+  private updateConditionsOnQuestionNameChanged(
+    obj: Survey.Base,
+    propertyName: string,
+    oldValue: any
+  ) {
+    if (!this.isObjQuestion(obj)) return;
+    if (propertyName === "name" && !obj["valueName"]) {
+      this.updateConditions(oldValue, obj["name"]);
+    }
+    if (propertyName === "valueName") {
+      var oldName = !!oldValue ? oldValue : obj["name"];
+      var newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
+      this.updateConditions(oldName, newName);
+    }
+  }
+  private updateConditions(oldName: string, newName: string) {
+    if (oldName === newName) return;
+    new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
+  }
+
+  private isObjQuestion(obj: Survey.Base) {
+    var classInfo = Survey.Serializer.findClass(obj.getType());
+
+    while (!!classInfo && !!classInfo.parentName) {
+      if (classInfo.name === "question") return true;
+      classInfo = Survey.Serializer.findClass(classInfo.parentName);
+    }
+    return !!classInfo && classInfo.name === "question";
+  }
+
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
@@ -1300,6 +1426,24 @@ export class CreatorBase<T extends SurveyModel>
     if (this.propertyGrid) {
       this.propertyGrid.obj = element;
     }
+  }
+
+  /**
+   * Check for errors in property grid and adorners of the selected elements.
+   * Returns true if selected element is null or there is no errors.
+   */
+  public validateSelectedElement(): boolean {
+    var isValid = true;
+    if (!this.selectedElement) return isValid;
+    if (!!this.propertyGrid) {
+      isValid = this.propertyGrid.validate();
+    }
+    /*
+    var options = { errors: [] };
+    this.onValidateSelectedElement.fire(this, options);
+    return isValid && options.errors.length == 0;
+    */
+    return isValid;
   }
 
   public clickToolboxItem(json: any) {

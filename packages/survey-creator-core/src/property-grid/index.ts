@@ -627,6 +627,10 @@ export class PropertyGridModel {
   public get survey() {
     return this.surveyValue;
   }
+  public validate(): boolean {
+    if (!this.survey) return;
+    return !this.survey.hasErrors(true, true);
+  }
   protected createSurvey(json: any): SurveyModel {
     return this.options.createSurvey(json, "property-grid");
   }
