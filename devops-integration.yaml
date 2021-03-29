@@ -151,6 +151,17 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
     npm run test
   displayName: 'test creator V2 Core'
+  
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
+    ArtifactName: 'SurveyJSCreatorV2BuildCore'
+    publishLocation: 'Container'  
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
@@ -161,6 +172,18 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run test
   displayName: 'test creator V2 Knockout'
+  
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-knockout
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-knockout'
+    ArtifactName: 'SurveyJSCreatorV2BuildKnockout'
+    publishLocation: 'Container'  
+
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -171,6 +194,17 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm run test
   displayName: 'test creator V2 React'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react'
+    ArtifactName: 'SurveyJSCreatorV2BuildReact'
+    publishLocation: 'Container'  
 
 - task: CopyFiles@2
   inputs:
