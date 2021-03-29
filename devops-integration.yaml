@@ -179,6 +179,31 @@ steps:
     ArtifactName: 'SurveyJSCreatorV2BuildKnockout'
     publishLocation: 'Container'  
 
+
+- script: |
+    cd $(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages
+    dir
+    ls
+    cd $(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-core
+    dir
+    ls
+    cd $(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-react-ui
+    dir
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules
+    dir
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core
+    dir
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui
+    dir
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    dir
+    ls
+  displayName: 'pre-debug survey-creator-react build'
+
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm install
