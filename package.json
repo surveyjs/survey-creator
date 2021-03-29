@@ -12,13 +12,17 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "test": "lerna run test",
-    "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome testCafe/ --selector-timeout 1500 --reporter minimal\""
+    "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome testCafe/ --selector-timeout 1500 --reporter minimal\"",
+    "testcafe_debug_file": "concurrently \"http-server --silent\" \"testcafe chrome testCafe/json/json.js --reporter minimal --debug-mode\""
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
     "http-server": "^0.12.3",
     "husky": "^4.3.8",
     "lerna": "^3.22.1",
+    "survey-core": "../survey-library/build/survey-core",
+    "survey-creator-knockout": "packages/survey-creator-knockout/build",
+    "survey-knockout-ui": "../survey-library/build/survey-knockout-ui",
     "testcafe": "^1.9.2"
   },
   "dependencies": {},
@@ -26,5 +30,5 @@
     "hooks": {
       "pre-push": "npm test"
     }
-  }  
+  }
 }
