@@ -19,7 +19,6 @@ export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
   private itemEditorValue: LogicItemEditor;
   private itemsSurveyValue: SurveyModel;
-  private;
   constructor(
     public survey: SurveyModel,
     public options: ISurveyCreatorOptions = null
@@ -49,6 +48,10 @@ export class SurveyLogicUI extends SurveyLogic {
     this.updateItemsSurveyData();
     this.setupToolbarItems();
     this.itemEditorValue = new LogicItemEditor(null, this.options);
+  }
+  public dispose() {
+    super.dispose();
+    this.itemsSurveyValue.dispose();
   }
   /**
    * The list of toolbar items. You may add/remove/replace them.
@@ -229,12 +232,21 @@ export class LogicModel extends Base {
     super();
   }
   @property() logic: SurveyLogicUI;
+  public get showing(): boolean {
+    return this.getPropertyValue("showing", false);
+  }
+  public set showing(val: boolean) {
+    this.setPropertyValue("showing", val);
+  }
   public activate(): void {
     var logic = new SurveyLogicUI(this.creator.survey, this.creator);
     if (!!this.onCreateLogic) this.onCreateLogic(logic);
     this.logic = logic;
+    this.showing = true;
   }
   public deactivate(): boolean {
+    this.showing = false;
+    this.logic.dispose();
     this.logic = undefined;
     return true;
   }

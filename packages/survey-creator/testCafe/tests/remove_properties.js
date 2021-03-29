@@ -1,4 +1,4 @@
-import { url, init } from "../settings";
+import { url, init } from "../helper";
 import { ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `remove properties`;

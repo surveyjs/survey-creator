@@ -95,6 +95,11 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.update();
     this.koAfterRender = function () {};
   }
+  dispose() {
+    super.dispose();
+    this.onEndEditing();
+    this.survey = undefined;
+  }
   @propertyArray() items: Array<SurveyLogicItem>;
   @propertyArray() logicTypes: Array<SurveyLogicType>;
   /**
@@ -429,5 +434,4 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     }
   }
   */
-  dispose() {}
 }

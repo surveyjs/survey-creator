@@ -1,4 +1,4 @@
-import { init } from "../settings";
+import { init } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const assert = require("assert");
 const title = `toolbar customization`;

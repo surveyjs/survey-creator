@@ -565,6 +565,9 @@ export class PropertyGridModel {
     if (this.options.readOnly) {
       json.mode = "display";
     }
+    if (!!this.surveyValue) {
+      this.surveyValue.dispose();
+    }
     this.surveyValue = this.createSurvey(json);
     this.surveyValue.css = creatorCss;
     var page = this.surveyValue.createNewPage("p1");

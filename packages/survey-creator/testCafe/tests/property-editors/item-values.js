@@ -1,5 +1,5 @@
-import { url, init } from "../../settings";
-import { Selector, ClientFunction } from "testcafe";
+import { url, init } from "../../helper";
+import { Selector } from "testcafe";
 const title = `item-values`;
 
 fixture`Property editors: ${title}`.page`${url}`.beforeEach(async (ctx) => {
