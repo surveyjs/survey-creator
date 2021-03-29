@@ -153,6 +153,57 @@ steps:
     ArtifactName: 'SurveyJSCreatorV2BuildCore'
     publishLocation: 'Container'  
 
+# Creator REACT
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm install
+  displayName: 'npm install'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-library/build
+    dir
+    ls
+    cd $(Build.SourcesDirectory)/survey-library/build/survey-core
+    dir
+    ls
+    cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
+    dir
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core
+    dir
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui
+    dir
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    dir
+    ls
+  displayName: 'pre-debug survey-creator-react build'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run build
+  displayName: 'build creator V2 React'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run test
+  displayName: 'test creator V2 React'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react'
+    ArtifactName: 'SurveyJSCreatorV2BuildReact'
+    publishLocation: 'Container'  
+    
+
+# Creator KNOCKOUT
+    
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm install
@@ -178,54 +229,6 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-knockout'
     ArtifactName: 'SurveyJSCreatorV2BuildKnockout'
     publishLocation: 'Container'  
-
-
-#- script: |
-#    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-#    npm install
-#  displayName: 'npm install'
-#
-#- script: |
-#    cd $(Build.SourcesDirectory)/survey-library/build
-#    dir
-#    ls
-#    cd $(Build.SourcesDirectory)/survey-library/build/survey-core
-#    dir
-#    ls
-#    cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
-#    dir
-#    ls
-#    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core
-#    dir
-#    ls
-#    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui
-#    dir
-#    ls
-#    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-#    dir
-#    ls
-#  displayName: 'pre-debug survey-creator-react build'
-#
-#- script: |
-#    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-#    npm run build
-#  displayName: 'build creator V2 React'
-#
-#- script: |
-#    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-#    npm run test
-#  displayName: 'test creator V2 React'
-#
-#- task: CopyFiles@2
-#  inputs:
-#    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build'
-#    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react
-#
-#- task: PublishBuildArtifacts@1
-#  inputs:
-#    PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react'
-#    ArtifactName: 'SurveyJSCreatorV2BuildReact'
-#    publishLocation: 'Container'  
 
 - task: CopyFiles@2
   inputs:
