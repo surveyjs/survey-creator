@@ -62,21 +62,6 @@ steps:
     TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
     OverWrite: true
 
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm install
-  displayName: 'npm install'
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-    npm install
-  displayName: 'npm install'
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-    npm install
-  displayName: 'npm install'
-
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-knockout'
@@ -141,6 +126,11 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run doc_gen
   displayName: 'generate docs'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm install
+  displayName: 'npm install'
   
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
@@ -165,6 +155,11 @@ steps:
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm install
+  displayName: 'npm install'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run build
   displayName: 'build creator V2 Knockout'
 
@@ -184,6 +179,10 @@ steps:
     ArtifactName: 'SurveyJSCreatorV2BuildKnockout'
     publishLocation: 'Container'  
 
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm install
+  displayName: 'npm install'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
