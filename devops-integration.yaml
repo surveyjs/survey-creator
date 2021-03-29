@@ -186,16 +186,13 @@ steps:
   displayName: 'npm install'
 
 - script: |
-    cd $(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages
+    cd $(Build.SourcesDirectory)/survey-library/build
     dir
     ls
-    cd $(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-core
+    cd $(Build.SourcesDirectory)/survey-library/build/survey-core
     dir
     ls
-    cd $(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-react-ui
-    dir
-    ls
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules
+    cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
     dir
     ls
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core

@@ -3,7 +3,7 @@
 var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-//var TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+var TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var dts = require("dts-bundle");
 var rimraf = require("rimraf");
@@ -155,7 +155,7 @@ module.exports = function (options) {
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
-      //plugins: [new TsconfigPathsPlugin(/*{ configFile: "./tsconfig.json" }*/)],
+      plugins: [new TsconfigPathsPlugin(/*{ configFile: "./tsconfig.json" }*/)],
       alias: {
         tslib: path.join(__dirname, "./src/entries/helpers.ts"),
       },
