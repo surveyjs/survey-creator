@@ -1332,3 +1332,38 @@ test("Validate Selected Element Errors", () => {
   propertyGrid.obj = null;
   expect(propertyGrid.survey.getQuestionByName("name")).toBeFalsy();
 });
+test("Change page", () => {
+  var survey = new SurveyModel();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  var question = survey.pages[0].addNewQuestion("text", "q1");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var pageQuestion = <QuestionDropdownModel>(
+    propertyGrid.survey.getQuestionByName("page")
+  );
+  expect(pageQuestion).toBeTruthy();
+  expect(pageQuestion.choices).toHaveLength(2);
+  expect(question.page.name).toEqual("page1");
+  expect(pageQuestion.value).toEqual("page1");
+  pageQuestion.value = "page2";
+  expect(question.page.name).toEqual("page2");
+});
+test("Expand/collapse categories", () => {
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var generalPanel = <PanelModel>propertyGrid.survey.getPanelByName("general");
+  var logicPanel = <PanelModel>propertyGrid.survey.getPanelByName("logic");
+  expect(generalPanel.isExpanded).toBeTruthy();
+  propertyGrid.collapseCategory("general");
+  expect(generalPanel.isExpanded).toBeFalsy();
+  propertyGrid.expandCategory("general");
+  expect(generalPanel.isExpanded).toBeTruthy();
+
+  expect(logicPanel.isExpanded).toBeFalsy();
+  propertyGrid.expandAllCategories();
+  expect(logicPanel.isExpanded).toBeTruthy();
+  propertyGrid.collapseAllCategories();
+  expect(logicPanel.isExpanded).toBeFalsy();
+});

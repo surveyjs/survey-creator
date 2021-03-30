@@ -5,12 +5,17 @@ import {
   ElementFactory,
   QuestionTextModel,
   Serializer,
+  QuestionRadiogroupModel,
+  QuestionMatrixDropdownModel,
+  QuestionMatrixDynamicModel,
 } from "survey-core";
 import { CreatorBase, ICreatorOptions } from "../src/creator-base";
+import { editorLocalization } from "../src/editorLocalization";
 import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
 } from "../src/settings";
+import { ConditionEditor } from "../src/property-grid/condition-survey";
 
 export class CreatorTester extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
@@ -485,7 +490,7 @@ test("Do not allow to select page/survey objects", () => {
   creator.selectedElement = creator.survey.pages[0];
   expect(creator.selectedElement.getType()).toEqual("text");
 });
-/*
+
 test("Change elemenent page", () => {
   var creator = new CreatorTester();
   creator.JSON = getSurveyJson();
@@ -498,211 +503,9 @@ test("Change elemenent page", () => {
   pageEditor.value = "page2";
   expect(creator.selectedElement["name"]).toEqual("question1");
   expect(question.page.name).toEqual("page2");
-  expect(creator.survey.currentPage.name).toEqual("page2");
+  //TODO
+  //expect(creator.survey.currentPage.name).toEqual("page2");
 });
-
-test("show property grid on Edit", () => {
-  var creator = new CreatorTester();
-  creator.JSON = getSurveyJson();
-  creator.showToolbox = "right";
-  creator.rightContainerActiveItem("toolbox");
-  creator.hideAdvancedSettings = true;
-  creator.rightContainerVisible(false);
-  creator.selectedElement = creator.survey.getQuestionByName("question1");
-  expect(
-    creator.selectedElement.name,
-    "question1",
-    "question1 is selected"
-  );
-  creator.showQuestionEditor(creator.selectedElement);
-  expect(
-    creator.rightContainerActiveItem(),
-    "property-grid",
-    "Property grid is selected"
-  );
-  expect(
-    creator.hideAdvancedSettings,
-    false,
-    "Make sure that property grid is shown"
-  );
-  expect(
-    creator.rightContainerVisible(),
-    true,
-    "Make sure right container is visible"
-  );
-});
-
-test(
-  "hideAdvancedSettings and designer containers visibility",
-  () => {
-    var creator = new CreatorTester();
-
-    // creator.showToolbox = "left";
-    // creator.showPropertyGrid = "right";
-    // creator.hideAdvancedSettings = false;
-    expect(
-      creator.hideAdvancedSettings,
-      false,
-      "Make sure that property grid is shown default"
-    );
-    expect(
-      creator.leftContainerVisible(),
-      true,
-      "Make sure right container is visible default"
-    );
-    expect(
-      creator.rightContainerVisible(),
-      true,
-      "Make sure right container is visible default"
-    );
-
-    // creator.showToolbox = "left";
-    // creator.showPropertyGrid = "right";
-    creator.hideAdvancedSettings = true;
-    expect(
-      creator.hideAdvancedSettings,
-      true,
-      "Make sure that property grid is hidden"
-    );
-    expect(
-      creator.leftContainerVisible(),
-      true,
-      "Make sure right container is visible"
-    );
-    expect(
-      creator.rightContainerVisible(),
-      false,
-      "Make sure right container is hidden"
-    );
-
-    // creator.showToolbox = "left";
-    // creator.showPropertyGrid = "right";
-    creator.hideAdvancedSettings = false;
-    expect(
-      creator.hideAdvancedSettings,
-      false,
-      "Make sure that property grid is shown"
-    );
-    expect(
-      creator.leftContainerVisible(),
-      true,
-      "Make sure right container is visible"
-    );
-    expect(
-      creator.rightContainerVisible(),
-      true,
-      "Make sure right container is visible"
-    );
-
-    creator.showToolbox = "right";
-    // creator.showPropertyGrid = "right";
-    // creator.hideAdvancedSettings = false;
-    expect(
-      creator.hideAdvancedSettings,
-      false,
-      "Make sure that property grid is shown"
-    );
-    expect(
-      creator.leftContainerVisible(),
-      true,
-      "Make sure right container is visible"
-    );
-    expect(
-      creator.rightContainerVisible(),
-      true,
-      "Make sure right container is visible"
-    );
-
-    // creator.showToolbox = "right";
-    // creator.showPropertyGrid = "right";
-    creator.hideAdvancedSettings = true;
-    expect(
-      creator.hideAdvancedSettings,
-      true,
-      "Make sure that property grid is hidden"
-    );
-    expect(
-      creator.leftContainerVisible(),
-      true,
-      "Make sure right container is visible"
-    );
-    expect(
-      creator.rightContainerVisible(),
-      true,
-      "Make sure right container is visible"
-    );
-  }
-);
-
-test(
-  "Show toolbox in right container and hide property grid",
-  () => {
-    var creator = new CreatorTester();
-    creator.showPropertyGrid = false;
-    creator.showToolbox = "right";
-    assert.deepEqual(creator.leftContainer, [], "left container is empty");
-    assert.deepEqual(
-      creator.rightContainer,
-      ["toolbox"],
-      "right container contains toolbox"
-    );
-  }
-);
-
-test("Undo-redo on showing modal window", () => {
-  var creator = new CreatorTester();
-  creator.koShowElementEditorAsPropertyGrid(false);
-  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
-  var question = creator.survey.getQuestionByName("q1");
-  expect(creator.koCanUndo(), false, "There is nothing to undo");
-  var creator = new SurveyQuestionEditor(question, null, creator);
-  creator.getPropertyEditorByName("name").creator.koValue("question1");
-  creator.getPropertyEditorByName("title").creator.koValue("new title");
-  expect(creator.koCanUndo(), false, "We do not apply yet");
-  creator.onOkClick();
-  expect(question.name, "question1", "new name is applied");
-  expect(question.title, "new title", "new title is applied");
-  expect(creator.koCanUndo(), true, "We have something to undo");
-  creator.undo();
-  expect(creator.koCanUndo(), false, "There is nothing to apply again");
-  expect(question.name, "q1", "undo name");
-  expect(question.title, "q1", "undo title");
-  creator.redo();
-  expect(question.name, "question1", "redo name");
-  expect(question.title, "new title", "redo title");
-});
-
-test(
-  "Undo-redo on showing modal window and updating the expressions",
-  () => {
-    var creator = new CreatorTester();
-    creator.koShowElementEditorAsPropertyGrid(false);
-    creator.JSON = {
-      elements: [
-        { type: "text", name: "q1" },
-        { type: "text", name: "q2", visibleIf: "{q1} = 2" },
-        { type: "text", name: "q3", visibleIf: "{q1} = 3" },
-      ],
-    };
-    var q1 = creator.survey.getQuestionByName("q1");
-    var q2 = creator.survey.getQuestionByName("q2");
-    var q3 = creator.survey.getQuestionByName("q3");
-    var creator = new SurveyQuestionEditor(q1, null, creator);
-    creator.getPropertyEditorByName("name").creator.koValue("question1");
-    creator.onOkClick();
-    expect(q1.name, "question1", "q1 name is changed");
-    expect(q2.visibleIf, "{question1} = 2", "q2 visibleIf is changed");
-    expect(q3.visibleIf, "{question1} = 3", "q3 visibleIf is changed");
-    creator.undo();
-    expect(q1.name, "q1", "undo q1 name");
-    expect(q2.visibleIf, "{q1} = 2", "undo q2 visibleIf");
-    expect(q3.visibleIf, "{q1} = 3", "undo q3 visibleIf");
-    creator.redo();
-    expect(q1.name, "question1", "redo q1 name");
-    expect(q2.visibleIf, "{question1} = 2", "redo q2 visibleIf");
-    expect(q3.visibleIf, "{question1} = 3", "redo q3 visibleIf");
-  }
-);
 
 test("Undo-redo creator add/remove page", () => {
   var creator = new CreatorTester();
@@ -713,167 +516,56 @@ test("Undo-redo creator add/remove page", () => {
       { type: "text", name: "q3", visibleIf: "{q1} = 3" },
     ],
   };
-  expect(creator.survey.pages.length, 1, "There is one page");
+  expect(creator.survey.pages).toHaveLength(1);
   creator.addPage();
-  expect(creator.survey.pages.length, 2, "There are two pages");
+  expect(creator.survey.pages).toHaveLength(2);
   creator.undo();
-  expect(creator.survey.pages.length, 1, "Undo new page");
+  expect(creator.survey.pages).toHaveLength(1);
   creator.redo();
-  expect(creator.survey.pages.length, 2, "Redo new page");
+  expect(creator.survey.pages).toHaveLength(2);
 });
 
-test("showModalOnElementEditing property", () => {
-  var creator = new CreatorTester();
-  expect(
-    creator.showModalOnElementEditing,
-    false,
-    "Show new property grid by default"
-  );
-  creator.showPropertyGrid = false;
-  expect(
-    creator.showModalOnElementEditing,
-    true,
-    "There is no property grid, show modal"
-  );
-  creator.showPropertyGrid = true;
-  expect(
-    creator.showModalOnElementEditing,
-    false,
-    "Show new property grid, showPropertyGrid is show again"
-  );
-  creator = new CreatorTester(null, { showElementEditorAsPropertyGrid: false });
-  expect(
-    creator.showModalOnElementEditing,
-    true,
-    "Show old property grid"
-  );
-});
-
-test("pageEditMode property", () => {
-  var options = {
-    pageEditMode: "single",
-  };
-  var creator = new CreatorTester(undefined, options);
-  expect(
-    creator.topContainer.indexOf("pages-editor"),
-    -1,
-    "Pages editor shouldn't be shown"
-  );
-  creator = new CreatorTester();
-  expect(
-    creator.topContainer.indexOf("pages-editor"),
-    1,
-    "Pages editor should be shown"
-  );
-});
-
-test(
-  "The onModified event is called on property changed",
-  () => {
-    var creator = new CreatorTester(undefined);
-    var counter;
-    creator.onModified.add(() => {
-      counter++;
-    });
-    var survey = creator.survey;
-
-    survey.addNewPage("p");
-    var question = <Survey.QuestionRadiogroupModel>(
-      survey.pages[0].addNewQuestion("radiogroup", "q1")
-    );
-    var property = Survey.Serializer.findProperty("question", "title");
-    var propertyEditor = new SurveyObjectProperty(property, creator);
-    propertycreator.object = question;
-    var editor: any = propertycreator.editor;
-
-    counter = 0;
-    creator.koValue("some title");
-    expect(counter, 1, "1 modification - title changed");
-
-    creator.undoRedoManager.undo();
-    expect(counter, 2, "2 modification un-done");
-
-    creator.undoRedoManager.redo();
-    expect(counter, 3, "3 modification re-done");
-
-    property = Survey.Serializer.findProperty("selectbase", "choices");
-    propertyEditor = new SurveyObjectProperty(property, creator);
-    propertycreator.object = question;
-    editor = propertycreator.editor;
-
-    counter = 0;
-    creator.onAddClick();
-    expect(counter, 1, "1 modification - after add");
-
-    creator.undoRedoManager.undo();
-    expect(counter, 2, "2 modification un-done");
-
-    creator.onDeleteClick(creator.originalValue[0]);
-    expect(counter, 3, "3 modification - after delete");
-
-    creator.onClearClick();
-    expect(counter, 4, "4 modification - after clear");
-  }
-);
-
-test(
-  "Pass showPropertyGrid in options - https://github.com/surveyjs/survey-creator/issues/657",
-  () => {
-    try {
-      var creator = new CreatorTester(undefined, { showPropertyGrid: "left" });
-      expect.ok(!!creator);
-    } catch {
-      expect.ok(false, "Exception has occured in constructor");
-    }
-  }
-);
-
-test("Can show unexisting property", () => {
+test("The onModified event is called on property changed", () => {
   var creator = new CreatorTester(undefined);
-  var question = new Survey.QuestionCheckbox("q1");
-  creator.onCanShowProperty.add((sender, options) => {
-    options.canShow = options.property.name !== "someth";
+  var counter;
+  creator.onModified.add((sender, options) => {
+    counter++;
   });
-  assert.notOk(creator.canShowObjectProperty(question, "someth"));
-});
+  var survey = creator.survey;
 
-
-test("Default toolbar items", () => {
-  var creator = new CreatorTester(undefined);
-  expect(creator.toolbarItems().length, 8, "Necessary items are present");
-  expect(
-    creator.toolbarItems()[0].id,
-    "svd-toolbar-page-selector",
-    "page selector"
+  survey.addNewPage("p");
+  var question = <QuestionRadiogroupModel>(
+    survey.pages[0].addNewQuestion("radiogroup", "q1")
   );
-  expect(creator.toolbarItems()[1].id, "svd-undo", "svd-undo");
-  expect(creator.toolbarItems()[2].id, "svd-redo", "svd-redo");
-  expect(
-    creator.toolbarItems()[3].id,
-    "svd-survey-settings",
-    "svd-survey-settings"
-  );
-  expect(creator.toolbarItems()[4].id, "svd-options", "svd-options");
-  expect(creator.toolbarItems()[5].id, "svd-test", "svd-test");
-  expect(creator.toolbarItems()[6].id, "svd-save", "svd-save");
-  expect(creator.toolbarItems()[7].id, "svd-state", "svd-state");
-});
+  creator.selectElement(question);
+  var titleQuestion = creator.propertyGrid.survey.getQuestionByName("title");
+  counter = 0;
+  titleQuestion.value = "some title";
+  expect(counter).toEqual(1);
 
-test("showPageSelectorInToolbar property", () => {
-  var creator = new CreatorTester(undefined);
-  expect(
-    creator.toolbarItems()[0].visible,
-    false,
-    "page selector in toolbar invisible by default"
-  );
+  creator.undo();
+  expect(counter).toEqual(2);
 
-  creator = new CreatorTester(undefined, { showPageSelectorInToolbar: true });
+  creator.redo();
+  expect(counter).toEqual(3);
 
-  expect(
-    creator.toolbarItems()[0].visible,
-    true,
-    "page selector is visible with showPageSelectorInToolbar property"
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    creator.propertyGrid.survey.getQuestionByName("choices")
   );
+  counter = 0;
+  choicesQuestion.addRow();
+  expect(counter).toEqual(1);
+
+  creator.undo();
+  expect(counter).toEqual(2);
+
+  choicesQuestion.removeRow(0);
+  expect(counter).toEqual(3);
+
+  /* TODO get access to clear button
+    creator.onClearClick();
+    expect(counter).toEqual(4);
+    */
 });
 
 test("deleteElement function", () => {
@@ -885,26 +577,13 @@ test("deleteElement function", () => {
 
   creator.selectedElement = q2;
   creator.deleteElement(creator.selectedElement);
-  expect(
-    creator.selectedElement.name,
-    "q3",
-    "select next question after delete the previous one"
-  );
-
+  expect(creator.selectedElement["name"]).toEqual("q3");
   creator.deleteElement(creator.selectedElement);
-  expect(
-    creator.selectedElement.name,
-    "q1",
-    "select prev question after delete the lastest one"
-  );
-
+  expect(creator.selectedElement["name"]).toEqual("q1");
   creator.deleteElement(creator.selectedElement);
-  expect(
-    creator.selectedElement.name,
-    "page1",
-    "select page after delete the last question"
-  );
+  expect(creator.selectedElement["name"]).toEqual("page1");
 });
+
 test("Do not call onPageAdded on pages move", () => {
   var creator = new CreatorTester();
   var counter = 0;
@@ -913,133 +592,38 @@ test("Do not call onPageAdded on pages move", () => {
   });
   creator.survey.addNewPage("page2");
   creator.survey.addNewPage("page3");
-  expect(counter, 2, "We added two pages");
+  expect(counter).toEqual(2);
   var page2 = creator.survey.pages[1];
   creator.survey.pages.splice(1, 1);
   creator.survey.pages.splice(0, 0, page2);
-  expect(
-    creator.survey.pages[0].name,
-    "page2",
-    "page2 inserted correctly"
-  );
-  expect(counter, 2, "We do not added new page");
+  expect(creator.survey.pages[0].name).toEqual("page2");
+  expect(counter).toEqual(2);
 });
 
-test(
-  "creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab collapsePropertyTab",
-  () => {
-    const creator = new CreatorTester(undefined);
-    const tabs = creator.propertyGridObjectEditorModel.koElementEditor().koTabs;
-    const vm = new AccordionViewModel({ tabs });
+test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab collapsePropertyTab", () => {
+  const creator = new CreatorTester();
+  var page = creator.survey.pages[0];
+  var q1 = page.addNewQuestion("text", "q1");
+  creator.selectElement(q1);
+  var generalPanel = <PanelModel>(
+    creator.propertyGrid.survey.getPanelByName("general")
+  );
+  var logicPanel = <PanelModel>(
+    creator.propertyGrid.survey.getPanelByName("logic")
+  );
+  expect(generalPanel.isExpanded).toBeTruthy();
+  creator.collapsePropertyTab("general");
+  expect(generalPanel.isExpanded).toBeFalsy();
+  creator.expandPropertyTab("general");
+  expect(generalPanel.isExpanded).toBeTruthy();
 
-    expect(vm.tabs().length, 10, "tabs count");
-    expect(vm.tabs()[0].collapsed(), false, "general tab expanded");
-    expect(vm.tabs()[5].collapsed(), true, "logic tab expanded");
+  expect(logicPanel.isExpanded).toBeFalsy();
+  creator.expandAllPropertyTabs();
+  expect(logicPanel.isExpanded).toBeTruthy();
+  creator.collapseAllPropertyTabs();
+  expect(logicPanel.isExpanded).toBeFalsy();
+});
 
-    creator.collapsePropertyTab("general");
-    expect(vm.tabs()[0].collapsed(), true, "general tab collapsed");
-
-    creator.expandPropertyTab("logic");
-    expect(vm.tabs()[5].collapsed(), false, "logic tab expanded");
-
-    creator.collapseAllPropertyTabs();
-    vm.tabs().forEach((tab) => {
-      expect(tab.collapsed(), true, tab.name + " tab collapsed");
-    });
-
-    creator.expandAllPropertyTabs();
-    vm.tabs().forEach((tab) => {
-      expect(tab.collapsed(), false, tab.name + " tab expanded");
-    });
-  }
-);
-
-test(
-  "creator getMenuItems should respect property visibility (e.g. for image question) - https://github.com/surveyjs/survey-creator/issues/897",
-  () => {
-    const creator = new CreatorTester(undefined);
-    const question = new Survey.QuestionImage("qi");
-    var menuItems = creator.survey.getMenuItems(question);
-    assert.deepEqual(
-      menuItems.filter(
-        (i) => ["showtitle", "isrequired"].indexOf(i.name) !== -1
-      ),
-      [],
-      "No 'showtitle' or 'isrequired' in the menu items"
-    );
-    assert.notOk(
-      isPropertyVisible(question, "title"),
-      "The title property is hidden for the image question"
-    );
-    assert.notOk(
-      isPropertyVisible(question, "isRequired"),
-      "The isRequired property is hidden for the image question"
-    );
-
-    const questionText = new Survey.QuestionText("qt");
-    menuItems = creator.survey.getMenuItems(questionText);
-    expect(
-      menuItems.filter(
-        (i) => ["showtitle", "isrequired"].indexOf(i.name) !== -1
-      ).length,
-      2,
-      "The 'showtitle' or 'isrequired' are in the menu items"
-    );
-  }
-);
-
-test(
-  "creator getMenuItems should respect property readOnly - https://github.com/surveyjs/survey-creator/issues/1024",
-  () => {
-    const creator = new CreatorTester(undefined);
-    const questionText = new Survey.QuestionText("qt");
-    var menuItems = creator.survey.getMenuItems(questionText);
-    var requiredItem = menuItems.filter((i) => i.name == "isrequired")[0];
-    assert.notEqual(
-      requiredItem,
-      undefined,
-      "The 'isrequired' is in the menu items"
-    );
-
-    creator.onGetPropertyReadOnly.add(function (sender, options) {
-      if (options.property.name == "isRequired") {
-        options.readOnly = "true";
-      }
-    });
-    assert.notOk(questionText.isRequired);
-    requiredItem.onClick(questionText);
-    assert.notOk(questionText.isRequired);
-  }
-);
-
-test(
-  "addQuestion into the QuestionPanelDynamic into second page",
-  () => {
-    var creator = new CreatorTester();
-    var survey = creator.survey;
-    survey.addNewPage("p1");
-    var page = survey.addNewPage("p2");
-    var pnlQuestion = page.addNewQuestion("paneldynamic", "newQuestion");
-    var newQuestion = pnlQuestion["template"].addNewQuestion(
-      "text",
-      "question1"
-    );
-    //TODO rebuld items
-    editor["surveyObjects"].survey = null;
-    editor["surveyObjects"].survey = survey;
-    survey.selectedElement = newQuestion;
-    expect(
-      creator.survey.selectedElement.name,
-      newQuestion.name,
-      "The embedded question is selected"
-    );
-    expect(
-      creator.survey.currentPage.name,
-      "p2",
-      "The second page is selected"
-    );
-  }
-);
 test("generate element name based on another survey", () => {
   var creator = new CreatorTester();
   creator.onGenerateNewName.add(function (sender, options) {
@@ -1053,33 +637,22 @@ test("generate element name based on another survey", () => {
   var survey = creator.survey;
   var page = survey.addNewPage("p1");
   page.addNewQuestion("text");
-  expect(page.questions[0].name, "question1", "Generate question1 name");
+  expect(page.questions[0].name).toEqual("question1");
   page.addNewQuestion("text");
-  expect(page.questions[1].name, "question2", "Generate question2 name");
+  expect(page.questions[1].name).toEqual("question2");
   page.addNewQuestion("text");
-  expect(
-    page.questions[2].name,
-    "question4",
-    "Generate question4 name, question3 is used already"
-  );
+  expect(page.questions[2].name).toEqual("question4");
   page.addNewQuestion("text");
-  expect(
-    page.questions[3].name,
-    "question9",
-    "Generate question9 name, suggest by setting the name"
-  );
+  expect(page.questions[3].name).toEqual("question9");
   page.addNewQuestion("text");
-  expect(
-    page.questions[4].name,
-    "question10",
-    "Generate question10 name, next after question10"
-  );
+  expect(page.questions[4].name).toEqual("question10");
 });
+
 test("creator.onConditionQuestionsGetList, Bug#957", () => {
   var creator = new CreatorTester();
   creator.onConditionQuestionsGetList.add(function (sender, options) {
     options.list = options.list.filter(
-      (question) => question.getType() === "text"
+      (item) => item.question.getType() === "text"
     );
   });
   creator.JSON = {
@@ -1092,323 +665,114 @@ test("creator.onConditionQuestionsGetList, Bug#957", () => {
     ],
   };
   var question = creator.survey.getQuestionByName("q1");
-  var property = Survey.Serializer.findProperty("question", "visibleIf");
-  var creator = new SurveyPropertyConditionEditor(property);
-  creator.options = creator;
-  creator.object = question;
-  creator.beforeShow();
-  creator.isEditorShowing = true;
-  var editorItem = creator.koEditorItems()[0];
-  expect.ok(editorItem, "Editor item is created");
-  expect(editorItem.nameQuestion.choices.length, 1, "One text question");
+  creator.selectElement(question);
+  var editor = new ConditionEditor(creator.survey, question, creator);
+  expect(editor.panel.panels).toHaveLength(1);
+  var panel = editor.panel.panels[0];
+  var questionValue = panel.getQuestionByName("questionName");
+  expect(questionValue).toBeTruthy();
+  expect(questionValue.choices).toHaveLength(1);
+  expect(questionValue.choices[0].value).toEqual("q2");
 });
 
-test(
-  "creator.onGetObjectDisplayName, change visible name for objects",
-  () => {
-    var creator = new CreatorTester();
-    var reason = "";
-    creator.onGetObjectDisplayName.add(function (sender, options) {
-      reason = options.reason;
-      options.displayName = options.obj.title + " [" + options.obj.name + "]";
-    });
-    creator.JSON = {
-      elements: [
-        { name: "q1", type: "text" },
-        { name: "q2", title: "Question 2", type: "text" },
-        { name: "q3", title: "Question 3", type: "dropdown" },
-        { name: "q4", title: "Question 4", type: "checkbox" },
-        { name: "q5", title: "Question 5", type: "radiogroup" },
-      ],
-    };
-    var question = creator.survey.getQuestionByName("q1");
-    var property = Survey.Serializer.findProperty("question", "visibleIf");
-    var creator = new SurveyPropertyConditionEditor(property);
-    creator.options = creator;
-    creator.object = question;
-    creator.beforeShow();
-    creator.isEditorShowing = true;
-    var editorItem = creator.koEditorItems()[0];
-    expect.ok(editorItem, "Editor item is created");
-    var choices = editorItem.nameQuestion.choices;
-    expect(
-      reason,
-      "condition",
-      "event fired with correct options.reason"
-    );
-    expect(choices.length, 4, "There are 4 questions");
-    expect(
-      choices[0].text,
-      "Question 2 [q2]",
-      "onGetObjectDisplayName was used correctly"
-    );
-    expect(creator.koCanAddItem(), true, "we can added a new item");
-  }
-);
-
-test(
-  "creator options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value",
-  () => {
-    var creator = new CreatorTester(null, { maxLogicItemsInCondition: 2 });
-    creator.JSON = {
-      elements: [
-        { name: "q1", type: "text" },
-        { name: "q2", type: "text" },
-      ],
-    };
-    var question = creator.survey.getQuestionByName("q1");
-    var property = Survey.Serializer.findProperty("question", "visibleIf");
-    var creator = new SurveyPropertyConditionEditor(property);
-    creator.options = creator;
-    creator.object = question;
-    creator.beforeShow();
-    creator.isEditorShowing = true;
-    expect(
-      creator.koEditorItems().length,
-      1,
-      "There is one logic conditions"
-    );
-    expect(creator.koCanAddItem(), true, "we can added a new item");
-    creator.koEditorItems()[0].nameQuestion.value = "q2";
-    creator.addCondition();
-    expect(
-      creator.koEditorItems().length,
-      2,
-      "There are 2 logic conditions"
-    );
-    expect(
-      creator.koCanAddItem(),
-      false,
-      "we can't added a new item, there are already two of them"
-    );
-  }
-);
-
-test(
-  "creator.onAddQuestion and undo-redo manager, Bug#972",
-  () => {
-    var creator = new CreatorTester();
-    creator.onQuestionAdded.add(function (sender, options) {
-      options.question.title = "new title";
-    });
-    creator.JSON = {};
-    creator.survey.currentPage.addNewQuestion("text", "q1");
-    creator.survey.currentPage.addNewQuestion("text", "q2");
-    creator.undo();
-    creator.undo();
-    expect(
-      creator.survey.getAllQuestions().length,
-      0,
-      "We added two questions and then undo adding two questions"
-    );
-  }
-);
-test(
-  "creator.onAddPage and undo-redo manager, Bug#972",
-  () => {
-    var creator = new CreatorTester();
-    creator.onPageAdded.add(function (sender, options) {
-      options.page.title = "new title";
-    });
-    creator.JSON = {};
-    creator.survey.addNewPage("p2");
-    creator.survey.addNewPage("p3");
-    creator.undo();
-    creator.undo();
-    expect(
-      creator.survey.pages.length,
-      1,
-      "We added two pages and then undo adding two pages"
-    );
-  }
-);
-test(
-  "creator.onAddPanel and undo-redo manager, Bug#972",
-  () => {
-    var creator = new CreatorTester();
-    creator.onPanelAdded.add(function (sender, options) {
-      options.panel.title = "new title";
-    });
-    creator.JSON = {};
-    creator.survey.currentPage.addNewPanel("panel1");
-    creator.survey.currentPage.addNewPanel("panel2");
-    creator.undo();
-    creator.undo();
-    expect(
-      creator.survey.getAllPanels().length,
-      0,
-      "We added two panels and then undo adding two panels"
-    );
-  }
-);
-
-test(
-  "creator.onGetObjectTextInPropertyGrid event, update on property changing",
-  () => {
-    var creator = new CreatorTester();
-    creator.onGetObjectTextInPropertyGrid.add(function (sender, options) {
-      if (!!options.obj.title) {
-        options.text = options.obj.title;
-      }
-      if (!!options.obj.description) {
-        options.text = options.obj.description;
-      }
-    });
-    creator.JSON = {
-      elements: [{ type: "text", name: "q1", title: "question1" }],
-    };
-    expect(
-      creator.getSurveyObjects().koObjects()[2].text(),
-      "..question1",
-      "Default value is correct"
-    );
-    var question = creator.survey.getAllQuestions()[0];
-    creator.selectedElement = question;
-    question.description = "New Title";
-    creator.propertyGridObjectEditorModel.onPropertyChanged(
-      question,
-      Survey.Serializer.findProperty("question", "description"),
-      ""
-    );
-    expect(
-      creator.getSurveyObjects().koObjects()[2].text(),
-      "..New Title",
-      "React on chaning the current object property"
-    );
-  }
-);
-
-test(
-  "use creator.onGetObjectDisplayName instead of creator.onGetObjectTextInPropertyGrid event, update on property changing",
-  () => {
-    var creator = new CreatorTester();
-    creator.onGetObjectDisplayName.add(function (sender, options) {
-      if (!!options.obj.title) {
-        options.displayName = options.obj.title;
-      }
-      if (!!options.obj.description) {
-        options.displayName = options.obj.description;
-      }
-    });
-    creator.JSON = {
-      elements: [{ type: "text", name: "q1", title: "question1" }],
-    };
-    expect(
-      creator.getSurveyObjects().koObjects()[2].text(),
-      "..question1",
-      "Default value is correct"
-    );
-    var question = creator.survey.getAllQuestions()[0];
-    creator.selectedElement = question;
-    question.description = "New Title";
-    creator.propertyGridObjectEditorModel.onPropertyChanged(
-      question,
-      Survey.Serializer.findProperty("question", "description"),
-      ""
-    );
-    expect(
-      creator.getSurveyObjects().koObjects()[2].text(),
-      "..New Title",
-      "React on chaning the current object property"
-    );
-  }
-);
-
-test(
-  "update element TextInPropertyGrid for non selected element",
-  () => {
-    var creator = new CreatorTester();
-    creator.onGetObjectTextInPropertyGrid.add(function (sender, options) {
-      if (!!options.obj.description) {
-        options.text = options.obj.description;
-      }
-    });
-    creator.JSON = {
-      elements: [
-        { type: "text", name: "q1" },
-        { type: "text", name: "q2" },
-      ],
-    };
-    var q1 = creator.survey.getAllQuestions()[0];
-    var q2 = creator.survey.getAllQuestions()[1];
-    creator.selectedElement = q1;
-    q2.name = "q2_new";
-    creator.updateObjectTextInPropertyGrid(q2);
-    expect(
-      creator.getSurveyObjects().koObjects()[3].text(),
-      "..q2_new",
-      "React on chaning the current object property"
-    );
-    q2.description = "New Title";
-    creator.updateObjectTextInPropertyGrid(q2);
-    expect(
-      creator.getSurveyObjects().koObjects()[3].text(),
-      "..New Title",
-      "React on chaning the current object property"
-    );
-  }
-);
-test(
-  "SurveyPropertyConditionEditor, set correct locale into internal survey, Bug #953",
-  () => {
-    editorLocalization.currentLocale = "de";
-    var creator = new CreatorTester();
-    creator.JSON = {
-      elements: [
-        { name: "q1", type: "text" },
-        {
-          name: "q2",
-          type: "text",
-        },
-      ],
-    };
-    expect(
-      creator.survey.locale,
-      "",
-      "We do not set the designer survey locale"
-    );
-    var question = creator.survey.getQuestionByName("q2");
-    var property = Survey.Serializer.findProperty("question", "visibleIf");
-    var creator = new SurveyPropertyConditionEditor(property);
-    creator.options = creator;
-    creator.object = question;
-    creator.beforeShow();
-    creator.isEditorShowing = true;
-    expect(
-      creator.koEditorItems()[0].survey.locale,
-      "de",
-      "Get locale from Creator"
-    );
-
-    editorLocalization.currentLocale = "";
-    editor = new SurveyPropertyConditionEditor(property);
-    creator.options = creator;
-    creator.object = question;
-    creator.beforeShow();
-    creator.isEditorShowing = true;
-    expect(
-      creator.koEditorItems()[0].survey.locale,
-      "",
-      "locale in Creator is empty"
-    );
-  }
-);
-
-test("Set Text property", () => {
+test("creator.onGetObjectDisplayName, change visible name for objects", () => {
   var creator = new CreatorTester();
-  expect(creator.tabs().length, 3);
-  expect(creator.tabs()[0].template, "se-tab-designer");
-  expect(creator.tabs()[1].template, "se-tab-test");
-  expect(creator.tabs()[2].template, "se-tab-json-editor");
+  var reason = "";
+  creator.onGetObjectDisplayName.add(function (sender, options) {
+    reason = options.reason;
+    options.displayName = options.obj.title + " [" + options.obj.name + "]";
+  });
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", title: "Question 2", type: "text" },
+      { name: "q3", title: "Question 3", type: "dropdown" },
+      { name: "q4", title: "Question 4", type: "checkbox" },
+      { name: "q5", title: "Question 5", type: "radiogroup" },
+    ],
+  };
+  var question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  var editor = new ConditionEditor(creator.survey, question, creator);
+  expect(editor.panel.panels).toHaveLength(1);
+  var panel = editor.panel.panels[0];
+  var questionName = panel.getQuestionByName("questionName");
+  expect(questionName).toBeTruthy();
+  expect(questionName.choices).toHaveLength(4);
+  expect(questionName.choices[0].value).toEqual("q2");
+  expect(questionName.choices[0].text).toEqual("Question 2 [q2]");
 });
 
-test("options.showPagesToolbox", () => {
-  var creator = new CreatorTester();
-  expect(creator.showPagesToolbox, true);
-  editor = new CreatorTester(null, { showPagesToolbox: "none" });
-  expect(creator.showPagesToolbox, false);
+test("creator options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value", () => {
+  var creator = new CreatorTester({ maxLogicItemsInCondition: 2 });
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "text" },
+    ],
+  };
+  var question = creator.survey.getQuestionByName("q1");
+  var editor = new ConditionEditor(creator.survey, question, creator);
+  expect(editor.panel.maxPanelCount).toEqual(2);
 });
-*/
+
+test("creator.onAddQuestion and undo-redo manager, Bug#972", () => {
+  var creator = new CreatorTester();
+  creator.onQuestionAdded.add(function (sender, options) {
+    options.question.title = "new title";
+  });
+  creator.JSON = {};
+  creator.survey.currentPage.addNewQuestion("text", "q1");
+  creator.survey.currentPage.addNewQuestion("text", "q2");
+  creator.undo();
+  creator.undo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(0);
+});
+test("creator.onAddPage and undo-redo manager, Bug#972", () => {
+  var creator = new CreatorTester();
+  creator.onPageAdded.add(function (sender, options) {
+    options.page.title = "new title";
+  });
+  creator.JSON = {};
+  creator.survey.addNewPage("p2");
+  creator.survey.addNewPage("p3");
+  creator.undo();
+  creator.undo();
+  expect(creator.survey.pages).toHaveLength(1);
+});
+test("creator.onAddPanel and undo-redo manager, Bug#972", () => {
+  var creator = new CreatorTester();
+  creator.onPanelAdded.add(function (sender, options) {
+    options.panel.title = "new title";
+  });
+  creator.JSON = {};
+  creator.survey.currentPage.addNewPanel("panel1");
+  creator.survey.currentPage.addNewPanel("panel2");
+  creator.undo();
+  creator.undo();
+  expect(creator.survey.getAllPanels()).toHaveLength(0);
+});
+
+test("SurveyPropertyConditionEditor, set correct locale into internal survey, Bug #953", () => {
+  editorLocalization.currentLocale = "de";
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      {
+        name: "q2",
+        type: "text",
+      },
+    ],
+  };
+  expect(creator.survey.locale).toBeFalsy();
+  expect(creator.propertyGrid.survey.locale).toEqual("de");
+  var question = creator.survey.getQuestionByName("q2");
+  var editor = new ConditionEditor(creator.survey, question, creator);
+  expect(editor.editSurvey.locale).toEqual("de");
+  editorLocalization.currentLocale = "";
+});
+
 test("Change names in copyElements", () => {
   var creator = new CreatorTester();
   creator.JSON = {
@@ -2000,5 +1364,505 @@ test(
     );
   }
 );
+test("show property grid on Edit", () => {
+  var creator = new CreatorTester();
+  creator.JSON = getSurveyJson();
+  creator.showToolbox = "right";
+  creator.rightContainerActiveItem("toolbox");
+  creator.hideAdvancedSettings = true;
+  creator.rightContainerVisible(false);
+  creator.selectedElement = creator.survey.getQuestionByName("question1");
+  expect(
+    creator.selectedElement.name,
+    "question1",
+    "question1 is selected"
+  );
+  creator.showQuestionEditor(creator.selectedElement);
+  expect(
+    creator.rightContainerActiveItem(),
+    "property-grid",
+    "Property grid is selected"
+  );
+  expect(
+    creator.hideAdvancedSettings,
+    false,
+    "Make sure that property grid is shown"
+  );
+  expect(
+    creator.rightContainerVisible(),
+    true,
+    "Make sure right container is visible"
+  );
+});
 
+test(
+  "hideAdvancedSettings and designer containers visibility",
+  () => {
+    var creator = new CreatorTester();
+
+    // creator.showToolbox = "left";
+    // creator.showPropertyGrid = "right";
+    // creator.hideAdvancedSettings = false;
+    expect(
+      creator.hideAdvancedSettings,
+      false,
+      "Make sure that property grid is shown default"
+    );
+    expect(
+      creator.leftContainerVisible(),
+      true,
+      "Make sure right container is visible default"
+    );
+    expect(
+      creator.rightContainerVisible(),
+      true,
+      "Make sure right container is visible default"
+    );
+
+    // creator.showToolbox = "left";
+    // creator.showPropertyGrid = "right";
+    creator.hideAdvancedSettings = true;
+    expect(
+      creator.hideAdvancedSettings,
+      true,
+      "Make sure that property grid is hidden"
+    );
+    expect(
+      creator.leftContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+    expect(
+      creator.rightContainerVisible(),
+      false,
+      "Make sure right container is hidden"
+    );
+
+    // creator.showToolbox = "left";
+    // creator.showPropertyGrid = "right";
+    creator.hideAdvancedSettings = false;
+    expect(
+      creator.hideAdvancedSettings,
+      false,
+      "Make sure that property grid is shown"
+    );
+    expect(
+      creator.leftContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+    expect(
+      creator.rightContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+
+    creator.showToolbox = "right";
+    // creator.showPropertyGrid = "right";
+    // creator.hideAdvancedSettings = false;
+    expect(
+      creator.hideAdvancedSettings,
+      false,
+      "Make sure that property grid is shown"
+    );
+    expect(
+      creator.leftContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+    expect(
+      creator.rightContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+
+    // creator.showToolbox = "right";
+    // creator.showPropertyGrid = "right";
+    creator.hideAdvancedSettings = true;
+    expect(
+      creator.hideAdvancedSettings,
+      true,
+      "Make sure that property grid is hidden"
+    );
+    expect(
+      creator.leftContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+    expect(
+      creator.rightContainerVisible(),
+      true,
+      "Make sure right container is visible"
+    );
+  }
+);
+
+test(
+  "Show toolbox in right container and hide property grid",
+  () => {
+    var creator = new CreatorTester();
+    creator.showPropertyGrid = false;
+    creator.showToolbox = "right";
+    assert.deepEqual(creator.leftContainer, [], "left container is empty");
+    assert.deepEqual(
+      creator.rightContainer,
+      ["toolbox"],
+      "right container contains toolbox"
+    );
+  }
+);
+
+test("Undo-redo on showing modal window", () => {
+  var creator = new CreatorTester();
+  creator.koShowElementEditorAsPropertyGrid(false);
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  var question = creator.survey.getQuestionByName("q1");
+  expect(creator.koCanUndo(), false, "There is nothing to undo");
+  var creator = new SurveyQuestionEditor(question, null, creator);
+  creator.getPropertyEditorByName("name").creator.koValue("question1");
+  creator.getPropertyEditorByName("title").creator.koValue("new title");
+  expect(creator.koCanUndo(), false, "We do not apply yet");
+  creator.onOkClick();
+  expect(question.name, "question1", "new name is applied");
+  expect(question.title, "new title", "new title is applied");
+  expect(creator.koCanUndo(), true, "We have something to undo");
+  creator.undo();
+  expect(creator.koCanUndo(), false, "There is nothing to apply again");
+  expect(question.name, "q1", "undo name");
+  expect(question.title, "q1", "undo title");
+  creator.redo();
+  expect(question.name, "question1", "redo name");
+  expect(question.title, "new title", "redo title");
+});
+
+test(
+  "Undo-redo on showing modal window and updating the expressions",
+  () => {
+    var creator = new CreatorTester();
+    creator.koShowElementEditorAsPropertyGrid(false);
+    creator.JSON = {
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "text", name: "q2", visibleIf: "{q1} = 2" },
+        { type: "text", name: "q3", visibleIf: "{q1} = 3" },
+      ],
+    };
+    var q1 = creator.survey.getQuestionByName("q1");
+    var q2 = creator.survey.getQuestionByName("q2");
+    var q3 = creator.survey.getQuestionByName("q3");
+    var creator = new SurveyQuestionEditor(q1, null, creator);
+    creator.getPropertyEditorByName("name").creator.koValue("question1");
+    creator.onOkClick();
+    expect(q1.name, "question1", "q1 name is changed");
+    expect(q2.visibleIf, "{question1} = 2", "q2 visibleIf is changed");
+    expect(q3.visibleIf, "{question1} = 3", "q3 visibleIf is changed");
+    creator.undo();
+    expect(q1.name, "q1", "undo q1 name");
+    expect(q2.visibleIf, "{q1} = 2", "undo q2 visibleIf");
+    expect(q3.visibleIf, "{q1} = 3", "undo q3 visibleIf");
+    creator.redo();
+    expect(q1.name, "question1", "redo q1 name");
+    expect(q2.visibleIf, "{question1} = 2", "redo q2 visibleIf");
+    expect(q3.visibleIf, "{question1} = 3", "redo q3 visibleIf");
+  }
+);
+test("showModalOnElementEditing property", () => {
+  var creator = new CreatorTester();
+  expect(
+    creator.showModalOnElementEditing,
+    false,
+    "Show new property grid by default"
+  );
+  creator.showPropertyGrid = false;
+  expect(
+    creator.showModalOnElementEditing,
+    true,
+    "There is no property grid, show modal"
+  );
+  creator.showPropertyGrid = true;
+  expect(
+    creator.showModalOnElementEditing,
+    false,
+    "Show new property grid, showPropertyGrid is show again"
+  );
+  creator = new CreatorTester(null, { showElementEditorAsPropertyGrid: false });
+  expect(
+    creator.showModalOnElementEditing,
+    true,
+    "Show old property grid"
+  );
+});
+
+test("pageEditMode property", () => {
+  var options = {
+    pageEditMode: "single",
+  };
+  var creator = new CreatorTester(undefined, options);
+  expect(
+    creator.topContainer.indexOf("pages-editor"),
+    -1,
+    "Pages editor shouldn't be shown"
+  );
+  creator = new CreatorTester();
+  expect(
+    creator.topContainer.indexOf("pages-editor"),
+    1,
+    "Pages editor should be shown"
+  );
+});
+test(
+  "Pass showPropertyGrid in options - https://github.com/surveyjs/survey-creator/issues/657",
+  () => {
+    try {
+      var creator = new CreatorTester(undefined, { showPropertyGrid: "left" });
+      expect.ok(!!creator);
+    } catch {
+      expect.ok(false, "Exception has occured in constructor");
+    }
+  }
+);
+
+test("Default toolbar items", () => {
+  var creator = new CreatorTester(undefined);
+  expect(creator.toolbarItems().length, 8, "Necessary items are present");
+  expect(
+    creator.toolbarItems()[0].id,
+    "svd-toolbar-page-selector",
+    "page selector"
+  );
+  expect(creator.toolbarItems()[1].id, "svd-undo", "svd-undo");
+  expect(creator.toolbarItems()[2].id, "svd-redo", "svd-redo");
+  expect(
+    creator.toolbarItems()[3].id,
+    "svd-survey-settings",
+    "svd-survey-settings"
+  );
+  expect(creator.toolbarItems()[4].id, "svd-options", "svd-options");
+  expect(creator.toolbarItems()[5].id, "svd-test", "svd-test");
+  expect(creator.toolbarItems()[6].id, "svd-save", "svd-save");
+  expect(creator.toolbarItems()[7].id, "svd-state", "svd-state");
+});
+
+test("showPageSelectorInToolbar property", () => {
+  var creator = new CreatorTester(undefined);
+  expect(
+    creator.toolbarItems()[0].visible,
+    false,
+    "page selector in toolbar invisible by default"
+  );
+
+  creator = new CreatorTester(undefined, { showPageSelectorInToolbar: true });
+
+  expect(
+    creator.toolbarItems()[0].visible,
+    true,
+    "page selector is visible with showPageSelectorInToolbar property"
+  );
+});
+test(
+  "creator getMenuItems should respect property visibility (e.g. for image question) - https://github.com/surveyjs/survey-creator/issues/897",
+  () => {
+    const creator = new CreatorTester(undefined);
+    const question = new Survey.QuestionImage("qi");
+    var menuItems = creator.survey.getMenuItems(question);
+    assert.deepEqual(
+      menuItems.filter(
+        (i) => ["showtitle", "isrequired"].indexOf(i.name) !== -1
+      ),
+      [],
+      "No 'showtitle' or 'isrequired' in the menu items"
+    );
+    assert.notOk(
+      isPropertyVisible(question, "title"),
+      "The title property is hidden for the image question"
+    );
+    assert.notOk(
+      isPropertyVisible(question, "isRequired"),
+      "The isRequired property is hidden for the image question"
+    );
+
+    const questionText = new Survey.QuestionText("qt");
+    menuItems = creator.survey.getMenuItems(questionText);
+    expect(
+      menuItems.filter(
+        (i) => ["showtitle", "isrequired"].indexOf(i.name) !== -1
+      ).length,
+      2,
+      "The 'showtitle' or 'isrequired' are in the menu items"
+    );
+  }
+);
+
+test(
+  "creator getMenuItems should respect property readOnly - https://github.com/surveyjs/survey-creator/issues/1024",
+  () => {
+    const creator = new CreatorTester(undefined);
+    const questionText = new Survey.QuestionText("qt");
+    var menuItems = creator.survey.getMenuItems(questionText);
+    var requiredItem = menuItems.filter((i) => i.name == "isrequired")[0];
+    assert.notEqual(
+      requiredItem,
+      undefined,
+      "The 'isrequired' is in the menu items"
+    );
+
+    creator.onGetPropertyReadOnly.add(function (sender, options) {
+      if (options.property.name == "isRequired") {
+        options.readOnly = "true";
+      }
+    });
+    assert.notOk(questionText.isRequired);
+    requiredItem.onClick(questionText);
+    assert.notOk(questionText.isRequired);
+  }
+);
+
+test(
+  "addQuestion into the QuestionPanelDynamic into second page",
+  () => {
+    var creator = new CreatorTester();
+    var survey = creator.survey;
+    survey.addNewPage("p1");
+    var page = survey.addNewPage("p2");
+    var pnlQuestion = page.addNewQuestion("paneldynamic", "newQuestion");
+    var newQuestion = pnlQuestion["template"].addNewQuestion(
+      "text",
+      "question1"
+    );
+    //TODO rebuld items
+    editor["surveyObjects"].survey = null;
+    editor["surveyObjects"].survey = survey;
+    survey.selectedElement = newQuestion;
+    expect(
+      creator.survey.selectedElement.name,
+      newQuestion.name,
+      "The embedded question is selected"
+    );
+    expect(
+      creator.survey.currentPage.name,
+      "p2",
+      "The second page is selected"
+    );
+  }
+);
+test(
+  "creator.onGetObjectTextInPropertyGrid event, update on property changing",
+  () => {
+    var creator = new CreatorTester();
+    creator.onGetObjectTextInPropertyGrid.add(function (sender, options) {
+      if (!!options.obj.title) {
+        options.text = options.obj.title;
+      }
+      if (!!options.obj.description) {
+        options.text = options.obj.description;
+      }
+    });
+    creator.JSON = {
+      elements: [{ type: "text", name: "q1", title: "question1" }],
+    };
+    expect(
+      creator.getSurveyObjects().koObjects()[2].text(),
+      "..question1",
+      "Default value is correct"
+    );
+    var question = creator.survey.getAllQuestions()[0];
+    creator.selectedElement = question;
+    question.description = "New Title";
+    creator.propertyGridObjectEditorModel.onPropertyChanged(
+      question,
+      Survey.Serializer.findProperty("question", "description"),
+      ""
+    );
+    expect(
+      creator.getSurveyObjects().koObjects()[2].text(),
+      "..New Title",
+      "React on chaning the current object property"
+    );
+  }
+);
+
+test(
+  "use creator.onGetObjectDisplayName instead of creator.onGetObjectTextInPropertyGrid event, update on property changing",
+  () => {
+    var creator = new CreatorTester();
+    creator.onGetObjectDisplayName.add(function (sender, options) {
+      if (!!options.obj.title) {
+        options.displayName = options.obj.title;
+      }
+      if (!!options.obj.description) {
+        options.displayName = options.obj.description;
+      }
+    });
+    creator.JSON = {
+      elements: [{ type: "text", name: "q1", title: "question1" }],
+    };
+    expect(
+      creator.getSurveyObjects().koObjects()[2].text(),
+      "..question1",
+      "Default value is correct"
+    );
+    var question = creator.survey.getAllQuestions()[0];
+    creator.selectedElement = question;
+    question.description = "New Title";
+    creator.propertyGridObjectEditorModel.onPropertyChanged(
+      question,
+      Survey.Serializer.findProperty("question", "description"),
+      ""
+    );
+    expect(
+      creator.getSurveyObjects().koObjects()[2].text(),
+      "..New Title",
+      "React on chaning the current object property"
+    );
+  }
+);
+
+test(
+  "update element TextInPropertyGrid for non selected element",
+  () => {
+    var creator = new CreatorTester();
+    creator.onGetObjectTextInPropertyGrid.add(function (sender, options) {
+      if (!!options.obj.description) {
+        options.text = options.obj.description;
+      }
+    });
+    creator.JSON = {
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "text", name: "q2" },
+      ],
+    };
+    var q1 = creator.survey.getAllQuestions()[0];
+    var q2 = creator.survey.getAllQuestions()[1];
+    creator.selectedElement = q1;
+    q2.name = "q2_new";
+    creator.updateObjectTextInPropertyGrid(q2);
+    expect(
+      creator.getSurveyObjects().koObjects()[3].text(),
+      "..q2_new",
+      "React on chaning the current object property"
+    );
+    q2.description = "New Title";
+    creator.updateObjectTextInPropertyGrid(q2);
+    expect(
+      creator.getSurveyObjects().koObjects()[3].text(),
+      "..New Title",
+      "React on chaning the current object property"
+    );
+  }
+);
+test("Set Text property", () => {
+  var creator = new CreatorTester();
+  expect(creator.tabs().length, 3);
+  expect(creator.tabs()[0].template, "se-tab-designer");
+  expect(creator.tabs()[1].template, "se-tab-test");
+  expect(creator.tabs()[2].template, "se-tab-json-editor");
+});
+
+test("options.showPagesToolbox", () => {
+  var creator = new CreatorTester();
+  expect(creator.showPagesToolbox, true);
+  editor = new CreatorTester(null, { showPagesToolbox: "none" });
+  expect(creator.showPagesToolbox, false);
+});
 */
