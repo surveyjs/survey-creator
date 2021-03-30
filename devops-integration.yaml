@@ -141,6 +141,15 @@ steps:
   displayName: 'npm install'
 
 - script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react-dom
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react-dom
+    ls
     cd $(Build.SourcesDirectory)/survey-library/build
     echo $(Build.SourcesDirectory)/survey-library/build
     ls
