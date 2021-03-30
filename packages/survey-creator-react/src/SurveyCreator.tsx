@@ -1,4 +1,5 @@
-import React, { CSSProperties } from "react";
+import React from "react";
+import { CSSProperties } from "react";
 
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import PropertyGridComponent from "./PropertyGrid";
@@ -21,11 +22,7 @@ import {
   SurveyElementBase,
   SurveyLocStringViewer,
 } from "survey-react-ui";
-import {
-  CreatorBase,
-  ICreatorOptions,
-  PropertyGridViewModel,
-} from "@survey/creator";
+import { CreatorBase, ICreatorOptions } from "@survey/creator";
 
 StylesManager.applyTheme("modern");
 
