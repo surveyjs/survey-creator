@@ -637,6 +637,16 @@ export class CreatorBase<T extends SurveyModel>
   public get undoRedoManager(): UndoRedoManager {
     return this.undoRedoManagerValue;
   }
+  public undo() {
+    if (!!this.undoRedoManager) {
+      this.undoRedoManager.undo();
+    }
+  }
+  public redo() {
+    if (!!this.undoRedoManager) {
+      this.undoRedoManager.redo();
+    }
+  }
   protected initTabs() {
     const tabs: Array<Survey.IActionBarItem> = [];
     if (this.showDesignerTab) {
@@ -932,14 +942,18 @@ export class CreatorBase<T extends SurveyModel>
     //works only with JSON
     this.initSurveyWithJSON(JSON.parse(text), true);
   }
-
+  private existingPages: {};
   protected initSurveyWithJSON(json: any, clearState: boolean) {
+    this.existingPages = {};
     var survey = this.createSurvey({});
     survey.setDesignMode(true);
     survey.setJsonObject(json);
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
     }
+    survey.pages.forEach((page: PageModel) => {
+      this.existingPages[page.id] = true;
+    });
     this.onDesignerSurveyCreated.fire(this, { survey: survey });
     // this.survey.render(this.surveyjs);
     /*
@@ -955,6 +969,8 @@ export class CreatorBase<T extends SurveyModel>
       this.doOnPanelAdded(options.panel, options.parentPanel);
     });
     survey.onPageAdded.add((sender: SurveyModel, options) => {
+      if (!!this.existingPages[options.page.id]) return;
+      this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
     /*
@@ -1443,6 +1459,86 @@ export class CreatorBase<T extends SurveyModel>
   public selectElement(element: any) {
     this.selection = element;
   }
+  /**
+   * Collapse certain property editor tab (category) in properties panel/grid
+   * name - tab category name
+   * @see collapseAllPropertyGridCategories
+   * @see expandPropertyGridCategory
+   * @see expandAllPropertyGridCategories
+   */
+  public collapsePropertyGridCategory(name: string) {
+    if (!!this.propertyGrid) {
+      this.propertyGrid.collapseCategory(name);
+    }
+  }
+  /**
+   * Expand certain property editor tab (category) in properties panel/grid
+   * name - tab category name
+   * @see collapsePropertyGridCategory
+   * @see collapseAllPropertyGridCategories
+   * @see expandAllPropertyGridCategories
+   */
+  public expandPropertyGridCategory(name: string) {
+    if (!!this.propertyGrid) {
+      this.propertyGrid.expandCategory(name);
+    }
+  }
+  /**
+   * Expand all property editor tabs (categories) in properties panel/grid
+   * @see collapsePropertyGridCategory
+   * @see expandPropertyGridCategory
+   * @see expandAllPropertyGridCategories
+   */
+  public collapseAllPropertyGridCategories() {
+    if (!!this.propertyGrid) {
+      this.propertyGrid.collapseAllCategories();
+    }
+  }
+  /**
+   * Expand all property editor tabs (categories) in properties panel/grid
+   * @see collapsePropertyGridCategory
+   * @see collapseAllPropertyGridCategories
+   * @see expandPropertyGridCategory
+   */
+  public expandAllPropertyGridCategories() {
+    if (!!this.propertyGrid) {
+      this.propertyGrid.expandAllCategories();
+    }
+  }
+  /**
+   * Obsolete. Collapse all property editor tabs (categories) in properties panel/grid
+   * @see collapseAllPropertyGridCategories
+   *
+   */
+  public collapseAllPropertyTabs(): void {
+    this.collapseAllPropertyGridCategories();
+  }
+
+  /**
+   * Obsolete. Expand all property editor tabs (categories) in properties panel/grid
+   * @see expandAllPropertyGridCategories
+   */
+  public expandAllPropertyTabs(): void {
+    this.expandAllPropertyGridCategories();
+  }
+
+  /**
+   * Obsolete. Expand certain property editor tab (category) in properties panel/grid
+   * name - tab category name
+   * @see expandPropertyGridCategory
+   */
+  public expandPropertyTab(name: string): void {
+    this.expandPropertyGridCategory(name);
+  }
+
+  /**
+   * Obsolete. Collapse certain property editor tab (category) in properties panel/grid
+   * name - tab category name
+   * @see collapsePropertyGridCategory
+   */
+  public collapsePropertyTab(name: string): void {
+    this.collapsePropertyGridCategory(name);
+  }
 
   /**
    * Check for errors in property grid and adorners of the selected elements.
@@ -1692,6 +1788,9 @@ export class CreatorBase<T extends SurveyModel>
     obj: any,
     newValue: any
   ) {
+    /* 
+    //TODO We likely do not need this callback and can remove it for V2
+    //We called "PROPERTY_CHANGED" from obj.propertyValueChanged with undoRedoManager object
     var oldValue = obj[property.name];
     this.setModified({
       type: "PROPERTY_CHANGED",
@@ -1710,7 +1809,7 @@ export class CreatorBase<T extends SurveyModel>
     ) {
       this.doPropertyGridChanged();
     }
-    return null;
+    */
   }
   onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
     return title;

@@ -4,6 +4,7 @@ import {
   Serializer,
   Question,
   PanelModelBase,
+  PanelModel,
   SurveyModel,
   FunctionFactory,
   Helpers,
@@ -631,6 +632,30 @@ export class PropertyGridModel {
     if (!this.survey) return;
     return !this.survey.hasErrors(true, true);
   }
+  public collapseCategory(name: string) {
+    var panel = <PanelModel>this.survey.getPanelByName(name);
+    if (!!panel) {
+      panel.collapse();
+    }
+  }
+  public expandCategory(name: string) {
+    var panel = <PanelModel>this.survey.getPanelByName(name);
+    if (!!panel) {
+      panel.expand();
+    }
+  }
+  public collapseAllCategories() {
+    var panels = this.survey.getAllPanels();
+    for (var i = 0; i < panels.length; i++) {
+      (<PanelModel>panels[i]).collapse();
+    }
+  }
+  public expandAllCategories() {
+    var panels = this.survey.getAllPanels();
+    for (var i = 0; i < panels.length; i++) {
+      (<PanelModel>panels[i]).expand();
+    }
+  }
   protected createSurvey(json: any): SurveyModel {
     return this.options.createSurvey(json, "property-grid");
   }
@@ -1067,9 +1092,12 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       showOptionsCaption: false,
     };
   }
+  protected get canRenderAsButtonGroup(): boolean {
+    return true;
+  }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
-    if (question.choices.length < 5) {
+    if (this.canRenderAsButtonGroup && question.choices.length < 5) {
       question.renderAs = "button-group";
     }
   }
@@ -1135,6 +1163,24 @@ export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
     json.type = hasTagbox ? "tagbox" : "checkbox";
     json.hasSelectAll = !hasTagbox;
     return json;
+  }
+}
+export class PropertyGridEditorPage extends PropertyGridEditorDropdown {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.hasChoices && prop.name == "page";
+  }
+  protected get canRenderAsButtonGroup(): boolean {
+    return false;
+  }
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    super.onCreated(obj, question, prop);
+    question.valueFromDataCallback = (val: any): any => {
+      return !!val ? val.name : "";
+    };
+    question.valueToDataCallback = (val: any): any => {
+      if (!val || !obj || !obj.getSurvey()) return undefined;
+      return (<SurveyModel>obj.getSurvey()).getPageByName(val);
+    };
   }
 }
 export class PropertyGridEditorQuestion extends PropertyGridEditor {
@@ -1220,6 +1266,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorHtml());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorSet());
+PropertyGridEditorCollection.register(new PropertyGridEditorPage());
 PropertyGridEditorCollection.register(new PropertyGridEditorStringArray());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
