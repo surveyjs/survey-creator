@@ -1324,3 +1324,11 @@ test("Validate Selected Element Errors", () => {
   expect(question.title).toEqual("Question 1");
   titleProp.isRequired = oldIsRequired;
 });
+test("Validate Selected Element Errors", () => {
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  expect(propertyGrid.survey.getQuestionByName("name")).toBeTruthy();
+  propertyGrid.obj = null;
+  expect(propertyGrid.survey.getQuestionByName("name")).toBeFalsy();
+});

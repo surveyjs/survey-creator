@@ -550,17 +550,16 @@ export class PropertyGridModel {
   }
   private setObj(value: Base) {
     this.objValue = value;
-    this.classNameProperty = PropertyJSONGenerator.getClassNameProperty(
-      this.obj
-    );
+    this.classNameProperty = !!this.obj
+      ? PropertyJSONGenerator.getClassNameProperty(this.obj)
+      : "";
     this.classNameValue = !!this.classNameProperty
       ? this.obj[this.classNameProperty]
       : undefined;
 
-    this.titleActionsCreator = new PropertyGridTitleActionsCreator(
-      this.obj,
-      this.options
-    );
+    this.titleActionsCreator = !!this.obj
+      ? new PropertyGridTitleActionsCreator(this.obj, this.options)
+      : undefined;
     var json = this.getSurveyJSON();
     if (this.options.readOnly) {
       json.mode = "display";
@@ -571,6 +570,7 @@ export class PropertyGridModel {
     this.surveyValue = this.createSurvey(json);
     this.surveyValue.css = creatorCss;
     var page = this.surveyValue.createNewPage("p1");
+    if (!this.obj) return;
     new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
       page,
       false

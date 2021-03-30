@@ -447,66 +447,12 @@ test("Remove Panel immediately on add - https://surveyjs.answerdesk.io/ticket/de
   creator.clickToolboxItem({ name: "q1", type: "panel" });
   expect(creator.survey.getAllPanels()).toHaveLength(0);
 });
-/*
-test(
-  "Change page on changing survey.selectedElement if needed, Bug#424",
-  () => {
-    var creator = new CreatorTester();
-    creator.JSON = getSurveyJson();
-    var pagesEditor = new PagesEditorViewModel(
-      creator.pagesEditorModel,
-      creator.survey.pages[0]
-    );
-    creator.survey.selectedElement = creator.survey.getQuestionByName(
-      "question4"
-    );
-    expect(
-      pagescreator.model.selectedPage().name,
-      "page3",
-      "Page 3 is selected"
-    );
-    creator.survey.selectedElement = creator.survey.getQuestionByName(
-      "question3"
-    );
-    expect(
-      pagescreator.model.selectedPage().name,
-      "page2",
-      "Page 2 is selected"
-    );
-  }
-);
-
-test(
-  "getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380",
-  () => {
-    var creator = new CreatorTester();
-    creator.showObjectTitles = true;
-    creator.JSON = getSurveyJson();
-    expect(
-      creator.pagesEditorModel.getDisplayText(
-        creator.pagesEditorModel.pagesForSelection()[0].value
-      ),
-      "Page 1",
-      "page1 title"
-    );
-    expect(
-      creator.pagesEditorModel.pagesForSelection()[0].text,
-      "Page 1",
-      "page1 title"
-    );
-    expect(
-      creator.pagesEditorModel.getDisplayText(creator.survey.pages[0]),
-      "Page 1",
-      "page1 title"
-    );
-  }
-);
-
 test("Do not allow to select page object", () => {
   var creator = new CreatorTester();
   creator.JSON = getSurveyJson();
-  creator.selectedElement = creator.survey.getQuestionByName("question1");
-  expect(creator.selectedElement.name, "question1");
+  var question = creator.survey.getQuestionByName("question1");
+  creator.selectedElement = question;
+  expect(creator.selectedElement["name"]).toEqual("question1");
   creator.onSelectedElementChanging.add(function (c, options) {
     if (
       options.newSelectedElement != null &&
@@ -516,19 +462,15 @@ test("Do not allow to select page object", () => {
     }
   });
   creator.selectedElement = creator.survey.pages[0];
-  expect.ok(creator.selectedElement, "There is the selected object");
-  expect(
-    creator.selectedElement.getType(),
-    "survey",
-    "The selected object is survey"
-  );
+  expect(creator.selectedElement).toBeTruthy();
+  expect(creator.selectedElement.getType()).toEqual("survey");
 });
-
 test("Do not allow to select page/survey objects", () => {
   var creator = new CreatorTester();
+  creator.JSON = getSurveyJson();
   creator.onSelectedElementChanging.add(function (c, options) {
     var el = options.newSelectedElement;
-    if (el != null && (el.getType() == "page" || el.getType() == "survey")) {
+    if (!el || el.getType() == "page" || el.getType() == "survey") {
       options.newSelectedElement =
         creator.survey.getAllQuestions().length > 0
           ? creator.survey.getAllQuestions()[0]
@@ -536,45 +478,27 @@ test("Do not allow to select page/survey objects", () => {
     }
   });
   creator.selectedElement = null;
-  assert.notOk(
-    creator.selectedElement,
-    "There is no selected element, do not select survey"
-  );
+  expect(creator.selectedElement).toBeTruthy();
   creator.JSON = getSurveyJson();
   creator.selectedElement = creator.survey.getQuestionByName("question1");
-  expect(creator.selectedElement.name, "question1");
+  expect(creator.selectedElement["name"]).toEqual("question1");
   creator.selectedElement = creator.survey.pages[0];
-  expect(
-    creator.selectedElement.getType(),
-    "text",
-    "Do not select page or survey"
-  );
+  expect(creator.selectedElement.getType()).toEqual("text");
 });
-
+/*
 test("Change elemenent page", () => {
   var creator = new CreatorTester();
   creator.JSON = getSurveyJson();
-  creator.selectedElement = creator.survey.getQuestionByName("question1");
-  expect(
-    creator.selectedElement.name,
-    "question1",
-    "question1 is selected"
-  );
-  expect(creator.survey.currentPage.name, "page1", "page1 is current");
-  var objEditor = creator.propertyGridObjectEditorModel.koElementEditor();
-  var propertyEditor = objcreator.getPropertyEditorByName("page");
-  propertycreator.creator.koValue("page2");
-  expect(
-    creator.selectedElement.name,
-    "question1",
-    "question1 is still selected"
-  );
-  expect(
-    creator.selectedElement.page.name,
-    "page2",
-    "question1 has page2 now"
-  );
-  expect(creator.survey.currentPage.name, "page2", "page2 is current");
+  var question = creator.survey.getQuestionByName("question1");
+  creator.selectedElement = question;
+  expect(creator.selectedElement["name"]).toEqual("question1");
+  expect(creator.survey.currentPage.name).toEqual("page1");
+  var pageEditor = creator.propertyGrid.survey.getQuestionByName("page");
+  expect(pageEditor).toBeTruthy();
+  pageEditor.value = "page2";
+  expect(creator.selectedElement["name"]).toEqual("question1");
+  expect(question.page.name).toEqual("page2");
+  expect(creator.survey.currentPage.name).toEqual("page2");
 });
 
 test("show property grid on Edit", () => {
@@ -2023,4 +1947,58 @@ test("onModified options", function(assert) {
   expect(opts.type, "OBJECT_DELETED", "Operation type OBJECT_DELETED");
   expect(opts.target, page, "Object - page");
 });
+test(
+  "Change page on changing survey.selectedElement if needed, Bug#424",
+  () => {
+    var creator = new CreatorTester();
+    creator.JSON = getSurveyJson();
+    var pagesEditor = new PagesEditorViewModel(
+      creator.pagesEditorModel,
+      creator.survey.pages[0]
+    );
+    creator.survey.selectedElement = creator.survey.getQuestionByName(
+      "question4"
+    );
+    expect(
+      pagescreator.model.selectedPage().name,
+      "page3",
+      "Page 3 is selected"
+    );
+    creator.survey.selectedElement = creator.survey.getQuestionByName(
+      "question3"
+    );
+    expect(
+      pagescreator.model.selectedPage().name,
+      "page2",
+      "Page 2 is selected"
+    );
+  }
+);
+
+test(
+  "getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380",
+  () => {
+    var creator = new CreatorTester();
+    creator.showObjectTitles = true;
+    creator.JSON = getSurveyJson();
+    expect(
+      creator.pagesEditorModel.getDisplayText(
+        creator.pagesEditorModel.pagesForSelection()[0].value
+      ),
+      "Page 1",
+      "page1 title"
+    );
+    expect(
+      creator.pagesEditorModel.pagesForSelection()[0].text,
+      "Page 1",
+      "page1 title"
+    );
+    expect(
+      creator.pagesEditorModel.getDisplayText(creator.survey.pages[0]),
+      "Page 1",
+      "page1 title"
+    );
+  }
+);
+
 */

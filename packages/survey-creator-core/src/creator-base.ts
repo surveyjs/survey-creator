@@ -29,7 +29,7 @@ import { TabTestPlugin } from "./components/tabs/test";
 import { TabTranslationPlugin } from "./tabs/translation";
 import { TabLogicPlugin } from "./tabs/logic-ui";
 import { ObjType, SurveyHelper } from "./surveyHelper";
-import {UndoRedoManager, IUndoRedoChange} from "./undoredomanager";
+import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
 
 export interface ICreatorOptions {
@@ -428,35 +428,50 @@ export class CreatorBase<T extends SurveyModel>
    * The event is called before undo happens.
    * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
-   public onBeforeUndo: Survey.Event<
-   (sender: CreatorBase<T>, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
- /**
-  * The event is called before redo happens.
-  * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
-  */
- public onBeforeRedo: Survey.Event<
-   (sender: CreatorBase<T>, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
- /**
-  * The event is called after undo happens.
-  * <br/> options.state is an undo/redo item.
-  */
- public onAfterUndo: Survey.Event<
-   (sender: CreatorBase<T>, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
- /**
-  * The event is called after redo happens.
-  * <br/> options.state is an undo/redo item.
-  */
- public onAfterRedo: Survey.Event<
-   (sender: CreatorBase<T>, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-
+  public onBeforeUndo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called before redo happens.
+   * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
+   */
+  public onBeforeRedo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called after undo happens.
+   * <br/> options.state is an undo/redo item.
+   */
+  public onAfterUndo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called after redo happens.
+   * <br/> options.state is an undo/redo item.
+   */
+  public onAfterRedo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called on changing the selected element. You may change the new selected element by changing the property options.newSelectedElement to your own
+   * <br/> options.newSelectedElement the element that is going to be selected in the survey desiger: question, panel, page or survey.
+   */
+  public onSelectedElementChanging: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called after the selected element is changed.
+   * <br/> options.newSelectedElement the new selected element in the survey desiger: question, panel, page or survey.
+   */
+  public onSelectedElementChanged: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * This callback is used internally for providing survey JSON text.
    */
@@ -615,7 +630,13 @@ export class CreatorBase<T extends SurveyModel>
       this
     );
   }
-  public get undoRedoManager(): UndoRedoManager { return this.undoRedoManagerValue;}
+  public setPropertyValue(name: string, val: any) {
+    val = this.propertyValueChanging(name, val);
+    super.setPropertyValue(name, val);
+  }
+  public get undoRedoManager(): UndoRedoManager {
+    return this.undoRedoManagerValue;
+  }
   protected initTabs() {
     const tabs: Array<Survey.IActionBarItem> = [];
     if (this.showDesignerTab) {
@@ -677,78 +698,83 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   private initToolbar() {
-    const items: Array<IActionBarItem> =  [
-        {
-          id: "icon-undo",
-          iconName: "icon-undo",
-          title: "Undo",
-          showTitle: false,
-          active: () => { return this.undoRedoManager && this.undoRedoManager.canUndo()},
-          action: () => {
-            var options = { canUndo: true };
-            this.onBeforeUndo.fire(self, options);
-            if (options.canUndo) {
-              var item = this.undoRedoManager.undo();
-              this.onAfterUndo.fire(self, { state: item });
-            }
-          },
+    const items: Array<IActionBarItem> = [
+      {
+        id: "icon-undo",
+        iconName: "icon-undo",
+        title: "Undo",
+        showTitle: false,
+        active: () => {
+          return this.undoRedoManager && this.undoRedoManager.canUndo();
         },
-        {
-          id: "icon-redo",
-          iconName: "icon-redo",
-          title: "Redo",
-          showTitle: false,
-          active: () => { return this.undoRedoManager && this.undoRedoManager.canRedo()},
-          action: () => {
-            var options = { canRedo: true };
-            this.onBeforeRedo.fire(self, options);
-            if (options.canRedo) {
-              var item = this.undoRedoManager.redo();
-              this.onAfterRedo.fire(self, { state: item });
-            }
+        action: () => {
+          var options = { canUndo: true };
+          this.onBeforeUndo.fire(self, options);
+          if (options.canUndo) {
+            var item = this.undoRedoManager.undo();
+            this.onAfterUndo.fire(self, { state: item });
+          }
         },
-        {
-          id: "icon-settings",
-          iconName: "icon-settings",
-          needSeparator: true,
-          action: () => this.selectElement(this.survey),
-          active: () => this.isElementSelected(<any>this.survey),
-          title: "Settings",
-          showTitle: false,
+      },
+      {
+        id: "icon-redo",
+        iconName: "icon-redo",
+        title: "Redo",
+        showTitle: false,
+        active: () => {
+          return this.undoRedoManager && this.undoRedoManager.canRedo();
         },
-        {
-          id: "icon-clear",
-          iconName: "icon-clear",
-          action: () => {
-            alert("clear pressed");
-          },
-          active: false,
-          title: "Clear",
-          showTitle: false,
+        action: () => {
+          var options = { canRedo: true };
+          this.onBeforeRedo.fire(self, options);
+          if (options.canRedo) {
+            var item = this.undoRedoManager.redo();
+            this.onAfterRedo.fire(self, { state: item });
+          }
         },
-        {
-          id: "icon-search",
-          iconName: "icon-search",
-          action: () => {
-            this.showSearch = !this.showSearch;
-          },
-          active: () => this.showSearch,
-          title: "Search",
-          showTitle: false,
+      },
+      {
+        id: "icon-settings",
+        iconName: "icon-settings",
+        needSeparator: true,
+        action: () => this.selectElement(this.survey),
+        active: () => this.isElementSelected(<any>this.survey),
+        title: "Settings",
+        showTitle: false,
+      },
+      {
+        id: "icon-clear",
+        iconName: "icon-clear",
+        action: () => {
+          alert("clear pressed");
         },
-        {
-          id: "icon-preview",
-          iconName: "icon-preview",
-          needSeparator: true,
-          css: () =>
-            this.viewType === "test" ? "sv-action-bar-item--secondary" : "",
-          action: () => {
-            this.makeNewViewActive("test");
-          },
-          active: false,
-          title: "Preview",
+        active: false,
+        title: "Clear",
+        showTitle: false,
+      },
+      {
+        id: "icon-search",
+        iconName: "icon-search",
+        action: () => {
+          this.showSearch = !this.showSearch;
         },
-      ];
+        active: () => this.showSearch,
+        title: "Search",
+        showTitle: false,
+      },
+      {
+        id: "icon-preview",
+        iconName: "icon-preview",
+        needSeparator: true,
+        css: () =>
+          this.viewType === "test" ? "sv-action-bar-item--secondary" : "",
+        action: () => {
+          this.makeNewViewActive("test");
+        },
+        active: false,
+        title: "Preview",
+      },
+    ];
     this.toolbarItems = items;
   }
 
@@ -1415,17 +1441,7 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public selectElement(element: any) {
-    if (typeof element.getType === "function" && element.getType() === "page") {
-      this.currentPage = element;
-    } else if (!!element["page"]) {
-      this.currentPage = element["page"];
-    } else {
-      this.currentPage = undefined;
-    }
     this.selection = element;
-    if (this.propertyGrid) {
-      this.propertyGrid.obj = element;
-    }
   }
 
   /**
@@ -1445,7 +1461,38 @@ export class CreatorBase<T extends SurveyModel>
     */
     return isValid;
   }
-
+  private propertyValueChanging(name: string, val: any): any {
+    if (name == "selection") {
+      var options = { newSelectedElement: val };
+      this.onSelectedElementChanging.fire(this, options);
+      return options.newSelectedElement;
+    }
+    return val;
+  }
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name == "selection") {
+      this.selectionChanged(newValue);
+    }
+  }
+  private selectionChanged(element: Base) {
+    if (
+      !!element &&
+      typeof element.getType === "function" &&
+      element.getType() === "page"
+    ) {
+      this.survey.currentPage = <PageModel>element;
+    } else if (!!element && !!element["page"]) {
+      this.survey.currentPage = element["page"];
+    } else {
+      this.survey.currentPage = undefined;
+    }
+    if (this.propertyGrid) {
+      this.propertyGrid.obj = element;
+    }
+    var options = { newSelectedElement: element };
+    this.onSelectedElementChanged.fire(this, options);
+  }
   public clickToolboxItem(json: any) {
     if (!this.readOnly) {
       var newElement = this.createNewElement(json);
