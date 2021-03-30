@@ -107,26 +107,7 @@ steps:
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/surveyjs-widgets'
     OverWrite: true
 
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-    npm run build_prod
-  displayName: 'build_prod'
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-    npm run test_ci
-  displayName: 'unit tests'
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-    npm run testcafe_ci
-  displayName: 'functional tests'
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-    npm run doc_gen
-  displayName: 'generate docs'
-
+# Creator CORE
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
     npm install
@@ -160,23 +141,32 @@ steps:
   displayName: 'npm install'
 
 - script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react-dom
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react-dom
+    ls
     cd $(Build.SourcesDirectory)/survey-library/build
-    dir
+    echo $(Build.SourcesDirectory)/survey-library/build
     ls
     cd $(Build.SourcesDirectory)/survey-library/build/survey-core
-    dir
+    echo $(Build.SourcesDirectory)/survey-library/build/survey-core
     ls
     cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
-    dir
+    echo $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
     ls
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core
-    dir
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core
     ls
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui
-    dir
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui
     ls
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-    dir
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     ls
   displayName: 'pre-debug survey-creator-react build'
 
@@ -203,7 +193,6 @@ steps:
     
 
 # Creator KNOCKOUT
-    
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm install
@@ -229,6 +218,28 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-knockout'
     ArtifactName: 'SurveyJSCreatorV2BuildKnockout'
     publishLocation: 'Container'  
+
+# Creator V1
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm run build_prod
+  displayName: 'build_prod'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm run test_ci
+  displayName: 'unit tests'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm run testcafe_ci
+  displayName: 'functional tests'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm run doc_gen
+  displayName: 'generate docs'
+
 
 - task: CopyFiles@2
   inputs:

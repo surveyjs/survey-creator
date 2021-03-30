@@ -1,4 +1,5 @@
-import React, { CSSProperties } from "react";
+import React from "react";
+import { CSSProperties } from "react";
 //import { ImplementorBase } from "survey-knockout";
 import {
   AdaptiveActionBarItemWrapper,
@@ -7,10 +8,7 @@ import {
   IActionBarItem,
 } from "survey-core";
 
-import {
-  ReactElementFactory,
-  SurveyElementBase,
-} from "survey-react-ui";
+import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 interface ITabbedMenuComponentProps {
   items: Array<IActionBarItem>;
