@@ -1,5 +1,5 @@
 import { ClientFunction } from "testcafe";
-export const frameworks = ["knockout"/*, "react"*/];
+export const frameworks = ["knockout", "react"];
 export const url = "http://127.0.0.1:8080/testCafe/";
 
 export const initCreator = ClientFunction((framework, json = {}, options = {}) => {
@@ -12,7 +12,8 @@ export const initCreator = ClientFunction((framework, json = {}, options = {}) =
     }
     else if (framework === "react") {
         const creator = SurveyCreatorReact.createReactSurveyCreator(json, options);
-        ReactDOM.render(<SurveyCreatorReact.SurveyCreatorComponent creator={creator}/>,
-          document.getElementById("survey-creator"));
+        ReactDOM.render(React.createElement(
+            SurveyCreatorReact.SurveyCreatorComponent, { creator: creator }, null),
+            document.getElementById("survey-creator"));
     }
 });

@@ -22,7 +22,9 @@
     "lerna": "^3.22.1",
     "survey-core": "../survey-library/build/survey-core",
     "survey-creator-knockout": "packages/survey-creator-knockout/build",
+    "survey-creator-react": "packages/survey-creator-react/build",
     "survey-knockout-ui": "../survey-library/build/survey-knockout-ui",
+    "survey-react-ui": "../survey-library/build/survey-react-ui",
     "testcafe": "^1.9.2"
   },
   "dependencies": {},
