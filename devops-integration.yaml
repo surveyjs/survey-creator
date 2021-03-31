@@ -236,6 +236,7 @@ steps:
   displayName: 'functional tests'
 
 - script: |
+    mkdir $(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run doc_gen
   displayName: 'generate docs'
