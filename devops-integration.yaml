@@ -241,6 +241,12 @@ steps:
     npm run doc_gen
   displayName: 'generate docs'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
+    TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
+    CleanTargetFolder: true
+  displayName: 'copy root docs to the local surveyjs/service repo'
 
 - task: CopyFiles@2
   inputs:
