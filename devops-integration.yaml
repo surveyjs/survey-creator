@@ -252,7 +252,7 @@ steps:
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs'
     TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
-    CleanTargetFolder: true
+    CleanTargetFolder: false
   displayName: 'copy generated docs to the local surveyjs/service repo'
 
 # read about the problem with git output ($env:GIT_REDIRECT_STDERR = '2>&1') :
