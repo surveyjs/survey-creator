@@ -16,6 +16,7 @@ import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropHelper } from "./dragdrophelper";
+import { DragDropHelper2 } from "./dragdrophelper";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyLogic } from "./tabs/logic";
 import { SurveyTextWorker } from "./textWorker";
@@ -92,6 +93,7 @@ export class CreatorBase<T extends SurveyModel>
   @property() surveyValue: T;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
   public dragDropHelper: DragDropHelper<T>;
+  public dragDropHelper2: DragDropHelper2;
 
   @property() selection: Base;
 
@@ -625,6 +627,7 @@ export class CreatorBase<T extends SurveyModel>
         : null
     );
     this.dragDropHelper = new DragDropHelper<T>(this);
+    this.dragDropHelper2 = new DragDropHelper2(this, ()=>{});
     this.propertyGrid = new PropertyGridModel(
       (this.survey as any) as Base,
       this

@@ -9,7 +9,7 @@ import {
   QuestionHtmlModel,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { DragDropHelper } from "../dragdrophelper";
+import { DragDropHelper, DragDropHelper2 } from "../dragdrophelper";
 import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
 import "./question.scss";
 
@@ -61,6 +61,10 @@ export class QuestionAdornerViewModel extends Base {
     return this.creator.dragDropHelper;
   }
 
+  private get dragDropHelper2(): DragDropHelper2 {
+    return this.creator.dragDropHelper2;
+  }
+
   public get showDragOverFeedbackAbove(): boolean {
     return this.dragDropHelper.showDragOverFeedbackAbove(this.surveyElement);
   }
@@ -73,16 +77,20 @@ export class QuestionAdornerViewModel extends Base {
 
   dragStart(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     setTimeout(() => (model.isDragged = true), 1);
-    return model.dragDropHelper.dragStart(model.surveyElement, event);
+    return model.dragDropHelper2.startDragQuestion(event, model.surveyElement);
+    // return model.dragDropHelper.dragStart(model.surveyElement, event);
   }
   dragOver(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper.dragOver(model.surveyElement, event);
+    model.dragDropHelper2.doDragDropOver(event, model.surveyElement, true);
+    // model.dragDropHelper.dragOver(model.surveyElement, event);
   }
   drop(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper.drop(model.surveyElement, event);
+    model.dragDropHelper2.doDrop(event);
+    // model.dragDropHelper.drop(model.surveyElement, event);
   }
   dragEnd(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     setTimeout(() => (model.isDragged = false), 1);
-    model.dragDropHelper.dragEnd(model.surveyElement, event);
+    model.dragDropHelper2.end();
+    // model.dragDropHelper.dragEnd(model.surveyElement, event);
   }
 }

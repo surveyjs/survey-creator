@@ -69,7 +69,7 @@ export class PageViewModel<T extends SurveyModel> extends Base {
   }
 
   dragOver(model: PageViewModel<T>, event: IPortableDragEvent) {
-    this.creator.dragDropHelper.dragOverPage(model.page, event);
+    // this.creator.dragDropHelper.dragOverPage(model.page, event);
   }
 
   public get dragOverFeedback(): SurveyElementTemplateData {
