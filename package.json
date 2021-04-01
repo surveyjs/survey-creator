@@ -13,7 +13,7 @@
     "build": "lerna run build",
     "test": "lerna run test",
     "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome testCafe/ --selector-timeout 1500 --reporter minimal\"",
-    "testcafe_debug_file": "concurrently \"http-server --silent\" \"testcafe chrome testCafe/json/json.js --reporter minimal --debug-mode\""
+    "testcafe_debug_file": "concurrently \"http-server --silent\" \"testcafe chrome testCafe/embed/embed.js --reporter minimal --debug-mode\""
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
