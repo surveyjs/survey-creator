@@ -272,6 +272,11 @@ module.exports = function (options) {
         template: "index.html",
       }),
     ]);
+    config.devServer = {
+      contentBase: __dirname,
+      compress: false,
+      port: 8081,
+    };
   }
 
   return config;

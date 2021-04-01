@@ -33,6 +33,11 @@ svc-tabbed-menu-item {
     background-color: $background;
   }
 }
+
 .svc-tabbed-menu-item--hidden {
   visibility: hidden;
+}
+
+.svc-tabbed-menu-item__text {
+  white-space: nowrap;
 }
