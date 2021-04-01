@@ -3168,3 +3168,18 @@ QUnit.test(
     assert.equal(json.type, "text");
   }
 );
+QUnit.test(
+  "SurveyPropertyDefaultValueEditor for matrixdropdown with cellType equals boolean, Bug#1127",
+  function (assert) {
+    var question = new Survey.QuestionMatrixDropdown("q1");
+    question.addColumn("col1");
+    question.rows = ["row1", "row2"];
+    question.cellType = "boolean";
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question,
+      true
+    );
+    assert.equal(json.type, "matrixdropdown");
+    assert.equal(json.cellType, "boolean");
+  }
+);

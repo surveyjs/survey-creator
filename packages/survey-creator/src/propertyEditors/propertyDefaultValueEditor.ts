@@ -11,12 +11,7 @@ import { EditableObject } from "./editableObject";
 import { SurveyHelper } from "../surveyHelper";
 
 export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor {
-  private static skipPropertyNames = [
-    "cellType",
-    "width",
-    "minWidth",
-    "maxWidth",
-  ];
+  private static skipPropertyNames = ["width", "minWidth", "maxWidth"];
   public static defaultQuestionName = "question";
   public static createJsonFromQuestion(obj: any, readOnly: boolean): any {
     var qjson = new Survey.JsonObject().toJsonObject(obj);
@@ -26,8 +21,9 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
       qjson.type = "text";
     }
 
-    if (!!qjson.cellType) {
+    if (!!qjson.cellType && qjson.type == "matrixdropdowncolumn") {
       qjson.type = qjson.cellType;
+      delete qjson["cellType"];
     }
 
     SurveyPropertyDefaultValueEditor.filterJsonProperties(qjson);
@@ -37,10 +33,10 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
     qjson.readOnly = readOnly;
     return qjson;
   }
-  private static filterJsonProperties(qjson: {[index: string]: any}) {
+  private static filterJsonProperties(qjson: { [index: string]: any }) {
     var properties = SurveyPropertyDefaultValueEditor.skipPropertyNames;
     for (let i = 0; i < properties.length; i++) {
-      const name : string = properties[i];
+      const name: string = properties[i];
       if (!!qjson[name]) {
         delete qjson[name];
       }

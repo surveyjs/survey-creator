@@ -1880,6 +1880,62 @@ test("SurveyPropertyDefaultValueEditor json expression converted to text", () =>
   expect(defaultValueEditor.question.getType()).toEqual("text");
   Serializer.findProperty("expression", "defaultValue").visible = false;
 });
+test("SurveyPropertyDefaultValueEditor json cellType overrides type", () => {
+  var column = new MatrixDropdownColumn("column 1");
+  column.cellType = "boolean";
+  expect(column.getType()).toEqual("matrixdropdowncolumn");
+  var propertyGrid = new PropertyGridModelTester(column);
+  var defaultValueQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("defaultValue")
+  );
+  expect(defaultValueQuestion).toBeTruthy();
+  var propEditor = PropertyGridEditorCollection.getEditor(
+    defaultValueQuestion.property
+  );
+  expect(propEditor).toBeTruthy();
+
+  var defaultValueEditor = <DefaultValueEditor>(
+    propEditor.createPropertyEditorSetup(
+      column,
+      defaultValueQuestion.property,
+      defaultValueQuestion,
+      new EmptySurveyCreatorOptions()
+    )
+  );
+  expect(defaultValueEditor.question).toBeTruthy();
+  expect(defaultValueEditor.question.getType()).toEqual("boolean");
+  expect(defaultValueEditor.question.cellType).toBeFalsy();
+});
+
+test("SurveyPropertyDefaultValueEditor for matrixdropdown with cellType equals boolean, Bug#1127", () => {
+  PropertyGridEditorCollection.register(new PropertyGridValueEditor());
+  var question = new QuestionMatrixDropdownModel("q1");
+  question.addColumn("col1");
+  question.rows = ["row1", "row2"];
+  question.cellType = "boolean";
+  var propertyGrid = new PropertyGridModelTester(question);
+  var defaultValueQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("defaultValue")
+  );
+
+  var propEditor = PropertyGridEditorCollection.getEditor(
+    defaultValueQuestion.property
+  );
+  expect(propEditor).toBeTruthy();
+
+  var defaultValueEditor = <DefaultValueEditor>(
+    propEditor.createPropertyEditorSetup(
+      question,
+      defaultValueQuestion.property,
+      defaultValueQuestion,
+      new EmptySurveyCreatorOptions()
+    )
+  );
+  expect(defaultValueEditor.question).toBeTruthy();
+  expect(defaultValueEditor.question.getType()).toEqual("matrixdropdown");
+  expect(defaultValueEditor.question.cellType).toEqual("boolean");
+});
+
 /* It works out of the box. expression/condition properties editors are comment questions with title actions
 test(
     "SurveyPropertyEditorFactory.createEditor, isCellEditor=true, for expression and condition",

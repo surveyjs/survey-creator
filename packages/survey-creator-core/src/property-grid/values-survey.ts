@@ -28,7 +28,11 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
       json.type = "text";
     }
     json.titleLocation = "hidden";
-    delete json["cellType"];
+    if (!!json.cellType && json.type == "matrixdropdowncolumn") {
+      json.type = json.cellType;
+      delete json["cellType"];
+    }
+
     delete json["width"];
     delete json["minWidth"];
     delete json["maxWidth"];
