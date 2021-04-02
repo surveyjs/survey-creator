@@ -411,8 +411,10 @@ export class SurveyElementEditorTabModel {
   }
   public doOnExpanded() {
     this.beforeShow();
-    ko.tasks.runEarly();
-    this.focusEditor();
+    setTimeout(() => {
+      ko.tasks.runEarly();
+      this.focusEditor();
+    }, 1);
   }
   private afterRender(elements: HTMLElement[], context) {
     this.htmlElements = elements;

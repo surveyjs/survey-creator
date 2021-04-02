@@ -8,7 +8,6 @@ import {
 import { CreatorBase, PageViewModel } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
-import {DragOverFeedbackComponent} from "./DragOverFeedback";
 
 interface ICreatorSurveyPageComponentProps {
   creator: CreatorBase<SurveyModel>;
@@ -35,11 +34,6 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   render(): JSX.Element {
     return (
       <React.Fragment>
-      <DragOverFeedbackComponent 
-        shouldRender={this.model.showDragOverFeedback}
-        creator={this.model.creator}
-        feedback={this.model.dragOverFeedback}>
-      </DragOverFeedbackComponent>
       <div
         className={"svc-page__content " + this.model.css}
         onClick={(e) => {
