@@ -6,7 +6,7 @@ import { IQuestionToolboxItem } from "@survey/creator";
 //import "./toolbox-item.scss";
 import { AdaptiveActionBarItemWrapper } from "survey-core";
 import { ToolboxViewModel } from "./toolbox";
-import { KnockoutDragEvent } from "src/events";
+import { KnockoutDragEvent } from "../../events";
 const template = require("./toolbox-item.html");
 // import template from "./toolbox-item.html";
 

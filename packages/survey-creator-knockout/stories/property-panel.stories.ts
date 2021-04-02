@@ -1,9 +1,9 @@
 // import { document } from "global";
-import { text, boolean } from "@storybook/addon-knobs";
+// import { text, boolean } from "@storybook/addon-knobs";
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { PropertyPanelItemViewModel } from "../src/components/property-panel/property-panel-item";
+// import { PropertyPanelItemViewModel } from "../src/components/property-panel/property-panel-item";
 // import { PropertyPanelViewModel } from "../src/components/property-panel/property-panel";
-import { TextEditorViewModel } from "../src/components/property-editors/text-editor/text-editor";
+// import { TextEditorViewModel } from "../src/components/property-editors/text-editor/text-editor";
 
 // export default {
 //   title: "Property Panel",
