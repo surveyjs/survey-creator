@@ -64,65 +64,57 @@ export class PageViewModel<T extends SurveyModel> extends Base {
       : "";
   }
 
-  get showDragOverFeedback() {
-    return  this.creator.dragDropHelper.showDragOverPage(this.page);
-  }
-
   dragOver(model: PageViewModel<T>, event: IPortableDragEvent) {
     // this.creator.dragDropHelper.dragOverPage(model.page, event);
   }
 
-  public get dragOverFeedback(): SurveyElementTemplateData {
-    return this.creator.dragDropHelper.dragOverFeedback;
-  }
+  // binarySearchIndexByY(questionNodes, y) {
+  //   let lo = 0;
+  //   let hi = questionNodes.length - 1;
+  //   while (lo <= hi) {
+  //     const median = (lo + (hi - lo)) >> 1;
+  //     const q = questionNodes[median];
+  //     const rect = q.getBoundingClientRect();
 
-  binarySearchIndexByY(questionNodes, y) {
-    let lo = 0;
-    let hi = questionNodes.length - 1;
-    while (lo <= hi) {
-      const median = (lo + (hi - lo)) >> 1;
-      const q = questionNodes[median];
-      const rect = q.getBoundingClientRect();
-
-      if (rect.top <= y && y <= rect.bottom) {
-        return 0;
-      }
-      if (y > rect.bottom) {
-        lo = median + 1;
-      } else {
-        hi = median - 1;
-      }
-    }
-    return ~lo;
-  }
+  //     if (rect.top <= y && y <= rect.bottom) {
+  //       return 0;
+  //     }
+  //     if (y > rect.bottom) {
+  //       lo = median + 1;
+  //     } else {
+  //       hi = median - 1;
+  //     }
+  //   }
+  //   return ~lo;
+  // }
   drop(model: PageViewModel<T>, event: IPortableDragEvent) {
-    const page: any = event.currentTarget;
-    const questions = page.querySelectorAll(".svc-question__content");
-    let index = this.binarySearchIndexByY(questions, event.clientY);
-    if (index < 0) {
-      index = ~index;
-      if (index >= questions.length) {
-        model.dropAtQuestion(questions, questions.length - 1, true, event);
-      } else {
-        model.dropAtQuestion(questions, index, false, event);
-      }
-    } else {
-      model.dropAtQuestion(questions, index, undefined, event);
-    }
+    // const page: any = event.currentTarget;
+    // const questions = page.querySelectorAll(".svc-question__content");
+    // let index = this.binarySearchIndexByY(questions, event.clientY);
+    // if (index < 0) {
+    //   index = ~index;
+    //   if (index >= questions.length) {
+    //     model.dropAtQuestion(questions, questions.length - 1, true, event);
+    //   } else {
+    //     model.dropAtQuestion(questions, index, false, event);
+    //   }
+    // } else {
+    //   model.dropAtQuestion(questions, index, undefined, event);
+    // }
   }
-  dropAtQuestion(
-    questions,
-    index: number,
-    dropBelow: boolean,
-    event: IPortableDragEvent
-  ) {
-    if (index < 0) {
-      // drop onto empty page
-      this.creator.dragDropHelper.dropAtPage(this.page, event);
-    } else {
-      const questionName = questions[index].dataset.questionName as string;
-      const question = this.creator.survey.getQuestionByName(questionName);
-      this.creator.dragDropHelper.dropAt(question, event, dropBelow);
-    }
-  }
+  // dropAtQuestion(
+  //   questions,
+  //   index: number,
+  //   dropBelow: boolean,
+  //   event: IPortableDragEvent
+  // ) {
+  //   if (index < 0) {
+  //     // drop onto empty page
+  //     this.creator.dragDropHelper.dropAtPage(this.page, event);
+  //   } else {
+  //     const questionName = questions[index].dataset.questionName as string;
+  //     const question = this.creator.survey.getQuestionByName(questionName);
+  //     this.creator.dragDropHelper.dropAt(question, event, dropBelow);
+  //   }
+  // }
 }

@@ -33,9 +33,10 @@ export class ToolboxItemViewModel {
     model._creator.clickToolboxItem(model.item.json);
   }
   dragstart(model: ToolboxItemViewModel, e: DragEvent) {
-    model._creator.dragDropHelper.dragToolboxItem(
+    model._creator.dragDropHelper.startDragToolboxItem(
+      new KnockoutDragEvent(e),
+      model.item.json.name,
       JSON.stringify(model.item.json),
-      new KnockoutDragEvent(e)
     );
     return true;
   }

@@ -12863,4 +12863,6 @@ if (!window["%hammerhead%"]) {
     window.creator.JSON = counter % 2 == 0 ? json : json3;
     counter++;
   }
+  window.creator.JSON = json3;
+
 }

@@ -1,7 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { UndoRedoManager } from "./undoredomanager";
-import { SurveyHelper } from "./surveyHelper";
 
 if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;

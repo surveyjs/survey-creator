@@ -25,15 +25,15 @@ export class TabDesignerComponent extends SurveyElementBase<
     return this.props.creator;
   }
 
+  // render(): JSX.Element {
+  //   return (
+  //     <ReactDragDropHelperComponent
+  //       creator={this.props.creator}
+  //       renderContent={() => this.renderContent()}
+  //     ></ReactDragDropHelperComponent>
+  //   );
+  // }
   render(): JSX.Element {
-    return (
-      <ReactDragDropHelperComponent
-        creator={this.props.creator}
-        renderContent={() => this.renderContent()}
-      ></ReactDragDropHelperComponent>
-    );
-  }
-  renderContent(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const survey: SurveyModel = this.props.survey;
     const className = "svc-tab-designer " + survey.css.root;
@@ -104,22 +104,22 @@ interface ReactDragDropHelperComponentProps {
   renderContent: () => JSX.Element;
 }
 
-class ReactDragDropHelperComponent extends SurveyElementBase<
-  ReactDragDropHelperComponentProps,
-  any
-> {
-  constructor(props: ReactDragDropHelperComponentProps) {
-    super(props);
-  }
+// class ReactDragDropHelperComponent extends SurveyElementBase<
+//   ReactDragDropHelperComponentProps,
+//   any
+// > {
+//   constructor(props: ReactDragDropHelperComponentProps) {
+//     super(props);
+//   }
 
-  protected getStateElement(): Base {
-    return this.props.creator.dragDropHelper;
-  }
+//   protected getStateElement(): Base {
+//     return this.props.creator.dragDropHelper;
+//   }
 
-  render(): JSX.Element {
-    return this.props.renderContent();
-  }
-}
+//   render(): JSX.Element {
+//     return this.props.renderContent();
+//   }
+// }
 
 ReactElementFactory.Instance.registerElement("svc-tab-designer", (props) => {
   return React.createElement(

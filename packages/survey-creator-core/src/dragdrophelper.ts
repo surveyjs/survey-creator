@@ -14,212 +14,212 @@ import {
 import { CreatorBase } from "./creator-base";
 import { IPortableDragEvent } from "./utils/events";
 
-export class DragDropHelper<T extends SurveyModel> extends Base {
-  constructor(public creator: CreatorBase<T>) {
-    super();
-  }
+// export class DragDropHelper<T extends SurveyModel> extends Base {
+//   constructor(public creator: CreatorBase<T>) {
+//     super();
+//   }
 
-  get survey(): SurveyModel {
-    return this.creator.survey;
-  }
+//   get survey(): SurveyModel {
+//     return this.creator.survey;
+//   }
 
-  private createDragDataJsonText(element: SurveyElement) {
-    const json = new JsonObject().toJsonObject(element);
-    json["type"] = element.getType();
-    return JSON.stringify(json);
-  }
-  public createElementFromJsonText(jsonText: string): SurveyElement {
-    const json = JSON.parse(jsonText);
-    const instance: SurveyElement = Serializer.createClass(json["type"]);
-    new JsonObject().toObject(json, instance);
+//   private createDragDataJsonText(element: SurveyElement) {
+//     const json = new JsonObject().toJsonObject(element);
+//     json["type"] = element.getType();
+//     return JSON.stringify(json);
+//   }
+//   public createElementFromJsonText(jsonText: string): SurveyElement {
+//     const json = JSON.parse(jsonText);
+//     const instance: SurveyElement = Serializer.createClass(json["type"]);
+//     new JsonObject().toObject(json, instance);
 
-    if (instance["setSurveyImpl"]) {
-      instance["setSurveyImpl"](this.survey);
-    } else {
-      instance["setData"](this.survey);
-    }
+//     if (instance["setSurveyImpl"]) {
+//       instance["setSurveyImpl"](this.survey);
+//     } else {
+//       instance["setData"](this.survey);
+//     }
 
-    return instance;
-  }
+//     return instance;
+//   }
 
-  // Drag-drop feedback
-  public createDragOverFeedback(jsonText: string): SurveyElementTemplateData {
-    const instance = this.createElementFromJsonText(jsonText);
+//   // Drag-drop feedback
+//   public createDragOverFeedback(jsonText: string): SurveyElementTemplateData {
+//     const instance = this.createElementFromJsonText(jsonText);
 
-    // bad smell
-    let name = "survey-question";
-    if (instance.getType() == "panel") {
-      name = "survey-panel";
-    } else if (instance.getType() == "flowpanel") {
-      name = "survey-flowpanel";
-    }
+//     // bad smell
+//     let name = "survey-question";
+//     if (instance.getType() == "panel") {
+//       name = "survey-panel";
+//     } else if (instance.getType() == "flowpanel") {
+//       name = "survey-flowpanel";
+//     }
 
-    return {
-      name: name,
-      data: instance,
-      afterRender: undefined,
-    };
-  }
+//     return {
+//       name: name,
+//       data: instance,
+//       afterRender: undefined,
+//     };
+//   }
 
-  private dragOverFeedbackInstance: SurveyElementTemplateData;
-  private cachedJsonText: string;
-  public get dragOverFeedback(): SurveyElementTemplateData {
-    if (!this.dragOverFeedbackInstance) {
-      const jsonText = this.cachedJsonText; // event.dataTransfer.getData("svc-item-json");
+//   private dragOverFeedbackInstance: SurveyElementTemplateData;
+//   private cachedJsonText: string;
+//   public get dragOverFeedback(): SurveyElementTemplateData {
+//     if (!this.dragOverFeedbackInstance) {
+//       const jsonText = this.cachedJsonText; // event.dataTransfer.getData("svc-item-json");
 
-      if (!!jsonText) {
-        this.dragOverFeedbackInstance = this.createDragOverFeedback(jsonText);
-      }
-    }
-    return this.dragOverFeedbackInstance;
-  }
-  @property() _showDragOverFeedbackAbove: boolean;
-  @property() _showDragOverFeedbackBelow: boolean;
-  @property() draggedOverQuestion: SurveyElement;
-  @property() draggedOverPage: PageModel;
+//       if (!!jsonText) {
+//         this.dragOverFeedbackInstance = this.createDragOverFeedback(jsonText);
+//       }
+//     }
+//     return this.dragOverFeedbackInstance;
+//   }
+//   @property() _showDragOverFeedbackAbove: boolean;
+//   @property() _showDragOverFeedbackBelow: boolean;
+//   @property() draggedOverQuestion: SurveyElement;
+//   @property() draggedOverPage: PageModel;
 
-  private draggedSurveyElement: SurveyElement;
-  public showDragOverPage(page: PageModel): boolean {
-    return this.draggedOverPage !== undefined && page.elements.length <= 0;
-  }
-  public showDragOverFeedbackAbove(surveyElement: SurveyElement): boolean {
-    return (
-      surveyElement === this.draggedOverQuestion &&
-      this._showDragOverFeedbackAbove
-    );
-  }
-  public showDragOverFeedbackBelow(surveyElement: SurveyElement): boolean {
-    return (
-      surveyElement === this.draggedOverQuestion &&
-      this._showDragOverFeedbackBelow
-    );
-  }
+//   private draggedSurveyElement: SurveyElement;
+//   public showDragOverPage(page: PageModel): boolean {
+//     return this.draggedOverPage !== undefined && page.elements.length <= 0;
+//   }
+//   public showDragOverFeedbackAbove(surveyElement: SurveyElement): boolean {
+//     return (
+//       surveyElement === this.draggedOverQuestion &&
+//       this._showDragOverFeedbackAbove
+//     );
+//   }
+//   public showDragOverFeedbackBelow(surveyElement: SurveyElement): boolean {
+//     return (
+//       surveyElement === this.draggedOverQuestion &&
+//       this._showDragOverFeedbackBelow
+//     );
+//   }
 
-  public clearDragFeedback() {
-    this.draggedOverQuestion = undefined;
-    this.draggedOverPage = undefined;
-    this.dragOverFeedbackInstance = undefined;
-    this._showDragOverFeedbackAbove = false;
-    this._showDragOverFeedbackBelow = false;
-    this.cachedJsonText = undefined;
-    this.draggedSurveyElement = undefined;
-  }
+//   public clearDragFeedback() {
+//     this.draggedOverQuestion = undefined;
+//     this.draggedOverPage = undefined;
+//     this.dragOverFeedbackInstance = undefined;
+//     this._showDragOverFeedbackAbove = false;
+//     this._showDragOverFeedbackBelow = false;
+//     this.cachedJsonText = undefined;
+//     this.draggedSurveyElement = undefined;
+//   }
 
-  // /Drag-drop feedback
+//   // /Drag-drop feedback
 
-  public dragToolboxItem(jsonText: string, event: IPortableDragEvent) {
-    this.clearDragFeedback();
-    if (!this.creator.readOnly) {
-      event.dataTransfer.setData("svc-item-json", jsonText);
-      event.dataTransfer.effectAllowed = "move";
+//   public dragToolboxItem(jsonText: string, event: IPortableDragEvent) {
+//     this.clearDragFeedback();
+//     if (!this.creator.readOnly) {
+//       event.dataTransfer.setData("svc-item-json", jsonText);
+//       event.dataTransfer.effectAllowed = "move";
 
-      this.cachedJsonText = jsonText;
-    }
-  }
+//       this.cachedJsonText = jsonText;
+//     }
+//   }
 
-  public dragStart(surveyElement: SurveyElement, event: IPortableDragEvent) {
-    const jsonText = this.createDragDataJsonText(surveyElement);
-    event.cancelBubble = true;
-    this.dragToolboxItem(jsonText, event);
-    this.draggedSurveyElement = surveyElement;
-    return true;
-  }
+//   public dragStart(surveyElement: SurveyElement, event: IPortableDragEvent) {
+//     const jsonText = this.createDragDataJsonText(surveyElement);
+//     event.cancelBubble = true;
+//     this.dragToolboxItem(jsonText, event);
+//     this.draggedSurveyElement = surveyElement;
+//     return true;
+//   }
 
-  public dragOverPage(page: PageModel, event: IPortableDragEvent) {
-    event.preventDefault();
-    event.cancelBubble = true;
-    event.stopPropagation();
+//   public dragOverPage(page: PageModel, event: IPortableDragEvent) {
+//     event.preventDefault();
+//     event.cancelBubble = true;
+//     event.stopPropagation();
 
-    if (page.elements.length > 0) return;
+//     if (page.elements.length > 0) return;
 
-    this.draggedOverQuestion = undefined;
-    this.draggedOverPage = page;
-  }
-  public dragOver(surveyElement: SurveyElement, event: IPortableDragEvent) {
-    event.preventDefault();
-    event.cancelBubble = true;
-    event.stopPropagation();
+//     this.draggedOverQuestion = undefined;
+//     this.draggedOverPage = page;
+//   }
+//   public dragOver(surveyElement: SurveyElement, event: IPortableDragEvent) {
+//     event.preventDefault();
+//     event.cancelBubble = true;
+//     event.stopPropagation();
 
-    this.draggedOverQuestion = surveyElement;
-    this.draggedOverPage = undefined;
+//     this.draggedOverQuestion = surveyElement;
+//     this.draggedOverPage = undefined;
 
-    const isBelow = this.isAtLowerPartOfCurrentTarget(event);
-    this._showDragOverFeedbackAbove = !isBelow;
-    this._showDragOverFeedbackBelow = isBelow;
-  }
+//     const isBelow = this.isAtLowerPartOfCurrentTarget(event);
+//     this._showDragOverFeedbackAbove = !isBelow;
+//     this._showDragOverFeedbackBelow = isBelow;
+//   }
 
-  drop(surveyElement: SurveyElement, event: IPortableDragEvent) {
-    this.dropAt(surveyElement, event, this._showDragOverFeedbackBelow);
-  }
-  public dropAtPage(page: PageModel, event: IPortableDragEvent) {
-    event.stopPropagation();
-    const jsonText = event.dataTransfer.getData("svc-item-json");
-    if (!!jsonText) {
-      const instance = this.createElementFromJsonText(jsonText);
-      page.addQuestion(instance as Question);
-      this.removeDraggedQuestion();
-      this.end();
-    }
-  }
-  public dropAt(
-    surveyElement: SurveyElement,
-    event: IPortableDragEvent,
-    below: boolean
-  ) {
-    event.stopPropagation();
-    if (!surveyElement) {
-      surveyElement = this.draggedOverQuestion as Question;
-    }
-    if (!surveyElement) {
-      return;
-    }
+//   drop(surveyElement: SurveyElement, event: IPortableDragEvent) {
+//     this.dropAt(surveyElement, event, this._showDragOverFeedbackBelow);
+//   }
+//   public dropAtPage(page: PageModel, event: IPortableDragEvent) {
+//     event.stopPropagation();
+//     const jsonText = event.dataTransfer.getData("svc-item-json");
+//     if (!!jsonText) {
+//       const instance = this.createElementFromJsonText(jsonText);
+//       page.addQuestion(instance as Question);
+//       this.removeDraggedQuestion();
+//       this.end();
+//     }
+//   }
+//   public dropAt(
+//     surveyElement: SurveyElement,
+//     event: IPortableDragEvent,
+//     below: boolean
+//   ) {
+//     event.stopPropagation();
+//     if (!surveyElement) {
+//       surveyElement = this.draggedOverQuestion as Question;
+//     }
+//     if (!surveyElement) {
+//       return;
+//     }
 
-    if (below === undefined) {
-      below = this.isAtLowerPartOfCurrentTarget(event);
-    }
+//     if (below === undefined) {
+//       below = this.isAtLowerPartOfCurrentTarget(event);
+//     }
 
-    const jsonText = event.dataTransfer.getData("svc-item-json");
-    if (!!jsonText) {
-      const instance = this.createElementFromJsonText(jsonText);
-      const parent: any = surveyElement.parent;
-      if (below) {
-        parent.insertElementAfter(instance, surveyElement);
-      } else {
-        parent.insertElementBefore(instance, surveyElement);
-      }
+//     const jsonText = event.dataTransfer.getData("svc-item-json");
+//     if (!!jsonText) {
+//       const instance = this.createElementFromJsonText(jsonText);
+//       const parent: any = surveyElement.parent;
+//       if (below) {
+//         parent.insertElementAfter(instance, surveyElement);
+//       } else {
+//         parent.insertElementBefore(instance, surveyElement);
+//       }
 
-      this.removeDraggedQuestion();
-    }
-    this.end();
-  }
+//       this.removeDraggedQuestion();
+//     }
+//     this.end();
+//   }
 
-  public dragEnd(surveyElement: SurveyElement, event: IPortableDragEvent) {
-    this.clearDragFeedback();
-    this.end();
-  }
+//   public dragEnd(surveyElement: SurveyElement, event: IPortableDragEvent) {
+//     this.clearDragFeedback();
+//     this.end();
+//   }
 
-  private removeDraggedQuestion() {
-    if (this.draggedSurveyElement && this.draggedSurveyElement.parent) {
-      this.draggedSurveyElement.parent.removeElement(
-        <IElement>(<any>this.draggedSurveyElement)
-      );
-    }
-  }
+//   private removeDraggedQuestion() {
+//     if (this.draggedSurveyElement && this.draggedSurveyElement.parent) {
+//       this.draggedSurveyElement.parent.removeElement(
+//         <IElement>(<any>this.draggedSurveyElement)
+//       );
+//     }
+//   }
 
-  private isAtLowerPartOfCurrentTarget(event: IPortableDragEvent): boolean {
-    var target = event.currentTarget;
-    if (!target["getBoundingClientRect"]) {
-      return true;
-    }
-    const bounds: DOMRect = (<any>target).getBoundingClientRect();
-    const middle = (bounds.bottom + bounds.top) / 2;
-    return event.clientY >= middle;
-  }
+//   private isAtLowerPartOfCurrentTarget(event: IPortableDragEvent): boolean {
+//     var target = event.currentTarget;
+//     if (!target["getBoundingClientRect"]) {
+//       return true;
+//     }
+//     const bounds: DOMRect = (<any>target).getBoundingClientRect();
+//     const middle = (bounds.bottom + bounds.top) / 2;
+//     return event.clientY >= middle;
+//   }
 
-  public end() {
-    this.clearDragFeedback();
-  }
-}
+//   public end() {
+//     this.clearDragFeedback();
+//   }
+// }
 
 export class DragDropTargetElement {
   private nestedPanelDepth: number;
@@ -261,7 +261,7 @@ export class DragDropTargetElement {
   }
 }
 
-export class DragDropHelper2 {
+export class DragDropHelper {
   public static edgeHeight: number = 20;
   public static nestedPanelDepth: number = -1;
   static dataStart: string = "{element:";
@@ -296,10 +296,11 @@ export class DragDropHelper2 {
     this.prepareData(event, elementName, elementJson, null);
     event.cancelBubble = true;
   }
+
   public isSurveyDragging(event: IPortableDragEvent): boolean {
     if (!event) return false;
     var data = this.getData(event).text;
-    return data && data.indexOf(DragDropHelper2.dataStart) == 0;
+    return data && data.indexOf(DragDropHelper.dataStart) == 0;
   }
   public doDragDropOver(
     event: IPortableDragEvent,
@@ -415,8 +416,8 @@ export class DragDropHelper2 {
     return {
       isBottom: y > height / 2,
       isEdge:
-        y <= DragDropHelper2.edgeHeight ||
-        height - y <= DragDropHelper2.edgeHeight,
+        y <= DragDropHelper.edgeHeight ||
+        height - y <= DragDropHelper.edgeHeight,
     };
   }
   private isBottomThanElement(event: IPortableDragEvent, lastEl: any): boolean {
@@ -433,9 +434,9 @@ export class DragDropHelper2 {
   private isSamePlace(event: IPortableDragEvent, element: any): boolean {
     return false;
     /*
-    var prev = DragDropHelper2.prevEvent;
+    var prev = DragDropHelper.prevEvent;
     console.log(
-      "DragDropHelper2::isSamePlace:element=%o, prev.element=%o",
+      "DragDropHelper::isSamePlace:element=%o, prev.element=%o",
       element,
       prev.element
     );
@@ -470,14 +471,14 @@ export class DragDropHelper2 {
     json: any,
     source: IElement
   ) {
-    var str = DragDropHelper2.dataStart + elementName + "}";
+    var str = DragDropHelper.dataStart + elementName + "}";
     this.setData(event, str);
     var targetElement = this.createTargetElement(elementName, json);
     this.ddTarget = new DragDropTargetElement(
       this.survey.currentPage,
       targetElement,
       source,
-      DragDropHelper2.nestedPanelDepth
+      DragDropHelper.nestedPanelDepth
     );
   }
   private setData(event: IPortableDragEvent, text: string) {
@@ -486,22 +487,22 @@ export class DragDropHelper2 {
       event.dataTransfer.setData("Text", text);
       event.dataTransfer.effectAllowed = "copy";
     }
-    DragDropHelper2.dragData = { text: text };
+    DragDropHelper.dragData = { text: text };
   }
   private getData(event: IPortableDragEvent): any {
     //event = this.getEvent(event);
     if (event.dataTransfer) {
       var text = event.dataTransfer.getData("Text");
       if (text) {
-        DragDropHelper2.dragData.text = text;
+        DragDropHelper.dragData.text = text;
       }
     }
-    return DragDropHelper2.dragData;
+    return DragDropHelper.dragData;
   }
   private clearData() {
     this.ddTarget = null; // We should reset ddTarget to null due to the https://surveyjs.answerdesk.io/ticket/details/T1003 - onQuestionAdded not fired after D&D
-    DragDropHelper2.dragData = { text: "", json: null };
-    var prev = DragDropHelper2.prevEvent;
+    DragDropHelper.dragData = { text: "", json: null };
+    var prev = DragDropHelper.prevEvent;
     prev.element = null;
     prev.x = -1;
     prev.y = -1;

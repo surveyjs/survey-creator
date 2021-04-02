@@ -9,7 +9,7 @@ import {
   QuestionHtmlModel,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { DragDropHelper, DragDropHelper2 } from "../dragdrophelper";
+import { DragDropHelper } from "../dragdrophelper";
 import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
 import "./question.scss";
 
@@ -57,40 +57,26 @@ export class QuestionAdornerViewModel extends Base {
     return "Drop questions here";
   }
 
-  private get dragDropHelper(): DragDropHelper<SurveyModel> {
+  private get dragDropHelper(): DragDropHelper {
     return this.creator.dragDropHelper;
-  }
-
-  private get dragDropHelper2(): DragDropHelper2 {
-    return this.creator.dragDropHelper2;
-  }
-
-  public get showDragOverFeedbackAbove(): boolean {
-    return this.dragDropHelper.showDragOverFeedbackAbove(this.surveyElement);
-  }
-  public get showDragOverFeedbackBelow(): boolean {
-    return this.dragDropHelper.showDragOverFeedbackBelow(this.surveyElement);
-  }
-  public get dragOverFeedback(): SurveyElementTemplateData {
-    return this.dragDropHelper.dragOverFeedback;
   }
 
   dragStart(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     setTimeout(() => (model.isDragged = true), 1);
-    return model.dragDropHelper2.startDragQuestion(event, model.surveyElement);
+    return model.dragDropHelper.startDragQuestion(event, model.surveyElement);
     // return model.dragDropHelper.dragStart(model.surveyElement, event);
   }
   dragOver(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper2.doDragDropOver(event, model.surveyElement, true);
+    model.dragDropHelper.doDragDropOver(event, model.surveyElement, true);
     // model.dragDropHelper.dragOver(model.surveyElement, event);
   }
   drop(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper2.doDrop(event);
+    model.dragDropHelper.doDrop(event);
     // model.dragDropHelper.drop(model.surveyElement, event);
   }
   dragEnd(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     setTimeout(() => (model.isDragged = false), 1);
-    model.dragDropHelper2.end();
+    model.dragDropHelper.end();
     // model.dragDropHelper.dragEnd(model.surveyElement, event);
   }
 }
