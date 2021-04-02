@@ -91,7 +91,7 @@ export class CreatorBase<T extends SurveyModel>
 
   @property() surveyValue: T;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
-  public dragDropHelper: DragDropHelper<T>;
+  public dragDropHelper: DragDropHelper;
 
   @property() selection: Base;
 
@@ -624,7 +624,7 @@ export class CreatorBase<T extends SurveyModel>
         ? this.options.questionTypes
         : null
     );
-    this.dragDropHelper = new DragDropHelper<T>(this);
+    this.dragDropHelper = new DragDropHelper(this, ()=>{});
     this.propertyGrid = new PropertyGridModel(
       (this.survey as any) as Base,
       this
