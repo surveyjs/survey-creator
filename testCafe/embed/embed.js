@@ -1,4 +1,4 @@
-import { frameworks, url, initCreator } from "../helper";
+import { getFrameworks, url, initCreator } from "../helper";
 import { Selector } from "testcafe";
 const title = "Embed tab";
 
@@ -6,7 +6,7 @@ const options = {
     showEmbededSurveyTab: true
 };
 
-frameworks.forEach((framework) => {
+getFrameworks(process.argv).forEach((framework) => {
     fixture`${framework} ${title}`.page`${url}${framework}.html`.beforeEach(
         async (t) => {
             await initCreator(framework, undefined, options);
