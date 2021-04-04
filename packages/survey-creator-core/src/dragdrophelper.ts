@@ -290,10 +290,9 @@ export class DragDropHelper {
   }
   public startDragToolboxItem(
     event: IPortableDragEvent,
-    elementName: string,
-    elementJson: any
+    json: any
   ) {
-    this.prepareData(event, elementName, elementJson, null);
+    this.prepareData(event, json.name, json, null);
     event.cancelBubble = true;
   }
 

@@ -1,4 +1,4 @@
-import { frameworks, url, initCreator } from "../helper";
+import { getFrameworks, url, initCreator } from "../helper";
 import { Selector } from "testcafe";
 const title = "JSON tab";
 
@@ -12,7 +12,7 @@ const json = {
     ]
 };
 
-frameworks.forEach((framework) => {
+getFrameworks(process.argv).forEach((framework) => {
     fixture`${framework} ${title}`.page`${url}${framework}.html`.beforeEach(
         async (t) => {
             await initCreator(framework, json);
