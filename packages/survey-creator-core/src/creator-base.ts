@@ -11,6 +11,7 @@ import {
   property,
   propertyArray,
   IElement,
+  Serializer,
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -93,8 +94,7 @@ export class CreatorBase<T extends SurveyModel>
   @propertyArray() toolbarItems: Array<IActionBarItem>;
   public dragDropHelper: DragDropHelper;
 
-  @property() selection: Base;
-
+  private selectedElementValue: Base;
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private newQuestionChangedNames: {};
@@ -624,15 +624,11 @@ export class CreatorBase<T extends SurveyModel>
         ? this.options.questionTypes
         : null
     );
-    this.dragDropHelper = new DragDropHelper(this, ()=>{});
+    this.dragDropHelper = new DragDropHelper(this, () => {});
     this.propertyGrid = new PropertyGridModel(
       (this.survey as any) as Base,
       this
     );
-  }
-  public setPropertyValue(name: string, val: any) {
-    val = this.propertyValueChanging(name, val);
-    super.setPropertyValue(name, val);
   }
   public get undoRedoManager(): UndoRedoManager {
     return this.undoRedoManagerValue;
@@ -1371,7 +1367,7 @@ export class CreatorBase<T extends SurveyModel>
    * Get or set the current selected object in the Creator. It can be a question, panel, page or survey itself.
    */
   public get selectedElement(): Base {
-    return this.selection;
+    return this.selectedElementValue;
   }
   public set selectedElement(val: Base) {
     this.selectElement(val);
@@ -1387,7 +1383,7 @@ export class CreatorBase<T extends SurveyModel>
    * Delete a currently selected element in the survey. It can be a question, a panel or a page.
    */
   public deleteCurrentElement() {
-    this.deleteObject(this.selection);
+    this.deleteObject(this.selectedElement);
   }
   /**
    * Delete an element in the survey. It can be a question, a panel or a page.
@@ -1453,12 +1449,32 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public isElementSelected(element: Base): boolean {
-    return element === this.selection;
+    return element.getPropertyValue("isSelectedInDesigner");
   }
 
   public selectElement(element: any) {
-    this.selection = element;
+    var oldValue = this.selectedElement;
+    this.selectedElementValue = this.onSelectingElement(element);
+    if (oldValue !== this.selectedElementValue) {
+      if (!!oldValue && !oldValue.isDisposed) {
+        oldValue.setPropertyValue("isSelectedInDesigner", false);
+      }
+      if (!!this.selectedElementValue) {
+        this.selectedElementValue.setPropertyValue(
+          "isSelectedInDesigner",
+          true
+        );
+      }
+      this.selectionChanged(this.selectedElement);
+    }
   }
+
+  private onSelectingElement(val: Base): Base {
+    var options = { newSelectedElement: val };
+    this.onSelectedElementChanging.fire(this, options);
+    return options.newSelectedElement;
+  }
+
   /**
    * Collapse certain property editor tab (category) in properties panel/grid
    * name - tab category name
@@ -1556,20 +1572,6 @@ export class CreatorBase<T extends SurveyModel>
     return isValid && options.errors.length == 0;
     */
     return isValid;
-  }
-  private propertyValueChanging(name: string, val: any): any {
-    if (name == "selection") {
-      var options = { newSelectedElement: val };
-      this.onSelectedElementChanging.fire(this, options);
-      return options.newSelectedElement;
-    }
-    return val;
-  }
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
-    super.onPropertyValueChanged(name, oldValue, newValue);
-    if (name == "selection") {
-      this.selectionChanged(newValue);
-    }
   }
   private selectionChanged(element: Base) {
     if (
@@ -2059,7 +2061,7 @@ export class PagesController<T extends SurveyModel> extends Base {
   }
   public set currentPage(value: PageModel) {
     (<any>this.survey).currentPage = value;
-    this.creator.selection = value;
+    this.creator.selectedElement = value;
   }
   /*
   @property({
