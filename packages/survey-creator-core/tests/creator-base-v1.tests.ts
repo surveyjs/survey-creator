@@ -553,6 +553,7 @@ test("The onModified event is called on property changed", () => {
     creator.propertyGrid.survey.getQuestionByName("choices")
   );
   counter = 0;
+  var rows = choicesQuestion.visibleRows;
   choicesQuestion.addRow();
   expect(counter).toEqual(1);
 

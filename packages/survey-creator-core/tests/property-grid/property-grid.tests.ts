@@ -852,6 +852,7 @@ test("options.onItemValueAddedCallback", () => {
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
+  var rows = choicesQuestion.visibleRows;
   choicesQuestion.addRow();
   expect(question.choices).toHaveLength(4);
   expect(question.choices[3].text).toEqual("dropdown:choices,4,4");
@@ -873,6 +874,7 @@ test("options.onMatrixDropdownColumnAddedCallback", () => {
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
+  var rows = columnsQuestion.visibleRows;
   columnsQuestion.addRow();
   expect(question.columns[3].title).toEqual("q1:4");
 });

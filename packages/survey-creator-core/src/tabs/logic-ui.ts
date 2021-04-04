@@ -31,6 +31,11 @@ export class SurveyLogicUI extends SurveyLogic {
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
+    this.itemsSurvey.onMatrixCellCreated.add((sender, options) => {
+      var q = options.cellQuestion;
+      q.ignoreHtmlProgressing = true;
+      q.html = q.value;
+    });
     this.itemsSurvey.onMatrixRowRemoved.add((sender, options) => {
       this.removeItem(this.items[options.rowIndex]);
     });
@@ -170,14 +175,6 @@ export class SurveyLogicUI extends SurveyLogic {
     }
     matrix.rowCount = data.length;
     matrix.value = data;
-    for (var i = 0; i < matrix.visibleRows.length; i++) {
-      var row = matrix.visibleRows[i];
-      for (var j = 0; j < row.cells.length; j++) {
-        var cell = row.cells[j];
-        if (!cell.question || cell.question.getType() !== "html") continue;
-        cell.question.html = cell.question.value;
-      }
-    }
   }
   private setupToolbarItems() {
     this.toolbarItems.push({

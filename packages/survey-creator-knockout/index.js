@@ -2,7 +2,7 @@ if (!window["%hammerhead%"]) {
   // SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
 
   Survey.StylesManager.applyTheme("modern");
-  //Survey.settings.lazyRowsRendering = true;
+  Survey.settings.lazyRowsRendering = true;
   let options = {
     // showTestSurveyTab: false,
     // showJSONEditorTab: false
@@ -12864,5 +12864,4 @@ if (!window["%hammerhead%"]) {
     counter++;
   }
   window.creator.JSON = json3;
-
 }

@@ -766,8 +766,8 @@ test("SurveyNestedPropertyEditorItem", () => {
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  expect(choicesQuestion.hasErrors()).toBeTruthy();
   var rows = choicesQuestion.visibleRows;
+  expect(choicesQuestion.hasErrors()).toBeTruthy();
   expect(rows).toHaveLength(1);
   rows[0].cells[0].value = "item1";
   expect(question.choices[0].value).toEqual("item1");
@@ -1062,6 +1062,7 @@ test("SurveyPropertyPagesEditor add page", () => {
   var pagesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("pages")
   );
+  var rows = pagesQuestion.visibleRows;
   pagesQuestion.addRow();
   expect(survey.pages).toHaveLength(2);
   expect(survey.pages[1].name).toEqual("p2");
@@ -1463,6 +1464,7 @@ test("automicatilly create name for new item in SurveyPropertyTextItemsEditor", 
   var itemsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("items")
   );
+  var rows = itemsQuestion.visibleRows;
   itemsQuestion.addRow();
   expect(question.items).toHaveLength(3);
   expect(question.items[2].name).toEqual("text3");
