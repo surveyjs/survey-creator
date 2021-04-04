@@ -187,7 +187,8 @@ export var itemAdorner = {
       !!model.choices &&
       typeof model.getType === "function" &&
       model.getType() !== "imagepicker" &&
-      !model.choicesFromQuestion && !model.rows
+      !model.choicesFromQuestion &&
+      !model.rows
       ? "item_editable"
       : "";
   },
@@ -245,7 +246,7 @@ export var createAddItemHandler = (
 ) => () => {
   var nextValue = null;
   var values = question.choices.map(function (item) {
-    return item.itemValue;
+    return item.value;
   });
   var itemText = Survey.surveyLocalization.getString("choices_Item");
   nextValue = getNextValue(itemText, values);
