@@ -13,6 +13,7 @@
     "build": "lerna run build",
     "test": "lerna run test",
     "testcafe": "lerna run testcafe",
+    "testcafe:ci": "lerna run testcafe:ci",
     "testcafe:file": "lerna run testcafe:file"
   },
   "devDependencies": {
