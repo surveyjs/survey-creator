@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.40](https://github.com/surveyjs/survey-creator/compare/v1.8.39...v1.8.40) (2021-04-05)
+
+
+### Bug Fixes
+
+* defaultValue property editor doesn't work correctly for matrix dropdown if cellType is set [#1127](https://github.com/surveyjs/survey-creator/issues/1127) ([a56f900](https://github.com/surveyjs/survey-creator/commit/a56f9001a88645a2e31c68c503cf3d26542042d6))
+* Next value functionality stops working for choices, matrix dropdown rows and rates [#1131](https://github.com/surveyjs/survey-creator/issues/1131) ([1e9b47e](https://github.com/surveyjs/survey-creator/commit/1e9b47ec6da4a9a7c069f287ffb4c8558a804ff9))
+
 ### [1.8.39](https://github.com/surveyjs/survey-creator/compare/v1.8.38...v1.8.39) (2021-03-31)
 
 ### [1.8.38](https://github.com/surveyjs/survey-creator/compare/v1.8.37...v1.8.38) (2021-03-29)
