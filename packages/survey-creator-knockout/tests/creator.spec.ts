@@ -15,3 +15,7 @@ test("getObjectDisplayName", () => {
   expect(creator.getObjectDisplayName(obj2, "test")).toEqual("title");
   // expect(creator.getObjectTitle(creator.survey.pages[0])).toEqual("page1");
 });
+
+// test("default", () => {
+//   expect(true).toEqual(true);
+// });

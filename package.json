@@ -12,8 +12,9 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "test": "lerna run test",
-    "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome testCafe/ --selector-timeout 1500 --reporter minimal\"",
-    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome testCafe/json/json.js --reporter minimal --debug-mode\""
+    "testcafe": "lerna run testcafe",
+    "testcafe:ci": "lerna run testcafe:ci",
+    "testcafe:file": "lerna run testcafe:file"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
