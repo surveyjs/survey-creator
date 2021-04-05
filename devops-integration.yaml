@@ -37,12 +37,12 @@ steps:
     $env:GIT_REDIRECT_STDERR = '2>&1'
     git config --global user.email "kurmanov.work@gmail.com"
     git config --global user.name "dmitrykurmanov"
-  displayName: 'set up Git config'
+  displayName: 'Set up git config'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm install
-  displayName: 'npm install'
+  displayName: 'Install npm'
   
 - task: DownloadBuildArtifacts@0
   inputs:
@@ -76,12 +76,12 @@ steps:
     Contents: 'version.txt'
     TargetFolder: '$(Build.SourcesDirectory)/'
     OverWrite: true
-  displayName: 'Copy Build Artifact - SurveyJSVersion File'
+  displayName: 'Copy build artifact - SurveyJSVersion File'
 
 - powershell: |
     $version = Get-Content $(Build.SourcesDirectory)/version.txt
     Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
-  displayName: 'setup SurveyJSVersion variable from SurveyJSVersionFile'
+  displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
 
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
@@ -111,17 +111,17 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
     npm install
-  displayName: 'npm install'
+  displayName: 'Install npm'
   
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
     npm run build
-  displayName: 'build creator V2 Core'
+  displayName: 'Build creator v2 core'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
     npm run test
-  displayName: 'test creator V2 Core'
+  displayName: 'Unit tests creator v2 core'
   
 - task: CopyFiles@2
   inputs:
@@ -138,7 +138,7 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm install
-  displayName: 'npm install'
+  displayName: 'Install npm'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
@@ -168,17 +168,17 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     ls
-  displayName: 'pre-debug survey-creator-react build'
+  displayName: 'Pre-debug survey-creator-react build'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm run build
-  displayName: 'build creator V2 React'
+  displayName: 'Build creator v2 react'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm run test
-  displayName: 'test creator V2 React'
+  displayName: 'Unit tests creator v2 react'
 
 - task: CopyFiles@2
   inputs:
@@ -196,17 +196,17 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm install
-  displayName: 'npm install'
+  displayName: 'Install npm'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run build
-  displayName: 'build creator V2 Knockout'
+  displayName: 'Build creator v2 knockout'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run test
-  displayName: 'test creator V2 Knockout'
+  displayName: 'Unit tests creator v2 knockout'
   
 - task: CopyFiles@2
   inputs:
@@ -223,37 +223,37 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run build_prod
-  displayName: 'build_prod'
+  displayName: 'Build prod'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run test_ci
-  displayName: 'unit tests'
+  displayName: 'Unit tests'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run testcafe_ci
-  displayName: 'functional tests'
+  displayName: 'Functional tests'
 
 - script: |
     mkdir $(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run doc_gen
-  displayName: 'generate docs'
+  displayName: 'Generate docs'
 
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
     TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
     CleanTargetFolder: true
-  displayName: 'copy root docs to the local surveyjs/service repo'
+  displayName: 'Copy root docs to the local surveyjs/service repo'
 
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs'
     TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
     CleanTargetFolder: false
-  displayName: 'copy generated docs to the local surveyjs/service repo'
+  displayName: 'Copy generated docs to the local surveyjs/service repo'
 
 # read about the problem with git output ($env:GIT_REDIRECT_STDERR = '2>&1') :
 # https://github.com/microsoft/azure-pipelines-yaml/issues/248
@@ -268,7 +268,7 @@ steps:
     git commit -m "[skip ci] Updated survey-creator docs"
     git pull origin master
     git push origin master
-  displayName: 'git surveyjs/service push updated docs'
+  displayName: 'Git surveyjs/service push updated docs'
 
 - task: CopyFiles@2
   inputs:
