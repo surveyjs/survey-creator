@@ -180,6 +180,11 @@ steps:
     npm run test
   displayName: 'Unit tests creator v2 react'
 
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run testcafe:ci
+  displayName: 'Functional tests creator v2 react'
+
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build'
@@ -207,7 +212,12 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run test
   displayName: 'Unit tests creator v2 knockout'
-  
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm run testcafe:ci
+  displayName: 'Functional tests creator v2 knockout'
+
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/build'
