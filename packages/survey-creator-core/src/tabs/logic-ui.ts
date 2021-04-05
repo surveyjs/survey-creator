@@ -173,8 +173,8 @@ export class SurveyLogicUI extends SurveyLogic {
         actions: this.items[i].actionsText,
       });
     }
-    matrix.rowCount = data.length;
     matrix.value = data;
+    matrix.rowCount = data.length;
   }
   private setupToolbarItems() {
     this.toolbarItems.push({
