@@ -10,9 +10,9 @@ const template = require("./page.html");
 ko.components.register("svc-page", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const creator = params.creator;
+      const creator: SurveyCreator = params.creator;
       const scrollSubscription = ko.computed(() => {
-        if (creator.isElementSelected(params.page)) {
+        if (creator.isElementSelected(ko.unwrap(params.page))) {
           componentInfo.element.scrollIntoView();
         }
       });
