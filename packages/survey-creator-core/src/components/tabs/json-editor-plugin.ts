@@ -10,7 +10,9 @@ export interface IJsonEditorModel {
   readOnly: boolean;
 }
 
-export abstract class JsonEditorBaseModel extends Base implements IJsonEditorModel {
+export abstract class JsonEditorBaseModel
+  extends Base
+  implements IJsonEditorModel {
   public isJSONChanged: boolean = false;
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
@@ -46,7 +48,8 @@ export abstract class JsonEditorBaseModel extends Base implements IJsonEditorMod
   }
 }
 
-export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel> implements ICreatorPlugin {
+export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel>
+  implements ICreatorPlugin {
   public model: TModel;
   constructor(private creator: CreatorBase<SurveyModel>) {}
   public activate(): void {
@@ -60,7 +63,7 @@ export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel> i
       return false;
     }
     if (!this.model.readOnly && this.model.isJSONChanged) {
-      this.creator._dummySetText(this.model.text);
+      this.creator.text = this.model.text;
     }
     return true;
   }
