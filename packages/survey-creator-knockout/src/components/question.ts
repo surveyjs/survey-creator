@@ -58,7 +58,7 @@ class KnockoutPanelAdornerViewModel extends KnockoutQuestionAdornerViewModel {
 
   get isEmptyElement(): boolean {
     const panel = (this.surveyElement as any) as PanelModelBase;
-    return !panel.elements || panel.elements.length <= 0;
+    return !panel.rows || panel.rows.length <= 0;
   }
 }
 

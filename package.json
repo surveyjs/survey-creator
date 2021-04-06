@@ -17,16 +17,8 @@
     "testcafe:file": "lerna run testcafe:file"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0",
-    "http-server": "^0.12.3",
     "husky": "^4.3.8",
-    "lerna": "^3.22.1",
-    "survey-core": "../survey-library/build/survey-core",
-    "survey-creator-knockout": "packages/survey-creator-knockout/build",
-    "survey-creator-react": "packages/survey-creator-react/build",
-    "survey-knockout-ui": "../survey-library/build/survey-knockout-ui",
-    "survey-react-ui": "../survey-library/build/survey-react-ui",
-    "testcafe": "^1.9.2"
+    "lerna": "^3.22.1"
   },
   "dependencies": {},
   "husky": {

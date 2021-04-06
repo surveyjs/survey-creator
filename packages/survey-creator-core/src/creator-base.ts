@@ -1329,7 +1329,7 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
-  protected createNewElement(json: any): IElement {
+  public createNewElement(json: any): IElement {
     var newElement = Survey.Serializer.createClass(json["type"]);
     new Survey.JsonObject().toObject(json, newElement);
     this.setNewNames(newElement);

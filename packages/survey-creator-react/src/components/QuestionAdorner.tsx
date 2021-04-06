@@ -50,7 +50,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
           onDragEnd={(e) =>
             this.model.dragEnd(this.model, new ReactDragEvent(e))
           }
-          onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
+          // onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
           draggable={this.model.isDraggable}
         >
           {this.renderPanelPlaceholder()}

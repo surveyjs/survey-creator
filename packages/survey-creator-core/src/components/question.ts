@@ -63,11 +63,13 @@ export class QuestionAdornerViewModel extends Base {
 
   dragStart(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     setTimeout(() => (model.isDragged = true), 1);
-    return model.dragDropHelper.startDragQuestion(event, model.surveyElement);
+    const sourceElement = model.surveyElement;
+    return model.dragDropHelper.startDragQuestion(event, sourceElement);
     // return model.dragDropHelper.dragStart(model.surveyElement, event);
   }
   dragOver(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper.doDragDropOver(event, model.surveyElement, true);
+    const draggedOverElement = model.surveyElement;
+    model.dragDropHelper.doDragDropOver(event, draggedOverElement, true);
     // model.dragDropHelper.dragOver(model.surveyElement, event);
   }
   drop(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
