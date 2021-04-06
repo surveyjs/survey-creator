@@ -199,6 +199,7 @@ export var itemAdorner = {
       var decoration = document.createElement("span");
       decoration.className = "svda-adorner-root";
       var itemValue = ko.dataFor(elements[i]);
+      if(!itemValue) continue;
       var propertyName = itemAdorner.inplaceEditForValues ? "value" : "text";
       var target = itemValue;
       if (itemValue === model["selectAllItem"]) {
@@ -345,6 +346,7 @@ export var itemDraggableAdorner = {
     }
     for (var i = 0; i < elements.length; i++) {
       var itemValue = ko.dataFor(elements[i]);
+      if(!itemValue) continue;
       if (
         itemValue === model["selectAllItemValue"] ||
         itemValue === model["noneItemValue"] ||
