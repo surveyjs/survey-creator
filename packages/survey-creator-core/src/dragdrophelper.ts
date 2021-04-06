@@ -310,7 +310,7 @@ export class DragDropHelper {
     if (!event) {
       return;
     }
-    var bottomInfo = this.isBottom(event);
+    var bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
     if (draggedOverElement.isPage && draggedOverElement.elements.length > 0) {
       var lastEl = draggedOverElement.elements[draggedOverElement.elements.length - 1];
       if (!this.isBottomThanElement(event, lastEl)) return;
@@ -331,7 +331,7 @@ export class DragDropHelper {
       if (!event) {
         return true;
       }
-      var bottomInfo = this.isBottom(event);
+      var bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
       return this.ddTarget.moveTo(
         element,
         bottomInfo.isBottom,
@@ -399,20 +399,36 @@ export class DragDropHelper {
     }
   }
 
-  private isBottom(event: IPortableDragEvent): any {
-    //event = this.getEvent(event);
-    var height = <number>event.currentTarget["clientHeight"];
-    var y = event.offsetY;
-    if (event.hasOwnProperty("layerX")) {
-      y = event["layerY"] - <number>event.currentTarget["offsetTop"];
+  private isAtLowerPartOfCurrentTarget(event: IPortableDragEvent): any {
+    var target = event.currentTarget;
+    if (!target["getBoundingClientRect"]) {
+      return true;
     }
+    const bounds: DOMRect = (<any>target).getBoundingClientRect();
+    const middle = (bounds.bottom + bounds.top) / 2;
+
     return {
-      isBottom: y > height / 2,
+      isBottom: event.clientY >= middle,
       isEdge:
-        y <= DragDropHelper.edgeHeight ||
-        height - y <= DragDropHelper.edgeHeight,
+        event.clientY - bounds.bottom <= DragDropHelper.edgeHeight ||
+        bounds.top - event.clientY <= DragDropHelper.edgeHeight,
     };
   }
+
+  // private isBottom(event: IPortableDragEvent): any {
+  //   //event = this.getEvent(event);
+  //   var height = <number>event.currentTarget["clientHeight"];
+  //   var y = event.offsetY;
+  //   if (event.hasOwnProperty("layerX")) {
+  //     y = event["layerY"] - <number>event.currentTarget["offsetTop"];
+  //   }
+  //   return {
+  //     isBottom: y > height / 2,
+  //     isEdge:
+  //       y <= DragDropHelper.edgeHeight ||
+  //       height - y <= DragDropHelper.edgeHeight,
+  //   };
+  // }
 
   private isBottomThanElement(event: IPortableDragEvent, lastEl: any): boolean {
     var el = lastEl.renderedElement;
