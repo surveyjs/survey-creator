@@ -55,7 +55,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     };
     item.active = () => page === this.pagesController.currentPage;
     item.action = () => {
-      this.pagesController.currentPage = page;
+      this.pagesController.selectPage(page);
     };
     item.data = page;
     return new ActionBarItem(item);

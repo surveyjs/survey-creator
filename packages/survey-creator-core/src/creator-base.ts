@@ -928,16 +928,6 @@ export class CreatorBase<T extends SurveyModel>
   public get survey(): T {
     return this.surveyValue;
   }
-
-  //TODO: refactor this method and remove
-  public _dummySetText(text: string): void {
-    //should work with JSON5
-    //var textWorker = new SurveyTextWorker(this.text);
-    //this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
-
-    //works only with JSON
-    this.initSurveyWithJSON(JSON.parse(text), true);
-  }
   private existingPages: {};
   protected initSurveyWithJSON(json: any, clearState: boolean) {
     this.existingPages = {};
@@ -2062,21 +2052,15 @@ export class PagesController<T extends SurveyModel> extends Base {
   }
   public set currentPage(value: PageModel) {
     (<any>this.survey).currentPage = value;
-    this.creator.selectedElement = value;
   }
-  /*
-  @property({
-    onSet: (val, target) => {
-      target.survey.currentPage = val;
-    },
-  })
-  currentPage: PageModel;
-  */
+  public selectPage(value: PageModel) {
+    this.currentPage = value;
+    this.creator.selectElement(value);
+  }
   public addPage(): PageModel {
     const name: string = SurveyHelper.getNewPageName(this.survey.pages);
     const page: PageModel = this.survey.addNewPage(name);
-    //this.selectedElement = page;
-    this.currentPage = page;
+    this.selectPage(page);
     return page;
   }
   public deletePage() {}

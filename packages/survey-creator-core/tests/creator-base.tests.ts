@@ -36,7 +36,6 @@ test("options.questionTypes", () => {
   creator.JSON = {
     elements: [{ type: "text", name: "q1" }],
   };
-  creator.selectElement(creator.survey);
   expect(creator.selectedElementName).toEqual("survey");
   expect(creator.isElementSelected(creator.survey)).toBeTruthy();
   var question = creator.survey.getAllQuestions()[0];
