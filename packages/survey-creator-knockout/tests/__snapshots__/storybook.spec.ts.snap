@@ -1745,8 +1745,6 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                   
   
                   <!-- ko template: { name: 'survey-page', data: page } -->
-                  
-  
                   <!-- /ko -->
                   
   
@@ -3375,8 +3373,6 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           
   
           <!-- ko template: { name: 'survey-page', data: page } -->
-          
-  
           <!-- /ko -->
           
   
