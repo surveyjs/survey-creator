@@ -1808,6 +1808,46 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           </svc-page-navigator>
           
 
+          <div
+            class="svc-flex-column"
+            style="width: auto; border-left: 1px solid lightgray;"
+          >
+            
+  
+            <svc-property-panel
+              params="title: 'Question Properties', model: creator"
+            >
+              <sv-action-bar
+                params="items: toolbarItems"
+              />
+              
+
+              <div
+                class="svc-property-panel__header"
+                data-bind="text: title"
+              >
+                Question Properties
+              </div>
+              
+
+              <div
+                class="svc-property-panel__expander"
+              >
+                
+  
+                <!-- ko template: { name: 'survey-content', data: survey  } -->
+                <!-- /ko -->
+                
+
+              </div>
+              
+
+            </svc-property-panel>
+            
+
+          </div>
+          
+
           <!-- /ko -->
           
       
@@ -1978,46 +2018,6 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       
   
     </div>
-    
-
-  </div>
-  
-
-  <div
-    class="svc-flex-column"
-    style="width: auto; border-left: 1px solid lightgray;"
-  >
-    
-  
-    <svc-property-panel
-      params="title: 'Question Properties', model: creator"
-    >
-      <sv-action-bar
-        params="items: toolbarItems"
-      />
-      
-
-      <div
-        class="svc-property-panel__header"
-        data-bind="text: title"
-      >
-        Question Properties
-      </div>
-      
-
-      <div
-        class="svc-property-panel__expander"
-      >
-        
-  
-        <!-- ko template: { name: 'survey-content', data: survey  } -->
-        <!-- /ko -->
-        
-
-      </div>
-      
-
-    </svc-property-panel>
     
 
   </div>
@@ -3434,6 +3434,46 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
 
   </svc-page-navigator>
+  
+
+  <div
+    class="svc-flex-column"
+    style="width: auto; border-left: 1px solid lightgray;"
+  >
+    
+  
+    <svc-property-panel
+      params="title: 'Question Properties', model: creator"
+    >
+      <sv-action-bar
+        params="items: toolbarItems"
+      />
+      
+
+      <div
+        class="svc-property-panel__header"
+        data-bind="text: title"
+      >
+        Question Properties
+      </div>
+      
+
+      <div
+        class="svc-property-panel__expander"
+      >
+        
+  
+        <!-- ko template: { name: 'survey-content', data: survey  } -->
+        <!-- /ko -->
+        
+
+      </div>
+      
+
+    </svc-property-panel>
+    
+
+  </div>
   
 
 </svc-tab-designer>

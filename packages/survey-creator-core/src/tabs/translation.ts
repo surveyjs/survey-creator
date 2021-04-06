@@ -937,7 +937,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       data: this,
       action: () => {
         creator.makeNewViewActive("translation");
-        this.activate();
       },
       active: () => creator.viewType === "translation",
     });

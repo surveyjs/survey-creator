@@ -260,7 +260,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
       data: this,
       action: () => {
         creator.makeNewViewActive("logic");
-        this.activate();
       },
       active: () => creator.viewType === "logic",
     });
