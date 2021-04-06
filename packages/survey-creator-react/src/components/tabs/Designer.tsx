@@ -5,6 +5,7 @@ import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
 import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
+import PropertyGridComponent from "../../PropertyGrid";
 
 interface ITabDesignerComponentProps {
   creator: CreatorBase<SurveyModel>;
@@ -57,7 +58,7 @@ export class TabDesignerComponent extends SurveyElementBase<
         creator={creator}
       ></CreatorSurveyPageComponent>
     );
-
+    const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
       <>
         <SurveyCreatorToolbox
@@ -72,6 +73,12 @@ export class TabDesignerComponent extends SurveyElementBase<
           creator={creator}
           pages={creator.pagesController.pages}
         ></SurveyPageNavigator>
+        <div className="svc-flex-column" style={style}>
+          <PropertyGridComponent
+            model={creator}
+            title="Question Properties"
+          ></PropertyGridComponent>
+        </div>
       </>
     );
     /*

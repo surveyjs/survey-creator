@@ -2,7 +2,10 @@ import { SurveyModel, property } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { SurveyTextWorker } from "../../textWorker";
-import { JsonEditorBaseModel, TabJsonEditorBasePlugin } from "./json-editor-plugin";
+import {
+  JsonEditorBaseModel,
+  TabJsonEditorBasePlugin,
+} from "./json-editor-plugin";
 import "./json-editor-ace.scss";
 
 export class AceJsonEditorModel extends JsonEditorBaseModel {
@@ -84,7 +87,9 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   }
 }
 
-export class TabJsonEditorAcePlugin extends TabJsonEditorBasePlugin<AceJsonEditorModel> implements ICreatorPlugin {
+export class TabJsonEditorAcePlugin
+  extends TabJsonEditorBasePlugin<AceJsonEditorModel>
+  implements ICreatorPlugin {
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
     this.model = new AceJsonEditorModel(creator);
@@ -95,7 +100,6 @@ export class TabJsonEditorAcePlugin extends TabJsonEditorBasePlugin<AceJsonEdito
       data: this,
       action: () => {
         creator.makeNewViewActive("editor");
-        this.activate();
       },
       active: () => creator.viewType === "editor",
     });

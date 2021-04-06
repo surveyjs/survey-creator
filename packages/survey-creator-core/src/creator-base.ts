@@ -584,19 +584,37 @@ export class CreatorBase<T extends SurveyModel>
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
   }
-
+  /**
+   * Get/set the active tab.
+   * The following values are available: "designer", "editor", "test", "embed", "logic" and "translation".
+   * Please note, not all tabs are visible.
+   */
+  public get activeTab(): string {
+    return this.viewType;
+  }
+  public set activeTab(val: string) {
+    this.makeNewViewActive(val);
+  }
   /**
    * Change the active view/tab. It will return false if it can't change the current tab.
-   * @param viewName name of new active view (tab). The following values are available: "designer", "editor", "test", "embed" and "translation".
+   * @param viewName name of new active view (tab). The following values are available: "designer", "editor", "test", "embed", "logic" and "translation".
    */
   public makeNewViewActive(viewName: string): boolean {
-    if (!this.canSwitchViewType(viewName)) return false;
+    if (viewName == this.viewType) return false;
+    if (!this.canSwitchViewType()) return false;
     this.viewType = viewName;
+    this.activatePlugin(viewName);
     return true;
   }
-  private canSwitchViewType(newType: string): boolean {
+  private canSwitchViewType(): boolean {
     const plugin: ICreatorPlugin = this.plugins[this.viewType];
     return !plugin || !plugin.deactivate || plugin.deactivate();
+  }
+  private activatePlugin(newType: string) {
+    const plugin: ICreatorPlugin = this.plugins[newType];
+    if (!!plugin) {
+      plugin.activate();
+    }
   }
 
   public static defaultNewSurveyText: string =
@@ -613,7 +631,6 @@ export class CreatorBase<T extends SurveyModel>
     this._pagesController = new PagesController<T>(this);
     this.setOptions(options);
     this.initTabs();
-    this.initTabsPlugin();
     this.initToolbar();
     this.initSurveyWithJSON(
       JSON.parse(CreatorBase.defaultNewSurveyText),
@@ -655,29 +672,8 @@ export class CreatorBase<T extends SurveyModel>
         active: () => this.viewType === "designer",
       });
     }
-    /*
-    if (this.showLogicTab) {
-      tabs.push({
-        id: "logic",
-        title: this.getLocString("ed.logic"),
-        component: "svc-tab-logic",
-        data: this,
-        action: () => this.makeNewViewActive("logic"),
-        active: () => this.viewType === "logic",
-      });
-    }
-    if (this.showTranslationTab) {
-      tabs.push({
-        id: "translation",
-        title: this.getLocString("ed.translation"),
-        component: "svc-tab-translation",
-        data: this,
-        action: () => this.makeNewViewActive("translation"),
-        active: () => this.viewType === "translation",
-      });
-    }
-    */
     this.tabs = tabs;
+    this.initTabsPlugin();
     if (this.tabs.length > 0) {
       this.viewType = this.tabs[0].id;
     }

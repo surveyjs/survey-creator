@@ -44,3 +44,14 @@ test("options.questionTypes", () => {
   expect(creator.isElementSelected(question)).toBeTruthy();
   expect(creator.isElementSelected(creator.survey)).toBeFalsy();
 });
+test("do not deactivate/activate tabs on selecting the active tab", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }],
+  };
+  expect(creator.activeTab).toEqual("designer");
+  expect(creator.makeNewViewActive("test")).toBeTruthy();
+  creator.activeTab = "test";
+  expect(creator.makeNewViewActive("test")).toBeFalsy();
+  creator.activeTab = "test";
+});

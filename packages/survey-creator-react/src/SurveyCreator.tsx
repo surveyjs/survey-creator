@@ -2,7 +2,6 @@ import React from "react";
 import { CSSProperties } from "react";
 
 import TabbedMenuComponent from "./TabbedMenuComponent";
-import PropertyGridComponent from "./PropertyGrid";
 import {
   Base,
   IActionBarItem,
@@ -47,7 +46,6 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   render() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     //AM: width unrecognized by react
-    const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
       <div className="svc-creator">
         <div className="svc-creator__area svc-flex-column">
@@ -60,12 +58,6 @@ export class SurveyCreatorComponent extends SurveyElementBase<
               {this.renderCreatorTabs()}
             </div>
           </div>
-        </div>
-        <div className="svc-flex-column" style={style}>
-          <PropertyGridComponent
-            model={creator}
-            title="Question Properties"
-          ></PropertyGridComponent>
         </div>
       </div>
     );
