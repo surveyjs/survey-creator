@@ -243,7 +243,8 @@ export class DragDropTargetElement {
     isBottom: boolean,
     isEdge: boolean = false
   ): boolean {
-    this.moveToPage(destination.page);
+    const page = destination.isPage ? destination : destination.page;
+    this.moveToPage(page);
     return this.page.dragDropMoveTo(destination, isBottom, isEdge);
   }
   public doDrop(): any {
@@ -371,6 +372,7 @@ export class DragDropHelper {
         event.preventDefault();
       }
       var newElement = this.ddTarget.doDrop();
+      this.creator.selectElement(newElement);
       if (this.onModifiedCallback)
         this.onModifiedCallback({
           type: "DO_DROP",
@@ -431,8 +433,6 @@ export class DragDropHelper {
     return y > elY;
   }
   private isSamePlace(event: IPortableDragEvent, element: any): boolean {
-    return false;
-    /*
     var prev = DragDropHelper.prevEvent;
     console.log(
       "DragDropHelper::isSamePlace:element=%o, prev.element=%o",
@@ -459,7 +459,6 @@ export class DragDropHelper {
       return false;
     }
     return true;
-    */
   }
   // private getEvent(event: DragEvent): DragEvent {
   //   return event["originalEvent"] ? event["originalEvent"] : event;

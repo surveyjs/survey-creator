@@ -1249,7 +1249,7 @@ export class CreatorBase<T extends SurveyModel>
     this.updateNewElementExpressions(element);
   }
   private updateNewElementExpressions(element: Survey.ISurveyElement) {
-    var survey = new SurveyModel();
+    var survey = this.createSurvey({}, "updateNewElementExpressions");
     survey.setDesignMode(true);
     if (element.isPage) {
       survey.addPage(<Survey.PageModel>element);

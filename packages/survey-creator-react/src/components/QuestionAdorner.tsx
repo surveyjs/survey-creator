@@ -45,9 +45,8 @@ export class QuestionAdornerComponent extends SurveyElementBase<
           onDragStart={(e) =>
             this.model.dragStart(this.model, new ReactDragEvent(e))
           }
-          onDragOver={(e) => {
-            this.model.dragOver(this.model, new ReactDragEvent(e));
-          }}
+          onDragOver={(e) => this.model.dragOver(this.model, new ReactDragEvent(e))
+          }
           onDragEnd={(e) =>
             this.model.dragEnd(this.model, new ReactDragEvent(e))
           }
@@ -60,7 +59,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
             <SurveyActionBar items={this.model.actions}></SurveyActionBar>
           </div>
         </div>
-      </React.Fragment>
+      </React.Fragment >
     );
   }
   renderPanelPlaceholder(): JSX.Element {

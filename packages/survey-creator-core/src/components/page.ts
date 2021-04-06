@@ -65,7 +65,7 @@ export class PageViewModel<T extends SurveyModel> extends Base {
   }
 
   dragOver(model: PageViewModel<T>, event: IPortableDragEvent) {
-    // this.creator.dragDropHelper.dragOverPage(model.page, event);
+    this.creator.dragDropHelper.doDragDropOver(event, model.page, true);
   }
 
   // binarySearchIndexByY(questionNodes, y) {
@@ -88,6 +88,10 @@ export class PageViewModel<T extends SurveyModel> extends Base {
   //   return ~lo;
   // }
   drop(model: PageViewModel<T>, event: IPortableDragEvent) {
+    this.addGhostPage();
+    var survey: any = model.creator.survey;
+    survey.currentPage = model.page;
+    this.creator.dragDropHelper.doDrop(event);
     // const page: any = event.currentTarget;
     // const questions = page.querySelectorAll(".svc-question__content");
     // let index = this.binarySearchIndexByY(questions, event.clientY);
