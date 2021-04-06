@@ -297,12 +297,14 @@ export class DragDropHelper {
     var data = this.getData(event).text;
     return data && data.indexOf(DragDropHelper.dataStart) == 0;
   }
-  
+
   public doDragDropOver(
     event: IPortableDragEvent,
     draggedOverElement: any,
     isEdge: boolean = false
   ) {
+    event.stopPropagation();
+    // console.log("over: " + draggedOverElement.name);
     event.dataTransfer.dropEffect = "copy";
     event = this.isCanDragContinue(event, draggedOverElement);
     if (!event) {
@@ -426,20 +428,20 @@ export class DragDropHelper {
 
   private isSamePlace(event: IPortableDragEvent, draggedOverElement: any): boolean {
     var prev = DragDropHelper.prevEvent;
-    console.log(
-      "DragDropHelper::isSamePlace:element=%o, prev.element=%o",
-      draggedOverElement,
-      prev.element
-    );
-    console.log("(prev.element != element) == " + (prev.element != draggedOverElement));
-    console.log(
-      "Math.abs(event.clientX - prev.x) > 5 == " +
-        (Math.abs(event.clientX - prev.x) > 5)
-    );
-    console.log(
-      "Math.abs(event.clientY - prev.y) > 5 == " +
-        (Math.abs(event.clientY - prev.y) > 5)
-    );
+    // console.log(
+    //   "DragDropHelper::isSamePlace:element=%o, prev.element=%o",
+    //   draggedOverElement,
+    //   prev.element
+    // );
+    // console.log("(prev.element != element) == " + (prev.element != draggedOverElement));
+    // console.log(
+    //   "Math.abs(event.clientX - prev.x) > 5 == " +
+    //     (Math.abs(event.clientX - prev.x) > 5)
+    // );
+    // console.log(
+    //   "Math.abs(event.clientY - prev.y) > 5 == " +
+    //     (Math.abs(event.clientY - prev.y) > 5)
+    // );
     if (
       prev.element != draggedOverElement ||
       Math.abs(event.clientX - prev.x) > 5 ||
