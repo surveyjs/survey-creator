@@ -943,6 +943,7 @@ export class CreatorBase<T extends SurveyModel>
     this.existingPages = {};
     var survey = this.createSurvey({});
     survey.setDesignMode(true);
+    survey.lazyRendering = true;
     survey.setJsonObject(json);
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
