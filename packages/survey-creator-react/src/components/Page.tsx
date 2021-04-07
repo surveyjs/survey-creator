@@ -34,34 +34,35 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   render(): JSX.Element {
     return (
       <React.Fragment>
-      <div
-        className={"svc-page__content " + this.model.css}
-        onClick={(e) => {
-          return this.model.select(this.model, new ReactMouseEvent(e));
-        }}
-        onDragOver={(e) =>
-          this.model.dragOver(this.model, new ReactDragEvent(e))
-        }
-        onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
-        // data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
-      >
-        <SurveyPage
-          page={this.props.page}
-          survey={this.props.survey}
-          creator={this.props.creator}
-          css={this.model.css}
-        ></SurveyPage>
         <div
-          className="svc-page__add-new-question"
-          onClick={(e) =>
-            this.model.addNewQuestion(this.model, new ReactMouseEvent(e))
+          className={"svc-page__content " + this.model.css}
+          onClick={(e) => {
+            return this.model.select(this.model, new ReactMouseEvent(e));
+          }}
+          onDragOver={(e) =>
+            this.model.dragOver(this.model, new ReactDragEvent(e))
           }
-          data-bind="click: addNewQuestion"
+          onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
+          // data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
         >
-          <span className="svc-text svc-text--normal svc-text--bold">
-            {this.model.addNewQuestionText}
-          </span>
-        </div>
+          <SurveyPage
+            page={this.props.page}
+            survey={this.props.survey}
+            creator={this.props.creator}
+            css={this.model.css}
+          ></SurveyPage>
+          <div
+            className="svc-page__add-new-question"
+            onClick={(e) => {
+              e.stopPropagation();
+              this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
+            }}
+            data-bind="click: addNewQuestion"
+          >
+            <span className="svc-text svc-text--normal svc-text--bold">
+              {this.model.addNewQuestionText}
+            </span>
+          </div>
           <div className="svc-page__content-actions">
             <SurveyActionBar items={this.model.actions}></SurveyActionBar>
           </div>
