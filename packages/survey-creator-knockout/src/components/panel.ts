@@ -54,7 +54,7 @@ ko.components.register("svc-panel", {
       });
       const model = new KnockoutPanelAdornerViewModel(
         params.componentData,
-        params.templateData.data as Question,
+        params.templateData.data as PanelModel,
         params.templateData
       );
       new ImplementorBase(model);
