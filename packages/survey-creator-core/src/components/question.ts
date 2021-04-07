@@ -7,6 +7,7 @@ import {
   SurveyElementTemplateData,
   property,
   QuestionHtmlModel,
+  PanelModel,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropHelper } from "../dragdrophelper";
@@ -62,7 +63,7 @@ export class QuestionAdornerViewModel extends Base {
   }
 
   dragStart(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    setTimeout(() => (model.isDragged = true), 1);
+    // setTimeout(() => (model.isDragged = true), 1);
     const sourceElement = model.surveyElement;
     return model.dragDropHelper.startDragQuestion(event, sourceElement);
     // return model.dragDropHelper.dragStart(model.surveyElement, event);
@@ -77,7 +78,7 @@ export class QuestionAdornerViewModel extends Base {
     // model.dragDropHelper.drop(model.surveyElement, event);
   }
   dragEnd(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    setTimeout(() => (model.isDragged = false), 1);
+    // setTimeout(() => (model.isDragged = false), 1);
     model.dragDropHelper.end();
     // model.dragDropHelper.dragEnd(model.surveyElement, event);
   }

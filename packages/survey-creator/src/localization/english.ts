@@ -447,8 +447,8 @@ export var enStrings = {
     noquestions: "There is no any question in the survey.",
     createtrigger: "Please create a trigger",
     titleKeyboardAdornerTip: "Press enter button to edit",
-    keyboardAdornerTip:
-      "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item",
+    keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item",
+    keyboardMoveItemsTip: "Press alt plus arrow up or arrow down to move item",
     triggerOn: "On ",
     triggerMakePagesVisible: "Make pages visible:",
     triggerMakeQuestionsVisible: "Make elements visible:",

@@ -227,8 +227,7 @@ export class DragDropTargetElement {
     public fakeElement: any,
     public sourceElement: IElement,
     private nestedPanelDepth: number = -1
-  ) {
-  }
+  ) {}
   public moveTo(
     destination: any,
     isBottom: boolean,
@@ -253,12 +252,16 @@ export class DragDropTargetElement {
     if (!!page && page !== this.page) {
       this.clear();
       this.page = page;
-      this.page.dragDropStart(this.sourceElement, this.fakeElement, this.nestedPanelDepth);
+      this.page.dragDropStart(
+        this.sourceElement,
+        this.fakeElement,
+        this.nestedPanelDepth
+      );
     }
   }
 }
 
-export class DragDropHelper {
+export class DragDropHelper extends Base {
   public static edgeHeight: number = 20;
   public static nestedPanelDepth: number = -1;
   public static dataStart: string = "{element:";
@@ -269,7 +272,13 @@ export class DragDropHelper {
   private onModifiedCallback: (options?: any) => any;
   public ddTarget: DragDropTargetElement = null;
 
-  constructor(private creator: CreatorBase<SurveyModel>, onModifiedCallback: (options?: any) => any) {
+  @property() draggedOverQuestion: SurveyElement;
+
+  constructor(
+    private creator: CreatorBase<SurveyModel>,
+    onModifiedCallback: (options?: any) => any
+  ) {
+    super();
     this.onModifiedCallback = onModifiedCallback;
   }
 
@@ -286,7 +295,10 @@ export class DragDropHelper {
 
     return true;
   }
-  public startDragToolboxItem(event: IPortableDragEvent, sourceElementJson: any) {
+  public startDragToolboxItem(
+    event: IPortableDragEvent,
+    sourceElementJson: any
+  ) {
     event.stopPropagation();
 
     this.prepareData(event, sourceElementJson, null);
@@ -304,15 +316,24 @@ export class DragDropHelper {
     isEdge: boolean = false
   ) {
     event.stopPropagation();
-    // console.log("over: " + draggedOverElement.name);
     event.dataTransfer.dropEffect = "copy";
+
+    if (this.ddTarget.fakeElement === draggedOverElement) {
+      console.log("drag over fake element");
+      return;
+    }
+
+    this.draggedOverQuestion = draggedOverElement;
+
+    console.log("over: " + draggedOverElement.name);
     event = this.isCanDragContinue(event, draggedOverElement);
     if (!event) {
       return;
     }
     var bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
     if (draggedOverElement.isPage && draggedOverElement.elements.length > 0) {
-      var lastEl = draggedOverElement.elements[draggedOverElement.elements.length - 1];
+      var lastEl =
+        draggedOverElement.elements[draggedOverElement.elements.length - 1];
       if (!this.isBottomThanElement(event, lastEl)) return;
       draggedOverElement = lastEl;
       isEdge = true;
@@ -320,8 +341,15 @@ export class DragDropHelper {
       bottomInfo.isBottom = true;
     }
 
-    isEdge = draggedOverElement.isPanel ? isEdge && bottomInfo.isEdge : true;
-    if (draggedOverElement.isPanel && !isEdge && draggedOverElement.elements.length > 0) return;
+    isEdge = draggedOverElement.isPanel
+      ? isEdge && this.isBottom(event).isEdge
+      : true;
+    if (
+      draggedOverElement.isPanel &&
+      !isEdge &&
+      draggedOverElement.elements.length > 0
+    )
+      return;
     this.ddTarget.moveTo(draggedOverElement, bottomInfo.isBottom, isEdge);
   }
 
@@ -349,8 +377,7 @@ export class DragDropHelper {
     if (
       !draggedOverElement ||
       !this.isSurveyDragging(event) ||
-      this.isSamePlace(event, draggedOverElement) ||
-      draggedOverElement == this.ddTarget.fakeElement
+      this.isSamePlace(event, draggedOverElement)
     ) {
       return null;
     }
@@ -358,6 +385,7 @@ export class DragDropHelper {
   }
 
   public end() {
+    this.draggedOverQuestion = undefined;
     if (this.ddTarget) {
       this.ddTarget.clear();
     }
@@ -415,20 +443,20 @@ export class DragDropHelper {
     };
   }
 
-  // private isBottom(event: IPortableDragEvent): any {
-  //   //event = this.getEvent(event);
-  //   var height = <number>event.currentTarget["clientHeight"];
-  //   var y = event.offsetY;
-  //   if (event.hasOwnProperty("layerX")) {
-  //     y = event["layerY"] - <number>event.currentTarget["offsetTop"];
-  //   }
-  //   return {
-  //     isBottom: y > height / 2,
-  //     isEdge:
-  //       y <= DragDropHelper.edgeHeight ||
-  //       height - y <= DragDropHelper.edgeHeight,
-  //   };
-  // }
+  private isBottom(event: IPortableDragEvent): any {
+    //event = this.getEvent(event);
+    var height = <number>event.currentTarget["clientHeight"];
+    var y = event.offsetY;
+    if (event.hasOwnProperty("layerX")) {
+      y = event["layerY"] - <number>event.currentTarget["offsetTop"];
+    }
+    return {
+      isBottom: y > height / 2,
+      isEdge:
+        y <= DragDropHelper.edgeHeight ||
+        height - y <= DragDropHelper.edgeHeight,
+    };
+  }
 
   private isBottomThanElement(event: IPortableDragEvent, lastEl: any): boolean {
     var el = lastEl.renderedElement;
@@ -442,7 +470,10 @@ export class DragDropHelper {
     return y > elY;
   }
 
-  private isSamePlace(event: IPortableDragEvent, draggedOverElement: any): boolean {
+  private isSamePlace(
+    event: IPortableDragEvent,
+    draggedOverElement: any
+  ): boolean {
     var prev = DragDropHelper.prevEvent;
     // console.log(
     //   "DragDropHelper::isSamePlace:element=%o, prev.element=%o",
@@ -483,7 +514,11 @@ export class DragDropHelper {
     return targetElement;
   }
 
-  private prepareData(event: IPortableDragEvent, sourceElementJson: any, sourceElement: IElement) {
+  private prepareData(
+    event: IPortableDragEvent,
+    sourceElementJson: any,
+    sourceElement: IElement
+  ) {
     var str = DragDropHelper.dataStart + sourceElementJson.name + "}";
     this.setData(event, str);
     var fakeElement = this.createTargetElement(sourceElementJson);
