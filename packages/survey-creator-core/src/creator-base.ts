@@ -10,6 +10,7 @@ import {
   PopupModel,
   property,
   propertyArray,
+  EventBase,
   IElement,
   Serializer,
 } from "survey-core";
@@ -1102,7 +1103,7 @@ export class CreatorBase<T extends SurveyModel>
     }
     this.surveyValue = survey;
     this.selectElement(survey);
-    this.pagesController.currentPage = survey.currentPage;
+    this.pagesController.onSurveyChanged();
   }
 
   private getSurveyTextFromDesigner() {
@@ -1436,6 +1437,7 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public isElementSelected(element: Base): boolean {
+    if (!element || element.isDisposed) return false;
     return element.getPropertyValue("isSelectedInDesigner");
   }
 
@@ -2023,19 +2025,33 @@ export class CreatorBase<T extends SurveyModel>
     this.pagesController.currentPage = value;
   }
   public addPage(): PageModel {
-    return this.pagesController.addPage();
-  }
-  public deletePage() {
-    this.pagesController.deletePage();
-  }
-  public movePage(page: Survey.PageModel, indexFrom: number) {
-    this.pagesController.movePage();
+    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
+    const page: PageModel = this.survey.addNewPage(name);
+    this.selectElement(page);
+    return page;
   }
 }
 
 export class PagesController<T extends SurveyModel> extends Base {
+  public onPagesChanged: EventBase<PagesController<T>> = this.addEvent<
+    PagesController<T>
+  >();
+  public onCurrentPagesChanged: EventBase<PagesController<T>> = this.addEvent<
+    PagesController<T>
+  >();
+  private pagesChangedFunc: (sender: SurveyModel, options: any) => any;
+  private currentpagedChangedFunc: (sender: SurveyModel, options: any) => any;
+  private surveyValue: SurveyModel;
   constructor(public creator: CreatorBase<T>) {
     super();
+    this.pagesChangedFunc = (sender: SurveyModel, options: any) => {
+      if (options.name !== "pages") return;
+      this.onPagesChanged.fire(this, {});
+    };
+    this.currentpagedChangedFunc = (sender: SurveyModel, options: any) => {
+      this.onCurrentPagesChanged.fire(this, {});
+    };
+    this.onSurveyChanged();
   }
   public get survey(): T {
     return this.creator.survey;
@@ -2053,12 +2069,28 @@ export class PagesController<T extends SurveyModel> extends Base {
     this.currentPage = value;
     this.creator.selectElement(value);
   }
-  public addPage(): PageModel {
-    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
-    const page: PageModel = this.survey.addNewPage(name);
-    this.selectPage(page);
-    return page;
+  public getDisplayName(page: PageModel): string {
+    if (!page) return "";
+    return this.creator.getObjectDisplayName(page);
   }
-  public deletePage() {}
-  public movePage() {}
+  public onSurveyChanged() {
+    this.removeFunctions();
+    this.surveyValue = this.creator.survey;
+    if (!this.surveyValue) return;
+    this.onPagesChanged.fire(this, {});
+    this.surveyValue.onPropertyChanged.add(this.pagesChangedFunc);
+    this.surveyValue.onCurrentPageChanged.add(this.currentpagedChangedFunc);
+  }
+  public dispose() {
+    super.dispose();
+    this.removeFunctions();
+  }
+  private removeFunctions() {
+    if (!!this.surveyValue && !this.surveyValue.isDisposed) {
+      this.surveyValue.onPropertyChanged.remove(this.pagesChangedFunc);
+      this.surveyValue.onCurrentPageChanged.remove(
+        this.currentpagedChangedFunc
+      );
+    }
+  }
 }

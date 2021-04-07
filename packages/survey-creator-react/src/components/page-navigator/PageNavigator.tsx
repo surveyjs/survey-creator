@@ -1,5 +1,16 @@
-import { Base, SurveyModel, PageModel, unwrap } from "survey-core";
-import { SurveyElementBase, SvgIcon, Popup } from "survey-react-ui";
+import {
+  Base,
+  SurveyModel,
+  PageModel,
+  unwrap,
+  AdaptiveActionBarItemWrapper,
+} from "survey-core";
+import {
+  SurveyElementBase,
+  SvgIcon,
+  Popup,
+  IActionBarItem,
+} from "survey-react-ui";
 import { CreatorBase, PageNavigatorViewModel } from "@survey/creator";
 import React from "react";
 
@@ -18,17 +29,16 @@ export class SurveyPageNavigator extends SurveyElementBase<
     this.model = new PageNavigatorViewModel<SurveyModel>(
       props.creator.pagesController
     );
-    const pageItems = this.props.pages.map((page: PageModel) => {
-      return this.model.createActionBarItem(page);
-    });
-    this.model.setItems(pageItems);
   }
 
   protected getStateElement(): Base {
     return this.model;
   }
-
-  render(): JSX.Element {
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    this.model.dispose();
+  }
+  renderElement(): JSX.Element {
     if (!this.model.visible) {
       return null;
     }
@@ -50,11 +60,25 @@ export class SurveyPageNavigator extends SurveyElementBase<
             //className="svc-page-navigator__popup"
           ></Popup>
         </div>
-        {this.model.items.map((item) => this.renderPageNavigatorItem(item))}
+        {this.model.items.map((item) => (
+          <SurveyPageNavigatorItem
+            key={item.id}
+            item={item}
+          ></SurveyPageNavigatorItem>
+        ))}
       </div>
     );
   }
-  renderPageNavigatorItem(item): JSX.Element {
+}
+export class SurveyPageNavigatorItem extends SurveyElementBase<any, any> {
+  constructor(props: IActionBarItem) {
+    super(props);
+  }
+  protected getStateElement(): Base {
+    return this.props.item as Base;
+  }
+  renderElement(): JSX.Element {
+    var item = this.props.item;
     let className: string = "svc-page-navigator-item-content";
     if (unwrap(item.active)) {
       className += " svc-page-navigator-item--selected";
@@ -63,7 +87,7 @@ export class SurveyPageNavigator extends SurveyElementBase<
       className += " svc-page-navigator-item--disabled";
     }
     return (
-      <div key={item.id} className="svc-page-navigator-item">
+      <div className="svc-page-navigator-item">
         <div
           className={className}
           onClick={() => item.action(item)}

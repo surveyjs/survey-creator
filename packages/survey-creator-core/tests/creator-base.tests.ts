@@ -10,11 +10,8 @@ import {
   QuestionMatrixDynamicModel,
 } from "survey-core";
 import { CreatorBase, ICreatorOptions } from "../src/creator-base";
-import { editorLocalization } from "../src/editorLocalization";
-import {
-  ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions,
-} from "../src/settings";
+import { PageViewModel } from "../src/components/page";
+import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 
 export class CreatorTester extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
@@ -64,4 +61,71 @@ test("Select new added question", () => {
   creator.survey.currentPage = creator.survey.currentPage;
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question2");
+});
+test("PageViewModel", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }],
+  };
+  expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+  var pageModel = new PageViewModel(creator, creator.survey.currentPage);
+  var counter = 0;
+  pageModel.onPageSelectedCallback = () => {
+    counter++;
+  };
+  expect(creator.currentPage.onPropertyChanged.isEmpty).toBeFalsy();
+  expect(pageModel.isSelected).toBeFalsy();
+  creator.selectElement(creator.survey.getQuestionByName("question1"));
+  expect(pageModel.isSelected).toBeFalsy();
+  expect(counter).toEqual(0);
+  creator.selectElement(creator.survey.currentPage);
+  expect(pageModel.isSelected).toBeTruthy();
+  expect(counter).toEqual(1);
+  creator.selectElement(creator.survey);
+  expect(pageModel.isSelected).toBeFalsy();
+  expect(counter).toEqual(1);
+  pageModel.dispose();
+  expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+});
+
+test("PagesController", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }],
+  };
+  var counter = 0;
+  creator.pagesController.onPagesChanged.add((sender, options) => {
+    counter++;
+  });
+  creator.addPage();
+  expect(counter).toEqual(1);
+  creator.survey.removePage(creator.survey.pages[1]);
+  expect(counter).toEqual(2);
+  creator.JSON = {
+    elements: [{ type: "text", name: "question2" }],
+  };
+  expect(counter).toEqual(3);
+});
+test("PageNavigatorViewModel", () => {
+  var creator = new CreatorTester();
+  var model = new PageNavigatorViewModel(creator.pagesController);
+  expect(model.items).toHaveLength(1);
+  creator.JSON = {
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }],
+      },
+      {
+        elements: [{ type: "text", name: "question2" }],
+      },
+    ],
+  };
+  expect(model.items).toHaveLength(2);
+  expect(model.items[0].active).toBeTruthy();
+  expect(model.items[1].active).toBeFalsy();
+  creator.addPage();
+  expect(model.items).toHaveLength(3);
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeFalsy();
+  expect(model.items[2].active).toBeTruthy();
 });

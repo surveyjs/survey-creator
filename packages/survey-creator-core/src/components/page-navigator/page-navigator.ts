@@ -8,6 +8,7 @@ import {
   propertyArray,
   ActionBarItem,
   SurveyModel,
+  property,
 } from "survey-core";
 
 import "./page-navigator.scss";
@@ -17,53 +18,94 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
   public icon: string;
   public pageListModel: ListModel;
   public popupModel: PopupModel;
+  private pagesChangedFunc: (sender: PagesController<T>, options: any) => any;
+  private currentpageChangedFunc: (
+    sender: PagesController<T>,
+    options: any
+  ) => any;
 
   constructor(private pagesController: PagesController<T>) {
     super();
     this.icon = "icon-navigation";
-
+    this.pagesChangedFunc = (sender: PagesController<T>, options: any) => {
+      this.buildItems();
+    };
+    this.currentpageChangedFunc = (
+      sender: PagesController<T>,
+      options: any
+    ) => {
+      this.updateItemsActivity();
+    };
+    this.pagesController.onPagesChanged.add(this.pagesChangedFunc);
+    this.pagesController.onCurrentPagesChanged.add(this.currentpageChangedFunc);
     this.pageListModel = new ListModel(
       [],
       (item) => {
-        this.pagesController.currentPage = item.data;
+        this.pagesController.selectPage(item.data);
         this.popupModel.toggleVisibility();
       },
       true
     );
     this.popupModel = new PopupModel("sv-list", this.pageListModel);
     this.popupModel.onShow = () => {
-      this.pageListModel.selectedItem = this.items.filter(
-        (item) => item.data === this.pagesController.currentPage
-      )[0];
+      this.pageListModel.selectedItem = this.getActionBarByPage(
+        this.pagesController.currentPage
+      );
     };
+    this.buildItems();
+  }
+  public dispose() {
+    super.dispose();
+    this.pagesController.onPagesChanged.remove(this.pagesChangedFunc);
+    this.pagesController.onCurrentPagesChanged.remove(
+      this.currentpageChangedFunc
+    );
   }
 
   @propertyArray() items: Array<IActionBarItem>;
-
-  public setItems(items: Array<IActionBarItem>) {
+  @property({ defaultValue: false }) visible: boolean;
+  private getActionBarByPage(page: PageModel): IActionBarItem {
+    for (var i = 0; i < this.items.length; i++) {
+      if (this.items[i].data === page) return this.items[i];
+    }
+    return null;
+  }
+  private setItems(items: Array<IActionBarItem>) {
     this.items = items;
     this.pageListModel.items = items;
+    this.visible = items.length > 1;
   }
-
-  createActionBarItem(page: PageModel): ActionBarItem {
+  private buildItems() {
+    var items = [];
+    var pages = this.pagesController.pages;
+    for (var i = 0; i < pages.length; i++) {
+      items.push(this.createActionBarItem(pages[i]));
+    }
+    this.setItems(items);
+  }
+  private updateItemsActivity() {
+    var page = this.pagesController.currentPage;
+    for (var i = 0; i < this.items.length; i++) {
+      var item = this.items[i];
+      item.active = item.data === page;
+    }
+  }
+  private createActionBarItem(page: PageModel): ActionBarItem {
     const item: IActionBarItem = {
       id: page.id,
-      title:
-        this.pagesController && this.pagesController.creator
-          ? this.pagesController.creator.getObjectDisplayName(page)
-          : page.title,
+      title: this.pagesController
+        ? this.pagesController.getDisplayName(page)
+        : page.title,
     };
-    item.active = () => page === this.pagesController.currentPage;
+    item.active = page === this.pagesController.currentPage;
     item.action = () => {
       this.pagesController.selectPage(page);
     };
     item.data = page;
+    return this.createActionBarCore(item);
+  }
+  protected createActionBarCore(item: IActionBarItem): ActionBarItem {
     return new ActionBarItem(item);
   }
-
-  get visible(): boolean {
-    return this.items.length > 1;
-  }
-
   togglePageSelector = () => this.popupModel.toggleVisibility();
 }

@@ -20,21 +20,37 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   any
 > {
   private model: PageViewModel<SurveyModel>;
+  private rootRef: React.RefObject<HTMLDivElement>;
+  private propertyPageFunc: (sender: Base, options: any) => void;
   constructor(props: ICreatorSurveyPageComponentProps) {
     super(props);
     this.model = new PageViewModel<SurveyModel>(
       this.props.creator,
       this.props.page
     );
+    this.rootRef = React.createRef();
   }
-
   protected getStateElement(): Base {
     return this.model;
   }
+  componentDidMount() {
+    super.componentDidMount();
+    this.model.onPageSelectedCallback = () => {
+      if (!!this.rootRef.current) {
+        this.rootRef.current.scrollIntoView();
+      }
+    };
+  }
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    this.model.dispose();
+  }
+
   render(): JSX.Element {
     return (
       <React.Fragment>
         <div
+          ref={this.rootRef}
           className={"svc-page__content " + this.model.css}
           onClick={(e) => {
             return this.model.select(this.model, new ReactMouseEvent(e));

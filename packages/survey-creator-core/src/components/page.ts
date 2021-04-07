@@ -15,14 +15,27 @@ import "./page.scss";
 export class PageViewModel<T extends SurveyModel> extends Base {
   @property({ defaultValue: false }) isGhost: boolean;
   @propertyArray() actions: Array<IActionBarItem>;
+  @property({ defaultValue: false }) isSelected: boolean;
   public creator: CreatorBase<T>;
+  public onPageSelectedCallback: () => void;
   private _page: PageModel;
+  private selectedPropPageFunc: (sender: Base, options: any) => void;
 
   constructor(creator: CreatorBase<T>, page: PageModel) {
     super();
     this.creator = creator;
 
     this._page = page;
+    this.selectedPropPageFunc = (sender: Base, options: any) => {
+      if (options.name === "isSelectedInDesigner") {
+        this.isSelected = options.newValue;
+        if (options.newValue && this.onPageSelectedCallback) {
+          this.onPageSelectedCallback();
+        }
+      }
+    };
+    this.page.onPropertyChanged.add(this.selectedPropPageFunc);
+
     this.isGhost = typeof this.page["_addToSurvey"] === "function";
     if (!this.isGhost) {
       this.actions = creator.getContextActions(this.page);
@@ -30,6 +43,11 @@ export class PageViewModel<T extends SurveyModel> extends Base {
     this.page.onFirstRendering();
     this.page.updateCustomWidgets();
     this.page.setWasShown(true);
+  }
+  public dispose() {
+    super.dispose();
+    this.page.onPropertyChanged.remove(this.selectedPropPageFunc);
+    this.onPropertyValueChangedCallback = undefined;
   }
 
   get page(): PageModel {
@@ -53,6 +71,9 @@ export class PageViewModel<T extends SurveyModel> extends Base {
   select(model: PageViewModel<T>, event: IPortableMouseEvent) {
     if (!model.isGhost) {
       model.creator.selectElement(model.page);
+      if (!this.onPageSelectedCallback) {
+        this.onPageSelectedCallback();
+      }
     }
   }
   get css(): string {

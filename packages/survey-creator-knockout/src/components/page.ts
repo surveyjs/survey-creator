@@ -11,15 +11,13 @@ ko.components.register("svc-page", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const creator: SurveyCreator = params.creator;
-      const scrollSubscription = ko.computed(() => {
-        if (creator.isElementSelected(ko.unwrap(params.page))) {
-          componentInfo.element.scrollIntoView();
-        }
-      });
       const model = new PageViewModel<Survey>(creator, ko.unwrap(params.page));
+      model.onPageSelectedCallback = () => {
+        componentInfo.element.scrollIntoView();
+      };
       new ImplementorBase(model);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        scrollSubscription.dispose();
+        model.dispose();
       });
       return model;
     },
