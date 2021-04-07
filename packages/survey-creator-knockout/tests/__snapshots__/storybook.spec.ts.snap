@@ -401,7 +401,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
         
-          <!-- ko component: { name: component, params: {creator: $parent.creator, data: data } } -->
+          <!-- ko component: { name: component, params: { creator: $parent.creator, data: data } } -->
           <svc-toolbox
             params="categories: creator.toolboxCategories, creator: creator"
           >
@@ -1247,6 +1247,74 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       
                   <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
                   <div
+                    aria-label="buttongroup toolbox item"
+                    class="svc-toolbox__item svc-toolbox__item--icon-buttongroup"
+                    data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+                    draggable="true"
+                    role="button"
+                    tabindex="0"
+                    title="buttongroup"
+                  >
+                    
+  
+                    <span
+                      class="svc-toolbox__item-container"
+                    >
+                      
+    
+                      <sv-svg-icon
+                        params="iconName: iconName, size: 24"
+                      />
+                      
+  
+                    </span>
+                    
+  
+                    <span
+                      class="svc-toolbox__item-banner"
+                    >
+                      
+    
+                      <sv-svg-icon
+                        params="iconName: iconName, size: 24"
+                      />
+                      
+    
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        buttongroup
+                      </span>
+                      
+  
+                    </span>
+                    
+
+                  </div>
+                  
+
+                  <!-- /ko -->
+                  
+    
+                </div>
+                
+    
+                
+    
+                <div
+                  class="svc-toolbox__tool"
+                  data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
+                  style="visibility: visible;"
+                >
+                  
+      
+                  <!-- ko if: $data.needSeparator -->
+                  <!-- /ko -->
+                  
+      
+                  <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+                  <div
                     aria-label="Expression (read-only) toolbox item"
                     class="svc-toolbox__item svc-toolbox__item--icon-expression"
                     data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
@@ -1655,6 +1723,74 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       
                   <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
                   <div
+                    aria-label="Panel toolbox item"
+                    class="svc-toolbox__item svc-toolbox__item--icon-panel"
+                    data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+                    draggable="true"
+                    role="button"
+                    tabindex="0"
+                    title="Panel"
+                  >
+                    
+  
+                    <span
+                      class="svc-toolbox__item-container"
+                    >
+                      
+    
+                      <sv-svg-icon
+                        params="iconName: iconName, size: 24"
+                      />
+                      
+  
+                    </span>
+                    
+  
+                    <span
+                      class="svc-toolbox__item-banner"
+                    >
+                      
+    
+                      <sv-svg-icon
+                        params="iconName: iconName, size: 24"
+                      />
+                      
+    
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Panel
+                      </span>
+                      
+  
+                    </span>
+                    
+
+                  </div>
+                  
+
+                  <!-- /ko -->
+                  
+    
+                </div>
+                
+    
+                
+    
+                <div
+                  class="svc-toolbox__tool"
+                  data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
+                  style="visibility: visible;"
+                >
+                  
+      
+                  <!-- ko if: $data.needSeparator -->
+                  <!-- /ko -->
+                  
+      
+                  <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+                  <div
                     aria-label="Panel (dynamic panels) toolbox item"
                     class="svc-toolbox__item svc-toolbox__item--icon-paneldynamic"
                     data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
@@ -1721,13 +1857,13 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           
 
           <div
-            class="svc-tab-designer sv_main sv_default_css"
+            class="svc-tab-designer sv-root-modern"
             data-bind="css: survey.css.root"
           >
             
   
             <div
-              class="sv_container"
+              class="sv-container-modern"
               data-bind="css: survey.css.container"
             >
               
@@ -1750,7 +1886,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
                   <div
                     class="svc-page__add-new-question"
-                    data-bind="click: addNewQuestion"
+                    data-bind="click: addNewQuestion, clickBubble: false"
                   >
                     
     
@@ -1863,17 +1999,17 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
         
-          <!-- ko component: { name: component, params: {creator: $parent.creator, data: data } } -->
+          <!-- ko component: { name: component, params: { creator: $parent.creator, data: data } } -->
           <div
             class="svc-creator-tab__content"
           >
             
-    
+  
             <div
-              class="svc-test-tab__content"
+              class="svc-plugin-tab__content"
             >
               
-        
+    
               <survey-simulator
                 params="options: simulator"
               >
@@ -1906,24 +2042,24 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 
               </survey-simulator>
               
-        
+    
               <!-- ko ifnot: isRunning -->
               <!-- /ko -->
               
-    
+  
             </div>
             
-    
+  
             <div
-              class="svc-test-tab__content-actions"
+              class="svc-plugin-tab__content-actions"
             >
               
-        
+    
               <sv-action-bar
                 params="items: actions"
               />
               
-    
+  
             </div>
             
 
@@ -1945,7 +2081,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
         
-          <!-- ko component: { name: component, params: {creator: $parent.creator, data: data } } -->
+          <!-- ko component: { name: component, params: { creator: $parent.creator, data: data } } -->
           <div
             class="svc-creator-tab__content"
           >
@@ -1990,7 +2126,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
         
-          <!-- ko component: { name: component, params: {creator: $parent.creator, data: data } } -->
+          <!-- ko component: { name: component, params: { creator: $parent.creator, data: data } } -->
           <div
             class="svc-creator-tab__content"
           >
@@ -2875,6 +3011,74 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       
           <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
           <div
+            aria-label="buttongroup toolbox item"
+            class="svc-toolbox__item svc-toolbox__item--icon-buttongroup"
+            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+            draggable="true"
+            role="button"
+            tabindex="0"
+            title="buttongroup"
+          >
+            
+  
+            <span
+              class="svc-toolbox__item-container"
+            >
+              
+    
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              />
+              
+  
+            </span>
+            
+  
+            <span
+              class="svc-toolbox__item-banner"
+            >
+              
+    
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              />
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                buttongroup
+              </span>
+              
+  
+            </span>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+        </div>
+        
+    
+        
+    
+        <div
+          class="svc-toolbox__tool"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
+          style="visibility: visible;"
+        >
+          
+      
+          <!-- ko if: $data.needSeparator -->
+          <!-- /ko -->
+          
+      
+          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
             aria-label="Expression (read-only) toolbox item"
             class="svc-toolbox__item svc-toolbox__item--icon-expression"
             data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
@@ -3283,6 +3487,74 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       
           <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
           <div
+            aria-label="Panel toolbox item"
+            class="svc-toolbox__item svc-toolbox__item--icon-panel"
+            data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
+            draggable="true"
+            role="button"
+            tabindex="0"
+            title="Panel"
+          >
+            
+  
+            <span
+              class="svc-toolbox__item-container"
+            >
+              
+    
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              />
+              
+  
+            </span>
+            
+  
+            <span
+              class="svc-toolbox__item-banner"
+            >
+              
+    
+              <sv-svg-icon
+                params="iconName: iconName, size: 24"
+              />
+              
+    
+              <span
+                class="svc-toolbox__item-title"
+                data-bind="text: title"
+              >
+                Panel
+              </span>
+              
+  
+            </span>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+    
+        </div>
+        
+    
+        
+    
+        <div
+          class="svc-toolbox__tool"
+          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
+          style="visibility: visible;"
+        >
+          
+      
+          <!-- ko if: $data.needSeparator -->
+          <!-- /ko -->
+          
+      
+          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
+          <div
             aria-label="Panel (dynamic panels) toolbox item"
             class="svc-toolbox__item svc-toolbox__item--icon-paneldynamic"
             data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { dragstart: dragstart, dragend: dragend }"
@@ -3349,13 +3621,13 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
 
   <div
-    class="svc-tab-designer sv_main sv_default_css"
+    class="svc-tab-designer sv-root-modern"
     data-bind="css: survey.css.root"
   >
     
   
     <div
-      class="sv_container"
+      class="sv-container-modern"
       data-bind="css: survey.css.container"
     >
       
@@ -3378,7 +3650,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
           <div
             class="svc-page__add-new-question"
-            data-bind="click: addNewQuestion"
+            data-bind="click: addNewQuestion, clickBubble: false"
           >
             
     

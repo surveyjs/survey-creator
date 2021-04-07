@@ -531,7 +531,7 @@ export class Translation implements ITranslationLocales {
       }),
     });
     items.push({
-      id: "svd-translation-language-selector",
+      id: "svd-translation-pages-selector",
       title: "",
       tooltip: "",
       component: "svd-dropdown",

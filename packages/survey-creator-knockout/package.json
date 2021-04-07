@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --env.buildType dev --open",
+    "serve": "http-server --silent",
     "test": "jest",
     "test:update": "npm run test -- -u",
     "test:generate-output": "jest --json --outputFile=.jest-test-results.json || echo",
@@ -23,7 +24,6 @@
     "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/embed/embed.js --reporter minimal --debug-mode\"",
     "release": "standard-version --message \"Release: %s [skip ci]\"",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
-    "watch:dev": "webpack --env.buildType dev --watch",
     "-prestorybook": "npm run test:generate-output",
     "storybook": "start-storybook -p 9000"
   },
