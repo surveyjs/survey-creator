@@ -5,7 +5,7 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyCreator } from "../editor";
-import { getNextValue, createKey2click, findParentNode } from "../utils/utils";
+import { getNextValue, createKey2click } from "../utils/utils";
 import { SurveyHelper } from "../surveyHelper";
 
 import "./item-editor.scss";
