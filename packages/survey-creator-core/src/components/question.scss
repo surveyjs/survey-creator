@@ -56,3 +56,16 @@ svc-question {
     padding: 0;
   }
 }
+
+.svc-panel__edge {
+  position: absolute;
+  border: 1px solid orange;
+  height: 10px;
+  width: 100%;
+}
+.svc-panel__edge--top {
+  top: 0;
+}
+.svc-panel__edge--bottom {
+  bottom: 0;
+}
