@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Base, SurveyModel } from "survey-core";
 import {
   SurveyActionBar,
@@ -46,24 +46,37 @@ export class LogicUIComponent extends SurveyElementBase<any, any> {
 
   render(): JSX.Element {
     var logic = this.model;
-    if (logic.mode == "view") {
-      return (
-        <div className="svc-creator-tab__content">
-          <div className="svc-test-tab__content-actions">
-            <SurveyActionBar items={logic.toolbarItems}></SurveyActionBar>
-          </div>
-          <Survey model={logic.itemsSurvey}></Survey>
-        </div>
-      );
-    }
+    var content =
+      logic.mode == "view"
+        ? this.renderViewContent()
+        : this.renderEditContent();
     return (
       <div className="svc-creator-tab__content">
-        <Survey model={logic.expressionSurvey}></Survey>
-        <Survey model={logic.itemEditorSurvey}></Survey>
-        <div className="svc-test-tab__content-actions">
-          <SurveyActionBar items={logic.toolbarEditItems}></SurveyActionBar>
-        </div>
+        <div className="svc-plugin-tab__content">{content}</div>
       </div>
+    );
+  }
+  private renderViewContent(): JSX.Element {
+    return (
+      <Fragment>
+        <div className="svc-test-tab__content-actions">
+          <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
+        </div>
+        <Survey model={this.model.itemsSurvey}></Survey>
+      </Fragment>
+    );
+  }
+  private renderEditContent(): JSX.Element {
+    return (
+      <Fragment>
+        <Survey model={this.model.expressionSurvey}></Survey>
+        <Survey model={this.model.itemEditorSurvey}></Survey>
+        <div className="svc-test-tab__content-actions">
+          <SurveyActionBar
+            items={this.model.toolbarEditItems}
+          ></SurveyActionBar>
+        </div>
+      </Fragment>
     );
   }
 }

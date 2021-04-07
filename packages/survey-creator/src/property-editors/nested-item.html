@@ -2,7 +2,8 @@
   <td class="svd-itemvalue-actions-container">
     <div
       class="svd-drag-handle svd-itemvalue-action"
-      data-bind="visible: !$data.editor.readOnly()"
+      tabindex="0"
+      data-bind="visible: !$data.editor.readOnly(), attr: { 'aria-label': editor.getLocString('pe.keyboardMoveItemsTip') }"
     >
       <span>
         <svg-icon

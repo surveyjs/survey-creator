@@ -1,12 +1,10 @@
-<div>
+<div class="svc-creator-tab__content">
   <!-- ko if: $data.showing  -->
-  <div
-    class="form-group svd-logic-tab"
-    style="width: 100%;"
-    data-bind="with: $data.logic"
-  >
+  <div class="svc-plugin-tab__content" data-bind="with: $data.logic">
     <!-- ko if: $data.mode == "view" -->
-    <sv-action-bar params="items: toolbarItems"></sv-action-bar>
+    <div class="svc-plugin-tab__content-actions">
+      <sv-action-bar params="items: toolbarItems"></sv-action-bar>
+    </div>
     <!-- ko template: { name: 'survey-content', data: $data.itemsSurvey  } --><!-- /ko -->
     <!-- /ko -->
     <!-- ko if: $data.mode != "view" -->

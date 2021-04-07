@@ -55,3 +55,13 @@ test("do not deactivate/activate tabs on selecting the active tab", () => {
   expect(creator.makeNewViewActive("test")).toBeFalsy();
   creator.activeTab = "test";
 });
+test("Select new added question", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }],
+  };
+  expect(creator.activeTab).toEqual("designer");
+  creator.survey.currentPage = creator.survey.currentPage;
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question2");
+});
