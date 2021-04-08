@@ -1951,7 +1951,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <svc-property-panel
-              params="title: 'Question Properties', model: creator"
+              params=model: creator"
             >
               <sv-action-bar
                 params="items: toolbarItems"
@@ -3715,7 +3715,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
   
     <svc-property-panel
-      params="title: 'Question Properties', model: creator"
+      params="model: creator"
     >
       <sv-action-bar
         params="items: toolbarItems"

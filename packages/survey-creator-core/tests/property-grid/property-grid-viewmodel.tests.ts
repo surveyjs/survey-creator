@@ -19,7 +19,7 @@ test("Go to next/prev", () => {
     ],
   });
   var propertyGrid = new PropertyGridModel(survey);
-  var model = new PropertyGridViewModel(propertyGrid, "", (obj: Base): void => {
+  var model = new PropertyGridViewModel(propertyGrid, (obj: Base): void => {
     propertyGrid.obj = obj;
   });
   expect(model.hasPrev).toBeFalsy();
@@ -62,7 +62,7 @@ test("Reset history on changing survey", () => {
   });
   var survey2 = new SurveyModel();
   var propertyGrid = new PropertyGridModel(survey1);
-  var model = new PropertyGridViewModel(propertyGrid, "", (obj: Base): void => {
+  var model = new PropertyGridViewModel(propertyGrid, (obj: Base): void => {
     propertyGrid.obj = obj;
   });
   expect(model.hasPrev).toBeFalsy();
@@ -101,7 +101,7 @@ test("Update history on deleting elements", () => {
     ],
   });
   var propertyGrid = new PropertyGridModel(survey);
-  var model = new PropertyGridViewModel(propertyGrid, "", (obj: Base): void => {
+  var model = new PropertyGridViewModel(propertyGrid, (obj: Base): void => {
     propertyGrid.obj = obj;
   });
   var page = survey.pages[1];
@@ -125,4 +125,33 @@ test("Update history on deleting elements", () => {
   expect(model.hasInHistory(column)).toBeTruthy();
   survey.getQuestionByName("question2").columns.splice(0, 1);
   expect(model.hasInHistory(column)).toBeFalsy();
+});
+
+test("Generate and update title correctly", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+      },
+    ],
+  });
+  var propertyGrid = new PropertyGridModel(survey);
+  var model = new PropertyGridViewModel(propertyGrid, (obj: Base): void => {
+    propertyGrid.obj = obj;
+  });
+  expect(model.title).toEqual("survey");
+  propertyGrid.obj = survey.getQuestionByName("question1");
+  expect(model.title).toEqual("question1");
+  propertyGrid.survey.getQuestionByName("name").value = "Q1";
+  expect(model.title).toEqual("Q1");
+  propertyGrid.options.getObjectDisplayName = (
+    obj: Base,
+    reason: string,
+    displayName: string
+  ) => {
+    return "Question:" + displayName;
+  };
+  propertyGrid.survey.getQuestionByName("name").value = "Q2";
+  expect(model.title).toEqual("Question:Q2");
 });

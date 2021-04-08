@@ -842,16 +842,15 @@ export class PropertyGridViewModel extends Base {
   @property({ defaultValue: false }) hasPrev: boolean;
   @property({ defaultValue: false }) hasNext: boolean;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
+  @property() title: string;
   constructor(
     private model: PropertyGridModel,
-    public title: string,
     private onAction: (obj: Base) => void
   ) {
     super();
     this.historyItems = [];
     this.model.objValueChangedCallback = () => {
-      this.updateHistoryItems();
-      this.survey = this.model.survey;
+      this.onSurveyChanged();
       // AM: TODO need to fix creatorCss content, it breaks survey appearance in the PropertyGrid
       // this.survey.css = creatorCss;
     };
@@ -874,6 +873,31 @@ export class PropertyGridViewModel extends Base {
       },
     });
     this.model.objValueChangedCallback();
+  }
+  private onSurveyChanged() {
+    this.updateHistoryItems();
+    this.survey = this.model.survey;
+    if (!!this.survey) {
+      this.survey.onValueChanged.add((sender: SurveyModel, options: any) => {
+        if (options.name == "name" || options.name == "title") {
+          this.updateTitle();
+        }
+      });
+    }
+    this.updateTitle();
+  }
+  private updateTitle() {
+    this.title = this.getTitle();
+  }
+  private getTitle(): string {
+    var obj = this.model.obj;
+    if (!obj) return "";
+    var displayName = !!obj["name"] ? obj["name"] : obj.getType();
+    return this.model.options.getObjectDisplayName(
+      obj,
+      "property-grid",
+      displayName
+    );
   }
   public next() {
     this.updateHistoryActionState();

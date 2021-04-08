@@ -74,10 +74,7 @@ export class TabDesignerComponent extends SurveyElementBase<
           pages={creator.pagesController.pages}
         ></SurveyPageNavigator>
         <div className="svc-flex-column" style={style}>
-          <PropertyGridComponent
-            model={creator}
-            title="Question Properties"
-          ></PropertyGridComponent>
+          <PropertyGridComponent model={creator}></PropertyGridComponent>
         </div>
       </>
     );

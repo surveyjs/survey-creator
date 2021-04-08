@@ -1050,7 +1050,7 @@ export class CreatorBase<T extends SurveyModel>
   }
   private updatePagesController(sender: Survey.Base, name: string) {
     if ((name == "name" || name == "title") && this.isObjPage(sender)) {
-      this.pagesController.pageNameChanged(sender);
+      this.pagesController.pageNameChanged(<PageModel>sender);
     }
   }
   private updateConditions(oldName: string, newName: string) {
@@ -2126,3 +2126,4 @@ export class PagesController<T extends SurveyModel> extends Base {
     }
   }
 }
+export class SelectionHistoryController extends Base {}

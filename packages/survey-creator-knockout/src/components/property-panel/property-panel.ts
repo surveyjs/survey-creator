@@ -8,12 +8,19 @@ const template = require("./property-panel.html");
 
 ko.components.register("svc-property-panel", {
   viewModel: {
-    createViewModel: (params: any) => {
+    createViewModel: (params: any, componentInfo: any) => {
       var creator: CreatorBase<Survey> = params.model;
-      const model = new PropertyGridViewModel(creator.propertyGrid, params.title, (obj: Base): void => {
-        creator.selectElement(obj);
-      });
+      const model = new PropertyGridViewModel(
+        creator.propertyGrid,
+        (obj: Base): void => {
+          creator.selectElement(obj);
+        }
+      );
       new ImplementorBase(model);
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        model.dispose();
+      });
+
       return model;
     },
   },

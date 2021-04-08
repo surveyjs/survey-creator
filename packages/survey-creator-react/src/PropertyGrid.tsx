@@ -5,7 +5,6 @@ import { Survey, SurveyElementBase, SurveyActionBar } from "survey-react-ui";
 
 interface IPropertyGridComponentProps {
   model: CreatorBase<SurveyModel>;
-  title: string;
 }
 class PropertyGridComponent extends SurveyElementBase<
   IPropertyGridComponentProps,
@@ -17,7 +16,6 @@ class PropertyGridComponent extends SurveyElementBase<
     var creator = this.props.model;
     this.model = new PropertyGridViewModel(
       creator.propertyGrid,
-      this.props.title,
       (obj: Base): void => {
         creator.selectElement(obj);
       }
@@ -25,6 +23,10 @@ class PropertyGridComponent extends SurveyElementBase<
   }
   protected getStateElement(): Base {
     return this.model;
+  }
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    this.model.dispose();
   }
   render() {
     return (
