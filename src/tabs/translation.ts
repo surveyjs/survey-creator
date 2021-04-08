@@ -462,7 +462,7 @@ export class Translation implements ITranslationLocales {
       }),
     });
     items.push({
-      id: "svd-translation-language-selector",
+      id: "svd-translation-page-selector",
       title: "",
       tooltip: "",
       component: "svd-dropdown",
