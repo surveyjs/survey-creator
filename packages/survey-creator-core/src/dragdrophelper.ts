@@ -316,6 +316,7 @@ export class DragDropHelper extends Base {
     isEdge: boolean = false
   ) {
     event.stopPropagation();
+    event.preventDefault();
     event.dataTransfer.dropEffect = "copy";
 
     if (this.ddTarget.fakeElement === draggedOverElement) {
