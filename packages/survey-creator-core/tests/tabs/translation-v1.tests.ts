@@ -615,9 +615,9 @@ test("check LocalizableStrings/dataList property", () => {
   var root = translation.root;
   expect(root.groups).toHaveLength(1);
   var q1G = root.groups[0].groups[0];
-  var item = <TranslationItem>q1G.items.find((item) => {
+  var item = <TranslationItem>q1G.items.filter((item) => {
     if (item.name == "dataList") return item;
-  });
+  })[0];
   expect(item);
   expect(item.name).toEqual("dataList");
   expect(item.values("").text).toEqual("en1\nen2");
