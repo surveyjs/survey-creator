@@ -40,23 +40,27 @@ export class QuestionAdornerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div
-          className={"svc-question__content " + this.model.css()}
-          onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
-          onDragStart={(e) =>
-            this.model.dragStart(this.model, new ReactDragEvent(e))
-          }
+          className={"svc-question__adorner"}
           onDragOver={(e) => this.model.dragOver(this.model, new ReactDragEvent(e))
           }
           onDragEnd={(e) =>
             this.model.dragEnd(this.model, new ReactDragEvent(e))
           }
-          // onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
-          draggable={this.model.isDraggable}
         >
-          {this.renderPanelPlaceholder()}
-          {this.props.element}
-          <div className="svc-question__content-actions">
-            <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+          <div
+            className={"svc-question__content " + this.model.css()}
+            onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
+            onDragStart={(e) =>
+              this.model.dragStart(this.model, new ReactDragEvent(e))
+            }
+            // onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
+            draggable={this.model.isDraggable}
+          >
+            {this.renderPanelPlaceholder()}
+            {this.props.element}
+            <div className="svc-question__content-actions">
+              <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+            </div>
           </div>
         </div>
       </React.Fragment >

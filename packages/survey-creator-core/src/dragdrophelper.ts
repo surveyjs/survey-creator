@@ -319,14 +319,18 @@ export class DragDropHelper extends Base {
     event.dataTransfer.dropEffect = "copy";
 
     if (this.ddTarget.fakeElement === draggedOverElement) {
-      console.log("drag over fake element");
+      // console.log("drag over fake element");
       return;
     }
 
     this.draggedOverQuestion = draggedOverElement;
 
-    console.log("over: " + draggedOverElement.name);
+    // console.log("over: " + draggedOverElement.name);
+
     event = this.isCanDragContinue(event, draggedOverElement);
+
+    // console.log("isCanDragContinue: " + event);
+
     if (!event) {
       return;
     }
@@ -373,12 +377,12 @@ export class DragDropHelper extends Base {
     event: IPortableDragEvent,
     draggedOverElement: any
   ): IPortableDragEvent {
+    const isSamePlace = this.isSamePlace(event, draggedOverElement);
     //event = this.getEvent(event);
-    if (
-      !draggedOverElement ||
-      !this.isSurveyDragging(event) ||
-      this.isSamePlace(event, draggedOverElement)
-    ) {
+    // console.log("draggedOverElement: " + !draggedOverElement);
+    // console.log("isSurveyDragging: " + !this.isSurveyDragging(event));
+    // console.log("isSamePlace: " + isSamePlace);
+    if (!draggedOverElement || !this.isSurveyDragging(event) || isSamePlace) {
       return null;
     }
     return event;
