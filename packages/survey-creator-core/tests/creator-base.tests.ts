@@ -128,4 +128,7 @@ test("PageNavigatorViewModel", () => {
   expect(model.items[0].active).toBeFalsy();
   expect(model.items[1].active).toBeFalsy();
   expect(model.items[2].active).toBeTruthy();
+  expect(model.items[0].title).toEqual("page1");
+  creator.survey.pages[0].name = "page1-newName";
+  expect(model.items[0].title).toEqual("page1-newName");
 });

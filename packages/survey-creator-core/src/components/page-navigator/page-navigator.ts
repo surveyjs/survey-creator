@@ -19,7 +19,11 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
   public pageListModel: ListModel;
   public popupModel: PopupModel;
   private pagesChangedFunc: (sender: PagesController<T>, options: any) => any;
-  private currentpageChangedFunc: (
+  private currentPageChangedFunc: (
+    sender: PagesController<T>,
+    options: any
+  ) => any;
+  private pageNameChangedFunc: (
     sender: PagesController<T>,
     options: any
   ) => any;
@@ -30,14 +34,23 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     this.pagesChangedFunc = (sender: PagesController<T>, options: any) => {
       this.buildItems();
     };
-    this.currentpageChangedFunc = (
+    this.currentPageChangedFunc = (
       sender: PagesController<T>,
       options: any
     ) => {
       this.updateItemsActivity();
     };
+    this.pageNameChangedFunc = (sender: PagesController<T>, options: any) => {
+      var page = options.page;
+      if (!page) return;
+      var item = this.getActionBarByPage(page);
+      if (!!item) {
+        item.title = this.pagesController.getDisplayName(page);
+      }
+    };
     this.pagesController.onPagesChanged.add(this.pagesChangedFunc);
-    this.pagesController.onCurrentPagesChanged.add(this.currentpageChangedFunc);
+    this.pagesController.onCurrentPagesChanged.add(this.currentPageChangedFunc);
+    this.pagesController.onPageNameChanged.add(this.pageNameChangedFunc);
     this.pageListModel = new ListModel(
       [],
       (item) => {
@@ -58,8 +71,9 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     super.dispose();
     this.pagesController.onPagesChanged.remove(this.pagesChangedFunc);
     this.pagesController.onCurrentPagesChanged.remove(
-      this.currentpageChangedFunc
+      this.currentPageChangedFunc
     );
+    this.pagesController.onPageNameChanged.add(this.pageNameChangedFunc);
   }
 
   @propertyArray() items: Array<IActionBarItem>;

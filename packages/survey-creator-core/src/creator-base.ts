@@ -107,6 +107,20 @@ export class CreatorBase<T extends SurveyModel>
   ) => void;
 
   @property({ defaultValue: "designer" }) viewType: string;
+
+  /**
+   * Returns the current show view name. The possible returns values are:
+   * "designer", "editor", "test", "embed", "logic" and "translation".
+   * @see showDesigner
+   * @see showTestSurvey
+   * @see showJsonEditor
+   * @see showLogicEditor
+   * @see showTranslationEditor
+   * @see showEmbedEditor
+   */
+  public get showingViewName(): string {
+    return this.viewType;
+  }
   public get isDesignerShowing(): boolean {
     return this.viewType === "designer";
   }
@@ -1015,6 +1029,7 @@ export class CreatorBase<T extends SurveyModel>
       sender,
       arrayChanges
     );
+    this.updatePagesController(sender, name);
     this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
     this.undoRedoManager.stopTransaction();
   }
@@ -1033,19 +1048,30 @@ export class CreatorBase<T extends SurveyModel>
       this.updateConditions(oldName, newName);
     }
   }
+  private updatePagesController(sender: Survey.Base, name: string) {
+    if ((name == "name" || name == "title") && this.isObjPage(sender)) {
+      this.pagesController.pageNameChanged(sender);
+    }
+  }
   private updateConditions(oldName: string, newName: string) {
     if (oldName === newName) return;
     new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
   }
 
   private isObjQuestion(obj: Survey.Base) {
+    return this.isObjThisType(obj, "question");
+  }
+  private isObjPage(obj: Survey.Base) {
+    return this.isObjThisType(obj, "page");
+  }
+  private isObjThisType(obj: Survey.Base, typeName: string) {
     var classInfo = Survey.Serializer.findClass(obj.getType());
 
     while (!!classInfo && !!classInfo.parentName) {
-      if (classInfo.name === "question") return true;
+      if (classInfo.name === typeName) return true;
       classInfo = Survey.Serializer.findClass(classInfo.parentName);
     }
-    return !!classInfo && classInfo.name === "question";
+    return !!classInfo && classInfo.name === typeName;
   }
 
   private doOnQuestionAdded(question: Question, parentPanel: any) {
@@ -2039,6 +2065,9 @@ export class PagesController<T extends SurveyModel> extends Base {
   public onCurrentPagesChanged: EventBase<PagesController<T>> = this.addEvent<
     PagesController<T>
   >();
+  public onPageNameChanged: EventBase<PagesController<T>> = this.addEvent<
+    PagesController<T>
+  >();
   private pagesChangedFunc: (sender: SurveyModel, options: any) => any;
   private currentpagedChangedFunc: (sender: SurveyModel, options: any) => any;
   private surveyValue: SurveyModel;
@@ -2080,6 +2109,9 @@ export class PagesController<T extends SurveyModel> extends Base {
     this.onPagesChanged.fire(this, {});
     this.surveyValue.onPropertyChanged.add(this.pagesChangedFunc);
     this.surveyValue.onCurrentPageChanged.add(this.currentpagedChangedFunc);
+  }
+  public pageNameChanged(page: PageModel) {
+    this.onPageNameChanged.fire(this, { page: page });
   }
   public dispose() {
     super.dispose();
