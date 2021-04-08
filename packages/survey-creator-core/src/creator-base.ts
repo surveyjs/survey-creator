@@ -33,6 +33,9 @@ import { TabLogicPlugin } from "./tabs/logic-ui";
 import { ObjType, SurveyHelper } from "./surveyHelper";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
+import { ICreatorSelectionOwner } from "./controllers/controller-base";
+import { PagesController } from "./controllers/pages-controller";
+import { SelectionHistoryController } from "./controllers/selection-history-controller";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -48,7 +51,7 @@ export interface ICreatorPlugin {
  */
 export class CreatorBase<T extends SurveyModel>
   extends Survey.Base
-  implements ISurveyCreatorOptions {
+  implements ISurveyCreatorOptions, ICreatorSelectionOwner {
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
    */
@@ -100,6 +103,8 @@ export class CreatorBase<T extends SurveyModel>
   private newPanels: Array<any> = [];
   private newQuestionChangedNames: {};
   private undoRedoManagerValue: UndoRedoManager;
+  private pagesControllerValue: PagesController;
+  private selectionHistoryControllerValue: SelectionHistoryController;
 
   private saveSurveyFuncValue: (
     no: number,
@@ -643,7 +648,8 @@ export class CreatorBase<T extends SurveyModel>
 
   constructor(protected options: ICreatorOptions) {
     super();
-    this._pagesController = new PagesController<T>(this);
+    this.pagesControllerValue = new PagesController(this);
+    this.selectionHistoryControllerValue = new SelectionHistoryController(this);
     this.setOptions(options);
     this.initTabs();
     this.initToolbar();
@@ -674,6 +680,25 @@ export class CreatorBase<T extends SurveyModel>
     if (!!this.undoRedoManager) {
       this.undoRedoManager.redo();
     }
+  }
+  public get pagesController(): PagesController {
+    return this.pagesControllerValue;
+  }
+  public get selectionHistoryController(): SelectionHistoryController {
+    return this.selectionHistoryControllerValue;
+  }
+
+  public get currentPage(): PageModel {
+    return this.survey.currentPage;
+  }
+  public set currentPage(value: PageModel) {
+    this.survey.currentPage = value;
+  }
+  public addPage(): PageModel {
+    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
+    const page: PageModel = this.survey.addNewPage(name);
+    this.selectElement(page);
+    return page;
   }
   protected initTabs() {
     const tabs: Array<Survey.IActionBarItem> = [];
@@ -1130,6 +1155,7 @@ export class CreatorBase<T extends SurveyModel>
     this.surveyValue = survey;
     this.selectElement(survey);
     this.pagesController.onSurveyChanged();
+    this.selectionHistoryController.reset();
   }
 
   private getSurveyTextFromDesigner() {
@@ -1600,6 +1626,7 @@ export class CreatorBase<T extends SurveyModel>
     } else {
       this.survey.currentPage = undefined;
     }
+    this.selectionHistoryController.onObjSelected(element);
     if (this.propertyGrid) {
       this.propertyGrid.obj = element;
     }
@@ -2036,94 +2063,4 @@ export class CreatorBase<T extends SurveyModel>
 
     return items;
   }
-
-  // Page Controller
-  private _pagesController: PagesController<T>;
-
-  public get pagesController(): PagesController<T> {
-    return this._pagesController;
-  }
-
-  public get currentPage(): PageModel {
-    return this.pagesController.currentPage;
-  }
-  public set currentPage(value: PageModel) {
-    this.pagesController.currentPage = value;
-  }
-  public addPage(): PageModel {
-    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
-    const page: PageModel = this.survey.addNewPage(name);
-    this.selectElement(page);
-    return page;
-  }
 }
-
-export class PagesController<T extends SurveyModel> extends Base {
-  public onPagesChanged: EventBase<PagesController<T>> = this.addEvent<
-    PagesController<T>
-  >();
-  public onCurrentPagesChanged: EventBase<PagesController<T>> = this.addEvent<
-    PagesController<T>
-  >();
-  public onPageNameChanged: EventBase<PagesController<T>> = this.addEvent<
-    PagesController<T>
-  >();
-  private pagesChangedFunc: (sender: SurveyModel, options: any) => any;
-  private currentpagedChangedFunc: (sender: SurveyModel, options: any) => any;
-  private surveyValue: SurveyModel;
-  constructor(public creator: CreatorBase<T>) {
-    super();
-    this.pagesChangedFunc = (sender: SurveyModel, options: any) => {
-      if (options.name !== "pages") return;
-      this.onPagesChanged.fire(this, {});
-    };
-    this.currentpagedChangedFunc = (sender: SurveyModel, options: any) => {
-      this.onCurrentPagesChanged.fire(this, {});
-    };
-    this.onSurveyChanged();
-  }
-  public get survey(): T {
-    return this.creator.survey;
-  }
-  public get pages(): Array<PageModel> {
-    return this.survey.pages;
-  }
-  public get currentPage(): PageModel {
-    return this.survey.currentPage;
-  }
-  public set currentPage(value: PageModel) {
-    (<any>this.survey).currentPage = value;
-  }
-  public selectPage(value: PageModel) {
-    this.currentPage = value;
-    this.creator.selectElement(value);
-  }
-  public getDisplayName(page: PageModel): string {
-    if (!page) return "";
-    return this.creator.getObjectDisplayName(page);
-  }
-  public onSurveyChanged() {
-    this.removeFunctions();
-    this.surveyValue = this.creator.survey;
-    if (!this.surveyValue) return;
-    this.onPagesChanged.fire(this, {});
-    this.surveyValue.onPropertyChanged.add(this.pagesChangedFunc);
-    this.surveyValue.onCurrentPageChanged.add(this.currentpagedChangedFunc);
-  }
-  public pageNameChanged(page: PageModel) {
-    this.onPageNameChanged.fire(this, { page: page });
-  }
-  public dispose() {
-    super.dispose();
-    this.removeFunctions();
-  }
-  private removeFunctions() {
-    if (!!this.surveyValue && !this.surveyValue.isDisposed) {
-      this.surveyValue.onPropertyChanged.remove(this.pagesChangedFunc);
-      this.surveyValue.onCurrentPageChanged.remove(
-        this.currentpagedChangedFunc
-      );
-    }
-  }
-}
-export class SelectionHistoryController extends Base {}

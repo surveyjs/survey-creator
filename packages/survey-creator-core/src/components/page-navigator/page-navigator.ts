@@ -1,4 +1,5 @@
-import { CreatorBase, PagesController } from "../../creator-base";
+import { CreatorBase } from "../../creator-base";
+import { PagesController } from "../../controllers/pages-controller";
 import {
   IActionBarItem,
   PageModel,
@@ -18,29 +19,23 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
   public icon: string;
   public pageListModel: ListModel;
   public popupModel: PopupModel;
-  private pagesChangedFunc: (sender: PagesController<T>, options: any) => any;
+  private pagesChangedFunc: (sender: PagesController, options: any) => any;
   private currentPageChangedFunc: (
-    sender: PagesController<T>,
+    sender: PagesController,
     options: any
   ) => any;
-  private pageNameChangedFunc: (
-    sender: PagesController<T>,
-    options: any
-  ) => any;
+  private pageNameChangedFunc: (sender: PagesController, options: any) => any;
 
-  constructor(private pagesController: PagesController<T>) {
+  constructor(private pagesController: PagesController) {
     super();
     this.icon = "icon-navigation";
-    this.pagesChangedFunc = (sender: PagesController<T>, options: any) => {
+    this.pagesChangedFunc = (sender: PagesController, options: any) => {
       this.buildItems();
     };
-    this.currentPageChangedFunc = (
-      sender: PagesController<T>,
-      options: any
-    ) => {
+    this.currentPageChangedFunc = (sender: PagesController, options: any) => {
       this.updateItemsActivity();
     };
-    this.pageNameChangedFunc = (sender: PagesController<T>, options: any) => {
+    this.pageNameChangedFunc = (sender: PagesController, options: any) => {
       var page = options.page;
       if (!page) return;
       var item = this.getActionBarByPage(page);

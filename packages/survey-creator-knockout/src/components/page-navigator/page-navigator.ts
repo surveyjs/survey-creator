@@ -12,7 +12,7 @@ const template = require("./page-navigator.html");
 // import template from "./page-navigator.html";
 
 export class PageNavigatorView extends PageNavigatorViewModel<SurveyModel> {
-  constructor(private pagesController: PagesController<SurveyModel>) {
+  constructor(private pagesController: PagesController) {
     super(pagesController);
   }
   protected createActionBarCore(item: IActionBarItem): ActionBarItem {

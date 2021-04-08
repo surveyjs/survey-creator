@@ -132,3 +132,120 @@ test("PageNavigatorViewModel", () => {
   creator.survey.pages[0].name = "page1-newName";
   expect(model.items[0].title).toEqual("page1-newName");
 });
+
+test("SelectionHistoryController: Go to next/prev", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+      },
+      {
+        type: "text",
+        name: "question2",
+      },
+    ],
+  };
+  var controller = creator.selectionHistoryController;
+  expect(controller.hasPrev).toBeFalsy();
+  expect(controller.hasNext).toBeFalsy();
+  creator.selectElement(creator.survey.pages[0]);
+  expect(controller.hasPrev).toBeTruthy();
+  expect(controller.hasNext).toBeFalsy();
+  creator.selectElement(creator.survey.getQuestionByName("question1"));
+  expect(controller.hasPrev).toBeTruthy();
+  expect(controller.hasNext).toBeFalsy();
+  creator.selectElement(creator.survey.pages[0]);
+  expect(controller.hasPrev).toBeTruthy();
+  expect(controller.hasNext).toBeFalsy();
+  controller.prev();
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(controller.hasPrev).toBeTruthy();
+  expect(controller.hasNext).toBeTruthy();
+  controller.next();
+  expect(creator.selectedElementName).toEqual("page1");
+  expect(controller.hasPrev).toBeTruthy();
+  expect(controller.hasNext).toBeFalsy();
+  controller.prev();
+  controller.prev();
+  expect(creator.selectedElementName).toEqual("survey");
+  expect(controller.hasPrev).toBeFalsy();
+  expect(controller.hasNext).toBeTruthy();
+});
+test("SelectionHistoryController: Reset history on changing survey", () => {
+  var json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+      },
+      {
+        type: "text",
+        name: "question2",
+      },
+    ],
+  };
+  var creator = new CreatorTester();
+  creator.JSON = json;
+
+  var controller = creator.selectionHistoryController;
+  expect(controller.hasPrev).toBeFalsy();
+  expect(controller.hasNext).toBeFalsy();
+  creator.selectElement(creator.survey.pages[0]);
+  expect(controller.hasPrev).toBeTruthy();
+  creator.JSON = json;
+  expect(controller.hasPrev).toBeFalsy();
+  expect(controller.hasNext).toBeFalsy();
+});
+test("SelectionHistoryController: Update history on deleting elements", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+          },
+          {
+            type: "matrixdynamic",
+            name: "question2",
+            columns: [{ name: "col1" }, { name: "col2" }],
+          },
+          {
+            type: "panel",
+            name: "panel1",
+            elements: [{ type: "text", name: "question3" }],
+          },
+        ],
+      },
+      {
+        name: "page2",
+      },
+    ],
+  };
+  var controller = creator.selectionHistoryController;
+  var page = creator.survey.pages[1];
+  creator.selectElement(page);
+  var question = creator.survey.getQuestionByName("question1");
+  creator.selectElement(question);
+  var panel = <PanelModel>creator.survey.getPanelByName("panel1");
+  creator.selectElement(panel);
+  var column = creator.survey.getQuestionByName("question2").columns[0];
+  creator.selectElement(column);
+  creator.selectElement(creator.survey);
+  expect(controller.hasInHistory(page)).toBeTruthy();
+  page.delete();
+  expect(controller.hasInHistory(page)).toBeFalsy();
+  expect(controller.hasInHistory(question)).toBeTruthy();
+  question.delete();
+  expect(controller.hasInHistory(question)).toBeFalsy();
+  expect(controller.hasInHistory(panel)).toBeTruthy();
+  panel.delete();
+  expect(controller.hasInHistory(panel)).toBeFalsy();
+  expect(controller.hasInHistory(column)).toBeTruthy();
+  creator.survey.getQuestionByName("question2").columns.splice(0, 1);
+  expect(controller.hasInHistory(column)).toBeFalsy();
+});

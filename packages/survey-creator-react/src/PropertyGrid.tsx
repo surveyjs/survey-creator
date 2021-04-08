@@ -16,9 +16,7 @@ class PropertyGridComponent extends SurveyElementBase<
     var creator = this.props.model;
     this.model = new PropertyGridViewModel(
       creator.propertyGrid,
-      (obj: Base): void => {
-        creator.selectElement(obj);
-      }
+      creator.selectionHistoryController
     );
   }
   protected getStateElement(): Base {

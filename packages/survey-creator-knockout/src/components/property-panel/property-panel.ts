@@ -12,9 +12,7 @@ ko.components.register("svc-property-panel", {
       var creator: CreatorBase<Survey> = params.model;
       const model = new PropertyGridViewModel(
         creator.propertyGrid,
-        (obj: Base): void => {
-          creator.selectElement(obj);
-        }
+        creator.selectionHistoryController
       );
       new ImplementorBase(model);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
