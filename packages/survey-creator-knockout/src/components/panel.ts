@@ -24,11 +24,6 @@ class KnockoutPanelAdornerViewModel extends KnockoutQuestionAdornerViewModel {
     super(creator, panel, templateData);
   }
 
-  get isEmptyElement(): boolean {
-    const panel = (this.surveyElement as any) as PanelModelBase;
-    return !panel.rows || panel.rows.length <= 0;
-  }
-
   get isDraggedOverMe(): boolean {
     return this.creator.dragDropHelper.draggedOverQuestion === this.surveyElement;
   }

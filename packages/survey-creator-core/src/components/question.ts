@@ -8,6 +8,7 @@ import {
   property,
   QuestionHtmlModel,
   PanelModel,
+  PanelModelBase,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropHelper } from "../dragdrophelper";
@@ -51,6 +52,12 @@ export class QuestionAdornerViewModel extends Base {
     if (this.surveyElement instanceof QuestionHtmlModel) {
       return !this.surveyElement.html;
     }
+
+    if (this.surveyElement instanceof PanelModelBase) {
+      const panel = (this.surveyElement as any) as PanelModelBase;
+      return !panel.rows || panel.rows.length <= 0;
+    }
+
     return false;
   }
 
