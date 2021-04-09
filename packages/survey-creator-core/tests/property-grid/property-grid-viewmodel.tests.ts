@@ -1,9 +1,9 @@
 import { SurveyModel, Base, PanelModel } from "survey-core";
 import {
   PropertyGridModel,
-  PropertyGridViewModel,
   PropertyGridEditorCollection,
 } from "../../src/property-grid";
+import { PropertyGridViewModel } from "../../src/property-grid/property-grid-view-model";
 
 test("Generate and update title correctly", () => {
   var survey = new SurveyModel({
@@ -15,9 +15,7 @@ test("Generate and update title correctly", () => {
     ],
   });
   var propertyGrid = new PropertyGridModel(survey);
-  var model = new PropertyGridViewModel(propertyGrid, (obj: Base): void => {
-    propertyGrid.obj = obj;
-  });
+  var model = new PropertyGridViewModel(propertyGrid, null);
   expect(model.title).toEqual("survey");
   propertyGrid.obj = survey.getQuestionByName("question1");
   expect(model.title).toEqual("question1");

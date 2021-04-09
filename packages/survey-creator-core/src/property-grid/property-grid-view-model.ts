@@ -12,8 +12,6 @@ export class PropertyGridViewModel extends Base {
   @property() survey: SurveyModel;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
   @property() title: string;
-  @property() hasPrev: boolean;
-  @property() hasNext: boolean;
   constructor(
     private model: PropertyGridModel,
     private selectionController: SelectionHistoryController
@@ -26,7 +24,6 @@ export class PropertyGridViewModel extends Base {
       id: "svd-grid-history-prev",
       title: "Prev", //TODO editorLocalization.getString("pe.edit"),
       component: "sv-action-bar-item",
-      enabled: this.hasPrev,
       action: () => {
         this.selectionController.prev();
       },
@@ -35,7 +32,6 @@ export class PropertyGridViewModel extends Base {
       id: "svd-grid-history-next",
       title: "Next", //TODO editorLocalization.getString("pe.edit"),
       component: "sv-action-bar-item",
-      enabled: this.hasNext,
       action: () => {
         this.selectionController.next();
       },
@@ -52,8 +48,10 @@ export class PropertyGridViewModel extends Base {
       });
     }
     this.updateTitle();
-    this.hasPrev = this.selectionController.hasPrev;
-    this.hasNext = this.selectionController.hasNext;
+    if (this.selectionController) {
+      this.toolbarItems[0].enabled = this.selectionController.hasPrev;
+      this.toolbarItems[1].enabled = this.selectionController.hasNext;
+    }
   }
   private updateTitle() {
     this.title = this.getTitle();
