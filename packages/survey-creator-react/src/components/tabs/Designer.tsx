@@ -23,7 +23,7 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
 
   protected getStateElement(): Base {
-    return this.props.creator;
+    return this.props.survey;
   }
 
   // render(): JSX.Element {
@@ -50,14 +50,17 @@ export class TabDesignerComponent extends SurveyElementBase<
       );
     });
 
-    surveyPages.push(
-      <CreatorSurveyPageComponent
-        key={this.model.newPage.id}
-        survey={survey}
-        page={this.model.newPage}
-        creator={creator}
-      ></CreatorSurveyPageComponent>
-    );
+    if (this.model.showNewPage) {
+      surveyPages.push(
+        <CreatorSurveyPageComponent
+          key={this.model.newPage.id}
+          survey={survey}
+          page={this.model.newPage}
+          creator={creator}
+        ></CreatorSurveyPageComponent>
+      );
+    }
+
     const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
       <>
