@@ -44,9 +44,6 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     this.aceEditor.getSession().on("change", () => {
       self.onTextChanged();
     });
-    this.aceEditor.on("input", () => {
-      self.isJSONChanged = true;
-    });
     this.aceEditor.getSession().setUseWorker(true);
     SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
   }
@@ -56,8 +53,10 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       .getUndoManager();
     this.aceCanUndo = undoManager.hasUndo();
     this.aceCanRedo = undoManager.hasRedo();
-
-    this.isJSONChanged = !undoManager.isClean();
+    var isFocused: any = this.aceEditor.isFocused();
+    if (isFocused === true) {
+      this.isJSONChanged = !undoManager.isClean();
+    }
   }
   protected onTextChanged(): void {
     this.updateUndoRedoState();
