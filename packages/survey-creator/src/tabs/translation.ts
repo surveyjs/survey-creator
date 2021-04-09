@@ -509,10 +509,11 @@ export class Translation implements ITranslationLocales {
     this.survey = survey;
 
     const items: Array<IActionBarItem> = [];
-    items.push({
+    items.push(<IActionBarItem>{
       id: "svd-translation-language-selector",
       title: "",
       tooltip: this.selectLanguageOptionsCaption,
+      ariaLabel: this.selectLanguageOptionsCaption,
       component: "svd-dropdown",
       action: ko.computed({
         read: () => this.koSelectedLanguageToAdd(),
@@ -530,10 +531,11 @@ export class Translation implements ITranslationLocales {
         write: (val: any) => this.koShowAllStrings(val),
       }),
     });
-    items.push({
+    items.push(<IActionBarItem>{
       id: "svd-translation-pages-selector",
       title: "",
       tooltip: "",
+      ariaLabel: this.showAllPagesText,
       component: "svd-dropdown",
       action: ko.computed({
         read: () => this.koFilteredPage(),
