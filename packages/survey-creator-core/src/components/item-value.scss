@@ -1,0 +1,13 @@
+.svc-item-value-controls {
+    display: none;
+    position: absolute;
+    left: -60px;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.svc-question__content--selected {
+    .svc-item-value-controls {
+        display: block;
+    }
+}
