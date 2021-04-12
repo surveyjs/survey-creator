@@ -44,7 +44,7 @@ export class SurveyJSONEditor {
     let focusEditor = () => setTimeout(() => this.aceEditor.focus(), 1);
     let items: Array<IToolbarItem> = [];
     items.push({
-      id: "svd-undo",
+      id: "svd-json-editor-undo",
       icon: "icon-actionundo",
       title: getLocString("ed.undo"),
       enabled: this.aceCanUndo,
@@ -56,7 +56,7 @@ export class SurveyJSONEditor {
       },
     });
     items.push({
-      id: "svd-redo",
+      id: "svd-json-editor-redo",
       icon: "icon-actionredo",
       enabled: this.aceCanRedo,
       title: getLocString("ed.redo"),

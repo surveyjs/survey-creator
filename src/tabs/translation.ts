@@ -440,10 +440,11 @@ export class Translation implements ITranslationLocales {
     this.survey = survey;
 
     let items: Array<IToolbarItem> = [];
-    items.push({
+    items.push(<IToolbarItem>{
       id: "svd-translation-language-selector",
       title: "",
       tooltip: this.selectLanguageOptionsCaption,
+      ariaLabel: this.selectLanguageOptionsCaption,
       component: "svd-dropdown",
       action: ko.computed({
         read: () => this.koSelectedLanguageToAdd(),
@@ -461,10 +462,11 @@ export class Translation implements ITranslationLocales {
         write: (val: any) => this.koShowAllStrings(val),
       }),
     });
-    items.push({
+    items.push(<IToolbarItem>{
       id: "svd-translation-page-selector",
       title: "",
       tooltip: "",
+      ariaLabel: this.showAllPagesText,
       component: "svd-dropdown",
       action: ko.computed({
         read: () => this.koFilteredPage(),
