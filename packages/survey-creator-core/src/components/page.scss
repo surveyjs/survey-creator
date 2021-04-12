@@ -2,11 +2,11 @@
 
 svc-page {
   display: block;
-  padding: calcSize(4);
 }
 
 .svc-page__content {
   position: relative;
+  padding: calcSize(4);
 }
 
 .svc-page__content-actions {

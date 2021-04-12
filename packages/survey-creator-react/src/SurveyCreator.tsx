@@ -12,6 +12,8 @@ import {
   unwrap,
   SurveyModel,
   SurveyElement,
+  ItemValue,
+  QuestionSelectBase,
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -124,6 +126,15 @@ class DesignTimeSurveyModel extends Model {
       }
     }
     return super.getElementWrapperComponentData(element);
+  }
+  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+    return "svc-item-value";
+  }
+  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
+    return {
+      creator: this.creator,
+      question
+    };
   }
 }
 class SurveyCreator extends CreatorBase<SurveyModel> {
