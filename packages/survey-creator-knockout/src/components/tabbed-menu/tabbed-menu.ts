@@ -5,7 +5,7 @@ import {
 } from "survey-knockout-ui";
 
 //import "./tabbed-menu.scss";
-import { ResponsibilityManager } from "survey-core";
+import { ResponsivityManager } from "survey-core";
 const template = require("./tabbed-menu.html");
 // import template from "./tabbed-menu.html";
 
@@ -17,7 +17,7 @@ ko.components.register("svc-tabbed-menu", {
       model.dotsItemPopupModel.horizontalPosition = "right";
       new AdaptiveElementImplementor(model);
 
-      var manager = new ResponsibilityManager(container, model);
+      var manager = new ResponsivityManager(container, model);
       manager.getItemSizes = () => {
         var widths: number[] = [];
         container

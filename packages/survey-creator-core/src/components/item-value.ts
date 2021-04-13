@@ -3,8 +3,7 @@ import {
     ItemValue,
     property,
     QuestionSelectBase,
-    SurveyItemValueTemplateData,
-    SurveyModel,
+    SurveyModel
   } from "survey-core";
 import { CreatorBase } from "../creator-base";
   
