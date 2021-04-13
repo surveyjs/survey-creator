@@ -385,7 +385,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     creator.tabs.push({
       id: "test",
       title: getLocString("ed.testSurvey"),
-      component: "svc-tab-test",
+      componentContent: "svc-tab-test",
       data: this,
       active: () => creator.viewType === "test",
       action: () => {

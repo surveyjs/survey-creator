@@ -49,12 +49,12 @@ export class TabJsonEditorTextareaPlugin
     creator.tabs.push({
       id: "editor",
       title: getLocString("ed.jsonEditor"),
-      component: "svc-tab-json-editor-textarea",
+      componentContent: "svc-tab-json-editor-textarea",
       data: this,
       action: () => {
         creator.makeNewViewActive("editor");
       },
-      active: () => creator.viewType === "editor",
+      active: () => creator.viewType === "editor"
     });
     creator.plugins["editor"] = this;
   }
