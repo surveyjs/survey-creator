@@ -245,7 +245,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
   
-          <!-- ko component: {name: 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
             data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
@@ -278,7 +278,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
   
-          <!-- ko component: {name: 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item"
             data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
@@ -311,7 +311,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
   
-          <!-- ko component: {name: 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item"
             data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
@@ -344,7 +344,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
   
-          <!-- ko component: {name: 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item"
             data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
@@ -401,7 +401,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
         
-          <!-- ko component: { name: component, params: { creator: $parent.creator, data: data } } -->
+          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
           <svc-toolbox
             params="categories: creator.toolboxCategories, creator: creator"
           >
@@ -1999,7 +1999,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
         
-          <!-- ko component: { name: component, params: { creator: $parent.creator, data: data } } -->
+          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
           <div
             class="svc-creator-tab__content"
           >
@@ -2081,7 +2081,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
         
-          <!-- ko component: { name: component, params: { creator: $parent.creator, data: data } } -->
+          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
           <div
             class="svc-creator-tab__content"
           >
@@ -2126,7 +2126,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         >
           
         
-          <!-- ko component: { name: component, params: { creator: $parent.creator, data: data } } -->
+          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
           <div
             class="svc-creator-tab__content"
           >
@@ -4073,7 +4073,7 @@ exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
   >
     
   
-    <!-- ko component: {name: 'svc-tabbed-menu-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
     <div
       class="svc-tabbed-menu-item"
       data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
@@ -4106,7 +4106,7 @@ exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
   >
     
   
-    <!-- ko component: {name: 'svc-tabbed-menu-item', params: { item: $data } } -->
+    <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
     <div
       class="svc-tabbed-menu-item"
       data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
