@@ -28,8 +28,10 @@ class SurveyHelper {
     baseName: string
   ): string | number {
     var arr = [];
-    for (var i = 0; i < objs.length; i++) {
-      arr.push([objs[i][keyPropName]]);
+    if (Array.isArray(objs)) {
+      for (var i = 0; i < objs.length; i++) {
+        arr.push([objs[i][keyPropName]]);
+      }
     }
     return getNextValue(baseName, arr);
   }
@@ -51,6 +53,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     var json: any = {};
     var baseValue = this.getBaseValue(prop);
     var keyPropName = this.getKeyValue();
+    if (!baseValue) {
+      baseValue = "item";
+    }
     var keyValue = null;
     if (!!baseValue && !!keyPropName) {
       var newName = SurveyHelper.getNewName(
@@ -66,6 +71,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     if (!!this.getObjTypeName()) {
       item[this.getObjTypeName()] = item.getType();
+    }
+    if (!Array.isArray(matrix.value)) {
+      matrix.value = [];
     }
     matrix.value.push(item);
     return item;
