@@ -10,7 +10,7 @@ import {
   ItemValueWrapperViewModel,
 } from "@survey/creator";
 import { ImplementorBase } from "survey-knockout-ui";
-import { KnockoutDragEvent } from "src/events";
+import { KnockoutDragEvent } from "../events";
 
 const template = require("./item-value.html");
 
