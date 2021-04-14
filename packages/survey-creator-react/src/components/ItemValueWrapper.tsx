@@ -1,4 +1,4 @@
-import { ItemValueAdornerViewModel } from "@survey/creator";
+import { ItemValueWrapperViewModel } from "@survey/creator";
 import React from "react";
 import { Base, ItemValue } from "survey-core";
 import {
@@ -17,10 +17,10 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
   ItemValueAdornerComponentProps,
   any
 > {
-  model: ItemValueAdornerViewModel;
+  model: ItemValueWrapperViewModel;
   constructor(props: ItemValueAdornerComponentProps) {
     super(props);
-    this.model = new ItemValueAdornerViewModel(
+    this.model = new ItemValueWrapperViewModel(
       this.props.componentData.creator,
       this.props.componentData.question,
       this.props.componentData.item
