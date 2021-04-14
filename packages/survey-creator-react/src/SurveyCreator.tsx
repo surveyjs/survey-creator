@@ -4,7 +4,6 @@ import { CSSProperties } from "react";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import {
   Base,
-  IActionBarItem,
   Question,
   PanelModel,
   StylesManager,
@@ -23,7 +22,7 @@ import {
   SurveyElementBase,
   SurveyLocStringViewer,
 } from "survey-react-ui";
-import { CreatorBase, ICreatorOptions } from "@survey/creator";
+import { ICreatorOptions, CreatorBase, ITabbedMenuItem } from "@survey/creator";
 
 StylesManager.applyTheme("modern");
 
@@ -72,7 +71,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return <>{tabs}</>;
     //return <Survey.Survey model={this.creator.survey} />;
   }
-  renderCreatorTab(tab: IActionBarItem) {
+  renderCreatorTab(tab: ITabbedMenuItem) {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     let style: CSSProperties = {};
     //if (tab.visible !== undefined && !tab.visible) {
@@ -81,7 +80,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     }
 
     const component = ReactElementFactory.Instance.createElement(
-      tab.component,
+      tab.componentContent,
       { creator: creator, survey: creator.survey, data: tab.data }
     );
     return (

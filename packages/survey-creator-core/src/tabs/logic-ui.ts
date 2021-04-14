@@ -256,7 +256,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
     creator.tabs.push({
       id: "logic",
       title: editorLocalization.getString("ed.logic"),
-      component: "svc-tab-logic",
+      componentContent: "svc-tab-logic",
       data: this,
       action: () => {
         creator.makeNewViewActive("logic");

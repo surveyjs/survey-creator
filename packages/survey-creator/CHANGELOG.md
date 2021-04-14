@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.42](https://github.com/surveyjs/survey-creator/compare/v1.8.41...v1.8.42) (2021-04-13)
+
+
+### Bug Fixes
+
+* Edit pages does not work when editing survey in Modal Window [#1140](https://github.com/surveyjs/survey-creator/issues/1140) ([c27008a](https://github.com/surveyjs/survey-creator/commit/c27008acda7865e3529a162d98a7f3d5e4470c49))
+
 ### [1.8.41](https://github.com/surveyjs/survey-creator/compare/v1.8.40...v1.8.41) (2021-04-06)
 
 ### [1.8.40](https://github.com/surveyjs/survey-creator/compare/v1.8.39...v1.8.40) (2021-04-05)

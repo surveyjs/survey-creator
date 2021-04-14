@@ -10,9 +10,7 @@ import {
   PopupModel,
   property,
   propertyArray,
-  EventBase,
-  IElement,
-  Serializer,
+  IElement
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -44,6 +42,10 @@ export interface ICreatorOptions {
 export interface ICreatorPlugin {
   activate: () => void;
   deactivate?: () => boolean;
+}
+
+export interface ITabbedMenuItem extends IActionBarItem {
+  componentContent: string;
 }
 
 /**
@@ -564,7 +566,7 @@ export class CreatorBase<T extends SurveyModel>
    */
   public showPageSelectorInToolbar = false;
 
-  @propertyArray() tabs: Array<Survey.IActionBarItem>;
+  @propertyArray() tabs: Array<ITabbedMenuItem>;
 
   /**
    * Returns the localized string by its id
@@ -701,12 +703,12 @@ export class CreatorBase<T extends SurveyModel>
     return page;
   }
   protected initTabs() {
-    const tabs: Array<Survey.IActionBarItem> = [];
+    const tabs: Array<ITabbedMenuItem> = [];
     if (this.showDesignerTab) {
       tabs.push({
         id: "designer",
         title: this.getLocString("ed.designer"),
-        component: "svc-tab-designer",
+        componentContent: "svc-tab-designer",
         data: this,
         action: () => this.makeNewViewActive("designer"),
         active: () => this.viewType === "designer",
@@ -767,10 +769,10 @@ export class CreatorBase<T extends SurveyModel>
           return this.undoRedoManager && this.undoRedoManager.canRedo();
         },
         action: () => {
-          var options = { canRedo: true };
+          const options = { canRedo: true };
           this.onBeforeRedo.fire(self, options);
           if (options.canRedo) {
-            var item = this.undoRedoManager.redo();
+            const item = this.undoRedoManager.redo();
             this.onAfterRedo.fire(self, { state: item });
           }
         },

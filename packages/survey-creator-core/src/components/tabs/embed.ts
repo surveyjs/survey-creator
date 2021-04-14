@@ -100,7 +100,7 @@ export class TabEmbedPlugin implements ICreatorPlugin {
     creator.tabs.push({
       id: "embed",
       title: getLocString("ed.embedSurvey"),
-      component: "svc-tab-embed",
+      componentContent: "svc-tab-embed",
       data: this,
       action: () => {
         creator.makeNewViewActive("embed");

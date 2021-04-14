@@ -9,9 +9,8 @@ import {
   AdaptiveActionBarItemWrapper,
   AdaptiveElement,
   Base,
-  IActionBarItem,
-  VerticalResponsibilityManager,
-  SurveyModel,
+  VerticalResponsivityManager,
+  SurveyModel
 } from "survey-core";
 import { SurveyElementBase, SvgIcon } from "survey-react-ui";
 
@@ -36,7 +35,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   any
 > {
   private adaptiveElement = new AdaptiveElement();
-  private manager: VerticalResponsibilityManager;
+  private manager: VerticalResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
   private updateVisibleItems: any;
 
@@ -55,7 +54,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     super.componentDidMount();
 
     const container = this.rootRef.current;
-    this.manager = new VerticalResponsibilityManager(
+    this.manager = new VerticalResponsivityManager(
       container,
       this.adaptiveElement,
       40
