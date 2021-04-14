@@ -13,6 +13,7 @@ import {
   ISurvey,
   IActionBarItem,
   propertyArray,
+  IQuestion,
 } from "survey-core";
 import {
   SurveyQuestionEditorTabDefinition,
@@ -23,6 +24,7 @@ import { editorLocalization } from "../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { creatorCss } from "../survey-theme/creator-css";
+import { IMatrixDropdownData } from "survey-core";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -118,6 +120,7 @@ export interface IPropertyGridEditor {
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
   onMatrixAllowRemoveRow?: (obj: Base, options: any) => boolean;
+  onGetQuestionTitleActions?: (obj: Base, options: any) => void;
 }
 
 export var PropertyGridEditorCollection = {
@@ -211,6 +214,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetMatrixRowAction) {
       res.onGetMatrixRowAction(obj, options, setObjFunc);
+    }
+  },
+  onGetQuestionTitleActions(obj: Base, prop: JsonObjectProperty, options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onGetQuestionTitleActions) {
+      res.onGetQuestionTitleActions(obj, options);
     }
   },
 };
@@ -567,6 +576,10 @@ export class PropertyGridModel {
     }
     this.surveyValue = this.createSurvey(json);
     this.surveyValue.css = creatorCss;
+    this.surveyValue.onDetailPanelRenderedRowCreated.add((_, opt) => {
+      opt.renderedRow.cells = [opt.renderedRow.cells[1]];
+      opt.renderedRow.cells[0].colSpans += 2;
+    });
     var page = this.surveyValue.createNewPage("p1");
     new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
       page,
@@ -585,6 +598,7 @@ export class PropertyGridModel {
     });
     this.survey.onGetQuestionTitleActions.add((sender, options) => {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
+      this.onGetQuestionTitleActions(options);
     });
     this.survey.onMatrixCellCreated.add((sender, options) => {
       this.onMatrixCellCreated(options);
@@ -738,6 +752,13 @@ export class PropertyGridModel {
       (obj: Base): void => {
         this.setObj(obj);
       }
+    );
+  }
+  private onGetQuestionTitleActions(options: any) {
+    PropertyGridEditorCollection.onGetQuestionTitleActions(
+      this.obj,
+      options.question.property,
+      options
     );
   }
   private onMatrixCellValueChanged(options: any) {

@@ -138,6 +138,8 @@ export var creatorCss = {
     column: "svc-survey-selectbase__column",
   },
   boolean: {
+    mainRoot:
+      "svc-survey-question svc-survey-row__question svc-survey-question--boolean",
     root: "",
     item: "svc-survey-checkbox",
     control: "svc-survey-checkbox__control",
@@ -211,6 +213,13 @@ export var creatorCss = {
     cell: "svc-survey-table__cell",
     headerCell: "svc-survey-table__cell svc-survey-table__cell--header",
     button: "svc-survey-btn",
+    detailRow: "svc-table__row svc-table__row--detail",
+    detailButton: "svc-table__cell--detail-button",
+    detailButtonExpanded: "svc-table__cell--detail-button--expanded",
+    detailIcon: "svc-detail-panel__icon",
+    detailIconExpanded: "svc-detail-panel__icon--expanded",
+    detailPanelCell: "svc-table__cell--detail-panel",
+    actionsCell: "svc-table__cell svc-table__cell--actions",
     buttonAdd: "svc-survey-matrixdynamic__add-btn",
     buttonRemove: "svc-survey-matrixdynamic__remove-btn",
     iconAdd: "",

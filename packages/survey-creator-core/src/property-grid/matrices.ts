@@ -43,6 +43,33 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       return this.createNewItem(sender, prop);
     };
     this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question, prop);
+    question.showHeader = false;
+  }
+  public onGetMatrixRowAction(
+    obj: Base,
+    options: any,
+    setObjFunc: (obj: Base) => void
+  ) {
+    const question = <QuestionMatrixDynamicModel>options.question;
+    options.actions.push({
+      iconName: "icon-delete",
+      location: "end",
+      title: question.removeRowText,
+      action: () => {
+        question.removeRow(options.row);
+      },
+    });
+  }
+  public onGetQuestionTitleActions(obj: Base, options: any) {
+    const question = options.question;
+    options.titleActions.push({
+      iconName: "icon-add(small)",
+      title: question.addRowText,
+      showTitle: false,
+      action: () => {
+        question.addRow();
+      },
+    });
   }
   protected createNewItem(
     matrix: QuestionMatrixDynamicModel,
@@ -325,6 +352,7 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
     options: any,
     setObjFunc: (obj: Base) => void
   ) {
+    super.onGetMatrixRowAction(obj, options, setObjFunc);
     options.actions.push({
       id: "svd-grid-edit-column",
       title: editorLocalization.getString("pe.edit"),
