@@ -213,6 +213,9 @@ export class SurveyHelper {
     delete json["valueName"];
     delete json["choicesVisibleIf"];
     delete json["choicesEnableIf"];
+    delete json["width"];
+    delete json["minWidth"];
+    delete json["maxWidth"];
   }
   public static updateQuestionJson(questionJson: any) {
     questionJson.storeOthersAsComment = false;
