@@ -15,7 +15,7 @@ import { KnockoutDragEvent } from "src/events";
 const template = require("./item-value.html");
 
 class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
-  constructor( creator: CreatorBase<SurveyModel>, question: QuestionSelectBase, item: ItemValue) {
+  constructor( public creator: CreatorBase<SurveyModel>, public question: QuestionSelectBase, public item: ItemValue, public templateData:any) {
     super(creator, question, item);
   }
 
@@ -44,7 +44,8 @@ ko.components.register("svc-item-value", {
       const model = new KnockoutItemValueWrapperViewModel(
         creator,
         question,
-        params.templateData.data
+        item,
+        params.templateData
       );
       new ImplementorBase(model);
       return model;
