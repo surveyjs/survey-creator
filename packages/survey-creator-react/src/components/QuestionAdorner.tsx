@@ -1,4 +1,4 @@
-import { QuestionAdornerViewModel } from "@survey/creator";
+import { QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, Question } from "survey-core";
@@ -46,6 +46,8 @@ export class QuestionAdornerComponent extends SurveyElementBase<
           onDragEnd={(e) =>
             this.model.dragEnd(this.model, new ReactDragEvent(e))
           }
+          onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
           <div
             className={"svc-question__content " + this.model.css()}

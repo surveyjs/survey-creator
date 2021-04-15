@@ -1808,7 +1808,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               >
                 <div
                   class="svc-page__content"
-                  data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
+                  data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
                 >
                   
   
@@ -3504,7 +3504,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       >
         <div
           class="svc-page__content"
-          data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
+          data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
         >
           
   

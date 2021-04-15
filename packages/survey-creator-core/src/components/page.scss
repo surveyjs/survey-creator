@@ -16,12 +16,12 @@ svc-page {
   display: none;
 }
 
-.svc-page__content:hover {
+.svc-hovered.svc-page__content {
   border: 1px solid $secondary;
 }
 
 .svc-page__content--selected,
-.svc-page__content--selected:hover {
+.svc-hovered.svc-page__content--selected {
   border: 2px solid $secondary;
   .svc-page__content-actions {
     display: block;

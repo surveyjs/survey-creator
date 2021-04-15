@@ -7,7 +7,7 @@ import {
   SurveyModel,
 } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { CreatorBase, QuestionAdornerViewModel } from "@survey/creator";
+import { CreatorBase, QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
 import { KnockoutMouseEvent, KnockoutDragEvent } from "../events";
 //import "./question.scss";
 const template = require("./question.html");
@@ -42,6 +42,9 @@ export class KnockoutQuestionAdornerViewModel extends QuestionAdornerViewModel {
   }
   private wrapDragEvent(event: DragEvent): KnockoutDragEvent {
     return new KnockoutDragEvent(event);
+  }
+  public hover(event: MouseEvent, element: HTMLElement) {
+    toggleHovered(event, element);
   }
 }
 
