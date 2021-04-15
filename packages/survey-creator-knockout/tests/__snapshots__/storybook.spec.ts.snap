@@ -1938,7 +1938,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <div
-              class="svc-plugin-tab__content"
+              class="svc-plugin-tab__content svc-test-tab__content"
             >
               
     
@@ -1983,7 +1983,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
   
             <div
-              class="svc-plugin-tab__content-actions"
+              class="svc-plugin-tab__content-actions svc-test-tab__content-actions"
             >
               
     

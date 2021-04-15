@@ -13,10 +13,11 @@ svc-tab-test {
 }
 
 .svc-test-tab__content-actions {
-  sv-action-bar {
+  .sv-action-bar {
     padding: 0;
     height: calc(6 * #{$base-unit});
     background: $background;
     border-top: 1px solid $border;
+    width: 100%;
   }
 }

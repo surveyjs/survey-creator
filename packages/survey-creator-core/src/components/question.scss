@@ -51,6 +51,12 @@ svc-question {
   }
 }
 
+.svc-question__content-actions {
+  .sv-action-bar {
+    width: 100%;
+  }
+}
+
 svc-question {
   sv-action-bar {
     padding: 0;

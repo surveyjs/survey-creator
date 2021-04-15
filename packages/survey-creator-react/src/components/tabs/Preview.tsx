@@ -24,7 +24,7 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
 
   render(): JSX.Element {
     return (
-      <div className="svc-creator-tab__content">
+      <div className="svc-creator-tab__content svc-test-tab__content">
         <div className="svc-plugin-tab__content">
           <SurveySimulator options={this.model.simulator}></SurveySimulator>
           {!this.model.isRunning ? (
