@@ -7,6 +7,7 @@ svc-page {
 .svc-page__content {
   position: relative;
   padding: calcSize(4);
+  border: 1px solid transparent;
 }
 
 .svc-page__content-actions {
