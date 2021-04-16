@@ -5,7 +5,7 @@
             <tr>
                 <th></th>
                 <!-- ko foreach: $data.koLocales -->
-                <th
+                <th scope="col"
                     data-bind="visible: $data.koVisible, text: $parent.getLocaleName($data.locale), style: {width: $parent.locWidth}">
                 </th>
                 <!-- /ko -->
@@ -13,11 +13,11 @@
         </thead>
         <tbody data-bind="foreach: {data: $data.locItems, as: 'item' }">
             <tr>
-                <td style="max-width: 200px; min-width:100px"><span data-bind="text:item.text"></span></td>
+                <td scope="row" style="max-width: 200px; min-width:100px"><span data-bind="text:item.text"></span></td>
                 <!-- ko foreach: $parent.koLocales -->
                 <td data-bind="visible: $data.koVisible, style: {width: $data.koVisible ? $parent.locWidth : '0px'}">
                     <textarea class="form-control" style="width:100%"
-                        data-bind="visible: $data.koVisible, disable: item.koReadOnly, value:item.koValue($data.locale), attr: {placeholder: !$data.locale? item.defaultValue : ''}"></textarea>
+                        data-bind="visible: $data.koVisible, disable: item.koReadOnly, value:item.koValue($data.locale), attr: {placeholder: !$data.locale? item.defaultValue : '', title: item.text + ' - ' + $parents[1].getLocaleName($data.locale) }"></textarea>
                 </td>
                 <!-- /ko -->
             </tr>
