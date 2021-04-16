@@ -416,9 +416,11 @@ export class SurveyElementEditorTabModel {
     this.focusEditor();
   }
   public focusEditor() {
-    if (!!this.htmlElements) {
-      focusFirstControl(this.htmlElements);
-    }
+    setTimeout(() => {
+      if (!!this.htmlElements) {
+        focusFirstControl(this.htmlElements);
+      }
+    });
   }
   public get name(): string {
     return this._name;
