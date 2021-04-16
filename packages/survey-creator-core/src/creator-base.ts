@@ -10,7 +10,7 @@ import {
   PopupModel,
   property,
   propertyArray,
-  IElement
+  IElement,
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -1641,6 +1641,12 @@ export class CreatorBase<T extends SurveyModel>
       this.doClickQuestionCore(newElement);
       this.selectElement(newElement);
     }
+  }
+  public getJSONForNewElement(json: any): any {
+    var newElement: Base = <any>this.createNewElement(json);
+    json = newElement.toJSON();
+    json["type"] = newElement.getType();
+    return json;
   }
 
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
