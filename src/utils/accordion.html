@@ -4,7 +4,7 @@
     class="svd-accordion-tab-header"
     role="tab"
     tabindex="0"
-    data-bind="click: toggle, key2click, visible: $parent.showHeader, attr: { 'data-title': title }"
+    data-bind="click: toggle, key2click, visible: $parent.showHeader, attr: { 'data-title': title, 'aria-selected': !collapsed() }"
   >
     <span
       data-bind="css: { 'svd-main-color': !collapsed() }, text: title"
@@ -24,7 +24,7 @@
   </div>
   <div
     class="svd-accordion-tab-content"
-    role="tab"
+    role="tabpanel"
     data-bind="ifnot: collapsed"
   >
     <!-- ko component: { name: data.htmlTemplate, params: { model: data.templateObject, afterRender: data.koAfterRender || data.afterRender } } --><!-- /ko -->
