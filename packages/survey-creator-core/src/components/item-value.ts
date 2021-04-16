@@ -28,8 +28,11 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   dragStart(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    // const sourceElement = model.surveyElement;
-    // return model.dragDropHelper.startDragQuestion(event, sourceElement);
+    return model.dragDropHelper.startDragItemValueItem(
+      event,
+      model.question,
+      model.item
+    );
   }
   dragOver(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
     // const draggedOverElement = model.surveyElement;
@@ -41,5 +44,8 @@ export class ItemValueWrapperViewModel extends Base {
 
   private get dragDropHelper(): DragDropHelper {
     return this.creator.dragDropHelper;
+  }
+  get isDraggable() {
+    return true;
   }
 }

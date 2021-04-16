@@ -10,7 +10,7 @@ import {
   PopupModel,
   property,
   propertyArray,
-  IElement
+  IElement,
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -664,7 +664,7 @@ export class CreatorBase<T extends SurveyModel>
         ? this.options.questionTypes
         : null
     );
-    this.dragDropHelper = new DragDropHelper(this, () => {});
+    this.dragDropHelper = new DragDropHelper(this);
     this.propertyGrid = new PropertyGridModel(
       (this.survey as any) as Base,
       this

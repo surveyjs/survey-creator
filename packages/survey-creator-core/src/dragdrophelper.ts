@@ -1,225 +1,15 @@
 import {
   IElement,
   PageModel,
-  ISurvey,
   SurveyModel,
   JsonObject,
-  Serializer,
   SurveyElement,
-  SurveyElementTemplateData,
   property,
-  Question,
   Base,
+  ItemValue,
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { IPortableDragEvent } from "./utils/events";
-
-// export class DragDropHelper<T extends SurveyModel> extends Base {
-//   constructor(public creator: CreatorBase<T>) {
-//     super();
-//   }
-
-//   get survey(): SurveyModel {
-//     return this.creator.survey;
-//   }
-
-//   private createDragDataJsonText(element: SurveyElement) {
-//     const json = new JsonObject().toJsonObject(element);
-//     json["type"] = element.getType();
-//     return JSON.stringify(json);
-//   }
-//   public createElementFromJsonText(jsonText: string): SurveyElement {
-//     const json = JSON.parse(jsonText);
-//     const instance: SurveyElement = Serializer.createClass(json["type"]);
-//     new JsonObject().toObject(json, instance);
-
-//     if (instance["setSurveyImpl"]) {
-//       instance["setSurveyImpl"](this.survey);
-//     } else {
-//       instance["setData"](this.survey);
-//     }
-
-//     return instance;
-//   }
-
-//   // Drag-drop feedback
-//   public createDragOverFeedback(jsonText: string): SurveyElementTemplateData {
-//     const instance = this.createElementFromJsonText(jsonText);
-
-//     // bad smell
-//     let name = "survey-question";
-//     if (instance.getType() == "panel") {
-//       name = "survey-panel";
-//     } else if (instance.getType() == "flowpanel") {
-//       name = "survey-flowpanel";
-//     }
-
-//     return {
-//       name: name,
-//       data: instance,
-//       afterRender: undefined,
-//     };
-//   }
-
-//   private dragOverFeedbackInstance: SurveyElementTemplateData;
-//   private cachedJsonText: string;
-//   public get dragOverFeedback(): SurveyElementTemplateData {
-//     if (!this.dragOverFeedbackInstance) {
-//       const jsonText = this.cachedJsonText; // event.dataTransfer.getData("svc-item-json");
-
-//       if (!!jsonText) {
-//         this.dragOverFeedbackInstance = this.createDragOverFeedback(jsonText);
-//       }
-//     }
-//     return this.dragOverFeedbackInstance;
-//   }
-//   @property() _showDragOverFeedbackAbove: boolean;
-//   @property() _showDragOverFeedbackBelow: boolean;
-//   @property() draggedOverQuestion: SurveyElement;
-//   @property() draggedOverPage: PageModel;
-
-//   private draggedSurveyElement: SurveyElement;
-//   public showDragOverPage(page: PageModel): boolean {
-//     return this.draggedOverPage !== undefined && page.elements.length <= 0;
-//   }
-//   public showDragOverFeedbackAbove(surveyElement: SurveyElement): boolean {
-//     return (
-//       surveyElement === this.draggedOverQuestion &&
-//       this._showDragOverFeedbackAbove
-//     );
-//   }
-//   public showDragOverFeedbackBelow(surveyElement: SurveyElement): boolean {
-//     return (
-//       surveyElement === this.draggedOverQuestion &&
-//       this._showDragOverFeedbackBelow
-//     );
-//   }
-
-//   public clearDragFeedback() {
-//     this.draggedOverQuestion = undefined;
-//     this.draggedOverPage = undefined;
-//     this.dragOverFeedbackInstance = undefined;
-//     this._showDragOverFeedbackAbove = false;
-//     this._showDragOverFeedbackBelow = false;
-//     this.cachedJsonText = undefined;
-//     this.draggedSurveyElement = undefined;
-//   }
-
-//   // /Drag-drop feedback
-
-//   public dragToolboxItem(jsonText: string, event: IPortableDragEvent) {
-//     this.clearDragFeedback();
-//     if (!this.creator.readOnly) {
-//       event.dataTransfer.setData("svc-item-json", jsonText);
-//       event.dataTransfer.effectAllowed = "move";
-
-//       this.cachedJsonText = jsonText;
-//     }
-//   }
-
-//   public dragStart(surveyElement: SurveyElement, event: IPortableDragEvent) {
-//     const jsonText = this.createDragDataJsonText(surveyElement);
-//     event.cancelBubble = true;
-//     this.dragToolboxItem(jsonText, event);
-//     this.draggedSurveyElement = surveyElement;
-//     return true;
-//   }
-
-//   public dragOverPage(page: PageModel, event: IPortableDragEvent) {
-//     event.preventDefault();
-//     event.cancelBubble = true;
-//     event.stopPropagation();
-
-//     if (page.elements.length > 0) return;
-
-//     this.draggedOverQuestion = undefined;
-//     this.draggedOverPage = page;
-//   }
-//   public dragOver(surveyElement: SurveyElement, event: IPortableDragEvent) {
-//     event.preventDefault();
-//     event.cancelBubble = true;
-//     event.stopPropagation();
-
-//     this.draggedOverQuestion = surveyElement;
-//     this.draggedOverPage = undefined;
-
-//     const isBelow = this.isAtLowerPartOfCurrentTarget(event);
-//     this._showDragOverFeedbackAbove = !isBelow;
-//     this._showDragOverFeedbackBelow = isBelow;
-//   }
-
-//   drop(surveyElement: SurveyElement, event: IPortableDragEvent) {
-//     this.dropAt(surveyElement, event, this._showDragOverFeedbackBelow);
-//   }
-//   public dropAtPage(page: PageModel, event: IPortableDragEvent) {
-//     event.stopPropagation();
-//     const jsonText = event.dataTransfer.getData("svc-item-json");
-//     if (!!jsonText) {
-//       const instance = this.createElementFromJsonText(jsonText);
-//       page.addQuestion(instance as Question);
-//       this.removeDraggedQuestion();
-//       this.end();
-//     }
-//   }
-//   public dropAt(
-//     surveyElement: SurveyElement,
-//     event: IPortableDragEvent,
-//     below: boolean
-//   ) {
-//     event.stopPropagation();
-//     if (!surveyElement) {
-//       surveyElement = this.draggedOverQuestion as Question;
-//     }
-//     if (!surveyElement) {
-//       return;
-//     }
-
-//     if (below === undefined) {
-//       below = this.isAtLowerPartOfCurrentTarget(event);
-//     }
-
-//     const jsonText = event.dataTransfer.getData("svc-item-json");
-//     if (!!jsonText) {
-//       const instance = this.createElementFromJsonText(jsonText);
-//       const parent: any = surveyElement.parent;
-//       if (below) {
-//         parent.insertElementAfter(instance, surveyElement);
-//       } else {
-//         parent.insertElementBefore(instance, surveyElement);
-//       }
-
-//       this.removeDraggedQuestion();
-//     }
-//     this.end();
-//   }
-
-//   public dragEnd(surveyElement: SurveyElement, event: IPortableDragEvent) {
-//     this.clearDragFeedback();
-//     this.end();
-//   }
-
-//   private removeDraggedQuestion() {
-//     if (this.draggedSurveyElement && this.draggedSurveyElement.parent) {
-//       this.draggedSurveyElement.parent.removeElement(
-//         <IElement>(<any>this.draggedSurveyElement)
-//       );
-//     }
-//   }
-
-//   private isAtLowerPartOfCurrentTarget(event: IPortableDragEvent): boolean {
-//     var target = event.currentTarget;
-//     if (!target["getBoundingClientRect"]) {
-//       return true;
-//     }
-//     const bounds: DOMRect = (<any>target).getBoundingClientRect();
-//     const middle = (bounds.bottom + bounds.top) / 2;
-//     return event.clientY >= middle;
-//   }
-
-//   public end() {
-//     this.clearDragFeedback();
-//   }
-// }
 
 export class DragDropTargetElement {
   public page: PageModel = null;
@@ -264,50 +54,70 @@ export class DragDropTargetElement {
 export class DragDropHelper extends Base {
   public static edgeHeight: number = 20;
   public static nestedPanelDepth: number = -1;
-  public static dataStart: string = "{element:";
-  public static dragData: any = { text: "", json: null };
   public static prevEvent = { element: null, x: -1, y: -1 };
   public static counter: number = 1;
 
-  private onModifiedCallback: (options?: any) => any;
   public ddTarget: DragDropTargetElement = null;
 
   @property() draggedOverQuestion: SurveyElement;
 
-  constructor(
-    private creator: CreatorBase<SurveyModel>,
-    onModifiedCallback: (options?: any) => any
-  ) {
+  constructor(private creator: CreatorBase<SurveyModel>) {
     super();
-    this.onModifiedCallback = onModifiedCallback;
   }
 
   public get survey(): SurveyModel {
     return this.creator.survey;
   }
 
-  public startDragQuestion(event: IPortableDragEvent, sourceElement: any) {
-    event.stopPropagation();
-
-    var sourceElementJson = new JsonObject().toJsonObject(sourceElement);
-    sourceElementJson["type"] = sourceElement.getType();
-    this.prepareData(event, sourceElementJson, sourceElement);
-
-    return true;
-  }
   public startDragToolboxItem(
     event: IPortableDragEvent,
     sourceElementJson: any
   ) {
-    event.stopPropagation();
+    event.stopPropagation(); // prevent call startDrag event on Parent
 
-    this.prepareData(event, sourceElementJson, null);
+    this.setupDataTransfer(event, sourceElementJson.name);
+
+    this.ddTarget = new DragDropTargetElement(
+      this.createFakeElement(sourceElementJson),
+      null,
+      DragDropHelper.nestedPanelDepth
+    );
   }
 
-  public isSurveyDragging(event: IPortableDragEvent): boolean {
-    if (!event) return false;
-    var data = this.getData(event).text;
-    return data && data.indexOf(DragDropHelper.dataStart) == 0;
+  public startDragQuestion(event: IPortableDragEvent, sourceElement: any) {
+    event.stopPropagation(); // prevent call startDrag event on Parent
+
+    var sourceElementJson = new JsonObject().toJsonObject(sourceElement);
+    sourceElementJson["type"] = sourceElement.getType();
+
+    this.setupDataTransfer(event, sourceElementJson.name);
+
+    this.ddTarget = new DragDropTargetElement(
+      this.createFakeElement(sourceElementJson),
+      sourceElement,
+      DragDropHelper.nestedPanelDepth
+    );
+
+    return true;
+  }
+
+  public startDragItemValueItem(
+    event: IPortableDragEvent,
+    question: SurveyElement,
+    item: ItemValue
+  ) {
+    event.stopPropagation(); // prevent call startDrag event on Parent
+
+    var dataTransferText = question.name + " : " + item.name;
+    // this.setupDataTransfer(event, dataTransferText);
+
+    // this.ddTarget = new DragDropTargetElement(
+    //   this.createFakeElement(sourceElementJson),
+    //   sourceElement,
+    //   DragDropHelper.nestedPanelDepth
+    // );
+
+    return true;
   }
 
   public doDragDropOver(
@@ -317,12 +127,9 @@ export class DragDropHelper extends Base {
   ) {
     event.stopPropagation();
     event.preventDefault();
-    event.dataTransfer.dropEffect = "copy";
 
-    if (this.ddTarget.fakeElement === draggedOverElement) {
-      // console.log("drag over fake element");
-      return;
-    }
+    if (!event.dataTransfer.getData("Text")) return; // this is strange, how it could be that dragover be called before dragstart?
+    if (this.ddTarget.fakeElement === draggedOverElement) return;
 
     this.draggedOverQuestion = draggedOverElement;
 
@@ -358,32 +165,12 @@ export class DragDropHelper extends Base {
     this.ddTarget.moveTo(draggedOverElement, bottomInfo.isBottom, isEdge);
   }
 
-  public doDragDropOverFlow(event: IPortableDragEvent, element: any) {
-    if (!!this.ddTarget) {
-      event = this.isCanDragContinue(event, element);
-      if (!event) {
-        return true;
-      }
-      var bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
-      return this.ddTarget.moveTo(
-        element,
-        bottomInfo.isBottom,
-        bottomInfo.isEdge
-      );
-    }
-    return true;
-  }
-
   private isCanDragContinue(
     event: IPortableDragEvent,
     draggedOverElement: any
   ): IPortableDragEvent {
     const isSamePlace = this.isSamePlace(event, draggedOverElement);
-    //event = this.getEvent(event);
-    // console.log("draggedOverElement: " + !draggedOverElement);
-    // console.log("isSurveyDragging: " + !this.isSurveyDragging(event));
-    // console.log("isSamePlace: " + isSamePlace);
-    if (!draggedOverElement || !this.isSurveyDragging(event) || isSamePlace) {
+    if (!draggedOverElement || isSamePlace) {
       return null;
     }
     return event;
@@ -397,32 +184,11 @@ export class DragDropHelper extends Base {
     this.clearData();
   }
 
-  public get isMoving(): boolean {
-    return this.ddTarget && !!this.ddTarget.sourceElement;
-  }
-
-  public doDrop(event: IPortableDragEvent, prevedDefault: boolean = true) {
+  public doDrop(event: IPortableDragEvent) {
     event.stopPropagation();
-
-    if (this.isSurveyDragging(event)) {
-      if (prevedDefault) {
-        event.preventDefault();
-      }
-      var newElement = this.ddTarget.doDrop();
-      this.creator.selectElement(newElement);
-      if (this.onModifiedCallback)
-        this.onModifiedCallback({
-          type: "DO_DROP",
-          page: this.ddTarget.page,
-          source: this.ddTarget.sourceElement,
-          target: this.ddTarget.fakeElement,
-          newElement: this.ddTarget.sourceElement ? null : newElement,
-          moveToParent: newElement.parent,
-          moveToIndex: !!newElement.parent
-            ? newElement.parent.elements.indexOf(newElement)
-            : -1,
-        });
-    }
+    event.preventDefault();
+    var newElement = this.ddTarget.doDrop();
+    this.creator.selectElement(newElement);
     this.end();
   }
 
@@ -480,20 +246,6 @@ export class DragDropHelper extends Base {
     draggedOverElement: any
   ): boolean {
     var prev = DragDropHelper.prevEvent;
-    // console.log(
-    //   "DragDropHelper::isSamePlace:element=%o, prev.element=%o",
-    //   draggedOverElement,
-    //   prev.element
-    // );
-    // console.log("(prev.element != element) == " + (prev.element != draggedOverElement));
-    // console.log(
-    //   "Math.abs(event.clientX - prev.x) > 5 == " +
-    //     (Math.abs(event.clientX - prev.x) > 5)
-    // );
-    // console.log(
-    //   "Math.abs(event.clientY - prev.y) > 5 == " +
-    //     (Math.abs(event.clientY - prev.y) > 5)
-    // );
     if (
       prev.element != draggedOverElement ||
       Math.abs(event.clientX - prev.x) > 5 ||
@@ -507,7 +259,7 @@ export class DragDropHelper extends Base {
     return true;
   }
 
-  private createTargetElement(json: any): any {
+  private createFakeElement(json: any): any {
     if (!json || !json.type) return null;
     var targetElement = this.creator.createNewElement(json);
     if (targetElement["setSurveyImpl"]) {
@@ -519,42 +271,23 @@ export class DragDropHelper extends Base {
     return targetElement;
   }
 
-  private prepareData(
-    event: IPortableDragEvent,
-    sourceElementJson: any,
-    sourceElement: IElement
-  ) {
-    var str = DragDropHelper.dataStart + sourceElementJson.name + "}";
-    this.setData(event, str);
-    var fakeElement = this.createTargetElement(sourceElementJson);
-    this.ddTarget = new DragDropTargetElement(
-      fakeElement,
-      sourceElement,
-      DragDropHelper.nestedPanelDepth
-    );
-  }
+  private setupDataTransfer(event: IPortableDragEvent, text: string) {
+    event.dataTransfer.setData("Text", text);
+    event.dataTransfer.effectAllowed = "move";
 
-  private setData(event: IPortableDragEvent, text: string) {
-    if (event.dataTransfer) {
-      event.dataTransfer.setData("Text", text);
-      event.dataTransfer.effectAllowed = "copy";
-    }
-    DragDropHelper.dragData = { text: text };
-  }
+    event.dataTransfer.setData = () => {
+      debugger;
+    };
+    event.dataTransfer.clearData = () => {
+      debugger;
+    };
 
-  private getData(event: IPortableDragEvent): any {
-    if (event.dataTransfer) {
-      var text = event.dataTransfer.getData("Text");
-      if (text) {
-        DragDropHelper.dragData.text = text;
-      }
-    }
-    return DragDropHelper.dragData;
+    window["e1e"] = event;
   }
 
   private clearData() {
+    console.log("clearData");
     this.ddTarget = null; // We should reset ddTarget to null due to the https://surveyjs.answerdesk.io/ticket/details/T1003 - onQuestionAdded not fired after D&D
-    DragDropHelper.dragData = { text: "", json: null };
     var prev = DragDropHelper.prevEvent;
     prev.element = null;
     prev.x = -1;
