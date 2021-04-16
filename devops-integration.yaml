@@ -37,13 +37,13 @@ steps:
     $env:GIT_REDIRECT_STDERR = '2>&1'
     git config --global user.email "kurmanov.work@gmail.com"
     git config --global user.name "dmitrykurmanov"
-  displayName: 'set up Git config'
+  displayName: 'Set up git config'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm install
-  displayName: 'npm install'
-
+  displayName: 'Install npm'
+  
 - task: DownloadBuildArtifacts@0
   inputs:
     buildType: 'specific'
@@ -54,6 +54,13 @@ steps:
     downloadType: 'single'
     artifactName: 'SurveyJSLibraryBuild'
     downloadPath: '$(System.ArtifactsDirectory)'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+    Contents: '**'
+    TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+    OverWrite: true
 
 - task: CopyFiles@2
   inputs:
@@ -69,17 +76,17 @@ steps:
     Contents: 'version.txt'
     TargetFolder: '$(Build.SourcesDirectory)/'
     OverWrite: true
-  displayName: 'Copy Build Artifact - SurveyJSVersion File'
+  displayName: 'Copy build artifact - SurveyJSVersion File'
 
 - powershell: |
     $version = Get-Content $(Build.SourcesDirectory)/version.txt
     Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
-  displayName: 'setup SurveyJSVersion variable from SurveyJSVersionFile'
+  displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
 
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run release -- --release-as $(SurveyJSVersion)
-  displayName: 'npm run release specific version'
+  displayName: 'Release specific version'
 #####################################################
 
 - task: DownloadBuildArtifacts@0
@@ -100,32 +107,163 @@ steps:
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/surveyjs-widgets'
     OverWrite: true
 
+# Creator CORE
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm install
+  displayName: 'Install npm'
+  
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run build
+  displayName: 'Build creator v2 core'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run test
+  displayName: 'Unit tests creator v2 core'
+  
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
+    ArtifactName: 'SurveyJSCreatorV2BuildCore'
+    publishLocation: 'Container'  
+
+# Creator REACT
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm install
+  displayName: 'Install npm'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react-dom
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types/react-dom
+    ls
+    cd $(Build.SourcesDirectory)/survey-library/build
+    echo $(Build.SourcesDirectory)/survey-library/build
+    ls
+    cd $(Build.SourcesDirectory)/survey-library/build/survey-core
+    echo $(Build.SourcesDirectory)/survey-library/build/survey-core
+    ls
+    cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
+    echo $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui
+    ls
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    ls
+  displayName: 'Pre-debug survey-creator-react build'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run build
+  displayName: 'Build creator v2 react'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run test
+  displayName: 'Unit tests creator v2 react'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run testcafe:ci
+  displayName: 'Functional tests creator v2 react'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react'
+    ArtifactName: 'SurveyJSCreatorV2BuildReact'
+    publishLocation: 'Container'  
+    
+
+# Creator KNOCKOUT
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm install
+  displayName: 'Install npm'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm run build
+  displayName: 'Build creator v2 knockout'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm run test
+  displayName: 'Unit tests creator v2 knockout'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm run testcafe:ci
+  displayName: 'Functional tests creator v2 knockout'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-knockout
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-knockout'
+    ArtifactName: 'SurveyJSCreatorV2BuildKnockout'
+    publishLocation: 'Container'  
+
+# Creator V1
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run build_prod
-  displayName: 'build_prod'
+  displayName: 'Build prod'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run test_ci
-  displayName: 'unit tests'
+  displayName: 'Unit tests'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run testcafe_ci
-  displayName: 'functional tests'
+  displayName: 'Functional tests'
 
 - script: |
+    mkdir $(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run doc_gen
-  displayName: 'generate docs'
+  displayName: 'Generate docs'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
+    TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
+    CleanTargetFolder: true
+  displayName: 'Copy root docs to the local surveyjs/service repo'
 
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs'
     TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
-    CleanTargetFolder: true
-  displayName: 'copy generated docs to the local surveyjs/service repo'
+    CleanTargetFolder: false
+  displayName: 'Copy generated docs to the local surveyjs/service repo'
 
 # read about the problem with git output ($env:GIT_REDIRECT_STDERR = '2>&1') :
 # https://github.com/microsoft/azure-pipelines-yaml/issues/248
@@ -140,7 +278,7 @@ steps:
     git commit -m "[skip ci] Updated survey-creator docs"
     git pull origin master
     git push origin master
-  displayName: 'git surveyjs/service push updated docs'
+  displayName: 'Git surveyjs/service push updated docs'
 
 - task: CopyFiles@2
   inputs:

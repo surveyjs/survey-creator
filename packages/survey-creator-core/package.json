@@ -10,7 +10,9 @@
   "scripts": {
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
     "test": "jest",
-    "test:dev": "jest --watch"
+    "test:dev": "jest --watch",
+    "watch:dev": "webpack --env.buildType dev --watch",
+    "watch:prod": "webpack --env.buildType prod --watch"
   },
   "dependencies": {
     "papaparse": "^5.2.0",

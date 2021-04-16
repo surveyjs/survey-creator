@@ -101,7 +101,6 @@ export var flowpanelActionsAdorner = {
       "<flowpanel-actions params='question: model, editor: editor'></question-flowpanel>";
     elements[0].appendChild(decoration);
     ko.applyBindings({ model: model, editor: editor }, decoration);
-    ko.tasks.runEarly();
     editor.onAdornerRenderedCallback(model, "flowpanel-actions", decoration);
   }
 };

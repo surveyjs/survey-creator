@@ -99,6 +99,88 @@ QUnit.test("Question Editor apply/reset/onChanged", function (assert) {
   assert.equal(dropdownQuestion.visibleIf, "false", "visibleIf assign correct");
 });
 
+QUnit.test("Survey Editor, modify pages", function (assert) {
+  var survey = new Survey.Survey({
+    pages: [
+      {
+        name: "page1",
+        title: "Page 1",
+        elements: [{ type: "text", name: "q1" }],
+      },
+      {
+        name: "page2",
+        elements: [{ type: "text", name: "q2" }],
+      },
+    ],
+  });
+  var editor = new SurveyQuestionEditor(survey);
+  var pages = editor.editableObj.pages;
+  assert.equal(pages.length, 2, "There are two pages");
+  assert.equal(pages[0].title, "Page 1", "page title copied");
+  assert.equal(pages[1].name, "page2", "page name copied");
+  assert.equal(pages[0].elements.length, 0, "elements are not copied");
+  assert.equal(
+    pages[0].originalObj.elements.length,
+    1,
+    "has elements in original"
+  );
+  pages[0].name = "page11";
+  pages[0].title = "Page_1";
+  editor.apply();
+  assert.equal(survey.pages[0].name, "page11", "page name was changed");
+  assert.equal(pages[0].title, "Page_1", "page title was changed");
+  pages.push(new Survey.Page("page3"));
+  pages.splice(0, 0, new Survey.Page("page4"));
+  editor.apply();
+  editor.apply();
+  assert.equal(survey.pages.length, 4, "There are four pages");
+  assert.equal(survey.pages[0].name, "page4", "the first page is page4");
+  assert.equal(survey.pages[3].name, "page3", "the last page is page3");
+  pages.splice(0, 1);
+  pages.splice(0, 1);
+  assert.equal(pages.length, 2, "editableObj: There are two pages again.");
+  assert.equal(pages[0].name, "page2", "editableObj: the first page is page2");
+  assert.equal(pages[1].name, "page3", "editableObj: the second page is page3");
+  editor.apply();
+  assert.equal(survey.pages.length, 2, "There are two pages again.");
+  assert.equal(survey.pages[0].name, "page2", "the first page is page2");
+  assert.equal(survey.pages[1].name, "page3", "the second page is page3");
+  assert.equal(
+    survey.pages[0].elements[0].name,
+    "q2",
+    "the original page has its elements"
+  );
+  var page1 = pages[0];
+  pages.splice(0, 1);
+  pages.push(page1);
+  assert.equal(
+    pages[0].name,
+    "page3",
+    "editableObj-Reordering: the first page is page3"
+  );
+  editor.apply();
+  assert.equal(
+    survey.pages.length,
+    2,
+    "Reordering: There are two pages again."
+  );
+  assert.equal(
+    survey.pages[0].name,
+    "page3",
+    "Reordering: the first page is page3"
+  );
+  assert.equal(
+    survey.pages[1].name,
+    "page2",
+    "Reordering: the second page is page2"
+  );
+  assert.equal(
+    survey.pages[1].elements[0].name,
+    "q2",
+    "Reordering: the original page has its elements"
+  );
+});
+
 QUnit.test("Survey Editor, modal apply, Bug #674", function (assert) {
   var creator = new SurveyCreator();
   creator.JSON = {

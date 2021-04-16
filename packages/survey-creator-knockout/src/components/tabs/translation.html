@@ -1,36 +1,34 @@
-<div>
+<div class="svc-creator-tab__content">
   <!-- ko if: $data.showTranslation -->
-    <!-- ko template: { name: 'svd-translation-tab', data: $data.translation} -->
+  <div class="svc-plugin-tab__content" data-bind="with: $data.translation">
+    <!-- ko template: { name: 'survey-content', data: $data.settingsSurvey  } -->
     <!-- /ko -->
-  <!-- /ko -->
-</div>
-<script type="text/html" id="svd-translation-tab">
-<div class="form-group svd-translation-tab" style="width: 100%">
-  <!-- ko template: { name: 'survey-content', data: $data.settingsSurvey  } -->
-  <!-- /ko -->
-  <sv-action-bar params="items: toolbarItems"></sv-action-bar>
-  <div class="svd-vertical-container" role="presentation">
-    <div class="svd-vertical-container__row" role="presentation">
-      <div class="svd-vertical-container__cell" role="presentation">
-        <div class="svd-vertical-container__cell-content-holder">
-          <div
-            class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable"
-          >
+    <div class="svc-plugin-tab__content-actions">
+      <sv-action-bar params="items: toolbarItems"></sv-action-bar>
+    </div>
+    <div class="svd-vertical-container" role="presentation">
+      <div class="svd-vertical-container__row" role="presentation">
+        <div class="svd-vertical-container__cell" role="presentation">
+          <div class="svd-vertical-container__cell-content-holder">
             <div
-              class="svd-translation-no-strings svd-light-text-color"
-              data-bind="visible:$data.isEmpty"
+              class="svd-vertical-container__cell-content svd-vertical-container__cell-content--scrollable"
             >
-              <span data-bind="text:$data.noStringsText"></span>
+              <div
+                class="svd-translation-no-strings svd-light-text-color"
+                data-bind="visible:$data.isEmpty"
+              >
+                <span data-bind="text:$data.noStringsText"></span>
+              </div>
+              <!-- ko ifnot: $data.isEmpty -->
+              <svd-translation-group
+                params="model: root"
+              ></svd-translation-group>
+              <!-- /ko -->
             </div>
-            <!-- ko ifnot: $data.isEmpty -->
-            <svd-translation-group
-              params="model: root"
-            ></svd-translation-group>
-            <!-- /ko -->
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- /ko -->
 </div>
-</script>

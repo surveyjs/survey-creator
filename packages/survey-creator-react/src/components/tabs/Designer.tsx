@@ -5,6 +5,7 @@ import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
 import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
+import PropertyGridComponent from "../../PropertyGrid";
 
 interface ITabDesignerComponentProps {
   creator: CreatorBase<SurveyModel>;
@@ -22,18 +23,18 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
 
   protected getStateElement(): Base {
-    return this.props.creator;
+    return this.props.survey;
   }
 
+  // render(): JSX.Element {
+  //   return (
+  //     <ReactDragDropHelperComponent
+  //       creator={this.props.creator}
+  //       renderContent={() => this.renderContent()}
+  //     ></ReactDragDropHelperComponent>
+  //   );
+  // }
   render(): JSX.Element {
-    return (
-      <ReactDragDropHelperComponent
-        creator={this.props.creator}
-        renderContent={() => this.renderContent()}
-      ></ReactDragDropHelperComponent>
-    );
-  }
-  renderContent(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const survey: SurveyModel = this.props.survey;
     const className = "svc-tab-designer " + survey.css.root;
@@ -49,15 +50,18 @@ export class TabDesignerComponent extends SurveyElementBase<
       );
     });
 
-    surveyPages.push(
-      <CreatorSurveyPageComponent
-        key={this.model.newPage.id}
-        survey={survey}
-        page={this.model.newPage}
-        creator={creator}
-      ></CreatorSurveyPageComponent>
-    );
+    if (this.model.showNewPage) {
+      surveyPages.push(
+        <CreatorSurveyPageComponent
+          key={this.model.newPage.id}
+          survey={survey}
+          page={this.model.newPage}
+          creator={creator}
+        ></CreatorSurveyPageComponent>
+      );
+    }
 
+    const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
       <>
         <SurveyCreatorToolbox
@@ -72,6 +76,9 @@ export class TabDesignerComponent extends SurveyElementBase<
           creator={creator}
           pages={creator.pagesController.pages}
         ></SurveyPageNavigator>
+        <div className="svc-flex-column" style={style}>
+          <PropertyGridComponent model={creator}></PropertyGridComponent>
+        </div>
       </>
     );
     /*
@@ -104,22 +111,22 @@ interface ReactDragDropHelperComponentProps {
   renderContent: () => JSX.Element;
 }
 
-class ReactDragDropHelperComponent extends SurveyElementBase<
-  ReactDragDropHelperComponentProps,
-  any
-> {
-  constructor(props: ReactDragDropHelperComponentProps) {
-    super(props);
-  }
+// class ReactDragDropHelperComponent extends SurveyElementBase<
+//   ReactDragDropHelperComponentProps,
+//   any
+// > {
+//   constructor(props: ReactDragDropHelperComponentProps) {
+//     super(props);
+//   }
 
-  protected getStateElement(): Base {
-    return this.props.creator.dragDropHelper;
-  }
+//   protected getStateElement(): Base {
+//     return this.props.creator.dragDropHelper;
+//   }
 
-  render(): JSX.Element {
-    return this.props.renderContent();
-  }
-}
+//   render(): JSX.Element {
+//     return this.props.renderContent();
+//   }
+// }
 
 ReactElementFactory.Instance.registerElement("svc-tab-designer", (props) => {
   return React.createElement(

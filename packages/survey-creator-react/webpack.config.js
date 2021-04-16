@@ -1,37 +1,38 @@
 "use strict";
 
-var webpack = require("webpack");
-var path = require("path");
-var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-//var TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var dts = require("dts-bundle");
-var rimraf = require("rimraf");
-var packageJson = require("./package.json");
-var fs = require("fs");
-var replace = require("replace-in-file");
-var svgStoreUtils = require(path.resolve(
+const webpack = require("webpack");
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const dts = require("dts-bundle");
+const rimraf = require("rimraf");
+const packageJson = require("./package.json");
+const fs = require("fs");
+const replace = require("replace-in-file");
+const svgStoreUtils = require(path.resolve(
   __dirname,
   "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
 ));
 
-var banner = [
+const year = new Date().getFullYear();
+const banner = [
   "SurveyJS Creator React v" + packageJson.version,
-  "(c) 2015-2021 Devsoft Baltic OÜ - http://surveyjs.io/",
+  "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
 ].join("\n");
 
-var dts_banner = [
+const dts_banner = [
   "Type definitions for SurveyJS Creator React JavaScript library v" +
     packageJson.version,
-  "(c) 2015-2021 Devsoft Baltic OÜ - http://surveyjs.io/",
+  "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
   "",
 ].join("\n");
 
-var buildPlatformJson = {
+const buildPlatformJson = {
   name: packageJson.name,
   version: packageJson.version,
   description:
@@ -67,20 +68,23 @@ var buildPlatformJson = {
     "ace-builds": "^1.4.12",
   },
   dependencies: {
-    "survey-core": "^" + packageJson.version,
-    "survey-react-ui": "^" + packageJson.version,
+    //TODO: Return back when release
+    // "survey-core": "^" + packageJson.version,
+    // "survey-react-ui": "^" + packageJson.version,
+    "survey-core": "^1.8.0",
+    "survey-react-ui": "^1.8.0",
     react: "^17.0.1",
     "react-dom": "^17.0.1",
   },
-  devDependencies: {},
+  devDependencies: {}
 };
 
 module.exports = function (options) {
-  var buildPath = __dirname + "/build/";
-  var isProductionBuild = options.buildType === "prod";
+  const buildPath = __dirname + "/build/";
+  const isProductionBuild = options.buildType === "prod";
 
   function createSVGBundle() {
-    var options = {
+    const options = {
       fileName: path.resolve(__dirname, "./src/svgbundle.html"),
       template: path.resolve(__dirname, "./svgbundle.pug"),
       svgoOptions: {
@@ -99,7 +103,7 @@ module.exports = function (options) {
     });
   }
 
-  var percentage_handler = function handler(percentage, msg) {
+  const percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
       createSVGBundle();
@@ -145,14 +149,14 @@ module.exports = function (options) {
     }
   };
 
-  var config = {
+  const config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
       [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
-      //plugins: [new TsconfigPathsPlugin(/*{ configFile: "./tsconfig.json" }*/)],
+      plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
       alias: {
         tslib: path.join(__dirname, "./src/entries/helpers.ts"),
       },

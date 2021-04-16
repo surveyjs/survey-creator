@@ -1,6 +1,6 @@
 import * as ko from "knockout";
-import { property, Question, SurveyElement } from "survey-core";
-import { Survey, ImplementorBase, Panel } from "survey-knockout-ui";
+import { ItemValue, property, Question, QuestionSelectBase, SurveyElement } from "survey-core";
+import { Survey, ImplementorBase, Panel, QuestionRow } from "survey-knockout-ui";
 import { ICreatorOptions, CreatorBase } from "@survey/creator";
 
 if (!!ko.options) {
@@ -18,6 +18,11 @@ class DesignTimeSurveyModel extends Survey {
           return "svc-question";
         }
       }
+      if (element instanceof Panel) {
+        if (element.koElementType() == "survey-panel") {
+          return "svc-panel";
+        }
+      }
     }
     return super.getElementWrapperComponentName(element);
   }
@@ -28,8 +33,31 @@ class DesignTimeSurveyModel extends Survey {
           return this.creator;
         }
       }
+      if (element instanceof Panel) {
+        if (element.koElementType() == "survey-panel") {
+          return this.creator;
+        }
+      }
     }
     return super.getElementWrapperComponentData(element);
+  }
+
+  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+    return "svc-item-value";
+  }
+  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
+    return {
+      creator: this.creator,
+      question,
+      item
+    };
+  }
+
+  public getSurveyRowComponentName(row: QuestionRow): string {
+    return "svc-row";
+  }
+  public getSurveyRowComponentData(row: QuestionRow): any {
+    return row;
   }
 }
 

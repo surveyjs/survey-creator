@@ -1,7 +1,10 @@
 import { SurveyModel, property, propertyArray } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
-import { JsonEditorBaseModel, TabJsonEditorBasePlugin } from "./json-editor-plugin";
+import {
+  JsonEditorBaseModel,
+  TabJsonEditorBasePlugin,
+} from "./json-editor-plugin";
 import "./json-editor-textarea.scss";
 
 export class TextareaJsonEditorModel extends JsonEditorBaseModel {
@@ -37,20 +40,21 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   public onEditorActivated(): void {}
 }
 
-export class TabJsonEditorTextareaPlugin extends TabJsonEditorBasePlugin<TextareaJsonEditorModel> implements ICreatorPlugin {
+export class TabJsonEditorTextareaPlugin
+  extends TabJsonEditorBasePlugin<TextareaJsonEditorModel>
+  implements ICreatorPlugin {
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
     this.model = new TextareaJsonEditorModel(creator);
     creator.tabs.push({
       id: "editor",
       title: getLocString("ed.jsonEditor"),
-      component: "svc-tab-json-editor-textarea",
+      componentContent: "svc-tab-json-editor-textarea",
       data: this,
       action: () => {
         creator.makeNewViewActive("editor");
-        this.activate();
       },
-      active: () => creator.viewType === "editor",
+      active: () => creator.viewType === "editor"
     });
     creator.plugins["editor"] = this;
   }

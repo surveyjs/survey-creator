@@ -1,4 +1,4 @@
-import { QuestionAdornerViewModel } from "@survey/creator";
+import { QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, Question } from "survey-core";
@@ -38,47 +38,59 @@ export class QuestionAdornerComponent extends SurveyElementBase<
     }
 
     return (
-      <>
-        {this.renderDragOverFeedback(this.model.showDragOverFeedbackAbove)}
+      <React.Fragment>
         <div
-          className={"svc-question__content " + this.model.css()}
-          onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
-          onDragStart={(e) =>
-            this.model.dragStart(this.model, new ReactDragEvent(e))
+          className={"svc-question__adorner"}
+          onDragOver={(e) => this.model.dragOver(this.model, new ReactDragEvent(e))
           }
-          onDragOver={(e) => {
-            this.model.dragOver(this.model, new ReactDragEvent(e));
-          }}
           onDragEnd={(e) =>
             this.model.dragEnd(this.model, new ReactDragEvent(e))
           }
-          onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
-          draggable={this.model.isDraggable}
+          onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
-          {this.props.element}
-          <div className="svc-question__content-actions">
-            <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+          <div
+            className={"svc-question__content " + this.model.css()}
+            onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
+            onDragStart={(e) =>
+              this.model.dragStart(this.model, new ReactDragEvent(e))
+            }
+            // onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
+            draggable={this.model.isDraggable}
+          >
+            {this.renderPanelPlaceholder()}
+            {this.props.element}
+            <div className="svc-question__content-actions">
+              <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+            </div>
           </div>
         </div>
-        {this.renderDragOverFeedback(this.model.showDragOverFeedbackBelow)}
-      </>
+      </React.Fragment >
     );
   }
-  renderDragOverFeedback(shouldRender: boolean): JSX.Element {
-    if (!shouldRender) {
+  renderPanelPlaceholder(): JSX.Element {
+    if (!this.model.isEmptyElement) {
       return null;
     }
 
     return (
-      <div style={{ pointerEvents: "none" }}>
-        <SurveyQuestion
-          creator={this.model.creator}
-          element={this.model.dragOverFeedback.data}
-        ></SurveyQuestion>
+      <div className="svc-panel__placeholder_frame">
+        <div className="svc-panel__placeholder">
+          {this.model.placeholderText}
+        </div>
       </div>
     );
   }
 }
+
+// <!-- ko if: isEmptyElement -->
+// <div class="svc-panel__placeholder_frame">
+//   <div
+//     class="svc-panel__placeholder"
+//     data-bind="text: placeholderText"
+//   ></div>
+// </div>
+// <!-- /ko -->
 
 ReactElementFactory.Instance.registerElement(
   "svc-question",

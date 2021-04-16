@@ -4,7 +4,7 @@ import { SurveyCreator } from "../../creator";
 import {
   AdaptiveElement,
   AdaptiveActionBarItemWrapper,
-  VerticalResponsibilityManager,
+  VerticalResponsivityManager,
 } from "survey-core";
 //import "./toolbox.scss";
 import { IQuestionToolboxItem } from "@survey/creator";
@@ -64,7 +64,7 @@ ko.components.register("svc-toolbox", {
     createViewModel: (params: any, componentInfo: any) => {
       const model = new ToolboxViewModel(params.categories, params.creator);
       var container = componentInfo.element.querySelector(".svc-toolbox");
-      var manager = new VerticalResponsibilityManager(container, model, 40);
+      var manager = new VerticalResponsivityManager(container, model, 40);
       manager.getItemSizes = () => {
         var widths: number[] = [];
         container

@@ -1,24 +1,25 @@
 import * as ko from "knockout";
 import {
   Question,
+  SurveyElement,
   SurveyElementTemplateData,
   SurveyElementViewModel,
   SurveyModel,
 } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { CreatorBase, QuestionAdornerViewModel } from "@survey/creator";
+import { CreatorBase, QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
 import { KnockoutMouseEvent, KnockoutDragEvent } from "../events";
 //import "./question.scss";
 const template = require("./question.html");
 // import template from "./question.html";
 
-class KnockoutQuestionAdornerViewModel extends QuestionAdornerViewModel {
+export class KnockoutQuestionAdornerViewModel extends QuestionAdornerViewModel {
   constructor(
     creator: CreatorBase<SurveyModel>,
-    question: Question,
+    surveyElement: SurveyElement,
     templateData: SurveyElementTemplateData
   ) {
-    super(creator, question, templateData);
+    super(creator, surveyElement, templateData);
   }
 
   koSelect(model: QuestionAdornerViewModel, event: MouseEvent) {
@@ -41,6 +42,9 @@ class KnockoutQuestionAdornerViewModel extends QuestionAdornerViewModel {
   }
   private wrapDragEvent(event: DragEvent): KnockoutDragEvent {
     return new KnockoutDragEvent(event);
+  }
+  public hover(event: MouseEvent, element: HTMLElement) {
+    toggleHovered(event, element);
   }
 }
 

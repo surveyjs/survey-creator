@@ -2,7 +2,10 @@ import { SurveyModel, property } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { SurveyTextWorker } from "../../textWorker";
-import { JsonEditorBaseModel, TabJsonEditorBasePlugin } from "./json-editor-plugin";
+import {
+  JsonEditorBaseModel,
+  TabJsonEditorBasePlugin,
+} from "./json-editor-plugin";
 import "./json-editor-ace.scss";
 
 export class AceJsonEditorModel extends JsonEditorBaseModel {
@@ -41,9 +44,6 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     this.aceEditor.getSession().on("change", () => {
       self.onTextChanged();
     });
-    this.aceEditor.on("input", () => {
-      self.isJSONChanged = true;
-    });
     this.aceEditor.getSession().setUseWorker(true);
     SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
   }
@@ -53,8 +53,10 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       .getUndoManager();
     this.aceCanUndo = undoManager.hasUndo();
     this.aceCanRedo = undoManager.hasRedo();
-
-    this.isJSONChanged = !undoManager.isClean();
+    var isFocused: any = this.aceEditor.isFocused();
+    if (isFocused === true) {
+      this.isJSONChanged = !undoManager.isClean();
+    }
   }
   protected onTextChanged(): void {
     this.updateUndoRedoState();
@@ -84,20 +86,21 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   }
 }
 
-export class TabJsonEditorAcePlugin extends TabJsonEditorBasePlugin<AceJsonEditorModel> implements ICreatorPlugin {
+export class TabJsonEditorAcePlugin
+  extends TabJsonEditorBasePlugin<AceJsonEditorModel>
+  implements ICreatorPlugin {
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
     this.model = new AceJsonEditorModel(creator);
     creator.tabs.push({
       id: "editor",
       title: getLocString("ed.jsonEditor"),
-      component: "svc-tab-json-editor-ace",
+      componentContent: "svc-tab-json-editor-ace",
       data: this,
       action: () => {
         creator.makeNewViewActive("editor");
-        this.activate();
       },
-      active: () => creator.viewType === "editor",
+      active: () => creator.viewType === "editor"
     });
     creator.plugins["editor"] = this;
   }

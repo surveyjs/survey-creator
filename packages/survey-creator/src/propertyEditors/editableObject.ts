@@ -48,13 +48,17 @@ export class EditableObject {
     return this.editableObjValue;
   }
   public isPropertyChanged(propertyName: string): boolean {
-    if (propertyName == "pages") return false; //TODO could not find a better way yet
+    if (propertyName == "pages") return false; //We update pages in our own way
     return !Survey.Helpers.isTwoValueEquals(
       this.obj[propertyName],
       this.editableObj[propertyName]
     );
   }
   public apply(propertyName: string) {
+    if (propertyName == "pages") {
+      this.applyPages();
+      return;
+    }
     if (!this.isPropertyChanged(propertyName)) return;
     this.obj[propertyName] = this.editableObj[propertyName];
   }
@@ -121,5 +125,43 @@ export class EditableObject {
     var jsonObj = new Survey.JsonObject();
     jsonObj.lightSerializing = true;
     return jsonObj.toJsonObject(obj);
+  }
+  private applyPages() {
+    var editablePages = (<any>this.editableObj).pages;
+    var pages = (<any>this.obj).pages;
+    for (var i = 0; i < editablePages.length; i++) {
+      var editablePage = editablePages[i];
+      var page = editablePages[i].originalObj;
+      if (!!page) {
+        page.name = editablePage.name;
+        page.title = editablePage.title;
+      } else {
+        editablePage.originalObj = editablePage;
+        pages.splice(i, 0, editablePage);
+      }
+    }
+    if (!this.isPageOrderChagned()) return;
+    Object.getPrototypeOf(pages).splice.call(pages, 0, pages.length);
+    for (var i = 0; i < editablePages.length; i++) {
+      if (i < editablePages.length - 1) {
+        Object.getPrototypeOf(pages).push.call(
+          pages,
+          editablePages[i].originalObj
+        );
+      } else {
+        //send notification about changes
+        pages.push(editablePages[i].originalObj);
+      }
+    }
+    (<any>this.obj).currentPageNo = 0;
+  }
+  private isPageOrderChagned() {
+    var editablePages = (<any>this.editableObj).pages;
+    var pages = (<any>this.obj).pages;
+    if (editablePages.length !== pages.length) return true;
+    for (var i = 0; i < editablePages.length; i++) {
+      if (editablePages[i].originalObj !== pages[i]) return true;
+    }
+    return false;
   }
 }

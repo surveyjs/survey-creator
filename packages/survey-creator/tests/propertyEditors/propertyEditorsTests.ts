@@ -2599,6 +2599,26 @@ QUnit.test("SurveyPropertyItemValuesEditor + koShowHeader", function (assert) {
   Survey.Serializer.findProperty("itemvalue", "text").visible = true;
 });
 
+QUnit.test("SurveyPropertyItemValuesEditor + addNew", function (assert) {
+  var survey = new Survey.Survey();
+  var p = survey.addNewPage();
+  var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
+  q.choices = ["item1", "item2", "item3"];
+  var property = Survey.Serializer.findProperty("selectbase", "choices");
+  var propEditor = <SurveyPropertyItemValuesEditor>(
+    SurveyPropertyEditorFactory.createEditor(property)
+  );
+  propEditor.object = q;
+  propEditor.beforeShow();
+  propEditor.onAddClick();
+  assert.equal(q.choices.length, 4, "There are 4 items");
+  assert.equal(
+    q.choices[3].value,
+    "item4",
+    "the next value generated correctly"
+  );
+});
+
 QUnit.test(
   "SurveyPropertyEditorFactory.createEditor, isCellEditor=true, for expression and condition",
   function (assert) {
@@ -3166,5 +3186,20 @@ QUnit.test(
       true
     );
     assert.equal(json.type, "text");
+  }
+);
+QUnit.test(
+  "SurveyPropertyDefaultValueEditor for matrixdropdown with cellType equals boolean, Bug#1127",
+  function (assert) {
+    var question = new Survey.QuestionMatrixDropdown("q1");
+    question.addColumn("col1");
+    question.rows = ["row1", "row2"];
+    question.cellType = "boolean";
+    var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
+      question,
+      true
+    );
+    assert.equal(json.type, "matrixdropdown");
+    assert.equal(json.cellType, "boolean");
   }
 );

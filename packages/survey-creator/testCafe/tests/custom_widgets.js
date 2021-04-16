@@ -1,4 +1,4 @@
-import { init } from "../settings";
+import { init } from "../helper";
 import { Selector } from "testcafe";
 const title = `custom widgets`;
 

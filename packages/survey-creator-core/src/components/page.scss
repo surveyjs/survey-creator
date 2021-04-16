@@ -2,11 +2,12 @@
 
 svc-page {
   display: block;
-  padding: calcSize(4);
 }
 
 .svc-page__content {
   position: relative;
+  padding: calcSize(4);
+  border: 1px solid transparent;
 }
 
 .svc-page__content-actions {
@@ -16,20 +17,16 @@ svc-page {
   display: none;
 }
 
-.svc-page__content:hover {
+.svc-hovered.svc-page__content {
   border: 1px solid $secondary;
 }
 
 .svc-page__content--selected,
-.svc-page__content--selected:hover {
+.svc-hovered.svc-page__content--selected {
   border: 2px solid $secondary;
   .svc-page__content-actions {
     display: block;
   }
-}
-
-.svc-page__content--new > div:nth-child(1) {
-  pointer-events: none;
 }
 
 .svc-page__add-new-question {

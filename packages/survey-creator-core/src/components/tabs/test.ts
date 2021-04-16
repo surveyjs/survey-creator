@@ -30,18 +30,23 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 export class TestSurveyTabViewModel extends Base {
   private json: any;
   @property({ defaultValue: true }) isRunning: boolean;
-  @property({ defaultValue: "desktop", onSet: (val: string, target: TestSurveyTabViewModel) => {
-    if (!!val) {
-      target.simulator.device = val;
-    }
-  },
-}) device: string;
-@property({onSet: (val: SurveyModel, target: TestSurveyTabViewModel) => {
+  @property({
+    defaultValue: "desktop",
+    onSet: (val: string, target: TestSurveyTabViewModel) => {
+      if (!!val) {
+        target.simulator.device = val;
+      }
+    },
+  })
+  device: string;
+  @property({
+    onSet: (val: SurveyModel, target: TestSurveyTabViewModel) => {
       if (!!val) {
         target.simulator.survey = val;
       }
     },
-  }) survey: SurveyModel;
+  })
+  survey: SurveyModel;
   @propertyArray() pages: Array<IActionBarItem>;
   @property({
     onSet: (val: PageModel, target: TestSurveyTabViewModel) => {
@@ -140,7 +145,7 @@ export class TestSurveyTabViewModel extends Base {
           ? "sv-action-bar-item--secondary"
           : "",
       iconName: "icon-leftarrow_16x16",
-      visible: () => this.isRunning,
+      visible: () => this.isRunning && this.pages.length > 1,
       enabled: () => this.survey && !this.survey.isFirstPage,
       title: "",
       action: () => {
@@ -195,7 +200,7 @@ export class TestSurveyTabViewModel extends Base {
           ? "sv-action-bar-item--secondary"
           : "",
       iconName: "icon-rightarrow_16x16",
-      visible: () => this.isRunning,
+      visible: () => this.isRunning && this.pages.length > 1,
       enabled: () => this.survey && !this.survey.isLastPage,
       title: "",
       action: () => {
@@ -310,7 +315,7 @@ export class TestSurveyTabViewModel extends Base {
     }
     this.showInvisibleElements = false;
     this.pages = pages;
-    (<ListModel>(this.pagePopupModel.contentComponentData)).items = pages;
+    (<ListModel>this.pagePopupModel.contentComponentData).items = pages;
     this.activePage = this.survey.currentPage;
     this.activeLanguage =
       this.survey.locale || surveyLocalization.defaultLocale;
@@ -380,12 +385,11 @@ export class TabTestPlugin implements ICreatorPlugin {
     creator.tabs.push({
       id: "test",
       title: getLocString("ed.testSurvey"),
-      component: "svc-tab-test",
+      componentContent: "svc-tab-test",
       data: this,
       active: () => creator.viewType === "test",
       action: () => {
         creator.makeNewViewActive("test");
-        this.activate();
       },
     });
     creator.plugins["test"] = this;
@@ -393,14 +397,14 @@ export class TabTestPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model.onSurveyCreatedCallback = (survey) => {
       this.creator["onTestSurveyCreated"] &&
-      this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
+        this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
     };
     var options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
-      showDefaultLanguageInTestSurveyTab:
-      this.creator.showDefaultLanguageInTestSurveyTab,
-      showInvisibleElementsInTestSurveyTab:
-      this.creator.showInvisibleElementsInTestSurveyTab,
+      showDefaultLanguageInTestSurveyTab: this.creator
+        .showDefaultLanguageInTestSurveyTab,
+      showInvisibleElementsInTestSurveyTab: this.creator
+        .showInvisibleElementsInTestSurveyTab,
       showSimulatorInTestSurveyTab: this.creator.showSimulatorInTestSurveyTab,
     };
     this.model.setJSON(this.creator.JSON);

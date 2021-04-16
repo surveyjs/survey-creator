@@ -5,7 +5,7 @@ import { editorLocalization } from "../editorLocalization";
 import Sortable from "sortablejs";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyCreator } from "../editor";
-import { getNextValue, createKey2click, findParentNode } from "../utils/utils";
+import { getNextValue, createKey2click } from "../utils/utils";
 import { SurveyHelper } from "../surveyHelper";
 
 import "./item-editor.scss";
@@ -187,7 +187,8 @@ export var itemAdorner = {
       !!model.choices &&
       typeof model.getType === "function" &&
       model.getType() !== "imagepicker" &&
-      !model.choicesFromQuestion && !model.rows
+      !model.choicesFromQuestion &&
+      !model.rows
       ? "item_editable"
       : "";
   },
@@ -198,6 +199,7 @@ export var itemAdorner = {
       var decoration = document.createElement("span");
       decoration.className = "svda-adorner-root";
       var itemValue = ko.dataFor(elements[i]);
+      if(!itemValue) continue;
       var propertyName = itemAdorner.inplaceEditForValues ? "value" : "text";
       var target = itemValue;
       if (itemValue === model["selectAllItem"]) {
@@ -226,7 +228,6 @@ export var itemAdorner = {
         },
         decoration
       );
-      ko.tasks.runEarly();
       editor.onAdornerRenderedCallback(
         model,
         "choices-label",
@@ -246,7 +247,7 @@ export var createAddItemHandler = (
 ) => () => {
   var nextValue = null;
   var values = question.choices.map(function (item) {
-    return item.itemValue;
+    return item.value;
   });
   var itemText = Survey.surveyLocalization.getString("choices_Item");
   nextValue = getNextValue(itemText, values);
@@ -345,6 +346,7 @@ export var itemDraggableAdorner = {
     }
     for (var i = 0; i < elements.length; i++) {
       var itemValue = ko.dataFor(elements[i]);
+      if(!itemValue) continue;
       if (
         itemValue === model["selectAllItemValue"] ||
         itemValue === model["noneItemValue"] ||

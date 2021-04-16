@@ -4,16 +4,12 @@ import {
   Serializer,
   Question,
   PanelModelBase,
+  PanelModel,
   SurveyModel,
   FunctionFactory,
   Helpers,
   settings,
   QuestionMatrixDynamicModel,
-  property,
-  ISurvey,
-  IActionBarItem,
-  propertyArray,
-  IQuestion,
 } from "survey-core";
 import {
   SurveyQuestionEditorTabDefinition,
@@ -24,7 +20,6 @@ import { editorLocalization } from "../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { creatorCss } from "../survey-theme/creator-css";
-import { IMatrixDropdownData } from "survey-core";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -559,20 +554,22 @@ export class PropertyGridModel {
   }
   private setObj(value: Base) {
     this.objValue = value;
-    this.classNameProperty = PropertyJSONGenerator.getClassNameProperty(
-      this.obj
-    );
+    this.classNameProperty = !!this.obj
+      ? PropertyJSONGenerator.getClassNameProperty(this.obj)
+      : "";
     this.classNameValue = !!this.classNameProperty
       ? this.obj[this.classNameProperty]
       : undefined;
 
-    this.titleActionsCreator = new PropertyGridTitleActionsCreator(
-      this.obj,
-      this.options
-    );
+    this.titleActionsCreator = !!this.obj
+      ? new PropertyGridTitleActionsCreator(this.obj, this.options)
+      : undefined;
     var json = this.getSurveyJSON();
     if (this.options.readOnly) {
       json.mode = "display";
+    }
+    if (!!this.surveyValue) {
+      this.surveyValue.dispose();
     }
     this.surveyValue = this.createSurvey(json);
     this.surveyValue.css = creatorCss;
@@ -581,6 +578,7 @@ export class PropertyGridModel {
       opt.renderedRow.cells[0].colSpans += 2;
     });
     var page = this.surveyValue.createNewPage("p1");
+    if (!this.obj) return;
     new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
       page,
       false
@@ -637,6 +635,34 @@ export class PropertyGridModel {
   }
   public get survey() {
     return this.surveyValue;
+  }
+  public validate(): boolean {
+    if (!this.survey) return;
+    return !this.survey.hasErrors(true, true);
+  }
+  public collapseCategory(name: string) {
+    var panel = <PanelModel>this.survey.getPanelByName(name);
+    if (!!panel) {
+      panel.collapse();
+    }
+  }
+  public expandCategory(name: string) {
+    var panel = <PanelModel>this.survey.getPanelByName(name);
+    if (!!panel) {
+      panel.expand();
+    }
+  }
+  public collapseAllCategories() {
+    var panels = this.survey.getAllPanels();
+    for (var i = 0; i < panels.length; i++) {
+      (<PanelModel>panels[i]).collapse();
+    }
+  }
+  public expandAllCategories() {
+    var panels = this.survey.getAllPanels();
+    for (var i = 0; i < panels.length; i++) {
+      (<PanelModel>panels[i]).expand();
+    }
   }
   protected createSurvey(json: any): SurveyModel {
     return this.options.createSurvey(json, "property-grid");
@@ -817,136 +843,6 @@ export class PropertyGridModel {
   }
 }
 
-interface IPropertyGridHistoryItem {
-  obj: Base;
-  propertyName?: string;
-}
-
-export class PropertyGridViewModel extends Base {
-  private historyItems: Array<IPropertyGridHistoryItem>;
-  private prevObj: Base;
-  private isInternalUpdate: boolean;
-  private prevSurvey: ISurvey;
-  @property() survey: SurveyModel;
-  @property({ defaultValue: false }) hasPrev: boolean;
-  @property({ defaultValue: false }) hasNext: boolean;
-  @propertyArray() toolbarItems: Array<IActionBarItem>;
-  constructor(
-    private model: PropertyGridModel,
-    public title: string,
-    private onAction: (obj: Base) => void
-  ) {
-    super();
-    this.historyItems = [];
-    this.model.objValueChangedCallback = () => {
-      this.updateHistoryItems();
-      this.survey = this.model.survey;
-      // AM: TODO need to fix creatorCss content, it breaks survey appearance in the PropertyGrid
-      // this.survey.css = creatorCss;
-    };
-    this.toolbarItems.push({
-      id: "svd-grid-history-prev",
-      title: "Prev", //TODO editorLocalization.getString("pe.edit"),
-      component: "sv-action-bar-item",
-      enabled: this.hasPrev,
-      action: () => {
-        this.prev();
-      },
-    });
-    this.toolbarItems.push({
-      id: "svd-grid-history-next",
-      title: "Next", //TODO editorLocalization.getString("pe.edit"),
-      component: "sv-action-bar-item",
-      enabled: this.hasNext,
-      action: () => {
-        this.next();
-      },
-    });
-    this.model.objValueChangedCallback();
-  }
-  public next() {
-    this.updateHistoryActionState();
-    if (!this.hasNext) return;
-    var index = this.findCurrentIndex() + 1;
-    if (index < this.historyItems.length) {
-      this.setObjInternally(index);
-    }
-  }
-  public prev() {
-    this.updateHistoryActionState();
-    if (!this.hasPrev) return;
-    var index = this.findCurrentIndex();
-    if (index < 0) index = this.historyItems.length - 1;
-    else index--;
-    if (index > -1) {
-      this.setObjInternally(index);
-    }
-  }
-  public hasInHistory(obj: Base): boolean {
-    return this.findIndex(obj) > -1;
-  }
-  private setObjInternally(index: number) {
-    this.isInternalUpdate = true;
-    if (!!this.prevObj) {
-      this.historyItems.push({ obj: this.prevObj });
-      this.prevObj = null;
-    }
-    if (!!this.onAction) {
-      this.onAction(this.historyItems[index].obj);
-    }
-    this.isInternalUpdate = false;
-  }
-  private updateHistoryItems() {
-    if (this.prevObj == this.model.obj) return;
-    if (
-      !!this.model.obj &&
-      !!this.prevSurvey &&
-      this.prevSurvey != this.model.obj.getSurvey()
-    ) {
-      this.historyItems = [];
-      this.prevObj = null;
-    }
-    if (!!this.model.obj) {
-      var survey = this.model.obj.getSurvey();
-      if (!!survey) {
-        this.prevSurvey = survey;
-      }
-    }
-    if (!!this.prevObj) {
-      this.historyItems.push({ obj: this.prevObj });
-    }
-    this.prevObj = !this.isInternalUpdate ? this.model.obj : null;
-    this.updateHistoryActionState(!this.isInternalUpdate);
-  }
-  private updateHistoryActionState(removeItem: boolean = false) {
-    var index = this.findCurrentIndex();
-    if (removeItem && index > -1) {
-      this.historyItems.splice(index, 1);
-      index = -1;
-    }
-    this.hasPrev = index != 0 && this.historyItems.length > 0;
-    this.hasNext = index >= 0 && index < this.historyItems.length - 1;
-  }
-  private removeDeletedItemsFromHistory() {
-    for (var i = this.historyItems.length - 1; i >= 0; i--) {
-      if (!this.historyItems[i].obj.inSurvey) {
-        this.historyItems.splice(i, 1);
-      }
-    }
-  }
-  private findCurrentIndex(): number {
-    return this.findIndex(this.model.obj);
-  }
-  private findIndex(obj: Base): number {
-    this.removeDeletedItemsFromHistory();
-    if (!obj) return -1;
-    for (var i = 0; i < this.historyItems.length; i++) {
-      if (this.historyItems[i].obj == obj) return i;
-    }
-    return -1;
-  }
-}
-
 export abstract class PropertyGridEditor implements IPropertyGridEditor {
   constructor() {}
   public abstract fit(prop: JsonObjectProperty): boolean;
@@ -1081,9 +977,12 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       showOptionsCaption: false,
     };
   }
+  protected get canRenderAsButtonGroup(): boolean {
+    return true;
+  }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
-    if (question.choices.length < 5) {
+    if (this.canRenderAsButtonGroup && question.choices.length < 5) {
       question.renderAs = "button-group";
     }
   }
@@ -1149,6 +1048,24 @@ export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
     json.type = hasTagbox ? "tagbox" : "checkbox";
     json.hasSelectAll = !hasTagbox;
     return json;
+  }
+}
+export class PropertyGridEditorPage extends PropertyGridEditorDropdown {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.hasChoices && prop.name == "page";
+  }
+  protected get canRenderAsButtonGroup(): boolean {
+    return false;
+  }
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    super.onCreated(obj, question, prop);
+    question.valueFromDataCallback = (val: any): any => {
+      return !!val ? val.name : "";
+    };
+    question.valueToDataCallback = (val: any): any => {
+      if (!val || !obj || !obj.getSurvey()) return undefined;
+      return (<SurveyModel>obj.getSurvey()).getPageByName(val);
+    };
   }
 }
 export class PropertyGridEditorQuestion extends PropertyGridEditor {
@@ -1234,6 +1151,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorHtml());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorSet());
+PropertyGridEditorCollection.register(new PropertyGridEditorPage());
 PropertyGridEditorCollection.register(new PropertyGridEditorStringArray());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());

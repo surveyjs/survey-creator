@@ -933,11 +933,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     creator.tabs.push({
       id: "translation",
       title: editorLocalization.getString("ed.translation"),
-      component: "svc-tab-translation",
+      componentContent: "svc-tab-translation",
       data: this,
       action: () => {
         creator.makeNewViewActive("translation");
-        this.activate();
       },
       active: () => creator.viewType === "translation",
     });

@@ -36,7 +36,7 @@ class RatingItemEditor extends TitleInplaceEditor {
     if (allowDelete) {
       var question = model.question;
       var index = question.visibleRateValues
-        .map(item => item.value)
+        .map((item) => item.value)
         .indexOf(model.item.value);
 
       if (
@@ -103,8 +103,8 @@ var createAddItemHandler = (
     question.rateMax += question.rateStep;
   } else {
     var nextValue = null;
-    var values = question.rateValues.map(function(item) {
-      return item.itemValue;
+    var values = question.rateValues.map(function (item) {
+      return item.value;
     });
     var itemText = Survey.surveyLocalization.getString("choices_Item");
     nextValue = getNextValue(itemText, values);
@@ -154,7 +154,6 @@ export var ratingItemAdorner = {
         },
         decoration
       );
-      ko.tasks.runEarly();
       editor.onAdornerRenderedCallback(model, "rating-item", decoration, item);
     }
 

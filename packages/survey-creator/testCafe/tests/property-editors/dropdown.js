@@ -1,4 +1,4 @@
-import { url, init } from '../../settings';
+import { url, init } from '../../helper';
 import { Selector, ClientFunction } from 'testcafe';
 const title = `dropdown property editor`;
 

@@ -108,7 +108,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     var items = this.originalValue;
     if (Array.isArray(items)) {
       values = items.map(function (item) {
-        return item.itemValue;
+        return item.value;
       });
     }
     var itemText = this.property.getBaseValue();

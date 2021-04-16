@@ -16,9 +16,7 @@
           <th></th>
         </tr>
       </thead>
-      <tbody
-        data-bind="sortable: { foreach: originalValue, options: sortableOptions }"
-      >
+      <tbody data-bind="sortable: { foreach: originalValue, options: sortableOptions }">
         <!-- ko component: { name:"svd-property-editor-nested-item", params: { item: $data, editor: $parent.model } } -->
         <!-- /ko -->
       </tbody>

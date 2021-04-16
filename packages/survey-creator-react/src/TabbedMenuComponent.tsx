@@ -1,4 +1,5 @@
-import React, { CSSProperties } from "react";
+import React from "react";
+import { CSSProperties } from "react";
 //import { ImplementorBase } from "survey-knockout";
 import {
   AdaptiveActionBarItemWrapper,
@@ -7,10 +8,7 @@ import {
   IActionBarItem,
 } from "survey-core";
 
-import {
-  ReactElementFactory,
-  SurveyElementBase,
-} from "survey-react-ui";
+import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 interface ITabbedMenuComponentProps {
   items: Array<IActionBarItem>;
@@ -100,7 +98,7 @@ class TabbedMenuItemComponent extends SurveyElementBase<
     if (item.active) className += " svc-tabbed-menu-item--selected";
     if (item.enabled !== undefined && !item.enabled)
       className += " svc-tabbed-menu-item--disabled";
-    let titleClassName: string = "svc-text svc-text--normal";
+    let titleClassName: string = "svc-text svc-tabbed-menu-item__text svc-text--normal";
     if (item.active) titleClassName += " svc-text--bold";
     return (
       <div className={className} onClick={() => item.action(item)}>

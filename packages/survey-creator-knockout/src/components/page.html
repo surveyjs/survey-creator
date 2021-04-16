@@ -1,10 +1,13 @@
 <div
   class="svc-page__content"
-  data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
+  data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
   <!-- ko template: { name: 'survey-page', data: page } -->
   <!-- /ko -->
-  <div class="svc-page__add-new-question" data-bind="click: addNewQuestion">
+  <div
+    class="svc-page__add-new-question"
+    data-bind="click: addNewQuestion, clickBubble: false"
+  >
     <span
       class="svc-text svc-text--normal svc-text--bold"
       data-bind="text: addNewQuestionText"

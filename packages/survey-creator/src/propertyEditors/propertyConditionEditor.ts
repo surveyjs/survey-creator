@@ -487,8 +487,10 @@ export class SurveyPropertyConditionEditor
     var conditionEditorItem = new ConditionEditorItem(this);
     this.koEditorItems.push(conditionEditorItem);
     this.updateEditorItemsVisibilities();
-    ko.tasks.runEarly();
-    conditionEditorItem.conjunctionQuestion.focus();
+    setTimeout(() => {
+      ko.tasks.runEarly();
+      conditionEditorItem.conjunctionQuestion.focus();
+    }, 1);
   };
   public removeCondition = (item: ConditionEditorItem) => {
     this.koEditorItems.remove(item);

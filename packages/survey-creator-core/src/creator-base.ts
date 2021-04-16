@@ -29,7 +29,11 @@ import { TabTestPlugin } from "./components/tabs/test";
 import { TabTranslationPlugin } from "./tabs/translation";
 import { TabLogicPlugin } from "./tabs/logic-ui";
 import { ObjType, SurveyHelper } from "./surveyHelper";
+import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
+import { ICreatorSelectionOwner } from "./controllers/controller-base";
+import { PagesController } from "./controllers/pages-controller";
+import { SelectionHistoryController } from "./controllers/selection-history-controller";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -40,12 +44,16 @@ export interface ICreatorPlugin {
   deactivate?: () => boolean;
 }
 
+export interface ITabbedMenuItem extends IActionBarItem {
+  componentContent: string;
+}
+
 /**
  * Base class for Survey Creator.
  */
 export class CreatorBase<T extends SurveyModel>
   extends Survey.Base
-  implements ISurveyCreatorOptions {
+  implements ISurveyCreatorOptions, ICreatorSelectionOwner {
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
    */
@@ -90,19 +98,36 @@ export class CreatorBase<T extends SurveyModel>
 
   @property() surveyValue: T;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
-  public dragDropHelper: DragDropHelper<T>;
+  public dragDropHelper: DragDropHelper;
 
-  @property() selection: Base;
-
+  private selectedElementValue: Base;
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private newQuestionChangedNames: {};
+  private undoRedoManagerValue: UndoRedoManager;
+  private pagesControllerValue: PagesController;
+  private selectionHistoryControllerValue: SelectionHistoryController;
+
   private saveSurveyFuncValue: (
     no: number,
     onSaveCallback: (no: number, isSuccess: boolean) => void
   ) => void;
 
   @property({ defaultValue: "designer" }) viewType: string;
+
+  /**
+   * Returns the current show view name. The possible returns values are:
+   * "designer", "editor", "test", "embed", "logic" and "translation".
+   * @see showDesigner
+   * @see showTestSurvey
+   * @see showJsonEditor
+   * @see showLogicEditor
+   * @see showTranslationEditor
+   * @see showEmbedEditor
+   */
+  public get showingViewName(): string {
+    return this.viewType;
+  }
   public get isDesignerShowing(): boolean {
     return this.viewType === "designer";
   }
@@ -421,7 +446,54 @@ export class CreatorBase<T extends SurveyModel>
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-
+  /**
+   * The event is called before undo happens.
+   * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
+   */
+  public onBeforeUndo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called before redo happens.
+   * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
+   */
+  public onBeforeRedo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called after undo happens.
+   * <br/> options.state is an undo/redo item.
+   */
+  public onAfterUndo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called after redo happens.
+   * <br/> options.state is an undo/redo item.
+   */
+  public onAfterRedo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called on changing the selected element. You may change the new selected element by changing the property options.newSelectedElement to your own
+   * <br/> options.newSelectedElement the element that is going to be selected in the survey desiger: question, panel, page or survey.
+   */
+  public onSelectedElementChanging: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called after the selected element is changed.
+   * <br/> options.newSelectedElement the new selected element in the survey desiger: question, panel, page or survey.
+   */
+  public onSelectedElementChanged: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * This callback is used internally for providing survey JSON text.
    */
@@ -494,7 +566,7 @@ export class CreatorBase<T extends SurveyModel>
    */
   public showPageSelectorInToolbar = false;
 
-  @propertyArray() tabs: Array<Survey.IActionBarItem>;
+  @propertyArray() tabs: Array<ITabbedMenuItem>;
 
   /**
    * Returns the localized string by its id
@@ -534,19 +606,37 @@ export class CreatorBase<T extends SurveyModel>
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
   }
-
+  /**
+   * Get/set the active tab.
+   * The following values are available: "designer", "editor", "test", "embed", "logic" and "translation".
+   * Please note, not all tabs are visible.
+   */
+  public get activeTab(): string {
+    return this.viewType;
+  }
+  public set activeTab(val: string) {
+    this.makeNewViewActive(val);
+  }
   /**
    * Change the active view/tab. It will return false if it can't change the current tab.
-   * @param viewName name of new active view (tab). The following values are available: "designer", "editor", "test", "embed" and "translation".
+   * @param viewName name of new active view (tab). The following values are available: "designer", "editor", "test", "embed", "logic" and "translation".
    */
   public makeNewViewActive(viewName: string): boolean {
-    if (!this.canSwitchViewType(viewName)) return false;
+    if (viewName == this.viewType) return false;
+    if (!this.canSwitchViewType()) return false;
     this.viewType = viewName;
+    this.activatePlugin(viewName);
     return true;
   }
-  private canSwitchViewType(newType: string): boolean {
+  private canSwitchViewType(): boolean {
     const plugin: ICreatorPlugin = this.plugins[this.viewType];
     return !plugin || !plugin.deactivate || plugin.deactivate();
+  }
+  private activatePlugin(newType: string) {
+    const plugin: ICreatorPlugin = this.plugins[newType];
+    if (!!plugin) {
+      plugin.activate();
+    }
   }
 
   public static defaultNewSurveyText: string =
@@ -560,10 +650,10 @@ export class CreatorBase<T extends SurveyModel>
 
   constructor(protected options: ICreatorOptions) {
     super();
-    this._pagesController = new PagesController<T>(this);
+    this.pagesControllerValue = new PagesController(this);
+    this.selectionHistoryControllerValue = new SelectionHistoryController(this);
     this.setOptions(options);
     this.initTabs();
-    this.initTabsPlugin();
     this.initToolbar();
     this.initSurveyWithJSON(
       JSON.parse(CreatorBase.defaultNewSurveyText),
@@ -574,48 +664,58 @@ export class CreatorBase<T extends SurveyModel>
         ? this.options.questionTypes
         : null
     );
-    this.dragDropHelper = new DragDropHelper<T>(this);
+    this.dragDropHelper = new DragDropHelper(this, () => {});
     this.propertyGrid = new PropertyGridModel(
       (this.survey as any) as Base,
       this
     );
   }
+  public get undoRedoManager(): UndoRedoManager {
+    return this.undoRedoManagerValue;
+  }
+  public undo() {
+    if (!!this.undoRedoManager) {
+      this.undoRedoManager.undo();
+    }
+  }
+  public redo() {
+    if (!!this.undoRedoManager) {
+      this.undoRedoManager.redo();
+    }
+  }
+  public get pagesController(): PagesController {
+    return this.pagesControllerValue;
+  }
+  public get selectionHistoryController(): SelectionHistoryController {
+    return this.selectionHistoryControllerValue;
+  }
 
+  public get currentPage(): PageModel {
+    return this.survey.currentPage;
+  }
+  public set currentPage(value: PageModel) {
+    this.survey.currentPage = value;
+  }
+  public addPage(): PageModel {
+    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
+    const page: PageModel = this.survey.addNewPage(name);
+    this.selectElement(page);
+    return page;
+  }
   protected initTabs() {
-    const tabs: Array<Survey.IActionBarItem> = [];
+    const tabs: Array<ITabbedMenuItem> = [];
     if (this.showDesignerTab) {
       tabs.push({
         id: "designer",
         title: this.getLocString("ed.designer"),
-        component: "svc-tab-designer",
+        componentContent: "svc-tab-designer",
         data: this,
         action: () => this.makeNewViewActive("designer"),
         active: () => this.viewType === "designer",
       });
     }
-    /*
-    if (this.showLogicTab) {
-      tabs.push({
-        id: "logic",
-        title: this.getLocString("ed.logic"),
-        component: "svc-tab-logic",
-        data: this,
-        action: () => this.makeNewViewActive("logic"),
-        active: () => this.viewType === "logic",
-      });
-    }
-    if (this.showTranslationTab) {
-      tabs.push({
-        id: "translation",
-        title: this.getLocString("ed.translation"),
-        component: "svc-tab-translation",
-        data: this,
-        action: () => this.makeNewViewActive("translation"),
-        active: () => this.viewType === "translation",
-      });
-    }
-    */
     this.tabs = tabs;
+    this.initTabsPlugin();
     if (this.tabs.length > 0) {
       this.viewType = this.tabs[0].id;
     }
@@ -642,67 +742,83 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   private initToolbar() {
-    const items: Array<IActionBarItem> = [];
-    items.push(
-      ...[
-        {
-          id: "icon-undo",
-          iconName: "icon-undo",
-          action: () => {},
-          title: "Undo",
-          showTitle: false,
+    const items: Array<IActionBarItem> = [
+      {
+        id: "icon-undo",
+        iconName: "icon-undo",
+        title: "Undo",
+        showTitle: false,
+        active: () => {
+          return this.undoRedoManager && this.undoRedoManager.canUndo();
         },
-        {
-          id: "icon-redo",
-          iconName: "icon-redo",
-          action: () => {},
-          title: "Redo",
-          showTitle: false,
+        action: () => {
+          var options = { canUndo: true };
+          this.onBeforeUndo.fire(self, options);
+          if (options.canUndo) {
+            var item = this.undoRedoManager.undo();
+            this.onAfterUndo.fire(self, { state: item });
+          }
         },
-        {
-          id: "icon-settings",
-          iconName: "icon-settings",
-          needSeparator: true,
-          action: () => this.selectElement(this.survey),
-          active: () => this.isElementSelected(<any>this.survey),
-          title: "Settings",
-          showTitle: false,
+      },
+      {
+        id: "icon-redo",
+        iconName: "icon-redo",
+        title: "Redo",
+        showTitle: false,
+        active: () => {
+          return this.undoRedoManager && this.undoRedoManager.canRedo();
         },
-        {
-          id: "icon-clear",
-          iconName: "icon-clear",
-          action: () => {
-            alert("clear pressed");
-          },
-          active: false,
-          title: "Clear",
-          showTitle: false,
+        action: () => {
+          const options = { canRedo: true };
+          this.onBeforeRedo.fire(self, options);
+          if (options.canRedo) {
+            const item = this.undoRedoManager.redo();
+            this.onAfterRedo.fire(self, { state: item });
+          }
         },
-        {
-          id: "icon-search",
-          iconName: "icon-search",
-          action: () => {
-            this.showSearch = !this.showSearch;
-          },
-          active: () => this.showSearch,
-          title: "Search",
-          showTitle: false,
+      },
+      {
+        id: "icon-settings",
+        iconName: "icon-settings",
+        needSeparator: true,
+        action: () => this.selectElement(this.survey),
+        active: () => this.isElementSelected(<any>this.survey),
+        title: "Settings",
+        showTitle: false,
+      },
+      {
+        id: "icon-clear",
+        iconName: "icon-clear",
+        action: () => {
+          alert("clear pressed");
         },
-        {
-          id: "icon-preview",
-          iconName: "icon-preview",
-          needSeparator: true,
-          css: () =>
-            this.viewType === "test" ? "sv-action-bar-item--secondary" : "",
-          action: () => {
-            this.makeNewViewActive("test");
-          },
-          active: false,
-          title: "Preview",
+        active: false,
+        title: "Clear",
+        showTitle: false,
+      },
+      {
+        id: "icon-search",
+        iconName: "icon-search",
+        action: () => {
+          this.showSearch = !this.showSearch;
         },
-      ]
-    );
-
+        active: () => this.showSearch,
+        title: "Search",
+        showTitle: false,
+      },
+      {
+        id: "icon-preview",
+        iconName: "icon-preview",
+        needSeparator: true,
+        css: () =>
+          this.viewType === "test" ? "sv-action-bar-item--secondary" : "",
+        action: () => {
+          this.makeNewViewActive("test");
+        },
+        active: false,
+        title: "Preview",
+      },
+    ];
     this.toolbarItems = items;
   }
 
@@ -850,24 +966,19 @@ export class CreatorBase<T extends SurveyModel>
   public get survey(): T {
     return this.surveyValue;
   }
-
-  //TODO: refactor this method and remove
-  public _dummySetText(text: string): void {
-    //should work with JSON5
-    //var textWorker = new SurveyTextWorker(this.text);
-    //this.initSurvey(new Survey.JsonObject().toJsonObject(textWorker.survey));
-
-    //works only with JSON
-    this.initSurveyWithJSON(JSON.parse(text), true);
-  }
-
+  private existingPages: {};
   protected initSurveyWithJSON(json: any, clearState: boolean) {
+    this.existingPages = {};
     var survey = this.createSurvey({});
     survey.setDesignMode(true);
+    survey.lazyRendering = true;
     survey.setJsonObject(json);
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
     }
+    survey.pages.forEach((page: PageModel) => {
+      this.existingPages[page.id] = true;
+    });
     this.onDesignerSurveyCreated.fire(this, { survey: survey });
     // this.survey.render(this.surveyjs);
     /*
@@ -883,6 +994,8 @@ export class CreatorBase<T extends SurveyModel>
       this.doOnPanelAdded(options.panel, options.parentPanel);
     });
     survey.onPageAdded.add((sender: SurveyModel, options) => {
+      if (!!this.existingPages[options.page.id]) return;
+      this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
     /*
@@ -893,9 +1006,101 @@ export class CreatorBase<T extends SurveyModel>
       this.doOnElementRemoved(options.question);
     });
     */
+    this.undoRedoManagerValue = new UndoRedoManager();
+    survey.onPropertyValueChangedCallback = (
+      name: string,
+      oldValue: any,
+      newValue: any,
+      sender: Survey.Base,
+      arrayChanges: Survey.ArrayChanges
+    ) => {
+      this.onSurveyPropertyValueChangedCallback(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
+    };
+    this.undoRedoManager.canUndoRedoCallback = () => {
+      //this.updateKoCanUndoRedo();
+    };
+    this.undoRedoManager.changesFinishedCallback = (
+      changes: IUndoRedoChange
+    ) => {
+      this.setModified({
+        type: "PROPERTY_CHANGED",
+        name: changes.propertyName,
+        target: changes.object,
+        oldValue: changes.oldValue,
+        newValue: changes.newValue,
+      });
+    };
+
     this.setSurvey(survey);
   }
   private addingObject: Survey.Base;
+  private onSurveyPropertyValueChangedCallback(
+    name: string,
+    oldValue: any,
+    newValue: any,
+    sender: Survey.Base,
+    arrayChanges: Survey.ArrayChanges
+  ) {
+    if (this.addingObject == sender) return;
+    this.undoRedoManager.startTransaction(name + " changed");
+    this.undoRedoManager.onPropertyValueChanged(
+      name,
+      oldValue,
+      newValue,
+      sender,
+      arrayChanges
+    );
+    this.updatePagesController(sender, name);
+    this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
+    this.undoRedoManager.stopTransaction();
+  }
+  private updateConditionsOnQuestionNameChanged(
+    obj: Survey.Base,
+    propertyName: string,
+    oldValue: any
+  ) {
+    if (!this.isObjQuestion(obj)) return;
+    if (propertyName === "name" && !obj["valueName"]) {
+      this.updateConditions(oldValue, obj["name"]);
+    }
+    if (propertyName === "valueName") {
+      var oldName = !!oldValue ? oldValue : obj["name"];
+      var newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
+      this.updateConditions(oldName, newName);
+    }
+  }
+  private updatePagesController(sender: Survey.Base, name: string) {
+    if ((name == "name" || name == "title") && this.isObjPage(sender)) {
+      this.pagesController.pageNameChanged(<PageModel>sender);
+    }
+  }
+  private updateConditions(oldName: string, newName: string) {
+    if (oldName === newName) return;
+    new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
+  }
+
+  private isObjQuestion(obj: Survey.Base) {
+    return this.isObjThisType(obj, "question");
+  }
+  private isObjPage(obj: Survey.Base) {
+    return this.isObjThisType(obj, "page");
+  }
+  private isObjThisType(obj: Survey.Base, typeName: string) {
+    var classInfo = Survey.Serializer.findClass(obj.getType());
+
+    while (!!classInfo && !!classInfo.parentName) {
+      if (classInfo.name === typeName) return true;
+      classInfo = Survey.Serializer.findClass(classInfo.parentName);
+    }
+    return !!classInfo && classInfo.name === typeName;
+  }
+
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
@@ -946,9 +1151,13 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   protected setSurvey(survey: T) {
+    if (!!this.surveyValue) {
+      this.surveyValue.dispose();
+    }
     this.surveyValue = survey;
     this.selectElement(survey);
-    this.pagesController.currentPage = survey.currentPage;
+    this.pagesController.onSurveyChanged();
+    this.selectionHistoryController.reset();
   }
 
   private getSurveyTextFromDesigner() {
@@ -1095,7 +1304,7 @@ export class CreatorBase<T extends SurveyModel>
     this.updateNewElementExpressions(element);
   }
   private updateNewElementExpressions(element: Survey.ISurveyElement) {
-    var survey = new SurveyModel();
+    var survey = this.createSurvey({}, "updateNewElementExpressions");
     survey.setDesignMode(true);
     if (element.isPage) {
       survey.addPage(<Survey.PageModel>element);
@@ -1175,7 +1384,7 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
-  protected createNewElement(json: any): IElement {
+  public createNewElement(json: any): IElement {
     var newElement = Survey.Serializer.createClass(json["type"]);
     new Survey.JsonObject().toObject(json, newElement);
     this.setNewNames(newElement);
@@ -1200,7 +1409,7 @@ export class CreatorBase<T extends SurveyModel>
    * Get or set the current selected object in the Creator. It can be a question, panel, page or survey itself.
    */
   public get selectedElement(): Base {
-    return this.selection;
+    return this.selectedElementValue;
   }
   public set selectedElement(val: Base) {
     this.selectElement(val);
@@ -1216,7 +1425,7 @@ export class CreatorBase<T extends SurveyModel>
    * Delete a currently selected element in the survey. It can be a question, a panel or a page.
    */
   public deleteCurrentElement() {
-    this.deleteObject(this.selection);
+    this.deleteObject(this.selectedElement);
   }
   /**
    * Delete an element in the survey. It can be a question, a panel or a page.
@@ -1282,29 +1491,162 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public isElementSelected(element: Base): boolean {
-    return element === this.selection;
+    if (!element || element.isDisposed) return false;
+    return element.getPropertyValue("isSelectedInDesigner");
   }
 
   public selectElement(element: any) {
-    if (typeof element.getType === "function" && element.getType() === "page") {
-      this.currentPage = element;
-    } else if (!!element["page"]) {
-      this.currentPage = element["page"];
-    } else {
-      this.currentPage = undefined;
-    }
-    this.selection = element;
-    if (this.propertyGrid) {
-      this.propertyGrid.obj = element;
+    var oldValue = this.selectedElement;
+    this.selectedElementValue = this.onSelectingElement(element);
+    if (oldValue !== this.selectedElementValue) {
+      if (!!oldValue && !oldValue.isDisposed) {
+        oldValue.setPropertyValue("isSelectedInDesigner", false);
+      }
+      if (!!this.selectedElementValue) {
+        this.selectedElementValue.setPropertyValue(
+          "isSelectedInDesigner",
+          true
+        );
+      }
+      this.selectionChanged(this.selectedElement);
     }
   }
 
+  private onSelectingElement(val: Base): Base {
+    var options = { newSelectedElement: val };
+    this.onSelectedElementChanging.fire(this, options);
+    return options.newSelectedElement;
+  }
+
+  /**
+   * Collapse certain property editor tab (category) in properties panel/grid
+   * name - tab category name
+   * @see collapseAllPropertyGridCategories
+   * @see expandPropertyGridCategory
+   * @see expandAllPropertyGridCategories
+   */
+  public collapsePropertyGridCategory(name: string) {
+    if (!!this.propertyGrid) {
+      this.propertyGrid.collapseCategory(name);
+    }
+  }
+  /**
+   * Expand certain property editor tab (category) in properties panel/grid
+   * name - tab category name
+   * @see collapsePropertyGridCategory
+   * @see collapseAllPropertyGridCategories
+   * @see expandAllPropertyGridCategories
+   */
+  public expandPropertyGridCategory(name: string) {
+    if (!!this.propertyGrid) {
+      this.propertyGrid.expandCategory(name);
+    }
+  }
+  /**
+   * Expand all property editor tabs (categories) in properties panel/grid
+   * @see collapsePropertyGridCategory
+   * @see expandPropertyGridCategory
+   * @see expandAllPropertyGridCategories
+   */
+  public collapseAllPropertyGridCategories() {
+    if (!!this.propertyGrid) {
+      this.propertyGrid.collapseAllCategories();
+    }
+  }
+  /**
+   * Expand all property editor tabs (categories) in properties panel/grid
+   * @see collapsePropertyGridCategory
+   * @see collapseAllPropertyGridCategories
+   * @see expandPropertyGridCategory
+   */
+  public expandAllPropertyGridCategories() {
+    if (!!this.propertyGrid) {
+      this.propertyGrid.expandAllCategories();
+    }
+  }
+  /**
+   * Obsolete. Collapse all property editor tabs (categories) in properties panel/grid
+   * @see collapseAllPropertyGridCategories
+   *
+   */
+  public collapseAllPropertyTabs(): void {
+    this.collapseAllPropertyGridCategories();
+  }
+
+  /**
+   * Obsolete. Expand all property editor tabs (categories) in properties panel/grid
+   * @see expandAllPropertyGridCategories
+   */
+  public expandAllPropertyTabs(): void {
+    this.expandAllPropertyGridCategories();
+  }
+
+  /**
+   * Obsolete. Expand certain property editor tab (category) in properties panel/grid
+   * name - tab category name
+   * @see expandPropertyGridCategory
+   */
+  public expandPropertyTab(name: string): void {
+    this.expandPropertyGridCategory(name);
+  }
+
+  /**
+   * Obsolete. Collapse certain property editor tab (category) in properties panel/grid
+   * name - tab category name
+   * @see collapsePropertyGridCategory
+   */
+  public collapsePropertyTab(name: string): void {
+    this.collapsePropertyGridCategory(name);
+  }
+
+  /**
+   * Check for errors in property grid and adorners of the selected elements.
+   * Returns true if selected element is null or there is no errors.
+   */
+  public validateSelectedElement(): boolean {
+    var isValid = true;
+    if (!this.selectedElement) return isValid;
+    if (!!this.propertyGrid) {
+      isValid = this.propertyGrid.validate();
+    }
+    /*
+    var options = { errors: [] };
+    this.onValidateSelectedElement.fire(this, options);
+    return isValid && options.errors.length == 0;
+    */
+    return isValid;
+  }
+  private selectionChanged(element: Base) {
+    if (
+      !!element &&
+      typeof element.getType === "function" &&
+      element.getType() === "page"
+    ) {
+      this.survey.currentPage = <PageModel>element;
+    } else if (!!element && !!element["page"]) {
+      this.survey.currentPage = element["page"];
+    } else {
+      this.survey.currentPage = undefined;
+    }
+    this.selectionHistoryController.onObjSelected(element);
+    if (this.propertyGrid) {
+      this.propertyGrid.obj = element;
+    }
+    var options = { newSelectedElement: element };
+    this.onSelectedElementChanged.fire(this, options);
+  }
   public clickToolboxItem(json: any) {
     if (!this.readOnly) {
       var newElement = this.createNewElement(json);
       this.doClickQuestionCore(newElement);
       this.selectElement(newElement);
     }
+  }
+  public getJSONForNewElement(json: any): any {
+    var newElement: Base = <any>this.createNewElement(json);
+    json = newElement.toJSON();
+    json["type"] = newElement.getType();
+    return json;
   }
 
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
@@ -1498,6 +1840,9 @@ export class CreatorBase<T extends SurveyModel>
     obj: any,
     newValue: any
   ) {
+    /* 
+    //TODO We likely do not need this callback and can remove it for V2
+    //We called "PROPERTY_CHANGED" from obj.propertyValueChanged with undoRedoManager object
     var oldValue = obj[property.name];
     this.setModified({
       type: "PROPERTY_CHANGED",
@@ -1516,7 +1861,7 @@ export class CreatorBase<T extends SurveyModel>
     ) {
       this.doPropertyGridChanged();
     }
-    return null;
+    */
   }
   onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
     return title;
@@ -1726,63 +2071,4 @@ export class CreatorBase<T extends SurveyModel>
 
     return items;
   }
-
-  // Page Controller
-  private _pagesController: PagesController<T>;
-
-  public get pagesController(): PagesController<T> {
-    return this._pagesController;
-  }
-
-  public get currentPage(): PageModel {
-    return this.pagesController.currentPage;
-  }
-  public set currentPage(value: PageModel) {
-    this.pagesController.currentPage = value;
-  }
-  public addPage(): PageModel {
-    return this.pagesController.addPage();
-  }
-  public deletePage() {
-    this.pagesController.deletePage();
-  }
-  public movePage(page: Survey.PageModel, indexFrom: number) {
-    this.pagesController.movePage();
-  }
-}
-
-export class PagesController<T extends SurveyModel> extends Base {
-  constructor(public creator: CreatorBase<T>) {
-    super();
-  }
-  public get survey(): T {
-    return this.creator.survey;
-  }
-  public get pages(): Array<PageModel> {
-    return this.survey.pages;
-  }
-  public get currentPage(): PageModel {
-    return this.survey.currentPage;
-  }
-  public set currentPage(value: PageModel) {
-    (<any>this.survey).currentPage = value;
-    this.creator.selection = value;
-  }
-  /*
-  @property({
-    onSet: (val, target) => {
-      target.survey.currentPage = val;
-    },
-  })
-  currentPage: PageModel;
-  */
-  public addPage(): PageModel {
-    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
-    const page: PageModel = this.survey.addNewPage(name);
-    //this.selectedElement = page;
-    this.currentPage = page;
-    return page;
-  }
-  public deletePage() {}
-  public movePage() {}
 }

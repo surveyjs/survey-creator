@@ -265,6 +265,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.panelValue = <QuestionPanelDynamicModel>(
       this.editSurvey.getQuestionByName("panel")
     );
+    if (!!this.options.maxLogicItemsInCondition) {
+      this.panel.maxPanelCount = this.options.maxLogicItemsInCondition;
+    }
     this.allConditionQuestions = this.createAllConditionQuestions();
     this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
       this.onPanelAdded();
@@ -291,7 +294,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       elements: [
         {
           type: "paneldynamic",
+          titleLocation: "hidden",
           name: "panel",
+          panelRemoveButtonLocation: "right",
           templateElements: [
             {
               name: "conjunction",
@@ -438,7 +443,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           if (!!valueName && name.indexOf(valueName) == 0) {
             name = name.replace(valueName, question.name);
           }
-          res[i].text = name;
+          res[i].text = this.options.getObjectDisplayName(
+            question,
+            "condition",
+            name
+          );
         }
         this.addConditionQuestionsHash[res[i].name] = question;
       }

@@ -4,7 +4,6 @@ svc-tabbed-menu-item {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  cursor: pointer;
 
   &:hover {
     box-shadow: inset 0px -1px 0px $border;
@@ -15,6 +14,7 @@ svc-tabbed-menu-item {
   padding: 0px calcSize(3);
   line-height: calcSize(8);
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .svc-tabbed-menu-item--selected {
@@ -33,6 +33,11 @@ svc-tabbed-menu-item {
     background-color: $background;
   }
 }
+
 .svc-tabbed-menu-item--hidden {
   visibility: hidden;
+}
+
+.svc-tabbed-menu-item__text {
+  white-space: nowrap;
 }

@@ -11,12 +11,15 @@ export * from "../components/tabs/logic";
 export * from "../components/tabs/translation";
 
 export * from "../components/page";
+export * from "../components/question";
+export * from "../components/item-value";
+export * from "../components/panel";
+
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";
 export * from "../components/property-editors/button-group/button-group";
 export * from "../components/property-editors/button-group/button-group-item";
 export * from "../components/property-panel/property-panel";
-export * from "../components/question";
 export * from "../components/results";
 export * from "../components/simulator";
 export * from "../components/survey-renderers/dropdown";

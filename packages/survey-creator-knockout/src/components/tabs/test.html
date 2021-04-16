@@ -1,11 +1,11 @@
 <div class="svc-creator-tab__content">
-    <div class="svc-test-tab__content">
-        <survey-simulator params="options: simulator"></survey-simulator>
-        <!-- ko ifnot: isRunning -->
-        <survey-results params="survey: survey"></survey-results>
-        <!-- /ko -->
-    </div>
-    <div class="svc-test-tab__content-actions">
-        <sv-action-bar params="items: actions"></sv-action-bar>
-    </div>
+  <div class="svc-plugin-tab__content svc-test-tab__content">
+    <survey-simulator params="options: simulator"></survey-simulator>
+    <!-- ko ifnot: isRunning -->
+    <survey-results params="survey: survey"></survey-results>
+    <!-- /ko -->
+  </div>
+  <div class="svc-plugin-tab__content-actions svc-test-tab__content-actions">
+    <sv-action-bar params="items: actions"></sv-action-bar>
+  </div>
 </div>

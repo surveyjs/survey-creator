@@ -13,8 +13,8 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",
     "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
-    "survey-knockout":
-      "<rootDir>/node_modules/survey-knockout",
+    "survey-core": "<rootDir>/node_modules/survey-core",
+    "survey-knockout-ui": "<rootDir>/node_modules/survey-knockout-ui"
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],

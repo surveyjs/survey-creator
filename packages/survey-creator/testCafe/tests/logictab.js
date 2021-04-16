@@ -1,4 +1,4 @@
-import { url, init } from "../settings";
+import { url, init } from "../helper";
 import page from "../page-model";
 import { Selector } from "testcafe";
 const title = `logictab_editor`;

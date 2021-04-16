@@ -10,15 +10,20 @@
   "version": "0.0.1",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build:prod",
-    "test": "lerna run test"
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "testcafe": "lerna run testcafe",
+    "testcafe:ci": "lerna run testcafe:ci",
+    "testcafe:file": "lerna run testcafe:file"
   },
   "devDependencies": {
+    "husky": "^4.3.8",
     "lerna": "^3.22.1"
   },
+  "dependencies": {},
   "husky": {
     "hooks": {
-      "pre-push": "npm run test"
+      "pre-push": "npm test"
     }
   }
 }

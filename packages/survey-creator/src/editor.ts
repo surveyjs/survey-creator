@@ -1793,7 +1793,7 @@ export class SurveyCreator
       let opts = options.obj.allowingOptions;
       if (!opts) opts = {};
 
-      if (this.showModalOnElementEditing && opts.allowEdit) {
+      if (this.showModalOnElementEditing && opts.allowShowEditor) {
         options.items.push({
           name: "editelement",
           text: this.getLocString("survey.edit"),
@@ -1944,7 +1944,7 @@ export class SurveyCreator
         });
       }
 
-      if (!this.showModalOnElementEditing && opts.allowEdit) {
+      if (!this.showModalOnElementEditing && opts.allowShowEditor) {
         options.items.push({
           name: "editelement",
           text: this.getLocString("ed.property-grid"),
@@ -2013,11 +2013,10 @@ export class SurveyCreator
     return html;
   }
   private doDraggingToolboxItem(json: any, e) {
-    this.dragDropHelper.startDragToolboxItem(
-      e,
-      this.getNewName(json["type"]),
-      json
-    );
+    var newElement = this.createNewElement(json);
+    json = (<Survey.Base>(<any>newElement)).toJSON();
+    json["type"] = newElement.getType();
+    this.dragDropHelper.startDragToolboxItem(e, newElement.name, json);
   }
 
   private doClickToolboxItem(json: any) {
@@ -2313,14 +2312,19 @@ export class SurveyCreator
     element: HTMLElement,
     context?: any
   ) {
-    var options = {
-      survey: this.survey,
-      question: question,
-      adorner: adorner,
-      element: element,
-      context: context,
-    };
-    this.onAdornerRendered.fire(this, options);
+    if (!this.onAdornerRendered.isEmpty) {
+      setTimeout(() => {
+        ko.tasks.runEarly();
+        var options = {
+          survey: this.survey,
+          question: question,
+          adorner: adorner,
+          element: element,
+          context: context,
+        };
+        this.onAdornerRendered.fire(this, options);
+      }, 1);
+    }
   }
   /**
    * Clear the files on a server

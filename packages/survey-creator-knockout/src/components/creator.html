@@ -10,18 +10,10 @@
         class="svc-creator-tab"
         data-bind="visible: $parent.creator.viewType == id"
       >
-        <!-- ko component: { name: component, params: {creator: $parent.creator, survey: $parent.creator.survey, data: data } } -->
+        <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
         <!-- /ko -->
       </div>
       <!-- /ko -->
     </div>
   </div>
-</div>
-<div
-  class="svc-flex-column"
-  style="width: auto; border-left: 1px solid lightgray;"
->
-  <svc-property-panel
-    params="title: 'Question Properties', model: creator"
-  ></svc-property-panel>
 </div>

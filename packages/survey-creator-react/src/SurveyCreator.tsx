@@ -1,16 +1,18 @@
-import React, { CSSProperties } from "react";
+import React from "react";
+import { CSSProperties } from "react";
 
 import TabbedMenuComponent from "./TabbedMenuComponent";
-import PropertyGridComponent from "./PropertyGrid";
 import {
   Base,
-  IActionBarItem,
   Question,
+  PanelModel,
   StylesManager,
   SurveyError,
   unwrap,
   SurveyModel,
   SurveyElement,
+  ItemValue,
+  QuestionSelectBase,
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -20,11 +22,7 @@ import {
   SurveyElementBase,
   SurveyLocStringViewer,
 } from "survey-react-ui";
-import {
-  CreatorBase,
-  ICreatorOptions,
-  PropertyGridViewModel,
-} from "@survey/creator";
+import { ICreatorOptions, CreatorBase, ITabbedMenuItem } from "@survey/creator";
 
 StylesManager.applyTheme("modern");
 
@@ -49,7 +47,6 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   render() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     //AM: width unrecognized by react
-    const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
       <div className="svc-creator">
         <div className="svc-creator__area svc-flex-column">
@@ -63,12 +60,6 @@ export class SurveyCreatorComponent extends SurveyElementBase<
             </div>
           </div>
         </div>
-        <div className="svc-flex-column" style={style}>
-          <PropertyGridComponent
-            model={creator}
-            title="Question Properties"
-          ></PropertyGridComponent>
-        </div>
       </div>
     );
   }
@@ -80,7 +71,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return <>{tabs}</>;
     //return <Survey.Survey model={this.creator.survey} />;
   }
-  renderCreatorTab(tab: IActionBarItem) {
+  renderCreatorTab(tab: ITabbedMenuItem) {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     let style: CSSProperties = {};
     //if (tab.visible !== undefined && !tab.visible) {
@@ -89,7 +80,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     }
 
     const component = ReactElementFactory.Instance.createElement(
-      tab.component,
+      tab.componentContent,
       { creator: creator, survey: creator.survey, data: tab.data }
     );
     return (
@@ -118,6 +109,9 @@ class DesignTimeSurveyModel extends Model {
       if (element instanceof Question) {
         return "svc-question";
       }
+      if (element instanceof PanelModel) {
+        return "svc-question";
+      }
     }
     return super.getElementWrapperComponentName(element);
   }
@@ -126,8 +120,20 @@ class DesignTimeSurveyModel extends Model {
       if (element instanceof Question) {
         return this.creator;
       }
+      if (element instanceof PanelModel) {
+        return this.creator;
+      }
     }
     return super.getElementWrapperComponentData(element);
+  }
+  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+    return "svc-item-value";
+  }
+  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
+    return {
+      creator: this.creator,
+      question
+    };
   }
 }
 class SurveyCreator extends CreatorBase<SurveyModel> {

@@ -6,7 +6,7 @@ import { IQuestionToolboxItem } from "@survey/creator";
 //import "./toolbox-item.scss";
 import { AdaptiveActionBarItemWrapper } from "survey-core";
 import { ToolboxViewModel } from "./toolbox";
-import { KnockoutDragEvent } from "src/events";
+import { KnockoutDragEvent } from "../../events";
 const template = require("./toolbox-item.html");
 // import template from "./toolbox-item.html";
 
@@ -33,9 +33,10 @@ export class ToolboxItemViewModel {
     model._creator.clickToolboxItem(model.item.json);
   }
   dragstart(model: ToolboxItemViewModel, e: DragEvent) {
-    model._creator.dragDropHelper.dragToolboxItem(
-      JSON.stringify(model.item.json),
-      new KnockoutDragEvent(e)
+    var json = model._creator.getJSONForNewElement(model.item.json);
+    model._creator.dragDropHelper.startDragToolboxItem(
+      new KnockoutDragEvent(e),
+      json
     );
     return true;
   }

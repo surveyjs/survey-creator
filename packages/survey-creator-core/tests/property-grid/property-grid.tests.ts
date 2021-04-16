@@ -27,6 +27,7 @@ import {
   QuestionPanelDynamicModel,
   QuestionMatrixDropdownModel,
   IActionBarItem,
+  QuestionRatingModel,
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -852,6 +853,7 @@ test("options.onItemValueAddedCallback", () => {
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
+  var rows = choicesQuestion.visibleRows;
   choicesQuestion.addRow();
   expect(question.choices).toHaveLength(4);
   expect(question.choices[3].text).toEqual("dropdown:choices,4,4");
@@ -873,6 +875,7 @@ test("options.onMatrixDropdownColumnAddedCallback", () => {
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
+  var rows = columnsQuestion.visibleRows;
   columnsQuestion.addRow();
   expect(question.columns[3].title).toEqual("q1:4");
 });
@@ -1090,6 +1093,34 @@ test("DefaultValue editor", () => {
   );
   expect(question.defaultValue).toBeFalsy();
 });
+test("DefaultValue editor for invisible values", () => {
+  PropertyGridEditorCollection.register(new PropertyGridValueEditor());
+  var question = new QuestionDropdownModel("q1");
+  question.visibleIf = "{q2} = 1";
+  question.visible = false;
+  question.choices = [
+    { value: 1, visibleIf: "{q2} = 2}" },
+    { value: 2, enableIf: "{q2} = 2}" },
+    3,
+  ];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var editQuestion = propertyGrid.survey.getQuestionByName("defaultValue");
+  var editor = <PropertyGridValueEditor>(
+    PropertyGridEditorCollection.getEditor(editQuestion.property)
+  );
+  var valueEditor = editor.createPropertyEditorSetup(
+    question,
+    editQuestion.property,
+    editQuestion,
+    new EmptySurveyCreatorOptions()
+  );
+  var valueQuestion = valueEditor.editSurvey.getQuestionByName("question");
+  expect(valueQuestion).toBeTruthy();
+  expect(valueQuestion.isVisible).toBeTruthy();
+  expect(valueQuestion.visibleChoices).toHaveLength(3);
+  expect(valueQuestion.visibleChoices[1].isEnabled).toBeTruthy();
+});
+
 test("DefaultRowValue editor", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
@@ -1307,4 +1338,88 @@ test("Change cellType in the column in property grid", () => {
   expect(question.columns[0].cellType).toEqual("checkbox");
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
   expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeTruthy();
+});
+test("Validate Selected Element Errors", () => {
+  var titleProp = Serializer.findProperty("question", "title");
+  var oldIsRequired = titleProp.isRequired;
+  titleProp.isRequired = true;
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  expect(propertyGrid.validate()).toBeFalsy();
+  var titleQuestion = propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.errors).toHaveLength(1);
+  titleQuestion.value = "Question 1";
+  expect(propertyGrid.validate()).toBeTruthy();
+  expect(titleQuestion.errors).toHaveLength(0);
+  expect(question.title).toEqual("Question 1");
+  titleProp.isRequired = oldIsRequired;
+});
+test("Validate Selected Element Errors", () => {
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  expect(propertyGrid.survey.getQuestionByName("name")).toBeTruthy();
+  propertyGrid.obj = null;
+  expect(propertyGrid.survey.getQuestionByName("name")).toBeFalsy();
+});
+test("Change page", () => {
+  var survey = new SurveyModel();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  var question = survey.pages[0].addNewQuestion("text", "q1");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var pageQuestion = <QuestionDropdownModel>(
+    propertyGrid.survey.getQuestionByName("page")
+  );
+  expect(pageQuestion).toBeTruthy();
+  expect(pageQuestion.choices).toHaveLength(2);
+  expect(question.page.name).toEqual("page1");
+  expect(pageQuestion.value).toEqual("page1");
+  pageQuestion.value = "page2";
+  expect(question.page.name).toEqual("page2");
+});
+test("Expand/collapse categories", () => {
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var generalPanel = <PanelModel>propertyGrid.survey.getPanelByName("general");
+  var logicPanel = <PanelModel>propertyGrid.survey.getPanelByName("logic");
+  expect(generalPanel.isExpanded).toBeTruthy();
+  propertyGrid.collapseCategory("general");
+  expect(generalPanel.isExpanded).toBeFalsy();
+  propertyGrid.expandCategory("general");
+  expect(generalPanel.isExpanded).toBeTruthy();
+
+  expect(logicPanel.isExpanded).toBeFalsy();
+  propertyGrid.expandAllCategories();
+  expect(logicPanel.isExpanded).toBeTruthy();
+  propertyGrid.collapseAllCategories();
+  expect(logicPanel.isExpanded).toBeFalsy();
+});
+test("add item into rates", () => {
+  var question = new QuestionRatingModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var rateValuesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  expect(rateValuesQuestion).toBeTruthy();
+  expect(rateValuesQuestion.rowCount).toEqual(0);
+  rateValuesQuestion.addRow();
+  expect(question.rateValues).toHaveLength(1);
+  expect(question.rateValues[0].value).toEqual("item1");
+});
+
+test("add item into rates", () => {
+  var question = new QuestionRatingModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var rateValuesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  expect(rateValuesQuestion).toBeTruthy();
+  expect(rateValuesQuestion.rowCount).toEqual(0);
+  rateValuesQuestion.addRow();
+  expect(question.rateValues).toHaveLength(1);
+  expect(question.rateValues[0].value).toEqual("item1");
 });

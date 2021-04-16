@@ -38,13 +38,14 @@
   </table>
 
   <div
+    role = "tablist"
     class="svd-translation-panel-strings"
     data-bind="foreach: {data: $data.groups, as: 'group' }"
   >
     <div
       class="svd-toolbox-category-header"
-      role="tab"
-      data-bind="visible: koShowHeader, click: function(){ group.koExpanded(!group.koExpanded())}"
+      role="tab" tabindex="0"
+      data-bind="visible: koShowHeader, click: function(){ group.koExpanded(!group.koExpanded())}, key2click"
     >
       <span
         class="svd-translation-panel-strings-title"

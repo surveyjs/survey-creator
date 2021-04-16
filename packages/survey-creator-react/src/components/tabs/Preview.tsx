@@ -1,6 +1,10 @@
 import React from "react";
 import { Base } from "survey-core";
-import { SurveyActionBar, ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import {
+  SurveyActionBar,
+  ReactElementFactory,
+  SurveyElementBase,
+} from "survey-react-ui";
 import { TabTestPlugin, TestSurveyTabViewModel } from "@survey/creator";
 import { SurveySimulator } from "./SurveySimulator";
 import { CreatorSurveyResultsComponent } from "../Results";
@@ -20,10 +24,9 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
 
   render(): JSX.Element {
     return (
-      <div className="svc-creator-tab__content">
-        <div className="svc-test-tab__content">
+      <div className="svc-creator-tab__content svc-test-tab__content">
+        <div className="svc-plugin-tab__content">
           <SurveySimulator options={this.model.simulator}></SurveySimulator>
-
           {!this.model.isRunning ? (
             <CreatorSurveyResultsComponent survey={this.model.survey} />
           ) : null}

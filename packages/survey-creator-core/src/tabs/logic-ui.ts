@@ -19,7 +19,6 @@ export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
   private itemEditorValue: LogicItemEditor;
   private itemsSurveyValue: SurveyModel;
-  private;
   constructor(
     public survey: SurveyModel,
     public options: ISurveyCreatorOptions = null
@@ -32,6 +31,11 @@ export class SurveyLogicUI extends SurveyLogic {
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
+    this.itemsSurvey.onMatrixCellCreated.add((sender, options) => {
+      var q = options.cellQuestion;
+      q.ignoreHtmlProgressing = true;
+      q.html = q.value;
+    });
     this.itemsSurvey.onMatrixRowRemoved.add((sender, options) => {
       this.removeItem(this.items[options.rowIndex]);
     });
@@ -49,6 +53,10 @@ export class SurveyLogicUI extends SurveyLogic {
     this.updateItemsSurveyData();
     this.setupToolbarItems();
     this.itemEditorValue = new LogicItemEditor(null, this.options);
+  }
+  public dispose() {
+    super.dispose();
+    this.itemsSurveyValue.dispose();
   }
   /**
    * The list of toolbar items. You may add/remove/replace them.
@@ -165,16 +173,8 @@ export class SurveyLogicUI extends SurveyLogic {
         actions: this.items[i].actionsText,
       });
     }
-    matrix.rowCount = data.length;
     matrix.value = data;
-    for (var i = 0; i < matrix.visibleRows.length; i++) {
-      var row = matrix.visibleRows[i];
-      for (var j = 0; j < row.cells.length; j++) {
-        var cell = row.cells[j];
-        if (!cell.question || cell.question.getType() !== "html") continue;
-        cell.question.html = cell.question.value;
-      }
-    }
+    matrix.rowCount = data.length;
   }
   private setupToolbarItems() {
     this.toolbarItems.push({
@@ -229,12 +229,21 @@ export class LogicModel extends Base {
     super();
   }
   @property() logic: SurveyLogicUI;
+  public get showing(): boolean {
+    return this.getPropertyValue("showing", false);
+  }
+  public set showing(val: boolean) {
+    this.setPropertyValue("showing", val);
+  }
   public activate(): void {
     var logic = new SurveyLogicUI(this.creator.survey, this.creator);
     if (!!this.onCreateLogic) this.onCreateLogic(logic);
     this.logic = logic;
+    this.showing = true;
   }
   public deactivate(): boolean {
+    this.showing = false;
+    this.logic.dispose();
     this.logic = undefined;
     return true;
   }
@@ -247,11 +256,10 @@ export class TabLogicPlugin implements ICreatorPlugin {
     creator.tabs.push({
       id: "logic",
       title: editorLocalization.getString("ed.logic"),
-      component: "svc-tab-logic",
+      componentContent: "svc-tab-logic",
       data: this,
       action: () => {
         creator.makeNewViewActive("logic");
-        this.activate();
       },
       active: () => creator.viewType === "logic",
     });

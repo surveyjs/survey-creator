@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --env.buildType dev --open",
+    "serve": "http-server --silent",
     "test": "jest",
     "test:update": "npm run test -- -u",
     "test:generate-output": "jest --json --outputFile=.jest-test-results.json || echo",
@@ -18,12 +19,11 @@
     "test_debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "doc:gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "doc:update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
-    "testcafe": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/\"",
-    "testcafe:ci": "http-server -p 7777 --silent & testcafe chrome:headless --reporter minimal testCafe/",
-    "testcafe:file": "concurrently \"http-server -p 7777\" \"testcafe chrome testCafe/tests/adorners.js\"",
+    "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500 --reporter minimal\"",
+    "testcafe:ci": "http-server --silent & testcafe chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal",
+    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/embed/embed.js --reporter minimal --debug-mode\"",
     "release": "standard-version --message \"Release: %s [skip ci]\"",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
-    "watch:dev": "webpack --env.buildType dev --watch",
     "-prestorybook": "npm run test:generate-output",
     "storybook": "start-storybook -p 9000"
   },
