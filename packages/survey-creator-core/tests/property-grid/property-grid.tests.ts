@@ -27,6 +27,7 @@ import {
   QuestionPanelDynamicModel,
   QuestionMatrixDropdownModel,
   IActionBarItem,
+  QuestionRatingModel,
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -1092,6 +1093,34 @@ test("DefaultValue editor", () => {
   );
   expect(question.defaultValue).toBeFalsy();
 });
+test("DefaultValue editor for invisible values", () => {
+  PropertyGridEditorCollection.register(new PropertyGridValueEditor());
+  var question = new QuestionDropdownModel("q1");
+  question.visibleIf = "{q2} = 1";
+  question.visible = false;
+  question.choices = [
+    { value: 1, visibleIf: "{q2} = 2}" },
+    { value: 2, enableIf: "{q2} = 2}" },
+    3,
+  ];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var editQuestion = propertyGrid.survey.getQuestionByName("defaultValue");
+  var editor = <PropertyGridValueEditor>(
+    PropertyGridEditorCollection.getEditor(editQuestion.property)
+  );
+  var valueEditor = editor.createPropertyEditorSetup(
+    question,
+    editQuestion.property,
+    editQuestion,
+    new EmptySurveyCreatorOptions()
+  );
+  var valueQuestion = valueEditor.editSurvey.getQuestionByName("question");
+  expect(valueQuestion).toBeTruthy();
+  expect(valueQuestion.isVisible).toBeTruthy();
+  expect(valueQuestion.visibleChoices).toHaveLength(3);
+  expect(valueQuestion.visibleChoices[1].isEnabled).toBeTruthy();
+});
+
 test("DefaultRowValue editor", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
@@ -1368,4 +1397,29 @@ test("Expand/collapse categories", () => {
   expect(logicPanel.isExpanded).toBeTruthy();
   propertyGrid.collapseAllCategories();
   expect(logicPanel.isExpanded).toBeFalsy();
+});
+test("add item into rates", () => {
+  var question = new QuestionRatingModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var rateValuesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  expect(rateValuesQuestion).toBeTruthy();
+  expect(rateValuesQuestion.rowCount).toEqual(0);
+  rateValuesQuestion.addRow();
+  expect(question.rateValues).toHaveLength(1);
+  expect(question.rateValues[0].value).toEqual("item1");
+});
+
+test("add item into rates", () => {
+  var question = new QuestionRatingModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var rateValuesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  expect(rateValuesQuestion).toBeTruthy();
+  expect(rateValuesQuestion.rowCount).toEqual(0);
+  rateValuesQuestion.addRow();
+  expect(question.rateValues).toHaveLength(1);
+  expect(question.rateValues[0].value).toEqual("item1");
 });

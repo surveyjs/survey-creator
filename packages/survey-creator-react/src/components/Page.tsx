@@ -5,7 +5,7 @@ import {
   SurveyPage,
   SurveyQuestion,
 } from "survey-react-ui";
-import { CreatorBase, PageViewModel } from "@survey/creator";
+import { CreatorBase, PageViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 
@@ -59,7 +59,8 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
             this.model.dragOver(this.model, new ReactDragEvent(e))
           }
           onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
-          // data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }"
+          onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
           <SurveyPage
             page={this.props.page}

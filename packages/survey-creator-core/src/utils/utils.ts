@@ -175,3 +175,17 @@ export function isPropertyVisible(obj: any, propertyName: string) {
   }
   return result;
 }
+
+export function toggleHovered(e: MouseEvent, element: HTMLElement) {
+  const processedFlagName = "__svc_question_processed";
+  const name = "svc-hovered";
+  if(!e[processedFlagName] && e.type === 'mouseover') {
+    const arr = element.className.split(" ");
+    if (arr.indexOf(name) == -1) {
+      element.className += " " + name;
+    }
+    e[processedFlagName] = true;
+  } else {
+    element.className = element.className.replace(/\bsvc-hovered\b/g, "");
+  }
+}

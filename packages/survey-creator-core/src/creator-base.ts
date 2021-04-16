@@ -1642,6 +1642,12 @@ export class CreatorBase<T extends SurveyModel>
       this.selectElement(newElement);
     }
   }
+  public getJSONForNewElement(json: any): any {
+    var newElement: Base = <any>this.createNewElement(json);
+    json = newElement.toJSON();
+    json["type"] = newElement.getType();
+    return json;
+  }
 
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
     var parent = obj["parent"];

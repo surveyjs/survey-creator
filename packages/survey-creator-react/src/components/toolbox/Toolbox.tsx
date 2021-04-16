@@ -10,7 +10,7 @@ import {
   AdaptiveElement,
   Base,
   VerticalResponsivityManager,
-  SurveyModel
+  SurveyModel,
 } from "survey-core";
 import { SurveyElementBase, SvgIcon } from "survey-react-ui";
 
@@ -164,9 +164,10 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
         aria-label={item.tooltip + " " + getLocString("toolbox") + " item"}
         onClick={() => this.props.creator.clickToolboxItem(toolboxItem.json)}
         onDragStart={(e) => {
+          var json = this.props.creator.getJSONForNewElement(toolboxItem.json);
           this.props.creator.dragDropHelper.startDragToolboxItem(
             new ReactDragEvent(e),
-            toolboxItem.json
+            json
           );
           return true;
         }}

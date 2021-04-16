@@ -145,7 +145,7 @@ export class TestSurveyTabViewModel extends Base {
           ? "sv-action-bar-item--secondary"
           : "",
       iconName: "icon-leftarrow_16x16",
-      visible: () => this.isRunning,
+      visible: () => this.isRunning && this.pages.length > 1,
       enabled: () => this.survey && !this.survey.isFirstPage,
       title: "",
       action: () => {
@@ -200,7 +200,7 @@ export class TestSurveyTabViewModel extends Base {
           ? "sv-action-bar-item--secondary"
           : "",
       iconName: "icon-rightarrow_16x16",
-      visible: () => this.isRunning,
+      visible: () => this.isRunning && this.pages.length > 1,
       enabled: () => this.survey && !this.survey.isLastPage,
       title: "",
       action: () => {

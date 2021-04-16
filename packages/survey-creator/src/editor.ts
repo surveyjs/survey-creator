@@ -2013,11 +2013,10 @@ export class SurveyCreator
     return html;
   }
   private doDraggingToolboxItem(json: any, e) {
-    this.dragDropHelper.startDragToolboxItem(
-      e,
-      this.getNewName(json["type"]),
-      json
-    );
+    var newElement = this.createNewElement(json);
+    json = (<Survey.Base>(<any>newElement)).toJSON();
+    json["type"] = newElement.getType();
+    this.dragDropHelper.startDragToolboxItem(e, newElement.name, json);
   }
 
   private doClickToolboxItem(json: any) {
@@ -2313,7 +2312,7 @@ export class SurveyCreator
     element: HTMLElement,
     context?: any
   ) {
-    if(!this.onAdornerRendered.isEmpty) {
+    if (!this.onAdornerRendered.isEmpty) {
       setTimeout(() => {
         ko.tasks.runEarly();
         var options = {

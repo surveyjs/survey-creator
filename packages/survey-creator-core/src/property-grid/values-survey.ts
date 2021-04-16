@@ -1,6 +1,7 @@
 import { Question, Base } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../settings";
+import { SurveyHelper } from "../surveyHelper";
 
 export class DefaultValueEditor extends PropertyEditorSetupValue {
   constructor(
@@ -32,10 +33,7 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
       json.type = json.cellType;
       delete json["cellType"];
     }
-
-    delete json["width"];
-    delete json["minWidth"];
-    delete json["maxWidth"];
+    SurveyHelper.updateQuestionJson(json);
     return json;
   }
   protected getQuestionValue() {

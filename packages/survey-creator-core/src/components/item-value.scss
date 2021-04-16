@@ -1,13 +1,15 @@
+@import "../variables.scss";
+
 .svc-item-value-controls {
-    display: none;
-    position: absolute;
-    left: -60px;
-    cursor: pointer;
-    margin-top: 4px;
+  display: none;
+  position: absolute;
+  left: calcSize(-5);
+  cursor: pointer;
+  margin-top: calcSize(0.5);
 }
 
 .svc-question__content--selected {
-    .svc-item-value-controls {
-        display: block;
-    }
+  .svc-item-value-controls {
+    display: block;
+  }
 }

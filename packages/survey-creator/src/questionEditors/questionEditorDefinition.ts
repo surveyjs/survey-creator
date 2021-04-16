@@ -424,6 +424,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "defaultPanelValue", tab: "data" },
         { name: "defaultValueFromLastPanel", tab: "data" },
         { name: "templateTitleLocation", tab: "layout" },
+        { name: "panelRemoveButtonLocation", tab: "layout" },
         { name: "keyName", tab: "validation" },
         { name: "keyDuplicationError", tab: "validation" },
       ],

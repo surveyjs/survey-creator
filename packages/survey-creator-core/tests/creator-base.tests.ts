@@ -62,6 +62,22 @@ test("Select new added question", () => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question2");
 });
+test("Update JSON before drag&drop", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }],
+  };
+  expect(creator.activeTab).toEqual("designer");
+  creator.survey.currentPage = creator.survey.currentPage;
+  var json: any = {
+    type: "panel",
+    elements: [{ type: "text", name: "question1" }],
+  };
+  json = creator.getJSONForNewElement(json);
+  expect(json.name).toEqual("panel1");
+  expect(json.type).toEqual("panel");
+  expect(json.elements[0].name).toEqual("question2");
+});
 test("PageViewModel", () => {
   var creator = new CreatorTester();
   creator.JSON = {

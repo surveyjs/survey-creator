@@ -294,7 +294,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       elements: [
         {
           type: "paneldynamic",
+          titleLocation: "hidden",
           name: "panel",
+          panelRemoveButtonLocation: "right",
           templateElements: [
             {
               name: "conjunction",
