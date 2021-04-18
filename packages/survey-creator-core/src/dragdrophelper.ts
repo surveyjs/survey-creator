@@ -75,13 +75,15 @@ export class DragDropHelper extends Base {
   ) {
     event.stopPropagation(); // prevent call startDrag event on Parent
 
-    this.setupDataTransfer(event, sourceElementJson.name);
+    event.dataTransfer.effectAllowed = "move";
 
     this.ddTarget = new DragDropTargetElement(
       this.createFakeElement(sourceElementJson),
       null,
       DragDropHelper.nestedPanelDepth
     );
+
+    return true;
   }
 
   public startDragQuestion(event: IPortableDragEvent, sourceElement: any) {
@@ -90,7 +92,7 @@ export class DragDropHelper extends Base {
     var sourceElementJson = new JsonObject().toJsonObject(sourceElement);
     sourceElementJson["type"] = sourceElement.getType();
 
-    this.setupDataTransfer(event, sourceElementJson.name);
+    event.dataTransfer.effectAllowed = "move";
 
     this.ddTarget = new DragDropTargetElement(
       this.createFakeElement(sourceElementJson),
@@ -109,7 +111,8 @@ export class DragDropHelper extends Base {
     event.stopPropagation(); // prevent call startDrag event on Parent
 
     var dataTransferText = question.name + " : " + item.name;
-    // this.setupDataTransfer(event, dataTransferText);
+
+    event.dataTransfer.effectAllowed = "move";
 
     // this.ddTarget = new DragDropTargetElement(
     //   this.createFakeElement(sourceElementJson),
@@ -128,7 +131,6 @@ export class DragDropHelper extends Base {
     event.stopPropagation();
     event.preventDefault();
 
-    if (!event.dataTransfer.getData("Text")) return; // this is strange, how it could be that dragover be called before dragstart?
     if (this.ddTarget.fakeElement === draggedOverElement) return;
 
     this.draggedOverQuestion = draggedOverElement;
@@ -269,20 +271,6 @@ export class DragDropHelper extends Base {
     }
     targetElement.renderWidth = "100%";
     return targetElement;
-  }
-
-  private setupDataTransfer(event: IPortableDragEvent, text: string) {
-    event.dataTransfer.setData("Text", text);
-    event.dataTransfer.effectAllowed = "move";
-
-    event.dataTransfer.setData = () => {
-      debugger;
-    };
-    event.dataTransfer.clearData = () => {
-      debugger;
-    };
-
-    window["e1e"] = event;
   }
 
   private clearData() {
