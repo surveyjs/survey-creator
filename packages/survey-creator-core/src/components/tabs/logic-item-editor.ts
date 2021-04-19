@@ -8,19 +8,19 @@ import {
   Base,
   FunctionFactory,
 } from "survey-core";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
 import {
   PropertyEditorSetupValue,
   PropertyJSONGenerator,
   PropertyGridTitleActionsCreator,
-} from "../property-grid/index";
+} from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import {
   SurveyLogicTypes,
   SurveyLogicType,
   getLogicString,
 } from "./logic-types";
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "../../editorLocalization";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)

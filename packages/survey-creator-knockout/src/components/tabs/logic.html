@@ -3,7 +3,8 @@
   <div class="svc-plugin-tab__content" data-bind="with: $data.logic">
     <!-- ko if: $data.mode == "view" -->
     <div class="svc-plugin-tab__content-actions">
-      <sv-action-bar params="items: toolbarItems"></sv-action-bar>
+      <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+      <!-- /ko -->
     </div>
     <!-- ko template: { name: 'survey-content', data: $data.itemsSurvey  } --><!-- /ko -->
     <!-- /ko -->
@@ -11,7 +12,8 @@
     <!-- ko template: { name: 'survey-content', data: $data.expressionSurvey  } --><!-- /ko -->
     <!-- ko template: { name: 'survey-content', data: $data.itemEditorSurvey  } --><!-- /ko -->
     <div><span data-bind="text: errorText"></span></div>
-    <sv-action-bar params="items: toolbarEditItems"></sv-action-bar>
+    <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarEditItems } } -->
+    <!-- /ko -->
     <!-- /ko -->
   </div>
   <!-- /ko -->

@@ -1,14 +1,7 @@
 import {
   SurveyModel,
-  Question,
-  QuestionTextModel,
-  QuestionCheckboxModel,
-  surveyLocalization,
   SurveyTriggerComplete,
-  RegexValidator,
   QuestionMatrixDropdownModel,
-  QuestionMultipleTextModel,
-  Serializer,
   QuestionDropdownModel,
   ExpressionValidator,
   PanelModel,
@@ -17,18 +10,13 @@ import {
   QuestionRadiogroupModel,
   SurveyTriggerRunExpression,
   SurveyTriggerCopyValue,
-  ItemValue,
+  ItemValue
 } from "survey-core";
-import { SurveyLogic } from "../../src/tabs/logic";
-import { SurveyLogicUI } from "../../src/tabs/logic-ui";
-import { LogicItemEditor } from "../../src/tabs/logic-item-editor";
-import { SurveyLogicAction } from "../../src/tabs/logic-items";
-
-import { EmptySurveyCreatorOptions, settings } from "../../src/settings";
-import {
-  editorLocalization,
-  defaultStrings,
-} from "../../src/editorLocalization";
+import { SurveyLogic } from "../../src/components/tabs/logic";
+import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
+import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
+import { EmptySurveyCreatorOptions } from "../../src/settings";
+import { defaultStrings } from "../../src/editorLocalization";
 
 test("Page visibility logic", () => {
   var survey = new SurveyModel({});
