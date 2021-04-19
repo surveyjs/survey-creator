@@ -17,23 +17,24 @@ import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropHelper } from "./dragdrophelper";
 import { QuestionConverter } from "./questionconverter";
-import { SurveyLogic } from "./tabs/logic";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
 import { isPropertyVisible, propertyExists } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
-import { TabEmbedPlugin } from "./components/tabs/embed";
-import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
-import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
-import { TabTestPlugin } from "./components/tabs/test";
-import { TabTranslationPlugin } from "./tabs/translation";
-import { TabLogicPlugin } from "./tabs/logic-ui";
 import { ObjType, SurveyHelper } from "./surveyHelper";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
 import { ICreatorSelectionOwner } from "./controllers/controller-base";
 import { PagesController } from "./controllers/pages-controller";
 import { SelectionHistoryController } from "./controllers/selection-history-controller";
+
+import { TabEmbedPlugin } from "./components/tabs/embed";
+import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
+import { TabTestPlugin } from "./components/tabs/test";
+import { SurveyLogic } from "./components/tabs/logic";
+import { TabTranslationPlugin } from "./components/tabs/translation";
+import { TabLogicPlugin } from "./components/tabs/logic-ui";
 
 export interface ICreatorOptions {
   [index: string]: any;

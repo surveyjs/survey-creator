@@ -16,14 +16,14 @@ import {
   QuestionCheckboxModel,
 } from "survey-core";
 import { unparse, parse } from "papaparse";
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "../../editorLocalization";
 import {
   EmptySurveyCreatorOptions,
   ISurveyCreatorOptions,
   settings,
-} from "../settings";
-import { setSurveyJSONForPropertyGrid } from "../property-grid/index";
-import { CreatorBase, ICreatorPlugin } from "../creator-base";
+} from "../../settings";
+import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
+import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
