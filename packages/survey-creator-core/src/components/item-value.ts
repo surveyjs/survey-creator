@@ -28,7 +28,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   dragStart(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    return model.dragDropHelper.startDragItemValueItem(
+    return model.dragDropHelper.startDragItemValue(
       event,
       model.question,
       model.item

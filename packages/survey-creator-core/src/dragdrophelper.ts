@@ -11,53 +11,14 @@ import {
 import { CreatorBase } from "./creator-base";
 import { IPortableDragEvent } from "./utils/events";
 
-export class DragDropTargetElement {
-  public page: PageModel = null;
-  constructor(
-    public fakeElement: any,
-    public sourceElement: IElement,
-    private nestedPanelDepth: number = -1
-  ) {}
-  public moveTo(
-    destination: any,
-    isBottom: boolean,
-    isEdge: boolean = false
-  ): boolean {
-    const page = destination.isPage ? destination : destination.page;
-    if (page) {
-      this.moveToPage(page);
-      return this.page.dragDropMoveTo(destination, isBottom, isEdge);
-    }
-    return false;
-  }
-  public doDrop(): any {
-    if (!this.page) return;
-    return this.page.dragDropFinish();
-  }
-  public clear() {
-    if (!this.page) return;
-    this.page.dragDropFinish(true);
-  }
-  public moveToPage(page: PageModel) {
-    if (!!page && page !== this.page) {
-      this.clear();
-      this.page = page;
-      this.page.dragDropStart(
-        this.sourceElement,
-        this.fakeElement,
-        this.nestedPanelDepth
-      );
-    }
-  }
-}
-
 export class DragDropHelper extends Base {
   public static edgeHeight: number = 20;
   public static nestedPanelDepth: number = -1;
   public static prevEvent = { element: null, x: -1, y: -1 };
-  public static counter: number = 1;
 
-  public ddTarget: DragDropTargetElement = null;
+  public ghostElement: any = null;
+  public sourceElement: IElement = null;
+  public page: PageModel = null;
 
   @property() draggedOverQuestion: SurveyElement;
 
@@ -69,56 +30,45 @@ export class DragDropHelper extends Base {
     return this.creator.survey;
   }
 
-  public startDragToolboxItem(
-    event: IPortableDragEvent,
-    sourceElementJson: any
-  ) {
-    event.stopPropagation(); // prevent call startDrag event on Parent
-
-    event.dataTransfer.effectAllowed = "move";
-
-    this.ddTarget = new DragDropTargetElement(
-      this.createFakeElement(sourceElementJson),
-      null,
-      DragDropHelper.nestedPanelDepth
-    );
-
-    return true;
+  public get draggedItemType() {
+    if (!this.sourceElement) return "toolbox-item";
+    return this.sourceElement.getType();
   }
 
-  public startDragQuestion(event: IPortableDragEvent, sourceElement: any) {
-    event.stopPropagation(); // prevent call startDrag event on Parent
+  public startDragToolboxItem(
+    event: IPortableDragEvent,
+    sourceElementJson: JsonObject
+  ) {
+    return this.dragStartHandler(event, sourceElementJson, null);
+  }
 
+  public startDragQuestion(event: IPortableDragEvent, sourceElement: IElement) {
     var sourceElementJson = new JsonObject().toJsonObject(sourceElement);
     sourceElementJson["type"] = sourceElement.getType();
 
-    event.dataTransfer.effectAllowed = "move";
-
-    this.ddTarget = new DragDropTargetElement(
-      this.createFakeElement(sourceElementJson),
-      sourceElement,
-      DragDropHelper.nestedPanelDepth
-    );
-
-    return true;
+    return this.dragStartHandler(event, sourceElementJson, sourceElement);
   }
 
-  public startDragItemValueItem(
+  public startDragItemValue(
     event: IPortableDragEvent,
-    question: SurveyElement,
+    question: IElement,
     item: ItemValue
   ) {
+    var sourceElementJson = new JsonObject().toJsonObject(item);
+    sourceElementJson["type"] = item.getType();
+    return this.dragStartHandler(event, null, <any>item);
+  }
+
+  private dragStartHandler(
+    event: IPortableDragEvent,
+    sourceElementJson: JsonObject,
+    sourceElement: IElement
+  ) {
     event.stopPropagation(); // prevent call startDrag event on Parent
-
-    var dataTransferText = question.name + " : " + item.name;
-
     event.dataTransfer.effectAllowed = "move";
 
-    // this.ddTarget = new DragDropTargetElement(
-    //   this.createFakeElement(sourceElementJson),
-    //   sourceElement,
-    //   DragDropHelper.nestedPanelDepth
-    // );
+    this.ghostElement = this.createGhostElement(sourceElementJson);
+    this.sourceElement = sourceElement;
 
     return true;
   }
@@ -131,15 +81,16 @@ export class DragDropHelper extends Base {
     event.stopPropagation();
     event.preventDefault();
 
-    if (this.ddTarget.fakeElement === draggedOverElement) return;
+    if (this.draggedItemType === "itemvalue") {
+      event.dataTransfer.effectAllowed = "none";
+      return;
+    }
+
+    if (this.ghostElement === draggedOverElement) return;
 
     this.draggedOverQuestion = draggedOverElement;
 
-    // console.log("over: " + draggedOverElement.name);
-
     event = this.isCanDragContinue(event, draggedOverElement);
-
-    // console.log("isCanDragContinue: " + event);
 
     if (!event) {
       return;
@@ -164,7 +115,7 @@ export class DragDropHelper extends Base {
       draggedOverElement.elements.length > 0
     )
       return;
-    this.ddTarget.moveTo(draggedOverElement, bottomInfo.isBottom, isEdge);
+    this.moveTo(draggedOverElement, bottomInfo.isBottom, isEdge);
   }
 
   private isCanDragContinue(
@@ -180,24 +131,25 @@ export class DragDropHelper extends Base {
 
   public end() {
     this.draggedOverQuestion = undefined;
-    if (this.ddTarget) {
-      this.ddTarget.clear();
-    }
+    this.clear();
     this.clearData();
   }
 
   public doDrop(event: IPortableDragEvent) {
+    var newElement;
     event.stopPropagation();
     event.preventDefault();
-    var newElement = this.ddTarget.doDrop();
+
+    if (!!this.page) {
+      newElement = this.page.dragDropFinish();
+    }
+
     this.creator.selectElement(newElement);
     this.end();
   }
 
   public doLeavePage(event: IPortableDragEvent) {
-    if (!!this.ddTarget) {
-      this.ddTarget.moveTo(null, false);
-    }
+    this.moveTo(null, false);
   }
 
   private isAtLowerPartOfCurrentTarget(event: IPortableDragEvent): any {
@@ -261,24 +213,54 @@ export class DragDropHelper extends Base {
     return true;
   }
 
-  private createFakeElement(json: any): any {
+  private createGhostElement(json: any): any {
     if (!json || !json.type) return null;
-    var targetElement = this.creator.createNewElement(json);
-    if (targetElement["setSurveyImpl"]) {
-      targetElement["setSurveyImpl"](this.survey);
+    var ghostElement = this.creator.createNewElement(json);
+    if (ghostElement["setSurveyImpl"]) {
+      ghostElement["setSurveyImpl"](this.survey);
     } else {
-      targetElement["setData"](this.survey);
+      ghostElement["setData"](this.survey);
     }
-    targetElement.renderWidth = "100%";
-    return targetElement;
+    ghostElement.renderWidth = "100%";
+    return ghostElement;
+  }
+
+  public moveTo(
+    destination: any,
+    isBottom: boolean,
+    isEdge: boolean = false
+  ): boolean {
+    const page = destination.isPage ? destination : destination.page;
+    if (page) {
+      this.moveToPage(page);
+      return this.page.dragDropMoveTo(destination, isBottom, isEdge);
+    }
+    return false;
+  }
+  public clear() {
+    if (!this.page) return;
+    this.page.dragDropFinish(true);
+  }
+  public moveToPage(page: PageModel) {
+    if (!!page && page !== this.page) {
+      this.clear();
+      this.page = page;
+      this.page.dragDropStart(
+        this.sourceElement,
+        this.ghostElement,
+        DragDropHelper.nestedPanelDepth
+      );
+    }
   }
 
   private clearData() {
-    console.log("clearData");
-    this.ddTarget = null; // We should reset ddTarget to null due to the https://surveyjs.answerdesk.io/ticket/details/T1003 - onQuestionAdded not fired after D&D
-    var prev = DragDropHelper.prevEvent;
-    prev.element = null;
-    prev.x = -1;
-    prev.y = -1;
+    var prevEvent = DragDropHelper.prevEvent;
+    prevEvent.element = null;
+    prevEvent.x = -1;
+    prevEvent.y = -1;
+
+    // We should reset  to null due to the https://surveyjs.answerdesk.io/ticket/details/T1003 - onQuestionAdded not fired after D&D
+    this.ghostElement = null;
+    this.sourceElement = null;
   }
 }
