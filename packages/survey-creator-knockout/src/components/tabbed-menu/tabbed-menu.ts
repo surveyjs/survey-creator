@@ -9,7 +9,7 @@ const template = require("./tabbed-menu.html");
 ko.components.register("svc-tabbed-menu", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const container: HTMLDivElement = componentInfo.element;
+      const container: HTMLDivElement = componentInfo.element.nextElementSibling;
       const model = new ActionBarViewModel(params.items);
       model.dotsItemPopupModel.horizontalPosition = "right";
       new AdaptiveElementImplementor(model);
@@ -28,7 +28,7 @@ ko.components.register("svc-tabbed-menu", {
         manager.process();
         ko.tasks.runEarly();
       }, 100);
-      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+      ko.utils.domNodeDisposal.addDisposeCallback(container, () => {
         clearInterval(updateVisibleItems);
       });
       return model;
