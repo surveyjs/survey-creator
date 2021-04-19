@@ -232,19 +232,22 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     >
       
     
-      <svc-tabbed-menu
-        params="items: creator.tabs"
+      <!-- ko component: { name: 'svc-tabbed-menu', params: { items: creator.tabs } } -->
+      <div
+        class="svc-tabbed-menu"
       >
+        
+  
         <!-- ko foreach: items -->
         
-
+  
         <span
           class="svc-tabbed-menu-item-container"
           data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
           style="visibility: visible;"
         >
           
-  
+    
           <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
@@ -265,19 +268,19 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 
           <!-- /ko -->
           
-
+  
         </span>
         
-
+  
         
-
+  
         <span
           class="svc-tabbed-menu-item-container"
           data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
           style="visibility: visible;"
         >
           
-  
+    
           <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item"
@@ -298,19 +301,19 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 
           <!-- /ko -->
           
-
+  
         </span>
         
-
+  
         
-
+  
         <span
           class="svc-tabbed-menu-item-container"
           data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
           style="visibility: visible;"
         >
           
-  
+    
           <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item"
@@ -331,19 +334,19 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 
           <!-- /ko -->
           
-
+  
         </span>
         
-
+  
         
-
+  
         <span
           class="svc-tabbed-menu-item-container"
           data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
           style="visibility: visible;"
         >
           
-  
+    
           <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item"
@@ -364,19 +367,21 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 
           <!-- /ko -->
           
-
+  
         </span>
         
-
+  
         <!-- /ko -->
         
 
-      </svc-tabbed-menu>
+      </div>
+      
+
+      <!-- /ko -->
       
     
-      <sv-action-bar
-        params="items: creator.toolbarItems"
-      />
+      <!-- ko component: { name: 'sv-action-bar', params: { items: creator.toolbarItems } } -->
+      <!-- /ko -->
       
   
     </div>
@@ -1839,9 +1844,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                   >
                     
     
-                    <sv-action-bar
-                      params="items: actions"
-                    />
+                    <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
+                    
+    
+                    <!-- /ko -->
                     
   
                   </div>
@@ -1885,9 +1891,8 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             <svc-property-panel
               params="model: creator"
             >
-              <sv-action-bar
-                params="items: toolbarItems"
-              />
+              <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+              <!-- /ko -->
               
 
               <div
@@ -1987,9 +1992,8 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             >
               
     
-              <sv-action-bar
-                params="items: actions"
-              />
+              <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
+              <!-- /ko -->
               
   
             </div>
@@ -3535,9 +3539,10 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
     
-            <sv-action-bar
-              params="items: actions"
-            />
+            <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
+            
+    
+            <!-- /ko -->
             
   
           </div>
@@ -3581,9 +3586,8 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     <svc-property-panel
       params="model: creator"
     >
-      <sv-action-bar
-        params="items: toolbarItems"
-      />
+      <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+      <!-- /ko -->
       
 
       <div
@@ -3927,74 +3931,82 @@ exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
 <svc-tabbed-menu
   params="items: items"
 >
-  <!-- ko foreach: items -->
-  
-
-  <span
-    class="svc-tabbed-menu-item-container"
-    data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
-    style="visibility: visible;"
+  <div
+    class="svc-tabbed-menu"
   >
     
   
-    <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
-    <div
-      class="svc-tabbed-menu-item"
-      data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+    <!-- ko foreach: items -->
+    
+  
+    <span
+      class="svc-tabbed-menu-item-container"
+      data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+      style="visibility: visible;"
     >
       
-  
-      <span
-        class="svc-text svc-text--normal svc-tabbed-menu-item__text"
-        data-bind="text: title, css: { 'svc-text--bold': active }"
+    
+      <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+      <div
+        class="svc-tabbed-menu-item"
+        data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
       >
-        Menu Item 1
-      </span>
+        
+  
+        <span
+          class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+          data-bind="text: title, css: { 'svc-text--bold': active }"
+        >
+          Menu Item 1
+        </span>
+        
+
+      </div>
       
 
-    </div>
+      <!-- /ko -->
+      
+  
+    </span>
     
+  
+    
+  
+    <span
+      class="svc-tabbed-menu-item-container"
+      data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+      style="visibility: visible;"
+    >
+      
+    
+      <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+      <div
+        class="svc-tabbed-menu-item"
+        data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+      >
+        
+  
+        <span
+          class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+          data-bind="text: title, css: { 'svc-text--bold': active }"
+        >
+          Menu Item 2
+        </span>
+        
 
+      </div>
+      
+
+      <!-- /ko -->
+      
+  
+    </span>
+    
+  
     <!-- /ko -->
     
 
-  </span>
-  
-
-  
-
-  <span
-    class="svc-tabbed-menu-item-container"
-    data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
-    style="visibility: visible;"
-  >
-    
-  
-    <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
-    <div
-      class="svc-tabbed-menu-item"
-      data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
-    >
-      
-  
-      <span
-        class="svc-text svc-text--normal svc-tabbed-menu-item__text"
-        data-bind="text: title, css: { 'svc-text--bold': active }"
-      >
-        Menu Item 2
-      </span>
-      
-
-    </div>
-    
-
-    <!-- /ko -->
-    
-
-  </span>
-  
-
-  <!-- /ko -->
+  </div>
   
 
 </svc-tabbed-menu>
