@@ -4,7 +4,8 @@
     <!-- ko template: { name: 'survey-content', data: $data.settingsSurvey  } -->
     <!-- /ko -->
     <div class="svc-plugin-tab__content-actions">
-      <sv-action-bar params="items: toolbarItems"></sv-action-bar>
+      <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+      <!-- /ko -->
     </div>
     <div class="svd-vertical-container" role="presentation">
       <div class="svd-vertical-container__row" role="presentation">
