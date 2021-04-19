@@ -52,15 +52,15 @@ export class TranslationUIComponent extends SurveyElementBase<any, any> {
   render(): JSX.Element {
     return (
       <div className="svc-creator-tab__content">
-        <div className="svc-plugin-tab__content">
+        <div className="svc-plugin-tab__content svc-translation-tab__content">
           <Survey model={this.model.settingsSurvey}></Survey>
-          <div className="svc-test-tab__content-actions">
-            <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
-          </div>
           <TranslationGroupComponent
             model={this.model.root}
           ></TranslationGroupComponent>
         </div>
+        <div className="svc-test-tab__content-actions svc-translation-tab__content-actions">
+            <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
+          </div>
       </div>
     );
   }

@@ -1,12 +1,7 @@
-<div class="svc-creator-tab__content">
-  <!-- ko if: $data.showTranslation -->
-  <div class="svc-plugin-tab__content" data-bind="with: $data.translation">
+<div class="svc-creator-tab__content" data-bind="with: $data.translation">
+  <div class="svc-plugin-tab__content svc-translation-tab__content">
     <!-- ko template: { name: 'survey-content', data: $data.settingsSurvey  } -->
     <!-- /ko -->
-    <div class="svc-plugin-tab__content-actions">
-      <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
-      <!-- /ko -->
-    </div>
     <div class="svd-vertical-container" role="presentation">
       <div class="svd-vertical-container__row" role="presentation">
         <div class="svd-vertical-container__cell" role="presentation">
@@ -31,5 +26,8 @@
       </div>
     </div>
   </div>
-  <!-- /ko -->
+  <div class="svc-plugin-tab__content-actions svc-translation-tab__content-actions">
+    <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+    <!-- /ko -->
+  </div>
 </div>
