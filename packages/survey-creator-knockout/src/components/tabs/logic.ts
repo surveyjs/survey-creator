@@ -1,9 +1,8 @@
 import * as ko from "knockout";
-import { SurveyCreator } from "../../creator";
 import { TabLogicPlugin, SurveyLogicUI } from "@survey/creator";
 import { ImplementorBase } from "survey-knockout-ui";
 import "./logic.scss";
-var templateHtml = require("./logic.html");
+const templateHtml = require("./logic.html");
 
 ko.components.register("svc-tab-logic", {
   viewModel: {
