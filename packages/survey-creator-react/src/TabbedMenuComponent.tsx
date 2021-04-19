@@ -37,7 +37,7 @@ class TabbedMenuComponent extends SurveyElementBase<
     const items = this.adaptiveElement.items.map((item) =>
       this.renderItem(item)
     );
-    return <>{items}</>;
+    return <div className="svc-tabbed-menu">{items}</div>;
   }
   renderItem(item: AdaptiveActionBarItemWrapper): JSX.Element {
     let css: string = "svc-tabbed-menu-item-container";
@@ -98,7 +98,8 @@ class TabbedMenuItemComponent extends SurveyElementBase<
     if (item.active) className += " svc-tabbed-menu-item--selected";
     if (item.enabled !== undefined && !item.enabled)
       className += " svc-tabbed-menu-item--disabled";
-    let titleClassName: string = "svc-text svc-tabbed-menu-item__text svc-text--normal";
+    let titleClassName: string =
+      "svc-text svc-tabbed-menu-item__text svc-text--normal";
     if (item.active) titleClassName += " svc-text--bold";
     return (
       <div className={className} onClick={() => item.action(item)}>

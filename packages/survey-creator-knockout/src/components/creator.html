@@ -1,6 +1,7 @@
 <div class="svc-creator__area svc-flex-column">
   <div class="svc-top-bar">
-    <svc-tabbed-menu params="items: creator.tabs"></svc-tabbed-menu>
+    <!-- ko component: { name: 'svc-tabbed-menu', params: { items: creator.tabs } } -->
+    <!-- /ko -->
     <!-- ko component: { name: 'sv-action-bar', params: { items: creator.toolbarItems } } -->
     <!-- /ko -->
   </div>
