@@ -5,15 +5,12 @@ import {
   SurveyTriggerRunExpression,
   PanelModel,
   SurveyTriggerSkip,
-  QuestionMatrixDynamicModel,
+  QuestionMatrixDynamicModel
 } from "survey-core";
-import { SurveyLogic } from "../../src/tabs/logic";
-import { SurveyLogicUI } from "../../src/tabs/logic-ui";
-import { LogicItemEditor } from "../../src/tabs/logic-item-editor";
-import { SurveyLogicAction, SurveyLogicItem } from "../../src/tabs/logic-items";
-import { getLogicString } from "../../src/tabs/logic-types";
-import { settings } from "../../src/settings";
-import { getLocString } from "../../src/editorLocalization";
+import { SurveyLogic } from "../../src/components/tabs/logic";
+import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
+import { LogicItemEditor } from "../../src/components/tabs/logic-item-editor";
+import { getLogicString } from "../../src/components/tabs/logic-types";
 import { PropertyGridEditorCollection } from "../../src/property-grid/index";
 import { PropertyGridEditorExpression } from "../../src/property-grid/condition";
 

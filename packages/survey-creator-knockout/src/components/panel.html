@@ -19,7 +19,8 @@
     <!-- /ko -->
 
     <div class="svc-question__content-actions">
-      <sv-action-bar params="items: actions"></sv-action-bar>
+      <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
+      <!-- /ko -->
     </div>
 
     <!-- ko if: isDraggedOverMe -->

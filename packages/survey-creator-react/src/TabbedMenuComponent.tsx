@@ -6,6 +6,7 @@ import {
   AdaptiveElement,
   Base,
   IActionBarItem,
+  ResponsivityManager,
 } from "survey-core";
 
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
@@ -19,6 +20,9 @@ class TabbedMenuComponent extends SurveyElementBase<
   any
 > {
   private adaptiveElement = new AdaptiveElement();
+  private manager: ResponsivityManager;
+  private rootRef: React.RefObject<HTMLDivElement>;
+  private updateVisibleItems: any;
 
   protected getStateElement(): Base {
     return this.adaptiveElement;
@@ -31,13 +35,19 @@ class TabbedMenuComponent extends SurveyElementBase<
         return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
       }
     );
+    this.rootRef = React.createRef();
+    this.adaptiveElement.dotsItemPopupModel.horizontalPosition = "right";
   }
 
   render(): JSX.Element {
     const items = this.adaptiveElement.items.map((item) =>
       this.renderItem(item)
     );
-    return <>{items}</>;
+    return (
+      <div ref={this.rootRef} className="svc-tabbed-menu">
+        {items}
+      </div>
+    );
   }
   renderItem(item: AdaptiveActionBarItemWrapper): JSX.Element {
     let css: string = "svc-tabbed-menu-item-container";
@@ -53,7 +63,7 @@ class TabbedMenuComponent extends SurveyElementBase<
     }
 
     const component = ReactElementFactory.Instance.createElement(
-      "svc-tabbed-menu-item",
+      item.component || "svc-tabbed-menu-item",
       { item: item }
     );
 
@@ -71,6 +81,28 @@ class TabbedMenuComponent extends SurveyElementBase<
       <!-- /ko -->
     </span>
      */
+  }
+  componentDidMount() {
+    super.componentDidMount();
+    const container = this.rootRef.current;
+    this.manager = new ResponsivityManager(container, this.adaptiveElement);
+    this.manager.getItemSizes = () => {
+      const widths: number[] = [];
+      container
+        .querySelectorAll("span.svc-tabbed-menu-item-container")
+        .forEach((actionContainer) => {
+          widths.push((actionContainer as HTMLDivElement).offsetWidth);
+        });
+      return widths;
+    };
+
+    this.updateVisibleItems = setInterval(() => {
+      this.manager.process();
+    }, 100);
+  }
+  componentWillUnmount() {
+    clearInterval(this.updateVisibleItems);
+    super.componentWillUnmount();
   }
 }
 
@@ -98,7 +130,8 @@ class TabbedMenuItemComponent extends SurveyElementBase<
     if (item.active) className += " svc-tabbed-menu-item--selected";
     if (item.enabled !== undefined && !item.enabled)
       className += " svc-tabbed-menu-item--disabled";
-    let titleClassName: string = "svc-text svc-tabbed-menu-item__text svc-text--normal";
+    let titleClassName: string =
+      "svc-text svc-tabbed-menu-item__text svc-text--normal";
     if (item.active) titleClassName += " svc-text--bold";
     return (
       <div className={className} onClick={() => item.action(item)}>
