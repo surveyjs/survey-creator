@@ -168,6 +168,7 @@ export interface ITranslationLocales {
   ) => void;
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
   fireOnObjCreating(obj: Base);
+  removeLocale(loc: string): void;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -224,6 +225,9 @@ export class TranslationGroup extends TranslationItemBase {
   public get locales() {
     return !!this.translation ? this.translation.locales : null;
   }
+  public get removeLocaleText() {
+    return editorLocalization.getString("pe.remove");
+  }
   public get localeCount(): number {
     return !!Array.isArray(this.locales) ? this.locales.length : 0;
   }
@@ -236,6 +240,9 @@ export class TranslationGroup extends TranslationItemBase {
     return this.translation
       ? this.translation.getLocaleName(loc)
       : editorLocalization.getLocaleName(loc);
+  }
+  public removeLocale = (loc: string) => {
+    this.translation && this.translation.removeLocale(loc);
   }
   public reset() {
     this.itemValues = [];
@@ -476,6 +483,7 @@ export class Translation extends Base implements ITranslationLocales {
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
   private pagePopupModel: PopupModel;
+  private chooseLanguagePopupModel: PopupModel;
 
   constructor(
     survey: SurveyModel,
@@ -572,6 +580,7 @@ export class Translation extends Base implements ITranslationLocales {
     return {
       elements: [
         {
+          visible: false,
           type: "dropdown",
           name: "availableLocales",
           choicesVisibleIf: "{selLocales} notcontains {item}",
@@ -608,8 +617,8 @@ export class Translation extends Base implements ITranslationLocales {
       ],
     };
   }
-  private updateSettingsSurveyLocales() {
-    var choices = new Array<ItemValue>();
+  private getSurveyLocales() {
+    const usedLocales = new Array<ItemValue>();
     var sLocales = surveyLocalization.supportedLocales;
     var locales =
       Array.isArray(sLocales) && sLocales.length > 0
@@ -617,13 +626,17 @@ export class Translation extends Base implements ITranslationLocales {
         : (<any>surveyLocalization).getLocales();
     var addedLocales = {};
     for (var i = 0; i < locales.length; i++) {
-      this.addLocaleIntoChoices(locales[i], choices, addedLocales);
+      this.addLocaleIntoChoices(locales[i], usedLocales, addedLocales);
     }
     locales = this.settingsSurvey.getValue("selLocales");
     if (!locales) locales = [];
     for (var i = 0; i < locales.length; i++) {
-      this.addLocaleIntoChoices(locales[i], choices, addedLocales);
+      this.addLocaleIntoChoices(locales[i], usedLocales, addedLocales);
     }
+    return [usedLocales, locales];
+  }
+  private updateSettingsSurveyLocales() {
+    const [choices, locales] = this.getSurveyLocales();
     this.availableLocalesQuestion.choices = choices;
     this.localesQuestion.choices = choices;
     this.settingsSurvey.getQuestionByName(
@@ -656,13 +669,28 @@ export class Translation extends Base implements ITranslationLocales {
     }
   }
   private setupToolbarItems() {
+    this.chooseLanguagePopupModel = new PopupModel(
+      "sv-list",
+      new ListModel(
+        this.getSurveyLocales()[0].map((locale: ItemValue) => ({ id: locale.value, title: locale.text, data: locale })),
+        (item: IActionBarItem) => {
+          this.addLocale(item.id);
+          this.chooseLanguagePopupModel.toggleVisibility();
+        },
+        false
+      ),
+      "top",
+      "right"
+    );
     this.toolbarItems.push({
-      id: "svc-translation-import",
-      title: this.exportToCSVText,
-      tooltip: this.exportToCSVText,
-      component: "sv-action-bar-item",
-      action: () => {
-        this.exportToSCVFile("survey_translation.csv");
+      id: "svc-translation-choose-language",
+      css: "sv-action--first sv-action-bar-item--secondary",
+      iconName: "icon-change_16x16",
+      title: () => this.selectLanguageOptionsCaption,
+      component: "sv-action-bar-item-dropdown",
+      popupModel: this.chooseLanguagePopupModel,
+      action: (language) => {
+        this.chooseLanguagePopupModel.toggleVisibility();
       },
     });
 
@@ -701,8 +729,8 @@ export class Translation extends Base implements ITranslationLocales {
       id: "svc-translation-show-all-strings",
       css: () =>
         this.showAllStrings
-          ? "sv-action--last sv-action-bar-item--secondary"
-          : "sv-action--last",
+          ? "sv-action-bar-item--secondary"
+          : "",
       title: this.showAllStringsText,
       iconName: () => {
         if (this.showAllStrings) {
@@ -713,7 +741,6 @@ export class Translation extends Base implements ITranslationLocales {
       action: () => (this.showAllStrings = !this.showAllStrings),
     });
 
-    //TODO add import from, requried file input action
     this.toolbarItems.push({
       id: "svd-translation-merge_locale_withdefault",
       title: this.mergeLocaleWithDefaultText,
@@ -722,6 +749,18 @@ export class Translation extends Base implements ITranslationLocales {
       visible: this.canMergeLocaleWithDefault,
       action: () => {
         this.mergeLocaleWithDefault();
+      },
+    });
+
+    //TODO add import from, requried file input action
+    this.toolbarItems.push({
+      id: "svc-translation-export",
+      css: "sv-action--last",
+      title: this.exportToCSVText,
+      tooltip: this.exportToCSVText,
+      component: "sv-action-bar-item",
+      action: () => {
+        this.exportToSCVFile("survey_translation.csv");
       },
     });
   }
@@ -765,6 +804,15 @@ export class Translation extends Base implements ITranslationLocales {
   }
   public getLocaleName(loc: string) {
     return editorLocalization.getLocaleName(loc, this.defaultLocale);
+  }
+  public removeLocale(locale: string) {
+    if (this.hasLocale(locale)) {
+      const index = this.locales.indexOf(locale);
+      const locales = this.locales;
+      locales.splice(index, 1);
+      this.locales = locales;
+      this.canMergeLocaleWithDefault = this.hasLocale(this.defaultLocale);
+    }
   }
   public hasLocale(locale: string): boolean {
     var locales = this.locales;
