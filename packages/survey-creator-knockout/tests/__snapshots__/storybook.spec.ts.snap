@@ -374,9 +374,8 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       </svc-tabbed-menu>
       
     
-      <sv-action-bar
-        params="items: creator.toolbarItems"
-      />
+      <!-- ko component: { name: 'sv-action-bar', params: { items: creator.toolbarItems } } -->
+      <!-- /ko -->
       
   
     </div>
@@ -1839,9 +1838,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                   >
                     
     
-                    <sv-action-bar
-                      params="items: actions"
-                    />
+                    <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
+                    
+    
+                    <!-- /ko -->
                     
   
                   </div>
@@ -1885,9 +1885,8 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             <svc-property-panel
               params="model: creator"
             >
-              <sv-action-bar
-                params="items: toolbarItems"
-              />
+              <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+              <!-- /ko -->
               
 
               <div
@@ -1987,9 +1986,8 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             >
               
     
-              <sv-action-bar
-                params="items: actions"
-              />
+              <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
+              <!-- /ko -->
               
   
             </div>
@@ -3535,9 +3533,10 @@ exports[`Storyshots Creator design surface content Default 1`] = `
           >
             
     
-            <sv-action-bar
-              params="items: actions"
-            />
+            <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
+            
+    
+            <!-- /ko -->
             
   
           </div>
@@ -3581,9 +3580,8 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     <svc-property-panel
       params="model: creator"
     >
-      <sv-action-bar
-        params="items: toolbarItems"
-      />
+      <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+      <!-- /ko -->
       
 
       <div
