@@ -1,4 +1,4 @@
-.svc-survey-question {
+.spg-question {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -6,10 +6,10 @@
   //todo: remove !important
   min-width: auto !important;
 }
-.svc-survey-question__header {
+.spg-question__header {
   width: 100%;
 }
-.svc-survey-question__title {
+.spg-question__title {
   width: 100%;
   line-height: calcSize(3);
   font-size: calcSize(2);
@@ -27,12 +27,11 @@
   }
 }
 
-.svc-survey-question__content {
+.spg-question__content {
   margin-top: calcSize(1);
   width: 100%;
 }
-.svc-survey-question--boolean {
-  
+.spg-question--boolean {
 }
-.svc-survey-question--boolean + .svc-survey-question--boolean {
+.spg-question--boolean + .spg-question--boolean {
 }

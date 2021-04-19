@@ -1,0 +1,44 @@
+.spg-table {
+  table-layout: fixed;
+  width: 100%;
+  background-color: $background;
+  border: 1px solid $border;
+  border-collapse: collapse;
+}
+.spg-table tr:not(:last-child) {
+  box-shadow: 0px 1px 0px #d6d6d6;
+}
+.spg-table__cell {
+  padding: 4px 0;
+}
+
+.spg-table__cell--detail-panel {
+  padding: 0;
+  .spg-panel__content {
+    box-shadow: none;
+  }
+}
+.spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
+  appearance: none;
+  line-height: 24px;
+  height: 24px;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+}
+.spg-table__cell--actions .sv-action-bar {
+  padding: 0;
+  opacity: 0.5;
+  .sv-action:not(.sv-action--hidden):not(:last-of-type) {
+    padding-right: 0;
+  }
+  .sv-action:first-child {
+    margin-left: auto;
+  }
+}
+.spg-table__cell--actions:first-child {
+  width: calcSize(6);
+  .sv-action-bar {
+    padding: 0;
+  }
+}

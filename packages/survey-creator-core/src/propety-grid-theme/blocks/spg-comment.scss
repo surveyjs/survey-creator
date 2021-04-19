@@ -1,4 +1,4 @@
-.svc-survey-input {
+.spg-comment {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -6,23 +6,24 @@
   background: $background;
   box-sizing: border-box;
   width: 100%;
-  height: calcSize(6);
+  height: calcSize(9);
   border: 1px solid $border-inside;
   padding: 12px calcSize(2);
+  margin-top: calcSize(1);
   outline: none;
   font-size: calcSize(2);
   color: $foreground;
 }
 
-.svc-survey-input::placeholder {
+.spg-comment::placeholder {
   color: $foreground-light;
 }
 
-.svc-survey-input:focus {
+.spg-comment:focus {
   border: 2px solid #19b394;
 }
 
-.svc-survey-input:disabled,
-.svc-survey-input:disabled::placeholder {
+.spg-comment:disabled,
+.spg-comment:disabled::placeholder {
   color: $foreground-disabled;
 }

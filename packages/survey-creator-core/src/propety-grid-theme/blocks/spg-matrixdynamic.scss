@@ -1,0 +1,18 @@
+.spg-matrixdynamic__add-btn {
+  display: none;
+}
+.spg-matrixdynamic__drag-element {
+  padding: calcSize(2);
+  &:hover {
+    background-color: $background;
+  }
+  &:after {
+    content: " ";
+    display: block;
+    height: calcSize(0.5);
+    width: calcSize(2);
+    border: 1px solid #d6d6d6;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+}

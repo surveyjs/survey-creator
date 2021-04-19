@@ -1,25 +1,25 @@
 import {
   Base,
-  JsonObjectProperty,
-  Serializer,
-  Question,
-  PanelModelBase,
-  PanelModel,
-  SurveyModel,
   FunctionFactory,
   Helpers,
-  settings,
+  JsonObjectProperty,
+  PanelModel,
+  PanelModelBase,
+  Question,
   QuestionMatrixDynamicModel,
+  Serializer,
+  settings,
+  SurveyModel,
 } from "survey-core";
+import { editorLocalization } from "../editorLocalization";
+import { EditableObject } from "../propertyEditors/editableObject";
+import { propertyGridCss } from "../propety-grid-theme/property-grid";
 import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties,
 } from "../questionEditors/questionEditor";
-import { EditableObject } from "../propertyEditors/editableObject";
-import { editorLocalization } from "../editorLocalization";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
+import { EmptySurveyCreatorOptions, ISurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
-import { creatorCss } from "../survey-theme/creator-css";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -572,11 +572,7 @@ export class PropertyGridModel {
       this.surveyValue.dispose();
     }
     this.surveyValue = this.createSurvey(json);
-    this.surveyValue.css = creatorCss;
-    this.surveyValue.onDetailPanelRenderedRowCreated.add((_, opt) => {
-      opt.renderedRow.cells = [opt.renderedRow.cells[1]];
-      opt.renderedRow.cells[0].colSpans += 2;
-    });
+    this.surveyValue.css = propertyGridCss;
     var page = this.surveyValue.createNewPage("p1");
     if (!this.obj) return;
     new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
