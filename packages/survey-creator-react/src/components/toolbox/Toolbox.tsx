@@ -165,7 +165,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
         onClick={() => this.props.creator.clickToolboxItem(toolboxItem.json)}
         onDragStart={(e) => {
           var json = this.props.creator.getJSONForNewElement(toolboxItem.json);
-          this.props.creator.dragDropHelper.startDragToolboxItem(
+          this.props.creator.dragDropHelper.toolboxItemDragStartHandler(
             new ReactDragEvent(e),
             json
           );

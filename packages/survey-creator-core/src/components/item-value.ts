@@ -28,7 +28,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   dragStart(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    return model.dragDropHelper.startDragItemValue(
+    return model.dragDropHelper.onDragStartItemValue(
       event,
       model.question,
       model.item
@@ -39,7 +39,7 @@ export class ItemValueWrapperViewModel extends Base {
     // model.dragDropHelper.doDragDropOver(event, draggedOverElement, true);
   }
   dragEnd(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper.end();
+    model.dragDropHelper.onDragEnd();
   }
 
   private get dragDropHelper(): DragDropHelper {

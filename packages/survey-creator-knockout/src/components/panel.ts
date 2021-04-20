@@ -23,10 +23,6 @@ class KnockoutPanelAdornerViewModel extends KnockoutQuestionAdornerViewModel {
   ) {
     super(creator, panel, templateData);
   }
-
-  get isDraggedOverMe(): boolean {
-    return this.creator.dragDropHelper.draggedOverQuestion === this.surveyElement;
-  }
 }
 
 ko.components.register("svc-panel", {
