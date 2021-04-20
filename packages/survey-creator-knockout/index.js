@@ -7,7 +7,7 @@ if (!window["%hammerhead%"]) {
     // showJSONEditorTab: false
     showLogicTab: true,
     showTranslationTab: true,
-    showEmbededSurveyTab: true,
+    showEmbeddedSurveyTab: true,
   };
   let creator = new SurveyCreatorKnockout.SurveyCreator(options);
   let json = {

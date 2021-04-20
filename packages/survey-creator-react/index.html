@@ -128,15 +128,15 @@
             ],
           },
         ],
-        showQuestionNumbers: "off",
+        showQuestionNumbers: "off"
       };
 
-      let options = {
+      const options = {
         showLogicTab: true,
         showTranslationTab: true,
-        showEmbededSurveyTab: true
+        showEmbeddedSurveyTab: true
       };
-      let creator = SurveyCreatorReact.createReactSurveyCreator(json, options);
+      const creator = SurveyCreatorReact.createReactSurveyCreator(json, options);
 
       ReactDOM.render(
         <React.StrictMode>
