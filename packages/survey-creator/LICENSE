@@ -1,1 +1,91 @@
-Please go to this link to review the commercial license: https://surveyjs.io/Licenses#SurveyCreator
+Devsoft Baltic OÜ
+Commercial developer license for SurveyJS Creator, SurveyJS Pdf Export and SurveyJS Analytics Pack libraries.
+Copyright (C) 2015-2021 DEVSOFT BALTIC OÜ.
+
+END-USER LICENSE AGREEMENT
+FOR ALL SOFTWARE DEVELOPMENT PRODUCT(S) INCLUDED IN THIS DISTRIBUTION
+
+IMPORTANT - PLEASE READ THIS END-USER LICENSE AGREEMENT ("AGREEMENT") CAREFULLY BEFORE USING THE SOFTWARE DEVELOPMENT PRODUCT(S) INCLUDED IN THIS DISTRIBUTION/INSTALLATION.
+
+This Devsoft Baltic OÜ ("DEVSOFTBALTIC") AGREEMENT constitutes a legally binding agreement between you or the business and/or entity which you represent ("You" or "LICENSEE") and DEVSOFTBALTIC for all DEVSOFTBALTIC products, frameworks, widgets, source code, demos, intermediate files, media, printed materials, and documentation ("SOFTWARE DEVELOPMENT PRODUCT(S)") included in this distribution/installation.
+
+By purchasing, installing, copying, or otherwise using the SOFTWARE DEVELOPMENT PRODUCT(S), you acknowledge that you have read this AGREEMENT and you agree to be bound by its terms and conditions. If you are representing a business and/or entity, you acknowledge that you have the legal authority to bind the business and/or entity you are representing to all the terms and conditions of this AGREEMENT.
+
+If you do not agree to any of the terms and conditions of this AGREEMENT or if you do not have the legal authority to bind the business and/or entity you are representing to any of the terms and conditions of this AGREEMENT, DO NOT INSTALL, COPY, USE, EVALUATE, OR REPLICATE IN ANY MANNER, ANY PART, FILE OR PORTION OF THE SOFTWARE DEVELOPMENT PRODUCT(S).
+
+All SOFTWARE DEVELOPMENT PRODUCT(S) is licensed, not sold.
+
+1. GRANT OF LICENSE.
+Subject to all the terms and conditions of this AGREEMENT, DEVSOFTBALTIC grants LICENSEE a non-exclusive, non-transferable license to install and use the SOFTWARE DEVELOPMENT PRODUCT(S) included in this distribution as authorized in sections 1.1 through 1.2 below:
+
+1.1 INDIVIDUAL USE LICENSE.
+If you are an individual, you may install, copy, and use the SOFTWARE DEVELOPMENT PRODUCT(S) by purchasing a SurveyJS Creator license(s) from DEVSOFTBALTIC or its authorized resellers, in accordance with Section 4 of this AGREEMENT.
+
+1.2 BUSINESS AND GOVERNMENT USE LICENSE.
+DEVSOFTBALTIC licenses the SOFTWARE DEVELOPMENT PRODUCT(S) on a per-developer basis. If you represent a business and/or government entity, you or your employees may install, copy, and use the SOFTWARE DEVELOPMENT PRODUCT(S) by purchasing SurveyJS Creator license(s) from DEVSOFTBALTIC or its authorized resellers for each developer using the SOFTWARE DEVELOPMENT PRODUCT(S), in accordance with Section 4 of this AGREEMENT. The number of licensed developers using the SOFTWARE DEVELOPMENT PRODUCT(S) must equal or be less than the number of seats purchased from DEVSOFTBALTIC or its authorized resellers.
+DEVSOFTBALTIC grants to Licensee a paid up, perpetual world-wide, irrevocable (except in the case of Licensee’s uncured breach) non-exclusive and non-transferable license to the SOFTWARE DEVELOPMENT PRODUCT(S), including the Redistributables, to use, test, demonstrate, develop derivative works, use for technical support, provide training, host and embed the Redistributables , in executable form only (the “DEVSOFTBALTIC Component”) , in all current and future versions of the Application (the "License").  This license grant extends to all Licensee distributors and resellers (collectively, “the Licensees”).  By way of clarification, there is no limit on the number of customers or users (including users of Licensee’s resellers, distributors, and licensees) that Licensees can use the Redistributables for. Further, DEVSOFTBALTIC agrees that Licensee’s third-party contractors and hosting partners may access and use the Redistributables, subject to the same restrictions and solely for the purposes contemplated hereunder.  The foregoing license grant applies to all corrections, patches, updates and future versions of the DEVSOFTBALTIC Component (collectively, “Updates”).  
+
+2. RENTAL.
+You may not rent, lease, or lend the SOFTWARE DEVELOPMENT PRODUCT(S).
+
+3. TRANSFER.
+You may NOT permanently or temporarily transfer ANY of your rights under this AGREEMENT to any individual or business or government entity without prior written approval from DEVSOFTBALTIC. Regardless of any modifications which you make and regardless of how you might compile, link, and/or package your programs, under no circumstances may the libraries, Redistributables, and/or files included in the SOFTWARE DEVELOPMENT PRODUCT(S) (including any portions thereof) be used for developing programs by anyone other than you. Only you as the LICENSEE have the right to use the libraries, redistributables, or other files of the SOFTWARE DEVELOPMENT PRODUCT(S) (or any portions thereof) for developing programs created with the SOFTWARE DEVELOPMENT PRODUCT(S). You may not share copies of the Redistributables with other co-developers. 
+
+4. RECEIVE UPDATES DURING TWELVE (12) MONTHS SINCE ORIGINAL PURCHASE.
+LICENSEE will be eligible to receive all major and minor updates for the SOFTWARE DEVELOPMENT PRODUCT(S) during this 12-month period. Upon 12 months plus 1 day after original purchase date, and each subsequent year thereafter, Licensee may elect to continue receiving major and minor updates of the SOFTWARE DEVELOPMENT PRODUCT(S) from DEVSOFTBALTIC by paying the annual support fees which will be about forty percent (40%) of the original license fee the SOFTWARE DEVELOPMENT PRODUCT(S).
+
+If the SOFTWARE DEVELOPMENT PRODUCT(S) is labeled as an update, you must be properly licensed to obtain the updated SOFTWARE DEVELOPMENT PRODUCT(S). A SOFTWARE DEVELOPMENT PRODUCT(S) labeled as an update replaces and/or supplements the SOFTWARE DEVELOPMENT PRODUCT(S) that formed the basis for your eligibility for the update, and together constitutes a single PRODUCT(S). You may only use the updated PRODUCT(S) in accordance with all the terms of this AGREEMENT.
+
+Pricing for the SOFTWARE DEVELOPMENT PRODUCT(S) license and any subsequent upgrade of the license subject to change with or without notice.
+
+DEVSOFTBALTIC reserves the right to discontinue the SOFTWARE DEVELOPMENT PRODUCT(S) or its constituents, at any time. In the event this occurs LICENSEE has the right to use the discontinued SOFTWARE PRODUCT for unlimited period and get support for 24 months since the purchase date. LICENSEE shall be entitled to get full refund if the purchase was made in 90 days, 75% if the purchase was made in 180 days, 50% if the purchase was made in 270 days and 25% if the purchase was made within a year. 
+
+5. REDISTRIBUTION.
+The SOFTWARE DEVELOPMENT PRODUCT(s) may include certain files ("REDISTRIBUTABLE(s)") intended for distribution by you to the users of software applications which you create. Redistributables include, for example, those files identified in printed or on-line documentation as redistributable files or those files preselected for deployment by an install utility provided with the SOFTWARE DEVELOPMENT PRODUCT(S) (if any). In all circumstances, the REDISTRIBUTABLES for the SOFTWARE DEVELOPMENT PRODUCT(S) are only those files specifically designated as such by DEVSOFTBALTIC.
+AT NO TIME MAY LICENSEE CREATE ANY TOOL, REDISTRIBUTABLE, OR PRODUCT THAT DIRECTLY OR INDIRECTLY COMPETES WITH THE SOFTWARE DEVELOPMENT PRODUCT(S) BY UTILIZING ALL OR ANY PORTION OF THE DEVSOFTBALTIC SOFTWARE DEVELOPMENT PRODUCT(S).
+The LICENSEE may NOT distribute the SOFTWARE DEVELOPMENT PRODUCT(S), in any format, to others for development or application compilation purposes.
+If you have purchased a license as described in Section 4 of this AGREEMENT, you may reproduce and distribute copies of the REDISTRIBUTABLES, provided that such copies are made from the original copy of the REDISTRIBUTABLES included with the SOFTWARE DEVELOPMENT PRODUCT(S) or modified versions of the REDISTRIBUTABLES which are provided to you by DEVSOFTBALTIC or those which you create. Copies of REDISTRIBUTABLES may only be distributed with and for the sole purpose of executing application programs permitted under this AGREEMENT that you have created using the SOFTWARE DEVELOPMENT PRODUCT(S).
+
+The following files in the SOFTWARE DEVELOPMENT PRODUCT(S) distribution are considered REDISTRIBUTABLES under this AGREEMENT. Refer to Section 4 of this AGREEMENT for licensing terms:
+
+*.css, *.js, fonts\*.*, *.d.ts
+
+6. THIRD-PARTY SOFTWARE PRODUCTS/LIBRARIES
+DEVSOFTBALTIC represents and warrants that the DEVSOFTBALTIC SOFTWARE PRODUCTS, including Redistributables, do not and will not contain any third-party libraries or open-source software other than that open-source software licensed through MIT.  
+7. COPYRIGHT.
+All title and copyrights in and to the SOFTWARE DEVELOPMENT PRODUCT(S) (including but not limited to any DEVSOFTBALTIC trademarks, copywritten images, demos, source code, intermediate files, packages, photographs, redistributables, animations, video, audio, music, text, and "applets" incorporated into the SOFTWARE DEVELOPMENT PRODUCT(S) the accompanying printed materials, and any copies of the SOFTWARE DEVELOPMENT PRODUCT(S)) are owned by DEVSOFTBALTIC or its subsidiaries.
+The SOFTWARE DEVELOPMENT PRODUCT(S) is protected by copyright laws and international treaty provisions and therefore, you must treat the SOFTWARE DEVELOPMENT PRODUCT(S) like any other copyrighted material except that you may install and use the SOFTWARE DEVELOPMENT PRODUCT(S) as described in this AGREEMENT.
+
+8. DOWNLOAD of SOFTWARE DEVELOPMENT PRODUCT(S).
+The SOFTWARE DEVELOPMENT PRODUCT(S) will be made available for download from “SurveyJS Project” websites or installing SurveyJS packages using https://www.npmjs.com/ package installer.
+
+9. DISCLAIMER OF WARRANTY.
+DEVSOFTBALTIC expressly disclaims any warranty for the SOFTWARE DEVELOPMENT PRODUCT(S). THE SOFTWARE DEVELOPMENT PRODUCT(S) AND ANY RELATED DOCUMENTATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NONINFRINGEMENT. DEVSOFTBALTIC DOES NOT WARRANT, GUARANTEE, OR MAKE ANY REPRESENTATIONS REGARDING THE USE, OR THE RESULTS OF THE USE, OF THE SOFTWARE DEVELOPMENT PRODUCT(S) IN TERMS OF CORRECTNESS, ACCURACY, RELIABILITY, OR OTHERWISE. THE ENTIRE RISK ARISING OUT OF USE OR PERFORMANCE OF THE SOFTWARE DEVELOPMENT PRODUCT(S) REMAINS WITH YOU. No oral or written information or advice given by DEVSOFTBALTIC or its employees shall create a warranty or in any way increase the scope of this warranty.
+
+10. LIMITATIONS ON LIABILITY.
+To the maximum extent permitted by applicable law, in no event shall either party be liable for any special, incidental, indirect, or consequential damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or any other pecuniary loss) arising out of the use of or inability to use the SOFTWARE DEVELOPMENT PRODUCT(S) or the provision of or failure to provide SUPPORT SERVICES, even if DEVSOFTBALTIC has been advised of the possibility of such damages. 
+ 
+LICENSEE understands that the SOFTWARE DEVELOPMENT PRODUCT(S) may produce inaccurate results because of a failure or fault within the SOFTWARE DEVELOPMENT PRODUCT(S) or failure by LICENSEE to properly use and or deploy the SOFTWARE DEVELOPMENT PRODUCT(S). LICENSEE assumes full and sole responsibility for any use of the SOFTWARE DEVELOPMENT PRODUCT(S) and bears the entire risk for failures or faults within the SOFTWARE DEVELOPMENT PRODUCT(S). You agree that regardless of the cause of failure or fault or the form of any claim, THE SOLE REMEDY AND EITHER PARTIES SOLE OBLIGATION SHALL BE GOVERNED BY THIS AGREEMENT AND IN NO EVENT SHALL EITHER PARTIES LIABILITY EXCEED THE PRICE PAID TO DEVSOFTBALTIC FOR THE SOFTWARE DEVELOPMENT PRODUCT(S). This Limited Warranty is void if failure of the SOFTWARE DEVELOPMENT PRODUCT(S) has resulted from accident, abuse, alteration, unauthorized use, or misapplication of the SOFTWARE DEVELOPMENT PRODUCT(S). Nothing in this Agreement will limit any liability either party may have to the other: (a) for willful default or fraud; or (b) for any unauthorized use of the other party’s INTELLECTUAL PROPERTY or PERSONAL DATA. 
+
+11. INDEMNIFICATION.
+You hereby agree to indemnify DEVSOFTBALTIC and its officers, directors, employees, agents, and representatives from each and every demand, claim, loss, liability, or damage of any kind, including actual attorney's fees, whether in tort or contract, that it or any of them may incur by reason of, or arising out of, any claim which is made by any third party with respect to any breach or violation of this AGREEMENT by you or any claims based on the Applications and the SOFTWARE DEVELOPMENT PRODUCT(S) included herein, including without limitation any claims asserted by your end user customers.
+12. SUPPORT SERVICES.
+DEVSOFTBALTIC may provide you with support services related to the SOFTWARE DEVELOPMENT PRODUCT(S) ("SUPPORT SERVICES"). Use of SUPPORT SERVICES is governed by DEVSOFTBALTIC policies and programs described in the user manual, in "online" documentation and/or other DEVSOFTBALTIC provided materials. DEVSOFTBALTIC may restrict or otherwise discontinue SUPPORT SERVICES provided to you if Your use of SUPPORT SERVICES is deemed by DEVSOFTBALTIC, in its sole and reasonable discretion, to be excessive and beyond the scope of fair use.
+
+Any supplemental SOFTWARE DEVELOPMENT PRODUCT(S) provided to you as part of the SUPPORT SERVICES shall be considered part of the SOFTWARE DEVELOPMENT PRODUCT(S) and subject to the terms and conditions of this AGREEMENT. With respect to technical information, you provide to DEVSOFTBALTIC as part of the SUPPORT SERVICES, DEVSOFTBALTIC may use such information for its business purposes, including for SOFTWARE DEVELOPMENT PRODUCT(S) support and development.
+
+13. TERMINATION.
+Without prejudice to any other rights or remedies, DEVSOFTBALTIC will terminate this AGREEMENT upon your failure to comply with all the terms and conditions of this AGREEMENT. In such events, LICENSEE must destroy all copies of the SOFTWARE DEVELOPMENT PRODUCT(S) and all of its component parts including any related documentation and must remove ANY and ALL use of DEVSOFTBALTIC intellectual property from any applications distributed by LICENSEE, whether in native, altered or compiled states.
+LICENSEE has an unconditional right to terminate before the first ninety (90) days of purchase of the SOFTWARE DEVELOPMENT PRODUCT(S) and shall be entitled to a full refund.
+14. PERSONAL DATA.
+All Information DEVSOFTBALTIC collects from You is stored and maintained on servers utilizing reasonable and appropriate data security safeguards. DEVSOFTBALTIC does not lend, lease, sell, or market information it obtains from its customers or those who provide us personally identifiable information. DEVSOFTBALTIC does not disclose purchase information or licensing information to third parties.
+DEVSOFTBALTIC collects personally identifiable information whenever You purchase/license a DEVSOFTBALTIC product or service. Information includes Name, Address, Phone Number, Email address, Payment Information, Product Purchases, Licenses Owned, Employee/Contact Details, etc. 
+
+DEVSOFTBALTIC collects personally identifiable information whenever You purchase/license a DEVSOFTBALTIC product or service. Information includes Name, Address, Phone Number, Email address, Payment Information, Product Purchases, Licenses Owned, Employee/Contact Details, etc. The information we collect allows DEVSOFTBALTIC to communicate with You regarding upcoming product updates, new product releases, company news and other important business matters.
+
+DEVSOFTBALTIC does not wish to receive, act to procure, nor desire to solicit, confidential or proprietary materials and information from You through the use of the SOFTWARE DEVELOPMENT PRODUCT(S) or SUPPORT SERVICES. Any and all materials, attachments, or information submitted by You as part of error submissions, or divulged during chats, online discussions, or made available to DEVSOFTBALTIC in any manner will be deemed NOT to be confidential by DEVSOFTBALTIC. You acknowledge that submissions to DEVSOFTBALTIC will not be considered confidential or proprietary and that DEVSOFTBALTIC will be under no obligation to keep such information confidential.
+
+15. MISCELLANEOUS.
+This AGREEMENT may only be modified in writing signed by you and an authorized officer of Devsoft Baltic OÜ. If any provision of this AGREEMENT is found void or unenforceable, the remainder will remain valid and enforceable according to its terms. If any remedy provided is determined to have failed for its essential purpose, all limitations of liability and exclusions of damages set forth in the Limited Warranty shall remain in effect.
+This Agreement shall be governed by and construed in accordance with the laws of any of the following jurisdictions based on LICENSEE choice: European Union, United States of America, Canada, England and Wales, Australia, or New Zealand.
+DEVSOFTBALTIC reserves all rights not specifically granted in this AGREEMENT.

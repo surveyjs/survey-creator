@@ -1463,9 +1463,7 @@ export class CreatorBase<T extends SurveyModel>
       type: "OBJECT_DELETED",
       target: obj,
     });
-    if (objType == ObjType.Question) {
-      this.updateConditionsOnRemove(obj.getValueName());
-    }
+    this.updateConditionsOnRemove(obj);
   }
   private getNextPage(page: PageModel): PageModel {
     var index = this.survey.pages.indexOf(page);
@@ -1485,10 +1483,20 @@ export class CreatorBase<T extends SurveyModel>
     if (!options.allowing) return;
     this.deleteObjectCore(obj);
   }
-
-  protected updateConditionsOnRemove(name: string) {
+  protected updateConditionsOnRemove(obj: any) {
+    var objType = SurveyHelper.getObjectType(obj);
+    var questions;
+    if (objType == ObjType.Question) {
+      questions = [obj];
+    } else {
+      var questions = obj.questions;
+    }
+    if (!questions) return;
     // TODO: remove SurveyLogic call here
-    new SurveyLogic(<any>this.survey, <any>this).removeQuestion(name);
+    var logic = new SurveyLogic(<any>this.survey, <any>this);
+    for (var i = 0; i < questions.length; i++) {
+      logic.removeQuestion(questions[i].getValueName());
+    }
   }
 
   public isElementSelected(element: Base): boolean {
