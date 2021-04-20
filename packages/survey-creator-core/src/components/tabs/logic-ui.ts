@@ -5,15 +5,15 @@ import {
   propertyArray,
   property,
 } from "survey-core";
-import { ConditionEditor } from "../property-grid/condition-survey";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
+import { ConditionEditor } from "../../property-grid/condition-survey";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
 import { SurveyLogicAction } from "./logic-items";
 import { SurveyLogic } from "./logic";
-import { setSurveyJSONForPropertyGrid } from "../property-grid/index";
-import { CreatorBase, ICreatorPlugin } from "../creator-base";
-import { editorLocalization } from "../entries";
+import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
+import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { editorLocalization } from "../../entries";
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;

@@ -1,6 +1,6 @@
 import { SurveyModel, Base, property, propertyArray } from "survey-core";
-import { editorLocalization } from "../editorLocalization";
-import { ExpressionRemoveVariable } from "../expressionToDisplayText";
+import { editorLocalization } from "../../editorLocalization";
+import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 
 export class SurveyLogicAction {

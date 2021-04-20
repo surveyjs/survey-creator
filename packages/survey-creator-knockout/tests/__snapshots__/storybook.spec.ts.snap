@@ -3928,9 +3928,8 @@ exports[`Storyshots Popup Modal Fast Entry 1`] = `
 `;
 
 exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
-<svc-tabbed-menu
-  params="items: items"
->
+<div>
+  <!-- ko component: { name: 'svc-tabbed-menu', params: { items: items } } -->
   <div
     class="svc-tabbed-menu"
   >
@@ -4009,7 +4008,8 @@ exports[`Storyshots Tabbed Menu Tabbed Menu 1`] = `
   </div>
   
 
-</svc-tabbed-menu>
+  <!-- /ko -->
+</div>
 `;
 
 exports[`Storyshots Tabbed Menu Tabbed Menu Item 1`] = `

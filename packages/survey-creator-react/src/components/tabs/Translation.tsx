@@ -52,15 +52,15 @@ export class TranslationUIComponent extends SurveyElementBase<any, any> {
   render(): JSX.Element {
     return (
       <div className="svc-creator-tab__content">
-        <div className="svc-plugin-tab__content">
-          <Survey model={this.model.settingsSurvey}></Survey>
-          <div className="svc-test-tab__content-actions">
-            <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
-          </div>
+        <div className="svc-plugin-tab__content svc-translation-tab__content">
+          {/* <Survey model={this.model.settingsSurvey}></Survey> */}
           <TranslationGroupComponent
             model={this.model.root}
           ></TranslationGroupComponent>
         </div>
+        <div className="svc-test-tab__content-actions svc-translation-tab__content-actions">
+            <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
+          </div>
       </div>
     );
   }
@@ -100,9 +100,13 @@ export class TranslationGroupComponent extends SurveyElementBase<any, any> {
     headers.push(<th key={"header"}></th>);
     var headerStyle = { width: this.model.locWidth };
     for (var i = 0; i < this.model.locales.length; i++) {
+      var currLocale = this.model.locales[i];
       headers.push(
         <th key={"header" + i} style={headerStyle}>
-          {this.model.getLocaleName(this.model.locales[i])}
+          <span>{this.model.getLocaleName(this.model.locales[i])}</span>
+          <span onClick={e => {
+            this.model.removeLocale(currLocale);
+          }}>{this.model.removeLocaleText}</span>
         </th>
       );
     }

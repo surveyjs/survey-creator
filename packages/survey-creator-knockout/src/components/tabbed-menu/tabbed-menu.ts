@@ -6,15 +6,17 @@ import { ResponsivityManager } from "survey-core";
 const template = require("./tabbed-menu.html");
 // import template from "./tabbed-menu.html";
 
+export let TabbedMenuViewModel: any;
+
 ko.components.register("svc-tabbed-menu", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const container: HTMLDivElement = componentInfo.element.nextElementSibling;
-      const model = new ActionBarViewModel(params.items);
+      const model: ActionBarViewModel = new ActionBarViewModel(params.items);
       model.dotsItemPopupModel.horizontalPosition = "right";
       new AdaptiveElementImplementor(model);
 
-      const manager = new ResponsivityManager(container, model);
+      const manager: ResponsivityManager = new ResponsivityManager(container, model);
       manager.getItemSizes = () => {
         const widths: number[] = [];
         container
@@ -34,5 +36,5 @@ ko.components.register("svc-tabbed-menu", {
       return model;
     },
   },
-  template: template,
+  template: template
 });
