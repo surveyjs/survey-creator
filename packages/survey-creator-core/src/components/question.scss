@@ -25,11 +25,24 @@ svc-question {
 
 .svc-panel__placeholder_frame {
   border: 1px dashed grey;
-  margin: 4px;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+
+.svc-question__content--empty {
+  height: 150px;
+  padding: 10px;
+  padding-bottom: 40px;
 }
 
 .svc-panel__placeholder {
-  padding: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .svc-question__content-actions {

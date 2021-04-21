@@ -39,9 +39,15 @@ export class QuestionAdornerViewModel extends Base {
     return true;
   }
   css() {
-    return this.creator.isElementSelected(this.surveyElement)
+    let result = this.creator.isElementSelected(this.surveyElement)
       ? "svc-question__content--selected"
       : "";
+
+    if (this.isEmptyElement) {
+      result += " svc-question__content--empty";
+    }
+
+    return result;
   }
   dispose() {}
   get isDraggable() {
@@ -55,7 +61,9 @@ export class QuestionAdornerViewModel extends Base {
 
     if (this.surveyElement instanceof PanelModelBase) {
       const panel = (this.surveyElement as any) as PanelModelBase;
-      return !panel.rows || panel.rows.length <= 0;
+      return (
+        !panel.rows || panel.rows.length <= 0 || panel.elements.length === 0
+      );
     }
 
     return false;
