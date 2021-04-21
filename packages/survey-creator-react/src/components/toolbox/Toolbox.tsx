@@ -54,21 +54,8 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     super.componentDidMount();
 
     const container = this.rootRef.current;
-    this.manager = new VerticalResponsivityManager(
-      container,
-      this.adaptiveElement,
-      40
-    );
-    this.manager.getItemSizes = () => {
-      const widths: number[] = [];
-      container
-        .querySelectorAll("span.sv-action")
-        .forEach((actionContainer) => {
-          widths.push((actionContainer as HTMLDivElement).offsetWidth);
-        });
-      return widths;
-    };
-
+    this.manager = new VerticalResponsivityManager(container,
+      this.adaptiveElement, 'span.sv-action', 40);
     this.updateVisibleItems = setInterval(() => {
       this.manager.process();
     }, 100);
