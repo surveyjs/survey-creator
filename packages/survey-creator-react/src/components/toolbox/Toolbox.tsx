@@ -152,14 +152,14 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
         onClick={() => this.props.creator.clickToolboxItem(toolboxItem.json)}
         onDragStart={(e) => {
           var json = this.props.creator.getJSONForNewElement(toolboxItem.json);
-          this.props.creator.dragDropHelper.startDragToolboxItem(
+          this.props.creator.dragDropHelper.onDragStartToolboxItem(
             new ReactDragEvent(e),
             json
           );
           return true;
         }}
         onDragEnd={() => {
-          this.props.creator.dragDropHelper.end();
+          this.props.creator.dragDropHelper.onDragEnd();
         }}
       >
         <span className="svc-toolbox__item-container">

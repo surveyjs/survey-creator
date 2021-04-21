@@ -39,9 +39,15 @@ export class QuestionAdornerViewModel extends Base {
     return true;
   }
   css() {
-    return this.creator.isElementSelected(this.surveyElement)
+    let result = this.creator.isElementSelected(this.surveyElement)
       ? "svc-question__content--selected"
       : "";
+
+    if (this.isEmptyElement) {
+      result += " svc-question__content--empty";
+    }
+
+    return result;
   }
   dispose() {}
   get isDraggable() {
@@ -55,7 +61,9 @@ export class QuestionAdornerViewModel extends Base {
 
     if (this.surveyElement instanceof PanelModelBase) {
       const panel = (this.surveyElement as any) as PanelModelBase;
-      return !panel.rows || panel.rows.length <= 0;
+      return (
+        !panel.rows || panel.rows.length <= 0 || panel.elements.length === 0
+      );
     }
 
     return false;
@@ -72,21 +80,21 @@ export class QuestionAdornerViewModel extends Base {
   dragStart(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     // setTimeout(() => (model.isDragged = true), 1);
     const sourceElement = model.surveyElement;
-    return model.dragDropHelper.startDragQuestion(event, sourceElement);
+    return model.dragDropHelper.onDragStartQuestion(event, <any>sourceElement);
     // return model.dragDropHelper.dragStart(model.surveyElement, event);
   }
   dragOver(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     const draggedOverElement = model.surveyElement;
-    model.dragDropHelper.doDragDropOver(event, draggedOverElement, true);
+    model.dragDropHelper.onDragOver(event, draggedOverElement, true);
     // model.dragDropHelper.dragOver(model.surveyElement, event);
   }
   drop(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper.doDrop(event);
+    model.dragDropHelper.onDrop(event);
     // model.dragDropHelper.drop(model.surveyElement, event);
   }
   dragEnd(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     // setTimeout(() => (model.isDragged = false), 1);
-    model.dragDropHelper.end();
+    model.dragDropHelper.onDragEnd();
     // model.dragDropHelper.dragEnd(model.surveyElement, event);
   }
 }

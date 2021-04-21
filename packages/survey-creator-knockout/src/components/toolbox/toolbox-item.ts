@@ -34,14 +34,14 @@ export class ToolboxItemViewModel {
   }
   dragstart(model: ToolboxItemViewModel, e: DragEvent) {
     var json = model._creator.getJSONForNewElement(model.item.json);
-    model._creator.dragDropHelper.startDragToolboxItem(
+    model._creator.dragDropHelper.onDragStartToolboxItem(
       new KnockoutDragEvent(e),
       json
     );
     return true;
   }
   dragend(model: ToolboxItemViewModel, e: DragEvent) {
-    model._creator.dragDropHelper.end();
+    model._creator.dragDropHelper.onDragEnd();
   }
 }
 

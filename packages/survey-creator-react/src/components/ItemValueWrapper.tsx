@@ -37,18 +37,18 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     // }
 
     const button = this.model.isNew ?
-      <span onClick={() => this.model.add(this.model)}>
+      <span className="svc-item-value-controls__button svc-item-value-controls__add" onClick={() => this.model.add(this.model)}>
         <SvgIcon size={24} iconName={'icon-add-item-value'}></SvgIcon>
       </span>
       :
-      <span onClick={() => this.model.remove(this.model)}>
+      <span className="svc-item-value-controls__button svc-item-value-controls__remove" onClick={() => this.model.remove(this.model)}>
         <SvgIcon size={24} iconName={'icon-remove-item-value'}></SvgIcon>
       </span>
       ;
 
     return (
       <div
-        className={"svc-item-value__adorner"} key={this.props.element.key}
+        className={"svc-item-value__adorner" + (this.model.isNew ? " svc-item-value--new" : "")} key={this.props.element.key}
       >
         <div
           className={"svc-item-value__content "}
@@ -56,7 +56,9 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
           <div className="svc-item-value-controls">
           {button}
           </div>
+          <div className={"svc-item-value__item"}>
           {this.props.element}
+          </div>
         </div>
       </div>
     );
