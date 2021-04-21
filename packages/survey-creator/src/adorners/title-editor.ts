@@ -344,6 +344,7 @@ export var titleAdorner = {
 registerAdorner("title", titleAdorner);
 
 export var itemTitleAdorner = {
+  inplaceEditForNames: false,
   getMarkerClass: (model) => {
     return !!model.items ? "item_title_editable title_editable" : "";
   },
@@ -353,10 +354,13 @@ export var itemTitleAdorner = {
     model: Survey.QuestionMultipleText,
     editor
   ) => {
+    var propertyName = itemTitleAdorner.inplaceEditForNames ? "name" : "title";
     for (var i = 0; i < elements.length; i++) {
       var decoration = document.createElement("span");
       decoration.innerHTML =
-        "<title-editor params='name: \"title\", model: model, editor: editor'></title-editor>";
+        "<title-editor params='name: \"" +
+        propertyName +
+        "\", model: model, editor: editor'></title-editor>";
       elements[i].appendChild(decoration);
       ko.applyBindings({ model: model.items[i], editor: editor }, decoration);
       editor.onAdornerRenderedCallback(

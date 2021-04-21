@@ -1,11 +1,13 @@
 <div
-  class="svc-item-value-wrapper" data-bind="attr: { draggable: isDraggable }, event: { dragstart: koDragStart, dragover: koDragOver, dragend: koDragEnd  }"
+  class="svc-item-value-wrapper" data-bind="attr: { draggable: isDraggable }, event: { dragstart: koDragStart, dragover: koDragOver, dragend: koDragEnd  }, css: { 'svc-item-value--new': isNew }"
  >
   <div class="svc-item-value-controls">
     <sv-svg-icon class="" data-bind="visible: isNew, click: add" params="iconName: 'icon-add-item-value', size: 24"></sv-svg-icon>
     <sv-svg-icon class="" data-bind="visible: !isNew, click: remove" params="iconName: 'icon-remove-item-value', size: 24"></sv-svg-icon>
   </div>
 
+  <div class="svc-item-value__item">
   <!-- ko component: { name: 'survey-item-value-component', params: { componentData: null, templateData: templateData } } -->
   <!-- /ko -->
+  </div>
 </div>

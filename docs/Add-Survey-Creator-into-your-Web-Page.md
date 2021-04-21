@@ -48,7 +48,7 @@ Inside your web page
 ```
 
 ```javascript
-var options = {showEmbededSurveyTab: true}; //see examples below
+var options = { showEmbeddedSurveyTab: true }; //see examples below
 var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorContainer", options);
 //set function on save callback
 surveyCreator.saveSurveyFunc = saveMySurvey;
@@ -74,7 +74,7 @@ Load Survey from SurveyJS Service
 ```javascript
 var options = {
  // show the embedded survey tab. It is hidden by default
- showEmbededSurveyTab : true,
+ showEmbeddedSurveyTab : true,
  // hide the test survey tab. It is shown by default
  showTestSurveyTab : false,
  // hide the JSON text editor tab. It is shown by default

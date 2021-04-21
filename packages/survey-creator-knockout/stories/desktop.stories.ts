@@ -2,7 +2,7 @@ import { StylesManager, settings } from "survey-core";
 import {
   SurveyCreator,
   CreatorViewModel,
-  DropdownEditorViewModel,
+  DropdownEditorViewModel
 } from "../src/entries";
 import { PropertyGridModel } from "@survey/creator";
 
@@ -30,8 +30,8 @@ export default {
 };
 
 export const Default = () => {
-  let creator: SurveyCreator = new SurveyCreator({
-    showEmbededSurveyTab: true,
+  const creator: SurveyCreator = new SurveyCreator({
+    showEmbeddedSurveyTab: true,
   });
   (<any>creator).JSON = surveyJSON;
   return {

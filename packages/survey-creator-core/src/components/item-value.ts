@@ -2,6 +2,8 @@ import {
   Base,
   ItemValue,
   property,
+  QuestionCheckboxBase,
+  QuestionCheckboxModel,
   QuestionSelectBase,
   SurveyModel,
 } from "survey-core";
@@ -19,12 +21,33 @@ export class ItemValueWrapperViewModel extends Base {
     public item: ItemValue
   ) {
     super();
+    this.isNew = !question["isItemInList"](item);
   }
 
-  public add(model: ItemValueWrapperViewModel) {}
+  public add(model: ItemValueWrapperViewModel) {
+    if(model.question.noneItem === model.item) {
+      model.question.hasNone = true;
+    } else if(model.question.otherItem === model.item) {
+      model.question.hasOther = true;
+    } else if(model.question.getType() === "checkbox" && (<QuestionCheckboxModel>model.question).selectAllItem === model.item) {
+      model.question.hasSelectAll = true;
+    } else {
+      model.question.choices.push(model.item);
+    }
+    this.isNew = !model.question["isItemInList"](model.item);
+  }
   public remove(model: ItemValueWrapperViewModel) {
-    var index = model.question.choices.indexOf(model.item);
-    model.question.choices.splice(index, 1);
+    if(model.question.noneItem === model.item) {
+      model.question.hasNone = false;
+    } else if(model.question.otherItem === model.item) {
+      model.question.hasOther = false;
+    } else if(model.question.getType() === "checkbox" && (<QuestionCheckboxModel>model.question).selectAllItem === model.item) {
+      model.question.hasSelectAll = false;
+    } else {
+      var index = model.question.choices.indexOf(model.item);
+      model.question.choices.splice(index, 1);
+    }
+    this.isNew = !model.question["isItemInList"](model.item);
   }
 
   dragStart(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {

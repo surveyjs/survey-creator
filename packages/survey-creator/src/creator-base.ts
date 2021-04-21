@@ -119,7 +119,7 @@ export class CreatorBase<T extends { [index: string]: any }>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
-   * Obsolete, please use onShowingProperty event.
+   * @Deprecated Obsolete, please use onShowingProperty event.
    * The event is called before showing a property in the Property Grid or in Question Editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
@@ -355,12 +355,22 @@ export class CreatorBase<T extends { [index: string]: any }>
     this.showTestSurveyTabValue(value);
   }
   /**
-   * Set it to true to show "Embed Survey" tab and to false to hide the tab
+   * @Deprecated Obsolete, use showEmbeddedSurveyTab
    */
   public get showEmbededSurveyTab() {
-    return this.showEmbeddedSurveyTabValue();
+    return this.showEmbeddedSurveyTab;
   }
   public set showEmbededSurveyTab(value: boolean) {
+    this.showEmbeddedSurveyTab = value;
+  }
+
+  /**
+   * Set it to true to show "Embed Survey" tab and to false to hide the tab
+   */
+  public get showEmbeddedSurveyTab() {
+    return this.showEmbeddedSurveyTabValue();
+  }
+  public set showEmbeddedSurveyTab(value: boolean) {
     this.showEmbeddedSurveyTabValue(value);
   }
 
@@ -506,7 +516,7 @@ export class CreatorBase<T extends { [index: string]: any }>
           action: () => this.makeNewViewActive("editor"),
         });
       }
-      if (this.showEmbededSurveyTab) {
+      if (this.showEmbeddedSurveyTab) {
         this.tabs.push({
           name: "embed",
           title: this.getLocString("ed.embedSurvey"),
@@ -534,7 +544,7 @@ export class CreatorBase<T extends { [index: string]: any }>
     return this.options || {};
   }
 
-  protected setOptions(options: any) {
+  protected setOptions(options: ICreatorOptions) {
     if (!options) options = {};
     if (!options.hasOwnProperty("generateValidJSON"))
       options.generateValidJSON = true;
@@ -558,7 +568,9 @@ export class CreatorBase<T extends { [index: string]: any }>
         : true
     );
     this.showEmbeddedSurveyTabValue(
-      typeof options.showEmbededSurveyTab !== "undefined"
+      typeof options.showEmbeddedSurveyTab !== "undefined"
+        ? options.showEmbeddedSurveyTab
+        : typeof options.showEmbededSurveyTab !== "undefined"
         ? options.showEmbededSurveyTab
         : false
     );

@@ -46,3 +46,6 @@ import "../components/button.scss";
 import "../survey-theme/survey.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
+
+import { settings } from "survey-core";
+settings.supportCreatorV2 = true;

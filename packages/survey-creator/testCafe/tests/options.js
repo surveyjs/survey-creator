@@ -12,16 +12,14 @@ test(`showJSONEditorTab`, async t => {
     document.documentElement.innerText.indexOf("JSON Editor")
   );
   const hideTab = ClientFunction(() => {
-    let editorOptions = {
+    const editorOptions = {
       showJSONEditorTab: false
     };
     creator.render(null, editorOptions);
   });
 
   assert.notEqual(await isTabExists(), -1);
-
   await hideTab();
-
   assert.equal(await isTabExists(), -1);
 });
 
@@ -30,34 +28,46 @@ test(`showTestSurveyTab`, async t => {
     document.documentElement.innerText.indexOf("Test Survey")
   );
   const hideTab = ClientFunction(() => {
-    let editorOptions = {
+    const editorOptions = {
       showTestSurveyTab: false
     };
     creator.render(null, editorOptions);
   });
 
   assert.notEqual(await isTabExists(), -1);
-
   await hideTab();
-
   assert.equal(await isTabExists(), -1);
 });
 
-test(`showEmbededSurveyTab`, async t => {
+test(`Check deprecated showEmbededSurveyTab`, async t => {
   const isTabExists = ClientFunction(() =>
     document.documentElement.innerText.indexOf("Embed Survey")
   );
   const showTab = ClientFunction(() => {
-    let editorOptions = {
+    const editorOptions = {
       showEmbededSurveyTab: true
     };
     creator.render(null, editorOptions);
   });
 
   assert.equal(await isTabExists(), -1);
-
   await showTab();
+  assert.notEqual(await isTabExists(), -1);
+});
 
+test(`showEmbeddedSurveyTab`, async t => {
+  const isTabExists = ClientFunction(() =>
+    document.documentElement.innerText.indexOf("Embed Survey")
+  );
+  const showTab = ClientFunction(() => {
+    const editorOptions = {
+      showEmbeddedSurveyTab: true
+    };
+    creator.render(null, editorOptions);
+  });
+
+  assert.equal(await isTabExists(), -1);
+  await showTab();
   assert.notEqual(await isTabExists(), -1);
 });
 
