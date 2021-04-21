@@ -48,7 +48,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
 
     return (
       <div
-        className={"svc-item-value__adorner"} key={this.props.element.key}
+        className={"svc-item-value__adorner" + (this.model.isNew ? " svc-item-value--new" : "")} key={this.props.element.key}
       >
         <div
           className={"svc-item-value__content "}
@@ -56,7 +56,9 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
           <div className="svc-item-value-controls">
           {button}
           </div>
+          <div className={"svc-item-value__item"}>
           {this.props.element}
+          </div>
         </div>
       </div>
     );

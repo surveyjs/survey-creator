@@ -13,3 +13,17 @@
     display: block;
   }
 }
+
+.svc-item-value__item {
+  pointer-events: none;
+}
+
+.sv-string-editor {
+  pointer-events: all;
+}
+
+.svc-item-value--new {
+  .svc-item-value__item {
+    opacity: 0.5;
+  }
+}
