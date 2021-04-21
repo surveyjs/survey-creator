@@ -11,12 +11,13 @@
 }
 .spg-question__title {
   width: 100%;
+  margin: 0;
+  padding: calcSize(1) 0;
   line-height: calcSize(3);
   font-size: calcSize(2);
   font-family: "Open Sans";
   color: $foreground-light;
   font-weight: normal;
-  margin: 0;
   box-sizing: border-box;
   .sv-action:not(.sv-action--hidden):not(:last-of-type) {
     padding-right: 0;
@@ -28,10 +29,12 @@
 }
 
 .spg-question__content {
-  margin-top: calcSize(1);
   width: 100%;
 }
-.spg-question--boolean {
-}
-.spg-question--boolean + .spg-question--boolean {
+
+.spg-question__description {
+  line-height: calcSize(3);
+  font-size: calcSize(2);
+  color: $foreground;
+  padding-bottom: calcSize(2);
 }

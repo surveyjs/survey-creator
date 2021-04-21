@@ -379,8 +379,10 @@ export class PropertyJSONGenerator {
       if (!!prop.visibleIf) {
         q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
       }
+      q.descriptionLocation = "hidden";
       var helpText = PropertiesHelpTexts.instance.getHelpText(this.obj, prop);
       if (!!helpText) {
+        q.descriptionLocation = "underTitle";
         q.description = helpText;
       }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop);
