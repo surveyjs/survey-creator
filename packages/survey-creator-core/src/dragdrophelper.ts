@@ -95,6 +95,22 @@ export class DragDropHelper extends Base {
     return element;
   }
 
+  public onDragOverItemValue(event: IPortableDragEvent, draggedOverElement: any) {
+    event.stopPropagation();
+
+    if (this.sourceElementType !== "itemvalue") {
+      return true; // ban drop here
+    }
+
+    if (draggedOverElement === this.sourceElement) {
+      return true; // ban drop here
+    }
+
+    event.preventDefault(); // alow drop here without return;
+
+    this.draggedOverElement = draggedOverElement;
+  }
+
   public onDragOver(event: IPortableDragEvent, draggedOverElement: any) {
     event.stopPropagation();
 
@@ -214,6 +230,13 @@ export class DragDropHelper extends Base {
       y = event["layerY"] - <number>event.currentTarget["offsetTop"];
     }
     return y > elY;
+  }
+
+  public onDropItemValue(event: IPortableDragEvent) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    // this.creator.selectElement(newElement);
   }
 
   public onDrop(event: IPortableDragEvent) {

@@ -28,6 +28,9 @@ class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   koDragEnd(model: ItemValueWrapperViewModel, event: DragEvent) {
     return super.dragEnd(model, this.wrapDragEvent(event));
   }
+  koDrop(model: ItemValueWrapperViewModel, event: DragEvent) {
+    return super.drop(model, this.wrapDragEvent(event))
+  }
 
   private wrapDragEvent(event: DragEvent): KnockoutDragEvent {
     return new KnockoutDragEvent(event);

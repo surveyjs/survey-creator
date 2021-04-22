@@ -1,5 +1,5 @@
 <div
-  class="svc-item-value-wrapper" data-bind="attr: { draggable: isDraggable }, event: { dragstart: koDragStart, dragover: koDragOver, dragend: koDragEnd  }, css: { 'svc-item-value--new': isNew }"
+  class="svc-item-value-wrapper" data-bind="attr: { draggable: isDraggable }, event: { dragstart: koDragStart, dragover: koDragOver, dragend: koDragEnd, drop: koDrop,  }, css: { 'svc-item-value--new': isNew }"
  >
   <div class="svc-item-value-controls">
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__add" data-bind="visible: isNew, click: add" params="iconName: 'icon-add-item-value', size: 24"></sv-svg-icon>
