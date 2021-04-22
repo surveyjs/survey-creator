@@ -86,7 +86,7 @@ export class PageViewModel<T extends SurveyModel> extends Base {
   }
 
   dragOver(model: PageViewModel<T>, event: IPortableDragEvent) {
-    return this.creator.dragDropHelper.onDragOver(event, model.page, true);
+    return this.creator.dragDropHelper.onDragOver(event, model.page);
   }
 
   // binarySearchIndexByY(questionNodes, y) {

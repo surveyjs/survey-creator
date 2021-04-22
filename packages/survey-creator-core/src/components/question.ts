@@ -85,7 +85,7 @@ export class QuestionAdornerViewModel extends Base {
   }
   dragOver(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     const draggedOverElement = model.surveyElement;
-    return model.dragDropHelper.onDragOver(event, draggedOverElement, true);
+    return model.dragDropHelper.onDragOver(event, draggedOverElement);
     // model.dragDropHelper.dragOver(model.surveyElement, event);
   }
   drop(model: QuestionAdornerViewModel, event: IPortableDragEvent) {

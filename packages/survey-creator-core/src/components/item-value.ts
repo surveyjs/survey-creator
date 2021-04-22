@@ -23,10 +23,13 @@ export class ItemValueWrapperViewModel extends Base {
   ) {
     super();
     this.isNew = !question["isItemInList"](item);
-    if(question.noneItem === item) {
-    } else if(question.otherItem === item) {
-    } else if(question.getType() === "checkbox" && (<QuestionCheckboxModel>question).selectAllItem === item) {
-    } else if(this.isNew) {
+    if (question.noneItem === item) {
+    } else if (question.otherItem === item) {
+    } else if (
+      question.getType() === "checkbox" &&
+      (<QuestionCheckboxModel>question).selectAllItem === item
+    ) {
+    } else if (this.isNew) {
       const nextValue = creator.getNextItemValue(question);
       item.value = nextValue;
     }
@@ -77,6 +80,7 @@ export class ItemValueWrapperViewModel extends Base {
   dragOver(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
     // const draggedOverElement = model.surveyElement;
     // model.dragDropHelper.doDragDropOver(event, draggedOverElement, true);
+    return true;
   }
   dragEnd(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
     // model.dragDropHelper.onDragEnd();
