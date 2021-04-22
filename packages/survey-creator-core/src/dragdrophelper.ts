@@ -116,12 +116,10 @@ export class DragDropHelper extends Base {
     this.draggedOverElement = draggedOverElement;
 
     const bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
-    this.isEdge = true;
+    this.isEdge = bottomInfo.isEdge;
     this.isBottom = bottomInfo.isBottom;
 
-    // console.log(this.isEdge);
-    // console.log(this.isBottom);
-
+    //TODO
     if (draggedOverElement.isPage && draggedOverElement.elements.length > 0) {
       const lastEl =
         draggedOverElement.elements[draggedOverElement.elements.length - 1];
@@ -142,6 +140,7 @@ export class DragDropHelper extends Base {
       draggedOverElement.elements.length > 0
     )
       return false; // alow drop here
+    //EO TODO
 
     this.insertGhostElementIntoSurvey(
       this.draggedOverElement,
@@ -238,13 +237,11 @@ export class DragDropHelper extends Base {
     isBottom: boolean,
     isEdge: boolean = false
   ): boolean {
+    this.removeGhostElementFromSurvey(this.pageOrPanel);
+
     this.pageOrPanel = draggedOverElement.isPage
       ? draggedOverElement
       : draggedOverElement.page;
-
-    if (!!this.pageOrPanel && this.pageOrPanel.name !== this.pageOrPanel.name) {
-      this.removeGhostElementFromSurvey(this.pageOrPanel);
-    }
 
     this.pageOrPanel.dragDropStart(
       this.sourceElement,
