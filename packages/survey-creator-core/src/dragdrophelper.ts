@@ -27,7 +27,7 @@ export class DragDropHelper extends Base {
     return this.creator.survey;
   }
 
-  private get draggedItemType() {
+  private get sourceElementType() {
     if (!this.sourceElement) return "toolbox-item";
     return this.sourceElement.getType();
   }
@@ -56,7 +56,11 @@ export class DragDropHelper extends Base {
     question: IElement,
     item: ItemValue
   ) {
-    return this.onDragStart(event, <any>item);
+    event.stopPropagation();
+    event.dataTransfer.effectAllowed = "move";
+
+    this.sourceElement = <any>item;
+    return true;
   }
 
   private onDragStart(event: IPortableDragEvent, sourceElement: IElement) {
@@ -96,25 +100,26 @@ export class DragDropHelper extends Base {
     isEdge: boolean = false
   ) {
     event.stopPropagation();
-    event.preventDefault();
 
-    if (this.draggedItemType === "itemvalue") {
+    if (this.sourceElementType === "itemvalue") {
       event.dataTransfer.effectAllowed = "none";
-      return;
+      return true;
     }
+
+    event.preventDefault();
 
     if (this.ghostElement === draggedOverElement) return;
 
     event = this.isCanDragContinue(event, draggedOverElement);
 
     if (!event) {
-      return;
+      return true;
     }
     var bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
     if (draggedOverElement.isPage && draggedOverElement.elements.length > 0) {
       var lastEl =
         draggedOverElement.elements[draggedOverElement.elements.length - 1];
-      if (!this.isBottomThanElement(event, lastEl)) return;
+      if (!this.isBottomThanElement(event, lastEl)) return true;
       draggedOverElement = lastEl;
       isEdge = true;
       bottomInfo.isEdge = true;
@@ -129,7 +134,7 @@ export class DragDropHelper extends Base {
       !isEdge &&
       draggedOverElement.elements.length > 0
     )
-      return;
+      return true;
 
     this.draggedOverElement = draggedOverElement;
     this.isEdge = isEdge;
@@ -140,6 +145,8 @@ export class DragDropHelper extends Base {
       this.isBottom,
       this.isEdge
     );
+
+    return true;
   }
 
   private isCanDragContinue(

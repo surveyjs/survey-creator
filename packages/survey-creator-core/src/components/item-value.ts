@@ -25,11 +25,14 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   public add(model: ItemValueWrapperViewModel) {
-    if(model.question.noneItem === model.item) {
+    if (model.question.noneItem === model.item) {
       model.question.hasNone = true;
-    } else if(model.question.otherItem === model.item) {
+    } else if (model.question.otherItem === model.item) {
       model.question.hasOther = true;
-    } else if(model.question.getType() === "checkbox" && (<QuestionCheckboxModel>model.question).selectAllItem === model.item) {
+    } else if (
+      model.question.getType() === "checkbox" &&
+      (<QuestionCheckboxModel>model.question).selectAllItem === model.item
+    ) {
       model.question.hasSelectAll = true;
     } else {
       model.question.choices.push(model.item);
@@ -37,11 +40,14 @@ export class ItemValueWrapperViewModel extends Base {
     this.isNew = !model.question["isItemInList"](model.item);
   }
   public remove(model: ItemValueWrapperViewModel) {
-    if(model.question.noneItem === model.item) {
+    if (model.question.noneItem === model.item) {
       model.question.hasNone = false;
-    } else if(model.question.otherItem === model.item) {
+    } else if (model.question.otherItem === model.item) {
       model.question.hasOther = false;
-    } else if(model.question.getType() === "checkbox" && (<QuestionCheckboxModel>model.question).selectAllItem === model.item) {
+    } else if (
+      model.question.getType() === "checkbox" &&
+      (<QuestionCheckboxModel>model.question).selectAllItem === model.item
+    ) {
       model.question.hasSelectAll = false;
     } else {
       var index = model.question.choices.indexOf(model.item);
@@ -62,7 +68,7 @@ export class ItemValueWrapperViewModel extends Base {
     // model.dragDropHelper.doDragDropOver(event, draggedOverElement, true);
   }
   dragEnd(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper.onDragEnd();
+    // model.dragDropHelper.onDragEnd();
   }
 
   private get dragDropHelper(): DragDropHelper {
