@@ -5,6 +5,7 @@ import {
   QuestionCheckboxBase,
   QuestionCheckboxModel,
   QuestionSelectBase,
+  surveyLocalization,
   SurveyModel,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
@@ -22,6 +23,13 @@ export class ItemValueWrapperViewModel extends Base {
   ) {
     super();
     this.isNew = !question["isItemInList"](item);
+    if(question.noneItem === item) {
+    } else if(question.otherItem === item) {
+    } else if(question.getType() === "checkbox" && (<QuestionCheckboxModel>question).selectAllItem === item) {
+    } else if(this.isNew) {
+      const nextValue = creator.getNextItemValue(question);
+      item.value = nextValue;
+    }
   }
 
   public add(model: ItemValueWrapperViewModel) {
@@ -35,7 +43,10 @@ export class ItemValueWrapperViewModel extends Base {
     ) {
       model.question.hasSelectAll = true;
     } else {
-      model.question.choices.push(model.item);
+      const itemValue = model.creator.createNewItemValue(model.question);
+      model.question.choices.push(itemValue);
+      const nextValue = model.creator.getNextItemValue(model.question);
+      model.item.value = nextValue;
     }
     this.isNew = !model.question["isItemInList"](model.item);
   }

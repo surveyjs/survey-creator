@@ -62,19 +62,11 @@ export class ToolboxViewModel extends AdaptiveElement {
 ko.components.register("svc-toolbox", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const model = new ToolboxViewModel(params.categories, params.creator);
-      var container = componentInfo.element.querySelector(".svc-toolbox");
-      var manager = new VerticalResponsivityManager(container, model, 40);
-      manager.getItemSizes = () => {
-        var widths: number[] = [];
-        container
-          .querySelectorAll("div.svc-toolbox__tool")
-          .forEach((actionContainer) => {
-            widths.push((<HTMLDivElement>actionContainer).offsetHeight);
-          });
-        return widths;
-      };
-      let updateVisibleItems = setInterval(() => {
+      const model: ToolboxViewModel = new ToolboxViewModel(params.categories, params.creator);
+      const container = componentInfo.element.querySelector(".svc-toolbox");
+      const manager: VerticalResponsivityManager =
+        new VerticalResponsivityManager(container, model, 'div.svc-toolbox__tool', 40);
+      const updateVisibleItems = setInterval(() => {
         manager.process();
       }, 100);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
@@ -84,5 +76,5 @@ ko.components.register("svc-toolbox", {
       return model;
     },
   },
-  template: template,
+  template: template
 });

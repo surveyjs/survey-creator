@@ -19,7 +19,7 @@ import { DragDropHelper } from "./dragdrophelper";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
-import { isPropertyVisible, propertyExists } from "./utils/utils";
+import { getNextValue, isPropertyVisible, propertyExists } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./surveyHelper";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
@@ -2079,5 +2079,15 @@ export class CreatorBase<T extends SurveyModel>
     });
 
     return items;
+  }
+  public getNextItemValue(question: Survey.QuestionSelectBase) {
+    const itemText = Survey.surveyLocalization.getString("choices_Item");
+    const values = question.choices.map((item: Survey.ItemValue) => item.value);
+    const nextValue = getNextValue(itemText, values);
+    return nextValue;
+  }
+  public createNewItemValue(question: Survey.QuestionSelectBase) {
+    const nextValue = this.getNextItemValue(question);
+    return new Survey.ItemValue(nextValue);
   }
 }

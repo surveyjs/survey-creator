@@ -1,11 +1,37 @@
 @import "../variables.scss";
 
+.svc-item-value-wrapper {
+  position: relative;
+}
+
 .svc-item-value-controls {
   display: none;
   position: absolute;
   left: calcSize(-5);
   cursor: pointer;
-  margin-top: calcSize(0.5);
+}
+
+.svc-item-value-controls__button {
+  height: calcSize(3);
+  width: calcSize(3);
+  border-radius: 50%;
+  padding: calcSize(1.5);
+  cursor: pointer;
+  display: inline-block;
+  margin-top: calcSize(-1);
+  margin-left: calcSize(-1);
+}
+.svc-item-value-controls__add:hover {
+  background-color: $primary-light;
+  use {
+    fill: $primary;
+  }
+}
+.svc-item-value-controls__remove:hover {
+  background-color: $red-light;
+  use {
+    fill: $red;
+  }
 }
 
 .svc-question__content--selected {
@@ -20,6 +46,7 @@
 
 .sv-string-editor {
   pointer-events: all;
+  cursor: text;
 }
 
 .svc-item-value--new {

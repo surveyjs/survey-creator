@@ -84,18 +84,9 @@ class TabbedMenuComponent extends SurveyElementBase<
   }
   componentDidMount() {
     super.componentDidMount();
-    const container = this.rootRef.current;
-    this.manager = new ResponsivityManager(container, this.adaptiveElement);
-    this.manager.getItemSizes = () => {
-      const widths: number[] = [];
-      container
-        .querySelectorAll("span.svc-tabbed-menu-item-container")
-        .forEach((actionContainer) => {
-          widths.push((actionContainer as HTMLDivElement).offsetWidth);
-        });
-      return widths;
-    };
-
+    const container: HTMLDivElement = this.rootRef.current;
+    this.manager = new ResponsivityManager(container, this.adaptiveElement,
+      'span.svc-tabbed-menu-item-container');
     this.updateVisibleItems = setInterval(() => {
       this.manager.process();
     }, 100);
