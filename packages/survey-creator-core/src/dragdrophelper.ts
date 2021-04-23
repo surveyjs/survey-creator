@@ -3,11 +3,9 @@ import {
   PageModel,
   SurveyModel,
   JsonObject,
-  SurveyElement,
-  property,
   Base,
   ItemValue,
-  PanelModel,
+  property,
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { IPortableDragEvent } from "./utils/events";
@@ -19,10 +17,12 @@ export class DragDropHelper extends Base {
 
   private ghostElement: any = null;
   private sourceElement: IElement = null;
-  private draggedOverElement: IElement = null;
-  private isBottom: boolean = null;
+  @property() draggedOverElement: IElement = null;
+  @property() isBottom: boolean = null;
   private isEdge: boolean = null;
   private pageOrPanel: PageModel = null;
+
+  private itemValueSourceQuestion = null;
 
   private get survey(): SurveyModel {
     return this.creator.survey;
@@ -60,6 +60,7 @@ export class DragDropHelper extends Base {
     event.stopPropagation();
     event.dataTransfer.effectAllowed = "move";
 
+    this.itemValueSourceQuestion = question;
     this.sourceElement = <any>item;
     return true;
   }
@@ -78,8 +79,7 @@ export class DragDropHelper extends Base {
     const json = {
       type: "html",
       name: "svd-drag-drog-ghost-element",
-      html:
-        '<div style="width: 100%; height:4px; background: #FF9814; position: absolute;"></div>',
+      html: '<div class="svc-drag-drop-ghost"></div>',
     };
     return this.createElementFromJson(json);
   }
@@ -95,26 +95,48 @@ export class DragDropHelper extends Base {
     return element;
   }
 
-  public onDragOverItemValue(event: IPortableDragEvent, draggedOverElement: any) {
-    event.stopPropagation();
-
+  public onDragOverItemValue(
+    event: IPortableDragEvent,
+    question: IElement,
+    item: any
+  ) {
     if (this.sourceElementType !== "itemvalue") {
       return true; // ban drop here
     }
 
-    if (draggedOverElement === this.sourceElement) {
+    event.stopPropagation();
+
+    if (item === this.sourceElement) {
+      this.draggedOverElement = null;
+      return true; // ban drop here
+    }
+
+    if (this.itemValueSourceQuestion !== question) {
+      this.draggedOverElement = null;
       return true; // ban drop here
     }
 
     event.preventDefault(); // alow drop here without return;
 
-    this.draggedOverElement = draggedOverElement;
+    this.draggedOverElement = item;
+
+    const bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
+    this.isEdge = bottomInfo.isEdge;
+    this.isBottom = bottomInfo.isBottom;
+  }
+
+  public getItemValueGhostPosition(item) {
+    if (this.draggedOverElement !== item) return null;
+    if (this.isBottom) return "bottom";
+    return "top";
   }
 
   public onDragOver(event: IPortableDragEvent, draggedOverElement: any) {
     event.stopPropagation();
 
     if (this.sourceElementType === "itemvalue") {
+      this.removeGhostElementFromSurvey(this.pageOrPanel);
+      this.draggedOverElement = null;
       return true; // ban drop here
     }
 
@@ -191,7 +213,7 @@ export class DragDropHelper extends Base {
       return true;
     }
     const bounds: DOMRect = (<any>target).getBoundingClientRect();
-    const middle = (bounds.bottom - bounds.top) / 2 + bounds.top;
+    const middle = (bounds.bottom + bounds.top) / 2;
     75;
 
     return {
@@ -308,6 +330,7 @@ export class DragDropHelper extends Base {
     this.ghostElement = null;
     this.sourceElement = null;
     this.pageOrPanel = null;
+    this.itemValueSourceQuestion = null;
     this.isBottom = null;
     this.isEdge = null;
   }
