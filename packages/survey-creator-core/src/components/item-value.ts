@@ -78,8 +78,11 @@ export class ItemValueWrapperViewModel extends Base {
     );
   }
   dragOver(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    const draggedOverElement = model.item;
-    return model.dragDropHelper.onDragOverItemValue(event, draggedOverElement);
+    return model.dragDropHelper.onDragOverItemValue(
+      event,
+      model.question,
+      model.item
+    );
   }
   dragEnd(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
     return model.dragDropHelper.onDragEnd();
@@ -88,6 +91,9 @@ export class ItemValueWrapperViewModel extends Base {
     return model.dragDropHelper.onDropItemValue(event);
   }
 
+  public getItemValueGhostPosition(): string {
+    return this.dragDropHelper.getItemValueGhostPosition(this.item);
+  }
   private get dragDropHelper(): DragDropHelper {
     return this.creator.dragDropHelper;
   }
