@@ -18,13 +18,7 @@ ko.components.register('svc-tabbed-menu', {
 
       const manager: ResponsivityManager =
         new ResponsivityManager(container, model, 'span.svc-tabbed-menu-item-container');
-      const updateVisibleItems = setInterval(() => {
-        manager.process();
-        ko.tasks.runEarly();
-      }, 100);
-      ko.utils.domNodeDisposal.addDisposeCallback(container, () => {
-        clearInterval(updateVisibleItems);
-      });
+      ko.utils.domNodeDisposal.addDisposeCallback(container, () => manager.dispose());
       return model;
     },
   },

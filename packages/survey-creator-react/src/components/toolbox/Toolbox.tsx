@@ -1,17 +1,8 @@
-import {
-  CreatorBase,
-  getLocString,
-  IQuestionToolboxItem,
-} from "@survey/creator";
+import { CreatorBase, getLocString, IQuestionToolboxItem } from "@survey/creator";
 import React, { CSSProperties } from "react";
 import { ReactDragEvent } from "../../events";
-import {
-  AdaptiveActionBarItemWrapper,
-  AdaptiveElement,
-  Base,
-  VerticalResponsivityManager,
-  SurveyModel,
-} from "survey-core";
+import { AdaptiveActionBarItemWrapper, AdaptiveElement, Base,
+  VerticalResponsivityManager, SurveyModel } from "survey-core";
 import { SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 // export class SurveyCreatorToolbox extends ActionBar {
@@ -30,14 +21,10 @@ interface ISurveyCreatorToolboxProps {
   items: Array<IQuestionToolboxItem>;
 }
 
-export class SurveyCreatorToolbox extends SurveyElementBase<
-  ISurveyCreatorToolboxProps,
-  any
-> {
+export class SurveyCreatorToolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {
   private adaptiveElement = new AdaptiveElement();
   private manager: VerticalResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
-  private updateVisibleItems: any;
 
   constructor(props: ISurveyCreatorToolboxProps) {
     super(props);
@@ -52,16 +39,12 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
   componentDidMount() {
     super.componentDidMount();
-
     const container = this.rootRef.current;
     this.manager = new VerticalResponsivityManager(container,
-      this.adaptiveElement, 'span.sv-action', 40);
-    this.updateVisibleItems = setInterval(() => {
-      this.manager.process();
-    }, 100);
+      this.adaptiveElement, 'div.svc-toolbox__tool', 40);
   }
   componentWillUnmount() {
-    clearInterval(this.updateVisibleItems);
+    this.manager.dispose();
     super.componentWillUnmount();
   }
 
@@ -69,15 +52,11 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     return this.adaptiveElement;
   }
   render(): JSX.Element {
-    if (!this.hasItems) {
-      return null;
-    }
-
+    if (!this.hasItems) return null;
     const items = this.renderItems();
-
     return (
-      <div className="svc-toolbox">
-        <div className="svc-toolbox__category">{items}</div>
+      <div ref={this.rootRef} className='svc-toolbox'>
+        <div className='svc-toolbox__category'>{items}</div>
       </div>
     );
     /*
