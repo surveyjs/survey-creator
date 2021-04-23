@@ -84,6 +84,7 @@ test("getNextValue", () => {
   );
   expect(getNextValue(prefix, ["1", "3", "4"])).toEqual("5");
   expect(getNextValue(prefix, [1, 3, 4])).toEqual(5);
+  expect(getNextValue(prefix, [1, 2, 3])).toEqual(4);
   expect(getNextValue(prefix, ["yes"])).toEqual("no");
   expect(getNextValue(prefix, ["No"])).toEqual("Yes");
   expect(getNextValue(prefix, ["TRUE"])).toEqual("FALSE");

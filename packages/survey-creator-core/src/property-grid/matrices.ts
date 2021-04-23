@@ -30,7 +30,7 @@ class SurveyHelper {
     var arr = [];
     if (Array.isArray(objs)) {
       for (var i = 0; i < objs.length; i++) {
-        arr.push([objs[i][keyPropName]]);
+        arr.push(objs[i][keyPropName]);
       }
     }
     return getNextValue(baseName, arr);
