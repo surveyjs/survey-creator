@@ -113,7 +113,7 @@ var portugueseTranslation = {
     translationNoStrings: "Nenhuma string para traduzir. Por favor, altere o filtro.",
     translationExportToSCVButton: "Exportar para CSV",
     translationImportFromSCVButton: "Importar de CSV",
-    translationMergeLocaleWithDefault: "Combinar {0} com o idioma default"
+    translationMergeLocaleWithDefault: "Combinar {0} com o idioma default",
     bold: "Negrito",
     italic: "Itálico",
     underline: "Sublinhado",
