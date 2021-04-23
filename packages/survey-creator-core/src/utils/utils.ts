@@ -42,21 +42,27 @@ export function getNextValue(prefix: string, values: any[]): string | number {
   if (oposite && values.indexOf(oposite) < 0) return oposite;
   var numStr = "";
   var baseStr = "";
+  var numStrIndex = -1;
   for (var i = values.length - 1; i >= 0; i--) {
     if (!values[i]) continue;
     var str = values[i].toString();
     numStr = getNumericFromString(str);
     if (!!numStr) {
-      baseStr = str.substr(0, str.length - numStr.length);
+      numStrIndex = str.lastIndexOf(numStr);
+      baseStr = str;
       break;
     }
   }
-  if (!!numStr) {
+  if (numStrIndex > -1) {
     var num = parseInt(numStr);
-    while (hasValueInArray(values, baseStr + num)) {
-      num++;
-    }
-    return !!baseStr ? baseStr + num : num;
+    var newValue;
+    do {
+      newValue =
+        str.substr(0, numStrIndex) +
+        (num++).toString() +
+        str.substr(numStrIndex + numStr.length);
+    } while (hasValueInArray(values, newValue));
+    return newValue;
   }
   return prefix + 1;
 }
@@ -179,7 +185,7 @@ export function isPropertyVisible(obj: any, propertyName: string) {
 export function toggleHovered(e: MouseEvent, element: HTMLElement) {
   const processedFlagName = "__svc_question_processed";
   const name = "svc-hovered";
-  if(!e[processedFlagName] && e.type === 'mouseover') {
+  if (!e[processedFlagName] && e.type === "mouseover") {
     const arr = element.className.split(" ");
     if (arr.indexOf(name) == -1) {
       element.className += " " + name;

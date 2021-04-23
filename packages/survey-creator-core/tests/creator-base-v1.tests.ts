@@ -9,6 +9,7 @@ import {
   QuestionMatrixDropdownModel,
   QuestionMatrixDynamicModel,
 } from "survey-core";
+import { getNextValue } from "../src/utils/utils";
 import { CreatorBase, ICreatorOptions } from "../src/creator-base";
 import { editorLocalization } from "../src/editorLocalization";
 import {
@@ -67,6 +68,35 @@ function getSurveyJson(): any {
     ],
   };
 }
+
+test("getNextValue", () => {
+  var prefix = "item";
+  expect(getNextValue(prefix, ["item4", "item5", "item3"])).toEqual("item6");
+  expect(getNextValue(prefix, ["item1", "item5", "itemzzz", "zzz", 1])).toEqual(
+    "2"
+  );
+  expect(getNextValue(prefix, ["item1", "item2", "item3"])).toEqual("item4");
+  expect(
+    getNextValue(prefix, ["item1", "item2", "item3", "item4", "item4"])
+  ).toEqual("item5");
+  expect(getNextValue(prefix, [])).toEqual("item1");
+  expect(getNextValue(prefix, ["Column 1", "Column 3", "Column 2"])).toEqual(
+    "Column 4"
+  );
+  expect(getNextValue(prefix, ["1", "3", "4"])).toEqual("5");
+  expect(getNextValue(prefix, [1, 3, 4])).toEqual("5");
+  expect(getNextValue(prefix, ["yes"])).toEqual("no");
+  expect(getNextValue(prefix, ["No"])).toEqual("Yes");
+  expect(getNextValue(prefix, ["TRUE"])).toEqual("FALSE");
+  expect(
+    getNextValue(prefix, [
+      "12345671234567890",
+      "12345671234567891",
+      "12345671234567892",
+    ])
+  ).toEqual("12345671234567893");
+  expect(getNextValue(prefix, ["1 day", "2 days", "3 days"])).toEqual("4 days");
+});
 
 test("Set Text property", () => {
   var creator = new CreatorTester();
