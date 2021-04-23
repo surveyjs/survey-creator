@@ -1,12 +1,18 @@
 import { editorLocalization } from "../editorLocalization";
 
+
 var portugueseTranslation = {
   //survey templates
   survey: {
     edit: "Editar",
+    externalHelpLink: "Assista o vídeo e aprenda a criar pesquisas",
+    externalHelpLinkUrl:
+      "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "Por favor arraste uma pergunta aqui.",
+    addLogicItem: "Crie uma regra para personalizar o fluxo da pesquisa.",
     copy: "Copiar",
-    addToToolbox: "Adicionar à toolbox",
+    duplicate: "Duplicar",
+    addToToolbox: "Adicionar à barra de ferramentas",
     deletePanel: "Remover Painel",
     deleteQuestion: "Remover Pergunta",
     convertTo: "Converter para",
@@ -17,7 +23,9 @@ var portugueseTranslation = {
     default: "Default",
     checkbox: "Checkbox",
     comment: "Comentário",
-    imagepicker: "Selecionador de imagem",
+    imagepicker: "Seletor de imagem",
+    ranking: "Ranking",
+    image: "Imagem",
     dropdown: "Dropdown",
     file: "Arquivo",
     html: "Html",
@@ -31,14 +39,22 @@ var portugueseTranslation = {
     rating: "Rating",
     text: "Texto único",
     boolean: "Boleano",
-    expression: "Expressão"
+    expression: "Expressão (somente leitura)",
+    signaturepad: "Campo de assinatura",
+    flowpanel: "Painel de Fluxo",
   },
   //Strings in Editor
   ed: {
     defaultLocale: "Default ({0})",
     survey: "Pesquisa",
-    settings: "Configurações da Pesquisa",
-    editSurvey: "Editar Pesquisa",
+    settings: "Configurações da pesquisa",
+    settingsTooltip: "Exibir configurações da pesquisa",
+    //opjectPropertiesHeader: "Avançado",
+    //showObjectProperties: "Exibir Propriedades do Objeto",
+    //hideObjectProperties: "Ocultar Propriedades do Objeto",
+    showPanel: "Mostrar Painel",
+    hidePanel: "Ocultar Painel",
+    //editSurvey: "Editar Pesquisa",
     addNewPage: "Adicionar Nova Página",
     moveRight: "Role para direita",
     moveLeft: "Role para esquerda",
@@ -48,23 +64,36 @@ var portugueseTranslation = {
     newPageName: "página",
     newQuestionName: "pergunta",
     newPanelName: "painel",
+    newTextItemName: "texto",
     testSurvey: "Testar pesquisa",
     testSurveyAgain: "Testar pesquisa novamente",
     testSurveyWidth: "Tamanho do pesquisa: ",
+    navigateToMsg: "Você teve que navegar para:",
+    logic: "Lógica da Pesquisa",
     embedSurvey: "Incorporar Pesquisa",
     translation: "Tradução",
     saveSurvey: "Salvar Pesquisa",
+    saveSurveyTooltip: "Salvar Pesquisa",
     designer: "Designer de Pesquisa",
     jsonEditor: "Editor de JSON",
     undo: "Desfazer",
     redo: "Refazer",
+    undoTooltip: "Desfazer última modificação",
+    redoTooltip: "Refazer modificação",
+    copy: "Copiar",
+    cut: "Recortar",
+    paste: "Colar",
+    copyTooltip: "Copiar seleção para a área de transferência",
+    cutTooltip: "Recortar seleção para a área de transferência",
+    pasteTooltip: "Colar da área de transferência",
     options: "Opções",
     generateValidJSON: "Gerar JSON válido",
     generateReadableJSON: "Gerar JSON legível",
-    toolbox: "Toolbox",
+    toolbox: "Ferramentas",
+    "property-grid": "Propriedades",
     toolboxGeneralCategory: "Geral",
-    delSelObject: "Apagar objeto selecionado",
-    editSelObject: "Editar objeto selecionado",
+    //delSelObject: "Apagar objeto selecionado",
+    //editSelObject: "Editar objeto selecionado",
     correctJSON: "Por favor corrija o JSON.",
     surveyResults: "Resultado da pesquisa: ",
     surveyResultsTable: "Como Tabela",
@@ -76,6 +105,7 @@ var portugueseTranslation = {
     modified: "Modificado",
     saving: "Salvando",
     saved: "Salvo",
+    propertyEditorError: "Erro:",
     saveError: "Erro! Conteúdo do editor não foi salvo.",
     translationAddLanguage: "Selecione o idioma para traduzir",
     translationShowAllStrings: "Mostrar todas strings",
@@ -84,49 +114,147 @@ var portugueseTranslation = {
     translationExportToSCVButton: "Exportar para CSV",
     translationImportFromSCVButton: "Importar de CSV",
     translationMergeLocaleWithDefault: "Combinar {0} com o idioma default"
+    bold: "Negrito",
+    italic: "Itálico",
+    underline: "Sublinhado",
+    fpAddQuestion: "Adicionar pergunta...",
+    selectPage: "Selecionar página...",
+    chooseElement: "Escolha um elemento...",
+    //completedHtmlOnConditionItemText: "Exibir se:",
+    lg: {
+      addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
+      //Logic tab strings
+      page_visibilityName: "Visibilidade da Página",
+      panel_visibilityName: "Visibilidade do Painel",
+      panel_enableName: "Ativar/desativar painel",
+      question_visibilityName: "Visibilidade da pergunta",
+      question_enableName: "Habilitar/desabilitar pergunta",
+      question_requireName: "Questão opcional obrigatória",
+      trigger_completeName: "Completar Pesquisa",
+      trigger_setvalueName: "Defina o valor da pergunta",
+      trigger_copyvalueName: "Copiar o valor da pergunta",
+      trigger_skipName: "Pular para a pergunta",
+      trigger_runExpressionName: "Executar expressão personalizada",
+      completedHtmlOnConditionName: "Nome da página de conclusão personalizada",
+      
+page_visibilityDescription:
+        "Torne a página visível quando a expressão lógica retornar verdadeira. Caso contrário, mantenha-a invisível.",
+      panel_visibilityDescription:
+        "Torne o painel visível quando a expressão lógica retornar verdadeiro. Caso contrário, mantenha-o invisível.",
+      panel_enableDescription:
+        "Faça com que o painel, e todos os elementos dentro dele, sejam habilitados quando a expressão lógica retornar verdadeiro. Caso contrário, mantenha-os desabilitados.",
+      question_visibilityDescription:
+        "Torne a pergunta visível quando a expressão lógica retornar verdadeira. Caso contrário, mantenha-a invisível.",
+      question_enableDescription:
+        "Ative a pergunta quando a expressão lógica retornar verdadeira. Caso contrário, mantenha-a desativada.",
+      question_requireDescription:
+        "A pergunta torna-se necessária quando a expressão lógica retorna verdadeira.",
+      trigger_completeDescription:
+        "Quando a expressão lógica retorna verdadeira, a pesquisa é concluída e um usuário final vê a 'página de agradecimento'.",
+      trigger_setvalueDescription:
+        "Quando os valores da pergunta, que são usados ​​na expressão lógica, são alterados e a expressão lógica retorna verdadeiro, o valor é definido para a pergunta selecionada.",
+      trigger_copyvalueDescription:
+        "Quando os valores da pergunta, que são usados ​​na expressão lógica, são alterados e a expressão lógica retorna verdadeiro, o valor de uma pergunta selecionada é copiado para outra pergunta selecionada.",
+      trigger_skipDescription:
+        "Quando a expressão lógica retorna verdadeira, a pesquisa pula para / enfoca a questão selecionada.",
+      trigger_runExpressionDescription:
+        "Quando a expressão lógica retorna verdadeiro, a expressão personalizada é executada. Você pode, opcionalmente, definir o resultado desta expressão na pergunta selecionada",
+      completedHtmlOnConditionDescription:
+        "Se a expressão lógica retornar verdadeiro, o texto padrão da 'página de agradecimento' será alterado para o fornecido.",
+      
+      itemExpressionText: "Quando a expressão: '{0}' retorna verdadeiro:", // {0} - a expressão
+      page_visibilityText: "Tornar a página {0} visível", // {0} nome da página
+      panel_visibilityText: "Tornar o painel {0} visível", // {0} nome do painel
+      panel_enableText: "Tornar painel {0} habilitar", // {0} nome do painel
+      question_visibilityText: "Tornar a pergunta {0} visível", // {0} nome da pergunta
+      question_enableText: "Faça a pergunta {0} ativada", // {0} nome da pergunta
+      question_requireText: "Tornar a pergunta {0} obrigatória", // {0} nome da pergunta
+      trigger_completeText: "A pesquisa foi concluída",
+      trigger_setvalueText: "Colocar em questão: {0} valor {1}", // {0} nome da questão, {1} setValue
+      trigger_copyvalueText: "Copiar para a questão: {0} valor da questão {1}", // {0} e {1} nomes das questões
+      trigger_skipText: "Pesquisa pule para a questão {0}", // {0} nome da questão
+      trigger_runExpressionText1: "Executar expressão: '{0}'", // {0} a expressão
+      trigger_runExpressionText2: "e coloque seu resultado em questão: {0}", // {0} nome da questão
+      completedHtmlOnConditionText:
+        "Mostrar texto personalizado para a 'página de agradecimento'.",
+        
+      conditions: "Condição(ões)",
+      actions: "Ação(ões)",
+      expressionEditorTitle: "Definir condição (ões)",
+      actionsEditorTitle: "Definir ação (ões)",
+      
+      deleteAction: "Excluir ação",
+      addNewAction: "Adicionar nova ação",
+      selectedActionCaption: "Selecione uma ação para adicionar ...",
+      
+      expressionInvalid:
+        "A expressão lógica está vazia ou é inválida. Corrija-a.",
+      noActionError: "Por favor, adicione pelo menos uma ação.",
+      actionInvalid: "Por favor, corrija problemas em suas ações.",
+      expressionSetup: "",
+      actionsSetup: "",
+    },
   },
   //Property names in table headers
-  pel: {
-    isRequired: "Obrigatório?"
-  },
+  // pel: {
+  //  isRequired: "Obrigatório?"
+  // },
   //Property Editors
   pe: {
     apply: "Aplicar",
     ok: "OK",
+    save: "Salvar",
+    saveTooltip: "Salvar",
     cancel: "Cancelar",
     reset: "Limpar",
-    close: "Fechar",
-    delete: "Apagar",
+    refresh: "Atualizar",
+    // close: "Fechar",
+    delete: "Deletar",
+    add: "Adicionar",
     addNew: "Adicionar Novo",
     addItem: "Clique para adicionar um item...",
+    addOther: "Outro",
+    addSelectAll: "Selecionar Tudo",
+    addNone: "Nenhum",
     removeAll: "Remover Todos",
     edit: "Editar",
-    itemValueEdit: "Visível Se",
+    back: "Voltar sem salvar",
+    backTooltip: "Voltar sem salvar",
+    saveAndBack: "Salvar e retornar",
+    saveAndBackTooltip: "Salvar e retornar",
+    // itemValueEdit: "Visível Se",
     editChoices: "Editar Opções",
+    showChoices: "Exibir Opções",
     move: "Mover",
     empty: "<vazio>",
-    notEmpty: "<editar valor>",
+    // notEmpty: "<editar valor>",
     fastEntry: "Entrada Rápida",
     formEntry: "Entrada com formulário",
     testService: "Testar o serviço",
+    itemSelectorEmpty: "Por favor selecione o elemento",
+    conditionActionEmpty: "Por favor selecione a ação",
     conditionSelectQuestion: "Selecionar pergunta...",
-    conditionValueQuestionTitle: "Por favor, entre/selecione o valor",
-    conditionButtonAdd: "Add",
-    conditionButtonReplace: "Substituir",
-    conditionHelp:
-      "Por favor, entre com uma expressão boleana. Deve retornar verdadeiro para manter a pergunta/página visível. Por exemplo: {´pergunta1} = 'valor1' ou ({pergunta2} * {pergunta4} > 20 e {pergunta3} < 5)",
+    conditionSelectPage: "Selecionar página ...",
+     conditionSelectPanel: "Selecionar painel ...",
+     conditionValueQuestionTitle: "Por favor, insira/selecione o valor",
+    // conditionHelp:
+    //  "Por favor, entre com uma expressão boleana. Deve retornar verdadeiro para manter a pergunta/página visível. Por exemplo: {´pergunta1} = 'valor1' ou ({pergunta2} * {pergunta4} > 20 e {pergunta3} < 5)",
     expressionHelp:
       "Por favor informe uma expressão boleana. Ela deve retornar verdadeiro para manter a pergunta/página visível. Por exemplo: {´pergunta1} = 'valor1' or ({pergunta2} = 3 and {pergunta3} < 5)",
-    aceEditorHelp: "Pressione ctrl+space para autocompletar",
+    aceEditorHelp: "Pressione ctrl+espaço para autocompletar",
     aceEditorRowTitle: "Linha atual",
     aceEditorPanelTitle: "Painel atual",
     showMore: "Para mais detalhes, por favor visite a documentação",
-    conditionShowMoreUrl:
-      "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
+    // conditionShowMoreUrl:
+    //  "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
     assistantTitle: "Perguntas disponíveis:",
     cellsEmptyRowsColumns: "Deve haver ao menos uma coluna ou linha",
 
     propertyIsEmpty: "Por favor informe um valor na propriedade",
+    propertyIsNoUnique: "Por favor informe um valor único",
+    propertyNameIsNotUnique: "Por favor informe um nome único",
+    listIsEmpty: "Adicionar um novo item",
+    expressionIsEmpty: "A Expressão está vazia",
     value: "Valor",
     text: "Texto",
     rowid: "ID da Linha",
@@ -138,9 +266,22 @@ var portugueseTranslation = {
     path: "Caminho",
     valueName: "Nome do valor",
     titleName: "Nome do título",
-
+    titlePlaceholder: "Insira o título aqui",
+    surveyTitlePlaceholder: "Insira o título da pesquisa aqui",
+    pageTitlePlaceholder: "Insira o título da página aqui",
+    descriptionPlaceholder: "Digite a descrição",
+    surveyDescriptionPlaceholder: "Digite a descrição da pesquisa",
+    pageDescriptionPlaceholder: "Digite a descrição da página",
+    
     hasOther: "Tem item 'outros'",
     otherText: "Texto do item 'outros'",
+    hasNone: "Tem item 'nenhum'",
+    noneText: "Texto do item 'nenhum'",
+    hasSelectAll: "Tem item 'selecionar todos'",
+    selectAllText: "Texto do item 'selecionat todos'",
+    choicesMin: "Valor mínimo para itens gerados automaticamente",
+    choicesMax: "Valor máximo para itens gerados automaticamente",
+    choicesStep: "A diferença entre itens gerados automaticamente",
     name: "Nome",
     title: "Título",
     cellType: "Tipo de célula",
@@ -148,8 +289,11 @@ var portugueseTranslation = {
     choicesOrder: "Selecione a ordem das alternativas",
     visible: "É visível?",
     isRequired: "É obrigatório?",
+    isAllRowRequired: "Obrigatório resposta para todas as linhas",
+    requiredErrorText: "Texto do erro de obrigatoriedade",
     startWithNewLine: "Começa com uma nova linha?",
     rows: "Contagem de linhas",
+    cols: "Contagem de colunas",
     placeHolder: "Texto de referência",
     showPreview: "Mostra pré-visualização de imagem?",
     storeDataAsText: "Gravar conteúdo de arquivo no resultado JSON como texto",
@@ -161,6 +305,9 @@ var portugueseTranslation = {
     addRowLocation: "Localização do botão de adicionar linha",
     addRowText: "Texto do botão para adicionar linhas",
     removeRowText: "Texto do botão para remover linhas",
+    rateMin: "Frequência mínima",
+    rateMax: "Frequência máxima",
+    rateStep: "Passo da frequência",
     minRateDescription: "Descrição de qualificação mínima",
     maxRateDescription: "Descrição de qualificação máxima",
     inputType: "Tipo de entrada",
@@ -172,10 +319,20 @@ var portugueseTranslation = {
     qEditorTitle: "Editar pergunta: {0}",
 
     maxLength: "Tamanho máximo",
+    
+    buildExpression: "Construir",
+    editExpression: "Editar",
+    and: "E",
+    or: "Ou",
+    remove: "Remover",
+    addCondition: "Adicionar condição",
 
     //survey
     showTitle: "Mostrar/ocultar título",
-    locale: "Idioma default",
+    expandCollapseTitle: "Expandir/colapsar título",
+    locale: "Idioma padrão",
+    simulator: "Escolha o dispositivo",
+    landscapeOrientation: "Paisagem",
     mode: "Modo (editável/somente leitura)",
     clearInvisibleValues: "Limpar valores invisíveis",
     cookieName: "Nome do cookie (para desativar rode a pesquisa duas vezes localmente)",
@@ -186,8 +343,10 @@ var portugueseTranslation = {
     pagePrevText: "Texto para botão de página anterior",
     pageNextText: "Texto para botão de página seguinte",
     completeText: "Texto para botão de completar",
+    previewText: "Texto do botão de Pré-visualização'",
+    editText: "Texto do botão 'Editar'",
     startSurveyText: "Texto para botão de começar",
-    showNavigationButtons: "Mostrar botões de navegação (navegação default)",
+    showNavigationButtons: "Mostrar botões de navegação (navegação padrão)",
     showPrevButton: "Mostrar botão de voltar (usuário pode retornar para página anterior)",
     firstPageIsStarted: "Primeira página da pesquisa é a página de início.",
     showCompletedPage: "Mostrar a página de conclusão no final (completedHtml)",
@@ -199,7 +358,7 @@ var portugueseTranslation = {
     questionStartIndex: "Index das perguntas (1, 2 or 'A', 'a')",
     showQuestionNumbers: "Mostrar número das perguntas",
     questionTitleTemplate:
-      "Template do título da pergunta, default é: '{no}. {obrigatório} {título}'",
+      "Template do título da pergunta, o padrão é: '{no}. {obrigatório} {título}'",
     questionErrorLocation: "Localização do erro da pergunta",
     focusFirstQuestionAutomatic: "Focar automaticamente na primeira pergunta ao trocar de página",
     questionsOrder: "Ordenar elementos na página",
@@ -213,6 +372,35 @@ var portugueseTranslation = {
     panelAddText: "Texto de adicionar painel",
     panelRemoveText: "Texto de remover painel",
     isSinglePage: "Mostrar todos elementos em uma página",
+    html: "Html",
+    expression: "Expressão",
+    
+    minValue: "Valor mínimo",
+    maxValue: "Valor máximo",
+    minLength: "Tamanho mínimo",
+    allowDigits: "Permitir dígitos",
+    minCount: "Contagem mínima",
+    maxCount: "Contagem máxima",
+    regex: "Expressão regular",
+    
+    totalText: "Texto do total",
+    totalType: "Tipo do total",
+    totalExpression: "Expressão do total",
+    totalDisplayStyle: "Estilo de exibição do total",
+    totalCurrency: "Moeda do total",
+    totalFormat: "Formato do total",
+    
+    // Header  adorner
+    logoPosition: "Posição do logotipo",
+    addLogo: "Adicionar logotipo...",
+    changeLogo: "Alterar logotipo...",
+    logoPositions: {
+      none: "Remover logotipo",
+      left: "Esquerda",
+      right: "Direita",
+      top: "No topo",
+      bottom: "No rodapé",
+    },
 
     tabs: {
       general: "Geral",
@@ -229,21 +417,38 @@ var portugueseTranslation = {
       choicesByUrl: "Opções com origem na Web",
       matrixChoices: "Opções padrão",
       multipleTextItems: "Entradas de texto",
+      numbering: "Numeração",
       validators: "Validadores",
       navigation: "Navegação",
       question: "Pergunta",
-      completedHtml: "Completo Html",
-      loadingHtml: "Carregando Html",
+      pages: "Páginas",
+      completedHtml: "Html de conclusão da pesquisa",
+      completedHtmlOnCondition: "Html condicional de conclusão da pesquisa",
+      loadingHtml: "Html de carregamento da pesquisa",
       timer: "Cronômetro/Quiz",
-      triggers: "Triggers",
-      templateTitle: "Título do template"
+      calculatedValues: "Valores Calculados",
+      triggers: "Gatilhos",
+      templateTitle: "Título do template",
+      totals: "Totais",
+      logic: "Lógica",
+      layout: "Layout",
+      data: "Dados",
+      validation: "Validação",
+      cells: "Células",
+      showOnCompleted: "Mostrar na conclusão",
+      logo: "Logo no Título da Pesquisa",
+      slider: "Slider",
+      others: "Outros",
     },
     editProperty: "Editar propriedade '{0}'",
-    items: "[ Items: {0} ]",
+    items: "[ Itens: {0} ]",
 
     enterNewValue: "Por favor, informe o valor.",
     noquestions: "Não há nenhuma pergunta na pesquisa.",
     createtrigger: "Por favor, crie um gatilho",
+    titleKeyboardAdornerTip: "Aperte Enter para editar",
+    keyboardAdornerTip:
+      "Pressione o botão Enter para editar o item, pressione o botão Excluir para excluir o item, pressione Alt mais a seta para cima ou a seta para baixo para mover o item",
     triggerOn: "Ligado ",
     triggerMakePagesVisible: "Tornar páginas visíveis:",
     triggerMakeQuestionsVisible: "Tornar perguntas visíves:",
@@ -254,16 +459,20 @@ var portugueseTranslation = {
     triggerFromName: "Copiar valor de: ",
     triggerRunExpression: "Rodar essa expressão:",
     triggerSetValue: "para: ",
-    triggerIsVariable: "Não colocar a variável no resultado da pesquisa."
+    triggerGotoName: "Ir para a questão:",
+    triggerIsVariable: "Não coloque a variável no resultado da pesquisa.",
+    triggerRunExpressionEmpty: "Por favor insira uma expressão válida",
+    
+    noFile: "Nenhum arquivo selecionado",
   },
   //Property values
   pv: {
     true: "verdadeiro",
     false: "falso",
-    inherit: "inherit",
+    inherit: "herdar",
     show: "mostrar",
     hide: "ocultar",
-    default: "default",
+    default: "padrão",
     initial: "inicial",
     random: "aleatório",
     collapsed: "colapsado",
@@ -288,6 +497,7 @@ var portugueseTranslation = {
     top: "superior",
     bottom: "inferior",
     topBottom: "superior and bottom",
+    both: "ambos",
     left: "esquerda",
     color: "cor",
     date: "data",
@@ -314,7 +524,13 @@ var portugueseTranslation = {
     page: "página",
     survey: "pesquisa",
     onNextPage: "na página seguinte",
-    onValueChanged: "ao mudar valor"
+    onValueChanged: "ao mudar valor",
+    singlePage: "página única",
+    standard: "padrão",
+    questionPerPage: "questões por página",
+    noPreview: "sem prévia",
+    showAllQuestions: "mostrar prévia com todas as questões",
+    showAnsweredQuestions: "mostrar prévia com as questões respondidas",
   },
   //Operators
   op: {
@@ -324,10 +540,14 @@ var portugueseTranslation = {
     notequal: "não é igual",
     contains: "contém",
     notcontains: "não contém",
+    anyof: "qualquer um de",
+    allof: "todos de",
     greater: "maior",
     less: "menor",
     greaterorequal: "maior ou igual",
-    lessorequal: "menor ou igual"
+    lessorequal: "menor ou igual",
+    and: "e",
+    or: "ou",
   },
   //Embed window
   ew: {
@@ -337,7 +557,14 @@ var portugueseTranslation = {
     react: "Usar versão React",
     vue: "Usar versão Vue",
     bootstrap: "Para framework bootstrap",
-    standard: "Sem bootstrap",
+    modern: "Tema Modern",
+    default: "Tema Padrão",
+    orange: "Tema Oranje",
+    darkblue: "Tema Darkblue",
+    darkrose: "Tema Darkrose",
+    stone: "Tema Stone",
+    winter: "Tema Winter",
+    winterstone: "Tema Winterstone",
     showOnPage: "Mostrar pesquisa em uma página",
     showInWindow: "Mostrar pesquisa em uma janela",
     loadFromServer: "Carregar JSON da pesquisa de um servidor",
@@ -362,8 +589,12 @@ var portugueseTranslation = {
     completetrigger: "completar pesquisa",
     setvaluetrigger: "definir valor",
     copyvaluetrigger: "copiar valor",
+    skiptrigger: "pular para questão",
     runexpressiontrigger: "rodar expressão",
     visibletrigger: "alterar visibilidade"
+  },
+  pehelp: {
+    //expression:
   },
   //Properties
   p: {
@@ -526,14 +757,6 @@ var portugueseTranslation = {
     noneText: "nenhum texto",
 
     text: "texto",
-    minValue: "valor mínimo",
-    maxValue: "valor máximo",
-    minLength: "tamanho mínimo",
-    maxLength: "tamanho máximo",
-    allowDigits: "permitir dígitos",
-    minCount: "contador mínimo",
-    maxCount: "contador máximo",
-    regex: "expressão regular"
   }
 };
 
