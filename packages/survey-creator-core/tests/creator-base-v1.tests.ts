@@ -68,12 +68,11 @@ function getSurveyJson(): any {
     ],
   };
 }
-
 test("getNextValue", () => {
   var prefix = "item";
   expect(getNextValue(prefix, ["item4", "item5", "item3"])).toEqual("item6");
   expect(getNextValue(prefix, ["item1", "item5", "itemzzz", "zzz", 1])).toEqual(
-    "2"
+    2
   );
   expect(getNextValue(prefix, ["item1", "item2", "item3"])).toEqual("item4");
   expect(
@@ -84,7 +83,7 @@ test("getNextValue", () => {
     "Column 4"
   );
   expect(getNextValue(prefix, ["1", "3", "4"])).toEqual("5");
-  expect(getNextValue(prefix, [1, 3, 4])).toEqual("5");
+  expect(getNextValue(prefix, [1, 3, 4])).toEqual(5);
   expect(getNextValue(prefix, ["yes"])).toEqual("no");
   expect(getNextValue(prefix, ["No"])).toEqual("Yes");
   expect(getNextValue(prefix, ["TRUE"])).toEqual("FALSE");

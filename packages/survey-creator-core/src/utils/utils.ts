@@ -30,6 +30,7 @@ function getOpositValue(str: string): string {
   return null;
 }
 function hasValueInArray(values: any[], search: any): boolean {
+  search = search.toString();
   for (var i = 0; i < values.length; i++) {
     if (!values[i]) continue;
     if (values[i].toString() === search) return true;
@@ -41,7 +42,7 @@ export function getNextValue(prefix: string, values: any[]): string | number {
     var oposite = getOpositValue(values[values.length - 1]);
   if (oposite && values.indexOf(oposite) < 0) return oposite;
   var numStr = "";
-  var baseStr = "";
+  var baseValue;
   var numStrIndex = -1;
   for (var i = values.length - 1; i >= 0; i--) {
     if (!values[i]) continue;
@@ -49,18 +50,20 @@ export function getNextValue(prefix: string, values: any[]): string | number {
     numStr = getNumericFromString(str);
     if (!!numStr) {
       numStrIndex = str.lastIndexOf(numStr);
-      baseStr = str;
+      baseValue = values[i];
       break;
     }
   }
   if (numStrIndex > -1) {
     var num = parseInt(numStr);
+    var isNumber = baseValue === num;
     var newValue;
     do {
-      newValue =
-        str.substr(0, numStrIndex) +
-        (num++).toString() +
-        str.substr(numStrIndex + numStr.length);
+      newValue = isNumber
+        ? ++num
+        : str.substr(0, numStrIndex) +
+          (num++).toString() +
+          str.substr(numStrIndex + numStr.length);
     } while (hasValueInArray(values, newValue));
     return newValue;
   }
