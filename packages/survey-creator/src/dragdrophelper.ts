@@ -291,6 +291,8 @@ export class DragDropHelper {
               ? newElement.parent.elements.indexOf(newElement)
               : -1
           });
+          newElement.updateElementCss && newElement.updateElementCss();
+          newElement["koElementType"] && newElement["koElementType"].notifySubscribers();
       }
     }
     this.end();

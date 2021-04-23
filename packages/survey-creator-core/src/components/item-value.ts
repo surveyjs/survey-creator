@@ -23,21 +23,27 @@ export class ItemValueWrapperViewModel extends Base {
   ) {
     super();
     this.isNew = !question["isItemInList"](item);
-    if(question.noneItem === item) {
-    } else if(question.otherItem === item) {
-    } else if(question.getType() === "checkbox" && (<QuestionCheckboxModel>question).selectAllItem === item) {
-    } else if(this.isNew) {
+    if (question.noneItem === item) {
+    } else if (question.otherItem === item) {
+    } else if (
+      question.getType() === "checkbox" &&
+      (<QuestionCheckboxModel>question).selectAllItem === item
+    ) {
+    } else if (this.isNew) {
       const nextValue = creator.getNextItemValue(question);
       item.value = nextValue;
     }
   }
 
   public add(model: ItemValueWrapperViewModel) {
-    if(model.question.noneItem === model.item) {
+    if (model.question.noneItem === model.item) {
       model.question.hasNone = true;
-    } else if(model.question.otherItem === model.item) {
+    } else if (model.question.otherItem === model.item) {
       model.question.hasOther = true;
-    } else if(model.question.getType() === "checkbox" && (<QuestionCheckboxModel>model.question).selectAllItem === model.item) {
+    } else if (
+      model.question.getType() === "checkbox" &&
+      (<QuestionCheckboxModel>model.question).selectAllItem === model.item
+    ) {
       model.question.hasSelectAll = true;
     } else {
       const itemValue = model.creator.createNewItemValue(model.question);
@@ -48,11 +54,14 @@ export class ItemValueWrapperViewModel extends Base {
     this.isNew = !model.question["isItemInList"](model.item);
   }
   public remove(model: ItemValueWrapperViewModel) {
-    if(model.question.noneItem === model.item) {
+    if (model.question.noneItem === model.item) {
       model.question.hasNone = false;
-    } else if(model.question.otherItem === model.item) {
+    } else if (model.question.otherItem === model.item) {
       model.question.hasOther = false;
-    } else if(model.question.getType() === "checkbox" && (<QuestionCheckboxModel>model.question).selectAllItem === model.item) {
+    } else if (
+      model.question.getType() === "checkbox" &&
+      (<QuestionCheckboxModel>model.question).selectAllItem === model.item
+    ) {
       model.question.hasSelectAll = false;
     } else {
       var index = model.question.choices.indexOf(model.item);
@@ -69,13 +78,22 @@ export class ItemValueWrapperViewModel extends Base {
     );
   }
   dragOver(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    // const draggedOverElement = model.surveyElement;
-    // model.dragDropHelper.doDragDropOver(event, draggedOverElement, true);
+    return model.dragDropHelper.onDragOverItemValue(
+      event,
+      model.question,
+      model.item
+    );
   }
   dragEnd(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper.onDragEnd();
+    return model.dragDropHelper.onDragEnd();
+  }
+  drop(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
+    return model.dragDropHelper.onDropItemValue(event);
   }
 
+  public getItemValueGhostPosition(): string {
+    return this.dragDropHelper.getItemValueGhostPosition(this.item);
+  }
   private get dragDropHelper(): DragDropHelper {
     return this.creator.dragDropHelper;
   }

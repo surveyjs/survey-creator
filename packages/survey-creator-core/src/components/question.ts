@@ -85,16 +85,16 @@ export class QuestionAdornerViewModel extends Base {
   }
   dragOver(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     const draggedOverElement = model.surveyElement;
-    model.dragDropHelper.onDragOver(event, draggedOverElement, true);
+    return model.dragDropHelper.onDragOver(event, draggedOverElement);
     // model.dragDropHelper.dragOver(model.surveyElement, event);
   }
   drop(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    model.dragDropHelper.onDrop(event);
+    return model.dragDropHelper.onDrop(event);
     // model.dragDropHelper.drop(model.surveyElement, event);
   }
   dragEnd(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     // setTimeout(() => (model.isDragged = false), 1);
-    model.dragDropHelper.onDragEnd();
+    return model.dragDropHelper.onDragEnd();
     // model.dragDropHelper.dragEnd(model.surveyElement, event);
   }
 }
