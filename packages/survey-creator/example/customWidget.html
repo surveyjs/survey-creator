@@ -6,8 +6,8 @@
   <title>survey.js Creator Test</title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-debug.js"></script>
-  <script src="https://unpkg.com/survey-knockout/survey.ko.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+  <script src="../node_modules/survey-knockout/survey.ko.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ace.min.js" type="text/javascript"
     charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/worker-json.js" type="text/javascript"
@@ -21,11 +21,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
   <script src="../build/survey-creator.js"></script>
-  <link rel="stylesheet" href="../build/survey-creator.js" />
+  <link rel="stylesheet" href="../build/survey-creator.css" />
 
   <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="./index.css" />
+  <!-- <link rel="stylesheet" href="./index.css" /> -->
 
   <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
   <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" type="text/css"
@@ -43,7 +43,7 @@
   <script src="https://unpkg.com/signature_pad@2.2.0/dist/signature_pad.min.js"></script>
 
   <script src="https://rawgit.com/RobinHerbots/Inputmask/4.x/dist/jquery.inputmask.bundle.js"></script>
-  <script src="https://rawgit.com/RobinHerbots/Inputmask/4.x/dist/inputmask/phone-codes/phone.js"></script>
+  <!-- <script src="https://rawgit.com/RobinHerbots/Inputmask/4.x/dist/inputmask/phone-codes/phone.js"></script> -->
 
   <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
 
@@ -79,7 +79,7 @@
         questionTypes: ["text", "radiogroup", "dropdown"],
         showJSONEditorTab: false
       };
-      var creator = new SurveyCretor.SurveyCretor(
+      var creator = new SurveyCreator.SurveyCreator(
         "editorElement",
         creatorOptions
       );
