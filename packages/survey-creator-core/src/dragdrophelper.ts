@@ -6,6 +6,8 @@ import {
   Base,
   ItemValue,
   property,
+  SurveyElement,
+  QuestionSelectBase,
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { IPortableDragEvent } from "./utils/events";
@@ -22,7 +24,7 @@ export class DragDropHelper extends Base {
   private isEdge: boolean = null;
   private pageOrPanel: PageModel = null;
 
-  private itemValueSourceQuestion = null;
+  private itemValueSourceQuestion: QuestionSelectBase = null;
 
   private get survey(): SurveyModel {
     return this.creator.survey;
@@ -54,10 +56,14 @@ export class DragDropHelper extends Base {
 
   public onDragStartItemValue(
     event: IPortableDragEvent,
-    question: IElement,
+    question: QuestionSelectBase,
     item: ItemValue
   ) {
     event.stopPropagation();
+
+    // shouldn't allow drag start on adorners (selectall, none, other)
+    if (question.choices.indexOf(item) === -1) return false;
+
     event.dataTransfer.effectAllowed = "move";
 
     this.itemValueSourceQuestion = question;
@@ -67,6 +73,7 @@ export class DragDropHelper extends Base {
 
   private onDragStart(event: IPortableDragEvent, sourceElement: IElement) {
     event.stopPropagation(); // prevent call startDrag event on Parent
+
     event.dataTransfer.effectAllowed = "move";
 
     this.ghostElement = this.createGhostElement();
@@ -97,12 +104,15 @@ export class DragDropHelper extends Base {
 
   public onDragOverItemValue(
     event: IPortableDragEvent,
-    question: IElement,
+    question: QuestionSelectBase,
     item: any
   ) {
     if (this.sourceElementType !== "itemvalue") {
       return true; // ban drop here
     }
+
+    // shouldn't allow drag over on adorners (selectall, none, other)
+    if (question.choices.indexOf(item) === -1) return true;
 
     event.stopPropagation();
 
@@ -258,7 +268,28 @@ export class DragDropHelper extends Base {
     event.stopPropagation();
     event.preventDefault();
 
-    // this.creator.selectElement(newElement);
+    this.doDropItemValue(
+      this.itemValueSourceQuestion,
+      this.sourceElement,
+      this.draggedOverElement,
+      this.isBottom
+    );
+
+    return true;
+  }
+  private doDropItemValue(
+    itemValueSourceQuestion,
+    sourceElement,
+    draggedOverElement,
+    isBottom
+  ) {
+    const choices = itemValueSourceQuestion.choices;
+    const oldIndex = choices.indexOf(sourceElement);
+    const draggedOverItemIndex = choices.indexOf(draggedOverElement);
+    const newIndex = isBottom ? draggedOverItemIndex : draggedOverItemIndex - 1;
+
+    choices.splice(oldIndex, 1);
+    choices.splice(newIndex, 0, sourceElement);
   }
 
   public onDrop(event: IPortableDragEvent) {
