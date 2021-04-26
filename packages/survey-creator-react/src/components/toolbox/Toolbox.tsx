@@ -1,17 +1,8 @@
-import {
-  CreatorBase,
-  getLocString,
-  IQuestionToolboxItem,
-} from "@survey/creator";
+import { CreatorBase, getLocString, IQuestionToolboxItem } from "@survey/creator";
 import React, { CSSProperties } from "react";
 import { ReactDragEvent } from "../../events";
-import {
-  AdaptiveActionBarItemWrapper,
-  AdaptiveElement,
-  Base,
-  VerticalResponsivityManager,
-  SurveyModel,
-} from "survey-core";
+import { AdaptiveActionBarItemWrapper, AdaptiveElement, Base,
+  VerticalResponsivityManager, SurveyModel } from "survey-core";
 import { SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 // export class SurveyCreatorToolbox extends ActionBar {
@@ -30,14 +21,10 @@ interface ISurveyCreatorToolboxProps {
   items: Array<IQuestionToolboxItem>;
 }
 
-export class SurveyCreatorToolbox extends SurveyElementBase<
-  ISurveyCreatorToolboxProps,
-  any
-> {
+export class SurveyCreatorToolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {
   private adaptiveElement = new AdaptiveElement();
   private manager: VerticalResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
-  private updateVisibleItems: any;
 
   constructor(props: ISurveyCreatorToolboxProps) {
     super(props);
@@ -52,29 +39,12 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
   componentDidMount() {
     super.componentDidMount();
-
     const container = this.rootRef.current;
-    this.manager = new VerticalResponsivityManager(
-      container,
-      this.adaptiveElement,
-      40
-    );
-    this.manager.getItemSizes = () => {
-      const widths: number[] = [];
-      container
-        .querySelectorAll("span.sv-action")
-        .forEach((actionContainer) => {
-          widths.push((actionContainer as HTMLDivElement).offsetWidth);
-        });
-      return widths;
-    };
-
-    this.updateVisibleItems = setInterval(() => {
-      this.manager.process();
-    }, 100);
+    this.manager = new VerticalResponsivityManager(container,
+      this.adaptiveElement, 'div.svc-toolbox__tool', 40);
   }
   componentWillUnmount() {
-    clearInterval(this.updateVisibleItems);
+    this.manager.dispose();
     super.componentWillUnmount();
   }
 
@@ -82,15 +52,11 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     return this.adaptiveElement;
   }
   render(): JSX.Element {
-    if (!this.hasItems) {
-      return null;
-    }
-
+    if (!this.hasItems) return null;
     const items = this.renderItems();
-
     return (
-      <div className="svc-toolbox">
-        <div className="svc-toolbox__category">{items}</div>
+      <div ref={this.rootRef} className='svc-toolbox'>
+        <div className='svc-toolbox__category'>{items}</div>
       </div>
     );
     /*
@@ -165,14 +131,14 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
         onClick={() => this.props.creator.clickToolboxItem(toolboxItem.json)}
         onDragStart={(e) => {
           var json = this.props.creator.getJSONForNewElement(toolboxItem.json);
-          this.props.creator.dragDropHelper.startDragToolboxItem(
+          this.props.creator.dragDropHelper.onDragStartToolboxItem(
             new ReactDragEvent(e),
             json
           );
           return true;
         }}
         onDragEnd={() => {
-          this.props.creator.dragDropHelper.end();
+          this.props.creator.dragDropHelper.onDragEnd();
         }}
       >
         <span className="svc-toolbox__item-container">

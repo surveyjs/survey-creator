@@ -8,31 +8,17 @@ const template = require("./tabbed-menu.html");
 
 export let TabbedMenuViewModel: any;
 
-ko.components.register("svc-tabbed-menu", {
+ko.components.register('svc-tabbed-menu', {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const container: HTMLDivElement = componentInfo.element.nextElementSibling;
       const model: ActionBarViewModel = new ActionBarViewModel(params.items);
-      model.dotsItemPopupModel.horizontalPosition = "right";
+      model.dotsItemPopupModel.horizontalPosition = 'right';
       new AdaptiveElementImplementor(model);
 
-      const manager: ResponsivityManager = new ResponsivityManager(container, model);
-      manager.getItemSizes = () => {
-        const widths: number[] = [];
-        container
-          .querySelectorAll("span.svc-tabbed-menu-item-container")
-          .forEach((actionContainer) => {
-            widths.push((<HTMLDivElement>actionContainer).offsetWidth);
-          });
-        return widths;
-      };
-      const updateVisibleItems = setInterval(() => {
-        manager.process();
-        ko.tasks.runEarly();
-      }, 100);
-      ko.utils.domNodeDisposal.addDisposeCallback(container, () => {
-        clearInterval(updateVisibleItems);
-      });
+      const manager: ResponsivityManager =
+        new ResponsivityManager(container, model, 'span.svc-tabbed-menu-item-container');
+      ko.utils.domNodeDisposal.addDisposeCallback(container, () => manager.dispose());
       return model;
     },
   },

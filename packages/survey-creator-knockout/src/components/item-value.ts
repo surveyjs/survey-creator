@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import {
   ItemValue,
+  property,
   QuestionSelectBase,
   SurveyItemValueViewModel, SurveyModel,
 } from "survey-core";
@@ -14,19 +15,25 @@ import { KnockoutDragEvent } from "../events";
 
 const template = require("./item-value.html");
 
-class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
+class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel { 
   constructor( public creator: CreatorBase<SurveyModel>, public question: QuestionSelectBase, public item: ItemValue, public templateData:any) {
     super(creator, question, item);
   }
 
+  get showDragDropGhostOnTop():boolean {return super.getItemValueGhostPosition() === "top"};
+  get showDragDropGhostOnBottom():boolean {return super.getItemValueGhostPosition() === "bottom"}
+
   koDragStart(model: ItemValueWrapperViewModel, event: DragEvent) {
     return super.dragStart(model, this.wrapDragEvent(event));
+  }
+  koDragEnd(model: ItemValueWrapperViewModel, event: DragEvent) {
+    return super.dragEnd(model, this.wrapDragEvent(event));
   }
   koDragOver(model: ItemValueWrapperViewModel, event: DragEvent) {
     return super.dragOver(model, this.wrapDragEvent(event));
   }
-  koDragEnd(model: ItemValueWrapperViewModel, event: DragEvent) {
-    return super.dragEnd(model, this.wrapDragEvent(event));
+  koDrop(model: ItemValueWrapperViewModel, event: DragEvent) {
+    return super.drop(model, this.wrapDragEvent(event))
   }
 
   private wrapDragEvent(event: DragEvent): KnockoutDragEvent {

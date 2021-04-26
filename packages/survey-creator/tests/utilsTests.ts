@@ -34,6 +34,7 @@ QUnit.test("getNextValue", function (assert) {
     ]),
     "12345671234567893"
   );
+  assert.equal(getNextValue(prefix, ["1 day", "2 days", "3 days"]), "4 days");
 });
 
 QUnit.test("DesignerContainerViewModel changed unsubscribe", function (assert) {

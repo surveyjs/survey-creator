@@ -81,7 +81,7 @@ There are several options that you may set to change the Survey Creator behavior
 |_generateValidJSON: false,_| The default value of this options is true. By default, the valid JSON is generated. You may want to use non-standard, but more readable format, [JSON5](https://json5.org/).|
 |_showJSONEditorTab: false,_|Set this option to false to hide the JSON Tab.|
 |_showTestSurveyTab: false,_|Set this option to false to hide the Survey Test Tab.|
-|_showEmbededSurveyTab: true,_|Set this option to true to show the Survey Embedded Tab. This tab is hidden by default. It shows how to integrate the survey into another web page.|
+|_showEmbeddedSurveyTab: true,_|Set this option to true to show the Survey Embedded Tab. This tab is hidden by default. It shows how to integrate the survey into another web page.|
 |_showTranslationTab: true,_|Set this option to true to show the Translation Tab. This tab is hidden by default. It allows to edit all localizable strings for several languages on one page. It allows to import/export into from csv file.|
 |_showLogicTab: true,_|Set this option to true to show the Logic Tab. This tab is hidden by default. It allows to view and edit the survey logic (expressions) in one place.|
 |_showElementEditorAsPropertyGrid: true_|Set this property to false to show property grid in old style, without categories, and allow to show Element Editor as modal window.|

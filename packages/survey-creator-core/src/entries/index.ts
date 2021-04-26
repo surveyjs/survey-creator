@@ -45,3 +45,6 @@ import "../components/toolbox/toolbox.scss";
 import "../propety-grid-theme/property-grid.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
+
+import { settings } from "survey-core";
+settings.supportCreatorV2 = true;

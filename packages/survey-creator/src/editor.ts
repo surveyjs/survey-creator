@@ -79,12 +79,12 @@ export class SurveyCreator
 
   /**
    * This property is assign to the survey.surveyId property on showing in the "Embed Survey" tab.
-   * @see showEmbededSurveyTab
+   * @see showEmbeddedSurveyTab
    */
   public surveyId: string = null;
   /**
    * This property is assign to the survey.surveyPostId property on showing in the "Embed Survey" tab.
-   * @see showEmbededSurveyTab
+   * @see showEmbeddedSurveyTab
    */
   public surveyPostId: string = null;
   /**
@@ -386,7 +386,7 @@ export class SurveyCreator
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
   /**
-   * Obsolete, please use onGetObjectDisplayName event
+   * @Deprecated Obsolete, please use onGetObjectDisplayName event
    * Use this event to change the text showing in the dropdown of the property grid.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object.
@@ -568,7 +568,7 @@ export class SurveyCreator
    * The Survey Creator constructor.
    * @param renderedElement HtmlElement or html element id where survey creator will be rendered
    * @param options survey creator options. The following options are available:
-   * showDesignerTab, showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab, showTranslationTab, showLogicTab,
+   * showDesignerTab, showJSONEditorTab, showTestSurveyTab, showEmbeddedSurveyTab, showTranslationTab, showLogicTab,
    * showOptions, showPropertyGrid, showToolbox,
    * allowModifyPages, pageEditingMode, showDropdownPageSelector, readOnly,
    * questionTypes, generateValidJSON, isAutoSave, designerHeight, showErrorOnFailedSave, closeModalOutside, useTabsInElementEditor,
@@ -878,7 +878,7 @@ export class SurveyCreator
   /**
    * Call this method to render the Survey Creator.
    * @param element HtmlElement or html element id where survey creator will be rendered
-   * @param options survey creator options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbededSurveyTab,
+   * @param options survey creator options. The following options are available: showJSONEditorTab, showTestSurveyTab, showEmbeddedSurveyTab,
    * showTranslationTab, showLogicTab, showOptions, generateValidJSON, isAutoSave, designerHeight.
    */
   public render(element: any = null, options: any = null) {
@@ -1168,7 +1168,7 @@ export class SurveyCreator
     }
   }
   /**
-   * Obsolete from v1.5.1
+   * @Deprecated Obsolete from v1.5.1
    * Set it to false to temporary hide the Property Grid on the right side of the creator. User will be able to show the Property Grid again via the click on the 'Advanced' label. It allows to edit the properties of the selected object (question/panel/page/survey).
    */
   public get hideAdvancedSettings() {

@@ -1,28 +1,18 @@
 import React from "react";
 import { CSSProperties } from "react";
 //import { ImplementorBase } from "survey-knockout";
-import {
-  AdaptiveActionBarItemWrapper,
-  AdaptiveElement,
-  Base,
-  IActionBarItem,
-  ResponsivityManager,
-} from "survey-core";
-
+import { AdaptiveActionBarItemWrapper, AdaptiveElement, Base,
+  IActionBarItem, ResponsivityManager } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 interface ITabbedMenuComponentProps {
   items: Array<IActionBarItem>;
 }
 
-class TabbedMenuComponent extends SurveyElementBase<
-  ITabbedMenuComponentProps,
-  any
-> {
+class TabbedMenuComponent extends SurveyElementBase<ITabbedMenuComponentProps, any> {
   private adaptiveElement = new AdaptiveElement();
   private manager: ResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
-  private updateVisibleItems: any;
 
   protected getStateElement(): Base {
     return this.adaptiveElement;
@@ -84,24 +74,12 @@ class TabbedMenuComponent extends SurveyElementBase<
   }
   componentDidMount() {
     super.componentDidMount();
-    const container = this.rootRef.current;
-    this.manager = new ResponsivityManager(container, this.adaptiveElement);
-    this.manager.getItemSizes = () => {
-      const widths: number[] = [];
-      container
-        .querySelectorAll("span.svc-tabbed-menu-item-container")
-        .forEach((actionContainer) => {
-          widths.push((actionContainer as HTMLDivElement).offsetWidth);
-        });
-      return widths;
-    };
-
-    this.updateVisibleItems = setInterval(() => {
-      this.manager.process();
-    }, 100);
+    const container: HTMLDivElement = this.rootRef.current;
+    this.manager = new ResponsivityManager(container, this.adaptiveElement,
+      'span.svc-tabbed-menu-item-container');
   }
   componentWillUnmount() {
-    clearInterval(this.updateVisibleItems);
+    this.manager.dispose();
     super.componentWillUnmount();
   }
 }

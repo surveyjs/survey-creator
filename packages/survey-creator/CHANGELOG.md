@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.44](https://github.com/surveyjs/survey-creator/compare/v1.8.43...v1.8.44) (2021-04-20)
+
+
+### Bug Fixes
+
+* Bug on create a custom question (panel question) from toolbox [#1126](https://github.com/surveyjs/survey-creator/issues/1126) ([9ae812e](https://github.com/surveyjs/survey-creator/commit/9ae812ec7e779c20db0d117a58b5fcc5bf0b7bff))
+* Update expressions on deleting panels and pages [#1144](https://github.com/surveyjs/survey-creator/issues/1144) ([32d2788](https://github.com/surveyjs/survey-creator/commit/32d2788dc7a1015a89e7686fadc3e8d1d433eff9))
+
 ### [1.8.43](https://github.com/surveyjs/survey-creator/compare/v1.8.42...v1.8.43) (2021-04-14)
 
 ### [1.8.42](https://github.com/surveyjs/survey-creator/compare/v1.8.41...v1.8.42) (2021-04-13)

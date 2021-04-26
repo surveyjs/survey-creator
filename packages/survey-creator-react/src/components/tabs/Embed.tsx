@@ -18,14 +18,14 @@ export class TabEmbedComponent extends SurveyElementBase<ITabEmbedComponentProps
   }
   render(): JSX.Element {
     return (
-      <div className="svc-creator-tab__content">
+      <div className='svc-creator-tab__content'>
         {this.model.survey ? <Survey model={this.model.survey}></Survey> : null}
       </div>
     );
   }
 }
 
-ReactElementFactory.Instance.registerElement("svc-tab-embed",
+ReactElementFactory.Instance.registerElement('svc-tab-embed',
   (props: ITabEmbedComponentProps) => {
     return React.createElement(TabEmbedComponent, props);
   }

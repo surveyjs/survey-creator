@@ -9,7 +9,7 @@ fixture`${title}`.page`${url}`.beforeEach(
 );
 
 test("Choose knockout framework and show as widnow", async (t) => {
-    // await ClientFunction(() => { creator.showEmbededSurveyTab = true; })();
+    // await ClientFunction(() => { creator.showEmbeddedSurveyTab = true; })();
     // await t.click(Selector(".svc-tabbed-menu-item").withText("Embed Survey"));
     // await t.click("select[aria-label='framework']")
     //     .click(Selector('option').filter("[value='knockout']"));

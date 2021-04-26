@@ -19,7 +19,7 @@ import { DragDropHelper } from "./dragdrophelper";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
-import { isPropertyVisible, propertyExists } from "./utils/utils";
+import { getNextValue, isPropertyVisible, propertyExists } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./surveyHelper";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
@@ -223,7 +223,7 @@ export class CreatorBase<T extends SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
-   * Obsolete, please use onShowingProperty event.
+   * @Deprecated Obsolete, please use onShowingProperty event.
    * The event is called before showing a property in the Property Grid or in Question Editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
@@ -665,7 +665,7 @@ export class CreatorBase<T extends SurveyModel>
         ? this.options.questionTypes
         : null
     );
-    this.dragDropHelper = new DragDropHelper(this, () => {});
+    this.dragDropHelper = new DragDropHelper(this);
     this.propertyGrid = new PropertyGridModel(
       (this.survey as any) as Base,
       this
@@ -849,8 +849,8 @@ export class CreatorBase<T extends SurveyModel>
         ? options.showTestSurveyTab
         : true;
     this.showEmbeddedSurveyTab =
-      typeof options.showEmbededSurveyTab !== "undefined"
-        ? options.showEmbededSurveyTab
+      typeof options.showEmbeddedSurveyTab !== "undefined"
+        ? options.showEmbeddedSurveyTab
         : false;
     this.showTranslationTab =
       typeof options.showTranslationTab !== "undefined"
@@ -1416,7 +1416,7 @@ export class CreatorBase<T extends SurveyModel>
     this.selectElement(val);
   }
   /**
-   * Obsolete. Please use deleteCurrentElement.
+   * @Deprecated Obsolete. Please use deleteCurrentElement.
    * @see deleteCurrentElement
    */
   public deleteCurrentObject() {
@@ -1574,7 +1574,7 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   /**
-   * Obsolete. Collapse all property editor tabs (categories) in properties panel/grid
+   * @Deprecated Obsolete. Collapse all property editor tabs (categories) in properties panel/grid
    * @see collapseAllPropertyGridCategories
    *
    */
@@ -1583,7 +1583,7 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   /**
-   * Obsolete. Expand all property editor tabs (categories) in properties panel/grid
+   * @Deprecated Obsolete. Expand all property editor tabs (categories) in properties panel/grid
    * @see expandAllPropertyGridCategories
    */
   public expandAllPropertyTabs(): void {
@@ -1591,7 +1591,7 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   /**
-   * Obsolete. Expand certain property editor tab (category) in properties panel/grid
+   * @Deprecated Obsolete. Expand certain property editor tab (category) in properties panel/grid
    * name - tab category name
    * @see expandPropertyGridCategory
    */
@@ -1600,7 +1600,7 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   /**
-   * Obsolete. Collapse certain property editor tab (category) in properties panel/grid
+   * @Deprecated Obsolete. Collapse certain property editor tab (category) in properties panel/grid
    * name - tab category name
    * @see collapsePropertyGridCategory
    */
@@ -2079,5 +2079,15 @@ export class CreatorBase<T extends SurveyModel>
     });
 
     return items;
+  }
+  public getNextItemValue(question: Survey.QuestionSelectBase) {
+    const itemText = Survey.surveyLocalization.getString("choices_Item");
+    const values = question.choices.map((item: Survey.ItemValue) => item.value);
+    const nextValue = getNextValue(itemText, values);
+    return nextValue;
+  }
+  public createNewItemValue(question: Survey.QuestionSelectBase) {
+    const nextValue = this.getNextItemValue(question);
+    return new Survey.ItemValue(nextValue);
   }
 }
