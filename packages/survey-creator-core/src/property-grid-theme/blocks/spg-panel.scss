@@ -41,7 +41,7 @@
 }
 
 .spg-panel__content {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
@@ -55,7 +55,5 @@
   .spg-row {
     width: 100%;
     margin-top: calcSize(2);
-  }
-  .spg-row:last-of-type {
   }
 }
