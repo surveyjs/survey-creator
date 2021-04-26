@@ -71,6 +71,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       removeRowAction.action = () => {
         question.removeRowUI(row);
       };
+      removeRowAction.visibleIndex = 10;
     }
     if (!!showDetailAction) {
       showDetailAction.component = "sv-action-bar-item";
@@ -82,9 +83,8 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       showDetailAction.action = () => {
         row.showHideDetailPanelClick();
       };
+      showDetailAction.visibleIndex = 0;
     }
-    const removeRowActionIndex: number = actions.indexOf(removeRowAction);
-    const showDetailActionIndex: number = actions.indexOf(showDetailAction);
 
     actions.push({
       id: "drag-row",
@@ -92,12 +92,8 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       showTitle: false,
       action: () => {},
       location: "start",
+      visibleIndex: 0,
     });
-
-    if (removeRowActionIndex < showDetailActionIndex) {
-      actions[showDetailActionIndex] = removeRowAction;
-      actions[removeRowActionIndex] = showDetailAction;
-    }
   }
   public onGetQuestionTitleActions(obj: Base, options: any): void {
     const question: QuestionMatrixDynamicModel = options.question;
