@@ -1,7 +1,8 @@
 import * as ko from "knockout";
-import { ItemValue, property, Question, QuestionSelectBase, SurveyElement } from "survey-core";
+import { Base, ItemValue, property, Question, QuestionSelectBase, SurveyElement } from "survey-core";
 import { Survey, ImplementorBase, Panel, QuestionRow } from "survey-knockout-ui";
 import { ICreatorOptions, CreatorBase } from "@survey/creator";
+import { editableStringRendererName } from "./components/string-editor";
 
 if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;
@@ -58,6 +59,12 @@ class DesignTimeSurveyModel extends Survey {
   }
   public getSurveyRowComponentData(row: QuestionRow): any {
     return row;
+  }
+
+  
+  public getRendererForString(element: Base, name: string): string {
+    if (this.isDesignMode) return editableStringRendererName;
+    return undefined;
   }
 }
 
