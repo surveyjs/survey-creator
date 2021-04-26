@@ -3,7 +3,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const dts = require("dts-bundle");
 const rimraf = require("rimraf");
@@ -76,44 +76,21 @@ const buildPlatformJson = {
     react: "^17.0.1",
     "react-dom": "^17.0.1",
   },
-  devDependencies: {}
+  devDependencies: {},
 };
 
 module.exports = function (options) {
   const buildPath = __dirname + "/build/";
   const isProductionBuild = options.buildType === "prod";
 
-  function createSVGBundle() {
-    const options = {
-      fileName: path.resolve(__dirname, "./src/svgbundle.html"),
-      template: path.resolve(__dirname, "./svgbundle.pug"),
-      svgoOptions: {
-        plugins: [{ removeTitle: true }],
-      },
-      prefix: "icon-",
-    };
-
-    svgStoreUtils.filesMap(path.join("./src/images/**/*.svg"), (files) => {
-      const fileContent = svgStoreUtils.createSprite(
-        svgStoreUtils.parseFiles(files, options),
-        options.template
-      );
-
-      fs.writeFileSync(options.fileName, fileContent);
-    });
-  }
-
   const percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
-      createSVGBundle();
     } else if (1 == percentage) {
       if (isProductionBuild) {
         dts.bundle({
           name: "../../" + packageJson.name,
-          main:
-            buildPath +
-            "typings/entries/index.d.ts",
+          main: buildPath + "typings/entries/index.d.ts",
           outputAsModuleFolder: true,
           headerText: dts_banner,
         });
@@ -128,7 +105,9 @@ module.exports = function (options) {
             if (error) {
               return console.error("Error occurred:", error);
             }
-            console.log("check me :     " + buildPath + packageJson.name + ".d.ts");
+            console.log(
+              "check me :     " + buildPath + packageJson.name + ".d.ts"
+            );
             console.log("Modified files:", changes.join(", "));
           }
         );
@@ -224,7 +203,7 @@ module.exports = function (options) {
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
       library: options.libraryName || "SurveyCreatorReact",
       libraryTarget: "umd",
-      globalObject: 'this',
+      globalObject: "this",
       umdNamedDefine: true,
     },
     externals: {
@@ -232,13 +211,13 @@ module.exports = function (options) {
         root: "React",
         commonjs2: "react",
         commonjs: "react",
-        amd: "react"
+        amd: "react",
       },
       "react-dom": {
         root: "ReactDOM",
         commonjs2: "react-dom",
         commonjs: "react-dom",
-        amd: "react-dom"
+        amd: "react-dom",
       },
       "survey-core": {
         root: "Survey",
@@ -262,7 +241,6 @@ module.exports = function (options) {
       new MiniCssExtractPlugin({
         filename: isProductionBuild ? "[name].min.css" : "[name].css",
       }),
-      new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
       new webpack.BannerPlugin({
         banner: banner,
       }),
