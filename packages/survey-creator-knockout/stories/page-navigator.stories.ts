@@ -2,10 +2,8 @@ import { PageNavigatorViewModel } from "@survey/creator";
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import {
-  PageNavigatorItemViewModel,
-  SvgBundleViewModel,
-} from "../src/entries";
+import { PageNavigatorItemViewModel } from "../src/entries";
+import { SvgBundleViewModel } from "@survey/creator";
 
 const template =
   '<div style="width: 200px; display: flex; flex-direction: row-reverse;"><svc-page-navigator params="items: items"></svc-page-navigator></div>';

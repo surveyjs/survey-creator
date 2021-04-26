@@ -42,5 +42,3 @@ import "@survey/creator/survey-creator-core.css";
 // //export * from "../property-grid/modal-action";
 // export * from "@survey/creator/property-grid/restfull";
 // export * from "@survey/creator/property-grid/values";
-
-export * from "../svgbundle";

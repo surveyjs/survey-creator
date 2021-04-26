@@ -3,24 +3,20 @@
 const webpack = require("webpack");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const dts = require("dts-bundle");
 const rimraf = require("rimraf");
 const packageJson = require("./package.json");
 const fs = require("fs");
 const replace = require("replace-in-file");
-const svgStoreUtils = require(path.resolve(
-  __dirname,
-  "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
-));
 
 const year = new Date().getFullYear();
 const banner = [
   "SurveyJS Creator v" + packageJson.version,
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#SurveyCreator"
+  "License: https://surveyjs.io/Licenses#SurveyCreator",
 ].join("\n");
 
 const dts_banner = [
@@ -29,7 +25,7 @@ const dts_banner = [
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
-  ""
+  "",
 ].join("\n");
 
 const buildPlatformJson = {
@@ -44,7 +40,7 @@ const buildPlatformJson = {
     "Survey Maker",
     "SurveyJS",
     "JavaScript",
-    "TypeScript"
+    "TypeScript",
   ],
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
   license: "https://surveyjs.io/Licenses#SurveyCreator",
@@ -53,19 +49,19 @@ const buildPlatformJson = {
     packageJson.name + ".min.css",
     packageJson.name + ".js",
     packageJson.name + ".d.ts",
-    packageJson.name + ".min.js"
+    packageJson.name + ".min.js",
   ],
   main: packageJson.name + ".js",
   repository: {
     type: "git",
-    url: "https://github.com/surveyjs/survey-creator.git"
+    url: "https://github.com/surveyjs/survey-creator.git",
   },
   engines: {
-    node: ">=0.10.0"
+    node: ">=0.10.0",
   },
   typings: packageJson.name + ".d.ts",
   peerDependencies: {
-    "ace-builds": "^1.4.12"
+    "ace-builds": "^1.4.12",
   },
   dependencies: {
     //TODO: Return back when release
@@ -73,39 +69,18 @@ const buildPlatformJson = {
     // "survey-knockout-ui": "^" + packageJson.version,
     "survey-core": "^1.8.0",
     "survey-knockout-ui": "^1.8.0",
-    knockout: "^3.5.0"
+    knockout: "^3.5.0",
   },
-  devDependencies: {}
+  devDependencies: {},
 };
 
 module.exports = function (options) {
   const buildPath = __dirname + "/build/";
   const isProductionBuild = options.buildType === "prod";
 
-  function createSVGBundle() {
-    const options = {
-      fileName: path.resolve(__dirname, "./src/svgbundle.html"),
-      template: path.resolve(__dirname, "./svgbundle.pug"),
-      svgoOptions: {
-        plugins: [{ removeTitle: true }],
-      },
-      prefix: "icon-"
-    };
-
-    svgStoreUtils.filesMap(path.join("./src/images/**/*.svg"), (files) => {
-      const fileContent = svgStoreUtils.createSprite(
-        svgStoreUtils.parseFiles(files, options),
-        options.template
-      );
-
-      fs.writeFileSync(options.fileName, fileContent);
-    });
-  }
-
   const percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
-      createSVGBundle();
     } else if (1 == percentage) {
       if (isProductionBuild) {
         dts.bundle({
@@ -125,7 +100,9 @@ module.exports = function (options) {
             if (error) {
               return console.error("Error occurred:", error);
             }
-            console.log("check me :     " + buildPath + packageJson.name + ".d.ts");
+            console.log(
+              "check me :     " + buildPath + packageJson.name + ".d.ts"
+            );
             console.log("Modified files:", changes.join(", "));
           }
         );
@@ -253,7 +230,6 @@ module.exports = function (options) {
       new MiniCssExtractPlugin({
         filename: isProductionBuild ? "[name].min.css" : "[name].css",
       }),
-      new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
       new webpack.BannerPlugin({
         banner: banner,
       }),

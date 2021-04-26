@@ -2,7 +2,7 @@
 import { text, boolean, button } from "@storybook/addon-knobs";
 import { ListModel } from "survey-core";
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { SvgBundleViewModel } from "../src/svgbundle";
+import { SvgBundleViewModel } from "@survey/creator";
 
 export default {
   title: "List",
