@@ -14,16 +14,20 @@ import {
   IActionBarItem,
   QuestionDropdownModel,
   QuestionCheckboxModel,
+  PopupModel,
+  ListModel,
 } from "survey-core";
 import { unparse, parse } from "papaparse";
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "../../editorLocalization";
 import {
   EmptySurveyCreatorOptions,
   ISurveyCreatorOptions,
   settings,
-} from "../settings";
-import { setSurveyJSONForPropertyGrid } from "../property-grid/index";
-import { CreatorBase, ICreatorPlugin } from "../creator-base";
+} from "../../settings";
+import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
+import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+
+import "./translation.scss";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -164,6 +168,7 @@ export interface ITranslationLocales {
   ) => void;
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
   fireOnObjCreating(obj: Base);
+  removeLocale(loc: string): void;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -220,6 +225,9 @@ export class TranslationGroup extends TranslationItemBase {
   public get locales() {
     return !!this.translation ? this.translation.locales : null;
   }
+  public get removeLocaleText() {
+    return editorLocalization.getString("pe.remove");
+  }
   public get localeCount(): number {
     return !!Array.isArray(this.locales) ? this.locales.length : 0;
   }
@@ -232,6 +240,9 @@ export class TranslationGroup extends TranslationItemBase {
     return this.translation
       ? this.translation.getLocaleName(loc)
       : editorLocalization.getLocaleName(loc);
+  }
+  public removeLocale = (loc: string) => {
+    this.translation && this.translation.removeLocale(loc);
   }
   public reset() {
     this.itemValues = [];
@@ -471,6 +482,8 @@ export class Translation extends Base implements ITranslationLocales {
   private surveyValue: SurveyModel;
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
+  private pagePopupModel: PopupModel;
+  private chooseLanguagePopupModel: PopupModel;
 
   constructor(
     survey: SurveyModel,
@@ -567,6 +580,7 @@ export class Translation extends Base implements ITranslationLocales {
     return {
       elements: [
         {
+          visible: false,
           type: "dropdown",
           name: "availableLocales",
           choicesVisibleIf: "{selLocales} notcontains {item}",
@@ -575,6 +589,7 @@ export class Translation extends Base implements ITranslationLocales {
           width: "300px",
         },
         {
+          visible: false,
           type: "boolean",
           name: "showAllStrings",
           defaultValue: this.showAllStrings,
@@ -583,6 +598,7 @@ export class Translation extends Base implements ITranslationLocales {
           titleLocation: "left",
         },
         {
+          visible: false,
           type: "dropdown",
           name: "filteredPage",
           defaultValue: this.filteredPage,
@@ -601,8 +617,8 @@ export class Translation extends Base implements ITranslationLocales {
       ],
     };
   }
-  private updateSettingsSurveyLocales() {
-    var choices = new Array<ItemValue>();
+  private getSurveyLocales() {
+    const usedLocales = new Array<ItemValue>();
     var sLocales = surveyLocalization.supportedLocales;
     var locales =
       Array.isArray(sLocales) && sLocales.length > 0
@@ -610,13 +626,17 @@ export class Translation extends Base implements ITranslationLocales {
         : (<any>surveyLocalization).getLocales();
     var addedLocales = {};
     for (var i = 0; i < locales.length; i++) {
-      this.addLocaleIntoChoices(locales[i], choices, addedLocales);
+      this.addLocaleIntoChoices(locales[i], usedLocales, addedLocales);
     }
     locales = this.settingsSurvey.getValue("selLocales");
     if (!locales) locales = [];
     for (var i = 0; i < locales.length; i++) {
-      this.addLocaleIntoChoices(locales[i], choices, addedLocales);
+      this.addLocaleIntoChoices(locales[i], usedLocales, addedLocales);
     }
+    return [usedLocales, locales];
+  }
+  private updateSettingsSurveyLocales() {
+    const [choices, locales] = this.getSurveyLocales();
     this.availableLocalesQuestion.choices = choices;
     this.localesQuestion.choices = choices;
     this.settingsSurvey.getQuestionByName(
@@ -649,16 +669,78 @@ export class Translation extends Base implements ITranslationLocales {
     }
   }
   private setupToolbarItems() {
+    this.chooseLanguagePopupModel = new PopupModel(
+      "sv-list",
+      new ListModel(
+        this.getSurveyLocales()[0].map((locale: ItemValue) => ({ id: locale.value, title: locale.text, data: locale })),
+        (item: IActionBarItem) => {
+          this.addLocale(item.id);
+          this.chooseLanguagePopupModel.toggleVisibility();
+        },
+        false
+      ),
+      "top",
+      "right"
+    );
     this.toolbarItems.push({
-      id: "svd-translation-import",
-      title: this.exportToCSVText,
-      tooltip: this.exportToCSVText,
-      component: "sv-action-bar-item",
-      action: () => {
-        this.exportToSCVFile("survey_translation.csv");
+      id: "svc-translation-choose-language",
+      css: "sv-action--first sv-action-bar-item--secondary",
+      iconName: "icon-change_16x16",
+      title: () => this.selectLanguageOptionsCaption,
+      component: "sv-action-bar-item-dropdown",
+      popupModel: this.chooseLanguagePopupModel,
+      action: (language) => {
+        this.chooseLanguagePopupModel.toggleVisibility();
       },
     });
-    //TODO add import from, requried file input action
+
+    this.pagePopupModel = new PopupModel(
+      "sv-list",
+      new ListModel(
+        [{ id: null, title: this.showAllPagesText }].concat(this.survey.pages.map(page => ({ id: page.name, title: this.options.getObjectDisplayName(page, "survey-translation", page.title) }))),
+        (item: IActionBarItem) => {
+          this.filteredPage = !!item.id
+          ? this.survey.getPageByName(item.id)
+          : null;          
+          this.pagePopupModel.toggleVisibility();
+        },
+        true
+      ),
+      "top",
+      "center"
+    );
+    this.toolbarItems.push({
+      id: "svc-translation-filter-page",
+      title: () =>
+        (this.filteredPage &&
+          this.options.getObjectDisplayName(
+            this.filteredPage,
+            "survey-translation",
+            this.filteredPage.title) ||
+        this.showAllPagesText),
+      component: "sv-action-bar-item-dropdown",
+      popupModel: this.pagePopupModel,
+      action: (newPage) => {
+        this.pagePopupModel.toggleVisibility();
+      },
+    });
+
+    this.toolbarItems.push({
+      id: "svc-translation-show-all-strings",
+      css: () =>
+        this.showAllStrings
+          ? "sv-action-bar-item--secondary"
+          : "",
+      title: this.showAllStringsText,
+      iconName: () => {
+        if (this.showAllStrings) {
+          return "icon-switchactive_16x16";
+        }
+        return "icon-switchinactive_16x16";
+      },
+      action: () => (this.showAllStrings = !this.showAllStrings),
+    });
+
     this.toolbarItems.push({
       id: "svd-translation-merge_locale_withdefault",
       title: this.mergeLocaleWithDefaultText,
@@ -667,6 +749,18 @@ export class Translation extends Base implements ITranslationLocales {
       visible: this.canMergeLocaleWithDefault,
       action: () => {
         this.mergeLocaleWithDefault();
+      },
+    });
+
+    //TODO add import from, requried file input action
+    this.toolbarItems.push({
+      id: "svc-translation-export",
+      css: "sv-action--last",
+      title: this.exportToCSVText,
+      tooltip: this.exportToCSVText,
+      component: "sv-action-bar-item",
+      action: () => {
+        this.exportToSCVFile("survey_translation.csv");
       },
     });
   }
@@ -710,6 +804,15 @@ export class Translation extends Base implements ITranslationLocales {
   }
   public getLocaleName(loc: string) {
     return editorLocalization.getLocaleName(loc, this.defaultLocale);
+  }
+  public removeLocale(locale: string) {
+    if (this.hasLocale(locale)) {
+      const index = this.locales.indexOf(locale);
+      const locales = this.locales;
+      locales.splice(index, 1);
+      this.locales = locales;
+      this.canMergeLocaleWithDefault = this.hasLocale(this.defaultLocale);
+    }
   }
   public hasLocale(locale: string): boolean {
     var locales = this.locales;

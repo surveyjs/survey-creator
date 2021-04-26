@@ -2220,3 +2220,106 @@ QUnit.test("Update expressions in copyElements", function (assert) {
   );
   assert.equal(newPanel.questions[1].visible, true, "Do not make it invisible");
 });
+QUnit.test("Update expressions on deleting a question", function (assert) {
+  var creator = new SurveyCreator();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        visibleIf: "{question2} = 1",
+      },
+      {
+        type: "text",
+        name: "question2",
+      },
+    ],
+  };
+  assert.equal(
+    creator.survey.getQuestionByName("question1").visibleIf,
+    "{question2} = 1",
+    "Initial visibleIf is here"
+  );
+  creator.deleteElement(creator.survey.getQuestionByName("question2"));
+  assert.equal(
+    creator.survey.getQuestionByName("question1").visibleIf,
+    "",
+    "VisibleIf is empty"
+  );
+});
+QUnit.test(
+  "Update expressions on deleting a panel with questions",
+  function (assert) {
+    var creator = new SurveyCreator();
+    creator.JSON = {
+      elements: [
+        {
+          type: "text",
+          name: "question1",
+          visibleIf: "{question2} = 1",
+        },
+        {
+          type: "panel",
+          name: "panel1",
+          elements: [{ type: "text", name: "question2" }],
+        },
+      ],
+    };
+    assert.equal(
+      creator.survey.getQuestionByName("question1").visibleIf,
+      "{question2} = 1",
+      "Initial visibleIf is here"
+    );
+    creator.deleteElement(
+      <Survey.Base>(<any>creator.survey.getPanelByName("panel1"))
+    );
+    assert.equal(
+      creator.survey.getQuestionByName("question1").visibleIf,
+      "",
+      "VisibleIf is empty"
+    );
+  }
+);
+QUnit.test(
+  "Update expressions on deleting a page with questions",
+  function (assert) {
+    var creator = new SurveyCreator();
+    creator.JSON = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "text",
+              name: "question1",
+              visibleIf: "{question2} = 1",
+            },
+          ],
+        },
+        {
+          name: "page2",
+          elements: [
+            {
+              type: "panel",
+              name: "panel1",
+              elements: [{ type: "text", name: "question2" }],
+            },
+          ],
+        },
+      ],
+    };
+    assert.equal(
+      creator.survey.getQuestionByName("question1").visibleIf,
+      "{question2} = 1",
+      "Initial visibleIf is here"
+    );
+    creator.deleteElement(
+      <Survey.Base>(<any>creator.survey.getPageByName("page2"))
+    );
+    assert.equal(
+      creator.survey.getQuestionByName("question1").visibleIf,
+      "",
+      "VisibleIf is empty"
+    );
+  }
+);

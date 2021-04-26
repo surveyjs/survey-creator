@@ -5,9 +5,9 @@ import {
   SurveyTrigger,
   Serializer,
 } from "survey-core";
-import { editorLocalization } from "../editorLocalization";
-import { ExpressionToDisplayText } from "../expressionToDisplayText";
-import { ISurveyCreatorOptions } from "../settings";
+import { editorLocalization } from "../../editorLocalization";
+import { ExpressionToDisplayText } from "../../expressionToDisplayText";
+import { ISurveyCreatorOptions } from "../../settings";
 
 export function getLogicString(name: string) {
   return editorLocalization.getString("ed.lg." + name);

@@ -47,7 +47,7 @@ var packagePlatformJson = {
     "TypeScript"
   ],
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
-  license: "https://surveyjs.io/Licenses#SurveyCreator",
+  license: "SEE LICENSE IN LICENSE",
   files: [
     "surveyeditor.css",
     "surveyeditor.min.css",
@@ -91,7 +91,7 @@ var buildPlatformJson = {
     "TypeScript"
   ],
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
-  license: "https://surveyjs.io/Licenses#SurveyCreator",
+  license: "SEE LICENSE IN LICENSE",
   files: [
     "survey-creator.css",
     "survey-creator.min.css",
@@ -174,6 +174,9 @@ module.exports = function(options) {
         );
 
         rimraf.sync(buildPath + "typings");
+        fs.createReadStream("./LICENSE").pipe(
+          fs.createWriteStream(buildPath + "LICENSE")
+        );
         fs.createReadStream("./README.md").pipe(
           fs.createWriteStream(buildPath + "README.md")
         );
@@ -193,6 +196,9 @@ module.exports = function(options) {
           copyToBuild("survey-creator.min.js", "surveyeditor.min.js");
           copyToBuild("survey-creator.min.css", "surveyeditor.min.css");
           copyToBuild("survey-creator.d.ts", "surveyeditor.d.ts");
+          fs.createReadStream("./LICENSE").pipe(
+            fs.createWriteStream(packagePath + "LICENSE")
+          );
           fs.createReadStream("./README.md").pipe(
             fs.createWriteStream(packagePath + "README.md")
           );

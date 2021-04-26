@@ -1,4 +1,5 @@
 import {
+  Base,
   PanelModel,
   SurveyModel,
   QuestionHtmlModel,
@@ -264,4 +265,79 @@ test("SelectionHistoryController: Update history on deleting elements", () => {
   expect(controller.hasInHistory(column)).toBeTruthy();
   creator.survey.getQuestionByName("question2").columns.splice(0, 1);
   expect(controller.hasInHistory(column)).toBeFalsy();
+});
+test("Update expressions on deleting a question", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        visibleIf: "{question2} = 1",
+      },
+      {
+        type: "text",
+        name: "question2",
+      },
+    ],
+  };
+  expect(creator.survey.getQuestionByName("question1").visibleIf).toEqual(
+    "{question2} = 1"
+  );
+  creator.deleteElement(creator.survey.getQuestionByName("question2"));
+  expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
+});
+test("Update expressions on deleting a panel with questions", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        visibleIf: "{question2} = 1",
+      },
+      {
+        type: "panel",
+        name: "panel1",
+        elements: [{ type: "text", name: "question2" }],
+      },
+    ],
+  };
+  expect(creator.survey.getQuestionByName("question1").visibleIf).toEqual(
+    "{question2} = 1"
+  );
+  creator.deleteElement(<Base>(<any>creator.survey.getPanelByName("panel1")));
+  expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
+});
+test("Update expressions on deleting a page with questions", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            visibleIf: "{question2} = 1",
+          },
+        ],
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "panel",
+            name: "panel1",
+            elements: [{ type: "text", name: "question2" }],
+          },
+        ],
+      },
+    ],
+  };
+  expect(creator.survey.getQuestionByName("question1").visibleIf).toEqual(
+    "{question2} = 1"
+  );
+  creator.deleteElement(<Base>(<any>creator.survey.getPageByName("page2")));
+  expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
 });

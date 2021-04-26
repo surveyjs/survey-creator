@@ -4,12 +4,7 @@ import {
   Base,
   QuestionDropdownModel,
 } from "survey-core";
-import {
-  Translation,
-  TranslationGroup,
-  TranslationItem,
-  TranslationItemBase,
-} from "../../src/tabs/translation";
+import { Translation } from "../../src/components/tabs/translation";
 
 test("Fire callback on base objects creation", () => {
   var survey = new SurveyModel();

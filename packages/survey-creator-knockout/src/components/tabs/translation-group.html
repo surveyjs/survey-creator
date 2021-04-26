@@ -15,8 +15,8 @@
         <th></th>
         <!-- ko foreach: $data.locales -->
         <th
-          data-bind="text: $parent.getLocaleName($data), style: {width: $parent.locWidth}"
-        ></th>
+          data-bind="style: {width: $parent.locWidth}"
+        ><span data-bind="text: $parent.getLocaleName($data)"></span><span data-bind="click: $parent.removeLocale, text: $parent.removeLocaleText"></span></th>
         <!-- /ko -->
       </tr>
     </thead>
