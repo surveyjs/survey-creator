@@ -10,10 +10,6 @@ const rimraf = require("rimraf");
 const packageJson = require("./package.json");
 const fs = require("fs");
 const replace = require("replace-in-file");
-const svgStoreUtils = require(path.resolve(
-  __dirname,
-  "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
-));
 
 const year = new Date().getFullYear();
 const banner = [

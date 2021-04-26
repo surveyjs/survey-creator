@@ -80,8 +80,7 @@
     "val-loader": "0.5.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-svgstore-plugin": "^4.1.0"
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "react": "^17.0.1",
