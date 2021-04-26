@@ -11,6 +11,7 @@ export * from "../components/tabs/test";
 export * from "../components/tabs/logic";
 export * from "../components/tabs/logic-ui";
 export * from "../components/tabs/translation";
+export * from "../components/tabs/designer";
 
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page";
@@ -27,7 +28,7 @@ export * from "../property-grid/property-grid-view-model";
 //export * from "../property-grid/modal-action";
 export * from "../property-grid/restfull";
 export * from "../property-grid/values";
-export { propertyGridCss } from "../propety-grid-theme/property-grid";
+export { propertyGridCss } from "../property-grid-theme/property-grid";
 export * from "../questionconverter";
 export * from "../svgbundle";
 export * from "../textWorker";
@@ -42,7 +43,7 @@ import "../components/tabbed-menu/tabbed-menu-item.scss";
 import "../components/tabbed-menu/tabbed-menu.scss";
 import "../components/toolbox/toolbox-item.scss";
 import "../components/toolbox/toolbox.scss";
-import "../propety-grid-theme/property-grid.scss";
+import "../property-grid-theme/property-grid.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
 

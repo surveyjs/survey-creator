@@ -13,7 +13,7 @@ import {
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { EditableObject } from "../propertyEditors/editableObject";
-import { propertyGridCss } from "../propety-grid-theme/property-grid";
+import { propertyGridCss } from "../property-grid-theme/property-grid";
 import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties,
