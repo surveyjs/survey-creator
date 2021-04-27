@@ -170,6 +170,41 @@ steps:
     ls
   displayName: 'Pre-debug survey-creator-react build'
 
+# copy survey-core and survey-ui builds from the latest library build to creator-kncokout and creator-react node_modules for f-f tests
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+    Contents: '**'
+    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
+    OverWrite: true
+  displayName: 'copy build from library for f-f tests'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-react-ui'
+    Contents: '**'
+    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
+    OverWrite: true
+  displayName: 'copy build from library for f-f tests'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+    Contents: '**'
+    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
+    OverWrite: true
+  displayName: 'copy build from library for f-f tests'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-knockout-ui'
+    Contents: '**'
+    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
+    OverWrite: true
+  displayName: 'copy build from library for f-f tests'
+
+# EO copy for f-f tests
+
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm run build
@@ -212,41 +247,6 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run test
   displayName: 'Unit tests creator v2 knockout'
-
-# copy survey-core and survey-ui builds from the latest library build to creator-kncokout and creator-react node_modules for f-f tests
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
-    Contents: '**'
-    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
-    OverWrite: true
-  displayName: 'copy build from library for f-f tests'
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-react-ui'
-    Contents: '**'
-    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
-    OverWrite: true
-  displayName: 'copy build from library for f-f tests'
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
-    Contents: '**'
-    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
-    OverWrite: true
-  displayName: 'copy build from library for f-f tests'
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-knockout-ui'
-    Contents: '**'
-    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
-    OverWrite: true
-  displayName: 'copy build from library for f-f tests'
-
-# EO copy for f-f tests
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
