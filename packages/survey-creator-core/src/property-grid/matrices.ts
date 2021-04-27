@@ -85,15 +85,16 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       };
       showDetailAction.visibleIndex = 0;
     }
-
-    actions.push({
-      id: "drag-row",
-      innerCss: "spg-matrixdynamic__drag-element",
-      showTitle: false,
-      action: () => {},
-      location: "start",
-      visibleIndex: 0,
-    });
+    if (this.allowDragRows) {
+      actions.push({
+        id: "drag-row",
+        innerCss: "spg-matrixdynamic__drag-element",
+        showTitle: false,
+        action: () => {},
+        location: "start",
+        visibleIndex: 0,
+      });
+    }
   }
   public onGetQuestionTitleActions(obj: Base, options: any): void {
     const question: QuestionMatrixDynamicModel = options.question;
@@ -105,6 +106,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         question.addRow();
       },
     });
+  }
+  protected get allowDragRows() {
+    return false;
   }
   protected createNewItem(
     matrix: QuestionMatrixDynamicModel,
@@ -389,6 +393,9 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       return;
     }
     arr.splice(0, arr.length);
+  }
+  protected get allowDragRows() {
+    return true;
   }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return obj.getType() + "@" + prop.name;

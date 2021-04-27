@@ -1557,7 +1557,7 @@ test("SurveyPropertyItemValuesEditor + koShowHeader", () => {
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  expect(choicesQuestion.showHeader).toBeTruthy();
+  expect(choicesQuestion.showHeader).toBeFalsy(); //according to design header is not shown for item values editor
 
   Serializer.findProperty("itemvalue", "text").visible = false;
   propertyGrid = new PropertyGridModelTester(question);
