@@ -1,7 +1,13 @@
 import { PropertyGridViewModel, CreatorBase } from "@survey/creator";
 import * as ko from "knockout";
-import { ImplementorBase, Survey } from "survey-knockout-ui";
+import {
+  ImplementorBase,
+  QuestionButtonGroup,
+  Survey,
+} from "survey-knockout-ui";
 import { Base } from "survey-core";
+import { Serializer } from "survey-core";
+import { QuestionFactory } from "survey-core";
 //import "./property-panel.scss";
 //import "../../survey-theme/survey.scss";
 const template = require("./property-panel.html");
@@ -23,4 +29,14 @@ ko.components.register("svc-property-panel", {
     },
   },
   template: template,
+});
+
+Serializer.overrideClassCreator("buttongroup", function () {
+  return new QuestionButtonGroup("");
+});
+
+QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
+  var q = new QuestionButtonGroup(name);
+  q.choices = QuestionFactory.DefaultChoices;
+  return q;
 });

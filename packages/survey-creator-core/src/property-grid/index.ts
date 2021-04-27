@@ -6,6 +6,7 @@ import {
   PanelModel,
   PanelModelBase,
   Question,
+  QuestionButtonGroupModel,
   QuestionMatrixDynamicModel,
   Serializer,
   settings,
@@ -20,6 +21,7 @@ import {
 } from "../questionEditors/questionEditor";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
+import { QuestionFactory } from "survey-core";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -971,7 +973,10 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any {
     return {
-      type: "dropdown",
+      type:
+        this.canRenderAsButtonGroup && prop.getChoices(obj).length < 5
+          ? "buttongroup"
+          : "dropdown",
       showOptionsCaption: false,
     };
   }
@@ -980,9 +985,6 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
-    if (this.canRenderAsButtonGroup && question.choices.length < 5) {
-      question.renderAs = "button-group";
-    }
   }
   private setChoicesCore(
     question: Question,
@@ -1156,3 +1158,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(
   new PropertyGridEditorQuestionSelectBase()
 );
+
+QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
+  return new QuestionButtonGroupModel(name);
+});

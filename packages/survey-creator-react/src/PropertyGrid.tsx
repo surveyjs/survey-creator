@@ -1,8 +1,13 @@
 import React from "react";
 import { PropertyGridViewModel, CreatorBase } from "@survey/creator";
 import { Base, SurveyModel } from "survey-core";
-import { Survey, SurveyElementBase, SurveyActionBar } from "survey-react-ui";
-
+import {
+  Survey,
+  SurveyElementBase,
+  SurveyActionBar,
+  ReactQuestionFactory,
+  SurveyQuestionButtonGroup,
+} from "survey-react-ui";
 interface IPropertyGridComponentProps {
   model: CreatorBase<SurveyModel>;
 }
@@ -50,5 +55,9 @@ class PropertyGridComponent extends SurveyElementBase<
      */
   }
 }
+
+ReactQuestionFactory.Instance.registerQuestion("buttongroup", (props) => {
+  return React.createElement(SurveyQuestionButtonGroup, props);
+});
 
 export default PropertyGridComponent;
