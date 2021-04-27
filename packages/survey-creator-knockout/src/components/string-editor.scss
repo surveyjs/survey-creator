@@ -1,0 +1,90 @@
+$primary: var(--primary, #19b394);
+$primary-light: var(--primary-light, rgba(25, 179, 148, 0.1));
+$foreground-light: var(--foreground-light, #909090);
+
+$base-unit: var(--base-unit, 8px);
+
+@function calcSize($multiplier) {
+  $result: calc(#{$multiplier} * #{$base-unit});
+  @return $result;
+}
+
+.svc-string-editor {
+  position: static;
+  .sv-string-editor {
+    outline: none;
+  }
+}
+
+.svc-string-editor__content {
+  display: inline-block;
+  position: relative;
+}
+
+.svc-string-editor__border {
+  position: absolute;
+  display: none;
+  top: calcSize(-1);
+  bottom: calcSize(-1);
+  left: calcSize(-1);
+  right: calcSize(-5);
+  border: calcSize(0.25) solid $primary;
+  border-radius: calcSize(0.5);
+}
+
+.svc-string-editor__controls {
+  position: absolute;
+  left: 100%;
+  height: 100%;
+  top: 0;
+  padding-left: calcSize(1);
+}
+
+.svc-string-editor__button {
+  display: none;
+  cursor: pointer;
+  use {
+    fill: $foreground-light;
+  }
+}
+.svc-string-editor__button:hover {
+  use {
+    fill: $primary;
+  }
+}
+
+.svc-string-editor__button--edit {
+  margin-top: calcSize(-2);
+  height: calcSize(2);
+  width: calcSize(2);
+  border-radius: 50%;
+  padding: calcSize(1);
+  line-height: calcSize(2);
+  &:hover {
+    background-color: $primary-light;
+  }
+}
+
+.svc-string-editor:hover:not(:focus-within) {
+  .svc-string-editor__button--edit {
+    display: inline-block;
+  }
+}
+
+.svc-string-editor__button--done {
+  margin-top: calc(50% - 10px);
+}
+
+.svc-string-editor:focus-within {
+  .svc-string-editor__button--done {
+    display: inline-block;
+  }
+  .svc-string-editor__border {
+    display: block;
+  }
+}
+
+// .sv-question__header,
+// .sv-title {
+//   position: relative;
+// }
