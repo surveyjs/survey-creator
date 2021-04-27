@@ -460,7 +460,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       newValue = options.newValue;
     }
     if (
-      !this.isValueEmpty(newValue) &&
+      newValue !== null &&
+      newValue !== undefined &&
       !Survey.Helpers.isTwoValueEquals(newValue, copiedValue)
     ) {
       this.koValue(newValue);
