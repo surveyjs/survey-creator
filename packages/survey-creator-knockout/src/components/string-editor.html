@@ -3,14 +3,14 @@
         <div class="svc-string-editor__border">
         </div>
         <!-- ko ifnot: koHasHtml -->
-        <span class="sv-string-editor" style="position: static;" data-bind="text: editValue, event: { blur: onInput, keydown: onKeyDown, click: onClick, clickBubble: false }" contenteditable="true"></span>
+        <span class="sv-string-editor" data-bind="text: editValue, event: { blur: onInput, keydown: onKeyDown, click: onClick, clickBubble: false }" contenteditable="true"></span>
         <!-- /ko -->
         <!-- ko if: koHasHtml -->
-        <span class="sv-string-editor" style="position: static;" data-bind="html: editValue, event: { blur: onInput, click: onClick, clickBubble: false }" contenteditable="true"></span>
+        <span class="sv-string-editor" data-bind="html: editValue, event: { blur: onInput, click: onClick, clickBubble: false }" contenteditable="true"></span>
         <!-- /ko -->
         <div class="svc-string-editor__controls">
             <sv-svg-icon class="svc-string-editor__button svc-string-editor__button--edit" data-bind="click: edit" params="iconName: 'icon-pencil', size: 16"></sv-svg-icon>
-            <sv-svg-icon class="svc-string-editor__button svc-string-editor__button--done" data-bind="click: done" params="iconName: 'icon-check', size: 20"></sv-svg-icon>
+            <sv-svg-icon class="svc-string-editor__button svc-string-editor__button--done" data-bind="click: done" params="iconName: 'icon-check', size: 22"></sv-svg-icon>
         </div>
     </span>
 </span>
