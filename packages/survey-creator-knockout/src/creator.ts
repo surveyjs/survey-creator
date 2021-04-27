@@ -15,6 +15,9 @@ class DesignTimeSurveyModel extends Survey {
   public getElementWrapperComponentName(element: SurveyElement): string {
     if (element.isDesignMode) {
       if (element instanceof Question) {
+        if (element.getType() == "dropdown") {
+          return "svc-dropdown-question";
+        }
         if (element.koElementType() == "survey-question") {
           return "svc-question";
         }

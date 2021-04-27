@@ -12,6 +12,7 @@ export * from "../components/tabs/translation";
 
 export * from "../components/page";
 export * from "../components/question";
+export * from "../components/question-dropdown";
 export * from "../components/item-value";
 export * from "../components/panel";
 

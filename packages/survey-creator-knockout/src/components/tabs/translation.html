@@ -17,3 +17,10 @@
     <!-- /ko -->
   </div>
 </div>
+<script type="text/html" id="svd-translation-item">
+  <textarea
+    class="form-control"
+    style="width: 100%;"
+    data-bind="disable: item.readOnly, value:$data.text, attr: {placeholder: $data.placeholder}"
+  ></textarea>
+</script>
