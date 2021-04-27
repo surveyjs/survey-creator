@@ -22,7 +22,7 @@ export class ItemValueWrapperViewModel extends Base {
     public item: ItemValue
   ) {
     super();
-    this.isNew = !question["isItemInList"](item);
+    this.isNew = !question.isItemInList(item);
     if (question.noneItem === item) {
     } else if (question.otherItem === item) {
     } else if (
@@ -51,7 +51,7 @@ export class ItemValueWrapperViewModel extends Base {
       const nextValue = model.creator.getNextItemValue(model.question);
       model.item.value = nextValue;
     }
-    this.isNew = !model.question["isItemInList"](model.item);
+    this.isNew = !model.question.isItemInList(model.item);
   }
   public remove(model: ItemValueWrapperViewModel) {
     if (model.question.noneItem === model.item) {
