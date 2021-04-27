@@ -1,7 +1,6 @@
 import React from "react";
 import { CSSProperties } from "react";
 
-import TabbedMenuComponent from "./TabbedMenuComponent";
 import {
   Base,
   Question,
@@ -23,6 +22,8 @@ import {
   SurveyLocStringViewer,
 } from "survey-react-ui";
 import { ICreatorOptions, CreatorBase, ITabbedMenuItem } from "@survey/creator";
+import TabbedMenuComponent from "./TabbedMenuComponent";
+import { editableStringRendererName } from "./components/StringEditor";
 
 StylesManager.applyTheme("modern");
 
@@ -134,6 +135,10 @@ class DesignTimeSurveyModel extends Model {
       creator: this.creator,
       question
     };
+  }
+  public getRendererForString(element: Base, name: string): string {
+    if (this.isDesignMode) return editableStringRendererName;
+    return undefined;
   }
 }
 class SurveyCreator extends CreatorBase<SurveyModel> {

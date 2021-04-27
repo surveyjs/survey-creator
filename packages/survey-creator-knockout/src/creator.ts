@@ -64,7 +64,6 @@ class DesignTimeSurveyModel extends Survey {
     return row;
   }
 
-  
   public getRendererForString(element: Base, name: string): string {
     if (this.isDesignMode) return editableStringRendererName;
     return undefined;

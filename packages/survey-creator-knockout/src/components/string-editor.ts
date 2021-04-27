@@ -1,5 +1,4 @@
 import * as ko from "knockout";
-import "./string-editor.scss";
 const template = require("./string-editor.html");
 
 export class StringEditorViewModel {
