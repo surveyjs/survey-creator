@@ -108,6 +108,9 @@ class DesignTimeSurveyModel extends Model {
   public getElementWrapperComponentName(element: SurveyElement): string {
     if (element.isDesignMode) {
       if (element instanceof Question) {
+        if (element.getType() == "dropdown") {
+          return "svc-dropdown-question";
+        }
         return "svc-question";
       }
       if (element instanceof PanelModel) {
