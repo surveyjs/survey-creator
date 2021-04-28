@@ -65,6 +65,9 @@
   .sv-svg-icon {
     vertical-align: bottom;
   }
+  &.sv-svg-icon {
+    overflow: visible;
+  }
 }
 
 .svc-string-editor:hover:not(:focus-within) {
