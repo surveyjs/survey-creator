@@ -2443,6 +2443,29 @@ QUnit.test("onPropertyValueChanging callback, Bug #438", function (assert) {
   stringProperty.apply();
   assert.equal(question.title, "ss", "The value has been trimmed");
 });
+QUnit.test(
+  "onPropertyValueChanging callback, set empty string, Bug #1158",
+  function (assert) {
+    var question = new Survey.QuestionText("q1");
+    var property = Survey.Serializer.findProperty("question", "name");
+    var stringProperty = new SurveyStringPropertyEditor(property);
+    stringProperty.beforeShow();
+    stringProperty.onChanged = (newValue: any) => {
+      question.name = newValue;
+    };
+    stringProperty.object = question;
+    var options = new EditorOptionsTests();
+    options.doValueChangingCallback = function (options) {
+      options.newValue = options.newValue.trim();
+    };
+    stringProperty.options = options;
+    stringProperty.koValue("   ");
+    stringProperty.apply();
+    assert.equal(stringProperty.koValue(), "", "The value has been trimmed");
+    assert.equal(stringProperty.hasError(), true, "There is an error");
+    assert.equal(question.name, "q1", "The value is not changed");
+  }
+);
 
 QUnit.test(
   "SurveyPropertyMultipleValuesEditor - categories ",

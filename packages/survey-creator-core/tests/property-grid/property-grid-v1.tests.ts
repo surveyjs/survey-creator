@@ -1492,6 +1492,20 @@ test("onPropertyValueChanging callback, Bug #438", () => {
   titleQuestion.value = " ss   ";
   expect(question.title).toEqual("ss");
 });
+test("onPropertyValueChanging callback, set empty string, Bug#1158", () => {
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  options.onValueChangingCallback = function (options) {
+    options.newValue = options.newValue.trim();
+  };
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var titleQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("name")
+  );
+  titleQuestion.value = "  ";
+  expect(titleQuestion.errors).toHaveLength(1);
+  expect(question.name).toEqual("q1");
+});
 /* TODO fix
 test("SurveyPropertyItemValuesEditor + item.koShowDetails", () => {
   var survey = new SurveyModel();

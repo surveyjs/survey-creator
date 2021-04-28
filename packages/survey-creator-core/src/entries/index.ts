@@ -43,6 +43,7 @@ import "../components/property-panel/property-panel-item.scss";
 import "../components/toolbox/toolbox.scss";
 import "../components/toolbox/toolbox-item.scss";
 import "../components/button.scss";
+import "../components/question-dropdown.scss";
 import "../survey-theme/survey.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
