@@ -44,7 +44,6 @@ import "../components/tabbed-menu/tabbed-menu.scss";
 import "../components/toolbox/toolbox-item.scss";
 import "../components/button.scss";
 import "../components/question-dropdown.scss";
-import "../survey-theme/survey.scss";
 import "../components/toolbox/toolbox.scss";
 import "../property-grid-theme/property-grid.scss";
 import "../utils/design.scss";
