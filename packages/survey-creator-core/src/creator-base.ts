@@ -24,6 +24,7 @@ import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./surveyHelper";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
+import "./components/string-editor.scss"
 import { ICreatorSelectionOwner } from "./controllers/controller-base";
 import { PagesController } from "./controllers/pages-controller";
 import { SelectionHistoryController } from "./controllers/selection-history-controller";

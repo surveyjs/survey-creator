@@ -1,0 +1,17 @@
+.svc-question__dropdown-choices {
+  display: none;
+  margin-top: 16px;
+}
+
+.svc-question__content--selected {
+  .svc-question__dropdown-choices {
+    display: block;
+  }
+}
+
+.svc-question__dropdown-choice {
+  padding: 4px 0;
+  .svc-item-value__item {
+    padding-left: 16px;
+  }
+}

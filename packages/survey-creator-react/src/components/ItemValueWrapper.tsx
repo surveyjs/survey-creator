@@ -5,7 +5,7 @@ import { QuestionSelectBase, Base, ItemValue } from "survey-core";
 import {
   ReactElementFactory,
   SurveyElementBase,
-  SvgIcon,
+  SvgIcon
 } from "survey-react-ui";
 
 interface ItemValueAdornerComponentProps {

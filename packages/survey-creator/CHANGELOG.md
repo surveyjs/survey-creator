@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.45](https://github.com/surveyjs/survey-creator/compare/v1.8.44...v1.8.45) (2021-04-28)
+
+
+### Bug Fixes
+
+* creator onPropertyValueChanging doesn't work correct on setting empty string as new value [#1158](https://github.com/surveyjs/survey-creator/issues/1158) ([a99738d](https://github.com/surveyjs/survey-creator/commit/a99738ddd599b65a563dcc4f4bc459b77017d9f8))
+
 ### [1.8.44](https://github.com/surveyjs/survey-creator/compare/v1.8.43...v1.8.44) (2021-04-20)
 
 
