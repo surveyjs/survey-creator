@@ -1,1 +1,391 @@
-{"fixtures":[{"name":"Add new question","pageUrl":"http://localhost:8080/testCafe/testcafe.html","tests":[{"name":"Add a New Question","commands":[{"type":"maximize-window","studio":{},"callsite":"0"},{"type":"assertion","studio":{"assertionMode":"checkElement","selectors":[{"rawSelector":{"type":"js-expr","value":"Selector('span').withText('Add a New Question').visible"},"ruleType":"$text$"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-text.svc-text--normal.svc-text--bold').nth(1).visible"},"ruleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-page__add-new-question span').withText('Add a New Question').visible"},"ruleType":"$text$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-page__add-new-question .svc-text.svc-text--normal.svc-text--bold').visible"},"ruleType":"class","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-page__add-new-question [data-bind=\"text: addNewQuestionText\"]').visible"},"ruleType":"$attr$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-page__add-new-question span').visible"},"ruleType":"$dom$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind=\"text: addNewQuestionText\"]').visible"},"ruleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] span').withText('Add a New Question').visible"},"ruleType":"$text$","ancestorRuleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] .svc-text.svc-text--normal.svc-text--bold').visible"},"ruleType":"class","ancestorRuleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('div survey-creator div div').nth(7).find('div div div').nth(44).find('div svc-page div div').nth(2).find('span').visible"},"ruleType":"$dom$"}],"selectorType":"CSS Selector","selectorPostfix":".visible"},"callsite":"1","assertionType":"ok","actual":{"type":"js-expr","value":"Selector('span').withText('Add a New Question').visible"},"options":{}},{"selector":{"type":"js-expr","value":"Selector('span').withText('Add a New Question')"},"studio":{"selectors":[{"rawSelector":{"type":"js-expr","value":"Selector('span').withText('Add a New Question')"},"ruleType":"$text$"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-text.svc-text--normal.svc-text--bold').nth(1)"},"ruleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-page__add-new-question span').withText('Add a New Question')"},"ruleType":"$text$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-page__add-new-question .svc-text.svc-text--normal.svc-text--bold')"},"ruleType":"class","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-page__add-new-question [data-bind=\"text: addNewQuestionText\"]')"},"ruleType":"$attr$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-page__add-new-question span')"},"ruleType":"$dom$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind=\"text: addNewQuestionText\"]')"},"ruleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] span').withText('Add a New Question')"},"ruleType":"$text$","ancestorRuleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] .svc-text.svc-text--normal.svc-text--bold')"},"ruleType":"class","ancestorRuleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('div survey-creator div div').nth(7).find('div div div').nth(44).find('div svc-page div div').nth(2).find('span')"},"ruleType":"$dom$"}],"useOffsets":false,"offsetX":51,"offsetY":11},"options":{},"type":"click","callsite":"3"},{"type":"assertion","studio":{"assertionMode":"checkElement","selectors":[{"rawSelector":{"type":"js-expr","value":"Selector('#sq_209_ariaTitle span').withText('question1').visible"},"ruleType":"$text$","ancestorRuleType":"id"},{"rawSelector":{"type":"js-expr","value":"Selector('#sq_209_ariaTitle .sv-string-editor').visible"},"ruleType":"class","ancestorRuleType":"id"},{"rawSelector":{"type":"js-expr","value":"Selector('#sq_209_ariaTitle [data-bind^=\"text: editValue, event: { blur: onInput, click: on\"]').visible"},"ruleType":"$attr$","ancestorRuleType":"id"},{"rawSelector":{"type":"js-expr","value":"Selector('#sq_209_ariaTitle span').nth(1).visible"},"ruleType":"$dom$","ancestorRuleType":"id"},{"rawSelector":{"type":"js-expr","value":"Selector('span').withText('question1').visible"},"ruleType":"$text$"},{"rawSelector":{"type":"js-expr","value":"Selector('.sv-string-editor').nth(2).visible"},"ruleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.sv-title.sv-question__title span').withText('question1').visible"},"ruleType":"$text$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind^=\"text: editValue, event: { blur: onInput, click: on\"]').nth(2).visible"},"ruleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind^=\"css: cssTitle, attr: { \\\\\\'aria-label\\\\\\': question.locT\"] span').withText('question1').visible"},"ruleType":"$text$","ancestorRuleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('div survey-creator div div').nth(7).find('div div div').nth(44).find('div svc-page div div div').nth(1).find('div div div div h5 span').nth(1).visible"},"ruleType":"$dom$"}],"selectorType":"CSS Selector","selectorPostfix":".visible"},"callsite":"4","assertionType":"ok","actual":{"type":"js-expr","value":"Selector('span').withText('question1').visible"},"options":{}},{"type":"assertion","studio":{"assertionMode":"checkElement","selectors":[{"rawSelector":{"type":"js-expr","value":"Selector('div').withText('1. question1').nth(11).visible"},"ruleType":"$text$"},{"rawSelector":{"type":"js-expr","value":"Selector('[class^=\"svc-question__content svc-question__content--selec\"]').visible"},"ruleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-question__adorner div').withText('1. question1').visible"},"ruleType":"$text$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-question__adorner [class^=\"svc-question__content svc-question__content--selec\"]').visible"},"ruleType":"class","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-question__adorner [data-bind^=\"click: koSelect, clickBubble: false, css: css(), a\"][data-question-name=\"question1\"]').visible"},"ruleType":"$attr$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('.svc-question__adorner div').visible"},"ruleType":"$dom$","ancestorRuleType":"class"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind^=\"click: koSelect, clickBubble: false, css: css(), a\"][data-question-name=\"question1\"]').visible"},"ruleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind^=\"event: { dragover: koDragOver, dragend: koDragEnd \"] div').withText('1. question1').visible"},"ruleType":"$text$","ancestorRuleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('[data-bind^=\"event: { dragover: koDragOver, dragend: koDragEnd \"] [class^=\"svc-question__content svc-question__content--selec\"]').visible"},"ruleType":"class","ancestorRuleType":"$attr$"},{"rawSelector":{"type":"js-expr","value":"Selector('div survey-creator div div').nth(7).find('div div div').nth(44).find('div svc-page div div div').nth(1).find('div div').visible"},"ruleType":"$dom$"}],"selectorType":"CSS Selector","selectorPostfix":".visible"},"callsite":"5","assertionType":"ok","actual":{"type":"js-expr","value":"Selector('[class^=\"svc-question__content svc-question__content--selec\"]').visible"},"options":{}}]}]}]}
+{
+  "fixtures": [
+    {
+      "name": "Add new question",
+      "pageUrl": "http://localhost:8080/testCafe/testcafe.html",
+      "tests": [
+        {
+          "name": "Add a New Question",
+          "commands": [
+            {
+              "type": "maximize-window",
+              "studio": {},
+              "callsite": "0"
+            },
+            {
+              "type": "assertion",
+              "studio": {
+                "assertionMode": "checkElement",
+                "selectors": [
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('span').withText('Add a New Question').visible"
+                    },
+                    "ruleType": "$text$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-text.svc-text--normal.svc-text--bold').nth(1).visible"
+                    },
+                    "ruleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-page__add-new-question span').withText('Add a New Question').visible"
+                    },
+                    "ruleType": "$text$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-page__add-new-question .svc-text.svc-text--normal.svc-text--bold').visible"
+                    },
+                    "ruleType": "class",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-page__add-new-question [data-bind=\"text: addNewQuestionText\"]').visible"
+                    },
+                    "ruleType": "$attr$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-page__add-new-question span').visible"
+                    },
+                    "ruleType": "$dom$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind=\"text: addNewQuestionText\"]').visible"
+                    },
+                    "ruleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] span').withText('Add a New Question').visible"
+                    },
+                    "ruleType": "$text$",
+                    "ancestorRuleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] .svc-text.svc-text--normal.svc-text--bold').visible"
+                    },
+                    "ruleType": "class",
+                    "ancestorRuleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('div survey-creator div div').nth(7).find('div div div').nth(44).find('div svc-page div div').nth(2).find('span').visible"
+                    },
+                    "ruleType": "$dom$"
+                  }
+                ],
+                "selectorType": "CSS Selector",
+                "selectorPostfix": ".visible"
+              },
+              "callsite": "1",
+              "assertionType": "ok",
+              "actual": {
+                "type": "js-expr",
+                "value": "Selector('span').withText('Add a New Question').visible"
+              },
+              "options": {}
+            },
+            {
+              "selector": {
+                "type": "js-expr",
+                "value": "Selector('span').withText('Add a New Question')"
+              },
+              "studio": {
+                "selectors": [
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('span').withText('Add a New Question')"
+                    },
+                    "ruleType": "$text$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-text.svc-text--normal.svc-text--bold').nth(1)"
+                    },
+                    "ruleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-page__add-new-question span').withText('Add a New Question')"
+                    },
+                    "ruleType": "$text$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-page__add-new-question .svc-text.svc-text--normal.svc-text--bold')"
+                    },
+                    "ruleType": "class",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-page__add-new-question [data-bind=\"text: addNewQuestionText\"]')"
+                    },
+                    "ruleType": "$attr$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-page__add-new-question span')"
+                    },
+                    "ruleType": "$dom$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind=\"text: addNewQuestionText\"]')"
+                    },
+                    "ruleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] span').withText('Add a New Question')"
+                    },
+                    "ruleType": "$text$",
+                    "ancestorRuleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] .svc-text.svc-text--normal.svc-text--bold')"
+                    },
+                    "ruleType": "class",
+                    "ancestorRuleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('div survey-creator div div').nth(7).find('div div div').nth(44).find('div svc-page div div').nth(2).find('span')"
+                    },
+                    "ruleType": "$dom$"
+                  }
+                ],
+                "useOffsets": false,
+                "offsetX": 51,
+                "offsetY": 11
+              },
+              "options": {},
+              "type": "click",
+              "callsite": "3"
+            },
+            {
+              "type": "assertion",
+              "studio": {
+                "assertionMode": "checkElement",
+                "selectors": [
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('#sq_209_ariaTitle span').withText('question1').visible"
+                    },
+                    "ruleType": "$text$",
+                    "ancestorRuleType": "id"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('#sq_209_ariaTitle .sv-string-editor').visible"
+                    },
+                    "ruleType": "class",
+                    "ancestorRuleType": "id"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('#sq_209_ariaTitle [data-bind^=\"text: editValue, event: { blur: onInput, click: on\"]').visible"
+                    },
+                    "ruleType": "$attr$",
+                    "ancestorRuleType": "id"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('#sq_209_ariaTitle span').nth(1).visible"
+                    },
+                    "ruleType": "$dom$",
+                    "ancestorRuleType": "id"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('span').withText('question1').visible"
+                    },
+                    "ruleType": "$text$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.sv-string-editor').nth(2).visible"
+                    },
+                    "ruleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.sv-title.sv-question__title span').withText('question1').visible"
+                    },
+                    "ruleType": "$text$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind^=\"text: editValue, event: { blur: onInput, click: on\"]').nth(2).visible"
+                    },
+                    "ruleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind^=\"css: cssTitle, attr: { \\\\\\'aria-label\\\\\\': question.locT\"] span').withText('question1').visible"
+                    },
+                    "ruleType": "$text$",
+                    "ancestorRuleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('div survey-creator div div').nth(7).find('div div div').nth(44).find('div svc-page div div div').nth(1).find('div div div div h5 span').nth(1).visible"
+                    },
+                    "ruleType": "$dom$"
+                  }
+                ],
+                "selectorType": "CSS Selector",
+                "selectorPostfix": ".visible"
+              },
+              "callsite": "4",
+              "assertionType": "ok",
+              "actual": {
+                "type": "js-expr",
+                "value": "Selector('span').withText('question1').visible"
+              },
+              "options": {}
+            },
+            {
+              "type": "assertion",
+              "studio": {
+                "assertionMode": "checkElement",
+                "selectors": [
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('div').withText('1. question1').nth(11).visible"
+                    },
+                    "ruleType": "$text$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[class^=\"svc-question__content svc-question__content--selec\"]').visible"
+                    },
+                    "ruleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-question__adorner div').withText('1. question1').visible"
+                    },
+                    "ruleType": "$text$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-question__adorner [class^=\"svc-question__content svc-question__content--selec\"]').visible"
+                    },
+                    "ruleType": "class",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-question__adorner [data-bind^=\"click: koSelect, clickBubble: false, css: css(), a\"][data-question-name=\"question1\"]').visible"
+                    },
+                    "ruleType": "$attr$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('.svc-question__adorner div').visible"
+                    },
+                    "ruleType": "$dom$",
+                    "ancestorRuleType": "class"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind^=\"click: koSelect, clickBubble: false, css: css(), a\"][data-question-name=\"question1\"]').visible"
+                    },
+                    "ruleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind^=\"event: { dragover: koDragOver, dragend: koDragEnd \"] div').withText('1. question1').visible"
+                    },
+                    "ruleType": "$text$",
+                    "ancestorRuleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('[data-bind^=\"event: { dragover: koDragOver, dragend: koDragEnd \"] [class^=\"svc-question__content svc-question__content--selec\"]').visible"
+                    },
+                    "ruleType": "class",
+                    "ancestorRuleType": "$attr$"
+                  },
+                  {
+                    "rawSelector": {
+                      "type": "js-expr",
+                      "value": "Selector('div survey-creator div div').nth(7).find('div div div').nth(44).find('div svc-page div div div').nth(1).find('div div').visible"
+                    },
+                    "ruleType": "$dom$"
+                  }
+                ],
+                "selectorType": "CSS Selector",
+                "selectorPostfix": ".visible"
+              },
+              "callsite": "5",
+              "assertionType": "ok",
+              "actual": {
+                "type": "js-expr",
+                "value": "Selector('[class^=\"svc-question__content svc-question__content--selec\"]').visible"
+              },
+              "options": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

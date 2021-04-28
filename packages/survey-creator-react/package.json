@@ -18,7 +18,7 @@
     "test_debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "doc:gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "doc:update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
-    "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500 --reporter minimal\"",
+    "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500\"",
     "testcafe:ci": "http-server --silent & testcafe chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal",
     "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/json/json.js --reporter minimal --debug-mode\"",
     "release": "standard-version --message \"Release: %s [skip ci]\"",
