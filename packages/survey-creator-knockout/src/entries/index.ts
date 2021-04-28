@@ -18,8 +18,6 @@ export * from "../components/panel";
 
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";
-export * from "../components/property-editors/button-group/button-group";
-export * from "../components/property-editors/button-group/button-group-item";
 export * from "../components/property-panel/property-panel";
 export * from "../components/results";
 export * from "../components/simulator";

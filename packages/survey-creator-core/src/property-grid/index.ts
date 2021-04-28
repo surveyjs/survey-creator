@@ -1,25 +1,27 @@
 import {
   Base,
-  JsonObjectProperty,
-  Serializer,
-  Question,
-  PanelModelBase,
-  PanelModel,
-  SurveyModel,
   FunctionFactory,
   Helpers,
-  settings,
+  JsonObjectProperty,
+  PanelModel,
+  PanelModelBase,
+  Question,
+  QuestionButtonGroupModel,
   QuestionMatrixDynamicModel,
+  Serializer,
+  settings,
+  SurveyModel,
 } from "survey-core";
+import { editorLocalization } from "../editorLocalization";
+import { EditableObject } from "../propertyEditors/editableObject";
+import { propertyGridCss } from "../property-grid-theme/property-grid";
 import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties,
 } from "../questionEditors/questionEditor";
-import { EditableObject } from "../propertyEditors/editableObject";
-import { editorLocalization } from "../editorLocalization";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
+import { EmptySurveyCreatorOptions, ISurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
-import { creatorCss } from "../survey-theme/creator-css";
+import { QuestionFactory } from "survey-core";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -115,6 +117,7 @@ export interface IPropertyGridEditor {
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
   onMatrixAllowRemoveRow?: (obj: Base, options: any) => boolean;
+  onGetQuestionTitleActions?: (obj: Base, options: any) => void;
 }
 
 export var PropertyGridEditorCollection = {
@@ -208,6 +211,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetMatrixRowAction) {
       res.onGetMatrixRowAction(obj, options, setObjFunc);
+    }
+  },
+  onGetQuestionTitleActions(obj: Base, prop: JsonObjectProperty, options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onGetQuestionTitleActions) {
+      res.onGetQuestionTitleActions(obj, options);
     }
   },
 };
@@ -372,8 +381,10 @@ export class PropertyJSONGenerator {
       if (!!prop.visibleIf) {
         q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
       }
+      q.descriptionLocation = "hidden";
       var helpText = PropertiesHelpTexts.instance.getHelpText(this.obj, prop);
       if (!!helpText) {
+        q.descriptionLocation = "underTitle";
         q.description = helpText;
       }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop);
@@ -565,7 +576,7 @@ export class PropertyGridModel {
       this.surveyValue.dispose();
     }
     this.surveyValue = this.createSurvey(json);
-    this.surveyValue.css = creatorCss;
+    this.surveyValue.css = propertyGridCss;
     var page = this.surveyValue.createNewPage("p1");
     if (!this.obj) return;
     new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
@@ -585,6 +596,7 @@ export class PropertyGridModel {
     });
     this.survey.onGetQuestionTitleActions.add((sender, options) => {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
+      this.onGetQuestionTitleActions(options);
     });
     this.survey.onMatrixCellCreated.add((sender, options) => {
       this.onMatrixCellCreated(options);
@@ -766,6 +778,13 @@ export class PropertyGridModel {
       (obj: Base): void => {
         this.setObj(obj);
       }
+    );
+  }
+  private onGetQuestionTitleActions(options: any) {
+    PropertyGridEditorCollection.onGetQuestionTitleActions(
+      this.obj,
+      options.question.property,
+      options
     );
   }
   private onMatrixCellValueChanged(options: any) {
@@ -954,7 +973,10 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any {
     return {
-      type: "dropdown",
+      type:
+        this.canRenderAsButtonGroup && prop.getChoices(obj).length < 5
+          ? "buttongroup"
+          : "dropdown",
       showOptionsCaption: false,
     };
   }
@@ -963,9 +985,6 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
-    if (this.canRenderAsButtonGroup && question.choices.length < 5) {
-      question.renderAs = "button-group";
-    }
   }
   private setChoicesCore(
     question: Question,
@@ -1139,3 +1158,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(
   new PropertyGridEditorQuestionSelectBase()
 );
+
+QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
+  return new QuestionButtonGroupModel(name);
+});

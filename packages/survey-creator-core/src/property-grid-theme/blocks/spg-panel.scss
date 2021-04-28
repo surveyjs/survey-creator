@@ -1,4 +1,4 @@
-.svc-survey-panel__title {
+.spg-panel__title {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -19,41 +19,41 @@
 }
 
 //todo: implement state in survey-library
-.svc-survey-panel__title:disabled,
-.svc-survey-panel__title:disabled:hover {
+.spg-panel__title:disabled,
+.spg-panel__title:disabled:hover {
   background-color: $background;
   color: $foreground-disabled;
   cursor: default;
 }
 
-.svc-survey-panel__title--expandable:hover {
+.spg-panel__title--expandable:hover {
   background-color: $background-dim;
   color: $foreground-light;
   font-weight: 400;
 }
 
 //todo: implement state in survey-library
-.svc-survey-panel__title--expanded,
-.svc-survey-panel__title--expanded:hover {
+.spg-panel__title--expanded,
+.spg-panel__title--expanded:hover {
   color: $foreground;
   font-weight: 600;
   background-color: $background;
 }
 
-.svc-survey-panel__content {
-  display: flex;
+.spg-panel__content {
+  display: flex !important;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: calcSize(1) calcSize(2) calcSize(3);
+  padding: 0 calcSize(2) calcSize(5);
   box-sizing: border-box;
   background: $background-dim;
   box-shadow: inset 0px -1px 0px #d6d6d6;
 }
 
-.svc-survey-panel__content {
-  .svc-survey-row {
-    margin: calcSize(1) 0;
+.spg-panel__content {
+  .spg-row {
     width: 100%;
+    margin-top: calcSize(2);
   }
 }
