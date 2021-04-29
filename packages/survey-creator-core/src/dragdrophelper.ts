@@ -6,7 +6,7 @@ import {
   Base,
   ItemValue,
   property,
-  SurveyElement,
+  settings,
   QuestionSelectBase,
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
@@ -283,10 +283,16 @@ export class DragDropHelper extends Base {
     draggedOverElement,
     isBottom
   ) {
+    const isTop = !isBottom;
     const choices = itemValueSourceQuestion.choices;
     const oldIndex = choices.indexOf(sourceElement);
-    const draggedOverItemIndex = choices.indexOf(draggedOverElement);
-    const newIndex = isBottom ? draggedOverItemIndex : draggedOverItemIndex - 1;
+    let newIndex = choices.indexOf(draggedOverElement);
+
+    if (oldIndex < newIndex && isTop) {
+      newIndex--;
+    } else if (oldIndex > newIndex && isBottom) {
+      newIndex++;
+    }
 
     choices.splice(oldIndex, 1);
     choices.splice(newIndex, 0, sourceElement);
