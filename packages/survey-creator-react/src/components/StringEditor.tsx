@@ -1,6 +1,6 @@
-import React from "react";
-import { LocalizableString } from "survey-core";
-import { ReactElementFactory, SvgIcon } from "survey-react-ui";
+import React from 'react';
+import { LocalizableString } from 'survey-core';
+import { ReactElementFactory, SvgIcon } from 'survey-react-ui';
 
 export class SurveyLocStringEditor extends React.Component<any, any> {
   private svStringEditorRef: React.RefObject<HTMLDivElement>;
@@ -30,11 +30,11 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     this.locStr.text = event.target.innerText;
   };
   onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
-    if(event.keyCode === 13) {
+    if (event.keyCode === 13) {
       this.svStringEditorRef.current.blur();
       this.done(event);
     }
-    if(event.keyCode === 27) {
+    if (event.keyCode === 27) {
       this.svStringEditorRef.current.blur();
       this.done(event);
     }
@@ -58,8 +58,8 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
       control = (
         <span
           ref={this.svStringEditorRef}
-          className="sv-string-editor"
-          contentEditable="true"
+          className='sv-string-editor'
+          contentEditable='true'
           suppressContentEditableWarning={true}
           style={this.style}
           dangerouslySetInnerHTML={htmlValue}
@@ -69,28 +69,31 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
         />
       );
     }
-    control = (
-      <span
-        ref={this.svStringEditorRef}
-        className="sv-string-editor"
-        contentEditable="true"
-        suppressContentEditableWarning={true}
-        style={this.style}
-        onBlur={this.onInput}
-        onClick={this.done}
-      >
-        {this.locStr.renderedHtml}
-      </span>
-    );
+    else {
+      control = (
+        <span
+          ref={this.svStringEditorRef}
+          className='sv-string-editor'
+          contentEditable='true'
+          suppressContentEditableWarning={true}
+          style={this.style}
+          onBlur={this.onInput}
+          onKeyDown={this.onKeyDown}
+          onClick={this.done}
+        >
+          {this.locStr.renderedHtml}
+        </span>
+      );
+    }
     return (
-      <span className="svc-string-editor" onClick={this.done}>
-        <span className="svc-string-editor__content">
-          <div className="svc-string-editor__border">
+      <span className='svc-string-editor' onClick={this.done}>
+        <span className='svc-string-editor__content'>
+          <div className='svc-string-editor__border'>
           </div>
           {control}
-          <div className="svc-string-editor__controls">
-            <SvgIcon className="svc-string-editor__button svc-string-editor__button--edit" onClick={this.edit} size={16} iconName={'icon-pencil'}></SvgIcon>
-            <SvgIcon className="svc-string-editor__button svc-string-editor__button--done" onClick={this.done} size={22} iconName={'icon-check'}></SvgIcon>
+          <div className='svc-string-editor__controls'>
+            <SvgIcon className='svc-string-editor__button svc-string-editor__button--edit' onClick={this.edit} size={16} iconName={'icon-pencil'}></SvgIcon>
+            <SvgIcon className='svc-string-editor__button svc-string-editor__button--done' onClick={this.done} size={22} iconName={'icon-check'}></SvgIcon>
           </div>
         </span>
       </span>
@@ -98,7 +101,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   }
 }
 
-export const editableStringRendererName = "svc-string-editor";
+export const editableStringRendererName = 'svc-string-editor';
 ReactElementFactory.Instance.registerElement(
   editableStringRendererName,
   (props) => {
