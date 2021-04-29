@@ -578,11 +578,30 @@ Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
     "hasSelectAll",
     "colCount",
     "titleLocation",
+    "rateValues",
     "choicesFromQuestion",
   ].forEach((propertyName) =>
     this.question.registerFunctionOnPropertyValueChanged(
       propertyName,
-      updateTriggerFunction
+      updateTriggerFunction,
+      "koElementType_Trigger"
+    )
+  );
+};
+
+Survey.QuestionRatingImplementor.prototype["onCreated"] = function () {
+  var q: any = this.question;
+  var updateTriggerFunction = function () {
+    setTimeout(() => q["koElementType"].notifySubscribers(), 0);
+    q.locStrsChanged();
+  };
+  [
+    "rateValues",
+  ].forEach((propertyName) =>
+    this.question.registerFunctionOnPropertyValueChanged(
+      propertyName,
+      updateTriggerFunction,
+      "koElementType_Trigger"
     )
   );
 };

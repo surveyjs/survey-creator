@@ -304,3 +304,47 @@ test("ctrl+Z click when editing title - #855", async (t) => {
     )
     .eql(2);
 });
+
+test(`rating change item`, async (t) => {
+  await t
+    .click(`[title~=Rating]`)
+    .click(`.sv_q_rating_item_text.item_editable`)
+    .typeText(`input:focus`, `new item`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(Selector(`.sv_q_rating_item_text.item_editable>span`).innerText)
+    .eql("new item")
+    .click(`.svd_question`)
+    .click(`[data-title='Rate Values']`)
+    .expect(Selector(`input[aria-label~=Text]`).exists)
+    .ok()
+    // .debug()
+    .expect(Selector(`input[aria-label~=Text]`).value)
+    .eql("new item")
+    // .wait(3000);
+});
+
+test(`rating add item from property grid`, async (t) => {
+  await t
+    .click(`[title~=Rating]`)
+    .click(`.svd_question`)
+    .click(`[data-title='Rate Values']`)
+    .expect(Selector(`input[aria-label~=Text]`).exists)
+    .notOk()
+    .click(`input[value='Add New']`)
+    .expect(Selector(`input[aria-label~=Text]`).exists)
+    .ok()
+    .expect(Selector(`.sv_q_rating_item_text.item_editable>span`).innerText)
+    .eql("item1")
+    .click(`.svd_question`)
+    .click(`.sv_q_rating_item_text.item_editable`)
+    .typeText(`input:focus`, `new item`)
+    .click(`input:focus+span.svda-edit-button`)
+    .expect(Selector(`.sv_q_rating_item_text.item_editable>span`).innerText)
+    .eql("new item")
+    .click(`.svd_question`)
+    .click(`[data-title='Rate Values']`)
+    .expect(Selector(`input[aria-label~=Text]`).exists)
+    .ok()
+    .expect(Selector(`input[aria-label~=Text]`).value)
+    .eql("new item")
+});
