@@ -14,8 +14,7 @@
   line-height: calcSize(3);
   text-align: center;
   color: $primary;
-
-  border: none;
+  border: 2px solid transparent;
   &:hover {
     box-shadow: 0 0 0 2px $primary;
   }

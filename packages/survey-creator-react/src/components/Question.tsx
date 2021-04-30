@@ -9,7 +9,7 @@ import {
   SurveyQuestion,
 } from "survey-react-ui";
 
-interface QuestionAdornerComponentProps {
+export interface QuestionAdornerComponentProps {
   element: JSX.Element;
   question: Question;
   componentData: any;
@@ -82,15 +82,6 @@ export class QuestionAdornerComponent extends SurveyElementBase<
     );
   }
 }
-
-// <!-- ko if: isEmptyElement -->
-// <div class="svc-panel__placeholder_frame">
-//   <div
-//     class="svc-panel__placeholder"
-//     data-bind="text: placeholderText"
-//   ></div>
-// </div>
-// <!-- /ko -->
 
 ReactElementFactory.Instance.registerElement(
   "svc-question",

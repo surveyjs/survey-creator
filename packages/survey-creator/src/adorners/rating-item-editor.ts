@@ -57,6 +57,10 @@ class RatingItemEditor extends TitleInplaceEditor {
   get isLastItem() {
     return this.question.visibleRateValues.length === 1;
   }
+
+  dispose() {
+    this.valueChanged = undefined;
+  }
 }
 
 ko.components.register("rating-item-editor", {
@@ -78,13 +82,15 @@ ko.components.register("rating-item-editor", {
       );
       model.valueChanged = (newValue) => {
         if (question.rateValues.length === 0) {
-          question.rateValues = question.visibleRateValues;
-          var index = question.rateValues
+          const rateValues = question.visibleRateValues;
+          var index = rateValues
             .map((item) => item.value)
             .indexOf(params.item.value);
-          question.rateValues[index] = params.target;
+          rateValues[index][params.name] = newValue;
+          question.rateValues = rateValues;
+        } else {
+          params.target[params.name] = newValue;
         }
-        params.target[params.name] = newValue;
         params.editor.onQuestionEditorChanged(question);
         return "";
       };

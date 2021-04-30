@@ -27,14 +27,11 @@ export class StringEditorViewModel {
     }
     return true;
   }
-  onClick(sender: StringEditorViewModel, event: any) {
-    event.stopPropagation();
-  }
   edit(model: StringEditorViewModel, event: MouseEvent) {
     model.focusEditor && model.focusEditor();
     this.done(model, event);
   }
-  done(model: StringEditorViewModel, event: Event) {
+  done(_: StringEditorViewModel, event: Event) {
     event.stopImmediatePropagation();
     event.preventDefault();
   }
@@ -97,7 +94,7 @@ export const editableStringRendererName = "svc-string-editor";
 ko.components.register(editableStringRendererName, {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      var locStr = params.locString;
+      const locStr = params.locString;
       applyLocStrOnSearchChanged(componentInfo.element, locStr);
       const model = new StringEditorViewModel(locStr);
       const getEditorElement = () => {

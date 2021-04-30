@@ -120,7 +120,7 @@ test("dropdown property editor localization", () => {
   var showPreviewQuestion = propertyGrid.survey.getQuestionByName(
     "showPreviewBeforeComplete"
   );
-  expect(showPreviewQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
+  expect(showPreviewQuestion.getType()).toEqual("buttongroup"); //"correct property editor is created" //since choices.length < 5 buttongroup rendered instead of dropdown
   expect(showPreviewQuestion.choices[0].value).toEqual("noPreview");
   expect(showPreviewQuestion.choices[0].text).toEqual("no preview");
 

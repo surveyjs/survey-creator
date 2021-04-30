@@ -9,7 +9,7 @@ import {
 import { ImplementorBase } from "survey-knockout-ui";
 import { CreatorBase, QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
 import { KnockoutQuestionAdornerViewModel } from "./question";
-import "./question-dropdown.scss";
+// import "./question-dropdown.scss";
 const template = require("./question-dropdown.html");
 // import template from "./question-dropdown.html";
 

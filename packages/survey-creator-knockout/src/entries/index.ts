@@ -18,8 +18,6 @@ export * from "../components/panel";
 
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";
-export * from "../components/property-editors/button-group/button-group";
-export * from "../components/property-editors/button-group/button-group-item";
 export * from "../components/property-panel/property-panel";
 export * from "../components/results";
 export * from "../components/simulator";
@@ -43,5 +41,3 @@ import "@survey/creator/survey-creator-core.css";
 // //export * from "../property-grid/modal-action";
 // export * from "@survey/creator/property-grid/restfull";
 // export * from "@survey/creator/property-grid/values";
-
-export * from "../svgbundle";

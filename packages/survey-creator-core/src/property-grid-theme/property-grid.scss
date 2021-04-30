@@ -1,0 +1,20 @@
+@import "../variables.scss";
+
+@import "blocks/spg-question.scss";
+@import "blocks/spg-input.scss";
+@import "blocks/spg-comment.scss";
+@import "blocks/spg-panel.scss";
+@import "blocks/spg-checkbox.scss";
+@import "blocks/spg-matrixdynamic.scss";
+@import "blocks/spg-table.scss";
+
+.spg-root-modern {
+  width: 100%;
+}
+
+.sv-popup--modal {
+  .sv-popup__footer {
+    padding-bottom: 2px;
+  }
+  padding: calcSize(4);
+}

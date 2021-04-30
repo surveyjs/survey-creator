@@ -1,7 +1,7 @@
 // import { document } from "global";
 import { boolean, text } from "@storybook/addon-knobs";
 import * as ko from "knockout";
-import { SvgBundleViewModel } from "../src/svgbundle";
+import { SvgBundleViewModel } from "@survey/creator";
 
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 

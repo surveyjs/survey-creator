@@ -3,6 +3,7 @@
 .svc-string-editor {
   position: static;
   .sv-string-editor {
+    display: inline-block;
     position: relative;
     outline: none;
     z-index: 2;
@@ -64,6 +65,9 @@
   }
   .sv-svg-icon {
     vertical-align: bottom;
+  }
+  &.sv-svg-icon {
+    overflow: visible;
   }
 }
 

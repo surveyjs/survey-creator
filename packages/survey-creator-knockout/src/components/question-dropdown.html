@@ -10,7 +10,7 @@
     <!-- ko component: { name: 'survey-element-component', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
 
-    <div class="svc-question__dropdown-choices" data-bind="css: question.koCss().root">
+    <div class="svc-question__dropdown-choices">
         <!-- ko foreach: { data: question.visibleChoices, as: 'item' }  -->
           <div class="svc-question__dropdown-choice">
               <!-- ko component: { name: question.getItemValueWrapperComponentName(item), params: { componentData:  question.getItemValueWrapperComponentData(item), templateData: { name: 'svc-choice-item-text', data: item } } } -->
@@ -18,7 +18,6 @@
           </div>
         <!-- /ko -->
     </div>
-
 
     <div class="svc-question__content-actions">
       <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
