@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.46](https://github.com/surveyjs/survey-creator/compare/v1.8.45...v1.8.46) (2021-04-30)
+
+
+### Bug Fixes
+
+* survey title and description are not update in property grid accordingly to survey locale change [#1162](https://github.com/surveyjs/survey-creator/issues/1162) ([25f0941](https://github.com/surveyjs/survey-creator/commit/25f09418f04804f773b4e6ab5cd6d9adbc756be9))
+
 ### [1.8.45](https://github.com/surveyjs/survey-creator/compare/v1.8.44...v1.8.45) (2021-04-28)
 
 
