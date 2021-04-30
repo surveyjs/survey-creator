@@ -33,7 +33,7 @@ export class SurveyObjectProperty {
     this.name = this.property.name;
     this.disabled = property.readOnly;
     var self = this;
-    var onItemChanged = function(newValue) {
+    var onItemChanged = function (newValue) {
       self.onEditorValueChanged(newValue);
     };
     this.editor = SurveyPropertyEditorFactory.createEditor(
@@ -107,6 +107,7 @@ export class SurveyObjectProperty {
   public updateDynamicProperties() {
     this.koVisible(this.isVisible());
     this.editor.updateDynamicProperties();
+    this.editor.updateValue();
   }
   public get isHidden(): boolean {
     return this.isHiddenValue;

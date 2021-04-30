@@ -838,6 +838,25 @@ QUnit.test("Question editor: depended property, choices", function (assert) {
   Survey.Serializer.removeProperty("question", "targetField");
 });
 
+QUnit.test("Question editor: depended property, choices", function (assert) {
+  Survey.Serializer.findProperty("survey", "locale").addDependedProperty(
+    "title"
+  );
+  var survey = new Survey.Survey({
+    title: {
+      default: "title",
+      de: "title de",
+    },
+  });
+  var editor = new SurveyElementEditorOldTableContentModel(survey);
+  var localeEditor = editor.getPropertyEditorByName("locale").editor;
+  var titleEditor = editor.getPropertyEditorByName("title").editor;
+
+  assert.equal(titleEditor.koValue(), "title", "The default value is correct");
+  localeEditor.koValue("de");
+  assert.equal(titleEditor.koValue(), "title de", "Edit 'de' string");
+});
+
 QUnit.test(
   "Support old property grid: show localized display text from p.propertyName.title",
   function (assert) {
