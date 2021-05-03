@@ -220,60 +220,112 @@ QUnit.test(
     );
   }
 );
-QUnit.test("toolbox categories + keepAllCategoriesExpanded property", function (
-  assert
-) {
-  var toolbox = new QuestionToolbox([
-    "text",
-    "dropdown",
-    "checkbox",
-    "radiogroup",
-    "comment",
-    "matrix",
-  ]);
-  toolbox.changeCategories([
-    { name: "comment", category: "comment" },
-    { name: "matrix", category: "matrix" },
-  ]);
-  assert.equal(
-    toolbox.activeCategory,
-    "General",
-    "By default 'General' is active category"
-  );
-  assert.equal(
-    toolbox.koCanCollapseCategories(),
-    true,
-    "Categories can be collapsed"
-  );
-  toolbox.keepAllCategoriesExpanded = true;
-  assert.equal(toolbox.activeCategory, "", "There is no active category now");
-  assert.equal(
-    (<any>toolbox.koCategories()[0]).koCollapsed(),
-    false,
-    "the first category is expanded"
-  );
-  assert.equal(
-    (<any>toolbox.koCategories()[2]).koCollapsed(),
-    false,
-    "the last category is expanded"
-  );
-  (<any>toolbox.koCategories()[0]).expand();
-  assert.equal(
-    (<any>toolbox.koCategories()[0]).koCollapsed(),
-    false,
-    "the first category is still expanded"
-  );
-  assert.equal(
-    toolbox.activeCategory,
-    "",
-    "There is still no active category now"
-  );
-  assert.equal(
-    toolbox.koCanCollapseCategories(),
-    false,
-    "Categories can not be collapsed"
-  );
-});
+QUnit.test(
+  "toolbox categories + keepAllCategoriesExpanded property",
+  function (assert) {
+    var toolbox = new QuestionToolbox([
+      "text",
+      "dropdown",
+      "checkbox",
+      "radiogroup",
+      "comment",
+      "matrix",
+    ]);
+    toolbox.changeCategories([
+      { name: "comment", category: "comment" },
+      { name: "matrix", category: "matrix" },
+    ]);
+    assert.equal(
+      toolbox.activeCategory,
+      "General",
+      "By default 'General' is active category"
+    );
+    assert.equal(
+      toolbox.koCanCollapseCategories(),
+      true,
+      "Categories can be collapsed"
+    );
+    toolbox.keepAllCategoriesExpanded = true;
+    assert.equal(toolbox.activeCategory, "", "There is no active category now");
+    assert.equal(
+      (<any>toolbox.koCategories()[0]).koCollapsed(),
+      false,
+      "the first category is expanded"
+    );
+    assert.equal(
+      (<any>toolbox.koCategories()[2]).koCollapsed(),
+      false,
+      "the last category is expanded"
+    );
+    (<any>toolbox.koCategories()[0]).expand();
+    assert.equal(
+      (<any>toolbox.koCategories()[0]).koCollapsed(),
+      false,
+      "the first category is still expanded"
+    );
+    assert.equal(
+      toolbox.activeCategory,
+      "",
+      "There is still no active category now"
+    );
+    assert.equal(
+      toolbox.koCanCollapseCategories(),
+      false,
+      "Categories can not be collapsed"
+    );
+  }
+);
+
+QUnit.test(
+  "toolbox categories + keepAllCategoriesExpanded property + remove item, Bug#1165",
+  function (assert) {
+    var toolbox = new QuestionToolbox([
+      "text",
+      "dropdown",
+      "checkbox",
+      "radiogroup",
+      "comment",
+      "matrix",
+    ]);
+    toolbox.changeCategories([
+      { name: "comment", category: "second" },
+      { name: "matrix", category: "second" },
+    ]);
+    toolbox.keepAllCategoriesExpanded = true;
+    assert.equal(toolbox.activeCategory, "", "There is no active category now");
+    assert.equal(
+      (<any>toolbox.koCategories()[1]).items.length,
+      2,
+      "There are two items in the last category"
+    );
+    assert.equal(
+      (<any>toolbox.koCategories()[0]).koCollapsed(),
+      false,
+      "the first category is expanded"
+    );
+    assert.equal(
+      (<any>toolbox.koCategories()[1]).koCollapsed(),
+      false,
+      "the last category is expanded"
+    );
+    toolbox.removeItem("comment");
+    assert.equal(
+      (<any>toolbox.koCategories()[1]).items.length,
+      1,
+      "There is one item in the last category"
+    );
+    assert.equal(
+      (<any>toolbox.koCategories()[0]).koCollapsed(),
+      false,
+      "the first category is still expanded"
+    );
+    assert.equal(
+      (<any>toolbox.koCategories()[1]).koCollapsed(),
+      false,
+      "the last category is still expanded"
+    );
+  }
+);
 
 QUnit.test("toolbox copied questions", function (assert) {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);

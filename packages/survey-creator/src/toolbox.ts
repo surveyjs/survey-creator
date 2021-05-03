@@ -441,7 +441,10 @@ export class QuestionToolbox {
         var category = {
           name: categoryName,
           items: [],
-          koCollapsed: ko.observable(categoryName !== prevActiveCategory),
+          koCollapsed: ko.observable(
+            categoryName !== prevActiveCategory &&
+              !this.keepAllCategoriesExpanded
+          ),
           expand: function () {
             self.doCategoryClick(this.name);
           },
@@ -452,15 +455,19 @@ export class QuestionToolbox {
       categoriesHash[categoryName].items.push(item);
     }
     this.koCategories(categories);
-    if (!this.allowExpandMultipleCategories) {
-      if (prevActiveCategory && categoriesHash[prevActiveCategory]) {
-        this.koActiveCategory(prevActiveCategory);
+    if (!this.keepAllCategoriesExpanded) {
+      if (!this.allowExpandMultipleCategories) {
+        if (prevActiveCategory && categoriesHash[prevActiveCategory]) {
+          this.koActiveCategory(prevActiveCategory);
+        } else {
+          this.koActiveCategory(
+            categories.length > 0 ? categories[0].name : ""
+          );
+        }
       } else {
-        this.koActiveCategory(categories.length > 0 ? categories[0].name : "");
-      }
-    } else {
-      if (categories.length > 0) {
-        categories[0].koCollapsed(false);
+        if (categories.length > 0) {
+          categories[0].koCollapsed(false);
+        }
       }
     }
     this.koHasCategories(categories.length > 1);

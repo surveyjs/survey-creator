@@ -29,7 +29,7 @@
     "papaparse": "^5.2.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
-    "survey-knockout": "^1.8.23"
+    "survey-knockout": "^1.8.46"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
