@@ -14,14 +14,15 @@ export class StringEditorViewModel {
     this.locString.text = value;
   }
   onInput(sender: StringEditorViewModel, event: any) {
+    if (sender.editValue == event.target.innerText) return;
     sender.editValue = event.target.innerText;
   }
   onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent) {
-    if(event.keyCode === 13) {
+    if (event.keyCode === 13) {
       this.blurEditor();
       this.done(sender, event);
     }
-    if(event.keyCode === 27) {
+    if (event.keyCode === 27) {
       this.blurEditor();
       this.done(sender, event);
     }
@@ -98,8 +99,10 @@ ko.components.register(editableStringRendererName, {
       applyLocStrOnSearchChanged(componentInfo.element, locStr);
       const model = new StringEditorViewModel(locStr);
       const getEditorElement = () => {
-        return componentInfo.element.nextSibling.getElementsByClassName("sv-string-editor")[0];
-      }
+        return componentInfo.element.nextSibling.getElementsByClassName(
+          "sv-string-editor"
+        )[0];
+      };
       model.focusEditor = () => getEditorElement().focus();
       model.blurEditor = () => getEditorElement().blur();
       return model;
