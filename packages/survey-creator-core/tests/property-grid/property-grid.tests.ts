@@ -1321,6 +1321,8 @@ test("Edit columns in property grid", () => {
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
   propertyGrid.survey.getQuestionByName("name").value = "col3";
   expect(question.columns[0].name).toEqual("col3");
+  propertyGrid.survey.getQuestionByName("cellType").value = "text";
+  expect(question.columns[0].cellType).toEqual("text");
 });
 test("Change cellType in the column in property grid", () => {
   var question = new QuestionMatrixDynamicModel("q1");
@@ -1422,4 +1424,59 @@ test("add item into rates", () => {
   rateValuesQuestion.addRow();
   expect(question.rateValues).toHaveLength(1);
   expect(question.rateValues[0].value).toEqual("item1");
+});
+test("Change survey locale", () => {
+  var survey = new SurveyModel();
+  survey.setDesignMode(true);
+  survey.fromJSON({
+    title: {
+      default: "title en",
+      de: "title de",
+    },
+  });
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var localeQuestion = <QuestionDropdownModel>(
+    propertyGrid.survey.getQuestionByName("locale")
+  );
+  var titleQuestion = <QuestionDropdownModel>(
+    propertyGrid.survey.getQuestionByName("title")
+  );
+  expect(titleQuestion.value).toEqual("title en");
+  localeQuestion.value = "de";
+  expect(survey.locale).toEqual("de");
+  expect(titleQuestion.value).toEqual("title de");
+});
+test("DependedOn properties, dynamic choices", () => {
+  Serializer.addProperty("question", "targetEntity");
+  Serializer.addProperty("question", {
+    name: "targetField",
+    dependsOn: "targetEntity",
+    choices: function (obj) {
+      return getChoicesByEntity(obj);
+    },
+  });
+  function getChoicesByEntity(obj: any): Array<any> {
+    var entity = !!obj ? obj["targetEntity"] : null;
+    var choices = [];
+    if (!entity) return choices;
+    choices.push({ value: null });
+    choices.push({ value: entity + " 1", text: entity + " 1" });
+    choices.push({ value: entity + " 2", text: entity + " 2" });
+    return choices;
+  }
+
+  var question = new QuestionTextModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var entityQuestion = propertyGrid.survey.getQuestionByName("targetEntity");
+  var targetQuestion = <QuestionDropdownModel>(
+    propertyGrid.survey.getQuestionByName("targetField")
+  );
+
+  expect(targetQuestion.visibleChoices).toHaveLength(0);
+  entityQuestion.value = "Account";
+  expect(targetQuestion.visibleChoices).toHaveLength(3);
+  expect(targetQuestion.visibleChoices[1].value).toEqual("Account 1");
+
+  Serializer.removeProperty("question", "targetEntity");
+  Serializer.removeProperty("question", "targetField");
 });

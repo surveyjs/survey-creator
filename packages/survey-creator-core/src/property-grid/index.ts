@@ -107,6 +107,11 @@ export interface IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions
   ) => void;
+  onMasterValueChanged?: (
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question
+  ) => void;
 
   onAddIntoPropertyValue?: (
     obj: Base,
@@ -217,6 +222,16 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetQuestionTitleActions) {
       res.onGetQuestionTitleActions(obj, options);
+    }
+  },
+  onMasterValueChanged(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question
+  ) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onMasterValueChanged) {
+      res.onMasterValueChanged(obj, prop, question);
     }
   },
 };
@@ -707,12 +722,31 @@ export class PropertyGridModel {
       this.obj,
       options.value
     );
+    this.changeDependedProperties(q);
     if (
       !!this.classNameProperty &&
       options.name === this.classNameProperty &&
       this.classNameValue !== options.value
     ) {
       this.setObj(this.obj);
+    }
+  }
+  private changeDependedProperties(question: Question) {
+    var prop: JsonObjectProperty = question.property;
+    var properties = prop.getDependedProperties();
+    if (!properties) return;
+    for (var i = 0; i < properties.length; i++) {
+      var name = properties[i];
+      var q = this.survey.getQuestionByName(name);
+      if (!q) continue;
+      if (!Helpers.isTwoValueEquals(q.value, this.survey.getValue(name))) {
+        q.value = this.survey.getValue(name);
+      }
+      PropertyGridEditorCollection.onMasterValueChanged(
+        this.obj,
+        q.property,
+        q
+      );
     }
   }
 
@@ -984,6 +1018,13 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     return true;
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    this.setChoices(obj, question, prop);
+  }
+  onMasterValueChanged(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question
+  ) {
     this.setChoices(obj, question, prop);
   }
   private setChoicesCore(
