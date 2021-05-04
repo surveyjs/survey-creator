@@ -2,6 +2,7 @@ import {
   Base,
   FunctionFactory,
   Helpers,
+  ItemValue,
   JsonObjectProperty,
   PanelModel,
   PanelModelBase,
@@ -1006,13 +1007,21 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return {
+    var choices = prop.getChoices(obj);
+
+    var json: any = {
       type:
-        this.canRenderAsButtonGroup && prop.getChoices(obj).length < 5
+        this.canRenderAsButtonGroup && choices.length < 5 && choices.length > 0
           ? "buttongroup"
           : "dropdown",
       showOptionsCaption: false,
     };
+    var emptyValueItem: ItemValue = this.getEmptyJsonItemValue(prop, choices);
+    if (!!emptyValueItem) {
+      json.showOptionsCaption = true;
+      json.optionsCaption = emptyValueItem.text;
+    }
+    return json;
   }
   protected get canRenderAsButtonGroup(): boolean {
     return true;
@@ -1054,24 +1063,40 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   ): Array<any> {
     var choices = [];
     for (var i = 0; i < propChoices.length; i++) {
-      var item = propChoices[i];
-      var jsonItem: any = { value: !!item.value ? item.value : item };
-      var text = !!item.text ? item.text : "";
-      if (!text) {
-        text = this.getLocalizedText(prop, jsonItem.value);
+      var jsonItem = this.getJsonItem(prop, propChoices[i]);
+      if (!Helpers.isValueEmpty(jsonItem.value)) {
+        choices.push(jsonItem);
       }
-      if (!!text && text != jsonItem.value) {
-        jsonItem.text = text;
-      }
-      choices.push(jsonItem);
     }
     return choices;
+  }
+  private getJsonItem(prop: JsonObjectProperty, item: any): any {
+    var jsonItem: any = { value: item.value !== undefined ? item.value : item };
+    var text = !!item.text ? item.text : "";
+    if (!text) {
+      text = this.getLocalizedText(prop, jsonItem.value);
+    }
+    if (!!text && text != jsonItem.value) {
+      jsonItem.text = text;
+    }
+    return jsonItem;
   }
   private setChoices(obj: Base, question: Question, prop: JsonObjectProperty) {
     var propChoices = prop.getChoices(obj, (choices: any) => {
       this.setChoicesCore(question, prop, choices);
     });
     this.setChoicesCore(question, prop, propChoices);
+  }
+  private getEmptyJsonItemValue(
+    prop: JsonObjectProperty,
+    choices: Array<any>
+  ): any {
+    for (var i = 0; i < choices.length; i++) {
+      var item = choices[i];
+      var value = item.value !== undefined ? item.value : item;
+      if (Helpers.isValueEmpty(value)) return this.getJsonItem(prop, item);
+    }
+    return null;
   }
 }
 

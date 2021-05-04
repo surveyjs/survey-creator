@@ -126,8 +126,8 @@ test("dropdown property editor localization", () => {
 
   var localeQuestion = propertyGrid.survey.getQuestionByName("locale");
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
-  expect(localeQuestion.choices[0].value).toEqual("");
-  expect(localeQuestion.choices[0].text).toEqual("Default (english)");
+  expect(localeQuestion.showOptionsCaption).toBeTruthy();
+  expect(localeQuestion.optionsCaption).toEqual("Default (english)");
 });
 test("dropdown property editor, get choices on callback", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
@@ -1459,7 +1459,7 @@ test("DependedOn properties, dynamic choices", () => {
     var entity = !!obj ? obj["targetEntity"] : null;
     var choices = [];
     if (!entity) return choices;
-    choices.push({ value: null });
+    choices.push({ value: "entity" });
     choices.push({ value: entity + " 1", text: entity + " 1" });
     choices.push({ value: entity + " 2", text: entity + " 2" });
     return choices;
@@ -1479,4 +1479,27 @@ test("DependedOn properties, dynamic choices", () => {
 
   Serializer.removeProperty("question", "targetEntity");
   Serializer.removeProperty("question", "targetField");
+});
+
+test("showOptionsCaption for dropdown with empty choice item", () => {
+  Serializer.addProperty("question", {
+    name: "test",
+    choices: function (obj) {
+      var choices = [];
+      choices.push({ value: "", text: "Empty value" });
+      for (var i = 1; i <= 10; i++) {
+        choices.push({ value: i, text: "Value" + i.toString() });
+      }
+      return choices;
+    },
+  });
+  var question = new QuestionTextModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var testQuestion = propertyGrid.survey.getQuestionByName("test");
+  expect(testQuestion.getType()).toEqual("dropdown");
+  expect(testQuestion.choices).toHaveLength(10);
+  expect(testQuestion.showOptionsCaption).toBeTruthy();
+  expect(testQuestion.optionsCaption).toEqual("Empty value");
+
+  Serializer.removeProperty("question", "test");
 });
