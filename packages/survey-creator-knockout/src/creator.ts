@@ -47,6 +47,9 @@ class DesignTimeSurveyModel extends Survey {
   }
 
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+    if(question.getType() === "imagepicker") {
+      return "survey-item-value-component";
+    }
     return "svc-item-value";
   }
   public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {

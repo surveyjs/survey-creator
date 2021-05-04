@@ -52,3 +52,12 @@
     opacity: 0.5;
   }
 }
+
+.sv-ranking {
+  .svc-item-value-controls {
+    height: 100%;
+  }
+  .svc-item-value-controls__button {
+    margin-top: calc(50% - calc(1.25 * #{$base-unit}));
+  }
+}
