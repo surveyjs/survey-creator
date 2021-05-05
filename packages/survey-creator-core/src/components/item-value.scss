@@ -25,7 +25,8 @@
 }
 
 .svc-item-value-controls__drag {
-  padding-right: calcSize(1.5) 0;
+  padding-left: 0;
+  padding-right: calcSize(0.5);
   cursor: move;
   use {
     fill: $foreground-light;
