@@ -35,6 +35,13 @@ export class SelectionHistoryController extends Base {
       this.onObjSelected(this.creator.selectedElement);
     }
   }
+  public selectFromAction(obj: Base, propertyName: string) {
+    var index = this.currentIndex;
+    if (index > -1 && index < this.items.length) {
+      this.items[index].propertyName = propertyName;
+    }
+    this.creator.selectElement(obj);
+  }
   public onObjSelected(obj: Base) {
     if (this.isChangingInternally) return;
     var index = this.currentIndex;
@@ -59,7 +66,8 @@ export class SelectionHistoryController extends Base {
   private selectElement(index: number) {
     if (index < 0 || index >= this.items.length) return;
     this.isChangingInternally = true;
-    this.creator.selectElement(this.items[index].obj);
+    var item = this.items[index];
+    this.creator.selectElement(item.obj, item.propertyName);
     this.isChangingInternally = false;
   }
   private updateItems() {

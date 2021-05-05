@@ -15,6 +15,7 @@ export enum ObjType {
   Page,
   Panel,
   Question,
+  Column,
 }
 export class SurveyHelper {
   public static getNewPageName(objs: Array<any>) {
@@ -65,6 +66,7 @@ export class SurveyHelper {
     if (obj.getType() == "page") return ObjType.Page;
     if (obj.getType() == "panel") return ObjType.Panel;
     if (obj.getType() == "survey") return ObjType.Survey;
+    if (obj.getType() == "matrixdropdowncolumn") return ObjType.Column;
     if (obj["name"]) return ObjType.Question;
     return ObjType.Unknown;
   }
@@ -74,6 +76,7 @@ export class SurveyHelper {
     if (objType === ObjType.Page) return "page";
     if (objType === ObjType.Panel) return "panel";
     if (objType === ObjType.Question) return "question";
+    if (objType === ObjType.Column) return "column";
     return "unknown";
   }
 

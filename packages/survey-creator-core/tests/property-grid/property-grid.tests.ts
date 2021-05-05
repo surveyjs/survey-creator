@@ -1297,9 +1297,14 @@ test("Support maximumColumnsCount option", () => {
   );
   expect(editQuestion.maxRowCount).toEqual(3);
   var actions = editQuestion.getTitleActions();
-  var addAction = actions.find((item) => {
-    if (item.id == "add-item") return item;
-  });
+
+  var addAction = undefined;
+  for (var i = 0; i < actions.length; i++) {
+    if (actions[i].id == "add-item") {
+      addAction = actions[i];
+      break;
+    }
+  }
   expect(addAction).toBeTruthy();
   expect(addAction.enabled()).toBeTruthy();
   question.addColumn("col3");

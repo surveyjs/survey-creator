@@ -24,7 +24,7 @@ import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./surveyHelper";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
-import "./components/string-editor.scss"
+import "./components/string-editor.scss";
 import { ICreatorSelectionOwner } from "./controllers/controller-base";
 import { PagesController } from "./controllers/pages-controller";
 import { SelectionHistoryController } from "./controllers/selection-history-controller";
@@ -1505,8 +1505,9 @@ export class CreatorBase<T extends SurveyModel>
     return element.getPropertyValue("isSelectedInDesigner");
   }
 
-  public selectElement(element: any) {
+  public selectElement(element: any, propertyName?: string) {
     var oldValue = this.selectedElement;
+    if (oldValue === element) return;
     this.selectedElementValue = this.onSelectingElement(element);
     if (oldValue !== this.selectedElementValue) {
       if (!!oldValue && !oldValue.isDisposed) {
@@ -1518,7 +1519,7 @@ export class CreatorBase<T extends SurveyModel>
           true
         );
       }
-      this.selectionChanged(this.selectedElement);
+      this.selectionChanged(this.selectedElement, propertyName);
     }
   }
 
@@ -1626,7 +1627,7 @@ export class CreatorBase<T extends SurveyModel>
     */
     return isValid;
   }
-  private selectionChanged(element: Base) {
+  private selectionChanged(element: Base, propertyName?: string) {
     if (
       !!element &&
       typeof element.getType === "function" &&
@@ -1641,6 +1642,9 @@ export class CreatorBase<T extends SurveyModel>
     this.selectionHistoryController.onObjSelected(element);
     if (this.propertyGrid) {
       this.propertyGrid.obj = element;
+      if (!!propertyName) {
+        this.propertyGrid.selectProperty(propertyName);
+      }
     }
     var options = { newSelectedElement: element };
     this.onSelectedElementChanged.fire(this, options);

@@ -558,6 +558,7 @@ export class PropertyGridModel {
   private classNameProperty: string;
   private classNameValue: any;
   public objValueChangedCallback: () => void;
+  public changedFromActionCallback: (obj: Base, propertyName: string) => void;
   constructor(
     obj: Base = null,
     options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
@@ -571,6 +572,28 @@ export class PropertyGridModel {
   public set obj(value: Base) {
     if (this.objValue === value) return;
     this.setObj(value);
+  }
+  public selectProperty(propertyName: string) {
+    if (!this.survey) return;
+    var question = this.survey.getQuestionByName(propertyName);
+    if (!question) return;
+    var panels = this.survey.getAllPanels();
+    for (var i = 0; i < panels.length; i++) {
+      var panel = <PanelModel>panels[i];
+      if (panel === question.parent) {
+        panel.expand();
+      } else {
+        panel.collapse();
+      }
+    }
+    question.focus();
+  }
+  private setObjFromAction(value: Base, propertyName: string) {
+    if (this.changedFromActionCallback) {
+      this.changedFromActionCallback(value, propertyName);
+    } else {
+      this.setObj(value);
+    }
   }
   private setObj(value: Base) {
     this.objValue = value;
@@ -811,7 +834,7 @@ export class PropertyGridModel {
       options.question.property,
       options,
       (obj: Base): void => {
-        this.setObj(obj);
+        this.setObjFromAction(obj, options.question.name);
       }
     );
   }

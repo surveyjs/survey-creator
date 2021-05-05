@@ -7,6 +7,8 @@ import {
 } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistoryController } from "../controllers/selection-history-controller";
+import { SurveyHelper } from "../surveyHelper";
+import { editorLocalization } from "../editorLocalization";
 
 export class PropertyGridViewModel extends Base {
   @property() survey: SurveyModel;
@@ -21,6 +23,14 @@ export class PropertyGridViewModel extends Base {
     super();
     this.model.objValueChangedCallback = () => {
       this.onSurveyChanged();
+    };
+    this.model.changedFromActionCallback = (
+      obj: Base,
+      propertyName: string
+    ) => {
+      if (!!this.selectionController) {
+        this.selectionController.selectFromAction(obj, propertyName);
+      }
     };
     this.toolbarItems.push({
       id: "svd-grid-history-prev",
@@ -63,7 +73,10 @@ export class PropertyGridViewModel extends Base {
   private getTitle(): string {
     var obj = this.model.obj;
     if (!obj) return "";
-    var displayName = !!obj["name"] ? obj["name"] : obj.getType();
+    var typeName = SurveyHelper.getObjectTypeStr(obj);
+    var displayName = editorLocalization.getString(
+      "ed." + typeName + "TypeName"
+    );
     return this.model.options.getObjectDisplayName(
       obj,
       "property-grid",
