@@ -3,8 +3,9 @@ import { SurveyJSON5 } from "./json5";
 
 class SurveyForTextWorker extends SurveyModel {
   constructor(jsonObj: any) {
-    super(jsonObj);
+    super();
     this.setDesignMode(true);
+    this.fromJSON(jsonObj);
   }
   // public get isDesignMode(): boolean {
   //   return true;
