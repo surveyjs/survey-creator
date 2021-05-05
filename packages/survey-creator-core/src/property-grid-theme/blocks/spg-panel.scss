@@ -41,7 +41,7 @@
 }
 
 .spg-panel__content {
-  display: flex !important;
+  //display: flex !important; todo: panels in react are not collapsed with this style
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
