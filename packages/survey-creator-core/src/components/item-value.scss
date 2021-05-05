@@ -7,8 +7,10 @@
 .svc-item-value-controls {
   display: none;
   position: absolute;
-  left: calcSize(-5);
-  cursor: pointer;
+  left: calcSize(-10);
+  width: calcSize(9);
+  text-align: right;
+  white-space: nowrap;
 }
 
 .svc-item-value-controls__button {
@@ -21,6 +23,20 @@
   margin-top: calcSize(-1);
   margin-left: calcSize(-1);
 }
+
+.svc-item-value-controls__drag {
+  padding-right: calcSize(1.5) 0;
+  cursor: move;
+  use {
+    fill: $foreground;
+  }
+  &:hover {
+    use {
+      fill: $primary;
+    }
+  }
+}
+
 .svc-item-value-controls__add:hover {
   background-color: $primary-light;
   use {

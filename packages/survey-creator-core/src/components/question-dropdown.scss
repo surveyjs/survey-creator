@@ -1,6 +1,8 @@
+@import "../variables.scss";
+
 .svc-question__dropdown-choices {
   display: none;
-  margin-top: 16px;
+  margin-top: calcSize(2);
 }
 
 .svc-question__content--selected {
@@ -10,8 +12,8 @@
 }
 
 .svc-question__dropdown-choice {
-  padding: 4px 0;
+  padding: calcSize(1) 0;
   .svc-item-value__item {
-    padding-left: 16px;
+    padding-left: calcSize(2);
   }
 }
