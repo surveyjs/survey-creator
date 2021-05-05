@@ -17,7 +17,7 @@ import "./item-value.scss";
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
   constructor(
-    private creator: CreatorBase<SurveyModel>,
+    protected creator: CreatorBase<SurveyModel>,
     public question: QuestionSelectBase,
     public item: ItemValue
   ) {
