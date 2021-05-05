@@ -28,7 +28,7 @@
   padding-right: calcSize(1.5) 0;
   cursor: move;
   use {
-    fill: $foreground;
+    fill: $foreground-light;
   }
   &:hover {
     use {
