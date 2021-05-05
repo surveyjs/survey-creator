@@ -1296,6 +1296,14 @@ test("Support maximumColumnsCount option", () => {
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(editQuestion.maxRowCount).toEqual(3);
+  var actions = editQuestion.getTitleActions();
+  var addAction = actions.find((item) => {
+    if (item.id == "add-item") return item;
+  });
+  expect(addAction).toBeTruthy();
+  expect(addAction.enabled()).toBeTruthy();
+  question.addColumn("col3");
+  expect(addAction.enabled()).toBeFalsy();
 });
 test("Edit columns in property grid", () => {
   var question = new QuestionMatrixDynamicModel("q1");

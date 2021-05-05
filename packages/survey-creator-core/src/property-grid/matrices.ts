@@ -99,11 +99,15 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   public onGetQuestionTitleActions(obj: Base, options: any): void {
     const question: QuestionMatrixDynamicModel = options.question;
     options.titleActions.push({
+      id: "add-item",
       iconName: "icon-add(small)",
       title: question.addRowText,
       showTitle: false,
       action: () => {
         question.addRow();
+      },
+      enabled: (): boolean => {
+        return question.canAddRow;
       },
     });
   }
