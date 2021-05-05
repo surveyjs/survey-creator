@@ -41,6 +41,7 @@ export var enStrings = {
     boolean: "Boolean",
     expression: "Expression (read-only)",
     signaturepad: "Signature pad",
+    buttongroup: "Button group",
     flowpanel: "Flow Panel",
   },
   //Strings in Editor
