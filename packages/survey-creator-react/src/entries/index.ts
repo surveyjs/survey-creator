@@ -6,6 +6,7 @@ export * from "../SurveyCreator";
 export * from "../components/Question";
 export * from "../components/QuestionDropdown";
 export * from "../components/ItemValueWrapper";
+export * from "../components/ImageItemValueWrapper";
 export * from "../components/tabs/Designer";
 export * from "../components/tabs/Embed";
 export * from "../components/tabs/JsonEditorAce";

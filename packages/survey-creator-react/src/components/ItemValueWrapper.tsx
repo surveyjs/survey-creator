@@ -49,9 +49,14 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         <SvgIcon size={24} iconName={'icon-add-item-value'}></SvgIcon>
       </span>
       :
-      <span className="svc-item-value-controls__button svc-item-value-controls__remove" onClick={() => this.model.remove(this.model)}>
-        <SvgIcon size={24} iconName={'icon-remove-item-value'}></SvgIcon>
-      </span>
+      <>
+        <span className="svc-item-value-controls__button svc-item-value-controls__drag">
+          <SvgIcon size={24} iconName={'icon-drag-handler'}></SvgIcon>
+        </span>
+        <span className="svc-item-value-controls__button svc-item-value-controls__remove" onClick={() => this.model.remove(this.model)}>
+          <SvgIcon size={24} iconName={'icon-remove-item-value'}></SvgIcon>
+        </span>
+      </>
       ;
 
     return (

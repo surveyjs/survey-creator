@@ -497,6 +497,29 @@ export class CreatorBase<T extends SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
+   * The event is fired then one need to choose files.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> input file input HTML element
+   * <br/> callback need to be called after files has been chosen
+   * @see uploadFile
+   */
+   public onOpenFileChooser: Survey.Event<
+   (sender: CreatorBase<T>, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is fired on uploading the files.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> There are two properties in options:
+   * <br/> files the Javascript File objects array
+   * <br/> callback called on upload complete
+   * @see uploadFile
+   */
+   public onUploadFile: Survey.Event<
+   (sender: CreatorBase<T>, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
    * This callback is used internally for providing survey JSON text.
    */
   public getSurveyJSONTextCallback: () => { text: string; isModified: boolean };
@@ -1662,6 +1685,57 @@ export class CreatorBase<T extends SurveyModel>
     json["type"] = newElement.getType();
     return json;
   }
+  /**
+   * Open file chooser dialog
+   * @param input file input element
+   * @param onFilesChosen a call back function to process chosen files
+   */
+   public chooseFiles(
+    input: HTMLInputElement,
+    onFilesChosen: (files: File[]) => void
+  ) {
+    if (this.onOpenFileChooser.isEmpty) {
+      if (!window["FileReader"]) return;
+      input.value = "";
+      input.onchange = (event) => {
+        if (!window["FileReader"]) return;
+        if (!input || !input.files || input.files.length < 1) return;
+        let files = [];
+        for (let i = 0; i < input.files.length; i++) {
+          files.push(input.files[i]);
+        }
+        onFilesChosen(files);
+      };
+      input.click();
+    } else {
+      this.onOpenFileChooser.fire(this, {
+        input: input,
+        callback: onFilesChosen,
+      });
+    }
+  }
+  /**
+   * Upload the files on a server
+   * @param files files to upload
+   * @param uploadingCallback a call back function to get the status on uploading the file and operation result - URI of the uploaded file
+   */
+   public uploadFiles(
+    files: File[],
+    uploadingCallback: (status: string, data: any) => any
+  ) {
+    if (this.onUploadFile.isEmpty) {
+      let fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        uploadingCallback("success", fileReader.result);
+      };
+      fileReader.readAsDataURL(files[0]);
+    } else {
+      this.onUploadFile.fire(this, {
+        files: files || [],
+        callback: uploadingCallback,
+      });
+    }
+  }
 
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
     var parent = obj["parent"];
@@ -2093,6 +2167,10 @@ export class CreatorBase<T extends SurveyModel>
   }
   public createNewItemValue(question: Survey.QuestionSelectBase) {
     const nextValue = this.getNextItemValue(question);
+    // TODO: get item type from question
+    if(question.getType() === "imagepicker") {
+      return new Survey.ImageItemValue(nextValue);
+    }
     return new Survey.ItemValue(nextValue);
   }
 }

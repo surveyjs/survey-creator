@@ -1,0 +1,39 @@
+<div
+  class="svc-image-item-value-wrapper" data-bind="attr: { draggable: isDraggable }, event: { dragstart: koDragStart, dragover: koDragOver, dragend: koDragEnd, drop: koDrop,  }, css: { 'svc-image-item-value--new': isNew }"
+ >
+  <input type="file" accept="image/*" class="svc-choose-file-input" style="position: absolute; opacity: 0; width: 1px; height: 1px; overflow: hidden;" />
+  <!-- ko ifnot: isNew -->
+    <!-- ko if: showDragDropGhostOnTop -->
+    <div class="svc-drag-drop-ghost"></div>
+    <!-- /ko -->
+
+    <div class="svc-image-item-value__item">
+    <!-- ko component: { name: 'survey-item-value-component', params: { componentData: null, templateData: templateData } } -->
+    <!-- /ko -->
+    </div>
+
+    <div class="svc-image-item-value-controls">
+      <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" data-bind="click: chooseFile" params="iconName: 'icon-file', size: 24"></sv-svg-icon>
+      <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__remove" data-bind="click: remove" params="iconName: 'icon-delete', size: 24"></sv-svg-icon>
+    </div>
+
+    <!-- ko if: showDragDropGhostOnBottom -->
+    <div class="svc-drag-drop-ghost"></div>
+    <!-- /ko -->
+  <!-- /ko -->
+
+  <!-- ko if: isNew -->
+    <div class="svc-image-item-value__item">
+      <div class="sv-imagepicker__item sv-imagepicker__item--inline">
+        <label class="sv-imagepicker__label">
+            <div data-bind="style: { width: question.imageWidth ? question.imageWidth + 'px' : undefined, height: question.imageHeight ? question.imageHeight + 'px' : undefined }" class="sv-imagepicker__image">
+            </div>
+        </label>
+      </div>      
+    </div>      
+
+    <div class="svc-image-item-value-controls">
+      <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__add" data-bind="click: chooseNewFile" params="iconName: 'icon-add-item-value', size: 24"></sv-svg-icon>
+    </div>
+  <!-- /ko -->
+</div>
