@@ -43,16 +43,18 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     // if (this.model.question.isDragged) {
     //   return null;
     // }
+    this.model.item = this.props.item;
+    const isNew = !this.props.question.isItemInList(this.props.item);
 
-    const button = this.model.isNew ?
+    const button = isNew ?
       <span className="svc-item-value-controls__button svc-item-value-controls__add" onClick={() => this.model.add(this.model)}>
         <SvgIcon size={24} iconName={'icon-add-item-value'}></SvgIcon>
       </span>
       :
-      <>
+      <> {(this.model.isDraggable ?
         <span className="svc-item-value-controls__button svc-item-value-controls__drag">
           <SvgIcon size={24} iconName={'icon-drag-handler'}></SvgIcon>
-        </span>
+        </span> : null)}
         <span className="svc-item-value-controls__button svc-item-value-controls__remove" onClick={() => this.model.remove(this.model)}>
           <SvgIcon size={24} iconName={'icon-remove-item-value'}></SvgIcon>
         </span>
@@ -61,7 +63,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
 
     return (
       <div
-        className={"svc-item-value-wrapper" + (this.model.isNew ? " svc-item-value--new" : "")} key={this.props.element.key}
+        className={"svc-item-value-wrapper" + (isNew ? " svc-item-value--new" : "")} key={this.props.element.key}
         draggable={this.model.isDraggable}
         onDragStart={ (e) => this.model.dragStart(this.model, new ReactDragEvent(e)) }
         onDragOver={ (e) => this.model.dragOver(this.model, new ReactDragEvent(e)) }

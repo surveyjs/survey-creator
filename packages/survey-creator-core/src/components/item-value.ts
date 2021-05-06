@@ -35,6 +35,15 @@ export class ItemValueWrapperViewModel extends Base {
     }
   }
 
+  public isDraggableItem(item: ItemValue) {
+    if (this.question.noneItem === item 
+        || this.question.otherItem === item 
+        || this.question.getType() === "checkbox" &&(<QuestionCheckboxModel>this.question).selectAllItem === item) {
+          return false;
+    }
+    return true
+  }
+
   public add(model: ItemValueWrapperViewModel) {
     if (model.question.noneItem === model.item) {
       model.question.hasNone = true;
@@ -98,6 +107,6 @@ export class ItemValueWrapperViewModel extends Base {
     return this.creator.dragDropHelper;
   }
   get isDraggable() {
-    return true;
+    return this.isDraggableItem(this.item);
   }
 }

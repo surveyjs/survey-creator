@@ -30,6 +30,7 @@ export class StringEditorViewModel {
   }
   edit(model: StringEditorViewModel, event: MouseEvent) {
     model.focusEditor && model.focusEditor();
+    this.done(model, event);
   }
   done(_: StringEditorViewModel, event: Event) {
     event.stopImmediatePropagation();

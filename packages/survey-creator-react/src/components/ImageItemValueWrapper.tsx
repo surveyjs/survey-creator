@@ -53,10 +53,11 @@ ImageItemValueAdornerComponentProps,
     // if (this.model.question.isDragged) {
     //   return null;
     // }
-
+    this.model.item = this.props.item;
+    const isNew = !this.props.question.isItemInList(this.props.item);
 
     let content = null;
-    if(this.model.isNew) {
+    if(isNew) {
       content = (<>
         <div className="svc-image-item-value__item">
           <div className="sv-imagepicker__item sv-imagepicker__item--inline">
@@ -98,7 +99,7 @@ ImageItemValueAdornerComponentProps,
     return (
       <div
         ref={this.rootRef}
-        className={"svc-image-item-value-wrapper" + (this.model.isNew ? " svc-image-item-value--new" : "")} key={this.props.element.key}
+        className={"svc-image-item-value-wrapper" + (isNew ? " svc-image-item-value--new" : "")} key={this.props.element.key}
         draggable={this.model.isDraggable}
         onDragStart={ (e) => this.model.dragStart(this.model, new ReactDragEvent(e)) }
         onDragOver={ (e) => this.model.dragOver(this.model, new ReactDragEvent(e)) }
