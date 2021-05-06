@@ -18,6 +18,9 @@ class DesignTimeSurveyModel extends Survey {
         if (element.getType() == "dropdown") {
           return "svc-dropdown-question";
         }
+        if (element.getType() == "image") {
+          return "svc-image-question";
+        }
         if (element.koElementType() == "survey-question") {
           return "svc-question";
         }

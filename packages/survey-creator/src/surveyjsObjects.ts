@@ -1,9 +1,9 @@
 import * as ko from "knockout";
-import { editorLocalization } from "./editorLocalization";
 import * as Survey from "survey-knockout";
+import { PageModel } from "survey-knockout";
+import { editorLocalization } from "./editorLocalization";
 import { findParentNode } from "./utils/utils";
 import { StylesManager } from "./stylesmanager";
-import { PageModel } from "survey-knockout";
 
 export interface ISurveyObjectMenuItem {
   name: string;

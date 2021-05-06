@@ -111,6 +111,9 @@ class DesignTimeSurveyModel extends Model {
         if (element.getType() == "dropdown") {
           return "svc-dropdown-question";
         }
+        if (element.getType() == "image") {
+          return "svc-image-question";
+        }
         return "svc-question";
       }
       if (element instanceof PanelModel) {

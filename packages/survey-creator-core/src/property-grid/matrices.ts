@@ -580,6 +580,7 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     if (options.columnName != this.getObjTypeName()) {
       return;
     }
+    options.cellQuestion.showOptionsCaption = false;
     options.cellQuestion.choices = this.getChoices(obj);
     options.cellQuestion.value = options.row.editingObj.getType();
   }
