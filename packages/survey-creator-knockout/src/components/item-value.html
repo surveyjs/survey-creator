@@ -6,7 +6,9 @@
  <!-- /ko -->
 
   <div class="svc-item-value-controls">
+    <!-- ko if: isDraggable -->
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__drag" data-bind="visible: !isNew" params="iconName: 'icon-drag-handler', size: 24"></sv-svg-icon>
+    <!-- /ko -->
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__add" data-bind="visible: isNew, click: add" params="iconName: 'icon-add-item-value', size: 24"></sv-svg-icon>
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__remove" data-bind="visible: !isNew, click: remove" params="iconName: 'icon-remove-item-value', size: 24"></sv-svg-icon>
   </div>
