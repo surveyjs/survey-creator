@@ -373,9 +373,11 @@ test("Validators property editor", () => {
   expect(validatorsQuestion).toBeTruthy(); //visibleIf is here
   expect(validatorsQuestion.columns).toHaveLength(1);
   expect(validatorsQuestion.visibleRows).toHaveLength(1);
-  var validatorTypeQuestion =
-    validatorsQuestion.visibleRows[0].cells[0].question;
+  var validatorTypeQuestion = <QuestionDropdownModel>(
+    validatorsQuestion.visibleRows[0].cells[0].question
+  );
   expect(validatorTypeQuestion.getType()).toEqual("dropdown");
+  expect(validatorTypeQuestion.showOptionsCaption).toBeFalsy();
   expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
   var validatorCount = question.getSupportedValidators().length;
   expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);
@@ -397,7 +399,9 @@ test("Validators property editor", () => {
     "text"
   ).value = "validator2 text";
   expect(question.validators[1].text).toEqual("validator2 text");
-  validatorTypeQuestion = validatorsQuestion.visibleRows[1].cells[0].question;
+  validatorTypeQuestion = <QuestionDropdownModel>(
+    validatorsQuestion.visibleRows[1].cells[0].question
+  );
   validatorTypeQuestion.value = "numericvalidator";
   expect(
     validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("text")
@@ -441,7 +445,10 @@ test("Triggers property editor", () => {
     "expression"
   ).value = "{q1} = 1";
   expect(survey.triggers[1].expression).toEqual("{q1} = 1");
-  triggerTypeQuestion = triggersQuestion.visibleRows[1].cells[0].question;
+  triggerTypeQuestion = <QuestionDropdownModel>(
+    triggersQuestion.visibleRows[1].cells[0].question
+  );
+  expect(triggerTypeQuestion.showOptionsCaption).toBeFalsy();
   triggerTypeQuestion.value = "completetrigger";
   expect(
     triggersQuestion.visibleRows[1].detailPanel.getQuestionByName("expression")
