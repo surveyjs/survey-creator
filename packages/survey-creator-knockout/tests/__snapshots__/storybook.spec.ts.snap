@@ -452,7 +452,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                 class="svc-property-panel__header"
                 data-bind="text: title"
               >
-                survey
+                Survey
               </div>
               
 
@@ -826,7 +826,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         class="svc-property-panel__header"
         data-bind="text: title"
       >
-        survey
+        Survey
       </div>
       
 
