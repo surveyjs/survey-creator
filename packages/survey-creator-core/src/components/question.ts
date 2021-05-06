@@ -8,12 +8,12 @@ import {
   property,
   QuestionHtmlModel,
   PanelModel,
-  PanelModelBase,
-} from "survey-core";
-import { CreatorBase } from "../creator-base";
-import { DragDropHelper } from "../dragdrophelper";
-import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
-import "./question.scss";
+  PanelModelBase
+} from 'survey-core';
+import { CreatorBase } from '../creator-base';
+import { DragDropHelper } from '../dragdrophelper';
+import { IPortableDragEvent, IPortableMouseEvent } from '../utils/events';
+import './question.scss';
 
 export class QuestionAdornerViewModel extends Base {
   public creator: CreatorBase<SurveyModel>;
@@ -40,11 +40,11 @@ export class QuestionAdornerViewModel extends Base {
   }
   css() {
     let result = this.creator.isElementSelected(this.surveyElement)
-      ? "svc-question__content--selected"
-      : "";
+      ? 'svc-question__content--selected'
+      : '';
 
     if (this.isEmptyElement) {
-      result += " svc-question__content--empty";
+      result += ' svc-question__content--empty';
     }
 
     return result;
@@ -70,7 +70,7 @@ export class QuestionAdornerViewModel extends Base {
   }
 
   public get placeholderText(): string {
-    return "Drop questions here";
+    return 'Drop questions here';
   }
 
   private get dragDropHelper(): DragDropHelper {
@@ -79,11 +79,6 @@ export class QuestionAdornerViewModel extends Base {
 
   startDrag(event: PointerEvent) {
     this.dragDropHelper.startDragQuestion(event, <any>this.surveyElement);
-    return true;
-  }
-  doDragOver(event: PointerEvent) {
-    console.log("do drag over");
-    // this.dragDropHelper.doDragOver(event, <any>this.surveyElement);
     return true;
   }
 
