@@ -1,20 +1,20 @@
-import { Base, PageModel, property, SurveyModel } from "survey-core";
-import { CreatorBase } from "../../creator-base";
-import "./designer.scss";
+import { Base, PageModel, property, SurveyModel } from 'survey-core';
+import { CreatorBase } from '../../creator-base';
+import './designer.scss';
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   @property() newPage: PageModel;
   public creator: CreatorBase<T>;
 
   private createNewPage() {
-    const newPage = this.creator.survey.createNewPage("");
+    const newPage: PageModel = this.creator.survey.createNewPage('');
     newPage.setSurveyImpl(this.creator.survey);
     this.creator.setNewNames(newPage);
     newPage.onFirstRendering();
     newPage.updateCustomWidgets();
     newPage.setWasShown(true);
-    newPage["_addToSurvey"] = () => {
-      newPage["_addToSurvey"] = undefined;
+    newPage['_addToSurvey'] = () => {
+      newPage['_addToSurvey'] = undefined;
       this.survey.addPage(newPage);
       this.createNewPage();
     };
@@ -30,7 +30,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     return this.creator.survey;
   }
   public get showNewPage(): boolean {
-    const pages = this.survey.pages;
+    const pages: PageModel[] = this.survey.pages;
     return pages.length === 0 || pages[pages.length - 1].rows.length > 0;
   }
 }
