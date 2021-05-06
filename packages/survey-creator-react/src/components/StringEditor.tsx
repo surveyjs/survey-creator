@@ -47,7 +47,6 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   };
   edit = (event: MouseEvent) => {
     this.svStringEditorRef.current.focus();
-    this.done(event);
   };
   render(): JSX.Element {
     if (!this.locStr) {
@@ -66,7 +65,6 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           dangerouslySetInnerHTML={htmlValue}
           onBlur={this.onInput}
           onKeyDown={this.onKeyDown}
-          onClick={this.done}
         />
       );
     } else {
@@ -79,14 +77,13 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           style={this.style}
           onBlur={this.onInput}
           onKeyDown={this.onKeyDown}
-          onClick={this.done}
         >
           {this.locStr.renderedHtml}
         </span>
       );
     }
     return (
-      <span className="svc-string-editor" onClick={this.done}>
+      <span className="svc-string-editor">
         <span className="svc-string-editor__content">
           <div className="svc-string-editor__border"></div>
           {control}
