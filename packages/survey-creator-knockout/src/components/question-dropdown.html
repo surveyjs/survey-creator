@@ -1,22 +1,21 @@
 <div
   class="svc-question__adorner"
-  data-bind="event: { dragover: koDragOver, dragend: koDragEnd, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+  data-bind="event: { pointerdown: (model, event)=>{startDrag(event)}, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
   <div
     class="svc-question__content"
-    data-bind="click: koSelect, clickBubble: false, css: css(), attr: { draggable: isDraggable }, event: { dragstart: koDragStart }, hidden: isDragged"
+    data-bind="click: koSelect, clickBubble: false, css: css(), hidden: isDragged"
   >
-
     <!-- ko component: { name: 'survey-element-component', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
 
     <div class="svc-question__dropdown-choices">
-        <!-- ko foreach: { data: question.visibleChoices, as: 'item' }  -->
-          <div class="svc-question__dropdown-choice">
-              <!-- ko component: { name: question.getItemValueWrapperComponentName(item), params: { componentData:  question.getItemValueWrapperComponentData(item), templateData: { name: 'svc-choice-item-text', data: item } } } -->
-              <!-- /ko -->
-          </div>
+      <!-- ko foreach: { data: question.visibleChoices, as: 'item' }  -->
+      <div class="svc-question__dropdown-choice">
+        <!-- ko component: { name: question.getItemValueWrapperComponentName(item), params: { componentData:  question.getItemValueWrapperComponentData(item), templateData: { name: 'svc-choice-item-text', data: item } } } -->
         <!-- /ko -->
+      </div>
+      <!-- /ko -->
     </div>
 
     <div class="svc-question__content-actions">

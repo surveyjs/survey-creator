@@ -1,10 +1,10 @@
 <div
   class="svc-question__adorner"
-  data-bind="event: { dragover: koDragOver, dragend: koDragEnd, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+  data-bind="event: { pointerdown: (model, event)=>{startDrag(event)}, pointerenter:(model, event)=>{doDragOver(event)} ,mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
   <div
     class="svc-question__content"
-    data-bind="click: koSelect, clickBubble: false, css: css(), attr: { draggable: isDraggable }, event: { dragstart: koDragStart }, hidden: isDragged"
+    data-bind="click: koSelect, clickBubble: false, css: css(), hidden: isDragged"
   >
     <!-- ko if: isEmptyElement -->
     <div class="svc-panel__placeholder_frame">

@@ -77,6 +77,16 @@ export class QuestionAdornerViewModel extends Base {
     return this.creator.dragDropHelper;
   }
 
+  startDrag(event: PointerEvent) {
+    this.dragDropHelper.startDragQuestion(event, <any>this.surveyElement);
+    return true;
+  }
+  doDragOver(event: PointerEvent) {
+    console.log("do drag over");
+    // this.dragDropHelper.doDragOver(event, <any>this.surveyElement);
+    return true;
+  }
+
   dragStart(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
     // setTimeout(() => (model.isDragged = true), 1);
     const sourceElement = model.surveyElement;

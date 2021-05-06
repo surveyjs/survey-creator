@@ -54,6 +54,46 @@ export class DragDropHelper extends Base {
     return this.onDragStart(event, sourceElement);
   }
 
+  public startDragQuestion(event: PointerEvent, sourceElement: IElement) {
+    this.ghostElement = this.createGhostElement();
+    this.sourceElement = sourceElement;
+
+    const draggedElement = document.createElement("div");
+    draggedElement.innerText = sourceElement.name;
+    draggedElement.style.height = "40px";
+    draggedElement.style.minWidth = "100px";
+    draggedElement.style.borderRadius = "100px";
+    draggedElement.style.backgroundColor = "white";
+    draggedElement.style.padding = "10px";
+
+    draggedElement.style.cursor = "grabbing";
+    draggedElement.style.position = "absolute";
+    draggedElement.style.zIndex = "1000";
+    document.body.append(draggedElement);
+
+    let shiftX = draggedElement.offsetWidth / 2;
+    let shiftY = draggedElement.offsetHeight / 2;
+
+    moveAt(event.pageX, event.pageY);
+
+    function moveAt(pageX, pageY) {
+      draggedElement.style.left = pageX - shiftX + "px";
+      draggedElement.style.top = pageY - shiftY + "px";
+    }
+
+    function onPoinerMove(event) {
+      moveAt(event.pageX, event.pageY);
+    }
+
+    document.addEventListener("pointermove", onPoinerMove);
+
+    draggedElement.onpointerup = function () {
+      document.removeEventListener("pointermove", onPoinerMove);
+      draggedElement.onpointerup = null;
+      document.body.removeChild(draggedElement);
+    };
+  }
+
   public onDragStartItemValue(
     event: IPortableDragEvent,
     question: QuestionSelectBase,
