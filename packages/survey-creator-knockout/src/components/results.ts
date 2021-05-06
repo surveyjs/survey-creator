@@ -1,29 +1,27 @@
 import * as ko from "knockout";
 import { SurveyResultsModel } from "@survey/creator";
 import { ImplementorBase } from "survey-knockout-ui";
-
-var templateHtml = require("./results.html");
-var rowTemplateHtml = require("./results-table-row.html");
-
+const templateHtml = require("./results.html");
+const rowTemplateHtml = require("./results-table-row.html");
 
 ko.components.register("survey-results", {
   viewModel: {
-    createViewModel: (params, componentInfo) => {
-      const model = new SurveyResultsModel(ko.unwrap(params.survey));
+    createViewModel: (params) => {
+      const model: SurveyResultsModel = new SurveyResultsModel(ko.unwrap(params.survey));
       new ImplementorBase(model);
       return model;
-    },
+    }
   },
-  template: templateHtml,
+  template: templateHtml
 });
 
 ko.components.register("survey-results-table-row", {
   viewModel: {
-    createViewModel: (params, componentInfo) => {
-      var model = params.model;
+    createViewModel: (params) => {
+      const model = params.model;
       new ImplementorBase(model);
       return model;
-    },
+    }
   },
-  template: rowTemplateHtml,
+  template: rowTemplateHtml
 });

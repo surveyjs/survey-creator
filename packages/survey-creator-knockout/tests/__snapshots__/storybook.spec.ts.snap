@@ -358,6 +358,14 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             >
               
     
+              <svc-template-renderer
+                params="templateName: 'survey-header', templateData: survey"
+              >
+                <!-- ko template: { name: templateName, data: templateData } -->
+                <!-- /ko -->
+              </svc-template-renderer>
+              
+    
               <!-- ko foreach: survey.pages -->
               
     
@@ -730,6 +738,14 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       class="sv-container-modern"
       data-bind="css: survey.css.container"
     >
+      
+    
+      <svc-template-renderer
+        params="templateName: 'survey-header', templateData: survey"
+      >
+        <!-- ko template: { name: templateName, data: templateData } -->
+        <!-- /ko -->
+      </svc-template-renderer>
       
     
       <!-- ko foreach: survey.pages -->
