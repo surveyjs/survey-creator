@@ -1,0 +1,23 @@
+<div
+  class="svc-question__adorner"
+  data-bind="event: { dragover: koDragOver, dragend: koDragEnd, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+>
+  <div
+    class="svc-question__content"
+    data-bind="click: koSelect, clickBubble: false, css: css(), attr: { draggable: isDraggable }, event: { dragstart: koDragStart }, hidden: isDragged"
+  >
+    <input type="file" accept="image/*" class="svc-choose-file-input" style="position: absolute; opacity: 0; width: 1px; height: 1px; overflow: hidden;" />
+
+    <!-- ko component: { name: 'survey-element-component', params: { componentData: null, templateData: templateData } } -->
+    <!-- /ko -->
+
+    <div class="svc-image-question-controls">
+      <sv-svg-icon class="svc-image-question-controls__button" data-bind="click: chooseFile" params="iconName: 'icon-file', size: 24"></sv-svg-icon>
+    </div>
+
+    <div class="svc-question__content-actions">
+      <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
+      <!-- /ko -->
+    </div>
+  </div>
+</div>

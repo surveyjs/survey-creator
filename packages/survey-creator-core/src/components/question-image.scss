@@ -1,0 +1,41 @@
+@import "../variables.scss";
+
+.svc-image-question-controls {
+  position: absolute;
+  top: calcSize(1.5);
+  right: calcSize(1.5);
+  display: none;
+}
+
+.svc-question__content--selected .svc-image-question-controls {
+  display: block;
+}
+
+.svc-image-question-controls__button {
+  display: inline-block;
+  background-color: $background;
+  border-radius: 50%;
+  width: calcSize(6);
+  height: calcSize(6);
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: calcSize(0.5);
+  }
+
+  .sv-svg-icon {
+    margin-top: calc(50% - 12px);
+    margin-left: calc(50% - 12px);
+  }
+
+  use {
+    fill: $foreground-light;
+  }
+}
+
+.svc-image-item-value-controls__choose-file:hover {
+  // background-color: $primary-light;
+  use {
+    fill: $primary;
+  }
+}
