@@ -5,6 +5,7 @@ import "@survey/creator/survey-creator-core.css";
 export * from "../SurveyCreator";
 export * from "../components/Question";
 export * from "../components/QuestionDropdown";
+export * from "../components/QuestionImage";
 export * from "../components/ItemValueWrapper";
 export * from "../components/ImageItemValueWrapper";
 export * from "../components/tabs/Designer";
