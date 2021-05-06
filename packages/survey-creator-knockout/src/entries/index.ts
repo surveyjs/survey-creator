@@ -27,6 +27,7 @@ export * from "../components/survey-renderers/dropdown";
 export * from "../components/tabs/test";
 export * from "../components/tabbed-menu/tabbed-menu";
 export * from "../components/tabbed-menu/tabbed-menu-item";
+export * from "../components/template-renderer";
 export * from "../components/toolbox/toolbox";
 export * from "../components/toolbox/toolbox-item";
 export * from "../utils/survey-widget";

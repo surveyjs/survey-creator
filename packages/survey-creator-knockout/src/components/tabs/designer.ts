@@ -11,7 +11,7 @@ ko.components.register('svc-tab-designer', {
       const model = new TabDesignerViewModel<Survey>(params.creator);
       new ImplementorBase(model);
       return model;
-    },
+    }
   },
   template: template
 });
