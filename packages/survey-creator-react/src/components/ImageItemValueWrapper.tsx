@@ -99,7 +99,7 @@ ImageItemValueAdornerComponentProps,
     return (
       <div
         ref={this.rootRef}
-        className={"svc-image-item-value-wrapper" + (this.model.isNew ? " svc-image-item-value--new" : "")} key={this.props.element.key}
+        className={"svc-image-item-value-wrapper" + (isNew ? " svc-image-item-value--new" : "")} key={this.props.element.key}
         draggable={this.model.isDraggable}
         onDragStart={ (e) => this.model.dragStart(this.model, new ReactDragEvent(e)) }
         onDragOver={ (e) => this.model.dragOver(this.model, new ReactDragEvent(e)) }
