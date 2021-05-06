@@ -1523,3 +1523,25 @@ test("showOptionsCaption for dropdown with empty choice item", () => {
 
   Serializer.removeProperty("question", "test");
 });
+test("property editor show help as description", () => {
+  var question = new QuestionTextModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var defaultValueExpressionQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("defaultValueExpression")
+  );
+  var actions = defaultValueExpressionQuestion.getTitleActions();
+  expect(
+    defaultValueExpressionQuestion.description.indexOf(
+      "You can use curly brackets"
+    ) > -1
+  ).toBeTruthy();
+  expect(actions).toHaveLength(2);
+  expect(actions[1].id).toEqual("property-grid-help");
+  expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
+  actions[1].action();
+  expect(defaultValueExpressionQuestion.descriptionLocation).toEqual(
+    "underTitle"
+  );
+  actions[1].action();
+  expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
+});

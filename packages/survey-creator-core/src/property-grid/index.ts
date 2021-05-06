@@ -266,6 +266,10 @@ export class PropertyGridTitleActionsCreator {
         this.createEditorSetupAction(editor, property, question, enabled)
       );
     }
+    var helpAction = this.createPropertyHelpAction(question);
+    if (!!helpAction) {
+      actions.push(helpAction);
+    }
     if (actions.length > 0) {
       options.titleActions = actions;
     }
@@ -326,6 +330,23 @@ export class PropertyGridTitleActionsCreator {
       },
     };
     return setupAction;
+  }
+  private createPropertyHelpAction(question: Question): any {
+    if (!question.description) return null;
+    return {
+      title: "",
+      id: "property-grid-help",
+      iconName: () => {
+        return question.descriptionLocation != "hidden"
+          ? "icon-editingfinish"
+          : "icon-edit";
+      },
+      showTitle: false,
+      action: () => {
+        question.descriptionLocation =
+          question.descriptionLocation != "hidden" ? "hidden" : "underTitle";
+      },
+    };
   }
 }
 
@@ -400,7 +421,6 @@ export class PropertyJSONGenerator {
       q.descriptionLocation = "hidden";
       var helpText = PropertiesHelpTexts.instance.getHelpText(this.obj, prop);
       if (!!helpText) {
-        q.descriptionLocation = "underTitle";
         q.description = helpText;
       }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop);
