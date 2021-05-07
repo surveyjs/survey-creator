@@ -57,7 +57,7 @@ export class QuestionDropdownAdornerComponent extends SurveyElementBase<
 
             <div className="svc-question__dropdown-choices">
                 {(question.visibleChoices.map((item: ItemValue, index: number) => (
-                  <div className="svc-question__dropdown-choice">
+                  <div className="svc-question__dropdown-choice" key={`editable_choice_${index}`}>
                     {(question.survey["wrapItemValue"](SurveyElementBase.renderLocString(item.locText), question, item))}
                 </div>
               )))}
