@@ -5,7 +5,7 @@ import {
   SurveyTriggerRunExpression,
   PanelModel,
   SurveyTriggerSkip,
-  QuestionMatrixDynamicModel
+  QuestionMatrixDynamicModel,
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -441,7 +441,7 @@ test("SurveyLogicUI: create trigger_runExpression trigger", () => {
   var runExpressionQuestion = elementPanel.getQuestionByName("runExpression");
   expect(runExpressionQuestion).toBeTruthy();
   var actions = runExpressionQuestion.getTitleActions();
-  expect(actions).toHaveLength(1);
+  expect(actions).toHaveLength(2);
   expect(actions[0].id).toEqual("property-grid-clear");
 });
 test("LogicItemEditorUI: remove item", () => {
