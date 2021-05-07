@@ -1,6 +1,6 @@
 <div
   class="svc-question__adorner svc-drop-zone"
-  data-bind="attr: { 'data-svc-name': surveyElement.name }, event: { pointerdown: (model, event)=>{startDrag(event)}, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+  data-bind="attr: { 'data-svc-name': surveyElement.name }, event: { dragstart: (model, event)=>{return false;}, pointerdown: (model, event)=>{startDrag(event)}, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
   <div
     class="svc-question__content"

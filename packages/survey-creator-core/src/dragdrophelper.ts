@@ -7,10 +7,10 @@ import {
   ItemValue,
   property,
   settings,
-  QuestionSelectBase
-} from 'survey-core';
-import { CreatorBase } from './creator-base';
-import { IPortableDragEvent } from './utils/events';
+  QuestionSelectBase,
+} from "survey-core";
+import { CreatorBase } from "./creator-base";
+import { IPortableDragEvent } from "./utils/events";
 
 export class DragDropHelper extends Base {
   public static edgeHeight: number = 20;
@@ -31,7 +31,7 @@ export class DragDropHelper extends Base {
   }
 
   private get sourceElementType() {
-    if (!this.sourceElement) return 'toolbox-item';
+    if (!this.sourceElement) return "toolbox-item";
     return this.sourceElement.getType();
   }
 
@@ -58,43 +58,52 @@ export class DragDropHelper extends Base {
     this.ghostElement = this.createGhostElement();
     this.sourceElement = sourceElement;
 
-    const draggedElement = document.createElement('div');
+    const draggedElement = document.createElement("div");
     draggedElement.innerText = sourceElement.name;
-    draggedElement.style.height = '40px';
-    draggedElement.style.minWidth = '100px';
-    draggedElement.style.borderRadius = '100px';
-    draggedElement.style.backgroundColor = 'white';
-    draggedElement.style.padding = '10px';
+    draggedElement.style.height = "40px";
+    draggedElement.style.minWidth = "100px";
+    draggedElement.style.borderRadius = "100px";
+    draggedElement.style.backgroundColor = "white";
+    draggedElement.style.padding = "10px";
 
-    draggedElement.style.cursor = 'grabbing';
-    draggedElement.style.position = 'absolute';
-    draggedElement.style.zIndex = '1000';
+    draggedElement.style.cursor = "grabbing";
+    draggedElement.style.position = "absolute";
+    draggedElement.style.zIndex = "1000";
     document.body.append(draggedElement);
 
     let shiftX = draggedElement.offsetWidth / 2;
     let shiftY = draggedElement.offsetHeight / 2;
 
-    const moveAt = (pageX, pageY) => {
-      draggedElement.style.left = pageX - shiftX + 'px';
-      draggedElement.style.top = pageY - shiftY + 'px';
+    const getScrollableParent = (node) => {
+      if (node == null) {
+        return null;
+      }
+
+      if (node.scrollHeight > node.clientHeight) {
+        return node;
+      } else {
+        return getScrollableParent(node.parentNode);
+      }
     };
 
-    moveAt(event.pageX, event.pageY);
+    let intervalId;
+    let howMuchToTop;
 
-    const onPoinerMove = (event) => {
-      moveAt(event.pageX, event.pageY);
+    const moveAt = (event) => {
+      draggedElement.style.left = event.pageX - shiftX + "px";
+      draggedElement.style.top = event.pageY - shiftY + "px";
 
       draggedElement.hidden = true;
-      let draggedOverElement = document.elementFromPoint(
+      let draggedOverNode = document.elementFromPoint(
         event.clientX,
         event.clientY
       );
       draggedElement.hidden = false;
 
-      if (!draggedOverElement) return;
+      if (!draggedOverNode) return;
 
       let dropZoneElement = <HTMLElement>(
-        draggedOverElement.closest('.svc-drop-zone')
+        draggedOverNode.closest(".svc-drop-zone")
       );
 
       if (!dropZoneElement) return;
@@ -102,14 +111,36 @@ export class DragDropHelper extends Base {
       this.draggedOverElement = this.survey.getQuestionByName(
         dropZoneElement.dataset.svcName
       );
+
+      if (!this.draggedOverElement) return; //TODO this is strange
+
+      this.removeGhostElementFromSurvey();
+      this.insertGhostElementIntoSurvey(this.draggedOverElement, true, true);
+
+      //scroll
+      const startScrollBoundary = 50;
+      let scrollableParentElement = getScrollableParent(dropZoneElement)
+        .parentNode;
+
+      if (howMuchToTop !== event.clientY - shiftY) {
+        howMuchToTop = event.clientY - shiftY;
+        console.log("scr top" + howMuchToTop);
+      }
+
+      if (event.clientY - shiftY <= startScrollBoundary) {
+        scrollableParentElement.scrollTop -= 10;
+      }
+      //EO scroll
     };
 
-    document.addEventListener('pointermove', onPoinerMove);
+    // moveAt(event.pageX, event.pageY);
+
+    document.addEventListener("pointermove", moveAt);
 
     draggedElement.onpointerup = () => {
-      console.log('drop on: ' + this.draggedOverElement.name);
-      this.draggedOverElement;
-      document.removeEventListener('pointermove', onPoinerMove);
+      clearInterval(intervalId);
+      console.log("drop on: " + this.draggedOverElement.name);
+      document.removeEventListener("pointermove", moveAt);
       draggedElement.onpointerup = null;
       document.body.removeChild(draggedElement);
       this.onDragEnd();
@@ -126,7 +157,7 @@ export class DragDropHelper extends Base {
     // shouldn't allow drag start on adorners (selectall, none, other)
     if (question.choices.indexOf(item) === -1) return false;
 
-    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.effectAllowed = "move";
 
     this.itemValueSourceQuestion = question;
     this.sourceElement = <any>item;
@@ -136,7 +167,7 @@ export class DragDropHelper extends Base {
   private onDragStart(event: IPortableDragEvent, sourceElement: IElement) {
     event.stopPropagation(); // prevent call startDrag event on Parent
 
-    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.effectAllowed = "move";
 
     this.ghostElement = this.createGhostElement();
     this.sourceElement = sourceElement;
@@ -146,21 +177,21 @@ export class DragDropHelper extends Base {
 
   private createGhostElement(): any {
     const json = {
-      type: 'html',
-      name: 'svd-drag-drog-ghost-element',
-      html: '<div class="svc-drag-drop-ghost"></div>'
+      type: "html",
+      name: "svd-drag-drog-ghost-element",
+      html: '<div class="svc-drag-drop-ghost"></div>',
     };
     return this.createElementFromJson(json);
   }
 
   private createElementFromJson(json) {
     const element = this.creator.createNewElement(json);
-    if (element['setSurveyImpl']) {
-      element['setSurveyImpl'](this.survey);
+    if (element["setSurveyImpl"]) {
+      element["setSurveyImpl"](this.survey);
     } else {
-      element['setData'](this.survey);
+      element["setData"](this.survey);
     }
-    element.renderWidth = '100%';
+    element.renderWidth = "100%";
     return element;
   }
 
@@ -169,7 +200,7 @@ export class DragDropHelper extends Base {
     question: QuestionSelectBase,
     item: any
   ) {
-    if (this.sourceElementType !== 'itemvalue') {
+    if (this.sourceElementType !== "itemvalue") {
       return true; // ban drop here
     }
 
@@ -199,21 +230,21 @@ export class DragDropHelper extends Base {
 
   public getItemValueGhostPosition(item) {
     if (this.draggedOverElement !== item) return null;
-    if (this.isBottom) return 'bottom';
-    return 'top';
+    if (this.isBottom) return "bottom";
+    return "top";
   }
 
   public onDragOver(event: IPortableDragEvent, draggedOverElement: any) {
     event.stopPropagation();
 
-    if (this.sourceElementType === 'itemvalue') {
-      this.removeGhostElementFromSurvey(this.pageOrPanel);
+    if (this.sourceElementType === "itemvalue") {
+      this.removeGhostElementFromSurvey();
       this.draggedOverElement = null;
       return true; // ban drop here
     }
 
     if (draggedOverElement === this.sourceElement) {
-      this.removeGhostElementFromSurvey(this.pageOrPanel);
+      this.removeGhostElementFromSurvey();
       return true; // ban drop here
     }
 
@@ -281,7 +312,7 @@ export class DragDropHelper extends Base {
 
   private isAtLowerPartOfCurrentTarget(event: IPortableDragEvent): any {
     const target = event.currentTarget;
-    if (!target['getBoundingClientRect']) {
+    if (!target["getBoundingClientRect"]) {
       return true;
     }
     const bounds: DOMRect = (<any>target).getBoundingClientRect();
@@ -292,22 +323,22 @@ export class DragDropHelper extends Base {
       isBottom: event.clientY >= middle,
       isEdge:
         event.clientY - bounds.bottom <= DragDropHelper.edgeHeight ||
-        bounds.top - event.clientY <= DragDropHelper.edgeHeight
+        bounds.top - event.clientY <= DragDropHelper.edgeHeight,
     };
   }
 
   private calculateIsBottomForPanel(event: IPortableDragEvent): any {
     //event = this.getEvent(event);
-    const height = <number>event.currentTarget['clientHeight'];
+    const height = <number>event.currentTarget["clientHeight"];
     let y = event.offsetY;
-    if (event.hasOwnProperty('layerX')) {
-      y = event['layerY'] - <number>event.currentTarget['offsetTop'];
+    if (event.hasOwnProperty("layerX")) {
+      y = event["layerY"] - <number>event.currentTarget["offsetTop"];
     }
     return {
       isBottom: y > height / 2,
       isEdge:
         y <= DragDropHelper.edgeHeight ||
-        height - y <= DragDropHelper.edgeHeight
+        height - y <= DragDropHelper.edgeHeight,
     };
   }
 
@@ -320,8 +351,8 @@ export class DragDropHelper extends Base {
     //event = this.getEvent(event);
     const elY = <number>el.offsetTop + <number>el.clientHeight;
     let y = event.offsetY;
-    if (event.hasOwnProperty('layerX')) {
-      y = event['layerY'] - <number>event.currentTarget['offsetTop'];
+    if (event.hasOwnProperty("layerX")) {
+      y = event["layerY"] - <number>event.currentTarget["offsetTop"];
     }
     return y > elY;
   }
@@ -381,7 +412,7 @@ export class DragDropHelper extends Base {
     isBottom: boolean,
     isEdge: boolean = false
   ): boolean {
-    this.removeGhostElementFromSurvey(this.pageOrPanel);
+    this.removeGhostElementFromSurvey();
 
     this.pageOrPanel = draggedOverElement.isPage
       ? draggedOverElement
@@ -407,18 +438,18 @@ export class DragDropHelper extends Base {
     isBottom,
     isEdge
   ) {
-    this.removeGhostElementFromSurvey(page);
+    this.removeGhostElementFromSurvey();
     page.dragDropStart(null, element, DragDropHelper.nestedPanelDepth);
     page.dragDropMoveTo(draggedOverElement, isBottom, isEdge);
     return page.dragDropFinish();
   }
 
-  private removeGhostElementFromSurvey(page) {
-    if (!!page) page.dragDropFinish(true);
+  private removeGhostElementFromSurvey() {
+    if (!!this.pageOrPanel) this.pageOrPanel.dragDropFinish(true);
   }
 
   public onDragEnd() {
-    this.removeGhostElementFromSurvey(this.pageOrPanel);
+    this.removeGhostElementFromSurvey();
 
     const prevEvent = DragDropHelper.prevEvent;
     prevEvent.element = null;
