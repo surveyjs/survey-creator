@@ -1,6 +1,8 @@
+import ko from "knockout";
+
 import { getNextValue } from "../src/utils/utils";
 import { DesignerContainerViewModel } from "../src/utils/designer-container";
-import ko from "knockout";
+import { ButtonViewModel } from "../src/utils/button";
 
 export default QUnit.module("UtilsTests");
 
@@ -58,4 +60,27 @@ QUnit.test("DesignerContainerViewModel default icons", function (assert) {
   assert.ok(dcm.iconLeftClose, "icon-left-close");
   assert.ok(dcm.iconRightOpen, "icon-right-open");
   assert.ok(dcm.iconRightClose, "icon-right-close");
+});
+
+QUnit.test("ButtonViewModel", function (assert) {
+  let counter = 0;
+  const action = {
+    id: "custom-preview",
+    enabled: ko.observable(true),
+    title: "Survey Preview",
+    action: function() {
+      counter++;
+    }
+  }
+  const button = new ButtonViewModel(action);
+  assert.ok(button.showTitle);
+  assert.equal(counter, 0);
+  assert.notOk(button.disabled);
+  button.action(button);
+  assert.equal(counter, 1);
+
+  action.enabled(false);
+  assert.ok(button.disabled);
+  button.action(button);
+  assert.equal(counter, 1);
 });
