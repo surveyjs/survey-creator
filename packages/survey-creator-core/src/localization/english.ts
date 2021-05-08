@@ -16,7 +16,7 @@ export var enStrings = {
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
-    drag: "Drag element",
+    drag: "Drag element"
   },
   //questionTypes
   qt: {
@@ -42,7 +42,7 @@ export var enStrings = {
     expression: "Expression (read-only)",
     signaturepad: "Signature pad",
     buttongroup: "Button group",
-    flowpanel: "Flow Panel",
+    flowpanel: "Flow Panel"
   },
   //Strings in Editor
   ed: {
@@ -198,8 +198,8 @@ export var enStrings = {
       noActionError: "Please, add at least one action.",
       actionInvalid: "Please, fix problems in your action(s).",
       expressionSetup: "",
-      actionsSetup: "",
-    },
+      actionsSetup: ""
+    }
   },
   //Property names in table headers
   // pel: {
@@ -233,7 +233,7 @@ export var enStrings = {
     showChoices: "Show Choices",
     move: "Move",
     empty: "<empty>",
-    // notEmpty: "<edit value>",
+    emptyValue: "Value is empty",
     fastEntry: "Fast Entry",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -405,7 +405,7 @@ export var enStrings = {
       left: "Left",
       right: "Right",
       top: "On the top",
-      bottom: "In the bottom",
+      bottom: "In the bottom"
     },
 
     tabs: {
@@ -444,7 +444,7 @@ export var enStrings = {
       showOnCompleted: "Show on Completed",
       logo: "Logo in Survey Title",
       slider: "Slider",
-      others: "Others",
+      others: "Others"
     },
     editProperty: "Edit property '{0}'",
     items: "[ Items: {0} ]",
@@ -469,7 +469,7 @@ export var enStrings = {
     triggerIsVariable: "Do not put the variable into the survey result.",
     triggerRunExpressionEmpty: "Please enter a valid expression",
 
-    noFile: "No file choosen",
+    noFile: "No file choosen"
   },
   //Property values
   pv: {
@@ -536,7 +536,7 @@ export var enStrings = {
     questionPerPage: "question per page",
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
-    showAnsweredQuestions: "show preview with answered questions",
+    showAnsweredQuestions: "show preview with answered questions"
   },
   //Operators
   op: {
@@ -553,7 +553,7 @@ export var enStrings = {
     greaterorequal: "greater or equals",
     lessorequal: "less or equals",
     and: "and",
-    or: "or",
+    or: "or"
   },
   //Embed window
   ew: {
@@ -576,12 +576,12 @@ export var enStrings = {
     loadFromServer: "Load Survey JSON from server",
     titleScript: "Scripts and styles",
     titleHtml: "HTML",
-    titleJavaScript: "JavaScript",
+    titleJavaScript: "JavaScript"
   },
   //Test Survey
   ts: {
     selectPage: "Select the page to test it:",
-    showInvisibleElements: "Show invisible elements",
+    showInvisibleElements: "Show invisible elements"
   },
   validators: {
     answercountvalidator: "answer count",
@@ -589,7 +589,7 @@ export var enStrings = {
     expressionvalidator: "expression",
     numericvalidator: "numeric",
     regexvalidator: "regex",
-    textvalidator: "text",
+    textvalidator: "text"
   },
   triggers: {
     completetrigger: "complete survey",
@@ -597,7 +597,7 @@ export var enStrings = {
     copyvaluetrigger: "copy value",
     skiptrigger: "skip to question",
     runexpressiontrigger: "run expression",
-    visibletrigger: "change visibility (deprecated)",
+    visibletrigger: "change visibility (deprecated)"
   },
   pehelp: {
     //expression:
@@ -607,7 +607,7 @@ export var enStrings = {
     name: "name",
     title: {
       name: "title",
-      title: "Leave it empty, if it is the same as 'Name'",
+      title: "Leave it empty, if it is the same as 'Name'"
     },
 
     navigationButtonsVisibility: "navigationButtonsVisibility",
@@ -762,8 +762,8 @@ export var enStrings = {
     hasNone: "hasNone",
     noneText: "noneText",
 
-    text: "text",
-  },
+    text: "text"
+  }
 };
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
 //editorLocalization.locales["en"] = enStrings;
