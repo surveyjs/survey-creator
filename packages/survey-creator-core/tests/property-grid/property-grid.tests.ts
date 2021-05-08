@@ -529,8 +529,14 @@ test("QuestionMultipleTextModel items property editor", () => {
     propertyGrid.survey.getQuestionByName("items")
   );
   expect(itemsQuestion).toBeTruthy();
-  expect(itemsQuestion.visibleRows).toHaveLength(1);
-  itemsQuestion.visibleRows[0].showDetailPanel();
+  var rows = itemsQuestion.visibleRows;
+  expect(rows).toHaveLength(1);
+  var nameQuestion = rows[0].getQuestionByName("name");
+  expect(nameQuestion.value).toEqual("item1");
+  nameQuestion.value = "item11";
+  expect(question.items[0].name).toEqual("item11");
+  question.items[0].name = "item1";
+  rows[0].showDetailPanel();
   var titleQ = itemsQuestion.visibleRows[0].detailPanel.getQuestionByName(
     "title"
   );
