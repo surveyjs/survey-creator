@@ -87,7 +87,6 @@ export class DragDropHelper extends Base {
     };
 
     let intervalId;
-    let howMuchToTop;
 
     const moveAt = (event) => {
       draggedElement.style.left = event.pageX - shiftX + "px";
@@ -101,6 +100,39 @@ export class DragDropHelper extends Base {
       draggedElement.hidden = false;
 
       if (!draggedOverNode) return;
+
+      //scroll
+      clearInterval(intervalId);
+      const startScrollBoundary = 50;
+      // let scrollableParentElement = getScrollableParent(dropZoneElement)
+      //   .parentNode;
+      let scrollableParentElement = document.querySelector(
+        ".svc-tab-designer.sv-root-modern"
+      );
+
+      let top = scrollableParentElement.getBoundingClientRect().top;
+      let bottom = scrollableParentElement.getBoundingClientRect().bottom;
+      let left = scrollableParentElement.getBoundingClientRect().left;
+      let right = scrollableParentElement.getBoundingClientRect().right;
+
+      if (event.clientY - top <= startScrollBoundary) {
+        intervalId = setInterval(() => {
+          scrollableParentElement.scrollTop -= 1;
+        }, 10);
+      } else if (bottom - event.clientY <= startScrollBoundary) {
+        intervalId = setInterval(() => {
+          scrollableParentElement.scrollTop += 1;
+        }, 10);
+      } else if (right - event.clientX <= startScrollBoundary) {
+        intervalId = setInterval(() => {
+          scrollableParentElement.scrollLeft += 1;
+        }, 10);
+      } else if (event.clientX - left <= startScrollBoundary) {
+        intervalId = setInterval(() => {
+          scrollableParentElement.scrollLeft -= 1;
+        }, 10);
+      }
+      //EO scroll
 
       let dropZoneElement = <HTMLElement>(
         draggedOverNode.closest(".svc-drop-zone")
@@ -116,21 +148,6 @@ export class DragDropHelper extends Base {
 
       this.removeGhostElementFromSurvey();
       this.insertGhostElementIntoSurvey(this.draggedOverElement, true, true);
-
-      //scroll
-      const startScrollBoundary = 50;
-      let scrollableParentElement = getScrollableParent(dropZoneElement)
-        .parentNode;
-
-      if (howMuchToTop !== event.clientY - shiftY) {
-        howMuchToTop = event.clientY - shiftY;
-        console.log("scr top" + howMuchToTop);
-      }
-
-      if (event.clientY - shiftY <= startScrollBoundary) {
-        scrollableParentElement.scrollTop -= 10;
-      }
-      //EO scroll
     };
 
     // moveAt(event.pageX, event.pageY);
@@ -139,7 +156,9 @@ export class DragDropHelper extends Base {
 
     draggedElement.onpointerup = () => {
       clearInterval(intervalId);
-      console.log("drop on: " + this.draggedOverElement.name);
+      if (this.draggedOverElement) {
+        console.log("drop on: " + this.draggedOverElement.name);
+      }
       document.removeEventListener("pointermove", moveAt);
       draggedElement.onpointerup = null;
       document.body.removeChild(draggedElement);
