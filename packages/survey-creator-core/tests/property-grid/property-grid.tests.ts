@@ -1,6 +1,6 @@
 import {
   PropertyGridModel,
-  PropertyGridEditorCollection,
+  PropertyGridEditorCollection
 } from "../../src/property-grid";
 import {
   Base,
@@ -27,11 +27,11 @@ import {
   QuestionPanelDynamicModel,
   QuestionMatrixDropdownModel,
   IActionBarItem,
-  QuestionRatingModel,
+  QuestionRatingModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions,
+  EmptySurveyCreatorOptions
 } from "../../src/settings";
 
 export * from "../../src/property-grid/matrices";
@@ -40,11 +40,11 @@ export * from "../../src/property-grid/restfull";
 import { CellsEditor } from "../../src/property-grid/cells-survey";
 import {
   PropertyGridValueEditor,
-  PropertyGridRowValueEditor,
+  PropertyGridRowValueEditor
 } from "../../src/property-grid/values";
 import {
   SurveyQuestionEditorTabDefinition,
-  SurveyQuestionProperties,
+  SurveyQuestionProperties
 } from "../../src/questionEditors/questionEditor";
 
 export class PropertyGridModelTester extends PropertyGridModel {
@@ -137,7 +137,7 @@ test("dropdown property editor, get choices on callback", () => {
     choices: function (obj, choicesCallback) {
       callback = choicesCallback;
       return [];
-    },
+    }
   });
   var survey = new SurveyModel();
   var propertyGrid = new PropertyGridModelTester(survey);
@@ -153,7 +153,7 @@ test("dropdown property editor, get choices on callback", () => {
 test("set property editor", () => {
   Serializer.addProperty("question", {
     name: "prop1:set",
-    choices: ["item1", "item2", "item3"],
+    choices: ["item1", "item2", "item3"]
   });
   var question = new QuestionTextModel("q1");
   question.prop1 = ["item1", "item3"];
@@ -328,9 +328,9 @@ test("Support question property editor", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
-      { type: "text", name: "q2" },
+      { type: "text", name: "q2" }
     ],
-    triggers: [{ type: "skiptrigger", gotoName: "q2" }],
+    triggers: [{ type: "skiptrigger", gotoName: "q2" }]
   });
   var trigger = survey.triggers[0];
   var propertyGrid = new PropertyGridModelTester(trigger);
@@ -347,8 +347,8 @@ test("Support select base question property editor", () => {
       { type: "text", name: "q1" },
       { type: "text", name: "q2" },
       { type: "checkbox", name: "q3" },
-      { type: "dropdown", name: "q4" },
-    ],
+      { type: "dropdown", name: "q4" }
+    ]
   });
   var question = <QuestionDropdownModel>survey.getQuestionByName("q4");
   var propertyGrid = new PropertyGridModelTester(question);
@@ -529,8 +529,14 @@ test("QuestionMultipleTextModel items property editor", () => {
     propertyGrid.survey.getQuestionByName("items")
   );
   expect(itemsQuestion).toBeTruthy();
-  expect(itemsQuestion.visibleRows).toHaveLength(1);
-  itemsQuestion.visibleRows[0].showDetailPanel();
+  var rows = itemsQuestion.visibleRows;
+  expect(rows).toHaveLength(1);
+  var nameQuestion = rows[0].getQuestionByName("name");
+  expect(nameQuestion.value).toEqual("item1");
+  nameQuestion.value = "item11";
+  expect(question.items[0].name).toEqual("item11");
+  question.items[0].name = "item1";
+  rows[0].showDetailPanel();
   var titleQ = itemsQuestion.visibleRows[0].detailPanel.getQuestionByName(
     "title"
   );
@@ -547,8 +553,8 @@ test("bindings property editor", () => {
     elements: [
       { type: "text", name: "q2" },
       { type: "matrixdynamic", name: "q1", bindings: { rowCount: "q2" } },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
   var propertyGrid = new PropertyGridModelTester(matrix);
@@ -1076,6 +1082,9 @@ test("DefaultValue editor", () => {
   var propertyGrid = new PropertyGridModelTester(question);
   var editQuestion = propertyGrid.survey.getQuestionByName("defaultValue");
   expect(editQuestion).toBeTruthy();
+  expect(editQuestion.getType()).toEqual("propertygrid_value");
+  expect(editQuestion.value).toEqual(2);
+  expect(editQuestion.contentQuestion.html).toEqual("2");
   var editor = <PropertyGridValueEditor>(
     PropertyGridEditorCollection.getEditor(editQuestion.property)
   );
@@ -1100,6 +1109,23 @@ test("DefaultValue editor", () => {
   );
   expect(question.defaultValue).toBeFalsy();
 });
+test("DefaultValue editor, use display value", () => {
+  PropertyGridEditorCollection.register(new PropertyGridValueEditor());
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = [
+    { value: 1, text: "Item 1" },
+    { value: 2, text: "Item 2" }
+  ];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var editQuestion = propertyGrid.survey.getQuestionByName("defaultValue");
+  var htmlQuestion = editQuestion.contentQuestion;
+  expect(htmlQuestion.html).toEqual("Value is empty");
+  question.defaultValue = [1, 2];
+  expect(htmlQuestion.html).toEqual("Item 1, Item 2");
+  question.defaultValue = undefined;
+  expect(htmlQuestion.html).toEqual("Value is empty");
+});
+
 test("DefaultValue editor for invisible values", () => {
   PropertyGridEditorCollection.register(new PropertyGridValueEditor());
   var question = new QuestionDropdownModel("q1");
@@ -1108,7 +1134,7 @@ test("DefaultValue editor for invisible values", () => {
   question.choices = [
     { value: 1, visibleIf: "{q2} = 2}" },
     { value: 2, enableIf: "{q2} = 2}" },
-    3,
+    3
   ];
   var propertyGrid = new PropertyGridModelTester(question);
   var editQuestion = propertyGrid.survey.getQuestionByName("defaultValue");
@@ -1201,12 +1227,12 @@ test("Matrix cells editor", () => {
   question.cells.setJson({
     default: { col1: "dCol1" },
     row1: { col1: "val1" },
-    row2: { col2: "val2" },
+    row2: { col2: "val2" }
   });
   expect(question.cells.getJson()).toEqual({
     default: { col1: "dCol1" },
     row1: { col1: "val1" },
-    row2: { col2: "val2" },
+    row2: { col2: "val2" }
   });
   var propertyGrid = new PropertyGridModelTester(question);
   var editQuestion = propertyGrid.survey.getQuestionByName("cells");
@@ -1226,18 +1252,18 @@ test("Matrix cells editor", () => {
   expect(valueQuestion.value).toEqual({
     default: { col1: "dCol1" },
     row1: { col1: "val1" },
-    row2: { col2: "val2" },
+    row2: { col2: "val2" }
   });
   valueQuestion.value = {
     default: { col2: "dCol2" },
     row1: { col2: "val3" },
-    row2: { col1: "val4" },
+    row2: { col1: "val4" }
   };
   valueEditor.apply();
   expect(question.cells.getJson()).toEqual({
     default: { col2: "dCol2" },
     row1: { col2: "val3" },
-    row2: { col1: "val4" },
+    row2: { col1: "val4" }
   });
   editor.clearPropertyValue(
     question,
@@ -1251,16 +1277,16 @@ test("trigger value editor", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] },
-      { type: "text", name: "q2" },
+      { type: "text", name: "q2" }
     ],
     triggers: [
       {
         type: "setvalue",
         expression: "{q2} = 1",
         setToName: "q1",
-        setValue: 1,
-      },
-    ],
+        setValue: 1
+      }
+    ]
   });
   var trigger = <SurveyTriggerSetValue>survey.triggers[0];
 
@@ -1451,8 +1477,8 @@ test("Change survey locale", () => {
   survey.fromJSON({
     title: {
       default: "title en",
-      de: "title de",
-    },
+      de: "title de"
+    }
   });
   var propertyGrid = new PropertyGridModelTester(survey);
   var localeQuestion = <QuestionDropdownModel>(
@@ -1473,7 +1499,7 @@ test("DependedOn properties, dynamic choices", () => {
     dependsOn: "targetEntity",
     choices: function (obj) {
       return getChoicesByEntity(obj);
-    },
+    }
   });
   function getChoicesByEntity(obj: any): Array<any> {
     var entity = !!obj ? obj["targetEntity"] : null;
@@ -1511,7 +1537,7 @@ test("showOptionsCaption for dropdown with empty choice item", () => {
         choices.push({ value: i, text: "Value" + i.toString() });
       }
       return choices;
-    },
+    }
   });
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);

@@ -11,14 +11,14 @@ import {
   QuestionMatrixDynamicModel,
   Serializer,
   settings,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { EditableObject } from "../propertyEditors/editableObject";
 import { propertyGridCss } from "../property-grid-theme/property-grid";
 import {
   SurveyQuestionEditorTabDefinition,
-  SurveyQuestionProperties,
+  SurveyQuestionProperties
 } from "../questionEditors/questionEditor";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
@@ -225,6 +225,12 @@ export var PropertyGridEditorCollection = {
       res.onGetQuestionTitleActions(obj, options);
     }
   },
+  onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onValueChanged) {
+      res.onValueChanged(obj, prop, question);
+    }
+  },
   onMasterValueChanged(
     obj: Base,
     prop: JsonObjectProperty,
@@ -234,7 +240,7 @@ export var PropertyGridEditorCollection = {
     if (!!res && !!res.onMasterValueChanged) {
       res.onMasterValueChanged(obj, prop, question);
     }
-  },
+  }
 };
 
 export class PropertyGridTitleActionsCreator {
@@ -289,7 +295,7 @@ export class PropertyGridTitleActionsCreator {
       enabled: enabled,
       action: () => {
         editor.clearPropertyValue(this.obj, property, question, this.options);
-      },
+      }
     };
   }
   private showModalPropertyEditor(
@@ -327,7 +333,7 @@ export class PropertyGridTitleActionsCreator {
       showTitle: false,
       action: () => {
         this.showModalPropertyEditor(editor, property, question);
-      },
+      }
     };
     return setupAction;
   }
@@ -338,14 +344,14 @@ export class PropertyGridTitleActionsCreator {
       id: "property-grid-help",
       iconName: () => {
         return question.descriptionLocation != "hidden"
-          ? "icon-editingfinish"
-          : "icon-edit";
+          ? "icon-helpfinish"
+          : "icon-help";
       },
       showTitle: false,
       action: () => {
         question.descriptionLocation =
           question.descriptionLocation != "hidden" ? "hidden" : "underTitle";
-      },
+      }
     };
   }
 }
@@ -468,7 +474,7 @@ export class PropertyJSONGenerator {
       panels[tabs[i].name] = this.createPanelProps(tabs[i], i == 0);
     }
     var json: any = {
-      elements: [],
+      elements: []
     };
     for (var key in panels) {
       if (key == "general" && isNestedObj) {
@@ -508,7 +514,7 @@ export class PropertyJSONGenerator {
       name: category,
       title: this.getPanelTitle(category, title),
       state: isFirstPanel ? "expanded" : "collapsed",
-      elements: [],
+      elements: []
     };
   }
   private createQuestionJSON(
@@ -753,7 +759,7 @@ export class PropertyGridModel {
       propertyName: q.property.name,
       value: options.oldValue,
       newValue: options.value,
-      doValidation: false,
+      doValidation: false
     };
     this.options.onValueChangingCallback(changingOptions);
     options.value = changingOptions.newValue;
@@ -767,6 +773,7 @@ export class PropertyGridModel {
       options.value
     );
     this.changeDependedProperties(q);
+    PropertyGridEditorCollection.onValueChanged(this.obj, q.property, q);
     if (
       !!this.classNameProperty &&
       options.name === this.classNameProperty &&
@@ -829,7 +836,7 @@ export class PropertyGridModel {
       propertyName: options.columnName,
       value: options.oldValue,
       newValue: options.value,
-      doValidation: false,
+      doValidation: false
     };
     this.options.onValueChangingCallback(changingOptions);
     options.value = changingOptions.newValue;
@@ -944,7 +951,7 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
       type: "boolean",
       default: false,
       renderAs: "checkbox",
-      titleLocation: "hidden",
+      titleLocation: "hidden"
     };
   }
 }
@@ -1057,7 +1064,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
         this.canRenderAsButtonGroup && choices.length < 5 && choices.length > 0
           ? "buttongroup"
           : "dropdown",
-      showOptionsCaption: false,
+      showOptionsCaption: false
     };
     var emptyValueItem: ItemValue = this.getEmptyJsonItemValue(prop, choices);
     if (!!emptyValueItem) {
@@ -1191,7 +1198,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
       optionsCaption: editorLocalization.getString(
         "pe.conditionSelectQuestion"
       ),
-      choices: this.getChoices(obj, prop, options),
+      choices: this.getChoices(obj, prop, options)
     };
   }
   private getChoices(

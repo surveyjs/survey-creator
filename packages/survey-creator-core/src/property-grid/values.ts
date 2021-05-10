@@ -4,20 +4,33 @@ import {
   JsonObjectProperty,
   Question,
   QuestionMatrixModel,
+  ComponentCollection
 } from "survey-core";
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,
-  PropertyGridEditor,
+  PropertyGridEditor
 } from "./index";
 import { CellsEditor } from "./cells-survey";
 import {
   DefaultValueEditor,
   DefaultMatrixRowValueEditor,
   DefaultPanelDynamicPanelValueEditor,
-  TriggerValueEditor,
+  TriggerValueEditor
 } from "./values-survey";
 import { ISurveyCreatorOptions } from "../settings";
+import { editorLocalization } from "../editorLocalization";
+
+var propertyGridValueJSON = {
+  name: "propertygrid_value",
+  showInToolbox: false,
+  questionJSON: {
+    type: "html",
+    html: editorLocalization.getString("pe.emptyValue")
+  }
+};
+
+ComponentCollection.Instance.add(propertyGridValueJSON);
 
 export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   public getJSON(
@@ -26,7 +39,8 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any {
     return {
-      type: "empty",
+      type: "propertygrid_value",
+      readOnly: true
     };
   }
   public clearPropertyValue(
@@ -37,13 +51,43 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   ): void {
     obj[prop.name] = undefined;
   }
-  public onAfterRenderQuestion(
-    obj: Base,
-    prop: JsonObjectProperty,
-    evtOptions: any
-  ) {}
+  onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
+    var displayValue = question.isEmpty()
+      ? editorLocalization.getString("pe.emptyValue")
+      : this.getObjDisplayValue(obj, question);
+    question.contentQuestion.html = this.correctHtml(displayValue);
+  }
   protected isValueEmpty(val: any): boolean {
     return Helpers.isValueEmpty(val);
+  }
+  private correctHtml(html: string): string {
+    if (!html) return html;
+    let regex = /[&|<|>|"|']/g;
+    return html.replace(regex, function (match) {
+      if (match === "&") {
+        return "&amp;";
+      } else if (match === "<") {
+        return "&lt;";
+      } else if (match === ">") {
+        return "&gt;";
+      } else if (match === '"') {
+        return "&quot;";
+      } else {
+        return "&apos;";
+      }
+    });
+  }
+  private getObjDisplayValue(obj: Base, question: Question): string {
+    if (!obj["getDisplayValue"]) return this.stringifyValue(question.value);
+    var res = !!obj["getDisplayValue"]
+      ? obj["getDisplayValue"](true, question.value)
+      : question.value;
+    if (typeof res !== "string") return JSON.stringify(res);
+    return res;
+  }
+  private stringifyValue(val: any): string {
+    if (typeof val !== "string") return JSON.stringify(val);
+    return val;
   }
 }
 
