@@ -7,7 +7,7 @@ import {
   ItemValue,
   property,
   settings,
-  QuestionSelectBase,
+  QuestionSelectBase
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { IPortableDragEvent } from "./utils/events";
@@ -179,7 +179,7 @@ export class DragDropHelper extends Base {
     const json = {
       type: "html",
       name: "svd-drag-drog-ghost-element",
-      html: '<div class="svc-drag-drop-ghost"></div>',
+      html: '<div class="svc-drag-drop-ghost"></div>'
     };
     return this.createElementFromJson(json);
   }
@@ -323,7 +323,7 @@ export class DragDropHelper extends Base {
       isBottom: event.clientY >= middle,
       isEdge:
         event.clientY - bounds.bottom <= DragDropHelper.edgeHeight ||
-        bounds.top - event.clientY <= DragDropHelper.edgeHeight,
+        bounds.top - event.clientY <= DragDropHelper.edgeHeight
     };
   }
 
@@ -338,7 +338,7 @@ export class DragDropHelper extends Base {
       isBottom: y > height / 2,
       isEdge:
         y <= DragDropHelper.edgeHeight ||
-        height - y <= DragDropHelper.edgeHeight,
+        height - y <= DragDropHelper.edgeHeight
     };
   }
 
