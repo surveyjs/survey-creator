@@ -30,7 +30,6 @@ export class StringEditorViewModel {
   }
   edit(model: StringEditorViewModel, event: MouseEvent) {
     model.focusEditor && model.focusEditor();
-    this.done(model, event);
   }
   done(_: StringEditorViewModel, event: Event) {
     event.stopImmediatePropagation();
@@ -103,7 +102,10 @@ ko.components.register(editableStringRendererName, {
           "sv-string-editor"
         )[0];
       };
-      model.focusEditor = () => getEditorElement().focus();
+      model.focusEditor = () => {
+        getEditorElement().focus();
+        document.execCommand('selectAll', false, null);
+      }
       model.blurEditor = () => getEditorElement().blur();
       return model;
     },

@@ -39,6 +39,7 @@ export interface IPropertyEditorSetup {
 export function setSurveyJSONForPropertyGrid(json: any) {
   json.showNavigationButtons = "none";
   json.showPageTitles = false;
+  json.focusFirstQuestionAutomatic = false;
   json.showQuestionNumbers = "off";
   json.textUpdateMode = "onTyping";
   json.requiredText = "";
