@@ -88,19 +88,7 @@ export class DragDropHelper extends Base {
 
     let intervalId;
 
-    const moveAt = (event) => {
-      draggedElement.style.left = event.pageX - shiftX + "px";
-      draggedElement.style.top = event.pageY - shiftY + "px";
-
-      draggedElement.hidden = true;
-      let draggedOverNode = document.elementFromPoint(
-        event.clientX,
-        event.clientY
-      );
-      draggedElement.hidden = false;
-
-      if (!draggedOverNode) return;
-
+    const doScroll = (event) => {
       //scroll
       clearInterval(intervalId);
       const startScrollBoundary = 50;
@@ -117,11 +105,11 @@ export class DragDropHelper extends Base {
 
       if (event.clientY - top <= startScrollBoundary) {
         intervalId = setInterval(() => {
-          scrollableParentElement.scrollTop -= 1;
+          scrollableParentElement.scrollTop -= 5;
         }, 10);
       } else if (bottom - event.clientY <= startScrollBoundary) {
         intervalId = setInterval(() => {
-          scrollableParentElement.scrollTop += 1;
+          scrollableParentElement.scrollTop += 5;
         }, 10);
       } else if (right - event.clientX <= startScrollBoundary) {
         intervalId = setInterval(() => {
@@ -133,12 +121,37 @@ export class DragDropHelper extends Base {
         }, 10);
       }
       //EO scroll
+    };
+
+    const moveAt = (event) => {
+      doScroll(event);
+
+      if (event.pageX + shiftX >= document.documentElement.clientWidth) return;
+      if (event.pageY + shiftY >= document.documentElement.clientHeight) return;
+      if (event.pageX - shiftX <= 0) return;
+      if (event.pageY - shiftY <= 0) return;
+
+      draggedElement.style.left = event.clientX - shiftX + "px";
+      draggedElement.style.top = event.clientY - shiftY + "px";
+
+      draggedElement.hidden = true;
+      let draggedOverNode = document.elementFromPoint(
+        event.clientX,
+        event.clientY
+      );
+      draggedElement.hidden = false;
+
+      if (!draggedOverNode) return;
 
       let dropZoneElement = <HTMLElement>(
         draggedOverNode.closest(".svc-drop-zone")
       );
 
-      if (!dropZoneElement) return;
+      if (!dropZoneElement) {
+        draggedElement.style.cursor = "not-allowed";
+        return;
+      }
+      draggedElement.style.cursor = "grabbing";
 
       this.draggedOverElement = this.survey.getQuestionByName(
         dropZoneElement.dataset.svcName
@@ -150,7 +163,7 @@ export class DragDropHelper extends Base {
       this.insertGhostElementIntoSurvey(this.draggedOverElement, true, true);
     };
 
-    // moveAt(event.pageX, event.pageY);
+    // moveAt(event.clientX, event.clientY);
 
     document.addEventListener("pointermove", moveAt);
 
