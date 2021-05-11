@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Base, ItemValue, property, Question, QuestionSelectBase, SurveyElement } from "survey-core";
+import { Base, ItemValue, property, Question, QuestionSelectBase, SurveyElement, SurveyModel } from "survey-core";
 import { Survey, ImplementorBase, Panel, QuestionRow } from "survey-knockout-ui";
 import { ICreatorOptions, CreatorBase } from "@survey/creator";
 import { editableStringRendererName } from "./components/string-editor";
@@ -51,7 +51,7 @@ class DesignTimeSurveyModel extends Survey {
 
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
     if(!this.isDesignMode) {
-      return "survey-item-value-component";
+      return SurveyModel.TEMPLATE_RENDERER_COMPONENT_NAME;
     }
     if(question.getType() === "imagepicker") {
       return "svc-image-item-value";

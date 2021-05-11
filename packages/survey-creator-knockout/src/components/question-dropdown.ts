@@ -2,12 +2,12 @@ import * as ko from "knockout";
 import {
   Question,
   SurveyElement,
-  SurveyElementTemplateData,
-  SurveyElementViewModel,
-  SurveyModel,
+  SurveyTemplateRendererTemplateData,
+  SurveyTemplateRendererViewModel,
+  SurveyModel
 } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { CreatorBase, QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
+import { CreatorBase } from "@survey/creator";
 import { KnockoutQuestionAdornerViewModel } from "./question";
 // import "./question-dropdown.scss";
 const template = require("./question-dropdown.html");
@@ -17,7 +17,7 @@ export class KnockoutDropdownQuestionAdornerViewModel extends KnockoutQuestionAd
   constructor(
     creator: CreatorBase<SurveyModel>,
     surveyElement: SurveyElement,
-    templateData: SurveyElementTemplateData
+    templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement, templateData);
   }
@@ -25,7 +25,7 @@ export class KnockoutDropdownQuestionAdornerViewModel extends KnockoutQuestionAd
 
 ko.components.register("svc-dropdown-question", {
   viewModel: {
-    createViewModel: (params: SurveyElementViewModel, componentInfo: any) => {
+    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
       const creator = params.componentData;
       const question = params.templateData.data;
 
