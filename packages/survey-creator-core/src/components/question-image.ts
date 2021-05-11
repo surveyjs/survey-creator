@@ -1,5 +1,5 @@
 
-import { QuestionImageModel, SurveyElement, SurveyElementTemplateData, SurveyModel } from "survey-core";
+import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 
@@ -9,7 +9,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     constructor(
       creator: CreatorBase<SurveyModel>,
       surveyElement: SurveyElement,
-      templateData: SurveyElementTemplateData,
+      templateData: SurveyTemplateRendererTemplateData,
       public questionRoot: HTMLElement
     ) {
       super(creator, surveyElement, templateData);

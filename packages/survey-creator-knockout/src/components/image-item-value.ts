@@ -1,15 +1,13 @@
 import * as ko from "knockout";
 import {
   ImageItemValue,
-  ItemValue,
-  property,
   QuestionSelectBase,
-  SurveyItemValueViewModel, SurveyModel,
+  SurveyTemplateRendererViewModel,
+  SurveyModel
 } from "survey-core";
 import {
   CreatorBase,
-  DragDropHelper,
-  ImageItemValueWrapperViewModel,
+  ImageItemValueWrapperViewModel
 } from "@survey/creator";
 import { ImplementorBase } from "survey-knockout-ui";
 import { KnockoutDragEvent } from "../events";
@@ -44,7 +42,7 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
 
 ko.components.register("svc-image-item-value", {
   viewModel: {
-    createViewModel: (params: SurveyItemValueViewModel, componentInfo: any) => {
+    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
       const creator = params.componentData.creator;
       const question = params.componentData.question;
       const item = params.templateData.data;
@@ -57,7 +55,7 @@ ko.components.register("svc-image-item-value", {
       );
       new ImplementorBase(model);
       return model;
-    },
+    }
   },
-  template: template,
+  template: template
 });

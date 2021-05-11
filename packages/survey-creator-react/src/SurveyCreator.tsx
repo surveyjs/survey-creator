@@ -11,7 +11,7 @@ import {
   SurveyModel,
   SurveyElement,
   ItemValue,
-  QuestionSelectBase,
+  QuestionSelectBase
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -19,7 +19,7 @@ import {
   ReactQuestionFactory,
   Model,
   SurveyElementBase,
-  SurveyLocStringViewer,
+  SurveyLocStringViewer
 } from "survey-react-ui";
 import { ICreatorOptions, CreatorBase, ITabbedMenuItem } from "@survey/creator";
 import TabbedMenuComponent from "./TabbedMenuComponent";
@@ -135,7 +135,7 @@ class DesignTimeSurveyModel extends Model {
   }
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
     if(!this.isDesignMode) {
-      return "survey-item-value-component";
+      return SurveyModel.TEMPLATE_RENDERER_COMPONENT_NAME;
     }
     if(question.getType() === "imagepicker") {
       return "svc-image-item-value";

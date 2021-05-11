@@ -1,9 +1,8 @@
 import * as ko from "knockout";
 import {
-  Question,
   SurveyElement,
-  SurveyElementTemplateData,
-  SurveyElementViewModel,
+  SurveyTemplateRendererTemplateData,
+  SurveyTemplateRendererViewModel,
   SurveyModel,
   QuestionImageModel
 } from "survey-core";
@@ -19,7 +18,7 @@ export class KnockoutQuestionImageAdornerViewModel extends QuestionImageAdornerV
   constructor(
     creator: CreatorBase<SurveyModel>,
     surveyElement: SurveyElement,
-    templateData: SurveyElementTemplateData,
+    templateData: SurveyTemplateRendererTemplateData,
     questionRoot: HTMLElement
   ) {
     super(creator, surveyElement, templateData, questionRoot);
@@ -53,7 +52,7 @@ export class KnockoutQuestionImageAdornerViewModel extends QuestionImageAdornerV
 
 ko.components.register("svc-image-question", {
   viewModel: {
-    createViewModel: (params: SurveyElementViewModel, componentInfo: any) => {
+    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
       const creator = params.componentData;
       const question = params.templateData.data;
 

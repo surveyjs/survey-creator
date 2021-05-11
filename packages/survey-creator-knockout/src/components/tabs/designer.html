@@ -3,7 +3,8 @@
 ></svc-toolbox>
 <div class="svc-tab-designer" data-bind="css: survey.css.root">
   <div data-bind="css: survey.css.container">
-    <svc-template-renderer params="templateName: 'survey-header', templateData: survey"></svc-template-renderer>
+    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: { name: 'survey-header', data: survey } } } -->
+    <!-- /ko -->
     <!-- ko foreach: survey.pages -->
     <svc-page
       params="survey: $parent.survey, page: $data, creator: $parent.creator"

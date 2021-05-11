@@ -4,8 +4,7 @@ import {
   PageModel,
   property,
   propertyArray,
-  SurveyElementTemplateData,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";

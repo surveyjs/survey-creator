@@ -1,10 +1,8 @@
 import * as ko from "knockout";
 import {
   PanelModel,
-  PanelModelBase,
-  Question,
-  SurveyElementTemplateData,
-  SurveyElementViewModel,
+  SurveyTemplateRendererTemplateData,
+  SurveyTemplateRendererViewModel,
   SurveyModel,
 } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
@@ -19,7 +17,7 @@ class KnockoutPanelAdornerViewModel extends KnockoutQuestionAdornerViewModel {
   constructor(
     creator: CreatorBase<SurveyModel>,
     panel: PanelModel,
-    templateData: SurveyElementTemplateData
+    templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, panel, templateData);
   }
@@ -27,7 +25,7 @@ class KnockoutPanelAdornerViewModel extends KnockoutQuestionAdornerViewModel {
 
 ko.components.register("svc-panel", {
   viewModel: {
-    createViewModel: (params: SurveyElementViewModel, componentInfo: any) => {
+    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
       const creator = params.componentData;
       const question = params.templateData.data;
 

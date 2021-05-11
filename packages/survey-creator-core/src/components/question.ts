@@ -1,14 +1,12 @@
 import {
   SurveyElement,
-  Question,
   propertyArray,
   Base,
   SurveyModel,
-  SurveyElementTemplateData,
+  SurveyTemplateRendererTemplateData,
   property,
   QuestionHtmlModel,
-  PanelModel,
-  PanelModelBase,
+  PanelModelBase
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropHelper } from "../dragdrophelper";
@@ -25,7 +23,7 @@ export class QuestionAdornerViewModel extends Base {
   constructor(
     creator: CreatorBase<SurveyModel>,
     surveyElement: SurveyElement,
-    public templateData: SurveyElementTemplateData
+    public templateData: SurveyTemplateRendererTemplateData
   ) {
     super();
     this.creator = creator;
