@@ -181,7 +181,7 @@ export var PropertyGridEditorCollection = {
   onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onMatrixCellCreated) {
-      res.onMatrixCellCreated(obj, options);
+      res.onMatrixCellCreated(options.question.obj, options);
     }
   },
   onMatrixCellValueChanged(obj: Base, prop: JsonObjectProperty, options: any) {
