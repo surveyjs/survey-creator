@@ -104,7 +104,7 @@ ko.components.register(editableStringRendererName, {
       };
       model.focusEditor = () => {
         getEditorElement().focus();
-        document.execCommand('selectAll', false, null);
+        // document.execCommand('selectAll', false, null);
       }
       model.blurEditor = () => getEditorElement().blur();
       return model;

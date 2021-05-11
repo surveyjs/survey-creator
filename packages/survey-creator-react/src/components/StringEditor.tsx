@@ -23,7 +23,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     };
     if(this.locStr["__isEditing"]) {
       this.svStringEditorRef.current.focus();
-      document.execCommand('selectAll', false, null);
+      // document.execCommand('selectAll', false, null);
     }
   }
   componentWillUnmount() {
@@ -53,7 +53,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   };
   edit = () => {
     this.svStringEditorRef.current.focus();
-    document.execCommand('selectAll', false, null);
+    // document.execCommand('selectAll', false, null);
     this.locStr["__isEditing"] = true;
   };
   render(): JSX.Element {
