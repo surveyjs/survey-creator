@@ -56,41 +56,34 @@ export class DragDropHelper extends Base {
 
     if (!this.ghostElement) this.ghostElement = this.createGhostElement();
 
-    let shiftX = this.draggedElementShortcut.offsetWidth / 2;
-    let shiftY = this.draggedElementShortcut.offsetHeight / 2;
+    let shortcutXCenter = this.draggedElementShortcut.offsetWidth / 2;
+    let shortcutYCenter = this.draggedElementShortcut.offsetHeight / 2;
 
-    if (event.pageX + shiftX >= document.documentElement.clientWidth) return;
-    if (event.pageY + shiftY >= document.documentElement.clientHeight) return;
-    if (event.pageX - shiftX <= 0) return;
-    if (event.pageY - shiftY <= 0) return;
+    if (
+      this.isShortcutElementMoveOutOfDocument(
+        event.pageX,
+        event.pageY,
+        shortcutXCenter,
+        shortcutYCenter
+      )
+    )
+      return;
 
-    this.draggedElementShortcut.style.left = event.clientX - shiftX + "px";
-    this.draggedElementShortcut.style.top = event.clientY - shiftY + "px";
+    this.draggedElementShortcut.style.left =
+      event.clientX - shortcutXCenter + "px";
+    this.draggedElementShortcut.style.top =
+      event.clientY - shortcutYCenter + "px";
 
-    this.draggedElementShortcut.hidden = true;
-    let draggedOverNode = document.elementFromPoint(
+    this.draggedOverElement = this.getDraggedOverElementFromPoint(
       event.clientX,
       event.clientY
     );
-    this.draggedElementShortcut.hidden = false;
 
-    if (!draggedOverNode) return;
-
-    let dropZoneElement = <HTMLElement>(
-      draggedOverNode.closest(".svc-drop-area")
-    );
-
-    if (!dropZoneElement) {
+    if (!this.draggedOverElement) {
       this.draggedElementShortcut.style.cursor = "not-allowed";
       return;
     }
     this.draggedElementShortcut.style.cursor = "grabbing";
-
-    this.draggedOverElement = this.survey.getQuestionByName(
-      dropZoneElement.dataset.svcName
-    );
-
-    if (!this.draggedOverElement) return; //TODO this is strange
 
     this.removeGhostElementFromSurvey();
     this.insertGhostElementIntoSurvey();
@@ -110,7 +103,21 @@ export class DragDropHelper extends Base {
     document.body.removeChild(this.draggedElementShortcut);
     this.onDragEnd();
   };
+  private getDraggedOverElementFromPoint(x, y) {
+    this.draggedElementShortcut.hidden = true;
+    let draggedOverNode = document.elementFromPoint(x, y);
+    this.draggedElementShortcut.hidden = false;
 
+    let droppableElement = <HTMLElement>(
+      draggedOverNode.closest("[data-svc-droppable-element-name]")
+    );
+
+    if (!droppableElement) return null;
+
+    return this.survey.getQuestionByName(
+      droppableElement.dataset.svcDroppableElementName
+    );
+  }
   private createDraggedElementShortcut() {
     const draggedElementShortcut = document.createElement("div");
     draggedElementShortcut.innerText = this.draggedElement.name;
@@ -157,7 +164,6 @@ export class DragDropHelper extends Base {
       }, 10);
     }
   }
-
   private createGhostElement(): any {
     const json = {
       type: "html",
@@ -212,6 +218,21 @@ export class DragDropHelper extends Base {
     }
     element.renderWidth = "100%";
     return element;
+  }
+  private isShortcutElementMoveOutOfDocument(
+    pageX,
+    pageY,
+    shortcutXCenter,
+    shortCutYCenter
+  ) {
+    if (pageX + shortcutXCenter >= document.documentElement.clientWidth)
+      return true;
+    if (pageY + shortCutYCenter >= document.documentElement.clientHeight)
+      return true;
+    if (pageX - shortcutXCenter <= 0) return true;
+    if (pageY - shortCutYCenter <= 0) return true;
+
+    return false;
   }
 
   public onDragStartToolboxItem(

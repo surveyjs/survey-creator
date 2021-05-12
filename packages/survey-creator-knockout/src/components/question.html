@@ -1,13 +1,16 @@
 <div
-  class="svc-question__adorner svc-drop-area"
-  data-bind="attr: { 'data-svc-name': surveyElement.name }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+  class="svc-question__adorner"
+  data-bind="attr: { 'data-svc-droppable-element-name': surveyElement.name }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
   <div
     class="svc-question__content"
     data-bind="click: koSelect, clickBubble: false, css: css()"
   >
     <div class="svc-question__drag-area">
-      <div class="svc-question__drag-element" data-bind="event: {pointerdown: (model, event)=>{startDragElement()}}"></div>
+      <div
+        class="svc-question__drag-element"
+        data-bind="event: {pointerdown: (model, event)=>{startDragElement()}}"
+      ></div>
     </div>
 
     <!-- ko if: isEmptyElement -->
