@@ -330,10 +330,16 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!className) {
       className = prop.baseClassName;
     }
-    return new PropertyJSONGenerator(obj, options).createColumnsJSON(
+    var res = new PropertyJSONGenerator(obj, options).createColumnsJSON(
       className,
       propNames
     );
+    for (var i = 0; i < res.length; i++) {
+      if (res[i].cellType == "comment") {
+        res[i].cellType = "text";
+      }
+    }
+    return res;
   }
   protected getEditItemAsStandAlone(): boolean {
     return false;

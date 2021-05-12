@@ -85,9 +85,8 @@ test("Stop doing it because of title actions - Hide question title if property i
 test("boolean property editor (boolean/switch)", () => {
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
-  var startWithNewLineQuestion = propertyGrid.survey.getQuestionByName(
-    "startWithNewLine"
-  );
+  var startWithNewLineQuestion =
+    propertyGrid.survey.getQuestionByName("startWithNewLine");
   var isRequiredQuestion = propertyGrid.survey.getQuestionByName("isRequired");
   expect(startWithNewLineQuestion).toBeTruthy(); //"property for startWithNewLine is created"
   expect(isRequiredQuestion).toBeTruthy(); // "property for isRequired is created"
@@ -103,9 +102,8 @@ test("boolean property editor (boolean/switch)", () => {
 test("dropdown property editor", () => {
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
-  var titleLocationQuestion = propertyGrid.survey.getQuestionByName(
-    "titleLocation"
-  );
+  var titleLocationQuestion =
+    propertyGrid.survey.getQuestionByName("titleLocation");
   expect(titleLocationQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
   expect(titleLocationQuestion.choices.length).toEqual(5); // "There are five choices"
   expect(titleLocationQuestion.value).toEqual("default"); //"the value is correct"
@@ -519,10 +517,14 @@ test("calculatedValues property editor", () => {
   );
   expect(calcValuesQuestion).toBeTruthy();
   expect(calcValuesQuestion.visibleRows).toHaveLength(1);
+  expect(calcValuesQuestion.columns).toHaveLength(2);
+  expect(calcValuesQuestion.columns[0].cellType).toEqual("text");
+  expect(calcValuesQuestion.columns[1].cellType).toEqual("text");
   calcValuesQuestion.visibleRows[0].showDetailPanel();
-  var expQ = calcValuesQuestion.visibleRows[0].detailPanel.getQuestionByName(
-    "expression"
-  );
+  var expQ =
+    calcValuesQuestion.visibleRows[0].detailPanel.getQuestionByName(
+      "expression"
+    );
   expect(expQ).toBeTruthy();
   expect(expQ.value).toEqual("{q1}=1");
   expQ.value = "{q1}=2";
@@ -542,9 +544,10 @@ test("htmlConditions property editor", () => {
   expect(htmlConditionsQuestion).toBeTruthy();
   expect(htmlConditionsQuestion.visibleRows).toHaveLength(1);
   htmlConditionsQuestion.visibleRows[0].showDetailPanel();
-  var expQ = htmlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
-    "expression"
-  );
+  var expQ =
+    htmlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
+      "expression"
+    );
   expect(expQ).toBeTruthy();
   expect(expQ.value).toEqual("{q1}=1");
   expQ.value = "{q1}=2";
@@ -562,9 +565,10 @@ test("urlconditions property editor", () => {
   expect(urlConditionsQuestion).toBeTruthy();
   expect(urlConditionsQuestion.visibleRows).toHaveLength(1);
   urlConditionsQuestion.visibleRows[0].showDetailPanel();
-  var expQ = urlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
-    "expression"
-  );
+  var expQ =
+    urlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
+      "expression"
+    );
   expect(expQ).toBeTruthy();
   expect(expQ.value).toEqual("{q1}=1");
   expQ.value = "{q1}=2";
@@ -589,9 +593,8 @@ test("QuestionMultipleTextModel items property editor", () => {
   expect(question.items[0].name).toEqual("item11");
   question.items[0].name = "item1";
   rows[0].showDetailPanel();
-  var titleQ = itemsQuestion.visibleRows[0].detailPanel.getQuestionByName(
-    "title"
-  );
+  var titleQ =
+    itemsQuestion.visibleRows[0].detailPanel.getQuestionByName("title");
   expect(titleQ).toBeTruthy();
   expect(titleQ.value).toEqual("Item 1");
   titleQ.value = "item 2";
