@@ -97,7 +97,12 @@ svc-question,
   bottom: 0;
 }
 
+.svc-hovered .svc-question__drag-area {
+  visibility: visible;
+}
+
 .svc-question__drag-area {
+  visibility: hidden;
   height: 28px;
   width: 100%;
   display: flex;

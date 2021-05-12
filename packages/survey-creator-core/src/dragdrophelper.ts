@@ -15,14 +15,18 @@ import { IPortableDragEvent } from "./utils/events";
 export class DragDropHelper extends Base {
   public static edgeHeight: number = 20;
   public static nestedPanelDepth: number = -1;
-  public static prevEvent = { element: null, x: -1, y: -1 };
+  public static prevEvent = {
+    element: null,
+    x: -1,
+    y: -1,
+    isBottom: true,
+    isEdge: true
+  };
 
   private draggedElement: IElement = null;
   private draggedElementShortcut: HTMLElement = null;
-  private scrollIntervalId: number = null;
-
+  private scrollIntervalId: ReturnType<typeof setTimeout> = null;
   private ghostElement: IElement = null;
-
   @property() draggedOverElement: IElement = null;
   @property() isBottom: boolean = null;
   private isEdge: boolean = null;
@@ -79,13 +83,25 @@ export class DragDropHelper extends Base {
       event.clientY
     );
 
-    if (!this.draggedOverElement) {
+    if (
+      !this.draggedOverElement ||
+      this.draggedOverElement === this.draggedElement
+    ) {
+      this.removeGhostElementFromSurvey();
       this.draggedElementShortcut.style.cursor = "not-allowed";
       return;
     }
+
+    // const bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
+    // this.isEdge = bottomInfo.isEdge;
+    // this.isBottom = bottomInfo.isBottom;
+    this.isEdge = true;
+    this.isBottom = true;
+
+    if (this.isSamePlace(event, this.draggedOverElement)) return;
+
     this.draggedElementShortcut.style.cursor = "grabbing";
 
-    this.removeGhostElementFromSurvey();
     this.insertGhostElementIntoSurvey();
   };
 
@@ -371,25 +387,27 @@ export class DragDropHelper extends Base {
     return false; // alow drop here
   }
 
-  private isSamePlace(
-    event: IPortableDragEvent,
-    draggedOverElement: any
-  ): boolean {
-    const prev = DragDropHelper.prevEvent;
+  private isSamePlace(event, draggedOverElement: any): boolean {
+    const prevEvent = DragDropHelper.prevEvent;
+
     if (
-      prev.element != draggedOverElement ||
-      Math.abs(event.clientX - prev.x) > 5 ||
-      Math.abs(event.clientY - prev.y) > 5
+      prevEvent.element !== draggedOverElement &&
+      prevEvent.isBottom !== this.isBottom &&
+      prevEvent.isEdge !== this.isEdge
+      // Math.abs(event.clientX - prevEvent.x) > 5 ||
+      // Math.abs(event.clientY - prevEvent.y) > 5
     ) {
-      prev.element = draggedOverElement;
-      prev.x = event.clientX;
-      prev.y = event.clientY;
+      prevEvent.element = draggedOverElement;
+      prevEvent.x = event.clientX;
+      prevEvent.y = event.clientY;
+      prevEvent.isBottom = this.isBottom;
+      prevEvent.isEdge = this.isEdge;
       return false;
     }
     return true;
   }
 
-  private isAtLowerPartOfCurrentTarget(event: IPortableDragEvent): any {
+  private isAtLowerPartOfCurrentTarget(event): any {
     const target = event.currentTarget;
     if (!target["getBoundingClientRect"]) {
       return true;
@@ -483,6 +501,8 @@ export class DragDropHelper extends Base {
     prevEvent.element = null;
     prevEvent.x = -1;
     prevEvent.y = -1;
+    prevEvent.isBottom = true;
+    prevEvent.isEdge = true;
 
     this.draggedOverElement = null;
     this.draggedElementShortcut = null;
