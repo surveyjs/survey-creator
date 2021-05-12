@@ -1,10 +1,4 @@
-import {
-  ImageItemValue,
-  ItemValue,
-  property,
-  QuestionSelectBase,
-  SurveyItemValueViewModel, SurveyModel,
-} from "survey-core";
+import { ImageItemValue, QuestionSelectBase, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 

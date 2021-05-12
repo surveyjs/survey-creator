@@ -2,9 +2,9 @@ import * as ko from "knockout";
 import {
   Question,
   SurveyElement,
-  SurveyElementTemplateData,
-  SurveyElementViewModel,
-  SurveyModel,
+  SurveyTemplateRendererTemplateData,
+  SurveyTemplateRendererViewModel,
+  SurveyModel
 } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
 import { CreatorBase, QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
@@ -17,7 +17,7 @@ export class KnockoutQuestionAdornerViewModel extends QuestionAdornerViewModel {
   constructor(
     creator: CreatorBase<SurveyModel>,
     surveyElement: SurveyElement,
-    templateData: SurveyElementTemplateData
+    templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement, templateData);
   }
@@ -34,7 +34,7 @@ export class KnockoutQuestionAdornerViewModel extends QuestionAdornerViewModel {
 
 ko.components.register("svc-question", {
   viewModel: {
-    createViewModel: (params: SurveyElementViewModel, componentInfo: any) => {
+    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
       const creator = params.componentData;
       const question = params.templateData.data;
 

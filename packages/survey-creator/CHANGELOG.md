@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.47](https://github.com/surveyjs/survey-creator/compare/v1.8.46...v1.8.47) (2021-05-11)
+
+
+### Bug Fixes
+
+* V2: Do not run expressions for Survey using in JSON Editor [#1175](https://github.com/surveyjs/survey-creator/issues/1175) ([401cfcf](https://github.com/surveyjs/survey-creator/commit/401cfcfb72b62fe3546809a4e77f8c51c25c4627))
+
 ### [1.8.46](https://github.com/surveyjs/survey-creator/compare/v1.8.45...v1.8.46) (2021-04-30)
 
 

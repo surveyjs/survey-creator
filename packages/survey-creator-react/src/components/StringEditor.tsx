@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { LocalizableString } from "survey-core";
 import { ReactElementFactory, SvgIcon } from "survey-react-ui";
 
@@ -21,12 +21,17 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     this.locStr.onChanged = function () {
       self.setState({ changed: self.state.changed + 1 });
     };
+    if(this.locStr["__isEditing"]) {
+      this.svStringEditorRef.current.focus();
+      // document.execCommand('selectAll', false, null);
+    }
   }
   componentWillUnmount() {
     if (!this.locStr) return;
     this.locStr.onChanged = function () {};
   }
   onInput = (event: any) => {
+    this.done(event);
     if (this.locStr.renderedHtml == event.target.innerText) return;
     this.locStr.text = event.target.innerText;
   };
@@ -44,10 +49,12 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   done = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
+    this.locStr["__isEditing"] = false;
   };
-  edit = (event: MouseEvent) => {
+  edit = () => {
     this.svStringEditorRef.current.focus();
-    this.done(event);
+    // document.execCommand('selectAll', false, null);
+    this.locStr["__isEditing"] = true;
   };
   render(): JSX.Element {
     if (!this.locStr) {
@@ -66,7 +73,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           dangerouslySetInnerHTML={htmlValue}
           onBlur={this.onInput}
           onKeyDown={this.onKeyDown}
-          onClick={this.done}
+          onClick={this.edit}
         />
       );
     } else {
@@ -79,14 +86,14 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           style={this.style}
           onBlur={this.onInput}
           onKeyDown={this.onKeyDown}
-          onClick={this.done}
+          onClick={this.edit}
         >
           {this.locStr.renderedHtml}
         </span>
       );
     }
     return (
-      <span className="svc-string-editor" onClick={this.done}>
+      <span className="svc-string-editor">
         <span className="svc-string-editor__content">
           <div className="svc-string-editor__border"></div>
           {control}

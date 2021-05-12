@@ -1,13 +1,12 @@
 import * as ko from "knockout";
 import {
   ItemValue,
-  property,
   QuestionSelectBase,
-  SurveyItemValueViewModel, SurveyModel,
+  SurveyTemplateRendererViewModel,
+  SurveyModel
 } from "survey-core";
 import {
   CreatorBase,
-  DragDropHelper,
   ItemValueWrapperViewModel,
 } from "@survey/creator";
 import { ImplementorBase } from "survey-knockout-ui";
@@ -43,7 +42,7 @@ class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
 
 ko.components.register("svc-item-value", {
   viewModel: {
-    createViewModel: (params: SurveyItemValueViewModel, componentInfo: any) => {
+    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
       const creator = params.componentData.creator;
       const question = params.componentData.question;
       const item = params.templateData.data;

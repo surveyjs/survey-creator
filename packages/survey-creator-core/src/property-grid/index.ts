@@ -39,6 +39,7 @@ export interface IPropertyEditorSetup {
 export function setSurveyJSONForPropertyGrid(json: any) {
   json.showNavigationButtons = "none";
   json.showPageTitles = false;
+  json.focusFirstQuestionAutomatic = false;
   json.showQuestionNumbers = "off";
   json.textUpdateMode = "onTyping";
   json.requiredText = "";
@@ -181,7 +182,7 @@ export var PropertyGridEditorCollection = {
   onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onMatrixCellCreated) {
-      res.onMatrixCellCreated(obj, options);
+      res.onMatrixCellCreated(options.question.obj, options);
     }
   },
   onMatrixCellValueChanged(obj: Base, prop: JsonObjectProperty, options: any) {

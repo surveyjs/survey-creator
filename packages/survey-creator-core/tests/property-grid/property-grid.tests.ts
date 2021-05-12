@@ -85,9 +85,8 @@ test("Stop doing it because of title actions - Hide question title if property i
 test("boolean property editor (boolean/switch)", () => {
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
-  var startWithNewLineQuestion = propertyGrid.survey.getQuestionByName(
-    "startWithNewLine"
-  );
+  var startWithNewLineQuestion =
+    propertyGrid.survey.getQuestionByName("startWithNewLine");
   var isRequiredQuestion = propertyGrid.survey.getQuestionByName("isRequired");
   expect(startWithNewLineQuestion).toBeTruthy(); //"property for startWithNewLine is created"
   expect(isRequiredQuestion).toBeTruthy(); // "property for isRequired is created"
@@ -103,9 +102,8 @@ test("boolean property editor (boolean/switch)", () => {
 test("dropdown property editor", () => {
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
-  var titleLocationQuestion = propertyGrid.survey.getQuestionByName(
-    "titleLocation"
-  );
+  var titleLocationQuestion =
+    propertyGrid.survey.getQuestionByName("titleLocation");
   expect(titleLocationQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
   expect(titleLocationQuestion.choices.length).toEqual(5); // "There are five choices"
   expect(titleLocationQuestion.value).toEqual("default"); //"the value is correct"
@@ -413,6 +411,58 @@ test("Validators property editor", () => {
   expect(question.validators[0].getType()).toEqual("numericvalidator");
   expect(question.validators[1].getType()).toEqual("numericvalidator");
 });
+test("Validators property editor for column", () => {
+  var matrix = new QuestionMatrixDynamicModel("q1");
+  var column = matrix.addColumn("col1");
+  column.cellType = "text";
+  column.validators.push(new ExpressionValidator());
+  var propertyGrid = new PropertyGridModelTester(column);
+  var validatorsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("validators")
+  );
+  expect(validatorsQuestion).toBeTruthy(); //visibleIf is here
+  expect(validatorsQuestion.columns).toHaveLength(1);
+  expect(validatorsQuestion.visibleRows).toHaveLength(1);
+  var validatorTypeQuestion = <QuestionDropdownModel>(
+    validatorsQuestion.visibleRows[0].cells[0].question
+  );
+  expect(validatorTypeQuestion.getType()).toEqual("dropdown");
+  expect(validatorTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
+  var validatorCount = column.templateQuestion.getSupportedValidators().length;
+  expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);
+  validatorsQuestion.addRow();
+  expect(column.validators).toHaveLength(2);
+  expect(column.validators[1].getType()).toEqual("expressionvalidator");
+
+  validatorTypeQuestion.value = "numericvalidator";
+  expect(column.validators[0].getType()).toEqual("numericvalidator");
+  expect(column.validators[1].getType()).toEqual("expressionvalidator");
+  expect(validatorsQuestion.visibleRows[0].cells[0].value).toEqual(
+    "numericvalidator"
+  );
+  expect(validatorsQuestion.visibleRows[1].cells[0].value).toEqual(
+    "expressionvalidator"
+  );
+  validatorsQuestion.visibleRows[1].showDetailPanel();
+  validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName(
+    "text"
+  ).value = "validator2 text";
+  expect(column.validators[1].text).toEqual("validator2 text");
+  validatorTypeQuestion = <QuestionDropdownModel>(
+    validatorsQuestion.visibleRows[1].cells[0].question
+  );
+  validatorTypeQuestion.value = "numericvalidator";
+  expect(
+    validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("text")
+      .value
+  ).toEqual("validator2 text");
+  expect(
+    validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("minValue")
+  ).toBeTruthy();
+  expect(column.validators[0].getType()).toEqual("numericvalidator");
+  expect(column.validators[1].getType()).toEqual("numericvalidator");
+});
 
 test("Triggers property editor", () => {
   var survey = new SurveyModel();
@@ -467,10 +517,14 @@ test("calculatedValues property editor", () => {
   );
   expect(calcValuesQuestion).toBeTruthy();
   expect(calcValuesQuestion.visibleRows).toHaveLength(1);
+  expect(calcValuesQuestion.columns).toHaveLength(2);
+  expect(calcValuesQuestion.columns[0].cellType).toEqual("text");
+  expect(calcValuesQuestion.columns[1].cellType).toEqual("text");
   calcValuesQuestion.visibleRows[0].showDetailPanel();
-  var expQ = calcValuesQuestion.visibleRows[0].detailPanel.getQuestionByName(
-    "expression"
-  );
+  var expQ =
+    calcValuesQuestion.visibleRows[0].detailPanel.getQuestionByName(
+      "expression"
+    );
   expect(expQ).toBeTruthy();
   expect(expQ.value).toEqual("{q1}=1");
   expQ.value = "{q1}=2";
@@ -490,9 +544,10 @@ test("htmlConditions property editor", () => {
   expect(htmlConditionsQuestion).toBeTruthy();
   expect(htmlConditionsQuestion.visibleRows).toHaveLength(1);
   htmlConditionsQuestion.visibleRows[0].showDetailPanel();
-  var expQ = htmlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
-    "expression"
-  );
+  var expQ =
+    htmlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
+      "expression"
+    );
   expect(expQ).toBeTruthy();
   expect(expQ.value).toEqual("{q1}=1");
   expQ.value = "{q1}=2";
@@ -510,9 +565,10 @@ test("urlconditions property editor", () => {
   expect(urlConditionsQuestion).toBeTruthy();
   expect(urlConditionsQuestion.visibleRows).toHaveLength(1);
   urlConditionsQuestion.visibleRows[0].showDetailPanel();
-  var expQ = urlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
-    "expression"
-  );
+  var expQ =
+    urlConditionsQuestion.visibleRows[0].detailPanel.getQuestionByName(
+      "expression"
+    );
   expect(expQ).toBeTruthy();
   expect(expQ.value).toEqual("{q1}=1");
   expQ.value = "{q1}=2";
@@ -537,9 +593,8 @@ test("QuestionMultipleTextModel items property editor", () => {
   expect(question.items[0].name).toEqual("item11");
   question.items[0].name = "item1";
   rows[0].showDetailPanel();
-  var titleQ = itemsQuestion.visibleRows[0].detailPanel.getQuestionByName(
-    "title"
-  );
+  var titleQ =
+    itemsQuestion.visibleRows[0].detailPanel.getQuestionByName("title");
   expect(titleQ).toBeTruthy();
   expect(titleQ.value).toEqual("Item 1");
   titleQ.value = "item 2";
@@ -548,6 +603,79 @@ test("QuestionMultipleTextModel items property editor", () => {
   expect(question.items).toHaveLength(2);
   expect(question.items[1].name).toEqual("item2");
 });
+test("QuestionMultipleTextModel items property editor + validators editor", () => {
+  var multipleQuestion = new QuestionMultipleTextModel("q1");
+  var textItem = multipleQuestion.addItem("item1", "Item 1");
+  var propertyGrid = new PropertyGridModelTester(multipleQuestion);
+  var itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("items")
+  );
+  expect(itemsQuestion).toBeTruthy();
+  var rows = itemsQuestion.visibleRows;
+  rows[0].showDetailPanel();
+  var validatorsQuestion = <QuestionMatrixDynamicModel>(
+    rows[0].detailPanel.getQuestionByName("validators")
+  );
+  expect(validatorsQuestion).toBeTruthy(); //visibleIf is here
+  expect(validatorsQuestion.columns).toHaveLength(1);
+  expect(validatorsQuestion.visibleRows).toHaveLength(0);
+  validatorsQuestion.addRow();
+  expect(validatorsQuestion.visibleRows).toHaveLength(1);
+  expect(validatorsQuestion.visibleRows[0].editingObj.getType()).toEqual(
+    "expressionvalidator"
+  );
+  expect(textItem.validators).toHaveLength(1);
+  expect(textItem.validators[0].getType()).toEqual("expressionvalidator");
+  var validatorTypeQuestion = <QuestionDropdownModel>(
+    validatorsQuestion.visibleRows[0].cells[0].question
+  );
+  expect(validatorTypeQuestion.getType()).toEqual("dropdown");
+  expect(validatorTypeQuestion.showOptionsCaption).toBeFalsy();
+  expect(validatorTypeQuestion.value).toEqual("expressionvalidator");
+  var validatorCount = textItem.editor.getSupportedValidators().length;
+  expect(validatorTypeQuestion.choices).toHaveLength(validatorCount);
+  validatorsQuestion.addRow();
+  expect(textItem.validators).toHaveLength(2);
+  expect(textItem.validators[1].getType()).toEqual("expressionvalidator");
+  expect(validatorsQuestion.visibleRows[1].editingObj.getType()).toEqual(
+    "expressionvalidator"
+  );
+  validatorsQuestion.visibleRows[0].editingObj["data"] = "test";
+  expect(textItem.validators[0]["data"]).toEqual("test");
+  validatorTypeQuestion = <QuestionDropdownModel>(
+    validatorsQuestion.visibleRows[0].cells[0].question
+  );
+  validatorTypeQuestion.value = "numericvalidator";
+  expect(textItem.validators[0].getType()).toEqual("numericvalidator");
+  expect(textItem.validators[1].getType()).toEqual("expressionvalidator");
+  expect(validatorsQuestion.visibleRows[0].cells[0].value).toEqual(
+    "numericvalidator"
+  );
+  expect(validatorsQuestion.visibleRows[0].editingObj["data"]).toBeFalsy();
+  validatorsQuestion.visibleRows[0].showDetailPanel();
+  expect(
+    validatorsQuestion.visibleRows[0].detailPanel.getQuestionByName("minValue")
+  ).toBeTruthy();
+  expect(validatorsQuestion.visibleRows[1].cells[0].value).toEqual(
+    "expressionvalidator"
+  );
+  validatorsQuestion.visibleRows[1].showDetailPanel();
+  validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName(
+    "text"
+  ).value = "validator2 text";
+  expect(textItem.validators[1].text).toEqual("validator2 text");
+  validatorTypeQuestion = <QuestionDropdownModel>(
+    validatorsQuestion.visibleRows[1].cells[0].question
+  );
+  validatorTypeQuestion.value = "numericvalidator";
+  expect(
+    validatorsQuestion.visibleRows[1].detailPanel.getQuestionByName("text")
+      .value
+  ).toEqual("validator2 text");
+  expect(textItem.validators[0].getType()).toEqual("numericvalidator");
+  expect(textItem.validators[1].getType()).toEqual("numericvalidator");
+});
+
 test("bindings property editor", () => {
   var survey = new SurveyModel({
     elements: [
