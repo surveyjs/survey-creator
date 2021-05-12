@@ -38,11 +38,11 @@ export class QuestionAdornerViewModel extends Base {
   }
   css() {
     let result = this.creator.isElementSelected(this.surveyElement)
-      ? 'svc-question__content--selected'
-      : '';
+      ? "svc-question__content--selected"
+      : "";
 
     if (this.isEmptyElement) {
-      result += ' svc-question__content--empty';
+      result += " svc-question__content--empty";
     }
 
     return result;
@@ -58,7 +58,7 @@ export class QuestionAdornerViewModel extends Base {
     }
 
     if (this.surveyElement instanceof PanelModelBase) {
-      const panel = (this.surveyElement as any) as PanelModelBase;
+      const panel = this.surveyElement as any as PanelModelBase;
       return (
         !panel.rows || panel.rows.length <= 0 || panel.elements.length === 0
       );
@@ -68,15 +68,15 @@ export class QuestionAdornerViewModel extends Base {
   }
 
   public get placeholderText(): string {
-    return 'Drop questions here';
+    return "Drop questions here";
   }
 
   private get dragDropHelper(): DragDropHelper {
     return this.creator.dragDropHelper;
   }
 
-  startDrag(event: PointerEvent) {
-    this.dragDropHelper.startDragQuestion(event, <any>this.surveyElement);
+  startDragElement() {
+    this.dragDropHelper.startDrag(<any>this.surveyElement);
     return true;
   }
 

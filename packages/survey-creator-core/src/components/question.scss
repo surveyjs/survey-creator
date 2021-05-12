@@ -96,3 +96,18 @@ svc-question,
 .svc-panel__edge--bottom {
   bottom: 0;
 }
+
+.svc-question__drag-area {
+  height: 28px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.svc-question__drag-element {
+  cursor: move;
+  width: 24px;
+  height: 6px;
+  border: 1px solid $border;
+  border-radius: 10px;
+}
