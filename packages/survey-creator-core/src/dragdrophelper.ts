@@ -119,9 +119,16 @@ export class DragDropHelper extends Base {
     // this.isEdge = bottomInfo.isEdge;
     // this.isBottom = bottomInfo.isBottom;
     const rect = newDraggedOverHTMLElement.getBoundingClientRect();
-    const middle = Math.abs(rect.y) + rect.height / 2;
+    const middle = rect.y + rect.height / 2;
     let newIsEdge = true;
     let newIsBottom = event.clientY >= middle;
+
+    if (
+      newDraggedOverElement.isPanel &&
+      newDraggedOverElement.elements.length === 0
+    ) {
+      newIsEdge = Math.abs(event.clientY - middle) <= DragDropHelper.edgeHeight;
+    }
     // IS BOTTOM IS EDGE
 
     if (
