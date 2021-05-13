@@ -17,7 +17,7 @@ svc-page {
   display: none;
 }
 
-.svc-hovered.svc-page__content {
+.svc-hovered.svc-page__content:not(.svc-page__content--new) {
   border: 1px solid $secondary;
 }
 
