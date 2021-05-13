@@ -1288,6 +1288,7 @@ export class CreatorBase<T extends SurveyModel>
       oldValue: obj,
       newValue: newQuestion,
     });
+    return newQuestion;
   }
 
   /**
@@ -1426,9 +1427,10 @@ export class CreatorBase<T extends SurveyModel>
    * Copy a question to the active page
    * @param question A copied Survey.Question
    */
-  public fastCopyQuestion(question: Survey.Base) {
+  public fastCopyQuestion(question: Survey.Base): Survey.IElement {
     var newElement = this.copyElement(question);
     this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
+    return newElement;
   }
   /**
    * Get or set the current selected object in the Creator. It can be a question, panel, page or survey itself.
@@ -2077,7 +2079,7 @@ export class CreatorBase<T extends SurveyModel>
               id: type.value,
             })),
             (item: any) => {
-              this.convertCurrentObject(element, item.id);
+              this.selectElement(this.convertCurrentObject(element, item.id));
             },
             false
           ),
@@ -2106,7 +2108,7 @@ export class CreatorBase<T extends SurveyModel>
         id: "duplicate",
         title: this.getLocString("survey.duplicate"),
         action: () => {
-          this.fastCopyQuestion(element);
+          this.selectElement(this.fastCopyQuestion(element));
         },
       });
     }

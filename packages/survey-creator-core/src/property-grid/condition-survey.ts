@@ -14,7 +14,7 @@ import {
   Helpers,
   Base,
   JsonObject,
-  Question,
+  Question
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
@@ -297,6 +297,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           titleLocation: "hidden",
           name: "panel",
           panelRemoveButtonLocation: "right",
+          panelAddText: editorLocalization.getString("pe.addCondition"),
           templateElements: [
             {
               name: "conjunction",
@@ -304,14 +305,14 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               titleLocation: "hidden",
               showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
-              choices: ["and", "or"],
+              choices: ["and", "or"]
             },
             {
               name: "questionName",
               type: "dropdown",
               titleLocation: "hidden",
               startWithNewLine: false,
-              isRequired: true,
+              isRequired: true
             },
             {
               name: "operator",
@@ -320,18 +321,28 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               startWithNewLine: false,
               showOptionsCaption: false,
               isRequired: true,
-              enableIf: "{panel.questionName} notempty",
+              enableIf: "{panel.questionName} notempty"
             },
             {
               name: "questionValue",
               type: "text",
-              visible: false,
-            },
-          ],
-        },
-      ],
+              visible: false
+            }
+          ]
+        }
+      ]
     };
   }
+  /*  
+  protected createSurvey(): SurveyModel {
+    var res = super.createSurvey();
+    res.onUpdateQuestionCssClasses.add((sender: SurveyModel, options: any) => {
+      if (options.question.name !== "panel") return;
+      options.cssClasses.iconRemove = "svc-creator-condition__editor-remove";
+    });
+    return res;
+  }
+*/
   protected getSurveyCreationReason(): string {
     return "condition-builder";
   }
@@ -381,9 +392,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     panel.getQuestionByName("conjunction").value = item.conjunction;
     panel.getQuestionByName("operator").choices = this.getOperators();
     panel.getQuestionByName("operator").value = item.operator;
-    panel.getQuestionByName(
-      "questionName"
-    ).choices = this.allConditionQuestions;
+    panel.getQuestionByName("questionName").choices =
+      this.allConditionQuestions;
     if (!!this.getConditionQuestion(item.questionName)) {
       panel.getQuestionByName("questionName").value = item.questionName;
     }
@@ -463,7 +473,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       res.push({
         value: name,
         text: name,
-        question: this.getCalculatedValueQuestion(),
+        question: this.getCalculatedValueQuestion()
       });
     }
   }
@@ -493,7 +503,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     );
     if (!json) {
       json = {
-        type: "text",
+        type: "text"
       };
     }
     json.isRequired = true;
@@ -541,7 +551,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private isKeepQuestonValueOnSameLine(questionType: string): boolean {
     return this.isClassContains(
       questionType,
-      ["text", "dropdown", "rating", "boolean"],
+      ["text", "dropdown", "boolean"],
       []
     );
   }
@@ -628,7 +638,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     var isFirst = !conjunctionQuestion || !conjunctionQuestion.isVisible;
     if (!isFirst) {
       conjunctionQuestion.minWidth = "50px";
-      conjunctionQuestion.width = "100px";
+      conjunctionQuestion.width = "15%";
       conjunctionQuestion.paddingRight = paddingRight;
     }
 

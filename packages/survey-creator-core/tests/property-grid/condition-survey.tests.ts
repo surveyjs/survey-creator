@@ -8,11 +8,12 @@ import {
   QuestionPanelDynamicModel,
   ItemValue,
   Base,
+  QuestionTextModel
 } from "survey-core";
 import {
   ConditionEditor,
   ConditionEditorItemsBuilder,
-  ConditionEditorItem,
+  ConditionEditorItem
 } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/settings";
 
@@ -35,8 +36,8 @@ test("Setup simple panel", () => {
     elements: [
       { type: "text", name: "question1" },
       { type: "text", name: "question2" },
-      { type: "text", name: "question3" },
-    ],
+      { type: "text", name: "question3" }
+    ]
   });
   var conditionEditor = new ConditionEditor(
     survey,
@@ -56,8 +57,8 @@ test("Add condition", () => {
     questions: [
       { type: "text", name: "q1" },
       { type: "text", name: "q" },
-      { type: "text", name: "q2" },
-    ],
+      { type: "text", name: "q2" }
+    ]
   });
   var conditionEditor = new ConditionEditor(
     survey,
@@ -82,8 +83,8 @@ test("Do not delete the only condition, but clear it", () => {
     questions: [
       { type: "text", name: "q1" },
       { type: "text", name: "q" },
-      { type: "text", name: "q2" },
-    ],
+      { type: "text", name: "q2" }
+    ]
   });
   var conditionEditor = new ConditionEditor(
     survey,
@@ -104,8 +105,8 @@ test("addCondition quotes - https://surveyjs.answerdesk.io/ticket/details/T2679"
   var survey = new SurveyModel({
     questions: [
       { type: "text", name: "q1" },
-      { type: "dropdown", name: "q2" },
-    ],
+      { type: "dropdown", name: "q2" }
+    ]
   });
   var editor = new ConditionEditor(survey, survey.getQuestionByName("q1"));
   expect(editor.panel.panels).toHaveLength(1);
@@ -119,8 +120,8 @@ test("Apostrophes in answers break VisibleIf - https://github.com/surveyjs/edito
   var survey = new SurveyModel({
     questions: [
       { type: "text", name: "q1" },
-      { type: "dropdown", name: "q2" },
-    ],
+      { type: "dropdown", name: "q2" }
+    ]
   });
   var editor = new ConditionEditor(survey, survey.getQuestionByName("q1"));
   expect(editor.panel.panels).toHaveLength(1);
@@ -140,15 +141,15 @@ test("Add question for dynamic panel", () => {
           {
             name: "q1",
             type: "text",
-            visibleIf: "{panel.q2} = 1",
+            visibleIf: "{panel.q2} = 1"
           },
           {
             name: "q2",
-            type: "text",
-          },
-        ],
-      },
-    ],
+            type: "text"
+          }
+        ]
+      }
+    ]
   });
   var pd = <QuestionPanelDynamicModel>survey.getQuestionByName("pd");
   var editor = new ConditionEditor(survey, pd.template.getQuestionByName("q1"));
@@ -273,7 +274,7 @@ test("allConditionQuestions", () => {
   }
   expect(res).toEqual([
     { value: "q2", text: "q2" },
-    { value: "q3", text: "q3" },
+    { value: "q3", text: "q3" }
   ]);
 });
 test("allCondtionQuestions for matrix column", () => {
@@ -322,7 +323,7 @@ test("Show invisible choices and make all choices enabled, Bug: https://surveyjs
   var radioQuestion = page.addNewQuestion("dropdown", "q2");
   radioQuestion.choices = [
     { value: 1, visibleIf: "{a} = 1" },
-    { value: 1, enabledIf: "{b} = 1" },
+    { value: 1, enabledIf: "{b} = 1" }
   ];
 
   var editor = new ConditionEditor(survey, question);
@@ -340,8 +341,8 @@ test("Error in value input, Bug# T2598 (customer marked it private)", () => {
       { name: "q1", type: "checkbox", choices: [1, 2, 3] },
       { name: "q2", type: "checkbox", choices: [1, 2, 3] },
       { name: "q3", type: "checkbox", choices: ["a", "b"] },
-      { name: "q4", type: "text" },
-    ],
+      { name: "q4", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q2");
 
@@ -361,9 +362,9 @@ test("Could not edit value for row.column1 on editing column, Bug# T3376 (custom
         name: "question1",
         type: "matrixdynamic",
         columns: [{ name: "Column1" }, { name: "Column2" }],
-        choices: [1, 2, 3, 4, 5],
-      },
-    ],
+        choices: [1, 2, 3, 4, 5]
+      }
+    ]
   });
   var question = <QuestionMatrixDynamicModel>(
     survey.getQuestionByName("question1")
@@ -379,8 +380,8 @@ test("Question has defaultValue and user could not add condition with it, Bug# T
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "radiogroup", choices: [1, 2, 3], defaultValue: 1 },
-      { name: "q2", type: "text" },
-    ],
+      { name: "q2", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q2");
 
@@ -404,11 +405,11 @@ test("isReady for empty/non empty", () => {
         choices: [
           { value: 1, text: "Item 1" },
           { value: 2, text: "Item 2" },
-          { value: 3, text: "Item 3" },
-        ],
+          { value: 3, text: "Item 3" }
+        ]
       },
-      { name: "q2", type: "text" },
-    ],
+      { name: "q2", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q2");
 
@@ -427,8 +428,8 @@ test("set invalid expression", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
-      { name: "q2", type: "text" },
-    ],
+      { name: "q2", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q2");
 
@@ -460,8 +461,8 @@ test("enabled operators", () => {
         columns: [
           { cellType: "text", name: "col1" },
           { cellType: "radiogroup", name: "col2" },
-          { cellType: "checkbox", name: "col3" },
-        ],
+          { cellType: "checkbox", name: "col3" }
+        ]
       },
       {
         name: "qMatrixdynamic",
@@ -470,11 +471,11 @@ test("enabled operators", () => {
         columns: [
           { cellType: "text", name: "col1" },
           { cellType: "radiogroup", name: "col2" },
-          { cellType: "checkbox", name: "col3" },
-        ],
+          { cellType: "checkbox", name: "col3" }
+        ]
       },
-      { name: "qMultipletext", type: "multipletext" },
-    ],
+      { name: "qMultipletext", type: "multipletext" }
+    ]
   });
   var question = survey.getQuestionByName("q1");
 
@@ -508,7 +509,7 @@ test("enabled operators", () => {
       "qComment",
       "qExpression",
       "qMatrixdropdown.row1.col1",
-      "qMatrixdynamic[0].col1",
+      "qMatrixdynamic[0].col1"
     ],
     [
       "empty",
@@ -520,7 +521,7 @@ test("enabled operators", () => {
       "greater",
       "less",
       "greaterorequal",
-      "lessorequal",
+      "lessorequal"
     ]
   );
   checkFunMultiple(
@@ -529,7 +530,7 @@ test("enabled operators", () => {
       "qDropdown",
       "qMatrix.row1",
       "qMatrixdropdown.row1.col2",
-      "qMatrixdynamic[0].col2",
+      "qMatrixdynamic[0].col2"
     ],
     [
       "empty",
@@ -540,7 +541,7 @@ test("enabled operators", () => {
       "greater",
       "less",
       "greaterorequal",
-      "lessorequal",
+      "lessorequal"
     ]
   );
   checkFunMultiple(
@@ -553,7 +554,7 @@ test("enabled operators", () => {
       "contains",
       "notcontains",
       "anyof",
-      "allof",
+      "allof"
     ]
   );
   checkFun("qBoolean", ["empty", "notempty", "equal", "notequal"]);
@@ -567,7 +568,7 @@ test("enabled operators", () => {
       "greater",
       "less",
       "greaterorequal",
-      "lessorequal",
+      "lessorequal"
     ]
   );
   checkFun("qFile", ["empty", "notempty"]);
@@ -577,8 +578,8 @@ test("Keep condition value on changing operation when it possible", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
-      { name: "question1", type: "radiogroup", choices: ["item1", "item2"] },
-    ],
+      { name: "question1", type: "radiogroup", choices: ["item1", "item2"] }
+    ]
   });
   var question = survey.getQuestionByName("q1");
 
@@ -595,8 +596,8 @@ test("Selectbase + anyof", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
-      { name: "question1", type: "dropdown", choices: ["item1", "item2"] },
-    ],
+      { name: "question1", type: "dropdown", choices: ["item1", "item2"] }
+    ]
   });
   var question = survey.getQuestionByName("q1");
 
@@ -619,8 +620,8 @@ test("expression question", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
-      { name: "question1", type: "expression" },
-    ],
+      { name: "question1", type: "expression" }
+    ]
   });
   var question = survey.getQuestionByName("q1");
 
@@ -637,9 +638,9 @@ test("Do not show question description", () => {
         name: "question1",
         type: "dropdown",
         choices: ["item1", "item2"],
-        description: "Some text",
-      },
-    ],
+        description: "Some text"
+      }
+    ]
   });
   var question = survey.getQuestionByName("q1");
 
@@ -656,8 +657,8 @@ test("Add apostrophes to string value", () => {
     elements: [
       { name: "q1", type: "text" },
       { name: "question1", type: "radiogroup", choices: ["item1", 1] },
-      { name: "question2", type: "checkbox", choices: ["item1", 1] },
-    ],
+      { name: "question2", type: "checkbox", choices: ["item1", 1] }
+    ]
   });
   var question = survey.getQuestionByName("q1");
 
@@ -684,9 +685,9 @@ test("Parse expressions", () => {
       { name: "q1", type: "text" },
       { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
       { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-      { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" },
+      { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" }
     ],
-    calculatedValues: [{ name: "val1", expression: "{q1} + {q2}" }],
+    calculatedValues: [{ name: "val1", expression: "{q1} + {q2}" }]
   });
   survey.setVariable("user", "admin");
   var question = survey.getQuestionByName("q4");
@@ -734,9 +735,9 @@ test("Parse calcaluted values, Bug #727 and Bug #740", () => {
     calculatedValues: [
       {
         name: "var1",
-        expression: "1",
-      },
-    ],
+        expression: "1"
+      }
+    ]
   });
   var question = survey.getQuestionByName("q1");
   var editor = new ConditionEditor(survey, question);
@@ -759,8 +760,8 @@ test("Change questionName in panel", () => {
       { name: "q1", type: "text" },
       { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
       { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-      { name: "q4", type: "text", visibleIf: "{q1} = 'abc'" },
-    ],
+      { name: "q4", type: "text", visibleIf: "{q1} = 'abc'" }
+    ]
   });
   var question = survey.getQuestionByName("q4");
   var editor = new ConditionEditor(survey, question);
@@ -803,8 +804,8 @@ test("Create expression from scratch", () => {
       { name: "q1", type: "text" },
       { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
       { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-      { name: "q4", type: "text" },
-    ],
+      { name: "q4", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q4");
   var editor = new ConditionEditor(survey, question);
@@ -836,8 +837,8 @@ test("We are supporting wide mode only", () => {
       { name: "q1", type: "text" },
       { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
       { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-      { name: "q4", type: "text" },
-    ],
+      { name: "q4", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q4");
   var editor = new ConditionEditor(survey, question);
@@ -863,8 +864,8 @@ test("Set question width", () => {
       { name: "q1", type: "text" },
       { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
       { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-      { name: "q4", type: "text" },
-    ],
+      { name: "q4", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q4");
   var editor = new ConditionEditor(survey, question);
@@ -893,7 +894,7 @@ test("Set question width", () => {
   expect(panel.getQuestionByName("questionName").startWithNewLine).toBeFalsy();
   expect(panel.getQuestionByName("operator").startWithNewLine).toBeFalsy();
   expect(panel.getQuestionByName("questionValue").startWithNewLine).toBeFalsy();
-  expect(panel.getQuestionByName("conjunction").width).toEqual("100px");
+  expect(panel.getQuestionByName("conjunction").width).toEqual("15%");
   expect(panel.getQuestionByName("questionName").width).toEqual("25%");
   expect(panel.getQuestionByName("operator").width).toEqual("25%");
   expect(panel.getQuestionByName("questionValue").width).toEqual("35%");
@@ -904,7 +905,7 @@ test("Set question width", () => {
   expect(
     panel.getQuestionByName("questionValue").startWithNewLine
   ).toBeTruthy();
-  expect(panel.getQuestionByName("conjunction").width).toEqual("100px");
+  expect(panel.getQuestionByName("conjunction").width).toEqual("15%");
   expect(panel.getQuestionByName("questionName").width).toEqual("25%");
   expect(panel.getQuestionByName("operator").width).toEqual("60%");
   expect(panel.getQuestionByName("questionValue").width).toEqual("");
@@ -913,8 +914,8 @@ test("Set correct value for array, Bug #700", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text", visibleIf: "{q2} = ['item1', 'item3']" },
-      { name: "q2", type: "checkbox", choices: ["item1", "item2", "item3"] },
-    ],
+      { name: "q2", type: "checkbox", choices: ["item1", "item2", "item3"] }
+    ]
   });
   var question = survey.getQuestionByName("q1");
   var editor = new ConditionEditor(survey, question);
@@ -934,9 +935,9 @@ test("anyof/allof is enabled on editing, Bug #804", () => {
         name: "q2",
         type: "checkbox",
         choices: ["item1", "item2", "item3"],
-        visibleIf: "{q1} = 'a'",
-      },
-    ],
+        visibleIf: "{q1} = 'a'"
+      }
+    ]
   });
   var question = survey.getQuestionByName("q2");
   var editor = new ConditionEditor(survey, question);
@@ -956,9 +957,9 @@ test("remove operators", () => {
         name: "q2",
         type: "checkbox",
         choices: ["item1", "item2", "item3"],
-        visibleIf: "{q1} = 'a'",
-      },
-    ],
+        visibleIf: "{q1} = 'a'"
+      }
+    ]
   });
   var containsValue = settings.operators.contains;
   var anyofValue = settings.operators.anyof;
@@ -996,10 +997,10 @@ test("file question type should not set operator to 'equal'", () => {
       { name: "q1", type: "text" },
       {
         name: "q2",
-        type: "file",
+        type: "file"
       },
-      { name: "q3", type: "text" },
-    ],
+      { name: "q3", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q1");
   var editor = new ConditionEditor(survey, question);
@@ -1014,13 +1015,13 @@ test("file question type should not set operator to 'equal'", () => {
 
 test("onConditionQuestionsGetListCallback", () => {
   var survey = new SurveyModel({
-    elements: [{ name: "q1", type: "text" }],
+    elements: [{ name: "q1", type: "text" }]
   });
   var question = survey.getQuestionByName("q1");
   var survey2 = new SurveyModel({
     elements: [
-      { name: "question1", type: "dropdown", choices: ["item1", "item2"] },
-    ],
+      { name: "question1", type: "dropdown", choices: ["item1", "item2"] }
+    ]
   });
   var options = new EmptySurveyCreatorOptions();
   var propName = "";
@@ -1045,8 +1046,8 @@ test("getObjectDisplayName", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
-      { name: "q2", title: "Question 2", type: "text" },
-    ],
+      { name: "q2", title: "Question 2", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q1");
   var options = new EmptySurveyCreatorOptions();
@@ -1069,8 +1070,8 @@ test("options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the va
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
-      { name: "q2", title: "Question 2", type: "text" },
-    ],
+      { name: "q2", title: "Question 2", type: "text" }
+    ]
   });
   var question = survey.getQuestionByName("q1");
   var options = new EmptySurveyCreatorOptions();
@@ -1092,9 +1093,9 @@ test("valueName with ':', Bug #953", () => {
       { name: "q1", type: "text", valueName: "profile:q1" },
       {
         name: "q2",
-        type: "text",
-      },
-    ],
+        type: "text"
+      }
+    ]
   });
   var question = survey.getQuestionByName("q2");
   var editor = new ConditionEditor(survey, question);
@@ -1109,9 +1110,9 @@ test("convert 000 into '000'", () => {
       { name: "q1", type: "text" },
       {
         name: "q2",
-        type: "text",
-      },
-    ],
+        type: "text"
+      }
+    ]
   });
   var question = survey.getQuestionByName("q2");
   var editor = new ConditionEditor(survey, question);
@@ -1127,9 +1128,9 @@ test("do not convert '000' into 0", () => {
       {
         name: "q2",
         type: "text",
-        visibleIf: "{q1} = '000'",
-      },
-    ],
+        visibleIf: "{q1} = '000'"
+      }
+    ]
   });
   var question = survey.getQuestionByName("q2");
   var editor = new ConditionEditor(survey, question);
@@ -1150,18 +1151,18 @@ test("SurveyPropertyConditionEditor dynamic matrix in dynamic panel, Bug #1072",
         templateElements: [
           {
             name: "q2",
-            type: "text",
+            type: "text"
           },
           {
             name: "matrix",
             type: "matrixdynamic",
             choices: [1, 2, 3],
             columns: [{ name: "col1", cellType: "dropdown" }, { name: "col2" }],
-            rowCount: 1,
-          },
-        ],
-      },
-    ],
+            rowCount: 1
+          }
+        ]
+      }
+    ]
   });
   var question = survey.getQuestionByName("q1");
   var editor = new ConditionEditor(survey, question);
@@ -1171,4 +1172,64 @@ test("SurveyPropertyConditionEditor dynamic matrix in dynamic panel, Bug #1072",
     "dropdown"
   );
   expect(panel.getQuestionByName("questionValue").choices).toHaveLength(3);
+});
+
+test("Check text for add panel button", () => {
+  var editor = new ConditionEditor(
+    new SurveyModel(),
+    new QuestionTextModel("q1")
+  );
+  expect(editor.panel.panelAddText).toEqual("Add condition");
+});
+test("Show rating/ranking in new line", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "rating" },
+      { name: "q4", type: "ranking", choices: [1, 2, 3] }
+    ]
+  });
+  var question = survey.getQuestionByName("q1");
+  var editor = new ConditionEditor(survey, question);
+  var panel = editor.panel.panels[0];
+  var questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.titleLocation).toEqual("hidden");
+  expect(questionValue.startWithNewLine).toBeFalsy();
+
+  panel.getQuestionByName("questionName").value = "q3";
+  questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.startWithNewLine).toBeTruthy();
+
+  panel.getQuestionByName("questionName").value = "q4";
+  questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.startWithNewLine).toBeTruthy();
+
+  panel.getQuestionByName("questionName").value = "q2";
+  questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.titleLocation).toEqual("hidden");
+  expect(questionValue.startWithNewLine).toBeFalsy();
+});
+test("Set minWidth proeprty to question correctly", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] }
+    ]
+  });
+  var question = survey.getQuestionByName("q1");
+  var editor = new ConditionEditor(survey, question);
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("questionName").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("operator").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("questionValue").minWidth).toEqual("50px");
+  editor.panel.addPanel();
+  panel = editor.panel.panels[1];
+  expect(panel.getQuestionByName("conjunction").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("questionName").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("operator").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("questionValue").minWidth).toEqual("50px");
 });
