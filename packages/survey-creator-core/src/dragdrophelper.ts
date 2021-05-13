@@ -18,9 +18,7 @@ export class DragDropHelper extends Base {
   public static prevEvent = {
     element: null,
     x: -1,
-    y: -1,
-    isBottom: true,
-    isEdge: true
+    y: -1
   };
 
   private draggedElement: IElement = null;
@@ -56,6 +54,8 @@ export class DragDropHelper extends Base {
   }
 
   private moveDraggedElementShortcut = (event: PointerEvent) => {
+    let newDraggedOverElement;
+
     this.doScroll(event.clientY, event.clientX);
 
     if (!this.ghostElement) this.ghostElement = this.createGhostElement();
@@ -78,29 +78,63 @@ export class DragDropHelper extends Base {
     this.draggedElementShortcut.style.top =
       event.clientY - shortcutYCenter + "px";
 
-    this.draggedOverElement = this.getDraggedOverElementFromPoint(
+    let newDraggedOverHTMLElement = this.getDraggedOverHTMLElementFromPoint(
       event.clientX,
       event.clientY
     );
 
-    if (
-      !this.draggedOverElement ||
-      this.draggedOverElement === this.draggedElement
-    ) {
+    if (!newDraggedOverHTMLElement) {
       this.removeGhostElementFromSurvey();
       this.draggedElementShortcut.style.cursor = "not-allowed";
       return;
     }
 
+    if (
+      newDraggedOverHTMLElement.dataset.svcDroppableElementName ===
+      "svc-drag-drop-ghost"
+    ) {
+      console.log("aaaaa");
+      this.draggedElementShortcut.style.cursor = "grabbing";
+      return;
+    }
+
+    newDraggedOverElement = this.survey.getQuestionByName(
+      newDraggedOverHTMLElement.dataset.svcDroppableElementName
+    );
+
+    if (
+      !newDraggedOverElement ||
+      newDraggedOverElement === this.draggedElement
+    ) {
+      this.draggedOverElement = null;
+      this.removeGhostElementFromSurvey();
+      this.draggedElementShortcut.style.cursor = "not-allowed";
+      return;
+    }
+
+    this.draggedElementShortcut.style.cursor = "grabbing";
+
+    // IS BOTTOM IS EDGE
     // const bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
     // this.isEdge = bottomInfo.isEdge;
     // this.isBottom = bottomInfo.isBottom;
-    this.isEdge = true;
-    this.isBottom = true;
+    const rect = newDraggedOverHTMLElement.getBoundingClientRect();
+    const middle = Math.abs(rect.y) + rect.height / 2;
+    let newIsEdge = true;
+    let newIsBottom = event.clientY >= middle;
+    // IS BOTTOM IS EDGE
 
-    if (this.isSamePlace(event, this.draggedOverElement)) return;
+    if (
+      newDraggedOverElement === this.draggedOverElement &&
+      newIsEdge === this.isEdge &&
+      newIsBottom === this.isBottom
+    )
+      return;
 
-    this.draggedElementShortcut.style.cursor = "grabbing";
+    this.isEdge = newIsEdge;
+    this.isBottom = newIsBottom;
+
+    this.draggedOverElement = newDraggedOverElement;
 
     this.insertGhostElementIntoSurvey();
   };
@@ -109,8 +143,9 @@ export class DragDropHelper extends Base {
     clearInterval(this.scrollIntervalId);
     if (this.draggedOverElement) {
       console.log("drop on: " + this.draggedOverElement.name);
-      //this.insertRealElementIntoSurvey();
+      this.insertRealElementIntoSurvey();
     }
+
     document.removeEventListener(
       "pointermove",
       this.moveDraggedElementShortcut
@@ -119,20 +154,23 @@ export class DragDropHelper extends Base {
     document.body.removeChild(this.draggedElementShortcut);
     this.onDragEnd();
   };
-  private getDraggedOverElementFromPoint(x, y) {
+
+  private getDraggedOverHTMLElementFromPoint(x, y): HTMLElement {
+    const selector = "[data-svc-droppable-element-name]";
     this.draggedElementShortcut.hidden = true;
     let draggedOverNode = document.elementFromPoint(x, y);
     this.draggedElementShortcut.hidden = false;
 
-    let droppableElement = <HTMLElement>(
-      draggedOverNode.closest("[data-svc-droppable-element-name]")
-    );
+    let droppableElement =
+      draggedOverNode.closest(selector) ||
+      draggedOverNode.querySelector(selector);
 
-    if (!droppableElement) return null;
+    if (!droppableElement) {
+      window["draggedOverNode"] = draggedOverNode;
+      console.dir(draggedOverNode);
+    }
 
-    return this.survey.getQuestionByName(
-      droppableElement.dataset.svcDroppableElementName
-    );
+    return <HTMLElement>droppableElement;
   }
   private createDraggedElementShortcut() {
     const draggedElementShortcut = document.createElement("div");
@@ -183,13 +221,15 @@ export class DragDropHelper extends Base {
   private createGhostElement(): any {
     const json = {
       type: "html",
-      name: "svd-drag-drog-ghost-element",
+      name: "svc-drag-drop-ghost",
       html: '<div class="svc-drag-drop-ghost"></div>'
     };
     return this.createElementFromJson(json);
   }
   private insertGhostElementIntoSurvey(): boolean {
     this.removeGhostElementFromSurvey();
+
+    this.ghostElement.name = "svc-drag-drop-ghost"; //TODO
 
     this.pageOrPanel = this.draggedOverElement.isPage
       ? this.draggedOverElement
@@ -210,7 +250,7 @@ export class DragDropHelper extends Base {
   private insertRealElementIntoSurvey() {
     this.removeGhostElementFromSurvey();
     this.pageOrPanel.dragDropStart(
-      null,
+      this.draggedElement,
       this.draggedElement,
       DragDropHelper.nestedPanelDepth
     );
@@ -250,6 +290,8 @@ export class DragDropHelper extends Base {
 
     return false;
   }
+
+  //TODO =====================================
 
   public onDragStartToolboxItem(
     event: IPortableDragEvent,
@@ -391,17 +433,13 @@ export class DragDropHelper extends Base {
     const prevEvent = DragDropHelper.prevEvent;
 
     if (
-      prevEvent.element !== draggedOverElement &&
-      prevEvent.isBottom !== this.isBottom &&
-      prevEvent.isEdge !== this.isEdge
-      // Math.abs(event.clientX - prevEvent.x) > 5 ||
-      // Math.abs(event.clientY - prevEvent.y) > 5
+      (prevEvent.element !== draggedOverElement &&
+        Math.abs(event.clientX - prevEvent.x) > 5) ||
+      Math.abs(event.clientY - prevEvent.y) > 5
     ) {
       prevEvent.element = draggedOverElement;
       prevEvent.x = event.clientX;
       prevEvent.y = event.clientY;
-      prevEvent.isBottom = this.isBottom;
-      prevEvent.isEdge = this.isEdge;
       return false;
     }
     return true;
@@ -501,8 +539,6 @@ export class DragDropHelper extends Base {
     prevEvent.element = null;
     prevEvent.x = -1;
     prevEvent.y = -1;
-    prevEvent.isBottom = true;
-    prevEvent.isEdge = true;
 
     this.draggedOverElement = null;
     this.draggedElementShortcut = null;

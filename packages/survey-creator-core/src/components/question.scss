@@ -97,6 +97,16 @@ svc-question,
   bottom: 0;
 }
 
+[data-svc-droppable-element-name="svc-drag-drop-ghost"] {
+  .svc-question__drag-area {
+    display: none;
+  }
+
+  .svc-question__drag-element {
+    display: none;
+  }
+}
+
 .svc-hovered .svc-question__drag-area {
   visibility: visible;
 }
