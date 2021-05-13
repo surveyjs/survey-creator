@@ -11,6 +11,7 @@ import {
   property,
   propertyArray,
   IElement,
+  Serializer
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -678,6 +679,7 @@ export class CreatorBase<T extends SurveyModel>
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistoryController(this);
     this.setOptions(options);
+    this.patchMetadata();
     this.initTabs();
     this.initToolbar();
     this.initSurveyWithJSON(
@@ -851,7 +853,7 @@ export class CreatorBase<T extends SurveyModel>
     return this.options || {};
   }
 
-  protected setOptions(options: any) {
+  protected setOptions(options: any): void {
     if (!options) options = {};
     if (!options.hasOwnProperty("generateValidJSON"))
       options.generateValidJSON = true;
@@ -948,6 +950,10 @@ export class CreatorBase<T extends SurveyModel>
     if (typeof options.allowModifyPages !== "undefined") {
       this.allowModifyPages = options.allowModifyPages;
     }
+  }
+
+  private patchMetadata(): void {
+    Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {

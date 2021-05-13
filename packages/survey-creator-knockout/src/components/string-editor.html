@@ -1,7 +1,9 @@
 <span class="svc-string-editor">
     <span class="svc-string-editor__content">
-        <div class="svc-string-editor__border">
-        </div>
+        <div class="svc-string-editor__border"></div>
+        <!-- ko ifnot: editValue -->
+        <span class="svc-string-editor-placeholder" data-bind="text: placeholder"></span>
+        <!-- /ko -->
         <!-- ko ifnot: koHasHtml -->
         <span class="sv-string-editor" data-bind="text: editValue, event: { blur: onInput, keydown: onKeyDown }, click: edit" contenteditable="true"></span>
         <!-- /ko -->
