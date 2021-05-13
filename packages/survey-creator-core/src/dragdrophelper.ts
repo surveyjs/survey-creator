@@ -89,6 +89,15 @@ export class DragDropHelper extends Base {
       return;
     }
 
+    if (
+      newDraggedOverHTMLElement.dataset.svcDroppableElementName ===
+      "svc-drag-drop-ghost"
+    ) {
+      console.log("aaaaa");
+      this.draggedElementShortcut.style.cursor = "grabbing";
+      return;
+    }
+
     newDraggedOverElement = this.survey.getQuestionByName(
       newDraggedOverHTMLElement.dataset.svcDroppableElementName
     );
@@ -156,10 +165,10 @@ export class DragDropHelper extends Base {
       draggedOverNode.closest(selector) ||
       draggedOverNode.querySelector(selector);
 
-    // if (!droppableElement) {
-    //   window["draggedOverNode"] = draggedOverNode;
-    //   console.dir(draggedOverNode);
-    // }
+    if (!droppableElement) {
+      window["draggedOverNode"] = draggedOverNode;
+      console.dir(draggedOverNode);
+    }
 
     return <HTMLElement>droppableElement;
   }
@@ -212,13 +221,15 @@ export class DragDropHelper extends Base {
   private createGhostElement(): any {
     const json = {
       type: "html",
-      name: "svddragdrogghostelement",
+      name: "svc-drag-drop-ghost",
       html: '<div class="svc-drag-drop-ghost"></div>'
     };
     return this.createElementFromJson(json);
   }
   private insertGhostElementIntoSurvey(): boolean {
     this.removeGhostElementFromSurvey();
+
+    this.ghostElement.name = "svc-drag-drop-ghost"; //TODO
 
     this.pageOrPanel = this.draggedOverElement.isPage
       ? this.draggedOverElement
