@@ -638,7 +638,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     var isFirst = !conjunctionQuestion || !conjunctionQuestion.isVisible;
     if (!isFirst) {
       conjunctionQuestion.minWidth = "50px";
-      conjunctionQuestion.width = "100px";
+      conjunctionQuestion.width = "15%";
       conjunctionQuestion.paddingRight = paddingRight;
     }
 

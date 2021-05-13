@@ -894,7 +894,7 @@ test("Set question width", () => {
   expect(panel.getQuestionByName("questionName").startWithNewLine).toBeFalsy();
   expect(panel.getQuestionByName("operator").startWithNewLine).toBeFalsy();
   expect(panel.getQuestionByName("questionValue").startWithNewLine).toBeFalsy();
-  expect(panel.getQuestionByName("conjunction").width).toEqual("100px");
+  expect(panel.getQuestionByName("conjunction").width).toEqual("15%");
   expect(panel.getQuestionByName("questionName").width).toEqual("25%");
   expect(panel.getQuestionByName("operator").width).toEqual("25%");
   expect(panel.getQuestionByName("questionValue").width).toEqual("35%");
@@ -905,7 +905,7 @@ test("Set question width", () => {
   expect(
     panel.getQuestionByName("questionValue").startWithNewLine
   ).toBeTruthy();
-  expect(panel.getQuestionByName("conjunction").width).toEqual("100px");
+  expect(panel.getQuestionByName("conjunction").width).toEqual("15%");
   expect(panel.getQuestionByName("questionName").width).toEqual("25%");
   expect(panel.getQuestionByName("operator").width).toEqual("60%");
   expect(panel.getQuestionByName("questionValue").width).toEqual("");
@@ -1211,4 +1211,25 @@ test("Show rating/ranking in new line", () => {
   questionValue = panel.getQuestionByName("questionValue");
   expect(questionValue.titleLocation).toEqual("hidden");
   expect(questionValue.startWithNewLine).toBeFalsy();
+});
+test("Set minWidth proeprty to question correctly", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] }
+    ]
+  });
+  var question = survey.getQuestionByName("q1");
+  var editor = new ConditionEditor(survey, question);
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("questionName").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("operator").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("questionValue").minWidth).toEqual("50px");
+  editor.panel.addPanel();
+  panel = editor.panel.panels[1];
+  expect(panel.getQuestionByName("conjunction").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("questionName").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("operator").minWidth).toEqual("50px");
+  expect(panel.getQuestionByName("questionValue").minWidth).toEqual("50px");
 });
