@@ -551,7 +551,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private isKeepQuestonValueOnSameLine(questionType: string): boolean {
     return this.isClassContains(
       questionType,
-      ["text", "dropdown", "rating", "boolean"],
+      ["text", "dropdown", "boolean"],
       []
     );
   }

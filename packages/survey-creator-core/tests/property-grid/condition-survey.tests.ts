@@ -1181,3 +1181,34 @@ test("Check text for add panel button", () => {
   );
   expect(editor.panel.panelAddText).toEqual("Add condition");
 });
+test("Show rating/ranking in new line", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "rating" },
+      { name: "q4", type: "ranking", choices: [1, 2, 3] }
+    ]
+  });
+  var question = survey.getQuestionByName("q1");
+  var editor = new ConditionEditor(survey, question);
+  var panel = editor.panel.panels[0];
+  var questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.titleLocation).toEqual("hidden");
+  expect(questionValue.startWithNewLine).toBeFalsy();
+
+  panel.getQuestionByName("questionName").value = "q3";
+  questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.startWithNewLine).toBeTruthy();
+
+  panel.getQuestionByName("questionName").value = "q4";
+  questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.startWithNewLine).toBeTruthy();
+
+  panel.getQuestionByName("questionName").value = "q2";
+  questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.titleLocation).toEqual("hidden");
+  expect(questionValue.startWithNewLine).toBeFalsy();
+});
