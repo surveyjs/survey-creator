@@ -5,27 +5,28 @@ const template = require("./string-editor.html");
 
 export class StringEditorViewModel {
   constructor(public locString: any) {}
-  get koHasHtml() {
+  public get koHasHtml(): boolean {
     return this.locString.koHasHtml();
   }
-  get editValue() {
+  public get editValue(): string {
     return this.locString.koRenderedHtml();
   }
-  set editValue(value) {
+  public set editValue(value) {
     this.locString.searchElement = undefined;
     this.locString.text = value;
   }
-  public get placeholder() {
+  public get placeholder(): string {
     const ownerType: string = this.locString.owner.getType();
+    if (!this.locString.name) return "";
     const property: JsonObjectProperty = Serializer.findProperty(ownerType, this.locString.name);
     if (!property.placeholder) return "";
     return editorLocalization.getString(property.placeholder);
   }
-  onInput(sender: StringEditorViewModel, event: any) {
+  public onInput(sender: StringEditorViewModel, event: any): void {
     if (sender.editValue == event.target.innerText) return;
     sender.editValue = event.target.innerText;
   }
-  onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent) {
+  public onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent): boolean {
     if (event.keyCode === 13) {
       this.blurEditor();
       this.done(sender, event);
@@ -36,16 +37,16 @@ export class StringEditorViewModel {
     }
     return true;
   }
-  edit(model: StringEditorViewModel, event: MouseEvent) {
+  public edit(model: StringEditorViewModel, _: MouseEvent): void {
     model.focusEditor && model.focusEditor();
   }
-  done(_: StringEditorViewModel, event: Event) {
+  public done(_: StringEditorViewModel, event: Event): void {
     event.stopImmediatePropagation();
     event.preventDefault();
   }
-  focusEditor: () => void;
-  blurEditor: () => void;
-  dispose() {
+  public focusEditor: () => void;
+  public blurEditor: () => void;
+  public dispose(): void {
     this.locString.onSearchChanged = undefined;
     this.focusEditor = undefined;
     this.blurEditor = undefined;

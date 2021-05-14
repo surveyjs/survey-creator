@@ -954,10 +954,13 @@ export class CreatorBase<T extends SurveyModel>
 
   private patchMetadata(): void {
     Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
+    Serializer.findProperty("survey", "description").placeholder = "pe.surveyDescriptionPlaceholder";
+    Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
+    Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
-    var property = Survey.Serializer.findProperty(obj.getType(), propertyName);
+    const property: Survey.JsonObjectProperty = Survey.Serializer.findProperty(obj.getType(), propertyName);
     return (
       !property ||
       !this.onIsPropertyReadOnlyCallback(

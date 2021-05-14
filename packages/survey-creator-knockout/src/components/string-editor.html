@@ -1,14 +1,11 @@
 <span class="svc-string-editor">
     <span class="svc-string-editor__content">
         <div class="svc-string-editor__border"></div>
-        <!-- ko ifnot: editValue -->
-        <span class="svc-string-editor-placeholder" data-bind="text: placeholder"></span>
-        <!-- /ko -->
         <!-- ko ifnot: koHasHtml -->
-        <span class="sv-string-editor" data-bind="text: editValue, event: { blur: onInput, keydown: onKeyDown }, click: edit" contenteditable="true"></span>
+        <span class="sv-string-editor" data-bind="text: editValue, event: { blur: onInput, keydown: onKeyDown }, click: edit, attr: { 'aria-placeholder': placeholder }" contenteditable="true"></span>
         <!-- /ko -->
         <!-- ko if: koHasHtml -->
-        <span class="sv-string-editor" data-bind="html: editValue, event: { blur: onInput, keydown: onKeyDown }, click: edit" contenteditable="true"></span>
+        <span class="sv-string-editor" data-bind="html: editValue, event: { blur: onInput, keydown: onKeyDown }, click: edit, attr: { 'aria-placeholder': placeholder }" contenteditable="true"></span>
         <!-- /ko -->
         <div class="svc-string-editor__controls">
             <sv-svg-icon class="svc-string-editor__button svc-string-editor__button--edit" data-bind="click: edit" params="iconName: 'icon-pencil', size: 16"></sv-svg-icon>
