@@ -6,19 +6,22 @@ import {
   PanelModel,
   Helpers,
   Base,
-  FunctionFactory,
+  FunctionFactory
 } from "survey-core";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
+import {
+  ISurveyCreatorOptions,
+  EmptySurveyCreatorOptions
+} from "../../settings";
 import {
   PropertyEditorSetupValue,
   PropertyJSONGenerator,
-  PropertyGridTitleActionsCreator,
+  PropertyGridTitleActionsCreator
 } from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import {
   SurveyLogicTypes,
   SurveyLogicType,
-  getLogicString,
+  getLogicString
 } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
 
@@ -130,6 +133,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           name: "panel",
           title: getLogicString("actionsEditorTitle"),
           panelAddText: getLogicString("addNewAction"),
+          panelRemoveButtonLocation: "right",
           panelCount: 0,
           templateElements: [
             {
@@ -138,28 +142,28 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               titleLocation: "hidden",
               isRequired: true,
               optionsCaption: getLogicString("selectedActionCaption"),
-              requiredErrorText: this.getLocString("pe.conditionActionEmpty"),
+              requiredErrorText: this.getLocString("pe.conditionActionEmpty")
             },
             {
               name: "logicTypeDescription",
               type: "html",
-              startWithNewLine: false,
+              startWithNewLine: false
             },
             {
               name: "elementSelector",
               type: "dropdown",
               titleLocation: "hidden",
               isRequired: true,
-              visible: false,
+              visible: false
             },
             {
               name: "elementPanel",
               type: "panel",
-              visible: false,
-            },
-          ],
-        },
-      ],
+              visible: false
+            }
+          ]
+        }
+      ]
     };
   }
   protected getSurveyCreationReason(): string {

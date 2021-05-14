@@ -9,11 +9,13 @@
     <!-- ko template: { name: 'survey-content', data: $data.itemsSurvey  } --><!-- /ko -->
     <!-- /ko -->
     <!-- ko if: $data.mode != "view" -->
+
     <!-- ko template: { name: 'survey-content', data: $data.expressionSurvey  } --><!-- /ko -->
     <!-- ko template: { name: 'survey-content', data: $data.itemEditorSurvey  } --><!-- /ko -->
     <div><span data-bind="text: errorText"></span></div>
     <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarEditItems } } -->
     <!-- /ko -->
+
     <!-- /ko -->
   </div>
   <!-- /ko -->
