@@ -105,6 +105,10 @@ export class DragDropHelper extends Base {
     if (elementOrPageName === "newGhostPage") {
       newDraggedOverElement = DragDropHelper.newGhostPage;
     } else {
+      newDraggedOverElement = this.survey.getPageByName(elementOrPageName);
+    }
+
+    if (!newDraggedOverElement) {
       newDraggedOverElement =
         this.survey.currentPage.getElementByName(elementOrPageName);
     }
@@ -279,6 +283,16 @@ export class DragDropHelper extends Base {
       this.isEdge
     );
     const newElement = this.pageOrPanel.dragDropFinish();
+
+    // ghost new page
+    if (
+      this.draggedOverElement.isPage &&
+      typeof this.draggedOverElement["_addToSurvey"] === "function"
+    ) {
+      this.survey.currentPage = this.draggedOverElement;
+      this.draggedOverElement["_addToSurvey"]();
+    }
+    // EO ghost new page
     this.creator.selectElement(newElement);
   }
   private removeGhostElementFromSurvey() {
