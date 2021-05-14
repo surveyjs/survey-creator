@@ -43,7 +43,11 @@ test("Text question choices localization", () => {
 test("Survey child groups", () => {
   const survey: SurveyModel = new SurveyModel();
   const translation: Translation = new Translation(survey);
-  const root: TranslationGroup = new TranslationGroup("root", survey, translation);
+  const root: TranslationGroup = new TranslationGroup(
+    "root",
+    survey,
+    translation
+  );
   expect(root.groups).toHaveLength(0);
   survey.addNewPage("p1");
   const q: Question = survey.pages[0].addNewQuestion("text", "q1");
@@ -80,7 +84,7 @@ test("Survey child groups, #2", () => {
 test("get locales", () => {
   const survey: SurveyModel = new SurveyModel({
     title: { default: "t1", de: "dfdfdf" },
-    description: "text1",
+    description: "text1"
   });
   const translation: Translation = new Translation(survey);
   translation.showAllStrings = true;
@@ -105,16 +109,12 @@ test("Translation for adding", () => {
   translation.showAllStrings = true;
   const locales: any = surveyLocalization.locales;
   const count: number = Object.keys(locales).length;
-  expect(translation.availableLocalesQuestion.visibleChoices).
-    toHaveLength(count);
+  expect(translation.getSurveyLocales()[0]).toHaveLength(count);
   translation.addLocale("de");
-  expect(translation.availableLocalesQuestion.visibleChoices).
-    toHaveLength(count - 1);
   expect(translation.locales).toHaveLength(2);
-  translation.availableLocalesQuestion.value = "fr";
+  translation.addLocale("fr");
   expect(translation.locales).toHaveLength(3);
   expect(translation.locales[2]).toEqual("fr");
-  expect(translation.availableLocalesQuestion.value).toBeFalsy();
 });
 test("Do not reset locales on reset", () => {
   const survey: SurveyModel = new SurveyModel();
@@ -158,13 +158,13 @@ test("disable locales", () => {
               default: "question 1",
               fr: "quéstion 1",
               it: "quéstion 1",
-              es: "quéstion 1",
+              es: "quéstion 1"
             },
-            choices: ["item1", "item2", "item3"],
-          },
-        ],
-      },
-    ],
+            choices: ["item1", "item2", "item3"]
+          }
+        ]
+      }
+    ]
   });
   surveyLocalization.supportedLocales = ["", "fr"];
   const translation: Translation = new Translation(survey);
@@ -180,9 +180,9 @@ test("get/set the selected locales with inactive translation tab", () => {
       {
         type: "text",
         name: "q1",
-        title: { default: "t", de: "de_t", fr: "fr_t", it: "it_d" },
-      },
-    ],
+        title: { default: "t", de: "de_t", fr: "fr_t", it: "it_d" }
+      }
+    ]
   });
   const translation: Translation = new Translation(survey);
   translation.setSelectedLocales(["de", "it"]);
@@ -233,7 +233,9 @@ test("Default locale name", () => {
 });
 
 test("Add properties for columns", () => {
-  const question: QuestionMatrixDropdownModel = new QuestionMatrixDropdownModel("q1");
+  const question: QuestionMatrixDropdownModel = new QuestionMatrixDropdownModel(
+    "q1"
+  );
   question.addColumn("col1");
   question.columns[0]["choices"] = ["1", "2"];
   const group: TranslationGroup = new TranslationGroup(question.name, question);
@@ -242,10 +244,16 @@ test("Add properties for columns", () => {
 });
 
 test("Do not allow translate choices with numbers", () => {
-  const question: QuestionMatrixDropdownModel = new QuestionMatrixDropdownModel("q1");
+  const question: QuestionMatrixDropdownModel = new QuestionMatrixDropdownModel(
+    "q1"
+  );
   question.choices = [1, 2, 3];
   const translation: Translation = new Translation(new SurveyModel());
-  const group: TranslationGroup = new TranslationGroup(question.name, question, translation);
+  const group: TranslationGroup = new TranslationGroup(
+    question.name,
+    question,
+    translation
+  );
   expect(group.groups).toHaveLength(0);
 });
 test("Filter by Page", () => {
@@ -267,7 +275,9 @@ test("Filter by Page", () => {
 test("MultipleText question", () => {
   const survey: SurveyModel = new SurveyModel();
   survey.addNewPage("Page 1");
-  const question: QuestionMultipleTextModel = new QuestionMultipleTextModel("q1");
+  const question: QuestionMultipleTextModel = new QuestionMultipleTextModel(
+    "q1"
+  );
   question.addItem("i1", "item 1");
   question.addItem("i2", "item 2");
   survey.pages[0].addQuestion(question);
@@ -289,7 +299,7 @@ test("Import from array", () => {
             name: "col1",
             title: {
               default: "col1 en",
-              de: "col1 de",
+              de: "col1 de"
             },
             cellType: "dropdown",
             isRequired: true,
@@ -298,17 +308,17 @@ test("Import from array", () => {
                 value: "item1",
                 text: {
                   default: "item en",
-                  de: "item de",
-                },
-              },
-            ],
+                  de: "item de"
+                }
+              }
+            ]
           },
           {
-            name: "col2",
+            name: "col2"
           },
           {
-            name: "col3",
-          },
+            name: "col3"
+          }
         ],
         choices: [1, 2, 3, 4, 5],
         rows: [
@@ -316,19 +326,19 @@ test("Import from array", () => {
             value: "item1",
             text: {
               default: "Row 1",
-              de: "Row 1-de",
-            },
-          },
-        ],
-      },
-    ],
+              de: "Row 1-de"
+            }
+          }
+        ]
+      }
+    ]
   });
   const translation: Translation = new Translation(survey);
 
   translation.importFromNestedArray([
     ["description ↓ - language →", "default", "de"],
     ["survey.page1.question1.title", "question1_1", ""],
-    ["survey.page1.question1.col1.title", "col1 en1", "col1 de1"],
+    ["survey.page1.question1.col1.title", "col1 en1", "col1 de1"]
   ]);
   let question = <QuestionMatrixDropdownModel>(
     survey.getQuestionByName("question1")
@@ -351,7 +361,7 @@ test("Export to array", () => {
             name: "col1",
             title: {
               default: "col1 en",
-              de: "col1 de",
+              de: "col1 de"
             },
             cellType: "dropdown",
             isRequired: true,
@@ -360,17 +370,17 @@ test("Export to array", () => {
                 value: "item1",
                 text: {
                   default: "item en",
-                  de: "item de",
-                },
-              },
-            ],
+                  de: "item de"
+                }
+              }
+            ]
           },
           {
-            name: "col2",
+            name: "col2"
           },
           {
-            name: "col3",
-          },
+            name: "col3"
+          }
         ],
         choices: [1, 2, 3, 4, 5],
         rows: [
@@ -378,19 +388,19 @@ test("Export to array", () => {
             value: "item1",
             text: {
               default: "Row 1",
-              de: "Row 1-de",
-            },
-          },
-        ],
-      },
-    ],
+              de: "Row 1-de"
+            }
+          }
+        ]
+      }
+    ]
   });
   const translation: Translation = new Translation(survey);
   let exported;
   parse(translation.exportToCSV(), {
     complete: function (results, file) {
       exported = results.data;
-    },
+    }
   });
 
   expect(exported).toHaveLength(7);
@@ -398,7 +408,7 @@ test("Export to array", () => {
   expect(exported[1]).toEqual([
     "survey.page1.question1.title",
     "question1",
-    "",
+    ""
   ]);
 });
 test("Merging a locale with default", () => {
@@ -411,8 +421,8 @@ test("Merging a locale with default", () => {
         name: "question1",
         title: {
           de: "title de",
-          fr: "title fr",
-        },
+          fr: "title fr"
+        }
       },
       {
         type: "text",
@@ -420,18 +430,18 @@ test("Merging a locale with default", () => {
         title: {
           default: "title default",
           de: "title de",
-          fr: "title fr",
-        },
+          fr: "title fr"
+        }
       },
       {
         type: "text",
         name: "question3",
         title: {
           default: "title default",
-          fr: "title fr",
-        },
-      },
-    ],
+          fr: "title fr"
+        }
+      }
+    ]
   });
   const translation: Translation = new Translation(survey);
   expect(translation.locales).toHaveLength(3);
@@ -451,13 +461,17 @@ test("Merging a locale with default", () => {
 test("Custom localizable property in question", () => {
   Serializer.addProperty("question", {
     name: "customProp",
-    isLocalizable: true,
+    isLocalizable: true
   });
   const question: QuestionTextModel = new QuestionTextModel("q1");
   question["customProp"] = "some text";
   const group: TranslationGroup = new TranslationGroup(question.name, question);
-  const titleItem: TranslationItem = <TranslationItem>group.getItemByName("title");
-  const customPropItem: TranslationItem = <TranslationItem>group.getItemByName("customProp");
+  const titleItem: TranslationItem = <TranslationItem>(
+    group.getItemByName("title")
+  );
+  const customPropItem: TranslationItem = <TranslationItem>(
+    group.getItemByName("customProp")
+  );
   expect(titleItem).toBeTruthy();
   expect(customPropItem).toBeTruthy();
   expect(customPropItem.name).toEqual("customProp");
@@ -466,7 +480,7 @@ test("Custom localizable property in question", () => {
 test("Custom localizable property in itemvalue", () => {
   Serializer.addProperty("itemvalue", {
     name: "customProp",
-    isLocalizable: true,
+    isLocalizable: true
   });
   const question: QuestionCheckboxModel = new QuestionCheckboxModel("q1");
   question.choices = ["1", "2"];
@@ -474,7 +488,9 @@ test("Custom localizable property in itemvalue", () => {
   question.choices[1].text = "text 2";
   question.choices[1].customProp = "some text";
   const group: TranslationGroup = new TranslationGroup(question.name, question);
-  const choicesGroup: TranslationGroup = <TranslationGroup>group.getItemByName("choices");
+  const choicesGroup: TranslationGroup = <TranslationGroup>(
+    group.getItemByName("choices")
+  );
   expect(choicesGroup).toBeTruthy();
   expect(choicesGroup.isGroup).toBeTruthy();
   expect(choicesGroup.items).toHaveLength(4);
@@ -497,7 +513,7 @@ test("Add pages as a custom property, it should not produce the error, Bug#991",
     onSetValue: function (obj) {
       //Do nothing
     },
-    isSerializable: false,
+    isSerializable: false
   });
   const survey: SurveyModel = new SurveyModel({
     locale: "de",
@@ -507,8 +523,8 @@ test("Add pages as a custom property, it should not produce the error, Bug#991",
         name: "question1",
         title: {
           de: "title de",
-          fr: "title fr",
-        },
+          fr: "title fr"
+        }
       },
       {
         type: "text",
@@ -516,18 +532,18 @@ test("Add pages as a custom property, it should not produce the error, Bug#991",
         title: {
           default: "title default",
           de: "title de",
-          fr: "title fr",
-        },
+          fr: "title fr"
+        }
       },
       {
         type: "text",
         name: "question3",
         title: {
           default: "title default",
-          fr: "title fr",
-        },
-      },
-    ],
+          fr: "title fr"
+        }
+      }
+    ]
   });
   const translation: Translation = new Translation(survey);
   expect(translation.locales).toHaveLength(3);
@@ -538,17 +554,17 @@ test("Show questions as they are in survey. Do not sort them", () => {
     elements: [
       {
         type: "text",
-        name: "question2",
+        name: "question2"
       },
       {
         type: "text",
         name: "question1",
         title: {
           default: "title",
-          de: "title de",
-        },
-      },
-    ],
+          de: "title de"
+        }
+      }
+    ]
   });
   let translation: Translation = new Translation(survey);
   expect(translation.root.groups).toHaveLength(1);
@@ -604,7 +620,9 @@ test("Two new functions: expandAll(), collapseAll()", () => {
 test("check LocalizableStrings/dataList property", () => {
   const survey: SurveyModel = new SurveyModel();
   survey.addNewPage("page1");
-  const q1: QuestionTextModel = <QuestionTextModel>survey.pages[0].addNewQuestion("text", "q1");
+  const q1: QuestionTextModel = <QuestionTextModel>(
+    survey.pages[0].addNewQuestion("text", "q1")
+  );
   q1.dataList = ["en1", "en2"];
   const translation: Translation = new Translation(survey);
   const root: TranslationGroup = translation.root;

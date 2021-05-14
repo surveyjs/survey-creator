@@ -7,20 +7,14 @@
       <span data-bind="text:$data.noStringsText"></span>
     </div>
     <!-- ko ifnot: $data.isEmpty -->
-    <svd-translation-group
-      params="model: root"
-    ></svd-translation-group>
+    <!-- ko template: { name: 'survey-content', data: $data.settingsSurvey  } --><!-- /ko -->
+    <!-- ko template: { name: 'survey-content', data: $data.stringsSurvey  } --><!-- /ko -->
     <!-- /ko -->
   </div>
-  <div class="svc-plugin-tab__content-actions svc-translation-tab__content-actions">
+  <div
+    class="svc-plugin-tab__content-actions svc-translation-tab__content-actions"
+  >
     <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
     <!-- /ko -->
   </div>
 </div>
-<script type="text/html" id="svd-translation-item">
-  <textarea
-    class="form-control"
-    style="width: 100%;"
-    data-bind="disable: item.readOnly, value:$data.text, attr: {placeholder: $data.placeholder}"
-  ></textarea>
-</script>
