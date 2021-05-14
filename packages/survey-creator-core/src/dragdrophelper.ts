@@ -20,6 +20,7 @@ export class DragDropHelper extends Base {
     x: -1,
     y: -1
   };
+  public static newGhostPage: PageModel = null;
 
   private draggedElement: IElement = null;
   private draggedElementShortcut: HTMLElement = null;
@@ -98,9 +99,15 @@ export class DragDropHelper extends Base {
       return;
     }
 
-    newDraggedOverElement = this.survey.currentPage.getElementByName(
-      newDraggedOverHTMLElement.dataset.svcDroppableElementName
-    );
+    let elementOrPageName =
+      newDraggedOverHTMLElement.dataset.svcDroppableElementName;
+
+    if (elementOrPageName === "newGhostPage") {
+      newDraggedOverElement = DragDropHelper.newGhostPage;
+    } else {
+      newDraggedOverElement =
+        this.survey.currentPage.getElementByName(elementOrPageName);
+    }
 
     if (
       !newDraggedOverElement ||
@@ -115,9 +122,6 @@ export class DragDropHelper extends Base {
     this.draggedElementShortcut.style.cursor = "grabbing";
 
     // IS BOTTOM IS EDGE
-    // const bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
-    // this.isEdge = bottomInfo.isEdge;
-    // this.isBottom = bottomInfo.isBottom;
     const rect = newDraggedOverHTMLElement.getBoundingClientRect();
     const middle = rect.y + rect.height / 2;
     let newIsEdge = true;
@@ -176,7 +180,7 @@ export class DragDropHelper extends Base {
 
     // need for panel: find last droppable child.
     while (!!droppableElement) {
-      result = droppableElement; 
+      result = droppableElement;
       droppableElement = droppableElement.querySelector(selector);
     }
 

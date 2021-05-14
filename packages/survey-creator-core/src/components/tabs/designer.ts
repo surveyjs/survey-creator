@@ -1,5 +1,6 @@
 import { Base, PageModel, property, SurveyModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
+import { DragDropHelper } from "../../dragdrophelper";
 import "./designer.scss";
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
@@ -19,6 +20,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
       this.createNewPage();
     };
     this.newPage = newPage;
+    DragDropHelper.newGhostPage = newPage;
   }
 
   constructor(creator: CreatorBase<T>) {

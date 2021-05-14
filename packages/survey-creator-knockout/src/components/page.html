@@ -1,6 +1,6 @@
 <div
   class="svc-page__content"
-  data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+  data-bind="attr: { 'data-svc-droppable-element-name': 'newGhostPage' }, click: select, clickBubble: false, css: css, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
   <!-- ko template: { name: 'survey-page', data: page } -->
   <!-- /ko -->
