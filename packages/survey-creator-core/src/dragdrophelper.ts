@@ -149,7 +149,7 @@ export class DragDropHelper extends Base {
   private drop = () => {
     clearInterval(this.scrollIntervalId);
     if (this.draggedOverElement) {
-      console.log("drop on: " + this.draggedOverElement.name);
+      // console.log("drop on: " + this.draggedOverElement["title"]);
       this.insertRealElementIntoSurvey();
     }
 
@@ -172,16 +172,24 @@ export class DragDropHelper extends Base {
       draggedOverNode.closest(selector) ||
       draggedOverNode.querySelector(selector);
 
-    if (!droppableElement) {
-      window["draggedOverNode"] = draggedOverNode;
-      console.dir(draggedOverNode);
+    let result;
+
+    // need for panel: find last droppable child.
+    while (!!droppableElement) {
+      result = droppableElement; 
+      droppableElement = droppableElement.querySelector(selector);
     }
 
-    return <HTMLElement>droppableElement;
+    // if (!droppableElement) {
+    //   window["draggedOverNode"] = draggedOverNode;
+    //   console.dir(draggedOverNode);
+    // }
+
+    return <HTMLElement>result;
   }
   private createDraggedElementShortcut() {
     const draggedElementShortcut = document.createElement("div");
-    draggedElementShortcut.innerText = this.draggedElement.name;
+    draggedElementShortcut.innerText = this.draggedElement["title"];
     draggedElementShortcut.style.height = "40px";
     draggedElementShortcut.style.minWidth = "100px";
     draggedElementShortcut.style.borderRadius = "100px";
