@@ -13,7 +13,7 @@ import { CreatorBase } from "./creator-base";
 import { IPortableDragEvent } from "./utils/events";
 
 export class DragDropHelper extends Base {
-  public static edgeHeight: number = 20;
+  public static edgeHeight: number = 30;
   public static nestedPanelDepth: number = -1;
   public static prevEvent = {
     element: null,
@@ -84,6 +84,7 @@ export class DragDropHelper extends Base {
     );
 
     if (!newDraggedOverHTMLElement) {
+      this.draggedOverElement = null;
       this.removeGhostElementFromSurvey();
       this.draggedElementShortcut.style.cursor = "not-allowed";
       return;
@@ -93,12 +94,11 @@ export class DragDropHelper extends Base {
       newDraggedOverHTMLElement.dataset.svcDroppableElementName ===
       "svc-drag-drop-ghost"
     ) {
-      console.log("aaaaa");
       this.draggedElementShortcut.style.cursor = "grabbing";
       return;
     }
 
-    newDraggedOverElement = this.survey.getQuestionByName(
+    newDraggedOverElement = this.survey.currentPage.getElementByName(
       newDraggedOverHTMLElement.dataset.svcDroppableElementName
     );
 
@@ -127,7 +127,7 @@ export class DragDropHelper extends Base {
       newDraggedOverElement.isPanel &&
       newDraggedOverElement.elements.length === 0
     ) {
-      newIsEdge = Math.abs(event.clientY - middle) <= DragDropHelper.edgeHeight;
+      newIsEdge = Math.abs(event.clientY - middle) >= DragDropHelper.edgeHeight;
     }
     // IS BOTTOM IS EDGE
 
