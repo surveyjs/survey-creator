@@ -1,22 +1,29 @@
+<!-- ko if: $data.showing  -->
+<!-- ko if: logic.mode == "view" -->
 <div class="svc-creator-tab__content">
-  <!-- ko if: $data.showing  -->
-  <div class="svc-plugin-tab__content" data-bind="with: $data.logic">
-    <!-- ko if: $data.mode == "view" -->
-    <div class="svc-plugin-tab__content-actions">
-      <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
-      <!-- /ko -->
-    </div>
-    <!-- ko template: { name: 'survey-content', data: $data.itemsSurvey  } --><!-- /ko -->
-    <!-- /ko -->
-    <!-- ko if: $data.mode != "view" -->
-
-    <!-- ko template: { name: 'survey-content', data: $data.expressionSurvey  } --><!-- /ko -->
-    <!-- ko template: { name: 'survey-content', data: $data.itemEditorSurvey  } --><!-- /ko -->
-    <div><span data-bind="text: errorText"></span></div>
-    <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarEditItems } } -->
-    <!-- /ko -->
-
+  <div class="svc-plugin-tab__content-actions">
+    <!-- ko component: { name: 'sv-action-bar', params: { items: logic.toolbarItems } } -->
     <!-- /ko -->
   </div>
-  <!-- /ko -->
+  <div class="svc-plugin-tab__content">
+    <!-- ko template: { name: 'survey-content', data: logic.itemsSurvey  } --><!-- /ko -->
+  </div>
 </div>
+<!-- /ko -->
+
+<!-- ko if: logic.mode != "view" -->
+<div class="svc-creator-tab__content svc-tab-logic-edit">
+  <div class="svc-plugin-tab__content svc-tab-logic-edit__content">
+    <!-- ko template: { name: 'survey-content', data: logic.expressionSurvey  } --><!-- /ko -->
+    <!-- ko template: { name: 'survey-content', data: logic.itemEditorSurvey  } --><!-- /ko -->
+    <div><span data-bind="text: logic.errorText"></span></div>
+  </div>
+  <div
+    class="svc-plugin-tab__content-actions svc-tab-logic-edit__content-actions"
+  >
+    <!-- ko component: { name: 'sv-action-bar', params: { items: logic.toolbarEditItems } } -->
+    <!-- /ko -->
+  </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
