@@ -272,11 +272,22 @@ export class DragDropHelper extends Base {
   }
   private insertRealElementIntoSurvey() {
     this.removeGhostElementFromSurvey();
+
+    // ghost new page
+    if (this.draggedOverElement.isPage && this.draggedOverElement["_isGhost"]) {
+      // this.survey.currentPage = this.draggedOverElement;
+      this.draggedOverElement["_addGhostPageViewMobel"]();
+    }
+    // EO ghost new page
+
+    let src = this.draggedOverElement.isPage ? null : this.draggedElement;
+
     this.pageOrPanel.dragDropStart(
-      this.draggedElement,
+      src,
       this.draggedElement,
       DragDropHelper.nestedPanelDepth
     );
+
     this.pageOrPanel.dragDropMoveTo(
       this.draggedOverElement,
       this.isBottom,
@@ -284,15 +295,6 @@ export class DragDropHelper extends Base {
     );
     const newElement = this.pageOrPanel.dragDropFinish();
 
-    // ghost new page
-    if (
-      this.draggedOverElement.isPage &&
-      typeof this.draggedOverElement["_addToSurvey"] === "function"
-    ) {
-      this.survey.currentPage = this.draggedOverElement;
-      this.draggedOverElement["_addToSurvey"]();
-    }
-    // EO ghost new page
     this.creator.selectElement(newElement);
   }
   private removeGhostElementFromSurvey() {

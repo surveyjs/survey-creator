@@ -35,10 +35,17 @@ export class PageViewModel<T extends SurveyModel> extends Base {
     };
     this.page.onPropertyChanged.add(this.selectedPropPageFunc);
 
-    this.isGhost = typeof this.page["_addToSurvey"] === "function";
-    if (!this.isGhost) {
+    if (typeof this.page["_addToSurvey"] === "function") {
+      this.isGhost = true;
+      this.page["_isGhost"] = true;
+      this.page["_addGhostPageViewMobel"] = () => {
+        this.addGhostPage();
+      };
+    } else {
+      this.isGhost = false;
       this.actions = creator.getContextActions(this.page);
     }
+
     this.page.onFirstRendering();
     this.page.updateCustomWidgets();
     this.page.setWasShown(true);
@@ -58,13 +65,12 @@ export class PageViewModel<T extends SurveyModel> extends Base {
       this.isGhost = false;
       this.page["_addToSurvey"]();
     }
+    this.creator.survey.currentPage = this.page;
   }
 
   addNewQuestionText = "Add a New Question";
   addNewQuestion(model: PageViewModel<T>, event: IPortableMouseEvent) {
     this.addGhostPage();
-    var survey: any = model.creator.survey;
-    survey.currentPage = model.page;
     model.creator.clickToolboxItem({ type: "text" });
   }
   select(model: PageViewModel<T>, event: IPortableMouseEvent) {
@@ -109,8 +115,6 @@ export class PageViewModel<T extends SurveyModel> extends Base {
   // }
   drop(model: PageViewModel<T>, event: IPortableDragEvent) {
     this.addGhostPage();
-    var survey: any = model.creator.survey;
-    survey.currentPage = model.page;
     return this.creator.dragDropHelper.onDrop(event);
     // const page: any = event.currentTarget;
     // const questions = page.querySelectorAll(".svc-question__content");
