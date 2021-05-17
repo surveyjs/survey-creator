@@ -1,6 +1,6 @@
 import React from "react";
-import { Base, SurveyModel } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import { Base, SurveyModel, PageModel } from "survey-core";
+import { ReactElementFactory, SurveyElementBase, SurveyHeader } from "survey-react-ui";
 import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
 import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
@@ -37,9 +37,9 @@ export class TabDesignerComponent extends SurveyElementBase<
   renderContent(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const survey: SurveyModel = this.props.survey;
-    const className = "svc-tab-designer " + survey.css.root;
+    const designerTabClassName: string = "svc-tab-designer " + survey.css.root;
 
-    const surveyPages = survey.pages.map((page, index) => {
+    const surveyPages: JSX.Element[] = survey.pages.map((page: PageModel) => {
       return (
         <CreatorSurveyPageComponent
           key={page.id}
@@ -69,8 +69,11 @@ export class TabDesignerComponent extends SurveyElementBase<
           creator={creator}
           items={creator.toolbox.items}
         ></SurveyCreatorToolbox>
-        <div className={className}>
-          <div className={survey.css.container}>{surveyPages}</div>
+        <div className={designerTabClassName}>
+          <div className={survey.css.container}>
+            <SurveyHeader survey={survey}></SurveyHeader>
+            {surveyPages}
+          </div>
         </div>
         <SurveyPageNavigator
           creator={creator}
