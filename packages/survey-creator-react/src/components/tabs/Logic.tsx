@@ -4,13 +4,13 @@ import {
   SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
-  Survey,
+  Survey
 } from "survey-react-ui";
 import {
   CreatorBase,
   TabLogicPlugin,
   LogicModel,
-  SurveyLogicUI,
+  SurveyLogicUI
 } from "@survey/creator";
 
 export class TabLogicComponent extends SurveyElementBase<any, any> {
@@ -46,32 +46,39 @@ export class LogicUIComponent extends SurveyElementBase<any, any> {
 
   render(): JSX.Element {
     var logic = this.model;
+    var rootClass = "svc-creator-tab__content";
+    if (logic.mode == "edit") {
+      rootClass += " svc-tab-logic-edit";
+    }
     var content =
       logic.mode == "view"
         ? this.renderViewContent()
         : this.renderEditContent();
-    return (
-      <div className="svc-creator-tab__content">
-        <div className="svc-plugin-tab__content">{content}</div>
-      </div>
-    );
+    return <div className={rootClass}>{content}</div>;
   }
   private renderViewContent(): JSX.Element {
     return (
       <Fragment>
-        <div className="svc-test-tab__content-actions">
+        <div className="svc-plugin-tab__content-actions">
           <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
         </div>
-        <Survey model={this.model.itemsSurvey}></Survey>
+        <div className="svc-plugin-tab__content">
+          <Survey model={this.model.itemsSurvey}></Survey>
+        </div>
       </Fragment>
     );
   }
   private renderEditContent(): JSX.Element {
     return (
       <Fragment>
-        <Survey model={this.model.expressionSurvey}></Survey>
-        <Survey model={this.model.itemEditorSurvey}></Survey>
-        <div className="svc-test-tab__content-actions">
+        <div className="svc-plugin-tab__content svc-tab-logic-edit__content">
+          <Survey model={this.model.expressionSurvey}></Survey>
+          <Survey model={this.model.itemEditorSurvey}></Survey>
+          <div>
+            <span>{this.model.errorText}</span>
+          </div>
+        </div>
+        <div className="svc-plugin-tab__content-actions svc-tab-logic-edit__content-actions">
           <SurveyActionBar
             items={this.model.toolbarEditItems}
           ></SurveyActionBar>
