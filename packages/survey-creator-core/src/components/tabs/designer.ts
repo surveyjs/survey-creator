@@ -49,7 +49,7 @@ export class TabDesignerPlugin<T extends SurveyModel>
       id: "designer",
       title: getLocString("ed.designer"),
       componentContent: "svc-tab-designer",
-      data: this,
+      data: this.model,
       action: () => this.creator.makeNewViewActive("designer"),
       active: () => this.creator.viewType === "designer"
     });
