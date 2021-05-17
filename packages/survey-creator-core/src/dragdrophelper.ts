@@ -45,6 +45,11 @@ export class DragDropHelper extends Base {
     super();
   }
 
+  public startDragToolboxItem(draggedElementJson: JsonObject) {
+    const draggedElement = this.createElementFromJson(draggedElementJson);
+    this.startDrag(draggedElement);
+  }
+
   public startDrag(draggedElement: IElement) {
     this.draggedElement = draggedElement;
     this.draggedElementShortcut = this.createDraggedElementShortcut();
@@ -88,6 +93,7 @@ export class DragDropHelper extends Base {
       this.draggedOverElement = null;
       this.removeGhostElementFromSurvey();
       this.draggedElementShortcut.style.cursor = "not-allowed";
+      // console.log("1");
       return;
     }
 
@@ -109,8 +115,11 @@ export class DragDropHelper extends Base {
     }
 
     if (!newDraggedOverElement) {
-      newDraggedOverElement =
-        this.survey.currentPage.getElementByName(elementOrPageName);
+      let element;
+      this.survey.pages.forEach((page) => {
+        element = page.getElementByName(elementOrPageName);
+        if (element) newDraggedOverElement = element;
+      });
     }
 
     if (
@@ -120,6 +129,7 @@ export class DragDropHelper extends Base {
       this.draggedOverElement = null;
       this.removeGhostElementFromSurvey();
       this.draggedElementShortcut.style.cursor = "not-allowed";
+      // console.log("2");
       return;
     }
 
@@ -275,15 +285,12 @@ export class DragDropHelper extends Base {
 
     // ghost new page
     if (this.draggedOverElement.isPage && this.draggedOverElement["_isGhost"]) {
-      // this.survey.currentPage = this.draggedOverElement;
       this.draggedOverElement["_addGhostPageViewMobel"]();
     }
     // EO ghost new page
 
-    let src = this.draggedOverElement.isPage ? null : this.draggedElement;
-
     this.pageOrPanel.dragDropStart(
-      src,
+      this.draggedElement,
       this.draggedElement,
       DragDropHelper.nestedPanelDepth
     );

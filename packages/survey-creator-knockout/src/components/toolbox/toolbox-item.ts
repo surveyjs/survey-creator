@@ -29,11 +29,20 @@ export class ToolboxItemViewModel {
   get ariaLabel() {
     return this.item.tooltip + " " + getLocString("toolbox") + " item";
   }
+  get creator() {
+    return this._creator;
+  }
   click(model: ToolboxItemViewModel) {
     model._creator.clickToolboxItem(model.item.json);
   }
+  startDragToolboxItem() {
+    var json = this.creator.getJSONForNewElement(this.item.json);
+    this.creator.dragDropHelper.startDragToolboxItem(json);
+    return true;
+  }
   dragstart(model: ToolboxItemViewModel, e: DragEvent) {
     var json = model._creator.getJSONForNewElement(model.item.json);
+
     model._creator.dragDropHelper.onDragStartToolboxItem(
       new KnockoutDragEvent(e),
       json
@@ -53,7 +62,7 @@ ko.components.register("svc-toolbox-item", {
         ToolboxViewModel.getToolboxItem(wrapper),
         params.creator
       );
-    },
+    }
   },
-  template: template,
+  template: template
 });
