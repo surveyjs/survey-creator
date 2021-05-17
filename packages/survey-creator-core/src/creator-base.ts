@@ -10,7 +10,7 @@ import {
   PopupModel,
   property,
   propertyArray,
-  IElement,
+  IElement
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -36,6 +36,7 @@ import { TabTestPlugin } from "./components/tabs/test";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation";
 import { TabLogicPlugin } from "./components/tabs/logic-ui";
+import { TabDesignerPlugin } from "./entries";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -44,6 +45,7 @@ export interface ICreatorOptions {
 export interface ICreatorPlugin {
   activate: () => void;
   deactivate?: () => boolean;
+  designerSurveyCreated?: () => void;
 }
 
 export interface ITabbedMenuItem extends IActionBarItem {
@@ -55,7 +57,8 @@ export interface ITabbedMenuItem extends IActionBarItem {
  */
 export class CreatorBase<T extends SurveyModel>
   extends Survey.Base
-  implements ISurveyCreatorOptions, ICreatorSelectionOwner {
+  implements ISurveyCreatorOptions, ICreatorSelectionOwner
+{
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
    */
@@ -115,7 +118,7 @@ export class CreatorBase<T extends SurveyModel>
     onSaveCallback: (no: number, isSuccess: boolean) => void
   ) => void;
 
-  @property({ defaultValue: "designer" }) viewType: string;
+  @property() viewType: string;
 
   /**
    * Returns the current show view name. The possible returns values are:
@@ -503,10 +506,10 @@ export class CreatorBase<T extends SurveyModel>
    * <br/> callback need to be called after files has been chosen
    * @see uploadFile
    */
-   public onOpenFileChooser: Survey.Event<
-   (sender: CreatorBase<T>, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onOpenFileChooser: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * The event is fired on uploading the files.
    * <br/> sender the survey creator object that fires the event
@@ -515,10 +518,10 @@ export class CreatorBase<T extends SurveyModel>
    * <br/> callback called on upload complete
    * @see uploadFile
    */
-   public onUploadFile: Survey.Event<
-   (sender: CreatorBase<T>, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onUploadFile: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * This callback is used internally for providing survey JSON text.
    */
@@ -654,14 +657,17 @@ export class CreatorBase<T extends SurveyModel>
     return true;
   }
   private canSwitchViewType(): boolean {
-    const plugin: ICreatorPlugin = this.plugins[this.viewType];
+    const plugin: ICreatorPlugin = this.currentPlugin;
     return !plugin || !plugin.deactivate || plugin.deactivate();
   }
   private activatePlugin(newType: string) {
-    const plugin: ICreatorPlugin = this.plugins[newType];
+    const plugin: ICreatorPlugin = this.currentPlugin;
     if (!!plugin) {
       plugin.activate();
     }
+  }
+  private get currentPlugin(): ICreatorPlugin {
+    return this.plugins[this.viewType];
   }
 
   public static defaultNewSurveyText: string =
@@ -690,22 +696,27 @@ export class CreatorBase<T extends SurveyModel>
         : null
     );
     this.dragDropHelper = new DragDropHelper(this);
-    this.propertyGrid = new PropertyGridModel(
-      (this.survey as any) as Base,
-      this
-    );
+    this.propertyGrid = new PropertyGridModel(this.survey as any as Base, this);
   }
   public get undoRedoManager(): UndoRedoManager {
     return this.undoRedoManagerValue;
   }
   public undo() {
-    if (!!this.undoRedoManager) {
-      this.undoRedoManager.undo();
+    if (!this.undoRedoManager) return;
+    var options = { canUndo: true };
+    this.onBeforeUndo.fire(self, options);
+    if (options.canUndo) {
+      var item = this.undoRedoManager.undo();
+      this.onAfterUndo.fire(self, { state: item });
     }
   }
   public redo() {
-    if (!!this.undoRedoManager) {
-      this.undoRedoManager.redo();
+    if (!this.undoRedoManager) return;
+    const options = { canRedo: true };
+    this.onBeforeRedo.fire(self, options);
+    if (options.canRedo) {
+      const item = this.undoRedoManager.redo();
+      this.onAfterRedo.fire(self, { state: item });
     }
   }
   public get pagesController(): PagesController {
@@ -729,23 +740,16 @@ export class CreatorBase<T extends SurveyModel>
   }
   protected initTabs() {
     const tabs: Array<ITabbedMenuItem> = [];
-    if (this.showDesignerTab) {
-      tabs.push({
-        id: "designer",
-        title: this.getLocString("ed.designer"),
-        componentContent: "svc-tab-designer",
-        data: this,
-        action: () => this.makeNewViewActive("designer"),
-        active: () => this.viewType === "designer",
-      });
-    }
     this.tabs = tabs;
     this.initTabsPlugin();
     if (this.tabs.length > 0) {
-      this.viewType = this.tabs[0].id;
+      this.makeNewViewActive(this.tabs[0].id);
     }
   }
   private initTabsPlugin(): void {
+    if (this.showDesignerTab) {
+      new TabDesignerPlugin<T>(this);
+    }
     if (this.showTestSurveyTab) {
       new TabTestPlugin(this);
     }
@@ -773,34 +777,22 @@ export class CreatorBase<T extends SurveyModel>
         iconName: "icon-undo",
         title: "Undo",
         showTitle: false,
+        visible: () => this.viewType === "designer",
         active: () => {
           return this.undoRedoManager && this.undoRedoManager.canUndo();
         },
-        action: () => {
-          var options = { canUndo: true };
-          this.onBeforeUndo.fire(self, options);
-          if (options.canUndo) {
-            var item = this.undoRedoManager.undo();
-            this.onAfterUndo.fire(self, { state: item });
-          }
-        },
+        action: () => this.undo()
       },
       {
         id: "icon-redo",
         iconName: "icon-redo",
         title: "Redo",
         showTitle: false,
+        visible: () => this.viewType === "designer",
         active: () => {
           return this.undoRedoManager && this.undoRedoManager.canRedo();
         },
-        action: () => {
-          const options = { canRedo: true };
-          this.onBeforeRedo.fire(self, options);
-          if (options.canRedo) {
-            const item = this.undoRedoManager.redo();
-            this.onAfterRedo.fire(self, { state: item });
-          }
-        },
+        action: () => this.redo()
       },
       {
         id: "icon-settings",
@@ -808,18 +800,9 @@ export class CreatorBase<T extends SurveyModel>
         needSeparator: true,
         action: () => this.selectElement(this.survey),
         active: () => this.isElementSelected(<any>this.survey),
+        visible: () => this.viewType === "designer",
         title: "Settings",
-        showTitle: false,
-      },
-      {
-        id: "icon-clear",
-        iconName: "icon-clear",
-        action: () => {
-          alert("clear pressed");
-        },
-        active: false,
-        title: "Clear",
-        showTitle: false,
+        showTitle: false
       },
       {
         id: "icon-search",
@@ -827,9 +810,10 @@ export class CreatorBase<T extends SurveyModel>
         action: () => {
           this.showSearch = !this.showSearch;
         },
+        visible: false,
         active: () => this.showSearch,
         title: "Search",
-        showTitle: false,
+        showTitle: false
       },
       {
         id: "icon-preview",
@@ -841,8 +825,8 @@ export class CreatorBase<T extends SurveyModel>
           this.makeNewViewActive("test");
         },
         active: false,
-        title: "Preview",
-      },
+        title: "Preview"
+      }
     ];
     this.toolbarItems = items;
   }
@@ -979,7 +963,7 @@ export class CreatorBase<T extends SurveyModel>
       readOnly: proposedValue,
       propertyName: property.name,
       parentObj: parentObj,
-      parentProperty: parentProperty,
+      parentProperty: parentProperty
     };
     this.onGetPropertyReadOnly.fire(this, options);
     return options.readOnly;
@@ -1050,6 +1034,11 @@ export class CreatorBase<T extends SurveyModel>
     this.undoRedoManager.canUndoRedoCallback = () => {
       //this.updateKoCanUndoRedo();
     };
+    this.setSurvey(survey);
+    var plugin = this.currentPlugin;
+    if (!!plugin && !!plugin.designerSurveyCreated) {
+      plugin.designerSurveyCreated();
+    }
     this.undoRedoManager.changesFinishedCallback = (
       changes: IUndoRedoChange
     ) => {
@@ -1058,11 +1047,9 @@ export class CreatorBase<T extends SurveyModel>
         name: changes.propertyName,
         target: changes.object,
         oldValue: changes.oldValue,
-        newValue: changes.newValue,
+        newValue: changes.newValue
       });
     };
-
-    this.setSurvey(survey);
   }
   private addingObject: Survey.Base;
   private onSurveyPropertyValueChangedCallback(
@@ -1286,7 +1273,7 @@ export class CreatorBase<T extends SurveyModel>
       type: "QUESTION_CONVERTED",
       className: className,
       oldValue: obj,
-      newValue: newQuestion,
+      newValue: newQuestion
     });
     return newQuestion;
   }
@@ -1487,7 +1474,7 @@ export class CreatorBase<T extends SurveyModel>
     }
     this.setModified({
       type: "OBJECT_DELETED",
-      target: obj,
+      target: obj
     });
     this.updateConditionsOnRemove(obj);
   }
@@ -1503,7 +1490,7 @@ export class CreatorBase<T extends SurveyModel>
     var options = {
       element: obj,
       elementType: SurveyHelper.getObjectType(obj),
-      allowing: true,
+      allowing: true
     };
     this.onElementDeleting.fire(this, options);
     if (!options.allowing) return;
@@ -1692,7 +1679,7 @@ export class CreatorBase<T extends SurveyModel>
    * @param input file input element
    * @param onFilesChosen a call back function to process chosen files
    */
-   public chooseFiles(
+  public chooseFiles(
     input: HTMLInputElement,
     onFilesChosen: (files: File[]) => void
   ) {
@@ -1712,7 +1699,7 @@ export class CreatorBase<T extends SurveyModel>
     } else {
       this.onOpenFileChooser.fire(this, {
         input: input,
-        callback: onFilesChosen,
+        callback: onFilesChosen
       });
     }
   }
@@ -1721,7 +1708,7 @@ export class CreatorBase<T extends SurveyModel>
    * @param files files to upload
    * @param uploadingCallback a call back function to get the status on uploading the file and operation result - URI of the uploaded file
    */
-   public uploadFiles(
+  public uploadFiles(
     files: File[],
     uploadingCallback: (status: string, data: any) => any
   ) {
@@ -1734,7 +1721,7 @@ export class CreatorBase<T extends SurveyModel>
     } else {
       this.onUploadFile.fire(this, {
         files: files || [],
-        callback: uploadingCallback,
+        callback: uploadingCallback
       });
     }
   }
@@ -1762,7 +1749,7 @@ export class CreatorBase<T extends SurveyModel>
       canShow: true,
       showMode: showMode,
       parentObj: parentObj,
-      parentProperty: parentProperty,
+      parentProperty: parentProperty
     };
     this.onCanShowProperty.fire(this, options);
     return options.canShow;
@@ -1867,7 +1854,7 @@ export class CreatorBase<T extends SurveyModel>
       propertyName: property.name,
       collection: collection,
       item: item,
-      allowDelete: true,
+      allowDelete: true
     };
     this.onCollectionItemDeleting.fire(this, options);
     return options.allowDelete;
@@ -1882,7 +1869,7 @@ export class CreatorBase<T extends SurveyModel>
       obj: obj,
       propertyName: propertyName,
       newItem: itemValue,
-      itemValues: itemValues,
+      itemValues: itemValues
     };
     this.onItemValueAdded.fire(this, options);
   }
@@ -1902,7 +1889,7 @@ export class CreatorBase<T extends SurveyModel>
     var options = {
       propertyName: propertyName,
       obj: obj,
-      editorOptions: editorOptions,
+      editorOptions: editorOptions
     };
     this.onSetPropertyEditorOptions.fire(this, options);
   }
@@ -1917,7 +1904,7 @@ export class CreatorBase<T extends SurveyModel>
       propertyName: propertyName,
       obj: obj,
       value: value,
-      error: "",
+      error: ""
     };
     this.onPropertyValidationCustomError.fire(this, options);
     return options.error;
@@ -1966,7 +1953,7 @@ export class CreatorBase<T extends SurveyModel>
       propertyName: propertyName,
       obj: obj,
       editor: editor,
-      list: list,
+      list: list
     };
     this.onConditionQuestionsGetList.fire(this, options);
     if (options.list !== list) {
@@ -2063,7 +2050,7 @@ export class CreatorBase<T extends SurveyModel>
         var createTypeByClass = (className) => {
           return {
             name: this.getLocString("qt." + className),
-            value: className,
+            value: className
           };
         };
         var availableTypes = [createTypeByClass(currentType)];
@@ -2076,7 +2063,7 @@ export class CreatorBase<T extends SurveyModel>
           new ListModel(
             availableTypes.map((type) => ({
               title: type.name,
-              id: type.value,
+              id: type.value
             })),
             (item: any) => {
               this.selectElement(this.convertCurrentObject(element, item.id));
@@ -2098,7 +2085,7 @@ export class CreatorBase<T extends SurveyModel>
           action: (newType) => {
             popupModel.toggleVisibility();
           },
-          popupModel: popupModel,
+          popupModel: popupModel
         });
       }
     }
@@ -2109,7 +2096,7 @@ export class CreatorBase<T extends SurveyModel>
         title: this.getLocString("survey.duplicate"),
         action: () => {
           this.selectElement(this.fastCopyQuestion(element));
-        },
+        }
       });
     }
 
@@ -2133,14 +2120,14 @@ export class CreatorBase<T extends SurveyModel>
           if (this.isCanModifyProperty(<any>element, "isRequired")) {
             element.isRequired = !element.isRequired;
           }
-        },
+        }
       });
     }
 
     if (items.length > 0) {
       items.push({
         id: "sep-" + items.length,
-        component: "sv-action-bar-separator",
+        component: "sv-action-bar-separator"
       });
     }
 
@@ -2150,13 +2137,13 @@ export class CreatorBase<T extends SurveyModel>
         title: this.getLocString("pe.delete"),
         action: () => {
           this.deleteObject(element);
-        },
+        }
       });
     }
 
     this.onDefineElementMenuItems.fire(this, {
       obj: element,
-      items: items,
+      items: items
     });
 
     return items;
@@ -2170,7 +2157,7 @@ export class CreatorBase<T extends SurveyModel>
   public createNewItemValue(question: Survey.QuestionSelectBase) {
     const nextValue = this.getNextItemValue(question);
     // TODO: get item type from question
-    if(question.getType() === "imagepicker") {
+    if (question.getType() === "imagepicker") {
       return new Survey.ImageItemValue(nextValue);
     }
     return new Survey.ItemValue(nextValue);
