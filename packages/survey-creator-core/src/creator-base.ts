@@ -46,6 +46,7 @@ export interface ICreatorPlugin {
   activate: () => void;
   deactivate?: () => boolean;
   designerSurveyCreated?: () => void;
+  createActions?: (items: Array<IActionBarItem>) => void;
 }
 
 export interface ITabbedMenuItem extends IActionBarItem {
@@ -771,63 +772,12 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   private initToolbar() {
-    const items: Array<IActionBarItem> = [
-      {
-        id: "icon-undo",
-        iconName: "icon-undo",
-        title: "Undo",
-        showTitle: false,
-        visible: () => this.viewType === "designer",
-        active: () => {
-          return this.undoRedoManager && this.undoRedoManager.canUndo();
-        },
-        action: () => this.undo()
-      },
-      {
-        id: "icon-redo",
-        iconName: "icon-redo",
-        title: "Redo",
-        showTitle: false,
-        visible: () => this.viewType === "designer",
-        active: () => {
-          return this.undoRedoManager && this.undoRedoManager.canRedo();
-        },
-        action: () => this.redo()
-      },
-      {
-        id: "icon-settings",
-        iconName: "icon-settings",
-        needSeparator: true,
-        action: () => this.selectElement(this.survey),
-        active: () => this.isElementSelected(<any>this.survey),
-        visible: () => this.viewType === "designer",
-        title: "Settings",
-        showTitle: false
-      },
-      {
-        id: "icon-search",
-        iconName: "icon-search",
-        action: () => {
-          this.showSearch = !this.showSearch;
-        },
-        visible: false,
-        active: () => this.showSearch,
-        title: "Search",
-        showTitle: false
-      },
-      {
-        id: "icon-preview",
-        iconName: "icon-preview",
-        needSeparator: true,
-        css: () =>
-          this.viewType === "test" ? "sv-action-bar-item--secondary" : "",
-        action: () => {
-          this.makeNewViewActive("test");
-        },
-        active: false,
-        title: "Preview"
+    const items: Array<IActionBarItem> = [];
+    for (var key in this.plugins) {
+      if (!!this.plugins[key].createActions) {
+        this.plugins[key].createActions(items);
       }
-    ];
+    }
     this.toolbarItems = items;
   }
 

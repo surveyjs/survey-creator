@@ -1,4 +1,11 @@
-import { Base, PageModel, property, SurveyModel } from "survey-core";
+import {
+  ActionBarItem,
+  Base,
+  IActionBarItem,
+  PageModel,
+  property,
+  SurveyModel
+} from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import "./designer.scss";
@@ -43,6 +50,9 @@ export class TabDesignerPlugin<T extends SurveyModel>
   implements ICreatorPlugin
 {
   public model: TabDesignerViewModel<T>;
+  private undoAction: IActionBarItem;
+  private redoAction: IActionBarItem;
+  private surveySettingsAction: IActionBarItem;
   constructor(private creator: CreatorBase<T>) {
     this.model = new TabDesignerViewModel<T>(creator);
     creator.tabs.push({
@@ -61,5 +71,46 @@ export class TabDesignerPlugin<T extends SurveyModel>
   }
   public designerSurveyCreated(): void {
     this.model.initSurvey();
+  }
+  public createActions(items: Array<IActionBarItem>) {
+    this.undoAction = new ActionBarItem({
+      id: "icon-undo",
+      iconName: "icon-undo",
+      title: "Undo",
+      showTitle: false,
+      visible: () => this.creator.viewType === "designer",
+      active: () => {
+        return (
+          this.creator.undoRedoManager && this.creator.undoRedoManager.canUndo()
+        );
+      },
+      action: () => this.creator.undo()
+    });
+    this.redoAction = new ActionBarItem({
+      id: "icon-redo",
+      iconName: "icon-redo",
+      title: "Redo",
+      showTitle: false,
+      visible: () => this.creator.viewType === "designer",
+      active: () => {
+        return (
+          this.creator.undoRedoManager && this.creator.undoRedoManager.canRedo()
+        );
+      },
+      action: () => this.creator.redo()
+    });
+    this.surveySettingsAction = new ActionBarItem({
+      id: "icon-settings",
+      iconName: "icon-settings",
+      needSeparator: true,
+      action: () => this.creator.selectElement(this.creator.survey),
+      active: () => this.creator.isElementSelected(<any>this.creator.survey),
+      visible: () => this.creator.viewType === "designer",
+      title: "Settings",
+      showTitle: false
+    });
+    items.push(this.undoAction);
+    items.push(this.redoAction);
+    items.push(this.surveySettingsAction);
   }
 }

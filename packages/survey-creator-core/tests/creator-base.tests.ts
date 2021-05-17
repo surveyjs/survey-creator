@@ -8,7 +8,8 @@ import {
   Serializer,
   QuestionRadiogroupModel,
   QuestionMatrixDropdownModel,
-  QuestionMatrixDynamicModel
+  QuestionMatrixDynamicModel,
+  IActionBarItem
 } from "survey-core";
 import { CreatorBase, ICreatorOptions } from "../src/creator-base";
 import { PageViewModel } from "../src/components/page";
@@ -27,6 +28,12 @@ export class CreatorTester extends CreatorBase<SurveyModel> {
     var name = this.selectedElement["name"];
     if (!!name) return name;
     return this.selectedElement.getType();
+  }
+  public getActionBarItem(id: string): IActionBarItem {
+    for (var i = 0; i < this.toolbarItems.length; i++) {
+      if (this.toolbarItems[i].id == id) return this.toolbarItems[i];
+    }
+    return null;
   }
 }
 
@@ -342,11 +349,20 @@ test("Update expressions on deleting a page with questions", () => {
   creator.deleteElement(<Base>(<any>creator.survey.getPageByName("page2")));
   expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
 });
-test("Make sure to call activate() for designer plug-in", () => {
+test("Create new page on creating designer plugin", () => {
   var creator = new CreatorTester();
   expect(creator.viewType).toEqual("designer");
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.plugins["designer"]
   );
   expect(designerPlugin.model.newPage).toBeTruthy();
+});
+test("Check survey settings button ", () => {
+  var creator = new CreatorTester();
+  var item = creator.getActionBarItem("icon-settings");
+  expect(item.active).toBeTruthy();
+  creator.selectElement(creator.survey.pages[0]);
+  expect(item.active).toBeFalsy();
+  creator.selectElement(creator.survey);
+  expect(item.active).toBeTruthy();
 });
