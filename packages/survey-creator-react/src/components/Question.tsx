@@ -40,24 +40,21 @@ export class QuestionAdornerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div
+          data-svc-droppable-element-name={this.model.surveyElement.name}
           className={"svc-question__adorner"}
-          onDragOver={(e) => this.model.dragOver(this.model, new ReactDragEvent(e))
-          }
-          onDragEnd={(e) =>
-            this.model.dragEnd(this.model, new ReactDragEvent(e))
-          }
           onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
           onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
           <div
             className={"svc-question__content " + this.model.css()}
             onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
-            onDragStart={(e) =>
-              this.model.dragStart(this.model, new ReactDragEvent(e))
-            }
-            // onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
-            draggable={this.model.isDraggable}
           >
+            <div className={"svc-question__drag-area"}>
+                <div
+                  className={"svc-question__drag-element"}
+                  onPointerDown={(e) => this.model.startDragElement()}
+                ></div>
+            </div>
             {this.renderPanelPlaceholder()}
             {this.props.element}
             <div className="svc-question__content-actions">

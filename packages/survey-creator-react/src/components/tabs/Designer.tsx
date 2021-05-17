@@ -46,6 +46,7 @@ export class TabDesignerComponent extends SurveyElementBase<
           survey={survey}
           page={page}
           creator={creator}
+          data-svc-droppable-element-name={page.name} 
         ></CreatorSurveyPageComponent>
       );
     });
@@ -57,6 +58,7 @@ export class TabDesignerComponent extends SurveyElementBase<
           survey={survey}
           page={this.model.newPage}
           creator={creator}
+          data-svc-droppable-element-name={"newGhostPage"} 
         ></CreatorSurveyPageComponent>
       );
     }
@@ -81,28 +83,6 @@ export class TabDesignerComponent extends SurveyElementBase<
         </div>
       </>
     );
-    /*
-        <svc-toolbox
-        params="categories: creator.toolboxCategories, creator: creator"
-        ></svc-toolbox>
-        <div class="svc-tab-designer" data-bind="css: survey.css.root">
-            <div data-bind="css: survey.css.container">
-                <!-- ko foreach: survey.pages -->
-                <svc-page
-                params="survey: $parent.survey, page: $data, creator: $parent.creator"
-                ></svc-page>
-                <!-- /ko -->
-                <!-- ko if: showNewPage -->
-                <svc-page
-                params="survey: survey, creator: creator, page: newPage"
-                ></svc-page>
-                <!-- /ko -->
-            </div>
-        </div>
-        <svc-page-navigator
-        params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"
-        ></svc-page-navigator>
-       */
   }
 }
 

@@ -1,7 +1,6 @@
 <div
   class="svc-toolbox__item"
   tabindex="0"
-  draggable="true"
   data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, click: click, event: { pointerdown: (model, event)=>{startDragToolboxItem()} }"
 >
   <span class="svc-toolbox__item-container">

@@ -79,25 +79,4 @@ export class QuestionAdornerViewModel extends Base {
     this.dragDropHelper.startDrag(<any>this.surveyElement);
     return true;
   }
-
-  dragStart(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    // setTimeout(() => (model.isDragged = true), 1);
-    const sourceElement = model.surveyElement;
-    return model.dragDropHelper.onDragStartQuestion(event, <any>sourceElement);
-    // return model.dragDropHelper.dragStart(model.surveyElement, event);
-  }
-  dragOver(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    const draggedOverElement = model.surveyElement;
-    return model.dragDropHelper.onDragOver(event, draggedOverElement);
-    // model.dragDropHelper.dragOver(model.surveyElement, event);
-  }
-  drop(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    return model.dragDropHelper.onDrop(event);
-    // model.dragDropHelper.drop(model.surveyElement, event);
-  }
-  dragEnd(model: QuestionAdornerViewModel, event: IPortableDragEvent) {
-    // setTimeout(() => (model.isDragged = false), 1);
-    return model.dragDropHelper.onDragEnd();
-    // model.dragDropHelper.dragEnd(model.surveyElement, event);
-  }
 }

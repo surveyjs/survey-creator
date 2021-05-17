@@ -40,18 +40,6 @@ export class ToolboxItemViewModel {
     this.creator.dragDropHelper.startDragToolboxItem(json);
     return true;
   }
-  dragstart(model: ToolboxItemViewModel, e: DragEvent) {
-    var json = model._creator.getJSONForNewElement(model.item.json);
-
-    model._creator.dragDropHelper.onDragStartToolboxItem(
-      new KnockoutDragEvent(e),
-      json
-    );
-    return true;
-  }
-  dragend(model: ToolboxItemViewModel, e: DragEvent) {
-    model._creator.dragDropHelper.onDragEnd();
-  }
 }
 
 ko.components.register("svc-toolbox-item", {

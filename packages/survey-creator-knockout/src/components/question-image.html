@@ -1,18 +1,40 @@
 <div
   class="svc-question__adorner"
-  data-bind="event: { dragover: koDragOver, dragend: koDragEnd, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+  data-bind="attr: { 'data-svc-droppable-element-name': surveyElement.name }, event: { pointerdown: (model, event)=>{startDrag(event)}, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
   <div
     class="svc-question__content"
-    data-bind="click: koSelect, clickBubble: false, css: css(), attr: { draggable: isDraggable }, event: { dragstart: koDragStart }, hidden: isDragged"
+    data-bind="click: koSelect, clickBubble: false, css: css()"
   >
-    <input type="file" accept="image/*" class="svc-choose-file-input" style="position: absolute; opacity: 0; width: 1px; height: 1px; overflow: hidden;" />
+    <input
+      type="file"
+      accept="image/*"
+      class="svc-choose-file-input"
+      style="
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      "
+    />
+
+    <div class="svc-question__drag-area">
+      <div
+        class="svc-question__drag-element"
+        data-bind="event: {pointerdown: (model, event)=>{startDragElement()}}"
+      ></div>
+    </div>
 
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
 
     <div class="svc-image-question-controls">
-      <sv-svg-icon class="svc-image-question-controls__button" data-bind="click: chooseFile" params="iconName: 'icon-file', size: 24"></sv-svg-icon>
+      <sv-svg-icon
+        class="svc-image-question-controls__button"
+        data-bind="click: chooseFile"
+        params="iconName: 'icon-file', size: 24"
+      ></sv-svg-icon>
     </div>
 
     <div class="svc-question__content-actions">
