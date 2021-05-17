@@ -55,16 +55,22 @@ export class DragDropHelper extends Base {
     this.draggedElementShortcut = this.createDraggedElementShortcut();
 
     document.body.append(this.draggedElementShortcut);
-    document.addEventListener("pointermove", this.moveDraggedElementShortcut);
+    document.addEventListener("pointermove", this.moveDraggedElement);
     this.draggedElementShortcut.addEventListener("pointerup", this.drop);
   }
 
-  private moveDraggedElementShortcut = (event: PointerEvent) => {
-    let newDraggedOverElement;
+  private moveDraggedElement = (event: PointerEvent) => {
+    this.moveShortcutElement(event);
 
+    if (this.draggedElement.getType() === "itemvalue") {
+      this.handleItemValueDragOver(event);
+    } else {
+      this.handleSurveyElementDragOver(event);
+    }
+  };
+
+  private moveShortcutElement(event: PointerEvent) {
     this.doScroll(event.clientY, event.clientX);
-
-    if (!this.ghostElement) this.ghostElement = this.createGhostElement();
 
     let shortcutXCenter = this.draggedElementShortcut.offsetWidth / 2;
     let shortcutYCenter = this.draggedElementShortcut.offsetHeight / 2;
@@ -83,6 +89,12 @@ export class DragDropHelper extends Base {
       event.clientX - shortcutXCenter + "px";
     this.draggedElementShortcut.style.top =
       event.clientY - shortcutYCenter + "px";
+  }
+
+  private handleItemValueDragOver(event: PointerEvent){}
+
+  private handleSurveyElementDragOver(event: PointerEvent) {
+    if (!this.ghostElement) this.ghostElement = this.createGhostElement();
 
     let newDraggedOverHTMLElement = this.getDraggedOverHTMLElementFromPoint(
       event.clientX,
@@ -107,6 +119,7 @@ export class DragDropHelper extends Base {
 
     let elementOrPageName =
       newDraggedOverHTMLElement.dataset.svcDroppableElementName;
+    let newDraggedOverElement;
 
     if (elementOrPageName === "newGhostPage") {
       newDraggedOverElement = DragDropHelper.newGhostPage;
@@ -162,7 +175,7 @@ export class DragDropHelper extends Base {
     this.draggedOverElement = newDraggedOverElement;
 
     this.insertGhostElementIntoSurvey();
-  };
+  }
 
   private drop = () => {
     clearInterval(this.scrollIntervalId);
@@ -171,10 +184,7 @@ export class DragDropHelper extends Base {
       this.insertRealElementIntoSurvey();
     }
 
-    document.removeEventListener(
-      "pointermove",
-      this.moveDraggedElementShortcut
-    );
+    document.removeEventListener("pointermove", this.moveDraggedElement);
     this.draggedElementShortcut.removeEventListener("pointerup", this.drop);
     document.body.removeChild(this.draggedElementShortcut);
     this.onDragEnd();
@@ -205,6 +215,7 @@ export class DragDropHelper extends Base {
 
     return <HTMLElement>result;
   }
+
   private createDraggedElementShortcut() {
     const draggedElementShortcut = document.createElement("div");
     draggedElementShortcut.innerText = this.draggedElement["title"];
@@ -219,6 +230,7 @@ export class DragDropHelper extends Base {
     draggedElementShortcut.style.zIndex = "1000";
     return draggedElementShortcut;
   }
+
   private doScroll(clientY, clientX) {
     clearInterval(this.scrollIntervalId);
     const startScrollBoundary = 50;
@@ -251,6 +263,7 @@ export class DragDropHelper extends Base {
       }, 10);
     }
   }
+
   private createGhostElement(): any {
     const json = {
       type: "html",
@@ -259,6 +272,7 @@ export class DragDropHelper extends Base {
     };
     return this.createElementFromJson(json);
   }
+
   private insertGhostElementIntoSurvey(): boolean {
     this.removeGhostElementFromSurvey();
 
@@ -280,6 +294,7 @@ export class DragDropHelper extends Base {
       this.isEdge
     );
   }
+
   private insertRealElementIntoSurvey() {
     this.removeGhostElementFromSurvey();
 
@@ -304,9 +319,11 @@ export class DragDropHelper extends Base {
 
     this.creator.selectElement(newElement);
   }
+
   private removeGhostElementFromSurvey() {
     if (!!this.pageOrPanel) this.pageOrPanel.dragDropFinish(true);
   }
+
   private createElementFromJson(json) {
     const element = this.creator.createNewElement(json);
     if (element["setSurveyImpl"]) {
@@ -317,6 +334,7 @@ export class DragDropHelper extends Base {
     element.renderWidth = "100%";
     return element;
   }
+  
   private isShortcutElementMoveOutOfDocument(
     pageX,
     pageY,
