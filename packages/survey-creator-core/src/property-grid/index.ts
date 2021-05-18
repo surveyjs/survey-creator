@@ -310,10 +310,12 @@ export class PropertyGridTitleActionsCreator {
       question,
       this.options
     );
-
     settings.showModal(
       "survey",
-      { survey: surveyPropertyEditor.editSurvey },
+      {
+        survey: surveyPropertyEditor.editSurvey,
+        model: surveyPropertyEditor.editSurvey,
+      },
       () => surveyPropertyEditor.apply()
     );
   }
