@@ -101,27 +101,15 @@ export class DragDropHelper extends Base {
   private handleSurveyElementDragOver(event: PointerEvent) {
     this.draggedElementShortcut.style.cursor = "grabbing";
 
-    let dropTargetHTMLElement = this.findDropTargetHTMLElementFromPoint(
-      event.clientX,
-      event.clientY
-    );
-
-    if (!dropTargetHTMLElement) {
-      this.banDropSurveyElement();
-      // console.log("1");
-      return;
-    }
-
-    if (this.checkHTMLElementIsGhost(dropTargetHTMLElement)) return;
-
-    let { dropTargetSurveyElement, isEdge, isBottom } = this.getDragInfo(
-      event,
-      dropTargetHTMLElement
-    );
+    let { dropTargetSurveyElement, isEdge, isBottom } = this.getDragInfo(event);
 
     if (!dropTargetSurveyElement) {
       this.banDropSurveyElement();
       // console.log("2");
+      return;
+    }
+
+    if (dropTargetSurveyElement === this.ghostSurveyElement) {
       return;
     }
 
@@ -178,7 +166,16 @@ export class DragDropHelper extends Base {
     this.scrollIntervalId = null;
   };
 
-  private getDragInfo(event: PointerEvent, dropTargetHTMLElement: HTMLElement) {
+  private getDragInfo(event: PointerEvent) {
+    let dropTargetHTMLElement = this.findDropTargetHTMLElementFromPoint(
+      event.clientX,
+      event.clientY
+    );
+
+    if (!dropTargetHTMLElement) {
+      return { dropTargetSurveyElement: null, isEdge: true, isBottom: true };
+    }
+
     let dropTargetSurveyElement =
       this.getDropTargetSurveyElementFromHTMLElement(dropTargetHTMLElement);
 
@@ -220,6 +217,10 @@ export class DragDropHelper extends Base {
   private getDropTargetSurveyElementFromHTMLElement(element: HTMLElement) {
     let result;
     let elementOrPageName = element.dataset.svcDropTargetElementName;
+
+    if (elementOrPageName === DragDropHelper.ghostSurveyElementName) {
+      return this.ghostSurveyElement;
+    }
 
     if (elementOrPageName === "newGhostPage") {
       result = DragDropHelper.newGhostPage;
