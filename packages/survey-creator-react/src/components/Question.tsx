@@ -40,7 +40,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div
-          data-svc-droppable-element-name={this.model.surveyElement.name}
+          data-svc-drop-target-element-name={this.model.surveyElement.name}
           className={"svc-question__adorner"}
           onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
           onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}

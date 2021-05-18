@@ -42,7 +42,7 @@ export class TabDesignerComponent extends SurveyElementBase<
 
     const surveyPages = survey.pages.map((page, index) => {
       return (
-        <div className={"svc-page"} data-svc-droppable-element-name={page.name} >
+        <div className={"svc-page"} data-svc-drop-target-element-name={page.name} >
           <CreatorSurveyPageComponent
             key={page.id}
             survey={survey}
@@ -55,7 +55,7 @@ export class TabDesignerComponent extends SurveyElementBase<
 
     if (this.model.showNewPage) {
       surveyPages.push(
-        <div className={"svc-page"} data-svc-droppable-element-name={"newGhostPage"} >
+        <div className={"svc-page"} data-svc-drop-target-element-name={"newGhostPage"} >
           <CreatorSurveyPageComponent
             key={this.model.newPage.id}
             survey={survey}
