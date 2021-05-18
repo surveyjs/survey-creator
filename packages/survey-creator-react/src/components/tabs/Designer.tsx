@@ -1,15 +1,22 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
+import {
+  ReactElementFactory,
+  Survey,
+  SurveyElementBase
+} from "survey-react-ui";
+import {
+  CreatorBase,
+  TabDesignerViewModel,
+  TabDesignerPlugin
+} from "@survey/creator";
 import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 import PropertyGridComponent from "../../PropertyGrid";
 
 interface ITabDesignerComponentProps {
-  creator: CreatorBase<SurveyModel>;
-  survey: SurveyModel;
+  data: TabDesignerViewModel<SurveyModel>;
 }
 
 export class TabDesignerComponent extends SurveyElementBase<
@@ -19,25 +26,25 @@ export class TabDesignerComponent extends SurveyElementBase<
   private model: TabDesignerViewModel<SurveyModel>;
   constructor(props: ITabDesignerComponentProps) {
     super(props);
-    this.model = new TabDesignerViewModel<SurveyModel>(props.creator);
+    this.model = props.data;
   }
 
   protected getStateElement(): Base {
-    return this.props.survey;
+    return this.model;
   }
 
   render(): JSX.Element {
     return this.renderContent();
     return (
       <ReactDragDropHelperComponent
-        creator={this.props.creator}
+        creator={this.props.data.creator}
         renderContent={() => this.renderContent()}
       ></ReactDragDropHelperComponent>
     );
   }
   renderContent(): JSX.Element {
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
-    const survey: SurveyModel = this.props.survey;
+    const creator: CreatorBase<SurveyModel> = this.model.creator;
+    const survey: SurveyModel = creator.survey;
     const className = "svc-tab-designer " + survey.css.root;
 
     const surveyPages = survey.pages.map((page, index) => {
@@ -53,7 +60,7 @@ export class TabDesignerComponent extends SurveyElementBase<
       );
     });
 
-    if (this.model.showNewPage) {
+    if (!!this.model.newPage) {
       surveyPages.push(
         <div className={"svc-page"} data-svc-drop-target-element-name={"newGhostPage"} >
           <CreatorSurveyPageComponent
