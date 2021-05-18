@@ -56,6 +56,7 @@ export class DragDropHelper extends Base {
 
   public startDrag(draggedElement: IElement) {
     this.draggedSurveyElement = draggedElement;
+    this.ghostSurveyElement = this.createGhostSurveyElement();
     this.draggedElementShortcut = this.createDraggedElementShortcut();
 
     document.body.append(this.draggedElementShortcut);
@@ -98,16 +99,11 @@ export class DragDropHelper extends Base {
   private handleItemValueDragOver(event: PointerEvent) {}
 
   private handleSurveyElementDragOver(event: PointerEvent) {
-    if (!this.ghostSurveyElement)
-      this.ghostSurveyElement = this.createGhostSurveyElement();
+    this.draggedElementShortcut.style.cursor = "grabbing";
 
     let dropTargetHTMLElement = this.findDropTargetHTMLElementFromPoint(
       event.clientX,
       event.clientY
-    );
-
-    dropTargetHTMLElement = this.findDeepestDropTargetChild(
-      dropTargetHTMLElement
     );
 
     if (!dropTargetHTMLElement) {
@@ -118,38 +114,27 @@ export class DragDropHelper extends Base {
 
     if (this.checkHTMLElementIsGhost(dropTargetHTMLElement)) return;
 
-    let dropTargetSurveyElement =
-      this.getDropTargetSurveyElementFromHTMLElement(dropTargetHTMLElement);
+    let { dropTargetSurveyElement, isEdge, isBottom } = this.getCurrentDragInfo(
+      event,
+      dropTargetHTMLElement
+    );
 
-    if (dropTargetSurveyElement === this.draggedSurveyElement) {
+    if (!dropTargetSurveyElement) {
       this.banDropSurveyElement();
       // console.log("2");
       return;
     }
 
-    this.draggedElementShortcut.style.cursor = "grabbing";
-
-    let newIsEdge = dropTargetSurveyElement.isPanel
-      ? this.calculateIsEdge(dropTargetHTMLElement, event.clientY)
-      : true;
-
-    let newIsBottom = this.calculateIsBottom(
-      dropTargetHTMLElement,
-      event.clientY
-    );
-
     if (
       dropTargetSurveyElement === this.dropTargetSurveyElement &&
-      newIsEdge === this.isEdge &&
-      newIsBottom === this.isBottom
+      isEdge === this.isEdge &&
+      isBottom === this.isBottom
     )
       return;
 
-    this.isEdge = newIsEdge;
-    this.isBottom = newIsBottom;
-
+    this.isEdge = isEdge;
+    this.isBottom = isBottom;
     this.dropTargetSurveyElement = dropTargetSurveyElement;
-
     this.insertGhostElementIntoSurvey();
   }
 
@@ -171,6 +156,36 @@ export class DragDropHelper extends Base {
     document.body.removeChild(this.draggedElementShortcut);
     this.onDragEnd();
   };
+
+  private getCurrentDragInfo(
+    event: PointerEvent,
+    dropTargetHTMLElement: HTMLElement
+  ) {
+    let dropTargetSurveyElement =
+      this.getDropTargetSurveyElementFromHTMLElement(dropTargetHTMLElement);
+
+    let isEdge = true;
+
+    if (dropTargetSurveyElement.isPanel) {
+      isEdge = this.calculateIsEdge(dropTargetHTMLElement, event.clientY);
+
+      if (!isEdge) {
+        dropTargetHTMLElement = this.findDeepestDropTargetChild(
+          dropTargetHTMLElement
+        );
+
+        dropTargetSurveyElement =
+          this.getDropTargetSurveyElementFromHTMLElement(dropTargetHTMLElement);
+      }
+    }
+
+    if (dropTargetSurveyElement === this.draggedSurveyElement) {
+      dropTargetSurveyElement = null;
+    }
+
+    let isBottom = this.calculateIsBottom(dropTargetHTMLElement, event.clientY);
+    return { dropTargetSurveyElement, isEdge, isBottom };
+  }
 
   private getDropTargetSurveyElementFromHTMLElement(element: HTMLElement) {
     let result;

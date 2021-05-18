@@ -101,11 +101,6 @@ svc-question,
 [data-svc-drop-target-element-name="svc-drag-drop-ghost-survey-element-name"] {
   border: none;
   height: 0;
-  position: initial;
-
-  .svc-question__content {
-    position: initial;
-  }
 
   .svc-question__drag-area {
     display: none;
