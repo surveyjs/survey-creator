@@ -50,9 +50,9 @@ export class TabDesignerPlugin<T extends SurveyModel>
   implements ICreatorPlugin
 {
   public model: TabDesignerViewModel<T>;
-  private undoAction: IActionBarItem;
-  private redoAction: IActionBarItem;
-  private surveySettingsAction: IActionBarItem;
+  private undoAction: ActionBarItem;
+  private redoAction: ActionBarItem;
+  private surveySettingsAction: ActionBarItem;
   constructor(private creator: CreatorBase<T>) {
     this.model = new TabDesignerViewModel<T>(creator);
     creator.tabs.push({
@@ -71,6 +71,11 @@ export class TabDesignerPlugin<T extends SurveyModel>
   }
   public designerSurveyCreated(): void {
     this.model.initSurvey();
+    if (!!this.creator.undoRedoManager) {
+      this.creator.undoRedoManager.canUndoRedoCallback = () => {
+        this.updateUndeRedoActions();
+      };
+    }
   }
   public createActions(items: Array<IActionBarItem>) {
     this.undoAction = new ActionBarItem({
@@ -79,11 +84,6 @@ export class TabDesignerPlugin<T extends SurveyModel>
       title: "Undo",
       showTitle: false,
       visible: () => this.creator.viewType === "designer",
-      active: () => {
-        return (
-          this.creator.undoRedoManager && this.creator.undoRedoManager.canUndo()
-        );
-      },
       action: () => this.creator.undo()
     });
     this.redoAction = new ActionBarItem({
@@ -92,11 +92,6 @@ export class TabDesignerPlugin<T extends SurveyModel>
       title: "Redo",
       showTitle: false,
       visible: () => this.creator.viewType === "designer",
-      active: () => {
-        return (
-          this.creator.undoRedoManager && this.creator.undoRedoManager.canRedo()
-        );
-      },
       action: () => this.creator.redo()
     });
     this.surveySettingsAction = new ActionBarItem({
@@ -104,7 +99,7 @@ export class TabDesignerPlugin<T extends SurveyModel>
       iconName: "icon-settings",
       needSeparator: true,
       action: () => this.creator.selectElement(this.creator.survey),
-      active: () => this.creator.isElementSelected(<any>this.creator.survey),
+      active: this.isSurveySelected,
       visible: () => this.creator.viewType === "designer",
       title: "Settings",
       showTitle: false
@@ -112,5 +107,17 @@ export class TabDesignerPlugin<T extends SurveyModel>
     items.push(this.undoAction);
     items.push(this.redoAction);
     items.push(this.surveySettingsAction);
+    this.updateUndeRedoActions();
+    this.creator.onSelectedElementChanged.add((sender, options) => {
+      this.surveySettingsAction.active = this.isSurveySelected;
+    });
+  }
+  private updateUndeRedoActions() {
+    if (!this.creator.undoRedoManager) return;
+    this.undoAction.active = this.creator.undoRedoManager.canUndo();
+    this.redoAction.active = this.creator.undoRedoManager.canRedo();
+  }
+  private get isSurveySelected(): boolean {
+    return this.creator.isElementSelected(<any>this.creator.survey);
   }
 }

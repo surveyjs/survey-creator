@@ -357,6 +357,21 @@ test("Create new page on creating designer plugin", () => {
   );
   expect(designerPlugin.model.newPage).toBeTruthy();
 });
+test("canUndo/canRedo functions ", () => {
+  var creator = new CreatorTester();
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+  creator.survey.title = "My title";
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+  creator.undo();
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeTruthy();
+  creator.redo();
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+});
+
 test("Check survey settings button ", () => {
   var creator = new CreatorTester();
   var item = creator.getActionBarItem("icon-settings");
@@ -365,4 +380,20 @@ test("Check survey settings button ", () => {
   expect(item.active).toBeFalsy();
   creator.selectElement(creator.survey);
   expect(item.active).toBeTruthy();
+});
+test("Check survey undo/redo buttons ", () => {
+  var creator = new CreatorTester();
+  var undoItem = creator.getActionBarItem("icon-undo");
+  var redoItem = creator.getActionBarItem("icon-redo");
+  expect(undoItem.active).toBeFalsy();
+  expect(redoItem.active).toBeFalsy();
+  creator.survey.title = "My title";
+  expect(undoItem.active).toBeTruthy();
+  expect(redoItem.active).toBeFalsy();
+  creator.undo();
+  expect(undoItem.active).toBeFalsy();
+  expect(redoItem.active).toBeTruthy();
+  creator.redo();
+  expect(undoItem.active).toBeTruthy();
+  expect(redoItem.active).toBeFalsy();
 });

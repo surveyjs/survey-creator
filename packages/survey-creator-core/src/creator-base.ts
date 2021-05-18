@@ -966,6 +966,11 @@ export class CreatorBase<T extends SurveyModel>
     });
     */
     this.undoRedoManagerValue = new UndoRedoManager();
+    this.setSurvey(survey);
+    var plugin = this.currentPlugin;
+    if (!!plugin && !!plugin.designerSurveyCreated) {
+      plugin.designerSurveyCreated();
+    }
     survey.onPropertyValueChangedCallback = (
       name: string,
       oldValue: any,
@@ -981,14 +986,6 @@ export class CreatorBase<T extends SurveyModel>
         arrayChanges
       );
     };
-    this.undoRedoManager.canUndoRedoCallback = () => {
-      //this.updateKoCanUndoRedo();
-    };
-    this.setSurvey(survey);
-    var plugin = this.currentPlugin;
-    if (!!plugin && !!plugin.designerSurveyCreated) {
-      plugin.designerSurveyCreated();
-    }
     this.undoRedoManager.changesFinishedCallback = (
       changes: IUndoRedoChange
     ) => {
@@ -1010,6 +1007,8 @@ export class CreatorBase<T extends SurveyModel>
     arrayChanges: Survey.ArrayChanges
   ) {
     if (this.addingObject == sender) return;
+    var prop = Survey.Serializer.findProperty(sender.getType(), name);
+    if (!prop || !prop.isSerializable || !prop.isVisible) return;
     this.undoRedoManager.startTransaction(name + " changed");
     this.undoRedoManager.onPropertyValueChanged(
       name,
