@@ -27,6 +27,7 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
 
   render(): JSX.Element {
+    return this.renderContent();
     return (
       <ReactDragDropHelperComponent
         creator={this.props.creator}
@@ -41,25 +42,27 @@ export class TabDesignerComponent extends SurveyElementBase<
 
     const surveyPages = survey.pages.map((page, index) => {
       return (
-        <CreatorSurveyPageComponent
-          key={page.id}
-          survey={survey}
-          page={page}
-          creator={creator}
-          data-svc-droppable-element-name={page.name} 
-        ></CreatorSurveyPageComponent>
+        <div className={"svc-page"} data-svc-droppable-element-name={page.name} >
+          <CreatorSurveyPageComponent
+            key={page.id}
+            survey={survey}
+            page={page}
+            creator={creator}
+          ></CreatorSurveyPageComponent>
+        </div>
       );
     });
 
     if (this.model.showNewPage) {
       surveyPages.push(
-        <CreatorSurveyPageComponent
-          key={this.model.newPage.id}
-          survey={survey}
-          page={this.model.newPage}
-          creator={creator}
-          data-svc-droppable-element-name={"newGhostPage"} 
-        ></CreatorSurveyPageComponent>
+        <div className={"svc-page"} data-svc-droppable-element-name={"newGhostPage"} >
+          <CreatorSurveyPageComponent
+            key={this.model.newPage.id}
+            survey={survey}
+            page={this.model.newPage}
+            creator={creator}
+          ></CreatorSurveyPageComponent>
+        </div>
       );
     }
 
