@@ -9,10 +9,12 @@ import {
   QuestionRadiogroupModel,
   QuestionMatrixDropdownModel,
   QuestionMatrixDynamicModel,
+  IActionBarItem
 } from "survey-core";
 import { CreatorBase, ICreatorOptions } from "../src/creator-base";
 import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
+import { TabDesignerPlugin } from "../src/components/tabs/designer";
 
 export class CreatorTester extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
@@ -27,12 +29,18 @@ export class CreatorTester extends CreatorBase<SurveyModel> {
     if (!!name) return name;
     return this.selectedElement.getType();
   }
+  public getActionBarItem(id: string): IActionBarItem {
+    for (var i = 0; i < this.toolbarItems.length; i++) {
+      if (this.toolbarItems[i].id == id) return this.toolbarItems[i];
+    }
+    return null;
+  }
 }
 
 test("options.questionTypes", () => {
   var creator = new CreatorTester();
   creator.JSON = {
-    elements: [{ type: "text", name: "q1" }],
+    elements: [{ type: "text", name: "q1" }]
   };
   expect(creator.selectedElementName).toEqual("survey");
   expect(creator.isElementSelected(creator.survey)).toBeTruthy();
@@ -45,7 +53,7 @@ test("options.questionTypes", () => {
 test("do not deactivate/activate tabs on selecting the active tab", () => {
   var creator = new CreatorTester();
   creator.JSON = {
-    elements: [{ type: "text", name: "q1" }],
+    elements: [{ type: "text", name: "q1" }]
   };
   expect(creator.activeTab).toEqual("designer");
   expect(creator.makeNewViewActive("test")).toBeTruthy();
@@ -56,7 +64,7 @@ test("do not deactivate/activate tabs on selecting the active tab", () => {
 test("Select new added question", () => {
   var creator = new CreatorTester();
   creator.JSON = {
-    elements: [{ type: "text", name: "question1" }],
+    elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.activeTab).toEqual("designer");
   creator.survey.currentPage = creator.survey.currentPage;
@@ -66,13 +74,13 @@ test("Select new added question", () => {
 test("Update JSON before drag&drop", () => {
   var creator = new CreatorTester();
   creator.JSON = {
-    elements: [{ type: "text", name: "question1" }],
+    elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.activeTab).toEqual("designer");
   creator.survey.currentPage = creator.survey.currentPage;
   var json: any = {
     type: "panel",
-    elements: [{ type: "text", name: "question1" }],
+    elements: [{ type: "text", name: "question1" }]
   };
   json = creator.getJSONForNewElement(json);
   expect(json.name).toEqual("panel1");
@@ -82,7 +90,7 @@ test("Update JSON before drag&drop", () => {
 test("PageViewModel", () => {
   var creator = new CreatorTester();
   creator.JSON = {
-    elements: [{ type: "text", name: "question1" }],
+    elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
   var pageModel = new PageViewModel(creator, creator.survey.currentPage);
@@ -108,7 +116,7 @@ test("PageViewModel", () => {
 test("PagesController", () => {
   var creator = new CreatorTester();
   creator.JSON = {
-    elements: [{ type: "text", name: "question1" }],
+    elements: [{ type: "text", name: "question1" }]
   };
   var counter = 0;
   creator.pagesController.onPagesChanged.add((sender, options) => {
@@ -119,7 +127,7 @@ test("PagesController", () => {
   creator.survey.removePage(creator.survey.pages[1]);
   expect(counter).toEqual(2);
   creator.JSON = {
-    elements: [{ type: "text", name: "question2" }],
+    elements: [{ type: "text", name: "question2" }]
   };
   expect(counter).toEqual(3);
 });
@@ -130,12 +138,12 @@ test("PageNavigatorViewModel", () => {
   creator.JSON = {
     pages: [
       {
-        elements: [{ type: "text", name: "question1" }],
+        elements: [{ type: "text", name: "question1" }]
       },
       {
-        elements: [{ type: "text", name: "question2" }],
-      },
-    ],
+        elements: [{ type: "text", name: "question2" }]
+      }
+    ]
   };
   expect(model.items).toHaveLength(2);
   expect(model.items[0].active).toBeTruthy();
@@ -156,13 +164,13 @@ test("SelectionHistoryController: Go to next/prev", () => {
     elements: [
       {
         type: "text",
-        name: "question1",
+        name: "question1"
       },
       {
         type: "text",
-        name: "question2",
-      },
-    ],
+        name: "question2"
+      }
+    ]
   };
   var controller = creator.selectionHistoryController;
   expect(controller.hasPrev).toBeFalsy();
@@ -195,13 +203,13 @@ test("SelectionHistoryController: Reset history on changing survey", () => {
     elements: [
       {
         type: "text",
-        name: "question1",
+        name: "question1"
       },
       {
         type: "text",
-        name: "question2",
-      },
-    ],
+        name: "question2"
+      }
+    ]
   };
   var creator = new CreatorTester();
   creator.JSON = json;
@@ -224,24 +232,24 @@ test("SelectionHistoryController: Update history on deleting elements", () => {
         elements: [
           {
             type: "text",
-            name: "question1",
+            name: "question1"
           },
           {
             type: "matrixdynamic",
             name: "question2",
-            columns: [{ name: "col1" }, { name: "col2" }],
+            columns: [{ name: "col1" }, { name: "col2" }]
           },
           {
             type: "panel",
             name: "panel1",
-            elements: [{ type: "text", name: "question3" }],
-          },
-        ],
+            elements: [{ type: "text", name: "question3" }]
+          }
+        ]
       },
       {
-        name: "page2",
-      },
-    ],
+        name: "page2"
+      }
+    ]
   };
   var controller = creator.selectionHistoryController;
   var page = creator.survey.pages[1];
@@ -273,13 +281,13 @@ test("Update expressions on deleting a question", () => {
       {
         type: "text",
         name: "question1",
-        visibleIf: "{question2} = 1",
+        visibleIf: "{question2} = 1"
       },
       {
         type: "text",
-        name: "question2",
-      },
-    ],
+        name: "question2"
+      }
+    ]
   };
   expect(creator.survey.getQuestionByName("question1").visibleIf).toEqual(
     "{question2} = 1"
@@ -294,14 +302,14 @@ test("Update expressions on deleting a panel with questions", () => {
       {
         type: "text",
         name: "question1",
-        visibleIf: "{question2} = 1",
+        visibleIf: "{question2} = 1"
       },
       {
         type: "panel",
         name: "panel1",
-        elements: [{ type: "text", name: "question2" }],
-      },
-    ],
+        elements: [{ type: "text", name: "question2" }]
+      }
+    ]
   };
   expect(creator.survey.getQuestionByName("question1").visibleIf).toEqual(
     "{question2} = 1"
@@ -319,9 +327,9 @@ test("Update expressions on deleting a page with questions", () => {
           {
             type: "text",
             name: "question1",
-            visibleIf: "{question2} = 1",
-          },
-        ],
+            visibleIf: "{question2} = 1"
+          }
+        ]
       },
       {
         name: "page2",
@@ -329,15 +337,63 @@ test("Update expressions on deleting a page with questions", () => {
           {
             type: "panel",
             name: "panel1",
-            elements: [{ type: "text", name: "question2" }],
-          },
-        ],
-      },
-    ],
+            elements: [{ type: "text", name: "question2" }]
+          }
+        ]
+      }
+    ]
   };
   expect(creator.survey.getQuestionByName("question1").visibleIf).toEqual(
     "{question2} = 1"
   );
   creator.deleteElement(<Base>(<any>creator.survey.getPageByName("page2")));
   expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
+});
+test("Create new page on creating designer plugin", () => {
+  var creator = new CreatorTester();
+  expect(creator.viewType).toEqual("designer");
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.plugins["designer"]
+  );
+  expect(designerPlugin.model.newPage).toBeTruthy();
+});
+test("canUndo/canRedo functions ", () => {
+  var creator = new CreatorTester();
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+  creator.survey.title = "My title";
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+  creator.undo();
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeTruthy();
+  creator.redo();
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+});
+
+test("Check survey settings button ", () => {
+  var creator = new CreatorTester();
+  var item = creator.getActionBarItem("icon-settings");
+  expect(item.active).toBeTruthy();
+  creator.selectElement(creator.survey.pages[0]);
+  expect(item.active).toBeFalsy();
+  creator.selectElement(creator.survey);
+  expect(item.active).toBeTruthy();
+});
+test("Check survey undo/redo buttons ", () => {
+  var creator = new CreatorTester();
+  var undoItem = creator.getActionBarItem("icon-undo");
+  var redoItem = creator.getActionBarItem("icon-redo");
+  expect(undoItem.active).toBeFalsy();
+  expect(redoItem.active).toBeFalsy();
+  creator.survey.title = "My title";
+  expect(undoItem.active).toBeTruthy();
+  expect(redoItem.active).toBeFalsy();
+  creator.undo();
+  expect(undoItem.active).toBeFalsy();
+  expect(redoItem.active).toBeTruthy();
+  creator.redo();
+  expect(undoItem.active).toBeTruthy();
+  expect(redoItem.active).toBeFalsy();
 });

@@ -672,71 +672,23 @@ exports[`Storyshots Creator design surface content Default 1`] = `
 >
   <svc-toolbox
     params="categories: creator.toolboxCategories, creator: creator"
-  >
-    <div
-      class="svc-toolbox"
-    >
-      
-  
-      <div
-        class="svc-toolbox__category"
-      >
-        
-    
-        <!-- ko foreach: items -->
-        
-    
-        <div
-          class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible ? 'visible': 'hidden' }"
-        >
-          
-      
-          <!-- ko if: $data.needSeparator -->
-          
-      
-          <div
-            class="svc-toolbox__category-separator"
-          />
-          
-      
-          <!-- /ko -->
-          
-      
-          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator } } -->
-          
-      
-          <!-- /ko -->
-          
-    
-        </div>
-        
-    
-        <!-- /ko -->
-        
-  
-      </div>
-      
-
-    </div>
-    
-
-  </svc-toolbox>
+  />
   
 
   <div
-    class="svc-tab-designer sv-root-modern"
+    class="svc-tab-designer"
     data-bind="css: survey.css.root"
   >
     
   
     <div
-      class="sv-container-modern"
       data-bind="css: survey.css.container"
     >
       
     
       <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: { name: 'survey-header', data: survey } } } -->
+      
+    
       <!-- /ko -->
       
     
@@ -745,59 +697,20 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
       <svc-page
         params="survey: $parent.survey, page: $data, creator: $parent.creator"
-      >
-        <div
-          class="svc-page__content"
-          data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
-        >
-          
-  
-          <!-- ko template: { name: 'survey-page', data: page } -->
-          <!-- /ko -->
-          
-  
-          <div
-            class="svc-page__add-new-question"
-            data-bind="click: addNewQuestion, clickBubble: false"
-          >
-            
-    
-            <span
-              class="svc-text svc-text--normal svc-text--bold"
-              data-bind="text: addNewQuestionText"
-            >
-              
-    
-            </span>
-            
-  
-          </div>
-          
-  
-          <div
-            class="svc-page__content-actions"
-          >
-            
-    
-            <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
-            
-    
-            <!-- /ko -->
-            
-  
-          </div>
-          
-
-        </div>
-        
-
-      </svc-page>
+      />
       
     
       <!-- /ko -->
       
     
       <!-- ko if: showNewPage -->
+      
+    
+      <svc-page
+        params="survey: survey, creator: creator, page: newPage"
+      />
+      
+    
       <!-- /ko -->
       
   
@@ -809,12 +722,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
 
   <svc-page-navigator
     params="creator: creator"
-  >
-    <!-- ko if: visible -->
-    <!-- /ko -->
-    
-
-  </svc-page-navigator>
+  />
   
 
   <div
@@ -825,32 +733,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
     <svc-property-panel
       params="model: creator"
-    >
-      <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
-      <!-- /ko -->
-      
-
-      <div
-        class="svc-property-panel__header"
-        data-bind="text: title"
-      >
-        Survey
-      </div>
-      
-
-      <div
-        class="svc-property-panel__expander"
-      >
-        
-  
-        <!-- ko template: { name: 'survey-content', data: survey  } -->
-        <!-- /ko -->
-        
-
-      </div>
-      
-
-    </svc-property-panel>
+    />
     
 
   </div>
