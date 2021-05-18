@@ -1,0 +1,28 @@
+.sd-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  background: $background;
+  box-sizing: border-box;
+  width: 100%;
+  height: calcSize(6);
+  border: 1px solid $border-inside;
+  padding: 12px calcSize(2);
+  outline: none;
+  font-size: calcSize(2);
+  color: $foreground;
+}
+
+.sd-input::placeholder {
+  color: $foreground-light;
+}
+
+.sd-input:focus {
+  border: 2px solid #19b394;
+}
+
+.sd-input:disabled,
+.sd-input:disabled::placeholder {
+  color: $foreground-disabled;
+}

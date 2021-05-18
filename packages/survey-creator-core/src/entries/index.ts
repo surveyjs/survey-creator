@@ -48,6 +48,7 @@ import "../components/button.scss";
 import "../components/question-dropdown.scss";
 import "../components/toolbox/toolbox.scss";
 import "../property-grid-theme/property-grid.scss";
+import "../survey-designer-theme/survey-designer.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
 
