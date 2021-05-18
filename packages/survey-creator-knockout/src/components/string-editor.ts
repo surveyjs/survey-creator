@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { JsonObjectProperty, Serializer } from "survey-core";
+import { Serializer, JsonObjectProperty } from "survey-core";
 import { editorLocalization } from "@survey/creator";
 const template = require("./string-editor.html");
 

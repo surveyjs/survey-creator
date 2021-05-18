@@ -1,6 +1,7 @@
-import React, { MouseEventHandler } from "react";
-import { LocalizableString } from "survey-core";
+import React from "react";
+import { LocalizableString, Serializer, JsonObjectProperty } from "survey-core";
 import { ReactElementFactory, SvgIcon } from "survey-react-ui";
+import { editorLocalization } from "@survey/creator";
 
 export class SurveyLocStringEditor extends React.Component<any, any> {
   private svStringEditorRef: React.RefObject<HTMLDivElement>;
@@ -9,33 +10,40 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     this.state = { changed: 0 };
     this.svStringEditorRef = React.createRef();
   }
-  private get locStr(): LocalizableString {
+  private get locString(): LocalizableString {
     return this.props.locStr;
   }
   private get style(): any {
     return this.props.style;
   }
-  componentDidMount() {
-    if (!this.locStr) return;
-    var self = this;
-    this.locStr.onChanged = function () {
+  public componentDidMount() {
+    if (!this.locString) return;
+    const self: SurveyLocStringEditor = this;
+    this.locString.onChanged = function () {
       self.setState({ changed: self.state.changed + 1 });
     };
-    if(this.locStr["__isEditing"]) {
+    if(this.locString["__isEditing"]) {
       this.svStringEditorRef.current.focus();
       // document.execCommand('selectAll', false, null);
     }
   }
-  componentWillUnmount() {
-    if (!this.locStr) return;
-    this.locStr.onChanged = function () {};
+  public componentWillUnmount() {
+    if (!this.locString) return;
+    this.locString.onChanged = function () {};
   }
-  onInput = (event: any) => {
+  private get placeholder(): string {
+    const ownerType: string = (this.locString.owner as any).getType();
+    if (!this.locString.name) return "";
+    const property: JsonObjectProperty = Serializer.findProperty(ownerType, this.locString.name);
+    if (!property.placeholder) return "";
+    return editorLocalization.getString(property.placeholder);
+  }
+  private onInput = (event: any) => {
     this.done(event);
-    if (this.locStr.renderedHtml == event.target.innerText) return;
-    this.locStr.text = event.target.innerText;
+    if (this.locString.renderedHtml == event.target.innerText) return;
+    this.locString.text = event.target.innerText;
   };
-  onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
+  private onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
     if (event.keyCode === 13) {
       this.svStringEditorRef.current.blur();
       this.done(event);
@@ -46,28 +54,29 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     }
     return true;
   };
-  done = (event: any) => {
+  private done = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
-    this.locStr["__isEditing"] = false;
+    this.locString["__isEditing"] = false;
   };
-  edit = () => {
+  private edit = () => {
     this.svStringEditorRef.current.focus();
     // document.execCommand('selectAll', false, null);
-    this.locStr["__isEditing"] = true;
+    this.locString["__isEditing"] = true;
   };
-  render(): JSX.Element {
-    if (!this.locStr) {
+  public render(): JSX.Element {
+    if (!this.locString) {
       return null;
     }
     let control = null;
-    if (this.locStr.hasHtml) {
-      const htmlValue = { __html: this.locStr.renderedHtml };
+    if (this.locString.hasHtml) {
+      const htmlValue = { __html: this.locString.renderedHtml };
       control = (
         <span
           ref={this.svStringEditorRef}
           className="sv-string-editor"
           contentEditable="true"
+          aria-placeholder={this.placeholder}
           suppressContentEditableWarning={true}
           style={this.style}
           dangerouslySetInnerHTML={htmlValue}
@@ -82,13 +91,14 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           ref={this.svStringEditorRef}
           className="sv-string-editor"
           contentEditable="true"
+          aria-placeholder={this.placeholder}
           suppressContentEditableWarning={true}
           style={this.style}
           onBlur={this.onInput}
           onKeyDown={this.onKeyDown}
           onClick={this.edit}
         >
-          {this.locStr.renderedHtml}
+          {this.locString.renderedHtml}
         </span>
       );
     }
