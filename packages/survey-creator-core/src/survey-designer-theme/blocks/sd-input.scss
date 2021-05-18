@@ -2,16 +2,20 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  display: block;
-  background: $background;
-  box-sizing: border-box;
+  position: static;
   width: 100%;
-  height: calcSize(6);
-  border: 1px solid $border-inside;
-  padding: 12px calcSize(2);
-  outline: none;
-  font-size: calcSize(2);
+  box-sizing: border-box;
+  padding: 12px 16px;
   color: $foreground;
+  background: $background-for-editors;
+  box-shadow: inset 0px 1px 2px $border-inside;
+  border: none;
+  border-radius: 3px;
+}
+
+.sd-input:disabled {
+  background: $background-for-editors;
+  color: $foreground-disabled-for-editors;
 }
 
 .sd-input::placeholder {

@@ -1,40 +1,13 @@
 .sd-question {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  //todo: remove !important
-  min-width: auto !important;
+  background: transparent;
 }
 .sd-question__header {
   width: 100%;
 }
 .sd-question__title {
-  width: 100%;
-  margin: 0;
-  padding: calcSize(1) 0;
-  line-height: calcSize(3);
+  position: static;
+  font-weight: 600;
   font-size: calcSize(2);
-  font-family: "Open Sans";
-  color: $foreground-light;
-  font-weight: normal;
-  box-sizing: border-box;
-  .sv-action:not(.sv-action--hidden):not(:last-of-type) {
-    padding-right: 0;
-  }
-  .sv-action-bar,
-  sv-action-bar {
-    padding: 0;
-  }
-}
-
-.sd-question__content {
-  width: 100%;
-}
-
-.sd-question__description {
   line-height: calcSize(3);
-  font-size: calcSize(2);
-  color: $foreground;
-  padding-bottom: calcSize(2);
+  margin: 4px 0px;
 }
