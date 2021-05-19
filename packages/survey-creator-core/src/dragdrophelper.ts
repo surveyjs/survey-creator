@@ -440,14 +440,6 @@ export class DragDropHelper extends Base {
 
   //TODO =====================================
 
-  public onDragStartToolboxItem(
-    event: IPortableDragEvent,
-    draggedElementJson: JsonObject
-  ) {
-    const draggedElement = this.createElementFromJson(draggedElementJson);
-    return this.onDragStart(event, draggedElement);
-  }
-
   public onDragStartItemValue(
     event: IPortableDragEvent,
     question: QuestionSelectBase,
@@ -465,16 +457,6 @@ export class DragDropHelper extends Base {
     return true;
   }
 
-  private onDragStart(event: IPortableDragEvent, draggedElement: IElement) {
-    event.stopPropagation(); // prevent call startDrag event on Parent
-
-    event.dataTransfer.effectAllowed = "move";
-
-    this.ghostSurveyElement = this.createGhostSurveyElement();
-    this.draggedSurveyElement = draggedElement;
-
-    return true;
-  }
 
   public onDragOverItemValue(
     event: IPortableDragEvent,
