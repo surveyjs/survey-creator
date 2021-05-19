@@ -147,7 +147,15 @@ export class CreatorBase<T extends SurveyModel>
     this.viewType = "test";
   }
 
-  public plugins: { [name: string]: ICreatorPlugin } = {};
+  protected plugins: { [name: string]: ICreatorPlugin } = {};
+  public addPlugin(name: string, plugin: ICreatorPlugin) {
+    this.plugins[name] = plugin;
+  }
+  public getPlugin(name: string): ICreatorPlugin {
+    {
+      return this.plugins[name];
+    }
+  }
 
   /**
    * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
@@ -1006,9 +1014,12 @@ export class CreatorBase<T extends SurveyModel>
     sender: Survey.Base,
     arrayChanges: Survey.ArrayChanges
   ) {
-    if (this.addingObject == sender) return;
-    var prop = Survey.Serializer.findProperty(sender.getType(), name);
-    if (!prop || !prop.isSerializable || !prop.isVisible) return;
+    if (
+      this.addingObject == sender ||
+      !this.undoRedoManager ||
+      !this.undoRedoManager.isCorrectProperty(sender, name)
+    )
+      return;
     this.undoRedoManager.startTransaction(name + " changed");
     this.undoRedoManager.onPropertyValueChanged(
       name,

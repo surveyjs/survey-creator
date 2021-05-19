@@ -17,7 +17,6 @@ export class UndoRedoManager {
     sender: Survey.Base,
     arrayChanges: Survey.ArrayChanges
   ) {
-    if (!this.hasPropertyInSerializer(sender, name)) return;
     if (EditableObject.isCopyObject(sender)) return;
     if (this._ignoreChanges) return;
 
@@ -35,15 +34,18 @@ export class UndoRedoManager {
 
     transaction.addAction(action);
   }
-
+  public isCorrectProperty(sender: Survey.Base, propertyName: string): boolean {
+    var prop: Survey.JsonObjectProperty = Survey.Serializer.findProperty(
+      sender.getType(),
+      propertyName
+    );
+    return !!prop && prop.isSerializable;
+  }
   private _ignoreChanges = false;
   private _preparingTransaction: Transaction = null;
   private _transactions: Transaction[] = [];
   private _currentTransactionIndex: number = -1;
 
-  private hasPropertyInSerializer(sender: Survey.Base, propertyName: string) {
-    return !!Survey.Serializer.findProperty(sender.getType(), propertyName);
-  }
   public isCopyObject(sender: Survey.Base) {}
   private _cutOffTail() {
     if (this._currentTransactionIndex + 1 !== this._transactions.length) {

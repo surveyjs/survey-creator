@@ -17,11 +17,11 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   private createNewPage() {
     if (!this.survey) return;
     const newPage: PageModel = this.survey.createNewPage("");
-    newPage.setSurveyImpl(this.survey);
     this.creator.setNewNames(newPage);
     newPage.onFirstRendering();
     newPage.updateCustomWidgets();
     newPage.setWasShown(true);
+    newPage.setSurveyImpl(this.survey);
     newPage["_addToSurvey"] = () => {
       newPage["_addToSurvey"] = undefined;
       this.survey.addPage(newPage);
@@ -63,7 +63,7 @@ export class TabDesignerPlugin<T extends SurveyModel>
       action: () => this.creator.makeNewViewActive("designer"),
       active: () => this.creator.viewType === "designer"
     });
-    creator.plugins["designer"] = this;
+    creator.addPlugin("designer", this);
   }
   public activate(): void {}
   public deactivate(): boolean {

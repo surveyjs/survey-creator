@@ -1131,7 +1131,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       },
       active: () => creator.viewType === "translation"
     });
-    creator.plugins["translation"] = this;
+    creator.addPlugin("translation", this);
   }
   public activate(): void {
     this.model.activate();

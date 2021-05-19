@@ -392,7 +392,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         creator.makeNewViewActive("test");
       }
     });
-    creator.plugins["test"] = this;
+    creator.addPlugin("test", this);
   }
   public activate(): void {
     this.model.onSurveyCreatedCallback = (survey) => {
