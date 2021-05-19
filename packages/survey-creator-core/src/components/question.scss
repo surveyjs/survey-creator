@@ -112,7 +112,7 @@ svc-question,
 }
 // EO reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
 
-.svc-hovered .svc-question__drag-area {
+.svc-hovered > .svc-question__content > .svc-question__drag-area {
   visibility: visible;
 }
 
