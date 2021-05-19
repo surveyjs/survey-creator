@@ -717,6 +717,7 @@ export class CreatorBase<T extends SurveyModel>
     if (options.canUndo) {
       var item = this.undoRedoManager.undo();
       this.onAfterUndo.fire(self, { state: item });
+      this.selectElementAfterUndo();
     }
   }
   public redo() {
@@ -726,7 +727,23 @@ export class CreatorBase<T extends SurveyModel>
     if (options.canRedo) {
       const item = this.undoRedoManager.redo();
       this.onAfterRedo.fire(self, { state: item });
+      this.selectElementAfterUndo();
     }
+  }
+  private selectElementAfterUndo() {
+    this.selectElementAfterUndoCore(this.selectedElement);
+  }
+  private selectElementAfterUndoCore(obj: Base) {
+    if (
+      !!obj &&
+      !obj.isDisposed &&
+      !!obj.getSurvey() &&
+      (!this.isObjQuestion(obj) || !!obj["parent"])
+    ) {
+      this.selectElement(obj);
+      return;
+    }
+    this.selectElement(this.survey);
   }
   public get pagesController(): PagesController {
     return this.pagesControllerValue;
