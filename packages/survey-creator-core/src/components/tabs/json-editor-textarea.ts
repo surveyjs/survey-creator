@@ -3,7 +3,7 @@ import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import {
   JsonEditorBaseModel,
-  TabJsonEditorBasePlugin,
+  TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
 import "./json-editor-textarea.scss";
 
@@ -42,7 +42,8 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
 
 export class TabJsonEditorTextareaPlugin
   extends TabJsonEditorBasePlugin<TextareaJsonEditorModel>
-  implements ICreatorPlugin {
+  implements ICreatorPlugin
+{
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
     this.model = new TextareaJsonEditorModel(creator);
@@ -56,6 +57,6 @@ export class TabJsonEditorTextareaPlugin
       },
       active: () => creator.viewType === "editor"
     });
-    creator.plugins["editor"] = this;
+    creator.addPlugin("editor", this);
   }
 }
