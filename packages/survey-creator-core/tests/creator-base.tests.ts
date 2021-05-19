@@ -449,3 +449,21 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(creator.survey.pages[0].name).toEqual("page1");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
 });
+test("undo/redo make sure that the deleting element is not active", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text", name: "question2" }
+    ]
+  };
+  creator.clickToolboxItem({ type: "text", name: "question3" });
+  expect(creator.selectedElementName).toEqual("question3");
+  creator.undo();
+  expect(creator.selectedElementName).toEqual("survey");
+  creator.survey.addNewPage("page2");
+  creator.selectElement(creator.survey.pages[1]);
+  expect(creator.selectedElementName).toEqual("page2");
+  creator.undo();
+  expect(creator.selectedElementName).toEqual("survey");
+});
