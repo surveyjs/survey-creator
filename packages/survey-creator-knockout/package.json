@@ -21,7 +21,7 @@
     "doc:update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
     "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500\"",
     "testcafe:ci": "http-server --silent & testcafe chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal",
-    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/string-editor.js --reporter minimal --debug-mode\"",
+    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/page-title-placeholder.js --reporter minimal --debug-mode\"",
     "release": "standard-version --message \"Release: %s [skip ci]\"",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
     "-prestorybook": "npm run test:generate-output",

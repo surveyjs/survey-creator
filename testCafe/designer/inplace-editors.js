@@ -1,5 +1,5 @@
 import { url } from '../helper';
-import { ClientFunction, Selector } from 'testcafe';
+import { Selector } from 'testcafe';
 const title = 'Inplace editors';
 
 fixture`${title}`.page`${url}`.beforeEach(
