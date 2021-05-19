@@ -64,6 +64,30 @@ export class DragDropHelper extends Base {
     this.draggedElementShortcut.addEventListener("pointerup", this.drop);
   }
 
+  private createGhostSurveyElement(): any {
+    const json = {
+      type: "html",
+      name: DragDropHelper.ghostSurveyElementName,
+      html: '<div class="svc-drag-drop-ghost"></div>'
+    };
+    return this.createElementFromJson(json);
+  }
+
+  private createDraggedElementShortcut() {
+    const draggedElementShortcut = document.createElement("div");
+    draggedElementShortcut.innerText = this.draggedSurveyElement["title"];
+    draggedElementShortcut.style.height = "40px";
+    draggedElementShortcut.style.minWidth = "100px";
+    draggedElementShortcut.style.borderRadius = "100px";
+    draggedElementShortcut.style.backgroundColor = "white";
+    draggedElementShortcut.style.padding = "10px";
+
+    draggedElementShortcut.style.cursor = "grabbing";
+    draggedElementShortcut.style.position = "absolute";
+    draggedElementShortcut.style.zIndex = "1000";
+    return draggedElementShortcut;
+  }
+
   private moveDraggedElement = (event: PointerEvent) => {
     this.moveShortcutElement(event);
 
@@ -96,6 +120,39 @@ export class DragDropHelper extends Base {
       event.clientY - shortcutYCenter + "px";
   }
 
+  private doScroll(clientY, clientX) {
+    clearInterval(this.scrollIntervalId);
+    const startScrollBoundary = 50;
+    // let scrollableParentElement = getScrollableParent(dropZoneElement)
+    //   .parentNode;
+    let scrollableParentElement = document.querySelector(
+      ".svc-tab-designer.sv-root-modern"
+    );
+
+    let top = scrollableParentElement.getBoundingClientRect().top;
+    let bottom = scrollableParentElement.getBoundingClientRect().bottom;
+    let left = scrollableParentElement.getBoundingClientRect().left;
+    let right = scrollableParentElement.getBoundingClientRect().right;
+
+    if (clientY - top <= startScrollBoundary) {
+      this.scrollIntervalId = setInterval(() => {
+        scrollableParentElement.scrollTop -= 5;
+      }, 10);
+    } else if (bottom - clientY <= startScrollBoundary) {
+      this.scrollIntervalId = setInterval(() => {
+        scrollableParentElement.scrollTop += 5;
+      }, 10);
+    } else if (right - clientX <= startScrollBoundary) {
+      this.scrollIntervalId = setInterval(() => {
+        scrollableParentElement.scrollLeft += 1;
+      }, 10);
+    } else if (clientX - left <= startScrollBoundary) {
+      this.scrollIntervalId = setInterval(() => {
+        scrollableParentElement.scrollLeft -= 1;
+      }, 10);
+    }
+  }
+
   private handleItemValueDragOver(event: PointerEvent) {}
 
   private handleSurveyElementDragOver(event: PointerEvent) {
@@ -126,46 +183,6 @@ export class DragDropHelper extends Base {
     this.insertGhostElementIntoSurvey();
   }
 
-  private banDropSurveyElement = () => {
-    this.dropTargetSurveyElement = null;
-    this.removeGhostElementFromSurvey();
-    this.draggedElementShortcut.style.cursor = "not-allowed";
-  };
-
-  private drop = () => {
-    if (this.dropTargetSurveyElement) {
-      // console.log("drop on: " + this.draggedOverElement["title"]);
-      this.insertRealElementIntoSurvey();
-    }
-
-    this.clear();
-  };
-
-  private clear = () => {
-    clearInterval(this.scrollIntervalId);
-
-    document.removeEventListener("pointermove", this.moveDraggedElement);
-    this.draggedElementShortcut.removeEventListener("pointerup", this.drop);
-    document.body.removeChild(this.draggedElementShortcut);
-
-    this.removeGhostElementFromSurvey();
-
-    const prevEvent = DragDropHelper.prevEvent;
-    prevEvent.element = null;
-    prevEvent.x = -1;
-    prevEvent.y = -1;
-
-    this.dropTargetSurveyElement = null;
-    this.draggedElementShortcut = null;
-    this.ghostSurveyElement = null;
-    this.draggedSurveyElement = null;
-    this.pageOrPanel = null;
-    this.itemValueDraggedQuestion = null;
-    this.isBottom = null;
-    this.isEdge = null;
-    this.scrollIntervalId = null;
-  };
-
   private getDragInfo(event: PointerEvent) {
     let dropTargetHTMLElement = this.findDropTargetHTMLElementFromPoint(
       event.clientX,
@@ -191,6 +208,14 @@ export class DragDropHelper extends Base {
       isEdge = panelDragInfo.isEdge;
     }
 
+    if (
+      // TODO we can't drop on not empty page directly for now
+      dropTargetSurveyElement.getType() === "page" &&
+      dropTargetSurveyElement.elements.length !== 0
+    ) {
+      dropTargetSurveyElement = null;
+    }
+
     if (dropTargetSurveyElement === this.draggedSurveyElement) {
       dropTargetSurveyElement = null;
     }
@@ -206,13 +231,18 @@ export class DragDropHelper extends Base {
     if (!isEdge) {
       HTMLElement = this.findDeepestDropTargetChild(HTMLElement);
 
-      if (this.checkHTMLElementIsGhost(HTMLElement)) return; //TODO
-
       dropTargetSurveyElement =
         this.getDropTargetSurveyElementFromHTMLElement(HTMLElement);
     }
+
     return { dropTargetSurveyElement, isEdge };
   }
+
+  private banDropSurveyElement = () => {
+    this.dropTargetSurveyElement = null;
+    this.removeGhostElementFromSurvey();
+    this.draggedElementShortcut.style.cursor = "not-allowed";
+  };
 
   private getDropTargetSurveyElementFromHTMLElement(element: HTMLElement) {
     let result;
@@ -267,6 +297,8 @@ export class DragDropHelper extends Base {
     let draggedOverNode = document.elementFromPoint(clientX, clientY);
     this.draggedElementShortcut.hidden = false;
 
+    if (!draggedOverNode) return null;
+
     let dropTargetHTMLElement =
       draggedOverNode.closest(selector) ||
       draggedOverNode.querySelector(selector);
@@ -289,63 +321,6 @@ export class DragDropHelper extends Base {
     }
 
     return <HTMLElement>result;
-  }
-
-  private createDraggedElementShortcut() {
-    const draggedElementShortcut = document.createElement("div");
-    draggedElementShortcut.innerText = this.draggedSurveyElement["title"];
-    draggedElementShortcut.style.height = "40px";
-    draggedElementShortcut.style.minWidth = "100px";
-    draggedElementShortcut.style.borderRadius = "100px";
-    draggedElementShortcut.style.backgroundColor = "white";
-    draggedElementShortcut.style.padding = "10px";
-
-    draggedElementShortcut.style.cursor = "grabbing";
-    draggedElementShortcut.style.position = "absolute";
-    draggedElementShortcut.style.zIndex = "1000";
-    return draggedElementShortcut;
-  }
-
-  private doScroll(clientY, clientX) {
-    clearInterval(this.scrollIntervalId);
-    const startScrollBoundary = 50;
-    // let scrollableParentElement = getScrollableParent(dropZoneElement)
-    //   .parentNode;
-    let scrollableParentElement = document.querySelector(
-      ".svc-tab-designer.sv-root-modern"
-    );
-
-    let top = scrollableParentElement.getBoundingClientRect().top;
-    let bottom = scrollableParentElement.getBoundingClientRect().bottom;
-    let left = scrollableParentElement.getBoundingClientRect().left;
-    let right = scrollableParentElement.getBoundingClientRect().right;
-
-    if (clientY - top <= startScrollBoundary) {
-      this.scrollIntervalId = setInterval(() => {
-        scrollableParentElement.scrollTop -= 5;
-      }, 10);
-    } else if (bottom - clientY <= startScrollBoundary) {
-      this.scrollIntervalId = setInterval(() => {
-        scrollableParentElement.scrollTop += 5;
-      }, 10);
-    } else if (right - clientX <= startScrollBoundary) {
-      this.scrollIntervalId = setInterval(() => {
-        scrollableParentElement.scrollLeft += 1;
-      }, 10);
-    } else if (clientX - left <= startScrollBoundary) {
-      this.scrollIntervalId = setInterval(() => {
-        scrollableParentElement.scrollLeft -= 1;
-      }, 10);
-    }
-  }
-
-  private createGhostSurveyElement(): any {
-    const json = {
-      type: "html",
-      name: DragDropHelper.ghostSurveyElementName,
-      html: '<div class="svc-drag-drop-ghost"></div>'
-    };
-    return this.createElementFromJson(json);
   }
 
   private insertGhostElementIntoSurvey(): boolean {
@@ -428,6 +403,40 @@ export class DragDropHelper extends Base {
 
     return false;
   }
+
+  private drop = () => {
+    if (this.dropTargetSurveyElement) {
+      // console.log("drop on: " + this.draggedOverElement["title"]);
+      this.insertRealElementIntoSurvey();
+    }
+
+    this.clear();
+  };
+
+  private clear = () => {
+    clearInterval(this.scrollIntervalId);
+
+    document.removeEventListener("pointermove", this.moveDraggedElement);
+    this.draggedElementShortcut.removeEventListener("pointerup", this.drop);
+    document.body.removeChild(this.draggedElementShortcut);
+
+    this.removeGhostElementFromSurvey();
+
+    const prevEvent = DragDropHelper.prevEvent;
+    prevEvent.element = null;
+    prevEvent.x = -1;
+    prevEvent.y = -1;
+
+    this.dropTargetSurveyElement = null;
+    this.draggedElementShortcut = null;
+    this.ghostSurveyElement = null;
+    this.draggedSurveyElement = null;
+    this.pageOrPanel = null;
+    this.itemValueDraggedQuestion = null;
+    this.isBottom = null;
+    this.isEdge = null;
+    this.scrollIntervalId = null;
+  };
 
   //TODO =====================================
 
