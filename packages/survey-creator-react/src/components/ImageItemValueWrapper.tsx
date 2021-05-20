@@ -100,11 +100,7 @@ ImageItemValueAdornerComponentProps,
       <div
         ref={this.rootRef}
         className={"svc-image-item-value-wrapper" + (isNew ? " svc-image-item-value--new" : "")} key={this.props.element.key}
-        draggable={this.model.isDraggable}
-        onDragStart={ (e) => this.model.dragStart(this.model, new ReactDragEvent(e)) }
-        onDragOver={ (e) => this.model.dragOver(this.model, new ReactDragEvent(e)) }
-        onDragEnd={ (e) => this.model.dragEnd(this.model, new ReactDragEvent(e)) }
-        onDrop={ (e) => this.model.drop(this.model, new ReactDragEvent(e)) }
+        data-svc-drop-target-element-name={this.model.item.value}
       >
         <input type="file" accept="image/*" className="svc-choose-file-input" style={{position: "absolute", opacity: 0, width: "1px", height: "1px", overflow: "hidden"}} />
         {content}

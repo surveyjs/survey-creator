@@ -9,7 +9,7 @@
   <div class="svc-item-value-controls">
     <!-- ko if: isDraggable -->
     <sv-svg-icon
-      data-bind="event: {pointerdown: (model, event)=>{startDragItemValue()}}"
+      data-bind="event: {pointerdown: (model, event)=>{startDragItemValue(event)}}"
       class="svc-item-value-controls__button svc-item-value-controls__drag"
       data-bind="visible: !isNew"
       params="iconName: 'icon-drag-handler', size: 24"
