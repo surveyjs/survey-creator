@@ -19,20 +19,11 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
     super(creator, question, item, templateData, itemsRoot);
   }
 
-  get showDragDropGhostOnTop():boolean {return super.getItemValueGhostPosition() === "top"};
-  get showDragDropGhostOnBottom():boolean {return super.getItemValueGhostPosition() === "bottom"}
+  get showDragDropGhostOnTop():boolean {return super.getGhostPosition() === "top"};
+  get showDragDropGhostOnBottom():boolean {return super.getGhostPosition() === "bottom"}
 
   koDragStart(model: ImageItemValueWrapperViewModel, event: DragEvent) {
     return super.dragStart(model, this.wrapDragEvent(event));
-  }
-  koDragEnd(model: ImageItemValueWrapperViewModel, event: DragEvent) {
-    return super.dragEnd(model, this.wrapDragEvent(event));
-  }
-  koDragOver(model: ImageItemValueWrapperViewModel, event: DragEvent) {
-    return super.dragOver(model, this.wrapDragEvent(event));
-  }
-  koDrop(model: ImageItemValueWrapperViewModel, event: DragEvent) {
-    return super.drop(model, this.wrapDragEvent(event))
   }
 
   private wrapDragEvent(event: DragEvent): KnockoutDragEvent {

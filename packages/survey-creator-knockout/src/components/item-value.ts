@@ -19,20 +19,11 @@ class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     super(creator, question, item);
   }
 
-  get showDragDropGhostOnTop():boolean {return super.getItemValueGhostPosition() === "top"};
-  get showDragDropGhostOnBottom():boolean {return super.getItemValueGhostPosition() === "bottom"}
+  get showDragDropGhostOnTop():boolean {return super.getGhostPosition() === "top"};
+  get showDragDropGhostOnBottom():boolean {return super.getGhostPosition() === "bottom"}
 
   koDragStart(model: ItemValueWrapperViewModel, event: DragEvent) {
     return super.dragStart(model, this.wrapDragEvent(event));
-  }
-  koDragEnd(model: ItemValueWrapperViewModel, event: DragEvent) {
-    return super.dragEnd(model, this.wrapDragEvent(event));
-  }
-  koDragOver(model: ItemValueWrapperViewModel, event: DragEvent) {
-    return super.dragOver(model, this.wrapDragEvent(event));
-  }
-  koDrop(model: ItemValueWrapperViewModel, event: DragEvent) {
-    return super.drop(model, this.wrapDragEvent(event))
   }
 
   private wrapDragEvent(event: DragEvent): KnockoutDragEvent {

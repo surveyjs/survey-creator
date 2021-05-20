@@ -6,7 +6,6 @@ import {
   Base,
   ItemValue,
   property,
-  settings,
   QuestionSelectBase
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
@@ -34,14 +33,13 @@ export class DragDropHelper extends Base {
   @property() isBottom: boolean = null;
   private isEdge: boolean = null;
   private pageOrPanel: PageModel = null;
-  private itemValueDraggedQuestion: QuestionSelectBase = null;
+  private itemValueParentQuestion: QuestionSelectBase = null;
 
   private get survey(): SurveyModel {
     return this.creator.survey;
   }
 
   private get draggedElementType() {
-    if (!this.draggedSurveyElement) return "toolbox-item";
     return this.draggedSurveyElement.getType();
   }
 
@@ -51,6 +49,16 @@ export class DragDropHelper extends Base {
 
   public startDragToolboxItem(draggedElementJson: JsonObject) {
     const draggedElement = this.createElementFromJson(draggedElementJson);
+    this.startDragElement(draggedElement);
+  }
+
+  public startDragElement(draggedElement: IElement) {
+    this.startDrag(draggedElement);
+  }
+
+  public startDragItemValue(question: QuestionSelectBase, item: ItemValue) {
+    const draggedElement = <any>item;
+    this.itemValueParentQuestion = question;
     this.startDrag(draggedElement);
   }
 
@@ -153,12 +161,47 @@ export class DragDropHelper extends Base {
     }
   }
 
-  private handleItemValueDragOver(event: PointerEvent) {}
+  private handleItemValueDragOver(event: PointerEvent) {
+    this.draggedElementShortcut.style.cursor = "grabbing";
+
+    const dragInfo = this.getDragInfo(event);
+    let dropTargetSurveyElement = dragInfo.dropTargetSurveyElement;
+    let isEdge = dragInfo.isEdge;
+    let isBottom = dragInfo.isBottom;
+
+    // shouldn't allow to drop on "adorners" (selectall, none, other)
+    if (
+      this.itemValueParentQuestion.choices.indexOf(dropTargetSurveyElement) ===
+      -1
+    ) {
+      this.banDropHere();
+      return;
+    }
+
+    if (dropTargetSurveyElement === this.draggedSurveyElement) {
+      this.banDropHere();
+      return true;
+    }
+
+    if (
+      dropTargetSurveyElement === this.dropTargetSurveyElement &&
+      isEdge === this.isEdge &&
+      isBottom === this.isBottom
+    )
+      return;
+
+    this.isEdge = isEdge;
+    this.isBottom = isBottom;
+    this.dropTargetSurveyElement = dropTargetSurveyElement;
+  }
 
   private handleSurveyElementDragOver(event: PointerEvent) {
     this.draggedElementShortcut.style.cursor = "grabbing";
 
-    let { dropTargetSurveyElement, isEdge, isBottom } = this.getDragInfo(event);
+    const dragInfo = this.getDragInfo(event);
+    let dropTargetSurveyElement = dragInfo.dropTargetSurveyElement;
+    let isEdge = dragInfo.isEdge;
+    let isBottom = dragInfo.isBottom;
 
     if (!dropTargetSurveyElement) {
       this.banDropSurveyElement();
@@ -238,32 +281,45 @@ export class DragDropHelper extends Base {
     return { dropTargetSurveyElement, isEdge };
   }
 
-  private banDropSurveyElement = () => {
+  private banDropHere = () => {
     this.dropTargetSurveyElement = null;
-    this.removeGhostElementFromSurvey();
     this.draggedElementShortcut.style.cursor = "not-allowed";
+  };
+
+  private banDropSurveyElement = () => {
+    this.removeGhostElementFromSurvey();
+    this.banDropHere();
   };
 
   private getDropTargetSurveyElementFromHTMLElement(element: HTMLElement) {
     let result;
-    let elementOrPageName = element.dataset.svcDropTargetElementName;
+    let dropTargetName = element.dataset.svcDropTargetElementName;
 
-    if (elementOrPageName === DragDropHelper.ghostSurveyElementName) {
+    if (dropTargetName === DragDropHelper.ghostSurveyElementName) {
       return this.ghostSurveyElement;
     }
 
-    if (elementOrPageName === "newGhostPage") {
+    // drop to page
+    if (dropTargetName === "newGhostPage") {
       result = DragDropHelper.newGhostPage;
     } else {
-      result = this.survey.getPageByName(elementOrPageName);
+      result = this.survey.getPageByName(dropTargetName);
     }
 
+    // drop to element (question or panel)
     if (!result) {
       let element;
       this.survey.pages.forEach((page) => {
-        element = page.getElementByName(elementOrPageName);
+        element = page.getElementByName(dropTargetName);
         if (element) result = element;
       });
+    }
+
+    // drop to item-value
+    if (!result) {
+      result = this.itemValueParentQuestion.choices.filter(
+        (choice) => choice.value === dropTargetName
+      )[0];
     }
 
     return result;
@@ -432,7 +488,7 @@ export class DragDropHelper extends Base {
     this.ghostSurveyElement = null;
     this.draggedSurveyElement = null;
     this.pageOrPanel = null;
-    this.itemValueDraggedQuestion = null;
+    this.itemValueParentQuestion = null;
     this.isBottom = null;
     this.isEdge = null;
     this.scrollIntervalId = null;
@@ -452,11 +508,10 @@ export class DragDropHelper extends Base {
 
     event.dataTransfer.effectAllowed = "move";
 
-    this.itemValueDraggedQuestion = question;
+    this.itemValueParentQuestion = question;
     this.draggedSurveyElement = <any>item;
     return true;
   }
-
 
   public onDragOverItemValue(
     event: IPortableDragEvent,
@@ -477,7 +532,7 @@ export class DragDropHelper extends Base {
       return true; // ban drop here
     }
 
-    if (this.itemValueDraggedQuestion !== question) {
+    if (this.itemValueParentQuestion !== question) {
       this.dropTargetSurveyElement = null;
       return true; // ban drop here
     }
@@ -518,7 +573,7 @@ export class DragDropHelper extends Base {
     event.preventDefault();
 
     this.doDropItemValue(
-      this.itemValueDraggedQuestion,
+      this.itemValueParentQuestion,
       this.draggedSurveyElement,
       this.dropTargetSurveyElement,
       this.isBottom

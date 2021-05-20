@@ -6,7 +6,7 @@ import {
   QuestionCheckboxModel,
   QuestionSelectBase,
   surveyLocalization,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropHelper } from "../dragdrophelper";
@@ -36,12 +36,15 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   public isDraggableItem(item: ItemValue) {
-    if (this.question.noneItem === item 
-        || this.question.otherItem === item 
-        || this.question.getType() === "checkbox" &&(<QuestionCheckboxModel>this.question).selectAllItem === item) {
-          return false;
+    if (
+      this.question.noneItem === item ||
+      this.question.otherItem === item ||
+      (this.question.getType() === "checkbox" &&
+        (<QuestionCheckboxModel>this.question).selectAllItem === item)
+    ) {
+      return false;
     }
-    return true
+    return true;
   }
 
   public add(model: ItemValueWrapperViewModel) {
@@ -79,28 +82,12 @@ export class ItemValueWrapperViewModel extends Base {
     this.isNew = !model.question["isItemInList"](model.item);
   }
 
-  dragStart(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    return model.dragDropHelper.onDragStartItemValue(
-      event,
-      model.question,
-      model.item
-    );
-  }
-  dragOver(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    return model.dragDropHelper.onDragOverItemValue(
-      event,
-      model.question,
-      model.item
-    );
-  }
-  dragEnd(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    return model.dragDropHelper.onDragEnd();
-  }
-  drop(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
-    return model.dragDropHelper.onDropItemValue(event);
+  startDrag() {
+    this.dragDropHelper.startDragItemValue(this.question, this.item);
+    return true;
   }
 
-  public getItemValueGhostPosition(): string {
+  public getGhostPosition(): string {
     return this.dragDropHelper.getItemValueGhostPosition(this.item);
   }
   private get dragDropHelper(): DragDropHelper {
