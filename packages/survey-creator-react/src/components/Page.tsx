@@ -3,6 +3,7 @@ import {
   SurveyActionBar,
   SurveyElementBase,
   SurveyPage,
+  SurveyQuestion
 } from "survey-react-ui";
 import { CreatorBase, PageViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
@@ -44,8 +45,15 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     super.componentWillUnmount();
     this.model.dispose();
   }
-
-  render(): JSX.Element {
+  protected canRender(): boolean {
+    return (
+      !!this.model &&
+      this.model.isPageLive &&
+      !!this.model.page &&
+      !!this.model.page.survey
+    );
+  }
+  renderElement(): JSX.Element {
     return (
       <React.Fragment>
         <div

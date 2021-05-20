@@ -147,7 +147,15 @@ export class CreatorBase<T extends SurveyModel>
     this.viewType = "test";
   }
 
-  public plugins: { [name: string]: ICreatorPlugin } = {};
+  protected plugins: { [name: string]: ICreatorPlugin } = {};
+  public addPlugin(name: string, plugin: ICreatorPlugin) {
+    this.plugins[name] = plugin;
+  }
+  public getPlugin(name: string): ICreatorPlugin {
+    {
+      return this.plugins[name];
+    }
+  }
 
   /**
    * The event is called on deleting an element (question/panel/page) from the survey. Typically, when a user click the delete from the element menu.
@@ -709,6 +717,7 @@ export class CreatorBase<T extends SurveyModel>
     if (options.canUndo) {
       var item = this.undoRedoManager.undo();
       this.onAfterUndo.fire(self, { state: item });
+      this.selectElementAfterUndo();
     }
   }
   public redo() {
@@ -718,7 +727,23 @@ export class CreatorBase<T extends SurveyModel>
     if (options.canRedo) {
       const item = this.undoRedoManager.redo();
       this.onAfterRedo.fire(self, { state: item });
+      this.selectElementAfterUndo();
     }
+  }
+  private selectElementAfterUndo() {
+    this.selectElementAfterUndoCore(this.selectedElement);
+  }
+  private selectElementAfterUndoCore(obj: Base) {
+    if (
+      !!obj &&
+      !obj.isDisposed &&
+      !!obj.getSurvey() &&
+      (!this.isObjQuestion(obj) || !!obj["parent"])
+    ) {
+      this.selectElement(obj);
+      return;
+    }
+    this.selectElement(this.survey);
   }
   public get pagesController(): PagesController {
     return this.pagesControllerValue;
@@ -1006,9 +1031,12 @@ export class CreatorBase<T extends SurveyModel>
     sender: Survey.Base,
     arrayChanges: Survey.ArrayChanges
   ) {
-    if (this.addingObject == sender) return;
-    var prop = Survey.Serializer.findProperty(sender.getType(), name);
-    if (!prop || !prop.isSerializable || !prop.isVisible) return;
+    if (
+      this.addingObject == sender ||
+      !this.undoRedoManager ||
+      !this.undoRedoManager.isCorrectProperty(sender, name)
+    )
+      return;
     this.undoRedoManager.startTransaction(name + " changed");
     this.undoRedoManager.onPropertyValueChanged(
       name,
@@ -1244,15 +1272,17 @@ export class CreatorBase<T extends SurveyModel>
 
   protected doClickQuestionCore(
     element: IElement,
-    modifiedType: string = "ADDED_FROM_TOOLBOX"
+    modifiedType: string = "ADDED_FROM_TOOLBOX",
+    index: number = -1
   ) {
     var parent = this.currentPage;
-    var index = -1;
     var elElement = this.survey.selectedElement;
     if (elElement && elElement.parent) {
       parent = elElement.parent;
-      index = parent.elements.indexOf(this.survey.selectedElement);
-      if (index > -1) index++;
+      if (index < 0) {
+        index = parent.elements.indexOf(this.survey.selectedElement);
+        if (index > -1) index++;
+      }
     }
     parent.addElement(element, index);
     this.setModified({ type: modifiedType, question: element });
@@ -1365,7 +1395,10 @@ export class CreatorBase<T extends SurveyModel>
    */
   public fastCopyQuestion(question: Survey.Base): Survey.IElement {
     var newElement = this.copyElement(question);
-    this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
+    var index = !!question["parent"]
+      ? question["parent"].elements.indexOf(question) + 1
+      : -1;
+    this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index);
     return newElement;
   }
   /**
@@ -1409,8 +1442,6 @@ export class CreatorBase<T extends SurveyModel>
     } else {
       this.survey.pages.push(newPage);
     }
-    //TODO
-    //this.addPageToUI(newPage);
     return newPage;
   }
 
@@ -2044,7 +2075,10 @@ export class CreatorBase<T extends SurveyModel>
         id: "duplicate",
         title: this.getLocString("survey.duplicate"),
         action: () => {
-          this.selectElement(this.fastCopyQuestion(element));
+          var newElement = this.isObjPage(element)
+            ? this.copyPage(element)
+            : this.fastCopyQuestion(element);
+          this.selectElement(newElement);
         }
       });
     }

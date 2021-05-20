@@ -147,7 +147,7 @@ export var propertyGridCss = {
     materialDecorator: "spg-checkbox__rectangle",
   },
   text: {
-    root: "spg-input",
+    root: "spg-input spg-text",
     small: "spg-row__question--small",
     onError: "spg-input--error",
   },

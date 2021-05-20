@@ -268,7 +268,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
       },
       active: () => creator.viewType === "logic"
     });
-    creator.plugins["logic"] = this;
+    creator.addPlugin("logic", this);
   }
   public activate(): void {
     this.model.activate();

@@ -135,7 +135,7 @@ class DesignTimeSurveyModel extends Model {
   }
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
     if(!this.isDesignMode) {
-      return SurveyModel.TEMPLATE_RENDERER_COMPONENT_NAME;
+      return SurveyModel.TemplateRendererComponentName;
     }
     if(question.getType() === "imagepicker") {
       return "svc-image-item-value";

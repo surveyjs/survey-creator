@@ -4,7 +4,7 @@ import { getLocString } from "../../editorLocalization";
 import { SurveyTextWorker } from "../../textWorker";
 import {
   JsonEditorBaseModel,
-  TabJsonEditorBasePlugin,
+  TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
 import "./json-editor-ace.scss";
 
@@ -45,7 +45,8 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       self.onTextChanged();
     });
     this.aceEditor.getSession().setUseWorker(true);
-    SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
+    SurveyTextWorker.newLineChar =
+      this.aceEditor.session.doc.getNewLineCharacter();
   }
   private updateUndoRedoState(): void {
     const undoManager: AceAjax.UndoManager = this.aceEditor
@@ -70,7 +71,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
         row: error.position.start.row,
         column: error.position.start.column,
         text: error.text,
-        type: "error",
+        type: "error"
       };
       annotations.push(annotation);
     }
@@ -88,7 +89,8 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
 
 export class TabJsonEditorAcePlugin
   extends TabJsonEditorBasePlugin<AceJsonEditorModel>
-  implements ICreatorPlugin {
+  implements ICreatorPlugin
+{
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
     this.model = new AceJsonEditorModel(creator);
@@ -102,7 +104,7 @@ export class TabJsonEditorAcePlugin
       },
       active: () => creator.viewType === "editor"
     });
-    creator.plugins["editor"] = this;
+    creator.addPlugin("editor", this);
   }
   public static hasAceEditor(): boolean {
     return typeof ace !== "undefined";
