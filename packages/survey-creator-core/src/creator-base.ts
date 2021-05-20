@@ -1272,15 +1272,17 @@ export class CreatorBase<T extends SurveyModel>
 
   protected doClickQuestionCore(
     element: IElement,
-    modifiedType: string = "ADDED_FROM_TOOLBOX"
+    modifiedType: string = "ADDED_FROM_TOOLBOX",
+    index: number = -1
   ) {
     var parent = this.currentPage;
-    var index = -1;
     var elElement = this.survey.selectedElement;
     if (elElement && elElement.parent) {
       parent = elElement.parent;
-      index = parent.elements.indexOf(this.survey.selectedElement);
-      if (index > -1) index++;
+      if (index < 0) {
+        index = parent.elements.indexOf(this.survey.selectedElement);
+        if (index > -1) index++;
+      }
     }
     parent.addElement(element, index);
     this.setModified({ type: modifiedType, question: element });
@@ -1393,7 +1395,10 @@ export class CreatorBase<T extends SurveyModel>
    */
   public fastCopyQuestion(question: Survey.Base): Survey.IElement {
     var newElement = this.copyElement(question);
-    this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
+    var index = !!question["parent"]
+      ? question["parent"].elements.indexOf(question) + 1
+      : -1;
+    this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index);
     return newElement;
   }
   /**
@@ -1437,8 +1442,6 @@ export class CreatorBase<T extends SurveyModel>
     } else {
       this.survey.pages.push(newPage);
     }
-    //TODO
-    //this.addPageToUI(newPage);
     return newPage;
   }
 
@@ -2072,7 +2075,10 @@ export class CreatorBase<T extends SurveyModel>
         id: "duplicate",
         title: this.getLocString("survey.duplicate"),
         action: () => {
-          this.selectElement(this.fastCopyQuestion(element));
+          var newElement = this.isObjPage(element)
+            ? this.copyPage(element)
+            : this.fastCopyQuestion(element);
+          this.selectElement(newElement);
         }
       });
     }
