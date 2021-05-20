@@ -30,8 +30,14 @@ export class CreatorTester extends CreatorBase<SurveyModel> {
     return this.selectedElement.getType();
   }
   public getActionBarItem(id: string): IActionBarItem {
-    for (var i = 0; i < this.toolbarItems.length; i++) {
-      if (this.toolbarItems[i].id == id) return this.toolbarItems[i];
+    return this.getActionBarItemByActions(this.toolbarItems, id);
+  }
+  public getActionBarItemByActions(
+    actions: Array<IActionBarItem>,
+    id: string
+  ): IActionBarItem {
+    for (var i = 0; i < actions.length; i++) {
+      if (actions[i].id == id) return actions[i];
     }
     return null;
   }
@@ -466,4 +472,50 @@ test("undo/redo make sure that the deleting element is not active", (): any => {
   expect(creator.selectedElementName).toEqual("page2");
   creator.undo();
   expect(creator.selectedElementName).toEqual("survey");
+});
+
+test("fast copy tests, copy a question and check the index", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text", name: "question2" },
+      { type: "text", name: "question3" }
+    ]
+  };
+  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
+  expect(creator.survey.pages[0].questions).toHaveLength(4);
+  expect(creator.survey.getQuestionByName("question4")).toBeTruthy();
+  expect(creator.survey.getQuestionByName("question4").visibleIndex).toEqual(1);
+});
+test("Page duplicate action, copy a page and check the index", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "question1" },
+          { type: "text", name: "question2" },
+          { type: "text", name: "question3" }
+        ]
+      },
+      {
+        elements: [{ type: "text", name: "question4" }]
+      }
+    ]
+  };
+  expect(creator.survey.pages).toHaveLength(2);
+  var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  var action = creator.getActionBarItemByActions(
+    pageModel.actions,
+    "duplicate"
+  );
+  expect(action).toBeTruthy();
+  action.action();
+  expect(creator.survey.pages).toHaveLength(3);
+  expect(creator.selectedElementName).toEqual("page3");
+  expect(creator.survey.pages[1].name).toEqual("page3");
+  expect(creator.survey.pages[1].elements).toHaveLength(3);
+  expect(creator.survey.pages[1].elements[0].name).toEqual("question5");
+  expect(creator.survey.pages[1].elements[2].name).toEqual("question7");
 });
