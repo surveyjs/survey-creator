@@ -112,13 +112,23 @@ test("dropdown property editor", () => {
   titleLocationQuestion.value = "bottom";
   expect(question.titleLocation).toEqual("bottom"); //"property editor change the question property"
 });
-test("dropdown property editor localization", () => {
+test("dropdown property editor localization", (): any => {
   var survey = new SurveyModel();
   var propertyGrid = new PropertyGridModelTester(survey);
+  var questionDescriptionLocationQuestion =
+    propertyGrid.survey.getQuestionByName("questionDescriptionLocation");
+  expect(questionDescriptionLocationQuestion.getType()).toEqual("buttongroup"); //"correct property editor is created" //since choices.length < 5 buttongroup rendered instead of dropdown
+  expect(questionDescriptionLocationQuestion.choices[0].value).toEqual(
+    "underInput"
+  );
+  expect(questionDescriptionLocationQuestion.choices[0].text).toEqual(
+    "under input"
+  );
+
   var showPreviewQuestion = propertyGrid.survey.getQuestionByName(
     "showPreviewBeforeComplete"
   );
-  expect(showPreviewQuestion.getType()).toEqual("buttongroup"); //"correct property editor is created" //since choices.length < 5 buttongroup rendered instead of dropdown
+  expect(showPreviewQuestion.getType()).toEqual("dropdown"); //"correct property editor is created" a lot of text
   expect(showPreviewQuestion.choices[0].value).toEqual("noPreview");
   expect(showPreviewQuestion.choices[0].text).toEqual("no preview");
 
@@ -127,6 +137,7 @@ test("dropdown property editor localization", () => {
   expect(localeQuestion.showOptionsCaption).toBeTruthy();
   expect(localeQuestion.optionsCaption).toEqual("Default (english)");
 });
+
 test("dropdown property editor, get choices on callback", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;
