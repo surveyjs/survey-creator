@@ -124,18 +124,42 @@ export class DragDropHelper extends Base {
   private moveShortcutElement(event: PointerEvent) {
     this.doScroll(event.clientY, event.clientX);
 
-    let shortcutXCenter = this.draggedElementShortcut.offsetWidth / 2;
-    let shortcutYCenter = this.draggedElementShortcut.offsetHeight / 2;
+    let shortcutHeight = this.draggedElementShortcut.offsetHeight;
+    let shortcutWidth = this.draggedElementShortcut.offsetWidth;
+    let shortcutXCenter = shortcutWidth / 2;
+    let shortcutYCenter = shortcutHeight / 2;
+
+    if (event.pageX + shortcutXCenter >= document.documentElement.clientWidth) {
+      this.draggedElementShortcut.style.left =
+        document.documentElement.clientWidth - shortcutWidth + "px";
+      this.draggedElementShortcut.style.top =
+        event.clientY - shortcutYCenter + "px";
+      return;
+    }
+    if (event.pageX - shortcutXCenter <= 0) {
+      this.draggedElementShortcut.style.left = 0 + "px";
+      this.draggedElementShortcut.style.top =
+        event.clientY - shortcutYCenter + "px";
+      return;
+    }
 
     if (
-      this.isShortcutElementMoveOutOfDocument(
-        event.pageX,
-        event.pageY,
-        shortcutXCenter,
-        shortcutYCenter
-      )
-    )
+      event.pageY + shortcutYCenter >=
+      document.documentElement.clientHeight
+    ) {
+      this.draggedElementShortcut.style.left =
+        event.clientX - shortcutXCenter + "px";
+      this.draggedElementShortcut.style.top =
+        document.documentElement.clientHeight - shortcutHeight + "px";
       return;
+    }
+
+    if (event.pageY - shortcutYCenter <= 0) {
+      this.draggedElementShortcut.style.left =
+        event.clientX - shortcutXCenter + "px";
+      this.draggedElementShortcut.style.top = 0 + "px";
+      return;
+    }
 
     this.draggedElementShortcut.style.left =
       event.clientX - shortcutXCenter + "px";
@@ -451,22 +475,6 @@ export class DragDropHelper extends Base {
     }
     element.renderWidth = "100%";
     return element;
-  }
-
-  private isShortcutElementMoveOutOfDocument(
-    pageX,
-    pageY,
-    shortcutXCenter,
-    shortCutYCenter
-  ) {
-    if (pageX + shortcutXCenter >= document.documentElement.clientWidth)
-      return true;
-    if (pageY + shortCutYCenter >= document.documentElement.clientHeight)
-      return true;
-    if (pageX - shortcutXCenter <= 0) return true;
-    if (pageY - shortCutYCenter <= 0) return true;
-
-    return false;
   }
 
   private drop = () => {
