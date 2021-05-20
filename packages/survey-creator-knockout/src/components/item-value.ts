@@ -5,35 +5,36 @@ import {
   SurveyTemplateRendererViewModel,
   SurveyModel
 } from "survey-core";
-import {
-  CreatorBase,
-  ItemValueWrapperViewModel,
-} from "@survey/creator";
+import { CreatorBase, ItemValueWrapperViewModel } from "@survey/creator";
 import { ImplementorBase } from "survey-knockout-ui";
 import { KnockoutDragEvent } from "../events";
 
 const template = require("./item-value.html");
 
-class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel { 
-  constructor( public creator: CreatorBase<SurveyModel>, public question: QuestionSelectBase, public item: ItemValue, public templateData:any) {
+class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
+  constructor(
+    public creator: CreatorBase<SurveyModel>,
+    public question: QuestionSelectBase,
+    public item: ItemValue,
+    public templateData: any
+  ) {
     super(creator, question, item);
   }
 
-  get showDragDropGhostOnTop():boolean {return super.getGhostPosition() === "top"};
-  get showDragDropGhostOnBottom():boolean {return super.getGhostPosition() === "bottom"}
-
-  koDragStart(model: ItemValueWrapperViewModel, event: DragEvent) {
-    return super.dragStart(model, this.wrapDragEvent(event));
+  get showDragDropGhostOnTop(): boolean {
+    return super.getGhostPosition() === "top";
   }
-
-  private wrapDragEvent(event: DragEvent): KnockoutDragEvent {
-    return new KnockoutDragEvent(event);
+  get showDragDropGhostOnBottom(): boolean {
+    return super.getGhostPosition() === "bottom";
   }
 }
 
 ko.components.register("svc-item-value", {
   viewModel: {
-    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
+    createViewModel: (
+      params: SurveyTemplateRendererViewModel,
+      componentInfo: any
+    ) => {
       const creator = params.componentData.creator;
       const question = params.componentData.question;
       const item = params.templateData.data;
@@ -46,7 +47,7 @@ ko.components.register("svc-item-value", {
       );
       new ImplementorBase(model);
       return model;
-    },
+    }
   },
-  template: template,
+  template: template
 });

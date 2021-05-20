@@ -52,7 +52,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
             <div className={"svc-question__drag-area"}>
                 <div
                   className={"svc-question__drag-element"}
-                  onPointerDown={(e) => this.model.startDragElement()}
+                  onPointerDown={(event) => this.model.startDragSurveyElement(event)()}
                 ></div>
             </div>
             {this.renderPanelPlaceholder()}

@@ -47,29 +47,44 @@ export class DragDropHelper extends Base {
     super();
   }
 
-  public startDragToolboxItem(draggedElementJson: JsonObject) {
+  public startDragToolboxItem(
+    event: PointerEvent,
+    draggedElementJson: JsonObject
+  ) {
     const draggedElement = this.createElementFromJson(draggedElementJson);
-    this.startDragElement(draggedElement);
+    this.startDragSurveyElement(event, draggedElement);
   }
 
-  public startDragElement(draggedElement: IElement) {
-    this.startDrag(draggedElement);
+  public startDragSurveyElement(event: PointerEvent, draggedElement: IElement) {
+    this.startDrag(event, draggedElement);
   }
 
-  public startDragItemValue(question: QuestionSelectBase, item: ItemValue) {
+  public startDragItemValue(
+    event: PointerEvent,
+    question: QuestionSelectBase,
+    item: ItemValue
+  ) {
     const draggedElement = <any>item;
     this.itemValueParentQuestion = question;
-    this.startDrag(draggedElement);
+    this.startDrag(event, draggedElement);
   }
 
-  public startDrag(draggedElement: IElement) {
+  public startDrag(event: PointerEvent, draggedElement: IElement) {
     this.draggedSurveyElement = draggedElement;
     this.ghostSurveyElement = this.createGhostSurveyElement();
     this.draggedElementShortcut = this.createDraggedElementShortcut();
 
     document.body.append(this.draggedElementShortcut);
+    this.moveShortcutElement(event);
+
     document.addEventListener("pointermove", this.moveDraggedElement);
     this.draggedElementShortcut.addEventListener("pointerup", this.drop);
+  }
+
+  public getItemValueGhostPosition(item) {
+    if (this.dropTargetSurveyElement !== item) return null;
+    if (this.isBottom) return "bottom";
+    return "top";
   }
 
   private createGhostSurveyElement(): any {
@@ -131,6 +146,8 @@ export class DragDropHelper extends Base {
   private doScroll(clientY, clientX) {
     clearInterval(this.scrollIntervalId);
     const startScrollBoundary = 50;
+
+    // need to import getScrollableParent method
     // let scrollableParentElement = getScrollableParent(dropZoneElement)
     //   .parentNode;
     let scrollableParentElement = document.querySelector(
@@ -205,7 +222,6 @@ export class DragDropHelper extends Base {
 
     if (!dropTargetSurveyElement) {
       this.banDropSurveyElement();
-      // console.log("2");
       return;
     }
 
@@ -323,13 +339,6 @@ export class DragDropHelper extends Base {
     }
 
     return result;
-  }
-
-  private checkHTMLElementIsGhost(element) {
-    return (
-      element.dataset.svcDropTargetElementName ===
-      DragDropHelper.ghostSurveyElementName
-    );
   }
 
   private calculateMiddleOfHTMLElement(HTMLElement) {
@@ -461,13 +470,36 @@ export class DragDropHelper extends Base {
   }
 
   private drop = () => {
+    if (this.draggedSurveyElement.getType() === "itemvalue") {
+      this.doDropItemValue();
+    } else {
+      this.doDropSurveyElement();
+    }
+    this.clear();
+  };
+
+  private doDropSurveyElement() {
     if (this.dropTargetSurveyElement) {
       // console.log("drop on: " + this.draggedOverElement["title"]);
       this.insertRealElementIntoSurvey();
     }
+  }
 
-    this.clear();
-  };
+  private doDropItemValue() {
+    const isTop = !this.isBottom;
+    const choices = this.itemValueParentQuestion.choices;
+    const oldIndex = choices.indexOf(this.draggedSurveyElement);
+    let newIndex = choices.indexOf(this.dropTargetSurveyElement);
+
+    if (oldIndex < newIndex && isTop) {
+      newIndex--;
+    } else if (oldIndex > newIndex && this.isBottom) {
+      newIndex++;
+    }
+
+    choices.splice(oldIndex, 1);
+    choices.splice(newIndex, 0, this.draggedSurveyElement);
+  }
 
   private clear = () => {
     clearInterval(this.scrollIntervalId);
@@ -493,112 +525,4 @@ export class DragDropHelper extends Base {
     this.isEdge = null;
     this.scrollIntervalId = null;
   };
-
-  //TODO =====================================
-
-  public onDragStartItemValue(
-    event: IPortableDragEvent,
-    question: QuestionSelectBase,
-    item: ItemValue
-  ) {
-    event.stopPropagation();
-
-    // shouldn't allow drag start on adorners (selectall, none, other)
-    if (question.choices.indexOf(item) === -1) return false;
-
-    event.dataTransfer.effectAllowed = "move";
-
-    this.itemValueParentQuestion = question;
-    this.draggedSurveyElement = <any>item;
-    return true;
-  }
-
-  public onDragOverItemValue(
-    event: IPortableDragEvent,
-    question: QuestionSelectBase,
-    item: any
-  ) {
-    if (this.draggedElementType !== "itemvalue") {
-      return true; // ban drop here
-    }
-
-    // shouldn't allow drag over on adorners (selectall, none, other)
-    if (question.choices.indexOf(item) === -1) return true;
-
-    event.stopPropagation();
-
-    if (item === this.draggedSurveyElement) {
-      this.dropTargetSurveyElement = null;
-      return true; // ban drop here
-    }
-
-    if (this.itemValueParentQuestion !== question) {
-      this.dropTargetSurveyElement = null;
-      return true; // ban drop here
-    }
-
-    event.preventDefault(); // alow drop here without return;
-
-    this.dropTargetSurveyElement = item;
-
-    const bottomInfo = this.isAtLowerPartOfCurrentTarget(event);
-    this.isEdge = bottomInfo.isEdge;
-    this.isBottom = bottomInfo.isBottom;
-  }
-
-  public getItemValueGhostPosition(item) {
-    if (this.dropTargetSurveyElement !== item) return null;
-    if (this.isBottom) return "bottom";
-    return "top";
-  }
-  private isAtLowerPartOfCurrentTarget(event): any {
-    const target = event.currentTarget;
-    if (!target["getBoundingClientRect"]) {
-      return true;
-    }
-    const bounds: DOMRect = (<any>target).getBoundingClientRect();
-    const middle = (bounds.bottom + bounds.top) / 2;
-    75;
-
-    return {
-      isBottom: event.clientY >= middle,
-      isEdge:
-        event.clientY - bounds.bottom <= DragDropHelper.edgeHeight ||
-        bounds.top - event.clientY <= DragDropHelper.edgeHeight
-    };
-  }
-
-  public onDropItemValue(event: IPortableDragEvent) {
-    event.stopPropagation();
-    event.preventDefault();
-
-    this.doDropItemValue(
-      this.itemValueParentQuestion,
-      this.draggedSurveyElement,
-      this.dropTargetSurveyElement,
-      this.isBottom
-    );
-
-    return true;
-  }
-  private doDropItemValue(
-    itemValuedraggedQuestion,
-    draggedElement,
-    draggedOverElement,
-    isBottom
-  ) {
-    const isTop = !isBottom;
-    const choices = itemValuedraggedQuestion.choices;
-    const oldIndex = choices.indexOf(draggedElement);
-    let newIndex = choices.indexOf(draggedOverElement);
-
-    if (oldIndex < newIndex && isTop) {
-      newIndex--;
-    } else if (oldIndex > newIndex && isBottom) {
-      newIndex++;
-    }
-
-    choices.splice(oldIndex, 1);
-    choices.splice(newIndex, 0, draggedElement);
-  }
 }

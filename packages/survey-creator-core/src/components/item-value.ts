@@ -82,8 +82,8 @@ export class ItemValueWrapperViewModel extends Base {
     this.isNew = !model.question["isItemInList"](model.item);
   }
 
-  startDrag() {
-    this.dragDropHelper.startDragItemValue(this.question, this.item);
+  startDragItemValue(event: PointerEvent) {
+    this.dragDropHelper.startDragItemValue(event, this.question, this.item);
     return true;
   }
 

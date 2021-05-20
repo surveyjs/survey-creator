@@ -75,8 +75,8 @@ export class QuestionAdornerViewModel extends Base {
     return this.creator.dragDropHelper;
   }
 
-  startDragElement() {
-    this.dragDropHelper.startDragElement(<any>this.surveyElement);
+  startDragSurveyElement(event: PointerEvent) {
+    this.dragDropHelper.startDragSurveyElement(event, <any>this.surveyElement);
     return true;
   }
 }

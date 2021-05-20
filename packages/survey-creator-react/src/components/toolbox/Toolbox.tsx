@@ -151,9 +151,9 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
         role="button"
         aria-label={this.item.tooltip + " " + getLocString("toolbox") + " item"}
         onClick={() => this.props.creator.clickToolboxItem(toolboxItem.json)}
-        onPointerDown={(e)=>{
+        onPointerDown={(event)=>{
           var json = this.props.creator.getJSONForNewElement(toolboxItem.json);
-          this.props.creator.dragDropHelper.startDragToolboxItem(json);
+          this.props.creator.dragDropHelper.startDragToolboxItem(event, json);
           return true;
         }}
       >

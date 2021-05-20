@@ -5,35 +5,37 @@ import {
   SurveyTemplateRendererViewModel,
   SurveyModel
 } from "survey-core";
-import {
-  CreatorBase,
-  ImageItemValueWrapperViewModel
-} from "@survey/creator";
+import { CreatorBase, ImageItemValueWrapperViewModel } from "@survey/creator";
 import { ImplementorBase } from "survey-knockout-ui";
 import { KnockoutDragEvent } from "../events";
 
 const template = require("./image-item-value.html");
 
-class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewModel { 
-  constructor(creator: CreatorBase<SurveyModel>, public question: QuestionSelectBase, public item: ImageItemValue, public templateData: any, itemsRoot: HTMLElement) {
+class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewModel {
+  constructor(
+    creator: CreatorBase<SurveyModel>,
+    public question: QuestionSelectBase,
+    public item: ImageItemValue,
+    public templateData: any,
+    itemsRoot: HTMLElement
+  ) {
     super(creator, question, item, templateData, itemsRoot);
   }
 
-  get showDragDropGhostOnTop():boolean {return super.getGhostPosition() === "top"};
-  get showDragDropGhostOnBottom():boolean {return super.getGhostPosition() === "bottom"}
-
-  koDragStart(model: ImageItemValueWrapperViewModel, event: DragEvent) {
-    return super.dragStart(model, this.wrapDragEvent(event));
+  get showDragDropGhostOnTop(): boolean {
+    return super.getGhostPosition() === "top";
   }
-
-  private wrapDragEvent(event: DragEvent): KnockoutDragEvent {
-    return new KnockoutDragEvent(event);
+  get showDragDropGhostOnBottom(): boolean {
+    return super.getGhostPosition() === "bottom";
   }
 }
 
 ko.components.register("svc-image-item-value", {
   viewModel: {
-    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
+    createViewModel: (
+      params: SurveyTemplateRendererViewModel,
+      componentInfo: any
+    ) => {
       const creator = params.componentData.creator;
       const question = params.componentData.question;
       const item = params.templateData.data;
