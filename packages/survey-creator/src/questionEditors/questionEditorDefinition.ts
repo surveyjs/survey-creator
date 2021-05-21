@@ -122,6 +122,7 @@ export class SurveyQuestionEditorDefinition {
         "totalText",
         { name: "rowsVisibleIf", tab: "logic" },
         { name: "rowTitleWidth", tab: "layout" },
+        { name: "keyDuplicationError", tab: "validation" },
       ],
     },
     matrix: {
