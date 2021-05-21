@@ -41,15 +41,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   public isDraggableItem(item: ItemValue) {
-    if (
-      this.question.noneItem === item ||
-      this.question.otherItem === item ||
-      (this.question.getType() === "checkbox" &&
-        (<QuestionCheckboxModel>this.question).selectAllItem === item)
-    ) {
-      return false;
-    }
-    return true;
+    return this.question.choices.indexOf(item) !== -1;
   }
 
   public add(model: ItemValueWrapperViewModel) {
@@ -106,7 +98,6 @@ export class ItemValueWrapperViewModel extends Base {
   startDragItemValue(event: PointerEvent) {
     this.dragDropHelper.startDragItemValue(event, this.question, this.item);
   }
-
   private get dragDropHelper(): DragDropHelper {
     return this.creator.dragDropHelper;
   }

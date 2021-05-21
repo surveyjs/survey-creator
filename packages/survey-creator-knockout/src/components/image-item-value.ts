@@ -28,6 +28,11 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
   get showDragDropGhostOnBottom(): boolean {
     return this.ghostPosition === "bottom";
   }
+  get attributes() {
+    return this.isDraggable
+      ? { "data-svc-drop-target-element-name": this.item.value }
+      : null;
+  }
 }
 
 ko.components.register("svc-image-item-value", {

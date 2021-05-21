@@ -1,6 +1,6 @@
 <div
   class="svc-image-item-value-wrapper"
-  data-bind="attr: { 'data-svc-drop-target-element-name': item.value }, event: {pointerdown: (model, event)=>{startDragItemValue(event)}}, css: { 'svc-image-item-value--new': isNew }"
+  data-bind="attr: attributes, event: {pointerdown: (model, event)=>{startDragItemValue(event)}}, css: { 'svc-image-item-value--new': isNew }"
 >
   <input
     type="file"
