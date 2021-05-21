@@ -1061,10 +1061,9 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     var choices = prop.getChoices(obj);
 
     var json: any = {
-      type:
-        this.canRenderAsButtonGroup && choices.length < 5 && choices.length > 0
-          ? "buttongroup"
-          : "dropdown",
+      type: this.renderAsButtonGroup(prop, choices)
+        ? "buttongroup"
+        : "dropdown",
       showOptionsCaption: false
     };
     var emptyValueItem: ItemValue = this.getEmptyJsonItemValue(prop, choices);
@@ -1076,6 +1075,26 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   }
   protected get canRenderAsButtonGroup(): boolean {
     return true;
+  }
+  protected renderAsButtonGroup(
+    prop: JsonObjectProperty,
+    choices: Array<any>
+  ): boolean {
+    if (
+      !this.canRenderAsButtonGroup ||
+      choices.length == 0 ||
+      choices.length > 4
+    )
+      return false;
+    var charCount = 0;
+    for (var i = 0; i < choices.length; i++) {
+      var text = this.getLocalizedText(
+        prop,
+        !!choices[i].value ? choices[i].value : choices[i]
+      );
+      charCount += !!text ? text.length : 0;
+    }
+    return charCount < 25; //TODO
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
