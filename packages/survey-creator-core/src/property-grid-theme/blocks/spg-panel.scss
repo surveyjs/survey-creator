@@ -17,31 +17,25 @@
   font-weight: 400;
   margin: 0;
 }
-
-//todo: implement state in survey-library
 .spg-panel__title:disabled,
 .spg-panel__title:disabled:hover {
   background-color: $background;
   color: $foreground-disabled;
   cursor: default;
 }
-
 .spg-panel__title--expandable:hover {
   background-color: $background-dim;
   color: $foreground-light;
   font-weight: 400;
 }
-
-//todo: implement state in survey-library
 .spg-panel__title--expanded,
 .spg-panel__title--expanded:hover {
   color: $foreground;
   font-weight: 600;
   background-color: $background;
 }
-
 .spg-panel__content {
-  //display: flex !important; todo: panels in react are not collapsed with this style
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
@@ -50,7 +44,6 @@
   background: $background-dim;
   box-shadow: inset 0px -1px 0px #d6d6d6;
 }
-
 .spg-panel__content {
   .spg-row {
     width: 100%;

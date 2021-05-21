@@ -16,8 +16,9 @@
   .spg-panel__content {
     box-shadow: none;
   }
+  background: $background-dim;
 }
-.spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
+.spg-table__cell:not(.spg-table__cell--detail-panel) .spg-text {
   appearance: none;
   line-height: 24px;
   font-size: 16px;

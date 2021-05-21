@@ -3,7 +3,7 @@ import {
   SurveyModel,
   FunctionFactory,
   Version,
-  property,
+  property
 } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
@@ -105,9 +105,9 @@ export class TabEmbedPlugin implements ICreatorPlugin {
       action: () => {
         creator.makeNewViewActive("embed");
       },
-      active: () => creator.viewType === "embed",
+      active: () => creator.viewType === "embed"
     });
-    creator.plugins["embed"] = this;
+    creator.addPlugin("embed", this);
   }
   public activate(): void {
     this.model.init(this.creator);
