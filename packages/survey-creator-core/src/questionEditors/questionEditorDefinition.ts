@@ -269,7 +269,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     matrixdropdowncolumn: {
-      properties: ["isRequired", "cellType", "name", "title"]
+      properties: ["isRequired", "name", "title"]
     },
     "matrixdropdowncolumn@default": {
       properties: [
