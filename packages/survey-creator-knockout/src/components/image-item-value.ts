@@ -23,10 +23,10 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
   }
 
   get showDragDropGhostOnTop(): boolean {
-    return super.getGhostPosition() === "top";
+    return this.ghostPosition === "top";
   }
   get showDragDropGhostOnBottom(): boolean {
-    return super.getGhostPosition() === "bottom";
+    return this.ghostPosition === "bottom";
   }
 }
 

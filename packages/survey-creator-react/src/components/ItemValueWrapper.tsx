@@ -33,9 +33,8 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
   }
 
   private getDragDropGhost(topOrBottom: string) {
-    if (this.model.getGhostPosition() === topOrBottom)
+    if (this.model.ghostPosition === topOrBottom)
       return <div className="svc-drag-drop-ghost"></div>;
-
     return null;
   }
 
