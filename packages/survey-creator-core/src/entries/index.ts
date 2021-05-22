@@ -13,6 +13,7 @@ export * from "../components/tabs/logic-ui";
 export * from "../components/tabs/translation";
 export * from "../components/tabs/designer";
 
+export * from "../components/toolbox/toolbox-item";
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page";
 export * from "../components/question";
