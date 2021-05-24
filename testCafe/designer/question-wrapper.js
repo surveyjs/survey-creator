@@ -34,7 +34,7 @@ test('Single input question wrapper actions', async (t) => {
     await t.expect(deleteActionButton.visible).ok();
 });
 
-test('Single input question wrapper action convert', async (t) => {
+test.skip('Single input question wrapper action convert', async (t) => {
     await t.expect(Selector('.svc-question__content').exists).notOk();
 
     await t.click(Selector(`div[title='Single Input']`));
