@@ -111,14 +111,16 @@ export class TestSurveyTabViewModel extends Base {
       .map((key) => ({ id: key, title: simulatorDevices[key].title }));
     const devicePopupModel = new PopupModel(
       "sv-list",
-      new ListModel(
-        deviceSelectorItems,
-        (item: any) => {
-          this.device = item.id;
-          devicePopupModel.toggleVisibility();
-        },
-        true
-      ),
+      {
+        model: new ListModel(
+          deviceSelectorItems,
+          (item: any) => {
+            this.device = item.id;
+            devicePopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
       "top",
       "right"
     );
@@ -155,13 +157,14 @@ export class TestSurveyTabViewModel extends Base {
 
     this.pagePopupModel = new PopupModel(
       "sv-list",
-      new ListModel(
-        this.pages,
-        (item: IActionBarItem) => {
-          this.activePage = item.data;
-          this.pagePopupModel.toggleVisibility();
-        },
-        true /*,
+      {
+        model: new ListModel(
+          this.pages,
+          (item: IActionBarItem) => {
+            this.activePage = item.data;
+            this.pagePopupModel.toggleVisibility();
+          },
+          true /*,
         ko.computed({
           read: () =>
             pageSelectorItems().filter(
@@ -169,7 +172,8 @@ export class TestSurveyTabViewModel extends Base {
             )[0],
           write: (val) => {},
         })*/
-      ),
+        )
+      },
       "top",
       "center"
     );
@@ -315,7 +319,7 @@ export class TestSurveyTabViewModel extends Base {
     }
     this.showInvisibleElements = false;
     this.pages = pages;
-    (<ListModel>this.pagePopupModel.contentComponentData).items = pages;
+    (<ListModel>this.pagePopupModel.contentComponentData.model).items = pages;
     this.activePage = this.survey.currentPage;
     this.activeLanguage =
       this.survey.locale || surveyLocalization.defaultLocale;

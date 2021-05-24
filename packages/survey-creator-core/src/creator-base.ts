@@ -2040,7 +2040,7 @@ export class CreatorBase<T extends SurveyModel>
         }
         const popupModel = new PopupModel(
           "sv-list",
-          new ListModel(
+          { model: new ListModel(
             availableTypes.map((type) => ({
               title: type.name,
               id: type.value
@@ -2049,7 +2049,7 @@ export class CreatorBase<T extends SurveyModel>
               this.selectElement(this.convertCurrentObject(element, item.id));
             },
             false
-          ),
+          )},
           "bottom",
           "right"
         );
