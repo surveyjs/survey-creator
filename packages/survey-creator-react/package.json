@@ -24,6 +24,7 @@
     "release": "standard-version --message \"Release: %s [skip ci]\"",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
     "watch:dev": "webpack --env.buildType dev --watch",
+    "watch:prod": "webpack --env.buildType prod --watch",
     "-prestorybook": "npm run test:generate-output",
     "storybook": "start-storybook -p 9000"
   },

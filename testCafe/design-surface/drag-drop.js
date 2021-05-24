@@ -1,4 +1,10 @@
-import { url, getPages, getQuestions, setJSON } from "../helper";
+import {
+    url,
+    getPagesLength,
+    getQuestionsLength,
+    setJSON,
+    getQuestionNameByIndex
+} from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop Survey Element";
 
@@ -19,11 +25,11 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
     await t.hover(RatingToolboxItem);
     await t.dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
 
-    const pages = await getPages();
-    const questions = await getQuestions();
+    const pagesLength = await getPagesLength();
+    const questionsLength = await getQuestionsLength();
 
-    await t.expect(pages.length).eql(2);
-    await t.expect(questions.length).eql(2);
+    await t.expect(pagesLength).eql(2);
+    await t.expect(questionsLength).eql(2);
 });
 
 test("Drag Drop Question", async (t) => {
@@ -63,11 +69,7 @@ test("Drag Drop Question", async (t) => {
         offsetY: 8
     });
 
-    const getQuestionName = ClientFunction((index) => {
-        return creator.survey.getAllQuestions()[index].name;
-    });
-
-    let name = await getQuestionName(0);
+    let name = await getQuestionNameByIndex(0);
     await t.expect(name).eql(questionName);
 
     await t.hover(Rating2, { speed: 0.5 });
@@ -77,7 +79,7 @@ test("Drag Drop Question", async (t) => {
         offsetY: 5
     });
 
-    name = await getQuestionName(2);
+    name = await getQuestionNameByIndex(2);
     await t.expect(name).eql(questionName);
 });
 
