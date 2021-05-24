@@ -3,6 +3,7 @@ import {
     getPagesLength,
     getQuestionsLength,
     setJSON,
+    getJSON,
     getQuestionNameByIndex
 } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
@@ -83,7 +84,82 @@ test("Drag Drop Question", async (t) => {
     await t.expect(name).eql(questionName);
 });
 
-// test("Drag Drop to Panel", async (t) => {});
+test("Drag Drop to Panel", async (t) => {
+    const json = {
+        pages: [
+            {
+                name: "page1",
+                elements: [
+                    {
+                        type: "panel",
+                        name: "panel1"
+                    }
+                ]
+            }
+        ]
+    };
+    await setJSON(json);
+
+    const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+
+    await t.hover(RatingToolboxItem, { speed: 0.5 });
+    await t.drag(RatingToolboxItem, 200, 60, {
+        offsetX: 10,
+        offsetY: 10,
+        speed: 0.5
+    });
+
+    await t.hover(RatingToolboxItem, { speed: 0.5 });
+    await t.drag(RatingToolboxItem, 400, -40, {
+        offsetX: 10,
+        offsetY: 10,
+        speed: 0.5
+    });
+
+    await t.hover(RatingToolboxItem, { speed: 0.5 });
+    await t.drag(RatingToolboxItem, 261, 222, {
+        offsetX: 14,
+        offsetY: 16,
+        speed: 0.5
+    });
+
+    await t.hover(RatingToolboxItem, { speed: 0.5 });
+    await t.drag(RatingToolboxItem, 330, 200, {
+        offsetX: 10,
+        offsetY: 10,
+        speed: 0.5
+    });
+
+    await t.hover(RatingToolboxItem, { speed: 0.5 });
+    await t.drag(RatingToolboxItem, 300, 470, {
+        offsetX: 10,
+        offsetY: 10,
+        speed: 0.5
+    });
+
+    const expectedJson = {
+        pages: [
+            {
+                name: "page1",
+                elements: [
+                    { type: "rating", name: "question2" },
+                    {
+                        type: "panel",
+                        name: "panel1",
+                        elements: [
+                            { type: "rating", name: "question4" },
+                            { type: "rating", name: "question3" },
+                            { type: "rating", name: "question5" }
+                        ]
+                    },
+                    { type: "rating", name: "question1" }
+                ]
+            }
+        ]
+    };
+    const resultJson = await getJSON();
+    await t.expect(resultJson).eql(expectedJson);
+});
 
 // test("Drag Drop ItemValue (choices)", async (t) => {});
 

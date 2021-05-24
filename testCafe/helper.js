@@ -11,7 +11,11 @@ export const getQuestionsLength = ClientFunction(() => {
 });
 
 export const setJSON = ClientFunction((json) => {
-    return (creator.text = JSON.stringify(json));
+    creator.text = JSON.stringify(json);
+});
+
+export const getJSON = ClientFunction(() => {
+    return JSON.parse(creator.text);
 });
 
 export const getQuestionNameByIndex = ClientFunction((index) => {
