@@ -3,17 +3,20 @@ import { IQuestionToolboxItem } from "../../toolbox";
 import { CreatorBase } from "../../creator-base";
 
 export class ToolboxItemViewModel extends Base {
-  constructor(protected item: IQuestionToolboxItem, protected creator: CreatorBase<SurveyModel>) {
+  constructor(
+    protected item: IQuestionToolboxItem,
+    protected creator: CreatorBase<SurveyModel>
+  ) {
     super();
   }
 
-  
   // correct handle click vs drag
   private clickWasDone = false;
-  private onPointerDownEvent;
-  public onPointerDown(event) {
-    this.onPointerDownEvent = event;
-    const toolboxItemHTMLElement = <HTMLElement>this.onPointerDownEvent.target;
+  private pointerDownEvent;
+  public onPointerDown(pointerDownEvent) {
+    pointerDownEvent.preventDefault();
+    this.pointerDownEvent = pointerDownEvent;
+    const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
     toolboxItemHTMLElement.addEventListener("pointerup", this.click);
     setTimeout(() => {
       document.addEventListener("pointermove", this.startDragToolboxItem);
@@ -24,19 +27,23 @@ export class ToolboxItemViewModel extends Base {
     this.creator.clickToolboxItem(this.item.json);
     this.clickWasDone = true;
   };
-  private startDragToolboxItem = () => {
+  private startDragToolboxItem = (pointerMoveEvent) => {
+    pointerMoveEvent.preventDefault();
+
     this.clearListeners();
     if (this.clickWasDone) {
       this.clickWasDone = false;
       return;
     }
-    const event = this.onPointerDownEvent;
     var json = this.creator.getJSONForNewElement(this.item.json);
-    this.creator.dragDropHelper.startDragToolboxItem(event, json);
+    this.creator.dragDropHelper.startDragToolboxItem(
+      this.pointerDownEvent,
+      json
+    );
     return true;
   };
   private clearListeners() {
-    const toolboxItemHTMLElement = <HTMLElement>this.onPointerDownEvent.target;
+    const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
     document.removeEventListener("pointermove", this.startDragToolboxItem);
     toolboxItemHTMLElement.removeEventListener("pointerup", this.click);
   }
