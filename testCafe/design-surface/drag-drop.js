@@ -1,5 +1,5 @@
 import { url, getPages, getQuestions, setJSON } from "../helper";
-import { Selector } from "testcafe";
+import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop Survey Element";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -14,10 +14,10 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
     );
 
     await t.hover(RatingToolboxItem);
-    await t.dragToElement(RatingToolboxItem, EmptyPage);
+    await t.dragToElement(RatingToolboxItem, EmptyPage, { speed: 0.5 });
 
     await t.hover(RatingToolboxItem);
-    await t.dragToElement(RatingToolboxItem, newGhostPagePage);
+    await t.dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
 
     const pages = await getPages();
     const questions = await getQuestions();
@@ -50,20 +50,35 @@ test("Drag Drop Question", async (t) => {
     };
     await setJSON(json);
 
-    const Rating1 = Selector("[data-svc-drop-target-element-name='rating1']");
-    const Rating2 = Selector("[data-svc-drop-target-element-name='rating2']");
-    const Rating3 = Selector("[data-svc-drop-target-element-name='rating3']");
+    const questionName = "rating2";
+    const Rating2 = Selector(
+        `[data-svc-drop-target-element-name=${questionName}]`
+    );
     const DragZoneRating2 = Rating2.find(".svc-question__drag-element");
 
-    await t.hover(Rating2);
+    await t.hover(Rating2, { speed: 0.5 });
     await t.hover(DragZoneRating2);
-
-    await t.drag(DragZoneRating2, 0, -350, {
+    await t.drag(DragZoneRating2, 0, -150, {
         offsetX: 7,
         offsetY: 8
     });
 
-    // await t.debug();
+    const getQuestionName = ClientFunction((index) => {
+        return creator.survey.getAllQuestions()[index].name;
+    });
+
+    let name = await getQuestionName(0);
+    await t.expect(name).eql(questionName);
+
+    await t.hover(Rating2, { speed: 0.5 });
+    await t.hover(DragZoneRating2, { speed: 0.5 });
+    await t.drag(DragZoneRating2, 0, 516, {
+        offsetX: 10,
+        offsetY: 5
+    });
+
+    name = await getQuestionName(2);
+    await t.expect(name).eql(questionName);
 });
 
 // test("Drag Drop to Panel", async (t) => {});
