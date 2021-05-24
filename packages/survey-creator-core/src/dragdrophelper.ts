@@ -9,7 +9,6 @@ import {
   QuestionSelectBase
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
-import { IPortableDragEvent } from "./utils/events";
 
 export class DragDropHelper extends Base {
   public static edgeHeight: number = 30;
@@ -37,10 +36,6 @@ export class DragDropHelper extends Base {
 
   private get survey(): SurveyModel {
     return this.creator.survey;
-  }
-
-  private get draggedElementType() {
-    return this.draggedSurveyElement.getType();
   }
 
   constructor(private creator: CreatorBase<SurveyModel>) {
