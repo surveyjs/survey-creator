@@ -105,30 +105,40 @@ class DesignTimeSurveyModel extends Model {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
-  public getElementWrapperComponentName(element: SurveyElement): string {
-    if (element.isDesignMode && !element["parentQuestionValue"]) {
-      if (element instanceof Question) {
-        if (element.getType() == "dropdown") {
-          return "svc-dropdown-question";
-        }
-        if (element.getType() == "image") {
-          return "svc-image-question";
-        }
-        return "svc-question";
+  public getElementWrapperComponentName(element: SurveyElement, reason?: string): string {
+    if (this.isDesignMode) {
+      if(reason === "column-header" || reason === "row-header") {
+        return "svc-matrix-cell";
       }
-      if (element instanceof PanelModel) {
-        return "svc-question";
+      if(!element["parentQuestionValue"]) {
+        if (element instanceof Question) {
+          if (element.getType() == "dropdown") {
+            return "svc-dropdown-question";
+          }
+          if (element.getType() == "image") {
+            return "svc-image-question";
+          }
+          return "svc-question";
+        }
+        if (element instanceof PanelModel) {
+          return "svc-question";
+        }
       }
     }
     return super.getElementWrapperComponentName(element);
   }
-  public getElementWrapperComponentData(element: SurveyElement): any {
-    if (element.isDesignMode && !element["parentQuestionValue"]) {
-      if (element instanceof Question) {
-        return this.creator;
+  public getElementWrapperComponentData(element: SurveyElement, reason?: string): any {
+    if (this.isDesignMode) {
+      if(reason === "column-header" || reason === "row-header") {
+        return { creator: this.creator, element: element };
       }
-      if (element instanceof PanelModel) {
-        return this.creator;
+      if(!element["parentQuestionValue"]) {
+        if (element instanceof Question) {
+          return this.creator;
+        }
+        if (element instanceof PanelModel) {
+          return this.creator;
+        }
       }
     }
     return super.getElementWrapperComponentData(element);

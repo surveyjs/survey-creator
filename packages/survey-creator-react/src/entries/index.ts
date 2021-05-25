@@ -8,6 +8,7 @@ export * from "../components/QuestionDropdown";
 export * from "../components/QuestionImage";
 export * from "../components/ItemValueWrapper";
 export * from "../components/ImageItemValueWrapper";
+export * from "../components/MatrixCellWrapper";
 export * from "../components/tabs/Designer";
 export * from "../components/tabs/Embed";
 export * from "../components/tabs/JsonEditorAce";
