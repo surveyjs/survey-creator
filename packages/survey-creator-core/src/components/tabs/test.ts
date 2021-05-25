@@ -10,7 +10,7 @@ import {
   propertyArray,
   property,
   PageModel,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -36,7 +36,7 @@ export class TestSurveyTabViewModel extends Base {
       if (!!val) {
         target.simulator.device = val;
       }
-    },
+    }
   })
   device: string;
   @property({
@@ -44,7 +44,7 @@ export class TestSurveyTabViewModel extends Base {
       if (!!val) {
         target.simulator.survey = val;
       }
-    },
+    }
   })
   survey: SurveyModel;
   @propertyArray() pages: Array<IActionBarItem>;
@@ -56,7 +56,7 @@ export class TestSurveyTabViewModel extends Base {
         }
         target.survey.currentPage = val;
       }
-    },
+    }
   })
   activePage: PageModel;
   @propertyArray() languages: Array<IActionBarItem>;
@@ -65,7 +65,7 @@ export class TestSurveyTabViewModel extends Base {
     onSet: (val: string, target: TestSurveyTabViewModel) => {
       if (target.survey.locale == val) return;
       target.survey.locale = val;
-    },
+    }
   })
   activeLanguage: string;
 
@@ -73,7 +73,7 @@ export class TestSurveyTabViewModel extends Base {
     defaultValue: false,
     onSet: (val: boolean, target: TestSurveyTabViewModel) => {
       target.survey.showInvisibleElements = val;
-    },
+    }
   })
   showInvisibleElements;
   @property({ defaultValue: true }) showPagesInTestSurveyTab;
@@ -111,14 +111,16 @@ export class TestSurveyTabViewModel extends Base {
       .map((key) => ({ id: key, title: simulatorDevices[key].title }));
     const devicePopupModel = new PopupModel(
       "sv-list",
-      new ListModel(
-        deviceSelectorItems,
-        (item: any) => {
-          this.device = item.id;
-          devicePopupModel.toggleVisibility();
-        },
-        true
-      ),
+      {
+        model: new ListModel(
+          deviceSelectorItems,
+          (item: any) => {
+            this.device = item.id;
+            devicePopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
       "top",
       "right"
     );
@@ -136,7 +138,7 @@ export class TestSurveyTabViewModel extends Base {
       action: () => {
         devicePopupModel.toggleVisibility();
       },
-      popupModel: devicePopupModel,
+      popupModel: devicePopupModel
     });
     actions.push({
       id: "prevPage",
@@ -150,18 +152,19 @@ export class TestSurveyTabViewModel extends Base {
       title: "",
       action: () => {
         this.activePage = this.survey.pages[this.survey.currentPageNo - 1];
-      },
+      }
     });
 
     this.pagePopupModel = new PopupModel(
       "sv-list",
-      new ListModel(
-        this.pages,
-        (item: IActionBarItem) => {
-          this.activePage = item.data;
-          this.pagePopupModel.toggleVisibility();
-        },
-        true /*,
+      {
+        model: new ListModel(
+          this.pages,
+          (item: IActionBarItem) => {
+            this.activePage = item.data;
+            this.pagePopupModel.toggleVisibility();
+          },
+          true /*,
         ko.computed({
           read: () =>
             pageSelectorItems().filter(
@@ -169,7 +172,8 @@ export class TestSurveyTabViewModel extends Base {
             )[0],
           write: (val) => {},
         })*/
-      ),
+        )
+      },
       "top",
       "center"
     );
@@ -191,7 +195,7 @@ export class TestSurveyTabViewModel extends Base {
       popupModel: this.pagePopupModel,
       action: (newPage) => {
         this.pagePopupModel.toggleVisibility();
-      },
+      }
     });
     actions.push({
       id: "nextPage",
@@ -205,7 +209,7 @@ export class TestSurveyTabViewModel extends Base {
       title: "",
       action: () => {
         this.activePage = this.survey.pages[this.survey.currentPageNo + 1];
-      },
+      }
     });
     actions.push({
       id: "showInvisivle",
@@ -221,7 +225,7 @@ export class TestSurveyTabViewModel extends Base {
         }
         return "icon-switchinactive_16x16";
       },
-      action: () => (this.showInvisibleElements = !this.showInvisibleElements),
+      action: () => (this.showInvisibleElements = !this.showInvisibleElements)
     });
     actions.push({
       id: "testSurveyAgain",
@@ -230,7 +234,7 @@ export class TestSurveyTabViewModel extends Base {
       title: this.testSurveyAgainText,
       action: () => {
         this.testAgain();
-      },
+      }
     });
 
     this.actions = actions;
@@ -294,7 +298,7 @@ export class TestSurveyTabViewModel extends Base {
         visible: page.isVisible,
         enabled: page.isVisible,
         active: () =>
-          this.survey.state == "running" && page === this.survey.currentPage,
+          this.survey.state == "running" && page === this.survey.currentPage
       });
     }
     if (!!options && options.showSimulatorInTestSurveyTab != undefined) {
@@ -315,7 +319,7 @@ export class TestSurveyTabViewModel extends Base {
     }
     this.showInvisibleElements = false;
     this.pages = pages;
-    (<ListModel>this.pagePopupModel.contentComponentData).items = pages;
+    (<ListModel>this.pagePopupModel.contentComponentData.model).items = pages;
     this.activePage = this.survey.currentPage;
     this.activeLanguage =
       this.survey.locale || surveyLocalization.defaultLocale;
@@ -390,9 +394,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       active: () => creator.viewType === "test",
       action: () => {
         creator.makeNewViewActive("test");
-      },
+      }
     });
-    creator.plugins["test"] = this;
+    creator.addPlugin("test", this);
   }
   public activate(): void {
     this.model.onSurveyCreatedCallback = (survey) => {
@@ -401,11 +405,11 @@ export class TabTestPlugin implements ICreatorPlugin {
     };
     var options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
-      showDefaultLanguageInTestSurveyTab: this.creator
-        .showDefaultLanguageInTestSurveyTab,
-      showInvisibleElementsInTestSurveyTab: this.creator
-        .showInvisibleElementsInTestSurveyTab,
-      showSimulatorInTestSurveyTab: this.creator.showSimulatorInTestSurveyTab,
+      showDefaultLanguageInTestSurveyTab:
+        this.creator.showDefaultLanguageInTestSurveyTab,
+      showInvisibleElementsInTestSurveyTab:
+        this.creator.showInvisibleElementsInTestSurveyTab,
+      showSimulatorInTestSurveyTab: this.creator.showSimulatorInTestSurveyTab
     };
     this.model.setJSON(this.creator.JSON);
     this.model.show(options);
@@ -413,5 +417,19 @@ export class TabTestPlugin implements ICreatorPlugin {
   public deactivate(): boolean {
     this.model.onSurveyCreatedCallback = undefined;
     return true;
+  }
+  public createActions(items: Array<IActionBarItem>) {
+    items.push({
+      id: "icon-preview",
+      iconName: "icon-preview",
+      needSeparator: true,
+      css: () =>
+        this.creator.viewType === "test" ? "sv-action-bar-item--secondary" : "",
+      action: () => {
+        this.creator.makeNewViewActive("test");
+      },
+      active: false,
+      title: "Preview"
+    });
   }
 }

@@ -72,17 +72,24 @@ export var editorLocalization = {
     if (obj !== strName) return obj;
     return this.getAutoPropertyName(obj, defaultName);
   },
+  convertToCamelCase(value: string, toLowCase: boolean = false): string {
+    if (!value) return value;
+    var res = value[0].toUpperCase();
+    for (var i = 1; i < value.length; i++) {
+      if (value[i] === value[i].toUpperCase()) {
+        res += " ";
+      }
+      res += value[i].toLowerCase();
+    }
+    if (toLowCase) {
+      res = res.toLowerCase();
+    }
+    return res;
+  },
   getAutoPropertyName: function (propName: string, defaultName: string = null) {
     if (!!defaultName) return defaultName;
     if (!propName || !this.camelCaseBreaking) return propName;
-    var res = propName[0].toUpperCase();
-    for (var i = 1; i < propName.length; i++) {
-      if (propName[i] === propName[i].toUpperCase()) {
-        res += " ";
-      }
-      res += propName[i].toLowerCase();
-    }
-    return res;
+    return this.convertToCamelCase(propName);
   },
   getPropertyValue: function (value: any, locale: string = null) {
     return this.getValueInternal(value, "pv", locale);
@@ -105,7 +112,10 @@ export var editorLocalization = {
     var loc = this.getLocale(locale);
     var res = loc[prefix] ? loc[prefix][value] : null;
     if (!res) res = defaultStrings[prefix][value];
-    return res ? res : value;
+    if (!!res) return res;
+    return this.camelCaseBreaking
+      ? this.convertToCamelCase(value, true)
+      : value;
   },
   getLocales: function (): Array<string> {
     var res = [];
@@ -114,7 +124,7 @@ export var editorLocalization = {
       res.push(key);
     }
     return res;
-  },
+  }
 };
 
 export function getLocString(strName: string, locale: string = null) {

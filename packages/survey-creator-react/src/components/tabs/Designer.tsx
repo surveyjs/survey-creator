@@ -1,15 +1,24 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
+import {
+  ReactElementFactory,
+  Survey,
+  SurveyNavigationBlock,
+  SurveyElementBase
+} from "survey-react-ui";
+import {
+  CreatorBase,
+  TabDesignerViewModel,
+  TabDesignerPlugin
+} from "@survey/creator";
 import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 import PropertyGridComponent from "../../PropertyGrid";
+import { values } from "lodash";
 
 interface ITabDesignerComponentProps {
-  creator: CreatorBase<SurveyModel>;
-  survey: SurveyModel;
+  data: TabDesignerViewModel<SurveyModel>;
 }
 
 export class TabDesignerComponent extends SurveyElementBase<
@@ -19,24 +28,24 @@ export class TabDesignerComponent extends SurveyElementBase<
   private model: TabDesignerViewModel<SurveyModel>;
   constructor(props: ITabDesignerComponentProps) {
     super(props);
-    this.model = new TabDesignerViewModel<SurveyModel>(props.creator);
+    this.model = props.data;
   }
 
   protected getStateElement(): Base {
-    return this.props.survey;
+    return this.model;
   }
 
   render(): JSX.Element {
     return (
       <ReactDragDropHelperComponent
-        creator={this.props.creator}
+        creator={this.props.data.creator}
         renderContent={() => this.renderContent()}
       ></ReactDragDropHelperComponent>
     );
   }
   renderContent(): JSX.Element {
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
-    const survey: SurveyModel = this.props.survey;
+    const creator: CreatorBase<SurveyModel> = this.model.creator;
+    const survey: SurveyModel = creator.survey;
     const className = "svc-tab-designer " + survey.css.root;
 
     const surveyPages = survey.pages.map((page, index) => {
@@ -50,7 +59,7 @@ export class TabDesignerComponent extends SurveyElementBase<
       );
     });
 
-    if (this.model.showNewPage) {
+    if (!!this.model.newPage) {
       surveyPages.push(
         <CreatorSurveyPageComponent
           key={this.model.newPage.id}
@@ -70,7 +79,18 @@ export class TabDesignerComponent extends SurveyElementBase<
           items={creator.toolbox.items}
         ></SurveyCreatorToolbox>
         <div className={className}>
-          <div className={survey.css.container}>{surveyPages}</div>
+          <div className={survey.css.container}>
+            <DesignerSurveyNavigationBlock
+              survey={creator.survey}
+              location="top"
+            />{" "}
+            {surveyPages}
+            <DesignerSurveyNavigationBlock
+              survey={creator.survey}
+              location="bottom"
+              css={creator.survey.css}
+            />
+          </div>
         </div>
         <SurveyPageNavigator
           creator={creator}
@@ -81,28 +101,53 @@ export class TabDesignerComponent extends SurveyElementBase<
         </div>
       </>
     );
-    /*
-        <svc-toolbox
-        params="categories: creator.toolboxCategories, creator: creator"
-        ></svc-toolbox>
-        <div class="svc-tab-designer" data-bind="css: survey.css.root">
-            <div data-bind="css: survey.css.container">
-                <!-- ko foreach: survey.pages -->
-                <svc-page
-                params="survey: $parent.survey, page: $data, creator: $parent.creator"
-                ></svc-page>
-                <!-- /ko -->
-                <!-- ko if: showNewPage -->
-                <svc-page
-                params="survey: survey, creator: creator, page: newPage"
-                ></svc-page>
-                <!-- /ko -->
-            </div>
-        </div>
-        <svc-page-navigator
-        params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"
-        ></svc-page-navigator>
-       */
+  }
+}
+
+export class DesignerSurveyNavigationBlock extends React.Component<any, any> {
+  constructor(props: ITabDesignerComponentProps) {
+    super(props);
+    if (this.survey) {
+      this.survey.onPropertyChanged.add(this.onPropChangedHandler);
+    }
+  }
+  private onPropChangedHandler = (sender: any, options: any): any => {
+    if (options.name !== "showProgressBar") return;
+    this.setState((state: any, props: any) => {
+      var val = {
+        show: this.canShow
+      };
+      return val;
+    });
+  };
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    if (this.survey) {
+      this.survey.onPropertyChanged.remove(this.onPropChangedHandler);
+    }
+  }
+
+  protected get survey(): SurveyModel {
+    return this.props.survey;
+  }
+  protected get location(): string {
+    return this.props.location;
+  }
+  protected get isTop(): boolean {
+    return this.location == "top";
+  }
+  protected get canShow(): boolean {
+    return this.isTop
+      ? this.survey.isShowProgressBarOnTop
+      : this.survey.isShowProgressBarOnBottom;
+  }
+  render(): JSX.Element {
+    return this.canShow
+      ? ReactElementFactory.Instance.createElement(
+          "sv-progress-" + this.survey.progressBarType.toLowerCase(),
+          { survey: this.survey, css: this.survey.css, isTop: this.isTop }
+        )
+      : null;
   }
 }
 

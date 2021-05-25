@@ -470,7 +470,7 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
     return true;
   }
   protected getDefaulColumnNames(): Array<string> {
-    return ["cellType", "name", "title"];
+    return ["name", "title"];
   }
   protected getKeyValue(): string {
     return "name";

@@ -744,18 +744,20 @@ export class Translation extends Base implements ITranslationLocales {
   private setupToolbarItems() {
     this.chooseLanguagePopupModel = new PopupModel(
       "sv-list",
-      new ListModel(
-        this.getSurveyLocales()[0].map((locale: ItemValue) => ({
-          id: locale.value,
-          title: locale.text,
-          data: locale
-        })),
-        (item: IActionBarItem) => {
-          this.addLocale(item.id);
-          this.chooseLanguagePopupModel.toggleVisibility();
-        },
-        false
-      ),
+      {
+        model: new ListModel(
+          this.getSurveyLocales()[0].map((locale: ItemValue) => ({
+            id: locale.value,
+            title: locale.text,
+            data: locale
+          })),
+          (item: IActionBarItem) => {
+            this.addLocale(item.id);
+            this.chooseLanguagePopupModel.toggleVisibility();
+          },
+          false
+        )
+      },
       "top",
       "right"
     );
@@ -773,25 +775,27 @@ export class Translation extends Base implements ITranslationLocales {
 
     this.pagePopupModel = new PopupModel(
       "sv-list",
-      new ListModel(
-        [{ id: null, title: this.showAllPagesText }].concat(
-          this.survey.pages.map((page) => ({
-            id: page.name,
-            title: this.options.getObjectDisplayName(
-              page,
-              "survey-translation",
-              page.title
-            )
-          }))
-        ),
-        (item: IActionBarItem) => {
-          this.filteredPage = !!item.id
-            ? this.survey.getPageByName(item.id)
-            : null;
-          this.pagePopupModel.toggleVisibility();
-        },
-        true
-      ),
+      {
+        model: new ListModel(
+          [{ id: null, title: this.showAllPagesText }].concat(
+            this.survey.pages.map((page) => ({
+              id: page.name,
+              title: this.options.getObjectDisplayName(
+                page,
+                "survey-translation",
+                page.title
+              )
+            }))
+          ),
+          (item: IActionBarItem) => {
+            this.filteredPage = !!item.id
+              ? this.survey.getPageByName(item.id)
+              : null;
+            this.pagePopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
       "top",
       "center"
     );
@@ -1131,7 +1135,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       },
       active: () => creator.viewType === "translation"
     });
-    creator.plugins["translation"] = this;
+    creator.addPlugin("translation", this);
   }
   public activate(): void {
     this.model.activate();
