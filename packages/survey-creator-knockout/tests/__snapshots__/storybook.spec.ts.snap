@@ -362,6 +362,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               <!-- /ko -->
               
     
+              <!-- ko if: survey.isShowProgressBarOnTop -->
+              <!-- /ko -->
+              
+    
               <!-- ko foreach: survey.pages -->
               
     
@@ -420,6 +424,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               
     
               <!-- ko if: showNewPage -->
+              <!-- /ko -->
+              
+    
+              <!-- ko if: survey.isShowProgressBarOnBottom -->
               <!-- /ko -->
               
   
@@ -676,18 +684,27 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
 
   <div
-    class="svc-tab-designer sd-root-modern"
+    class="svc-tab-designer"
     data-bind="css: survey.css.root"
   >
     
   
     <div
-      class="sd-container-modern"
       data-bind="css: survey.css.container"
     >
       
     
       <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: { name: 'survey-header', data: survey } } } -->
+      
+    
+      <!-- /ko -->
+      
+    
+      <!-- ko if: survey.isShowProgressBarOnTop -->
+      
+    
+      <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+      <!-- /ko -->
       
     
       <!-- /ko -->
@@ -710,6 +727,16 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       <svc-page
         params="survey: survey, creator: creator, page: newPage"
       />
+      
+    
+      <!-- /ko -->
+      
+    
+      <!-- ko if: survey.isShowProgressBarOnBottom -->
+      
+    
+      <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+      <!-- /ko -->
       
     
       <!-- /ko -->
