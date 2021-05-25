@@ -34,24 +34,18 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
 
   render(): JSX.Element {
-    return this.renderContent();
-    return (
-      <ReactDragDropHelperComponent
-        creator={this.props.data.creator}
-        renderContent={() => this.renderContent()}
-      ></ReactDragDropHelperComponent>
-    );
-  }
-  renderContent(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.model.creator;
     const survey: SurveyModel = creator.survey;
     const className = "svc-tab-designer " + survey.css.root;
 
     const surveyPages = survey.pages.map((page, index) => {
       return (
-        <div className={"svc-page"} data-svc-drop-target-element-name={page.name} >
+        <div
+          className={"svc-page"}
+          data-svc-drop-target-element-name={page.name}
+          key={page.id}
+        >
           <CreatorSurveyPageComponent
-            key={page.id}
             survey={survey}
             page={page}
             creator={creator}
@@ -62,9 +56,12 @@ export class TabDesignerComponent extends SurveyElementBase<
 
     if (!!this.model.newPage) {
       surveyPages.push(
-        <div className={"svc-page"} data-svc-drop-target-element-name={"newGhostPage"} >
+        <div
+          className={"svc-page"}
+          data-svc-drop-target-element-name={"newGhostPage"}
+          key={this.model.newPage.id}
+        >
           <CreatorSurveyPageComponent
-            key={this.model.newPage.id}
             survey={survey}
             page={this.model.newPage}
             creator={creator}
@@ -75,7 +72,7 @@ export class TabDesignerComponent extends SurveyElementBase<
 
     const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
-      <>
+      <React.Fragment>
         <SurveyCreatorToolbox
           categories={creator.toolboxCategories}
           creator={creator}
@@ -91,30 +88,8 @@ export class TabDesignerComponent extends SurveyElementBase<
         <div className="svc-flex-column" style={style}>
           <PropertyGridComponent model={creator}></PropertyGridComponent>
         </div>
-      </>
+      </React.Fragment>
     );
-  }
-}
-
-interface ReactDragDropHelperComponentProps {
-  creator: CreatorBase<SurveyModel>;
-  renderContent: () => JSX.Element;
-}
-
-class ReactDragDropHelperComponent extends SurveyElementBase<
-  ReactDragDropHelperComponentProps,
-  any
-> {
-  constructor(props: ReactDragDropHelperComponentProps) {
-    super(props);
-  }
-
-  protected getStateElement(): Base {
-    return this.props.creator.dragDropHelper;
-  }
-
-  render(): JSX.Element {
-    return this.props.renderContent();
   }
 }
 

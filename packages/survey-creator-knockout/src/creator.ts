@@ -1,6 +1,20 @@
 import * as ko from "knockout";
-import { Base, ItemValue, property, Question, QuestionSelectBase, SurveyElement, SurveyModel } from "survey-core";
-import { Survey, ImplementorBase, Panel, QuestionRow } from "survey-knockout-ui";
+import {
+  Base,
+  ItemValue,
+  property,
+  Question,
+  QuestionRowModel,
+  QuestionSelectBase,
+  SurveyElement,
+  SurveyModel
+} from "survey-core";
+import {
+  Survey,
+  ImplementorBase,
+  Panel,
+  QuestionRow
+} from "survey-knockout-ui";
 import { ICreatorOptions, CreatorBase } from "@survey/creator";
 import { editableStringRendererName } from "./components/string-editor";
 
@@ -11,6 +25,15 @@ if (!!ko.options) {
 class DesignTimeSurveyModel extends Survey {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
+  }
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
+  }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
+    return {
+      creator: this.creator,
+      row
+    };
   }
   public getElementWrapperComponentName(element: SurveyElement): string {
     if (element.isDesignMode) {
@@ -49,17 +72,23 @@ class DesignTimeSurveyModel extends Survey {
     return super.getElementWrapperComponentData(element);
   }
 
-  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if(!this.isDesignMode) {
+  public getItemValueWrapperComponentName(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): string {
+    if (!this.isDesignMode) {
       return SurveyModel.TemplateRendererComponentName;
     }
-    if(question.getType() === "imagepicker") {
+    if (question.getType() === "imagepicker") {
       return "svc-image-item-value";
     }
     return "svc-item-value";
   }
-  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    if(!this.isDesignMode) {
+  public getItemValueWrapperComponentData(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): any {
+    if (!this.isDesignMode) {
       return item;
     }
     return {

@@ -11,7 +11,8 @@ import {
   SurveyModel,
   SurveyElement,
   ItemValue,
-  QuestionSelectBase
+  QuestionSelectBase,
+  QuestionRowModel
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -105,6 +106,15 @@ class DesignTimeSurveyModel extends Model {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
+  }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
+    return {
+      creator: this.creator,
+      row
+    };
+  }
   public getElementWrapperComponentName(element: SurveyElement): string {
     if (element.isDesignMode) {
       if (element instanceof Question) {
@@ -133,17 +143,23 @@ class DesignTimeSurveyModel extends Model {
     }
     return super.getElementWrapperComponentData(element);
   }
-  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if(!this.isDesignMode) {
+  public getItemValueWrapperComponentName(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): string {
+    if (!this.isDesignMode) {
       return SurveyModel.TemplateRendererComponentName;
     }
-    if(question.getType() === "imagepicker") {
+    if (question.getType() === "imagepicker") {
       return "svc-image-item-value";
     }
     return "svc-item-value";
   }
-  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    if(!this.isDesignMode) {
+  public getItemValueWrapperComponentData(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): any {
+    if (!this.isDesignMode) {
       return item;
     }
     return {
@@ -172,7 +188,7 @@ class SurveyCreator extends CreatorBase<SurveyModel> {
       {
         question: question,
         isDisplayMode: question.isReadOnly,
-        creator: this,
+        creator: this
       }
     );
   }
