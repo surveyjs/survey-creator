@@ -9,7 +9,7 @@ import {
   propertyArray,
   ActionBarItem,
   SurveyModel,
-  property,
+  property
 } from "survey-core";
 
 import "./page-navigator.scss";
@@ -54,7 +54,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
       },
       true
     );
-    this.popupModel = new PopupModel("sv-list", this.pageListModel);
+    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel });
     this.popupModel.onShow = () => {
       this.pageListModel.selectedItem = this.getActionBarByPage(
         this.pagesController.currentPage
@@ -104,7 +104,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
       id: page.id,
       title: this.pagesController
         ? this.pagesController.getDisplayName(page)
-        : page.title,
+        : page.title
     };
     item.active = page === this.pagesController.currentPage;
     item.action = () => {

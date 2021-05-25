@@ -3,6 +3,7 @@ import { Base, SurveyModel } from "survey-core";
 import {
   ReactElementFactory,
   Survey,
+  SurveyNavigationBlock,
   SurveyElementBase
 } from "survey-react-ui";
 import {
@@ -14,6 +15,7 @@ import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 import PropertyGridComponent from "../../PropertyGrid";
+import { values } from "lodash";
 
 interface ITabDesignerComponentProps {
   data: TabDesignerViewModel<SurveyModel>;
@@ -79,7 +81,18 @@ export class TabDesignerComponent extends SurveyElementBase<
           items={creator.toolbox.items}
         ></SurveyCreatorToolbox>
         <div className={className}>
-          <div className={survey.css.container}>{surveyPages}</div>
+          <div className={survey.css.container}>
+            <DesignerSurveyNavigationBlock
+              survey={creator.survey}
+              location="top"
+            />{" "}
+            {surveyPages}
+            <DesignerSurveyNavigationBlock
+              survey={creator.survey}
+              location="bottom"
+              css={creator.survey.css}
+            />
+          </div>
         </div>
         <SurveyPageNavigator
           creator={creator}
@@ -90,6 +103,74 @@ export class TabDesignerComponent extends SurveyElementBase<
         </div>
       </React.Fragment>
     );
+  }
+}
+export class DesignerSurveyNavigationBlock extends React.Component<any, any> {
+  constructor(props: ITabDesignerComponentProps) {
+    super(props);
+    if (this.survey) {
+      this.survey.onPropertyChanged.add(this.onPropChangedHandler);
+    }
+  }
+  private onPropChangedHandler = (sender: any, options: any): any => {
+    if (options.name !== "showProgressBar") return;
+    this.setState((state: any, props: any) => {
+      var val = {
+        show: this.canShow
+      };
+      return val;
+    });
+  };
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    if (this.survey) {
+      this.survey.onPropertyChanged.remove(this.onPropChangedHandler);
+    }
+  }
+
+  protected get survey(): SurveyModel {
+    return this.props.survey;
+  }
+  protected get location(): string {
+    return this.props.location;
+  }
+  protected get isTop(): boolean {
+    return this.location == "top";
+  }
+  protected get canShow(): boolean {
+    return this.isTop
+      ? this.survey.isShowProgressBarOnTop
+      : this.survey.isShowProgressBarOnBottom;
+  }
+  render(): JSX.Element {
+    return this.canShow
+      ? ReactElementFactory.Instance.createElement(
+          "sv-progress-" + this.survey.progressBarType.toLowerCase(),
+          { survey: this.survey, css: this.survey.css, isTop: this.isTop }
+        )
+      : null;
+  }
+}
+
+interface ReactDragDropHelperComponentProps {
+  creator: CreatorBase<SurveyModel>;
+  renderContent: () => JSX.Element;
+}
+
+class ReactDragDropHelperComponent extends SurveyElementBase<
+  ReactDragDropHelperComponentProps,
+  any
+> {
+  constructor(props: ReactDragDropHelperComponentProps) {
+    super(props);
+  }
+
+  protected getStateElement(): Base {
+    return this.props.creator.dragDropHelper;
+  }
+
+  render(): JSX.Element {
+    return this.props.renderContent();
   }
 }
 

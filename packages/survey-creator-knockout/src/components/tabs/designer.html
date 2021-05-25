@@ -5,6 +5,9 @@
   <div data-bind="css: survey.css.container">
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: { name: 'survey-header', data: survey } } } -->
     <!-- /ko -->
+    <!-- ko if: survey.isShowProgressBarOnTop -->
+    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } --><!-- /ko -->
+    <!-- /ko -->
     <!-- ko foreach: survey.pages -->
     <svc-page
       data-bind="attr: { 'data-svc-drop-target-element-name': $data.name }"
@@ -16,6 +19,9 @@
       data-bind="attr: { 'data-svc-drop-target-element-name': 'newGhostPage' }"
       params="survey: survey, creator: creator, page: newPage"
     ></svc-page>
+    <!-- /ko -->
+    <!-- ko if: survey.isShowProgressBarOnBottom -->
+    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } --><!-- /ko -->
     <!-- /ko -->
   </div>
 </div>
