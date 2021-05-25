@@ -1,24 +1,31 @@
 .sd-item {
   padding: 12px 0;
 }
+.sd-item__control.sd-item__control:disabled + .sd-item__decorator,
 .sd-item__decorator {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: calcSize(3);
   height: calcSize(3);
   box-sizing: border-box;
-  border: 2px solid transparent;
   box-shadow: inset 0px 1px 2px $border-inside;
   background: $background-for-editors;
+  border: none;
   svg {
     display: none;
   }
 }
 .sd-item--checked .sd-item__decorator,
-.sd-item--alowhover:hover {
-  border-color: $green;
+.sd-item--allowhover:hover .sd-item__decorator {
+  border: 2px $green solid;
+  box-shadow: none;
+}
+.sd-item--allowhover:hover .sd-item__decorator {
+  background: $background;
 }
 .sd-item--checked .sd-item__decorator {
-  background-color: $green;
+  background: $green;
 }
 .sd-item__control-label {
   font-family: Open Sans;

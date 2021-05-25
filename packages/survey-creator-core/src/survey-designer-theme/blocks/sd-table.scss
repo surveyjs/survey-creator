@@ -1,43 +1,16 @@
 .sd-table {
   width: 100%;
   background-color: $background;
-  border: 1px solid $border;
   border-collapse: collapse;
 }
 .sd-table tr:not(:last-child) {
-  box-shadow: 0px 1px 0px #d6d6d6;
+  padding-bottom: calcSize(2);
 }
 .sd-table__cell {
-  padding: 4px 0;
-}
-
-.sd-table__cell--detail-panel {
-  padding: 0;
-  .sd-panel__content {
-    box-shadow: none;
-  }
-  background: $background-dim;
-}
-.sd-table__cell:not(.sd-table__cell--detail-panel) .sd-text {
-  appearance: none;
-  line-height: 24px;
-  font-size: 16px;
-  border: none;
-  background-color: transparent;
-}
-.sd-table__cell--actions .sv-action-bar {
-  padding: 0;
-  opacity: 0.5;
-  .sv-action:not(.sv-action--hidden):not(:last-of-type) {
-    padding-right: 0;
-  }
-  .sv-action:first-child {
-    margin-left: auto;
-  }
-}
-.sd-table__cell--actions:first-child {
-  width: calcSize(6);
-  .sv-action-bar {
-    padding: 0;
-  }
+  font-family: $font-family;
+  font-weight: normal;
+  font-size: calcSize(2);
+  line-height: calcSize(3);
+  padding-bottom: calcSize(2);
+  color: $foreground;
 }
