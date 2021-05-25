@@ -12,45 +12,58 @@ class DesignTimeSurveyModel extends Survey {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
-  public getElementWrapperComponentName(element: SurveyElement): string {
-    if (element.isDesignMode) {
-      if (element instanceof Question) {
-        if (element.getType() == "dropdown") {
-          return "svc-dropdown-question";
-        }
-        if (element.getType() == "image") {
-          return "svc-image-question";
-        }
-        if (element.koElementType() == "survey-question") {
-          return "svc-question";
-        }
+  public getElementWrapperComponentName(element: SurveyElement, reason?: string): string {
+    if (this.isDesignMode) {
+      if(reason === "column-header") {
+        return "svc-matrix-column-neader";
       }
-      if (element instanceof Panel) {
-        if (element.koElementType() == "survey-panel") {
-          return "svc-panel";
+      if(reason === "row-header") {
+        return "svc-matrix-row-neader";
+      }
+      if(!element["parentQuestionValue"]) {
+        if (element instanceof Question) {
+          if (element.getType() == "dropdown") {
+            return "svc-dropdown-question";
+          }
+          if (element.getType() == "image") {
+            return "svc-image-question";
+          }
+          if (element.koElementType() == "survey-question") {
+            return "svc-question";
+          }
+        }
+        if (element instanceof Panel) {
+          if (element.koElementType() == "survey-panel") {
+            return "svc-panel";
+          }
         }
       }
     }
-    return super.getElementWrapperComponentName(element);
+    return super.getElementWrapperComponentName(element, reason);
   }
-  public getElementWrapperComponentData(element: SurveyElement): any {
-    if (element.isDesignMode) {
-      if (element instanceof Question) {
-        if (element.koElementType() == "survey-question") {
-          return this.creator;
-        }
+  public getElementWrapperComponentData(element: SurveyElement, reason?: string): any {
+    if (this.isDesignMode) {
+      if(reason === "column-header" || reason === "row-header") {
+        return { creator: this.creator, element: element };
       }
-      if (element instanceof Panel) {
-        if (element.koElementType() == "survey-panel") {
-          return this.creator;
+      if(!element["parentQuestionValue"]) {
+        if (element instanceof Question) {
+          if (element.koElementType() == "survey-question") {
+            return this.creator;
+          }
+        }
+        if (element instanceof Panel) {
+          if (element.koElementType() == "survey-panel") {
+            return this.creator;
+          }
         }
       }
     }
-    return super.getElementWrapperComponentData(element);
+    return super.getElementWrapperComponentData(element, reason);
   }
 
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if(!this.isDesignMode) {
+    if(!this.isDesignMode || !!question["parentQuestionValue"]) {
       return SurveyModel.TemplateRendererComponentName;
     }
     if(question.getType() === "imagepicker") {
@@ -59,7 +72,7 @@ class DesignTimeSurveyModel extends Survey {
     return "svc-item-value";
   }
   public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    if(!this.isDesignMode) {
+    if(!this.isDesignMode || !!question["parentQuestionValue"]) {
       return item;
     }
     return {
@@ -69,15 +82,18 @@ class DesignTimeSurveyModel extends Survey {
     };
   }
 
-  public getSurveyRowComponentName(row: QuestionRow): string {
-    return "svc-row";
-  }
-  public getSurveyRowComponentData(row: QuestionRow): any {
-    return row;
+  public getMatrixCellTemplateData(cell: any) {
+    if(!this.isDesignMode) {
+      return cell.question;
+    }
+    return cell.question;
+    // return cell.cell.column.templateQuestion;
   }
 
   public getRendererForString(element: Base, name: string): string {
-    if (this.isDesignMode) return editableStringRendererName;
+    if (this.isDesignMode && !element["parentQuestionValue"]) {
+      return editableStringRendererName;
+    }
     return undefined;
   }
 }

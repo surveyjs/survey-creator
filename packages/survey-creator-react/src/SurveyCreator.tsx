@@ -106,7 +106,7 @@ class DesignTimeSurveyModel extends Model {
     super(jsonObj);
   }
   public getElementWrapperComponentName(element: SurveyElement): string {
-    if (element.isDesignMode) {
+    if (element.isDesignMode && !element["parentQuestionValue"]) {
       if (element instanceof Question) {
         if (element.getType() == "dropdown") {
           return "svc-dropdown-question";
@@ -123,7 +123,7 @@ class DesignTimeSurveyModel extends Model {
     return super.getElementWrapperComponentName(element);
   }
   public getElementWrapperComponentData(element: SurveyElement): any {
-    if (element.isDesignMode) {
+    if (element.isDesignMode && !element["parentQuestionValue"]) {
       if (element instanceof Question) {
         return this.creator;
       }
@@ -134,7 +134,7 @@ class DesignTimeSurveyModel extends Model {
     return super.getElementWrapperComponentData(element);
   }
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if(!this.isDesignMode) {
+    if(!this.isDesignMode || !!question["parentQuestionValue"]) {
       return SurveyModel.TemplateRendererComponentName;
     }
     if(question.getType() === "imagepicker") {
@@ -143,7 +143,7 @@ class DesignTimeSurveyModel extends Model {
     return "svc-item-value";
   }
   public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    if(!this.isDesignMode) {
+    if(!this.isDesignMode || !!question["parentQuestionValue"]) {
       return item;
     }
     return {
@@ -152,11 +152,13 @@ class DesignTimeSurveyModel extends Model {
     };
   }
   public getRendererForString(element: Base, name: string): string {
-    if (this.isDesignMode) return editableStringRendererName;
+    if (this.isDesignMode && !element["parentQuestionValue"]) {
+      return editableStringRendererName;
+    }
     return undefined;
   }
 }
-class SurveyCreator extends CreatorBase<SurveyModel> {
+export class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
   }
@@ -196,12 +198,4 @@ class SurveyCreator extends CreatorBase<SurveyModel> {
   public questionErrorLocation(): string {
     return this.survey.questionErrorLocation;
   }
-}
-
-export function createReactSurveyCreator(json: any, options: any = null) {
-  if (!options) options = {};
-  const creator = new SurveyCreator(options);
-  creator.JSON = json;
-  //creator.setSurvey(new Model(json));
-  return creator;
 }
