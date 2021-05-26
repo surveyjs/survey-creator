@@ -1,4 +1,9 @@
 @import "../variables.scss";
 
 .svc-row {
+  padding-bottom: 2.5em;
+}
+
+.svc-row.svc-row--ghost {
+  padding-bottom: 0;
 }

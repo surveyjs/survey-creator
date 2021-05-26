@@ -28,7 +28,7 @@ export class RowWrapper extends SurveyElementBase<
   }
 
   render(): JSX.Element {
-    return <div className="svc-row">{this.props.element}</div>;
+    return <div className={this.model.cssClasses}>{this.props.element}</div>;
   }
 }
 
