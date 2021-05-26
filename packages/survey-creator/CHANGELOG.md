@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.49](https://github.com/surveyjs/survey-creator/compare/v1.8.48...v1.8.49) (2021-05-26)
+
+
+### Bug Fixes
+
+* Mouse events doesn't work in firefox in text edit adorners [#1228](https://github.com/surveyjs/survey-creator/issues/1228) ([f693761](https://github.com/surveyjs/survey-creator/commit/f69376147ab32e2ec0b109260496a1faf70d52fc))
+
 ### [1.8.48](https://github.com/surveyjs/survey-creator/compare/v1.8.47...v1.8.48) (2021-05-19)
 
 ### [1.8.47](https://github.com/surveyjs/survey-creator/compare/v1.8.46...v1.8.47) (2021-05-11)
