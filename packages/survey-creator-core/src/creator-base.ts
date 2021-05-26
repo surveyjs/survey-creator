@@ -2177,7 +2177,7 @@ export class CreatorBase<T extends SurveyModel>
   public createNewItemValue(question: Survey.QuestionSelectBase) {
     const nextValue = this.getNextItemValue(question);
     // TODO: get item type from question
-    if(question.getType() === "imagepicker") {
+    if (question.getType() === "imagepicker") {
       return new Survey.ImageItemValue(nextValue);
     }
     return new Survey.ItemValue(nextValue);

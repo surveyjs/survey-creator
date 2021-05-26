@@ -12,6 +12,18 @@ class DesignTimeSurveyModel extends Survey {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
+  public get hasLogo(): boolean {
+    if (this.isDesignMode) return true;
+    return super["hasLogo"];
+  }
+  public get isLogoBefore(): boolean {
+    if (this.isDesignMode) return false;
+    return super["isLogoBefore"];
+  }
+  public get isLogoAfter(): boolean {
+    if (this.isDesignMode) return true;
+    return super["isLogoAfter"];
+  }
   public getElementWrapperComponentName(element: SurveyElement): string {
     if (element.isDesignMode) {
       if (element instanceof Question) {
@@ -33,6 +45,13 @@ class DesignTimeSurveyModel extends Survey {
     }
     return super.getElementWrapperComponentName(element);
   }
+  public getElementWrapperComponentNameByName(element: string): string {
+    if (!this.isDesignMode) {
+      super.getElementWrapperComponentNameByName(element);
+    }
+    if (element === "sv-logo-image") return "svc-logo-image";
+    return super.getElementWrapperComponentNameByName(element);
+  }
   public getElementWrapperComponentData(element: SurveyElement): any {
     if (element.isDesignMode) {
       if (element instanceof Question) {
@@ -50,10 +69,10 @@ class DesignTimeSurveyModel extends Survey {
   }
 
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if(!this.isDesignMode) {
+    if (!this.isDesignMode) {
       return SurveyModel.TEMPLATE_RENDERER_COMPONENT_NAME;
     }
-    if(question.getType() === "imagepicker") {
+    if (question.getType() === "imagepicker") {
       return "svc-image-item-value";
     }
     return "svc-item-value";
