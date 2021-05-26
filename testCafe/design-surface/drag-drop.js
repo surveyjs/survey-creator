@@ -58,16 +58,20 @@ test("Drag Drop Question", async (t) => {
     await setJSON(json);
 
     const questionName = "rating2";
+    const Rating1 = Selector(`[data-svc-drop-target-element-name="rating1"]`);
     const Rating2 = Selector(
         `[data-svc-drop-target-element-name=${questionName}]`
     );
+    const Rating3 = Selector(`[data-svc-drop-target-element-name="rating3"]`);
     const DragZoneRating2 = Rating2.find(".svc-question__drag-element");
 
     await t.hover(Rating2, { speed: 0.5 });
     await t.hover(DragZoneRating2);
-    await t.drag(DragZoneRating2, 0, -150, {
-        offsetX: 7,
-        offsetY: 8
+    await t.dragToElement(DragZoneRating2, Rating1, {
+        offsetX: 5,
+        offsetY: 5,
+        destinationOffsetY: -120,
+        speed: 0.5
     });
 
     let name = await getQuestionNameByIndex(0);
@@ -75,9 +79,11 @@ test("Drag Drop Question", async (t) => {
 
     await t.hover(Rating2, { speed: 0.5 });
     await t.hover(DragZoneRating2, { speed: 0.5 });
-    await t.drag(DragZoneRating2, 0, 516, {
-        offsetX: 10,
-        offsetY: 5
+    await t.dragToElement(DragZoneRating2, Rating3, {
+        offsetX: 5,
+        offsetY: 5,
+        destinationOffsetY: 120,
+        speed: 0.5
     });
 
     name = await getQuestionNameByIndex(2);
@@ -100,40 +106,47 @@ test("Drag Drop to Panel", async (t) => {
     };
     await setJSON(json);
 
+    const Panel = Selector(`[data-svc-drop-target-element-name="panel1"]`);
     const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
 
     await t.hover(RatingToolboxItem, { speed: 0.5 });
-    await t.drag(RatingToolboxItem, 200, 60, {
-        offsetX: 10,
-        offsetY: 10,
+    await t.dragToElement(RatingToolboxItem, Panel, {
+        offsetX: 5,
+        offsetY: 5,
+        destinationOffsetY: -120,
         speed: 0.5
     });
 
     await t.hover(RatingToolboxItem, { speed: 0.5 });
-    await t.drag(RatingToolboxItem, 400, -40, {
-        offsetX: 10,
-        offsetY: 10,
+    await t.dragToElement(RatingToolboxItem, Panel, {
+        offsetX: 5,
+        offsetY: 5,
+        destinationOffsetY: 120,
         speed: 0.5
     });
 
     await t.hover(RatingToolboxItem, { speed: 0.5 });
-    await t.drag(RatingToolboxItem, 261, 222, {
-        offsetX: 14,
-        offsetY: 16,
+    await t.dragToElement(RatingToolboxItem, Panel, {
+        offsetX: 5,
+        offsetY: 5,
+        speed: 0.5
+    });
+
+    const Question3 = Selector(`[data-svc-drop-target-element-name="question3"]`);
+
+    await t.hover(RatingToolboxItem, { speed: 0.5 });
+    await t.dragToElement(RatingToolboxItem, Question3, {
+        offsetX: 5,
+        offsetY: 5,
+        destinationOffsetY: -120,
         speed: 0.5
     });
 
     await t.hover(RatingToolboxItem, { speed: 0.5 });
-    await t.drag(RatingToolboxItem, 330, 200, {
-        offsetX: 10,
-        offsetY: 10,
-        speed: 0.5
-    });
-
-    await t.hover(RatingToolboxItem, { speed: 0.5 });
-    await t.drag(RatingToolboxItem, 300, 470, {
-        offsetX: 10,
-        offsetY: 10,
+    await t.dragToElement(RatingToolboxItem, Question3, {
+        offsetX: 5,
+        offsetY: 5,
+        destinationOffsetY: 120,
         speed: 0.5
     });
 
@@ -142,7 +155,7 @@ test("Drag Drop to Panel", async (t) => {
             {
                 name: "page1",
                 elements: [
-                    { type: "rating", name: "question2" },
+                    { type: "rating", name: "question1" },
                     {
                         type: "panel",
                         name: "panel1",
@@ -152,7 +165,7 @@ test("Drag Drop to Panel", async (t) => {
                             { type: "rating", name: "question5" }
                         ]
                     },
-                    { type: "rating", name: "question1" }
+                    { type: "rating", name: "question2" }
                 ]
             }
         ]
