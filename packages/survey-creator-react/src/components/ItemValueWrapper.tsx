@@ -77,7 +77,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
           "svc-item-value-wrapper" + (isNew ? " svc-item-value--new" : "")
         }
         key={this.props.element.key}
-        data-svc-drop-target-element-name={
+        data-svc-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }
       >

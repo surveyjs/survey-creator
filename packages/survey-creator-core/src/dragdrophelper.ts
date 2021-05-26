@@ -19,7 +19,6 @@ export class DragDropHelper extends Base {
     y: -1
   };
   public static newGhostPage: PageModel = null;
-  public static dropTargetHTMLSelector = "[data-svc-drop-target-element-name]";
   public static ghostSurveyElementName =
     "svc-drag-drop-ghost-survey-element-name"; // before renaming use globa search (we have also css selectors)
 
@@ -36,6 +35,13 @@ export class DragDropHelper extends Base {
 
   private get survey(): SurveyModel {
     return this.creator.survey;
+  }
+
+  private get dropTargetDataAttributeName() {
+    if (this.draggedSurveyElement.getType() === "itemvalue") {
+      return "[data-svc-drop-target-item-value]";
+    }
+    return "[data-svc-drop-target-element-name]";
   }
 
   constructor(private creator: CreatorBase<SurveyModel>) {
@@ -276,22 +282,24 @@ export class DragDropHelper extends Base {
 
     let isEdge = true;
 
-    if (dropTargetSurveyElement.isPanel) {
-      const panelDragInfo = this.getPanelDragInfo(
-        dropTargetHTMLElement,
-        dropTargetSurveyElement,
-        event
-      );
-      dropTargetSurveyElement = panelDragInfo.dropTargetSurveyElement;
-      isEdge = panelDragInfo.isEdge;
-    }
+    if (this.draggedSurveyElement.getType() !== "itemvalue") {
+      if (dropTargetSurveyElement.isPanel) {
+        const panelDragInfo = this.getPanelDragInfo(
+          dropTargetHTMLElement,
+          dropTargetSurveyElement,
+          event
+        );
+        dropTargetSurveyElement = panelDragInfo.dropTargetSurveyElement;
+        isEdge = panelDragInfo.isEdge;
+      }
 
-    if (
-      // TODO we can't drop on not empty page directly for now
-      dropTargetSurveyElement.getType() === "page" &&
-      dropTargetSurveyElement.elements.length !== 0
-    ) {
-      dropTargetSurveyElement = null;
+      if (
+        // TODO we can't drop on not empty page directly for now
+        dropTargetSurveyElement.getType() === "page" &&
+        dropTargetSurveyElement.elements.length !== 0
+      ) {
+        dropTargetSurveyElement = null;
+      }
     }
 
     if (dropTargetSurveyElement === this.draggedSurveyElement) {
@@ -329,6 +337,10 @@ export class DragDropHelper extends Base {
   private getDropTargetSurveyElementFromHTMLElement(element: HTMLElement) {
     let result;
     let dropTargetName = element.dataset.svcDropTargetElementName;
+
+    if (!dropTargetName) {
+      dropTargetName = element.dataset.svcDropTargetItemValue;
+    }
 
     if (dropTargetName === DragDropHelper.ghostSurveyElementName) {
       return this.ghostSurveyElement;
@@ -376,7 +388,8 @@ export class DragDropHelper extends Base {
   }
 
   private findDropTargetHTMLElementFromPoint(clientX, clientY): HTMLElement {
-    const selector = DragDropHelper.dropTargetHTMLSelector;
+    const selector = this.dropTargetDataAttributeName;
+
     this.draggedElementShortcut.hidden = true;
     let draggedOverNode = document.elementFromPoint(clientX, clientY);
     this.draggedElementShortcut.hidden = false;
@@ -396,7 +409,7 @@ export class DragDropHelper extends Base {
   }
 
   private findDeepestDropTargetChild(parent): HTMLElement {
-    const selector = DragDropHelper.dropTargetHTMLSelector;
+    const selector = "[data-svc-drop-target-element-name]";
 
     let result = parent;
     while (!!parent) {

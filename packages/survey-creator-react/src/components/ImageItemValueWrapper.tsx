@@ -130,7 +130,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
           (isNew ? " svc-image-item-value--new" : "")
         }
         key={this.props.element.key}
-        data-svc-drop-target-element-name={
+        data-svc-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }
       >
