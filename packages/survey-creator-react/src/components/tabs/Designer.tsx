@@ -3,7 +3,6 @@ import { Base, SurveyModel } from "survey-core";
 import {
   ReactElementFactory,
   Survey,
-  SurveyNavigationBlock,
   SurveyElementBase
 } from "survey-react-ui";
 import {
