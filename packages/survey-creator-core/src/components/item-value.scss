@@ -2,30 +2,39 @@
 
 .svc-item-value-wrapper {
   position: relative;
+  display: flex;
+  // margin-left: calcSize(4);
 }
 
 .svc-item-value-controls {
   display: none;
-  position: absolute;
-  left: calcSize(-10);
+  margin: calcSize(1) 0;
+  margin-right: calcSize(1);
+  // position: absolute;
+  // left: calcSize(-10);
   width: calcSize(9);
-  text-align: right;
-  white-space: nowrap;
+  height: calcSize(4);
+  box-sizing: border-box;
+  // text-align: right;
+  // white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .svc-item-value-controls__button {
-  height: calcSize(3);
-  width: calcSize(3);
   border-radius: 50%;
-  padding: calcSize(1.5);
+  padding: calcSize(1);
   cursor: pointer;
   display: inline-block;
-  margin-left: calcSize(-1);
+}
+
+.svc-item-value-controls__button > span {
+  display: block;
+  width: 16px;
+  height: 16px;
 }
 
 .svc-item-value-controls__drag {
-  padding-left: 0;
-  padding-right: calcSize(0.5);
+  padding: calcSize(1) calcSize(1.5);
   cursor: move;
   use {
     fill: $foreground-light;
@@ -36,7 +45,15 @@
     }
   }
 }
+.sd-selectbase > .svc-item-value-wrapper .svc-item-value-controls,
+.sd-selectbase__column:first-of-type .svc-item-value-controls {
+  margin-left: calcSize(-5);
+}
 
+.svc-item-value-controls__remove,
+.svc-item-value-controls__add {
+  float: right;
+}
 .svc-item-value-controls__add:hover {
   background-color: $primary-light;
   use {

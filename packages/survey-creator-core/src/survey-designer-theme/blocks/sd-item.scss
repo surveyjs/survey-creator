@@ -15,6 +15,7 @@
   svg {
     display: none;
   }
+  flex-shrink: 0;
 }
 .sd-item--checked .sd-item__decorator,
 .sd-item--allowhover:hover .sd-item__decorator {
