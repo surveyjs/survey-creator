@@ -313,7 +313,11 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       cellType: "text",
       rowCount: 0,
       columns: columns,
-      addRowText: this.getAddRowText(prop)
+      addRowText: this.getAddRowText(prop),
+      keyDuplicationError: editorLocalization.getString(
+        "pe.propertyIsNoUnique"
+      ),
+      emptyRowsText: editorLocalization.getString("pe.listIsEmpty")
     };
     if (columns.length < 2) {
       res.showHeader = false;

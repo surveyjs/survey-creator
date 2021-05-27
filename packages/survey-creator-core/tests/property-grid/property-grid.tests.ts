@@ -1519,7 +1519,7 @@ test("Change cellType in the column in property grid", () => {
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
   expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeTruthy();
 });
-test("Validate Selected Element Errors", () => {
+test("Validate Selected Element Errors", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
   var oldIsRequired = titleProp.isRequired;
   titleProp.isRequired = true;
@@ -1529,6 +1529,7 @@ test("Validate Selected Element Errors", () => {
   expect(propertyGrid.validate()).toBeFalsy();
   var titleQuestion = propertyGrid.survey.getQuestionByName("title");
   expect(titleQuestion.errors).toHaveLength(1);
+  expect(titleQuestion.errors[0].getText()).toEqual("Please enter a value");
   titleQuestion.value = "Question 1";
   expect(propertyGrid.validate()).toBeTruthy();
   expect(titleQuestion.errors).toHaveLength(0);
