@@ -39,26 +39,6 @@ steps:
     git config --global user.name "dmitrykurmanov"
   displayName: 'Set up git config'
 
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-    npm install
-  displayName: 'Npm install survey-creator'
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm install
-  displayName: 'Npm install survey-creator-core'
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-    npm install
-  displayName: 'Npm install survey-creator-knockout'
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-    npm install
-  displayName: 'Npm install survey-creator-react'
-  
 - task: DownloadBuildArtifacts@0
   inputs:
     buildType: 'specific'
@@ -83,6 +63,31 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
     OverWrite: true
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm install
+  displayName: 'Npm install survey-creator'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm install
+  displayName: 'Npm install survey-creator-core'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run build
+  displayName: 'Build creator v2 core'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm install
+  displayName: 'Npm install survey-creator-knockout'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm install
+  displayName: 'Npm install survey-creator-react'
 
 # npm run release with version
 - task: CopyFiles@2
@@ -138,10 +143,6 @@ steps:
     OverWrite: true
 
 # Creator CORE
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm run build
-  displayName: 'Build creator v2 core'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
