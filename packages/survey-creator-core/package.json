@@ -13,7 +13,8 @@
     "test:dev": "jest --watch",
     "watch:dev": "webpack --env.buildType dev --watch",
     "watch:prod": "webpack --env.buildType prod --watch",
-    "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease alpha"
+    "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease alpha",
+    "remove-package-lock": "rimraf package-lock.json"
   },
   "dependencies": {
     "papaparse": "^5.2.0",
