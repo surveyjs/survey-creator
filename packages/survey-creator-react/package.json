@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "2.0.0",
+  "version": "0.0.1-alpha.0",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -21,7 +21,7 @@
     "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500\"",
     "testcafe:ci": "http-server --silent & testcafe chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal",
     "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/string-editor.js --reporter minimal --debug-mode\"",
-    "release": "standard-version --message \"Release: %s [skip ci]\"",
+    "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease alpha",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
     "watch:dev": "webpack --env.buildType dev --watch",
     "-prestorybook": "npm run test:generate-output",
@@ -92,6 +92,11 @@
   "husky": {
     "hooks": {
       "pre-push": "npm test"
+    }
+  },
+  "standard-version": {
+    "skip": {
+      "tag": true
     }
   }
 }
