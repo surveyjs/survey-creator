@@ -72,6 +72,7 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
     npm install
+    npm run remove-package-lock
   displayName: 'Npm install survey-creator-core'
 
 - script: |
@@ -82,11 +83,13 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm install
+    npm run remove-package-lock
   displayName: 'Npm install survey-creator-knockout'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm install
+    npm run remove-package-lock
   displayName: 'Npm install survey-creator-react'
 
 # npm run release with version
