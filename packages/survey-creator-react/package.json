@@ -86,8 +86,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rmodal": "^1.0.36",
-    "survey-core": "../../../survey-library/build/survey-core",
-    "survey-react-ui": "../../../survey-library/build/survey-react-ui"
+    "survey-core": "latest",
+    "survey-react-ui": "latest"
   },
   "husky": {
     "hooks": {
