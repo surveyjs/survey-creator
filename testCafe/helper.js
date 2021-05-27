@@ -21,3 +21,9 @@ export const getJSON = ClientFunction(() => {
 export const getQuestionNameByIndex = ClientFunction((index) => {
     return creator.survey.getAllQuestions()[index].name;
 });
+
+export const getItemValueByIndex = ClientFunction((questionName, index) => {
+    const question = creator.survey.getQuestionByName(questionName);
+    const choices = question.visibleChoices;
+    return choices[index].value;
+});

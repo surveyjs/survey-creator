@@ -4,7 +4,8 @@ import {
     getQuestionsLength,
     setJSON,
     getJSON,
-    getQuestionNameByIndex
+    getQuestionNameByIndex,
+    getItemValueByIndex
 } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop Survey Element";
@@ -174,6 +175,52 @@ test("Drag Drop to Panel", async (t) => {
     await t.expect(resultJson).eql(expectedJson);
 });
 
-// test("Drag Drop ItemValue (choices)", async (t) => {});
+test("Drag Drop ItemValue (choices)", async (t) => {
+    const json = {
+        pages: [
+            {
+                name: "page1",
+                elements: [
+                    {
+                        type: "radiogroup",
+                        name: "question1",
+                        choices: ["item1", "item2", "item3"]
+                    }
+                ]
+            }
+        ]
+    };
+    await setJSON(json);
+
+    const Question1 = Selector(`[data-question-name="question1"]`);
+    const Item1 = Selector(`[data-svc-drop-target-item-value="item1"]`);
+    const Item2 = Selector(`[data-svc-drop-target-item-value="item2"]`);
+    const Item3 = Selector(`[data-svc-drop-target-item-value="item3"]`);
+    const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
+
+    await t.click(Question1);
+
+    await t.hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2);
+
+    const expectedValue = "item2";
+
+    await t.dragToElement(DragZoneItem2, Item1, {
+        offsetX: 5,
+        offsetY: 5,
+        destinationOffsetY: -50,
+        speed: 0.5
+    });
+    let value = await getItemValueByIndex("question1", 0);
+    await t.expect(value).eql(expectedValue);
+
+    await t.dragToElement(DragZoneItem2, Item3, {
+        offsetX: 5,
+        offsetY: 5,
+        destinationOffsetY: 20,
+        speed: 0.5
+    });
+    value = await getItemValueByIndex("question1", 2);
+    await t.expect(value).eql(expectedValue);
+});
 
 // test("Drag Drop Question (StartWithNewLine === false)", async (t) => {});
