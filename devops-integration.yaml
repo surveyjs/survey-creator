@@ -87,6 +87,21 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run release -- --release-as $(SurveyJSVersion)
   displayName: 'Release specific version'
+
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run release
+  displayName: 'Release specific version'
+
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm run release
+  displayName: 'Release specific version'
+
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run release
+  displayName: 'Release specific version'
 #####################################################
 
 - task: DownloadBuildArtifacts@0
