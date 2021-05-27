@@ -1,5 +1,10 @@
-<!-- ko ifnot: isLogoImageChoosen -->
-<div class="svc-logo-image-placeholder">[LOGO]</div>
-<!-- /ko -->
-<!-- ko if: isLogoImageChoosen -->
-<!-- /ko -->
+<div class="svc-logo-image">
+  <input type="file" accept="image/*" class="svc-choose-file-input"/>
+  <!-- ko ifnot: isLogoImageChoosen -->
+  <div class="svc-logo-image-placeholder" data-bind="click: chooseFile">[LOGO]</div>
+  <!-- /ko -->
+  <!-- ko if: isLogoImageChoosen -->
+  <!-- ko component: { name: 'sv-logo-image', params: $data.creator.survey } -->
+  <!-- /ko -->
+  <!-- /ko -->
+</div>

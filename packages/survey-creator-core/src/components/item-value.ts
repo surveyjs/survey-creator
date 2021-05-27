@@ -2,11 +2,9 @@ import {
   Base,
   ItemValue,
   property,
-  QuestionCheckboxBase,
   QuestionCheckboxModel,
   QuestionSelectBase,
-  surveyLocalization,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropHelper } from "../dragdrophelper";

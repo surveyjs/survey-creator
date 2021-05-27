@@ -1,8 +1,12 @@
 @import "../../variables.scss";
 
-.svc-logo-image-placeholder {
+.svc-logo-image {
   float: right;
+}
+
+.svc-logo-image-placeholder {
   font-size: calcSize(4);
   color: $foreground-light;
   opacity: 0.25;
+  cursor: pointer;
 }

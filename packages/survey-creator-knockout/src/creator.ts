@@ -67,7 +67,13 @@ class DesignTimeSurveyModel extends Survey {
     }
     return super.getElementWrapperComponentData(element);
   }
-
+  public getElementWrapperComponentDataByName(element: string): any {
+    if (!this.isDesignMode) {
+      super.getElementWrapperComponentNameByName(element);
+    }
+    if (element === "sv-logo-image") return this.creator;
+    return super.getElementWrapperComponentDataByName(element);
+  }
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
     if (!this.isDesignMode) {
       return SurveyModel.TEMPLATE_RENDERER_COMPONENT_NAME;

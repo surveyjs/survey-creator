@@ -6,7 +6,7 @@
     class="svc-question__content"
     data-bind="click: koSelect, clickBubble: false, css: css(), attr: { draggable: isDraggable }, event: { dragstart: koDragStart }, hidden: isDragged"
   >
-    <input type="file" accept="image/*" class="svc-choose-file-input" style="position: absolute; opacity: 0; width: 1px; height: 1px; overflow: hidden;" />
+    <input type="file" accept="image/*" class="svc-choose-file-input"/>
 
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
