@@ -42,7 +42,22 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm install
-  displayName: 'Install npm'
+  displayName: 'Npm install survey-creator'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm install
+  displayName: 'Npm install survey-creator-core'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm install
+  displayName: 'Npm install survey-creator-knockout'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm install
+  displayName: 'Npm install survey-creator-react'
   
 - task: DownloadBuildArtifacts@0
   inputs:
@@ -125,11 +140,6 @@ steps:
 # Creator CORE
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm install
-  displayName: 'Install npm'
-  
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
     npm run build
   displayName: 'Build creator v2 core'
 
@@ -150,11 +160,6 @@ steps:
     publishLocation: 'Container'  
 
 # Creator REACT
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-    npm install
-  displayName: 'Install npm'
-
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
     echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
@@ -248,11 +253,6 @@ steps:
     
 
 # Creator KNOCKOUT
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-    npm install
-  displayName: 'Install npm'
-
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run build
