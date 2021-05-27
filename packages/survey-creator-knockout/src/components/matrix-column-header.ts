@@ -19,7 +19,7 @@ class KnockoutMatrixColumnHeaderWrapperViewModel extends Base {
   get column() {
     return this.templateData.data.column as MatrixDropdownColumn
   }
-  public celectColumn(model: KnockoutMatrixColumnHeaderWrapperViewModel, event: MouseEvent) {
+  public selectColumn(model: KnockoutMatrixColumnHeaderWrapperViewModel, event: MouseEvent) {
     model.creator.selectElement(model.column);
     event.stopPropagation();
   }

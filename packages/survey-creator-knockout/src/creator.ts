@@ -12,8 +12,12 @@ class DesignTimeSurveyModel extends Survey {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
+  public isPopupEditorContent = false;
   public getElementWrapperComponentName(element: SurveyElement, reason?: string): string {
     if (this.isDesignMode) {
+      if(reason === "cell") {
+        return "svc-matrix-cell";
+      }
       if(reason === "column-header") {
         return "svc-matrix-column-neader";
       }
@@ -23,13 +27,13 @@ class DesignTimeSurveyModel extends Survey {
       if(!element["parentQuestionValue"]) {
         if (element instanceof Question) {
           if (element.getType() == "dropdown") {
-            return "svc-dropdown-question";
+            return this.isPopupEditorContent ? "svc-cell-dropdown-question" : "svc-dropdown-question";
           }
           if (element.getType() == "image") {
             return "svc-image-question";
           }
           if (element.koElementType() == "survey-question") {
-            return "svc-question";
+            return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
           }
         }
         if (element instanceof Panel) {
@@ -43,7 +47,7 @@ class DesignTimeSurveyModel extends Survey {
   }
   public getElementWrapperComponentData(element: SurveyElement, reason?: string): any {
     if (this.isDesignMode) {
-      if(reason === "column-header" || reason === "row-header") {
+      if(reason === "cell" || reason === "column-header" || reason === "row-header") {
         return { creator: this.creator, element: element };
       }
       if(!element["parentQuestionValue"]) {

@@ -1,0 +1,34 @@
+.svc-matrix-cell {
+  position: relative;
+}
+
+.svc-matrix-cell__question-controls {
+  display: none;
+  position: absolute;
+  top: calc(50% - 24px);
+  left: calc(50% - 24px);
+}
+
+.svc-matrix-cell__question-controls-button {
+  display: block;
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  box-sizing: border-box;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+
+  use {
+    fill: rgba(144, 144, 144, 1);
+  }
+}
+
+.svc-matrix-cell:hover .svc-matrix-cell__question-controls {
+  display: block;
+}
+
+.svc-question__content--selected-no-border {
+  margin: 0 100px;
+}

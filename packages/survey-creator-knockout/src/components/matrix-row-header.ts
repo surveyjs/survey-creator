@@ -19,7 +19,7 @@ class KnockoutMatrixRowHeaderWrapperViewModel extends Base {
   get row() {
     return this.templateData.data.row as MatrixDropdownRowModelBase
   }
-  public celectRow(model: KnockoutMatrixRowHeaderWrapperViewModel, event: MouseEvent) {
+  public selectRow(model: KnockoutMatrixRowHeaderWrapperViewModel, event: MouseEvent) {
     model.creator.selectElement(model.row["item"]);
     event.stopPropagation();
   }

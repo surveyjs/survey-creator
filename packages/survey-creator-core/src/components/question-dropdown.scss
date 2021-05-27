@@ -5,7 +5,8 @@
   margin-top: calcSize(2);
 }
 
-.svc-question__content--selected {
+.svc-question__content--selected,
+.svc-question__content--selected-no-border {
   .svc-question__dropdown-choices {
     display: block;
   }

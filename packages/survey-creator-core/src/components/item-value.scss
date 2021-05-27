@@ -51,6 +51,24 @@
   }
 }
 
+.svc-question__content--selected-no-border
+  > div
+  > div
+  > div
+  > .svc-item-value-controls,
+.svc-question__content--selected-no-border
+  > fieldset
+  > div
+  > .svc-item-value-controls,
+.svc-question__content--selected-no-border
+  > div
+  > div
+  > fieldset
+  > div
+  > .svc-item-value-controls {
+  display: block;
+}
+
 .svc-question__content--selected > fieldset > div > .svc-item-value-controls,
 .svc-question__content--selected
   > div
