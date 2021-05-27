@@ -101,22 +101,22 @@ steps:
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run release -- --release-as $(SurveyJSVersion)
-  displayName: 'Release specific version'
+  displayName: 'Release specific version survey-creator'
 
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm run release
-  displayName: 'Release specific version'
+    npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'Release specific version survey-creator-core'
 
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-    npm run release
-  displayName: 'Release specific version'
+    npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'Release specific version survey-creator-knockout'
 
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-    npm run release
-  displayName: 'Release specific version'
+    npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'Release specific version survey-creator-react'
 #####################################################
 
 - task: DownloadBuildArtifacts@0
