@@ -7,44 +7,10 @@ import {
   settings,
   MatrixDropdownColumn,
 } from "survey-core";
-import {
-  CreatorBase,
-} from "@survey/creator";
+import { MatrixCellWrapperViewModel } from "@survey/creator";
 import { ImplementorBase } from "survey-knockout-ui";
 
-import "./matrix-cell.scss";
-
 const template = require("./matrix-cell.html");
-
-class KnockoutMatrixCellWrapperViewModel extends Base { 
-  constructor(public creator: CreatorBase<SurveyModel>, public templateData: any) {
-    super();
-  }
-  get question() {
-    return this.templateData.data as Question
-  }
-  public editQuestion(model: KnockoutMatrixCellWrapperViewModel) {
-    const column: MatrixDropdownColumn = model.question.parentQuestion.getColumnByName(model.question.name);
-    let questionJSON = model.question.toJSON();
-    questionJSON.type = model.question.getType();
-    const survey = model.creator.createSurvey({questions: [questionJSON]}, "modal-editor");
-    survey.setDesignMode(true);
-    survey.isPopupEditorContent = true;
-    survey.showQuestionNumbers = "none";
-    settings.showModal(
-      "survey",
-      {
-        survey: survey,
-        model: survey,
-      },
-      () => {
-        questionJSON = survey.getAllQuestions()[0].toJSON();
-        column.fromJSON(questionJSON);
-        model.question.parentQuestion.onColumnCellTypeChanged(column);
-      }
-    );
-  }
-}
 
 ko.components.register("svc-matrix-cell", {
   viewModel: {
@@ -53,7 +19,7 @@ ko.components.register("svc-matrix-cell", {
 
       params.templateData["nodes"] = componentInfo.templateNodes;
 
-      const model = new KnockoutMatrixCellWrapperViewModel(
+      const model = new MatrixCellWrapperViewModel(
         creator,
         params.templateData
       );

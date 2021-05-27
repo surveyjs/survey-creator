@@ -1,9 +1,10 @@
 import React from "react";
 import { QuestionSelectBase, Base, ItemValue, SurveyModel } from "survey-core";
-import { CreatorBase } from "@survey/creator";
+import { MatrixCellWrapperViewModel } from "@survey/creator";
 import {
   ReactElementFactory,
   SurveyElementBase,
+  SvgIcon
 } from "survey-react-ui";
 
 interface MatrixCellAdornerComponentProps {
@@ -12,20 +13,6 @@ interface MatrixCellAdornerComponentProps {
   question: QuestionSelectBase;
   cell: any;
 }
-
-class MatrixCellWrapperViewModel extends Base { 
-  constructor(public creator: CreatorBase<any>, public templateData: any) {
-    super();
-  }
-  get context() {
-    return this.templateData;
-  }
-  public celectContext(model: MatrixCellWrapperViewModel, event: MouseEvent) {
-    model.creator.selectElement(model.context);
-    event.stopPropagation();
-  }
-}
-
 
 export class MatrixCellAdornerComponent extends SurveyElementBase<
   MatrixCellAdornerComponentProps,
@@ -36,7 +23,7 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
     super(props);
     this.model = new MatrixCellWrapperViewModel(
       this.props.componentData.creator,
-      this.props.componentData.element
+      this.props.question || this.props.componentData.element
     );
   }
   protected getStateElement(): Base {
@@ -44,15 +31,22 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
   }
 
   render(): JSX.Element {
-    // if (this.model.question.isDragged) {
-    //   return null;
-    // }
+    let controls = null;
+    if(!!this.props.question) {
+      controls = <div className="svc-matrix-cell__question-controls">
+        <span className="svc-matrix-cell__question-controls-button" onClick={() => this.model.editQuestion(this.model)}>
+          <SvgIcon size={24} iconName={'icon-pencil'}></SvgIcon>
+        </span>
+      </div>;
+    }
 
     return (
       <div
-        className={"svc-matrix-cell"} key={this.props.element.key} onClick={(e: any) => this.model.celectContext(this.model, e)}
+        className={"svc-matrix-cell"} key={this.props.element.key} onClick={(e: any) => !this.props.question && this.model.selectContext(this.model, e)}
       >
         {this.props.element}
+
+        {controls}
       </div>
     );
   }
