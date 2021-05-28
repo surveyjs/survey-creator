@@ -1,7 +1,11 @@
 @import "../../variables.scss";
 
 .svc-logo-image {
+  position: relative;
   float: right;
+  .svc-image-item-value-controls {
+    display: block;
+  }
 }
 
 .svc-logo-image-placeholder {
