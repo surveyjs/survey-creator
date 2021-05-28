@@ -9,6 +9,7 @@ import { SurveyCreator } from "../src/editor";
 import { unparse, parse } from "papaparse";
 import { settings } from "../src/settings";
 import { editorLocalization } from "../src/editorLocalization";
+import { SurveyHelper } from "../src/surveyHelper";
 
 export default QUnit.module("TranslatonTests");
 
@@ -773,6 +774,49 @@ QUnit.test("Two new functions: expandAll(), collapseAll()", function (assert) {
     "The q1 group  is collapse as well"
   );
 });
+QUnit.test(
+  "Translation show All strings and property visibility",
+  function (assert) {
+    var creator = new SurveyCreator();
+    creator.JSON = {
+      completedHtml: "Test",
+      pages: [
+        {
+          title: "title1",
+          elements: [{ type: "checkbox", name: "question1" }],
+        },
+      ],
+    };
+    creator.onShowingProperty.add((sender, options) => {
+      options.canShow = options.property.name == "title";
+    });
+    var translation = new Translation(creator.survey);
+    assert.equal(
+      translation.root.locItems.length,
+      1,
+      "There is one item to translate - completedHtml"
+    );
+    translation.showAllStrings = true;
+    assert.ok(
+      translation.root.locItems.length > 5,
+      "Show a lot of items - completedHtml"
+    );
+    var translation = new Translation(
+      creator.survey,
+      true,
+      ko.computed(() => creator.readOnly),
+      (obj: Survey.Base, prop: Survey.JsonObjectProperty): boolean => {
+        return SurveyHelper.isPropertyVisible(obj, prop, creator);
+      }
+    );
+    assert.equal(
+      translation.root.locItems.length,
+      2,
+      "There are two items to translate - completedHtml + title"
+    );
+  }
+);
+
 /* TODO wait for v1.8.29
 QUnit.test("check LocalizableStrings/dataList property", function (assert) {
   var survey = new Survey.Survey();
