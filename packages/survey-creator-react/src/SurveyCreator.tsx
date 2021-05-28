@@ -133,17 +133,23 @@ class DesignTimeSurveyModel extends Model {
     }
     return super.getElementWrapperComponentData(element);
   }
-  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if(!this.isDesignMode) {
+  public getItemValueWrapperComponentName(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): string {
+    if (!this.isDesignMode) {
       return SurveyModel.TemplateRendererComponentName;
     }
-    if(question.getType() === "imagepicker") {
+    if (question.getType() === "imagepicker") {
       return "svc-image-item-value";
     }
     return "svc-item-value";
   }
-  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    if(!this.isDesignMode) {
+  public getItemValueWrapperComponentData(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): any {
+    if (!this.isDesignMode) {
       return item;
     }
     return {
@@ -156,7 +162,7 @@ class DesignTimeSurveyModel extends Model {
     return undefined;
   }
 }
-class SurveyCreator extends CreatorBase<SurveyModel> {
+export class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
   }
@@ -172,7 +178,7 @@ class SurveyCreator extends CreatorBase<SurveyModel> {
       {
         question: question,
         isDisplayMode: question.isReadOnly,
-        creator: this,
+        creator: this
       }
     );
   }
@@ -198,10 +204,9 @@ class SurveyCreator extends CreatorBase<SurveyModel> {
   }
 }
 
-export function createReactSurveyCreator(json: any, options: any = null) {
+export function createSurveyCreator(json: any, options: any = null) {
   if (!options) options = {};
   const creator = new SurveyCreator(options);
   creator.JSON = json;
-  //creator.setSurvey(new Model(json));
   return creator;
 }

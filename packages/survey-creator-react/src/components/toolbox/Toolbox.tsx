@@ -1,7 +1,7 @@
 import {
   CreatorBase,
-  getLocString,
-  IQuestionToolboxItem,
+  editorLocalization,
+  IQuestionToolboxItem
 } from "@survey/creator";
 import React, { CSSProperties } from "react";
 import { ReactDragEvent } from "../../events";
@@ -10,12 +10,12 @@ import {
   AdaptiveElement,
   Base,
   VerticalResponsivityManager,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 import {
   ReactElementFactory,
   SurveyElementBase,
-  SvgIcon,
+  SvgIcon
 } from "survey-react-ui";
 interface ISurveyCreatorToolboxProps {
   categories: Array<any>;
@@ -93,7 +93,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   renderToolboxItem(item: AdaptiveActionBarItemWrapper): JSX.Element {
     const className = "svc-toolbox__tool " + item.css;
     const style: CSSProperties = {
-      visibility: item.isVisible ? "visible" : "hidden",
+      visibility: item.isVisible ? "visible" : "hidden"
     };
     if (item.visible !== undefined && !item.visible) {
       style.display = "none";
@@ -102,7 +102,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
       item.component || "svc-toolbox-item",
       {
         item: item,
-        creator: this.creator,
+        creator: this.creator
       }
     );
     return (
@@ -150,7 +150,12 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
         draggable={true}
         title={this.item.tooltip}
         role="button"
-        aria-label={this.item.tooltip + " " + getLocString("toolbox") + " item"}
+        aria-label={
+          this.item.tooltip +
+          " " +
+          editorLocalization.getString("toolbox") +
+          " item"
+        }
         onClick={() => this.props.creator.clickToolboxItem(toolboxItem.json)}
         onDragStart={(e) => {
           var json = this.props.creator.getJSONForNewElement(toolboxItem.json);

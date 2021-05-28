@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="SurveyJS Creator Demo"
-    />
+    <meta name="description" content="SurveyJS Creator Demo" />
     <title>SurveyJS Creator React</title>
     <script src="https://unpkg.com/react@17.0.1/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js"></script>
@@ -17,9 +14,12 @@
     <script src="../node_modules/survey-react-ui/survey-react-ui.js"></script>
 
     <!--<script src="../build/survey-creator-react.js"></script>-->
-    <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/modern.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../node_modules/survey-core/modern.css"
+    />
     <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-react.css" /> -->
-
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -35,13 +35,13 @@
           {
             expression: "{nps_score} > 8",
             html:
-              "<h3>Thank you for your feedback.</h3> <h5>We glad that you love our product. Your ideas and suggestions will help us to make our product even better!</h5>",
+              "<h3>Thank you for your feedback.</h3> <h5>We glad that you love our product. Your ideas and suggestions will help us to make our product even better!</h5>"
           },
           {
             expression: "{nps_score} < 7",
             html:
-              "<h3>Thank you for your feedback.</h3> <h5> We are glad that you share with us your ideas.We highly value all suggestions from our customers. We do our best to improve the product and reach your expectation.</h5><br/>",
-          },
+              "<h3>Thank you for your feedback.</h3> <h5> We are glad that you share with us your ideas.We highly value all suggestions from our customers. We do our best to improve the product and reach your expectation.</h5><br/>"
+          }
         ],
         pages: [
           {
@@ -58,7 +58,7 @@
                 rateMin: 0,
                 rateMax: 10,
                 minRateDescription: "(Most unlikely)",
-                maxRateDescription: "(Most likely)",
+                maxRateDescription: "(Most likely)"
               },
               {
                 type: "checkbox",
@@ -70,33 +70,33 @@
                   {
                     type: "answercount",
                     text: "Please select two features maximum.",
-                    maxCount: 2,
-                  },
+                    maxCount: 2
+                  }
                 ],
                 hasOther: true,
                 choices: [
                   "Performance",
                   "Stability",
                   "User Interface",
-                  "Complete Functionality",
+                  "Complete Functionality"
                 ],
                 otherText: "Other feature:",
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
                 name: "passive_experience",
                 visibleIf: "{nps_score} > 6  and {nps_score} < 9",
-                title: "What is the primary reason for your score?",
+                title: "What is the primary reason for your score?"
               },
               {
                 type: "comment",
                 name: "disappointed_experience",
                 visibleIf: "{nps_score} notempty",
                 title:
-                  "What do you miss and what was disappointing in your experience with us?",
-              },
-            ],
+                  "What do you miss and what was disappointing in your experience with us?"
+              }
+            ]
           },
           {
             name: "page2",
@@ -104,9 +104,9 @@
               {
                 type: "checkbox",
                 name: "question4",
-                choices: ["item1", "item2", "item3"],
-              },
-            ],
+                choices: ["item1", "item2", "item3"]
+              }
+            ]
           },
           {
             name: "page3",
@@ -114,19 +114,19 @@
               {
                 type: "dropdown",
                 name: "question5",
-                choices: ["item1", "item2", "item3"],
-              },
-            ],
+                choices: ["item1", "item2", "item3"]
+              }
+            ]
           },
           {
             name: "page4",
             elements: [
               {
                 type: "rating",
-                name: "question6",
-              },
-            ],
-          },
+                name: "question6"
+              }
+            ]
+          }
         ],
         showQuestionNumbers: "off"
       };
@@ -136,11 +136,11 @@
         showTranslationTab: true,
         showEmbeddedSurveyTab: true
       };
-      const creator = SurveyCreatorReact.createReactSurveyCreator(json, options);
+      const creator = SurveyCreator.createSurveyCreator(json, options);
 
       ReactDOM.render(
         <React.StrictMode>
-          <SurveyCreatorReact.SurveyCreatorComponent creator={creator} />
+          <SurveyCreator.SurveyCreatorComponent creator={creator} />
         </React.StrictMode>,
         document.getElementById("root")
       );
