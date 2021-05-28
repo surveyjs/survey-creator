@@ -2,14 +2,15 @@ if (!window["%hammerhead%"]) {
   // SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
 
   Survey.StylesManager.applyTheme("modern");
+  SurveyCreator.editorLocalization.currentLocale = "de";
   let options = {
     // showTestSurveyTab: false,
     // showJSONEditorTab: false
     showLogicTab: true,
     showTranslationTab: true,
-    showEmbeddedSurveyTab: true,
+    showEmbeddedSurveyTab: true
   };
-  let creator = new SurveyCreatorKnockout.SurveyCreator(options);
+  let creator = new SurveyCreator.SurveyCreator(options);
   let json = {
     completedHtml:
       "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
@@ -17,13 +18,13 @@ if (!window["%hammerhead%"]) {
       {
         expression: "{nps_score} > 8",
         html:
-          "<h3>Thank you for your feedback.</h3> <h5>We glad that you love our product. Your ideas and suggestions will help us to make our product even better!</h5>",
+          "<h3>Thank you for your feedback.</h3> <h5>We glad that you love our product. Your ideas and suggestions will help us to make our product even better!</h5>"
       },
       {
         expression: "{nps_score} < 7",
         html:
-          "<h3>Thank you for your feedback.</h3> <h5> We are glad that you share with us your ideas.We highly value all suggestions from our customers. We do our best to improve the product and reach your expectation.</h5><br/>",
-      },
+          "<h3>Thank you for your feedback.</h3> <h5> We are glad that you share with us your ideas.We highly value all suggestions from our customers. We do our best to improve the product and reach your expectation.</h5><br/>"
+      }
     ],
     pages: [
       {
@@ -33,7 +34,7 @@ if (!window["%hammerhead%"]) {
         elements: [
           {
             type: "text",
-            name: "question11",
+            name: "question11"
           },
           {
             type: "rating",
@@ -44,7 +45,7 @@ if (!window["%hammerhead%"]) {
             rateMin: 0,
             rateMax: 10,
             minRateDescription: "(Most unlikely)",
-            maxRateDescription: "(Most likely)",
+            maxRateDescription: "(Most likely)"
           },
           {
             type: "checkbox",
@@ -56,33 +57,33 @@ if (!window["%hammerhead%"]) {
               {
                 type: "answercount",
                 text: "Please select two features maximum.",
-                maxCount: 2,
-              },
+                maxCount: 2
+              }
             ],
             hasOther: true,
             choices: [
               "Performance",
               "Stability",
               "User Interface",
-              "Complete Functionality",
+              "Complete Functionality"
             ],
             otherText: "Other feature:",
-            colCount: 2,
+            colCount: 2
           },
           {
             type: "comment",
             name: "passive_experience",
             visibleIf: "{nps_score} > 6  and {nps_score} < 9",
-            title: "What is the primary reason for your score?",
+            title: "What is the primary reason for your score?"
           },
           {
             type: "comment",
             name: "disappointed_experience",
             visibleIf: "{nps_score} notempty",
             title:
-              "What do you miss and what was disappointing in your experience with us?",
-          },
-        ],
+              "What do you miss and what was disappointing in your experience with us?"
+          }
+        ]
       },
       {
         name: "page2",
@@ -90,9 +91,9 @@ if (!window["%hammerhead%"]) {
           {
             type: "checkbox",
             name: "question4",
-            choices: ["item1", "item2", "item3"],
-          },
-        ],
+            choices: ["item1", "item2", "item3"]
+          }
+        ]
       },
       {
         name: "page3",
@@ -100,21 +101,21 @@ if (!window["%hammerhead%"]) {
           {
             type: "dropdown",
             name: "question5",
-            choices: ["item1", "item2", "item3"],
-          },
-        ],
+            choices: ["item1", "item2", "item3"]
+          }
+        ]
       },
       {
         name: "page4",
         elements: [
           {
             type: "rating",
-            name: "question6",
-          },
-        ],
-      },
+            name: "question6"
+          }
+        ]
+      }
     ],
-    showQuestionNumbers: "off",
+    showQuestionNumbers: "off"
   };
 
   let json2 = {
@@ -129,7 +130,7 @@ if (!window["%hammerhead%"]) {
             title: "Today's Date",
             isRequired: true,
             inputType: "date",
-            max: "2999-12-31",
+            max: "2999-12-31"
           },
           {
             type: "text",
@@ -137,7 +138,7 @@ if (!window["%hammerhead%"]) {
             startWithNewLine: false,
             title: "Review Month/Year",
             isRequired: true,
-            inputType: "month",
+            inputType: "month"
           },
           {
             type: "dropdown",
@@ -151,9 +152,9 @@ if (!window["%hammerhead%"]) {
               "Old Brooklyn",
               "JET",
               "SNAP to Skills",
-              "Quincy",
+              "Quincy"
             ],
-            choicesOrder: "asc",
+            choicesOrder: "asc"
           },
           {
             type: "dropdown",
@@ -249,9 +250,9 @@ if (!window["%hammerhead%"]) {
               "White, Shawn",
               "Wilson, Nicole",
               "Worthy, Lorene",
-              "Other",
+              "Other"
             ],
-            choicesOrder: "asc",
+            choicesOrder: "asc"
           },
           {
             type: "dropdown",
@@ -689,9 +690,9 @@ if (!window["%hammerhead%"]) {
               "Woodson, Angela",
               "Yarbrough, Nadine",
               "Yee, Mary",
-              "Ziegler, Lawrence",
+              "Ziegler, Lawrence"
             ],
-            choicesOrder: "asc",
+            choicesOrder: "asc"
           },
           {
             type: "radiogroup",
@@ -702,14 +703,14 @@ if (!window["%hammerhead%"]) {
             choices: [
               {
                 value: "Yes",
-                text: "Yes",
+                text: "Yes"
               },
               {
                 value: "No",
-                text: "No",
-              },
+                text: "No"
+              }
             ],
-            colCount: 2,
+            colCount: 2
           },
           {
             type: "dropdown",
@@ -799,15 +800,15 @@ if (!window["%hammerhead%"]) {
               "White, Jeriesha",
               "White, Shawn",
               "Wilson, Nicole",
-              "Worthy, Lorene",
+              "Worthy, Lorene"
             ],
-            choicesOrder: "asc",
+            choicesOrder: "asc"
           },
           {
             type: "text",
             name: "CaseName",
             title: "Case Name",
-            isRequired: true,
+            isRequired: true
           },
           {
             type: "checkbox",
@@ -815,7 +816,7 @@ if (!window["%hammerhead%"]) {
             title: "Check if this is a New Hire Review:",
             description:
               "If so, complete the review as the *proposed* action has been taken",
-            choices: ["Yes"],
+            choices: ["Yes"]
           },
           {
             type: "checkbox",
@@ -823,7 +824,7 @@ if (!window["%hammerhead%"]) {
             startWithNewLine: false,
             title: "Is this worker in the Hospital Unit?",
             description: "(Optional)",
-            choices: ["Yes"],
+            choices: ["Yes"]
           },
           {
             type: "matrixdropdown",
@@ -831,26 +832,26 @@ if (!window["%hammerhead%"]) {
             title: "Fill in the details of the block(s) you reviewed:",
             defaultValue: {
               SNAP: {
-                Included: "No",
+                Included: "No"
               },
               SNAPET: {
-                Included: "No",
+                Included: "No"
               },
               TANF: {
-                Included: "No",
+                Included: "No"
               },
               OWF: {
-                Included: "No",
+                Included: "No"
               },
               MC: {
-                Included: "No",
+                Included: "No"
               },
               LTC: {
-                Included: "No",
+                Included: "No"
               },
               UETarget: {
-                Included: "No",
-              },
+                Included: "No"
+              }
             },
             isRequired: true,
             columns: [
@@ -859,7 +860,7 @@ if (!window["%hammerhead%"]) {
                 title: "Did your review include this program?",
                 cellType: "radiogroup",
                 isRequired: true,
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 name: "ReviewType",
@@ -868,7 +869,7 @@ if (!window["%hammerhead%"]) {
                 isRequired: true,
                 visibleIf:
                   "{row.Included} = 'Yes' AND ( {rowindex} == 1 or {rowindex} == 3 or {rowindex} == 7 or {rowindex} = 5 or {rowindex} ==6)",
-                choices: ["Intake", "Renewal", "Interim", "Change"],
+                choices: ["Intake", "Renewal", "Interim", "Change"]
               },
               {
                 name: "Status",
@@ -876,7 +877,7 @@ if (!window["%hammerhead%"]) {
                 cellType: "dropdown",
                 isRequired: true,
                 visibleIf: "{row.Included} = 'Yes'",
-                choices: ["Approved", "Denied", "Discontinued", "Pending"],
+                choices: ["Approved", "Denied", "Discontinued", "Pending"]
               },
               {
                 name: "CaseNumber",
@@ -889,59 +890,59 @@ if (!window["%hammerhead%"]) {
                     type: "numeric",
                     text: "Please enter a valid case number",
                     minValue: 0,
-                    maxValue: 99999999,
+                    maxValue: 99999999
                   },
                   {
                     type: "text",
                     text: "Case numbers are 7 or 8 digits long",
                     minLength: 7,
                     maxLength: 8,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 name: "Block",
                 title: "Block Number(s)",
                 cellType: "text",
                 isRequired: true,
-                visibleIf: "{row.Included} = 'Yes'",
-              },
+                visibleIf: "{row.Included} = 'Yes'"
+              }
             ],
             choices: [1, 2, 3, 4, 5, 6, 7],
             rows: [
               {
                 value: "SNAP",
-                text: "SNAP",
+                text: "SNAP"
               },
               {
                 value: "SNAPET",
-                text: "SNAPET",
+                text: "SNAPET"
               },
               {
                 value: "TANF",
-                text: "TANF",
+                text: "TANF"
               },
               {
                 value: "OWF",
-                text: "TANF Work",
+                text: "TANF Work"
               },
               {
                 value: "MC",
-                text: "Community Medicaid",
+                text: "Community Medicaid"
               },
               {
                 value: "LTC",
-                text: "Long Term Care",
+                text: "Long Term Care"
               },
               {
                 value: "UETarget",
-                text: "Unearned Income Target Review",
-              },
-            ],
-          },
+                text: "Unearned Income Target Review"
+              }
+            ]
+          }
         ],
-        title: "Cover Page",
+        title: "Cover Page"
       },
       {
         name: "SNAP_Section",
@@ -950,27 +951,27 @@ if (!window["%hammerhead%"]) {
             type: "html",
             name: "SNAPPolicyLink",
             html:
-              '<a href="http://innerweb.odjfs.state.oh.us/Initiatives/CRIS-E/training/OhioBenefitsTrainingResources.stm" target=_"blank"> Link to SNAP Calculator </a> ',
+              '<a href="http://innerweb.odjfs.state.oh.us/Initiatives/CRIS-E/training/OhioBenefitsTrainingResources.stm" target=_"blank"> Link to SNAP Calculator </a> '
           },
           {
             type: "expression",
             name: "CaseName_Display_SNAP",
             title: "Case Name",
-            expression: "{CaseName}",
+            expression: "{CaseName}"
           },
           {
             type: "expression",
             name: "CaseNumber_Display_SNAP",
             startWithNewLine: false,
             title: "Case Number",
-            expression: "{ReviewDetails.SNAP.CaseNumber}",
+            expression: "{ReviewDetails.SNAP.CaseNumber}"
           },
           {
             type: "expression",
             name: "Block_Display_SNAP",
             startWithNewLine: false,
             title: "Block:\n",
-            expression: "{ReviewDetails.SNAP.Block}",
+            expression: "{ReviewDetails.SNAP.Block}"
           },
           {
             type: "panel",
@@ -982,7 +983,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are there journal notes regarding the action taken?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -992,7 +993,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the journal template used?",
                 isRequired: true,
                 choices: ["Yes", "No", "NA"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1001,7 +1002,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the journal notes adequate?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -1015,9 +1016,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -1029,7 +1030,7 @@ if (!window["%hammerhead%"]) {
                   'For example, does it describe the case action ("Denied for over-income") or does it just say "Overtime Assignment" or "Call Center"?',
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -1043,9 +1044,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -1055,10 +1056,10 @@ if (!window["%hammerhead%"]) {
                   "Is there Federal Tax Information (FTI) in the Journal Entry?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Journal Notes",
+            title: "Journal Notes"
           },
           {
             type: "panel",
@@ -1071,7 +1072,7 @@ if (!window["%hammerhead%"]) {
                   "Did the AG have zero net monthly income and $100 or less in liquid resources?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1081,7 +1082,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were benefits certified within 24 hours?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1092,7 +1093,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1102,7 +1103,7 @@ if (!window["%hammerhead%"]) {
                   "Did the AG have <$150 gross monthly income and resources of $100 or less?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1113,7 +1114,7 @@ if (!window["%hammerhead%"]) {
                   "Does the AG's rent/mortgage plus utility costs exceed the total of its gross monthly income & liquid resources?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1124,7 +1125,7 @@ if (!window["%hammerhead%"]) {
                   "Is the AG a destitute migrant or seasonal farmworker & has liquid resources of $100 or less?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1135,7 +1136,7 @@ if (!window["%hammerhead%"]) {
                   "Did the client miss the expedited interview appointment, receive a NOMI, and fail to reschedule an interview w/in 7 days from the application filing date?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1145,7 +1146,7 @@ if (!window["%hammerhead%"]) {
                   "Was the AG ineligible for benefits in the month of application or the month following application?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "expression",
@@ -1154,7 +1155,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Hidden logic to calculate whether the client meets expedited criteria, per the screening tool.",
                 expression:
-                  "({150Income100Resources_SNAP} = 'Yes'\nOR {ZeroIncome100Resources_SNAP} = 'Yes'\nOR {RentMortgageExceedUtility_SNAP} = 'Yes'\nOR {IsFarmworker_SNAP} = 'Yes')\nAND {ClientIneligibleFirstMonth_SNAP} = 'No'\nAND {ClientMissInitialScheduledInterview_SNAP} = 'No'",
+                  "({150Income100Resources_SNAP} = 'Yes'\nOR {ZeroIncome100Resources_SNAP} = 'Yes'\nOR {RentMortgageExceedUtility_SNAP} = 'Yes'\nOR {IsFarmworker_SNAP} = 'Yes')\nAND {ClientIneligibleFirstMonth_SNAP} = 'No'\nAND {ClientMissInitialScheduledInterview_SNAP} = 'No'"
               },
               {
                 type: "radiogroup",
@@ -1165,7 +1166,7 @@ if (!window["%hammerhead%"]) {
                   "Were the benefits available no later than close of business on the 7th calendar day?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1176,7 +1177,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1185,7 +1186,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the AG screened as Expedited at Application?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1197,7 +1198,7 @@ if (!window["%hammerhead%"]) {
                   "From previous answers, this client was eligible for Expedited processing but was not screened in as Expedited. Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1210,7 +1211,7 @@ if (!window["%hammerhead%"]) {
                   "From the answers above, this client appears not to have been eligible for Expedited service. ",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -1218,7 +1219,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OverrodeExpeditedAtApplication_SNAP} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what should have happened:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -1231,7 +1232,7 @@ if (!window["%hammerhead%"]) {
                   "From the answers above, this client appears to have been identified as eligible for Expedited services after the initial screening. ",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -1239,11 +1240,11 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{WasDiscoveryDateUsed_SNAP} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what should have happened:",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
             visibleIf: "{ReviewDetails.SNAP.ReviewType} = 'Intake'",
-            title: "Expedited Eligibility",
+            title: "Expedited Eligibility"
           },
           {
             type: "panel",
@@ -1259,18 +1260,18 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, scheduled timely",
+                    text: "Yes, scheduled timely"
                   },
                   {
                     value: "No",
-                    text: "No, scheduled untimely or not scheduled",
+                    text: "No, scheduled untimely or not scheduled"
                   },
                   {
                     value: "Unscheduled",
-                    text: "Walk-in or other unscheduled appointment",
-                  },
+                    text: "Walk-in or other unscheduled appointment"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1280,7 +1281,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the scheduling delay caused by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1291,7 +1292,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1303,18 +1304,18 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, Interview held timely",
+                    text: "Yes, Interview held timely"
                   },
                   {
                     value: "No",
-                    text: "No, Interview held untimely",
+                    text: "No, Interview held untimely"
                   },
                   {
                     value: "NoInterview",
-                    text: "The client did not attend an interview at all",
-                  },
+                    text: "The client did not attend an interview at all"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1323,7 +1324,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the interview delay caused by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1334,7 +1335,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1345,7 +1346,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits restored back to the AG's application date or beginning recertification period?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1357,10 +1358,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A (Phone Application)",
-                  },
+                    text: "N/A (Phone Application)"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -1369,7 +1370,7 @@ if (!window["%hammerhead%"]) {
                 title: "Did the client miss any scheduled interviews?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1380,7 +1381,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was a NOMI issued for the missed interview(s)?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1391,7 +1392,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1403,17 +1404,17 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Paper",
-                    text: "Yes, a Paper Application",
+                    text: "Yes, a Paper Application"
                   },
                   {
                     value: "Audio",
-                    text: "Yes, an Audio Signature",
+                    text: "Yes, an Audio Signature"
                   },
                   {
                     value: "No",
-                    text: "No, neither",
-                  },
-                ],
+                    text: "No, neither"
+                  }
+                ]
               },
               {
                 type: "matrix",
@@ -1426,54 +1427,54 @@ if (!window["%hammerhead%"]) {
                 rows: [
                   {
                     value: "Name",
-                    text: "State your First/Last Name",
+                    text: "State your First/Last Name"
                   },
                   {
                     value: "Address",
-                    text: "State your address",
+                    text: "State your address"
                   },
                   {
                     value: "PhoneApp",
                     text:
-                      "Do you want to submit this application for cash and/or food assistance over the phone?",
+                      "Do you want to submit this application for cash and/or food assistance over the phone?"
                   },
                   {
                     value: "PhoneAppResponse",
                     text: "((Did the client agree to apply by phone?))",
-                    visibleIf: "{AudioSignatureMatrix_SNAP.PhoneApp} = 'Yes'",
+                    visibleIf: "{AudioSignatureMatrix_SNAP.PhoneApp} = 'Yes'"
                   },
                   {
                     value: "ConfirmInfo",
                     text:
                       "Confirmed client's name, address and date of application back to them",
                     visibleIf:
-                      "{AudioSignatureMatrix_SNAP.PhoneAppResponse} = 'Yes'",
+                      "{AudioSignatureMatrix_SNAP.PhoneAppResponse} = 'Yes'"
                   },
                   {
                     value: "ConfirmIncomplete",
                     text:
                       "Your request to apply for food and cash is incomplete, we will not be able to continue without your understanding and agreement.",
                     visibleIf:
-                      "{AudioSignatureMatrix_SNAP.PhoneAppResponse} = 'No'",
+                      "{AudioSignatureMatrix_SNAP.PhoneAppResponse} = 'No'"
                   },
                   {
                     value: "AddAuthRep",
                     text: "Would you like to add an authorized representative?",
                     visibleIf:
-                      "{AudioSignatureMatrix_SNAP.PhoneAppResponse} = 'Yes'",
+                      "{AudioSignatureMatrix_SNAP.PhoneAppResponse} = 'Yes'"
                   },
                   {
                     value: "AddAuthRepResponse",
                     text: "((Did the client want to add an Auth rep?))",
-                    visibleIf: "{AudioSignatureMatrix_SNAP.AddAuthRep} = 'Yes'",
+                    visibleIf: "{AudioSignatureMatrix_SNAP.AddAuthRep} = 'Yes'"
                   },
                   {
                     value: "AuthRepInfo",
                     text: "The name/address of the Authorized Representative",
                     visibleIf:
-                      "{AudioSignatureMatrix_SNAP.AddAuthRepResponse} = 'Yes'",
-                  },
-                ],
+                      "{AudioSignatureMatrix_SNAP.AddAuthRepResponse} = 'Yes'"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -1486,18 +1487,18 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, request not fulfilled",
+                    text: "No, request not fulfilled"
                   },
                   {
                     value: "NA",
-                    text: "Not requested",
-                  },
-                ],
-              },
+                    text: "Not requested"
+                  }
+                ]
+              }
             ],
             visibleIf:
               "{ReviewDetails.SNAP.ReviewType} anyof ['Intake', 'Renewal']",
-            title: "Interview",
+            title: "Interview"
           },
           {
             type: "panel",
@@ -1512,15 +1513,15 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, omitted in error",
+                    text: "No, omitted in error"
                   },
                   {
                     value: "N/A",
-                    text: "Not applicable",
-                  },
+                    text: "Not applicable"
+                  }
                 ],
                 hideIfChoicesEmpty: true,
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -1528,7 +1529,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{AuthRepCorrect_SNAP} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -1537,7 +1538,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the correct application date used?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -1545,7 +1546,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IntakeCorrectAppDate_SNAP} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect about the app date:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -1555,7 +1556,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the certification period correct?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -1564,7 +1565,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title:
                   "Please describe what was incorrect about the cert period:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -1577,14 +1578,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, received after",
+                    text: "No, received after"
                   },
                   {
                     value: "NotReceived",
-                    text: "No, not received",
-                  },
+                    text: "No, not received"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1595,7 +1596,7 @@ if (!window["%hammerhead%"]) {
                   "Did the AG take the required action within 30 days after the end of the certification period?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1606,7 +1607,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits provided back to the date the AG took the required action?",
                 isRequired: true,
                 choices: ["Yes", "No "],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1617,7 +1618,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits authorized using the date the application for recertification was received by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1629,14 +1630,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, and should have been",
+                    text: "No, and should have been"
                   },
                   {
                     value: "N/A",
-                    text: "No, but should not have been",
-                  },
+                    text: "No, but should not have been"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1647,7 +1648,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits authorized within 30 days from the date of application?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1658,7 +1659,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1668,7 +1669,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was the application denied timely (by 30th day or the following business day)?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1679,10 +1680,10 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Authorization",
+            title: "Authorization"
           },
           {
             type: "panel",
@@ -1694,7 +1695,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was an ABAWD screening completed for the client?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1704,7 +1705,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the client's ABAWD status correctly assessed?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1714,7 +1715,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the screening results added to EDMS?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1723,7 +1724,7 @@ if (!window["%hammerhead%"]) {
                   "Based on your review, did the client meet an exemption?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1734,7 +1735,7 @@ if (!window["%hammerhead%"]) {
                   "Was the exemption already verified at the time of the interview?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1745,7 +1746,7 @@ if (!window["%hammerhead%"]) {
                   "Was the Work Registration Detail Screen updated with the exemption?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -1754,7 +1755,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title: "Were the verifications requested?",
                 isRequired: true,
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 type: "radiogroup",
@@ -1765,13 +1766,13 @@ if (!window["%hammerhead%"]) {
                 title: "Was the client referred to SNAP to Skills?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
             visibleIf:
               "{ReviewDetails.SNAP.ReviewType} anyof ['Intake', 'Renewal'] and {ReviewDetails.SNAP.Status} = 'Approved'",
             title: "Work Assessment",
-            isRequired: true,
+            isRequired: true
           },
           {
             type: "panel",
@@ -1783,7 +1784,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is there an elderly or disabled member of the AG?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "matrixdropdown",
@@ -1793,62 +1794,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -1857,14 +1858,14 @@ if (!window["%hammerhead%"]) {
                     title: "Does the client actually have this type of costs?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "InBudget",
                     title: "Was this expense included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -1872,7 +1873,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -1881,7 +1882,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'",
                     expression:
-                      "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -1890,7 +1891,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ExpenseExists} = 'No' and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.ExpenseExists} = 'No' and {row.InBudget} = 'Yes'",
+                      "{row.ExpenseExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -1898,40 +1899,40 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true \nor {row.IncludedInError} = true",
-                  },
+                      "{row.ExcludedInError} = true \nor {row.IncludedInError} = true"
+                  }
                 ],
                 rows: [
                   {
                     value: "Shelter",
-                    text: "Shelter Costs",
+                    text: "Shelter Costs"
                   },
                   {
                     value: "Utilities",
-                    text: "Utility Costs (Current Address)",
+                    text: "Utility Costs (Current Address)"
                   },
                   {
                     value: "Medical",
-                    text: "Recurring Medical Costs",
+                    text: "Recurring Medical Costs"
                   },
                   {
                     value: "Medicare",
-                    text: "Medicare Premium",
+                    text: "Medicare Premium"
                   },
                   {
                     value: "RecurringMedical",
                     text: "Recurring Medical Expenses",
-                    visibleIf: "{ElderlyDisabledAG_SNAP} = 'Yes'",
+                    visibleIf: "{ElderlyDisabledAG_SNAP} = 'Yes'"
                   },
                   {
                     value: "ChildSupport",
-                    text: "Court Ordered Child Support",
+                    text: "Court Ordered Child Support"
                   },
                   {
                     value: "Childcare",
-                    text: "Dependent Care Expenses",
-                  },
-                ],
+                    text: "Dependent Care Expenses"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -1946,10 +1947,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "N/A",
-                    text: "N/A, not paid by State buy-in",
-                  },
+                    text: "N/A, not paid by State buy-in"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -1957,7 +1958,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{BuyInMedicarePremium_SNAP} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the Medicare premium:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "matrixdropdown",
@@ -1967,62 +1968,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -2031,14 +2032,14 @@ if (!window["%hammerhead%"]) {
                     title: "Does the client actually have this type of income?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "InBudget",
                     title: "Was this income included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -2046,7 +2047,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -2055,7 +2056,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.IncomeExists} == Yes and {row.InBudget} == No",
                     expression:
-                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -2064,7 +2065,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'",
+                      "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -2072,23 +2073,23 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'",
-                  },
+                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'"
+                  }
                 ],
                 rows: [
                   {
                     value: "Earned",
-                    text: "Earned Income",
+                    text: "Earned Income"
                   },
                   {
                     value: "Unearned",
-                    text: "Unearned Income",
+                    text: "Unearned Income"
                   },
                   {
                     value: "SSISSDI",
-                    text: "SSI/SSDI",
-                  },
-                ],
+                    text: "SSI/SSDI"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -2103,10 +2104,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "N/A",
-                    text: "N/A, gross/net are same",
-                  },
+                    text: "N/A, gross/net are same"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -2114,7 +2115,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{SSISSDIOverpayment_SNAP} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the SSI/SSDI:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -2125,18 +2126,18 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, verified",
+                    text: "Yes, verified"
                   },
                   {
                     value: "No",
-                    text: "No, not verified",
+                    text: "No, not verified"
                   },
                   {
                     value: "N/A",
-                    text: "N/A, expenses do not exceed income",
-                  },
+                    text: "N/A, expenses do not exceed income"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -2144,7 +2145,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{HowMeetMonthlyExpenses_SNAP} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the expenses/icnome:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -2155,10 +2156,10 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No",
-                  },
+                    text: "No"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -2166,10 +2167,10 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherBudgetErrors_SNAP} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Budget",
+            title: "Budget"
           },
           {
             type: "panel",
@@ -2183,18 +2184,18 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes (including postponed verifications)",
+                    text: "Yes (including postponed verifications)"
                   },
                   {
                     value: "NoCorrect",
-                    text: "No, nothing to request",
+                    text: "No, nothing to request"
                   },
                   {
                     value: "NoIncorrect",
-                    text: "No, some necessary verifications were not requested",
-                  },
+                    text: "No, some necessary verifications were not requested"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "matrixdropdown",
@@ -2209,7 +2210,7 @@ if (!window["%hammerhead%"]) {
                     name: "Requested",
                     title: "Requested?",
                     cellType: "checkbox",
-                    choices: ["Yes"],
+                    choices: ["Yes"]
                   },
                   {
                     name: "Necessary",
@@ -2217,7 +2218,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: "{row.Requested} = ['Yes']",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Checklist",
@@ -2230,13 +2231,13 @@ if (!window["%hammerhead%"]) {
                     choices: [
                       {
                         value: "Yes",
-                        visibleIf: "{row.Requested} = ['Yes']",
+                        visibleIf: "{row.Requested} = ['Yes']"
                       },
                       {
                         value: "No",
-                        visibleIf: "{row.Requested} = ['Yes']",
-                      },
-                    ],
+                        visibleIf: "{row.Requested} = ['Yes']"
+                      }
+                    ]
                   },
                   {
                     name: "Verified",
@@ -2245,8 +2246,8 @@ if (!window["%hammerhead%"]) {
                     isRequired: true,
                     visibleIf:
                       "{row.Requested} = ['Yes'] AND( {MeetsExpeditedCriteria_SNAP} = 'No'\nAND NOT( rowindex == 1)",
-                    choices: ["Yes", "No"],
-                  },
+                    choices: ["Yes", "No"]
+                  }
                 ],
                 rows: [
                   "Identity",
@@ -2254,17 +2255,17 @@ if (!window["%hammerhead%"]) {
                   "Citizenship",
                   {
                     value: "Shelter",
-                    text: "Utility Expense",
+                    text: "Utility Expense"
                   },
                   {
                     value: "Rent",
-                    text: "Rent/Mortgage",
+                    text: "Rent/Mortgage"
                   },
                   {
                     value: "Other",
-                    text: "Other (describe below)",
-                  },
-                ],
+                    text: "Other (describe below)"
+                  }
+                ]
               },
               {
                 type: "expression",
@@ -2273,7 +2274,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Hidden Logic to Calculate whether unnecessary verifications were requested",
                 expression:
-                  "{RequestedVerifications_SNAP.Identity.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Income.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Citizenship.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Rent.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Shelter.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Other.Necessary} = 'No'",
+                  "{RequestedVerifications_SNAP.Identity.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Income.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Citizenship.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Rent.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Shelter.Necessary} = 'No' OR\n{RequestedVerifications_SNAP.Other.Necessary} = 'No'"
               },
               {
                 type: "comment",
@@ -2281,7 +2282,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{RequestedVerifications_SNAP.Other.Requested} = ['Yes']",
                 title: "What other verifications were requested?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -2296,10 +2297,10 @@ if (!window["%hammerhead%"]) {
                   {
                     value: "No",
                     text:
-                      "No, a checklist was issued and benefits were not authorized at interview",
-                  },
+                      "No, a checklist was issued and benefits were not authorized at interview"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2313,23 +2314,23 @@ if (!window["%hammerhead%"]) {
                   {
                     value: "Yes",
                     text:
-                      "Yes, verifications were received prior to a second month being issued.",
+                      "Yes, verifications were received prior to a second month being issued."
                   },
                   {
                     value: "No",
                     text:
-                      "No, a second month was issued without receiving necessary verifications.",
+                      "No, a second month was issued without receiving necessary verifications."
                   },
                   {
                     value: "FailedtoIssue",
                     text:
-                      "Verifications were received but a second month was not issued.",
+                      "Verifications were received but a second month was not issued."
                   },
                   {
                     value: "No Second Month",
-                    text: "It is still too soon to issue a second month.",
-                  },
-                ],
+                    text: "It is still too soon to issue a second month."
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -2340,7 +2341,7 @@ if (!window["%hammerhead%"]) {
                   "Was it fault of the worker under review: {EligSpec} that a second month was issued without verifications?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2351,7 +2352,7 @@ if (!window["%hammerhead%"]) {
                   "Was it fault of the worker under review: {EligSpec} that a a second month has not been issued?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2364,18 +2365,18 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, notice was provided",
+                    text: "Yes, notice was provided"
                   },
                   {
                     value: "No",
-                    text: "No, notice was not provided",
+                    text: "No, notice was not provided"
                   },
                   {
                     value: "NA",
-                    text: "N/A, Not needed",
-                  },
+                    text: "N/A, Not needed"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2386,7 +2387,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2399,14 +2400,14 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, benefits were authorized in error",
+                    text: "Yes, benefits were authorized in error"
                   },
                   {
                     value: "No",
-                    text: "No, case was authorized properly",
-                  },
+                    text: "No, case was authorized properly"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2415,7 +2416,7 @@ if (!window["%hammerhead%"]) {
                   "Are there unaddressed alerts and/or IEVS matches that may affect the current eligibility?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -2424,10 +2425,10 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title:
                   "Please describe the problem with the unaddressed alerts. \n(Don't include PII/FTI!):",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Verifications",
+            title: "Verifications"
           },
           {
             type: "panel",
@@ -2439,7 +2440,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was the case outcome ({ReviewDetails.SNAP.Status}) correct?",
                 isRequired: true,
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 type: "comment",
@@ -2447,7 +2448,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IsOutcomeCorrect_SNAP} = 'No'",
                 startWithNewLine: false,
                 title: "What was incorrect?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "matrixdropdown",
@@ -2464,7 +2465,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     colCount: 2,
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "AtReview",
@@ -2475,13 +2476,13 @@ if (!window["%hammerhead%"]) {
                     validators: [
                       {
                         type: "numeric",
-                        minValue: 0,
-                      },
+                        minValue: 0
+                      }
                     ],
                     totalDisplayStyle: "currency",
                     inputType: "number",
                     min: "0",
-                    step: 0.01,
+                    step: 0.01
                   },
                   {
                     name: "CorrectedAmt",
@@ -2494,13 +2495,13 @@ if (!window["%hammerhead%"]) {
                     validators: [
                       {
                         type: "numeric",
-                        minValue: 0,
-                      },
+                        minValue: 0
+                      }
                     ],
                     totalDisplayStyle: "currency",
                     inputType: "number",
                     min: "0",
-                    step: 0.01,
+                    step: 0.01
                   },
                   {
                     name: "Difference",
@@ -2508,7 +2509,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.Correct} = 'No' and {row.CorrectTBD} notcontains 'Cannot Identify Correct Amt'",
                     expression: "{row.AtReview}-{row.CorrectedAmt}",
-                    displayStyle: "currency",
+                    displayStyle: "currency"
                   },
                   {
                     name: "CorrectTBD",
@@ -2516,24 +2517,24 @@ if (!window["%hammerhead%"]) {
                     cellType: "checkbox",
                     visibleIf: "{row.Correct} = 'No'",
                     enableIf: "{row.CorrectedAmt} empty",
-                    choices: ["Cannot Identify Correct Amt"],
-                  },
+                    choices: ["Cannot Identify Correct Amt"]
+                  }
                 ],
                 choices: [1, 2, 3, 4, 5],
                 rows: [
                   {
                     value: "Initial",
-                    text: "Initial Month",
+                    text: "Initial Month"
                   },
-                  "Ongoing",
-                ],
+                  "Ongoing"
+                ]
               },
               {
                 type: "radiogroup",
                 name: "OtherErrors_SNAP",
                 title: "Are there other SNAP errors not addressed above?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -2541,14 +2542,14 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherErrors_SNAP} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Miscellaneous",
-          },
+            title: "Miscellaneous"
+          }
         ],
         visibleIf: "{ReviewDetails.SNAP.Included} = 'Yes'",
-        title: "SNAP Review Section",
+        title: "SNAP Review Section"
       },
       {
         name: "SNAPET_Section",
@@ -2558,7 +2559,7 @@ if (!window["%hammerhead%"]) {
             name: "CaseNameDisplay_SNAPET",
             title: "Case Name:",
             titleLocation: "left",
-            expression: "{CaseName}",
+            expression: "{CaseName}"
           },
           {
             type: "expression",
@@ -2566,14 +2567,14 @@ if (!window["%hammerhead%"]) {
             startWithNewLine: false,
             title: "Case Number:",
             titleLocation: "left",
-            expression: "{ReviewDetails.SNAPET.CaseNumber}",
+            expression: "{ReviewDetails.SNAPET.CaseNumber}"
           },
           {
             type: "expression",
             name: "BlockDisplay_SNAPET",
             startWithNewLine: false,
             title: "Block:",
-            expression: "{ReviewDetails.SNAPET.Block}",
+            expression: "{ReviewDetails.SNAPET.Block}"
           },
           {
             type: "panel",
@@ -2585,7 +2586,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are there journal notes regarding the action taken?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2594,7 +2595,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the journal notes adequate?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -2608,9 +2609,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -2622,7 +2623,7 @@ if (!window["%hammerhead%"]) {
                   'For example, does it describe the case action ("Denied for over-income") or does it just say "Overtime Assignment" or "Call Center"?',
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -2636,9 +2637,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -2648,10 +2649,10 @@ if (!window["%hammerhead%"]) {
                   "Is there Federal Tax Information (FTI) in the Journal Entry?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Journal Notes",
+            title: "Journal Notes"
           },
           {
             type: "panel",
@@ -2663,7 +2664,7 @@ if (!window["%hammerhead%"]) {
                 title: "Did STS complete an ABAWD screening for the client",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2673,7 +2674,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the client's ABAWD status correctly assessed?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2683,7 +2684,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the screening results added to EDMS?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2692,7 +2693,7 @@ if (!window["%hammerhead%"]) {
                   "Did the STS screening produce the same results as the NFSC screening?",
                 isRequired: true,
                 choices: ["Yes", "No", "No NFSC screening"],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -2700,7 +2701,7 @@ if (!window["%hammerhead%"]) {
                 title: "Did the client meet an exemption?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2711,7 +2712,7 @@ if (!window["%hammerhead%"]) {
                   "Was the exemption already verified at the time of the interview?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2720,7 +2721,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title: "Were the verifications requested?",
                 isRequired: true,
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 type: "radiogroup",
@@ -2731,7 +2732,7 @@ if (!window["%hammerhead%"]) {
                   "Was the Work Registration Detail Screen updated with the exemption?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2742,7 +2743,7 @@ if (!window["%hammerhead%"]) {
                   "Were all corresponding exemption screens updated correctly?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -2757,13 +2758,13 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
-              },
+                    allowDigits: true
+                  }
+                ]
+              }
             ],
             title: "Assessment",
-            isRequired: true,
+            isRequired: true
           },
           {
             type: "panel",
@@ -2776,7 +2777,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the client sent an appointment letter?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2787,13 +2788,13 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes",
+                    text: "Yes"
                   },
                   {
                     value: "No",
-                    text: "No",
-                  },
-                ],
+                    text: "No"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -2805,13 +2806,13 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "DelayedReferral",
-                    text: "Delayed/No Referral by NFSC",
+                    text: "Delayed/No Referral by NFSC"
                   },
                   {
                     value: "DelaySTS",
-                    text: "Delayed Scheduling by STS",
-                  },
-                ],
+                    text: "Delayed Scheduling by STS"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -2821,7 +2822,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was this the fault of the worker under review: {EligSpec}?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2829,7 +2830,7 @@ if (!window["%hammerhead%"]) {
                 title: "Did the client miss a SNAP to Skills appointment?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2839,7 +2840,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was valid good cause provided timely?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2849,7 +2850,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the client rescheduled?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2859,11 +2860,11 @@ if (!window["%hammerhead%"]) {
                 title: "Was the client sanctioned?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
             title: "SNAP to Skills Intake Appointment",
-            isRequired: true,
+            isRequired: true
           },
           {
             type: "panel",
@@ -2876,7 +2877,7 @@ if (!window["%hammerhead%"]) {
                   "Was the client regaining eligibility (had an open Non-Compliance record)?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2887,7 +2888,7 @@ if (!window["%hammerhead%"]) {
                   "Did the client regain eligibility prior to authorization?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2897,7 +2898,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was verification provided?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2906,7 +2907,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the non-compliance ended?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2916,7 +2917,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are the end dates correct?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2929,10 +2930,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "N/A",
-                    text: "None needed",
-                  },
+                    text: "None needed"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -2941,7 +2942,7 @@ if (!window["%hammerhead%"]) {
                   "Had the individual received benefits for 3 or more months of SNAP in a 36-month period?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2951,7 +2952,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the individual meeting the work requirements?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -2964,14 +2965,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, not terminated at all",
+                    text: "No, not terminated at all"
                   },
                   {
                     value: "Late",
-                    text: "No, terminated after third month",
-                  },
+                    text: "No, terminated after third month"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -2982,7 +2983,7 @@ if (!window["%hammerhead%"]) {
                   "Was the case referred to investigations after being terminated late?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -2992,10 +2993,10 @@ if (!window["%hammerhead%"]) {
                 title: "Was the employment activity screen end dated?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Eligibility",
+            title: "Eligibility"
           },
           {
             type: "panel",
@@ -3010,21 +3011,21 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Employment",
-                    text: "Employment (Paid/Unpaid)",
+                    text: "Employment (Paid/Unpaid)"
                   },
                   {
                     value: "WEP",
-                    text: "Work Experience Program",
+                    text: "Work Experience Program"
                   },
                   {
                     value: "JSJR",
-                    text: "Job Search/Job Readiness",
+                    text: "Job Search/Job Readiness"
                   },
-                  "Education",
+                  "Education"
                 ],
                 hasOther: true,
                 otherText: "Other (Describe)",
-                colCount: 4,
+                colCount: 4
               },
               {
                 type: "radiogroup",
@@ -3034,7 +3035,7 @@ if (!window["%hammerhead%"]) {
                   "Is the employment screen completed correctly for Unpaid/In-kind employment?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "text",
@@ -3048,10 +3049,10 @@ if (!window["%hammerhead%"]) {
                     type: "numeric",
                     text: "Weekly hours should be 0-80",
                     minValue: 0,
-                    maxValue: 80,
-                  },
+                    maxValue: 80
+                  }
                 ],
-                inputType: "number",
+                inputType: "number"
               },
               {
                 type: "radiogroup",
@@ -3062,7 +3063,7 @@ if (!window["%hammerhead%"]) {
                   "Was the client assigned to a sufficient number of hours in other activities?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3072,7 +3073,7 @@ if (!window["%hammerhead%"]) {
                   "Do the WEP hours assigned comply with FLSA requirements?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3082,7 +3083,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is there a signed employability plan on file?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3091,7 +3092,7 @@ if (!window["%hammerhead%"]) {
                   "Was the employment activity screen correctly updated with the activities?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3099,7 +3100,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was a service authorization completed?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3109,7 +3110,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the IWAM alerts read to take negative action?",
                 isRequired: true,
                 choices: ["Yes", "No", "N/A"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3122,10 +3123,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "N/A",
-                    text: "Not applicable to selected provider",
-                  },
+                    text: "Not applicable to selected provider"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3138,17 +3139,17 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A, no felony record",
-                  },
+                    text: "N/A, no felony record"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
                 name: "FelonyAssignedActAppropriate_Comment_SNAPET",
                 visibleIf: "{FelonyAssignedActAppropriate_SNAPET} = 'No'",
                 startWithNewLine: false,
-                title: "What was inappropriate about the activity?",
+                title: "What was inappropriate about the activity?"
               },
               {
                 type: "radiogroup",
@@ -3161,21 +3162,21 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A, has a GED-equivalent",
-                  },
+                    text: "N/A, has a GED-equivalent"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
                 name: "NoHSDiplomaGEDAssignActAppropriate_Comment_SNAPET",
                 visibleIf: "{NoHSDiplomaGEDAssignActAppropriate_SNAPET} = 'No'",
                 startWithNewLine: false,
-                title: "What was inappropriate about the activity?",
-              },
+                title: "What was inappropriate about the activity?"
+              }
             ],
             title: "Work Assignment",
-            isRequired: true,
+            isRequired: true
           },
           {
             type: "panel",
@@ -3188,7 +3189,7 @@ if (!window["%hammerhead%"]) {
                   "Are there other SNAP E&T errors not addressed in the questions above?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -3196,15 +3197,15 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherErrors_SNAPET} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
             title: "Miscellaneous",
-            isRequired: true,
-          },
+            isRequired: true
+          }
         ],
         visibleIf: "{ReviewDetails.SNAPET.Included} = 'Yes'",
-        title: "SNAP E&T Section",
+        title: "SNAP E&T Section"
       },
       {
         name: "TANF_Section",
@@ -3213,27 +3214,27 @@ if (!window["%hammerhead%"]) {
             type: "html",
             name: "TANFPolicyLink",
             html:
-              '<a href="http://innerweb.odjfs.state.oh.us/Initiatives/CRIS-E/training/OhioBenefitsTrainingResources.stm" target=_"blank"> Link to TANF Policy </a>',
+              '<a href="http://innerweb.odjfs.state.oh.us/Initiatives/CRIS-E/training/OhioBenefitsTrainingResources.stm" target=_"blank"> Link to TANF Policy </a>'
           },
           {
             type: "expression",
             name: "CaseNameDisplay_TANF",
             title: "Case Name:",
-            expression: "{CaseName}",
+            expression: "{CaseName}"
           },
           {
             type: "expression",
             name: "CaseNumberDisplay_TANF",
             startWithNewLine: false,
             title: "Case Number:",
-            expression: "{ReviewDetails.TANF.CaseNumber}",
+            expression: "{ReviewDetails.TANF.CaseNumber}"
           },
           {
             type: "expression",
             name: "BlockDisplay_TANF",
             startWithNewLine: false,
             title: "Block:",
-            expression: "{ReviewDetails.TANF.Block}",
+            expression: "{ReviewDetails.TANF.Block}"
           },
           {
             type: "panel",
@@ -3245,7 +3246,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are there journal notes regarding the action taken?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3255,7 +3256,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the journal template used?",
                 isRequired: true,
                 choices: ["Yes", "No", "NA"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3264,7 +3265,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the journal notes adequate?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -3278,9 +3279,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -3292,7 +3293,7 @@ if (!window["%hammerhead%"]) {
                   'For example, does it describe the case action ("Denied for over-income") or does it just say "Overtime Assignment" or "Call Center"?',
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -3306,9 +3307,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -3318,10 +3319,10 @@ if (!window["%hammerhead%"]) {
                   "Is there Federal Tax Information (FTI) in the Journal Entry?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Journal Notes",
+            title: "Journal Notes"
           },
           {
             type: "panel",
@@ -3337,9 +3338,9 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   "Yes, scheduled timely",
                   "No, scheduled untimely or not scheduled",
-                  "Walk-in or other unscheduled appointment",
+                  "Walk-in or other unscheduled appointment"
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3349,7 +3350,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the scheduling delay caused by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3360,7 +3361,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3372,18 +3373,18 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, Interview held timely",
+                    text: "Yes, Interview held timely"
                   },
                   {
                     value: "No",
-                    text: "No, Interview held untimely",
+                    text: "No, Interview held untimely"
                   },
                   {
                     value: "NoInterview",
-                    text: "The client did not attend an interview at all",
-                  },
+                    text: "The client did not attend an interview at all"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3392,7 +3393,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the interview delay caused by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3403,7 +3404,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3414,7 +3415,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits restored back to the AG's application date or beginning recertification period?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3426,9 +3427,9 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A (Phone Application)",
-                  },
-                ],
+                    text: "N/A (Phone Application)"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -3437,7 +3438,7 @@ if (!window["%hammerhead%"]) {
                 title: "Did the client miss any scheduled interviews?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3448,7 +3449,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was a NOMI issued for the missed interview(s)?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3459,7 +3460,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3467,7 +3468,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the application for child only cash?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3476,7 +3477,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was a referral sent to JET?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3488,7 +3489,7 @@ if (!window["%hammerhead%"]) {
                   "Was the referral within 30 days of the application date?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3500,19 +3501,19 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Paper",
-                    text: "Yes, a Paper Application",
+                    text: "Yes, a Paper Application"
                   },
                   {
                     value: "Audio",
-                    text: "Yes, an Audio Signature",
+                    text: "Yes, an Audio Signature"
                   },
-                  "No",
-                ],
-              },
+                  "No"
+                ]
+              }
             ],
             visibleIf:
               "{ReviewDetails.TANF.ReviewType} contains 'Intake' OR {ReviewDetails.TANF.ReviewType} contains 'Renewal']",
-            title: "Interview",
+            title: "Interview"
           },
           {
             type: "panel",
@@ -3527,15 +3528,15 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, omitted in error",
+                    text: "No, omitted in error"
                   },
                   {
                     value: "N/A",
-                    text: "Not applicable",
-                  },
+                    text: "Not applicable"
+                  }
                 ],
                 hideIfChoicesEmpty: true,
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -3543,7 +3544,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{AuthRepCorrect_TANF} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -3552,7 +3553,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the correct application date used?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -3560,7 +3561,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IntakeCorrectAppDate_TANF} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect about the app date:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -3570,7 +3571,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the certification period correct?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -3579,7 +3580,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title:
                   "Please describe what was incorrect about the cert period:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -3592,14 +3593,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, received after",
+                    text: "No, received after"
                   },
                   {
                     value: "NotReceived",
-                    text: "No, not received",
-                  },
+                    text: "No, not received"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3610,7 +3611,7 @@ if (!window["%hammerhead%"]) {
                   "Did the AG take the required action within 30 days after the end of the certification period?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3621,7 +3622,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits provided back to the date the AG took the required action?",
                 isRequired: true,
                 choices: ["Yes", "No "],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3632,7 +3633,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits authorized using the date the application for recertification was received by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3644,14 +3645,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, and should have been",
+                    text: "No, and should have been"
                   },
                   {
                     value: "N/A",
-                    text: "No, but should not have been",
-                  },
+                    text: "No, but should not have been"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3662,7 +3663,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits authorized within 30 days from the date of application?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3673,7 +3674,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3683,7 +3684,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was the application denied timely (by 30th day or the following business day)?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -3694,10 +3695,10 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Authorization",
+            title: "Authorization"
           },
           {
             type: "panel",
@@ -3711,62 +3712,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -3775,14 +3776,14 @@ if (!window["%hammerhead%"]) {
                     title: "Does the client actually have this type of costs?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "InBudget",
                     title: "Was this expense included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -3790,7 +3791,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -3799,7 +3800,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'",
                     expression:
-                      "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -3808,7 +3809,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ExpenseExists} = 'No' and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.ExpenseExists} = 'No' and {row.InBudget} = 'Yes'",
+                      "{row.ExpenseExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -3816,39 +3817,39 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'",
-                  },
+                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'"
+                  }
                 ],
                 rows: [
                   {
                     value: "Shelter",
-                    text: "Shelter Costs",
+                    text: "Shelter Costs"
                   },
                   {
                     value: "Utilities",
-                    text: "Utility Costs (Current Address)",
+                    text: "Utility Costs (Current Address)"
                   },
                   {
                     value: "Medical",
-                    text: "Medical Costs",
+                    text: "Medical Costs"
                   },
                   {
                     value: "Medicare",
-                    text: "Medicare Premium",
+                    text: "Medicare Premium"
                   },
                   {
                     value: "RecurringMedical",
-                    text: "Recurring Medical Expenses",
+                    text: "Recurring Medical Expenses"
                   },
                   {
                     value: "ChildSupport",
-                    text: "Court Ordered Child Support",
+                    text: "Court Ordered Child Support"
                   },
                   {
                     value: "Childcare",
-                    text: "Dependent Care Expenses",
-                  },
-                ],
+                    text: "Dependent Care Expenses"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -3863,10 +3864,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "N/A",
-                    text: "Not paid by State buy-in",
-                  },
+                    text: "Not paid by State buy-in"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -3874,7 +3875,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{BuyInMedicarePremium_TANF} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the Medicare premium:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "matrixdropdown",
@@ -3884,62 +3885,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -3948,14 +3949,14 @@ if (!window["%hammerhead%"]) {
                     title: "Does the client actually have this type of income?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "InBudget",
                     title: "Was this income included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -3963,7 +3964,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -3972,7 +3973,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'",
                     expression:
-                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -3981,7 +3982,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'",
+                      "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -3989,23 +3990,23 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'",
-                  },
+                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'"
+                  }
                 ],
                 rows: [
                   {
                     value: "Earned",
-                    text: "Earned Income",
+                    text: "Earned Income"
                   },
                   {
                     value: "Unearned",
-                    text: "Unearned Income",
+                    text: "Unearned Income"
                   },
                   {
                     value: "SSISSDI",
-                    text: "SSI/SSDI",
-                  },
-                ],
+                    text: "SSI/SSDI"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -4020,10 +4021,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "N/A",
-                    text: "N/A, gross/net are same",
-                  },
+                    text: "N/A, gross/net are same"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4031,7 +4032,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{SSISSDIOverpayment_TANF} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the SSI/SSDI:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -4042,10 +4043,10 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No",
-                  },
+                    text: "No"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4053,10 +4054,10 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherBudgetErrors_TANF} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Budget",
+            title: "Budget"
           },
           {
             type: "panel",
@@ -4071,7 +4072,7 @@ if (!window["%hammerhead%"]) {
                   "Is the caretaker a parent or verified custodian/legal guardian?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4081,7 +4082,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the caretaker a specified relative?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4091,7 +4092,7 @@ if (!window["%hammerhead%"]) {
                 title: "Has the relationship been verified?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4101,18 +4102,18 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes",
+                    text: "Yes"
                   },
                   {
                     value: "NoCorrect",
-                    text: "No, nothing to request",
+                    text: "No, nothing to request"
                   },
                   {
                     value: "NoIncorrect",
-                    text: "No, some necessary verifications were not requested",
-                  },
+                    text: "No, some necessary verifications were not requested"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "matrixdropdown",
@@ -4127,7 +4128,7 @@ if (!window["%hammerhead%"]) {
                     name: "Requested",
                     title: "Requested?",
                     cellType: "checkbox",
-                    choices: ["Yes"],
+                    choices: ["Yes"]
                   },
                   {
                     name: "Checklist",
@@ -4136,7 +4137,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: "{row.Requested} = ['Yes']",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -4144,8 +4145,8 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: "{row.Requested} = ['Yes']",
-                    choices: ["Yes", "No"],
-                  },
+                    choices: ["Yes", "No"]
+                  }
                 ],
                 rows: [
                   "Identity",
@@ -4153,17 +4154,17 @@ if (!window["%hammerhead%"]) {
                   "Citizenship",
                   {
                     value: "Shelter",
-                    text: "Utilities",
+                    text: "Utilities"
                   },
                   {
                     value: "Rent",
-                    text: "Rent/Mortgage",
+                    text: "Rent/Mortgage"
                   },
                   {
                     value: "Other",
-                    text: "Other (describe below)",
-                  },
-                ],
+                    text: "Other (describe below)"
+                  }
+                ]
               },
               {
                 type: "comment",
@@ -4171,7 +4172,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{RequestedVerifications_TANF.Other.Requested} = ['Yes']",
                 title: "What other verifications were requested?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -4184,14 +4185,14 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, benefits were authorized in error",
+                    text: "Yes, benefits were authorized in error"
                   },
                   {
                     value: "No",
-                    text: "No, case was authorized properly",
-                  },
+                    text: "No, case was authorized properly"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4200,7 +4201,7 @@ if (!window["%hammerhead%"]) {
                   "Are there unaddressed alerts and/or IEVS matches that may affect the current eligibility?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4209,10 +4210,10 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title:
                   "Please describe the problem with the unaddressed alerts. \n(Don't include PII/FTI!):",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Verifications",
+            title: "Verifications"
           },
           {
             type: "panel",
@@ -4224,7 +4225,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was the case outcome ({ReviewDetails.TANF.Status}) correct?",
                 isRequired: true,
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 type: "comment",
@@ -4232,7 +4233,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IsOutcomeCorrect_TANF} = 'No'",
                 startWithNewLine: false,
                 title: "What was incorrect?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -4240,7 +4241,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the Degrees List updated in OBWP?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "matrixdropdown",
@@ -4256,7 +4257,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     colCount: 2,
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "AtReview",
@@ -4267,13 +4268,13 @@ if (!window["%hammerhead%"]) {
                     validators: [
                       {
                         type: "numeric",
-                        minValue: 0,
-                      },
+                        minValue: 0
+                      }
                     ],
                     totalDisplayStyle: "currency",
                     inputType: "number",
                     min: "0",
-                    step: 0.01,
+                    step: 0.01
                   },
                   {
                     name: "CorrectedAmt",
@@ -4286,13 +4287,13 @@ if (!window["%hammerhead%"]) {
                     validators: [
                       {
                         type: "numeric",
-                        minValue: 0,
-                      },
+                        minValue: 0
+                      }
                     ],
                     totalDisplayStyle: "currency",
                     inputType: "number",
                     min: "0",
-                    step: 0.01,
+                    step: 0.01
                   },
                   {
                     name: "Difference",
@@ -4300,7 +4301,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.Correct} = 'No' and {row.CorrectTBD} notcontains 'Cannot Identify Correct Amt'",
                     expression: "{row.AtReview}-{row.CorrectedAmt}",
-                    displayStyle: "currency",
+                    displayStyle: "currency"
                   },
                   {
                     name: "CorrectTBD",
@@ -4308,17 +4309,17 @@ if (!window["%hammerhead%"]) {
                     cellType: "checkbox",
                     visibleIf: "{row.Correct} = 'No'",
                     enableIf: "{row.CorrectedAmt} empty",
-                    choices: ["Cannot Identify Correct Amt"],
-                  },
+                    choices: ["Cannot Identify Correct Amt"]
+                  }
                 ],
                 choices: [1, 2, 3, 4, 5],
                 rows: [
                   {
                     value: "Initial",
-                    text: "Initial Month",
+                    text: "Initial Month"
                   },
-                  "Ongoing",
-                ],
+                  "Ongoing"
+                ]
               },
               {
                 type: "radiogroup",
@@ -4326,7 +4327,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Are there other TANF errors not addressed in the questions above?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4334,14 +4335,14 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherErrors_TANF} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Miscellaneous",
-          },
+            title: "Miscellaneous"
+          }
         ],
         visibleIf: "{ReviewDetails.TANF.Included} = 'Yes'",
-        title: "TANF ",
+        title: "TANF "
       },
       {
         name: "OWF_Section",
@@ -4350,21 +4351,21 @@ if (!window["%hammerhead%"]) {
             type: "expression",
             name: "CaseNameDisplay_OWF",
             title: "Case Name:",
-            expression: "{CaseName}",
+            expression: "{CaseName}"
           },
           {
             type: "expression",
             name: "CaseNumberDisplay_OWF",
             startWithNewLine: false,
             title: "Case Number:",
-            expression: "{ReviewDetails.OWF.CaseNumber}",
+            expression: "{ReviewDetails.OWF.CaseNumber}"
           },
           {
             type: "expression",
             name: "BlockDisplay_OWF",
             startWithNewLine: false,
             title: "Block:",
-            expression: "{ReviewDetails.OWF.Block}",
+            expression: "{ReviewDetails.OWF.Block}"
           },
           {
             type: "panel",
@@ -4376,7 +4377,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are there journal notes regarding the action taken?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4385,7 +4386,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the journal notes adequate?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4399,9 +4400,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -4413,7 +4414,7 @@ if (!window["%hammerhead%"]) {
                   'For example, does it describe the case action ("Denied for over-income") or does it just say "Overtime Assignment" or "Call Center"?',
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4427,9 +4428,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -4439,10 +4440,10 @@ if (!window["%hammerhead%"]) {
                   "Is there Federal Tax Information (FTI) in the Journal Entry?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Journal Notes",
+            title: "Journal Notes"
           },
           {
             type: "panel",
@@ -4458,9 +4459,9 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   "Yes, scheduled timely",
                   "No, scheduled untimely or not scheduled",
-                  "Walk-in or other unscheduled appointment",
+                  "Walk-in or other unscheduled appointment"
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4470,7 +4471,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the scheduling delay caused by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4481,7 +4482,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4493,18 +4494,18 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, Interview held timely",
+                    text: "Yes, Interview held timely"
                   },
                   {
                     value: "No",
-                    text: "No, Interview held untimely",
+                    text: "No, Interview held untimely"
                   },
                   {
                     value: "NoInterview",
-                    text: "The client did not attend an interview at all",
-                  },
+                    text: "The client did not attend an interview at all"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4513,7 +4514,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the interview delay caused by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4524,7 +4525,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4533,7 +4534,7 @@ if (!window["%hammerhead%"]) {
                   "Has an Options and Opportunities call/SNAP review been completed?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4542,7 +4543,7 @@ if (!window["%hammerhead%"]) {
                 title: "Has an Assessment interview been scheduled?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4551,7 +4552,7 @@ if (!window["%hammerhead%"]) {
                 title: "Has a Pre-Employment Screening been scheduled?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4563,14 +4564,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, but should have been",
+                    text: "No, but should have been"
                   },
                   {
                     value: "NA",
-                    text: "Not applicable to this provider",
-                  },
+                    text: "Not applicable to this provider"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "comment",
@@ -4584,12 +4585,12 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
-              },
+                    allowDigits: true
+                  }
+                ]
+              }
             ],
-            title: "Intake Interviews",
+            title: "Intake Interviews"
           },
           {
             type: "panel",
@@ -4602,7 +4603,7 @@ if (!window["%hammerhead%"]) {
                   "Was the verification checklist provided for required verifications?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4612,10 +4613,10 @@ if (!window["%hammerhead%"]) {
                   "Is there a signed Self-Sufficiency contract and plan on file?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Verifications",
+            title: "Verifications"
           },
           {
             type: "panel",
@@ -4627,7 +4628,7 @@ if (!window["%hammerhead%"]) {
                 title: "Did the client request childcare or was it needed?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4637,7 +4638,7 @@ if (!window["%hammerhead%"]) {
                   "If childcare is needed, was client given an application with a checklist and date to return the application?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4648,10 +4649,10 @@ if (!window["%hammerhead%"]) {
                   "If the client states that childcare is not needed, is this in writing and signed by the client?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Childcare",
+            title: "Childcare"
           },
           {
             type: "panel",
@@ -4663,7 +4664,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is this a CCMEP case?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4671,7 +4672,7 @@ if (!window["%hammerhead%"]) {
                 title: "Has the transportation allowance been authorized?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "checkbox",
@@ -4679,7 +4680,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the client assigned to AJR or WEP?",
                 isRequired: true,
                 choices: ["AJR", "WEP", "Neither"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4689,7 +4690,7 @@ if (!window["%hammerhead%"]) {
                   "If the client is assigned to WEP, is the FLSA calculation correct?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4703,9 +4704,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -4713,7 +4714,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the client assigned to Job Search?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4723,7 +4724,7 @@ if (!window["%hammerhead%"]) {
                   "Was the Job Search Assignment scheduled to end after 6 weeks?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4731,7 +4732,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the client assigned to Alt Work?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4742,10 +4743,10 @@ if (!window["%hammerhead%"]) {
                   "Has the inability to participate in a work program been verified?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Work Assignment",
+            title: "Work Assignment"
           },
           {
             type: "panel",
@@ -4758,7 +4759,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the service authorization completed in IWAM?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4769,7 +4770,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the IWAM alerts read to take negative action?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4778,7 +4779,7 @@ if (!window["%hammerhead%"]) {
                   "Were the appropriate Work Activities screens updated in OBWP?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4792,9 +4793,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -4802,10 +4803,10 @@ if (!window["%hammerhead%"]) {
                 title: "Was the TANF Work Activities Status List updated?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Documentation",
+            title: "Documentation"
           },
           {
             type: "panel",
@@ -4817,7 +4818,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was there a sanction on the case at intake?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4831,10 +4832,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A",
-                  },
+                    text: "N/A"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4842,7 +4843,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{SanctionCorrectlyRemovedEndDated_OWF} = 'No'",
                 startWithNewLine: false,
                 title: "What was incorrect?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -4852,10 +4853,10 @@ if (!window["%hammerhead%"]) {
                   "Has the client served the minimum sanction period and completed the required compliance hours?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Sanction",
+            title: "Sanction"
           },
           {
             type: "panel",
@@ -4867,7 +4868,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was the case outcome ({ReviewDetails.OWF.Status}) correct?",
                 isRequired: true,
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 type: "comment",
@@ -4875,14 +4876,14 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IsOutcomeCorrect_OWF} = 'No'",
                 startWithNewLine: false,
                 title: "What was incorrect?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
                 name: "OtherErrors_OWF",
                 title:
                   "Are there other TANF Work Activity errors not addressed in the questions above?",
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 type: "comment",
@@ -4890,14 +4891,14 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherErrors_OWF} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Miscellaneous",
-          },
+            title: "Miscellaneous"
+          }
         ],
         visibleIf: "{ReviewDetails.OWF.Included} = 'Yes'",
-        title: "TANF Work Activities",
+        title: "TANF Work Activities"
       },
       {
         name: "MC_Section",
@@ -4906,21 +4907,21 @@ if (!window["%hammerhead%"]) {
             type: "expression",
             name: "CaseName_MC",
             title: "Case Name",
-            expression: "{CaseName}",
+            expression: "{CaseName}"
           },
           {
             type: "expression",
             name: "CaseNumber_MC",
             startWithNewLine: false,
             title: "Case Number",
-            expression: "{ReviewDetails.MC.CaseNumber}",
+            expression: "{ReviewDetails.MC.CaseNumber}"
           },
           {
             type: "expression",
             name: "Block_MC",
             startWithNewLine: false,
             title: "Block",
-            expression: "{ReviewDetails.MC.Block}",
+            expression: "{ReviewDetails.MC.Block}"
           },
           {
             type: "panel",
@@ -4932,7 +4933,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are there journal notes regarding the action taken?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4943,7 +4944,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the journal template used?",
                 isRequired: true,
                 choices: ["Yes", "No", "NA"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -4953,7 +4954,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the journal notes adequate?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4967,9 +4968,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -4981,7 +4982,7 @@ if (!window["%hammerhead%"]) {
                   'For example, does it describe the case action ("Denied for over-income") or does it just say "Overtime Assignment" or "Call Center"?',
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -4995,9 +4996,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -5007,10 +5008,10 @@ if (!window["%hammerhead%"]) {
                   "Is there Federal Tax Information (FTI) in the Journal Entry?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Journal Notes",
+            title: "Journal Notes"
           },
           {
             type: "panel",
@@ -5025,15 +5026,15 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, omitted in error",
+                    text: "No, omitted in error"
                   },
                   {
                     value: "N/A",
-                    text: "Not applicable",
-                  },
+                    text: "Not applicable"
+                  }
                 ],
                 hideIfChoicesEmpty: true,
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5041,7 +5042,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{AuthRepCorrect_MC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -5050,7 +5051,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is there a signed application or audio signature?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5059,7 +5060,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the correct application date used?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5067,7 +5068,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IntakeCorrectAppDate_MC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect about the app date:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -5077,7 +5078,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the certification period correct?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5086,7 +5087,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title:
                   "Please describe what was incorrect about the certification period:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -5099,14 +5100,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, received after",
+                    text: "No, received after"
                   },
                   {
                     value: "NotReceived",
-                    text: "No, not received",
-                  },
+                    text: "No, not received"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5117,7 +5118,7 @@ if (!window["%hammerhead%"]) {
                   "Did the AG take the required action within 90 days after the end of the certification period?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5128,7 +5129,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits provided back to the date the AG took the required action?",
                 isRequired: true,
                 choices: ["Yes", "No "],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5139,7 +5140,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits authorized using the date the application for renewal was received by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5151,14 +5152,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, and should have been",
+                    text: "No, and should have been"
                   },
                   {
                     value: "N/A",
-                    text: "No, but should not have been",
-                  },
+                    text: "No, but should not have been"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -5172,10 +5173,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A, did not apply for retro months",
-                  },
+                    text: "N/A, did not apply for retro months"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5186,7 +5187,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits authorized within 45 days from the date of application?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5197,7 +5198,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5207,7 +5208,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was the application denied timely (by 45th day or the following business day)?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5218,7 +5219,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5227,10 +5228,10 @@ if (!window["%hammerhead%"]) {
                 title: "Are the Medicaid aid codes correct?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Authorization",
+            title: "Authorization"
           },
           {
             type: "panel",
@@ -5244,62 +5245,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -5313,16 +5314,16 @@ if (!window["%hammerhead%"]) {
                       "Yes",
                       {
                         value: "No",
-                        text: "No or N/A for Aid Code",
-                      },
-                    ],
+                        text: "No or N/A for Aid Code"
+                      }
+                    ]
                   },
                   {
                     name: "InBudget",
                     title: "Was this expense included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -5330,7 +5331,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -5339,7 +5340,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'",
                     expression:
-                      "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -5348,7 +5349,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ExpenseExists} anyof ['No', 'NA'] and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.ExpenseExists} anyof ['No', 'NA'] and {row.InBudget} = 'Yes'",
+                      "{row.ExpenseExists} anyof ['No', 'NA'] and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -5356,35 +5357,35 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'",
-                  },
+                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'"
+                  }
                 ],
                 rows: [
                   {
                     value: "Medical",
-                    text: "Medical Costs",
+                    text: "Medical Costs"
                   },
                   {
                     value: "Medicare",
-                    text: "Medicare Premium",
+                    text: "Medicare Premium"
                   },
                   {
                     value: "RecurringMedical",
-                    text: "Recurring Medical Expenses",
+                    text: "Recurring Medical Expenses"
                   },
                   {
                     value: "ChildSupport",
-                    text: "Court Ordered Child Support",
+                    text: "Court Ordered Child Support"
                   },
                   {
                     value: "Childcare",
-                    text: "Dependent Care Expenses",
+                    text: "Dependent Care Expenses"
                   },
                   {
                     value: "HealthInsurance",
-                    text: "Other Health Insurance",
-                  },
-                ],
+                    text: "Other Health Insurance"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -5399,10 +5400,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "Not paid by State buy-in",
-                  },
+                    text: "Not paid by State buy-in"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5410,14 +5411,14 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{BuyInMedicarePremium_MC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the Medicare premium:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
                 name: "OtherHealthInsurance_MC",
                 title: "Did the client have other Health Insurance?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -5426,7 +5427,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title: "Was that insurance recorded correctly in OBWP?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5434,7 +5435,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{HealthInsuranceCorrect_MC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -5443,7 +5444,7 @@ if (!window["%hammerhead%"]) {
                   "Did the client report past, unpaid Medical bills that should have been reviewed and were not?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5451,7 +5452,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{UnpaidMedicalBillsReviewed_MC} = 'Yes'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the bills:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "matrixdropdown",
@@ -5461,62 +5462,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -5529,16 +5530,16 @@ if (!window["%hammerhead%"]) {
                       "Yes",
                       {
                         value: "No",
-                        text: "No or Not Applicable",
-                      },
-                    ],
+                        text: "No or Not Applicable"
+                      }
+                    ]
                   },
                   {
                     name: "InBudget",
                     title: "Was this income included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -5546,7 +5547,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -5555,7 +5556,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'",
                     expression:
-                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -5564,7 +5565,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'",
+                      "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -5572,23 +5573,23 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'",
-                  },
+                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'"
+                  }
                 ],
                 rows: [
                   {
                     value: "Earned",
-                    text: "Earned Income",
+                    text: "Earned Income"
                   },
                   {
                     value: "Unearned",
-                    text: "Unearned Income",
+                    text: "Unearned Income"
                   },
                   {
                     value: "SSISSDI",
-                    text: "SSI/SSDI",
-                  },
-                ],
+                    text: "SSI/SSDI"
+                  }
+                ]
               },
               {
                 type: "matrixdropdown",
@@ -5598,62 +5599,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -5663,14 +5664,14 @@ if (!window["%hammerhead%"]) {
                       "Does the client actually have this type of resource?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "InBudget",
                     title: "Was this resource included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -5678,7 +5679,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -5687,7 +5688,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ResourceExists} = 'Yes' and {row.InBudget} = 'No'",
                     expression:
-                      "{row.ResourceExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.ResourceExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -5696,7 +5697,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ResourceExists} = 'No' and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.ResourceExists} = 'No' and {row.InBudget} = 'Yes'",
+                      "{row.ResourceExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -5704,28 +5705,28 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'",
-                  },
+                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'"
+                  }
                 ],
                 rows: [
                   {
                     value: "Liquid",
-                    text: "Liquid (401k, Insurance, Bank Accounts)",
+                    text: "Liquid (401k, Insurance, Bank Accounts)"
                   },
                   {
                     value: "Vehicle",
-                    text: "Motor Vehicle",
+                    text: "Motor Vehicle"
                   },
                   {
                     value: "Personal",
-                    text: "Personal (Alien Sponsor, Crops, etc.)",
+                    text: "Personal (Alien Sponsor, Crops, etc.)"
                   },
                   {
                     value: "Property",
-                    text: "Real Property",
+                    text: "Real Property"
                   },
-                  "Transferred",
-                ],
+                  "Transferred"
+                ]
               },
               {
                 type: "radiogroup",
@@ -5740,10 +5741,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "N/A",
-                    text: "N/A, gross/net are same",
-                  },
+                    text: "N/A, gross/net are same"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5751,7 +5752,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{SSISSDIOverpayment_MC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the SSI/SSDI:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -5759,7 +5760,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are there other budget errors not already noted above?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5767,10 +5768,10 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherBudgetErrors_MC} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Budget",
+            title: "Budget"
           },
           {
             type: "panel",
@@ -5784,25 +5785,25 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes",
+                    text: "Yes"
                   },
                   {
                     value: "NoCorrect",
-                    text: "No, nothing to request",
+                    text: "No, nothing to request"
                   },
                   {
                     value: "NoIncorrect",
-                    text: "No, some necessary verifications were not requested",
-                  },
+                    text: "No, some necessary verifications were not requested"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
                 name: "AgencyRequestVerifications_Comment_MC",
                 visibleIf: "{AgencyRequestVerifications_MC} = 'NoIncorrect'",
                 title: "What necessary verifications were not requested?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -5816,10 +5817,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "Not Applicable",
-                  },
+                    text: "Not Applicable"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -5828,7 +5829,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title: "Which checklist was *not* sent?",
                 choices: ["MC", "SNAP and TANF"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "matrixdropdown",
@@ -5843,7 +5844,7 @@ if (!window["%hammerhead%"]) {
                     name: "Requested",
                     title: "Requested?",
                     cellType: "checkbox",
-                    choices: ["Yes"],
+                    choices: ["Yes"]
                   },
                   {
                     name: "Necessary",
@@ -5851,7 +5852,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: "{row.Requested} = ['Yes']",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "PingHub",
@@ -5859,7 +5860,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: "{row.Requested} = ['Yes']",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Checklist",
@@ -5872,13 +5873,13 @@ if (!window["%hammerhead%"]) {
                     choices: [
                       {
                         value: "Yes",
-                        visibleIf: "{row.Requested} = ['Yes']",
+                        visibleIf: "{row.Requested} = ['Yes']"
                       },
                       {
                         value: "No",
-                        visibleIf: "{row.Requested} = ['Yes']",
-                      },
-                    ],
+                        visibleIf: "{row.Requested} = ['Yes']"
+                      }
+                    ]
                   },
                   {
                     name: "Verified",
@@ -5886,8 +5887,8 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: "{row.Requested} = ['Yes']",
-                    choices: ["Yes", "No"],
-                  },
+                    choices: ["Yes", "No"]
+                  }
                 ],
                 rows: [
                   "Identity",
@@ -5897,9 +5898,9 @@ if (!window["%hammerhead%"]) {
                   "Rent",
                   {
                     value: "Other",
-                    text: "Other (describe below)",
-                  },
-                ],
+                    text: "Other (describe below)"
+                  }
+                ]
               },
               {
                 type: "expression",
@@ -5908,7 +5909,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Hidden Logic to Calculate whether unnecessary verifications were requested",
                 expression:
-                  "{RequestedVerifications_MC.Identity.Necessary} = 'No' OR\n{RequestedVerifications_MC.Income.Necessary} = 'No' OR\n{RequestedVerifications_MC.Citizenship.Necessary} = 'No' OR\n{RequestedVerifications_MC.Rent.Necessary} = 'No' OR\n{RequestedVerifications_MC.Shelter.Necessary} = 'No' OR\n{RequestedVerifications_MC.Other.Necessary} = 'No'",
+                  "{RequestedVerifications_MC.Identity.Necessary} = 'No' OR\n{RequestedVerifications_MC.Income.Necessary} = 'No' OR\n{RequestedVerifications_MC.Citizenship.Necessary} = 'No' OR\n{RequestedVerifications_MC.Rent.Necessary} = 'No' OR\n{RequestedVerifications_MC.Shelter.Necessary} = 'No' OR\n{RequestedVerifications_MC.Other.Necessary} = 'No'"
               },
               {
                 type: "comment",
@@ -5916,7 +5917,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{RequestedVerifications_MC.Other.Requested} = ['Yes']",
                 title: "What other verifications were requested?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -5930,10 +5931,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "Not Needed",
-                  },
+                    text: "Not Needed"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5941,7 +5942,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{FollowUp20Days_MC} = 'No'",
                 startWithNewLine: false,
                 title: "What happened instead?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -5954,14 +5955,14 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, benefits were authorized in error",
+                    text: "Yes, benefits were authorized in error"
                   },
                   {
                     value: "No",
-                    text: "No, authorized properly",
-                  },
+                    text: "No, authorized properly"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -5969,7 +5970,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{MCBenefitsDenied&WereNot_MC} = 'Yes'",
                 startWithNewLine: false,
                 title: "What happened instead?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -5978,10 +5979,10 @@ if (!window["%hammerhead%"]) {
                   "Are there unaddressed alerts and/or IEVS matches that may affect the current eligibility?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Verifications",
+            title: "Verifications"
           },
           {
             type: "panel",
@@ -5993,7 +5994,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was the case outcome ({ReviewDetails.MC.Status}) correct?",
                 isRequired: true,
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 type: "comment",
@@ -6001,7 +6002,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IsOutcomeCorrect_MC} = 'No'",
                 startWithNewLine: false,
                 title: "What was incorrect?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -6013,17 +6014,17 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A, Not yet authorized",
-                  },
+                    text: "N/A, Not yet authorized"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
                 name: "OtherErrors_MC",
                 title: "Are there other MC errors not addressed above?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6031,14 +6032,14 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherErrors_MC} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Miscellaneous",
-          },
+            title: "Miscellaneous"
+          }
         ],
         visibleIf: "{ReviewDetails.MC.Included} = 'Yes'",
-        title: "Community Medicaid",
+        title: "Community Medicaid"
       },
       {
         name: "LTC_Section",
@@ -6046,21 +6047,21 @@ if (!window["%hammerhead%"]) {
           {
             type: "expression",
             name: "CaseName_LTC",
-            title: "Case Name",
+            title: "Case Name"
           },
           {
             type: "expression",
             name: "CaseNumber_LTC",
             startWithNewLine: false,
             title: "Case Number",
-            expression: "{ReviewDetails.LTC.CaseNumber}",
+            expression: "{ReviewDetails.LTC.CaseNumber}"
           },
           {
             type: "expression",
             name: "Block_LTC",
             startWithNewLine: false,
             title: "Block",
-            expression: "{ReviewDetails.LTC.Block}",
+            expression: "{ReviewDetails.LTC.Block}"
           },
           {
             type: "panel",
@@ -6072,7 +6073,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are there journal notes regarding the action taken?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6083,7 +6084,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the journal template used?",
                 isRequired: true,
                 choices: ["Yes", "No", "NA"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6093,7 +6094,7 @@ if (!window["%hammerhead%"]) {
                 title: "Were the journal notes adequate?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6107,9 +6108,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -6121,7 +6122,7 @@ if (!window["%hammerhead%"]) {
                   'For example, does it describe the case action ("Denied for over-income") or does it just say "Overtime Assignment" or "Call Center"?',
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6135,9 +6136,9 @@ if (!window["%hammerhead%"]) {
                     type: "text",
                     minLength: 10,
                     maxLength: 0,
-                    allowDigits: true,
-                  },
-                ],
+                    allowDigits: true
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -6147,10 +6148,10 @@ if (!window["%hammerhead%"]) {
                   "Is there Federal Tax Information (FTI) in the Journal Entry?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Journal Notes",
+            title: "Journal Notes"
           },
           {
             type: "panel",
@@ -6165,15 +6166,15 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, omitted in error",
+                    text: "No, omitted in error"
                   },
                   {
                     value: "N/A",
-                    text: "Not applicable",
-                  },
+                    text: "Not applicable"
+                  }
                 ],
                 hideIfChoicesEmpty: true,
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6181,7 +6182,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{AuthRepCorrect_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -6191,7 +6192,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is there a signed application or audio signature?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6200,7 +6201,7 @@ if (!window["%hammerhead%"]) {
                 title: "Was the correct application date used?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6208,7 +6209,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IntakeCorrectAppDate_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect about the app date:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -6218,7 +6219,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the certification period correct?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6227,7 +6228,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title:
                   "Please describe what was incorrect about the cert period:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -6240,14 +6241,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, received after",
+                    text: "No, received after"
                   },
                   {
                     value: "NotReceived",
-                    text: "No, not received",
-                  },
+                    text: "No, not received"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6258,7 +6259,7 @@ if (!window["%hammerhead%"]) {
                   "Did the AG take the required action within 90 days after the end of the certification period?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6269,7 +6270,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits provided back to the date the AG took the required action?",
                 isRequired: true,
                 choices: ["Yes", "No "],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6280,7 +6281,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits authorized using the date the application for renewal was received by the agency?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6292,14 +6293,14 @@ if (!window["%hammerhead%"]) {
                   "Yes",
                   {
                     value: "No",
-                    text: "No, and should have been",
+                    text: "No, and should have been"
                   },
                   {
                     value: "N/A",
-                    text: "No, but should not have been",
-                  },
+                    text: "No, but should not have been"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -6310,7 +6311,7 @@ if (!window["%hammerhead%"]) {
                   "Were benefits authorized within 45 days from the date of application?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6321,7 +6322,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6331,7 +6332,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was the application denied timely (by 45th day or the following business day)?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6342,7 +6343,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6351,7 +6352,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are the Medicaid aid codes correct?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6365,13 +6366,13 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A, did not apply for retro months",
-                  },
+                    text: "N/A, did not apply for retro months"
+                  }
                 ],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Authorization",
+            title: "Authorization"
           },
           {
             type: "panel",
@@ -6385,62 +6386,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -6453,16 +6454,16 @@ if (!window["%hammerhead%"]) {
                       "Yes",
                       {
                         value: "No",
-                        text: "No or N/A for this Aid Code",
-                      },
-                    ],
+                        text: "No or N/A for this Aid Code"
+                      }
+                    ]
                   },
                   {
                     name: "InBudget",
                     title: "Was this expense included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -6470,7 +6471,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -6479,7 +6480,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'",
                     expression:
-                      "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.ExpenseExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -6488,7 +6489,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ExpenseExists} anyof ['No', 'NA'] and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.ExpenseExists} anyof ['No', 'NA'] and {row.InBudget} = 'Yes'",
+                      "{row.ExpenseExists} anyof ['No', 'NA'] and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -6496,35 +6497,35 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'",
-                  },
+                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'"
+                  }
                 ],
                 rows: [
                   {
                     value: "Medical",
-                    text: "Medical Costs",
+                    text: "Medical Costs"
                   },
                   {
                     value: "Medicare",
-                    text: "Medicare Premium",
+                    text: "Medicare Premium"
                   },
                   {
                     value: "RecurringMedical",
-                    text: "Recurring Medical Expenses",
+                    text: "Recurring Medical Expenses"
                   },
                   {
                     value: "ChildSupport",
-                    text: "Court Ordered Child Support",
+                    text: "Court Ordered Child Support"
                   },
                   {
                     value: "Childcare",
-                    text: "Dependent Care Expenses",
+                    text: "Dependent Care Expenses"
                   },
                   {
                     value: "HealthInsurance",
-                    text: "Other Health Insurance",
-                  },
-                ],
+                    text: "Other Health Insurance"
+                  }
+                ]
               },
               {
                 type: "radiogroup",
@@ -6539,10 +6540,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "Not paid by State buy-in",
-                  },
+                    text: "Not paid by State buy-in"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6550,14 +6551,14 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{BuyInMedicarePremium_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the Medicare premium:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
                 name: "OtherHealthInsurance_LTC",
                 title: "Did the client have other Health Insurance?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6566,7 +6567,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title: "Was that insurance recorded correctly in OBWP?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6574,7 +6575,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{HealthInsuranceCorrect_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe what was incorrect:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -6583,7 +6584,7 @@ if (!window["%hammerhead%"]) {
                   "Did the client report past, unpaid Medical bills that should have been reviewed and were not?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6591,7 +6592,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{UnpaidMedicalBillsReviewed_LTC} = 'Yes'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the bills:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "matrixdropdown",
@@ -6601,62 +6602,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -6665,14 +6666,14 @@ if (!window["%hammerhead%"]) {
                     title: "Does the client actually have this type of income?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "InBudget",
                     title: "Was this income included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -6680,7 +6681,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -6689,7 +6690,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'",
                     expression:
-                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -6698,7 +6699,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'",
+                      "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -6706,23 +6707,23 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'",
-                  },
+                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'"
+                  }
                 ],
                 rows: [
                   {
                     value: "Earned",
-                    text: "Earned Income",
+                    text: "Earned Income"
                   },
                   {
                     value: "Unearned",
-                    text: "Unearned Income",
+                    text: "Unearned Income"
                   },
                   {
                     value: "SSISSDI",
-                    text: "SSI/SSDI",
-                  },
-                ],
+                    text: "SSI/SSDI"
+                  }
+                ]
               },
               {
                 type: "matrixdropdown",
@@ -6732,62 +6733,62 @@ if (!window["%hammerhead%"]) {
                 defaultValue: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 correctAnswer: {
                   Shelter: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Utilities: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Medicare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   RecurringMedical: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   ChildSupport: {
                     ExcludedInError: false,
-                    IncludedInError: false,
+                    IncludedInError: false
                   },
                   Childcare: {
                     ExcludedInError: false,
-                    IncludedInError: false,
-                  },
+                    IncludedInError: false
+                  }
                 },
                 isRequired: true,
                 columns: [
@@ -6797,14 +6798,14 @@ if (!window["%hammerhead%"]) {
                       "Does the client actually have this type of resource?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "InBudget",
                     title: "Was this resource included in the budget?",
                     cellType: "radiogroup",
                     isRequired: true,
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Verified",
@@ -6812,7 +6813,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: " {row.InBudget} = 'Yes'",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "ExcludedInError",
@@ -6821,7 +6822,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ResourceExists} = 'Yes' and {row.InBudget} = 'No'",
                     expression:
-                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'",
+                      "{row.IncomeExists} = 'Yes' and {row.InBudget} = 'No'"
                   },
                   {
                     name: "IncludedInError",
@@ -6830,7 +6831,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{row.ResourceExists} = 'No' and {row.InBudget} = 'Yes'",
                     expression:
-                      "{row.IncomeeExists} = 'No' and {row.InBudget} = 'Yes'",
+                      "{row.IncomeeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
                     name: "Comment",
@@ -6838,28 +6839,28 @@ if (!window["%hammerhead%"]) {
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
-                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'",
-                  },
+                      "{row.ExcludedInError} = true or {row.IncludedInError} = true or {row.Verified} = 'No'"
+                  }
                 ],
                 rows: [
                   {
                     value: "Liquid",
-                    text: "Liquid (401k, Insurance, Bank Accounts)",
+                    text: "Liquid (401k, Insurance, Bank Accounts)"
                   },
                   {
                     value: "Vehicle",
-                    text: "Motor Vehicle",
+                    text: "Motor Vehicle"
                   },
                   {
                     value: "Personal",
-                    text: "Personal (Alien Sponsor, Crops, etc.)",
+                    text: "Personal (Alien Sponsor, Crops, etc.)"
                   },
                   {
                     value: "Property",
-                    text: "Real Property",
+                    text: "Real Property"
                   },
-                  "Transferred",
-                ],
+                  "Transferred"
+                ]
               },
               {
                 type: "radiogroup",
@@ -6874,10 +6875,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "N/A",
-                    text: "N/A, gross/net are same",
-                  },
+                    text: "N/A, gross/net are same"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6885,7 +6886,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{SSISSDIOverpayment_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please describe the problem with the SSI/SSDI:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -6893,7 +6894,7 @@ if (!window["%hammerhead%"]) {
                 title: "Are there other budget errors not already noted above?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -6901,10 +6902,10 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherBudgetErrors_LTC} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Budget",
+            title: "Budget"
           },
           {
             type: "panel",
@@ -6918,18 +6919,18 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes",
+                    text: "Yes"
                   },
                   {
                     value: "NoCorrect",
-                    text: "No, nothing to request",
+                    text: "No, nothing to request"
                   },
                   {
                     value: "NoIncorrect",
-                    text: "No, some necessary verifications were not requested",
-                  },
+                    text: "No, some necessary verifications were not requested"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -6943,10 +6944,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "Not Applicable",
-                  },
+                    text: "Not Applicable"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -6955,7 +6956,7 @@ if (!window["%hammerhead%"]) {
                 startWithNewLine: false,
                 title: "Which checklist was *not* sent?",
                 choices: ["MC", "SNAP and TANF"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "matrixdropdown",
@@ -6970,7 +6971,7 @@ if (!window["%hammerhead%"]) {
                     name: "Requested",
                     title: "Requested?",
                     cellType: "checkbox",
-                    choices: ["Yes"],
+                    choices: ["Yes"]
                   },
                   {
                     name: "Necessary",
@@ -6978,7 +6979,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: "{row.Requested} = ['Yes']",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "PingHub",
@@ -6986,7 +6987,7 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: "{row.Requested} = ['Yes']",
-                    choices: ["Yes", "No"],
+                    choices: ["Yes", "No"]
                   },
                   {
                     name: "Checklist",
@@ -6999,13 +7000,13 @@ if (!window["%hammerhead%"]) {
                     choices: [
                       {
                         value: "Yes",
-                        visibleIf: "{row.Requested} = ['Yes']",
+                        visibleIf: "{row.Requested} = ['Yes']"
                       },
                       {
                         value: "No",
-                        visibleIf: "{row.Requested} = ['Yes']",
-                      },
-                    ],
+                        visibleIf: "{row.Requested} = ['Yes']"
+                      }
+                    ]
                   },
                   {
                     name: "Verified",
@@ -7013,8 +7014,8 @@ if (!window["%hammerhead%"]) {
                     cellType: "radiogroup",
                     isRequired: true,
                     visibleIf: "{row.Requested} = ['Yes']",
-                    choices: ["Yes", "No"],
-                  },
+                    choices: ["Yes", "No"]
+                  }
                 ],
                 choices: ["Yes", "No"],
                 rows: [
@@ -7025,9 +7026,9 @@ if (!window["%hammerhead%"]) {
                   "Rent",
                   {
                     value: "Other",
-                    text: "Other (describe below)",
-                  },
-                ],
+                    text: "Other (describe below)"
+                  }
+                ]
               },
               {
                 type: "expression",
@@ -7036,7 +7037,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Hidden Logic to Calculate whether unnecessary verifications were requested",
                 expression:
-                  "{RequestedVerifications_LTC.Identity.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Income.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Citizenship.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Rent.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Shelter.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Other.Necessary} = 'No'",
+                  "{RequestedVerifications_LTC.Identity.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Income.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Citizenship.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Rent.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Shelter.Necessary} = 'No' OR\n{RequestedVerifications_LTC.Other.Necessary} = 'No'"
               },
               {
                 type: "comment",
@@ -7044,7 +7045,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{RequestedVerifications_LTC.Other.Requested} = ['Yes']",
                 title: "What other verifications were requested?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7058,10 +7059,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "Not Needed",
-                  },
+                    text: "Not Needed"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -7072,7 +7073,7 @@ if (!window["%hammerhead%"]) {
                   "Was this the fault of the worker under review: {EligSpec}?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -7080,7 +7081,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{FollowUp20Days_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "What happened instead?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7093,14 +7094,14 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes, benefits were authorized in error",
+                    text: "Yes, benefits were authorized in error"
                   },
                   {
                     value: "No",
-                    text: "No, authorized properly",
-                  },
+                    text: "No, authorized properly"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -7108,7 +7109,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{MCBenefitsDenied&WereNot_LTC} = 'Yes'",
                 startWithNewLine: false,
                 title: "What happened instead?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7117,10 +7118,10 @@ if (!window["%hammerhead%"]) {
                   "Are there unaddressed alerts and/or IEVS matches that may affect the current eligibility?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
-              },
+                colCount: 2
+              }
             ],
-            title: "Verifications",
+            title: "Verifications"
           },
           {
             type: "panel",
@@ -7133,7 +7134,7 @@ if (!window["%hammerhead%"]) {
                   "Is there a Monthly Income Allowance (MIA)/Family Need Allowance (FNA)?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -7143,7 +7144,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the MIA or FNA calculated correctly?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -7151,7 +7152,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{MIAFNACorrect_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please provide details:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7163,10 +7164,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A",
-                  },
+                    text: "N/A"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "comment",
@@ -7174,7 +7175,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{SpousalImprovementCorrect_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please provide details:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7187,10 +7188,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "None",
-                    text: "None Exist",
-                  },
+                    text: "None Exist"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "radiogroup",
@@ -7200,7 +7201,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the improper transfer screen completed correctly?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -7209,7 +7210,7 @@ if (!window["%hammerhead%"]) {
                   "{ImproperTransAccountedFor_LTC} = 'No' or {ImpropTranfScreenCorrect_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please provide details:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7222,10 +7223,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "Not required",
-                  },
+                    text: "Not required"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -7233,7 +7234,7 @@ if (!window["%hammerhead%"]) {
                 title: "Is the Share of Cost (SOC) calculated correctly?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -7241,7 +7242,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{SOCCorrect_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please provide details:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7254,10 +7255,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A",
-                  },
+                    text: "N/A"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -7269,7 +7270,7 @@ if (!window["%hammerhead%"]) {
                   "Was a NOA sent confirming the dates of the restricted coverage?",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -7277,7 +7278,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{RestrictCoveragePeriodCorrect_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please provide details:",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7290,10 +7291,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A, no institutional children",
-                  },
+                    text: "N/A, no institutional children"
+                  }
                 ],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -7301,10 +7302,10 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{InstitutionalChildCorrect_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "Please provide details:",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "LTC Policy",
+            title: "LTC Policy"
           },
           {
             type: "panel",
@@ -7316,7 +7317,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Was the case outcome ({ReviewDetails.LTC.Status}) correct?",
                 isRequired: true,
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 type: "comment",
@@ -7324,7 +7325,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IsOutcomeCorrect_LTC} = 'No'",
                 startWithNewLine: false,
                 title: "What was incorrect?",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7336,10 +7337,10 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "NA",
-                    text: "N/A, Not yet authorized",
-                  },
+                    text: "N/A, Not yet authorized"
+                  }
                 ],
-                colCount: 3,
+                colCount: 3
               },
               {
                 type: "radiogroup",
@@ -7347,7 +7348,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Are there other Long-Term Care errors not addressed above?",
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
@@ -7355,14 +7356,14 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherErrors_LTC} = 'Yes'",
                 startWithNewLine: false,
                 title: "What are those errors?",
-                isRequired: true,
-              },
+                isRequired: true
+              }
             ],
-            title: "Miscellaneous",
-          },
+            title: "Miscellaneous"
+          }
         ],
         visibleIf: "{ReviewDetails.LTC.Included} = 'Yes'",
-        title: "Long-Term Care Medicaid",
+        title: "Long-Term Care Medicaid"
       },
       {
         name: "UETarget_Section",
@@ -7372,21 +7373,21 @@ if (!window["%hammerhead%"]) {
             name: "Casename_UETarget",
             startWithNewLine: false,
             title: "Case Name",
-            expression: "{CaseName}",
+            expression: "{CaseName}"
           },
           {
             type: "expression",
             name: "CaseNumber_UETarget",
             startWithNewLine: false,
             title: "Case Number",
-            expression: "{ReviewDetails.UETarget.CaseNumber}",
+            expression: "{ReviewDetails.UETarget.CaseNumber}"
           },
           {
             type: "expression",
             name: "Block_UETarget",
             startWithNewLine: false,
             title: "Block",
-            expression: "{ReviewDetails.UETarget.Block}",
+            expression: "{ReviewDetails.UETarget.Block}"
           },
           {
             type: "matrixdropdown",
@@ -7397,19 +7398,19 @@ if (!window["%hammerhead%"]) {
                 name: "IncomeExists",
                 title: "Does the client have this type of income? ",
                 cellType: "radiogroup",
-                isRequired: true,
+                isRequired: true
               },
               {
                 name: "IncomeInBudget",
                 title: "Was the income included in the budget? ",
-                isRequired: true,
+                isRequired: true
               },
               {
                 name: "IncomeVerified",
                 title: "Was the income verified? ",
                 isRequired: true,
                 visibleIf:
-                  "{row.IncomeExists_UnETARGET} = 'Yes' or {row.IncomeInBudget_UETarget} = 'Yes'",
+                  "{row.IncomeExists_UnETARGET} = 'Yes' or {row.IncomeInBudget_UETarget} = 'Yes'"
               },
               {
                 name: "UEHowVerified",
@@ -7423,8 +7424,8 @@ if (!window["%hammerhead%"]) {
                   "Electronic Source",
                   "Bank Statement",
                   "Retirement/Pension/Annuity Account statement",
-                  "Other; Please Explain",
-                ],
+                  "Other; Please Explain"
+                ]
               },
               {
                 name: "UEexcludederror",
@@ -7433,7 +7434,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{row.IncomeExists_UnETARGET} = 'Yes' and {row.IncomeInBudget_UETarget} = 'No'",
                 expression:
-                  "{row.IncomeExists_UnETARGET} = 'Yes' and {row.IncomeInBudget_UETarget} = 'No'\n",
+                  "{row.IncomeExists_UnETARGET} = 'Yes' and {row.IncomeInBudget_UETarget} = 'No'\n"
               },
               {
                 name: "UEincludederror",
@@ -7442,7 +7443,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{row.IncomeExists_UnETARGET} = 'No' and {row.IncomeInBudget_UETarget} = 'Yes'",
                 expression:
-                  "{row.IncomeExists_UnETARGET} = 'No' and {row.IncomeInBudget_UETarget} = 'Yes'",
+                  "{row.IncomeExists_UnETARGET} = 'No' and {row.IncomeInBudget_UETarget} = 'Yes'"
               },
               {
                 name: "Comment",
@@ -7450,41 +7451,41 @@ if (!window["%hammerhead%"]) {
                 cellType: "comment",
                 isRequired: true,
                 visibleIf:
-                  "{row.UEexcludederror_UETarget} = 'True' or {row.UEincludederror_UETarget} = 'True' or {row.UEHowVerified_UETarget} = 'Other; Please Explain'",
-              },
+                  "{row.UEexcludederror_UETarget} = 'True' or {row.UEincludederror_UETarget} = 'True' or {row.UEHowVerified_UETarget} = 'Other; Please Explain'"
+              }
             ],
             choices: ["Yes", "No"],
             cellType: "radiogroup",
             rows: [
               {
                 value: "Unemployment",
-                text: "Unemployment",
+                text: "Unemployment"
               },
               {
                 value: "Workers'Compensation",
-                text: "Workers' Compensation",
+                text: "Workers' Compensation"
               },
               {
                 value: "SSI",
-                text: "SSI",
+                text: "SSI"
               },
               {
                 value: "SocialSecurity",
-                text: "Social Security",
+                text: "Social Security"
               },
               {
                 value: "ChildSupport",
-                text: "Child Support",
+                text: "Child Support"
               },
               {
                 value: "RetirementPensionsAnnuities",
-                text: "Retirement Pensions & Annuities",
+                text: "Retirement Pensions & Annuities"
               },
               {
                 value: "OtherExplainbelow",
-                text: "Other Explain below",
-              },
-            ],
+                text: "Other Explain below"
+              }
+            ]
           },
           {
             type: "panel",
@@ -7496,7 +7497,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{IncometypeMatrix_UETarget.OtherExplainbelow..IncomeExists_UnETARGET} = 'Yes'",
                 title: "Explain the other income from above. ",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7506,17 +7507,17 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   {
                     value: "Yes",
-                    text: "Yes",
+                    text: "Yes"
                   },
                   {
                     value: "No",
-                    text: "No",
+                    text: "No"
                   },
                   {
                     value: "Nojournalnotes",
-                    text: "No journal note kept. ",
-                  },
-                ],
+                    text: "No journal note kept. "
+                  }
+                ]
               },
               {
                 type: "comment",
@@ -7525,7 +7526,7 @@ if (!window["%hammerhead%"]) {
                   "{UECompJournal_UETarget} = 'No' or {UECompJournal_UETarget} = 'Nojournalnotes'",
                 startWithNewLine: false,
                 title: "Explain the error that was made. ",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7538,8 +7539,8 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   "Yes",
                   "No",
-                  "N/A This case did not require income calculation.",
-                ],
+                  "N/A This case did not require income calculation."
+                ]
               },
               {
                 type: "comment",
@@ -7547,14 +7548,14 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{UEIncCalc_UETarget} = 'No'",
                 startWithNewLine: false,
                 title: "Explain the error that was made: ",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
                 name: "UEAllInfoActedOn_UETarget",
                 title:
                   "Was all information related to unearned income that was  provided to the agency acted upon? ",
-                choices: ["Yes", "No"],
+                choices: ["Yes", "No"]
               },
               {
                 type: "comment",
@@ -7562,7 +7563,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{UEAllInfoActedOn_UETarget} = 'No'",
                 startWithNewLine: false,
                 title: "Explain the error that was made: ",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7572,14 +7573,14 @@ if (!window["%hammerhead%"]) {
                   "ex: SSI or SSD. Temporary or Permanent Workers' Compensation",
                 isRequired: true,
                 choices: ["Yes", "No"],
-                colCount: 2,
+                colCount: 2
               },
               {
                 type: "comment",
                 name: "CorrectUEType_Comment_UETarget",
                 visibleIf: "{UECorrectType_UETarget} = 'No'",
                 startWithNewLine: false,
-                title: "Explain the error that was made: ",
+                title: "Explain the error that was made: "
               },
               {
                 type: "radiogroup",
@@ -7591,9 +7592,9 @@ if (!window["%hammerhead%"]) {
                   "No",
                   {
                     value: "N/A",
-                    text: "N/A, gross/net are same",
-                  },
-                ],
+                    text: "N/A, gross/net are same"
+                  }
+                ]
               },
               {
                 type: "comment",
@@ -7601,7 +7602,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{UEGrossNetDif_UETarget} = 'No'",
                 startWithNewLine: false,
                 title: "Explain the error that was made: ",
-                isRequired: true,
+                isRequired: true
               },
               {
                 type: "radiogroup",
@@ -7610,21 +7611,21 @@ if (!window["%hammerhead%"]) {
                 choices: [
                   "Yes",
                   "No",
-                  "N/A There were no alerts for this case. ",
-                ],
+                  "N/A There were no alerts for this case. "
+                ]
               },
               {
                 type: "comment",
                 name: "UEIVESWRKD_Comment_UETarget",
                 visibleIf: "{UEIVESWRKD_UETarget} = 'No'",
                 startWithNewLine: false,
-                title: "Explain the error that was made: ",
-              },
-            ],
-          },
+                title: "Explain the error that was made: "
+              }
+            ]
+          }
         ],
         visibleIf: "{ReviewDetails.UETarget.Included} = 'Yes'",
-        title: "Unearned Income Target Review",
+        title: "Unearned Income Target Review"
       },
       {
         name: "Summary_Section",
@@ -7634,13 +7635,13 @@ if (!window["%hammerhead%"]) {
             name: "FinalComments_Summary",
             title: "Final comments about the case being reviewed: ",
             description:
-              "These comments do not appear in CATS as findings. The comments do appear on the completed form view-able in CATS.",
+              "These comments do not appear in CATS as findings. The comments do appear on the completed form view-able in CATS."
           },
           {
             type: "html",
             name: "SummaryDirectionsDisplay_Summary",
             html:
-              "Please review the findings below. These findings identify an error that appear to be the fault of the worker.",
+              "Please review the findings below. These findings identify an error that appear to be the fault of the worker."
           },
           {
             type: "panel",
@@ -7656,7 +7657,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JournalNotes_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalNotes_SNAP} = 'No'",
                     title: "No Journal Notes were kept",
-                    expression: '"Review of: " + {DisplayVariable_SNAP}',
+                    expression: '"Review of: " + {DisplayVariable_SNAP}'
                   },
                   {
                     type: "expression",
@@ -7664,7 +7665,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JournalTemplate_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalTemplate_SNAP} = 'No'",
                     title: "The Journal Note template was not used",
-                    expression: '"Review of: " + {DisplayVariable_SNAP}',
+                    expression: '"Review of: " + {DisplayVariable_SNAP}'
                   },
                   {
                     type: "expression",
@@ -7673,7 +7674,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalAdequate_SNAP} = 'No'",
                     title: "The Journal Notes were inadequate",
                     expression:
-                      '"Reviewer Comment: "+{JournalAdequate_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
+                      '"Reviewer Comment: "+{JournalAdequate_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
                   },
                   {
                     type: "expression",
@@ -7682,7 +7683,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalDescriptionSufficient_SNAP} = 'No'",
                     title: "The Journal Notes Description was not Sufficient",
                     expression:
-                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
+                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
                   },
                   {
                     type: "expression",
@@ -7691,13 +7692,13 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{FTIinJournalEntry_SNAP} = 'Yes'",
                     title:
                       "There was Federal Tax Information in the Journal Notes",
-                    expression: '"Review of: " + {DisplayVariable_SNAP}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_SNAP}'
+                  }
                 ],
-                title: "Journal Notes Findings:",
-              },
+                title: "Journal Notes Findings:"
+              }
             ],
-            title: "SNAP Findings",
+            title: "SNAP Findings"
           },
           {
             type: "panel",
@@ -7709,7 +7710,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$24hrsCert_Fault_SNAP$Finding_NO_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{24hrsCert_Fault_SNAP} = 'Yes'",
                 title: "Benefits were not Authorized within 24 hours",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7717,7 +7718,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$BenefitsAvail7Days_Fault_SNAP$Finding_NO_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{BenefitsAvail7Days_Fault_SNAP} = 'Yes'",
                 title: "Benefits were not available within 7 days",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7725,7 +7726,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$ExpeditedAtApp_Fault_SNAP$Finding_NO_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{ExpeditedAtAppNotScreened_Fault_SNAP} = 'Yes'",
                 title: "Applicant was not Screened In as Expedited Eligible",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7735,7 +7736,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Worker did not Override Expedited Eligibility Indicator before Authorization",
                 expression:
-                  '"Reviewer Comment: "+{OverrodeExpeditedAtApplication_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
+                  '"Reviewer Comment: "+{OverrodeExpeditedAtApplication_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7745,10 +7746,10 @@ if (!window["%hammerhead%"]) {
                 title:
                   "Worker did not correctly use the Expedited Discovery Date",
                 expression:
-                  '"Reviewer Comment: "+{WasDiscoveryDateUsed_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
-              },
+                  '"Reviewer Comment: "+{WasDiscoveryDateUsed_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
+              }
             ],
-            title: "Expedited Eligibility Findings:",
+            title: "Expedited Eligibility Findings:"
           },
           {
             type: "panel",
@@ -7762,7 +7763,7 @@ if (!window["%hammerhead%"]) {
                   "{InterviewScheduleDelayByAgency_Fault_SNAP} = 'Yes'",
                 title:
                   "Timely intake interview was not scheduled due to error by this worker",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7770,7 +7771,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$InterviewDelaybyAgency_Fault_SNAP$Finding_NO_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{InterviewDelaybyAgency_Fault_SNAP} = 'Yes'",
                 title: "The intake interview was delayed due to this worker",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7779,7 +7780,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{BenefitsRestoredtoAppDate_SNAP} = 'No'",
                 title:
                   "Benefits were not restored to the beginning of the App/Recert period",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7787,7 +7788,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$CustomerScheduleUpdate_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{CustomerScheduleUpdate_SNAP} = 'No'",
                 title: "Customer Scheduling was not updated correctly",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7795,7 +7796,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$NOMIIssued_Fault_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{NOMIIssued_Fault_SNAP} = 'Yes'",
                 title: "A NOMI was not issued",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7803,10 +7804,10 @@ if (!window["%hammerhead%"]) {
                   "$Finding$SignedApplicationAudiosignature_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{SignedApplicationAudiosignature_SNAP} = 'No'",
                 title: "There is no signed application and/or audio signature",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
-              },
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
+              }
             ],
-            title: "Interview Findings:",
+            title: "Interview Findings:"
           },
           {
             type: "panel",
@@ -7819,7 +7820,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{AudioSignatureMatrix_SNAP.Name} = 'No'",
                 title:
                   "Client was not asked to state first and last name. Invalid application.",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7828,7 +7829,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{AudioSignatureMatrix_SNAP.Address} = 'No'",
                 title:
                   "Client was not asked to state their address. Invalid application.",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7837,7 +7838,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{AudioSignatureMatrix_SNAP.PhoneApp} = 'No'",
                 title:
                   "Client not asked to verify their intent to apply. Invalid application.",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7845,7 +7846,7 @@ if (!window["%hammerhead%"]) {
                   "$FINDING$AudioSignatureConfirmInfo_SNAP$FINDING_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{AudioSignatureMatrix_SNAP.ConfirmInfo} = 'No'",
                 title: "Intent to apply not confirmed. Invalid application.",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7855,7 +7856,7 @@ if (!window["%hammerhead%"]) {
                   "{AudioSignatureMatrix_SNAP.ConfirmIncomplete} = 'No'",
                 title:
                   "Client name, address, and date if application not confirmed. Invalid application.",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7864,7 +7865,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{AudioSignatureMatrix_SNAP.AddAuthRep} = 'No'",
                 title:
                   "Client not asked to add authorized representative. Invalid application.",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7873,7 +7874,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{AudioSignatureMatrix_SNAP.AuthRepInfo} = 'No'",
                 title:
                   "Name and address of authorized representative not recorded. Invalid application.",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7882,10 +7883,10 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{MailedVoterRegistration_SNAP} = 'No'",
                 title:
                   "Client was not sent their requested voter registration form",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
-              },
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
+              }
             ],
-            title: "Audio Signature Findings:",
+            title: "Audio Signature Findings:"
           },
           {
             type: "panel",
@@ -7899,7 +7900,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "The Authorized Representative information was incorrect or missing",
                 expression:
-                  '"Reviewer Comment: "+{AuthRepCorrect_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
+                  '"Reviewer Comment: "+{AuthRepCorrect_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7908,7 +7909,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IntakeCorrectAppDate_SNAP} = 'No'",
                 title: "The application date was incorrect",
                 expression:
-                  '"Reviewer Comment: "+{IntakeCorrectAppDate_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
+                  '"Reviewer Comment: "+{IntakeCorrectAppDate_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7917,7 +7918,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{CertPeriodCorrect_SNAP} = 'No'",
                 title: "The certification period was incorrect",
                 expression:
-                  '"Reviewer Comment: "+{CertPeriodCorrect_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
+                  '"Reviewer Comment: "+{CertPeriodCorrect_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7926,7 +7927,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{RecertBenefitsFromActionDate_SNAP} = 'No '",
                 title:
                   "Benefits were not provided back to the recertification late-submission ",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7935,7 +7936,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{BenefitsFromRecertReceipt_SNAP} = 'No'",
                 title:
                   "Benefits were not provided back to the application for recertification date",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7943,7 +7944,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$RuntoComeUpMonth_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{RuntoComeUpMonth_SNAP} = 'No'",
                 title: "The come-up month of benefits was not run",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7951,7 +7952,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$NotAuthWithin30Days_Fault_SNAP$Finding_NO_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{NotAuthWithin30Days_Fault_SNAP} = 'Yes'",
                 title: "Benefits were not authorized within 30 days",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7959,10 +7960,10 @@ if (!window["%hammerhead%"]) {
                   "$Finding$DeniedTimely_Fault_SNAP$Finding_NO_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{DeniedTimely_Fault_SNAP} = 'Yes'",
                 title: "The application was not denied timely",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
-              },
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
+              }
             ],
-            title: "Authorization Findings:",
+            title: "Authorization Findings:"
           },
           {
             type: "panel",
@@ -7974,7 +7975,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$ABAWDScreening_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{ABAWDScreening_SNAP} = 'No'",
                 title: "No ABAWD Screening was completed",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7982,7 +7983,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$ABAWDStatusCorrect_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{ABAWDStatusCorrect_SNAP} = 'No'",
                 title: "The ABAWD status was incorrectly determined",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7990,7 +7991,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$ScreeningInEDMS_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{ScreeningInEDMS_SNAP} = 'No'",
                 title: "The ABAWD screening was not stored in EDMS/OnBase",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -7999,7 +8000,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{ExemptionWorkRegDetailUpdated_SNAP} = 'No'",
                 title:
                   "The Work Registration exemption was not recorded properly",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8008,7 +8009,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{ABAWDVerificationRequested_SNAP} = 'No'",
                 title:
                   "The verification needed for a Work Registration exemption were not requested",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8016,10 +8017,10 @@ if (!window["%hammerhead%"]) {
                   "$Finding$ReferredtoSTS_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{ReferredtoSTS_SNAP} = 'No'",
                 title: "The client was not referred to SNAP to Skills",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
-              },
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
+              }
             ],
-            title: "Work Assessment Findings:",
+            title: "Work Assessment Findings:"
           },
           {
             type: "panel",
@@ -8033,7 +8034,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Shelter Expense was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Shelter.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Shelter.Comment}'
               },
               {
                 type: "expression",
@@ -8044,7 +8045,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Shelter Expense was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Shelter.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Shelter.Comment}'
               },
               {
                 type: "expression",
@@ -8055,7 +8056,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Shelter Expense was included in the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Shelter.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Shelter.Comment}'
               },
               {
                 type: "expression",
@@ -8063,7 +8064,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$ExpenseUtilitiesVerified_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{ExpenseMatrix_SNAP.Utilities.Verified} = 'No'",
                 title:
-                  "A(n) Utilities Expense was not verified before authorization",
+                  "A(n) Utilities Expense was not verified before authorization"
               },
               {
                 type: "expression",
@@ -8074,7 +8075,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Utilities Expense was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Utilities.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Utilities.Comment}'
               },
               {
                 type: "expression",
@@ -8085,7 +8086,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Utilities Expense was included in the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Utilities.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Utilities.Comment}'
               },
               {
                 type: "expression",
@@ -8095,7 +8096,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Medical Expense was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Medical.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Medical.Comment}'
               },
               {
                 type: "expression",
@@ -8106,7 +8107,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Medical Expense was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Medical.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Medical.Comment}'
               },
               {
                 type: "expression",
@@ -8117,7 +8118,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Medical Expense was included in the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Medical.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Medical.Comment}'
               },
               {
                 type: "expression",
@@ -8127,7 +8128,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Medicare Premium was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Medicare.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Medicare.Comment}'
               },
               {
                 type: "expression",
@@ -8138,7 +8139,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) RecurringMedical Expense was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.RecurringMedical.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.RecurringMedical.Comment}'
               },
               {
                 type: "expression",
@@ -8148,7 +8149,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) ChildSupport Expense was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.ChildSupport.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.ChildSupport.Comment}'
               },
               {
                 type: "expression",
@@ -8159,7 +8160,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) ChildSupport Expense was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.ChildSupport.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.ChildSupport.Comment}'
               },
               {
                 type: "expression",
@@ -8170,7 +8171,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) ChildSupport Expense was included in the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.ChildSupport.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.ChildSupport.Comment}'
               },
               {
                 type: "expression",
@@ -8180,7 +8181,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Childcare Expense was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Childcare.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Childcare.Comment}'
               },
               {
                 type: "expression",
@@ -8191,7 +8192,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Childcare Expense was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Childcare.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Childcare.Comment}'
               },
               {
                 type: "expression",
@@ -8202,7 +8203,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Childcare Expense was included in the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Childcare.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.Childcare.Comment}'
               },
               {
                 type: "expression",
@@ -8213,7 +8214,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) HealthInsurance Expense was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.HealthInsurance.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.HealthInsurance.Comment}'
               },
               {
                 type: "expression",
@@ -8224,7 +8225,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) HealthInsurance Expense was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.HealthInsurance.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.HealthInsurance.Comment}'
               },
               {
                 type: "expression",
@@ -8235,7 +8236,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) HealthInsurance Expense was included in the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.HealthInsurance.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {ExpenseMatrix_SNAP.HealthInsurance.Comment}'
               },
               {
                 type: "expression",
@@ -8245,7 +8246,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Earned Income was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Earned.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Earned.Comment}'
               },
               {
                 type: "expression",
@@ -8256,7 +8257,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Earned Income was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Earned.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Earned.Comment}'
               },
               {
                 type: "expression",
@@ -8265,7 +8266,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IncomeMatrix_SNAP.Earned.IncludedInError} = TRUE",
                 title: "A(n) Earned Income was included in the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Earned.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Earned.Comment}'
               },
               {
                 type: "expression",
@@ -8275,7 +8276,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Unearned Income was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Unearned.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Unearned.Comment}'
               },
               {
                 type: "expression",
@@ -8286,7 +8287,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Unearned Income was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Unearned.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Unearned.Comment}'
               },
               {
                 type: "expression",
@@ -8297,7 +8298,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Unearned Income was included in the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Unearned.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.Unearned.Comment}'
               },
               {
                 type: "expression",
@@ -8307,7 +8308,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) SSISSDI Income was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.SSISSDI.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.SSISSDI.Comment}'
               },
               {
                 type: "expression",
@@ -8317,7 +8318,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) SSISSDI Income was excluded from the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.SSISSDI.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.SSISSDI.Comment}'
               },
               {
                 type: "expression",
@@ -8327,7 +8328,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) SSISSDI Income was included in the Budget in error",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.SSISSDI.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {IncomeMatrix_SNAP.SSISSDI.Comment}'
               },
               {
                 type: "expression",
@@ -8335,7 +8336,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$HowMeetMonthlyExpenses_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{HowMeetMonthlyExpenses_SNAP} = 'No'",
                 title:
-                  "The worker did not verify how expenses exceeding income were met",
+                  "The worker did not verify how expenses exceeding income were met"
               },
               {
                 type: "expression",
@@ -8344,10 +8345,10 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherBudgetErrors_SNAP} = 'Yes'",
                 title: "The worker made other budget-related errors",
                 expression:
-                  '"Reviewer Comment: "+{OtherBudgetErrors_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
-              },
+                  '"Reviewer Comment: "+{OtherBudgetErrors_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
+              }
             ],
-            title: "Budget Findings:",
+            title: "Budget Findings:"
           },
           {
             type: "panel",
@@ -8361,7 +8362,7 @@ if (!window["%hammerhead%"]) {
                   "{RequestedVerifications_Matrix_SNAP.Identity.Necessary} = 'No'",
                 title: "An unnecessary Verification for Identity was requested",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Identity.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Identity.Comment}'
               },
               {
                 type: "expression",
@@ -8371,7 +8372,7 @@ if (!window["%hammerhead%"]) {
                   "{RequestedVerifications_SNAP.Identity.PingHub} = 'No'",
                 title: "The Hub was not pinged for a(n) Identity Verification",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Identity.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Identity.Comment}'
               },
               {
                 type: "expression",
@@ -8382,7 +8383,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Identity Verification was not included in a Checklist",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Identity.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Identity.Comment}'
               },
               {
                 type: "expression",
@@ -8393,7 +8394,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Identity Verification was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Identity.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Identity.Comment}'
               },
               {
                 type: "expression",
@@ -8403,7 +8404,7 @@ if (!window["%hammerhead%"]) {
                   "{RequestedVerifications_SNAP.Income.Necessary} = 'No'",
                 title: "An unnecessary Verification for Income was requested",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Income.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Income.Comment}'
               },
               {
                 type: "expression",
@@ -8413,7 +8414,7 @@ if (!window["%hammerhead%"]) {
                   "{RequestedVerifications_SNAP.Income.PingHub} = 'No'",
                 title: "The Hub was not pinged for a(n) Income Verification",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Income.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Income.Comment}'
               },
               {
                 type: "expression",
@@ -8424,7 +8425,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Income Verification was not included in a Checklist",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Income.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Income.Comment}'
               },
               {
                 type: "expression",
@@ -8435,7 +8436,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Income Verification was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Income.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Income.Comment}'
               },
               {
                 type: "expression",
@@ -8446,7 +8447,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "An unnecessary Verification for Citizenship was requested",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Citizenship.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Citizenship.Comment}'
               },
               {
                 type: "expression",
@@ -8457,7 +8458,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "The Hub was not pinged for a(n) Citizenship Verification",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Citizenship.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Citizenship.Comment}'
               },
               {
                 type: "expression",
@@ -8468,7 +8469,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Citizenship Verification was not included in a Checklist",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Citizenship.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Citizenship.Comment}'
               },
               {
                 type: "expression",
@@ -8479,7 +8480,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Citizenship Verification was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Citizenship.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Citizenship.Comment}'
               },
               {
                 type: "expression",
@@ -8489,7 +8490,7 @@ if (!window["%hammerhead%"]) {
                   "{RequestedVerifications_SNAP.Shelter.Necessary} = 'No'",
                 title: "An unnecessary Verification for Shelter was requested",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Shelter.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Shelter.Comment}'
               },
               {
                 type: "expression",
@@ -8499,7 +8500,7 @@ if (!window["%hammerhead%"]) {
                   "{RequestedVerifications_SNAP.Shelter.PingHub} = 'No'",
                 title: "The Hub was not pinged for a(n) Shelter Verification",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Shelter.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Shelter.Comment}'
               },
               {
                 type: "expression",
@@ -8510,7 +8511,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Shelter Verification was not included in a Checklist",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Shelter.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Shelter.Comment}'
               },
               {
                 type: "expression",
@@ -8521,7 +8522,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Shelter Verification was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Shelter.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Shelter.Comment}'
               },
               {
                 type: "expression",
@@ -8531,7 +8532,7 @@ if (!window["%hammerhead%"]) {
                   "{RequestedVerifications_SNAP.Rent.Necessary} = 'No'",
                 title: "An unnecessary Verification for Rent was requested",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Rent.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Rent.Comment}'
               },
               {
                 type: "expression",
@@ -8540,7 +8541,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{RequestedVerifications_SNAP.Rent.PingHub} = 'No'",
                 title: "The Hub was not pinged for a(n) Rent Verification",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Rent.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Rent.Comment}'
               },
               {
                 type: "expression",
@@ -8550,7 +8551,7 @@ if (!window["%hammerhead%"]) {
                   "{RequestedVerifications_SNAP.Rent.Checklist} = 'No'",
                 title: "A(n) Rent Verification was not included in a Checklist",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Rent.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Rent.Comment}'
               },
               {
                 type: "expression",
@@ -8560,7 +8561,7 @@ if (!window["%hammerhead%"]) {
                 title:
                   "A(n) Rent Verification was not verified before authorization",
                 expression:
-                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Rent.Comment}',
+                  '"Review of: " + {DisplayVariable_SNAP} + " -- Reviewer Comment: "+ {RequestedVerifications_SNAP.Rent.Comment}'
               },
               {
                 type: "expression",
@@ -8568,7 +8569,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$AgencyRequestVerifications_SNAP$Finding_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{AgencyRequestVerifications_SNAP} = 'NoIncorrect'",
                 title: "One or more necessary verifications were not requested",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8576,7 +8577,7 @@ if (!window["%hammerhead%"]) {
                   "$Finding$UnnecessaryVerifications_SNAP$Finding_NO_CORRECTION_REQUIRED$review$3",
                 visibleIf: "{UnnecessaryVerifications_SNAP} = 'TRUE'",
                 title: "Unnecessary verifications were requested",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8586,7 +8587,7 @@ if (!window["%hammerhead%"]) {
                   "{PostponedSecondMonthUnverified_Fault_SNAP} = 'Yes'",
                 title:
                   "A second month of benefits was issued without verifications",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8595,7 +8596,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{PostponedSecondMonthFailedToIssue_Fault_SNAP} = 'Yes'",
                 title: "A second month of benefits was never issued",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8604,7 +8605,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{PendingNoticeon30thDay_Fault_SNAP} = 'Yes'",
                 title:
                   "Notice was not provided on the 30th day for pending verifications",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8613,7 +8614,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{SNAPBenefitsDenied&WereNot_SNAP} = 'Yes'",
                 title:
                   "Benefits were approved despite a failure to provide verifications",
-                expression: '"Review of: " + {DisplayVariable_SNAP}',
+                expression: '"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8622,10 +8623,10 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{UnaddressedAlertsIEVS_SNAP} = 'Yes'",
                 title: "Relevant alerts or IEVS matches were left unaddressed",
                 expression:
-                  '"Reviewer Comment: "+{UnaddressedAlertsIEVS_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
-              },
+                  '"Reviewer Comment: "+{UnaddressedAlertsIEVS_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
+              }
             ],
-            title: "Verification Findings:",
+            title: "Verification Findings:"
           },
           {
             type: "panel",
@@ -8638,7 +8639,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{IsOutcomeCorrect_SNAP} = 'No'",
                 title: "The eligibility determination was incorrect",
                 expression:
-                  '"Reviewer Comment: "+{OutcomeIncorrectComment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
+                  '"Reviewer Comment: "+{OutcomeIncorrectComment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8647,7 +8648,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf: "{OtherErrors_SNAP} = 'Yes'",
                 title: "One or more other errors were made",
                 expression:
-                  '"Reviewer Comment: "+{OtherErrors_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}',
+                  '"Reviewer Comment: "+{OtherErrors_Comment_SNAP} + " -- "+"Review of: " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8657,7 +8658,7 @@ if (!window["%hammerhead%"]) {
                   "{BenefitAmountCorrect_Matrix_SNAP.Initial.Correct} = 'No'",
                 title: "Initial Benefit Amount was Incorrect",
                 expression:
-                  '"At Review: $"+{BenefitAmountCorrect_Matrix_SNAP.Initial.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_SNAP.Initial.CorrectedAmt} + " -- " + {DisplayVariable_SNAP}',
+                  '"At Review: $"+{BenefitAmountCorrect_Matrix_SNAP.Initial.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_SNAP.Initial.CorrectedAmt} + " -- " + {DisplayVariable_SNAP}'
               },
               {
                 type: "expression",
@@ -8667,10 +8668,10 @@ if (!window["%hammerhead%"]) {
                   "{BenefitAmountCorrect_Matrix_SNAP.Ongoing.Correct} = 'No'",
                 title: "Ongoing Benefit Amount was Incorrect",
                 expression:
-                  '"At Review: $"+{BenefitAmountCorrect_Matrix_SNAP.Ongoing.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_SNAP.Ongoing.CorrectedAmt} + " -- " + {DisplayVariable_SNAP}',
-              },
+                  '"At Review: $"+{BenefitAmountCorrect_Matrix_SNAP.Ongoing.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_SNAP.Ongoing.CorrectedAmt} + " -- " + {DisplayVariable_SNAP}'
+              }
             ],
-            title: "Miscellaneous Findings:",
+            title: "Miscellaneous Findings:"
           },
           {
             type: "panel",
@@ -8685,7 +8686,7 @@ if (!window["%hammerhead%"]) {
                     name:
                       "$Finding$JournalNotes_SNAPET$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalNotes_SNAPET} = 'No'",
-                    title: "No Journal Notes were kept",
+                    title: "No Journal Notes were kept"
                   },
                   {
                     type: "expression",
@@ -8694,7 +8695,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalAdequate_SNAPET} = 'No'",
                     title: "The Journal Notes were inadequate",
                     expression:
-                      '"Reviewer Comment: "+{JournalAdequate_Comment_SNAPET} + " -- "+"Review of: " + {DisplayVariable_SNAPET}',
+                      '"Reviewer Comment: "+{JournalAdequate_Comment_SNAPET} + " -- "+"Review of: " + {DisplayVariable_SNAPET}'
                   },
                   {
                     type: "expression",
@@ -8703,7 +8704,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalDescriptionSufficient_SNAPET} = 'No'",
                     title: "The Journal Notes Description was not Sufficient",
                     expression:
-                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_SNAPET} + " -- "+"Review of: " + {DisplayVariable_SNAPET}',
+                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_SNAPET} + " -- "+"Review of: " + {DisplayVariable_SNAPET}'
                   },
                   {
                     type: "expression",
@@ -8713,7 +8714,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "There was Federal Tax Information in the Journal Notes",
                     expression:
-                      '"Reviewer Comment: "+{AllExemptionsRecorded_Comment_SNAPET} + " -- "+"Review of: " + {DisplayVariable_SNAPET}',
+                      '"Reviewer Comment: "+{AllExemptionsRecorded_Comment_SNAPET} + " -- "+"Review of: " + {DisplayVariable_SNAPET}'
                   },
                   {
                     type: "panel",
@@ -8725,7 +8726,7 @@ if (!window["%hammerhead%"]) {
                           "$Finding$ABAWDScreening_SNAPET$Finding_CORRECTION_REQUIRED$review$3",
                         visibleIf: "{ABAWDScreening_SNAPET} = 'No'",
                         title: "No ABAWD Screening was completed",
-                        expression: '"Review of: " + {DisplayVariable_SNAPET}',
+                        expression: '"Review of: " + {DisplayVariable_SNAPET}'
                       },
                       {
                         type: "expression",
@@ -8733,7 +8734,7 @@ if (!window["%hammerhead%"]) {
                           "$Finding$ABAWDStatusCorrect_SNAPET$Finding_CORRECTION_REQUIRED$review$3",
                         visibleIf: "{ABAWDStatusCorrect_SNAPET} = 'No'",
                         title: "The ABAWD status was incorrectly determined",
-                        expression: '"Review of: " + {DisplayVariable_SNAPET}',
+                        expression: '"Review of: " + {DisplayVariable_SNAPET}'
                       },
                       {
                         type: "expression",
@@ -8742,7 +8743,7 @@ if (!window["%hammerhead%"]) {
                         visibleIf: "{ScreeningInEDMS_SNAPET} = 'No'",
                         title:
                           "The ABAWD screening was not stored in EDMS/OnBase",
-                        expression: '"Review of: " + {DisplayVariable_SNAPET}',
+                        expression: '"Review of: " + {DisplayVariable_SNAPET}'
                       },
                       {
                         type: "expression",
@@ -8751,7 +8752,7 @@ if (!window["%hammerhead%"]) {
                         visibleIf: "{ExemptionRequested_SNAPET} = 'No'",
                         title:
                           "Verifications were not requested for the Work Registration exemption",
-                        expression: '"Review of: " + {DisplayVariable_SNAPET}',
+                        expression: '"Review of: " + {DisplayVariable_SNAPET}'
                       },
                       {
                         type: "expression",
@@ -8761,7 +8762,7 @@ if (!window["%hammerhead%"]) {
                           "{ExemptionWorkRegDetailUpdated_SNAPET} = 'No'",
                         title:
                           "The Work Registration exemption was not recorded properly",
-                        expression: '"Review of: " + {DisplayVariable_SNAPET}',
+                        expression: '"Review of: " + {DisplayVariable_SNAPET}'
                       },
                       {
                         type: "expression",
@@ -8770,7 +8771,7 @@ if (!window["%hammerhead%"]) {
                         visibleIf: "{AllExemptionsRecorded_SNAPET} = 'No'",
                         title:
                           "The exemption screens were not all recorded properly",
-                        expression: '"Review of: " + {DisplayVariable_SNAPET}',
+                        expression: '"Review of: " + {DisplayVariable_SNAPET}'
                       },
                       {
                         type: "panel",
@@ -8784,7 +8785,7 @@ if (!window["%hammerhead%"]) {
                             title:
                               "The client was not sent an appointment letter",
                             expression:
-                              '"Review of: " + {DisplayVariable_SNAPET}',
+                              '"Review of: " + {DisplayVariable_SNAPET}'
                           },
                           {
                             type: "expression",
@@ -8795,7 +8796,7 @@ if (!window["%hammerhead%"]) {
                             title:
                               "The worker caused the appointment to be scheduled untimely",
                             expression:
-                              '"Review of: " + {DisplayVariable_SNAPET}',
+                              '"Review of: " + {DisplayVariable_SNAPET}'
                           },
                           {
                             type: "expression",
@@ -8805,7 +8806,7 @@ if (!window["%hammerhead%"]) {
                             title:
                               "The client was not rescheduled after providing good cause",
                             expression:
-                              '"Review of: " + {DisplayVariable_SNAPET}',
+                              '"Review of: " + {DisplayVariable_SNAPET}'
                           },
                           {
                             type: "expression",
@@ -8815,7 +8816,7 @@ if (!window["%hammerhead%"]) {
                             title:
                               "The client was not sanctioned for missing their appointment without good cause",
                             expression:
-                              '"Review of: " + {DisplayVariable_SNAPET}',
+                              '"Review of: " + {DisplayVariable_SNAPET}'
                           },
                           {
                             type: "panel",
@@ -8830,7 +8831,7 @@ if (!window["%hammerhead%"]) {
                                 title:
                                   "The client's regained eligibility was not verified",
                                 expression:
-                                  '"Review of: " + {DisplayVariable_SNAPET}',
+                                  '"Review of: " + {DisplayVariable_SNAPET}'
                               },
                               {
                                 type: "expression",
@@ -8841,7 +8842,7 @@ if (!window["%hammerhead%"]) {
                                 title:
                                   "The client's non-compliance was end-dated with the wrong dates",
                                 expression:
-                                  '"Review of: " + {DisplayVariable_SNAPET}',
+                                  '"Review of: " + {DisplayVariable_SNAPET}'
                               },
                               {
                                 type: "expression",
@@ -8851,7 +8852,7 @@ if (!window["%hammerhead%"]) {
                                   "{SuppplementalBenefits_SNAPET} = 'No'",
                                 title: "Supplemental benefits were not issued",
                                 expression:
-                                  '"Review of: " + {DisplayVariable_SNAPET}',
+                                  '"Review of: " + {DisplayVariable_SNAPET}'
                               },
                               {
                                 type: "expression",
@@ -8862,7 +8863,7 @@ if (!window["%hammerhead%"]) {
                                 title:
                                   "The worker did not propose to terminate benefits timely after the 3 of 36 months were exhausted",
                                 expression:
-                                  '"Review of: " + {DisplayVariable_SNAPET}',
+                                  '"Review of: " + {DisplayVariable_SNAPET}'
                               },
                               {
                                 type: "expression",
@@ -8873,7 +8874,7 @@ if (!window["%hammerhead%"]) {
                                 title:
                                   "The case was not referred to investigations despite being terminated after 3 months",
                                 expression:
-                                  '"Review of: " + {DisplayVariable_SNAPET}',
+                                  '"Review of: " + {DisplayVariable_SNAPET}'
                               },
                               {
                                 type: "expression",
@@ -8884,7 +8885,7 @@ if (!window["%hammerhead%"]) {
                                 title:
                                   "The employment activity screen was not end-dated as part of the sanction",
                                 expression:
-                                  '"Review of: " + {DisplayVariable_SNAPET}',
+                                  '"Review of: " + {DisplayVariable_SNAPET}'
                               },
                               {
                                 type: "panel",
@@ -8899,7 +8900,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "The employment screen was not completed correctly for Unpaid/In-Kind Employment",
                                     expression:
-                                      '"Review of: " + {DisplayVariable_SNAPET}',
+                                      '"Review of: " + {DisplayVariable_SNAPET}'
                                   },
                                   {
                                     type: "expression",
@@ -8910,7 +8911,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "The client was not assigned sufficient non-employment hours",
                                     expression:
-                                      '"Review of: " + {DisplayVariable_SNAPET}',
+                                      '"Review of: " + {DisplayVariable_SNAPET}'
                                   },
                                   {
                                     type: "expression",
@@ -8921,7 +8922,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "The WEP hours do not comply with FLSA requirements",
                                     expression:
-                                      '"Review of: " + {DisplayVariable_SNAPET}',
+                                      '"Review of: " + {DisplayVariable_SNAPET}'
                                   },
                                   {
                                     type: "expression",
@@ -8932,7 +8933,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "There is no employability plan on file",
                                     expression:
-                                      '"Review of: " + {DisplayVariable_SNAPET}',
+                                      '"Review of: " + {DisplayVariable_SNAPET}'
                                   },
                                   {
                                     type: "expression",
@@ -8943,7 +8944,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "The employment screen was not correctly updated with the assigned activities",
                                     expression:
-                                      '"Review of: " + {DisplayVariable_SNAPET}',
+                                      '"Review of: " + {DisplayVariable_SNAPET}'
                                   },
                                   {
                                     type: "expression",
@@ -8953,7 +8954,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "A service authorization with a provider was not issued correctly",
                                     expression:
-                                      '"Review of: " + {DisplayVariable_SNAPET}',
+                                      '"Review of: " + {DisplayVariable_SNAPET}'
                                   },
                                   {
                                     type: "expression",
@@ -8964,7 +8965,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "Some iWAM Alerts requiring negative action were not processed",
                                     expression:
-                                      '"Review of: " + {DisplayVariable_SNAPET}',
+                                      '"Review of: " + {DisplayVariable_SNAPET}'
                                   },
                                   {
                                     type: "expression",
@@ -8975,7 +8976,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "The client was not referred for a necessary background check",
                                     expression:
-                                      '"Review of: " + {DisplayVariable_SNAPET}',
+                                      '"Review of: " + {DisplayVariable_SNAPET}'
                                   },
                                   {
                                     type: "expression",
@@ -8986,7 +8987,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "The assigned activities are not appropriate due to a felony record",
                                     expression:
-                                      '"Reviewer Comment: " +{FelonyAssignedActAppropriate_Comment_SNAPET} \n+ " -- "+ "Review of: " + {DisplayVariable_SNAPET}',
+                                      '"Reviewer Comment: " +{FelonyAssignedActAppropriate_Comment_SNAPET} \n+ " -- "+ "Review of: " + {DisplayVariable_SNAPET}'
                                   },
                                   {
                                     type: "expression",
@@ -8997,7 +8998,7 @@ if (!window["%hammerhead%"]) {
                                     title:
                                       "The assigned activities are not appropriate due to lack of a high school degree or equivalent",
                                     expression:
-                                      '"Reviewer Comment: " \n+ {NoHSDiplomaGEDAssignActAppropriate_Comment_SNAPET} \n+ " -- " + "Review of: " + {DisplayVariable_SNAPET}\n',
+                                      '"Reviewer Comment: " \n+ {NoHSDiplomaGEDAssignActAppropriate_Comment_SNAPET} \n+ " -- " + "Review of: " + {DisplayVariable_SNAPET}\n'
                                   },
                                   {
                                     type: "panel",
@@ -9012,28 +9013,28 @@ if (!window["%hammerhead%"]) {
                                         title:
                                           "One or more other errors were made",
                                         expression:
-                                          '"Reviewer Comment: "+{OtherErrors_Comment_SNAPET} + " -- "+"Review of: " + {DisplayVariable_TANF}',
-                                      },
+                                          '"Reviewer Comment: "+{OtherErrors_Comment_SNAPET} + " -- "+"Review of: " + {DisplayVariable_TANF}'
+                                      }
                                     ],
-                                    title: "Miscellaneous Findings:",
-                                  },
+                                    title: "Miscellaneous Findings:"
+                                  }
                                 ],
-                                title: "Work Assignment Findings:",
-                              },
+                                title: "Work Assignment Findings:"
+                              }
                             ],
-                            title: "Eligibility Findings:",
-                          },
+                            title: "Eligibility Findings:"
+                          }
                         ],
-                        title: "SNAP to Skills Intake Findings:",
-                      },
+                        title: "SNAP to Skills Intake Findings:"
+                      }
                     ],
-                    title: "Work Assessment Findings:",
-                  },
+                    title: "Work Assessment Findings:"
+                  }
                 ],
-                title: "JournalNotes Findings:",
-              },
+                title: "JournalNotes Findings:"
+              }
             ],
-            title: "SNAP E&T Findings",
+            title: "SNAP E&T Findings"
           },
           {
             type: "panel",
@@ -9049,7 +9050,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JournalNotes_TANF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalNotes_TANF} = 'No'",
                     title: "No Journal Notes were kept",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9057,7 +9058,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JournalTemplate_TANF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalTemplate_TANF} = 'No'",
                     title: "The Journal Note template was not used",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9066,7 +9067,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalAdequate_TANF} = 'No'",
                     title: "The Journal Notes were inadequate",
                     expression:
-                      '"Reviewer Comment: "+{JournalAdequate_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
+                      '"Reviewer Comment: "+{JournalAdequate_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9075,7 +9076,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalDescriptionSufficient_TANF} = 'No'",
                     title: "The Journal Notes Description was not Sufficient",
                     expression:
-                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
+                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9084,10 +9085,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{FTIinJournalEntry_TANF} = 'Yes'",
                     title:
                       "There was Federal Tax Information in the Journal Notes",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
+                  }
                 ],
-                title: "Journal Notes Findings:",
+                title: "Journal Notes Findings:"
               },
               {
                 type: "panel",
@@ -9101,7 +9102,7 @@ if (!window["%hammerhead%"]) {
                       "{InterviewScheduleDelayByAgency_Fault_TANF} = 'Yes'",
                     title:
                       "Timely intake interview was not scheduled due to error by this worker",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9110,7 +9111,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{InterviewDelaybyAgency_Fault_TANF} = 'Yes'",
                     title:
                       "The intake interview was delayed due to this worker",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9119,7 +9120,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{BenefitsRestoredtoAppDate_TANF} = 'No'",
                     title:
                       "Benefits were not restored to the beginning of the App/Recert period",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9127,7 +9128,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$CustomerScheduleUpdate_TANF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{CustomerScheduleUpdate_TANF} = 'No'",
                     title: "Customer Scheduling was not updated correctly",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9135,7 +9136,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$NOMIIssued_Fault_TANF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{NOMIIssued_Fault_TANF} = 'Yes'",
                     title: "A NOMI was not issued",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9143,7 +9144,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JETReferral_TANF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JETReferral_TANF} = 'No'",
                     title: "The client was not referred to JET",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9151,7 +9152,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JETReferralTimely_TANF$Finding_NO_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JETReferralTimely_TANF} = 'No'",
                     title: "The JET referral was not timely",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9160,10 +9161,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{SignedApplicationAudiosignature_TANF} = 'No'",
                     title:
                       "There is no signed application and/or audio signature",
-                    expression: '"Review of: " + {DisplayVariable_SNAP}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_SNAP}'
+                  }
                 ],
-                title: "Interview Findings:",
+                title: "Interview Findings:"
               },
               {
                 type: "panel",
@@ -9177,7 +9178,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Authorized Representative information was incorrect or missing",
                     expression:
-                      '"Reviewer Comment: "+{AuthRepCorrect_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
+                      '"Reviewer Comment: "+{AuthRepCorrect_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9186,7 +9187,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{IntakeCorrectAppDate_TANF} = 'No'",
                     title: "The application date was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{IntakeCorrectAppDate_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
+                      '"Reviewer Comment: "+{IntakeCorrectAppDate_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9195,7 +9196,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{CertPeriodCorrect_TANF} = 'No'",
                     title: "The certification period was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{CertPeriodCorrect_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
+                      '"Reviewer Comment: "+{CertPeriodCorrect_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9204,7 +9205,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{RecertBenefitsFromActionDate_TANF} = 'No '",
                     title:
                       "Benefits were not provided back to the recertification late-submission ",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9213,7 +9214,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{BenefitsFromRecertReceipt_TANF} = 'No'",
                     title:
                       "Benefits were not provided back to the application for recertification date",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9221,7 +9222,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$RuntoComeUpMonth_TANF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{RuntoComeUpMonth_TANF} = 'No'",
                     title: "The come-up month of benefits was not run",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9230,7 +9231,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{NotAuthWithin30Days_Fault_TANF} = 'Yes'",
                     title:
                       "The case was not authorized timely due to worker error",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9239,10 +9240,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{DeniedTimely_Fault_TANF} = 'Yes'",
                     title:
                       "The client was not denied timely due to worker error",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
+                  }
                 ],
-                title: "Authorization Findings:",
+                title: "Authorization Findings:"
               },
               {
                 type: "panel",
@@ -9256,7 +9257,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -9267,7 +9268,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -9278,7 +9279,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -9288,7 +9289,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Utilities Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Utilities.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Utilities.Comment}'
                   },
                   {
                     type: "expression",
@@ -9299,7 +9300,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Utilities Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Utilities.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Utilities.Comment}'
                   },
                   {
                     type: "expression",
@@ -9310,7 +9311,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Utilities Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Utilities.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Utilities.Comment}'
                   },
                   {
                     type: "expression",
@@ -9320,7 +9321,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medical Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medical.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medical.Comment}'
                   },
                   {
                     type: "expression",
@@ -9331,7 +9332,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medical Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medical.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medical.Comment}'
                   },
                   {
                     type: "expression",
@@ -9342,7 +9343,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medical Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medical.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medical.Comment}'
                   },
                   {
                     type: "expression",
@@ -9352,7 +9353,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medicare Premium was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medicare.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medicare.Comment}'
                   },
                   {
                     type: "expression",
@@ -9363,7 +9364,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medicare Premium was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medicare.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medicare.Comment}'
                   },
                   {
                     type: "expression",
@@ -9374,7 +9375,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medicare Premium was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medicare.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Medicare.Comment}'
                   },
                   {
                     type: "expression",
@@ -9385,7 +9386,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) RecurringMedical Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.RecurringMedical.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.RecurringMedical.Comment}'
                   },
                   {
                     type: "expression",
@@ -9396,7 +9397,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) RecurringMedical Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.RecurringMedical.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.RecurringMedical.Comment}'
                   },
                   {
                     type: "expression",
@@ -9407,7 +9408,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) RecurringMedical Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.RecurringMedical.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.RecurringMedical.Comment}'
                   },
                   {
                     type: "expression",
@@ -9418,7 +9419,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) ChildSupport Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -9429,7 +9430,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) ChildSupport Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -9440,7 +9441,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) ChildSupport Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -9450,7 +9451,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Childcare Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Childcare.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Childcare.Comment}'
                   },
                   {
                     type: "expression",
@@ -9461,7 +9462,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Childcare Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Childcare.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Childcare.Comment}'
                   },
                   {
                     type: "expression",
@@ -9472,7 +9473,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Childcare Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Childcare.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.Childcare.Comment}'
                   },
                   {
                     type: "expression",
@@ -9483,7 +9484,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) HealthInsurance Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.HealthInsurance.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.HealthInsurance.Comment}'
                   },
                   {
                     type: "expression",
@@ -9494,7 +9495,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) HealthInsurance Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.HealthInsurance.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.HealthInsurance.Comment}'
                   },
                   {
                     type: "expression",
@@ -9505,7 +9506,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) HealthInsurance Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.HealthInsurance.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {ExpenseMatrix_TANF.HealthInsurance.Comment}'
                   },
                   {
                     type: "expression",
@@ -9515,7 +9516,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Earned Income was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Earned.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Earned.Comment}'
                   },
                   {
                     type: "expression",
@@ -9526,7 +9527,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Earned Income was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Earned.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Earned.Comment}'
                   },
                   {
                     type: "expression",
@@ -9537,7 +9538,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Earned Income was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Earned.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Earned.Comment}'
                   },
                   {
                     type: "expression",
@@ -9547,7 +9548,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Unearned Income was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Unearned.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Unearned.Comment}'
                   },
                   {
                     type: "expression",
@@ -9558,7 +9559,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Unearned Income was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Unearned.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Unearned.Comment}'
                   },
                   {
                     type: "expression",
@@ -9569,7 +9570,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Unearned Income was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Unearned.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.Unearned.Comment}'
                   },
                   {
                     type: "expression",
@@ -9579,7 +9580,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) SSISSDI Income was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.SSISSDI.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.SSISSDI.Comment}'
                   },
                   {
                     type: "expression",
@@ -9590,7 +9591,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) SSISSDI Income was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.SSISSDI.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.SSISSDI.Comment}'
                   },
                   {
                     type: "expression",
@@ -9601,7 +9602,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) SSISSDI Income was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.SSISSDI.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {IncomeMatrix_TANF.SSISSDI.Comment}'
                   },
                   {
                     type: "expression",
@@ -9611,7 +9612,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Medicare premium paid by State Buy-In was not recorded correctly",
                     expression:
-                      '"Reviewer Comment: "+{BuyInMedicarePremium_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
+                      '"Reviewer Comment: "+{BuyInMedicarePremium_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9621,7 +9622,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The different gross and net SSI/SSDI was not processed correctly",
                     expression:
-                      '"Reviewer Comment: "+{SSISSDIOverpayment_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
+                      '"Reviewer Comment: "+{SSISSDIOverpayment_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9630,10 +9631,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{OtherBudgetErrors_TANF} = 'Yes'",
                     title: "The worker made other budget-related errors",
                     expression:
-                      '"Reviewer Comment: "+{OtherBudgetErrors_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
-                  },
+                      '"Reviewer Comment: "+{OtherBudgetErrors_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
+                  }
                 ],
-                title: "Budget Findings:",
+                title: "Budget Findings:"
               },
               {
                 type: "panel",
@@ -9648,7 +9649,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Identity was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -9659,7 +9660,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Identity Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -9670,7 +9671,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Identity Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -9681,7 +9682,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Identity Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -9692,7 +9693,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Income was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -9703,7 +9704,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Income Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -9714,7 +9715,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Income Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -9725,7 +9726,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Income Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -9736,7 +9737,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Citizenship was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -9747,7 +9748,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Citizenship Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -9758,7 +9759,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Citizenship Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -9769,7 +9770,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Citizenship Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -9780,7 +9781,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Shelter was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -9791,7 +9792,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Shelter Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -9802,7 +9803,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -9813,7 +9814,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -9823,7 +9824,7 @@ if (!window["%hammerhead%"]) {
                       "{RequestedVerifications_TANF.Rent.Necessary} = 'No'",
                     title: "An unnecessary Verification for Rent was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -9833,7 +9834,7 @@ if (!window["%hammerhead%"]) {
                       "{RequestedVerifications_TANF.Rent.PingHub} = 'No'",
                     title: "The Hub was not pinged for a(n) Rent Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -9844,7 +9845,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Rent Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -9855,7 +9856,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Rent Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_TANF} + " -- Reviewer Comment: "+ {RequestedVerifications_TANF.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -9864,7 +9865,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{NotChildCashCaretaker_TANF} = 'No'",
                     title:
                       "The caretaker is not a parent or verified custodian/legal guardian",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9872,7 +9873,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$ChildRelativeVerified_TANF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{ChildRelativeVerified_TANF} = 'No'",
                     title: "The caretaker relationship was not verified",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9881,7 +9882,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{TANFBenefitsDenied&WereNot_TANF} = 'No'",
                     title:
                       "Benefits were approved despite a failure to provide verifications",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9891,10 +9892,10 @@ if (!window["%hammerhead%"]) {
                     title:
                       "Relevant alerts or IEVS matches were left unaddressed",
                     expression:
-                      '"Reviewer Comment: "+{UnaddressedAlertsIEVS_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
-                  },
+                      '"Reviewer Comment: "+{UnaddressedAlertsIEVS_Comment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
+                  }
                 ],
-                title: "Verifications Findings:",
+                title: "Verifications Findings:"
               },
               {
                 type: "panel",
@@ -9907,7 +9908,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{IsOutcomeCorrect_TANF} = 'No'",
                     title: "The eligibility determination was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{OutcomeIncorrectComment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
+                      '"Reviewer Comment: "+{OutcomeIncorrectComment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9917,7 +9918,7 @@ if (!window["%hammerhead%"]) {
                       "{BenefitAmountCorrect_Matrix_TANF.Initial.Correct} = 'No'",
                     title: "Initial Benefit Amount was Incorrect",
                     expression:
-                      '"At Review: $"+{BenefitAmountCorrect_Matrix_TANF.Initial.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_TANF.Initial.CorrectedAmt} + " -- " + {DisplayVariable_TANF}',
+                      '"At Review: $"+{BenefitAmountCorrect_Matrix_TANF.Initial.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_TANF.Initial.CorrectedAmt} + " -- " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9927,7 +9928,7 @@ if (!window["%hammerhead%"]) {
                       "{BenefitAmountCorrect_Matrix_TANF.Ongoing.Correct} = 'No'",
                     title: "Ongoing Benefit Amount was Incorrect",
                     expression:
-                      '"At Review: $"+{BenefitAmountCorrect_Matrix_TANF.Ongoing.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_TANF.Ongoing.CorrectedAmt} + " -- " + {DisplayVariable_TANF}',
+                      '"At Review: $"+{BenefitAmountCorrect_Matrix_TANF.Ongoing.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_TANF.Ongoing.CorrectedAmt} + " -- " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9935,7 +9936,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$DegreeListUpdatedinOBWP_TANF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{DegreeListUpdatedinOBWP_TANF} = 'No'",
                     title: "The degree list was not updated correctly",
-                    expression: '"Review of: " + {DisplayVariable_TANF}',
+                    expression: '"Review of: " + {DisplayVariable_TANF}'
                   },
                   {
                     type: "expression",
@@ -9944,13 +9945,13 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{OtherErrors_TANF} = 'Yes'",
                     title: "One or more other errors were made",
                     expression:
-                      '"Reviewer Comment: "+{OtherErrorsComment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}',
-                  },
+                      '"Reviewer Comment: "+{OtherErrorsComment_TANF} + " -- "+"Review of: " + {DisplayVariable_TANF}'
+                  }
                 ],
-                title: "Journal Notes Findings:",
-              },
+                title: "Journal Notes Findings:"
+              }
             ],
-            title: "TANF Findings",
+            title: "TANF Findings"
           },
           {
             type: "panel",
@@ -9966,7 +9967,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JournalNotes_OWF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalNotes_OWF} = 'No'",
                     title: "No Journal Notes were kept",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -9975,7 +9976,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalAdequate_OWF} = 'No'",
                     title: "The Journal Notes were inadequate",
                     expression:
-                      '"Reviewer Comment: "+{JournalAdequate_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}',
+                      '"Reviewer Comment: "+{JournalAdequate_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -9984,7 +9985,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalDescriptionSufficient_OWF} = 'No'",
                     title: "The Journal Notes Description was not Sufficient",
                     expression:
-                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}',
+                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -9993,10 +9994,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{FTIinJournalEntry_OWF} = 'Yes'",
                     title:
                       "There was Federal Tax Information in the Journal Notes",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
+                  }
                 ],
-                title: "Journal Notes Findings:",
+                title: "Journal Notes Findings:"
               },
               {
                 type: "panel",
@@ -10010,7 +10011,7 @@ if (!window["%hammerhead%"]) {
                       "{InterviewScheduleDelayByAgency_Fault_OWF} = 'Yes'",
                     title:
                       "Timely intake interview was not scheduled due to error by this worker",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10019,7 +10020,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{InterviewDelaybyAgency_Fault_OWF} = 'Yes'",
                     title:
                       "The intake interview was not held timely due to this worker",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10028,7 +10029,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{OOCompleted_OWF} = 'No'",
                     title:
                       "The Options & Opportunities review was not completed",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10036,7 +10037,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$AssessInterviewScheduled_OWF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{AssessInterviewScheduled_OWF} = 'No'",
                     title: "The Assessment interview was not scheduled",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10044,7 +10045,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$PreEmployScreenScheduled_OWF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{PreEmployScreenScheduled_OWF} = 'No'",
                     title: "The pre-employment screening was not scheduled",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10054,10 +10055,10 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The client was not referred for a necessary background check",
                     expression:
-                      '"Reviewer Comment: "+{CriminalBackgroundCheckReferral_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}',
-                  },
+                      '"Reviewer Comment: "+{CriminalBackgroundCheckReferral_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}'
+                  }
                 ],
-                title: "Intake Interview Findings:",
+                title: "Intake Interview Findings:"
               },
               {
                 type: "panel",
@@ -10069,7 +10070,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$ChecklistRequiredVerf_OWF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{ChecklistRequiredVerf_OWF} = 'No'",
                     title: "A verification checklist was not issued properly",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10078,10 +10079,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{SignedSelfSuffContract&Plan_OWF} = 'No'",
                     title:
                       "There is no signed self-sufficiency contract on file",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
+                  }
                 ],
-                title: "Verifications Findings:",
+                title: "Verifications Findings:"
               },
               {
                 type: "panel",
@@ -10094,7 +10095,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{ChildcareAppWithChecklist_OWF} = 'No'",
                     title:
                       "The client was not given a childcare application and/or checklist",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10102,10 +10103,10 @@ if (!window["%hammerhead%"]) {
                       "$Finding$NoChildcareinWriting&Signed_OWF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{NoChildcareinWriting&Signed_OWF} = 'No'",
                     title: "A written declining of childcare is not on file",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
+                  }
                 ],
-                title: "Childcare Findings:",
+                title: "Childcare Findings:"
               },
               {
                 type: "panel",
@@ -10117,7 +10118,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$TranspAllowAuth_OWF$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{TranspAllowAuth_OWF} = 'No'",
                     title: "The transportation allowance was not authorized",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10126,7 +10127,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{WEPFLSACalCorrect_OWF} = 'No'",
                     title: "The WEP hours do not comply with FLSA requirements",
                     expression:
-                      '"Reviewer Comment: "+{WEPFLSACalCorrect_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}',
+                      '"Reviewer Comment: "+{WEPFLSACalCorrect_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10135,7 +10136,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JobSearchEndAfter6Wks_OWF} = 'No'",
                     title:
                       "The Job Search Assignment was not scheduled to end within 6 weeks",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10144,10 +10145,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{InabilityToWorkPartVerified_OWF} = 'No'",
                     title:
                       "The client's inability to work was not verified for an Alt Work referral",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
+                  }
                 ],
-                title: "Work Assignment Findings:",
+                title: "Work Assignment Findings:"
               },
               {
                 type: "panel",
@@ -10160,7 +10161,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{ServAuthInIWAM_OWF} = 'No'",
                     title:
                       "A service authorization with a provider was not issued correctly",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10169,7 +10170,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{IWAMAlertsNegAction_OWF} = 'No'",
                     title:
                       "Some iWAM Alerts requiring negative action were not processed",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10179,7 +10180,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The work acitivites were not updated correctly in OBWP",
                     expression:
-                      '"Reviewer Comment: "+{WorkActivitesUpdatedinOBWP_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}',
+                      '"Reviewer Comment: "+{WorkActivitesUpdatedinOBWP_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10188,10 +10189,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{OWFActStatusListUpdated_OWF} = 'No'",
                     title:
                       "The TANF Work Activities Status List was not updated correctly",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
+                  }
                 ],
-                title: "Documentation Findings:",
+                title: "Documentation Findings:"
               },
               {
                 type: "panel",
@@ -10205,7 +10206,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Sanction was not correctly removed or end-dated",
                     expression:
-                      '"Reviewer Comment: "+{SanctionCorrectlyRemovedEndDated_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}',
+                      '"Reviewer Comment: "+{SanctionCorrectlyRemovedEndDated_Comment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10214,7 +10215,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{MinSancPeriod&RequirComplHours_OWF} = 'No'",
                     title:
                       "The client had not served the minimum sanction period and/or provided compliance hours",
-                    expression: '"Review of: " + {DisplayVariable_OWF}',
+                    expression: '"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10223,7 +10224,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{IsOutcomeCorrect_OWF} = 'No'",
                     title: "The eligibility determination was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{OutcomeIncorrectComment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}',
+                      '"Reviewer Comment: "+{OutcomeIncorrectComment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}'
                   },
                   {
                     type: "expression",
@@ -10232,13 +10233,13 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{OtherErrors_OWF} = 'Yes'",
                     title: "One or more other errors were made",
                     expression:
-                      '"Reviewer Comment: "+{OtherErrorsComment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}',
-                  },
+                      '"Reviewer Comment: "+{OtherErrorsComment_OWF} + " -- "+"Review of: " + {DisplayVariable_OWF}'
+                  }
                 ],
-                title: "Journal Notes Findings:",
-              },
+                title: "Journal Notes Findings:"
+              }
             ],
-            title: "TANF Work Activities Findings",
+            title: "TANF Work Activities Findings"
           },
           {
             type: "panel",
@@ -10254,7 +10255,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JournalNotes_MC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalNotes_MC} = 'No'",
                     title: "No Journal Notes were kept",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10262,7 +10263,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JournalTemplate_MC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalTemplate_MC} = 'No'",
                     title: "The Journal Note template was not used",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10271,7 +10272,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalAdequate_MC} = 'No'",
                     title: "The Journal Notes were inadequate",
                     expression:
-                      '"Reviewer Comment: "+{JournalAdequate_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{JournalAdequate_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10280,7 +10281,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalDescriptionSufficient_MC} = 'No'",
                     title: "The Journal Notes Description was not Sufficient",
                     expression:
-                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10289,10 +10290,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{FTIinJournalEntry_MC} = 'Yes'",
                     title:
                       "There was Federal Tax Information in the Journal Notes",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_MC}'
+                  }
                 ],
-                title: "Journal Notes Findings:",
+                title: "Journal Notes Findings:"
               },
               {
                 type: "panel",
@@ -10306,7 +10307,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Authorized Representative information was incorrect or missing",
                     expression:
-                      '"Reviewer Comment: "+{AuthRepCorrect_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{AuthRepCorrect_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10315,7 +10316,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{SignedApplicationAudiosignature_MC} = 'No'",
                     title:
                       "There is no signed application and/or audio signature",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10324,7 +10325,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{IntakeCorrectAppDate_MC} = 'No'",
                     title: "The application date was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{IntakeCorrectAppDate_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{IntakeCorrectAppDate_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10333,7 +10334,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{CertPeriodCorrect_MC} = 'No'",
                     title: "The certification period was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{CertPeriodCorrect_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{CertPeriodCorrect_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10342,7 +10343,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{RecertBenefitsFromActionDate_MC} = 'No '",
                     title:
                       "Benefits were not provided back to the recertification late-submission ",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10351,7 +10352,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{BenefitsFromRecertReceipt_MC} = 'No'",
                     title:
                       "Benefits were not provided back to the application for recertification date",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10359,7 +10360,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$RuntoComeUpMonth_MC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{RuntoComeUpMonth_MC} = 'No'",
                     title: "The come-up month of benefits was not run",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10368,7 +10369,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{Approve45Days_Fault_MC} = 'Yes'",
                     title:
                       "Benefits were not approved timely due to worker error",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10377,7 +10378,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{DeniedTimely_Fault_MC} = 'Yes'",
                     title:
                       "Benefits were not denied timely due to worker error",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10385,7 +10386,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$MedAidCodesCorrect_MC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{MedAidCodesCorrect_MC} = 'No'",
                     title: "The Medicaid Aid Codes were incorrect",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10393,10 +10394,10 @@ if (!window["%hammerhead%"]) {
                       "$Finding$RetroMedBenefits_MC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{RetroMedBenefits_MC} = 'No'",
                     title: "Retroactive Medicaid benefits were not explored",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_MC}'
+                  }
                 ],
-                title: "Authorization Findings:",
+                title: "Authorization Findings:"
               },
               {
                 type: "panel",
@@ -10410,7 +10411,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -10421,7 +10422,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -10432,7 +10433,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -10442,7 +10443,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Utilities Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Utilities.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Utilities.Comment}'
                   },
                   {
                     type: "expression",
@@ -10453,7 +10454,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Utilities Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Utilities.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Utilities.Comment}'
                   },
                   {
                     type: "expression",
@@ -10464,7 +10465,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Utilities Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Utilities.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Utilities.Comment}'
                   },
                   {
                     type: "expression",
@@ -10474,7 +10475,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medical Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medical.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medical.Comment}'
                   },
                   {
                     type: "expression",
@@ -10485,7 +10486,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medical Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medical.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medical.Comment}'
                   },
                   {
                     type: "expression",
@@ -10496,7 +10497,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medical Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medical.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medical.Comment}'
                   },
                   {
                     type: "expression",
@@ -10506,7 +10507,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medicare Premium was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medicare.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medicare.Comment}'
                   },
                   {
                     type: "expression",
@@ -10517,7 +10518,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medicare Premium was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medicare.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medicare.Comment}'
                   },
                   {
                     type: "expression",
@@ -10528,7 +10529,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medicare Premium was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medicare.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Medicare.Comment}'
                   },
                   {
                     type: "expression",
@@ -10539,7 +10540,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) RecurringMedical Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.RecurringMedical.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.RecurringMedical.Comment}'
                   },
                   {
                     type: "expression",
@@ -10550,7 +10551,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) RecurringMedical Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.RecurringMedical.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.RecurringMedical.Comment}'
                   },
                   {
                     type: "expression",
@@ -10561,7 +10562,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) RecurringMedical Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.RecurringMedical.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.RecurringMedical.Comment}'
                   },
                   {
                     type: "expression",
@@ -10572,7 +10573,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) ChildSupport Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -10583,7 +10584,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) ChildSupport Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -10594,7 +10595,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) ChildSupport Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -10604,7 +10605,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Childcare Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Childcare.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Childcare.Comment}'
                   },
                   {
                     type: "expression",
@@ -10615,7 +10616,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Childcare Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Childcare.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Childcare.Comment}'
                   },
                   {
                     type: "expression",
@@ -10626,7 +10627,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Childcare Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Childcare.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.Childcare.Comment}'
                   },
                   {
                     type: "expression",
@@ -10637,7 +10638,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) HealthInsurance Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.HealthInsurance.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.HealthInsurance.Comment}'
                   },
                   {
                     type: "expression",
@@ -10648,7 +10649,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) HealthInsurance Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.HealthInsurance.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.HealthInsurance.Comment}'
                   },
                   {
                     type: "expression",
@@ -10659,7 +10660,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) HealthInsurance Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.HealthInsurance.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ExpenseMatrix_MC.HealthInsurance.Comment}'
                   },
                   {
                     type: "expression",
@@ -10669,7 +10670,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Earned Income was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Earned.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Earned.Comment}'
                   },
                   {
                     type: "expression",
@@ -10680,7 +10681,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Earned Income was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Earned.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Earned.Comment}'
                   },
                   {
                     type: "expression",
@@ -10691,7 +10692,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Earned Income was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Earned.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Earned.Comment}'
                   },
                   {
                     type: "expression",
@@ -10701,7 +10702,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Unearned Income was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Unearned.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Unearned.Comment}'
                   },
                   {
                     type: "expression",
@@ -10712,7 +10713,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Unearned Income was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Unearned.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Unearned.Comment}'
                   },
                   {
                     type: "expression",
@@ -10723,7 +10724,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Unearned Income was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Unearned.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.Unearned.Comment}'
                   },
                   {
                     type: "expression",
@@ -10733,7 +10734,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) SSISSDI Income was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.SSISSDI.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.SSISSDI.Comment}'
                   },
                   {
                     type: "expression",
@@ -10744,7 +10745,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) SSISSDI Income was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.SSISSDI.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.SSISSDI.Comment}'
                   },
                   {
                     type: "expression",
@@ -10755,7 +10756,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) SSISSDI Income was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.SSISSDI.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {IncomeMatrix_MC.SSISSDI.Comment}'
                   },
                   {
                     type: "expression",
@@ -10765,7 +10766,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Liquid Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Liquid.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Liquid.Comment}'
                   },
                   {
                     type: "expression",
@@ -10776,7 +10777,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Liquid Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Liquid.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Liquid.Comment}'
                   },
                   {
                     type: "expression",
@@ -10787,7 +10788,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Liquid Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Liquid.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Liquid.Comment}'
                   },
                   {
                     type: "expression",
@@ -10797,7 +10798,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Vehicle Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Vehicle.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Vehicle.Comment}'
                   },
                   {
                     type: "expression",
@@ -10808,7 +10809,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Vehicle Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Vehicle.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Vehicle.Comment}'
                   },
                   {
                     type: "expression",
@@ -10819,7 +10820,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Vehicle Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Vehicle.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Vehicle.Comment}'
                   },
                   {
                     type: "expression",
@@ -10829,7 +10830,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Personal Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Personal.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Personal.Comment}'
                   },
                   {
                     type: "expression",
@@ -10840,7 +10841,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Personal Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Personal.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Personal.Comment}'
                   },
                   {
                     type: "expression",
@@ -10851,7 +10852,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Personal Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Personal.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Personal.Comment}'
                   },
                   {
                     type: "expression",
@@ -10861,7 +10862,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Property Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Property.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Property.Comment}'
                   },
                   {
                     type: "expression",
@@ -10872,7 +10873,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Property Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Property.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Property.Comment}'
                   },
                   {
                     type: "expression",
@@ -10883,7 +10884,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Property Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Property.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Property.Comment}'
                   },
                   {
                     type: "expression",
@@ -10894,7 +10895,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Transferred Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Transferred.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Transferred.Comment}'
                   },
                   {
                     type: "expression",
@@ -10905,7 +10906,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Transferred Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Transferred.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Transferred.Comment}'
                   },
                   {
                     type: "expression",
@@ -10916,7 +10917,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Transferred Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Transferred.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {ResourceMatrix_MC.Transferred.Comment}'
                   },
                   {
                     type: "expression",
@@ -10926,7 +10927,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Medicare premium paid by State Buy-In was not recorded correctly",
                     expression:
-                      '"Reviewer Comment: "+{BuyInMedicarePremium_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{BuyInMedicarePremium_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10936,7 +10937,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The client's non-Medicaid insurance was not recorded correctly",
                     expression:
-                      '"Reviewer Comment: "+{HealthInsuranceCorrect_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{HealthInsuranceCorrect_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10946,7 +10947,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "Past, unpaid medicaid bills were not reviewed properly",
                     expression:
-                      '"Reviewer Comment: "+{UnpaidMedicalBillsReviewed_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{UnpaidMedicalBillsReviewed_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10956,7 +10957,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The different gross and net SSI/SSDI was not processed correctly",
                     expression:
-                      '"Reviewer Comment: "+{SSISSDIOverpayment_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{SSISSDIOverpayment_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10965,10 +10966,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{OtherBudgetErrors_MC} = 'Yes'",
                     title: "The worker made other budget-related errors",
                     expression:
-                      '"Reviewer Comment: "+{OtherBudgetErrors_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
-                  },
+                      '"Reviewer Comment: "+{OtherBudgetErrors_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
+                  }
                 ],
-                title: "Budget Findings:",
+                title: "Budget Findings:"
               },
               {
                 type: "panel",
@@ -10981,7 +10982,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{SeparateSNMCChecklists_MC} = 'No' AND {SeparateSNMCChecklists_Detail_MC} = 'MC'",
                     title: "A separate checklist was not issued for MC",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -10990,7 +10991,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{SeparateSNMCChecklists_MC} = 'No' and {SeparateSNMCChecklists_Detail_MC} = 'SNAP and TANF'",
                     title: "A separate checklist was not issued for SNAP",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -11001,7 +11002,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Identity was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -11012,7 +11013,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Identity Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -11023,7 +11024,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Identity Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -11034,7 +11035,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Identity Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -11045,7 +11046,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Income was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -11056,7 +11057,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Income Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -11067,7 +11068,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Income Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -11078,7 +11079,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Income Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -11089,7 +11090,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Citizenship was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -11100,7 +11101,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Citizenship Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -11111,7 +11112,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Citizenship Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -11122,7 +11123,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Citizenship Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -11133,7 +11134,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Shelter was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -11144,7 +11145,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Shelter Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -11155,7 +11156,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -11166,7 +11167,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -11176,7 +11177,7 @@ if (!window["%hammerhead%"]) {
                       "{RequestedVerifications_MC.Rent.Necessary} = 'No'",
                     title: "An unnecessary Verification for Rent was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -11186,7 +11187,7 @@ if (!window["%hammerhead%"]) {
                       "{RequestedVerifications_MC.Rent.PingHub} = 'No'",
                     title: "The Hub was not pinged for a(n) Rent Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -11197,7 +11198,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Rent Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -11208,7 +11209,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Rent Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_MC} + " -- Reviewer Comment: "+ {RequestedVerifications_MC.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -11218,7 +11219,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A second verification checklist (JFS 7220) was not issued properly",
                     expression:
-                      '"Reviewer Comment: "+{FollowUp20Days_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{FollowUp20Days_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -11228,7 +11229,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "Benefits were approved despite a failure to provide verifications",
                     expression:
-                      '"Reviewer Comment: "+{MCBenefitsDenied&WereNot_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{MCBenefitsDenied&WereNot_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -11237,7 +11238,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{UnaddressedAlertsIEVS_MC} = 'Yes'",
                     title:
                       "Relevant alerts or IEVS matches were left unaddressed",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -11248,10 +11249,10 @@ if (!window["%hammerhead%"]) {
                     title:
                       "No, some necessary verifications were not requested",
                     expression:
-                      '"Reviewer Comment: "+{AgencyRequestVerifications_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
-                  },
+                      '"Reviewer Comment: "+{AgencyRequestVerifications_Comment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
+                  }
                 ],
-                title: "Verifications Findings:",
+                title: "Verifications Findings:"
               },
               {
                 type: "panel",
@@ -11264,7 +11265,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{IsOutcomeCorrect_MC} = 'No'",
                     title: "The eligibility determination was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{OutcomeIncorrectComment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
+                      '"Reviewer Comment: "+{OutcomeIncorrectComment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -11274,7 +11275,7 @@ if (!window["%hammerhead%"]) {
                       "{BenefitAmountCorrect_Matrix_MC.Initial.Correct} = 'No'",
                     title: "Initial Benefit Amount was Incorrect",
                     expression:
-                      '"At Review: $"+{BenefitAmountCorrect_Matrix_MC.Initial.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_MC.Initial.CorrectedAmt} + " -- " + {DisplayVariable_MC}',
+                      '"At Review: $"+{BenefitAmountCorrect_Matrix_MC.Initial.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_MC.Initial.CorrectedAmt} + " -- " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -11284,7 +11285,7 @@ if (!window["%hammerhead%"]) {
                       "{BenefitAmountCorrect_Matrix_MC.Ongoing.Correct} = 'No'",
                     title: "Ongoing Benefit Amount was Incorrect",
                     expression:
-                      '"At Review: $"+{BenefitAmountCorrect_Matrix_MC.Ongoing.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_MC.Ongoing.CorrectedAmt} + " -- " + {DisplayVariable_MC}',
+                      '"At Review: $"+{BenefitAmountCorrect_Matrix_MC.Ongoing.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_MC.Ongoing.CorrectedAmt} + " -- " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -11292,7 +11293,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$BenefitsinMITS_MC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{BenefitsinMITS_MC} = 'No'",
                     title: "Benefits did not cross correctly into MITS",
-                    expression: '"Review of: " + {DisplayVariable_MC}',
+                    expression: '"Review of: " + {DisplayVariable_MC}'
                   },
                   {
                     type: "expression",
@@ -11301,13 +11302,13 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{OtherErrors_MC} = 'Yes'",
                     title: "One or more other errors were made",
                     expression:
-                      '"Reviewer Comment: "+{OtherErrorsComment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}',
-                  },
+                      '"Reviewer Comment: "+{OtherErrorsComment_MC} + " -- "+"Review of: " + {DisplayVariable_MC}'
+                  }
                 ],
-                title: "Journal Notes Findings:",
-              },
+                title: "Journal Notes Findings:"
+              }
             ],
-            title: "MC Findings",
+            title: "MC Findings"
           },
           {
             type: "panel",
@@ -11323,7 +11324,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JournalNotes_LTC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalNotes_LTC} = 'No'",
                     title: "No Journal Notes were kept",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11331,7 +11332,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$JournalTemplate_LTC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{JournalTemplate_LTC} = 'No'",
                     title: "The Journal Note template was not used",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11340,7 +11341,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalAdequate_LTC} = 'No'",
                     title: "The Journal Notes were inadequate",
                     expression:
-                      '"Reviewer Comment: "+{JournalAdequate_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{JournalAdequate_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11349,7 +11350,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{JournalDescriptionSufficient_LTC} = 'No'",
                     title: "The Journal Notes Description was not Sufficient",
                     expression:
-                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{JournalDescriptionSufficient_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11358,10 +11359,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{FTIinJournalEntry_LTC} = 'Yes'",
                     title:
                       "There was Federal Tax Information in the Journal Notes",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
+                  }
                 ],
-                title: "Journal Notes Findings:",
+                title: "Journal Notes Findings:"
               },
               {
                 type: "panel",
@@ -11375,7 +11376,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Authorized Representative information was incorrect or missing",
                     expression:
-                      '"Reviewer Comment: "+{AuthRepCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{AuthRepCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11384,7 +11385,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{SignedApplicationAudiosignature_LTC} = 'No'",
                     title:
                       "There is no signed application and/or audio signature",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11393,7 +11394,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{IntakeCorrectAppDate_LTC} = 'No'",
                     title: "The application date was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{IntakeCorrectAppDate_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{IntakeCorrectAppDate_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11402,7 +11403,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{CertPeriodCorrect_LTC} = 'No'",
                     title: "The certification period was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{CertPeriodCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{CertPeriodCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11411,7 +11412,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{RecertBenefitsFromActionDate_LTC} = 'No '",
                     title:
                       "Benefits were not provided back to the recertification late-submission ",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11420,7 +11421,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{BenefitsFromRecertReceipt_LTC} = 'No'",
                     title:
                       "Benefits were not provided back to the application for recertification date",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11428,7 +11429,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$RuntoComeUpMonth_LTC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{RuntoComeUpMonth_LTC} = 'No'",
                     title: "The come-up month of benefits was not run",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11437,7 +11438,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{Approve45Days_Fault_LTC} = 'Yes'",
                     title:
                       "Benefits were not approved timely due to worker error",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11446,7 +11447,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{DeniedTimely_Fault_LTC} = 'Yes'",
                     title:
                       "Benefits were not denied timely due to worker error",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11454,10 +11455,10 @@ if (!window["%hammerhead%"]) {
                       "$Finding$MedAidCodesCorrect_LTC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{MedAidCodesCorrect_LTC} = 'No'",
                     title: "The Medicaid Aid Codes were incorrect",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
+                  }
                 ],
-                title: "Authorization Findings:",
+                title: "Authorization Findings:"
               },
               {
                 type: "panel",
@@ -11471,7 +11472,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -11482,7 +11483,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -11493,7 +11494,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -11503,7 +11504,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Utilities Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Utilities.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Utilities.Comment}'
                   },
                   {
                     type: "expression",
@@ -11514,7 +11515,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Utilities Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Utilities.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Utilities.Comment}'
                   },
                   {
                     type: "expression",
@@ -11525,7 +11526,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Utilities Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Utilities.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Utilities.Comment}'
                   },
                   {
                     type: "expression",
@@ -11535,7 +11536,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medical Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medical.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medical.Comment}'
                   },
                   {
                     type: "expression",
@@ -11546,7 +11547,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medical Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medical.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medical.Comment}'
                   },
                   {
                     type: "expression",
@@ -11557,7 +11558,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medical Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medical.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medical.Comment}'
                   },
                   {
                     type: "expression",
@@ -11567,7 +11568,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medicare Premium was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medicare.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medicare.Comment}'
                   },
                   {
                     type: "expression",
@@ -11578,7 +11579,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medicare Premium was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medicare.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medicare.Comment}'
                   },
                   {
                     type: "expression",
@@ -11589,7 +11590,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Medicare Premium was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medicare.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Medicare.Comment}'
                   },
                   {
                     type: "expression",
@@ -11600,7 +11601,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) RecurringMedical Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.RecurringMedical.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.RecurringMedical.Comment}'
                   },
                   {
                     type: "expression",
@@ -11611,7 +11612,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) RecurringMedical Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.RecurringMedical.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.RecurringMedical.Comment}'
                   },
                   {
                     type: "expression",
@@ -11622,7 +11623,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) RecurringMedical Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.RecurringMedical.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.RecurringMedical.Comment}'
                   },
                   {
                     type: "expression",
@@ -11633,7 +11634,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) ChildSupport Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -11644,7 +11645,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) ChildSupport Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -11655,7 +11656,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) ChildSupport Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -11665,7 +11666,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Childcare Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Childcare.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Childcare.Comment}'
                   },
                   {
                     type: "expression",
@@ -11676,7 +11677,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Childcare Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Childcare.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Childcare.Comment}'
                   },
                   {
                     type: "expression",
@@ -11687,7 +11688,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Childcare Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Childcare.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.Childcare.Comment}'
                   },
                   {
                     type: "expression",
@@ -11698,7 +11699,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) HealthInsurance Expense was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.HealthInsurance.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.HealthInsurance.Comment}'
                   },
                   {
                     type: "expression",
@@ -11709,7 +11710,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) HealthInsurance Expense was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.HealthInsurance.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.HealthInsurance.Comment}'
                   },
                   {
                     type: "expression",
@@ -11720,7 +11721,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) HealthInsurance Expense was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.HealthInsurance.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ExpenseMatrix_LTC.HealthInsurance.Comment}'
                   },
                   {
                     type: "expression",
@@ -11730,7 +11731,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Earned Income was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Earned.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Earned.Comment}'
                   },
                   {
                     type: "expression",
@@ -11741,7 +11742,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Earned Income was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Earned.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Earned.Comment}'
                   },
                   {
                     type: "expression",
@@ -11752,7 +11753,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Earned Income was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Earned.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Earned.Comment}'
                   },
                   {
                     type: "expression",
@@ -11762,7 +11763,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Unearned Income was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Unearned.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Unearned.Comment}'
                   },
                   {
                     type: "expression",
@@ -11773,7 +11774,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Unearned Income was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Unearned.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Unearned.Comment}'
                   },
                   {
                     type: "expression",
@@ -11784,7 +11785,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Unearned Income was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Unearned.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.Unearned.Comment}'
                   },
                   {
                     type: "expression",
@@ -11794,7 +11795,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) SSISSDI Income was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.SSISSDI.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.SSISSDI.Comment}'
                   },
                   {
                     type: "expression",
@@ -11805,7 +11806,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) SSISSDI Income was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.SSISSDI.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.SSISSDI.Comment}'
                   },
                   {
                     type: "expression",
@@ -11816,7 +11817,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) SSISSDI Income was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.SSISSDI.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {IncomeMatrix_LTC.SSISSDI.Comment}'
                   },
                   {
                     type: "expression",
@@ -11826,7 +11827,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Liquid Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Liquid.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Liquid.Comment}'
                   },
                   {
                     type: "expression",
@@ -11837,7 +11838,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Liquid Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Liquid.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Liquid.Comment}'
                   },
                   {
                     type: "expression",
@@ -11848,7 +11849,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Liquid Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Liquid.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Liquid.Comment}'
                   },
                   {
                     type: "expression",
@@ -11858,7 +11859,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Vehicle Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Vehicle.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Vehicle.Comment}'
                   },
                   {
                     type: "expression",
@@ -11869,7 +11870,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Vehicle Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Vehicle.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Vehicle.Comment}'
                   },
                   {
                     type: "expression",
@@ -11880,7 +11881,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Vehicle Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Vehicle.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Vehicle.Comment}'
                   },
                   {
                     type: "expression",
@@ -11890,7 +11891,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Personal Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Personal.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Personal.Comment}'
                   },
                   {
                     type: "expression",
@@ -11901,7 +11902,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Personal Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Personal.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Personal.Comment}'
                   },
                   {
                     type: "expression",
@@ -11912,7 +11913,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Personal Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Personal.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Personal.Comment}'
                   },
                   {
                     type: "expression",
@@ -11922,7 +11923,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Property Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Property.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Property.Comment}'
                   },
                   {
                     type: "expression",
@@ -11933,7 +11934,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Property Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Property.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Property.Comment}'
                   },
                   {
                     type: "expression",
@@ -11944,7 +11945,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Property Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Property.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Property.Comment}'
                   },
                   {
                     type: "expression",
@@ -11955,7 +11956,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Transferred Resource was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Transferred.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Transferred.Comment}'
                   },
                   {
                     type: "expression",
@@ -11966,7 +11967,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Transferred Resource was excluded from the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Transferred.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Transferred.Comment}'
                   },
                   {
                     type: "expression",
@@ -11977,7 +11978,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Transferred Resource was included in the Budget in error",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Transferred.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {ResourceMatrix_LTC.Transferred.Comment}'
                   },
                   {
                     type: "expression",
@@ -11985,7 +11986,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$RetroMedBenefits_LTC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{RetroMedBenefits_LTC} = 'No'",
                     title: "Retroactive Medicaid benefits were not explored",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -11995,7 +11996,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Medicare premium paid by State Buy-In was not recorded correctly",
                     expression:
-                      '"Reviewer Comment: "+{BuyInMedicarePremium_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{BuyInMedicarePremium_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12005,7 +12006,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The client's non-Medicaid insurance was not recorded correctly",
                     expression:
-                      '"Reviewer Comment: "+{HealthInsuranceCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{HealthInsuranceCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12015,7 +12016,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "Past, unpaid medicaid bills were not reviewed properly",
                     expression:
-                      '"Reviewer Comment: "+{UnpaidMedicalBillsReviewed_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{UnpaidMedicalBillsReviewed_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12025,7 +12026,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The different gross and net SSI/SSDI was not processed correctly",
                     expression:
-                      '"Reviewer Comment: "+{SSISSDIOverpayment_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{SSISSDIOverpayment_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12034,10 +12035,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{OtherBudgetErrors_LTC} = 'Yes'",
                     title: "The worker made other budget-related errors",
                     expression:
-                      '"Reviewer Comment: "+{OtherBudgetErrors_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
-                  },
+                      '"Reviewer Comment: "+{OtherBudgetErrors_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
+                  }
                 ],
-                title: "Budget Findings:",
+                title: "Budget Findings:"
               },
               {
                 type: "panel",
@@ -12052,7 +12053,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Identity was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -12063,7 +12064,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Identity Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -12074,7 +12075,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Identity Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -12085,7 +12086,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Identity Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Identity.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Identity.Comment}'
                   },
                   {
                     type: "expression",
@@ -12096,7 +12097,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Income was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -12107,7 +12108,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Income Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -12118,7 +12119,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Income Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -12129,7 +12130,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Income Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Income.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Income.Comment}'
                   },
                   {
                     type: "expression",
@@ -12140,7 +12141,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Citizenship was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -12151,7 +12152,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Citizenship Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -12162,7 +12163,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Citizenship Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -12173,7 +12174,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Citizenship Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Citizenship.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Citizenship.Comment}'
                   },
                   {
                     type: "expression",
@@ -12184,7 +12185,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "An unnecessary Verification for Shelter was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -12195,7 +12196,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Hub was not pinged for a(n) Shelter Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -12206,7 +12207,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -12217,7 +12218,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Shelter Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Shelter.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Shelter.Comment}'
                   },
                   {
                     type: "expression",
@@ -12227,7 +12228,7 @@ if (!window["%hammerhead%"]) {
                       "{RequestedVerifications_LTC.Rent.Necessary} = 'No'",
                     title: "An unnecessary Verification for Rent was requested",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -12237,7 +12238,7 @@ if (!window["%hammerhead%"]) {
                       "{RequestedVerifications_LTC.Rent.PingHub} = 'No'",
                     title: "The Hub was not pinged for a(n) Rent Verification",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -12248,7 +12249,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Rent Verification was not included in a Checklist",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -12259,7 +12260,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A(n) Rent Verification was not verified before authorization",
                     expression:
-                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Rent.Comment}',
+                      '"Review of: " + {DisplayVariable_LTC} + " -- Reviewer Comment: "+ {RequestedVerifications_LTC.Rent.Comment}'
                   },
                   {
                     type: "expression",
@@ -12268,7 +12269,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{SeparateSNMCChecklists_LTC} = 'No' and {SeparateSNMCChecklists_Detail_LTC} = 'MC'",
                     title: "A separate checklist was not issued for MC",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12277,7 +12278,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf:
                       "{SeparateSNMCChecklists_LTC} = 'No' and {SeparateSNMCChecklists_Detail_LTC} = 'SNAP and TANF'",
                     title: "A separate checklist was not issued for SNAP/TANF",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12287,7 +12288,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "A second verification checklist (JFS 7220) was not issued timely",
                     expression:
-                      '"Reviewer Comment: "+{FollowUp20Days_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{FollowUp20Days_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12297,7 +12298,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "Benefits were approved despite a failure to provide verifications",
                     expression:
-                      '"Reviewer Comment: "+{MCBenefitsDenied&WereNot_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{MCBenefitsDenied&WereNot_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12306,10 +12307,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{UnaddressedAlertsIEVS_LTC} = 'Yes'",
                     title:
                       "Relevant alerts or IEVS matches were left unaddressed",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
-                  },
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
+                  }
                 ],
-                title: "Verifications Findings:",
+                title: "Verifications Findings:"
               },
               {
                 type: "panel",
@@ -12323,7 +12324,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Monthly Income Allowance or Family Need Allowance was incorrectly calculated",
                     expression:
-                      '"Reviewer Comment: "+{MIAFNACorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{MIAFNACorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12333,7 +12334,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The spousal impoverishment was incorrectly calculated",
                     expression:
-                      '"Reviewer Comment: "+{SpousalImprovementCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{SpousalImprovementCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12342,7 +12343,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{ImproperTransAccountedFor_LTC} = 'No'",
                     title: "Not all improper transfers were accounted for",
                     expression:
-                      '"Reviewer Comment: "+{ImproperTransAccountedFor_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{ImproperTransAccountedFor_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12350,7 +12351,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$ImpropTranfScreenCorrect_LTC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{ImpropTranfScreenCorrect_LTC} = 'No'",
                     title: "The improper transfer screen was incorrect",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12358,7 +12359,7 @@ if (!window["%hammerhead%"]) {
                       "$Finding$ResourceAssessComplete_LTC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{ResourceAssessComplete_LTC} = 'No'",
                     title: "The required resource assessment was not completed",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12367,7 +12368,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{SOCCorrect_LTC} = 'No'",
                     title: "The Share of Cost was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{SOCCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{SOCCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12377,7 +12378,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The restricted Medicaid coverage period was applied incorrectly",
                     expression:
-                      '"Reviewer Comment: "+{RestrictCoveragePeriodCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{RestrictCoveragePeriodCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12386,7 +12387,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{RestrictCoveragePeriodCorrect_NOA_LTC} = 'No'",
                     title:
                       "A NOA was not issued to confirm dates of restricted coverage",
-                    expression: '"Review of: " + {DisplayVariable_LTC}',
+                    expression: '"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12395,10 +12396,10 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{InstitutionalChildCorrect_LTC} = 'No'",
                     title: "Institutional  children were not handled correctly",
                     expression:
-                      '"Reviewer Comment: "+{InstitutionalChildCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
-                  },
+                      '"Reviewer Comment: "+{InstitutionalChildCorrect_Comment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
+                  }
                 ],
-                title: "Long Term Care Policy Findings:",
+                title: "Long Term Care Policy Findings:"
               },
               {
                 type: "panel",
@@ -12411,7 +12412,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{IsOutcomeCorrect_LTC} = 'No'",
                     title: "The eligibility determination was incorrect",
                     expression:
-                      '"Reviewer Comment: "+{OutcomeIncorrectComment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
+                      '"Reviewer Comment: "+{OutcomeIncorrectComment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12421,7 +12422,7 @@ if (!window["%hammerhead%"]) {
                       "{BenefitAmountCorrect_Matrix_LTC.Initial.Correct} = 'No'",
                     title: "Initial Benefit Amount was Incorrect",
                     expression:
-                      '"At Review: $"+{BenefitAmountCorrect_Matrix_LTC.Initial.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_LTC.Initial.CorrectedAmt} + " -- " + {DisplayVariable_LTC}',
+                      '"At Review: $"+{BenefitAmountCorrect_Matrix_LTC.Initial.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_LTC.Initial.CorrectedAmt} + " -- " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
@@ -12431,14 +12432,14 @@ if (!window["%hammerhead%"]) {
                       "{BenefitAmountCorrect_Matrix_LTC.Ongoing.Correct} = 'No'",
                     title: "Ongoing Benefit Amount was Incorrect",
                     expression:
-                      '"At Review: $"+{BenefitAmountCorrect_Matrix_LTC.Ongoing.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_LTC.Ongoing.CorrectedAmt} + " -- " + {DisplayVariable_LTC}',
+                      '"At Review: $"+{BenefitAmountCorrect_Matrix_LTC.Ongoing.AtReview} + " --  Correct Amount: $" + {BenefitAmountCorrect_Matrix_LTC.Ongoing.CorrectedAmt} + " -- " + {DisplayVariable_LTC}'
                   },
                   {
                     type: "expression",
                     name:
                       "$Finding$BenefitsinMITS_LTC$Finding_CORRECTION_REQUIRED$review$3",
                     visibleIf: "{BenefitsinMITS_LTC} = 'No'",
-                    title: "Benefits did not cross correctly into MITS",
+                    title: "Benefits did not cross correctly into MITS"
                   },
                   {
                     type: "expression",
@@ -12447,13 +12448,13 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{OtherErrors_LTC} = 'Yes'",
                     title: "One or more other errors were made",
                     expression:
-                      '"Reviewer Comment: "+{OtherErrorsComment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}',
-                  },
+                      '"Reviewer Comment: "+{OtherErrorsComment_LTC} + " -- "+"Review of: " + {DisplayVariable_LTC}'
+                  }
                 ],
-                title: "Miscellaneous Findings:",
-              },
+                title: "Miscellaneous Findings:"
+              }
             ],
-            title: "LTC Findings",
+            title: "LTC Findings"
           },
           {
             type: "panel",
@@ -12471,7 +12472,7 @@ if (!window["%hammerhead%"]) {
                       "{IncometypeMatrix_UETarget.Unemployment.UEexcludederror_UETarget} = 'True'",
                     title: "The Unemployment income was excluded in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.Unemployment.Comment}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.Unemployment.Comment}'
                   },
                   {
                     type: "expression",
@@ -12481,7 +12482,7 @@ if (!window["%hammerhead%"]) {
                       "{IncometypeMatrix_UETarget.Unemployment.UEincludederror_UETarget} = 'True'",
                     title: "The Unemployment income was included in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.Unemployment.Comment}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.Unemployment.Comment}'
                   },
                   {
                     type: "expression",
@@ -12492,7 +12493,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Workers' Compensation income was included in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.Workers\'Compensation.Comment}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.Workers\'Compensation.Comment}'
                   },
                   {
                     type: "expression",
@@ -12503,7 +12504,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The Workers' Compensation income was excluded in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.Workers\'Compensation.Comment}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.Workers\'Compensation.Comment}'
                   },
                   {
                     type: "expression",
@@ -12513,7 +12514,7 @@ if (!window["%hammerhead%"]) {
                       "{IncometypeMatrix_UETarget.SSI.UEexcludederror_UETarget} = 'True'",
                     title: "The SSI income was excluded in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.SSI.Comment}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.SSI.Comment}'
                   },
                   {
                     type: "expression",
@@ -12523,7 +12524,7 @@ if (!window["%hammerhead%"]) {
                       "{IncometypeMatrix_UETarget.SSI.UEincludederror_UETarget} = 'True'",
                     title: "The SSI income was included in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.SSI.Comment}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.SSI.Comment}'
                   },
                   {
                     type: "expression",
@@ -12533,7 +12534,7 @@ if (!window["%hammerhead%"]) {
                       "{IncometypeMatrix_UETarget.SocialSecurity.UEincludederror_UETarget} = 'True'",
                     title: "The Social Security income was included in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.SocialSecurity.Comment}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.SocialSecurity.Comment}'
                   },
                   {
                     type: "expression",
@@ -12543,7 +12544,7 @@ if (!window["%hammerhead%"]) {
                       "{IncometypeMatrix_UETarget.Social Security.UEexcludederror_UETarget} = 'True'",
                     title: "The Social Security income was excluded in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.SocialSecurity.Comment}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.SocialSecurity.Comment}'
                   },
                   {
                     type: "expression",
@@ -12553,7 +12554,7 @@ if (!window["%hammerhead%"]) {
                       "{IncometypeMatrix_UETarget.ChildSupport.UEexcludederror_UETarget} = 'True'",
                     title: "The child support income was excluded in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.ChildSupport.Comment}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.ChildSupport.Comment}'
                   },
                   {
                     type: "expression",
@@ -12563,10 +12564,10 @@ if (!window["%hammerhead%"]) {
                       "{IncometypeMatrix_UETarget.ChildSupport.UEincludederror_UETarget} = 'True'",
                     title: "The child support income was included in error. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.ChildSupport.Comment}',
-                  },
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.ChildSupport.Comment}'
+                  }
                 ],
-                title: "Income type and verification section.",
+                title: "Income type and verification section."
               },
               {
                 type: "expression",
@@ -12576,7 +12577,7 @@ if (!window["%hammerhead%"]) {
                   "{IncometypeMatrix_UETarget.RetirementPensions&Annuities.UEexcludederror_UETarget} = 'True'",
                 title: "The Retirement income was excluded in error. ",
                 expression:
-                  '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.RetirementPensions&Annuities.Comment}',
+                  '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.RetirementPensions&Annuities.Comment}'
               },
               {
                 type: "expression",
@@ -12586,7 +12587,7 @@ if (!window["%hammerhead%"]) {
                   "{IncometypeMatrix_UETarget.RetirementPensions&Annuities.UEincludederror_UETarget} = 'True'",
                 title: "The Retirement income was included in error. ",
                 expression:
-                  '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.RetirementPensions&Annuities.Comment}',
+                  '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.RetirementPensions&Annuities.Comment}'
               },
               {
                 type: "expression",
@@ -12596,7 +12597,7 @@ if (!window["%hammerhead%"]) {
                   "{IncometypeMatrix_UETarget.OtherExplainbelow..UEexcludederror_UETarget} = 'True'",
                 title: "The other income was excluded in error.",
                 expression:
-                  '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.OtherExplainbelow.Comment}',
+                  '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.OtherExplainbelow.Comment}'
               },
               {
                 type: "expression",
@@ -12606,7 +12607,7 @@ if (!window["%hammerhead%"]) {
                   "{IncometypeMatrix_UETarget.OtherExplainbelow..UEincludederror_UETarget} = 'True'",
                 title: "The other income was included in error.",
                 expression:
-                  '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.OtherExplainbelow.Comment}',
+                  '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {IncometypeMatrix_UETarget.OtherExplainbelow.Comment}'
               },
               {
                 type: "expression",
@@ -12615,7 +12616,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{IncometypeMatrix_UETarget.Unemployment.IncomeVerified_UETarget} = 'No'",
                 title: "The Unemployment income was not verified. ",
-                expression: '"Review of: " + {DisplayVariable_UETarget}',
+                expression: '"Review of: " + {DisplayVariable_UETarget}'
               },
               {
                 type: "expression",
@@ -12624,7 +12625,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{IncometypeMatrix_UETarget.Workers'Compensation.IncomeVerified_UETarget} = 'No'",
                 title: "The Workers' Compensation was not verified. ",
-                expression: '"Review of: " + {DisplayVariable_UETarget}',
+                expression: '"Review of: " + {DisplayVariable_UETarget}'
               },
               {
                 type: "expression",
@@ -12633,7 +12634,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{IncometypeMatrix_UETarget.SSI.IncomeVerified_UETarget} = 'No'",
                 title: "The SSI income was not verified. ",
-                expression: '"Review of: " + {DisplayVariable_UETarget}',
+                expression: '"Review of: " + {DisplayVariable_UETarget}'
               },
               {
                 type: "expression",
@@ -12642,7 +12643,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{IncometypeMatrix_UETarget.SocialSecurity.IncomeVerified_UETarget} = 'No'",
                 title: "The Social Security income was not verified. ",
-                expression: '"Review of: " + {DisplayVariable_UETarget}',
+                expression: '"Review of: " + {DisplayVariable_UETarget}'
               },
               {
                 type: "expression",
@@ -12651,7 +12652,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{IncometypeMatrix_UETarget.ChildSupport.IncomeVerified_UETarget} = 'No'",
                 title: "The child support income was not verified. ",
-                expression: '"Review of: " + {DisplayVariable_UETarget}',
+                expression: '"Review of: " + {DisplayVariable_UETarget}'
               },
               {
                 type: "expression",
@@ -12660,7 +12661,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{IncometypeMatrix_UETarget.RetirementPensions&Annuities.IncomeVerified_UETarget} = 'No'",
                 title: "The retirement income was not verified. ",
-                expression: '"Review of: " + {DisplayVariable_UETarget}',
+                expression: '"Review of: " + {DisplayVariable_UETarget}'
               },
               {
                 type: "expression",
@@ -12669,7 +12670,7 @@ if (!window["%hammerhead%"]) {
                 visibleIf:
                   "{IncometypeMatrix_UETarget.OtherExplainbelow..IncomeVerified_UETarget} = 'No'",
                 title: "The other income was not verified. ",
-                expression: '"Review of: " + {DisplayVariable_UETarget}',
+                expression: '"Review of: " + {DisplayVariable_UETarget}'
               },
               {
                 type: "panel",
@@ -12682,7 +12683,7 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{UEIncCalc_UETarget} = 'No'",
                     title: "The income calculation was completed incorrectly. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {UEIncCalc_Comment_UETarget}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {UEIncCalc_Comment_UETarget}'
                   },
                   {
                     type: "expression",
@@ -12692,7 +12693,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "All information provided to the agency was not acted on. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {UEAllInfoActedOn_comment_UETarget}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {UEAllInfoActedOn_comment_UETarget}'
                   },
                   {
                     type: "expression",
@@ -12702,7 +12703,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The unearned income type was not recorded correctly. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {CorrectUEType_Comment_UETarget}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {CorrectUEType_Comment_UETarget}'
                   },
                   {
                     type: "expression",
@@ -12712,7 +12713,7 @@ if (!window["%hammerhead%"]) {
                     title:
                       "The net amount was not used even thought the SSI/SSD payment was reduced due to overpayment from the same source. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {UEGrossNetDif__comment_UETarget}',
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {UEGrossNetDif__comment_UETarget}'
                   },
                   {
                     type: "expression",
@@ -12721,60 +12722,60 @@ if (!window["%hammerhead%"]) {
                     visibleIf: "{UEIVESWRKD_UETarget} = 'No'",
                     title: "Not all relevant IVES alerts were worked. ",
                     expression:
-                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {UEIVESWRKD_Comment_UETarget}',
-                  },
+                      '"Review of: " + {DisplayVariable_UETarget} + " -- Reviewer Comment: "+ {UEIVESWRKD_Comment_UETarget}'
+                  }
                 ],
-                title: "Miscellaneous Findings",
-              },
+                title: "Miscellaneous Findings"
+              }
             ],
-            title: "Unearned Income Target Review Findings: ",
-          },
+            title: "Unearned Income Target Review Findings: "
+          }
         ],
         title: "Summary Page",
-        description: "Final Comments and Summary of Findings",
-      },
+        description: "Final Comments and Summary of Findings"
+      }
     ],
     calculatedValues: [
       {
         name: "DisplayVariable_SNAP",
         expression:
-          "{ReviewDetails.SNAP.Status} +' '+{ReviewDetails.SNAP.ReviewType} + ' on Case ' +{ReviewDetails.SNAP.CaseNumber} + ' SNAP Block ' +{ReviewDetails.SNAP.Block}",
+          "{ReviewDetails.SNAP.Status} +' '+{ReviewDetails.SNAP.ReviewType} + ' on Case ' +{ReviewDetails.SNAP.CaseNumber} + ' SNAP Block ' +{ReviewDetails.SNAP.Block}"
       },
       {
         name: "DisplayVariable_SNAPET",
         expression:
-          " {ReviewDetails.SNAPET.Status} +' Intake on Case ' +{ReviewDetails.SNAPET.CaseNumber} + ' SNAPET Block ' +{ReviewDetails.SNAPET.Block",
+          " {ReviewDetails.SNAPET.Status} +' Intake on Case ' +{ReviewDetails.SNAPET.CaseNumber} + ' SNAPET Block ' +{ReviewDetails.SNAPET.Block"
       },
       {
         name: "DisplayVariable_TANF",
         expression:
-          "{ReviewDetails.TANF.Status} +' '+{ReviewDetails.TANF.ReviewType} + ' on Case ' +{ReviewDetails.TANF.CaseNumber} + ' TANF Block ' +{ReviewDetails.TANF.Block}",
+          "{ReviewDetails.TANF.Status} +' '+{ReviewDetails.TANF.ReviewType} + ' on Case ' +{ReviewDetails.TANF.CaseNumber} + ' TANF Block ' +{ReviewDetails.TANF.Block}"
       },
       {
         name: "DisplayVariable_OWF",
         expression:
-          "{ReviewDetails.OWF.Status} +' Intake on Case ' +{ReviewDetails.OWF.CaseNumber} + ' TANF WA Block ' +{ReviewDetails.OWF.Block}",
+          "{ReviewDetails.OWF.Status} +' Intake on Case ' +{ReviewDetails.OWF.CaseNumber} + ' TANF WA Block ' +{ReviewDetails.OWF.Block}"
       },
       {
         name: "DisplayVariable_MC",
         expression:
-          "{ReviewDetails.MC.Status} +' '+{ReviewDetails.MC.ReviewType} + ' on Case ' +{ReviewDetails.MC.CaseNumber} + ' MC Block ' +{ReviewDetails.MC.Block}",
+          "{ReviewDetails.MC.Status} +' '+{ReviewDetails.MC.ReviewType} + ' on Case ' +{ReviewDetails.MC.CaseNumber} + ' MC Block ' +{ReviewDetails.MC.Block}"
       },
       {
         name: "DisplayVariable_LTC",
         expression:
-          "{ReviewDetails.LTC.Status} +' '+{ReviewDetails.LTC.ReviewType} + ' on Case ' +{ReviewDetails.LTC.CaseNumber} + ' LTC MC Block ' +{ReviewDetails.LTC.Block}",
+          "{ReviewDetails.LTC.Status} +' '+{ReviewDetails.LTC.ReviewType} + ' on Case ' +{ReviewDetails.LTC.CaseNumber} + ' LTC MC Block ' +{ReviewDetails.LTC.Block}"
       },
       {
         name: "DisplayVariable_ UETarget",
         expression:
-          "{ReviewDetails.UETarget.Status} +' '+{ReviewDetails.UETarget.ReviewType} + ' on Case ' +{ReviewDetails.UETarget.CaseNumber} + ' Unearned Income Target Review Block ' +{ReviewDetails.UETarget.Block}",
-      },
+          "{ReviewDetails.UETarget.Status} +' '+{ReviewDetails.UETarget.ReviewType} + ' on Case ' +{ReviewDetails.UETarget.CaseNumber} + ' Unearned Income Target Review Block ' +{ReviewDetails.UETarget.Block}"
+      }
     ],
     showNavigationButtons: "both",
     showQuestionNumbers: "off",
     clearInvisibleValues: "onHidden",
-    checkErrorsMode: "onValueChanged",
+    checkErrorsMode: "onValueChanged"
   };
 
   //creator.JSON = json;
@@ -12790,7 +12791,7 @@ if (!window["%hammerhead%"]) {
         elements: [
           {
             type: "text",
-            name: "question11",
+            name: "question11"
           },
           {
             type: "rating",
@@ -12801,7 +12802,7 @@ if (!window["%hammerhead%"]) {
             rateMin: 0,
             rateMax: 10,
             minRateDescription: "(Most unlikely)",
-            maxRateDescription: "(Most likely)",
+            maxRateDescription: "(Most likely)"
           },
           {
             type: "checkbox",
@@ -12813,49 +12814,49 @@ if (!window["%hammerhead%"]) {
               {
                 type: "answercount",
                 text: "Please select two features maximum.",
-                maxCount: 2,
-              },
+                maxCount: 2
+              }
             ],
             hasOther: true,
             choices: [
               "Performance",
               "Stability",
               "User Interface",
-              "Complete Functionality",
+              "Complete Functionality"
             ],
             otherText: "Other feature:",
-            colCount: 2,
+            colCount: 2
           },
           {
             type: "comment",
             name: "passive_experience",
             visibleIf: "{nps_score} > 6  and {nps_score} < 9",
-            title: "What is the primary reason for your score?",
+            title: "What is the primary reason for your score?"
           },
           {
             type: "comment",
             name: "disappointed_experience",
             visibleIf: "{nps_score} notempty",
             title:
-              "What do you miss and what was disappointing in your experience with us?",
+              "What do you miss and what was disappointing in your experience with us?"
           },
           {
             type: "checkbox",
             name: "question4",
-            choices: ["item1", "item2", "item3"],
+            choices: ["item1", "item2", "item3"]
           },
           {
             type: "dropdown",
             name: "question5",
-            choices: ["item1", "item2", "item3"],
+            choices: ["item1", "item2", "item3"]
           },
           {
             type: "rating",
-            name: "question6",
-          },
-        ],
-      },
-    ],
+            name: "question6"
+          }
+        ]
+      }
+    ]
   };
   var counter = 0;
   function setJSON() {

@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { SurveyCreator } from "../../creator";
-import { getLocString } from "@survey/creator";
+import { editorLocalization } from "@survey/creator";
 import { IQuestionToolboxItem } from "@survey/creator";
 
 //import "./toolbox-item.scss";
@@ -27,7 +27,12 @@ export class ToolboxItemViewModel {
     this.title(_itemData.title);
   }
   get ariaLabel() {
-    return this.item.tooltip + " " + getLocString("toolbox") + " item";
+    return (
+      this.item.tooltip +
+      " " +
+      editorLocalization.getString("toolbox") +
+      " item"
+    );
   }
   click(model: ToolboxItemViewModel) {
     model._creator.clickToolboxItem(model.item.json);
@@ -53,7 +58,7 @@ ko.components.register("svc-toolbox-item", {
         ToolboxViewModel.getToolboxItem(wrapper),
         params.creator
       );
-    },
+    }
   },
-  template: template,
+  template: template
 });
