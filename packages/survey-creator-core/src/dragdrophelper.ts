@@ -400,11 +400,6 @@ export class DragDropHelper extends Base {
       draggedOverNode.closest(selector) ||
       draggedOverNode.querySelector(selector);
 
-    // if (!dropTargetHTMLElement) {
-    //   window["draggedOverNode"] = draggedOverNode;
-    //   // console.dir(draggedOverNode);
-    // }
-
     return <HTMLElement>dropTargetHTMLElement;
   }
 
@@ -501,7 +496,7 @@ export class DragDropHelper extends Base {
     }
   }
 
-  private doDropItemValue() {
+  private doDropItemValue = () => {
     const isTop = !this.isBottom;
     const choices = this.itemValueParentQuestion.choices;
     const oldIndex = choices.indexOf(this.draggedSurveyElement);
