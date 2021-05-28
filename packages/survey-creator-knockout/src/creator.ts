@@ -129,4 +129,14 @@ export class SurveyCreator extends CreatorBase<Survey> {
     const plugin = this.plugins[newType];
     !!plugin && plugin.activate();
   }
+
+  render(target: string | HTMLElement) {
+    let node: HTMLElement = target as HTMLElement;
+    if(typeof target === "string") {
+      node = document.getElementById(target);
+    }
+    var div = document.createElement("div");
+    node.innerHTML = `<survey-creator params="creator: creator"></survey-creator>`;
+    ko.applyBindings({ creator: this }, node);
+  }
 }

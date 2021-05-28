@@ -1,15 +1,12 @@
 import * as ko from "knockout";
 import { SurveyCreator } from "../../creator";
-import {
-  getLocString,
-  IQuestionToolboxItem,
-  ToolboxItemViewModel
-} from "@survey/creator";
+import { ToolboxItemViewModel } from "@survey/creator";
+import { editorLocalization } from "@survey/creator";
+import { IQuestionToolboxItem } from "@survey/creator";
 
 //import "./toolbox-item.scss";
 import { AdaptiveActionBarItemWrapper } from "survey-core";
 import { ToolboxViewModel } from "./toolbox";
-import { KnockoutDragEvent } from "../../events";
 const template = require("./toolbox-item.html");
 // import template from "./toolbox-item.html";
 
@@ -30,7 +27,12 @@ export class KnockoutToolboxItemViewModel extends ToolboxItemViewModel {
     this.title(item.title);
   }
   get ariaLabel() {
-    return this.item.tooltip + " " + getLocString("toolbox") + " item";
+    return (
+      this.item.tooltip +
+      " " +
+      editorLocalization.getString("toolbox") +
+      " item"
+    );
   }
 }
 

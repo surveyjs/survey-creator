@@ -1,5 +1,6 @@
 import {
   CreatorBase,
+  editorLocalization,
   getLocString,
   IQuestionToolboxItem
 } from "@survey/creator";
@@ -135,10 +136,7 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
   constructor(props) {
     super(props);
     const toolboxItem: IQuestionToolboxItem = this.item.wrappedItem as any;
-    this.model = new ToolboxItemViewModel(
-      toolboxItem,
-      this.props.creator
-    );
+    this.model = new ToolboxItemViewModel(toolboxItem, this.props.creator);
   }
   public get item() {
     return this.props.item;
@@ -158,7 +156,12 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
         tabIndex={0}
         title={this.item.tooltip}
         role="button"
-        aria-label={this.item.tooltip + " " + getLocString("toolbox") + " item"}
+        aria-label={
+          this.item.tooltip +
+          " " +
+          editorLocalization.getString("toolbox") +
+          " item"
+        }
         onPointerDown={(event: any) => {
           this.model.onPointerDown(event);
         }}

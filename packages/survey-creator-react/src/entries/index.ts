@@ -2,6 +2,7 @@ export let Version: string;
 Version = `${process.env.VERSION}`;
 
 import "@survey/creator/survey-creator-core.css";
+
 export * from "../SurveyCreator";
 export * from "../components/RowWrapper";
 export * from "../components/Question";
@@ -18,3 +19,10 @@ export * from "../components/tabs/Preview";
 export * from "../components/tabs/Translation";
 export * from "../components/toolbox/Toolbox";
 export * from "../events";
+
+export {
+  editorLocalization,
+  editorLocalization as localization,
+  settings,
+  LogicModel
+} from "@survey/creator";

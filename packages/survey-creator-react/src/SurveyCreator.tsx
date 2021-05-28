@@ -172,7 +172,7 @@ class DesignTimeSurveyModel extends Model {
     return undefined;
   }
 }
-class SurveyCreator extends CreatorBase<SurveyModel> {
+export class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
   }
@@ -214,10 +214,9 @@ class SurveyCreator extends CreatorBase<SurveyModel> {
   }
 }
 
-export function createReactSurveyCreator(json: any, options: any = null) {
+export function createSurveyCreator(json: any, options: any = null) {
   if (!options) options = {};
   const creator = new SurveyCreator(options);
   creator.JSON = json;
-  //creator.setSurvey(new Model(json));
   return creator;
 }
