@@ -159,12 +159,21 @@ export var surveyDesignerCss = {
     cell: "sd-multipletext__cell"
   },
   dropdown: {
-    root: "",
+    root: "sd-selectbase",
     small: "sd-row__question--small",
     control: "sd-input",
     selectWrapper: "",
     other: "sd-comment sd-question__other",
-    onError: "sd-input--error"
+    onError: "sd-input--error",
+    label: "sd-selectbase__label",
+    item: "sd-item sd-radio sd-selectbase__item",
+    itemDisabled: "sd-item--disabled sd-radio--disabled",
+    itemChecked: "sd-item--checked sd-radio--checked",
+    itemHover: "sd-item--allowhover sd-radio--allowhover",
+    itemControl: "sd-visuallyhidden sd-item__control sd-radio__control",
+    itemDecorator: "sd-item__svg sd-radio__svg",
+    controlLabel: "sd-item__control-label",
+    materialDecorator: "sd-item__decorator sd-radio__decorator",
   },
   imagepicker: {
     root: "sd-imagepicker",

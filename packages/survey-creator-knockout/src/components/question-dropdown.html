@@ -13,7 +13,7 @@
     <div class="svc-question__dropdown-choices">
         <!-- ko foreach: { data: question.visibleChoices, as: 'item' }  -->
           <div class="svc-question__dropdown-choice">
-              <!-- ko component: { name: question.getItemValueWrapperComponentName(item), params: { componentData:  question.getItemValueWrapperComponentData(item), templateData: { name: 'svc-choice-item-text', data: item } } } -->
+              <!-- ko component: { name: question.getItemValueWrapperComponentName(item), params: { componentData:  question.getItemValueWrapperComponentData(item), templateData: { name: 'survey-radiogroup-item', data: item } } } -->
               <!-- /ko -->
           </div>
         <!-- /ko -->

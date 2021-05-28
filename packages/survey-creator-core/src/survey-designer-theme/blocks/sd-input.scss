@@ -4,8 +4,12 @@
   appearance: none;
   position: static;
   width: 100%;
+  height: calcSize(6);
   box-sizing: border-box;
   padding: 12px 16px;
+  line-height: calcSize(3);
+  font-family: $font-family;
+  font-size: calcSize(2);
   color: $foreground;
   background: $background-for-editors;
   box-shadow: inset 0px 1px 2px $border-inside;
