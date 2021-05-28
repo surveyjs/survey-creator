@@ -13,80 +13,61 @@ class DesignTimeSurveyModel extends Survey {
     super(jsonObj);
   }
   public get hasLogo(): boolean {
-    if (this.isDesignMode) return true;
-    return super["hasLogo"];
+    return true;
   }
   public get isLogoBefore(): boolean {
-    if (this.isDesignMode) return false;
-    return super["isLogoBefore"];
+    return false;
   }
   public get isLogoAfter(): boolean {
-    if (this.isDesignMode) return true;
-    return super["isLogoAfter"];
+    return true;
   }
   public getElementWrapperComponentName(element: SurveyElement): string {
-    if (element.isDesignMode) {
-      if (element instanceof Question) {
-        if (element.getType() == "dropdown") {
-          return "svc-dropdown-question";
-        }
-        if (element.getType() == "image") {
-          return "svc-image-question";
-        }
-        if (element.koElementType() == "survey-question") {
-          return "svc-question";
-        }
+    if (element instanceof Question) {
+      if (element.getType() == "dropdown") {
+        return "svc-dropdown-question";
       }
-      if (element instanceof Panel) {
-        if (element.koElementType() == "survey-panel") {
-          return "svc-panel";
-        }
+      if (element.getType() == "image") {
+        return "svc-image-question";
+      }
+      if (element.koElementType() == "survey-question") {
+        return "svc-question";
+      }
+    }
+    if (element instanceof Panel) {
+      if (element.koElementType() == "survey-panel") {
+        return "svc-panel";
       }
     }
     return super.getElementWrapperComponentName(element);
   }
   public getElementWrapperComponentNameByName(element: string): string {
-    if (!this.isDesignMode) {
-      super.getElementWrapperComponentNameByName(element);
-    }
     if (element === "sv-logo-image") return "svc-logo-image";
     return super.getElementWrapperComponentNameByName(element);
   }
   public getElementWrapperComponentData(element: SurveyElement): any {
-    if (element.isDesignMode) {
-      if (element instanceof Question) {
-        if (element.koElementType() == "survey-question") {
-          return this.creator;
-        }
+    if (element instanceof Question) {
+      if (element.koElementType() == "survey-question") {
+        return this.creator;
       }
-      if (element instanceof Panel) {
-        if (element.koElementType() == "survey-panel") {
-          return this.creator;
-        }
+    }
+    if (element instanceof Panel) {
+      if (element.koElementType() == "survey-panel") {
+        return this.creator;
       }
     }
     return super.getElementWrapperComponentData(element);
   }
   public getElementWrapperComponentDataByName(element: string): any {
-    if (!this.isDesignMode) {
-      super.getElementWrapperComponentNameByName(element);
-    }
     if (element === "sv-logo-image") return this.creator;
     return super.getElementWrapperComponentDataByName(element);
   }
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if (!this.isDesignMode) {
-      return SurveyModel.TEMPLATE_RENDERER_COMPONENT_NAME;
-    }
     if (question.getType() === "imagepicker") {
       return "svc-image-item-value";
     }
     return "svc-item-value";
   }
   public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    if(!this.isDesignMode) {
-      return item;
-    }
     return {
       creator: this.creator,
       question,
@@ -102,8 +83,7 @@ class DesignTimeSurveyModel extends Survey {
   }
 
   public getRendererForString(element: Base, name: string): string {
-    if (this.isDesignMode) return editableStringRendererName;
-    return undefined;
+    return editableStringRendererName;
   }
 }
 
@@ -117,8 +97,9 @@ export class SurveyCreator extends CreatorBase<Survey> {
     new ImplementorBase(this);
   }
 
-  protected createSurveyCore(json: any = {}): Survey {
-    return new DesignTimeSurveyModel(this, json);
+  protected createSurveyCore(json: any = {}, reason: string): Survey {
+    if (reason === "designer") return new DesignTimeSurveyModel(this, json);
+    return new Survey(json);
   }
 
   protected onViewTypeChanged(newType: string) {

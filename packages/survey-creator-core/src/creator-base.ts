@@ -1263,14 +1263,14 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public createSurvey(json: any = {}, reason: string = "designer"): T {
-    const survey: T = this.createSurveyCore(json); // new surveyType(json);
+    const survey: T = this.createSurveyCore(json, reason); // new surveyType(json);
     if (reason != "designer" && reason != "test") {
       (<any>survey).locale = editorLocalization.currentLocale;
     }
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;
   }
-  protected createSurveyCore(json: any = {}): T {
+  protected createSurveyCore(json: any = {}, reason: string): T {
     throw new Error("createSurveyCore method should be overridden/implemented");
   }
   /**
