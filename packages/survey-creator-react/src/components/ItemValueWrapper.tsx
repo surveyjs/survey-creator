@@ -63,7 +63,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
 
     return (
       <div
-        className={"svc-item-value-wrapper" + (isNew ? " svc-item-value--new" : "")} key={this.props.element.key}
+        className={"svc-item-value-wrapper" + (isNew ? " svc-item-value--new" : "") + (this.model.isDragging ? " svc-item-value--dragging": "")} key={this.props.element.key}
         draggable={this.model.isDraggable}
         onDragStart={ (e) => this.model.dragStart(this.model, new ReactDragEvent(e)) }
         onDragOver={ (e) => this.model.dragOver(this.model, new ReactDragEvent(e)) }

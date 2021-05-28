@@ -1,5 +1,5 @@
 <div
-  class="svc-item-value-wrapper" data-bind="attr: { draggable: isDraggable }, event: { dragstart: koDragStart, dragover: koDragOver, dragend: koDragEnd, drop: koDrop,  }, css: { 'svc-item-value--new': isNew }"
+  class="svc-item-value-wrapper" data-bind="attr: { draggable: isDraggable }, event: { dragstart: koDragStart, dragover: koDragOver, dragend: koDragEnd, drop: koDrop,  }, css: { 'svc-item-value--new': isNew, 'svc-item-value--dragging': isDragging }"
  >
  <!-- ko if: showDragDropGhostOnTop -->
   <div class="svc-drag-drop-ghost"></div>

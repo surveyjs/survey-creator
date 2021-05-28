@@ -1,3 +1,4 @@
+import { ModuleWithComponentFactories } from "@angular/core";
 import {
   Base,
   ItemValue,
@@ -16,6 +17,7 @@ import "./item-value.scss";
 
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
+  @property({ defaultValue: false }) isDragging: boolean;
   constructor(
     protected creator: CreatorBase<SurveyModel>,
     public question: QuestionSelectBase,
@@ -80,6 +82,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   dragStart(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
+    this.isDragging = true;
     return model.dragDropHelper.onDragStartItemValue(
       event,
       model.question,
@@ -94,6 +97,7 @@ export class ItemValueWrapperViewModel extends Base {
     );
   }
   dragEnd(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
+    this.isDragging = false;
     return model.dragDropHelper.onDragEnd();
   }
   drop(model: ItemValueWrapperViewModel, event: IPortableDragEvent) {
