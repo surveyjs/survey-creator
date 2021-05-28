@@ -12780,7 +12780,8 @@ if (!window["%hammerhead%"]) {
 
   //creator.JSON = json;
   window.creator = creator;
-  ko.applyBindings({ creator: creator });
+  // ko.applyBindings({ creator: creator });
+  creator.render("surveyCreator");
 
   var json3 = {
     pages: [
