@@ -519,3 +519,34 @@ test("Page duplicate action, copy a page and check the index", (): any => {
   expect(creator.survey.pages[1].elements[0].name).toEqual("question5");
   expect(creator.survey.pages[1].elements[2].name).toEqual("question7");
 });
+test("Show error on entering non-unique column value", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "matrixdynamic",
+            name: "question1",
+            columns: [{ name: "col1" }, { name: "col2" }]
+          }
+        ]
+      }
+    ]
+  };
+  var matrixQuestion = creator.survey.getAllQuestions()[0];
+  creator.selectElement(matrixQuestion.columns[1]);
+  var questionName = creator.propertyGrid.survey.getQuestionByName("name");
+  expect(questionName.value).toEqual("col2");
+  questionName.value = "col1";
+  expect(questionName.errors).toHaveLength(1);
+  expect(questionName.errors[0].getText()).toEqual(
+    "Please enter a unique name"
+  );
+  expect(matrixQuestion.columns[1].name).toEqual("col2");
+  questionName.value = "col2";
+  expect(questionName.errors).toHaveLength(0);
+  questionName.value = "col3";
+  expect(questionName.errors).toHaveLength(0);
+  expect(matrixQuestion.columns[1].name).toEqual("col3");
+});

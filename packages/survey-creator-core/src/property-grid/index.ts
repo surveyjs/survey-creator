@@ -539,6 +539,7 @@ export class PropertyJSONGenerator {
     json.visible = prop.visible;
     json.isReadOnly = prop.readOnly;
     json.isRequired = prop.isRequired;
+    json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     json.title = this.getQuestionTitle(prop, title);
     return json;
   }

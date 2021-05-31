@@ -32,6 +32,13 @@ export * from "../components/toolbox/toolbox-item";
 export * from "../utils/survey-widget";
 
 export * from "../creator";
+export * as core from "@survey/creator";
+export {
+  editorLocalization,
+  editorLocalization as localization,
+  settings,
+  LogicModel
+} from "@survey/creator";
 
 import "@survey/creator/survey-creator-core.css";
 

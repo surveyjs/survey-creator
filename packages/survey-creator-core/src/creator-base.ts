@@ -1751,10 +1751,17 @@ export class CreatorBase<T extends SurveyModel>
     value: any
   ): string {
     if (propertyName !== "name") return null;
-    var newName = this.generateUniqueName(obj, value);
-    if (newName !== value)
-      return this.getLocString("pe.propertyNameIsNotUnique");
-    return null;
+    if (SurveyHelper.getObjectType(obj) === ObjType.Unknown) return null;
+    var hasError = false;
+    if (SurveyHelper.getObjectType(obj) === ObjType.Column) {
+      hasError = !!(<any>obj).colOwner
+        ? !this.isNameUniqueInArray((<any>obj).colOwner.columns, obj, value)
+        : false;
+    } else {
+      hasError = this.generateUniqueName(obj, value) !== value;
+    }
+
+    return hasError ? this.getLocString("pe.propertyNameIsNotUnique") : null;
   }
   protected generateUniqueName(el: Survey.Base, newName: string): string {
     var options = { element: el, name: newName, isUnique: true };
@@ -1785,6 +1792,7 @@ export class CreatorBase<T extends SurveyModel>
     el: Survey.Base,
     newName: string
   ): boolean {
+    if (!Array.isArray(elements)) return true;
     newName = newName.toLowerCase();
     for (var i = 0; i < elements.length; i++) {
       if (elements[i] != el && elements[i].name.toLowerCase() == newName)

@@ -31,6 +31,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 
 import "./translation.scss";
+import { SurveyHelper } from "../../surveyHelper";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -176,6 +177,7 @@ export interface ITranslationLocales {
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
   fireOnObjCreating(obj: Base);
   removeLocale(loc: string): void;
+  canShowProperty(obj: Base, prop: JsonObjectProperty): boolean;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -381,6 +383,12 @@ export class TranslationGroup extends TranslationItemBase {
     var locStr = <LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
+    if (
+      locStr.isEmpty &&
+      !!this.translation &&
+      !this.translation.canShowProperty(obj, property)
+    )
+      return null;
     return new TranslationItem(
       property.name,
       locStr,
@@ -890,6 +898,9 @@ export class Translation extends Base implements ITranslationLocales {
     this.updateSettingsSurveyLocales();
     this.updateLocales();
     this.resetStringsSurvey();
+  }
+  public canShowProperty(obj: Base, prop: JsonObjectProperty): boolean {
+    return SurveyHelper.isPropertyVisible(obj, prop, this.options);
   }
   public get defaultLocale(): string {
     return surveyLocalization.defaultLocale;

@@ -42,6 +42,7 @@ function getTextWidth(text, font) {
 
 export class TitleInplaceEditor {
   private _valueSubscription: ko.Computed;
+  private draggableElement;
   property: Survey.JsonObjectProperty;
   editingName = ko.observable<string>();
   prevName = ko.observable<string>();
@@ -183,6 +184,13 @@ export class TitleInplaceEditor {
       element.style.display = element.dataset["sjsOldDisplay"];
     });
   };
+  findDraggableElement(el: any): any {
+    while (el) {
+      if (el.draggable) return el;
+      el = el.parentNode;
+    }
+    return null;
+  }
   startEdit = (model: TitleInplaceEditor, event) => {
     if (this.readOnly) {
       return;
@@ -198,6 +206,15 @@ export class TitleInplaceEditor {
       element.style.display = "none";
     });
     var inputElement = this.getInputElement();
+    this.draggableElement = this.findDraggableElement(inputElement);
+    if (!!this.draggableElement) {
+      this.draggableElement.draggable = false;
+    }
+    inputElement.onblur = () => {
+      if (!!this.draggableElement) {
+        this.draggableElement.draggable = true;
+      }
+    };
     inputElement.onfocus = function () {
       const callback = model.editor.onTitleInplaceEditorStartEdit;
       if (!!callback) {
