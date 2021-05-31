@@ -688,11 +688,21 @@ export class CreatorBase<T extends SurveyModel>
   }
   public propertyGrid: PropertyGridModel;
 
-  constructor(protected options: ICreatorOptions) {
+  constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
     super();
+    if (
+      !!options2 ||
+      typeof this.options === "string" ||
+      this.options instanceof String
+    ) {
+      this.options = !!options2 ? options2 : {};
+      SurveyHelper.warnText(
+        "Creator constructor has one parameter, as creator options, in V2."
+      );
+    }
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistoryController(this);
-    this.setOptions(options);
+    this.setOptions(this.options);
     this.initTabs();
     this.initToolbar();
     this.initSurveyWithJSON(
@@ -707,6 +717,33 @@ export class CreatorBase<T extends SurveyModel>
     this.dragDropHelper = new DragDropHelper(this);
     this.propertyGrid = new PropertyGridModel(this.survey as any as Base, this);
   }
+  /**
+   * Start: Obsolete properties and functins
+   */
+  public get showToolbox(): string {
+    SurveyHelper.warnNonSupported("showToolbox");
+    return undefined;
+  }
+  public set showToolbox(val: string) {
+    SurveyHelper.warnNonSupported("showToolbox");
+  }
+  public get showPropertyGrid(): string {
+    SurveyHelper.warnNonSupported("showPropertyGrid");
+    return undefined;
+  }
+  public set showPropertyGrid(val: string) {
+    SurveyHelper.warnNonSupported("showPropertyGrid");
+  }
+  public rightContainerActiveItem(name: string) {
+    SurveyHelper.warnNonSupported("rightContainerActiveItem");
+  }
+  public leftContainerActiveItem(name: string) {
+    SurveyHelper.warnNonSupported("leftContainerActiveItem");
+  }
+  /**
+   * End: Obsolete properties and functins
+   */
+
   public get undoRedoManager(): UndoRedoManager {
     return this.undoRedoManagerValue;
   }
@@ -2154,5 +2191,18 @@ export class CreatorBase<T extends SurveyModel>
       return new Survey.ImageItemValue(nextValue);
     }
     return new Survey.ItemValue(nextValue);
+  }
+}
+
+export class StylesManager {
+  public static get currentTheme(): string {
+    SurveyHelper.warnNonSupported("StylesManager");
+    return undefined;
+  }
+  public static set currentTheme(val: string) {
+    SurveyHelper.warnNonSupported("StylesManager");
+  }
+  public static applyTheme(name?: string) {
+    SurveyHelper.warnNonSupported("StylesManager");
   }
 }
