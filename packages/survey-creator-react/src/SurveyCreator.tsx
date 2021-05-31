@@ -163,8 +163,8 @@ class DesignTimeSurveyModel extends Model {
   }
 }
 export class SurveyCreator extends CreatorBase<SurveyModel> {
-  constructor(options: ICreatorOptions = {}) {
-    super(options);
+  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
+    super(options, options2);
   }
   protected createSurveyCore(json: any = {}): SurveyModel {
     return new DesignTimeSurveyModel(this, json);

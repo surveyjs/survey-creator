@@ -25,3 +25,6 @@ export {
   settings,
   LogicModel
 } from "@survey/creator";
+
+//Obsolete
+export { StylesManager } from "@survey/creator";

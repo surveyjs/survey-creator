@@ -4,7 +4,7 @@ import {
   JsonObjectProperty,
   PageModel,
   Serializer,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./settings";
@@ -15,7 +15,7 @@ export enum ObjType {
   Page,
   Panel,
   Question,
-  Column,
+  Column
 }
 export class SurveyHelper {
   public static getNewPageName(objs: Array<any>) {
@@ -207,6 +207,12 @@ export class SurveyHelper {
   }
   public static canSelectObj(obj: Base) {
     return !obj || obj["disableSelecting"] !== true;
+  }
+  public static warnNonSupported(name: string) {
+    SurveyHelper.warnText("'" + name + "'" + " is not supported in V2.");
+  }
+  public static warnText(text: string) {
+    console.warn(text);
   }
   private static deleteConditionProperties(json: any) {
     delete json["visible"];

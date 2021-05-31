@@ -15,10 +15,11 @@ import { CreatorBase, ICreatorOptions } from "../src/creator-base";
 import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
+import { SurveyHelper } from "../src/surveyHelper";
 
 export class CreatorTester extends CreatorBase<SurveyModel> {
-  constructor(options: ICreatorOptions = {}) {
-    super(options);
+  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
+    super(options, options2);
   }
   protected createSurveyCore(json: any = {}): SurveyModel {
     return new SurveyModel(json);
@@ -549,4 +550,22 @@ test("Show error on entering non-unique column value", (): any => {
   questionName.value = "col3";
   expect(questionName.errors).toHaveLength(0);
   expect(matrixQuestion.columns[1].name).toEqual("col3");
+});
+test("Warn on incorrect using constructor", (): any => {
+  var oldFunc = SurveyHelper.warnText;
+  var warnings = [];
+  SurveyHelper.warnText = (text: string): void => {
+    warnings.push(text);
+  };
+  new CreatorTester(<any>"creator");
+  expect(warnings).toHaveLength(1);
+  expect(warnings[0].indexOf("constructor") > 0).toBeTruthy();
+  var creator = new CreatorTester(
+    <any>"creator",
+    <any>{ showTranslationTab: true }
+  );
+  expect(warnings).toHaveLength(2);
+  expect(warnings[1].indexOf("constructor") > 0).toBeTruthy();
+  expect(creator.showTranslationTab).toBeTruthy();
+  SurveyHelper.warnText = oldFunc;
 });
