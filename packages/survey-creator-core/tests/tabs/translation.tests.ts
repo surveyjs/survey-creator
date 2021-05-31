@@ -8,9 +8,19 @@ import {
 } from "survey-core";
 import {
   Translation,
-  TranslationItem
+  TranslationItem,
+  TabTranslationPlugin
 } from "../../src/components/tabs/translation";
+import { CreatorBase, ICreatorOptions } from "../../src/creator-base";
 
+export class CreatorTester extends CreatorBase<SurveyModel> {
+  constructor(options: ICreatorOptions = {}) {
+    super(options);
+  }
+  protected createSurveyCore(json: any = {}): SurveyModel {
+    return new SurveyModel(json);
+  }
+}
 test("Fire callback on base objects creation", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p1");
@@ -258,4 +268,25 @@ test("stringsSurvey and filterPage + one page", () => {
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
   translation.filteredPage = survey.pages[0];
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
+});
+test("Translation show All strings and property visibility", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    completedHtml: "Test",
+    pages: [
+      {
+        title: "title1",
+        elements: [{ type: "checkbox", name: "question1" }]
+      }
+    ]
+  };
+  creator.onShowingProperty.add((sender, options) => {
+    options.canShow = options.property.name == "title";
+  });
+  var tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  var translation = tabTranslation.model.translation;
+  expect(translation.root.locItems).toHaveLength(1);
+  translation.showAllStrings = true;
+  expect(translation.root.locItems).toHaveLength(2);
 });
