@@ -486,17 +486,6 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           </div>
           
 
-          <script
-            id="svc-choice-item-text"
-            type="text/html"
-          >
-            
-  &lt;!-- ko template: { name: 'survey-string', data: locText } --&gt;
-  &lt;!-- /ko --&gt;
-
-          </script>
-          
-
           <!-- /ko -->
           
       
@@ -765,17 +754,6 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
 
   </div>
-  
-
-  <script
-    id="svc-choice-item-text"
-    type="text/html"
-  >
-    
-  &lt;!-- ko template: { name: 'survey-string', data: locText } --&gt;
-  &lt;!-- /ko --&gt;
-
-  </script>
   
 
 </svc-tab-designer>
