@@ -16,7 +16,7 @@ const banner = [
   "SurveyJS Creator v" + packageJson.version,
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#SurveyCreator",
+  "License: https://surveyjs.io/Licenses#SurveyCreator"
 ].join("\n");
 
 const dts_banner = [
@@ -25,7 +25,7 @@ const dts_banner = [
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
-  "",
+  ""
 ].join("\n");
 
 const buildPlatformJson = {
@@ -40,7 +40,7 @@ const buildPlatformJson = {
     "Survey Maker",
     "SurveyJS",
     "JavaScript",
-    "TypeScript",
+    "TypeScript"
   ],
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
   license: "https://surveyjs.io/Licenses#SurveyCreator",
@@ -49,19 +49,19 @@ const buildPlatformJson = {
     packageJson.name + ".min.css",
     packageJson.name + ".js",
     packageJson.name + ".d.ts",
-    packageJson.name + ".min.js",
+    packageJson.name + ".min.js"
   ],
   main: packageJson.name + ".js",
   repository: {
     type: "git",
-    url: "https://github.com/surveyjs/survey-creator.git",
+    url: "https://github.com/surveyjs/survey-creator.git"
   },
   engines: {
-    node: ">=0.10.0",
+    node: ">=0.10.0"
   },
   typings: packageJson.name + ".d.ts",
   peerDependencies: {
-    "ace-builds": "^1.4.12",
+    "ace-builds": "^1.4.12"
   },
   dependencies: {
     //TODO: Return back when release
@@ -69,9 +69,9 @@ const buildPlatformJson = {
     // "survey-knockout-ui": "^" + packageJson.version,
     "survey-core": "^1.8.0",
     "survey-knockout-ui": "^1.8.0",
-    knockout: "^3.5.0",
+    knockout: "^3.5.0"
   },
-  devDependencies: {},
+  devDependencies: {}
 };
 
 module.exports = function (options) {
@@ -87,14 +87,14 @@ module.exports = function (options) {
           name: "../../" + packageJson.name,
           main: buildPath + "typings/entries/index.d.ts",
           outputAsModuleFolder: true,
-          headerText: dts_banner,
+          headerText: dts_banner
         });
 
         replace.sync(
           {
             files: buildPath + packageJson.name + ".d.ts",
             from: /export let\s+\w+:\s+\w+;/,
-            to: "",
+            to: ""
           },
           (error, changes) => {
             if (error) {
@@ -126,17 +126,17 @@ module.exports = function (options) {
   const config = {
     mode: isProductionBuild ? "production" : "development",
     entry: {
-      [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
+      [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
       plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
       alias: {
-        tslib: path.join(__dirname, "./src/entries/helpers.ts"),
-      },
+        tslib: path.join(__dirname, "./src/entries/helpers.ts")
+      }
     },
     optimization: {
-      minimize: isProductionBuild,
+      minimize: isProductionBuild
     },
     module: {
       rules: [
@@ -146,9 +146,9 @@ module.exports = function (options) {
           options: {
             compilerOptions: {
               declaration: isProductionBuild,
-              outDir: buildPath + "typings/",
-            },
-          },
+              outDir: buildPath + "typings/"
+            }
+          }
         },
         {
           test: /\.css$/,
@@ -157,10 +157,10 @@ module.exports = function (options) {
             {
               loader: "css-loader",
               options: {
-                sourceMap: options.buildType !== "prod",
-              },
-            },
-          ],
+                sourceMap: options.buildType !== "prod"
+              }
+            }
+          ]
         },
         {
           test: /\.s(c|a)ss$/,
@@ -169,71 +169,71 @@ module.exports = function (options) {
             {
               loader: "css-loader",
               options: {
-                sourceMap: options.buildType !== "prod",
-              },
+                sourceMap: options.buildType !== "prod"
+              }
             },
             {
               loader: "sass-loader",
               options: {
-                sourceMap: options.buildType !== "prod",
-              },
-            },
-          ],
+                sourceMap: options.buildType !== "prod"
+              }
+            }
+          ]
         },
         {
           test: /\.html$/,
-          loader: "html-loader",
+          loader: "html-loader"
         },
         {
           test: /\.(svg|png)$/,
           use: {
             loader: "url-loader",
-            options: {},
-          },
-        },
-      ],
+            options: {}
+          }
+        }
+      ]
     },
     output: {
       path: buildPath,
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
-      library: options.libraryName || "SurveyCreatorKnockout",
+      library: options.libraryName || "SurveyCreator",
       libraryTarget: "umd",
       globalObject: "this",
-      umdNamedDefine: true,
+      umdNamedDefine: true
     },
     externals: {
       knockout: {
         root: "ko",
         commonjs2: "knockout",
         commonjs: "knockout",
-        amd: "knockout",
+        amd: "knockout"
       },
       "survey-core": {
         root: "Survey",
         commonjs2: "survey-core",
         commonjs: "survey-core",
-        amd: "survey-core",
+        amd: "survey-core"
       },
       "survey-knockout-ui": {
         root: "SurveyKnockout",
         commonjs2: "survey-knockout-ui",
         commonjs: "survey-knockout-ui",
-        amd: "survey-knockout-ui",
-      },
+        amd: "survey-knockout-ui"
+      }
     },
     plugins: [
       new webpack.ProgressPlugin(percentage_handler),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
-        "process.env.VERSION": JSON.stringify(packageJson.version),
+        "process.env.VERSION": JSON.stringify(packageJson.version)
       }),
       new MiniCssExtractPlugin({
-        filename: isProductionBuild ? "[name].min.css" : "[name].css",
+        filename: isProductionBuild ? "[name].min.css" : "[name].css"
       }),
       new webpack.BannerPlugin({
-        banner: banner,
-      }),
-    ],
+        banner: banner
+      })
+    ]
   };
 
   if (isProductionBuild) {
@@ -245,13 +245,13 @@ module.exports = function (options) {
       new HtmlWebpackPlugin({
         filename: "index.html",
         inject: "body",
-        template: "index.html",
-      }),
+        template: "index.html"
+      })
     ]);
     config.devServer = {
       contentBase: __dirname,
       compress: false,
-      port: 8081,
+      port: 8081
     };
   }
 

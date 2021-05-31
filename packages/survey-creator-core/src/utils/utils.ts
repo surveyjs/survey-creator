@@ -195,6 +195,6 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement) {
     }
     e[processedFlagName] = true;
   } else {
-    element.className = element.className.replace(/\bsvc-hovered\b/g, "");
+    element.className = element.className.replace(/\b svc-hovered\b/g, "");
   }
 }

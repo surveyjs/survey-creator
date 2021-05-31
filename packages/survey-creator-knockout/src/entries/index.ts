@@ -11,6 +11,7 @@ export * from "../components/tabs/logic";
 export * from "../components/tabs/translation";
 
 export * from "../components/page";
+export * from "../components/row";
 export * from "../components/question";
 export * from "../components/question-dropdown";
 export * from "../components/question-image";
@@ -37,6 +38,13 @@ export * from "../components/toolbox/toolbox-item";
 export * from "../utils/survey-widget";
 
 export * from "../creator";
+export * as core from "@survey/creator";
+export {
+  editorLocalization,
+  editorLocalization as localization,
+  settings,
+  LogicModel
+} from "@survey/creator";
 
 import "@survey/creator/survey-creator-core.css";
 

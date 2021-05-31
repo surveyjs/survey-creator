@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "1.8.49-alpha.0",
   "name": "survey-creator-core",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -12,7 +12,9 @@
     "test": "jest",
     "test:dev": "jest --watch",
     "watch:dev": "webpack --env.buildType dev --watch",
-    "watch:prod": "webpack --env.buildType prod --watch"
+    "watch:prod": "webpack --env.buildType prod --watch",
+    "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease alpha",
+    "remove-package-lock": "rimraf package-lock.json"
   },
   "dependencies": {
     "papaparse": "^5.2.0",
@@ -69,6 +71,11 @@
   "husky": {
     "hooks": {
       "pre-push": "npm run test"
+    }
+  },
+  "standard-version": {
+    "skip": {
+      "tag": true
     }
   }
 }

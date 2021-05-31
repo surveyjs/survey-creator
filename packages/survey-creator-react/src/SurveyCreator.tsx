@@ -11,7 +11,8 @@ import {
   SurveyModel,
   SurveyElement,
   ItemValue,
-  QuestionSelectBase
+  QuestionSelectBase,
+  QuestionRowModel
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -105,6 +106,15 @@ class DesignTimeSurveyModel extends Model {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
+  }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
+    return {
+      creator: this.creator,
+      row
+    };
+  }
   public getElementWrapperComponentName(element: SurveyElement, reason?: string): string {
     if (this.isDesignMode) {
       if(reason === "cell" || reason === "column-header" || reason === "row-header") {
@@ -147,7 +157,7 @@ class DesignTimeSurveyModel extends Model {
     if(!this.isDesignMode || !!question["parentQuestionValue"]) {
       return SurveyModel.TemplateRendererComponentName;
     }
-    if(question.getType() === "imagepicker") {
+    if (question.getType() === "imagepicker") {
       return "svc-image-item-value";
     }
     return "svc-item-value";
@@ -184,7 +194,7 @@ export class SurveyCreator extends CreatorBase<SurveyModel> {
       {
         question: question,
         isDisplayMode: question.isReadOnly,
-        creator: this,
+        creator: this
       }
     );
   }

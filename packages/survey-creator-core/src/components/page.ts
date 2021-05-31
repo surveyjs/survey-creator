@@ -7,7 +7,7 @@ import {
   SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
+import { IPortableMouseEvent } from "../utils/events";
 
 import "./page.scss";
 
@@ -39,10 +39,17 @@ export class PageViewModel<T extends SurveyModel> extends Base {
     };
     this.page.onPropertyChanged.add(this.selectedPropPageFunc);
 
-    this.isGhost = typeof this.page["_addToSurvey"] === "function";
-    if (!this.isGhost) {
+    if (typeof this.page["_addToSurvey"] === "function") {
+      this.isGhost = true;
+      this.page["_isGhost"] = true;
+      this.page["_addGhostPageViewMobel"] = () => {
+        this.addGhostPage();
+      };
+    } else {
+      this.isGhost = false;
       this.actions = creator.getContextActions(this.page);
     }
+
     this.page.onFirstRendering();
     this.page.updateCustomWidgets();
     this.page.setWasShown(true);
@@ -62,6 +69,7 @@ export class PageViewModel<T extends SurveyModel> extends Base {
       this.isGhost = false;
       this.page["_addToSurvey"]();
     }
+    this.creator.survey.currentPage = this.page;
   }
 
   addNewQuestionText = "Add a New Question";
@@ -70,8 +78,6 @@ export class PageViewModel<T extends SurveyModel> extends Base {
       this.creator.undoRedoManager.startTransaction("add new page");
     }
     this.addGhostPage();
-    var survey: any = model.creator.survey;
-    survey.currentPage = model.page;
     model.creator.clickToolboxItem({ type: "text" });
     if (this.creator.undoRedoManager) {
       this.creator.undoRedoManager.stopTransaction();
@@ -93,62 +99,4 @@ export class PageViewModel<T extends SurveyModel> extends Base {
       ? "svc-page__content--selected"
       : "";
   }
-
-  dragOver(model: PageViewModel<T>, event: IPortableDragEvent) {
-    return this.creator.dragDropHelper.onDragOver(event, model.page);
-  }
-
-  // binarySearchIndexByY(questionNodes, y) {
-  //   let lo = 0;
-  //   let hi = questionNodes.length - 1;
-  //   while (lo <= hi) {
-  //     const median = (lo + (hi - lo)) >> 1;
-  //     const q = questionNodes[median];
-  //     const rect = q.getBoundingClientRect();
-
-  //     if (rect.top <= y && y <= rect.bottom) {
-  //       return 0;
-  //     }
-  //     if (y > rect.bottom) {
-  //       lo = median + 1;
-  //     } else {
-  //       hi = median - 1;
-  //     }
-  //   }
-  //   return ~lo;
-  // }
-  drop(model: PageViewModel<T>, event: IPortableDragEvent) {
-    this.addGhostPage();
-    var survey: any = model.creator.survey;
-    survey.currentPage = model.page;
-    return this.creator.dragDropHelper.onDrop(event);
-    // const page: any = event.currentTarget;
-    // const questions = page.querySelectorAll(".svc-question__content");
-    // let index = this.binarySearchIndexByY(questions, event.clientY);
-    // if (index < 0) {
-    //   index = ~index;
-    //   if (index >= questions.length) {
-    //     model.dropAtQuestion(questions, questions.length - 1, true, event);
-    //   } else {
-    //     model.dropAtQuestion(questions, index, false, event);
-    //   }
-    // } else {
-    //   model.dropAtQuestion(questions, index, undefined, event);
-    // }
-  }
-  // dropAtQuestion(
-  //   questions,
-  //   index: number,
-  //   dropBelow: boolean,
-  //   event: IPortableDragEvent
-  // ) {
-  //   if (index < 0) {
-  //     // drop onto empty page
-  //     this.creator.dragDropHelper.dropAtPage(this.page, event);
-  //   } else {
-  //     const questionName = questions[index].dataset.questionName as string;
-  //     const question = this.creator.survey.getQuestionByName(questionName);
-  //     this.creator.dragDropHelper.dropAt(question, event, dropBelow);
-  //   }
-  // }
 }

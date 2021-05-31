@@ -1,6 +1,20 @@
 import * as ko from "knockout";
-import { Base, ItemValue, property, Question, QuestionSelectBase, SurveyElement, SurveyModel } from "survey-core";
-import { Survey, ImplementorBase, Panel, QuestionRow } from "survey-knockout-ui";
+import {
+  Base,
+  ItemValue,
+  property,
+  Question,
+  QuestionRowModel,
+  QuestionSelectBase,
+  SurveyElement,
+  SurveyModel
+} from "survey-core";
+import {
+  Survey,
+  ImplementorBase,
+  Panel,
+  QuestionRow
+} from "survey-knockout-ui";
 import { ICreatorOptions, CreatorBase } from "@survey/creator";
 import { editableStringRendererName } from "./components/string-editor";
 
@@ -11,6 +25,15 @@ if (!!ko.options) {
 class DesignTimeSurveyModel extends Survey {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
+  }
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
+  }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
+    return {
+      creator: this.creator,
+      row
+    };
   }
   public isPopupEditorContent = false;
   public getElementWrapperComponentName(element: SurveyElement, reason?: string): string {
@@ -70,7 +93,7 @@ class DesignTimeSurveyModel extends Survey {
     if(!this.isDesignMode || !!question["parentQuestionValue"]) {
       return SurveyModel.TemplateRendererComponentName;
     }
-    if(question.getType() === "imagepicker") {
+    if (question.getType() === "imagepicker") {
       return "svc-image-item-value";
     }
     return "svc-item-value";
@@ -119,5 +142,15 @@ export class SurveyCreator extends CreatorBase<Survey> {
   protected onViewTypeChanged(newType: string) {
     const plugin = this.plugins[newType];
     !!plugin && plugin.activate();
+  }
+
+  render(target: string | HTMLElement) {
+    let node: HTMLElement = target as HTMLElement;
+    if(typeof target === "string") {
+      node = document.getElementById(target);
+    }
+    var div = document.createElement("div");
+    node.innerHTML = `<survey-creator params="creator: creator"></survey-creator>`;
+    ko.applyBindings({ creator: this }, node);
   }
 }
