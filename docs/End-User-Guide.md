@@ -1,14 +1,14 @@
-# Survey Editor
+# SurveyJS Creator
 
 This page has been prepared as a starting point for documentation aimed at end-users of Surveyjs.
 
 ## Basic Overview/Quick Start Guide
 
-The Surveyjs Survey Editor page contains the survey design area to the left and the toolbox to the right.
+The Surveyjs Survey Creator page contains the survey design area to the left and the toolbox to the right.
 
-![Overview of the SurveyJS Editor interface](images/survey-editor-overview.png)
+![Overview of the SurveyJS Creator interface](images/survey-editor-overview.png)
 
-Survey elements can be dragged from the toolbox onto the main Survey Editor. Once these elements are in the Editor, they can be modified, edited and reordered to suit the needs of the specific survey. You can add pages to your survey by clicking the drop down menu at the top left of the page.
+Survey elements can be dragged from the toolbox onto the main Survey Creator. Once these elements are in the Editor, they can be modified, edited and reordered to suit the needs of the specific survey. You can add pages to your survey by clicking the drop down menu at the top left of the page.
 
 ![Add survey page drop-down menu](images/survey-editor-new-page.png)
 
@@ -24,7 +24,7 @@ If you need to develop the survey in more detail via the JSON file format, you c
 
 ## Toolbox
 
-Each toolbox item will have its own configuration panel once it is placed into the Survey Editor. There you will be able to move and re-order the item using the ``hamburger`` button (three horizontal lines), delete the item using the ``cross`` button, toggle the item's visibility using the ``eye`` button, ``duplicate`` the item, ``add`` the item to the toolbox, see the item's ``mode`` and edit the items ``properties``. You may also set the item's ``required`` status if the tool allows it.
+Each toolbox item will have its own configuration panel once it is placed into the Survey Creator. There you will be able to move and re-order the item using the ``hamburger`` button (three horizontal lines), delete the item using the ``cross`` button, toggle the item's visibility using the ``eye`` button, ``duplicate`` the item, ``add`` the item to the toolbox, see the item's ``mode`` and edit the items ``properties``. You may also set the item's ``required`` status if the tool allows it.
 
 ![picture of toolbox configuration panel](images/survey-editor-tool-panel.png)
 
