@@ -271,6 +271,7 @@ test('Dropdown question inplace editor', async (t) => {
     await t.expect(items.nth(4).find('.svc-item-value-controls__drag').visible).notOk();
     await t.expect(items.nth(4).find('span').withText('Other (describe)').exists).ok();
 
+    await t.hover(Selector(`div[title='Single Input']`));
     await t.click(Selector(`div[title='Single Input']`));
 
     await t.expect(items.count).eql(6); // Choice editors are hidden if another question is selected
