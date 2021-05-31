@@ -99,7 +99,8 @@ export class DragDropHelper extends Base {
 
   private createDraggedElementShortcut() {
     const draggedElementShortcut = document.createElement("div");
-    draggedElementShortcut.innerText = this.draggedSurveyElement["title"];
+    draggedElementShortcut.innerText =
+      this.draggedSurveyElement["title"] || this.draggedSurveyElement["text"];
     draggedElementShortcut.style.height = "40px";
     draggedElementShortcut.style.minWidth = "100px";
     draggedElementShortcut.style.borderRadius = "100px";
@@ -137,6 +138,7 @@ export class DragDropHelper extends Base {
         event.clientY - shortcutYCenter + "px";
       return;
     }
+
     if (event.pageX - shortcutXCenter <= 0) {
       this.draggedElementShortcut.style.left = 0 + "px";
       this.draggedElementShortcut.style.top =
@@ -510,7 +512,7 @@ export class DragDropHelper extends Base {
 
     choices.splice(oldIndex, 1);
     choices.splice(newIndex, 0, this.draggedSurveyElement);
-  }
+  };
 
   private clear = () => {
     clearInterval(this.scrollIntervalId);
