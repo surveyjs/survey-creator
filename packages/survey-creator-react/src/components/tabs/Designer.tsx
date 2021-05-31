@@ -35,43 +35,45 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
 
   render(): JSX.Element {
-    return (
-      <ReactDragDropHelperComponent
-        creator={this.props.data.creator}
-        renderContent={() => this.renderContent()}
-      ></ReactDragDropHelperComponent>
-    );
-  }
-  renderContent(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.model.creator;
     const survey: SurveyModel = creator.survey;
     const className = "svc-tab-designer " + survey.css.root;
 
     const surveyPages = survey.pages.map((page, index) => {
       return (
-        <CreatorSurveyPageComponent
+        <div
+          className={"svc-page"}
+          data-svc-drop-target-element-name={page.name}
           key={page.id}
-          survey={survey}
-          page={page}
-          creator={creator}
-        ></CreatorSurveyPageComponent>
+        >
+          <CreatorSurveyPageComponent
+            survey={survey}
+            page={page}
+            creator={creator}
+          ></CreatorSurveyPageComponent>
+        </div>
       );
     });
 
     if (!!this.model.newPage) {
       surveyPages.push(
-        <CreatorSurveyPageComponent
+        <div
+          className={"svc-page"}
+          data-svc-drop-target-element-name={"newGhostPage"}
           key={this.model.newPage.id}
-          survey={survey}
-          page={this.model.newPage}
-          creator={creator}
-        ></CreatorSurveyPageComponent>
+        >
+          <CreatorSurveyPageComponent
+            survey={survey}
+            page={this.model.newPage}
+            creator={creator}
+          ></CreatorSurveyPageComponent>
+        </div>
       );
     }
 
     const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
-      <>
+      <React.Fragment>
         <SurveyCreatorToolbox
           categories={creator.toolboxCategories}
           creator={creator}
@@ -98,11 +100,10 @@ export class TabDesignerComponent extends SurveyElementBase<
         <div className="svc-flex-column" style={style}>
           <PropertyGridComponent model={creator}></PropertyGridComponent>
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }
-
 export class DesignerSurveyNavigationBlock extends React.Component<any, any> {
   constructor(props: ITabDesignerComponentProps) {
     super(props);

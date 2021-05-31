@@ -8,7 +8,7 @@ import {
 } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
 import { CreatorBase, QuestionAdornerViewModel, QuestionImageAdornerViewModel, toggleHovered } from "@survey/creator";
-import { KnockoutMouseEvent, KnockoutDragEvent } from "../events";
+import { KnockoutMouseEvent } from "../events";
 
 // import "./question-image.scss";
 const template = require("./question-image.html");
@@ -27,23 +27,8 @@ export class KnockoutQuestionImageAdornerViewModel extends QuestionImageAdornerV
   koSelect(model: QuestionAdornerViewModel, event: MouseEvent) {
     return super.select(model, this.wrapMouseEvent(event));
   }
-  koDragStart(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.dragStart(model, this.wrapDragEvent(event));
-  }
-  koDragOver(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.dragOver(model, this.wrapDragEvent(event));
-  }
-  koDrop(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.drop(model, this.wrapDragEvent(event));
-  }
-  koDragEnd(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.dragEnd(model, this.wrapDragEvent(event));
-  }
   private wrapMouseEvent(event: MouseEvent): KnockoutMouseEvent {
     return new KnockoutMouseEvent(event);
-  }
-  private wrapDragEvent(event: DragEvent): KnockoutDragEvent {
-    return new KnockoutDragEvent(event);
   }
   public hover(event: MouseEvent, element: HTMLElement) {
     toggleHovered(event, element);

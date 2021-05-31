@@ -4,6 +4,7 @@ import {
   ItemValue,
   property,
   Question,
+  QuestionRowModel,
   QuestionSelectBase,
   SurveyElement,
   SurveyModel
@@ -24,6 +25,15 @@ if (!!ko.options) {
 class DesignTimeSurveyModel extends Survey {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
+  }
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
+  }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
+    return {
+      creator: this.creator,
+      row
+    };
   }
   public getElementWrapperComponentName(element: SurveyElement): string {
     if (element.isDesignMode) {

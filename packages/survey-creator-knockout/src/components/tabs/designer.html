@@ -10,11 +10,13 @@
     <!-- /ko -->
     <!-- ko foreach: survey.pages -->
     <svc-page
+      data-bind="attr: { 'data-svc-drop-target-element-name': $data.name }"
       params="survey: $parent.survey, page: $data, creator: $parent.creator"
     ></svc-page>
     <!-- /ko -->
     <!-- ko if: showNewPage -->
     <svc-page
+      data-bind="attr: { 'data-svc-drop-target-element-name': 'newGhostPage' }"
       params="survey: survey, creator: creator, page: newPage"
     ></svc-page>
     <!-- /ko -->
