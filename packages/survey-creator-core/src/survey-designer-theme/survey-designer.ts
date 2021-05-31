@@ -161,7 +161,7 @@ export var surveyDesignerCss = {
   dropdown: {
     root: "sd-selectbase",
     small: "sd-row__question--small",
-    control: "sd-input",
+    control: "sd-input sd-dropdown",
     selectWrapper: "",
     other: "sd-comment sd-question__other",
     onError: "sd-input--error",
@@ -173,7 +173,7 @@ export var surveyDesignerCss = {
     itemControl: "sd-visuallyhidden sd-item__control sd-radio__control",
     itemDecorator: "sd-item__svg sd-radio__svg",
     controlLabel: "sd-item__control-label",
-    materialDecorator: "sd-item__decorator sd-radio__decorator",
+    materialDecorator: "sd-item__decorator sd-radio__decorator"
   },
   imagepicker: {
     root: "sd-imagepicker",

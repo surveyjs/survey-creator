@@ -11,14 +11,14 @@
   font-family: $font-family;
   font-size: calcSize(2);
   color: $foreground;
-  background: $background-for-editors;
+  background-color: $background-for-editors;
   box-shadow: inset 0px 1px 2px $border-inside;
   border: none;
   border-radius: 3px;
   outline: none;
 }
 .sd-input:disabled {
-  background: $background-for-editors;
+  background-color: $background-for-editors;
   color: $foreground-disabled-for-editors;
 }
 .sd-input::placeholder {
