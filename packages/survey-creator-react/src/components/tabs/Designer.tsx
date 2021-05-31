@@ -55,7 +55,7 @@ export class TabDesignerComponent extends SurveyElementBase<
       );
     });
 
-    if (!!this.model.newPage) {
+    if (this.model.showNewPage) {
       surveyPages.push(
         <div
           className={"svc-page"}

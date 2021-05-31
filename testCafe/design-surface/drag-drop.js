@@ -8,7 +8,7 @@ import {
     getItemValueByIndex
 } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
-const title = "Drag Drop Survey Element";
+const title = "Drag Drop";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
     await t.maximizeWindow();
@@ -133,7 +133,9 @@ test("Drag Drop to Panel", async (t) => {
         speed: 0.5
     });
 
-    const Question3 = Selector(`[data-svc-drop-target-element-name="question3"]`);
+    const Question3 = Selector(
+        `[data-svc-drop-target-element-name="question3"]`
+    );
 
     await t.hover(RatingToolboxItem, { speed: 0.5 });
     await t.dragToElement(RatingToolboxItem, Question3, {
