@@ -12,7 +12,7 @@ Survey elements can be dragged from the toolbox onto the main Survey Editor. Onc
 
 ![Add survey page drop-down menu](images/survey-editor-new-page.png)
 
-Detailed properties for the overall survey and each individual element can be accessed and edited by clicking the `Properties` tab to the right of the page. Ordering and reordering each survey element can be done my dragging on the `hamburger` element (three horizontal lines) to the top left of each item.
+Detailed properties for the overall survey and each individual element can be accessed and edited by clicking the `Properties` tab to the right of the page. Ordering and reordering each survey element can be done by dragging on the `hamburger` element (three horizontal lines) to the top left of each item.
 
 Once you have designed your survey you can test it by clicking the `Test Survey` link at the top left of the page. There you will be able to choose the target device for your test (for example, if you are going to deliver the survey via iPad, choose `iPad` from the drop-down list).
 
