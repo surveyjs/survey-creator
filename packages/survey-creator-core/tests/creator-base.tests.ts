@@ -572,3 +572,31 @@ test("Warn on incorrect using constructor", (): any => {
   expect(creator.showTranslationTab).toBeTruthy();
   SurveyHelper.warnText = oldFunc;
 });
+test("pageEditMode='single'", (): any => {
+  var creator = new CreatorTester();
+  expect(creator.pageEditMode).toEqual("standard");
+  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeTruthy();
+  expect(
+    Serializer.findProperty("question", "page").isVisible("")
+  ).toBeTruthy();
+  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
+  creator = new CreatorTester({ pageEditMode: "single" });
+  creator.JSON = { elements: [{ type: "text", name: "question1" }] };
+  expect(creator.pageEditMode).toEqual("single");
+  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeFalsy();
+  expect(Serializer.findProperty("question", "page").isVisible("")).toBeFalsy();
+  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeFalsy();
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model.newPage).toBeFalsy();
+
+  Serializer.findProperty("survey", "pages").visible = true;
+  Serializer.findProperty("question", "page").visible = true;
+  Serializer.findProperty("panel", "page").visible = true;
+  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeTruthy();
+  expect(
+    Serializer.findProperty("question", "page").isVisible("")
+  ).toBeTruthy();
+  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
+});

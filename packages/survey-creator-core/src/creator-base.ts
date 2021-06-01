@@ -102,6 +102,15 @@ export class CreatorBase<T extends SurveyModel>
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
 
+  private pageEditModeValue: "standard" | "single" = "standard";
+  /**
+   * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
+   * You can set this option in creator constructor only
+   */
+  public get pageEditMode() {
+    return this.pageEditModeValue;
+  }
+
   @property() surveyValue: T;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
   public dragDropHelper: DragDropHelper;
@@ -943,6 +952,15 @@ export class CreatorBase<T extends SurveyModel>
     }
     if (typeof options.allowModifyPages !== "undefined") {
       this.allowModifyPages = options.allowModifyPages;
+    }
+    if (typeof options.pageEditMode !== "undefined") {
+      this.pageEditModeValue = options.pageEditMode;
+      if (this.pageEditModeValue === "single") {
+        Survey.Serializer.findProperty("survey", "pages").visible = false;
+        Survey.Serializer.findProperty("question", "page").visible = false;
+        Survey.Serializer.findProperty("panel", "page").visible = false;
+        this.showJSONEditorTab = false;
+      }
     }
   }
 
