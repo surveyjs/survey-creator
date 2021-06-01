@@ -106,62 +106,52 @@ class DesignTimeSurveyModel extends Model {
     super(jsonObj);
   }
   public getElementWrapperComponentName(element: SurveyElement): string {
-    if (element.isDesignMode) {
-      if (element instanceof Question) {
-        if (element.getType() == "dropdown") {
-          return "svc-dropdown-question";
-        }
-        if (element.getType() == "image") {
-          return "svc-image-question";
-        }
-        return "svc-question";
+    if (element instanceof Question) {
+      if (element.getType() == "dropdown") {
+        return "svc-dropdown-question";
       }
-      if (element instanceof PanelModel) {
-        return "svc-question";
+      if (element.getType() == "image") {
+        return "svc-image-question";
       }
+      return "svc-question";
+    }
+    if (element instanceof PanelModel) {
+      return "svc-question";
     }
     return super.getElementWrapperComponentName(element);
   }
   public getElementWrapperComponentData(element: SurveyElement): any {
-    if (element.isDesignMode) {
-      if (element instanceof Question) {
-        return this.creator;
-      }
-      if (element instanceof PanelModel) {
-        return this.creator;
-      }
+    if (element instanceof Question) {
+      return this.creator;
+    }
+    if (element instanceof PanelModel) {
+      return this.creator;
     }
     return super.getElementWrapperComponentData(element);
   }
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if(!this.isDesignMode) {
-      return SurveyModel.TEMPLATE_RENDERER_COMPONENT_NAME;
-    }
-    if(question.getType() === "imagepicker") {
+    if (question.getType() === "imagepicker") {
       return "svc-image-item-value";
     }
     return "svc-item-value";
   }
   public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    if(!this.isDesignMode) {
-      return item;
-    }
     return {
       creator: this.creator,
       question
     };
   }
   public getRendererForString(element: Base, name: string): string {
-    if (this.isDesignMode) return editableStringRendererName;
-    return undefined;
+    return editableStringRendererName;
   }
 }
 class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}) {
     super(options);
   }
-  protected createSurveyCore(json: any = {}): SurveyModel {
-    return new DesignTimeSurveyModel(this, json);
+  protected createSurveyCore(json: any = {}, reason: string): Model {
+    if (reason === "designer") return new DesignTimeSurveyModel(this, json);
+    return new Model(json);
   }
   //ISurveyCreator
   public createQuestionElement(question: Question): JSX.Element {
