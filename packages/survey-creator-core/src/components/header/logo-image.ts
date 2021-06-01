@@ -6,6 +6,7 @@ export class LogoImageViewModel extends Base {
   @property() isLogoImageChoosen: boolean;
   constructor(private creator: CreatorBase<SurveyModel>, private root: HTMLDivElement) {
     super();
+    this.creator.survey.logoPosition = "right";
     this.updateIsLogoImageChoosen();
   }
   private updateIsLogoImageChoosen(): void {

@@ -48,6 +48,7 @@ import "../components/toolbox/toolbox-item.scss";
 import "../components/button.scss";
 import "../components/question-dropdown.scss";
 import "../components/toolbox/toolbox.scss";
+import "../components/header/header.scss";
 import "../property-grid-theme/property-grid.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
