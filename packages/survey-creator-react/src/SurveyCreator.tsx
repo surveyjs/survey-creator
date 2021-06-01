@@ -115,7 +115,7 @@ class DesignTimeSurveyModel extends Model {
       row
     };
   }
-  public getElementWrapperComponentName(element: SurveyElement, reason?: string): string {
+  public getElementWrapperComponentName(element: any, reason?: string): string {
     if (this.isDesignMode) {
       if(reason === "cell" || reason === "column-header" || reason === "row-header") {
         return "svc-matrix-cell";
@@ -137,10 +137,10 @@ class DesignTimeSurveyModel extends Model {
     }
     return super.getElementWrapperComponentName(element);
   }
-  public getElementWrapperComponentData(element: SurveyElement, reason?: string): any {
+  public getElementWrapperComponentData(element: any, reason?: string): any {
     if (this.isDesignMode) {
       if(reason === "cell" || reason === "column-header" || reason === "row-header") {
-        return { creator: this.creator, element: element };
+        return { creator: this.creator, element: element, question: element.question, row: element.row, column: element.column };
       }
       if(!element["parentQuestionValue"]) {
         if (element instanceof Question) {

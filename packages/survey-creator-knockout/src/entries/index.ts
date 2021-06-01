@@ -18,8 +18,6 @@ export * from "../components/question-image";
 export * from "../components/item-value";
 export * from "../components/image-item-value";
 export * from "../components/panel";
-export * from "../components/matrix-column-header";
-export * from "../components/matrix-row-header";
 export * from "../components/matrix-cell";
 export * from "../components/cell-question";
 export * from "../components/cell-question-dropdown";

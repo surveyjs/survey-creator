@@ -16,12 +16,18 @@ ko.components.register("svc-matrix-cell", {
   viewModel: {
     createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
       const creator = params.componentData.creator;
+      const question = params.componentData.question;
+      const row = params.componentData.row;
+      const column = params.componentData.column;
 
       params.templateData["nodes"] = componentInfo.templateNodes;
 
       const model = new MatrixCellWrapperViewModel(
         creator,
-        params.templateData
+        params.templateData,
+        question,
+        row,
+        column
       );
       new ImplementorBase(model);
       return model;

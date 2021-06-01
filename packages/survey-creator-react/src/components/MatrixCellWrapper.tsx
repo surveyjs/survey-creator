@@ -23,7 +23,10 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
     super(props);
     this.model = new MatrixCellWrapperViewModel(
       this.props.componentData.creator,
-      this.props.question || this.props.componentData.element
+      this.props.componentData.element,
+      this.props.componentData.question,
+      this.props.componentData.row,
+      this.props.componentData.column,
     );
   }
   protected getStateElement(): Base {
@@ -32,7 +35,7 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
 
   render(): JSX.Element {
     let controls = null;
-    if(!!this.props.question) {
+    if(!!this.model.question) {
       controls = <div className="svc-matrix-cell__question-controls">
         <span className="svc-matrix-cell__question-controls-button" onClick={() => this.model.editQuestion(this.model)}>
           <SvgIcon size={24} iconName={'icon-pencil'}></SvgIcon>

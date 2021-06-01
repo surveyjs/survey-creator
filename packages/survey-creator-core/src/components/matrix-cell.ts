@@ -1,5 +1,4 @@
 import {
-  SurveyTemplateRendererViewModel,
   SurveyModel,
   Base,
   Question,
@@ -11,11 +10,11 @@ import { CreatorBase } from "../creator-base";
 import "./matrix-cell.scss";
 
 export class MatrixCellWrapperViewModel extends Base { 
-  constructor(public creator: CreatorBase<SurveyModel>, public templateData: any) {
+  constructor(public creator: CreatorBase<SurveyModel>, public templateData: any, public question: Question, public row: any, public column: any) {
     super();
-  }
-  get question() {
-    return this.templateData.data as Question
+    // if(!question && !!this.templateData.data) {
+    //   this.question = this.templateData.data;
+    // }
   }
   public editQuestion(model: MatrixCellWrapperViewModel) {
     const column: MatrixDropdownColumn = model.question.parentQuestion.getColumnByName(model.question.name);
@@ -39,9 +38,12 @@ export class MatrixCellWrapperViewModel extends Base {
     );
   }
   get context() {
-    return this.templateData;
+    return this.row || this.column || this.templateData;
   }
   public selectContext(model: MatrixCellWrapperViewModel, event: MouseEvent) {
+    if(typeof model.context.getType !== "function") {
+      return;
+    }
     model.creator.selectElement(model.context);
     event.stopPropagation();
   }

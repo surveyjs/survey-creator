@@ -36,16 +36,10 @@ class DesignTimeSurveyModel extends Survey {
     };
   }
   public isPopupEditorContent = false;
-  public getElementWrapperComponentName(element: SurveyElement, reason?: string): string {
+  public getElementWrapperComponentName(element: any, reason?: string): string {
     if (this.isDesignMode) {
-      if(reason === "cell") {
+      if(reason === "cell" || reason === "column-header" || reason === "row-header") {
         return "svc-matrix-cell";
-      }
-      if(reason === "column-header") {
-        return "svc-matrix-column-neader";
-      }
-      if(reason === "row-header") {
-        return "svc-matrix-row-neader";
       }
       if(!element["parentQuestionValue"]) {
         if (element instanceof Question) {
@@ -68,10 +62,10 @@ class DesignTimeSurveyModel extends Survey {
     }
     return super.getElementWrapperComponentName(element, reason);
   }
-  public getElementWrapperComponentData(element: SurveyElement, reason?: string): any {
+  public getElementWrapperComponentData(element: any, reason?: string): any {
     if (this.isDesignMode) {
       if(reason === "cell" || reason === "column-header" || reason === "row-header") {
-        return { creator: this.creator, element: element };
+        return { creator: this.creator, element: element, question: element.question, row: element.row, column: element.column };
       }
       if(!element["parentQuestionValue"]) {
         if (element instanceof Question) {
