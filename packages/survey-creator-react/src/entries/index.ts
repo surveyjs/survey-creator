@@ -8,6 +8,8 @@ export * from "../components/RowWrapper";
 export * from "../components/Question";
 export * from "../components/QuestionDropdown";
 export * from "../components/QuestionImage";
+export * from "../components/CellQuestion";
+export * from "../components/CellQuestionDropdown";
 export * from "../components/ItemValueWrapper";
 export * from "../components/ImageItemValueWrapper";
 export * from "../components/MatrixCellWrapper";

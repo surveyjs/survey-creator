@@ -123,12 +123,12 @@ class DesignTimeSurveyModel extends Model {
       if(!element["parentQuestionValue"]) {
         if (element instanceof Question) {
           if (element.getType() == "dropdown") {
-            return "svc-dropdown-question";
+            return this.isPopupEditorContent ? "svc-cell-dropdown-question" : "svc-dropdown-question";
           }
           if (element.getType() == "image") {
             return "svc-image-question";
           }
-          return "svc-question";
+          return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
         }
         if (element instanceof PanelModel) {
           return "svc-question";
