@@ -42,6 +42,9 @@ export class CreatorTester extends CreatorBase<SurveyModel> {
     }
     return null;
   }
+  public doSaveFunc() {
+    this.doSave();
+  }
 }
 
 test("options.questionTypes", (): any => {
