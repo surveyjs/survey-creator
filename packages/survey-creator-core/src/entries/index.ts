@@ -43,6 +43,7 @@ export * from "../textWorker";
 export * from "../toolbox";
 export * from "../utils/events";
 export * from "../utils/utils";
+export * from "../questionEditors/questionEditorDefinition";
 
 import "../components/button.scss";
 import "../components/property-panel/property-panel-item.scss";

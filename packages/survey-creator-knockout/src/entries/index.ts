@@ -38,7 +38,8 @@ export {
   editorLocalization,
   editorLocalization as localization,
   settings,
-  LogicModel
+  LogicModel,
+  SurveyQuestionEditorDefinition
 } from "@survey/creator";
 //Obsolete
 export { StylesManager } from "@survey/creator";
