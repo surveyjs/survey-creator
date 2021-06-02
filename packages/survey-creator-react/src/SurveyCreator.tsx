@@ -105,6 +105,15 @@ class DesignTimeSurveyModel extends Model {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
+  public get hasLogo(): boolean {
+    return true;
+  }
+  public get isLogoBefore(): boolean {
+    return false;
+  }
+  public get isLogoAfter(): boolean {
+    return true;
+  }
   public getElementWrapperComponentName(element: SurveyElement): string {
     if (element instanceof Question) {
       if (element.getType() == "dropdown") {
@@ -120,6 +129,10 @@ class DesignTimeSurveyModel extends Model {
     }
     return super.getElementWrapperComponentName(element);
   }
+  public getElementWrapperComponentNameByName(element: string): string {
+    if (element === "sv-logo-image") return "svc-logo-image";
+    return super.getElementWrapperComponentNameByName(element);
+  }
   public getElementWrapperComponentData(element: SurveyElement): any {
     if (element instanceof Question) {
       return this.creator;
@@ -128,6 +141,10 @@ class DesignTimeSurveyModel extends Model {
       return this.creator;
     }
     return super.getElementWrapperComponentData(element);
+  }
+  public getElementWrapperComponentDataByName(element: string): any {
+    if (element === "sv-logo-image") return this.creator;
+    return super.getElementWrapperComponentDataByName(element);
   }
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
     if (question.getType() === "imagepicker") {

@@ -2,8 +2,7 @@ import { Base, PageModel, SurveyModel } from "survey-core";
 import {
   SurveyActionBar,
   SurveyElementBase,
-  SurveyPage,
-  SurveyQuestion,
+  SurveyPage
 } from "survey-react-ui";
 import { CreatorBase, PageViewModel, toggleHovered } from "@survey/creator";
 import React from "react";

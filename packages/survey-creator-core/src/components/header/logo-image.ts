@@ -4,7 +4,7 @@ import "./logo-image.scss";
 
 export class LogoImageViewModel extends Base {
   @property() isLogoImageChoosen: boolean;
-  constructor(private creator: CreatorBase<SurveyModel>, private root: HTMLDivElement) {
+  constructor(private creator: CreatorBase<SurveyModel>, public root: HTMLDivElement) {
     super();
     this.creator.survey.logoPosition = "right";
     this.updateIsLogoImageChoosen();
@@ -12,18 +12,18 @@ export class LogoImageViewModel extends Base {
   private updateIsLogoImageChoosen(): void {
     this.isLogoImageChoosen = !!this.creator.survey.logo;
   }
-  public chooseFile() {
+  public chooseFile(model: LogoImageViewModel) {
     const fileInput: HTMLInputElement =
-      <HTMLInputElement>this.root.getElementsByClassName("svc-choose-file-input")[0];
-    this.creator.chooseFiles(fileInput, (files: File[]) => {
-      this.creator.uploadFiles(files, (_, link) => {
-        this.creator.survey.logo = link;
-        this.updateIsLogoImageChoosen();
+      <HTMLInputElement>model.root.getElementsByClassName("svc-choose-file-input")[0];
+    model.creator.chooseFiles(fileInput, (files: File[]) => {
+      model.creator.uploadFiles(files, (_, link) => {
+        model.creator.survey.logo = link;
+        model.updateIsLogoImageChoosen();
       });
     });
   }
-  public remove() {
-    this.creator.survey.logo = "";
-    this.updateIsLogoImageChoosen();
+  public remove(model: LogoImageViewModel) {
+    model.creator.survey.logo = "";
+    model.updateIsLogoImageChoosen();
   }
 }

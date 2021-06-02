@@ -1,7 +1,7 @@
 import { ImageItemValueWrapperViewModel } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent } from "src/events";
-import { QuestionSelectBase, Base, ItemValue, ImageItemValue } from "survey-core";
+import { QuestionSelectBase, Base, ImageItemValue } from "survey-core";
 import {
   ReactElementFactory,
   SurveyElementBase,
@@ -57,7 +57,7 @@ ImageItemValueAdornerComponentProps,
     const isNew = !this.props.question.isItemInList(this.props.item);
 
     let content = null;
-    if(isNew) {
+    if (isNew) {
       content = (<>
         <div className="svc-image-item-value__item">
           <div className="sv-imagepicker__item sv-imagepicker__item--inline">

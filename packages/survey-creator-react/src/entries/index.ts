@@ -3,6 +3,7 @@ Version = `${process.env.VERSION}`;
 
 import "@survey/creator/survey-creator-core.css";
 export * from "../SurveyCreator";
+export * from "../components/header/LogoImage";
 export * from "../components/Question";
 export * from "../components/QuestionDropdown";
 export * from "../components/QuestionImage";
