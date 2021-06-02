@@ -294,14 +294,6 @@ export class DragDropHelper extends Base {
         dropTargetSurveyElement = panelDragInfo.dropTargetSurveyElement;
         isEdge = panelDragInfo.isEdge;
       }
-
-      if (
-        // TODO we can't drop on not empty page directly for now
-        dropTargetSurveyElement.getType() === "page" &&
-        dropTargetSurveyElement.elements.length !== 0
-      ) {
-        dropTargetSurveyElement = null;
-      }
     }
 
     if (dropTargetSurveyElement === this.draggedSurveyElement) {
@@ -309,6 +301,19 @@ export class DragDropHelper extends Base {
     }
 
     let isBottom = this.calculateIsBottom(dropTargetHTMLElement, event.clientY);
+
+    if (
+      // TODO we can't drop on not empty page directly for now
+      dropTargetSurveyElement &&
+      dropTargetSurveyElement.getType() === "page" &&
+      dropTargetSurveyElement.elements.length !== 0
+    ) {
+      const elements = dropTargetSurveyElement.elements;
+      dropTargetSurveyElement = isBottom
+        ? elements[elements.length - 1]
+        : elements[0];
+    }
+
     return { dropTargetSurveyElement, isEdge, isBottom };
   }
 

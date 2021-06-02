@@ -9,6 +9,13 @@ svc-page {
   padding-top: calcSize(4);
   padding-bottom: calcSize(4);
   border: 1px solid transparent;
+
+  .sv-page__title {
+    margin-left: 3em;
+  }
+  .sv-page__description {
+    padding-left: 7em;
+  }
 }
 
 @media only screen and (min-width: 1000px) {
