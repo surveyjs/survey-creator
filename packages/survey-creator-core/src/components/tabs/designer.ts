@@ -16,7 +16,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   public creator: CreatorBase<T>;
 
   private createNewPage() {
-    if (!this.survey) return;
+    if (!this.survey || this.creator.pageEditMode === "single") return;
     const newPage: PageModel = this.survey.createNewPage("");
     this.creator.setNewNames(newPage);
     newPage.onFirstRendering();
