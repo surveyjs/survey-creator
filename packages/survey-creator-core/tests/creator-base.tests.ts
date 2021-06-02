@@ -361,11 +361,50 @@ test("Update expressions on deleting a page with questions", (): any => {
 });
 test("Create new page on creating designer plugin", (): any => {
   var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
   expect(creator.viewType).toEqual("designer");
+
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+
+  creator = new CreatorTester();
+  expect(creator.survey.pages).toHaveLength(1);
+  designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
+
+  creator = new CreatorTester();
+  creator.survey.pages[0].addNewQuestion("text", "question1");
+  creator.survey.addNewPage("page2");
+  expect(creator.survey.pages).toHaveLength(2);
+  designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
+
+  creator.survey.pages[1].addNewQuestion("text", "question2");
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+
+  creator.survey.pages[1].elements[0].delete();
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
+
+  creator.survey.pages[1].delete();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+
+  creator.survey.addNewPage("page3");
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
 });
 test("canUndo/canRedo functions ", (): any => {
   var creator = new CreatorTester();
@@ -409,6 +448,9 @@ test("Check survey undo/redo buttons ", (): any => {
 });
 test("undo/redo add new page", (): any => {
   var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
@@ -418,20 +460,27 @@ test("undo/redo add new page", (): any => {
   designerPlugin.model.newPage["_addToSurvey"]();
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
+  creator.survey.pages[1].addNewQuestion("text", "question2");
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
   designerPlugin.model.newPage["_addToSurvey"]();
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
+  creator.survey.pages[2].addNewQuestion("text", "question3");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
+  creator.undo();
+  creator.undo();
   creator.undo();
   creator.undo();
   expect(creator.survey.pageCount).toEqual(1);
   expect(creator.survey.pages[0].name).toEqual("page1");
-  expect(designerPlugin.model.newPage.name).toEqual("page4");
+  expect(designerPlugin.model.newPage.name).toEqual("page2");
 });
 test("undo/redo add new page, via page model by adding new question", (): any => {
   var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
@@ -443,7 +492,7 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
   expect(creator.survey.pages[1].elements).toHaveLength(1);
-  expect(creator.survey.pages[1].elements[0].name).toEqual("question1");
+  expect(creator.survey.pages[1].elements[0].name).toEqual("question2");
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
   pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
@@ -451,13 +500,13 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
   expect(creator.survey.pages[2].elements).toHaveLength(1);
-  expect(creator.survey.pages[2].elements[0].name).toEqual("question2");
+  expect(creator.survey.pages[2].elements[0].name).toEqual("question3");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
   creator.undo();
   creator.undo();
   expect(creator.survey.pageCount).toEqual(1);
   expect(creator.survey.pages[0].name).toEqual("page1");
-  expect(designerPlugin.model.newPage.name).toEqual("page4");
+  expect(designerPlugin.model.newPage.name).toEqual("page2");
 });
 test("undo/redo make sure that the deleting element is not active", (): any => {
   var creator = new CreatorTester();
