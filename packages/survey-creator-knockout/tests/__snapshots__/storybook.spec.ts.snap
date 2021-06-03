@@ -370,11 +370,13 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               
     
               <svc-page
+                data-bind="attr: { 'data-svc-drop-target-element-name': $data.name }"
+                data-svc-drop-target-element-name="page1"
                 params="survey: $parent.survey, page: $data, creator: $parent.creator"
               >
                 <div
                   class="svc-page__content"
-                  data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+                  data-bind="click: select, clickBubble: false, css: css, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
                 >
                   
   
@@ -703,6 +705,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       
     
       <svc-page
+        data-bind="attr: { 'data-svc-drop-target-element-name': $data.name }"
         params="survey: $parent.survey, page: $data, creator: $parent.creator"
       />
       
@@ -714,6 +717,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       
     
       <svc-page
+        data-bind="attr: { 'data-svc-drop-target-element-name': 'newGhostPage' }"
         params="survey: survey, creator: creator, page: newPage"
       />
       

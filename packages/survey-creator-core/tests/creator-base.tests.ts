@@ -15,10 +15,11 @@ import { CreatorBase, ICreatorOptions } from "../src/creator-base";
 import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
+import { SurveyHelper } from "../src/surveyHelper";
 
 export class CreatorTester extends CreatorBase<SurveyModel> {
-  constructor(options: ICreatorOptions = {}) {
-    super(options);
+  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
+    super(options, options2);
   }
   protected createSurveyCore(json: any = {}): SurveyModel {
     return new SurveyModel(json);
@@ -40,6 +41,9 @@ export class CreatorTester extends CreatorBase<SurveyModel> {
       if (actions[i].id == id) return actions[i];
     }
     return null;
+  }
+  public doSaveFunc() {
+    this.doSave();
   }
 }
 
@@ -357,11 +361,50 @@ test("Update expressions on deleting a page with questions", (): any => {
 });
 test("Create new page on creating designer plugin", (): any => {
   var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
   expect(creator.viewType).toEqual("designer");
+
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+
+  creator = new CreatorTester();
+  expect(creator.survey.pages).toHaveLength(1);
+  designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
+
+  creator = new CreatorTester();
+  creator.survey.pages[0].addNewQuestion("text", "question1");
+  creator.survey.addNewPage("page2");
+  expect(creator.survey.pages).toHaveLength(2);
+  designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
+
+  creator.survey.pages[1].addNewQuestion("text", "question2");
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+
+  creator.survey.pages[1].elements[0].delete();
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
+
+  creator.survey.pages[1].delete();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+
+  creator.survey.addNewPage("page3");
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
 });
 test("canUndo/canRedo functions ", (): any => {
   var creator = new CreatorTester();
@@ -405,6 +448,9 @@ test("Check survey undo/redo buttons ", (): any => {
 });
 test("undo/redo add new page", (): any => {
   var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
@@ -414,20 +460,27 @@ test("undo/redo add new page", (): any => {
   designerPlugin.model.newPage["_addToSurvey"]();
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
+  creator.survey.pages[1].addNewQuestion("text", "question2");
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
   designerPlugin.model.newPage["_addToSurvey"]();
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
+  creator.survey.pages[2].addNewQuestion("text", "question3");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
+  creator.undo();
+  creator.undo();
   creator.undo();
   creator.undo();
   expect(creator.survey.pageCount).toEqual(1);
   expect(creator.survey.pages[0].name).toEqual("page1");
-  expect(designerPlugin.model.newPage.name).toEqual("page4");
+  expect(designerPlugin.model.newPage.name).toEqual("page2");
 });
 test("undo/redo add new page, via page model by adding new question", (): any => {
   var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
@@ -439,7 +492,7 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
   expect(creator.survey.pages[1].elements).toHaveLength(1);
-  expect(creator.survey.pages[1].elements[0].name).toEqual("question1");
+  expect(creator.survey.pages[1].elements[0].name).toEqual("question2");
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
   pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
@@ -447,13 +500,13 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
   expect(creator.survey.pages[2].elements).toHaveLength(1);
-  expect(creator.survey.pages[2].elements[0].name).toEqual("question2");
+  expect(creator.survey.pages[2].elements[0].name).toEqual("question3");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
   creator.undo();
   creator.undo();
   expect(creator.survey.pageCount).toEqual(1);
   expect(creator.survey.pages[0].name).toEqual("page1");
-  expect(designerPlugin.model.newPage.name).toEqual("page4");
+  expect(designerPlugin.model.newPage.name).toEqual("page2");
 });
 test("undo/redo make sure that the deleting element is not active", (): any => {
   var creator = new CreatorTester();
@@ -549,4 +602,50 @@ test("Show error on entering non-unique column value", (): any => {
   questionName.value = "col3";
   expect(questionName.errors).toHaveLength(0);
   expect(matrixQuestion.columns[1].name).toEqual("col3");
+});
+test("Warn on incorrect using constructor", (): any => {
+  var oldFunc = SurveyHelper.warnText;
+  var warnings = [];
+  SurveyHelper.warnText = (text: string): void => {
+    warnings.push(text);
+  };
+  new CreatorTester(<any>"creator");
+  expect(warnings).toHaveLength(1);
+  expect(warnings[0].indexOf("constructor") > 0).toBeTruthy();
+  var creator = new CreatorTester(
+    <any>"creator",
+    <any>{ showTranslationTab: true }
+  );
+  expect(warnings).toHaveLength(2);
+  expect(warnings[1].indexOf("constructor") > 0).toBeTruthy();
+  expect(creator.showTranslationTab).toBeTruthy();
+  SurveyHelper.warnText = oldFunc;
+});
+test("pageEditMode='single'", (): any => {
+  var creator = new CreatorTester();
+  expect(creator.pageEditMode).toEqual("standard");
+  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeTruthy();
+  expect(
+    Serializer.findProperty("question", "page").isVisible("")
+  ).toBeTruthy();
+  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
+  creator = new CreatorTester({ pageEditMode: "single" });
+  creator.JSON = { elements: [{ type: "text", name: "question1" }] };
+  expect(creator.pageEditMode).toEqual("single");
+  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeFalsy();
+  expect(Serializer.findProperty("question", "page").isVisible("")).toBeFalsy();
+  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeFalsy();
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model.newPage).toBeFalsy();
+
+  Serializer.findProperty("survey", "pages").visible = true;
+  Serializer.findProperty("question", "page").visible = true;
+  Serializer.findProperty("panel", "page").visible = true;
+  expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeTruthy();
+  expect(
+    Serializer.findProperty("question", "page").isVisible("")
+  ).toBeTruthy();
+  expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
 });

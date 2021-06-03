@@ -1,34 +1,20 @@
 import { SurveyModel, Base, PanelModel, IActionBarItem } from "survey-core";
 import {
   PropertyGridModel,
-  PropertyGridEditorCollection,
+  PropertyGridEditorCollection
 } from "../../src/property-grid";
 import { PropertyGridViewModel } from "../../src/property-grid/property-grid-view-model";
 import { CreatorBase, ICreatorOptions } from "../../src/creator-base";
-
-export class CreatorTester extends CreatorBase<SurveyModel> {
-  constructor(options: ICreatorOptions = {}) {
-    super(options);
-  }
-  protected createSurveyCore(json: any = {}): SurveyModel {
-    return new SurveyModel(json);
-  }
-  public get selectedElementName(): string {
-    if (!this.selectedElement) return "";
-    var name = this.selectedElement["name"];
-    if (!!name) return name;
-    return this.selectedElement.getType();
-  }
-}
+import { CreatorTester } from "../creator-base.tests";
 
 test("Generate and update title correctly", () => {
   var survey = new SurveyModel({
     elements: [
       {
         type: "text",
-        name: "question1",
-      },
-    ],
+        name: "question1"
+      }
+    ]
   });
   var propertyGrid = new PropertyGridModel(survey);
   var model = new PropertyGridViewModel(propertyGrid, null);
@@ -51,8 +37,8 @@ test("Prev/next correctly, including columns via actions", () => {
   var creator = new CreatorTester();
   creator.JSON = {
     elements: [
-      { type: "matrixdynamic", name: "q1", columns: [{ name: "col1" }] },
-    ],
+      { type: "matrixdynamic", name: "q1", columns: [{ name: "col1" }] }
+    ]
   };
   var matrix = creator.survey.getQuestionByName("q1");
   var model = new PropertyGridViewModel(
@@ -62,9 +48,8 @@ test("Prev/next correctly, including columns via actions", () => {
   expect(model.title).toEqual("Survey");
   creator.selectElement(matrix);
   expect(model.title).toEqual("Question");
-  var columnsQuestion = creator.propertyGrid.survey.getQuestionByName(
-    "columns"
-  );
+  var columnsQuestion =
+    creator.propertyGrid.survey.getQuestionByName("columns");
   expect(columnsQuestion).toBeTruthy();
   var actions: Array<IActionBarItem> = [];
   creator.propertyGrid.survey.getUpdatedMatrixRowActions(

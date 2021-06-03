@@ -11,8 +11,8 @@ svc-question {
 
 .svc-question__adorner {
   position: relative;
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 .svc-question__content {
   display: flex;
@@ -36,7 +36,7 @@ svc-question {
 .svc-panel__placeholder_frame {
   border: 1px dashed grey;
   position: absolute;
-  top: 10px;
+  top: 50px;
   bottom: 10px;
   left: 10px;
   right: 10px;
@@ -100,4 +100,39 @@ svc-question,
 }
 .svc-panel__edge--bottom {
   bottom: 0;
+}
+
+// reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
+[data-svc-drop-target-element-name="svc-drag-drop-ghost-survey-element-name"] {
+  border: none;
+  height: 0;
+
+  .svc-question__drag-area {
+    display: none;
+  }
+
+  .svc-question__drag-element {
+    display: none;
+  }
+}
+// EO reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
+
+.svc-hovered > .svc-question__content > .svc-question__drag-area {
+  visibility: visible;
+}
+
+.svc-question__drag-area {
+  visibility: hidden;
+  height: 28px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.svc-question__drag-element {
+  cursor: move;
+  width: 24px;
+  height: 6px;
+  border: 1px solid $border;
+  border-radius: 10px;
 }

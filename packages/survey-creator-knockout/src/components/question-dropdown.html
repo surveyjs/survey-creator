@@ -1,11 +1,17 @@
 <div
   class="svc-question__adorner"
-  data-bind="event: { dragover: koDragOver, dragend: koDragEnd, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+  data-bind="attr: { 'data-svc-drop-target-element-name': surveyElement.name }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
   <div
     class="svc-question__content"
-    data-bind="click: koSelect, clickBubble: false, css: css(), attr: { draggable: isDraggable }, event: { dragstart: koDragStart }, hidden: isDragged"
+    data-bind="click: koSelect, clickBubble: false, css: css()"
   >
+    <div class="svc-question__drag-area">
+      <div
+        class="svc-question__drag-element"
+        data-bind="event: {pointerdown: (model, event)=>{startDragSurveyElement(event)}}"
+      ></div>
+    </div>
 
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
@@ -17,6 +23,8 @@
               <!-- /ko -->
           </div>
         <!-- /ko -->
+      </div>
+      <!-- /ko -->
     </div>
 
     <div class="svc-question__content-actions">

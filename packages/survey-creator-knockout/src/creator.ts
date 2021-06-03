@@ -4,6 +4,7 @@ import {
   ItemValue,
   property,
   Question,
+  QuestionRowModel,
   QuestionSelectBase,
   SurveyElement,
   SurveyModel
@@ -24,6 +25,15 @@ if (!!ko.options) {
 class DesignTimeSurveyModel extends Survey {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
+  }
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
+  }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
+    return {
+      creator: this.creator,
+      row
+    };
   }
   public getElementWrapperComponentName(element: SurveyElement): string {
     if (element.isDesignMode) {
@@ -104,8 +114,8 @@ class DesignTimeSurveyModel extends Survey {
 export class SurveyCreator extends CreatorBase<Survey> {
   @property() testProp: string;
 
-  constructor(options: ICreatorOptions = {}) {
-    super(options);
+  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
+    super(options, options2);
     new ImplementorBase(this.toolbox);
     new ImplementorBase(this.dragDropHelper);
     new ImplementorBase(this);
@@ -122,7 +132,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   render(target: string | HTMLElement) {
     let node: HTMLElement = target as HTMLElement;
-    if(typeof target === "string") {
+    if (typeof target === "string") {
       node = document.getElementById(target);
     }
     var div = document.createElement("div");

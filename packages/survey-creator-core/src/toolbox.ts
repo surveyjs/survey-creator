@@ -9,7 +9,7 @@ import {
   propertyArray,
   Question,
   Serializer,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
@@ -48,10 +48,28 @@ export interface IQuestionToolboxItem extends IActionBarItem {
   category: string;
 }
 
+export interface IQuestionToolbox {
+  toggleCategoryState(name: string);
+}
+
+export class QuestionToolboxCategory extends Base {
+  constructor(private toolbox: IQuestionToolbox) {
+    super();
+  }
+  @property() name: string;
+  @propertyArray() items: Array<IQuestionToolboxItem>;
+  @property({ defaultValue: false }) collapsed: boolean;
+  public toggleState() {
+    if (this.toolbox) {
+      this.toolbox.toggleCategoryState(this.name);
+    }
+  }
+}
+
 /**
  * The list of Toolbox items.
  */
-export class QuestionToolbox extends Base {
+export class QuestionToolbox extends Base implements IQuestionToolbox {
   private _orderedQuestions = [
     "text",
     "checkbox",
@@ -64,7 +82,7 @@ export class QuestionToolbox extends Base {
     "boolean",
     "image",
     "html",
-    "signaturepad",
+    "signaturepad"
   ];
 
   private _questionDefaultSettings = {
@@ -74,32 +92,32 @@ export class QuestionToolbox extends Base {
           {
             value: "lion",
             imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
+              "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
           },
           {
             value: "giraffe",
             imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg",
+              "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
           },
           {
             value: "panda",
             imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg",
+              "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
           },
           {
             value: "camel",
             imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg",
-          },
-        ],
+              "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+          }
+        ]
       };
     },
     image: () => {
       return {
         imageLink:
-          "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
+          "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
       };
-    },
+    }
   };
 
   /**
@@ -121,7 +139,7 @@ export class QuestionToolbox extends Base {
   private itemsValue: Array<IQuestionToolboxItem> = [];
 
   //koItems = ko.observableArray();
-  @propertyArray() categories: Array<any>;
+  @propertyArray() categories: Array<QuestionToolboxCategory>;
   /**
    * Set and get and active category. This property doesn't work if allowExpandMultipleCategories is true. Its default value is empty.
    * @see allowExpandMultipleCategories
@@ -132,7 +150,7 @@ export class QuestionToolbox extends Base {
     defaultValue: "",
     onSet: (val: string, target: QuestionToolbox) => {
       target.onActiveCategoryChanged(val);
-    },
+    }
   })
   activeCategory: string;
   @property({ defaultValue: false }) hasCategories: boolean;
@@ -149,7 +167,7 @@ export class QuestionToolbox extends Base {
     const categories: Array<any> = this.categories;
     for (var i = 0; i < categories.length; i++) {
       var category = categories[i];
-      //(<any>category).koCollapsed((<any>category).name !== newValue);
+      category.collapsed = category.name !== newValue;
     }
   }
   /**
@@ -234,7 +252,7 @@ export class QuestionToolbox extends Base {
       isCopied: options.isCopied !== false,
       iconName: !!options.iconName ? options.iconName : "icon-default",
       json: !!options.json ? options.json : this.getQuestionJSON(question),
-      category: !!options.category ? options.category : "",
+      category: !!options.category ? options.category : ""
     };
     if (this.replaceItem(item)) return;
     const copied: IQuestionToolboxItem[] = this.copiedItems;
@@ -369,18 +387,12 @@ export class QuestionToolbox extends Base {
     }
     this.onItemsChanged();
   }
-  /**
-   * Set and get and active category. This property doesn't work if allowExpandMultipleCategories is true. Its default value is empty.
-   * @see allowExpandMultipleCategories
-   * @see expandCategory
-   * @see collapseCategory
-   */
-  private doCategoryClick(categoryName: string) {
+  public toggleCategoryState(categoryName: string) {
     if (this.keepAllCategoriesExpanded) return;
     if (this.allowExpandMultipleCategories) {
       var category = this.getCategoryByName(categoryName);
       if (category) {
-        //category.koCollapsed(!category.koCollapsed());
+        category.collapsed = !category.collapsed;
       }
     } else {
       this.activeCategory = categoryName;
@@ -396,10 +408,12 @@ export class QuestionToolbox extends Base {
     if (this.allowExpandMultipleCategories) {
       var category = this.getCategoryByName(categoryName);
       if (category) {
-        //category.koCollapsed(false);
+        category.collapsed = false;
       }
     } else {
-      this.activeCategory = categoryName;
+      if (this.canCollapseCategories) {
+        this.activeCategory = categoryName;
+      }
     }
   }
   /**
@@ -411,7 +425,7 @@ export class QuestionToolbox extends Base {
     if (!this.allowExpandMultipleCategories) return;
     var category = this.getCategoryByName(categoryName);
     if (category) {
-      //category.koCollapsed(true);
+      category.collapsed = true;
     }
   }
   /**
@@ -431,7 +445,7 @@ export class QuestionToolbox extends Base {
   private expandCollapseAllCategories(isCollapsed: boolean) {
     const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
-      //(<any>categories[i]).koCollapsed(isCollapsed);
+      categories[i].collapsed = isCollapsed;
     }
   }
   private getCategoryByName(categoryName: string): any {
@@ -443,44 +457,43 @@ export class QuestionToolbox extends Base {
     return null;
   }
   protected onItemsChanged() {
-    // this.koItems([]);
-    // this.koItems(this.itemsValue);
-    var categories = [];
+    var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
-    var self = this;
     for (var i = 0; i < this.itemsValue.length; i++) {
       var item = this.itemsValue[i];
       var categoryName = item.category
         ? item.category
         : editorLocalization.getString("ed.toolboxGeneralCategory");
       if (!categoriesHash[categoryName]) {
-        var category = {
-          name: categoryName,
-          items: [],
-          //koCollapsed: ko.observable(categoryName !== prevActiveCategory),
-          expand: function () {
-            self.doCategoryClick(this.name);
-          },
-        };
+        var category = this.createCategory();
+        category.name = categoryName;
+        category.collapsed =
+          categoryName !== prevActiveCategory &&
+          !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
         categories.push(category);
       }
       categoriesHash[categoryName].items.push(item);
     }
     this.categories = categories;
-    if (!this.allowExpandMultipleCategories) {
-      if (prevActiveCategory && categoriesHash[prevActiveCategory]) {
-        this.activeCategory = prevActiveCategory;
+    if (!this.keepAllCategoriesExpanded) {
+      if (!this.allowExpandMultipleCategories) {
+        if (prevActiveCategory && categoriesHash[prevActiveCategory]) {
+          this.activeCategory = prevActiveCategory;
+        } else {
+          this.activeCategory = categories.length > 0 ? categories[0].name : "";
+        }
       } else {
-        this.activeCategory = categories.length > 0 ? categories[0].name : "";
-      }
-    } else {
-      if (categories.length > 0) {
-        //categories[0].koCollapsed(false);
+        if (categories.length > 0) {
+          categories[0].collapsed = false;
+        }
       }
     }
     this.hasCategories = categories.length > 1;
+  }
+  protected createCategory(): QuestionToolboxCategory {
+    return new QuestionToolboxCategory(this);
   }
   private indexOf(name: string) {
     for (var i = 0; i < this.itemsValue.length; i++) {
@@ -517,7 +530,7 @@ export class QuestionToolbox extends Base {
         tooltip: title,
         json: json,
         isCopied: false,
-        category: "",
+        category: ""
       };
       this.itemsValue.push(item);
     }
@@ -532,7 +545,7 @@ export class QuestionToolbox extends Base {
     for (var i = 0; i < widgets.length; i++) {
       if (inst.getActivatedBy(widgets[i].name) != "customtype") continue;
       var widgetJson = widgets[i].widgetJson;
-      if (!widgetJson.widgetIsLoaded || !widgetJson.widgetIsLoaded()) continue;
+      if (!!widgetJson.widgetIsLoaded && !widgetJson.widgetIsLoaded()) continue;
       this.addItemFromJSON(widgetJson);
     }
   }
@@ -574,7 +587,7 @@ export class QuestionToolbox extends Base {
       tooltip: title,
       json: elementJson,
       isCopied: false,
-      category: category,
+      category: category
     };
     this.itemsValue.push(item);
   }

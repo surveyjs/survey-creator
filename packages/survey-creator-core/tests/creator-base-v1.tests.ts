@@ -7,32 +7,18 @@ import {
   Serializer,
   QuestionRadiogroupModel,
   QuestionMatrixDropdownModel,
-  QuestionMatrixDynamicModel,
+  QuestionMatrixDynamicModel
 } from "survey-core";
 import { getNextValue } from "../src/utils/utils";
 import { CreatorBase, ICreatorOptions } from "../src/creator-base";
 import { editorLocalization } from "../src/editorLocalization";
 import {
   ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions,
+  EmptySurveyCreatorOptions
 } from "../src/settings";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
+import { CreatorTester } from "./creator-base.tests";
 
-export class CreatorTester extends CreatorBase<SurveyModel> {
-  constructor(options: ICreatorOptions = {}) {
-    super(options);
-  }
-  protected createSurveyCore(json: any = {}): SurveyModel {
-    return new SurveyModel(json);
-  }
-  public doSaveFunc() {
-    this.doSave();
-  }
-  public get selectedElementName(): string {
-    if (!this.selectedElement) return "";
-    return this.selectedElement["name"];
-  }
-}
 function getSurveyJson(): any {
   return {
     pages: [
@@ -46,11 +32,11 @@ function getSurveyJson(): any {
             choices: [
               "one",
               { value: "two", text: "second value" },
-              { value: 3, text: "third value" },
+              { value: 3, text: "third value" }
             ],
-            type: "checkbox",
-          },
-        ],
+            type: "checkbox"
+          }
+        ]
       },
       { name: "page2", questions: [{ name: "question3", type: "comment" }] },
       {
@@ -60,12 +46,12 @@ function getSurveyJson(): any {
             name: "question4",
             columns: ["Column 1", "Column 2", "Column 3"],
             rows: ["Row 1", "Row 2"],
-            type: "matrix",
+            type: "matrix"
           },
-          { name: "question5", type: "rating" },
-        ],
-      },
-    ],
+          { name: "question5", type: "rating" }
+        ]
+      }
+    ]
   };
 }
 test("getNextValue", () => {
@@ -92,7 +78,7 @@ test("getNextValue", () => {
     getNextValue(prefix, [
       "12345671234567890",
       "12345671234567891",
-      "12345671234567892",
+      "12345671234567892"
     ])
   ).toEqual("12345671234567893");
   expect(getNextValue(prefix, ["1 day", "2 days", "3 days"])).toEqual("4 days");
@@ -119,10 +105,10 @@ test("Set Text property", () => {
           "BMW",
           "Peugeot",
           "Toyota",
-          "Citroen",
-        ],
-      },
-    ],
+          "Citroen"
+        ]
+      }
+    ]
   };
   creator.JSON = json;
   expect(creator.isDesignerShowing).toBeTruthy();
@@ -143,11 +129,11 @@ test("Escape HTML question string", () => {
           {
             type: "html",
             name: "question3",
-            html: '<img src="https://placehold.it/300x100" alt="test"/>',
-          },
-        ],
-      },
-    ],
+            html: '<img src="https://placehold.it/300x100" alt="test"/>'
+          }
+        ]
+      }
+    ]
   });
   //var jsonText = '{\"pages\":[{\"name\":\"page1\",\"elements\":[{\"type\":\"html\",\"name\":\"question3\",\"html\":\"<img src=\\\"https://placehold.it/300x100\\\" alt=\\\"test\\\"/>\"}]}]}';
   var creator = new CreatorTester();
@@ -175,7 +161,7 @@ test("options.questionTypes", () => {
   var creator = new CreatorTester();
   expect(creator.toolbox.items).toHaveLength(allTypes.length);
   creator = new CreatorTester({
-    questionTypes: ["text", "dropdown", "unknown"],
+    questionTypes: ["text", "dropdown", "unknown"]
   });
   expect(creator.toolbox.items).toHaveLength(2);
 });
@@ -285,13 +271,13 @@ test("Delete object and selectedElement property", () => {
               { type: "text", name: "panel1_q1" },
               { type: "text", name: "panel1_q2" },
               { type: "text", name: "panel1_q3" },
-              { type: "text", name: "panel1_q4" },
-            ],
+              { type: "text", name: "panel1_q4" }
+            ]
           },
-          { type: "text", name: "q3" },
-        ],
-      },
-    ],
+          { type: "text", name: "q3" }
+        ]
+      }
+    ]
   };
   creator.selectedElement = creator.survey.getQuestionByName("panel1_q3");
   creator.deleteCurrentObject();
@@ -456,9 +442,8 @@ test("Update conditions/expressions on changing question.valueName", () => {
   q2.visibleIf = "{question1} = 1";
   creator.selectElement(q1);
   var nameQuestion = creator.propertyGrid.survey.getQuestionByName("name");
-  var valueNameQuestion = creator.propertyGrid.survey.getQuestionByName(
-    "valueName"
-  );
+  var valueNameQuestion =
+    creator.propertyGrid.survey.getQuestionByName("valueName");
   valueNameQuestion.value = "valueName1";
   expect(q2.visibleIf).toEqual("{valueName1} = 1");
   valueNameQuestion.value = "valueName2";
@@ -543,8 +528,8 @@ test("Undo-redo creator add/remove page", () => {
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2", visibleIf: "{q1} = 2" },
-      { type: "text", name: "q3", visibleIf: "{q1} = 3" },
-    ],
+      { type: "text", name: "q3", visibleIf: "{q1} = 3" }
+    ]
   };
   expect(creator.survey.pages).toHaveLength(1);
   creator.addPage();
@@ -692,8 +677,8 @@ test("creator.onConditionQuestionsGetList, Bug#957", () => {
       { name: "q2", type: "text" },
       { name: "q3", type: "dropdown" },
       { name: "q4", type: "checkbox" },
-      { name: "q5", type: "radiogroup" },
-    ],
+      { name: "q5", type: "radiogroup" }
+    ]
   };
   var question = creator.survey.getQuestionByName("q1");
   creator.selectElement(question);
@@ -719,8 +704,8 @@ test("creator.onGetObjectDisplayName, change visible name for objects", () => {
       { name: "q2", title: "Question 2", type: "text" },
       { name: "q3", title: "Question 3", type: "dropdown" },
       { name: "q4", title: "Question 4", type: "checkbox" },
-      { name: "q5", title: "Question 5", type: "radiogroup" },
-    ],
+      { name: "q5", title: "Question 5", type: "radiogroup" }
+    ]
   };
   var question = creator.survey.getQuestionByName("q1");
   creator.selectElement(question);
@@ -739,8 +724,8 @@ test("creator options.maxLogicItemsInCondition, hide `Add Condition` on exceedin
   creator.JSON = {
     elements: [
       { name: "q1", type: "text" },
-      { name: "q2", type: "text" },
-    ],
+      { name: "q2", type: "text" }
+    ]
   };
   var question = creator.survey.getQuestionByName("q1");
   var editor = new ConditionEditor(creator.survey, question, creator);
@@ -792,9 +777,9 @@ test("SurveyPropertyConditionEditor, set correct locale into internal survey, Bu
       { name: "q1", type: "text" },
       {
         name: "q2",
-        type: "text",
-      },
-    ],
+        type: "text"
+      }
+    ]
   };
   expect(creator.survey.locale).toBeFalsy();
   expect(creator.propertyGrid.survey.locale).toEqual("de");
@@ -814,15 +799,15 @@ test("Change names in copyElements", () => {
         elements: [
           {
             type: "text",
-            name: "question1",
+            name: "question1"
           },
           {
             type: "text",
-            name: "question2",
-          },
-        ],
-      },
-    ],
+            name: "question2"
+          }
+        ]
+      }
+    ]
   };
   var panel = new PanelModel("panel1");
   panel.addNewQuestion("text", "question1");
@@ -842,15 +827,15 @@ test("Update expressions in copyElements", () => {
         elements: [
           {
             type: "text",
-            name: "question1",
+            name: "question1"
           },
           {
             type: "text",
-            name: "question2",
-          },
-        ],
-      },
-    ],
+            name: "question2"
+          }
+        ]
+      }
+    ]
   };
   var panel = new PanelModel("panel1");
   panel.addNewQuestion("text", "question1");

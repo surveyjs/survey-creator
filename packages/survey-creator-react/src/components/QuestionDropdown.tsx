@@ -36,27 +36,22 @@ export class QuestionDropdownAdornerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div
+          data-svc-drop-target-element-name={this.model.surveyElement.name}
           className={"svc-question__adorner"}
-          onDragOver={(e) =>
-            this.model.dragOver(this.model, new ReactDragEvent(e))
-          }
-          onDragEnd={(e) =>
-            this.model.dragEnd(this.model, new ReactDragEvent(e))
-          }
-          onMouseOut={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
-          onMouseOver={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
           <div
             className={"svc-question__content " + this.model.css()}
-            onClick={(e) =>
-              this.model.select(this.model, new ReactMouseEvent(e))
-            }
-            onDragStart={(e) =>
-              this.model.dragStart(this.model, new ReactDragEvent(e))
-            }
-            // onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
-            draggable={this.model.isDraggable}
+            onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
           >
+            <div className={"svc-question__drag-area"}>
+                <div
+                  className={"svc-question__drag-element"}
+                  onPointerDown={(event:any) => this.model.startDragSurveyElement(event)}
+                ></div>
+            </div>
+
             {this.props.element}
 
             <div className="svc-question__dropdown-choices">

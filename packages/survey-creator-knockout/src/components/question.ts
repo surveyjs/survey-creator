@@ -21,27 +21,11 @@ export class KnockoutQuestionAdornerViewModel extends QuestionAdornerViewModel {
   ) {
     super(creator, surveyElement, templateData);
   }
-
   koSelect(model: QuestionAdornerViewModel, event: MouseEvent) {
     return super.select(model, this.wrapMouseEvent(event));
   }
-  koDragStart(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.dragStart(model, this.wrapDragEvent(event));
-  }
-  koDragOver(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.dragOver(model, this.wrapDragEvent(event));
-  }
-  koDrop(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.drop(model, this.wrapDragEvent(event));
-  }
-  koDragEnd(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.dragEnd(model, this.wrapDragEvent(event));
-  }
   private wrapMouseEvent(event: MouseEvent): KnockoutMouseEvent {
     return new KnockoutMouseEvent(event);
-  }
-  private wrapDragEvent(event: DragEvent): KnockoutDragEvent {
-    return new KnockoutDragEvent(event);
   }
   public hover(event: MouseEvent, element: HTMLElement) {
     toggleHovered(event, element);

@@ -11,7 +11,8 @@ import {
   SurveyModel,
   SurveyElement,
   ItemValue,
-  QuestionSelectBase
+  QuestionSelectBase,
+  QuestionRowModel
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -105,6 +106,15 @@ class DesignTimeSurveyModel extends Model {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
+  }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
+    return {
+      creator: this.creator,
+      row
+    };
+  }
   public getElementWrapperComponentName(element: SurveyElement): string {
     if (element.isDesignMode) {
       if (element instanceof Question) {
@@ -163,8 +173,8 @@ class DesignTimeSurveyModel extends Model {
   }
 }
 export class SurveyCreator extends CreatorBase<SurveyModel> {
-  constructor(options: ICreatorOptions = {}) {
-    super(options);
+  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
+    super(options, options2);
   }
   protected createSurveyCore(json: any = {}): SurveyModel {
     return new DesignTimeSurveyModel(this, json);

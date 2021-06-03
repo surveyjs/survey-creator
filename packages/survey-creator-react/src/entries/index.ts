@@ -4,6 +4,7 @@ Version = `${process.env.VERSION}`;
 import "@survey/creator/survey-creator-core.css";
 
 export * from "../SurveyCreator";
+export * from "../components/RowWrapper";
 export * from "../components/Question";
 export * from "../components/QuestionDropdown";
 export * from "../components/QuestionImage";
@@ -23,5 +24,12 @@ export {
   editorLocalization,
   editorLocalization as localization,
   settings,
-  LogicModel
+  LogicModel,
+  SurveyQuestionEditorDefinition,
+  ISurveyCreatorOptions,
+  IPropertyGridEditor,
+  PropertyGridEditorCollection
 } from "@survey/creator";
+
+//Obsolete
+export { StylesManager } from "@survey/creator";
