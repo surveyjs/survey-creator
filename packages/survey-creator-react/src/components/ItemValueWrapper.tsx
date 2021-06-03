@@ -44,13 +44,12 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     // }
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
-
     const button = isNew ? (
       <span
         className="svc-item-value-controls__button svc-item-value-controls__add"
         onClick={() => this.model.add(this.model)}
       >
-        <SvgIcon size={24} iconName={"icon-add-item-value"}></SvgIcon>
+        <SvgIcon size={16} iconName={"icon-add-item-value"}></SvgIcon>
       </span>
     ) : (
       <>
@@ -60,21 +59,23 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
             className="svc-item-value-controls__button svc-item-value-controls__drag"
             onPointerDown={(event: any) => this.model.startDragItemValue(event)}
           >
-            <SvgIcon size={24} iconName={"icon-drag-handler"}></SvgIcon>
+            <SvgIcon size={16} iconName={"icon-drag-handler"}></SvgIcon>
           </span>
         ) : null}
         <span
           className="svc-item-value-controls__button svc-item-value-controls__remove"
           onClick={() => this.model.remove(this.model)}
         >
-          <SvgIcon size={24} iconName={"icon-remove-item-value"}></SvgIcon>
+          <SvgIcon size={16} iconName={"icon-remove-item-value"}></SvgIcon>
         </span>
       </>
     );
     return (
       <div
         className={
-          "svc-item-value-wrapper" + (isNew ? " svc-item-value--new" : "")
+          "svc-item-value-wrapper" +
+          (isNew ? " svc-item-value--new" : "") +
+          (this.model.isDragging ? " svc-item-value--dragging" : "")
         }
         key={this.props.element.key}
         data-svc-drop-target-item-value={

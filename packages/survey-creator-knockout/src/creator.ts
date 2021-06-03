@@ -122,8 +122,8 @@ class DesignTimeSurveyModel extends Survey {
 export class SurveyCreator extends CreatorBase<Survey> {
   @property() testProp: string;
 
-  constructor(options: ICreatorOptions = {}) {
-    super(options);
+  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
+    super(options, options2);
     new ImplementorBase(this.toolbox);
     new ImplementorBase(this.dragDropHelper);
     new ImplementorBase(this);
@@ -140,11 +140,11 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   render(target: string | HTMLElement) {
     let node: HTMLElement = target as HTMLElement;
-    if(typeof target === "string") {
+    if (typeof target === "string") {
       node = document.getElementById(target);
     }
-    var div = document.createElement("div");
     node.innerHTML = `<survey-creator params="creator: creator"></survey-creator>`;
+    ko.cleanNode(node);
     ko.applyBindings({ creator: this }, node);
   }
 }

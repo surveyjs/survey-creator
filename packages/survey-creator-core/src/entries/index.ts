@@ -44,6 +44,7 @@ export * from "../textWorker";
 export * from "../toolbox";
 export * from "../utils/events";
 export * from "../utils/utils";
+export * from "../questionEditors/questionEditorDefinition";
 
 import "../components/button.scss";
 import "../components/property-panel/property-panel-item.scss";
@@ -55,6 +56,7 @@ import "../components/button.scss";
 import "../components/question-dropdown.scss";
 import "../components/toolbox/toolbox.scss";
 import "../property-grid-theme/property-grid.scss";
+import "../survey-designer-theme/survey-designer.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
 

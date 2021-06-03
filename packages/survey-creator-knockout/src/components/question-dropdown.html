@@ -1,6 +1,6 @@
 <div
   class="svc-question__adorner"
-  data-bind="attr: { 'data-svc-drop-target-element-name': surveyElement.name }, event: { pointerdown: (model, event)=>{startDrag(event)}, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+  data-bind="attr: { 'data-svc-drop-target-element-name': surveyElement.name }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
   <div
     class="svc-question__content"
@@ -17,9 +17,11 @@
     <!-- /ko -->
 
     <div class="svc-question__dropdown-choices">
-      <!-- ko foreach: { data: question.visibleChoices, as: 'item' }  -->
-      <div class="svc-question__dropdown-choice">
-        <!-- ko component: { name: question.getItemValueWrapperComponentName(item), params: { componentData:  question.getItemValueWrapperComponentData(item), templateData: { name: 'svc-choice-item-text', data: item } } } -->
+        <!-- ko foreach: { data: question.visibleChoices, as: 'item' }  -->
+          <div class="svc-question__dropdown-choice">
+              <!-- ko component: { name: question.getItemValueWrapperComponentName(item), params: { componentData:  question.getItemValueWrapperComponentData(item), templateData: { name: 'survey-radiogroup-item', data: item } } } -->
+              <!-- /ko -->
+          </div>
         <!-- /ko -->
       </div>
       <!-- /ko -->

@@ -2,31 +2,56 @@
 
 .svc-item-value-wrapper {
   position: relative;
+  display: flex;
+  //Todo: remove this style
+  width: max-content;
+}
+
+.svc-question__content--selected .svc-item-value-wrapper {
+  margin-left: calcSize(-5);
+}
+
+.sd-selectbase__column:not(:first-of-type) .svc-item-value-wrapper {
+  margin-left: 0;
+}
+
+.svc-item-value--dragging {
+  background: $background;
+  box-shadow: 0px calcSize(1) calcSize(2) $shadow-medium;
+  border-radius: 100px;
+  padding-right: calcSize(3);
+  padding-left: calcSize(0.5);
 }
 
 .svc-item-value-controls {
   display: none;
-  position: absolute;
-  left: calcSize(-10);
+  margin: calcSize(1) 0;
+  margin-right: calcSize(1);
+  // position: absolute;
+  // left: calcSize(-10);
   width: calcSize(9);
-  text-align: right;
-  white-space: nowrap;
+  height: calcSize(4);
+  box-sizing: border-box;
+  // text-align: right;
+  // white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .svc-item-value-controls__button {
-  height: calcSize(3);
-  width: calcSize(3);
   border-radius: 50%;
-  padding: calcSize(1.5);
+  padding: calcSize(1);
   cursor: pointer;
   display: inline-block;
-  margin-top: calcSize(-1);
-  margin-left: calcSize(-1);
+}
+
+.svc-item-value-controls__button > span {
+  display: block;
+  width: 16px;
+  height: 16px;
 }
 
 .svc-item-value-controls__drag {
-  padding-left: 0;
-  padding-right: calcSize(0.5);
+  padding: calcSize(1) calcSize(1.5);
   cursor: move;
   use {
     fill: $foreground-light;
@@ -38,12 +63,18 @@
   }
 }
 
+.svc-item-value-controls__remove,
+.svc-item-value-controls__add {
+  float: right;
+}
+
 .svc-item-value-controls__add:hover {
   background-color: $primary-light;
   use {
     fill: $primary;
   }
 }
+
 .svc-item-value-controls__remove:hover {
   background-color: $red-light;
   use {
@@ -79,9 +110,6 @@
   display: block;
 }
 
-.svc-item-value__item {
-}
-
 .sv-string-editor {
   cursor: text;
 }
@@ -91,12 +119,18 @@
     opacity: 0.5;
   }
 }
-
 .sv-ranking {
-  .svc-item-value-controls {
-    height: 100%;
+  .svc-item-value-wrapper {
+    align-items: center;
   }
-  .svc-item-value-controls__button {
-    margin-top: calc(50% - calc(1.25 * #{$base-unit}));
+}
+
+.svc-item-value__item {
+  .sv-ranking-item__content {
+    padding-left: 0;
+  }
+
+  .sv-ranking-item__icon-container {
+    display: none;
   }
 }

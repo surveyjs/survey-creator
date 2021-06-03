@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { CSSProperties } from "react";
 
 import {
@@ -179,9 +180,23 @@ class DesignTimeSurveyModel extends Model {
   }
 }
 export class SurveyCreator extends CreatorBase<SurveyModel> {
-  constructor(options: ICreatorOptions = {}) {
-    super(options);
+  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
+    super(options, options2);
   }
+  public render(target: string | HTMLElement) {
+    let node: HTMLElement = target as HTMLElement;
+    if (typeof target === "string") {
+      node = document.getElementById(target);
+    }
+    ReactDOM.unmountComponentAtNode(node);
+    ReactDOM.render(
+      <React.StrictMode>
+        <SurveyCreatorComponent creator={this} />
+      </React.StrictMode>,
+      node
+    );
+  }
+
   protected createSurveyCore(json: any = {}): SurveyModel {
     return new DesignTimeSurveyModel(this, json);
   }

@@ -23,6 +23,7 @@ import {
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
+import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -310,6 +311,7 @@ export class PropertyGridTitleActionsCreator {
       question,
       this.options
     );
+    surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
     settings.showModal(
       "survey",
       {

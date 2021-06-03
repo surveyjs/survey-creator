@@ -55,7 +55,7 @@ export class TabDesignerComponent extends SurveyElementBase<
       );
     });
 
-    if (!!this.model.newPage) {
+    if (this.model.showNewPage) {
       surveyPages.push(
         <div
           className={"svc-page"}
@@ -121,7 +121,6 @@ export class DesignerSurveyNavigationBlock extends React.Component<any, any> {
     });
   };
   componentWillUnmount() {
-    super.componentWillUnmount();
     if (this.survey) {
       this.survey.onPropertyChanged.remove(this.onPropChangedHandler);
     }

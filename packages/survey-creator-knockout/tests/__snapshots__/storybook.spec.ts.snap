@@ -104,96 +104,6 @@ exports[`Storyshots Button Disabled Action Button 1`] = `
 </svc-button>
 `;
 
-exports[`Storyshots Button Group Disabled Item 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group Four Buttons 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group Selected Item 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group Three Buttons 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group Two Buttons 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group With Icons 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group With Icons Selected Item 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group With Label 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
 exports[`Storyshots Button Ordinary 1`] = `
 <svc-button
   params="action: action, title: title"
@@ -347,13 +257,13 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           
 
           <div
-            class="svc-tab-designer sv-root-modern"
+            class="svc-tab-designer sd-root-modern"
             data-bind="css: survey.css.root"
           >
             
   
             <div
-              class="sv-container-modern"
+              class="sd-container-modern"
               data-bind="css: survey.css.container"
             >
               
@@ -370,11 +280,13 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               
     
               <svc-page
+                data-bind="attr: { 'data-svc-drop-target-element-name': $data.name }"
+                data-svc-drop-target-element-name="page1"
                 params="survey: $parent.survey, page: $data, creator: $parent.creator"
               >
                 <div
                   class="svc-page__content"
-                  data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+                  data-bind="click: select, clickBubble: false, css: css, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
                 >
                   
   
@@ -484,17 +396,6 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             
 
           </div>
-          
-
-          <script
-            id="svc-choice-item-text"
-            type="text/html"
-          >
-            
-  &lt;!-- ko template: { name: 'survey-string', data: locText } --&gt;
-  &lt;!-- /ko --&gt;
-
-          </script>
           
 
           <!-- /ko -->
@@ -714,6 +615,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       
     
       <svc-page
+        data-bind="attr: { 'data-svc-drop-target-element-name': $data.name }"
         params="survey: $parent.survey, page: $data, creator: $parent.creator"
       />
       
@@ -725,6 +627,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       
     
       <svc-page
+        data-bind="attr: { 'data-svc-drop-target-element-name': 'newGhostPage' }"
         params="survey: survey, creator: creator, page: newPage"
       />
       
@@ -765,17 +668,6 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
 
   </div>
-  
-
-  <script
-    id="svc-choice-item-text"
-    type="text/html"
-  >
-    
-  &lt;!-- ko template: { name: 'survey-string', data: locText } --&gt;
-  &lt;!-- /ko --&gt;
-
-  </script>
   
 
 </svc-tab-designer>

@@ -7,7 +7,9 @@ svc-page {
 .svc-page__content {
   position: relative;
   padding: calcSize(4);
-  border: 1px solid transparent;
+  border: 2px solid transparent;
+  width: 100%;
+  max-width: calcSize(102);
 }
 
 .svc-page__content-actions {
@@ -18,12 +20,14 @@ svc-page {
 }
 
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-  border: 1px solid $secondary;
+  border: 2px solid $secondary;
 }
 
 .svc-page__content--selected,
 .svc-hovered.svc-page__content--selected {
   border: 2px solid $secondary;
+  background: rgba(255, 152, 20, 0.1);
+  border-radius: 4px;
   .svc-page__content-actions {
     display: block;
   }

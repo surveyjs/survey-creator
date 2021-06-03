@@ -8,7 +8,7 @@ import {
     getItemValueByIndex
 } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
-const title = "Drag Drop Survey Element";
+const title = "Drag Drop";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
     await t.maximizeWindow();
@@ -133,7 +133,9 @@ test("Drag Drop to Panel", async (t) => {
         speed: 0.5
     });
 
-    const Question3 = Selector(`[data-svc-drop-target-element-name="question3"]`);
+    const Question3 = Selector(
+        `[data-svc-drop-target-element-name="question3"]`
+    );
 
     await t.hover(RatingToolboxItem, { speed: 0.5 });
     await t.dragToElement(RatingToolboxItem, Question3, {
@@ -192,13 +194,13 @@ test("Drag Drop ItemValue (choices)", async (t) => {
     };
     await setJSON(json);
 
-    const Question1 = Selector(`[data-question-name="question1"]`);
+    const Question1 = Selector(`[name="question1"]`);
     const Item1 = Selector(`[data-svc-drop-target-item-value="item1"]`);
     const Item2 = Selector(`[data-svc-drop-target-item-value="item2"]`);
     const Item3 = Selector(`[data-svc-drop-target-item-value="item3"]`);
     const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
 
-    await t.click(Question1);
+    await t.click(Question1, { speed: 0.5 });
 
     await t.hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2);
 
@@ -207,7 +209,7 @@ test("Drag Drop ItemValue (choices)", async (t) => {
     await t.dragToElement(DragZoneItem2, Item1, {
         offsetX: 5,
         offsetY: 5,
-        destinationOffsetY: -50,
+        destinationOffsetY: -40,
         speed: 0.5
     });
     let value = await getItemValueByIndex("question1", 0);
@@ -216,7 +218,7 @@ test("Drag Drop ItemValue (choices)", async (t) => {
     await t.dragToElement(DragZoneItem2, Item3, {
         offsetX: 5,
         offsetY: 5,
-        destinationOffsetY: 20,
+        destinationOffsetY: 30,
         speed: 0.5
     });
     value = await getItemValueByIndex("question1", 2);

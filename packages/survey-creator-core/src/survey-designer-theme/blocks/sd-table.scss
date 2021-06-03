@@ -1,0 +1,16 @@
+.sd-table {
+  width: 100%;
+  background-color: $background;
+  border-collapse: collapse;
+}
+.sd-table tr:not(:last-child) {
+  padding-bottom: calcSize(2);
+}
+.sd-table__cell {
+  font-family: $font-family;
+  font-weight: normal;
+  font-size: calcSize(2);
+  line-height: calcSize(3);
+  padding-bottom: calcSize(2);
+  color: $foreground;
+}
