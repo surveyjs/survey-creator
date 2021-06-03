@@ -6,8 +6,24 @@ svc-page {
 
 .svc-page__content {
   position: relative;
-  padding: calcSize(4);
+  padding-top: calcSize(4);
+  padding-bottom: calcSize(4);
   border: 1px solid transparent;
+
+  .sv-page__title {
+    margin-left: 3em;
+  }
+  .sv-page__description {
+    padding-left: 7em;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .svc-page__content .sv-body__page,
+  .sv-body__footer {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }
 
 .svc-page__content-actions {
