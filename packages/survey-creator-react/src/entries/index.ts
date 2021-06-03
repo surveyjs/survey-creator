@@ -25,7 +25,10 @@ export {
   editorLocalization as localization,
   settings,
   LogicModel,
-  SurveyQuestionEditorDefinition
+  SurveyQuestionEditorDefinition,
+  ISurveyCreatorOptions,
+  IPropertyGridEditor,
+  PropertyGridEditorCollection
 } from "@survey/creator";
 
 //Obsolete
