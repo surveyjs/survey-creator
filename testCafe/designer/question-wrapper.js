@@ -141,9 +141,9 @@ test("Single input question wrapper action duplicate", async (t) => {
     const questions = Selector(".svc-question__content");
 
     await t.expect(questions.count).eql(2);
-    var title1 = await questions.nth(0).find(".sv-question__title").innerText;
+    var title1 = await questions.nth(0).find(".sd-question__title").innerText;
     await t.expect(title1.replace("\xa0", " ")).eql("1. question1");
-    var title2 = await questions.nth(1).find(".sv-question__title").innerText;
+    var title2 = await questions.nth(1).find(".sd-question__title").innerText;
     await t.expect(title2.replace("\xa0", " ")).eql("2. question2");
     await t
         .expect(questions.nth(0).hasClass("svc-question__content--selected"))
@@ -181,7 +181,7 @@ test("Single input question wrapper action change require", async (t) => {
         .find('button[title="Is required?"]');
     await t.expect(requiredActionButton.visible).ok();
 
-    const questionTitle = Selector(`.sv-question__title`);
+    const questionTitle = Selector(`.sd-question__title`);
     var title = await questionTitle.innerText;
     await t.expect(title.replace("\xa0", " ")).eql("1. question1");
     await t

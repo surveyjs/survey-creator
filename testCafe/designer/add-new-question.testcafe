@@ -251,7 +251,7 @@
                   {
                     "rawSelector": {
                       "type": "js-expr",
-                      "value": "Selector('.sv-title.sv-question__title span').withText('question1').visible"
+                      "value": "Selector('.sv-title.sd-question__title span').withText('question1').visible"
                     },
                     "ruleType": "$text$",
                     "ancestorRuleType": "class"
