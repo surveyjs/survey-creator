@@ -1301,7 +1301,7 @@ export class CreatorBase<T extends SurveyModel>
     this.isAutoSave && this.doAutoSave();
   }
 
-  protected convertCurrentObject(obj: Survey.Question, className: string) {
+  protected convertQuestion(obj: Survey.Question, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
     this.setModified({
       type: "QUESTION_CONVERTED",
@@ -2009,10 +2009,10 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   startUndoRedoTransaction() {
-    //TODO
+    this.undoRedoManager.startTransaction("");
   }
   stopUndoRedoTransaction() {
-    //TODO
+    this.undoRedoManager.stopTransaction();
   }
   /**
    * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
@@ -2072,6 +2072,14 @@ export class CreatorBase<T extends SurveyModel>
     //TODO
     //this.koShowSaveButton(value != null && !this.isAutoSave);
   }
+  public convertCurrentQuestion(newType: string) {
+    var el = this.selectedElement;
+    if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
+    this.undoRedoManager.startTransaction("Convert question");
+    el = this.convertQuestion(<Survey.Question>el, newType);
+    this.selectElement(el);
+    this.undoRedoManager.stopTransaction();
+  }
 
   public getContextActions(
     element: any /*ISurveyElement*/
@@ -2112,7 +2120,7 @@ export class CreatorBase<T extends SurveyModel>
                 id: type.value
               })),
               (item: any) => {
-                this.selectElement(this.convertCurrentObject(element, item.id));
+                this.convertCurrentQuestion(item.id);
               },
               false
             )
