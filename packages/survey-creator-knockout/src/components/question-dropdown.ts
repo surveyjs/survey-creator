@@ -29,7 +29,7 @@ ko.components.register("svc-dropdown-question", {
       const creator = params.componentData;
       const question = params.templateData.data;
 
-      const markup = componentInfo.element.nextSibling.querySelector(
+      const markup = componentInfo.element.parentElement.querySelector(
         ".svc-question__content"
       );
       if (markup) {
