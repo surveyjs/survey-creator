@@ -1,0 +1,19 @@
+.sd-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: calcSize(1) calcSize(2) calcSize(3);
+}
+.sd-page__title {
+  position: static;
+  font-size: calcSize(3);
+  line-height: calcSize(4);
+  margin: calcSize(0.5) 0px;
+}
+.sd-page__description {
+  position: static;
+  font-size: calcSize(2);
+  line-height: calcSize(3);
+  margin: calcSize(0.5) 0px;
+}

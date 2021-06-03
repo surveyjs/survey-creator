@@ -178,7 +178,7 @@ export class DragDropHelper extends Base {
     // let scrollableParentElement = getScrollableParent(dropZoneElement)
     //   .parentNode;
     let scrollableParentElement = document.querySelector(
-      ".svc-tab-designer.sv-root-modern"
+      ".svc-tab-designer.sd-root-modern"
     );
 
     let top = scrollableParentElement.getBoundingClientRect().top;

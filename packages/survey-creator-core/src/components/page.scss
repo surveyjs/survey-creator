@@ -6,24 +6,10 @@ svc-page {
 
 .svc-page__content {
   position: relative;
-  padding-top: calcSize(4);
-  padding-bottom: calcSize(4);
-  border: 1px solid transparent;
-
-  .sv-page__title {
-    margin-left: 3em;
-  }
-  .sv-page__description {
-    padding-left: 7em;
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-  .svc-page__content .sv-body__page,
-  .sv-body__footer {
-    margin-right: 0;
-    margin-left: 0;
-  }
+  padding: calcSize(4);
+  border: 2px solid transparent;
+  width: 100%;
+  max-width: calcSize(102);
 }
 
 .svc-page__content-actions {
@@ -34,12 +20,14 @@ svc-page {
 }
 
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-  border: 1px solid $secondary;
+  border: 2px solid $secondary;
 }
 
 .svc-page__content--selected,
 .svc-hovered.svc-page__content--selected {
   border: 2px solid $secondary;
+  background: rgba(255, 152, 20, 0.1);
+  border-radius: 4px;
   .svc-page__content-actions {
     display: block;
   }

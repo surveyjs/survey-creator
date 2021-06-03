@@ -36,6 +36,7 @@ import { TabTestPlugin } from "./components/tabs/test";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation";
 import { TabLogicPlugin } from "./components/tabs/logic-ui";
+import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
 import { TabDesignerPlugin } from "./entries";
 
 export interface ICreatorOptions {
@@ -1008,7 +1009,8 @@ export class CreatorBase<T extends SurveyModel>
   private existingPages: {};
   protected initSurveyWithJSON(json: any, clearState: boolean) {
     this.existingPages = {};
-    var survey = this.createSurvey({});
+    const survey = this.createSurvey({});
+    survey.css = surveyDesignerCss;
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);

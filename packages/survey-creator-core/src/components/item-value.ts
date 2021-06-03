@@ -1,3 +1,4 @@
+import { ModuleWithComponentFactories } from "@angular/core";
 import {
   Base,
   ItemValue,
@@ -16,6 +17,7 @@ import "./item-value.scss";
 
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
+  @property({ defaultValue: false }) isDragging: boolean;
   constructor(
     protected creator: CreatorBase<SurveyModel>,
     public question: QuestionSelectBase,
@@ -78,7 +80,6 @@ export class ItemValueWrapperViewModel extends Base {
     }
     this.isNew = !model.question["isItemInList"](model.item);
   }
-
   @property({ defaultValue: null }) ghostPosition: string;
   private handleDragDropHelperChanges = (sender, options) => {
     if (options.name === "isBottom") {

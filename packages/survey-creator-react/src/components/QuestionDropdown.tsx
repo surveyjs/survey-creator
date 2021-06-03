@@ -7,6 +7,7 @@ import {
   ReactElementFactory,
   SurveyElementBase,
   SurveyQuestion,
+  SurveyQuestionRadioItem
 } from "survey-react-ui";
 import { QuestionAdornerComponentProps } from "./Question";
 
@@ -54,12 +55,29 @@ export class QuestionDropdownAdornerComponent extends SurveyElementBase<
             {this.props.element}
 
             <div className="svc-question__dropdown-choices">
-                {(question.visibleChoices.map((item: ItemValue, index: number) => (
-                  <div className="svc-question__dropdown-choice" key={`editable_choice_${index}`}>
-                    {(question.survey["wrapItemValue"](SurveyElementBase.renderLocString(item.locText), question, item))}
+              {question.visibleChoices.map((item: ItemValue, index: number) => (
+                <div
+                  className="svc-question__dropdown-choice"
+                  key={`editable_choice_${index}`}
+                >
+                  {question.survey["wrapItemValue"](
+                    ReactElementFactory.Instance.createElement(
+                      "survey-radiogroup-item",
+                      {
+                        question: question,
+                        cssClasses: question.cssClasses,
+                        isDisplayMode: true,
+                        item: item,
+                        textStyle: question.textStyle,
+                        index: index,
+                        isChecked: question.value === item.value
+                      }
+                    ),
+                    question,
+                    item
+                  )}
                 </div>
-              )))}
-
+              ))}
             </div>
 
             <div className="svc-question__content-actions">
@@ -67,7 +85,7 @@ export class QuestionDropdownAdornerComponent extends SurveyElementBase<
             </div>
           </div>
         </div>
-      </React.Fragment >
+      </React.Fragment>
     );
   }
 }
