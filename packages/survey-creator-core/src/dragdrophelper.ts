@@ -100,7 +100,9 @@ export class DragDropHelper extends Base {
   private createDraggedElementShortcut() {
     const draggedElementShortcut = document.createElement("div");
     draggedElementShortcut.innerText =
-      this.draggedSurveyElement["title"] || this.draggedSurveyElement["text"];
+      this.draggedSurveyElement["title"] ||
+      this.draggedSurveyElement["text"] ||
+      this.draggedSurveyElement["name"];
     draggedElementShortcut.style.height = "40px";
     draggedElementShortcut.style.minWidth = "100px";
     draggedElementShortcut.style.borderRadius = "100px";
