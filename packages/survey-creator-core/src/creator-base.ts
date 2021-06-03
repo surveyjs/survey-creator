@@ -955,6 +955,9 @@ export class CreatorBase<T extends SurveyModel>
   private patchMetadata(): void {
     Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
     Serializer.findProperty("survey", "description").placeholder = "pe.surveyDescriptionPlaceholder";
+    const logoPosition: Survey.JsonObjectProperty = Serializer.findProperty("survey", "logoPosition");
+    logoPosition.defaultValue = "right";
+    logoPosition.isSerializable = false;
     Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
     Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
   }
