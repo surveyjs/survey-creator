@@ -190,7 +190,7 @@ test("Checkbox question inplace editor", async (t) => {
 
 test("Radiogroup question inplace editor", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
-    await t.click(Selector(`div[title=Radiogroup]`));
+    await t.hover(Selector(`div[title=Radiogroup]`));
     await t.click(Selector(`div[title=Radiogroup]`));
     await t
         .expect(

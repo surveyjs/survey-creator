@@ -11,8 +11,8 @@ svc-question {
 
 .svc-question__adorner {
   position: relative;
-  width: 100%;
   height: 100%;
+  padding: 0 5%;
 }
 .svc-question__content {
   position: relative;
@@ -21,6 +21,8 @@ svc-question {
   border-radius: 4px;
   box-sizing: border-box;
   border: 1px solid transparent;
+  padding-left: calcSize(4);
+  padding-right: calcSize(4);
 }
 
 .svc-question__content > div {

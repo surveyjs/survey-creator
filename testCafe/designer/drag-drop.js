@@ -194,13 +194,13 @@ test("Drag Drop ItemValue (choices)", async (t) => {
     };
     await setJSON(json);
 
-    const Question1 = Selector(`[data-question-name="question1"]`);
+    const Question1 = Selector(`[name="question1"]`);
     const Item1 = Selector(`[data-svc-drop-target-item-value="item1"]`);
     const Item2 = Selector(`[data-svc-drop-target-item-value="item2"]`);
     const Item3 = Selector(`[data-svc-drop-target-item-value="item3"]`);
     const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
 
-    await t.click(Question1);
+    await t.click(Question1, { speed: 0.5 });
 
     await t.hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2);
 
