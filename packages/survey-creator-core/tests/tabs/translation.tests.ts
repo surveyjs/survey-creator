@@ -11,8 +11,7 @@ import {
   TranslationItem,
   TabTranslationPlugin
 } from "../../src/components/tabs/translation";
-import { CreatorBase, ICreatorOptions } from "../../src/creator-base";
-import { CreatorTester } from "../creator-base.tests";
+import { CreatorTester } from "../creator-tester";
 
 test("Fire callback on base objects creation", () => {
   var survey = new SurveyModel();
