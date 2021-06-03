@@ -467,7 +467,9 @@ export class DragDropHelper extends Base {
       this.isBottom,
       this.isEdge
     );
+    this.creator.undoRedoManager.startTransaction("drag drop");
     const newElement = this.pageOrPanel.dragDropFinish();
+    this.creator.undoRedoManager.stopTransaction();
 
     this.creator.selectElement(newElement);
   }
