@@ -121,7 +121,6 @@ export class DesignerSurveyNavigationBlock extends React.Component<any, any> {
     });
   };
   componentWillUnmount() {
-    super.componentWillUnmount();
     if (this.survey) {
       this.survey.onPropertyChanged.remove(this.onPropChangedHandler);
     }
