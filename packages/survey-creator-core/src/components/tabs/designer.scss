@@ -13,3 +13,12 @@ svc-tab-designer {
   height: 100%;
   overflow-y: auto;
 }
+
+.svc-tab-designer {
+  .sd-container-modern {
+    max-width: calc(102 * var(--base-unit, 8px));
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
