@@ -6,10 +6,18 @@ export class LogoImageViewModel extends Base {
   @property() isLogoImageChoosen: boolean;
   constructor(private creator: CreatorBase<SurveyModel>, public root: HTMLDivElement) {
     super();
+    creator.onPropertyValueChanging.add((_, options) => {
+      if (options.propertyName === "logo") {
+        this.updateIsLogoImageChoosen(options.newValue);
+      }
+    });
     this.updateIsLogoImageChoosen();
   }
-  private updateIsLogoImageChoosen(): void {
-    this.isLogoImageChoosen = !!this.creator.survey.logo;
+  private updateIsLogoImageChoosen(value?: string): void {
+    if (typeof value === "undefined") {
+      value = this.creator.survey.logo;
+    }
+    this.isLogoImageChoosen = !!value;
   }
   public chooseFile(model: LogoImageViewModel) {
     const fileInput: HTMLInputElement =

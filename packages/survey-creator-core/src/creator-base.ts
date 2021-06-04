@@ -958,6 +958,7 @@ export class CreatorBase<T extends SurveyModel>
     const logoPosition: Survey.JsonObjectProperty = Serializer.findProperty("survey", "logoPosition");
     logoPosition.defaultValue = "right";
     logoPosition.isSerializable = false;
+    logoPosition.visible = false;
     Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
     Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
   }
