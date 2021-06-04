@@ -19,15 +19,22 @@ export class LogoImageViewModel extends Base {
     }
     this.isLogoImageChoosen = !!value;
   }
+  private uploadFile(model: LogoImageViewModel, fileInput: HTMLInputElement, files: File[]) {
+    model.creator.uploadFiles(files, (_, link) => {
+      model.creator.survey.logo = link;
+      model.updateIsLogoImageChoosen();
+      fileInput.value = "";
+    });
+  }
   public chooseFile(model: LogoImageViewModel) {
     const fileInput: HTMLInputElement =
       <HTMLInputElement>model.root.getElementsByClassName("svc-choose-file-input")[0];
-    model.creator.chooseFiles(fileInput, (files: File[]) => {
-      model.creator.uploadFiles(files, (_, link) => {
-        model.creator.survey.logo = link;
-        model.updateIsLogoImageChoosen();
+    if (fileInput.files.length === 0) {
+      model.creator.chooseFiles(fileInput, (files: File[]) => {
+        model.uploadFile(model, fileInput, files);
       });
-    });
+    }
+    else model.uploadFile(model, fileInput, [fileInput.files[0]]);
   }
   public remove(model: LogoImageViewModel) {
     model.creator.survey.logo = "";
