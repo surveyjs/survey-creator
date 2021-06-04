@@ -406,8 +406,8 @@ export class DragDropHelper extends Base {
     if (!draggedOverNode) return null;
 
     let dropTargetHTMLElement =
-      draggedOverNode.closest(selector) ||
-      draggedOverNode.querySelector(selector);
+      draggedOverNode.querySelector(selector) ||
+      draggedOverNode.closest(selector);
 
     return <HTMLElement>dropTargetHTMLElement;
   }
