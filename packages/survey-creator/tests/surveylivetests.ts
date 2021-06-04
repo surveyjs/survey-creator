@@ -212,6 +212,13 @@ QUnit.test(
       "auto:There are two language"
     );
     assert.equal(test.koLanguages().length, 2, "auto:There are two languages");
+    assert.equal(test.koLanguages()[0].value, "en", "First locale is en");
+    assert.equal(test.koLanguages()[1].value, "de", "Second locale is de");
+    assert.equal(
+      test.koLanguages()[1].text,
+      "deutsch",
+      "Second locale text is deutsch"
+    );
 
     creator.showDefaultLanguageInTestSurveyTab = true;
     test = getLiveSurveyByCreator(creator);
