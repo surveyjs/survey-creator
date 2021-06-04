@@ -54,6 +54,10 @@ export interface ITabbedMenuItem extends IActionBarItem {
   componentContent: string;
 }
 
+export class CreatorToolbarItems extends Base {
+  @propertyArray() items: Array<IActionBarItem>;
+}
+
 /**
  * Base class for Survey Creator.
  */
@@ -102,6 +106,7 @@ export class CreatorBase<T extends SurveyModel>
   @property({ defaultValue: true }) generateValidJSON: boolean;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
+  private toolbarItemsValue: CreatorToolbarItems;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -113,7 +118,13 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   @property() surveyValue: T;
-  @propertyArray() toolbarItems: Array<IActionBarItem>;
+
+  public get toolbarItems(): Array<IActionBarItem> {
+    return this.toolbarItemsValue.items;
+  }
+  public get toolbarItemsWrapper(): CreatorToolbarItems {
+    return this.toolbarItemsValue;
+  }
   public dragDropHelper: DragDropHelper;
 
   private selectedElementValue: Base;
@@ -710,6 +721,7 @@ export class CreatorBase<T extends SurveyModel>
         "Creator constructor has one parameter, as creator options, in V2."
       );
     }
+    this.toolbarItemsValue = new CreatorToolbarItems();
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistoryController(this);
     this.setOptions(this.options);
@@ -850,7 +862,7 @@ export class CreatorBase<T extends SurveyModel>
         this.plugins[key].createActions(items);
       }
     }
-    this.toolbarItems = items;
+    this.toolbarItemsValue.items = items;
   }
 
   public getOptions() {
