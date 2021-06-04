@@ -31,4 +31,7 @@
 
 .svc-question__content--selected-no-border {
   margin: 0 100px;
+  width: calc(100% - 200px);
+  margin: 0 100px;
+  min-width: 560px;
 }
