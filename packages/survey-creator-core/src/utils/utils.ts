@@ -23,7 +23,7 @@ const opositeValues = {
   YES: "NO",
   no: "yes",
   No: "Yes",
-  NO: "YES",
+  NO: "YES"
 };
 function getOpositValue(str: string): string {
   if (!!opositeValues[str]) return opositeValues[str];
@@ -195,6 +195,6 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement) {
     }
     e[processedFlagName] = true;
   } else {
-    element.className = element.className.replace(/\b svc-hovered\b/g, "");
+    element.className = element.className.replace(" svc-hovered", "");
   }
 }
