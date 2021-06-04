@@ -2194,16 +2194,10 @@ export class CreatorBase<T extends SurveyModel>
       });
     }
 
-    if (items.length > 0) {
-      items.push({
-        id: "sep-" + items.length,
-        component: "sv-action-bar-separator"
-      });
-    }
-
     if (opts.allowDelete === undefined || opts.allowDelete) {
       items.push({
         id: "delete",
+        needSeparator: items.length > 0,
         title: this.getLocString("pe.delete"),
         action: () => {
           this.deleteObject(element);

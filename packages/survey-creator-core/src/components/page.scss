@@ -8,8 +8,8 @@ svc-page {
   position: relative;
   padding: calcSize(4);
   border: 2px solid transparent;
+  box-sizing: border-box;
   width: 100%;
-  max-width: calcSize(102);
 }
 
 .svc-page__content-actions {
