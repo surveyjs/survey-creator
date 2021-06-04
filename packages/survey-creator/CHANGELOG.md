@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.50](https://github.com/surveyjs/survey-creator/compare/v1.8.49...v1.8.50) (2021-06-04)
+
+
+### Bug Fixes
+
+* V2: Toolbox is not reactive in react version [#1279](https://github.com/surveyjs/survey-creator/issues/1279) ([#1280](https://github.com/surveyjs/survey-creator/issues/1280)) ([a6e726b](https://github.com/surveyjs/survey-creator/commit/a6e726bfda5d1be84e0584d3fcefe0d1de5151f3))
+* V2: Undo/Redo for question type converting [#1273](https://github.com/surveyjs/survey-creator/issues/1273) ([#1274](https://github.com/surveyjs/survey-creator/issues/1274)) ([2578b6f](https://github.com/surveyjs/survey-creator/commit/2578b6f1120c4c98fc43b4ca278d48143fb40ab7))
+
 ### [1.8.49](https://github.com/surveyjs/survey-creator/compare/v1.8.48...v1.8.49) (2021-05-26)
 
 
