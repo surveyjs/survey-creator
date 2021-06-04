@@ -23,11 +23,38 @@ import {
   SurveyElementBase,
   SurveyLocStringViewer
 } from "survey-react-ui";
-import { ICreatorOptions, CreatorBase, ITabbedMenuItem } from "@survey/creator";
+import {
+  ICreatorOptions,
+  CreatorBase,
+  ITabbedMenuItem,
+  CreatorToolbarItems
+} from "@survey/creator";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import { editableStringRendererName } from "./components/StringEditor";
 
 StylesManager.applyTheme("modern");
+
+interface ISurveyCreatorToolBarItemsComponentProps {
+  toolbar: CreatorToolbarItems;
+}
+
+export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
+  ISurveyCreatorToolBarItemsComponentProps,
+  any
+> {
+  constructor(props: ISurveyCreatorComponentProps) {
+    super(props);
+  }
+  get toolbar(): CreatorToolbarItems {
+    return this.props.toolbar;
+  }
+  protected getStateElement(): Base {
+    return this.props.toolbar;
+  }
+  protected renderElement(): JSX.Element {
+    return <SurveyActionBar items={this.toolbar.items}></SurveyActionBar>;
+  }
+}
 
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;
@@ -55,7 +82,9 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         <div className="svc-creator__area svc-flex-column">
           <div className="svc-top-bar">
             <TabbedMenuComponent items={creator.tabs}></TabbedMenuComponent>
-            <SurveyActionBar items={creator.toolbarItems}></SurveyActionBar>
+            <SurveyCreatorToolBarItemsComponent
+              toolbar={creator.toolbarItemsWrapper}
+            ></SurveyCreatorToolBarItemsComponent>
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">
             <div className="svc-creator__content-holder svc-flex-column">

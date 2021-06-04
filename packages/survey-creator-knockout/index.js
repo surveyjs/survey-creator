@@ -12865,4 +12865,13 @@ if (!window["%hammerhead%"]) {
     counter++;
   }
   window.creator.JSON = json3;
+  creator.toolbarItems.push({
+    id: "toolboxCustomization",
+    visible: true,
+    title: "Toolbox Customization",
+    enabled: true,
+    action: function () {
+      alert("Hi!");
+    }
+  });
 }
