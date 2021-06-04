@@ -1,9 +1,14 @@
 .sd-row {
+  display: flex;
+  flex-direction: row;
   width: 100%;
+  box-sizing: border-box;
 }
 .sd-row {
   margin-top: 16px;
 }
+.sd-row__panel,
 .sd-row__question {
+  box-sizing: border-box;
   width: 100%;
 }
