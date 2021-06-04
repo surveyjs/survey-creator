@@ -114,7 +114,7 @@ test("Drag Drop to Panel", async (t) => {
     await t.dragToElement(RatingToolboxItem, Panel, {
         offsetX: 5,
         offsetY: 5,
-        destinationOffsetY: -120,
+        destinationOffsetY: -250,
         speed: 0.5
     });
 
@@ -122,7 +122,7 @@ test("Drag Drop to Panel", async (t) => {
     await t.dragToElement(RatingToolboxItem, Panel, {
         offsetX: 5,
         offsetY: 5,
-        destinationOffsetY: 120,
+        destinationOffsetY: 250,
         speed: 0.5
     });
 
