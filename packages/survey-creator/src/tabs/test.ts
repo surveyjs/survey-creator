@@ -252,7 +252,7 @@ export class SurveyLiveTester {
         : Survey.surveyLocalization.getLocales();
     for (var i = 0; i < locales.length; i++) {
       var loc = locales[i];
-      res.push({ value: loc, text: this.getLocString(loc) });
+      res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
     }
     return res;
   }
@@ -279,7 +279,7 @@ ko.components.register("survey-tester", {
 
       // Test tab updater implicitly depending on observable survey and view type
       var updateTestTab = (json: any) => {
-        if(creator.koViewType() !== "test") {
+        if (creator.koViewType() !== "test") {
           return;
         }
         var options = {
@@ -292,10 +292,10 @@ ko.components.register("survey-tester", {
         };
         model.setJSON(json);
         model.show(options);
-    }
+      };
 
       var subscr = creator.koViewType.subscribe((viewType: string) => {
-        if(viewType === "test") {
+        if (viewType === "test") {
           updateTestTab(creator.JSON);
         }
       });
