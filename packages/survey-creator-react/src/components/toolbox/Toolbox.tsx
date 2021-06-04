@@ -166,6 +166,7 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
           " item"
         }
         onPointerDown={(event: any) => {
+          event.persist();
           this.model.onPointerDown(event);
         }}
       >
