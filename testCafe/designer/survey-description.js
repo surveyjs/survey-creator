@@ -1,6 +1,6 @@
 import { url } from '../helper';
 import { ClientFunction, Selector } from 'testcafe';
-const title = 'Survey Description Placeholder';
+const title = 'Survey Description';
 
 fixture`${title}`.page`${url}`.beforeEach(
     async (t) => {

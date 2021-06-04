@@ -371,8 +371,7 @@ test('Image picker question inplace editor', async (t) => {
     await t.expect(items.nth(4).find('.svc-image-item-value-controls__remove').visible).notOk();
     await t.expect(items.nth(4).find('img').exists).notOk();
 
-    await t.setFilesToUpload(items.nth(4).find('.svc-choose-file-input'), ["./image.jpg"]);
-
+    await t.setFilesToUpload(items.nth(4).find('.svc-choose-file-input'), "./image.jpg");
 });
 
 test('Image question inplace editor', async (t) => {

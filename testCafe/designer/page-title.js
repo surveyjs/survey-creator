@@ -1,12 +1,12 @@
 import { url } from '../helper';
 import { ClientFunction, Selector } from 'testcafe';
-const title = 'Page Title Placeholder';
+const title = 'Page Title';
 
 const json = {
     questions: [
         {
             type: 'text',
-            name: 'page_title_placeholder'
+            name: 'page_title'
         }
     ]
 };
