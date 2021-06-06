@@ -167,9 +167,9 @@ export class DragDropHelper extends Base {
     }
 
     this.draggedElementShortcut.style.left =
-      event.clientX - shortcutXCenter + "px";
+      event.pageX - shortcutXCenter + "px";
     this.draggedElementShortcut.style.top =
-      event.clientY - shortcutYCenter + "px";
+      event.pageY - shortcutYCenter + "px";
   }
 
   private doScroll(clientY, clientX) {
