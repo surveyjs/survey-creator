@@ -327,7 +327,7 @@ export class TestSurveyTabViewModel extends Base {
         editorLocalization.getLocaleName(
           !!this.survey.locale
             ? this.survey.locale
-            : SurveySettings.defaultLocaleName
+            : surveyLocalization.defaultLocale
         ),
       visible: this.showDefaultLanguageInTestSurveyTab,
       component: "sv-action-bar-item-dropdown",
