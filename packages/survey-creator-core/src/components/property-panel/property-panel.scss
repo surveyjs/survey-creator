@@ -14,7 +14,8 @@ svc-property-panel,
   box-shadow: inset 0px -2px 0px $primary;
   text-align: right;
   line-height: calcSize(3);
-  padding: 20px calcSize(3);
+  padding: calcSize(1) calcSize(3);
+  display: flex;
 }
 
 .svc-property-panel__expander {
@@ -71,4 +72,21 @@ svc-property-panel,
   box-sizing: border-box;
   background: $background-dim;
   box-shadow: inset 0px -1px 0px $border;
+}
+
+.svc-property-panel__title {
+    display: flex;
+    line-height: 36px;  
+    flex-grow: 1;
+    justify-content: flex-end;    
+}
+
+.svc-property-panel__actions {
+    width: 130px;
+    margin-left: initial;
+    flex-grow: 0;
+    padding: 0;
+    .sv-action-bar {
+      padding: 0;
+    }
 }
