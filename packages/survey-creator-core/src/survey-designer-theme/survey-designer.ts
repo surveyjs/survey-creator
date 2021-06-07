@@ -235,7 +235,7 @@ export var surveyDesignerCss = {
     minText: "sd-rating__item-text sd-rating__min-text",
     itemText: "sd-rating__item-text",
     maxText: "sd-rating__item-text sd-rating__max-text",
-    disabled: "sd-rating--disabled"
+    disabled: "sd-rating__item--disabled"
   },
   comment: {
     root: "sd-comment",
