@@ -49,6 +49,12 @@
   width: 16px;
   height: 16px;
 }
+//for knockout
+sv-svg-icon.svc-item-value-controls__button {
+  width: 16px;
+  height: 16px;
+  box-sizing: content-box;
+}
 
 .svc-item-value-controls__drag {
   padding: calcSize(1) calcSize(1.5);

@@ -2,7 +2,8 @@ import {
   CreatorBase,
   editorLocalization,
   getLocString,
-  IQuestionToolboxItem
+  IQuestionToolboxItem,
+  QuestionToolbox
 } from "@survey/creator";
 import React, { CSSProperties } from "react";
 import { ToolboxItemViewModel } from "@survey/creator";
@@ -19,9 +20,8 @@ import {
   SvgIcon
 } from "survey-react-ui";
 interface ISurveyCreatorToolboxProps {
-  categories: Array<any>;
+  toolbox: QuestionToolbox;
   creator: CreatorBase<SurveyModel>;
-  items: Array<IQuestionToolboxItem>;
 }
 
 export class SurveyCreatorToolbox extends SurveyElementBase<
@@ -37,12 +37,6 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
 
     this.adaptiveElement.dotsItemPopupModel.horizontalPosition = "right";
     this.adaptiveElement.dotsItemPopupModel.verticalPosition = "top";
-    const sourceItems: Array<IQuestionToolboxItem> = this.props.items;
-    this.adaptiveElement.items = sourceItems.map(
-      (item: IQuestionToolboxItem, itemIndex: number) => {
-        return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
-      }
-    );
     this.adaptiveElement.invisibleItemSelected = this.invisibleItemSelected.bind(
       this
     );
@@ -50,6 +44,9 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
   public get creator() {
     return this.props.creator;
+  }
+  public get toolbox() {
+    return this.props.toolbox;
   }
   private invisibleItemSelected(model: AdaptiveActionBarItemWrapper): void {
     this.creator.clickToolboxItem(
@@ -78,9 +75,15 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
 
   protected getStateElement(): Base {
-    return this.adaptiveElement;
+    return this.toolbox;
   }
   render(): JSX.Element {
+    const sourceItems: Array<IQuestionToolboxItem> = this.props.toolbox.items;
+    this.adaptiveElement.items = sourceItems.map(
+      (item: IQuestionToolboxItem, itemIndex: number) => {
+        return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
+      }
+    );
     if (!this.hasItems) return null;
     const items = this.renderItems();
     return (
@@ -163,6 +166,7 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
           " item"
         }
         onPointerDown={(event: any) => {
+          event.persist();
           this.model.onPointerDown(event);
         }}
       >

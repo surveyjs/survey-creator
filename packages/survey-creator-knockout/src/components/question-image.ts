@@ -7,7 +7,12 @@ import {
   QuestionImageModel
 } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { CreatorBase, QuestionAdornerViewModel, QuestionImageAdornerViewModel, toggleHovered } from "@survey/creator";
+import {
+  CreatorBase,
+  QuestionAdornerViewModel,
+  QuestionImageAdornerViewModel,
+  toggleHovered
+} from "@survey/creator";
 import { KnockoutMouseEvent } from "../events";
 
 // import "./question-image.scss";
@@ -37,16 +42,12 @@ export class KnockoutQuestionImageAdornerViewModel extends QuestionImageAdornerV
 
 ko.components.register("svc-image-question", {
   viewModel: {
-    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
+    createViewModel: (
+      params: SurveyTemplateRendererViewModel,
+      componentInfo: any
+    ) => {
       const creator = params.componentData;
       const question = params.templateData.data;
-
-      const markup = componentInfo.element.nextSibling.querySelector(
-        ".svc-question__content"
-      );
-      if (markup) {
-        markup.dataset.questionName = question.name;
-      }
 
       const scrollSubscription = ko.computed(() => {
         if (creator.isElementSelected(question)) {
@@ -65,7 +66,7 @@ ko.components.register("svc-image-question", {
         model.dispose();
       });
       return model;
-    },
+    }
   },
-  template: template,
+  template: template
 });

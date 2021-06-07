@@ -1087,6 +1087,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   ): boolean {
     if (
       !this.canRenderAsButtonGroup ||
+      !choices ||
       choices.length == 0 ||
       choices.length > 4
     )
@@ -1166,6 +1167,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     prop: JsonObjectProperty,
     choices: Array<any>
   ): any {
+    if (!choices) return null;
     for (var i = 0; i < choices.length; i++) {
       var item = choices[i];
       var value = item.value !== undefined ? item.value : item;

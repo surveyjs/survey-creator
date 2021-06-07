@@ -75,9 +75,8 @@ export class TabDesignerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <SurveyCreatorToolbox
-          categories={creator.toolboxCategories}
+          toolbox={creator.toolbox}
           creator={creator}
-          items={creator.toolbox.items}
         ></SurveyCreatorToolbox>
         <div className={className}>
           <div className={survey.css.container}>
