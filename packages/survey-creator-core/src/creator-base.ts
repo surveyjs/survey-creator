@@ -54,6 +54,10 @@ export interface ITabbedMenuItem extends IActionBarItem {
   componentContent: string;
 }
 
+export class CreatorToolbarItems extends Base {
+  @propertyArray() items: Array<IActionBarItem>;
+}
+
 /**
  * Base class for Survey Creator.
  */
@@ -102,6 +106,7 @@ export class CreatorBase<T extends SurveyModel>
   @property({ defaultValue: true }) generateValidJSON: boolean;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
+  private toolbarItemsValue: CreatorToolbarItems;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -113,7 +118,13 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   @property() surveyValue: T;
-  @propertyArray() toolbarItems: Array<IActionBarItem>;
+
+  public get toolbarItems(): Array<IActionBarItem> {
+    return this.toolbarItemsValue.items;
+  }
+  public get toolbarItemsWrapper(): CreatorToolbarItems {
+    return this.toolbarItemsValue;
+  }
   public dragDropHelper: DragDropHelper;
 
   private selectedElementValue: Base;
@@ -710,6 +721,7 @@ export class CreatorBase<T extends SurveyModel>
         "Creator constructor has one parameter, as creator options, in V2."
       );
     }
+    this.toolbarItemsValue = new CreatorToolbarItems();
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistoryController(this);
     this.setOptions(this.options);
@@ -850,7 +862,7 @@ export class CreatorBase<T extends SurveyModel>
         this.plugins[key].createActions(items);
       }
     }
-    this.toolbarItems = items;
+    this.toolbarItemsValue.items = items;
   }
 
   public getOptions() {
@@ -1301,7 +1313,7 @@ export class CreatorBase<T extends SurveyModel>
     this.isAutoSave && this.doAutoSave();
   }
 
-  protected convertCurrentObject(obj: Survey.Question, className: string) {
+  protected convertQuestion(obj: Survey.Question, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
     this.setModified({
       type: "QUESTION_CONVERTED",
@@ -2009,10 +2021,10 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   startUndoRedoTransaction() {
-    //TODO
+    this.undoRedoManager.startTransaction("");
   }
   stopUndoRedoTransaction() {
-    //TODO
+    this.undoRedoManager.stopTransaction();
   }
   /**
    * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
@@ -2072,6 +2084,14 @@ export class CreatorBase<T extends SurveyModel>
     //TODO
     //this.koShowSaveButton(value != null && !this.isAutoSave);
   }
+  public convertCurrentQuestion(newType: string) {
+    var el = this.selectedElement;
+    if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
+    this.undoRedoManager.startTransaction("Convert question");
+    el = this.convertQuestion(<Survey.Question>el, newType);
+    this.selectElement(el);
+    this.undoRedoManager.stopTransaction();
+  }
 
   public getContextActions(
     element: any /*ISurveyElement*/
@@ -2112,7 +2132,7 @@ export class CreatorBase<T extends SurveyModel>
                 id: type.value
               })),
               (item: any) => {
-                this.selectElement(this.convertCurrentObject(element, item.id));
+                this.convertCurrentQuestion(item.id);
               },
               false
             )

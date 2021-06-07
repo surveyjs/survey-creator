@@ -212,6 +212,13 @@ QUnit.test(
       "auto:There are two language"
     );
     assert.equal(test.koLanguages().length, 2, "auto:There are two languages");
+    assert.equal(test.koLanguages()[0].value, "en", "First locale is en");
+    assert.equal(test.koLanguages()[1].value, "de", "Second locale is de");
+    assert.equal(
+      test.koLanguages()[1].text,
+      "deutsch",
+      "Second locale text is deutsch"
+    );
 
     creator.showDefaultLanguageInTestSurveyTab = true;
     test = getLiveSurveyByCreator(creator);
@@ -238,5 +245,29 @@ QUnit.test(
       "all: Show languages"
     );
     assert.ok(test.koLanguages().length > 10, "all: Show all languages");
+  }
+);
+QUnit.test(
+  "showDefaultLanguageInTestSurveyTab: auto, true, false, all",
+  function (assert) {
+    var creator = new SurveyCreator();
+    creator.JSON = {
+      questions: [
+        {
+          type: "text",
+          name: "q1",
+        },
+      ],
+    };
+    creator.survey.locale = "de";
+    creator.survey.title = "de";
+    creator.survey.locale = "";
+    creator.survey.title = "en";
+    creator.makeNewViewActive("test");
+    assert.equal(
+      creator.surveyLiveTester.koActiveLanguage(),
+      "",
+      "The active language is default"
+    );
   }
 );

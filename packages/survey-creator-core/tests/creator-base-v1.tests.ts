@@ -17,7 +17,7 @@ import {
   EmptySurveyCreatorOptions
 } from "../src/settings";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
-import { CreatorTester } from "./creator-base.tests";
+import { CreatorTester } from "./creator-tester";
 
 function getSurveyJson(): any {
   return {

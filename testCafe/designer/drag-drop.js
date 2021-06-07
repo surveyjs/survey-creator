@@ -114,7 +114,7 @@ test("Drag Drop to Panel", async (t) => {
     await t.dragToElement(RatingToolboxItem, Panel, {
         offsetX: 5,
         offsetY: 5,
-        destinationOffsetY: -120,
+        destinationOffsetY: -250,
         speed: 0.5
     });
 
@@ -122,7 +122,7 @@ test("Drag Drop to Panel", async (t) => {
     await t.dragToElement(RatingToolboxItem, Panel, {
         offsetX: 5,
         offsetY: 5,
-        destinationOffsetY: 120,
+        destinationOffsetY: 250,
         speed: 0.5
     });
 
@@ -209,7 +209,7 @@ test("Drag Drop ItemValue (choices)", async (t) => {
     await t.dragToElement(DragZoneItem2, Item1, {
         offsetX: 5,
         offsetY: 5,
-        destinationOffsetY: -50,
+        destinationOffsetY: -40,
         speed: 0.5
     });
     let value = await getItemValueByIndex("question1", 0);
@@ -218,7 +218,7 @@ test("Drag Drop ItemValue (choices)", async (t) => {
     await t.dragToElement(DragZoneItem2, Item3, {
         offsetX: 5,
         offsetY: 5,
-        destinationOffsetY: 20,
+        destinationOffsetY: 30,
         speed: 0.5
     });
     value = await getItemValueByIndex("question1", 2);

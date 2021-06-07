@@ -26,6 +26,7 @@ export * from "../components/question";
 export * from "../components/question-image";
 export * from "../components/item-value";
 export * from "../components/image-item-value";
+export * from "../components/matrix-cell";
 export * from "../components/simulator";
 export * from "../components/results";
 export * from "../json5";

@@ -75,9 +75,8 @@ export class TabDesignerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <SurveyCreatorToolbox
-          categories={creator.toolboxCategories}
+          toolbox={creator.toolbox}
           creator={creator}
-          items={creator.toolbox.items}
         ></SurveyCreatorToolbox>
         <div className={className}>
           <div className={survey.css.container}>
@@ -121,7 +120,6 @@ export class DesignerSurveyNavigationBlock extends React.Component<any, any> {
     });
   };
   componentWillUnmount() {
-    super.componentWillUnmount();
     if (this.survey) {
       this.survey.onPropertyChanged.remove(this.onPropChangedHandler);
     }

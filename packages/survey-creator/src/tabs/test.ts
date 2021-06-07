@@ -13,6 +13,7 @@ export { SurveyResultsModel } from "../components/results";
 
 export class SurveyLiveTester {
   private json: any;
+  private updatingLanguages: boolean;
   koIsRunning = ko.observable(true);
   selectTestClick: any;
   selectPageClick: any;
@@ -65,7 +66,7 @@ export class SurveyLiveTester {
     this.koLanguages = ko.observable(this.getLanguages());
     this.koActiveLanguage = ko.observable("");
     this.koActiveLanguage.subscribe(function (newValue) {
-      if (self.survey.locale == newValue) return;
+      if (self.updatingLanguages || self.survey.locale == newValue) return;
       self.survey.locale = newValue;
       self.koSurvey(self.survey);
     });
@@ -226,9 +227,11 @@ export class SurveyLiveTester {
       (opt === "auto" && this.survey.getUsedLocales().length > 1);
     this.koShowDefaultLanguageInTestSurveyTab(vis);
     if (vis) {
+      this.updatingLanguages = true;
       this.koLanguages(
         this.getLanguages(opt !== "all" ? this.survey.getUsedLocales() : null)
       );
+      this.updatingLanguages = false;
     }
   }
   private setActivePageItem(page: Survey.Page, val: boolean) {
@@ -252,7 +255,7 @@ export class SurveyLiveTester {
         : Survey.surveyLocalization.getLocales();
     for (var i = 0; i < locales.length; i++) {
       var loc = locales[i];
-      res.push({ value: loc, text: this.getLocString(loc) });
+      res.push({ value: loc, text: editorLocalization.getLocaleName(loc) });
     }
     return res;
   }
@@ -279,7 +282,7 @@ ko.components.register("survey-tester", {
 
       // Test tab updater implicitly depending on observable survey and view type
       var updateTestTab = (json: any) => {
-        if(creator.koViewType() !== "test") {
+        if (creator.koViewType() !== "test") {
           return;
         }
         var options = {
@@ -292,10 +295,10 @@ ko.components.register("survey-tester", {
         };
         model.setJSON(json);
         model.show(options);
-    }
+      };
 
       var subscr = creator.koViewType.subscribe((viewType: string) => {
-        if(viewType === "test") {
+        if (viewType === "test") {
           updateTestTab(creator.JSON);
         }
       });

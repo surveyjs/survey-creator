@@ -138,7 +138,7 @@ svc-question,
 .sd-panel {
   .svc-question__content {
     &:not(.svc-question__content--selected) {
-      border: 1px dashed #d6d6d6;
+      border: 1px dashed $border;
       box-shadow: none;
     }
     border-radius: 0;

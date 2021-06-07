@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { CSSProperties } from "react";
 
 import {
@@ -22,11 +23,38 @@ import {
   SurveyElementBase,
   SurveyLocStringViewer
 } from "survey-react-ui";
-import { ICreatorOptions, CreatorBase, ITabbedMenuItem } from "@survey/creator";
+import {
+  ICreatorOptions,
+  CreatorBase,
+  ITabbedMenuItem,
+  CreatorToolbarItems
+} from "@survey/creator";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import { editableStringRendererName } from "./components/StringEditor";
 
 StylesManager.applyTheme("modern");
+
+interface ISurveyCreatorToolBarItemsComponentProps {
+  toolbar: CreatorToolbarItems;
+}
+
+export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
+  ISurveyCreatorToolBarItemsComponentProps,
+  any
+> {
+  constructor(props: ISurveyCreatorComponentProps) {
+    super(props);
+  }
+  get toolbar(): CreatorToolbarItems {
+    return this.props.toolbar;
+  }
+  protected getStateElement(): Base {
+    return this.props.toolbar;
+  }
+  protected renderElement(): JSX.Element {
+    return <SurveyActionBar items={this.toolbar.items}></SurveyActionBar>;
+  }
+}
 
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;
@@ -54,7 +82,9 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         <div className="svc-creator__area svc-flex-column">
           <div className="svc-top-bar">
             <TabbedMenuComponent items={creator.tabs}></TabbedMenuComponent>
-            <SurveyActionBar items={creator.toolbarItems}></SurveyActionBar>
+            <SurveyCreatorToolBarItemsComponent
+              toolbar={creator.toolbarItemsWrapper}
+            ></SurveyCreatorToolBarItemsComponent>
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">
             <div className="svc-creator__content-holder svc-flex-column">
@@ -115,39 +145,46 @@ class DesignTimeSurveyModel extends Model {
       row
     };
   }
-  public getElementWrapperComponentName(element: SurveyElement): string {
-    if (element.isDesignMode) {
-      if (element instanceof Question) {
-        if (element.getType() == "dropdown") {
-          return "svc-dropdown-question";
-        }
-        if (element.getType() == "image") {
-          return "svc-image-question";
-        }
-        return "svc-question";
+  public getElementWrapperComponentName(element: any, reason?: string): string {
+    if (this.isDesignMode) {
+      if(reason === "cell" || reason === "column-header" || reason === "row-header") {
+        return "svc-matrix-cell";
       }
-      if (element instanceof PanelModel) {
-        return "svc-question";
+      if(!element["parentQuestionValue"]) {
+        if (element instanceof Question) {
+          if (element.getType() == "dropdown") {
+            return this.isPopupEditorContent ? "svc-cell-dropdown-question" : "svc-dropdown-question";
+          }
+          if (element.getType() == "image") {
+            return "svc-image-question";
+          }
+          return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
+        }
+        if (element instanceof PanelModel) {
+          return "svc-question";
+        }
       }
     }
     return super.getElementWrapperComponentName(element);
   }
-  public getElementWrapperComponentData(element: SurveyElement): any {
-    if (element.isDesignMode) {
-      if (element instanceof Question) {
-        return this.creator;
+  public getElementWrapperComponentData(element: any, reason?: string): any {
+    if (this.isDesignMode) {
+      if(reason === "cell" || reason === "column-header" || reason === "row-header") {
+        return { creator: this.creator, element: element, question: element.question, row: element.row, column: element.column };
       }
-      if (element instanceof PanelModel) {
-        return this.creator;
+      if(!element["parentQuestionValue"]) {
+        if (element instanceof Question) {
+          return this.creator;
+        }
+        if (element instanceof PanelModel) {
+          return this.creator;
+        }
       }
     }
     return super.getElementWrapperComponentData(element);
   }
-  public getItemValueWrapperComponentName(
-    item: ItemValue,
-    question: QuestionSelectBase
-  ): string {
-    if (!this.isDesignMode) {
+  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+    if(!this.isDesignMode || !!question["parentQuestionValue"]) {
       return SurveyModel.TemplateRendererComponentName;
     }
     if (question.getType() === "imagepicker") {
@@ -155,11 +192,8 @@ class DesignTimeSurveyModel extends Model {
     }
     return "svc-item-value";
   }
-  public getItemValueWrapperComponentData(
-    item: ItemValue,
-    question: QuestionSelectBase
-  ): any {
-    if (!this.isDesignMode) {
+  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
+    if(!this.isDesignMode || !!question["parentQuestionValue"]) {
       return item;
     }
     return {
@@ -168,7 +202,9 @@ class DesignTimeSurveyModel extends Model {
     };
   }
   public getRendererForString(element: Base, name: string): string {
-    if (this.isDesignMode) return editableStringRendererName;
+    if (this.isDesignMode && !element["parentQuestionValue"]) {
+      return editableStringRendererName;
+    }
     return undefined;
   }
 }
@@ -176,6 +212,20 @@ export class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
   }
+  public render(target: string | HTMLElement) {
+    let node: HTMLElement = target as HTMLElement;
+    if (typeof target === "string") {
+      node = document.getElementById(target);
+    }
+    ReactDOM.unmountComponentAtNode(node);
+    ReactDOM.render(
+      <React.StrictMode>
+        <SurveyCreatorComponent creator={this} />
+      </React.StrictMode>,
+      node
+    );
+  }
+
   protected createSurveyCore(json: any = {}): SurveyModel {
     return new DesignTimeSurveyModel(this, json);
   }
@@ -212,11 +262,4 @@ export class SurveyCreator extends CreatorBase<SurveyModel> {
   public questionErrorLocation(): string {
     return this.survey.questionErrorLocation;
   }
-}
-
-export function createSurveyCreator(json: any, options: any = null) {
-  if (!options) options = {};
-  const creator = new SurveyCreator(options);
-  creator.JSON = json;
-  return creator;
 }

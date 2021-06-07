@@ -136,14 +136,22 @@
         showTranslationTab: true,
         showEmbeddedSurveyTab: true
       };
-      const creator = SurveyCreator.createSurveyCreator(json, options);
-
+      const creator = new SurveyCreator.SurveyCreator(json, options);
       ReactDOM.render(
         <React.StrictMode>
           <SurveyCreator.SurveyCreatorComponent creator={creator} />
         </React.StrictMode>,
         document.getElementById("root")
       );
+      creator.toolbarItems.push({
+        id: "toolboxCustomization",
+        visible: true,
+        title: "Toolbox Customization",
+        enabled: true,
+        action: function () {
+          alert("Hi!");
+        }
+      });
     </script>
     <!--
       This HTML file is a template.

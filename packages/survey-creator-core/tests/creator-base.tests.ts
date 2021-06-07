@@ -16,36 +16,7 @@ import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
 import { SurveyHelper } from "../src/surveyHelper";
-
-export class CreatorTester extends CreatorBase<SurveyModel> {
-  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
-    super(options, options2);
-  }
-  protected createSurveyCore(json: any = {}): SurveyModel {
-    return new SurveyModel(json);
-  }
-  public get selectedElementName(): string {
-    if (!this.selectedElement) return "";
-    var name = this.selectedElement["name"];
-    if (!!name) return name;
-    return this.selectedElement.getType();
-  }
-  public getActionBarItem(id: string): IActionBarItem {
-    return this.getActionBarItemByActions(this.toolbarItems, id);
-  }
-  public getActionBarItemByActions(
-    actions: Array<IActionBarItem>,
-    id: string
-  ): IActionBarItem {
-    for (var i = 0; i < actions.length; i++) {
-      if (actions[i].id == id) return actions[i];
-    }
-    return null;
-  }
-  public doSaveFunc() {
-    this.doSave();
-  }
-}
+import { CreatorTester } from "./creator-tester";
 
 test("options.questionTypes", (): any => {
   var creator = new CreatorTester();
@@ -638,6 +609,7 @@ test("pageEditMode='single'", (): any => {
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
   expect(designerPlugin.model.newPage).toBeFalsy();
 
   Serializer.findProperty("survey", "pages").visible = true;
@@ -648,4 +620,18 @@ test("pageEditMode='single'", (): any => {
     Serializer.findProperty("question", "page").isVisible("")
   ).toBeTruthy();
   expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
+});
+test("Undo converting question type", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "question1", choices: [1, 2] }]
+  };
+  var q = creator.survey.getQuestionByName("question1");
+  creator.selectElement(q);
+  creator.convertCurrentQuestion("radiogroup");
+  var el = creator.selectedElement;
+  expect(el.getType()).toEqual("radiogroup");
+  creator.undo();
+  q = creator.survey.getQuestionByName("question1");
+  expect(q.getType()).toEqual("checkbox");
 });

@@ -100,16 +100,10 @@ export class DragDropHelper extends Base {
   private createDraggedElementShortcut() {
     const draggedElementShortcut = document.createElement("div");
     draggedElementShortcut.innerText =
-      this.draggedSurveyElement["title"] || this.draggedSurveyElement["text"];
-    draggedElementShortcut.style.height = "40px";
-    draggedElementShortcut.style.minWidth = "100px";
-    draggedElementShortcut.style.borderRadius = "100px";
-    draggedElementShortcut.style.backgroundColor = "white";
-    draggedElementShortcut.style.padding = "10px";
-
-    draggedElementShortcut.style.cursor = "grabbing";
-    draggedElementShortcut.style.position = "absolute";
-    draggedElementShortcut.style.zIndex = "1000";
+      this.draggedSurveyElement["title"] ||
+      this.draggedSurveyElement["text"] ||
+      this.draggedSurveyElement["name"];
+    draggedElementShortcut.className = "svc-drag-feedback";  
     return draggedElementShortcut;
   }
 
@@ -404,8 +398,8 @@ export class DragDropHelper extends Base {
     if (!draggedOverNode) return null;
 
     let dropTargetHTMLElement =
-      draggedOverNode.closest(selector) ||
-      draggedOverNode.querySelector(selector);
+      draggedOverNode.querySelector(selector) ||
+      draggedOverNode.closest(selector);
 
     return <HTMLElement>dropTargetHTMLElement;
   }
@@ -467,7 +461,9 @@ export class DragDropHelper extends Base {
       this.isBottom,
       this.isEdge
     );
+    this.creator.undoRedoManager.startTransaction("drag drop");
     const newElement = this.pageOrPanel.dragDropFinish();
+    this.creator.undoRedoManager.stopTransaction();
 
     this.creator.selectElement(newElement);
   }

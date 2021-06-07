@@ -4,8 +4,7 @@ import {
   PropertyGridEditorCollection
 } from "../../src/property-grid";
 import { PropertyGridViewModel } from "../../src/property-grid/property-grid-view-model";
-import { CreatorBase, ICreatorOptions } from "../../src/creator-base";
-import { CreatorTester } from "../creator-base.tests";
+import { CreatorTester } from "../creator-tester";
 
 test("Generate and update title correctly", () => {
   var survey = new SurveyModel({

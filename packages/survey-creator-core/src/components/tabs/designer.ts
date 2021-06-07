@@ -17,7 +17,6 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   public creator: CreatorBase<T>;
 
   private createNewPage() {
-    if (!this.survey || this.creator.pageEditMode === "single") return;
     const newPage: PageModel = this.survey.createNewPage("");
     this.creator.setNewNames(newPage);
     newPage.onFirstRendering();
@@ -27,7 +26,6 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     newPage["_addToSurvey"] = () => {
       newPage["_addToSurvey"] = undefined;
       this.survey.addPage(newPage);
-      //this.createNewPage();
     };
     this.newPage = newPage;
     DragDropHelper.newGhostPage = newPage;
@@ -67,7 +65,6 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     this.survey.onPanelRemoved.remove(this.checkNewPageHandler);
   }
   private checkNewPage() {
-    if (!this.survey) return;
     if (this.canShowNewPage) {
       var pages = this.survey.pages;
       if (
@@ -83,6 +80,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     }
   }
   private get canShowNewPage(): boolean {
+    if (!this.survey || this.creator.pageEditMode === "single") return false;
     const pages: PageModel[] = this.survey.pages;
     return pages.length === 0 || pages[pages.length - 1].elements.length > 0;
   }
