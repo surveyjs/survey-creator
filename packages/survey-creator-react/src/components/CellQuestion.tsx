@@ -1,13 +1,11 @@
-import { QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
-import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, Question } from "survey-core";
 import {
-  SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
-  SurveyQuestion,
 } from "survey-react-ui";
+import { QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
+import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { QuestionAdornerComponentProps } from "./Question";
 
 export class CellQuestionAdornerComponent extends SurveyElementBase<
@@ -39,7 +37,7 @@ export class CellQuestionAdornerComponent extends SurveyElementBase<
           className={"svc-question__adorner"}
         >
           <div
-            className={" svc-question__content--selected-no-border svc-question__content " + this.model.css()}
+            className={" svc-question__content--selected-no-border svc-question__content"}
             onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
           >
             {this.props.element}

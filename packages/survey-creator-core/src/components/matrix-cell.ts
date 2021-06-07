@@ -6,6 +6,7 @@ import {
   MatrixDropdownColumn,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
+import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
 
 import "./matrix-cell.scss";
 
@@ -21,6 +22,7 @@ export class MatrixCellWrapperViewModel extends Base {
     let questionJSON = model.question.toJSON();
     questionJSON.type = model.question.getType();
     const survey = model.creator.createSurvey({questions: [questionJSON]}, "modal-editor");
+    survey.css = surveyDesignerCss;
     survey.setDesignMode(true);
     survey.isPopupEditorContent = true;
     survey.showQuestionNumbers = "none";

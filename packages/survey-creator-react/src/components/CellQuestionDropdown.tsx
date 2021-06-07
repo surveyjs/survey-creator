@@ -3,10 +3,8 @@ import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, ItemValue } from "survey-core";
 import {
-  SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
-  SurveyQuestion,
 } from "survey-react-ui";
 import { QuestionAdornerComponentProps } from "./Question";
 
@@ -39,7 +37,7 @@ export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
           className={"svc-question__adorner"}
         >
           <div
-            className={" svc-question__content--selected-no-border svc-question__content " + this.model.css()}
+            className={" svc-question__content--selected-no-border svc-question__content"}
             onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
           >
 
