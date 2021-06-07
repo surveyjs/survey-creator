@@ -136,7 +136,7 @@
         showTranslationTab: true,
         showEmbeddedSurveyTab: true
       };
-      const creator = SurveyCreator.createSurveyCreator(json, options);
+      const creator = new SurveyCreator.SurveyCreator(json, options);
       ReactDOM.render(
         <React.StrictMode>
           <SurveyCreator.SurveyCreatorComponent creator={creator} />

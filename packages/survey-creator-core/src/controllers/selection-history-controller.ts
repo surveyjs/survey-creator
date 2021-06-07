@@ -73,7 +73,7 @@ export class SelectionHistoryController extends Base {
   private updateItems() {
     for (var i = this.items.length - 1; i >= 0; i--) {
       var obj = this.items[i].obj;
-      if (obj.isDisposed || !obj.inSurvey) {
+      if (!!obj && (obj.isDisposed || !obj.inSurvey)) {
         this.items.splice(i, 1);
       }
     }
