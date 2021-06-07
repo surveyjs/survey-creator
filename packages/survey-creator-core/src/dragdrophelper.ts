@@ -79,6 +79,7 @@ export class DragDropHelper extends Base {
     this.moveShortcutElement(event);
 
     document.addEventListener("pointermove", this.moveDraggedElement);
+    document.addEventListener("keydown", this.handleEscapeButton);
     this.draggedElementShortcut.addEventListener("pointerup", this.drop);
   }
 
@@ -114,6 +115,12 @@ export class DragDropHelper extends Base {
       this.handleItemValueDragOver(event);
     } else {
       this.handleSurveyElementDragOver(event);
+    }
+  };
+
+  private handleEscapeButton = (event: KeyboardEvent) => {
+    if (event.keyCode == 27) {
+      this.clear();
     }
   };
 
@@ -531,6 +538,7 @@ export class DragDropHelper extends Base {
     clearInterval(this.scrollIntervalId);
 
     document.removeEventListener("pointermove", this.moveDraggedElement);
+    document.removeEventListener("keydown", this.handleEscapeButton);
     this.draggedElementShortcut.removeEventListener("pointerup", this.drop);
     document.body.removeChild(this.draggedElementShortcut);
 
