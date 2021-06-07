@@ -368,15 +368,31 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             <svc-property-panel
               params="model: creator"
             >
-              <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
-              <!-- /ko -->
-              
-
               <div
                 class="svc-property-panel__header"
-                data-bind="text: title"
               >
-                Survey
+                
+  
+                <div
+                  class="svc-property-panel__actions"
+                >
+                  
+  
+                  <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+                  <!-- /ko -->
+                  
+  
+                </div>
+                
+  
+                <span
+                  class="svc-property-panel__title"
+                  data-bind="text: title"
+                >
+                  Survey
+                </span>
+                
+
               </div>
               
 
