@@ -46,13 +46,13 @@
 
 .svc-item-value-controls__button > span {
   display: block;
-  width: 16px;
-  height: 16px;
+  width: calcSize(2);
+  height: calcSize(2);
 }
 //for knockout
 sv-svg-icon.svc-item-value-controls__button {
-  width: 16px;
-  height: 16px;
+  width: calcSize(2);
+  height: calcSize(2);
   box-sizing: content-box;
 }
 

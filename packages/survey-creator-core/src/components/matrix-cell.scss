@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 .svc-matrix-cell {
   position: relative;
 }
@@ -11,17 +13,17 @@
 
 .svc-matrix-cell__question-controls-button {
   display: block;
-  width: 48px;
-  height: 48px;
-  background: #ffffff;
-  border: 1px solid #d6d6d6;
+  width: calcSize(6);
+  height: calcSize(6);
+  background: $background;
+  border: 1px solid $border;
   box-sizing: border-box;
   border-radius: 50%;
-  padding: 12px;
+  padding: calcSize(1.5);
   cursor: pointer;
 
   use {
-    fill: rgba(144, 144, 144, 1);
+    fill: $foreground-light;
   }
 }
 
@@ -32,6 +34,5 @@
 .svc-question__content--selected-no-border {
   margin: 0 100px;
   width: calc(100% - 200px);
-  margin: 0 100px;
   min-width: 560px;
 }
