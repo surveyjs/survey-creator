@@ -10,8 +10,7 @@ import {
   propertyArray,
   property,
   PageModel,
-  SurveyModel,
-  settings as SurveySettings
+  SurveyModel
 } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -337,7 +336,7 @@ export class TestSurveyTabViewModel extends Base {
       popupModel: languagePopupModel
     });
     actions.push({
-      id: "showInvisivle",
+      id: "showInvisible",
       css: () =>
         this.showInvisibleElements
           ? "sv-action--last sv-action-bar-item--secondary"
