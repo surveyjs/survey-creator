@@ -26,6 +26,7 @@ export class MatrixCellWrapperViewModel extends Base {
     survey.setDesignMode(true);
     survey.isPopupEditorContent = true;
     survey.showQuestionNumbers = "none";
+    survey.getAllQuestions()[0].setSurveyImpl(survey);
     settings.showModal(
       "survey",
       {
