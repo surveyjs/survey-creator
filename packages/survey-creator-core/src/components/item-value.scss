@@ -55,6 +55,12 @@ sv-svg-icon.svc-item-value-controls__button {
   height: calcSize(2);
   box-sizing: content-box;
 }
+//for knockout
+sv-svg-icon.svc-item-value-controls__button {
+  width: 16px;
+  height: 16px;
+  box-sizing: content-box;
+}
 
 .svc-item-value-controls__drag {
   padding: calcSize(1) calcSize(1.5);
@@ -88,31 +94,11 @@ sv-svg-icon.svc-item-value-controls__button {
   }
 }
 
-.svc-question__content--selected-no-border
-  > div
-  > div
-  > div
-  > .svc-item-value-controls,
-.svc-question__content--selected-no-border
-  > fieldset
-  > div
-  > .svc-item-value-controls,
-.svc-question__content--selected-no-border
-  > div
-  > div
-  > fieldset
-  > div
-  > .svc-item-value-controls {
+.svc-question__content--selected-no-border .svc-item-value-controls {
   display: block;
 }
 
-.svc-question__content--selected > fieldset > div > .svc-item-value-controls,
-.svc-question__content--selected
-  > div
-  > div
-  > fieldset
-  > div
-  > .svc-item-value-controls {
+.svc-question__content--selected .svc-item-value-controls {
   display: block;
 }
 
