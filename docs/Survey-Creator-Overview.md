@@ -885,7 +885,7 @@ End-users may change SurveyJS elements properties by using Element Editor Modal 
 
 <p align="center">
 
-![Radio group question Editor](https://raw.githubusercontent.com/surveyjs/survey-creator/master/packages/survey-creator/docs/images/builder-question-editor.png)
+![Radio group question Editor](images/builder-question-editor.png)
 
 _The radiogroup question Editor_
 
@@ -1066,7 +1066,7 @@ SurveyCreator.removeAdorners();
 ```
 <p align="center">
 
-![Survey Creator Adorners](https://raw.githubusercontent.com/surveyjs/survey-creator/master/packages/survey-creator/docs/images/builder-adorners.png)
+![Survey Creator Adorners](images/builder-adorners.png)
 
 _Dropdown question standard adorners_
 
