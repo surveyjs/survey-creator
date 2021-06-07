@@ -13,6 +13,7 @@ export { SurveyResultsModel } from "../components/results";
 
 export class SurveyLiveTester {
   private json: any;
+  private updatingLanguages: boolean;
   koIsRunning = ko.observable(true);
   selectTestClick: any;
   selectPageClick: any;
@@ -65,7 +66,7 @@ export class SurveyLiveTester {
     this.koLanguages = ko.observable(this.getLanguages());
     this.koActiveLanguage = ko.observable("");
     this.koActiveLanguage.subscribe(function (newValue) {
-      if (self.survey.locale == newValue) return;
+      if (self.updatingLanguages || self.survey.locale == newValue) return;
       self.survey.locale = newValue;
       self.koSurvey(self.survey);
     });
@@ -226,9 +227,11 @@ export class SurveyLiveTester {
       (opt === "auto" && this.survey.getUsedLocales().length > 1);
     this.koShowDefaultLanguageInTestSurveyTab(vis);
     if (vis) {
+      this.updatingLanguages = true;
       this.koLanguages(
         this.getLanguages(opt !== "all" ? this.survey.getUsedLocales() : null)
       );
+      this.updatingLanguages = false;
     }
   }
   private setActivePageItem(page: Survey.Page, val: boolean) {
