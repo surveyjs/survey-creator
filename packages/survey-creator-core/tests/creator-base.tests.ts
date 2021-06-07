@@ -609,6 +609,7 @@ test("pageEditMode='single'", (): any => {
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
   expect(designerPlugin.model.newPage).toBeFalsy();
 
   Serializer.findProperty("survey", "pages").visible = true;

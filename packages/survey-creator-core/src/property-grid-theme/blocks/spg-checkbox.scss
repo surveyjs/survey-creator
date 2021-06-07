@@ -14,7 +14,7 @@
 }
 .spg-checkbox__rectangle {
   background: #ffffff;
-  border: 1px solid #d6d6d6;
+  border: 1px solid $border;
   box-sizing: border-box;
   width: calcSize(3);
   height: calcSize(3);

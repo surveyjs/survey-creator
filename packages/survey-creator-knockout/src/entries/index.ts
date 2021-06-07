@@ -18,6 +18,9 @@ export * from "../components/question-image";
 export * from "../components/item-value";
 export * from "../components/image-item-value";
 export * from "../components/panel";
+export * from "../components/matrix-cell";
+export * from "../components/cell-question";
+export * from "../components/cell-question-dropdown";
 
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";

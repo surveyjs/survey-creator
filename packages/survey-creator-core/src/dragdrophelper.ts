@@ -103,15 +103,7 @@ export class DragDropHelper extends Base {
       this.draggedSurveyElement["title"] ||
       this.draggedSurveyElement["text"] ||
       this.draggedSurveyElement["name"];
-    draggedElementShortcut.style.height = "40px";
-    draggedElementShortcut.style.minWidth = "100px";
-    draggedElementShortcut.style.borderRadius = "100px";
-    draggedElementShortcut.style.backgroundColor = "white";
-    draggedElementShortcut.style.padding = "10px";
-
-    draggedElementShortcut.style.cursor = "grabbing";
-    draggedElementShortcut.style.position = "absolute";
-    draggedElementShortcut.style.zIndex = "1000";
+    draggedElementShortcut.className = "svc-drag-feedback";  
     return draggedElementShortcut;
   }
 

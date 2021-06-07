@@ -92,152 +92,6 @@ export class TestSurveyTabViewModel extends Base {
   constructor(private surveyProvider: CreatorBase<SurveyModel>) {
     super();
     this.simulator = new SimulatorOptions();
-    this.languages = this.getLanguages();
-
-    // this.toolbarItems.push({
-    //   id: "svd-test-locale-selector",
-    //   title: this.localeText,
-    //   visible: this.koShowDefaultLanguageInTestSurveyTab,
-    //   tooltip: this.localeText,
-    //   component: "svd-dropdown",
-    //   action: ko.computed({
-    //     read: () => this.koActiveLanguage(),
-    //     write: (val: any) => this.koActiveLanguage(val),
-    //   }),
-    //   items: <any>this.koLanguages,
-    // });
-    var deviceSelectorItems = Object.keys(simulatorDevices)
-      .filter((key) => !!simulatorDevices[key].title)
-      .map((key) => ({ id: key, title: simulatorDevices[key].title }));
-    const devicePopupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          deviceSelectorItems,
-          (item: any) => {
-            this.device = item.id;
-            devicePopupModel.toggleVisibility();
-          },
-          true
-        )
-      },
-      "top",
-      "right"
-    );
-
-    const actions: Array<IActionBarItem> = [];
-    actions.push({
-      id: "deviceSelector",
-      css: "sv-action--first sv-action-bar-item--secondary",
-      iconName: "icon-change_16x16",
-      title: () =>
-        simulatorDevices[this.simulator.device].title ||
-        this.getLocString("pe.simulator"),
-      enabled: this.showSimulator,
-      component: "sv-action-bar-item-dropdown",
-      action: () => {
-        devicePopupModel.toggleVisibility();
-      },
-      popupModel: devicePopupModel
-    });
-    actions.push({
-      id: "prevPage",
-      css: () =>
-        this.survey && !this.survey.isFirstPage
-          ? "sv-action-bar-item--secondary"
-          : "",
-      iconName: "icon-leftarrow_16x16",
-      visible: () => this.isRunning && this.pages.length > 1,
-      enabled: () => this.survey && !this.survey.isFirstPage,
-      title: "",
-      action: () => {
-        this.activePage = this.survey.pages[this.survey.currentPageNo - 1];
-      }
-    });
-
-    this.pagePopupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          this.pages,
-          (item: IActionBarItem) => {
-            this.activePage = item.data;
-            this.pagePopupModel.toggleVisibility();
-          },
-          true /*,
-        ko.computed({
-          read: () =>
-            pageSelectorItems().filter(
-              (item) => item.value === this.activePage
-            )[0],
-          write: (val) => {},
-        })*/
-        )
-      },
-      "top",
-      "center"
-    );
-
-    actions.push({
-      id: "pageSelector",
-      title: () =>
-        (this.activePage &&
-          surveyProvider.getObjectDisplayName(
-            this.activePage,
-            "survey-tester"
-          )) ||
-        this.getLocString("ts.selectPage"),
-      visible: () =>
-        this.isRunning &&
-        this.pages.length > 1 &&
-        this.showPagesInTestSurveyTab,
-      component: "sv-action-bar-item-dropdown",
-      popupModel: this.pagePopupModel,
-      action: (newPage) => {
-        this.pagePopupModel.toggleVisibility();
-      }
-    });
-    actions.push({
-      id: "nextPage",
-      css: () =>
-        this.survey && !this.survey.isLastPage
-          ? "sv-action-bar-item--secondary"
-          : "",
-      iconName: "icon-rightarrow_16x16",
-      visible: () => this.isRunning && this.pages.length > 1,
-      enabled: () => this.survey && !this.survey.isLastPage,
-      title: "",
-      action: () => {
-        this.activePage = this.survey.pages[this.survey.currentPageNo + 1];
-      }
-    });
-    actions.push({
-      id: "showInvisivle",
-      css: () =>
-        this.showInvisibleElements
-          ? "sv-action--last sv-action-bar-item--secondary"
-          : "sv-action--last",
-      visible: () => this.isRunning,
-      title: this.getLocString("ts.showInvisibleElements"),
-      iconName: () => {
-        if (this.showInvisibleElements) {
-          return "icon-switchactive_16x16";
-        }
-        return "icon-switchinactive_16x16";
-      },
-      action: () => (this.showInvisibleElements = !this.showInvisibleElements)
-    });
-    actions.push({
-      id: "testSurveyAgain",
-      css: "sv-action--last",
-      visible: () => !this.isRunning,
-      title: this.testSurveyAgainText,
-      action: () => {
-        this.testAgain();
-      }
-    });
-
-    this.actions = actions;
   }
 
   public setJSON(json: any) {
@@ -319,10 +173,10 @@ export class TestSurveyTabViewModel extends Base {
     }
     this.showInvisibleElements = false;
     this.pages = pages;
-    (<ListModel>this.pagePopupModel.contentComponentData.model).items = pages;
     this.activePage = this.survey.currentPage;
     this.activeLanguage =
       this.survey.locale || surveyLocalization.defaultLocale;
+    this.buildActions();
     this.isRunning = true;
   }
   public getLocString(name: string) {
@@ -350,6 +204,164 @@ export class TestSurveyTabViewModel extends Base {
       );
     }
   }
+  public buildActions() {
+    const languagePopupModel = new PopupModel(
+      "sv-list",
+      {
+        model: new ListModel(
+          this.languages,
+          (item: any) => {
+            this.survey.locale = item.id;
+            languagePopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
+      "top",
+      "right"
+    );
+
+    var deviceSelectorItems = Object.keys(simulatorDevices)
+      .filter((key) => !!simulatorDevices[key].title)
+      .map((key) => ({ id: key, title: simulatorDevices[key].title }));
+    const devicePopupModel = new PopupModel(
+      "sv-list",
+      {
+        model: new ListModel(
+          deviceSelectorItems,
+          (item: any) => {
+            this.device = item.id;
+            devicePopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
+      "top",
+      "right"
+    );
+    const actions: Array<IActionBarItem> = [];
+    actions.push({
+      id: "deviceSelector",
+      css: "sv-action--first sv-action-bar-item--secondary",
+      iconName: "icon-change_16x16",
+      title: () =>
+        simulatorDevices[this.simulator.device].title ||
+        this.getLocString("pe.simulator"),
+      enabled: this.showSimulator,
+      component: "sv-action-bar-item-dropdown",
+      action: () => {
+        devicePopupModel.toggleVisibility();
+      },
+      popupModel: devicePopupModel
+    });
+    actions.push({
+      id: "prevPage",
+      css: () =>
+        this.survey && !this.survey.isFirstPage
+          ? "sv-action-bar-item--secondary"
+          : "",
+      iconName: "icon-leftarrow_16x16",
+      visible: () => this.isRunning && this.pages.length > 1,
+      enabled: () => this.survey && !this.survey.isFirstPage,
+      title: "",
+      action: () => {
+        this.activePage = this.survey.pages[this.survey.currentPageNo - 1];
+      }
+    });
+
+    this.pagePopupModel = new PopupModel(
+      "sv-list",
+      {
+        model: new ListModel(
+          this.pages,
+          (item: IActionBarItem) => {
+            this.activePage = item.data;
+            this.pagePopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
+      "top",
+      "center"
+    );
+
+    actions.push({
+      id: "pageSelector",
+      title: () =>
+        (this.activePage &&
+          this.surveyProvider.getObjectDisplayName(
+            this.activePage,
+            "survey-tester"
+          )) ||
+        this.getLocString("ts.selectPage"),
+      visible: () =>
+        this.isRunning &&
+        this.pages.length > 1 &&
+        this.showPagesInTestSurveyTab,
+      component: "sv-action-bar-item-dropdown",
+      popupModel: this.pagePopupModel,
+      action: (newPage) => {
+        this.pagePopupModel.toggleVisibility();
+      }
+    });
+    actions.push({
+      id: "nextPage",
+      css: () =>
+        this.survey && !this.survey.isLastPage
+          ? "sv-action-bar-item--secondary"
+          : "",
+      iconName: "icon-rightarrow_16x16",
+      visible: () => this.isRunning && this.pages.length > 1,
+      enabled: () => this.survey && !this.survey.isLastPage,
+      title: "",
+      action: () => {
+        this.activePage = this.survey.pages[this.survey.currentPageNo + 1];
+      }
+    });
+    actions.push({
+      id: "languageSelector",
+      css: "sv-action--last sv-action-bar-item--secondary",
+      iconName: "icon-change_16x16",
+      title: () =>
+        editorLocalization.getLocaleName(
+          !!this.survey.locale
+            ? this.survey.locale
+            : surveyLocalization.defaultLocale
+        ),
+      visible: this.showDefaultLanguageInTestSurveyTab,
+      component: "sv-action-bar-item-dropdown",
+      action: () => {
+        languagePopupModel.toggleVisibility();
+      },
+      popupModel: languagePopupModel
+    });
+    actions.push({
+      id: "showInvisible",
+      css: () =>
+        this.showInvisibleElements
+          ? "sv-action--last sv-action-bar-item--secondary"
+          : "sv-action--last",
+      visible: () => this.isRunning,
+      title: this.getLocString("ts.showInvisibleElements"),
+      iconName: () => {
+        if (this.showInvisibleElements) {
+          return "icon-switchactive_16x16";
+        }
+        return "icon-switchinactive_16x16";
+      },
+      action: () => (this.showInvisibleElements = !this.showInvisibleElements)
+    });
+    actions.push({
+      id: "testSurveyAgain",
+      css: "sv-action--last",
+      visible: () => !this.isRunning,
+      title: this.testSurveyAgainText,
+      action: () => {
+        this.testAgain();
+      }
+    });
+    this.actions = actions;
+  }
   private setActivePageItem(page: PageModel, val: boolean) {
     var item = this.getPageItemByPage(page);
     if (item) {
@@ -373,13 +385,10 @@ export class TestSurveyTabViewModel extends Base {
         : surveyLocalization.getLocales();
     for (let i = 0; i < locales.length; i++) {
       const loc: string = locales[i];
-      res.push({ id: loc, title: this.getLocString(loc) });
+      res.push({ id: loc, title: editorLocalization.getLocaleName(loc) });
     }
     return res;
   }
-  // public koEventAfterRender(element: any, survey: any) {
-  //   survey["afterRenderSurvey"](element);
-  // }
 }
 
 export class TabTestPlugin implements ICreatorPlugin {

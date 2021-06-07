@@ -1,0 +1,39 @@
+@import "../variables.scss";
+
+.svc-matrix-cell {
+  position: relative;
+}
+
+.svc-matrix-cell__question-controls {
+  display: none;
+  position: absolute;
+  top: calc(50% - 24px);
+  left: calc(50% - 24px);
+}
+
+.svc-matrix-cell__question-controls-button {
+  display: block;
+  width: calcSize(6);
+  height: calcSize(6);
+  background: $background;
+  border: 1px solid $border;
+  box-sizing: border-box;
+  border-radius: 50%;
+  padding: calcSize(1.5);
+  cursor: pointer;
+
+  use {
+    fill: $foreground-light;
+  }
+}
+
+.svc-matrix-cell:hover .svc-matrix-cell__question-controls {
+  display: block;
+}
+
+.svc-question__content--selected-no-border {
+  margin: 0 100px;
+  width: calc(100% - 200px);
+  min-width: 560px;
+  box-shadow: none;
+}

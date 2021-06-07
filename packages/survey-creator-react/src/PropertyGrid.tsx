@@ -34,9 +34,13 @@ class PropertyGridComponent extends SurveyElementBase<
   render() {
     return (
       <div className="svc-property-panel">
-        <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
-
-        <div className="svc-property-panel__header">{this.model.title}</div>
+        <div className="svc-property-panel__header">
+          <div className="svc-property-panel__actions">
+            <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
+          </div>
+          <span className="svc-property-panel__title">{this.model.title}</span>
+          
+        </div>
         <div className="svc-property-panel__expander">
           <Survey model={this.model.survey}></Survey>
         </div>
