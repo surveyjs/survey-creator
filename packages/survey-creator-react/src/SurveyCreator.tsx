@@ -106,10 +106,13 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
   renderCreatorTab(tab: ITabbedMenuItem) {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
-    const component = ReactElementFactory.Instance.createElement(
-      tab.componentContent,
-      { creator: creator, survey: creator.survey, data: tab.data }
-    );
+    const component = !!tab.renderTab
+      ? tab.renderTab()
+      : ReactElementFactory.Instance.createElement(tab.componentContent, {
+          creator: creator,
+          survey: creator.survey,
+          data: tab.data
+        });
     return (
       <div key={tab.id} className="svc-creator-tab">
         {component}
