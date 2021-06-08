@@ -104,7 +104,7 @@ export class DragDropHelper extends Base {
       this.draggedSurveyElement["title"] ||
       this.draggedSurveyElement["text"] ||
       this.draggedSurveyElement["name"];
-    draggedElementShortcut.className = "svc-drag-feedback";  
+    draggedElementShortcut.className = "svc-drag-shortcut";
     return draggedElementShortcut;
   }
 
@@ -132,9 +132,7 @@ export class DragDropHelper extends Base {
     const shortcutXCenter = shortcutWidth / 2;
     const shortcutYCenter = shortcutHeight / 2;
 
-    const documentOffsetHeight = document.documentElement.offsetHeight;
     const documentClientHeight = document.documentElement.clientHeight;
-    const documentOffsetWidth = document.documentElement.offsetWidth;
     const documentClientWidth = document.documentElement.clientWidth;
 
     if (event.clientX + shortcutXCenter >= documentClientWidth) {
