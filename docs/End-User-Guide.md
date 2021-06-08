@@ -1,10 +1,10 @@
 # SurveyJS Creator
 
-This page has been prepared as a starting point for documentation aimed at end-users of Surveyjs.
+This page has been prepared as a starting point for documentation aimed at end-users of SurveyJS.
 
 ## Basic Overview/Quick Start Guide
 
-The Surveyjs Survey Creator page contains the survey design area to the left and the toolbox to the right.
+The SurveyJS Survey Creator page contains the survey design area to the left and the toolbox to the right.
 
 ![Overview of the SurveyJS Creator interface](images/survey-editor-overview.png)
 
@@ -22,11 +22,11 @@ If you need to develop the survey in more detail via the JSON file format, you c
 
 ![Image of JSON viewer/editor](images/survey-editor-json.png)
 
-## Toolbox
+## Adorner
 
-Each toolbox item will have its own configuration panel once it is placed into the Survey Creator. There you will be able to move and re-order the item using the ``hamburger`` button (three horizontal lines), delete the item using the ``cross`` button, toggle the item's visibility using the ``eye`` button, ``duplicate`` the item, ``add`` the item to the toolbox, see the item's ``mode`` and edit the items ``properties``. You may also set the item's ``required`` status if the tool allows it.
+Each toolbox item will have its own configuration panel once it is placed into the Survey Creator. This panel is called an `adorner`. Using the adorner, you will be able to move and re-order the item using the ``hamburger`` button (three horizontal lines), delete the item using the ``cross`` button, toggle the item's visibility using the ``eye`` button, ``duplicate`` the item, ``add`` the item to the toolbox, see the item's ``mode`` and edit the items ``properties``. You may also set the item's ``required`` status if the tool allows it.
 
-![picture of toolbox configuration panel](images/survey-editor-tool-panel.png)
+![picture of adorner configuration panel](images/survey-editor-adorner.png)
 
 ## Individual Toolbox Elements
 
@@ -40,21 +40,13 @@ Single Input allows you to ask a simple question or request a non-predetermined 
 
 Checkbox allows for multiple questions or items to be asked of the participant. The Checkbox presents the survey participant with a list of items with a checkbox next to each. Ticking the checkbox chooses that item. Multiple items can be checked and only those checked are recorded in the survey.
 
-### Ranking 
+### Radiogroup
 
-The participant is presented with a list of items that can be rearranged according to rank or preference. The items are rearranged by dragging the items on the page. The final rank or order of all items is recorded in the survey.
+Radiogroup allows for multiple questions or items to be asked of the participant. The participant is presented with a list of items with a radio button next to each. Only one item may be selected from this list and only the selected item will be recorded in the survey.
 
 ### Dropdown 
 
 The participant is presented with a drop-down list of items. Only one of these items can be selected, and only the selected item will be recorded in the survey.
-
-### Image picker
-
-The participant is presented with a series of images. One of these images can be selected and only the value associated with that image will be recorded in the survey.
-
-### Radiogroup
-
-Radiogroup allows for multiple questions or items to be asked of the participant. The participant is presented with a list of items with a radio button next to each. Only one item may be selected from this list and only the selected item will be recorded in the survey.
 
 ### Comment
 
@@ -63,6 +55,14 @@ The Comment tool asks for the participant to enter a non-predetermined input fro
 ### Rating
 
 The Rating tool asks the participant to choose a number across the range presented. Only one value may be selected and only the selected value will be recorded in the survey.
+
+### Ranking 
+
+The participant is presented with a list of items that can be rearranged according to rank or preference. The items are rearranged by dragging the items on the page. The final rank or order of all items is recorded in the survey.
+
+### Image picker
+
+The participant is presented with a series of images. One of these images can be selected and only the value associated with that image will be recorded in the survey.
 
 ### Boolean
 
