@@ -543,10 +543,9 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
     if (!inst.getActivatedBy) return;
     var widgets = inst.widgets;
     for (var i = 0; i < widgets.length; i++) {
-      if (inst.getActivatedBy(widgets[i].name) != "customtype") continue;
-      var widgetJson = widgets[i].widgetJson;
-      if (!!widgetJson.widgetIsLoaded && !widgetJson.widgetIsLoaded()) continue;
-      this.addItemFromJSON(widgetJson);
+      if (widgets[i].canShowInToolbox) {
+        this.addItemFromJSON(widgets[i].widgetJson);
+      }
     }
   }
   private registerComponentQuestions() {
