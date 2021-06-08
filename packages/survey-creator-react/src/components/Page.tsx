@@ -1,9 +1,5 @@
 import { Base, PageModel, SurveyModel } from "survey-core";
-import {
-  SurveyActionBar,
-  SurveyElementBase,
-  SurveyPage
-} from "survey-react-ui";
+import { SurveyActionBar, SurveyElementBase, SurveyPage } from "survey-react-ui";
 import { CreatorBase, PageViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
@@ -44,8 +40,15 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     super.componentWillUnmount();
     this.model.dispose();
   }
-
-  render(): JSX.Element {
+  protected canRender(): boolean {
+    return (
+      !!this.model &&
+      this.model.isPageLive &&
+      !!this.model.page &&
+      !!this.model.page.survey
+    );
+  }
+  renderElement(): JSX.Element {
     return (
       <React.Fragment>
         <div
@@ -58,8 +61,8 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
             this.model.dragOver(this.model, new ReactDragEvent(e))
           }
           onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
-          onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
-          onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOut={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOver={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
           <SurveyPage
             page={this.props.page}
@@ -85,39 +88,5 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
         </div>
       </React.Fragment>
     );
-    /*
-<div class="svc-page__content" data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop }">
-  <!-- ko template: { name: 'survey-page', data: page } -->
-  <!-- /ko -->
-  <div class="svc-page__add-new-question" data-bind="click: addNewQuestion">
-    <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: addNewQuestionText">
-    </span>
-  </div>
-  <div class="svc-page__content-actions">
-    <sv-action-bar params="items: actions"></sv-action-bar>
-  </div>
-</div>
-     */
-
-    /*
-<script type="text/html" id="survey-page">
-  <div data-bind="css: cssClasses.page.root">
-      <!-- ko if: _showTitle -->
-      <h4 data-bind="css: cssClasses.page.title">
-          <!-- ko template: { name: 'survey-string', data: locTitle } -->
-          <!-- /ko -->
-      </h4>
-      <!-- /ko -->
-      <!-- ko if: _showDescription-->
-      <div data-bind="visible: data.showPageTitles, css: cssClasses.page.description">
-          <!-- ko template: { name: 'survey-string', data: locDescription } -->
-          <!-- /ko -->
-      </div>
-      <!-- /ko -->
-      <!-- ko template: { name: 'survey-rows', data: $data} -->
-      <!-- /ko -->
-  </div>
-</script>
-     */
   }
 }

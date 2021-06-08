@@ -8,8 +8,7 @@ import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 import PropertyGridComponent from "../../PropertyGrid";
 
 interface ITabDesignerComponentProps {
-  creator: CreatorBase<SurveyModel>;
-  survey: SurveyModel;
+  data: TabDesignerViewModel<SurveyModel>;
 }
 
 export class TabDesignerComponent extends SurveyElementBase<
@@ -19,25 +18,25 @@ export class TabDesignerComponent extends SurveyElementBase<
   private model: TabDesignerViewModel<SurveyModel>;
   constructor(props: ITabDesignerComponentProps) {
     super(props);
-    this.model = new TabDesignerViewModel<SurveyModel>(props.creator);
+    this.model = props.data;
   }
 
   protected getStateElement(): Base {
-    return this.props.survey;
+    return this.model;
   }
 
   render(): JSX.Element {
     return (
       <ReactDragDropHelperComponent
-        creator={this.props.creator}
+        creator={this.props.data.creator}
         renderContent={() => this.renderContent()}
       ></ReactDragDropHelperComponent>
     );
   }
   renderContent(): JSX.Element {
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
-    const survey: SurveyModel = this.props.survey;
-    const designerTabClassName: string = "svc-tab-designer " + survey.css.root;
+    const creator: CreatorBase<SurveyModel> = this.model.creator;
+    const survey: SurveyModel = creator.survey;
+    const designerTabClassName = "svc-tab-designer " + survey.css.root;
 
     const surveyPages: JSX.Element[] = survey.pages.map((page: PageModel) => {
       return (
@@ -50,7 +49,7 @@ export class TabDesignerComponent extends SurveyElementBase<
       );
     });
 
-    if (this.model.showNewPage) {
+    if (!!this.model.newPage) {
       surveyPages.push(
         <CreatorSurveyPageComponent
           key={this.model.newPage.id}
@@ -84,28 +83,6 @@ export class TabDesignerComponent extends SurveyElementBase<
         </div>
       </>
     );
-    /*
-        <svc-toolbox
-        params="categories: creator.toolboxCategories, creator: creator"
-        ></svc-toolbox>
-        <div class="svc-tab-designer" data-bind="css: survey.css.root">
-            <div data-bind="css: survey.css.container">
-                <!-- ko foreach: survey.pages -->
-                <svc-page
-                params="survey: $parent.survey, page: $data, creator: $parent.creator"
-                ></svc-page>
-                <!-- /ko -->
-                <!-- ko if: showNewPage -->
-                <svc-page
-                params="survey: survey, creator: creator, page: newPage"
-                ></svc-page>
-                <!-- /ko -->
-            </div>
-        </div>
-        <svc-page-navigator
-        params="items: survey.pages, creator: creator, onSelect: creator.selectElement.bind(creator), selection: function () { return creator.currentPage; }"
-        ></svc-page-navigator>
-       */
   }
 }
 

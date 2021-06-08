@@ -3,10 +3,13 @@ import {
   SurveyModel,
   IActionBarItem,
   propertyArray,
-  property,
+  property
 } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
+import {
+  ISurveyCreatorOptions,
+  EmptySurveyCreatorOptions
+} from "../../settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
 import { SurveyLogicAction } from "./logic-items";
@@ -14,6 +17,8 @@ import { SurveyLogic } from "./logic";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../entries";
+
+import "./logic-ui.scss";
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
@@ -47,7 +52,7 @@ export class SurveyLogicUI extends SurveyLogic {
         component: "sv-action-bar-item",
         action: () => {
           this.editItem(this.items[options.row.rowIndex - 1]);
-        },
+        }
       });
     });
     this.updateItemsSurveyData();
@@ -133,16 +138,16 @@ export class SurveyLogicUI extends SurveyLogic {
             {
               cellType: "html",
               name: "conditions",
-              title: this.getLocString("ed.lg.conditions"),
+              title: this.getLocString("ed.lg.conditions")
             },
             {
               cellType: "html",
               name: "actions",
-              title: this.getLocString("ed.lg.actions"),
-            },
-          ],
-        },
-      ],
+              title: this.getLocString("ed.lg.actions")
+            }
+          ]
+        }
+      ]
     };
     setSurveyJSONForPropertyGrid(json);
     return json;
@@ -170,7 +175,7 @@ export class SurveyLogicUI extends SurveyLogic {
     for (var i = 0; i < this.items.length; i++) {
       data.push({
         conditions: this.items[i].expressionText,
-        actions: this.items[i].actionsText,
+        actions: this.items[i].actionsText
       });
     }
     matrix.value = data;
@@ -184,7 +189,7 @@ export class SurveyLogicUI extends SurveyLogic {
       component: "sv-action-bar-item",
       action: () => {
         this.addNew();
-      },
+      }
     });
     this.toolbarEditItems.push({
       id: "svd-logic-saveAndBack",
@@ -193,7 +198,7 @@ export class SurveyLogicUI extends SurveyLogic {
       component: "sv-action-bar-item",
       action: () => {
         this.saveEditableItemAndBack();
-      },
+      }
     });
     this.toolbarEditItems.push({
       id: "svd-logic-save",
@@ -202,7 +207,7 @@ export class SurveyLogicUI extends SurveyLogic {
       component: "sv-action-bar-item",
       action: () => {
         this.saveEditableItem();
-      },
+      }
     });
     this.toolbarEditItems.push({
       id: "svd-logic-back",
@@ -211,7 +216,7 @@ export class SurveyLogicUI extends SurveyLogic {
       component: "sv-action-bar-item",
       action: () => {
         this.mode = "view";
-      },
+      }
     });
   }
   public get addNewText(): string {
@@ -261,9 +266,9 @@ export class TabLogicPlugin implements ICreatorPlugin {
       action: () => {
         creator.makeNewViewActive("logic");
       },
-      active: () => creator.viewType === "logic",
+      active: () => creator.viewType === "logic"
     });
-    creator.plugins["logic"] = this;
+    creator.addPlugin("logic", this);
   }
   public activate(): void {
     this.model.activate();
