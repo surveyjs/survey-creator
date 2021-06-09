@@ -137,6 +137,7 @@
         showEmbeddedSurveyTab: true
       };
       const creator = SurveyCreatorReact.createReactSurveyCreator(json, options);
+      window.creator = creator;
 
       ReactDOM.render(
         <React.StrictMode>

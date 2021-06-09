@@ -11,13 +11,22 @@ export class LogoImageViewModel extends Base {
         this.updateIsLogoImageChoosen(options.newValue);
       }
     });
+    creator.survey.onPropertyChanged.add((_, options) => {
+      if (options.name === "logo") {
+        this.updateIsLogoImageChoosen(options.newValue);
+      }
+    });
     this.updateIsLogoImageChoosen();
   }
   private updateIsLogoImageChoosen(value?: string): void {
     if (typeof value === "undefined") {
       value = this.creator.survey.logo;
     }
-    this.isLogoImageChoosen = !!value;
+    const newIsChoosenValue: boolean = !!value;
+    if (this.isLogoImageChoosen && newIsChoosenValue) {
+      this.isLogoImageChoosen = false;
+    }
+    this.isLogoImageChoosen = newIsChoosenValue;
   }
   private uploadFile(model: LogoImageViewModel, fileInput: HTMLInputElement, files: File[]) {
     model.creator.uploadFiles(files, (_, link) => {
