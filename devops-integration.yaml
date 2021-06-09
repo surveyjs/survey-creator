@@ -113,17 +113,17 @@ steps:
 
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm run release -- --release-as $(SurveyJSVersion)
+    npm run release
   displayName: 'Release specific version survey-creator-core'
 
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-    npm run release -- --release-as $(SurveyJSVersion)
+    npm run release
   displayName: 'Release specific version survey-creator-knockout'
 
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-    npm run release -- --release-as $(SurveyJSVersion)
+    npm run release
   displayName: 'Release specific version survey-creator-react'
 #####################################################
 
