@@ -18,7 +18,7 @@ export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
   @property({ defaultValue: false }) isDragging: boolean;
   constructor(
-    protected creator: CreatorBase<SurveyModel>,
+    public creator: CreatorBase<SurveyModel>,
     public question: QuestionSelectBase,
     public item: ItemValue
   ) {
@@ -103,5 +103,9 @@ export class ItemValueWrapperViewModel extends Base {
   }
   get isDraggable() {
     return this.isDraggableItem(this.item);
+  }
+  public select(model: ItemValueWrapperViewModel, event: Event) {
+    model.creator.selectElement(model.question, "choices", false);
+    event && event.stopPropagation();
   }
 }

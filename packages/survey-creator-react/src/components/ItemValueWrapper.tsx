@@ -81,6 +81,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         data-svc-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }
+        onClick={event => this.model.select(this.model, event)}
       >
         {this.getDragDropGhost("top")}
 
