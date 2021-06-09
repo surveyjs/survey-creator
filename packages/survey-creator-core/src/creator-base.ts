@@ -52,6 +52,7 @@ export interface ICreatorPlugin {
 
 export interface ITabbedMenuItem extends IActionBarItem {
   componentContent: string;
+  renderTab?: () => any;
 }
 
 export class CreatorToolbarItems extends Base {

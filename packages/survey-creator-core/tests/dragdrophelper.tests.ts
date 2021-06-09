@@ -86,3 +86,54 @@ test("doDropItemValue", () => {
     "item4"
   ]);
 });
+
+test("calculateMiddleOfHTMLElement", () => {
+  let ddHelper = new DragDropHelper(null);
+  const calculateMiddleOfHTMLElement = ddHelper["calculateMiddleOfHTMLElement"];
+  const testElement = document.createElement("div");
+  (<any>testElement).getBoundingClientRect = jest.fn(() => ({
+    y: 10,
+    height: 100
+  }));
+
+  let result = calculateMiddleOfHTMLElement(testElement);
+  expect(result).toEqual(60);
+});
+
+test("calculateIsBottom", () => {
+  let ddHelper = new DragDropHelper(null);
+  const testElement = document.createElement("div");
+  (<any>testElement).getBoundingClientRect = jest.fn(() => ({
+    y: 100,
+    height: 100
+  }));
+
+  let result = ddHelper["calculateIsBottom"](testElement, 150);
+  expect(result).toEqual(true);
+
+  result = ddHelper["calculateIsBottom"](testElement, 100);
+  expect(result).toEqual(false);
+});
+
+test("calculateIsEdge", () => {
+  DragDropHelper.edgeHeight = 20;
+  let ddHelper = new DragDropHelper(null);
+  const testElement = document.createElement("div");
+  (<any>testElement).getBoundingClientRect = jest.fn(() => ({
+    y: 100,
+    height: 100
+  }));
+
+  let result = ddHelper["calculateIsEdge"](testElement, 100);
+  expect(result).toEqual(true);
+
+  result = ddHelper["calculateIsEdge"](testElement, 131);
+  expect(result).toEqual(false);
+  result = ddHelper["calculateIsEdge"](testElement, 150);
+  expect(result).toEqual(false);
+  result = ddHelper["calculateIsEdge"](testElement, 169);
+  expect(result).toEqual(false);
+
+  result = ddHelper["calculateIsEdge"](testElement, 200);
+  expect(result).toEqual(true);
+});
