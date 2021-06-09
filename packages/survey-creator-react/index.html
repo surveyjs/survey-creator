@@ -10,6 +10,27 @@
     <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
 
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ace.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/worker-json.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/mode-json.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ext-language_tools.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+
     <script src="../node_modules/survey-core/survey.core.js"></script>
     <script src="../node_modules/survey-react-ui/survey-react-ui.js"></script>
 
@@ -138,6 +159,29 @@
       };
       const creator = new SurveyCreator.SurveyCreator(options);
       creator.JSON = json;
+      var templatesPlugin = {
+        activate: () => {},
+        deactivate: () => {}
+      };
+      creator.addPlugin(templatesPlugin);
+      creator.tabs.push({
+        id: "templates",
+        title: "Templates",
+        renderTab: () => {
+          debugger;
+          return (
+            <React.StrictMode>
+              <span text="Hello world!" />
+              fdfdsfdf
+            </React.StrictMode>
+          );
+        },
+        data: this,
+        action: () => {
+          creator.makeNewViewActive("templates");
+        },
+        active: () => creator.viewType === "templates"
+      });
       ReactDOM.render(
         <React.StrictMode>
           <SurveyCreator.SurveyCreatorComponent creator={creator} />
