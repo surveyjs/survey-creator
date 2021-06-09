@@ -88,47 +88,36 @@ export class SurveyCreatorComponent extends SurveyElementBase<
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">
             <div className="svc-creator__content-holder svc-flex-column">
-              {this.renderCreatorTabs()}
+              {this.renderActiveTab()}
             </div>
           </div>
         </div>
       </div>
     );
   }
-  renderCreatorTabs() {
+  renderActiveTab() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
-    var tabs = creator.tabs.map((tab, index) => {
-      return this.renderCreatorTab(tab);
-    });
-    return <>{tabs}</>;
-    //return <Survey.Survey model={this.creator.survey} />;
+    for (var i = 0; i < creator.tabs.length; i++) {
+      if (creator.tabs[i].id === creator.activeTab) {
+        return this.renderCreatorTab(creator.tabs[i]);
+      }
+    }
+    return null;
   }
   renderCreatorTab(tab: ITabbedMenuItem) {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
-    let style: CSSProperties = {};
-    //if (tab.visible !== undefined && !tab.visible) {
-    if (!unwrap(tab.active)) {
-      style.display = "none";
-    }
-
-    const component = ReactElementFactory.Instance.createElement(
-      tab.componentContent,
-      { creator: creator, survey: creator.survey, data: tab.data }
-    );
+    const component = !!tab.renderTab
+      ? tab.renderTab()
+      : ReactElementFactory.Instance.createElement(tab.componentContent, {
+          creator: creator,
+          survey: creator.survey,
+          data: tab.data
+        });
     return (
-      <div key={tab.id} className="svc-creator-tab" style={style}>
+      <div key={tab.id} className="svc-creator-tab">
         {component}
       </div>
     );
-    /*
-      <div
-        class="svc-creator-tab"
-        data-bind="visible: $parent.creator.viewType == id"
-      >
-        <!-- ko component: { name: template, params: {creator: $parent.creator, survey: $parent.creator.survey, data: data } } -->
-        <!-- /ko -->
-      </div>
-    */
   }
 }
 
@@ -147,18 +136,26 @@ class DesignTimeSurveyModel extends Model {
   }
   public getElementWrapperComponentName(element: any, reason?: string): string {
     if (this.isDesignMode) {
-      if(reason === "cell" || reason === "column-header" || reason === "row-header") {
+      if (
+        reason === "cell" ||
+        reason === "column-header" ||
+        reason === "row-header"
+      ) {
         return "svc-matrix-cell";
       }
-      if(!element["parentQuestionValue"]) {
+      if (!element["parentQuestionValue"]) {
         if (element instanceof Question) {
           if (element.getType() == "dropdown") {
-            return this.isPopupEditorContent ? "svc-cell-dropdown-question" : "svc-dropdown-question";
+            return this.isPopupEditorContent
+              ? "svc-cell-dropdown-question"
+              : "svc-dropdown-question";
           }
           if (element.getType() == "image") {
             return "svc-image-question";
           }
-          return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
+          return this.isPopupEditorContent
+            ? "svc-cell-question"
+            : "svc-question";
         }
         if (element instanceof PanelModel) {
           return "svc-question";
@@ -169,10 +166,20 @@ class DesignTimeSurveyModel extends Model {
   }
   public getElementWrapperComponentData(element: any, reason?: string): any {
     if (this.isDesignMode) {
-      if(reason === "cell" || reason === "column-header" || reason === "row-header") {
-        return { creator: this.creator, element: element, question: element.question, row: element.row, column: element.column };
+      if (
+        reason === "cell" ||
+        reason === "column-header" ||
+        reason === "row-header"
+      ) {
+        return {
+          creator: this.creator,
+          element: element,
+          question: element.question,
+          row: element.row,
+          column: element.column
+        };
       }
-      if(!element["parentQuestionValue"]) {
+      if (!element["parentQuestionValue"]) {
         if (element instanceof Question) {
           return this.creator;
         }
@@ -183,8 +190,11 @@ class DesignTimeSurveyModel extends Model {
     }
     return super.getElementWrapperComponentData(element);
   }
-  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if(!this.isDesignMode || !!question["parentQuestionValue"]) {
+  public getItemValueWrapperComponentName(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): string {
+    if (!this.isDesignMode || !!question["parentQuestionValue"]) {
       return SurveyModel.TemplateRendererComponentName;
     }
     if (question.getType() === "imagepicker") {
@@ -192,8 +202,11 @@ class DesignTimeSurveyModel extends Model {
     }
     return "svc-item-value";
   }
-  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    if(!this.isDesignMode || !!question["parentQuestionValue"]) {
+  public getItemValueWrapperComponentData(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): any {
+    if (!this.isDesignMode || !!question["parentQuestionValue"]) {
       return item;
     }
     return {

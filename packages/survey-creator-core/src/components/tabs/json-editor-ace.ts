@@ -47,6 +47,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     this.aceEditor.getSession().setUseWorker(true);
     SurveyTextWorker.newLineChar =
       this.aceEditor.session.doc.getNewLineCharacter();
+    this.onPluginActivate();
   }
   private updateUndoRedoState(): void {
     const undoManager: AceAjax.UndoManager = this.aceEditor

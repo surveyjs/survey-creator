@@ -14,7 +14,6 @@ import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 import PropertyGridComponent from "../../PropertyGrid";
-import { values } from "lodash";
 
 interface ITabDesignerComponentProps {
   data: TabDesignerViewModel<SurveyModel>;
@@ -146,28 +145,6 @@ export class DesignerSurveyNavigationBlock extends React.Component<any, any> {
           { survey: this.survey, css: this.survey.css, isTop: this.isTop }
         )
       : null;
-  }
-}
-
-interface ReactDragDropHelperComponentProps {
-  creator: CreatorBase<SurveyModel>;
-  renderContent: () => JSX.Element;
-}
-
-class ReactDragDropHelperComponent extends SurveyElementBase<
-  ReactDragDropHelperComponentProps,
-  any
-> {
-  constructor(props: ReactDragDropHelperComponentProps) {
-    super(props);
-  }
-
-  protected getStateElement(): Base {
-    return this.props.creator.dragDropHelper;
-  }
-
-  render(): JSX.Element {
-    return this.props.renderContent();
   }
 }
 
