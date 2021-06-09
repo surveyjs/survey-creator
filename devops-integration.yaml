@@ -76,11 +76,6 @@ steps:
   displayName: 'Npm install survey-creator-core'
 
 - script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm run build
-  displayName: 'Build creator v2 core'
-
-- script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm install
     npm run remove-package-lock
@@ -146,6 +141,10 @@ steps:
     OverWrite: true
 
 # Creator CORE
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run build
+  displayName: 'Build creator v2 core'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
@@ -253,8 +252,7 @@ steps:
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react'
     ArtifactName: 'SurveyJSCreatorV2BuildReact'
-    publishLocation: 'Container'  
-    
+    publishLocation: 'Container'
 
 # Creator KNOCKOUT
 - script: |
