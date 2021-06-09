@@ -1,7 +1,6 @@
 .sd-item {
   padding: 12px 0;
 }
-.sd-item__control.sd-item__control:disabled + .sd-item__decorator,
 .sd-item__decorator {
   display: flex;
   align-items: center;
@@ -17,7 +16,7 @@
   }
   flex-shrink: 0;
 }
-.sd-item--checked .sd-item__decorator,
+.sd-item--checked:not(.sd-item--disabled) .sd-item__decorator,
 .sd-item--allowhover:hover .sd-item__decorator {
   border: 2px $green solid;
   box-shadow: none;
@@ -25,7 +24,7 @@
 .sd-item--allowhover:hover .sd-item__decorator {
   background: $background;
 }
-.sd-item--checked .sd-item__decorator {
+.sd-item--checked:not(.sd-item--disabled) .sd-item__decorator {
   background: $green;
 }
 .sd-item__control-label {

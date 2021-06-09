@@ -17,14 +17,14 @@
   border-radius: 3px;
   outline: none;
 }
-.sd-input:disabled {
+.sd-input--disabled {
   background-color: $background-for-editors;
   color: $foreground-disabled-for-editors;
 }
 .sd-input::placeholder {
   color: $foreground-light;
 }
-.sd-input:disabled,
-.sd-input:disabled::placeholder {
+.sd-input--disabled,
+.sd-input--disabled::placeholder {
   color: $foreground-disabled;
 }

@@ -149,6 +149,7 @@ export var surveyDesignerCss = {
   text: {
     root: "sd-input sd-text",
     small: "sd-row__question--small",
+    controlDisabled: "sd-input--disabled",
     onError: "sd-input--error"
   },
   multipletext: {
@@ -172,6 +173,7 @@ export var surveyDesignerCss = {
     itemHover: "sd-item--allowhover sd-radio--allowhover",
     itemControl: "sd-visuallyhidden sd-item__control sd-radio__control",
     itemDecorator: "sd-item__svg sd-radio__svg",
+    controlDisabled: "sd-input--disabled",
     controlLabel: "sd-item__control-label",
     materialDecorator: "sd-item__decorator sd-radio__decorator"
   },
@@ -231,11 +233,12 @@ export var surveyDesignerCss = {
   rating: {
     root: "sd-rating",
     item: "sd-rating__item",
+    itemHover: "sd-rating__item--allowhover",
     selected: "sd-rating__item--selected",
     minText: "sd-rating__item-text sd-rating__min-text",
     itemText: "sd-rating__item-text",
     maxText: "sd-rating__item-text sd-rating__max-text",
-    disabled: "sd-rating__item--disabled"
+    itemDisabled: "sd-rating__item--disabled"
   },
   comment: {
     root: "sd-comment",
