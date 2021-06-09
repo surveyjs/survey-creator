@@ -5,15 +5,9 @@
   margin-top: calcSize(2);
 }
 
-.svc-question__content--selected {
+.svc-question__content--selected,
+.svc-question__content--selected-no-border {
   .svc-question__dropdown-choices {
     display: block;
-  }
-}
-
-.svc-question__dropdown-choice {
-  padding: calcSize(1) 0;
-  .svc-item-value__item {
-    padding-left: calcSize(2);
   }
 }

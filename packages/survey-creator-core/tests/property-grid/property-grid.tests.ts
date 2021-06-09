@@ -112,13 +112,23 @@ test("dropdown property editor", () => {
   titleLocationQuestion.value = "bottom";
   expect(question.titleLocation).toEqual("bottom"); //"property editor change the question property"
 });
-test("dropdown property editor localization", () => {
+test("dropdown property editor localization", (): any => {
   var survey = new SurveyModel();
   var propertyGrid = new PropertyGridModelTester(survey);
+  var questionDescriptionLocationQuestion =
+    propertyGrid.survey.getQuestionByName("questionDescriptionLocation");
+  expect(questionDescriptionLocationQuestion.getType()).toEqual("buttongroup"); //"correct property editor is created" //since choices.length < 5 buttongroup rendered instead of dropdown
+  expect(questionDescriptionLocationQuestion.choices[0].value).toEqual(
+    "underInput"
+  );
+  expect(questionDescriptionLocationQuestion.choices[0].text).toEqual(
+    "under input"
+  );
+
   var showPreviewQuestion = propertyGrid.survey.getQuestionByName(
     "showPreviewBeforeComplete"
   );
-  expect(showPreviewQuestion.getType()).toEqual("buttongroup"); //"correct property editor is created" //since choices.length < 5 buttongroup rendered instead of dropdown
+  expect(showPreviewQuestion.getType()).toEqual("dropdown"); //"correct property editor is created" a lot of text
   expect(showPreviewQuestion.choices[0].value).toEqual("noPreview");
   expect(showPreviewQuestion.choices[0].text).toEqual("no preview");
 
@@ -127,6 +137,7 @@ test("dropdown property editor localization", () => {
   expect(localeQuestion.showOptionsCaption).toBeTruthy();
   expect(localeQuestion.optionsCaption).toEqual("Default (english)");
 });
+
 test("dropdown property editor, get choices on callback", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;
@@ -219,7 +230,7 @@ test("itemvalue[] property editor + detail panel", () => {
   expect(row.detailPanel.getQuestionByName("value")).toBeTruthy(); //"value property is here"
 });
 
-test("column[] property editor", () => {
+test("column[] property editor", (): any => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
   question.addColumn("col2");
@@ -230,14 +241,11 @@ test("column[] property editor", () => {
   );
   expect(columnsQuestion).toBeTruthy(); //"choices property editor created");
   expect(columnsQuestion.getType()).toEqual("matrixdynamic"); //"It is a matrix";
-  expect(columnsQuestion.columns).toHaveLength(4); //"There are four columns");
-  expect(columnsQuestion.columns[0].cellType).toEqual("boolean"); //"Correct cell type created for cellType property"
-  expect(columnsQuestion.columns[1].cellType).toEqual("dropdown"); //"Correct cell type created for cellType property"
-  expect(columnsQuestion.columns[2].title).toEqual("Name");
+  expect(columnsQuestion.columns).toHaveLength(3); //"There are three columns");
+  expect(columnsQuestion.columns[1].title).toEqual("Name");
   expect(columnsQuestion.visibleRows).toHaveLength(3); //"There are three elements"
-  expect(columnsQuestion.visibleRows[0].cells[1].value).toEqual("default"); //"the first cell value is 'default'"
-  expect(columnsQuestion.visibleRows[0].cells[2].value).toEqual("col1"); //"the second cell value is 'col1'"
-  columnsQuestion.visibleRows[0].cells[2].value = "col11";
+  expect(columnsQuestion.visibleRows[0].cells[1].value).toEqual("col1"); //"the second cell value is 'col1'"
+  columnsQuestion.visibleRows[0].cells[1].value = "col11";
   expect(question.columns[0].name).toEqual("col11"); //"column name has been changed"
 
   columnsQuestion.addRow();
@@ -245,11 +253,7 @@ test("column[] property editor", () => {
   expect(question.columns[3].getType()).toEqual("matrixdropdowncolumn"); //"Object created correctly"
   expect(question.columns[3].name).toEqual("col4"); //"Object created correctly"
   question.columns[1].title = "Column 2";
-  expect(columnsQuestion.visibleRows[1].cells[3].value).toEqual("Column 2"); //"the third cell in second row is correct"
-  question.columns[2].cellType = "text";
-  expect(columnsQuestion.visibleRows[2].cells[1].value).toEqual("text"); //"react on changing column cell type"
-  columnsQuestion.visibleRows[2].cells[1].value = "checkbox";
-  expect(question.columns[2].cellType).toEqual("checkbox"); //"change column cell type in matrix"
+  expect(columnsQuestion.visibleRows[1].cells[2].value).toEqual("Column 2"); //"the third cell in second row is correct"
 });
 
 test("surveypages property editor", () => {
@@ -1515,7 +1519,7 @@ test("Change cellType in the column in property grid", () => {
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
   expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeTruthy();
 });
-test("Validate Selected Element Errors", () => {
+test("Validate Selected Element Errors", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
   var oldIsRequired = titleProp.isRequired;
   titleProp.isRequired = true;
@@ -1525,6 +1529,7 @@ test("Validate Selected Element Errors", () => {
   expect(propertyGrid.validate()).toBeFalsy();
   var titleQuestion = propertyGrid.survey.getQuestionByName("title");
   expect(titleQuestion.errors).toHaveLength(1);
+  expect(titleQuestion.errors[0].getText()).toEqual("Please enter a value");
   titleQuestion.value = "Question 1";
   expect(propertyGrid.validate()).toBeTruthy();
   expect(titleQuestion.errors).toHaveLength(0);

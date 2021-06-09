@@ -39,11 +39,6 @@ steps:
     git config --global user.name "dmitrykurmanov"
   displayName: 'Set up git config'
 
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-    npm install
-  displayName: 'Install npm'
-  
 - task: DownloadBuildArtifacts@0
   inputs:
     buildType: 'specific'
@@ -69,6 +64,34 @@ steps:
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
     OverWrite: true
 
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm install
+  displayName: 'Npm install survey-creator'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm install
+    npm run remove-package-lock
+  displayName: 'Npm install survey-creator-core'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run build
+  displayName: 'Build creator v2 core'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm install
+    npm run remove-package-lock
+  displayName: 'Npm install survey-creator-knockout'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm install
+    npm run remove-package-lock
+  displayName: 'Npm install survey-creator-react'
+
 # npm run release with version
 - task: CopyFiles@2
   inputs:
@@ -86,7 +109,22 @@ steps:
 - powershell: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run release -- --release-as $(SurveyJSVersion)
-  displayName: 'Release specific version'
+  displayName: 'Release specific version survey-creator'
+
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'Release specific version survey-creator-core'
+
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'Release specific version survey-creator-knockout'
+
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'Release specific version survey-creator-react'
 #####################################################
 
 - task: DownloadBuildArtifacts@0
@@ -108,15 +146,6 @@ steps:
     OverWrite: true
 
 # Creator CORE
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm install
-  displayName: 'Install npm'
-  
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm run build
-  displayName: 'Build creator v2 core'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
@@ -135,11 +164,6 @@ steps:
     publishLocation: 'Container'  
 
 # Creator REACT
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-    npm install
-  displayName: 'Install npm'
-
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
     echo $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types
@@ -235,11 +259,6 @@ steps:
 # Creator KNOCKOUT
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-    npm install
-  displayName: 'Install npm'
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run build
   displayName: 'Build creator v2 knockout'
 
@@ -309,7 +328,6 @@ steps:
     git pull origin master
     git fetch --tags --force
     git add surveyjs.io/App_Data/DocsEditor
-    git reset -- surveyjs.io/App_Data/DocsEditor/images
     git commit -m "updated survey-creator docs"
     git pull origin master
     git push origin master

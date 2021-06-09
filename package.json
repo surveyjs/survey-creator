@@ -17,6 +17,7 @@
     "testcafe:file": "lerna run testcafe:file"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.23",
     "husky": "^4.3.8",
     "lerna": "^3.22.1"
   },

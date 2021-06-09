@@ -60,7 +60,19 @@ export class EditableObject {
       return;
     }
     if (!this.isPropertyChanged(propertyName)) return;
-    this.obj[propertyName] = this.editableObj[propertyName];
+    if (
+      Array.isArray(this.obj[propertyName]) &&
+      Array.isArray(this.editableObj[propertyName])
+    ) {
+      var dest = this.obj[propertyName];
+      var src = this.editableObj[propertyName];
+      dest.splice(0, dest.length);
+      for (var i = 0; i < src.length; i++) {
+        dest.push(src[i]);
+      }
+    } else {
+      this.obj[propertyName] = this.editableObj[propertyName];
+    }
   }
   public reset() {
     this.assignProperties(this.editableObj);

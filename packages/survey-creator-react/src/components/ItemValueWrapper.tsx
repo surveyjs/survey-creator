@@ -33,9 +33,8 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
   }
 
   private getDragDropGhost(topOrBottom: string) {
-    if (this.model.getItemValueGhostPosition() === topOrBottom)
+    if (this.model.ghostPosition === topOrBottom)
       return <div className="svc-drag-drop-ghost"></div>;
-
     return null;
   }
 
@@ -45,40 +44,49 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     // }
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
-
-    const button = isNew ?
-      <span className="svc-item-value-controls__button svc-item-value-controls__add" onClick={() => this.model.add(this.model)}>
-        <SvgIcon size={24} iconName={'icon-add-item-value'}></SvgIcon>
+    const button = isNew ? (
+      <span
+        className="svc-item-value-controls__button svc-item-value-controls__add"
+        onClick={() => this.model.add(this.model)}
+      >
+        <SvgIcon size={16} iconName={"icon-add-item-value"}></SvgIcon>
       </span>
-      :
-      <> {(this.model.isDraggable ?
-        <span className="svc-item-value-controls__button svc-item-value-controls__drag">
-          <SvgIcon size={24} iconName={'icon-drag-handler'}></SvgIcon>
-        </span> : null)}
-        <span className="svc-item-value-controls__button svc-item-value-controls__remove" onClick={() => this.model.remove(this.model)}>
-          <SvgIcon size={24} iconName={'icon-remove-item-value'}></SvgIcon>
+    ) : (
+      <>
+        {" "}
+        {this.model.isDraggable ? (
+          <span
+            className="svc-item-value-controls__button svc-item-value-controls__drag"
+            onPointerDown={(event: any) => this.model.startDragItemValue(event)}
+          >
+            <SvgIcon size={16} iconName={"icon-drag-handler"}></SvgIcon>
+          </span>
+        ) : null}
+        <span
+          className="svc-item-value-controls__button svc-item-value-controls__remove"
+          onClick={() => this.model.remove(this.model)}
+        >
+          <SvgIcon size={16} iconName={"icon-remove-item-value"}></SvgIcon>
         </span>
       </>
-      ;
-
+    );
     return (
       <div
-        className={"svc-item-value-wrapper" + (isNew ? " svc-item-value--new" : "")} key={this.props.element.key}
-        draggable={this.model.isDraggable}
-        onDragStart={ (e) => this.model.dragStart(this.model, new ReactDragEvent(e)) }
-        onDragOver={ (e) => this.model.dragOver(this.model, new ReactDragEvent(e)) }
-        onDragEnd={ (e) => this.model.dragEnd(this.model, new ReactDragEvent(e)) }
-        onDrop={ (e) => this.model.drop(this.model, new ReactDragEvent(e)) }
+        className={
+          "svc-item-value-wrapper" +
+          (isNew ? " svc-item-value--new" : "") +
+          (this.model.isDragging ? " svc-item-value--dragging" : "")
+        }
+        key={this.props.element.key}
+        data-svc-drop-target-item-value={
+          this.model.isDraggable ? this.model.item.value : undefined
+        }
       >
         {this.getDragDropGhost("top")}
 
-        <div className="svc-item-value-controls">
-          {button}
-        </div>
+        <div className="svc-item-value-controls">{button}</div>
 
-        <div className={"svc-item-value__item"}>
-          {this.props.element}
-        </div>
+        <div className={"svc-item-value__item"}>{this.props.element}</div>
 
         {this.getDragDropGhost("bottom")}
       </div>

@@ -31,6 +31,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 
 import "./translation.scss";
+import { SurveyHelper } from "../../surveyHelper";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -176,6 +177,7 @@ export interface ITranslationLocales {
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
   fireOnObjCreating(obj: Base);
   removeLocale(loc: string): void;
+  canShowProperty(obj: Base, prop: JsonObjectProperty): boolean;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -381,6 +383,12 @@ export class TranslationGroup extends TranslationItemBase {
     var locStr = <LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
+    if (
+      locStr.isEmpty &&
+      !!this.translation &&
+      !this.translation.canShowProperty(obj, property)
+    )
+      return null;
     return new TranslationItem(
       property.name,
       locStr,
@@ -744,18 +752,20 @@ export class Translation extends Base implements ITranslationLocales {
   private setupToolbarItems() {
     this.chooseLanguagePopupModel = new PopupModel(
       "sv-list",
-      new ListModel(
-        this.getSurveyLocales()[0].map((locale: ItemValue) => ({
-          id: locale.value,
-          title: locale.text,
-          data: locale
-        })),
-        (item: IActionBarItem) => {
-          this.addLocale(item.id);
-          this.chooseLanguagePopupModel.toggleVisibility();
-        },
-        false
-      ),
+      {
+        model: new ListModel(
+          this.getSurveyLocales()[0].map((locale: ItemValue) => ({
+            id: locale.value,
+            title: locale.text,
+            data: locale
+          })),
+          (item: IActionBarItem) => {
+            this.addLocale(item.id);
+            this.chooseLanguagePopupModel.toggleVisibility();
+          },
+          false
+        )
+      },
       "top",
       "right"
     );
@@ -773,25 +783,27 @@ export class Translation extends Base implements ITranslationLocales {
 
     this.pagePopupModel = new PopupModel(
       "sv-list",
-      new ListModel(
-        [{ id: null, title: this.showAllPagesText }].concat(
-          this.survey.pages.map((page) => ({
-            id: page.name,
-            title: this.options.getObjectDisplayName(
-              page,
-              "survey-translation",
-              page.title
-            )
-          }))
-        ),
-        (item: IActionBarItem) => {
-          this.filteredPage = !!item.id
-            ? this.survey.getPageByName(item.id)
-            : null;
-          this.pagePopupModel.toggleVisibility();
-        },
-        true
-      ),
+      {
+        model: new ListModel(
+          [{ id: null, title: this.showAllPagesText }].concat(
+            this.survey.pages.map((page) => ({
+              id: page.name,
+              title: this.options.getObjectDisplayName(
+                page,
+                "survey-translation",
+                page.title
+              )
+            }))
+          ),
+          (item: IActionBarItem) => {
+            this.filteredPage = !!item.id
+              ? this.survey.getPageByName(item.id)
+              : null;
+            this.pagePopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
       "top",
       "center"
     );
@@ -886,6 +898,9 @@ export class Translation extends Base implements ITranslationLocales {
     this.updateSettingsSurveyLocales();
     this.updateLocales();
     this.resetStringsSurvey();
+  }
+  public canShowProperty(obj: Base, prop: JsonObjectProperty): boolean {
+    return SurveyHelper.isPropertyVisible(obj, prop, this.options);
   }
   public get defaultLocale(): string {
     return surveyLocalization.defaultLocale;

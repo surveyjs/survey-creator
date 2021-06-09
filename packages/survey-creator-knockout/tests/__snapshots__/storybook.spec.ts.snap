@@ -104,96 +104,6 @@ exports[`Storyshots Button Disabled Action Button 1`] = `
 </svc-button>
 `;
 
-exports[`Storyshots Button Group Disabled Item 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group Four Buttons 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group Selected Item 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group Three Buttons 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group Two Buttons 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group With Icons 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group With Icons Disabled Item 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group With Icons Selected Item 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
-exports[`Storyshots Button Group With Label 1`] = `
-<div
-  style="width:480px"
->
-  <svc-button-group
-    params="model: model"
-  />
-</div>
-`;
-
 exports[`Storyshots Button Ordinary 1`] = `
 <svc-button
   params="action: action, title: title"
@@ -285,9 +195,11 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         <!-- ko foreach: creator.tabs -->
         
       
+        <!-- ko if: $parent.creator.viewType == id -->
+        
+      
         <div
           class="svc-creator-tab"
-          data-bind="visible: $parent.creator.viewType == id"
         >
           
         
@@ -347,13 +259,13 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           
 
           <div
-            class="svc-tab-designer sv-root-modern"
+            class="svc-tab-designer sd-root-modern"
             data-bind="css: survey.css.root"
           >
             
   
             <div
-              class="sv-container-modern"
+              class="sd-container-modern"
               data-bind="css: survey.css.container"
             >
               
@@ -362,15 +274,21 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               <!-- /ko -->
               
     
+              <!-- ko if: survey.isShowProgressBarOnTop -->
+              <!-- /ko -->
+              
+    
               <!-- ko foreach: survey.pages -->
               
     
               <svc-page
+                data-bind="attr: { 'data-svc-drop-target-element-name': $data.name }"
+                data-svc-drop-target-element-name="page1"
                 params="survey: $parent.survey, page: $data, creator: $parent.creator"
               >
                 <div
                   class="svc-page__content"
-                  data-bind="click: select, clickBubble: false, css: css, event: { dragover: dragOver, drop: drop, mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+                  data-bind="click: select, clickBubble: false, css: css, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
                 >
                   
   
@@ -422,6 +340,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               <!-- ko if: showNewPage -->
               <!-- /ko -->
               
+    
+              <!-- ko if: survey.isShowProgressBarOnBottom -->
+              <!-- /ko -->
+              
   
             </div>
             
@@ -448,15 +370,31 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             <svc-property-panel
               params="model: creator"
             >
-              <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
-              <!-- /ko -->
-              
-
               <div
                 class="svc-property-panel__header"
-                data-bind="text: title"
               >
-                Survey
+                
+  
+                <div
+                  class="svc-property-panel__actions"
+                >
+                  
+  
+                  <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+                  <!-- /ko -->
+                  
+  
+                </div>
+                
+  
+                <span
+                  class="svc-property-panel__title"
+                  data-bind="text: title"
+                >
+                  Survey
+                </span>
+                
+
               </div>
               
 
@@ -478,177 +416,31 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           </div>
           
 
-          <script
-            id="svc-choice-item-text"
-            type="text/html"
-          >
-            
-  &lt;!-- ko template: { name: 'survey-string', data: locText } --&gt;
-  &lt;!-- /ko --&gt;
-
-          </script>
-          
-
           <!-- /ko -->
           
       
         </div>
         
       
-        
-      
-        <div
-          class="svc-creator-tab"
-          data-bind="visible: $parent.creator.viewType == id"
-          style="display: none;"
-        >
-          
-        
-          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
-          <div
-            class="svc-creator-tab__content"
-          >
-            
-  
-            <div
-              class="svc-plugin-tab__content svc-test-tab__content"
-            >
-              
-    
-              <survey-simulator
-                params="options: simulator"
-              >
-                <div
-                  class="svd-simulator-main"
-                >
-                  
-  
-                  <!-- ko if: hasFrame -->
-                  <!-- /ko -->
-                  
-  
-                  <!-- ko ifnot: hasFrame -->
-                  
-  
-                  <survey-widget
-                    class="svd-simulator-content"
-                    params="survey: survey"
-                  >
-                    <!-- ko if: $data.survey -->
-                    <!-- /ko -->
-                  </survey-widget>
-                  
-  
-                  <!-- /ko -->
-                  
-
-                </div>
-                
-
-              </survey-simulator>
-              
-    
-              <!-- ko ifnot: isRunning -->
-              <!-- /ko -->
-              
-  
-            </div>
-            
-  
-            <div
-              class="svc-plugin-tab__content-actions svc-test-tab__content-actions"
-            >
-              
-    
-              <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
-              <!-- /ko -->
-              
-  
-            </div>
-            
-
-          </div>
-          
-
-          <!-- /ko -->
-          
-      
-        </div>
+        <!-- /ko -->
         
       
         
       
-        <div
-          class="svc-creator-tab"
-          data-bind="visible: $parent.creator.viewType == id"
-          style="display: none;"
-        >
-          
-        
-          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
-          <div
-            class="svc-creator-tab__content"
-          >
-            
-  
-            <div
-              class="svc-json-editor-tab__content"
-            >
-              
-    
-              <textarea
-                aria-label="JSON Editor"
-                class="svc-json-editor-tab__content-area"
-                data-bind="textInput: text, disable: readOnly, attr: { 'aria-label': ariaLabel }"
-              >
-                    
-              </textarea>
-              
-    
-              <div
-                class="svc-json-editor-tab__content-errors"
-                data-bind="foreach: errors"
-              />
-              
-  
-            </div>
-            
-
-          </div>
-          <!-- /ko -->
-          
-      
-        </div>
+        <!-- ko if: $parent.creator.viewType == id -->
+        <!-- /ko -->
         
       
         
       
-        <div
-          class="svc-creator-tab"
-          data-bind="visible: $parent.creator.viewType == id"
-          style="display: none;"
-        >
-          
+        <!-- ko if: $parent.creator.viewType == id -->
+        <!-- /ko -->
         
-          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
-          <div
-            class="svc-creator-tab__content"
-          >
-            
-  
-            <survey-widget
-              params="survey: survey"
-            >
-              <!-- ko if: $data.survey -->
-              <!-- /ko -->
-            </survey-widget>
-            
-
-          </div>
-          <!-- /ko -->
-          
       
-        </div>
+        
+      
+        <!-- ko if: $parent.creator.viewType == id -->
+        <!-- /ko -->
         
       
         <!-- /ko -->
@@ -692,10 +484,21 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       <!-- /ko -->
       
     
+      <!-- ko if: survey.isShowProgressBarOnTop -->
+      
+    
+      <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+      <!-- /ko -->
+      
+    
+      <!-- /ko -->
+      
+    
       <!-- ko foreach: survey.pages -->
       
     
       <svc-page
+        data-bind="attr: { 'data-svc-drop-target-element-name': $data.name }"
         params="survey: $parent.survey, page: $data, creator: $parent.creator"
       />
       
@@ -707,8 +510,19 @@ exports[`Storyshots Creator design surface content Default 1`] = `
       
     
       <svc-page
+        data-bind="attr: { 'data-svc-drop-target-element-name': 'newGhostPage' }"
         params="survey: survey, creator: creator, page: newPage"
       />
+      
+    
+      <!-- /ko -->
+      
+    
+      <!-- ko if: survey.isShowProgressBarOnBottom -->
+      
+    
+      <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+      <!-- /ko -->
       
     
       <!-- /ko -->
@@ -737,17 +551,6 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     
 
   </div>
-  
-
-  <script
-    id="svc-choice-item-text"
-    type="text/html"
-  >
-    
-  &lt;!-- ko template: { name: 'survey-string', data: locText } --&gt;
-  &lt;!-- /ko --&gt;
-
-  </script>
   
 
 </svc-tab-designer>

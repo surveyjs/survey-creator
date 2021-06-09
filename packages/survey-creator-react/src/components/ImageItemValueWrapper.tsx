@@ -1,12 +1,7 @@
 import { ImageItemValueWrapperViewModel } from "@survey/creator";
 import React from "react";
-import { ReactDragEvent } from "src/events";
 import { QuestionSelectBase, Base, ImageItemValue } from "survey-core";
-import {
-  ReactElementFactory,
-  SurveyElementBase,
-  SvgIcon
-} from "survey-react-ui";
+import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 interface ImageItemValueAdornerComponentProps {
   element: JSX.Element;
@@ -16,7 +11,7 @@ interface ImageItemValueAdornerComponentProps {
 }
 
 export class ImageItemValueAdornerComponent extends SurveyElementBase<
-ImageItemValueAdornerComponentProps,
+  ImageItemValueAdornerComponentProps,
   any
 > {
   model: ImageItemValueWrapperViewModel;
@@ -43,7 +38,7 @@ ImageItemValueAdornerComponentProps,
   }
 
   private getDragDropGhost(topOrBottom: string) {
-    if (this.model.getItemValueGhostPosition() === topOrBottom)
+    if (this.model.ghostPosition === topOrBottom)
       return <div className="svc-drag-drop-ghost"></div>;
 
     return null;
@@ -74,39 +69,59 @@ ImageItemValueAdornerComponentProps,
           </span>
         </div>
       </>);
-
     } else {
-      content = (<>
-        {this.getDragDropGhost("top")}
+      content = (
+        <>
+          {this.getDragDropGhost("top")}
 
-        <div className={"svc-image-item-value__item"}>
-          {this.props.element}
-        </div>
+          <div className={"svc-image-item-value__item"}>
+            {this.props.element}
+          </div>
 
-        <div className="svc-image-item-value-controls">
-          <span className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" onClick={() => this.model.chooseFile(this.model)}>
-            <SvgIcon size={24} iconName={'icon-file'}></SvgIcon>
-          </span>
-          <span className="svc-image-item-value-controls__button svc-image-item-value-controls__remove" onClick={() => this.model.remove(this.model)}>
-            <SvgIcon size={24} iconName={'icon-delete'}></SvgIcon>
-          </span>
-        </div>
+          <div className="svc-image-item-value-controls">
+            <span
+              className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
+              onClick={() => this.model.chooseFile(this.model)}
+            >
+              <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+            </span>
+            <span
+              className="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
+              onClick={() => this.model.remove(this.model)}
+            >
+              <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
+            </span>
+          </div>
 
-        {this.getDragDropGhost("bottom")}
-      </>);
+          {this.getDragDropGhost("bottom")}
+        </>
+      );
     }
 
     return (
       <div
         ref={this.rootRef}
-        className={"svc-image-item-value-wrapper" + (isNew ? " svc-image-item-value--new" : "")} key={this.props.element.key}
-        draggable={this.model.isDraggable}
-        onDragStart={ (e) => this.model.dragStart(this.model, new ReactDragEvent(e)) }
-        onDragOver={ (e) => this.model.dragOver(this.model, new ReactDragEvent(e)) }
-        onDragEnd={ (e) => this.model.dragEnd(this.model, new ReactDragEvent(e)) }
-        onDrop={ (e) => this.model.drop(this.model, new ReactDragEvent(e)) }
+        className={
+          "svc-image-item-value-wrapper" +
+          (isNew ? " svc-image-item-value--new" : "")
+        }
+        key={this.props.element.key}
+        data-svc-drop-target-item-value={
+          this.model.isDraggable ? this.model.item.value : undefined
+        }
       >
-        <input type="file" accept="image/*" className="svc-choose-file-input" style={{position: "absolute", opacity: 0, width: "1px", height: "1px", overflow: "hidden"}} />
+        <input
+          type="file"
+          accept="image/*"
+          className="svc-choose-file-input"
+          style={{
+            position: "absolute",
+            opacity: 0,
+            width: "1px",
+            height: "1px",
+            overflow: "hidden"
+          }}
+        />
         {content}
       </div>
     );

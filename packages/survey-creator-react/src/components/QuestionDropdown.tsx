@@ -7,6 +7,7 @@ import {
   ReactElementFactory,
   SurveyElementBase,
   SurveyQuestion,
+  SurveyQuestionRadioItem
 } from "survey-react-ui";
 import { QuestionAdornerComponentProps } from "./Question";
 
@@ -35,33 +36,48 @@ export class QuestionDropdownAdornerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div
+          data-svc-drop-target-element-name={this.model.surveyElement.name}
           className={"svc-question__adorner"}
-          onDragOver={(e) => this.model.dragOver(this.model, new ReactDragEvent(e))
-          }
-          onDragEnd={(e) =>
-            this.model.dragEnd(this.model, new ReactDragEvent(e))
-          }
           onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
           onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
           <div
             className={"svc-question__content " + this.model.css()}
             onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
-            onDragStart={(e) =>
-              this.model.dragStart(this.model, new ReactDragEvent(e))
-            }
-            // onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
-            draggable={this.model.isDraggable}
           >
+            <div className={"svc-question__drag-area"}>
+                <div
+                  className={"svc-question__drag-element"}
+                  onPointerDown={(event:any) => this.model.startDragSurveyElement(event)}
+                ></div>
+            </div>
+
             {this.props.element}
 
             <div className="svc-question__dropdown-choices">
-                {(question.visibleChoices.map((item: ItemValue, index: number) => (
-                  <div className="svc-question__dropdown-choice" key={`editable_choice_${index}`}>
-                    {(question.survey["wrapItemValue"](SurveyElementBase.renderLocString(item.locText), question, item))}
+              {question.visibleChoices.map((item: ItemValue, index: number) => (
+                <div
+                  className="svc-question__dropdown-choice"
+                  key={`editable_choice_${index}`}
+                >
+                  {question.survey["wrapItemValue"](
+                    ReactElementFactory.Instance.createElement(
+                      "survey-radiogroup-item",
+                      {
+                        question: question,
+                        cssClasses: question.cssClasses,
+                        isDisplayMode: true,
+                        item: item,
+                        textStyle: question.textStyle,
+                        index: index,
+                        isChecked: question.value === item.value
+                      }
+                    ),
+                    question,
+                    item
+                  )}
                 </div>
-              )))}
-
+              ))}
             </div>
 
             <div className="svc-question__content-actions">
@@ -69,7 +85,7 @@ export class QuestionDropdownAdornerComponent extends SurveyElementBase<
             </div>
           </div>
         </div>
-      </React.Fragment >
+      </React.Fragment>
     );
   }
 }

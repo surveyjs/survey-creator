@@ -1,0 +1,17 @@
+.sd-matrixdynamic__add-btn {
+}
+.sd-matrixdynamic__drag-element {
+  padding: calcSize(2);
+  &:hover {
+    background-color: $background;
+  }
+  &:after {
+    content: " ";
+    display: block;
+    height: calcSize(0.5);
+    width: calcSize(2);
+    border: 1px solid $border;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+}

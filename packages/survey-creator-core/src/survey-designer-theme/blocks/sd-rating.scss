@@ -1,0 +1,36 @@
+.sd-rating {
+  fieldset {
+    display: flex;
+    border: none;
+    padding: 0;
+  }
+}
+.sd-rating__item {
+  background: $background;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 100px;
+  white-space: nowrap;
+  padding: calcSize(1.25) calcSize(2);
+  box-sizing: border-box;
+  min-width: calcSize(6);
+  text-align: center;
+  border: 2px solid $background;
+  color: $foreground;
+}
+.sd-rating__item.sd-rating__item--disabled {
+  color: $foreground-disabled-for-editors;
+}
+.sd-rating__item:not(.sd-rating__item--disabled):hover {
+  border-color: $primary;
+}
+.sd-rating__item--selected {
+  background-color: $primary;
+  border-color: $primary;
+  color: $background;
+}
+.sd-rating__item + .sd-rating__item {
+  margin-left: calcSize(1);
+}
+.sd-rating__item-text {
+  line-height: calcSize(3);
+}

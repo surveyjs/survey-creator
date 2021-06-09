@@ -2,7 +2,7 @@ import { Base, PageModel, SurveyModel } from "survey-core";
 import { SurveyActionBar, SurveyElementBase, SurveyPage } from "survey-react-ui";
 import { CreatorBase, PageViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
-import { ReactDragEvent, ReactMouseEvent } from "../events";
+import { ReactMouseEvent } from "../events";
 
 interface ICreatorSurveyPageComponentProps {
   creator: CreatorBase<SurveyModel>;
@@ -57,12 +57,8 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
           onClick={(e) => {
             return this.model.select(this.model, new ReactMouseEvent(e));
           }}
-          onDragOver={(e) =>
-            this.model.dragOver(this.model, new ReactDragEvent(e))
-          }
-          onDrop={(e) => this.model.drop(this.model, new ReactDragEvent(e))}
-          onMouseOut={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
-          onMouseOver={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
           <SurveyPage
             page={this.props.page}
@@ -76,7 +72,6 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
               e.stopPropagation();
               this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
             }}
-            data-bind="click: addNewQuestion"
           >
             <span className="svc-text svc-text--normal svc-text--bold">
               {this.model.addNewQuestionText}

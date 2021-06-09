@@ -51,11 +51,13 @@ export class DesignerContainerViewModel {
     if (this.visible()) {
       this._prevWidth = this._element.style.width;
       this._prevSurfaceWidth = surfaceEl.style.width;
-      surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis =
-        "";
+      surfaceEl.style.width = "100%";
+      surfaceEl.style.maxWidth = "none";
+      surfaceEl.style.flexBasis = "auto";
+      // surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis = "";
     } else {
       this._element.style.width = this._element.style.maxWidth = this._element.style.flexBasis = this._prevWidth;
-      surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis = this._prevSurfaceWidth;
+      // surfaceEl.style.width = surfaceEl.style.maxWidth = surfaceEl.style.flexBasis = this._prevSurfaceWidth;
     }
     this.visible(!this.visible());
   };

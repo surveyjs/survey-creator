@@ -11,12 +11,16 @@ export * from "../components/tabs/logic";
 export * from "../components/tabs/translation";
 
 export * from "../components/page";
+export * from "../components/row";
 export * from "../components/question";
 export * from "../components/question-dropdown";
 export * from "../components/question-image";
 export * from "../components/item-value";
 export * from "../components/image-item-value";
 export * from "../components/panel";
+export * from "../components/matrix-cell";
+export * from "../components/cell-question";
+export * from "../components/cell-question-dropdown";
 
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";
@@ -33,6 +37,19 @@ export * from "../components/header/logo-image";
 export * from "../utils/survey-widget";
 
 export * from "../creator";
+export * as core from "@survey/creator";
+export {
+  editorLocalization,
+  editorLocalization as localization,
+  settings,
+  LogicModel,
+  SurveyQuestionEditorDefinition,
+  ISurveyCreatorOptions,
+  IPropertyGridEditor,
+  PropertyGridEditorCollection
+} from "@survey/creator";
+//Obsolete
+export { StylesManager } from "@survey/creator";
 
 import "@survey/creator/survey-creator-core.css";
 

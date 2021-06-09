@@ -1,0 +1,35 @@
+@import "../variables.scss";
+
+@import "blocks/sd-question.scss";
+@import "blocks/sd-input.scss";
+@import "blocks/sd-comment.scss";
+@import "blocks/sd-panel.scss";
+@import "blocks/sd-checkbox.scss";
+@import "blocks/sd-matrixdynamic.scss";
+@import "blocks/sd-table.scss";
+@import "blocks/sd-page.scss";
+@import "blocks/sd-row.scss";
+@import "blocks/sd-title.scss";
+@import "blocks/sd-description.scss";
+@import "blocks/sd-item.scss";
+@import "blocks/sd-selectbase.scss";
+@import "blocks/sd-checkbox.scss";
+@import "blocks/sd-radio.scss";
+@import "blocks/sd-visuallyhidden.scss";
+@import "blocks/sd-matrix.scss";
+@import "blocks/sd-rating.scss";
+@import "blocks/sd-dropdown.scss";
+@import "blocks/sd-imagepicker.scss";
+@import "blocks/sd-progress.scss";
+
+.sd-root-modern {
+  width: 100%;
+  font-family: $font-family;
+}
+
+.sv-popup--modal {
+  .sv-popup__footer {
+    padding-bottom: 2px;
+  }
+  padding: calcSize(4);
+}

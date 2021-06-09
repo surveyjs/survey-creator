@@ -1,0 +1,15 @@
+@import "../variables.scss";
+
+.svc-row {
+  width: 100%;
+}
+.svc-row.svc-row--ghost {
+  .svc-question__content {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+  }
+  .sd-row {
+    margin-top: 0;
+  }
+}

@@ -1,26 +1,27 @@
 import {
   CreatorBase,
+  editorLocalization,
   getLocString,
   IQuestionToolboxItem,
+  QuestionToolbox
 } from "@survey/creator";
 import React, { CSSProperties } from "react";
-import { ReactDragEvent } from "../../events";
+import { ToolboxItemViewModel } from "@survey/creator";
 import {
   AdaptiveActionBarItemWrapper,
   AdaptiveElement,
   Base,
   VerticalResponsivityManager,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 import {
   ReactElementFactory,
   SurveyElementBase,
-  SvgIcon,
+  SvgIcon
 } from "survey-react-ui";
 interface ISurveyCreatorToolboxProps {
-  categories: Array<any>;
+  toolbox: QuestionToolbox;
   creator: CreatorBase<SurveyModel>;
-  items: Array<IQuestionToolboxItem>;
 }
 
 export class SurveyCreatorToolbox extends SurveyElementBase<
@@ -33,14 +34,9 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
 
   constructor(props: ISurveyCreatorToolboxProps) {
     super(props);
+
     this.adaptiveElement.dotsItemPopupModel.horizontalPosition = "right";
     this.adaptiveElement.dotsItemPopupModel.verticalPosition = "top";
-    const sourceItems: Array<IQuestionToolboxItem> = this.props.items;
-    this.adaptiveElement.items = sourceItems.map(
-      (item: IQuestionToolboxItem, itemIndex: number) => {
-        return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
-      }
-    );
     this.adaptiveElement.invisibleItemSelected = this.invisibleItemSelected.bind(
       this
     );
@@ -48,6 +44,9 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
   public get creator() {
     return this.props.creator;
+  }
+  public get toolbox() {
+    return this.props.toolbox;
   }
   private invisibleItemSelected(model: AdaptiveActionBarItemWrapper): void {
     this.creator.clickToolboxItem(
@@ -76,9 +75,15 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
 
   protected getStateElement(): Base {
-    return this.adaptiveElement;
+    return this.toolbox;
   }
   render(): JSX.Element {
+    const sourceItems: Array<IQuestionToolboxItem> = this.props.toolbox.items;
+    this.adaptiveElement.items = sourceItems.map(
+      (item: IQuestionToolboxItem, itemIndex: number) => {
+        return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
+      }
+    );
     if (!this.hasItems) return null;
     const items = this.renderItems();
     return (
@@ -93,7 +98,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   renderToolboxItem(item: AdaptiveActionBarItemWrapper): JSX.Element {
     const className = "svc-toolbox__tool " + item.css;
     const style: CSSProperties = {
-      visibility: item.isVisible ? "visible" : "hidden",
+      visibility: item.isVisible ? "visible" : "hidden"
     };
     if (item.visible !== undefined && !item.visible) {
       style.display = "none";
@@ -102,7 +107,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
       item.component || "svc-toolbox-item",
       {
         item: item,
-        creator: this.creator,
+        creator: this.creator
       }
     );
     return (
@@ -130,8 +135,11 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
   ISurveyCreatorToolboxItemProps,
   any
 > {
+  model: ToolboxItemViewModel;
   constructor(props) {
     super(props);
+    const toolboxItem: IQuestionToolboxItem = this.item.wrappedItem as any;
+    this.model = new ToolboxItemViewModel(toolboxItem, this.props.creator);
   }
   public get item() {
     return this.props.item;
@@ -139,29 +147,27 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
   public get creator() {
     return this.props.creator;
   }
+  protected getStateElement(): Base {
+    return this.model;
+  }
   render(): JSX.Element {
     const className =
       "svc-toolbox__item svc-toolbox__item--" + this.item.iconName;
-    const toolboxItem: IQuestionToolboxItem = this.item.wrappedItem as any;
     return (
       <div
         className={className}
         tabIndex={0}
-        draggable={true}
         title={this.item.tooltip}
         role="button"
-        aria-label={this.item.tooltip + " " + getLocString("toolbox") + " item"}
-        onClick={() => this.props.creator.clickToolboxItem(toolboxItem.json)}
-        onDragStart={(e) => {
-          var json = this.props.creator.getJSONForNewElement(toolboxItem.json);
-          this.props.creator.dragDropHelper.onDragStartToolboxItem(
-            new ReactDragEvent(e),
-            json
-          );
-          return true;
-        }}
-        onDragEnd={() => {
-          this.props.creator.dragDropHelper.onDragEnd();
+        aria-label={
+          this.item.tooltip +
+          " " +
+          editorLocalization.getString("toolbox") +
+          " item"
+        }
+        onPointerDown={(event: any) => {
+          event.persist();
+          this.model.onPointerDown(event);
         }}
       >
         <span className="svc-toolbox__item-container">

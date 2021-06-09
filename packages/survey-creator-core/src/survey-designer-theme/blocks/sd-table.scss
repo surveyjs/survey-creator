@@ -1,0 +1,24 @@
+.sd-table {
+  width: 100%;
+  background-color: $background;
+  border-collapse: collapse;
+}
+.sd-table tr:not(:last-child) {
+  padding-bottom: calcSize(2);
+}
+.sd-table__cell {
+  font-weight: normal;
+  font-size: calcSize(2);
+  line-height: calcSize(3);
+  padding-bottom: calcSize(2);
+  color: $foreground;
+}
+
+.sd-table__cell--actions, .sd-matrixdynamic__add-btn {
+  .sv-action-bar {
+    overflow: visible;
+  }
+  .svc-string-editor__button--done {
+    width: calcSize(2);
+  }
+}

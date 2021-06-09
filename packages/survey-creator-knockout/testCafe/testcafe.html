@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
-        <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/modern.css"/>
-        <link rel="stylesheet" type="text/css" href="../build/survey-creator-knockout.min.css"/>
-        <script src="../node_modules/survey-core/survey.core.js"></script>
-        <script src="../node_modules/survey-knockout-ui/survey-knockout-ui.js"></script> -->
-        <script src="../build/survey-creator-knockout.js"></script>
-    </head>
-    <body>
-        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
-            <survey-creator params="creator: creator"></survey-creator>
-        </div>
-        <script>
-            Survey.StylesManager.applyTheme("modern");
-            const creator = new SurveyCreatorKnockout.SurveyCreator();
-            window.creator = creator;
-            ko.applyBindings({ creator: creator });
-        </script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../node_modules/survey-core/modern.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../build/survey-creator-knockout.min.css"
+    />
+    <script src="../node_modules/survey-core/survey.core.js"></script>
+    <script src="../node_modules/survey-knockout-ui/survey-knockout-ui.js"></script>
+    -->
+    <script src="../build/survey-creator-knockout.js"></script>
+  </head>
+  <body>
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
+      <survey-creator params="creator: creator"></survey-creator>
+    </div>
+    <script>
+      Survey.StylesManager.applyTheme("modern");
+      const creator = new SurveyCreator.SurveyCreator();
+      window.creator = creator;
+      ko.applyBindings({ creator: creator });
+    </script>
+  </body>
 </html>

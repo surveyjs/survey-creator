@@ -7,6 +7,7 @@ import { settings } from "../settings";
 
 import "./translation.scss";
 import { IActionBarItem } from "survey-knockout";
+import { SurveyHelper } from "../surveyHelper";
 var templateHtml = require("./translation.html");
 var groupTemplateHtml = require("./translation-group.html");
 
@@ -118,6 +119,7 @@ export interface ITranslationLocales {
     context: any
   ) => void;
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
+  canShowProperty(obj: Survey.Base, prop: Survey.JsonObjectProperty): boolean;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -321,6 +323,13 @@ export class TranslationGroup extends TranslationItemBase {
     var locStr = <Survey.LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
+    if (
+      locStr.isEmpty &&
+      !!this.translation &&
+      !!this.translation.canShowProperty &&
+      !this.translation.canShowProperty(this.obj, property)
+    )
+      return null;
     return new TranslationItem(
       property.name,
       locStr,
@@ -454,7 +463,11 @@ export class Translation implements ITranslationLocales {
   constructor(
     survey: Survey.Survey,
     showAllStrings: boolean = false,
-    public koReadOnly = ko.computed(() => false)
+    public koReadOnly = ko.computed(() => false),
+    private onCanShowProperty?: (
+      obj: Survey.Base,
+      prop: Survey.JsonObjectProperty
+    ) => boolean
   ) {
     this.koLocales = ko.observableArray([
       {
@@ -634,6 +647,12 @@ export class Translation implements ITranslationLocales {
   }
   public get selectLanguageOptionsCaption() {
     return editorLocalization.getString("ed.translationAddLanguage");
+  }
+  public canShowProperty(
+    obj: Survey.Base,
+    prop: Survey.JsonObjectProperty
+  ): boolean {
+    return !!this.onCanShowProperty ? this.onCanShowProperty(obj, prop) : true;
   }
   public get showAllStrings(): boolean {
     return this.koShowAllStrings();
@@ -854,7 +873,10 @@ ko.components.register("survey-translation", {
       let model = new Translation(
         creator.createSurvey({}, "translation"),
         false,
-        ko.computed(() => creator.readOnly)
+        ko.computed(() => creator.readOnly),
+        (obj: Survey.Base, prop: Survey.JsonObjectProperty): boolean => {
+          return SurveyHelper.isPropertyVisible(obj, prop, creator);
+        }
       );
       model.importFinishedCallback = function () {
         creator.onTranslationImported.fire(self, {});

@@ -17,20 +17,20 @@ import {
   QuestionRadiogroupModel,
   SurveyTriggerVisible,
   NumericValidator,
-  QuestionExpressionModel,
+  QuestionExpressionModel
 } from "survey-core";
 import {
   PropertyGridModel,
   PropertyGridEditorCollection,
-  PropertyEditorSetupValue,
+  PropertyEditorSetupValue
 } from "../../src/property-grid";
 import {
   ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions,
+  EmptySurveyCreatorOptions
 } from "../../src/settings";
 import {
   defaultStrings,
-  editorLocalization,
+  editorLocalization
 } from "../../src/editorLocalization";
 import { SurveyQuestionEditorDefinition } from "../../src/questionEditors/questionEditorDefinition";
 
@@ -44,7 +44,7 @@ import { DefaultValueEditor } from "../../src/property-grid/values-survey";
 import { CellsEditor } from "../../src/property-grid/cells-survey";
 import {
   PropertyGridValueEditor,
-  PropertyGridRowValueEditor,
+  PropertyGridRowValueEditor
 } from "../../src/property-grid/values";
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
 import { PropertiesHelpTexts } from "../../src/property-grid/properties-helptext";
@@ -62,8 +62,8 @@ class BindingsTester extends Base {
     this.survey = new SurveyModel({
       elements: [
         { type: "text", name: "q1" },
-        { type: "text", name: "q2" },
-      ],
+        { type: "text", name: "q2" }
+      ]
     });
   }
   public getType() {
@@ -98,7 +98,7 @@ Serializer.addClass(
     { name: "property1", isBindable: true },
     "proeprty2",
     { name: "property3:number", isBindable: true },
-    { name: "bindings:bindings", serializationProperty: "bindings" },
+    { name: "bindings:bindings", serializationProperty: "bindings" }
   ],
   function (json: any) {
     return new BindingsTester();
@@ -118,11 +118,11 @@ function createSurvey(): SurveyModel {
             choices: [
               "one",
               { value: "two", text: "second value" },
-              { value: 3, text: "third value" },
+              { value: 3, text: "third value" }
             ],
-            type: "checkbox",
-          },
-        ],
+            type: "checkbox"
+          }
+        ]
       },
       { name: "page2", questions: [{ name: "question3", type: "comment" }] },
       {
@@ -132,12 +132,12 @@ function createSurvey(): SurveyModel {
             name: "question4",
             columns: ["Column 1", "Column 2", "Column 3"],
             rows: ["Row 1", "Row 2"],
-            type: "matrix",
+            type: "matrix"
           },
-          { name: "question5", type: "rating" },
-        ],
-      },
-    ],
+          { name: "question5", type: "rating" }
+        ]
+      }
+    ]
   });
 }
 
@@ -167,7 +167,7 @@ test("Create correct questions for property editors", () => {
     textitems: "matrixdynamic",
     triggers: "matrixdynamic",
     validators: "matrixdynamic",
-    restfull: "propertygrid_restfull",
+    restfull: "propertygrid_restfull"
   };
   for (var key in propertyTypes) {
     var propName = "testname_" + key;
@@ -232,8 +232,8 @@ test("Question property editor - choices", () => {
     elements: [
       { type: "text", name: "question1", valueName: "value1" },
       { type: "text", name: "question2" },
-      { type: "text", name: "question3" },
-    ],
+      { type: "text", name: "question3" }
+    ]
   });
   var propertyGrid = new PropertyGridModelTester(survey);
   var dropdownQuestion = propertyGrid.survey.getQuestionByName("question_test");
@@ -248,8 +248,8 @@ test("SurveySelectBaseQuestionPropertyEditor", () => {
       { type: "text", name: "question1", valueName: "value1" },
       { type: "radiogroup", name: "question2" },
       { type: "checkbox", name: "question3" },
-      { type: "dropdown", name: "question4" },
-    ],
+      { type: "dropdown", name: "question4" }
+    ]
   });
   var propertyGrid = new PropertyGridModelTester(
     survey.getQuestionByName("question3")
@@ -265,8 +265,8 @@ test("SurveyQuestionValuePropertyEditor - choices", () => {
     elements: [
       { type: "text", name: "question1", valueName: "value1" },
       { type: "text", name: "question2" },
-      { type: "text", name: "question3" },
-    ],
+      { type: "text", name: "question3" }
+    ]
   });
   var propertyGrid = new PropertyGridModelTester(survey);
   var dropdownQuestion = propertyGrid.survey.getQuestionByName("question_test");
@@ -281,7 +281,7 @@ test("SurveyPropertyItemValue", () => {
   question.choices = [
     { value: 1, text: "item1" },
     { value: 2, text: "item2" },
-    { value: 3, text: "item3" },
+    { value: 3, text: "item3" }
   ];
   var propertyGrid = new PropertyGridModelTester(question);
   var choicesQuestion = <QuestionMatrixDynamicModel>(
@@ -438,9 +438,9 @@ test("SurveyPropertyItemValue disable viewtext for multiple languages", () => {
       {
         type: "checkbox",
         name: "q1",
-        choices: [{ value: 1, text: { default: "item1", de: "de_item1" } }],
-      },
-    ],
+        choices: [{ value: 1, text: { default: "item1", de: "de_item1" } }]
+      }
+    ]
   });
   survey.locale = "de";
   var question = <QuestionCheckboxModel>survey.getQuestionByName("q1");
@@ -503,7 +503,7 @@ test("SurveyPropertyItemValue override properties", () => {
   Serializer.addProperty("itemvalue", {
     name: "price:number",
     visible: false,
-    isSerializable: false,
+    isSerializable: false
   });
   Serializer.addClass(
     "ordergriditem",
@@ -512,11 +512,11 @@ test("SurveyPropertyItemValue override properties", () => {
         name: "price:number",
         default: 0,
         visible: true,
-        isSerializable: true,
+        isSerializable: true
       },
       { name: "text", visible: false },
       { name: "visibleIf", visible: false },
-      { name: "enableIf", visible: false },
+      { name: "enableIf", visible: false }
     ],
     function () {
       return new ItemValue(null, null, "ordergriditem");
@@ -552,7 +552,7 @@ test("SurveyPropertyItemValue override properties", () => {
 });
 test("SurveyPropertyItemValueEditor override grid columns using canShowProperty callback", () => {
   Serializer.addProperty("itemvalue", {
-    name: "price:number",
+    name: "price:number"
   });
   var dropdownQuestion = new QuestionDropdownModel("q1");
   dropdownQuestion.choices = [1, 2];
@@ -589,7 +589,7 @@ test("SurveyPropertyItemValueEditor override grid columns using canShowProperty 
 test("SurveyPropertyItemValue columns define in definition", () => {
   Serializer.addProperty("itemvalue", "description");
   SurveyQuestionEditorDefinition.definition["checkbox@choices"] = {
-    properties: ["value", "text"],
+    properties: ["value", "text"]
   };
 
   var qRadio = new QuestionRadiogroupModel("q1");
@@ -615,7 +615,7 @@ test("SurveyPropertyItemValue columns define in definition", () => {
 test("SurveyPropertyItemValue columns new localizable property", () => {
   Serializer.addProperty("itemvalue", {
     name: "description",
-    isLocalizable: true,
+    isLocalizable: true
   });
   var qRadio = new QuestionRadiogroupModel("q1");
   qRadio.choices = ["item1", "item2"];
@@ -773,7 +773,7 @@ test("SurveyNestedPropertyEditorItem", () => {
   expect(question.choices[0].value).toEqual("item1");
   expect(choicesQuestion.hasErrors()).toBeFalsy();
 });
-test("SurveyPropertyMatrixDropdownColumns set properties", () => {
+test("SurveyPropertyMatrixDropdownColumns set properties", (): any => {
   var question = new QuestionMatrixDropdownModel("q1");
   question.columns.push(new MatrixDropdownColumn("column 1"));
   question.columns.push(new MatrixDropdownColumn("column 2"));
@@ -782,17 +782,15 @@ test("SurveyPropertyMatrixDropdownColumns set properties", () => {
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
-  expect(columnsQuestion.columns).toHaveLength(4);
+  expect(columnsQuestion.columns).toHaveLength(3);
   var rows = columnsQuestion.visibleRows;
   expect(rows[0].getQuestionByColumnName("name").value).toEqual("column 1");
   columnsQuestion.addRow();
   expect(question.columns).toHaveLength(3);
   rows = columnsQuestion.visibleRows;
   expect(rows[2].getQuestionByColumnName("name").value).toEqual("column 3");
-  rows[2].getQuestionByColumnName("cellType").value = "checkbox";
   rows[2].getQuestionByColumnName("name").value = "column 5";
   expect(question.columns).toHaveLength(3);
-  expect(question.columns[2].cellType).toEqual("checkbox");
   expect(question.columns[2].name).toEqual("column 5");
 });
 test("SurveyPropertyMatrixDropdownColumns change columns", () => {
@@ -802,7 +800,7 @@ test("SurveyPropertyMatrixDropdownColumns change columns", () => {
   SurveyQuestionEditorDefinition.definition.matrixdropdowncolumn.properties = [
     "cellType",
     "name",
-    "readOnly",
+    "readOnly"
   ];
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("column 1");
@@ -814,7 +812,8 @@ test("SurveyPropertyMatrixDropdownColumns change columns", () => {
   expect(columnsQuestion.columns).toHaveLength(3);
   expect(columnsQuestion.columns[2].name).toEqual("readOnly");
 
-  SurveyQuestionEditorDefinition.definition.matrixdropdowncolumn.properties = saveProperties;
+  SurveyQuestionEditorDefinition.definition.matrixdropdowncolumn.properties =
+    saveProperties;
 });
 test("SurveyPropertyMatrixDropdownColumns use question editor", () => {
   var survey = new SurveyModel();
@@ -879,6 +878,7 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
+  expect(columnsQuestion.emptyRowsText).toEqual("Add a new item");
   expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;
   expect(rows[1].getQuestionByColumnName("name").value).toEqual("column2");
@@ -893,6 +893,9 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
   column3Name.value = "column1";
   expect(question.columns[2].name).toEqual("column3");
   expect(column3Name.errors).toHaveLength(1);
+  expect(column3Name.errors[0].getText()).toEqual(
+    "Please enter a unique value"
+  );
   column3Name.value = "column3";
   expect(question.columns[2].name).toEqual("column3");
   expect(column3Name.errors).toHaveLength(0);
@@ -1158,10 +1161,10 @@ test("SurveyPropertyPagesEditor show Pages Editor for Page object", () => {
     onSetValue: function (obj) {
       //Do nothing
     },
-    isSerializable: false,
+    isSerializable: false
   });
   SurveyQuestionEditorDefinition.definition["page@page"] = {
-    properties: ["name"],
+    properties: ["name"]
   };
   var survey = new SurveyModel();
   survey.addNewPage("page1");
@@ -1322,7 +1325,7 @@ test("Triggers property editor and setvalue trigger", () => {
 test("'set' property editor", () => {
   Serializer.addProperty("survey", {
     name: "region:set",
-    choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"],
+    choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"]
   });
   var survey = createSurvey();
   var propertyGrid = new PropertyGridModelTester(survey);
@@ -1342,7 +1345,7 @@ test("'set' property editor, get choices on callback, Bug#720", () => {
     choices: function (obj, choicesCallback) {
       callback = choicesCallback;
       return [];
-    },
+    }
   });
   var survey = createSurvey();
   var propertyGrid = new PropertyGridModelTester(survey);
@@ -1432,7 +1435,7 @@ test("minValue doesn't work when it is 0, Bug #687", () => {
     minValue: 0,
     maxValue: 5,
     category: "validation",
-    visibleIndex: 0,
+    visibleIndex: 0
   });
 
   var question = new QuestionTextModel("q1");

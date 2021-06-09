@@ -37,6 +37,7 @@ import { TabTestPlugin } from "./components/tabs/test";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation";
 import { TabLogicPlugin } from "./components/tabs/logic-ui";
+import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
 import { TabDesignerPlugin } from "./entries";
 
 export interface ICreatorOptions {
@@ -52,6 +53,11 @@ export interface ICreatorPlugin {
 
 export interface ITabbedMenuItem extends IActionBarItem {
   componentContent: string;
+  renderTab?: () => any;
+}
+
+export class CreatorToolbarItems extends Base {
+  @propertyArray() items: Array<IActionBarItem>;
 }
 
 /**
@@ -102,9 +108,25 @@ export class CreatorBase<T extends SurveyModel>
   @property({ defaultValue: true }) generateValidJSON: boolean;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
+  private toolbarItemsValue: CreatorToolbarItems;
+
+  private pageEditModeValue: "standard" | "single" = "standard";
+  /**
+   * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
+   * You can set this option in creator constructor only
+   */
+  public get pageEditMode() {
+    return this.pageEditModeValue;
+  }
 
   @property() surveyValue: T;
-  @propertyArray() toolbarItems: Array<IActionBarItem>;
+
+  public get toolbarItems(): Array<IActionBarItem> {
+    return this.toolbarItemsValue.items;
+  }
+  public get toolbarItemsWrapper(): CreatorToolbarItems {
+    return this.toolbarItemsValue;
+  }
   public dragDropHelper: DragDropHelper;
 
   private selectedElementValue: Base;
@@ -689,11 +711,22 @@ export class CreatorBase<T extends SurveyModel>
   }
   public propertyGrid: PropertyGridModel;
 
-  constructor(protected options: ICreatorOptions) {
+  constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
     super();
+    if (
+      !!options2 ||
+      typeof this.options === "string" ||
+      this.options instanceof String
+    ) {
+      this.options = !!options2 ? options2 : {};
+      SurveyHelper.warnText(
+        "Creator constructor has one parameter, as creator options, in V2."
+      );
+    }
+    this.toolbarItemsValue = new CreatorToolbarItems();
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistoryController(this);
-    this.setOptions(options);
+    this.setOptions(this.options);
     this.patchMetadata();
     this.initTabs();
     this.initToolbar();
@@ -709,6 +742,33 @@ export class CreatorBase<T extends SurveyModel>
     this.dragDropHelper = new DragDropHelper(this);
     this.propertyGrid = new PropertyGridModel(this.survey as any as Base, this);
   }
+  /**
+   * Start: Obsolete properties and functins
+   */
+  public get showToolbox(): string {
+    SurveyHelper.warnNonSupported("showToolbox");
+    return undefined;
+  }
+  public set showToolbox(val: string) {
+    SurveyHelper.warnNonSupported("showToolbox");
+  }
+  public get showPropertyGrid(): string {
+    SurveyHelper.warnNonSupported("showPropertyGrid");
+    return undefined;
+  }
+  public set showPropertyGrid(val: string) {
+    SurveyHelper.warnNonSupported("showPropertyGrid");
+  }
+  public rightContainerActiveItem(name: string) {
+    SurveyHelper.warnNonSupported("rightContainerActiveItem");
+  }
+  public leftContainerActiveItem(name: string) {
+    SurveyHelper.warnNonSupported("leftContainerActiveItem");
+  }
+  /**
+   * End: Obsolete properties and functins
+   */
+
   public get undoRedoManager(): UndoRedoManager {
     return this.undoRedoManagerValue;
   }
@@ -805,7 +865,7 @@ export class CreatorBase<T extends SurveyModel>
         this.plugins[key].createActions(items);
       }
     }
-    this.toolbarItems = items;
+    this.toolbarItemsValue.items = items;
   }
 
   public getOptions() {
@@ -909,6 +969,15 @@ export class CreatorBase<T extends SurveyModel>
     if (typeof options.allowModifyPages !== "undefined") {
       this.allowModifyPages = options.allowModifyPages;
     }
+    if (typeof options.pageEditMode !== "undefined") {
+      this.pageEditModeValue = options.pageEditMode;
+      if (this.pageEditModeValue === "single") {
+        Survey.Serializer.findProperty("survey", "pages").visible = false;
+        Survey.Serializer.findProperty("question", "page").visible = false;
+        Survey.Serializer.findProperty("panel", "page").visible = false;
+        this.showJSONEditorTab = false;
+      }
+    }
   }
 
   private patchMetadata(): void {
@@ -966,7 +1035,8 @@ export class CreatorBase<T extends SurveyModel>
   private existingPages: {};
   protected initSurveyWithJSON(json: any, clearState: boolean) {
     this.existingPages = {};
-    var survey = this.createSurvey({});
+    const survey = this.createSurvey({});
+    survey.css = surveyDesignerCss;
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
@@ -1257,7 +1327,7 @@ export class CreatorBase<T extends SurveyModel>
     this.isAutoSave && this.doAutoSave();
   }
 
-  protected convertCurrentObject(obj: Survey.Question, className: string) {
+  protected convertQuestion(obj: Survey.Question, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
     this.setModified({
       type: "QUESTION_CONVERTED",
@@ -1285,15 +1355,17 @@ export class CreatorBase<T extends SurveyModel>
 
   protected doClickQuestionCore(
     element: IElement,
-    modifiedType: string = "ADDED_FROM_TOOLBOX"
+    modifiedType: string = "ADDED_FROM_TOOLBOX",
+    index: number = -1
   ) {
     var parent = this.currentPage;
-    var index = -1;
     var elElement = this.survey.selectedElement;
     if (elElement && elElement.parent) {
       parent = elElement.parent;
-      index = parent.elements.indexOf(this.survey.selectedElement);
-      if (index > -1) index++;
+      if (index < 0) {
+        index = parent.elements.indexOf(this.survey.selectedElement);
+        if (index > -1) index++;
+      }
     }
     parent.addElement(element, index);
     this.setModified({ type: modifiedType, question: element });
@@ -1406,7 +1478,10 @@ export class CreatorBase<T extends SurveyModel>
    */
   public fastCopyQuestion(question: Survey.Base): Survey.IElement {
     var newElement = this.copyElement(question);
-    this.doClickQuestionCore(newElement, "ELEMENT_COPIED");
+    var index = !!question["parent"]
+      ? question["parent"].elements.indexOf(question) + 1
+      : -1;
+    this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index);
     return newElement;
   }
   /**
@@ -1450,8 +1525,6 @@ export class CreatorBase<T extends SurveyModel>
     } else {
       this.survey.pages.push(newPage);
     }
-    //TODO
-    //this.addPageToUI(newPage);
     return newPage;
   }
 
@@ -1759,10 +1832,17 @@ export class CreatorBase<T extends SurveyModel>
     value: any
   ): string {
     if (propertyName !== "name") return null;
-    var newName = this.generateUniqueName(obj, value);
-    if (newName !== value)
-      return this.getLocString("pe.propertyNameIsNotUnique");
-    return null;
+    if (SurveyHelper.getObjectType(obj) === ObjType.Unknown) return null;
+    var hasError = false;
+    if (SurveyHelper.getObjectType(obj) === ObjType.Column) {
+      hasError = !!(<any>obj).colOwner
+        ? !this.isNameUniqueInArray((<any>obj).colOwner.columns, obj, value)
+        : false;
+    } else {
+      hasError = this.generateUniqueName(obj, value) !== value;
+    }
+
+    return hasError ? this.getLocString("pe.propertyNameIsNotUnique") : null;
   }
   protected generateUniqueName(el: Survey.Base, newName: string): string {
     var options = { element: el, name: newName, isUnique: true };
@@ -1793,6 +1873,7 @@ export class CreatorBase<T extends SurveyModel>
     el: Survey.Base,
     newName: string
   ): boolean {
+    if (!Array.isArray(elements)) return true;
     newName = newName.toLowerCase();
     for (var i = 0; i < elements.length; i++) {
       if (elements[i] != el && elements[i].name.toLowerCase() == newName)
@@ -1954,10 +2035,10 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   startUndoRedoTransaction() {
-    //TODO
+    this.undoRedoManager.startTransaction("");
   }
   stopUndoRedoTransaction() {
-    //TODO
+    this.undoRedoManager.stopTransaction();
   }
   /**
    * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
@@ -2017,6 +2098,14 @@ export class CreatorBase<T extends SurveyModel>
     //TODO
     //this.koShowSaveButton(value != null && !this.isAutoSave);
   }
+  public convertCurrentQuestion(newType: string) {
+    var el = this.selectedElement;
+    if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
+    this.undoRedoManager.startTransaction("Convert question");
+    el = this.convertQuestion(<Survey.Question>el, newType);
+    this.selectElement(el);
+    this.undoRedoManager.stopTransaction();
+  }
 
   public getContextActions(
     element: any /*ISurveyElement*/
@@ -2050,16 +2139,18 @@ export class CreatorBase<T extends SurveyModel>
         }
         const popupModel = new PopupModel(
           "sv-list",
-          new ListModel(
-            availableTypes.map((type) => ({
-              title: type.name,
-              id: type.value
-            })),
-            (item: any) => {
-              this.selectElement(this.convertCurrentObject(element, item.id));
-            },
-            false
-          ),
+          {
+            model: new ListModel(
+              availableTypes.map((type) => ({
+                title: type.name,
+                id: type.value
+              })),
+              (item: any) => {
+                this.convertCurrentQuestion(item.id);
+              },
+              false
+            )
+          },
           "bottom",
           "right"
         );
@@ -2085,7 +2176,10 @@ export class CreatorBase<T extends SurveyModel>
         id: "duplicate",
         title: this.getLocString("survey.duplicate"),
         action: () => {
-          this.selectElement(this.fastCopyQuestion(element));
+          var newElement = this.isObjPage(element)
+            ? this.copyPage(element)
+            : this.fastCopyQuestion(element);
+          this.selectElement(newElement);
         }
       });
     }
@@ -2114,16 +2208,10 @@ export class CreatorBase<T extends SurveyModel>
       });
     }
 
-    if (items.length > 0) {
-      items.push({
-        id: "sep-" + items.length,
-        component: "sv-action-bar-separator"
-      });
-    }
-
     if (opts.allowDelete === undefined || opts.allowDelete) {
       items.push({
         id: "delete",
+        needSeparator: items.length > 0,
         title: this.getLocString("pe.delete"),
         action: () => {
           this.deleteObject(element);
@@ -2151,5 +2239,18 @@ export class CreatorBase<T extends SurveyModel>
       return new Survey.ImageItemValue(nextValue);
     }
     return new Survey.ItemValue(nextValue);
+  }
+}
+
+export class StylesManager {
+  public static get currentTheme(): string {
+    SurveyHelper.warnNonSupported("StylesManager");
+    return undefined;
+  }
+  public static set currentTheme(val: string) {
+    SurveyHelper.warnNonSupported("StylesManager");
+  }
+  public static applyTheme(name?: string) {
+    SurveyHelper.warnNonSupported("StylesManager");
   }
 }

@@ -7,8 +7,13 @@ import {
   QuestionImageModel
 } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { CreatorBase, QuestionAdornerViewModel, QuestionImageAdornerViewModel, toggleHovered } from "@survey/creator";
-import { KnockoutMouseEvent, KnockoutDragEvent } from "../events";
+import {
+  CreatorBase,
+  QuestionAdornerViewModel,
+  QuestionImageAdornerViewModel,
+  toggleHovered
+} from "@survey/creator";
+import { KnockoutMouseEvent } from "../events";
 
 // import "./question-image.scss";
 const template = require("./question-image.html");
@@ -27,23 +32,8 @@ export class KnockoutQuestionImageAdornerViewModel extends QuestionImageAdornerV
   koSelect(model: QuestionAdornerViewModel, event: MouseEvent) {
     return super.select(model, this.wrapMouseEvent(event));
   }
-  koDragStart(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.dragStart(model, this.wrapDragEvent(event));
-  }
-  koDragOver(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.dragOver(model, this.wrapDragEvent(event));
-  }
-  koDrop(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.drop(model, this.wrapDragEvent(event));
-  }
-  koDragEnd(model: QuestionAdornerViewModel, event: DragEvent) {
-    return super.dragEnd(model, this.wrapDragEvent(event));
-  }
   private wrapMouseEvent(event: MouseEvent): KnockoutMouseEvent {
     return new KnockoutMouseEvent(event);
-  }
-  private wrapDragEvent(event: DragEvent): KnockoutDragEvent {
-    return new KnockoutDragEvent(event);
   }
   public hover(event: MouseEvent, element: HTMLElement) {
     toggleHovered(event, element);
@@ -52,16 +42,12 @@ export class KnockoutQuestionImageAdornerViewModel extends QuestionImageAdornerV
 
 ko.components.register("svc-image-question", {
   viewModel: {
-    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
+    createViewModel: (
+      params: SurveyTemplateRendererViewModel,
+      componentInfo: any
+    ) => {
       const creator = params.componentData;
       const question = params.templateData.data;
-
-      const markup = componentInfo.element.nextSibling.querySelector(
-        ".svc-question__content"
-      );
-      if (markup) {
-        markup.dataset.questionName = question.name;
-      }
 
       const scrollSubscription = ko.computed(() => {
         if (creator.isElementSelected(question)) {
@@ -80,7 +66,7 @@ ko.components.register("svc-image-question", {
         model.dispose();
       });
       return model;
-    },
+    }
   },
-  template: template,
+  template: template
 });

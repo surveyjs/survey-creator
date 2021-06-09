@@ -11,15 +11,21 @@ svc-question {
 
 .svc-question__adorner {
   position: relative;
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 .svc-question__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 4px;
+  border-radius: calcSize(0.5);
   box-sizing: border-box;
+  padding: calcSize(4) calcSize(5) calcSize(8);
+  background: #ffffff;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
   border: 1px solid transparent;
 }
 
@@ -29,17 +35,12 @@ svc-question {
 
 .svc-panel__placeholder_frame {
   border: 1px dashed grey;
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  width: 100%;
+  height: 100%;
 }
 
 .svc-question__content--empty {
-  height: 150px;
-  padding: 10px;
-  padding-bottom: 40px;
+  height: calcSize(23);
 }
 
 .svc-panel__placeholder {
@@ -50,11 +51,10 @@ svc-question {
 }
 
 .svc-question__content-actions {
-  // position: absolute;
+  position: absolute;
   display: none;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  bottom: calcSize(2);
+  width: calc(100% - 80px);
 }
 
 .svc-hovered > .svc-question__content {
@@ -71,8 +71,8 @@ svc-question {
 
 .svc-question__content-actions {
   .sv-action-bar {
-    width: 100%;
     box-sizing: border-box;
+    padding: 0;
   }
 }
 
@@ -95,4 +95,52 @@ svc-question,
 }
 .svc-panel__edge--bottom {
   bottom: 0;
+}
+
+// reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
+[data-svc-drop-target-element-name="svc-drag-drop-ghost-survey-element-name"] {
+  border: none;
+  height: 0;
+
+  .svc-question__drag-area {
+    display: none;
+  }
+
+  .svc-question__drag-element {
+    display: none;
+  }
+}
+// EO reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
+
+.svc-hovered > .svc-question__content > .svc-question__drag-area {
+  visibility: visible;
+}
+
+.svc-question__drag-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  height: 28px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.svc-question__drag-element {
+  cursor: move;
+  width: 24px;
+  height: 6px;
+  border: 1px solid $border;
+  border-radius: 10px;
+}
+
+.sd-panel {
+  .svc-question__content {
+    &:not(.svc-question__content--selected) {
+      border: 1px dashed $border;
+      box-shadow: none;
+    }
+    border-radius: 0;
+  }
 }

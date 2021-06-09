@@ -23,6 +23,7 @@ import {
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
+import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -310,10 +311,13 @@ export class PropertyGridTitleActionsCreator {
       question,
       this.options
     );
-
+    surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
     settings.showModal(
       "survey",
-      { survey: surveyPropertyEditor.editSurvey },
+      {
+        survey: surveyPropertyEditor.editSurvey,
+        model: surveyPropertyEditor.editSurvey
+      },
       () => surveyPropertyEditor.apply()
     );
   }
@@ -535,6 +539,7 @@ export class PropertyJSONGenerator {
     json.visible = prop.visible;
     json.isReadOnly = prop.readOnly;
     json.isRequired = prop.isRequired;
+    json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     json.title = this.getQuestionTitle(prop, title);
     return json;
   }
@@ -1061,10 +1066,9 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     var choices = prop.getChoices(obj);
 
     var json: any = {
-      type:
-        this.canRenderAsButtonGroup && choices.length < 5 && choices.length > 0
-          ? "buttongroup"
-          : "dropdown",
+      type: this.renderAsButtonGroup(prop, choices)
+        ? "buttongroup"
+        : "dropdown",
       showOptionsCaption: false
     };
     var emptyValueItem: ItemValue = this.getEmptyJsonItemValue(prop, choices);
@@ -1076,6 +1080,27 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   }
   protected get canRenderAsButtonGroup(): boolean {
     return true;
+  }
+  protected renderAsButtonGroup(
+    prop: JsonObjectProperty,
+    choices: Array<any>
+  ): boolean {
+    if (
+      !this.canRenderAsButtonGroup ||
+      !choices ||
+      choices.length == 0 ||
+      choices.length > 4
+    )
+      return false;
+    var charCount = 0;
+    for (var i = 0; i < choices.length; i++) {
+      var text = this.getLocalizedText(
+        prop,
+        !!choices[i].value ? choices[i].value : choices[i]
+      );
+      charCount += !!text ? text.length : 0;
+    }
+    return charCount < 25; //TODO
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
@@ -1142,6 +1167,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     prop: JsonObjectProperty,
     choices: Array<any>
   ): any {
+    if (!choices) return null;
     for (var i = 0; i < choices.length; i++) {
       var item = choices[i];
       var value = item.value !== undefined ? item.value : item;
