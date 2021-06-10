@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.51](https://github.com/surveyjs/survey-creator/compare/v1.8.50...v1.8.51) (2021-06-09)
+
+
+### Bug Fixes
+
+* Inconsistent selected language in designer and test survey tabs [#1297](https://github.com/surveyjs/survey-creator/issues/1297) ([#1298](https://github.com/surveyjs/survey-creator/issues/1298)) ([6484fef](https://github.com/surveyjs/survey-creator/commit/6484fef984e2450df5d72659ceb51f8849298a1e))
+
 ### [1.8.50](https://github.com/surveyjs/survey-creator/compare/v1.8.49...v1.8.50) (2021-06-04)
 
 

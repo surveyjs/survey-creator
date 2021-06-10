@@ -110,21 +110,6 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run release -- --release-as $(SurveyJSVersion)
   displayName: 'Release specific version survey-creator'
-
-- powershell: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    npm run release -- --release-as $(SurveyJSVersion)
-  displayName: 'Release specific version survey-creator-core'
-
-- powershell: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-    npm run release -- --release-as $(SurveyJSVersion)
-  displayName: 'Release specific version survey-creator-knockout'
-
-- powershell: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-    npm run release -- --release-as $(SurveyJSVersion)
-  displayName: 'Release specific version survey-creator-react'
 #####################################################
 
 - task: DownloadBuildArtifacts@0
@@ -146,6 +131,15 @@ steps:
     OverWrite: true
 
 # Creator CORE
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run release
+  displayName: 'Release specific version survey-creator-core'
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run build
+  displayName: 'Build creator v2 core'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
@@ -228,6 +222,10 @@ steps:
   displayName: 'copy build from library for f-f tests'
 
 # EO copy for f-f tests
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run release
+  displayName: 'Release specific version survey-creator-react'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -253,10 +251,14 @@ steps:
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react'
     ArtifactName: 'SurveyJSCreatorV2BuildReact'
-    publishLocation: 'Container'  
-    
+    publishLocation: 'Container'
 
 # Creator KNOCKOUT
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm run release
+  displayName: 'Release specific version survey-creator-knockout'
+
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run build
