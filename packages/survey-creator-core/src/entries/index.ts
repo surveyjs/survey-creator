@@ -24,6 +24,7 @@ export * from "../components/page";
 export * from "../components/row";
 export * from "../components/question";
 export * from "../components/question-image";
+export * from "../components/question-rating";
 export * from "../components/item-value";
 export * from "../components/image-item-value";
 export * from "../components/matrix-cell";
