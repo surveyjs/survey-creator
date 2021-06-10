@@ -1,17 +1,23 @@
 @import "../variables.scss";
 
 .svc-rating-question-controls {
-  margin-top: calcSize(0.5);
+  position: absolute;
+  bottom: calcSize(8.5);
+  left: calcSize(4);
   display: none;
 }
 
-.svc-question__content--selected .svc-rating-question-controls {
-  display: block;
+.svc-question__content--selected {
+  .sd-rating {
+    margin-left: calcSize(14);
+  }
+  .svc-rating-question-controls {
+    display: block;
+  }
 }
 
 .svc-rating-question-controls__button {
   display: inline-block;
-  background-color: $background;
   border-radius: 50%;
   width: calcSize(6);
   height: calcSize(6);

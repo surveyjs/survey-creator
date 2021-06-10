@@ -1,4 +1,7 @@
 .sd-rating {
+  overflow-x: auto;
+  height: calcSize(7);
+
   fieldset {
     display: flex;
     border: none;
