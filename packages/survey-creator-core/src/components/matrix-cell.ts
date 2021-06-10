@@ -44,6 +44,11 @@ export class MatrixCellWrapperViewModel extends Base {
     return this.row || this.column || this.templateData;
   }
   public selectContext(model: MatrixCellWrapperViewModel, event: MouseEvent) {
+    if(!!model.row) {
+      model.creator.selectElement(model.row.data, "rows", false);
+      event.stopPropagation();
+      return;
+    }
     if(typeof model.context.getType !== "function") {
       return;
     }

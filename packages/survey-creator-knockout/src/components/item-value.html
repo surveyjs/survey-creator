@@ -1,6 +1,6 @@
 <div
   class="svc-item-value-wrapper"
-  data-bind="attr: attributes, css: { 'svc-item-value--new': isNew, 'svc-item-value--dragging': isDragging }"
+  data-bind="attr: attributes, css: { 'svc-item-value--new': isNew, 'svc-item-value--dragging': isDragging }, click: select"
 >
   <!-- ko if: showDragDropGhostOnTop -->
   <div class="svc-drag-drop-ghost"></div>
