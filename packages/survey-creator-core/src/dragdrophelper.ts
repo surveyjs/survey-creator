@@ -90,12 +90,23 @@ export class DragDropHelper extends Base {
   }
 
   private createGhostSurveyElement(): any {
+    const startWithNewLine = this.draggedSurveyElement.startWithNewLine;
+    let className = "svc-drag-drop-ghost";
+
+    if (!startWithNewLine) {
+      className += " " + className + "--vertical";
+    }
+
     const json = {
       type: "html",
       name: DragDropHelper.ghostSurveyElementName,
-      html: '<div class="svc-drag-drop-ghost"></div>'
+      html: `<div class="${className}"></div>`
     };
-    return this.createElementFromJson(json);
+
+    const element = this.createElementFromJson(json);
+    element.startWithNewLine = startWithNewLine;
+
+    return element;
   }
 
   private createDraggedElementShortcut() {
