@@ -1,6 +1,7 @@
 import { ItemValue, QuestionCommentModel, Serializer } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../settings";
+import { editorLocalization } from "../editorLocalization";
 
 export class FastEntryEditor extends PropertyEditorSetupValue {
   public static applyItemValueArray(
@@ -49,7 +50,14 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
   }
   protected getSurveyJSON(): any {
     return {
-      elements: [{ type: "comment", name: "question" }],
+      elements: [
+        {
+          type: "comment",
+          name: "question",
+          title: editorLocalization.getString("pe.fastEntry"),
+          rows: 12
+        }
+      ]
     };
   }
   protected getSurveyCreationReason(): string {
