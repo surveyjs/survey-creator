@@ -527,7 +527,6 @@ export class DragDropHelper extends Base {
       targetElement["setData"](this.survey);
     }
     targetElement.renderWidth = "100%";
-    // targetElement["koIsDragging"](true);
     return targetElement;
   }
 
