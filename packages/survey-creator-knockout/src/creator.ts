@@ -49,6 +49,9 @@ class DesignTimeSurveyModel extends Survey {
           if (element.getType() == "image") {
             return "svc-image-question";
           }
+          if (element.getType() == "rating") {
+            return "svc-rating-question";
+          }
           if (element.koElementType() == "survey-question") {
             return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
           }

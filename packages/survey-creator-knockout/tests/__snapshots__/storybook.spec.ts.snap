@@ -195,9 +195,11 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         <!-- ko foreach: creator.tabs -->
         
       
+        <!-- ko if: $parent.creator.viewType == id -->
+        
+      
         <div
           class="svc-creator-tab"
-          data-bind="visible: $parent.creator.viewType == id"
         >
           
         
@@ -420,160 +422,25 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         </div>
         
       
-        
-      
-        <div
-          class="svc-creator-tab"
-          data-bind="visible: $parent.creator.viewType == id"
-          style="display: none;"
-        >
-          
-        
-          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
-          <div
-            class="svc-creator-tab__content"
-          >
-            
-  
-            <div
-              class="svc-plugin-tab__content svc-test-tab__content"
-            >
-              
-    
-              <survey-simulator
-                params="options: simulator"
-              >
-                <div
-                  class="svd-simulator-main"
-                >
-                  
-  
-                  <!-- ko if: hasFrame -->
-                  <!-- /ko -->
-                  
-  
-                  <!-- ko ifnot: hasFrame -->
-                  
-  
-                  <survey-widget
-                    class="svd-simulator-content"
-                    params="survey: survey"
-                  >
-                    <!-- ko if: $data.survey -->
-                    <!-- /ko -->
-                  </survey-widget>
-                  
-  
-                  <!-- /ko -->
-                  
-
-                </div>
-                
-
-              </survey-simulator>
-              
-    
-              <!-- ko ifnot: isRunning -->
-              <!-- /ko -->
-              
-  
-            </div>
-            
-  
-            <div
-              class="svc-plugin-tab__content-actions svc-test-tab__content-actions"
-            >
-              
-    
-              <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
-              <!-- /ko -->
-              
-  
-            </div>
-            
-
-          </div>
-          
-
-          <!-- /ko -->
-          
-      
-        </div>
+        <!-- /ko -->
         
       
         
       
-        <div
-          class="svc-creator-tab"
-          data-bind="visible: $parent.creator.viewType == id"
-          style="display: none;"
-        >
-          
-        
-          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
-          <div
-            class="svc-creator-tab__content"
-          >
-            
-  
-            <div
-              class="svc-json-editor-tab__content"
-            >
-              
-    
-              <textarea
-                aria-label="JSON Editor"
-                class="svc-json-editor-tab__content-area"
-                data-bind="textInput: text, disable: readOnly, attr: { 'aria-label': ariaLabel }"
-              >
-                    
-              </textarea>
-              
-    
-              <div
-                class="svc-json-editor-tab__content-errors"
-                data-bind="foreach: errors"
-              />
-              
-  
-            </div>
-            
-
-          </div>
-          <!-- /ko -->
-          
-      
-        </div>
+        <!-- ko if: $parent.creator.viewType == id -->
+        <!-- /ko -->
         
       
         
       
-        <div
-          class="svc-creator-tab"
-          data-bind="visible: $parent.creator.viewType == id"
-          style="display: none;"
-        >
-          
+        <!-- ko if: $parent.creator.viewType == id -->
+        <!-- /ko -->
         
-          <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
-          <div
-            class="svc-creator-tab__content"
-          >
-            
-  
-            <survey-widget
-              params="survey: survey"
-            >
-              <!-- ko if: $data.survey -->
-              <!-- /ko -->
-            </survey-widget>
-            
-
-          </div>
-          <!-- /ko -->
-          
       
-        </div>
+        
+      
+        <!-- ko if: $parent.creator.viewType == id -->
+        <!-- /ko -->
         
       
         <!-- /ko -->

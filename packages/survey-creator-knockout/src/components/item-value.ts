@@ -13,7 +13,7 @@ const template = require("./item-value.html");
 
 class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   constructor(
-    public creator: CreatorBase<SurveyModel>,
+    creator: CreatorBase<SurveyModel>,
     public question: QuestionSelectBase,
     public item: ItemValue,
     public templateData: any

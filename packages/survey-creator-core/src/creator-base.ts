@@ -52,6 +52,7 @@ export interface ICreatorPlugin {
 
 export interface ITabbedMenuItem extends IActionBarItem {
   componentContent: string;
+  renderTab?: () => any;
 }
 
 export class CreatorToolbarItems extends Base {
@@ -1566,7 +1567,7 @@ export class CreatorBase<T extends SurveyModel>
     return element.getPropertyValue("isSelectedInDesigner");
   }
 
-  public selectElement(element: any, propertyName?: string) {
+  public selectElement(element: any, propertyName?: string, focus = true) {
     var oldValue = this.selectedElement;
     if (oldValue === element) return;
     this.selectedElementValue = this.onSelectingElement(element);
@@ -1580,7 +1581,7 @@ export class CreatorBase<T extends SurveyModel>
           true
         );
       }
-      this.selectionChanged(this.selectedElement, propertyName);
+      this.selectionChanged(this.selectedElement, propertyName, focus);
     }
   }
 
@@ -1688,7 +1689,7 @@ export class CreatorBase<T extends SurveyModel>
     */
     return isValid;
   }
-  private selectionChanged(element: Base, propertyName?: string) {
+  private selectionChanged(element: Base, propertyName?: string, focus = true) {
     if (
       !!element &&
       typeof element.getType === "function" &&
@@ -1704,7 +1705,7 @@ export class CreatorBase<T extends SurveyModel>
     if (this.propertyGrid) {
       this.propertyGrid.obj = element;
       if (!!propertyName) {
-        this.propertyGrid.selectProperty(propertyName);
+        this.propertyGrid.selectProperty(propertyName, focus);
       }
     }
     var options = { newSelectedElement: element };

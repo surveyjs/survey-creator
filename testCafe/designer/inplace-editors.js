@@ -8,8 +8,8 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 test("Checkbox question inplace editor", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
-    await t.hover(Selector(`div[title=Checkbox]`));
-    await t.click(Selector(`div[title=Checkbox]`));
+    await t.hover(Selector(`div[title=Checkbox]`), {speed: 0.5});
+    await t.click(Selector(`div[title=Checkbox]`), {speed: 0.5});
     await t
         .expect(
             Selector(".svc-question__content.svc-question__content--selected")
@@ -190,8 +190,8 @@ test("Checkbox question inplace editor", async (t) => {
 
 test("Radiogroup question inplace editor", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
-    await t.hover(Selector(`div[title=Radiogroup]`));
-    await t.click(Selector(`div[title=Radiogroup]`));
+    await t.hover(Selector(`div[title=Radiogroup]`), {speed: 0.5});
+    await t.click(Selector(`div[title=Radiogroup]`), {speed: 0.5});
     await t
         .expect(
             Selector(".svc-question__content.svc-question__content--selected")
@@ -358,8 +358,8 @@ test("Radiogroup question inplace editor", async (t) => {
 
 test("Dropdown question inplace editor", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
-    await t.hover(Selector(`div[title=Dropdown]`));
-    await t.click(Selector(`div[title=Dropdown]`));
+    await t.hover(Selector(`div[title=Dropdown]`), {speed: 0.5});
+    await t.click(Selector(`div[title=Dropdown]`), {speed: 0.5});
     await t
         .expect(
             Selector(".svc-question__content.svc-question__content--selected")
@@ -523,16 +523,16 @@ test("Dropdown question inplace editor", async (t) => {
         .expect(items.nth(4).find("span").withText("Other (describe)").exists)
         .ok();
 
-    await t.hover(Selector(`div[title='Single Input']`));
-    await t.click(Selector(`div[title='Single Input']`));
+    await t.hover(Selector(`div[title='Single Input']`), {speed: 0.5});
+    await t.click(Selector(`div[title='Single Input']`), {speed: 0.5});
 
     await t.expect(items.count).eql(6); // Choice editors are hidden if another question is selected
 });
 
 test("Ranking question inplace editor", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
-    await t.hover(Selector(`div[title=Ranking]`));
-    await t.click(Selector(`div[title=Ranking]`));
+    await t.hover(Selector(`div[title=Ranking]`), {speed: 0.5});
+    await t.click(Selector(`div[title=Ranking]`), {speed: 0.5});
     await t
         .expect(
             Selector(".svc-question__content.svc-question__content--selected")
@@ -636,8 +636,8 @@ test("Ranking question inplace editor", async (t) => {
 
 test("Image picker question inplace editor", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
-    await t.hover(Selector(`div[title='Image picker']`));
-    await t.click(Selector(`div[title='Image picker']`));
+    await t.hover(Selector(`div[title='Image picker']`), {speed: 0.5});
+    await t.click(Selector(`div[title='Image picker']`), {speed: 0.5});
     await t
         .expect(
             Selector(".svc-question__content.svc-question__content--selected")
@@ -750,8 +750,8 @@ test("Image picker question inplace editor", async (t) => {
 
 test("Image question inplace editor", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
-    await t.hover(Selector(`div[title=Image]`));
-    await t.click(Selector(`div[title=Image]`));
+    await t.hover(Selector(`div[title=Image]`), {speed: 0.5});
+    await t.click(Selector(`div[title=Image]`), {speed: 0.5});
     await t
         .expect(
             Selector(".svc-question__content.svc-question__content--selected")

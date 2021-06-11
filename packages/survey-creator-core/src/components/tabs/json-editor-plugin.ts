@@ -4,15 +4,17 @@ import { SurveyTextWorker } from "../../textWorker";
 
 export interface IJsonEditorModel {
   isJSONChanged: boolean;
+
   text: string;
-  onEditorActivated(): void;
+  onPluginActivate(): void;
   processErrors(text: string): void;
   readOnly: boolean;
 }
 
 export abstract class JsonEditorBaseModel
   extends Base
-  implements IJsonEditorModel {
+  implements IJsonEditorModel
+{
   public isJSONChanged: boolean = false;
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
@@ -24,6 +26,11 @@ export abstract class JsonEditorBaseModel
 
   public abstract text: string;
   public abstract onEditorActivated(): void;
+  public onPluginActivate(): void {
+    this.text = this.creator.text;
+    this.onEditorActivated();
+    this.isJSONChanged = false;
+  }
   protected onTextChanged(): void {
     if (this.jsonEditorChangedTimeoutId !== -1) {
       clearTimeout(this.jsonEditorChangedTimeoutId);
@@ -49,13 +56,12 @@ export abstract class JsonEditorBaseModel
 }
 
 export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel>
-  implements ICreatorPlugin {
+  implements ICreatorPlugin
+{
   public model: TModel;
   constructor(private creator: CreatorBase<SurveyModel>) {}
   public activate(): void {
-    this.model.text = this.creator.text;
-    this.model.onEditorActivated();
-    this.model.isJSONChanged = false;
+    this.model.onPluginActivate();
   }
   public deactivate(): boolean {
     const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);

@@ -247,6 +247,16 @@ test("Add customWidgets into toolbox", (): any => {
     },
     "customtype"
   );
+  CustomWidgetCollection.Instance.addCustomWidget(
+    {
+      name: "third",
+      isFit: (question: Question) => {
+        return (<Question>question).getType() == "checkbox";
+      },
+      showInToolbox: false
+    },
+    "customtype"
+  );
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
   expect(toolbox.items).toHaveLength(4);
   expect(toolbox.items[0].name).toEqual("text");

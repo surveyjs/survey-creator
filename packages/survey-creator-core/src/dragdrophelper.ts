@@ -79,6 +79,7 @@ export class DragDropHelper extends Base {
     this.moveShortcutElement(event);
 
     document.addEventListener("pointermove", this.moveDraggedElement);
+    document.addEventListener("keydown", this.handleEscapeButton);
     this.draggedElementShortcut.addEventListener("pointerup", this.drop);
   }
 
@@ -103,7 +104,7 @@ export class DragDropHelper extends Base {
       this.draggedSurveyElement["title"] ||
       this.draggedSurveyElement["text"] ||
       this.draggedSurveyElement["name"];
-    draggedElementShortcut.className = "svc-drag-feedback";  
+    draggedElementShortcut.className = "svc-drag-shortcut";
     return draggedElementShortcut;
   }
 
@@ -117,51 +118,67 @@ export class DragDropHelper extends Base {
     }
   };
 
+  private handleEscapeButton = (event: KeyboardEvent) => {
+    if (event.keyCode == 27) {
+      this.clear();
+    }
+  };
+
   private moveShortcutElement(event: PointerEvent) {
     this.doScroll(event.clientY, event.clientX);
 
-    let shortcutHeight = this.draggedElementShortcut.offsetHeight;
-    let shortcutWidth = this.draggedElementShortcut.offsetWidth;
-    let shortcutXCenter = shortcutWidth / 2;
-    let shortcutYCenter = shortcutHeight / 2;
+    const shortcutHeight = this.draggedElementShortcut.offsetHeight;
+    const shortcutWidth = this.draggedElementShortcut.offsetWidth;
+    const shortcutXCenter = shortcutWidth / 2;
+    const shortcutYCenter = shortcutHeight / 2;
 
-    if (event.pageX + shortcutXCenter >= document.documentElement.clientWidth) {
+    const documentClientHeight = document.documentElement.clientHeight;
+    const documentClientWidth = document.documentElement.clientWidth;
+
+    if (event.clientX + shortcutXCenter >= documentClientWidth) {
       this.draggedElementShortcut.style.left =
-        document.documentElement.clientWidth - shortcutWidth + "px";
+        event.pageX -
+        event.clientX +
+        documentClientWidth -
+        shortcutWidth +
+        "px";
       this.draggedElementShortcut.style.top =
-        event.clientY - shortcutYCenter + "px";
+        event.pageY - shortcutYCenter + "px";
       return;
     }
 
-    if (event.pageX - shortcutXCenter <= 0) {
-      this.draggedElementShortcut.style.left = 0 + "px";
+    if (event.clientX - shortcutXCenter <= 0) {
+      this.draggedElementShortcut.style.left =
+        event.pageX - event.clientX + "px";
       this.draggedElementShortcut.style.top =
-        event.clientY - shortcutYCenter + "px";
+        event.pageY - shortcutYCenter + "px";
       return;
     }
 
-    if (
-      event.pageY + shortcutYCenter >=
-      document.documentElement.clientHeight
-    ) {
+    if (event.clientY + shortcutYCenter >= documentClientHeight) {
       this.draggedElementShortcut.style.left =
-        event.clientX - shortcutXCenter + "px";
+        event.pageX - shortcutXCenter + "px";
       this.draggedElementShortcut.style.top =
-        document.documentElement.clientHeight - shortcutHeight + "px";
+        event.pageY -
+        event.clientY +
+        documentClientHeight -
+        shortcutHeight +
+        "px";
       return;
     }
 
-    if (event.pageY - shortcutYCenter <= 0) {
+    if (event.clientY - shortcutYCenter <= 0) {
       this.draggedElementShortcut.style.left =
-        event.clientX - shortcutXCenter + "px";
-      this.draggedElementShortcut.style.top = 0 + "px";
+        event.pageX - shortcutXCenter + "px";
+      this.draggedElementShortcut.style.top =
+        event.pageY - event.clientY + "px";
       return;
     }
 
     this.draggedElementShortcut.style.left =
-      event.clientX - shortcutXCenter + "px";
+      event.pageX - shortcutXCenter + "px";
     this.draggedElementShortcut.style.top =
-      event.clientY - shortcutYCenter + "px";
+      event.pageY - shortcutYCenter + "px";
   }
 
   private doScroll(clientY, clientX) {
@@ -190,11 +207,11 @@ export class DragDropHelper extends Base {
       }, 10);
     } else if (right - clientX <= startScrollBoundary) {
       this.scrollIntervalId = setInterval(() => {
-        scrollableParentElement.scrollLeft += 1;
+        scrollableParentElement.scrollLeft += 5;
       }, 10);
     } else if (clientX - left <= startScrollBoundary) {
       this.scrollIntervalId = setInterval(() => {
-        scrollableParentElement.scrollLeft -= 1;
+        scrollableParentElement.scrollLeft -= 5;
       }, 10);
     }
   }
@@ -519,6 +536,7 @@ export class DragDropHelper extends Base {
     clearInterval(this.scrollIntervalId);
 
     document.removeEventListener("pointermove", this.moveDraggedElement);
+    document.removeEventListener("keydown", this.handleEscapeButton);
     this.draggedElementShortcut.removeEventListener("pointerup", this.drop);
     document.body.removeChild(this.draggedElementShortcut);
 

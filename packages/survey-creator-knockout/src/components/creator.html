@@ -8,13 +8,12 @@
   <div class="svc-creator__content-wrapper svc-flex-row">
     <div class="svc-creator__content-holder svc-flex-column">
       <!-- ko foreach: creator.tabs -->
-      <div
-        class="svc-creator-tab"
-        data-bind="visible: $parent.creator.viewType == id"
-      >
+      <!-- ko if: $parent.creator.viewType == id -->
+      <div class="svc-creator-tab">
         <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
         <!-- /ko -->
       </div>
+      <!-- /ko -->
       <!-- /ko -->
     </div>
   </div>
