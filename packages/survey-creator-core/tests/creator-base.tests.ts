@@ -2,16 +2,8 @@ import {
   Base,
   PanelModel,
   SurveyModel,
-  QuestionHtmlModel,
-  ElementFactory,
-  QuestionTextModel,
-  Serializer,
-  QuestionRadiogroupModel,
-  QuestionMatrixDropdownModel,
-  QuestionMatrixDynamicModel,
-  IActionBarItem
+  Serializer
 } from "survey-core";
-import { CreatorBase, ICreatorOptions } from "../src/creator-base";
 import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
