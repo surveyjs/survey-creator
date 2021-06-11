@@ -6,6 +6,7 @@ test("Create survey with editingObj", () => {
   originalElement.choices = [1, 2, 3];
 
   var fastEntryEditor = new FastEntryEditor(originalElement.choices);
+  expect(fastEntryEditor.comment.title).toEqual("Fast Entry");
   expect(fastEntryEditor.comment.value).toEqual("1\n2\n3");
   fastEntryEditor.comment.value = "1|item1\n2\n3\n4|item4";
   fastEntryEditor.apply();
