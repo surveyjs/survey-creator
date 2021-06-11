@@ -1,10 +1,12 @@
 import * as ko from "knockout";
-import { Serializer, JsonObjectProperty } from "survey-core";
-import { editorLocalization } from "@survey/creator";
+import { StringEditorViewModelBase } from "@survey/creator";
 const template = require("./string-editor.html");
 
 export class StringEditorViewModel {
-  constructor(public locString: any) {}
+  private baseModel: StringEditorViewModelBase;
+  constructor(public locString: any) {
+    this.baseModel = new StringEditorViewModelBase(locString);
+  }
   public get koHasHtml(): boolean {
     return this.locString.koHasHtml();
   }
@@ -16,11 +18,7 @@ export class StringEditorViewModel {
     this.locString.text = value;
   }
   public get placeholder(): string {
-    const ownerType: string = this.locString.owner.getType();
-    if (!this.locString.name) return "";
-    const property: JsonObjectProperty = Serializer.findProperty(ownerType, this.locString.name);
-    if (!property.placeholder) return "";
-    return editorLocalization.getString(property.placeholder);
+    return this.baseModel.placeholder;
   }
   public onInput(sender: StringEditorViewModel, event: any): void {
     if (sender.editValue == event.target.innerText) return;

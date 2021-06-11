@@ -1,13 +1,15 @@
 import React from "react";
 import { LocalizableString, Serializer, JsonObjectProperty } from "survey-core";
 import { ReactElementFactory, SvgIcon } from "survey-react-ui";
-import { editorLocalization } from "@survey/creator";
+import { StringEditorViewModelBase } from "@survey/creator";
 
 export class SurveyLocStringEditor extends React.Component<any, any> {
+  private baseModel: StringEditorViewModelBase;
   private svStringEditorRef: React.RefObject<HTMLDivElement>;
   constructor(props: any) {
     super(props);
     this.state = { changed: 0 };
+    this.baseModel = new StringEditorViewModelBase(this.locString);
     this.svStringEditorRef = React.createRef();
   }
   private get locString(): LocalizableString {
@@ -32,11 +34,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     this.locString.onChanged = function () {};
   }
   private get placeholder(): string {
-    const ownerType: string = (this.locString.owner as any).getType();
-    if (!this.locString.name) return "";
-    const property: JsonObjectProperty = Serializer.findProperty(ownerType, this.locString.name);
-    if (!property.placeholder) return "";
-    return editorLocalization.getString(property.placeholder);
+    return this.baseModel.placeholder;
   }
   private onInput = (event: any) => {
     this.done(event);

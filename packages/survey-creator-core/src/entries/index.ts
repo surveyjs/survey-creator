@@ -30,6 +30,7 @@ export * from "../components/matrix-cell";
 export * from "../components/simulator";
 export * from "../components/results";
 export * from "../components/header/logo-image";
+export * from "../components/string-editor";
 export * from "../editorLocalization";
 export * from "../json5";
 export * from "../property-grid";
