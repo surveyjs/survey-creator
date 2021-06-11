@@ -4,7 +4,7 @@ This page has been prepared as a starting point for documentation aimed at end-u
 
 ## Basic Overview/Quick Start Guide
 
-The SurveyJS Survey Creator page contains the survey design area to the left and the toolbox to the right.
+The SurveyJS [Survey Creator](https://surveyjs.io/create-survey) page contains the survey design area with the Toolbox to the left and the Properties window to the right.
 
 ![Overview of the SurveyJS Creator interface](images/survey-editor-overview.png)
 
