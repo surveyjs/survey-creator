@@ -424,7 +424,7 @@ export class PropertyJSONGenerator {
       q.obj = this.obj;
       q.options = this.options;
       var eventVisibility = this.getVisibilityOnEvent(prop);
-      q.readOnly = this.isPropertyReadOnly(prop);
+      q.readOnly = q.readOnly || this.isPropertyReadOnly(prop);
       q.visible = q.visible && eventVisibility;
       if (!!prop.visibleIf) {
         q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
@@ -618,7 +618,7 @@ export class PropertyGridModel {
         panel.collapse();
       }
     }
-    if(focus) {
+    if (focus) {
       question.focus();
     }
   }
