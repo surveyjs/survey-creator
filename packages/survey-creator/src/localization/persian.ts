@@ -81,7 +81,7 @@ var persianStrings = {
     "generateValidJSON": "تولید کد معتبر JSON",
     "generateReadableJSON": "تولید کد خوانا JSON",
     "toolbox": "جعبه ابزار",
-    "property-grid": "Properties",
+    "property-grid": "ویژگی ها",
     "toolboxGeneralCategory": "عمومی",
     "correctJSON": "لطفا JSON را تصحیح کنید.",
     "surveyResults": "نتایج نظرسنجی: ",
