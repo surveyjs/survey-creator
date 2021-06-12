@@ -6,7 +6,8 @@ import {
   Base,
   ItemValue,
   property,
-  QuestionSelectBase
+  QuestionSelectBase,
+  Serializer
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
 
@@ -90,12 +91,19 @@ export class DragDropHelper extends Base {
   }
 
   private createGhostSurveyElement(): any {
+    const startWithNewLine = this.draggedSurveyElement.startWithNewLine;
+    let className = "svc-drag-drop-ghost";
+
     const json = {
       type: "html",
       name: DragDropHelper.ghostSurveyElementName,
-      html: '<div class="svc-drag-drop-ghost"></div>'
+      html: `<div class="${className}"></div>`
     };
-    return this.createElementFromJson(json);
+
+    const element = this.createElementFromJson(json);
+    element.startWithNewLine = startWithNewLine;
+
+    return element;
   }
 
   private createDraggedElementShortcut() {
@@ -467,9 +475,16 @@ export class DragDropHelper extends Base {
     }
     // EO ghost new page
 
+    // fake target element (need only for "startWithNewLine:false" feature)
+    //TODO need for dragDrop helper in library
+    const json = new JsonObject().toJsonObject(this.draggedSurveyElement);
+    json["type"] = this.draggedSurveyElement.getType();
+    const fakeTargetElement = this.createFakeTargetElement(this.draggedSurveyElement.name, json);
+    // EO fake target element
+
     this.pageOrPanel.dragDropStart(
       this.draggedSurveyElement,
-      this.draggedSurveyElement,
+      fakeTargetElement,
       DragDropHelper.nestedPanelDepth
     );
 
@@ -498,6 +513,21 @@ export class DragDropHelper extends Base {
     }
     element.renderWidth = "100%";
     return element;
+  }
+
+  private createFakeTargetElement(elementName: string, json: any): any {
+    if (!elementName || !json) return null;
+    var targetElement = null;
+    targetElement = Serializer.createClass(json["type"]);
+    new JsonObject().toObject(json, targetElement);
+    targetElement.name = elementName;
+    if (targetElement["setSurveyImpl"]) {
+      targetElement["setSurveyImpl"](this.survey);
+    } else {
+      targetElement["setData"](this.survey);
+    }
+    targetElement.renderWidth = "100%";
+    return targetElement;
   }
 
   private drop = () => {
