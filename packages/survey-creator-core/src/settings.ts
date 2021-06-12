@@ -4,12 +4,12 @@ import {
   JsonObjectProperty,
   MatrixDropdownColumn,
   Question,
-  SurveyModel,
+  SurveyModel
 } from "survey-core";
 
 export var settings = {
   traslation: {
-    sortByName: true,
+    sortByName: true
   },
   operators: {
     empty: [],
@@ -23,10 +23,10 @@ export var settings = {
     greater: ["!checkbox", "!imagepicker", "!boolean", "!file"],
     less: ["!checkbox", "!imagepicker", "!boolean", "!file"],
     greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
+    lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
   },
   visibleLogicActions: [],
-  defaultNewSurveyJSON: { pages: [{ name: "page1" }] },
+  defaultNewSurveyJSON: { pages: [{ name: "page1" }] }
 
   //TODO add maximumColumnCount
 };
@@ -113,7 +113,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   readOnly: boolean;
   maxLogicItemsInCondition: number;
   showTitlesInExpressions: boolean;
-  allowEditExpressionsInTextEditor: boolean;
+  allowEditExpressionsInTextEditor: boolean = true;
   maximumColumnsCount: number;
   getObjectDisplayName(obj: Base, reason: string, displayName: string): string {
     return displayName;
