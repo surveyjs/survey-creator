@@ -136,15 +136,17 @@ export var surveyDesignerCss = {
   boolean: {
     mainRoot: "sd-question sd-row__question sd-question--boolean",
     root: "",
-    item: "sd-checkbox",
-    control: "sd-checkbox__control",
-    itemChecked: "sd-checkbox--checked",
-    itemIndeterminate: "sd-checkbox--indeterminate",
-    itemDisabled: "sd-checkbox--disabled",
-    label: "sd-checkbox__caption",
+    item: "sd-boolean",
+    control: "sd-visuallyhidden",
+    itemChecked: "sd-boolean--checked",
+    itemIndeterminate: "sd-boolean--indeterminate",
+    itemDisabled: "sd-boolean--disabled",
+    label: "sd-boolean__label",
+    switch: "sd-boolean__switch",
     disabledLabel: "sd-checkbox__label--disabled",
     itemDecorator: "sd-checkbox__hidden",
-    materialDecorator: "sd-checkbox__rectangle"
+    materialDecorator: "sd-checkbox__rectangle",
+    slider: "sd-boolean__thumb"
   },
   text: {
     root: "sd-input sd-text",
