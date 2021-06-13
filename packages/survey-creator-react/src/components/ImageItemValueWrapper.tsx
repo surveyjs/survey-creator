@@ -46,11 +46,14 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
     super.componentDidMount();
     this.model.itemsRoot = this.rootRef.current;
   }
-
+  
   private getDragDropGhost(topOrBottom: string) {
-    if (this.model.ghostPosition === topOrBottom)
-      return <div className="svc-drag-drop-ghost"></div>;
-
+    if (this.model.ghostPosition === topOrBottom) {
+      let className = "svc-drag-drop-ghost";
+      if (topOrBottom === "bottom")
+        className += " svc-drag-drop-ghost--item-value-bottom";
+      return <div className={className}></div>;
+    }
     return null;
   }
 

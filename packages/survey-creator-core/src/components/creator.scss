@@ -67,3 +67,8 @@ survey-creator,
   background: $secondary;
   position: absolute;
 }
+
+.svc-drag-drop-ghost--item-value-bottom {
+  top: initial;
+  bottom: 6px;
+}
