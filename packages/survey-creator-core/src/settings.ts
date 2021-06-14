@@ -26,8 +26,11 @@ export var settings = {
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
   },
   visibleLogicActions: [],
-  defaultNewSurveyJSON: { pages: [{ name: "page1" }] }
-
+  defaultNewSurveyJSON: { pages: [{ name: "page1" }] },
+  /**
+   * Set it to true to allow to convert any question type to any question type
+   */
+  allowToConvertQuestionsToAllTypes: false
   //TODO add maximumColumnCount
 };
 
