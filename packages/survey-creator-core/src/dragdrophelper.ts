@@ -232,13 +232,35 @@ export class DragDropHelper extends Base {
     let isEdge = dragInfo.isEdge;
     let isBottom = dragInfo.isBottom;
 
+    const choices = this.itemValueParentQuestion.choices;
+
     // shouldn't allow to drop on "adorners" (selectall, none, other)
-    if (
-      this.itemValueParentQuestion.choices.indexOf(dropTargetSurveyElement) ===
-      -1
-    ) {
+    if (choices.indexOf(dropTargetSurveyElement) === -1) {
       this.banDropHere();
       return;
+    }
+
+    if (choices.indexOf(dropTargetSurveyElement) === -1) {
+      this.banDropHere();
+      return;
+    }
+
+    //drag over next item
+    if (
+      choices.indexOf(dropTargetSurveyElement) -
+        choices.indexOf(this.draggedSurveyElement) ===
+      1
+    ) {
+      isBottom = true;
+    }
+
+    //drag over prev item
+    if (
+      choices.indexOf(this.draggedSurveyElement) -
+        choices.indexOf(dropTargetSurveyElement) ===
+      1
+    ) {
+      isBottom = false;
     }
 
     if (dropTargetSurveyElement === this.draggedSurveyElement) {
@@ -253,9 +275,16 @@ export class DragDropHelper extends Base {
     )
       return;
 
+    // console.log(dropTargetSurveyElement.value);
+    // console.log(isBottom);
+
+    // if (dropTargetSurveyElement.value === "item2") {
+    //   debugger
+    // }
+
+    this.dropTargetSurveyElement = dropTargetSurveyElement;
     this.isEdge = isEdge;
     this.isBottom = isBottom;
-    this.dropTargetSurveyElement = dropTargetSurveyElement;
   }
 
   private handleSurveyElementDragOver(event: PointerEvent) {
@@ -352,6 +381,8 @@ export class DragDropHelper extends Base {
 
   private banDropHere = () => {
     this.dropTargetSurveyElement = null;
+    this.isBottom = null;
+    this.isEdge = null;
     this.draggedElementShortcut.style.cursor = "not-allowed";
   };
 
@@ -479,7 +510,10 @@ export class DragDropHelper extends Base {
     //TODO need for dragDrop helper in library
     const json = new JsonObject().toJsonObject(this.draggedSurveyElement);
     json["type"] = this.draggedSurveyElement.getType();
-    const fakeTargetElement = this.createFakeTargetElement(this.draggedSurveyElement.name, json);
+    const fakeTargetElement = this.createFakeTargetElement(
+      this.draggedSurveyElement.name,
+      json
+    );
     // EO fake target element
 
     this.pageOrPanel.dragDropStart(
