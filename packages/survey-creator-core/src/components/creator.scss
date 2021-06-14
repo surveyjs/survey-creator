@@ -61,7 +61,7 @@ survey-creator,
 }
 
 .svc-drag-drop-ghost {
-  top: 6px;
+  top: 0;
   width: 100%;
   height: 4px;
   background: $secondary;
@@ -70,6 +70,5 @@ survey-creator,
 
 .svc-drag-drop-ghost--item-value-bottom {
   top: initial;
-  bottom: 6px;
-  background: $primary;
+  bottom: -4px;
 }
