@@ -240,11 +240,6 @@ export class DragDropHelper extends Base {
       return;
     }
 
-    if (choices.indexOf(dropTargetSurveyElement) === -1) {
-      this.banDropHere();
-      return;
-    }
-
     //drag over next item
     if (
       choices.indexOf(dropTargetSurveyElement) -
