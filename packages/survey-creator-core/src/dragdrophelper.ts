@@ -270,13 +270,6 @@ export class DragDropHelper extends Base {
     )
       return;
 
-    // console.log(dropTargetSurveyElement.value);
-    // console.log(isBottom);
-
-    // if (dropTargetSurveyElement.value === "item2") {
-    //   debugger
-    // }
-
     this.dropTargetSurveyElement = dropTargetSurveyElement;
     this.isEdge = isEdge;
     this.isBottom = isBottom;
