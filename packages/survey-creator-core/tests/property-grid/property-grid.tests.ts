@@ -1239,9 +1239,13 @@ test("DefaultValue editor", () => {
   expect(editQuestion.getType()).toEqual("propertygrid_value");
   expect(editQuestion.value).toEqual(2);
   expect(editQuestion.contentQuestion.html).toEqual("2");
+  expect(editQuestion.isReadOnly).toBeFalsy();
   var editor = <PropertyGridValueEditor>(
     PropertyGridEditorCollection.getEditor(editQuestion.property)
   );
+  const titleActions = editQuestion.getTitleActions();
+  expect(titleActions).toHaveLength(2);
+  expect(titleActions[1].disabled).toBeFalsy();
   expect(editor).toBeTruthy();
   var valueEditor = editor.createPropertyEditorSetup(
     question,
