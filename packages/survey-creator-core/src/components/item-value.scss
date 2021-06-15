@@ -43,23 +43,17 @@
   cursor: pointer;
   display: inline-block;
 }
-
+.svc-item-value-controls__button > span,
+sv-svg-icon.svc-item-value-controls__button {
+  width: calcSize(2);
+  height: calcSize(2);
+  box-sizing: content-box;
+  .sv-svg-icon {
+    display: block;
+  }
+}
 .svc-item-value-controls__button > span {
   display: block;
-  width: calcSize(2);
-  height: calcSize(2);
-}
-//for knockout
-sv-svg-icon.svc-item-value-controls__button {
-  width: calcSize(2);
-  height: calcSize(2);
-  box-sizing: content-box;
-}
-//for knockout
-sv-svg-icon.svc-item-value-controls__button {
-  width: 16px;
-  height: 16px;
-  box-sizing: content-box;
 }
 
 .svc-item-value-controls__drag {
