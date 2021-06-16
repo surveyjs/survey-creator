@@ -33,8 +33,12 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
   }
 
   private getDragDropGhost(topOrBottom: string) {
-    if (this.model.ghostPosition === topOrBottom)
-      return <div className="svc-drag-drop-ghost"></div>;
+    if (this.model.ghostPosition === topOrBottom) {
+      let className = "svc-drag-drop-ghost";
+      if (topOrBottom === "bottom")
+        className += " svc-drag-drop-ghost--item-value-bottom";
+      return <div className={className}></div>;
+    }
     return null;
   }
 
@@ -81,6 +85,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         data-svc-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }
+        onClick={(event) => this.model.select(this.model, event)}
       >
         {this.getDragDropGhost("top")}
 

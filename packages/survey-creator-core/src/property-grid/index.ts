@@ -424,7 +424,7 @@ export class PropertyJSONGenerator {
       q.obj = this.obj;
       q.options = this.options;
       var eventVisibility = this.getVisibilityOnEvent(prop);
-      q.readOnly = this.isPropertyReadOnly(prop);
+      q.readOnly = q.readOnly || this.isPropertyReadOnly(prop);
       q.visible = q.visible && eventVisibility;
       if (!!prop.visibleIf) {
         q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
@@ -605,7 +605,7 @@ export class PropertyGridModel {
     if (this.objValue === value) return;
     this.setObj(value);
   }
-  public selectProperty(propertyName: string) {
+  public selectProperty(propertyName: string, focus = true) {
     if (!this.survey) return;
     var question = this.survey.getQuestionByName(propertyName);
     if (!question) return;
@@ -618,7 +618,9 @@ export class PropertyGridModel {
         panel.collapse();
       }
     }
-    question.focus();
+    if (focus) {
+      question.focus();
+    }
   }
   private setObjFromAction(value: Base, propertyName: string) {
     if (this.changedFromActionCallback) {

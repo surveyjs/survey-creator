@@ -326,6 +326,28 @@ test("Show property editor for condition/expression", () => {
     propertyGrid.survey.getQuestionByName("defaultValueExpression")
   ).toBeTruthy(); //defaultValueExpression is here
 });
+test("Test options.allowEditExpressionsInTextEditor", () => {
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  options.allowEditExpressionsInTextEditor = false;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var conditionQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+  var expressionQuestion = propertyGrid.survey.getQuestionByName(
+    "defaultValueExpression"
+  );
+  expect(conditionQuestion.isReadOnly).toBeTruthy();
+  expect(expressionQuestion.isReadOnly).toBeFalsy();
+
+  options.allowEditExpressionsInTextEditor = true;
+  propertyGrid = new PropertyGridModelTester(question, options);
+  conditionQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+  expressionQuestion = propertyGrid.survey.getQuestionByName(
+    "defaultValueExpression"
+  );
+  expect(conditionQuestion.isReadOnly).toBeFalsy();
+  expect(expressionQuestion.isReadOnly).toBeFalsy();
+});
+
 test("Support question property editor", () => {
   var survey = new SurveyModel({
     elements: [
@@ -1217,9 +1239,13 @@ test("DefaultValue editor", () => {
   expect(editQuestion.getType()).toEqual("propertygrid_value");
   expect(editQuestion.value).toEqual(2);
   expect(editQuestion.contentQuestion.html).toEqual("2");
+  expect(editQuestion.isReadOnly).toBeFalsy();
   var editor = <PropertyGridValueEditor>(
     PropertyGridEditorCollection.getEditor(editQuestion.property)
   );
+  const titleActions = editQuestion.getTitleActions();
+  expect(titleActions).toHaveLength(2);
+  expect(titleActions[1].disabled).toBeFalsy();
   expect(editor).toBeTruthy();
   var valueEditor = editor.createPropertyEditorSetup(
     question,

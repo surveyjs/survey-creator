@@ -14,7 +14,10 @@ import {
   Helpers,
   Base,
   JsonObject,
-  Question
+  Question,
+  QuestionCommentModel,
+  IActionBarItem,
+  ActionBarItem
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
@@ -247,10 +250,21 @@ export class ConditionEditorItemsBuilder {
 }
 
 export class ConditionEditor extends PropertyEditorSetupValue {
+  public static canParseExpression(text: string): boolean {
+    if (!text) return true;
+    return !!new ConditionsParser().parseExpression(text);
+  }
+  public static canBuildExpression(text: string): boolean {
+    if (!text) return true;
+    if (!ConditionEditor.canParseExpression(text)) return false;
+    return new ConditionEditorItemsBuilder().build(text).length > 0;
+  }
   private objectValue: Base;
   private surveyValue: SurveyModel;
   private panelValue: QuestionPanelDynamicModel;
+  private textEditorValue: QuestionCommentModel;
   private addConditionQuestionsHash = {};
+  private isModalValue: boolean = true;
   public allConditionQuestions: Array<ItemValue>;
 
   constructor(
@@ -265,10 +279,18 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.panelValue = <QuestionPanelDynamicModel>(
       this.editSurvey.getQuestionByName("panel")
     );
+    this.textEditorValue = <QuestionCommentModel>(
+      this.editSurvey.getQuestionByName("textEditor")
+    );
     if (!!this.options.maxLogicItemsInCondition) {
       this.panel.maxPanelCount = this.options.maxLogicItemsInCondition;
     }
     this.allConditionQuestions = this.createAllConditionQuestions();
+    this.editSurvey.onValueChanged.add((sender, options) => {
+      if (options.name === "textEditor") {
+        this.textEditorValueChanged();
+      }
+    });
     this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
       this.onPanelAdded();
     });
@@ -280,6 +302,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);
     });
+    this.editSurvey.onGetQuestionTitleActions.add((sender, options) => {
+      this.onGetQuestionTitleActions(options);
+    });
     this.text =
       !!this.object && this.propertyName ? this.object[this.propertyName] : "";
   }
@@ -288,6 +313,15 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   public set title(val: string) {
     this.panel.title = val;
+    this.textEditor.title = val;
+  }
+  public get isModal(): boolean {
+    return this.isModalValue;
+  }
+  public set isModal(val: boolean) {
+    if (val === this.isModalValue) return;
+    this.isModalValue = val;
+    this.panel.titleLocation = val ? "hidden" : "default";
   }
   protected getSurveyJSON(): any {
     return {
@@ -329,6 +363,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               visible: false
             }
           ]
+        },
+        {
+          type: "comment",
+          name: "textEditor",
+          textUpdateMode: "onTyping",
+          visible: false
         }
       ]
     };
@@ -351,6 +391,15 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return this.getText();
   }
   public set text(val: string) {
+    if (!this.isModal && !ConditionEditor.canBuildExpression(val)) {
+      this.panel.panelCount = 0;
+      this.showTextEditor(val);
+    } else {
+      this.textEditor.value = val;
+      this.showBuilder();
+    }
+  }
+  private processText(val: string) {
     this.panel.panelCount = 0;
     var items = new ConditionEditorItemsBuilder().build(val);
     this.buildPanels(items);
@@ -364,7 +413,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   public get panel(): QuestionPanelDynamicModel {
     return this.panelValue;
   }
+  public get textEditor(): QuestionCommentModel {
+    return this.textEditorValue;
+  }
   public get isReady(): boolean {
+    if (this.textEditor.visible) {
+      return ConditionEditor.canParseExpression(this.textEditor.value);
+    }
     for (var i = 0; i < this.panel.panels.length; i++) {
       if (!this.createEditorItemFromPanel(this.panel.panels[i]).isReady)
         return false;
@@ -403,6 +458,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.isSettingPanelValues = false;
   }
   private getText(): string {
+    if (this.textEditor.visible) return this.textEditor.value;
     var res = "";
     var items = [];
     for (var i = 0; i < this.panel.panels.length; i++) {
@@ -534,7 +590,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       }
       panel.addElement(newQuestion);
     }
-    //this.updateQuestionsWidth();
   }
   rebuildQuestionValueOnOperandChanging(panel: PanelModel) {
     var json = this.getQuestionConditionJson(
@@ -715,5 +770,64 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     this.updateOperatorEnables(panel);
     this.updateQuestionsWidth(panel);
+  }
+  private showBuilderAction: IActionBarItem;
+  private onGetQuestionTitleActions(options: any) {
+    options.titleActions = [];
+    if (
+      this.isModal ||
+      !this.options.allowEditExpressionsInTextEditor ||
+      !options.question.parent.isPage
+    )
+      return;
+    var isBuildQuestion = options.question === this.panel;
+    var showBuilder = new ActionBarItem({
+      id: "condition-buid",
+      title: editorLocalization.getString("pe.buildExpression"),
+      active: isBuildQuestion,
+      enabled: isBuildQuestion || ConditionEditor.canBuildExpression(this.text),
+      action: !isBuildQuestion
+        ? () => {
+            this.showBuilder();
+          }
+        : undefined
+    });
+    if (!isBuildQuestion) {
+      this.showBuilderAction = showBuilder;
+    }
+    options.titleActions = [
+      showBuilder,
+      {
+        id: "condition-edit",
+        title: editorLocalization.getString("pe.editExpression"),
+        active: !isBuildQuestion,
+        action: isBuildQuestion
+          ? () => {
+              this.showTextEditor(this.text);
+            }
+          : undefined
+      }
+    ];
+  }
+  private isSettingTextEditorValue: boolean;
+  private showTextEditor(expression: string) {
+    this.panel.visible = false;
+    this.isSettingTextEditorValue = true;
+    this.textEditor.value = expression;
+    this.isSettingTextEditorValue = false;
+    this.textEditor.visible = true;
+  }
+  private showBuilder() {
+    if (!this.isModal && !this.canShowBuilder) return;
+    this.textEditor.visible = false;
+    this.processText(this.textEditor.value);
+    this.panel.visible = true;
+  }
+  private textEditorValueChanged() {
+    if (this.isSettingTextEditorValue || !this.showBuilderAction) return;
+    this.showBuilderAction.enabled = this.canShowBuilder;
+  }
+  private get canShowBuilder(): boolean {
+    return ConditionEditor.canBuildExpression(this.textEditor.value);
   }
 }

@@ -39,8 +39,7 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any {
     return {
-      type: "propertygrid_value",
-      readOnly: true
+      type: "propertygrid_value"
     };
   }
   public clearPropertyValue(

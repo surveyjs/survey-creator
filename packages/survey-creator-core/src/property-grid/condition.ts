@@ -2,7 +2,7 @@ import { Base, JsonObjectProperty, Question } from "survey-core";
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,
-  PropertyGridEditor,
+  PropertyGridEditor
 } from "./index";
 import { ConditionEditor } from "./condition-survey";
 import { ISurveyCreatorOptions } from "../settings";
@@ -36,7 +36,11 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return { type: "comment", showOptionsCaption: false };
+    return {
+      type: "comment",
+      showOptionsCaption: false,
+      readOnly: options.allowEditExpressionsInTextEditor === false
+    };
   }
   public createPropertyEditorSetup(
     obj: Base,

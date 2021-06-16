@@ -32,10 +32,10 @@ class DesignTimeSurveyModel extends Survey {
   }
   public isPopupEditorContent = false;
   public getElementWrapperComponentName(element: any, reason?: string): string {
-    if (reason === "cell" || reason === "column-header" || reason === "row-header") {
+    if(reason === "cell" || reason === "column-header" || reason === "row-header") {
       return "svc-matrix-cell";
     }
-    if (!element["parentQuestionValue"]) {
+    if(!element["parentQuestionValue"]) {
       if (element instanceof Question) {
         if (element.getType() == "dropdown") {
           return this.isPopupEditorContent ? "svc-cell-dropdown-question" : "svc-dropdown-question";
@@ -43,14 +43,23 @@ class DesignTimeSurveyModel extends Survey {
         if (element.getType() == "image") {
           return "svc-image-question";
         }
+        if (element.getType() == "rating") {
+          return "svc-rating-question";
+        }
         if (element.koElementType() == "survey-question") {
           return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
         }
       }
-      if (element instanceof Panel) {
-        if (element.koElementType() == "survey-panel") {
-          return "svc-panel";
-        }
+      if (element.getType() == "image") {
+        return "svc-image-question";
+      }
+      if (element.koElementType() == "survey-question") {
+        return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
+      }
+    }
+    if (element instanceof Panel) {
+      if (element.koElementType() == "survey-panel") {
+        return "svc-panel";
       }
     }
     return super.getElementWrapperComponentName(element, reason);

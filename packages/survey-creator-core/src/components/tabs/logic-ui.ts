@@ -159,13 +159,7 @@ export class SurveyLogicUI extends SurveyLogic {
       this.options
     );
     this.expressionEditor.title = getLogicString("expressionEditorTitle");
-    /*
-    this.expressionEditor.isEditorShowing = true;
-    this.expressionEditor.isWideMode = true;
-    this.expressionEditor.object = this.survey;
-    this.expressionEditor.options = this.options;
-    this.expressionEditor.koSetupText(this.expressionSetupText);
-    */
+    this.expressionEditor.isModal = false;
   }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;

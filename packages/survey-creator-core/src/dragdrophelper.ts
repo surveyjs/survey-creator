@@ -6,7 +6,8 @@ import {
   Base,
   ItemValue,
   property,
-  QuestionSelectBase
+  QuestionSelectBase,
+  Serializer
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
 
@@ -90,12 +91,19 @@ export class DragDropHelper extends Base {
   }
 
   private createGhostSurveyElement(): any {
+    const startWithNewLine = this.draggedSurveyElement.startWithNewLine;
+    let className = "svc-drag-drop-ghost";
+
     const json = {
       type: "html",
       name: DragDropHelper.ghostSurveyElementName,
-      html: '<div class="svc-drag-drop-ghost"></div>'
+      html: `<div class="${className}"></div>`
     };
-    return this.createElementFromJson(json);
+
+    const element = this.createElementFromJson(json);
+    element.startWithNewLine = startWithNewLine;
+
+    return element;
   }
 
   private createDraggedElementShortcut() {
@@ -224,13 +232,30 @@ export class DragDropHelper extends Base {
     let isEdge = dragInfo.isEdge;
     let isBottom = dragInfo.isBottom;
 
+    const choices = this.itemValueParentQuestion.choices;
+
     // shouldn't allow to drop on "adorners" (selectall, none, other)
-    if (
-      this.itemValueParentQuestion.choices.indexOf(dropTargetSurveyElement) ===
-      -1
-    ) {
+    if (choices.indexOf(dropTargetSurveyElement) === -1) {
       this.banDropHere();
       return;
+    }
+
+    //drag over next item
+    if (
+      choices.indexOf(dropTargetSurveyElement) -
+        choices.indexOf(this.draggedSurveyElement) ===
+      1
+    ) {
+      isBottom = true;
+    }
+
+    //drag over prev item
+    if (
+      choices.indexOf(this.draggedSurveyElement) -
+        choices.indexOf(dropTargetSurveyElement) ===
+      1
+    ) {
+      isBottom = false;
     }
 
     if (dropTargetSurveyElement === this.draggedSurveyElement) {
@@ -245,9 +270,9 @@ export class DragDropHelper extends Base {
     )
       return;
 
+    this.dropTargetSurveyElement = dropTargetSurveyElement;
     this.isEdge = isEdge;
     this.isBottom = isBottom;
-    this.dropTargetSurveyElement = dropTargetSurveyElement;
   }
 
   private handleSurveyElementDragOver(event: PointerEvent) {
@@ -344,6 +369,8 @@ export class DragDropHelper extends Base {
 
   private banDropHere = () => {
     this.dropTargetSurveyElement = null;
+    this.isBottom = null;
+    this.isEdge = null;
     this.draggedElementShortcut.style.cursor = "not-allowed";
   };
 
@@ -467,9 +494,19 @@ export class DragDropHelper extends Base {
     }
     // EO ghost new page
 
+    // fake target element (need only for "startWithNewLine:false" feature)
+    //TODO need for dragDrop helper in library
+    const json = new JsonObject().toJsonObject(this.draggedSurveyElement);
+    json["type"] = this.draggedSurveyElement.getType();
+    const fakeTargetElement = this.createFakeTargetElement(
+      this.draggedSurveyElement.name,
+      json
+    );
+    // EO fake target element
+
     this.pageOrPanel.dragDropStart(
       this.draggedSurveyElement,
-      this.draggedSurveyElement,
+      fakeTargetElement,
       DragDropHelper.nestedPanelDepth
     );
 
@@ -498,6 +535,21 @@ export class DragDropHelper extends Base {
     }
     element.renderWidth = "100%";
     return element;
+  }
+
+  private createFakeTargetElement(elementName: string, json: any): any {
+    if (!elementName || !json) return null;
+    var targetElement = null;
+    targetElement = Serializer.createClass(json["type"]);
+    new JsonObject().toObject(json, targetElement);
+    targetElement.name = elementName;
+    if (targetElement["setSurveyImpl"]) {
+      targetElement["setSurveyImpl"](this.survey);
+    } else {
+      targetElement["setData"](this.survey);
+    }
+    targetElement.renderWidth = "100%";
+    return targetElement;
   }
 
   private drop = () => {
