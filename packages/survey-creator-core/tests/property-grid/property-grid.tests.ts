@@ -1476,6 +1476,36 @@ test("trigger value editor", () => {
   );
   expect(trigger.setValue).toBeFalsy();
 });
+test("Create setvalue trigger", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] },
+      { type: "text", name: "q2" }
+    ]
+  });
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var triggersQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("triggers")
+  );
+  expect(triggersQuestion).toBeTruthy();
+  triggersQuestion.addRow();
+  triggersQuestion.visibleRows[0].getQuestionByName("triggerType").value =
+    "setvaluetrigger";
+  triggersQuestion.visibleRows[0].showDetailPanel();
+  expect(triggersQuestion.visibleRows[0].detailPanel).toBeTruthy();
+  var setValueQuestion =
+    triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("setValue");
+  expect(setValueQuestion).toBeTruthy();
+  expect(setValueQuestion.isVisible).toBeFalsy();
+  var setToNameQuestion =
+    triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("setToName");
+  expect(setToNameQuestion).toBeTruthy();
+  setToNameQuestion.value = "q1";
+  expect(setValueQuestion.isVisible).toBeTruthy();
+  var actions = setValueQuestion.getTitleActions();
+  expect(actions).toHaveLength(2);
+  actions[1].action();
+});
 test("Support maximumColumnsCount option", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");

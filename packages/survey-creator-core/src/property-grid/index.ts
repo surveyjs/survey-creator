@@ -306,17 +306,19 @@ export class PropertyGridTitleActionsCreator {
     question: Question
   ) {
     const surveyPropertyEditor = editor.createPropertyEditorSetup(
-      this.obj,
+      question.obj,
       property,
       question,
       this.options
     );
-    surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
+    const editSurvey = surveyPropertyEditor.editSurvey;
+    editSurvey.css = surveyDesignerCss;
+    if (!settings.showModal) return;
     settings.showModal(
       "survey",
       {
-        survey: surveyPropertyEditor.editSurvey,
-        model: surveyPropertyEditor.editSurvey
+        survey: editSurvey,
+        model: editSurvey
       },
       () => surveyPropertyEditor.apply()
     );
