@@ -73,7 +73,7 @@
     "storybook-addon-designs": "^5.4.2",
     "style-loader": "^1.2.1",
     "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
-    "testcafe": "^1.9.2",
+    "testcafe": "^1.14.2",
     "ts-jest": "^26.1.1",
     "ts-loader": "^8.0.15",
     "tsconfig-paths-webpack-plugin": "^3.3.0",

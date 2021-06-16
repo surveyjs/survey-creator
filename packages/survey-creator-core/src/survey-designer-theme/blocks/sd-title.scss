@@ -6,6 +6,24 @@
   flex-direction: row;
 }
 
+.sd-title.sd-container-modern__title {
+  padding: calcSize(3);
+  border-bottom: 2px solid $primary;
+  overflow: auto;
+  font-family: "Open Sans";
+}
+
 .sd-header__text {
   flex-grow: 1;
+  h3 {
+    padding-bottom: calcSize(1);
+    font-size: calcSize(4);
+    font-weight: 700;
+    line-height: calcSize(5);
+  }
+  h5 {
+    font-size: calcSize(2);
+    font-weight: 400;
+    line-height: calcSize(3);
+  }
 }
