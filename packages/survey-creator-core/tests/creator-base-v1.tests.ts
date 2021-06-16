@@ -1,21 +1,14 @@
 import {
   PanelModel,
-  SurveyModel,
   QuestionHtmlModel,
   ElementFactory,
   QuestionTextModel,
   Serializer,
   QuestionRadiogroupModel,
-  QuestionMatrixDropdownModel,
   QuestionMatrixDynamicModel
 } from "survey-core";
 import { getNextValue } from "../src/utils/utils";
-import { CreatorBase, ICreatorOptions } from "../src/creator-base";
 import { editorLocalization } from "../src/editorLocalization";
-import {
-  ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions
-} from "../src/settings";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 import { CreatorTester } from "./creator-tester";
 

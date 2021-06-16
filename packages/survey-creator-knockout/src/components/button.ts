@@ -36,5 +36,5 @@ ko.components.register("svc-button", {
       );
     },
   },
-  template: template,
+  template: template
 });

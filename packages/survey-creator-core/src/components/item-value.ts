@@ -2,16 +2,12 @@ import {
   Base,
   ItemValue,
   property,
-  QuestionCheckboxBase,
   QuestionCheckboxModel,
   QuestionSelectBase,
-  surveyLocalization,
   SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropHelper } from "../dragdrophelper";
-import { IPortableDragEvent } from "../entries";
-
 import "./item-value.scss";
 
 export class ItemValueWrapperViewModel extends Base {

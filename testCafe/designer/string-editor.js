@@ -22,7 +22,7 @@ fixture`${title}`.page`${url}`.beforeEach(
     }
 );
 
-test('Edit question\'s title', async (t) => {
+test('Edit question title', async (t) => {
     await ClientFunction((json) => { creator.JSON = json; })(json);
     const title = json.questions[0].name;
     await t.click(Selector(`div[name=${title}]`, { offsetX: -1, offsetY: -1 }));
@@ -32,5 +32,5 @@ test('Edit question\'s title', async (t) => {
     await t.typeText(svStringSelector, prefix, { caretPos: 0 });
     await t.pressKey('enter');
     await t.expect(Selector('textarea[aria-label=Title]').value).
-        eql(prefix + title, 'Question\'s title in property grid is updated');
+        eql(prefix + title, 'Question title in property grid is updated');
 });

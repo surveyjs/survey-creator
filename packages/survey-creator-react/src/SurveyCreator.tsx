@@ -125,6 +125,16 @@ class DesignTimeSurveyModel extends Model {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
+
+  public get hasLogo(): boolean {
+    return true;
+  }
+  public get isLogoBefore(): boolean {
+    return false;
+  }
+  public get isLogoAfter(): boolean {
+    return true;
+  }
   public getRowWrapperComponentName(row: QuestionRowModel): string {
     return "svc-row";
   }
@@ -135,60 +145,65 @@ class DesignTimeSurveyModel extends Model {
     };
   }
   public getElementWrapperComponentName(element: any, reason?: string): string {
-    if (this.isDesignMode) {
-      if (
-        reason === "cell" ||
-        reason === "column-header" ||
-        reason === "row-header"
-      ) {
-        return "svc-matrix-cell";
-      }
-      if (!element["parentQuestionValue"]) {
-        if (element instanceof Question) {
-          if (element.getType() == "dropdown") {
-            return this.isPopupEditorContent
-              ? "svc-cell-dropdown-question"
-              : "svc-dropdown-question";
-          }
-          if (element.getType() == "image") {
-            return "svc-image-question";
-          }
-          if (element.getType() == "rating") {
-            return "svc-rating-question";
-          }
+    if (reason === "cell" || reason === "column-header" || reason === "row-header") {
+      return "svc-matrix-cell";
+    }
+    if (!element["parentQuestionValue"]) {
+      if (element instanceof Question) {
+        if (element.getType() == "dropdown") {
           return this.isPopupEditorContent
-            ? "svc-cell-question"
-            : "svc-question";
+            ? "svc-cell-dropdown-question"
+            : "svc-dropdown-question";
         }
-        if (element instanceof PanelModel) {
-          return "svc-question";
+        if (element.getType() == "image") {
+          return "svc-image-question";
         }
+        if (element.getType() == "rating") {
+          return "svc-rating-question";
+        }
+        return this.isPopupEditorContent
+          ? "svc-cell-dropdown-question"
+          : "svc-dropdown-question";
       }
+      if (element.getType() == "image") {
+        return "svc-image-question";
+      }
+      return this.isPopupEditorContent
+        ? "svc-cell-question"
+        : "svc-question";
+    }
+    if (element instanceof PanelModel) {
+      return "svc-question";
+    }
+    if (element instanceof PanelModel) {
+      return "svc-question";
     }
     return super.getElementWrapperComponentName(element);
   }
+  public getElementWrapperComponentNameByName(element: string): string {
+    if (element === "sv-logo-image") return "svc-logo-image";
+    return super.getElementWrapperComponentNameByName(element);
+  }
+  public getElementWrapperComponentDataByName(element: string): any {
+    if (element === "sv-logo-image") return this.creator;
+    return super.getElementWrapperComponentDataByName(element);
+  }
   public getElementWrapperComponentData(element: any, reason?: string): any {
-    if (this.isDesignMode) {
-      if (
-        reason === "cell" ||
-        reason === "column-header" ||
-        reason === "row-header"
-      ) {
-        return {
-          creator: this.creator,
-          element: element,
-          question: element.question,
-          row: element.row,
-          column: element.column
-        };
+    if (reason === "cell" || reason === "column-header" || reason === "row-header") {
+      return {
+        creator: this.creator,
+        element: element,
+        question: element.question,
+        row: element.row,
+        column: element.column
+      };
+    }
+    if (!element["parentQuestionValue"]) {
+      if (element instanceof Question) {
+        return this.creator;
       }
-      if (!element["parentQuestionValue"]) {
-        if (element instanceof Question) {
-          return this.creator;
-        }
-        if (element instanceof PanelModel) {
-          return this.creator;
-        }
+      if (element instanceof PanelModel) {
+        return this.creator;
       }
     }
     return super.getElementWrapperComponentData(element);
@@ -209,7 +224,7 @@ class DesignTimeSurveyModel extends Model {
     item: ItemValue,
     question: QuestionSelectBase
   ): any {
-    if (!this.isDesignMode || !!question["parentQuestionValue"]) {
+    if (!!question["parentQuestionValue"]) {
       return item;
     }
     return {
@@ -218,7 +233,7 @@ class DesignTimeSurveyModel extends Model {
     };
   }
   public getRendererForString(element: Base, name: string): string {
-    if (this.isDesignMode && !element["parentQuestionValue"]) {
+    if (!element["parentQuestionValue"]) {
       return editableStringRendererName;
     }
     return undefined;
@@ -227,6 +242,10 @@ class DesignTimeSurveyModel extends Model {
 export class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
+  }
+  protected createSurveyCore(json: any = {}, reason: string): Model {
+    if (reason === "designer") return new DesignTimeSurveyModel(this, json);
+    return new Model(json);
   }
   public render(target: string | HTMLElement) {
     let node: HTMLElement = target as HTMLElement;
@@ -242,9 +261,6 @@ export class SurveyCreator extends CreatorBase<SurveyModel> {
     );
   }
 
-  protected createSurveyCore(json: any = {}): SurveyModel {
-    return new DesignTimeSurveyModel(this, json);
-  }
   //ISurveyCreator
   public createQuestionElement(question: Question): JSX.Element {
     return ReactQuestionFactory.Instance.createQuestion(
