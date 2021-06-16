@@ -3,35 +3,15 @@ import { CreatorBase } from "../../creator-base";
 import "./logo-image.scss";
 
 export class LogoImageViewModel extends Base {
-  @property() isLogoImageChoosen: boolean;
   constructor(private creator: CreatorBase<SurveyModel>, public root: HTMLDivElement) {
     super();
-    creator.onPropertyValueChanging.add((_, options) => {
-      if (options.propertyName === "logo") {
-        this.updateIsLogoImageChoosen(options.newValue);
-      }
-    });
-    creator.survey.onPropertyChanged.add((_, options) => {
-      if (options.name === "logo") {
-        this.updateIsLogoImageChoosen(options.newValue);
-      }
-    });
-    this.updateIsLogoImageChoosen();
   }
-  private updateIsLogoImageChoosen(value?: string): void {
-    if (typeof value === "undefined") {
-      value = this.creator.survey.logo;
-    }
-    const newIsChoosenValue: boolean = !!value;
-    if (this.isLogoImageChoosen && newIsChoosenValue) {
-      this.isLogoImageChoosen = false;
-    }
-    this.isLogoImageChoosen = newIsChoosenValue;
+  public get survey(): SurveyModel {
+    return this.creator.survey;
   }
   private uploadFile(model: LogoImageViewModel, fileInput: HTMLInputElement, files: File[]) {
     model.creator.uploadFiles(files, (_, link) => {
       model.creator.survey.logo = link;
-      model.updateIsLogoImageChoosen();
       fileInput.value = "";
     });
   }
@@ -47,6 +27,5 @@ export class LogoImageViewModel extends Base {
   }
   public remove(model: LogoImageViewModel) {
     model.creator.survey.logo = "";
-    model.updateIsLogoImageChoosen();
   }
 }

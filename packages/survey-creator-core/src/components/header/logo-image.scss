@@ -2,7 +2,7 @@
 
 .svc-logo-image {
   position: relative;
-  float: right;
+  justify-content: flex-end;
   margin-top: calcSize(2);
   .svc-image-item-value-controls {
     display: block;

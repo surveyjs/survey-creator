@@ -24,7 +24,7 @@ export class LogoImageComponent extends SurveyElementBase<ILogoImageComponentPro
   }
   render(): JSX.Element {
     let content: JSX.Element = null;
-    if (this.model.isLogoImageChoosen) {
+    if (this.model.survey.locLogo.renderedHtml) {
       content = <>
         <LogoImage data={this.props.data.survey}></LogoImage>
         <div className="svc-image-item-value-controls">

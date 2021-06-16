@@ -2,4 +2,10 @@
   font-family: "Open Sans";
   font-style: normal;
   color: $foreground;
+  display: flex;
+  flex-direction: row;
+}
+
+.sd-header__text {
+  flex-grow: 1;
 }

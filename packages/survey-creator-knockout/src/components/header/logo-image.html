@@ -1,10 +1,10 @@
 <div class="svc-logo-image">
   <input type="file" accept="image/*" class="svc-choose-file-input"/>
-  <!-- ko ifnot: isLogoImageChoosen -->
+  <!-- ko ifnot: survey.locLogo.koRenderedHtml -->
     <div class="svc-logo-image-placeholder" data-bind="click: chooseFile">[LOGO]</div>
   <!-- /ko -->
-  <!-- ko if: isLogoImageChoosen -->
-    <!-- ko component: { name: 'sv-logo-image', params: $data.creator.survey } -->
+  <!-- ko if: survey.locLogo.koRenderedHtml -->
+    <!-- ko component: { name: 'sv-logo-image', params: survey } -->
     <!-- /ko -->
     <div class="svc-image-item-value-controls">
       <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" data-bind="click: chooseFile" params="iconName: 'icon-file', size: 24"></sv-svg-icon>
