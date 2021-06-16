@@ -296,7 +296,12 @@ export class PropertyGridTitleActionsCreator {
       iconName: "icon-property_grid_clear",
       enabled: enabled,
       action: () => {
-        editor.clearPropertyValue(this.obj, property, question, this.options);
+        editor.clearPropertyValue(
+          question.obj,
+          property,
+          question,
+          this.options
+        );
       }
     };
   }

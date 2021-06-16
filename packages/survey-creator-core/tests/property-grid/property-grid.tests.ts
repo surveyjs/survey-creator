@@ -1514,6 +1514,10 @@ test("Create setvalue trigger", () => {
   expect(trigger.getType()).toEqual("setvaluetrigger");
   expect(trigger.setToName).toEqual("q1");
   expect(trigger.setValue).toEqual(2);
+  actions[0].action();
+  expect(trigger.setValue).toBeFalsy();
+  expect(setValueQuestion.value).toBeFalsy();
+  expect(setValueQuestion.contentQuestion.html).toEqual("Value is empty");
 });
 test("Support maximumColumnsCount option", () => {
   var question = new QuestionMatrixDynamicModel("q1");
