@@ -1,5 +1,5 @@
 import { url } from "../helper";
-import { ClientFunction, Selector } from "testcafe";
+import { Selector } from "testcafe";
 const title = "Inplace editors";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -8,14 +8,9 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 test("Checkbox question inplace editor", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
-    await t.hover(Selector(`div[title=Checkbox]`), {speed: 0.5});
-    await t.click(Selector(`div[title=Checkbox]`), {speed: 0.5});
-    await t
-        .expect(
-            Selector(".svc-question__content.svc-question__content--selected")
-                .exists
-        )
-        .ok();
+    await t.hover(Selector(`div[title=Checkbox]`), { speed: 0.5 });
+    await t.click(Selector(`div[title=Checkbox]`), { speed: 0.5 });
+    await t.expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok();
 
     const items = Selector(".svc-item-value-wrapper");
     await t.expect(items.count).eql(7);
@@ -649,103 +644,36 @@ test("Image picker question inplace editor", async (t) => {
     await t.expect(items.count).eql(5);
 
     await t.expect(items.nth(0).hasClass("svc-item-value--new")).notOk();
-    await t
-        .expect(
-            items.nth(0).find(".svc-image-item-value-controls__add").visible
-        )
-        .notOk();
-    await t
-        .expect(
-            items.nth(0).find(".svc-image-item-value-controls__choose-file")
-                .visible
-        )
-        .ok();
-    await t
-        .expect(
-            items.nth(0).find(".svc-image-item-value-controls__remove").visible
-        )
-        .ok();
-    await t.expect(items.nth(0).find("img[alt=lion]").exists).ok();
+    await t.expect(items.nth(0).find(".svc-image-item-value-controls__add").visible).notOk();
+    await t.expect(items.nth(0).find(".svc-image-item-value-controls__choose-file").visible).ok();
+    await t.expect(items.nth(0).find('.svc-image-item-value-controls__remove').visible).ok();
+    await t.expect(items.nth(0).find('img[alt=lion]').exists).ok();
 
-    await t.expect(items.nth(1).hasClass("svc-item-value--new")).notOk();
-    await t
-        .expect(
-            items.nth(1).find(".svc-image-item-value-controls__add").visible
-        )
-        .notOk();
-    await t
-        .expect(
-            items.nth(1).find(".svc-image-item-value-controls__choose-file")
-                .visible
-        )
-        .ok();
-    await t
-        .expect(
-            items.nth(1).find(".svc-image-item-value-controls__remove").visible
-        )
-        .ok();
-    await t.expect(items.nth(1).find("img[alt=giraffe]").exists).ok();
+    await t.expect(items.nth(1).hasClass('svc-item-value--new')).notOk()
+    await t.expect(items.nth(1).find('.svc-image-item-value-controls__add').visible).notOk();
+    await t.expect(items.nth(1).find('.svc-image-item-value-controls__choose-file').visible).ok();
+    await t.expect(items.nth(1).find('.svc-image-item-value-controls__remove').visible).ok();
+    await t.expect(items.nth(1).find('img[alt=giraffe]').exists).ok();
 
-    await t.expect(items.nth(2).hasClass("svc-item-value--new")).notOk();
-    await t
-        .expect(
-            items.nth(2).find(".svc-image-item-value-controls__add").visible
-        )
-        .notOk();
-    await t
-        .expect(
-            items.nth(2).find(".svc-image-item-value-controls__choose-file")
-                .visible
-        )
-        .ok();
-    await t
-        .expect(
-            items.nth(2).find(".svc-image-item-value-controls__remove").visible
-        )
-        .ok();
-    await t.expect(items.nth(2).find("img[alt=panda]").exists).ok();
+    await t.expect(items.nth(2).hasClass('svc-item-value--new')).notOk()
+    await t.expect(items.nth(2).find('.svc-image-item-value-controls__add').visible).notOk();
+    await t.expect(items.nth(2).find('.svc-image-item-value-controls__choose-file').visible).ok();
+    await t.expect(items.nth(2).find('.svc-image-item-value-controls__remove').visible).ok();
+    await t.expect(items.nth(2).find('img[alt=panda]').exists).ok();
+    
+    await t.expect(items.nth(3).hasClass('svc-item-value--new')).notOk()
+    await t.expect(items.nth(3).find('.svc-image-item-value-controls__add').visible).notOk();
+    await t.expect(items.nth(3).find('.svc-image-item-value-controls__choose-file').visible).ok();
+    await t.expect(items.nth(3).find('.svc-image-item-value-controls__remove').visible).ok();
+    await t.expect(items.nth(3).find('img[alt=camel]').exists).ok();
+    
+    await t.expect(items.nth(4).hasClass('svc-image-item-value--new')).ok()
+    await t.expect(items.nth(4).find('.svc-image-item-value-controls__add').visible).ok();
+    await t.expect(items.nth(4).find('.svc-image-item-value-controls__choose-file').visible).notOk();
+    await t.expect(items.nth(4).find('.svc-image-item-value-controls__remove').visible).notOk();
+    await t.expect(items.nth(4).find('img').exists).notOk();
 
-    await t.expect(items.nth(3).hasClass("svc-item-value--new")).notOk();
-    await t
-        .expect(
-            items.nth(3).find(".svc-image-item-value-controls__add").visible
-        )
-        .notOk();
-    await t
-        .expect(
-            items.nth(3).find(".svc-image-item-value-controls__choose-file")
-                .visible
-        )
-        .ok();
-    await t
-        .expect(
-            items.nth(3).find(".svc-image-item-value-controls__remove").visible
-        )
-        .ok();
-    await t.expect(items.nth(3).find("img[alt=camel]").exists).ok();
-
-    await t.expect(items.nth(4).hasClass("svc-image-item-value--new")).ok();
-    await t
-        .expect(
-            items.nth(4).find(".svc-image-item-value-controls__add").visible
-        )
-        .ok();
-    await t
-        .expect(
-            items.nth(4).find(".svc-image-item-value-controls__choose-file")
-                .visible
-        )
-        .notOk();
-    await t
-        .expect(
-            items.nth(4).find(".svc-image-item-value-controls__remove").visible
-        )
-        .notOk();
-    await t.expect(items.nth(4).find("img").exists).notOk();
-
-    await t.setFilesToUpload(items.nth(4).find(".svc-choose-file-input"), [
-        "./image.jpg"
-    ]);
+    await t.setFilesToUpload(items.nth(4).find('.svc-choose-file-input'), "./image.jpg");
 });
 
 test("Image question inplace editor", async (t) => {

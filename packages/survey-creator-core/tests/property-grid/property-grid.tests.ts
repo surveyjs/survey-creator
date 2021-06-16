@@ -27,7 +27,8 @@ import {
   QuestionPanelDynamicModel,
   QuestionMatrixDropdownModel,
   IActionBarItem,
-  QuestionRatingModel
+  QuestionRatingModel,
+  QuestionCustomModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -1493,8 +1494,9 @@ test("Create setvalue trigger", () => {
     "setvaluetrigger";
   triggersQuestion.visibleRows[0].showDetailPanel();
   expect(triggersQuestion.visibleRows[0].detailPanel).toBeTruthy();
-  var setValueQuestion =
-    triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("setValue");
+  var setValueQuestion = <QuestionCustomModel>(
+    triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("setValue")
+  );
   expect(setValueQuestion).toBeTruthy();
   expect(setValueQuestion.isVisible).toBeFalsy();
   var setToNameQuestion =
@@ -1505,6 +1507,13 @@ test("Create setvalue trigger", () => {
   var actions = setValueQuestion.getTitleActions();
   expect(actions).toHaveLength(2);
   actions[1].action();
+  setValueQuestion.value = 2;
+  expect(setValueQuestion.contentQuestion.html).toEqual("2");
+  expect(survey.triggers).toHaveLength(1);
+  var trigger = <SurveyTriggerSetValue>survey.triggers[0];
+  expect(trigger.getType()).toEqual("setvaluetrigger");
+  expect(trigger.setToName).toEqual("q1");
+  expect(trigger.setValue).toEqual(2);
 });
 test("Support maximumColumnsCount option", () => {
   var question = new QuestionMatrixDynamicModel("q1");

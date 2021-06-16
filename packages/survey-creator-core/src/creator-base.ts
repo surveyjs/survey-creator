@@ -10,7 +10,8 @@ import {
   PopupModel,
   property,
   propertyArray,
-  IElement
+  IElement,
+  Serializer
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -726,6 +727,7 @@ export class CreatorBase<T extends SurveyModel>
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistoryController(this);
     this.setOptions(this.options);
+    this.patchMetadata();
     this.initTabs();
     this.initToolbar();
     this.initSurveyWithJSON(
@@ -870,7 +872,7 @@ export class CreatorBase<T extends SurveyModel>
     return this.options || {};
   }
 
-  protected setOptions(options: any) {
+  protected setOptions(options: any): void {
     if (!options) options = {};
     if (!options.hasOwnProperty("generateValidJSON"))
       options.generateValidJSON = true;
@@ -978,8 +980,19 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
+  private patchMetadata(): void {
+    Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
+    Serializer.findProperty("survey", "description").placeholder = "pe.surveyDescriptionPlaceholder";
+    const logoPosition: Survey.JsonObjectProperty = Serializer.findProperty("survey", "logoPosition");
+    logoPosition.defaultValue = "right";
+    logoPosition.isSerializable = false;
+    logoPosition.visible = false;
+    Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
+    Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
+  }
+
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
-    var property = Survey.Serializer.findProperty(obj.getType(), propertyName);
+    const property: Survey.JsonObjectProperty = Survey.Serializer.findProperty(obj.getType(), propertyName);
     return (
       !property ||
       !this.onIsPropertyReadOnlyCallback(
@@ -1288,14 +1301,14 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public createSurvey(json: any = {}, reason: string = "designer"): T {
-    const survey: T = this.createSurveyCore(json); // new surveyType(json);
+    const survey: T = this.createSurveyCore(json, reason); // new surveyType(json);
     if (reason != "designer" && reason != "test") {
       (<any>survey).locale = editorLocalization.currentLocale;
     }
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;
   }
-  protected createSurveyCore(json: any = {}): T {
+  protected createSurveyCore(json: any = {}, reason: string): T {
     throw new Error("createSurveyCore method should be overridden/implemented");
   }
   /**

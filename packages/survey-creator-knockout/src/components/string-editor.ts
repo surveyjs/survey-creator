@@ -1,23 +1,30 @@
 import * as ko from "knockout";
+import { StringEditorViewModelBase } from "@survey/creator";
 const template = require("./string-editor.html");
 
 export class StringEditorViewModel {
-  constructor(public locString: any) {}
-  get koHasHtml() {
+  private baseModel: StringEditorViewModelBase;
+  constructor(public locString: any) {
+    this.baseModel = new StringEditorViewModelBase(locString);
+  }
+  public get koHasHtml(): boolean {
     return this.locString.koHasHtml();
   }
-  get editValue() {
+  public get editValue(): string {
     return this.locString.koRenderedHtml();
   }
-  set editValue(value) {
+  public set editValue(value) {
     this.locString.searchElement = undefined;
     this.locString.text = value;
   }
-  onInput(sender: StringEditorViewModel, event: any) {
+  public get placeholder(): string {
+    return this.baseModel.placeholder;
+  }
+  public onInput(sender: StringEditorViewModel, event: any): void {
     if (sender.editValue == event.target.innerText) return;
     sender.editValue = event.target.innerText;
   }
-  onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent) {
+  public onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent): boolean {
     if (event.keyCode === 13) {
       this.blurEditor();
       this.done(sender, event);
@@ -28,16 +35,16 @@ export class StringEditorViewModel {
     }
     return true;
   }
-  edit(model: StringEditorViewModel, event: MouseEvent) {
+  public edit(model: StringEditorViewModel, _: MouseEvent): void {
     model.focusEditor && model.focusEditor();
   }
-  done(_: StringEditorViewModel, event: Event) {
+  public done(_: StringEditorViewModel, event: Event): void {
     event.stopImmediatePropagation();
     event.preventDefault();
   }
-  focusEditor: () => void;
-  blurEditor: () => void;
-  dispose() {
+  public focusEditor: () => void;
+  public blurEditor: () => void;
+  public dispose(): void {
     this.locString.onSearchChanged = undefined;
     this.focusEditor = undefined;
     this.blurEditor = undefined;
@@ -46,9 +53,8 @@ export class StringEditorViewModel {
 
 function getSearchElement(element: any): any {
   while (!!element && element.nodeName !== "SPAN") {
-    var elements = element.parentElement.getElementsByClassName(
-      "sv-string-editor"
-    );
+    const elements = element.parentElement.
+      getElementsByClassName("sv-string-editor");
     element = elements.length > 0 ? elements[0] : undefined;
   }
   if (!!element && element.childNodes.length > 0) return element;
@@ -68,14 +74,14 @@ function applyLocStrOnSearchChanged(element: any, locStr: any) {
       locStr.searchElement = getSearchElement(element);
     }
     if (locStr.searchElement == null) return;
-    var el = locStr.searchElement;
+    const el = locStr.searchElement;
     if (!locStr.highlightDiv) {
       locStr.highlightDiv = document.createElement("span");
       locStr.highlightDiv.style.backgroundColor = "lightgray";
     }
     if (locStr.searchIndex != undefined) {
       resetLocalizationSpan(el, locStr);
-      var rng = document.createRange();
+      const rng: Range = document.createRange();
       rng.setStart(el.childNodes[0], locStr.searchIndex);
       rng.setEnd(
         el.childNodes[0],

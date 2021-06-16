@@ -7,6 +7,10 @@
     position: relative;
     outline: none;
     z-index: 2;
+    &[aria-placeholder]:empty:before {
+      content: attr(aria-placeholder);
+      color: $foreground-light; 
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import { ClientFunction } from "testcafe";
 
 export const url = "http://127.0.0.1:8080/testCafe/testcafe.html";
+export const base64image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==";
 
 export const getPagesLength = ClientFunction(() => {
     return creator.survey.pages.length;

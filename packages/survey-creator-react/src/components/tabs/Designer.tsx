@@ -1,15 +1,7 @@
 import React from "react";
-import { Base, SurveyModel } from "survey-core";
-import {
-  ReactElementFactory,
-  Survey,
-  SurveyElementBase
-} from "survey-react-ui";
-import {
-  CreatorBase,
-  TabDesignerViewModel,
-  TabDesignerPlugin
-} from "@survey/creator";
+import { Base, SurveyModel, PageModel } from "survey-core";
+import { ReactElementFactory, SurveyElementBase, SurveyHeader } from "survey-react-ui";
+import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
 import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
@@ -36,9 +28,9 @@ export class TabDesignerComponent extends SurveyElementBase<
   render(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.model.creator;
     const survey: SurveyModel = creator.survey;
-    const className = "svc-tab-designer " + survey.css.root;
+    const designerTabClassName = "svc-tab-designer " + survey.css.root;
 
-    const surveyPages = survey.pages.map((page, index) => {
+    const surveyPages: JSX.Element[] = survey.pages.map((page: PageModel) => {
       return (
         <div
           className={"svc-page"}
@@ -73,28 +65,16 @@ export class TabDesignerComponent extends SurveyElementBase<
     const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
       <React.Fragment>
-        <SurveyCreatorToolbox
-          toolbox={creator.toolbox}
-          creator={creator}
-        ></SurveyCreatorToolbox>
-        <div className={className}>
-          <div className={survey.css.container}>
-            <DesignerSurveyNavigationBlock
-              survey={creator.survey}
-              location="top"
-            />{" "}
+        <SurveyCreatorToolbox toolbox={creator.toolbox} creator={creator}></SurveyCreatorToolbox>
+        <DesignerSurveyNavigationBlock survey={creator.survey} location="top"/>{" "}
+        <div className={"svc-tab-designer " + creator.survey.css.root}>
+          <div className={creator.survey.css.container}>
+            <SurveyHeader survey={survey}></SurveyHeader>
             {surveyPages}
-            <DesignerSurveyNavigationBlock
-              survey={creator.survey}
-              location="bottom"
-              css={creator.survey.css}
-            />
           </div>
         </div>
-        <SurveyPageNavigator
-          creator={creator}
-          pages={creator.pagesController.pages}
-        ></SurveyPageNavigator>
+        <DesignerSurveyNavigationBlock survey={creator.survey} location="bottom" css={creator.survey.css}/>
+        <SurveyPageNavigator creator={creator} pages={creator.pagesController.pages}></SurveyPageNavigator>
         <div className="svc-flex-column" style={style}>
           <PropertyGridComponent model={creator}></PropertyGridComponent>
         </div>

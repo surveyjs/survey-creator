@@ -34,7 +34,7 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
     await t.expect(questionsLength).eql(2);
 });
 
-test("Drag Drop Question", async (t) => {
+test.skip("Drag Drop Question", async (t) => {
     const json = {
         pages: [
             {
@@ -91,7 +91,7 @@ test("Drag Drop Question", async (t) => {
     await t.expect(name).eql(questionName);
 });
 
-test("Drag Drop to Panel", async (t) => {
+test.skip("Drag Drop to Panel", async (t) => {
     const json = {
         pages: [
             {
@@ -272,7 +272,7 @@ test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
         speed: 0.5
     });
 
-    await t.debug();
+    //await t.debug();
 
     let name = await getQuestionNameByIndex(0);
     await t.expect(name).eql("question2");

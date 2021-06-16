@@ -1,19 +1,9 @@
 <div
   class="svc-image-item-value-wrapper"
   data-bind="attr: attributes, event: {pointerdown: (model, event)=>{startDragItemValue(event)}}, css: { 'svc-image-item-value--new': isNew }"
->
-  <input
-    type="file"
-    accept="image/*"
-    class="svc-choose-file-input"
-    style="
-      position: absolute;
-      opacity: 0;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    "
-  />
+>  
+  <input type="file" accept="image/*" class="svc-choose-file-input"/>
+
   <!-- ko ifnot: isNew -->
   <!-- ko if: showDragDropGhostOnTop -->
   <div class="svc-drag-drop-ghost"></div>

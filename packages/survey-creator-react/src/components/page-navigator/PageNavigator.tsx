@@ -2,14 +2,13 @@ import {
   Base,
   SurveyModel,
   PageModel,
-  unwrap,
-  AdaptiveActionBarItemWrapper,
+  unwrap
 } from "survey-core";
 import {
   SurveyElementBase,
   SvgIcon,
   Popup,
-  IActionBarItem,
+  IActionBarItem
 } from "survey-react-ui";
 import { CreatorBase, PageNavigatorViewModel } from "@survey/creator";
 import React from "react";
@@ -78,7 +77,7 @@ export class SurveyPageNavigatorItem extends SurveyElementBase<any, any> {
     return this.props.item as Base;
   }
   renderElement(): JSX.Element {
-    var item = this.props.item;
+    const item = this.props.item;
     let className: string = "svc-page-navigator-item-content";
     if (unwrap(item.active)) {
       className += " svc-page-navigator-item--selected";
