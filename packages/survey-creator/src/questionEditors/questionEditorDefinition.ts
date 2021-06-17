@@ -84,6 +84,7 @@ export class SurveyQuestionEditorDefinition {
         "cellType",
         "optionsCaption",
         "detailPanelMode",
+        "detailPanelShowOnAdding",
         { name: "showHeader", tab: "layout" },
         { name: "columnsVisibleIf", tab: "logic" },
         { name: "columnLayout", tab: "layout" },
