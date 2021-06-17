@@ -316,6 +316,7 @@ export class PropertyGridTitleActionsCreator {
       question,
       this.options
     );
+    if(!surveyPropertyEditor) return;
     surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
     settings.showModal(
       "survey",
