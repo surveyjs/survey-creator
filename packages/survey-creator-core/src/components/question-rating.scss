@@ -2,51 +2,17 @@
 
 .svc-rating-question-controls {
   position: absolute;
-  bottom: calcSize(8.5);
-  left: calcSize(4);
+  bottom: calcSize(9);
+  left: calcSize(5);
   display: none;
 }
 
 .svc-question__content--selected {
   .sd-rating {
-    margin-left: calcSize(14);
+    margin-left: calcSize(9);
   }
   .svc-rating-question-controls {
     display: block;
-  }
-}
-
-.svc-rating-question-controls__button {
-  display: inline-block;
-  border-radius: 50%;
-  width: calcSize(6);
-  height: calcSize(6);
-  cursor: pointer;
-
-  // &:not(:last-child) {
-  //   margin-right: calcSize(0.5);
-  // }
-
-  .sv-svg-icon {
-    margin-top: calc(50% - 12px);
-    margin-left: calc(50% - 12px);
-  }
-
-  use {
-    fill: $foreground-light;
-  }
-}
-
-.svc-rating-question-controls__add:hover {
-  background-color: $primary-light;
-  use {
-    fill: $primary;
-  }
-}
-
-.svc-rating-question-controls__remove:hover {
-  background-color: $red-light;
-  use {
-    fill: $red;
+    width: calcSize(8);
   }
 }

@@ -6,7 +6,6 @@
     class="svc-question__content"
     data-bind="click: select, clickBubble: false, css: css()"
   >
-
     <div class="svc-question__drag-area">
       <div
         class="svc-question__drag-element"
@@ -17,16 +16,16 @@
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
 
-    <div class="svc-rating-question-controls">
+    <div class="svc-rating-question-controls svc-item-value-controls">
       <sv-svg-icon
-        class="svc-rating-question-controls__button svc-rating-question-controls__remove"
+        class="svc-item-value-controls__button svc-item-value-controls__remove"
         data-bind="click: removeItem"
-        params="iconName: 'icon-remove-item-value', size: 24"
+        params="iconName: 'icon-remove-item-value', size: 16"
       ></sv-svg-icon>
       <sv-svg-icon
-        class="svc-rating-question-controls__button svc-rating-question-controls__add"
+        class="svc-item-value-controls__button svc-item-value-controls__add"
         data-bind="click: addItem"
-        params="iconName: 'icon-add-item-value', size: 24"
+        params="iconName: 'icon-add-item-value', size: 16"
       ></sv-svg-icon>
     </div>
 

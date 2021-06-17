@@ -62,12 +62,12 @@ QuestionRatingAdornerComponentProps,
 
             {this.props.element}
 
-            <div className="svc-rating-question-controls">
-              <span className="svc-rating-question-controls__button svc-rating-question-controls__remove" onClick={() => this.model.removeItem(this.model)}>
-                <SvgIcon size={24} iconName={'icon-remove-item-value'}></SvgIcon>
+            <div className="svc-rating-question-controls svc-item-value-controls">
+              <span className="svc-item-value-controls__button svc-item-value-controls__remove" onClick={() => this.model.removeItem(this.model)}>
+                <SvgIcon size={16} iconName={'icon-remove-item-value'}></SvgIcon>
               </span>
-              <span className="svc-rating-question-controls__button svc-rating-question-controls__add" onClick={() => this.model.addItem(this.model)}>
-                <SvgIcon size={24} iconName={'icon-add-item-value'}></SvgIcon>
+              <span className="svc-item-value-controls__button svc-item-value-controls__add" onClick={() => this.model.addItem(this.model)}>
+                <SvgIcon size={16} iconName={'icon-add-item-value'}></SvgIcon>
               </span>
             </div>
 

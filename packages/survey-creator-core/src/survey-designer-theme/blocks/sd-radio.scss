@@ -9,6 +9,6 @@
   border-radius: 50%;
   background-color: $background;
 }
-.sd-radio--checked .sd-radio__control:disabled + .sd-radio__decorator:after {
+.sd-radio--checked.sd-radio--disabled .sd-radio__decorator:after {
   background-color: $border;
 }

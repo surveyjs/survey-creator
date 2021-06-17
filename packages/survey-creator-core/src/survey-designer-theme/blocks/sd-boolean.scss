@@ -1,0 +1,65 @@
+.sd-boolean {
+  display: flex;
+  width: max-content;
+  background: #f9f9f9;
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 100px;
+  position: relative;
+  padding: 4px;
+}
+.sd-boolean__thumb,
+.sd-boolean__label {
+  display: block;
+  color: #909090;
+  font-family: $font-family;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 8px 24px;
+}
+.sd-boolean__switch {
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+}
+.sd-boolean--indeterminate .sd-boolean__thumb {
+  display: none;
+}
+.sd-boolean__thumb {
+  background: #ffffff;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 100px;
+  transition-duration: 0.2s;
+  transition-property: margin-left, transform;
+  transition-timing-function: linear;
+  color: $primary;
+  font-weight: 600;
+}
+.sd-boolean--checked .sd-boolean__thumb {
+  margin-left: 100%;
+  transform: translateX(-100%);
+}
+.sd-boolean--disabled {
+  .sd-boolean__thumb,
+  .sd-boolean__label {
+    color: $foreground-disabled-for-editors;
+  }
+}
+.svc-question__content {
+  .sd-boolean:not(.sd-boolean--checked):not(.sd-boolean--indeterminate)
+    .sd-boolean__label:nth-of-type(1),
+  .sd-boolean--checked .sd-boolean__label:nth-of-type(2) {
+    color: $primary;
+    font-weight: 600;
+    background: #ffffff;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
+  }
+  .sd-boolean__switch {
+    display: none;
+  }
+}
