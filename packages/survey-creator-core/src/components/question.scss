@@ -109,6 +109,11 @@ svc-question,
   .svc-question__drag-element {
     display: none;
   }
+
+  .svc-question__content {
+    background: transparent;
+    box-shadow: none;
+  }
 }
 // EO reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
 

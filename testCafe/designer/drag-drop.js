@@ -34,7 +34,7 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
     await t.expect(questionsLength).eql(2);
 });
 
-test("Drag Drop Question", async (t) => {
+test.skip("Drag Drop Question", async (t) => {
     const json = {
         pages: [
             {
@@ -91,7 +91,7 @@ test("Drag Drop Question", async (t) => {
     await t.expect(name).eql(questionName);
 });
 
-test("Drag Drop to Panel", async (t) => {
+test.skip("Drag Drop to Panel", async (t) => {
     const json = {
         pages: [
             {
@@ -225,4 +225,58 @@ test("Drag Drop ItemValue (choices)", async (t) => {
     await t.expect(value).eql(expectedValue);
 });
 
-// test("Drag Drop Question (StartWithNewLine === false)", async (t) => {});
+test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
+    const json = {
+        pages: [
+            {
+                name: "page1",
+                elements: [
+                    {
+                        type: "rating",
+                        name: "question1",
+                        startWithNewLine: false
+                    },
+                    {
+                        type: "rating",
+                        name: "question2",
+                        startWithNewLine: false
+                    },
+                    {
+                        type: "rating",
+                        name: "question3",
+                        startWithNewLine: false
+                    }
+                ],
+                title: "page1 -- title",
+                description: "page1 -- description"
+            }
+        ]
+    };
+
+    await setJSON(json);
+
+    const Question1 = Selector(
+        `[data-svc-drop-target-element-name="question1"]`
+    );
+    const Question3 = Selector(
+        `[data-svc-drop-target-element-name="question3"]`
+    );
+    const DragZoneQuestion1 = Question1.find(".svc-question__drag-element");
+
+    await t.hover(Question1, { speed: 0.5 });
+    await t.hover(DragZoneQuestion1);
+    await t.dragToElement(DragZoneQuestion1, Question3, {
+        offsetX: 5,
+        offsetY: 5,
+        destinationOffsetX: 80,
+        speed: 0.5
+    });
+
+    //await t.debug();
+
+    let name = await getQuestionNameByIndex(0);
+    await t.expect(name).eql("question2");
+
+    name = await getQuestionNameByIndex(1);
+    await t.expect(name).eql("question1");
+});

@@ -1,10 +1,5 @@
 import { Base, PageModel, SurveyModel } from "survey-core";
-import {
-  SurveyActionBar,
-  SurveyElementBase,
-  SurveyPage,
-  SurveyQuestion
-} from "survey-react-ui";
+import { SurveyActionBar, SurveyElementBase, SurveyPage } from "survey-react-ui";
 import { CreatorBase, PageViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
 import { ReactMouseEvent } from "../events";

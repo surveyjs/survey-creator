@@ -1,17 +1,7 @@
 import { ImageItemValueWrapperViewModel } from "@survey/creator";
 import React from "react";
-import { ReactDragEvent } from "src/events";
-import {
-  QuestionSelectBase,
-  Base,
-  ItemValue,
-  ImageItemValue
-} from "survey-core";
-import {
-  ReactElementFactory,
-  SurveyElementBase,
-  SvgIcon
-} from "survey-react-ui";
+import { QuestionSelectBase, Base, ImageItemValue } from "survey-core";
+import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 interface ImageItemValueAdornerComponentProps {
   element: JSX.Element;
@@ -46,11 +36,14 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
     super.componentDidMount();
     this.model.itemsRoot = this.rootRef.current;
   }
-
+  
   private getDragDropGhost(topOrBottom: string) {
-    if (this.model.ghostPosition === topOrBottom)
-      return <div className="svc-drag-drop-ghost"></div>;
-
+    if (this.model.ghostPosition === topOrBottom) {
+      let className = "svc-drag-drop-ghost";
+      if (topOrBottom === "bottom")
+        className += " svc-drag-drop-ghost--item-value-bottom";
+      return <div className={className}></div>;
+    }
     return null;
   }
 
@@ -63,36 +56,22 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
 
     let content = null;
     if (isNew) {
-      content = (
-        <>
-          <div className="svc-image-item-value__item">
-            <div className="sv-imagepicker__item sv-imagepicker__item--inline">
-              <label className="sv-imagepicker__label">
-                <div
-                  style={{
-                    width: this.props.question.imageWidth
-                      ? this.props.question.imageWidth + "px"
-                      : undefined,
-                    height: this.props.question.imageHeight
-                      ? this.props.question.imageHeight + "px"
-                      : undefined
-                  }}
-                  className="sv-imagepicker__image"
-                ></div>
-              </label>
-            </div>
-          </div>
-
-          <div className="svc-image-item-value-controls">
-            <span
-              className="svc-image-item-value-controls__button svc-image-item-value-controls__add"
-              onClick={() => this.model.chooseNewFile(this.model)}
-            >
-              <SvgIcon size={24} iconName={"icon-add-item-value"}></SvgIcon>
-            </span>
-          </div>
-        </>
-      );
+      content = (<>
+        <div className="svc-image-item-value__item">
+          <div className="sv-imagepicker__item sv-imagepicker__item--inline">
+            <label className="sv-imagepicker__label">
+                <div style={{ width: this.props.question.imageWidth ? this.props.question.imageWidth + 'px' : undefined, height: this.props.question.imageHeight ? this.props.question.imageHeight + 'px' : undefined }} className="sv-imagepicker__image">
+                </div>
+            </label>
+          </div>      
+        </div>      
+      
+        <div className="svc-image-item-value-controls">
+          <span className="svc-image-item-value-controls__button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
+            <SvgIcon size={24} iconName={'icon-add-item-value'}></SvgIcon>
+          </span>
+        </div>
+      </>);
     } else {
       content = (
         <>
