@@ -55,8 +55,8 @@ export class QuestionAdornerComponent extends SurveyElementBase<
                   onPointerDown={(event:any) => this.model.startDragSurveyElement(event)}
                 ></div>
             </div>
-            {this.renderPanelPlaceholder()}
             {this.props.element}
+            {this.renderPanelPlaceholder()}
             <div className="svc-question__content-actions">
               <SurveyActionBar items={this.model.actions}></SurveyActionBar>
             </div>

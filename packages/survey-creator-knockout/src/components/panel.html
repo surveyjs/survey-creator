@@ -12,7 +12,8 @@
         data-bind="event: {pointerdown: (model, event)=>{startDragSurveyElement(event)}}"
       ></div>
     </div>
-
+    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
+    <!-- /ko -->
     <!-- ko if: isEmptyElement -->
     <div class="svc-panel__placeholder_frame">
       <div
@@ -21,10 +22,6 @@
       ></div>
     </div>
     <!-- /ko -->
-
-    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
-    <!-- /ko -->
-
     <div class="svc-question__content-actions">
       <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
       <!-- /ko -->
