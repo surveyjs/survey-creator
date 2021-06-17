@@ -27,6 +27,42 @@ var propertyGridValueJSON = {
   questionJSON: {
     type: "html",
     html: editorLocalization.getString("pe.emptyValue")
+  },
+  onValueChanged: (question: Question, name: string, newValue: any) => {
+    const correctHtml = (html: string): string => {
+      if (!html) return html;
+      let regex = /[&|<|>|"|']/g;
+      return html.replace(regex, function (match) {
+        if (match === "&") {
+          return "&amp;";
+        } else if (match === "<") {
+          return "&lt;";
+        } else if (match === ">") {
+          return "&gt;";
+        } else if (match === '"') {
+          return "&quot;";
+        } else {
+          return "&apos;";
+        }
+      });
+    };
+    const stringifyValue = (val: any): string => {
+      if (typeof val !== "string") return JSON.stringify(val);
+      return val;
+    };
+    const getObjDisplayValue = (obj: Base, question: Question): string => {
+      if (!obj["getDisplayValue"]) return stringifyValue(question.value);
+      var res = !!obj["getDisplayValue"]
+        ? obj["getDisplayValue"](true, question.value)
+        : question.value;
+      if (typeof res !== "string") return JSON.stringify(res);
+      return res;
+    };
+    const obj = question.obj;
+    var displayValue = question.isEmpty()
+      ? editorLocalization.getString("pe.emptyValue")
+      : getObjDisplayValue(obj, question);
+    question.contentQuestion.html = correctHtml(displayValue);
   }
 };
 
@@ -50,43 +86,8 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   ): void {
     obj[prop.name] = undefined;
   }
-  onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
-    var displayValue = question.isEmpty()
-      ? editorLocalization.getString("pe.emptyValue")
-      : this.getObjDisplayValue(obj, question);
-    question.contentQuestion.html = this.correctHtml(displayValue);
-  }
   protected isValueEmpty(val: any): boolean {
     return Helpers.isValueEmpty(val);
-  }
-  private correctHtml(html: string): string {
-    if (!html) return html;
-    let regex = /[&|<|>|"|']/g;
-    return html.replace(regex, function (match) {
-      if (match === "&") {
-        return "&amp;";
-      } else if (match === "<") {
-        return "&lt;";
-      } else if (match === ">") {
-        return "&gt;";
-      } else if (match === '"') {
-        return "&quot;";
-      } else {
-        return "&apos;";
-      }
-    });
-  }
-  private getObjDisplayValue(obj: Base, question: Question): string {
-    if (!obj["getDisplayValue"]) return this.stringifyValue(question.value);
-    var res = !!obj["getDisplayValue"]
-      ? obj["getDisplayValue"](true, question.value)
-      : question.value;
-    if (typeof res !== "string") return JSON.stringify(res);
-    return res;
-  }
-  private stringifyValue(val: any): string {
-    if (typeof val !== "string") return JSON.stringify(val);
-    return val;
   }
 }
 
