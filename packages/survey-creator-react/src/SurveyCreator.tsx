@@ -145,7 +145,11 @@ class DesignTimeSurveyModel extends Model {
     };
   }
   public getElementWrapperComponentName(element: any, reason?: string): string {
-    if (reason === "cell" || reason === "column-header" || reason === "row-header") {
+    if (
+      reason === "cell" ||
+      reason === "column-header" ||
+      reason === "row-header"
+    ) {
       return "svc-matrix-cell";
     }
     if (!element["parentQuestionValue"]) {
@@ -161,16 +165,11 @@ class DesignTimeSurveyModel extends Model {
         if (element.getType() == "rating") {
           return "svc-rating-question";
         }
-        return this.isPopupEditorContent
-          ? "svc-cell-dropdown-question"
-          : "svc-dropdown-question";
       }
       if (element.getType() == "image") {
         return "svc-image-question";
       }
-      return this.isPopupEditorContent
-        ? "svc-cell-question"
-        : "svc-question";
+      return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
     }
     if (element instanceof PanelModel) {
       return "svc-question";
@@ -189,7 +188,11 @@ class DesignTimeSurveyModel extends Model {
     return super.getElementWrapperComponentDataByName(element);
   }
   public getElementWrapperComponentData(element: any, reason?: string): any {
-    if (reason === "cell" || reason === "column-header" || reason === "row-header") {
+    if (
+      reason === "cell" ||
+      reason === "column-header" ||
+      reason === "row-header"
+    ) {
       return {
         creator: this.creator,
         element: element,
