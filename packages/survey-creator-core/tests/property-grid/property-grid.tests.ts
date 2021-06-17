@@ -27,8 +27,7 @@ import {
   QuestionPanelDynamicModel,
   QuestionMatrixDropdownModel,
   IActionBarItem,
-  QuestionRatingModel,
-  QuestionCustomModel
+  QuestionRatingModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,

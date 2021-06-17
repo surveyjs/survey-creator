@@ -311,19 +311,17 @@ export class PropertyGridTitleActionsCreator {
     question: Question
   ) {
     const surveyPropertyEditor = editor.createPropertyEditorSetup(
-      question.obj,
+      this.obj,
       property,
       question,
       this.options
     );
-    const editSurvey = surveyPropertyEditor.editSurvey;
-    editSurvey.css = surveyDesignerCss;
-    if (!settings.showModal) return;
+    surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
     settings.showModal(
       "survey",
       {
-        survey: editSurvey,
-        model: editSurvey
+        survey: surveyPropertyEditor.editSurvey,
+        model: surveyPropertyEditor.editSurvey
       },
       () => surveyPropertyEditor.apply()
     );
@@ -782,7 +780,13 @@ export class PropertyGridModel {
   private onValueChanged(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    this.onValueChangedCore(this.obj, q, q.property, options.value);
+    this.options.onSurveyElementPropertyValueChanged(
+      q.property,
+      this.obj,
+      options.value
+    );
+    this.changeDependedProperties(q);
+    PropertyGridEditorCollection.onValueChanged(this.obj, q.property, q);
     if (
       !!this.classNameProperty &&
       options.name === this.classNameProperty &&
@@ -790,16 +794,6 @@ export class PropertyGridModel {
     ) {
       this.setObj(this.obj);
     }
-  }
-  private onValueChangedCore(
-    obj: Base,
-    question: Question,
-    property: JsonObjectProperty,
-    newValue: any
-  ) {
-    this.options.onSurveyElementPropertyValueChanged(property, obj, newValue);
-    this.changeDependedProperties(question);
-    PropertyGridEditorCollection.onValueChanged(obj, property, question);
   }
   private changeDependedProperties(question: Question) {
     var prop: JsonObjectProperty = question.property;
@@ -898,15 +892,6 @@ export class PropertyGridModel {
       options.question.property,
       options
     );
-    var cellQuestion = options.row.getQuestionByName(options.columnName);
-    if (!!cellQuestion && !!cellQuestion.obj && !!cellQuestion.property) {
-      this.onValueChangedCore(
-        cellQuestion.obj,
-        cellQuestion,
-        cellQuestion.property,
-        options.value
-      );
-    }
     var rowObj = options.row.editingObj;
     if (!rowObj) return;
     var prop = Serializer.findProperty(rowObj.getType(), options.columnName);

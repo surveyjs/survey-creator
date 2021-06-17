@@ -6,6 +6,10 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
     await t.maximizeWindow();
 });
 
+function normalize(str) {
+    return str.replace(/\xa0/gi, " ").replace(/\n/gi, " ");
+}
+
 test("Single input question wrapper actions", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
 
@@ -142,9 +146,9 @@ test("Single input question wrapper action duplicate", async (t) => {
 
     await t.expect(questions.count).eql(2);
     var title1 = await questions.nth(0).find(".sd-question__title").innerText;
-    await t.expect(title1.replace("\xa0", " ")).eql("1. question1");
+    await t.expect(normalize(title1)).eql("1. question1");
     var title2 = await questions.nth(1).find(".sd-question__title").innerText;
-    await t.expect(title2.replace("\xa0", " ")).eql("2. question2");
+    await t.expect(normalize(title2)).eql("2. question2");
     await t
         .expect(questions.nth(0).hasClass("svc-question__content--selected"))
         .notOk();
@@ -183,14 +187,14 @@ test("Single input question wrapper action change require", async (t) => {
 
     const questionTitle = Selector(`.sd-question__title`);
     var title = await questionTitle.innerText;
-    await t.expect(title.replace("\xa0", " ")).eql("1. question1");
+    await t.expect(normalize(title)).eql("1. question1");
     await t
         .expect(requiredActionRoot.hasClass("sv-action-bar-item--secondary"))
         .notOk();
 
     await t.click(requiredActionButton);
     title = await questionTitle.innerText;
-    await t.expect(title.replace(/\xa0/gi, " ")).eql("1. question1\n *");
+    await t.expect(normalize(title)).eql("1. question1\n *");
     await t
         .expect(requiredActionRoot.hasClass("sv-action-bar-item--secondary"))
         .ok();
