@@ -83,3 +83,81 @@ class SurveyComponent extends Component {
 
 export default SurveyComponent;
 ```
+
+## Custom property editor
+
+We are using SurveyJS Library to render property grid in V2. It means that old code, related in creating custom property editors, that works in V1 will not work in V2 at all. The good news, it becomes easy to set up a new property grid editor in V2. All you need is to tell SurveyJS Creator what question type you want to use for a particular property.
+Here is the simple example:
+
+```javascript
+//Register a new property for all questions
+Survey.Serializer.addProperty("question", {
+    name: "shortname",
+    type: "shorttext",
+    isRequired: true,
+    category: "general",
+    visibleIndex: 3
+});
+
+//Register a new property editor for this property type
+SurveyCreator.PropertyGridEditorCollection.register({
+    //Returns true for a property with type "shorttext"
+    fit: function (prop) {
+        return prop.type === "shorttext";
+    },
+    //Returns a typical question JSON. This question will be used to edit this property value
+    getJSON: function (obj, prop, options) {
+        return { type: "text", maxLength: 5 };
+    }
+});
+```
+
+You can override and use your own property editor for any property you want by returning true in the `fit()` function.
+
+## Custom adorners
+
+We do not use after render technique in SurveyJS Creator V2 and render additional widgets for survey elements on design surface using a platform standard approach. Templates for knockout and react components for react. As result, the old code will not work as well for rendering custom adorners will not work. SurveyJS Creator will simply ignore it.
+
+In V2 you can use `onDefineElementMenuItems` event to insert a new action into standard actions. You can modify standard actions as well or modify them. The following code inserts "Start with new line" action before the "delete" action for all questions.
+
+```javascript
+creator.onDefineElementMenuItems.add((sender, options) => {
+    //If element doesn't have property define than it is not a question
+    if (options.obj.startWithNewLine === undefined) return;
+    var question = options.obj;
+    //Define a new bar item
+    var barItem = {
+        //Unique id
+        id: "startWithNewLine",
+        css: () =>
+            question.startWithNewLine ? "sv-action-bar-item--secondary" : "",
+        //item text
+        title: "On new line",
+        //Icon to render that depends on a property
+        iconName: () => {
+            if (question.startWithNewLine) {
+                return "icon-switchactive_16x16";
+            }
+            return "icon-switchinactive_16x16";
+        },
+        //Action on click
+        action: () => {
+            question.startWithNewLine = !question.startWithNewLine;
+        }
+    };
+    //Find where is the "delete" action
+    var index = -1;
+    for (var i = 0; i < options.items.length; i++) {
+        if (options.items[i].id === "delete") {
+            index = i;
+            break;
+        }
+    }
+    //Insert before delete action or at the end
+    if (index > -1) {
+        options.items.splice(index, 0, barItem);
+    } else {
+        options.items.push(barItem);
+    }
+});
+```
