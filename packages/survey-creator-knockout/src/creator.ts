@@ -9,7 +9,7 @@ import {
   SurveyModel
 } from "survey-core";
 import { Survey, ImplementorBase, Panel } from "survey-knockout-ui";
-import { ICreatorOptions, CreatorBase } from "@survey/creator";
+import { ICreatorOptions, CreatorBase, getElementWrapperComponentName } from "@survey/creator";
 import { editableStringRendererName } from "./components/string-editor";
 
 if (!!ko.options) {
@@ -32,46 +32,19 @@ class DesignTimeSurveyModel extends Survey {
   }
   public isPopupEditorContent = false;
   public getElementWrapperComponentName(element: any, reason?: string): string {
-    if(reason === "cell" || reason === "column-header" || reason === "row-header") {
-      return "svc-matrix-cell";
-    }
-    if(!element["parentQuestionValue"]) {
-      if (element instanceof Question) {
-        if (element.getType() == "dropdown") {
-          return this.isPopupEditorContent ? "svc-cell-dropdown-question" : "svc-dropdown-question";
-        }
-        if (element.getType() == "image") {
-          return "svc-image-question";
-        }
-        if (element.getType() == "rating") {
-          return "svc-rating-question";
-        }
-        if (element.koElementType() == "survey-question") {
-          return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
-        }
-      }
-      if (element.getType() == "image") {
-        return "svc-image-question";
-      }
-      if (element.koElementType() == "survey-question") {
-        return this.isPopupEditorContent ? "svc-cell-question" : "svc-question";
-      }
-    }
-    if (element instanceof Panel) {
+    let componentName = getElementWrapperComponentName(element, reason, this.isPopupEditorContent);
+    if (!componentName && element instanceof Panel) {
       if (element.koElementType() == "survey-panel") {
         return "svc-panel";
       }
     }
-    return super.getElementWrapperComponentName(element, reason);
-  }
-  public getElementWrapperComponentNameByName(element: string): string {
-    if (element === "sv-logo-image") return "svc-logo-image";
-    return super.getElementWrapperComponentNameByName(element);
+    return componentName || super.getElementWrapperComponentName(element, reason);
   }
   public getRowWrapperComponentName(row: QuestionRowModel): string {
     return "svc-row";
   }
   public getElementWrapperComponentData(element: any, reason?: string): any {
+    if(reason === "logo-image") return this.creator;
     if(reason === "cell" || reason === "column-header" || reason === "row-header") {
       return { creator: this.creator, element: element, question: element.question, row: element.row, column: element.column };
     }
@@ -88,10 +61,6 @@ class DesignTimeSurveyModel extends Survey {
       }
     }
     return super.getElementWrapperComponentData(element, reason);
-  }
-  public getElementWrapperComponentDataByName(element: string): any {
-    if (element === "sv-logo-image") return this.creator;
-    return super.getElementWrapperComponentDataByName(element);
   }
   public getRowWrapperComponentData(row: QuestionRowModel): any {
     return {
@@ -146,7 +115,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
   }
 
   protected createSurveyCore(json: any = {}, reason: string): Survey {
-    if (reason === "designer") return new DesignTimeSurveyModel(this, json);
+    if (reason === "designer" || reason === "modal-question-editor") return new DesignTimeSurveyModel(this, json);
     return new Survey(json);
   }
 

@@ -21,7 +21,7 @@ export class MatrixCellWrapperViewModel extends Base {
     const column: MatrixDropdownColumn = model.question.parentQuestion.getColumnByName(model.question.name);
     let questionJSON = model.question.toJSON();
     questionJSON.type = model.question.getType();
-    const survey = model.creator.createSurvey({questions: [questionJSON]}, "modal-editor");
+    const survey = model.creator.createSurvey({questions: [questionJSON]}, "modal-question-editor");
     survey.css = surveyDesignerCss;
     survey.setDesignMode(true);
     survey.isPopupEditorContent = true;

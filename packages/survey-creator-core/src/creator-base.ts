@@ -2254,3 +2254,27 @@ export class StylesManager {
     SurveyHelper.warnNonSupported("StylesManager");
   }
 }
+
+export function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
+  if (reason === "logo-image") {
+    return "svc-logo-image";
+  }
+  if (reason === "cell" || reason === "column-header" || reason === "row-header") {
+    return "svc-matrix-cell";
+  }
+  if (!element["parentQuestionValue"]) {
+    if (element instanceof Question) {
+      if (element.getType() == "dropdown") {
+        return isPopupEditorContent ? "svc-cell-dropdown-question" : "svc-dropdown-question";
+      }
+      if (element.getType() == "image") {
+        return "svc-image-question";
+      }
+      if (element.getType() == "rating") {
+        return "svc-rating-question";
+      }
+      return isPopupEditorContent ? "svc-cell-question" : "svc-question";
+    }
+  }
+  return undefined;
+}
