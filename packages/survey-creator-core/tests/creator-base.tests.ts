@@ -2,11 +2,16 @@ import {
   Base,
   PanelModel,
   SurveyModel,
-  Serializer
+  Serializer,
+  QuestionTextModel,
+  QuestionImageModel,
+  QuestionRatingModel,
+  QuestionDropdownModel
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
+import { getElementWrapperComponentName } from "../src/creator-base";
 import { SurveyHelper } from "../src/surveyHelper";
 import { CreatorTester } from "./creator-tester";
 
@@ -626,4 +631,24 @@ test("Undo converting question type", (): any => {
   creator.undo();
   q = creator.survey.getQuestionByName("question1");
   expect(q.getType()).toEqual("checkbox");
+});
+test("getElementWrapperComponentName", () : any => {
+  expect(getElementWrapperComponentName(null, "logo-image", false)).toEqual("svc-logo-image");
+  expect(getElementWrapperComponentName(null, "logo-image", true)).toEqual("svc-logo-image");
+  expect(getElementWrapperComponentName(null, "cell", false)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(null, "cell", true)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(null, "column-header", false)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(null, "column-header", true)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(null, "row-header", false)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(null, "row-header", true)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName({parentQuestionValue: {}}, "", false)).toEqual(undefined);
+  expect(getElementWrapperComponentName({parentQuestionValue: {}}, "", true)).toEqual(undefined);
+  expect(getElementWrapperComponentName(new QuestionTextModel(""), "", false)).toEqual("svc-question");
+  expect(getElementWrapperComponentName(new QuestionTextModel(""), "", true)).toEqual("svc-cell-question");
+  expect(getElementWrapperComponentName(new QuestionImageModel(""), "", false)).toEqual("svc-image-question");
+  expect(getElementWrapperComponentName(new QuestionImageModel(""), "", true)).toEqual("svc-image-question");
+  expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", false)).toEqual("svc-rating-question");
+  expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", true)).toEqual("svc-rating-question");
+  expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", false)).toEqual("svc-dropdown-question");
+  expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", true)).toEqual("svc-cell-dropdown-question");
 });
