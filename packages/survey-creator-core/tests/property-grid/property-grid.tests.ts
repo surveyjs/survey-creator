@@ -1489,11 +1489,11 @@ test("Create setvalue trigger", () => {
     propertyGrid.survey.getQuestionByName("triggers")
   );
   expect(triggersQuestion).toBeTruthy();
+  expect(triggersQuestion.detailPanelShowOnAdding).toBeTruthy();
   triggersQuestion.addRow();
+  expect(triggersQuestion.visibleRows[0].detailPanel).toBeTruthy();
   triggersQuestion.visibleRows[0].getQuestionByName("triggerType").value =
     "setvaluetrigger";
-  triggersQuestion.visibleRows[0].showDetailPanel();
-  expect(triggersQuestion.visibleRows[0].detailPanel).toBeTruthy();
   var setValueQuestion = <QuestionCustomModel>(
     triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("setValue")
   );
