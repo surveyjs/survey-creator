@@ -25,7 +25,7 @@ import {
 } from "./index";
 
 class SurveyHelper {
-  public static getNewName(
+  public static getNewColumnName(
     objs: Array<any>,
     keyPropName: string,
     baseName: string
@@ -137,7 +137,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     var keyValue = null;
     if (!!baseValue && !!keyPropName) {
-      var newName = SurveyHelper.getNewName(
+      var newName = SurveyHelper.getNewColumnName(
         matrix.value,
         keyPropName,
         baseValue
@@ -322,6 +322,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (columns.length < 2) {
       res.showHeader = false;
     }
+    if (this.getShowDetailPanelOnAdding()) {
+      res.detailPanelShowOnAdding = true;
+    }
     return res;
   }
   protected getColumnsJSON(
@@ -346,6 +349,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     return res;
   }
   protected getEditItemAsStandAlone(): boolean {
+    return false;
+  }
+  protected getShowDetailPanelOnAdding(): boolean {
     return false;
   }
   private getAddRowText(prop: JsonObjectProperty): string {
@@ -540,6 +546,9 @@ export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditor
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "var";
   }
+  protected getShowDetailPanelOnAdding(): boolean {
+    return true;
+  }
 }
 export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
@@ -548,6 +557,9 @@ export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMa
   protected getDefaulColumnNames(): Array<string> {
     return ["html"];
   }
+  protected getShowDetailPanelOnAdding(): boolean {
+    return true;
+  }
 }
 export class PropertyGridEditorMatrixUrlConditions extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
@@ -555,6 +567,9 @@ export class PropertyGridEditorMatrixUrlConditions extends PropertyGridEditorMat
   }
   protected getDefaulColumnNames(): Array<string> {
     return ["url"];
+  }
+  protected getShowDetailPanelOnAdding(): boolean {
+    return true;
   }
 }
 export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEditorMatrix {
@@ -624,6 +639,9 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     if (isDetailPanelShowing) {
       options.row.showDetailPanel();
     }
+  }
+  protected getShowDetailPanelOnAdding(): boolean {
+    return true;
   }
 }
 

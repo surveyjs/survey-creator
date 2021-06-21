@@ -1,5 +1,5 @@
 import { url } from "../helper";
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from 'testcafe';
 const title = "Inplace editors";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -703,4 +703,21 @@ test("Image question inplace editor", async (t) => {
             controls.nth(0).find(".svc-image-question-controls__button").visible
         )
         .ok();
+});
+
+test("Image question inplace editor - choose image via inplace editor", async (t) => {
+    const getImageLink = ClientFunction(() => {
+        return document.querySelectorAll("img.sv_image_image")[0].src;
+    });
+    await t.expect(Selector(".svc-question__content").exists).notOk();
+    await t.hover(Selector(`div[title=Image]`), {speed: 0.5});
+    await t.click(Selector(`div[title=Image]`), {speed: 0.5});
+
+    let imageLink = await getImageLink();
+    await t.expect(imageLink).eql("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+
+    await t.click(Selector('.svc-image-question-controls__button'));
+    await t.setFilesToUpload(Selector('.svc-question__content input[type=file]'), './image.jpg');
+    imageLink = await getImageLink();
+    await t.expect(imageLink.substring(0, 48)).eql("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABA");
 });

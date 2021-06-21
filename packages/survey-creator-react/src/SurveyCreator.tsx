@@ -27,7 +27,8 @@ import {
   ICreatorOptions,
   CreatorBase,
   ITabbedMenuItem,
-  CreatorToolbarItems
+  CreatorToolbarItems,
+  getElementWrapperComponentName
 } from "@survey/creator";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import { editableStringRendererName } from "./components/StringEditor";
@@ -145,51 +146,19 @@ class DesignTimeSurveyModel extends Model {
     };
   }
   public getElementWrapperComponentName(element: any, reason?: string): string {
-    if (reason === "cell" || reason === "column-header" || reason === "row-header") {
-      return "svc-matrix-cell";
-    }
-    if (!element["parentQuestionValue"]) {
-      if (element instanceof Question) {
-        if (element.getType() == "dropdown") {
-          return this.isPopupEditorContent
-            ? "svc-cell-dropdown-question"
-            : "svc-dropdown-question";
-        }
-        if (element.getType() == "image") {
-          return "svc-image-question";
-        }
-        if (element.getType() == "rating") {
-          return "svc-rating-question";
-        }
-        return this.isPopupEditorContent
-          ? "svc-cell-dropdown-question"
-          : "svc-dropdown-question";
-      }
-      if (element.getType() == "image") {
-        return "svc-image-question";
-      }
-      return this.isPopupEditorContent
-        ? "svc-cell-question"
-        : "svc-question";
-    }
-    if (element instanceof PanelModel) {
+    let componentName = getElementWrapperComponentName(element, reason, this.isPopupEditorContent);
+    if (!componentName && element instanceof PanelModel) {
       return "svc-question";
     }
-    if (element instanceof PanelModel) {
-      return "svc-question";
-    }
-    return super.getElementWrapperComponentName(element);
-  }
-  public getElementWrapperComponentNameByName(element: string): string {
-    if (element === "sv-logo-image") return "svc-logo-image";
-    return super.getElementWrapperComponentNameByName(element);
-  }
-  public getElementWrapperComponentDataByName(element: string): any {
-    if (element === "sv-logo-image") return this.creator;
-    return super.getElementWrapperComponentDataByName(element);
+    return componentName || super.getElementWrapperComponentName(element, reason);
   }
   public getElementWrapperComponentData(element: any, reason?: string): any {
-    if (reason === "cell" || reason === "column-header" || reason === "row-header") {
+    if (reason === "logo-image") return this.creator;
+    if (
+      reason === "cell" ||
+      reason === "column-header" ||
+      reason === "row-header"
+    ) {
       return {
         creator: this.creator,
         element: element,
@@ -244,7 +213,7 @@ export class SurveyCreator extends CreatorBase<SurveyModel> {
     super(options, options2);
   }
   protected createSurveyCore(json: any = {}, reason: string): Model {
-    if (reason === "designer") return new DesignTimeSurveyModel(this, json);
+    if (reason === "designer" || reason === "modal-question-editor") return new DesignTimeSurveyModel(this, json);
     return new Model(json);
   }
   public render(target: string | HTMLElement) {

@@ -365,8 +365,11 @@ export function createAfterRenderHeaderHandler(
   survey: SurveyForDesigner
 ) {
   return function elementOnAfterRendering(domElement: any, survey: any) {
-    domElement.classList.add("svd_survey_header");
-    addAdorner(domElement, survey);
+    setTimeout(() => {
+      ko.tasks.runEarly();
+      domElement.classList.add("svd_survey_header");
+      addAdorner(domElement, survey);
+    }, 1);
   };
 }
 
