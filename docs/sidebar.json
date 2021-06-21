@@ -17,6 +17,10 @@
       "Title": "Create custom widget"
     },
     {
+      "Name": "End-User-Guide",
+      "Title": "End-User Guide"
+    },    
+    {
       "Name": "BuilderOverview",
       "Title": "Overview",
       "IsHidden": true
