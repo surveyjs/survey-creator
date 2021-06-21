@@ -18,12 +18,18 @@ export class PageViewModel<T extends SurveyModel> extends Base {
   @property({ defaultValue: true }) isPageLive: boolean;
   public creator: CreatorBase<T>;
   public onPageSelectedCallback: () => void;
+  public questionTypeSelectorModel;
   private _page: PageModel;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
 
   constructor(creator: CreatorBase<T>, page: PageModel) {
     super();
     this.creator = creator;
+    this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
+      () => {
+        this.addGhostPage();
+      }
+    );
 
     this._page = page;
     page["surveyChangedCallback"] = () => {
@@ -72,16 +78,10 @@ export class PageViewModel<T extends SurveyModel> extends Base {
     this.creator.survey.currentPage = this.page;
   }
 
-  addNewQuestionText = "Add a New Question";
   addNewQuestion(model: PageViewModel<T>, event: IPortableMouseEvent) {
-    if (this.creator.undoRedoManager) {
-      this.creator.undoRedoManager.startTransaction("add new page");
-    }
-    this.addGhostPage();
-    model.creator.clickToolboxItem({ type: "text" });
-    if (this.creator.undoRedoManager) {
-      this.creator.undoRedoManager.stopTransaction();
-    }
+    this.creator.addNewQuestionInPage(() => {
+      this.addGhostPage();
+    });
   }
   select(model: PageViewModel<T>, event: IPortableMouseEvent) {
     if (!model.isGhost) {

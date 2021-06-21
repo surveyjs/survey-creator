@@ -106,6 +106,7 @@ export class CreatorBase<T extends SurveyModel>
   @property({ defaultValue: false }) showState: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
+  @property({ defaultValue: "" }) currentAddQuestionType: string;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarItemsValue: CreatorToolbarItems;
@@ -981,18 +982,28 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   private patchMetadata(): void {
-    Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
-    Serializer.findProperty("survey", "description").placeholder = "pe.surveyDescriptionPlaceholder";
-    const logoPosition: Survey.JsonObjectProperty = Serializer.findProperty("survey", "logoPosition");
+    Serializer.findProperty("survey", "title").placeholder =
+      "pe.surveyTitlePlaceholder";
+    Serializer.findProperty("survey", "description").placeholder =
+      "pe.surveyDescriptionPlaceholder";
+    const logoPosition: Survey.JsonObjectProperty = Serializer.findProperty(
+      "survey",
+      "logoPosition"
+    );
     logoPosition.defaultValue = "right";
     logoPosition.isSerializable = false;
     logoPosition.visible = false;
-    Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
-    Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
+    Serializer.findProperty("page", "title").placeholder =
+      "pe.pageTitlePlaceholder";
+    Serializer.findProperty("page", "description").placeholder =
+      "pe.pageDescriptionPlaceholder";
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
-    const property: Survey.JsonObjectProperty = Survey.Serializer.findProperty(obj.getType(), propertyName);
+    const property: Survey.JsonObjectProperty = Survey.Serializer.findProperty(
+      obj.getType(),
+      propertyName
+    );
     return (
       !property ||
       !this.onIsPropertyReadOnlyCallback(
@@ -2107,6 +2118,59 @@ export class CreatorBase<T extends SurveyModel>
     this.undoRedoManager.stopTransaction();
   }
 
+  public get addNewQuestionText() {
+    return "Add " + ((!!this.currentAddQuestionType && editorLocalization.getString("qt." + this.currentAddQuestionType)) || "Question");
+  }
+
+  public getQuestionTypeSelectorModel(beforeAdd: () => void) {
+    const popupModel = new PopupModel(
+      "sv-list",
+      {
+        model: new ListModel(
+          this.toolbox.itemNames.map((name) => {
+            let type = this.createTypeByClass(name);
+            return {
+              title: type.name,
+              id: type.value
+            };
+          }),
+          (item: any) => {
+            this.currentAddQuestionType = item.id;
+            this.addNewQuestionInPage(beforeAdd);
+            popupModel.toggleVisibility();
+          },
+          false
+        )
+      },
+      "bottom",
+      "right"
+    );
+
+    return {
+      iconName: "icon-dots",
+      action: () => {
+        popupModel.toggleVisibility();
+      },
+      popupModel: popupModel
+    };
+  }
+  public addNewQuestionInPage(beforeAdd: () => void) {
+    if (this.undoRedoManager) {
+      this.undoRedoManager.startTransaction("add new page");
+    }
+    beforeAdd();
+    this.clickToolboxItem({ type: this.currentAddQuestionType });
+    if (this.undoRedoManager) {
+      this.undoRedoManager.stopTransaction();
+    }
+  }
+  private createTypeByClass(className: string) {
+    return {
+      name: this.getLocString("qt." + className),
+      value: className
+    };
+  }
+
   public getContextActions(
     element: any /*ISurveyElement*/
   ): Array<IActionBarItem> {
@@ -2126,16 +2190,10 @@ export class CreatorBase<T extends SurveyModel>
       );
       const allowChangeType: boolean = convertClasses.length > 0;
       if (!element.isPanel && !element.isPage) {
-        var createTypeByClass = (className) => {
-          return {
-            name: this.getLocString("qt." + className),
-            value: className
-          };
-        };
-        var availableTypes = [createTypeByClass(currentType)];
+        var availableTypes = [this.createTypeByClass(currentType)];
         for (var i = 0; i < convertClasses.length; i++) {
           var className = convertClasses[i];
-          availableTypes.push(createTypeByClass(className));
+          availableTypes.push(this.createTypeByClass(className));
         }
         const popupModel = new PopupModel(
           "sv-list",
