@@ -374,6 +374,48 @@ test("Create new page on creating designer plugin", (): any => {
   expect(designerPlugin.model.newPage).toBeFalsy();
   expect(designerPlugin.model.showNewPage).toBeFalsy();
 });
+test("Create new page with empty survey", (): any => {
+  var creator = new CreatorTester();
+  expect(creator.viewType).toEqual("designer");
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  creator.survey.pages[0].addNewQuestion("text", "question1");
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  designerPlugin.model.newPage.addNewQuestion("text", "question2");
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.survey.pages[0].elements).toHaveLength(1);
+  expect(creator.survey.pages[1].elements).toHaveLength(1);
+  expect(creator.survey.pages[1].elements[0].name).toEqual("question2");
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.newPage.elements).toHaveLength(0);
+});
+test("Create new page, set empty JSON", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {};
+  expect(creator.viewType).toEqual("designer");
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+});
+test("Create new page, recreate designer survey via JSON", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "question1" }] };
+  creator.showTestSurvey();
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  creator.JSON = {};
+  creator.showDesigner();
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+});
+
 test("canUndo/canRedo functions ", (): any => {
   var creator = new CreatorTester();
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
@@ -632,23 +674,59 @@ test("Undo converting question type", (): any => {
   q = creator.survey.getQuestionByName("question1");
   expect(q.getType()).toEqual("checkbox");
 });
-test("getElementWrapperComponentName", () : any => {
-  expect(getElementWrapperComponentName(null, "logo-image", false)).toEqual("svc-logo-image");
-  expect(getElementWrapperComponentName(null, "logo-image", true)).toEqual("svc-logo-image");
-  expect(getElementWrapperComponentName(null, "cell", false)).toEqual("svc-matrix-cell");
-  expect(getElementWrapperComponentName(null, "cell", true)).toEqual("svc-matrix-cell");
-  expect(getElementWrapperComponentName(null, "column-header", false)).toEqual("svc-matrix-cell");
-  expect(getElementWrapperComponentName(null, "column-header", true)).toEqual("svc-matrix-cell");
-  expect(getElementWrapperComponentName(null, "row-header", false)).toEqual("svc-matrix-cell");
-  expect(getElementWrapperComponentName(null, "row-header", true)).toEqual("svc-matrix-cell");
-  expect(getElementWrapperComponentName({parentQuestionValue: {}}, "", false)).toEqual(undefined);
-  expect(getElementWrapperComponentName({parentQuestionValue: {}}, "", true)).toEqual(undefined);
-  expect(getElementWrapperComponentName(new QuestionTextModel(""), "", false)).toEqual("svc-question");
-  expect(getElementWrapperComponentName(new QuestionTextModel(""), "", true)).toEqual("svc-cell-question");
-  expect(getElementWrapperComponentName(new QuestionImageModel(""), "", false)).toEqual("svc-image-question");
-  expect(getElementWrapperComponentName(new QuestionImageModel(""), "", true)).toEqual("svc-image-question");
-  expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", false)).toEqual("svc-rating-question");
-  expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", true)).toEqual("svc-rating-question");
-  expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", false)).toEqual("svc-dropdown-question");
-  expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", true)).toEqual("svc-cell-dropdown-question");
+test("getElementWrapperComponentName", (): any => {
+  expect(getElementWrapperComponentName(null, "logo-image", false)).toEqual(
+    "svc-logo-image"
+  );
+  expect(getElementWrapperComponentName(null, "logo-image", true)).toEqual(
+    "svc-logo-image"
+  );
+  expect(getElementWrapperComponentName(null, "cell", false)).toEqual(
+    "svc-matrix-cell"
+  );
+  expect(getElementWrapperComponentName(null, "cell", true)).toEqual(
+    "svc-matrix-cell"
+  );
+  expect(getElementWrapperComponentName(null, "column-header", false)).toEqual(
+    "svc-matrix-cell"
+  );
+  expect(getElementWrapperComponentName(null, "column-header", true)).toEqual(
+    "svc-matrix-cell"
+  );
+  expect(getElementWrapperComponentName(null, "row-header", false)).toEqual(
+    "svc-matrix-cell"
+  );
+  expect(getElementWrapperComponentName(null, "row-header", true)).toEqual(
+    "svc-matrix-cell"
+  );
+  expect(
+    getElementWrapperComponentName({ parentQuestionValue: {} }, "", false)
+  ).toEqual(undefined);
+  expect(
+    getElementWrapperComponentName({ parentQuestionValue: {} }, "", true)
+  ).toEqual(undefined);
+  expect(
+    getElementWrapperComponentName(new QuestionTextModel(""), "", false)
+  ).toEqual("svc-question");
+  expect(
+    getElementWrapperComponentName(new QuestionTextModel(""), "", true)
+  ).toEqual("svc-cell-question");
+  expect(
+    getElementWrapperComponentName(new QuestionImageModel(""), "", false)
+  ).toEqual("svc-image-question");
+  expect(
+    getElementWrapperComponentName(new QuestionImageModel(""), "", true)
+  ).toEqual("svc-image-question");
+  expect(
+    getElementWrapperComponentName(new QuestionRatingModel(""), "", false)
+  ).toEqual("svc-rating-question");
+  expect(
+    getElementWrapperComponentName(new QuestionRatingModel(""), "", true)
+  ).toEqual("svc-rating-question");
+  expect(
+    getElementWrapperComponentName(new QuestionDropdownModel(""), "", false)
+  ).toEqual("svc-dropdown-question");
+  expect(
+    getElementWrapperComponentName(new QuestionDropdownModel(""), "", true)
+  ).toEqual("svc-cell-dropdown-question");
 });

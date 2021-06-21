@@ -4,7 +4,8 @@ import {
   IActionBarItem,
   PageModel,
   property,
-  SurveyModel
+  SurveyModel,
+  ArrayChanges
 } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { DragDropHelper } from "../../dragdrophelper";
@@ -27,6 +28,16 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
       newPage["_addToSurvey"] = undefined;
       this.survey.addPage(newPage);
     };
+    var checkNewElementHandler = (sender: SurveyModel, options: any) => {
+      if (options.name === "elements" && newPage.elements.length > 0) {
+        newPage.onPropertyChanged.remove(checkNewElementHandler);
+        if (this.survey.pages.indexOf(newPage) > -1) return;
+        this.creator.startUndoRedoTransaction("Add new page");
+        this.survey.addPage(newPage);
+        this.creator.stopUndoRedoTransaction();
+      }
+    };
+    newPage.onPropertyChanged.add(checkNewElementHandler);
     this.newPage = newPage;
     DragDropHelper.newGhostPage = newPage;
   }
@@ -34,6 +45,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   constructor(creator: CreatorBase<T>) {
     super();
     this.creator = creator;
+    this.initSurvey();
   }
   get survey() {
     return this.creator.survey;
@@ -41,6 +53,9 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   private checkNewPageHandler: (sender: SurveyModel, options: any) => void;
   private surveyOnPropertyChanged: (sender: SurveyModel, options: any) => void;
   public initSurvey() {
+    if (!this.survey) return;
+    this.showNewPage = false;
+    this.newPage = undefined;
     this.checkNewPageHandler = (sender: SurveyModel, options: any) => {
       this.checkNewPage();
     };
@@ -94,22 +109,25 @@ export class TabDesignerPlugin<T extends SurveyModel>
   private redoAction: ActionBarItem;
   private surveySettingsAction: ActionBarItem;
   constructor(private creator: CreatorBase<T>) {
-    this.model = new TabDesignerViewModel<T>(creator);
     creator.tabs.push({
       id: "designer",
       title: getLocString("ed.designer"),
       componentContent: "svc-tab-designer",
-      data: this.model,
+      data: this,
       action: () => this.creator.makeNewViewActive("designer"),
       active: () => this.creator.viewType === "designer"
     });
     creator.addPlugin("designer", this);
   }
-  public activate(): void {}
+  public activate(): void {
+    this.model = new TabDesignerViewModel<T>(this.creator);
+  }
   public deactivate(): boolean {
+    this.model = undefined;
     return true;
   }
   public designerSurveyCreated(): void {
+    if (!this.model) return;
     this.model.initSurvey();
     if (!!this.creator.undoRedoManager) {
       this.creator.undoRedoManager.canUndoRedoCallback = () => {
