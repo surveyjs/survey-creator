@@ -304,15 +304,42 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     
                     <span
                       class="svc-text svc-text--normal svc-text--bold"
-                      data-bind="text: addNewQuestionText"
+                      data-bind="text: creator.addNewQuestionText"
                     >
                       
     
                     </span>
                     
+      
+                    <!-- ko with: questionTypeSelectorModel -->
+                    
+      
+                    <button
+                      class="svc-page__question-type-selector"
+                      data-bind="click: action, clickBubble: false"
+                    >
+                      
+        
+                      <sv-svg-icon
+                        class="svc-page__question-type-selector-icon"
+                        params="iconName: iconName, size: 24"
+                      />
+                      
+        
+                      <sv-popup
+                        params="model: popupModel"
+                      />
+                      
+      
+                    </button>
+                    
+      
+                    <!-- /ko -->
+                    
   
                   </div>
                   
+
   
                   <div
                     class="svc-page__content-actions"
@@ -329,8 +356,6 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                   
 
                 </div>
-                
-
               </svc-page>
               
     
