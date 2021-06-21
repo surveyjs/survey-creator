@@ -1735,9 +1735,11 @@ export class CreatorBase<T extends SurveyModel>
     var options = { newSelectedElement: element };
     this.onSelectedElementChanged.fire(this, options);
   }
-  public clickToolboxItem(json: any) {
+  public clickToolboxItem(newElement: any) {
     if (!this.readOnly) {
-      var newElement = this.createNewElement(json);
+      if (newElement["getType"] === undefined) {
+        newElement = this.createNewElement(newElement);
+      }
       this.doClickQuestionCore(newElement);
       this.selectElement(newElement);
     }
@@ -2119,7 +2121,12 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public get addNewQuestionText() {
-    return "Add " + ((!!this.currentAddQuestionType && editorLocalization.getString("qt." + this.currentAddQuestionType)) || "Question");
+    return (
+      "Add " +
+      ((!!this.currentAddQuestionType &&
+        editorLocalization.getString("qt." + this.currentAddQuestionType)) ||
+        "Question")
+    );
   }
 
   public getQuestionTypeSelectorModel(beforeAdd: () => void) {
@@ -2159,7 +2166,13 @@ export class CreatorBase<T extends SurveyModel>
       this.undoRedoManager.startTransaction("add new page");
     }
     beforeAdd();
-    this.clickToolboxItem({ type: this.currentAddQuestionType || "text" });
+    const newElement = Survey.ElementFactory.Instance.createElement(
+      this.currentAddQuestionType || "text",
+      "q1"
+    );
+    this.setNewNames(newElement);
+    this.clickToolboxItem(newElement);
+
     if (this.undoRedoManager) {
       this.undoRedoManager.stopTransaction();
     }

@@ -3,7 +3,8 @@ import {
   PanelModel,
   SurveyModel,
   Serializer,
-  ListModel
+  ListModel,
+  QuestionRadiogroupModel
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
@@ -644,4 +645,14 @@ test("Question type selector", (): any => {
   expect(creator.addNewQuestionInPage(() => {}));
   expect(survey.getAllQuestions().length).toEqual(2);
   expect(survey.getAllQuestions()[1].getType()).toEqual("rating");
+});
+
+test("Add question with default choices", (): any => {
+  const creator = new CreatorTester();
+  const survey: SurveyModel = <SurveyModel>creator.survey;
+  creator.currentAddQuestionType = "radiogroup";
+  creator.addNewQuestionInPage(() => {});
+  const question = <QuestionRadiogroupModel>survey.getAllQuestions()[0];
+  expect(question.getType()).toEqual("radiogroup");
+  expect(question.visibleChoices.length).toEqual(6);
 });
