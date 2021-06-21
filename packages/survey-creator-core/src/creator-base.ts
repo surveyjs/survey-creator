@@ -2159,7 +2159,7 @@ export class CreatorBase<T extends SurveyModel>
       this.undoRedoManager.startTransaction("add new page");
     }
     beforeAdd();
-    this.clickToolboxItem({ type: this.currentAddQuestionType });
+    this.clickToolboxItem({ type: this.currentAddQuestionType || "text" });
     if (this.undoRedoManager) {
       this.undoRedoManager.stopTransaction();
     }
