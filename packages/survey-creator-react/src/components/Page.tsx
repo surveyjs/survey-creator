@@ -1,5 +1,11 @@
 import { Base, PageModel, SurveyModel } from "survey-core";
-import { SurveyActionBar, SurveyElementBase, SurveyPage } from "survey-react-ui";
+import {
+  Popup,
+  SurveyActionBar,
+  SurveyElementBase,
+  SurveyPage,
+  SvgIcon
+} from "survey-react-ui";
 import { CreatorBase, PageViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
 import { ReactMouseEvent } from "../events";
@@ -49,6 +55,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     );
   }
   renderElement(): JSX.Element {
+    const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
     return (
       <React.Fragment>
         <div
@@ -57,8 +64,8 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
           onClick={(e) => {
             return this.model.select(this.model, new ReactMouseEvent(e));
           }}
-          onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
-          onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOut={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOver={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
           <SurveyPage
             page={this.props.page}
@@ -74,8 +81,24 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
             }}
           >
             <span className="svc-text svc-text--normal svc-text--bold">
-              {this.model.addNewQuestionText}
+              {this.model.creator.addNewQuestionText}
             </span>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                questionTypeSelectorModel.action();
+              }}
+              className="svc-page__question-type-selector"
+            >
+              <span className="svc-page__question-type-selector-icon">
+                <SvgIcon
+                  iconName={questionTypeSelectorModel.iconName}
+                  size={24}
+                ></SvgIcon>
+              </span>
+              <Popup model={questionTypeSelectorModel.popupModel}></Popup>
+            </button>
           </div>
           <div className="svc-page__content-actions">
             <SurveyActionBar items={this.model.actions}></SurveyActionBar>
