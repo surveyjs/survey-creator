@@ -2,7 +2,8 @@ import {
   Base,
   PanelModel,
   SurveyModel,
-  Serializer
+  Serializer,
+  ListModel
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
@@ -626,4 +627,21 @@ test("Undo converting question type", (): any => {
   creator.undo();
   q = creator.survey.getQuestionByName("question1");
   expect(q.getType()).toEqual("checkbox");
+});
+test("Question type selector", (): any => {
+  const creator = new CreatorTester();
+  const survey: SurveyModel = <SurveyModel>creator.survey;
+  expect(survey.getAllQuestions().length).toEqual(0);
+  expect(creator.addNewQuestionText).toEqual("Add Question");
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => {});
+  const listModel: ListModel =
+    selectorModel.popupModel.contentComponentData.model;
+  const ratingItem = listModel.items.filter((item) => item.id == "rating")[0];
+  listModel.selectItem(ratingItem);
+  expect(creator.addNewQuestionText).toEqual("Add Rating");
+  expect(survey.getAllQuestions().length).toEqual(1);
+  expect(survey.getAllQuestions()[0].getType()).toEqual("rating");
+  expect(creator.addNewQuestionInPage(() => {}));
+  expect(survey.getAllQuestions().length).toEqual(2);
+  expect(survey.getAllQuestions()[1].getType()).toEqual("rating");
 });
