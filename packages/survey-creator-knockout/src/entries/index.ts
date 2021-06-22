@@ -20,6 +20,7 @@ export * from "../components/item-value";
 export * from "../components/image-item-value";
 export * from "../components/panel";
 export * from "../components/matrix-cell";
+export * from "../components/question-editor-content";
 export * from "../components/cell-question";
 export * from "../components/cell-question-dropdown";
 

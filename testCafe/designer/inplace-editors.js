@@ -721,3 +721,25 @@ test("Image question inplace editor - choose image via inplace editor", async (t
     imageLink = await getImageLink();
     await t.expect(imageLink.substring(0, 48)).eql("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABA");
 });
+
+test("Matrix dropdown question inplace popup editor", async (t) => {
+    const showControl = ClientFunction(() => {
+        document.querySelectorAll("td:nth-child(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0].style.display = "block";
+    });    
+    await t.expect(Selector(".svc-question__content").exists).notOk();
+
+    await t.hover(Selector(`div[title="Matrix (multiple choice)"]`), {speed: 0.5});
+    await t.click(Selector(`div[title="Matrix (multiple choice)"]`), {speed: 0.5});
+    await t.expect(Selector(".svc-question__content").exists).ok();
+
+    await t.hover(Selector(`td:nth-child(2) .svc-matrix-cell`).nth(0), {speed: 0.1});
+    // TODO: remove this line after TestCafe implements workig hover
+    await showControl();
+    await t.click(Selector(`td:nth-child(2) .svc-matrix-cell`).nth(0).find(`.svc-matrix-cell__question-controls-button`), {speed: 0.5});
+    await t.expect(Selector('.svc-question__content--selected-no-border').visible).ok();
+    await t.expect(Selector('.sv-popup__content .sd-header__text').exists).notOk();
+    await t.expect(Selector('.sv-popup__content .sd-page__title').exists).notOk();
+
+    await t.click(Selector('.sv-popup__button--cancel'));
+    await t.expect(Selector('.svc-question__content--selected-no-border').exists).notOk();
+});
