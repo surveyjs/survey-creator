@@ -28,10 +28,10 @@ export class MatrixCellWrapperViewModel extends Base {
     survey.showQuestionNumbers = "none";
     survey.getAllQuestions()[0].setSurveyImpl(survey);
     settings.showModal(
-      "survey",
+      "svc-question-editor-content",
       {
         survey: survey,
-        model: survey,
+        creator: this.creator
       },
       () => {
         questionJSON = survey.getAllQuestions()[0].toJSON();

@@ -12,6 +12,7 @@ export * from "../components/QuestionImage";
 export * from "../components/QuestionRating";
 export * from "../components/CellQuestion";
 export * from "../components/CellQuestionDropdown";
+export * from "../components/QuestionEditorContent";
 export * from "../components/ItemValueWrapper";
 export * from "../components/ImageItemValueWrapper";
 export * from "../components/MatrixCellWrapper";

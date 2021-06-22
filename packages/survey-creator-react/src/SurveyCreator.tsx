@@ -136,6 +136,7 @@ class DesignTimeSurveyModel extends Model {
   public get isLogoAfter(): boolean {
     return true;
   }
+  public isPopupEditorContent = false;
   public getRowWrapperComponentName(row: QuestionRowModel): string {
     return "svc-row";
   }
