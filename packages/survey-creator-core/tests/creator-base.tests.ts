@@ -3,6 +3,8 @@ import {
   PanelModel,
   SurveyModel,
   Serializer,
+  ListModel,
+  QuestionRadiogroupModel,
   QuestionTextModel,
   QuestionImageModel,
   QuestionRatingModel,
@@ -673,6 +675,33 @@ test("Undo converting question type", (): any => {
   creator.undo();
   q = creator.survey.getQuestionByName("question1");
   expect(q.getType()).toEqual("checkbox");
+});
+test("Question type selector", (): any => {
+  const creator = new CreatorTester();
+  const survey: SurveyModel = <SurveyModel>creator.survey;
+  expect(survey.getAllQuestions().length).toEqual(0);
+  expect(creator.addNewQuestionText).toEqual("Add Question");
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => {});
+  const listModel: ListModel =
+    selectorModel.popupModel.contentComponentData.model;
+  const ratingItem = listModel.items.filter((item) => item.id == "rating")[0];
+  listModel.selectItem(ratingItem);
+  expect(creator.addNewQuestionText).toEqual("Add Rating");
+  expect(survey.getAllQuestions().length).toEqual(1);
+  expect(survey.getAllQuestions()[0].getType()).toEqual("rating");
+  expect(creator.addNewQuestionInPage(() => {}));
+  expect(survey.getAllQuestions().length).toEqual(2);
+  expect(survey.getAllQuestions()[1].getType()).toEqual("rating");
+});
+
+test("Add question with default choices", (): any => {
+  const creator = new CreatorTester();
+  const survey: SurveyModel = <SurveyModel>creator.survey;
+  creator.currentAddQuestionType = "radiogroup";
+  creator.addNewQuestionInPage(() => {});
+  const question = <QuestionRadiogroupModel>survey.getAllQuestions()[0];
+  expect(question.getType()).toEqual("radiogroup");
+  expect(question.visibleChoices.length).toEqual(6);
 });
 test("getElementWrapperComponentName", (): any => {
   expect(getElementWrapperComponentName(null, "logo-image", false)).toEqual(

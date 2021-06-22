@@ -106,6 +106,7 @@ export class CreatorBase<T extends SurveyModel>
   @property({ defaultValue: false }) showState: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
+  @property({ defaultValue: "" }) currentAddQuestionType: string;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarItemsValue: CreatorToolbarItems;
@@ -1734,9 +1735,11 @@ export class CreatorBase<T extends SurveyModel>
     var options = { newSelectedElement: element };
     this.onSelectedElementChanged.fire(this, options);
   }
-  public clickToolboxItem(json: any) {
+  public clickToolboxItem(newElement: any) {
     if (!this.readOnly) {
-      var newElement = this.createNewElement(json);
+      if (newElement["getType"] === undefined) {
+        newElement = this.createNewElement(newElement);
+      }
       this.doClickQuestionCore(newElement);
       this.selectElement(newElement);
     }
@@ -2117,6 +2120,71 @@ export class CreatorBase<T extends SurveyModel>
     this.undoRedoManager.stopTransaction();
   }
 
+  public get addNewQuestionText() {
+    return (
+      "Add " +
+      ((!!this.currentAddQuestionType &&
+        editorLocalization.getString("qt." + this.currentAddQuestionType)) ||
+        "Question")
+    );
+  }
+
+  public getQuestionTypeSelectorModel(beforeAdd: () => void) {
+    const popupModel = new PopupModel(
+      "sv-list",
+      {
+        model: new ListModel(
+          this.toolbox.itemNames.map((name) => {
+            let type = this.createTypeByClass(name);
+            return {
+              title: type.name,
+              id: type.value,
+              iconName: "icon-" + type.value,
+            };
+          }),
+          (item: any) => {
+            this.currentAddQuestionType = item.id;
+            this.addNewQuestionInPage(beforeAdd);
+            popupModel.toggleVisibility();
+          },
+          false
+        )
+      },
+      "bottom",
+      "center"
+    );
+
+    return {
+      iconName: "icon-dots",
+      action: () => {
+        popupModel.toggleVisibility();
+      },
+      popupModel: popupModel
+    };
+  }
+  public addNewQuestionInPage(beforeAdd: () => void) {
+    if (this.undoRedoManager) {
+      this.undoRedoManager.startTransaction("add new page");
+    }
+    beforeAdd();
+    const newElement = Survey.ElementFactory.Instance.createElement(
+      this.currentAddQuestionType || "text",
+      "q1"
+    );
+    this.setNewNames(newElement);
+    this.clickToolboxItem(newElement);
+
+    if (this.undoRedoManager) {
+      this.undoRedoManager.stopTransaction();
+    }
+  }
+  private createTypeByClass(className: string) {
+    return {
+      name: this.getLocString("qt." + className),
+      value: className
+    };
+  }
+
   public getContextActions(
     element: any /*ISurveyElement*/
   ): Array<IActionBarItem> {
@@ -2136,16 +2204,10 @@ export class CreatorBase<T extends SurveyModel>
       );
       const allowChangeType: boolean = convertClasses.length > 0;
       if (!element.isPanel && !element.isPage) {
-        var createTypeByClass = (className) => {
-          return {
-            name: this.getLocString("qt." + className),
-            value: className
-          };
-        };
-        var availableTypes = [createTypeByClass(currentType)];
+        var availableTypes = [this.createTypeByClass(currentType)];
         for (var i = 0; i < convertClasses.length; i++) {
           var className = convertClasses[i];
-          availableTypes.push(createTypeByClass(className));
+          availableTypes.push(this.createTypeByClass(className));
         }
         const popupModel = new PopupModel(
           "sv-list",
