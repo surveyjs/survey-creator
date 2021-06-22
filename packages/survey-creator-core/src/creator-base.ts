@@ -1086,7 +1086,7 @@ export class CreatorBase<T extends SurveyModel>
     */
     this.undoRedoManagerValue = new UndoRedoManager();
     this.setSurvey(survey);
-    var plugin = this.currentPlugin;
+    var plugin = this.plugins["designer"];
     if (!!plugin && !!plugin.designerSurveyCreated) {
       plugin.designerSurveyCreated();
     }
@@ -2047,8 +2047,8 @@ export class CreatorBase<T extends SurveyModel>
       }
     }
   }
-  startUndoRedoTransaction() {
-    this.undoRedoManager.startTransaction("");
+  startUndoRedoTransaction(name: string = "") {
+    this.undoRedoManager.startTransaction(name);
   }
   stopUndoRedoTransaction() {
     this.undoRedoManager.stopTransaction();
@@ -2327,17 +2327,27 @@ export class StylesManager {
   }
 }
 
-export function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
+export function getElementWrapperComponentName(
+  element: any,
+  reason: string,
+  isPopupEditorContent: boolean
+): string {
   if (reason === "logo-image") {
     return "svc-logo-image";
   }
-  if (reason === "cell" || reason === "column-header" || reason === "row-header") {
+  if (
+    reason === "cell" ||
+    reason === "column-header" ||
+    reason === "row-header"
+  ) {
     return "svc-matrix-cell";
   }
   if (!element["parentQuestionValue"]) {
     if (element instanceof Question) {
       if (element.getType() == "dropdown") {
-        return isPopupEditorContent ? "svc-cell-dropdown-question" : "svc-dropdown-question";
+        return isPopupEditorContent
+          ? "svc-cell-dropdown-question"
+          : "svc-dropdown-question";
       }
       if (element.getType() == "image") {
         return "svc-image-question";

@@ -376,6 +376,48 @@ test("Create new page on creating designer plugin", (): any => {
   expect(designerPlugin.model.newPage).toBeFalsy();
   expect(designerPlugin.model.showNewPage).toBeFalsy();
 });
+test("Create new page with empty survey", (): any => {
+  var creator = new CreatorTester();
+  expect(creator.viewType).toEqual("designer");
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  creator.survey.pages[0].addNewQuestion("text", "question1");
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  designerPlugin.model.newPage.addNewQuestion("text", "question2");
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.survey.pages[0].elements).toHaveLength(1);
+  expect(creator.survey.pages[1].elements).toHaveLength(1);
+  expect(creator.survey.pages[1].elements[0].name).toEqual("question2");
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.newPage.elements).toHaveLength(0);
+});
+test("Create new page, set empty JSON", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {};
+  expect(creator.viewType).toEqual("designer");
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+});
+test("Create new page, recreate designer survey via JSON", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "question1" }] };
+  creator.showTestSurvey();
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  creator.JSON = {};
+  creator.showDesigner();
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+});
+
 test("canUndo/canRedo functions ", (): any => {
   var creator = new CreatorTester();
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();

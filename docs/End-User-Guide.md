@@ -1,4 +1,4 @@
-# SurveyJS Creator
+# End-User Guide - SurveyJS Creator
 
 This page has been prepared as a starting point for documentation aimed at end-users of SurveyJS.
 

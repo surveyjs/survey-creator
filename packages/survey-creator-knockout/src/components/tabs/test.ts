@@ -14,5 +14,5 @@ ko.components.register("svc-tab-test", {
       return plugin.model;
     },
   },
-  template: template,
+  template: template
 });
