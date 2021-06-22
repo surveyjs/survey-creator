@@ -103,17 +103,16 @@ export class TestSurveyTabViewModel extends Base {
     }
     this.survey = this.surveyProvider.createSurvey(json || {}, "test");
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
-    var self = this;
+    const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
       self.isRunning = false;
     });
     if (!!this.survey["onNavigateToUrl"]) {
       this.survey["onNavigateToUrl"].add(function (sender, options) {
-        var url = options.url;
+        const url: string = options.url;
         options.url = "";
         if (!!url) {
-          var message =
-            self.getLocString("ed.navigateToMsg") + " '" + url + "'.";
+          const message: string = self.getLocString("ed.navigateToMsg") + " '" + url + "'.";
           if (!!this.surveyProvider) {
             this.surveyProvider.notify(message);
           } else {
@@ -143,8 +142,8 @@ export class TestSurveyTabViewModel extends Base {
   }
   public show(options: any = null) {
     const pages: Array<IActionBarItem> = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      var page = this.survey.pages[i];
+    for (let i = 0; i < this.survey.pages.length; i++) {
+      const page: PageModel = this.survey.pages[i];
       pages.push({
         id: page.name,
         data: page,
@@ -193,19 +192,16 @@ export class TestSurveyTabViewModel extends Base {
     this.show();
   }
   private setDefaultLanguageOption(opt: boolean | string) {
-    var vis =
-      opt === true ||
-      opt === "all" ||
+    const vis: boolean = opt === true || opt === "all" ||
       (opt === "auto" && this.survey.getUsedLocales().length > 1);
     this.showDefaultLanguageInTestSurveyTab = vis;
     if (vis) {
       this.languages = this.getLanguages(
-        opt !== "all" ? this.survey.getUsedLocales() : null
-      );
+        opt !== "all" ? this.survey.getUsedLocales() : null);
     }
   }
   public buildActions() {
-    const languagePopupModel = new PopupModel(
+    const languagePopupModel: PopupModel = new PopupModel(
       "sv-list",
       {
         model: new ListModel(
@@ -221,10 +217,10 @@ export class TestSurveyTabViewModel extends Base {
       "right"
     );
 
-    var deviceSelectorItems = Object.keys(simulatorDevices)
+    const deviceSelectorItems = Object.keys(simulatorDevices)
       .filter((key) => !!simulatorDevices[key].title)
       .map((key) => ({ id: key, title: simulatorDevices[key].title }));
-    const devicePopupModel = new PopupModel(
+    const devicePopupModel: PopupModel = new PopupModel(
       "sv-list",
       {
         model: new ListModel(
@@ -284,7 +280,6 @@ export class TestSurveyTabViewModel extends Base {
       "top",
       "center"
     );
-
     actions.push({
       id: "pageSelector",
       title: () =>
@@ -304,6 +299,7 @@ export class TestSurveyTabViewModel extends Base {
         this.pagePopupModel.toggleVisibility();
       }
     });
+
     actions.push({
       id: "nextPage",
       css: () =>
@@ -363,14 +359,14 @@ export class TestSurveyTabViewModel extends Base {
     this.actions = actions;
   }
   private setActivePageItem(page: PageModel, val: boolean) {
-    var item = this.getPageItemByPage(page);
+    const item: IActionBarItem = this.getPageItemByPage(page);
     if (item) {
       item.active = val;
     }
   }
   private getPageItemByPage(page: PageModel): IActionBarItem {
-    var items = this.pages;
-    for (var i = 0; i < items.length; i++) {
+    const items: IActionBarItem[] = this.pages;
+    for (let i = 0; i < items.length; i++) {
       if (items[i].data === page) return items[i];
     }
     return null;
@@ -412,7 +408,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.creator["onTestSurveyCreated"] &&
         this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
     };
-    var options = {
+    const options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
       showDefaultLanguageInTestSurveyTab:
         this.creator.showDefaultLanguageInTestSurveyTab,

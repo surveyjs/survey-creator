@@ -15,6 +15,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
 
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
+    this.isInitialized = true;
   }
 
   public get text(): string {

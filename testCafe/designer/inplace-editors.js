@@ -706,13 +706,13 @@ test("Image question inplace editor", async (t) => {
 });
 
 test("Image question inplace editor - choose image via inplace editor", async (t) => {
-    const getImageLink = ClientFunction(() => {
-        return document.querySelectorAll("img.sv_image_image")[0].src;
-    });
     await t.expect(Selector(".svc-question__content").exists).notOk();
     await t.hover(Selector(`div[title=Image]`), {speed: 0.5});
     await t.click(Selector(`div[title=Image]`), {speed: 0.5});
 
+    const getImageLink = ClientFunction(() => {
+        return document.querySelectorAll("img.sv_image_image")[0].src;
+    });
     let imageLink = await getImageLink();
     await t.expect(imageLink).eql("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
 

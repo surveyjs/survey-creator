@@ -4,17 +4,14 @@ import { SurveyTextWorker } from "../../textWorker";
 
 export interface IJsonEditorModel {
   isJSONChanged: boolean;
-
   text: string;
+  readOnly: boolean;
   onPluginActivate(): void;
   processErrors(text: string): void;
-  readOnly: boolean;
 }
 
-export abstract class JsonEditorBaseModel
-  extends Base
-  implements IJsonEditorModel
-{
+export abstract class JsonEditorBaseModel extends Base implements IJsonEditorModel {
+  protected isInitialized: boolean = false;
   public isJSONChanged: boolean = false;
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
@@ -27,6 +24,7 @@ export abstract class JsonEditorBaseModel
   public abstract text: string;
   public abstract onEditorActivated(): void;
   public onPluginActivate(): void {
+    if (!this.isInitialized) return;
     this.text = this.creator.text;
     this.onEditorActivated();
     this.isJSONChanged = false;
@@ -55,9 +53,7 @@ export abstract class JsonEditorBaseModel
   }
 }
 
-export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel>
-  implements ICreatorPlugin
-{
+export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel> implements ICreatorPlugin {
   public model: TModel;
   constructor(private creator: CreatorBase<SurveyModel>) {}
   public activate(): void {
