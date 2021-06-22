@@ -8,7 +8,7 @@ const template = require("./designer.html");
 ko.components.register("svc-tab-designer", {
   viewModel: {
     createViewModel: (params: any) => {
-      const model = <TabDesignerViewModel<Survey>>params.data;
+      const model = <TabDesignerViewModel<Survey>>params.data.model;
       new ImplementorBase(model);
       return model;
     }
