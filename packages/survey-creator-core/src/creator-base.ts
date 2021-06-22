@@ -2151,7 +2151,7 @@ export class CreatorBase<T extends SurveyModel>
         )
       },
       "bottom",
-      "right"
+      "center"
     );
 
     return {
