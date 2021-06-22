@@ -45,8 +45,8 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       self.onTextChanged();
     });
     this.aceEditor.getSession().setUseWorker(true);
-    SurveyTextWorker.newLineChar =
-      this.aceEditor.session.doc.getNewLineCharacter();
+    SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
+    this.isInitialized = true;
     this.onPluginActivate();
   }
   private updateUndoRedoState(): void {
@@ -88,10 +88,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   }
 }
 
-export class TabJsonEditorAcePlugin
-  extends TabJsonEditorBasePlugin<AceJsonEditorModel>
-  implements ICreatorPlugin
-{
+export class TabJsonEditorAcePlugin extends TabJsonEditorBasePlugin<AceJsonEditorModel> implements ICreatorPlugin {
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
     this.model = new AceJsonEditorModel(creator);
