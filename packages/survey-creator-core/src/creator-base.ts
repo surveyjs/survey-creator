@@ -2138,7 +2138,8 @@ export class CreatorBase<T extends SurveyModel>
             let type = this.createTypeByClass(name);
             return {
               title: type.name,
-              id: type.value
+              id: type.value,
+              iconName: "icon-" + type.value,
             };
           }),
           (item: any) => {
