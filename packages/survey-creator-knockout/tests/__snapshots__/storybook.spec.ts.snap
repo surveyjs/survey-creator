@@ -270,11 +270,25 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
             >
               
     
-              <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: { name: 'survey-header', data: survey } } } -->
-              <!-- /ko -->
+              <div
+                data-bind="click: function() { creator.selectElement(survey); }"
+              >
+                
+      
+                <!-- ko template: { name: 'survey-header', data: survey } -->
+                <!-- /ko -->
+                
+    
+              </div>
               
     
               <!-- ko if: survey.isShowProgressBarOnTop -->
+              
+    
+              <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+              <!-- /ko -->
+              
+    
               <!-- /ko -->
               
     
@@ -283,90 +297,32 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     
               <svc-page
                 data-bind="attr: { 'data-svc-drop-target-element-name': $data.name }"
-                data-svc-drop-target-element-name="page1"
                 params="survey: $parent.survey, page: $data, creator: $parent.creator"
-              >
-                <div
-                  class="svc-page__content"
-                  data-bind="click: select, clickBubble: false, css: css, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
-                >
-                  
-  
-                  <!-- ko template: { name: 'survey-page', data: page } -->
-                  <!-- /ko -->
-                  
-  
-                  <div
-                    class="svc-page__add-new-question"
-                    data-bind="click: addNewQuestion, clickBubble: false"
-                  >
-                    
-    
-                    <span
-                      class="svc-text svc-text--normal svc-text--bold"
-                      data-bind="text: creator.addNewQuestionText"
-                    >
-                      
-    
-                    </span>
-                    
-      
-                    <!-- ko with: questionTypeSelectorModel -->
-                    
-      
-                    <button
-                      class="svc-page__question-type-selector"
-                      data-bind="click: action, clickBubble: false"
-                    >
-                      
-        
-                      <sv-svg-icon
-                        class="svc-page__question-type-selector-icon"
-                        params="iconName: iconName, size: 24"
-                      />
-                      
-        
-                      <sv-popup
-                        params="model: popupModel"
-                      />
-                      
-      
-                    </button>
-                    
-      
-                    <!-- /ko -->
-                    
-  
-                  </div>
-                  
-
-  
-                  <div
-                    class="svc-page__content-actions"
-                  >
-                    
-    
-                    <!-- ko component: { name: 'sv-action-bar', params: { items: actions } } -->
-                    
-    
-                    <!-- /ko -->
-                    
-  
-                  </div>
-                  
-
-                </div>
-              </svc-page>
+              />
               
     
               <!-- /ko -->
               
     
               <!-- ko if: showNewPage -->
+              
+    
+              <svc-page
+                data-bind="attr: { 'data-svc-drop-target-element-name': 'newGhostPage' }"
+                params="survey: survey, creator: creator, page: newPage"
+              />
+              
+    
               <!-- /ko -->
               
     
               <!-- ko if: survey.isShowProgressBarOnBottom -->
+              
+    
+              <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+              <!-- /ko -->
+              
+    
               <!-- /ko -->
               
   
@@ -378,64 +334,17 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
 
           <svc-page-navigator
             params="creator: creator"
-          >
-            <!-- ko if: visible -->
-            <!-- /ko -->
-            
-
-          </svc-page-navigator>
+          />
           
 
           <div
-            class="svc-flex-column"
-            style="width: auto; border-left: 1px solid lightgray;"
+            class="svc-flex-column svc-properties-wrapper"
           >
             
   
             <svc-property-panel
               params="model: creator"
-            >
-              <div
-                class="svc-property-panel__header"
-              >
-                
-  
-                <div
-                  class="svc-property-panel__actions"
-                >
-                  
-  
-                  <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
-                  <!-- /ko -->
-                  
-  
-                </div>
-                
-  
-                <span
-                  class="svc-property-panel__title"
-                  data-bind="text: title"
-                >
-                  Survey
-                </span>
-                
-
-              </div>
-              
-
-              <div
-                class="svc-property-panel__expander"
-              >
-                
-  
-                <!-- ko template: { name: 'survey-content', data: survey  } -->
-                <!-- /ko -->
-                
-
-              </div>
-              
-
-            </svc-property-panel>
+            />
             
 
           </div>
@@ -503,10 +412,18 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     >
       
     
-      <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: { name: 'survey-header', data: survey } } } -->
+      <div
+        data-bind="click: function() { creator.selectElement(survey); }"
+      >
+        
       
+        <!-- ko template: { name: 'survey-header', data: survey } -->
+        
+      
+        <!-- /ko -->
+        
     
-      <!-- /ko -->
+      </div>
       
     
       <!-- ko if: survey.isShowProgressBarOnTop -->
@@ -565,8 +482,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
 
   <div
-    class="svc-flex-column"
-    style="width: auto; border-left: 1px solid lightgray;"
+    class="svc-flex-column svc-properties-wrapper"
   >
     
   
