@@ -3,8 +3,10 @@
 ></svc-toolbox>
 <div class="svc-tab-designer" data-bind="css: survey.css.root">
   <div data-bind="css: survey.css.container">
-    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: { name: 'survey-header', data: survey } } } -->
-    <!-- /ko -->
+    <div data-bind="click: function() { creator.selectElement(survey); }">
+      <!-- ko template: { name: 'survey-header', data: survey } -->
+      <!-- /ko -->
+    </div>
     <!-- ko if: survey.isShowProgressBarOnTop -->
     <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } --><!-- /ko -->
     <!-- /ko -->
@@ -26,9 +28,6 @@
   </div>
 </div>
 <svc-page-navigator params="creator: creator"></svc-page-navigator>
-<div
-  class="svc-flex-column"
-  style="width: auto; border-left: 1px solid lightgray;"
->
+<div class="svc-flex-column svc-properties-wrapper">
   <svc-property-panel params="model: creator"></svc-property-panel>
 </div>
