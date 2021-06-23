@@ -1,5 +1,5 @@
 import * as Survey from "survey-core";
-import { settings } from "./settings";
+import { QuestionConvertMode, settings } from "./settings";
 
 export class QuestionConverter {
   public static convertInfo = {};
@@ -13,7 +13,7 @@ export class QuestionConverter {
     className: string,
     availableTypes: Array<string> = null
   ): Array<string> {
-    var res = settings.allowToConvertQuestionsToAllTypes
+    var res = settings.convertQuestionMode == QuestionConvertMode.AllTypes
       ? getAllQuestionTypes(className)
       : QuestionConverter.convertInfo[className];
     if (!res) return [];
@@ -22,11 +22,9 @@ export class QuestionConverter {
       Array.isArray(availableTypes) &&
       availableTypes.length > 0
     ) {
-      for (var i = res.length - 1; i >= 0; i--) {
-        if (availableTypes.indexOf(res[i]) < 0) {
-          res.splice(i, 1);
-        }
-      }
+      res = res
+        .filter((item) => availableTypes.indexOf(item) >= 0)
+        .sort((a, b) => availableTypes.indexOf(a) - availableTypes.indexOf(b));
     }
     return !!res ? res : [];
   }

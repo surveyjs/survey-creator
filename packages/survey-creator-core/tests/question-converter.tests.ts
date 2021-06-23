@@ -7,18 +7,21 @@ import {
   QuestionTextModel
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
-import { settings } from "../src/settings";
+import { QuestionConvertMode, settings } from "../src/settings";
 
 test("get converted classes", () => {
+  settings.convertQuestionMode = QuestionConvertMode.CompatibleTypes;
   var classes = QuestionConverter.getConvertToClasses("radiogroup");
   expect(classes.length >= 3).toBeTruthy();
   expect(classes.indexOf("dropdown") > -1).toBeTruthy();
   classes = QuestionConverter.getConvertToClasses("text");
   expect(classes).toHaveLength(1);
   expect(classes[0]).toEqual("comment");
+  settings..convertMode = QuestionConvertMode.AllTypes;
 });
 
 test("get converted classes based on available types", () => {
+  settings.convertQuestionMode = QuestionConvertMode.CompatibleTypes;
   var classes = QuestionConverter.getConvertToClasses("radiogroup", []);
   expect(classes.length >= 3).toBeTruthy();
   classes = QuestionConverter.getConvertToClasses("radiogroup", [
@@ -38,6 +41,7 @@ test("get converted classes based on available types", () => {
     "text"
   ]);
   expect(classes).toHaveLength(0);
+  settings.convertQuestionMode = QuestionConvertMode.AllTypes;
 });
 
 test("Convert question", () => {
@@ -59,7 +63,6 @@ test("Convert question", () => {
   expect(newQ2.placeHolder).toEqual("type here");
 });
 test("Allow to convert to all question types", () => {
-  settings.allowToConvertQuestionsToAllTypes = true;
   var classes = QuestionConverter.getConvertToClasses("text", []);
   expect(classes.length >= 5).toBeTruthy();
   classes = QuestionConverter.getConvertToClasses("radiogroup", [
@@ -79,5 +82,4 @@ test("Allow to convert to all question types", () => {
     "text"
   ]);
   expect(classes).toHaveLength(2);
-  settings.allowToConvertQuestionsToAllTypes = false;
 });
