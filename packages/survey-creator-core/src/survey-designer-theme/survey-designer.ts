@@ -146,6 +146,7 @@ export var surveyDesignerCss = {
     disabledLabel: "sd-checkbox__label--disabled",
     itemDecorator: "sd-checkbox__hidden",
     materialDecorator: "sd-checkbox__rectangle",
+    sliderText: "",
     slider: "sd-boolean__thumb"
   },
   text: {
