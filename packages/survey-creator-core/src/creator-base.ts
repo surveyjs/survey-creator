@@ -1593,21 +1593,25 @@ export class CreatorBase<T extends SurveyModel>
 
   public selectElement(element: any, propertyName?: string, focus = true) {
     var oldValue = this.selectedElement;
-    if (oldValue === element) return;
-    this.selectedElementValue = this.onSelectingElement(element);
-    if (oldValue !== this.selectedElementValue) {
-      if (!!oldValue && !oldValue.isDisposed) {
-        oldValue.setPropertyValue("isSelectedInDesigner", false);
+    if (oldValue !== element) {
+      this.selectedElementValue = this.onSelectingElement(element);
+      if (oldValue !== this.selectedElementValue) {
+        if (!!oldValue && !oldValue.isDisposed) {
+          oldValue.setPropertyValue("isSelectedInDesigner", false);
+        }
+        if (!!this.selectedElementValue) {
+          this.selectedElementValue.setPropertyValue(
+            "isSelectedInDesigner",
+            true
+          );
+        }
       }
-      if (!!this.selectedElementValue) {
-        this.selectedElementValue.setPropertyValue(
-          "isSelectedInDesigner",
-          true
-        );
-      }
+    }
+    if (oldValue !== element || !!propertyName) {
       this.selectionChanged(this.selectedElement, propertyName, focus);
     }
   }
+
 
   private onSelectingElement(val: Base): Base {
     var options = { newSelectedElement: val };

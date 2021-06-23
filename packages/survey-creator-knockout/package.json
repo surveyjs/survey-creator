@@ -20,7 +20,7 @@
     "doc:gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "doc:update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
     "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500\"",
-    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/inplace-editors.js --reporter minimal --debug-mode\"",
+    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/select-context.js --reporter minimal --debug-mode\"",
     "testcafe:ci": "http-server --silent & testcafe chrome:headless ../../testCafe/ --selector-timeout 1500 ",
     "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease alpha",
     "remove-package-lock": "rimraf package-lock.json",

@@ -1,4 +1,4 @@
-<div class="svc-logo-image">
+<div class="svc-logo-image" data-bind="click: function(m, e) { return true; }, clickBubble: false">
   <input type="file" accept="image/*" class="svc-choose-file-input"/>
   <!-- ko ifnot: survey.locLogo.koRenderedHtml -->
     <div class="svc-logo-image-placeholder" data-bind="click: chooseFile">[LOGO]</div>
