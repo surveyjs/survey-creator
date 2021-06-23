@@ -6,7 +6,13 @@ import {
   Question,
   SurveyModel
 } from "survey-core";
-
+/**
+ * List available question convert modes
+ */
+export enum QuestionConvertMode {
+  AllTypes, 
+  CompatibleTypes
+}
 export var settings = {
   traslation: {
     sortByName: true
@@ -28,9 +34,10 @@ export var settings = {
   visibleLogicActions: [],
   defaultNewSurveyJSON: { pages: [{ name: "page1" }] },
   /**
-   * Set it to true to allow to convert any question type to any question type
+   * Determines which types of questions the conversion will be available for.
    */
-  allowToConvertQuestionsToAllTypes: false
+   questionConvertMode: QuestionConvertMode.AllTypes
+
   //TODO add maximumColumnCount
 };
 

@@ -2130,18 +2130,14 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public getQuestionTypeSelectorModel(beforeAdd: () => void) {
+    var availableTypes = this.toolbox.itemNames.map((className) => {
+      return this.createIActionBarItemByClass(className);
+    });
     const popupModel = new PopupModel(
       "sv-list",
       {
         model: new ListModel(
-          this.toolbox.itemNames.map((name) => {
-            let type = this.createTypeByClass(name);
-            return {
-              title: type.name,
-              id: type.value,
-              iconName: "icon-" + type.value,
-            };
-          }),
+          availableTypes,
           (item: any) => {
             this.currentAddQuestionType = item.id;
             this.addNewQuestionInPage(beforeAdd);
@@ -2178,10 +2174,11 @@ export class CreatorBase<T extends SurveyModel>
       this.undoRedoManager.stopTransaction();
     }
   }
-  private createTypeByClass(className: string) {
+  private createIActionBarItemByClass(className: string): IActionBarItem {
     return {
-      name: this.getLocString("qt." + className),
-      value: className
+      title: this.getLocString("qt." + className),
+      id: className,
+      iconName: "icon-" + className
     };
   }
 
@@ -2204,19 +2201,14 @@ export class CreatorBase<T extends SurveyModel>
       );
       const allowChangeType: boolean = convertClasses.length > 0;
       if (!element.isPanel && !element.isPage) {
-        var availableTypes = [this.createTypeByClass(currentType)];
-        for (var i = 0; i < convertClasses.length; i++) {
-          var className = convertClasses[i];
-          availableTypes.push(this.createTypeByClass(className));
-        }
+        var availableTypes = convertClasses.map((className) => {
+          return this.createIActionBarItemByClass(className);
+        });
         const popupModel = new PopupModel(
           "sv-list",
           {
             model: new ListModel(
-              availableTypes.map((type) => ({
-                title: type.name,
-                id: type.value
-              })),
+              availableTypes,
               (item: any) => {
                 this.convertCurrentQuestion(item.id);
               },
@@ -2224,15 +2216,14 @@ export class CreatorBase<T extends SurveyModel>
             )
           },
           "bottom",
-          "right"
+          "center"
         );
 
         items.push({
           id: "convertTo",
           css: "sv-action--first sv-action-bar-item--secondary",
           iconName: "icon-change_16x16",
-          // title: this.getLocString("qt." + currentType),
-          title: this.getLocString("survey.convertTo"),
+          title: this.getLocString("qt." + currentType),
           enabled: allowChangeType,
           component: "sv-action-bar-item-dropdown",
           action: (newType) => {
