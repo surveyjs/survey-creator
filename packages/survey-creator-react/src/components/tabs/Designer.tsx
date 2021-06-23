@@ -70,7 +70,6 @@ export class TabDesignerComponent extends SurveyElementBase<
       );
     }
 
-    const style = { width: "auto", borderLeft: "1px solid lightgray" };
     return (
       <React.Fragment>
         <SurveyCreatorToolbox
@@ -80,7 +79,9 @@ export class TabDesignerComponent extends SurveyElementBase<
         <DesignerSurveyNavigationBlock survey={creator.survey} location="top" />{" "}
         <div className={"svc-tab-designer " + creator.survey.css.root}>
           <div className={creator.survey.css.container}>
+            <div onClick={function() { creator.selectElement(creator.survey); }}>
             <SurveyHeader survey={survey}></SurveyHeader>
+            </div>
             {surveyPages}
           </div>
         </div>
@@ -93,7 +94,7 @@ export class TabDesignerComponent extends SurveyElementBase<
           creator={creator}
           pages={creator.pagesController.pages}
         ></SurveyPageNavigator>
-        <div className="svc-flex-column" style={style}>
+        <div className="svc-flex-column svc-properties-wrapper">
           <PropertyGridComponent model={creator}></PropertyGridComponent>
         </div>
       </React.Fragment>

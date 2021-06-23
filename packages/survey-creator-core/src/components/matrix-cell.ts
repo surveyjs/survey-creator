@@ -52,7 +52,12 @@ export class MatrixCellWrapperViewModel extends Base {
     if(typeof model.context.getType !== "function") {
       return;
     }
-    model.creator.selectElement(model.context);
+    const contextType = model.context.getType();
+    if(contextType === "itemvalue") {
+      model.creator.selectElement(model.context.locOwner, model.context.ownerPropertyName, false);
+    } else {
+      model.creator.selectElement(model.context);
+    }
     event.stopPropagation();
   }
 }
