@@ -17,7 +17,7 @@ test("get converted classes", () => {
   classes = QuestionConverter.getConvertToClasses("text");
   expect(classes).toHaveLength(1);
   expect(classes[0]).toEqual("comment");
-  settings..convertMode = QuestionConvertMode.AllTypes;
+  settings.questionConvertMode = QuestionConvertMode.AllTypes;
 });
 
 test("get converted classes based on available types", () => {
