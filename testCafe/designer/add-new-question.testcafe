@@ -5,7 +5,7 @@
       "pageUrl": "http://localhost:8080/testCafe/testcafe.html",
       "tests": [
         {
-          "name": "Add a New Question",
+          "name": "Add New Question",
           "commands": [
             {
               "type": "maximize-window",
@@ -20,7 +20,7 @@
                   {
                     "rawSelector": {
                       "type": "js-expr",
-                      "value": "Selector('span').withText('Add a New Question').visible"
+                      "value": "Selector('span').withText('Add Question').visible"
                     },
                     "ruleType": "$text$"
                   },
@@ -34,7 +34,7 @@
                   {
                     "rawSelector": {
                       "type": "js-expr",
-                      "value": "Selector('.svc-page__add-new-question span').withText('Add a New Question').visible"
+                      "value": "Selector('.svc-page__add-new-question span').withText('Add Question').visible"
                     },
                     "ruleType": "$text$",
                     "ancestorRuleType": "class"
@@ -73,7 +73,7 @@
                   {
                     "rawSelector": {
                       "type": "js-expr",
-                      "value": "Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] span').withText('Add a New Question').visible"
+                      "value": "Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] span').withText('Add Question').visible"
                     },
                     "ruleType": "$text$",
                     "ancestorRuleType": "$attr$"
@@ -101,21 +101,21 @@
               "assertionType": "ok",
               "actual": {
                 "type": "js-expr",
-                "value": "Selector('span').withText('Add a New Question').visible"
+                "value": "Selector('span').withText('Add Question').visible"
               },
               "options": {}
             },
             {
               "selector": {
                 "type": "js-expr",
-                "value": "Selector('span').withText('Add a New Question')"
+                "value": "Selector('span').withText('Add Question')"
               },
               "studio": {
                 "selectors": [
                   {
                     "rawSelector": {
                       "type": "js-expr",
-                      "value": "Selector('span').withText('Add a New Question')"
+                      "value": "Selector('span').withText('Add Question')"
                     },
                     "ruleType": "$text$"
                   },
@@ -129,7 +129,7 @@
                   {
                     "rawSelector": {
                       "type": "js-expr",
-                      "value": "Selector('.svc-page__add-new-question span').withText('Add a New Question')"
+                      "value": "Selector('.svc-page__add-new-question span').withText('Add Question')"
                     },
                     "ruleType": "$text$",
                     "ancestorRuleType": "class"
@@ -168,7 +168,7 @@
                   {
                     "rawSelector": {
                       "type": "js-expr",
-                      "value": "Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] span').withText('Add a New Question')"
+                      "value": "Selector('[data-bind=\"click: addNewQuestion, clickBubble: false\"] span').withText('Add Question')"
                     },
                     "ruleType": "$text$",
                     "ancestorRuleType": "$attr$"

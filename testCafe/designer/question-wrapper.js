@@ -38,7 +38,7 @@ test("Single input question wrapper actions", async (t) => {
 
     const convertActionButton = controls
         .nth(0)
-        .find('button[title="Convert to"]');
+        .find('button[title="Single Input"]');
     await t.expect(convertActionButton.visible).ok();
 
     const duplicateActionButton = controls
@@ -58,7 +58,7 @@ test("Single input question wrapper actions", async (t) => {
     await t.expect(deleteActionButton.visible).ok();
 });
 
-test.skip("Single input question wrapper action convert", async (t) => {
+test("Single input question wrapper action convert", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
 
     await t.hover(Selector(`div[title='Single Input']`));
@@ -80,18 +80,16 @@ test.skip("Single input question wrapper action convert", async (t) => {
     const controls = Selector(".svc-question__content-actions").find(
         ".sv-action"
     );
-    const convertActionButton = controls
-        .nth(0)
-        .find('button[title="Convert to"]');
+    const convertActionButton = controls.find('button[title="Single Input"]');
     await t.expect(convertActionButton.visible).ok();
 
     await t.click(convertActionButton);
     const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
-    await t.expect(listItems.count).eql(2);
-    await t.expect(listItems.nth(0).innerText).eql("Single Input");
-    await t.expect(listItems.nth(1).innerText).eql("Comment");
+    await t.expect(listItems.count).eql(19);
+    await t.expect(listItems.nth(0).innerText).eql("Checkbox");
+    await t.expect(listItems.nth(3).innerText).eql("Comment");
 
-    await t.click(listItems.nth(1));
+    await t.click(listItems.nth(3));
     await t
         .expect(
             Selector(".svc-question__content--selected").find(
@@ -100,11 +98,11 @@ test.skip("Single input question wrapper action convert", async (t) => {
         )
         .ok();
 
-    await t.click(convertActionButton);
-    await t.expect(listItems.count).eql(2);
-    await t.expect(listItems.nth(0).innerText).eql("Comment");
-    await t.expect(listItems.nth(1).innerText).eql("Single Input");
-    await t.click(listItems.nth(1));
+    await t.click(controls.find('button[title="Comment"]'));
+    await t.expect(listItems.count).eql(19);
+    await t.expect(listItems.nth(0).innerText).eql("Single Input");
+    await t.expect(listItems.nth(1).innerText).eql("Checkbox");
+    await t.click(listItems.nth(0));
     await t
         .expect(
             Selector(".svc-question__content--selected").find(
