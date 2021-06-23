@@ -70,6 +70,7 @@ export class QuestionToolboxCategory extends Base {
  * The list of Toolbox items.
  */
 export class QuestionToolbox extends Base implements IQuestionToolbox {
+  static hiddenTypes = ["buttongroup"];
   private _orderedQuestions = [
     "text",
     "checkbox",
@@ -614,7 +615,8 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
     for (let i = 0; i < supportedQuestions.length; i++) {
       const name: string = supportedQuestions[i];
       if (
-        questions.indexOf(supportedQuestions[i]) < 0 &&
+        questions.indexOf(name) < 0 &&
+        QuestionToolbox.hiddenTypes.indexOf(name) < 0 &&
         allTypes.indexOf(name) > -1
       )
         questions.push(name);

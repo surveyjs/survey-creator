@@ -152,7 +152,7 @@ test("At least one page should be available", () => {
 test("options.questionTypes", () => {
   var allTypes = ElementFactory.Instance.getAllTypes();
   var creator = new CreatorTester();
-  expect(creator.toolbox.items).toHaveLength(allTypes.length);
+  expect(creator.toolbox.items).toHaveLength(allTypes.length - 1);
   creator = new CreatorTester({
     questionTypes: ["text", "dropdown", "unknown"]
   });
