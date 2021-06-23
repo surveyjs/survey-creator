@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.53](https://github.com/surveyjs/survey-creator/compare/v1.8.52...v1.8.53) (2021-06-23)
+
+
+### Bug Fixes
+
+* Editor text looks like placeholder [#1378](https://github.com/surveyjs/survey-creator/issues/1378) ([#1408](https://github.com/surveyjs/survey-creator/issues/1408)) ([fde9963](https://github.com/surveyjs/survey-creator/commit/fde99636521bc19314db0ab97f570756d14b7c4f))
+
 ### [1.8.52](https://github.com/surveyjs/survey-creator/compare/v1.8.51...v1.8.52) (2021-06-16)
 
 ### [1.8.51](https://github.com/surveyjs/survey-creator/compare/v1.8.50...v1.8.51) (2021-06-09)
