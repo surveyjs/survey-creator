@@ -9,7 +9,7 @@
     z-index: 2;
     &[aria-placeholder]:empty:before {
       content: attr(aria-placeholder);
-      color: $foreground-light; 
+      color: $foreground-light;
     }
   }
 }
@@ -86,6 +86,7 @@
 }
 
 .svc-string-editor:focus-within {
+  color: $foreground;
   .svc-string-editor__button--done {
     display: inline-block;
   }
