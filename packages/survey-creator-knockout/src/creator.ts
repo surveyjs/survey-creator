@@ -9,7 +9,7 @@ import {
   SurveyModel
 } from "survey-core";
 import { Survey, ImplementorBase, Panel } from "survey-knockout-ui";
-import { ICreatorOptions, CreatorBase, getElementWrapperComponentName } from "@survey/creator";
+import { ICreatorOptions, CreatorBase, getElementWrapperComponentName, isStringEditable } from "@survey/creator";
 import { editableStringRendererName } from "./components/string-editor";
 
 if (!!ko.options) {
@@ -69,7 +69,7 @@ class DesignTimeSurveyModel extends Survey {
     };
   }
   public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    if (!!question["parentQuestionValue"]) {
+    if (!!question["parentQuestionValue"] || question.isContentElement) {
       return SurveyModel.TemplateRendererComponentName;
     }
     if (question.getType() === "imagepicker") {
@@ -78,7 +78,7 @@ class DesignTimeSurveyModel extends Survey {
     return "svc-item-value";
   }
   public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    if (!!question["parentQuestionValue"]) {
+    if (!!question["parentQuestionValue"] || question.isContentElement) {
       return item;
     }
     return {
@@ -97,7 +97,7 @@ class DesignTimeSurveyModel extends Survey {
   }
 
   public getRendererForString(element: Base, name: string): string {
-    if (!element["parentQuestionValue"]) {
+    if (isStringEditable(element, name)) {
       return editableStringRendererName;
     }
     return undefined;

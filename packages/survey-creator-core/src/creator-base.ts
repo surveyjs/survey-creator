@@ -2337,7 +2337,7 @@ export function getElementWrapperComponentName(
   ) {
     return "svc-matrix-cell";
   }
-  if (!element["parentQuestionValue"]) {
+  if (!element.parentQuestionValue && !element.isContentElement) {
     if (element instanceof Question) {
       if (element.getType() == "dropdown") {
         return isPopupEditorContent
@@ -2354,4 +2354,7 @@ export function getElementWrapperComponentName(
     }
   }
   return undefined;
+}
+export function isStringEditable(element: any, name: string): boolean {
+  return !element.parentQuestionValue && !element.isContentElement;
 }

@@ -28,7 +28,8 @@ import {
   CreatorBase,
   ITabbedMenuItem,
   CreatorToolbarItems,
-  getElementWrapperComponentName
+  getElementWrapperComponentName,
+  isStringEditable
 } from "@survey/creator";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import { editableStringRendererName } from "./components/StringEditor";
@@ -182,7 +183,7 @@ class DesignTimeSurveyModel extends Model {
     item: ItemValue,
     question: QuestionSelectBase
   ): string {
-    if (!this.isDesignMode || !!question["parentQuestionValue"]) {
+    if (!this.isDesignMode || !!question["parentQuestionValue"] || question.isContentElement) {
       return SurveyModel.TemplateRendererComponentName;
     }
     if (question.getType() === "imagepicker") {
@@ -194,7 +195,7 @@ class DesignTimeSurveyModel extends Model {
     item: ItemValue,
     question: QuestionSelectBase
   ): any {
-    if (!!question["parentQuestionValue"]) {
+    if (!!question["parentQuestionValue"] || question.isContentElement) {
       return item;
     }
     return {
@@ -203,7 +204,7 @@ class DesignTimeSurveyModel extends Model {
     };
   }
   public getRendererForString(element: Base, name: string): string {
-    if (!element["parentQuestionValue"]) {
+    if (isStringEditable(element, name)) {
       return editableStringRendererName;
     }
     return undefined;
