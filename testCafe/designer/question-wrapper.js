@@ -85,7 +85,7 @@ test("Single input question wrapper action convert", async (t) => {
 
     await t.click(convertActionButton);
     const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
-    await t.expect(listItems.count).eql(19);
+    await t.expect(listItems.count).eql(18);
     await t.expect(listItems.nth(0).innerText).eql("Checkbox");
     await t.expect(listItems.nth(3).innerText).eql("Comment");
 
@@ -99,7 +99,7 @@ test("Single input question wrapper action convert", async (t) => {
         .ok();
 
     await t.click(controls.find('button[title="Comment"]'));
-    await t.expect(listItems.count).eql(19);
+    await t.expect(listItems.count).eql(18);
     await t.expect(listItems.nth(0).innerText).eql("Single Input");
     await t.expect(listItems.nth(1).innerText).eql("Checkbox");
     await t.click(listItems.nth(0));
