@@ -38,8 +38,14 @@ export class SplitterComponentViewModel {
       if (isInChangeWidth) return;
       isInChangeWidth = true;
       try {
+        let isRtl = false;
+        if(window && typeof window.getComputedStyle === "function") {
+          const conputedStyles = getComputedStyle(leftElement);
+          isRtl = conputedStyles && conputedStyles.direction === "rtl";
+        }
+        const offsetDelta = isRtl ? -delta : delta;
         var totalWidth = leftElement.offsetWidth + rightElement.offsetWidth;
-        var newLeft = leftElement.offsetWidth + delta;
+        var newLeft = leftElement.offsetWidth + offsetDelta;
         var newRight = totalWidth - newLeft;
         if (newLeft > minLeft && newRight > minRight) {
           startX += delta;
