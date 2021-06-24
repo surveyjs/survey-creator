@@ -2356,6 +2356,5 @@ export function getElementWrapperComponentName(
   return undefined;
 }
 export function isStringEditable(element: any, name: string): boolean {
-  return !element.parentQuestionValue && !element.isContentElement 
-         || element.locOwner && element.locOwner.getType && element.locOwner.getType() === "matrixdropdowncolumn";
+  return !element.parentQuestionValue && !element.isContentElement || element.isEditableTemplateElement;
 }

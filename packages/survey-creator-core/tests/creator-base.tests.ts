@@ -772,4 +772,10 @@ test("isStringEditable", (): any => {
   expect(
     isStringEditable({}, "")
   ).toBeTruthy();
+  expect(
+    isStringEditable({ isEditableTemplateElement: true }, "")
+  ).toBeTruthy();
+  expect(
+    isStringEditable({ isContentElement: true, isEditableTemplateElement: true }, "")
+  ).toBeTruthy();
 });
