@@ -13,7 +13,7 @@ import {
 import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
-import { getElementWrapperComponentName } from "../src/creator-base";
+import { getElementWrapperComponentName, isStringEditable } from "../src/creator-base";
 import { SurveyHelper } from "../src/surveyHelper";
 import { CreatorTester } from "./creator-tester";
 
@@ -758,4 +758,18 @@ test("getElementWrapperComponentName", (): any => {
   expect(
     getElementWrapperComponentName(new QuestionDropdownModel(""), "", true)
   ).toEqual("svc-cell-dropdown-question");
+  expect(
+    getElementWrapperComponentName({ isContentElement: true }, "", false)
+  ).toEqual(undefined);
+});
+test("isStringEditable", (): any => {
+  expect(
+    isStringEditable({ isContentElement: true }, "")
+  ).toBeFalsy();
+  expect(
+    isStringEditable({ parentQuestionValue: {} }, "")
+  ).toBeFalsy();
+  expect(
+    isStringEditable({}, "")
+  ).toBeTruthy();
 });
