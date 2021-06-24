@@ -172,6 +172,28 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
+  public addPluginTab(
+    name: string,
+    plugin: ICreatorPlugin,
+    title?: string,
+    componentContent?: string,
+    index?: number
+  ) {
+    var tab = {
+      id: name,
+      title: !!title ? title : editorLocalization.getString("ed." + name),
+      componentContent: componentContent ? componentContent : "svc-tab-" + name,
+      data: plugin,
+      action: () => this.makeNewViewActive(name),
+      active: () => this.viewType === name
+    };
+    if (index >= 0 && index < this.tabs.length) {
+      this.tabs.splice(index, 0, tab);
+    } else {
+      this.tabs.push(tab);
+    }
+    this.addPlugin(name, plugin);
+  }
   public addPlugin(name: string, plugin: ICreatorPlugin) {
     this.plugins[name] = plugin;
   }
@@ -1611,7 +1633,6 @@ export class CreatorBase<T extends SurveyModel>
       this.selectionChanged(this.selectedElement, propertyName, focus);
     }
   }
-
 
   private onSelectingElement(val: Base): Base {
     var options = { newSelectedElement: val };

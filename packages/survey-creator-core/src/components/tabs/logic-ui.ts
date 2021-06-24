@@ -222,52 +222,17 @@ export class SurveyLogicUI extends SurveyLogic {
   }
 }
 
-export class LogicModel extends Base {
-  onCreateLogic: (logic: SurveyLogicUI) => void;
-  constructor(private creator: CreatorBase<SurveyModel>) {
-    super();
-  }
-  @property() logic: SurveyLogicUI;
-  public get showing(): boolean {
-    return this.getPropertyValue("showing", false);
-  }
-  public set showing(val: boolean) {
-    this.setPropertyValue("showing", val);
-  }
-  public activate(): void {
-    var logic = new SurveyLogicUI(this.creator.survey, this.creator);
-    if (!!this.onCreateLogic) this.onCreateLogic(logic);
-    this.logic = logic;
-    this.showing = true;
-  }
-  public deactivate(): boolean {
-    this.showing = false;
-    this.logic.dispose();
-    this.logic = undefined;
-    return true;
-  }
-}
-
 export class TabLogicPlugin implements ICreatorPlugin {
-  public model: LogicModel;
-  constructor(creator: CreatorBase<SurveyModel>) {
-    this.model = new LogicModel(creator);
-    creator.tabs.push({
-      id: "logic",
-      title: editorLocalization.getString("ed.logic"),
-      componentContent: "svc-tab-logic",
-      data: this,
-      action: () => {
-        creator.makeNewViewActive("logic");
-      },
-      active: () => creator.viewType === "logic"
-    });
-    creator.addPlugin("logic", this);
+  public model: SurveyLogicUI;
+  constructor(private creator: CreatorBase<SurveyModel>) {
+    creator.addPluginTab("logic", this);
   }
   public activate(): void {
-    this.model.activate();
+    this.model = new SurveyLogicUI(this.creator.survey, this.creator);
   }
   public deactivate(): boolean {
-    return this.model.deactivate();
+    this.model.dispose();
+    this.model = undefined;
+    return true;
   }
 }

@@ -112,7 +112,8 @@ export class TestSurveyTabViewModel extends Base {
         const url: string = options.url;
         options.url = "";
         if (!!url) {
-          const message: string = self.getLocString("ed.navigateToMsg") + " '" + url + "'.";
+          const message: string =
+            self.getLocString("ed.navigateToMsg") + " '" + url + "'.";
           if (!!this.surveyProvider) {
             this.surveyProvider.notify(message);
           } else {
@@ -192,12 +193,15 @@ export class TestSurveyTabViewModel extends Base {
     this.show();
   }
   private setDefaultLanguageOption(opt: boolean | string) {
-    const vis: boolean = opt === true || opt === "all" ||
+    const vis: boolean =
+      opt === true ||
+      opt === "all" ||
       (opt === "auto" && this.survey.getUsedLocales().length > 1);
     this.showDefaultLanguageInTestSurveyTab = vis;
     if (vis) {
       this.languages = this.getLanguages(
-        opt !== "all" ? this.survey.getUsedLocales() : null);
+        opt !== "all" ? this.survey.getUsedLocales() : null
+      );
     }
   }
   public buildActions() {
@@ -390,20 +394,10 @@ export class TestSurveyTabViewModel extends Base {
 export class TabTestPlugin implements ICreatorPlugin {
   public model: TestSurveyTabViewModel;
   constructor(private creator: CreatorBase<SurveyModel>) {
-    this.model = new TestSurveyTabViewModel(creator);
-    creator.tabs.push({
-      id: "test",
-      title: getLocString("ed.testSurvey"),
-      componentContent: "svc-tab-test",
-      data: this,
-      active: () => creator.viewType === "test",
-      action: () => {
-        creator.makeNewViewActive("test");
-      }
-    });
-    creator.addPlugin("test", this);
+    creator.addPluginTab("test", this, getLocString("ed.testSurvey"));
   }
   public activate(): void {
+    this.model = new TestSurveyTabViewModel(this.creator);
     this.model.onSurveyCreatedCallback = (survey) => {
       this.creator["onTestSurveyCreated"] &&
         this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
@@ -421,6 +415,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     this.model.onSurveyCreatedCallback = undefined;
+    this.model = undefined;
     return true;
   }
   public createActions(items: Array<IActionBarItem>) {
