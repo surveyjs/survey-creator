@@ -613,7 +613,7 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
         questions.push(name);
     }
     for (let i = 0; i < supportedQuestions.length; i++) {
-      const name: string = supportedQuestions[i];
+      var name: string = supportedQuestions[i];
       if (
         questions.indexOf(name) < 0 &&
         QuestionToolbox.hiddenTypes.indexOf(name) < 0 &&

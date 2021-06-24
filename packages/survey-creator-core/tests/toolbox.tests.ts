@@ -16,7 +16,8 @@ test("dummy test", () => {
 test("toolbox support options", (): any => {
   var allTypes = ElementFactory.Instance.getAllTypes();
   var toolbox = new QuestionToolbox();
-  expect(toolbox.items).toHaveLength(allTypes.length - 1);
+  var unregistredCount = allTypes.indexOf("buttongroup") > -1 ? 1 : 0;
+  expect(toolbox.items).toHaveLength(allTypes.length - unregistredCount);
   expect(toolbox.items[0].name).toEqual(toolbox.orderedQuestions[0]);
   expect(toolbox.items[0].json["type"]).toEqual(toolbox.orderedQuestions[0]);
   expect(toolbox.getItemByName("buttongroup")).toBeFalsy();
@@ -211,8 +212,9 @@ test("toolbox copied questions", (): any => {
 });
 test("Save/Load all toolbox items", (): any => {
   var allTypes = ElementFactory.Instance.getAllTypes();
+  var unregistredCount = allTypes.indexOf("buttongroup") > -1 ? 1 : 0;
   var toolbox1 = new QuestionToolbox();
-  expect(toolbox1.items).toHaveLength(allTypes.length - 1);
+  expect(toolbox1.items).toHaveLength(allTypes.length - unregistredCount);
   var toolbox2 = new QuestionToolbox(["text", "dropdown"]);
   toolbox1.jsonText = toolbox2.jsonText;
   expect(toolbox1.items).toHaveLength(2);
