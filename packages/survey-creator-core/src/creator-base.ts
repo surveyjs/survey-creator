@@ -26,9 +26,9 @@ import { ObjType, SurveyHelper } from "./surveyHelper";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
-import { ICreatorSelectionOwner } from "./controllers/controller-base";
-import { PagesController } from "./controllers/pages-controller";
-import { SelectionHistoryController } from "./controllers/selection-history-controller";
+import { ICreatorSelectionOwner } from "./selection-owner";
+import { PagesController } from "./pages-controller";
+import { SelectionHistory } from "./selection-history";
 
 import { TabEmbedPlugin } from "./components/tabs/embed";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
@@ -136,7 +136,7 @@ export class CreatorBase<T extends SurveyModel>
   private newQuestionChangedNames: {};
   private undoRedoManagerValue: UndoRedoManager;
   private pagesControllerValue: PagesController;
-  private selectionHistoryControllerValue: SelectionHistoryController;
+  private selectionHistoryControllerValue: SelectionHistory;
 
   private saveSurveyFuncValue: (
     no: number,
@@ -726,7 +726,7 @@ export class CreatorBase<T extends SurveyModel>
     }
     this.toolbarItemsValue = new CreatorToolbarItems();
     this.pagesControllerValue = new PagesController(this);
-    this.selectionHistoryControllerValue = new SelectionHistoryController(this);
+    this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.setOptions(this.options);
     this.patchMetadata();
     this.initTabs();
@@ -811,7 +811,7 @@ export class CreatorBase<T extends SurveyModel>
   public get pagesController(): PagesController {
     return this.pagesControllerValue;
   }
-  public get selectionHistoryController(): SelectionHistoryController {
+  public get selectionHistoryController(): SelectionHistory {
     return this.selectionHistoryControllerValue;
   }
 

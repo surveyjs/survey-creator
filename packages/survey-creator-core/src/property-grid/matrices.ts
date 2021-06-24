@@ -13,7 +13,7 @@ import {
   Serializer
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyQuestionProperties } from "../questionEditors/questionEditor";
+import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../settings";
 import { getNextValue } from "../utils/utils";
 import { FastEntryEditor } from "./fast-entry";

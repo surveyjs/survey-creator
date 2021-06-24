@@ -32,7 +32,7 @@ import {
   defaultStrings,
   editorLocalization
 } from "../../src/editorLocalization";
-import { SurveyQuestionEditorDefinition } from "../../src/questionEditors/questionEditorDefinition";
+import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/restfull";
