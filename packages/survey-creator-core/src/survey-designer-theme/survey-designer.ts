@@ -270,6 +270,7 @@ export var surveyDesignerCss = {
     root: "sd-signaturepad sjs_sp_container",
     small: "sd-row__question--small",
     controls: "sjs_sp_controls",
+    placeholder: "sjs_sp_placeholder",
     clearButton: "sjs_sp_clear"
   },
   saveData: {
