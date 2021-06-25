@@ -10,6 +10,7 @@ import {
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropHelper } from "../dragdrophelper";
+import { getLocString } from "../editorLocalization";
 import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
 import "./question.scss";
 
@@ -68,7 +69,10 @@ export class QuestionAdornerViewModel extends Base {
   }
 
   public get placeholderText(): string {
-    return "Drop questions here";
+    if (this.surveyElement instanceof QuestionHtmlModel) {
+      return getLocString("ed.htmlPlaceHolder");
+    }
+    return  getLocString("ed.panelPlaceHolder");
   }
 
   private get dragDropHelper(): DragDropHelper {
