@@ -7,7 +7,7 @@ import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
 import { ISurveyCreatorOptions } from "./settings";
-import { EditableObject } from "./entries";
+import { EditableObject } from "./propertyEditors/editableObject";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -17,7 +17,8 @@ export interface ICreatorOptions {
  * Base class for Survey Creator.
  */
 export class CreatorBase<T extends { [index: string]: any }>
-  implements ISurveyCreatorOptions {
+  implements ISurveyCreatorOptions
+{
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);

@@ -37,7 +37,7 @@ import { isPropertyVisible } from "./utils/utils";
 import { SurveyObjectProperty } from "./objectProperty";
 import { CreatorBase } from "./creator-base";
 import { IActionBarItem } from "survey-knockout";
-import { EditableObject } from "./entries";
+import { EditableObject } from "./propertyEditors/editableObject";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
