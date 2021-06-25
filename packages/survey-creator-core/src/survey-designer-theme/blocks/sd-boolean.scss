@@ -1,11 +1,11 @@
 .sd-boolean {
   display: flex;
   width: max-content;
+  position: relative;
+  padding: 4px;
   background: #f9f9f9;
   box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
   border-radius: 100px;
-  position: relative;
-  padding: 4px;
 }
 .sd-boolean__thumb,
 .sd-boolean__label {
@@ -23,8 +23,13 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: calc(100% - 8px);
-  height: calc(100% - 8px);
+  width: calc(100%);
+  height: calc(100%);
+  box-sizing: border-box;
+  border-radius: 100px;
+}
+.sd-boolean__control:focus ~ .sd-boolean__switch {
+  box-shadow: inset 0 0 0 2px $primary;
 }
 .sd-boolean--indeterminate .sd-boolean__thumb {
   display: none;

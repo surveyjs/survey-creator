@@ -12,3 +12,6 @@
 .sd-radio--checked.sd-radio--disabled .sd-radio__decorator:after {
   background-color: $border;
 }
+.sd-radio--checked .sd-radio__control:focus + .sd-radio__decorator:after {
+  background-color: $primary;
+}
