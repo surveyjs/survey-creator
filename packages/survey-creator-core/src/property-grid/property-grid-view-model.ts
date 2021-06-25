@@ -6,7 +6,7 @@ import {
   IActionBarItem,
 } from "survey-core";
 import { PropertyGridModel } from "./index";
-import { SelectionHistoryController } from "../controllers/selection-history-controller";
+import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../surveyHelper";
 import { editorLocalization } from "../editorLocalization";
 
@@ -18,7 +18,7 @@ export class PropertyGridViewModel extends Base {
   @property() hasNext: boolean;
   constructor(
     private model: PropertyGridModel,
-    private selectionController: SelectionHistoryController
+    private selectionController: SelectionHistory
   ) {
     super();
     this.model.objValueChangedCallback = () => {

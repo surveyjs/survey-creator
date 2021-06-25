@@ -26,9 +26,9 @@ import { ObjType, SurveyHelper } from "./surveyHelper";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
-import { ICreatorSelectionOwner } from "./controllers/controller-base";
-import { PagesController } from "./controllers/pages-controller";
-import { SelectionHistoryController } from "./controllers/selection-history-controller";
+import { ICreatorSelectionOwner } from "./selection-owner";
+import { PagesController } from "./pages-controller";
+import { SelectionHistory } from "./selection-history";
 
 import { TabEmbedPlugin } from "./components/tabs/embed";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
@@ -136,7 +136,7 @@ export class CreatorBase<T extends SurveyModel>
   private newQuestionChangedNames: {};
   private undoRedoManagerValue: UndoRedoManager;
   private pagesControllerValue: PagesController;
-  private selectionHistoryControllerValue: SelectionHistoryController;
+  private selectionHistoryControllerValue: SelectionHistory;
 
   private saveSurveyFuncValue: (
     no: number,
@@ -172,6 +172,28 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
+  public addPluginTab(
+    name: string,
+    plugin: ICreatorPlugin,
+    title?: string,
+    componentContent?: string,
+    index?: number
+  ) {
+    var tab = {
+      id: name,
+      title: !!title ? title : editorLocalization.getString("ed." + name),
+      componentContent: componentContent ? componentContent : "svc-tab-" + name,
+      data: plugin,
+      action: () => this.makeNewViewActive(name),
+      active: () => this.viewType === name
+    };
+    if (index >= 0 && index < this.tabs.length) {
+      this.tabs.splice(index, 0, tab);
+    } else {
+      this.tabs.push(tab);
+    }
+    this.addPlugin(name, plugin);
+  }
   public addPlugin(name: string, plugin: ICreatorPlugin) {
     this.plugins[name] = plugin;
   }
@@ -726,7 +748,7 @@ export class CreatorBase<T extends SurveyModel>
     }
     this.toolbarItemsValue = new CreatorToolbarItems();
     this.pagesControllerValue = new PagesController(this);
-    this.selectionHistoryControllerValue = new SelectionHistoryController(this);
+    this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.setOptions(this.options);
     this.patchMetadata();
     this.initTabs();
@@ -811,7 +833,7 @@ export class CreatorBase<T extends SurveyModel>
   public get pagesController(): PagesController {
     return this.pagesControllerValue;
   }
-  public get selectionHistoryController(): SelectionHistoryController {
+  public get selectionHistoryController(): SelectionHistory {
     return this.selectionHistoryControllerValue;
   }
 
@@ -1612,7 +1634,6 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
-
   private onSelectingElement(val: Base): Base {
     var options = { newSelectedElement: val };
     this.onSelectedElementChanging.fire(this, options);
@@ -2337,7 +2358,7 @@ export function getElementWrapperComponentName(
   ) {
     return "svc-matrix-cell";
   }
-  if (!element["parentQuestionValue"]) {
+  if (!element.parentQuestionValue && !element.isContentElement) {
     if (element instanceof Question) {
       if (element.getType() == "dropdown") {
         return isPopupEditorContent
@@ -2354,4 +2375,8 @@ export function getElementWrapperComponentName(
     }
   }
   return undefined;
+}
+export function isStringEditable(element: any, name: string): boolean {
+  return !element.parentQuestionValue && !element.isContentElement 
+         || element.locOwner && element.locOwner.getType && element.locOwner.getType() === "matrixdropdowncolumn";
 }

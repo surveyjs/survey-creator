@@ -14,12 +14,12 @@ import {
   SurveyModel
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
-import { EditableObject } from "../propertyEditors/editableObject";
+import { EditableObject } from "../editable-object";
 import { propertyGridCss } from "../property-grid-theme/property-grid";
 import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties
-} from "../questionEditors/questionEditor";
+} from "../question-editor/properties";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";

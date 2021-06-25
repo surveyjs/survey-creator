@@ -1,5 +1,5 @@
 import * as Survey from "survey-core";
-import { EditableObject } from "./propertyEditors/editableObject";
+import { EditableObject } from "./editable-object";
 
 export interface IUndoRedoChange {
   object: any;

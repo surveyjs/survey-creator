@@ -1,5 +1,5 @@
 import { Base, SurveyModel, EventBase, PageModel } from "survey-core";
-import { ICreatorSelectionOwner } from "./controller-base";
+import { ICreatorSelectionOwner } from "./selection-owner";
 
 export class PagesController extends Base {
   public onPagesChanged: EventBase<PagesController> = this.addEvent<PagesController>();

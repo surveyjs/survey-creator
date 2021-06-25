@@ -1,12 +1,12 @@
 import { Base, SurveyModel, EventBase, property } from "survey-core";
-import { ICreatorSelectionOwner } from "./controller-base";
+import { ICreatorSelectionOwner } from "./selection-owner";
 
 interface ISelectionHistoryItem {
   obj: Base;
   propertyName?: string;
 }
 
-export class SelectionHistoryController extends Base {
+export class SelectionHistory extends Base {
   private items: Array<ISelectionHistoryItem>;
   private isChangingInternally: boolean;
   constructor(public creator: ICreatorSelectionOwner) {

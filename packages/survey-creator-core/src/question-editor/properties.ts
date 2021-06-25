@@ -1,7 +1,7 @@
 import {
   SurveyQuestionEditorDefinition,
   ISurveyQuestionEditorDefinition,
-} from "./questionEditorDefinition";
+} from "./definition";
 import * as Survey from "survey-core";
 import { SurveyHelper } from "../surveyHelper";
 import { ISurveyCreatorOptions } from "../settings";

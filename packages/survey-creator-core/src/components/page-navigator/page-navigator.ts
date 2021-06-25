@@ -1,5 +1,5 @@
 import { CreatorBase } from "../../creator-base";
-import { PagesController } from "../../controllers/pages-controller";
+import { PagesController } from "../../pages-controller";
 import {
   IActionBarItem,
   PageModel,
