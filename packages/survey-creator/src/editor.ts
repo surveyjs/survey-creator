@@ -37,6 +37,7 @@ import { isPropertyVisible } from "./utils/utils";
 import { SurveyObjectProperty } from "./objectProperty";
 import { CreatorBase } from "./creator-base";
 import { IActionBarItem } from "survey-knockout";
+import { EditableObject } from "./entries";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
@@ -46,7 +47,8 @@ type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
 export class SurveyCreator
   extends CreatorBase<SurveyForDesigner>
-  implements ISurveyObjectEditorOptions {
+  implements ISurveyObjectEditorOptions
+{
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
   private renderedElement: HTMLElement;
 
@@ -645,7 +647,8 @@ export class SurveyCreator
       }
     });
 
-    this.propertyGridObjectEditorModel.onAfterRenderCallback = this.onEditorAfterRenderCallback;
+    this.propertyGridObjectEditorModel.onAfterRenderCallback =
+      this.onEditorAfterRenderCallback;
     this.propertyGridObjectEditorModel.onSortPropertyCallback = function (
       obj: any,
       property1: Survey.JsonObjectProperty,
@@ -827,7 +830,8 @@ export class SurveyCreator
       this.showSurveyTitle = options.showSurveyTitle;
     }
     if (typeof options.allowControlSurveyTitleVisibility !== "undefined") {
-      this.allowControlSurveyTitleVisibility = !!options.allowControlSurveyTitleVisibility;
+      this.allowControlSurveyTitleVisibility =
+        !!options.allowControlSurveyTitleVisibility;
     }
   }
 
@@ -1258,6 +1262,8 @@ export class SurveyCreator
     if (!object || !object.getType) {
       return true;
     }
+    if (EditableObject.isCopyObject(object) && propertyName === "page")
+      return false;
     var property = Survey.Serializer.findProperty(
       object.getType(),
       propertyName
