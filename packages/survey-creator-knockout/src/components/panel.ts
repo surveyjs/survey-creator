@@ -16,7 +16,7 @@ const template = require("./panel.html");
 class KnockoutPanelAdornerViewModel extends KnockoutQuestionAdornerViewModel {
   constructor(
     creator: CreatorBase<SurveyModel>,
-    panel: PanelModel,
+    public panel: PanelModel,
     templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, panel, templateData);

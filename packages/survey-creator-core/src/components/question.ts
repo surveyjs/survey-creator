@@ -31,6 +31,9 @@ export class QuestionAdornerViewModel extends Base {
     this.actions = creator.getContextActions(surveyElement);
   }
   select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
+    if(!model.surveyElement.isInteractiveDesignElement) {
+      return;
+    }
     event.stopPropagation();
     event.cancelBubble = true;
     model.creator.selectElement(model.surveyElement);

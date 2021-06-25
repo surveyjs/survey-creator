@@ -60,7 +60,7 @@ svc-question {
 .svc-question__content--selected,
 .svc-hovered > .svc-question__content--selected {
   border: 2px solid $secondary;
-  .svc-question__content-actions {
+  & > .svc-question__content-actions {
     display: block;
   }
 }
