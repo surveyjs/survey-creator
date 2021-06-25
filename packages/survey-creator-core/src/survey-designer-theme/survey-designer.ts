@@ -137,7 +137,7 @@ export var surveyDesignerCss = {
     mainRoot: "sd-question sd-row__question sd-question--boolean",
     root: "",
     item: "sd-boolean",
-    control: "sd-visuallyhidden",
+    control: "sd-boolean__control sd-visuallyhidden",
     itemChecked: "sd-boolean--checked",
     itemIndeterminate: "sd-boolean--indeterminate",
     itemDisabled: "sd-boolean--disabled",

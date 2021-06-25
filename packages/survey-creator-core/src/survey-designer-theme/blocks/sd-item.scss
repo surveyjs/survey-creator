@@ -1,6 +1,7 @@
 .sd-item {
   padding: 12px 0;
 }
+.sd-item--disabled.sd-item--disabled .sd-item__decorator,
 .sd-item__decorator {
   display: flex;
   align-items: center;
@@ -16,15 +17,17 @@
   }
   flex-shrink: 0;
 }
-.sd-item--checked:not(.sd-item--disabled) .sd-item__decorator,
+.sd-item--checked .sd-item__decorator,
+.sd-item__control:focus + .sd-item__decorator,
 .sd-item--allowhover:hover .sd-item__decorator {
   border: 2px $green solid;
   box-shadow: none;
 }
+.sd-item__control:focus + .sd-item__decorator,
 .sd-item--allowhover:hover .sd-item__decorator {
   background: $background;
 }
-.sd-item--checked:not(.sd-item--disabled) .sd-item__decorator {
+.sd-item--checked .sd-item__decorator {
   background: $green;
 }
 .sd-item__control-label {
