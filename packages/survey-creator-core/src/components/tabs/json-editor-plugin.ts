@@ -2,16 +2,7 @@ import { Base, SurveyModel } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { SurveyTextWorker } from "../../textWorker";
 
-export interface IJsonEditorModel {
-  isJSONChanged: boolean;
-  text: string;
-  readOnly: boolean;
-  onPluginActivate(): void;
-  processErrors(text: string): void;
-}
-
-export abstract class JsonEditorBaseModel extends Base implements IJsonEditorModel {
-  protected isInitialized: boolean = false;
+export abstract class JsonEditorBaseModel extends Base {
   public isJSONChanged: boolean = false;
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
@@ -22,9 +13,8 @@ export abstract class JsonEditorBaseModel extends Base implements IJsonEditorMod
   }
 
   public abstract text: string;
-  public abstract onEditorActivated(): void;
+  protected onEditorActivated(): void {}
   public onPluginActivate(): void {
-    if (!this.isInitialized) return;
     this.text = this.creator.text;
     this.onEditorActivated();
     this.isJSONChanged = false;
@@ -53,11 +43,11 @@ export abstract class JsonEditorBaseModel extends Base implements IJsonEditorMod
   }
 }
 
-export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel> implements ICreatorPlugin {
-  public model: TModel;
+export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
+  public model: JsonEditorBaseModel;
   constructor(private creator: CreatorBase<SurveyModel>) {}
   public activate(): void {
-    this.model.onPluginActivate();
+    this.model = this.createModel(this.creator);
   }
   public deactivate(): boolean {
     const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
@@ -67,6 +57,10 @@ export abstract class TabJsonEditorBasePlugin<TModel extends IJsonEditorModel> i
     if (!this.model.readOnly && this.model.isJSONChanged) {
       this.creator.text = this.model.text;
     }
+    this.model = undefined;
     return true;
   }
+  protected abstract createModel(
+    creator: CreatorBase<SurveyModel>
+  ): JsonEditorBaseModel;
 }
