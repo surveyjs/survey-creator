@@ -264,9 +264,8 @@ QUnit.test(
       "layout",
       "The name of the visible tab is 'html'"
     );
-    SurveyQuestionEditorDefinition.definition.html = JSON.parse(
-      savedDefinition
-    );
+    SurveyQuestionEditorDefinition.definition.html =
+      JSON.parse(savedDefinition);
   }
 );
 
@@ -439,7 +438,8 @@ QUnit.test("Check properties order for tab properties", function (assert) {
 });
 
 QUnit.test("Modify property.category in code", function (assert) {
-  var oldProperties = SurveyQuestionEditorDefinition.definition.question.properties.slice();
+  var oldProperties =
+    SurveyQuestionEditorDefinition.definition.question.properties.slice();
   var prop = Survey.Serializer.findProperty("question", "title");
   var oldCategory = prop.category;
   var oldVisibleIndex = prop.visibleIndex;
@@ -461,7 +461,8 @@ QUnit.test("Modify property.category in code", function (assert) {
 });
 
 QUnit.test("Add a property into new category", function (assert) {
-  var oldProperties = SurveyQuestionEditorDefinition.definition.question.properties.slice();
+  var oldProperties =
+    SurveyQuestionEditorDefinition.definition.question.properties.slice();
   var prop = Survey.Serializer.findProperty("question", "title");
   var oldCategory = prop.category;
   var oldCategoryIndex = prop.categoryIndex;
@@ -1201,9 +1202,8 @@ QUnit.test(
       "Choices updated immediately"
     );
 
-    SurveyQuestionEditorDefinition.definition.text = JSON.parse(
-      savedDefinition
-    );
+    SurveyQuestionEditorDefinition.definition.text =
+      JSON.parse(savedDefinition);
     Survey.Serializer.removeProperty("text", "targetEntity");
     Survey.Serializer.removeProperty("text", "targetField");
   }
@@ -1421,3 +1421,17 @@ QUnit.test(
     );
   }
 );
+QUnit.test("Do not show page editor in Modal Window", function (assert) {
+  var creator = new SurveyCreator();
+  var question = creator.survey.currentPage.addNewQuestion("text", "question1");
+  var editor = new SurveyQuestionEditor(question);
+  var layoutTab = editor.getTabByName("layout");
+  assert.ok(layoutTab.getPropertyEditorByName("width"));
+  assert.equal(layoutTab.getPropertyEditorByName("width").koVisible(), true);
+  assert.ok(layoutTab.getPropertyEditorByName("page"));
+  assert.equal(
+    layoutTab.getPropertyEditorByName("page").koVisible(),
+    false,
+    "We can't process page correctly in temporary object"
+  );
+});
