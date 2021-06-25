@@ -61,6 +61,16 @@ test("Select new added question", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question2");
 });
+test("Click on toolbox on empty survey", (): any => {
+  var creator = new CreatorTester();
+  creator.survey.pages.splice(0, 1);
+  expect(creator.survey.pages).toHaveLength(0);
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(creator.survey.pages[0].elements).toHaveLength(1);
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(creator.selectedElement.getType()).toEqual("text");
+});
 test("Update JSON before drag&drop", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {

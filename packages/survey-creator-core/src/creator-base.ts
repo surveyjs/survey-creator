@@ -1391,6 +1391,9 @@ export class CreatorBase<T extends SurveyModel>
     modifiedType: string = "ADDED_FROM_TOOLBOX",
     index: number = -1
   ) {
+    if (this.survey.pageCount == 0) {
+      this.survey.addNewPage();
+    }
     var parent = this.currentPage;
     var elElement = this.survey.selectedElement;
     if (elElement && elElement.parent) {
@@ -2377,5 +2380,8 @@ export function getElementWrapperComponentName(
   return undefined;
 }
 export function isStringEditable(element: any, name: string): boolean {
-  return !element.parentQuestionValue && !element.isContentElement || element.isEditableTemplateElement;
+  return (
+    (!element.parentQuestionValue && !element.isContentElement) ||
+    element.isEditableTemplateElement
+  );
 }
