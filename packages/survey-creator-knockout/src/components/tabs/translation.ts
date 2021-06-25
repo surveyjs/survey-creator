@@ -9,10 +9,9 @@ ko.components.register("svc-tab-translation", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const plugin: TabTranslationPlugin = params.data;
-      new ImplementorBase(plugin.model);
-      plugin.model.onTranslationObjCreated = (obj: Base) => {
+      plugin.model.makeObservable((obj: Base) => {
         new ImplementorBase(obj);
-      };
+      });
       return plugin.model;
     }
   },

@@ -19,7 +19,8 @@ test("Fire callback on base objects creation", () => {
   var q = survey.pages[0].addNewQuestion("text", "q1");
   q.title = "some value";
   var cretorHash = {};
-  var translation = new Translation(survey, null, (obj: Base) => {
+  var translation = new Translation(survey, null);
+  translation.makeObservable((obj: Base) => {
     var type = obj.getType();
     if (!cretorHash[type]) {
       cretorHash[type] = 0;
@@ -27,8 +28,8 @@ test("Fire callback on base objects creation", () => {
     cretorHash[type] = cretorHash[type] + 1;
   });
   expect(cretorHash["translation"]).toEqual(1);
-  expect(cretorHash["translationgroup"]).toEqual(5);
-  expect(cretorHash["translationitem"]).toEqual(2);
+  expect(cretorHash["translationgroup"]).toEqual(3);
+  expect(cretorHash["translationitem"]).toEqual(1);
   expect(cretorHash["translationitemstring"]).toBeFalsy();
   var group = translation.root.groups[0];
   expect(group.items).toHaveLength(1);
@@ -277,8 +278,29 @@ test("Translation show All strings and property visibility", () => {
   });
   var tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
-  var translation = tabTranslation.model.translation;
+  var translation = tabTranslation.model;
   expect(translation.root.locItems).toHaveLength(1);
   translation.showAllStrings = true;
   expect(translation.root.locItems).toHaveLength(2);
+});
+test("Translation make translation observable", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    completedHtml: "Test",
+    pages: [
+      {
+        title: "title1",
+        elements: [{ type: "checkbox", name: "question1" }]
+      }
+    ]
+  };
+  var tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  var translation = tabTranslation.model;
+  translation.makeObservable((obj: Base) => {
+    obj["tag"] = "Hello!";
+  });
+  expect(translation["tag"]).toEqual("Hello!");
+  expect(translation.root.locItems[0]["tag"]).toEqual("Hello!");
+  expect(translation.root.locItems[0].values("en")["tag"]).toEqual("Hello!");
 });

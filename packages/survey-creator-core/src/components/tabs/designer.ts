@@ -109,15 +109,7 @@ export class TabDesignerPlugin<T extends SurveyModel>
   private redoAction: ActionBarItem;
   private surveySettingsAction: ActionBarItem;
   constructor(private creator: CreatorBase<T>) {
-    creator.tabs.push({
-      id: "designer",
-      title: getLocString("ed.designer"),
-      componentContent: "svc-tab-designer",
-      data: this,
-      action: () => this.creator.makeNewViewActive("designer"),
-      active: () => this.creator.viewType === "designer"
-    });
-    creator.addPlugin("designer", this);
+    creator.addPluginTab("designer", this);
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);

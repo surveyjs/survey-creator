@@ -6,47 +6,18 @@ import {
   SurveyElementBase,
   Survey
 } from "survey-react-ui";
-import {
-  TabTranslationPlugin,
-  TranslationModel,
-  Translation
-} from "@survey/creator";
+import { Translation } from "@survey/creator";
 
 export class TabTranslationComponent extends SurveyElementBase<any, any> {
-  private model: TranslationModel;
-
-  constructor(props: any) {
-    super(props);
-    const plugin: TabTranslationPlugin = this.props.data;
-    this.model = plugin.model;
-  }
-
-  protected getStateElement(): Base {
-    return this.model;
-  }
-
-  render(): JSX.Element {
-    if (!this.model.showTranslation) return null;
-    return (
-      <TranslationUIComponent
-        model={this.model.translation}
-      ></TranslationUIComponent>
-    );
-  }
-}
-
-export class TranslationUIComponent extends SurveyElementBase<any, any> {
-  constructor(props: any) {
-    super(props);
-  }
   private get model(): Translation {
-    return this.props.model;
+    return this.props.data.model;
   }
 
   protected getStateElement(): Base {
     return this.model;
   }
   render(): JSX.Element {
+    if (!this.model) return null;
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-plugin-tab__content svc-translation-tab__content">

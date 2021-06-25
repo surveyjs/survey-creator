@@ -13,7 +13,15 @@ import {
 import { PageViewModel } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
-import { getElementWrapperComponentName, isStringEditable } from "../src/creator-base";
+import { TabTestPlugin } from "../src/components/tabs/test";
+import { TabTranslationPlugin } from "../src/components/tabs/translation";
+import { TabLogicPlugin } from "../src/components/tabs/logic-ui";
+import { TabEmbedPlugin } from "../src/components/tabs/embed";
+
+import {
+  getElementWrapperComponentName,
+  isStringEditable
+} from "../src/creator-base";
 import { SurveyHelper } from "../src/surveyHelper";
 import { CreatorTester } from "./creator-tester";
 
@@ -778,4 +786,42 @@ test("isStringEditable", (): any => {
   expect(
     isStringEditable({ isContentElement: true, isEditableTemplateElement: true }, "")
   ).toBeTruthy();
+});
+test("Test plug-ins in creator", (): any => {
+  const creator = new CreatorTester({
+    showTranslationTab: true,
+    showLogicTab: true,
+    showEmbeddedSurveyTab: true
+  });
+  expect(creator.viewType).toEqual("designer");
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model).toBeTruthy();
+  var testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  expect(testPlugin.model).toBeFalsy();
+  creator.makeNewViewActive("test");
+  expect(designerPlugin.model).toBeFalsy();
+  expect(testPlugin.model).toBeTruthy();
+  var logicPlugin = <TabLogicPlugin>creator.getPlugin("logic");
+  var translationPlugin = <TabTranslationPlugin>(
+    creator.getPlugin("translation")
+  );
+  var embedPlugin = <TabEmbedPlugin>creator.getPlugin("embed");
+  expect(logicPlugin.model).toBeFalsy();
+  expect(translationPlugin.model).toBeFalsy();
+  expect(embedPlugin.model).toBeFalsy();
+
+  creator.makeNewViewActive("logic");
+  expect(testPlugin.model).toBeFalsy();
+  expect(logicPlugin.model).toBeTruthy();
+  creator.makeNewViewActive("translation");
+  expect(logicPlugin.model).toBeFalsy();
+  expect(translationPlugin.model).toBeTruthy();
+  creator.makeNewViewActive("embed");
+  expect(translationPlugin.model).toBeFalsy();
+  expect(embedPlugin.model).toBeTruthy();
+  creator.makeNewViewActive("designer");
+  expect(embedPlugin.model).toBeFalsy();
+  expect(designerPlugin.model).toBeTruthy();
 });

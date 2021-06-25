@@ -23,12 +23,12 @@ export class TabDesignerComponent extends SurveyElementBase<
   ITabDesignerComponentProps,
   any
 > {
-  private model: TabDesignerViewModel<SurveyModel>;
   constructor(props: ITabDesignerComponentProps) {
     super(props);
-    this.model = props.data.model;
   }
-
+  private get model(): TabDesignerViewModel<SurveyModel> {
+    return this.props.data.model;
+  }
   protected getStateElement(): Base {
     return this.model;
   }
@@ -79,8 +79,12 @@ export class TabDesignerComponent extends SurveyElementBase<
         <DesignerSurveyNavigationBlock survey={creator.survey} location="top" />{" "}
         <div className={"svc-tab-designer " + creator.survey.css.root}>
           <div className={creator.survey.css.container}>
-            <div onClick={function() { creator.selectElement(creator.survey); }}>
-            <SurveyHeader survey={survey}></SurveyHeader>
+            <div
+              onClick={function () {
+                creator.selectElement(creator.survey);
+              }}
+            >
+              <SurveyHeader survey={survey}></SurveyHeader>
             </div>
             {surveyPages}
           </div>

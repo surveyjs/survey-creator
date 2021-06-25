@@ -34,7 +34,7 @@ svc-question {
 }
 
 .svc-panel__placeholder_frame {
-  border: 1px dashed grey;
+  border: 1px dashed $border;
   width: 100%;
   height: calcSize(23);
 }

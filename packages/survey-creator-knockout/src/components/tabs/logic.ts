@@ -9,12 +9,6 @@ ko.components.register("svc-tab-logic", {
     createViewModel: (params: any, componentInfo: any) => {
       const plugin: TabLogicPlugin = params.data;
       new ImplementorBase(plugin.model);
-      if (!!plugin.model.logic) {
-        new ImplementorBase(plugin.model.logic);
-      }
-      plugin.model.onCreateLogic = (logic: SurveyLogicUI) => {
-        new ImplementorBase(logic);
-      };
       return plugin.model;
     }
   },

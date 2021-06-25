@@ -42,6 +42,9 @@ export class TranslationItemBase extends Base {
   }
   public fillLocales(locales: Array<string>) {}
   public mergeLocaleWithDefault(loc: string) {}
+  public makeObservable() {
+    this.fireOnObjCreating();
+  }
   protected fireOnObjCreating(obj: Base = null) {
     if (this.translation) {
       if (!obj) obj = this;
@@ -91,6 +94,12 @@ export class TranslationItem extends TranslationItemBase {
       }
     };
     this.fireOnObjCreating();
+  }
+  public makeObservable() {
+    super.makeObservable();
+    for (var loc in this.hashValues) {
+      this.fireOnObjCreating(this.hashValues[loc]);
+    }
   }
   public getType(): string {
     return "translationitem";
@@ -260,6 +269,12 @@ export class TranslationGroup extends TranslationItemBase {
   public fillLocales(locales: Array<string>) {
     for (var i = 0; i < this.items.length; i++) {
       this.items[i].fillLocales(locales);
+    }
+  }
+  public makeObservable() {
+    super.makeObservable();
+    for (var i = 0; i < this.items.length; i++) {
+      this.items[i].makeObservable();
     }
   }
   public get showAllStrings(): boolean {
@@ -502,12 +517,10 @@ export class Translation extends Base implements ITranslationLocales {
 
   constructor(
     survey: SurveyModel,
-    private options: ISurveyCreatorOptions = null,
-    onBaseObjCreating: (obj: Base) => void = null
+    private options: ISurveyCreatorOptions = null
   ) {
     super();
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
-    this.onBaseObjCreatingCallback = onBaseObjCreating;
     var self = this;
     this.exportToCSVFileUI = function () {
       self.exportToSCVFile("survey_translation.csv");
@@ -517,7 +530,6 @@ export class Translation extends Base implements ITranslationLocales {
       self.importFromCSVFile(el.files[0]);
       el.value = "";
     };
-    this.fireOnObjCreating(this);
     this.settingsSurveyValue = this.createSettingsSurvey();
     this.survey = survey;
     this.setupToolbarItems();
@@ -540,7 +552,11 @@ export class Translation extends Base implements ITranslationLocales {
    * @see IActionBarItem
    */
   @propertyArray() toolbarItems: Array<IActionBarItem>;
-
+  public makeObservable(onBaseObjCreating: (obj: Base) => void) {
+    this.onBaseObjCreatingCallback = onBaseObjCreating;
+    this.fireOnObjCreating(this);
+    this.root.makeObservable();
+  }
   public fireOnObjCreating(obj: Base) {
     if (!this.onBaseObjCreatingCallback) return;
     this.onBaseObjCreatingCallback(obj);
@@ -1092,14 +1108,6 @@ export class Translation extends Base implements ITranslationLocales {
       this.addLocaleIntoValue(locs[i], false);
     }
   }
-  private getSurveyPages(): Array<ItemValue> {
-    var res = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      var page = this.survey.pages[i];
-      res.push(new ItemValue(page.name, page.name));
-    }
-    return res;
-  }
   dispose() {
     this.importFinishedCallback = undefined;
     this.availableTranlationsChangedCallback = undefined;
@@ -1107,51 +1115,16 @@ export class Translation extends Base implements ITranslationLocales {
   }
 }
 
-export class TranslationModel extends Base {
-  onTranslationObjCreated: (obj: Base) => void;
-  constructor(private creator: CreatorBase<SurveyModel>) {
-    super();
-  }
-  @property() translation: Translation;
-  @property() showTranslation: boolean;
-  public activate(): void {
-    var translation = new Translation(
-      this.creator.survey,
-      this.creator,
-      (obj: Base) => {
-        if (!!this.onTranslationObjCreated) this.onTranslationObjCreated(obj);
-      }
-    );
-    this.translation = translation;
-    this.showTranslation = true;
-  }
-  public deactivate(): boolean {
-    this.showTranslation = false;
-    this.translation = undefined;
-    return true;
-  }
-}
-
 export class TabTranslationPlugin implements ICreatorPlugin {
-  public model: TranslationModel;
-  constructor(creator: CreatorBase<SurveyModel>) {
-    this.model = new TranslationModel(creator);
-    creator.tabs.push({
-      id: "translation",
-      title: editorLocalization.getString("ed.translation"),
-      componentContent: "svc-tab-translation",
-      data: this,
-      action: () => {
-        creator.makeNewViewActive("translation");
-      },
-      active: () => creator.viewType === "translation"
-    });
-    creator.addPlugin("translation", this);
+  public model: Translation;
+  constructor(private creator: CreatorBase<SurveyModel>) {
+    creator.addPluginTab("translation", this);
   }
   public activate(): void {
-    this.model.activate();
+    this.model = new Translation(this.creator.survey, this.creator);
   }
   public deactivate(): boolean {
-    return this.model.deactivate();
+    this.model = undefined;
+    return true;
   }
 }
