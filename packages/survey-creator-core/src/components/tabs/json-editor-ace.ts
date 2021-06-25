@@ -19,7 +19,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   }
 
   public get text(): string {
-    return this.aceEditor.getValue();
+    return !!this.aceEditor ? this.aceEditor.getValue() : "";
   }
   public set text(value: string) {
     this.isProcessingImmediately = true;
@@ -45,8 +45,8 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       self.onTextChanged();
     });
     this.aceEditor.getSession().setUseWorker(true);
-    SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
-    this.isInitialized = true;
+    SurveyTextWorker.newLineChar =
+      this.aceEditor.session.doc.getNewLineCharacter();
     this.onPluginActivate();
   }
   private updateUndoRedoState(): void {
@@ -88,21 +88,23 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   }
 }
 
-export class TabJsonEditorAcePlugin extends TabJsonEditorBasePlugin<AceJsonEditorModel> implements ICreatorPlugin {
+export class TabJsonEditorAcePlugin
+  extends TabJsonEditorBasePlugin
+  implements ICreatorPlugin
+{
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
-    this.model = new AceJsonEditorModel(creator);
-    creator.tabs.push({
-      id: "editor",
-      title: getLocString("ed.jsonEditor"),
-      componentContent: "svc-tab-json-editor-ace",
-      data: this,
-      action: () => {
-        creator.makeNewViewActive("editor");
-      },
-      active: () => creator.viewType === "editor"
-    });
-    creator.addPlugin("editor", this);
+    creator.addPluginTab(
+      "editor",
+      this,
+      getLocString("ed.jsonEditor"),
+      "svc-tab-json-editor-ace"
+    );
+  }
+  protected createModel(
+    creator: CreatorBase<SurveyModel>
+  ): JsonEditorBaseModel {
+    return new AceJsonEditorModel(creator);
   }
   public static hasAceEditor(): boolean {
     return typeof ace !== "undefined";

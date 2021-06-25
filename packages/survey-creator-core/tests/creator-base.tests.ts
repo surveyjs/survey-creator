@@ -17,6 +17,8 @@ import { TabTestPlugin } from "../src/components/tabs/test";
 import { TabTranslationPlugin } from "../src/components/tabs/translation";
 import { TabLogicPlugin } from "../src/components/tabs/logic-ui";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
+import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
+import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 
 import {
   getElementWrapperComponentName,
@@ -771,20 +773,17 @@ test("getElementWrapperComponentName", (): any => {
   ).toEqual(undefined);
 });
 test("isStringEditable", (): any => {
-  expect(
-    isStringEditable({ isContentElement: true }, "")
-  ).toBeFalsy();
-  expect(
-    isStringEditable({ parentQuestionValue: {} }, "")
-  ).toBeFalsy();
-  expect(
-    isStringEditable({}, "")
-  ).toBeTruthy();
+  expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
+  expect(isStringEditable({ parentQuestionValue: {} }, "")).toBeFalsy();
+  expect(isStringEditable({}, "")).toBeTruthy();
   expect(
     isStringEditable({ isEditableTemplateElement: true }, "")
   ).toBeTruthy();
   expect(
-    isStringEditable({ isContentElement: true, isEditableTemplateElement: true }, "")
+    isStringEditable(
+      { isContentElement: true, isEditableTemplateElement: true },
+      ""
+    )
   ).toBeTruthy();
 });
 test("Test plug-ins in creator", (): any => {
@@ -824,4 +823,41 @@ test("Test plug-ins in creator", (): any => {
   creator.makeNewViewActive("designer");
   expect(embedPlugin.model).toBeFalsy();
   expect(designerPlugin.model).toBeTruthy();
+});
+test("Test plug-ins JSON-Text in creator", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.viewType).toEqual("designer");
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model).toBeTruthy();
+  var textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  expect(textPlugin.model).toBeFalsy();
+  creator.makeNewViewActive("editor");
+  expect(textPlugin.model).toBeTruthy();
+  expect(designerPlugin.model).toBeFalsy();
+  creator.makeNewViewActive("designer");
+  expect(designerPlugin.model).toBeTruthy();
+  expect(textPlugin.model).toBeFalsy();
+});
+test("Test plug-ins JSON-Ace in creator", (): any => {
+  var oldFunc = TabJsonEditorAcePlugin.hasAceEditor;
+  TabJsonEditorAcePlugin.hasAceEditor = (): boolean => {
+    return true;
+  };
+  const creator = new CreatorTester();
+  expect(creator.viewType).toEqual("designer");
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model).toBeTruthy();
+  var textPlugin = <TabJsonEditorAcePlugin>creator.getPlugin("editor");
+  expect(textPlugin.model).toBeFalsy();
+  creator.makeNewViewActive("editor");
+  expect(textPlugin.model).toBeTruthy();
+  expect(designerPlugin.model).toBeFalsy();
+  creator.makeNewViewActive("designer");
+  expect(designerPlugin.model).toBeTruthy();
+  expect(textPlugin.model).toBeFalsy();
+  TabJsonEditorAcePlugin.hasAceEditor = oldFunc;
 });
