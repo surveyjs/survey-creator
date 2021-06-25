@@ -771,11 +771,23 @@ test("getElementWrapperComponentName", (): any => {
   ).toEqual(undefined);
 });
 test("isStringEditable", (): any => {
-  expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
-  expect(isStringEditable({ parentQuestionValue: {} }, "")).toBeFalsy();
-  expect(isStringEditable({}, "")).toBeTruthy();
+  expect(
+    isStringEditable({ isContentElement: true }, "")
+  ).toBeFalsy();
+  expect(
+    isStringEditable({ parentQuestionValue: {} }, "")
+  ).toBeFalsy();
+  expect(
+    isStringEditable({}, "")
+  ).toBeTruthy();
+  expect(
+    isStringEditable({ isEditableTemplateElement: true }, "")
+  ).toBeTruthy();
+  expect(
+    isStringEditable({ isContentElement: true, isEditableTemplateElement: true }, "")
+  ).toBeTruthy();
 });
-test("Test plig-ins in creator", (): any => {
+test("Test plug-ins in creator", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
     showLogicTab: true,
