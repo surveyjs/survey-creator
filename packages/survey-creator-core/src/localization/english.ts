@@ -44,7 +44,7 @@ export var enStrings = {
     buttongroup: "Button group",
     flowpanel: "Flow Panel"
   },
-  //Strings in Editor
+  //Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Default ({0})",
     survey: "Survey",
@@ -126,6 +126,8 @@ export var enStrings = {
     fpAddQuestion: "Add question...",
     selectPage: "Select page...",
     chooseElement: "Choose element...",
+    htmlPlaceHolder: "HTML content will be here.",
+    panelPlaceHolder: "Drop a question from the toolbox here.",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
       addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
