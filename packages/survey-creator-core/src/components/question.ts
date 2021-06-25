@@ -68,7 +68,10 @@ export class QuestionAdornerViewModel extends Base {
   }
 
   public get placeholderText(): string {
-    return "Drop questions here";
+    if (this.surveyElement instanceof QuestionHtmlModel) {
+      return "HTML content will be here.";
+    }
+    return "Drop a question from the toolbox here.";
   }
 
   private get dragDropHelper(): DragDropHelper {
