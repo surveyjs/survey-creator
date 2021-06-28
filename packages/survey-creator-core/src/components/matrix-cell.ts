@@ -74,7 +74,7 @@ export class MatrixCellWrapperViewModel extends Base {
     event.stopPropagation();
   }
   public hover(event: MouseEvent, element: HTMLElement) {
-    if(this.context && this.context.getPropertyValue) {
+    if(!this.row && this.context && this.context.getPropertyValue && this.context.getType && this.context.getType() !== "itemvalue") {
       toggleHovered(event, element);
     }
   }

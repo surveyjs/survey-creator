@@ -1,4 +1,4 @@
-import { QuestionRatingModel } from "survey-core";
+import { QuestionRatingModel, Event } from "survey-core";
 import { MatrixCellWrapperViewModel } from "../src/components/matrix-cell";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 
@@ -44,7 +44,8 @@ test("MatrixCellWrapperViewModel select context", () => {
     const creator: any = {
         selectedElement: undefined,
         selectedProperty: undefined,
-        selectElement: undefined
+        selectElement: undefined,
+        onSelectedElementChanged: new Event()
     };
     creator.selectElement = (element: any, property?: string, focus?: boolean) => {
         creator.selectedElement = element;

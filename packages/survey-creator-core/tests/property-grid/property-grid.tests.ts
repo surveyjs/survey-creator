@@ -46,7 +46,7 @@ import {
 import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties
-} from "../../src/questionEditors/questionEditor";
+} from "../../src/question-editor/properties";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
