@@ -67,7 +67,17 @@ export class TestSurveyTabViewModel extends Base {
       target.survey.locale = val;
     }
   })
-  activeLanguage: string;
+  public get activeLanguage(): string {
+    return this.getPropertyValue(
+      "activeLanguage",
+      this.survey.locale || surveyLocalization.defaultLocale
+    );
+  }
+  public set activeLanguage(val: string) {
+    if (val === this.activeLanguage) return;
+    this.setPropertyValue("activeLanguage", val);
+    this.survey.locale = val;
+  }
 
   @property({
     defaultValue: false,
@@ -174,8 +184,6 @@ export class TestSurveyTabViewModel extends Base {
     this.showInvisibleElements = false;
     this.pages = pages;
     this.activePage = this.survey.currentPage;
-    this.activeLanguage =
-      this.survey.locale || surveyLocalization.defaultLocale;
     this.buildActions();
     this.isRunning = true;
   }
@@ -211,7 +219,7 @@ export class TestSurveyTabViewModel extends Base {
         model: new ListModel(
           this.languages,
           (item: any) => {
-            this.survey.locale = item.id;
+            this.activeLanguage = item.id;
             languagePopupModel.toggleVisibility();
           },
           true
@@ -322,12 +330,7 @@ export class TestSurveyTabViewModel extends Base {
       id: "languageSelector",
       css: "sv-action--last sv-action-bar-item--secondary",
       iconName: "icon-change_16x16",
-      title: () =>
-        editorLocalization.getLocaleName(
-          !!this.survey.locale
-            ? this.survey.locale
-            : surveyLocalization.defaultLocale
-        ),
+      title: () => editorLocalization.getLocaleName(this.activeLanguage),
       visible: this.showDefaultLanguageInTestSurveyTab,
       component: "sv-action-bar-item-dropdown",
       action: () => {
