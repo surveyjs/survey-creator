@@ -4,6 +4,24 @@
   position: relative;
 }
 
+.svc-matrix-cell--selected {
+  position: absolute;
+  border: 2px solid $secondary;
+  top: calcSize(-2);
+  left: calcSize(-0.25);
+  right: calcSize(-0.25);
+  bottom: calcSize(-2);
+  display: none;
+  &.svc-visible {
+    display: block;
+  }
+}
+
+.svc-hovered > .svc-matrix-cell--selected:not(.svc-visible) {
+  border: 1px solid $secondary;
+  display: block;
+}
+
 .svc-matrix-cell__question-controls {
   display: none;
   position: absolute;

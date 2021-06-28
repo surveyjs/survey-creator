@@ -1,4 +1,5 @@
-<div class="svc-matrix-cell"  data-bind="click: selectContext">
+<div class="svc-matrix-cell"  data-bind="click: selectContext, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
+  <div class="svc-matrix-cell--selected" data-bind="css: { 'svc-visible': isSelected }"></div>
 
   <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
   <!-- /ko -->

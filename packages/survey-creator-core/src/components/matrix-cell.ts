@@ -4,9 +4,11 @@ import {
   Question,
   settings,
   MatrixDropdownColumn,
+  property,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
+import { toggleHovered } from "../utils/utils";
 
 import "./matrix-cell.scss";
 
@@ -16,7 +18,18 @@ export class MatrixCellWrapperViewModel extends Base {
     // if(!question && !!this.templateData.data) {
     //   this.question = this.templateData.data;
     // }
+    creator.onSelectedElementChanged.add(this.onSelectionChanged);
   }
+  @property() isSelected: boolean;
+
+  private onSelectionChanged = (sender, options) => {
+    if(this.context && this.context.getPropertyValue) {
+      this.isSelected = this.creator.isElementSelected(this.context);
+    } else {
+      this.isSelected = false;
+    }
+  }
+
   public editQuestion(model: MatrixCellWrapperViewModel) {
     const column: MatrixDropdownColumn = model.question.parentQuestion.getColumnByName(model.question.name);
     let questionJSON = model.question.toJSON();
@@ -59,5 +72,13 @@ export class MatrixCellWrapperViewModel extends Base {
       model.creator.selectElement(model.context);
     }
     event.stopPropagation();
+  }
+  public hover(event: MouseEvent, element: HTMLElement) {
+    if(this.context && this.context.getPropertyValue) {
+      toggleHovered(event, element);
+    }
+  }
+  public dispose() {
+    this.creator.onSelectedElementChanged.remove(this.onSelectionChanged);
   }
 }

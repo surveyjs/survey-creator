@@ -54,6 +54,39 @@ test("Matrix dropdown question", async (t) => {
     await t.expect(Selector(`h5[aria-label='Row count'].spg-title`).visible).ok();
 });
 
+test("Matrix dropdown question select column", async (t) => {
+    await t.expect(Selector(".svc-question__content").exists).notOk();
+    await t.expect(Selector(`.svc-property-panel__title`).innerText).eql("Survey");
+
+    await t.hover(Selector(`div[title="Matrix (multiple choice)"]`), {speed: 0.5});
+    await t.click(Selector(`div[title="Matrix (multiple choice)"]`), {speed: 0.5});
+    await t.expect(Selector(".svc-question__content").exists).ok();
+    await t.expect(Selector(`.svc-property-panel__title`).innerText).eql("Question");
+    await t.expect(Selector(`.svc-matrix-cell--selected`).visible).notOk();
+
+    await t.hover(Selector(`.svc-matrix-cell`), {speed: 0.5});
+    await t.expect(Selector(`.svc-matrix-cell--selected`).visible).ok();
+
+    await t.click(Selector(`.sv-string-editor`).withText('Column 1'));
+    await t.expect(Selector(`.svc-matrix-cell--selected.svc-visible`).visible).ok();
+});
+
+test("Matrix dynamic question select column", async (t) => {
+    await t.expect(Selector(".svc-question__content").exists).notOk();
+    await t.expect(Selector(`.svc-property-panel__title`).innerText).eql("Survey");
+
+    await t.hover(Selector(`div[title="Matrix (dynamic rows)"]`), {speed: 0.5});
+    await t.click(Selector(`div[title="Matrix (dynamic rows)"]`), {speed: 0.5});
+    await t.expect(Selector(".svc-question__content").exists).ok();
+    await t.expect(Selector(`.svc-property-panel__title`).innerText).eql("Question");
+    await t.expect(Selector(`.svc-matrix-cell--selected`).visible).notOk();
+
+    await t.hover(Selector(`.svc-matrix-cell`), {speed: 0.5});
+    await t.expect(Selector(`.svc-matrix-cell--selected`).visible).ok();
+
+    await t.click(Selector(`.sv-string-editor`).withText('Column 1'));
+    await t.expect(Selector(`.svc-matrix-cell--selected.svc-visible`).visible).ok();
+});
 test("Dynamic panel inner panel not selectable", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
 
