@@ -36,31 +36,38 @@ export class QuestionAdornerComponent extends SurveyElementBase<
     if (this.model.isDragged) {
       return null;
     }
+    const allowInteractions = this.model.surveyElement.isInteractiveDesignElement;
+    let content = (<>
+            {this.props.element}
+            {this.renderPanelPlaceholder()}
+    </>);
+    if(allowInteractions) {
+      content = (          <div
+        className={"svc-question__content " + this.model.css()}
+        onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
+      >
+        <div className={"svc-question__drag-area"}>
+            <div
+              className={"svc-question__drag-element"}
+              onPointerDown={(event:any) => this.model.startDragSurveyElement(event)}
+            ></div>
+        </div>
+        {content}
+        <div className="svc-question__content-actions">
+          <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+        </div>
+      </div>);
+    }
 
     return (
       <React.Fragment>
         <div
           data-svc-drop-target-element-name={this.model.surveyElement.name}
           className={"svc-question__adorner"}
-          onMouseOut={e => toggleHovered(e.nativeEvent, e.currentTarget)}
-          onMouseOver={e => toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOut={e => allowInteractions && toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOver={e => allowInteractions && toggleHovered(e.nativeEvent, e.currentTarget)}
         >
-          <div
-            className={"svc-question__content " + this.model.css()}
-            onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
-          >
-            <div className={"svc-question__drag-area"}>
-                <div
-                  className={"svc-question__drag-element"}
-                  onPointerDown={(event:any) => this.model.startDragSurveyElement(event)}
-                ></div>
-            </div>
-            {this.props.element}
-            {this.renderPanelPlaceholder()}
-            <div className="svc-question__content-actions">
-              <SurveyActionBar items={this.model.actions}></SurveyActionBar>
-            </div>
-          </div>
+        {content}
         </div>
       </React.Fragment >
     );

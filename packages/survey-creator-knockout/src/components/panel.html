@@ -2,6 +2,7 @@
   class="svc-question__adorner"
   data-bind="attr: { 'data-svc-drop-target-element-name': surveyElement.name }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
+  <!-- ko if: panel.isInteractiveDesignElement -->
   <div
     class="svc-question__content"
     data-bind="click: koSelect, clickBubble: false, css: css()"
@@ -27,4 +28,17 @@
       <!-- /ko -->
     </div>
   </div>
+  <!-- /ko -->
+  <!-- ko ifnot: panel.isInteractiveDesignElement -->
+    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
+    <!-- /ko -->
+    <!-- ko if: isEmptyElement -->
+    <div class="svc-panel__placeholder_frame">
+      <div
+        class="svc-panel__placeholder"
+        data-bind="text: placeholderText"
+      ></div>
+    </div>
+    <!-- /ko -->
+  <!-- /ko -->
 </div>

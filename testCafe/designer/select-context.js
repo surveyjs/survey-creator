@@ -87,3 +87,14 @@ test("Matrix dynamic question select column", async (t) => {
     await t.click(Selector(`.sv-string-editor`).withText('Column 1'));
     await t.expect(Selector(`.svc-matrix-cell--selected.svc-visible`).visible).ok();
 });
+test("Dynamic panel inner panel not selectable", async (t) => {
+    await t.expect(Selector(".svc-question__content").exists).notOk();
+
+    await t.hover(Selector(`div[title="Panel (dynamic panels)"]`), {speed: 0.5});
+    await t.click(Selector(`div[title="Panel (dynamic panels)"]`), {speed: 0.5});
+    await t.expect(Selector(".svc-question__adorner").exists).ok();
+    await t.expect(Selector(".svc-question__content").exists).ok();
+    await t.expect(Selector(".svc-question__adorner .svc-question__adorner").exists).ok();
+    await t.expect(Selector(".svc-question__content .svc-question__content").exists).notOk();
+    await t.expect(Selector(".svc-question__adorner .svc-question__adorner>.svc-panel__placeholder_frame").exists).ok();
+});
