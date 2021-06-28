@@ -53,3 +53,15 @@ test("Matrix dropdown question", async (t) => {
     await t.expect(Selector(`h5[aria-label='Columns'].spg-title`).visible).notOk();
     await t.expect(Selector(`h5[aria-label='Row count'].spg-title`).visible).ok();
 });
+
+test("Dynamic panel inner panel not selectable", async (t) => {
+    await t.expect(Selector(".svc-question__content").exists).notOk();
+
+    await t.hover(Selector(`div[title="Panel (dynamic panels)"]`), {speed: 0.5});
+    await t.click(Selector(`div[title="Panel (dynamic panels)"]`), {speed: 0.5});
+    await t.expect(Selector(".svc-question__adorner").exists).ok();
+    await t.expect(Selector(".svc-question__content").exists).ok();
+    await t.expect(Selector(".svc-question__adorner .svc-question__adorner").exists).ok();
+    await t.expect(Selector(".svc-question__content .svc-question__content").exists).notOk();
+    await t.expect(Selector(".svc-question__adorner .svc-question__adorner>.svc-panel__placeholder_frame").exists).ok();
+});

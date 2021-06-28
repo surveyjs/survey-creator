@@ -28,6 +28,9 @@ export class KnockoutQuestionAdornerViewModel extends QuestionAdornerViewModel {
     return new KnockoutMouseEvent(event);
   }
   public hover(event: MouseEvent, element: HTMLElement) {
+    if(!this.surveyElement.isInteractiveDesignElement) {
+      return;
+    }
     toggleHovered(event, element);
   }
 }
