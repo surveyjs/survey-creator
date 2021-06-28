@@ -1,6 +1,6 @@
 import React from "react";
 import { QuestionSelectBase, Base, ItemValue, SurveyModel } from "survey-core";
-import { MatrixCellWrapperViewModel } from "@survey/creator";
+import { MatrixCellWrapperViewModel, toggleHovered } from "@survey/creator";
 import {
   ReactElementFactory,
   SurveyElementBase,
@@ -45,8 +45,14 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
 
     return (
       <div
-        className={"svc-matrix-cell"} key={this.props.element.key} onClick={(e: any) => !this.props.question && this.model.selectContext(this.model, e)}
+        className={"svc-matrix-cell"}
+        key={this.props.element.key}
+        onClick={(e: any) => !this.props.question && this.model.selectContext(this.model, e)}
+        onMouseOut={e => this.model.hover(e.nativeEvent, e.currentTarget)}
+        onMouseOver={e => this.model.hover(e.nativeEvent, e.currentTarget)}
       >
+        <div className={"svc-matrix-cell--selected" + (this.model.isSelected ? " svc-visible" : "")}></div>
+
         {this.props.element}
 
         {controls}
