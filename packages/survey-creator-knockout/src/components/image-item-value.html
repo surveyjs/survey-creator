@@ -1,6 +1,6 @@
 <div
   class="svc-image-item-value-wrapper"
-  data-bind="attr: attributes, event: {pointerdown: (model, event)=>{startDragItemValue(event)}}, css: { 'svc-image-item-value--new': isNew }"
+  data-bind="attr: attributes, event: { pointerdown: function(model, event) { startDragItemValue(event); } }, css: { 'svc-image-item-value--new': isNew }"
 >  
   <input type="file" accept="image/*" class="svc-choose-file-input"/>
 
@@ -14,7 +14,7 @@
     <!-- /ko -->
   </div>
 
-  <div class="svc-image-item-value-controls">
+  <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
     <sv-svg-icon
       class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
       data-bind="click: chooseFile"
@@ -44,10 +44,10 @@
     </div>
   </div>
 
-  <div class="svc-image-item-value-controls">
+  <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
     <sv-svg-icon
       class="svc-image-item-value-controls__button svc-image-item-value-controls__add"
-      data-bind="click: chooseNewFile"
+      data-bind="click: chooseNewFile, clickBubble: false"
       params="iconName: 'icon-add-item-value', size: 24"
     ></sv-svg-icon>
   </div>
