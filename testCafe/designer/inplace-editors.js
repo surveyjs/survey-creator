@@ -676,6 +676,36 @@ test("Image picker question inplace editor", async (t) => {
     await t.setFilesToUpload(items.nth(4).find('.svc-choose-file-input'), "./image.jpg");
 });
 
+test("Image picker question inplace editor - add new item", async (t) => {
+    await t.expect(Selector(".svc-question__content").exists).notOk();
+    await t.hover(Selector(`div[title='Image picker']`), {speed: 0.5});
+    await t.click(Selector(`div[title='Image picker']`), {speed: 0.5});
+    await t
+        .expect(
+            Selector(".svc-question__content.svc-question__content--selected")
+                .exists
+        )
+        .ok();
+
+    const items = Selector(".svc-image-item-value-wrapper");
+    await t.expect(items.count).eql(5);
+
+    await t.click(Selector('.svc-image-item-value-controls__add'));
+    const input = await items.nth(4).find('input.svc-choose-file-input');
+    await t.setFilesToUpload(input, "./image.jpg");
+
+    const newItems = Selector(".svc-image-item-value-wrapper");
+    await t.expect(newItems.count).eql(6);
+    await t.expect(newItems.nth(4).find('img').visible).ok();
+
+    const getImageLink = ClientFunction(() => {
+        return document.querySelectorAll("img.sd-imagepicker__image")[4].src;
+    });
+    let imageLink = await getImageLink();
+    await t.expect(imageLink.substring(0, 48)).eql("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABA");
+
+});
+
 test("Image question inplace editor", async (t) => {
     await t.expect(Selector(".svc-question__content").exists).notOk();
     await t.hover(Selector(`div[title=Image]`), {speed: 0.5});
