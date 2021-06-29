@@ -272,9 +272,7 @@ export class TestSurveyTabViewModel extends Base {
       visible: () => this.isRunning && this.pages.length > 1,
       enabled: () => this.survey && !this.survey.isFirstPage,
       title: "",
-      action: () => {
-        this.activePage = this.survey.pages[this.survey.currentPageNo - 1];
-      }
+      action: () => this.survey.prevPage()
     });
 
     this.pagePopupModel = new PopupModel(
@@ -322,9 +320,7 @@ export class TestSurveyTabViewModel extends Base {
       visible: () => this.isRunning && this.pages.length > 1,
       enabled: () => this.survey && !this.survey.isLastPage,
       title: "",
-      action: () => {
-        this.activePage = this.survey.pages[this.survey.currentPageNo + 1];
-      }
+      action: () => this.survey.nextPage()
     });
     actions.push({
       id: "languageSelector",
