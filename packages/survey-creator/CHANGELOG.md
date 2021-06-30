@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.54](https://github.com/surveyjs/survey-creator/compare/v1.8.53...v1.8.54) (2021-06-30)
+
+
+### Bug Fixes
+
+* Throw exception if try adding question in empty survey by toolbox click [#1414](https://github.com/surveyjs/survey-creator/issues/1414) ([#1432](https://github.com/surveyjs/survey-creator/issues/1432)) ([94ea900](https://github.com/surveyjs/survey-creator/commit/94ea900f2c8c21bb55719995c1cb63e25fa3ea50))
+
 ### [1.8.53](https://github.com/surveyjs/survey-creator/compare/v1.8.52...v1.8.53) (2021-06-23)
 
 
