@@ -1,3 +1,5 @@
+import { Question } from "survey-core";
+import { ImageItemValue, ItemValue } from "survey-core";
 import { DragDropHelper } from "../src/dragdrophelper";
 
 test("doDropItemValue", () => {
@@ -136,4 +138,24 @@ test("calculateIsEdge", () => {
 
   result = ddHelper["calculateIsEdge"](testElement, 200);
   expect(result).toEqual(true);
+});
+
+test("isItemValueBeingDragged for itemvalue and it descendants", () => {
+  let ddHelper: any = new DragDropHelper(null);
+
+  ddHelper.draggedSurveyElement = new ItemValue(null);
+  expect(ddHelper.isItemValueBeingDragged()).toBeTruthy();
+  ddHelper.draggedSurveyElement = new ImageItemValue(null);
+  expect(ddHelper.isItemValueBeingDragged()).toBeTruthy();
+});
+
+test("dropTargetDataAttributeName for itemvalue and it descendants", () => {
+  let ddHelper: any = new DragDropHelper(null);
+
+  ddHelper.draggedSurveyElement = new ItemValue(null);
+  expect(ddHelper.dropTargetDataAttributeName).toBe("[data-svc-drop-target-item-value]");
+  ddHelper.draggedSurveyElement = new ImageItemValue(null);
+  expect(ddHelper.dropTargetDataAttributeName).toBe("[data-svc-drop-target-item-value]");
+  ddHelper.draggedSurveyElement = new Question(null);
+  expect(ddHelper.dropTargetDataAttributeName).toBe("[data-svc-drop-target-element-name]");
 });
