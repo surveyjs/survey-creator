@@ -21,4 +21,9 @@
   background: $background;
   box-sizing: border-box;
   box-shadow: inset 0px -1px 0px $border;
+
+  .sv-action-bar {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }
