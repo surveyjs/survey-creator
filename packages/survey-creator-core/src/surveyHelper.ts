@@ -81,10 +81,12 @@ export class SurveyHelper {
   }
 
   public static getObjectName(obj: any, showObjectTitle = false): string {
+    var objType = SurveyHelper.getObjectType(obj);
+    if (objType === ObjType.Survey)
+      return editorLocalization.getString("ed.surveyTypeName");
     if (showObjectTitle && obj["title"]) return obj["title"];
     if (showObjectTitle && obj["text"]) return obj["text"];
     if (obj["name"]) return obj["name"];
-    var objType = SurveyHelper.getObjectType(obj);
     if (objType != ObjType.Page) return "";
     var data = <SurveyModel>(<PageModel>obj)["data"];
     if (!data) data = <SurveyModel>(<PageModel>obj)["survey"]; //TODO

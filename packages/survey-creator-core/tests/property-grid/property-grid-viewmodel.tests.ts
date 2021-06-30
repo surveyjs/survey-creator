@@ -19,9 +19,9 @@ test("Generate and update title correctly", () => {
   var model = new PropertyGridViewModel(propertyGrid, null);
   expect(model.title).toEqual("Survey");
   propertyGrid.obj = survey.getQuestionByName("question1");
-  expect(model.title).toEqual("Question");
+  expect(model.title).toEqual("question1");
   propertyGrid.survey.getQuestionByName("name").value = "Q1";
-  expect(model.title).toEqual("Question");
+  expect(model.title).toEqual("Q1");
   propertyGrid.options.getObjectDisplayName = (
     obj: Base,
     reason: string,
@@ -46,7 +46,7 @@ test("Prev/next correctly, including columns via actions", () => {
   );
   expect(model.title).toEqual("Survey");
   creator.selectElement(matrix);
-  expect(model.title).toEqual("Question");
+  expect(model.title).toEqual("q1");
   var columnsQuestion =
     creator.propertyGrid.survey.getQuestionByName("columns");
   expect(columnsQuestion).toBeTruthy();
@@ -58,11 +58,11 @@ test("Prev/next correctly, including columns via actions", () => {
   );
   actions[0].action();
   expect(creator.propertyGrid.survey.editingObj["name"]).toEqual("col1");
-  expect(model.title).toEqual("Column");
+  expect(model.title).toEqual("col1");
   expect(creator.selectedElementName).toEqual("col1");
   creator.selectionHistoryController.prev();
   expect(creator.selectedElementName).toEqual("q1");
-  expect(model.title).toEqual("Question");
+  expect(model.title).toEqual("q1");
   var panelColumns = <PanelModel>(
     creator.propertyGrid.survey.getPanelByName("columns")
   );

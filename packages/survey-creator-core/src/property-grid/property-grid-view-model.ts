@@ -3,11 +3,11 @@ import {
   SurveyModel,
   property,
   propertyArray,
-  IActionBarItem,
+  IActionBarItem
 } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
-import { SurveyHelper } from "../surveyHelper";
+import { ObjType, SurveyHelper } from "../surveyHelper";
 import { editorLocalization } from "../editorLocalization";
 
 export class PropertyGridViewModel extends Base {
@@ -39,7 +39,7 @@ export class PropertyGridViewModel extends Base {
       enabled: () => this.hasPrev,
       action: () => {
         this.selectionController.prev();
-      },
+      }
     });
     this.toolbarItems.push({
       id: "svd-grid-history-next",
@@ -48,7 +48,7 @@ export class PropertyGridViewModel extends Base {
       enabled: () => this.hasNext,
       action: () => {
         this.selectionController.next();
-      },
+      }
     });
     this.onSurveyChanged();
   }
@@ -73,9 +73,9 @@ export class PropertyGridViewModel extends Base {
   private getTitle(): string {
     var obj = this.model.obj;
     if (!obj) return "";
-    var typeName = SurveyHelper.getObjectTypeStr(obj);
-    var displayName = editorLocalization.getString(
-      "ed." + typeName + "TypeName"
+    var displayName = SurveyHelper.getObjectName(
+      obj,
+      this.model.options.showObjectTitles
     );
     return this.model.options.getObjectDisplayName(
       obj,
