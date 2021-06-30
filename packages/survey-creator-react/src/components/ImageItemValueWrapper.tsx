@@ -112,7 +112,8 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         data-svc-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }
-      >
+        onPointerDown={isNew ? undefined : (event: any) => this.model.startDragItemValue(event)}
+        >
         <input
           type="file"
           accept="image/*"
