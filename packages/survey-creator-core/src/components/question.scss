@@ -37,6 +37,7 @@ svc-question {
   border: 1px dashed $border;
   width: 100%;
   height: calcSize(23);
+  box-sizing: border-box;
 }
 
 .svc-panel__placeholder {
