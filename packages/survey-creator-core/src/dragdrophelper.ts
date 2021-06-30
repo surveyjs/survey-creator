@@ -7,7 +7,8 @@ import {
   ItemValue,
   property,
   QuestionSelectBase,
-  Serializer
+  Serializer,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { CreatorBase } from "./creator-base";
 
@@ -379,12 +380,25 @@ export class DragDropHelper extends Base {
     this.banDropHere();
   };
 
-  private getDropTargetSurveyElementFromHTMLElement(element: HTMLElement) {
-    let result;
-    let dropTargetName = element.dataset.svcDropTargetElementName;
+  private getDropTargetSurveyElementName(element: HTMLElement) {
+    let dropTargetSurveyElementName = element.dataset.svcDropTargetElementName;
+    if (!dropTargetSurveyElementName) {
+      dropTargetSurveyElementName = element.dataset.svcDropTargetItemValue;
+    }
+    return dropTargetSurveyElementName;
+  }
 
-    if (!dropTargetName) {
-      dropTargetName = element.dataset.svcDropTargetItemValue;
+  private getDropTargetSurveyElementFromHTMLElement(element: HTMLElement) {
+    let result = undefined;;
+    let dropTargetName = this.getDropTargetSurveyElementName(element);
+    let isDragOverInnerPanel = false;
+    if(!dropTargetName) {
+      const nearestDropTargetElement = element.parentElement.closest<HTMLElement>(this.dropTargetDataAttributeName);
+      dropTargetName = this.getDropTargetSurveyElementName(nearestDropTargetElement);
+      isDragOverInnerPanel = nearestDropTargetElement !== element && !!dropTargetName;
+    }
+    if(!dropTargetName) {
+      throw new Error("Can't find drop target survey element name");
     }
 
     if (dropTargetName === DragDropHelper.ghostSurveyElementName) {
@@ -405,6 +419,11 @@ export class DragDropHelper extends Base {
         element = page.getElementByName(dropTargetName);
         if (element) result = element;
       });
+      if(!!result && result.getType() === "paneldynamic" && isDragOverInnerPanel) {
+        const page = result.page;
+        result = (<QuestionPanelDynamicModel>result).template;
+        result.page = page;
+      }
     }
 
     // drop to item-value
@@ -432,20 +451,23 @@ export class DragDropHelper extends Base {
     return Math.abs(clientY - middle) >= DragDropHelper.edgeHeight;
   }
 
-  private findDropTargetHTMLElementFromPoint(clientX, clientY): HTMLElement {
-    const selector = this.dropTargetDataAttributeName;
+  private findDropTargetHTMLElement(draggedOverNode: Element): HTMLElement {
+    if (!draggedOverNode) return null;
 
+    const selector = this.dropTargetDataAttributeName;
+    let dropTargetHTMLElement =
+      draggedOverNode.querySelector<HTMLElement>(selector) ||
+      draggedOverNode.closest<HTMLElement>(selector);
+
+    return dropTargetHTMLElement;
+  }
+
+  private findDropTargetHTMLElementFromPoint(clientX, clientY): HTMLElement {
     this.draggedElementShortcut.hidden = true;
     let draggedOverNode = document.elementFromPoint(clientX, clientY);
     this.draggedElementShortcut.hidden = false;
 
-    if (!draggedOverNode) return null;
-
-    let dropTargetHTMLElement =
-      draggedOverNode.querySelector(selector) ||
-      draggedOverNode.closest(selector);
-
-    return <HTMLElement>dropTargetHTMLElement;
+    return this.findDropTargetHTMLElement(draggedOverNode);
   }
 
   private findDeepestDropTargetChild(parent): HTMLElement {
