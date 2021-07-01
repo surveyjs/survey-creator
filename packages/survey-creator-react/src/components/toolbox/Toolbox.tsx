@@ -41,12 +41,20 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
       this
     );
     this.rootRef = React.createRef();
+    this.setItems(this.props.toolbox.itemsValue);
   }
   public get creator() {
     return this.props.creator;
   }
   public get toolbox() {
     return this.props.toolbox;
+  }
+  private setItems(sourceItems: Array<IQuestionToolboxItem>){
+    this.adaptiveElement.items = sourceItems.map(
+      (item: IQuestionToolboxItem, itemIndex: number) => {
+        return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
+      }
+    )
   }
   private invisibleItemSelected(model: AdaptiveActionBarItemWrapper): void {
     this.creator.clickToolboxItem(
@@ -74,16 +82,11 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     super.componentWillUnmount();
   }
 
-  protected getStateElement(): Base {
-    return this.toolbox;
+  protected getStateElements(): Base[] {
+    return [this.toolbox, this.adaptiveElement];
   }
+
   render(): JSX.Element {
-    const sourceItems: Array<IQuestionToolboxItem> = this.props.toolbox.items;
-    this.adaptiveElement.items = sourceItems.map(
-      (item: IQuestionToolboxItem, itemIndex: number) => {
-        return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
-      }
-    );
     if (!this.hasItems) return null;
     const items = this.renderItems();
     return (
