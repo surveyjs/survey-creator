@@ -137,7 +137,7 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   public copiedItemMaxCount: number = 3;
   private allowExpandMultipleCategoriesValue: boolean = false;
   private keepAllCategoriesExpandedValue: boolean = false;
-  private itemsValue: Array<IQuestionToolboxItem> = [];
+  @propertyArray() itemsValue: Array<IQuestionToolboxItem>;
 
   //koItems = ko.observableArray();
   @propertyArray() categories: Array<QuestionToolboxCategory>;
