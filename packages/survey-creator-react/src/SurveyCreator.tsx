@@ -54,7 +54,7 @@ export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
     return this.props.toolbar;
   }
   protected renderElement(): JSX.Element {
-    return <SurveyActionBar items={this.toolbar.items}></SurveyActionBar>;
+    return <SurveyActionBar items={[].concat(this.toolbar.items)}></SurveyActionBar>;
   }
 }
 

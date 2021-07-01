@@ -39,8 +39,12 @@ export class DragDropHelper extends Base {
     return this.creator.survey;
   }
 
-  private get dropTargetDataAttributeName() {
-    if (this.draggedSurveyElement.getType() === "itemvalue") {
+  protected isItemValueBeingDragged() {
+    return Serializer.isDescendantOf(this.draggedSurveyElement.getType(), "itemvalue");
+  }
+
+  protected get dropTargetDataAttributeName() {
+    if (this.isItemValueBeingDragged()) {
       return "[data-svc-drop-target-item-value]";
     }
     return "[data-svc-drop-target-element-name]";
@@ -120,7 +124,7 @@ export class DragDropHelper extends Base {
   private moveDraggedElement = (event: PointerEvent) => {
     this.moveShortcutElement(event);
 
-    if (this.draggedSurveyElement.getType() === "itemvalue") {
+    if (this.isItemValueBeingDragged()) {
       this.handleItemValueDragOver(event);
     } else {
       this.handleSurveyElementDragOver(event);
@@ -321,7 +325,7 @@ export class DragDropHelper extends Base {
 
     let isEdge = true;
 
-    if (this.draggedSurveyElement.getType() !== "itemvalue") {
+    if (!this.isItemValueBeingDragged()) {
       if (dropTargetSurveyElement.isPanel) {
         const panelDragInfo = this.getPanelDragInfo(
           dropTargetHTMLElement,
@@ -575,7 +579,7 @@ export class DragDropHelper extends Base {
   }
 
   private drop = () => {
-    if (this.draggedSurveyElement.getType() === "itemvalue") {
+    if (this.isItemValueBeingDragged()) {
       this.doDropItemValue();
     } else {
       this.doDropSurveyElement();

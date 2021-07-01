@@ -11,30 +11,35 @@ export class ToolboxItemViewModel extends Base {
   }
 
   // correct handle click vs drag
-  private clickWasDone = false;
   private pointerDownEvent;
+  private startX;
+  private startY;
+  private currentX;
+  private currentY;
+
   public onPointerDown(pointerDownEvent) {
     pointerDownEvent.preventDefault();
     this.pointerDownEvent = pointerDownEvent;
+    this.startX = pointerDownEvent.pageX;
+    this.startY = pointerDownEvent.pageY;
+    document.addEventListener("pointermove", this.startDragToolboxItem);
+
     const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
     toolboxItemHTMLElement.addEventListener("pointerup", this.click);
-    setTimeout(() => {
-      document.addEventListener("pointermove", this.startDragToolboxItem);
-    }, 300);
   }
   private click = (event) => {
     this.clearListeners();
     this.creator.clickToolboxItem(this.item.json);
-    this.clickWasDone = true;
   };
   private startDragToolboxItem = (pointerMoveEvent) => {
     pointerMoveEvent.preventDefault();
 
+    this.currentX = pointerMoveEvent.pageX;
+    this.currentY = pointerMoveEvent.pageY;
+    if (this.isMicroMovement) return;
+
     this.clearListeners();
-    if (this.clickWasDone) {
-      this.clickWasDone = false;
-      return;
-    }
+
     var json = this.creator.getJSONForNewElement(this.item.json);
     this.creator.dragDropHelper.startDragToolboxItem(
       this.pointerDownEvent,
@@ -42,6 +47,14 @@ export class ToolboxItemViewModel extends Base {
     );
     return true;
   };
+
+  // see https://stackoverflow.com/questions/6042202/how-to-distinguish-mouse-click-and-drag
+  private get isMicroMovement() {
+    const delta = 10;
+    const diffX = Math.abs(this.currentX - this.startX);
+    const diffY = Math.abs(this.currentY - this.startY);
+    return diffX < delta && diffY < delta;
+  }
   private clearListeners() {
     const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
     document.removeEventListener("pointermove", this.startDragToolboxItem);
