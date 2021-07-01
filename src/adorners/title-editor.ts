@@ -106,10 +106,10 @@ export class TitleInplaceEditor {
     this.forNeibours(
       (element, index) =>
         {
-          element.tabIndex = 0;
-          element.onkeyup = createKey2click(element);
-          element.setAttribute('aria-label', this.getLocString('pe.titleKeyboardAdornerTip'));
-          element.setAttribute('role', 'textbox');
+          // element.tabIndex = 0;
+          // element.onkeyup = createKey2click(element);
+          // element.setAttribute('aria-label', this.getLocString('pe.titleKeyboardAdornerTip'));
+          // element.setAttribute('role', 'textbox');
           element.onclick = (e) => {
             this.startEdit(this, e);
             e.preventDefault();

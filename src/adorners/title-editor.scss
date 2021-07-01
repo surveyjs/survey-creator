@@ -85,4 +85,13 @@ title-editor {
       cursor: pointer;
     }
   }
+
+  .svda-focusable:focus + .svda-title-editor-start {
+    visibility: visible;
+    outline: 1px dotted $primary-color;
+    outline-color: var(--primary-color, $primary-color);
+    .svda-title-editor-start-button {
+      visibility: visible;
+    }
+  }
 }
