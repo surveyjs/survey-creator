@@ -3,12 +3,14 @@ import {
   SurveyModel,
   property,
   propertyArray,
-  IActionBarItem
+  IActionBarItem,
+  PopupModel
 } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { ObjType, SurveyHelper } from "../surveyHelper";
 import { editorLocalization } from "../editorLocalization";
+import { ObjectSelectorModel } from "./object-selector";
 
 export class PropertyGridViewModel extends Base {
   @property() survey: SurveyModel;
@@ -49,6 +51,42 @@ export class PropertyGridViewModel extends Base {
       action: () => {
         this.selectionController.next();
       }
+    });
+    const selectorModel = new ObjectSelectorModel(
+      (obj: Base, reason: string, displayName: string) => {
+        return this.model.options.getObjectDisplayName(
+          obj,
+          reason,
+          displayName
+        );
+      }
+    );
+    const selectorPopupModel: PopupModel = new PopupModel(
+      "svc-object-selector",
+      {
+        model: selectorModel
+      },
+      "bottom",
+      "left"
+    );
+    this.toolbarItems.push({
+      id: "svd-grid-object-selector",
+      title: () => this.title,
+      css: "sv-action--last sv-action-bar-item--secondary",
+      iconName: "icon-more",
+      component: "sv-action-bar-item-dropdown",
+      action: () => {
+        selectorModel.show(
+          this.selectionController.creator.survey,
+          this.model.obj,
+          (obj: Base) => {
+            this.selectionController.selectFromAction(obj, "name");
+            selectorPopupModel.toggleVisibility();
+          }
+        );
+        selectorPopupModel.toggleVisibility();
+      },
+      popupModel: selectorPopupModel
     });
     this.onSurveyChanged();
   }

@@ -1,7 +1,8 @@
-import { Question, SurveyModel } from "survey-core";
+import { Question, SurveyModel, Base } from "survey-core";
 import {
   ObjectSelector,
-  ObjectSelectorItem
+  ObjectSelectorItem,
+  ObjectSelectorModel
 } from "../../src/property-grid/object-selector";
 
 function createSurvey(): SurveyModel {
@@ -39,16 +40,46 @@ function createSurvey(): SurveyModel {
     ]
   });
 }
+function createSurvey2(): SurveyModel {
+  return new SurveyModel({
+    pages: [
+      {
+        elements: [
+          {
+            type: "panel",
+            name: "Person name",
+            elements: [
+              { type: "text", name: "First name" },
+              { type: "text", name: "Last name" }
+            ]
+          },
+          { type: "text", name: "Birth date" }
+        ]
+      },
+      {
+        elements: [{ type: "text", name: "Title" }]
+      }
+    ]
+  });
+}
 
 test("Initial objects building", () => {
   var survey = createSurvey();
   var objects = new ObjectSelector(survey);
   expect(objects.items).toHaveLength(1 + 3 + 2 + 1 + 2); //    "survey + 3 pages + 5 questions."
-  expect(objects.items[0].text).toEqual("Survey");
-  expect(objects.items[4].text).toEqual("page2");
+  expect(objects.items[0].title).toEqual("Survey");
+  expect(objects.items[0].data).toEqual(survey);
+  expect(objects.items[4].title).toEqual("page2");
+  expect(objects.items[4].data).toEqual(survey.pages[1]);
   expect(objects.items[4].level).toEqual(1);
-  expect(objects.items[5].text).toEqual("question3");
+  expect(objects.items[5].title).toEqual("question3");
   expect(objects.items[5].level).toEqual(2);
+  expect(objects.getItemByObj(survey).title).toEqual("Survey");
+  expect(objects.getItemByObj(survey.pages[0]).title).toEqual("page1");
+  expect(
+    objects.getItemByObj(survey.getQuestionByName("question3")).title
+  ).toEqual("question3");
+  expect(objects.getItemByObj(new SurveyModel())).toBeFalsy();
 });
 test("Initial objects building, panel support", () => {
   var survey = new SurveyModel();
@@ -65,10 +96,10 @@ test("Initial objects building, panel support", () => {
 
   var objects = new ObjectSelector(survey);
   expect(objects.items).toHaveLength(1 + 2 + 2 + 6); //"survey + 2 pages + 2 panels +  5 questions."
-  expect(objects.items[0].text).toEqual("Survey"); //"The first item is Survey");
-  expect(objects.items[3].text).toEqual("panel1"); //  "The first panel"
+  expect(objects.items[0].title).toEqual("Survey"); //"The first item is Survey");
+  expect(objects.items[3].title).toEqual("panel1"); //  "The first panel"
   expect(objects.items[3].level).toEqual(2); //  "The first panel"
-  expect(objects.items[4].text).toEqual("q2");
+  expect(objects.items[4].title).toEqual("q2");
   expect(objects.items[4].level).toEqual(3);
 });
 
@@ -85,57 +116,67 @@ test("Initial objects building with titles - https://surveyjs.answerdesk.io/tick
   var objects = new ObjectSelector(createSurvey(), (obj: any) => {
     return obj["title"];
   });
-  expect(objects.items[1].text).toEqual("Page 1");
+  expect(objects.items[1].title).toEqual("Page 1");
   expect(objects.items[1].level).toEqual(1);
-  expect(objects.items[2].text).toEqual("Q 1");
+  expect(objects.items[2].title).toEqual("Q 1");
   expect(objects.items[2].level).toEqual(2);
 });
 test("Filter items, set visible property", () => {
-  var survey = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          {
-            type: "panel",
-            name: "Person name",
-            elements: [
-              { type: "text", name: "First name:" },
-              { type: "text", name: "Last name" }
-            ]
-          },
-          { type: "text", name: "Birth date" }
-        ]
-      },
-      {
-        elements: [{ type: "text", name: "Title" }]
-      }
-    ]
-  });
-  var objects = new ObjectSelector(survey);
+  var objects = new ObjectSelector(createSurvey2());
   expect(objects.items).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
-  expect(objects.items[2].text).toEqual("Person name");
+  expect(objects.items[2].title).toEqual("Person name");
   expect(objects.items[2].level).toEqual(2);
   expect(objects.items[2].visible).toBeTruthy();
   expect(objects.items[3].visible).toBeTruthy();
-  expect(objects.items[6].text).toEqual("page2");
+  expect(objects.items[6].title).toEqual("page2");
   expect(objects.items[6].visible).toBeTruthy();
-  expect(objects.items[7].text).toEqual("Title");
+  expect(objects.items[7].title).toEqual("Title");
   expect(objects.items[7].visible).toBeTruthy();
-  function checkVisiblity(checks: Array<boolean>) {
+  function checkVisiblity(filteredText: string, checks: Array<boolean>) {
+    objects.filterByText(filteredText);
     for (let i = 0; i < checks.length; i++) {
       expect(objects.items[i].visible).toEqual(checks[i]);
     }
   }
-  objects.filteredText = "name";
-  checkVisiblity([true, true, true, true, true, false, false, false]);
-  objects.filteredText = "last";
-  checkVisiblity([true, true, true, false, true, false, false, false]);
-  objects.filteredText = "date";
-  checkVisiblity([true, true, false, false, false, true, false, false]);
-  objects.filteredText = "x-x";
-  checkVisiblity([false, false, false, false, false, false, false, false]);
-  objects.filteredText = "surv";
-  checkVisiblity([true, false, false, false, false, false, false, false]);
-  objects.filteredText = "";
-  checkVisiblity([true, true, true, true, true, true, true, true]);
+  checkVisiblity("name", [true, true, true, true, true, false, false, false]);
+  checkVisiblity("last", [true, true, true, false, true, false, false, false]);
+  checkVisiblity("date", [true, true, false, false, false, true, false, false]);
+  checkVisiblity("unknown", [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ]);
+  checkVisiblity("surv", [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ]);
+  checkVisiblity("", [true, true, true, true, true, true, true, true]);
+});
+test("Check ObjectSelectorModel", () => {
+  var survey = createSurvey2();
+  var model = new ObjectSelectorModel();
+  var selectedItem: any;
+  model.show(survey, survey.pages[0], (obj: Base) => {
+    selectedItem = obj;
+  });
+  expect(model.list.items).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
+  expect(model.list.selectedItem.title).toEqual("page1");
+  expect(model.list.items[3].visible).toBeTruthy();
+  model.filteredText = "date";
+  expect(model.list.items[3].visible).toBeFalsy();
+  model.filteredText = "";
+  expect(model.list.items[3].visible).toBeTruthy();
+  model.list.selectItem(model.list.items[3]);
+  expect(selectedItem.title).toEqual("First name");
 });

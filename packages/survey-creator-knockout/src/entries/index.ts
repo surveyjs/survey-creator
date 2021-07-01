@@ -26,6 +26,7 @@ export * from "../components/cell-question-dropdown";
 
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";
+export * from "../components/property-panel/object-selector";
 export * from "../components/property-panel/property-panel";
 export * from "../components/results";
 export * from "../components/simulator";

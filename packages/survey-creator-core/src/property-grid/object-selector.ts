@@ -1,37 +1,49 @@
-import { Base, SurveyModel, property } from "survey-core";
+import {
+  Base,
+  SurveyModel,
+  property,
+  IActionBarItem,
+  ListModel,
+  propertyArray
+} from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../surveyHelper";
 
-export class ObjectSelectorItem extends Base {
-  public value: Base;
-  public text: string;
-  public level: number = 0;
+export class ObjectSelectorItem extends Base implements IActionBarItem {
   private textInLow: string;
+  public id: string;
+  constructor(
+    id: number,
+    public data: Base,
+    public title: string,
+    public level: number
+  ) {
+    super();
+    this.id = "sv_item_selector_" + id.toString();
+  }
   @property({ defaultValue: true }) visible: boolean;
   public hasText(filteredTextInLow: string): boolean {
     if (!filteredTextInLow) return true;
     if (!this.textInLow) {
-      this.textInLow = this.text.toLocaleLowerCase();
+      this.textInLow = this.title.toLocaleLowerCase();
     }
     return this.textInLow.indexOf(filteredTextInLow) > -1;
   }
 }
 
-export class ObjectSelector extends Base {
+export class ObjectSelector {
   private surveyValue: SurveyModel;
   private deepestLevel: number;
-  @property() filteredText: string;
   private filteredTextInLow: string;
-
+  private itemsValue: Array<ObjectSelectorItem>;
   constructor(
     survey: SurveyModel,
     private getObjectDisplayName: (
       obj: Base,
-      reason: string
+      reason: string,
+      displayName: string
     ) => string = undefined
   ) {
-    super();
-    this.createNewArray("items");
     this.surveyValue = survey;
     this.rebuild();
   }
@@ -39,16 +51,20 @@ export class ObjectSelector extends Base {
     return this.surveyValue;
   }
   public get items(): Array<ObjectSelectorItem> {
-    return this.getPropertyValue("items");
+    return this.itemsValue;
   }
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
-    super.onPropertyValueChanged(name, oldValue, newValue);
-    if (name === "filteredText") {
-      this.filteredTextInLow = !!this.filteredText
-        ? this.filteredText.toLocaleLowerCase()
-        : "";
-      this.updateItemsVisibility();
+  public getItemByObj(obj: Base): IActionBarItem {
+    var items = this.items;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].data === obj) return items[i];
     }
+    return null;
+  }
+  public filterByText(filteredText: string) {
+    this.filteredTextInLow = !!filteredText
+      ? filteredText.toLocaleLowerCase()
+      : "";
+    this.updateItemsVisibility();
   }
   private rebuild() {
     var objs = [];
@@ -61,7 +77,7 @@ export class ObjectSelector extends Base {
       objs.push(pageItem);
       this.buildElements(objs, this.getElements(page), pageItem);
     }
-    this.setPropertyValue("items", objs);
+    this.itemsValue = objs;
   }
   private updateItemsVisibility() {
     for (var i = this.deepestLevel; i >= 0; i--) {
@@ -99,20 +115,78 @@ export class ObjectSelector extends Base {
       this.buildElements(objs, this.getElements(el), item);
     }
   }
-  private createItem(value: Base, parent: ObjectSelectorItem) {
-    var item = new ObjectSelectorItem();
-    item.value = value;
-    item.level = parent != null ? parent.level + 1 : 0;
+  private static uniqueId = 0;
+  private createItem(obj: Base, parent: ObjectSelectorItem) {
+    var item = new ObjectSelectorItem(
+      ObjectSelector.uniqueId++,
+      obj,
+      this.getText(obj),
+      parent != null ? parent.level + 1 : 0
+    );
     if (item.level > this.deepestLevel) {
       this.deepestLevel = item.level;
     }
-    item.text = this.getText(item);
     return item;
   }
-  private getText(item: ObjectSelectorItem): string {
+  private getText(obj: Base): string {
     var text = !!this.getObjectDisplayName
-      ? this.getObjectDisplayName(item.value, "property-grid")
-      : SurveyHelper.getObjectName(item.value, false);
+      ? this.getObjectDisplayName(obj, "property-grid", undefined)
+      : SurveyHelper.getObjectName(obj, false);
     return text;
+  }
+}
+export class ObjectSelectorModel extends Base {
+  private selector: ObjectSelector;
+  private listModelValue: ListModel;
+  @property() filteredText: string;
+  @property() isVisible: boolean;
+  public onCreateItemCallback: (item: ObjectSelectorItem) => void;
+  constructor(
+    private getObjectDisplayName: (
+      obj: Base,
+      reason: string,
+      displayName: string
+    ) => string = undefined
+  ) {
+    super();
+  }
+  public get list(): ListModel {
+    return this.listModelValue;
+  }
+  public show(
+    survey: SurveyModel,
+    selectedItem: Base,
+    onClose: (obj: Base) => void
+  ) {
+    this.filteredText = "";
+    this.selector = new ObjectSelector(survey, this.getObjectDisplayName);
+    this.onItemsCreated();
+    this.listModelValue = new ListModel(
+      this.selector.items,
+      (item: IActionBarItem) => {
+        onClose(item.data);
+      },
+      true,
+      this.selector.getItemByObj(selectedItem)
+    );
+    this.isVisible = true;
+  }
+  public get filteredTextPlaceholder(): string {
+    return editorLocalization.getString(
+      "ed.propertyGridFilteredTextPlaceholder"
+    );
+  }
+  private onItemsCreated() {
+    if (!this.onCreateItemCallback) return;
+    var items = this.selector.items;
+    for (var i = 0; i < items.length; i++) {
+      this.onCreateItemCallback(items[i]);
+    }
+  }
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name === "filteredText" && !!this.selector) {
+      this.selector.filterByText(this.filteredText);
+    }
   }
 }

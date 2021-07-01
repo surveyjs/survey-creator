@@ -75,18 +75,18 @@ svc-property-panel,
 }
 
 .svc-property-panel__title {
-    display: flex;
-    line-height: 36px;  
-    flex-grow: 1;
-    justify-content: flex-end;    
+  display: flex;
+  line-height: 36px;
+  flex-grow: 1;
+  justify-content: flex-end;
 }
 
 .svc-property-panel__actions {
-    width: 130px;
-    margin-left: initial;
-    flex-grow: 0;
+  width: 100%;
+  margin-left: initial;
+  flex-grow: 0;
+  padding: 0;
+  .sv-action-bar {
     padding: 0;
-    .sv-action-bar {
-      padding: 0;
-    }
+  }
 }

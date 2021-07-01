@@ -1,10 +1,17 @@
-import { SurveyModel, Base, PanelModel, IActionBarItem } from "survey-core";
+import {
+  SurveyModel,
+  Base,
+  PanelModel,
+  IActionBarItem,
+  PopupModel
+} from "survey-core";
 import {
   PropertyGridModel,
   PropertyGridEditorCollection
 } from "../../src/property-grid";
 import { PropertyGridViewModel } from "../../src/property-grid/property-grid-view-model";
 import { CreatorTester } from "../creator-tester";
+import { ObjectSelectorModel } from "../../src/property-grid/object-selector";
 
 test("Generate and update title correctly", () => {
   var survey = new SurveyModel({
@@ -71,4 +78,39 @@ test("Prev/next correctly, including columns via actions", () => {
     creator.propertyGrid.survey.getPanelByName("general")
   );
   expect(panelGeneral.isExpanded).toBeFalsy();
+});
+test("Element Selector Bar Item", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  };
+  var model = new PropertyGridViewModel(
+    creator.propertyGrid,
+    creator.selectionHistoryController
+  );
+  var selectorBarItem = model.toolbarItems.find((item) => {
+    if (item.id === "svd-grid-object-selector") return item;
+  });
+  expect(selectorBarItem).toBeTruthy();
+  var popupModel = <PopupModel>selectorBarItem.popupModel;
+  expect(popupModel).toBeTruthy();
+  var selectorModel = <ObjectSelectorModel>(
+    popupModel.contentComponentData.model
+  );
+  expect(selectorModel).toBeTruthy();
+  expect(selectorModel.isVisible).toBeFalsy();
+  expect(selectorModel.list).toBeFalsy();
+  selectorBarItem.action();
+  expect(popupModel.isVisible).toBeTruthy();
+  expect(selectorModel.isVisible).toBeTruthy();
+  expect(selectorModel.list).toBeTruthy();
+  expect(selectorModel.list.items).toHaveLength(4);
+  expect(selectorModel.list.items[2].title).toEqual("q1");
+  expect(creator.selectedElementName).toEqual("survey");
+  selectorModel.list.selectItem(selectorModel.list.items[2]);
+  expect(creator.selectedElementName).toEqual("q1");
+  expect(popupModel.isVisible).toBeFalsy();
 });

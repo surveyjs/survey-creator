@@ -97,6 +97,7 @@ export var enStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",
+    propertyGridFilteredTextPlaceholder: "Type to search...",
     toolboxGeneralCategory: "General",
     //delSelObject: "Delete selected object",
     //editSelObject: "Edit selected object",
