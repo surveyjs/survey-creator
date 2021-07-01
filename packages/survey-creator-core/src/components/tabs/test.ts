@@ -153,7 +153,7 @@ export class TestSurveyTabViewModel extends Base {
   }
   public show(options: any = null) {
     const pages: Array<IActionBarItem> = [];
-    for (let i = 0; i < this.survey.pages.length; i++) {
+    for (let i: number = 0; i < this.survey.pages.length; i++) {
       const page: PageModel = this.survey.pages[i];
       pages.push({
         id: page.name,
@@ -162,22 +162,19 @@ export class TestSurveyTabViewModel extends Base {
         visible: page.isVisible,
         enabled: page.isVisible,
         active: () =>
-          this.survey.state == "running" && page === this.survey.currentPage
+          this.survey.state === "running" && page === this.survey.currentPage
       });
     }
-    if (!!options && options.showSimulatorInTestSurveyTab != undefined) {
+    if (!!options && options.showSimulatorInTestSurveyTab !== undefined) {
       this.showSimulator = options.showSimulatorInTestSurveyTab;
     }
-    if (!!options && options.showPagesInTestSurveyTab != undefined) {
+    if (!!options && options.showPagesInTestSurveyTab !== undefined) {
       this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
     }
     if (!!options && options.showDefaultLanguageInTestSurveyTab != undefined) {
       this.setDefaultLanguageOption(options.showDefaultLanguageInTestSurveyTab);
     }
-    if (
-      !!options &&
-      options.showInvisibleElementsInTestSurveyTab != undefined
-    ) {
+    if (!!options && options.showInvisibleElementsInTestSurveyTab !== undefined) {
       this.showInvisibleElementsInTestSurveyTab =
         options.showInvisibleElementsInTestSurveyTab;
     }
@@ -262,6 +259,29 @@ export class TestSurveyTabViewModel extends Base {
       },
       popupModel: devicePopupModel
     });
+    
+    const getCurrentPageItem: () => IActionBarItem = () => {
+      const pageIndex: number = this.survey.pages.indexOf(this.survey.currentPage);
+      return this.pages[pageIndex];
+    };
+    const pageList: ListModel = new ListModel(
+      this.pages,
+      (item: IActionBarItem) => {
+        this.activePage = item.data;
+        this.pagePopupModel.toggleVisibility();
+      },
+      true,
+      getCurrentPageItem()
+    );
+    const setNearPage: (isNext: boolean) => void = (isNext: boolean) => {
+      const currentIndex: number = this.survey.currentPageNo;
+      const shift: number = isNext ? 1 : -1;
+      const nearPage: PageModel = this.survey.visiblePages[currentIndex + shift];
+      const pageIndex: number = this.survey.pages.indexOf(nearPage);
+      this.activePage = this.survey.pages[pageIndex];
+      pageList.selectedItem = this.pages[pageIndex];
+    };
+    this.pagePopupModel = new PopupModel("sv-list", { model: pageList }, "top", "center");
     actions.push({
       id: "prevPage",
       css: () =>
@@ -272,24 +292,8 @@ export class TestSurveyTabViewModel extends Base {
       visible: () => this.isRunning && this.pages.length > 1,
       enabled: () => this.survey && !this.survey.isFirstPage,
       title: "",
-      action: () => this.survey.prevPage()
+      action: () => setNearPage(false)
     });
-
-    this.pagePopupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          this.pages,
-          (item: IActionBarItem) => {
-            this.activePage = item.data;
-            this.pagePopupModel.toggleVisibility();
-          },
-          true
-        )
-      },
-      "top",
-      "center"
-    );
     actions.push({
       id: "pageSelector",
       title: () =>
@@ -309,7 +313,6 @@ export class TestSurveyTabViewModel extends Base {
         this.pagePopupModel.toggleVisibility();
       }
     });
-
     actions.push({
       id: "nextPage",
       css: () =>
@@ -320,7 +323,7 @@ export class TestSurveyTabViewModel extends Base {
       visible: () => this.isRunning && this.pages.length > 1,
       enabled: () => this.survey && !this.survey.isLastPage,
       title: "",
-      action: () => this.survey.nextPage()
+      action: () => setNearPage(true)
     });
     actions.push({
       id: "languageSelector",
@@ -334,6 +337,7 @@ export class TestSurveyTabViewModel extends Base {
       },
       popupModel: languagePopupModel
     });
+
     actions.push({
       id: "showInvisible",
       css: () =>

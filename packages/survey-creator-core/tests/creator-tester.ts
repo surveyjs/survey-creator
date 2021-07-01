@@ -10,7 +10,7 @@ export class CreatorTester extends CreatorBase<SurveyModel> {
   }
   public get selectedElementName(): string {
     if (!this.selectedElement) return "";
-    var name = this.selectedElement["name"];
+    const name = this.selectedElement["name"];
     if (!!name) return name;
     return this.selectedElement.getType();
   }
