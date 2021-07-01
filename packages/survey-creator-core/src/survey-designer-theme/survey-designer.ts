@@ -195,6 +195,7 @@ export var surveyDesignerCss = {
     other: "sd-comment sd-question__other"
   },
   matrix: {
+    mainRoot: "sd-question sd-row__question sd-scrollable",
     tableWrapper: "sd-matrix",
     root: "sd-table",
     rowError: "sd-matrix__row--error",
@@ -212,11 +213,13 @@ export var surveyDesignerCss = {
     cellTextDisabled: "sd-matrix__text--disabled"
   },
   matrixdropdown: {
+    mainRoot: "sd-question sd-row__question sd-scrollable",
     root: "sd-table",
     cell: "sd-table__cell",
     headerCell: "sd-table__cell sd-table__cell--header"
   },
   matrixdynamic: {
+    mainRoot: "sd-question sd-row__question sd-scrollable",
     root: "sd-table sd-matrixdynamic",
     cell: "sd-table__cell",
     headerCell: "sd-table__cell sd-table__cell--header",
