@@ -25,6 +25,8 @@ export * from "../components/tabs/Preview";
 export * from "../components/tabs/Translation";
 export * from "../components/toolbox/Toolbox";
 export * from "../events";
+export * from "../ObjectSelector";
+export * from "../PropertyGrid";
 
 export {
   editorLocalization,

@@ -10,7 +10,7 @@ import {
  * List available question convert modes
  */
 export enum QuestionConvertMode {
-  AllTypes, 
+  AllTypes,
   CompatibleTypes
 }
 export var settings = {
@@ -36,7 +36,7 @@ export var settings = {
   /**
    * Determines which types of questions the conversion will be available for.
    */
-   questionConvertMode: QuestionConvertMode.AllTypes
+  questionConvertMode: QuestionConvertMode.AllTypes
 
   //TODO add maximumColumnCount
 };
@@ -46,6 +46,7 @@ export interface ISurveyCreatorOptions {
   readOnly: boolean;
   maxLogicItemsInCondition: number;
   showTitlesInExpressions: boolean;
+  showObjectTitles: boolean;
   allowEditExpressionsInTextEditor: boolean;
   maximumColumnsCount: number;
   getObjectDisplayName(obj: Base, reason: string, displayName: string): string;
@@ -123,6 +124,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   readOnly: boolean;
   maxLogicItemsInCondition: number;
   showTitlesInExpressions: boolean;
+  showObjectTitles: boolean;
   allowEditExpressionsInTextEditor: boolean = true;
   maximumColumnsCount: number;
   getObjectDisplayName(obj: Base, reason: string, displayName: string): string {

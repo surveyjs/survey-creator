@@ -6,7 +6,7 @@ import {
   SurveyElementBase,
   SurveyActionBar,
   ReactQuestionFactory,
-  SurveyQuestionButtonGroup,
+  SurveyQuestionButtonGroup
 } from "survey-react-ui";
 interface IPropertyGridComponentProps {
   model: CreatorBase<SurveyModel>;
@@ -38,25 +38,12 @@ class PropertyGridComponent extends SurveyElementBase<
           <div className="svc-property-panel__actions">
             <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
           </div>
-          <span className="svc-property-panel__title">{this.model.title}</span>
-          
         </div>
         <div className="svc-property-panel__expander">
           <Survey model={this.model.survey}></Survey>
         </div>
       </div>
     );
-    /* <svc-property-panel
-        params="title: 'Question Properties',survey: creator.propertyGrid.koSurvey()"
-    ></svc-property-panel> */
-
-    /*
-    <div class="svc-property-panel__header" data-bind="text: title"></div>
-    <div class="svc-property-panel__expander">
-      <!-- ko template: { name: 'survey-content', data: survey  } -->
-      <!-- /ko -->
-    </div>
-     */
   }
 }
 
