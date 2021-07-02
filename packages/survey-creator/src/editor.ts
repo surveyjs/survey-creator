@@ -1026,22 +1026,17 @@ export class SurveyCreator
     this.setState("saving");
     if (this.saveSurveyFunc) {
       this.saveNo++;
-      var self = this;
-      this.saveSurveyFunc(
-        this.saveNo,
-        function doSaveCallback(no: number, isSuccess: boolean) {
-          if (self.saveNo === no) {
-            if (isSuccess) {
-              self.setState("saved");
-            } else {
-              if (self.showErrorOnFailedSave) {
-                this.notify(self.getLocString("ed.saveError"));
-              }
-              self.setState("modified");
-            }
+      this.saveSurveyFunc(this.saveNo, (no: number, isSuccess: boolean) => {
+        if (this.saveNo !== no) return;
+        if (isSuccess) {
+          this.setState("saved");
+        } else {
+          if (this.showErrorOnFailedSave) {
+            this.notify(this.getLocString("ed.saveError"));
           }
+          this.setState("modified");
         }
-      );
+      });
     }
   }
   public setModified(options: any = null) {
