@@ -183,12 +183,15 @@ test("Editor state property", () => {
   success = false;
   creator.doSaveFunc();
   expect(creator.state).toEqual("modified");
-  //   creator.addPage();
-  //   expect(creator.state, "modified");
-  //   creator.doUndoClick();
-  //   expect(creator.state, "saved");
-  //   creator.doRedoClick();
-  //   expect(creator.state, "modified");
+  //Add a case for Bug #1447
+  creator.showErrorOnFailedSave = true;
+  var notifyMessage;
+  creator.onNotify.add((sender: any, options: any) => {
+    notifyMessage = options.message;
+  });
+  creator.doSaveFunc();
+  expect(notifyMessage).toBeTruthy();
+  expect(creator.state).toEqual("modified");
 });
 
 test("Do not reload surey on 'Designer' tab click", () => {

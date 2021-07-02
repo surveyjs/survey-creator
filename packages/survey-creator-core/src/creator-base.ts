@@ -507,6 +507,15 @@ export class CreatorBase<T extends SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
+   * The event is called in case of UI notifications. By default all notifications are done via built-in alert () function.
+   * In case of any subscriptions to this event all notifications will be redirected into the event handler.
+   * <br/> options.message is a message to show.
+   */
+  public onNotify: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
    * The event is called before undo happens.
    * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
@@ -1359,6 +1368,17 @@ export class CreatorBase<T extends SurveyModel>
     this.onModified.fire(this, options);
     this.isAutoSave && this.doAutoSave();
   }
+  /**
+   * This function triggers user notification (via the alert() function if no onNotify event handler added).
+   * @see onNotify
+   */
+  public notify(msg: string) {
+    if (this.onNotify.isEmpty) {
+      alert(msg);
+    } else {
+      this.onNotify.fire(this, { message: msg });
+    }
+  }
 
   protected convertQuestion(obj: Survey.Question, className: string) {
     var newQuestion = QuestionConverter.convertObject(obj, className);
@@ -2108,22 +2128,17 @@ export class CreatorBase<T extends SurveyModel>
     this.setState("saving");
     if (this.saveSurveyFunc) {
       this.saveNo++;
-      var self = this;
-      this.saveSurveyFunc(
-        this.saveNo,
-        function doSaveCallback(no: number, isSuccess: boolean) {
-          if (self.saveNo === no) {
-            if (isSuccess) {
-              self.setState("saved");
-            } else {
-              if (self.showErrorOnFailedSave) {
-                this.notify(self.getLocString("ed.saveError"));
-              }
-              self.setState("modified");
-            }
+      this.saveSurveyFunc(this.saveNo, (no: number, isSuccess: boolean) => {
+        if (this.saveNo !== no) return;
+        if (isSuccess) {
+          this.setState("saved");
+        } else {
+          if (this.showErrorOnFailedSave) {
+            this.notify(this.getLocString("ed.saveError"));
           }
+          this.setState("modified");
         }
-      );
+      });
     }
   }
 
