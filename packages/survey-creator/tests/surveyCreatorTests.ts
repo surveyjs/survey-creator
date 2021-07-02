@@ -146,14 +146,15 @@ QUnit.test("Editor state property", function (assert) {
   success = false;
   editor.saveButtonClick();
   assert.equal(editor.state, "modified");
-  /*
-     editor.addPage();
-     assert.equal(editor.state, "modified");
-     editor.doUndoClick();
-     assert.equal(editor.state, "saved");
-     editor.doRedoClick();
-     assert.equal(editor.state, "modified");
-     */
+  //Add a case for Bug #1447
+  editor.showErrorOnFailedSave = true;
+  var notifyMessage;
+  editor.onNotify.add((sender: SurveyCreator, options: any) => {
+    notifyMessage = options.message;
+  });
+  editor.saveButtonClick();
+  assert.ok(notifyMessage, "There is an error");
+  assert.equal(editor.state, "modified");
 });
 QUnit.test("Do not reload surey on 'Designer' tab click", function (assert) {
   var editor = new SurveyCreator();
@@ -945,9 +946,10 @@ QUnit.test(
     editor.survey.currentPage.addNewQuestion("text", "question2");
     var question = editor.survey.currentPage.addNewQuestion("text", "question");
     editor.propertyGridObjectEditorModel.selectedObject = question;
-    var namePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
-      "name"
-    ).editor;
+    var namePropertyEditor =
+      editor.propertyGridObjectEditorModel.getPropertyEditorByName(
+        "name"
+      ).editor;
     namePropertyEditor.koValue("question2");
     assert.equal(
       namePropertyEditor.koValue(),
@@ -981,9 +983,10 @@ QUnit.test("Validate Selected Element Errors", function (assert) {
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");
   creator.selectedElement = question;
   creator.validateSelectedElement();
-  var titlePropertyEditor = creator.propertyGridObjectEditorModel.getPropertyEditorByName(
-    "title"
-  ).editor;
+  var titlePropertyEditor =
+    creator.propertyGridObjectEditorModel.getPropertyEditorByName(
+      "title"
+    ).editor;
   assert.equal(
     titlePropertyEditor.koHasError(),
     true,
@@ -1009,9 +1012,10 @@ QUnit.test(
     var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
     q2.visibleIf = "{question1} = 1";
     editor.propertyGridObjectEditorModel.selectedObject = q1;
-    var namePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
-      "name"
-    ).editor;
+    var namePropertyEditor =
+      editor.propertyGridObjectEditorModel.getPropertyEditorByName(
+        "name"
+      ).editor;
     namePropertyEditor.koValue("myUpdatedQuestion1");
     assert.equal(
       q2.visibleIf,
@@ -1031,12 +1035,14 @@ QUnit.test(
     var q2 = <Survey.Question>editor.survey.getAllQuestions()[1];
     q2.visibleIf = "{question1} = 1";
     editor.propertyGridObjectEditorModel.selectedObject = q1;
-    var namePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
-      "name"
-    ).editor;
-    var valuePropertyEditor = editor.propertyGridObjectEditorModel.getPropertyEditorByName(
-      "valueName"
-    ).editor;
+    var namePropertyEditor =
+      editor.propertyGridObjectEditorModel.getPropertyEditorByName(
+        "name"
+      ).editor;
+    var valuePropertyEditor =
+      editor.propertyGridObjectEditorModel.getPropertyEditorByName(
+        "valueName"
+      ).editor;
     valuePropertyEditor.koValue("valueName1");
     assert.equal(
       q2.visibleIf,
@@ -1098,17 +1104,15 @@ QUnit.test(
       editor.pagesEditorModel,
       editor.survey.pages[0]
     );
-    editor.survey.selectedElement = editor.survey.getQuestionByName(
-      "question4"
-    );
+    editor.survey.selectedElement =
+      editor.survey.getQuestionByName("question4");
     assert.equal(
       pagesEditor.model.selectedPage().name,
       "page3",
       "Page 3 is selected"
     );
-    editor.survey.selectedElement = editor.survey.getQuestionByName(
-      "question3"
-    );
+    editor.survey.selectedElement =
+      editor.survey.getQuestionByName("question3");
     assert.equal(
       pagesEditor.model.selectedPage().name,
       "page2",
