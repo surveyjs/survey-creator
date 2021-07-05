@@ -9,6 +9,7 @@ import { getNextValue } from "../utils/utils";
 
 import "./image-items.scss";
 import { QuestionSelectBase } from "survey-knockout";
+import { createImageFileChooser } from "./image";
 var templateHtml = require("html-loader?interpolate!val-loader!./image-items.html");
 
 class ImageItemInplaceEditor {
@@ -149,15 +150,7 @@ export var imageItemsAdorner = {
       }
     });
 
-    var input = document.createElement("input");
-    input.type = "file";
-    input.accept = "image/*";
-    input.className = "svda-choose-file";
-    input.style.position = "absolute";
-    input.style.opacity = "0";
-    input.style.width = "1px";
-    input.style.height = "1px";
-    input.style.overflow = "hidden";
+    var input = createImageFileChooser(model.contentMode);
     itemsRoot.appendChild(input);
   }
 };
@@ -236,15 +229,7 @@ export var addImageItemAdorner = {
     addItemElement.style.lineHeight = addItemElement.style.height;
     itemsRoot.appendChild(addItemElement);
 
-    var input = document.createElement("input");
-    input.type = "file";
-    input.accept = "image/*";
-    input.className = "svda-choose-file";
-    input.style.position = "absolute";
-    input.style.opacity = "0";
-    input.style.width = "1px";
-    input.style.height = "1px";
-    input.style.overflow = "hidden";
+    var input = createImageFileChooser(model.contentMode);
     itemsRoot.appendChild(input);
   }
 };
