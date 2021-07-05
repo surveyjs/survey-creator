@@ -10,7 +10,8 @@ import {
   propertyArray,
   property,
   PageModel,
-  SurveyModel
+  SurveyModel,
+  Action
 } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -421,18 +422,18 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.model = undefined;
     return true;
   }
-  public createActions(items: Array<IActionBarItem>) {
-    items.push({
+  public createActions(items: Array<Action>) {
+    items.push(new Action({
       id: "icon-preview",
       iconName: "icon-preview",
       needSeparator: true,
-      css: () =>
-        this.creator.viewType === "test" ? "sv-action-bar-item--secondary" : "",
+      //css: () => this.creator.viewType === "test" ? "sv-action-bar-item--secondary" : "",
+      css: this.creator.viewType === "test" ? "sv-action-bar-item--secondary" : "",
       action: () => {
         this.creator.makeNewViewActive("test");
       },
       active: false,
       title: "Preview"
-    });
+    }));
   }
 }

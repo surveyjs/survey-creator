@@ -13,10 +13,11 @@ import {
   SurveyElement,
   ItemValue,
   QuestionSelectBase,
+  AdaptiveActionContainer,
   QuestionRowModel
 } from "survey-core";
 import {
-  SurveyActionBar,
+  SurveyActionBarV2,
   ReactElementFactory,
   ReactQuestionFactory,
   Model,
@@ -37,7 +38,7 @@ import { editableStringRendererName } from "./components/StringEditor";
 StylesManager.applyTheme("modern");
 
 interface ISurveyCreatorToolBarItemsComponentProps {
-  toolbar: CreatorToolbarItems;
+  toolbar: AdaptiveActionContainer;
 }
 
 export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
@@ -47,14 +48,14 @@ export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
   constructor(props: ISurveyCreatorComponentProps) {
     super(props);
   }
-  get toolbar(): CreatorToolbarItems {
+  get toolbar(): AdaptiveActionContainer {
     return this.props.toolbar;
   }
   protected getStateElement(): Base {
     return this.props.toolbar;
   }
   protected renderElement(): JSX.Element {
-    return <SurveyActionBar items={[].concat(this.toolbar.items)}></SurveyActionBar>;
+    return <SurveyActionBarV2 model={this.toolbar}></SurveyActionBarV2>;
   }
 }
 

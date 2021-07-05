@@ -11,7 +11,9 @@ import {
   property,
   propertyArray,
   IElement,
-  Serializer
+  Serializer,
+  AdaptiveActionContainer,
+  Action
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -48,7 +50,7 @@ export interface ICreatorPlugin {
   activate: () => void;
   deactivate?: () => boolean;
   designerSurveyCreated?: () => void;
-  createActions?: (items: Array<IActionBarItem>) => void;
+  createActions?: (items: Array<Action>) => void;
 }
 
 export interface ITabbedMenuItem extends IActionBarItem {
@@ -109,7 +111,7 @@ export class CreatorBase<T extends SurveyModel>
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
-  private toolbarItemsValue: CreatorToolbarItems;
+  private toolbarItemsValue: AdaptiveActionContainer;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -122,10 +124,10 @@ export class CreatorBase<T extends SurveyModel>
 
   @property() surveyValue: T;
 
-  public get toolbarItems(): Array<IActionBarItem> {
-    return this.toolbarItemsValue.items;
+  public get toolbarItems(): Array<Action> {
+    return this.toolbarItemsValue.actions;
   }
-  public get toolbarItemsWrapper(): CreatorToolbarItems {
+  public get toolbarItemsWrapper(): AdaptiveActionContainer {
     return this.toolbarItemsValue;
   }
   public dragDropHelper: DragDropHelper;
@@ -746,7 +748,7 @@ export class CreatorBase<T extends SurveyModel>
         "Creator constructor has one parameter, as creator options, in V2."
       );
     }
-    this.toolbarItemsValue = new CreatorToolbarItems();
+    this.toolbarItemsValue = new AdaptiveActionContainer();
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.setOptions(this.options);
@@ -882,13 +884,13 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   private initToolbar() {
-    const items: Array<IActionBarItem> = [];
+    const items: Array<Action> = [];
     for (var key in this.plugins) {
       if (!!this.plugins[key].createActions) {
         this.plugins[key].createActions(items);
       }
     }
-    this.toolbarItemsValue.items = items;
+    this.toolbarItemsValue.actions = items;
   }
 
   public getOptions() {
@@ -1193,7 +1195,7 @@ export class CreatorBase<T extends SurveyModel>
   private isObjQuestion(obj: Survey.Base) {
     return this.isObjThisType(obj, "question");
   }
-  private isObjPage(obj: Survey.Base) {
+  public isObjPage(obj: Survey.Base) {
     return this.isObjThisType(obj, "page");
   }
   private isObjThisType(obj: Survey.Base, typeName: string) {
@@ -2202,7 +2204,7 @@ export class CreatorBase<T extends SurveyModel>
       this.undoRedoManager.stopTransaction();
     }
   }
-  private createIActionBarItemByClass(className: string): IActionBarItem {
+  createIActionBarItemByClass(className: string): IActionBarItem {
     return {
       title: this.getLocString("qt." + className),
       id: className,
@@ -2210,112 +2212,11 @@ export class CreatorBase<T extends SurveyModel>
     };
   }
 
-  public getContextActions(
-    element: any /*ISurveyElement*/
-  ): Array<IActionBarItem> {
-    if (this.readOnly) {
-      return [];
-    }
-
-    let opts: any = element["allowingOptions"];
-    if (!opts) opts = {};
-    const items: Array<IActionBarItem> = [];
-
-    if (opts.allowChangeType === undefined || opts.allowChangeType) {
-      var currentType = element.getType();
-      const convertClasses: string[] = QuestionConverter.getConvertToClasses(
-        currentType,
-        this.toolbox.itemNames
-      );
-      const allowChangeType: boolean = convertClasses.length > 0;
-      if (!element.isPanel && !element.isPage) {
-        var availableTypes = convertClasses.map((className) => {
-          return this.createIActionBarItemByClass(className);
-        });
-        const popupModel = new PopupModel(
-          "sv-list",
-          {
-            model: new ListModel(
-              availableTypes,
-              (item: any) => {
-                this.convertCurrentQuestion(item.id);
-              },
-              false
-            )
-          },
-          "bottom",
-          "center"
-        );
-
-        items.push({
-          id: "convertTo",
-          css: "sv-action--first sv-action-bar-item--secondary",
-          iconName: "icon-change_16x16",
-          title: this.getLocString("qt." + currentType),
-          enabled: allowChangeType,
-          component: "sv-action-bar-item-dropdown",
-          action: (newType) => {
-            popupModel.toggleVisibility();
-          },
-          popupModel: popupModel
-        });
-      }
-    }
-
-    if (opts.allowCopy === undefined || opts.allowCopy) {
-      items.push({
-        id: "duplicate",
-        title: this.getLocString("survey.duplicate"),
-        action: () => {
-          var newElement = this.isObjPage(element)
-            ? this.copyPage(element)
-            : this.fastCopyQuestion(element);
-          this.selectElement(newElement);
-        }
-      });
-    }
-
-    if (
-      (opts.allowChangeRequired === undefined || opts.allowChangeRequired) &&
-      typeof element.isRequired !== "undefined" &&
-      propertyExists(element, "isRequired") &&
-      isPropertyVisible(element, "isRequired")
-    ) {
-      items.push({
-        id: "isrequired",
-        css: () => (element.isRequired ? "sv-action-bar-item--secondary" : ""),
-        title: this.getLocString("pe.isRequired"),
-        iconName: () => {
-          if (element.isRequired) {
-            return "icon-switchactive_16x16";
-          }
-          return "icon-switchinactive_16x16";
-        },
-        action: () => {
-          if (this.isCanModifyProperty(<any>element, "isRequired")) {
-            element.isRequired = !element.isRequired;
-          }
-        }
-      });
-    }
-
-    if (opts.allowDelete === undefined || opts.allowDelete) {
-      items.push({
-        id: "delete",
-        needSeparator: items.length > 0,
-        title: this.getLocString("pe.delete"),
-        action: () => {
-          this.deleteObject(element);
-        }
-      });
-    }
-
+  public onElementMenuItemsChanged(element: any, items: Action[]) {
     this.onDefineElementMenuItems.fire(this, {
       obj: element,
       items: items
     });
-
-    return items;
   }
   public getNextItemValue(question: Survey.QuestionSelectBase) {
     const itemText = Survey.surveyLocalization.getString("choices_Item");

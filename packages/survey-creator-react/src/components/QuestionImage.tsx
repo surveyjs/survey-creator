@@ -3,7 +3,7 @@ import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, Question, QuestionImageModel, SurveyElement } from "survey-core";
 import {
-  SurveyActionBar,
+  SurveyActionBarV2,
   ReactElementFactory,
   SurveyElementBase,
   SurveyQuestion,
@@ -79,7 +79,7 @@ QuestionImageAdornerComponentProps,
             </div>
 
             <div className="svc-question__content-actions">
-              <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+              <SurveyActionBarV2 model={this.model.actionContainer}></SurveyActionBarV2>
             </div>
           </div>
         </div>

@@ -5,7 +5,8 @@ import {
   PageModel,
   property,
   SurveyModel,
-  ArrayChanges
+  ArrayChanges,
+  Action
 } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { DragDropHelper } from "../../dragdrophelper";
@@ -105,17 +106,24 @@ export class TabDesignerPlugin<T extends SurveyModel>
   implements ICreatorPlugin
 {
   public model: TabDesignerViewModel<T>;
-  private undoAction: ActionBarItem;
-  private redoAction: ActionBarItem;
-  private surveySettingsAction: ActionBarItem;
+  private undoAction: Action;
+  private redoAction: Action;
+  private surveySettingsAction: Action;
   constructor(private creator: CreatorBase<T>) {
     creator.addPluginTab("designer", this);
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
+    this.undoAction && (this.undoAction.visible = true);
+    this.redoAction && (this.redoAction.visible = true);
+    this.surveySettingsAction && (this.surveySettingsAction.visible = true);
   }
   public deactivate(): boolean {
     this.model = undefined;
+
+    this.undoAction.visible = false;
+    this.redoAction.visible = false;
+    this.surveySettingsAction.visible = false;
     return true;
   }
   public designerSurveyCreated(): void {
@@ -127,30 +135,30 @@ export class TabDesignerPlugin<T extends SurveyModel>
       };
     }
   }
-  public createActions(items: Array<IActionBarItem>) {
-    this.undoAction = new ActionBarItem({
+  public createActions(items: Array<Action>) {
+    this.undoAction = new Action({
       id: "icon-undo",
       iconName: "icon-undo",
       title: "Undo",
       showTitle: false,
-      visible: () => this.creator.viewType === "designer",
+      visible: this.creator.viewType === "designer",
       action: () => this.creator.undo()
     });
-    this.redoAction = new ActionBarItem({
+    this.redoAction = new Action({
       id: "icon-redo",
       iconName: "icon-redo",
       title: "Redo",
       showTitle: false,
-      visible: () => this.creator.viewType === "designer",
+      visible: this.creator.viewType === "designer",
       action: () => this.creator.redo()
     });
-    this.surveySettingsAction = new ActionBarItem({
+    this.surveySettingsAction = new Action({
       id: "icon-settings",
       iconName: "icon-settings",
       needSeparator: true,
       action: () => this.creator.selectElement(this.creator.survey),
       active: this.isSurveySelected,
-      visible: () => this.creator.viewType === "designer",
+      visible: this.creator.viewType === "designer",
       title: "Settings",
       showTitle: false
     });

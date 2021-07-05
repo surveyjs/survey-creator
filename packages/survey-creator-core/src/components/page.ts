@@ -4,27 +4,31 @@ import {
   PageModel,
   property,
   propertyArray,
+  AdaptiveActionContainer,
+  Action,
   SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
+import { ActionContainerViewModel } from "./action-container-view-model";
 
 import "./page.scss";
 
-export class PageViewModel<T extends SurveyModel> extends Base {
+export class PageViewModel<
+  T extends SurveyModel
+> extends ActionContainerViewModel<T> {
   @property({ defaultValue: false }) isGhost: boolean;
-  @propertyArray() actions: Array<IActionBarItem>;
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
-  public creator: CreatorBase<T>;
   public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel;
+  public actionContainer: AdaptiveActionContainer =
+    new AdaptiveActionContainer();
   private _page: PageModel;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
 
   constructor(creator: CreatorBase<T>, page: PageModel) {
-    super();
-    this.creator = creator;
+    super(creator, page);
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
       () => {
         this.addGhostPage();
@@ -53,7 +57,7 @@ export class PageViewModel<T extends SurveyModel> extends Base {
       };
     } else {
       this.isGhost = false;
-      this.actions = creator.getContextActions(this.page);
+      this.actionContainer.setItems(this.getContextActions());
     }
 
     this.page.onFirstRendering();
@@ -98,5 +102,16 @@ export class PageViewModel<T extends SurveyModel> extends Base {
     return this.creator.isElementSelected(this.page)
       ? "svc-page__content--selected"
       : "";
+  }
+
+  protected duplicate() {
+    var newElement = this.creator.copyPage(this.page);
+    this.creator.selectElement(newElement);
+  }
+
+  protected getContextActions(): Array<Action> {
+    let items = super.getContextActions();
+    this.creator.onElementMenuItemsChanged(this.page, items);
+    return items;
   }
 }
