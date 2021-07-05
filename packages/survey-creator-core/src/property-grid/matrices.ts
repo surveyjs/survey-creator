@@ -97,6 +97,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       showDetailAction.visibleIndex = 0;
     }
     if (this.allowDragRows) {
+      question.allowRowsDragAndDrop = true;
       actions.push({
         id: "drag-row",
         innerCss: "spg-matrixdynamic__drag-element",
