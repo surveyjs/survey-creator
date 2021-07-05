@@ -8,21 +8,31 @@ import {
 } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
-import { ObjType, SurveyHelper } from "../surveyHelper";
-import { editorLocalization } from "../editorLocalization";
+import { SurveyHelper } from "../surveyHelper";
 import { ObjectSelectorModel } from "./object-selector";
+import { CreatorBase } from "../creator-base";
 
-export class PropertyGridViewModel extends Base {
+export class PropertyGridViewModel<T extends SurveyModel> extends Base {
   @property() survey: SurveyModel;
   @propertyArray() toolbarItems: Array<IActionBarItem>;
   @property() title: string;
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
-  constructor(
-    private model: PropertyGridModel,
-    private selectionController: SelectionHistory
-  ) {
+  @property({ defaultValue: true }) visible: boolean;
+  private onPropertyGridVisibilityChanged;
+  constructor(private creator: CreatorBase<T>) {
     super();
+    this.onPropertyGridVisibilityChanged = (
+      sender: CreatorBase<T>,
+      options: any
+    ) => {
+      if (this.isDisposed) return;
+      this.visible = options.show;
+    };
+    this.creator.onShowPropertyGridVisiblityChanged.add(
+      this.onPropertyGridVisibilityChanged
+    );
+    this.visible = this.creator.showPropertyGrid;
     this.model.objValueChangedCallback = () => {
       this.onSurveyChanged();
     };
@@ -35,8 +45,16 @@ export class PropertyGridViewModel extends Base {
       }
     };
     this.toolbarItems.push({
+      id: "svd-grid-hide",
+      iconName: "icon-hide",
+      component: "sv-action-bar-item",
+      action: () => {
+        this.creator.showPropertyGrid = false;
+      }
+    });
+    this.toolbarItems.push({
       id: "svd-grid-history-prev",
-      title: "Prev", //TODO editorLocalization.getString("pe.edit"),
+      iconName: "icon-prev",
       component: "sv-action-bar-item",
       enabled: () => this.hasPrev,
       action: () => {
@@ -45,7 +63,7 @@ export class PropertyGridViewModel extends Base {
     });
     this.toolbarItems.push({
       id: "svd-grid-history-next",
-      title: "Next", //TODO editorLocalization.getString("pe.edit"),
+      iconName: "icon-next",
       component: "sv-action-bar-item",
       enabled: () => this.hasNext,
       action: () => {
@@ -89,6 +107,20 @@ export class PropertyGridViewModel extends Base {
       popupModel: selectorPopupModel
     });
     this.onSurveyChanged();
+  }
+  public dispose() {
+    if (!!this.creator && !this.isDisposed) {
+      this.creator.onShowPropertyGridVisiblityChanged.remove(
+        this.onPropertyGridVisibilityChanged
+      );
+    }
+    super.dispose();
+  }
+  private get model(): PropertyGridModel {
+    return this.creator.propertyGrid;
+  }
+  private get selectionController(): SelectionHistory {
+    return this.creator.selectionHistoryController;
   }
   private onSurveyChanged() {
     this.survey = this.model.survey;
