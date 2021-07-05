@@ -14,18 +14,19 @@ import { CreatorTester } from "../creator-tester";
 import { ObjectSelectorModel } from "../../src/property-grid/object-selector";
 
 test("Generate and update title correctly", () => {
-  var survey = new SurveyModel({
+  var creator = new CreatorTester();
+  creator.JSON = {
     elements: [
       {
         type: "text",
         name: "question1"
       }
     ]
-  });
-  var propertyGrid = new PropertyGridModel(survey);
-  var model = new PropertyGridViewModel(propertyGrid, null);
+  };
+  var propertyGrid = creator.propertyGrid;
+  var model = new PropertyGridViewModel(creator);
   expect(model.title).toEqual("Survey");
-  propertyGrid.obj = survey.getQuestionByName("question1");
+  propertyGrid.obj = creator.survey.getQuestionByName("question1");
   expect(model.title).toEqual("question1");
   propertyGrid.survey.getQuestionByName("name").value = "Q1";
   expect(model.title).toEqual("Q1");
@@ -47,10 +48,7 @@ test("Prev/next correctly, including columns via actions", () => {
     ]
   };
   var matrix = creator.survey.getQuestionByName("q1");
-  var model = new PropertyGridViewModel(
-    creator.propertyGrid,
-    creator.selectionHistoryController
-  );
+  var model = new PropertyGridViewModel(creator);
   expect(model.title).toEqual("Survey");
   creator.selectElement(matrix);
   expect(model.title).toEqual("q1");
@@ -87,10 +85,7 @@ test("Element Selector Bar Item", () => {
       { type: "text", name: "q2" }
     ]
   };
-  var model = new PropertyGridViewModel(
-    creator.propertyGrid,
-    creator.selectionHistoryController
-  );
+  var model = new PropertyGridViewModel(creator);
   var selectorBarItem = model.toolbarItems.find((item) => {
     if (item.id === "svd-grid-object-selector") return item;
   });
