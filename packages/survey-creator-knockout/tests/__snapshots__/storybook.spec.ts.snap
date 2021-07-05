@@ -337,17 +337,9 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           />
           
 
-          <div
-            class="svc-flex-column svc-properties-wrapper"
-          >
-            
-  
-            <svc-property-panel
-              params="model: creator"
-            />
-            
-
-          </div>
+          <svc-property-panel
+            params="model: creator"
+          />
           
 
           <!-- /ko -->
@@ -481,17 +473,9 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   />
   
 
-  <div
-    class="svc-flex-column svc-properties-wrapper"
-  >
-    
-  
-    <svc-property-panel
-      params="model: creator"
-    />
-    
-
-  </div>
+  <svc-property-panel
+    params="model: creator"
+  />
   
 
 </svc-tab-designer>
