@@ -13,9 +13,11 @@ const template = require("./toolbox-item.html");
 export class KnockoutToolboxItemViewModel extends ToolboxItemViewModel {
   public title: ko.Observable<string> = ko.observable("");
   public iconName: ko.Observable<string> = ko.observable("");
+
   constructor(
     protected item: IQuestionToolboxItem,
-    protected creator: SurveyCreator
+    protected creator: SurveyCreator,
+    public isCompact = true
   ) {
     super(item, creator);
     var icon = item.iconName;
@@ -26,7 +28,7 @@ export class KnockoutToolboxItemViewModel extends ToolboxItemViewModel {
     this.iconName(icon);
     this.title(item.title);
   }
-  get ariaLabel() {
+  public get ariaLabel() {
     return (
       this.item.tooltip +
       " " +
@@ -39,10 +41,10 @@ export class KnockoutToolboxItemViewModel extends ToolboxItemViewModel {
 ko.components.register("svc-toolbox-item", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const wrapper: AdaptiveActionBarItemWrapper = params.item;
       return new KnockoutToolboxItemViewModel(
-        ToolboxViewModel.getToolboxItem(wrapper),
-        params.creator
+        params.item,
+        params.creator,
+        params.isCompact
       );
     }
   },

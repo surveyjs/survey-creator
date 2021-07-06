@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { AdaptiveElementImplementor } from "survey-knockout-ui";
+import { AdaptiveElementImplementor, ImplementorBase } from "survey-knockout-ui";
 import { SurveyCreator } from "../../creator";
 import {
   AdaptiveElement,
@@ -15,10 +15,19 @@ export class ToolboxViewModel extends AdaptiveElement {
   private _categoriesSubscription: ko.Computed;
   public categories = ko.observableArray<any>();
   public creator: SurveyCreator;
+  private _isCompact = ko.observable(true);
+  private _isCompactSubscription: ko.Computed;
+  public get isCompact() {
+    return this._isCompact();
+  }
+  public set isCompact(val: boolean) {
+    this._isCompact(val);
+  }
 
   constructor(
     private _categories: any[] | ko.Computed<Array<any>>,
-    creator: SurveyCreator
+    creator: SurveyCreator,
+    isCompact: boolean | ko.Computed<boolean>,
   ) {
     super();
 
@@ -29,6 +38,7 @@ export class ToolboxViewModel extends AdaptiveElement {
       const wrappedItems: AdaptiveActionBarItemWrapper[] = [];
       const categories = ko.unwrap(_categories);
       categories.forEach((category: any, categoryIndex) => {
+        new ImplementorBase(category);
         (ko.unwrap(category.items) || []).forEach((item, index) => {
           const wrapper = new AdaptiveActionBarItemWrapper(this, item);
           if (categoryIndex != 0 && index == 0) {
@@ -37,6 +47,7 @@ export class ToolboxViewModel extends AdaptiveElement {
           wrappedItems.push(wrapper);
         });
       });
+      this._isCompactSubscription = ko.computed(() => this.isCompact = ko.unwrap(isCompact));
       this.items = wrappedItems;
       this.categories(categories);
     });
@@ -62,7 +73,7 @@ export class ToolboxViewModel extends AdaptiveElement {
 ko.components.register('svc-toolbox', {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const model: ToolboxViewModel = new ToolboxViewModel(params.categories, params.creator);
+      const model: ToolboxViewModel = new ToolboxViewModel(params.categories, params.creator, params.isCompact);
       const container = componentInfo.element.querySelector('.svc-toolbox');
       const manager: VerticalResponsivityManager =
         new VerticalResponsivityManager(container, model, 'div.svc-toolbox__tool', 40);

@@ -157,6 +157,8 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   @property({ defaultValue: false }) hasCategories: boolean;
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
+  @property({ defaultValue: true }) isCompact: boolean;
+
   constructor(
     supportedQuestions: Array<string> = null,
     public creator: CreatorBase<SurveyModel> = null
