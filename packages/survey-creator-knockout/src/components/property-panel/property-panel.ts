@@ -5,7 +5,6 @@ import {
   QuestionButtonGroup,
   Survey
 } from "survey-knockout-ui";
-import { Base } from "survey-core";
 import { Serializer } from "survey-core";
 import { QuestionFactory } from "survey-core";
 //import "./property-panel.scss";
@@ -21,7 +20,6 @@ ko.components.register("svc-property-panel", {
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         model.dispose();
       });
-
       return model;
     }
   },
