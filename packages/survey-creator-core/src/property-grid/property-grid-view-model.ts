@@ -4,7 +4,9 @@ import {
   property,
   propertyArray,
   IActionBarItem,
-  PopupModel
+  PopupModel,
+  AdaptiveActionContainer,
+  Action
 } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
@@ -13,11 +15,20 @@ import { editorLocalization } from "../editorLocalization";
 import { ObjectSelectorModel } from "./object-selector";
 
 export class PropertyGridViewModel extends Base {
+  private nextSelectionAction: Action;
+  private prevSelectionAction: Action;
+  private objectSelectionAction: Action;
+
   @property() survey: SurveyModel;
-  @propertyArray() toolbarItems: Array<IActionBarItem>;
   @property() title: string;
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
+
+  public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+  public get toolbarItems(): Array<Action> {
+    return this.toolbar.actions;
+  }
+
   constructor(
     private model: PropertyGridModel,
     private selectionController: SelectionHistory
@@ -34,24 +45,30 @@ export class PropertyGridViewModel extends Base {
         this.selectionController.selectFromAction(obj, propertyName);
       }
     };
-    this.toolbarItems.push({
+
+    var actions: Array<Action> = [];
+    this.prevSelectionAction = new Action({
       id: "svd-grid-history-prev",
       title: "Prev", //TODO editorLocalization.getString("pe.edit"),
       component: "sv-action-bar-item",
-      enabled: () => this.hasPrev,
+      enabled: this.hasPrev,
       action: () => {
         this.selectionController.prev();
       }
     });
-    this.toolbarItems.push({
+    actions.push(this.prevSelectionAction);
+
+    this.nextSelectionAction = new Action({
       id: "svd-grid-history-next",
       title: "Next", //TODO editorLocalization.getString("pe.edit"),
       component: "sv-action-bar-item",
-      enabled: () => this.hasNext,
+      enabled: this.hasNext,
       action: () => {
         this.selectionController.next();
       }
     });
+    actions.push(this.nextSelectionAction);
+
     const selectorModel = new ObjectSelectorModel(
       (obj: Base, reason: string, displayName: string) => {
         return this.model.options.getObjectDisplayName(
@@ -69,9 +86,10 @@ export class PropertyGridViewModel extends Base {
       "bottom",
       "left"
     );
-    this.toolbarItems.push({
+
+    this.objectSelectionAction = new Action({
       id: "svd-grid-object-selector",
-      title: () => this.title,
+      title: this.title,
       css: "sv-action--last sv-action-bar-item--secondary",
       iconName: "icon-more",
       component: "sv-action-bar-item-dropdown",
@@ -88,8 +106,27 @@ export class PropertyGridViewModel extends Base {
       },
       popupModel: selectorPopupModel
     });
+    actions.push(this.objectSelectionAction);
+    this.toolbar.actions = actions;
+
     this.onSurveyChanged();
   }
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+
+    if (!this.toolbarItems || this.toolbarItems.length <= 0) return;
+
+    if (name === "hasNext") {
+      this.nextSelectionAction.enabled = this.hasNext;
+    }
+    if (name === "hasPrev") {
+      this.prevSelectionAction.enabled = this.hasPrev;
+    }
+    if (name === "title") {
+      this.objectSelectionAction.title = this.title;
+    }
+  }
+
   private onSurveyChanged() {
     this.survey = this.model.survey;
     if (!!this.survey) {

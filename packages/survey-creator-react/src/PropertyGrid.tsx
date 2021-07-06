@@ -4,7 +4,7 @@ import { Base, SurveyModel } from "survey-core";
 import {
   Survey,
   SurveyElementBase,
-  SurveyActionBar,
+  SurveyActionBarV2,
   ReactQuestionFactory,
   SurveyQuestionButtonGroup
 } from "survey-react-ui";
@@ -36,7 +36,7 @@ class PropertyGridComponent extends SurveyElementBase<
       <div className="svc-property-panel">
         <div className="svc-property-panel__header">
           <div className="svc-property-panel__actions">
-            <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
+            <SurveyActionBarV2 model={this.model.toolbar}></SurveyActionBarV2>
           </div>
         </div>
         <div className="svc-property-panel__expander">
