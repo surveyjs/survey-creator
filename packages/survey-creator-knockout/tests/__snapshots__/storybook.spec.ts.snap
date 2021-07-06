@@ -377,6 +377,28 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
     </div>
     
+  
+    <!-- ko ifnot: creator.haveCommercialLicense -->
+    
+  
+    <div
+      class="svc-creator__banner"
+    >
+      
+    
+      <span
+        class="svc-creator__non-commercial-text"
+        data-bind="text: creator.licenseText"
+      >
+        Please purchase a SurveyJS Creator developer license to use it in your app
+      </span>
+      
+  
+    </div>
+    
+  
+    <!-- /ko -->
+    
 
   </div>
   
