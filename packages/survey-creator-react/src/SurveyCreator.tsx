@@ -78,6 +78,13 @@ export class SurveyCreatorComponent extends SurveyElementBase<
 
   render() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
+    let licenseBanner = null;
+    if(!this.props.creator.haveCommercialLicense) {
+      licenseBanner = 
+      <div className="svc-creator__banner">
+        <span className="svc-creator__non-commercial-text">{this.props.creator.licenseText}</span>
+      </div>
+    }
     //AM: width unrecognized by react
     return (
       <div className="svc-creator">
@@ -93,6 +100,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
               {this.renderActiveTab()}
             </div>
           </div>
+          {licenseBanner}
         </div>
       </div>
     );
