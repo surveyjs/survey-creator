@@ -338,6 +338,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           
 
           <svc-property-panel
+            class="svc-flex-column svc-properties-wrapper"
             params="model: creator"
           />
           
@@ -376,6 +377,28 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       
   
     </div>
+    
+  
+    <!-- ko ifnot: creator.haveCommercialLicense -->
+    
+  
+    <div
+      class="svc-creator__banner"
+    >
+      
+    
+      <span
+        class="svc-creator__non-commercial-text"
+        data-bind="text: creator.licenseText"
+      >
+        
+      </span>
+      
+  
+    </div>
+    
+  
+    <!-- /ko -->
     
 
   </div>
@@ -474,6 +497,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   
 
   <svc-property-panel
+    class="svc-flex-column svc-properties-wrapper"
     params="model: creator"
   />
   
