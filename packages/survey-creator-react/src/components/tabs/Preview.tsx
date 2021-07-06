@@ -1,7 +1,7 @@
 import React from "react";
 import { Base } from "survey-core";
 import {
-  SurveyActionBar,
+  SurveyActionBarV2,
   ReactElementFactory,
   SurveyElementBase,
 } from "survey-react-ui";
@@ -32,7 +32,7 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
           ) : null}
         </div>
         <div className="svc-test-tab__content-actions">
-          <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+          <SurveyActionBarV2 model={this.model.toolbar}></SurveyActionBarV2>
         </div>
       </div>
     );
