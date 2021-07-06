@@ -100,6 +100,13 @@ export class TestSurveyTabViewModel extends Base {
   constructor(private surveyProvider: CreatorBase<SurveyModel>) {
     super();
     this.simulator = new SimulatorOptions();
+    this.simulator.registerFunctionOnPropertyValueChanged(
+      "device",
+      () => {
+        this.deviceSelectorAction.title = simulatorDevices[this.simulator.device].title || this.getLocString("pe.simulator");
+      },
+      "testTabActions"
+    );
   }
 
   public setJSON(json: any) {
@@ -179,6 +186,7 @@ export class TestSurveyTabViewModel extends Base {
     this.buildActions();
     this.isRunning = true;
   }
+
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
@@ -272,8 +280,6 @@ export class TestSurveyTabViewModel extends Base {
     };
     this.pagePopupModel = new PopupModel("sv-list", { model: pageList }, "top", "center");
 
-    this.registerFunctionsOnPropertiesChanged();
-
     this.prevPageAction = new Action({
       id: "prevPage",
       css: this.survey && !this.survey.isFirstPage ? "sv-action-bar-item--secondary" : "",
@@ -328,7 +334,12 @@ export class TestSurveyTabViewModel extends Base {
       visible: this.isRunning,
       title: this.getLocString("ts.showInvisibleElements"),
       iconName: this.showInvisibleElements ? "icon-switchactive_16x16" : "icon-switchinactive_16x16",
-      action: () => (this.showInvisibleElements = !this.showInvisibleElements)
+      action: () => {
+        this.showInvisibleElements = !this.showInvisibleElements;
+        this.invisibleToggleAction.css = this.showInvisibleElements ? "sv-action--last sv-action-bar-item--secondary" : "sv-action--last";
+        this.invisibleToggleAction.iconName = this.showInvisibleElements ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
+      
+      }
     });
     actions.push(this.invisibleToggleAction);
 
@@ -368,43 +379,33 @@ export class TestSurveyTabViewModel extends Base {
     return res;
   }
 
-  private registerFunctionsOnPropertiesChanged() {
-    this.simulator.registerFunctionOnPropertyValueChanged(
-      "device",
-      () => {
-        this.deviceSelectorAction.title = simulatorDevices[this.simulator.device].title || this.getLocString("pe.simulator");
-      },
-      "testTabActions"
-    );
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
 
-    this.registerFunctionOnPropertiesValueChanged(
-      ["isRunning", "pages", "activePage", "showPagesInTestSurveyTab", "activeLanguage", "showInvisibleElements"],
-      () => {
-        this.prevPageAction.css = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0 ? "sv-action-bar-item--secondary" : "";
-        this.prevPageAction.enabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0;
-        this.prevPageAction.visible = this.isRunning && this.pages.length > 1;
+    if(!this.actions || this.actions.length <= 0) return;
 
-        this.nextPageAction.css = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1 ? "sv-action-bar-item--secondary" : "";
-        this.nextPageAction.enabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
-        this.nextPageAction.visible = this.isRunning && this.pages.length > 1;
+    if(name === "activePage"){
+      this.prevPageAction.css = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0 ? "sv-action-bar-item--secondary" : "";
+      this.prevPageAction.enabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0;
 
-        this.selectPageAction.title = (this.activePage && this.surveyProvider.getObjectDisplayName(this.activePage, "survey-tester")) || this.getLocString("ts.selectPage");
-        this.selectPageAction.visible = this.isRunning && this.pages.length > 1 && this.showPagesInTestSurveyTab;
+      this.nextPageAction.css = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1 ? "sv-action-bar-item--secondary" : "";
+      this.nextPageAction.enabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
 
-        this.languageSelectorAction.title = editorLocalization.getLocaleName(this.activeLanguage);
-
-        this.invisibleToggleAction.css = this.showInvisibleElements ? "sv-action--last sv-action-bar-item--secondary" : "sv-action--last";
-        this.invisibleToggleAction.visible = this.isRunning;
-        this.invisibleToggleAction.iconName = this.showInvisibleElements ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
-
-        this.testAgainAction.visible = !this.isRunning;
-      },
-      "testTabActions"
-    );
+      this.selectPageAction.title = (this.activePage && this.surveyProvider.getObjectDisplayName(this.activePage, "survey-tester")) || this.getLocString("ts.selectPage");
+    }
+    if(name === "isRunning" || name === "pages" || name === "showPagesInTestSurveyTab"){
+      this.prevPageAction.visible = this.isRunning && this.pages.length > 1;
+      this.nextPageAction.visible = this.isRunning && this.pages.length > 1;
+      this.invisibleToggleAction.visible = this.isRunning;
+      this.testAgainAction.visible = !this.isRunning;
+      this.selectPageAction.visible = this.isRunning && this.pages.length > 1 && this.showPagesInTestSurveyTab;
+    }
+    if(name === "activeLanguage") {
+      this.languageSelectorAction.title = editorLocalization.getLocaleName(this.activeLanguage);
+    }
   }
 
   public dispose() {
-    this.unRegisterFunctionOnPropertiesValueChanged(["isRunning", "pages", "activePage", "showPagesInTestSurveyTab", "activeLanguage", "showInvisibleElements"], "testTabActions");
     this.simulator.unRegisterFunctionOnPropertyValueChanged("device", "testTabActions");
   }
 }
