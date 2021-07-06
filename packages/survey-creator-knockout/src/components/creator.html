@@ -17,4 +17,9 @@
       <!-- /ko -->
     </div>
   </div>
+  <!-- ko ifnot: creator.haveCommercialLicense -->
+  <div class="svc-creator__banner">
+    <span class="svc-creator__non-commercial-text" data-bind="text: creator.licenseText"></span>
+  </div>
+  <!-- /ko -->
 </div>

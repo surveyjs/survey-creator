@@ -16,7 +16,8 @@ export var enStrings = {
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
-    drag: "Drag element"
+    drag: "Drag element",
+    license: "Please purchase a SurveyJS Creator developer license to use it in your app"
   },
   //questionTypes
   qt: {
