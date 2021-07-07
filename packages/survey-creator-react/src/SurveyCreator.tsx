@@ -17,7 +17,7 @@ import {
   QuestionRowModel
 } from "survey-core";
 import {
-  SurveyActionBarV2,
+  SurveyActionBar,
   ReactElementFactory,
   ReactQuestionFactory,
   Model,
@@ -55,7 +55,7 @@ export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
     return this.props.toolbar;
   }
   protected renderElement(): JSX.Element {
-    return <SurveyActionBarV2 model={this.toolbar}></SurveyActionBarV2>;
+    return <SurveyActionBar model={this.toolbar}></SurveyActionBar>;
   }
 }
 

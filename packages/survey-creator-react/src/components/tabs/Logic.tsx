@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Base, SurveyModel } from "survey-core";
 import {
-  SurveyActionBarV2,
+  SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
   Survey
@@ -32,7 +32,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
     return (
       <Fragment>
         <div className="svc-plugin-tab__content-actions">
-          <SurveyActionBarV2 model={this.model.toolbar}></SurveyActionBarV2>
+          <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
         </div>
         <div className="svc-plugin-tab__content">
           <Survey model={this.model.itemsSurvey}></Survey>
@@ -51,7 +51,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
           </div>
         </div>
         <div className="svc-plugin-tab__content-actions svc-tab-logic-edit__content-actions">
-          <SurveyActionBarV2 model={this.model.editToolbar}></SurveyActionBarV2>
+          <SurveyActionBar model={this.model.editToolbar}></SurveyActionBar>
         </div>
       </Fragment>
     );

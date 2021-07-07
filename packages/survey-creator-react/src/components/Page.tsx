@@ -1,7 +1,7 @@
 import { Base, PageModel, SurveyModel } from "survey-core";
 import {
   Popup,
-  SurveyActionBarV2,
+  SurveyActionBar,
   SurveyElementBase,
   SurveyPage,
   SvgIcon
@@ -101,7 +101,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
             </button>
           </div>
           <div className="svc-page__content-actions">
-            <SurveyActionBarV2 model={this.model.actionContainer}></SurveyActionBarV2>
+            <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
           </div>
         </div>
       </React.Fragment>
