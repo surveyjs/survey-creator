@@ -2,8 +2,8 @@ import {
   SurveyModel,
   Base,
   PanelModel,
-  IActionBarItem,
-  PopupModel
+  PopupModel,
+  IAction
 } from "survey-core";
 import {
   PropertyGridModel,
@@ -57,7 +57,7 @@ test("Prev/next correctly, including columns via actions", () => {
   var columnsQuestion =
     creator.propertyGrid.survey.getQuestionByName("columns");
   expect(columnsQuestion).toBeTruthy();
-  var actions: Array<IActionBarItem> = [];
+  var actions: Array<IAction> = [];
   creator.propertyGrid.survey.getUpdatedMatrixRowActions(
     columnsQuestion,
     columnsQuestion.visibleRows[0],
