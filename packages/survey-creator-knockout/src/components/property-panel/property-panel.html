@@ -1,10 +1,12 @@
-<div class="svc-property-panel__header">
-  <div class="svc-property-panel__actions">
-    <!-- ko component: { name: 'sv-action-bar', params: { model: toolbar } } -->
+<div class="svc-property-panel" data-bind="visible:visible">
+  <div class="svc-property-panel__header">
+    <div class="svc-property-panel__actions">
+      <!-- ko component: { name: 'sv-action-bar', params: { model: toolbar } } -->
+      <!-- /ko -->
+    </div>
+  </div>
+  <div class="svc-property-panel__expander">
+    <!-- ko template: { name: 'survey-content', data: survey  } -->
     <!-- /ko -->
   </div>
-</div>
-<div class="svc-property-panel__expander">
-  <!-- ko template: { name: 'survey-content', data: survey  } -->
-  <!-- /ko -->
 </div>

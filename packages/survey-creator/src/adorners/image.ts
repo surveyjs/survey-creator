@@ -7,6 +7,21 @@ import "./image.scss";
 import { QuestionImageModel } from "survey-knockout";
 var templateHtml = require("html-loader?interpolate!val-loader!./image.html");
 
+export function createImageFileChooser(contentMode?: string) {
+  const input = document.createElement("input");
+  input.type = "file";
+  if(!!contentMode) {
+    input.accept = contentMode === "video" ? "video/*" : "image/*";
+  }
+  input.className = "svda-choose-file";
+  input.style.position = "absolute";
+  input.style.opacity = "0";
+  input.style.width = "1px";
+  input.style.height = "1px";
+  input.style.overflow = "hidden";
+  return input;
+}
+
 class ImageInplaceEditor {
   constructor(private input, public allowDelete = false, private editor) {}
 
@@ -86,15 +101,7 @@ export var imageAdorner = {
         "<image-editor params='name: \"imageLink\", target: target, question: question, editor: editor, input: input'></image-editor>";
       elements[i].appendChild(decoration);
 
-      var input = document.createElement("input");
-      input.type = "file";
-      input.accept = "image/*";
-      input.className = "svda-choose-file";
-      input.style.position = "absolute";
-      input.style.opacity = "0";
-      input.style.width = "1px";
-      input.style.height = "1px";
-      input.style.overflow = "hidden";
+      var input = createImageFileChooser(model.contentMode);
       itemsRoot.parentElement.appendChild(input);
 
       ko.applyBindings(

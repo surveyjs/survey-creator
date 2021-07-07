@@ -583,6 +583,7 @@ Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
     "titleLocation",
     "rateValues",
     "choicesFromQuestion",
+    "contentMode",
   ].forEach((propertyName) =>
     this.question.registerFunctionOnPropertyValueChanged(
       propertyName,

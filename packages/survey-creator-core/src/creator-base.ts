@@ -100,6 +100,9 @@ export class CreatorBase<T extends SurveyModel>
    * @see haveCommercialLicense
    */
   @property({ defaultValue: false }) haveCommercialLicense: boolean;
+  public get licenseText() {
+    return this.getLocString("survey.license");
+  }
   /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
    */
@@ -786,12 +789,27 @@ export class CreatorBase<T extends SurveyModel>
   public set showToolbox(val: string) {
     SurveyHelper.warnNonSupported("showToolbox");
   }
-  public get showPropertyGrid(): string {
-    SurveyHelper.warnNonSupported("showPropertyGrid");
-    return undefined;
+  private showPropertyGridValue: boolean = true;
+  public onShowPropertyGridVisiblityChanged: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Set this this property grid false to hide the property grid.
+   */
+  public get showPropertyGrid(): boolean {
+    return this.showPropertyGridValue;
   }
-  public set showPropertyGrid(val: string) {
-    SurveyHelper.warnNonSupported("showPropertyGrid");
+  public set showPropertyGrid(val: boolean) {
+    if (<any>val !== true && <any>val !== false) {
+      SurveyHelper.warnText(
+        "showPropertyGrid propertry grid is a boolean property now."
+      );
+      return;
+    }
+    if (this.showPropertyGrid === val) return;
+    this.showPropertyGridValue = val;
+    this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
   }
   public rightContainerActiveItem(name: string) {
     SurveyHelper.warnNonSupported("rightContainerActiveItem");

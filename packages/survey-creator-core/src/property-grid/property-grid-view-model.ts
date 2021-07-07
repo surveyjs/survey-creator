@@ -2,38 +2,46 @@ import {
   Base,
   SurveyModel,
   property,
-  propertyArray,
-  IActionBarItem,
   PopupModel,
   AdaptiveActionContainer,
   Action
 } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
-import { ObjType, SurveyHelper } from "../surveyHelper";
-import { editorLocalization } from "../editorLocalization";
+import { SurveyHelper } from "../surveyHelper";
 import { ObjectSelectorModel } from "./object-selector";
+import { CreatorBase } from "../creator-base";
 
-export class PropertyGridViewModel extends Base {
+export class PropertyGridViewModel<T extends SurveyModel> extends Base {
   private nextSelectionAction: Action;
   private prevSelectionAction: Action;
   private objectSelectionAction: Action;
+  private onPropertyGridVisibilityChanged;
 
   @property() survey: SurveyModel;
   @property() title: string;
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
+  @property({ defaultValue: true }) visible: boolean;
 
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
   public get toolbarItems(): Array<Action> {
     return this.toolbar.actions;
   }
 
-  constructor(
-    private model: PropertyGridModel,
-    private selectionController: SelectionHistory
-  ) {
+  constructor(private creator: CreatorBase<T>) {
     super();
+    this.onPropertyGridVisibilityChanged = (
+      sender: CreatorBase<T>,
+      options: any
+    ) => {
+      if (this.isDisposed) return;
+      this.visible = options.show;
+    };
+    this.creator.onShowPropertyGridVisiblityChanged.add(
+      this.onPropertyGridVisibilityChanged
+    );
+    this.visible = this.creator.showPropertyGrid;
     this.model.objValueChangedCallback = () => {
       this.onSurveyChanged();
     };
@@ -47,9 +55,18 @@ export class PropertyGridViewModel extends Base {
     };
 
     var actions: Array<Action> = [];
+    actions.push(new Action({
+      id: "svd-grid-hide",
+      iconName: "icon-hide",
+      component: "sv-action-bar-item",
+      action: () => {
+        this.creator.showPropertyGrid = false;
+      }
+    }));
+
     this.prevSelectionAction = new Action({
-      id: "svd-grid-history-prev",
-      title: "Prev", //TODO editorLocalization.getString("pe.edit"),
+    id: "svd-grid-history-prev",
+      iconName: "icon-prev",
       component: "sv-action-bar-item",
       enabled: this.hasPrev,
       action: () => {
@@ -60,7 +77,7 @@ export class PropertyGridViewModel extends Base {
 
     this.nextSelectionAction = new Action({
       id: "svd-grid-history-next",
-      title: "Next", //TODO editorLocalization.getString("pe.edit"),
+      iconName: "icon-next",
       component: "sv-action-bar-item",
       enabled: this.hasNext,
       action: () => {
@@ -111,6 +128,7 @@ export class PropertyGridViewModel extends Base {
 
     this.onSurveyChanged();
   }
+
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
 
@@ -125,6 +143,21 @@ export class PropertyGridViewModel extends Base {
     if (name === "title") {
       this.objectSelectionAction.title = this.title;
     }
+  }
+
+  public dispose() {
+    if (!!this.creator && !this.isDisposed) {
+      this.creator.onShowPropertyGridVisiblityChanged.remove(
+        this.onPropertyGridVisibilityChanged
+      );
+    }
+    super.dispose();
+  }
+  private get model(): PropertyGridModel {
+    return this.creator.propertyGrid;
+  }
+  private get selectionController(): SelectionHistory {
+    return this.creator.selectionHistoryController;
   }
 
   private onSurveyChanged() {

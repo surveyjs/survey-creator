@@ -3,9 +3,8 @@ import * as ko from "knockout";
 import {
   ImplementorBase,
   QuestionButtonGroup,
-  Survey,
+  Survey
 } from "survey-knockout-ui";
-import { Base } from "survey-core";
 import { Serializer } from "survey-core";
 import { QuestionFactory } from "survey-core";
 //import "./property-panel.scss";
@@ -16,19 +15,15 @@ ko.components.register("svc-property-panel", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       var creator: CreatorBase<Survey> = params.model;
-      const model = new PropertyGridViewModel(
-        creator.propertyGrid,
-        creator.selectionHistoryController
-      );
+      const model = new PropertyGridViewModel(creator);
       new ImplementorBase(model);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         model.dispose();
       });
-
       return model;
-    },
+    }
   },
-  template: template,
+  template: template
 });
 
 Serializer.overrideClassCreator("buttongroup", function () {

@@ -15,14 +15,11 @@ class PropertyGridComponent extends SurveyElementBase<
   IPropertyGridComponentProps,
   any
 > {
-  model: PropertyGridViewModel;
+  model: PropertyGridViewModel<SurveyModel>;
   constructor(props: IPropertyGridComponentProps) {
     super(props);
     var creator = this.props.model;
-    this.model = new PropertyGridViewModel(
-      creator.propertyGrid,
-      creator.selectionHistoryController
-    );
+    this.model = new PropertyGridViewModel<SurveyModel>(creator);
   }
   protected getStateElement(): Base {
     return this.model;
@@ -31,16 +28,22 @@ class PropertyGridComponent extends SurveyElementBase<
     super.componentWillUnmount();
     this.model.dispose();
   }
-  render() {
+  public canRender(): boolean {
+    if (!this.model || !this.model.visible) return false;
+    return super.canRender();
+  }
+  renderElement() {
     return (
-      <div className="svc-property-panel">
-        <div className="svc-property-panel__header">
-          <div className="svc-property-panel__actions">
+      <div className="svc-flex-column svc-properties-wrapper">
+        <div className="svc-property-panel">
+          <div className="svc-property-panel__header">
+            <div className="svc-property-panel__actions">
             <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
+            </div>
           </div>
-        </div>
-        <div className="svc-property-panel__expander">
-          <Survey model={this.model.survey}></Survey>
+          <div className="svc-property-panel__expander">
+            <Survey model={this.model.survey}></Survey>
+          </div>
         </div>
       </div>
     );

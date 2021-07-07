@@ -1,16 +1,12 @@
 import {
-  ActionBarItem,
   Base,
-  IActionBarItem,
   PageModel,
   property,
   SurveyModel,
-  ArrayChanges,
   Action
 } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { DragDropHelper } from "../../dragdrophelper";
-import { getLocString } from "../../editorLocalization";
 import "./designer.scss";
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
@@ -156,7 +152,13 @@ export class TabDesignerPlugin<T extends SurveyModel>
       id: "icon-settings",
       iconName: "icon-settings",
       needSeparator: true,
-      action: () => this.creator.selectElement(this.creator.survey),
+      action: () => {
+        if (!this.creator.showPropertyGrid) {
+          this.creator.showPropertyGrid = true;
+        } else {
+          this.creator.selectElement(this.creator.survey);
+        }
+      },
       active: this.isSurveySelected,
       visible: this.creator.viewType === "designer",
       title: "Settings",
@@ -167,7 +169,10 @@ export class TabDesignerPlugin<T extends SurveyModel>
     items.push(this.surveySettingsAction);
     this.updateUndeRedoActions();
     this.creator.onSelectedElementChanged.add((sender, options) => {
-      this.surveySettingsAction.active = this.isSurveySelected;
+      this.surveySettingsAction.active = this.isSettingsActive;
+    });
+    this.creator.onShowPropertyGridVisiblityChanged.add((sender, options) => {
+      this.surveySettingsAction.active = this.isSettingsActive;
     });
   }
   private updateUndeRedoActions() {
@@ -177,5 +182,8 @@ export class TabDesignerPlugin<T extends SurveyModel>
   }
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);
+  }
+  private get isSettingsActive(): boolean {
+    return this.creator.showPropertyGrid && this.isSurveySelected;
   }
 }

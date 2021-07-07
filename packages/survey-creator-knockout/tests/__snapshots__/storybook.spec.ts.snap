@@ -337,17 +337,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           />
           
 
-          <div
+          <svc-property-panel
             class="svc-flex-column svc-properties-wrapper"
-          >
-            
-  
-            <svc-property-panel
-              params="model: creator"
-            />
-            
-
-          </div>
+            params="model: creator"
+          />
           
 
           <!-- /ko -->
@@ -384,6 +377,32 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       
   
     </div>
+    
+  
+    <!-- ko ifnot: creator.haveCommercialLicense -->
+    
+  
+    <div
+      class="svc-creator__banner"
+    >
+      
+    
+      <span
+        class="svc-creator__non-commercial-text"
+      >
+        <a
+          data-bind="text: creator.licenseText"
+          href="https://surveyjs.io/buy"
+        >
+          Please purchase a SurveyJS Creator developer license to use it in your app
+        </a>
+      </span>
+      
+  
+    </div>
+    
+  
+    <!-- /ko -->
     
 
   </div>
@@ -481,17 +500,10 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   />
   
 
-  <div
+  <svc-property-panel
     class="svc-flex-column svc-properties-wrapper"
-  >
-    
-  
-    <svc-property-panel
-      params="model: creator"
-    />
-    
-
-  </div>
+    params="model: creator"
+  />
   
 
 </svc-tab-designer>

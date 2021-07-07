@@ -19,6 +19,7 @@ import { TabLogicPlugin } from "../src/components/tabs/logic-ui";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
+import { PropertyGridViewModel } from "../src/property-grid/property-grid-view-model";
 
 import {
   getElementWrapperComponentName,
@@ -870,4 +871,98 @@ test("Test plug-ins JSON-Ace in creator", (): any => {
   expect(designerPlugin.model).toBeTruthy();
   expect(textPlugin.model).toBeFalsy();
   TabJsonEditorAcePlugin.hasAceEditor = oldFunc;
+});
+test("Show/hide property grid", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      }
+    ]
+  };
+  var settingsBarItem = creator.toolbarItems.find((item) => {
+    if (item.id === "icon-settings") return item;
+  });
+  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(settingsBarItem).toBeTruthy();
+  var propertyGridModel = new PropertyGridViewModel(creator);
+  expect(propertyGridModel.visible).toBeTruthy();
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  expect(creator.selectedElementName).toEqual("question1");
+  settingsBarItem.action();
+  expect(creator.selectedElementName).toEqual("survey");
+
+  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.find((item) => {
+    if (item.id === "svd-grid-hide") return item;
+  });
+  expect(hidePropertyModelBarItem).toBeTruthy();
+  hidePropertyModelBarItem.action();
+  expect(creator.showPropertyGrid).toBeFalsy();
+  expect(propertyGridModel.visible).toBeFalsy();
+
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  expect(creator.selectedElementName).toEqual("question1");
+  settingsBarItem.action();
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(propertyGridModel.visible).toBeTruthy();
+
+  settingsBarItem.action();
+  expect(creator.selectedElementName).toEqual("survey");
+  expect(propertyGridModel.visible).toBeTruthy();
+});
+test("Show/hide property grid and settings button active state", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      }
+    ]
+  };
+  creator.showPropertyGrid = false;
+  var settingsBarItem = creator.toolbarItems.find((item) => {
+    if (item.id === "icon-settings") return item;
+  });
+  expect(creator.showPropertyGrid).toBeFalsy();
+  expect(settingsBarItem.active).toBeFalsy();
+  expect(creator.selectedElementName).toEqual("survey");
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(settingsBarItem.active).toBeFalsy();
+  var propertyGridModel = new PropertyGridViewModel(creator);
+  expect(propertyGridModel.visible).toBeFalsy();
+
+  settingsBarItem.action();
+  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(propertyGridModel.visible).toBeTruthy();
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(settingsBarItem.active).toBeFalsy();
+
+  settingsBarItem.action();
+  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(propertyGridModel.visible).toBeTruthy();
+  expect(creator.selectedElementName).toEqual("survey");
+  expect(settingsBarItem.active).toBeTruthy();
+
+  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.find((item) => {
+    if (item.id === "svd-grid-hide") return item;
+  });
+  expect(hidePropertyModelBarItem).toBeTruthy();
+  hidePropertyModelBarItem.action();
+  expect(creator.showPropertyGrid).toBeFalsy();
+  expect(propertyGridModel.visible).toBeFalsy();
+  expect(creator.selectedElementName).toEqual("survey");
+  expect(settingsBarItem.active).toBeFalsy();
 });
