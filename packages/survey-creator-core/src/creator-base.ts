@@ -98,6 +98,9 @@ export class CreatorBase<T extends SurveyModel>
    * @see haveCommercialLicense
    */
   @property({ defaultValue: false }) haveCommercialLicense: boolean;
+  public get licenseText() {
+    return this.getLocString("survey.license");
+  }
   /**
    * A boolean property, false by default. Set it to true to call protected doSave method automatically on survey changing.
    */

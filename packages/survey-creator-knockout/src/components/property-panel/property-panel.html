@@ -1,14 +1,12 @@
-<div class="svc-flex-column svc-properties-wrapper" data-bind="hidden:!visible">
-  <div className="svc-property-panel">
-    <div class="svc-property-panel__header">
-      <div class="svc-property-panel__actions">
-        <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
-        <!-- /ko -->
-      </div>
-    </div>
-    <div class="svc-property-panel__expander">
-      <!-- ko template: { name: 'survey-content', data: survey  } -->
+<div class="svc-property-panel" data-bind="visible:visible">
+  <div class="svc-property-panel__header">
+    <div class="svc-property-panel__actions">
+      <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
       <!-- /ko -->
     </div>
+  </div>
+  <div class="svc-property-panel__expander">
+    <!-- ko template: { name: 'survey-content', data: survey  } -->
+    <!-- /ko -->
   </div>
 </div>

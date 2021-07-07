@@ -19,6 +19,7 @@ survey-creator,
 .svc-creator__area {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .svc-creator__content-wrapper {
@@ -58,6 +59,29 @@ survey-creator,
     height: calc(6 * #{$base-unit});
     background: $background;
     border-top: 1px solid $border;
+  }
+}
+
+.svc-creator__banner {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: calcSize(4);
+  line-height: calcSize(4);
+  background-color: $secondary;
+  text-align: center;
+}
+
+.svc-creator__non-commercial-text {
+  color: $primary-foreground;
+  font-family: "Open Sans";
+  font-weight: bold;
+  font-size: calcSize(2);
+  text-transform: uppercase;
+  vertical-align: middle;
+  a {
+    color: $primary-foreground;
+    text-decoration: none;
   }
 }
 
