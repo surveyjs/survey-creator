@@ -82,7 +82,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     if(!this.props.creator.haveCommercialLicense) {
       licenseBanner = 
       <div className="svc-creator__banner">
-        <span className="svc-creator__non-commercial-text">{this.props.creator.licenseText}</span>
+        <span className="svc-creator__non-commercial-text"><a href="https://surveyjs.io/buy">{this.props.creator.licenseText}</a></span>
       </div>
     }
     //AM: width unrecognized by react

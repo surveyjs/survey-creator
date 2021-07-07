@@ -79,6 +79,10 @@ survey-creator,
   font-size: calcSize(2);
   text-transform: uppercase;
   vertical-align: middle;
+  a {
+    color: $primary-foreground;
+    text-decoration: none;
+  }
 }
 
 .svc-drag-drop-ghost {
