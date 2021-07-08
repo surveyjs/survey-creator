@@ -33,7 +33,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 
 import "./translation.scss";
-import { SurveyHelper } from "../../surveyHelper";
+import { SurveyHelper } from "../../survey-helper";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {

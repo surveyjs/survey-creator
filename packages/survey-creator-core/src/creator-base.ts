@@ -24,7 +24,7 @@ import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
 import { getNextValue, isPropertyVisible, propertyExists } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
-import { ObjType, SurveyHelper } from "./surveyHelper";
+import { ObjType, SurveyHelper } from "./survey-helper";
 import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
 import "./components/string-editor.scss";

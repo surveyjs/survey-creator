@@ -1,7 +1,7 @@
 import { Question, Base } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../settings";
-import { SurveyHelper } from "../surveyHelper";
+import { SurveyHelper } from "../survey-helper";
 
 export class DefaultValueEditor extends PropertyEditorSetupValue {
   constructor(

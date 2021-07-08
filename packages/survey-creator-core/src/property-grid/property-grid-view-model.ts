@@ -8,7 +8,7 @@ import {
 } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
-import { SurveyHelper } from "../surveyHelper";
+import { SurveyHelper } from "../survey-helper";
 import { ObjectSelectorModel } from "./object-selector";
 import { CreatorBase } from "../creator-base";
 

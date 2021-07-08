@@ -21,7 +21,7 @@ import {
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyHelper } from "../surveyHelper";
+import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
 
 export class ConditionEditorItem {

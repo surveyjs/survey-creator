@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { ImplementorBase, Survey } from "survey-knockout-ui";
 import { SurveyCreator } from "../creator";
-import { CreatorBase, PageViewModel, toggleHovered } from "@survey/creator";
+import { CreatorBase, PageViewModel, SurveyHelper, toggleHovered } from "@survey/creator";
 import { PageModel } from "survey-core";
 
 //import "./page.scss";
@@ -23,7 +23,7 @@ ko.components.register("svc-page", {
       const creator: SurveyCreator = params.creator;
       const model = new KnockoutPageViewModel(creator, ko.unwrap(params.page));
       model.onPageSelectedCallback = () => {
-        componentInfo.element.scrollIntoView();
+        SurveyHelper.scrollIntoViewIfNeeded(componentInfo.element);
       };
       new ImplementorBase(model);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {

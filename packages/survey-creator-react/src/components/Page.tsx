@@ -6,7 +6,7 @@ import {
   SurveyPage,
   SvgIcon
 } from "survey-react-ui";
-import { CreatorBase, PageViewModel, toggleHovered } from "@survey/creator";
+import { CreatorBase, PageViewModel, SurveyHelper, toggleHovered } from "@survey/creator";
 import React from "react";
 import { ReactMouseEvent } from "../events";
 
@@ -38,7 +38,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     super.componentDidMount();
     this.model.onPageSelectedCallback = () => {
       if (!!this.rootRef.current) {
-        this.rootRef.current.scrollIntoView();
+        SurveyHelper.scrollIntoViewIfNeeded(this.rootRef.current);
       }
     };
   }

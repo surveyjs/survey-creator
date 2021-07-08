@@ -50,6 +50,7 @@ export * from "../toolbox";
 export * from "../utils/events";
 export * from "../utils/utils";
 export * from "../question-editor/definition";
+export * from "../survey-helper";
 
 import "../components/button.scss";
 import "../components/property-panel/property-panel-item.scss";
