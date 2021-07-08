@@ -2,14 +2,14 @@
   <div class="svc-top-bar">
     <!-- ko component: { name: 'svc-tabbed-menu', params: { items: creator.tabs } } -->
     <!-- /ko -->
-    <!-- ko component: { name: 'sv-action-bar', params: { items: creator.toolbarItems } } -->
+    <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
     <!-- /ko -->
   </div>
   <div class="svc-creator__content-wrapper svc-flex-row">
     <div class="svc-creator__content-holder svc-flex-column">
       <!-- ko foreach: creator.tabs -->
       <!-- ko if: $parent.creator.viewType == id -->
-      <div class="svc-creator-tab">
+      <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv' + id }">
         <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
         <!-- /ko -->
       </div>
@@ -19,7 +19,7 @@
   </div>
   <!-- ko ifnot: creator.haveCommercialLicense -->
   <div class="svc-creator__banner">
-    <span class="svc-creator__non-commercial-text" data-bind="text: creator.licenseText"></span>
+    <span class="svc-creator__non-commercial-text"><a href="https://surveyjs.io/buy" data-bind="text: creator.licenseText"></a></span>
   </div>
   <!-- /ko -->
 </div>

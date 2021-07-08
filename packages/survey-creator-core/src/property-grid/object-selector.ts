@@ -7,7 +7,7 @@ import {
   propertyArray
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyHelper } from "../surveyHelper";
+import { SurveyHelper } from "../survey-helper";
 
 export class ObjectSelectorItem extends Base implements IActionBarItem {
   private textInLow: string;

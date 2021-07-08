@@ -175,7 +175,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       <!-- /ko -->
       
     
-      <!-- ko component: { name: 'sv-action-bar', params: { items: creator.toolbarItems } } -->
+      <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
       <!-- /ko -->
       
   
@@ -389,9 +389,13 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     
       <span
         class="svc-creator__non-commercial-text"
-        data-bind="text: creator.licenseText"
       >
-        
+        <a
+          data-bind="text: creator.licenseText"
+          href="https://surveyjs.io/buy"
+        >
+          Please purchase a SurveyJS Creator developer license to use it in your app
+        </a>
       </span>
       
   

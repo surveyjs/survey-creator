@@ -1,7 +1,7 @@
 <!-- ko if: mode == "view" -->
 <div class="svc-creator-tab__content">
   <div class="svc-plugin-tab__content-actions">
-    <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarItems } } -->
+    <!-- ko component: { name: 'sv-action-bar', params: { model: toolbar } } -->
     <!-- /ko -->
   </div>
   <div class="svc-plugin-tab__content">
@@ -20,7 +20,7 @@
   <div
     class="svc-plugin-tab__content-actions svc-tab-logic-edit__content-actions"
   >
-    <!-- ko component: { name: 'sv-action-bar', params: { items: toolbarEditItems } } -->
+    <!-- ko component: { name: 'sv-action-bar', params: { model: editToolbar } } -->
     <!-- /ko -->
   </div>
 </div>

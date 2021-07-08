@@ -3,7 +3,7 @@ import {
   ISurveyQuestionEditorDefinition,
 } from "./definition";
 import * as Survey from "survey-core";
-import { SurveyHelper } from "../surveyHelper";
+import { SurveyHelper } from "../survey-helper";
 import { ISurveyCreatorOptions } from "../settings";
 
 export class SurveyQuestionEditorPropertyDefinition {

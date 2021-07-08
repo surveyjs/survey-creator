@@ -117,7 +117,7 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById("root")
 );
-creator.toolbarItems.push({
+creator.toolbarItems.push(new Survey.Action({
     id: "toolboxCustomization",
     visible: true,
     title: "Toolbox Customization",
@@ -125,4 +125,23 @@ creator.toolbarItems.push({
     action: function () {
         alert("Hi!");
     }
-});
+}));
+creator.toolbox.changeCategories([
+    {
+        name: "panel",
+        category: "Panels"
+    }, {
+        name: "paneldynamic",
+        category: "Panels"
+    }, {
+        name: "matrix",
+        category: "Matrix"
+    }, {
+        name: "matrixdropdown",
+        category: "Matrix"
+    }, {
+        name: "matrixdynamic",
+        category: "Matrix"
+    }
+]);  
+creator.toolbox.isCompact = false;

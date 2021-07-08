@@ -76,7 +76,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           contentEditable="true"
           aria-placeholder={this.placeholder}
           suppressContentEditableWarning={true}
-          style={this.style}
+          // style={this.style}
           dangerouslySetInnerHTML={htmlValue}
           onBlur={this.onInput}
           onKeyDown={this.onKeyDown}
@@ -91,7 +91,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           contentEditable="true"
           aria-placeholder={this.placeholder}
           suppressContentEditableWarning={true}
-          style={this.style}
+          // style={this.style}
           onBlur={this.onInput}
           onKeyDown={this.onKeyDown}
           onClick={this.edit}

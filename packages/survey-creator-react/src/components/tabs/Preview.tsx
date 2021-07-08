@@ -32,7 +32,7 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
           ) : null}
         </div>
         <div className="svc-test-tab__content-actions">
-          <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+          <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
         </div>
       </div>
     );
