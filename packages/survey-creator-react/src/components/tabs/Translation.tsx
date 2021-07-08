@@ -25,7 +25,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
           <Survey model={this.model.stringsSurvey}></Survey>
         </div>
         <div className="svc-test-tab__content-actions svc-translation-tab__content-actions">
-          <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
+          <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
         </div>
       </div>
     );

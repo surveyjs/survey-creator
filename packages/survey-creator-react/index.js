@@ -117,7 +117,7 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById("root")
 );
-creator.toolbarItems.push({
+creator.toolbarItems.push(new Survey.Action({
     id: "toolboxCustomization",
     visible: true,
     title: "Toolbox Customization",
@@ -125,10 +125,8 @@ creator.toolbarItems.push({
     action: function () {
         alert("Hi!");
     }
-});
-creator
-.toolbox
-.changeCategories([
+}));
+creator.toolbox.changeCategories([
     {
         name: "panel",
         category: "Panels"

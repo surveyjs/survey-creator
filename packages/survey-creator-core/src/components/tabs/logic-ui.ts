@@ -1,9 +1,8 @@
 import {
-  Base,
   SurveyModel,
-  IActionBarItem,
-  propertyArray,
-  property
+  AdaptiveActionContainer,
+  Action,
+  IAction
 } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
 import {
@@ -24,6 +23,9 @@ export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
   private itemEditorValue: LogicItemEditor;
   private itemsSurveyValue: SurveyModel;
+  public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+  public editToolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+
   constructor(
     public survey: SurveyModel,
     public options: ISurveyCreatorOptions = null
@@ -67,8 +69,13 @@ export class SurveyLogicUI extends SurveyLogic {
    * The list of toolbar items. You may add/remove/replace them.
    * @see IActionBarItem
    */
-  @propertyArray() toolbarItems: Array<IActionBarItem>;
-  @propertyArray() toolbarEditItems: Array<IActionBarItem>;
+  public get toolbarItems(): Array<IAction>{
+    return this.toolbar.actions;
+  }
+  public get toolbarEditItems(): Array<IAction>{
+    return this.editToolbar.actions;
+  }
+  
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "items") {
@@ -176,7 +183,7 @@ export class SurveyLogicUI extends SurveyLogic {
     matrix.rowCount = data.length;
   }
   private setupToolbarItems() {
-    this.toolbarItems.push({
+    this.toolbar.actions.push(new Action({
       id: "svd-logic-addNew",
       title: this.addNewText,
       tooltip: this.addNewText,
@@ -184,8 +191,8 @@ export class SurveyLogicUI extends SurveyLogic {
       action: () => {
         this.addNew();
       }
-    });
-    this.toolbarEditItems.push({
+    }));
+    this.editToolbar.actions.push(new Action({
       id: "svd-logic-saveAndBack",
       title: this.getLocString("pe.saveAndBack"),
       tooltip: this.getLocString("pe.saveAndBackTooltip"),
@@ -193,8 +200,8 @@ export class SurveyLogicUI extends SurveyLogic {
       action: () => {
         this.saveEditableItemAndBack();
       }
-    });
-    this.toolbarEditItems.push({
+    }));
+    this.editToolbar.actions.push(new Action({
       id: "svd-logic-save",
       title: this.getLocString("pe.save"),
       tooltip: this.getLocString("pe.saveTooltip"),
@@ -202,8 +209,8 @@ export class SurveyLogicUI extends SurveyLogic {
       action: () => {
         this.saveEditableItem();
       }
-    });
-    this.toolbarEditItems.push({
+    }));
+    this.editToolbar.actions.push(new Action({
       id: "svd-logic-back",
       title: this.getLocString("pe.back"),
       tooltip: this.getLocString("pe.backTooltip"),
@@ -211,7 +218,7 @@ export class SurveyLogicUI extends SurveyLogic {
       action: () => {
         this.mode = "view";
       }
-    });
+    }));
   }
   public get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");

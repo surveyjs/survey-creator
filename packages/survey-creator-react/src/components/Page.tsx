@@ -101,7 +101,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
             </button>
           </div>
           <div className="svc-page__content-actions">
-            <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+            <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
           </div>
         </div>
       </React.Fragment>
