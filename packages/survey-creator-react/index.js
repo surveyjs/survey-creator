@@ -126,3 +126,24 @@ creator.toolbarItems.push({
         alert("Hi!");
     }
 });
+creator
+.toolbox
+.changeCategories([
+    {
+        name: "panel",
+        category: "Panels"
+    }, {
+        name: "paneldynamic",
+        category: "Panels"
+    }, {
+        name: "matrix",
+        category: "Matrix"
+    }, {
+        name: "matrixdropdown",
+        category: "Matrix"
+    }, {
+        name: "matrixdynamic",
+        category: "Matrix"
+    }
+]);  
+creator.toolbox.isCompact = false;
