@@ -54,7 +54,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
         </div>
         {content}
         <div className="svc-question__content-actions">
-          <SurveyActionBar items={this.model.actions}></SurveyActionBar>
+          <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
         </div>
       </div>);
     }

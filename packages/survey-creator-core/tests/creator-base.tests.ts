@@ -593,7 +593,7 @@ test("Page duplicate action, copy a page and check the index", (): any => {
   expect(creator.survey.pages).toHaveLength(2);
   var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
   var action = creator.getActionBarItemByActions(
-    pageModel.actions,
+    pageModel.actionContainer.actions,
     "duplicate"
   );
   expect(action).toBeTruthy();

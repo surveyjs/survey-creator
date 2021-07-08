@@ -12865,7 +12865,7 @@ if (!window["%hammerhead%"]) {
     counter++;
   }
   window.creator.JSON = json3;
-  creator.toolbarItems.push({
+  creator.toolbarItems.push(new Survey.Action({
     id: "toolboxCustomization",
     visible: true,
     title: "Toolbox Customization",
@@ -12873,5 +12873,5 @@ if (!window["%hammerhead%"]) {
     action: function () {
       alert("Hi!");
     }
-  });
+  }));
 }

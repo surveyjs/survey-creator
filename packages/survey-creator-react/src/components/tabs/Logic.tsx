@@ -32,7 +32,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
     return (
       <Fragment>
         <div className="svc-plugin-tab__content-actions">
-          <SurveyActionBar items={this.model.toolbarItems}></SurveyActionBar>
+          <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
         </div>
         <div className="svc-plugin-tab__content">
           <Survey model={this.model.itemsSurvey}></Survey>
@@ -51,9 +51,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
           </div>
         </div>
         <div className="svc-plugin-tab__content-actions svc-tab-logic-edit__content-actions">
-          <SurveyActionBar
-            items={this.model.toolbarEditItems}
-          ></SurveyActionBar>
+          <SurveyActionBar model={this.model.editToolbar}></SurveyActionBar>
         </div>
       </Fragment>
     );

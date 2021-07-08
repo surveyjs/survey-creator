@@ -26,18 +26,12 @@ test("Test language Bar Item", (): any => {
   expect(model.languages[1].id).toEqual("de");
   expect(model.languages[1].title).toEqual("deutsch");
   expect(model.activeLanguage).toEqual("en");
-  let langAction : any;
-  for (let i: number = 0; i < model.actions.length; i++) {
-    if (model.actions[i].id == "languageSelector") {
-      langAction = model.actions[i];
-      break;
-    }
-  }
+  let langAction = model.actions.filter(action => action.id === "languageSelector")[0];
   expect(langAction).toBeTruthy();
-  expect(langAction.title()).toEqual("english");
+  expect(langAction.title).toEqual("english");
   model.activeLanguage = "de";
   expect(model.survey.locale).toEqual("de");
-  expect(langAction.title()).toEqual("deutsch");
+  expect(langAction.title).toEqual("deutsch");
 });
 
 test("Check page list state after change page arrows click", (): any => {

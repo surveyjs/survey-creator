@@ -13,6 +13,7 @@ import {
   SurveyElement,
   ItemValue,
   QuestionSelectBase,
+  AdaptiveActionContainer,
   QuestionRowModel
 } from "survey-core";
 import {
@@ -37,7 +38,7 @@ import { editableStringRendererName } from "./components/StringEditor";
 StylesManager.applyTheme("modern");
 
 interface ISurveyCreatorToolBarItemsComponentProps {
-  toolbar: CreatorToolbarItems;
+  toolbar: AdaptiveActionContainer;
 }
 
 export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
@@ -47,14 +48,14 @@ export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
   constructor(props: ISurveyCreatorComponentProps) {
     super(props);
   }
-  get toolbar(): CreatorToolbarItems {
+  get toolbar(): AdaptiveActionContainer {
     return this.props.toolbar;
   }
   protected getStateElement(): Base {
     return this.props.toolbar;
   }
   protected renderElement(): JSX.Element {
-    return <SurveyActionBar items={[].concat(this.toolbar.items)}></SurveyActionBar>;
+    return <SurveyActionBar model={this.toolbar}></SurveyActionBar>;
   }
 }
 
@@ -92,7 +93,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
           <div className="svc-top-bar">
             <TabbedMenuComponent items={creator.tabs}></TabbedMenuComponent>
             <SurveyCreatorToolBarItemsComponent
-              toolbar={creator.toolbarItemsWrapper}
+              toolbar={creator.toolbar}
             ></SurveyCreatorToolBarItemsComponent>
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">

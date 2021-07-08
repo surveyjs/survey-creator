@@ -2,9 +2,9 @@ import {
   Base,
   SurveyModel,
   property,
-  propertyArray,
-  IActionBarItem,
-  PopupModel
+  PopupModel,
+  AdaptiveActionContainer,
+  Action
 } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
@@ -13,13 +13,22 @@ import { ObjectSelectorModel } from "./object-selector";
 import { CreatorBase } from "../creator-base";
 
 export class PropertyGridViewModel<T extends SurveyModel> extends Base {
+  private nextSelectionAction: Action;
+  private prevSelectionAction: Action;
+  private objectSelectionAction: Action;
+  private onPropertyGridVisibilityChanged;
+
   @property() survey: SurveyModel;
-  @propertyArray() toolbarItems: Array<IActionBarItem>;
   @property() title: string;
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
   @property({ defaultValue: true }) visible: boolean;
-  private onPropertyGridVisibilityChanged;
+
+  public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+  public get toolbarItems(): Array<Action> {
+    return this.toolbar.actions;
+  }
+
   constructor(private creator: CreatorBase<T>) {
     super();
     this.onPropertyGridVisibilityChanged = (
@@ -44,32 +53,39 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
         this.selectionController.selectFromAction(obj, propertyName);
       }
     };
-    this.toolbarItems.push({
+
+    var actions: Array<Action> = [];
+    actions.push(new Action({
       id: "svd-grid-hide",
       iconName: "icon-hide",
       component: "sv-action-bar-item",
       action: () => {
         this.creator.showPropertyGrid = false;
       }
-    });
-    this.toolbarItems.push({
-      id: "svd-grid-history-prev",
+    }));
+
+    this.prevSelectionAction = new Action({
+    id: "svd-grid-history-prev",
       iconName: "icon-prev",
       component: "sv-action-bar-item",
-      enabled: () => this.hasPrev,
+      enabled: this.hasPrev,
       action: () => {
         this.selectionController.prev();
       }
     });
-    this.toolbarItems.push({
+    actions.push(this.prevSelectionAction);
+
+    this.nextSelectionAction = new Action({
       id: "svd-grid-history-next",
       iconName: "icon-next",
       component: "sv-action-bar-item",
-      enabled: () => this.hasNext,
+      enabled: this.hasNext,
       action: () => {
         this.selectionController.next();
       }
     });
+    actions.push(this.nextSelectionAction);
+
     const selectorModel = new ObjectSelectorModel(
       (obj: Base, reason: string, displayName: string) => {
         return this.model.options.getObjectDisplayName(
@@ -87,9 +103,10 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
       "bottom",
       "left"
     );
-    this.toolbarItems.push({
+
+    this.objectSelectionAction = new Action({
       id: "svd-grid-object-selector",
-      title: () => this.title,
+      title: this.title,
       css: "sv-action--last sv-action-bar-item--secondary",
       iconName: "icon-more",
       component: "sv-action-bar-item-dropdown",
@@ -106,8 +123,28 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
       },
       popupModel: selectorPopupModel
     });
+    actions.push(this.objectSelectionAction);
+    this.toolbar.actions = actions;
+
     this.onSurveyChanged();
   }
+
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+
+    if (!this.toolbarItems || this.toolbarItems.length <= 0) return;
+
+    if (name === "hasNext") {
+      this.nextSelectionAction.enabled = this.hasNext;
+    }
+    if (name === "hasPrev") {
+      this.prevSelectionAction.enabled = this.hasPrev;
+    }
+    if (name === "title") {
+      this.objectSelectionAction.title = this.title;
+    }
+  }
+
   public dispose() {
     if (!!this.creator && !this.isDisposed) {
       this.creator.onShowPropertyGridVisiblityChanged.remove(
@@ -122,6 +159,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
   private get selectionController(): SelectionHistory {
     return this.creator.selectionHistoryController;
   }
+
   private onSurveyChanged() {
     this.survey = this.model.survey;
     if (!!this.survey) {
