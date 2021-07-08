@@ -114,7 +114,7 @@ export class CreatorBase<T extends SurveyModel>
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
-  private toolbarItemsValue: AdaptiveActionContainer;
+  private toolbarValue: AdaptiveActionContainer;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -128,10 +128,10 @@ export class CreatorBase<T extends SurveyModel>
   @property() surveyValue: T;
 
   public get toolbarItems(): Array<Action> {
-    return this.toolbarItemsValue.actions;
+    return this.toolbarValue.actions;
   }
-  public get toolbarItemsWrapper(): AdaptiveActionContainer {
-    return this.toolbarItemsValue;
+  public get toolbar(): AdaptiveActionContainer {
+    return this.toolbarValue;
   }
   public dragDropHelper: DragDropHelper;
 
@@ -760,7 +760,7 @@ export class CreatorBase<T extends SurveyModel>
         "Creator constructor has one parameter, as creator options, in V2."
       );
     }
-    this.toolbarItemsValue = new AdaptiveActionContainer();
+    this.toolbarValue = new AdaptiveActionContainer();
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.setOptions(this.options);
@@ -917,7 +917,7 @@ export class CreatorBase<T extends SurveyModel>
         this.plugins[key].createActions(items);
       }
     }
-    this.toolbarItemsValue.actions = items;
+    this.toolbarValue.actions = items;
   }
 
   public getOptions() {

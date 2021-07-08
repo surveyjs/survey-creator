@@ -175,7 +175,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       <!-- /ko -->
       
     
-      <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbarItemsWrapper } } -->
+      <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
       <!-- /ko -->
       
   

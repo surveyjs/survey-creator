@@ -93,7 +93,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
           <div className="svc-top-bar">
             <TabbedMenuComponent items={creator.tabs}></TabbedMenuComponent>
             <SurveyCreatorToolBarItemsComponent
-              toolbar={creator.toolbarItemsWrapper}
+              toolbar={creator.toolbar}
             ></SurveyCreatorToolBarItemsComponent>
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">
