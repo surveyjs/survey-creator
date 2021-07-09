@@ -18,7 +18,7 @@ export var propertyGridCss = {
     next: "spg-btn spg-footer__next-btn",
     start: "spg-btn spg-footer__start-btn",
     preview: "spg-btn spg-footer__preview-btn",
-    edit: "spg-btn spg-footer__edit-btn",
+    edit: "spg-btn spg-footer__edit-btn"
   },
   panel: {
     title: "spg-title spg-panel__title",
@@ -31,7 +31,7 @@ export var propertyGridCss = {
     icon: "spg-panel__icon",
     iconExpanded: "spg-panel__icon--expanded",
     footer: "spg-panel__footer",
-    requiredText: "spg-panel__required-text",
+    requiredText: "spg-panel__required-text"
   },
   paneldynamic: {
     root: "spg-paneldynamic",
@@ -49,7 +49,7 @@ export var propertyGridCss = {
     progress: "spg-progress",
     progressBar: "spg-progress__bar",
     progressText: "spg-paneldynamic__progress-text",
-    separator: "spg-paneldynamic__separator",
+    separator: "spg-paneldynamic__separator"
   },
   progress: "spg-progress spg-body__progress",
   progressBar: "spg-progress__bar",
@@ -58,7 +58,7 @@ export var propertyGridCss = {
   page: {
     root: "spg-page spg-body__page",
     title: "spg-title spg-page__title",
-    description: "spg-description spg-page__description",
+    description: "spg-description spg-page__description"
   },
   pageTitle: "spg-title spg-page__title",
   pageDescription: "spg-description spg-page__description",
@@ -88,7 +88,7 @@ export var propertyGridCss = {
     footer: "spg-question__footer",
     formGroup: "spg-question__form-group",
     hasError: "",
-    disabled: "spg-question--disabled",
+    disabled: "spg-question--disabled"
   },
   image: { root: "spg-image", image: "sv_image_image" },
   error: {
@@ -96,7 +96,7 @@ export var propertyGridCss = {
     icon: "",
     item: "",
     locationTop: "spg-question__erbox--location--top",
-    locationBottom: "spg-question__erbox--location--bottom",
+    locationBottom: "spg-question__erbox--location--bottom"
   },
   checkbox: {
     root: "spg-selectbase",
@@ -114,7 +114,7 @@ export var propertyGridCss = {
     controlLabel: "spg-item__control-label",
     materialDecorator: "spg-item__decorator spg-checkbox__decorator",
     other: "spg-comment spg-question__other",
-    column: "spg-selectbase__column",
+    column: "spg-selectbase__column"
   },
   radiogroup: {
     root: "spg-selectbase",
@@ -131,7 +131,7 @@ export var propertyGridCss = {
     materialDecorator: "spg-item__decorator spg-radio__decorator",
     other: "spg-comment spg-question__other",
     clearButton: "spg-btn spg-selectbase__clear-btn",
-    column: "spg-selectbase__column",
+    column: "spg-selectbase__column"
   },
   boolean: {
     mainRoot: "spg-question spg-row__question spg-question--boolean",
@@ -144,19 +144,19 @@ export var propertyGridCss = {
     label: "spg-checkbox__caption",
     disabledLabel: "spg-checkbox__label--disabled",
     itemDecorator: "spg-checkbox__hidden",
-    materialDecorator: "spg-checkbox__rectangle",
+    materialDecorator: "spg-checkbox__rectangle"
   },
   text: {
     root: "spg-input spg-text",
     small: "spg-row__question--small",
-    onError: "spg-input--error",
+    onError: "spg-input--error"
   },
   multipletext: {
     root: "spg-multipletext",
     item: "spg-multipletext__item",
     itemTitle: "spg-multipletext__item-title",
     row: "spg-multipletext__row",
-    cell: "spg-multipletext__cell",
+    cell: "spg-multipletext__cell"
   },
   dropdown: {
     root: "",
@@ -164,7 +164,7 @@ export var propertyGridCss = {
     control: "spg-input",
     selectWrapper: "",
     other: "spg-comment spg-question__other",
-    onError: "spg-input--error",
+    onError: "spg-input--error"
   },
   imagepicker: {
     root: "spg-imagepicker",
@@ -178,7 +178,7 @@ export var propertyGridCss = {
     image: "spg-imagepicker__image",
     itemText: "spg-imagepicker__text",
     clearButton: "spg-btn",
-    other: "spg-comment spg-question__other",
+    other: "spg-comment spg-question__other"
   },
   matrix: {
     tableWrapper: "spg-matrix",
@@ -195,12 +195,12 @@ export var propertyGridCss = {
     itemDecorator: "spg-item__svg spg-radio__svg",
     cellText: "spg-matrix__text",
     cellTextSelected: "spg-matrix__text--checked",
-    cellTextDisabled: "spg-matrix__text--disabled",
+    cellTextDisabled: "spg-matrix__text--disabled"
   },
   matrixdropdown: {
     root: "spg-table",
     cell: "spg-table__cell",
-    headerCell: "spg-table__cell spg-table__cell--header",
+    headerCell: "spg-table__cell spg-table__cell--header"
   },
   matrixdynamic: {
     root: "spg-table spg-matrixdynamic",
@@ -218,6 +218,7 @@ export var propertyGridCss = {
     buttonRemove: "spg-matrixdynamic__remove-btn",
     iconAdd: "",
     iconRemove: "",
+    iconDrag: "spg-matrixdynamic__drag-element"
   },
   rating: {
     root: "spg-rating",
@@ -226,11 +227,11 @@ export var propertyGridCss = {
     minText: "spg-rating__min-text",
     itemText: "spg-rating__item-text",
     maxText: "spg-rating__max-text",
-    disabled: "spg-rating--disabled",
+    disabled: "spg-rating--disabled"
   },
   comment: {
     root: "spg-comment",
-    small: "spg-row__question--small",
+    small: "spg-row__question--small"
   },
   expression: "",
   file: {
@@ -249,20 +250,20 @@ export var propertyGridCss = {
     removeButtonBottom: "spg-btn spg-file__clean-btn",
     removeFile: "spg-hidden",
     removeFileSvg: "spg-file__remove-svg",
-    wrapper: "spg-file__wrapper",
+    wrapper: "spg-file__wrapper"
   },
   signaturepad: {
     root: "spg-signaturepad sjs_sp_container",
     small: "spg-row__question--small",
     controls: "sjs_sp_controls",
-    clearButton: "sjs_sp_clear",
+    clearButton: "sjs_sp_clear"
   },
   saveData: {
     root: "",
     saving: "",
     error: "",
     success: "",
-    saveAgainButton: "",
+    saveAgainButton: ""
   },
   window: {
     root: "sv_window",
@@ -272,7 +273,7 @@ export var propertyGridCss = {
       title: "",
       button: "",
       buttonExpanded: "",
-      buttonCollapsed: "",
-    },
-  },
+      buttonCollapsed: ""
+    }
+  }
 };

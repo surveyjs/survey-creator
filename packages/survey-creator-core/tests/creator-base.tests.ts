@@ -25,7 +25,7 @@ import {
   getElementWrapperComponentName,
   isStringEditable
 } from "../src/creator-base";
-import { SurveyHelper } from "../src/surveyHelper";
+import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
 
 test("options.questionTypes", (): any => {

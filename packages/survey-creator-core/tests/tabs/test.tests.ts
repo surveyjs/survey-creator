@@ -32,6 +32,11 @@ test("Test language Bar Item", (): any => {
   model.activeLanguage = "de";
   expect(model.survey.locale).toEqual("de");
   expect(langAction.title).toEqual("deutsch");
+
+  let testAgain = model.actions.filter(action => action.id === "testSurveyAgain")[0];
+  expect(testAgain).toBeTruthy();
+  testAgain.action();
+  expect(model.survey.locale).toEqual("de");
 });
 
 test("Check page list state after change page arrows click", (): any => {
