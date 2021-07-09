@@ -31,10 +31,10 @@ test("pages, active", (): any => {
     ]
   };
   var model = getTestModel(creator);
-  expect(model.pages).toHaveLength(3);
+  expect(model.pageListItems).toHaveLength(3);
   expect(model.activePage.name).toEqual("page1");
   model.survey.nextPage();
-  expect(model.pages[0].active).toBeFalsy();
+  expect(model.pageListItems[0].active).toBeFalsy();
   expect(model.activePage.name).toEqual("page2");
   model.activePage = model.survey.pages[2];
   expect(model.survey.currentPage.name).toEqual("page3");
@@ -51,10 +51,10 @@ test("pages, visibility", (): any => {
   };
   var model = getTestModel(creator);
   var q = model.survey.getQuestionByName("q2");
-  expect(model.pages).toHaveLength(3);
-  expect(model.pages[1].enabled).toBeFalsy();
+  expect(model.pageListItems).toHaveLength(3);
+  expect(model.pageListItems[1].enabled).toBeFalsy();
   q.visible = true;
-  expect(model.pages[1].enabled).toBeTruthy();
+  expect(model.pageListItems[1].enabled).toBeTruthy();
 });
 
 test("Reset options on show, Bug# https://surveyjs.answerdesk.io/ticket/details/T2147", (): any => {
@@ -96,9 +96,9 @@ test("Use title for pages", (): any => {
   });
   var model = getTestModel(creator);
   expect(model.survey.pages).toHaveLength(2);
-  expect(model.pages).toHaveLength(2);
-  expect(model.pages[0].title).toEqual("First Page");
-  expect(model.pages[1].title).toEqual("My Second Page");
+  expect(model.pageListItems).toHaveLength(2);
+  expect(model.pageListItems[0].title).toEqual("First Page");
+  expect(model.pageListItems[1].title).toEqual("My Second Page");
 });
 
 test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {

@@ -196,6 +196,7 @@ export class TestSurveyTabViewModel extends Base {
   public show() {
     this.showInvisibleElements = false;
     this.activePage = this.survey.currentPage;
+    this.survey.locale = this.activeLanguage;
     this.isRunning = true;
   }
 
