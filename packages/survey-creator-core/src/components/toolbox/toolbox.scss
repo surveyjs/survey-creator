@@ -51,6 +51,7 @@ svc-toolbox {
 .svc-toolbox__category-title {
   font-family: "Open Sans";
   font-size: calcSize(1.5);
+  font-weight: bold;
   line-height: calcSize(2);
   color: $foreground;
   vertical-align: middle;
