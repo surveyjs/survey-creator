@@ -83,7 +83,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     if(this.toolbox.isCompact || this.toolbox.categories.length == 1) {
       const items = this.renderItems();
       return (
-        <div ref={this.rootRef} className={"svc-toolbox svc-toolbox--compact"}>
+        <div ref={this.rootRef} className={"svc-toolbox" + (this.toolbox.isCompact ? " svc-toolbox--compact" : "")}>
           <div className="svc-toolbox__container"><div className="svc-toolbox__category">{items}</div></div>
         </div>
       );
