@@ -6,8 +6,13 @@
   <span class="svc-toolbox__item-container">
     <sv-svg-icon params="iconName: iconName, size: 24"></sv-svg-icon>
   </span>
+  <!-- ko if: isCompact -->
   <span class="svc-toolbox__item-banner">
     <sv-svg-icon params="iconName: iconName, size: 24"></sv-svg-icon>
     <span class="svc-toolbox__item-title" data-bind="text: title"></span>
   </span>
+  <!-- /ko -->
+  <!-- ko ifnot: isCompact -->
+  <span class="svc-toolbox__item-title" data-bind="text: title"></span>
+  <!-- /ko -->
 </div>

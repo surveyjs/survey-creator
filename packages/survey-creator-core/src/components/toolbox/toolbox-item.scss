@@ -40,6 +40,9 @@
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   transition: max-width 0.1s ease-in-out, padding 0.2s ease-in-out;
 
+  .svc-toolbox__item-title {
+    color: $foreground;
+  }
   .sv-svg-icon use {
     fill: $primary;
   }
@@ -52,6 +55,7 @@
   font-family: $font-family;
   font-weight: 600;
   font-size: 12px;
+  color: $foreground-light;
 }
 
 .svc-toolbox__item:hover {

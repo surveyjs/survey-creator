@@ -7,9 +7,20 @@ svc-toolbox {
 
 .svc-toolbox {
   height: 100%;
-  width: 84px;
   padding: calcSize(2);
   box-sizing: border-box;
+  overflow-y: auto;
+  direction: rtl;
+}
+
+.svc-toolbox--compact {
+  width: 84px;
+  overflow: visible;
+  direction: ltr;
+}
+
+.svc-toolbox__container {
+  direction: ltr;
 }
 
 .svc-toolbox__category {
@@ -23,4 +34,37 @@ svc-toolbox {
   width: calcSize(6);
   background-color: $border;
   margin: calcSize(1) 0;
+}
+
+.svc-toolbox__category-header {
+  height: calcSize(5);
+  padding: calcSize(1.5);
+  background: $background-dim;
+  // box-shadow: 0px 1px 0px $border;
+  border-bottom: 1px solid $border;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.svc-toolbox__category-title {
+  font-family: "Open Sans";
+  font-size: calcSize(1.5);
+  line-height: calcSize(2);
+  color: $foreground;
+  vertical-align: middle;
+}
+
+.svc-toolbox__category-header__controls {
+  position: absolute;
+  right: calcSize(1.2);
+  top: calcSize(1.2);
+  display: none;
+}
+
+.svc-toolbox__category-header:hover {
+  .svc-toolbox__category-header__controls {
+    display: block;
+  }
 }

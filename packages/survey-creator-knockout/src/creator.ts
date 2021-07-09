@@ -105,7 +105,6 @@ class DesignTimeSurveyModel extends Survey {
 }
 
 export class SurveyCreator extends CreatorBase<Survey> {
-  @property() testProp: string;
 
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);

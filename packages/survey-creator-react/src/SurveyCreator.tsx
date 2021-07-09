@@ -125,7 +125,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
           data: tab.data
         });
     return (
-      <div key={tab.id} id={"scrollableDiv" + tab.id} className="svc-creator-tab">
+      <div key={tab.id} id={"scrollableDiv-" + tab.id} className="svc-creator-tab">
         {component}
       </div>
     );
