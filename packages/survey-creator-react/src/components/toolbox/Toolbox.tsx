@@ -57,15 +57,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     )
   }
   private invisibleItemSelected(model: AdaptiveActionBarItemWrapper): void {
-    this.creator.clickToolboxItem(
-      SurveyCreatorToolbox.getToolboxItem(model).json
-    );
-  }
-  public static getToolboxItem(
-    wrapper: AdaptiveActionBarItemWrapper
-  ): IQuestionToolboxItem {
-    const item: IQuestionToolboxItem = wrapper.wrappedItem as IQuestionToolboxItem;
-    return item;
+    this.creator.clickToolboxItem((model.wrappedItem as IQuestionToolboxItem).json);
   }
   componentDidMount() {
     super.componentDidMount();
@@ -88,11 +80,11 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
 
   render(): JSX.Element {
     if (!this.hasItems) return null;
-    if(this.toolbox.isCompact) {
+    if(this.toolbox.isCompact || this.toolbox.categories.length == 1) {
       const items = this.renderItems();
       return (
         <div ref={this.rootRef} className={"svc-toolbox svc-toolbox--compact"}>
-          <div className="svc-toolbox__category">{items}</div>
+          <div className="svc-toolbox__container"><div className="svc-toolbox__category">{items}</div></div>
         </div>
       );
     } else {
@@ -107,7 +99,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   get hasItems(): boolean {
     return (this.adaptiveElement.items || []).length > 0;
   }
-  renderToolboxItem(item: AdaptiveActionBarItemWrapper): JSX.Element {
+  renderToolboxItem(item: AdaptiveActionBarItemWrapper, isCompact: boolean, useWrapped: boolean): JSX.Element {
     const className = "svc-toolbox__tool " + item.css;
     const style: CSSProperties = {
       visibility: item.isVisible === undefined || item.isVisible ? "visible" : "hidden"
@@ -118,9 +110,9 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     const itemComponent = ReactElementFactory.Instance.createElement(
       item.component || "svc-toolbox-item",
       {
-        item: item,
+        item: useWrapped ? item.wrappedItem : item,
         creator: this.creator,
-        isCompact: this.toolbox.isCompact
+        isCompact: isCompact
       }
     );
     return (
@@ -134,7 +126,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
   renderItems() {
     return this.adaptiveElement.items.map(
-      (item: AdaptiveActionBarItemWrapper) => this.renderToolboxItem(item)
+      (item: AdaptiveActionBarItemWrapper) => this.renderToolboxItem(item, this.toolbox.isCompact, true)
     );
   }
   renderCategories() {
@@ -157,78 +149,13 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     }
     let items = [];
     if(!category.collapsed) {
-      items = category.items.map(item => this.renderToolboxItem(item));
+      items = category.items.map(item => this.renderToolboxItem(item, false, false));
     }
     return (
-      <div className="svc-toolbox__category">
+      <div className="svc-toolbox__category" key={category.name}>
           {header}
           {items}
       </div>
     );
   }
 }
-
-export interface ISurveyCreatorToolboxItemProps {
-  item: IQuestionToolboxItem;
-  creator: CreatorBase<SurveyModel>;
-  isCompact: boolean
-}
-
-export class SurveyCreatorToolboxItem extends SurveyElementBase<
-  ISurveyCreatorToolboxItemProps,
-  any
-> {
-  model: ToolboxItemViewModel;
-  constructor(props) {
-    super(props);
-    const toolboxItem: IQuestionToolboxItem = this.props.item;
-    this.model = new ToolboxItemViewModel(toolboxItem, this.props.creator);
-  }
-  public get item() {
-    return this.props.item;
-  }
-  public get creator() {
-    return this.props.creator;
-  }
-  protected getStateElement(): Base {
-    return this.model;
-  }
-  render(): JSX.Element {
-    const className =
-      "svc-toolbox__item svc-toolbox__item--" + this.item.iconName;
-    return (
-      <div
-        className={className}
-        tabIndex={0}
-        title={this.item.tooltip}
-        role="button"
-        aria-label={
-          this.item.tooltip +
-          " " +
-          editorLocalization.getString("toolbox") +
-          " item"
-        }
-        onPointerDown={(event: any) => {
-          event.persist();
-          this.model.onPointerDown(event);
-        }}
-      >
-        <span className="svc-toolbox__item-container">
-          <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon>
-        </span>
-        {(this.props.isCompact ?
-          <span className="svc-toolbox__item-banner">
-            <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon>
-            <span className="svc-toolbox__item-title">{this.item.title}</span>
-          </span>
-          :
-          <span className="svc-toolbox__item-title">{this.item.title}</span>
-        )}
-      </div>
-    );
-  }
-}
-
-ReactElementFactory.Instance.registerElement("svc-toolbox-item", (props) => {
-  return React.createElement(SurveyCreatorToolboxItem, props);
-});

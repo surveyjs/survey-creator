@@ -72,10 +72,12 @@ export class TabDesignerComponent extends SurveyElementBase<
 
     return (
       <React.Fragment>
+        <div className="svc-flex-column">
         <SurveyCreatorToolbox
           toolbox={creator.toolbox}
           creator={creator}
         ></SurveyCreatorToolbox>
+        </div>
         <DesignerSurveyNavigationBlock survey={creator.survey} location="top" />{" "}
         <div className={"svc-tab-designer " + creator.survey.css.root}>
           <div className={creator.survey.css.container}>

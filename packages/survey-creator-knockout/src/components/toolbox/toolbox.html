@@ -1,6 +1,6 @@
 <div class="svc-toolbox" data-bind="css: { 'svc-toolbox--compact': isCompact }">
-  <!-- ko ifnot: isCompact -->
   <div class="svc-toolbox__container">
+  <!-- ko ifnot: isCompact || categories().length == 1 -->
   <!-- ko foreach: categories -->
   <div class="svc-toolbox__category">
     <!-- ko if: $parent.categories().length > 1 -->
@@ -28,10 +28,9 @@
     <!-- /ko -->
   </div>
   <!-- /ko -->
-  </div>
   <!-- /ko -->
 
-  <!-- ko if: isCompact -->
+  <!-- ko if: isCompact || categories().length == 1 -->
   <div class="svc-toolbox__category">
     <!-- ko foreach: items -->
     <div
@@ -41,10 +40,11 @@
       <!-- ko if: $data.needSeparator -->
       <div class="svc-toolbox__category-separator"></div>
       <!-- /ko -->
-      <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator, isCompact: true } } -->
+      <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data.wrappedItem, creator: $parent.creator, isCompact: $parent.isCompact } } -->
       <!-- /ko -->
     </div>
     <!-- /ko -->
   </div>
   <!-- /ko -->
+  </div>
 </div>

@@ -54,19 +54,13 @@ export class ToolboxViewModel extends AdaptiveElement {
     new AdaptiveElementImplementor(this);
   }
 
-  public static getToolboxItem(
-    wrapper: AdaptiveActionBarItemWrapper
-  ): IQuestionToolboxItem {
-    const item: IQuestionToolboxItem = <any>wrapper.wrappedItem;
-    return item;
-  }
-
   public invisibleItemSelected(model: AdaptiveActionBarItemWrapper): void {
-    this.creator.clickToolboxItem(ToolboxViewModel.getToolboxItem(model).json);
+    this.creator.clickToolboxItem((model.wrappedItem as IQuestionToolboxItem).json);
   }
 
   dispose() {
     this._categoriesSubscription.dispose();
+    this._isCompactSubscription.dispose();
   }
 }
 

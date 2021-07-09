@@ -9,7 +9,7 @@
     <div class="svc-creator__content-holder svc-flex-column">
       <!-- ko foreach: creator.tabs -->
       <!-- ko if: $parent.creator.viewType == id -->
-      <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv' + id }">
+      <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv-' + id }">
         <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
         <!-- /ko -->
       </div>

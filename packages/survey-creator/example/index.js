@@ -55,20 +55,20 @@ if (!window["%hammerhead%"]) {
 
 
   var options = {
-    questionTypes: [
-      "text",
-      "checkbox",
-      "radiogroup",
-      "dropdown",
-      "comment",
-      "rating",
-      "imagepicker",
-      "boolean",
-      "html",
-      "file",
-      "expression"
-    ],
-    pageEditMode: "single"
+    // questionTypes: [
+    //   "text",
+    //   "checkbox",
+    //   "radiogroup",
+    //   "dropdown",
+    //   "comment",
+    //   "rating",
+    //   "imagepicker",
+    //   "boolean",
+    //   "html",
+    //   "file",
+    //   "expression"
+    // ],
+    // pageEditMode: "single"
   };
   var creator = new SurveyCreator.SurveyCreator("editorElement", options);
   creator.showToolbox = "right";
