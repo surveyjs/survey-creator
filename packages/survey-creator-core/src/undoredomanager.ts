@@ -1,4 +1,4 @@
-import * as Survey from "survey-core";
+import { ArrayChanges, Base, JsonObjectProperty, Serializer } from "survey-core";
 import { EditableObject } from "./editable-object";
 
 export interface IUndoRedoChange {
@@ -14,16 +14,16 @@ export class UndoRedoManager {
     name: string,
     oldValue: any,
     newValue: any,
-    sender: Survey.Base,
-    arrayChanges: Survey.ArrayChanges
+    sender: Base,
+    arrayChanges: ArrayChanges
   ) {
     if (EditableObject.isCopyObject(sender)) return;
     if (this._ignoreChanges) return;
 
     let transaction = this._preparingTransaction;
     let action = arrayChanges
-      ? new ArrayAction(name, sender, arrayChanges)
-      : new Action(name, oldValue, newValue, sender);
+      ? new UndoRedoArrayAction(name, sender, arrayChanges)
+      : new UndoRedoAction(name, oldValue, newValue, sender);
 
     if (!transaction) {
       transaction = new Transaction(name);
@@ -34,8 +34,8 @@ export class UndoRedoManager {
 
     transaction.addAction(action);
   }
-  public isCorrectProperty(sender: Survey.Base, propertyName: string): boolean {
-    var prop: Survey.JsonObjectProperty = Survey.Serializer.findProperty(
+  public isCorrectProperty(sender: Base, propertyName: string): boolean {
+    var prop: JsonObjectProperty = Serializer.findProperty(
       sender.getType(),
       propertyName
     );
@@ -46,7 +46,7 @@ export class UndoRedoManager {
   private _transactions: Transaction[] = [];
   private _currentTransactionIndex: number = -1;
 
-  public isCopyObject(sender: Survey.Base) {}
+  public isCopyObject(sender: Base) {}
   private _cutOffTail() {
     if (this._currentTransactionIndex + 1 !== this._transactions.length) {
       this._transactions.length = this._currentTransactionIndex + 1;
@@ -161,20 +161,18 @@ export class Transaction {
   }
 }
 
-export class UndoRedoAction {
-  apply() {}
-  rollback() {}
-  get changes(): IUndoRedoChange {
-    return <any>{};
-  }
+export interface IUndoRedoAction {
+  apply: () => void;
+  rollback: () => void;
+  get changes(): IUndoRedoChange;
 }
 
-export class Action {
+export class UndoRedoAction {
   constructor(
     private _propertyName: string,
     private _oldValue: any,
     private _newValue: any,
-    private _sender: Survey.Base
+    private _sender: Base
   ) {}
 
   apply() {
@@ -195,15 +193,15 @@ export class Action {
   }
 }
 
-export class ArrayAction {
+export class UndoRedoArrayAction {
   private _index: number = 0;
   private _itemsToAdd: any[] = [];
   private _deletedItems: any[] = [];
 
   constructor(
     private _propertyName: string,
-    private _sender: Survey.Base,
-    arrayChanges: Survey.ArrayChanges
+    private _sender: Base,
+    arrayChanges: ArrayChanges
   ) {
     this._index = arrayChanges.index;
     this._itemsToAdd = arrayChanges.itemsToAdd;

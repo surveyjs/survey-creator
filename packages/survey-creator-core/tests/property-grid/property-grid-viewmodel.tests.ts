@@ -86,9 +86,9 @@ test("Element Selector Bar Item", () => {
     ]
   };
   var model = new PropertyGridViewModel(creator);
-  var selectorBarItem = model.toolbarItems.find((item) => {
+  var selectorBarItem = model.toolbarItems.filter((item) => {
     if (item.id === "svd-grid-object-selector") return item;
-  });
+  })[0];
   expect(selectorBarItem).toBeTruthy();
   var popupModel = <PopupModel>selectorBarItem.popupModel;
   expect(popupModel).toBeTruthy();
