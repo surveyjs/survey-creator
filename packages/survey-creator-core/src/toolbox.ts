@@ -3,7 +3,7 @@ import {
   ComponentCollection,
   CustomWidgetCollection,
   ElementFactory,
-  IActionBarItem,
+  IAction,
   JsonObject,
   property,
   propertyArray,
@@ -17,7 +17,7 @@ import { editorLocalization } from "./editorLocalization";
 /**
  * The Toolbox item description.
  */
-export interface IQuestionToolboxItem extends IActionBarItem {
+export interface IQuestionToolboxItem extends IAction {
   /**
    * A unique name
    */

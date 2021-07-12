@@ -8,9 +8,9 @@ import {
 import React, { CSSProperties } from "react";
 import { ToolboxItemViewModel } from "@survey/creator";
 import {
-  AdaptiveActionBarItemWrapper,
-  AdaptiveElement,
   Base,
+  Action,
+  AdaptiveActionContainer,
   VerticalResponsivityManager,
   SurveyModel
 } from "survey-core";
@@ -28,7 +28,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   ISurveyCreatorToolboxProps,
   any
 > {
-  private adaptiveElement = new AdaptiveElement();
+  private adaptiveElement = new AdaptiveActionContainer();
   private manager: VerticalResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
 
@@ -41,7 +41,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
       this
     );
     this.rootRef = React.createRef();
-    this.setItems(this.props.toolbox.itemsValue);
+    this.adaptiveElement.setItems(this.props.toolbox.itemsValue, false);
   }
   public get creator() {
     return this.props.creator;
@@ -49,15 +49,10 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   public get toolbox() {
     return this.props.toolbox;
   }
-  private setItems(sourceItems: Array<IQuestionToolboxItem>){
-    this.adaptiveElement.items = sourceItems.map(
-      (item: IQuestionToolboxItem, itemIndex: number) => {
-        return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
-      }
-    )
-  }
-  private invisibleItemSelected(model: AdaptiveActionBarItemWrapper): void {
-    this.creator.clickToolboxItem((model.wrappedItem as IQuestionToolboxItem).json);
+  private invisibleItemSelected(model: Action): void {
+    this.creator.clickToolboxItem(
+      (model as any).json
+    );
   }
   componentDidMount() {
     super.componentDidMount();
@@ -80,7 +75,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
 
   render(): JSX.Element {
     if (!this.hasItems) return null;
-    if(this.toolbox.isCompact || this.toolbox.categories.length == 1) {
+    if (this.toolbox.isCompact || this.toolbox.categories.length == 1) {
       const items = this.renderItems();
       return (
         <div ref={this.rootRef} className={"svc-toolbox" + (this.toolbox.isCompact ? " svc-toolbox--compact" : "")}>
@@ -97,9 +92,12 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     }
   }
   get hasItems(): boolean {
-    return (this.adaptiveElement.items || []).length > 0;
+    return this.adaptiveElement.hasItems;
   }
-  renderToolboxItem(item: AdaptiveActionBarItemWrapper, isCompact: boolean, useWrapped: boolean): JSX.Element {
+  renderToolboxItem(
+    item: Action,
+    isCompact: boolean
+  ): JSX.Element {
     const className = "svc-toolbox__tool " + item.css;
     const style: CSSProperties = {
       visibility: item.isVisible === undefined || item.isVisible ? "visible" : "hidden"
@@ -110,7 +108,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     const itemComponent = ReactElementFactory.Instance.createElement(
       item.component || "svc-toolbox-item",
       {
-        item: useWrapped ? item.wrappedItem : item,
+        item: item,
         creator: this.creator,
         isCompact: isCompact
       }
@@ -125,8 +123,8 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     );
   }
   renderItems() {
-    return this.adaptiveElement.items.map(
-      (item: AdaptiveActionBarItemWrapper) => this.renderToolboxItem(item, this.toolbox.isCompact, true)
+    return this.adaptiveElement.actions.map(
+      (item: Action) => this.renderToolboxItem(item, this.toolbox.isCompact)
     );
   }
   renderCategories() {
@@ -134,27 +132,27 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
   renderToolboxCategory(category: any): JSX.Element {
     let header = null;
-    if(this.creator.toolboxCategories.length > 1) {
+    if (this.creator.toolboxCategories.length > 1) {
       header = 
       <div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
-        <span className="svc-toolbox__category-title" >{category.name}</span>
-        <div className="svc-toolbox__category-header__controls">
+          <span className="svc-toolbox__category-title">{category.name}</span>
+          <div className="svc-toolbox__category-header__controls">
           {( category.collapsed ?
             <SvgIcon className="svc-toolbox__category-header__button svc-string-editor__button--expand" size={16} iconName={"icon-expand"}></SvgIcon>
             :
             <SvgIcon className="svc-toolbox__category-header__button svc-string-editor__button--collapse" size={16} iconName={"icon-collapse"}></SvgIcon>
-          )}
-        </div>
+            )}
+          </div>
       </div>;
     }
     let items = [];
-    if(!category.collapsed) {
-      items = category.items.map(item => this.renderToolboxItem(item, false, false));
+    if (!category.collapsed) {
+      items = category.items.map(item => this.renderToolboxItem(item, false));
     }
     return (
       <div className="svc-toolbox__category" key={category.name}>
-          {header}
-          {items}
+        {header}
+        {items}
       </div>
     );
   }

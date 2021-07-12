@@ -11,7 +11,6 @@ import {
   surveyLocalization,
   ILocalizableString,
   ItemValue,
-  IActionBarItem,
   QuestionDropdownModel,
   QuestionCheckboxModel,
   PopupModel,
@@ -20,7 +19,8 @@ import {
   QuestionMatrixDropdownModel,
   PanelModel,
   AdaptiveActionContainer,
-  Action
+  Action,
+  IAction
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
@@ -784,7 +784,7 @@ export class Translation extends Base implements ITranslationLocales {
             title: locale.text,
             data: locale
           })),
-          (item: IActionBarItem) => {
+          (item: IAction) => {
             this.addLocale(item.id);
             this.chooseLanguagePopupModel.toggleVisibility();
           },
@@ -823,7 +823,7 @@ export class Translation extends Base implements ITranslationLocales {
               )
             }))
           ),
-          (item: IActionBarItem) => {
+          (item: IAction) => {
             this.filteredPage = !!item.id
               ? this.survey.getPageByName(item.id)
               : null;

@@ -1,6 +1,5 @@
 import {
   Base,
-  IActionBarItem,
   PageModel,
   property,
   propertyArray,

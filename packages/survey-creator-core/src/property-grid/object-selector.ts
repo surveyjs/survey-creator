@@ -2,14 +2,14 @@ import {
   Base,
   SurveyModel,
   property,
-  IActionBarItem,
   ListModel,
-  propertyArray
+  propertyArray,
+  IAction
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 
-export class ObjectSelectorItem extends Base implements IActionBarItem {
+export class ObjectSelectorItem extends Base implements IAction {
   private textInLow: string;
   public id: string;
   constructor(
@@ -53,7 +53,7 @@ export class ObjectSelector {
   public get items(): Array<ObjectSelectorItem> {
     return this.itemsValue;
   }
-  public getItemByObj(obj: Base): IActionBarItem {
+  public getItemByObj(obj: Base): IAction {
     var items = this.items;
     for (var i = 0; i < items.length; i++) {
       if (items[i].data === obj) return items[i];
@@ -163,7 +163,7 @@ export class ObjectSelectorModel extends Base {
     this.onItemsCreated();
     this.listModelValue = new ListModel(
       this.selector.items,
-      (item: IActionBarItem) => {
+      (item: IAction) => {
         onClose(item.data);
       },
       true,

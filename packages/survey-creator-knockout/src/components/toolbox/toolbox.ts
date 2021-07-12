@@ -1,17 +1,17 @@
 import * as ko from "knockout";
-import { AdaptiveElementImplementor, ImplementorBase } from "survey-knockout-ui";
+import { ImplementorBase } from "survey-knockout-ui";
 import { SurveyCreator } from "../../creator";
 import {
-  AdaptiveElement,
-  AdaptiveActionBarItemWrapper,
   VerticalResponsivityManager,
+  AdaptiveActionContainer,
+  Action
 } from "survey-core";
 //import "./toolbox.scss";
 import { IQuestionToolboxItem } from "@survey/creator";
 const template = require("./toolbox.html");
 // import template from "./toolbox.html";
 
-export class ToolboxViewModel extends AdaptiveElement {
+export class ToolboxViewModel extends AdaptiveActionContainer {
   private _categoriesSubscription: ko.Computed;
   public categories = ko.observableArray<any>();
   public creator: SurveyCreator;
@@ -35,27 +35,25 @@ export class ToolboxViewModel extends AdaptiveElement {
     this.dotsItemPopupModel.verticalPosition = "top";
     this.creator = creator;
     this._categoriesSubscription = ko.computed(() => {
-      const wrappedItems: AdaptiveActionBarItemWrapper[] = [];
+      const actions: Action[] = [];
       const categories = ko.unwrap(_categories);
       categories.forEach((category: any, categoryIndex) => {
         new ImplementorBase(category);
         (ko.unwrap(category.items) || []).forEach((item, index) => {
-          const wrapper = new AdaptiveActionBarItemWrapper(this, item);
           if (categoryIndex != 0 && index == 0) {
-            wrapper.needSeparator = true;
+            item.needSeparator = true;
           }
-          wrappedItems.push(wrapper);
+          actions.push(item);
         });
       });
       this._isCompactSubscription = ko.computed(() => this.isCompact = ko.unwrap(isCompact));
-      this.items = wrappedItems;
+      this.setItems(actions, false);
       this.categories(categories);
     });
-    new AdaptiveElementImplementor(this);
   }
 
-  public invisibleItemSelected(model: AdaptiveActionBarItemWrapper): void {
-    this.creator.clickToolboxItem((model.wrappedItem as IQuestionToolboxItem).json);
+  public invisibleItemSelected(model: Action): void {
+    this.creator.clickToolboxItem((<any>model).json);
   }
 
   dispose() {

@@ -1,6 +1,5 @@
 import * as Survey from "survey-core";
 import {
-  IActionBarItem,
   Base,
   SurveyModel,
   ListModel,
@@ -13,6 +12,7 @@ import {
   IElement,
   Serializer,
   AdaptiveActionContainer,
+  IAction,
   Action
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
@@ -53,13 +53,13 @@ export interface ICreatorPlugin {
   createActions?: (items: Array<Action>) => void;
 }
 
-export interface ITabbedMenuItem extends IActionBarItem {
+export interface ITabbedMenuItem extends IAction {
   componentContent: string;
   renderTab?: () => any;
 }
 
 export class CreatorToolbarItems extends Base {
-  @propertyArray() items: Array<IActionBarItem>;
+  @propertyArray() items: Array<IAction>;
 }
 
 /**
@@ -184,13 +184,13 @@ export class CreatorBase<T extends SurveyModel>
     componentContent?: string,
     index?: number
   ) {
-    var tab = {
+    var tab: ITabbedMenuItem = {
       id: name,
       title: !!title ? title : editorLocalization.getString("ed." + name),
       componentContent: componentContent ? componentContent : "svc-tab-" + name,
       data: plugin,
       action: () => this.makeNewViewActive(name),
-      active: () => this.viewType === name
+      active: this.viewType === name
     };
     if (index >= 0 && index < this.tabs.length) {
       this.tabs.splice(index, 0, tab);
@@ -879,8 +879,7 @@ export class CreatorBase<T extends SurveyModel>
     return page;
   }
   protected initTabs() {
-    const tabs: Array<ITabbedMenuItem> = [];
-    this.tabs = tabs;
+    this.tabs = [];
     this.initTabsPlugin();
     if (this.tabs.length > 0) {
       this.makeNewViewActive(this.tabs[0].id);
@@ -2237,12 +2236,12 @@ export class CreatorBase<T extends SurveyModel>
       this.undoRedoManager.stopTransaction();
     }
   }
-  createIActionBarItemByClass(className: string): IActionBarItem {
-    return {
+  createIActionBarItemByClass(className: string): Action {
+    return new Action({
       title: this.getLocString("qt." + className),
       id: className,
       iconName: "icon-" + className
-    };
+    });
   }
 
   public onElementMenuItemsChanged(element: any, items: Action[]) {
@@ -2264,6 +2263,12 @@ export class CreatorBase<T extends SurveyModel>
       return new Survey.ImageItemValue(nextValue);
     }
     return new Survey.ItemValue(nextValue);
+  }
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name === "viewType") {
+      this.tabs.forEach((tab) => (tab.active = this.viewType === tab.id));
+    }
   }
 }
 
