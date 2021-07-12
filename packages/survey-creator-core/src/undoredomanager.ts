@@ -1,4 +1,9 @@
-import { ArrayChanges, Base, JsonObjectProperty, Serializer } from "survey-core";
+import {
+  ArrayChanges,
+  Base,
+  JsonObjectProperty,
+  Serializer
+} from "survey-core";
 import { EditableObject } from "./editable-object";
 
 export interface IUndoRedoChange {
@@ -73,7 +78,7 @@ export class UndoRedoManager {
   private notifyChangesFinished(transaction: Transaction) {
     if (transaction.actions.length > 0 && transaction.actions[0]) {
       !!this.changesFinishedCallback &&
-        this.changesFinishedCallback(transaction.actions[0].changes);
+        this.changesFinishedCallback(transaction.actions[0].getChanges());
     }
   }
   canUndoRedoCallback() {}
@@ -164,7 +169,7 @@ export class Transaction {
 export interface IUndoRedoAction {
   apply: () => void;
   rollback: () => void;
-  get changes(): IUndoRedoChange;
+  getChanges(): IUndoRedoChange;
 }
 
 export class UndoRedoAction {
@@ -183,7 +188,7 @@ export class UndoRedoAction {
     this._sender[this._propertyName] = this._oldValue;
   }
 
-  get changes(): IUndoRedoChange {
+  getChanges(): IUndoRedoChange {
     return {
       object: this._sender,
       propertyName: this._propertyName,
@@ -222,7 +227,7 @@ export class UndoRedoArrayAction {
     );
     this._itemsToAdd = [].concat(itemsToAdd);
   }
-  get changes(): IUndoRedoChange {
+  getChanges(): IUndoRedoChange {
     return {
       object: this._sender,
       propertyName: this._propertyName,

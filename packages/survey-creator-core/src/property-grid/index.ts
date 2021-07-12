@@ -316,7 +316,7 @@ export class PropertyGridTitleActionsCreator {
       question,
       this.options
     );
-    if(!surveyPropertyEditor) return;
+    if (!surveyPropertyEditor) return;
     surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
     settings.showModal(
       "survey",
@@ -676,6 +676,9 @@ export class PropertyGridModel {
     this.survey.onGetQuestionTitleActions.add((sender, options) => {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
       this.onGetQuestionTitleActions(options);
+    });
+    this.survey.onGetPanelTitleActions.add((sender, options) => {
+      options.titleActions.splice(0, options.titleActions.length);
     });
     this.survey.onMatrixCellCreated.add((sender, options) => {
       this.onMatrixCellCreated(options);
