@@ -37,12 +37,19 @@ export interface IPropertyEditorSetup {
   apply(): boolean;
 }
 
-export function setSurveyJSONForPropertyGrid(json: any) {
+export function setSurveyJSONForPropertyGrid(
+  json: any,
+  updateOnTyping: boolean = true
+) {
   json.showNavigationButtons = "none";
   json.showPageTitles = false;
   json.focusFirstQuestionAutomatic = false;
   json.showQuestionNumbers = "off";
-  json.textUpdateMode = "onTyping";
+  json.questionTitleLocation = "top";
+  json.showProgressBar = "off";
+  if (updateOnTyping) {
+    json.textUpdateMode = "onTyping";
+  }
   json.requiredText = "";
 }
 
@@ -316,7 +323,7 @@ export class PropertyGridTitleActionsCreator {
       question,
       this.options
     );
-    if(!surveyPropertyEditor) return;
+    if (!surveyPropertyEditor) return;
     surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
     settings.showModal(
       "survey",
@@ -676,6 +683,9 @@ export class PropertyGridModel {
     this.survey.onGetQuestionTitleActions.add((sender, options) => {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
       this.onGetQuestionTitleActions(options);
+    });
+    this.survey.onGetPanelTitleActions.add((sender, options) => {
+      options.titleActions.splice(0, options.titleActions.length);
     });
     this.survey.onMatrixCellCreated.add((sender, options) => {
       this.onMatrixCellCreated(options);

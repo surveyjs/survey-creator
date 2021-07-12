@@ -639,15 +639,12 @@ export class Translation extends Base implements ITranslationLocales {
     this.stringsSurvey = this.createStringsSurvey();
   }
   private createStringsSurvey(): SurveyModel {
+    var json = {};
+    setSurveyJSONForPropertyGrid(json, false);
     var survey: SurveyModel = this.options.createSurvey(
-      {},
+      json,
       "translation_strings"
     );
-    survey.showNavigationButtons = "none";
-    survey.showPageTitles = false;
-    survey.focusFirstQuestionAutomatic = false;
-    survey.showQuestionNumbers = "off";
-
     survey.addNewPage("page");
     this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root, null);
     this.expandRootPanels(survey.pages[0]);

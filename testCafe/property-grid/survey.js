@@ -29,8 +29,8 @@ test("Delete second page", async (t) => {
     await ClientFunction((json) => {
         creator.JSON = json;
     })(json);
-    await t.click(Selector("h4").child("span").withExactText("General"));
-    await t.click(Selector("h4").child("span").withExactText("Pages"));
+    await t.click(Selector("h4").withExactText("General"));
+    await t.click(Selector("h4").withExactText("Pages"));
     const deleteButtons = Selector("div[name=pages]").find(
         "button[title=Remove]"
     );
@@ -43,8 +43,8 @@ test("Add calculated values", async (t) => {
     await ClientFunction((json) => {
         creator.JSON = json;
     })(json);
-    await t.click(Selector("h4").child("span").withExactText("General"));
-    await t.click(Selector("h4").child("span").withExactText("Logic"));
+    await t.click(Selector("h4").withExactText("General"));
+    await t.click(Selector("h4").withExactText("Logic"));
     const addButton = Selector("div[name=calculatedValues]").find(
         "button[title='Add New']"
     );
