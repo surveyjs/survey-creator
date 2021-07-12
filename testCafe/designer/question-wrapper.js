@@ -144,9 +144,9 @@ test("Single input question wrapper action duplicate", async (t) => {
 
     await t.expect(questions.count).eql(2);
     var title1 = await questions.nth(0).find(".sd-question__title").innerText;
-    await t.expect(normalize(title1)).eql("1.\n \nquestion1");
+    await t.expect(normalize(title1)).eql("1. question1");
     var title2 = await questions.nth(1).find(".sd-question__title").innerText;
-    await t.expect(normalize(title2)).eql("2.\n \nquestion2");
+    await t.expect(normalize(title2)).eql("2. question2");
     await t
         .expect(questions.nth(0).hasClass("svc-question__content--selected"))
         .notOk();
@@ -185,14 +185,14 @@ test("Single input question wrapper action change require", async (t) => {
 
     const questionTitle = Selector(`.sd-question__title`);
     var title = await questionTitle.innerText;
-    await t.expect(normalize(title)).eql("1.\n \nquestion1");
+    await t.expect(normalize(title)).eql("1. question1");
     await t
         .expect(requiredActionRoot.hasClass("sv-action-bar-item--secondary"))
         .notOk();
 
     await t.click(requiredActionButton);
     title = await questionTitle.innerText;
-    await t.expect(normalize(title)).eql("1.\n \nquestion1\n \n*");
+    await t.expect(normalize(title)).eql("1. question1\n *");
     await t
         .expect(requiredActionRoot.hasClass("sv-action-bar-item--secondary"))
         .ok();
