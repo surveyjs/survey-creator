@@ -684,6 +684,9 @@ export class PropertyGridModel {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
       this.onGetQuestionTitleActions(options);
     });
+    this.survey.onGetPanelTitleActions.add((sender, options) => {
+      options.titleActions.splice(0, options.titleActions.length);
+    });
     this.survey.onMatrixCellCreated.add((sender, options) => {
       this.onMatrixCellCreated(options);
     });

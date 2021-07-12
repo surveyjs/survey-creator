@@ -83,6 +83,8 @@ test("Check tabs creating", () => {
   var generalPanel = <PanelModel>propertyGrid.survey.getPanelByName("general");
   expect(generalPanel).toBeTruthy();
   expect(generalPanel.title).toEqual("General");
+  var actions = generalPanel.getTitleActions();
+  expect(actions).toHaveLength(0);
   var choicesPanel = <PanelModel>propertyGrid.survey.getPanelByName("choices");
   expect(choicesPanel).toBeTruthy();
   expect(choicesPanel.title).toEqual("Choices");
