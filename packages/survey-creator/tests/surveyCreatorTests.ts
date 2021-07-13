@@ -20,6 +20,9 @@ class SurveyCreatorTester extends SurveyCreator {
   public getSurveyObjects(): SurveyObjects {
     return this.surveyObjects;
   }
+  public initSurveyOnRenderEx() {
+    this.initSurveyOnRender();
+  }
 }
 
 QUnit.test("Set Text property", function (assert) {
@@ -2327,3 +2330,25 @@ QUnit.test(
     );
   }
 );
+QUnit.test("Do not clear JSON on rendering", function (assert) {
+  var creator = new SurveyCreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+      },
+    ],
+  };
+  assert.equal(
+    creator.survey.getAllQuestions().length,
+    1,
+    "There is one question"
+  );
+  creator.initSurveyOnRenderEx();
+  assert.equal(
+    creator.survey.getAllQuestions().length,
+    1,
+    "There is still one question"
+  );
+});
