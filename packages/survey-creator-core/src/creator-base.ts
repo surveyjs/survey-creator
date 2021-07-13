@@ -774,7 +774,8 @@ export class CreatorBase<T extends SurveyModel>
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes
-        : null
+        : null,
+      this
     );
     this.dragDropHelper = new DragDropHelper(this);
     this.propertyGrid = new PropertyGridModel(this.survey as any as Base, this);

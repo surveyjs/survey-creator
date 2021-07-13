@@ -1,4 +1,6 @@
 import {
+  Action,
+  AdaptiveActionContainer,
   Base,
   ComponentCollection,
   CustomWidgetCollection,
@@ -69,7 +71,10 @@ export class QuestionToolboxCategory extends Base {
 /**
  * The list of Toolbox items.
  */
-export class QuestionToolbox extends Base implements IQuestionToolbox {
+export class QuestionToolbox
+  extends AdaptiveActionContainer
+  implements IQuestionToolbox
+{
   static hiddenTypes = ["buttongroup"];
   private _orderedQuestions = [
     "text",
@@ -165,6 +170,8 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   ) {
     super();
     this.createDefaultItems(supportedQuestions);
+    this.dotsItemPopupModel.horizontalPosition = "right";
+    this.dotsItemPopupModel.verticalPosition = "top";
   }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<any> = this.categories;
@@ -445,6 +452,9 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   public collapseAllCategories() {
     this.expandCollapseAllCategories(true);
   }
+  public invisibleItemSelected(model: Action): void {
+    this.creator.clickToolboxItem((<any>model).json);
+  }
   private expandCollapseAllCategories(isCollapsed: boolean) {
     const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
@@ -494,6 +504,8 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
       }
     }
     this.hasCategories = categories.length > 1;
+    this.updateItemSeparators();
+    this.setItems(this.itemsValue, false);
   }
   protected createCategory(): QuestionToolboxCategory {
     return new QuestionToolboxCategory(this);
@@ -503,6 +515,15 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
       if (this.itemsValue[i].name == name) return i;
     }
     return -1;
+  }
+  private updateItemSeparators() {
+    this.categories.forEach((category: any, categoryIndex) => {
+      (category.items || []).forEach((item, index) => {
+        if (categoryIndex !== 0 && index == 0) {
+          item.needSeparator = true;
+        }
+      });
+    });
   }
   private reorderItems() {
     this.itemsValue.sort((i1, i2) => {
