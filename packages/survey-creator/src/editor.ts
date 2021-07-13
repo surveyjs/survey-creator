@@ -1565,10 +1565,15 @@ export class SurveyCreator
     container["onkeydown"] = function (e) {
       self.onKeyDownHandler(e, self);
     };
-
-    this.initSurvey(this.getDefaultSurveyJson());
-
+    this.initSurveyOnRender();
     this.setUndoRedoCurrentState(true);
+  }
+  protected initSurveyOnRender() {
+    var json = this.JSON;
+    if (!json || Object.keys(json).length === 0) {
+      json = this.getDefaultSurveyJson();
+    }
+    this.initSurvey(json);
   }
   private getDefaultSurveyJson(): any {
     var json = new SurveyJSON5().parse(SurveyCreator.defaultNewSurveyText);
