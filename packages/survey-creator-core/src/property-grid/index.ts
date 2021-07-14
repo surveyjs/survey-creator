@@ -11,7 +11,8 @@ import {
   QuestionMatrixDynamicModel,
   Serializer,
   settings,
-  SurveyModel
+  SurveyModel,
+  Action
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -357,20 +358,23 @@ export class PropertyGridTitleActionsCreator {
   }
   private createPropertyHelpAction(question: Question): any {
     if (!question.description) return null;
-    return {
+    const action = new Action({
       title: "",
       id: "property-grid-help",
-      iconName: () => {
-        return question.descriptionLocation != "hidden"
-          ? "icon-helpfinish"
-          : "icon-help";
-      },
+      iconName: this.getHelpActionIconName(question),
       showTitle: false,
       action: () => {
         question.descriptionLocation =
           question.descriptionLocation != "hidden" ? "hidden" : "underTitle";
+        action.iconName = this.getHelpActionIconName(question);
       }
-    };
+    });
+    return action;
+  }
+  private getHelpActionIconName(question: Question): string {
+    return question.descriptionLocation != "hidden"
+      ? "icon-helpfinish"
+      : "icon-help";
   }
 }
 
