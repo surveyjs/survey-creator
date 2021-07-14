@@ -86,16 +86,20 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     if (!!showDetailAction) {
       showDetailAction.component = "sv-action-bar-item";
-      showDetailAction.iconName = () => {
-        return row.isDetailPanelShowing ? "icon-editingfinish" : "icon-edit";
-      };
+      showDetailAction.iconName = this.getShowDetailActionIconName(row);
       showDetailAction.showTitle = false;
       showDetailAction.location = "end";
       showDetailAction.action = () => {
         row.showHideDetailPanelClick();
       };
       showDetailAction.visibleIndex = 0;
+      row.onDetailPanelShowingChanged = () => {
+        showDetailAction.iconName = this.getShowDetailActionIconName(row);
+      };
     }
+  }
+  private getShowDetailActionIconName(row: MatrixDynamicRowModel) {
+    return row.isDetailPanelShowing ? "icon-editingfinish" : "icon-edit";
   }
   public onGetQuestionTitleActions(obj: Base, options: any): void {
     const question: QuestionMatrixDynamicModel = options.question;
