@@ -1,4 +1,4 @@
-import { CreatorBase } from "@survey/creator";
+import { CreatorBase, IQuestionToolbox } from "@survey/creator";
 import React, { CSSProperties } from "react";
 import {
   Base,
@@ -11,6 +11,7 @@ import {
   SurveyElementBase,
   SvgIcon
 } from "survey-react-ui";
+import { SurveyCreatorToolboxTool } from "./ToolboxItem";
 interface ISurveyCreatorToolboxProps {
   creator: CreatorBase<SurveyModel>;
 }
@@ -76,34 +77,9 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     }
   }
 
-  renderToolboxItem(item: Action, isCompact: boolean): JSX.Element {
-    const className = "svc-toolbox__tool " + item.css;
-    const style: CSSProperties = {
-      visibility: item.isVisible === undefined || item.isVisible ? "visible" : "hidden"
-    };
-    if (item.visible !== undefined && !item.visible) {
-      style.display = "none";
-    }
-    const itemComponent = ReactElementFactory.Instance.createElement(
-      item.component || "svc-toolbox-item",
-      {
-        item: item,
-        creator: this.creator,
-        isCompact: isCompact
-      }
-    );
-    return (
-      <div className={className} style={style} key={item.id}>
-        {(isCompact && item.needSeparator) ? (
-          <div className="svc-toolbox__category-separator"></div>
-        ) : null}
-        {itemComponent}
-      </div>
-    );
-  }
   renderItems() {
-    return this.toolbox.actions.map((item: Action) =>
-      this.renderToolboxItem(item, this.toolbox.isCompact)
+    return this.toolbox.actions.map((item: Action, itemIndex) =>
+      <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={this.toolbox.isCompact} key={"item" + itemIndex}></SurveyCreatorToolboxTool>
     );
   }
   renderCategories() {
@@ -114,21 +90,21 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   renderToolboxCategory(category: any): JSX.Element {
     let header = null;
     if (this.toolbox.categories.length > 1) {
-      header = 
-      <div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
+      header =
+        <div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
           <span className="svc-toolbox__category-title">{category.name}</span>
           <div className="svc-toolbox__category-header__controls">
-          {( category.collapsed ?
-            <SvgIcon className="svc-toolbox__category-header__button svc-string-editor__button--expand" size={16} iconName={"icon-expand"}></SvgIcon>
-            :
-            <SvgIcon className="svc-toolbox__category-header__button svc-string-editor__button--collapse" size={16} iconName={"icon-collapse"}></SvgIcon>
+            {(category.collapsed ?
+              <SvgIcon className="svc-toolbox__category-header__button svc-string-editor__button--expand" size={16} iconName={"icon-expand"}></SvgIcon>
+              :
+              <SvgIcon className="svc-toolbox__category-header__button svc-string-editor__button--collapse" size={16} iconName={"icon-collapse"}></SvgIcon>
             )}
           </div>
-      </div>;
+        </div>;
     }
     let items = [];
     if (!category.collapsed) {
-      items = category.items.map((item) => this.renderToolboxItem(item, false));
+      items = category.items.map((item, itemIndex) => <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={false} key={"item" + itemIndex}></SurveyCreatorToolboxTool>)
     }
     return (
       <div className="svc-toolbox__category" key={category.name}>

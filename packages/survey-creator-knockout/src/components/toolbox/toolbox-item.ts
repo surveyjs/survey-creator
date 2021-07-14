@@ -3,11 +3,7 @@ import { SurveyCreator } from "../../creator";
 import { ToolboxItemViewModel } from "@survey/creator";
 import { editorLocalization } from "@survey/creator";
 import { IQuestionToolboxItem } from "@survey/creator";
-
-//import "./toolbox-item.scss";
-import { ToolboxViewModel } from "./toolbox";
 const template = require("./toolbox-item.html");
-// import template from "./toolbox-item.html";
 
 export class KnockoutToolboxItemViewModel extends ToolboxItemViewModel {
   public title: ko.Observable<string> = ko.observable("");

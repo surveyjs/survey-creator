@@ -14,10 +14,8 @@
       <!-- /ko -->
       <!-- ko ifnot: collapsed -->
       <!-- ko foreach: items -->
-      <div class="svc-toolbox__tool" data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible === undefined || $data.isVisible ? 'visible': 'hidden' }">
-        <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
+        <!-- ko component: { name: $data.component || 'svc-toolbox-tool', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
         <!-- /ko -->
-      </div>
       <!-- /ko -->
       <!-- /ko -->
     </div>
