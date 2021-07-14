@@ -245,6 +245,27 @@ test("itemvalue[] property editor + detail panel", () => {
   expect(row.detailPanel).toBeTruthy(); //"Detail panel is showing");
   expect(row.detailPanel.getQuestionByName("value")).toBeTruthy(); //"value property is here"
 });
+test("itemvalue[] property editor + row actions", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const row = choicesQuestion.renderedTable.rows[0];
+  expect(row.cells).toHaveLength(4);
+  expect(row.cells[3].isActionsCell).toBeTruthy();
+  expect(row.cells[3].item).toBeTruthy();
+  const actions = row.cells[3].item.value.actions;
+  expect(actions).toHaveLength(2);
+  const detailAction: IActionBarItem = actions.filter(
+    (item: IActionBarItem) => item.id === "show-detail"
+  )[0];
+  expect(detailAction).toBeTruthy();
+  expect(detailAction.iconName).toEqual("icon-edit");
+  detailAction.action();
+  expect(detailAction.iconName).toEqual("icon-editingfinish");
+});
 
 test("column[] property editor", (): any => {
   var question = new QuestionMatrixDynamicModel("q1");
