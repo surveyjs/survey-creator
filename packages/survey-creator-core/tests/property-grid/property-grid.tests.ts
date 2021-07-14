@@ -1780,13 +1780,16 @@ test("property editor show help as description", () => {
   ).toBeTruthy();
   expect(actions).toHaveLength(2);
   expect(actions[1].id).toEqual("property-grid-help");
+  expect(actions[1].iconName).toEqual("icon-help");
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
   actions[1].action();
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual(
     "underTitle"
   );
+  expect(actions[1].iconName).toEqual("icon-helpfinish");
   actions[1].action();
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
+  expect(actions[1].iconName).toEqual("icon-help");
 });
 test("Use maxLength property attribute", () => {
   Serializer.findProperty("question", "name").maxLength = 10;
