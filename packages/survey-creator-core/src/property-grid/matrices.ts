@@ -244,15 +244,18 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   protected hasDetailPanel(): boolean {
     return !this.getEditItemAsStandAlone();
   }
+  private hasPropertiesInDetail: boolean;
   protected setupMatrixQuestion(
     obj: Base,
     matrix: QuestionMatrixDynamicModel,
     prop: JsonObjectProperty
   ) {
+    this.hasPropertiesInDetail =
+      this.hasDetailPanel() && this.calcHasPropertiesInDetail(matrix, prop);
     matrix.onHasDetailPanelCallback = (
       row: MatrixDropdownRowModelBase
     ): boolean => {
-      return this.hasDetailPanel();
+      return this.hasPropertiesInDetail;
     };
     matrix.onCreateDetailPanelRenderedRowCallback = (
       renderedRow: QuestionMatrixDropdownRenderedRow
@@ -274,6 +277,22 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!!matrix.options) {
       this.setupUsingOptions(obj, matrix, matrix.options, prop);
     }
+  }
+  private calcHasPropertiesInDetail(
+    matrix: QuestionMatrixDynamicModel,
+    prop: JsonObjectProperty
+  ): boolean {
+    if (!prop.className) return true;
+    var newObj = Serializer.createClass(prop.className);
+    if (!newObj) return true;
+    var panel = new PanelModel("");
+    new PropertyJSONGenerator(
+      newObj,
+      matrix.options,
+      matrix.obj,
+      prop
+    ).setupObjPanel(panel, true);
+    return panel.elements.length > 0;
   }
   public getJSON(
     obj: Base,

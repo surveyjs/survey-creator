@@ -243,7 +243,7 @@ test("itemvalue[] property editor + detail panel", () => {
   expect(row.hasPanel).toEqual(true); //"There is a detail panel here");
   row.showDetailPanel();
   expect(row.detailPanel).toBeTruthy(); //"Detail panel is showing");
-  expect(row.detailPanel.getQuestionByName("value")).toBeTruthy(); //"value property is here"
+  expect(row.detailPanel.getQuestionByName("visibleIf")).toBeTruthy(); //"visibleIf property is here"
 });
 test("itemvalue[] property editor + row actions", () => {
   var question = new QuestionDropdownModel("q1");
@@ -902,7 +902,7 @@ test("itemvalue[] property editor + detail panel + options.onIsPropertyReadOnlyC
   ): boolean => {
     if (!parentObj || !parentProperty) return readOnly;
     return (
-      property.name == "enableIf" &&
+      property.name == "visibleIf" &&
       parentObj.getType() == "matrixdropdown" &&
       parentProperty.name == "rows"
     );
@@ -915,10 +915,7 @@ test("itemvalue[] property editor + detail panel + options.onIsPropertyReadOnlyC
   );
   var row = choicesQuestion.visibleRows[0];
   row.showDetailPanel();
-  expect(row.detailPanel.getQuestionByName("visibleIf").readOnly).toEqual(
-    false
-  );
-  expect(row.detailPanel.getQuestionByName("enableIf").readOnly).toEqual(true);
+  expect(row.detailPanel.getQuestionByName("visibleIf").readOnly).toEqual(true);
 });
 
 test("itemvalue[] property editor + create columns + options.onCanShowPropertyCallback", () => {
