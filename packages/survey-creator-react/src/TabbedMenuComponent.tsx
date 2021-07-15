@@ -1,3 +1,4 @@
+import { ITabbedMenuItem, TabbedMenuItem } from "@survey/creator";
 import React from "react";
 import { CSSProperties } from "react";
 //import { ImplementorBase } from "survey-knockout";
@@ -11,34 +12,31 @@ import {
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 interface ITabbedMenuComponentProps {
-  items: Array<IAction>;
+  model: AdaptiveActionContainer<TabbedMenuItem, ITabbedMenuItem>;
 }
 
 class TabbedMenuComponent extends SurveyElementBase<
   ITabbedMenuComponentProps,
   any
 > {
-  private adaptiveElement = new AdaptiveActionContainer();
   private manager: ResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
 
+  private get model() {
+    return this.props.model;
+  }
+
   protected getStateElement(): Base {
-    return this.adaptiveElement;
+    return this.model;
   }
 
   constructor(props) {
     super(props);
-    this.adaptiveElement.actions = this.props.items.map((item: IAction) => {
-      return new Action(item);
-    });
     this.rootRef = React.createRef();
-    this.adaptiveElement.dotsItemPopupModel.horizontalPosition = "right";
   }
 
   render(): JSX.Element {
-    const items = this.adaptiveElement.actions.map((item) =>
-      this.renderItem(item)
-    );
+    const items = this.model.actions.map((item) => this.renderItem(item));
     return (
       <div ref={this.rootRef} className="svc-tabbed-menu">
         {items}
@@ -83,7 +81,7 @@ class TabbedMenuComponent extends SurveyElementBase<
     const container: HTMLDivElement = this.rootRef.current;
     this.manager = new ResponsivityManager(
       container,
-      this.adaptiveElement,
+      this.model,
       "span.svc-tabbed-menu-item-container"
     );
   }

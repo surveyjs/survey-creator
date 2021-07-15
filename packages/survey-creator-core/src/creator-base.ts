@@ -57,6 +57,13 @@ export interface ITabbedMenuItem extends IAction {
   componentContent: string;
   renderTab?: () => any;
 }
+export class TabbedMenuItem extends Action implements ITabbedMenuItem {
+  constructor(item: ITabbedMenuItem) {
+    super(item);
+  }
+  componentContent: string;
+  renderTab?: () => any;
+}
 
 export class CreatorToolbarItems extends Base {
   @propertyArray() items: Array<IAction>;
@@ -184,14 +191,14 @@ export class CreatorBase<T extends SurveyModel>
     componentContent?: string,
     index?: number
   ) {
-    var tab: ITabbedMenuItem = {
+    var tab: TabbedMenuItem = new TabbedMenuItem({
       id: name,
       title: !!title ? title : editorLocalization.getString("ed." + name),
       componentContent: componentContent ? componentContent : "svc-tab-" + name,
       data: plugin,
       action: () => this.makeNewViewActive(name),
       active: this.viewType === name
-    };
+    });
     if (index >= 0 && index < this.tabs.length) {
       this.tabs.splice(index, 0, tab);
     } else {
@@ -663,8 +670,14 @@ export class CreatorBase<T extends SurveyModel>
    */
   public showPageSelectorInToolbar = false;
 
-  @propertyArray() tabs: Array<ITabbedMenuItem>;
+  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem, ITabbedMenuItem>;
 
+  get tabs() {
+    return this.tabbedMenu.actions;
+  }
+  set tabs(val: Array<TabbedMenuItem>) {
+    this.tabbedMenu.actions = val;
+  }
   /**
    * Returns the localized string by its id
    * @param str the string id.
@@ -880,11 +893,16 @@ export class CreatorBase<T extends SurveyModel>
     return page;
   }
   protected initTabs() {
+    this.initTabbedMenu();
     this.tabs = [];
     this.initTabsPlugin();
     if (this.tabs.length > 0) {
       this.makeNewViewActive(this.tabs[0].id);
     }
+  }
+  private initTabbedMenu() {
+    this.tabbedMenu = new AdaptiveActionContainer();
+    this.tabbedMenu.dotsItemPopupModel.horizontalPosition = "right";
   }
   private initTabsPlugin(): void {
     if (this.showDesignerTab) {
