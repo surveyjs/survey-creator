@@ -207,11 +207,11 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         
           <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
           <svc-toolbox
-            params="categories: creator.toolboxCategories, creator: creator, isCompact: creator.toolbox.isCompact"
+            params="creator: creator"
           >
             <div
               class="svc-toolbox"
-              data-bind="css: { 'svc-toolbox--compact': isCompact }"
+              data-bind="css: { 'svc-toolbox--compact': $data.toolbox.isCompact }"
             >
               
   
@@ -219,152 +219,112 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                 class="svc-toolbox__container"
               >
                 
-  
-                <!-- ko ifnot: isCompact || categories().length == 1 -->
+    
+                <!-- ko ifnot: $data.toolbox.isCompact || categories().length == 1 -->
                 
-  
+    
                 <!-- ko foreach: categories -->
                 
-  
+    
                 <div
                   class="svc-toolbox__category"
                 >
                   
-    
+      
                   <!-- ko if: $parent.categories().length &gt; 1 -->
                   
-    
+      
                   <div
                     class="svc-toolbox__category-header"
                     data-bind="click: toggleState"
                   >
                     
-      
+        
                     <span
                       class="svc-toolbox__category-title"
                       data-bind="text: name"
                     />
                     
-      
+        
                     <div
                       class="svc-toolbox__category-header__controls"
                     >
                       
-        
+          
                       <sv-svg-icon
                         class="svc-toolbox__category-header__button svc-string-editor__button--expand"
                         data-bind="visible: collapsed"
                         params="iconName: 'icon-expand', size: 16"
                       />
                       
-        
+          
                       <sv-svg-icon
                         class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
                         data-bind="visible: !collapsed"
                         params="iconName: 'icon-collapse', size: 16"
                       />
                       
-      
+        
                     </div>
                     
-    
+      
                   </div>
                   
-    
+      
                   <!-- /ko -->
                   
-    
+      
                   <!-- ko ifnot: collapsed -->
                   
-    
+      
                   <!-- ko foreach: items -->
                   
-    
-                  <div
-                    class="svc-toolbox__tool"
-                    data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible === undefined || $data.isVisible ? 'visible': 'hidden' }"
-                  >
-                    
-      
-                    <!-- ko if: $data.needSeparator -->
-                    
-      
-                    <div
-                      class="svc-toolbox__category-separator"
-                    />
-                    
-      
-                    <!-- /ko -->
-                    
-      
-                    <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
-                    
-      
-                    <!-- /ko -->
-                    
-    
-                  </div>
+        
+                  <!-- ko component: { name: $data.component || 'svc-toolbox-tool', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
                   
-    
+        
+                  <!-- /ko -->
+                  
+      
+                  <!-- /ko -->
+                  
+      
                   <!-- /ko -->
                   
     
-                  <!-- /ko -->
-                  
-  
                 </div>
                 
-  
+    
                 <!-- /ko -->
                 
-  
+    
                 <!-- /ko -->
                 
 
-  
-                <!-- ko if: isCompact || categories().length == 1 -->
+    
+                <!-- ko if: $data.toolbox.isCompact || categories().length == 1 -->
                 
-  
+    
                 <div
                   class="svc-toolbox__category"
                 >
                   
-    
-                  <!-- ko foreach: actions -->
+      
+                  <!-- ko foreach: $data.toolbox.actions -->
                   
-    
-                  <div
-                    class="svc-toolbox__tool"
-                    data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible === undefined || $data.isVisible ? 'visible': 'hidden' }"
-                  >
-                    
       
-                    <!-- ko if: $data.needSeparator -->
-                    
-      
-                    <div
-                      class="svc-toolbox__category-separator"
-                    />
-                    
-      
-                    <!-- /ko -->
-                    
-      
-                    <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parent.creator, isCompact: $parent.isCompact } } -->
-                    
-      
-                    <!-- /ko -->
-                    
-    
-                  </div>
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.isCompact } } -->
                   
-    
+      
                   <!-- /ko -->
                   
-  
+      
+                  <!-- /ko -->
+                  
+    
                 </div>
                 
-  
+    
                 <!-- /ko -->
                 
   
@@ -372,8 +332,6 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
               
 
             </div>
-            
-
           </svc-toolbox>
           
 
@@ -535,7 +493,7 @@ exports[`Storyshots Creator design surface content Default 1`] = `
   params="creator: creator"
 >
   <svc-toolbox
-    params="categories: creator.toolboxCategories, creator: creator, isCompact: creator.toolbox.isCompact"
+    params="creator: creator"
   />
   
 
@@ -1050,7 +1008,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
 >
   <div
     class="svc-toolbox"
-    data-bind="css: { 'svc-toolbox--compact': isCompact }"
+    data-bind="css: { 'svc-toolbox--compact': $data.toolbox.isCompact }"
   >
     
   
@@ -1058,152 +1016,112 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       class="svc-toolbox__container"
     >
       
-  
-      <!-- ko ifnot: isCompact || categories().length == 1 -->
+    
+      <!-- ko ifnot: $data.toolbox.isCompact || categories().length == 1 -->
       
-  
+    
       <!-- ko foreach: categories -->
       
-  
+    
       <div
         class="svc-toolbox__category"
       >
         
-    
+      
         <!-- ko if: $parent.categories().length &gt; 1 -->
         
-    
+      
         <div
           class="svc-toolbox__category-header"
           data-bind="click: toggleState"
         >
           
-      
+        
           <span
             class="svc-toolbox__category-title"
             data-bind="text: name"
           />
           
-      
+        
           <div
             class="svc-toolbox__category-header__controls"
           >
             
-        
+          
             <sv-svg-icon
               class="svc-toolbox__category-header__button svc-string-editor__button--expand"
               data-bind="visible: collapsed"
               params="iconName: 'icon-expand', size: 16"
             />
             
-        
+          
             <sv-svg-icon
               class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
               data-bind="visible: !collapsed"
               params="iconName: 'icon-collapse', size: 16"
             />
             
-      
+        
           </div>
           
-    
+      
         </div>
         
-    
+      
         <!-- /ko -->
         
-    
+      
         <!-- ko ifnot: collapsed -->
         
-    
+      
         <!-- ko foreach: items -->
         
-    
-        <div
-          class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible === undefined || $data.isVisible ? 'visible': 'hidden' }"
-        >
-          
-      
-          <!-- ko if: $data.needSeparator -->
-          
-      
-          <div
-            class="svc-toolbox__category-separator"
-          />
-          
-      
-          <!-- /ko -->
-          
-      
-          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
-          
-      
-          <!-- /ko -->
-          
-    
-        </div>
         
-    
+        <!-- ko component: { name: $data.component || 'svc-toolbox-tool', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
+        
+        
+        <!-- /ko -->
+        
+      
+        <!-- /ko -->
+        
+      
         <!-- /ko -->
         
     
-        <!-- /ko -->
-        
-  
       </div>
       
-  
+    
       <!-- /ko -->
       
-  
+    
       <!-- /ko -->
       
 
-  
-      <!-- ko if: isCompact || categories().length == 1 -->
+    
+      <!-- ko if: $data.toolbox.isCompact || categories().length == 1 -->
       
-  
+    
       <div
         class="svc-toolbox__category"
       >
         
-    
-        <!-- ko foreach: actions -->
+      
+        <!-- ko foreach: $data.toolbox.actions -->
         
-    
-        <div
-          class="svc-toolbox__tool"
-          data-bind="css: $data.css, visible: $data.visible === undefined || $data.visible, style: { visibility : $data.isVisible === undefined || $data.isVisible ? 'visible': 'hidden' }"
-        >
-          
       
-          <!-- ko if: $data.needSeparator -->
-          
-      
-          <div
-            class="svc-toolbox__category-separator"
-          />
-          
-      
-          <!-- /ko -->
-          
-      
-          <!-- ko component: { name: $data.component || 'svc-toolbox-item', params: { item: $data, creator: $parent.creator, isCompact: $parent.isCompact } } -->
-          
-      
-          <!-- /ko -->
-          
-    
-        </div>
+        <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.isCompact } } -->
         
-    
+      
         <!-- /ko -->
         
-  
+      
+        <!-- /ko -->
+        
+    
       </div>
       
-  
+    
       <!-- /ko -->
       
   
@@ -1211,7 +1129,5 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
     
 
   </div>
-  
-
 </svc-toolbox>
 `;
