@@ -1509,18 +1509,16 @@ test("onPropertyValueChanging callback, set empty string, Bug#1158", () => {
   expect(titleQuestion.errors).toHaveLength(1);
   expect(question.name).toEqual("q1");
 });
-/* TODO fix
+
 test("SurveyPropertyItemValuesEditor + item.koShowDetails", () => {
   var survey = new SurveyModel();
   var p = survey.addNewPage();
   var question = <QuestionDropdownModel>p.addNewQuestion("dropdown", "q1");
   question.choices = [1, 2, 3];
-  survey.locale = "en";
-  question.choices[0].text = "English 1";
   var tabs =
     SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs;
   SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [
-    { name: "general", visible: false },
+    { name: "general", visible: false }
   ];
 
   var propertyGrid = new PropertyGridModelTester(question);
@@ -1532,7 +1530,7 @@ test("SurveyPropertyItemValuesEditor + item.koShowDetails", () => {
   ).toBeFalsy();
   SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = tabs;
 });
-*/
+
 test("SurveyPropertyItemValuesEditor + item.koShowDetails + make properties invisible", () => {
   var survey = new SurveyModel();
   var p = survey.addNewPage();
@@ -1556,11 +1554,7 @@ test("SurveyPropertyItemValuesEditor + item.koShowDetails + make properties invi
     propertyGrid.survey.getQuestionByName("choices")
   );
   rows = choicesQuestion.visibleRows;
-  rows[0].showDetailPanel();
-  panel = rows[0].detailPanel;
-  expect(panel.getQuestionByName("value").isVisible).toBeTruthy();
-  expect(panel.getQuestionByName("visibleIf")).toBeFalsy();
-  expect(panel.getQuestionByName("enableIf")).toBeFalsy();
+  expect(choicesQuestion.hasDetailPanel(rows[0])).toBeFalsy();
   Serializer.findProperty("itemvalue", "visibleIf").visible = true;
   Serializer.findProperty("itemvalue", "enableIf").visible = true;
 });

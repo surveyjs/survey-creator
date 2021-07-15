@@ -33,7 +33,7 @@ export class TabDesignerComponent extends SurveyElementBase<
     return this.model;
   }
 
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.model.creator;
     const survey: SurveyModel = creator.survey;
     const designerTabClassName = "svc-tab-designer " + survey.css.root;
@@ -73,12 +73,11 @@ export class TabDesignerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div className="svc-flex-column">
-        <SurveyCreatorToolbox
-          toolbox={creator.toolbox}
-          creator={creator}
-        ></SurveyCreatorToolbox>
+          <SurveyCreatorToolbox
+            toolbox={creator.toolbox}
+            creator={creator}
+          ></SurveyCreatorToolbox>
         </div>
-        <DesignerSurveyNavigationBlock survey={creator.survey} location="top" />{" "}
         <div className={"svc-tab-designer " + creator.survey.css.root}>
           <div className={creator.survey.css.container}>
             <div
@@ -88,14 +87,18 @@ export class TabDesignerComponent extends SurveyElementBase<
             >
               <SurveyHeader survey={survey}></SurveyHeader>
             </div>
+            <DesignerSurveyNavigationBlock
+              survey={creator.survey}
+              location="top"
+            />
             {surveyPages}
+            <DesignerSurveyNavigationBlock
+              survey={creator.survey}
+              location="bottom"
+              css={creator.survey.css}
+            />
           </div>
         </div>
-        <DesignerSurveyNavigationBlock
-          survey={creator.survey}
-          location="bottom"
-          css={creator.survey.css}
-        />
         <SurveyPageNavigator
           creator={creator}
           pages={creator.pagesController.pages}
@@ -105,20 +108,28 @@ export class TabDesignerComponent extends SurveyElementBase<
     );
   }
 }
-export class DesignerSurveyNavigationBlock extends React.Component<any, any> {
-  constructor(props: ITabDesignerComponentProps) {
-    super(props);
-    if (this.survey) {
-      this.survey.onPropertyChanged.add(this.onPropChangedHandler);
-    }
+export class DesignerSurveyNavigationBlock extends SurveyElementBase<any, any> {
+  componentDidMount() {
+    this.setHandler();
+  }
+  componentDidUpdate(prevProps: any, prevState: any) {
+    this.setHandler();
+  }
+  private setHandler() {
+    if (
+      !this.survey ||
+      this.survey.onPropertyChanged.hasFunc(this.onPropChangedHandler)
+    )
+      return;
+    this.survey.onPropertyChanged.add(this.onPropChangedHandler);
   }
   private onPropChangedHandler = (sender: any, options: any): any => {
-    if (options.name !== "showProgressBar") return;
-    this.setState((state: any, props: any) => {
-      var val = {
-        show: this.canShow
-      };
-      return val;
+    if (this.isRendering) return;
+    const name = options.name;
+    if (name !== "showProgressBar" && name !== "progressBarType") return;
+    this.setState({
+      showProgressBar: this.survey.showProgressBar,
+      progressBarType: this.survey.progressBarType
     });
   };
   componentWillUnmount() {
@@ -136,18 +147,16 @@ export class DesignerSurveyNavigationBlock extends React.Component<any, any> {
   protected get isTop(): boolean {
     return this.location == "top";
   }
-  protected get canShow(): boolean {
+  protected canRender(): boolean {
     return this.isTop
       ? this.survey.isShowProgressBarOnTop
       : this.survey.isShowProgressBarOnBottom;
   }
-  render(): JSX.Element {
-    return this.canShow
-      ? ReactElementFactory.Instance.createElement(
-          "sv-progress-" + this.survey.progressBarType.toLowerCase(),
-          { survey: this.survey, css: this.survey.css, isTop: this.isTop }
-        )
-      : null;
+  renderElement(): JSX.Element {
+    return ReactElementFactory.Instance.createElement(
+      "sv-progress-" + this.survey.progressBarType.toLowerCase(),
+      { survey: this.survey, css: this.survey.css, isTop: this.isTop }
+    );
   }
 }
 

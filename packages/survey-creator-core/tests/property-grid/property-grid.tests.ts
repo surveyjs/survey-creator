@@ -32,7 +32,8 @@ import {
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions
+  EmptySurveyCreatorOptions,
+  settings
 } from "../../src/settings";
 
 export * from "../../src/property-grid/matrices";
@@ -154,6 +155,21 @@ test("dropdown property editor localization", (): any => {
   expect(localeQuestion.optionsCaption).toEqual("Default (english)");
 });
 
+test("settings.propertyGrid.useButtonGroup", (): any => {
+  var survey = new SurveyModel();
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var questionDescriptionLocationQuestion =
+    propertyGrid.survey.getQuestionByName("questionDescriptionLocation");
+  expect(questionDescriptionLocationQuestion.getType()).toEqual("buttongroup");
+  settings.propertyGrid.useButtonGroup = false;
+  propertyGrid = new PropertyGridModelTester(survey);
+  questionDescriptionLocationQuestion = propertyGrid.survey.getQuestionByName(
+    "questionDescriptionLocation"
+  );
+  expect(questionDescriptionLocationQuestion.getType()).toEqual("dropdown");
+  settings.propertyGrid.useButtonGroup = true;
+});
+
 test("dropdown property editor, get choices on callback", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;
@@ -243,7 +259,28 @@ test("itemvalue[] property editor + detail panel", () => {
   expect(row.hasPanel).toEqual(true); //"There is a detail panel here");
   row.showDetailPanel();
   expect(row.detailPanel).toBeTruthy(); //"Detail panel is showing");
-  expect(row.detailPanel.getQuestionByName("value")).toBeTruthy(); //"value property is here"
+  expect(row.detailPanel.getQuestionByName("visibleIf")).toBeTruthy(); //"visibleIf property is here"
+});
+test("itemvalue[] property editor + row actions", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const row = choicesQuestion.renderedTable.rows[0];
+  expect(row.cells).toHaveLength(4);
+  expect(row.cells[3].isActionsCell).toBeTruthy();
+  expect(row.cells[3].item).toBeTruthy();
+  const actions = row.cells[3].item.value.actions;
+  expect(actions).toHaveLength(2);
+  const detailAction: IActionBarItem = actions.filter(
+    (item: IActionBarItem) => item.id === "show-detail"
+  )[0];
+  expect(detailAction).toBeTruthy();
+  expect(detailAction.iconName).toEqual("icon-edit");
+  detailAction.action();
+  expect(detailAction.iconName).toEqual("icon-editingfinish");
 });
 test("itemvalue[] property editor + row actions", () => {
   var question = new QuestionDropdownModel("q1");
@@ -902,7 +939,7 @@ test("itemvalue[] property editor + detail panel + options.onIsPropertyReadOnlyC
   ): boolean => {
     if (!parentObj || !parentProperty) return readOnly;
     return (
-      property.name == "enableIf" &&
+      property.name == "visibleIf" &&
       parentObj.getType() == "matrixdropdown" &&
       parentProperty.name == "rows"
     );
@@ -915,10 +952,7 @@ test("itemvalue[] property editor + detail panel + options.onIsPropertyReadOnlyC
   );
   var row = choicesQuestion.visibleRows[0];
   row.showDetailPanel();
-  expect(row.detailPanel.getQuestionByName("visibleIf").readOnly).toEqual(
-    false
-  );
-  expect(row.detailPanel.getQuestionByName("enableIf").readOnly).toEqual(true);
+  expect(row.detailPanel.getQuestionByName("visibleIf").readOnly).toEqual(true);
 });
 
 test("itemvalue[] property editor + create columns + options.onCanShowPropertyCallback", () => {

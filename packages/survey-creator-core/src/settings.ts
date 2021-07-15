@@ -36,7 +36,10 @@ export var settings = {
   /**
    * Determines which types of questions the conversion will be available for.
    */
-  questionConvertMode: QuestionConvertMode.AllTypes
+  questionConvertMode: QuestionConvertMode.AllTypes,
+  propertyGrid: {
+    useButtonGroup: true
+  }
 
   //TODO add maximumColumnCount
 };

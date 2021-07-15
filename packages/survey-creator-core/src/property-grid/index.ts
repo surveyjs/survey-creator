@@ -21,7 +21,11 @@ import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties
 } from "../question-editor/properties";
-import { EmptySurveyCreatorOptions, ISurveyCreatorOptions } from "../settings";
+import {
+  EmptySurveyCreatorOptions,
+  ISurveyCreatorOptions,
+  settings as cretorSettings
+} from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
 import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
@@ -475,12 +479,20 @@ export class PropertyJSONGenerator {
       this.parentProperty
     );
   }
-
+  private getClasPropName(): string {
+    if (!!this.parentObj && !!this.parentProperty)
+      return this.parentProperty.name;
+    var propName = PropertyJSONGenerator.getClassNameProperty(this.obj);
+    if (!!propName && this.obj[propName]) return this.obj[propName];
+    return undefined;
+  }
   private createJSON(isNestedObj: boolean): any {
     var className = undefined;
-    var propName = PropertyJSONGenerator.getClassNameProperty(this.obj);
-    if (!!propName && this.obj[propName]) {
-      className = this.obj.getType() + "@" + this.obj[propName];
+    const propName = this.getClasPropName();
+    if (!!propName) {
+      className = this.obj.getType();
+      if (className === "itemvalue") className += "[]";
+      className += "@" + propName;
     }
     var properties = new SurveyQuestionProperties(
       this.obj,
@@ -493,6 +505,7 @@ export class PropertyJSONGenerator {
     var tabs = properties.getTabs();
     var panels: any = {};
     for (var i = 0; i < tabs.length; i++) {
+      if (tabs[i].visible === false) continue;
       panels[tabs[i].name] = this.createPanelProps(tabs[i], i == 0);
     }
     var json: any = {
@@ -1115,7 +1128,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     return json;
   }
   protected get canRenderAsButtonGroup(): boolean {
-    return true;
+    return cretorSettings.propertyGrid.useButtonGroup;
   }
   protected renderAsButtonGroup(
     prop: JsonObjectProperty,
