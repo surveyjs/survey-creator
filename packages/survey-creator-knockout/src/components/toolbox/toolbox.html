@@ -25,7 +25,7 @@
     <!-- ko if: $data.toolbox.isCompact || categories().length == 1 -->
     <div class="svc-toolbox__category">
       <!-- ko foreach: $data.toolbox.actions -->
-      <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.isCompact } } -->
+      <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
       <!-- /ko -->
       <!-- /ko -->
     </div>
