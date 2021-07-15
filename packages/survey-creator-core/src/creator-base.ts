@@ -41,6 +41,7 @@ import { TabTranslationPlugin } from "./components/tabs/translation";
 import { TabLogicPlugin } from "./components/tabs/logic-ui";
 import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
 import { TabDesignerPlugin } from "./entries";
+import { Notifier } from "./components/notifier";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -1393,7 +1394,12 @@ export class CreatorBase<T extends SurveyModel>
   }
   protected setState(value: string) {
     this.setPropertyValue("state", value);
+    if(!!value) {
+      this.notify(this.getLocString("ed." + value));
+    }
   }
+
+  notifier = new Notifier();
 
   public setModified(options: any = null) {
     this.setState("modified");
@@ -1406,7 +1412,8 @@ export class CreatorBase<T extends SurveyModel>
    */
   public notify(msg: string) {
     if (this.onNotify.isEmpty) {
-      alert(msg);
+      this.notifier.notify(msg);
+      // alert(msg);
     } else {
       this.onNotify.fire(this, { message: msg });
     }
