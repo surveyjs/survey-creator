@@ -142,7 +142,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     >
       
     
-      <!-- ko component: { name: 'svc-tabbed-menu', params: { items: creator.tabs } } -->
+      <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
       <div
         class="svc-tabbed-menu"
       >
