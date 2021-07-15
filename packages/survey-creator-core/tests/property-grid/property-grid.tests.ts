@@ -32,7 +32,8 @@ import {
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions
+  EmptySurveyCreatorOptions,
+  settings
 } from "../../src/settings";
 
 export * from "../../src/property-grid/matrices";
@@ -152,6 +153,21 @@ test("dropdown property editor localization", (): any => {
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
   expect(localeQuestion.showOptionsCaption).toBeTruthy();
   expect(localeQuestion.optionsCaption).toEqual("Default (english)");
+});
+
+test("settings.propertyGrid.useButtonGroup", (): any => {
+  var survey = new SurveyModel();
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var questionDescriptionLocationQuestion =
+    propertyGrid.survey.getQuestionByName("questionDescriptionLocation");
+  expect(questionDescriptionLocationQuestion.getType()).toEqual("buttongroup");
+  settings.propertyGrid.useButtonGroup = false;
+  propertyGrid = new PropertyGridModelTester(survey);
+  questionDescriptionLocationQuestion = propertyGrid.survey.getQuestionByName(
+    "questionDescriptionLocation"
+  );
+  expect(questionDescriptionLocationQuestion.getType()).toEqual("dropdown");
+  settings.propertyGrid.useButtonGroup = true;
 });
 
 test("dropdown property editor, get choices on callback", () => {
