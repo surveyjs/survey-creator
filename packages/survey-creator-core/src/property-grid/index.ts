@@ -21,7 +21,11 @@ import {
   SurveyQuestionEditorTabDefinition,
   SurveyQuestionProperties
 } from "../question-editor/properties";
-import { EmptySurveyCreatorOptions, ISurveyCreatorOptions } from "../settings";
+import {
+  EmptySurveyCreatorOptions,
+  ISurveyCreatorOptions,
+  settings as cretorSettings
+} from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
 import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
@@ -1124,7 +1128,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     return json;
   }
   protected get canRenderAsButtonGroup(): boolean {
-    return true;
+    return cretorSettings.propertyGrid.useButtonGroup;
   }
   protected renderAsButtonGroup(
     prop: JsonObjectProperty,
