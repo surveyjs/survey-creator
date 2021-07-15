@@ -29,6 +29,11 @@ svc-toolbox {
   align-items: flex-start;
 }
 
+.svc-toolbox__tool:not(.sv-dots) {
+  width: 100%;
+  padding-right: calcSize(1);
+}
+
 .svc-toolbox__category-separator {
   height: calcSize(0.1);
   width: calcSize(6);

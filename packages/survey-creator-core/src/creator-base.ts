@@ -18,7 +18,7 @@ import {
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
-import { DragDropHelper } from "./dragdrophelper";
+import { DragDropHelper } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
@@ -790,7 +790,7 @@ export class CreatorBase<T extends SurveyModel>
         : null,
       this
     );
-    this.dragDropHelper = new DragDropHelper(this);
+    this.initDragDrop();
     this.propertyGrid = new PropertyGridModel(this.survey as any as Base, this);
   }
   /**
@@ -1185,6 +1185,18 @@ export class CreatorBase<T extends SurveyModel>
         newValue: changes.newValue
       });
     };
+  }
+  protected initDragDrop() {
+    this.dragDropHelper = new DragDropHelper(null, this);
+
+    this.dragDropHelper.onBeforeDrop.add((sender, options) => {
+      this.undoRedoManager.startTransaction("drag drop");
+    });
+
+    this.dragDropHelper.onAfterDrop.add((sender, options) => {
+      this.undoRedoManager.stopTransaction();
+      this.selectElement(options.draggedElement);
+    });
   }
   private addingObject: Survey.Base;
   private onSurveyPropertyValueChangedCallback(

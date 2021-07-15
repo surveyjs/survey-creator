@@ -97,8 +97,7 @@ let json = {
                 }
             ]
         }
-    ],
-    showQuestionNumbers: "off"
+    ]
 };
 
 const options = {
@@ -144,4 +143,4 @@ creator.toolbarItems.push(new Survey.Action({
 //         category: "Matrix"
 //     }
 // ]);
-// creator.toolbox.isCompact = false;
+// creator.toolbox.isCompact = true;

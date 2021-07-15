@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.56](https://github.com/surveyjs/survey-creator/compare/v1.8.55...v1.8.56) (2021-07-13)
+
+
+### Bug Fixes
+
+* Changing default value of showProgressBar creates progress bar inside property grid: V2 [#1481](https://github.com/surveyjs/survey-creator/issues/1481) ([#1488](https://github.com/surveyjs/survey-creator/issues/1488)) ([76bc43e](https://github.com/surveyjs/survey-creator/commit/76bc43e60df5869c55cacb8f55de4a3295756149))
+
 ### [1.8.55](https://github.com/surveyjs/survey-creator/compare/v1.8.54...v1.8.55) (2021-07-07)
 
 ### [1.8.54](https://github.com/surveyjs/survey-creator/compare/v1.8.53...v1.8.54) (2021-06-30)

@@ -605,6 +605,19 @@ test("Page duplicate action, copy a page and check the index", (): any => {
   expect(creator.survey.pages[1].elements[0].name).toEqual("question5");
   expect(creator.survey.pages[1].elements[2].name).toEqual("question7");
 });
+test("Check action container for new added page", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  var pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  pageModel.addNewQuestion(pageModel, null);
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(pageModel.actionContainer.actions).toHaveLength(2);
+});
 test("Show error on entering non-unique column value", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {

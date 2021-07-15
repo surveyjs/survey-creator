@@ -27,3 +27,9 @@
     line-height: calcSize(3);
   }
 }
+//todo: add ability to customize class sv-title-actions in library
+.sd-title {
+  .sv-title-actions {
+    width: 100%;
+  }
+}

@@ -77,6 +77,7 @@ export class PageViewModel<
     if (this.isGhost) {
       this.isGhost = false;
       this.page["_addToSurvey"]();
+      this.actionContainer.setItems(this.getContextActions());
     }
     this.creator.survey.currentPage = this.page;
   }

@@ -65,3 +65,9 @@
     padding-right: calcSize(2);
   }
 }
+
+.svc-toolbox:not(.svc-toolbox--compact) {
+  .svc-toolbox__tool:hover {
+    background-color: $border;
+  }
+}

@@ -786,6 +786,7 @@ export class CreatorBase<T extends { [index: string]: any }>
    * @see text
    */
   public get JSON(): any {
+    if (!this.survey) return {};
     return (<any>this.survey).toJSON();
   }
   public set JSON(val: any) {
