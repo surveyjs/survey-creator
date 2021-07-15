@@ -206,7 +206,7 @@ export class QuestionToolbox
    * The Array of copied Toolbox items as Text JSON.
    */
   public get copiedJsonText(): string {
-    return JSON.stringify(this.copiedItems));
+    return JSON.stringify(this.copiedItems);
   }
   public set copiedJsonText(value: string) {
     var newItems = value ? JSON.parse(value) : [];
