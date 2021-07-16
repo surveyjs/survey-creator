@@ -1,12 +1,12 @@
 import * as ko from "knockout";
-import { IActionBarItem } from "survey-core";
+import { IAction } from "survey-core";
 
 //import "./page-navigator-item.scss";
 const template = require("./page-navigator-item.html");
 // import template from "./page-navigator-item.html";
 
 export class PageNavigatorItemViewModel {
-  constructor(private item: IActionBarItem) {}
+  constructor(private item: IAction) {}
   get text() {
     return this.item.title;
   }

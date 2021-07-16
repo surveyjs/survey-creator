@@ -1,15 +1,15 @@
 import { CreatorBase } from "../../creator-base";
 import { PagesController } from "../../pages-controller";
 import {
-  IActionBarItem,
   PageModel,
   PopupModel,
   ListModel,
   Base,
   propertyArray,
-  ActionBarItem,
   SurveyModel,
-  property
+  property,
+  IAction,
+  Action
 } from "survey-core";
 
 import "./page-navigator.scss";
@@ -71,15 +71,15 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     this.pagesController.onPageNameChanged.add(this.pageNameChangedFunc);
   }
 
-  @propertyArray() items: Array<IActionBarItem>;
+  @propertyArray() items: Array<IAction>;
   @property({ defaultValue: false }) visible: boolean;
-  private getActionBarByPage(page: PageModel): IActionBarItem {
+  private getActionBarByPage(page: PageModel): IAction {
     for (var i = 0; i < this.items.length; i++) {
       if (this.items[i].data === page) return this.items[i];
     }
     return null;
   }
-  private setItems(items: Array<IActionBarItem>) {
+  private setItems(items: Array<IAction>) {
     this.items = items;
     this.pageListModel.items = items;
     this.visible = items.length > 1;
@@ -99,8 +99,8 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
       item.active = item.data === page;
     }
   }
-  private createActionBarItem(page: PageModel): ActionBarItem {
-    const item: IActionBarItem = {
+  private createActionBarItem(page: PageModel): Action {
+    const item: IAction = {
       id: page.id,
       title: this.pagesController
         ? this.pagesController.getDisplayName(page)
@@ -113,8 +113,8 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     item.data = page;
     return this.createActionBarCore(item);
   }
-  protected createActionBarCore(item: IActionBarItem): ActionBarItem {
-    return new ActionBarItem(item);
+  protected createActionBarCore(item: IAction): Action {
+    return new Action(item);
   }
   togglePageSelector = () => this.popupModel.toggleVisibility();
 }

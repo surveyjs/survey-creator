@@ -16,8 +16,8 @@ import {
   JsonObject,
   Question,
   QuestionCommentModel,
-  IActionBarItem,
-  ActionBarItem
+  IAction,
+  Action
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
@@ -771,7 +771,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.updateOperatorEnables(panel);
     this.updateQuestionsWidth(panel);
   }
-  private showBuilderAction: IActionBarItem;
+  private showBuilderAction: IAction;
   private onGetQuestionTitleActions(options: any) {
     options.titleActions = [];
     if (
@@ -781,7 +781,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     )
       return;
     var isBuildQuestion = options.question === this.panel;
-    var showBuilder = new ActionBarItem({
+    var showBuilder = new Action({
       id: "condition-buid",
       title: editorLocalization.getString("pe.buildExpression"),
       active: isBuildQuestion,

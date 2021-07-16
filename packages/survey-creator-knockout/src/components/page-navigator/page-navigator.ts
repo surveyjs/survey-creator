@@ -2,8 +2,8 @@ import * as ko from "knockout";
 import { PageNavigatorViewModel, PagesController } from "@survey/creator";
 import {
   PageModel,
-  IActionBarItem,
-  ActionBarItem,
+  IAction,
+  Action,
   SurveyModel,
 } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
@@ -15,7 +15,7 @@ export class PageNavigatorView extends PageNavigatorViewModel<SurveyModel> {
   constructor(private pagesController: PagesController) {
     super(pagesController);
   }
-  protected createActionBarCore(item: IActionBarItem): ActionBarItem {
+  protected createActionBarCore(item: IAction): Action {
     var res = super.createActionBarCore(item);
     new ImplementorBase(res);
     return res;

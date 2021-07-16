@@ -67,15 +67,15 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   /**
    * The list of toolbar items. You may add/remove/replace them.
-   * @see IActionBarItem
+   * @see IAction
    */
-  public get toolbarItems(): Array<IAction>{
+  public get toolbarItems(): Array<IAction> {
     return this.toolbar.actions;
   }
-  public get toolbarEditItems(): Array<IAction>{
+  public get toolbarEditItems(): Array<IAction> {
     return this.editToolbar.actions;
   }
-  
+
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "items") {
@@ -183,42 +183,50 @@ export class SurveyLogicUI extends SurveyLogic {
     matrix.rowCount = data.length;
   }
   private setupToolbarItems() {
-    this.toolbar.actions.push(new Action({
-      id: "svd-logic-addNew",
-      title: this.addNewText,
-      tooltip: this.addNewText,
-      component: "sv-action-bar-item",
-      action: () => {
-        this.addNew();
-      }
-    }));
-    this.editToolbar.actions.push(new Action({
-      id: "svd-logic-saveAndBack",
-      title: this.getLocString("pe.saveAndBack"),
-      tooltip: this.getLocString("pe.saveAndBackTooltip"),
-      component: "sv-action-bar-item",
-      action: () => {
-        this.saveEditableItemAndBack();
-      }
-    }));
-    this.editToolbar.actions.push(new Action({
-      id: "svd-logic-save",
-      title: this.getLocString("pe.save"),
-      tooltip: this.getLocString("pe.saveTooltip"),
-      component: "sv-action-bar-item",
-      action: () => {
-        this.saveEditableItem();
-      }
-    }));
-    this.editToolbar.actions.push(new Action({
-      id: "svd-logic-back",
-      title: this.getLocString("pe.back"),
-      tooltip: this.getLocString("pe.backTooltip"),
-      component: "sv-action-bar-item",
-      action: () => {
-        this.mode = "view";
-      }
-    }));
+    this.toolbar.actions.push(
+      new Action({
+        id: "svd-logic-addNew",
+        title: this.addNewText,
+        tooltip: this.addNewText,
+        component: "sv-action-bar-item",
+        action: () => {
+          this.addNew();
+        }
+      })
+    );
+    this.editToolbar.actions.push(
+      new Action({
+        id: "svd-logic-saveAndBack",
+        title: this.getLocString("pe.saveAndBack"),
+        tooltip: this.getLocString("pe.saveAndBackTooltip"),
+        component: "sv-action-bar-item",
+        action: () => {
+          this.saveEditableItemAndBack();
+        }
+      })
+    );
+    this.editToolbar.actions.push(
+      new Action({
+        id: "svd-logic-save",
+        title: this.getLocString("pe.save"),
+        tooltip: this.getLocString("pe.saveTooltip"),
+        component: "sv-action-bar-item",
+        action: () => {
+          this.saveEditableItem();
+        }
+      })
+    );
+    this.editToolbar.actions.push(
+      new Action({
+        id: "svd-logic-back",
+        title: this.getLocString("pe.back"),
+        tooltip: this.getLocString("pe.backTooltip"),
+        component: "sv-action-bar-item",
+        action: () => {
+          this.mode = "view";
+        }
+      })
+    );
   }
   public get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");
