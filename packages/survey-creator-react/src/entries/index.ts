@@ -25,6 +25,7 @@ export * from "../components/tabs/Preview";
 export * from "../components/tabs/Translation";
 export * from "../components/toolbox/Toolbox";
 export * from "../components/toolbox/ToolboxItem";
+export * from "../components/Notifier";
 export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
