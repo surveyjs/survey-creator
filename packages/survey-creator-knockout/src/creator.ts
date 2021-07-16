@@ -108,6 +108,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
 
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
+    new ImplementorBase(this.notifier);
     new ImplementorBase(this.toolbox);
     new ImplementorBase(this.dragDropHelper);
     new ImplementorBase(this);

@@ -36,7 +36,22 @@ export var settings = {
   /**
    * Determines which types of questions the conversion will be available for.
    */
-  questionConvertMode: QuestionConvertMode.AllTypes
+  questionConvertMode: QuestionConvertMode.AllTypes,
+  propertyGrid: {
+    useButtonGroup: true
+  },
+  /**
+   * Notification settings
+   */
+  notifications : {
+    lifetime: 2000
+  },
+  /**
+   * Auto save parameters
+   */
+   autoSave: {
+    delay: 500
+  }
 
   //TODO add maximumColumnCount
 };

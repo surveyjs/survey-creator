@@ -770,6 +770,7 @@ export class Translation extends Base implements ITranslationLocales {
       this.settingsSurvey.setValue(valueName, val);
     }
   }
+  private inputFileElement: HTMLInputElement;
   private setupToolbarItems() {
     var actions: Array<Action> = [];
     this.chooseLanguagePopupModel = new PopupModel(
@@ -882,8 +883,27 @@ export class Translation extends Base implements ITranslationLocales {
         }
       })
     );
-
-    //TODO add import from, requried file input action
+    actions.push(
+      new Action({
+        id: "svc-translation-import",
+        css: "sv-action--last",
+        title: this.importFromCSVText,
+        tooltip: this.importFromCSVText,
+        component: "sv-action-bar-item",
+        action: () => {
+          if (!document) return;
+          if (!this.inputFileElement) {
+            this.inputFileElement = document.createElement("input");
+            this.inputFileElement.type = "file";
+            this.inputFileElement.style.display = "none";
+            this.inputFileElement.onchange = () => {
+              this.importFromCSVFileUI(this.inputFileElement);
+            };
+          }
+          this.inputFileElement.click();
+        }
+      })
+    );
     actions.push(
       new Action({
         id: "svc-translation-export",

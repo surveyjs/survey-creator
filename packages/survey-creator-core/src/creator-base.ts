@@ -41,6 +41,7 @@ import { TabTranslationPlugin } from "./components/tabs/translation";
 import { TabLogicPlugin } from "./components/tabs/logic-ui";
 import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
 import { TabDesignerPlugin } from "./entries";
+import { Notifier } from "./components/notifier";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -716,6 +717,11 @@ export class CreatorBase<T extends SurveyModel>
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
   }
+  
+  public onActiveTabChanged: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * Get/set the active tab.
    * The following values are available: "designer", "editor", "test", "embed", "logic" and "translation".
@@ -736,6 +742,7 @@ export class CreatorBase<T extends SurveyModel>
     if (!this.canSwitchViewType()) return false;
     this.viewType = viewName;
     this.activatePlugin(viewName);
+    this.onActiveTabChanged.fire(this, { tabName: viewName });
     return true;
   }
   private canSwitchViewType(): boolean {
@@ -1411,7 +1418,18 @@ export class CreatorBase<T extends SurveyModel>
   }
   protected setState(value: string) {
     this.setPropertyValue("state", value);
+    this.onStateChanged.fire(this, {val: value});
+    if(!!value) {
+      this.notify(this.getLocString("ed." + value));
+    }
   }
+
+  public onStateChanged: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  notifier = new Notifier();
 
   public setModified(options: any = null) {
     this.setState("modified");
@@ -1424,7 +1442,8 @@ export class CreatorBase<T extends SurveyModel>
    */
   public notify(msg: string) {
     if (this.onNotify.isEmpty) {
-      alert(msg);
+      this.notifier.notify(msg);
+      // alert(msg);
     } else {
       this.onNotify.fire(this, { message: msg });
     }
@@ -2156,7 +2175,7 @@ export class CreatorBase<T extends SurveyModel>
    * If during this period of time an end-user modify survey, then the last version will be saved only. Set to 0 to save immediately.
    * @see isAutoSave
    */
-  public autoSaveDelay: number = 500;
+  public autoSaveDelay: number = settings.autoSave.delay;
   private autoSaveTimerId = null;
   protected doAutoSave() {
     if (this.autoSaveDelay <= 0) {
@@ -2174,7 +2193,7 @@ export class CreatorBase<T extends SurveyModel>
     }, this.autoSaveDelay);
   }
   saveNo: number = 0;
-  protected doSave() {
+  public doSave() {
     this.setState("saving");
     if (this.saveSurveyFunc) {
       this.saveNo++;
@@ -2192,6 +2211,13 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
+  public onShowSaveButtonVisiblityChanged: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  @property({ defaultValue: false }) showSaveButton: boolean;
+
   /**
    * Assign to this property a function that will be called on clicking the 'Save' button or on any change if isAutoSave equals true.
    * @see isAutoSave
@@ -2201,8 +2227,8 @@ export class CreatorBase<T extends SurveyModel>
   }
   public set saveSurveyFunc(value: any) {
     this.saveSurveyFuncValue = value;
-    //TODO
-    //this.koShowSaveButton(value != null && !this.isAutoSave);
+    this.showSaveButton = (value != null) && !this.isAutoSave;
+    this.onShowSaveButtonVisiblityChanged.fire(this, { val: this.showSaveButton });
   }
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;

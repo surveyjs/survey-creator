@@ -481,6 +481,10 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
   
     <!-- /ko -->
     
+  
+    <!-- ko component: { name: 'svc-notifier', params: { creator: creator, notifier: creator.notifier } } -->
+    <!-- /ko -->
+    
 
   </div>
   
