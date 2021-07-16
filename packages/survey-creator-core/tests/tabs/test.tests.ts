@@ -1,6 +1,6 @@
 import { CreatorTester } from "../creator-tester";
 import { TabTestPlugin, TestSurveyTabViewModel } from "../../src/components/tabs/test";
-import { IActionBarItem, ListModel } from "survey-core";
+import { IAction, ListModel } from "survey-core";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
@@ -84,15 +84,15 @@ test("Check page list state after change page arrows click", (): any => {
     ]
    };
   const model: TestSurveyTabViewModel = getTestModel(creator);
-  const pageList: ListModel = model.actions.filter((item: IActionBarItem) =>
+  const pageList: ListModel = model.actions.filter((item: IAction) =>
     item.id === "pageSelector")[0].popupModel.contentComponentData.model;
   expect(pageList.selectedItem.data).toEqual(model.activePage);
-  const nextPage: IActionBarItem =
-    model.actions.filter((item: IActionBarItem) => item.id === "nextPage")[0];
+  const nextPage: IAction =
+    model.actions.filter((item: IAction) => item.id === "nextPage")[0];
   nextPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
-  const prevPage: IActionBarItem =
-    model.actions.filter((item: IActionBarItem) => item.id === "prevPage")[0];
+  const prevPage: IAction =
+    model.actions.filter((item: IAction) => item.id === "prevPage")[0];
   prevPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
 });

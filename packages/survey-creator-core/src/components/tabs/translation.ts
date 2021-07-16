@@ -554,7 +554,7 @@ export class Translation extends Base implements ITranslationLocales {
   @property({ defaultValue: true }) isEmpty: boolean;
   /**
    * The list of toolbar items. You may add/remove/replace them.
-   * @see IActionBarItem
+   * @see IAction
    */
   public get toolbarItems(): Array<Action> {
     return this.toolbar.actions;
