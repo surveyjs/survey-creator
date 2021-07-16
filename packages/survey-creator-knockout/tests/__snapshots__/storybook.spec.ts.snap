@@ -313,7 +313,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                   <!-- ko foreach: $data.toolbox.actions -->
                   
       
-                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.isCompact } } -->
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
                   
       
                   <!-- /ko -->
@@ -1114,7 +1114,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
         <!-- ko foreach: $data.toolbox.actions -->
         
       
-        <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.isCompact } } -->
+        <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
         
       
         <!-- /ko -->
