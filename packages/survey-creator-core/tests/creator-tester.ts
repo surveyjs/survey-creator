@@ -30,6 +30,3 @@ export class CreatorTester extends CreatorBase<SurveyModel> {
     this.doSave();
   }
 }
-test("dummy test", () => {
-  expect(true).toEqual(true);
-});
