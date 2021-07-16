@@ -125,12 +125,18 @@ export class DesignerSurveyNavigationBlock extends SurveyElementBase<any, any> {
   }
   private onPropChangedHandler = (sender: any, options: any): any => {
     if (this.isRendering) return;
-    const name = options.name;
-    if (name !== "showProgressBar" && name !== "progressBarType") return;
-    this.setState({
-      showProgressBar: this.survey.showProgressBar,
-      progressBarType: this.survey.progressBarType
-    });
+    const reactiveProps = [
+      "showProgressBar",
+      "progressBarType",
+      "currentPageValue"
+    ];
+    if (reactiveProps.indexOf(options.name) < 0) return;
+    var val: any = {};
+    for (var i = 0; i < reactiveProps.length; i++) {
+      var propName = reactiveProps[i];
+      val[propName] = this.survey[propName];
+    }
+    this.setState(val);
   };
   componentWillUnmount() {
     if (this.survey) {
