@@ -34,7 +34,7 @@ import {
 } from "@survey/creator";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import { editableStringRendererName } from "./components/StringEditor";
-import { NotifierComponent } from "./components/notifier";
+import { NotifierComponent } from "./components/Notifier";
 
 StylesManager.applyTheme("modern");
 
