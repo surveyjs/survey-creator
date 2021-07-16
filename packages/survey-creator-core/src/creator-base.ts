@@ -2157,7 +2157,7 @@ export class CreatorBase<T extends SurveyModel>
    * If during this period of time an end-user modify survey, then the last version will be saved only. Set to 0 to save immediately.
    * @see isAutoSave
    */
-  public autoSaveDelay: number = 500;
+  public autoSaveDelay: number = settings.autoSave.delay;
   private autoSaveTimerId = null;
   protected doAutoSave() {
     if (this.autoSaveDelay <= 0) {

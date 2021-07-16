@@ -1,10 +1,11 @@
 import { Base, property } from "survey-core";
+import { settings } from "../settings";
 import "./notifier.scss";
 
 export class Notifier extends Base {
   @property({defaultValue: false}) active;
   @property() message: string;
-  timeout = 2000;
+  timeout = settings.notifications.lifetime;
   timer = undefined;
 
   notify(message: string) {
