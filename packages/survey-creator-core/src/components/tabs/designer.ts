@@ -168,7 +168,7 @@ export class TabDesignerPlugin<T extends SurveyModel>
     });
     this.saveSurveyAction = new Action({
       id: "icon-save",
-      iconName: "icon-save",
+      iconName: "icon-import",
       action: () => this.creator.doSave(),
       active: this.creator.state === "modified",
       enabled: this.creator.state === "modified",
