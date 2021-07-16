@@ -1,7 +1,7 @@
 import { simulatorDevices, SimulatorOptions } from "../simulator";
 
 import "./test.scss";
-import { surveyLocalization, IActionBarItem, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, AdaptiveActionContainer } from "survey-core";
+import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, AdaptiveActionContainer, IAction } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 
@@ -46,7 +46,7 @@ export class TestSurveyTabViewModel extends Base {
     }
   })
   survey: SurveyModel;
-  @propertyArray() pageListItems: Array<IActionBarItem>;
+  @propertyArray() pageListItems: Array<IAction>;
   @property({
     onSet: (val: PageModel, target: TestSurveyTabViewModel) => {
       if (!!val) {
@@ -58,7 +58,7 @@ export class TestSurveyTabViewModel extends Base {
     }
   })
   activePage: PageModel;
-  @propertyArray() languages: Array<IActionBarItem>;
+  @propertyArray() languages: Array<IAction>;
   @property({
     defaultValue: "",
     onSet: (val: string, target: TestSurveyTabViewModel) => {
@@ -90,7 +90,7 @@ export class TestSurveyTabViewModel extends Base {
   private pagePopupModel: PopupModel;
   /**
    * The list of action bar items.
-   * @see IActionBarItem
+   * @see IAction
    */
   public get actions(): Array<Action> {
     return this.toolbar.actions;
@@ -174,11 +174,12 @@ export class TestSurveyTabViewModel extends Base {
       item.enabled = page.isVisible;
     }
   }
-  private getCurrentPageItem(): IActionBarItem {
+  private getCurrentPageItem(): IAction {
     return this.pageListItems[this.survey.pages.indexOf(this.survey.currentPage)];
   };
   private updatePageList(){
-    const pages: Array<IActionBarItem> = [];
+
+    const pages: Array<IAction> = [];
     for (let i: number = 0; i < this.survey.pages.length; i++) {
       const page: PageModel = this.survey.pages[i];
       pages.push({
@@ -186,8 +187,7 @@ export class TestSurveyTabViewModel extends Base {
         data: page,
         title: this.surveyProvider.getObjectDisplayName(page, "survey-tester"),
         visible: page.isVisible,
-        enabled: page.isVisible,
-        active: () => this.survey.state === "running" && page === this.survey.currentPage
+        enabled: page.isVisible
       });
     }
     this.pageListItems = pages;
@@ -273,7 +273,7 @@ export class TestSurveyTabViewModel extends Base {
 
     const pageList: ListModel = new ListModel(
       this.pageListItems,
-      (item: IActionBarItem) => {
+      (item: IAction) => {
         this.activePage = item.data;
         this.pagePopupModel.toggleVisibility();
       },
@@ -367,20 +367,20 @@ export class TestSurveyTabViewModel extends Base {
     this.toolbar.actions = actions;
   }
   private setActivePageItem(page: PageModel, val: boolean) {
-    const item: IActionBarItem = this.getPageItemByPage(page);
+    const item: IAction = this.getPageItemByPage(page);
     if (item) {
       item.active = val;
     }
   }
-  private getPageItemByPage(page: PageModel): IActionBarItem {
-    const items: IActionBarItem[] = this.pageListItems;
+  private getPageItemByPage(page: PageModel): IAction {
+    const items: IAction[] = this.pageListItems;
     for (let i = 0; i < items.length; i++) {
       if (items[i].data === page) return items[i];
     }
     return null;
   }
-  private getLanguages(usedLanguages: Array<string> = null): Array<IActionBarItem> {
-    const res: Array<IActionBarItem> = [];
+  private getLanguages(usedLanguages: Array<string> = null): Array<IAction> {
+    const res: Array<IAction> = [];
     const locales = !!usedLanguages && usedLanguages.length > 1 ? usedLanguages : surveyLocalization.getLocales();
     for (let i = 0; i < locales.length; i++) {
       const loc: string = locales[i];

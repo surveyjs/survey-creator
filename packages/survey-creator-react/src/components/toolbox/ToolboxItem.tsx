@@ -3,9 +3,10 @@ import {
     editorLocalization,
     IQuestionToolboxItem
   } from "@survey/creator";
-  import React from "react";
+  import React, { CSSProperties } from "react";
   import { ToolboxItemViewModel } from "@survey/creator";
   import {
+    Action,
     Base,
     SurveyModel
   } from "survey-core";
@@ -21,6 +22,56 @@ import {
     isCompact: boolean
   }
   
+  export class SurveyCreatorToolboxTool extends SurveyElementBase<
+    ISurveyCreatorToolboxItemProps,
+    any
+  > {
+    constructor(props) {
+      super(props);
+    }
+    public get item() {
+      return this.props.item;
+    }
+    public get creator() {
+      return this.props.creator;
+    }
+    public get isCompact() {
+      return this.props.isCompact;
+    }
+
+    protected getStateElement(): Base {
+      return (this.item as any);
+    }
+    
+    render(): JSX.Element {
+      const item = ((this.item as any) as Action);
+      const className = "svc-toolbox__tool " 
+      + item.css;
+      const style: CSSProperties = {
+        visibility: item.isVisible === undefined || item.isVisible ? "visible" : "hidden"
+      };
+      if (item.visible !== undefined && !item.visible) {
+        style.display = "none";
+      }
+      const itemComponent = ReactElementFactory.Instance.createElement(
+        this.item.component || "svc-toolbox-item",
+        {
+          item: this.item,
+          creator: this.creator,
+          isCompact: this.isCompact
+        }
+      );
+      return (
+        <div className={className} style={style} key={item.id}>
+          {(this.isCompact && item.needSeparator) ? (
+            <div className="svc-toolbox__category-separator"></div>
+          ) : null}
+          {itemComponent}
+        </div>
+      );
+    }
+  }
+
   export class SurveyCreatorToolboxItem extends SurveyElementBase<
     ISurveyCreatorToolboxItemProps,
     any
