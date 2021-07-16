@@ -34,6 +34,7 @@ import {
 } from "@survey/creator";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import { editableStringRendererName } from "./components/StringEditor";
+import { NotifierComponent } from "./components/notifier";
 
 StylesManager.applyTheme("modern");
 
@@ -102,6 +103,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
             </div>
           </div>
           {licenseBanner}
+          <NotifierComponent creator={creator} notifier={creator.notifier}></NotifierComponent>
         </div>
       </div>
     );

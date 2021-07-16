@@ -39,6 +39,18 @@ export var settings = {
   questionConvertMode: QuestionConvertMode.AllTypes,
   propertyGrid: {
     useButtonGroup: true
+  },
+  /**
+   * Notification settings
+   */
+  notifications : {
+    lifetime: 2000
+  },
+  /**
+   * Auto save parameters
+   */
+   autoSave: {
+    delay: 500
   }
 
   //TODO add maximumColumnCount
