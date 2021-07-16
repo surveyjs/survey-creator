@@ -1,9 +1,29 @@
-.sd-question {
-  background: transparent;
+.svc-logic-question-value,
+.sd-page>.sd-row>div>.sd-element {
+  border-radius: calcSize(0.5);
+  box-sizing: border-box;
+  padding: calcSize(4) calcSize(5) calcSize(8);
+  background: #ffffff;
+  box-shadow: 0px 1px 2px rgba(139, 127, 127, 0.15);
+  border: 1px solid transparent;
 }
+
+// .sd-panel__content .sd-row>.sd-element,
+// .sd-paneldynamic > .sd-panel,
+// .svc-logic-panel.sd-element,
+// .svc-question__content>.sd-element {
+//   border: none;
+//   border-radius: none;
+//   padding: 0;
+//   background: transparent;
+//   box-shadow: none;
+// }
+
+
 .sd-question__header {
   width: 100%;
 }
+
 .sd-question__title {
   position: static;
   font-weight: 600;
@@ -15,4 +35,13 @@
 .sd-scrollable .sd-question__content {
   overflow-x: auto;
   padding: calcSize(2) 0;
+}
+
+.sd-question__header--location--left {
+  float: left;
+  width: auto;
+}
+
+.sd-question__content--left {
+  overflow: hidden;
 }

@@ -18,6 +18,7 @@ import {
   EmptySurveyCreatorOptions,
   settings,
 } from "../../settings";
+import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
 import {
   ISurveyLogicItemOwner,
   SurveyLogicItem,

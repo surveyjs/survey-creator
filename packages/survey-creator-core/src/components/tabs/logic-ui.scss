@@ -10,6 +10,8 @@ svc-tab-logic-edit {
   height: calc(100% - calc(6 * #{$base-unit}));
   overflow-y: auto;
   overflow-x: hidden;
+  max-width: 600px;
+  margin: auto;
   // background: $background;
 }
 
@@ -22,3 +24,93 @@ svc-tab-logic-edit {
     width: 100%;
   }
 }
+
+.svc-logic-operator {
+  appearance: none;
+  padding: calcSize(1) calcSize(2);
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  font-family: $font-family;
+  font-size: calcSize(2);
+  color: $foreground-light;
+
+  option {
+      background: $background;
+      color: $foreground;
+  }
+}
+
+.svc-logic-question--answered .svc-logic-operator { 
+  color: $foreground;
+}
+
+.svc-logic-operator.svc-logic-operator--conjunction {
+    background-color: rgba(25, 179, 148, 0.1);
+}
+
+.svc-logic-operator.svc-logic-operator--question {
+    background-color: rgba(67, 127, 217, 0.1);
+}
+
+.svc-logic-operator.svc-logic-operator--operator {
+    background-color: rgba(255, 152, 20, 0.1);
+}
+
+.svc-logic-operator.svc-logic-operator--action {
+    background-color: rgba(230, 10, 62, 0.1);
+}
+
+.svc-logic-operator.svc-logic-operator--error {
+  background-color: #FFFFFF;
+  color:  #E60A3E;
+  box-shadow: inset 0 0 0 2px #E60A3E;
+}
+
+.svc-logic-operator__error{
+  display: none;    
+}
+
+.sd-paneldynamic__separator {
+    border: none;
+    margin: 0;
+}
+
+.svc-icon-remove {
+    display: block;
+    width: 20px;
+    height: 22px;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='22' viewBox='0 0 20 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 4H18H14V2C14 0.9 13.1 0 12 0H8C6.9 0 6 0.9 6 2V4H2H0V6H2V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V6H20V4ZM8 2H12V4H8V2ZM16 20H4V6H6H14H16V20ZM12 8H14V18H12V8ZM9 8H11V18H9V8ZM6 8H8V18H6V8Z' fill='%23E60A3E'/%3E%3C/svg%3E%0A");
+}
+
+.svc-logic-paneldynamic__button-remove-text {
+    display: none;
+}
+
+.svc-logic-paneldynamic__button {
+    appearance: none;
+    border: none;
+    padding: 0;
+}
+
+.svc-question-wrapper {
+    max-width: initial !important;
+    min-width: initial !important;
+    width: initial !important;
+    flex: initial !important;
+}
+.svc-question-wrapper {
+    .sv-title-actions__title {
+        max-width: none;
+    }
+}
+.svc-logic-panel-element .sd-row {
+    margin-top: 0;
+}
+
+.svc-logic-operator--action.sd-paneldynamic__add-btn.sd-paneldynamic__add-btn,
+.svc-logic-operator--operator.sd-paneldynamic__add-btn.sd-paneldynamic__add-btn {
+    color: $foreground-light;
+} 

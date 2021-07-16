@@ -18,6 +18,7 @@ import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../entries";
 
 import "./logic-ui.scss";
+import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
@@ -38,6 +39,7 @@ export class SurveyLogicUI extends SurveyLogic {
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
+    this.itemsSurveyValue.css = surveyDesignerCss;
     this.itemsSurvey.onMatrixCellCreated.add((sender, options) => {
       var q = options.cellQuestion;
       q.ignoreHtmlProgressing = true;

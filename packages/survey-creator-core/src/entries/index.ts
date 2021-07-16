@@ -14,9 +14,9 @@ export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
 export * from "../components/tabs/test";
 export * from "../components/tabs/logic";
-export * from "../components/tabs/logic-ui";
 export * from "../components/tabs/translation";
 export * from "../components/tabs/designer";
+export * from "../components/tabs/logic-ui";
 
 export * from "../components/toolbox/toolbox-item";
 export * from "../components/page-navigator/page-navigator";
