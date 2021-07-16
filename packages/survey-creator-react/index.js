@@ -103,12 +103,19 @@ let json = {
 const options = {
     showLogicTab: true,
     showTranslationTab: true,
-    showEmbeddedSurveyTab: true
+    showEmbeddedSurveyTab: true,
+    isAutoSave: true
 };
 
 const creator = new SurveyCreator.SurveyCreator(options);
 creator.JSON = json;
 window.creator = creator;
+
+creator.saveSurveyFunc = (no, callback) => {
+    setTimeout(function() {
+      callback(no, true);
+    }, 1000);
+  };  
 
 ReactDOM.render(
     <React.StrictMode>
