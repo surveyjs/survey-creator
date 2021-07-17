@@ -717,7 +717,7 @@ export class CreatorBase<T extends SurveyModel>
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
   }
-  
+
   public onActiveTabChanged: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any
@@ -1410,16 +1410,17 @@ export class CreatorBase<T extends SurveyModel>
   protected createSurveyCore(json: any = {}, reason: string): T {
     throw new Error("createSurveyCore method should be overridden/implemented");
   }
+  private stateValue: string;
   /**
    * Returns the creator state. It may return empty string or "saving" and "saved".
    */
   public get state(): string {
-    return this.getPropertyValue("state");
+    return !!this.stateValue ? this.stateValue : "";
   }
   protected setState(value: string) {
-    this.setPropertyValue("state", value);
-    this.onStateChanged.fire(this, {val: value});
-    if(!!value) {
+    this.stateValue = value;
+    this.onStateChanged.fire(this, { val: value });
+    if (!!value) {
       this.notify(this.getLocString("ed." + value));
     }
   }
@@ -2227,8 +2228,10 @@ export class CreatorBase<T extends SurveyModel>
   }
   public set saveSurveyFunc(value: any) {
     this.saveSurveyFuncValue = value;
-    this.showSaveButton = (value != null) && !this.isAutoSave;
-    this.onShowSaveButtonVisiblityChanged.fire(this, { val: this.showSaveButton });
+    this.showSaveButton = value != null && !this.isAutoSave;
+    this.onShowSaveButtonVisiblityChanged.fire(this, {
+      val: this.showSaveButton
+    });
   }
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;

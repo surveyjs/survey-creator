@@ -7,16 +7,17 @@ import {
   Survey
 } from "survey-react-ui";
 import { SurveyLogicUI } from "@survey/creator";
+import { TabBaseComponent } from "./TabBase";
 
-export class TabLogicComponent extends SurveyElementBase<any, any> {
+export class TabLogicComponent extends TabBaseComponent<any, any> {
   private get model(): SurveyLogicUI {
     return this.props.data.model;
   }
-  protected getStateElement(): Base {
+  protected getStateModel(): Base {
     return this.model;
   }
 
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     var logic = this.model;
     var rootClass = "svc-creator-tab__content";
     if (logic.mode == "edit") {

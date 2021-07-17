@@ -14,25 +14,22 @@ import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 import PropertyGridComponent from "../../PropertyGrid";
+import { TabBaseComponent } from "./TabBase";
 
 interface ITabDesignerComponentProps {
   data: TabDesignerPlugin<SurveyModel>;
 }
 
-export class TabDesignerComponent extends SurveyElementBase<
+export class TabDesignerComponent extends TabBaseComponent<
   ITabDesignerComponentProps,
   any
 > {
-  constructor(props: ITabDesignerComponentProps) {
-    super(props);
-  }
   private get model(): TabDesignerViewModel<SurveyModel> {
     return this.props.data.model;
   }
-  protected getStateElement(): Base {
+  protected getStateModel(): Base {
     return this.model;
   }
-
   renderElement(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.model.creator;
     const survey: SurveyModel = creator.survey;

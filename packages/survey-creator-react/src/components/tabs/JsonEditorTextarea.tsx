@@ -5,25 +5,23 @@ import {
   TextareaJsonEditorModel,
   TabJsonEditorTextareaPlugin
 } from "@survey/creator";
+import { TabBaseComponent } from "./TabBase";
 
 interface ITabJsonEditorTextareaComponentProps {
   data: TabJsonEditorTextareaPlugin;
 }
 
-export class TabJsonEditorTextareaComponent extends SurveyElementBase<
+export class TabJsonEditorTextareaComponent extends TabBaseComponent<
   ITabJsonEditorTextareaComponentProps,
   any
 > {
-  constructor(props: ITabJsonEditorTextareaComponentProps) {
-    super(props);
-  }
-  protected getStateElement(): Base {
+  protected getStateModel(): Base {
     return this.model;
   }
   private get model(): TextareaJsonEditorModel {
     return this.props.data.model as TextareaJsonEditorModel;
   }
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     const errors: JSX.Element[] = [];
     for (let i: number = 0; i < this.model.errors.length; i++) {
       errors.push(<span>Error: </span>);

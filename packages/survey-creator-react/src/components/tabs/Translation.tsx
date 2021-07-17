@@ -7,16 +7,16 @@ import {
   Survey
 } from "survey-react-ui";
 import { Translation } from "@survey/creator";
+import { TabBaseComponent } from "./TabBase";
 
-export class TabTranslationComponent extends SurveyElementBase<any, any> {
+export class TabTranslationComponent extends TabBaseComponent<any, any> {
   private get model(): Translation {
     return this.props.data.model;
   }
-
-  protected getStateElement(): Base {
+  protected getStateModel(): Base {
     return this.model;
   }
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     if (!this.model) return null;
     return (
       <div className="svc-creator-tab__content">

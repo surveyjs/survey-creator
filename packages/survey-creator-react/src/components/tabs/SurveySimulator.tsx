@@ -2,8 +2,9 @@ import { Base } from "survey-core";
 import { Survey, SurveyElementBase } from "survey-react-ui";
 import { SurveySimulatorComponent, TabTestPlugin } from "@survey/creator";
 import React from "react";
+import { TabBaseComponent } from "./TabBase";
 
-export class SurveySimulator extends SurveyElementBase<any, any> {
+export class SurveySimulator extends TabBaseComponent<any, any> {
   private model: SurveySimulatorComponent;
 
   constructor(props: any) {
@@ -11,12 +12,11 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     const plugin: TabTestPlugin = this.props.data;
     this.model = new SurveySimulatorComponent(this.props.options);
   }
-
-  protected getStateElement(): Base {
+  protected getStateModel(): Base {
     return this.model;
   }
 
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     if (!this.model.survey) {
       return <div className="svd-simulator-main"></div>;
     }
@@ -27,7 +27,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
             className="svd-simulator-wrapper"
             style={{
               width: this.model.simulatorFrame.frameWidth + "px",
-              height: this.model.simulatorFrame.frameHeight + "px",
+              height: this.model.simulatorFrame.frameHeight + "px"
             }}
           >
             <div
@@ -42,7 +42,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
                 height:
                   (this.model.landscapeOrientation
                     ? this.model.simulatorFrame.frameWidth
-                    : this.model.simulatorFrame.frameHeight) + "px",
+                    : this.model.simulatorFrame.frameHeight) + "px"
               }}
             ></div>
             <div
@@ -59,7 +59,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
                 transform:
                   "scale(" +
                   this.model.simulatorFrame.scale +
-                  ") translate(-50%, -50%)",
+                  ") translate(-50%, -50%)"
               }}
             >
               <div className="svd-simulator-content">
