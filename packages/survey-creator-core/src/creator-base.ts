@@ -717,7 +717,7 @@ export class CreatorBase<T extends SurveyModel>
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
   }
-  
+
   public onActiveTabChanged: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any
@@ -1418,8 +1418,8 @@ export class CreatorBase<T extends SurveyModel>
   }
   protected setState(value: string) {
     this.setPropertyValue("state", value);
-    this.onStateChanged.fire(this, {val: value});
-    if(!!value) {
+    this.onStateChanged.fire(this, { val: value });
+    if (!!value) {
       this.notify(this.getLocString("ed." + value));
     }
   }
@@ -1656,7 +1656,9 @@ export class CreatorBase<T extends SurveyModel>
   protected deleteObjectCore(obj: any) {
     var objType = SurveyHelper.getObjectType(obj);
     if (objType == ObjType.Page) {
+      var newPage = this.getNextPage(obj);
       this.survey.removePage(obj);
+      this.selectElement(!!newPage ? newPage : this.survey);
     } else {
       this.deletePanelOrQuestion(obj, objType);
     }
@@ -1668,11 +1670,11 @@ export class CreatorBase<T extends SurveyModel>
   }
   private getNextPage(page: PageModel): PageModel {
     var index = this.survey.pages.indexOf(page);
-    if (index < this.survey.pages.length - 1) index++;
-    else index--;
-    if (index < 0) index = 0;
-    if (index < this.survey.pages.length) return this.survey.pages[index];
-    return null;
+    if (index < 0 || this.survey.pages.length == 1) return null;
+    if (index == this.survey.pages.length - 1) index--;
+    else index++;
+    if (index < 0 || index > this.survey.pages.length - 1) return null;
+    return this.survey.pages[index];
   }
   protected deleteObject(obj: any) {
     var options = {
@@ -2227,8 +2229,10 @@ export class CreatorBase<T extends SurveyModel>
   }
   public set saveSurveyFunc(value: any) {
     this.saveSurveyFuncValue = value;
-    this.showSaveButton = (value != null) && !this.isAutoSave;
-    this.onShowSaveButtonVisiblityChanged.fire(this, { val: this.showSaveButton });
+    this.showSaveButton = value != null && !this.isAutoSave;
+    this.onShowSaveButtonVisiblityChanged.fire(this, {
+      val: this.showSaveButton
+    });
   }
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;

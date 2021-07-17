@@ -911,9 +911,11 @@ test("Show/hide property grid", (): any => {
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
 
-  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter((item) => {
-    if (item.id === "svd-grid-hide") return item;
-  })[0];
+  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter(
+    (item) => {
+      if (item.id === "svd-grid-hide") return item;
+    }
+  )[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
@@ -969,13 +971,44 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeTruthy();
 
-  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter((item) => {
-    if (item.id === "svd-grid-hide") return item;
-  })[0];
+  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter(
+    (item) => {
+      if (item.id === "svd-grid-hide") return item;
+    }
+  )[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
   expect(propertyGridModel.visible).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeFalsy();
+});
+test("Show survey in property grid on deleting last page", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      },
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  };
+  creator.selectElement(creator.survey.pages[0]);
+  expect(creator.selectedElementName).toEqual("page1");
+  creator.deleteCurrentElement();
+  expect(creator.selectedElementName).toEqual("page2");
+  creator.deleteCurrentElement();
+  expect(creator.selectedElementName).toEqual("survey");
 });
