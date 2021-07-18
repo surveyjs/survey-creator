@@ -1,7 +1,19 @@
 import { simulatorDevices, SimulatorOptions } from "../simulator";
 
 import "./test.scss";
-import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, AdaptiveActionContainer, IAction } from "survey-core";
+import {
+  surveyLocalization,
+  PopupModel,
+  ListModel,
+  Base,
+  propertyArray,
+  property,
+  PageModel,
+  SurveyModel,
+  Action,
+  AdaptiveActionContainer,
+  IAction
+} from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 
@@ -67,7 +79,10 @@ export class TestSurveyTabViewModel extends Base {
     }
   })
   public get activeLanguage(): string {
-    return this.getPropertyValue("activeLanguage", this.survey.locale || surveyLocalization.defaultLocale);
+    return this.getPropertyValue(
+      "activeLanguage",
+      this.survey.locale || surveyLocalization.defaultLocale
+    );
   }
   public set activeLanguage(val: string) {
     if (val === this.activeLanguage) return;
@@ -103,7 +118,9 @@ export class TestSurveyTabViewModel extends Base {
     this.simulator.registerFunctionOnPropertyValueChanged(
       "device",
       () => {
-        this.deviceSelectorAction.title = simulatorDevices[this.simulator.device].title || this.getLocString("pe.simulator");
+        this.deviceSelectorAction.title =
+          simulatorDevices[this.simulator.device].title ||
+          this.getLocString("pe.simulator");
       },
       "testTabActions"
     );
@@ -127,7 +144,8 @@ export class TestSurveyTabViewModel extends Base {
         const url: string = options.url;
         options.url = "";
         if (!!url) {
-          const message: string = self.getLocString("ed.navigateToMsg") + " '" + url + "'.";
+          const message: string =
+            self.getLocString("ed.navigateToMsg") + " '" + url + "'.";
           if (!!this.surveyProvider) {
             this.surveyProvider.notify(message);
           } else {
@@ -149,7 +167,7 @@ export class TestSurveyTabViewModel extends Base {
     });
   }
 
-  public initialize(json: any, options: any){
+  public initialize(json: any, options: any) {
     this.setJSON(json);
     this.updatePageList();
 
@@ -162,8 +180,12 @@ export class TestSurveyTabViewModel extends Base {
     if (!!options && options.showDefaultLanguageInTestSurveyTab != undefined) {
       this.setDefaultLanguageOption(options.showDefaultLanguageInTestSurveyTab);
     }
-    if (!!options && options.showInvisibleElementsInTestSurveyTab !== undefined) {
-      this.showInvisibleElementsInTestSurveyTab = options.showInvisibleElementsInTestSurveyTab;
+    if (
+      !!options &&
+      options.showInvisibleElementsInTestSurveyTab !== undefined
+    ) {
+      this.showInvisibleElementsInTestSurveyTab =
+        options.showInvisibleElementsInTestSurveyTab;
     }
     this.buildActions();
   }
@@ -175,10 +197,11 @@ export class TestSurveyTabViewModel extends Base {
     }
   }
   private getCurrentPageItem(): IAction {
-    return this.pageListItems[this.survey.pages.indexOf(this.survey.currentPage)];
-  };
-  private updatePageList(){
-
+    return this.pageListItems[
+      this.survey.pages.indexOf(this.survey.currentPage)
+    ];
+  }
+  private updatePageList() {
     const pages: Array<IAction> = [];
     for (let i: number = 0; i < this.survey.pages.length; i++) {
       const page: PageModel = this.survey.pages[i];
@@ -215,10 +238,15 @@ export class TestSurveyTabViewModel extends Base {
     this.show();
   }
   private setDefaultLanguageOption(opt: boolean | string) {
-    const vis: boolean = opt === true || opt === "all" || (opt === "auto" && this.survey.getUsedLocales().length > 1);
+    const vis: boolean =
+      opt === true ||
+      opt === "all" ||
+      (opt === "auto" && this.survey.getUsedLocales().length > 1);
     this.showDefaultLanguageInTestSurveyTab = vis;
     if (vis) {
-      this.languages = this.getLanguages(opt !== "all" ? this.survey.getUsedLocales() : null);
+      this.languages = this.getLanguages(
+        opt !== "all" ? this.survey.getUsedLocales() : null
+      );
     }
   }
   public buildActions() {
@@ -261,8 +289,10 @@ export class TestSurveyTabViewModel extends Base {
       id: "deviceSelector",
       css: "sv-action--first sv-action-bar-item--secondary",
       iconName: "icon-change_16x16",
-      title: simulatorDevices[this.simulator.device].title || this.getLocString("pe.simulator"),
-      enabled: this.showSimulator,
+      title:
+        simulatorDevices[this.simulator.device].title ||
+        this.getLocString("pe.simulator"),
+      visible: this.showSimulator,
       component: "sv-action-bar-item-dropdown",
       action: () => {
         devicePopupModel.toggleVisibility();
@@ -283,16 +313,25 @@ export class TestSurveyTabViewModel extends Base {
     const setNearPage: (isNext: boolean) => void = (isNext: boolean) => {
       const currentIndex: number = this.survey.currentPageNo;
       const shift: number = isNext ? 1 : -1;
-      const nearPage: PageModel = this.survey.visiblePages[currentIndex + shift];
+      const nearPage: PageModel =
+        this.survey.visiblePages[currentIndex + shift];
       const pageIndex: number = this.survey.pages.indexOf(nearPage);
       this.activePage = this.survey.pages[pageIndex];
       pageList.selectedItem = this.pageListItems[pageIndex];
     };
-    this.pagePopupModel = new PopupModel("sv-list", { model: pageList }, "top", "center");
+    this.pagePopupModel = new PopupModel(
+      "sv-list",
+      { model: pageList },
+      "top",
+      "center"
+    );
 
     this.prevPageAction = new Action({
       id: "prevPage",
-      css: this.survey && !this.survey.isFirstPage ? "sv-action-bar-item--secondary" : "",
+      css:
+        this.survey && !this.survey.isFirstPage
+          ? "sv-action-bar-item--secondary"
+          : "",
       iconName: "icon-leftarrow_16x16",
       visible: this.isRunning && this.pageListItems.length > 1,
       enabled: this.survey && !this.survey.isFirstPage,
@@ -303,8 +342,17 @@ export class TestSurveyTabViewModel extends Base {
 
     this.selectPageAction = new Action({
       id: "pageSelector",
-      title: (this.activePage && this.surveyProvider.getObjectDisplayName(this.activePage, "survey-tester")) || this.getLocString("ts.selectPage"),
-      visible: this.isRunning && this.pageListItems.length > 1 && this.showPagesInTestSurveyTab,
+      title:
+        (this.activePage &&
+          this.surveyProvider.getObjectDisplayName(
+            this.activePage,
+            "survey-tester"
+          )) ||
+        this.getLocString("ts.selectPage"),
+      visible:
+        this.isRunning &&
+        this.pageListItems.length > 1 &&
+        this.showPagesInTestSurveyTab,
       component: "sv-action-bar-item-dropdown",
       popupModel: this.pagePopupModel,
       action: (newPage) => {
@@ -315,7 +363,10 @@ export class TestSurveyTabViewModel extends Base {
 
     this.nextPageAction = new Action({
       id: "nextPage",
-      css: this.survey && !this.survey.isLastPage ? "sv-action-bar-item--secondary" : "",
+      css:
+        this.survey && !this.survey.isLastPage
+          ? "sv-action-bar-item--secondary"
+          : "",
       iconName: "icon-rightarrow_16x16",
       visible: this.isRunning && this.pageListItems.length > 1,
       enabled: this.survey && !this.survey.isLastPage,
@@ -340,15 +391,22 @@ export class TestSurveyTabViewModel extends Base {
 
     this.invisibleToggleAction = new Action({
       id: "showInvisible",
-      css: this.showInvisibleElements ? "sv-action--last sv-action-bar-item--secondary" : "sv-action--last",
+      css: this.showInvisibleElements
+        ? "sv-action--last sv-action-bar-item--secondary"
+        : "sv-action--last",
       visible: this.isRunning,
       title: this.getLocString("ts.showInvisibleElements"),
-      iconName: this.showInvisibleElements ? "icon-switchactive_16x16" : "icon-switchinactive_16x16",
+      iconName: this.showInvisibleElements
+        ? "icon-switchactive_16x16"
+        : "icon-switchinactive_16x16",
       action: () => {
         this.showInvisibleElements = !this.showInvisibleElements;
-        this.invisibleToggleAction.css = this.showInvisibleElements ? "sv-action--last sv-action-bar-item--secondary" : "sv-action--last";
-        this.invisibleToggleAction.iconName = this.showInvisibleElements ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
-      
+        this.invisibleToggleAction.css = this.showInvisibleElements
+          ? "sv-action--last sv-action-bar-item--secondary"
+          : "sv-action--last";
+        this.invisibleToggleAction.iconName = this.showInvisibleElements
+          ? "icon-switchactive_16x16"
+          : "icon-switchinactive_16x16";
       }
     });
     actions.push(this.invisibleToggleAction);
@@ -381,7 +439,10 @@ export class TestSurveyTabViewModel extends Base {
   }
   private getLanguages(usedLanguages: Array<string> = null): Array<IAction> {
     const res: Array<IAction> = [];
-    const locales = !!usedLanguages && usedLanguages.length > 1 ? usedLanguages : surveyLocalization.getLocales();
+    const locales =
+      !!usedLanguages && usedLanguages.length > 1
+        ? usedLanguages
+        : surveyLocalization.getLocales();
     for (let i = 0; i < locales.length; i++) {
       const loc: string = locales[i];
       res.push({ id: loc, title: editorLocalization.getLocaleName(loc) });
@@ -392,33 +453,67 @@ export class TestSurveyTabViewModel extends Base {
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
 
-    if(!this.actions || this.actions.length <= 0) return;
+    if (!this.actions || this.actions.length <= 0) return;
 
-    if(name === "activePage"){
-      this.prevPageAction.css = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0 ? "sv-action-bar-item--secondary" : "";
-      this.prevPageAction.enabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0;
+    if (name === "activePage") {
+      this.prevPageAction.css =
+        this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0
+          ? "sv-action-bar-item--secondary"
+          : "";
+      this.prevPageAction.enabled =
+        this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0;
 
-      this.nextPageAction.css = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1 ? "sv-action-bar-item--secondary" : "";
-      this.nextPageAction.enabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
+      this.nextPageAction.css =
+        this.survey &&
+        this.survey.visiblePages.indexOf(this.activePage) !==
+          this.survey.visiblePages.length - 1
+          ? "sv-action-bar-item--secondary"
+          : "";
+      this.nextPageAction.enabled =
+        this.survey &&
+        this.survey.visiblePages.indexOf(this.activePage) !==
+          this.survey.visiblePages.length - 1;
 
-      this.selectPageAction.title = (this.activePage && this.surveyProvider.getObjectDisplayName(this.activePage, "survey-tester")) || this.getLocString("ts.selectPage");
+      this.selectPageAction.title =
+        (this.activePage &&
+          this.surveyProvider.getObjectDisplayName(
+            this.activePage,
+            "survey-tester"
+          )) ||
+        this.getLocString("ts.selectPage");
     }
-    if(name === "isRunning" || name === "pageListItems" || name === "showPagesInTestSurveyTab"){
-      this.prevPageAction.visible = this.isRunning && this.pageListItems.length > 1;
-      this.nextPageAction.visible = this.isRunning && this.pageListItems.length > 1;
+    if (
+      name === "isRunning" ||
+      name === "pageListItems" ||
+      name === "showPagesInTestSurveyTab"
+    ) {
+      this.prevPageAction.visible =
+        this.isRunning && this.pageListItems.length > 1;
+      this.nextPageAction.visible =
+        this.isRunning && this.pageListItems.length > 1;
       this.invisibleToggleAction.visible = this.isRunning;
       this.testAgainAction.visible = !this.isRunning;
-      this.selectPageAction.popupModel.contentComponentData.model.items = this.pageListItems;   
-      this.selectPageAction.popupModel.contentComponentData.model.selectedItem = this.getCurrentPageItem();
-      this.selectPageAction.visible = this.isRunning && this.pageListItems.length > 1 && this.showPagesInTestSurveyTab;
+      this.selectPageAction.popupModel.contentComponentData.model.items =
+        this.pageListItems;
+      this.selectPageAction.popupModel.contentComponentData.model.selectedItem =
+        this.getCurrentPageItem();
+      this.selectPageAction.visible =
+        this.isRunning &&
+        this.pageListItems.length > 1 &&
+        this.showPagesInTestSurveyTab;
     }
-    if(name === "activeLanguage") {
-      this.languageSelectorAction.title = editorLocalization.getLocaleName(this.activeLanguage);
+    if (name === "activeLanguage") {
+      this.languageSelectorAction.title = editorLocalization.getLocaleName(
+        this.activeLanguage
+      );
     }
   }
 
   public dispose() {
-    this.simulator.unRegisterFunctionOnPropertyValueChanged("device", "testTabActions");
+    this.simulator.unRegisterFunctionOnPropertyValueChanged(
+      "device",
+      "testTabActions"
+    );
   }
 }
 
@@ -431,13 +526,16 @@ export class TabTestPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new TestSurveyTabViewModel(this.creator);
     this.model.onSurveyCreatedCallback = (survey) => {
-      this.creator["onTestSurveyCreated"] && this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
+      this.creator["onTestSurveyCreated"] &&
+        this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
     };
     this.previewAction.css = "sv-action-bar-item--secondary";
     const options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
-      showDefaultLanguageInTestSurveyTab: this.creator.showDefaultLanguageInTestSurveyTab,
-      showInvisibleElementsInTestSurveyTab: this.creator.showInvisibleElementsInTestSurveyTab,
+      showDefaultLanguageInTestSurveyTab:
+        this.creator.showDefaultLanguageInTestSurveyTab,
+      showInvisibleElementsInTestSurveyTab:
+        this.creator.showInvisibleElementsInTestSurveyTab,
       showSimulatorInTestSurveyTab: this.creator.showSimulatorInTestSurveyTab
     };
     this.model.initialize(this.creator.JSON, options);
@@ -454,7 +552,8 @@ export class TabTestPlugin implements ICreatorPlugin {
       id: "icon-preview",
       iconName: "icon-preview",
       needSeparator: true,
-      css: this.creator.viewType === "test" ? "sv-action-bar-item--secondary" : "",
+      css:
+        this.creator.viewType === "test" ? "sv-action-bar-item--secondary" : "",
       action: () => {
         this.creator.makeNewViewActive("test");
       },
