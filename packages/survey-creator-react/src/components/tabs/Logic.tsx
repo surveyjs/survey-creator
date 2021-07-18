@@ -10,13 +10,13 @@ import { SurveyLogicUI } from "@survey/creator";
 
 export class TabLogicComponent extends SurveyElementBase<any, any> {
   private get model(): SurveyLogicUI {
-    return this.props.data.model;
+    return this.props.data;
   }
   protected getStateElement(): Base {
     return this.model;
   }
 
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     var logic = this.model;
     var rootClass = "svc-creator-tab__content";
     if (logic.mode == "edit") {

@@ -5,34 +5,26 @@ import {
   SurveyElementBase,
   SurveyHeader
 } from "survey-react-ui";
-import {
-  CreatorBase,
-  TabDesignerViewModel,
-  TabDesignerPlugin
-} from "@survey/creator";
+import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
 import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyCreatorToolbox } from "../toolbox/Toolbox";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 import PropertyGridComponent from "../../PropertyGrid";
 
 interface ITabDesignerComponentProps {
-  data: TabDesignerPlugin<SurveyModel>;
+  data: TabDesignerViewModel<SurveyModel>;
 }
 
 export class TabDesignerComponent extends SurveyElementBase<
   ITabDesignerComponentProps,
   any
 > {
-  constructor(props: ITabDesignerComponentProps) {
-    super(props);
-  }
   private get model(): TabDesignerViewModel<SurveyModel> {
-    return this.props.data.model;
+    return this.props.data;
   }
   protected getStateElement(): Base {
     return this.model;
   }
-
   renderElement(): JSX.Element {
     const creator: CreatorBase<SurveyModel> = this.model.creator;
     const survey: SurveyModel = creator.survey;

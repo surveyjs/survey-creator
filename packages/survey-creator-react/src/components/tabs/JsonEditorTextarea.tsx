@@ -1,29 +1,23 @@
 import React, { ChangeEvent } from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import {
-  TextareaJsonEditorModel,
-  TabJsonEditorTextareaPlugin
-} from "@survey/creator";
+import { TextareaJsonEditorModel } from "@survey/creator";
 
 interface ITabJsonEditorTextareaComponentProps {
-  data: TabJsonEditorTextareaPlugin;
+  data: TextareaJsonEditorModel;
 }
 
 export class TabJsonEditorTextareaComponent extends SurveyElementBase<
   ITabJsonEditorTextareaComponentProps,
   any
 > {
-  constructor(props: ITabJsonEditorTextareaComponentProps) {
-    super(props);
-  }
   protected getStateElement(): Base {
     return this.model;
   }
   private get model(): TextareaJsonEditorModel {
-    return this.props.data.model as TextareaJsonEditorModel;
+    return this.props.data;
   }
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     const errors: JSX.Element[] = [];
     for (let i: number = 0; i < this.model.errors.length; i++) {
       errors.push(<span>Error: </span>);

@@ -49,6 +49,7 @@ export interface ICreatorOptions {
 
 export interface ICreatorPlugin {
   activate: () => void;
+  model: Base;
   deactivate?: () => boolean;
   designerSurveyCreated?: () => void;
   createActions?: (items: Array<Action>) => void;
@@ -1410,14 +1411,15 @@ export class CreatorBase<T extends SurveyModel>
   protected createSurveyCore(json: any = {}, reason: string): T {
     throw new Error("createSurveyCore method should be overridden/implemented");
   }
+  private stateValue: string;
   /**
    * Returns the creator state. It may return empty string or "saving" and "saved".
    */
   public get state(): string {
-    return this.getPropertyValue("state");
+    return !!this.stateValue ? this.stateValue : "";
   }
   protected setState(value: string) {
-    this.setPropertyValue("state", value);
+    this.stateValue = value;
     this.onStateChanged.fire(this, { val: value });
     if (!!value) {
       this.notify(this.getLocString("ed." + value));
