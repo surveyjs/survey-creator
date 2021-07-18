@@ -49,6 +49,7 @@ export interface ICreatorOptions {
 
 export interface ICreatorPlugin {
   activate: () => void;
+  model: Base;
   deactivate?: () => boolean;
   designerSurveyCreated?: () => void;
   createActions?: (items: Array<Action>) => void;

@@ -7,13 +7,12 @@ import {
   Survey
 } from "survey-react-ui";
 import { SurveyLogicUI } from "@survey/creator";
-import { TabBaseComponent } from "./TabBase";
 
-export class TabLogicComponent extends TabBaseComponent<any, any> {
+export class TabLogicComponent extends SurveyElementBase<any, any> {
   private get model(): SurveyLogicUI {
-    return this.props.data.model;
+    return this.props.data;
   }
-  protected getStateModel(): Base {
+  protected getStateElement(): Base {
     return this.model;
   }
 

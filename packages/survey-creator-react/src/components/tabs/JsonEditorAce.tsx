@@ -1,14 +1,13 @@
 import React from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { TabJsonEditorAcePlugin, AceJsonEditorModel } from "@survey/creator";
-import { TabBaseComponent } from "./TabBase";
+import { AceJsonEditorModel } from "@survey/creator";
 
 interface ITabJsonEditorAceComponentProps {
-  data: TabJsonEditorAcePlugin;
+  data: AceJsonEditorModel;
 }
 
-export class TabJsonEditorAceComponent extends TabBaseComponent<
+export class TabJsonEditorAceComponent extends SurveyElementBase<
   ITabJsonEditorAceComponentProps,
   any
 > {
@@ -17,11 +16,11 @@ export class TabJsonEditorAceComponent extends TabBaseComponent<
     super(props);
     this.aceEditorrRef = React.createRef();
   }
-  protected getStateModel(): Base {
+  protected getStateElement(): Base {
     return this.model;
   }
   private get model(): AceJsonEditorModel {
-    return this.props.data.model as AceJsonEditorModel;
+    return this.props.data;
   }
   componentDidMount() {
     this.model.init(ace.edit(this.aceEditorrRef.current as HTMLElement));

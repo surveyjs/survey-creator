@@ -1,18 +1,16 @@
 import { Base } from "survey-core";
 import { Survey, SurveyElementBase } from "survey-react-ui";
-import { SurveySimulatorComponent, TabTestPlugin } from "@survey/creator";
+import { SurveySimulatorComponent } from "@survey/creator";
 import React from "react";
-import { TabBaseComponent } from "./TabBase";
 
-export class SurveySimulator extends TabBaseComponent<any, any> {
+export class SurveySimulator extends SurveyElementBase<any, any> {
   private model: SurveySimulatorComponent;
 
   constructor(props: any) {
     super(props);
-    const plugin: TabTestPlugin = this.props.data;
     this.model = new SurveySimulatorComponent(this.props.options);
   }
-  protected getStateModel(): Base {
+  protected getStateElement(): Base {
     return this.model;
   }
 

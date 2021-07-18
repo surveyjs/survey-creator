@@ -5,16 +5,15 @@ import {
   ReactElementFactory,
   SurveyElementBase
 } from "survey-react-ui";
-import { TabTestPlugin, TestSurveyTabViewModel } from "@survey/creator";
+import { TestSurveyTabViewModel } from "@survey/creator";
 import { SurveySimulator } from "./SurveySimulator";
 import { CreatorSurveyResultsComponent } from "../Results";
-import { TabBaseComponent } from "./TabBase";
 
-export class TabPreviewSurveyComponent extends TabBaseComponent<any, any> {
+export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   private get model(): TestSurveyTabViewModel {
-    return this.props.data.model;
+    return this.props.data;
   }
-  protected getStateModel(): Base {
+  protected getStateElement(): Base {
     return this.model;
   }
 

@@ -1,21 +1,24 @@
 import React from "react";
 import { Base } from "survey-core";
-import { ReactElementFactory, Survey } from "survey-react-ui";
-import { EmbedModel, TabEmbedPlugin } from "@survey/creator";
-import { TabBaseComponent } from "./TabBase";
+import {
+  ReactElementFactory,
+  Survey,
+  SurveyElementBase
+} from "survey-react-ui";
+import { EmbedModel } from "@survey/creator";
 
 interface ITabEmbedComponentProps {
-  data: TabEmbedPlugin;
+  data: EmbedModel;
 }
 
-export class TabEmbedComponent extends TabBaseComponent<
+export class TabEmbedComponent extends SurveyElementBase<
   ITabEmbedComponentProps,
   any
 > {
   private get model(): EmbedModel {
-    return this.props.data.model;
+    return this.props.data;
   }
-  protected getStateModel(): Base {
+  protected getStateElement(): Base {
     return this.model;
   }
   renderElement(): JSX.Element {
