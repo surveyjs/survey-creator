@@ -65,7 +65,7 @@ export class TabDesignerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div className="svc-flex-column">
-          <SurveyCreatorToolbox creator={creator}></SurveyCreatorToolbox>
+          {ReactElementFactory.Instance.createElement('svc-toolbox', { creator: creator })}
         </div>
         <div className={"svc-tab-designer " + creator.survey.css.root}>
           <div className={creator.survey.css.container}>
@@ -92,7 +92,7 @@ export class TabDesignerComponent extends SurveyElementBase<
           creator={creator}
           pages={creator.pagesController.pages}
         ></SurveyPageNavigator>
-        <PropertyGridComponent model={creator}></PropertyGridComponent>
+          {ReactElementFactory.Instance.createElement('svc-property-grid', { model: creator })}
       </React.Fragment>
     );
   }
