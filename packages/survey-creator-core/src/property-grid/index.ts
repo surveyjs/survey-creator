@@ -336,7 +336,7 @@ export class PropertyGridTitleActionsCreator {
         survey: surveyPropertyEditor.editSurvey,
         model: surveyPropertyEditor.editSurvey
       },
-      () => surveyPropertyEditor.apply()
+      (): boolean => {return surveyPropertyEditor.apply();}
     );
   }
 

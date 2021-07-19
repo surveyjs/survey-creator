@@ -50,6 +50,7 @@ export class MatrixCellWrapperViewModel extends Base {
         questionJSON = survey.getAllQuestions()[0].toJSON();
         column.fromJSON(questionJSON);
         model.question.parentQuestion.onColumnCellTypeChanged(column);
+        return true;
       }
     );
   }
