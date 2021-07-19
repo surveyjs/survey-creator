@@ -239,6 +239,7 @@ export var enStrings = {
     empty: "<empty>",
     emptyValue: "Value is empty",
     fastEntry: "Fast Entry",
+    fastEntryNonUniqueError: "Value '{0}' is not unique",
     formEntry: "Form Entry",
     testService: "Test the service",
     itemSelectorEmpty: "Please select the element",

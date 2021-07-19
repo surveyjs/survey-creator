@@ -47,6 +47,14 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
       this.editSurvey.getQuestionByName("question")
     );
     this.setComment();
+    this.editSurvey.onValidateQuestion.add((sender, options) => {
+      if (!this.isValueUnique) return;
+      let uniqueValue = this.getFirstUniqueValue();
+      if (!!uniqueValue) {
+        options.error = editorLocalization
+        .getString("pe.fastEntryNonUniqueError")["format"](uniqueValue);
+      }
+    });
   }
   protected getSurveyJSON(): any {
     return {
@@ -68,6 +76,7 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
   }
   public apply(): boolean {
     if (this.comment.isEmpty()) return false;
+    if (this.editSurvey.hasErrors(true)) return false;
     const items = this.convertTextToItemValues(this.comment.value);
     FastEntryEditor.applyItemValueArray(<any>this.choices, items, this.names);
     return true;
@@ -75,6 +84,21 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
   public setComment() {
     var text = this.convertItemValuesToText();
     this.comment.value = text;
+  }
+  private get isValueUnique(): boolean {
+    return Serializer.findProperty("itemvalue", "value").isUnique === true;
+  }
+  private getFirstUniqueValue(): boolean {
+      var texts = this.comment.value.split("\n");
+      const values: any = {};
+      for (let i = 0; i < texts.length; i++) {
+        let str = texts[i];
+        if (!str) continue;
+        let value = str.split(ItemValue.Separator)[0]; 
+        if (values[value]) return value;
+        values[value] = true;
+      }
+      return undefined;
   }
   private convertTextToItemValues(text: string): ItemValue[] {
     var items = [];
