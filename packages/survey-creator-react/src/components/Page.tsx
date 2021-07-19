@@ -6,7 +6,12 @@ import {
   SurveyPage,
   SvgIcon
 } from "survey-react-ui";
-import { CreatorBase, PageViewModel, SurveyHelper, toggleHovered } from "@survey/creator";
+import {
+  CreatorBase,
+  PageViewModel,
+  SurveyHelper,
+  toggleHovered
+} from "@survey/creator";
 import React from "react";
 import { ReactMouseEvent } from "../events";
 
@@ -61,6 +66,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
         <div
           ref={this.rootRef}
           className={"svc-page__content " + this.model.css}
+          id={this.props.page.id}
           onClick={(e) => {
             return this.model.select(this.model, new ReactMouseEvent(e));
           }}
@@ -101,7 +107,9 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
             </button>
           </div>
           <div className="svc-page__content-actions">
-            <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
+            <SurveyActionBar
+              model={this.model.actionContainer}
+            ></SurveyActionBar>
           </div>
         </div>
       </React.Fragment>
