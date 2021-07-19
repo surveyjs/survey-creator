@@ -116,7 +116,7 @@ class CustomToolboxWrapper extends React.Component {
         this.setState({ collapsed: !this.state.collapsed });
     }
     render() {
-        return <div style={{position: "relative"}}>
+        return <div style={{position: "relative", height: "100%"}}>
             <div
                 style={{position: "absolute", left: "100%", top: 0, padding: "16px", cursor: "pointer"}}
                 title={this.state.collapsed ? "Show toolbox" : "Hide toolbox"}
