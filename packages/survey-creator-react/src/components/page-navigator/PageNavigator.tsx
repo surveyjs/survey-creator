@@ -1,5 +1,6 @@
 import {
   Base,
+  IAction,
   SurveyModel,
   PageModel,
   unwrap
@@ -7,8 +8,7 @@ import {
 import {
   SurveyElementBase,
   SvgIcon,
-  Popup,
-  IActionBarItem
+  Popup
 } from "survey-react-ui";
 import { CreatorBase, PageNavigatorViewModel } from "@survey/creator";
 import React from "react";
@@ -70,7 +70,7 @@ export class SurveyPageNavigator extends SurveyElementBase<
   }
 }
 export class SurveyPageNavigatorItem extends SurveyElementBase<any, any> {
-  constructor(props: IActionBarItem) {
+  constructor(props: IAction) {
     super(props);
   }
   protected getStateElement(): Base {

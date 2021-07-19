@@ -1,6 +1,6 @@
 import {
   Base,
-  IActionBarItem,
+  IAction,
   ItemValue,
   JsonObjectProperty,
   MatrixDropdownColumn,
@@ -56,7 +56,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   ) {
     const question: QuestionMatrixDynamicModel = options.question;
     const row: MatrixDynamicRowModel = options.row;
-    const actions: IActionBarItem[] = options.actions;
+    const actions: IAction[] = options.actions;
     if (this.getEditItemAsStandAlone()) {
       actions.push({
         id: "svd-grid-edit-column",
@@ -68,11 +68,11 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         }
       });
     }
-    const removeRowAction: IActionBarItem = actions.filter(
-      (item: IActionBarItem) => item.id === "remove-row"
+    const removeRowAction: IAction = actions.filter(
+      (item: IAction) => item.id === "remove-row"
     )[0];
-    const showDetailAction: IActionBarItem = actions.filter(
-      (item: IActionBarItem) => item.id === "show-detail"
+    const showDetailAction: IAction = actions.filter(
+      (item: IAction) => item.id === "show-detail"
     )[0];
     if (!!removeRowAction) {
       removeRowAction.component = "sv-action-bar-item";
@@ -91,6 +91,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       showDetailAction.location = "end";
       showDetailAction.action = () => {
         row.showHideDetailPanelClick();
+        showDetailAction.iconName = row.isDetailPanelShowing
+          ? "icon-editingfinish"
+          : "icon-edit";
       };
       showDetailAction.visibleIndex = 0;
       row.onDetailPanelShowingChanged = () => {

@@ -1,52 +1,56 @@
+import { ITabbedMenuItem, TabbedMenuItem } from "@survey/creator";
 import React from "react";
 import { CSSProperties } from "react";
 //import { ImplementorBase } from "survey-knockout";
-import { AdaptiveActionBarItemWrapper, AdaptiveElement, Base,
-  IActionBarItem, ResponsivityManager } from "survey-core";
+import {
+  Base,
+  IAction,
+  Action,
+  ResponsivityManager,
+  AdaptiveActionContainer
+} from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 interface ITabbedMenuComponentProps {
-  items: Array<IActionBarItem>;
+  model: AdaptiveActionContainer<TabbedMenuItem, ITabbedMenuItem>;
 }
 
-class TabbedMenuComponent extends SurveyElementBase<ITabbedMenuComponentProps, any> {
-  private adaptiveElement = new AdaptiveElement();
+class TabbedMenuComponent extends SurveyElementBase<
+  ITabbedMenuComponentProps,
+  any
+> {
   private manager: ResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
 
+  private get model() {
+    return this.props.model;
+  }
+
   protected getStateElement(): Base {
-    return this.adaptiveElement;
+    return this.model;
   }
 
   constructor(props) {
     super(props);
-    this.adaptiveElement.items = this.props.items.map(
-      (item: IActionBarItem) => {
-        return new AdaptiveActionBarItemWrapper(this.adaptiveElement, item);
-      }
-    );
     this.rootRef = React.createRef();
-    this.adaptiveElement.dotsItemPopupModel.horizontalPosition = "right";
   }
 
   render(): JSX.Element {
-    const items = this.adaptiveElement.items.map((item) =>
-      this.renderItem(item)
-    );
+    const items = this.model.actions.map((item) => this.renderItem(item));
     return (
       <div ref={this.rootRef} className="svc-tabbed-menu">
         {items}
       </div>
     );
   }
-  renderItem(item: AdaptiveActionBarItemWrapper): JSX.Element {
+  renderItem(item: Action): JSX.Element {
     let css: string = "svc-tabbed-menu-item-container";
     if (item.css) {
       css += " " + item.css;
     }
 
     const style: CSSProperties = {
-      visibility: item.isVisible ? "visible" : "hidden",
+      visibility: item.isVisible ? "visible" : "hidden"
     };
     if (item.visible !== undefined && !item.visible) {
       style.display = "none";
@@ -75,8 +79,11 @@ class TabbedMenuComponent extends SurveyElementBase<ITabbedMenuComponentProps, a
   componentDidMount() {
     super.componentDidMount();
     const container: HTMLDivElement = this.rootRef.current;
-    this.manager = new ResponsivityManager(container, this.adaptiveElement,
-      'span.svc-tabbed-menu-item-container');
+    this.manager = new ResponsivityManager(
+      container,
+      this.model,
+      "span.svc-tabbed-menu-item-container"
+    );
   }
   componentWillUnmount() {
     this.manager.dispose();
@@ -85,13 +92,13 @@ class TabbedMenuComponent extends SurveyElementBase<ITabbedMenuComponentProps, a
 }
 
 interface ITabbedMenuItemComponentProps {
-  item: AdaptiveActionBarItemWrapper;
+  item: Action;
 }
 class TabbedMenuItemComponent extends SurveyElementBase<
   ITabbedMenuItemComponentProps,
   any
 > {
-  get item(): AdaptiveActionBarItemWrapper {
+  get item(): Action {
     return this.props.item;
   }
   protected getStateElement(): Base {

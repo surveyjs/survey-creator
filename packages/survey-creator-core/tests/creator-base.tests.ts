@@ -416,6 +416,30 @@ test("Create new page with empty survey", (): any => {
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.newPage.elements).toHaveLength(0);
 });
+test("Create new page on changing title/description in ghost", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+      elements: [
+        {
+          type: "text",
+          name: "q1"
+        }
+      ]
+  };
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  designerPlugin.model.newPage.title = "Some title";
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  creator.survey.pages[1].addNewQuestion("text", "q2");
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  designerPlugin.model.newPage.description = "Some description";
+  expect(creator.survey.pages).toHaveLength(3);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+});
 test("Create new page, set empty JSON", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {};
@@ -899,9 +923,9 @@ test("Show/hide property grid", (): any => {
       }
     ]
   };
-  var settingsBarItem = creator.toolbarItems.find((item) => {
+  var settingsBarItem = creator.toolbarItems.filter((item) => {
     if (item.id === "icon-settings") return item;
-  });
+  })[0];
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(settingsBarItem).toBeTruthy();
   var propertyGridModel = new PropertyGridViewModel(creator);
@@ -911,9 +935,11 @@ test("Show/hide property grid", (): any => {
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
 
-  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.find((item) => {
-    if (item.id === "svd-grid-hide") return item;
-  });
+  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter(
+    (item) => {
+      if (item.id === "svd-grid-hide") return item;
+    }
+  )[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
@@ -945,9 +971,9 @@ test("Show/hide property grid and settings button active state", (): any => {
     ]
   };
   creator.showPropertyGrid = false;
-  var settingsBarItem = creator.toolbarItems.find((item) => {
+  var settingsBarItem = creator.toolbarItems.filter((item) => {
     if (item.id === "icon-settings") return item;
-  });
+  })[0];
   expect(creator.showPropertyGrid).toBeFalsy();
   expect(settingsBarItem.active).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
@@ -969,13 +995,44 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeTruthy();
 
-  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.find((item) => {
-    if (item.id === "svd-grid-hide") return item;
-  });
+  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter(
+    (item) => {
+      if (item.id === "svd-grid-hide") return item;
+    }
+  )[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
   expect(propertyGridModel.visible).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeFalsy();
+});
+test("Show survey in property grid on deleting last page", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      },
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  };
+  creator.selectElement(creator.survey.pages[0]);
+  expect(creator.selectedElementName).toEqual("page1");
+  creator.deleteCurrentElement();
+  expect(creator.selectedElementName).toEqual("page2");
+  creator.deleteCurrentElement();
+  expect(creator.selectedElementName).toEqual("survey");
 });

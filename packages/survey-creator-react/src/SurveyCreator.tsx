@@ -34,6 +34,7 @@ import {
 } from "@survey/creator";
 import TabbedMenuComponent from "./TabbedMenuComponent";
 import { editableStringRendererName } from "./components/StringEditor";
+import { NotifierComponent } from "./components/Notifier";
 
 StylesManager.applyTheme("modern");
 
@@ -80,18 +81,25 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   render() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     let licenseBanner = null;
-    if(!this.props.creator.haveCommercialLicense) {
-      licenseBanner = 
-      <div className="svc-creator__banner">
-        <span className="svc-creator__non-commercial-text"><a href="https://surveyjs.io/buy">{this.props.creator.licenseText}</a></span>
-      </div>
+    if (!this.props.creator.haveCommercialLicense) {
+      licenseBanner = (
+        <div className="svc-creator__banner">
+          <span className="svc-creator__non-commercial-text">
+            <a href="https://surveyjs.io/buy">
+              {this.props.creator.licenseText}
+            </a>
+          </span>
+        </div>
+      );
     }
     //AM: width unrecognized by react
     return (
       <div className="svc-creator">
         <div className="svc-creator__area svc-flex-column">
           <div className="svc-top-bar">
-            <TabbedMenuComponent items={creator.tabs}></TabbedMenuComponent>
+            <TabbedMenuComponent
+              model={creator.tabbedMenu}
+            ></TabbedMenuComponent>
             <SurveyCreatorToolBarItemsComponent
               toolbar={creator.toolbar}
             ></SurveyCreatorToolBarItemsComponent>
@@ -102,6 +110,10 @@ export class SurveyCreatorComponent extends SurveyElementBase<
             </div>
           </div>
           {licenseBanner}
+          <NotifierComponent
+            creator={creator}
+            notifier={creator.notifier}
+          ></NotifierComponent>
         </div>
       </div>
     );
@@ -122,10 +134,14 @@ export class SurveyCreatorComponent extends SurveyElementBase<
       : ReactElementFactory.Instance.createElement(tab.componentContent, {
           creator: creator,
           survey: creator.survey,
-          data: tab.data
+          data: tab.data.model
         });
     return (
-      <div key={tab.id} id={"scrollableDiv-" + tab.id} className="svc-creator-tab">
+      <div
+        key={tab.id}
+        id={"scrollableDiv-" + tab.id}
+        className="svc-creator-tab"
+      >
         {component}
       </div>
     );
@@ -157,11 +173,17 @@ class DesignTimeSurveyModel extends Model {
     };
   }
   public getElementWrapperComponentName(element: any, reason?: string): string {
-    let componentName = getElementWrapperComponentName(element, reason, this.isPopupEditorContent);
+    let componentName = getElementWrapperComponentName(
+      element,
+      reason,
+      this.isPopupEditorContent
+    );
     if (!componentName && element instanceof PanelModel) {
       return "svc-question";
     }
-    return componentName || super.getElementWrapperComponentName(element, reason);
+    return (
+      componentName || super.getElementWrapperComponentName(element, reason)
+    );
   }
   public getElementWrapperComponentData(element: any, reason?: string): any {
     if (reason === "logo-image") return this.creator;
@@ -192,7 +214,11 @@ class DesignTimeSurveyModel extends Model {
     item: ItemValue,
     question: QuestionSelectBase
   ): string {
-    if (!this.isDesignMode || !!question["parentQuestionValue"] || question.isContentElement) {
+    if (
+      !this.isDesignMode ||
+      !!question["parentQuestionValue"] ||
+      question.isContentElement
+    ) {
       return SurveyModel.TemplateRendererComponentName;
     }
     if (question.getType() === "imagepicker") {
@@ -224,7 +250,8 @@ export class SurveyCreator extends CreatorBase<SurveyModel> {
     super(options, options2);
   }
   protected createSurveyCore(json: any = {}, reason: string): Model {
-    if (reason === "designer" || reason === "modal-question-editor") return new DesignTimeSurveyModel(this, json);
+    if (reason === "designer" || reason === "modal-question-editor")
+      return new DesignTimeSurveyModel(this, json);
     return new Model(json);
   }
   public render(target: string | HTMLElement) {

@@ -11,7 +11,6 @@ import {
   surveyLocalization,
   ILocalizableString,
   ItemValue,
-  IActionBarItem,
   QuestionDropdownModel,
   QuestionCheckboxModel,
   PopupModel,
@@ -20,7 +19,8 @@ import {
   QuestionMatrixDropdownModel,
   PanelModel,
   AdaptiveActionContainer,
-  Action
+  Action,
+  IAction
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
@@ -554,7 +554,7 @@ export class Translation extends Base implements ITranslationLocales {
   @property({ defaultValue: true }) isEmpty: boolean;
   /**
    * The list of toolbar items. You may add/remove/replace them.
-   * @see IActionBarItem
+   * @see IAction
    */
   public get toolbarItems(): Array<Action> {
     return this.toolbar.actions;
@@ -770,6 +770,7 @@ export class Translation extends Base implements ITranslationLocales {
       this.settingsSurvey.setValue(valueName, val);
     }
   }
+  private inputFileElement: HTMLInputElement;
   private setupToolbarItems() {
     var actions: Array<Action> = [];
     this.chooseLanguagePopupModel = new PopupModel(
@@ -781,7 +782,7 @@ export class Translation extends Base implements ITranslationLocales {
             title: locale.text,
             data: locale
           })),
-          (item: IActionBarItem) => {
+          (item: IAction) => {
             this.addLocale(item.id);
             this.chooseLanguagePopupModel.toggleVisibility();
           },
@@ -820,7 +821,7 @@ export class Translation extends Base implements ITranslationLocales {
               )
             }))
           ),
-          (item: IActionBarItem) => {
+          (item: IAction) => {
             this.filteredPage = !!item.id
               ? this.survey.getPageByName(item.id)
               : null;
@@ -882,8 +883,27 @@ export class Translation extends Base implements ITranslationLocales {
         }
       })
     );
-
-    //TODO add import from, requried file input action
+    actions.push(
+      new Action({
+        id: "svc-translation-import",
+        css: "sv-action--last",
+        title: this.importFromCSVText,
+        tooltip: this.importFromCSVText,
+        component: "sv-action-bar-item",
+        action: () => {
+          if (!document) return;
+          if (!this.inputFileElement) {
+            this.inputFileElement = document.createElement("input");
+            this.inputFileElement.type = "file";
+            this.inputFileElement.style.display = "none";
+            this.inputFileElement.onchange = () => {
+              this.importFromCSVFileUI(this.inputFileElement);
+            };
+          }
+          this.inputFileElement.click();
+        }
+      })
+    );
     actions.push(
       new Action({
         id: "svc-translation-export",

@@ -2,6 +2,7 @@ import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObje
 import { editorLocalization } from "../../src/editorLocalization";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
+import { TabDesignerPlugin } from "../../src/components/tabs/designer";
 
 test("Survey/page title/description placeholders text", () => {
   new CreatorTester();
@@ -25,4 +26,32 @@ test("Survey/page title/description placeholders text", () => {
   checkPlaceholder(survey, "survey", "description");
   checkPlaceholder(survey.pages[0], "page", "title");
   checkPlaceholder(survey.pages[0], "page", "description");
+});
+
+test("Save survey action properties", () => {
+  const creator = new CreatorTester();
+  const action = creator.getActionBarItem("icon-save");
+  expect(action.visible).toBeFalsy();
+  expect(action.active).toBeFalsy();
+  expect(action.enabled).toBeFalsy();
+
+  creator.saveSurveyFunc = () => {};
+  expect(action.visible).toBeTruthy();
+  expect(action.active).toBeFalsy();
+  expect(action.enabled).toBeFalsy();
+
+  creator.activeTab = "test";
+  expect(action.visible).toBeFalsy();
+  expect(action.active).toBeFalsy();
+  expect(action.enabled).toBeFalsy();
+
+  creator.activeTab = "designer";
+  expect(action.visible).toBeTruthy();
+  expect(action.active).toBeFalsy();
+  expect(action.enabled).toBeFalsy();
+
+  creator.setModified({});
+  expect(action.visible).toBeTruthy();
+  expect(action.active).toBeTruthy();
+  expect(action.enabled).toBeTruthy();
 });

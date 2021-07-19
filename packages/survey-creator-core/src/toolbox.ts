@@ -1,9 +1,11 @@
 import {
+  Action,
+  AdaptiveActionContainer,
   Base,
   ComponentCollection,
   CustomWidgetCollection,
   ElementFactory,
-  IActionBarItem,
+  IAction,
   JsonObject,
   property,
   propertyArray,
@@ -17,7 +19,7 @@ import { editorLocalization } from "./editorLocalization";
 /**
  * The Toolbox item description.
  */
-export interface IQuestionToolboxItem extends IActionBarItem {
+export interface IQuestionToolboxItem extends IAction {
   /**
    * A unique name
    */
@@ -57,7 +59,7 @@ export class QuestionToolboxCategory extends Base {
     super();
   }
   @property() name: string;
-  @propertyArray() items: Array<IQuestionToolboxItem>;
+  @propertyArray() items: Array<QuestionToolboxItem>;
   @property({ defaultValue: false }) collapsed: boolean;
   public toggleState() {
     if (this.toolbox) {
@@ -65,11 +67,27 @@ export class QuestionToolboxCategory extends Base {
     }
   }
 }
+export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
+  constructor(private item: IQuestionToolboxItem) {
+    super(item);
+  }
+  name: string;
+  json: any;
+  title: string;
+  tooltip: string;
+  isCopied: boolean;
+  category: string;
+  toJSON() {
+    return this.item;
+  }
+}
 
 /**
  * The list of Toolbox items.
  */
-export class QuestionToolbox extends Base implements IQuestionToolbox {
+export class QuestionToolbox
+  extends AdaptiveActionContainer<QuestionToolboxItem, IQuestionToolboxItem>
+  implements IQuestionToolbox {
   static hiddenTypes = ["buttongroup"];
   private _orderedQuestions = [
     "text",
@@ -137,7 +155,6 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   public copiedItemMaxCount: number = 3;
   private allowExpandMultipleCategoriesValue: boolean = false;
   private keepAllCategoriesExpandedValue: boolean = false;
-  @propertyArray() itemsValue: Array<IQuestionToolboxItem>;
 
   //koItems = ko.observableArray();
   @propertyArray() categories: Array<QuestionToolboxCategory>;
@@ -165,6 +182,8 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   ) {
     super();
     this.createDefaultItems(supportedQuestions);
+    this.dotsItemPopupModel.horizontalPosition = "right";
+    this.dotsItemPopupModel.verticalPosition = "top";
   }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<any> = this.categories;
@@ -177,10 +196,10 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
    * The Array of Toolbox items as Text JSON.
    */
   public get jsonText() {
-    return JSON.stringify(this.itemsValue);
+    return JSON.stringify(this.actions);
   }
   public set jsonText(value: string) {
-    this.itemsValue = value ? JSON.parse(value) : [];
+    this.actions = value ? JSON.parse(value) : [];
     this.onItemsChanged();
   }
   /**
@@ -200,8 +219,8 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   /**
    * The Array of Toolbox items.
    */
-  public get items(): Array<IQuestionToolboxItem> {
-    return this.itemsValue;
+  public get items(): Array<QuestionToolboxItem> {
+    return this.actions;
   }
   public get itemNames(): Array<string> {
     const res: string[] = [];
@@ -213,10 +232,10 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   /**
    * The Array of copied Toolbox items
    */
-  public get copiedItems(): Array<IQuestionToolboxItem> {
-    const result: IQuestionToolboxItem[] = [];
-    for (let i: number = 0; i < this.itemsValue.length; i++) {
-      if (this.itemsValue[i].isCopied) result.push(this.itemsValue[i]);
+  public get copiedItems(): Array<QuestionToolboxItem> {
+    const result: QuestionToolboxItem[] = [];
+    for (let i: number = 0; i < this.actions.length; i++) {
+      if (this.actions[i].isCopied) result.push(this.actions[i]);
     }
     return result;
   }
@@ -233,7 +252,7 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
       this.clearItems();
     }
     for (let i: number = 0; i < items.length; i++) {
-      this.itemsValue.push(items[i]);
+      this.actions.push(this.getActionByItem(items[i]));
     }
     this.onItemsChanged();
   }
@@ -269,12 +288,16 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
    * @param index the toolbox index to place the item, the item is added to the end if index not passed
    * @see IQuestionToolboxItem
    */
+  private getActionByItem(item: IQuestionToolboxItem) {
+    return item instanceof QuestionToolboxItem ? item : new QuestionToolboxItem(item);
+  }
   public addItem(item: IQuestionToolboxItem, index?: number) {
     this.correctItem(item);
+    const action = this.getActionByItem(item);
     if (index === undefined) {
-      this.itemsValue.push(item);
+      this.actions.push(action);
     } else {
-      this.itemsValue.splice(index, 0, item);
+      this.actions.splice(index, 0, action);
     }
     this.onItemsChanged();
   }
@@ -291,7 +314,7 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
     this.correctItem(item);
     const index: number = this.indexOf(item.name);
     if (index < 0) return;
-    this.itemsValue[index] = item;
+    this.actions[index] = this.getActionByItem(item);;
     this.onItemsChanged();
     return true;
   }
@@ -303,7 +326,7 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   public removeItem(name: string): boolean {
     const index: number = this.indexOf(name);
     if (index < 0) return false;
-    this.itemsValue.splice(index, 1);
+    this.actions.splice(index, 1);
     this.onItemsChanged();
     return true;
   }
@@ -311,7 +334,7 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
    * Remove all toolbox items.
    */
   public clearItems() {
-    this.itemsValue = [];
+    this.actions = [];
     this.onItemsChanged();
   }
   /**
@@ -329,7 +352,7 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
    */
   public getItemByName(name: string): IQuestionToolboxItem {
     const index: number = this.indexOf(name);
-    return index > -1 ? this.itemsValue[index] : null;
+    return index > -1 ? this.actions[index] : null;
   }
   /**
    * Set it to true, to allow end-user to expand more than one category. There will no active category in this case
@@ -445,6 +468,9 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
   public collapseAllCategories() {
     this.expandCollapseAllCategories(true);
   }
+  public invisibleItemSelected(model: Action): void {
+    this.creator.clickToolboxItem((<any>model).json);
+  }
   private expandCollapseAllCategories(isCollapsed: boolean) {
     const categories = this.categories;
     for (var i = 0; i < categories.length; i++) {
@@ -463,8 +489,8 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
     var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
-    for (var i = 0; i < this.itemsValue.length; i++) {
-      var item = this.itemsValue[i];
+    for (var i = 0; i < this.actions.length; i++) {
+      var item = this.actions[i];
       var categoryName = item.category
         ? item.category
         : editorLocalization.getString("ed.toolboxGeneralCategory");
@@ -494,18 +520,28 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
       }
     }
     this.hasCategories = categories.length > 1;
+    this.updateItemSeparators();
   }
   protected createCategory(): QuestionToolboxCategory {
     return new QuestionToolboxCategory(this);
   }
   private indexOf(name: string) {
-    for (var i = 0; i < this.itemsValue.length; i++) {
-      if (this.itemsValue[i].name == name) return i;
+    for (var i = 0; i < this.actions.length; i++) {
+      if (this.actions[i].name == name) return i;
     }
     return -1;
   }
+  private updateItemSeparators() {
+    this.categories.forEach((category: any, categoryIndex) => {
+      (category.items || []).forEach((item, index) => {
+        if (categoryIndex !== 0 && index == 0) {
+          item.needSeparator = true;
+        }
+      });
+    });
+  }
   private reorderItems() {
-    this.itemsValue.sort((i1, i2) => {
+    this.actions.sort((i1, i2) => {
       var index1 = this._orderedQuestions.indexOf(i1.name);
       if (index1 === -1) index1 = Number.MAX_VALUE;
       var index2 = this._orderedQuestions.indexOf(i2.name);
@@ -535,7 +571,7 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
         isCopied: false,
         category: ""
       };
-      this.itemsValue.push(item);
+      this.actions.push(this.getActionByItem(item));
     }
     this.registerCustomWidgets();
     this.registerComponentQuestions();
@@ -581,7 +617,7 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
       elementJson.type = json.name;
     }
     var category = json.category ? json.category : "";
-    const item: IQuestionToolboxItem = {
+    const item: IQuestionToolboxItem = <any>new Action(<any>{
       id: json.name,
       name: json.name,
       iconName: iconName,
@@ -590,8 +626,8 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
       json: elementJson,
       isCopied: false,
       category: category
-    };
-    this.itemsValue.push(item);
+    });
+    this.actions.push(this.getActionByItem(item));
   }
   private getQuestionJSON(question: any): any {
     var json = new JsonObject().toJsonObject(question);
@@ -626,5 +662,5 @@ export class QuestionToolbox extends Base implements IQuestionToolbox {
     return questions;
   }
 
-  public dispose() {}
+  public dispose() { }
 }

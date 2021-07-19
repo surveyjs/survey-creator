@@ -10,13 +10,12 @@ import { Translation } from "@survey/creator";
 
 export class TabTranslationComponent extends SurveyElementBase<any, any> {
   private get model(): Translation {
-    return this.props.data.model;
+    return this.props.data;
   }
-
   protected getStateElement(): Base {
     return this.model;
   }
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     if (!this.model) return null;
     return (
       <div className="svc-creator-tab__content">

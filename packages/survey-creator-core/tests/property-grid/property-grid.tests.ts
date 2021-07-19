@@ -26,13 +26,14 @@ import {
   Serializer,
   QuestionPanelDynamicModel,
   QuestionMatrixDropdownModel,
-  IActionBarItem,
+  IAction,
   QuestionRatingModel,
   QuestionCustomModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions
+  EmptySurveyCreatorOptions,
+  settings
 } from "../../src/settings";
 
 export * from "../../src/property-grid/matrices";
@@ -154,6 +155,21 @@ test("dropdown property editor localization", (): any => {
   expect(localeQuestion.optionsCaption).toEqual("Default (english)");
 });
 
+test("settings.propertyGrid.useButtonGroup", (): any => {
+  var survey = new SurveyModel();
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var questionDescriptionLocationQuestion =
+    propertyGrid.survey.getQuestionByName("questionDescriptionLocation");
+  expect(questionDescriptionLocationQuestion.getType()).toEqual("buttongroup");
+  settings.propertyGrid.useButtonGroup = false;
+  propertyGrid = new PropertyGridModelTester(survey);
+  questionDescriptionLocationQuestion = propertyGrid.survey.getQuestionByName(
+    "questionDescriptionLocation"
+  );
+  expect(questionDescriptionLocationQuestion.getType()).toEqual("dropdown");
+  settings.propertyGrid.useButtonGroup = true;
+});
+
 test("dropdown property editor, get choices on callback", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;
@@ -258,8 +274,8 @@ test("itemvalue[] property editor + row actions", () => {
   expect(row.cells[3].item).toBeTruthy();
   const actions = row.cells[3].item.value.actions;
   expect(actions).toHaveLength(2);
-  const detailAction: IActionBarItem = actions.filter(
-    (item: IActionBarItem) => item.id === "show-detail"
+  const detailAction: IAction = actions.filter(
+    (item: IAction) => item.id === "show-detail"
   )[0];
   expect(detailAction).toBeTruthy();
   expect(detailAction.iconName).toEqual("icon-edit");
@@ -279,8 +295,8 @@ test("itemvalue[] property editor + row actions", () => {
   expect(row.cells[3].item).toBeTruthy();
   const actions = row.cells[3].item.value.actions;
   expect(actions).toHaveLength(2);
-  const detailAction: IActionBarItem = actions.filter(
-    (item: IActionBarItem) => item.id === "show-detail"
+  const detailAction: IAction = actions.filter(
+    (item: IAction) => item.id === "show-detail"
   )[0];
   expect(detailAction).toBeTruthy();
   expect(detailAction.iconName).toEqual("icon-edit");
@@ -1608,7 +1624,7 @@ test("Edit columns in property grid", () => {
     propertyGrid.survey.getQuestionByName("columns")
   );
   var rows = editQuestion.visibleRows;
-  var actions: Array<IActionBarItem> = [];
+  var actions: Array<IAction> = [];
   propertyGrid.survey.getUpdatedMatrixRowActions(
     editQuestion,
     rows[0],

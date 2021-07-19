@@ -1,6 +1,9 @@
 import { CreatorTester } from "../creator-tester";
-import { TabTestPlugin, TestSurveyTabViewModel } from "../../src/components/tabs/test";
-import { IActionBarItem, ListModel } from "survey-core";
+import {
+  TabTestPlugin,
+  TestSurveyTabViewModel
+} from "../../src/components/tabs/test";
+import { IAction, ListModel } from "survey-core";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
@@ -26,14 +29,18 @@ test("Test language Bar Item", (): any => {
   expect(model.languages[1].id).toEqual("de");
   expect(model.languages[1].title).toEqual("deutsch");
   expect(model.activeLanguage).toEqual("en");
-  let langAction = model.actions.filter(action => action.id === "languageSelector")[0];
+  let langAction = model.actions.filter(
+    (action) => action.id === "languageSelector"
+  )[0];
   expect(langAction).toBeTruthy();
   expect(langAction.title).toEqual("english");
   model.activeLanguage = "de";
   expect(model.survey.locale).toEqual("de");
   expect(langAction.title).toEqual("deutsch");
 
-  let testAgain = model.actions.filter(action => action.id === "testSurveyAgain")[0];
+  let testAgain = model.actions.filter(
+    (action) => action.id === "testSurveyAgain"
+  )[0];
   expect(testAgain).toBeTruthy();
   testAgain.action();
   expect(model.survey.locale).toEqual("de");
@@ -43,56 +50,94 @@ test("Check page list state after change page arrows click", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
     pages: [
-     {
-      name: "page1",
-      elements: [
-       {
-        type: "text",
-        name: "question1",
-        visibleIf: "{question2} notempty"
-       }
-      ]
-     },
-     {
-      name: "page2",
-      elements: [
-       {
-        type: "text",
-        name: "question2"
-       }
-      ]
-     },
-     {
-      name: "page3",
-      elements: [
-       {
-        type: "text",
-        name: "question3",
-        visibleIf: "{question2} notempty"
-       }
-      ]
-     },
-     {
-      name: "page4",
-      elements: [
-       {
-        type: "text",
-        name: "question4"
-       }
-      ]
-     }
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            visibleIf: "{question2} notempty"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      },
+      {
+        name: "page3",
+        elements: [
+          {
+            type: "text",
+            name: "question3",
+            visibleIf: "{question2} notempty"
+          }
+        ]
+      },
+      {
+        name: "page4",
+        elements: [
+          {
+            type: "text",
+            name: "question4"
+          }
+        ]
+      }
     ]
-   };
+  };
   const model: TestSurveyTabViewModel = getTestModel(creator);
-  const pageList: ListModel = model.actions.filter((item: IActionBarItem) =>
-    item.id === "pageSelector")[0].popupModel.contentComponentData.model;
+  const pageList: ListModel = model.actions.filter(
+    (item: IAction) => item.id === "pageSelector"
+  )[0].popupModel.contentComponentData.model;
   expect(pageList.selectedItem.data).toEqual(model.activePage);
-  const nextPage: IActionBarItem =
-    model.actions.filter((item: IActionBarItem) => item.id === "nextPage")[0];
+  const nextPage: IAction = model.actions.filter(
+    (item: IAction) => item.id === "nextPage"
+  )[0];
   nextPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
-  const prevPage: IActionBarItem =
-    model.actions.filter((item: IActionBarItem) => item.id === "prevPage")[0];
+  const prevPage: IAction = model.actions.filter(
+    (item: IAction) => item.id === "prevPage"
+  )[0];
   prevPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
+});
+test("Show/hide device similator", (): any => {
+  let creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  let model: TestSurveyTabViewModel = getTestModel(creator);
+  expect(model.showSimulator).toBeTruthy();
+  let similatorAction = model.actions.filter(
+    (action) => action.id === "deviceSelector"
+  )[0];
+  expect(similatorAction).toBeTruthy();
+  expect(similatorAction.visible).toBeTruthy();
+
+  creator = new CreatorTester({ showSimulatorInTestSurveyTab: false });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  model = getTestModel(creator);
+  expect(model.showSimulator).toBeFalsy();
+  similatorAction = model.actions.filter(
+    (action) => action.id === "deviceSelector"
+  )[0];
+  expect(similatorAction).toBeTruthy();
+  expect(similatorAction.visible).toBeFalsy();
 });

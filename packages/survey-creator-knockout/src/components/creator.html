@@ -1,6 +1,6 @@
 <div class="svc-creator__area svc-flex-column">
   <div class="svc-top-bar">
-    <!-- ko component: { name: 'svc-tabbed-menu', params: { items: creator.tabs } } -->
+    <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
     <!-- /ko -->
     <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
     <!-- /ko -->
@@ -21,5 +21,7 @@
   <div class="svc-creator__banner">
     <span class="svc-creator__non-commercial-text"><a href="https://surveyjs.io/buy" data-bind="text: creator.licenseText"></a></span>
   </div>
+  <!-- /ko -->
+  <!-- ko component: { name: 'svc-notifier', params: { creator: creator, notifier: creator.notifier } } -->
   <!-- /ko -->
 </div>

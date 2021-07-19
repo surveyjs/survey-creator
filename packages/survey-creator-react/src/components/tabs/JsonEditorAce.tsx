@@ -1,10 +1,10 @@
 import React from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { TabJsonEditorAcePlugin, AceJsonEditorModel } from "@survey/creator";
+import { AceJsonEditorModel } from "@survey/creator";
 
 interface ITabJsonEditorAceComponentProps {
-  data: TabJsonEditorAcePlugin;
+  data: AceJsonEditorModel;
 }
 
 export class TabJsonEditorAceComponent extends SurveyElementBase<
@@ -20,12 +20,12 @@ export class TabJsonEditorAceComponent extends SurveyElementBase<
     return this.model;
   }
   private get model(): AceJsonEditorModel {
-    return this.props.data.model as AceJsonEditorModel;
+    return this.props.data;
   }
   componentDidMount() {
     this.model.init(ace.edit(this.aceEditorrRef.current as HTMLElement));
   }
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
