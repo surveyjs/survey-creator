@@ -23,8 +23,12 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     newPage.setSurveyImpl(this.survey);
     newPage["_addToSurvey"] = () => {
       newPage["_addToSurvey"] = undefined;
+      newPage.unRegisterFunctionOnPropertiesValueChanged(["title", "description"]);
       this.survey.addPage(newPage);
     };
+    newPage.registerFunctionOnPropertiesValueChanged(["title", "description"], () => {
+      newPage["_addToSurvey"]();
+    });
     var checkNewElementHandler = (sender: SurveyModel, options: any) => {
       if (options.name === "elements" && newPage.elements.length > 0) {
         newPage.onPropertyChanged.remove(checkNewElementHandler);
