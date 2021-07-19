@@ -3,26 +3,21 @@ import { Base } from "survey-core";
 import {
   SurveyActionBar,
   ReactElementFactory,
-  SurveyElementBase,
+  SurveyElementBase
 } from "survey-react-ui";
-import { TabTestPlugin, TestSurveyTabViewModel } from "@survey/creator";
+import { TestSurveyTabViewModel } from "@survey/creator";
 import { SurveySimulator } from "./SurveySimulator";
 import { CreatorSurveyResultsComponent } from "../Results";
 
 export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
-  private model: TestSurveyTabViewModel;
-
-  constructor(props: any) {
-    super(props);
-    const plugin: TabTestPlugin = this.props.data;
-    this.model = plugin.model;
+  private get model(): TestSurveyTabViewModel {
+    return this.props.data;
   }
-
   protected getStateElement(): Base {
     return this.model;
   }
 
-  render(): JSX.Element {
+  renderElement(): JSX.Element {
     return (
       <div className="svc-creator-tab__content svc-test-tab__content">
         <div className="svc-plugin-tab__content">
