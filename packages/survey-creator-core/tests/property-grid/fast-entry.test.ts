@@ -17,7 +17,9 @@ test("Create survey with editingObj", () => {
 });
 
 test("Check unique value in itemValue", () => {
-  Serializer.findProperty("itemvalue", "value").isUnique = true;
+  var propValue = Serializer.findProperty("itemvalue", "value");
+  var oldUnique = propValue.isUnique;
+  propValue.isUnique = true;
   var originalElement = new QuestionRadiogroupModel("originalElement");
   originalElement.choices = [1, 2, 3];
 
@@ -26,14 +28,19 @@ test("Check unique value in itemValue", () => {
   var result = fastEntryEditor.apply();
   expect(result).toBeFalsy();
   expect(fastEntryEditor.comment.errors).toHaveLength(1);
-  expect(fastEntryEditor.comment.errors[0].text).toEqual("Value '1' is not unique");
+  expect(fastEntryEditor.comment.errors[0].text).toEqual(
+    "Value '1' is not unique"
+  );
   fastEntryEditor.comment.value = "1|item1\n2\n3\n4|item4";
   var result = fastEntryEditor.apply();
   expect(result).toBeTruthy();
   expect(fastEntryEditor.comment.errors).toHaveLength(0);
-  Serializer.findProperty("itemvalue", "value").isUnique = false;
+
+  propValue.isUnique = false;
   fastEntryEditor.comment.value = "1|item1\n1\n3\n4|item4";
   var result = fastEntryEditor.apply();
   expect(result).toBeTruthy();
   expect(fastEntryEditor.comment.errors).toHaveLength(0);
+
+  propValue.isUnique = oldUnique;
 });
