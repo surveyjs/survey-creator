@@ -6,7 +6,8 @@ import {
   SurveyElementBase,
   SurveyActionBar,
   ReactQuestionFactory,
-  SurveyQuestionButtonGroup
+  SurveyQuestionButtonGroup,
+  ReactElementFactory
 } from "survey-react-ui";
 interface IPropertyGridComponentProps {
   model: CreatorBase<SurveyModel>;
@@ -55,3 +56,7 @@ ReactQuestionFactory.Instance.registerQuestion("buttongroup", (props) => {
 });
 
 export default PropertyGridComponent;
+
+ReactElementFactory.Instance.registerElement("svc-property-grid", (props) => {
+  return React.createElement(PropertyGridComponent, props);
+});
