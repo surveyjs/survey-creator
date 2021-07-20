@@ -146,106 +146,106 @@ The Panel survey element serves as a box or container that can include multiple 
 
 The Panel (Dynamic Panels) tool allows you to create a template box or container element that can include multiple questions and input types. This template is activated when the survey respondent actively clicks `Add New` in the survey. The respondent can activate any number of these templates by repeatedly clicking `Add New`.
 
-## Hiding `Question Number` and `Title` in survey
+### Hiding `Question Number` and `Title` in survey
 
-    The `Question Number` and `Title` can be hidden in the survey output. `Properties` > `layout` > `Hide number` removes the number at the start of the question while retaining your title. You can also remove the whole number and title with `Properties` > `Layout` > `Title location` and set it to `Hidden`. This can be useful if you are planning on using an `HTML` element to ask the question or otherwise direct the survey respondent. 
+The `Question Number` and `Title` can be hidden in the survey output. `Properties` > `layout` > `Hide number` removes the number at the start of the question while retaining your title. You can also remove the whole number and title with `Properties` > `Layout` > `Title location` and set it to `Hidden`. This can be useful if you are planning on using an `HTML` element to ask the question or otherwise direct the survey respondent. 
 
-## Formatting text within the survey
+### Formatting text within the survey
 
-    Presenting text within the survey can be partially acheived using the `Title` and `Description` fields of each `Element`. These fields are an easy and direct way to add questions and direction to the survey respondent. While this is easy and direct, there are limitations to using these fields. For instance, the `Description` field of an `Element` does not allow formatting such as *italics* or **bold**. These limitations can be overcome by using an `HTML` element to provide the necessary textual material for your survey.
+Presenting text within the survey can be partially acheived using the `Title` and `Description` fields of each `Element`. These fields are an easy and direct way to add questions and direction to the survey respondent. While this is easy and direct, there are limitations to using these fields. For instance, the `Description` field of an `Element` does not allow formatting such as *italics* or **bold**. These limitations can be overcome by using an `HTML` element to provide the necessary textual material for your survey.
 
-## Conditional Logic
+### Conditional Logic
 
-    Every survey element can be triggered by any question within the survey. This allows the `visibility` or `availability` of each element to be conditional on the responses made elsewhere in the survey. For example, `Conditional Logic` would allow for a `Matrix` to appear if a `Boolean` question was answered `Yes`, and an `Image Picker` to appear if the same `Boolean` was answered `No`. Using `Logic` within your survey makes it dynamic and responsive, and enables you to create separate pathways throughout the survey as a whole.
+Every survey element can be triggered by any question within the survey. This allows the `visibility` or `availability` of each element to be conditional on the responses made elsewhere in the survey. For example, `Conditional Logic` would allow for a `Matrix` to appear if a `Boolean` question was answered `Yes`, and an `Image Picker` to appear if the same `Boolean` was answered `No`. Using `Logic` within your survey makes it dynamic and responsive, and enables you to create separate pathways throughout the survey as a whole.
 
-    To define the `logic` for each element, go to `Properties` > `Logic`.
+To define the `logic` for each element, go to `Properties` > `Logic`.
 
-    ![Image of `Logic` dropdown within `Properties` section](images/survey-editor-logic.png)
+![Image of `Logic` dropdown within `Properties` section](images/survey-editor-logic.png)
 
-    - `Visible if` controls whether the element is made `Visible` via `Logic Expressions`. If these `Expressions` are defined, then the element will remain invisible within the survey unless the conditions of the expression are met.
-    - `Enable if` controls whether the element is `Enabled` via `Logic Expressions`. The element will be visible, but the responses will disabled until the conditions of the expression are met.
-    - `Required if` controls whether the element's `Required` state is determined through `Logic Expressions`. If an element is required, then it becomes compulsory and the survey cannot proceed or be completed unless that element has recorded a response (`Required` status can also be determined manually by toggling `Properties` > `General` > `Is required`).
+- `Visible if` controls whether the element is made `Visible` via `Logic Expressions`. If these `Expressions` are defined, then the element will remain invisible within the survey unless the conditions of the expression are met.
+- `Enable if` controls whether the element is `Enabled` via `Logic Expressions`. The element will be visible, but the responses will disabled until the conditions of the expression are met.
+- `Required if` controls whether the element's `Required` state is determined through `Logic Expressions`. If an element is required, then it becomes compulsory and the survey cannot proceed or be completed unless that element has recorded a response (`Required` status can also be determined manually by toggling `Properties` > `General` > `Is required`).
 
 ### `Naming` an element for use in an `Expression`
 
-    When you add a survey element you are able to give it both a `Title` and a `Name` in the `Properties` > `General` section. Understanding the difference between `Title` and `Name` is important when developing the `Logic` of your survey. In short, `Name` refers to the question as a logical entity that can be refered to within the `Conditional Logic` of the survey without confusion. `Title` refers to text that is directed to the survey respondent and it may be unsuitable for use within the terse structure of the survey's logic.
+When you add a survey element you are able to give it both a `Title` and a `Name` in the `Properties` > `General` section. Understanding the difference between `Title` and `Name` is important when developing the `Logic` of your survey. In short, `Name` refers to the question as a logical entity that can be refered to within the `Conditional Logic` of the survey without confusion. `Title` refers to text that is directed to the survey respondent and it may be unsuitable for use within the terse structure of the survey's logic.
     An example of a `Name` might be `Q1vegetables` while the corresponding `Title` might be `Please select your favourites from the following vegetables`. It is clear that the purpose of the `Title` is to direct the survey user, while the `Name` refers to the question within the `Logic` of the survey.  
 
-    - If there is no `Title` given, the `Name` will be used instead. 
-    - Both `Title` and `Name` can be hidden in the survey by setting `Properties` > `Layout` > `Title location` to `Hidden`. This might be useful if you plan on providing a question to the survey user using the `HTML` element, for example.
+- If there is no `Title` given, the `Name` will be used instead. 
+- Both `Title` and `Name` can be hidden in the survey by setting `Properties` > `Layout` > `Title location` to `Hidden`. This might be useful if you plan on providing a question to the survey user using the `HTML` element, for example.
 
-    ![Image comparing `Title` and `Name` properties](images/survey-editor-namevstitle.png)
-    ![Image comparing `Title` and `Name` properties](images/survey-editor-namevstitle1.png)
+![Image comparing `Title` and `Name` properties](images/survey-editor-namevstitle.png)
+![Image comparing `Title` and `Name` properties](images/survey-editor-namevstitle1.png)
 
 ### Building a `Logic` `Expression`
 
-    ![Image of the `Logic` `Properties` menu](images/survey-editor-logic-expression.png)
+![Image of the `Logic` `Properties` menu](images/survey-editor-logic-expression.png)
 
-    To build the `Expression` for an element, go to `Properties` > `Logic` and choose how you would like to trigger the element (for example, choose `Visible if` if you would like the element to remain invisible until the conditions of the expresion are met). When you select `Visible if`, you will be directed to `Select question...`. This will open a drop-down dialogue that lists all available questions in the survey. The dialogue will list these by `Name`.
+To build the `Expression` for an element, go to `Properties` > `Logic` and choose how you would like to trigger the element (for example, choose `Visible if` if you would like the element to remain invisible until the conditions of the expresion are met). When you select `Visible if`, you will be directed to `Select question...`. This will open a drop-down dialogue that lists all available questions in the survey. The dialogue will list these by `Name`.
 
-    Select the question you would like to use within the `Expression`. Once selected, you will be able to select the `Operator` you would like to apply to your chosen question. Operators could be:
+Select the question you would like to use within the `Expression`. Once selected, you will be able to select the `Operator` you would like to apply to your chosen question. Operators could be:
 
-    - `is empty`
-    - `is not empty`
-    - `equals`
-    - `not equals`
-    - `contains`
-    - `not contains`
-    - `any of`
-    - `all of`
-    - `greater`
-    - `less`
-    - `greater or equals`
-    - `less or equals`
+- `is empty`
+- `is not empty`
+- `equals`
+- `not equals`
+- `contains`
+- `not contains`
+- `any of`
+- `all of`
+- `greater`
+- `less`
+- `greater or equals`
+- `less or equals`
 
-    Depending on the type of question you have chosen, only some of these `Operators` may be available and others will be grayed out.
+Depending on the type of question you have chosen, only some of these `Operators` may be available and others will be grayed out.
 
-    Once you have chosen the question and the `Operator`, you will be able to select the state that the question must have in order to meet the requirements of the `Expression`. For example, in the following image `Q2` is the question, `equals` is the `Operator` and the state of `item1` as `Selected` fulfils the requirements of the  `Expression`:
+Once you have chosen the question and the `Operator`, you will be able to select the state that the question must have in order to meet the requirements of the `Expression`. For example, in the following image `Q2` is the question, `equals` is the `Operator` and the state of `item1` as `Selected` fulfils the requirements of the  `Expression`:
 
-    ![Image of the `Logic` `Properties` menu](images/survey-editor-logic-expression1.png)
+![Image of the `Logic` `Properties` menu](images/survey-editor-logic-expression1.png)
 
 
-    You can also add more than one condition for your expression to meet in order to be valid. Press `Add condition` to develop the `Expression` further. Multiple conditions can be set and their interrelation is based on the logical `Operators` `And` and `Or`:
+You can also add more than one condition for your expression to meet in order to be valid. Press `Add condition` to develop the `Expression` further. Multiple conditions can be set and their interrelation is based on the logical `Operators` `And` and `Or`:
 
-    - `And` determines that the second `Expression` must also be valid in order for the whole `Expression` to be met. In this example, we are using an expression to determine if an element is `Visible`. Choosing the `And` `Operator` means that the element will not be visible unless the conditions of *both* expressions are met.
-    - `Or` determines that the second `Expression` is an alternative to the first: *either* the details of the first `Expression` fulfil the conditions to make the element `Visible`, *or* the details of the second `Expression` can also fulfil the conditions of the `Logic`.
+- `And` determines that the second `Expression` must also be valid in order for the whole `Expression` to be met. In this example, we are using an expression to determine if an element is `Visible`. Choosing the `And` `Operator` means that the element will not be visible unless the conditions of *both* expressions are met.
+- `Or` determines that the second `Expression` is an alternative to the first: *either* the details of the first `Expression` fulfil the conditions to make the element `Visible`, *or* the details of the second `Expression` can also fulfil the conditions of the `Logic`.
 
-    ![Image of the `Logic` `Properties` menu](images/survey-editor-logic-expression2.png)
+![Image of the `Logic` `Properties` menu](images/survey-editor-logic-expression2.png)
 
-## Specific use cases of `Conditional logic`
+### Specific use cases of `Conditional logic`
 
-    In general, `Conditional Logic` will be the same across all survey elements. However there are some interesting and specific use cases.
+In general, `Conditional Logic` will be the same across all survey elements. However there are some interesting and specific use cases.
 
 ### `Logic` within a `Matrix` element
 
-    Conditional logic can be set within a `Matrix` element on a column-row basis. This means that you can set columns to `Visible` or `Enabled` by setting an `Expression` condition within the same row. This allows each row to have it's own conditional logic. 
+Conditional logic can be set within a `Matrix` element on a column-row basis. This means that you can set columns to `Visible` or `Enabled` by setting an `Expression` condition within the same row. This allows each row to have it's own conditional logic. 
 
-    The `Logic` of each specific column is set by editing the column details. Each column can be edited via `Properties` > `Columns` > `Edit`, and within this there is a `Logic` section specific to that column. 
+The `Logic` of each specific column is set by editing the column details. Each column can be edited via `Properties` > `Columns` > `Edit`, and within this there is a `Logic` section specific to that column. 
 
-    ![Image of the `Column` > `Edit` properties](images/survey-editor-logic-matrix-column.png)
+![Image of the `Column` > `Edit` properties](images/survey-editor-logic-matrix-column.png)
 
-    Once you click `Edit` for a specific column, you will be shown a configuration section for that column:
+Once you click `Edit` for a specific column, you will be shown a configuration section for that column:
 
-    ![Image of the `Column` > `Edit` properties detail](images/survey-editor-logic-column-detail.png)
+![Image of the `Column` > `Edit` properties detail](images/survey-editor-logic-column-detail.png)
 
-    - The `Visiblity` or `Availability` of the column can be determined by a single question anywhere within the survey, including the `Matrix` the column belongs to.
-    - The column can also be made `Available` or `Visible` relative to a question within the same row of the `Matrix`. For example if you have a `Matrix` with four columns and you would like the `Visibility` of columns 2-4 to be triggered by a `Boolean` in column 1, you will need to set the `Logic` of columns 2, 3 and 4 to be `Visible if`  `row.<columnname>` equals `true`.
-    - The question `row.<columnname>` refers to the `row` that is *relative* to the question, then the `Name` that you have given the column. In this instance, `row` means 'in the current row' 
-    - It would be necessary to apply this `Logic` to all columns you would like to be affected by the trigger.
+- The `Visiblity` or `Availability` of the column can be determined by a single question anywhere within the survey, including the `Matrix` the column belongs to.
+- The column can also be made `Available` or `Visible` relative to a question within the same row of the `Matrix`. For example if you have a `Matrix` with four columns and you would like the `Visibility` of columns 2-4 to be triggered by a `Boolean` in column 1, you will need to set the `Logic` of columns 2, 3 and 4 to be `Visible if`  `row.<columnname>` equals `true`.
+- The question `row.<columnname>` refers to the `row` that is *relative* to the question, then the `Name` that you have given the column. In this instance, `row` means 'in the current row' 
+- It would be necessary to apply this `Logic` to all columns you would like to be affected by the trigger.
 
-    The end-result of setting logic within a `Matrix` can be seen in the following images. 
+The end-result of setting logic within a `Matrix` can be seen in the following images. 
 
-    First, the survey only shows the `Boolean` questions from column one:
+First, the survey only shows the `Boolean` questions from column one:
 
-    ![Image of the survey output of internal `Matrix Logic`](images/survey-editor-logic-matrix.png)
+![Image of the survey output of internal `Matrix Logic`](images/survey-editor-logic-matrix.png)
 
-    Second, the `Boolean` from Column 1/Row 1 is set to `yes/true`, which makes columns 2-4  `Visible`. Notice how this only applies to Row 1.
+Second, the `Boolean` from Column 1/Row 1 is set to `yes/true`, which makes columns 2-4  `Visible`. Notice how this only applies to Row 1.
 
-    ![Image of the survey output of internal `Matrix Logic`](images/survey-editor-logic-matrix1.png)
+![Image of the survey output of internal `Matrix Logic`](images/survey-editor-logic-matrix1.png)
 
-    Third, the `Boolean` from Column 1/Row 2 is set to `yes/true`, which makes columns 2-4 `Visible` in Row 2 as well as Row 1. Note that Columns 2-4 in Row 3 are still not `Visible`. 
+Third, the `Boolean` from Column 1/Row 2 is set to `yes/true`, which makes columns 2-4 `Visible` in Row 2 as well as Row 1. Note that Columns 2-4 in Row 3 are still not `Visible`. 
 
-    ![Image of the survey output of internal `Matrix Logic`](images/survey-editor-logic-matrix2.png)
+![Image of the survey output of internal `Matrix Logic`](images/survey-editor-logic-matrix2.png)
 
 
 ## Additional Resources
