@@ -395,7 +395,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
     propGenerator.setupObjPanel(elementPanel, true);
     elementPanel.title = "";
-    elementPanel.startWithNewLine = false; // TODO
+    elementPanel.startWithNewLine = logicType.name == "trigger_runExpression" || logicType.name == "completedHtmlOnCondition"; // TODO
+    const runExpressionQuestion = elementPanel.getQuestionByName("runExpression");
+    runExpressionQuestion && (runExpressionQuestion.titleLocation = "top"); // TODO
     elementPanel.getElementByName(logicType.propertyName).visible = false;
     elementPanel.onSurveyLoad();
     for (var i = 0; i < elementPanel.questions.length; i++) {
