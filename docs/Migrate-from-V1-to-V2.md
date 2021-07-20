@@ -1,35 +1,59 @@
-# Guid to migrate from V1 to V2
+# Migration Guide for SurveyJS Creator - from V1 to V2
 
-We did our best to make sure that SurveyJS Creator V2 compatible with V1. Unfortunately, we made a lot of changes and the biggest one is the support react and later other JavaScript frameworks. We have to divide our code from knockoutjs and this could not change the code dramatically.
+## Basics
 
-Moreover, SurveyJS Creator V2 UI changed dramatically. It is not a face lifting. It is a deep re-design and re-thinking based on our customers and users feedback.
+We always do our best to minimize the impact an upgrade might have on existing projects. However, it is often necessary to change the UI, API, or behavior of our tools to improve them.  
 
-If we are talking about technical and internal code changes, then the biggest change in V2 that we have replaced custom UI in property grid, logic tab, translation tab, Embedded Survey tab with Survey widget. In fact, we are creating all forms using our own Survey. Since Survey Library is already support different frameworks and it has been tested on accessibility and other important functionality, it let us to support react framework and soon other platforms comparatively easy. It creates some incompatibility with V1, for example in creating adorners and custom property editors, but we strongly believe it costs it.
 
-For compatibility reason, when it is possible, we are logging warning into console that a function/property from V1 doesn’t work in V2 and you need to use another approach or parameters.
+In V2 of SurveyJS Creator, we have made a lot of changes. The most important are as follows.
 
-## Knockout version
+* ### Native support for React
+  The biggest change is a provided native support for the React JavaScript framework (and later we plan to add a similar native support for other JavaScript frameworks, such as Angular2 and Vue). For this purpose, we had to reorganize our source code and divide it into framework-related packages. As a result (from [v.1.8.13](https://github.com/surveyjs/survey-creator/tree/v1.8.13)?), we broke our Knockout.js code base into parts to stand out a common core part and detach parts for individual frameworks.  
+  This change should not affect the working projects of our customers.
 
-If you are going to continue to use the knockout version, then in most cases you will need to make two changes:
+
+* ### Changes in UI 
+  We changed the SurveyJS Creator's UI dramatically. New UI is not a face lifting. It is a deep re-design and re-thinking which were made based on the constructive and reasonable feedback provided by our customers and their users.
+
+  Remarkable changes have been made to the following UI elements:  
+
+  * property grid, 
+  * logic tab, 
+  * translation tab, 
+  * Embedded Survey tab.  
+  
+  In V2, they render their contents with the help of our Survey widget instead of using previous redundant custom code.
+
+In fact, we now render all forms in SurveyJS Creator by using our own Survey component that is implemented as SurveyModel in our main library - SurveyJS Library.  
+And since SurveyJS Library already supports different frameworks and has already been thoroughly tested for accessibility and important functional requirements and use-cases, it empowers us to easily support the React framework in V2 (and to provide support for other platforms in the same way in near future). It should be admitted, that this approach exposes some incompatibilities with V1 (for example, in creating adorners and custom property editors). However, we strongly believe that the benefits outweigh the costs.
+
+To facilitate your migration from V1 to V2, we try to log  potential incompatibilities as warnings into Console, when it is possible. A warning names a function or property that does not work in V2 and suggests you to use another approach or parameters. 
+
+
+## To use Knockout version
+
+If you are going to continue using the Knockout version, you might need to make two changes in your projects. In most cases, they are:
 
 ### Step 1. Change JavaScript and CSS links
+ 
+Change the links to the Survey Library resources. 
 
-You will need to change the links to the Survey Library. We are using the same library, but for Creator V2 you will need SurveyJS Library slitted on two modules: framework independent part (core) and framework depended on part (knockout in our case).
+We still use the same library. However, for V2 of Creator you need to refer to the SurveyJS Library as to a library divided in two modules: a framework-independent part (core) and a framework-dependent part (Knockout in our case).
 
-In our case it will be:
+In V2, use the following two references: (???CSS links needed?)
 
 ```javascript
 <script src="https://unpkg.com/survey-core@SurveyJSVersion/survey.core.min.js"></script>
 <script src="https://unpkg.com/survey-knockout@SurveyJSVersion/survey-knockout-ui.min.js"></script>
 ```
 
-Instead of one link in V1:
+Instead of one link used in V1:
 
 ```javascript
 <script src="https://unpkg.com/survey-knockout@SurveyJSVersion/survey-ko.min.js"></script>
 ```
 
-You will need to make sure to remove the old SurveyJS Creator V1 links and replace it with new:
+Additionally, make sure to remove old SurveyJS Creator V1 links and replace them with new references, as follows:
 
 ```javascript
 <script src="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator-knockout.min.js"></script>
