@@ -134,6 +134,33 @@ SurveyReact.ReactElementFactory.Instance.registerElement("svc-toolbox", (props) 
     return React.createElement(CustomToolboxWrapper, props);
 });
 
+class CustomPropertyGridWrapper extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { collapsed: false }
+    }
+    toggle() {
+        this.setState({ collapsed: !this.state.collapsed });
+    }
+    render() {
+        return <div style={{position: "relative", height: "100%", display: "flex"}}>
+            <div
+                style={{position: "absolute", left: "-120px", top: 0, padding: "16px", cursor: "pointer"}}
+                title={this.state.collapsed ? "Show property grid" : "Hide property grid"}
+                onClick={() => this.toggle()}>
+                {this.state.collapsed ? "<<" : ">>"}
+            </div>
+            {
+                this.state.collapsed ? null : <SurveyCreator.PropertyGridComponent model={this.props.model}></SurveyCreator.PropertyGridComponent>
+            }
+        </div>;
+    }
+}
+
+SurveyReact.ReactElementFactory.Instance.registerElement("svc-property-grid", (props) => {
+    return React.createElement(CustomPropertyGridWrapper, props);
+});
+
 
 const creator = new SurveyCreator.SurveyCreator(options);
 creator.JSON = json;
