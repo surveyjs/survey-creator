@@ -36,7 +36,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     }
     event.stopPropagation();
     event.cancelBubble = true;
-    model.creator.selectElement(model.surveyElement);
+    model.creator.selectElement(model.surveyElement, undefined, false);
     return true;
   }
   css() {
