@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.57](https://github.com/surveyjs/survey-creator/compare/v1.8.56...v1.8.57) (2021-07-20)
+
+
+### Bug Fixes
+
+* New added question is not visible on clicking on toolbox [#1537](https://github.com/surveyjs/survey-creator/issues/1537) ([52b7ed0](https://github.com/surveyjs/survey-creator/commit/52b7ed08be8bed76c8976855bfcd46a34955c257))
+* Non unique entries possible through fast entry when itemValues are set unique in V2. [#1497](https://github.com/surveyjs/survey-creator/issues/1497) ([#1533](https://github.com/surveyjs/survey-creator/issues/1533)) ([0283340](https://github.com/surveyjs/survey-creator/commit/02833405d87c491ed5cd0135e5a9060aeb8bc297))
+* Progress Bar does not work/appear correctly on Designer Page in Creator V2 React version [#1507](https://github.com/surveyjs/survey-creator/issues/1507) ([#1510](https://github.com/surveyjs/survey-creator/issues/1510)) ([e9c5f92](https://github.com/surveyjs/survey-creator/commit/e9c5f9297d1e58d07c1717a3838f6fba7b47ed56))
+
 ### [1.8.56](https://github.com/surveyjs/survey-creator/compare/v1.8.55...v1.8.56) (2021-07-13)
 
 
