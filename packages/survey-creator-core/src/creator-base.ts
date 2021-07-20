@@ -1442,9 +1442,9 @@ export class CreatorBase<T extends SurveyModel>
    * This function triggers user notification (via the alert() function if no onNotify event handler added).
    * @see onNotify
    */
-  public notify(msg: string) {
+  public notify(msg: string, type: "info"|"error" = "info") {
     if (this.onNotify.isEmpty) {
-      this.notifier.notify(msg);
+      this.notifier.notify(msg, type);
       // alert(msg);
     } else {
       this.onNotify.fire(this, { message: msg });

@@ -120,11 +120,11 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected hasErrorInUI(): boolean {
     if (!this.expressionEditor.isReady) {
-      this.errorText = getLogicString("expressionInvalid");
+      this.survey.creator.notify(getLogicString("expressionInvalid"), "error")
       return true;
     }
     if (this.itemEditor.hasErrors()) {
-      this.errorText = getLogicString("actionInvalid");
+      this.survey.creator.notify(getLogicString("actionInvalid"), "error")
       return true;
     }
     return false;

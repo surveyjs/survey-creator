@@ -46,9 +46,6 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
         <div className="svc-plugin-tab__content svc-tab-logic-edit__content">
           <Survey model={this.model.expressionSurvey}></Survey>
           <Survey model={this.model.itemEditorSurvey}></Survey>
-          <div>
-            <span>{this.model.errorText}</span>
-          </div>
         </div>
         <div className="svc-plugin-tab__content-actions svc-tab-logic-edit__content-actions">
           <SurveyActionBar model={this.model.editToolbar}></SurveyActionBar>

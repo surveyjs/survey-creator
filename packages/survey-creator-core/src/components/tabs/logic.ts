@@ -107,7 +107,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
    * There are 3 modes: view, new, edit
    */
   @property() mode: string;
-  @property() errorText: string;
   @property() readOnly: boolean;
   @property() placeholderHtml: string;
 
@@ -118,7 +117,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "mode") {
-      this.errorText = "";
       if (newValue == "view" && (oldValue == "edit" || oldValue == "new")) {
         this.onEndEditing();
       }
@@ -201,8 +199,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       actions: this.getEditingActions(),
     };
     this.onLogicItemValidation.fire(this, options);
-    this.errorText = options.error;
-    return !!this.errorText;
+    this.survey.creator.notify(options.error, "error");
+    return !!options.error;
   }
   protected hasErrorInUI(): boolean {
     return false;
