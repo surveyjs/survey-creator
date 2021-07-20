@@ -67,7 +67,7 @@ export class SurveyConditionEditorItem extends ConditionEditorItem {
     );
   }
   public toExpression(): string {
-    var text =
+    var text = 
       "{" + this.getQuestionValueByName() + "} " + this.getOperatorText();
     if (this.isValueRequired) {
       text += " " + this.getValueText();
@@ -575,9 +575,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       panel.removeElement(oldQuestion);
     }
     if (!json) {
-      // json = {
-      //   type: "text"
-      // };
       return;
     }
     json.isRequired = true;
@@ -598,10 +595,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       newQuestion.description = "";
       newQuestion.titleLocation = "default";
       newQuestion.hasComment = false;
-      // if (this.isKeepQuestonValueOnSameLine(newQuestion.getType())) {
-      //   newQuestion.titleLocation = "hidden";
-      //   newQuestion.startWithNewLine = false;
-      // }
       panel.addElement(newQuestion);
     }
   }
@@ -617,13 +610,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!question || (!!json && json.type == question.getType())) return;
     this.rebuildQuestionValue(panel);
   }
-  // private isKeepQuestonValueOnSameLine(questionType: string): boolean {
-  //   return this.isClassContains(
-  //     questionType,
-  //     ["text", "dropdown", "boolean"],
-  //     []
-  //   );
-  // }
   private canShowQuestionValue(panel: PanelModel): boolean {
     var questionOperator = panel.getQuestionByName("operator");
     if (!questionOperator) return false;
@@ -854,6 +840,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if(options.question.name === "panel" && options.value.length > 0 ) {
       options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].questionName) ? 1 : 100;
     }
+    this.title = this.text || "Expression is not complete";
   }
 
   private isSettingTextEditorValue: boolean;

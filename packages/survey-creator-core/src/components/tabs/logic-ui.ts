@@ -120,11 +120,11 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected hasErrorInUI(): boolean {
     if (!this.expressionEditor.isReady) {
-      this.survey.creator.notify(getLogicString("expressionInvalid"), "error")
+      !!this.survey.creator && this.survey.creator.notify(getLogicString("expressionInvalid"), "error")
       return true;
     }
     if (this.itemEditor.hasErrors()) {
-      this.survey.creator.notify(getLogicString("actionInvalid"), "error")
+      !!this.survey.creator && this.survey.creator.notify(getLogicString("actionInvalid"), "error")
       return true;
     }
     return false;
@@ -167,7 +167,6 @@ export class SurveyLogicUI extends SurveyLogic {
       null,
       this.options
     );
-    this.expressionEditor.title = getLogicString("expressionEditorTitle");
     this.expressionEditor.isModal = false;
   }
   private updateItemsSurveyData() {

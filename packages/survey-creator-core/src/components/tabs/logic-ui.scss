@@ -64,8 +64,8 @@ svc-tab-logic-edit {
 
 .svc-logic-operator.svc-logic-operator--error {
   background-color: #FFFFFF;
-  color:  #E60A3E;
-  box-shadow: inset 0 0 0 2px #E60A3E;
+  color:  $red;
+  box-shadow: inset 0 0 0 2px $red;
 }
 
 .svc-logic-operator__error{

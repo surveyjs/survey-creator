@@ -199,7 +199,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       actions: this.getEditingActions(),
     };
     this.onLogicItemValidation.fire(this, options);
-    this.survey.creator.notify(options.error, "error");
+    !!this.survey.creator && this.survey.creator.notify(options.error, "error");
     return !!options.error;
   }
   protected hasErrorInUI(): boolean {
