@@ -68,6 +68,17 @@
 
 .svc-toolbox:not(.svc-toolbox--compact) {
   .svc-toolbox__tool:hover {
-    background-color: $border;
+    overflow: hidden;
+    border-radius: 100px;
+    background-color: $background;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.1s ease-in-out;
+
+    .svc-toolbox__item-title {
+      color: $foreground;
+    }
+    .sv-svg-icon use {
+      fill: $primary;
+    }
   }
 }
