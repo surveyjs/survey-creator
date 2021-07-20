@@ -357,7 +357,7 @@ test("fast copy tests, set the correct parent", () => {
   var q1 = p1.addNewQuestion("text", "question1");
   var p2 = p1.addNewPanel("panel2");
   var q2 = p2.addNewQuestion("text", "question2");
-  creator.survey.selectedElement = q2;
+  creator.selectElement(q2);
   creator.fastCopyQuestion(q2);
   expect(p2.questions).toHaveLength(2);
   var newQuestion = <QuestionTextModel>p2.questions[1];

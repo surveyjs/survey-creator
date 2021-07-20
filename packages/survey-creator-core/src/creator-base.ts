@@ -1488,7 +1488,7 @@ export class CreatorBase<T extends SurveyModel>
     }
     var parent: IPanel = this.currentPage;
     var elElement = this.getSelectedSurveyElement();
-    if (elElement && elElement.parent) {
+    if (elElement && elElement.parent && elElement["page"] == parent) {
       parent = elElement.parent;
       if (index < 0) {
         index = parent.elements.indexOf(elElement);
