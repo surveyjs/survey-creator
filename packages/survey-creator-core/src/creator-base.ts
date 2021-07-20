@@ -13,7 +13,8 @@ import {
   Serializer,
   AdaptiveActionContainer,
   IAction,
-  Action
+  Action,
+  IPanel
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -1203,7 +1204,7 @@ export class CreatorBase<T extends SurveyModel>
 
     this.dragDropHelper.onAfterDrop.add((sender, options) => {
       this.undoRedoManager.stopTransaction();
-      this.selectElement(options.draggedElement);
+      this.selectElement(options.draggedElement, undefined, false);
     });
   }
   private addingObject: Survey.Base;
@@ -1485,12 +1486,12 @@ export class CreatorBase<T extends SurveyModel>
     if (this.survey.pageCount == 0) {
       this.survey.addNewPage();
     }
-    var parent = this.currentPage;
-    var elElement = this.survey.selectedElement;
-    if (elElement && elElement.parent) {
+    var parent: IPanel = this.currentPage;
+    var elElement = this.getSelectedSurveyElement();
+    if (elElement && elElement.parent && elElement["page"] == parent) {
       parent = elElement.parent;
       if (index < 0) {
-        index = parent.elements.indexOf(this.survey.selectedElement);
+        index = parent.elements.indexOf(elElement);
         if (index > -1) index++;
       }
     }
@@ -1728,8 +1729,21 @@ export class CreatorBase<T extends SurveyModel>
     if (oldValue !== element || !!propertyName) {
       this.selectionChanged(this.selectedElement, propertyName, focus);
     }
+    var selEl: any = this.getSelectedSurveyElement();
+    if (oldValue !== element && focus && !!document && !!selEl) {
+      setTimeout(() => {
+        const el = document.getElementById(selEl.id);
+        if (!!el) {
+          el.scrollIntoView({ block: "center" });
+        }
+      }, 100);
+    }
   }
-
+  private getSelectedSurveyElement(): IElement {
+    var sel: any = this.selectedElement;
+    if (!sel || sel.getType() == "survey") return null;
+    return sel.isInteractiveDesignElement && sel.id ? sel : null;
+  }
   private onSelectingElement(val: Base): Base {
     var options = { newSelectedElement: val };
     this.onSelectedElementChanging.fire(this, options);
@@ -1861,6 +1875,7 @@ export class CreatorBase<T extends SurveyModel>
       if (newElement["getType"] === undefined) {
         newElement = this.createNewElement(newElement);
       }
+      this.survey.lazyRendering = false;
       this.doClickQuestionCore(newElement);
       this.selectElement(newElement);
     }

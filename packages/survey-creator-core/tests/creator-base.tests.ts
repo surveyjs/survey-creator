@@ -72,6 +72,25 @@ test("Click on toolbox on empty survey", (): any => {
   expect(creator.selectedElementName).toEqual("question1");
   expect(creator.selectedElement.getType()).toEqual("text");
 });
+test("Click on toolbox and cancel survey.lazyRendering", (): any => {
+  var creator = new CreatorTester();
+  expect(creator.survey.isLazyRendering).toEqual(true);
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.survey.isLazyRendering).toEqual(false);
+});
+test("Click on toolbox and insert into correct index", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text", name: "question2" }
+    ]
+  };
+  creator.selectElement(creator.survey.getQuestionByName("question1"));
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question3");
+  expect(creator.survey.currentPage.elements[1].name).toEqual("question3");
+});
 test("Update JSON before drag&drop", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
@@ -419,12 +438,12 @@ test("Create new page with empty survey", (): any => {
 test("Create new page on changing title/description in ghost", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
-      elements: [
-        {
-          type: "text",
-          name: "q1"
-        }
-      ]
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
   };
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
