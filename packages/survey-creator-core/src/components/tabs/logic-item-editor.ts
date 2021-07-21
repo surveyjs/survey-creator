@@ -381,16 +381,18 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.titleActionsCreator = null;
     var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
     elementPanel.elements.splice(0, elementPanel.elements.length);
-    elementPanel.visible = this.isElementPanelVisible(logicType);
-    if (!elementPanel.visible) return;
+    if (!this.isElementPanelVisible(logicType) || logicType.name === "trigger_complete") { 
+      elementPanel.visible = false;
+      return;
+    }
     var obj = this.createElementPanelObj(
       this.getActionByPanel(panel),
       logicType
       );
-      this.titleActionsCreator = new PropertyGridTitleActionsCreator(
-        obj,
-        this.options
-        );
+    this.titleActionsCreator = new PropertyGridTitleActionsCreator(
+      obj,
+      this.options
+      );
     this.setElementPanelObj(panel, obj);
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
     propGenerator.setupObjPanel(elementPanel, true);
@@ -398,6 +400,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     elementPanel.startWithNewLine = logicType.name == "trigger_runExpression" || logicType.name == "completedHtmlOnCondition"; // TODO
     const runExpressionQuestion = elementPanel.getQuestionByName("runExpression");
     runExpressionQuestion && (runExpressionQuestion.titleLocation = "top"); // TODO
+    elementPanel.visible = true;
     elementPanel.getElementByName(logicType.propertyName).visible = false;
     elementPanel.onSurveyLoad();
     for (var i = 0; i < elementPanel.questions.length; i++) {
