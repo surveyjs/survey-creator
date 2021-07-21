@@ -1,6 +1,6 @@
 @import "../../variables.scss";
 
-svc-tab-logic-edit {
+.svc-tab-logic-edit {
   width: 100%;
   height: 100%;
   background: $background-dim;
@@ -10,8 +10,10 @@ svc-tab-logic-edit {
   height: calc(100% - calc(6 * #{$base-unit}));
   overflow-y: auto;
   overflow-x: hidden;
-  max-width: 600px;
-  margin: auto;
+  padding-left: 16%;
+  padding-right: 16%;
+  //max-width: 600px;
+  //margin: auto;
   // background: $background;
 }
 
