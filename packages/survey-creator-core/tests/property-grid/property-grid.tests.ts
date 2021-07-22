@@ -28,7 +28,8 @@ import {
   QuestionMatrixDropdownModel,
   IAction,
   QuestionRatingModel,
-  QuestionCustomModel
+  QuestionCustomModel,
+  surveyLocalization
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -153,6 +154,23 @@ test("dropdown property editor localization", (): any => {
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
   expect(localeQuestion.showOptionsCaption).toBeTruthy();
   expect(localeQuestion.optionsCaption).toEqual("Default (english)");
+  expect(localeQuestion.displayValue).toEqual("Default (english)");
+});
+test("dropdown property editor localization & empty supportedLocales", (): any => {
+  var oldSupportedLocales = surveyLocalization.supportedLocales;
+  surveyLocalization.supportedLocales = ["en"];
+
+  var survey = new SurveyModel();
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var localeQuestion = <QuestionDropdownModel>(
+    propertyGrid.survey.getQuestionByName("locale")
+  );
+  expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
+  expect(localeQuestion.choices).toHaveLength(0);
+  expect(localeQuestion.showOptionsCaption).toBeTruthy();
+  expect(localeQuestion.optionsCaption).toEqual("Default (english)");
+  expect(localeQuestion.displayValue).toEqual("Default (english)");
+  surveyLocalization.supportedLocales = oldSupportedLocales;
 });
 
 test("settings.propertyGrid.useButtonGroup", (): any => {
