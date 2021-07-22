@@ -570,12 +570,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       panel.getQuestionByName("questionName").value,
       panel.getQuestionByName("operator").value
     );
-    var oldQuestion = panel.getQuestionByName("questionValue");
-    if (!!oldQuestion) {
-      panel.removeElement(oldQuestion);
-    }
     if (!json) {
-      return;
+      json = {
+        type: "text"
+      };
     }
     json.isRequired = true;
     SurveyHelper.updateQuestionJson(json);
@@ -587,8 +585,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!newQuestion) {
       newQuestion = Serializer.createClass("text", json);
     }
+    var oldQuestion = panel.getQuestionByName("questionValue");
+    if (!!oldQuestion) {
+      panel.removeElement(oldQuestion);
+    }
     if (this.canShowQuestionValue(panel)) {
       newQuestion.name = "questionValue";
+      newQuestion.visibleIf = "{panel.questionName} notempty";
       newQuestion.title = editorLocalization.getString(
         "pe.conditionValueQuestionTitle"
       );
@@ -838,7 +841,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private onValueChanged(options: any){
     if(options.question.name === "panel" && options.value.length > 0 ) {
-      options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].questionName) ? 1 : 100;
+      const maxLogicItems = this.options.maxLogicItemsInCondition > 0 ? this.options.maxLogicItemsInCondition : 100;
+      options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].questionName) ? 1 : maxLogicItems;
     }
     this.title = this.text || "Expression is not complete";
   }

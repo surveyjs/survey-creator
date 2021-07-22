@@ -728,6 +728,9 @@ test("creator options.maxLogicItemsInCondition, hide `Add Condition` on exceedin
   };
   var question = creator.survey.getQuestionByName("q1");
   var editor = new ConditionEditor(creator.survey, question, creator);
+  expect(editor.panel.maxPanelCount).toEqual(1);
+
+  editor.panel.addPanel();
   expect(editor.panel.maxPanelCount).toEqual(2);
 });
 

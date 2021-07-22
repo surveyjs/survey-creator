@@ -381,19 +381,23 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.titleActionsCreator = null;
     var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
     elementPanel.elements.splice(0, elementPanel.elements.length);
-    if (!this.isElementPanelVisible(logicType) || logicType.name === "trigger_complete") { 
+    if (!this.isElementPanelVisible(logicType)) { 
+        elementPanel.visible = false;
+        return;
+    }
+    var obj = this.createElementPanelObj(
+      this.getActionByPanel(panel), 
+      logicType
+    );
+    this.setElementPanelObj(panel, obj);
+    if(logicType.name === "trigger_complete"){ 
       elementPanel.visible = false;
       return;
     }
-    var obj = this.createElementPanelObj(
-      this.getActionByPanel(panel),
-      logicType
-      );
     this.titleActionsCreator = new PropertyGridTitleActionsCreator(
-      obj,
+      obj, 
       this.options
-      );
-    this.setElementPanelObj(panel, obj);
+    );
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
     propGenerator.setupObjPanel(elementPanel, true);
     elementPanel.title = "";
