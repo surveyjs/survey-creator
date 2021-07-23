@@ -844,7 +844,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const maxLogicItems = this.options.maxLogicItemsInCondition > 0 ? this.options.maxLogicItemsInCondition : 100;
       options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].questionName) ? 1 : maxLogicItems;
     }
-    this.title = this.text || "Expression is not complete";
+    this.title = this.text || "Rule";
   }
 
   private isSettingTextEditorValue: boolean;
