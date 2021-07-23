@@ -832,6 +832,59 @@ test("Create expression from scratch", () => {
   expect(editor.text).toEqual("{q2} empty");
 });
 
+test.skip("Set question width", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+      { name: "q4", type: "text" }
+    ]
+  });
+  var question = survey.getQuestionByName("q4");
+  var editor = new ConditionEditor(survey, question);
+  expect(editor.panel.panels).toHaveLength(1);
+
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("questionName").startWithNewLine).toBeFalsy();
+  expect(panel.getQuestionByName("operator").startWithNewLine).toBeFalsy();
+  expect(panel.getQuestionByName("questionValue").startWithNewLine).toBeFalsy();
+  expect(panel.getQuestionByName("questionName").width).toEqual("40%");
+  expect(panel.getQuestionByName("operator").width).toEqual("25%");
+  expect(panel.getQuestionByName("questionValue").width).toEqual("35%");
+
+  panel.getQuestionByName("questionName").value = "q3";
+  expect(panel.getQuestionByName("questionName").startWithNewLine).toBeFalsy();
+  expect(panel.getQuestionByName("operator").startWithNewLine).toBeFalsy();
+  expect(
+    panel.getQuestionByName("questionValue").startWithNewLine
+  ).toBeTruthy();
+  expect(panel.getQuestionByName("questionName").width).toEqual("40%");
+  expect(panel.getQuestionByName("operator").width).toEqual("60%");
+  expect(panel.getQuestionByName("questionValue").width).toEqual("");
+
+  editor.panel.addPanel();
+  panel = editor.panel.panels[1];
+  expect(panel.getQuestionByName("questionName").startWithNewLine).toBeFalsy();
+  expect(panel.getQuestionByName("operator").startWithNewLine).toBeFalsy();
+  expect(panel.getQuestionByName("questionValue").startWithNewLine).toBeFalsy();
+  expect(panel.getQuestionByName("conjunction").width).toEqual("15%");
+  expect(panel.getQuestionByName("questionName").width).toEqual("25%");
+  expect(panel.getQuestionByName("operator").width).toEqual("25%");
+  expect(panel.getQuestionByName("questionValue").width).toEqual("35%");
+
+  panel.getQuestionByName("questionName").value = "q3";
+  expect(panel.getQuestionByName("questionName").startWithNewLine).toBeFalsy();
+  expect(panel.getQuestionByName("operator").startWithNewLine).toBeFalsy();
+  expect(
+    panel.getQuestionByName("questionValue").startWithNewLine
+  ).toBeTruthy();
+  expect(panel.getQuestionByName("conjunction").width).toEqual("15%");
+  expect(panel.getQuestionByName("questionName").width).toEqual("25%");
+  expect(panel.getQuestionByName("operator").width).toEqual("60%");
+  expect(panel.getQuestionByName("questionValue").width).toEqual("");
+});
+
 test("Set correct value for array, Bug #700", () => {
   var survey = new SurveyModel({
     elements: [
