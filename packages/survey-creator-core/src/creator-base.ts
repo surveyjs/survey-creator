@@ -14,7 +14,8 @@ import {
   AdaptiveActionContainer,
   IAction,
   Action,
-  IPanel
+  IPanel,
+  SurveyElement
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -266,6 +267,20 @@ export class CreatorBase<T extends SurveyModel>
    * @see showObjectTitles
    */
   public onGetObjectDisplayName: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Use this event to disable some operations for an element (question/panel).
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object question/panel
+   * <br/> options.allowDelete set it to false to disable deleting the object
+   * <br/> options.allowCopy set it to false to disable copying the object
+   * <br/> options.allowDragging set it to false to disable dragging the element
+   * <br/> options.allowChangeType set it to false to disable changing element type
+   * <br/> options.allowChangeRequired set it to false to disable changing isRequired property
+   */
+  public onElementAllowOperations: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
@@ -1657,13 +1672,12 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   protected deleteObjectCore(obj: any) {
-    var objType = SurveyHelper.getObjectType(obj);
-    if (objType == ObjType.Page) {
+    if (obj.isPage) {
       var newPage = this.getNextPage(obj);
       this.survey.removePage(obj);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
-      this.deletePanelOrQuestion(obj, objType);
+      this.deletePanelOrQuestion(obj);
     }
     this.setModified({
       type: "OBJECT_DELETED",
@@ -1938,7 +1952,7 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
-  protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
+  protected deletePanelOrQuestion(obj: Survey.Base): void {
     var parent = obj["parent"];
     var elements = parent.elements;
     var objIndex = elements.indexOf(obj);
@@ -2327,6 +2341,19 @@ export class CreatorBase<T extends SurveyModel>
       obj: element,
       items: items
     });
+  }
+  public getElementAllowOperations(element: SurveyElement): any {
+    var options = {
+      obj: element,
+      element: element,
+      allowDelete: true,
+      allowCopy: true,
+      allowDragging: true,
+      allowChangeType: true,
+      allowChangeRequired: true
+    };
+    this.onElementAllowOperations.fire(this, options);
+    return options;
   }
   public getNextItemValue(question: Survey.QuestionSelectBase) {
     const itemText = Survey.surveyLocalization.getString("choices_Item");
