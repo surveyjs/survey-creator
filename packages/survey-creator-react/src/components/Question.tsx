@@ -6,7 +6,7 @@ import {
   SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
-  SurveyQuestion,
+  SurveyQuestion
 } from "survey-react-ui";
 
 export interface QuestionAdornerComponentProps {
@@ -19,64 +19,97 @@ export class QuestionAdornerComponent extends SurveyElementBase<
   QuestionAdornerComponentProps,
   any
 > {
-  model: QuestionAdornerViewModel;
+  private modelValue: QuestionAdornerViewModel;
+  protected rootRef: React.RefObject<HTMLDivElement>;
+
   constructor(props: QuestionAdornerComponentProps) {
     super(props);
-    this.model = new QuestionAdornerViewModel(
+    this.modelValue = this.createQuestionViewModel();
+  }
+  protected createQuestionViewModel(): QuestionAdornerViewModel {
+    return new QuestionAdornerViewModel(
       this.props.componentData,
       this.props.question,
       null
     );
   }
+  public get model(): QuestionAdornerViewModel {
+    return this.modelValue;
+  }
   protected getStateElement(): Base {
     return this.model;
   }
+  protected canRender(): boolean {
+    return super.canRender() && !this.model.isDragged;
+  }
 
-  render(): JSX.Element {
-    if (this.model.isDragged) {
-      return null;
-    }
-    const allowInteractions = this.model.surveyElement.isInteractiveDesignElement;
-    let content = (<>
-            {this.props.element}
-            {this.renderPanelPlaceholder()}
-    </>);
-    if(allowInteractions) {
-      content = (          <div
-        className={"svc-question__content " + this.model.css()}
-        onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
-      >
-        <div className={"svc-question__drag-area"}>
-            <div
-              className={"svc-question__drag-element"}
-              onPointerDown={(event:any) => this.model.startDragSurveyElement(event)}
-            ></div>
-        </div>
-        {content}
-        <div className="svc-question__content-actions">
-          <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
-        </div>
-      </div>);
-    }
-
+  renderElement(): JSX.Element {
+    const allowInteractions = this.model.surveyElement
+      .isInteractiveDesignElement;
+    const content = this.renderContent(allowInteractions);
     return (
       <React.Fragment>
         <div
           data-svc-drop-target-element-name={this.model.surveyElement.name}
+          ref={this.rootRef}
           className={"svc-question__adorner"}
-          onMouseOut={e => allowInteractions && toggleHovered(e.nativeEvent, e.currentTarget)}
-          onMouseOver={e => allowInteractions && toggleHovered(e.nativeEvent, e.currentTarget)}
+          onMouseOut={(e) =>
+            allowInteractions && toggleHovered(e.nativeEvent, e.currentTarget)
+          }
+          onMouseOver={(e) =>
+            allowInteractions && toggleHovered(e.nativeEvent, e.currentTarget)
+          }
         >
-        {content}
+          {content}
         </div>
-      </React.Fragment >
+      </React.Fragment>
     );
   }
-  renderPanelPlaceholder(): JSX.Element {
+  protected renderContent(allowInteractions: boolean): JSX.Element {
+    var content = this.renderElementContent();
+    if (!allowInteractions) return content;
+    return (
+      <div
+        className={"svc-question__content " + this.model.css()}
+        onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
+      >
+        {this.renderContentOnTop()}
+        {this.renderDragAria()}
+        {content}
+        <div className="svc-question__content-actions">
+          <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
+        </div>
+      </div>
+    );
+  }
+  protected renderElementContent(): JSX.Element {
+    return (
+      <>
+        {this.props.element}
+        {this.renderElementPlaceholder()}
+      </>
+    );
+  }
+  protected renderContentOnTop(): JSX.Element {
+    return null;
+  }
+  protected renderDragAria(): JSX.Element {
+    if (!this.model.allowDragging) return null;
+    return (
+      <div className={"svc-question__drag-area"}>
+        <div
+          className={"svc-question__drag-element"}
+          onPointerDown={(event: any) =>
+            this.model.startDragSurveyElement(event)
+          }
+        ></div>
+      </div>
+    );
+  }
+  renderElementPlaceholder(): JSX.Element {
     if (!this.model.isEmptyElement) {
       return null;
     }
-
     return (
       <div className="svc-panel__placeholder_frame">
         <div className="svc-panel__placeholder">

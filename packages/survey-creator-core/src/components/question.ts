@@ -28,7 +28,6 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
-    this.actionContainer.setItems(this.getContextActions());
   }
   select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
     if (!model.surveyElement.isInteractiveDesignElement) {
@@ -58,6 +57,17 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   }
   get isDraggable() {
     return true;
+  }
+  protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
+    super.updateElementAllowOptions(options, operationsAllow);
+    this.updateActionVisibility(
+      "convertTo",
+      operationsAllow && options.allowChangeType
+    );
+    this.updateActionVisibility(
+      "isrequired",
+      operationsAllow && options.allowChangeRequired
+    );
   }
 
   public get isEmptyElement(): boolean {
@@ -175,32 +185,20 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     return requiredAction;
   }
 
-  protected getContextActions(): Array<Action> {
-    if (this.creator.readOnly) return [];
-
-    const items = super.getContextActions();
-
+  protected buildActions(items: Array<Action>) {
+    super.buildActions(items);
     let element = this.surveyElement;
-    let opts: any = element["allowingOptions"];
-    if (!opts) opts = {};
-
-    if (opts.allowChangeType === undefined || opts.allowChangeType) {
-      if (!element.isPanel) {
-        items.push(this.createConverToAction());
-      }
+    if (!element.isPanel) {
+      items.push(this.createConverToAction());
     }
 
     if (
-      (opts.allowChangeRequired === undefined || opts.allowChangeRequired) &&
       typeof element["isRequired"] !== "undefined" &&
       propertyExists(element, "isRequired") &&
       isPropertyVisible(element, "isRequired")
     ) {
       items.push(this.createRequiredAction());
     }
-
-    this.creator.onElementMenuItemsChanged(element, items);
-    return items;
   }
   protected duplicate() {
     var newElement = this.creator.fastCopyQuestion(this.surveyElement);

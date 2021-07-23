@@ -6,7 +6,7 @@
     class="svc-question__content"
     data-bind="click: select, clickBubble: false, css: css()"
   >
-    <div class="svc-question__drag-area">
+    <div class="svc-question__drag-area" data-bind="visible:allowDragging">
       <div
         class="svc-question__drag-element"
         data-bind="event: {pointerdown: (model, event)=>{startDragSurveyElement(event)}}"
