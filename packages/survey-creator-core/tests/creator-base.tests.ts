@@ -1056,6 +1056,20 @@ test("Show survey in property grid on deleting last page", (): any => {
   creator.deleteCurrentElement();
   expect(creator.selectedElementName).toEqual("survey");
 });
+test("Test TabDesignerViewModel.pageCount - reactive", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model.pageCount).toEqual(1);
+  creator.copyPage(creator.survey.pages[0]);
+  expect(designerPlugin.model.pageCount).toEqual(2);
+  creator.deleteElement(creator.survey.pages[1]);
+  expect(designerPlugin.model.pageCount).toEqual(1);
+});
 test("PageViewModel and onElementAllowOperations", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
