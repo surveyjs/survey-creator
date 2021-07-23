@@ -30,55 +30,77 @@ And since SurveyJS Library already supports different frameworks and has already
 To facilitate your migration from V1 to V2, we try to log  potential incompatibilities as warnings into Console, when it is possible. A warning names a function or property that does not work in V2 and suggests you to use another approach or parameters. 
 
 
-## To use Knockout version
+## To continue using Knockout
 
 If you are going to continue using the Knockout version, you might need to make two changes in your projects. In most cases, they are:
 
 ### Step 1. Change JavaScript and CSS links
  
-Change the links to the Survey Library resources. 
+Change the links to the SurveyJS Library resources. 
+
+#### Links to the SurveyJS Library's scripts
 
 We still use the same library. However, for V2 of Creator you need to refer to the SurveyJS Library as to a library divided in two modules: a framework-independent part (core) and a framework-dependent part (Knockout in our case).
 
-In V2, use the following two references: (???CSS links needed?)
-
-```javascript
-<script src="https://unpkg.com/survey-core@SurveyJSVersion/survey.core.min.js"></script>
-<script src="https://unpkg.com/survey-knockout@SurveyJSVersion/survey-knockout-ui.min.js"></script>
-```
-
-Instead of one link used in V1:
+So, find and remove the following link (used in V1 as the [Add Survey Creator into your page](https://surveyjs.io/Documentation/Survey-Creator?id=Add-Survey-Creator-into-your-Web-Page#step-2.add-links-to-survey-creator-and-survey-library) topic suggested):
 
 ```javascript
 <script src="https://unpkg.com/survey-knockout@SurveyJSVersion/survey-ko.min.js"></script>
 ```
 
-Additionally, make sure to remove old SurveyJS Creator V1 links and replace them with new references, as follows:
+And, in V2, add the following two references instead:
+
+```javascript
+<script src="https://unpkg.com/survey-core@SurveyJSVersion/survey.core.min.js"></script>
+
+<script src="https://unpkg.com/survey-knockout@SurveyJSVersion/survey-knockout-ui.min.js"></script>
+```
+
+#### Links to the SurveyJS Creator's scripts and CSS
+
+Additionally, make sure to remove the following old V1 links to SurveyJS Creator resources (script and CSS files):
+
+```javascript
+<script src="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator.min.js"></script>
+
+<link href="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator.css" type="text/css" rel="stylesheet" />
+```
+
+Replace them with new references in V2, as follows:
 
 ```javascript
 <script src="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator-knockout.min.js"></script>
+
 <link href="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator-knockout.css" type="text/css" rel="stylesheet"/>
 ```
 
-### Step 2. Optionally change constructor parameters and explicitly call render function
 
-You will need to make sure to call the render function to render the Creator widget. We do not render SurveyJS Creator in constructor, and we can do it V1. Moreover, we will log a warning in the console if you pass a DOM element or element id into constructor as the first parameter. We will simply ignore it. It means instead of one line of code in V1:
+
+### Step 2. Optionally change constructor parameters and explicitly call a render function
+
+In V2, we do not support rendering of a SurveyCreator instance in the SurveyCreator's constructor. You need to call a specific render function to render a SurveyCreator.
+
+So, find all occurrences of specifying the Creator container element in the SurveyCreator's constructor (as the [Show Survey Creator on the Page](https://surveyjs.io/Documentation/Survey-Creator?id=Add-Survey-Creator-into-your-Web-Page#step-4.show-survey-creator-on-the-page) topic section previously suggested for V1).
 
 ```javascript
 var creator = new SurveyCreator.SurveyCreator("creatorElement", options);
 ```
 
-You will need at least two lines of code in V2:
+And modify them in the following manner by detaching the creation from the render (use the [render](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#render) method to render the created instance). 
 
 ```javascript
 var creator = new SurveyCreator.SurveyCreator(options);
-//Add event handlers, survey JSON and any customization code you need here
-creator.render("creatorElement");
+//Add event handlers, survey JSON and any customization code you need here:
+//...
+creator.render("creatorElement"); //Finally, render the instance
 ```
 
-In the most cases, that is all you need to do. We will discuss advanced changes later.
+If you pass a DOM element or an element id into the SurveyCreator constructor as the first parameter, we (in V2) log a warning in the Console and ignore this constructor parameter in code.
 
-## React version
+
+In most cases, that's all you need to do to continue using the Knockout version in V2. We will discuss advanced changes later.
+
+## To start using React version
 
 We did not have SurveyJS Creator for react framework before. React developers use V1 knockout version as a black box. Now SurveyJS Creator V2 for react and a truly react widget and it should be used a common react widget. It does not mean that all your code that you have created for V1 will go into trash if you are using react in your application. The most code will be still valid, except the code that deals with rendering and some advanced functionality as custom property editors.
 
