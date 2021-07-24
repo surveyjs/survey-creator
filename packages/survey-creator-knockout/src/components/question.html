@@ -13,7 +13,16 @@
         data-bind="event: {pointerdown: (model, event)=>{startDragSurveyElement(event)}}"
       ></div>
     </div>
-    <!-- ko template: { name: 'svc-question-adoner-content', data: $data } --><!-- /ko -->
+    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
+    <!-- /ko -->
+    <!-- ko if: isEmptyElement -->
+    <div class="svc-panel__placeholder_frame">
+      <div
+        class="svc-panel__placeholder"
+        data-bind="text: placeholderText"
+      ></div>
+    </div>
+    <!-- /ko -->
 
     <!-- ko if: adornerComponent -->
     <!-- ko component: { name: adornerComponent, params: { model: $data } } --><!-- /ko -->
@@ -26,10 +35,6 @@
   </div>
   <!-- /ko -->
   <!-- ko ifnot: question.isInteractiveDesignElement -->
-  <!-- ko template: { name: 'svc-question-adoner-content', data: $data } --><!-- /ko -->
-  <!-- /ko -->
-</div>
-<script type="text/html" id="svc-question-adoner-content">
   <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
   <!-- /ko -->
   <!-- ko if: isEmptyElement -->
@@ -37,4 +42,5 @@
     <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
   </div>
   <!-- /ko -->
-</script>
+  <!-- /ko -->
+</div>
