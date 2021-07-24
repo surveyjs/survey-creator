@@ -1,27 +1,18 @@
 import * as ko from "knockout";
-import {
-  Question,
-  SurveyTemplateRendererViewModel,
-} from "survey-core";
+import { Question, SurveyTemplateRendererViewModel } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { KnockoutDropdownQuestionAdornerViewModel } from "./question-dropdown";
+import { createQuestionViewModel } from "./question";
 
 const template = require("./cell-question-dropdown.html");
 
 ko.components.register("svc-cell-dropdown-question", {
   viewModel: {
-    createViewModel: (params: SurveyTemplateRendererViewModel, componentInfo: any) => {
-      const creator = params.componentData;
-      const question = params.templateData.data;
-
-      const model = new KnockoutDropdownQuestionAdornerViewModel(
-        params.componentData,
-        params.templateData.data as Question,
-        params.templateData
-      );
-      new ImplementorBase(model);
-      return model;
-    },
+    createViewModel: (
+      params: SurveyTemplateRendererViewModel,
+      componentInfo: any
+    ) => {
+      return createQuestionViewModel(params, componentInfo);
+    }
   },
-  template: template,
+  template: template
 });

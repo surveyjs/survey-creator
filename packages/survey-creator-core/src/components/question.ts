@@ -15,7 +15,11 @@ import { DragDropHelper } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
-import { isPropertyVisible, propertyExists } from "../utils/utils";
+import {
+  isPropertyVisible,
+  propertyExists,
+  toggleHovered
+} from "../utils/utils";
 import { ActionContainerViewModel } from "./action-container-view-model";
 import "./question.scss";
 
@@ -57,6 +61,12 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   }
   get isDraggable() {
     return true;
+  }
+  public hover(event: MouseEvent, element: HTMLElement) {
+    if (!this.surveyElement.isInteractiveDesignElement) {
+      return;
+    }
+    toggleHovered(event, element);
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
     super.updateElementAllowOptions(options, operationsAllow);
