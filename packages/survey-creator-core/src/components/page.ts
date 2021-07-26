@@ -2,7 +2,7 @@ import { PageModel, property, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { ActionContainerViewModel } from "./action-container-view-model";
-
+import { toggleHovered } from "../utils/utils";
 import "./page.scss";
 
 export class PageViewModel<
@@ -95,7 +95,9 @@ export class PageViewModel<
       ? "svc-page__content--selected"
       : "";
   }
-
+  public hover(event: MouseEvent, element: HTMLElement) {
+    toggleHovered(event, element);
+  }
   protected duplicate() {
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);
