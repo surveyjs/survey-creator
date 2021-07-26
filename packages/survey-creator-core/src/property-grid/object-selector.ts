@@ -161,14 +161,18 @@ export class ObjectSelectorModel extends Base {
     this.filteredText = "";
     this.selector = new ObjectSelector(survey, this.getObjectDisplayName);
     this.onItemsCreated();
-    this.listModelValue = new ListModel(
-      this.selector.items,
-      (item: IAction) => {
-        onClose(item.data);
-      },
-      true,
-      this.selector.getItemByObj(selectedItem)
-    );
+    if (!this.listModelValue) {
+      this.listModelValue = new ListModel(
+        this.selector.items,
+        (item: IAction) => {
+          onClose(item.data);
+        },
+        true,
+        this.selector.getItemByObj(selectedItem)
+      );
+    } else {
+      this.listModelValue.items = this.selector.items;
+    }
     this.isVisible = true;
   }
   public get filteredTextPlaceholder(): string {
