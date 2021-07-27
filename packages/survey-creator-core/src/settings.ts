@@ -38,18 +38,19 @@ export var settings = {
    */
   questionConvertMode: QuestionConvertMode.AllTypes,
   propertyGrid: {
-    useButtonGroup: true
+    useButtonGroup: true,
+    showNavigationButtons: true
   },
   /**
    * Notification settings
    */
-  notifications : {
+  notifications: {
     lifetime: 2000
   },
   /**
    * Auto save parameters
    */
-   autoSave: {
+  autoSave: {
     delay: 500
   }
 
