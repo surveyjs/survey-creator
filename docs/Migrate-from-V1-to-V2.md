@@ -17,9 +17,9 @@ In V2 of SurveyJS Creator, we have made a lot of changes. The most important are
 
   Remarkable changes have been made to the following UI elements:  
 
-  * property grid, 
-  * logic tab, 
-  * translation tab, 
+  * Properties grid, 
+  * Logic tab, 
+  * Translation tab, 
   * Embedded Survey tab.  
   
   In V2, they render their contents with the help of our Survey widget instead of using previous redundant custom code.
