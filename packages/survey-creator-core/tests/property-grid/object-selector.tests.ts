@@ -180,3 +180,18 @@ test("Check ObjectSelectorModel", () => {
   model.list.selectItem(model.list.items[3]);
   expect(selectedItem.title).toEqual("First name");
 });
+test("ObjectSelectorModel, do not recreate list model", () => {
+  var survey = createSurvey2();
+  var model = new ObjectSelectorModel();
+  var selectedItem: any;
+  model.show(survey, survey.pages[0], (obj: Base) => {
+    selectedItem = obj;
+  });
+  expect(model.list.items).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
+  var list = model.list;
+  model.show(survey, survey.pages[0], (obj: Base) => {
+    selectedItem = obj;
+  });
+  expect(model.list).toStrictEqual(list);
+  expect(model.list.items).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
+});
