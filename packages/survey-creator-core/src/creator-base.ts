@@ -1211,6 +1211,9 @@ export class CreatorBase<T extends SurveyModel>
     };
   }
   protected initDragDrop() {
+    DragDropHelper.restrictDragQuestionBetweenPages =
+      settings.dragDrop.restrictDragQuestionBetweenPages;
+
     this.dragDropHelper = new DragDropHelper(null, this);
 
     this.dragDropHelper.onBeforeDrop.add((sender, options) => {
