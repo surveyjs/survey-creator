@@ -52,6 +52,12 @@ export var settings = {
    */
   autoSave: {
     delay: 500
+  },
+  /**
+   * Drag Drop Settings
+   */
+  dragDrop: {
+    restrictDragQuestionBetweenPages: false
   }
 
   //TODO add maximumColumnCount
