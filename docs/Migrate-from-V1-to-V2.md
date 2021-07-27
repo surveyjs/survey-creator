@@ -90,7 +90,7 @@ And modify them in the following manner by detaching the creation from the rende
 
 ```javascript
 var creator = new SurveyCreator.SurveyCreator(options);
-// Add event handlers, survey JSON and any customization code you need here:
+// Add event handlers, survey JSON and any customization code here:
 //...
 creator.render("creatorElement"); // Finally, render the instance.
 ```
@@ -126,7 +126,8 @@ class SurveyComponent extends Component {
         super();
         const options = { showLogicTab: true };
         this.creator = new SurveyCreator.SurveyCreator(options);
-        // Here go event handlers, survey JSON and any customization code you need.
+        // Add event handlers, survey JSON and any customization code here:
+        //...
     }
     render() {
         return <SurveyCreator.SurveyCreatorComponent creator={this.creator} />;
