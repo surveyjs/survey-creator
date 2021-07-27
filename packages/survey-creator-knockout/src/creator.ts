@@ -9,7 +9,12 @@ import {
   SurveyModel
 } from "survey-core";
 import { Survey, ImplementorBase, Panel } from "survey-knockout-ui";
-import { ICreatorOptions, CreatorBase, getElementWrapperComponentName, isStringEditable } from "@survey/creator";
+import {
+  ICreatorOptions,
+  CreatorBase,
+  getElementWrapperComponentName,
+  isStringEditable
+} from "@survey/creator";
 import { editableStringRendererName } from "./components/string-editor";
 
 if (!!ko.options) {
@@ -20,35 +25,41 @@ class DesignTimeSurveyModel extends Survey {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
-
-  public get hasLogo(): boolean {
-    return true;
-  }
-  public get isLogoBefore(): boolean {
-    return false;
-  }
-  public get isLogoAfter(): boolean {
-    return true;
-  }
   public isPopupEditorContent = false;
   public getElementWrapperComponentName(element: any, reason?: string): string {
-    let componentName = getElementWrapperComponentName(element, reason, this.isPopupEditorContent);
+    let componentName = getElementWrapperComponentName(
+      element,
+      reason,
+      this.isPopupEditorContent
+    );
     if (!componentName && element instanceof Panel) {
       if (element.koElementType() == "survey-panel") {
         return "svc-panel";
       }
     }
-    return componentName || super.getElementWrapperComponentName(element, reason);
+    return (
+      componentName || super.getElementWrapperComponentName(element, reason)
+    );
   }
   public getRowWrapperComponentName(row: QuestionRowModel): string {
     return "svc-row";
   }
   public getElementWrapperComponentData(element: any, reason?: string): any {
-    if(reason === "logo-image") return this.creator;
-    if(reason === "cell" || reason === "column-header" || reason === "row-header") {
-      return { creator: this.creator, element: element, question: element.question, row: element.row, column: element.column };
+    if (reason === "logo-image") return this.creator;
+    if (
+      reason === "cell" ||
+      reason === "column-header" ||
+      reason === "row-header"
+    ) {
+      return {
+        creator: this.creator,
+        element: element,
+        question: element.question,
+        row: element.row,
+        column: element.column
+      };
     }
-    if(!element["parentQuestionValue"]) {
+    if (!element["parentQuestionValue"]) {
       if (element instanceof Question) {
         if (element.koElementType() == "survey-question") {
           return this.creator;
@@ -68,7 +79,10 @@ class DesignTimeSurveyModel extends Survey {
       row
     };
   }
-  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+  public getItemValueWrapperComponentName(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): string {
     if (!!question["parentQuestionValue"] || question.isContentElement) {
       return SurveyModel.TemplateRendererComponentName;
     }
@@ -77,7 +91,10 @@ class DesignTimeSurveyModel extends Survey {
     }
     return "svc-item-value";
   }
-  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
+  public getItemValueWrapperComponentData(
+    item: ItemValue,
+    question: QuestionSelectBase
+  ): any {
     if (!!question["parentQuestionValue"] || question.isContentElement) {
       return item;
     }
@@ -105,7 +122,6 @@ class DesignTimeSurveyModel extends Survey {
 }
 
 export class SurveyCreator extends CreatorBase<Survey> {
-
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
     new ImplementorBase(this.notifier);
@@ -115,7 +131,8 @@ export class SurveyCreator extends CreatorBase<Survey> {
   }
 
   protected createSurveyCore(json: any = {}, reason: string): Survey {
-    if (reason === "designer" || reason === "modal-question-editor") return new DesignTimeSurveyModel(this, json);
+    if (reason === "designer" || reason === "modal-question-editor")
+      return new DesignTimeSurveyModel(this, json);
     return new Survey(json);
   }
 

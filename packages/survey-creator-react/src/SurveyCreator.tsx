@@ -152,16 +152,6 @@ class DesignTimeSurveyModel extends Model {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
-
-  public get hasLogo(): boolean {
-    return true;
-  }
-  public get isLogoBefore(): boolean {
-    return false;
-  }
-  public get isLogoAfter(): boolean {
-    return true;
-  }
   public isPopupEditorContent = false;
   public getRowWrapperComponentName(row: QuestionRowModel): string {
     return "svc-row";
