@@ -114,3 +114,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     );
   }
 }
+
+ReactElementFactory.Instance.registerElement("svc-toolbox", (props) => {
+  return React.createElement(SurveyCreatorToolbox, props);
+});

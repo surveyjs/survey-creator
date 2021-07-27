@@ -11,6 +11,7 @@ import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
 import { ObjectSelectorModel } from "./object-selector";
 import { CreatorBase } from "../creator-base";
+import { settings } from "../settings";
 
 export class PropertyGridViewModel<T extends SurveyModel> extends Base {
   private nextSelectionAction: Action;
@@ -55,36 +56,40 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
     };
 
     var actions: Array<Action> = [];
-    actions.push(new Action({
-      id: "svd-grid-hide",
-      iconName: "icon-hide",
-      component: "sv-action-bar-item",
-      action: () => {
-        this.creator.showPropertyGrid = false;
-      }
-    }));
+    actions.push(
+      new Action({
+        id: "svd-grid-hide",
+        iconName: "icon-hide",
+        component: "sv-action-bar-item",
+        action: () => {
+          this.creator.showPropertyGrid = false;
+        }
+      })
+    );
 
-    this.prevSelectionAction = new Action({
-    id: "svd-grid-history-prev",
-      iconName: "icon-prev",
-      component: "sv-action-bar-item",
-      enabled: this.hasPrev,
-      action: () => {
-        this.selectionController.prev();
-      }
-    });
-    actions.push(this.prevSelectionAction);
+    if (settings.propertyGrid.showNavigationButtons) {
+      this.prevSelectionAction = new Action({
+        id: "svd-grid-history-prev",
+        iconName: "icon-prev",
+        component: "sv-action-bar-item",
+        enabled: this.hasPrev,
+        action: () => {
+          this.selectionController.prev();
+        }
+      });
+      actions.push(this.prevSelectionAction);
 
-    this.nextSelectionAction = new Action({
-      id: "svd-grid-history-next",
-      iconName: "icon-next",
-      component: "sv-action-bar-item",
-      enabled: this.hasNext,
-      action: () => {
-        this.selectionController.next();
-      }
-    });
-    actions.push(this.nextSelectionAction);
+      this.nextSelectionAction = new Action({
+        id: "svd-grid-history-next",
+        iconName: "icon-next",
+        component: "sv-action-bar-item",
+        enabled: this.hasNext,
+        action: () => {
+          this.selectionController.next();
+        }
+      });
+      actions.push(this.nextSelectionAction);
+    }
 
     const selectorModel = new ObjectSelectorModel(
       (obj: Base, reason: string, displayName: string) => {
@@ -134,10 +139,10 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
 
     if (!this.toolbarItems || this.toolbarItems.length <= 0) return;
 
-    if (name === "hasNext") {
+    if (!!this.nextSelectionAction && name === "hasNext") {
       this.nextSelectionAction.enabled = this.hasNext;
     }
-    if (name === "hasPrev") {
+    if (!!this.prevSelectionAction && name === "hasPrev") {
       this.prevSelectionAction.enabled = this.hasPrev;
     }
     if (name === "title") {

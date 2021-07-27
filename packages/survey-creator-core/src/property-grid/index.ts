@@ -336,7 +336,9 @@ export class PropertyGridTitleActionsCreator {
         survey: surveyPropertyEditor.editSurvey,
         model: surveyPropertyEditor.editSurvey
       },
-      () => surveyPropertyEditor.apply()
+      (): boolean => {
+        return surveyPropertyEditor.apply();
+      }
     );
   }
 
@@ -1105,7 +1107,7 @@ export class PropertyGridEditorStringArray extends PropertyGridEditor {
 }
 export class PropertyGridEditorDropdown extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.hasChoices;
+    return this.isLocaleProp(prop) || prop.hasChoices;
   }
   public getJSON(
     obj: Base,
@@ -1134,6 +1136,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     prop: JsonObjectProperty,
     choices: Array<any>
   ): boolean {
+    if (this.isLocaleProp(prop)) return false;
     if (
       !this.canRenderAsButtonGroup ||
       !choices ||
@@ -1153,6 +1156,9 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
+    question.displayValueCallback = (text: string): string => {
+      return !text ? question.optionsCaption : text;
+    };
   }
   onMasterValueChanged(
     obj: Base,
@@ -1170,8 +1176,11 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       return;
     question.choices = this.choicesFromPropChoices(prop, propChoices);
   }
+  private isLocaleProp(prop: JsonObjectProperty): boolean {
+    return prop.name === "locale";
+  }
   private getLocalizedText(prop: JsonObjectProperty, value: string): string {
-    if (prop.name === "locale") {
+    if (this.isLocaleProp(prop)) {
       let text = editorLocalization.getLocaleName(value);
       if (text) return text;
     }

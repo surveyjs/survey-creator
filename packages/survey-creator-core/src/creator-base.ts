@@ -13,7 +13,9 @@ import {
   Serializer,
   AdaptiveActionContainer,
   IAction,
-  Action
+  Action,
+  IPanel,
+  SurveyElement
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -265,6 +267,20 @@ export class CreatorBase<T extends SurveyModel>
    * @see showObjectTitles
    */
   public onGetObjectDisplayName: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Use this event to disable some operations for an element (question/panel).
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object question/panel
+   * <br/> options.allowDelete set it to false to disable deleting the object
+   * <br/> options.allowCopy set it to false to disable copying the object
+   * <br/> options.allowDragging set it to false to disable dragging the element
+   * <br/> options.allowChangeType set it to false to disable changing element type
+   * <br/> options.allowChangeRequired set it to false to disable changing isRequired property
+   */
+  public onElementAllowOperations: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
@@ -1195,6 +1211,9 @@ export class CreatorBase<T extends SurveyModel>
     };
   }
   protected initDragDrop() {
+    DragDropHelper.restrictDragQuestionBetweenPages =
+      settings.dragDrop.restrictDragQuestionBetweenPages;
+
     this.dragDropHelper = new DragDropHelper(null, this);
 
     this.dragDropHelper.onBeforeDrop.add((sender, options) => {
@@ -1203,7 +1222,7 @@ export class CreatorBase<T extends SurveyModel>
 
     this.dragDropHelper.onAfterDrop.add((sender, options) => {
       this.undoRedoManager.stopTransaction();
-      this.selectElement(options.draggedElement);
+      this.selectElement(options.draggedElement, undefined, false);
     });
   }
   private addingObject: Survey.Base;
@@ -1485,12 +1504,12 @@ export class CreatorBase<T extends SurveyModel>
     if (this.survey.pageCount == 0) {
       this.survey.addNewPage();
     }
-    var parent = this.currentPage;
-    var elElement = this.survey.selectedElement;
-    if (elElement && elElement.parent) {
+    var parent: IPanel = this.currentPage;
+    var elElement = this.getSelectedSurveyElement();
+    if (elElement && elElement.parent && elElement["page"] == parent) {
       parent = elElement.parent;
       if (index < 0) {
-        index = parent.elements.indexOf(this.survey.selectedElement);
+        index = parent.elements.indexOf(elElement);
         if (index > -1) index++;
       }
     }
@@ -1656,13 +1675,12 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   protected deleteObjectCore(obj: any) {
-    var objType = SurveyHelper.getObjectType(obj);
-    if (objType == ObjType.Page) {
+    if (obj.isPage) {
       var newPage = this.getNextPage(obj);
       this.survey.removePage(obj);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
-      this.deletePanelOrQuestion(obj, objType);
+      this.deletePanelOrQuestion(obj);
     }
     this.setModified({
       type: "OBJECT_DELETED",
@@ -1728,8 +1746,21 @@ export class CreatorBase<T extends SurveyModel>
     if (oldValue !== element || !!propertyName) {
       this.selectionChanged(this.selectedElement, propertyName, focus);
     }
+    var selEl: any = this.getSelectedSurveyElement();
+    if (oldValue !== element && focus && !!document && !!selEl) {
+      setTimeout(() => {
+        const el = document.getElementById(selEl.id);
+        if (!!el) {
+          el.scrollIntoView({ block: "center" });
+        }
+      }, 100);
+    }
   }
-
+  private getSelectedSurveyElement(): IElement {
+    var sel: any = this.selectedElement;
+    if (!sel || sel.getType() == "survey") return null;
+    return sel.isInteractiveDesignElement && sel.id ? sel : null;
+  }
   private onSelectingElement(val: Base): Base {
     var options = { newSelectedElement: val };
     this.onSelectedElementChanging.fire(this, options);
@@ -1861,6 +1892,7 @@ export class CreatorBase<T extends SurveyModel>
       if (newElement["getType"] === undefined) {
         newElement = this.createNewElement(newElement);
       }
+      this.survey.lazyRendering = false;
       this.doClickQuestionCore(newElement);
       this.selectElement(newElement);
     }
@@ -1923,7 +1955,7 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
-  protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
+  protected deletePanelOrQuestion(obj: Survey.Base): void {
     var parent = obj["parent"];
     var elements = parent.elements;
     var objIndex = elements.indexOf(obj);
@@ -2312,6 +2344,19 @@ export class CreatorBase<T extends SurveyModel>
       obj: element,
       items: items
     });
+  }
+  public getElementAllowOperations(element: SurveyElement): any {
+    var options = {
+      obj: element,
+      element: element,
+      allowDelete: true,
+      allowCopy: true,
+      allowDragging: true,
+      allowChangeType: true,
+      allowChangeRequired: true
+    };
+    this.onElementAllowOperations.fire(this, options);
+    return options;
   }
   public getNextItemValue(question: Survey.QuestionSelectBase) {
     const itemText = Survey.surveyLocalization.getString("choices_Item");

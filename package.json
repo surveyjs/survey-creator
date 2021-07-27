@@ -19,7 +19,7 @@
     },
     "devDependencies": {
         "@types/jest": "^26.0.23",
-        "concurrently": "6.2.0",
+        "concurrently": "^6.2.0",
         "husky": "^4.3.8",
         "lerna": "^3.22.1"
     },

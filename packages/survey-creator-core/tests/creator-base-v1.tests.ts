@@ -357,7 +357,7 @@ test("fast copy tests, set the correct parent", () => {
   var q1 = p1.addNewQuestion("text", "question1");
   var p2 = p1.addNewPanel("panel2");
   var q2 = p2.addNewQuestion("text", "question2");
-  creator.survey.selectedElement = q2;
+  creator.selectElement(q2);
   creator.fastCopyQuestion(q2);
   expect(p2.questions).toHaveLength(2);
   var newQuestion = <QuestionTextModel>p2.questions[1];
@@ -1053,58 +1053,6 @@ test(
   }
 );
 
-test("pagescreator.readOnly", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.readOnly,
-    false,
-    "page editor is not read-only by default"
-  );
-
-  creator.readOnly = true;
-  pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.readOnly,
-    true,
-    "page editor is read-only creator.readOnly"
-  );
-
-  creator.readOnly = false;
-  pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.readOnly,
-    false,
-    "page editor is not read-only again"
-  );
-
-  expect(
-    creator.allowModifyPages,
-    true,
-    "The property is true by default"
-  );
-  var creator = new CreatorTester(null, { allowModifyPages: false });
-  expect(creator.allowModifyPages, false, "The parameter set correctly");
-  pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.readOnly,
-    true,
-    "page editor is read-only allowModifyPages"
-  );
-});
-
 test("PagesEditor change question's page", () => {
   var jsonText = JSON.stringify({
     pages: [
@@ -1142,123 +1090,6 @@ test("PagesEditor change question's page", () => {
   );
   expect(pagescreator.model.selectedPage(), creator.survey.pages[1]);
 });
-
-test("pagescreator.canAddPage", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.canAddPage,
-    true,
-    "page adding is allowed by default"
-  );
-
-  var handler = function (s, o) {
-    if (o.obj.getType() === "page") {
-      o.allowAdd = false;
-    }
-  };
-  creator.onElementAllowOperations.add(handler);
-  expect(pagescreator.model.canAddPage, false, "page adding is disabled");
-  creator.onElementAllowOperations.remove(handler);
-  expect(pagescreator.model.canAddPage, false, "page adding is enabled");
-});
-
-test("pagescreator.canCopyPage", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.canCopyPage,
-    true,
-    "page copying is allowed by default"
-  );
-
-  var handler = function (s, o) {
-    if (o.obj.getType() === "page") {
-      o.allowCopy = false;
-    }
-  };
-  creator.onElementAllowOperations.add(handler);
-  expect(
-    pagescreator.model.canCopyPage,
-    false,
-    "page copying is disabled"
-  );
-  creator.onElementAllowOperations.remove(handler);
-  expect(pagescreator.model.canCopyPage, false, "page copying is enabled");
-});
-
-test("pagescreator.canEditPage", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.canEditPage,
-    true,
-    "page editing is allowed by default"
-  );
-
-  var handler = function (s, o) {
-    if (o.obj.getType() === "page") {
-      o.allowEdit = false;
-    }
-  };
-  creator.onElementAllowOperations.add(handler);
-  expect(
-    pagescreator.model.canEditPage,
-    false,
-    "page editing is disabled"
-  );
-  creator.onElementAllowOperations.remove(handler);
-  expect(pagescreator.model.canEditPage, false, "page editing is enabled");
-});
-
-test("pagescreator.canDeletePage", () => {
-  var creator = new CreatorTester();
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
-  expect(
-    pagescreator.model.canDeletePage,
-    false,
-    "page deleting is disallowed by default"
-  );
-
-  pagescreator.model.addPage();
-
-  expect(
-    pagescreator.model.canDeletePage,
-    true,
-    "page deleting is allowed"
-  );
-
-  var handler = function (s, o) {
-    if (o.obj.getType() === "page") {
-      o.allowDelete = false;
-    }
-  };
-  creator.onElementAllowOperations.add(handler);
-  expect(
-    pagescreator.model.canDeletePage,
-    false,
-    "page deleting is disabled"
-  );
-  creator.onElementAllowOperations.remove(handler);
-  expect(
-    pagescreator.model.canDeletePage,
-    false,
-    "page deleting is enabled"
-  );
-});
-*/
 
 /* TODO refactor
 test("onModified options", function(assert) {
