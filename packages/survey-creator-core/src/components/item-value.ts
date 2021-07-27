@@ -78,7 +78,7 @@ export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: null }) ghostPosition: string;
   private handleDragDropHelperChanges = (sender, options) => {
     if (options.name === "isBottom") {
-      this.ghostPosition = this.dragDropHelper.getItemValueGhostPosition(
+      this.ghostPosition = this.dragDropHelper.getGhostPosition(
         this.item
       );
     }
