@@ -25,7 +25,7 @@ In V2 of SurveyJS Creator, we have made a lot of changes. The most important are
   In V2, they render their contents with the help of our Survey widget instead of using previous redundant custom code.
 
 In fact, we now render all forms in SurveyJS Creator by using our own Survey component that is implemented as SurveyModel in our main library - SurveyJS Library.  
-And since SurveyJS Library already supports different frameworks and has already been thoroughly tested for accessibility and important functional requirements and use-cases, it empowers us to easily support the React framework in V2 (and to provide support for other platforms in the same way in near future). It should be admitted, that this approach exposes some incompatibilities with V1 (for example, in creating adorners and custom property editors). However, we strongly believe that the benefits outweigh the costs.
+And since SurveyJS Library already supports different frameworks and has already been thoroughly tested for accessibility and important functional requirements and use-cases, it empowers us to easily support the React framework in our V2 (and to provide support for other platforms in the same way in the near future). It should be admitted, that this approach exposes some incompatibilities with V1 (for example, in creating adorners and custom property editors). However, we strongly believe that the benefits outweigh the costs.
 
 To facilitate your migration from V1 to V2, we try to log  potential incompatibilities as warnings into Console, when it is possible. A warning names a function or property that does not work in V2 and suggests you to use another approach or parameters. 
 
@@ -90,24 +90,30 @@ And modify them in the following manner by detaching the creation from the rende
 
 ```javascript
 var creator = new SurveyCreator.SurveyCreator(options);
-//Add event handlers, survey JSON and any customization code you need here:
+// Add event handlers, survey JSON and any customization code you need here:
 //...
-creator.render("creatorElement"); //Finally, render the instance
+creator.render("creatorElement"); // Finally, render the instance.
 ```
 
 If you pass a DOM element or an element id into the SurveyCreator constructor as the first parameter, we (in V2) log a warning in the Console and ignore this constructor parameter in code.
 
 
-In most cases, that's all you need to do to continue using the Knockout version in V2. We will discuss advanced changes later.
+In most cases, that's all you need to do to continue using the Knockout version in V2. The additional changes that relate to the advanced functionality of using custom property editors or custom adorners are addressed below.
+
 
 ## To start using React version
 
-We did not have SurveyJS Creator for react framework before. React developers use V1 knockout version as a black box. Now SurveyJS Creator V2 for react and a truly react widget and it should be used a common react widget. It does not mean that all your code that you have created for V1 will go into trash if you are using react in your application. The most code will be still valid, except the code that deals with rendering and some advanced functionality as custom property editors.
+Prior to V2, React developers used our Knockout version (in V1) as a black box. We did not provide a native  SurveyJS Creator component for React framework.
 
-If you migrate your application with SurveyJS Creator from V1 into V2 then you will need to make sure to use the correct packages.
+In V2, the React version of the SurveyJS Creator is a truly React component that should be used as a common React widget.
+It does not mean that if you are using React in your application, all code that you have created for V1 will go into trash.
+The most of code is still valid, with an exception of the code that deals with rendering and some advanced functionality, such as custom property editors.
 
-You will require to install `survey-creator-react`. It depends on `survey-react-ui` and `survey-core` that will be installed as well.
-Your Survey Creator component code can look like this:
+If your application uses SurveyJS Creator and you migrate from V1 to V2, make sure you use correct packages.
+You need to install `survey-creator-react`. It depends on `survey-react-ui` and `survey-core` that will be installed as well.
+
+As a result, your Survey Creator component code can look as follows:
+
 
 ```javascript
 import React, { Component } from "react";
@@ -120,7 +126,7 @@ class SurveyComponent extends Component {
         super();
         const options = { showLogicTab: true };
         this.creator = new SurveyCreator.SurveyCreator(options);
-        //Add event handlers, survey JSON and any customization code you need here
+        // Here go event handlers, survey JSON and any customization code you need.
     }
     render() {
         return <SurveyCreator.SurveyCreatorComponent creator={this.creator} />;
@@ -130,13 +136,18 @@ class SurveyComponent extends Component {
 export default SurveyComponent;
 ```
 
+
+
 ## Custom property editor
 
-We are using SurveyJS Library to render property grid in V2. It means that old code, related in creating custom property editors, that works in V1 will not work in V2 at all. The good news, it becomes easy to set up a new property grid editor in V2. All you need is to tell SurveyJS Creator what question type you want to use for a particular property.
-Here is the simple example:
+In V2, we implement the Properties window in a new manner - we render it using a Survey widget (SurveyModel) from our SurveyJS Library. This means that old code that relates to creating custom property editors and that worked fine in V1 will not work in V2.
+
+The benefit of this change is that V2 makes it easier to set up a new property editor. All you need to do is to tell SurveyJS Creator what question type you want to use for a particular property.
+
+Here is a simple example:
 
 ```javascript
-//Register a new property for all questions
+// Register a new property for all questions.
 Survey.Serializer.addProperty("question", {
     name: "shortname",
     type: "shorttext",
@@ -145,53 +156,54 @@ Survey.Serializer.addProperty("question", {
     visibleIndex: 3
 });
 
-//Register a new property editor for this property type
+// Register a new property editor for the "shorttext" property type
 SurveyCreator.PropertyGridEditorCollection.register({
-    //Returns true for a property with type "shorttext"
+    // Returns true for a property with type "shorttext".
     fit: function (prop) {
         return prop.type === "shorttext";
     },
-    //Returns a typical question JSON. This question will be used to edit this property value
+    // Returns a typical question JSON. This question will be used to edit the property value.
     getJSON: function (obj, prop, options) {
         return { type: "text", maxLength: 5 };
     }
 });
 ```
 
-You can override and use your own property editor for any property you want by returning true in the `fit()` function.
+You can override the default property editor and use your own property editor for any property by returning `true` in the `fit()` function.
 
 ## Custom adorners
 
-We do not use after render technique in SurveyJS Creator V2 and render additional widgets for survey elements on design surface using a platform standard approach. Templates for knockout and react components for react. As result, the old code will not work as well for rendering custom adorners will not work. SurveyJS Creator will simply ignore it.
+We do not use an "after render" technique in the SurveyJS Creator V2 to render additional widgets for survey elements. Now we render them on the design surface using standard platform-dependent approaches: as templates - for Knockout, as React components - for React.
+As a result, the old code used to render custom adorners will not work as well. SurveyJS Creator V2 simply ignores such a code now.
 
-In V2 you can use `onDefineElementMenuItems` event to insert a new action into standard actions. You can modify standard actions as well or modify them. The following code inserts "Start with new line" action before the "delete" action for all questions.
+In V2, use the `onDefineElementMenuItems` event to add a new action to standard actions (adorners). You can also modify standard actions through this event.
+
+The following code inserts a "Start with a new line" action before the "delete" action for all questions.
 
 ```javascript
 creator.onDefineElementMenuItems.add((sender, options) => {
-    //If element doesn't have property define than it is not a question
+    // If an element doesn't have such a property, the element is not a question.
     if (options.obj.startWithNewLine === undefined) return;
     var question = options.obj;
-    //Define a new bar item
+    // Define a new bar item (action).
     var barItem = {
-        //Unique id
-        id: "startWithNewLine",
+        id: "startWithNewLine", // Unique id
         css: () =>
             question.startWithNewLine ? "sv-action-bar-item--secondary" : "",
-        //item text
-        title: "On new line",
-        //Icon to render that depends on a property
+        title: "On new line", // Item text
+        // An icon to render depending on a property's value:
         iconName: () => {
             if (question.startWithNewLine) {
                 return "icon-switchactive_16x16";
             }
             return "icon-switchinactive_16x16";
         },
-        //Action on click
+        // An action to perform on a click:
         action: () => {
             question.startWithNewLine = !question.startWithNewLine;
         }
     };
-    //Find where is the "delete" action
+    // Find the "delete" action's position.
     var index = -1;
     for (var i = 0; i < options.items.length; i++) {
         if (options.items[i].id === "delete") {
@@ -199,7 +211,7 @@ creator.onDefineElementMenuItems.add((sender, options) => {
             break;
         }
     }
-    //Insert before delete action or at the end
+    // Insert a new action before the "delete" action or at the end.
     if (index > -1) {
         options.items.splice(index, 0, barItem);
     } else {
