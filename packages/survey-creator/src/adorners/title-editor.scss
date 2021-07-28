@@ -9,9 +9,18 @@
     visibility: hidden;
   }
 }
-.svd_q_selected .title_editable:hover {
+.svd_q_selected .title_editable:hover,
+.svd_q_selected .description_editable:hover {
   .svda-title-editor-start {
     visibility: visible;
+  }
+}
+
+.svd_surveyjs_designer_container {
+  .title_editable {
+    .sv-title-actions {
+      display: inline-block;
+    }
   }
 }
 

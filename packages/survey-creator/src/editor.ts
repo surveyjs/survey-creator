@@ -36,7 +36,7 @@ import { PagesEditor } from "./pages-editor";
 import { isPropertyVisible } from "./utils/utils";
 import { SurveyObjectProperty } from "./objectProperty";
 import { CreatorBase } from "./creator-base";
-import { IActionBarItem } from "survey-knockout";
+import { IAction } from "survey-knockout";
 import { EditableObject } from "./propertyEditors/editableObject";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
@@ -966,9 +966,9 @@ export class SurveyCreator
   // }
   /**
    * The list of toolbar items. You may add/remove/replace them.
-   * @see IActionBarItem
+   * @see IAction
    */
-  public toolbarItems = ko.observableArray<IActionBarItem>();
+  public toolbarItems = ko.observableArray<IAction>();
   /**
    * Get and set the maximum of copied questions/panels in the toolbox. The default value is 3
    */

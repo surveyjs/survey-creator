@@ -1,13 +1,13 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import { IActionBarItem } from "survey-knockout";
+import { IAction } from "survey-knockout";
 import { CreatorBase } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
 
 /**
  * The Toolbox item description.
  */
-export interface IQuestionToolboxItem extends IActionBarItem {
+export interface IQuestionToolboxItem extends IAction {
   /**
    * A unique name
    */
