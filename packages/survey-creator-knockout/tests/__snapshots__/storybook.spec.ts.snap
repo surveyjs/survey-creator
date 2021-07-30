@@ -142,6 +142,9 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     >
       
     
+      <!-- ko if: creator.showTabs -->
+      
+    
       <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
       <div
         class="svc-tabbed-menu"
@@ -290,7 +293,16 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       <!-- /ko -->
       
     
+      <!-- /ko -->
+      
+    
+      <!-- ko if: creator.showToolbar -->
+      
+    
       <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
+      <!-- /ko -->
+      
+    
       <!-- /ko -->
       
   
