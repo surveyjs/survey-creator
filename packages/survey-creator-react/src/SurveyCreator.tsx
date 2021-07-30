@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { CSSProperties } from "react";
 
 import {
   Base,
@@ -32,7 +31,7 @@ import {
   getElementWrapperComponentName,
   isStringEditable
 } from "@survey/creator";
-import TabbedMenuComponent from "./TabbedMenuComponent";
+import TabbedMenuComponent from "./components/TabbedMenu";
 import { editableStringRendererName } from "./components/StringEditor";
 import { NotifierComponent } from "./components/Notifier";
 
@@ -56,7 +55,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return this.props.creator;
   }
 
-  render() {
+  renderElement() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {

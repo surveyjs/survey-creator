@@ -11,11 +11,11 @@ import {
 } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
-interface ITabbedMenuComponentProps {
+export interface ITabbedMenuComponentProps {
   model: AdaptiveActionContainer<TabbedMenuItem, ITabbedMenuItem>;
 }
 
-class TabbedMenuComponent extends SurveyElementBase<
+export class TabbedMenuComponent extends SurveyElementBase<
   ITabbedMenuComponentProps,
   any
 > {
@@ -91,10 +91,10 @@ class TabbedMenuComponent extends SurveyElementBase<
   }
 }
 
-interface ITabbedMenuItemComponentProps {
+export interface ITabbedMenuItemComponentProps {
   item: Action;
 }
-class TabbedMenuItemComponent extends SurveyElementBase<
+export class TabbedMenuItemComponent extends SurveyElementBase<
   ITabbedMenuItemComponentProps,
   any
 > {
@@ -123,17 +123,6 @@ class TabbedMenuItemComponent extends SurveyElementBase<
         <span className={titleClassName}>{item.title}</span>
       </div>
     );
-    /*
-<div
-  class="svc-tabbed-menu-item"
-  data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
->
-  <span
-    class="svc-text svc-text--normal"
-    data-bind="text: title, css: { 'svc-text--bold': active }"
-  ></span>
-</div>
-     */
   }
 }
 
