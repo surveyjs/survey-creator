@@ -38,28 +38,6 @@ import { NotifierComponent } from "./components/Notifier";
 
 StylesManager.applyTheme("modern");
 
-interface ISurveyCreatorToolBarItemsComponentProps {
-  toolbar: AdaptiveActionContainer;
-}
-
-export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
-  ISurveyCreatorToolBarItemsComponentProps,
-  any
-> {
-  constructor(props: ISurveyCreatorComponentProps) {
-    super(props);
-  }
-  get toolbar(): AdaptiveActionContainer {
-    return this.props.toolbar;
-  }
-  protected getStateElement(): Base {
-    return this.props.toolbar;
-  }
-  protected renderElement(): JSX.Element {
-    return <SurveyActionBar model={this.toolbar}></SurveyActionBar>;
-  }
-}
-
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;
 }
@@ -100,9 +78,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
             <TabbedMenuComponent
               model={creator.tabbedMenu}
             ></TabbedMenuComponent>
-            <SurveyCreatorToolBarItemsComponent
-              toolbar={creator.toolbar}
-            ></SurveyCreatorToolBarItemsComponent>
+            <SurveyActionBar model={creator.toolbar}></SurveyActionBar>
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">
             <div className="svc-creator__content-holder svc-flex-column">
