@@ -84,4 +84,4 @@ Optionally you may use [bootstrap](http://getbootstrap.com), [ace editor](https:
 
 ## License
 
-The Survey Creator (Form Builder) is NOT FREE for commercial using. Please find more about licensing the product [here](http://surveyjs.io/Licenses).
+The Survey Creator (Form Builder) is NOT FREE for commercial using. Please find more about licensing the product [here](http://surveyjs.io/Licenses)..
