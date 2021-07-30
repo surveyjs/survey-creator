@@ -51,7 +51,8 @@ var propertyGridValueJSON = {
       return val;
     };
     const getObjDisplayValue = (obj: Base, question: Question): string => {
-      if (!obj["getDisplayValue"]) return stringifyValue(question.value);
+      if (!obj || !obj["getDisplayValue"])
+        return stringifyValue(question.value);
       var res = !!obj["getDisplayValue"]
         ? obj["getDisplayValue"](true, question.value)
         : question.value;
@@ -172,10 +173,13 @@ export class PropertyGridTriggerValueEditor extends PropertyGridValueEditorBase 
     question: Question,
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
-    if (!obj["setToName"] || !obj["owner"]) return;
-    var setQuestion = obj["owner"].getQuestionByValueName(obj["setToName"]);
+    const trigger = question.obj;
+    if (!trigger["setToName"] || !trigger["owner"]) return;
+    var setQuestion = trigger["owner"].getQuestionByValueName(
+      trigger["setToName"]
+    );
     if (!setQuestion) return;
-    return new TriggerValueEditor(setQuestion, obj, prop.name, options);
+    return new TriggerValueEditor(setQuestion, trigger, prop.name, options);
   }
 }
 

@@ -64,6 +64,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         if (!!panelElement.getQuestionByName(options.name)) {
           obj[options.name] = options.value;
         }
+        options.panel.runCondition(this.editSurvey.getAllValues(), {
+          survey: this.editSurvey
+        });
       }
     });
     this.editSurvey.onDynamicPanelRemoved.add((sender, options) => {
@@ -308,6 +311,10 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private setupElementPanel(panel: PanelModel, logicType: SurveyLogicType) {
     this.titleActionsCreator = null;
     var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+    var elementPanelQuestions = elementPanel.questions;
+    for (var i = 0; i < elementPanelQuestions.length; i++) {
+      elementPanelQuestions[i].clearValue();
+    }
     elementPanel.elements.splice(0, elementPanel.elements.length);
     elementPanel.visible = this.isElementPanelVisible(logicType);
     if (!elementPanel.visible) return;
@@ -347,7 +354,29 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     return panel["panelObj"];
   }
   private setElementPanelObj(panel: PanelModel, obj: Base) {
+    var oldObj = this.getElementPanelObj(panel);
+    if (!!oldObj) {
+      oldObj.onPropertyValueChangedCallback = undefined;
+    }
     panel["panelObj"] = obj;
+    if (!!obj) {
+      obj.onPropertyValueChangedCallback = (
+        name: string,
+        oldValue: any,
+        newValue: any,
+        sender: Base,
+        arrayChanges: any
+      ) => {
+        if (!panel || panel.isDisposed) {
+          oldObj.onPropertyValueChangedCallback = undefined;
+          return;
+        }
+        const q = panel.getQuestionByName(name);
+        if (!!q) {
+          q.value = newValue;
+        }
+      };
+    }
   }
   private createElementPanelObj(
     action: SurveyLogicAction,
