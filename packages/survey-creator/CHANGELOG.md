@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.58](https://github.com/surveyjs/survey-creator/compare/v1.8.57...v1.8.58) (2021-07-28)
+
+
+### Bug Fixes
+
+* Duplicating a page does nothing until the tabs are changed in V2 [#1547](https://github.com/surveyjs/survey-creator/issues/1547) ([897e5f9](https://github.com/surveyjs/survey-creator/commit/897e5f9692375032f46f55456c9195da1016e73e))
+* Toolbox doesn't load in 1.8.57 [#1558](https://github.com/surveyjs/survey-creator/issues/1558) ([bede98a](https://github.com/surveyjs/survey-creator/commit/bede98a629a5442be86ba79218139e9e8f5bbbc3))
+
 ### [1.8.57](https://github.com/surveyjs/survey-creator/compare/v1.8.56...v1.8.57) (2021-07-20)
 
 
