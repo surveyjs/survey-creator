@@ -1,8 +1,12 @@
 <div class="svc-creator__area svc-flex-column">
   <div class="svc-top-bar">
+    <!-- ko if: creator.showTabs -->
     <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
     <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: creator.showToolbar -->
     <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
+    <!-- /ko -->
     <!-- /ko -->
   </div>
   <div class="svc-creator__content-wrapper svc-flex-row">

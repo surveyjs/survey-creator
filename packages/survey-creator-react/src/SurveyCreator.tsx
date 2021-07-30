@@ -27,7 +27,6 @@ import {
   ICreatorOptions,
   CreatorBase,
   ITabbedMenuItem,
-  CreatorToolbarItems,
   getElementWrapperComponentName,
   isStringEditable
 } from "@survey/creator";
@@ -74,10 +73,10 @@ export class SurveyCreatorComponent extends SurveyElementBase<
       <div className="svc-creator">
         <div className="svc-creator__area svc-flex-column">
           <div className="svc-top-bar">
-            <TabbedMenuComponent
+            {(creator.showTabs ? <TabbedMenuComponent
               model={creator.tabbedMenu}
-            ></TabbedMenuComponent>
-            <SurveyActionBar model={creator.toolbar}></SurveyActionBar>
+            ></TabbedMenuComponent> : null)}
+            {(creator.showToolbar ? <SurveyActionBar model={creator.toolbar}></SurveyActionBar> : null)}
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">
             <div className="svc-creator__content-holder svc-flex-column">
