@@ -69,10 +69,6 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   renderTab?: () => any;
 }
 
-export class CreatorToolbarItems extends Base {
-  @propertyArray() items: Array<IAction>;
-}
-
 /**
  * Base class for Survey Creator.
  */
@@ -2378,6 +2374,8 @@ export class CreatorBase<T extends SurveyModel>
       this.tabs.forEach((tab) => (tab.active = this.viewType === tab.id));
     }
   }
+  @property({ defaultValue: settings.layout.showTabs }) showTabs;
+  @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
 }
 
 export class StylesManager {
