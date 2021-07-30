@@ -21,15 +21,14 @@ export class TabDesignerComponent extends SurveyElementBase<
   private get model(): TabDesignerViewModel<SurveyModel> {
     return this.props.data;
   }
+  protected get creator(): CreatorBase<SurveyModel> {
+    return this.model.creator;
+  }
   protected getStateElement(): Base {
     return this.model;
   }
-  renderElement(): JSX.Element {
-    const creator: CreatorBase<SurveyModel> = this.model.creator;
-    const survey: SurveyModel = creator.survey;
-    const designerTabClassName = "svc-tab-designer " + survey.css.root;
-
-    const surveyPages: JSX.Element[] = survey.pages.map((page: PageModel) => {
+  protected renderPages(): JSX.Element[] {
+    const surveyPages: JSX.Element[] = this.creator.survey.pages.map((page: PageModel) => {
       return (
         <div
           className={"svc-page"}
@@ -37,9 +36,9 @@ export class TabDesignerComponent extends SurveyElementBase<
           key={page.id}
         >
           <CreatorSurveyPageComponent
-            survey={survey}
+            survey={this.creator.survey}
             page={page}
-            creator={creator}
+            creator={this.creator}
           ></CreatorSurveyPageComponent>
         </div>
       );
@@ -53,45 +52,50 @@ export class TabDesignerComponent extends SurveyElementBase<
           key={this.model.newPage.id}
         >
           <CreatorSurveyPageComponent
-            survey={survey}
+            survey={this.creator.survey}
             page={this.model.newPage}
-            creator={creator}
+            creator={this.creator}
           ></CreatorSurveyPageComponent>
         </div>
       );
     }
+    return surveyPages;
+  }
+  renderElement(): JSX.Element {
+    const survey: SurveyModel = this.creator.survey;
+    const designerTabClassName = "svc-tab-designer " + survey.css.root;
 
     return (
       <React.Fragment>
         <div className="svc-flex-column">
-          {ReactElementFactory.Instance.createElement('svc-toolbox', { creator: creator })}
+          {ReactElementFactory.Instance.createElement('svc-toolbox', { creator: this.creator })}
         </div>
-        <div className={"svc-tab-designer " + creator.survey.css.root}>
-          <div className={creator.survey.css.container}>
+        <div className={"svc-tab-designer " + survey.css.root}>
+          <div className={survey.css.container}>
             <div
               onClick={function () {
-                creator.selectElement(creator.survey);
+                this.creator.selectElement(survey);
               }}
             >
               <SurveyHeader survey={survey}></SurveyHeader>
             </div>
             <SurveyNavigation
-              survey={creator.survey}
+              survey={survey}
               location="top"
             />
-            {surveyPages}
+            {this.renderPages()}
             <SurveyNavigation
-              survey={creator.survey}
+              survey={survey}
               location="bottom"
-              css={creator.survey.css}
+              css={survey.css}
             />
           </div>
         </div>
         <SurveyPageNavigator
-          creator={creator}
-          pages={creator.pagesController.pages}
+          creator={this.creator}
+          pages={this.creator.pagesController.pages}
         ></SurveyPageNavigator>
-          {ReactElementFactory.Instance.createElement('svc-property-grid', { model: creator })}
+          {ReactElementFactory.Instance.createElement('svc-property-grid', { model: this.creator })}
       </React.Fragment>
     );
   }
