@@ -143,10 +143,166 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       
     
       <!-- ko if: creator.showTabs -->
+      
+    
+      <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
+      <div
+        class="svc-tabbed-menu"
+      >
+        
+  
+        <!-- ko foreach: actions -->
+        
+  
+        <span
+          class="svc-tabbed-menu-item-container"
+          data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+          style="visibility: visible;"
+        >
+          
+    
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <div
+            class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal svc-tabbed-menu-item__text svc-text--bold"
+              data-bind="text: title, css: { 'svc-text--bold': active }"
+            >
+              Survey Designer
+            </span>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+  
+        </span>
+        
+  
+        
+  
+        <span
+          class="svc-tabbed-menu-item-container"
+          data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+          style="visibility: visible;"
+        >
+          
+    
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+              data-bind="text: title, css: { 'svc-text--bold': active }"
+            >
+              Test Survey
+            </span>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+  
+        </span>
+        
+  
+        
+  
+        <span
+          class="svc-tabbed-menu-item-container"
+          data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+          style="visibility: visible;"
+        >
+          
+    
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+              data-bind="text: title, css: { 'svc-text--bold': active }"
+            >
+              JSON Editor
+            </span>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+  
+        </span>
+        
+  
+        
+  
+        <span
+          class="svc-tabbed-menu-item-container"
+          data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+          style="visibility: visible;"
+        >
+          
+    
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+              data-bind="text: title, css: { 'svc-text--bold': active }"
+            >
+              Embed Survey
+            </span>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+  
+        </span>
+        
+  
+        <!-- /ko -->
+        
+
+      </div>
+      
+
+      <!-- /ko -->
+      
+    
       <!-- /ko -->
       
     
       <!-- ko if: creator.showToolbar -->
+      
+    
+      <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
+      <!-- /ko -->
+      
+    
       <!-- /ko -->
       
   

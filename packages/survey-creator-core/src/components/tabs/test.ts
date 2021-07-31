@@ -39,7 +39,6 @@ export class TestSurveyTabViewModel extends Base {
   private languageSelectorAction: Action;
   private testAgainAction: Action;
   private invisibleToggleAction: Action;
-  private surveyValue: SurveyModel;
 
   @property({ defaultValue: true }) isRunning: boolean;
   @property({
@@ -57,10 +56,9 @@ export class TestSurveyTabViewModel extends Base {
         target.simulator.survey = val;
       }
     }
-  })
-  public get survey(): SurveyModel {
-    return this.surveyValue;
-  }
+  });
+  //Should be writable
+  survey: SurveyModel;
   @propertyArray() pageListItems: Array<IAction>;
   @property({
     onSet: (val: PageModel, target: TestSurveyTabViewModel) => {
@@ -136,7 +134,7 @@ export class TestSurveyTabViewModel extends Base {
         delete json.cookieName;
       }
     }
-    this.surveyValue = this.surveyProvider.createSurvey(json || {}, "test");
+    this.survey = this.surveyProvider.createSurvey(json || {}, "test");
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -195,7 +193,6 @@ export class TestSurveyTabViewModel extends Base {
   private updatePageItem(page: PageModel) {
     const item = this.getPageItemByPage(page);
     if (item) {
-      item.visible = page.isVisible;
       item.enabled = page.isVisible;
     }
   }
@@ -212,8 +209,8 @@ export class TestSurveyTabViewModel extends Base {
         id: page.name,
         data: page,
         title: this.surveyProvider.getObjectDisplayName(page, "survey-tester"),
-        visible: page.isVisible,
-        enabled: page.isVisible
+        enabled: page.isVisible,
+        visible: true
       });
     }
     this.pageListItems = pages;
