@@ -39,6 +39,7 @@ export class TestSurveyTabViewModel extends Base {
   private languageSelectorAction: Action;
   private testAgainAction: Action;
   private invisibleToggleAction: Action;
+  private surveyValue: SurveyModel;
 
   @property({ defaultValue: true }) isRunning: boolean;
   @property({
@@ -57,7 +58,9 @@ export class TestSurveyTabViewModel extends Base {
       }
     }
   })
-  survey: SurveyModel;
+  public get survey(): SurveyModel {
+    return this.surveyValue;
+  }
   @propertyArray() pageListItems: Array<IAction>;
   @property({
     onSet: (val: PageModel, target: TestSurveyTabViewModel) => {
@@ -133,7 +136,7 @@ export class TestSurveyTabViewModel extends Base {
         delete json.cookieName;
       }
     }
-    this.survey = this.surveyProvider.createSurvey(json || {}, "test");
+    this.surveyValue = this.surveyProvider.createSurvey(json || {}, "test");
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {

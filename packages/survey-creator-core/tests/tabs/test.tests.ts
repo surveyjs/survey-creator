@@ -141,3 +141,22 @@ test("Show/hide device similator", (): any => {
   expect(similatorAction).toBeTruthy();
   expect(similatorAction.visible).toBeFalsy();
 });
+test("pages, PageListItems, makes items enable/disable", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page3" }
+    ]
+  };
+  var model = getTestModel(creator);
+  expect(model.pageListItems).toHaveLength(3);
+  expect(model.pageListItems[0].enabled).toBeTruthy();
+  expect(model.pageListItems[1].enabled).toBeTruthy();
+  expect(model.pageListItems[2].enabled).toBeFalsy();
+  model.survey.pages[1].visible = false;
+  expect(model.pageListItems[1].enabled).toBeFalsy();
+  model.survey.pages[1].visible = true;
+  expect(model.pageListItems[1].enabled).toBeTruthy();
+});
