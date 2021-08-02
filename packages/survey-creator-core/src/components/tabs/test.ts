@@ -56,8 +56,7 @@ export class TestSurveyTabViewModel extends Base {
         target.simulator.survey = val;
       }
     }
-  });
-  //Should be writable
+  })
   survey: SurveyModel;
   @propertyArray() pageListItems: Array<IAction>;
   @property({
