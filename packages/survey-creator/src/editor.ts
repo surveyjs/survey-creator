@@ -70,7 +70,6 @@ export class SurveyCreator
   private koAllowControlSurveyTitleVisibility: ko.Observable<boolean>;
   private closeModalOutsideValue: "off" | "cancel" | "apply" = "off";
   private pageEditModeValue: "standard" | "single" = "standard";
-  private showDropdownPageSelectorValue: boolean = true;
   private showApplyButtonValue: boolean = true;
   private hideExpressionHeaderValue: ko.Observable<boolean>;
 
@@ -809,14 +808,6 @@ export class SurveyCreator
         this.showJSONEditorTab = false;
       }
     }
-    if (this.options.showPageSelectorInToolbar) {
-      this.showPageSelectorInToolbar = true;
-      this.showDropdownPageSelectorValue = false;
-    }
-    if (typeof options.showDropdownPageSelector !== "undefined") {
-      this.showDropdownPageSelectorValue = options.showDropdownPageSelector;
-    }
-
     this.hideExpressionHeaderValue(options.hideExpressionHeader === true);
 
     this.showToolbox =
@@ -1229,12 +1220,6 @@ export class SurveyCreator
    */
   public get pageEditMode() {
     return this.pageEditModeValue;
-  }
-  /**
-   * Set it to false hide the dropdown page selector in the page editor above the design surface
-   */
-  public get showDropdownPageSelector() {
-    return this.showDropdownPageSelectorValue;
   }
   private _leftContainer: ko.ObservableArray<string>;
   public get leftContainer() {

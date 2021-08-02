@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { CSSProperties } from "react";
 
 import {
   Base,
@@ -28,37 +27,14 @@ import {
   ICreatorOptions,
   CreatorBase,
   ITabbedMenuItem,
-  CreatorToolbarItems,
   getElementWrapperComponentName,
   isStringEditable
 } from "@survey/creator";
-import TabbedMenuComponent from "./TabbedMenuComponent";
+import TabbedMenuComponent from "./components/TabbedMenu";
 import { editableStringRendererName } from "./components/StringEditor";
 import { NotifierComponent } from "./components/Notifier";
 
 StylesManager.applyTheme("modern");
-
-interface ISurveyCreatorToolBarItemsComponentProps {
-  toolbar: AdaptiveActionContainer;
-}
-
-export class SurveyCreatorToolBarItemsComponent extends SurveyElementBase<
-  ISurveyCreatorToolBarItemsComponentProps,
-  any
-> {
-  constructor(props: ISurveyCreatorComponentProps) {
-    super(props);
-  }
-  get toolbar(): AdaptiveActionContainer {
-    return this.props.toolbar;
-  }
-  protected getStateElement(): Base {
-    return this.props.toolbar;
-  }
-  protected renderElement(): JSX.Element {
-    return <SurveyActionBar model={this.toolbar}></SurveyActionBar>;
-  }
-}
 
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;
@@ -78,7 +54,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return this.props.creator;
   }
 
-  render() {
+  renderElement() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
@@ -97,12 +73,10 @@ export class SurveyCreatorComponent extends SurveyElementBase<
       <div className="svc-creator">
         <div className="svc-creator__area svc-flex-column">
           <div className="svc-top-bar">
-            <TabbedMenuComponent
+            {(creator.showTabs ? <TabbedMenuComponent
               model={creator.tabbedMenu}
-            ></TabbedMenuComponent>
-            <SurveyCreatorToolBarItemsComponent
-              toolbar={creator.toolbar}
-            ></SurveyCreatorToolBarItemsComponent>
+            ></TabbedMenuComponent> : null)}
+            {(creator.showToolbar ? <SurveyActionBar model={creator.toolbar}></SurveyActionBar> : null)}
           </div>
           <div className="svc-creator__content-wrapper svc-flex-row">
             <div className="svc-creator__content-holder svc-flex-column">

@@ -18,7 +18,7 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
   }
   protected getSurveyJSON(): any {
     return {
-      elements: [this.getQuestionJSON()],
+      elements: [this.getQuestionJSON()]
     };
   }
   protected getQuestionJSON(): any {

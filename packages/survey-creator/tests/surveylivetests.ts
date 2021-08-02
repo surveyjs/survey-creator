@@ -152,8 +152,8 @@ QUnit.test("Use title for pages", function (assert) {
     "There are two pages in test survey"
   );
   assert.equal(test.koPages().length, 2, "There are two pages in selector");
-  assert.equal(test.koPages()[0].title, "First Page", "Use Page title");
-  assert.equal(test.koPages()[1].title, "My Second Page", "Use Page title");
+  assert.equal(test.koPages()[0].text, "First Page", "Use Page title");
+  assert.equal(test.koPages()[1].text, "My Second Page", "Use Page title");
 });
 function getLiveSurveyByCreator(creator: SurveyCreator): SurveyLiveTester {
   creator.showDesigner();

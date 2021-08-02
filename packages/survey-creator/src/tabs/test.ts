@@ -85,11 +85,7 @@ export class SurveyLiveTester {
         write: (val: any) => this.koActivePage(val),
       }),
       afterRender: this.setPageDisable,
-      items: <any>ko.computed(() =>
-        this.koPages().map((page) => {
-          return { text: page.title, value: page.page };
-        })
-      ),
+      items: <any>ko.computed(() => this.koPages()),
     });
     this.toolbarItems.push({
       id: "svd-test-locale-selector",
@@ -171,7 +167,8 @@ export class SurveyLiveTester {
       var page = this.survey.pages[i];
       pages.push({
         page: page,
-        title: this.onGetObjectDisplayName
+        value: page,
+        text: this.onGetObjectDisplayName
           ? this.onGetObjectDisplayName(page)
           : page.name,
         koVisible: ko.observable(page.isVisible),

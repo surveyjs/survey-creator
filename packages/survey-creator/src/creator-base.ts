@@ -28,6 +28,7 @@ export class CreatorBase<T extends { [index: string]: any }>
   private isRTLValue: boolean = false;
   private haveCommercialLicenseValue = ko.observable(false);
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
+  private showDropdownPageSelectorValue = ko.observable(true);
 
   protected surveyValue = ko.observable<T>();
 
@@ -648,6 +649,13 @@ export class CreatorBase<T extends { [index: string]: any }>
     if (typeof options.allowModifyPages !== "undefined") {
       this.allowModifyPages = options.allowModifyPages;
     }
+    if (this.options.showPageSelectorInToolbar) {
+      this.showPageSelectorInToolbar = true;
+      this.showDropdownPageSelectorValue(false);
+    }
+    if (typeof options.showDropdownPageSelector !== "undefined") {
+      this.showDropdownPageSelectorValue(options.showDropdownPageSelector);
+    }
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
@@ -796,7 +804,12 @@ export class CreatorBase<T extends { [index: string]: any }>
       this.initSurveyWithJSON(val, true);
     }
   }
-
+  /**
+   * Set it to false hide the dropdown page selector in the page editor above the design surface
+   */
+  public get showDropdownPageSelector() {
+    return this.showDropdownPageSelectorValue();
+  }
   protected doClickQuestionCore(
     element: Survey.IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX"

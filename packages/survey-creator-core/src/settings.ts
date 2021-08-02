@@ -58,6 +58,13 @@ export var settings = {
    */
   dragDrop: {
     restrictDragQuestionBetweenPages: false
+  },
+  /**
+   * Creator layout settings
+   */
+  layout: {
+    showTabs: true,
+    showToolbar: true
   }
 
   //TODO add maximumColumnCount

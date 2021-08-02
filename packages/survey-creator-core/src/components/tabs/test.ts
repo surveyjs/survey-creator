@@ -192,7 +192,6 @@ export class TestSurveyTabViewModel extends Base {
   private updatePageItem(page: PageModel) {
     const item = this.getPageItemByPage(page);
     if (item) {
-      item.visible = page.isVisible;
       item.enabled = page.isVisible;
     }
   }
@@ -209,8 +208,8 @@ export class TestSurveyTabViewModel extends Base {
         id: page.name,
         data: page,
         title: this.surveyProvider.getObjectDisplayName(page, "survey-tester"),
-        visible: page.isVisible,
-        enabled: page.isVisible
+        enabled: page.isVisible,
+        visible: true
       });
     }
     this.pageListItems = pages;
