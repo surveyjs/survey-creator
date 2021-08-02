@@ -26,10 +26,10 @@
 }
 
 .sd-question__header--location--left {
-  float: left;
+  display: inline-block;
   width: auto;
 }
 
 .sd-question__content--left {
-  overflow: hidden;
+  display: inline-block;
 }
