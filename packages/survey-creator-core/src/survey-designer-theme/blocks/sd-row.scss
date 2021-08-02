@@ -6,6 +6,11 @@
   box-sizing: border-box;
   margin-top: 16px;
 }
+
+.sv-property-editor.sv-popup--modal .sd-row {
+  flex-wrap: nowrap;
+}
+
 .sd-row__panel{
   box-sizing: border-box;
   width: calc(100% - 40px);
