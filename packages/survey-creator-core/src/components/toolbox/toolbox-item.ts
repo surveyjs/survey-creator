@@ -1,7 +1,7 @@
 import { Base, SurveyModel } from "survey-core";
 import { IQuestionToolboxItem } from "../../toolbox";
 import { CreatorBase } from "../../creator-base";
-import { DragDropChoices } from "survey-core";
+import { DragDropSurveyElements } from "survey-core";
 
 export class ToolboxItemViewModel extends Base {
   constructor(
@@ -46,8 +46,8 @@ export class ToolboxItemViewModel extends Base {
     return true;
   };
 
-  private get dragDropHelper(): DragDropChoices {
-    return this.creator.dragDropChoices;
+  private get dragDropHelper(): DragDropSurveyElements {
+    return this.creator.dragDropSurveyElements;
   }
 
   // see https://stackoverflow.com/questions/6042202/how-to-distinguish-mouse-click-and-drag

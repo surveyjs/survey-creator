@@ -16,9 +16,9 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 test("Drag Drop Toolbox Item and Empty Page", async (t) => {
     const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
-    const EmptyPage = Selector("[data-svc-drop-target-element-name='page1']");
+    const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
     const newGhostPagePage = Selector(
-        "[data-svc-drop-target-element-name='newGhostPage']"
+        "[data-sv-drop-target-survey-element='newGhostPage']"
     );
 
     await t.hover(RatingToolboxItem);
@@ -59,11 +59,11 @@ test.skip("Drag Drop Question", async (t) => {
     await setJSON(json);
 
     const questionName = "rating2";
-    const Rating1 = Selector(`[data-svc-drop-target-element-name="rating1"]`);
+    const Rating1 = Selector(`[data-sv-drop-target-survey-element="rating1"]`);
     const Rating2 = Selector(
-        `[data-svc-drop-target-element-name=${questionName}]`
+        `[data-sv-drop-target-survey-element=${questionName}]`
     );
-    const Rating3 = Selector(`[data-svc-drop-target-element-name="rating3"]`);
+    const Rating3 = Selector(`[data-sv-drop-target-survey-element="rating3"]`);
     const DragZoneRating2 = Rating2.find(".svc-question__drag-element");
 
     await t.hover(Rating2, { speed: 0.5 });
@@ -107,7 +107,7 @@ test.skip("Drag Drop to Panel", async (t) => {
     };
     await setJSON(json);
 
-    const Panel = Selector(`[data-svc-drop-target-element-name="panel1"]`);
+    const Panel = Selector(`[data-sv-drop-target-survey-element="panel1"]`);
     const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
 
     await t.hover(RatingToolboxItem, { speed: 0.5 });
@@ -134,7 +134,7 @@ test.skip("Drag Drop to Panel", async (t) => {
     });
 
     const Question3 = Selector(
-        `[data-svc-drop-target-element-name="question3"]`
+        `[data-sv-drop-target-survey-element="question3"]`
     );
 
     await t.hover(RatingToolboxItem, { speed: 0.5 });
@@ -195,9 +195,9 @@ test("Drag Drop ItemValue (choices)", async (t) => {
     await setJSON(json);
 
     const Question1 = Selector(`[name="question1"]`);
-    const Item1 = Selector(`[data-svc-drop-target-item-value="item1"]`);
-    const Item2 = Selector(`[data-svc-drop-target-item-value="item2"]`);
-    const Item3 = Selector(`[data-svc-drop-target-item-value="item3"]`);
+    const Item1 = Selector(`[data-sv-drop-target-item-value="item1"]`);
+    const Item2 = Selector(`[data-sv-drop-target-item-value="item2"]`);
+    const Item3 = Selector(`[data-sv-drop-target-item-value="item3"]`);
     const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
 
     await t.click(Question1, { speed: 0.5 });
@@ -256,10 +256,10 @@ test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
     await setJSON(json);
 
     const Question1 = Selector(
-        `[data-svc-drop-target-element-name="question1"]`
+        `[data-sv-drop-target-survey-element="question1"]`
     );
     const Question3 = Selector(
-        `[data-svc-drop-target-element-name="question3"]`
+        `[data-sv-drop-target-survey-element="question3"]`
     );
     const DragZoneQuestion1 = Question1.find(".svc-question__drag-element");
 

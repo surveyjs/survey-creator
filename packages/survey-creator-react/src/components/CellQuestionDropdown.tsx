@@ -2,10 +2,7 @@ import { QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, ItemValue } from "survey-core";
-import {
-  ReactElementFactory,
-  SurveyElementBase,
-} from "survey-react-ui";
+import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { QuestionAdornerComponentProps } from "./Question";
 
 export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
@@ -33,14 +30,17 @@ export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div
-          data-svc-drop-target-element-name={this.model.surveyElement.name}
+          data-sv-drop-target-survey-element={this.model.surveyElement.name}
           className={"svc-question__adorner"}
         >
           <div
-            className={" svc-question__content--selected-no-border svc-question__content"}
-            onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
+            className={
+              " svc-question__content--selected-no-border svc-question__content"
+            }
+            onClick={(e) =>
+              this.model.select(this.model, new ReactMouseEvent(e))
+            }
           >
-
             {this.props.element}
 
             <div className="svc-question__dropdown-choices">
@@ -68,10 +68,9 @@ export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
                 </div>
               ))}
             </div>
-
           </div>
         </div>
-      </React.Fragment >
+      </React.Fragment>
     );
   }
 }

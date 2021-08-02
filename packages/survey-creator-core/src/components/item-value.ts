@@ -92,7 +92,7 @@ export class ItemValueWrapperViewModel extends Base {
     );
   };
   startDragItemValue(event: PointerEvent) {
-    this.dragDropHelper.startDrag(event, this.question, this.item);
+    this.dragDropHelper.startDrag(event, this.item, this.question,);
   }
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;

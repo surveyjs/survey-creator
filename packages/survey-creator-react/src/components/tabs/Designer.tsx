@@ -28,27 +28,29 @@ export class TabDesignerComponent extends SurveyElementBase<
     return this.model;
   }
   protected renderPages(): JSX.Element[] {
-    const surveyPages: JSX.Element[] = this.creator.survey.pages.map((page: PageModel) => {
-      return (
-        <div
-          className={"svc-page"}
-          data-svc-drop-target-element-name={page.name}
-          key={page.id}
-        >
-          <CreatorSurveyPageComponent
-            survey={this.creator.survey}
-            page={page}
-            creator={this.creator}
-          ></CreatorSurveyPageComponent>
-        </div>
-      );
-    });
+    const surveyPages: JSX.Element[] = this.creator.survey.pages.map(
+      (page: PageModel) => {
+        return (
+          <div
+            className={"svc-page"}
+            data-sv-drop-target-survey-element={page.name}
+            key={page.id}
+          >
+            <CreatorSurveyPageComponent
+              survey={this.creator.survey}
+              page={page}
+              creator={this.creator}
+            ></CreatorSurveyPageComponent>
+          </div>
+        );
+      }
+    );
 
     if (this.model.showNewPage) {
       surveyPages.push(
         <div
           className={"svc-page"}
-          data-svc-drop-target-element-name={"newGhostPage"}
+          data-sv-drop-target-survey-element={"newGhostPage"}
           key={this.model.newPage.id}
         >
           <CreatorSurveyPageComponent
@@ -68,7 +70,9 @@ export class TabDesignerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div className="svc-flex-column">
-          {ReactElementFactory.Instance.createElement('svc-toolbox', { creator: this.creator })}
+          {ReactElementFactory.Instance.createElement("svc-toolbox", {
+            creator: this.creator
+          })}
         </div>
         <div className={"svc-tab-designer " + survey.css.root}>
           <div className={survey.css.container}>
@@ -79,10 +83,7 @@ export class TabDesignerComponent extends SurveyElementBase<
             >
               <SurveyHeader survey={survey}></SurveyHeader>
             </div>
-            <SurveyNavigation
-              survey={survey}
-              location="top"
-            />
+            <SurveyNavigation survey={survey} location="top" />
             {this.renderPages()}
             <SurveyNavigation
               survey={survey}
@@ -95,7 +96,9 @@ export class TabDesignerComponent extends SurveyElementBase<
           creator={this.creator}
           pages={this.creator.pagesController.pages}
         ></SurveyPageNavigator>
-          {ReactElementFactory.Instance.createElement('svc-property-grid', { model: this.creator })}
+        {ReactElementFactory.Instance.createElement("svc-property-grid", {
+          model: this.creator
+        })}
       </React.Fragment>
     );
   }
