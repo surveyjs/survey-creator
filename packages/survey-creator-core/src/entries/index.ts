@@ -71,6 +71,7 @@ import "../utils/layout.scss";
 import "../localization/danish";
 import "../localization/french";
 import "../localization/german";
+import "../localization/finnish";
 import "../localization/italian";
 import "../localization/indonesian";
 import "../localization/korean";

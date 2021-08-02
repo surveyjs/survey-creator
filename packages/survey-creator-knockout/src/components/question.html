@@ -2,17 +2,19 @@
   class="svc-question__adorner"
   data-bind="attr: { 'data-svc-drop-target-element-name': surveyElement.name }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
 >
+  <!-- ko if: question.isInteractiveDesignElement -->
   <div
     class="svc-question__content"
     data-bind="click: koSelect, clickBubble: false, css: css()"
   >
-    <div class="svc-question__drag-area">
+    <div class="svc-question__drag-area" data-bind="visible:allowDragging">
       <div
         class="svc-question__drag-element"
         data-bind="event: {pointerdown: (model, event)=>{startDragSurveyElement(event)}}"
       ></div>
     </div>
-
+    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
+    <!-- /ko -->
     <!-- ko if: isEmptyElement -->
     <div class="svc-panel__placeholder_frame">
       <div
@@ -22,7 +24,8 @@
     </div>
     <!-- /ko -->
 
-    <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
+    <!-- ko if: adornerComponent -->
+    <!-- ko component: { name: adornerComponent, params: { model: $data } } --><!-- /ko -->
     <!-- /ko -->
 
     <div class="svc-question__content-actions">
@@ -30,4 +33,14 @@
       <!-- /ko -->
     </div>
   </div>
+  <!-- /ko -->
+  <!-- ko ifnot: question.isInteractiveDesignElement -->
+  <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
+  <!-- /ko -->
+  <!-- ko if: isEmptyElement -->
+  <div class="svc-panel__placeholder_frame">
+    <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
 </div>

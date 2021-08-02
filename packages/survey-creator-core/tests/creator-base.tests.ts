@@ -11,6 +11,7 @@ import {
   QuestionDropdownModel
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
+import { QuestionAdornerViewModel } from "../src/components/question";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
 import { TabTestPlugin } from "../src/components/tabs/test";
@@ -71,6 +72,25 @@ test("Click on toolbox on empty survey", (): any => {
   expect(creator.survey.pages[0].elements).toHaveLength(1);
   expect(creator.selectedElementName).toEqual("question1");
   expect(creator.selectedElement.getType()).toEqual("text");
+});
+test("Click on toolbox and cancel survey.lazyRendering", (): any => {
+  var creator = new CreatorTester();
+  expect(creator.survey.isLazyRendering).toEqual(true);
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.survey.isLazyRendering).toEqual(false);
+});
+test("Click on toolbox and insert into correct index", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text", name: "question2" }
+    ]
+  };
+  creator.selectElement(creator.survey.getQuestionByName("question1"));
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toEqual("question3");
+  expect(creator.survey.currentPage.elements[1].name).toEqual("question3");
 });
 test("Update JSON before drag&drop", (): any => {
   var creator = new CreatorTester();
@@ -419,12 +439,12 @@ test("Create new page with empty survey", (): any => {
 test("Create new page on changing title/description in ghost", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
-      elements: [
-        {
-          type: "text",
-          name: "q1"
-        }
-      ]
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
   };
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
@@ -1035,4 +1055,97 @@ test("Show survey in property grid on deleting last page", (): any => {
   expect(creator.selectedElementName).toEqual("page2");
   creator.deleteCurrentElement();
   expect(creator.selectedElementName).toEqual("survey");
+});
+test("Test TabDesignerViewModel.pageCount - reactive", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model.pageCount).toEqual(1);
+  creator.copyPage(creator.survey.pages[0]);
+  expect(designerPlugin.model.pageCount).toEqual(2);
+  creator.deleteElement(creator.survey.pages[1]);
+  expect(designerPlugin.model.pageCount).toEqual(1);
+});
+test("PageViewModel and onElementAllowOperations", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.survey.addNewPage("page2");
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (options.obj.isPage) {
+      options.allowDelete = sender.survey.pageCount > 1;
+    }
+  });
+  var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  expect(pageModel.getActionById("delete").visible).toBeTruthy();
+  creator.selectElement(creator.survey.pages[1]);
+  creator.deleteCurrentElement();
+  expect(creator.selectedElementName).toEqual("page1");
+  expect(pageModel.getActionById("delete").visible).toBeFalsy();
+  var pageModel2 = new PageViewModel(creator, creator.survey.pages[0]);
+  expect(pageModel2.getActionById("delete").visible).toBeFalsy();
+});
+test("PageViewModel and creator readOnly", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.readOnly = true;
+  creator.selectElement(creator.survey.pages[0]);
+  var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  expect(pageModel.getActionById("delete").visible).toBeFalsy();
+  expect(pageModel.getActionById("duplicate").visible).toBeFalsy();
+  expect(pageModel.allowDragging).toBeFalsy();
+});
+test("PageViewModel, actions and isGhost", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  var pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  expect(pageModel.isGhost).toBeTruthy();
+  expect(pageModel.getActionById("delete").visible).toBeFalsy();
+  expect(pageModel.getActionById("duplicate").visible).toBeFalsy();
+  expect(pageModel.allowDragging).toBeFalsy();
+});
+test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "comment", name: "q2" }
+    ]
+  };
+  creator.survey.addNewPage("page2");
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (options.obj.isQuestion) {
+      options.allowChangeType = options.obj.getType() !== "comment";
+      options.allowChangeRequired = options.obj.getType() !== "text";
+    }
+  });
+  var q1Model = new QuestionAdornerViewModel(
+    creator,
+    creator.survey.getAllQuestions()[0],
+    undefined
+  );
+  var q2Model = new QuestionAdornerViewModel(
+    creator,
+    creator.survey.getAllQuestions()[1],
+    undefined
+  );
+  creator.selectElement(q1Model.surveyElement);
+  expect(q1Model.getActionById("convertTo").visible).toBeTruthy();
+  expect(q1Model.getActionById("isrequired").visible).toBeFalsy();
+  creator.selectElement(q2Model.surveyElement);
+  expect(q2Model.getActionById("convertTo").visible).toBeFalsy();
+  expect(q2Model.getActionById("isrequired").visible).toBeTruthy();
 });

@@ -1,5 +1,5 @@
 {
-  "version": "1.8.56",
+  "version": "1.8.58",
   "name": "survey-creator",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -29,7 +29,7 @@
     "papaparse": "^5.2.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
-    "survey-knockout": "^1.8.46"
+    "survey-knockout": "^1.8.57"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",

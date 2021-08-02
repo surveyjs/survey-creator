@@ -5,7 +5,7 @@ import { getLocString } from "../editorLocalization";
 import { SurveyCreator } from "../editor";
 
 import "./json-editor.scss";
-import { IActionBarItem } from "survey-knockout";
+import { IAction } from "survey-knockout";
 var templateHtml = require("./json-editor.html");
 
 export class SurveyJSONEditor {
@@ -25,9 +25,9 @@ export class SurveyJSONEditor {
 
   /**
    * The list of toolbar items. You may add/remove/replace them.
-   * @see IActionBarItem
+   * @see IAction
    */
-  public toolbarItems = ko.observableArray<IActionBarItem>();
+  public toolbarItems = ko.observableArray<IAction>();
 
   constructor() {
     this.koText = ko.observable("");
@@ -42,7 +42,7 @@ export class SurveyJSONEditor {
     if (!this.hasAceEditor) return;
     if (!SurveyJSONEditor.showToolbar) return;
     const focusEditor = () => setTimeout(() => this.aceEditor.focus(), 1);
-    const items: Array<IActionBarItem> = [];
+    const items: Array<IAction> = [];
     items.push({
       id: "svd-json-editor-undo",
       iconName: "icon-actionundo",
@@ -144,7 +144,8 @@ export class SurveyJSONEditor {
       self.isJSONChanged = true;
     });
     this.aceEditor.getSession().setUseWorker(true);
-    SurveyTextWorker.newLineChar = this.aceEditor.session.doc.getNewLineCharacter();
+    SurveyTextWorker.newLineChar =
+      this.aceEditor.session.doc.getNewLineCharacter();
     this.addToolbarItems();
   }
 

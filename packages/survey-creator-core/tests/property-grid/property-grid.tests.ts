@@ -28,7 +28,8 @@ import {
   QuestionMatrixDropdownModel,
   IAction,
   QuestionRatingModel,
-  QuestionCustomModel
+  QuestionCustomModel,
+  surveyLocalization
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -153,6 +154,23 @@ test("dropdown property editor localization", (): any => {
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
   expect(localeQuestion.showOptionsCaption).toBeTruthy();
   expect(localeQuestion.optionsCaption).toEqual("Default (english)");
+  expect(localeQuestion.displayValue).toEqual("Default (english)");
+});
+test("dropdown property editor localization & empty supportedLocales", (): any => {
+  var oldSupportedLocales = surveyLocalization.supportedLocales;
+  surveyLocalization.supportedLocales = ["en"];
+
+  var survey = new SurveyModel();
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var localeQuestion = <QuestionDropdownModel>(
+    propertyGrid.survey.getQuestionByName("locale")
+  );
+  expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
+  expect(localeQuestion.choices).toHaveLength(0);
+  expect(localeQuestion.showOptionsCaption).toBeTruthy();
+  expect(localeQuestion.optionsCaption).toEqual("Default (english)");
+  expect(localeQuestion.displayValue).toEqual("Default (english)");
+  surveyLocalization.supportedLocales = oldSupportedLocales;
 });
 
 test("settings.propertyGrid.useButtonGroup", (): any => {
@@ -1554,6 +1572,7 @@ test("Create setvalue trigger", () => {
       { type: "text", name: "q2" }
     ]
   });
+  survey.setDesignMode(true);
   var propertyGrid = new PropertyGridModelTester(survey);
   var triggersQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("triggers")
@@ -1576,8 +1595,22 @@ test("Create setvalue trigger", () => {
   expect(setValueQuestion.isVisible).toBeTruthy();
   var actions = setValueQuestion.getTitleActions();
   expect(actions).toHaveLength(2);
-  actions[1].action();
-  setValueQuestion.value = 2;
+
+  var setValuePropEditor = PropertyGridEditorCollection.getEditor(
+    setValueQuestion.property
+  );
+  expect(setValuePropEditor).toBeTruthy();
+  var setupValueEditor = setValuePropEditor.createPropertyEditorSetup(
+    survey,
+    setValueQuestion.property,
+    setValueQuestion,
+    propertyGrid.options
+  );
+  expect(setupValueEditor).toBeTruthy();
+  var editorSetValueQuestion = setupValueEditor.editSurvey.getAllQuestions()[0];
+  editorSetValueQuestion.value = 2;
+  setupValueEditor.apply();
+  expect(setValueQuestion.value).toEqual(2);
   expect(setValueQuestion.contentQuestion.html).toEqual("2");
   expect(survey.triggers).toHaveLength(1);
   var trigger = <SurveyTriggerSetValue>survey.triggers[0];
@@ -1588,6 +1621,12 @@ test("Create setvalue trigger", () => {
   expect(trigger.setValue).toBeFalsy();
   expect(setValueQuestion.value).toBeFalsy();
   expect(setValueQuestion.contentQuestion.html).toEqual("Value is empty");
+  setValueQuestion.value = 3;
+  expect(trigger.setValue).toEqual(3);
+  setToNameQuestion.value = "q2";
+  expect(trigger.setToName).toEqual("q2");
+  expect(trigger.setValue).toBeFalsy();
+  expect(setValueQuestion.value).toBeFalsy();
 });
 test("Support maximumColumnsCount option", () => {
   var question = new QuestionMatrixDynamicModel("q1");

@@ -12,7 +12,7 @@ import {
 interface IPropertyGridComponentProps {
   model: CreatorBase<SurveyModel>;
 }
-class PropertyGridComponent extends SurveyElementBase<
+export class PropertyGridComponent extends SurveyElementBase<
   IPropertyGridComponentProps,
   any
 > {

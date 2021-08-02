@@ -142,6 +142,9 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     >
       
     
+      <!-- ko if: creator.showTabs -->
+      
+    
       <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
       <div
         class="svc-tabbed-menu"
@@ -154,12 +157,127 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
         <span
           class="svc-tabbed-menu-item-container"
           data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+          style="visibility: visible;"
         >
           
     
           <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <div
+            class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal svc-tabbed-menu-item__text svc-text--bold"
+              data-bind="text: title, css: { 'svc-text--bold': active }"
+            >
+              Survey Designer
+            </span>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+  
+        </span>
+        
+  
+        
+  
+        <span
+          class="svc-tabbed-menu-item-container"
+          data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+          style="visibility: visible;"
+        >
           
     
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+              data-bind="text: title, css: { 'svc-text--bold': active }"
+            >
+              Test Survey
+            </span>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+  
+        </span>
+        
+  
+        
+  
+        <span
+          class="svc-tabbed-menu-item-container"
+          data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+          style="visibility: visible;"
+        >
+          
+    
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+              data-bind="text: title, css: { 'svc-text--bold': active }"
+            >
+              JSON Editor
+            </span>
+            
+
+          </div>
+          
+
+          <!-- /ko -->
+          
+  
+        </span>
+        
+  
+        
+  
+        <span
+          class="svc-tabbed-menu-item-container"
+          data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
+          style="visibility: visible;"
+        >
+          
+    
+          <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+          <div
+            class="svc-tabbed-menu-item"
+            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+          >
+            
+  
+            <span
+              class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+              data-bind="text: title, css: { 'svc-text--bold': active }"
+            >
+              Embed Survey
+            </span>
+            
+
+          </div>
+          
+
           <!-- /ko -->
           
   
@@ -175,7 +293,16 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
       <!-- /ko -->
       
     
+      <!-- /ko -->
+      
+    
+      <!-- ko if: creator.showToolbar -->
+      
+    
       <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
+      <!-- /ko -->
+      
+    
       <!-- /ko -->
       
   
@@ -221,83 +348,6 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                 
     
                 <!-- ko ifnot: $data.toolbox.isCompact || categories().length == 1 -->
-                
-    
-                <!-- ko foreach: categories -->
-                
-    
-                <div
-                  class="svc-toolbox__category"
-                >
-                  
-      
-                  <!-- ko if: $parent.categories().length &gt; 1 -->
-                  
-      
-                  <div
-                    class="svc-toolbox__category-header"
-                    data-bind="click: toggleState"
-                  >
-                    
-        
-                    <span
-                      class="svc-toolbox__category-title"
-                      data-bind="text: name"
-                    />
-                    
-        
-                    <div
-                      class="svc-toolbox__category-header__controls"
-                    >
-                      
-          
-                      <sv-svg-icon
-                        class="svc-toolbox__category-header__button svc-string-editor__button--expand"
-                        data-bind="visible: collapsed"
-                        params="iconName: 'icon-expand', size: 16"
-                      />
-                      
-          
-                      <sv-svg-icon
-                        class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
-                        data-bind="visible: !collapsed"
-                        params="iconName: 'icon-collapse', size: 16"
-                      />
-                      
-        
-                    </div>
-                    
-      
-                  </div>
-                  
-      
-                  <!-- /ko -->
-                  
-      
-                  <!-- ko ifnot: collapsed -->
-                  
-      
-                  <!-- ko foreach: items -->
-                  
-        
-                  <!-- ko component: { name: $data.component || 'svc-toolbox-tool', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
-                  
-        
-                  <!-- /ko -->
-                  
-      
-                  <!-- /ko -->
-                  
-      
-                  <!-- /ko -->
-                  
-    
-                </div>
-                
-    
-                <!-- /ko -->
-                
-    
                 <!-- /ko -->
                 
 
@@ -314,8 +364,1320 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                   
       
                   <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Single Input toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-text"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Single Input"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Single Input
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
                   
       
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Checkbox toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-checkbox"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Checkbox"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Checkbox
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Radiogroup toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-radiogroup"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Radiogroup"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Radiogroup
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Dropdown toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-dropdown"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Dropdown"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Dropdown
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Comment toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-comment"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Comment"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Comment
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Rating toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-rating"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Rating"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Rating
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Ranking toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-ranking"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Ranking"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Ranking
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Image picker toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-imagepicker"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Image picker"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Image picker
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Boolean toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-boolean"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Boolean"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Boolean
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Image toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-image"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Image"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Image
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Html toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-html"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Html"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Html
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Signature pad toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-signaturepad"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Signature pad"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Signature pad
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Expression (read-only) toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-expression"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Expression (read-only)"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Expression (read-only)
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="File toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-file"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="File"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        File
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Matrix (single choice) toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-matrix"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Matrix (single choice)"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Matrix (single choice)
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Matrix (multiple choice) toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-matrixdropdown"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Matrix (multiple choice)"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Matrix (multiple choice)
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Matrix (dynamic rows) toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-matrixdynamic"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Matrix (dynamic rows)"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Matrix (dynamic rows)
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Multiple Text toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-multipletext"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Multiple Text"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Multiple Text
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Panel toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-panel"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Panel"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Panel
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
+                      aria-label="Panel (dynamic panels) toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-paneldynamic"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      role="button"
+                      tabindex="0"
+                      title="Panel (dynamic panels)"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        Panel (dynamic panels)
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
                   <!-- /ko -->
                   
       

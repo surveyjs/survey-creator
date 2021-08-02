@@ -219,7 +219,7 @@ export class SurveyHelper {
   private static deleteConditionProperties(json: any) {
     delete json["visible"];
     delete json["visibleIf"];
-    delete json["enable"];
+    delete json["readOnly"];
     delete json["enableIf"];
     delete json["valueName"];
     delete json["choicesVisibleIf"];

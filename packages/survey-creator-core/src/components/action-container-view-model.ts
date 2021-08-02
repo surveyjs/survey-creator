@@ -3,53 +3,100 @@ import {
   AdaptiveActionContainer,
   Action,
   SurveyModel,
-  SurveyElement
+  SurveyElement,
+  property
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 
 export class ActionContainerViewModel<T extends SurveyModel> extends Base {
-  public actionContainer: AdaptiveActionContainer =
-    new AdaptiveActionContainer();
+  public actionContainer: AdaptiveActionContainer;
+  @property({ defaultValue: true }) allowDragging: boolean;
+  private selectedPropPageFunc: (sender: Base, options: any) => void;
 
-  constructor(public creator: CreatorBase<T>, public surveyElement: SurveyElement) {
+  constructor(
+    public creator: CreatorBase<T>,
+    public surveyElement: SurveyElement
+  ) {
     super();
-  }
-  protected getContextActions(): Array<Action> {
-    if (this.creator.readOnly) return [];
-
-    let element = this.surveyElement;
-    let opts: any = element["allowingOptions"];
-    if (!opts) opts = {};
-    const items: Array<Action> = [];
-
-    if (opts.allowCopy === undefined || opts.allowCopy) {
-      items.push(
-        new Action({
-          id: "duplicate",
-          title: this.creator.getLocString("survey.duplicate"),
-          visibleIndex: 10,
-          action: () => {
-            this.duplicate();
-          }
-        })
-      );
+    this.selectedPropPageFunc = (sender: Base, options: any) => {
+      if (options.name === "isSelectedInDesigner") {
+        this.onElementSelectedChanged(options.newValue);
+      }
+    };
+    this.surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+    this.actionContainer = new AdaptiveActionContainer();
+    var actions: Array<Action> = [];
+    this.buildActions(actions);
+    this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
+    this.actionContainer.setItems(actions);
+    if (this.creator.isElementSelected(this.surveyElement)) {
+      this.updateActionsProperties();
     }
-
-    if (opts.allowDelete === undefined || opts.allowDelete) {
-      items.push(
-        new Action({
-          id: "delete",
-          needSeparator: items.length > 0,
-          title: this.creator.getLocString("pe.delete"),
-          visibleIndex: 30,
-          action: () => {
-            this.creator.deleteElement(element);
-          }
-        })
-      );
+  }
+  public dispose() {
+    super.dispose();
+    this.surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+  }
+  protected onElementSelectedChanged(isSelected: boolean) {
+    if (!isSelected) return;
+    this.updateActionsProperties();
+  }
+  protected updateActionsProperties() {
+    this.updateElementAllowOptions(
+      this.creator.getElementAllowOperations(this.surveyElement),
+      this.isOperationsAllow()
+    );
+  }
+  protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
+    this.allowDragging = operationsAllow && options.allowDragging;
+    this.updateActionVisibility(
+      "delete",
+      operationsAllow && options.allowDelete
+    );
+    this.updateActionVisibility(
+      "duplicate",
+      operationsAllow && options.allowCopy
+    );
+  }
+  protected isOperationsAllow(): boolean {
+    return !this.creator.readOnly;
+  }
+  protected updateActionVisibility(id: string, isVisible: boolean) {
+    var action = this.getActionById(id);
+    if (!action) return;
+    action.visible = isVisible;
+  }
+  public getActionById(id: string): Action {
+    let actions = this.actionContainer.actions;
+    for (var i = 0; i < actions.length; i++) {
+      if (actions[i].id === id) return actions[i];
     }
-    return items;
+    return null;
+  }
+  protected buildActions(items: Array<Action>) {
+    items.push(
+      new Action({
+        id: "duplicate",
+        title: this.creator.getLocString("survey.duplicate"),
+        visibleIndex: 10,
+        action: () => {
+          this.duplicate();
+        }
+      })
+    );
+
+    items.push(
+      new Action({
+        id: "delete",
+        needSeparator: items.length > 0,
+        title: this.creator.getLocString("pe.delete"),
+        visibleIndex: 30,
+        action: () => {
+          this.creator.deleteElement(this.surveyElement);
+        }
+      })
+    );
   }
 
-  protected duplicate(){}
+  protected duplicate() {}
 }

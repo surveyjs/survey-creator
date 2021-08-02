@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-knockout",
-  "version": "1.8.56-alpha.0",
+  "version": "1.8.58-alpha.1",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -58,7 +58,6 @@
     "github-api": "^3.3.0",
     "html-loader": "^0.4.4",
     "http-server": "^0.12.3",
-    "husky": "^4.3.0",
     "jest": "^26.1.0",
     "jest-canvas-mock": "^2.2.0",
     "live-server": "^1.2.1",

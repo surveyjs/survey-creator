@@ -12,6 +12,7 @@ import {
 import { PropertyGridViewModel } from "../../src/property-grid/property-grid-view-model";
 import { CreatorTester } from "../creator-tester";
 import { ObjectSelectorModel } from "../../src/property-grid/object-selector";
+import { settings } from "../../src/settings";
 
 test("Generate and update title correctly", () => {
   var creator = new CreatorTester();
@@ -108,4 +109,67 @@ test("Element Selector Bar Item", () => {
   selectorModel.list.selectItem(selectorModel.list.items[2]);
   expect(creator.selectedElementName).toEqual("q1");
   expect(popupModel.isVisible).toBeFalsy();
+});
+test("Element Selector Bar Item", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  };
+  var model = new PropertyGridViewModel(creator);
+  var selectorBarItem = model.toolbarItems.filter((item) => {
+    if (item.id === "svd-grid-object-selector") return item;
+  })[0];
+  expect(selectorBarItem).toBeTruthy();
+  var popupModel = <PopupModel>selectorBarItem.popupModel;
+  expect(popupModel).toBeTruthy();
+  var selectorModel = <ObjectSelectorModel>(
+    popupModel.contentComponentData.model
+  );
+  expect(selectorModel).toBeTruthy();
+  expect(selectorModel.isVisible).toBeFalsy();
+  expect(selectorModel.list).toBeFalsy();
+  selectorBarItem.action();
+  expect(popupModel.isVisible).toBeTruthy();
+  expect(selectorModel.isVisible).toBeTruthy();
+  expect(selectorModel.list).toBeTruthy();
+  expect(selectorModel.list.items).toHaveLength(4);
+  expect(selectorModel.list.items[2].title).toEqual("q1");
+  expect(creator.selectedElementName).toEqual("survey");
+  selectorModel.list.selectItem(selectorModel.list.items[2]);
+  expect(creator.selectedElementName).toEqual("q1");
+  expect(popupModel.isVisible).toBeFalsy();
+});
+test("settings.showNavigation", () => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  };
+  var model = new PropertyGridViewModel(creator);
+  var prevItem = model.toolbarItems.filter((item) => {
+    if (item.id === "svd-grid-history-prev") return item;
+  })[0];
+  expect(prevItem).toBeTruthy();
+  var nextItem = model.toolbarItems.filter((item) => {
+    if (item.id === "svd-grid-history-next") return item;
+  })[0];
+  expect(nextItem).toBeTruthy();
+  settings.propertyGrid.showNavigationButtons = false;
+
+  model = new PropertyGridViewModel(creator);
+  prevItem = model.toolbarItems.filter((item) => {
+    if (item.id === "svd-grid-history-prev") return item;
+  })[0];
+  expect(prevItem).toBeFalsy();
+  nextItem = model.toolbarItems.filter((item) => {
+    if (item.id === "svd-grid-history-next") return item;
+  })[0];
+  expect(nextItem).toBeFalsy();
+
+  settings.propertyGrid.showNavigationButtons = true;
 });

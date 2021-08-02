@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.58](https://github.com/surveyjs/survey-creator/compare/v1.8.57...v1.8.58) (2021-07-28)
+
+
+### Bug Fixes
+
+* Duplicating a page does nothing until the tabs are changed in V2 [#1547](https://github.com/surveyjs/survey-creator/issues/1547) ([897e5f9](https://github.com/surveyjs/survey-creator/commit/897e5f9692375032f46f55456c9195da1016e73e))
+* Toolbox doesn't load in 1.8.57 [#1558](https://github.com/surveyjs/survey-creator/issues/1558) ([bede98a](https://github.com/surveyjs/survey-creator/commit/bede98a629a5442be86ba79218139e9e8f5bbbc3))
+
+### [1.8.57](https://github.com/surveyjs/survey-creator/compare/v1.8.56...v1.8.57) (2021-07-20)
+
+
+### Bug Fixes
+
+* New added question is not visible on clicking on toolbox [#1537](https://github.com/surveyjs/survey-creator/issues/1537) ([52b7ed0](https://github.com/surveyjs/survey-creator/commit/52b7ed08be8bed76c8976855bfcd46a34955c257))
+* Non unique entries possible through fast entry when itemValues are set unique in V2. [#1497](https://github.com/surveyjs/survey-creator/issues/1497) ([#1533](https://github.com/surveyjs/survey-creator/issues/1533)) ([0283340](https://github.com/surveyjs/survey-creator/commit/02833405d87c491ed5cd0135e5a9060aeb8bc297))
+* Progress Bar does not work/appear correctly on Designer Page in Creator V2 React version [#1507](https://github.com/surveyjs/survey-creator/issues/1507) ([#1510](https://github.com/surveyjs/survey-creator/issues/1510)) ([e9c5f92](https://github.com/surveyjs/survey-creator/commit/e9c5f9297d1e58d07c1717a3838f6fba7b47ed56))
+
 ### [1.8.56](https://github.com/surveyjs/survey-creator/compare/v1.8.55...v1.8.56) (2021-07-13)
 
 

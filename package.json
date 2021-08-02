@@ -1,30 +1,32 @@
 {
-  "name": "survey-creator",
-  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
-  "license": "https://surveyjs.io/Licenses#SurveyCreator",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/surveyjs/survey-creator.git"
-  },
-  "private": true,
-  "version": "0.0.1",
-  "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
-    "test": "lerna run test",
-    "testcafe": "lerna run testcafe",
-    "testcafe:ci": "lerna run testcafe:ci",
-    "testcafe:file": "lerna run testcafe:file"
-  },
-  "devDependencies": {
-    "@types/jest": "^26.0.23",
-    "husky": "^4.3.8",
-    "lerna": "^3.22.1"
-  },
-  "dependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-push": "npm test"
+    "name": "survey-creator",
+    "homepage": "https://surveyjs.io/Overview/Survey-Creator",
+    "license": "https://surveyjs.io/Licenses#SurveyCreator",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/surveyjs/survey-creator.git"
+    },
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+        "bootstrap": "lerna bootstrap",
+        "build": "lerna run build",
+        "test": "lerna run test",
+        "testcafe": "lerna run testcafe",
+        "testcafe:ci": "lerna run testcafe:ci",
+        "testcafe:file": "lerna run testcafe:file",
+        "dev": "concurrently \"npm run dev --prefix ../survey-library\" \"http-server -p 7777 --silent\" \"npm run watch:dev --prefix packages/survey-creator-core\" \"npm run watch:prod --prefix packages/survey-creator-core\" \"npm run watch:dev --prefix packages/survey-creator-knockout\" \"npm run watch:dev --prefix packages/survey-creator-react\" "
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.23",
+        "concurrently": "^6.2.0",
+        "husky": "^4.3.8",
+        "lerna": "^3.22.1"
+    },
+    "dependencies": {},
+    "husky": {
+        "hooks": {
+            "pre-push": "npm test"
+        }
     }
-  }
 }
