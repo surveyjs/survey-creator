@@ -114,10 +114,23 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       action: () => {
         question.addRow();
       },
-      enabled: (): boolean => {
-        return question.canAddRow;
-      }
+      enabled: question.canAddRow
     });
+  }
+  public onValueChanged(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question
+  ) {
+    this.updateTitleActions(question);
+  }
+  protected updateTitleActions(question: Question) {
+    const addAction: IAction = question.titleActions.filter(
+      (item: IAction) => item.id === "add-item"
+    )[0];
+    if (!!addAction) {
+      addAction.enabled = question.canAddRow;
+    }
   }
   protected createNewItem(
     matrix: QuestionMatrixDynamicModel,
@@ -150,13 +163,6 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (arr != matrix.value) {
       matrix.value = arr;
     }
-    /*
-    if (!Array.isArray(matrix.value)) {
-      matrix.value = [item];
-    } else {
-      matrix.value.push(item);
-    }
-    */
     return item;
   }
   protected getDefaultClassName(prop: JsonObjectProperty): string {
@@ -338,7 +344,18 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (this.getShowDetailPanelOnAdding()) {
       res.detailPanelShowOnAdding = true;
     }
+    var maxRowCount = this.getMaximumRowCount(obj, prop, options);
+    if (maxRowCount > 0) {
+      res.maxRowCount = maxRowCount;
+    }
     return res;
+  }
+  protected getMaximumRowCount(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): number {
+    return -1;
   }
   protected getColumnsJSON(
     obj: Base,
@@ -459,6 +476,17 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   protected getKeyValue(): string {
     return "value";
   }
+  protected getMaximumRowCount(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): number {
+    if (prop.name === "choices") return options.maximumChoicesCount;
+    if (prop.name === "rows") return options.maximumRowsCount;
+    if (prop.name === "columns") return options.maximumColumnsCount;
+    if (prop.name === "rateValues") return options.maximumRateValues;
+    return super.getMaximumRowCount(obj, prop, options);
+  }
   private hasMultipleLanguage(items: Array<ItemValue>): boolean {
     if (!items || !Array.isArray(items)) {
       return false;
@@ -499,17 +527,12 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "column";
   }
-  protected getMatrixJSON(
+  protected getMaximumRowCount(
     obj: Base,
     prop: JsonObjectProperty,
-    propNames: Array<string>,
     options: ISurveyCreatorOptions
-  ): any {
-    var res = super.getMatrixJSON(obj, prop, propNames, options);
-    if (options.maximumColumnsCount > 0) {
-      res.maxRowCount = options.maximumColumnsCount;
-    }
-    return res;
+  ): number {
+    return options.maximumColumnsCount;
   }
 }
 
