@@ -7,7 +7,7 @@ import {
   SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { DragDropHelper } from "survey-core";
+import { DragDropChoices } from "survey-core";
 import "./item-value.scss";
 
 export class ItemValueWrapperViewModel extends Base {
@@ -92,10 +92,10 @@ export class ItemValueWrapperViewModel extends Base {
     );
   };
   startDragItemValue(event: PointerEvent) {
-    this.dragDropHelper.startDragItemValue(event, this.question, this.item);
+    this.dragDropHelper.startDrag(event, this.question, this.item);
   }
-  private get dragDropHelper(): DragDropHelper {
-    return this.creator.dragDropHelper;
+  private get dragDropHelper(): DragDropChoices {
+    return this.creator.dragDropChoices;
   }
   get isDraggable() {
     return this.isDraggableItem(this.item);

@@ -11,7 +11,7 @@ import {
   Question
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { DragDropHelper } from "survey-core";
+import { DragDropSurveyElements } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
@@ -102,8 +102,8 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     return getLocString("ed.panelPlaceHolder");
   }
 
-  private get dragDropHelper(): DragDropHelper {
-    return this.creator.dragDropHelper;
+  private get dragDropHelper(): DragDropSurveyElements {
+    return this.creator.dragDropSurveyElements;
   }
 
   get isRequired() {
@@ -114,7 +114,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   }
 
   startDragSurveyElement(event: PointerEvent) {
-    this.dragDropHelper.startDragSurveyElement(event, <any>this.surveyElement);
+    this.dragDropHelper.startDrag(event, <any>this.surveyElement);
     return true;
   }
 

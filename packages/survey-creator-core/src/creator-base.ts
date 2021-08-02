@@ -20,7 +20,7 @@ import {
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
-import { DragDropHelper } from "survey-core";
+import { DragDropSurveyElements, DragDropChoices } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
@@ -140,7 +140,8 @@ export class CreatorBase<T extends SurveyModel>
   public get toolbar(): AdaptiveActionContainer {
     return this.toolbarValue;
   }
-  public dragDropHelper: DragDropHelper;
+  public dragDropSurveyElements: DragDropSurveyElements;
+  public dragDropChoices: DragDropChoices;
 
   private selectedElementValue: Base;
   private newQuestions: Array<any> = [];
@@ -1206,21 +1207,34 @@ export class CreatorBase<T extends SurveyModel>
       });
     };
   }
+
   protected initDragDrop() {
-    DragDropHelper.restrictDragQuestionBetweenPages =
+    this.initDragDropSurveyElements();
+    this.initDragDropChoices();
+  }
+  private initDragDropSurveyElements() {
+    DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
-
-    this.dragDropHelper = new DragDropHelper(null, this);
-
-    this.dragDropHelper.onBeforeDrop.add((sender, options) => {
+    this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
       this.undoRedoManager.startTransaction("drag drop");
     });
-
-    this.dragDropHelper.onAfterDrop.add((sender, options) => {
+    this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
       this.undoRedoManager.stopTransaction();
       this.selectElement(options.draggedElement, undefined, false);
     });
   }
+  private initDragDropChoices() {
+    this.dragDropChoices = new DragDropChoices(null, this);
+    this.dragDropChoices.onBeforeDrop.add((sender, options) => {
+      this.undoRedoManager.startTransaction("drag drop");
+    });
+    this.dragDropChoices.onAfterDrop.add((sender, options) => {
+      this.undoRedoManager.stopTransaction();
+      this.selectElement(options.draggedElement, undefined, false);
+    });
+  }
+
   private addingObject: Survey.Base;
   private onSurveyPropertyValueChangedCallback(
     name: string,
