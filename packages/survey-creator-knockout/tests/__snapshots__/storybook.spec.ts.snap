@@ -36,7 +36,7 @@ exports[`Storyshots Button Action Button 1`] = `
 >
   <button
     class="svc-button svc-button--action"
-    data-bind="click: action, css: css, disable: disabled"
+    data-bind="click: action, key2click, css: css, disable: disabled"
   >
     
   
@@ -60,7 +60,7 @@ exports[`Storyshots Button Disabled 1`] = `
 >
   <button
     class="svc-button"
-    data-bind="click: action, css: css, disable: disabled"
+    data-bind="click: action, key2click, css: css, disable: disabled"
     disabled=""
   >
     
@@ -85,7 +85,7 @@ exports[`Storyshots Button Disabled Action Button 1`] = `
 >
   <button
     class="svc-button svc-button--action"
-    data-bind="click: action, css: css, disable: disabled"
+    data-bind="click: action, key2click, css: css, disable: disabled"
     disabled=""
   >
     
@@ -110,7 +110,7 @@ exports[`Storyshots Button Ordinary 1`] = `
 >
   <button
     class="svc-button"
-    data-bind="click: action, css: css, disable: disabled"
+    data-bind="click: action, key2click, css: css, disable: disabled"
   >
     
   
@@ -164,7 +164,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
-            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+            data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
           >
             
   
@@ -197,7 +197,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item"
-            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+            data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
           >
             
   
@@ -230,7 +230,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item"
-            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+            data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
           >
             
   
@@ -263,7 +263,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
           <div
             class="svc-tabbed-menu-item"
-            data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+            data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
           >
             
   
@@ -2037,7 +2037,7 @@ exports[`Storyshots Page Navigator Page Navigator Item 1`] = `
   >
     <div
       class="svc-page-navigator-item-content"
-      data-bind="click: action, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
+      data-bind="click: action, key2click, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
       title="Page 1"
     >
       
@@ -2085,7 +2085,7 @@ exports[`Storyshots Page Navigator Page Navigator Item Disabled 1`] = `
   >
     <div
       class="svc-page-navigator-item-content"
-      data-bind="click: action, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
+      data-bind="click: action, key2click, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
       title="Disabled Page"
     >
       
@@ -2133,7 +2133,7 @@ exports[`Storyshots Page Navigator Page Navigator Item Selected 1`] = `
   >
     <div
       class="svc-page-navigator-item-content svc-page-navigator-item--selected"
-      data-bind="click: action, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
+      data-bind="click: action, key2click, css: { 'svc-page-navigator-item--selected': active, 'svc-page-navigator-item--disabled': disabled }, attr: { title: text }"
       title="Page 1"
     >
       
@@ -2183,7 +2183,7 @@ exports[`Storyshots Popup Modal Context Menu Ordinary 1`] = `
   >
     <button
       class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
+      data-bind="click: action, key2click, css: css, disable: disabled"
     >
       
   
@@ -2224,7 +2224,7 @@ exports[`Storyshots Popup Modal Context Menu With Pointer 1`] = `
   >
     <button
       class="svc-button"
-      data-bind="click: action, css: css, disable: disabled"
+      data-bind="click: action, key2click, css: css, disable: disabled"
     >
       
   
@@ -2302,7 +2302,7 @@ exports[`Storyshots Tabbed Menu Tabbed Menu Item 1`] = `
 >
   <div
     class="svc-tabbed-menu-item"
-    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+    data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
   >
     
   
@@ -2326,7 +2326,7 @@ exports[`Storyshots Tabbed Menu Tabbed Menu Item Disabled 1`] = `
 >
   <div
     class="svc-tabbed-menu-item svc-tabbed-menu-item--disabled"
-    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+    data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
   >
     
   
@@ -2350,7 +2350,7 @@ exports[`Storyshots Tabbed Menu Tabbed Menu Item Selected 1`] = `
 >
   <div
     class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
-    data-bind="click: action, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+    data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
   >
     
   
@@ -2399,7 +2399,7 @@ exports[`Storyshots Toolbox Toolbox 1`] = `
       
         <div
           class="svc-toolbox__category-header"
-          data-bind="click: toggleState"
+          data-bind="click: toggleState, key2click"
         >
           
         

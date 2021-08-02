@@ -4,7 +4,7 @@
     <!-- ko foreach: categories -->
     <div class="svc-toolbox__category">
       <!-- ko if: $parent.categories().length > 1 -->
-      <div class="svc-toolbox__category-header" data-bind="click: toggleState">
+      <div class="svc-toolbox__category-header" data-bind="click: toggleState, key2click">
         <span class="svc-toolbox__category-title" data-bind="text: name"></span>
         <div class="svc-toolbox__category-header__controls">
           <sv-svg-icon class="svc-toolbox__category-header__button svc-string-editor__button--expand" data-bind="visible: collapsed" params="iconName: 'icon-expand', size: 16"></sv-svg-icon>

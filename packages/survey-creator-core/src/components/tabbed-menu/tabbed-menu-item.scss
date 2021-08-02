@@ -22,7 +22,8 @@ svc-tabbed-menu-item {
   box-shadow: inset 0px -2px 0px $primary;
 }
 
-.svc-tabbed-menu-item:hover {
+.svc-tabbed-menu-item:hover,
+.svc-tabbed-menu-item:focus {
   background-color: $background-dim;
 }
 
