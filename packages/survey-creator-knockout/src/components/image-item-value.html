@@ -2,7 +2,7 @@
   class="svc-image-item-value-wrapper"
   data-bind="attr: attributes, event: { pointerdown: function(model, event) { startDragItemValue(event); } }, css: { 'svc-image-item-value--new': isNew }"
 >  
-  <input type="file" accept="image/*" class="svc-choose-file-input"/>
+  <input type="file" tabindex="-1" accept="image/*" class="svc-choose-file-input"/>
 
   <!-- ko ifnot: isNew -->
   <!-- ko if: showDragDropGhostOnTop -->
@@ -17,12 +17,12 @@
   <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
     <sv-svg-icon
       class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
-      data-bind="click: chooseFile"
+      data-bind="click: chooseFile, key2click"
       params="iconName: 'icon-file', size: 24"
     ></sv-svg-icon>
     <sv-svg-icon
       class="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
-      data-bind="click: remove"
+      data-bind="click: remove, key2click"
       params="iconName: 'icon-delete', size: 24"
     ></sv-svg-icon>
   </div>
@@ -47,7 +47,7 @@
   <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
     <sv-svg-icon
       class="svc-image-item-value-controls__button svc-image-item-value-controls__add"
-      data-bind="click: chooseNewFile, clickBubble: false"
+      data-bind="click: chooseNewFile, key2click, clickBubble: false"
       params="iconName: 'icon-add-item-value', size: 24"
     ></sv-svg-icon>
   </div>

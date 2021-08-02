@@ -3,6 +3,9 @@
   display: flex;
   align-items: center;
 }
+.spg-checkbox:focus-within {
+  outline: 1px dotted $primary;
+}
 .spg-checkbox--disabled {
   cursor: default;
 }
