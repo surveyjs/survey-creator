@@ -67,7 +67,7 @@ export class SurveyConditionEditorItem extends ConditionEditorItem {
     );
   }
   public toExpression(): string {
-    var text = 
+    var text =
       "{" + this.getQuestionValueByName() + "} " + this.getOperatorText();
     if (this.isValueRequired) {
       text += " " + this.getValueText();
@@ -300,8 +300,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       if (options.question.panelCount == 0) {
         options.question.addPanel();
       }
-      if(this.panel.panelCount > 0)
-        this.panel.panels[0].getQuestionByName("questionName").titleLocation = "left";
+      if (this.panel.panelCount > 0)
+        this.panel.panels[0].getQuestionByName("questionName").titleLocation =
+          "left";
     });
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);
@@ -461,7 +462,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     panel.getQuestionByName("operator").value = item.operator;
     panel.getQuestionByName("questionName").choices =
       this.allConditionQuestions;
-    panel.getQuestionByName("questionName").titleLocation = this.panel.panelCount > 1 ? "hidden" : "left";
+    panel.getQuestionByName("questionName").titleLocation =
+      this.panel.panelCount > 1 ? "hidden" : "left";
     if (!!this.getConditionQuestion(item.questionName)) {
       panel.getQuestionByName("questionName").value = item.questionName;
     }
@@ -789,11 +791,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       title: editorLocalization.getString("pe.buildExpression"),
       active: isBuildQuestion,
       enabled: isBuildQuestion || ConditionEditor.canBuildExpression(this.text),
-      action: !isBuildQuestion
-        ? () => {
-            this.showBuilder();
-          }
-        : undefined
+      action: () => {
+        this.showBuilder();
+      }
     });
     if (!isBuildQuestion) {
       this.showBuilderAction = showBuilder;
@@ -804,11 +804,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         id: "condition-edit",
         title: editorLocalization.getString("pe.editExpression"),
         active: !isBuildQuestion,
-        action: isBuildQuestion
-          ? () => {
-              this.showTextEditor(this.text);
-            }
-          : undefined
+        action: () => {
+          this.showTextEditor(this.text);
+        }
       }
     ];
   }
@@ -816,39 +814,51 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     options.cssClasses.answered = "svc-logic-question--answered";
 
     if (options.question.name === "conjunction") {
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--conjunction ";
+      options.cssClasses.control =
+        "svc-logic-operator svc-logic-operator--conjunction ";
       options.cssClasses.questionWrapper = "svc-question-wrapper";
     }
-    if(options.question.name === "questionName") {
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
+    if (options.question.name === "questionName") {
+      options.cssClasses.control =
+        "svc-logic-operator svc-logic-operator--question";
       options.cssClasses.questionWrapper = "svc-question-wrapper";
     }
-    if(options.question.name === "operator") {
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--operator";
+    if (options.question.name === "operator") {
+      options.cssClasses.control =
+        "svc-logic-operator svc-logic-operator--operator";
       options.cssClasses.questionWrapper = "svc-question-wrapper";
     }
     options.cssClasses.mainRoot = "sd-question sd-row__question";
     if (options.question.name === "questionValue") {
       options.cssClasses.mainRoot += " svc-logic-question-value";
     }
-    if(options.question.name === "panel") {
+    if (options.question.name === "panel") {
       options.cssClasses.root += " svc-logic-paneldynamic";
-      options.cssClasses.buttonAdd = "svc-logic-operator svc-logic-operator--operator sd-paneldynamic__add-btn";
+      options.cssClasses.buttonAdd =
+        "svc-logic-operator svc-logic-operator--operator sd-paneldynamic__add-btn";
       options.cssClasses.iconRemove = "svc-icon-remove";
       options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button";
-      options.cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
+      options.cssClasses.buttonRemoveText =
+        "svc-logic-paneldynamic__button-remove-text";
     }
   }
-  private onValueChanged(options: any){
-    if(options.question.name === "panel" && options.value.length > 0 ) {
-      const maxLogicItems = this.options.maxLogicItemsInCondition > 0 ? this.options.maxLogicItemsInCondition : 100;
-      options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].questionName) ? 1 : maxLogicItems;
+  private onValueChanged(options: any) {
+    if (options.question.name === "panel" && options.value.length > 0) {
+      const maxLogicItems =
+        this.options.maxLogicItemsInCondition > 0
+          ? this.options.maxLogicItemsInCondition
+          : 100;
+      options.question.maxPanelCount =
+        options.value.length === 1 && !options.value[0].questionName
+          ? 1
+          : maxLogicItems;
     }
     this.title = this.text || "Rule";
   }
 
   private isSettingTextEditorValue: boolean;
   private showTextEditor(expression: string) {
+    if (this.textEditor.visible) return;
     this.panel.visible = false;
     this.isSettingTextEditorValue = true;
     this.textEditor.value = expression;
@@ -856,6 +866,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.textEditor.visible = true;
   }
   private showBuilder() {
+    if (this.panel.visible) return;
     if (!this.isModal && !this.canShowBuilder) return;
     this.textEditor.visible = false;
     this.processText(this.textEditor.value);
