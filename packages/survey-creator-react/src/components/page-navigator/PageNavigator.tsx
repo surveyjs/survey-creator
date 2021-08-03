@@ -8,7 +8,8 @@ import {
 import {
   SurveyElementBase,
   SvgIcon,
-  Popup
+  Popup,
+  attachKey2click
 } from "survey-react-ui";
 import { CreatorBase, PageNavigatorViewModel } from "@survey/creator";
 import React from "react";
@@ -87,7 +88,7 @@ export class SurveyPageNavigatorItem extends SurveyElementBase<any, any> {
     }
     return (
       <div className="svc-page-navigator-item">
-        <div
+        {attachKey2click(<div
           className={className}
           onClick={() => item.action(item)}
           title={item.title}
@@ -97,7 +98,7 @@ export class SurveyPageNavigatorItem extends SurveyElementBase<any, any> {
             <span className="svc-text svc-text--normal">{item.title}</span>
             <span className="svc-page-navigator-item__dot"></span>
           </div>
-        </div>
+        </div>)}
       </div>
     );
   }

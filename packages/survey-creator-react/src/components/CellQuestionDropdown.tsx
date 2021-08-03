@@ -7,6 +7,9 @@ import {
   SurveyElementBase,
 } from "survey-react-ui";
 import { QuestionAdornerComponentProps } from "./Question";
+import {
+  attachKey2click,
+} from "survey-react-ui";
 
 export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
   QuestionAdornerComponentProps,
@@ -36,7 +39,7 @@ export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
           data-svc-drop-target-element-name={this.model.surveyElement.name}
           className={"svc-question__adorner"}
         >
-          <div
+          {attachKey2click(<div
             className={" svc-question__content--selected-no-border svc-question__content"}
             onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
           >
@@ -69,7 +72,7 @@ export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
               ))}
             </div>
 
-          </div>
+          </div>)}
         </div>
       </React.Fragment >
     );

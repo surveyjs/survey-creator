@@ -7,6 +7,7 @@ import {
   SurveyModel
 } from "survey-core";
 import {
+  attachKey2click,
   ReactElementFactory,
   SurveyElementBase,
   SvgIcon
@@ -91,7 +92,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     let header = null;
     if (this.toolbox.categories.length > 1) {
       header =
-        <div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
+        attachKey2click(<div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
           <span className="svc-toolbox__category-title">{category.name}</span>
           <div className="svc-toolbox__category-header__controls">
             {(category.collapsed ?
@@ -100,7 +101,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
               <SvgIcon className="svc-toolbox__category-header__button svc-string-editor__button--collapse" size={16} iconName={"icon-collapse"}></SvgIcon>
             )}
           </div>
-        </div>;
+        </div>);
     }
     let items = [];
     if (!category.collapsed) {

@@ -2,6 +2,7 @@ import React from "react";
 import { QuestionSelectBase, Base, ItemValue, SurveyModel } from "survey-core";
 import { MatrixCellWrapperViewModel, toggleHovered } from "@survey/creator";
 import {
+  attachKey2click,
   ReactElementFactory,
   SurveyElementBase,
   SvgIcon
@@ -37,13 +38,13 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
     let controls = null;
     if(!!this.model.question) {
       controls = <div className="svc-matrix-cell__question-controls">
-        <span className="svc-matrix-cell__question-controls-button" onClick={() => this.model.editQuestion(this.model)}>
+        {attachKey2click(<span className="svc-matrix-cell__question-controls-button" onClick={() => this.model.editQuestion(this.model)}>
           <SvgIcon size={24} iconName={'icon-pencil'}></SvgIcon>
-        </span>
+        </span>)}
       </div>;
     }
 
-    return (
+    return attachKey2click(
       <div
         className={"svc-matrix-cell"}
         key={this.props.element.key}

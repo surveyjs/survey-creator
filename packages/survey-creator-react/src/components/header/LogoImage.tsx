@@ -1,6 +1,6 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
-import { ReactElementFactory, SurveyElementBase, LogoImage, SvgIcon } from "survey-react-ui";
+import { ReactElementFactory, SurveyElementBase, LogoImage, SvgIcon, attachKey2click } from "survey-react-ui";
 import { CreatorBase, LogoImageViewModel } from "@survey/creator";
 
 interface ILogoImageComponentProps {
@@ -28,17 +28,17 @@ export class LogoImageComponent extends SurveyElementBase<ILogoImageComponentPro
       content = <>
         <LogoImage data={this.props.data.survey}></LogoImage>
         <div className="svc-image-item-value-controls">
-          <SvgIcon className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" size={24} iconName={'icon-file'} onClick={() => this.model.chooseFile(this.model)}></SvgIcon>
-          <SvgIcon className="svc-image-item-value-controls__button svc-image-item-value-controls__remove" size={24} iconName={'icon-delete'} onClick={() => this.model.remove(this.model)}></SvgIcon>
+          {attachKey2click(<SvgIcon className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" size={24} iconName={'icon-file'} onClick={() => this.model.chooseFile(this.model)}></SvgIcon>)}
+          {attachKey2click(<SvgIcon className="svc-image-item-value-controls__button svc-image-item-value-controls__remove" size={24} iconName={'icon-delete'} onClick={() => this.model.remove(this.model)}></SvgIcon>)}
         </div>
       </>;
     }
     else {
-      content = <div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}>[LOGO]</div>;
+      content = attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}>[LOGO]</div>);
     }
     return (
       <div ref={this.rootRef} className="svc-logo-image">
-        <input type="file" accept="image/*" className="svc-choose-file-input"/>
+        <input type="file" tabIndex={-1} accept="image/*" className="svc-choose-file-input"/>
         {content}
       </div>
     );
