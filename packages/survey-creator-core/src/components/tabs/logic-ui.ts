@@ -18,6 +18,7 @@ import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../entries";
 
 import "./logic-ui.scss";
+import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
@@ -38,6 +39,7 @@ export class SurveyLogicUI extends SurveyLogic {
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
+    //this.itemsSurveyValue.css = surveyDesignerCss;
     this.itemsSurvey.onMatrixCellCreated.add((sender, options) => {
       var q = options.cellQuestion;
       q.ignoreHtmlProgressing = true;
@@ -119,10 +121,12 @@ export class SurveyLogicUI extends SurveyLogic {
   protected hasErrorInUI(): boolean {
     if (!this.expressionEditor.isReady) {
       this.errorText = getLogicString("expressionInvalid");
+      !!this.survey.creator && this.survey.creator.notify(this.errorText, "error")
       return true;
     }
     if (this.itemEditor.hasErrors()) {
-      this.errorText = getLogicString("actionInvalid");
+      this.errorText = getLogicString("actionInvalid")
+      !!this.survey.creator && this.survey.creator.notify(this.errorText, "error")
       return true;
     }
     return false;
@@ -165,7 +169,6 @@ export class SurveyLogicUI extends SurveyLogic {
       null,
       this.options
     );
-    this.expressionEditor.title = getLogicString("expressionEditorTitle");
     this.expressionEditor.isModal = false;
   }
   private updateItemsSurveyData() {

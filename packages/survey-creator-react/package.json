@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --env.buildType dev --open",
+    "serve": "http-server --silent",
     "test": "jest",
     "test:update": "npm run test -- -u",
     "test:generate-output": "jest --json --outputFile=.jest-test-results.json || echo",

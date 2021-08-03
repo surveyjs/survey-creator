@@ -337,6 +337,10 @@ export var enStrings = {
     or: "Or",
     remove: "Remove",
     addCondition: "Add condition",
+    if: "If",
+    then: "Then",
+    setToName: "to",
+    fromName: "from",
 
     //survey
     showTitle: "Show/hide title",

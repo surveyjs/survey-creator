@@ -338,7 +338,9 @@ export class PropertyGridTitleActionsCreator {
       },
       (): boolean => {
         return surveyPropertyEditor.apply();
-      }
+      },
+      undefined,
+      "sv-property-editor"
     );
   }
 
