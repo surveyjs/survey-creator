@@ -17,12 +17,12 @@
     <!-- /ko -->
     <sv-svg-icon
       class="svc-item-value-controls__button svc-item-value-controls__add"
-      data-bind="visible: isNew, click: add"
+      data-bind="visible: isNew, click: add, key2click"
       params="iconName: 'icon-add-item-value', size: 16"
     ></sv-svg-icon>
     <sv-svg-icon
       class="svc-item-value-controls__button svc-item-value-controls__remove"
-      data-bind="visible: !isNew, click: remove"
+      data-bind="visible: !isNew, click: remove, key2click"
       params="iconName: 'icon-remove-item-value', size: 16"
     ></sv-svg-icon>
   </div>
