@@ -24,6 +24,8 @@ function getSelectOptionByText(text: string) {
     return Selector("option").withExactText(text).filterVisible();
 }
 
+const tableRulesSelector = Selector(".sv-table.sv-matrixdynamic tbody tr").filterVisible();
+
 const titleSelector = Selector(".sd-question__header.sd-question__header--location--top .sv-title-actions__title").filterVisible();
 const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
 const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sd-paneldynamic__add-btn)").filterVisible();
@@ -117,4 +119,32 @@ test("Create logic rule", async (t) => {
 
         .click(Selector(".sv-action-bar-item__title").withExactText("Save").filterVisible())
         .expect(notifyBalloonSelector.innerText).eql("Modified")
+});
+
+test("Logic rules", async (t) => {
+    await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+
+    await t
+        .click(getTabbedMenuItemByText("Survey Logic"))
+        .expect(tableRulesSelector.count).eql(0)
+
+        .click(Selector(".sv-action-bar-item").withExactText("Add New").filterVisible())
+        .click(logicQuestionSelector)
+        .click(getSelectOptionByText("string_editor"))
+        .click(logicOperatorSelector)
+        .click(getSelectOptionByText("is not empty"))
+        .click(logicActionSelector)
+        .click(getSelectOptionByText("Complete survey"))
+        .click(Selector(".sv-action-bar-item__title").withExactText("Save and return").filterVisible())
+        .expect(tableRulesSelector.count).eql(1)
+        .expect(tableRulesSelector.find("td").nth(0).innerText).eql("Edit")
+        .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{string_editor} is not empty' returns true:")
+        .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
+
+        .click(getTabbedMenuItemByText("Survey Designer"))
+        .click(getTabbedMenuItemByText("Survey Logic"))
+        .expect(tableRulesSelector.count).eql(1)
+        .expect(tableRulesSelector.find("td").nth(0).innerText).eql("Edit")
+        .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{string_editor} is not empty' returns true:")
+        .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
 });
