@@ -22,7 +22,7 @@
       ></span>
       <span
         class="svc-survey-dropdown__button"
-        data-bind="click: toggle, disable: question.readOnly, css: { 'svc-survey-dropdown__button--active': isExpanded }"
+        data-bind="click: toggle, key2click, disable: question.readOnly, css: { 'svc-survey-dropdown__button--active': isExpanded }"
       >
         <sv-svg-icon
           class="svc-survey-dropdown__button-icon"
@@ -44,7 +44,7 @@
       <!--ko foreach: question.visibleChoices-->
       <li
         class="svc-survey-dropdown__list-item"
-        data-bind="css: { 'svc-survey-dropdown__list-item--disabled': !isEnabled, 'svc-survey-dropdown__list-item--selected': question.koValue() == $data.value }, text: $data.text, click: $parent.selectItem"
+        data-bind="css: { 'svc-survey-dropdown__list-item--disabled': !isEnabled, 'svc-survey-dropdown__list-item--selected': question.koValue() == $data.value }, text: $data.text, click: $parent.selectItem, key2click"
       ></li>
       <!-- /ko -->
     </ul>

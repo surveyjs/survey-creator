@@ -29,5 +29,5 @@
   color: $foreground-disabled;
 }
 .sd-input:focus {
-  box-shadow: inset 0 0 0 2px #19b394, inset 0px 1px 2px $border-inside;
+  box-shadow: inset 0 0 0 2px $primary, inset 0px 1px 2px $border-inside;
 }
