@@ -39,7 +39,7 @@ export class SurveyLogicUI extends SurveyLogic {
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
-    this.itemsSurveyValue.css = surveyDesignerCss;
+    //this.itemsSurveyValue.css = surveyDesignerCss;
     this.itemsSurvey.onMatrixCellCreated.add((sender, options) => {
       var q = options.cellQuestion;
       q.ignoreHtmlProgressing = true;
