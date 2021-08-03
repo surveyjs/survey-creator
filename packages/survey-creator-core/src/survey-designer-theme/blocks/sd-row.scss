@@ -1,14 +1,9 @@
 .sd-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   width: 100%;
   box-sizing: border-box;
   margin-top: 16px;
-}
-
-.sv-property-editor.sv-popup--modal .sd-row {
-  flex-wrap: nowrap;
 }
 
 .sd-row__panel{

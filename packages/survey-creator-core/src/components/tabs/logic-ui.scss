@@ -17,6 +17,14 @@
   // background: $background;
 }
 
+.svc-tab-logic-edit__content .sd-row {
+  flex-wrap: wrap;
+}
+
+.svc-logic-panel-element .sd-row {
+  margin-top: 0;
+}
+
 .svc-tab-logic-edit__content-actions {
   .sv-action-bar {
     padding: 0;
@@ -107,9 +115,6 @@
     .sv-title-actions__title {
         max-width: none;
     }
-}
-.svc-logic-panel-element .sd-row {
-    margin-top: 0;
 }
 
 .svc-logic-operator--action.sd-paneldynamic__add-btn.sd-paneldynamic__add-btn,
