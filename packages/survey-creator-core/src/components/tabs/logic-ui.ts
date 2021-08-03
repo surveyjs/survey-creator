@@ -145,6 +145,7 @@ export class SurveyLogicUI extends SurveyLogic {
           name: "items",
           titleLocation: "hidden",
           allowAddRows: false,
+          rowCount: 0,
           columns: [
             {
               cellType: "html",
@@ -174,7 +175,6 @@ export class SurveyLogicUI extends SurveyLogic {
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
     var matrix = this.itemsSurvey.getQuestionByName("items");
-    matrix.rowCount = 0;
     var data = [];
     for (var i = 0; i < this.items.length; i++) {
       data.push({
@@ -183,7 +183,6 @@ export class SurveyLogicUI extends SurveyLogic {
       });
     }
     matrix.value = data;
-    matrix.rowCount = data.length;
   }
   private setupToolbarItems() {
     this.toolbar.actions.push(
