@@ -858,7 +858,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
 
   private isSettingTextEditorValue: boolean;
   private showTextEditor(expression: string) {
-    if (this.textEditor.visible) return;
     this.panel.visible = false;
     this.isSettingTextEditorValue = true;
     this.textEditor.value = expression;
@@ -866,7 +865,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.textEditor.visible = true;
   }
   private showBuilder() {
-    if (this.panel.visible) return;
     if (!this.isModal && !this.canShowBuilder) return;
     this.textEditor.visible = false;
     this.processText(this.textEditor.value);
