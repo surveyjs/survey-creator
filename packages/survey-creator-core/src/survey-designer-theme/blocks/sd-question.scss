@@ -23,15 +23,15 @@
     display: inline-block;
     max-width: 100%;
   }
-  .sv-string-editor{
-    white-space: normal;
+  .sv-string-editor {
     max-width: 100%;
+    white-space: normal;
+    word-break: break-word;
   }
 
   .sv-title-actions__title {
     white-space: unset;
   }
-
 }
 
 .sd-scrollable .sd-question__content {
