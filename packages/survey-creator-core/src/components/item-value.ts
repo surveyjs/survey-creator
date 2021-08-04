@@ -38,6 +38,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   public isDraggableItem(item: ItemValue) {
+    if (this.creator.readOnly) return false;
     return this.question.choices.indexOf(item) !== -1;
   }
 
