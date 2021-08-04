@@ -42,10 +42,14 @@
 .sd-question__header--location--left {
   display: inline-block;
   width: auto;
+  max-width: 50%;
+  vertical-align: top;
 }
 
 .sd-question__content--left {
   display: inline-block;
+  width: calc(50% - 24px);
+  padding-left: calcSize(3);
 }
 
 .sd-question__num {
