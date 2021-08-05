@@ -2,6 +2,7 @@
 
 This page has been prepared as a starting point for documentation aimed at end-users of SurveyJS.
 
+<a id="basics"></a>
 ## Basic Overview/Quick Start Guide
 
 The SurveyJS [Survey Creator](https://surveyjs.io/create-survey) page contains the survey design area with the Toolbox to the left and the Properties window to the right.
@@ -22,12 +23,16 @@ If you need to develop the survey in more detail via the JSON file format, you c
 
 ![Image of JSON viewer/editor](images/survey-editor-json.png)
 
+
+<a id="adorners"></a>
 ## Adorners
 
 Each toolbox item will have its own configuration panel once it is placed into the Survey Creator. This panel contains a set of ``adorners``. Using adorners, you will be able to move and re-order the item using the ``hamburger`` button (three horizontal lines), delete the item using the ``cross`` button, toggle the item's visibility using the ``eye`` button, ``duplicate`` the item, ``add`` the item to the toolbox, see the item's ``mode`` and edit the items ``properties``. You may also set the item's ``required`` status if the tool allows it.
 
 ![picture of adorner configuration panel](images/survey-editor-adorner.png)
 
+
+<a id="toolbox"></a>
 ## Individual Toolbox Elements
 
 ![Overview of Toolbox](images/survey-editor-toolbox.png)

@@ -1,5 +1,6 @@
 import { Base, PageModel, SurveyModel } from "survey-core";
 import {
+  attachKey2click,
   Popup,
   SurveyActionBar,
   SurveyElementBase,
@@ -62,8 +63,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   renderElement(): JSX.Element {
     const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
     return (
-      <React.Fragment>
-        <div
+        attachKey2click(<div
           ref={this.rootRef}
           className={"svc-page__content " + this.model.css}
           id={this.props.page.id}
@@ -79,7 +79,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
             creator={this.props.creator}
             css={this.model.css}
           ></SurveyPage>
-          <div
+          {attachKey2click(<div
             className="svc-page__add-new-question"
             onClick={(e) => {
               e.stopPropagation();
@@ -90,7 +90,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
               {this.model.creator.addNewQuestionText}
             </span>
 
-            <button
+            {attachKey2click(<button
               onClick={(e) => {
                 e.stopPropagation();
                 questionTypeSelectorModel.action();
@@ -104,15 +104,14 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
                 ></SvgIcon>
               </span>
               <Popup model={questionTypeSelectorModel.popupModel}></Popup>
-            </button>
-          </div>
+            </button>)}
+          </div>)}
           <div className="svc-page__content-actions">
             <SurveyActionBar
               model={this.model.actionContainer}
             ></SurveyActionBar>
           </div>
-        </div>
-      </React.Fragment>
+        </div>)
     );
   }
 }

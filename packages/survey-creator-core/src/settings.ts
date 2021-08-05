@@ -39,7 +39,11 @@ export var settings = {
   questionConvertMode: QuestionConvertMode.AllTypes,
   propertyGrid: {
     useButtonGroup: true,
-    showNavigationButtons: true
+    showNavigationButtons: true,
+    maximumColumnsCount: 0,
+    maximumChoicesCount: 0,
+    maximumRowsCount: 0,
+    maximumRateValues: 0
   },
   /**
    * Notification settings
@@ -78,6 +82,9 @@ export interface ISurveyCreatorOptions {
   showObjectTitles: boolean;
   allowEditExpressionsInTextEditor: boolean;
   maximumColumnsCount: number;
+  maximumChoicesCount: number;
+  maximumRowsCount: number;
+  maximumRateValues: number;
   getObjectDisplayName(obj: Base, reason: string, displayName: string): string;
   onCanShowPropertyCallback(
     object: any,
@@ -155,7 +162,11 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   showTitlesInExpressions: boolean;
   showObjectTitles: boolean;
   allowEditExpressionsInTextEditor: boolean = true;
-  maximumColumnsCount: number;
+  maximumColumnsCount: number = settings.propertyGrid.maximumColumnsCount;
+  maximumChoicesCount: number = settings.propertyGrid.maximumChoicesCount;
+  maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
+  maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+
   getObjectDisplayName(obj: Base, reason: string, displayName: string): string {
     return displayName;
   }

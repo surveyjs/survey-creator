@@ -18,6 +18,7 @@ import {
   EmptySurveyCreatorOptions,
   settings,
 } from "../../settings";
+import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
 import {
   ISurveyLogicItemOwner,
   SurveyLogicItem,
@@ -201,6 +202,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     };
     this.onLogicItemValidation.fire(this, options);
     this.errorText = options.error;
+    if(!!this.errorText && !!this.survey.creator)
+      this.survey.creator.notify(this.errorText, "error");
     return !!this.errorText;
   }
   protected hasErrorInUI(): boolean {

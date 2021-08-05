@@ -29,7 +29,7 @@ export class NotifierComponent extends SurveyElementBase<
       return null;
     }
     return (
-      <div className="svc-notifier">
+      <div className={this.notifier.css}>
         <span>{this.notifier.message}</span>
       </div>
     );

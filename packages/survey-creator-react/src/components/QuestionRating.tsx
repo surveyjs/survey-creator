@@ -7,7 +7,7 @@ import {
   QuestionAdornerComponent,
   QuestionAdornerComponentProps
 } from "./Question";
-import { ReactElementFactory, SvgIcon } from "survey-react-ui";
+import { attachKey2click, ReactElementFactory, SvgIcon } from "survey-react-ui";
 
 export class QuestionRatingAdornerComponent extends QuestionAdornerComponent {
   protected createQuestionViewModel(): QuestionAdornerViewModel {
@@ -26,18 +26,18 @@ export class QuestionRatingAdornerComponent extends QuestionAdornerComponent {
     const model = this.ratingModel;
     return (
       <div className="svc-rating-question-controls svc-item-value-controls">
-        <span
+        {attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__remove"
           onClick={() => model.removeItem(model)}
         >
           <SvgIcon size={16} iconName={"icon-remove-item-value"}></SvgIcon>
-        </span>
-        <span
+        </span>)}
+        {attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__add"
           onClick={() => model.addItem(model)}
         >
           <SvgIcon size={16} iconName={"icon-add-item-value"}></SvgIcon>
-        </span>
+        </span>)}
       </div>
     );
   }

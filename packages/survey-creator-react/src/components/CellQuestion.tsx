@@ -1,6 +1,10 @@
 import React from "react";
 import { Base, Question } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import {
+  attachKey2click,
+  ReactElementFactory,
+  SurveyElementBase
+} from "survey-react-ui";
 import { QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { QuestionAdornerComponentProps } from "./Question";
@@ -33,16 +37,18 @@ export class CellQuestionAdornerComponent extends SurveyElementBase<
           data-sv-drop-target-survey-element={this.model.surveyElement.name}
           className={"svc-question__adorner"}
         >
-          <div
-            className={
-              " svc-question__content--selected-no-border svc-question__content"
-            }
-            onClick={(e) =>
-              this.model.select(this.model, new ReactMouseEvent(e))
-            }
-          >
-            {this.props.element}
-          </div>
+          {attachKey2click(
+            <div
+              className={
+                " svc-question__content--selected-no-border svc-question__content"
+              }
+              onClick={(e) =>
+                this.model.select(this.model, new ReactMouseEvent(e))
+              }
+            >
+              {this.props.element}
+            </div>
+          )}
         </div>
       </React.Fragment>
     );

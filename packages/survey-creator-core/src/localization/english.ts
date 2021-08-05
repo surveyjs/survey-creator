@@ -17,7 +17,8 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "Please purchase a SurveyJS Creator developer license to use it in your app"
+    license:
+      "Please purchase a SurveyJS Creator developer license to use it in your app"
   },
   //questionTypes
   qt: {
@@ -240,6 +241,8 @@ export var enStrings = {
     emptyValue: "Value is empty",
     fastEntry: "Fast Entry",
     fastEntryNonUniqueError: "Value '{0}' is not unique",
+    fastEntryChoicesCountError:
+      "Please limit the number of items from {0} to {1}",
     formEntry: "Form Entry",
     testService: "Test the service",
     itemSelectorEmpty: "Please select the element",
@@ -337,6 +340,10 @@ export var enStrings = {
     or: "Or",
     remove: "Remove",
     addCondition: "Add condition",
+    if: "If",
+    then: "Then",
+    setToName: "to",
+    fromName: "from",
 
     //survey
     showTitle: "Show/hide title",

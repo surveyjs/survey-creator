@@ -3,7 +3,7 @@ import {
   QuestionAdornerViewModel
 } from "@survey/creator";
 import React from "react";
-import { ReactElementFactory, SvgIcon } from "survey-react-ui";
+import { attachKey2click, ReactElementFactory, SvgIcon } from "survey-react-ui";
 import {
   QuestionAdornerComponent,
   QuestionAdornerComponentProps
@@ -33,6 +33,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
     return (
       <input
         type="file"
+        tabIndex={-1}
         accept="image/*"
         className="svc-choose-file-input"
         style={{
@@ -49,12 +50,12 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
   renderElementPlaceholder(): JSX.Element {
     return (
       <div className="svc-image-question-controls">
-        <span
+        {attachKey2click(<span
           className="svc-image-question-controls__button svc-image-question-controls__choose-file"
           onClick={() => this.imageModel.chooseFile(this.imageModel)}
         >
           <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
-        </span>
+        </span>)}
       </div>
     );
   }

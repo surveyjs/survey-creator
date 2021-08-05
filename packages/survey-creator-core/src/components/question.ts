@@ -8,7 +8,8 @@ import {
   Action,
   PopupModel,
   ListModel,
-  Question
+  Question,
+  ItemValue
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -32,6 +33,21 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
+    if (
+      surveyElement.isQuestion &&
+      !!surveyElement["setCanShowOptionItemCallback"]
+    ) {
+      (<any>surveyElement).setCanShowOptionItemCallback(
+        (item: ItemValue): boolean => {
+          if (creator.readOnly) return false;
+          if (item.value !== "newitem") return true;
+          return (
+            creator.maximumChoicesCount < 1 ||
+            surveyElement["choices"].length < creator.maximumChoicesCount
+          );
+        }
+      );
+    }
   }
   select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
     if (!model.surveyElement.isInteractiveDesignElement) {
@@ -58,6 +74,9 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       "isRequired",
       "isRequiredAdorner"
     );
+    if (!!this.surveyElement["setCanShowOptionItemCallback"]) {
+      (<any>this.surveyElement).setCanShowOptionItemCallback(undefined);
+    }
   }
   get isDraggable() {
     return true;

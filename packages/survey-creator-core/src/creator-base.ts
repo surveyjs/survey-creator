@@ -649,8 +649,21 @@ export class CreatorBase<T extends SurveyModel>
   /**
    * You need to set this property to number more than 0 to limit the number of columns that users can create for matrix dynamic/matrix dropdown questions.
    */
-  public maximumColumnsCount = 0;
-
+  public maximumColumnsCount: number =
+    settings.propertyGrid.maximumColumnsCount;
+  /**
+   * You need to set this property to number more than 0 to limit the number of choices that users can added to checkbox/dropdown/radiogroup questions.
+   */
+  public maximumChoicesCount: number =
+    settings.propertyGrid.maximumChoicesCount;
+  /**
+   * You need to set this property to number more than 0 to limit the number of rows that users can add to matrix dropdown and single matrix questions.
+   */
+  public maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
+  /**
+   * You need to set this property to number more than 0 to limit the number of rate values that users can add to rate question.
+   */
+  public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
   /**
    * Set this property to false to hide the pages selector in the Test Survey Tab
    */
@@ -1016,6 +1029,15 @@ export class CreatorBase<T extends SurveyModel>
         : true;
     if (typeof options.maximumColumnsCount !== "undefined") {
       this.maximumColumnsCount = options.maximumColumnsCount;
+    }
+    if (typeof options.maximumChoicesCount !== "undefined") {
+      this.maximumChoicesCount = options.maximumChoicesCount;
+    }
+    if (typeof options.maximumRowsCount !== "undefined") {
+      this.maximumRowsCount = options.maxiumumRowsCount;
+    }
+    if (typeof options.maximumRateValues !== "undefined") {
+      this.maximumRateValues = options.maximumRateValues;
     }
     this.useTabsInElementEditor =
       typeof options.useTabsInElementEditor !== "undefined"
@@ -1471,9 +1493,9 @@ export class CreatorBase<T extends SurveyModel>
    * This function triggers user notification (via the alert() function if no onNotify event handler added).
    * @see onNotify
    */
-  public notify(msg: string) {
+  public notify(msg: string, type: "info"|"error" = "info") {
     if (this.onNotify.isEmpty) {
-      this.notifier.notify(msg);
+      this.notifier.notify(msg, type);
       // alert(msg);
     } else {
       this.onNotify.fire(this, { message: msg });

@@ -8,7 +8,8 @@ import {
   QuestionTextModel,
   QuestionImageModel,
   QuestionRatingModel,
-  QuestionDropdownModel
+  QuestionDropdownModel,
+  ItemValue
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -1148,4 +1149,26 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   creator.selectElement(q2Model.surveyElement);
   expect(q2Model.getActionById("convertTo").visible).toBeFalsy();
   expect(q2Model.getActionById("isrequired").visible).toBeTruthy();
+});
+test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
+  };
+  const q1 = creator.survey.getAllQuestions()[0];
+  creator.maximumChoicesCount = 3;
+  var q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
+  expect(q1.visibleChoices).toHaveLength(2 + 4);
+  q1.choices.push(new ItemValue("item3"));
+  expect(q1.visibleChoices).toHaveLength(3 + 3);
+});
+test("QuestionAdornerViewModel for selectbase and creator.readOnly", (): any => {
+  const creator = new CreatorTester();
+  creator.readOnly = true;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
+  };
+  const q1 = creator.survey.getAllQuestions()[0];
+  var q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
+  expect(q1.visibleChoices).toHaveLength(2);
 });

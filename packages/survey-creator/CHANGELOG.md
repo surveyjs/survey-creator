@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.59](https://github.com/surveyjs/survey-creator/compare/v1.8.58...v1.8.59) (2021-08-03)
+
+
+### Bug Fixes
+
+* Invisible pages are not disabled in page selector in Test tab [#1567](https://github.com/surveyjs/survey-creator/issues/1567) ([df7fb88](https://github.com/surveyjs/survey-creator/commit/df7fb8853629bfdf44221396ce15ce49866d275e))
+* options showPageSelectorInToolbar and showDropdownPageSelector doesn't work in V1 [#1578](https://github.com/surveyjs/survey-creator/issues/1578) ([#1579](https://github.com/surveyjs/survey-creator/issues/1579)) ([25fe86f](https://github.com/surveyjs/survey-creator/commit/25fe86f04061d0f81ddea2d0374a8e36b5da291d))
+
 ### [1.8.58](https://github.com/surveyjs/survey-creator/compare/v1.8.57...v1.8.58) (2021-07-28)
 
 

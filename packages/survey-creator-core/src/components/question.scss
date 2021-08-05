@@ -53,6 +53,7 @@ svc-question {
   display: none;
   bottom: calcSize(2);
   width: calc(100% - 80px);
+  left: calcSize(5);
 }
 
 .svc-hovered > .svc-question__content {

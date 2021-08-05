@@ -6,6 +6,7 @@ import {
   SurveyElementBase,
   SvgIcon
 } from "survey-react-ui";
+import { attachKey2click } from "survey-react-ui";
 
 interface ImageItemValueAdornerComponentProps {
   element: JSX.Element;
@@ -81,12 +82,14 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
           </div>
 
           <div className="svc-image-item-value-controls">
-            <span
-              className="svc-image-item-value-controls__button svc-image-item-value-controls__add"
-              onClick={() => this.model.chooseNewFile(this.model)}
-            >
-              <SvgIcon size={24} iconName={"icon-add-item-value"}></SvgIcon>
-            </span>
+            {attachKey2click(
+              <span
+                className="svc-image-item-value-controls__button svc-image-item-value-controls__add"
+                onClick={() => this.model.chooseNewFile(this.model)}
+              >
+                <SvgIcon size={24} iconName={"icon-add-item-value"}></SvgIcon>
+              </span>
+            )}
           </div>
         </>
       );
@@ -100,18 +103,22 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
           </div>
 
           <div className="svc-image-item-value-controls">
-            <span
-              className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
-              onClick={() => this.model.chooseFile(this.model)}
-            >
-              <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
-            </span>
-            <span
-              className="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
-              onClick={() => this.model.remove(this.model)}
-            >
-              <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
-            </span>
+            {attachKey2click(
+              <span
+                className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
+                onClick={() => this.model.chooseFile(this.model)}
+              >
+                <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+              </span>
+            )}
+            {attachKey2click(
+              <span
+                className="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
+                onClick={() => this.model.remove(this.model)}
+              >
+                <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
+              </span>
+            )}
           </div>
 
           {this.getDragDropGhost("bottom")}
@@ -138,6 +145,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
       >
         <input
           type="file"
+          tabIndex={-1}
           accept="image/*"
           className="svc-choose-file-input"
           style={{
