@@ -4,7 +4,7 @@ import { CreatorTester } from "./creator-tester";
 
 beforeEach(() => {});
 
-test("item value isNew isDraggable", () => {
+test("item value isNew isDraggable isRemovable", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
@@ -26,8 +26,21 @@ test("item value isNew isDraggable", () => {
   );
 
   expect(firstItemAdorner.isNew).toBeFalsy();
+  expect(firstItemAdorner.isAddable).toBeFalsy();
   expect(firstItemAdorner.isDraggable).toBeTruthy();
+  expect(firstItemAdorner.isRemovable).toBeTruthy();
 
   expect(itemNoneAdorner.isNew).toBeTruthy();
+  expect(itemNoneAdorner.isAddable).toBeTruthy();
   expect(itemNoneAdorner.isDraggable).toBeFalsy();
+  expect(itemNoneAdorner.isRemovable).toBeTruthy();
+
+  creator.readOnly = true;
+  expect(firstItemAdorner.isAddable).toBeFalsy();
+  expect(firstItemAdorner.isDraggable).toBeFalsy();
+  expect(firstItemAdorner.isRemovable).toBeFalsy();
+
+  expect(itemNoneAdorner.isAddable).toBeFalsy();
+  expect(itemNoneAdorner.isDraggable).toBeFalsy();
+  expect(itemNoneAdorner.isRemovable).toBeFalsy();
 });

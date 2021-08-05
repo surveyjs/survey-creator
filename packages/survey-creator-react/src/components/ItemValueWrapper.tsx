@@ -48,8 +48,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     //   return null;
     // }
     this.model.item = this.props.item;
-    const isNew = !this.props.question.isItemInList(this.props.item);
-    const button = isNew ? (
+    const button = this.model.isAddable ? (
       attachKey2click(<span
         className="svc-item-value-controls__button svc-item-value-controls__add"
         onClick={() => this.model.add(this.model)}
@@ -67,19 +66,19 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
             <SvgIcon size={16} iconName={"icon-drag-handler"}></SvgIcon>
           </span>
         ) : null}
-        {attachKey2click(<span
+        {this.model.isRemovable ? attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__remove"
           onClick={() => this.model.remove(this.model)}
         >
           <SvgIcon size={16} iconName={"icon-remove-item-value"}></SvgIcon>
-        </span>)}
+        </span>) : null}
       </>
     );
     return (
       <div
         className={
           "svc-item-value-wrapper" +
-          (isNew ? " svc-item-value--new" : "") +
+          (this.model.isAddable ? " svc-item-value--new" : "") +
           (this.model.isDragging ? " svc-item-value--dragging" : "")
         }
         key={this.props.element.key}

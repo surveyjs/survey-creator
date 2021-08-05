@@ -1,7 +1,6 @@
-import { ITabbedMenuItem, TabbedMenuItem } from "@survey/creator";
 import React from "react";
 import { CSSProperties } from "react";
-//import { ImplementorBase } from "survey-knockout";
+import { ITabbedMenuItem, TabbedMenuItem } from "@survey/creator";
 import {
   Base,
   IAction,
@@ -66,15 +65,6 @@ export class TabbedMenuComponent extends SurveyElementBase<
         {component}
       </span>
     );
-    /*
-    <span
-      class="svc-tabbed-menu-item-container"
-      data-bind="css: $data.css, style: { visibility : $data.isVisible? 'visible': 'hidden' }, visible: $data.visible === undefined || $data.visible"
-    >
-      <!-- ko component: {name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
-      <!-- /ko -->
-    </span>
-     */
   }
   componentDidMount() {
     super.componentDidMount();
