@@ -30,7 +30,7 @@ import {
   getElementWrapperComponentName,
   isStringEditable
 } from "@survey/creator";
-import TabbedMenuComponent from "./components/TabbedMenu";
+import { TabbedMenuComponent } from "./components/TabbedMenu";
 import { editableStringRendererName } from "./components/StringEditor";
 import { NotifierComponent } from "./components/Notifier";
 
@@ -122,7 +122,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 }
 
-class DesignTimeSurveyModel extends Model {
+export class DesignTimeSurveyModel extends Model {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
@@ -203,7 +203,7 @@ class DesignTimeSurveyModel extends Model {
     };
   }
   public getRendererForString(element: Base, name: string): string {
-    if (isStringEditable(element, name)) {
+    if (!this.creator.readOnly && isStringEditable(element, name)) {
       return editableStringRendererName;
     }
     return undefined;
