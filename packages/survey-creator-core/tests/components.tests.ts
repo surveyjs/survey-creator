@@ -1,5 +1,6 @@
-import { QuestionCheckboxModel, QuestionRatingModel } from "survey-core";
+import { QuestionCheckboxModel, QuestionImageModel, QuestionRatingModel } from "survey-core";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
+import { QuestionImageAdornerViewModel } from "../src/components/question-image";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
 
@@ -67,4 +68,25 @@ test("QuestionRatingAdornerViewModel read only mode", () => {
 
   expect(ratingAdorner.allowAdd).toBeFalsy();
   expect(ratingAdorner.allowRemove).toBeFalsy();
+});
+
+test("QuestionImageAdornerViewModel read only mode", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+
+  const imageAdorner = new QuestionImageAdornerViewModel(
+    creator,
+    question,
+    <any>{},
+    null
+  );
+
+  expect(imageAdorner.allowEdit).toBeTruthy();
+
+  creator.readOnly = true;
+
+  expect(imageAdorner.allowEdit).toBeFalsy();
 });
