@@ -1,4 +1,4 @@
-import { url } from '../helper';
+import { url, getTabbedMenuItemByText } from '../helper';
 import { ClientFunction, Selector } from 'testcafe';
 const title = 'Preview tab';
 
@@ -28,9 +28,7 @@ function getBarItemByText(text) {
 function getListItemByText(text) {
     return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
 }
-function getTabbedMenuItemByText(text) {
-    return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text);
-}
+
 const visibleBarItems = Selector(".svc-test-tab__content-actions .sv-action-bar-item").filterVisible();
 
 test('Device selector', async (t) => {

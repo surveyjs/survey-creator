@@ -11,6 +11,7 @@ import {
     SurveyModel
   } from "survey-core";
   import {
+    attachKey2click,
     ReactElementFactory,
     SurveyElementBase,
     SvgIcon
@@ -94,7 +95,7 @@ import {
     render(): JSX.Element {
       const className =
         "svc-toolbox__item svc-toolbox__item--" + this.item.iconName;
-      return (
+      return attachKey2click(
         <div
           className={className}
           tabIndex={0}
@@ -109,6 +110,10 @@ import {
           onPointerDown={(event: any) => {
             event.persist();
             this.model.onPointerDown(event);
+          }}
+          onClick={(event: any) => {
+            event.persist();
+            this.model.click(event);
           }}
         >
           <span className="svc-toolbox__item-container">

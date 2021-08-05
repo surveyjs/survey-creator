@@ -16,3 +16,8 @@
   min-width: calcSize(30);
   text-align: center;
 }
+
+.svc-notifier.svc-notifier--error {
+  background-color: $red;
+  color: white;
+}

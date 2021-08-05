@@ -379,7 +379,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Single Input toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-text"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Single Input"
@@ -445,7 +445,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Checkbox toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-checkbox"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Checkbox"
@@ -511,7 +511,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Radiogroup toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-radiogroup"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Radiogroup"
@@ -577,7 +577,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Dropdown toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-dropdown"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Dropdown"
@@ -643,7 +643,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Comment toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-comment"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Comment"
@@ -709,7 +709,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Rating toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-rating"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Rating"
@@ -775,7 +775,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Ranking toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-ranking"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Ranking"
@@ -841,7 +841,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Image picker toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-imagepicker"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Image picker"
@@ -907,7 +907,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Boolean toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-boolean"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Boolean"
@@ -973,7 +973,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Image toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-image"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Image"
@@ -1039,7 +1039,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Html toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-html"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Html"
@@ -1105,7 +1105,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Signature pad toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-signaturepad"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Signature pad"
@@ -1171,7 +1171,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Expression (read-only) toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-expression"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Expression (read-only)"
@@ -1237,7 +1237,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="File toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-file"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="File"
@@ -1303,7 +1303,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Matrix (single choice) toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-matrix"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Matrix (single choice)"
@@ -1369,7 +1369,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Matrix (multiple choice) toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-matrixdropdown"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Matrix (multiple choice)"
@@ -1435,7 +1435,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Matrix (dynamic rows) toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-matrixdynamic"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Matrix (dynamic rows)"
@@ -1501,7 +1501,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Multiple Text toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-multipletext"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Multiple Text"
@@ -1567,7 +1567,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Panel toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-panel"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Panel"
@@ -1633,7 +1633,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     <div
                       aria-label="Panel (dynamic panels) toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-paneldynamic"
-                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)} }"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
                       role="button"
                       tabindex="0"
                       title="Panel (dynamic panels)"

@@ -24,11 +24,8 @@ export class ToolboxItemViewModel extends Base {
     this.startX = pointerDownEvent.pageX;
     this.startY = pointerDownEvent.pageY;
     document.addEventListener("pointermove", this.startDragToolboxItem);
-
-    const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
-    toolboxItemHTMLElement.addEventListener("pointerup", this.click);
   }
-  private click = (event) => {
+  public click = (event) => {
     this.clearListeners();
     this.creator.clickToolboxItem(this.item.json);
   };
@@ -58,9 +55,9 @@ export class ToolboxItemViewModel extends Base {
     return diffX < delta && diffY < delta;
   }
   private clearListeners() {
+    if(!this.pointerDownEvent) return;
     const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
     document.removeEventListener("pointermove", this.startDragToolboxItem);
-    toolboxItemHTMLElement.removeEventListener("pointerup", this.click);
   }
   // EO correct handle click vs drag
 }

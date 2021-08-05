@@ -3,6 +3,7 @@ import React from "react";
 import { ReactDragEvent } from "src/events";
 import { QuestionSelectBase, Base, ItemValue } from "survey-core";
 import {
+  attachKey2click,
   ReactElementFactory,
   SurveyElementBase,
   SvgIcon
@@ -49,12 +50,12 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
     const button = isNew ? (
-      <span
+      attachKey2click(<span
         className="svc-item-value-controls__button svc-item-value-controls__add"
         onClick={() => this.model.add(this.model)}
       >
         <SvgIcon size={16} iconName={"icon-add-item-value"}></SvgIcon>
-      </span>
+      </span>)
     ) : (
       <>
         {" "}
@@ -66,12 +67,12 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
             <SvgIcon size={16} iconName={"icon-drag-handler"}></SvgIcon>
           </span>
         ) : null}
-        <span
+        {attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__remove"
           onClick={() => this.model.remove(this.model)}
         >
           <SvgIcon size={16} iconName={"icon-remove-item-value"}></SvgIcon>
-        </span>
+        </span>)}
       </>
     );
     return (

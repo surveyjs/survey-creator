@@ -1,5 +1,6 @@
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
 import { QuestionRadiogroupModel, Serializer } from "survey-core";
+import { EmptySurveyCreatorOptions } from "../../src/settings";
 
 test("Create survey with editingObj", () => {
   var originalElement = new QuestionRadiogroupModel("originalElement");
@@ -43,4 +44,22 @@ test("Check unique value in itemValue", () => {
   expect(fastEntryEditor.comment.errors).toHaveLength(0);
 
   propValue.isUnique = oldUnique;
+});
+test("options.maximumChoicesCount in FastEntry editor", () => {
+  var originalElement = new QuestionRadiogroupModel("originalElement");
+  originalElement.choices = [1, 2];
+  const options = new EmptySurveyCreatorOptions();
+  options.maximumChoicesCount = 3;
+  var fastEntryEditor = new FastEntryEditor(originalElement.choices, options);
+  fastEntryEditor.comment.value = "1|item1\n2\n3\n4|item4";
+  var result = fastEntryEditor.apply();
+  expect(result).toBeFalsy();
+  expect(fastEntryEditor.comment.errors).toHaveLength(1);
+  expect(fastEntryEditor.comment.errors[0].text).toEqual(
+    "Please limit the number of items from 4 to 3"
+  );
+  fastEntryEditor.comment.value = "1|item1\n2\n3\n";
+  var result = fastEntryEditor.apply();
+  expect(result).toBeTruthy();
+  expect(fastEntryEditor.comment.errors).toHaveLength(0);
 });

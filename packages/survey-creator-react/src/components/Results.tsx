@@ -1,7 +1,7 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
 import { SurveyResultsModel } from "@survey/creator";
-import { SurveyElementBase } from "survey-react-ui";
+import { attachKey2click, SurveyElementBase } from "survey-react-ui";
 
 interface ICreatorSurveyResultsComponentProps {
   survey: SurveyModel;
@@ -39,26 +39,26 @@ export class CreatorSurveyResultsComponent extends SurveyElementBase<
                 : ""
             }
           >
-            <a
+            {attachKey2click(<a
               className="nav-link"
               href="#"
               onClick={() => this.model.selectTableClick(this.model)}
             >
               {this.model.getLocString("ed.surveyResultsTable")}
-            </a>
+            </a>)}
           </li>
           <li
             className={
               "nav-item " + this.model.resultViewType === "text" ? "active" : ""
             }
           >
-            <a
+            {attachKey2click(<a
               className="nav-link"
               href="#"
               onClick={() => this.model.selectJsonClick(this.model)}
             >
               {this.model.getLocString("ed.surveyResultsJson")}
-            </a>
+            </a>)}
           </li>
         </ul>
         {this.renderResultAsText()}

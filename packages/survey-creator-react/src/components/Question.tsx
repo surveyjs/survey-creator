@@ -6,7 +6,8 @@ import {
   SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
-  SurveyQuestion
+  SurveyQuestion,
+  attachKey2click
 } from "survey-react-ui";
 
 export interface QuestionAdornerComponentProps {
@@ -68,7 +69,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
   protected renderContent(allowInteractions: boolean): JSX.Element {
     var content = this.renderElementContent();
     if (!allowInteractions) return content;
-    return (
+    return attachKey2click(
       <div
         className={"svc-question__content " + this.model.css()}
         onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}

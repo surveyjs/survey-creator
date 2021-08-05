@@ -21,6 +21,11 @@
       "Title": "End-User Guide"
     },    
     {
+      "Name": "Migrate-from-V1-to-V2",
+      "Title": "Migration Guide - from V1 to V2",
+      "IsHidden": true
+    },     
+    {
       "Name": "BuilderOverview",
       "Title": "Overview",
       "IsHidden": true

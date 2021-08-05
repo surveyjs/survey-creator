@@ -3,12 +3,17 @@
   flex-direction: row;
   width: 100%;
   box-sizing: border-box;
-}
-.sd-row {
   margin-top: 16px;
 }
-.sd-row__panel,
+
+.sd-row__panel{
+  box-sizing: border-box;
+  width: calc(100% - 40px);
+}
+
 .sd-row__question {
   box-sizing: border-box;
   width: 100%;
+  white-space: nowrap;
+  margin-top: calcSize(2);
 }

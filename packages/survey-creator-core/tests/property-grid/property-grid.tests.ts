@@ -29,7 +29,8 @@ import {
   IAction,
   QuestionRatingModel,
   QuestionCustomModel,
-  surveyLocalization
+  surveyLocalization,
+  Action
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -1628,6 +1629,17 @@ test("Create setvalue trigger", () => {
   expect(trigger.setValue).toBeFalsy();
   expect(setValueQuestion.value).toBeFalsy();
 });
+function getAddItemAction(question: Question): IAction {
+  var actions = question.getTitleActions();
+  var addAction = undefined;
+  for (var i = 0; i < actions.length; i++) {
+    if (actions[i].id == "add-item") {
+      addAction = actions[i];
+      break;
+    }
+  }
+  return addAction;
+}
 test("Support maximumColumnsCount option", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
@@ -1639,19 +1651,84 @@ test("Support maximumColumnsCount option", () => {
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(editQuestion.maxRowCount).toEqual(3);
-  var actions = editQuestion.getTitleActions();
-
-  var addAction = undefined;
-  for (var i = 0; i < actions.length; i++) {
-    if (actions[i].id == "add-item") {
-      addAction = actions[i];
-      break;
-    }
-  }
+  const addAction = getAddItemAction(editQuestion);
   expect(addAction).toBeTruthy();
-  expect(addAction.enabled()).toBeTruthy();
+  expect(addAction.enabled).toBeTruthy();
   question.addColumn("col3");
-  expect(addAction.enabled()).toBeFalsy();
+  expect(addAction.enabled).toBeFalsy();
+  question.columns.splice(2, 1);
+  expect(addAction.enabled).toBeTruthy();
+});
+test("Support maximumChoicesCount option", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choices.push(new ItemValue("item1"));
+  question.choices.push(new ItemValue("item2"));
+  var options = new EmptySurveyCreatorOptions();
+  options.maximumChoicesCount = 3;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var editQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(editQuestion.maxRowCount).toEqual(3);
+  const addAction = getAddItemAction(editQuestion);
+  expect(addAction).toBeTruthy();
+  expect(addAction.enabled).toBeTruthy();
+  question.choices.push(new ItemValue("item3"));
+  expect(addAction.enabled).toBeFalsy();
+});
+test("Support maximumRowsCount option", () => {
+  const testMaxRows = (question: any) => {
+    question.rows.push(new ItemValue("row1"));
+    question.rows.push(new ItemValue("row2"));
+    var options = new EmptySurveyCreatorOptions();
+    options.maximumRowsCount = 3;
+    var propertyGrid = new PropertyGridModelTester(question, options);
+    var editQuestion = <QuestionMatrixDynamicModel>(
+      propertyGrid.survey.getQuestionByName("rows")
+    );
+    expect(editQuestion.maxRowCount).toEqual(3);
+    const addAction = getAddItemAction(editQuestion);
+    expect(addAction).toBeTruthy();
+    expect(addAction.enabled).toBeTruthy();
+    question.rows.push(new ItemValue("row3"));
+    expect(addAction.enabled).toBeFalsy();
+  };
+  testMaxRows(new QuestionMatrixDropdownModel("q1"));
+  testMaxRows(new QuestionMatrixModel("q1"));
+});
+test("Support maximumColumnsCount option in single matrix", () => {
+  var question = new QuestionMatrixModel("q1");
+  question.columns.push(new ItemValue("col1"));
+  question.columns.push(new ItemValue("col2"));
+  var options = new EmptySurveyCreatorOptions();
+  options.maximumColumnsCount = 3;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var editQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  expect(editQuestion.maxRowCount).toEqual(3);
+  const addAction = getAddItemAction(editQuestion);
+  expect(addAction).toBeTruthy();
+  expect(addAction.enabled).toBeTruthy();
+  question.columns.push(new ItemValue("col3"));
+  expect(addAction.enabled).toBeFalsy();
+});
+test("Support maximumRateValuesCount option", () => {
+  var question = new QuestionRatingModel("q1");
+  question.rateValues.push(new ItemValue("item1"));
+  question.rateValues.push(new ItemValue("item2"));
+  var options = new EmptySurveyCreatorOptions();
+  options.maximumRateValues = 3;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var editQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  expect(editQuestion.maxRowCount).toEqual(3);
+  const addAction = getAddItemAction(editQuestion);
+  expect(addAction).toBeTruthy();
+  expect(addAction.enabled).toBeTruthy();
+  question.rateValues.push(new ItemValue("item3"));
+  expect(addAction.enabled).toBeFalsy();
 });
 test("Edit columns in property grid", () => {
   var question = new QuestionMatrixDynamicModel("q1");

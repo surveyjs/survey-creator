@@ -9,7 +9,7 @@ import {
   ResponsivityManager,
   AdaptiveActionContainer
 } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import { attachKey2click, ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 export interface ITabbedMenuComponentProps {
   model: AdaptiveActionContainer<TabbedMenuItem, ITabbedMenuItem>;
@@ -118,7 +118,7 @@ export class TabbedMenuItemComponent extends SurveyElementBase<
     let titleClassName: string =
       "svc-text svc-tabbed-menu-item__text svc-text--normal";
     if (item.active) titleClassName += " svc-text--bold";
-    return (
+    return attachKey2click(
       <div className={className} onClick={() => item.action(item)}>
         <span className={titleClassName}>{item.title}</span>
       </div>
