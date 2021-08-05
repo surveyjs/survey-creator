@@ -1,5 +1,6 @@
-import { QuestionCheckboxModel } from "survey-core";
+import { QuestionCheckboxModel, QuestionRatingModel } from "survey-core";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
+import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
 
 beforeEach(() => {});
@@ -43,4 +44,27 @@ test("item value isNew isDraggable isRemovable", () => {
   expect(itemNoneAdorner.isAddable).toBeFalsy();
   expect(itemNoneAdorner.isDraggable).toBeFalsy();
   expect(itemNoneAdorner.isRemovable).toBeFalsy();
+});
+
+
+test("QuestionRatingAdornerViewModel read only mode", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "rating", name: "q1" }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+
+  const ratingAdorner = new QuestionRatingAdornerViewModel(
+    creator,
+    question,
+    <any>{}
+  );
+
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+
+  creator.readOnly = true;
+
+  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowRemove).toBeFalsy();
 });
