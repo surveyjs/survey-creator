@@ -1172,3 +1172,23 @@ test("QuestionAdornerViewModel for selectbase and creator.readOnly", (): any => 
   var q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2);
 });
+test("Modify property editor settings on event", (): any => {
+  const creator = new CreatorTester();
+  creator.onPropertyEditorCreated.add((sender, options) => {
+    if (
+      options.obj.getType() == "text" &&
+      options.property.name === "placeHolder"
+    ) {
+      options.editor.textUpdateMode = "onTyping";
+      options.editor.dataList = ["item1", "item2"];
+    }
+  });
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  const placeHolderQuestion =
+    creator.propertyGrid.survey.getQuestionByName("placeHolder");
+  expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
+  expect(placeHolderQuestion.dataList).toHaveLength(2);
+});

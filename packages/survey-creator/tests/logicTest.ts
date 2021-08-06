@@ -315,6 +315,27 @@ QUnit.test("Remove existing item", function (assert) {
     "Remove the visibleIf from q2"
   );
 });
+QUnit.test("Remove existing item, trigger, Bug#1598", function (assert) {
+  var survey = new Survey.SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ],
+    triggers: [
+      {
+        type: "setvalue",
+        expression: "{q1} = 1",
+        setToName: "q2",
+        setValue: "q2Value",
+      },
+    ],
+  });
+  var logic = new SurveyLogic(survey);
+  assert.equal(survey.triggers.length, 1, "There is one trigger");
+  logic.removeItem(logic.items[0]);
+  assert.equal(logic.items.length, 0, "There is no more items");
+  assert.equal(survey.triggers.length, 0, "There is no triggers");
+});
 
 QUnit.test("Rename the name", function (assert) {
   var survey = new Survey.SurveyModel({

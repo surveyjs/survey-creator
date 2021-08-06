@@ -79,7 +79,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
             creator={this.props.creator}
             css={this.model.css}
           ></SurveyPage>
-          {attachKey2click(<div
+          {this.model.allowEdit ? attachKey2click(<div
             className="svc-page__add-new-question"
             onClick={(e) => {
               e.stopPropagation();
@@ -105,7 +105,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
               </span>
               <Popup model={questionTypeSelectorModel.popupModel}></Popup>
             </button>)}
-          </div>)}
+          </div>) : null}
           <div className="svc-page__content-actions">
             <SurveyActionBar
               model={this.model.actionContainer}

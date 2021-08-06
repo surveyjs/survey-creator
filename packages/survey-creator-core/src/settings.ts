@@ -93,6 +93,11 @@ export interface ISurveyCreatorOptions {
     parentObj: any,
     parentProperty: JsonObjectProperty
   ): boolean;
+  onPropertyEditorCreatedCallback(
+    object: any,
+    property: JsonObjectProperty,
+    editor: Question
+  );
   onIsPropertyReadOnlyCallback(
     obj: Base,
     property: JsonObjectProperty,
@@ -179,6 +184,11 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): boolean {
     return true;
   }
+  onPropertyEditorCreatedCallback(
+    object: any,
+    property: JsonObjectProperty,
+    editor: Question
+  ) {}
   onIsPropertyReadOnlyCallback(
     obj: Base,
     property: JsonObjectProperty,

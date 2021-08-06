@@ -1,5 +1,5 @@
 .svc-logic-question-value,
-.sd-page>.sd-row>div>.sd-element {
+.sd-page > .sd-row > div > .sd-element {
   border-radius: calcSize(0.5);
   box-sizing: border-box;
   padding: calcSize(4) calcSize(5) calcSize(8);
@@ -26,7 +26,6 @@
   .sv-string-editor {
     max-width: 100%;
     white-space: normal;
-    word-break: break-word;
   }
 
   .sv-title-actions__title {

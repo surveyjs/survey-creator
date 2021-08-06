@@ -26,18 +26,18 @@ export class QuestionRatingAdornerComponent extends QuestionAdornerComponent {
     const model = this.ratingModel;
     return (
       <div className="svc-rating-question-controls svc-item-value-controls">
-        {attachKey2click(<span
+        {model.allowRemove ? attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__remove"
           onClick={() => model.removeItem(model)}
         >
           <SvgIcon size={16} iconName={"icon-remove-item-value"}></SvgIcon>
-        </span>)}
-        {attachKey2click(<span
+        </span>) : null}
+        {model.allowAdd ? attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__add"
           onClick={() => model.addItem(model)}
         >
           <SvgIcon size={16} iconName={"icon-add-item-value"}></SvgIcon>
-        </span>)}
+        </span>): null}
       </div>
     );
   }

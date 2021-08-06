@@ -101,6 +101,13 @@ export class ItemValueWrapperViewModel extends Base {
   get isDraggable() {
     return this.isDraggableItem(this.item);
   }
+  get allowRemove() {
+    return !this.creator.readOnly;
+  }
+  get allowAdd() {
+    const isNew = !this.question.isItemInList(this.item);
+    return !this.creator.readOnly && isNew;
+  }
   public select(model: ItemValueWrapperViewModel, event: Event) {
     model.creator.selectElement(model.question, "choices", false);
     event && event.stopPropagation();

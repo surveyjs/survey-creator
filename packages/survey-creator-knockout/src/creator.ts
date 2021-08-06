@@ -21,7 +21,7 @@ if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;
 }
 
-class DesignTimeSurveyModel extends Survey {
+export class DesignTimeSurveyModel extends Survey {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
@@ -114,7 +114,7 @@ class DesignTimeSurveyModel extends Survey {
   }
 
   public getRendererForString(element: Base, name: string): string {
-    if (isStringEditable(element, name)) {
+    if (!this.creator.readOnly && isStringEditable(element, name)) {
       return editableStringRendererName;
     }
     return undefined;

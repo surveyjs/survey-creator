@@ -137,6 +137,10 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     return true;
   }
 
+  public get allowEdit() {
+    return !this.creator.readOnly;
+  }
+
   private createConverToAction() {
     var currentType = this.surveyElement.getType();
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(

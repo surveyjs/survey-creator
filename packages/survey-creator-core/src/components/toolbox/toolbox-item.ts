@@ -18,7 +18,12 @@ export class ToolboxItemViewModel extends Base {
   private currentX;
   private currentY;
 
+  public get allowAdd() {
+    return !this.creator.readOnly;
+  }
+
   public onPointerDown(pointerDownEvent) {
+    if (!this.allowAdd) return;
     pointerDownEvent.preventDefault();
     this.pointerDownEvent = pointerDownEvent;
     this.startX = pointerDownEvent.pageX;
@@ -26,6 +31,7 @@ export class ToolboxItemViewModel extends Base {
     document.addEventListener("pointermove", this.startDragToolboxItem);
   }
   public click = (event) => {
+    if (!this.allowAdd) return;
     this.clearListeners();
     this.creator.clickToolboxItem(this.item.json);
   };
