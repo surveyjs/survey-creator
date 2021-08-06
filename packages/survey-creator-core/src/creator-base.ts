@@ -322,6 +322,17 @@ export class CreatorBase<T extends SurveyModel>
     any
   > = this.onShowingProperty;
   /**
+   * The event is called after a property editor (in fact a survey question) has been created and all it's properties have been assign.
+   * You can use this event to modify the property editor properties or set event handlers to customize it's behavior
+   * <br/> options.obj the survey object that is currently editing in the property grid
+   * <br/> options.property the property that the current property editor is editing
+   * <br/> options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
+   */
+  public onPropertyEditorCreated: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
    * The event is called before rendering a delete button in the Property Grid or in Question Editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey Question
@@ -1479,7 +1490,7 @@ export class CreatorBase<T extends SurveyModel>
    * This function triggers user notification (via the alert() function if no onNotify event handler added).
    * @see onNotify
    */
-  public notify(msg: string, type: "info"|"error" = "info") {
+  public notify(msg: string, type: "info" | "error" = "info") {
     if (this.onNotify.isEmpty) {
       this.notifier.notify(msg, type);
       // alert(msg);
@@ -2088,6 +2099,14 @@ export class CreatorBase<T extends SurveyModel>
       parentObj,
       parentProperty
     );
+  }
+  onPropertyEditorCreatedCallback(
+    object: any,
+    property: Survey.JsonObjectProperty,
+    editor: Question
+  ) {
+    const options = { obj: object, property: property, editor: editor };
+    this.onPropertyEditorCreated.fire(this, options);
   }
   onCanDeleteItemCallback(
     object: any,

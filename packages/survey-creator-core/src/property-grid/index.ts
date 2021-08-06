@@ -460,6 +460,7 @@ export class PropertyJSONGenerator {
         q.description = helpText;
       }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop);
+      this.options.onPropertyEditorCreatedCallback(this.obj, prop, q);
     }
   }
   private getVisibilityOnEvent(
