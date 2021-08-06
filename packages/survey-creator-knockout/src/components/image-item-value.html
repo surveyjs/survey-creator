@@ -15,7 +15,7 @@
   </div>
 
   <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
-    <!-- ko if: isRemovable -->
+    <!-- ko if: allowRemove -->
     <sv-svg-icon
       class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
       data-bind="click: chooseFile, key2click"
@@ -47,7 +47,7 @@
   </div>
 
   <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
-    <!-- ko if: isAddable -->
+    <!-- ko if: allowAdd -->
     <sv-svg-icon
       class="svc-image-item-value-controls__button svc-image-item-value-controls__add"
       data-bind="click: chooseNewFile, key2click, clickBubble: false"

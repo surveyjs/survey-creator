@@ -101,10 +101,10 @@ export class ItemValueWrapperViewModel extends Base {
   get isDraggable() {
     return this.isDraggableItem(this.item);
   }
-  get isRemovable() {
+  get allowRemove() {
     return !this.creator.readOnly;
   }
-  get isAddable() {
+  get allowAdd() {
     const isNew = !this.question.isItemInList(this.item);
     return !this.creator.readOnly && isNew;
   }
