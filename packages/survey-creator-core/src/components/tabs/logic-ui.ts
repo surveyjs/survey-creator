@@ -33,7 +33,6 @@ export class SurveyLogicUI extends SurveyLogic {
   ) {
     super(survey, options);
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
-    this.createExpressionPropertyEditor();
     //TODO
     this.itemsSurveyValue = this.options.createSurvey(
       this.getLogicItemSurveyJSON(),
@@ -101,12 +100,13 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected onStartEditing() {
     super.onStartEditing();
+    this.createExpressionPropertyEditor();
     this.expressionEditor.text = this.editableItem.expression;
     this.itemEditor.editableItem = this.editableItem;
   }
   protected onEndEditing() {
     super.onEndEditing();
-    this.expressionEditor.text = "";
+    this.expressionEditorValue = null;
     this.itemEditor.editableItem = null;
   }
   protected onEditableItemApply() {
@@ -121,12 +121,14 @@ export class SurveyLogicUI extends SurveyLogic {
   protected hasErrorInUI(): boolean {
     if (!this.expressionEditor.isReady) {
       this.errorText = getLogicString("expressionInvalid");
-      !!this.survey.creator && this.survey.creator.notify(this.errorText, "error")
+      !!this.survey.creator &&
+        this.survey.creator.notify(this.errorText, "error");
       return true;
     }
     if (this.itemEditor.hasErrors()) {
-      this.errorText = getLogicString("actionInvalid")
-      !!this.survey.creator && this.survey.creator.notify(this.errorText, "error")
+      this.errorText = getLogicString("actionInvalid");
+      !!this.survey.creator &&
+        this.survey.creator.notify(this.errorText, "error");
       return true;
     }
     return false;
