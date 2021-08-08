@@ -36,4 +36,8 @@
 }
 .sd-rating__item-text {
   line-height: calcSize(3);
+
+  .sv-string-editor {
+    white-space: nowrap;
+  }
 }

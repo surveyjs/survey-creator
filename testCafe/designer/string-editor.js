@@ -25,7 +25,6 @@ fixture`${title}`.page`${url}`.beforeEach(
 test('Edit question title', async (t) => {
     await ClientFunction((json) => { creator.JSON = json; })(json);
     const title = json.questions[0].name;
-    await t.click(Selector(`div[name=${title}]`, { offsetX: -1, offsetY: -1 }));
     const svStringSelector = Selector('.sv-string-editor').withText(title);
     await t.click(svStringSelector);
     const prefix = 'prefix';

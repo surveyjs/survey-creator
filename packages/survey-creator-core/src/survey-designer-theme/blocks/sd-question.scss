@@ -29,7 +29,10 @@
   }
 
   .sv-title-actions__title {
-    white-space: unset;
+    white-space: nowrap;
+  }
+  .sv-string-viewer {
+    white-space: normal;
   }
 }
 

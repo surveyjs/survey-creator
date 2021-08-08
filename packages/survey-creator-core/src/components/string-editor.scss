@@ -6,6 +6,7 @@
     display: inline-block;
     position: relative;
     outline: none;
+    white-space: normal;
     word-break: break-word;
     z-index: 2;
     &[aria-placeholder]:empty:before {
