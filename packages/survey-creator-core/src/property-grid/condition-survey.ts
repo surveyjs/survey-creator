@@ -17,7 +17,8 @@ import {
   Question,
   QuestionCommentModel,
   IAction,
-  Action
+  Action,
+  FunctionFactory
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
@@ -249,6 +250,17 @@ export class ConditionEditorItemsBuilder {
     return operator != "empty" && operator != "notempty";
   }
 }
+
+function questionValueVisibleIf(params: any): boolean {
+  if (params.length !== 2) return false;
+  if (!params[0] || !params[1]) return false;
+  return params[1] !== "empty" && params[1] !== "notempty";
+}
+
+FunctionFactory.Instance.register(
+  "questionValueVisibleIf",
+  questionValueVisibleIf
+);
 
 export class ConditionEditor extends PropertyEditorSetupValue {
   public static canParseExpression(text: string): boolean {
@@ -593,7 +605,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     if (this.canShowQuestionValue(panel)) {
       newQuestion.name = "questionValue";
-      newQuestion.visibleIf = "{panel.questionName} notempty";
+      newQuestion.visibleIf =
+        "questionValueVisibleIf({panel.questionName}, {panel.operator})";
       newQuestion.title = editorLocalization.getString(
         "pe.conditionValueQuestionTitle"
       );
@@ -609,7 +622,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       panel.getQuestionByName("operator").value
     );
     var question = panel.getQuestionByName("questionValue");
-    if (!!question && question.isReadOnly) {
+    if (!!question && (question.isReadOnly || !question.isVisible)) {
       question.clearValue();
     }
     if (!question || (!!json && json.type == question.getType())) return;
