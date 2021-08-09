@@ -7,7 +7,7 @@ import {
 } from "survey-react-ui";
 import { TestSurveyTabViewModel } from "@survey/creator";
 import { SurveySimulator } from "./SurveySimulator";
-import { CreatorSurveyResultsComponent } from "../Results";
+import { SurveyResults } from "../Results";
 
 export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   private get model(): TestSurveyTabViewModel {
@@ -23,7 +23,7 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
         <div className="svc-plugin-tab__content">
           <SurveySimulator options={this.model.simulator}></SurveySimulator>
           {!this.model.isRunning ? (
-            <CreatorSurveyResultsComponent survey={this.model.survey} />
+            <SurveyResults survey={this.model.survey} />
           ) : null}
         </div>
         <div className="svc-test-tab__content-actions">
