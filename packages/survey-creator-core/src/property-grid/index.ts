@@ -14,7 +14,7 @@ import {
   SurveyModel,
   Action
 } from "survey-core";
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
 import { propertyGridCss } from "../property-grid-theme/property-grid";
 import {
@@ -301,9 +301,9 @@ export class PropertyGridTitleActionsCreator {
     enabled: boolean
   ): any {
     return {
-      title: "",
       id: "property-grid-clear",
       icon: "icon-property_grid_clear",
+      title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-property_grid_clear",
       enabled: enabled,
@@ -351,12 +351,12 @@ export class PropertyGridTitleActionsCreator {
     enabled: boolean
   ): any {
     var setupAction = {
-      title: "",
       id: "property-grid-setup",
       css: "sv-action--first sv-action-bar-item--secondary",
       icon: "icon-property_grid_modal",
       iconName: "icon-property_grid_modal",
       enabled: enabled,
+      title: getLocString("pe.edit"),
       showTitle: false,
       action: () => {
         this.showModalPropertyEditor(editor, property, question);
