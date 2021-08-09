@@ -33,6 +33,7 @@ export class StringEditorViewModel {
       this.blurEditor();
       this.done(sender, event);
     }
+    this.baseModel.checkConstraints(event);
     return true;
   }
   public edit(model: StringEditorViewModel, _: MouseEvent): void {

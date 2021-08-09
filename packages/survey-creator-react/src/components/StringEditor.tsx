@@ -50,6 +50,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
       this.svStringEditorRef.current.blur();
       this.done(event);
     }
+    this.baseModel.checkConstraints(event);
     return true;
   };
   private done = (event: any) => {

@@ -55,3 +55,18 @@ test("Save survey action properties", () => {
   expect(action.active).toBeTruthy();
   expect(action.enabled).toBeTruthy();
 });
+
+test("StringEditorViewModelBase maxLength", () => {
+  let survey: SurveyModel = new SurveyModel({  });
+  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle);
+  expect(editor.maxLength).toBe(-1);
+  try{
+    Serializer.findProperty('survey', 'title').maxLength = 4;
+    survey = new SurveyModel({  });
+    editor = new StringEditorViewModelBase(survey.locTitle);
+    expect(editor.maxLength).toBe(4);
+  }
+  finally {
+    Serializer.findProperty('survey', 'title').maxLength = -1;
+  }
+});
