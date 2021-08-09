@@ -1190,6 +1190,37 @@ test("Show rating/ranking in new line", () => {
   expect(questionValue.titleLocation).toEqual("default");
   expect(questionValue.startWithNewLine).toBeTruthy();
 });
+test("Make question value invisible for empty/notempty if they are in the new line", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "ranking", choices: [1, 2, 3] }
+    ]
+  });
+  var question = survey.getQuestionByName("q1");
+  var editor = new ConditionEditor(survey, question);
+  editor.isModal = false;
+  var panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "q1";
+  panel.getQuestionByName("operator").value = "equal";
+  var questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.startWithNewLine).toBeTruthy();
+  expect(questionValue.isReadOnly).toBeFalsy();
+  expect(questionValue.isVisible).toBeTruthy();
+  panel.getQuestionByName("operator").value = "empty";
+  expect(questionValue.startWithNewLine).toBeTruthy();
+  expect(questionValue.isVisible).toBeFalsy();
+
+  panel.getQuestionByName("questionName").value = "q2";
+  panel.getQuestionByName("operator").value = "equal";
+  var questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue.startWithNewLine).toBeTruthy();
+  expect(questionValue.isReadOnly).toBeFalsy();
+  expect(questionValue.isVisible).toBeTruthy();
+  panel.getQuestionByName("operator").value = "empty";
+  expect(questionValue.startWithNewLine).toBeTruthy();
+  expect(questionValue.isVisible).toBeFalsy();
+});
 test("Set minWidth property to question correctly", () => {
   var survey = new SurveyModel({
     elements: [
