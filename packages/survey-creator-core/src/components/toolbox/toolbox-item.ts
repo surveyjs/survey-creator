@@ -45,7 +45,7 @@ export class ToolboxItemViewModel extends Base {
     this.clearListeners();
 
     var json = this.creator.getJSONForNewElement(this.item.json);
-    this.dragDropHelper.startDrag(this.pointerDownEvent, json);
+    this.dragDropHelper.startDragToolboxItem(this.pointerDownEvent, json);
     return true;
   };
 
@@ -61,7 +61,7 @@ export class ToolboxItemViewModel extends Base {
     return diffX < delta && diffY < delta;
   }
   private clearListeners() {
-    if(!this.pointerDownEvent) return;
+    if (!this.pointerDownEvent) return;
     const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
     document.removeEventListener("pointermove", this.startDragToolboxItem);
   }
