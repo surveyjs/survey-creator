@@ -155,12 +155,13 @@ export class ObjectSelectorModel extends Base {
   }
   public show(
     survey: SurveyModel,
-    selectedItem: Base,
+    selectedObj: Base,
     onClose: (obj: Base) => void
   ) {
     this.filteredText = "";
     this.selector = new ObjectSelector(survey, this.getObjectDisplayName);
     this.onItemsCreated();
+    const selectedItem = this.selector.getItemByObj(selectedObj);
     if (!this.listModelValue) {
       this.listModelValue = new ListModel(
         this.selector.items,
@@ -168,10 +169,11 @@ export class ObjectSelectorModel extends Base {
           onClose(item.data);
         },
         true,
-        this.selector.getItemByObj(selectedItem)
+        selectedItem
       );
     } else {
       this.listModelValue.items = this.selector.items;
+      this.listModelValue.selectedItem = selectedItem;
     }
     this.isVisible = true;
   }

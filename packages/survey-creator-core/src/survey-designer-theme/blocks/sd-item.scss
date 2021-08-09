@@ -38,6 +38,8 @@
   font-size: calcSize(2);
   margin-left: calcSize(1);
   color: $foreground;
+  white-space: normal;
+  word-break: break-word;
 }
 .sd-item--disabled .sd-item__control-label {
   color: $foreground-disabled-for-editors;
