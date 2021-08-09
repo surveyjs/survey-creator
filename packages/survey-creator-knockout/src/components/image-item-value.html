@@ -1,8 +1,13 @@
 <div
   class="svc-image-item-value-wrapper"
   data-bind="attr: attributes, event: { pointerdown: function(model, event) { startDragItemValue(event); } }, css: { 'svc-image-item-value--new': isNew }"
->  
-  <input type="file" tabindex="-1" accept="image/*" class="svc-choose-file-input"/>
+>
+  <input
+    type="file"
+    tabindex="-1"
+    accept="image/*"
+    class="svc-choose-file-input"
+  />
 
   <!-- ko ifnot: isNew -->
   <!-- ko if: showDragDropGhostOnTop -->
@@ -14,7 +19,10 @@
     <!-- /ko -->
   </div>
 
-  <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
+  <div
+    class="svc-image-item-value-controls"
+    data-bind="event: { pointerdown: blockEvent }"
+  >
     <!-- ko if: allowRemove -->
     <sv-svg-icon
       class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
@@ -30,7 +38,7 @@
   </div>
 
   <!-- ko if: showDragDropGhostOnBottom -->
-  <div class="svc-drag-drop-ghost svc-drag-drop-ghost--item-value-bottom"></div>
+  <div class="sv-drag-drop-ghostsvc-drag-drop-ghost--item-value-bottom"></div>
   <!-- /ko -->
   <!-- /ko -->
 
@@ -46,7 +54,10 @@
     </div>
   </div>
 
-  <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
+  <div
+    class="svc-image-item-value-controls"
+    data-bind="event: { pointerdown: blockEvent }"
+  >
     <!-- ko if: allowAdd -->
     <sv-svg-icon
       class="svc-image-item-value-controls__button svc-image-item-value-controls__add"
