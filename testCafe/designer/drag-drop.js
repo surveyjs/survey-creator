@@ -225,6 +225,72 @@ test("Drag Drop ItemValue (choices)", async (t) => {
     await t.expect(value).eql(expectedValue);
 });
 
+test("Drag Drop MatrixRows (property grid)", async (t) => {
+    const json = {
+        pages: [
+            {
+                name: "page1",
+                elements: [
+                    {
+                        type: "radiogroup",
+                        name: "question1",
+                        choices: ["item1", "item2", "item3"]
+                    }
+                ]
+            }
+        ]
+    };
+    await setJSON(json);
+
+    const Question1 = Selector(`[name="question1"]`);
+    await t.click(Question1, { speed: 0.5 });
+
+    const ChoicesTab = Selector("h4").withExactText("Choices");
+    await t.click(ChoicesTab);
+
+    const Item1 = Selector(
+        `[name="choices"] [data-sv-drop-target-matrix-row]`
+    ).nth(0);
+    const Item2 = Selector(
+        `[name="choices"] [data-sv-drop-target-matrix-row]`
+    ).nth(1);
+    const Item3 = Selector(
+        `[name="choices"] [data-sv-drop-target-matrix-row]`
+    ).nth(2);
+    let DragZoneItem2 = Selector(
+        `[name="choices"] [data-sv-drop-target-matrix-row]`
+    )
+        .nth(1)
+        .find(`.spg-matrixdynamic__drag-element`);
+
+    await t.hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2);
+
+    const expectedValue = "item2";
+
+    await t.dragToElement(DragZoneItem2, Item1, {
+        offsetX: 5,
+        offsetY: 5,
+        speed: 0.5
+    });
+
+    let value = await getItemValueByIndex("question1", 0);
+    await t.expect(value).eql(expectedValue);
+
+    DragZoneItem2 = Selector(
+        `[name="choices"] [data-sv-drop-target-matrix-row]`
+    )
+        .nth(0)
+        .find(`.spg-matrixdynamic__drag-element`);
+
+    await t.dragToElement(DragZoneItem2, Item3, {
+        offsetX: 5,
+        offsetY: 5,
+        speed: 0.5
+    });
+    value = await getItemValueByIndex("question1", 2);
+    await t.expect(value).eql(expectedValue);
+});
+
 test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
     const json = {
         pages: [
