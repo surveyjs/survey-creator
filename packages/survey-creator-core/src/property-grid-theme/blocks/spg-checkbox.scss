@@ -46,3 +46,13 @@
 .spg-checkbox__hidden {
   display: none;
 }
+
+.spg-selectbase {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.spg-selectbase__item {
+  margin-bottom: calcSize(2);
+}

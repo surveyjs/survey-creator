@@ -1,6 +1,6 @@
 @import "../../variables.scss";
 
-svc-tab-translation {
+.svc-tab-translation {
   width: 100%;
   height: 100%;
   background: $background-dim;
@@ -13,6 +13,15 @@ svc-tab-translation {
   // background: $background;
 }
 
+.svc-creator-tab__content-wrapper {
+  flex-grow: 1;
+}
+
+.svc-translation-tab__property-panel {
+  flex-grow: 0;
+  width: 450px;
+}
+
 .svc-translation-tab__content-actions {
   .sv-action-bar {
     padding: 0;
@@ -21,4 +30,8 @@ svc-tab-translation {
     border-top: 1px solid $border;
     width: 100%;
   }
+}
+
+.svc-translation-tab {
+  display: flex;
 }

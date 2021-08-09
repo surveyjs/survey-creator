@@ -48,9 +48,9 @@ export function setSurveyJSONForPropertyGrid(
 ) {
   json.showNavigationButtons = "none";
   json.showPageTitles = false;
-  json.focusFirstQuestionAutomatic = false;
+  //json.focusFirstQuestionAutomatic = false;
   json.showQuestionNumbers = "off";
-  json.questionTitleLocation = "top";
+  json.questionTitleLocation = "left";
   json.showProgressBar = "off";
   if (updateOnTyping) {
     json.textUpdateMode = "onTyping";

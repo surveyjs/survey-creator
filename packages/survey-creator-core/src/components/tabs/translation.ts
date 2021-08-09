@@ -34,6 +34,7 @@ import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 
 import "./translation.scss";
 import { SurveyHelper } from "../../survey-helper";
+import { propertyGridCss } from "../../entries";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -581,6 +582,7 @@ export class Translation extends Base implements ITranslationLocales {
     var json = this.getSettingsSurveyJSON();
     setSurveyJSONForPropertyGrid(json);
     var res = this.options.createSurvey(json, "translation_settings");
+    res.css = propertyGridCss;
     res.onValueChanged.add((sender, options) => {
       if (options.name == "locales") {
         this.updateLocales();
@@ -603,13 +605,20 @@ export class Translation extends Base implements ITranslationLocales {
     return {
       elements: [
         {
-          type: "checkbox",
-          name: "locales",
-          choicesVisibleIf: "{selLocales} contains {item}",
-          titleLocation: "hidden",
-          colCount: 0
+         "type": "panel",
+         "name": "languages",
+         "elements": [
+          {
+            type: "checkbox",
+            name: "locales",
+            choicesVisibleIf: "{selLocales} contains {item}",
+            choicesEnableIf: " {item} != \"english\"",
+            titleLocation: "hidden"
+          }
+         ],
+         "title": "Languages"
         }
-      ]
+       ]
     };
   }
   public getSurveyLocales() {
@@ -796,7 +805,6 @@ export class Translation extends Base implements ITranslationLocales {
       new Action({
         id: "svc-translation-choose-language",
         css: "sv-action--first sv-action-bar-item--secondary",
-        iconName: "icon-change_16x16",
         //title: () => this.selectLanguageOptionsCaption,
         title: this.selectLanguageOptionsCaption,
         component: "sv-action-bar-item-dropdown",
@@ -871,23 +879,24 @@ export class Translation extends Base implements ITranslationLocales {
     });
     actions.push(this.showAllStringsAction);
 
-    actions.push(
-      new Action({
-        id: "svd-translation-merge_locale_withdefault",
-        title: this.mergeLocaleWithDefaultText,
-        tooltip: this.mergeLocaleWithDefaultText,
-        component: "sv-action-bar-item",
-        visible: this.canMergeLocaleWithDefault,
-        action: () => {
-          this.mergeLocaleWithDefault();
-        }
-      })
-    );
+    // actions.push(
+    //   new Action({
+    //     id: "svd-translation-merge_locale_withdefault",
+    //     title: this.mergeLocaleWithDefaultText,
+    //     tooltip: this.mergeLocaleWithDefaultText,
+    //     component: "sv-action-bar-item",
+    //     visible: this.canMergeLocaleWithDefault,
+    //     action: () => {
+    //       this.mergeLocaleWithDefault();
+    //     }
+    //   })
+    // );
     actions.push(
       new Action({
         id: "svc-translation-import",
         css: "sv-action--last",
-        title: this.importFromCSVText,
+        iconName: "icon-import_20x20",
+        //title: this.importFromCSVText,
         tooltip: this.importFromCSVText,
         component: "sv-action-bar-item",
         action: () => {
@@ -908,7 +917,8 @@ export class Translation extends Base implements ITranslationLocales {
       new Action({
         id: "svc-translation-export",
         css: "sv-action--last",
-        title: this.exportToCSVText,
+        iconName: "icon-export_20x20",
+        //title: this.exportToCSVText,
         tooltip: this.exportToCSVText,
         component: "sv-action-bar-item",
         action: () => {
@@ -1000,7 +1010,7 @@ export class Translation extends Base implements ITranslationLocales {
     }
   }
   public resetLocales() {
-    var locales = [""];
+    var locales = ["en"];
     this.root.fillLocales(locales);
     this.setLocales(locales);
   }
