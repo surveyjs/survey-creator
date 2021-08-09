@@ -1,4 +1,4 @@
-import { ItemValueWrapperViewModel } from "@survey/creator";
+import { getLocString, ItemValueWrapperViewModel } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent } from "src/events";
 import { QuestionSelectBase, Base, ItemValue } from "survey-core";
@@ -51,6 +51,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     const button = this.model.allowAdd ? (
       attachKey2click(<span
         className="svc-item-value-controls__button svc-item-value-controls__add"
+        title={this.model.tooltip}
         onClick={() => this.model.add(this.model)}
       >
         <SvgIcon size={16} iconName={"icon-add-item-value"}></SvgIcon>
@@ -61,6 +62,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         {this.model.isDraggable ? (
           <span
             className="svc-item-value-controls__button svc-item-value-controls__drag"
+            title={this.model.dragTooltip}
             onPointerDown={(event: any) => this.model.startDragItemValue(event)}
           >
             <SvgIcon size={16} iconName={"icon-drag-handler"}></SvgIcon>
@@ -68,6 +70,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         ) : null}
         {this.model.allowRemove ? attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__remove"
+          title={this.model.tooltip}
           onClick={() => this.model.remove(this.model)}
         >
           <SvgIcon size={16} iconName={"icon-remove-item-value"}></SvgIcon>
