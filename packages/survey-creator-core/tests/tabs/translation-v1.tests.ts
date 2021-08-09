@@ -411,6 +411,25 @@ test("Export to array", () => {
     ""
   ]);
 });
+test("Export settings.translation.prefix", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title en",
+          de: "title de"
+        }
+      }
+    ]
+  });
+  var translation = new Translation(survey);
+  const exportStr1 = translation.exportToCSV();
+  settings.traslation.exportPrefix = "12345;";
+  const exportStr2 = translation.exportToCSV();
+  expect(exportStr2).toEqual("12345;" + exportStr1);
+});
 test("Merging a locale with default", () => {
   surveyLocalization.defaultLocale = "de";
   const survey: SurveyModel = new SurveyModel({

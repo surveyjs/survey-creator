@@ -515,6 +515,25 @@ QUnit.test("Export to array", function (assert) {
     "use default value"
   );
 });
+QUnit.test("Export settings.translation.prefix", function (assert) {
+  var survey = new Survey.Survey({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title en",
+          de: "title de",
+        },
+      },
+    ],
+  });
+  var translation = new Translation(survey);
+  const exportStr1 = translation.exportToCSV();
+  settings.traslation.exportPrefix = "12345;";
+  const exportStr2 = translation.exportToCSV();
+  assert.equal(exportStr2, "12345;" + exportStr1, "Prefix was added");
+});
 QUnit.test("Merging a locale with default", function (assert) {
   Survey.surveyLocalization.defaultLocale = "de";
   var survey = new Survey.Survey({
