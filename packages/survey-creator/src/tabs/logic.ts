@@ -282,6 +282,20 @@ export class SurveyLogicAction {
       if (!isRenaming) {
         this.logicType.saveElement(this);
       }
+      if (
+        !expression &&
+        Survey.Serializer.isDescendantOf(
+          this.element.getType(),
+          "surveytrigger"
+        )
+      ) {
+        var index = this.survey.triggers.indexOf(
+          <Survey.SurveyTrigger>this.element
+        );
+        if (index > -1) {
+          this.survey.triggers.splice(index, 1);
+        }
+      }
     }
   }
   public renameQuestion(oldName: string, newName: string) {
@@ -416,7 +430,11 @@ export class SurveyLogicItem {
     }
   }
   public apply(expression: string) {
-    this.removeSameActions();
+    if (!expression) {
+      this.removeActions();
+    } else {
+      this.removeSameActions();
+    }
     for (var i = 0; i < this.removedActions.length; i++) {
       this.removedActions[i].apply("");
     }
@@ -482,6 +500,12 @@ export class SurveyLogicItem {
     var ops = this.actions;
     for (var i = 0; i < ops.length; i++) {
       ops[i].apply(expression, isRenaming);
+    }
+  }
+  private removeActions() {
+    var ops = this.actions;
+    for (var i = ops.length - 1; i >= 0; i--) {
+      this.removeAction(ops[i]);
     }
   }
   private removeSameActions() {

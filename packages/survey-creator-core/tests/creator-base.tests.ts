@@ -1150,6 +1150,31 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   expect(q2Model.getActionById("convertTo").visible).toBeFalsy();
   expect(q2Model.getActionById("isrequired").visible).toBeTruthy();
 });
+test("QuestionAdornerViewModel and onElementAllowOperations on new elements", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "comment", name: "q2" }
+    ]
+  };
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (options.obj.isQuestion) {
+      options.allowChangeType = false;
+      options.allowChangeRequired = false;
+    }
+  });
+  const newQuestion = creator.survey.pages[0].addNewQuestion("text", "q3");
+  creator.selectElement(newQuestion);
+
+  var newQuestionModel = new QuestionAdornerViewModel(
+    creator,
+    newQuestion,
+    undefined
+  );
+  expect(newQuestionModel.getActionById("convertTo").visible).toBeFalsy();
+  expect(newQuestionModel.getActionById("isrequired").visible).toBeFalsy();
+});
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -1171,4 +1196,24 @@ test("QuestionAdornerViewModel for selectbase and creator.readOnly", (): any => 
   const q1 = creator.survey.getAllQuestions()[0];
   var q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2);
+});
+test("Modify property editor settings on event", (): any => {
+  const creator = new CreatorTester();
+  creator.onPropertyEditorCreated.add((sender, options) => {
+    if (
+      options.obj.getType() == "text" &&
+      options.property.name === "placeHolder"
+    ) {
+      options.editor.textUpdateMode = "onTyping";
+      options.editor.dataList = ["item1", "item2"];
+    }
+  });
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  const placeHolderQuestion =
+    creator.propertyGrid.survey.getQuestionByName("placeHolder");
+  expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
+  expect(placeHolderQuestion.dataList).toHaveLength(2);
 });

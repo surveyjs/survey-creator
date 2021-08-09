@@ -29,6 +29,7 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
   }
 
   public addItem(model: QuestionRatingAdornerViewModel) {
+    if (!model.allowAdd) return;
     if (model.question.rateValues.length === 0) {
       model.question.rateMax += model.question.rateStep;
     } else {
@@ -56,6 +57,7 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
     }
   }
   public removeItem(model: QuestionRatingAdornerViewModel) {
+    if (!model.allowRemove) return;
     const property = Serializer.findProperty(
       model.question.getType(),
       "rateValues"
@@ -85,5 +87,11 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
         question.rateValues.splice(itemIndex, 1);
       }
     }
+  }
+  public get allowAdd() {
+    return !this.creator.readOnly;
+  }
+  public get allowRemove() {
+    return !this.creator.readOnly;
   }
 }

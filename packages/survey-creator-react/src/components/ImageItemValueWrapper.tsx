@@ -70,9 +70,9 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         </div>      
       
         <div className="svc-image-item-value-controls">
-        {attachKey2click(<span className="svc-image-item-value-controls__button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
+        {this.model.allowAdd ? attachKey2click(<span className="svc-image-item-value-controls__button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
             <SvgIcon size={24} iconName={'icon-add-item-value'}></SvgIcon>
-          </span>)}
+          </span>) : null}
         </div>
       </>);
     } else {
@@ -85,18 +85,18 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
           </div>
 
           <div className="svc-image-item-value-controls">
-            {attachKey2click(<span
+            {this.model.allowRemove ? attachKey2click(<span
               className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
               onClick={() => this.model.chooseFile(this.model)}
             >
               <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
-            </span>)}
-            {attachKey2click(<span
+            </span>) : null}
+            {this.model.allowRemove ? attachKey2click(<span
               className="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
               onClick={() => this.model.remove(this.model)}
             >
               <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
-            </span>)}
+            </span>) : null}
           </div>
 
           {this.getDragDropGhost("bottom")}

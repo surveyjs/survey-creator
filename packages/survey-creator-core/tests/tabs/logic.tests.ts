@@ -509,3 +509,50 @@ test("Create setValue trigger in logic", () => {
   expect(elementPanel.getQuestionByName("setToName").value).toBeFalsy();
   expect(elementPanel.getQuestionByName("setValue").value).toBeFalsy();
 });
+test("LogicItemEditorUI: edit item two times and do Build/Edit", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{q1} = 1" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  var itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(logic.expressionEditor).toBeFalsy();
+  logic.editItem(logic.items[0]);
+  expect(logic.mode).toEqual("edit");
+  expect(logic.expressionEditor).toBeTruthy();
+
+  var editor = logic.expressionEditor;
+  expect(editor.isModal).toBeFalsy();
+  expect(editor.panel.titleLocation).toEqual("default");
+  expect(editor.panel.visible).toBeTruthy();
+  expect(editor.textEditor.visible).toBeFalsy();
+  var actions = editor.panel.getTitleActions();
+  expect(actions).toHaveLength(2);
+  expect(actions[0].title).toEqual("Build");
+  expect(actions[1].title).toEqual("Edit");
+  expect(actions[0].active).toBeTruthy();
+  expect(actions[1].active).toBeFalsy();
+  actions[1].action();
+  expect(editor.panel.visible).toBeFalsy();
+  expect(editor.textEditor.visible).toBeTruthy();
+  expect(editor.textEditor.value).toEqual("{q1} = 1");
+
+  logic.mode = "view";
+  expect(logic.expressionEditor).toBeFalsy();
+
+  logic.editItem(logic.items[0]);
+  expect(logic.expressionEditor).toBeTruthy();
+  editor = logic.expressionEditor;
+  expect(editor.textEditor.visible).toBeFalsy();
+  var actions = editor.panel.getTitleActions();
+  expect(actions[0].active).toBeTruthy();
+  expect(actions[1].active).toBeFalsy();
+  actions[1].action();
+  expect(editor.panel.visible).toBeFalsy();
+  expect(editor.textEditor.visible).toBeTruthy();
+  expect(editor.textEditor.value).toEqual("{q1} = 1");
+});

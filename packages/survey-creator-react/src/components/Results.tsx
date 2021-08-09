@@ -3,15 +3,15 @@ import { Base, SurveyModel } from "survey-core";
 import { SurveyResultsModel } from "@survey/creator";
 import { attachKey2click, SurveyElementBase } from "survey-react-ui";
 
-interface ICreatorSurveyResultsComponentProps {
+interface ISurveyResultsProps {
   survey: SurveyModel;
 }
-export class CreatorSurveyResultsComponent extends SurveyElementBase<
-  ICreatorSurveyResultsComponentProps,
+export class SurveyResults extends SurveyElementBase<
+  ISurveyResultsProps,
   any
 > {
   model: SurveyResultsModel;
-  constructor(props: ICreatorSurveyResultsComponentProps) {
+  constructor(props: ISurveyResultsProps) {
     super(props);
     if (props.survey) {
       this.model = new SurveyResultsModel(props.survey);

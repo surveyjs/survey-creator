@@ -6,6 +6,9 @@ export class LogoImageViewModel extends Base {
   constructor(private creator: CreatorBase<SurveyModel>, public root: HTMLDivElement) {
     super();
   }
+  public get allowEdit() {
+    return !this.creator.readOnly;
+  }
   public get survey(): SurveyModel {
     return this.creator.survey;
   }

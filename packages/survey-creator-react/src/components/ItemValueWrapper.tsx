@@ -1,4 +1,4 @@
-import { ItemValueWrapperViewModel } from "@survey/creator";
+import { getLocString, ItemValueWrapperViewModel } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent } from "src/events";
 import { QuestionSelectBase, Base, ItemValue } from "survey-core";
@@ -48,10 +48,10 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     //   return null;
     // }
     this.model.item = this.props.item;
-    const isNew = !this.props.question.isItemInList(this.props.item);
-    const button = isNew ? (
+    const button = this.model.allowAdd ? (
       attachKey2click(<span
         className="svc-item-value-controls__button svc-item-value-controls__add"
+        title={this.model.tooltip}
         onClick={() => this.model.add(this.model)}
       >
         <SvgIcon size={16} iconName={"icon-add-item-value"}></SvgIcon>
@@ -62,24 +62,26 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         {this.model.isDraggable ? (
           <span
             className="svc-item-value-controls__button svc-item-value-controls__drag"
+            title={this.model.dragTooltip}
             onPointerDown={(event: any) => this.model.startDragItemValue(event)}
           >
             <SvgIcon size={16} iconName={"icon-drag-handler"}></SvgIcon>
           </span>
         ) : null}
-        {attachKey2click(<span
+        {this.model.allowRemove ? attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__remove"
+          title={this.model.tooltip}
           onClick={() => this.model.remove(this.model)}
         >
           <SvgIcon size={16} iconName={"icon-remove-item-value"}></SvgIcon>
-        </span>)}
+        </span>) : null}
       </>
     );
     return (
       <div
         className={
           "svc-item-value-wrapper" +
-          (isNew ? " svc-item-value--new" : "") +
+          (this.model.allowAdd ? " svc-item-value--new" : "") +
           (this.model.isDragging ? " svc-item-value--dragging" : "")
         }
         key={this.props.element.key}

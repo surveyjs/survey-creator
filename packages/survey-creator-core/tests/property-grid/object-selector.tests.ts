@@ -195,3 +195,20 @@ test("ObjectSelectorModel, do not recreate list model", () => {
   expect(model.list).toStrictEqual(list);
   expect(model.list.items).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
 });
+test("ObjectSelectorModel, list model selection on show issue", () => {
+  var survey = createSurvey2();
+  var model = new ObjectSelectorModel();
+  var selectedItem: any;
+  var selectedQuestion = survey.getAllQuestions()[0];
+  model.show(survey, selectedQuestion, (obj: Base) => {
+    selectedItem = obj;
+  });
+  expect(model.list.selectedItem).toBeTruthy();
+  expect(model.list.selectedItem.data).toEqual(selectedQuestion);
+  model.list.selectItem(model.list.items[0]);
+  model.show(survey, selectedQuestion, (obj: Base) => {
+    selectedItem = obj;
+  });
+  expect(model.list.selectedItem).toBeTruthy();
+  expect(model.list.selectedItem.data).toEqual(selectedQuestion);
+});

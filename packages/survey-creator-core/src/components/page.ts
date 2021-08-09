@@ -102,4 +102,7 @@ export class PageViewModel<
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);
   }
+  public get allowEdit() {
+    return !this.creator.readOnly;
+  }
 }

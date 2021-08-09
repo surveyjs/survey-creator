@@ -1,5 +1,5 @@
 .svc-logic-question-value,
-.sd-page>.sd-row>div>.sd-element {
+.sd-page > .sd-row > div > .sd-element {
   border-radius: calcSize(0.5);
   box-sizing: border-box;
   padding: calcSize(4) calcSize(5) calcSize(8);
@@ -23,15 +23,17 @@
     display: inline-block;
     max-width: 100%;
   }
-  .sv-string-editor{
-    white-space: normal;
+  .sv-string-editor {
     max-width: 100%;
+    white-space: normal;
   }
 
   .sv-title-actions__title {
-    white-space: unset;
+    white-space: nowrap;
   }
-
+  .sv-string-viewer {
+    white-space: normal;
+  }
 }
 
 .sd-scrollable .sd-question__content {

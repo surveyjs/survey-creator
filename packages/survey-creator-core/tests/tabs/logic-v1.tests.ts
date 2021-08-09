@@ -68,8 +68,8 @@ test("Add existing visible Items", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q2}=1" },
-      { type: "text", name: "q2", visibleIf: "{q1}=1" },
-    ],
+      { type: "text", name: "q2", visibleIf: "{q1}=1" }
+    ]
   });
   var logic = new SurveyLogic(survey);
   expect(logic.items).toHaveLength(2);
@@ -79,8 +79,8 @@ test("Add new action immediately", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
-      { type: "text", name: "q2" },
-    ],
+      { type: "text", name: "q2" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   expect(logic.mode).toEqual("view");
@@ -99,8 +99,8 @@ test("Do not add expression question into visible Items", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
-      { type: "expression", name: "q2", expression: "{q1}+1" },
-    ],
+      { type: "expression", name: "q2", expression: "{q1}+1" }
+    ]
   });
   var logic = new SurveyLogic(survey);
   expect(logic.items).toHaveLength(0);
@@ -112,8 +112,8 @@ test("Add new item", () => {
     elements: [
       { type: "text", name: "q1", visibleIf: "{q2}=1" },
       { type: "text", name: "q2", visibleIf: "{q1}=1" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   expect(logic.mode).toEqual("view");
@@ -143,8 +143,8 @@ test("Edit existing item", () => {
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
       { type: "text", name: "q2", visibleIf: "{q3} =1" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   expect(logic.mode).toEqual("view");
@@ -162,8 +162,8 @@ test("Use SurveyItemSelector for editing", () => {
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
       { type: "text", name: "q2", visibleIf: "{q3}=1" },
       { type: "text", name: "q3", visibleIf: "{q2}=1" },
-      { type: "text", name: "q4" },
-    ],
+      { type: "text", name: "q4" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   expect(logic.mode).toEqual("view");
@@ -208,8 +208,8 @@ test("Remove same actions on save", () => {
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
       { type: "text", name: "q2" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   logic.editItem(logic.items[0]);
@@ -231,8 +231,8 @@ test("Remove existing action", () => {
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
       { type: "text", name: "q2", visibleIf: "{q3}=1" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   logic.editItem(logic.items[0]);
@@ -246,8 +246,8 @@ test("Remove existing item", () => {
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
       { type: "text", name: "q2", visibleIf: "{q3}=1" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var logic = new SurveyLogic(survey);
   logic.removeItem(logic.items[0]);
@@ -256,18 +256,42 @@ test("Remove existing item", () => {
   expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
 });
 
+test("Remove existing item, triggers, Bug #1598", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ],
+    triggers: [
+      {
+        type: "setvalue",
+        expression: "{q1} = 1",
+        setToName: "q2",
+        setValue: "q2Value"
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  expect(survey.triggers).toHaveLength(1);
+  logic.removeItem(logic.items[0]);
+  expect(logic.items).toHaveLength(0);
+  expect(survey.triggers).toHaveLength(0);
+});
+
 test("Rename the name", () => {
   var survey = new SurveyModel({
     pages: [
       {
         name: "page1",
         visibleIf: "{q2} != 2",
-        elements: [{ type: "text", name: "q1", enableIf: "{q2} > 2" }],
+        elements: [{ type: "text", name: "q1", enableIf: "{q2} > 2" }]
       },
       {
         name: "page2",
         visibleIf: "{Q1} != 1 and {q1} < 1",
-        elements: [{ type: "text", name: "q2", requiredIf: "{q1} < 1" }],
+        elements: [{ type: "text", name: "q2", requiredIf: "{q1} < 1" }]
       },
       {
         name: "page3",
@@ -282,18 +306,18 @@ test("Rename the name", () => {
                 type: "text",
                 name: "q3",
                 validators: [
-                  { type: "expressionvalidator", expression: "{q1} > 1" },
-                ],
-              },
-            ],
-          },
-        ],
+                  { type: "expressionvalidator", expression: "{q1} > 1" }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         name: "page4",
         elements: [
-          { type: "expression", name: "q4", expression: "{q1} + {q2}" },
-        ],
+          { type: "expression", name: "q4", expression: "{q1} + {q2}" }
+        ]
       },
       {
         name: "page5",
@@ -307,11 +331,11 @@ test("Rename the name", () => {
                 visibleIf: "{q1} = 1",
                 enableIf: "{q2} = 2",
                 requiredIf: "{q1} = 1",
-                totalExpression: "{q1} + {q2}",
-              },
-            ],
-          },
-        ],
+                totalExpression: "{q1} + {q2}"
+              }
+            ]
+          }
+        ]
       },
       {
         name: "page6",
@@ -319,15 +343,15 @@ test("Rename the name", () => {
           {
             type: "matrixdropdown",
             name: "q6",
-            rowsVisibleIf: "{item} = {q1}",
+            rowsVisibleIf: "{item} = {q1}"
           },
           {
             type: "matrix",
             name: "q7",
             rowsVisibleIf: "{item} = {q1}",
-            columnsVisibleIf: "{item} = {q2}",
-          },
-        ],
+            columnsVisibleIf: "{item} = {q2}"
+          }
+        ]
       },
       {
         name: "page7",
@@ -337,42 +361,40 @@ test("Rename the name", () => {
             name: "q8",
             choicesVisibleIf: "{item} = {q1}",
             choicesEnableIf: "{item} = {q2}",
-            choices: [
-              { value: 1, visibleIf: "{q1} = 1", enableIf: "{q2} = 2" },
-            ],
-          },
-        ],
-      },
+            choices: [{ value: 1, visibleIf: "{q1} = 1", enableIf: "{q2} = 2" }]
+          }
+        ]
+      }
     ],
     triggers: [
       {
         type: "runexpression",
         expression: "{q1} = 1",
-        runExpression: "{q2} + 1",
+        runExpression: "{q2} + 1"
       },
       {
         type: "complete",
-        expression: "{q1} = 1",
+        expression: "{q1} = 1"
       },
       {
         type: "copyvalue",
         expression: "{q1} = 1",
         setToName: "q1",
-        fromName: "q2",
-      },
+        fromName: "q2"
+      }
     ],
     completedHtmlOnCondition: [
       {
         expression: "{q1} = 1",
-        html: "text",
-      },
+        html: "text"
+      }
     ],
     calculatedValues: [
       {
         name: "var1",
-        expression: "{q1} = 1",
-      },
-    ],
+        expression: "{q1} = 1"
+      }
+    ]
   });
   var logic = new SurveyLogic(survey);
   var q1 = survey.getQuestionByName("q1");
@@ -431,10 +453,10 @@ test("Delete the question", () => {
       {
         type: "text",
         name: "q2",
-        visibleIf: "{q1} = 1 and {q3} < 2 or {q1} = 2",
+        visibleIf: "{q1} = 1 and {q3} < 2 or {q1} = 2"
       },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var q1 = survey.getQuestionByName("q1");
   var q2 = survey.getQuestionByName("q2");
@@ -448,7 +470,7 @@ test("Delete the question", () => {
 
 test("Add new trigger", () => {
   var survey = new SurveyModel({
-    elements: [{ type: "text", name: "q1" }],
+    elements: [{ type: "text", name: "q1" }]
   });
   var logic = new SurveyLogicUI(survey);
   logic.addNew();
@@ -473,16 +495,16 @@ test("Edit triggers via trigger editor", () => {
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
       { type: "text", name: "q2", title: "Question 2" },
-      { type: "text", name: "q3", title: "Question 3" },
+      { type: "text", name: "q3", title: "Question 3" }
     ],
     triggers: [
       {
         type: "runexpression",
         expression: "{q1} = 1",
         runExpression: "{q2} + 1",
-        setToName: "q2",
-      },
-    ],
+        setToName: "q2"
+      }
+    ]
   });
   var options = new EmptySurveyCreatorOptions();
   options.showTitlesInExpressions = true;
@@ -512,8 +534,8 @@ test("Edit condition complete via its editor", () => {
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
       { type: "text", name: "q2" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   logic.addNew();
@@ -551,8 +573,8 @@ test("Use survey creator options", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1", title: "Question 1" },
-      { type: "text", name: "q2", title: "Question 2" },
-    ],
+      { type: "text", name: "q2", title: "Question 2" }
+    ]
   });
   var logic = new SurveyLogicUI(survey, options);
   logic.addNew();
@@ -562,9 +584,8 @@ test("Use survey creator options", () => {
     panel.getElementByName("elementSelector")
   );
   expect(elementSelector.choices[0].text).toEqual("Question 1");
-  var chooseQuestion = logic.expressionEditor.panel.panels[0].getQuestionByName(
-    "questionName"
-  );
+  var chooseQuestion =
+    logic.expressionEditor.panel.panels[0].getQuestionByName("questionName");
   expect(chooseQuestion.choices[0].text).toEqual("Question 1");
 });
 
@@ -574,8 +595,8 @@ test("Disable editing for readOnly", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
-      { type: "text", name: "q2" },
-    ],
+      { type: "text", name: "q2" }
+    ]
   });
   var logic = new SurveyLogic(survey, options);
   expect(logic.mode).toEqual("view");
@@ -600,48 +621,48 @@ test("Displaying correct text for logic action", () => {
             elements: [
               {
                 type: "text",
-                name: "q5",
-              },
-            ],
-          },
-        ],
-      },
+                name: "q5"
+              }
+            ]
+          }
+        ]
+      }
     ],
     triggers: [
       {
         type: "complete",
-        expression: "{q1} = 1",
+        expression: "{q1} = 1"
       },
       {
         type: "skip",
         expression: "{q1} = 1",
-        gotoName: "q2",
+        gotoName: "q2"
       },
       {
         type: "runexpression",
         expression: "{q1} = 1",
         runExpression: "{q2} + 1",
-        setToName: "q3",
+        setToName: "q3"
       },
       {
         type: "copyvalue",
         expression: "{q1} = 1",
         setToName: "q1",
-        fromName: "q2",
+        fromName: "q2"
       },
       {
         type: "setvalue",
         expression: "{q1} = 1",
         setToName: "q2",
-        setValue: "q2Value",
-      },
+        setValue: "q2Value"
+      }
     ],
     completedHtmlOnCondition: [
       {
         expression: "{q1} = 1",
-        html: "text",
-      },
-    ],
+        html: "text"
+      }
+    ]
   });
   var logic = new SurveyLogic(survey);
   expect(logic.items).toHaveLength(1);
@@ -658,7 +679,7 @@ test("Displaying correct text for logic action", () => {
     "trigger_copyvalue",
     "trigger_skip",
     "trigger_runExpression",
-    "completedHtmlOnCondition",
+    "completedHtmlOnCondition"
   ];
   // "There are 11 actions: 1 page + 2 panels + 3 questions + 5 triggers + 1 html condition"
   expect(ops).toHaveLength(logicTypes.length);
@@ -709,8 +730,8 @@ test("Logic editing errors", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
-      { type: "text", name: "q2" },
-    ],
+      { type: "text", name: "q2" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   logic.addNew();
@@ -750,17 +771,17 @@ test("Return without saving", () => {
         elements: [
           { type: "text", name: "q1" },
           { type: "text", name: "q2", visibleIf: "{q1} = 1" },
-          { type: "text", name: "q3" },
-        ],
-      },
+          { type: "text", name: "q3" }
+        ]
+      }
     ],
     triggers: [
       {
         type: "skip",
         expression: "{q1} = 1",
-        gotoName: "q2",
-      },
-    ],
+        gotoName: "q2"
+      }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   var item = logic.items[0];
@@ -785,8 +806,8 @@ test("Add existing visible Items", () => {
     elements: [
       { type: "text", name: "q1", title: "My Question 1" },
       { type: "text", name: "q2", visibleIf: "{q1}=1" },
-      { type: "text", name: "q3", visibleIf: "{q1}=1" },
-    ],
+      { type: "text", name: "q3", visibleIf: "{q1}=1" }
+    ]
   });
   var options = new EmptySurveyCreatorOptions();
   options.showTitlesInExpressions = true;
@@ -802,8 +823,8 @@ test("Allow logic type to be null and change it", () => {
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2", visibleIf: "{q1}=1" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var options = new EmptySurveyCreatorOptions();
   var logic = new SurveyLogicUI(survey, options);
@@ -829,8 +850,8 @@ test("One action exists in new item", () => {
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   logic.addNew();
@@ -846,14 +867,14 @@ test("Limit the number of action types.", () => {
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   SurveyLogic.visibleActions = [
     "question_visibility",
     "question_require",
     "trigger_skip",
-    "trigger_complete",
+    "trigger_complete"
   ];
   var logic = new SurveyLogic(survey);
   expect(logic.logicTypes).toHaveLength(4);
@@ -866,8 +887,8 @@ test("Logic onLogicItemSaved event", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
-      { type: "text", name: "q2" },
-    ],
+      { type: "text", name: "q2" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   var callCount = 0;
@@ -888,8 +909,8 @@ test("Logic onLogicItemValidation event", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
-      { type: "text", name: "q2" },
-    ],
+      { type: "text", name: "q2" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   var callCount = 0;
@@ -930,8 +951,8 @@ test("Logic onLogicItemRemoving/onLogicItemRemoved events", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q3}=1" },
-      { type: "text", name: "q2", visibleIf: "{q3}=1" },
-    ],
+      { type: "text", name: "q2", visibleIf: "{q3}=1" }
+    ]
   });
   var logic = new SurveyLogic(survey);
   var removingCallCount = 0;
@@ -970,8 +991,8 @@ test("Hide/show logic types in actions", () => {
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2" },
-      { type: "text", name: "q3" },
-    ],
+      { type: "text", name: "q3" }
+    ]
   });
   var logic = new SurveyLogicUI(survey);
   logic.addNew();
