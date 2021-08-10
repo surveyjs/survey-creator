@@ -28,7 +28,10 @@ import {
   CreatorBase,
   ITabbedMenuItem,
   getElementWrapperComponentName,
-  isStringEditable
+  isStringEditable,
+  getElementWrapperComponentData,
+  getItemValueWrapperComponentName,
+  getItemValueWrapperComponentData
 } from "@survey/creator";
 import { TabbedMenuComponent } from "./components/TabbedMenu";
 import { editableStringRendererName } from "./components/StringEditor";
@@ -127,15 +130,7 @@ export class DesignTimeSurveyModel extends Model {
     super(jsonObj);
   }
   public isPopupEditorContent = false;
-  public getRowWrapperComponentName(row: QuestionRowModel): string {
-    return "svc-row";
-  }
-  public getRowWrapperComponentData(row: QuestionRowModel): any {
-    return {
-      creator: this.creator,
-      row
-    };
-  }
+
   public getElementWrapperComponentName(element: any, reason?: string): string {
     let componentName = getElementWrapperComponentName(
       element,
@@ -150,58 +145,27 @@ export class DesignTimeSurveyModel extends Model {
     );
   }
   public getElementWrapperComponentData(element: any, reason?: string): any {
-    if (reason === "logo-image") return this.creator;
-    if (
-      reason === "cell" ||
-      reason === "column-header" ||
-      reason === "row-header"
-    ) {
-      return {
-        creator: this.creator,
-        element: element,
-        question: element.question,
-        row: element.row,
-        column: element.column
-      };
-    }
-    if (!element["parentQuestionValue"]) {
-      if (element instanceof Question) {
-        return this.creator;
-      }
-      if (element instanceof PanelModel) {
-        return this.creator;
-      }
-    }
-    return super.getElementWrapperComponentData(element);
+    const data = getElementWrapperComponentData(element, reason, this.creator);
+    return data || super.getElementWrapperComponentData(element);
   }
-  public getItemValueWrapperComponentName(
-    item: ItemValue,
-    question: QuestionSelectBase
-  ): string {
-    if (
-      !this.isDesignMode ||
-      !!question["parentQuestionValue"] ||
-      question.isContentElement
-    ) {
-      return SurveyModel.TemplateRendererComponentName;
-    }
-    if (question.getType() === "imagepicker") {
-      return "svc-image-item-value";
-    }
-    return "svc-item-value";
+
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
   }
-  public getItemValueWrapperComponentData(
-    item: ItemValue,
-    question: QuestionSelectBase
-  ): any {
-    if (!!question["parentQuestionValue"] || question.isContentElement) {
-      return item;
-    }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
     return {
       creator: this.creator,
-      question
+      row
     };
   }
+
+  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+    return getItemValueWrapperComponentName(item, question);
+  }
+  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
+    return getItemValueWrapperComponentData(item, question, this.creator);
+  }
+  
   public getRendererForString(element: Base, name: string): string {
     if (!this.creator.readOnly && isStringEditable(element, name)) {
       return editableStringRendererName;
