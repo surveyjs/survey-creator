@@ -85,7 +85,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
           (this.model.isDragging ? " svc-item-value--dragging" : "")
         }
         key={this.props.element.key}
-        data-svc-drop-target-item-value={
+        data-sv-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }
         onClick={(event) => this.model.select(this.model, event)}

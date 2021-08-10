@@ -30,10 +30,13 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
   }
   get attributes() {
     return this.isDraggable
-      ? { "data-svc-drop-target-item-value": this.item.value }
+      ? { "data-sv-drop-target-item-value": this.item.value }
       : null;
   }
-  public blockEvent(_: KnockoutImageItemValueWrapperViewModel, event: MouseEvent) {
+  public blockEvent(
+    _: KnockoutImageItemValueWrapperViewModel,
+    event: MouseEvent
+  ) {
     event.stopPropagation();
   }
 }

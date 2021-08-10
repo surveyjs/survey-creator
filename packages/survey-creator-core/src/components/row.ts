@@ -22,7 +22,7 @@ export class RowViewModel extends Base {
 
     if (
       this.row.elements.length === 1 &&
-      this.row.elements[0].name === "svc-drag-drop-ghost-survey-element-name"
+      this.row.elements[0].name === "sv-drag-drop-ghost-survey-element-name"
     ) {
       result += ghostClass;
     } else {

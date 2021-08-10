@@ -218,7 +218,9 @@ export var propertyGridCss = {
     buttonRemove: "spg-matrixdynamic__remove-btn",
     iconAdd: "",
     iconRemove: "",
-    iconDrag: "spg-matrixdynamic__drag-element"
+    iconDrag: "spg-matrixdynamic__drag-element",
+    dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
+    dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
   },
   rating: {
     root: "spg-rating",

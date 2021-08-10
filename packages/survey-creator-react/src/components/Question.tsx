@@ -51,7 +51,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div
-          data-svc-drop-target-element-name={this.model.surveyElement.name}
+          data-sv-drop-target-survey-element={this.model.surveyElement.name}
           ref={this.rootRef}
           className={"svc-question__adorner"}
           onMouseOut={(e) =>

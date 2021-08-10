@@ -1,6 +1,7 @@
 import { Base, SurveyModel } from "survey-core";
 import { IQuestionToolboxItem } from "../../toolbox";
 import { CreatorBase } from "../../creator-base";
+import { DragDropSurveyElements } from "survey-core";
 
 export class ToolboxItemViewModel extends Base {
   constructor(
@@ -44,12 +45,13 @@ export class ToolboxItemViewModel extends Base {
     this.clearListeners();
 
     var json = this.creator.getJSONForNewElement(this.item.json);
-    this.creator.dragDropHelper.startDragToolboxItem(
-      this.pointerDownEvent,
-      json
-    );
+    this.dragDropHelper.startDragToolboxItem(this.pointerDownEvent, json);
     return true;
   };
+
+  private get dragDropHelper(): DragDropSurveyElements {
+    return this.creator.dragDropSurveyElements;
+  }
 
   // see https://stackoverflow.com/questions/6042202/how-to-distinguish-mouse-click-and-drag
   private get isMicroMovement() {
@@ -59,7 +61,7 @@ export class ToolboxItemViewModel extends Base {
     return diffX < delta && diffY < delta;
   }
   private clearListeners() {
-    if(!this.pointerDownEvent) return;
+    if (!this.pointerDownEvent) return;
     const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
     document.removeEventListener("pointermove", this.startDragToolboxItem);
   }
