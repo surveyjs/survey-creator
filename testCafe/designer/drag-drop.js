@@ -337,6 +337,6 @@ test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
     let name = await getQuestionNameByIndex(0);
     await t.expect(name).eql("question2");
 
-    name = await getQuestionNameByIndex(1);
+    name = await getQuestionNameByIndex(2);
     await t.expect(name).eql("question1");
 });
