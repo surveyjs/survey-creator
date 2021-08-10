@@ -34,7 +34,7 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
     await t.expect(questionsLength).eql(2);
 });
 
-test.skip("Drag Drop Question", async (t) => {
+test("Drag Drop Question", async (t) => {
     const json = {
         pages: [
             {
@@ -47,10 +47,6 @@ test.skip("Drag Drop Question", async (t) => {
                     {
                         type: "rating",
                         name: "rating2"
-                    },
-                    {
-                        type: "rating",
-                        name: "rating3"
                     }
                 ]
             }
@@ -63,11 +59,10 @@ test.skip("Drag Drop Question", async (t) => {
     const Rating2 = Selector(
         `[data-sv-drop-target-survey-element=${questionName}]`
     );
-    const Rating3 = Selector(`[data-sv-drop-target-survey-element="rating3"]`);
     const DragZoneRating2 = Rating2.find(".svc-question__drag-element");
 
     await t.hover(Rating2, { speed: 0.5 });
-    await t.hover(DragZoneRating2);
+    await t.hover(DragZoneRating2, { speed: 0.5 });
     await t.dragToElement(DragZoneRating2, Rating1, {
         offsetX: 5,
         offsetY: 5,
@@ -80,18 +75,18 @@ test.skip("Drag Drop Question", async (t) => {
 
     await t.hover(Rating2, { speed: 0.5 });
     await t.hover(DragZoneRating2, { speed: 0.5 });
-    await t.dragToElement(DragZoneRating2, Rating3, {
+    await t.dragToElement(DragZoneRating2, Rating1, {
         offsetX: 5,
         offsetY: 5,
         destinationOffsetY: 120,
         speed: 0.5
     });
 
-    name = await getQuestionNameByIndex(2);
+    name = await getQuestionNameByIndex(1);
     await t.expect(name).eql(questionName);
 });
 
-test.skip("Drag Drop to Panel", async (t) => {
+test("Drag Drop to Panel", async (t) => {
     const json = {
         pages: [
             {
@@ -245,8 +240,9 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
     const Question1 = Selector(`[name="question1"]`);
     await t.click(Question1, { speed: 0.5 });
 
-    const ChoicesTab = Selector("h4").withExactText("Choices");
-    await t.click(ChoicesTab);
+    // TODO uncomment after the fix https://github.com/surveyjs/survey-creator/issues/1618
+    // const ChoicesTab = Selector("h4").withExactText("Choices");
+    // await t.click(ChoicesTab);
 
     const Item1 = Selector(
         `[name="choices"] [data-sv-drop-target-matrix-row]`
@@ -337,8 +333,6 @@ test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
         destinationOffsetX: 80,
         speed: 0.5
     });
-
-    //await t.debug();
 
     let name = await getQuestionNameByIndex(0);
     await t.expect(name).eql("question2");
