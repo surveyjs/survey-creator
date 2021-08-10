@@ -1049,15 +1049,20 @@ export class Translation extends Base implements ITranslationLocales {
       }
       res.push(row);
     }
-    return unparse(res, {
-      quoteChar: '"',
-      escapeChar: '"',
-      delimiter: Translation.csvDelimiter,
-      header: true,
-      newline: Translation.newLineDelimiter,
-      skipEmptyLines: false, //or 'greedy',
-      columns: null //or array of strings
-    });
+    let prefix = settings.traslation.exportPrefix;
+    if (!prefix) prefix = "";
+    return (
+      prefix +
+      unparse(res, {
+        quoteChar: '"',
+        escapeChar: '"',
+        delimiter: Translation.csvDelimiter,
+        header: true,
+        newline: Translation.newLineDelimiter,
+        skipEmptyLines: false, //or 'greedy',
+        columns: null //or array of strings
+      })
+    );
   }
 
   public importFromNestedArray(rows: string[][]) {

@@ -15,7 +15,9 @@ export enum QuestionConvertMode {
 }
 export var settings = {
   traslation: {
-    sortByName: true
+    sortByName: true,
+    //Set it to \xef\xbb\xbf; to tell system that it is UTF8 file. You can use other prefix as well
+    exportPrefix: ""
   },
   operators: {
     empty: [],

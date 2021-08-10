@@ -3,6 +3,8 @@ import * as Survey from "survey-knockout";
 export var settings = {
   traslation: {
     sortByName: true,
+    //Set it to \xef\xbb\xbf; to tell system that it is UTF8 file. You can use other prefix as well
+    exportPrefix: "",
   },
   operators: {
     empty: [],

@@ -15,7 +15,9 @@ import {
   IAction,
   Action,
   IPanel,
-  SurveyElement
+  SurveyElement,
+  ItemValue,
+  QuestionSelectBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -2478,6 +2480,60 @@ export function getElementWrapperComponentName(
     }
   }
   return undefined;
+}
+export function getElementWrapperComponentData(element: any, reason: string, creator: CreatorBase<SurveyModel>): any {
+  if (reason === "logo-image") return creator;
+  if (
+    reason === "cell" ||
+    reason === "column-header" ||
+    reason === "row-header"
+  ) {
+    return {
+      creator: creator,
+      element: element,
+      question: element.question,
+      row: element.row,
+      column: element.column
+    };
+  }
+  if (!element["parentQuestionValue"]) {
+    if (element instanceof Question) {
+      return creator;
+    }
+    if (element instanceof PanelModel) {
+      return creator;
+    }
+  }
+  return null;
+}
+export function getItemValueWrapperComponentName(
+  item: ItemValue,
+  question: QuestionSelectBase
+): string {
+  if (
+    !!question["parentQuestionValue"] ||
+    question.isContentElement
+  ) {
+    return SurveyModel.TemplateRendererComponentName;
+  }
+  if (question.getType() === "imagepicker") {
+    return "svc-image-item-value";
+  }
+  return "svc-item-value";
+}
+export function getItemValueWrapperComponentData(
+  item: ItemValue,
+  question: QuestionSelectBase,
+  creator: CreatorBase<SurveyModel>
+): any {
+  if (!!question["parentQuestionValue"] || question.isContentElement) {
+    return item;
+  }
+  return {
+    creator: creator,
+    question,
+    item
+  };
 }
 export function isStringEditable(element: any, name: string): boolean {
   return (
