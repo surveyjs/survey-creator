@@ -87,6 +87,7 @@ test("Drag Drop Question", async (t) => {
 });
 
 test("Drag Drop to Panel", async (t) => {
+    await t.resizeWindow(2560, 1440);
     const json = {
         pages: [
             {
