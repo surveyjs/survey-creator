@@ -93,7 +93,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
 
         <div className="svc-item-value-controls">{button}</div>
 
-        <div className={"svc-item-value__item"}>{this.props.element}</div>
+        <div className={"svc-item-value__item"} onClick={(event) => this.model.select(this.model, event)}>{this.props.element}</div>
 
         {this.getDragDropGhost("bottom")}
       </div>
