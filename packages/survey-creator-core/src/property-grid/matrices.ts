@@ -562,6 +562,14 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "page";
   }
+  protected setupMatrixQuestion(
+    obj: Base,
+    matrix: QuestionMatrixDynamicModel,
+    prop: JsonObjectProperty
+  ) {
+    super.setupMatrixQuestion(obj, matrix, prop);
+    matrix.allowRowsDragAndDrop = true;
+  }
 }
 
 export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditorMatrix {
