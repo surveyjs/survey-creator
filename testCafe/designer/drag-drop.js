@@ -297,8 +297,8 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
     await t.click(Question1, { speed: 0.5 });
 
     // TODO uncomment after the fix https://github.com/surveyjs/survey-creator/issues/1618
-    // const ChoicesTab = Selector("h4").withExactText("Choices");
-    // await t.click(ChoicesTab);
+    const ChoicesTab = Selector("h4").withExactText("Choices");
+    await t.click(ChoicesTab);
 
     const Item1 = Selector(
         `[name="choices"] [data-sv-drop-target-matrix-row]`
