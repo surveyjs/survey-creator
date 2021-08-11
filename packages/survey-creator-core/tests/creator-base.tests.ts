@@ -1217,3 +1217,12 @@ test("Modify property editor settings on event", (): any => {
   expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeHolderQuestion.dataList).toHaveLength(2);
 });
+test("Set readOnly option", (): any => {
+  try {
+    const creator = new CreatorTester({ readOnly: true });
+    expect(creator.readOnly).toBeTruthy();
+  }
+  catch(e) {
+    expect(e).toBeNull();
+  }
+});

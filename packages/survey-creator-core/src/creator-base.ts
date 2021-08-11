@@ -1397,6 +1397,7 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   private getSurveyTextFromDesigner() {
+    if(!this.survey) return "";
     var json = (<any>this.survey).toJSON();
     if (this.options && this.options.generateValidJSON) {
       return JSON.stringify(json, null, 1);
