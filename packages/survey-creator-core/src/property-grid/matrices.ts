@@ -534,6 +534,14 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   ): number {
     return options.maximumColumnsCount;
   }
+  protected setupMatrixQuestion(
+    obj: Base,
+    matrix: QuestionMatrixDynamicModel,
+    prop: JsonObjectProperty
+  ) {
+    super.setupMatrixQuestion(obj, matrix, prop);
+    matrix.allowRowsDragAndDrop = true;
+  }
 }
 
 export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
