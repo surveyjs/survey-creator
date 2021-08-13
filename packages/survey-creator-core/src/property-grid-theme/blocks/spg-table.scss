@@ -41,3 +41,8 @@
     padding: 0;
   }
 }
+.spg-table__cell--actions > .spg-matrixdynamic__drag-element {
+  display: inline-block;
+  margin-top: calcSize(0.5);
+  cursor: move;
+}
