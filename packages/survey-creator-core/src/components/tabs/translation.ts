@@ -20,7 +20,8 @@ import {
   PanelModel,
   AdaptiveActionContainer,
   Action,
-  IAction
+  IAction,
+  QuestionCommentModel
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
@@ -34,7 +35,8 @@ import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 
 import "./translation.scss";
 import { SurveyHelper } from "../../survey-helper";
-import { propertyGridCss } from "../../entries";
+import { propertyGridCss } from "../../property-grid-theme/property-grid";
+import { translationCss } from "./translation-theme";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -551,6 +553,7 @@ export class Translation extends Base implements ITranslationLocales {
   @property({ defaultValue: false }) showAllStrings: boolean;
   @property() filteredPage: PageModel;
   @property() stringsSurvey: SurveyModel;
+  @property() stringsHeaderSurvey: SurveyModel;
 
   @property({ defaultValue: true }) isEmpty: boolean;
   /**
@@ -605,20 +608,19 @@ export class Translation extends Base implements ITranslationLocales {
     return {
       elements: [
         {
-         "type": "panel",
-         "name": "languages",
-         "elements": [
-          {
-            type: "checkbox",
-            name: "locales",
-            choicesVisibleIf: "{selLocales} contains {item}",
-            choicesEnableIf: " {item} != \"english\"",
-            titleLocation: "hidden"
-          }
-         ],
-         "title": "Languages"
+          type: "panel",
+          name: "languages",
+          elements: [
+            {
+              type: "checkbox",
+              name: "locales",
+              choicesVisibleIf: "{selLocales} contains {item}",
+              titleLocation: "hidden"
+            }
+          ],
+          title: "Languages"
         }
-       ]
+      ]
     };
   }
   public getSurveyLocales() {
@@ -646,6 +648,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private resetStringsSurvey() {
     this.stringsSurvey = this.createStringsSurvey();
+    this.stringsHeaderSurvey = this.createStringsHeaderSurvey();
   }
   private createStringsSurvey(): SurveyModel {
     var json = {};
@@ -654,10 +657,16 @@ export class Translation extends Base implements ITranslationLocales {
       json,
       "translation_strings"
     );
+    survey.css = translationCss;
     survey.addNewPage("page");
     this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root, null);
     this.expandRootPanels(survey.pages[0]);
     survey.data = this.getStringsSurveyData(survey);
+    survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
+      if(options.cell.question instanceof QuestionCommentModel){
+        options.cell.question.rows = 1;
+      }
+    })
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
       var itemValue = ItemValue.getItemByValue(
         options.question.rows,
@@ -668,6 +677,26 @@ export class Translation extends Base implements ITranslationLocales {
       item.setLocText(options.columnName, options.value);
     });
     survey.currentPage = survey.pages[0];
+    return survey;
+  }
+  private createStringsHeaderSurvey() {
+    let json = {};
+    setSurveyJSONForPropertyGrid(json, false);
+    let survey: SurveyModel = this.options.createSurvey(
+      json,
+      "translation_strings_header"
+    );
+    survey.css = translationCss;
+    const newPage = survey.addNewPage("page");
+
+    let matrix = <QuestionMatrixDropdownModel>(
+      Serializer.createClass("matrixdropdown")
+    );
+    matrix.name = "stringsHeader";
+    matrix.titleLocation = "hidden";
+    this.addLocaleColumns(matrix);
+
+    newPage.addQuestion(matrix);
     return survey;
   }
   private addTranslationGroupIntoStringsSurvey(
@@ -685,6 +714,7 @@ export class Translation extends Base implements ITranslationLocales {
         matrix.cellType = "comment";
         matrix.titleLocation = "hidden";
         matrix.name = this.getStringsSurveyQuestionName(group, parent);
+        matrix.showHeader = false;
         panel.addQuestion(matrix);
         this.addLocaleColumns(matrix);
       }
@@ -699,16 +729,19 @@ export class Translation extends Base implements ITranslationLocales {
       var pnl = <PanelModel>Serializer.createClass("panel");
       pnl.name = item.name;
       panel.addElement(pnl);
-      pnl.collapse();
       pnl.title = item.text;
       this.addTranslationGroupIntoStringsSurvey(pnl, item, group);
     }
   }
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
-    matrix.addColumn("default", this.getLocaleName(""));
     var locs = this.getSelectedLocales();
+    matrix.rowTitleWidth = "300px";
+    const width = "calc((100% - "+ matrix.rowTitleWidth +")/"+ (locs.length + 1) +")";
+    const defaultColumn = matrix.addColumn("default", this.getLocaleName(""));
+    defaultColumn.width = width;
     for (var i = 0; i < locs.length; i++) {
-      matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
+      let column = matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
+      column.width = width
     }
   }
   private getStringsSurveyQuestionName(
@@ -745,6 +778,12 @@ export class Translation extends Base implements ITranslationLocales {
     if (page.elements.length == 1 && page.elements[0].isPanel) {
       (<PanelModel>page.elements[0]).expand();
     }
+  }
+  private updateHeaderStringsSurveyColumns(){
+    if(!this.stringsHeaderSurvey) return;
+    let matrix = <QuestionMatrixDropdownModel>this.stringsHeaderSurvey.getQuestionByName("stringsHeader");
+    matrix.columns = [];
+    this.addLocaleColumns(matrix);
   }
   private updateStringsSurveyColumns() {
     if (!this.stringsSurvey) return;
@@ -879,24 +918,22 @@ export class Translation extends Base implements ITranslationLocales {
     });
     actions.push(this.showAllStringsAction);
 
-    // actions.push(
-    //   new Action({
-    //     id: "svd-translation-merge_locale_withdefault",
-    //     title: this.mergeLocaleWithDefaultText,
-    //     tooltip: this.mergeLocaleWithDefaultText,
-    //     component: "sv-action-bar-item",
-    //     visible: this.canMergeLocaleWithDefault,
-    //     action: () => {
-    //       this.mergeLocaleWithDefault();
-    //     }
-    //   })
-    // );
+    actions.push(
+      new Action({
+        id: "svd-translation-merge_locale_withdefault",
+        title: this.mergeLocaleWithDefaultText,
+        tooltip: this.mergeLocaleWithDefaultText,
+        component: "sv-action-bar-item",
+        visible: this.canMergeLocaleWithDefault,
+        action: () => {
+          this.mergeLocaleWithDefault();
+        }
+      })
+    );
     actions.push(
       new Action({
         id: "svc-translation-import",
-        css: "sv-action--last",
         iconName: "icon-import_20x20",
-        //title: this.importFromCSVText,
         tooltip: this.importFromCSVText,
         component: "sv-action-bar-item",
         action: () => {
@@ -916,9 +953,7 @@ export class Translation extends Base implements ITranslationLocales {
     actions.push(
       new Action({
         id: "svc-translation-export",
-        css: "sv-action--last",
         iconName: "icon-export_20x20",
-        //title: this.exportToCSVText,
         tooltip: this.exportToCSVText,
         component: "sv-action-bar-item",
         action: () => {
@@ -949,6 +984,7 @@ export class Translation extends Base implements ITranslationLocales {
       this.reset();
     }
     if (name === "locales") {
+      this.updateHeaderStringsSurveyColumns();
       this.updateStringsSurveyColumns();
     }
   }
@@ -1010,7 +1046,7 @@ export class Translation extends Base implements ITranslationLocales {
     }
   }
   public resetLocales() {
-    var locales = ["en"];
+    var locales = [""];
     this.root.fillLocales(locales);
     this.setLocales(locales);
   }

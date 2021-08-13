@@ -19,21 +19,20 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     if (!this.model) return null;
     return (
       <div className="svc-creator-tab__content svc-translation-tab">
-        <div className="svc-flex-column svc-creator-tab__content-wrapper">
-          <div className="svc-flex-row svc-test-tab__content-actions svc-translation-tab__content-actions">
-            <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
-          </div>
-          <div className="svc-flex-row svc-plugin-tab__content svc-translation-tab__content">
-            <div className="svc-flex-column svc-translation-tab__strings">
+        <div className="st-content">
+          <div className="svc-flex-column st-strings-wrapper">
+            <div className="svc-flex-row">
+              <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
+            </div>
+            <div className="svc-flex-row st-strings-header">
+              <Survey model={this.model.stringsHeaderSurvey}></Survey>
+            </div>
+            <div className="svc-flex-row svc-plugin-tab__content st-strings">
               <Survey model={this.model.stringsSurvey}></Survey>
             </div>
           </div>
-        </div>
-        <div className="svc-flex-column svc-properties-wrapper svc-translation-tab__property-panel">
-          <div className="svc-property-panel">
-            <div className="svc-property-panel__expander">
-              <Survey model={this.model.settingsSurvey}></Survey>
-            </div>
+          <div className="svc-flex-column st-property-panel">
+            <Survey model={this.model.settingsSurvey}></Survey>
           </div>
         </div>
       </div>
