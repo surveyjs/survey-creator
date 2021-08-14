@@ -5,8 +5,10 @@ import {
   QuestionTextModel,
   QuestionDropdownModel,
   CustomWidgetCollection,
-  Question
+  Question,
+  QuestionButtonGroupModel
 } from "survey-core";
+import { QuestionLinkValueModel } from "../src/property-grid/values";
 import { QuestionToolbox } from "../src/toolbox";
 
 test("dummy test", () => {
@@ -230,6 +232,15 @@ test("Save/Load copied toolbox items", (): any => {
   expect(toolbox1.copiedItems).toHaveLength(1);
   expect(toolbox1.copiedItems[0].name).toEqual("q3");
 });
+test("Do not register linkvalue and buttongroup", (): any => {
+  new QuestionLinkValueModel("q1");
+  new QuestionButtonGroupModel("q2");
+  var toolbox = new QuestionToolbox();
+  expect(toolbox.getItemByName("text")).toBeTruthy();
+  expect(toolbox.getItemByName("buttongroup")).toBeFalsy();
+  expect(toolbox.getItemByName("linkvalue")).toBeFalsy();
+});
+
 // test("Add customWidgets into toolbox", (): any => {
 //   CustomWidgetCollection.Instance.clear();
 //   CustomWidgetCollection.Instance.addCustomWidget(
