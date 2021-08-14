@@ -41,8 +41,8 @@ import {
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
-import { CellsEditor } from "../../src/property-grid/cells-survey";
 import {
+  QuestionLinkValueModel,
   PropertyGridValueEditor,
   PropertyGridRowValueEditor
 } from "../../src/property-grid/values";
@@ -1318,6 +1318,19 @@ test("options.onPropertyValueChanged in matrix", () => {
   expect(changedValue).toEqual("col1234");
 });
 
+test("QuestionLinekValueModel test", () => {
+  const question = new QuestionLinkValueModel("q1");
+  const checkQuestion = new QuestionCheckboxModel("q2");
+  checkQuestion.choices = [
+    { value: 1, text: "Item 1" },
+    { value: 2, text: "Item 2" }
+  ];
+  question.obj = checkQuestion;
+  expect(question.linkValueText).toEqual("Value is empty");
+  question.value = [1, 2];
+  expect(question.linkValueText).toEqual("Item 1, Item 2");
+});
+
 test("DefaultValue editor", () => {
   PropertyGridEditorCollection.register(new PropertyGridValueEditor());
   var question = new QuestionDropdownModel("q1");
@@ -1326,15 +1339,16 @@ test("DefaultValue editor", () => {
   var propertyGrid = new PropertyGridModelTester(question);
   var editQuestion = propertyGrid.survey.getQuestionByName("defaultValue");
   expect(editQuestion).toBeTruthy();
-  expect(editQuestion.getType()).toEqual("propertygrid_value");
+  expect(editQuestion.getType()).toEqual("linkvalue");
   expect(editQuestion.value).toEqual(2);
-  expect(editQuestion.contentQuestion.html).toEqual("2");
+  expect(editQuestion.linkValueText).toEqual("2");
   expect(editQuestion.isReadOnly).toBeFalsy();
   var editor = <PropertyGridValueEditor>(
     PropertyGridEditorCollection.getEditor(editQuestion.property)
   );
   const titleActions = editQuestion.getTitleActions();
   expect(titleActions).toHaveLength(2);
+  expect(editQuestion.linkClickCallback).toBeTruthy();
   expect(titleActions[1].disabled).toBeFalsy();
   expect(editor).toBeTruthy();
   var valueEditor = editor.createPropertyEditorSetup(
@@ -1366,12 +1380,11 @@ test("DefaultValue editor, use display value", () => {
   ];
   var propertyGrid = new PropertyGridModelTester(question);
   var editQuestion = propertyGrid.survey.getQuestionByName("defaultValue");
-  var htmlQuestion = editQuestion.contentQuestion;
-  expect(htmlQuestion.html).toEqual("Value is empty");
+  expect(editQuestion.linkValueText).toEqual("Value is empty");
   question.defaultValue = [1, 2];
-  expect(htmlQuestion.html).toEqual("Item 1, Item 2");
+  expect(editQuestion.linkValueText).toEqual("Item 1, Item 2");
   question.defaultValue = undefined;
-  expect(htmlQuestion.html).toEqual("Value is empty");
+  expect(editQuestion.linkValueText).toEqual("Value is empty");
 });
 
 test("DefaultValue editor for invisible values", () => {
@@ -1612,7 +1625,7 @@ test("Create setvalue trigger", () => {
   editorSetValueQuestion.value = 2;
   setupValueEditor.apply();
   expect(setValueQuestion.value).toEqual(2);
-  expect(setValueQuestion.contentQuestion.html).toEqual("2");
+  expect(setValueQuestion.linkValueText).toEqual("2");
   expect(survey.triggers).toHaveLength(1);
   var trigger = <SurveyTriggerSetValue>survey.triggers[0];
   expect(trigger.getType()).toEqual("setvaluetrigger");
@@ -1621,7 +1634,7 @@ test("Create setvalue trigger", () => {
   actions[0].action();
   expect(trigger.setValue).toBeFalsy();
   expect(setValueQuestion.value).toBeFalsy();
-  expect(setValueQuestion.contentQuestion.html).toEqual("Value is empty");
+  expect(setValueQuestion.linkValueText).toEqual("Value is empty");
   setValueQuestion.value = 3;
   expect(trigger.setValue).toEqual(3);
   setToNameQuestion.value = "q2";

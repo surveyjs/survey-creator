@@ -4,7 +4,9 @@ import {
   JsonObjectProperty,
   Question,
   QuestionMatrixModel,
-  ComponentCollection
+  Serializer,
+  QuestionFactory,
+  property
 } from "survey-core";
 import {
   PropertyGridEditorCollection,
@@ -21,53 +23,75 @@ import {
 import { ISurveyCreatorOptions } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 
-var propertyGridValueJSON = {
-  name: "propertygrid_value",
-  showInToolbox: false,
-  questionJSON: {
-    type: "html",
-    html: editorLocalization.getString("pe.emptyValue")
-  },
-  onValueChanged: (question: Question, name: string, newValue: any) => {
-    const correctHtml = (html: string): string => {
-      if (!html) return html;
-      let regex = /[&|<|>|"|']/g;
-      return html.replace(regex, function (match) {
-        if (match === "&") {
-          return "&amp;";
-        } else if (match === "<") {
-          return "&lt;";
-        } else if (match === ">") {
-          return "&gt;";
-        } else if (match === '"') {
-          return "&quot;";
-        } else {
-          return "&apos;";
-        }
-      });
-    };
-    const stringifyValue = (val: any): string => {
-      if (typeof val !== "string") return JSON.stringify(val);
-      return val;
-    };
-    const getObjDisplayValue = (obj: Base, question: Question): string => {
-      if (!obj || !obj["getDisplayValue"])
-        return stringifyValue(question.value);
-      var res = !!obj["getDisplayValue"]
-        ? obj["getDisplayValue"](true, question.value)
-        : question.value;
-      if (typeof res !== "string") return JSON.stringify(res);
-      return res;
-    };
-    const obj = question.obj;
-    var displayValue = question.isEmpty()
-      ? editorLocalization.getString("pe.emptyValue")
-      : getObjDisplayValue(obj, question);
-    question.contentQuestion.html = correctHtml(displayValue);
+export class QuestionLinkValueModel extends Question {
+  public linkClickCallback: () => void;
+  @property() linkValueText: string;
+  constructor(name: string) {
+    super(name);
+    this.linkValueText = editorLocalization.getString("pe.emptyValue");
   }
-};
+  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
+    super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name === "value") {
+      this.updateLinkValueText();
+    }
+  }
+  public getType(): string {
+    return "linkvalue";
+  }
+  public doLinkClick() {
+    if (!!this.linkClickCallback) {
+      this.linkClickCallback();
+    }
+  }
+  private updateLinkValueText() {
+    var displayValue = this.isEmpty()
+      ? editorLocalization.getString("pe.emptyValue")
+      : this.getObjDisplayValue();
+    this.linkValueText = this.correctHtml(displayValue);
+  }
+  private correctHtml(html: string): string {
+    if (!html) return html;
+    let regex = /[&|<|>|"|']/g;
+    return html.replace(regex, function (match) {
+      if (match === "&") {
+        return "&amp;";
+      } else if (match === "<") {
+        return "&lt;";
+      } else if (match === ">") {
+        return "&gt;";
+      } else if (match === '"') {
+        return "&quot;";
+      } else {
+        return "&apos;";
+      }
+    });
+  }
+  private stringifyValue(val: any): string {
+    if (typeof val !== "string") return JSON.stringify(val);
+    return val;
+  }
+  private getObjDisplayValue(): string {
+    const obj = this.obj;
+    if (!obj || !obj["getDisplayValue"]) return this.stringifyValue(this.value);
+    var res = obj["getDisplayValue"](true, this.value);
+    if (typeof res !== "string") return JSON.stringify(res);
+    return res;
+  }
+}
 
-ComponentCollection.Instance.add(propertyGridValueJSON);
+Serializer.addClass(
+  "linkvalue",
+  ["linkValueText"],
+  function () {
+    return new QuestionLinkValueModel("");
+  },
+  "nonvalue"
+);
+
+QuestionFactory.Instance.registerQuestion("linkvalue", (name) => {
+  return new QuestionLinkValueModel(name);
+});
 
 export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   public getJSON(
@@ -76,9 +100,22 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any {
     return {
-      type: "propertygrid_value"
+      type: "linkvalue"
     };
   }
+  public onGetQuestionTitleActions(obj: Base, options: any): void {
+    var action = undefined;
+    for (var i = 0; i < options.titleActions.length; i++) {
+      if (options.titleActions[i].id === "property-grid-setup") {
+        action = options.titleActions[i];
+        break;
+      }
+    }
+    options.question.linkClickCallback = () => {
+      action.action();
+    };
+  }
+
   public clearPropertyValue(
     obj: Base,
     prop: JsonObjectProperty,
