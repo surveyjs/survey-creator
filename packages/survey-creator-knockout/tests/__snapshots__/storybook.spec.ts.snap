@@ -1301,6 +1301,72 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     
                     <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
                     <div
+                      aria-label="linkvalue toolbox item"
+                      class="svc-toolbox__item svc-toolbox__item--icon-linkvalue"
+                      data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
+                      role="button"
+                      tabindex="0"
+                      title="linkvalue"
+                    >
+                      
+  
+                      <span
+                        class="svc-toolbox__item-container"
+                      >
+                        
+    
+                        <sv-svg-icon
+                          params="iconName: iconName, size: 24"
+                        />
+                        
+  
+                      </span>
+                      
+  
+                      <!-- ko if: isCompact -->
+                      <!-- /ko -->
+                      
+  
+                      <!-- ko ifnot: isCompact -->
+                      
+  
+                      <span
+                        class="svc-toolbox__item-title"
+                        data-bind="text: title"
+                      >
+                        linkvalue
+                      </span>
+                      
+  
+                      <!-- /ko -->
+                      
+
+                    </div>
+                    
+
+                    <!-- /ko -->
+                    
+
+                  </div>
+                  <!-- /ko -->
+                  
+      
+                  
+      
+                  <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+                  <div
+                    class="svc-toolbox__tool"
+                    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }"
+                    style="visibility: visible;"
+                  >
+                    
+    
+                    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+                    <!-- /ko -->
+                    
+    
+                    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+                    <div
                       aria-label="Matrix (single choice) toolbox item"
                       class="svc-toolbox__item svc-toolbox__item--icon-matrix"
                       data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName, event: { pointerdown: (model, event)=>{onPointerDown(event)}, click: (model, event)=>{click(event)} }, key2click"
