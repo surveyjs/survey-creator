@@ -24,7 +24,6 @@ export class ToolboxItemViewModel extends Base {
 
   public onPointerDown(pointerDownEvent) {
     if (!this.allowAdd) return;
-    pointerDownEvent.preventDefault();
     this.pointerDownEvent = pointerDownEvent;
     this.startX = pointerDownEvent.pageX;
     this.startY = pointerDownEvent.pageY;
@@ -36,8 +35,6 @@ export class ToolboxItemViewModel extends Base {
     this.creator.clickToolboxItem(this.item.json);
   };
   private startDragToolboxItem = (pointerMoveEvent) => {
-    pointerMoveEvent.preventDefault();
-
     this.currentX = pointerMoveEvent.pageX;
     this.currentY = pointerMoveEvent.pageY;
     if (this.isMicroMovement) return;
