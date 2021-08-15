@@ -153,6 +153,9 @@ test("options.questionTypes", () => {
   var allTypes = ElementFactory.Instance.getAllTypes();
   var creator = new CreatorTester();
   var unregistredCount = allTypes.indexOf("buttongroup") > -1 ? 1 : 0;
+  if (allTypes.indexOf("linkvalue") > -1) {
+    unregistredCount++;
+  }
   expect(creator.toolbox.items).toHaveLength(
     allTypes.length - unregistredCount
   );
