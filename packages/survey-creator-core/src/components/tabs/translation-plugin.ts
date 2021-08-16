@@ -32,10 +32,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
    
     this.showAllStringsAction.css = this.model.showAllStrings ? "sv-action-bar-item--secondary" : "";
     this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
-
     this.showAllStringsAction.visible = true;
+    
     this.filterPageAction.visible = true;
-    this.mergeLocaleWithDefaultAction.visible = true;
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
 
@@ -74,6 +73,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         this.filterPageAction.title = this.getFilterPageActionTitle();
         this.model.reset();
       }
+      if (options.name === "canMergeLocaleWithDefault"){
+        this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
+      }
+      if (options.name === "mergeLocaleWithDefaultText"){
+        this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
+        this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
+        this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
+      }
     });
   }
   public deactivate(): boolean {
@@ -105,6 +112,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterPageAction = new Action({
       id: "svc-translation-filter-page",
       title: this.getFilterPageActionTitle(),
+      visible: false,
       // component: "sv-action-bar-item-dropdown",
       action: (newPage) => {
         this.pagePopupModel.toggleVisibility();
@@ -116,6 +124,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       id: "svc-translation-show-all-strings",
       // css: this.model.showAllStrings ? "sv-action-bar-item--secondary" : "",
       title: this.showAllStringsText,
+      visible: false,
       // iconName: this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16",
       action: () => {
         this.model.showAllStrings = !this.model.showAllStrings;
@@ -127,6 +136,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     this.mergeLocaleWithDefaultAction = new Action({
       id: "svd-translation-merge_locale_withdefault",
+      visible: false,
       // title: this.model.mergeLocaleWithDefaultText,
       // tooltip: this.model.mergeLocaleWithDefaultText,
       component: "sv-action-bar-item",
@@ -141,6 +151,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       id: "svc-translation-import",
       iconName: "icon-import_20x20",
       tooltip: this.importFromCSVText,
+      title: this.importFromCSVText,
+      visible: false,
       component: "sv-action-bar-item",
       action: () => {
         if (!document) return;
@@ -161,6 +173,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       id: "svc-translation-export",
       iconName: "icon-export_20x20",
       tooltip: this.exportToCSVText,
+      title: this.exportToCSVText,
+      visible: false,
       component: "sv-action-bar-item",
       action: () => {
         this.model.exportToSCVFile("survey_translation.csv");
