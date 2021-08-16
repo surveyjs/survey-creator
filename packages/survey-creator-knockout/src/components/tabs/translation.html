@@ -1,20 +1,22 @@
-<div class="svc-creator-tab__content">
-  <div class="svc-plugin-tab__content svc-translation-tab__content">
-    <div
-      class="svd-translation-no-strings svd-light-text-color"
-      data-bind="visible:$data.isEmpty"
-    >
-      <span data-bind="text:$data.noStringsText"></span>
+<div class="svc-creator-tab__content svc-translation-tab">
+  <div class="st-content">
+    <!-- ko if: $data.isEmpty -->
+    <div class="st-no-strings">
+      <span data-bind="text: $data.noStringsText"></span>
     </div>
-    <!-- ko ifnot: $data.isEmpty -->
-    <!-- ko template: { name: 'survey-content', data: $data.settingsSurvey  } --><!-- /ko -->
-    <!-- ko template: { name: 'survey-content', data: $data.stringsSurvey  } --><!-- /ko -->
     <!-- /ko -->
-  </div>
-  <div
-    class="svc-plugin-tab__content-actions svc-translation-tab__content-actions"
-  >
-    <!-- ko component: { name: 'sv-action-bar', params: { model: toolbar } } -->
+    <!-- ko ifnot: $data.isEmpty -->
+    <div class="svc-flex-column st-strings-wrapper">
+      <div class="svc-flex-row st-strings-header">
+        <!-- ko template: { name: 'survey-content', data: $data.stringsHeaderSurvey  } --><!-- /ko -->
+      </div>
+      <div class="svc-flex-row svc-plugin-tab__content st-strings">
+        <!-- ko template: { name: 'survey-content', data: $data.stringsSurvey  } --><!-- /ko -->
+      </div>
+    </div>
+    <div class="svc-flex-column st-property-panel">
+      <!-- ko template: { name: 'survey-content', data: $data.settingsSurvey  } --><!-- /ko -->
+    </div>
     <!-- /ko -->
   </div>
 </div>

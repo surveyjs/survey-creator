@@ -664,6 +664,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.addLocaleColumns(matrix);
 
     newPage.addQuestion(matrix);
+    survey.currentPage = survey.pages[0];
     return survey;
   }
   private addTranslationGroupIntoStringsSurvey(
