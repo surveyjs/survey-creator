@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>SurveyJS Creator React</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ace.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/worker-json.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/mode-json.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ext-language_tools.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+
+    <script src="https://unpkg.com/react@17.0.1/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
+
+    <!-- <script src="https://unpkg.com/jquery"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
+
+    <script src="http://127.0.0.1:8080/build/survey-core/survey.core.js"></script>
+    <script src="http://127.0.0.1:8080/build/survey-react-ui/survey-react-ui.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="http://127.0.0.1:8080/build/survey-core/modern.css"
+    />
+
+    <script src="../build/survey-creator-react.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../build/survey-creator-react.css"
+    />
+  </head>
+
+  <body>
+    <div
+      id="surveyCreator"
+      style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"
+    ></div>
+  </body>
+  <script type="text/babel">
+    const json = {
+ "pages": [
+  {
+   "name": "page1",
+   "elements": [
+    {
+     "type": "rating",
+     "name": "question1"
+    },
+    {
+     "type": "rating",
+     "name": "question2"
+    },
+    {
+     "type": "rating",
+     "name": "question3"
+    },
+    {
+     "type": "rating",
+     "name": "question4"
+    },
+    {
+     "type": "rating",
+     "name": "question5"
+    },
+    {
+     "type": "rating",
+     "name": "question6"
+    },
+    {
+     "type": "rating",
+     "name": "question7"
+    },
+    {
+     "type": "rating",
+     "name": "question8"
+    },
+    {
+     "type": "rating",
+     "name": "question9"
+    },
+    {
+     "type": "rating",
+     "name": "question10"
+    },
+    {
+     "type": "rating",
+     "name": "question11"
+    },
+    {
+     "type": "rating",
+     "name": "question12"
+    },
+    {
+     "type": "rating",
+     "name": "question13"
+    },
+    {
+     "type": "rating",
+     "name": "question14"
+    },
+    {
+     "type": "rating",
+     "name": "question15"
+    },
+    {
+     "type": "rating",
+     "name": "question16"
+    },
+    {
+     "type": "rating",
+     "name": "question17"
+    },
+    {
+     "type": "rating",
+     "name": "question18"
+    },
+    {
+     "type": "rating",
+     "name": "question19"
+    }
+   ]
+  }
+ ]
+};
+    Survey.StylesManager.applyTheme("modern");
+    let creator = new SurveyCreator.SurveyCreator({});
+    window.creator = creator;
+    creator.JSON = json;
+    ReactDOM.render(<React.StrictMode>
+        <SurveyCreator.SurveyCreatorComponent creator={creator}/>
+    </React.StrictMode>, document.getElementById("surveyCreator"));
+  </script>
+</html>
