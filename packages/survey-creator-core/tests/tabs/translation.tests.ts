@@ -8,9 +8,9 @@ import {
 } from "survey-core";
 import {
   Translation,
-  TranslationItem,
-  TabTranslationPlugin
+  TranslationItem
 } from "../../src/components/tabs/translation";
+import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { CreatorTester } from "../creator-tester";
 
 test("Fire callback on base objects creation", () => {

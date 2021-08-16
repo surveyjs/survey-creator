@@ -39,7 +39,7 @@ import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test";
 import { SurveyLogic } from "./components/tabs/logic";
-import { TabTranslationPlugin } from "./components/tabs/translation";
+import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-ui";
 import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
 import { TabDesignerPlugin } from "./entries";

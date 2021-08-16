@@ -11,14 +11,12 @@ import {
   surveyLocalization,
   ILocalizableString,
   ItemValue,
-  QuestionDropdownModel,
   QuestionCheckboxModel,
   PopupModel,
   ListModel,
   PanelModelBase,
   QuestionMatrixDropdownModel,
   PanelModel,
-  AdaptiveActionContainer,
   Action,
   IAction,
   QuestionCommentModel
@@ -31,7 +29,6 @@ import {
   settings
 } from "../../settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 
 import "./translation.scss";
 import { SurveyHelper } from "../../survey-helper";
@@ -213,7 +210,6 @@ export class TranslationGroup extends TranslationItemBase {
   public getType(): string {
     return "translationgroup";
   }
-  @property({ defaultValue: false }) expanded: boolean;
   @property({ defaultValue: true }) showHeader: boolean;
   public get items(): Array<TranslationItemBase> {
     return this.itemValues;
@@ -228,7 +224,6 @@ export class TranslationGroup extends TranslationItemBase {
   }
   setAsRoot() {
     this.isRootValue = true;
-    this.expanded = true;
   }
   public getItemByName(name: string): TranslationItemBase {
     for (var i = 0; i < this.itemValues.length; i++) {
@@ -330,35 +325,6 @@ export class TranslationGroup extends TranslationItemBase {
       }
     }
     this.sortItems();
-    this.keepOnGroupExpanded();
-  }
-  private keepOnGroupExpanded() {
-    if (this.items.length == 1 && this.groups.length == 1) {
-      var gr = this.groups[0];
-      gr.expanded = true;
-      if (gr.obj.getType() == "page") {
-        gr.showHeader = false;
-      }
-    }
-  }
-  public expandAll() {
-    this.expandCollapseAll(true);
-  }
-  public collapseAll() {
-    this.expandCollapseAll(false);
-  }
-  private expandCollapseAll(isExpand: boolean) {
-    if (!this.isRoot) {
-      this.expanded = isExpand;
-    }
-    for (var i = 0; i < this.groups.length; i++) {
-      if (isExpand) {
-        this.groups[i].expandAll();
-      } else {
-        this.groups[i].collapseAll();
-      }
-    }
-    this.keepOnGroupExpanded();
   }
   private sortItems() {
     if (!settings.traslation.sortByName) return;
@@ -514,14 +480,10 @@ export class Translation extends Base implements ITranslationLocales {
     value: string,
     context: any
   ) => void;
-  public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
   private surveyValue: SurveyModel;
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
-  private pagePopupModel: PopupModel;
   private chooseLanguagePopupModel: PopupModel;
-  private showAllStringsAction: Action;
-  private filterPageAction: Action;
 
   constructor(
     survey: SurveyModel,
@@ -554,15 +516,7 @@ export class Translation extends Base implements ITranslationLocales {
   @property() filteredPage: PageModel;
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
-
   @property({ defaultValue: true }) isEmpty: boolean;
-  /**
-   * The list of toolbar items. You may add/remove/replace them.
-   * @see IAction
-   */
-  public get toolbarItems(): Array<Action> {
-    return this.toolbar.actions;
-  }
 
   public makeObservable(onBaseObjCreating: (obj: Base) => void) {
     this.onBaseObjCreatingCallback = onBaseObjCreating;
@@ -589,6 +543,20 @@ export class Translation extends Base implements ITranslationLocales {
     res.onValueChanged.add((sender, options) => {
       if (options.name == "locales") {
         this.updateLocales();
+      }
+    });
+    res.onGetPanelTitleActions.add((sender, options) => {
+      if (options.panel.name == "languages") {
+        const addLanguageAction = new Action({
+          id: "svc-translation-choose-language",
+          iconName: "icon-add(small)",
+          component: "sv-action-bar-item-dropdown",
+          popupModel: this.chooseLanguagePopupModel,
+          action: (language) => {
+            this.chooseLanguagePopupModel.toggleVisibility();
+          }
+        });
+        options.titleActions = [addLanguageAction];
       }
     });
     return res;
@@ -618,7 +586,7 @@ export class Translation extends Base implements ITranslationLocales {
               titleLocation: "hidden"
             }
           ],
-          title: "Languages"
+          title: editorLocalization.getString("ed.translationLanguages")
         }
       ]
     };
@@ -660,7 +628,6 @@ export class Translation extends Base implements ITranslationLocales {
     survey.css = translationCss;
     survey.addNewPage("page");
     this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root, null);
-    this.expandRootPanels(survey.pages[0]);
     survey.data = this.getStringsSurveyData(survey);
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
       if(options.cell.question instanceof QuestionCommentModel){
@@ -774,14 +741,11 @@ export class Translation extends Base implements ITranslationLocales {
     }
     return res;
   }
-  private expandRootPanels(page: PageModel) {
-    if (page.elements.length == 1 && page.elements[0].isPanel) {
-      (<PanelModel>page.elements[0]).expand();
-    }
-  }
-  private updateHeaderStringsSurveyColumns(){
-    if(!this.stringsHeaderSurvey) return;
-    let matrix = <QuestionMatrixDropdownModel>this.stringsHeaderSurvey.getQuestionByName("stringsHeader");
+  private updateHeaderStringsSurveyColumns() {
+    if (!this.stringsHeaderSurvey) return;
+    let matrix = <QuestionMatrixDropdownModel>(
+      this.stringsHeaderSurvey.getQuestionByName("stringsHeader")
+    );
     matrix.columns = [];
     this.addLocaleColumns(matrix);
   }
@@ -818,9 +782,8 @@ export class Translation extends Base implements ITranslationLocales {
       this.settingsSurvey.setValue(valueName, val);
     }
   }
-  private inputFileElement: HTMLInputElement;
+
   private setupToolbarItems() {
-    var actions: Array<Action> = [];
     this.chooseLanguagePopupModel = new PopupModel(
       "sv-list",
       {
@@ -837,151 +800,14 @@ export class Translation extends Base implements ITranslationLocales {
           false
         )
       },
-      "top",
-      "right"
+      "bottom",
+      "left"
     );
-    actions.push(
-      new Action({
-        id: "svc-translation-choose-language",
-        css: "sv-action--first sv-action-bar-item--secondary",
-        //title: () => this.selectLanguageOptionsCaption,
-        title: this.selectLanguageOptionsCaption,
-        component: "sv-action-bar-item-dropdown",
-        popupModel: this.chooseLanguagePopupModel,
-        action: (language) => {
-          this.chooseLanguagePopupModel.toggleVisibility();
-        }
-      })
-    );
-
-    this.pagePopupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          [{ id: null, title: this.showAllPagesText }].concat(
-            this.survey.pages.map((page) => ({
-              id: page.name,
-              title: this.options.getObjectDisplayName(
-                page,
-                "survey-translation",
-                page.title
-              )
-            }))
-          ),
-          (item: IAction) => {
-            this.filteredPage = !!item.id
-              ? this.survey.getPageByName(item.id)
-              : null;
-            this.pagePopupModel.toggleVisibility();
-          },
-          true
-        )
-      },
-      "top",
-      "center"
-    );
-
-    this.filterPageAction = new Action({
-      id: "svc-translation-filter-page",
-      title:
-        (this.filteredPage &&
-          this.options.getObjectDisplayName(
-            this.filteredPage,
-            "survey-translation",
-            this.filteredPage.title
-          )) ||
-        this.showAllPagesText,
-      component: "sv-action-bar-item-dropdown",
-      popupModel: this.pagePopupModel,
-      action: (newPage) => {
-        this.pagePopupModel.toggleVisibility();
-      }
-    });
-    actions.push(this.filterPageAction);
-
-    this.showAllStringsAction = new Action({
-      id: "svc-translation-show-all-strings",
-      css: this.showAllStrings ? "sv-action-bar-item--secondary" : "",
-      title: this.showAllStringsText,
-      iconName: this.showAllStrings
-        ? "icon-switchactive_16x16"
-        : "icon-switchinactive_16x16",
-      action: () => {
-        this.showAllStrings = !this.showAllStrings;
-        this.showAllStringsAction.css = this.showAllStrings
-          ? "sv-action-bar-item--secondary"
-          : "";
-        this.showAllStringsAction.iconName = this.showAllStrings
-          ? "icon-switchactive_16x16"
-          : "icon-switchinactive_16x16";
-      }
-    });
-    actions.push(this.showAllStringsAction);
-
-    actions.push(
-      new Action({
-        id: "svd-translation-merge_locale_withdefault",
-        title: this.mergeLocaleWithDefaultText,
-        tooltip: this.mergeLocaleWithDefaultText,
-        component: "sv-action-bar-item",
-        visible: this.canMergeLocaleWithDefault,
-        action: () => {
-          this.mergeLocaleWithDefault();
-        }
-      })
-    );
-    actions.push(
-      new Action({
-        id: "svc-translation-import",
-        iconName: "icon-import_20x20",
-        tooltip: this.importFromCSVText,
-        component: "sv-action-bar-item",
-        action: () => {
-          if (!document) return;
-          if (!this.inputFileElement) {
-            this.inputFileElement = document.createElement("input");
-            this.inputFileElement.type = "file";
-            this.inputFileElement.style.display = "none";
-            this.inputFileElement.onchange = () => {
-              this.importFromCSVFileUI(this.inputFileElement);
-            };
-          }
-          this.inputFileElement.click();
-        }
-      })
-    );
-    actions.push(
-      new Action({
-        id: "svc-translation-export",
-        iconName: "icon-export_20x20",
-        tooltip: this.exportToCSVText,
-        component: "sv-action-bar-item",
-        action: () => {
-          this.exportToSCVFile("survey_translation.csv");
-        }
-      })
-    );
-
-    this.toolbar.actions = actions;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "canMergeLocaleWithDefault") {
       this.mergeLocaleWithDefaultText = this.getMergeLocaleWithDefaultText();
-    }
-    if (name === "showAllStrings") {
-      this.reset();
-    }
-    if (name === "filteredPage") {
-      this.filterPageAction.title =
-        (this.filteredPage &&
-          this.options.getObjectDisplayName(
-            this.filteredPage,
-            "survey-translation",
-            this.filteredPage.title
-          )) ||
-        this.showAllPagesText;
-      this.reset();
     }
     if (name === "locales") {
       this.updateHeaderStringsSurveyColumns();
@@ -1057,23 +883,8 @@ export class Translation extends Base implements ITranslationLocales {
   public setSelectedLocales(selectedLocales: Array<string>) {
     this.localesQuestion.value = selectedLocales;
   }
-  public get selectLanguageOptionsCaption() {
-    return editorLocalization.getString("ed.translationAddLanguage");
-  }
-  public get showAllStringsText(): string {
-    return editorLocalization.getString("ed.translationShowAllStrings");
-  }
-  public get showAllPagesText(): string {
-    return editorLocalization.getString("ed.translationShowAllPages");
-  }
   public get noStringsText(): string {
     return editorLocalization.getString("ed.translationNoStrings");
-  }
-  public get exportToCSVText(): string {
-    return editorLocalization.getString("ed.translationExportToSCVButton");
-  }
-  public get importFromCSVText(): string {
-    return editorLocalization.getString("ed.translationImportFromSCVButton");
   }
   public exportToCSV(): string {
     let res = [];
@@ -1156,14 +967,6 @@ export class Translation extends Base implements ITranslationLocales {
     this.settingsSurveyValue.setValue("locales", []);
     this.reset();
   }
-  public expandAll() {
-    if (!this.root) return;
-    this.root.expandAll();
-  }
-  public collapseAll() {
-    if (!this.root) return;
-    this.root.collapseAll();
-  }
   translateItemAfterRender(item: TranslationItem, el: any, locale: string) {
     if (!this.translateItemAfterRenderCallback) return;
     if (Array.isArray(el)) {
@@ -1212,19 +1015,5 @@ export class Translation extends Base implements ITranslationLocales {
     this.importFinishedCallback = undefined;
     this.availableTranlationsChangedCallback = undefined;
     this.tranlationChangedCallback = undefined;
-  }
-}
-
-export class TabTranslationPlugin implements ICreatorPlugin {
-  public model: Translation;
-  constructor(private creator: CreatorBase<SurveyModel>) {
-    creator.addPluginTab("translation", this);
-  }
-  public activate(): void {
-    this.model = new Translation(this.creator.survey, this.creator);
-  }
-  public deactivate(): boolean {
-    this.model = undefined;
-    return true;
   }
 }

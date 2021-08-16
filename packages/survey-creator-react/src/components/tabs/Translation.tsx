@@ -1,7 +1,6 @@
 import React from "react";
 import { Base } from "survey-core";
 import {
-  SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
   Survey
@@ -19,11 +18,21 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     if (!this.model) return null;
     return (
       <div className="svc-creator-tab__content svc-translation-tab">
+        {this.renderElementContent()}
+      </div>
+    );
+  }
+  renderElementContent(): JSX.Element {
+    if(this.model.isEmpty){
+      return (
+        <div className="st-no-strings">
+          <span>{this.model.noStringsText}</span>
+        </div>
+      );
+    } else {
+      return (
         <div className="st-content">
           <div className="svc-flex-column st-strings-wrapper">
-            <div className="svc-flex-row">
-              <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
-            </div>
             <div className="svc-flex-row st-strings-header">
               <Survey model={this.model.stringsHeaderSurvey}></Survey>
             </div>
@@ -35,8 +44,8 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
             <Survey model={this.model.settingsSurvey}></Survey>
           </div>
         </div>
-      </div>
-    );
+      );
+    } 
   }
 }
 

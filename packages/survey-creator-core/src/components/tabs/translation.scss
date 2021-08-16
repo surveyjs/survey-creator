@@ -7,6 +7,20 @@
   background-color: $background-dim;
 }
 
+.st-no-strings {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calcSize(2);
+  color: $foreground;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  overflow: hidden;
+}
+
 .st-content {
   display: flex;
   height: 100%;
