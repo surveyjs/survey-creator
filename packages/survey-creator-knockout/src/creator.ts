@@ -13,7 +13,10 @@ import {
   ICreatorOptions,
   CreatorBase,
   getElementWrapperComponentName,
-  isStringEditable
+  isStringEditable,
+  getElementWrapperComponentData,
+  getItemValueWrapperComponentName,
+  getItemValueWrapperComponentData
 } from "@survey/creator";
 import { editableStringRendererName } from "./components/string-editor";
 
@@ -26,6 +29,7 @@ export class DesignTimeSurveyModel extends Survey {
     super(jsonObj);
   }
   public isPopupEditorContent = false;
+
   public getElementWrapperComponentName(element: any, reason?: string): string {
     let componentName = getElementWrapperComponentName(
       element,
@@ -41,37 +45,13 @@ export class DesignTimeSurveyModel extends Survey {
       componentName || super.getElementWrapperComponentName(element, reason)
     );
   }
+  public getElementWrapperComponentData(element: any, reason?: string): any {
+    const data = getElementWrapperComponentData(element, reason, this.creator);
+    return data || super.getElementWrapperComponentData(element);
+  }
+
   public getRowWrapperComponentName(row: QuestionRowModel): string {
     return "svc-row";
-  }
-  public getElementWrapperComponentData(element: any, reason?: string): any {
-    if (reason === "logo-image") return this.creator;
-    if (
-      reason === "cell" ||
-      reason === "column-header" ||
-      reason === "row-header"
-    ) {
-      return {
-        creator: this.creator,
-        element: element,
-        question: element.question,
-        row: element.row,
-        column: element.column
-      };
-    }
-    if (!element["parentQuestionValue"]) {
-      if (element instanceof Question) {
-        if (element.koElementType() == "survey-question") {
-          return this.creator;
-        }
-      }
-      if (element instanceof Panel) {
-        if (element.koElementType() == "survey-panel") {
-          return this.creator;
-        }
-      }
-    }
-    return super.getElementWrapperComponentData(element, reason);
   }
   public getRowWrapperComponentData(row: QuestionRowModel): any {
     return {
@@ -79,38 +59,12 @@ export class DesignTimeSurveyModel extends Survey {
       row
     };
   }
-  public getItemValueWrapperComponentName(
-    item: ItemValue,
-    question: QuestionSelectBase
-  ): string {
-    if (!!question["parentQuestionValue"] || question.isContentElement) {
-      return SurveyModel.TemplateRendererComponentName;
-    }
-    if (question.getType() === "imagepicker") {
-      return "svc-image-item-value";
-    }
-    return "svc-item-value";
-  }
-  public getItemValueWrapperComponentData(
-    item: ItemValue,
-    question: QuestionSelectBase
-  ): any {
-    if (!!question["parentQuestionValue"] || question.isContentElement) {
-      return item;
-    }
-    return {
-      creator: this.creator,
-      question,
-      item
-    };
-  }
 
-  public getMatrixCellTemplateData(cell: any) {
-    if (!this.isDesignMode) {
-      return cell.question;
-    }
-    return cell.question;
-    // return cell.cell.column.templateQuestion;
+  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+    return getItemValueWrapperComponentName(item, question);
+  }
+  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
+    return getItemValueWrapperComponentData(item, question, this.creator);
   }
 
   public getRendererForString(element: Base, name: string): string {
@@ -126,7 +80,8 @@ export class SurveyCreator extends CreatorBase<Survey> {
     super(options, options2);
     new ImplementorBase(this.notifier);
     new ImplementorBase(this.toolbox);
-    new ImplementorBase(this.dragDropHelper);
+    new ImplementorBase(this.dragDropSurveyElements);
+    new ImplementorBase(this.dragDropChoices);
     new ImplementorBase(this);
   }
 

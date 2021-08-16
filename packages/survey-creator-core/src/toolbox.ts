@@ -67,7 +67,10 @@ export class QuestionToolboxCategory extends Base {
     }
   }
 }
-export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
+export class QuestionToolboxItem
+  extends Action
+  implements IQuestionToolboxItem
+{
   constructor(private item: IQuestionToolboxItem) {
     super(item);
   }
@@ -87,8 +90,9 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
  */
 export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem, IQuestionToolboxItem>
-  implements IQuestionToolbox {
-  static hiddenTypes = ["buttongroup"];
+  implements IQuestionToolbox
+{
+  static hiddenTypes = ["buttongroup", "linkvalue"];
   private _orderedQuestions = [
     "text",
     "checkbox",
@@ -289,7 +293,9 @@ export class QuestionToolbox
    * @see IQuestionToolboxItem
    */
   private getActionByItem(item: IQuestionToolboxItem) {
-    return item instanceof QuestionToolboxItem ? item : new QuestionToolboxItem(item);
+    return item instanceof QuestionToolboxItem
+      ? item
+      : new QuestionToolboxItem(item);
   }
   public addItem(item: IQuestionToolboxItem, index?: number) {
     this.correctItem(item);
@@ -314,7 +320,7 @@ export class QuestionToolbox
     this.correctItem(item);
     const index: number = this.indexOf(item.name);
     if (index < 0) return;
-    this.actions[index] = this.getActionByItem(item);;
+    this.actions[index] = this.getActionByItem(item);
     this.onItemsChanged();
     return true;
   }
@@ -662,5 +668,5 @@ export class QuestionToolbox
     return questions;
   }
 
-  public dispose() { }
+  public dispose() {}
 }

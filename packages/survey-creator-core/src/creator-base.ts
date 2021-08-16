@@ -15,12 +15,14 @@ import {
   IAction,
   Action,
   IPanel,
-  SurveyElement
+  SurveyElement,
+  ItemValue,
+  QuestionSelectBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
-import { DragDropHelper } from "survey-core";
+import { DragDropSurveyElements, DragDropChoices } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
@@ -140,7 +142,8 @@ export class CreatorBase<T extends SurveyModel>
   public get toolbar(): AdaptiveActionContainer {
     return this.toolbarValue;
   }
-  public dragDropHelper: DragDropHelper;
+  public dragDropSurveyElements: DragDropSurveyElements;
+  public dragDropChoices: DragDropChoices;
 
   private selectedElementValue: Base;
   private newQuestions: Array<any> = [];
@@ -1239,21 +1242,34 @@ export class CreatorBase<T extends SurveyModel>
       });
     };
   }
+
   protected initDragDrop() {
-    DragDropHelper.restrictDragQuestionBetweenPages =
+    this.initDragDropSurveyElements();
+    this.initDragDropChoices();
+  }
+  private initDragDropSurveyElements() {
+    DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
-
-    this.dragDropHelper = new DragDropHelper(null, this);
-
-    this.dragDropHelper.onBeforeDrop.add((sender, options) => {
+    this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
       this.undoRedoManager.startTransaction("drag drop");
     });
-
-    this.dragDropHelper.onAfterDrop.add((sender, options) => {
+    this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
       this.undoRedoManager.stopTransaction();
       this.selectElement(options.draggedElement, undefined, false);
     });
   }
+  private initDragDropChoices() {
+    this.dragDropChoices = new DragDropChoices(null, this);
+    this.dragDropChoices.onBeforeDrop.add((sender, options) => {
+      this.undoRedoManager.startTransaction("drag drop");
+    });
+    this.dragDropChoices.onAfterDrop.add((sender, options) => {
+      this.undoRedoManager.stopTransaction();
+      this.selectElement(options.draggedElement, undefined, false);
+    });
+  }
+
   private addingObject: Survey.Base;
   private onSurveyPropertyValueChangedCallback(
     name: string,
@@ -1381,6 +1397,7 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   private getSurveyTextFromDesigner() {
+    if(!this.survey) return "";
     var json = (<any>this.survey).toJSON();
     if (this.options && this.options.generateValidJSON) {
       return JSON.stringify(json, null, 1);
@@ -2464,6 +2481,60 @@ export function getElementWrapperComponentName(
     }
   }
   return undefined;
+}
+export function getElementWrapperComponentData(element: any, reason: string, creator: CreatorBase<SurveyModel>): any {
+  if (reason === "logo-image") return creator;
+  if (
+    reason === "cell" ||
+    reason === "column-header" ||
+    reason === "row-header"
+  ) {
+    return {
+      creator: creator,
+      element: element,
+      question: element.question,
+      row: element.row,
+      column: element.column
+    };
+  }
+  if (!element["parentQuestionValue"]) {
+    if (element instanceof Question) {
+      return creator;
+    }
+    if (element instanceof PanelModel) {
+      return creator;
+    }
+  }
+  return null;
+}
+export function getItemValueWrapperComponentName(
+  item: ItemValue,
+  question: QuestionSelectBase
+): string {
+  if (
+    !!question["parentQuestionValue"] ||
+    question.isContentElement
+  ) {
+    return SurveyModel.TemplateRendererComponentName;
+  }
+  if (question.getType() === "imagepicker") {
+    return "svc-image-item-value";
+  }
+  return "svc-item-value";
+}
+export function getItemValueWrapperComponentData(
+  item: ItemValue,
+  question: QuestionSelectBase,
+  creator: CreatorBase<SurveyModel>
+): any {
+  if (!!question["parentQuestionValue"] || question.isContentElement) {
+    return item;
+  }
+  return {
+    creator: creator,
+    question,
+    item
+  };
 }
 export function isStringEditable(element: any, name: string): boolean {
   return (

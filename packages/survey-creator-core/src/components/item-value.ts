@@ -7,7 +7,7 @@ import {
   SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { DragDropHelper } from "survey-core";
+import { DragDropChoices } from "survey-core";
 import "./item-value.scss";
 import { getLocString } from "../editorLocalization";
 
@@ -80,7 +80,7 @@ export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: null }) ghostPosition: string;
   private handleDragDropHelperChanges = (sender, options) => {
     if (options.name === "isBottom") {
-      this.ghostPosition = this.dragDropHelper.getItemValueGhostPosition(
+      this.ghostPosition = this.dragDropHelper.getGhostPosition(
         this.item
       );
     }
@@ -94,10 +94,10 @@ export class ItemValueWrapperViewModel extends Base {
     );
   };
   startDragItemValue(event: PointerEvent) {
-    this.dragDropHelper.startDragItemValue(event, this.question, this.item);
+    this.dragDropHelper.startDrag(event, this.item, this.question,);
   }
-  private get dragDropHelper(): DragDropHelper {
-    return this.creator.dragDropHelper;
+  private get dragDropHelper(): DragDropChoices {
+    return this.creator.dragDropChoices;
   }
   get isDraggable() {
     return this.isDraggableItem(this.item);

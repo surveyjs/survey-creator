@@ -16,3 +16,26 @@
     border-radius: 10px;
   }
 }
+
+.spg-matrixdynamic__drag-drop-ghost-position-top,
+.spg-matrixdynamic__drag-drop-ghost-position-bottom {
+  position: relative;
+}
+
+.spg-matrixdynamic__drag-drop-ghost-position-top::after,
+.spg-matrixdynamic__drag-drop-ghost-position-bottom::after {
+  content: "";
+  width: 100%;
+  height: 4px;
+  background-color: $secondary;
+  position: absolute;
+  left: 0;
+}
+
+.spg-matrixdynamic__drag-drop-ghost-position-top::after {
+  top: 0;
+}
+
+.spg-matrixdynamic__drag-drop-ghost-position-bottom::after {
+  bottom: 0;
+}

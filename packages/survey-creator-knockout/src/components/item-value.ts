@@ -29,7 +29,7 @@ class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   }
   get attributes() {
     return this.isDraggable
-      ? { "data-svc-drop-target-item-value": this.item.value }
+      ? { "data-sv-drop-target-item-value": this.item.value }
       : null;
   }
 }

@@ -1,6 +1,6 @@
 import { Base, PageModel, property, SurveyModel, Action } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
-import { DragDropHelper } from "survey-core";
+import { DragDropSurveyElements } from "survey-core";
 import "./designer.scss";
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
@@ -41,7 +41,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     };
     newPage.onPropertyChanged.add(checkNewElementHandler);
     this.newPage = newPage;
-    DragDropHelper.newGhostPage = newPage;
+    DragDropSurveyElements.newGhostPage = newPage;
   }
 
   constructor(creator: CreatorBase<T>) {
