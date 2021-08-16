@@ -573,12 +573,21 @@ export class Translation extends Base implements ITranslationLocales {
     this.canMergeLocaleWithDefault = this.hasLocale(this.defaultLocale);
   }
   private getSettingsSurveyJSON(): any {
+    const defaultLanguageText = this.getLocaleName("");
     return {
       elements: [
         {
           type: "panel",
           name: "languages",
           elements: [
+            {
+              type: "checkbox",
+              name: "defaultLanguage",
+              titleLocation: "hidden",
+              readOnly: true,
+              choices: [defaultLanguageText],
+              defaultValue: [defaultLanguageText]
+            },
             {
               type: "checkbox",
               name: "locales",

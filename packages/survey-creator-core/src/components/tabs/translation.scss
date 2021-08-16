@@ -42,6 +42,12 @@
   width: 450px;
   border-left: 1px solid $border;
 }
+.st-property-panel .spg-panel__content .spg-row {
+  margin-top: 0;
+}
+.st-property-panel .spg-panel__content .spg-row:first-child {
+  margin-top: calcSize(2);
+}
 
 .st-strings-header {
   .st-table__cell {
