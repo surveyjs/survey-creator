@@ -48,24 +48,7 @@ export class QuestionLinkValueModel extends Question {
     var displayValue = this.isEmpty()
       ? editorLocalization.getString("pe.emptyValue")
       : this.getObjDisplayValue();
-    this.linkValueText = this.correctHtml(displayValue);
-  }
-  private correctHtml(html: string): string {
-    if (!html) return html;
-    let regex = /[&|<|>|"|']/g;
-    return html.replace(regex, function (match) {
-      if (match === "&") {
-        return "&amp;";
-      } else if (match === "<") {
-        return "&lt;";
-      } else if (match === ">") {
-        return "&gt;";
-      } else if (match === '"') {
-        return "&quot;";
-      } else {
-        return "&apos;";
-      }
-    });
+    this.linkValueText = displayValue;
   }
   private stringifyValue(val: any): string {
     if (typeof val !== "string") return JSON.stringify(val);

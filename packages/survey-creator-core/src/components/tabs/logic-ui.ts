@@ -39,11 +39,6 @@ export class SurveyLogicUI extends SurveyLogic {
       "logic-items"
     );
     //this.itemsSurveyValue.css = surveyDesignerCss;
-    this.itemsSurvey.onMatrixCellCreated.add((sender, options) => {
-      var q = options.cellQuestion;
-      q.ignoreHtmlProgressing = true;
-      q.html = q.value;
-    });
     this.itemsSurvey.onMatrixRowRemoved.add((sender, options) => {
       this.removeItem(this.items[options.rowIndex]);
     });
@@ -150,13 +145,15 @@ export class SurveyLogicUI extends SurveyLogic {
           rowCount: 0,
           columns: [
             {
-              cellType: "html",
+              cellType: "linkvalue",
               name: "conditions",
+              readOnly: true,
               title: this.getLocString("ed.lg.conditions")
             },
             {
-              cellType: "html",
+              cellType: "linkvalue",
               name: "actions",
+              readOnly: true,
               title: this.getLocString("ed.lg.actions")
             }
           ]
