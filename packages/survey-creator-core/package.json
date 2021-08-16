@@ -1,5 +1,5 @@
 {
-  "version": "1.8.60-alpha.0",
+  "version": "1.8.60-alpha.1",
   "name": "survey-creator-core",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -17,6 +17,7 @@
     "remove-package-lock": "rimraf package-lock.json"
   },
   "dependencies": {
+    "eslint": "^7.32.0",
     "papaparse": "^5.2.0",
     "rmodal": "1.0.31",
     "sortablejs": "1.6.1",
