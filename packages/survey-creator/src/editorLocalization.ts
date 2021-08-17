@@ -4,7 +4,7 @@ import * as Survey from "survey-knockout";
 export var editorLocalization = {
   camelCaseBreaking: true,
   currentLocale: "",
-  locales: {},
+  locales: <{[index: string]: any}>{},
   getString: function(strName: string, locale: string = null) {
     var loc = this.getLocale(locale);
     var defaultLocale = this.getLocale("en");
