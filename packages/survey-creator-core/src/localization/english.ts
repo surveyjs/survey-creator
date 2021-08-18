@@ -133,6 +133,8 @@ export var enStrings = {
     chooseElement: "Choose element...",
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
+    addNewQuestion: "Add Question",
+    addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
       addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
