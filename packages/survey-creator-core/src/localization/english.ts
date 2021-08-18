@@ -349,6 +349,7 @@ export var enStrings = {
     then: "Then",
     setToName: "to",
     fromName: "from",
+    ruleIsNotSet: "Rule is incorrect",
 
     //survey
     showTitle: "Show/hide title",

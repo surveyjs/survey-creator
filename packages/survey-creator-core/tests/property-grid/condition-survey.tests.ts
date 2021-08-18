@@ -64,6 +64,7 @@ test("Add condition", () => {
     survey,
     survey.getQuestionByName("q1")
   );
+  expect(conditionEditor.title).toEqual("Rule is incorrect");
   conditionEditor.text = "{q} = 1";
   expect(conditionEditor.panel.panelCount).toEqual(1);
   expect(conditionEditor.isReady).toEqual(true);
@@ -77,6 +78,7 @@ test("Add condition", () => {
   editPanel.getQuestionByName("questionValue").value = 2;
   expect(conditionEditor.isReady).toEqual(true);
   expect(conditionEditor.text).toEqual("{q} = 1 and {q2} = 2");
+  expect(conditionEditor.title).toEqual("{q} = 1 and {q2} = 2");
 });
 test("Do not delete the only condition, but clear it", () => {
   var survey = new SurveyModel({
@@ -819,6 +821,13 @@ test("Create expression from scratch", () => {
   editor.panel.addPanel();
   panel = editor.panel.panels[1];
   expect(panel.getQuestionByName("conjunction").isVisible).toBeTruthy();
+  expect(panel.getQuestionByName("conjunction").choices).toHaveLength(2);
+  expect(panel.getQuestionByName("conjunction").choices[0].value).toEqual(
+    "and"
+  );
+  expect(panel.getQuestionByName("conjunction").choices[0].text).toEqual("And");
+  expect(panel.getQuestionByName("conjunction").choices[1].value).toEqual("or");
+  expect(panel.getQuestionByName("conjunction").choices[1].text).toEqual("Or");
   panel.getQuestionByName("questionName").value = "q2";
   expect(editor.isReady).toBeFalsy();
   panel.getQuestionByName("questionValue").value = 2;
