@@ -46,7 +46,7 @@ test("Create logic rule", async (t) => {
     await t
         .click(getTabbedMenuItemByText("Survey Logic"))
         .click(Selector(".sv-action-bar-item").withExactText("Add New").filterVisible())
-        .expect(titleSelector.innerText).eql("Rule")
+        .expect(titleSelector.innerText).eql("Rule is incorrect")
         .expect(logicQuestionSelector.count).eql(1)
         .expect(logicQuestionSelector.value).eql("")
         .expect(logicOperatorSelector.innerText).eql("equals")
