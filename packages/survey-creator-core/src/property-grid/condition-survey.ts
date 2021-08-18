@@ -363,7 +363,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               titleLocation: "hidden",
               showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
-              choices: ["and", "or"]
+              choices: [
+                { value: "and", text: editorLocalization.getString("pe.and") },
+                { value: "or", text: editorLocalization.getString("pe.or") }
+              ]
             },
             {
               name: "questionName",
@@ -866,7 +869,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           ? 1
           : maxLogicItems;
     }
-    this.title = this.text || "Rule";
+    this.title = this.text || editorLocalization.getString("pe.ruleIsNotSet");
   }
 
   private isSettingTextEditorValue: boolean;
