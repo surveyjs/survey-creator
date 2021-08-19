@@ -42,7 +42,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     this.manager = new VerticalResponsivityManager(
       container,
       this.toolbox,
-      "div.svc-toolbox__tool",
+      ".svc-toolbox__tool:not(.sv-dots)>.sv-action__content",
       40
     );
   }

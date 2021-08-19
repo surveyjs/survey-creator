@@ -33,51 +33,30 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.showAllStringsAction.css = this.model.showAllStrings ? "sv-action-bar-item--secondary" : "";
     this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
     this.showAllStringsAction.visible = true;
-    
+
     this.filterPageAction.visible = true;
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
 
-    this.pagePopupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          [{ id: null, title: this.showAllPagesText }].concat(
-            this.creator.survey.pages.map((page) => ({
-              id: page.name,
-              title: this.creator.getObjectDisplayName(
-                page,
-                "survey-translation",
-                page.title
-              )
-            }))
-          ),
-          (item: IAction) => {
-            this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
-            this.pagePopupModel.toggleVisibility();
-          },
-          true
+    this.pagePopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllPagesText }].concat(
+      this.creator.survey.pages.map((page) => ({
+        id: page.name,
+        title: this.creator.getObjectDisplayName(
+          page,
+          "survey-translation",
+          page.title
         )
-      },
-      "bottom",
-      "center"
+      }))
     );
-    this.filterPageAction.popupModel = this.pagePopupModel;
-    this.filterPageAction.component = "sv-action-bar-item-dropdown";
 
     this.model.onPropertyChanged.add((sender, options) => {
-      if (options.name === "showAllStrings") {
-        this.model.reset();
-      }
       if (options.name === "filteredPage") {
         this.filterPageAction.title = this.getFilterPageActionTitle();
-        this.model.reset();
       }
       if (options.name === "canMergeLocaleWithDefault"){
         this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
       }
       if (options.name === "mergeLocaleWithDefaultText"){
-        this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
         this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
         this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
       }
@@ -109,11 +88,28 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     return editorLocalization.getString("ed.translationImportFromSCVButton");
   }
   public createActions(items: Array<Action>) {
+    const translationMergeLocaleWithDefaultStr = editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
+    this.pagePopupModel = new PopupModel<{model: ListModel}>(
+      "sv-list",
+      {
+        model: new ListModel(
+          [{ id: null, title: this.showAllPagesText }],
+          (item: IAction) => {
+            this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
+            this.pagePopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
+      "bottom",
+      "center"
+    );
     this.filterPageAction = new Action({
       id: "svc-translation-filter-page",
       title: this.getFilterPageActionTitle(),
       visible: false,
-      // component: "sv-action-bar-item-dropdown",
+      component: "sv-action-bar-item-dropdown",
+      popupModel: this.pagePopupModel,
       action: (newPage) => {
         this.pagePopupModel.toggleVisibility();
       }
@@ -137,10 +133,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction = new Action({
       id: "svd-translation-merge_locale_withdefault",
       visible: false,
-      // title: this.model.mergeLocaleWithDefaultText,
-      // tooltip: this.model.mergeLocaleWithDefaultText,
+      //visible: this.model.canMergeLocaleWithDefault,
+      title: translationMergeLocaleWithDefaultStr,
+      tooltip: translationMergeLocaleWithDefaultStr,
       component: "sv-action-bar-item",
-      // visible: this.model.canMergeLocaleWithDefault,
       action: () => {
         this.model.mergeLocaleWithDefault();
       }

@@ -512,8 +512,12 @@ export class Translation extends Base implements ITranslationLocales {
   @property() mergeLocaleWithDefaultText: string;
   @property({ defaultValue: false }) readOnly: boolean;
   @property() root: TranslationGroup;
-  @property({ defaultValue: false }) showAllStrings: boolean;
-  @property() filteredPage: PageModel;
+  @property({ defaultValue: false, onSet: (_, target: Translation) => {
+    target.reset()
+  } }) showAllStrings: boolean;
+  @property({ onSet: (_, target: Translation) => {
+    target.reset()
+  } }) filteredPage: PageModel;
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
   @property({ defaultValue: true }) isEmpty: boolean;

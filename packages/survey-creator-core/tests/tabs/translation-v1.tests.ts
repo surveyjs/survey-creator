@@ -56,7 +56,6 @@ test("Survey child groups", () => {
   expect(root.groups).toHaveLength(1);
   expect(root.items).toHaveLength(1);
   expect(root.groups[0].obj.getType()).toEqual("page");
-  expect(root.groups[0].showHeader).toBeFalsy();
   root.reset();
   expect(root.groups).toHaveLength(1);
   expect(root.groups[0].groups).toHaveLength(1);
@@ -610,6 +609,7 @@ test("Localize the group and item text", () => {
   expect(choices);
   expect(choices.text).toEqual("Choices");
 });
+
 test("check LocalizableStrings/dataList property", () => {
   const survey: SurveyModel = new SurveyModel();
   survey.addNewPage("page1");

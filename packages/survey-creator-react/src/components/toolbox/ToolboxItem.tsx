@@ -46,14 +46,7 @@ import {
     
     render(): JSX.Element {
       const item = ((this.item as any) as Action);
-      const className = "svc-toolbox__tool " 
-      + item.css;
-      const style: CSSProperties = {
-        visibility: item.isVisible === undefined || item.isVisible ? "visible" : "hidden"
-      };
-      if (item.visible !== undefined && !item.visible) {
-        style.display = "none";
-      }
+      const className = "svc-toolbox__tool " + item.css + (item.isVisible ? "" : " sv-action--hidden");
       const itemComponent = ReactElementFactory.Instance.createElement(
         this.item.component || "svc-toolbox-item",
         {
@@ -63,11 +56,13 @@ import {
         }
       );
       return (
-        <div className={className} style={style} key={item.id}>
-          {(this.isCompact && item.needSeparator) ? (
-            <div className="svc-toolbox__category-separator"></div>
-          ) : null}
-          {itemComponent}
+        <div className={className} key={item.id}>
+          <div className="sv-action__content">
+            {(this.isCompact && item.needSeparator) ? (
+              <div className="svc-toolbox__category-separator"></div>
+            ) : null}
+            {itemComponent}
+          </div>
         </div>
       );
     }

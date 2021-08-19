@@ -277,6 +277,7 @@ test("Translation show All strings and property visibility", () => {
     options.canShow = options.property.name == "title";
   });
   var tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.createActions([]);
   tabTranslation.activate();
   var translation = tabTranslation.model;
   expect(translation.root.locItems).toHaveLength(1);
@@ -295,6 +296,7 @@ test("Translation make translation observable", () => {
     ]
   };
   var tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.createActions([]);
   tabTranslation.activate();
   var translation = tabTranslation.model;
   translation.makeObservable((obj: Base) => {

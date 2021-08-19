@@ -982,7 +982,7 @@ export class CreatorBase<T extends SurveyModel>
         this.plugins[key].createActions(items);
       }
     }
-    this.toolbarValue.actions = items;
+    this.toolbarValue.setItems(items);
   }
 
   public getOptions() {

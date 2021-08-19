@@ -42,3 +42,8 @@ svc-tabbed-menu-item {
 .svc-tabbed-menu-item__text {
   white-space: nowrap;
 }
+
+.svc-tabbed-menu-item-container:not(:last-child) > .sv-action__content {
+  box-sizing: content-box;
+  padding-right: calcSize(2);
+}
