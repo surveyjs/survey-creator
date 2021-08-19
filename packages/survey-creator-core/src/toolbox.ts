@@ -89,7 +89,7 @@ export class QuestionToolboxItem
  * The list of Toolbox items.
  */
 export class QuestionToolbox
-  extends AdaptiveActionContainer<QuestionToolboxItem, IQuestionToolboxItem>
+  extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox
 {
   static hiddenTypes = ["buttongroup", "linkvalue"];

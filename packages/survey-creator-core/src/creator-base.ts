@@ -70,6 +70,12 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   componentContent: string;
   renderTab?: () => any;
 }
+export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem> {
+  constructor() {
+    super();
+    this.dotsItemPopupModel.horizontalPosition = "right";
+  }
+}
 
 /**
  * Base class for Survey Creator.
@@ -711,7 +717,7 @@ export class CreatorBase<T extends SurveyModel>
    */
   public showPageSelectorInToolbar = false;
 
-  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem, ITabbedMenuItem>;
+  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem>;
 
   get tabs() {
     return this.tabbedMenu.actions;
@@ -948,8 +954,7 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   private initTabbedMenu() {
-    this.tabbedMenu = new AdaptiveActionContainer();
-    this.tabbedMenu.dotsItemPopupModel.horizontalPosition = "right";
+    this.tabbedMenu = new TabbedMenuContainer();
   }
   private initTabsPlugin(): void {
     if (this.showDesignerTab) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSProperties } from "react";
-import { ITabbedMenuItem, TabbedMenuItem } from "@survey/creator";
+import { ITabbedMenuItem, TabbedMenuItem, TabbedMenuContainer } from "@survey/creator";
 import {
   Base,
   IAction,
@@ -11,7 +11,7 @@ import {
 import { attachKey2click, ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 export interface ITabbedMenuComponentProps {
-  model: AdaptiveActionContainer<TabbedMenuItem, ITabbedMenuItem>;
+  model: TabbedMenuContainer;
 }
 
 export class TabbedMenuComponent extends SurveyElementBase<
@@ -35,7 +35,7 @@ export class TabbedMenuComponent extends SurveyElementBase<
   }
 
   renderElement(): JSX.Element {
-    const items = this.model.actions.map((item) => <TabbedMenuItemWrapper item={item} key={item.id} />);
+    const items = this.model.renderedActions.map((item) => <TabbedMenuItemWrapper item={item} key={item.id} />);
     return (
       <div ref={this.rootRef} className="svc-tabbed-menu">
         {items}
