@@ -42,9 +42,9 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
   
   private getDragDropGhost(topOrBottom: string) {
     if (this.model.ghostPosition === topOrBottom) {
-      let className = "svc-drag-drop-ghost";
+      let className = "sv-drag-drop-ghost";
       if (topOrBottom === "bottom")
-        className += " svc-drag-drop-ghost--item-value-bottom";
+        className += " sv-drag-drop-ghost--item-value-bottom";
       return <div className={className}></div>;
     }
     return null;

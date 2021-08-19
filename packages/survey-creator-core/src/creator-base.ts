@@ -1402,7 +1402,7 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   private getSurveyTextFromDesigner() {
-    if(!this.survey) return "";
+    if (!this.survey) return "";
     var json = (<any>this.survey).toJSON();
     if (this.options && this.options.generateValidJSON) {
       return JSON.stringify(json, null, 1);
@@ -2337,12 +2337,14 @@ export class CreatorBase<T extends SurveyModel>
   }
 
   public get addNewQuestionText() {
-    return (
-      "Add " +
-      ((!!this.currentAddQuestionType &&
-        editorLocalization.getString("qt." + this.currentAddQuestionType)) ||
-        "Question")
-    );
+    if (!!this.currentAddQuestionType) {
+      const str = this.getLocString("ed.addNewTypeQuestion");
+      if (!!str && !!str["format"])
+        return str["format"](
+          editorLocalization.getString("qt." + this.currentAddQuestionType)
+        );
+    }
+    return this.getLocString("ed.addNewQuestion");
   }
 
   public getQuestionTypeSelectorModel(beforeAdd: () => void) {
@@ -2487,7 +2489,11 @@ export function getElementWrapperComponentName(
   }
   return undefined;
 }
-export function getElementWrapperComponentData(element: any, reason: string, creator: CreatorBase<SurveyModel>): any {
+export function getElementWrapperComponentData(
+  element: any,
+  reason: string,
+  creator: CreatorBase<SurveyModel>
+): any {
   if (reason === "logo-image") return creator;
   if (
     reason === "cell" ||
@@ -2516,10 +2522,7 @@ export function getItemValueWrapperComponentName(
   item: ItemValue,
   question: QuestionSelectBase
 ): string {
-  if (
-    !!question["parentQuestionValue"] ||
-    question.isContentElement
-  ) {
+  if (!!question["parentQuestionValue"] || question.isContentElement) {
     return SurveyModel.TemplateRendererComponentName;
   }
   if (question.getType() === "imagepicker") {

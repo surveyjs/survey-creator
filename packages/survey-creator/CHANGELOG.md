@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.61](https://github.com/surveyjs/survey-creator/compare/v1.8.60...v1.8.61) (2021-08-19)
+
+
+### Bug Fixes
+
+* V2: There are non localizable strings in logic edit panel [#1640](https://github.com/surveyjs/survey-creator/issues/1640) ([#1641](https://github.com/surveyjs/survey-creator/issues/1641)) ([08922e0](https://github.com/surveyjs/survey-creator/commit/08922e0cfadebe25b40733c64a91ba6b695830e3))
+
 ### [1.8.60](https://github.com/surveyjs/survey-creator/compare/v1.8.59...v1.8.60) (2021-08-11)
 
 

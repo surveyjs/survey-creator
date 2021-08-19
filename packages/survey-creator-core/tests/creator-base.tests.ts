@@ -29,6 +29,7 @@ import {
 } from "../src/creator-base";
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
+import { editorLocalization } from "../src/editorLocalization";
 
 test("options.questionTypes", (): any => {
   var creator = new CreatorTester();
@@ -773,6 +774,25 @@ test("Question type selector", (): any => {
   expect(survey.getAllQuestions()[1].getType()).toEqual("rating");
 });
 
+test("Question type selector localization", (): any => {
+  const locStrings = editorLocalization.getLocale("");
+  const oldAddNewQuestion = locStrings.ed.addNewQuestion;
+  const oldAddNewTypeQuestion = locStrings.ed.addNewTypeQuestion;
+  locStrings.ed.addNewQuestion = "Add New Question";
+  locStrings.ed.addNewTypeQuestion = "Add New {0}";
+  const creator = new CreatorTester();
+  const survey: SurveyModel = <SurveyModel>creator.survey;
+  expect(creator.addNewQuestionText).toEqual("Add New Question");
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => {});
+  const listModel: ListModel =
+    selectorModel.popupModel.contentComponentData.model;
+  const ratingItem = listModel.items.filter((item) => item.id == "rating")[0];
+  listModel.selectItem(ratingItem);
+  expect(creator.addNewQuestionText).toEqual("Add New Rating");
+  locStrings.ed.addNewQuestion = oldAddNewQuestion;
+  locStrings.ed.addNewTypeQuestion = oldAddNewTypeQuestion;
+});
+
 test("Add question with default choices", (): any => {
   const creator = new CreatorTester();
   const survey: SurveyModel = <SurveyModel>creator.survey;
@@ -1221,8 +1241,7 @@ test("Set readOnly option", (): any => {
   try {
     const creator = new CreatorTester({ readOnly: true });
     expect(creator.readOnly).toBeTruthy();
-  }
-  catch(e) {
+  } catch (e) {
     expect(e).toBeNull();
   }
 });

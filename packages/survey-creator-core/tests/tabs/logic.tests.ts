@@ -257,6 +257,41 @@ test("SurveyLogicUI: Test logicItemsSurvey", () => {
   expect(itemsQuestion.value).toHaveLength(2);
   expect(itemsQuestion.rowCount).toEqual(2);
 });
+test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4" }
+    ]
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(1);
+  var itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  var rows = itemsQuestion.visibleRows;
+  expect(rows).toHaveLength(1);
+  expect(rows[0].cells).toHaveLength(2);
+  expect(rows[0].cells[0].question.getType()).toEqual("linkvalue");
+  expect(rows[0].cells[1].question.getType()).toEqual("linkvalue");
+  expect(itemsQuestion.value).toHaveLength(1);
+  expect(itemsQuestion.value[0].conditions).toEqual(
+    "When expression: '{q1} == 1' returns true:"
+  );
+  expect(itemsQuestion.value[0].actions).toEqual("Make question {q3} visible");
+  logic.editItem(logic.items[0]);
+  logic.expressionEditor.text = "{q2}=1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("elementSelector").value = "q4";
+  var res = logic.saveEditableItemAndBack();
+  expect(res).toBeTruthy();
+  itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  expect(itemsQuestion.value).toHaveLength(1);
+  expect(itemsQuestion.value[0].conditions).toEqual(
+    "When expression: '{q2} == 1' returns true:"
+  );
+  expect(itemsQuestion.value[0].actions).toEqual("Make question {q4} visible");
+});
 test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
   var survey = new SurveyModel({
     elements: [
