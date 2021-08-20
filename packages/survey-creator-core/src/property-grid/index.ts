@@ -12,7 +12,9 @@ import {
   Serializer,
   settings,
   SurveyModel,
-  Action
+  Action,
+  IAction,
+  MatrixDynamicRowModel
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -56,6 +58,19 @@ export function setSurveyJSONForPropertyGrid(
     json.textUpdateMode = "onTyping";
   }
   json.requiredText = "";
+}
+export function updateMatrixRemoveAction(
+  question: QuestionMatrixDynamicModel,
+  action: IAction,
+  row: MatrixDynamicRowModel
+) {
+  action.component = "sv-action-bar-item";
+  action.iconName = "icon-delete";
+  action.title = question.removeRowText;
+  action.showTitle = false;
+  action.action = () => {
+    question.removeRowUI(row);
+  };
 }
 
 export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
