@@ -16,7 +16,7 @@ import { QuestionAdornerViewModel } from "../src/components/question";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
 import { TabTestPlugin } from "../src/components/tabs/test";
-import { TabTranslationPlugin } from "../src/components/tabs/translation";
+import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
 import { TabLogicPlugin } from "../src/components/tabs/logic-ui";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";

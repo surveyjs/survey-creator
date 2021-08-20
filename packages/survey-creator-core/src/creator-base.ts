@@ -41,7 +41,7 @@ import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test";
 import { SurveyLogic } from "./components/tabs/logic";
-import { TabTranslationPlugin } from "./components/tabs/translation";
+import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-ui";
 import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
 import { TabDesignerPlugin } from "./entries";
@@ -69,6 +69,12 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   }
   componentContent: string;
   renderTab?: () => any;
+}
+export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem> {
+  constructor() {
+    super();
+    this.dotsItemPopupModel.horizontalPosition = "right";
+  }
 }
 
 /**
@@ -711,7 +717,7 @@ export class CreatorBase<T extends SurveyModel>
    */
   public showPageSelectorInToolbar = false;
 
-  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem, ITabbedMenuItem>;
+  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem>;
 
   get tabs() {
     return this.tabbedMenu.actions;
@@ -948,8 +954,7 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
   private initTabbedMenu() {
-    this.tabbedMenu = new AdaptiveActionContainer();
-    this.tabbedMenu.dotsItemPopupModel.horizontalPosition = "right";
+    this.tabbedMenu = new TabbedMenuContainer();
   }
   private initTabsPlugin(): void {
     if (this.showDesignerTab) {
@@ -982,7 +987,7 @@ export class CreatorBase<T extends SurveyModel>
         this.plugins[key].createActions(items);
       }
     }
-    this.toolbarValue.actions = items;
+    this.toolbarValue.setItems(items);
   }
 
   public getOptions() {

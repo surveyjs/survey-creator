@@ -105,6 +105,9 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return null;
   }
   renderCreatorTab(tab: ITabbedMenuItem) {
+    if(tab.visible === false) {
+      return null;
+    }
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const component = !!tab.renderTab
       ? tab.renderTab()

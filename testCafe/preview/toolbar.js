@@ -29,7 +29,7 @@ function getListItemByText(text) {
     return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
 }
 
-const visibleBarItems = Selector(".svc-test-tab__content-actions .sv-action-bar-item").filterVisible();
+const visibleBarItems = Selector(".svc-test-tab__content-actions .sv-action").filterVisible();
 
 test('Device selector', async (t) => {
     await ClientFunction((json) => { creator.JSON = json; })(json);

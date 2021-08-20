@@ -1,8 +1,9 @@
-<div class="svc-toolbox__tool"
-    data-bind="css: $data.item.css, visible: $data.item.visible === undefined || $data.item.visible, style: { visibility : $data.item.isVisible === undefined || $data.item.isVisible ? 'visible': 'hidden' }">
-    <!-- ko if: $data.item.needSeparator && $data.isCompact-->
-    <div class="svc-toolbox__category-separator"></div>
-    <!-- /ko -->
-    <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
-    <!-- /ko -->
+<div class="svc-toolbox__tool" data-bind="css: { 'sv-action--hidden': !$data.item.isVisible }, class: $data.item.css">
+    <div class="sv-action__content">
+        <!-- ko if: $data.item.needSeparator && $data.isCompact-->
+        <div class="svc-toolbox__category-separator"></div>
+        <!-- /ko -->
+        <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
+        <!-- /ko -->
+    </div>
 </div>
