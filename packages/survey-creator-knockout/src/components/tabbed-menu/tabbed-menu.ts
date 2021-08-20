@@ -19,7 +19,7 @@ ko.components.register("svc-tabbed-menu", {
       const manager: ResponsivityManager = new ResponsivityManager(
         container,
         model,
-        "span.svc-tabbed-menu-item-container"
+        ".svc-tabbed-menu-item-container:not(.sv-dots)>.sv-action__content"
       );
       ko.utils.domNodeDisposal.addDisposeCallback(container, () =>
         manager.dispose()

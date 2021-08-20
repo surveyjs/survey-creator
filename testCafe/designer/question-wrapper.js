@@ -31,9 +31,7 @@ test("Single input question wrapper actions", async (t) => {
         )
         .ok();
 
-    const controls = Selector(".svc-question__content-actions").find(
-        ".sv-action"
-    );
+    const controls = Selector(".svc-question__content-actions .sv-action").filterVisible();
     await t.expect(controls.count).eql(4);
 
     const convertActionButton = controls
@@ -56,6 +54,11 @@ test("Single input question wrapper actions", async (t) => {
 
     const deleteActionButton = controls.nth(3).find('button[title="Delete"]');
     await t.expect(deleteActionButton.visible).ok();
+
+    const dotsButton = Selector(".svc-question__content-actions .sv-action").nth(4);
+    await t
+        .expect(dotsButton.exists).ok()
+        .expect(dotsButton.visible).notOk()
 });
 
 test("Single input question wrapper action convert", async (t) => {

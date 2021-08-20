@@ -1,7 +1,6 @@
 import React from "react";
 import { Base } from "survey-core";
 import {
-  SurveyActionBar,
   ReactElementFactory,
   SurveyElementBase,
   Survey
@@ -18,16 +17,35 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
   renderElement(): JSX.Element {
     if (!this.model) return null;
     return (
-      <div className="svc-creator-tab__content">
-        <div className="svc-plugin-tab__content svc-translation-tab__content">
-          <Survey model={this.model.settingsSurvey}></Survey>
-          <Survey model={this.model.stringsSurvey}></Survey>
-        </div>
-        <div className="svc-test-tab__content-actions svc-translation-tab__content-actions">
-          <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
-        </div>
+      <div className="svc-creator-tab__content svc-translation-tab">
+        {this.renderElementContent()}
       </div>
     );
+  }
+  renderElementContent(): JSX.Element {
+    if(this.model.isEmpty){
+      return (
+        <div className="st-no-strings">
+          <span>{this.model.noStringsText}</span>
+        </div>
+      );
+    } else {
+      return (
+        <div className="st-content">
+          <div className="svc-flex-column st-strings-wrapper">
+            <div className="svc-flex-row st-strings-header">
+              <Survey model={this.model.stringsHeaderSurvey}></Survey>
+            </div>
+            <div className="svc-flex-row svc-plugin-tab__content st-strings">
+              <Survey model={this.model.stringsSurvey}></Survey>
+            </div>
+          </div>
+          <div className="svc-flex-column st-property-panel">
+            <Survey model={this.model.settingsSurvey}></Survey>
+          </div>
+        </div>
+      );
+    } 
   }
 }
 

@@ -29,9 +29,18 @@ svc-toolbox {
   align-items: flex-start;
 }
 
+.svc-toolbox__tool > .sv-action__content {
+  padding-right: 0;
+}
+
 .svc-toolbox__tool:not(.sv-dots) {
+  display: flex;
   width: 100%;
   padding-right: calcSize(1);
+}
+
+.svc-toolbox__tool .sv-dots__item {
+  width: calcSize(6);
 }
 
 .svc-toolbox__category-separator {

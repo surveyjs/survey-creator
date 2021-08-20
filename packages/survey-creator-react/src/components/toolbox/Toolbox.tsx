@@ -42,7 +42,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     this.manager = new VerticalResponsivityManager(
       container,
       this.toolbox,
-      "div.svc-toolbox__tool",
+      ".svc-toolbox__tool:not(.sv-dots)>.sv-action__content",
       40
     );
   }
@@ -55,12 +55,8 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     return this.toolbox;
   }
 
-  get hasItems(): boolean {
-    return this.toolbox.hasItems;
-  }
-
   render(): JSX.Element {
-    if (!this.hasItems) return null;
+    if (!this.toolbox.hasActions) return null;
     if (this.toolbox.isCompact || this.toolbox.categories.length == 1) {
       const items = this.renderItems();
       return (
@@ -79,7 +75,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
 
   renderItems() {
-    return this.toolbox.actions.map((item: Action, itemIndex) =>
+    return this.toolbox.renderedActions.map((item: Action, itemIndex) =>
       <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={this.toolbox.isCompact} key={"item" + itemIndex}></SurveyCreatorToolboxTool>
     );
   }

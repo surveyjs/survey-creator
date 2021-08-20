@@ -53,7 +53,7 @@ ko.components.register('svc-toolbox', {
     createViewModel: (params: any, componentInfo: any) => {
       const model: ToolboxViewModel = new ToolboxViewModel(params.creator);
       const container = componentInfo.element.querySelector('.svc-toolbox');
-      const manager: VerticalResponsivityManager = new VerticalResponsivityManager(container, params.creator.toolbox, 'div.svc-toolbox__tool', 40);
+      const manager: VerticalResponsivityManager = new VerticalResponsivityManager(container, params.creator.toolbox, '.svc-toolbox__tool:not(.sv-dots)>.sv-action__content', 40);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         manager.dispose();
         model.dispose();

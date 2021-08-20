@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.60-alpha.1](https://github.com/surveyjs/survey-creator/compare/v1.8.60...v1.8.60-alpha.1) (2021-08-16)
+
+### [1.8.59-alpha.4](https://github.com/surveyjs/survey-creator/compare/v1.8.59...v1.8.59-alpha.4) (2021-08-13)
+
+
+### Bug Fixes
+
+* Console error on new logic tab design in V2 [#1588](https://github.com/surveyjs/survey-creator/issues/1588) ([c9f5112](https://github.com/surveyjs/survey-creator/commit/c9f511208a8f8afb0225549fb1cfff6ed1aa3a9b))
+* Logic tab: Could not delete triggers in the logic tab [#1598](https://github.com/surveyjs/survey-creator/issues/1598) ([#1599](https://github.com/surveyjs/survey-creator/issues/1599)) ([64d49b0](https://github.com/surveyjs/survey-creator/commit/64d49b0bb34803812a0d44cada3a5bfce4f2222a))
+* V2: We have to re-create Condition Editor on every new/edit logic item [#1600](https://github.com/surveyjs/survey-creator/issues/1600) ([#1601](https://github.com/surveyjs/survey-creator/issues/1601)) ([276cfe3](https://github.com/surveyjs/survey-creator/commit/276cfe391a728c7a67c96b3be5b10a8840d76c64))
+
+### [1.8.59-alpha.3](https://github.com/surveyjs/survey-creator/compare/v1.8.59...v1.8.59-alpha.3) (2021-08-09)
+
+
+### Bug Fixes
+
+* Console error on new logic tab design in V2 [#1588](https://github.com/surveyjs/survey-creator/issues/1588) ([c9f5112](https://github.com/surveyjs/survey-creator/commit/c9f511208a8f8afb0225549fb1cfff6ed1aa3a9b))
+
+### [1.8.59-alpha.2](https://github.com/surveyjs/survey-creator/compare/v1.8.59...v1.8.59-alpha.2) (2021-08-06)
+
+
+### Bug Fixes
+
+* Console error on new logic tab design in V2 [#1588](https://github.com/surveyjs/survey-creator/issues/1588) ([c9f5112](https://github.com/surveyjs/survey-creator/commit/c9f511208a8f8afb0225549fb1cfff6ed1aa3a9b))
+
 ### [1.8.59-alpha.1](https://github.com/surveyjs/survey-creator/compare/v1.8.59...v1.8.59-alpha.1) (2021-08-03)
 
 ### [1.8.58-alpha.1](https://github.com/surveyjs/survey-creator/compare/v1.8.58...v1.8.58-alpha.1) (2021-07-28)

@@ -8,9 +8,9 @@ import {
 } from "survey-core";
 import {
   Translation,
-  TranslationItem,
-  TabTranslationPlugin
+  TranslationItem
 } from "../../src/components/tabs/translation";
+import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { CreatorTester } from "../creator-tester";
 
 test("Fire callback on base objects creation", () => {
@@ -277,6 +277,7 @@ test("Translation show All strings and property visibility", () => {
     options.canShow = options.property.name == "title";
   });
   var tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.createActions([]);
   tabTranslation.activate();
   var translation = tabTranslation.model;
   expect(translation.root.locItems).toHaveLength(1);
@@ -295,6 +296,7 @@ test("Translation make translation observable", () => {
     ]
   };
   var tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.createActions([]);
   tabTranslation.activate();
   var translation = tabTranslation.model;
   translation.makeObservable((obj: Base) => {
