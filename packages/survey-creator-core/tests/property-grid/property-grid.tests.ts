@@ -30,7 +30,7 @@ import {
   QuestionRatingModel,
   QuestionCustomModel,
   surveyLocalization,
-  Action
+  AdaptiveActionContainer
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -267,6 +267,31 @@ test("itemvalue[] property editor", () => {
   question.choices[2].value = 333;
   expect(choicesQuestion.visibleRows[2].cells[0].value).toEqual(333); //"the first cell in third row is correct"
 });
+test("itemvalue[] property editor, remove action", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion).toBeTruthy(); //"choices property editor created");
+  expect(choicesQuestion.getType()).toEqual("matrixdynamic"); //"It is a matrix");
+  expect(choicesQuestion.rowCount).toEqual(3);
+  expect(choicesQuestion.renderedTable.rows[0].cells).toHaveLength(4);
+  const cell = choicesQuestion.renderedTable.rows[0].cells[3];
+  expect(cell.isActionsCell).toBeTruthy();
+  expect(cell.item.value).toBeTruthy();
+  const actions = <AdaptiveActionContainer>cell.item.value;
+  expect(actions.actions).toHaveLength(2);
+  const action = actions.actions[1];
+  expect(action.component).toEqual("sv-action-bar-item");
+  expect(action.iconName).toEqual("icon-delete");
+  expect(action.title).toEqual("Remove");
+  expect(action.showTitle).toBeFalsy();
+  action.action();
+  expect(choicesQuestion.rowCount).toEqual(2);
+});
+
 test("itemvalue[] property editor + detail panel", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3];

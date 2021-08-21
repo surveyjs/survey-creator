@@ -15,10 +15,9 @@ import { SurveyLogicAction } from "./logic-items";
 import { SurveyLogic } from "./logic";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
-import { editorLocalization } from "../../entries";
+import { updateMatrixRemoveAction } from "../../property-grid/index";
 
 import "./logic-ui.scss";
-import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
@@ -44,6 +43,13 @@ export class SurveyLogicUI extends SurveyLogic {
     });
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
       if (this.readOnly) return;
+      if (options.actions.length == 1) {
+        updateMatrixRemoveAction(
+          options.question,
+          options.actions[0],
+          options.row
+        );
+      }
       options.actions.push({
         id: "svd-logic-edit-item",
         title: this.editText,

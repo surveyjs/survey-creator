@@ -6,7 +6,8 @@ import {
   PanelModel,
   SurveyTriggerSkip,
   QuestionMatrixDynamicModel,
-  QuestionCustomModel
+  QuestionCustomModel,
+  AdaptiveActionContainer
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -590,4 +591,30 @@ test("LogicItemEditorUI: edit item two times and do Build/Edit", () => {
   expect(editor.panel.visible).toBeFalsy();
   expect(editor.textEditor.visible).toBeTruthy();
   expect(editor.textEditor.value).toEqual("{q1} = 1");
+});
+test("LogicItemEditorUI: check remove row action", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(itemsQuestion.renderedTable.rows[0].cells).toHaveLength(4);
+  const cell = itemsQuestion.renderedTable.rows[0].cells[3];
+  expect(cell.isActionsCell).toBeTruthy();
+  expect(cell.item.value).toBeTruthy();
+  const actions = <AdaptiveActionContainer>cell.item.value;
+  expect(actions.actions).toHaveLength(1);
+  const action = actions.actions[0];
+  expect(action.component).toEqual("sv-action-bar-item");
+  expect(action.iconName).toEqual("icon-delete");
+  expect(action.title).toEqual("Remove");
+  expect(action.showTitle).toBeFalsy();
+  action.action();
+  expect(itemsQuestion.rowCount).toEqual(0);
 });
