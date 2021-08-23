@@ -21,7 +21,8 @@ import {
   IPropertyEditorSetup,
   PropertyGridEditor,
   PropertyGridEditorCollection,
-  PropertyJSONGenerator
+  PropertyJSONGenerator,
+  updateMatrixRemoveAction
 } from "./index";
 
 class SurveyHelper {
@@ -75,13 +76,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       (item: IAction) => item.id === "show-detail"
     )[0];
     if (!!removeRowAction) {
-      removeRowAction.component = "sv-action-bar-item";
-      removeRowAction.iconName = "icon-delete";
-      removeRowAction.title = question.removeRowText;
-      removeRowAction.showTitle = false;
-      removeRowAction.action = () => {
-        question.removeRowUI(row);
-      };
+      updateMatrixRemoveAction(question, removeRowAction, row);
       removeRowAction.visibleIndex = 10;
     }
     if (!!showDetailAction) {

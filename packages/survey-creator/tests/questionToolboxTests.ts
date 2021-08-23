@@ -371,3 +371,74 @@ QUnit.test("Save/Load copied toolbox items", function (assert) {
   assert.equal(toolbox1.copiedItems.length, 1, "Only one item is now");
   assert.equal(toolbox1.copiedItems[0].name, "q3", "and it is q3");
 });
+QUnit.test("Add customWidgets and components into toolbox", function (assert) {
+  Survey.CustomWidgetCollection.Instance.clear();
+  Survey.CustomWidgetCollection.Instance.addCustomWidget(
+    {
+      name: "first",
+      widgetIsLoaded: () => {
+        return true;
+      },
+      isFit: (question: Survey.Question) => {
+        return question.name == "question2";
+      },
+    },
+    "customtype"
+  );
+  Survey.CustomWidgetCollection.Instance.addCustomWidget(
+    {
+      name: "second",
+      widgetIsLoaded: () => {
+        return true;
+      },
+      isFit: (question: Survey.Question) => {
+        return (<Survey.Question>question).getType() == "checkbox";
+      },
+    },
+    "customtype"
+  );
+  Survey.CustomWidgetCollection.Instance.addCustomWidget(
+    {
+      name: "third",
+      widgetIsLoaded: () => {
+        return true;
+      },
+      isFit: (question: Survey.Question) => {
+        return (<Survey.Question>question).getType() == "checkbox";
+      },
+      showInToolbox: false,
+    },
+    "customtype"
+  );
+  Survey.CustomWidgetCollection.Instance.addCustomWidget(
+    {
+      name: "third",
+      widgetIsLoaded: () => {
+        return false;
+      },
+      isFit: (question: Survey.Question) => {
+        return (<Survey.Question>question).getType() == "checkbox";
+      },
+    },
+    "customtype"
+  );
+  Survey.ComponentCollection.Instance.add({
+    name: "comp1",
+    questionJSON: { type: "dropdown", choices: [1, 2, 3, 4, 5] },
+  });
+  Survey.ComponentCollection.Instance.add({
+    name: "comp2",
+    showInToolbox: false,
+    questionJSON: { type: "dropdown", choices: [1, 2, 3, 4, 5] },
+  });
+
+  var toolbox = new QuestionToolbox(["text", "dropdown"]);
+  assert.equal(toolbox.items.length, 5);
+  assert.equal(toolbox.items[0].name, "text");
+  assert.equal(toolbox.items[1].name, "dropdown");
+  assert.equal(toolbox.items[2].name, "first");
+  assert.equal(toolbox.items[3].name, "second");
+  assert.equal(toolbox.items[4].name, "comp1");
+  Survey.CustomWidgetCollection.Instance.clear();
+  Survey.ComponentCollection.Instance.clear();
+});

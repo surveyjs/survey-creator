@@ -248,6 +248,9 @@ test("Add customWidgets into toolbox", (): any => {
   CustomWidgetCollection.Instance.addCustomWidget(
     {
       name: "first",
+      widgetIsLoaded: () => {
+        return true;
+      },
       isFit: (question: Question) => {
         return question.name == "question2";
       }
@@ -257,6 +260,9 @@ test("Add customWidgets into toolbox", (): any => {
   CustomWidgetCollection.Instance.addCustomWidget(
     {
       name: "second",
+      widgetIsLoaded: () => {
+        return true;
+      },
       isFit: (question: Question) => {
         return (<Question>question).getType() == "checkbox";
       }
@@ -266,6 +272,9 @@ test("Add customWidgets into toolbox", (): any => {
   CustomWidgetCollection.Instance.addCustomWidget(
     {
       name: "third",
+      widgetIsLoaded: () => {
+        return true;
+      },
       isFit: (question: Question) => {
         return (<Question>question).getType() == "checkbox";
       },
@@ -273,11 +282,34 @@ test("Add customWidgets into toolbox", (): any => {
     },
     "customtype"
   );
+  CustomWidgetCollection.Instance.addCustomWidget(
+    {
+      name: "third",
+      widgetIsLoaded: () => {
+        return false;
+      },
+      isFit: (question: Question) => {
+        return (<Question>question).getType() == "checkbox";
+      }
+    },
+    "customtype"
+  );
+  ComponentCollection.Instance.add({
+    name: "comp1",
+    questionJSON: { type: "dropdown", choices: [1, 2, 3, 4, 5] }
+  });
+  ComponentCollection.Instance.add({
+    name: "comp2",
+    showInToolbox: false,
+    questionJSON: { type: "dropdown", choices: [1, 2, 3, 4, 5] }
+  });
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
-  expect(toolbox.items).toHaveLength(4);
+  expect(toolbox.items).toHaveLength(5);
   expect(toolbox.items[0].name).toEqual("text");
   expect(toolbox.items[1].name).toEqual("dropdown");
   expect(toolbox.items[2].name).toEqual("first");
   expect(toolbox.items[3].name).toEqual("second");
+  expect(toolbox.items[4].name).toEqual("comp1");
   CustomWidgetCollection.Instance.clear();
+  ComponentCollection.Instance.clear();
 });
