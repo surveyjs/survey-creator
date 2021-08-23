@@ -39,6 +39,38 @@ test("Fire callback on base objects creation", () => {
   var val = group.locItems[0].values("");
   expect(cretorHash["translationitemstring"]).toEqual(1);
 });
+
+test("settingsSurvey layout", () => {
+  var survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: "Question 1"
+          }
+        ]
+      }
+    ]
+  });
+  var translation = new Translation(survey);
+  let panel = translation.settingsSurvey.getPanelByName("languages");
+  expect(panel.elements).toHaveLength(2);
+  let elements = panel.elements;
+  expect(elements[0].getType()).toEqual("checkbox")
+  expect(elements[0].name).toEqual("defaultLanguage")
+  expect(elements[0].isReadOnly).toBeTruthy()
+  expect(elements[0]["choices"][0].value).toEqual("Default (english)")
+  expect(elements[0]["defaultValue"][0]).toEqual("Default (english)")
+
+  expect(elements[1].getType()).toEqual("checkbox")
+  expect(elements[1].name).toEqual("locales")
+  expect(elements[1]["choicesVisibleIf"]).toEqual("{selLocales} contains {item}")
+
+});
+
 test("create available locales", () => {
   var survey = new SurveyModel({
     pages: [
@@ -305,4 +337,48 @@ test("Translation make translation observable", () => {
   expect(translation["tag"]).toEqual("Hello!");
   expect(translation.root.locItems[0]["tag"]).toEqual("Hello!");
   expect(translation.root.locItems[0].values("en")["tag"]).toEqual("Hello!");
+});
+
+test("StringsHeaderSurvey layout", () => {
+  var survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  });
+  var translation = new Translation(survey);
+  var stringsMatrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
+  var headerMatrix = <QuestionMatrixDropdownModel>(translation.stringsHeaderSurvey.getAllQuestions()[0]);
+  expect(stringsMatrix.rowTitleWidth).toEqual("300px");
+  expect(stringsMatrix.columns).toHaveLength(1);
+  expect(stringsMatrix.columns[0].width).toEqual("calc((100% - 300px)/1)");
+
+  expect(headerMatrix.rowTitleWidth).toEqual("300px");
+  expect(headerMatrix.columns).toHaveLength(1);
+  expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/1)");
+  
+  translation.addLocale("de");
+  expect(stringsMatrix.rowTitleWidth).toEqual("300px");
+  expect(stringsMatrix.columns).toHaveLength(2);
+  expect(stringsMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
+
+  expect(headerMatrix.rowTitleWidth).toEqual("300px");
+  expect(headerMatrix.columns).toHaveLength(2);
+  expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
 });
