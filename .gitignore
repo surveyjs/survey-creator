@@ -41,3 +41,4 @@ build
 package
 tmp
 package-lock.json
+/packages/*/coverage/**/*
