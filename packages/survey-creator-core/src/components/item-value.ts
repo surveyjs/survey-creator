@@ -31,17 +31,21 @@ export class ItemValueWrapperViewModel extends Base {
       const nextValue = creator.getNextItemValue(question);
       item.value = nextValue;
     }
-    this.initDragDrop();
+    this.dragDropHelper.onGhostPositionChanged.add(
+      this.handleDragDropGhostPositionChanged
+    );
   }
 
   @property({ defaultValue: null }) ghostPosition: string;
-  private initDragDrop() {
-    this.dragDropHelper.onGhostPositionChanged = ()=>{
-      this.ghostPosition = this.dragDropHelper.getGhostPosition(
-        this.item
-      );
-    };
+  public dispose() {
+    super.dispose();
+    this.dragDropHelper.onGhostPositionChanged.remove(
+      this.handleDragDropGhostPositionChanged
+    );
   }
+  private handleDragDropGhostPositionChanged = () => {
+    this.ghostPosition = this.dragDropHelper.getGhostPosition(this.item);
+  };
 
   public isDraggableItem(item: ItemValue) {
     if (this.creator.readOnly) return false;
@@ -83,7 +87,7 @@ export class ItemValueWrapperViewModel extends Base {
     this.isNew = !model.question["isItemInList"](model.item);
   }
   startDragItemValue(event: PointerEvent) {
-    this.dragDropHelper.startDrag(event, this.item, this.question,);
+    this.dragDropHelper.startDrag(event, this.item, this.question);
   }
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;
