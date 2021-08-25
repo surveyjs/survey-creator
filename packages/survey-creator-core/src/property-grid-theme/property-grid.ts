@@ -166,7 +166,7 @@ export var propertyGridCss = {
   dropdown: {
     root: "",
     small: "spg-row__question--small",
-    control: "spg-input",
+    control: "spg-input spg-dropdown",
     selectWrapper: "",
     other: "spg-comment spg-question__other",
     onError: "spg-input--error"
