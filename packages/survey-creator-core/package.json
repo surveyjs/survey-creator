@@ -10,6 +10,7 @@
   "scripts": {
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",
     "test": "jest",
+    "test:cov": "jest --coverage",
     "test:dev": "jest --watch",
     "watch:dev": "webpack --env.buildType dev --watch",
     "watch:prod": "webpack --env.buildType prod --watch",
