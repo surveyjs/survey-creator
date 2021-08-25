@@ -1,5 +1,5 @@
 {
-  "version": "1.8.62-beta.0",
+  "version": "1.8.63-beta.0",
   "name": "survey-creator-core",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -13,7 +13,7 @@
     "test:dev": "jest --watch",
     "watch:dev": "webpack --env.buildType dev --watch",
     "watch:prod": "webpack --env.buildType prod --watch",
-    "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease alpha",
+    "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease beta",
     "remove-package-lock": "rimraf package-lock.json"
   },
   "dependencies": {
