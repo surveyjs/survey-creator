@@ -95,6 +95,7 @@ export class SurveyLogicItem {
   private id = ++SurveyLogicItem.counter;
   private removedActions: Array<SurveyLogicAction>;
   private actionsValue: Array<SurveyLogicAction>;
+  public isNew: boolean = false;
   constructor(
     private owner: ISurveyLogicItemOwner,
     public expression: string = ""
@@ -199,9 +200,11 @@ export class SurveyLogicItem {
     this.removeQuestionInExpression(name);
   }
   public get expressionText(): string {
+    const text = this.getExpressionAsDisplayText();
+    if(!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
     return editorLocalization
       .getString("ed.lg.itemExpressionText")
-      ["format"](this.getExpressionAsDisplayText());
+      ["format"](text);
   }
   private getExpressionAsDisplayText(): string {
     return !!this.owner

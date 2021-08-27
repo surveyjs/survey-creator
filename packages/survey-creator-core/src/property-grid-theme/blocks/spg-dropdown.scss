@@ -1,0 +1,7 @@
+.spg-dropdown {
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='5' viewBox='0 0 10 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 5L10 0H0L5 5Z' fill='%23909090'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat, repeat;
+    background-position: right calcSize(2.5) top 50%, 0 0;
+    background-size: 10px 5px;
+    padding-right: calcSize(5.5);
+}

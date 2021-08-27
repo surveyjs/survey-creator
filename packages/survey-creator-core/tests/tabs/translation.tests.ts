@@ -338,6 +338,29 @@ test("Translation make translation observable", () => {
   expect(translation.root.locItems[0]["tag"]).toEqual("Hello!");
   expect(translation.root.locItems[0].values("en")["tag"]).toEqual("Hello!");
 });
+test("Translation update filterPageActiontitle after activated", () => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    completedHtml: "Test",
+    pages: [
+      {
+        name: "page1",
+        elements: [{ type: "checkbox", name: "question1" }]
+      }
+    ]
+  };
+  let tabTranslationPlugin = new TabTranslationPlugin(creator);
+  tabTranslationPlugin.createActions([]);
+  tabTranslationPlugin.activate();
+  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages");
+
+  tabTranslationPlugin.model.filteredPage = creator.survey.pages[0];
+  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("page1");
+
+  tabTranslationPlugin.deactivate();
+  tabTranslationPlugin.activate();
+  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages"); 
+});
 
 test("StringsHeaderSurvey layout", () => {
   var survey = new SurveyModel({

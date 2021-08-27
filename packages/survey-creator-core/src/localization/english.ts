@@ -179,6 +179,7 @@ export var enStrings = {
         "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
 
       itemExpressionText: "When expression: '{0}' returns true:", //{0} - the expression
+      itemEmptyExpressionText: "New rule is not set",
       page_visibilityText: "Make page {0} visible", //{0} page name
       panel_visibilityText: "Make panel {0} visible", //{0} panel name
       panel_enableText: "Make panel {0} enable", //{0} panel name
@@ -241,6 +242,7 @@ export var enStrings = {
     backTooltip: "Return without saving",
     saveAndBack: "Save and return",
     saveAndBackTooltip: "Save and return",
+    doneEditing: "Done",
     // itemValueEdit: "Visible If",
     editChoices: "Edit Choices",
     showChoices: "Show Choices",

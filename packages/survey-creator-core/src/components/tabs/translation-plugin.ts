@@ -34,6 +34,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
     this.showAllStringsAction.visible = true;
 
+    this.filterPageAction.title = this.getFilterPageActionTitle();
     this.filterPageAction.visible = true;
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
