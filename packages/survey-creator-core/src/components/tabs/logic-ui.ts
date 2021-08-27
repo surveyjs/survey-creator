@@ -43,7 +43,13 @@ export class SurveyLogicUI extends SurveyLogic {
     );
     //this.itemsSurveyValue.css = surveyDesignerCss;
     this.itemsSurvey.onMatrixRowRemoved.add((sender, options) => {
-      this.removeItem(this.items[options.rowIndex]);
+      const item = this.items[options.rowIndex];
+      const isDeleteEditable = item === this.editableItem;
+      this.removeItem(item);
+      if(isDeleteEditable) {
+        this.mode = "view";
+        this.updateNewActionState();
+      }
     });
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
       if (this.readOnly) return;
@@ -204,7 +210,7 @@ export class SurveyLogicUI extends SurveyLogic {
         } else {
           this.mode = "view";
         }
-        this.AddNewAction.enabled = this.mode !== "new";
+        this.updateNewActionState();
       };
       panel.addNewQuestion("embeddedsurvey", "conditions");
       panel.addNewQuestion("embeddedsurvey", "actions");
@@ -221,8 +227,11 @@ export class SurveyLogicUI extends SurveyLogic {
       });
     };
   }
-  private get AddNewAction(): IAction {
-    return findAction(this.toolbar.actions, "svd-logic-addNew")
+  private updateNewActionState(): void {
+    const action = findAction(this.toolbar.actions, "svd-logic-addNew");
+    if(!!action) {
+      action.enabled = this.mode !== "new";
+    }
   }
   private setupToolbarItems() {
     this.toolbar.actions.push(
