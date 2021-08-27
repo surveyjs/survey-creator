@@ -22,6 +22,7 @@ import {QuestionEmbeddedSurveyModel} from "../embedded-survey";
 import { findAction, updateMatrixRemoveAction } from "../../utils/actions";
 
 import "./logic-ui.scss";
+import { editorLocalization } from "../../editorLocalization";
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
@@ -211,7 +212,7 @@ export class SurveyLogicUI extends SurveyLogic {
       panel.footerActions.push({
         id: "saveDetailPanel",
         innerCss: "sv-btn sv-matrixdynamic__add-btn",
-        title: "Done", //TODO
+        title: this.getLocString("pe.doneEditing"),
         action: () => {
           if(this.saveEditableItem()) {
             row.hideDetailPanel(true);
@@ -240,9 +241,6 @@ export class SurveyLogicUI extends SurveyLogic {
   public get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");
     return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
-  }
-  public get editText(): string {
-    return this.getLocString("pe.edit");
   }
 }
 

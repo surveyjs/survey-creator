@@ -242,6 +242,7 @@ export var enStrings = {
     backTooltip: "Return without saving",
     saveAndBack: "Save and return",
     saveAndBackTooltip: "Save and return",
+    doneEditing: "Done",
     // itemValueEdit: "Visible If",
     editChoices: "Edit Choices",
     showChoices: "Show Choices",

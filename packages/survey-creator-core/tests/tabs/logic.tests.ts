@@ -661,6 +661,7 @@ test("LogicItemEditorUI: edit logic item using detail panel", () => {
   expect(panel.getQuestionByName("elementSelector").value).toEqual("q2");
   panel.getQuestionByName("elementSelector").value = "q3";
   
+  expect(row.detailPanel.footerActions[0].title).toEqual("Done");
   row.detailPanel.footerActions[0].action();
   expect(logic.mode).toEqual("view");
   expect(row.detailPanel).toBeFalsy();
