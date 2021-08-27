@@ -748,4 +748,8 @@ test("LogicItemEditorUI: create new logic several times", () => {
   expect(logic.items).toHaveLength(1);
   expect(logic.items[0].isNew).toBeTruthy();
   expect(logic.toolbar.actions[0].enabled).toBeFalsy();
+  itemsQuestion.removeRow(0);
+  expect(itemsQuestion.rowCount).toEqual(0);
+  expect(logic.items).toHaveLength(0);
+  expect(logic.toolbar.actions[0].enabled).toBeTruthy();
 });
