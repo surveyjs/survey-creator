@@ -960,8 +960,8 @@ export class Translation extends Base implements ITranslationLocales {
   public exportToSCVFile(fileName: string) {
     var data = this.exportToCSV();
     var blob = new Blob([data], { type: "text/csv" });
-    if (window.navigator.msSaveOrOpenBlob) {
-      window.navigator.msSaveBlob(blob, fileName);
+    if (window.navigator["msSaveOrOpenBlob"]) {
+      window.navigator["msSaveBlob"](blob, fileName);
     } else {
       var elem = window.document.createElement("a");
       elem.href = window.URL.createObjectURL(blob);
