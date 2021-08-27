@@ -15,6 +15,7 @@ export * from "../components/row";
 export * from "../components/question";
 export * from "../components/question-dropdown";
 export * from "../components/question-link-value";
+export * from "../components/question-embedded-survey";
 export * from "../components/question-image";
 export * from "../components/question-rating";
 export * from "../components/item-value";

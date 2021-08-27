@@ -940,11 +940,13 @@ test("Logic onLogicItemValidation event", () => {
   expect(callCount).toEqual(0);
   logic.saveEditableItem();
   expect(callCount).toEqual(1);
-  expect(logic.items).toHaveLength(0);
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].isNew).toBeTruthy();
   panel.getQuestionByName("elementSelector").value = "q2";
   logic.saveEditableItem();
   expect(callCount).toEqual(2);
   expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].isNew).toBeFalsy();
 });
 
 test("Logic onLogicItemRemoving/onLogicItemRemoved events", () => {

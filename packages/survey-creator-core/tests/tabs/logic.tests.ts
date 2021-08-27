@@ -17,6 +17,7 @@ import { PropertyGridEditorCollection } from "../../src/property-grid/index";
 import { PropertyGridEditorExpression } from "../../src/property-grid/condition";
 import { EmptySurveyCreatorOptions } from "../../src/settings";
 import { PropertyGridTriggerValueEditor } from "../../src/property-grid/values";
+import {QuestionEmbeddedSurveyModel} from "../../src/components/embedded-survey"
 
 test("SurveyLogicItem, logicType and logicType name", () => {
   var survey = new SurveyModel({
@@ -416,20 +417,23 @@ test("SurveyLogicUI: validate expression and actions", () => {
   var res = logic.saveEditableItem();
   expect(res).toBeFalsy();
 
-  expect(logic.items).toHaveLength(0);
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].isNew).toBeTruthy();
   logic.expressionEditor.text = "{q1} = 1";
 
   res = logic.saveEditableItem();
   expect(res).toBeFalsy();
-  expect(logic.items).toHaveLength(0);
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].isNew).toBeTruthy();
 
   var panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
   panel.getQuestionByName("elementSelector").value = "q2";
 
-  res = logic.saveEditableItem();
+  res = logic.saveEditableItem(); 
   expect(res).toBeTruthy();
   expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].isNew).toBeFalsy();
 });
 test("SurveyLogicUI: create skipTo trigger", () => {
   var survey = new SurveyModel({
@@ -617,4 +621,130 @@ test("LogicItemEditorUI: check remove row action", () => {
   expect(action.showTitle).toBeFalsy();
   action.action();
   expect(itemsQuestion.rowCount).toEqual(0);
+});
+
+test("LogicItemEditorUI: edit logic item using detail panel", () => {
+  const dummy = new QuestionEmbeddedSurveyModel("dummy");
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  expect(itemsQuestion.rowCount).toEqual(1);
+  const row = itemsQuestion.visibleRows[0];
+  expect(row.hasPanel).toBeTruthy();
+  row.showDetailPanel();
+  expect(logic.mode).toEqual("edit");
+  expect(row.detailPanel).toBeTruthy();
+  expect(row.detailPanel.footerActions).toHaveLength(1);
+  const conditionsQuestion = <QuestionEmbeddedSurveyModel>row.detailPanel.getQuestionByName("conditions");
+  expect(conditionsQuestion).toBeTruthy();
+  expect(conditionsQuestion.embeddedSurvey).toBeTruthy();
+  expect(logic.expressionEditor.editSurvey).toBeTruthy();
+  expect(logic.expressionEditor.text).toEqual("{q1} = 1");
+  expect(conditionsQuestion.embeddedSurvey).toEqual(logic.expressionEditor.editSurvey);
+
+  const actionsQuestion = <QuestionEmbeddedSurveyModel>row.detailPanel.getQuestionByName("actions");
+  expect(actionsQuestion).toBeTruthy();
+  expect(actionsQuestion.embeddedSurvey).toBeTruthy();
+  expect(logic.itemEditor.editSurvey).toBeTruthy();
+  expect(logic.itemEditor.panels).toHaveLength(1);
+  expect(actionsQuestion.embeddedSurvey).toEqual(logic.itemEditor.editSurvey);
+  var panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toEqual("question_visibility");
+  expect(panel.getQuestionByName("elementSelector").value).toEqual("q2");
+  panel.getQuestionByName("elementSelector").value = "q3";
+  
+  row.detailPanel.footerActions[0].action();
+  expect(logic.mode).toEqual("view");
+  expect(row.detailPanel).toBeFalsy();
+  expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
+  expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 1");
+});
+test("LogicItemEditorUI: create new logic item using detail panel", () => {
+  const dummy = new QuestionEmbeddedSurveyModel("dummy");
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  expect(itemsQuestion.rowCount).toEqual(0);
+  logic.addNewUI();
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].expressionText).toEqual("New rule is not set");
+  expect(itemsQuestion.rowCount).toEqual(1);
+  const row = itemsQuestion.visibleRows[0];
+  expect(row.cells[0].question.value).toEqual("New rule is not set");
+  expect(row.hasPanel).toBeTruthy();
+  expect(logic.mode).toEqual("new");
+  expect(row.detailPanel).toBeTruthy();
+  expect(row.detailPanel.footerActions).toHaveLength(1);
+  const conditionsQuestion = <QuestionEmbeddedSurveyModel>row.detailPanel.getQuestionByName("conditions");
+  expect(conditionsQuestion).toBeTruthy();
+  expect(conditionsQuestion.embeddedSurvey).toBeTruthy();
+  expect(logic.expressionEditor.editSurvey).toBeTruthy();
+  expect(logic.expressionEditor.text).toBeFalsy();
+  expect(conditionsQuestion.embeddedSurvey).toEqual(logic.expressionEditor.editSurvey);
+  logic.expressionEditor.text = "{q1} = 1"
+
+  const actionsQuestion = <QuestionEmbeddedSurveyModel>row.detailPanel.getQuestionByName("actions");
+  expect(actionsQuestion).toBeTruthy();
+  expect(actionsQuestion.embeddedSurvey).toBeTruthy();
+  expect(logic.itemEditor.editSurvey).toBeTruthy();
+  expect(logic.itemEditor.panels).toHaveLength(1);
+  expect(actionsQuestion.embeddedSurvey).toEqual(logic.itemEditor.editSurvey);
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility"
+  panel.getQuestionByName("elementSelector").value = "q2";
+  
+  row.detailPanel.footerActions[0].action();
+  expect(logic.mode).toEqual("view");
+  expect(row.detailPanel).toBeFalsy();
+  expect(row.cells[0].question.value).toEqual("When expression: '{q1} == 1' returns true:");
+  expect(survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 1");
+});
+test("LogicItemEditorUI: create new logic several times", () => {
+  const dummy = new QuestionEmbeddedSurveyModel("dummy");
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  expect(itemsQuestion.rowCount).toEqual(0);
+  expect(logic.toolbar.actions[0].enabled).toBeTruthy();
+  logic.addNewUI();
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].isNew).toBeTruthy();
+  expect(itemsQuestion.rowCount).toEqual(1);
+  const row = itemsQuestion.visibleRows[0];
+  expect(row.hasPanel).toBeTruthy();
+  expect(logic.mode).toEqual("new");
+  expect(row.detailPanel).toBeTruthy();
+  expect(logic.toolbar.actions[0].enabled).toBeFalsy();
+  row.hideDetailPanel();
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].isNew).toBeTruthy();
+  expect(logic.toolbar.actions[0].enabled).toBeTruthy();
+  logic.addNewUI();
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].isNew).toBeTruthy();
+  expect(logic.toolbar.actions[0].enabled).toBeFalsy();
 });
