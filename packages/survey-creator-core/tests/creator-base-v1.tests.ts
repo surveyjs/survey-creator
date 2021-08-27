@@ -75,6 +75,9 @@ test("getNextValue", () => {
     ])
   ).toEqual("12345671234567893");
   expect(getNextValue(prefix, ["1 day", "2 days", "3 days"])).toEqual("4 days");
+  expect(getNextValue(prefix, ["a01"])).toEqual("a02");
+  expect(getNextValue(prefix, ["a01", "a02"])).toEqual("a03");
+  expect(getNextValue(prefix, ["aaa1bbb2ccc3"])).toEqual("aaa1bbb2ccc4");
 });
 
 test("Set Text property", () => {
