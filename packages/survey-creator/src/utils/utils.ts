@@ -7,6 +7,8 @@ function getNumericFromString(str: string): string {
   for (var i = str.length - 1; i >= 0; i--) {
     if (str[i] >= "0" && str[i] <= "9") {
       num = str[i] + num;
+    } else {
+      if(!!num) return num;
     }
     if (num.length == 10) break;
   }
@@ -42,7 +44,7 @@ export function getNextValue(prefix: string, values: any[]): string | number {
     var oposite = getOpositValue(values[values.length - 1]);
   if (oposite && values.indexOf(oposite) < 0) return oposite;
   var numStr = "";
-  var baseStr = "";
+  var baseValue;
   var numStrIndex = -1;
   for (var i = values.length - 1; i >= 0; i--) {
     if (!values[i]) continue;
@@ -50,18 +52,25 @@ export function getNextValue(prefix: string, values: any[]): string | number {
     numStr = getNumericFromString(str);
     if (!!numStr) {
       numStrIndex = str.lastIndexOf(numStr);
-      baseStr = str;
+      baseValue = values[i];
       break;
     }
   }
   if (numStrIndex > -1) {
     var num = parseInt(numStr);
+    var isNumber = baseValue === num;
     var newValue;
     do {
-      newValue =
-        str.substr(0, numStrIndex) +
-        (num++).toString() +
-        str.substr(numStrIndex + numStr.length);
+      if(isNumber){
+        newValue = ++num;
+      }
+      else {
+        var newNum = (num++).toString();
+        while(numStr.length > newNum.length) {
+          newNum = "0" + newNum;
+        }
+        newValue = str.substr(0, numStrIndex) + newNum + str.substr(numStrIndex + numStr.length);
+      }
     } while (hasValueInArray(values, newValue));
     return newValue;
   }
