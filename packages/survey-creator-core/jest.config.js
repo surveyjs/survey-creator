@@ -5,7 +5,7 @@ module.exports = {
       tsconfig: "tsconfig.test.json",
     },
   },
-  collectCoverage: true,
+  // collectCoverage: true,
   roots: ["tests"],
   transform: {
     "^.+\\.(t|j)sx?$": "ts-jest",
