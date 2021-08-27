@@ -92,7 +92,7 @@ export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox
 {
-  static hiddenTypes = ["buttongroup", "linkvalue"];
+  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey"];
   private _orderedQuestions = [
     "text",
     "checkbox",
