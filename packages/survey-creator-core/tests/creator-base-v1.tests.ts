@@ -156,6 +156,9 @@ test("options.questionTypes", () => {
   if (allTypes.indexOf("linkvalue") > -1) {
     unregistredCount++;
   }
+  if (allTypes.indexOf("embeddedsurvey") > -1) {
+    unregistredCount++;
+  }
   expect(creator.toolbox.items).toHaveLength(
     allTypes.length - unregistredCount
   );
