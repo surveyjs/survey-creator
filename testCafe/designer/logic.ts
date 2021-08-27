@@ -110,14 +110,14 @@ test("Create logic rule", async (t) => {
         
         .click(logicActionSelector.nth(1))
         .click(getSelectOptionByText("Complete survey"))
-        .click(Selector(".sv-action-bar-item__title").withExactText("Save").filterVisible())
+        .click(Selector("button").withExactText("Done").filterVisible())
         .expect(errorNotifyBalloonSelector.innerText).eql("Please, fix problems in your action(s).")
         .expect(Selector(".svc-logic-operator.svc-logic-operator--question.svc-logic-operator--error").filterVisible().count).eql(2)
 
         .click(removeButton)
         .expect(removeButton.count).eql(0)
 
-        .click(Selector(".sv-action-bar-item__title").withExactText("Save").filterVisible())
+        .click(Selector("button").withExactText("Done").filterVisible())
         .expect(notifyBalloonSelector.innerText).eql("Modified")
 });
 
@@ -135,16 +135,14 @@ test("Logic rules", async (t) => {
         .click(getSelectOptionByText("is not empty"))
         .click(logicActionSelector)
         .click(getSelectOptionByText("Complete survey"))
-        .click(Selector(".sv-action-bar-item__title").withExactText("Save and return").filterVisible())
+        .click(Selector("button").withExactText("Done").filterVisible())
         .expect(tableRulesSelector.count).eql(1)
-        .expect(tableRulesSelector.find("td").nth(0).innerText).eql("Edit")
         .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{string_editor} is not empty' returns true:")
         .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
 
         .click(getTabbedMenuItemByText("Survey Designer"))
         .click(getTabbedMenuItemByText("Survey Logic"))
         .expect(tableRulesSelector.count).eql(1)
-        .expect(tableRulesSelector.find("td").nth(0).innerText).eql("Edit")
         .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{string_editor} is not empty' returns true:")
         .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
 });

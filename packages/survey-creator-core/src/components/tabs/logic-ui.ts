@@ -2,7 +2,10 @@ import {
   SurveyModel,
   AdaptiveActionContainer,
   Action,
-  IAction
+  IAction,
+  MatrixDropdownRowModelBase,
+  PanelModel,
+  QuestionMatrixDynamicModel
 } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
 import {
@@ -15,16 +18,17 @@ import { SurveyLogicAction } from "./logic-items";
 import { SurveyLogic } from "./logic";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
-import { updateMatrixRemoveAction } from "../../property-grid/index";
+import {QuestionEmbeddedSurveyModel} from "../embedded-survey";
+import { findAction, updateMatrixRemoveAction } from "../../utils/actions";
 
 import "./logic-ui.scss";
+import { editorLocalization } from "../../editorLocalization";
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
   private itemEditorValue: LogicItemEditor;
   private itemsSurveyValue: SurveyModel;
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
-  public editToolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
 
   constructor(
     public survey: SurveyModel,
@@ -43,21 +47,7 @@ export class SurveyLogicUI extends SurveyLogic {
     });
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
       if (this.readOnly) return;
-      if (options.actions.length == 1) {
-        updateMatrixRemoveAction(
-          options.question,
-          options.actions[0],
-          options.row
-        );
-      }
-      options.actions.push({
-        id: "svd-logic-edit-item",
-        title: this.editText,
-        component: "sv-action-bar-item",
-        action: () => {
-          this.editItem(this.items[options.row.rowIndex - 1]);
-        }
-      });
+      updateMatrixRemoveAction(options.question, options.actions, options.row)
     });
     this.updateItemsSurveyData();
     this.setupToolbarItems();
@@ -74,10 +64,13 @@ export class SurveyLogicUI extends SurveyLogic {
   public get toolbarItems(): Array<IAction> {
     return this.toolbar.actions;
   }
-  public get toolbarEditItems(): Array<IAction> {
-    return this.editToolbar.actions;
+  public addNewUI() {
+    if(this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
+      this.addNew();
+    }
+    const matrix = <QuestionMatrixDynamicModel>this.itemsSurvey.getQuestionByName("items");
+    matrix.visibleRows[matrix.visibleRows.length - 1].showDetailPanel();
   }
-
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "items") {
@@ -147,6 +140,7 @@ export class SurveyLogicUI extends SurveyLogic {
           type: "matrixdynamic",
           name: "items",
           titleLocation: "hidden",
+          detailPanelMode: "underRowSingle",
           allowAddRows: false,
           rowCount: 0,
           columns: [
@@ -179,7 +173,7 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
-    var matrix = this.itemsSurvey.getQuestionByName("items");
+    const matrix = this.itemsSurvey.getQuestionByName("items");
     var data = [];
     for (var i = 0; i < this.items.length; i++) {
       data.push({
@@ -188,6 +182,47 @@ export class SurveyLogicUI extends SurveyLogic {
       });
     }
     matrix.value = data;
+    matrix.onHasDetailPanelCallback = (
+      row
+    ) => {
+      return true;
+    };
+    matrix.onCreateDetailPanelCallback = (
+      row: MatrixDropdownRowModelBase,
+      panel: PanelModel
+    ) => {
+      row.onDetailPanelShowingChanged = () => {
+        if(row.isDetailPanelShowing) {
+          if(this.mode === "view") {
+            const logicItem = this.items[row.rowIndex - 1];
+            this.editItem(logicItem);
+          }
+          const condQuestion = <QuestionEmbeddedSurveyModel>panel.getQuestionByName("conditions");
+          const actionsQuestion = <QuestionEmbeddedSurveyModel>panel.getQuestionByName("actions");
+          condQuestion.embeddedSurvey = this.expressionEditor.editSurvey;    
+          actionsQuestion.embeddedSurvey = this.itemEditorValue.editSurvey;
+        } else {
+          this.mode = "view";
+        }
+        this.AddNewAction.enabled = this.mode !== "new";
+      };
+      panel.addNewQuestion("embeddedsurvey", "conditions");
+      panel.addNewQuestion("embeddedsurvey", "actions");
+
+      panel.footerActions.push({
+        id: "saveDetailPanel",
+        innerCss: "sv-btn sv-matrixdynamic__add-btn",
+        title: this.getLocString("pe.doneEditing"),
+        action: () => {
+          if(this.saveEditableItem()) {
+            row.hideDetailPanel(true);
+          }
+        }
+      });
+    };
+  }
+  private get AddNewAction(): IAction {
+    return findAction(this.toolbar.actions, "svd-logic-addNew")
   }
   private setupToolbarItems() {
     this.toolbar.actions.push(
@@ -196,41 +231,9 @@ export class SurveyLogicUI extends SurveyLogic {
         title: this.addNewText,
         tooltip: this.addNewText,
         component: "sv-action-bar-item",
+        enabled: true,
         action: () => {
-          this.addNew();
-        }
-      })
-    );
-    this.editToolbar.actions.push(
-      new Action({
-        id: "svd-logic-saveAndBack",
-        title: this.getLocString("pe.saveAndBack"),
-        tooltip: this.getLocString("pe.saveAndBackTooltip"),
-        component: "sv-action-bar-item",
-        action: () => {
-          this.saveEditableItemAndBack();
-        }
-      })
-    );
-    this.editToolbar.actions.push(
-      new Action({
-        id: "svd-logic-save",
-        title: this.getLocString("pe.save"),
-        tooltip: this.getLocString("pe.saveTooltip"),
-        component: "sv-action-bar-item",
-        action: () => {
-          this.saveEditableItem();
-        }
-      })
-    );
-    this.editToolbar.actions.push(
-      new Action({
-        id: "svd-logic-back",
-        title: this.getLocString("pe.back"),
-        tooltip: this.getLocString("pe.backTooltip"),
-        component: "sv-action-bar-item",
-        action: () => {
-          this.mode = "view";
+          this.addNewUI();
         }
       })
     );
@@ -238,9 +241,6 @@ export class SurveyLogicUI extends SurveyLogic {
   public get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");
     return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
-  }
-  public get editText(): string {
-    return this.getLocString("pe.edit");
   }
 }
 

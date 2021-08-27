@@ -103,10 +103,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   }
   @propertyArray() items: Array<SurveyLogicItem>;
   @propertyArray() logicTypes: Array<SurveyLogicType>;
-  /**
-   * There are 3 modes: view, new, edit
-   */
-  @property() mode: string;
   @property() errorText: string;
   @property() readOnly: boolean;
   @property() placeholderHtml: string;
@@ -114,15 +110,19 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   public get editableItem(): SurveyLogicItem {
     return this.editableItemValue;
   }
-
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
-    super.onPropertyValueChanged(name, oldValue, newValue);
-    if (name === "mode") {
-      this.errorText = "";
-      if (newValue == "view" && (oldValue == "edit" || oldValue == "new")) {
-        this.onEndEditing();
-      }
-    }
+  private modeValue: string;
+  /**
+   * There are 3 modes: view, new, edit
+   */
+   public get mode(): string { return this.modeValue;}
+   public set mode(val: string) {
+     if(this.modeValue === val) return;
+     const oldValue = this.mode;
+     this.modeValue = val;
+     this.errorText = "";
+     if (val == "view" && (oldValue == "edit" || oldValue == "new")) {
+       this.onEndEditing();
+     }
   }
   public getLocString(name: string) {
     return editorLocalization.getString(name);
@@ -160,10 +160,12 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     if (!this.editableItem || this.hasError()) return false;
     !!this.options && this.options.startUndoRedoTransaction();
     this.onEditableItemApply();
-    var isNew = this.items.indexOf(this.editableItem) < 0;
-    if (isNew) {
+    const hasInList = this.items.indexOf(this.editableItem) < 0;
+    if (hasInList) {
       this.items.push(this.editableItem);
     }
+    const isNew = !hasInList ||this.editableItem.isNew;
+    this.editableItem.isNew = false;
     this.onItemChanged(this.editableItem, isNew ? "new" : "modify");
     !!this.options && this.options.stopUndoRedoTransaction();
     this.onLogicItemSaved.fire(this, { item: this.editableItem });
@@ -232,17 +234,20 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   public addNew() {
     !!this.options && this.options.startUndoRedoTransaction();
     var logicItem = new SurveyLogicItem(this);
-    this.editableItemValue = logicItem;
-    this.onStartEditing();
-    this.mode = "new";
+    logicItem.isNew = true;
+    this.items.push(logicItem);
+    this.editItemCore(logicItem);
     !!this.options && this.options.stopUndoRedoTransaction();
   }
   public editItem(item: SurveyLogicItem) {
     !!this.options && this.options.startUndoRedoTransaction();
+    this.editItemCore(item);
+    !!this.options && this.options.stopUndoRedoTransaction();
+  }
+  private editItemCore(item: SurveyLogicItem) {
     this.editableItemValue = item;
     this.onStartEditing();
-    this.mode = "edit";
-    !!this.options && this.options.stopUndoRedoTransaction();
+    this.mode = item.isNew ? "new": "edit";
   }
   protected onStartEditing() {}
   protected onEndEditing() {

@@ -22,8 +22,8 @@ import {
   PropertyGridEditor,
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
-  updateMatrixRemoveAction
 } from "./index";
+import {  updateMatrixRemoveAction} from "../utils/actions";
 
 class SurveyHelper {
   public static getNewColumnName(
@@ -69,16 +69,10 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         }
       });
     }
-    const removeRowAction: IAction = actions.filter(
-      (item: IAction) => item.id === "remove-row"
-    )[0];
     const showDetailAction: IAction = actions.filter(
       (item: IAction) => item.id === "show-detail"
     )[0];
-    if (!!removeRowAction) {
-      updateMatrixRemoveAction(question, removeRowAction, row);
-      removeRowAction.visibleIndex = 10;
-    }
+      updateMatrixRemoveAction(question, actions, row);
     if (!!showDetailAction) {
       showDetailAction.component = "sv-action-bar-item";
       showDetailAction.iconName = this.getShowDetailActionIconName(row);
