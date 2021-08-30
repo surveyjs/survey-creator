@@ -46,6 +46,7 @@ import { TabLogicPlugin } from "./components/tabs/logic-ui";
 import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
 import { TabDesignerPlugin } from "./entries";
 import { Notifier } from "./components/notifier";
+import { updateMatrixRemoveAction } from "./utils/actions"
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -82,8 +83,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
  */
 export class CreatorBase<T extends SurveyModel>
   extends Survey.Base
-  implements ISurveyCreatorOptions, ICreatorSelectionOwner
-{
+  implements ISurveyCreatorOptions, ICreatorSelectionOwner {
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
    */
@@ -1235,6 +1235,7 @@ export class CreatorBase<T extends SurveyModel>
         arrayChanges
       );
     };
+    survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     this.undoRedoManager.changesFinishedCallback = (
       changes: IUndoRedoChange
     ) => {
