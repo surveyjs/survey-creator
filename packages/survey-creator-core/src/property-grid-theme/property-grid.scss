@@ -19,3 +19,12 @@
   }
   padding: calcSize(4);
 }
+
+.spg-root-modern {
+  .sv-action-bar {
+    padding-right: calcSize(0.5);
+  }
+  .sv-action:not(.sv-action--hidden):not(:last-of-type) > .sv-action__content {
+    padding-right: 0;
+  }
+}

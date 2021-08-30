@@ -28,18 +28,9 @@
 .spg-table__cell--actions .sv-action-bar {
   padding: 0;
   opacity: 0.5;
-  .sv-action:not(.sv-action--hidden):not(:last-of-type) {
-    padding-right: 0;
-  }
-  .sv-action:first-child {
-    margin-left: auto;
-  }
 }
 .spg-table__cell--actions:first-child {
   width: calcSize(6);
-  .sv-action-bar {
-    padding: 0;
-  }
 }
 .spg-table__cell--actions > .spg-matrixdynamic__drag-element {
   display: inline-block;
