@@ -1,5 +1,14 @@
 .sd-matrixdynamic__add-btn {
-}
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: $primary;
+  line-height: calcSize(3);
+  font-size: calcSize(2);
+  font-family: $font-family;
+  font-weight: 600;
+  padding: calcSize(1) 0;
+ }
 .sd-matrixdynamic__drag-element {
   padding: calcSize(2);
   &:hover {

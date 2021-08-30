@@ -31,6 +31,7 @@ import {
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
 import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
+import { updateMatrixRemoveAction } from "../utils/actions";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -332,6 +333,7 @@ export class PropertyGridTitleActionsCreator {
     );
     if (!surveyPropertyEditor) return;
     surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
+    surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     settings.showModal(
       "survey",
       {
