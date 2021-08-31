@@ -16,6 +16,22 @@ const json = {
     ]
 };
 
+const json2 = {
+    questions: [
+        {
+            type: 'radiogroup',
+            name: 'q1',
+            choices: [
+                'item1',
+                'item2',
+                'item3'
+            ]
+        },
+        {type: "text", name: "q2", visibleIf: "{q1}='item1'"},
+        {type: "text", name: "q3"}
+    ]
+};
+
 fixture(title)
     .page(url)
     .beforeEach(async (t) => await t.maximizeWindow());
@@ -31,8 +47,10 @@ const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--
 const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sd-paneldynamic__add-btn)").filterVisible();
 const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
 const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterVisible();
+const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
 const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
 const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisible();
+const logicDetailButtonElement = Selector(".sv-table__cell--detail-button").filterVisible();
 
 const addButton = Selector(".sd-paneldynamic__add-btn").filterVisible();
 const removeButton = Selector(".sv-paneldynamic__remove-btn--right").filterVisible();
@@ -145,4 +163,30 @@ test("Logic rules", async (t) => {
         .expect(tableRulesSelector.count).eql(1)
         .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{string_editor} is not empty' returns true:")
         .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
+});
+
+test("Edit Logic rule", async (t) => {
+    await ClientFunction((json) => { window["creator"].JSON = json; })(json2);
+
+    await t
+        .click(getTabbedMenuItemByText("Survey Logic"))
+        .expect(tableRulesSelector.count).eql(1)
+
+        .click(logicDetailButtonElement)
+   
+        .expect(logicQuestionSelector.value).eql("q1")
+        .expect(logicOperatorSelector.value).eql("equal")
+
+        .expect(logicDropdownValueSelector.value).eql("item1")
+        .click(logicDropdownValueSelector)
+        .click(getSelectOptionByText("item2"))
+
+        .expect(logicQuestionSelector.nth(-1).value).eql("q2")
+        .click(logicQuestionSelector.nth(-1))
+        .click(getSelectOptionByText("q3"))
+
+        .click(Selector("button").withExactText("Done").filterVisible())
+        .expect(tableRulesSelector.count).eql(1)
+        .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{q1} == \'item2\'\' returns true:")
+        .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Make question {q3} visible")
 });
