@@ -15,7 +15,12 @@ test(`asnwer custom question in test tab`, async t => {
       title: "All countries",
       json: {
         type: "dropdown",
-        choicesByUrl: { url: "https://restcountries.eu/rest/v1/all" }
+        choices: [
+          "Afghanistan",
+          "Cuba",
+          "Virgin Islands (U.S.)",
+          "São Tomé and Príncipe"
+        ]
       }
     };
 
