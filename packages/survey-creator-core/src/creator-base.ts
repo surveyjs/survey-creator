@@ -738,7 +738,7 @@ export class CreatorBase<T extends SurveyModel>
    */
   public showErrorOnFailedSave: boolean = true;
 
-  protected onSetReadOnly(newVal: boolean) {}
+  protected onSetReadOnly(newVal: boolean) { }
 
   /**
    * A boolean property, false by default. Set it to true to deny editing.
@@ -2099,7 +2099,7 @@ export class CreatorBase<T extends SurveyModel>
     }
     return true;
   }
-  protected doPropertyGridChanged() {}
+  protected doPropertyGridChanged() { }
 
   //implements ISurveyCreatorOptions
   get alwaySaveTextInPropertyEditors(): boolean {
@@ -2457,27 +2457,20 @@ export class StylesManager {
   }
 }
 
-export function getElementWrapperComponentName(
-  element: any,
-  reason: string,
-  isPopupEditorContent: boolean
-): string {
+export function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
   if (reason === "logo-image") {
     return "svc-logo-image";
   }
-  if (
-    reason === "cell" ||
-    reason === "column-header" ||
-    reason === "row-header"
-  ) {
+  if (reason === "cell" || reason === "column-header" || reason === "row-header") {
     return "svc-matrix-cell";
   }
   if (!element.parentQuestionValue && !element.isContentElement) {
     if (element instanceof Question) {
+      if (isPopupEditorContent) {
+        return element.getType() == "dropdown" ? "svc-cell-dropdown-question" : "svc-cell-question";
+      }
       if (element.getType() == "dropdown") {
-        return isPopupEditorContent
-          ? "svc-cell-dropdown-question"
-          : "svc-dropdown-question";
+        return "svc-dropdown-question";
       }
       if (element.getType() == "image") {
         return "svc-image-question";
@@ -2485,7 +2478,7 @@ export function getElementWrapperComponentName(
       if (element.getType() == "rating") {
         return "svc-rating-question";
       }
-      return isPopupEditorContent ? "svc-cell-question" : "svc-question";
+      return "svc-question";
     }
   }
   return undefined;
