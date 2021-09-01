@@ -632,7 +632,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.stringsHeaderSurvey = this.createStringsHeaderSurvey();
   }
   private createStringsSurvey(): SurveyModel {
-    var json = {};
+    var json = { autoGrowComment: true };
     setSurveyJSONForPropertyGrid(json, false);
     var survey: SurveyModel = this.options.createSurvey(
       json,
