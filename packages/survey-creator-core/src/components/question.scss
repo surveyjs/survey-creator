@@ -54,6 +54,20 @@ svc-question {
   bottom: calcSize(2);
   width: calc(100% - 80px);
   left: calcSize(5);
+  .sv-action-bar-item {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    align-items: center;
+    height: 32px;
+  }
+  .sv-action-bar-separator {
+    height: 32px;
+    margin-right: 8px;
+  }
+  .sv-action:not(:last-child) > .sv-action__content {
+    padding-right: 8px;
+  }
 }
 
 .svc-hovered > .svc-question__content {

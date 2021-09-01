@@ -171,6 +171,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
       iconName: "icon-change_16x16",
+      iconSize: 16,
       title: this.creator.getLocString("qt." + currentType),
       visibleIndex: 0,
       enabled: allowChangeType,
@@ -192,6 +193,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       iconName: this.isRequired
         ? "icon-switchactive_16x16"
         : "icon-switchinactive_16x16",
+      iconSize: 16,
       action: () => {
         if (
           this.creator.isCanModifyProperty(
