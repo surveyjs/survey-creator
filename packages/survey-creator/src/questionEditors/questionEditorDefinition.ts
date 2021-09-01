@@ -457,6 +457,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
         { name: "state", tab: "layout" },
+        { name: "questionsOrder", tab: "layout" },
         { name: "indent", tab: "layout" },
         { name: "innerIndent", tab: "layout" },
         { name: "width", tab: "layout" },
