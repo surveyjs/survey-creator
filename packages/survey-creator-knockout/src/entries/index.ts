@@ -55,6 +55,7 @@ export {
   SurveyQuestionEditorDefinition,
   ISurveyCreatorOptions,
   IPropertyGridEditor,
+  ToolboxItemViewModel,
   PropertyGridEditorCollection
 } from "@survey/creator";
 //Obsolete
