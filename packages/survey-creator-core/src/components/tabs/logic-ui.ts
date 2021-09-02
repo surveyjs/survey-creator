@@ -1,24 +1,13 @@
-import {
-  SurveyModel,
-  AdaptiveActionContainer,
-  Action,
-  IAction,
-  MatrixDropdownRowModelBase,
-  PanelModel,
-  QuestionMatrixDynamicModel
-} from "survey-core";
+import { SurveyModel, AdaptiveActionContainer, Action, IAction, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, PopupModel, ListModel, property } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
-import {
-  ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions
-} from "../../settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
-import { SurveyLogicAction } from "./logic-items";
+import { SurveyLogicAction, SurveyLogicItem } from "./logic-items";
 import { SurveyLogic } from "./logic";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
-import {QuestionEmbeddedSurveyModel} from "../embedded-survey";
+import { QuestionEmbeddedSurveyModel } from "../embedded-survey";
 import { findAction, updateMatrixRemoveAction } from "../../utils/actions";
 
 import "./logic-ui.scss";
@@ -28,6 +17,7 @@ export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
   private itemEditorValue: LogicItemEditor;
   private itemsSurveyValue: SurveyModel;
+  private visibleItems: SurveyLogicItem[];
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
 
   constructor(
@@ -43,10 +33,10 @@ export class SurveyLogicUI extends SurveyLogic {
     );
     //this.itemsSurveyValue.css = surveyDesignerCss;
     this.itemsSurvey.onMatrixRowRemoved.add((sender, options) => {
-      const item = this.items[options.rowIndex];
+      const item = this.visibleItems[options.rowIndex];
       const isDeleteEditable = item === this.editableItem;
       this.removeItem(item);
-      if(isDeleteEditable) {
+      if (isDeleteEditable) {
         this.mode = "view";
         this.updateNewActionState();
       }
@@ -59,6 +49,11 @@ export class SurveyLogicUI extends SurveyLogic {
     this.setupToolbarItems();
     this.itemEditorValue = new LogicItemEditor(null, this.options);
   }
+  @property({
+    onSet: (value, target: SurveyLogicUI) => {
+      target.updateItemsSurveyData();
+    }
+  }) questionFilter: string;
   public dispose() {
     super.dispose();
     this.itemsSurveyValue.dispose();
@@ -71,7 +66,7 @@ export class SurveyLogicUI extends SurveyLogic {
     return this.toolbar.actions;
   }
   public addNewUI() {
-    if(this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
+    if (this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
       this.addNew();
     }
     const matrix = <QuestionMatrixDynamicModel>this.itemsSurvey.getQuestionByName("items");
@@ -116,7 +111,12 @@ export class SurveyLogicUI extends SurveyLogic {
     if (this.editableItem.actions.length != this.itemEditor.panels.length) {
       this.itemEditor.editableItem = this.editableItem;
     }
-    this.updateItemsSurveyData();
+    this.editableItem.isNew = false;
+    if (!this.editableItem.isSuitable(this.questionFilter)) {
+      this.questionFilter = "";
+    } else {
+      this.updateItemsSurveyData();
+    }
   }
   protected hasErrorInUI(): boolean {
     if (!this.expressionEditor.isReady) {
@@ -177,35 +177,35 @@ export class SurveyLogicUI extends SurveyLogic {
     );
     this.expressionEditor.isModal = false;
   }
+  private getVisibleItems(): SurveyLogicItem[] {
+    return this.items.filter(item => item.isNew || item.isSuitable(this.questionFilter))
+  }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
     const matrix = this.itemsSurvey.getQuestionByName("items");
     var data = [];
-    for (var i = 0; i < this.items.length; i++) {
+    this.visibleItems = this.getVisibleItems();
+    for (var i = 0; i < this.visibleItems.length; i++) {
       data.push({
-        conditions: this.items[i].expressionText,
-        actions: this.items[i].actionsText
+        conditions: this.visibleItems[i].expressionText,
+        actions: this.visibleItems[i].actionsText
       });
     }
     matrix.value = data;
-    matrix.onHasDetailPanelCallback = (
-      row
-    ) => {
-      return true;
-    };
+    matrix.onHasDetailPanelCallback = (row) => { return true; };
     matrix.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,
       panel: PanelModel
     ) => {
       row.onDetailPanelShowingChanged = () => {
-        if(row.isDetailPanelShowing) {
-          if(this.mode === "view") {
-            const logicItem = this.items[row.rowIndex - 1];
+        if (row.isDetailPanelShowing) {
+          if (this.mode === "view") {
+            const logicItem = this.visibleItems[row.rowIndex - 1];
             this.editItem(logicItem);
           }
           const condQuestion = <QuestionEmbeddedSurveyModel>panel.getQuestionByName("conditions");
           const actionsQuestion = <QuestionEmbeddedSurveyModel>panel.getQuestionByName("actions");
-          condQuestion.embeddedSurvey = this.expressionEditor.editSurvey;    
+          condQuestion.embeddedSurvey = this.expressionEditor.editSurvey;
           actionsQuestion.embeddedSurvey = this.itemEditorValue.editSurvey;
         } else {
           this.mode = "view";
@@ -220,7 +220,7 @@ export class SurveyLogicUI extends SurveyLogic {
         innerCss: "sv-btn sv-matrixdynamic__add-btn",
         title: this.getLocString("pe.doneEditing"),
         action: () => {
-          if(this.saveEditableItem()) {
+          if (this.saveEditableItem()) {
             row.hideDetailPanel(true);
           }
         }
@@ -229,7 +229,7 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private updateNewActionState(): void {
     const action = findAction(this.toolbar.actions, "svd-logic-addNew");
-    if(!!action) {
+    if (!!action) {
       action.enabled = this.mode !== "new";
     }
   }
@@ -254,16 +254,63 @@ export class SurveyLogicUI extends SurveyLogic {
 }
 
 export class TabLogicPlugin implements ICreatorPlugin {
+  private filterQuestionAction: Action;
+  private showAllQuestionsText = getLogicString("showAllQuestions");
   public model: SurveyLogicUI;
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("logic", this);
   }
   public activate(): void {
     this.model = new SurveyLogicUI(this.creator.survey, this.creator);
+
+    this.filterQuestionAction.title = this.showAllQuestionsText;
+    this.filterQuestionAction.visible = true;
+
+    this.model.onPropertyChanged.add((sender, options) => {
+      if (options.name === "questionFilter") {
+        this.filterQuestionAction.title = !!this.model.questionFilter ? this.model.questionFilter : this.showAllQuestionsText;
+      }
+    });
   }
   public deactivate(): boolean {
     this.model.dispose();
     this.model = undefined;
+
+    this.filterQuestionAction.visible = false;
+
     return true;
+  }
+  public createActions(items: Array<Action>) {
+    const onShow = () => {
+      questionPopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllQuestionsText }].concat(
+        this.model.getUsedQuestions().map(question => { return { id: question.name, title: question.name } })
+      );
+    };
+    const questionPopupModel = new PopupModel<{ model: ListModel }>(
+      "sv-list",
+      {
+        model: new ListModel(
+          [{ id: null, title: this.showAllQuestionsText }],
+          (item: IAction) => {
+            this.model.questionFilter = !!item.id ? item.id : "";
+            questionPopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
+      "bottom",
+      "center",
+      undefined, undefined, undefined, undefined, undefined, onShow
+    );
+
+    this.filterQuestionAction = new Action({
+      id: "svc-logic-filter-question",
+      title: this.showAllQuestionsText,
+      visible: false,
+      component: "sv-action-bar-item-dropdown",
+      popupModel: questionPopupModel,
+      action: () => { questionPopupModel.toggleVisibility(); }
+    });
+    items.push(this.filterQuestionAction);
   }
 }

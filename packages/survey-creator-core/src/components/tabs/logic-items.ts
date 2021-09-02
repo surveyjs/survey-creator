@@ -4,7 +4,8 @@ import {
   property,
   propertyArray,
   Serializer,
-  SurveyTrigger
+  SurveyTrigger,
+  ConditionRunner
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
@@ -75,9 +76,20 @@ export class SurveyLogicAction {
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
+  public isSuitable(questionName: string): boolean {
+    return this.elementName === questionName || this.elementName.indexOf(questionName + ".") === 0;
+  }
+  public addQuestionNames(names: string[]) {
+    if (!!this.elementName) {
+      names.push(this.elementName);
+    }
+  }
   private get questionNames(): Array<string> {
     if (!this.logicType || !this.logicType.questionNames) return [];
     return this.logicType.questionNames;
+  }
+  private get elementName(): string {
+    return !!this.element && (<any>this.element).name || ""
   }
 }
 
@@ -199,12 +211,25 @@ export class SurveyLogicItem {
   public removeQuestion(name: string) {
     this.removeQuestionInExpression(name);
   }
+  public getQuestionNames(): string[] {
+    const res = [];
+    this.getQuestionNamesFromExpression(res);
+    this.getQuestionNamesFromActions(res);
+    return res;
+  }
   public get expressionText(): string {
     const text = this.getExpressionAsDisplayText();
-    if(!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
+    if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
     return editorLocalization
       .getString("ed.lg.itemExpressionText")
-      ["format"](text);
+    ["format"](text);
+  }
+  private getQuestionNamesFromExpression(names: string[]) {
+    const conditionRunner = new ConditionRunner(this.expression);
+    conditionRunner.getVariables().forEach(item => names.push(item));
+  }
+  private getQuestionNamesFromActions(names: string[]) {
+    this.actions.forEach(action => action.addQuestionNames(names))
   }
   private getExpressionAsDisplayText(): string {
     return !!this.owner
@@ -217,6 +242,16 @@ export class SurveyLogicItem {
   public get deleteText(): string {
     return editorLocalization.getString("pe.delete");
   }
+  public isSuitable(filteredName: string): boolean {
+    if (!filteredName) return true;
+    return this.isSuitableInExpression(filteredName) || this.isSuitableInActions(filteredName)
+  }
+  private isSuitableInExpression(filteredName: string): boolean {
+    return this.expression.indexOf("{" + filteredName + "}") !== -1 || this.expression.indexOf("{" + filteredName + ".") !== -1;
+  }
+  private isSuitableInActions(filteredName: string): boolean {
+    return this.actions.some(action => action.isSuitable(filteredName))
+  }
   private renameQuestionInExpression(oldName: string, newName: string) {
     if (!this.expression) return;
     var newExpression = this.expression;
@@ -225,10 +260,7 @@ export class SurveyLogicItem {
     newName = "{" + newName + "}";
     var index = expression.lastIndexOf(oldName, expression.length);
     while (index > -1) {
-      newExpression =
-        newExpression.substring(0, index) +
-        newName +
-        newExpression.substr(index + oldName.length, +newExpression.length);
+      newExpression = newExpression.substring(0, index) + newName + newExpression.substr(index + oldName.length, +newExpression.length);
       expression = expression.substring(0, index);
       index = expression.lastIndexOf(oldName, expression.length);
     }
