@@ -869,7 +869,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           ? 1
           : maxLogicItems;
     }
-    this.title = this.text || editorLocalization.getString("pe.ruleIsNotSet");
+    this.setTitle();
+  }
+  private setTitle() {
+    const text = this.text;
+    this.title = this.options.onConditionGetTitleCallback(text, text || editorLocalization.getString("pe.ruleIsNotSet"));
   }
 
   private isSettingTextEditorValue: boolean;
