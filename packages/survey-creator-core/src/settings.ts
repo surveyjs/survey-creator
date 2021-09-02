@@ -160,6 +160,10 @@ export interface ISurveyCreatorOptions {
     editor: any,
     list: any[]
   );
+  onConditionGetTitleCallback(
+    expression: string,
+    title: string
+  ): string;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -264,4 +268,10 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     editor: any,
     list: any[]
   ) {}
+  onConditionGetTitleCallback(
+    expression: string,
+    title: string
+  ): string {
+    return title;
+  }
 }

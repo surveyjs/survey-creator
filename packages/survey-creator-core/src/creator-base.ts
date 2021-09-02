@@ -456,6 +456,16 @@ export class CreatorBase<T extends SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
+   * Use this event to modify the title in a condition editor. The title is changing during editing. In case of empty or incorrect expression it tells that expression is incorrect
+   * <br/> sender the survey creator object that fires the event.
+   * <br/> options.expression the current expression. If the expression is empty or incorrect then the value is empty.
+   * <br/> options.title the default value of the title. You can change the default value.
+   */
+   public onConditionGetTitle: Survey.Event<
+  (sender: CreatorBase<T>, options: any) => any,
+  any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
    * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
    * <br/> sender the survey creator object that fires the event
    * <br/> options object contains the information about certain modifications
@@ -2259,6 +2269,17 @@ export class CreatorBase<T extends SurveyModel>
         list.push(options.list[i]);
       }
     }
+  }
+  onConditionGetTitleCallback(
+    expression: string,
+    title: string
+  ): string {
+    var options = {
+      expression: expression,
+      title: title,
+    };
+    this.onConditionGetTitle.fire(this, options);
+    return options.title;
   }
   startUndoRedoTransaction(name: string = "") {
     this.undoRedoManager.startTransaction(name);
