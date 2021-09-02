@@ -100,7 +100,7 @@ If you pass a DOM element or an element id into a SurveyCreator constructor as t
 
 In most cases, that's all you need to do to continue using the Knockout version in V2. The additional changes that relate to the advanced functionality of using custom property editors or custom adorners are addressed below.
 
-
+<a id="use-react"></a>
 ## To start using React version
 
 Prior to V2, React developers used our Knockout version as a black box. We did not provide a native  SurveyJS Creator component for [React](https://reactjs.org/) framework.
