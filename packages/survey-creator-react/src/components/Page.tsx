@@ -63,55 +63,56 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   renderElement(): JSX.Element {
     const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
     return (
-        attachKey2click(<div
-          ref={this.rootRef}
-          className={"svc-page__content " + this.model.css}
-          id={this.props.page.id}
+      attachKey2click(<div
+        ref={this.rootRef}
+        className={"svc-page__content " + this.model.css}
+        id={this.props.page.id}
+        onClick={(e) => {
+          return this.model.select(this.model, new ReactMouseEvent(e));
+        }}
+        onMouseOut={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
+        onMouseOver={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
+      >
+        <SurveyPage
+          page={this.props.page}
+          survey={this.props.survey}
+          creator={this.props.creator}
+          css={this.model.css}
+        ></SurveyPage>
+        {this.model.allowEdit ? attachKey2click(<div
+          className="svc-page__add-new-question"
           onClick={(e) => {
-            return this.model.select(this.model, new ReactMouseEvent(e));
+            e.stopPropagation();
+            this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
           }}
-          onMouseOut={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
-          onMouseOver={(e) => toggleHovered(e.nativeEvent, e.currentTarget)}
         >
-          <SurveyPage
-            page={this.props.page}
-            survey={this.props.survey}
-            creator={this.props.creator}
-            css={this.model.css}
-          ></SurveyPage>
-          {this.model.allowEdit ? attachKey2click(<div
-            className="svc-page__add-new-question"
+          <span className="svc-text svc-text--normal svc-text--bold">
+            {this.model.creator.addNewQuestionText}
+          </span>
+
+          {attachKey2click(<button
             onClick={(e) => {
               e.stopPropagation();
-              this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
+              questionTypeSelectorModel.action();
             }}
+            className="svc-page__question-type-selector"
+            title={this.model.creator.addNewQuestionText}
           >
-            <span className="svc-text svc-text--normal svc-text--bold">
-              {this.model.creator.addNewQuestionText}
+            <span className="svc-page__question-type-selector-icon">
+              <SvgIcon
+                iconName={questionTypeSelectorModel.iconName}
+                size={24}
+              ></SvgIcon>
             </span>
-
-            {attachKey2click(<button
-              onClick={(e) => {
-                e.stopPropagation();
-                questionTypeSelectorModel.action();
-              }}
-              className="svc-page__question-type-selector"
-            >
-              <span className="svc-page__question-type-selector-icon">
-                <SvgIcon
-                  iconName={questionTypeSelectorModel.iconName}
-                  size={24}
-                ></SvgIcon>
-              </span>
-              <Popup model={questionTypeSelectorModel.popupModel}></Popup>
-            </button>)}
-          </div>) : null}
-          <div className="svc-page__content-actions">
-            <SurveyActionBar
-              model={this.model.actionContainer}
-            ></SurveyActionBar>
-          </div>
-        </div>)
+            <Popup model={questionTypeSelectorModel.popupModel}></Popup>
+          </button>)}
+        </div>) : null}
+        <div className="svc-page__content-actions">
+          <SurveyActionBar
+            model={this.model.actionContainer}
+          ></SurveyActionBar>
+        </div>
+      </div>)
     );
   }
 }
