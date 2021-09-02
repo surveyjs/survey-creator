@@ -31,4 +31,7 @@ export class LogoImageViewModel extends Base {
   public remove(model: LogoImageViewModel) {
     model.creator.survey.logo = "";
   }
+  get chooseLogoPlaceholder() {
+    return this.creator.getLocString("ed.chooseLogoPlaceholder");
+  }
 }

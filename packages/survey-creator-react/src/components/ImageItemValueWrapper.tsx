@@ -39,7 +39,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
     super.componentDidMount();
     this.model.itemsRoot = this.rootRef.current;
   }
-  
+
   private getDragDropGhost(topOrBottom: string) {
     if (this.model.ghostPosition === topOrBottom) {
       let className = "sv-drag-drop-ghost";
@@ -63,14 +63,14 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         <div className="svc-image-item-value__item">
           <div className="sv-imagepicker__item sv-imagepicker__item--inline">
             <label className="sv-imagepicker__label">
-                <div style={{ width: this.props.question.imageWidth ? this.props.question.imageWidth + 'px' : undefined, height: this.props.question.imageHeight ? this.props.question.imageHeight + 'px' : undefined }} className="sv-imagepicker__image">
-                </div>
+              <div style={{ width: this.props.question.imageWidth ? this.props.question.imageWidth + 'px' : undefined, height: this.props.question.imageHeight ? this.props.question.imageHeight + 'px' : undefined }} className="sv-imagepicker__image">
+              </div>
             </label>
-          </div>      
-        </div>      
-      
+          </div>
+        </div>
+
         <div className="svc-image-item-value-controls">
-        {this.model.allowAdd ? attachKey2click(<span className="svc-image-item-value-controls__button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
+          {this.model.allowAdd ? attachKey2click(<span className="svc-image-item-value-controls__button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
             <SvgIcon size={24} iconName={'icon-add-item-value'}></SvgIcon>
           </span>) : null}
         </div>
@@ -116,9 +116,10 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
           this.model.isDraggable ? this.model.item.value : undefined
         }
         onPointerDown={isNew ? undefined : (event: any) => this.model.startDragItemValue(event)}
-        >
+      >
         <input
           type="file"
+          aria-hidden="true"
           tabIndex={-1}
           accept="image/*"
           className="svc-choose-file-input"

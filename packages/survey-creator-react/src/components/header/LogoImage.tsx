@@ -34,11 +34,11 @@ export class LogoImageComponent extends SurveyElementBase<ILogoImageComponentPro
       </>;
     }
     else {
-      content = this.model.allowEdit ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}>[LOGO]</div>) : null;
+      content = this.model.allowEdit ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}>{this.model.chooseLogoPlaceholder}</div>) : null;
     }
     return (
       <div ref={this.rootRef} className="svc-logo-image">
-        <input type="file" tabIndex={-1} accept="image/*" className="svc-choose-file-input"/>
+        <input aria-hidden="true" type="file" tabIndex={-1} accept="image/*" className="svc-choose-file-input" />
         {content}
       </div>
     );
