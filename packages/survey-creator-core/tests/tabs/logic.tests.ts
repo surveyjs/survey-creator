@@ -17,7 +17,8 @@ import { PropertyGridEditorCollection } from "../../src/property-grid/index";
 import { PropertyGridEditorExpression } from "../../src/property-grid/condition";
 import { EmptySurveyCreatorOptions } from "../../src/settings";
 import { PropertyGridTriggerValueEditor } from "../../src/property-grid/values";
-import {QuestionEmbeddedSurveyModel} from "../../src/components/embedded-survey"
+import { QuestionEmbeddedSurveyModel } from "../../src/components/embedded-survey"
+import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 
 test("SurveyLogicItem, logicType and logicType name", () => {
   var survey = new SurveyModel({
@@ -430,7 +431,7 @@ test("SurveyLogicUI: validate expression and actions", () => {
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
   panel.getQuestionByName("elementSelector").value = "q2";
 
-  res = logic.saveEditableItem(); 
+  res = logic.saveEditableItem();
   expect(res).toBeTruthy();
   expect(logic.items).toHaveLength(1);
   expect(logic.items[0].isNew).toBeFalsy();
@@ -660,7 +661,7 @@ test("LogicItemEditorUI: edit logic item using detail panel", () => {
   expect(panel.getQuestionByName("logicTypeName").value).toEqual("question_visibility");
   expect(panel.getQuestionByName("elementSelector").value).toEqual("q2");
   panel.getQuestionByName("elementSelector").value = "q3";
-  
+
   expect(row.detailPanel.footerActions[0].title).toEqual("Done");
   row.detailPanel.footerActions[0].action();
   expect(logic.mode).toEqual("view");
@@ -710,7 +711,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   var panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "question_visibility"
   panel.getQuestionByName("elementSelector").value = "q2";
-  
+
   row.detailPanel.footerActions[0].action();
   expect(logic.mode).toEqual("view");
   expect(row.detailPanel).toBeFalsy();
@@ -753,4 +754,452 @@ test("LogicItemEditorUI: create new logic several times", () => {
   expect(itemsQuestion.rowCount).toEqual(0);
   expect(logic.items).toHaveLength(0);
   expect(logic.toolbar.actions[0].enabled).toBeTruthy();
+});
+
+test("LogicItemEditorUI: filter by question", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+      { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  expect(itemsQuestion.rowCount).toEqual(3);
+  expect(logic.questionFilter).toBeFalsy();
+  logic.questionFilter = "q1";
+  expect(itemsQuestion.rowCount).toEqual(2);
+  logic.questionFilter = "q4";
+  expect(itemsQuestion.rowCount).toEqual(1);
+  logic.questionFilter = "";
+  expect(itemsQuestion.rowCount).toEqual(3);
+});
+
+test("LogicItemEditorUI: filter by question and delete", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+      { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(logic.itemsSurvey.getQuestionByName("items"));
+  logic.questionFilter = "q4";
+  expect(itemsQuestion.rowCount).toEqual(1);
+
+  itemsQuestion.removeRow(0);
+  expect(itemsQuestion.rowCount).toEqual(0);
+  expect(survey.getQuestionByName("q4").visibleIf).toBeFalsy()
+
+  logic.questionFilter = "";
+  expect(itemsQuestion.rowCount).toEqual(2);
+});
+
+test("LogicItemEditorUI: filter by question and addNew", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+      { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  logic.questionFilter = "q4";
+  expect(itemsQuestion.rowCount).toEqual(1);
+
+  logic.addNewUI();
+  expect(itemsQuestion.rowCount).toEqual(2);
+  expect(logic.items).toHaveLength(4);
+
+  logic.expressionEditor.text = "{q1} = 4";
+  let panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility"
+  panel.getQuestionByName("elementSelector").value = "q4";
+
+  expect(logic.saveEditableItem()).toBeTruthy();
+  expect(itemsQuestion.rowCount).toEqual(2);
+  expect(logic.items).toHaveLength(4);
+  expect(logic.questionFilter).toEqual("q4");
+
+  logic.addNewUI();
+  expect(itemsQuestion.rowCount).toEqual(3);
+  expect(logic.items).toHaveLength(5);
+
+  logic.expressionEditor.text = "{q1} = 4";
+  panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility"
+  panel.getQuestionByName("elementSelector").value = "q3";
+
+  expect(logic.saveEditableItem()).toBeTruthy();
+  expect(itemsQuestion.rowCount).toEqual(5);
+  expect(logic.items).toHaveLength(5);
+  expect(logic.questionFilter).toEqual("");
+});
+
+test("LogicItemEditorUI: filter by action type", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+          { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q4",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q2} = 2",
+        setToName: "q3",
+        fromName: "q4"
+      }
+    ],
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(logic.itemsSurvey.getQuestionByName("items"));
+  expect(itemsQuestion.rowCount).toEqual(3);
+  expect(logic.actionTypeFilter).toBeFalsy();
+  logic.actionTypeFilter = "trigger_skip";
+  expect(itemsQuestion.rowCount).toEqual(1);
+  logic.actionTypeFilter = "";
+  expect(itemsQuestion.rowCount).toEqual(3);
+});
+
+test("LogicItemEditorUI: filter by actionType and addNew", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", enableIf: "{q1} = 1" },
+          { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+          { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q4",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q2} = 2",
+        setToName: "q3",
+        fromName: "q4"
+      }
+    ],
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(logic.itemsSurvey.getQuestionByName("items"));
+  logic.actionTypeFilter = "question_enable";
+  expect(itemsQuestion.rowCount).toEqual(1);
+
+  logic.addNewUI();
+  expect(itemsQuestion.rowCount).toEqual(2);
+  expect(logic.items).toHaveLength(4);
+
+  logic.expressionEditor.text = "{q1} = 4";
+  let panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_enable"
+  panel.getQuestionByName("elementSelector").value = "q4";
+  expect(logic.saveEditableItem()).toBeTruthy();
+  expect(itemsQuestion.rowCount).toEqual(2);
+  expect(logic.items).toHaveLength(4);
+  expect(logic.actionTypeFilter).toEqual("question_enable");
+
+  logic.addNewUI();
+  expect(itemsQuestion.rowCount).toEqual(3);
+  expect(logic.items).toHaveLength(5);
+
+  logic.expressionEditor.text = "{q1} = 4";
+  panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_require"
+  panel.getQuestionByName("elementSelector").value = "q3";
+  expect(logic.saveEditableItem()).toBeTruthy();
+  expect(itemsQuestion.rowCount).toEqual(5);
+  expect(logic.items).toHaveLength(5);
+  expect(logic.actionTypeFilter).toEqual("");
+});
+
+test("LogicItemEditorUI: filter by question and action type", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+          { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q2",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q2} = 2",
+        setToName: "q3",
+        fromName: "q4"
+      }
+    ],
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(logic.itemsSurvey.getQuestionByName("items"));
+  expect(itemsQuestion.rowCount).toEqual(3);
+  expect(logic.questionFilter).toBeFalsy();
+  logic.questionFilter = "q1";
+  expect(itemsQuestion.rowCount).toEqual(2);
+  logic.actionTypeFilter = "trigger_skip";
+  expect(itemsQuestion.rowCount).toEqual(1);
+  logic.questionFilter = "q4";
+  expect(itemsQuestion.rowCount).toEqual(0);
+  logic.questionFilter = "";
+  expect(itemsQuestion.rowCount).toEqual(1);
+  logic.actionTypeFilter = "";
+  expect(itemsQuestion.rowCount).toEqual(3);
+});
+
+test("LogicItemEditorUI: getUsedQuestions", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+      { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+    ]
+  });
+  const logic = new SurveyLogic(survey);
+  const questions = logic.getUsedQuestions();
+
+  expect(questions).toHaveLength(4);
+  expect(questions[0].name).toEqual("q1");
+  expect(questions[3].name).toEqual("q4");
+});
+
+test("LogicItemEditorUI: getUsedActionTypes", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+          { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q4",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q2} = 2",
+        setToName: "q3",
+        fromName: "q4"
+      }
+    ],
+  });
+  const logic = new SurveyLogic(survey);
+  const types = logic.getUsedActionTypes();
+
+  expect(types).toHaveLength(3);
+  expect(types[0].name).toEqual("question_visibility");
+  expect(types[1].name).toEqual("trigger_skip");
+  expect(types[2].name).toEqual("trigger_copyvalue");
+});
+
+test("LogicItem isSuitable", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3" },
+          { type: "text", name: "q4" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q4",
+      },
+    ],
+  })
+  const logic = new SurveyLogic(survey);
+
+  expect(logic.items).toHaveLength(1)
+  let item = logic.items[0];
+
+  expect(item.isSuitable("")).toBeTruthy()
+  expect(item.isSuitable("q1")).toBeTruthy()
+  expect(item.isSuitable("q2")).toBeTruthy()
+  expect(item.isSuitable("q3")).toBeFalsy()
+  expect(item.isSuitable("q4")).toBeTruthy()
+
+  expect(item.isSuitable("", "")).toBeTruthy()
+  expect(item.isSuitable("", "trigger_skip")).toBeTruthy()
+  expect(item.isSuitable("", "question_enable")).toBeFalsy()
+
+  expect(item.isSuitable("q3", "trigger_skip")).toBeFalsy()
+  expect(item.isSuitable("q2", "question_enable")).toBeFalsy()
+  expect(item.isSuitable("q4", "trigger_skip")).toBeTruthy()
+});
+
+test("LogicItem getQuestionNames", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3" },
+          { type: "text", name: "q4" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q4",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q1} = 1",
+        setToName: "q2",
+        fromName: "q4"
+      }
+    ],
+  })
+  const logic = new SurveyLogic(survey);
+
+  expect(logic.items).toHaveLength(1)
+  let item = logic.items[0];
+
+  expect(item.getQuestionNames()).toHaveLength(3);
+  expect(item.getQuestionNames()[0]).toEqual("q1");
+  expect(item.getQuestionNames()[1]).toEqual("q2");
+  expect(item.getQuestionNames()[2]).toEqual("q4");
+});
+
+test("LogicItem getActionTypes", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3" },
+          { type: "text", name: "q4" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q4",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q1} = 1",
+        setToName: "q2",
+        fromName: "q4"
+      }
+    ],
+  })
+  const logic = new SurveyLogic(survey);
+
+  expect(logic.items).toHaveLength(1)
+  let item = logic.items[0];
+
+  expect(item.getActionTypes()).toHaveLength(3);
+  expect(item.getActionTypes()[0]).toEqual("question_visibility");
+  expect(item.getActionTypes()[1]).toEqual("trigger_skip");
+  expect(item.getActionTypes()[2]).toEqual("trigger_copyvalue");
+});
+
+test("LogicAction isSuitableByQuestionName", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q3",
+      },
+    ],
+  })
+  const logic = new SurveyLogic(survey);
+  const action = logic.items[0].actions[1];
+  expect(action.logicTypeName).toEqual("trigger_skip");
+  expect(action.isSuitableByQuestionName("q1")).toBeFalsy();
+  expect(action.isSuitableByQuestionName("q2")).toBeFalsy();
+  expect(action.isSuitableByQuestionName("q3")).toBeTruthy();
+
+  const action1 = new SurveyLogicAction(logic.getTypeByName("question_visibility"), survey.getQuestionByName("q1"), survey);
+  expect(action1.isSuitableByQuestionName("q1")).toBeTruthy();
+  expect(action1.isSuitableByQuestionName("q2")).toBeFalsy();
+});
+
+test("LogicAction isSuitableByLogicType", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q3",
+      },
+    ],
+  })
+  const logic = new SurveyLogic(survey);
+  const action1 = new SurveyLogicAction(logic.getTypeByName("question_visibility"), survey.getQuestionByName("q1"), survey);
+  expect(action1.isSuitableByLogicType("question_visibility")).toBeTruthy();
+  expect(action1.isSuitableByLogicType("trigger_skip")).toBeFalsy();
 });

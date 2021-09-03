@@ -4,7 +4,8 @@ import {
   property,
   propertyArray,
   Serializer,
-  SurveyTrigger
+  SurveyTrigger,
+  ConditionRunner
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
@@ -75,9 +76,36 @@ export class SurveyLogicAction {
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
+  public isSuitableByQuestionName(questionName: string): boolean {
+    let res = this.elementName === questionName || this.elementName.indexOf(questionName + ".") === 0;
+    if (!res) {
+      res = this.questionNamesValues.filter(question => { return question === questionName || question.indexOf(questionName + ".") === 0; }).length > 0;
+    }
+    return res;
+  }
+  public isSuitableByLogicType(logicTypeName: string): boolean {
+    if (!this.logicTypeName) return true;
+    return logicTypeName === this.logicTypeName;
+  }
+  public addQuestionNames(names: string[]) {
+    if (!!this.elementName && names.indexOf(this.elementName) === -1) {
+      names.push(this.elementName);
+    }
+    this.questionNamesValues.forEach(name => {
+      if (!!name && names.indexOf(name) === -1) {
+        names.push(name)
+      }
+    })
+  }
   private get questionNames(): Array<string> {
     if (!this.logicType || !this.logicType.questionNames) return [];
     return this.logicType.questionNames;
+  }
+  private get elementName(): string {
+    return !!this.element && (<any>this.element).name || "";
+  }
+  private get questionNamesValues(): Array<string> {
+    return this.questionNames.map(name => this.element[name]);
   }
 }
 
@@ -199,12 +227,31 @@ export class SurveyLogicItem {
   public removeQuestion(name: string) {
     this.removeQuestionInExpression(name);
   }
+  public getQuestionNames(): string[] {
+    const res = [];
+    this.getQuestionNamesFromExpression(res);
+    this.getQuestionNamesFromActions(res);
+    return res;
+  }
+  public getActionTypes(): string[] {
+    return this.actions.map(action => action.logicTypeName);
+  }
   public get expressionText(): string {
     const text = this.getExpressionAsDisplayText();
-    if(!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
+    if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
     return editorLocalization
       .getString("ed.lg.itemExpressionText")
-      ["format"](text);
+    ["format"](text);
+  }
+  private getQuestionNamesFromExpression(names: string[]) {
+    const conditionRunner = new ConditionRunner(this.expression);
+    conditionRunner.getVariables().forEach(item => {
+      if (names.indexOf(item) === -1)
+        names.push(item)
+    });
+  }
+  private getQuestionNamesFromActions(names: string[]) {
+    this.actions.forEach(action => action.addQuestionNames(names))
   }
   private getExpressionAsDisplayText(): string {
     return !!this.owner
@@ -217,6 +264,25 @@ export class SurveyLogicItem {
   public get deleteText(): string {
     return editorLocalization.getString("pe.delete");
   }
+  public isSuitable(filteredName: string, logicTypeName: string = ""): boolean {
+    if (!filteredName && !logicTypeName) return true;
+    if (!filteredName) {
+      return this.isSuitableByLogicTypeInActions(logicTypeName);
+    }
+    if (!logicTypeName) {
+      return this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName);
+    }
+    return (this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName)) && this.isSuitableByLogicTypeInActions(logicTypeName);
+  }
+  private isSuitableInExpression(filteredName: string): boolean {
+    return this.expression.indexOf("{" + filteredName + "}") !== -1 || this.expression.indexOf("{" + filteredName + ".") !== -1;
+  }
+  private isSuitableByNameInActions(filteredName: string): boolean {
+    return this.actions.some(action => action.isSuitableByQuestionName(filteredName));
+  }
+  private isSuitableByLogicTypeInActions(logicTypeName: string): boolean {
+    return this.actions.some(action => action.isSuitableByLogicType(logicTypeName));
+  }
   private renameQuestionInExpression(oldName: string, newName: string) {
     if (!this.expression) return;
     var newExpression = this.expression;
@@ -225,10 +291,7 @@ export class SurveyLogicItem {
     newName = "{" + newName + "}";
     var index = expression.lastIndexOf(oldName, expression.length);
     while (index > -1) {
-      newExpression =
-        newExpression.substring(0, index) +
-        newName +
-        newExpression.substr(index + oldName.length, +newExpression.length);
+      newExpression = newExpression.substring(0, index) + newName + newExpression.substr(index + oldName.length, +newExpression.length);
       expression = expression.substring(0, index);
       index = expression.lastIndexOf(oldName, expression.length);
     }
