@@ -1,4 +1,4 @@
-import { SurveyModel, QuestionFactory, QuestionNonValue, Question } from "survey-core";
+import { SurveyModel, QuestionFactory, QuestionNonValue, Question, Serializer } from "survey-core";
 
 export class QuestionEmbeddedSurveyModel extends QuestionNonValue {
     public embeddedSurvey: SurveyModel;
@@ -9,5 +9,13 @@ export class QuestionEmbeddedSurveyModel extends QuestionNonValue {
         return "embeddedsurvey";
     }
 }
-
+Serializer.addClass(
+    "embeddedsurvey",
+    [],
+    function () {
+      return new QuestionEmbeddedSurveyModel("");
+    },
+    "nonvalue"
+  );
+  
 QuestionFactory.Instance.registerQuestion("embeddedsurvey", (name: string): Question => {return new QuestionEmbeddedSurveyModel(name);})

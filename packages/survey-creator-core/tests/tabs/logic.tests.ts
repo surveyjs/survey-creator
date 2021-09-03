@@ -702,6 +702,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
 
   const actionsQuestion = <QuestionEmbeddedSurveyModel>row.detailPanel.getQuestionByName("actions");
   expect(actionsQuestion).toBeTruthy();
+  expect(actionsQuestion.startWithNewLine).toBeTruthy();
   expect(actionsQuestion.embeddedSurvey).toBeTruthy();
   expect(logic.itemEditor.editSurvey).toBeTruthy();
   expect(logic.itemEditor.panels).toHaveLength(1);

@@ -1290,6 +1290,7 @@ test("Show Build/Edit tabs and switch between, not a modal mode", () => {
   expect(editor.panel.titleLocation).toEqual("hidden");
   editor.isModal = false;
   expect(editor.panel.titleLocation).toEqual("default");
+  expect(editor.panel.getTitleLocation()).toEqual("top");
   expect(editor.panel.visible).toBeTruthy();
   expect(editor.textEditor.visible).toBeFalsy();
   var actions = editor.panel.getTitleActions();
@@ -1301,6 +1302,7 @@ test("Show Build/Edit tabs and switch between, not a modal mode", () => {
   actions[1].action();
   expect(editor.panel.visible).toBeFalsy();
   expect(editor.textEditor.visible).toBeTruthy();
+  expect(editor.textEditor.getTitleLocation()).toEqual("top");
   expect(editor.textEditor.value).toEqual("{q2} = 1");
   editor.textEditor.value = "{q2} = 2";
   actions = editor.textEditor.getTitleActions();
