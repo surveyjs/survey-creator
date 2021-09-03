@@ -955,7 +955,7 @@ test("LogicItemEditorUI: filter by question and action type", () => {
       {
         type: "skip",
         expression: "{q1} = 1",
-        gotoName: "q4",
+        gotoName: "q2",
       },
       {
         type: "copyvalue",
@@ -1041,6 +1041,7 @@ test("LogicItem isSuitable", () => {
           { type: "text", name: "q1" },
           { type: "text", name: "q2", visibleIf: "{q1} = 1" },
           { type: "text", name: "q3" },
+          { type: "text", name: "q4" },
         ],
       },
     ],
@@ -1048,7 +1049,7 @@ test("LogicItem isSuitable", () => {
       {
         type: "skip",
         expression: "{q1} = 1",
-        gotoName: "q2",
+        gotoName: "q4",
       },
     ],
   })
@@ -1061,6 +1062,7 @@ test("LogicItem isSuitable", () => {
   expect(item.isSuitable("q1")).toBeTruthy()
   expect(item.isSuitable("q2")).toBeTruthy()
   expect(item.isSuitable("q3")).toBeFalsy()
+  expect(item.isSuitable("q4")).toBeTruthy()
 
   expect(item.isSuitable("", "")).toBeTruthy()
   expect(item.isSuitable("", "trigger_skip")).toBeTruthy()
@@ -1068,6 +1070,7 @@ test("LogicItem isSuitable", () => {
 
   expect(item.isSuitable("q3", "trigger_skip")).toBeFalsy()
   expect(item.isSuitable("q2", "question_enable")).toBeFalsy()
+  expect(item.isSuitable("q4", "trigger_skip")).toBeTruthy()
 });
 
 test("LogicItem getQuestionNames", () => {
@@ -1144,7 +1147,7 @@ test("LogicItem getActionTypes", () => {
   expect(item.getActionTypes()[2]).toEqual("trigger_copyvalue");
 });
 
-test("LogicAction isSuitable", () => {
+test("LogicAction isSuitableByQuestionName", () => {
   const survey = new SurveyModel({
     pages: [
       {
@@ -1166,16 +1169,36 @@ test("LogicAction isSuitable", () => {
   const logic = new SurveyLogic(survey);
   const action = logic.items[0].actions[1];
   expect(action.logicTypeName).toEqual("trigger_skip");
-  expect(action.isSuitable("q1", "")).toBeFalsy();
-  expect(action.isSuitable("q2", "")).toBeFalsy();
-  expect(action.isSuitable("q3", "")).toBeTruthy();
+  expect(action.isSuitableByQuestionName("q1")).toBeFalsy();
+  expect(action.isSuitableByQuestionName("q2")).toBeFalsy();
+  expect(action.isSuitableByQuestionName("q3")).toBeTruthy();
 
   const action1 = new SurveyLogicAction(logic.getTypeByName("question_visibility"), survey.getQuestionByName("q1"), survey);
-  expect(action1.isSuitable("q1", "")).toBeTruthy();
-  expect(action1.isSuitable("q2", "")).toBeFalsy();
-
-  expect(action1.isSuitable("", "question_visibility")).toBeTruthy();
-  expect(action1.isSuitable("", "trigger_skip")).toBeFalsy();
-
+  expect(action1.isSuitableByQuestionName("q1")).toBeTruthy();
+  expect(action1.isSuitableByQuestionName("q2")).toBeFalsy();
 });
 
+test("LogicAction isSuitableByLogicType", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q3",
+      },
+    ],
+  })
+  const logic = new SurveyLogic(survey);
+  const action1 = new SurveyLogicAction(logic.getTypeByName("question_visibility"), survey.getQuestionByName("q1"), survey);
+  expect(action1.isSuitableByLogicType("question_visibility")).toBeTruthy();
+  expect(action1.isSuitableByLogicType("trigger_skip")).toBeFalsy();
+});

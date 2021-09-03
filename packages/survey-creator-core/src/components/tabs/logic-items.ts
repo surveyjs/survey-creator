@@ -76,18 +76,16 @@ export class SurveyLogicAction {
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
-  public isSuitable(questionName: string, logicTypeName: string): boolean {
-    let res = false;
-    if (!!questionName) {
-      res = this.elementName === questionName || this.elementName.indexOf(questionName + ".") === 0;
-      if (!res) {
-        res = this.questionNamesValues.filter(question => { return question === questionName || question.indexOf(questionName + ".") === 0; }).length > 0;
-      }
-    }
-    if (!res && !!logicTypeName) {
-      res = logicTypeName === this.logicTypeName;
+  public isSuitableByQuestionName(questionName: string): boolean {
+    let res = this.elementName === questionName || this.elementName.indexOf(questionName + ".") === 0;
+    if (!res) {
+      res = this.questionNamesValues.filter(question => { return question === questionName || question.indexOf(questionName + ".") === 0; }).length > 0;
     }
     return res;
+  }
+  public isSuitableByLogicType(logicTypeName: string): boolean {
+    if (!this.logicTypeName) return true;
+    return logicTypeName === this.logicTypeName;
   }
   public addQuestionNames(names: string[]) {
     if (!!this.elementName && names.indexOf(this.elementName) === -1) {
@@ -269,18 +267,21 @@ export class SurveyLogicItem {
   public isSuitable(filteredName: string, logicTypeName: string = ""): boolean {
     if (!filteredName && !logicTypeName) return true;
     if (!filteredName) {
-      return this.isSuitableInActions(filteredName, logicTypeName);
+      return this.isSuitableByLogicTypeInActions(logicTypeName);
     }
     if (!logicTypeName) {
-      return this.isSuitableInExpression(filteredName) || this.isSuitableInActions(filteredName, logicTypeName);
+      return this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName);
     }
-    return this.isSuitableInExpression(filteredName) && this.isSuitableInActions(filteredName, logicTypeName);
+    return (this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName)) && this.isSuitableByLogicTypeInActions(logicTypeName);
   }
   private isSuitableInExpression(filteredName: string): boolean {
     return this.expression.indexOf("{" + filteredName + "}") !== -1 || this.expression.indexOf("{" + filteredName + ".") !== -1;
   }
-  private isSuitableInActions(filteredName: string, logicTypeName: string): boolean {
-    return this.actions.some(action => action.isSuitable(filteredName, logicTypeName))
+  private isSuitableByNameInActions(filteredName: string): boolean {
+    return this.actions.some(action => action.isSuitableByQuestionName(filteredName));
+  }
+  private isSuitableByLogicTypeInActions(logicTypeName: string): boolean {
+    return this.actions.some(action => action.isSuitableByLogicType(logicTypeName));
   }
   private renameQuestionInExpression(oldName: string, newName: string) {
     if (!this.expression) return;

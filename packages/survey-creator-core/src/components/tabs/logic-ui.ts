@@ -261,7 +261,9 @@ export class SurveyLogicUI extends SurveyLogic {
 
 export class TabLogicPlugin implements ICreatorPlugin {
   private filterQuestionAction: Action;
+  private filterActionTypeAction: Action;
   private showAllQuestionsText = getLogicString("showAllQuestions");
+  private showAllActionTypesText = getLogicString("showAllActionTypes");
   public model: SurveyLogicUI;
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("logic", this);
@@ -272,9 +274,15 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.filterQuestionAction.title = this.showAllQuestionsText;
     this.filterQuestionAction.visible = true;
 
+    this.filterActionTypeAction.title = this.showAllActionTypesText;
+    this.filterActionTypeAction.visible = true;
+
     this.model.onPropertyChanged.add((sender, options) => {
       if (options.name === "questionFilter") {
         this.filterQuestionAction.title = !!this.model.questionFilter ? this.model.questionFilter : this.showAllQuestionsText;
+      }
+      if (options.name === "actionTypeFilter") {
+        this.filterActionTypeAction.title = !!this.model.actionTypeFilter ? this.model.getTypeByName(this.model.actionTypeFilter).displayName : this.showAllActionTypesText;
       }
     });
   }
@@ -283,13 +291,14 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.model = undefined;
 
     this.filterQuestionAction.visible = false;
+    this.filterActionTypeAction.visible = false;
 
     return true;
   }
   public createActions(items: Array<Action>) {
-    const onShow = () => {
+    const onQuestionPopupShow = () => {
       questionPopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllQuestionsText }].concat(
-        this.model.getUsedQuestions().map(question => { return { id: question.name, title: question.name } })
+        this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) } })
       );
     };
     const questionPopupModel = new PopupModel<{ model: ListModel }>(
@@ -306,7 +315,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
       },
       "bottom",
       "center",
-      undefined, undefined, undefined, undefined, undefined, onShow
+      undefined, undefined, undefined, undefined, undefined, onQuestionPopupShow
     );
 
     this.filterQuestionAction = new Action({
@@ -318,5 +327,37 @@ export class TabLogicPlugin implements ICreatorPlugin {
       action: () => { questionPopupModel.toggleVisibility(); }
     });
     items.push(this.filterQuestionAction);
+
+    const onActionTypesPopupShow = () => {
+      actionTypesPopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllActionTypesText }].concat(
+        this.model.getUsedActionTypes().map(type => { return { id: type.name, title: type.displayName } })
+      );
+    };
+    const actionTypesPopupModel = new PopupModel<{ model: ListModel }>(
+      "sv-list",
+      {
+        model: new ListModel(
+          [{ id: null, title: this.showAllQuestionsText }],
+          (item: IAction) => {
+            this.model.actionTypeFilter = !!item.id ? item.id : "";
+            actionTypesPopupModel.toggleVisibility();
+          },
+          true
+        )
+      },
+      "bottom",
+      "center",
+      undefined, undefined, undefined, undefined, undefined, onActionTypesPopupShow
+    );
+
+    this.filterActionTypeAction = new Action({
+      id: "svc-logic-filter-actiontype",
+      title: this.showAllActionTypesText,
+      visible: false,
+      component: "sv-action-bar-item-dropdown",
+      popupModel: actionTypesPopupModel,
+      action: () => { actionTypesPopupModel.toggleVisibility(); }
+    });
+    items.push(this.filterActionTypeAction);
   }
 }
