@@ -27,9 +27,35 @@ const json2 = {
                 'item3'
             ]
         },
-        {type: "text", name: "q2", visibleIf: "{q1}='item1'"},
-        {type: "text", name: "q3"}
+        { type: "text", name: "q2", visibleIf: "{q1}='item1'" },
+        { type: "text", name: "q3" }
     ]
+};
+
+const json3 = {
+    pages: [
+        {
+            elements: [
+                { type: "text", name: "q1" },
+                { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+                { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+                { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+            ],
+        },
+    ],
+    triggers: [
+        {
+            type: "skip",
+            expression: "{q1} = 1",
+            gotoName: "q4",
+        },
+        {
+            type: "copyvalue",
+            expression: "{q2} = 2",
+            setToName: "q3",
+            fromName: "q4"
+        }
+    ],
 };
 
 fixture(title)
@@ -57,7 +83,7 @@ const removeButton = Selector(".sv-paneldynamic__remove-btn--right").filterVisib
 
 const errorNotifyBalloonSelector = Selector(".svc-notifier.svc-notifier--error").filterVisible();
 const notifyBalloonSelector = Selector(".svc-notifier").filterVisible();
-    
+
 test("Create logic rule", async (t) => {
     await ClientFunction((json) => { window["creator"].JSON = json; })(json);
 
@@ -84,7 +110,7 @@ test("Create logic rule", async (t) => {
         .click(getSelectOptionByText("not equals"))
         .click(Selector(".sd-checkbox").filterVisible())
         .expect(titleSelector.innerText).eql("{string_editor} <> ['item1']")
-        
+
         .click(addButton)
         .expect(removeButton.count).eql(2)
         .expect(logicOperatorConjuction.count).eql(1)
@@ -125,7 +151,7 @@ test("Create logic rule", async (t) => {
         .click(addButton.nth(1))
         .expect(removeButton.count).eql(2)
         .expect(Selector(".svc-logic-operator.svc-logic-operator--question.svc-logic-operator--error").filterVisible().count).eql(0)
-        
+
         .click(logicActionSelector.nth(1))
         .click(getSelectOptionByText("Complete survey"))
         .click(Selector("button").withExactText("Done").filterVisible())
@@ -173,7 +199,7 @@ test("Edit Logic rule", async (t) => {
         .expect(tableRulesSelector.count).eql(1)
 
         .click(logicDetailButtonElement)
-   
+
         .expect(logicQuestionSelector.value).eql("q1")
         .expect(logicOperatorSelector.value).eql("equal")
 
@@ -189,4 +215,41 @@ test("Edit Logic rule", async (t) => {
         .expect(tableRulesSelector.count).eql(1)
         .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{q1} == \'item2\'\' returns true:")
         .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Make question {q3} visible")
+});
+
+function getBarItemByText(text) {
+    return Selector(".sv-action-bar-item .sv-action-bar-item__title").withText(text);
+}
+function getListItemByText(text) {
+    return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
+}
+
+test("Filtering rules", async (t) => {
+    await ClientFunction((json) => { window["creator"].JSON = json; })(json3);
+
+    await t
+        .click(getTabbedMenuItemByText("Survey Logic"))
+        .expect(tableRulesSelector.count).eql(3)
+
+        .click(getBarItemByText("Show all questions"))
+        .click(getListItemByText("q2"))
+        .expect(tableRulesSelector.count).eql(2)
+        .expect(getBarItemByText("q2").visible).ok()
+
+        .click(getBarItemByText("Show all action types"))
+        .click(getListItemByText("Skip to question"))
+        .expect(tableRulesSelector.count).eql(1)
+        .expect(getBarItemByText("Skip to question").visible).ok()
+
+        .click(Selector(".sv-action-bar-item").withExactText("Add New").filterVisible())
+        .click(logicQuestionSelector)
+        .click(getSelectOptionByText("q4"))
+        .click(logicOperatorSelector)
+        .click(getSelectOptionByText("is not empty"))
+        .click(logicActionSelector)
+        .click(getSelectOptionByText("Complete survey"))
+        .click(Selector("button").withExactText("Done").filterVisible())
+        .expect(tableRulesSelector.count).eql(4)
+        .expect(getBarItemByText("Show all action types").visible).ok()
+        .expect(getBarItemByText("Show all questions").visible).ok()
 });
