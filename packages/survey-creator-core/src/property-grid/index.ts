@@ -47,13 +47,16 @@ export interface IPropertyEditorSetup {
 
 export function setSurveyJSONForPropertyGrid(
   json: any,
-  updateOnTyping: boolean = true
+  updateOnTyping: boolean = true,
+  titleLocationLeft: boolean = true
 ) {
   json.showNavigationButtons = "none";
   json.showPageTitles = false;
   json.focusFirstQuestionAutomatic = false;
   json.showQuestionNumbers = "off";
-  json.questionTitleLocation = "left";
+  if(titleLocationLeft) {
+    json.questionTitleLocation = "left";
+  }
   json.showProgressBar = "off";
   if (updateOnTyping) {
     json.textUpdateMode = "onTyping";
@@ -85,7 +88,7 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   }
   protected createSurvey(): SurveyModel {
     var json = this.getSurveyJSON();
-    setSurveyJSONForPropertyGrid(json);
+    setSurveyJSONForPropertyGrid(json, true, false);
     return this.options.createSurvey(json, this.getSurveyCreationReason());
   }
   protected abstract getSurveyJSON(): any;
