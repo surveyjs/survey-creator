@@ -54,6 +54,11 @@ export class SurveyLogicUI extends SurveyLogic {
       target.updateItemsSurveyData();
     }
   }) questionFilter: string;
+  @property({
+    onSet: (value, target: SurveyLogicUI) => {
+      target.updateItemsSurveyData();
+    }
+  }) actionTypeFilter: string;
   public dispose() {
     super.dispose();
     this.itemsSurveyValue.dispose();
@@ -112,8 +117,9 @@ export class SurveyLogicUI extends SurveyLogic {
       this.itemEditor.editableItem = this.editableItem;
     }
     this.editableItem.isNew = false;
-    if (!this.editableItem.isSuitable(this.questionFilter)) {
+    if (!this.editableItem.isSuitable(this.questionFilter, this.actionTypeFilter)) {
       this.questionFilter = "";
+      this.actionTypeFilter = "";
     } else {
       this.updateItemsSurveyData();
     }
@@ -178,7 +184,7 @@ export class SurveyLogicUI extends SurveyLogic {
     this.expressionEditor.isModal = false;
   }
   private getVisibleItems(): SurveyLogicItem[] {
-    return this.items.filter(item => item.isNew || item.isSuitable(this.questionFilter))
+    return this.items.filter(item => item.isNew || item.isSuitable(this.questionFilter, this.actionTypeFilter))
   }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;

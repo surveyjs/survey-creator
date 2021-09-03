@@ -209,7 +209,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     return !!this.errorText;
   }
   public getUsedQuestions(): Question[] {
-    const names = {};
+    const names: { [key: string]: Question } = {};
     this.items.forEach(item => {
       item.getQuestionNames().forEach(name => {
         if (!names[name]) {
@@ -217,10 +217,28 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
         }
       })
     })
-    const res = [];
+    const res: Question[] = [];
     Object.keys(names).forEach(item => {
       if (!!names[item]) {
         res.push(names[item])
+      }
+    })
+    return res;
+  }
+  public getUsedActionTypes(): SurveyLogicType[] {
+    const types: { [key: string]: SurveyLogicType } = {};
+    this.items.forEach(item => {
+      item.getActionTypes().forEach(name => {
+        if (!types[name]) {
+          types[name] = this.logicTypes.filter(logicType => logicType.name == name)[0];
+        }
+      })
+    })
+
+    const res: SurveyLogicType[] = [];
+    Object.keys(types).forEach(item => {
+      if (!!types[item]) {
+        res.push(types[item])
       }
     })
     return res;

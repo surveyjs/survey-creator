@@ -76,10 +76,16 @@ export class SurveyLogicAction {
   public getLocString(name: string) {
     return editorLocalization.getString(name);
   }
-  public isSuitable(questionName: string): boolean {
-    let res = this.elementName === questionName || this.elementName.indexOf(questionName + ".") === 0;
-    if (!res) {
-      res = this.questionNamesValues.filter(question => { return question === questionName || question.indexOf(questionName + ".") === 0; }).length > 0;
+  public isSuitable(questionName: string, logicTypeName: string): boolean {
+    let res = false;
+    if (!!questionName) {
+      res = this.elementName === questionName || this.elementName.indexOf(questionName + ".") === 0;
+      if (!res) {
+        res = this.questionNamesValues.filter(question => { return question === questionName || question.indexOf(questionName + ".") === 0; }).length > 0;
+      }
+    }
+    if (!res && !!logicTypeName) {
+      res = logicTypeName === this.logicTypeName;
     }
     return res;
   }
@@ -229,6 +235,9 @@ export class SurveyLogicItem {
     this.getQuestionNamesFromActions(res);
     return res;
   }
+  public getActionTypes(): string[] {
+    return this.actions.map(action => action.logicTypeName);
+  }
   public get expressionText(): string {
     const text = this.getExpressionAsDisplayText();
     if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
@@ -257,15 +266,21 @@ export class SurveyLogicItem {
   public get deleteText(): string {
     return editorLocalization.getString("pe.delete");
   }
-  public isSuitable(filteredName: string): boolean {
-    if (!filteredName) return true;
-    return this.isSuitableInExpression(filteredName) || this.isSuitableInActions(filteredName)
+  public isSuitable(filteredName: string, logicTypeName: string = ""): boolean {
+    if (!filteredName && !logicTypeName) return true;
+    if (!filteredName) {
+      return this.isSuitableInActions(filteredName, logicTypeName);
+    }
+    if (!logicTypeName) {
+      return this.isSuitableInExpression(filteredName) || this.isSuitableInActions(filteredName, logicTypeName);
+    }
+    return this.isSuitableInExpression(filteredName) && this.isSuitableInActions(filteredName, logicTypeName);
   }
   private isSuitableInExpression(filteredName: string): boolean {
     return this.expression.indexOf("{" + filteredName + "}") !== -1 || this.expression.indexOf("{" + filteredName + ".") !== -1;
   }
-  private isSuitableInActions(filteredName: string): boolean {
-    return this.actions.some(action => action.isSuitable(filteredName))
+  private isSuitableInActions(filteredName: string, logicTypeName: string): boolean {
+    return this.actions.some(action => action.isSuitable(filteredName, logicTypeName))
   }
   private renameQuestionInExpression(oldName: string, newName: string) {
     if (!this.expression) return;
