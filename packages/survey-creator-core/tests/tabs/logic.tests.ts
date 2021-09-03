@@ -847,6 +847,50 @@ test("LogicItemEditorUI: filter by question and addNew", () => {
   expect(logic.questionFilter).toEqual("");
 });
 
+test("LogicItemEditorUI: filter by question and addNew", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+      { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  logic.questionFilter = "q4";
+  expect(itemsQuestion.rowCount).toEqual(1);
+
+  logic.addNewUI();
+  expect(itemsQuestion.rowCount).toEqual(2);
+  expect(logic.items).toHaveLength(4);
+
+  logic.expressionEditor.text = "{q1} = 4";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility"
+  panel.getQuestionByName("elementSelector").value = "q4";
+
+  expect(logic.saveEditableItem()).toBeTruthy();
+  expect(itemsQuestion.rowCount).toEqual(2);
+  expect(logic.items).toHaveLength(4);
+  expect(logic.questionFilter).toEqual("q4");
+
+  logic.addNewUI();
+  expect(itemsQuestion.rowCount).toEqual(3);
+  expect(logic.items).toHaveLength(5);
+
+  logic.expressionEditor.text = "{q1} = 4";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility"
+  panel.getQuestionByName("elementSelector").value = "q3";
+
+  expect(logic.saveEditableItem()).toBeTruthy();
+  expect(itemsQuestion.rowCount).toEqual(5);
+  expect(logic.items).toHaveLength(5);
+  expect(logic.questionFilter).toEqual("");
+});
 test("LogicItemEditorUI: getUsedQuestions", () => {
   const survey = new SurveyModel({
     elements: [
@@ -902,6 +946,7 @@ test("LogicItem getQuestionNames", () => {
           { type: "text", name: "q1" },
           { type: "text", name: "q2", visibleIf: "{q1} = 1" },
           { type: "text", name: "q3" },
+          { type: "text", name: "q4" },
         ],
       },
     ],
@@ -909,8 +954,14 @@ test("LogicItem getQuestionNames", () => {
       {
         type: "skip",
         expression: "{q1} = 1",
-        gotoName: "q2",
+        gotoName: "q4",
       },
+      {
+        type: "copyvalue",
+        expression: "{q1} = 1",
+        setToName: "q2",
+        fromName: "q4"
+      }
     ],
   })
   const logic = new SurveyLogic(survey);
@@ -918,9 +969,10 @@ test("LogicItem getQuestionNames", () => {
   expect(logic.items).toHaveLength(1)
   let item = logic.items[0];
 
-  expect(item.getQuestionNames()).toHaveLength(2);
+  expect(item.getQuestionNames()).toHaveLength(3);
   expect(item.getQuestionNames()[0]).toEqual("q1");
   expect(item.getQuestionNames()[1]).toEqual("q2");
+  expect(item.getQuestionNames()[2]).toEqual("q4");
 });
 
 test("LogicAction isSuitable", () => {
@@ -938,11 +990,17 @@ test("LogicAction isSuitable", () => {
       {
         type: "skip",
         expression: "{q1} = 1",
-        gotoName: "q2",
+        gotoName: "q3",
       },
     ],
   })
   const logic = new SurveyLogic(survey);
+  const action = logic.items[0].actions[1];
+  expect(action.logicTypeName).toEqual("trigger_skip");
+  expect(action.isSuitable("q1")).toBeFalsy();
+  expect(action.isSuitable("q2")).toBeFalsy();
+  expect(action.isSuitable("q3")).toBeTruthy();
+
   const action1 = new SurveyLogicAction(logic.getTypeByName("question_visibility"), survey.getQuestionByName("q1"), survey);
   expect(action1.isSuitable("q1")).toBeTruthy();
   expect(action1.isSuitable("q2")).toBeFalsy();

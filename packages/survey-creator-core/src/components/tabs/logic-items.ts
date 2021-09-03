@@ -77,19 +77,31 @@ export class SurveyLogicAction {
     return editorLocalization.getString(name);
   }
   public isSuitable(questionName: string): boolean {
-    return this.elementName === questionName || this.elementName.indexOf(questionName + ".") === 0;
+    let res = this.elementName === questionName || this.elementName.indexOf(questionName + ".") === 0;
+    if (!res) {
+      res = this.questionNamesValues.filter(question => { return question === questionName || question.indexOf(questionName + ".") === 0; }).length > 0;
+    }
+    return res;
   }
   public addQuestionNames(names: string[]) {
-    if (!!this.elementName) {
+    if (!!this.elementName && names.indexOf(this.elementName) === -1) {
       names.push(this.elementName);
     }
+    this.questionNamesValues.forEach(name => {
+      if (!!name && names.indexOf(name) === -1) {
+        names.push(name)
+      }
+    })
   }
   private get questionNames(): Array<string> {
     if (!this.logicType || !this.logicType.questionNames) return [];
     return this.logicType.questionNames;
   }
   private get elementName(): string {
-    return !!this.element && (<any>this.element).name || ""
+    return !!this.element && (<any>this.element).name || "";
+  }
+  private get questionNamesValues(): Array<string> {
+    return this.questionNames.map(name => this.element[name]);
   }
 }
 
@@ -226,7 +238,10 @@ export class SurveyLogicItem {
   }
   private getQuestionNamesFromExpression(names: string[]) {
     const conditionRunner = new ConditionRunner(this.expression);
-    conditionRunner.getVariables().forEach(item => names.push(item));
+    conditionRunner.getVariables().forEach(item => {
+      if (names.indexOf(item) === -1)
+        names.push(item)
+    });
   }
   private getQuestionNamesFromActions(names: string[]) {
     this.actions.forEach(action => action.addQuestionNames(names))
