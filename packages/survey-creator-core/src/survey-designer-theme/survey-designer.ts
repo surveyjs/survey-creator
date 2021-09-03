@@ -26,7 +26,7 @@ export var surveyDesignerCss = {
     titleOnExpand: "sd-panel__title--expanded",
     titleOnError: "sd-panel__title--error",
     description: "sd-description sd-panel__description",
-    container: "sd-element sd-panel sd-row__panel",
+    container: "sd-element-with-frame sd-panel sd-row__panel",
     content: "sd-panel__content",
     icon: "sd-panel__icon",
     iconExpanded: "sd-panel__icon--expanded",
@@ -66,8 +66,8 @@ export var surveyDesignerCss = {
   pageDescription: "sd-description sd-page__description",
   row: "sd-row sd-clearfix",
   question: {
-    mainRoot: "sd-element sd-question sd-row__question",
-    flowRoot: "sd-element sd-question sd-row__question sd-row__question--flow",
+    mainRoot: "sd-element-with-frame sd-question sd-row__question",
+    flowRoot: "sd-element-with-frame sd-question sd-row__question sd-row__question--flow",
     asCell: "sd-table__cell",
     header: "sd-question__header",
     headerLeft: "sd-question__header--location--left",
@@ -136,7 +136,7 @@ export var surveyDesignerCss = {
     column: "sd-selectbase__column"
   },
   boolean: {
-    mainRoot: "sd-question sd-row__question sd-question--boolean",
+    mainRoot: "sd-element-with-frame sd-question sd-row__question sd-question--boolean",
     root: "",
     item: "sd-boolean",
     control: "sd-boolean__control sd-visuallyhidden",
@@ -197,7 +197,7 @@ export var surveyDesignerCss = {
     other: "sd-comment sd-question__other"
   },
   matrix: {
-    mainRoot: "sd-question sd-row__question sd-scrollable",
+    mainRoot: "sd-element-with-frame sd-question sd-row__question sd-scrollable",
     tableWrapper: "sd-matrix",
     root: "sd-table",
     rowError: "sd-matrix__row--error",
@@ -215,13 +215,13 @@ export var surveyDesignerCss = {
     cellTextDisabled: "sd-matrix__text--disabled"
   },
   matrixdropdown: {
-    mainRoot: "sd-question sd-row__question sd-scrollable",
+    mainRoot: "sd-element-with-frame sd-question sd-row__question sd-scrollable",
     root: "sd-table",
     cell: "sd-table__cell",
     headerCell: "sd-table__cell sd-table__cell--header"
   },
   matrixdynamic: {
-    mainRoot: "sd-question sd-row__question sd-scrollable",
+    mainRoot: "sd-element-with-frame sd-question sd-row__question sd-scrollable",
     root: "sd-table sd-matrixdynamic",
     cell: "sd-table__cell",
     headerCell: "sd-table__cell sd-table__cell--header",
