@@ -10,6 +10,15 @@
   background: $background-dim;
 }
 
+.svc-full-container {
+  height: 100%;
+  width: 100%;
+}
+
+.svc-flex-row__element--growing {
+  flex: 1;
+}
+
 .svc-flex-column {
   display: flex;
   flex-direction: column;
