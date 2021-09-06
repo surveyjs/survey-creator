@@ -24,7 +24,9 @@
         </div>
       </div>    
     </div>
-    <svc-property-panel data-bind="visible: creator.activeTab === 'designer'" params="model: creator" class="svc-flex-column svc-properties-wrapper"></svc-property-panel>
+    <div data-bind="visible: creator.activeTab === 'designer'">
+      <svc-property-panel params="model: creator" class="svc-flex-column svc-properties-wrapper"></svc-property-panel>
+    </div>
   </div>
   <!-- ko ifnot: creator.haveCommercialLicense -->
   <div class="svc-creator__banner">
