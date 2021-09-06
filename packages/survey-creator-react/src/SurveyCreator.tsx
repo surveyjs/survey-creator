@@ -74,23 +74,30 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     //AM: width unrecognized by react
     return (
       <div className="svc-creator">
-        <div className="svc-creator__area svc-flex-column">
-          <div className="svc-top-bar">
-            {(creator.showTabs ? <TabbedMenuComponent
-              model={creator.tabbedMenu}
-            ></TabbedMenuComponent> : null)}
-            {(creator.showToolbar ? <SurveyActionBar model={creator.toolbar}></SurveyActionBar> : null)}
-          </div>
-          <div className="svc-creator__content-wrapper svc-flex-row">
-            <div className="svc-creator__content-holder svc-flex-column">
-              {this.renderActiveTab()}
+        <div className="svc-full-container svc-creator__area svc-flex-column">
+          <div className="svc-flex-row svc-full-container">
+            <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
+              <div className="svc-top-bar">
+                {(creator.showTabs ? <TabbedMenuComponent
+                  model={creator.tabbedMenu}
+                ></TabbedMenuComponent> : null)}
+                {(creator.showToolbar ? <SurveyActionBar model={creator.toolbar}></SurveyActionBar> : null)}
+              </div>
+              <div className="svc-creator__content-wrapper svc-flex-row">
+                <div className="svc-creator__content-holder svc-flex-column">
+                  {this.renderActiveTab()}
+                </div>
+              </div>
             </div>
+            {ReactElementFactory.Instance.createElement("svc-property-grid", {
+              model: this.creator
+            })}
           </div>
-          {licenseBanner}
-          <NotifierComponent
-            creator={creator}
-            notifier={creator.notifier}
-          ></NotifierComponent>
+            {licenseBanner}
+            <NotifierComponent
+              creator={creator}
+              notifier={creator.notifier}
+            ></NotifierComponent>
         </div>
       </div>
     );
