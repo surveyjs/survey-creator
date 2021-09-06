@@ -5,5 +5,8 @@
   white-space: nowrap;
   overflow: hidden;
   align-items: center;
-  width: 70%;
+}
+.svc-tabbed-menu-wrapper {
+  flex: 1 1 auto;
+  overflow: hidden;
 }

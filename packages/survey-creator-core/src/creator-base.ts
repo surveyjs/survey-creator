@@ -11,6 +11,7 @@ import {
   propertyArray,
   IElement,
   Serializer,
+  ActionContainer,
   AdaptiveActionContainer,
   IAction,
   Action,
@@ -74,7 +75,7 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
 export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem> {
   constructor() {
     super();
-    this.dotsItemPopupModel.horizontalPosition = "right";
+    this.dotsItemPopupModel.horizontalPosition = "center";
   }
 }
 
@@ -129,7 +130,7 @@ export class CreatorBase<T extends SurveyModel>
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
-  private toolbarValue: AdaptiveActionContainer;
+  private toolbarValue: ActionContainer;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -145,7 +146,7 @@ export class CreatorBase<T extends SurveyModel>
   public get toolbarItems(): Array<Action> {
     return this.toolbarValue.actions;
   }
-  public get toolbar(): AdaptiveActionContainer {
+  public get toolbar(): ActionContainer {
     return this.toolbarValue;
   }
   public dragDropSurveyElements: DragDropSurveyElements;
@@ -836,7 +837,7 @@ export class CreatorBase<T extends SurveyModel>
         "Creator constructor has one parameter, as creator options, in V2."
       );
     }
-    this.toolbarValue = new AdaptiveActionContainer();
+    this.toolbarValue = new ActionContainer();
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.setOptions(this.options);
