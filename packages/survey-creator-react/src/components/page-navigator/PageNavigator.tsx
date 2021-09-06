@@ -42,10 +42,13 @@ export class SurveyPageNavigator extends SurveyElementBase<
     if (!this.model.visible) {
       return null;
     }
+    let className = "svc-page-navigator__selector";
+    if (this.model.isPopupOpened)
+      className += " svc-page-navigator__selector--opened";
     return (
       <div className="svc-page-navigator">
         <div
-          className="svc-page-navigator__selector"
+          className={className}
           onClick={() => this.model.togglePageSelector()}
           title={"text"}
         >
