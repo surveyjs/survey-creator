@@ -52,7 +52,8 @@ export class MatrixCellWrapperViewModel extends Base {
         column.fromJSON(questionJSON);
         model.question.parentQuestion.onColumnCellTypeChanged(column);
         return true;
-      }
+      },
+      undefined, undefined, model.question.name
     );
   }
   get context() {
