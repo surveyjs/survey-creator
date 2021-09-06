@@ -94,7 +94,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     //this.hideExpressionHeader = options && options["hideExpressionHeader"];
     this.readOnly = this.optionsReadOnly;
     this.update();
-    this.koAfterRender = function () {};
+    this.koAfterRender = function () { };
   }
   dispose() {
     super.dispose();
@@ -114,15 +114,15 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   /**
    * There are 3 modes: view, new, edit
    */
-   public get mode(): string { return this.modeValue;}
-   public set mode(val: string) {
-     if(this.modeValue === val) return;
-     const oldValue = this.mode;
-     this.modeValue = val;
-     this.errorText = "";
-     if (val == "view" && (oldValue == "edit" || oldValue == "new")) {
-       this.onEndEditing();
-     }
+  public get mode(): string { return this.modeValue; }
+  public set mode(val: string) {
+    if (this.modeValue === val) return;
+    const oldValue = this.mode;
+    this.modeValue = val;
+    this.errorText = "";
+    if (val == "view" && (oldValue == "edit" || oldValue == "new")) {
+      this.onEndEditing();
+    }
   }
   public getLocString(name: string) {
     return editorLocalization.getString(name);
@@ -164,7 +164,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     if (hasInList) {
       this.items.push(this.editableItem);
     }
-    const isNew = !hasInList ||this.editableItem.isNew;
+    const isNew = !hasInList || this.editableItem.isNew;
     this.editableItem.isNew = false;
     this.onItemChanged(this.editableItem, isNew ? "new" : "modify");
     !!this.options && this.options.stopUndoRedoTransaction();
@@ -178,7 +178,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     }
     return res;
   }
-  protected onEditableItemApply() {}
+  protected onEditableItemApply() { }
   protected onItemChanged(item: SurveyLogicItem, changeType: string) {
     if (!!this.onChangedCallback) {
       this.onChangedCallback(item, changeType);
@@ -204,9 +204,44 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     };
     this.onLogicItemValidation.fire(this, options);
     this.errorText = options.error;
-    if(!!this.errorText && !!this.survey.creator)
+    if (!!this.errorText && !!this.survey.creator)
       this.survey.creator.notify(this.errorText, "error");
     return !!this.errorText;
+  }
+  public getUsedQuestions(): Question[] {
+    const names: { [key: string]: Question } = {};
+    this.items.forEach(item => {
+      item.getQuestionNames().forEach(name => {
+        if (!names[name]) {
+          names[name] = this.survey.getQuestionByName(name);
+        }
+      })
+    })
+    const res: Question[] = [];
+    Object.keys(names).forEach(item => {
+      if (!!names[item]) {
+        res.push(names[item])
+      }
+    })
+    return res;
+  }
+  public getUsedActionTypes(): SurveyLogicType[] {
+    const types: { [key: string]: SurveyLogicType } = {};
+    this.items.forEach(item => {
+      item.getActionTypes().forEach(name => {
+        if (!types[name]) {
+          types[name] = this.logicTypes.filter(logicType => logicType.name == name)[0];
+        }
+      })
+    })
+
+    const res: SurveyLogicType[] = [];
+    Object.keys(types).forEach(item => {
+      if (!!types[item]) {
+        res.push(types[item])
+      }
+    })
+    return res;
   }
   protected hasErrorInUI(): boolean {
     return false;
@@ -247,9 +282,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   private editItemCore(item: SurveyLogicItem) {
     this.editableItemValue = item;
     this.onStartEditing();
-    this.mode = item.isNew ? "new": "edit";
+    this.mode = item.isNew ? "new" : "edit";
   }
-  protected onStartEditing() {}
+  protected onStartEditing() { }
   protected onEndEditing() {
     this.editableItemValue = null;
   }
