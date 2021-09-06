@@ -126,6 +126,7 @@ export var enStrings = {
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
+    translationPlaceHolder: "Translation...",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
