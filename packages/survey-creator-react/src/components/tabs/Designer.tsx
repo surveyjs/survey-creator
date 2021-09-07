@@ -94,9 +94,6 @@ export class TabDesignerComponent extends SurveyElementBase<
           creator={this.creator}
           pages={this.creator.pagesController.pages}
         ></SurveyPageNavigator>
-        {ReactElementFactory.Instance.createElement("svc-property-grid", {
-          model: this.creator
-        })}
       </React.Fragment>
     );
   }

@@ -1,24 +1,31 @@
-<div class="svc-creator__area svc-flex-column">
-  <div class="svc-top-bar">
-    <!-- ko if: creator.showTabs -->
-    <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
-    <!-- /ko -->
-    <!-- /ko -->
-    <!-- ko if: creator.showToolbar -->
-    <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
-    <!-- /ko -->
-    <!-- /ko -->
-  </div>
-  <div class="svc-creator__content-wrapper svc-flex-row">
-    <div class="svc-creator__content-holder svc-flex-column">
-      <!-- ko foreach: creator.tabs -->
-      <!-- ko if: $parent.creator.viewType == id && ($data.visible === undefined || $data.visible) -->
-      <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv-' + id }">
-        <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
+<div class="svc-full-container svc-creator__area svc-flex-column">
+  <div class="svc-flex-row svc-full-container">
+    <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
+      <div class="svc-top-bar">
+        <!-- ko if: creator.showTabs -->
+        <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: creator.showToolbar -->
+        <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
+        <!-- /ko -->
         <!-- /ko -->
       </div>
-      <!-- /ko -->
-      <!-- /ko -->
+      <div class="svc-creator__content-wrapper svc-flex-row">
+        <div class="svc-creator__content-holder svc-flex-column">
+          <!-- ko foreach: creator.tabs -->
+          <!-- ko if: $parent.creator.viewType == id && ($data.visible === undefined || $data.visible) -->
+          <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv-' + id }">
+            <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
+            <!-- /ko -->
+          </div>
+          <!-- /ko -->
+          <!-- /ko -->
+        </div>
+      </div>    
+    </div>
+    <div data-bind="visible: creator.activeTab === 'designer'">
+      <svc-property-panel params="model: creator" class="svc-flex-column svc-properties-wrapper"></svc-property-panel>
     </div>
   </div>
   <!-- ko ifnot: creator.haveCommercialLicense -->
