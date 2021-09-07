@@ -183,6 +183,7 @@ export var surveyDesignerCss = {
     materialDecorator: "sd-item__decorator sd-radio__decorator"
   },
   imagepicker: {
+    mainRoot: "sd-element-with-frame sd-question sd-row__question sd-scrollable",
     root: "sd-imagepicker",
     item: "sd-imagepicker__item",
     itemInline: "sd-imagepicker__item--inline",
