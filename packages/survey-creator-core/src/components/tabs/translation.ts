@@ -484,6 +484,7 @@ export class Translation extends Base implements ITranslationLocales {
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
   private chooseLanguagePopupModel: PopupModel;
+  private placeHolderText = editorLocalization.getString("ed.translationPlaceHolder");
 
   constructor(
     survey: SurveyModel,
@@ -645,6 +646,7 @@ export class Translation extends Base implements ITranslationLocales {
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
       if(options.cell.question instanceof QuestionCommentModel){
         options.cell.question.rows = 1;
+        options.cell.question.placeHolder = this.placeHolderText;
       }
     })
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {

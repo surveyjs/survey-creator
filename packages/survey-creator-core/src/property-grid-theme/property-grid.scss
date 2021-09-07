@@ -14,6 +14,9 @@
 }
 
 .sv-popup--modal {
+  &.sv-property-editor .sv-popup__container {
+    background-color: $background-for-editors;
+  }
   .sv-popup__footer {
     padding-bottom: 2px;
   }
