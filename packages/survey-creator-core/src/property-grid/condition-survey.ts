@@ -550,6 +550,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     this.addValuesIntoConditionQuestions(this.survey.calculatedValues, res);
     this.addValuesIntoConditionQuestions(this.survey.getVariableNames(), res);
+    SurveyHelper.sortItems(res);
     return res;
   }
   private addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>) {

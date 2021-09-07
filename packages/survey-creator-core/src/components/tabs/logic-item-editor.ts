@@ -25,6 +25,7 @@ import {
 } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
 import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
+import { SurveyHelper } from "../../survey-helper";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)
@@ -507,9 +508,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       }
       res.push(itemValue);
     }
-    res.sort(function (a, b) {
-      return a.text.localeCompare(b.text);
-    });
+    SurveyHelper.sortItems(res);
     return res;
   }
   private isElementInInitialSelection(

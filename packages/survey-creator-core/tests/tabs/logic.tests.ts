@@ -86,6 +86,33 @@ test("LogicItemEditor: build panels and elementSelector", () => {
   expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 1");
   expect(survey.getQuestionByName("q4").visibleIf).toEqual("{q1} = 1");
 });
+test("LogicItemEditor: question selector order", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "question 1", type: "text" },
+      { name: "question 3", type: "text" },
+      { name: "question 11", type: "text", visibleIf: "{question 3} = 1" },
+      { name: "question 2", type: "text" },
+      { name: "question 10", type: "text" },
+    ]
+  });
+  const logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  const editor = new LogicItemEditor(logic.items[0]);
+  expect(editor.panels).toHaveLength(1);
+  const qSelector = <QuestionDropdownModel>(
+    editor.panels[0].getQuestionByName("elementSelector")
+  );
+  expect(qSelector).toBeTruthy();
+  const choices =  qSelector.choices;
+  expect(choices).toHaveLength(5)
+  expect(choices[0].text).toEqual("question 1");
+  expect(choices[1].text).toEqual("question 2");
+  expect(choices[2].text).toEqual("question 3");
+  expect(choices[3].text).toEqual("question 10");
+  expect(choices[4].text).toEqual("question 11");
+});
+
 test("LogicItemEditor: update a trigger", () => {
   var survey = new SurveyModel({
     elements: [
