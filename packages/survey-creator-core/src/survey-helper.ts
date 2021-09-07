@@ -292,6 +292,7 @@ export class SurveyHelper {
       let index = 0;
       while(index < aVal.length && index < bVal.length && aVal[index] === bVal[index])  index++;
       if(index < aVal.length && index < bVal.length) {
+        while(index > 0 && (aVal[index] >= '0' && aVal[index] <= '9')) index --;
         const aDiv = aVal.substr(index);
         const bDiv = bVal.substr(index);
         if(Helpers.isNumber(aDiv) && Helpers.isNumber(bDiv)) {
