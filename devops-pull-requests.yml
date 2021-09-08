@@ -8,7 +8,7 @@ trigger:
       - v*.*.*
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'Ubuntu-18.04'
 
 steps:
 - checkout: self
@@ -38,17 +38,17 @@ steps:
     TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
     OverWrite: true
 
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-    npm install
-  displayName: 'Npm install survey-creator'
-
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-knockout'
     Contents: '**'
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
     OverWrite: true
+
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm install
+  displayName: 'Npm install survey-creator'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
@@ -73,7 +73,50 @@ steps:
     npm run remove-package-lock
   displayName: 'Npm install survey-creator-react'
 
+# npm run release with version
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/'
+    Contents: 'version.txt'
+    TargetFolder: '$(Build.SourcesDirectory)/'
+    OverWrite: true
+  displayName: 'Copy build artifact - SurveyJSVersion File'
+
+- powershell: |
+    $version = Get-Content $(Build.SourcesDirectory)/version.txt
+    Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+  displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
+
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm run release -- --release-as $(SurveyJSVersion)
+  displayName: 'Release specific version survey-creator'
+#####################################################
+
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'specific'
+    project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+    pipeline: '42'
+    specificBuildWithTriggering: true
+    buildVersionToDownload: 'latest'
+    downloadType: 'single'
+    artifactName: 'SurveyJSWidgetsBuild'
+    downloadPath: '$(System.ArtifactsDirectory)'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSWidgetsBuild/packages/survey-widgets'
+    Contents: '**'
+    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/surveyjs-widgets'
+    OverWrite: true
+
 # Creator CORE
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    npm run release
+  displayName: 'Release specific version survey-creator-core'
+
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
     npm run build
@@ -84,6 +127,10 @@ steps:
     npm run test
   displayName: 'Unit tests creator v2 core'
   
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
 
 # Creator REACT
 - script: |
@@ -150,6 +197,11 @@ steps:
   displayName: 'copy build from library for f-f tests'
 
 # EO copy for f-f tests
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    npm run release
+  displayName: 'Release specific version survey-creator-react'
+
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm run build
@@ -165,8 +217,16 @@ steps:
     npm run testcafe:ci
   displayName: 'Functional tests creator v2 react'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react
 
 # Creator KNOCKOUT
+- powershell: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    npm run release
+  displayName: 'Release specific version survey-creator-knockout'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
@@ -182,6 +242,11 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run testcafe:ci
   displayName: 'Functional tests creator v2 knockout'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-knockout
 
 
 # Creator V1
@@ -199,3 +264,16 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run testcafe_ci
   displayName: 'Functional tests'
+
+- script: |
+    mkdir $(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm run doc_gen
+  displayName: 'Generate docs'
+
+
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/build'
+    targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorBuild/build
