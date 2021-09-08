@@ -67,8 +67,15 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       result += " svc-question__content--empty";
     }
 
+    if (this.surveyElement.isDragOverMe) {
+      result += " svc-question__content--drag-overred";
+    } else {
+      result = result.replace(" svc-question__content--drag-overred", "");
+    }
+
     return result;
   }
+  
   dispose() {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged(
       "isRequired",
