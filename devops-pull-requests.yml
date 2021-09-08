@@ -73,24 +73,6 @@ steps:
     npm run remove-package-lock
   displayName: 'Npm install survey-creator-react'
 
-- task: DownloadBuildArtifacts@0
-  inputs:
-    buildType: 'specific'
-    project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
-    pipeline: '42'
-    specificBuildWithTriggering: true
-    buildVersionToDownload: 'latest'
-    downloadType: 'single'
-    artifactName: 'SurveyJSWidgetsBuild'
-    downloadPath: '$(System.ArtifactsDirectory)'
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSWidgetsBuild/packages/survey-widgets'
-    Contents: '**'
-    TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/surveyjs-widgets'
-    OverWrite: true
-
 # Creator CORE
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
