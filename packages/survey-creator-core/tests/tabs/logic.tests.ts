@@ -1229,4 +1229,5 @@ test("LogicAction isSuitableByLogicType", () => {
   const action1 = new SurveyLogicAction(logic.getTypeByName("question_visibility"), survey.getQuestionByName("q1"), survey);
   expect(action1.isSuitableByLogicType("question_visibility")).toBeTruthy();
   expect(action1.isSuitableByLogicType("trigger_skip")).toBeFalsy();
+  expect(action1.isSuitableByLogicType("trigger_skip")).toBeFalsy();
 });
