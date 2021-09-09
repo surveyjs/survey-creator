@@ -13,10 +13,11 @@ test("Test sortItems", (): any => {
     expect(items[7].text).toEqual("q 2000");
 });
 test("Test sortItems2", (): any => {
-    const items = [{text: "abc1"}, {text: "abc10"}, {text: "abc100"}, {text: "abc200"}];
+    const items = [{text: "abc1"}, {text: "abc10"}, {text: "abc100"}, {text: "abc200"}, {text: "abc20"}];
     SurveyHelper.sortItems(items);
     expect(items[0].text).toEqual("abc1");
     expect(items[1].text).toEqual("abc10");
-    expect(items[2].text).toEqual("abc100");
-    expect(items[3].text).toEqual("abc200");
+    expect(items[2].text).toEqual("abc20");
+    expect(items[3].text).toEqual("abc100");
+    expect(items[4].text).toEqual("abc200");
 });
