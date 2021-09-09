@@ -32,6 +32,7 @@ import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
 import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
 import { updateMatrixRemoveAction } from "../utils/actions";
+import { SurveyHelper } from "../survey-helper";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj) return false;
@@ -1312,10 +1313,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
       let value = this.getItemValue(<any>q);
       return { value: value, text: text };
     });
-    qItems.sort((el1, el2) => {
-      return el1.text.localeCompare(el2.text);
-    });
-
+    SurveyHelper.sortItems(qItems);
     return qItems;
   }
 

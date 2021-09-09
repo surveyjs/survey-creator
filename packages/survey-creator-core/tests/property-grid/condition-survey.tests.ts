@@ -1373,3 +1373,22 @@ test("modal mode and options.allowEditExpressionsInTextEditor", () => {
   var actions = editor.panel.getTitleActions();
   expect(actions).toHaveLength(2);
 });
+test("questionName choices", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "question 1", type: "text" },
+      { name: "question 11", type: "text" },
+      { name: "question 2", type: "text" },
+      { name: "question 10", type: "text" },
+    ]
+  });
+  const question = survey.getQuestionByName("q4");
+  const editor = new ConditionEditor(survey, question);
+  const panel = editor.panel.panels[0];
+  const choices =  panel.getQuestionByName("questionName").choices;
+  expect(choices).toHaveLength(4)
+  expect(choices[0].text).toEqual("question 1");
+  expect(choices[1].text).toEqual("question 2");
+  expect(choices[2].text).toEqual("question 10");
+  expect(choices[3].text).toEqual("question 11");
+});

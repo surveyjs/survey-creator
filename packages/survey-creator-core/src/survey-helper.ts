@@ -1,5 +1,6 @@
 import {
   Base,
+  Helpers,
   ItemValue,
   JsonObjectProperty,
   PageModel,
@@ -283,5 +284,24 @@ export class SurveyHelper {
     }
 
     return items;
+  }
+  public static sortItems(items: Array<any>) {
+    items.sort((a: any, b: any): number => {
+      const aVal = !!a.text ? a.text : "";
+      const bVal = !!b.text ? b.text : "";
+      let index = 0;
+      while(index < aVal.length && index < bVal.length && aVal[index] === bVal[index])  index++;
+      if(index < aVal.length && index < bVal.length) {
+        while(index > 0 && (aVal[index-1] >= '0' && aVal[index-1] <= '9')) index --;
+        const aDiv = aVal.substr(index);
+        const bDiv = bVal.substr(index);
+        if(Helpers.isNumber(aDiv) && Helpers.isNumber(bDiv)) {
+          const aNum = parseFloat(aDiv);
+          const bNum = parseFloat(bDiv);
+          return aNum === bNum ? 0 : (aNum < bNum ? -1: 1);
+        }
+      }
+      return aVal.localeCompare(bVal);
+    });
   }
 }

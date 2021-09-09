@@ -2,7 +2,6 @@ import {
   SurveyModel,
   Base,
   Serializer,
-  HtmlConditionItem,
   Event,
   ExpressionRunner,
   Question,
@@ -12,13 +11,11 @@ import {
   propertyArray,
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
-import { ConditionEditor } from "../../property-grid/condition-survey";
 import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
   settings,
 } from "../../settings";
-import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
 import {
   ISurveyLogicItemOwner,
   SurveyLogicItem,
@@ -27,7 +24,6 @@ import {
 import {
   SurveyLogicTypes,
   SurveyLogicType,
-  getLogicString,
 } from "./logic-types";
 
 export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
