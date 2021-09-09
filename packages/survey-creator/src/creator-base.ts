@@ -778,7 +778,9 @@ export class CreatorBase<T extends { [index: string]: any }>
   public setModified(options: any = null) {}
 
   protected convertCurrentObject(obj: Survey.Question, className: string) {
+    this.startTransaction("Convert question to: " + className);
     var newQuestion = QuestionConverter.convertObject(obj, className);
+    this.stopTransation();
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -1228,4 +1230,8 @@ export class CreatorBase<T extends { [index: string]: any }>
   stopUndoRedoTransaction() {
     //TODO
   }
+  protected startTransaction(name: string) {
+
+  }
+  protected stopTransation() {}
 }

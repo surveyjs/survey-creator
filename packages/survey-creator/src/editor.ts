@@ -2297,6 +2297,13 @@ export class SurveyCreator
   stopUndoRedoTransaction() {
     this.undoRedoManager.stopTransaction();
   }
+  protected startTransaction(name: string) {
+    this.undoRedoManager.startTransaction(name);
+  }
+  protected stopTransation() {
+    this.undoRedoManager.stopTransaction();
+  }
+
   onAdornerRenderedCallback(
     question: Survey.Question,
     adorner: string,
