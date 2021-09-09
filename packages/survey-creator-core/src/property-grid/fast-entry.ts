@@ -73,7 +73,7 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
         {
           type: "comment",
           name: "question",
-          title: editorLocalization.getString("pe.fastEntry"),
+          titleLocation: "hidden",
           rows: 12
         }
       ]

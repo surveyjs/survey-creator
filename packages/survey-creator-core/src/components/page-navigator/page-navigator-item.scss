@@ -29,11 +29,10 @@ svc-page-navigator-item,
   .svc-page-navigator-item__dot {
     width: calcSize(1);
     height: calcSize(1);
-    right: calcSize(2);
-    right: 14px;
-    top: 12px;
+    right: calc(50% - 12px / 2);
+    top: calc(50% - 12px / 2);
     background: $background;
-    border: calcSize(0.5) solid $primary;
+    border: calcSize(0.25) solid $primary;
   }
 }
 
@@ -67,8 +66,8 @@ svc-page-navigator-item,
 .svc-page-navigator-item-content:not(.svc-page-navigator-item--disabled) {
   .svc-page-navigator-item__banner {
     .svc-page-navigator-item__dot {
-      width: 6px;
-      height: 6px;
+      width: calcSize(1);
+      height: calcSize(1);
       border: none;
       background: $primary;
     }

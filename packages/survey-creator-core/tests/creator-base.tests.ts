@@ -891,6 +891,40 @@ test("Test plug-ins JSON-Text in creator", (): any => {
   expect(designerPlugin.model).toBeTruthy();
   expect(textPlugin.model).toBeFalsy();
 });
+test("Test plug-ins JSON-Text in creator, autosave", (): any => {
+  const creator = new CreatorTester();
+  const json = {
+    pages: [
+      {
+        elements: [{type: "text", name: "q1"}]
+      }
+    ]
+  };
+  creator.JSON = json;
+  creator.isAutoSave = true;
+  let counter = 0;
+  let changedType;
+  creator.onModified.add((sender, options) => {
+    counter ++;
+    changedType = options.type;
+  });
+  expect(creator.viewType).toEqual("designer");
+  var textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  expect(textPlugin.model).toBeFalsy();
+  creator.makeNewViewActive("editor");
+  expect(textPlugin.model).toBeTruthy();
+  creator.makeNewViewActive("designer");
+  expect(counter).toEqual(0);
+  creator.makeNewViewActive("editor");
+  json.pages[0].elements[0].name = "question1";
+  textPlugin.model.text = JSON.stringify(json);
+  textPlugin.model.isJSONChanged = true;
+  creator.makeNewViewActive("designer");
+  expect(creator.survey.getAllQuestions()[0].name).toEqual("question1");
+  expect(counter).toEqual(1);
+  expect(changedType).toEqual("JSON_EDITOR");
+});
+
 test("Test plug-ins JSON-Ace in creator", (): any => {
   var oldFunc = TabJsonEditorAcePlugin.hasAceEditor;
   TabJsonEditorAcePlugin.hasAceEditor = (): boolean => {

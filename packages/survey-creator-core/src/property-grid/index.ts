@@ -347,7 +347,8 @@ export class PropertyGridTitleActionsCreator {
         return surveyPropertyEditor.apply();
       },
       undefined,
-      "sv-property-editor"
+      "sv-property-editor",
+      question.title
     );
   }
 

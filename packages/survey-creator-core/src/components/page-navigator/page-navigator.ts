@@ -1,16 +1,6 @@
 import { CreatorBase } from "../../creator-base";
 import { PagesController } from "../../pages-controller";
-import {
-  PageModel,
-  PopupModel,
-  ListModel,
-  Base,
-  propertyArray,
-  SurveyModel,
-  property,
-  IAction,
-  Action
-} from "survey-core";
+import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action } from "survey-core";
 
 import "./page-navigator.scss";
 import "./page-navigator-item.scss";
@@ -20,10 +10,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
   public pageListModel: ListModel;
   public popupModel: PopupModel;
   private pagesChangedFunc: (sender: PagesController, options: any) => any;
-  private currentPageChangedFunc: (
-    sender: PagesController,
-    options: any
-  ) => any;
+  private currentPageChangedFunc: (sender: PagesController, options: any) => any;
   private pageNameChangedFunc: (sender: PagesController, options: any) => any;
 
   constructor(private pagesController: PagesController) {
@@ -56,10 +43,10 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     );
     this.popupModel = new PopupModel("sv-list", { model: this.pageListModel });
     this.popupModel.onShow = () => {
-      this.pageListModel.selectedItem = this.getActionBarByPage(
-        this.pagesController.currentPage
-      );
+      this.pageListModel.selectedItem = this.getActionBarByPage(this.pagesController.currentPage);
+      this.isPopupOpened = true;
     };
+    this.popupModel.onHide = () => { this.isPopupOpened = false; };
     this.buildItems();
   }
   public dispose() {
@@ -73,6 +60,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
 
   @propertyArray() items: Array<IAction>;
   @property({ defaultValue: false }) visible: boolean;
+  @property({ defaultValue: false }) isPopupOpened: boolean;
   private getActionBarByPage(page: PageModel): IAction {
     for (var i = 0; i < this.items.length; i++) {
       if (this.items[i].data === page) return this.items[i];

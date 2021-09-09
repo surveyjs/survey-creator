@@ -143,6 +143,7 @@ test("Element Selector Bar Item", () => {
   expect(popupModel.isVisible).toBeFalsy();
 });
 test("settings.showNavigation", () => {
+  settings.propertyGrid.showNavigationButtons = true;
   var creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -171,5 +172,5 @@ test("settings.showNavigation", () => {
   })[0];
   expect(nextItem).toBeFalsy();
 
-  settings.propertyGrid.showNavigationButtons = true;
+  settings.propertyGrid.showNavigationButtons = false;
 });

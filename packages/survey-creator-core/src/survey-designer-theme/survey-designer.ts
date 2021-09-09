@@ -5,8 +5,8 @@ export var surveyDesignerCss = {
   body: "sd-body",
   bodyEmpty: "sd-body sd-body--empty",
   footer: "sd-footer sd-body__footer sd-clearfix",
-  title: "",
-  description: "",
+  title: "sd-title",
+  description: "sd-description",
   logo: "sd-logo",
   logoImage: "sd-logo__image",
   headerText: "sd-header__text",
@@ -183,6 +183,7 @@ export var surveyDesignerCss = {
     materialDecorator: "sd-item__decorator sd-radio__decorator"
   },
   imagepicker: {
+    mainRoot: "sd-element-with-frame sd-question sd-row__question sd-scrollable",
     root: "sd-imagepicker",
     item: "sd-imagepicker__item",
     itemInline: "sd-imagepicker__item--inline",

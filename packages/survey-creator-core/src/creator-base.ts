@@ -511,6 +511,7 @@ export class CreatorBase<T extends SurveyModel>
    * <br/> options.newElement: a new element. It is defined if a user drops question or panel from the toolbox
    * <br/>
    * <br/> options.type: "TRANSLATIONS_CHANGED"
+   * <br/> options.type: "JSON_EDITOR"
    */
   public onModified: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
