@@ -23,6 +23,9 @@ class SurveyCreatorTester extends SurveyCreator {
   public initSurveyOnRenderEx() {
     this.initSurveyOnRender();
   }
+  public convertQuestion(question: Survey.Question, newType: string) {
+    this.convertCurrentObject(question, newType);
+  }
 }
 
 QUnit.test("Set Text property", function (assert) {
@@ -1998,6 +2001,22 @@ QUnit.test(
       0,
       "We added two panels and then undo adding two panels"
     );
+  }
+);
+
+QUnit.test(
+  "question change type and undo-redo manager, Bug#1724",
+  function (assert) {
+    var creator = new SurveyCreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q1" }]};
+    creator.convertQuestion(creator.survey.getAllQuestions()[0], "comment");
+    assert.equal(creator.survey.getAllQuestions()[0].getType(), "comment", "We converted question");
+    creator.undoRedoManager.undo();
+    assert.equal(creator.survey.getAllQuestions().length, 1, "We have one question");
+    assert.equal(creator.survey.getAllQuestions()[0].getType(), "text", "It is text again");
+    creator.undoRedoManager.redo();
+    assert.equal(creator.survey.getAllQuestions().length, 1, "Still one question");
+    assert.equal(creator.survey.getAllQuestions()[0].getType(), "comment", "It is comment again");
   }
 );
 
