@@ -75,6 +75,10 @@ export var settings = {
 
   //TODO add maximumColumnCount
 };
+export interface ICollectionItemAllowOperations {
+  allowDelete: boolean;
+  allowEdit: boolean;
+}
 
 export interface ISurveyCreatorOptions {
   alwaySaveTextInPropertyEditors: boolean;
@@ -118,6 +122,13 @@ export interface ISurveyCreatorOptions {
     collection: Array<Base>,
     item: Base
   ): boolean;
+  onCollectionItemAllowingCallback(
+    obj: Base,
+    property: JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base,
+    options: ICollectionItemAllowOperations
+  ): void;
   onItemValueAddedCallback(
     obj: Base,
     propertyName: string,
@@ -220,6 +231,13 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): boolean {
     return true;
   }
+  onCollectionItemAllowingCallback(
+    obj: Base,
+    property: JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base,
+    options: ICollectionItemAllowOperations
+  ): void {}
   onItemValueAddedCallback(
     obj: Base,
     propertyName: string,

@@ -253,7 +253,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     matrix.onHasDetailPanelCallback = (
       row: MatrixDropdownRowModelBase
     ): boolean => {
-      return this.hasPropertiesInDetail;
+      return (<any>row).allowEditRow !== false && this.hasPropertiesInDetail; 
     };
     matrix.onCreateDetailPanelRenderedRowCallback = (
       renderedRow: QuestionMatrixDropdownRenderedRow
@@ -537,8 +537,8 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "surveypages";
   }
-  public onMatrixAllowRemoveRow(obj: Base, options: any): boolean {
-    var page = options.row.editingObj;
+  public onMatrixAllowRemoveRow(obj: Base, row: MatrixDynamicRowModel): boolean {
+    var page: any = row.editingObj;
     if (!page || !page.survey) {
       return;
     }

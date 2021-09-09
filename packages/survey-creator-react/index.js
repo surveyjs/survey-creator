@@ -149,6 +149,11 @@ SurveyReact.ReactElementFactory.Instance.registerElement(
 );
 
 const creator = new SurveyCreator.SurveyCreator(options);
+creator.onCollectionItemAllowOperations.add((sender, options) => {
+  if(options.propertyName !== "choices") return;
+  options.allowDelete = options.collection.indexOf(options.item) > 0;
+  options.allowEdit = options.collection.indexOf(options.item) > 0;
+});
 creator.JSON = json;
 window.creator = creator;
 

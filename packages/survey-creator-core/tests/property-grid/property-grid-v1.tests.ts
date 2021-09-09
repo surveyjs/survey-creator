@@ -1013,6 +1013,10 @@ test("SurveyNestedPropertyEditorItem koCanDeleteItem", () => {
     columnsQuestion.canRemoveRow(columnsQuestion.visibleRows[0])
   ).toBeTruthy();
   allowDeleteItem = false;
+  propertyGrid = new PropertyGridModelTester(question, options);
+  columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );  
   expect(
     columnsQuestion.canRemoveRow(columnsQuestion.visibleRows[0])
   ).toBeFalsy();
@@ -1097,6 +1101,10 @@ test("SurveyPropertyPagesEditor koCanDeleteItem + options.", () => {
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[1])).toBeTruthy();
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[0])).toBeFalsy();
   allowDeleteAll = true;
+  propertyGrid = new PropertyGridModelTester(survey, options);
+  pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[0])).toBeTruthy();
 });
 

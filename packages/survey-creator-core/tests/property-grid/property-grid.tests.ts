@@ -35,6 +35,7 @@ import {
 import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
+  ICollectionItemAllowOperations,
   settings
 } from "../../src/settings";
 
@@ -1088,6 +1089,46 @@ test("options.onCollectionItemDeletingCallback", () => {
   expect(pagesQuestion.canRemoveRow(rows[1])).toBeFalsy();
   expect(pagesQuestion.canRemoveRow(rows[2])).toBeTruthy();
 });
+test("options.onCollectionItemAllowingCallback", () => {
+  const options = new EmptySurveyCreatorOptions();
+  options.onCollectionItemAllowingCallback = (
+    obj: Base,
+    property: JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base, 
+    options: ICollectionItemAllowOperations
+  ): void => {
+    options.allowDelete = (<ItemValue>item).value % 2 == 1;
+    options.allowEdit = (<ItemValue>item).value > 2;
+  };
+  const question = new QuestionDropdownModel("q1");
+  for(let i = 0; i < 5; i ++) {
+    question.choices.push(new ItemValue(i + 1));  
+  }
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var editQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  var rows = editQuestion.visibleRows;
+  expect(editQuestion.canRemoveRow(rows[0])).toBeTruthy();
+  expect(editQuestion.canRemoveRow(rows[1])).toBeFalsy();
+  expect(editQuestion.canRemoveRow(rows[2])).toBeTruthy();
+  expect(editQuestion.canRemoveRow(rows[3])).toBeFalsy();
+  expect(editQuestion.canRemoveRow(rows[4])).toBeTruthy();
+
+  expect(rows[0].hasPanel).toBeFalsy();
+  expect(rows[1].hasPanel).toBeFalsy();
+  expect(rows[2].hasPanel).toBeTruthy();
+  expect(rows[3].hasPanel).toBeTruthy();
+  expect(rows[4].hasPanel).toBeTruthy();
+
+  expect(rows[0].cells[0].question.isReadOnly).toBeTruthy();
+  expect(rows[1].cells[0].question.isReadOnly).toBeTruthy();
+  expect(rows[2].cells[0].question.isReadOnly).toBeFalsy();
+  expect(rows[3].cells[0].question.isReadOnly).toBeFalsy();
+  expect(rows[4].cells[0].question.isReadOnly).toBeFalsy();
+});
+
 test("options.onCanDeleteItemCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onCanDeleteItemCallback = (
