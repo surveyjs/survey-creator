@@ -149,11 +149,6 @@ SurveyReact.ReactElementFactory.Instance.registerElement(
 );
 
 const creator = new SurveyCreator.SurveyCreator(options);
-creator.onCollectionItemAllowOperations.add((sender, options) => {
-  if(options.propertyName !== "choices") return;
-  options.allowDelete = options.collection.indexOf(options.item) > 0;
-  options.allowEdit = options.collection.indexOf(options.item) > 0;
-});
 creator.JSON = json;
 window.creator = creator;
 
@@ -186,22 +181,4 @@ creator.toolbarItems.push(
     }
   })
 );
-// creator.toolbox.changeCategories([
-//     {
-//         name: "panel",
-//         category: "Panels"
-//     }, {
-//         name: "paneldynamic",
-//         category: "Panels"
-//     }, {
-//         name: "matrix",
-//         category: "Matrix"
-//     }, {
-//         name: "matrixdropdown",
-//         category: "Matrix"
-//     }, {
-//         name: "matrixdynamic",
-//         category: "Matrix"
-//     }
-// ]);
 // creator.toolbox.isCompact = true;
