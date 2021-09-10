@@ -15,6 +15,7 @@ ko.components.register("select-items-editor", {
       var choices = ko.observableArray();
       ko.computed(() => { choices(params.question.choices); });
       var otherText = ko.observable(params.question.otherText);
+      var noneText = ko.observable(params.question.noneText);
       var sortableElement = componentInfo.element.parentElement.getElementsByClassName(
         "svda-select-items-collection"
       )[0];
@@ -69,6 +70,17 @@ ko.components.register("select-items-editor", {
           newValue = raiseChangingEvent(params.question, "hasOther", newValue);
           params.question.hasOther = newValue;
           raiseChangedEvent(params.question, "hasOther", newValue);
+        },
+        showNone: ko.computed(
+          () =>
+            params.editor.canShowObjectProperty(params.question, "hasNone") &&
+            params.question.hasNone !== true
+        ),
+        addNone: () => {
+          var newValue = !params.question.hasNone;
+          newValue = raiseChangingEvent(params.question, "hasNone", newValue);
+          params.question.hasNone = newValue;
+          raiseChangedEvent(params.question, "hasNone", newValue);
         },
         addItem: createAddItemHandler(
           params.question,
@@ -130,6 +142,10 @@ ko.components.register("select-items-editor", {
         otherText: otherText,
         otherValueChanged: (itemValue, propertyName, newValue) => {
           otherText(params.question.otherText);
+        },
+        noneText: noneText,
+        noneValueChanged: (itemValue, propertyName, newValue) => {
+          noneText(params.question.noneText);
         }
       };
     }
