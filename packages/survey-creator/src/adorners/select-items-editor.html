@@ -15,6 +15,16 @@
       </div>
       <!-- /ko -->
     </div>
+    <!-- ko if: question.hasNone -->
+    <div class="item_editable">
+      <span data-bind="text: noneText"></span>
+      <span>
+        <item-editor
+          params='name: \"noneText\", target: question, model: question, valueChanged: noneValueChanged, item: question.noneItem, question: question, editor: editor'>
+        </item-editor>
+      </span>
+    </div>
+    <!-- /ko -->
     <!-- ko if: question.hasOther -->
     <div class="item_editable">
       <span data-bind="text: otherText"></span>
@@ -33,6 +43,12 @@
     <div class="sv_technical svda-add-new-item svda-add-custom-item" tabindex="0"
       data-bind="key2click, click: addOther, attr: { title: getLocString('pe.addOther') }">
       <span data-bind="text: getLocString('pe.addOther')"></span>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: showOther -->
+    <div class="sv_technical svda-add-new-item svda-add-custom-item" tabindex="0"
+      data-bind="key2click, click: addNone, attr: { title: getLocString('pe.addNone') }">
+      <span data-bind="text: getLocString('pe.addNone')"></span>
     </div>
     <!-- /ko -->
   </div>
