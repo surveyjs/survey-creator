@@ -26,6 +26,7 @@ import {
 import {
   EmptySurveyCreatorOptions,
   ISurveyCreatorOptions,
+  ICollectionItemAllowOperations,
   settings as cretorSettings
 } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
@@ -143,7 +144,7 @@ export interface IPropertyGridEditor {
   ) => void;
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
-  onMatrixAllowRemoveRow?: (obj: Base, options: any) => boolean;
+  onMatrixAllowRemoveRow?: (obj: Base, row: any) => boolean;
   onGetQuestionTitleActions?: (obj: Base, options: any) => void;
 }
 
@@ -221,11 +222,11 @@ export var PropertyGridEditorCollection = {
   onMatrixAllowRemoveRow(
     obj: Base,
     prop: JsonObjectProperty,
-    options: any
+    row: MatrixDynamicRowModel
   ): boolean {
     var res = this.getEditor(prop);
     if (!!res && !!res.onMatrixAllowRemoveRow) {
-      return res.onMatrixAllowRemoveRow(obj, options);
+      return res.onMatrixAllowRemoveRow(obj, row);
     }
     return true;
   },
@@ -731,7 +732,7 @@ export class PropertyGridModel {
       this.onMatrixCellValueChanged(options);
     });
     this.survey.onMatrixAllowRemoveRow.add((sender, options) => {
-      options.allow = this.onMatrixAllowRemoveRow(options);
+      options.allow = this.getMatrixAllowRemoveRow(options.question, options.row);
     });
     this.survey.onMatrixRowAdded.add((sender, options) => {
       this.onMatrixRowAdded(options);
@@ -876,7 +877,8 @@ export class PropertyGridModel {
     if (!obj) return;
     var prop = Serializer.findProperty(obj.getType(), options.columnName);
     if (!prop) return;
-    options.cellQuestion.readOnly = PropertyJSONGenerator.isPropertyReadOnly(
+    const allowEditRow = this.getMatrixAllowEditRow(options.question, options.row)
+    options.cellQuestion.readOnly = !allowEditRow || PropertyJSONGenerator.isPropertyReadOnly(
       prop,
       this.options,
       obj,
@@ -938,28 +940,51 @@ export class PropertyGridModel {
     if (!rowObj) return;
     var prop = Serializer.findProperty(rowObj.getType(), options.columnName);
     this.options.onSurveyElementPropertyValueChanged(
-      //this.options.onPropertyValueChanged(
       <any>prop,
       options.row.editingObj,
       options.value
     );
   }
-  private onMatrixAllowRemoveRow(options: any): boolean {
+  private getMatrixAllowRemoveRow(question: Question, row: MatrixDynamicRowModel) : boolean {
+    if((<any>row).allowDeleteRow === undefined) {
+      this.calculateMatrixAllowOperations(question, row);
+    }
+    return (<any>row).allowDeleteRow;
+  }
+  private getMatrixAllowEditRow(question: Question, row: MatrixDynamicRowModel) : boolean {
+    if((<any>row).allowEditRow === undefined) {
+      this.calculateMatrixAllowOperations(question, row);
+    }
+    return (<any>row).allowEditRow;
+  }
+  private calculateMatrixAllowOperations(question: Question, row: MatrixDynamicRowModel) {
+    const rowOptions :ICollectionItemAllowOperations = {allowDelete: this.onMatrixAllowRemoveRow(question, row), allowEdit: true};
+    this.options.onCollectionItemAllowingCallback(<any>this.obj,
+      question.property,
+      question.value,
+      row.editingObj,
+      rowOptions
+    );
+
+    (<any>row).allowDeleteRow = rowOptions.allowDelete;
+    (<any>row).allowEditRow = rowOptions.allowEdit;
+  }
+  private onMatrixAllowRemoveRow(question: Question, row: MatrixDynamicRowModel): boolean {
     var res = PropertyGridEditorCollection.onMatrixAllowRemoveRow(
       this.obj,
-      options.question.property,
-      options
+      question.property,
+      row
     );
     res =
       this.options.onCollectionItemDeletingCallback(
         <any>this.obj,
-        options.question.property,
-        options.question.value,
-        options.row.editingObj
+        question.property,
+        question.value,
+        row.editingObj
       ) && res;
     return this.options.onCanDeleteItemCallback(
       <any>this.obj,
-      options.row.editingObj,
+      row.editingObj,
       res
     );
   }

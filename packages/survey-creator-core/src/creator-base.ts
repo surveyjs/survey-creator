@@ -19,7 +19,7 @@ import {
   ItemValue,
   QuestionSelectBase
 } from "survey-core";
-import { ISurveyCreatorOptions, settings } from "./settings";
+import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropSurveyElements, DragDropChoices } from "survey-core";
@@ -343,10 +343,12 @@ export class CreatorBase<T extends SurveyModel>
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * The event is called before rendering a delete button in the Property Grid or in Question Editor.
+   * Obsolete, please use onCollectionItemAllowOperations
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey Question
    * <br/> options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
    * <br/> options.canDelete a boolean value. It is true by default. Set it false to remove delete button from the Property Grid or in Question Editor
+   * @see onCollectionItemAllowOperations
    */
   public onCanDeleteItem: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
@@ -354,6 +356,7 @@ export class CreatorBase<T extends SurveyModel>
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * The event is called on deleting a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
+   * Obsolete, please use onCollectionItemAllowOperations
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object: Question, Panel, Page or Survey
    * <br/> options.property the collection property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
@@ -361,12 +364,29 @@ export class CreatorBase<T extends SurveyModel>
    * <br/> options.collection the editing collection where deleting item is located. It is can be columns in the matrices or choices in dropdown question and so on.
    * <br/> options.item the collection item that we are going to delete
    * <br/> options.allowDelete a boolean value. It is true by default. Set it false to abondome the element removing from the collection
+   * @see onCollectionItemAllowOperations
    */
   public onCollectionItemDeleting: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
+   * The event is called before rendering a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
+   * You can make detail/edit and remove buttons invsible and/or disable editing.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object: Question, Panel, Page or Survey
+   * <br/> options.property the collection property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
+   * <br/> options.propertyName the collection property name
+   * <br/> options.collection the editing collection where deleting item is located. It is can be columns in the matrices or choices in dropdown question and so on.
+   * <br/> options.item the collection item that we are going to delete
+   * <br/> options.allowDelete a boolean value. It is true by default. Set it false to abondome the element removing from the collection
+   * <br/> options.allowEdit a boolean value. It is true by default. Set it false to disable editing.
+   */
+   public onCollectionItemAllowOperations: Survey.Event<
+   (sender: CreatorBase<T>, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+ /**
    * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
    * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
    * <br/> sender the survey creator object that fires the event
@@ -2166,6 +2186,27 @@ export class CreatorBase<T extends SurveyModel>
     };
     this.onCollectionItemDeleting.fire(this, options);
     return options.allowDelete;
+  }
+  onCollectionItemAllowingCallback(
+    obj: Base,
+    property: Survey.JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base,
+    itemOptions: ICollectionItemAllowOperations
+  ): void {
+    if (this.onCollectionItemAllowOperations.isEmpty) return;
+    var options = {
+      obj: obj,
+      property: property,
+      propertyName: property.name,
+      collection: collection,
+      item: item,
+      allowEdit: itemOptions.allowEdit,
+      allowDelete: itemOptions.allowDelete
+    };
+    this.onCollectionItemAllowOperations.fire(this, options);
+    itemOptions.allowEdit = options.allowEdit;
+    itemOptions.allowDelete = options.allowDelete;
   }
   onItemValueAddedCallback(
     obj: Survey.Base,
