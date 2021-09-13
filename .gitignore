@@ -10,7 +10,6 @@ tmp/*
 !/tests/mock-loader.js
 _site/
 .sass-cache
-.vscode/
 docs/pmes.json
 docs/classes.json
 /dist/

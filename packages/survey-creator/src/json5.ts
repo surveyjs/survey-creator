@@ -50,23 +50,23 @@ export class SurveyJSON5 {
 
     return typeof reviver === "function"
       ? (function walk(holder, key) {
-          var k,
-            v,
-            value = holder[key];
-          if (value && typeof value === "object") {
-            for (k in value) {
-              if (Object.prototype.hasOwnProperty.call(value, k)) {
-                v = walk(value, k);
-                if (v !== undefined) {
-                  value[k] = v;
-                } else {
-                  delete value[k];
-                }
+        var k,
+          v,
+          value = holder[key];
+        if (value && typeof value === "object") {
+          for (k in value) {
+            if (Object.prototype.hasOwnProperty.call(value, k)) {
+              v = walk(value, k);
+              if (v !== undefined) {
+                value[k] = v;
+              } else {
+                delete value[k];
               }
             }
           }
-          return reviver.call(holder, key, value);
-        })({ "": result }, "")
+        }
+        return reviver.call(holder, key, value);
+      })({ "": result }, "")
       : result;
   }
   private error(m: string) {
@@ -660,7 +660,9 @@ export class SurveyJSON5 {
   // Copied from Crokford's implementation of JSON
   // See https://github.com/douglascrockford/JSON-js/blob/e39db4b7e6249f04a195e7dd0840e610cc9e941e/json2.js#L195
   // Begin
+  // eslint-disable-next-line
   private static cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+  // eslint-disable-next-line
   private static escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
   private static meta = {
     // table of character substitutions

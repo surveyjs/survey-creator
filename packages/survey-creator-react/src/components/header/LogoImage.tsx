@@ -28,8 +28,8 @@ export class LogoImageComponent extends SurveyElementBase<ILogoImageComponentPro
       content = <>
         <LogoImage data={this.props.data.survey}></LogoImage>
         {this.model.allowEdit ? <div className="svc-image-item-value-controls">
-          {attachKey2click(<SvgIcon className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" size={24} iconName={'icon-file'} onClick={() => this.model.chooseFile(this.model)}></SvgIcon>)}
-          {attachKey2click(<SvgIcon className="svc-image-item-value-controls__button svc-image-item-value-controls__remove" size={24} iconName={'icon-delete'} onClick={() => this.model.remove(this.model)}></SvgIcon>)}
+          {attachKey2click(<SvgIcon className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" size={24} iconName={"icon-file"} onClick={() => this.model.chooseFile(this.model)}></SvgIcon>)}
+          {attachKey2click(<SvgIcon className="svc-image-item-value-controls__button svc-image-item-value-controls__remove" size={24} iconName={"icon-delete"} onClick={() => this.model.remove(this.model)}></SvgIcon>)}
         </div> : null}
       </>;
     }

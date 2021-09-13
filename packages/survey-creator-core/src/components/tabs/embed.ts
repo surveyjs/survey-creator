@@ -57,7 +57,7 @@ export class EmbedModel extends Base {
         const window: string = show === "window" ? "Window" : "";
         switch (framework) {
           case "angular":
-            result += `@Component({\n    selector: "ng-app",\n    template: '<div id="surveyElement"></div>'\n})`;
+            result += "@Component({\n    selector: \"ng-app\",\n    template: '<div id=\"surveyElement\"></div>'\n})";
             result += `\nexport class AppComponent {\n    ngOnInit() {\n        var survey = new Survey.Model(surveyJSON);\n        survey.onComplete.add(sendDataToServer);\n        Survey.Survey${window}NG.render("surveyElement", { model: survey });\n    }\n}`;
             break;
           case "jquery":

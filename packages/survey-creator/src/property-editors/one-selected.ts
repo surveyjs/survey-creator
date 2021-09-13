@@ -32,7 +32,7 @@ export class PropertyEditorOneSelectedViewModel {
 
   public get selectedObjectEditor(): ko.Observable<
     SurveyElementEditorContentModel
-  > {
+    > {
     return this.model.selectedObjectEditor;
   }
 

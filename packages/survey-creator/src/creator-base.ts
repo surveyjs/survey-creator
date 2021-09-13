@@ -17,7 +17,7 @@ export interface ICreatorOptions {
  * Base class for Survey Creator.
  */
 export class CreatorBase<T extends { [index: string]: any }>
-  implements ISurveyCreatorOptions
+implements ISurveyCreatorOptions
 {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
@@ -251,7 +251,7 @@ export class CreatorBase<T extends { [index: string]: any }>
   /**
    * This callback is used internally for providing survey JSON text.
    */
-  public getSurveyJSONTextCallback: () => { text: string; isModified: boolean };
+  public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   /**
    * This callback is used internally for setting survey JSON text.
    */
@@ -573,8 +573,8 @@ export class CreatorBase<T extends { [index: string]: any }>
       typeof options.showEmbeddedSurveyTab !== "undefined"
         ? options.showEmbeddedSurveyTab
         : typeof options.showEmbededSurveyTab !== "undefined"
-        ? options.showEmbededSurveyTab
-        : false
+          ? options.showEmbededSurveyTab
+          : false
     );
     this.showTranslationTabValue(
       typeof options.showTranslationTab !== "undefined"

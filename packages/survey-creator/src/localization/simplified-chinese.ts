@@ -16,7 +16,7 @@ var simplifiedChineseTranslation = {
   },
   // strings for question types
   qt: {
-  default:
+    default:
     "默认",
     checkbox: "多项选择",
     comment: "多行文本",
@@ -287,7 +287,7 @@ var simplifiedChineseTranslation = {
     inherit: "继承",
     show: "显示",
     hide: "隐藏",
-  default:
+    default:
     "默认",
     initial: "初始化",
     random: "随机",
@@ -542,6 +542,5 @@ var simplifiedChineseTranslation = {
     }
   }
 };
-
 
 editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;

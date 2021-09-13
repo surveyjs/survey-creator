@@ -37,8 +37,8 @@ export var editorLocalization = {
     return !!loc
       ? localeNames[loc]
       : editorLocalization
-          .getString("ed.defaultLocale")
-          ["format"](localeNames[defaultLocale]);
+        .getString("ed.defaultLocale")
+        ["format"](localeNames[defaultLocale]);
   },
   getPropertyName: function (strName: string, defaultName: string = null) {
     var obj = this.getProperty(strName, defaultName);

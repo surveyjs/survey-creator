@@ -23,7 +23,7 @@ import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
 } from "./index";
-import {  updateMatrixRemoveAction} from "../utils/actions";
+import { updateMatrixRemoveAction } from "../utils/actions";
 
 class SurveyHelper {
   public static getNewColumnName(
@@ -72,7 +72,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     const showDetailAction: IAction = actions.filter(
       (item: IAction) => item.id === "show-detail"
     )[0];
-      updateMatrixRemoveAction(question, actions, row);
+    updateMatrixRemoveAction(question, actions, row);
     if (!!showDetailAction) {
       showDetailAction.component = "sv-action-bar-item";
       showDetailAction.iconName = this.getShowDetailActionIconName(row);
@@ -253,7 +253,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     matrix.onHasDetailPanelCallback = (
       row: MatrixDropdownRowModelBase
     ): boolean => {
-      return (<any>row).allowEditRow !== false && this.hasPropertiesInDetail; 
+      return (<any>row).allowEditRow !== false && this.hasPropertiesInDetail;
     };
     matrix.onCreateDetailPanelRenderedRowCallback = (
       renderedRow: QuestionMatrixDropdownRenderedRow

@@ -17,7 +17,7 @@ export class NotifierComponent extends SurveyElementBase<
   }
 
   get notifier() {
-      return this.props.notifier;
+    return this.props.notifier;
   }
 
   protected getStateElement(): Base {

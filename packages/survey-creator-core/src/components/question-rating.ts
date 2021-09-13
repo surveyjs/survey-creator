@@ -82,6 +82,7 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
         question.rateMax -= question.rateStep;
       } else {
         if (question.rateValues.length === 0) {
+          // eslint-disable-next-line no-self-assign
           question.rateValues = question.rateValues;
         }
         question.rateValues.splice(itemIndex, 1);

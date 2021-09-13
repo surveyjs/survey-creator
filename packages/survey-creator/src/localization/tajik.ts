@@ -124,7 +124,7 @@ export var tgStrings = {
         "Саволро намоён кардан, агар ифодаи мантиқӣ 'true' баргардонад. Вагарна онро нонамоён кардан.",
       question_enableDescription:
         "Саволро гирон кардан, агар ифодаи мантиқӣ 'true' баргардонад. Вагарна онро нонамоён кардан.",
-	  question_requireDescription:
+      question_requireDescription:
         "Савол ҳатмӣ мешавад, вақте ки ифодаи мантиқӣ 'true' баргардонад.",
       trigger_completeDescription:
         "Вақте, ки ифодаи мантиқӣ 'true' баргардонад, он вақт ӯ ҳамчун тамом шуда ҳисобида мешавад ва истифодабар саҳифаи 'Саҳифаи ташаккурӣ'-ро мебинад.",
@@ -218,9 +218,9 @@ export var tgStrings = {
     cellsEmptyRowsColumns: "Бояд ақалан як сатр ё сутун бошад",
 
     propertyIsEmpty: "Илтимос, қимматро ворид кунед",
-	  propertyNameIsNotUnique: "Лутфан як номи беҳамто ворид кунед",
+    propertyNameIsNotUnique: "Лутфан як номи беҳамто ворид кунед",
     listIsEmpty: "Ҳолати нав илова кунед",
-	  expressionIsEmpty: "Ибораи холӣ аст",
+    expressionIsEmpty: "Ибораи холӣ аст",
     value: "Қиммат",
     text: "Матн",
     rowid: "ID-и сатр",
@@ -232,13 +232,13 @@ export var tgStrings = {
     path: "Роҳ",
     valueName: "Номи нуқта",
     titleName: "Сарлавҳаи нуқта",
-	  titlePlaceholder: "Сарлавҳа ворид кунед",
+    titlePlaceholder: "Сарлавҳа ворид кунед",
     surveyTitlePlaceholder: "Сарлавҳаи пурсишро ворид кунед",
     pageTitlePlaceholder: "Сарлавҳаи саҳифаро ворид кунед",
     descriptionPlaceholder: "Тавсифро ворид кунед",
     surveyDescriptionPlaceholder: "Тавсифи пурсишро ворид кунед",
     pageDescriptionPlaceholder: "Тавсифи саҳифаро ворид кунед",
-  
+
     hasOther: "Нуқтаи 'Дигар' вуҷуд аст",
     otherText: "Манти нуқтаи 'Дигар'",
     hasNone: "Ягон нуқта вуҷуд надорад",
@@ -279,18 +279,18 @@ export var tgStrings = {
     optionsCaption: "Танзимотҳои имзо",
     DefaultValue: "Қиммати нобаён",
     cellsDefaultRow: "Матни нобаёни катак",
-  
+
     surveyEditorTitle: "Танзимоти саволнома",
     qEditorTitle: "Тағйир додани: {0}",
-  
+
     maxLength: "Шумораи максималӣ",
-	  buildExpression: "Сохтан",
+    buildExpression: "Сохтан",
     editExpression: "Таҳрир кунед",
     and: "ВА",
     or: "Ё",
     remove: "Ҷойивазкунӣ",
     addCondition: "шарт илова кунед",
-  
+
     //survey
     showTitle: "Нишон/пинҳон кардани сарлавҳа",
     locale: "Забон ба нобаён",
@@ -333,7 +333,7 @@ export var tgStrings = {
     isSinglePage: "Нишон додани ҳамаи элементҳо дар як саҳифа",
     HTML: "HTML",
     expression: "Ифода",
-  
+
     minValue: "Қиммати минималӣ",
     maxValue: "Қиммати максималӣ",
     mINLENGTH: "Дарозии минималӣ",
@@ -341,14 +341,14 @@ export var tgStrings = {
     minCount: "Шумораи минималӣ",
     maxCount: "Шумораи максималӣ",
     regex: "Ифодаи регулярӣ",
-  
+
     totalText: "Тексти умумӣ",
     totalType: "Намуди умумӣ",
     totalExpression: "Ифодаи умумӣ",
     totalDisplayStyle: "Услуби намоиши умумӣ",
     totalCurrency: "Асъори умумӣ",
     totalFormat: "Намуди умумӣ",
-	// Header  adorner
+    // Header  adorner
     logoPosition: "Ҷойгиршавии логотип",
     addLogo: "Иловаи логотип...",
     changeLogo: "Тағйир додани логотип...",
@@ -386,7 +386,7 @@ export var tgStrings = {
       triggers: "Триггерҳо",
       templateTitle: "Номи намуна",
       totals: "Натиҷаҳо",
-	    logic: "Мантиқ",
+      logic: "Мантиқ",
       layout: "Тарҳ",
       data: "Маълумот",
       validation: "Санҷед",
@@ -397,7 +397,7 @@ export var tgStrings = {
     },
     editProperty: "Тағйири хосияти '{0}'",
     items: "[Элементҳо: {0}]",
-  
+
     enterNewValue: "Илтимос, қимматро ворид кунед.",
     noquestions: "Дар саволнома ягон савол нест",
     createtrigger: "Илтимос, триггерро созед",
@@ -447,7 +447,7 @@ export var tgStrings = {
     top: "Аз боло",
     bottom: "Аз поён",
     topBottom: "Аз боло ва поён",
-    left:"Чап",
+    left: "Чап",
     color: "Ранг",
     date: "Сана",
     datetime: "Сана ва вақт",
@@ -519,7 +519,7 @@ export var tgStrings = {
     regexvalidator: "Ишораи регулярӣ",
     textvalidator: "Матн"
   },
-    triggers: {
+  triggers: {
     completetrigger: "Анҷом додани саволнома",
     setvaluetrigger: "Гузоштани қиммат",
     copyvaluetrigger: "Нусхабардорӣ кардани қиммат",

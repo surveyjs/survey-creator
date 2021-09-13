@@ -39,7 +39,7 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
     if(!!this.model.question) {
       controls = <div className="svc-matrix-cell__question-controls">
         {attachKey2click(<span className="svc-matrix-cell__question-controls-button" onClick={() => this.model.editQuestion(this.model)}>
-          <SvgIcon size={24} iconName={'icon-pencil'}></SvgIcon>
+          <SvgIcon size={24} iconName={"icon-pencil"}></SvgIcon>
         </span>)}
       </div>;
     }

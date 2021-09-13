@@ -2,20 +2,20 @@ import { SurveyModel } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 export class SurveyNavigation extends SurveyElementBase<any, any> {
-    componentDidMount() {
-      this.setHandler();
-    }
-    componentDidUpdate(prevProps: any, prevState: any) {
-      this.setHandler();
-    }
-    private setHandler() {
-      if (
-        !this.survey ||
+  componentDidMount() {
+    this.setHandler();
+  }
+  componentDidUpdate(prevProps: any, prevState: any) {
+    this.setHandler();
+  }
+  private setHandler() {
+    if (
+      !this.survey ||
         this.survey.onPropertyChanged.hasFunc(this.onPropChangedHandler)
-      )
-        return;
-      this.survey.onPropertyChanged.add(this.onPropChangedHandler);
-    }
+    )
+      return;
+    this.survey.onPropertyChanged.add(this.onPropChangedHandler);
+  }
     private onPropChangedHandler = (sender: any, options: any): any => {
       if (this.isRendering) return;
       const reactiveProps = [
@@ -36,7 +36,7 @@ export class SurveyNavigation extends SurveyElementBase<any, any> {
         this.survey.onPropertyChanged.remove(this.onPropChangedHandler);
       }
     }
-  
+
     protected get survey(): SurveyModel {
       return this.props.survey;
     }
@@ -57,5 +57,4 @@ export class SurveyNavigation extends SurveyElementBase<any, any> {
         { survey: this.survey, css: this.survey.css, isTop: this.isTop }
       );
     }
-  }
-  
+}

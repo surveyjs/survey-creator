@@ -101,7 +101,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     }
     let items = [];
     if (!category.collapsed) {
-      items = category.items.map((item, itemIndex) => <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={false} key={"item" + itemIndex}></SurveyCreatorToolboxTool>)
+      items = category.items.map((item, itemIndex) => <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={false} key={"item" + itemIndex}></SurveyCreatorToolboxTool>);
     }
     return (
       <div className="svc-toolbox__category" key={category.name}>

@@ -3,19 +3,19 @@ import { SurveyModel, QuestionFactory, QuestionNonValue, Question, Serializer } 
 export class QuestionEmbeddedSurveyModel extends QuestionNonValue {
     public embeddedSurvey: SurveyModel;
     constructor(name: string) {
-        super(name);
+      super(name);
     }
     public getType(): string {
-        return "embeddedsurvey";
+      return "embeddedsurvey";
     }
 }
 Serializer.addClass(
-    "embeddedsurvey",
-    [],
-    function () {
-      return new QuestionEmbeddedSurveyModel("");
-    },
-    "nonvalue"
-  );
-  
-QuestionFactory.Instance.registerQuestion("embeddedsurvey", (name: string): Question => {return new QuestionEmbeddedSurveyModel(name);})
+  "embeddedsurvey",
+  [],
+  function () {
+    return new QuestionEmbeddedSurveyModel("");
+  },
+  "nonvalue"
+);
+
+QuestionFactory.Instance.registerQuestion("embeddedsurvey", (name: string): Question => { return new QuestionEmbeddedSurveyModel(name); });

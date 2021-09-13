@@ -16,11 +16,17 @@
         "testcafe:ci": "lerna run testcafe:ci",
         "testcafe:file": "lerna run testcafe:file",
         "dev": "concurrently \"npm run dev --prefix ../survey-library\" \"http-server -p 7777 --silent\" \"npm run watch:dev --prefix packages/survey-creator-core\" \"npm run watch:prod --prefix packages/survey-creator-core\" \"npm run watch:dev --prefix packages/survey-creator-knockout\" \"npm run watch:prod --prefix packages/survey-creator-knockout\" \"npm run watch:dev --prefix packages/survey-creator-react\" \"npm run watch:prod --prefix packages/survey-creator-react\" ",
-        "testcafe:dev": "testcafe chrome ./testCafe/designer/drag-drop.js --reporter minimal --selector-timeout 1500"
+        "testcafe:dev": "testcafe chrome ./testCafe/designer/drag-drop.js --reporter minimal --selector-timeout 1500",
+        "lint": "eslint ./packages --quiet",
+        "pre-push-check": "npm run lint && npm run test"
     },
     "devDependencies": {
         "@types/jest": "^26.0.23",
+        "@typescript-eslint/eslint-plugin": "^4.31.0",
+        "@typescript-eslint/parser": "^4.31.0",
         "concurrently": "^6.2.0",
+        "eslint": "^7.32.0",
+        "eslint-plugin-react": "^7.25.1",
         "husky": "^4.3.8",
         "lerna": "^3.22.1",
         "testcafe": "^1.15.1"
@@ -28,7 +34,7 @@
     "dependencies": {},
     "husky": {
         "hooks": {
-            "pre-push": "npm test"
+            "pre-push": "npm run pre-push-check"
         }
     }
 }

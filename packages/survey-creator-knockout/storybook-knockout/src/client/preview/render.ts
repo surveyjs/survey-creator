@@ -1,10 +1,10 @@
-import { document, Node } from 'global';
-import dedent from 'ts-dedent';
-import { RenderMainArgs } from './types';
+import { document, Node } from "global";
+import dedent from "ts-dedent";
+import { RenderMainArgs } from "./types";
 
-import * as ko from 'knockout';
+import * as ko from "knockout";
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 
 export default function renderMain({
   storyFn,
@@ -20,7 +20,7 @@ export default function renderMain({
   const storyContent = storyFn();
   showMain();
 
-  if (typeof storyContent === 'string') {
+  if (typeof storyContent === "string") {
     knockoutInstance.cleanNode(rootElement);
     rootElement.innerHTML = storyContent;
     knockoutInstance.applyBindings({}, rootElement);
@@ -31,18 +31,18 @@ export default function renderMain({
     }
 
     knockoutInstance.cleanNode(rootElement);
-    rootElement.innerHTML = '';
+    rootElement.innerHTML = "";
     rootElement.appendChild(storyContent);
     knockoutInstance.applyBindings({}, rootElement);
   } else if (
-    'template' in storyContent &&
-    (typeof storyContent.template === 'string' || storyContent.template instanceof Node)
+    "template" in storyContent &&
+    (typeof storyContent.template === "string" || storyContent.template instanceof Node)
   ) {
     knockoutInstance.cleanNode(rootElement);
-    if (typeof storyContent.template === 'string') {
+    if (typeof storyContent.template === "string") {
       rootElement.innerHTML = storyContent.template;
     } else {
-      rootElement.innerHTML = '';
+      rootElement.innerHTML = "";
       rootElement.appendChild(storyContent);
     }
     knockoutInstance.applyBindings(storyContent.context || {}, rootElement);

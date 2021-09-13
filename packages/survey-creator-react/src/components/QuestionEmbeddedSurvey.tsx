@@ -2,7 +2,6 @@ import React from "react";
 import { ReactQuestionFactory, SurveyPage, ISurveyCreator, SurveyQuestionElementBase } from "survey-react-ui";
 import { QuestionEmbeddedSurveyModel } from "@survey/creator";
 
-
 export class SurveyElementEmbeddedSurvey extends SurveyQuestionElementBase {
   constructor(props: any) {
     super(props);
@@ -18,11 +17,11 @@ export class SurveyElementEmbeddedSurvey extends SurveyQuestionElementBase {
     const survey = this.embeddedSurvey.embeddedSurvey;
     if(!survey || !survey.currentPage) return null;
     return <SurveyPage
-    survey={survey}
-    page={survey.currentPage}
-    css={survey.css}
-    creator={this.creator}
-  />
+      survey={survey}
+      page={survey.currentPage}
+      css={survey.css}
+      creator={this.creator}
+    />;
 
   }
 }

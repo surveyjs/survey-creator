@@ -2008,7 +2008,7 @@ QUnit.test(
   "question change type and undo-redo manager, Bug#1724",
   function (assert) {
     var creator = new SurveyCreatorTester();
-    creator.JSON = { elements: [{ type: "text", name: "q1" }]};
+    creator.JSON = { elements: [{ type: "text", name: "q1" }] };
     creator.convertQuestion(creator.survey.getAllQuestions()[0], "comment");
     assert.equal(creator.survey.getAllQuestions()[0].getType(), "comment", "We converted question");
     creator.undoRedoManager.undo();

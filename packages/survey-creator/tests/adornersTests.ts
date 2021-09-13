@@ -177,14 +177,14 @@ QUnit.test("TitleInplaceEditor valueChanged", function(assert) {
 QUnit.test("TitleInplaceEditor hasError/error", function(assert) {
   var target = new Survey.QuestionTextModel("q1");
   var model = new TitleInplaceEditor(target, "title", null, "", <any>{
-      onIsPropertyReadOnlyCallback: (
-        obj: Survey.Base,
-        property: Survey.JsonObjectProperty,
-        readOnly: boolean
-      ): boolean => {
-        return property.readOnly;
-      },
-      onGetErrorTextOnValidationCallback: (_, __, newValue) =>
+    onIsPropertyReadOnlyCallback: (
+      obj: Survey.Base,
+      property: Survey.JsonObjectProperty,
+      readOnly: boolean
+    ): boolean => {
+      return property.readOnly;
+    },
+    onGetErrorTextOnValidationCallback: (_, __, newValue) =>
       newValue === "test1" ? "error" : "",
   });
   assert.equal(model.error(), "", "No errors initial");
@@ -335,7 +335,7 @@ QUnit.test("Title editor read only mode", function (assert) {
     ): boolean => {
       return property.readOnly && readOnly;
     }
-  }
+  };
   var titleModel = new TitleInplaceEditor(survey, "title", null, "", <any>creatorStub);
   var descriptionModel = new TitleInplaceEditor(survey, "description", null, "", <any>creatorStub);
   Survey.Serializer.findProperty("survey", "title").readOnly = true;

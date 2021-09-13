@@ -104,7 +104,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
 }
 
 export class TabDesignerPlugin<T extends SurveyModel>
-  implements ICreatorPlugin
+implements ICreatorPlugin
 {
   public model: TabDesignerViewModel<T>;
   private undoAction: Action;

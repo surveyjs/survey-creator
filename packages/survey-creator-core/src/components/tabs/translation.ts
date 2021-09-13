@@ -514,10 +514,10 @@ export class Translation extends Base implements ITranslationLocales {
   @property({ defaultValue: false }) readOnly: boolean;
   @property() root: TranslationGroup;
   @property({ defaultValue: false, onSet: (_, target: Translation) => {
-    target.reset()
+    target.reset();
   } }) showAllStrings: boolean;
   @property({ onSet: (_, target: Translation) => {
-    target.reset()
+    target.reset();
   } }) filteredPage: PageModel;
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
@@ -644,11 +644,11 @@ export class Translation extends Base implements ITranslationLocales {
     this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root, null);
     survey.data = this.getStringsSurveyData(survey);
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
-      if(options.cell.question instanceof QuestionCommentModel){
+      if(options.cell.question instanceof QuestionCommentModel) {
         options.cell.question.rows = 1;
         options.cell.question.placeHolder = this.placeHolderText;
       }
-    })
+    });
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
       var itemValue = ItemValue.getItemByValue(
         options.question.rows,
@@ -724,7 +724,7 @@ export class Translation extends Base implements ITranslationLocales {
     defaultColumn.width = width;
     for (var i = 0; i < locs.length; i++) {
       let column = matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
-      column.width = width
+      column.width = width;
     }
   }
   private getStringsSurveyQuestionName(

@@ -61,7 +61,7 @@ export function getNextValue(prefix: string, values: any[]): string | number {
     var isNumber = baseValue === num;
     var newValue;
     do {
-      if(isNumber){
+      if(isNumber) {
         newValue = ++num;
       }
       else {

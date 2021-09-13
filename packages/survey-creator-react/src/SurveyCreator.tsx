@@ -102,11 +102,11 @@ export class SurveyCreatorComponent extends SurveyElementBase<
               })}
             </div>
           </div>
-            {licenseBanner}
-            <NotifierComponent
-              creator={creator}
-              notifier={creator.notifier}
-            ></NotifierComponent>
+          {licenseBanner}
+          <NotifierComponent
+            creator={creator}
+            notifier={creator.notifier}
+          ></NotifierComponent>
         </div>
       </div>
     );
@@ -128,10 +128,10 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     const component = !!tab.renderTab
       ? tab.renderTab()
       : ReactElementFactory.Instance.createElement(tab.componentContent, {
-          creator: creator,
-          survey: creator.survey,
-          data: tab.data.model
-        });
+        creator: creator,
+        survey: creator.survey,
+        data: tab.data.model
+      });
     return (
       <div
         key={tab.id}
@@ -184,7 +184,7 @@ export class DesignTimeSurveyModel extends Model {
   public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
     return getItemValueWrapperComponentData(item, question, this.creator);
   }
-  
+
   public getRendererForString(element: Base, name: string): string {
     if (!this.creator.readOnly && isStringEditable(element, name)) {
       return editableStringRendererName;

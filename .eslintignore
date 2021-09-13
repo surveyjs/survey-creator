@@ -1,0 +1,4 @@
+node_modules
+dist
+**/*.js
+packages/survey-creator-core

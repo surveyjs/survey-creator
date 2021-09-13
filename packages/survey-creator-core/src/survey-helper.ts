@@ -123,14 +123,14 @@ export class SurveyHelper {
       return false;
     var canShow = !!options
       ? (object: any, property: JsonObjectProperty) => {
-          return options.onCanShowPropertyCallback(
-            object,
-            property,
-            showMode,
-            parentObj,
-            parentProperty
-          );
-        }
+        return options.onCanShowPropertyCallback(
+          object,
+          property,
+          showMode,
+          parentObj,
+          parentProperty
+        );
+      }
       : null;
     if (!!canShow && !canShow(obj, property)) return false;
     return true;
@@ -215,6 +215,7 @@ export class SurveyHelper {
     SurveyHelper.warnText("'" + name + "'" + " is not supported in V2.");
   }
   public static warnText(text: string) {
+    // eslint-disable-next-line no-console
     console.warn(text);
   }
   private static deleteConditionProperties(json: any) {
@@ -290,9 +291,9 @@ export class SurveyHelper {
       const aVal = !!a.text ? a.text : "";
       const bVal = !!b.text ? b.text : "";
       let index = 0;
-      while(index < aVal.length && index < bVal.length && aVal[index] === bVal[index])  index++;
+      while(index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
       if(index < aVal.length && index < bVal.length) {
-        while(index > 0 && (aVal[index-1] >= '0' && aVal[index-1] <= '9')) index --;
+        while(index > 0 && (aVal[index-1] >= "0" && aVal[index-1] <= "9")) index --;
         const aDiv = aVal.substr(index);
         const bDiv = bVal.substr(index);
         if(Helpers.isNumber(aDiv) && Helpers.isNumber(bDiv)) {

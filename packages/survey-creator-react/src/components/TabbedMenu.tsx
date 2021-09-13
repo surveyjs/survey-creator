@@ -93,7 +93,6 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
   }
 }
 
-
 export interface ITabbedMenuItemComponentProps {
   item: Action;
 }
@@ -123,10 +122,10 @@ export class TabbedMenuItemComponent extends SurveyElementBase<
     if (item.active) titleClassName += " svc-text--bold";
 
     return (attachKey2click(
-            <div className={className} onClick={() => item.action(item)}>
-                <span className={titleClassName}>{item.title}</span>
-              </div>
-            )
+      <div className={className} onClick={() => item.action(item)}>
+        <span className={titleClassName}>{item.title}</span>
+      </div>
+    )
     );
   }
 }

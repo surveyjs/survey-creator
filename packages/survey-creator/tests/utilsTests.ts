@@ -74,7 +74,7 @@ QUnit.test("ButtonViewModel", function (assert) {
     action: function() {
       counter++;
     }
-  }
+  };
   const button = new ButtonViewModel(action);
   assert.ok(button.showTitle);
   assert.equal(counter, 0);

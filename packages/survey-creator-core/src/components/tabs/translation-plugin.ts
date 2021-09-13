@@ -29,7 +29,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
-   
+
     this.showAllStringsAction.css = this.model.showAllStrings ? "sv-action-bar-item--secondary" : "";
     this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
     this.showAllStringsAction.visible = true;
@@ -54,10 +54,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       if (options.name === "filteredPage") {
         this.filterPageAction.title = this.getFilterPageActionTitle();
       }
-      if (options.name === "canMergeLocaleWithDefault"){
+      if (options.name === "canMergeLocaleWithDefault") {
         this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
       }
-      if (options.name === "mergeLocaleWithDefaultText"){
+      if (options.name === "mergeLocaleWithDefaultText") {
         this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
         this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
       }
@@ -141,9 +141,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       action: () => {
         this.model.mergeLocaleWithDefault();
       }
-    })
+    });
     items.push(this.mergeLocaleWithDefaultAction);
-    
+
     this.importCsvAction = new Action({
       id: "svc-translation-import",
       iconName: "icon-import_20x20",
@@ -163,7 +163,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         }
         this.inputFileElement.click();
       }
-    })
+    });
     items.push(this.importCsvAction);
 
     this.exportCsvAction = new Action({
@@ -176,7 +176,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       action: () => {
         this.model.exportToSCVFile("survey_translation.csv");
       }
-    })
+    });
     items.push(this.exportCsvAction);
   }
 

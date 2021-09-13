@@ -12,7 +12,7 @@ import { toggleHovered } from "../utils/utils";
 
 import "./matrix-cell.scss";
 
-export class MatrixCellWrapperViewModel extends Base { 
+export class MatrixCellWrapperViewModel extends Base {
   constructor(public creator: CreatorBase<SurveyModel>, public templateData: any, public question: Question, public row: any, public column: any) {
     super();
     // if(!question && !!this.templateData.data) {
@@ -34,7 +34,7 @@ export class MatrixCellWrapperViewModel extends Base {
     const column: MatrixDropdownColumn = model.question.parentQuestion.getColumnByName(model.question.name);
     let questionJSON = model.question.toJSON();
     questionJSON.type = model.question.getType();
-    const survey = model.creator.createSurvey({questions: [questionJSON]}, "modal-question-editor");
+    const survey = model.creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor");
     survey.css = surveyDesignerCss;
     survey.setDesignMode(true);
     survey.isPopupEditorContent = true;

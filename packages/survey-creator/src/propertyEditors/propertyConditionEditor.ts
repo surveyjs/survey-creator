@@ -251,8 +251,8 @@ export class ConditionEditorItem {
         ? "40%"
         : "25%"
       : this.isFirst
-      ? "70%"
-      : "45%";
+        ? "70%"
+        : "45%";
     this.nameQuestion.paddingRight = paddingRight;
 
     this.operatorQuestion.minWidth = "50px";
@@ -1081,7 +1081,7 @@ var ID_REGEXP = /[a-zA-Z_0-9{\*\/\<\>\=\!\$\.\-\u00A2-\uFFFF]/;
 export function doGetCompletions(
   prevIdentifier: string,
   prefix: string,
-  config: { question: Survey.Question; questions: Survey.Question[] },
+  config: { question: Survey.Question, questions: Survey.Question[] },
   completer = null
 ) {
   var completions = [];

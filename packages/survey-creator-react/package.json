@@ -29,7 +29,8 @@
     "watch:dev": "webpack --env.buildType dev --watch",
     "watch:prod": "webpack --env.buildType prod --watch",
     "-prestorybook": "npm run test:generate-output",
-    "storybook": "start-storybook -p 9000"
+    "storybook": "start-storybook -p 9000",
+    "lint": "eslint ./src"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "6.0.21",
@@ -58,6 +59,7 @@
     "concurrently": "^5.3.0",
     "css-loader": "^3.6.0",
     "dotenv": "4.0.0",
+    "eslint": "^7.32.0",
     "dts-bundle": "0.7.2",
     "github-api": "^3.3.0",
     "html-loader": "^0.4.4",

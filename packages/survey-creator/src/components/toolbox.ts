@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { editorLocalization } from "../editorLocalization";
-import { SurveyCreator } from '../editor';
+import { SurveyCreator } from "../editor";
 export { ToolboxItemViewModel } from "./toolbox-item";
 
 import "./toolbox.scss";

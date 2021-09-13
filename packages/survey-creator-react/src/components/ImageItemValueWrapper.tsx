@@ -63,7 +63,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         <div className="svc-image-item-value__item">
           <div className="sv-imagepicker__item sv-imagepicker__item--inline">
             <label className="sv-imagepicker__label">
-              <div style={{ width: this.props.question.imageWidth ? this.props.question.imageWidth + 'px' : undefined, height: this.props.question.imageHeight ? this.props.question.imageHeight + 'px' : undefined }} className="sv-imagepicker__image">
+              <div style={{ width: this.props.question.imageWidth ? this.props.question.imageWidth + "px" : undefined, height: this.props.question.imageHeight ? this.props.question.imageHeight + "px" : undefined }} className="sv-imagepicker__image">
               </div>
             </label>
           </div>
@@ -71,7 +71,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
 
         <div className="svc-image-item-value-controls">
           {this.model.allowAdd ? attachKey2click(<span className="svc-image-item-value-controls__button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
-            <SvgIcon size={24} iconName={'icon-add-item-value'}></SvgIcon>
+            <SvgIcon size={24} iconName={"icon-add-item-value"}></SvgIcon>
           </span>) : null}
         </div>
       </>);
