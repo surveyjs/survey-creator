@@ -37,3 +37,13 @@
   margin-top: calcSize(0.5);
   cursor: move;
 }
+.spg-table__cell--header {
+  font-size: calcSize(1.5);
+  font-weight: 600;
+  padding: calcSize(1) 0 calcSize(1) calcSize(2);
+  color: $foreground-light;
+  line-height: calcSize(2);
+  box-shadow: 0px 1px 0px $border;
+  background: $background-dim;
+  text-align: left;
+}
