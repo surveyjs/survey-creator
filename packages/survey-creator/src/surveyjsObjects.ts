@@ -343,20 +343,24 @@ export function createAfterRenderPageHandler(
   survey: SurveyForDesigner
 ) {
   return function elementOnAfterRendering(domElement: any, page: any) {
-    page.renderedElement = domElement;
-    domElement.classList.add("svd_page");
-    domElement.onclick = function (e) {
-      if (!e["markEvent"]) {
-        e["markEvent"] = true;
-        getSurvey(page)["selectedElement"] = page;
-      }
-    };
+    setTimeout(() => {
+      ko.tasks.runEarly();
 
-    domElement.ondblclick = function (e) {
-      getSurvey(page).doElementDoubleClick(page);
-    };
-
-    addAdorner(domElement, page);
+      page.renderedElement = domElement;
+      domElement.classList.add("svd_page");
+      domElement.onclick = function (e) {
+        if (!e["markEvent"]) {
+          e["markEvent"] = true;
+          getSurvey(page)["selectedElement"] = page;
+        }
+      };
+  
+      domElement.ondblclick = function (e) {
+        getSurvey(page).doElementDoubleClick(page);
+      };
+  
+      addAdorner(domElement, page);
+    }, 1);
   };
 }
 
