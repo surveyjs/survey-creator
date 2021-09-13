@@ -93,9 +93,9 @@ export class SurveyLogicAction {
     }
     this.questionNamesValues.forEach(name => {
       if (!!name && names.indexOf(name) === -1) {
-        names.push(name)
+        names.push(name);
       }
-    })
+    });
   }
   private get questionNames(): Array<string> {
     if (!this.logicType || !this.logicType.questionNames) return [];
@@ -241,17 +241,17 @@ export class SurveyLogicItem {
     if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
     return editorLocalization
       .getString("ed.lg.itemExpressionText")
-    ["format"](text);
+      ["format"](text);
   }
   private getQuestionNamesFromExpression(names: string[]) {
     const conditionRunner = new ConditionRunner(this.expression);
     conditionRunner.getVariables().forEach(item => {
       if (names.indexOf(item) === -1)
-        names.push(item)
+        names.push(item);
     });
   }
   private getQuestionNamesFromActions(names: string[]) {
-    this.actions.forEach(action => action.addQuestionNames(names))
+    this.actions.forEach(action => action.addQuestionNames(names));
   }
   private getExpressionAsDisplayText(): string {
     return !!this.owner

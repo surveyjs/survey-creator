@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 
 import "./element-selector.scss";
-import { SurveyElementSelector } from '../propertyEditors/surveyElementSelector';
+import { SurveyElementSelector } from "../propertyEditors/surveyElementSelector";
 const templateHtml = require("./element-selector.html");
 
 export class ElementSelectorViewModel {

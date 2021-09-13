@@ -75,7 +75,7 @@ ko.bindingHandlers["sjsselect3"] = {
       ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
         subscription.dispose();
         $objectSelector.off("select2:select");
-        $objectSelector["select2"]('destroy');
+        $objectSelector["select2"]("destroy");
       });
     }
   },

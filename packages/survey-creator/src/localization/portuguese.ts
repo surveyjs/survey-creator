@@ -1,6 +1,5 @@
 import { editorLocalization } from "../editorLocalization";
 
-
 var portugueseTranslation = {
   //survey templates
   survey: {
@@ -136,8 +135,8 @@ var portugueseTranslation = {
       trigger_skipName: "Saltar para a pergunta",
       trigger_runExpressionName: "Executar expressão personalizada",
       completedHtmlOnConditionName: "Nome da página de conclusão personalizada",
-      
-page_visibilityDescription:
+
+      page_visibilityDescription:
         "Torne a página visível quando a expressão lógica retornar verdadeiro. Caso contrário, mantenha-a invisível.",
       panel_visibilityDescription:
         "Torne o painel visível quando a expressão lógica retornar verdadeiro. Caso contrário, mantenha-o invisível.",
@@ -161,7 +160,7 @@ page_visibilityDescription:
         "Quando a expressão lógica retorna verdadeiro, a expressão personalizada é executada. Você pode, opcionalmente, definir o resultado desta expressão na pergunta selecionada",
       completedHtmlOnConditionDescription:
         "Se a expressão lógica retornar verdadeiro, o texto padrão da 'página de agradecimento' será alterado para o fornecido.",
-      
+
       itemExpressionText: "Quando a expressão: '{0}' retorna verdadeiro:", // {0} - a expressão
       page_visibilityText: "Tornar a página {0} visível", // {0} nome da página
       panel_visibilityText: "Tornar o painel {0} visível", // {0} nome do painel
@@ -177,16 +176,16 @@ page_visibilityDescription:
       trigger_runExpressionText2: "e coloque o seu resultado em questão: {0}", // {0} nome da questão
       completedHtmlOnConditionText:
         "Mostrar texto personalizado para a 'página de agradecimento'.",
-        
+
       conditions: "Condição(ões)",
       actions: "Ação(ões)",
       expressionEditorTitle: "Definir condição(ões)",
       actionsEditorTitle: "Definir ação(ões)",
-      
+
       deleteAction: "Excluir ação",
       addNewAction: "Adicionar nova ação",
       selectedActionCaption: "Selecione uma ação para adicionar ...",
-      
+
       expressionInvalid:
         "A expressão lógica está vazia ou é inválida. Corrija-a.",
       noActionError: "Por favor, adicione pelo menos uma ação.",
@@ -235,8 +234,8 @@ page_visibilityDescription:
     conditionActionEmpty: "Por favor selecione a ação",
     conditionSelectQuestion: "Selecionar pergunta...",
     conditionSelectPage: "Selecionar página ...",
-     conditionSelectPanel: "Selecionar painel ...",
-     conditionValueQuestionTitle: "Por favor, insira/selecione o valor",
+    conditionSelectPanel: "Selecionar painel ...",
+    conditionValueQuestionTitle: "Por favor, insira/selecione o valor",
     // conditionHelp:
     //  "Por favor, entre com uma expressão boleana. Deve retornar verdadeiro para manter a pergunta/página visível. Por exemplo: {´pergunta1} = 'valor1' ou ({pergunta2} * {pergunta4} > 20 e {pergunta3} < 5)",
     expressionHelp:
@@ -272,7 +271,7 @@ page_visibilityDescription:
     descriptionPlaceholder: "Insira a descrição",
     surveyDescriptionPlaceholder: "Insira a descrição do questionário",
     pageDescriptionPlaceholder: "Insira a descrição da página",
-    
+
     hasOther: "Tem item 'outros'",
     otherText: "Texto do item 'outros'",
     hasNone: "Tem item 'nenhum'",
@@ -319,7 +318,7 @@ page_visibilityDescription:
     qEditorTitle: "Editar pergunta: {0}",
 
     maxLength: "Tamanho máximo",
-    
+
     buildExpression: "Construir",
     editExpression: "Editar",
     and: "E",
@@ -374,7 +373,7 @@ page_visibilityDescription:
     isSinglePage: "Mostrar todos elementos em uma página",
     html: "Html",
     expression: "Expressão",
-    
+
     minValue: "Valor mínimo",
     maxValue: "Valor máximo",
     minLength: "Tamanho mínimo",
@@ -382,14 +381,14 @@ page_visibilityDescription:
     minCount: "Contagem mínima",
     maxCount: "Contagem máxima",
     regex: "Expressão regular",
-    
+
     totalText: "Texto do total",
     totalType: "Tipo do total",
     totalExpression: "Expressão do total",
     totalDisplayStyle: "Estilo de exibição do total",
     totalCurrency: "Moeda do total",
     totalFormat: "Formato do total",
-    
+
     // Header  adorner
     logoPosition: "Posição do logotipo",
     addLogo: "Adicionar logotipo...",
@@ -462,7 +461,7 @@ page_visibilityDescription:
     triggerGotoName: "Ir para a questão:",
     triggerIsVariable: "Não coloque a variável no resultado do questionário.",
     triggerRunExpressionEmpty: "Por favor insira uma expressão válida",
-    
+
     noFile: "Nenhum arquivo selecionado",
   },
   //Property values

@@ -877,7 +877,7 @@ export class PropertyGridModel {
     if (!obj) return;
     var prop = Serializer.findProperty(obj.getType(), options.columnName);
     if (!prop) return;
-    const allowEditRow = this.getMatrixAllowEditRow(options.question, options.row)
+    const allowEditRow = this.getMatrixAllowEditRow(options.question, options.row);
     options.cellQuestion.readOnly = !allowEditRow || PropertyJSONGenerator.isPropertyReadOnly(
       prop,
       this.options,
@@ -958,7 +958,7 @@ export class PropertyGridModel {
     return (<any>row).allowEditRow;
   }
   private calculateMatrixAllowOperations(question: Question, row: MatrixDynamicRowModel) {
-    const rowOptions :ICollectionItemAllowOperations = {allowDelete: this.onMatrixAllowRemoveRow(question, row), allowEdit: true};
+    const rowOptions :ICollectionItemAllowOperations = { allowDelete: this.onMatrixAllowRemoveRow(question, row), allowEdit: true };
     this.options.onCollectionItemAllowingCallback(<any>this.obj,
       question.property,
       question.value,

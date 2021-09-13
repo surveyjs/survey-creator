@@ -46,7 +46,7 @@ import { TabLogicPlugin } from "./components/tabs/logic-ui";
 import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
 import { TabDesignerPlugin } from "./entries";
 import { Notifier } from "./components/notifier";
-import { updateMatrixRemoveAction } from "./utils/actions"
+import { updateMatrixRemoveAction } from "./utils/actions";
 
 export interface ICreatorOptions {
   [index: string]: any;
@@ -666,7 +666,7 @@ export class CreatorBase<T extends SurveyModel>
   /**
    * This callback is used internally for providing survey JSON text.
    */
-  public getSurveyJSONTextCallback: () => { text: string; isModified: boolean };
+  public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   /**
    * This callback is used internally for setting survey JSON text.
    */
@@ -2266,7 +2266,7 @@ export class CreatorBase<T extends SurveyModel>
     obj: any,
     newValue: any
   ) {
-    /* 
+    /*
     //TODO We likely do not need this callback and can remove it for V2
     //We called "PROPERTY_CHANGED" from obj.propertyValueChanged with undoRedoManager object
     var oldValue = obj[property.name];

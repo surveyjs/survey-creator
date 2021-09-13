@@ -95,9 +95,9 @@ export class SurveyPropertyDropdownColumnsEditor extends SurveyNestedPropertyEdi
     )
       return;
     this,
-      this.koCanAddItem(
-        this.originalValue.length < this.options.maximumColumnsCount
-      );
+    this.koCanAddItem(
+      this.originalValue.length < this.options.maximumColumnsCount
+    );
   }
 }
 

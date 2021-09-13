@@ -220,25 +220,25 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--action";
       options.cssClasses.questionWrapper = "svc-question-wrapper";
       options.cssClasses.error.root = "svc-logic-operator__error";
-      options.cssClasses.onError = "svc-logic-operator--error"; 
+      options.cssClasses.onError = "svc-logic-operator--error";
     }
     if(options.question.name === "elementSelector" || options.question.name === "setToName" || options.question.name === "fromName" || options.question.name === "gotoName") {
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
       options.cssClasses.questionWrapper = "svc-question-wrapper";
-      
+
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
-    if(options.question.name === "setToName" || options.question.name === "fromName"){
+    if(options.question.name === "setToName" || options.question.name === "fromName") {
       options.question.titleLocation = "left";
       options.question.startWithNewLine = false;
       options.cssClasses.questionWrapper = "svc-question-wrapper";
-      
+
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
     options.cssClasses.mainRoot = "sd-question sd-row__question";
-    if(options.question.name === "panel"){
+    if(options.question.name === "panel") {
       options.cssClasses.root += "svc-logic-paneldynamic";
       options.cssClasses.buttonAdd += " svc-logic-operator svc-logic-operator--action sd-paneldynamic__add-btn";
       options.cssClasses.iconRemove = "svc-icon-remove";
@@ -247,20 +247,20 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private onUpdatePanelCssClasses(options: any) {
-    if(options.panel.name === "elementPanel"){
+    if(options.panel.name === "elementPanel") {
       options.cssClasses.panel.container += " svc-logic-panel-element";
     }
   }
   private onValueChanged(options: any) {
     options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].logicTypeName) ? 1 : 100;
   }
-  private onQuestionAdded(options: any){
-    if(options.question.name === "setToName" || options.question.name === "fromName"){
+  private onQuestionAdded(options: any) {
+    if(options.question.name === "setToName" || options.question.name === "fromName") {
       options.question.titleLocation = "left";
       options.question.startWithNewLine = false;
     }
   }
-  
+
   private applyPanel(panel: PanelModel) {
     var action = this.getActionByPanel(panel);
     var newAction = this.getOrCreateActionByPanel(panel);
@@ -389,21 +389,21 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       elementPanelQuestions[i].clearValue();
     }
     elementPanel.elements.splice(0, elementPanel.elements.length);
-    if (!this.isElementPanelVisible(logicType)) { 
-        elementPanel.visible = false;
-        return;
+    if (!this.isElementPanelVisible(logicType)) {
+      elementPanel.visible = false;
+      return;
     }
     var obj = this.createElementPanelObj(
-      this.getActionByPanel(panel), 
+      this.getActionByPanel(panel),
       logicType
     );
     this.setElementPanelObj(panel, obj);
-    if(logicType.name === "trigger_complete"){ 
+    if(logicType.name === "trigger_complete") {
       elementPanel.visible = false;
       return;
     }
     this.titleActionsCreator = new PropertyGridTitleActionsCreator(
-      obj, 
+      obj,
       this.options
     );
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
@@ -524,8 +524,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       elementType == "page"
         ? "pe.conditionSelectPage"
         : elementType == "panel"
-        ? "pe.conditionSelectPanel"
-        : "pe.conditionSelectQuestion";
+          ? "pe.conditionSelectPanel"
+          : "pe.conditionSelectQuestion";
     return this.getLocString(optionsCaptionName);
   }
   private getElementBySelectorName(

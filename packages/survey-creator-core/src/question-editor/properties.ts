@@ -313,8 +313,8 @@ export class SurveyQuestionProperties {
       let tabName = !!propCategory
         ? propCategory
         : tabs.length == 0
-        ? "general"
-        : "others";
+          ? "general"
+          : "others";
       if (tabNames.indexOf(tabName) < 0 && tabName != "general") {
         tabNames.push(tabName);
         classRes.tabs.push({

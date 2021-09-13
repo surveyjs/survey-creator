@@ -75,7 +75,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
 
     return result;
   }
-  
+
   dispose() {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged(
       "isRequired",

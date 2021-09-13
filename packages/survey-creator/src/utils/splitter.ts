@@ -13,9 +13,9 @@ export class SplitterComponentViewModel {
 
   constructor(
     params: {
-      minLeft: number;
-      minRight: number;
-      onChange?: any;
+      minLeft: number,
+      minRight: number,
+      onChange?: any,
     },
     componentInfo
   ) {

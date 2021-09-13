@@ -1,17 +1,17 @@
 export interface ISurveyQuestionEditorDefinition {
   title?: string;
-  properties?: Array<string | { name: string; title?: string; tab?: string }>;
+  properties?: Array<string | { name: string, title?: string, tab?: string }>;
   tabs?: Array<{
-    name: string;
-    index?: number;
-    title?: string;
-    visible?: boolean;
+    name: string,
+    index?: number,
+    title?: string,
+    visible?: boolean,
   }>;
 }
 
 export class SurveyQuestionEditorDefinition {
   public static definition: {
-    [key: string]: ISurveyQuestionEditorDefinition;
+    [key: string]: ISurveyQuestionEditorDefinition,
   } = {
     question: {
       properties: [
@@ -454,7 +454,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
         { name: "state", tab: "layout" },
-        { name: "questionsOrder", tab: "layout" },        
+        { name: "questionsOrder", tab: "layout" },
         { name: "indent", tab: "layout" },
         { name: "innerIndent", tab: "layout" },
         { name: "width", tab: "layout" },

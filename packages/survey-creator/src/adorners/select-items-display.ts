@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import { editorLocalization } from "../editorLocalization";
 import "./select-items-editor.scss";
 import { QuestionSelectBase } from "survey-knockout";
-import  { selectItemsAdorner } from "./select-items";
+import { selectItemsAdorner } from "./select-items";
 
 var templateHtml = require("html-loader?interpolate!val-loader!./select-items-display.html");
 
@@ -27,18 +27,18 @@ ko.components.register("select-items-display", {
 });
 
 export var renderDisplayMode = (elements: HTMLElement[], model: QuestionSelectBase, editor) => {
-    elements[0].onclick = e => e.preventDefault();
-    var decoration = document.createElement("div");
-    decoration.innerHTML =
+  elements[0].onclick = e => e.preventDefault();
+  var decoration = document.createElement("div");
+  decoration.innerHTML =
       "<select-items-display params='question: question, editor: editor'></select-items-display>";
-    elements[0].appendChild(decoration);
-    ko.applyBindings(
-      {
-        question: model,
-        editor: editor
-      },
-      decoration
-    );
-    editor.onAdornerRenderedCallback(model, "select-choices", decoration);
-  }
+  elements[0].appendChild(decoration);
+  ko.applyBindings(
+    {
+      question: model,
+      editor: editor
+    },
+    decoration
+  );
+  editor.onAdornerRenderedCallback(model, "select-choices", decoration);
+};
 

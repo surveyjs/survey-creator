@@ -125,7 +125,7 @@ export var ruStrings = {
         "Сделать вопрос видимой, когда логическое выражение вернет 'true'. В противном случае сделать ее невидимой.",
       question_enableDescription:
         "Сделать вопрос включенным, когда логическое выражение вернет 'true'. В противном случае оставить его отключенными.",
-	  question_requireDescription:
+      question_requireDescription:
         "Вопрос становится обязательным, когда логическое выражение вернет 'true'.",
       trigger_completeDescription:
         "Когда логическое выражение вернет 'true', то опрос становится завершенным и конечный пользователь видит 'Страницу благодарности'.",
@@ -219,10 +219,10 @@ export var ruStrings = {
     cellsEmptyRowsColumns: "Должен быть хотя бы один столбец или строка",
 
     propertyIsEmpty: "Пожалуйста, введите значение",
-	  propertyNameIsNotUnique: "Пожалуйста, введите уникальное имя",
+    propertyNameIsNotUnique: "Пожалуйста, введите уникальное имя",
     listIsEmpty: "Добавьте новое условие",
-	  expressionIsEmpty: "Выражение - пустое",
-	  value: "Значение",
+    expressionIsEmpty: "Выражение - пустое",
+    value: "Значение",
     text: "Текст",
     rowid: "ID строки",
     imageLink: "Ссылка на изображение",
@@ -233,13 +233,13 @@ export var ruStrings = {
     path: "Путь",
     valueName: "Название пункта",
     titleName: "Заголовок пункта",
-	  titlePlaceholder: "Введите заголовок",
+    titlePlaceholder: "Введите заголовок",
     surveyTitlePlaceholder: "Введите заголовок опроса",
     pageTitlePlaceholder: "Введите заголовок страницы",
     descriptionPlaceholder: "Введите описание",
     surveyDescriptionPlaceholder: "Введите описание опроса",
     pageDescriptionPlaceholder: "Введите описание страницы",
-  
+
     hasOther: "Есть пункт 'Другое'",
     otherText: "Текст пункта 'Другое'",
     hasNone: "Нет ни одного пункта",
@@ -280,12 +280,12 @@ export var ruStrings = {
     optionsCaption: "Параметры подписи",
     DefaultValue: "Значение по умолчанию",
     cellsDefaultRow: "Текст ячеек по умолчанию",
-  
+
     surveyEditorTitle: "Настройки опросника",
     qEditorTitle: "Изменить: {0}",
-  
+
     maxLength: "Максимальная длина",
-	  buildExpression: "Собрать",
+    buildExpression: "Собрать",
     editExpression: "Редактировать",
     and: "И",
     or: "ИЛИ",
@@ -334,7 +334,7 @@ export var ruStrings = {
     isSinglePage: "Показывать все элементы на одной странице",
     HTML: "HTML",
     expression: "Выражение",
-  
+
     minValue: "Минимальное значение",
     maxValue: "Максимальное значение",
     mINLENGTH: "Минимальная длина",
@@ -342,14 +342,14 @@ export var ruStrings = {
     minCount: "Минимальное количество",
     maxCount: "Максимальное количество",
     regex: "Регулярное выражение",
-  
+
     totalText: "Общий текст",
     totalType: "Общий тип",
     totalExpression: "Общее выражение",
     totalDisplayStyle: "Общий стиль отображения",
     totalCurrency: "Общая валюта",
     totalFormat: "Общий формат",
-	  // Header  adorner
+    // Header  adorner
     logoPosition: "Местоположение логотипа",
     addLogo: "Добавить логотип...",
     changeLogo: "Изменить логотип...",
@@ -387,7 +387,7 @@ export var ruStrings = {
       triggers: "Триггеры",
       templateTitle: "Название шаблона",
       totals: "Итоги",
-	    logic: "Логика",
+      logic: "Логика",
       layout: "Планировка",
       data: "Данные",
       validation: "Проверка",
@@ -398,7 +398,7 @@ export var ruStrings = {
     },
     editProperty: "Редактировать свойство '{0}'",
     items: "[Элементы: {0}]",
-  
+
     enterNewValue: "Пожалуйста, введите значение.",
     noquestions: "В опроснике нет ни одного вопроса",
     createtrigger: "Пожалуйста, создайте триггер",
@@ -448,7 +448,7 @@ export var ruStrings = {
     top: "Сверху",
     bottom: "Снизу",
     topBottom: "Сверху и снизу",
-    left:"Слева",
+    left: "Слева",
     color: "Цвет",
     date: "Дата",
     datetime: "Дата и время",
@@ -520,7 +520,7 @@ export var ruStrings = {
     regexvalidator: "Регулярное выражение",
     textvalidator: "Текст"
   },
-    triggers: {
+  triggers: {
     completetrigger: "Завершить опрос",
     setvaluetrigger: "Установить значение",
     copyvaluetrigger: "Скопировать значение",

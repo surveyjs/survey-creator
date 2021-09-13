@@ -2,7 +2,7 @@ import * as ko from "knockout";
 
 import "./nested-item.scss";
 import { SurveyNestedPropertyEditorItem,
-    SurveyNestedPropertyEditorEditorCell } from "../propertyEditors/propertyNestedPropertyEditor";
+  SurveyNestedPropertyEditorEditorCell } from "../propertyEditors/propertyNestedPropertyEditor";
 import { SurveyHelper } from "../surveyHelper";
 
 const templateHtml = require("./nested-item.html");
@@ -19,22 +19,22 @@ export class PropertyEditorNestedItemViewModel {
     rootElement
   ) {
     rootElement.addEventListener("keydown", (event) => {
-        if (event.keyCode == 38 && event.altKey) {
-          SurveyHelper.moveItemInArray(editor.originalValue, obj,
-            (editor.originalValue.indexOf(obj) - 1 +
+      if (event.keyCode == 38 && event.altKey) {
+        SurveyHelper.moveItemInArray(editor.originalValue, obj,
+          (editor.originalValue.indexOf(obj) - 1 +
               editor.originalValue.length) % editor.originalValue.length
-          );
-          event.stopPropagation();
-          return false;
-        }
-        if (event.keyCode == 40 && event.altKey) {
-          SurveyHelper.moveItemInArray(editor.originalValue, obj,
-            (editor.originalValue.indexOf(obj) + 1) % editor.originalValue.length
-          );
-          event.stopPropagation();
-          return false;
-        }
-      });
+        );
+        event.stopPropagation();
+        return false;
+      }
+      if (event.keyCode == 40 && event.altKey) {
+        SurveyHelper.moveItemInArray(editor.originalValue, obj,
+          (editor.originalValue.indexOf(obj) + 1) % editor.originalValue.length
+        );
+        event.stopPropagation();
+        return false;
+      }
+    });
   }
 
   public get cells(): SurveyNestedPropertyEditorEditorCell[] {

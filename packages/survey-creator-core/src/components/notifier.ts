@@ -3,7 +3,7 @@ import { settings } from "../settings";
 import "./notifier.scss";
 
 export class Notifier extends Base {
-  @property({defaultValue: false}) active;
+  @property({ defaultValue: false }) active;
   @property() message: string;
   @property() css: string;
   timeout = settings.notifications.lifetime;

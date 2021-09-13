@@ -5,7 +5,7 @@ const templateHtml = require("./property-grid.html");
 
 import { PropertyGridObjectEditorModel } from "../questionEditors/questionEditor";
 import { SurveyCreator } from "../editor";
-import { editorLocalization } from '../editorLocalization';
+import { editorLocalization } from "../editorLocalization";
 
 export class PropertyGridViewModel {
   constructor(

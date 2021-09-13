@@ -227,7 +227,7 @@ export var indonesianStrings = {
     isSinglePage: "Tampilkan seluruh elemen pada halaman",
     html: "Html",
     expression: "Ekspresi",
-    
+
     minValue: "Nilai minimum",
     maxValue: "Nilai maksimum",
     minLength: "Panjang minimum",

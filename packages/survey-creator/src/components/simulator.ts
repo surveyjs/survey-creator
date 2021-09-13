@@ -37,7 +37,7 @@ export class SurveySimulatorComponent {
       var device = simulatorDevices[this.activeDevice];
       return this.simulatorEnabled && device.deviceType !== "desktop";
     });
-  
+
     this.koSimulatorFrame = ko.computed(() => {
       if (!this.koHasFrame) {
         return undefined;
@@ -71,7 +71,6 @@ export class SurveySimulatorComponent {
         })
       };
     });
-
 
     if(!!_toolbarHolder) {
       this._options.survey = this._toolbarHolder.koSurvey;

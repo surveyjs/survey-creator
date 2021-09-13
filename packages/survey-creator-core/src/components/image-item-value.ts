@@ -4,7 +4,7 @@ import { ItemValueWrapperViewModel } from "./item-value";
 
 import "./image-item-value.scss";
 
-export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel { 
+export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   constructor(creator: CreatorBase<SurveyModel>, public question: QuestionSelectBase, public item: ImageItemValue, public templateData: any, public itemsRoot: HTMLElement) {
     super(creator, question, item);
   }
@@ -62,9 +62,9 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   //       editor.onQuestionEditorChanged(model);
   //     });
   //   });
-  // });    
+  // });
   // }
-  
+
   chooseFile(model: ImageItemValueWrapperViewModel) {
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
     model.creator.chooseFiles(fileInput, (files: File[]) => {

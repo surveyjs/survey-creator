@@ -401,7 +401,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       ]
     };
   }
-  /*  
+  /*
   protected createSurvey(): SurveyModel {
     var res = super.createSurvey();
     res.onUpdateQuestionCssClasses.add((sender: SurveyModel, options: any) => {

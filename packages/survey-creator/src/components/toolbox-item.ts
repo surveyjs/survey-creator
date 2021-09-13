@@ -1,7 +1,7 @@
 import * as ko from "knockout";
-import { IQuestionToolboxItem } from '../toolbox';
+import { IQuestionToolboxItem } from "../toolbox";
 import { getLocString } from "../editorLocalization";
-import { SurveyCreator } from '../editor';
+import { SurveyCreator } from "../editor";
 
 import "./toolbox-item.scss";
 var template = require("html-loader?interpolate!val-loader!./toolbox-item.html");
@@ -9,7 +9,7 @@ var template = require("html-loader?interpolate!val-loader!./toolbox-item.html")
 export class ToolboxItemViewModel {
   constructor(public item: IQuestionToolboxItem, private _creator: SurveyCreator) {
   }
-  get ariaLabel() { return this.item.tooltip + ' ' + getLocString('toolbox') + ' item'; }
+  get ariaLabel() { return this.item.tooltip + " " + getLocString("toolbox") + " item"; }
   click = () => { this._creator.clickToolboxItem(this.item); }
   dragstart = (el, e) => { this._creator.draggingToolboxItem(this.item, e); return true; }
   dragend = (el, e) => { this._creator.dragEnd(); }

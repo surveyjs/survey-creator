@@ -1,3 +1,3 @@
-import { window } from 'global';
+import { window } from "global";
 
-window.STORYBOOK_ENV = 'KNOCKOUT';
+window.STORYBOOK_ENV = "KNOCKOUT";

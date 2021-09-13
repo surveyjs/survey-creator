@@ -211,14 +211,14 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
         if (!names[name]) {
           names[name] = this.survey.getQuestionByName(name);
         }
-      })
-    })
+      });
+    });
     const res: Question[] = [];
     Object.keys(names).forEach(item => {
       if (!!names[item]) {
-        res.push(names[item])
+        res.push(names[item]);
       }
-    })
+    });
     return res;
   }
   public getUsedActionTypes(): SurveyLogicType[] {
@@ -228,15 +228,15 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
         if (!types[name]) {
           types[name] = this.logicTypes.filter(logicType => logicType.name == name)[0];
         }
-      })
-    })
+      });
+    });
 
     const res: SurveyLogicType[] = [];
     Object.keys(types).forEach(item => {
       if (!!types[item]) {
-        res.push(types[item])
+        res.push(types[item]);
       }
-    })
+    });
     return res;
   }
   protected hasErrorInUI(): boolean {

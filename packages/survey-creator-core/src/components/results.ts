@@ -44,7 +44,7 @@ function addCollapsed (items: any[] = []) {
   return items.filter((item) => !!item).map((item: any) => {
     return new SurveyResultsItemModel(item);
   });
-};
+}
 
 export class SurveyResultsModel extends Base {
   constructor(private survey: Survey.SurveyModel) {

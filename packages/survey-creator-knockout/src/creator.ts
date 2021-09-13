@@ -101,7 +101,7 @@ export class SurveyCreator extends CreatorBase<Survey> {
     if (typeof target === "string") {
       node = document.getElementById(target);
     }
-    node.innerHTML = `<survey-creator params="creator: creator"></survey-creator>`;
+    node.innerHTML = "<survey-creator params=\"creator: creator\"></survey-creator>";
     ko.cleanNode(node);
     ko.applyBindings({ creator: this }, node);
   }

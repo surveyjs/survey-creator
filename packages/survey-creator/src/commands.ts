@@ -5,10 +5,10 @@ export class Commands {
 
   private commands: {
     [index: string]: {
-      name?: string;
-      hotKey?: { ctrlKey: boolean; keyCode: number };
-      toolbar?: any;
-    };
+      name?: string,
+      hotKey?: { ctrlKey: boolean, keyCode: number },
+      toolbar?: any,
+    },
   } = {
     undo: {
       name: "undo",

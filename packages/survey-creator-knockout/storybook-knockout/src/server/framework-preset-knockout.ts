@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Configuration } from 'webpack';
+import { Configuration } from "webpack";
 
 export function webpack(config: Configuration) {
   return {
@@ -12,7 +11,7 @@ export function webpack(config: Configuration) {
           test: /\.html$/,
           use: [
             {
-              loader: require.resolve('html-loader'),
+              loader: require.resolve("html-loader"),
             },
           ],
         },

@@ -151,8 +151,8 @@ export class SurveyElementSelector {
         elementType == "page"
           ? "pe.conditionSelectPage"
           : elementType == "panel"
-          ? "pe.conditionSelectPanel"
-          : "pe.conditionSelectQuestion";
+            ? "pe.conditionSelectPanel"
+            : "pe.conditionSelectQuestion";
     }
     return this.getLocString(optionsCaptionName);
   }

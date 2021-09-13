@@ -1,74 +1,74 @@
 import {
-    CreatorBase,
-    editorLocalization,
-    IQuestionToolboxItem
-  } from "@survey/creator";
-  import React, { CSSProperties } from "react";
-  import { ToolboxItemViewModel } from "@survey/creator";
-  import {
-    Action,
-    Base,
-    SurveyModel
-  } from "survey-core";
-  import {
-    attachKey2click,
-    ReactElementFactory,
-    SurveyElementBase,
-    SvgIcon
-  } from "survey-react-ui";
-  
-  export interface ISurveyCreatorToolboxItemProps {
+  CreatorBase,
+  editorLocalization,
+  IQuestionToolboxItem
+} from "@survey/creator";
+import React, { CSSProperties } from "react";
+import { ToolboxItemViewModel } from "@survey/creator";
+import {
+  Action,
+  Base,
+  SurveyModel
+} from "survey-core";
+import {
+  attachKey2click,
+  ReactElementFactory,
+  SurveyElementBase,
+  SvgIcon
+} from "survey-react-ui";
+
+export interface ISurveyCreatorToolboxItemProps {
     item: IQuestionToolboxItem;
     creator: CreatorBase<SurveyModel>;
-    isCompact: boolean
+    isCompact: boolean;
   }
-  
-  export class SurveyCreatorToolboxTool extends SurveyElementBase<
+
+export class SurveyCreatorToolboxTool extends SurveyElementBase<
     ISurveyCreatorToolboxItemProps,
     any
   > {
-    constructor(props) {
-      super(props);
-    }
-    public get item() {
-      return this.props.item;
-    }
-    public get creator() {
-      return this.props.creator;
-    }
-    public get isCompact() {
-      return this.props.isCompact;
-    }
-
-    protected getStateElement(): Base {
-      return (this.item as any);
-    }
-    
-    render(): JSX.Element {
-      const item = ((this.item as any) as Action);
-      const className = "svc-toolbox__tool " + item.css + (item.isVisible ? "" : " sv-action--hidden");
-      const itemComponent = ReactElementFactory.Instance.createElement(
-        this.item.component || "svc-toolbox-item",
-        {
-          item: this.item,
-          creator: this.creator,
-          isCompact: this.isCompact
-        }
-      );
-      return (
-        <div className={className} key={item.id}>
-          <div className="sv-action__content">
-            {(this.isCompact && item.needSeparator) ? (
-              <div className="svc-toolbox__category-separator"></div>
-            ) : null}
-            {itemComponent}
-          </div>
-        </div>
-      );
-    }
+  constructor(props) {
+    super(props);
+  }
+  public get item() {
+    return this.props.item;
+  }
+  public get creator() {
+    return this.props.creator;
+  }
+  public get isCompact() {
+    return this.props.isCompact;
   }
 
-  export class SurveyCreatorToolboxItem extends SurveyElementBase<
+  protected getStateElement(): Base {
+    return (this.item as any);
+  }
+
+  render(): JSX.Element {
+    const item = ((this.item as any) as Action);
+    const className = "svc-toolbox__tool " + item.css + (item.isVisible ? "" : " sv-action--hidden");
+    const itemComponent = ReactElementFactory.Instance.createElement(
+      this.item.component || "svc-toolbox-item",
+      {
+        item: this.item,
+        creator: this.creator,
+        isCompact: this.isCompact
+      }
+    );
+    return (
+      <div className={className} key={item.id}>
+        <div className="sv-action__content">
+          {(this.isCompact && item.needSeparator) ? (
+            <div className="svc-toolbox__category-separator"></div>
+          ) : null}
+          {itemComponent}
+        </div>
+      </div>
+    );
+  }
+}
+
+export class SurveyCreatorToolboxItem extends SurveyElementBase<
     ISurveyCreatorToolboxItemProps,
     any
   > {
@@ -125,9 +125,8 @@ import {
         </div>
       );
     }
-  }
-  
-  ReactElementFactory.Instance.registerElement("svc-toolbox-item", (props) => {
-    return React.createElement(SurveyCreatorToolboxItem, props);
-  });
-  
+}
+
+ReactElementFactory.Instance.registerElement("svc-toolbox-item", (props) => {
+  return React.createElement(SurveyCreatorToolboxItem, props);
+});

@@ -268,9 +268,9 @@ export class SurveyNestedPropertyEditorColumn {
     var text = editorLocalization.hasString("pel." + this.property.name)
       ? editorLocalization.getString("pel." + this.property.name)
       : editorLocalization.getPropertyNameInEditor(
-          this.property.name,
-          this.property.displayName
-        );
+        this.property.name,
+        this.property.displayName
+      );
     return text ? text : this.property.name;
   }
 }

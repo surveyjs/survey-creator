@@ -43,7 +43,7 @@ export class SurveyLogicUI extends SurveyLogic {
     });
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
       if (this.readOnly) return;
-      updateMatrixRemoveAction(options.question, options.actions, options.row)
+      updateMatrixRemoveAction(options.question, options.actions, options.row);
     });
     this.updateItemsSurveyData();
     this.setupToolbarItems();
@@ -184,7 +184,7 @@ export class SurveyLogicUI extends SurveyLogic {
     this.expressionEditor.isModal = false;
   }
   private getVisibleItems(): SurveyLogicItem[] {
-    return this.items.filter(item => item.isNew || item.isSuitable(this.questionFilter, this.actionTypeFilter))
+    return this.items.filter(item => item.isNew || item.isSuitable(this.questionFilter, this.actionTypeFilter));
   }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
@@ -298,7 +298,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public createActions(items: Array<Action>) {
     const onQuestionPopupShow = () => {
       questionPopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllQuestionsText }].concat(
-        this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) } })
+        this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) }; })
       );
     };
     const questionPopupModel = new PopupModel<{ model: ListModel }>(
@@ -330,7 +330,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
 
     const onActionTypesPopupShow = () => {
       actionTypesPopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllActionTypesText }].concat(
-        this.model.getUsedActionTypes().map(type => { return { id: type.name, title: type.displayName } })
+        this.model.getUsedActionTypes().map(type => { return { id: type.name, title: type.displayName }; })
       );
     };
     const actionTypesPopupModel = new PopupModel<{ model: ListModel }>(

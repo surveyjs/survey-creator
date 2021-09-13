@@ -1,4 +1,4 @@
-import { StoryFn } from '@storybook/addons';
+import { StoryFn } from "@storybook/addons";
 
 export interface IKnockoutComponentStory {
   template: string | Node;

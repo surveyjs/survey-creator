@@ -23,7 +23,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     );
   }
   renderElementContent(): JSX.Element {
-    if(this.model.isEmpty){
+    if(this.model.isEmpty) {
       return (
         <div className="st-no-strings">
           <span>{this.model.noStringsText}</span>
@@ -45,7 +45,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
           </div>
         </div>
       );
-    } 
+    }
   }
 }
 

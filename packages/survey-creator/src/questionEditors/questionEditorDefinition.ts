@@ -2,18 +2,18 @@ import * as Survey from "survey-knockout";
 
 export interface ISurveyQuestionEditorDefinition {
   title?: string;
-  properties?: Array<string | { name: string; title?: string; tab?: string }>;
+  properties?: Array<string | { name: string, title?: string, tab?: string }>;
   tabs?: Array<{
-    name: string;
-    index?: number;
-    title?: string;
-    visible?: boolean;
+    name: string,
+    index?: number,
+    title?: string,
+    visible?: boolean,
   }>;
 }
 
 export class SurveyQuestionEditorDefinition {
   public static definition: {
-    [key: string]: ISurveyQuestionEditorDefinition;
+    [key: string]: ISurveyQuestionEditorDefinition,
   } = {
     question: {
       properties: [
