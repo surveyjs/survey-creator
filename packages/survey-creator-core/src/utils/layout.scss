@@ -31,8 +31,12 @@
   box-sizing: border-box;
   box-shadow: inset 0px -1px 0px $border;
 
-  .sv-action-bar {
-    width: 30%;
-    justify-content: flex-end;
+  .svc-toolbar-wrapper {
+    flex: 0 0 auto;
+    display: flex;
+    
+    .sv-action-bar{
+      justify-content: flex-end;
+    }
   }
 }

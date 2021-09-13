@@ -155,203 +155,211 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko if: creator.showTabs -->
           
         
-          <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
           <div
-            class="svc-tabbed-menu"
+            class="svc-tabbed-menu-wrapper"
           >
             
-  
-            <!-- ko foreach: renderedActions -->
-            
-  
-            <span
-              class="svc-tabbed-menu-item-container"
-              data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
+          
+            <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
+            <div
+              class="svc-tabbed-menu"
             >
               
-    
-              <div
-                class="sv-action__content"
+  
+              <!-- ko foreach: renderedActions -->
+              
+  
+              <span
+                class="svc-tabbed-menu-item-container"
+                data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
               >
                 
     
-                <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
                 <div
-                  class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
-                  data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+                  class="sv-action__content"
                 >
                   
-  
-                  <span
-                    class="svc-text svc-text--normal svc-tabbed-menu-item__text svc-text--bold"
-                    data-bind="text: title, css: { 'svc-text--bold': active }"
+    
+                  <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+                  <div
+                    class="svc-tabbed-menu-item svc-tabbed-menu-item--selected"
+                    data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
                   >
-                    Survey Designer
-                  </span>
+                    
+  
+                    <span
+                      class="svc-text svc-text--normal svc-tabbed-menu-item__text svc-text--bold"
+                      data-bind="text: title, css: { 'svc-text--bold': active }"
+                    >
+                      Survey Designer
+                    </span>
+                    
+
+                  </div>
                   
 
+                  <!-- /ko -->
+                  
+    
                 </div>
                 
-
-                <!-- /ko -->
-                
-    
-              </div>
+  
+              </span>
               
   
-            </span>
-            
-  
-            
-  
-            <span
-              class="svc-tabbed-menu-item-container"
-              data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
-            >
               
-    
-              <div
-                class="sv-action__content"
+  
+              <span
+                class="svc-tabbed-menu-item-container"
+                data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
               >
                 
     
-                <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
                 <div
-                  class="svc-tabbed-menu-item"
-                  data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+                  class="sv-action__content"
                 >
                   
-  
-                  <span
-                    class="svc-text svc-text--normal svc-tabbed-menu-item__text"
-                    data-bind="text: title, css: { 'svc-text--bold': active }"
+    
+                  <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+                  <div
+                    class="svc-tabbed-menu-item"
+                    data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
                   >
-                    Test Survey
-                  </span>
+                    
+  
+                    <span
+                      class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+                      data-bind="text: title, css: { 'svc-text--bold': active }"
+                    >
+                      Test Survey
+                    </span>
+                    
+
+                  </div>
                   
 
+                  <!-- /ko -->
+                  
+    
                 </div>
                 
-
-                <!-- /ko -->
-                
-    
-              </div>
+  
+              </span>
               
   
-            </span>
-            
-  
-            
-  
-            <span
-              class="svc-tabbed-menu-item-container"
-              data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
-            >
               
-    
-              <div
-                class="sv-action__content"
+  
+              <span
+                class="svc-tabbed-menu-item-container"
+                data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
               >
                 
     
-                <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
                 <div
-                  class="svc-tabbed-menu-item"
-                  data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+                  class="sv-action__content"
                 >
                   
-  
-                  <span
-                    class="svc-text svc-text--normal svc-tabbed-menu-item__text"
-                    data-bind="text: title, css: { 'svc-text--bold': active }"
+    
+                  <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+                  <div
+                    class="svc-tabbed-menu-item"
+                    data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
                   >
-                    JSON Editor
-                  </span>
+                    
+  
+                    <span
+                      class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+                      data-bind="text: title, css: { 'svc-text--bold': active }"
+                    >
+                      JSON Editor
+                    </span>
+                    
+
+                  </div>
                   
 
+                  <!-- /ko -->
+                  
+    
                 </div>
                 
-
-                <!-- /ko -->
-                
-    
-              </div>
+  
+              </span>
               
   
-            </span>
-            
-  
-            
-  
-            <span
-              class="svc-tabbed-menu-item-container"
-              data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
-            >
               
-    
-              <div
-                class="sv-action__content"
+  
+              <span
+                class="svc-tabbed-menu-item-container"
+                data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
               >
                 
     
-                <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
                 <div
-                  class="svc-tabbed-menu-item"
-                  data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
+                  class="sv-action__content"
                 >
                   
-  
-                  <span
-                    class="svc-text svc-text--normal svc-tabbed-menu-item__text"
-                    data-bind="text: title, css: { 'svc-text--bold': active }"
+    
+                  <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+                  <div
+                    class="svc-tabbed-menu-item"
+                    data-bind="click: action, key2click, css: { 'svc-tabbed-menu-item--selected': active, 'svc-tabbed-menu-item--disabled': disabled }"
                   >
-                    Embed Survey
-                  </span>
+                    
+  
+                    <span
+                      class="svc-text svc-text--normal svc-tabbed-menu-item__text"
+                      data-bind="text: title, css: { 'svc-text--bold': active }"
+                    >
+                      Embed Survey
+                    </span>
+                    
+
+                  </div>
                   
 
+                  <!-- /ko -->
+                  
+    
                 </div>
                 
-
-                <!-- /ko -->
-                
-    
-              </div>
+  
+              </span>
               
   
-            </span>
-            
-  
-            
-  
-            <span
-              class="svc-tabbed-menu-item-container sv-action--hidden sv-dots"
-              data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
-            >
               
-    
-              <div
-                class="sv-action__content"
+  
+              <span
+                class="svc-tabbed-menu-item-container sv-action--hidden sv-dots"
+                data-bind="css: { 'sv-action--hidden': !isVisible }, class: $data.css"
               >
                 
     
-                <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
-                <!-- /ko -->
-                
+                <div
+                  class="sv-action__content"
+                >
+                  
     
-              </div>
+                  <!-- ko component: { name: $data.component || 'svc-tabbed-menu-item', params: { item: $data } } -->
+                  <!-- /ko -->
+                  
+    
+                </div>
+                
+  
+              </span>
               
   
-            </span>
+              <!-- /ko -->
+              
+
+            </div>
             
-  
+
             <!-- /ko -->
             
-
+        
           </div>
-          
-
-          <!-- /ko -->
           
         
           <!-- /ko -->
@@ -360,8 +368,16 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           <!-- ko if: creator.showToolbar -->
           
         
-          <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
-          <!-- /ko -->
+          <div
+            class="svc-toolbar-wrapper"
+          >
+            
+          
+            <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
+            <!-- /ko -->
+            
+        
+          </div>
           
         
           <!-- /ko -->

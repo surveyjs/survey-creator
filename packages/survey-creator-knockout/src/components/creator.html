@@ -3,12 +3,16 @@
     <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
       <div class="svc-top-bar">
         <!-- ko if: creator.showTabs -->
-        <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
-        <!-- /ko -->
+        <div class="svc-tabbed-menu-wrapper">
+          <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
+          <!-- /ko -->
+        </div>
         <!-- /ko -->
         <!-- ko if: creator.showToolbar -->
-        <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
-        <!-- /ko -->
+        <div class="svc-toolbar-wrapper">
+          <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
+          <!-- /ko -->
+        </div>
         <!-- /ko -->
       </div>
       <div class="svc-creator__content-wrapper svc-flex-row">

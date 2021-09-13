@@ -78,10 +78,17 @@ export class SurveyCreatorComponent extends SurveyElementBase<
           <div className="svc-flex-row svc-full-container">
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
               <div className="svc-top-bar">
-                {(creator.showTabs ? <TabbedMenuComponent
-                  model={creator.tabbedMenu}
-                ></TabbedMenuComponent> : null)}
-                {(creator.showToolbar ? <SurveyActionBar model={creator.toolbar}></SurveyActionBar> : null)}
+                {(creator.showTabs ?
+                <div className="svc-tabbed-menu-wrapper">
+                  <TabbedMenuComponent
+                    model={creator.tabbedMenu}
+                  ></TabbedMenuComponent>
+                </div> : null)}
+                {(creator.showToolbar ?
+                <div className="svc-toolbar-wrapper">
+                  <SurveyActionBar model={creator.toolbar}></SurveyActionBar>
+                </div>
+                 : null)}
               </div>
               <div className="svc-creator__content-wrapper svc-flex-row">
                 <div className="svc-creator__content-holder svc-flex-column">
