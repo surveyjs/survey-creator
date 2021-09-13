@@ -66,6 +66,7 @@ steps:
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm run remove-package-lock
     npm install
   displayName: 'Npm install survey-creator'
 
