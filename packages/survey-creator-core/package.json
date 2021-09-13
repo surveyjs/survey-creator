@@ -15,7 +15,8 @@
     "watch:dev": "webpack --env.buildType dev --watch",
     "watch:prod": "webpack --env.buildType prod --watch",
     "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease beta",
-    "remove-package-lock": "rimraf package-lock.json"
+    "remove-package-lock": "rimraf package-lock.json",
+    "lint": "eslint ./src"
   },
   "dependencies": {
     "eslint": "^7.32.0",
@@ -40,6 +41,7 @@
     "css-loader": "^3.6.0",
     "dotenv": "4.0.0",
     "dts-bundle": "0.7.2",
+    "eslint": "^7.32.0",
     "file-loader": "0.10.0",
     "github-api": "^3.3.0",
     "html-loader": "0.4.4",

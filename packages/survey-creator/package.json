@@ -21,7 +21,8 @@
     "build_dev": "webpack --env.buildType dev --env.libraryName SurveyEditor && webpack --env.buildType dev",
     "build_prod": "webpack --env.buildType dev --env.libraryName SurveyEditor && webpack --env.buildType prod --env.libraryName SurveyEditor && webpack --env.buildType dev && webpack --env.buildType prod",
     "build": "npm run build_prod",
-    "watch:dev": "webpack --env.buildType dev --watch"
+    "watch:dev": "webpack --env.buildType dev --watch",
+    "lint": "eslint ./src"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
@@ -47,6 +48,7 @@
     "css-loader": "^3.6.0",
     "dotenv": "4.0.0",
     "dts-bundle": "0.7.2",
+    "eslint": "^7.32.0",
     "file-loader": "0.10.0",
     "github-api": "^3.3.0",
     "html-loader": "0.4.4",
