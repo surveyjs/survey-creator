@@ -17,7 +17,8 @@
         "testcafe:file": "lerna run testcafe:file",
         "dev": "concurrently \"npm run dev --prefix ../survey-library\" \"http-server -p 7777 --silent\" \"npm run watch:dev --prefix packages/survey-creator-core\" \"npm run watch:prod --prefix packages/survey-creator-core\" \"npm run watch:dev --prefix packages/survey-creator-knockout\" \"npm run watch:prod --prefix packages/survey-creator-knockout\" \"npm run watch:dev --prefix packages/survey-creator-react\" \"npm run watch:prod --prefix packages/survey-creator-react\" ",
         "testcafe:dev": "testcafe chrome ./testCafe/designer/drag-drop.js --reporter minimal --selector-timeout 1500",
-        "lint": "eslint ./packages --quiet"
+        "lint": "eslint ./packages --quiet",
+        "pre-push-check": "npm run lint && npm run test"
     },
     "devDependencies": {
         "@types/jest": "^26.0.23",
@@ -33,7 +34,7 @@
     "dependencies": {},
     "husky": {
         "hooks": {
-            "pre-push": "npm test"
+            "pre-push": "npm run pre-push-check"
         }
     }
 }
