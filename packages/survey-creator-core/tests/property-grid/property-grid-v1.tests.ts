@@ -981,7 +981,7 @@ QUnit.test(
       );
       assert.ok(colDetailEditor.getPropertyEditorByName("choices"));
       columnsEditor.onReturnToListClick();
-  
+
       itemViewModel.obj.cellType = "default";
       columnsEditor.onEditItemClick(itemViewModel);
       colDetailEditor = <SurveyElementEditorContentModel>(
@@ -1016,7 +1016,7 @@ test("SurveyNestedPropertyEditorItem koCanDeleteItem", () => {
   propertyGrid = new PropertyGridModelTester(question, options);
   columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
-  );  
+  );
   expect(
     columnsQuestion.canRemoveRow(columnsQuestion.visibleRows[0])
   ).toBeFalsy();
@@ -1252,10 +1252,10 @@ test("Triggers property editor", () => {
       "Run if: {Question1 title} != val1",
       "display text shows correctly"
     );
-  
+
     propEditor.onAddClick({ value: "skiptrigger" });
     assert.equal(survey.triggers.length, 2, "There are two triggers now");
-  
+
     var trigerEditor = <SurveyElementEditorContentModel>(
       propEditor.selectedObjectEditor()
     );
@@ -1273,7 +1273,7 @@ test("Triggers property editor", () => {
       (<Survey.SurveyTriggerSkip>survey.triggers[1]).gotoName,
       "question3"
     );
-  
+
     propEditor.onAddClick({ value: "copyvaluetrigger" });
     assert.equal(survey.triggers.length, 3, "There are three triggers now");
     propEditor.onDeleteClick();
@@ -2032,7 +2032,7 @@ QUnit.test("SurveyPropertyMultipleValuesEditor - categories ",
         },
       });
       var property = Survey.Serializer.findProperty("question", "multiple");
-  
+
       var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
       var categories = propertyEditor.koCategories();
       assert.equal(categories.length, 3, "There are 3 categories");
@@ -2057,7 +2057,7 @@ QUnit.test("SurveyPropertyMultipleValuesEditor - categories ",
         "category 2",
         "The third category is 2"
       );
-  
+
       Survey.Serializer.removeProperty("question", "multiple");
     }
   );

@@ -5,7 +5,7 @@ import { CreatorTester } from "./creator-tester";
 
 test("QuestionRatingAdornerViewModel add/remove items w/o ratingItems", () => {
   const ratingQuestion = new QuestionRatingModel("q1");
-  const ratingEditor = new QuestionRatingAdornerViewModel( new CreatorTester(), ratingQuestion, <any>{});
+  const ratingEditor = new QuestionRatingAdornerViewModel(new CreatorTester(), ratingQuestion, <any>{});
 
   expect(ratingQuestion.rateMin).toEqual(1);
   expect(ratingQuestion.rateMax).toEqual(5);
@@ -23,7 +23,7 @@ test("QuestionRatingAdornerViewModel add/remove items w/o ratingItems", () => {
 test("QuestionRatingAdornerViewModel add/remove rateValues", () => {
   const ratingQuestion = new QuestionRatingModel("q1");
   ratingQuestion.rateValues = ["item1", "item2", "item3"];
-  const ratingEditor = new QuestionRatingAdornerViewModel( new CreatorTester(), ratingQuestion, <any>{});
+  const ratingEditor = new QuestionRatingAdornerViewModel(new CreatorTester(), ratingQuestion, <any>{});
 
   expect(ratingQuestion.rateValues).toHaveLength(3);
 
@@ -44,15 +44,15 @@ test("MatrixCellWrapperViewModel select context", () => {
     selectElement: undefined,
     onSelectedElementChanged: new Event()
   };
-    creator.selectElement = (element: any, property?: string, focus?: boolean) => {
+  creator.selectElement = (element: any, property?: string, focus?: boolean) => {
     creator.selectedElement = element;
     creator.selectedProperty = property;
   };
   const event: any = {
     stopPropagation: () => {}
-    }
+  };
 
-    let cellWrapper = new MatrixCellWrapperViewModel(creator, null, null, null, null);
+  let cellWrapper = new MatrixCellWrapperViewModel(creator, null, null, null, null);
 
   const row = { data: {} };
   cellWrapper.row = row;
@@ -60,7 +60,7 @@ test("MatrixCellWrapperViewModel select context", () => {
   expect(creator.selectedElement).toBe(row.data);
   expect(creator.selectedProperty).toBe("rows");
 
-    const column = { getType: () => "itemvalue", locOwner: {}, ownerPropertyName: "columns" };
+  const column = { getType: () => "itemvalue", locOwner: {}, ownerPropertyName: "columns" };
   cellWrapper.row = undefined;
   cellWrapper.column = column;
   cellWrapper.selectContext(cellWrapper, event);

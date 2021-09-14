@@ -354,11 +354,11 @@ export function createAfterRenderPageHandler(
           getSurvey(page)["selectedElement"] = page;
         }
       };
-  
+
       domElement.ondblclick = function (e) {
         getSurvey(page).doElementDoubleClick(page);
       };
-  
+
       addAdorner(domElement, page);
     }, 1);
   };
