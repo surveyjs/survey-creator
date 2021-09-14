@@ -7,7 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 function normalize(str) {
-    return str.replace(/\xa0/gi, " ");
+    return str.replace(/\xa0/gi, " ").replace(/(?:\r\n|\r|\n)/g, "");
 }
 
 test("Single input question wrapper actions", async (t) => {
@@ -195,7 +195,7 @@ test("Single input question wrapper action change require", async (t) => {
 
     await t.click(requiredActionButton);
     title = await questionTitle.innerText;
-    await t.expect(normalize(title)).eql("1. question1\n *");
+    await t.expect(normalize(title)).eql("1. question1 *");
     await t
         .expect(requiredActionRoot.hasClass("sv-action-bar-item--secondary"))
         .ok();
