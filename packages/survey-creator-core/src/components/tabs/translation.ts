@@ -647,6 +647,7 @@ export class Translation extends Base implements ITranslationLocales {
       if(options.cell.question instanceof QuestionCommentModel) {
         options.cell.question.rows = 1;
         options.cell.question.placeHolder = this.placeHolderText;
+        options.cell.question.multiLine = false;
       }
     });
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
