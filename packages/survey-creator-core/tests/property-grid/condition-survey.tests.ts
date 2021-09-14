@@ -92,7 +92,7 @@ test("Custom text for condition title", () => {
   options.onConditionGetTitleCallback = (expression: string, title: string): string => {
     if(!expression) return "Please setup the expression";
     return "Your expression is: " + title;
-  }
+  };
   const conditionEditor = new ConditionEditor(survey, survey.getQuestionByName("q1"), options);
   expect(conditionEditor.title).toEqual("Please setup the expression");
   conditionEditor.text = "{q} = 1";
@@ -1385,8 +1385,8 @@ test("questionName choices", () => {
   const question = survey.getQuestionByName("q4");
   const editor = new ConditionEditor(survey, question);
   const panel = editor.panel.panels[0];
-  const choices =  panel.getQuestionByName("questionName").choices;
-  expect(choices).toHaveLength(4)
+  const choices = panel.getQuestionByName("questionName").choices;
+  expect(choices).toHaveLength(4);
   expect(choices[0].text).toEqual("question 1");
   expect(choices[1].text).toEqual("question 2");
   expect(choices[2].text).toEqual("question 10");

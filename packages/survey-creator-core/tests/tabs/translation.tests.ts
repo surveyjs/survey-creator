@@ -59,15 +59,15 @@ test("settingsSurvey layout", () => {
   let panel = translation.settingsSurvey.getPanelByName("languages");
   expect(panel.elements).toHaveLength(2);
   let elements = panel.elements;
-  expect(elements[0].getType()).toEqual("checkbox")
-  expect(elements[0].name).toEqual("defaultLanguage")
-  expect(elements[0].isReadOnly).toBeTruthy()
-  expect(elements[0]["choices"][0].value).toEqual("Default (english)")
-  expect(elements[0]["defaultValue"][0]).toEqual("Default (english)")
+  expect(elements[0].getType()).toEqual("checkbox");
+  expect(elements[0].name).toEqual("defaultLanguage");
+  expect(elements[0].isReadOnly).toBeTruthy();
+  expect(elements[0]["choices"][0].value).toEqual("Default (english)");
+  expect(elements[0]["defaultValue"][0]).toEqual("Default (english)");
 
-  expect(elements[1].getType()).toEqual("checkbox")
-  expect(elements[1].name).toEqual("locales")
-  expect(elements[1]["choicesVisibleIf"]).toEqual("{selLocales} contains {item}")
+  expect(elements[1].getType()).toEqual("checkbox");
+  expect(elements[1].name).toEqual("locales");
+  expect(elements[1]["choicesVisibleIf"]).toEqual("{selLocales} contains {item}");
 
 });
 
@@ -359,7 +359,7 @@ test("Translation update filterPageActiontitle after activated", () => {
 
   tabTranslationPlugin.deactivate();
   tabTranslationPlugin.activate();
-  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages"); 
+  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages");
 });
 
 test("StringsHeaderSurvey layout", () => {
@@ -395,7 +395,7 @@ test("StringsHeaderSurvey layout", () => {
   expect(headerMatrix.rowTitleWidth).toEqual("300px");
   expect(headerMatrix.columns).toHaveLength(1);
   expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/1)");
-  
+
   translation.addLocale("de");
   expect(stringsMatrix.rowTitleWidth).toEqual("300px");
   expect(stringsMatrix.columns).toHaveLength(2);

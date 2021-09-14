@@ -96,7 +96,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                 </div>
               </div>
             </div>
-            <div style={{ display: this.creator.activeTab === "designer" ? "block": "none" }}>
+            <div style={{ display: this.creator.activeTab === "designer" ? "block" : "none" }}>
               {ReactElementFactory.Instance.createElement("svc-property-grid", {
                 model: this.creator
               })}
@@ -121,7 +121,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return null;
   }
   renderCreatorTab(tab: ITabbedMenuItem) {
-    if(tab.visible === false) {
+    if (tab.visible === false) {
       return null;
     }
     const creator: CreatorBase<SurveyModel> = this.props.creator;

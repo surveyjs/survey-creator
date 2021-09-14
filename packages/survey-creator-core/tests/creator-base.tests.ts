@@ -61,6 +61,7 @@ test("Select new added question", (): any => {
     elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.activeTab).toEqual("designer");
+  // eslint-disable-next-line no-self-assign
   creator.survey.currentPage = creator.survey.currentPage;
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question2");
@@ -100,6 +101,7 @@ test("Update JSON before drag&drop", (): any => {
     elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.activeTab).toEqual("designer");
+  // eslint-disable-next-line no-self-assign
   creator.survey.currentPage = creator.survey.currentPage;
   var json: any = {
     type: "panel",
@@ -896,7 +898,7 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
   const json = {
     pages: [
       {
-        elements: [{type: "text", name: "q1"}]
+        elements: [{ type: "text", name: "q1" }]
       }
     ]
   };

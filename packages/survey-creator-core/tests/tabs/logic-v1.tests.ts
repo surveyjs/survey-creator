@@ -1091,7 +1091,7 @@ test("Hide/show logic types in actions", () => {
     logic.removeItem(logic.items[0]);
     expect(modifiedCounter, 2, "It was changed two times");
   });
-  
+
   test(
     "Hide Expression Header in Condition Property Editor in Logic tab",
     () => {
