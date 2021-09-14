@@ -6,6 +6,7 @@ import { ISurveyCreatorOptions } from "../settings";
 import {
   getFirstNonTextElement,
   getNodesFromKoComponentInfo,
+  trimValue,
 } from "../utils/utils";
 
 export interface ISurveyObjectEditorOptions extends ISurveyCreatorOptions {
@@ -291,7 +292,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected checkForErrors(): boolean {
     var errorText = "";
     if (this.isRequired || this.checkForItemValue()) {
-      var er = this.isCurrentValueEmpty;
+      var er = this.isValueEmpty(trimValue(this.koValue()));
       if (er) {
         errorText = this.getLocString("pe.propertyIsEmpty");
       }
@@ -462,7 +463,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     if (
       newValue !== null &&
       newValue !== undefined &&
-      !Survey.Helpers.isTwoValueEquals(newValue, copiedValue)
+      !Survey.Helpers.isTwoValueEquals(newValue, copiedValue, false, true, false)
     ) {
       this.koValue(newValue);
     }

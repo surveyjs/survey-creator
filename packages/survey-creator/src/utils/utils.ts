@@ -191,3 +191,9 @@ export function isPropertyVisible(obj: any, propertyName: string) {
   }
   return result;
 }
+
+export function trimValue(value: any): any {
+  if (!!value && (typeof value === "string" || value instanceof String))
+    return value.trim();
+  return value;
+}
