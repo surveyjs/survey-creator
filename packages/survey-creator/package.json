@@ -22,7 +22,8 @@
     "build_prod": "webpack --env.buildType dev --env.libraryName SurveyEditor && webpack --env.buildType prod --env.libraryName SurveyEditor && webpack --env.buildType dev && webpack --env.buildType prod",
     "build": "npm run build_prod",
     "watch:dev": "webpack --env.buildType dev --watch",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "remove-package-lock": "rimraf package-lock.json"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
