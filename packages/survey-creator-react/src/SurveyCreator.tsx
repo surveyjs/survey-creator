@@ -79,16 +79,16 @@ export class SurveyCreatorComponent extends SurveyElementBase<
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
               <div className="svc-top-bar">
                 {(creator.showTabs ?
-                <div className="svc-tabbed-menu-wrapper">
-                  <TabbedMenuComponent
-                    model={creator.tabbedMenu}
-                  ></TabbedMenuComponent>
-                </div> : null)}
+                  <div className="svc-tabbed-menu-wrapper">
+                    <TabbedMenuComponent
+                      model={creator.tabbedMenu}
+                    ></TabbedMenuComponent>
+                  </div> : null)}
                 {(creator.showToolbar ?
-                <div className="svc-toolbar-wrapper">
-                  <SurveyActionBar model={creator.toolbar}></SurveyActionBar>
-                </div>
-                 : null)}
+                  <div className="svc-toolbar-wrapper">
+                    <SurveyActionBar model={creator.toolbar}></SurveyActionBar>
+                  </div>
+                  : null)}
               </div>
               <div className="svc-creator__content-wrapper svc-flex-row">
                 <div className="svc-creator__content-holder svc-flex-column">
@@ -96,7 +96,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                 </div>
               </div>
             </div>
-            <div style={{ display: this.creator.activeTab === "designer" ? "block": "none" }}>
+            <div style={{ display: this.creator.activeTab === "designer" ? "block" : "none" }}>
               {ReactElementFactory.Instance.createElement("svc-property-grid", {
                 model: this.creator
               })}
@@ -121,7 +121,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return null;
   }
   renderCreatorTab(tab: ITabbedMenuItem) {
-    if(tab.visible === false) {
+    if (tab.visible === false) {
       return null;
     }
     const creator: CreatorBase<SurveyModel> = this.props.creator;
