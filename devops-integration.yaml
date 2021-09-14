@@ -72,6 +72,7 @@ steps:
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm install
+    rm package-lock.json
   displayName: 'Npm install survey-creator'
 
 - script: |
