@@ -636,6 +636,9 @@ export class PropertyGridModel {
   private classNameValue: any;
   public objValueChangedCallback: () => void;
   public changedFromActionCallback: (obj: Base, propertyName: string) => void;
+  public refresh(): void {
+    this.setObj(this.objValue);
+  }
   constructor(
     obj: Base = null,
     options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
