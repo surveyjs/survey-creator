@@ -1243,3 +1243,10 @@ test("Set readOnly option", (): any => {
     expect(e).toBeNull();
   }
 });
+test("Set allowEditSurveyTitle option", (): any => {
+  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  expect(creator.allowEditSurveyTitle).toBeFalsy();
+  expect(Serializer.findProperty("survey", "title").visible).toBeFalsy();
+  creator.allowEditSurveyTitle = true;
+  expect(Serializer.findProperty("survey", "title").visible).toBeTruthy();
+});
