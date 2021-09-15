@@ -251,11 +251,11 @@ export class TitleInplaceEditor {
     this.hideEditor();
   };
   compositionStart = (model, event) => {
-    console.log("compositionStart");
+    //console.log("compositionStart");
     this.compositionCount++;
   };
   compositionEnd = (model, event) => {
-    console.log("compositionEnd");
+    //console.log("compositionEnd");
   };
   nameEditorKeypress = (model, event) => {
     resizeInput(event.target);
