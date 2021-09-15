@@ -245,14 +245,24 @@ export class TitleInplaceEditor {
     }
     this.hideEditor();
   };
+  compositionCount = 0;
   cancelEdit = () => {
     this.editingName(this.prevName());
     this.hideEditor();
+  };
+  compositionStart = (model, event) => {
+    console.log("compositionStart");
+    this.compositionCount++;
+  };
+  compositionEnd = (model, event) => {
+    console.log("compositionEnd");
   };
   nameEditorKeypress = (model, event) => {
     resizeInput(event.target);
     switch (event.keyCode) {
       case 13:
+        this.compositionCount--;
+        if (this.compositionCount > 0) return true;
         this.postEdit();
         event.stopPropagation();
         return false;
