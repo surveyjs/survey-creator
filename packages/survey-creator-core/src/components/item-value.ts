@@ -17,6 +17,7 @@ export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isDragDropGhost: boolean;
   @property({ defaultValue: false }) isDragDropMoveDown: boolean;
   @property({ defaultValue: false }) isDragDropMoveUp: boolean;
+  @property({ defaultValue: null }) ghostPosition: string; // need fot image-item-value
   constructor(
     public creator: CreatorBase<SurveyModel>,
     public question: QuestionSelectBase,
@@ -52,6 +53,7 @@ export class ItemValueWrapperViewModel extends Base {
     );
   }
   private handleDragDropGhostPositionChanged = () => {
+    this.ghostPosition = this.dragDropHelper.getGhostPosition(this.item);
     this.isDragDropGhost = this.item === this.dragDropHelper.draggedElement;
     
     if (this.item === this.dragDropHelper.dropTarget) {
