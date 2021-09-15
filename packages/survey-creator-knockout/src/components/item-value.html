@@ -1,11 +1,8 @@
 <div
   class="svc-item-value-wrapper"
-  data-bind="attr: attributes, css: { 'svc-item-value--new': isNew, 'svc-item-value--dragging': isDragging }"
+  data-bind="attr: attributes, css: { 'svc-item-value--new': isNew, 'svc-item-value--dragging': isDragging, 'svc-item-value--ghost': isDragDropGhost, 'svc-item-value--movedown':isDragDropMoveDown, 'svc-item-value--moveup':isDragDropMoveUp }"
 >
-  <!-- ko if: showDragDropGhostOnTop -->
-  <div class="sv-drag-drop-ghost"></div>
-  <!-- /ko -->
-
+  <div class="svc-item-value__ghost"></div>
   <div class="svc-item-value-controls">
     <!-- ko if: isDraggable -->
     <sv-svg-icon
@@ -35,8 +32,4 @@
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
   </div>
-
-  <!-- ko if: showDragDropGhostOnBottom -->
-  <div class="sv-drag-drop-ghost sv-drag-drop-ghost--item-value-bottom"></div>
-  <!-- /ko -->
 </div>

@@ -33,16 +33,6 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     return this.model;
   }
 
-  private getDragDropGhost(topOrBottom: string) {
-    if (this.model.ghostPosition === topOrBottom) {
-      let className = "sv-drag-drop-ghost";
-      if (topOrBottom === "bottom")
-        className += " sv-drag-drop-ghost--item-value-bottom";
-      return <div className={className}></div>;
-    }
-    return null;
-  }
-
   render(): JSX.Element {
     // if (this.model.question.isDragged) {
     //   return null;
@@ -77,25 +67,27 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         </span>) : null}
       </>
     );
+
     return (
       <div
         className={
           "svc-item-value-wrapper" +
           (this.model.allowAdd ? " svc-item-value--new" : "") +
-          (this.model.isDragging ? " svc-item-value--dragging" : "")
+          (this.model.isDragging ? " svc-item-value--dragging" : "") + 
+          (this.model.isDragDropGhost ? " svc-item-value--ghost" : "") + 
+          (this.model.isDragDropMoveDown ? " svc-item-value--movedown" : "") +
+          (this.model.isDragDropMoveUp ? " svc-item-value--moveup" : "")
         }
         key={this.props.element.key}
         data-sv-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }
       >
-        {this.getDragDropGhost("top")}
+        <div className="svc-item-value__ghost"></div>
 
         <div className="svc-item-value-controls">{button}</div>
 
         <div className={"svc-item-value__item"} onClick={(event) => this.model.select(this.model, event)}>{this.props.element}</div>
-
-        {this.getDragDropGhost("bottom")}
       </div>
     );
   }

@@ -14,6 +14,9 @@ import { getLocString } from "../editorLocalization";
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
   @property({ defaultValue: false }) isDragging: boolean;
+  @property({ defaultValue: false }) isDragDropGhost: boolean;
+  @property({ defaultValue: false }) isDragDropMoveDown: boolean;
+  @property({ defaultValue: false }) isDragDropMoveUp: boolean;
   constructor(
     public creator: CreatorBase<SurveyModel>,
     public question: QuestionSelectBase,
@@ -36,7 +39,12 @@ export class ItemValueWrapperViewModel extends Base {
     );
   }
 
-  @property({ defaultValue: null }) ghostPosition: string;
+  startDragItemValue(event: PointerEvent) {
+    this.dragDropHelper.startDrag(event, this.item, this.question, <HTMLElement>event.currentTarget);
+  }
+  private get dragDropHelper(): DragDropChoices {
+    return this.creator.dragDropChoices;
+  }
   public dispose() {
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
@@ -44,9 +52,16 @@ export class ItemValueWrapperViewModel extends Base {
     );
   }
   private handleDragDropGhostPositionChanged = () => {
-    this.ghostPosition = this.dragDropHelper.getGhostPosition(this.item);
+    this.isDragDropGhost = this.item === this.dragDropHelper.draggedElement;
+    
+    if (this.item === this.dragDropHelper.dropTarget) {
+      this.isDragDropMoveDown = this.item.isDragDropMoveDown;
+      this.isDragDropMoveUp = this.item.isDragDropMoveUp;
+    }
   };
-
+  get isDraggable() {
+    return this.isDraggableItem(this.item);
+  }
   public isDraggableItem(item: ItemValue) {
     if (this.creator.readOnly) return false;
     return this.question.choices.indexOf(item) !== -1;
@@ -86,15 +101,7 @@ export class ItemValueWrapperViewModel extends Base {
     }
     this.isNew = !model.question["isItemInList"](model.item);
   }
-  startDragItemValue(event: PointerEvent) {
-    this.dragDropHelper.startDrag(event, this.item, this.question, <HTMLElement>event.currentTarget);
-  }
-  private get dragDropHelper(): DragDropChoices {
-    return this.creator.dragDropChoices;
-  }
-  get isDraggable() {
-    return this.isDraggableItem(this.item);
-  }
+
   get allowRemove() {
     return !this.creator.readOnly;
   }
