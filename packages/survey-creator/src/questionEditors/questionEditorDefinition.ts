@@ -1,5 +1,3 @@
-import * as Survey from "survey-knockout";
-
 export interface ISurveyQuestionEditorDefinition {
   title?: string;
   properties?: Array<string | { name: string, title?: string, tab?: string }>;
@@ -60,6 +58,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxLength", tab: "validation" },
         { name: "textUpdateMode", tab: "data" },
         { name: "autoGrow", tab: "layout" },
+        { name: "multiLine", tab: "layout" },
       ],
     },
     file: {
@@ -75,6 +74,7 @@ export class SurveyQuestionEditorDefinition {
         "imageHeight",
         "imageWidth",
         "waitForUpload",
+        "needConfirmRemoveFile"
       ],
     },
     html: {
@@ -103,6 +103,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "allowAddRows",
         "allowRemoveRows",
+        "allowRowsDragAndDrop",
         "rowCount",
         "minRowCount",
         "maxRowCount",
@@ -132,6 +133,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "isAllRowRequired", tab: "validation" },
         { name: "showHeader", tab: "layout" },
         { name: "rowsOrder", tab: "rows" },
+        { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "columnsVisibleIf", tab: "logic" },
         { name: "rowsVisibleIf", tab: "logic" },
       ],
@@ -196,6 +198,7 @@ export class SurveyQuestionEditorDefinition {
     dropdown: {
       properties: [
         "optionsCaption",
+        "autoComplete",
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
@@ -219,6 +222,7 @@ export class SurveyQuestionEditorDefinition {
         "imageFit",
         "imageHeight",
         "imageWidth",
+        "text"
       ],
     },
     "itemvalue[]@choices": {

@@ -2057,3 +2057,31 @@ test("Use maxLength property attribute", () => {
   expect(titleQuestion.getType()).toEqual("comment");
   expect(titleQuestion.maxLength).toEqual(20);
 });
+test("We should not have 'Others' category in our objects", () => {
+  const survey = new SurveyModel();
+  const page = survey.addNewPage("page1");
+  const panel = page.addNewPanel("panel");
+  const objToCheck: Array<Base> = [survey, panel, page];
+  const allQuestionTypes = Serializer.getChildrenClasses("question", true);
+  for(let i = 0; i < allQuestionTypes.length; i ++) {
+    let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
+    if(!!question && !question.isCompositeQuestion) {
+      objToCheck.push(question);
+    }
+  }
+  const matrix = new QuestionMatrixDynamicModel("matrix");
+  page.addQuestion(matrix);
+  objToCheck.push(matrix.addColumn("col1"));
+  for(let i = 0; i < objToCheck.length; i ++) {
+    let propGrid = new PropertyGridModelTester(objToCheck[i]);
+    let panel = <PanelModel>propGrid.survey.getPanelByName("others");
+    if(!!panel) {
+      const props = panel.questions;
+      const questionNames: Array<string> = [];
+      for(var j = 0; j < props.length; j ++) {
+        questionNames.push(props[j].name);
+      }
+      expect("obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(questionNames)).toBeFalsy();
+    }
+  }
+});
