@@ -59,6 +59,7 @@ export class SurveyQuestionEditorDefinition {
         "placeHolder",
         { name: "maxLength", tab: "validation" },
         { name: "textUpdateMode", tab: "data" },
+        { name: "autoGrow", tab: "layout" },
       ],
     },
     file: {
@@ -517,6 +518,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "questionsOrder", tab: "question" },
         { name: "maxTextLength", tab: "question" },
         { name: "maxOthersLength", tab: "question" },
+        { name: "autoGrowComment", tab: "question" },
 
         { name: "showPageTitles", tab: "pages" },
         { name: "showPageNumbers", tab: "pages" },

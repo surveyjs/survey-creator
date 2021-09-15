@@ -56,7 +56,7 @@ test(`dropdown change item values`, async (t) => {
 // });
 
 test(`text change title`, async (t) => {
-  var questionTitleTextSelector = `.sv_qstn .title_editable > div > span > span:nth-child(3)`;
+  var questionTitleTextSelector = `.sv_qstn .title_editable > span:nth-child(3)`;
   await t
     .click(`[title="Single Input"]`)
     .click(questionTitleTextSelector)

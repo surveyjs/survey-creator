@@ -1095,7 +1095,7 @@ test("options.onCollectionItemAllowingCallback", () => {
     obj: Base,
     property: JsonObjectProperty,
     collection: Array<Base>,
-    item: Base, 
+    item: Base,
     options: ICollectionItemAllowOperations
   ): void => {
     options.allowDelete = (<ItemValue>item).value % 2 == 1;
@@ -1103,7 +1103,7 @@ test("options.onCollectionItemAllowingCallback", () => {
   };
   const question = new QuestionDropdownModel("q1");
   for(let i = 0; i < 5; i ++) {
-    question.choices.push(new ItemValue(i + 1));  
+    question.choices.push(new ItemValue(i + 1));
   }
   var propertyGrid = new PropertyGridModelTester(question, options);
   var editQuestion = <QuestionMatrixDynamicModel>(
