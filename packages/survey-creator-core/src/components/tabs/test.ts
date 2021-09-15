@@ -518,7 +518,6 @@ export class TestSurveyTabViewModel extends Base {
 
 export class TabTestPlugin implements ICreatorPlugin {
   public model: TestSurveyTabViewModel;
-  private previewAction: Action;
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("test", this, getLocString("ed.testSurvey"));
   }
@@ -528,7 +527,6 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.creator["onTestSurveyCreated"] &&
         this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
     };
-    this.previewAction.css = "sv-action-bar-item--secondary";
     const options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
       showDefaultLanguageInTestSurveyTab:
@@ -541,24 +539,8 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.model.show();
   }
   public deactivate(): boolean {
-    this.previewAction.css = "";
     this.model.onSurveyCreatedCallback = undefined;
     this.model = undefined;
     return true;
-  }
-  public createActions(items: Array<Action>) {
-    this.previewAction = new Action({
-      id: "icon-preview",
-      iconName: "icon-preview",
-      needSeparator: true,
-      css:
-        this.creator.viewType === "test" ? "sv-action-bar-item--secondary" : "",
-      action: () => {
-        this.creator.makeNewViewActive("test");
-      },
-      active: false,
-      title: "Preview"
-    });
-    items.push(this.previewAction);
   }
 }

@@ -331,14 +331,15 @@ export class PropertyGridTitleActionsCreator {
     question: Question
   ) {
     const surveyPropertyEditor = editor.createPropertyEditorSetup(
-      this.obj,
+      question.obj,
       property,
       question,
       this.options
     );
-    if (!surveyPropertyEditor) return;
+    if (!surveyPropertyEditor) return null;
     surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
     surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
+    if(!settings.showModal) return surveyPropertyEditor;
     settings.showModal(
       "survey",
       {
@@ -352,6 +353,7 @@ export class PropertyGridTitleActionsCreator {
       "sv-property-editor",
       question.title
     );
+    return surveyPropertyEditor;
   }
 
   private createEditorSetupAction(
@@ -369,7 +371,7 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.edit"),
       showTitle: false,
       action: () => {
-        this.showModalPropertyEditor(editor, property, question);
+        return this.showModalPropertyEditor(editor, property, question);
       }
     };
     return setupAction;
@@ -636,6 +638,9 @@ export class PropertyGridModel {
   private classNameValue: any;
   public objValueChangedCallback: () => void;
   public changedFromActionCallback: (obj: Base, propertyName: string) => void;
+  public refresh(): void {
+    this.setObj(this.objValue);
+  }
   constructor(
     obj: Base = null,
     options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
