@@ -54,7 +54,6 @@
     "github-api": "^3.3.0",
     "html-loader": "0.4.4",
     "http-server": "^0.12.3",
-    "husky": "^1.2.1",
     "jquery": "^3.5.1",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -82,10 +81,5 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-svgstore-plugin": "4.0.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run test"
-    }
   }
 }
