@@ -65,7 +65,7 @@ export class QuestionLinkValueModel extends Question {
 
 Serializer.addClass(
   "linkvalue",
-  ["linkValueText"],
+  [],
   function () {
     return new QuestionLinkValueModel("");
   },
