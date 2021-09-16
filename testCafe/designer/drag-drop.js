@@ -261,7 +261,7 @@ test("Drag Drop ItemValue (choices)", async (t) => {
         offsetX: 5,
         offsetY: 5,
         destinationOffsetY: -40,
-        speed: 0.5
+        speed: 0.1
     });
     let value = await getItemValueByIndex("question1", 0);
     await t.expect(value).eql(expectedValue);
@@ -270,7 +270,7 @@ test("Drag Drop ItemValue (choices)", async (t) => {
         offsetX: 5,
         offsetY: 5,
         destinationOffsetY: 30,
-        speed: 0.5
+        speed: 0.1
     });
     value = await getItemValueByIndex("question1", 2);
     await t.expect(value).eql(expectedValue);
