@@ -831,7 +831,8 @@ export class CreatorBase<T extends SurveyModel>
     if (!this.canSwitchViewType()) return false;
     this.viewType = viewName;
     this.activatePlugin(viewName);
-    this.onActiveTabChanged.fire(this, { tabName: viewName });
+    const plugin = this.currentPlugin;
+    this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
     return true;
   }
   private canSwitchViewType(): boolean {
