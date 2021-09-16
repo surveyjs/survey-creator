@@ -251,7 +251,6 @@ export class TitleInplaceEditor {
     this.hideEditor();
   };
   compositionStart = (model, event) => {
-    //console.log("compositionStart");
     this.isCompositionSessionOpen = true;
   };
   nameEditorKeypress = (model, event) => {
