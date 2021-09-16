@@ -299,6 +299,9 @@ export class TabLogicPlugin implements ICreatorPlugin {
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("logic", this);
   }
+  get propertyGrid() {
+    return null;
+  }
   public activate(): void {
     this.model = new SurveyLogicUI(this.creator.survey, this.creator);
 

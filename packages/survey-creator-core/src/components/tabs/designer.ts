@@ -1,7 +1,9 @@
 import { Base, PageModel, property, SurveyModel, Action } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
+import { PropertyGridModel } from "../../property-grid";
 import "./designer.scss";
+import { PropertyGridViewModel, PropertyGridViewModelBase } from "../../entries";
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   @property() newPage: PageModel;
@@ -103,10 +105,9 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   }
 }
 
-export class TabDesignerPlugin<T extends SurveyModel>
-implements ICreatorPlugin
-{
+export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin {
   public model: TabDesignerViewModel<T>;
+  public propertyGrid: PropertyGridViewModelBase;
   private undoAction: Action;
   private redoAction: Action;
   private surveySettingsAction: Action;
@@ -114,12 +115,18 @@ implements ICreatorPlugin
 
   constructor(private creator: CreatorBase<T>) {
     creator.addPluginTab("designer", this);
+    const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
+    this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
   }
+  // get propertyGrid() {
+  //   return this.creator.propertyGrid;
+  // }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
     this.undoAction && (this.undoAction.visible = true);
     this.redoAction && (this.redoAction.visible = true);
     this.surveySettingsAction && (this.surveySettingsAction.visible = true);
+    this.propertyGrid.visible = true;
   }
   public deactivate(): boolean {
     this.model = undefined;
@@ -127,6 +134,7 @@ implements ICreatorPlugin
     this.undoAction.visible = false;
     this.redoAction.visible = false;
     this.surveySettingsAction.visible = false;
+    this.propertyGrid.visible = false;
     return true;
   }
   public designerSurveyCreated(): void {

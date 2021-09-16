@@ -7,6 +7,7 @@ import {
 } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
+import { PropertyGridViewModelBase } from "../../property-grid/property-grid-view-model";
 import { Translation } from "./translation";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
@@ -15,16 +16,25 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private mergeLocaleWithDefaultAction: Action;
   private importCsvAction: Action;
   private exportCsvAction: Action;
+  private settingsAction: Action;
   private inputFileElement: HTMLInputElement;
   private pagePopupModel: PopupModel;
 
   public model: Translation;
+  public propertyGrid: PropertyGridViewModelBase;
 
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("translation", this);
+    this.propertyGrid = new PropertyGridViewModelBase();
+    this.propertyGrid.toolbar.actions.push(new Action({ id: "title", title : "Translation Setting" }))
   }
+  // get propertyGrid() {
+  //   return this.propertyGrid;
+  // }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
+    this.propertyGrid.survey = this.model.settingsSurvey;
+    this.propertyGrid.visible = true;
 
     this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
@@ -70,6 +80,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
+    this.propertyGrid.visible = false;
 
     return true;
   }
@@ -178,6 +189,19 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       }
     });
     items.push(this.exportCsvAction);
+
+    this.settingsAction = new Action({
+      id: "icon-settings",
+      iconName: "icon-settings",
+      needSeparator: true,
+      action: () => {
+        this.propertyGrid.visible = true;
+      },
+      visible: this.creator.viewType === "translation",
+      title: "Settings",
+      showTitle: false
+    });
+    items.push(this.settingsAction);
   }
 
   private getFilterPageActionTitle() {

@@ -26,15 +26,18 @@
           <!-- /ko -->
           <!-- /ko -->
         </div>
-      </div>    
+      </div>
     </div>
-    <div data-bind="visible: creator.activeTab === 'designer'">
-      <svc-property-panel params="model: creator" class="svc-flex-column svc-properties-wrapper"></svc-property-panel>
+    <div data-bind="if: creator.currentTabPropertyGrid">
+    <!-- <div data-bind="visible: creator.hasPropertyGrid"> -->
+      <svc-property-panel params="model: creator.currentTabPropertyGrid" class="svc-flex-column svc-properties-wrapper">
+      </svc-property-panel>
     </div>
   </div>
   <!-- ko ifnot: creator.haveCommercialLicense -->
   <div class="svc-creator__banner">
-    <span class="svc-creator__non-commercial-text"><a href="https://surveyjs.io/buy" data-bind="text: creator.licenseText"></a></span>
+    <span class="svc-creator__non-commercial-text"><a href="https://surveyjs.io/buy"
+        data-bind="text: creator.licenseText"></a></span>
   </div>
   <!-- /ko -->
   <!-- ko component: { name: 'svc-notifier', params: { creator: creator, notifier: creator.notifier } } -->

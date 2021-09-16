@@ -80,9 +80,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
               <div className="svc-top-bar">
                 {(creator.showTabs ?
                   <div className="svc-tabbed-menu-wrapper">
-                    <TabbedMenuComponent
-                      model={creator.tabbedMenu}
-                    ></TabbedMenuComponent>
+                    <TabbedMenuComponent model={creator.tabbedMenu}></TabbedMenuComponent>
                   </div> : null)}
                 {(creator.showToolbar ?
                   <div className="svc-toolbar-wrapper">
@@ -96,11 +94,10 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                 </div>
               </div>
             </div>
-            <div style={{ display: this.creator.activeTab === "designer" ? "block" : "none" }}>
-              {ReactElementFactory.Instance.createElement("svc-property-grid", {
-                model: this.creator
-              })}
-            </div>
+            {/* <div style={{ display: this.creator.hasPropertyGrid ? "block" : "none" }}>
+              {ReactElementFactory.Instance.createElement("svc-property-grid", { model: this.creator.currentTabPropertyGrid })}
+            </div> */}
+            {this.renderPropertyGrid()}
           </div>
           {licenseBanner}
           <NotifierComponent
@@ -141,6 +138,15 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         {component}
       </div>
     );
+  }
+  renderPropertyGrid() {
+    if (!!this.creator.currentTabPropertyGrid)
+      return (
+        <div>
+          {ReactElementFactory.Instance.createElement("svc-property-grid", { model: this.creator.currentTabPropertyGrid })}
+        </div>);
+    else
+      return null;
   }
 }
 

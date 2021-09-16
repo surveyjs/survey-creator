@@ -1,33 +1,27 @@
 import React from "react";
-import { PropertyGridViewModel, CreatorBase } from "@survey/creator";
-import { Base, SurveyModel } from "survey-core";
-import {
-  Survey,
-  SurveyElementBase,
-  SurveyActionBar,
-  ReactQuestionFactory,
-  SurveyQuestionButtonGroup,
-  ReactElementFactory
-} from "survey-react-ui";
+import { PropertyGridViewModelBase, CreatorBase } from "@survey/creator";
+import { Action, Base, SurveyModel } from "survey-core";
+import { Survey, SurveyElementBase, SurveyActionBar, ReactQuestionFactory, SurveyQuestionButtonGroup, ReactElementFactory, ActionContainer } from "survey-react-ui";
 interface IPropertyGridComponentProps {
-  model: CreatorBase<SurveyModel>;
+  // model: CreatorBase<SurveyModel>;
+  model: PropertyGridViewModelBase;
 }
-export class PropertyGridComponent extends SurveyElementBase<
-  IPropertyGridComponentProps,
-  any
-> {
-  model: PropertyGridViewModel<SurveyModel>;
+export class PropertyGridComponent extends SurveyElementBase<IPropertyGridComponentProps, any> {
+  //model: PropertyGridViewModel<SurveyModel>;
+  model: PropertyGridViewModelBase;
+
   constructor(props: IPropertyGridComponentProps) {
     super(props);
-    var creator = this.props.model;
-    this.model = new PropertyGridViewModel<SurveyModel>(creator);
+    this.model = this.props.model;
+    // var creator = this.props.model;
+    // this.model = new PropertyGridViewModel<SurveyModel>(creator);
   }
   protected getStateElement(): Base {
     return this.model;
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    this.model.dispose();
+    // this.model.dispose();
   }
   public canRender(): boolean {
     if (!this.model || !this.model.visible) return false;
