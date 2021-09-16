@@ -45,7 +45,7 @@ import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-ui";
 import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
-import { TabDesignerPlugin } from "./entries";
+import { PropertyGridViewModel, PropertyGridViewModelBase, TabDesignerPlugin } from "./entries";
 import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
 
@@ -59,6 +59,7 @@ export interface ICreatorPlugin {
   deactivate?: () => boolean;
   designerSurveyCreated?: () => void;
   createActions?: (items: Array<Action>) => void;
+  propertyGrid?: PropertyGridViewModelBase
 }
 
 export interface ITabbedMenuItem extends IAction {
@@ -383,19 +384,19 @@ export class CreatorBase<T extends SurveyModel>
    * <br/> options.allowDelete a boolean value. It is true by default. Set it false to abondome the element removing from the collection
    * <br/> options.allowEdit a boolean value. It is true by default. Set it false to disable editing.
    */
-   public onCollectionItemAllowOperations: Survey.Event<
-   (sender: CreatorBase<T>, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
- /**
-   * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
-   * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
-   * <br/> sender the survey creator object that fires the event
-   * <br /> options.obj the object that contains the itemsValues array, for example selector, rating and single choice matrix questions.
-   * <br/> options.propertyName  the object property Name. It can be "choices" for selector questions or rateValues for rating question or columns/rows for single choice matrix.
-   * <br/> options.newItem a new created Survey.ItemValue object.
-   * <br/> options.itemValues an editing Survey.ItemValue array. newItem object is not added yet into this array.
-   */
+  public onCollectionItemAllowOperations: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+    * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
+    * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
+    * <br/> sender the survey creator object that fires the event
+    * <br /> options.obj the object that contains the itemsValues array, for example selector, rating and single choice matrix questions.
+    * <br/> options.propertyName  the object property Name. It can be "choices" for selector questions or rateValues for rating question or columns/rows for single choice matrix.
+    * <br/> options.newItem a new created Survey.ItemValue object.
+    * <br/> options.itemValues an editing Survey.ItemValue array. newItem object is not added yet into this array.
+    */
   public onItemValueAdded: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any
@@ -482,9 +483,9 @@ export class CreatorBase<T extends SurveyModel>
    * <br/> options.expression the current expression. If the expression is empty or incorrect then the value is empty.
    * <br/> options.title the default value of the title. You can change the default value.
    */
-   public onConditionGetTitle: Survey.Event<
-  (sender: CreatorBase<T>, options: any) => any,
-  any
+  public onConditionGetTitle: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
@@ -844,7 +845,14 @@ export class CreatorBase<T extends SurveyModel>
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
-  public propertyGrid: PropertyGridModel;
+  // public propertyGrid: PropertyGridModel;
+  public get designerPropertyGrid(): PropertyGridModel {
+    const designerPlugin = this.getPlugin("designer");
+    return designerPlugin.propertyGrid.model as any as PropertyGridModel;
+  }
+  public get currentTabPropertyGrid(): PropertyGridViewModelBase {
+    return this.getPlugin(this.activeTab).propertyGrid || null;
+  }
 
   constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
     super();
@@ -876,7 +884,7 @@ export class CreatorBase<T extends SurveyModel>
       this
     );
     this.initDragDrop();
-    this.propertyGrid = new PropertyGridModel(this.survey as any as Base, this);
+    // this.propertyGrid = new PropertyGridModel(this.survey as any as Base, this);
   }
   /**
    * Start: Obsolete properties and functins
@@ -1859,8 +1867,8 @@ export class CreatorBase<T extends SurveyModel>
    * @see expandAllPropertyGridCategories
    */
   public collapsePropertyGridCategory(name: string) {
-    if (!!this.propertyGrid) {
-      this.propertyGrid.collapseCategory(name);
+    if (!!this.designerPropertyGrid) {
+      this.designerPropertyGrid.collapseCategory(name);
     }
   }
   /**
@@ -1871,8 +1879,8 @@ export class CreatorBase<T extends SurveyModel>
    * @see expandAllPropertyGridCategories
    */
   public expandPropertyGridCategory(name: string) {
-    if (!!this.propertyGrid) {
-      this.propertyGrid.expandCategory(name);
+    if (!!this.designerPropertyGrid) {
+      this.designerPropertyGrid.expandCategory(name);
     }
   }
   /**
@@ -1882,8 +1890,8 @@ export class CreatorBase<T extends SurveyModel>
    * @see expandAllPropertyGridCategories
    */
   public collapseAllPropertyGridCategories() {
-    if (!!this.propertyGrid) {
-      this.propertyGrid.collapseAllCategories();
+    if (!!this.designerPropertyGrid) {
+      this.designerPropertyGrid.collapseAllCategories();
     }
   }
   /**
@@ -1893,8 +1901,8 @@ export class CreatorBase<T extends SurveyModel>
    * @see expandPropertyGridCategory
    */
   public expandAllPropertyGridCategories() {
-    if (!!this.propertyGrid) {
-      this.propertyGrid.expandAllCategories();
+    if (!!this.designerPropertyGrid) {
+      this.designerPropertyGrid.expandAllCategories();
     }
   }
   /**
@@ -1939,8 +1947,8 @@ export class CreatorBase<T extends SurveyModel>
   public validateSelectedElement(): boolean {
     var isValid = true;
     if (!this.selectedElement) return isValid;
-    if (!!this.propertyGrid) {
-      isValid = this.propertyGrid.validate();
+    if (!!this.designerPropertyGrid) {
+      isValid = this.designerPropertyGrid.validate();
     }
     /*
     var options = { errors: [] };
@@ -1962,10 +1970,10 @@ export class CreatorBase<T extends SurveyModel>
       this.survey.currentPage = undefined;
     }
     this.selectionHistoryController.onObjSelected(element);
-    if (this.propertyGrid) {
-      this.propertyGrid.obj = element;
+    if (this.designerPropertyGrid) {
+      this.designerPropertyGrid.obj = element;
       if (!!propertyName) {
-        this.propertyGrid.selectProperty(propertyName, focus);
+        this.designerPropertyGrid.selectProperty(propertyName, focus);
       }
     }
     var options = { newSelectedElement: element };
