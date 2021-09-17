@@ -284,11 +284,13 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected onEndEditing() {
     this.editableItemValue = null;
   }
-  public removeItem(item: SurveyLogicItem) {
-    var eventOptions = { item: item, allowRemove: true };
+  protected canRemoveItem(item: SurveyLogicItem): boolean {
+    const eventOptions = { item: item, allowRemove: true };
     this.onLogicItemRemoving.fire(this, eventOptions);
-    if (!eventOptions.allowRemove) return;
-
+    return eventOptions.allowRemove;
+  }
+  public removeItem(item: SurveyLogicItem, checkCanRemove: boolean = true): void {
+    if(checkCanRemove && !this.canRemoveItem(item)) return;
     !!this.options && this.options.startUndoRedoTransaction();
     item.apply("");
     var index = this.items.indexOf(item);

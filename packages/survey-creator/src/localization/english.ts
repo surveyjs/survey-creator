@@ -218,6 +218,7 @@ export var enStrings = {
     addNone: "None",
     removeAll: "Remove All",
     edit: "Edit",
+    view: "View",
     back: "Return without saving",
     backTooltip: "Return without saving",
     saveAndBack: "Save and return",
@@ -261,11 +262,13 @@ export var enStrings = {
     imageLink: "Image Link",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
+    itemView: "View item: {0}",
 
     url: "URL",
     path: "Path",
     valueName: "Value name",
     titleName: "Title name",
+    allowEmptyResponse: "Allow empty respose",
     titlePlaceholder: "Input title here",
     surveyTitlePlaceholder: "Input survey title here",
     pageTitlePlaceholder: "Input page title here",
@@ -312,6 +315,7 @@ export var enStrings = {
     maxRateDescription: "Maximum rate description",
     inputType: "Input type",
     optionsCaption: "Options caption",
+    showOptionsCaption: "Show options caption",
     defaultValue: "Default value",
     cellsDefaultRow: "Default cells texts",
 
@@ -531,6 +535,13 @@ export var enStrings = {
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
     showAnsweredQuestions: "show preview with answered questions",
+    pages: "pages",
+    questions: "questions",
+    requiredQuestions: "required questions",
+    correctQuestions: "correct questions",
+    buttons: "buttons",
+    underInput: "under input",
+    underTitle: "under title"
   },
   //Operators
   op: {

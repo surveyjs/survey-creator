@@ -17,7 +17,7 @@ import { PropertyGridEditorCollection } from "../../src/property-grid/index";
 import { PropertyGridEditorExpression } from "../../src/property-grid/condition";
 import { EmptySurveyCreatorOptions } from "../../src/settings";
 import { PropertyGridTriggerValueEditor } from "../../src/property-grid/values";
-import { QuestionEmbeddedSurveyModel } from "../../src/components/embedded-survey"
+import { QuestionEmbeddedSurveyModel } from "../../src/components/embedded-survey";
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 
 test("SurveyLogicItem, logicType and logicType name", () => {
@@ -104,8 +104,8 @@ test("LogicItemEditor: question selector order", () => {
     editor.panels[0].getQuestionByName("elementSelector")
   );
   expect(qSelector).toBeTruthy();
-  const choices =  qSelector.choices;
-  expect(choices).toHaveLength(5)
+  const choices = qSelector.choices;
+  expect(choices).toHaveLength(5);
   expect(choices[0].text).toEqual("question 1");
   expect(choices[1].text).toEqual("question 2");
   expect(choices[2].text).toEqual("question 3");
@@ -726,7 +726,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   expect(logic.expressionEditor.editSurvey).toBeTruthy();
   expect(logic.expressionEditor.text).toBeFalsy();
   expect(conditionsQuestion.embeddedSurvey).toEqual(logic.expressionEditor.editSurvey);
-  logic.expressionEditor.text = "{q1} = 1"
+  logic.expressionEditor.text = "{q1} = 1";
 
   const actionsQuestion = <QuestionEmbeddedSurveyModel>row.detailPanel.getQuestionByName("actions");
   expect(actionsQuestion).toBeTruthy();
@@ -736,7 +736,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   expect(logic.itemEditor.panels).toHaveLength(1);
   expect(actionsQuestion.embeddedSurvey).toEqual(logic.itemEditor.editSurvey);
   var panel = logic.itemEditor.panels[0];
-  panel.getQuestionByName("logicTypeName").value = "question_visibility"
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
   panel.getQuestionByName("elementSelector").value = "q2";
 
   row.detailPanel.footerActions[0].action();
@@ -822,7 +822,7 @@ test("LogicItemEditorUI: filter by question and delete", () => {
 
   itemsQuestion.removeRow(0);
   expect(itemsQuestion.rowCount).toEqual(0);
-  expect(survey.getQuestionByName("q4").visibleIf).toBeFalsy()
+  expect(survey.getQuestionByName("q4").visibleIf).toBeFalsy();
 
   logic.questionFilter = "";
   expect(itemsQuestion.rowCount).toEqual(2);
@@ -850,7 +850,7 @@ test("LogicItemEditorUI: filter by question and addNew", () => {
 
   logic.expressionEditor.text = "{q1} = 4";
   let panel = logic.itemEditor.panels[0];
-  panel.getQuestionByName("logicTypeName").value = "question_visibility"
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
   panel.getQuestionByName("elementSelector").value = "q4";
 
   expect(logic.saveEditableItem()).toBeTruthy();
@@ -864,7 +864,7 @@ test("LogicItemEditorUI: filter by question and addNew", () => {
 
   logic.expressionEditor.text = "{q1} = 4";
   panel = logic.itemEditor.panels[0];
-  panel.getQuestionByName("logicTypeName").value = "question_visibility"
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
   panel.getQuestionByName("elementSelector").value = "q3";
 
   expect(logic.saveEditableItem()).toBeTruthy();
@@ -946,7 +946,7 @@ test("LogicItemEditorUI: filter by actionType and addNew", () => {
 
   logic.expressionEditor.text = "{q1} = 4";
   let panel = logic.itemEditor.panels[0];
-  panel.getQuestionByName("logicTypeName").value = "question_enable"
+  panel.getQuestionByName("logicTypeName").value = "question_enable";
   panel.getQuestionByName("elementSelector").value = "q4";
   expect(logic.saveEditableItem()).toBeTruthy();
   expect(itemsQuestion.rowCount).toEqual(2);
@@ -959,7 +959,7 @@ test("LogicItemEditorUI: filter by actionType and addNew", () => {
 
   logic.expressionEditor.text = "{q1} = 4";
   panel = logic.itemEditor.panels[0];
-  panel.getQuestionByName("logicTypeName").value = "question_require"
+  panel.getQuestionByName("logicTypeName").value = "question_require";
   panel.getQuestionByName("elementSelector").value = "q3";
   expect(logic.saveEditableItem()).toBeTruthy();
   expect(itemsQuestion.rowCount).toEqual(5);
@@ -1080,25 +1080,25 @@ test("LogicItem isSuitable", () => {
         gotoName: "q4",
       },
     ],
-  })
+  });
   const logic = new SurveyLogic(survey);
 
-  expect(logic.items).toHaveLength(1)
+  expect(logic.items).toHaveLength(1);
   let item = logic.items[0];
 
-  expect(item.isSuitable("")).toBeTruthy()
-  expect(item.isSuitable("q1")).toBeTruthy()
-  expect(item.isSuitable("q2")).toBeTruthy()
-  expect(item.isSuitable("q3")).toBeFalsy()
-  expect(item.isSuitable("q4")).toBeTruthy()
+  expect(item.isSuitable("")).toBeTruthy();
+  expect(item.isSuitable("q1")).toBeTruthy();
+  expect(item.isSuitable("q2")).toBeTruthy();
+  expect(item.isSuitable("q3")).toBeFalsy();
+  expect(item.isSuitable("q4")).toBeTruthy();
 
-  expect(item.isSuitable("", "")).toBeTruthy()
-  expect(item.isSuitable("", "trigger_skip")).toBeTruthy()
-  expect(item.isSuitable("", "question_enable")).toBeFalsy()
+  expect(item.isSuitable("", "")).toBeTruthy();
+  expect(item.isSuitable("", "trigger_skip")).toBeTruthy();
+  expect(item.isSuitable("", "question_enable")).toBeFalsy();
 
-  expect(item.isSuitable("q3", "trigger_skip")).toBeFalsy()
-  expect(item.isSuitable("q2", "question_enable")).toBeFalsy()
-  expect(item.isSuitable("q4", "trigger_skip")).toBeTruthy()
+  expect(item.isSuitable("q3", "trigger_skip")).toBeFalsy();
+  expect(item.isSuitable("q2", "question_enable")).toBeFalsy();
+  expect(item.isSuitable("q4", "trigger_skip")).toBeTruthy();
 });
 
 test("LogicItem getQuestionNames", () => {
@@ -1126,10 +1126,10 @@ test("LogicItem getQuestionNames", () => {
         fromName: "q4"
       }
     ],
-  })
+  });
   const logic = new SurveyLogic(survey);
 
-  expect(logic.items).toHaveLength(1)
+  expect(logic.items).toHaveLength(1);
   let item = logic.items[0];
 
   expect(item.getQuestionNames()).toHaveLength(3);
@@ -1163,10 +1163,10 @@ test("LogicItem getActionTypes", () => {
         fromName: "q4"
       }
     ],
-  })
+  });
   const logic = new SurveyLogic(survey);
 
-  expect(logic.items).toHaveLength(1)
+  expect(logic.items).toHaveLength(1);
   let item = logic.items[0];
 
   expect(item.getActionTypes()).toHaveLength(3);
@@ -1193,7 +1193,7 @@ test("LogicAction isSuitableByQuestionName", () => {
         gotoName: "q3",
       },
     ],
-  })
+  });
   const logic = new SurveyLogic(survey);
   const action = logic.items[0].actions[1];
   expect(action.logicTypeName).toEqual("trigger_skip");
@@ -1224,9 +1224,36 @@ test("LogicAction isSuitableByLogicType", () => {
         gotoName: "q3",
       },
     ],
-  })
+  });
   const logic = new SurveyLogic(survey);
   const action1 = new SurveyLogicAction(logic.getTypeByName("question_visibility"), survey.getQuestionByName("q1"), survey);
   expect(action1.isSuitableByLogicType("question_visibility")).toBeTruthy();
   expect(action1.isSuitableByLogicType("trigger_skip")).toBeFalsy();
+});
+test("Logic onLogicItemRemoving events, Bug#1786", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3}=1" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  let allowRemove = false;
+  let counter = 0;
+  logic.onLogicItemRemoving.add((_, options) => {
+    options.allowRemove = allowRemove;
+    counter ++;
+  });
+  let itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(counter).toEqual(0);
+  itemsQuestion.removeRow(0);
+  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(logic.items).toHaveLength(1);
+  expect(counter).toEqual(1);
+  allowRemove = true;
+  itemsQuestion.removeRow(0);
+  expect(itemsQuestion.rowCount).toEqual(0);
+  expect(logic.items).toHaveLength(0);
+  expect(counter).toEqual(2);
 });

@@ -47,10 +47,8 @@ import {
   PropertyGridValueEditor,
   PropertyGridRowValueEditor
 } from "../../src/property-grid/values";
-import {
-  SurveyQuestionEditorTabDefinition,
-  SurveyQuestionProperties
-} from "../../src/question-editor/properties";
+import { ConditionEditor } from "../../src/property-grid/condition-survey";
+import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -58,6 +56,13 @@ export class PropertyGridModelTester extends PropertyGridModel {
     super(obj, options);
   }
 }
+function findSetupAction(actions: Array<any>): any {
+  for (var i = 0; i < actions.length; i++) {
+    if (actions[i].id === "property-grid-setup") return actions[i];
+  }
+  return null;
+}
+
 test("Check property grid survey options", () => {
   const oldValue = Serializer.findProperty(
     "survey",
@@ -1095,7 +1100,7 @@ test("options.onCollectionItemAllowingCallback", () => {
     obj: Base,
     property: JsonObjectProperty,
     collection: Array<Base>,
-    item: Base, 
+    item: Base,
     options: ICollectionItemAllowOperations
   ): void => {
     options.allowDelete = (<ItemValue>item).value % 2 == 1;
@@ -1103,7 +1108,7 @@ test("options.onCollectionItemAllowingCallback", () => {
   };
   const question = new QuestionDropdownModel("q1");
   for(let i = 0; i < 5; i ++) {
-    question.choices.push(new ItemValue(i + 1));  
+    question.choices.push(new ItemValue(i + 1));
   }
   var propertyGrid = new PropertyGridModelTester(question, options);
   var editQuestion = <QuestionMatrixDynamicModel>(
@@ -2056,4 +2061,60 @@ test("Use maxLength property attribute", () => {
   );
   expect(titleQuestion.getType()).toEqual("comment");
   expect(titleQuestion.maxLength).toEqual(20);
+});
+test("We should not have 'Others' category in our objects", () => {
+  const survey = new SurveyModel();
+  const page = survey.addNewPage("page1");
+  const panel = page.addNewPanel("panel");
+  const objToCheck: Array<Base> = [survey, panel, page];
+  const allQuestionTypes = Serializer.getChildrenClasses("question", true);
+  for(let i = 0; i < allQuestionTypes.length; i ++) {
+    let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
+    if(!!question && !question.isCompositeQuestion) {
+      objToCheck.push(question);
+    }
+  }
+  const matrix = new QuestionMatrixDynamicModel("matrix");
+  page.addQuestion(matrix);
+  objToCheck.push(matrix.addColumn("col1"));
+  for(let i = 0; i < objToCheck.length; i ++) {
+    let propGrid = new PropertyGridModelTester(objToCheck[i]);
+    let panel = <PanelModel>propGrid.survey.getPanelByName("others");
+    if(!!panel) {
+      const props = panel.questions;
+      const questionNames: Array<string> = [];
+      for(var j = 0; j < props.length; j ++) {
+        questionNames.push(props[j].name);
+      }
+      expect("obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(questionNames)).toBeFalsy();
+    }
+  }
+});
+test("expression editor in trigger expression", () => {
+  PropertyGridEditorCollection.register(new PropertyGridEditorCondition());
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  });
+  survey.triggers.push(new SurveyTriggerRunExpression());
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var triggersQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("triggers")
+  );
+  expect(triggersQuestion).toBeTruthy(); //visibleIf is here
+  expect(triggersQuestion.visibleRows).toHaveLength(1);
+  triggersQuestion.visibleRows[0].showDetailPanel();
+  var expressionQuestion = triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("expression");
+  expect(expressionQuestion.isVisible).toBeTruthy();
+  var actions = expressionQuestion.getTitleActions();
+  var setupAction = findSetupAction(actions);
+  expect(setupAction).toBeTruthy();
+  var conditionEditor = <ConditionEditor>setupAction.action();
+  expect(conditionEditor).toBeTruthy();
+  expect(conditionEditor.survey).toEqual(survey);
+  expect(conditionEditor.object).toEqual(survey.triggers[0]);
+  conditionEditor.text = "{q1} = 1";
+  conditionEditor.apply();
+  expect(survey.triggers[0].expression).toEqual("{q1} = 1");
 });

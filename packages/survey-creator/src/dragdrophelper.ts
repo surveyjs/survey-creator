@@ -127,8 +127,8 @@ export class DragDropHelper {
         if (!!document.caretRangeFromPoint) {
           dropRange = document.caretRangeFromPoint(e.clientX, e.clientY);
         } else {
-          if (!!document.caretPositionFromPoint) {
-            dropRange = document.caretPositionFromPoint(e.clientX, e.clientY);
+          if (!!document["caretPositionFromPoint"]) {
+            dropRange = document["caretPositionFromPoint"](e.clientX, e.clientY);
           }
         }
         if (!!dropRange) {

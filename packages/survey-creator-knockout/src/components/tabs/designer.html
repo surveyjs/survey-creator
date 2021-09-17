@@ -1,10 +1,12 @@
 <svc-toolbox params="creator: creator"></svc-toolbox>
 <div class="svc-tab-designer" data-bind="css: survey.css.root">
   <div data-bind="css: survey.css.container">
+    <!-- ko if: creator.allowEditSurveyTitle -->
     <div data-bind="click: function() { creator.selectElement(survey); }">
       <!-- ko template: { name: 'survey-header', data: survey } -->
       <!-- /ko -->
     </div>
+    <!-- /ko -->
     <!-- ko if: survey.isShowProgressBarOnTop -->
     <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } --><!-- /ko -->
     <!-- /ko -->

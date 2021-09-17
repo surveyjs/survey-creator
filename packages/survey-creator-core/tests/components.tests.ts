@@ -47,7 +47,6 @@ test("item value isNew isDraggable allowRemove", () => {
   expect(itemNoneAdorner.allowRemove).toBeFalsy();
 });
 
-
 test("QuestionRatingAdornerViewModel read only mode", () => {
   const creator = new CreatorTester();
   creator.JSON = {

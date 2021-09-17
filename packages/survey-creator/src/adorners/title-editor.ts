@@ -245,14 +245,22 @@ export class TitleInplaceEditor {
     }
     this.hideEditor();
   };
+  isCompositionSessionOpen = false;
   cancelEdit = () => {
     this.editingName(this.prevName());
     this.hideEditor();
+  };
+  compositionStart = (model, event) => {
+    this.isCompositionSessionOpen = true;
   };
   nameEditorKeypress = (model, event) => {
     resizeInput(event.target);
     switch (event.keyCode) {
       case 13:
+        if (this.isCompositionSessionOpen) {
+          this.isCompositionSessionOpen = false;
+          return true;
+        }
         this.postEdit();
         event.stopPropagation();
         return false;

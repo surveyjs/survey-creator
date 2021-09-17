@@ -249,7 +249,8 @@ export class SurveyNestedPropertyEditorItem {
       this.obj,
       this.getClassName(),
       this.options,
-      true
+      true,
+      this.isReadOnly
     );
     res.setParentList(this.parentList);
     return res;

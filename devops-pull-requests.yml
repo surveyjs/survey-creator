@@ -57,17 +57,17 @@ steps:
     TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
     OverWrite: true
 
+- script: |
+    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    npm install
+  displayName: 'Npm install survey-creator'
+
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-knockout'
     Contents: '**'
     TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
     OverWrite: true
-
-- script: |
-    cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-    npm install
-  displayName: 'Npm install survey-creator'
 
 - script: |
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core

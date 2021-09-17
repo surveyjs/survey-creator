@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.67](https://github.com/surveyjs/survey-creator/compare/v1.8.66...v1.8.67) (2021-09-17)
+
+
+### Bug Fixes
+
+* V2: Could not set expression in trigger in property grid [#1759](https://github.com/surveyjs/survey-creator/issues/1759) ([#1774](https://github.com/surveyjs/survey-creator/issues/1774)) ([5587d2d](https://github.com/surveyjs/survey-creator/commit/5587d2d5065535b7552d90397adff36d02d4d887))
+
+### [1.8.66](https://github.com/surveyjs/survey-creator/compare/v1.8.65...v1.8.66) (2021-09-15)
+
+
+### Bug Fixes
+
+* Undo/Redo works incorrectly on changing question type in V1 [#1724](https://github.com/surveyjs/survey-creator/issues/1724) ([#1726](https://github.com/surveyjs/survey-creator/issues/1726)) ([407f8ee](https://github.com/surveyjs/survey-creator/commit/407f8ee5c798b7b9875cb27f4d8e5fc18b0c9d58))
+
 ### [1.8.65](https://github.com/surveyjs/survey-creator/compare/v1.8.64...v1.8.65) (2021-09-07)
 
 ### [1.8.64](https://github.com/surveyjs/survey-creator/compare/v1.8.63...v1.8.64) (2021-08-31)

@@ -294,6 +294,7 @@ export var enStrings = {
     path: "Path",
     valueName: "Value name",
     titleName: "Title name",
+    allowEmptyResponse: "Allow empty respose",
     titlePlaceholder: "Input title here",
     surveyTitlePlaceholder: "Input survey title here",
     pageTitlePlaceholder: "Input page title here",
@@ -340,6 +341,7 @@ export var enStrings = {
     maxRateDescription: "Maximum rate description",
     inputType: "Input type",
     optionsCaption: "Options caption",
+    showOptionsCaption: "Show options caption",
     defaultValue: "Default value",
     cellsDefaultRow: "Default cells texts",
 
@@ -563,7 +565,14 @@ export var enStrings = {
     questionPerPage: "question per page",
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
-    showAnsweredQuestions: "show preview with answered questions"
+    showAnsweredQuestions: "show preview with answered questions",
+    pages: "pages",
+    questions: "questions",
+    requiredQuestions: "required questions",
+    correctQuestions: "correct questions",
+    buttons: "buttons",
+    underInput: "under input",
+    underTitle: "under title"
   },
   //Operators
   op: {
