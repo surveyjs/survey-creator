@@ -1230,3 +1230,30 @@ test("LogicAction isSuitableByLogicType", () => {
   expect(action1.isSuitableByLogicType("question_visibility")).toBeTruthy();
   expect(action1.isSuitableByLogicType("trigger_skip")).toBeFalsy();
 });
+test("Logic onLogicItemRemoving events, Bug#1786", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3}=1" },
+      { type: "text", name: "q2", visibleIf: "{q3}=1" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  let allowRemove = false;
+  let counter = 0;
+  logic.onLogicItemRemoving.add((_, options) => {
+    options.allowRemove = allowRemove;
+    counter ++;
+  });
+  let itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(counter).toEqual(0);
+  itemsQuestion.removeRow(0);
+  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(logic.items).toHaveLength(1);
+  expect(counter).toEqual(1);
+  allowRemove = true;
+  itemsQuestion.removeRow(0);
+  expect(itemsQuestion.rowCount).toEqual(0);
+  expect(logic.items).toHaveLength(0);
+  expect(counter).toEqual(2);
+});
