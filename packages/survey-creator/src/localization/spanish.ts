@@ -265,7 +265,7 @@ var spanishTranslation = {
     hasOther: "Tiene opción 'Otro'",
     otherText: "Cambiar texto 'Otro'",
     hasNone: "Tiene opcion 'Ninguno'",
-    noneText: "Cambiar texto de 'Ninguno'",
+    noneText: "Cambiar texto 'Ninguno'",
     hasSelectAll: "Tiene opción 'Selecionar todo'",
     selectAllText: "Cambiar texto de 'Seleccionar todo'",
     choicesMin: "Valor mínimo para artículos generados automáticos",
