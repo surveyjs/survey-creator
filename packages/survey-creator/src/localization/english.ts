@@ -218,6 +218,7 @@ export var enStrings = {
     addNone: "None",
     removeAll: "Remove All",
     edit: "Edit",
+    view: "View",
     back: "Return without saving",
     backTooltip: "Return without saving",
     saveAndBack: "Save and return",
@@ -261,6 +262,7 @@ export var enStrings = {
     imageLink: "Image Link",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
+    itemView: "View item: {0}",
 
     url: "URL",
     path: "Path",

@@ -19,7 +19,7 @@
     >
       <span
         class="glyphicon glyphicon-edit"
-        data-bind="text: editor.getLocString('pe.edit')"
+        data-bind="text: editor.getLocString($data.editor.readOnly()?'pe.view':'pe.edit')"
       ></span>
     </button>
   </td>

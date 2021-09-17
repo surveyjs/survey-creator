@@ -24,6 +24,7 @@ export interface IConditionEditorItemOwner {
   ): boolean;
   isWideMode: boolean;
   options: ISurveyObjectEditorOptions;
+  readOnly(): boolean;
 }
 
 export class ConditionEditorItem {
@@ -65,6 +66,9 @@ export class ConditionEditorItem {
     this.survey = !!owner.options
       ? owner.options.createSurvey(json, "conditionEditor")
       : new Survey.Survey(json);
+    if(owner.readOnly()) {
+      this.survey.mode = "display";
+    }
     this.survey.onValueChanged.add((sender, options) => {
       if (options.name == "questionName") {
         this.rebuildQuestionValue();

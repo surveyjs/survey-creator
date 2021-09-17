@@ -142,7 +142,8 @@ export class SurveyElementEditorContentModel {
     obj: any,
     public className: string = null,
     public options: ISurveyObjectEditorOptions = null,
-    protected useAsPropertyGrid: boolean = false
+    protected useAsPropertyGrid: boolean = false,
+    private _readOnly: boolean = false
   ) {
     this.setOriginalObjValue(obj);
     if (!this.className && this.originalObj.getType) {
@@ -167,6 +168,9 @@ export class SurveyElementEditorContentModel {
     if (tabs.length > 0) {
       this.koActiveTab(tabs[0].name);
     }
+  }
+  public get readOnly(): boolean {
+    return !!this.options && this.options.readOnly || this._readOnly;
   }
   public getLocString(name: string) {
     return editorLocalization.getString(name);
@@ -281,7 +285,8 @@ export class SurveyElementEditorContentModel {
       this.editableObj,
       properties,
       tabItem.name,
-      this.options
+      this.options,
+      this.readOnly
     );
     propertyTab.title = tabItem.title;
     var firstProperty =
@@ -391,7 +396,8 @@ export class SurveyElementEditorTabModel {
     public obj: any,
     private properties: Array<Survey.JsonObjectProperty>,
     private _name,
-    public options: ISurveyObjectEditorOptions
+    public options: ISurveyObjectEditorOptions,
+    private _readOnly: boolean = false
   ) {
     this.buildEditorProperties();
     var self = this;
@@ -489,6 +495,7 @@ export class SurveyElementEditorTabModel {
   private createEditor(property: any) {
     var objectProperty = new SurveyObjectProperty(property, this.options);
     objectProperty.object = this.obj;
+    objectProperty.editor.readOnly(objectProperty.editor.readOnly() || this._readOnly);
     this.editorPropertiesValue.push(objectProperty);
   }
   private performForAllProperties(func: (p: SurveyObjectProperty) => void) {
@@ -970,9 +977,6 @@ export class SurveyQuestionEditor extends SurveyElementEditorContentModel {
   }
   public get editableObj(): any {
     return this.editableObject.editableObj;
-  }
-  public get readOnly(): boolean {
-    return !!this.options && this.options.readOnly;
   }
   private getTitle(): string {
     var res;

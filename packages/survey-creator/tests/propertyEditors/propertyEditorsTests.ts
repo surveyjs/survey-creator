@@ -3227,6 +3227,32 @@ QUnit.test(
   }
 );
 
+QUnit.test(
+  "SurveyPropertyItemValuesEditor - Editor name",
+  function (assert) {
+    var survey = new Survey.Survey();
+    var p = survey.addNewPage();
+    var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
+    q.choices = ["item1", "item2", "item3"];
+    var property = Survey.Serializer.findProperty("selectbase", "choices");
+    var propEditor = <SurveyPropertyItemValuesEditor>(
+      SurveyPropertyEditorFactory.createEditor(property)
+    );
+    propEditor.object = q;
+    propEditor.beforeShow();
+
+    var firstItem = <SurveyNestedPropertyEditorItem>(
+      propEditor.createItemViewModel(q.choices[0])
+    );
+    propEditor.koEditItem(firstItem);
+    assert.equal(propEditor["getEditorName"](), "Edit item: item1", "getEditorName is Edit");
+
+    propEditor.readOnly(true);
+    assert.equal(propEditor["getEditorName"](), "View item: item1", "getEditorName is Edit");
+  }
+);
+
+
 QUnit.test("We should not have 'Others' category in our objects",
   function (assert) {
     const survey = new Survey.Survey();
@@ -3256,3 +3282,4 @@ QUnit.test("We should not have 'Others' category in our objects",
     }
   }
 );
+
