@@ -94,9 +94,6 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                 </div>
               </div>
             </div>
-            {/* <div style={{ display: this.creator.hasPropertyGrid ? "block" : "none" }}>
-              {ReactElementFactory.Instance.createElement("svc-property-grid", { model: this.creator.currentTabPropertyGrid })}
-            </div> */}
             {this.renderPropertyGrid()}
           </div>
           {licenseBanner}

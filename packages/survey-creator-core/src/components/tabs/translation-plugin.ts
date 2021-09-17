@@ -28,9 +28,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.propertyGrid = new PropertyGridViewModelBase();
     this.propertyGrid.toolbar.actions.push(new Action({ id: "title", title : "Translation Setting" }))
   }
-  // get propertyGrid() {
-  //   return this.propertyGrid;
-  // }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
     this.propertyGrid.survey = this.model.settingsSurvey;
@@ -48,6 +45,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterPageAction.visible = true;
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
+    this.settingsAction.visible = true;
 
     this.pagePopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
@@ -80,6 +78,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
+    this.settingsAction.visible = false;
     this.propertyGrid.visible = false;
 
     return true;

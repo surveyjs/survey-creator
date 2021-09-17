@@ -14,7 +14,7 @@ export class PropertyGridViewModelBase extends Base {
   @property() title: string;
   @property({ defaultValue: true }) visible: boolean;
 
-  constructor(public model?: Base) {
+  constructor(public model?: Base, hideAction?: () => void) {
     super();
     this.toolbar.actions.push(
       new Action({
@@ -24,7 +24,10 @@ export class PropertyGridViewModelBase extends Base {
         title: getLocString("ed.hidePanel"),
         showTitle: false,
         action: () => {
-          this.visible = false;
+          if (hideAction)
+            hideAction();
+          else
+            this.visible = false;
         }
       })
     );
@@ -37,19 +40,15 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
   private objectSelectionAction: Action;
   private onPropertyGridVisibilityChanged;
 
-  // @property() survey: SurveyModel;
-  // @property() title: string;
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
-  // @property({ defaultValue: true }) visible: boolean;
 
-  // public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
   public get toolbarItems(): Array<Action> {
     return this.toolbar.actions;
   }
 
   constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase<T>) {
-    super(propertyGridModel as any);
+    super(propertyGridModel as any, () => { this.creator.showPropertyGrid = false; });
     this.onPropertyGridVisibilityChanged = (sender: CreatorBase<T>, options: any) => {
       if (this.isDisposed) return;
       this.visible = options.show;
@@ -69,20 +68,6 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
         this.selectionController.selectFromAction(obj, propertyName);
       }
     };
-
-    // var actions: Array<Action> = [];
-    // actions.push(
-    //   new Action({
-    //     id: "svd-grid-hide",
-    //     iconName: "icon-hide",
-    //     component: "sv-action-bar-item",
-    //     title: getLocString("ed.hidePanel"),
-    //     showTitle: false,
-    //     action: () => {
-    //       this.creator.showPropertyGrid = false;
-    //     }
-    //   })
-    // );
 
     if (settings.propertyGrid.showNavigationButtons) {
       this.prevSelectionAction = new Action({
@@ -150,8 +135,6 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
       popupModel: selectorPopupModel
     });
     this.toolbar.actions.push(this.objectSelectionAction);
-    // this.toolbar.actions = actions;
-
     this.onSurveyChanged();
   }
 
@@ -179,9 +162,6 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
     }
     super.dispose();
   }
-  // private get model(): PropertyGridModel {
-  //   return this.creator.designerPropertyGrid;
-  // }
   private get selectionController(): SelectionHistory {
     return this.creator.selectionHistoryController;
   }

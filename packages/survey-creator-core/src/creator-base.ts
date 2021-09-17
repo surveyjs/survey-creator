@@ -830,8 +830,8 @@ export class CreatorBase<T extends SurveyModel>
   public makeNewViewActive(viewName: string): boolean {
     if (viewName == this.viewType) return false;
     if (!this.canSwitchViewType()) return false;
-    this.viewType = viewName;
     this.activatePlugin(viewName);
+    this.viewType = viewName;
     const plugin = this.currentPlugin;
     this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
     return true;
@@ -841,13 +841,13 @@ export class CreatorBase<T extends SurveyModel>
     return !plugin || !plugin.deactivate || plugin.deactivate();
   }
   private activatePlugin(newType: string) {
-    const plugin: ICreatorPlugin = this.currentPlugin;
+    const plugin: ICreatorPlugin = this.getPlugin(newType);
     if (!!plugin) {
       plugin.activate();
     }
   }
   private get currentPlugin(): ICreatorPlugin {
-    return this.plugins[this.viewType];
+    return this.getPlugin(this.viewType);
   }
 
   public static defaultNewSurveyText: string =
@@ -857,13 +857,15 @@ export class CreatorBase<T extends SurveyModel>
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
-  // public propertyGrid: PropertyGridModel;
   public get designerPropertyGrid(): PropertyGridModel {
     const designerPlugin = this.getPlugin("designer");
     return designerPlugin.propertyGrid.model as any as PropertyGridModel;
   }
   public get currentTabPropertyGrid(): PropertyGridViewModelBase {
     return this.getPlugin(this.activeTab).propertyGrid || null;
+  }
+  public getTabPropertyGrid(id: string): PropertyGridViewModelBase {
+    return this.getPlugin(id).propertyGrid || null;
   }
 
   constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
@@ -896,7 +898,6 @@ export class CreatorBase<T extends SurveyModel>
       this
     );
     this.initDragDrop();
-    // this.propertyGrid = new PropertyGridModel(this.survey as any as Base, this);
   }
   /**
    * Start: Obsolete properties and functins

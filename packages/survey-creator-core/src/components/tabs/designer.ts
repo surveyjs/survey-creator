@@ -118,9 +118,6 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
   }
-  // get propertyGrid() {
-  //   return this.creator.propertyGrid;
-  // }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
     this.undoAction && (this.undoAction.visible = true);
