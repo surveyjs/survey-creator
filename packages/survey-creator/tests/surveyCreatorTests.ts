@@ -2371,3 +2371,36 @@ QUnit.test("Do not clear JSON on rendering", function (assert) {
     "There is still one question"
   );
 });
+
+QUnit.test("isCanModifyProperty", function (assert) {
+  var creator = new SurveyCreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+      },
+    ],
+  };
+  assert.equal(
+    SurveyHelper.isCanModifyProperty(creator.survey.getQuestionByName("question1"), "title", creator),
+    true,
+    "Can modify property by default"
+  );
+  Survey.Serializer.findProperty("text", "title").readOnly = true;
+  assert.equal(
+    SurveyHelper.isCanModifyProperty(creator.survey.getQuestionByName("question1"), "title", creator),
+    false,
+    "Readonly by Serializer"
+  );
+  Survey.Serializer.findProperty("text", "title").readOnly = false;
+  creator.onGetPropertyReadOnly.add(function(s, o) {
+    if(o.property.name == "title")
+      o.readOnly = true;
+  });
+  assert.equal(
+    SurveyHelper.isCanModifyProperty(creator.survey.getQuestionByName("question1"), "title", creator),
+    false,
+    "Readonly by event"
+  );
+});

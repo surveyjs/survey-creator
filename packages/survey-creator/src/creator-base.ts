@@ -658,20 +658,6 @@ implements ISurveyCreatorOptions
     }
   }
 
-  isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
-    var property = Survey.Serializer.findProperty(obj.getType(), propertyName);
-    return (
-      !property ||
-      !this.onIsPropertyReadOnlyCallback(
-        obj,
-        property,
-        property.readOnly,
-        undefined,
-        undefined
-      )
-    );
-  }
-
   onIsPropertyReadOnlyCallback(
     obj: Survey.Base,
     property: Survey.JsonObjectProperty,
