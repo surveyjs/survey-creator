@@ -1,6 +1,6 @@
-import { PropertyGridViewModelBase, PropertyGridViewModel, CreatorBase } from "@survey/creator";
+import { PropertyGridViewModelBase } from "@survey/creator";
 import * as ko from "knockout";
-import { ImplementorBase, QuestionButtonGroup, Survey } from "survey-knockout-ui";
+import { ImplementorBase, QuestionButtonGroup } from "survey-knockout-ui";
 import { QuestionFactory, Serializer } from "survey-core";
 //import "./property-panel.scss";
 //import "../../survey-theme/survey.scss";
@@ -9,14 +9,14 @@ const template = require("./property-panel.html");
 ko.components.register("svc-property-panel", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const model: PropertyGridViewModelBase = ko.unwrap(params.model);
-      //var creator: CreatorBase<Survey> = params.model;
-      //const model = new PropertyGridViewModel(creator);
-      new ImplementorBase(model);
-      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        model.dispose();
+      const subscrib = ko.computed(() => {
+        const model: PropertyGridViewModelBase = ko.unwrap(params.model);
+        new ImplementorBase(model);
       });
-      return model;
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        subscrib.dispose();
+      });
+      return params;
     }
   },
   template: template
