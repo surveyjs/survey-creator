@@ -28,6 +28,9 @@ export class PropertyGridComponent extends SurveyElementBase<IPropertyGridCompon
             <div className="svc-property-panel__actions">
               <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
             </div>
+            <div className="svc-property-panel__title">
+              {this.model.headerText}
+            </div>
           </div>
           <div className="svc-property-panel__expander">
             <Survey model={this.model.survey}></Survey>
