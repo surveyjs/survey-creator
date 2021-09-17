@@ -122,6 +122,19 @@ export class SurveyHelper {
     if (!!canShow && !canShow(obj, property)) return false;
     return true;
   }
+  public static isCanModifyProperty(obj: Survey.Base, propertyName: string, options: ISurveyCreatorOptions = null): boolean {
+    var property = Survey.Serializer.findProperty(obj.getType(), propertyName);
+    return (
+      !property ||
+      !options.onIsPropertyReadOnlyCallback(
+        obj,
+        property,
+        property.readOnly,
+        undefined,
+        undefined
+      )
+    );
+  }
   public static scrollIntoViewIfNeeded(el: HTMLElement) {
     if (!el || !el.scrollIntoView) return;
     var rect = el.getBoundingClientRect();
