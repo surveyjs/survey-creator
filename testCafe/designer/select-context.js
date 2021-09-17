@@ -37,24 +37,24 @@ test("Matrix question", async (t) => {
         .expect(Selector(selectedObjectTextSelector).innerText)
         .eql("Survey");
     await t
-        .expect(Selector(`h5[aria-label='Columns'].spg-title`).visible)
+        .expect(Selector("h5.spg-title").withText("Columns").visible)
         .notOk();
 
     await t.click(Selector(`.sv-string-editor`).withText("Column 1"));
     await t
         .expect(Selector(selectedObjectTextSelector).innerText)
         .eql("question1");
-    await t.expect(Selector(`h5[aria-label='Columns'].spg-title`).visible).ok();
+    await t.expect(Selector("h5.spg-title").withText("Columns").visible).ok();
 
     await t.click(Selector(`.sv-string-editor`).withText("Row 1"));
     await t
         .expect(Selector(selectedObjectTextSelector).innerText)
         .eql("question1");
     await t
-        .expect(Selector(`h5[aria-label='Columns'].spg-title`).visible)
+        .expect(Selector("h5.spg-title").withText("Columns").visible)
         .notOk();
     await t
-        .expect(Selector(`h5[aria-label='Row count'].spg-title`).visible)
+        .expect(Selector("h5.spg-title").withText("Row count").visible)
         .ok();
 });
 
@@ -81,7 +81,7 @@ test("Matrix dropdown question", async (t) => {
         .expect(Selector(selectedObjectTextSelector).innerText)
         .eql("Column 1");
     await t
-        .expect(Selector(`h5[aria-label='Columns'].spg-title`).visible)
+        .expect(Selector("h5.spg-title").withText("Columns").visible)
         .notOk();
 
     await t.click(Selector(`.sv-string-editor`).withText("Row 1"));
@@ -89,10 +89,10 @@ test("Matrix dropdown question", async (t) => {
         .expect(Selector(selectedObjectTextSelector).innerText)
         .eql("question1");
     await t
-        .expect(Selector(`h5[aria-label='Columns'].spg-title`).visible)
+        .expect(Selector("h5.spg-title").withText("Columns").visible)
         .notOk();
     await t
-        .expect(Selector(`h5[aria-label='Row count'].spg-title`).visible)
+        .expect(Selector("h5.spg-title").withText("Row count").visible)
         .ok();
 });
 

@@ -3226,6 +3226,7 @@ QUnit.test(
     assert.equal(json.cellType, "boolean");
   }
 );
+
 QUnit.test(
   "SurveyPropertyItemValuesEditor - Editor name",
   function (assert) {
@@ -3250,3 +3251,35 @@ QUnit.test(
     assert.equal(propEditor["getEditorName"](), "View item: item1", "getEditorName is Edit");
   }
 );
+
+
+QUnit.test("We should not have 'Others' category in our objects",
+  function (assert) {
+    const survey = new Survey.Survey();
+    const page = survey.addNewPage("page1");
+    const panel = page.addNewPanel("panel");
+    const objToCheck: Array<Survey.Base> = [survey, panel, page];
+    const allQuestionTypes = Survey.Serializer.getChildrenClasses("question", true);
+    for(let i = 0; i < allQuestionTypes.length; i ++) {
+      if(allQuestionTypes[i].name === "signaturepad") continue; //TODO
+      let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
+      if(!!question && !question.isCompositeQuestion) {
+        objToCheck.push(question);
+      }
+    }
+    assert.ok(true);
+    for(let i = 0; i < objToCheck.length; i ++) {
+      let properties = new SurveyQuestionProperties(objToCheck[i]);
+      let tab = properties.getTabByName("others");
+      if(!!tab) {
+        const props = tab.properties;
+        const propNames: Array<string> = [];
+        for(var j = 0; j < props.length; j ++) {
+          propNames.push(props[j].name);
+        }
+        assert.notOk(true, "obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(propNames));
+      }
+    }
+  }
+);
+
