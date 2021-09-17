@@ -40,9 +40,6 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
               <Survey model={this.model.stringsSurvey}></Survey>
             </div>
           </div>
-          {/* <div className="svc-flex-column st-property-panel">
-            <Survey model={this.model.settingsSurvey}></Survey>
-          </div> */}
         </div>
       );
     }

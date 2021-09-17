@@ -40,6 +40,7 @@ export var settings = {
    */
   questionConvertMode: QuestionConvertMode.AllTypes,
   propertyGrid: {
+    allowCollapse: false,
     useButtonGroup: true,
     showNavigationButtons: false,
     maximumColumnsCount: 0,
