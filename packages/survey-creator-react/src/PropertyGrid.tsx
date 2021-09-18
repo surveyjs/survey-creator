@@ -38,13 +38,14 @@ export class PropertyGridComponent extends SurveyElementBase<
     this.model.dispose();
   }
   public canRender(): boolean {
-    if (!this.model || !this.model.visible) return false;
+    if (!this.model) return false;
     return super.canRender();
   }
   renderElement() {
+    const style = { display: !this.model.visible ? "none" : "" };
     return (
       <div className="svc-flex-column svc-properties-wrapper">
-        <div ref={this.containerRef} className="svc-property-panel">
+        <div ref={this.containerRef} style={style} className="svc-property-panel">
           <div className="svc-property-panel__header">
             <div className="svc-property-panel__actions">
               <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
