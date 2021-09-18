@@ -1,5 +1,5 @@
 import React from "react";
-import { PropertyGridViewModel, CreatorBase } from "@survey/creator";
+import { PropertyGridViewModel, CreatorBase, ResizeManager } from "@survey/creator";
 import { Base, SurveyModel } from "survey-core";
 import {
   Survey,
@@ -17,16 +17,24 @@ export class PropertyGridComponent extends SurveyElementBase<
   any
 > {
   model: PropertyGridViewModel<SurveyModel>;
+  private resizeManager: ResizeManager;
+  private containerRef: React.RefObject<HTMLDivElement>;
   constructor(props: IPropertyGridComponentProps) {
     super(props);
     var creator = this.props.model;
+    this.containerRef = React.createRef();
     this.model = new PropertyGridViewModel<SurveyModel>(creator);
   }
   protected getStateElement(): Base {
     return this.model;
   }
+  componentDidMount() {
+    super.componentDidMount();
+    this.resizeManager = new ResizeManager(this.containerRef.current);
+  }
   componentWillUnmount() {
     super.componentWillUnmount();
+    this.resizeManager.dispose();
     this.model.dispose();
   }
   public canRender(): boolean {
@@ -36,7 +44,7 @@ export class PropertyGridComponent extends SurveyElementBase<
   renderElement() {
     return (
       <div className="svc-flex-column svc-properties-wrapper">
-        <div className="svc-property-panel">
+        <div ref={this.containerRef} className="svc-property-panel">
           <div className="svc-property-panel__header">
             <div className="svc-property-panel__actions">
               <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
