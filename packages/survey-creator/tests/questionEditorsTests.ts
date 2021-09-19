@@ -1435,3 +1435,12 @@ QUnit.test("Do not show page editor in Modal Window", function (assert) {
     "We can't process page correctly in temporary object"
   );
 });
+
+QUnit.test("Question editor read only", function (assert) {
+  var options = new EditorOptionsTests();
+  var question = new Survey.QuestionText("q1");
+  var editor = new SurveyElementEditorContentModel(question, "", options, true, true);
+  assert.equal(editor.koTabs()[0].editorPropertiesValue[0].editor.readOnly(), true, "Question Tabs editor became readonly");
+  var editor1 = new SurveyElementEditorContentModel(question, "", options, true, false);
+  assert.equal(editor1.koTabs()[0].editorPropertiesValue[0].editor.readOnly(), false, "Question Tabs editor stay editable");
+});

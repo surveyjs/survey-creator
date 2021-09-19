@@ -1285,3 +1285,33 @@ test("Set readOnly option", (): any => {
     expect(e).toBeNull();
   }
 });
+test("Set allowEditSurveyTitle option", (): any => {
+  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  expect(creator.allowEditSurveyTitle).toBeFalsy();
+  expect(Serializer.findProperty("survey", "title").visible).toBeFalsy();
+  creator.allowEditSurveyTitle = true;
+  expect(Serializer.findProperty("survey", "title").visible).toBeTruthy();
+});
+test("creator.onActiveTabChanged", (): any => {
+  const creator = new CreatorTester({
+    showTranslationTab: true,
+    showLogicTab: true,
+  });
+  let tabName;
+  let plugin;
+  let model;
+  creator.onActiveTabChanged.add((sender, options) => {
+    tabName = options.tabName;
+    plugin = options.plugin;
+    model = options.model;
+  });
+  expect(creator.viewType).toEqual("designer");
+  creator.makeNewViewActive("test");
+  expect(tabName).toEqual("test");
+  expect(plugin).toEqual(creator.getPlugin("test"));
+  expect(model).toEqual(plugin.model);
+  creator.makeNewViewActive("logic");
+  expect(tabName).toEqual("logic");
+  expect(plugin).toEqual(creator.getPlugin("logic"));
+  expect(model).toEqual(plugin.model);
+});

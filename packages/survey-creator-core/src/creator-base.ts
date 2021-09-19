@@ -111,6 +111,17 @@ export class CreatorBase<T extends SurveyModel>
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
   /**
+   * Set it to false to hide survey title and coresponding properties
+   */
+  get allowEditSurveyTitle() {
+    return this.getPropertyValue("allowEditSurveyTitle", true);
+  }
+  set allowEditSurveyTitle(val: boolean) {
+    ["title", "description", "logo", "showTitle", "logoWidth", "logoHeight", "logoFit"].forEach(propertyName => Serializer.findProperty("survey", propertyName).visible = val);
+    this.setPropertyValue("allowEditSurveyTitle", val);
+    this.propertyGrid && this.propertyGrid.refresh();
+  }
+  /**
    * You have right to set this property to true if you have bought the commercial licence only.
    * It will remove the text about non-commerical usage on the top of the widget.
    * Setting this property true without having a commercial licence is illegal.
@@ -821,7 +832,8 @@ export class CreatorBase<T extends SurveyModel>
     if (!this.canSwitchViewType()) return false;
     this.activatePlugin(viewName);
     this.viewType = viewName;
-    this.onActiveTabChanged.fire(this, { tabName: viewName });
+    const plugin = this.currentPlugin;
+    this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
     return true;
   }
   private canSwitchViewType(): boolean {
@@ -1055,6 +1067,10 @@ export class CreatorBase<T extends SurveyModel>
     this.showTestSurveyTab =
       typeof options.showTestSurveyTab !== "undefined"
         ? options.showTestSurveyTab
+        : true;
+    this.allowEditSurveyTitle =
+      typeof options.allowEditSurveyTitle !== "undefined"
+        ? options.allowEditSurveyTitle
         : true;
     this.showEmbeddedSurveyTab =
       typeof options.showEmbeddedSurveyTab !== "undefined"

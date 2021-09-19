@@ -64,7 +64,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
   protected getEditorName(): string {
     if (!this.koEditItem() || !this.koEditItem().obj) return "";
     return editorLocalization
-      .getString("pe.itemEdit")
+      .getString(this.readOnly()?"pe.itemView":"pe.itemEdit")
       ["format"](this.koEditItem().obj.value);
   }
   public beforeShowCore() {

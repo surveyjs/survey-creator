@@ -1955,6 +1955,9 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                 >
                   
     
+                  <!-- ko if: creator.allowEditSurveyTitle -->
+                  
+    
                   <div
                     data-bind="click: function() { creator.selectElement(survey); }"
                   >
@@ -1965,6 +1968,9 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                     
     
                   </div>
+                  
+    
+                  <!-- /ko -->
                   
     
                   <!-- ko if: survey.isShowProgressBarOnTop -->
@@ -2186,6 +2192,9 @@ exports[`Storyshots Creator design surface content Default 1`] = `
     >
       
     
+      <!-- ko if: creator.allowEditSurveyTitle -->
+      
+    
       <div
         data-bind="click: function() { creator.selectElement(survey); }"
       >
@@ -2198,6 +2207,9 @@ exports[`Storyshots Creator design surface content Default 1`] = `
         
     
       </div>
+      
+    
+      <!-- /ko -->
       
     
       <!-- ko if: survey.isShowProgressBarOnTop -->

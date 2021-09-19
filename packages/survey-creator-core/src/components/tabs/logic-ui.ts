@@ -32,10 +32,14 @@ export class SurveyLogicUI extends SurveyLogic {
       "logic-items"
     );
     //this.itemsSurveyValue.css = surveyDesignerCss;
+    this.itemsSurvey.onMatrixRowRemoving.add((sender, options) => {
+      const item = this.visibleItems[options.rowIndex];
+      options.allow = this.canRemoveItem(item);
+    });
     this.itemsSurvey.onMatrixRowRemoved.add((sender, options) => {
       const item = this.visibleItems[options.rowIndex];
       const isDeleteEditable = item === this.editableItem;
-      this.removeItem(item);
+      this.removeItem(item, false);
       if (isDeleteEditable) {
         this.mode = "view";
         this.updateNewActionState();

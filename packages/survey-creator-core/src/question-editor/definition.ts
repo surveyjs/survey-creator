@@ -57,7 +57,9 @@ export class SurveyQuestionEditorDefinition {
         "placeHolder",
         { name: "maxLength", tab: "validation" },
         { name: "multiLine", tab: "data" },
-        { name: "textUpdateMode", tab: "data" }
+        { name: "textUpdateMode", tab: "data" },
+        { name: "autoGrow", tab: "layout" },
+        { name: "multiLine", tab: "layout" }
       ]
     },
     file: {
@@ -72,7 +74,8 @@ export class SurveyQuestionEditorDefinition {
         "maxSize",
         "imageHeight",
         "imageWidth",
-        "waitForUpload"
+        "waitForUpload",
+        "needConfirmRemoveFile"
       ]
     },
     html: {
@@ -101,6 +104,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "allowAddRows",
         "allowRemoveRows",
+        "allowRowsDragAndDrop",
         "rowCount",
         "minRowCount",
         "maxRowCount",
@@ -130,6 +134,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "isAllRowRequired", tab: "validation" },
         { name: "showHeader", tab: "layout" },
         { name: "rowsOrder", tab: "rows" },
+        { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "columnsVisibleIf", tab: "logic" },
         { name: "rowsVisibleIf", tab: "logic" }
       ],
@@ -194,6 +199,7 @@ export class SurveyQuestionEditorDefinition {
     dropdown: {
       properties: [
         "optionsCaption",
+        "autoComplete",
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
@@ -216,7 +222,8 @@ export class SurveyQuestionEditorDefinition {
         "contentMode",
         "imageFit",
         "imageHeight",
-        "imageWidth"
+        "imageWidth",
+        "text"
       ]
     },
     "itemvalue[]@choices": {
@@ -515,6 +522,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "questionsOrder", tab: "question" },
         { name: "maxTextLength", tab: "question" },
         { name: "maxOthersLength", tab: "question" },
+        { name: "autoGrowComment", tab: "question" },
 
         { name: "showPageTitles", tab: "pages" },
         { name: "showPageNumbers", tab: "pages" },

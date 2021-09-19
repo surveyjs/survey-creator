@@ -3226,3 +3226,60 @@ QUnit.test(
     assert.equal(json.cellType, "boolean");
   }
 );
+
+QUnit.test(
+  "SurveyPropertyItemValuesEditor - Editor name",
+  function (assert) {
+    var survey = new Survey.Survey();
+    var p = survey.addNewPage();
+    var q = <Survey.QuestionDropdown>p.addNewQuestion("dropdown", "q1");
+    q.choices = ["item1", "item2", "item3"];
+    var property = Survey.Serializer.findProperty("selectbase", "choices");
+    var propEditor = <SurveyPropertyItemValuesEditor>(
+      SurveyPropertyEditorFactory.createEditor(property)
+    );
+    propEditor.object = q;
+    propEditor.beforeShow();
+
+    var firstItem = <SurveyNestedPropertyEditorItem>(
+      propEditor.createItemViewModel(q.choices[0])
+    );
+    propEditor.koEditItem(firstItem);
+    assert.equal(propEditor["getEditorName"](), "Edit item: item1", "getEditorName is Edit");
+
+    propEditor.readOnly(true);
+    assert.equal(propEditor["getEditorName"](), "View item: item1", "getEditorName is Edit");
+  }
+);
+
+
+QUnit.test("We should not have 'Others' category in our objects",
+  function (assert) {
+    const survey = new Survey.Survey();
+    const page = survey.addNewPage("page1");
+    const panel = page.addNewPanel("panel");
+    const objToCheck: Array<Survey.Base> = [survey, panel, page];
+    const allQuestionTypes = Survey.Serializer.getChildrenClasses("question", true);
+    for(let i = 0; i < allQuestionTypes.length; i ++) {
+      if(allQuestionTypes[i].name === "signaturepad") continue; //TODO
+      let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
+      if(!!question && !question.isCompositeQuestion) {
+        objToCheck.push(question);
+      }
+    }
+    assert.ok(true);
+    for(let i = 0; i < objToCheck.length; i ++) {
+      let properties = new SurveyQuestionProperties(objToCheck[i]);
+      let tab = properties.getTabByName("others");
+      if(!!tab) {
+        const props = tab.properties;
+        const propNames: Array<string> = [];
+        for(var j = 0; j < props.length; j ++) {
+          propNames.push(props[j].name);
+        }
+        assert.notOk(true, "obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(propNames));
+      }
+    }
+  }
+);
+

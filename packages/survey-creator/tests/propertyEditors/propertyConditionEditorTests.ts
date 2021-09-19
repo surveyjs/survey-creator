@@ -2075,3 +2075,22 @@ QUnit.test(
     );
   }
 );
+
+QUnit.test("SurveyPropertyConditionEditor readonly", function (assert) {
+  var survey = new Survey.Survey({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q4", type: "text", visibleIf: "{q1} = 'abc'" },
+    ],
+  });
+  var question = survey.getQuestionByName("q4");
+  var property = Survey.Serializer.findProperty("question", "visibleIf");
+  property.readOnly = true;
+  var editor = new SurveyPropertyConditionEditor(property);
+  editor.object = question;
+  editor.beforeShow();
+  editor.isEditorShowing = true;
+  var editorItem = editor.koEditorItems()[0];
+  assert.equal(editorItem.survey.mode, "display", "Survey mode set to display correctly");
+  property.readOnly = false;
+});
