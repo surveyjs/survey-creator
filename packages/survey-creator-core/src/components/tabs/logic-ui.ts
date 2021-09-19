@@ -67,9 +67,14 @@ export class SurveyLogicUI extends SurveyLogic {
       target.updateItemsSurveyData();
     }
   }) actionTypeFilter: string;
-  public dispose() {
+  public dispose(): void {
     super.dispose();
-    this.itemsSurveyValue.dispose();
+    for(let key in this.itemUIHash) {
+      const itemUI = this.itemUIHash[key];
+      itemUI.expressionEditor.dispose();
+      itemUI.itemEditor.dispose();
+    }
+    this.itemUIHash = {};
   }
   /**
    * The list of toolbar items. You may add/remove/replace them.

@@ -136,6 +136,28 @@ test("LogicUI: do not reset editing and logic item isModified ", () => {
   logic.mode = "view";
   expect(item.isModified).toBeFalsy();
 });
+test("LogicUI: dispose logic item ui", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.editItem(logic.items[0]);
+  const itemEditor = logic.itemEditor;
+  const expressionEditor = logic.expressionEditor;
+  expect(itemEditor.editSurvey.isDisposed).toBeFalsy();
+  expect(expressionEditor.editSurvey.isDisposed).toBeFalsy();
+  logic.mode = "view";
+  expect(itemEditor.editSurvey.isDisposed).toBeFalsy();
+  expect(expressionEditor.editSurvey.isDisposed).toBeFalsy();
+  logic.dispose();
+  expect(itemEditor.editSurvey.isDisposed).toBeTruthy();
+  expect(expressionEditor.editSurvey.isDisposed).toBeTruthy();
+});
 test("LogicItemEditor: question selector order", () => {
   const survey = new SurveyModel({
     elements: [
