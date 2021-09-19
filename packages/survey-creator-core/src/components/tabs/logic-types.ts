@@ -4,6 +4,7 @@ import {
   HtmlConditionItem,
   SurveyTrigger,
   Serializer,
+  Helpers,
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
@@ -62,7 +63,28 @@ export class SurveyLogicType {
   public get showTitlesInExpression(): boolean {
     return !!this.options && this.options.showTitlesInExpressions;
   }
-  public saveNewElement(el: Base) {
+  public createNewObj(srcObj: Base): Base {
+    const obj = <Base>Serializer.createClass(this.baseClass);
+    if (!!srcObj) {
+      obj.fromJSON(srcObj.toJSON());
+    }
+    //TODO
+    obj["survey"] = this.survey;
+    if ((<any>obj).setOwner) {
+      (<any>obj).setOwner(this.survey);
+    }
+    return obj;
+  }
+  public cloneElement(el: Base): Base {
+    if(this.isTrigger) return this.createNewObj(el);
+    return el;
+  }
+  public areElementsEqual(el1: Base, el2: Base): boolean {
+    if(el1 === el2) return true;
+    if(!this.isTrigger || el1.getType() !== el2.getType()) return false;
+    return Helpers.isTwoValueEquals(el1.toJSON(), el2.toJSON());
+  }
+  public saveNewElement(el: Base): void {
     var collection: Array<Base> = !!this.logicType.getCollection
       ? this.logicType.getCollection(this.survey)
       : null;
