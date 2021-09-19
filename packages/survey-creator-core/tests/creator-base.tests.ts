@@ -25,11 +25,13 @@ import { PropertyGridViewModel } from "../src/property-grid/property-grid-view-m
 
 import {
   getElementWrapperComponentName,
+  ICreatorPlugin,
   isStringEditable
 } from "../src/creator-base";
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
 import { editorLocalization } from "../src/editorLocalization";
+import { settings } from "../src/settings";
 
 test("options.questionTypes", (): any => {
   var creator = new CreatorTester();
@@ -683,7 +685,7 @@ test("Show error on entering non-unique column value", (): any => {
   };
   var matrixQuestion = creator.survey.getAllQuestions()[0];
   creator.selectElement(matrixQuestion.columns[1]);
-  var questionName = creator.propertyGrid.survey.getQuestionByName("name");
+  var questionName = creator.designerPropertyGrid.survey.getQuestionByName("name");
   expect(questionName.value).toEqual("col2");
   questionName.value = "col1";
   expect(questionName.errors).toHaveLength(1);
@@ -907,7 +909,7 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
   let counter = 0;
   let changedType;
   creator.onModified.add((sender, options) => {
-    counter ++;
+    counter++;
     changedType = options.type;
   });
   expect(creator.viewType).toEqual("designer");
@@ -948,7 +950,44 @@ test("Test plug-ins JSON-Ace in creator", (): any => {
   expect(textPlugin.model).toBeFalsy();
   TabJsonEditorAcePlugin.hasAceEditor = oldFunc;
 });
+test("Test plug-ins check order change viewtype and activate/deactivate", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.viewType).toEqual("designer");
+
+  let result = "";
+  creator.addPlugin("one", <ICreatorPlugin>{
+    activate: () => {
+      expect(creator.viewType).toBe("designer");
+      result += "one-activate";
+    },
+    deactivate: () => {
+      expect(creator.viewType).toBe("one");
+      result += "+one-deactivate";
+      return true;
+    }
+  });
+
+  creator.addPlugin("two", <ICreatorPlugin>{
+    activate: () => {
+      result += "+two-activate";
+      expect(creator.viewType).toBe("one");
+    },
+    deactivate: () => {
+      result += "+two-deactivate";
+      return true;
+    }
+  });
+
+  creator.makeNewViewActive("one");
+  expect(result).toBe("one-activate");
+
+  creator.makeNewViewActive("two");
+  expect(result).toBe("one-activate+one-deactivate+two-activate");
+
+});
 test("Show/hide property grid", (): any => {
+  const prevValue = settings.propertyGrid.allowCollapse;
+  settings.propertyGrid.allowCollapse = true;
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
@@ -967,7 +1006,7 @@ test("Show/hide property grid", (): any => {
   })[0];
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(settingsBarItem).toBeTruthy();
-  var propertyGridModel = new PropertyGridViewModel(creator);
+  var propertyGridModel = creator.getPlugin("designer").propertyGrid as PropertyGridViewModel<SurveyModel>; // new PropertyGridViewModel(creator);
   expect(propertyGridModel.visible).toBeTruthy();
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
@@ -994,8 +1033,11 @@ test("Show/hide property grid", (): any => {
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
   expect(propertyGridModel.visible).toBeTruthy();
+  settings.propertyGrid.allowCollapse = prevValue;
 });
 test("Show/hide property grid and settings button active state", (): any => {
+  const prevValue = settings.propertyGrid.allowCollapse;
+  settings.propertyGrid.allowCollapse = true;
   var creator = new CreatorTester();
   creator.JSON = {
     pages: [
@@ -1019,7 +1061,7 @@ test("Show/hide property grid and settings button active state", (): any => {
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   expect(settingsBarItem.active).toBeFalsy();
-  var propertyGridModel = new PropertyGridViewModel(creator);
+  var propertyGridModel = creator.getPlugin("designer").propertyGrid as PropertyGridViewModel<SurveyModel>; //new PropertyGridViewModel(creator);
   expect(propertyGridModel.visible).toBeFalsy();
 
   settingsBarItem.action();
@@ -1045,6 +1087,7 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(propertyGridModel.visible).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeFalsy();
+  settings.propertyGrid.allowCollapse = prevValue;
 });
 test("Show survey in property grid on deleting last page", (): any => {
   var creator = new CreatorTester();
@@ -1230,8 +1273,7 @@ test("Modify property editor settings on event", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeHolderQuestion =
-    creator.propertyGrid.survey.getQuestionByName("placeHolder");
+  const placeHolderQuestion = creator.designerPropertyGrid.survey.getQuestionByName("placeHolder");
   expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeHolderQuestion.dataList).toHaveLength(2);
 });

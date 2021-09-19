@@ -2062,23 +2062,26 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           
       
         </div>
-            
+        
     
       </div>
       
     
       <div
-        data-bind="visible: creator.activeTab === 'designer'"
+        data-bind="if: creator.currentTabPropertyGrid"
       >
         
       
         <svc-property-panel
           class="svc-flex-column svc-properties-wrapper"
-          params="model: creator"
+          params="model: creator.currentTabPropertyGrid"
         >
+          <!-- ko with: model -->
+          
+
           <div
             class="svc-property-panel"
-            data-bind="visible:visible"
+            data-bind="visible: visible"
           >
             
   
@@ -2096,6 +2099,14 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
                 <!-- /ko -->
                 
     
+              </div>
+              
+    
+              <div
+                class="svc-property-panel__title"
+                data-bind="text: headerText"
+              >
+                
               </div>
               
   
@@ -2117,6 +2128,7 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
           </div>
           
 
+          <!-- /ko -->
         </svc-property-panel>
         
     
@@ -2157,8 +2169,6 @@ exports[`Storyshots Creator / Desktop or Landscape Tablet Default 1`] = `
     
 
   </div>
-  
-
 </survey-creator>
 `;
 

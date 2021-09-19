@@ -59,7 +59,7 @@ export interface ICreatorPlugin {
   deactivate?: () => boolean;
   designerSurveyCreated?: () => void;
   createActions?: (items: Array<Action>) => void;
-  propertyGrid?: PropertyGridViewModelBase
+  propertyGrid?: PropertyGridViewModelBase;
 }
 
 export interface ITabbedMenuItem extends IAction {
@@ -859,7 +859,7 @@ export class CreatorBase<T extends SurveyModel>
   }
   public get designerPropertyGrid(): PropertyGridModel {
     const designerPlugin = this.getPlugin("designer");
-    return designerPlugin.propertyGrid.model as any as PropertyGridModel;
+    return designerPlugin ? (designerPlugin.propertyGrid.model as any as PropertyGridModel) : null;
   }
   public get currentTabPropertyGrid(): PropertyGridViewModelBase {
     return this.getPlugin(this.activeTab).propertyGrid || null;
