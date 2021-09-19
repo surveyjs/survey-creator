@@ -1392,3 +1392,27 @@ test("questionName choices", () => {
   expect(choices[2].text).toEqual("question 10");
   expect(choices[3].text).toEqual("question 11");
 });
+test("questionName title visibility", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "text" },
+      { name: "q3", type: "text" },
+      { name: "q4", type: "text" },
+    ]
+  });
+  const question = survey.getQuestionByName("q4");
+  const editor = new ConditionEditor(survey, question);
+  let panel1 = editor.panel.panels[0];
+  expect(panel1.getQuestionByName("questionName").titleLocation).toEqual("left");
+  editor.panel.addPanel();
+  let panel2 = editor.panel.panels[1];
+  expect(panel2.getQuestionByName("questionName").titleLocation).toEqual("hidden");
+
+  editor.text = "{q1}=1 and {q2}=2";
+  expect(editor.panel.panels).toHaveLength(2);
+  panel1 = editor.panel.panels[0];
+  expect(panel1.getQuestionByName("questionName").titleLocation).toEqual("left");
+  panel2 = editor.panel.panels[1];
+  expect(panel2.getQuestionByName("questionName").titleLocation).toEqual("hidden");
+});

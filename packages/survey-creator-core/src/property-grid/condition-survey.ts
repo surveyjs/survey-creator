@@ -478,7 +478,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     panel.getQuestionByName("questionName").choices =
       this.allConditionQuestions;
     panel.getQuestionByName("questionName").titleLocation =
-      this.panel.panelCount > 1 ? "hidden" : "left";
+      this.panel.panels.indexOf(panel) == 0 ? "left" : "hidden";
     if (!!this.getConditionQuestion(item.questionName)) {
       panel.getQuestionByName("questionName").value = item.questionName;
     }
