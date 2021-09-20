@@ -1,29 +1,46 @@
 import React from "react";
-import { PropertyGridViewModelBase } from "@survey/creator";
-import { Action, Base, SurveyModel } from "survey-core";
-import { Survey, SurveyElementBase, SurveyActionBar, ReactQuestionFactory, SurveyQuestionButtonGroup, ReactElementFactory, ActionContainer } from "survey-react-ui";
+import { PropertyGridViewModelBase, ResizeManager } from "@survey/creator";
+import { Base } from "survey-core";
+import { Survey, SurveyElementBase, SurveyActionBar, ReactQuestionFactory, SurveyQuestionButtonGroup, ReactElementFactory } from "survey-react-ui";
+
 interface IPropertyGridComponentProps {
   model: PropertyGridViewModelBase;
 }
+
 export class PropertyGridComponent extends SurveyElementBase<IPropertyGridComponentProps, any> {
+  private resizeManager: ResizeManager;
+  private containerRef: React.RefObject<HTMLDivElement>;
+
   get model(): PropertyGridViewModelBase {
     return this.props.model;
   }
 
   constructor(props: IPropertyGridComponentProps) {
     super(props);
+    this.containerRef = React.createRef();
   }
+
   protected getStateElement(): Base {
     return this.model;
   }
+
+  componentDidMount() {
+    super.componentDidMount();
+    this.resizeManager = new ResizeManager(this.containerRef.current);
+  }
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    this.resizeManager.dispose();
+  }
   public canRender(): boolean {
-    if (!this.model || !this.model.visible) return false;
+    if (!this.model) return false;
     return super.canRender();
   }
   renderElement() {
+    const style = { display: !this.model.visible ? "none" : "" };
     return (
       <div className="svc-flex-column svc-properties-wrapper">
-        <div className="svc-property-panel">
+        <div ref={this.containerRef} style={style} className="svc-property-panel">
           <div className="svc-property-panel__header">
             <div className="svc-property-panel__actions">
               <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
