@@ -2,16 +2,8 @@ import { Base, property, SurveyModel } from "survey-core";
 
 import "./simulator.scss";
 
-export class SimulatorOptions extends Base {
-  @property({ defaultValue: true }) landscape: boolean;
-  @property() survey: SurveyModel;
-  @property({ defaultValue: "desktop" }) device: string;
-  @property({ defaultValue: "l" }) orientation: string;
-  @property({ defaultValue: true }) considerDPI: boolean;
-}
-
 export class SurveySimulatorComponent extends Base {
-  constructor(public simulatorOptions: SimulatorOptions) {
+  constructor() {
     super();
     // if (!!_toolbarHolder) {
     //   this.simulatorOptions.survey = this._toolbarHolder.koSurvey;
@@ -44,25 +36,27 @@ export class SurveySimulatorComponent extends Base {
     // }
   }
 
-  public get survey(): SurveyModel {
-    return this.simulatorOptions.survey;
-  }
+  @property({ defaultValue: true }) landscape: boolean;
+  @property() survey: SurveyModel;
+  @property({ defaultValue: "desktop" }) device: string;
+  @property({ defaultValue: "l" }) orientation: string;
+  @property({ defaultValue: true }) considerDPI: boolean;
 
   @property({ defaultValue: true }) simulatorEnabled: boolean;
   @property({ defaultValue: true }) simulatorScaleEnabled: boolean;
 
   public get activeDevice(): string {
-    return this.simulatorOptions.device;
+    return this.device;
   }
   public set activeDevice(device: string) {
-    this.simulatorOptions.device = device;
+    this.device = device;
   }
 
   get landscapeOrientation(): boolean {
-    return this.simulatorOptions.landscape;
+    return this.landscape;
   }
   // set landscapeOrientation(isLanscape: boolean) {
-  //   this.simulatorOptions.landscape = isLanscape;
+  //   this.landscape = isLanscape;
   // }
 
   public get hasFrame(): boolean {

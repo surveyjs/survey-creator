@@ -4,11 +4,12 @@ import { SurveySimulatorComponent } from "@survey/creator";
 import React from "react";
 
 export class SurveySimulator extends SurveyElementBase<any, any> {
-  private model: SurveySimulatorComponent;
+  private get model(): SurveySimulatorComponent {
+    return this.props.model;
+  }
 
   constructor(props: any) {
     super(props);
-    this.model = new SurveySimulatorComponent(this.props.options);
   }
   protected getStateElement(): Base {
     return this.model;
