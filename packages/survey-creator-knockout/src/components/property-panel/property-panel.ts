@@ -1,4 +1,4 @@
-import { PropertyGridViewModel, CreatorBase } from "@survey/creator";
+import { PropertyGridViewModel, CreatorBase, ResizeManager } from "@survey/creator";
 import * as ko from "knockout";
 import {
   ImplementorBase,
@@ -16,9 +16,11 @@ ko.components.register("svc-property-panel", {
     createViewModel: (params: any, componentInfo: any) => {
       var creator: CreatorBase<Survey> = params.model;
       const model = new PropertyGridViewModel(creator);
+      const resizeManager = new ResizeManager(componentInfo.element.children[0]);
       new ImplementorBase(model);
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         model.dispose();
+        resizeManager.dispose();
       });
       return model;
     }
