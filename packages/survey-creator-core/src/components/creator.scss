@@ -6,6 +6,10 @@ survey-creator,
   width: 100%;
   height: 100%;
 
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: $primary-light $background-dim;
+  }
   ::-webkit-scrollbar {
     height: 6px;
     width: 6px;
