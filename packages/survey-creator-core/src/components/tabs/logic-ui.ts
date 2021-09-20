@@ -1,4 +1,4 @@
-import { SurveyModel, AdaptiveActionContainer, Action, IAction, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, PopupModel, ListModel, property } from "survey-core";
+import { SurveyModel, AdaptiveActionContainer, Action, IAction, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, PopupModel, ListModel, property, HashTable } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
 import { LogicItemEditor } from "./logic-item-editor";
@@ -11,13 +11,18 @@ import { QuestionEmbeddedSurveyModel } from "../embedded-survey";
 import { findAction, updateMatrixRemoveAction } from "../../utils/actions";
 
 import "./logic-ui.scss";
-import { editorLocalization } from "../../editorLocalization";
+
+interface ILogicItemUI {
+  expressionEditor: ConditionEditor;
+   itemEditor: LogicItemEditor;
+}
 
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
   private itemEditorValue: LogicItemEditor;
   private itemsSurveyValue: SurveyModel;
   private visibleItems: SurveyLogicItem[];
+  private itemUIHash: HashTable<ILogicItemUI> = {};
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
 
   constructor(
@@ -51,7 +56,6 @@ export class SurveyLogicUI extends SurveyLogic {
     });
     this.updateItemsSurveyData();
     this.setupToolbarItems();
-    this.itemEditorValue = new LogicItemEditor(null, this.options);
   }
   @property({
     onSet: (value, target: SurveyLogicUI) => {
@@ -63,9 +67,14 @@ export class SurveyLogicUI extends SurveyLogic {
       target.updateItemsSurveyData();
     }
   }) actionTypeFilter: string;
-  public dispose() {
+  public dispose(): void {
     super.dispose();
-    this.itemsSurveyValue.dispose();
+    for(let key in this.itemUIHash) {
+      const itemUI = this.itemUIHash[key];
+      itemUI.expressionEditor.dispose();
+      itemUI.itemEditor.dispose();
+    }
+    this.itemUIHash = {};
   }
   /**
    * The list of toolbar items. You may add/remove/replace them.
@@ -93,6 +102,21 @@ export class SurveyLogicUI extends SurveyLogic {
   public get itemEditor(): LogicItemEditor {
     return this.itemEditorValue;
   }
+  public getExpressionEditor(item: SurveyLogicItem): ConditionEditor {
+    return this.getLogicItemUI(item).expressionEditor;
+  }
+  public getLogicItemEditor(item: SurveyLogicItem): LogicItemEditor {
+    return this.getLogicItemUI(item).itemEditor;
+  }
+  private getLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
+    let res: ILogicItemUI = this.itemUIHash[item.id];
+    if(!res) {
+      res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
+      res.expressionEditor.text = item.expression;
+      this.itemUIHash[item.id] = res;
+    }
+    return res;
+  }
   public get expressionSurvey(): SurveyModel {
     return this.expressionEditor.editSurvey;
   }
@@ -104,21 +128,23 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected onStartEditing() {
     super.onStartEditing();
-    this.createExpressionPropertyEditor();
-    this.expressionEditor.text = this.editableItem.expression;
-    this.itemEditor.editableItem = this.editableItem;
+    this.expressionEditorValue = this.getExpressionEditor(this.editableItem);
+    this.itemEditorValue = this.getLogicItemEditor(this.editableItem);
   }
   protected onEndEditing() {
+    if(!!this.editableItem) {
+      this.editableItem.isModified = !!this.itemEditor && !!this.expressionEditor && (this.itemEditor.isModified || this.expressionEditor.text !== this.editableItem.expression);
+    }
     super.onEndEditing();
     this.expressionEditorValue = null;
-    this.itemEditor.editableItem = null;
+    this.itemEditorValue = null;
   }
   protected onEditableItemApply() {
     this.expressionEditor.apply();
     this.itemEditor.apply();
     this.editableItem.apply(this.expressionEditor.text);
     if (this.editableItem.actions.length != this.itemEditor.panels.length) {
-      this.itemEditor.editableItem = this.editableItem;
+      this.itemEditor.setEditableItem(this.editableItem);
     }
     this.editableItem.isNew = false;
     if (!this.editableItem.isSuitable(this.questionFilter, this.actionTypeFilter)) {
@@ -179,13 +205,14 @@ export class SurveyLogicUI extends SurveyLogic {
     setSurveyJSONForPropertyGrid(json);
     return json;
   }
-  private createExpressionPropertyEditor() {
-    this.expressionEditorValue = new ConditionEditor(
+  private createExpressionPropertyEditor(): ConditionEditor {
+    const res = new ConditionEditor(
       this.survey,
       null,
       this.options
     );
-    this.expressionEditor.isModal = false;
+    res.isModal = false;
+    return res;
   }
   private getVisibleItems(): SurveyLogicItem[] {
     return this.items.filter(item => item.isNew || item.isSuitable(this.questionFilter, this.actionTypeFilter));

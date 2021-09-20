@@ -48,6 +48,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private isBuildingPanels: boolean;
   private titleActionsCreator: PropertyGridTitleActionsCreator;
   private initialSelectedElements: any = {};
+  private isModifiedValue: boolean = false;
   constructor(
     editableItem: SurveyLogicItem,
     protected options: ISurveyCreatorOptions = null
@@ -108,18 +109,22 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       this.onValueChanged(options);
     });
     this.editSurvey.css = surveyDesignerCss;
-    this.editableItem = editableItem;
+    this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {
     return this.editableItemValue;
   }
-  public set editableItem(val: SurveyLogicItem) {
+  public setEditableItem(val: SurveyLogicItem): void {
     this.editableItemValue = val;
     this.buildInitialSelectedElements();
     this.buildPanels();
+    this.isModifiedValue = false;
   }
-  public get survey() {
+  public get survey(): SurveyModel {
     return this.editableItem.survey;
+  }
+  public get isModified(): boolean {
+    return this.isModifiedValue;
   }
   public get panel(): QuestionPanelDynamicModel {
     return <QuestionPanelDynamicModel>(
@@ -201,6 +206,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     for (var i = 0; i < this.panels.length; i++) {
       this.applyPanel(this.panels[i]);
     }
+    this.isModifiedValue = false;
     return true;
   }
   public getEditingActions(): Array<SurveyLogicAction> {
@@ -252,6 +258,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private onValueChanged(options: any) {
+    this.isModifiedValue = true;
     options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].logicTypeName) ? 1 : 100;
   }
   private onQuestionAdded(options: any) {
@@ -464,16 +471,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     action: SurveyLogicAction,
     logicType: SurveyLogicType
   ): Base {
-    var obj = <Base>Serializer.createClass(logicType.baseClass);
-    if (!!action && !!action.element && action.logicType == logicType) {
-      obj.fromJSON(action.element.toJSON());
-    }
-    //TODO
-    obj["survey"] = this.survey;
-    if ((<any>obj).setOwner) {
-      (<any>obj).setOwner(this.survey);
-    }
-    return obj;
+    const srcElement = !!action && action.logicType == logicType ? action.element : null;
+    return logicType.createNewObj(srcElement);
   }
   public getLocString(name: string) {
     return editorLocalization.getString(name);

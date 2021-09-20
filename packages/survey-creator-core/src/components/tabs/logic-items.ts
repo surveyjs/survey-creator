@@ -29,7 +29,7 @@ export class SurveyLogicAction {
   public get survey(): SurveyModel {
     return this.surveyValue;
   }
-  public apply(expression: string, isRenaming: boolean = false) {
+  public apply(expression: string, isRenaming: boolean = false): void {
     if (!!this.element && !!this.logicType) {
       this.element[this.logicType.propertyName] = expression;
       if (
@@ -43,7 +43,7 @@ export class SurveyLogicAction {
       }
     }
   }
-  public renameQuestion(oldName: string, newName: string) {
+  public renameQuestion(oldName: string, newName: string): void {
     if (!this.element) return;
     var names = this.questionNames;
     for (var i = 0; i < names.length; i++) {
@@ -53,10 +53,13 @@ export class SurveyLogicAction {
       }
     }
   }
+  public clone(): SurveyLogicAction {
+    const el = this.logicType.cloneElement(this.element);
+    return new SurveyLogicAction(this.logicType, el, this.survey);
+  }
   public equals(action: SurveyLogicAction): boolean {
-    return (
-      this.logicType === action.logicType && this.element === action.element
-    );
+    if(this.logicType !== action.logicType) return false;
+    return this.logicType.areElementsEqual(this.element, action.element);
   }
   public get name(): string {
     return !!this.logicType ? this.logicType.displayName : "";
@@ -120,10 +123,11 @@ export interface ISurveyLogicItemOwner {
 
 export class SurveyLogicItem {
   private static counter = 0;
-  private id = ++SurveyLogicItem.counter;
+  private idValue = ++SurveyLogicItem.counter;
   private removedActions: Array<SurveyLogicAction>;
   private actionsValue: Array<SurveyLogicAction>;
   public isNew: boolean = false;
+  public isModified: boolean = false;
   constructor(
     private owner: ISurveyLogicItemOwner,
     public expression: string = ""
@@ -134,7 +138,8 @@ export class SurveyLogicItem {
   public get actions(): Array<SurveyLogicAction> {
     return this.actionsValue;
   }
-  public get name() {
+  public get id(): number { return this.idValue; }
+  public get name(): string {
     return "logicItem" + this.id;
   }
   public get survey(): SurveyModel {
@@ -189,6 +194,21 @@ export class SurveyLogicItem {
     } else {
       this.addNewAction(newAction);
     }
+  }
+  public clone(): SurveyLogicItem {
+    const res = new SurveyLogicItem(this.owner, this.expression);
+    for(var i = 0; i < this.actions.length; i ++) {
+      res.addNewAction(this.actions[i].clone());
+    }
+    return res;
+  }
+  public equals(item: SurveyLogicItem): boolean {
+    if(this.expression !== item.expression) return false;
+    if(this.actions.length !== item.actions.length) return false;
+    for(let i = 0; i < this.actions.length; i ++) {
+      if(!this.actions[i].equals(item.actions[i])) return false;
+    }
+    return true;
   }
   private replaceActionCore(
     newAction: SurveyLogicAction,
