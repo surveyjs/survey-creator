@@ -18,6 +18,8 @@ export interface ISurveyLogicType {
   name: string;
   baseClass: string;
   propertyName: string;
+  dynamicPropertyName?: string;
+  dependedOnPropertyName?: string;
   showInUI?: boolean;
   showIf?: (survey: SurveyModel) => boolean;
   getCollection?: (survey: SurveyModel) => Array<Base>;
@@ -54,6 +56,12 @@ export class SurveyLogicType {
   }
   public get propertyName(): string {
     return this.logicType.propertyName;
+  }
+  public get dynamicPropertyName(): string {
+    return this.logicType.dynamicPropertyName;
+  }
+  public get dependedOnPropertyName(): string {
+    return this.logicType.dependedOnPropertyName;
   }
   public get visible(): boolean {
     if (!this.showInUI) return false;
@@ -238,6 +246,8 @@ export class SurveyLogicTypes {
       name: "trigger_setvalue",
       baseClass: "setvaluetrigger",
       propertyName: "expression",
+      dynamicPropertyName: "setValue",
+      dependedOnPropertyName: "setToName",
       questionNames: ["setToName"],
       getDisplayText: function (
         element: Base,

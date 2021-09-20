@@ -104,7 +104,7 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
 }
 
 export interface IPropertyGridEditor {
-  fit(prop: JsonObjectProperty): boolean;
+  fit(prop: JsonObjectProperty, context?: string): boolean;
   isDefault?: () => boolean;
   getJSON(
     obj: Base,
@@ -159,11 +159,17 @@ export var PropertyGridEditorCollection = {
   clearHash(): void {
     this.fitHash = {};
   },
-  register(editor: IPropertyGridEditor) {
+  register(editor: IPropertyGridEditor): void {
     this.editors.push(editor);
   },
-  getEditor(prop: JsonObjectProperty): IPropertyGridEditor {
+  getEditor(prop: JsonObjectProperty, context?: string): IPropertyGridEditor {
     if (!prop) return null;
+    if(!!context) {
+      for (var i = this.editors.length - 1; i >= 0; i--) {
+        let ed = this.editors[i];
+        if(ed.fit(prop, context)) return ed;
+      }
+    }
     var fitEd = this.fitHash[prop.id];
     if (!!fitEd) return fitEd;
     let ed = this.isEditorFit(prop);
@@ -188,9 +194,10 @@ export var PropertyGridEditorCollection = {
   getJSON(
     obj: Base,
     prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
+    options: ISurveyCreatorOptions,
+    context?: string
   ): any {
-    var res = this.getEditor(prop);
+    var res = this.getEditor(prop, context);
     return !!res ? res.getJSON(obj, prop, options) : null;
   },
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty): any {
@@ -423,7 +430,7 @@ export class PropertyJSONGenerator {
     }
     return res;
   }
-  public static getClassNameProperty(obj: Base) {
+  public static getClassNameProperty(obj: Base): string {
     if (!!obj && !!obj["getClassNameProperty"])
       return obj["getClassNameProperty"]();
     return undefined;
@@ -435,8 +442,8 @@ export class PropertyJSONGenerator {
     private parentObj: Base = null,
     private parentProperty: JsonObjectProperty = null
   ) {}
-  public toJSON(isNested: boolean = false): any {
-    return this.createJSON(isNested);
+  public toJSON(isNested: boolean = false, context: string = undefined): any {
+    return this.createJSON(isNested, context);
   }
   public createColumnsJSON(className: string, names: Array<string>): any {
     var res: Array<any> = [];
@@ -448,8 +455,8 @@ export class PropertyJSONGenerator {
     }
     return res;
   }
-  public setupObjPanel(panel: PanelModelBase, isNestedObj: boolean = false) {
-    panel.fromJSON(this.toJSON(isNestedObj));
+  public setupObjPanel(panel: PanelModelBase, isNestedObj: boolean = false, context: string = undefined): void {
+    panel.fromJSON(this.toJSON(isNestedObj, context));
     this.onQuestionsCreated(panel);
   }
   private onQuestionsCreated(panel: PanelModelBase) {
@@ -508,7 +515,7 @@ export class PropertyJSONGenerator {
     if (!!propName && this.obj[propName]) return this.obj[propName];
     return undefined;
   }
-  private createJSON(isNestedObj: boolean): any {
+  private createJSON(isNestedObj: boolean, context: string = undefined): any {
     var className = undefined;
     const propName = this.getClasPropName();
     if (!!propName) {
@@ -528,7 +535,7 @@ export class PropertyJSONGenerator {
     var panels: any = {};
     for (var i = 0; i < tabs.length; i++) {
       if (tabs[i].visible === false) continue;
-      panels[tabs[i].name] = this.createPanelProps(tabs[i], i == 0);
+      panels[tabs[i].name] = this.createPanelProps(tabs[i], i == 0, context);
     }
     var json: any = {
       elements: []
@@ -547,14 +554,16 @@ export class PropertyJSONGenerator {
   }
   private createPanelProps(
     tab: SurveyQuestionEditorTabDefinition,
-    isFirst: boolean
+    isFirst: boolean, context: string
   ): any {
     var panel = this.createPanelJSON(tab.name, tab.title, isFirst);
     for (var i = 0; i < tab.properties.length; i++) {
       var propDef = tab.properties[i];
       var propJSON = this.createQuestionJSON(
         <any>propDef.property,
-        propDef.title
+        propDef.title,
+        false,
+        context
       );
       if (!propJSON) continue;
       panel.elements.push(propJSON);
@@ -577,14 +586,16 @@ export class PropertyJSONGenerator {
   private createQuestionJSON(
     prop: JsonObjectProperty,
     title: string,
-    isColumn: boolean = false
+    isColumn: boolean = false,
+    context: string
   ): any {
     var isVisible = this.isPropertyVisible(prop, isColumn ? "list" : "");
     if (!isVisible && isColumn) return null;
     var json = PropertyGridEditorCollection.getJSON(
       this.obj,
       prop,
-      this.options
+      this.options,
+      context
     );
     if (!json) return null;
     json.name = prop.name;
@@ -599,7 +610,7 @@ export class PropertyJSONGenerator {
     if (!className) return null;
     var prop = Serializer.findProperty(className, propName);
     if (!prop) return null;
-    var json = this.createQuestionJSON(prop, "", true);
+    var json = this.createQuestionJSON(prop, "", true, undefined);
     if (!json) return null;
     json.name = prop.name;
     json.title = this.getQuestionTitle(prop, "");
@@ -1029,7 +1040,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
 }
 
 export class PropertyGridEditorBoolean extends PropertyGridEditor {
-  public fit(prop: JsonObjectProperty): boolean {
+  public fit(prop: JsonObjectProperty, context?: string): boolean {
     return prop.type == "boolean" || prop.type == "switch";
   }
   public getJSON(
