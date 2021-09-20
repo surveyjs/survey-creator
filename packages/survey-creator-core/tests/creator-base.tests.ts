@@ -1089,6 +1089,49 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(settingsBarItem.active).toBeFalsy();
   settings.propertyGrid.allowCollapse = prevValue;
 });
+test("Show/hide property grid by collapse/expand actions", (): any => {
+  const prevValue = settings.propertyGrid.allowCollapse;
+  settings.propertyGrid.allowCollapse = true;
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      }
+    ]
+  };
+  const expandBarItem = creator.toolbarItems.filter((item) => {
+    if (item.id === "svd-grid-expand") return item;
+  })[0];
+  const propertyGridModel = creator.getPlugin("designer").propertyGrid as PropertyGridViewModel<SurveyModel>; // new PropertyGridViewModel(creator);
+  const hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter(
+    (item) => { if (item.id === "svd-grid-hide") return item; }
+  )[0];
+
+  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(expandBarItem).toBeTruthy();
+  expect(expandBarItem.visible).toBeFalsy();
+  expect(propertyGridModel.visible).toBeTruthy();
+  expect(hidePropertyModelBarItem).toBeTruthy();
+  expect(hidePropertyModelBarItem.visible).toBeTruthy();
+
+  hidePropertyModelBarItem.action();
+  expect(creator.showPropertyGrid).toBeFalsy();
+  expect(propertyGridModel.visible).toBeFalsy();
+  expect(expandBarItem.visible).toBeTruthy();
+
+  expandBarItem.action();
+  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(propertyGridModel.visible).toBeTruthy();
+  expect(expandBarItem.visible).toBeFalsy();
+
+  settings.propertyGrid.allowCollapse = prevValue;
+});
 test("Show survey in property grid on deleting last page", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {

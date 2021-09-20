@@ -125,7 +125,6 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.undoAction && (this.undoAction.visible = true);
     this.redoAction && (this.redoAction.visible = true);
     this.surveySettingsAction && (this.surveySettingsAction.visible = true);
-    this.propertyGrid.visible = true; // ???
     this.creator.showPropertyGrid = true;
     this.expandAction && (this.expandAction.visible = false)
   }
