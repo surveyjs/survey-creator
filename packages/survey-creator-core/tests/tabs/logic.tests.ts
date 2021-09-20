@@ -7,7 +7,9 @@ import {
   SurveyTriggerSkip,
   QuestionMatrixDynamicModel,
   QuestionCustomModel,
-  AdaptiveActionContainer
+  AdaptiveActionContainer,
+  Question,
+  SurveyTriggerSetValue
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -56,6 +58,7 @@ test("LogicItemEditor: build panels and elementSelector", () => {
   expect(logic.items).toHaveLength(1);
   var editor = new LogicItemEditor(logic.items[0]);
   expect(editor.panels).toHaveLength(2);
+  expect(editor.isModified).toBeFalsy();
   var ltQuestion = <QuestionDropdownModel>(
     editor.panels[0].getQuestionByName("logicTypeName")
   );
@@ -76,8 +79,11 @@ test("LogicItemEditor: build panels and elementSelector", () => {
   expect(qSelector.visible).toBeTruthy();
   expect(qSelector.value).toEqual("q2");
   expect(qSelector.choices).toHaveLength(4);
+  expect(editor.isModified).toBeFalsy();
   qSelector.value = "q4";
+  expect(editor.isModified).toBeTruthy();
   editor.apply();
+  expect(editor.isModified).toBeFalsy();
   expect(logic.items[0].actions[0].element).toEqual(
     survey.getQuestionByName("q4")
   );
@@ -85,6 +91,72 @@ test("LogicItemEditor: build panels and elementSelector", () => {
   expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
   expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 1");
   expect(survey.getQuestionByName("q4").visibleIf).toEqual("{q1} = 1");
+});
+test("LogicUI: do not reset editing and logic item isModified ", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(1);
+  const item = logic.items[0];
+  logic.editItem(item);
+  let editor = logic.itemEditor;
+  expect(editor.isModified).toBeFalsy();
+  let qSelector = <QuestionDropdownModel>(
+    editor.panels[0].getQuestionByName("elementSelector")
+  );
+  qSelector.value = "q4";
+  expect(editor.isModified).toBeTruthy();
+  expect(item.isModified).toBeFalsy();
+  logic.mode = "view";
+  expect(item.isModified).toBeTruthy();
+
+  logic.editItem(item);
+  editor = logic.itemEditor;
+  qSelector = <QuestionDropdownModel>(
+    editor.panels[0].getQuestionByName("elementSelector")
+  );
+  expect(qSelector.value).toEqual("q4");
+  logic.saveEditableItem();
+  logic.mode = "view";
+  expect(item.isModified).toBeFalsy();
+
+  logic.editItem(item);
+  logic.expressionEditor.text = "{q1} = 2";
+  logic.mode = "view";
+  expect(item.isModified).toBeTruthy();
+
+  logic.editItem(item);
+  logic.saveEditableItem();
+  logic.mode = "view";
+  expect(item.isModified).toBeFalsy();
+});
+test("LogicUI: dispose logic item ui", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.editItem(logic.items[0]);
+  const itemEditor = logic.itemEditor;
+  const expressionEditor = logic.expressionEditor;
+  expect(itemEditor.editSurvey.isDisposed).toBeFalsy();
+  expect(expressionEditor.editSurvey.isDisposed).toBeFalsy();
+  logic.mode = "view";
+  expect(itemEditor.editSurvey.isDisposed).toBeFalsy();
+  expect(expressionEditor.editSurvey.isDisposed).toBeFalsy();
+  logic.dispose();
+  expect(itemEditor.editSurvey.isDisposed).toBeTruthy();
+  expect(expressionEditor.editSurvey.isDisposed).toBeTruthy();
 });
 test("LogicItemEditor: question selector order", () => {
   const survey = new SurveyModel({
@@ -287,6 +359,37 @@ test("SurveyLogicUI: Test logicItemsSurvey", () => {
   expect(itemsQuestion.value).toHaveLength(2);
   expect(itemsQuestion.rowCount).toEqual(2);
 });
+test("SurveyLogicItem, clonse and equals", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q5" }
+    ],
+    triggers: [
+      { type: "setvalue", expression: "{q1}=1", setToName: "q5", setValue: 5 }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  const item = logic.items[0];
+  const clonedItem = item.clone();
+  expect(clonedItem).toBeTruthy();
+  expect(clonedItem.actions).toHaveLength(3);
+  expect(clonedItem.expression).toEqual("{q1}=1");
+  expect(clonedItem.actions[0].element).toEqual(item.actions[0].element);
+  expect(item.equals(clonedItem)).toBeTruthy();
+  clonedItem.expression = "{q1}=2";
+  expect(item.equals(clonedItem)).toBeFalsy();
+  clonedItem.expression = "{q1}=1";
+  expect(item.equals(clonedItem)).toBeTruthy();
+  const clonedTrigger = <SurveyTriggerSetValue>(clonedItem.actions[2].element);
+  clonedTrigger.setValue = 6;
+  expect(item.equals(clonedItem)).toBeFalsy();
+  clonedTrigger.setValue = 5;
+  expect(item.equals(clonedItem)).toBeTruthy();
+});
 test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => {
   var survey = new SurveyModel({
     elements: [
@@ -358,17 +461,14 @@ test("SurveyLogicUI: Test logicItemEditor", () => {
   });
   var logic = new SurveyLogicUI(survey);
   expect(logic.items).toHaveLength(2);
-  expect(logic.itemEditor).toBeTruthy();
-  expect(logic.itemEditor.editableItem).toBeFalsy();
-  expect(logic.itemEditor.panel.title).toEqual(
-    getLogicString("actionsEditorTitle")
-  );
+  expect(logic.itemEditor).toBeFalsy();
   logic.editItem(logic.items[0]);
+  expect(logic.itemEditor).toBeTruthy();
   expect(logic.itemEditor.editableItem).toBeTruthy();
   expect(logic.itemEditor.panels).toHaveLength(2);
   expect(logic.mode).toEqual("edit");
   logic.mode = "view";
-  expect(logic.itemEditor.editableItem).toBeFalsy();
+  expect(logic.itemEditor).toBeFalsy();
 });
 test("SurveyLogicUI: Add new item and action", () => {
   var survey = new SurveyModel({
@@ -608,6 +708,7 @@ test("LogicItemEditorUI: edit item two times and do Build/Edit", () => {
   expect(editor.panel.visible).toBeFalsy();
   expect(editor.textEditor.visible).toBeTruthy();
   expect(editor.textEditor.value).toEqual("{q1} = 1");
+  actions[0].action();
 
   logic.mode = "view";
   expect(logic.expressionEditor).toBeFalsy();

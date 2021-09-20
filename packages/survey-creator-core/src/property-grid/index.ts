@@ -96,6 +96,11 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   protected abstract getSurveyJSON(): any;
   protected abstract getSurveyCreationReason(): string;
   public abstract apply(): boolean;
+  public dispose(): void {
+    if(!!this.editSurvey) {
+      this.editSurvey.dispose();
+    }
+  }
 }
 
 export interface IPropertyGridEditor {
