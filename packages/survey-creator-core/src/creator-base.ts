@@ -119,7 +119,7 @@ export class CreatorBase<T extends SurveyModel>
   set allowEditSurveyTitle(val: boolean) {
     ["title", "description", "logo", "showTitle", "logoWidth", "logoHeight", "logoFit"].forEach(propertyName => Serializer.findProperty("survey", propertyName).visible = val);
     this.setPropertyValue("allowEditSurveyTitle", val);
-    this.propertyGrid && this.propertyGrid.refresh();
+    this.designerPropertyGrid && this.designerPropertyGrid.refresh();
   }
   /**
    * You have right to set this property to true if you have bought the commercial licence only.
