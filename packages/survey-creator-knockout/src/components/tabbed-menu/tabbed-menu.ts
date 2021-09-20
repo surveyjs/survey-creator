@@ -12,8 +12,7 @@ ko.components.register("svc-tabbed-menu", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const model = params.model;
-      const container: HTMLDivElement =
-        componentInfo.element.nextElementSibling;
+      const container: HTMLDivElement = componentInfo.element.nextElementSibling;
       new ActionContainerImplementor(model);
 
       const manager: ResponsivityManager = new ResponsivityManager(

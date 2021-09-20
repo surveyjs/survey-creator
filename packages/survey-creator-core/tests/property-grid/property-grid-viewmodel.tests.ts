@@ -24,8 +24,8 @@ test("Generate and update title correctly", () => {
       }
     ]
   };
-  var propertyGrid = creator.propertyGrid;
-  var model = new PropertyGridViewModel(creator);
+  var propertyGrid = creator.designerPropertyGrid;
+  var model = new PropertyGridViewModel(propertyGrid, creator);
   expect(model.title).toEqual("Survey");
   propertyGrid.obj = creator.survey.getQuestionByName("question1");
   expect(model.title).toEqual("question1");
@@ -49,33 +49,28 @@ test("Prev/next correctly, including columns via actions", () => {
     ]
   };
   var matrix = creator.survey.getQuestionByName("q1");
-  var model = new PropertyGridViewModel(creator);
+  var model = new PropertyGridViewModel(creator.designerPropertyGrid, creator);
   expect(model.title).toEqual("Survey");
   creator.selectElement(matrix);
   expect(model.title).toEqual("q1");
-  var columnsQuestion =
-    creator.propertyGrid.survey.getQuestionByName("columns");
+  var columnsQuestion = creator.designerPropertyGrid.survey.getQuestionByName("columns");
   expect(columnsQuestion).toBeTruthy();
   var actions: Array<IAction> = [];
-  creator.propertyGrid.survey.getUpdatedMatrixRowActions(
+  creator.designerPropertyGrid.survey.getUpdatedMatrixRowActions(
     columnsQuestion,
     columnsQuestion.visibleRows[0],
     actions
   );
   actions[0].action();
-  expect(creator.propertyGrid.survey.editingObj["name"]).toEqual("col1");
+  expect(creator.designerPropertyGrid.survey.editingObj["name"]).toEqual("col1");
   expect(model.title).toEqual("col1");
   expect(creator.selectedElementName).toEqual("col1");
   creator.selectionHistoryController.prev();
   expect(creator.selectedElementName).toEqual("q1");
   expect(model.title).toEqual("q1");
-  var panelColumns = <PanelModel>(
-    creator.propertyGrid.survey.getPanelByName("columns")
-  );
+  var panelColumns = <PanelModel>(creator.designerPropertyGrid.survey.getPanelByName("columns"));
   expect(panelColumns.isExpanded).toBeTruthy();
-  var panelGeneral = <PanelModel>(
-    creator.propertyGrid.survey.getPanelByName("general")
-  );
+  var panelGeneral = <PanelModel>(creator.designerPropertyGrid.survey.getPanelByName("general"));
   expect(panelGeneral.isExpanded).toBeFalsy();
 });
 test("Element Selector Bar Item", () => {
@@ -86,7 +81,7 @@ test("Element Selector Bar Item", () => {
       { type: "text", name: "q2" }
     ]
   };
-  var model = new PropertyGridViewModel(creator);
+  var model = new PropertyGridViewModel(creator.designerPropertyGrid, creator);
   var selectorBarItem = model.toolbarItems.filter((item) => {
     if (item.id === "svd-grid-object-selector") return item;
   })[0];
@@ -118,7 +113,7 @@ test("Element Selector Bar Item", () => {
       { type: "text", name: "q2" }
     ]
   };
-  var model = new PropertyGridViewModel(creator);
+  var model = new PropertyGridViewModel(creator.designerPropertyGrid, creator);
   var selectorBarItem = model.toolbarItems.filter((item) => {
     if (item.id === "svd-grid-object-selector") return item;
   })[0];
@@ -151,7 +146,7 @@ test("settings.showNavigation", () => {
       { type: "text", name: "q2" }
     ]
   };
-  var model = new PropertyGridViewModel(creator);
+  var model = new PropertyGridViewModel(creator.designerPropertyGrid, creator);
   var prevItem = model.toolbarItems.filter((item) => {
     if (item.id === "svd-grid-history-prev") return item;
   })[0];
@@ -162,7 +157,7 @@ test("settings.showNavigation", () => {
   expect(nextItem).toBeTruthy();
   settings.propertyGrid.showNavigationButtons = false;
 
-  model = new PropertyGridViewModel(creator);
+  model = new PropertyGridViewModel(creator.designerPropertyGrid, creator);
   prevItem = model.toolbarItems.filter((item) => {
     if (item.id === "svd-grid-history-prev") return item;
   })[0];

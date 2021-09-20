@@ -6,7 +6,9 @@ import {
   IAction
 } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
-import { editorLocalization } from "../../editorLocalization";
+import { editorLocalization, getLocString } from "../../editorLocalization";
+import { PropertyGridViewModelBase } from "../../property-grid/property-grid-view-model";
+import { settings } from "../../settings";
 import { Translation } from "./translation";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
@@ -15,16 +17,21 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private mergeLocaleWithDefaultAction: Action;
   private importCsvAction: Action;
   private exportCsvAction: Action;
+  private expandAction: Action;
   private inputFileElement: HTMLInputElement;
   private pagePopupModel: PopupModel;
 
   public model: Translation;
+  public propertyGrid: PropertyGridViewModelBase;
 
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("translation", this);
+    this.propertyGrid = new PropertyGridViewModelBase();
+    this.propertyGrid.headerText = editorLocalization.getString("ed.translationPropertyGridTitle");
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
+    this.propertyGrid.survey = this.model.settingsSurvey;
 
     this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
@@ -38,6 +45,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterPageAction.visible = true;
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
+    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible);
 
     this.pagePopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
@@ -70,6 +78,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
+    this.expandAction && (this.expandAction.visible = false);
 
     return true;
   }
@@ -90,7 +99,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public createActions(items: Array<Action>) {
     const translationMergeLocaleWithDefaultStr = editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
-    this.pagePopupModel = new PopupModel<{model: ListModel}>(
+    this.pagePopupModel = new PopupModel<{ model: ListModel }>(
       "sv-list",
       {
         model: new ListModel(
@@ -178,6 +187,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       }
     });
     items.push(this.exportCsvAction);
+
+    if (settings.propertyGrid.allowCollapse) {
+      this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
+      items.push(this.expandAction);
+    }
   }
 
   private getFilterPageActionTitle() {
