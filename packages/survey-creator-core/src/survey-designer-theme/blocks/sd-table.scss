@@ -13,6 +13,9 @@
   padding-bottom: calcSize(2);
   color: $foreground;
 }
+.sd-table__cell:not(:last-child) {
+  padding-right: calcSize(2);
+}
 .sd-table__cell--actions, .sd-matrixdynamic__add-btn {
   .sv-action-bar {
     overflow: visible;
@@ -33,5 +36,9 @@
 .sd-table__cell--actions{
   .sv-action-bar {
     opacity: 0.5;
+    padding: 0;
+  }
+  .sv-action:not(:last-child) > .sv-action__content {
+    padding-right: 0;
   }
 }
