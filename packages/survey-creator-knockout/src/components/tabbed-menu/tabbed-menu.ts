@@ -1,8 +1,8 @@
 import * as ko from "knockout";
-import { AdaptiveElementImplementor } from "survey-knockout-ui";
+import { ActionContainerImplementor } from "survey-knockout-ui";
 
 //import "./tabbed-menu.scss";
-import { AdaptiveActionContainer, ResponsivityManager } from "survey-core";
+import { ResponsivityManager } from "survey-core";
 const template = require("./tabbed-menu.html");
 // import template from "./tabbed-menu.html";
 
@@ -14,7 +14,7 @@ ko.components.register("svc-tabbed-menu", {
       const model = params.model;
       const container: HTMLDivElement =
         componentInfo.element.nextElementSibling;
-      new AdaptiveElementImplementor(model);
+      new ActionContainerImplementor(model);
 
       const manager: ResponsivityManager = new ResponsivityManager(
         container,
