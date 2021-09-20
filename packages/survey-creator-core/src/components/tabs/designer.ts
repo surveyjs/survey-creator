@@ -125,8 +125,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.undoAction && (this.undoAction.visible = true);
     this.redoAction && (this.redoAction.visible = true);
     this.surveySettingsAction && (this.surveySettingsAction.visible = true);
-    this.creator.showPropertyGrid = true;
-    this.expandAction && (this.expandAction.visible = false)
+    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible)
   }
   public deactivate(): boolean {
     this.model = undefined;
@@ -134,7 +133,6 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.undoAction && (this.undoAction.visible = false);
     this.redoAction && (this.redoAction.visible = false);
     this.surveySettingsAction.visible = false;
-    this.propertyGrid.visible = false;
     this.expandAction && (this.expandAction.visible = false);
     return true;
   }

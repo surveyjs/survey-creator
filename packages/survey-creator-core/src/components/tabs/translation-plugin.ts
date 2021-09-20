@@ -32,7 +32,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
     this.propertyGrid.survey = this.model.settingsSurvey;
-    this.propertyGrid.visible = true;
 
     this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
@@ -46,7 +45,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterPageAction.visible = true;
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
-    this.expandAction && (this.expandAction.visible = false);
+    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible);
 
     this.pagePopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
@@ -80,7 +79,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
     this.expandAction && (this.expandAction.visible = false);
-    this.propertyGrid.visible = false;
 
     return true;
   }
