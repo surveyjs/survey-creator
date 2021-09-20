@@ -178,6 +178,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       },
       active: this.isSurveySelected,
       visible: this.creator.viewType === "designer",
+      title: "Settings",
       showTitle: false
     });
     this.saveSurveyAction = new Action({
