@@ -405,3 +405,16 @@ test("StringsHeaderSurvey layout", () => {
   expect(headerMatrix.columns).toHaveLength(2);
   expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
 });
+
+test("Actions mode small", () => {
+  const creator = new CreatorTester();
+  const tabTranslation = new TabTranslationPlugin(creator);
+  const actions = [];
+  tabTranslation.createActions(actions);
+  expect(actions.length).toBe(5);
+  expect(actions[0].mode).toBe("small");
+  expect(actions[1].mode).toBe("small");
+  expect(actions[2].mode).toBe("small");
+  expect(actions[3].mode).toBe("small");
+  expect(actions[4].mode).toBe("small");
+});
