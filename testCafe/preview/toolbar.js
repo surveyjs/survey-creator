@@ -22,6 +22,43 @@ const json = {
     ]
 };
 
+const json2 = {
+    title: {
+        default: "My Survey",
+        de: "Meine Umfrage"
+    },
+    pages: [{
+        name: "page1",
+        elements: [{
+            type: "checkbox",
+            name: "string_editor",
+            choices: ["item1", "item2", "item3"]
+        }],
+        title: {
+            default: "First page",
+            de: "Erste Seite"
+        }
+    }, 
+    {
+        name: "page2",
+        elements: [{
+            type: "text",
+            name: "question1"
+        }],
+        title: {
+            default: "Second page",
+            de: "Zweite Seite"
+        }
+    },
+    {
+        name: "page3",
+        elements: [{
+            type: "text",
+            name: "question2"
+        }]
+    }]
+}
+
 function getBarItemByText(text) {
     return Selector(".svc-test-tab__content-actions .sv-action-bar-item .sv-action-bar-item__title").withText(text);
 }
@@ -30,6 +67,60 @@ function getListItemByText(text) {
 }
 
 const visibleBarItems = Selector(".svc-test-tab__content-actions .sv-action").filterVisible();
+
+test('Language switcher', async (t) => {
+    await ClientFunction((json) => { creator.JSON = json; })(json2);
+
+    await t
+        .click(getTabbedMenuItemByText("Test Survey"))
+        .expect(getBarItemByText("english").visible).ok()
+        .expect(Selector(".sv-title .sv-header__text").textContent).eql("My Survey")
+        .click(getBarItemByText("english"))
+        .expect(getListItemByText("deutsch").visible).ok()
+        .click(getListItemByText("deutsch"))
+        .expect(Selector(".sv-title .sv-header__text").textContent).eql("Meine Umfrage")
+        .expect(getBarItemByText("deutsch").visible).ok()
+});
+
+test.only('Page switcher', async (t) => {
+    await ClientFunction((json) => { creator.JSON = json; })(json2);
+
+    await t
+        .click(getTabbedMenuItemByText("Test Survey"))
+        .expect(Selector(".sv-question__title").withText("string_editor").visible).ok()
+        .expect(Selector("#pageSelector").textContent).contains("page1")
+        .expect(Selector("#prevPage button").hasAttribute('disabled')).eql(true)
+        .expect(Selector("#nextPage button").hasAttribute('disabled')).eql(false)
+
+        .click(Selector("#nextPage"))
+        .expect(Selector(".sv-question__title").withText("question1").visible).ok()
+        .expect(Selector("#pageSelector").textContent).contains("page2")
+        .expect(Selector("#prevPage button").hasAttribute('disabled')).eql(false)
+        .expect(Selector("#nextPage button").hasAttribute('disabled')).eql(false)
+
+        .click(Selector("#nextPage"))
+        .expect(Selector(".sv-question__title").withText("question2").visible).ok()
+        .expect(Selector("#pageSelector").textContent).contains("page3")
+        .expect(Selector("#prevPage button").hasAttribute('disabled')).eql(false)
+        .expect(Selector("#nextPage button").hasAttribute('disabled')).eql(true)
+
+        .click(getBarItemByText("page3"))
+        .expect(getListItemByText("page2").visible).ok()
+        .expect(getListItemByText("page1").hasClass("sv-list__item--selected")).notOk()
+        .expect(getListItemByText("page2").hasClass("sv-list__item--selected")).notOk()
+        .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).ok()
+        .click(getListItemByText("page2"))
+        .expect(Selector(".sv-question__title").withText("question1").visible).ok()
+        .expect(Selector("#pageSelector").textContent).contains("page2")
+        .expect(Selector("#prevPage button").hasAttribute('disabled')).eql(false)
+        .expect(Selector("#nextPage button").hasAttribute('disabled')).eql(false)
+        .click(getBarItemByText("page2"))
+        .expect(getListItemByText("page1").hasClass("sv-list__item--selected")).notOk()
+        .expect(getListItemByText("page2").hasClass("sv-list__item--selected")).ok()
+        .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).notOk()
+        .click(getListItemByText("page2"))
+});
+
 test('Landscape switcher', async (t) => {
     await ClientFunction((json) => { creator.JSON = json; })(json);
 
