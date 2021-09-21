@@ -79,11 +79,11 @@ test('Language switcher', async (t) => {
     await t
         .click(getTabbedMenuItemByText("Test Survey"))
         .expect(getBarItemByText("english").visible).ok()
-        .expect(Selector(".sv-title .sv-header__text").textContent).eql("My Survey")
+        .expect(Selector(".sv-title .sv-header__text").textContent).contains("My Survey")
         .click(getBarItemByText("english"))
         .expect(getListItemByText("deutsch").visible).ok()
         .click(getListItemByText("deutsch"))
-        .expect(Selector(".sv-title .sv-header__text").textContent).eql("Meine Umfrage")
+        .expect(Selector(".sv-title .sv-header__text").textContent).contains("Meine Umfrage")
         .expect(getBarItemByText("deutsch").visible).ok()
 });
 

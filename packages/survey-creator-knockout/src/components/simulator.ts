@@ -1,5 +1,4 @@
 import * as ko from "knockout";
-import { SurveySimulatorComponent } from "@survey/creator";
 import { ImplementorBase } from "survey-knockout-ui";
 const templateHtml = require("./simulator.html");
 
