@@ -126,7 +126,7 @@ test('Page switcher', async (t) => {
         .click(getListItemByText("page2"))
 });
 
-test.only('Test Survey Again', async (t) => {
+test('Test Survey Again', async (t) => {
     await ClientFunction((json) => { creator.JSON = json; })(json2);
     const switcher = getBarItemByText("Show invisible elements");
 
