@@ -126,6 +126,20 @@ test('Page switcher', async (t) => {
         .click(getListItemByText("page2"))
 });
 
+test.only('Test Survey Again', async (t) => {
+    await ClientFunction((json) => { creator.JSON = json; })(json2);
+    const switcher = getBarItemByText("Show invisible elements");
+
+    await t
+        .click(getTabbedMenuItemByText("Test Survey"))
+        .click(Selector("#nextPage"))
+        .click(Selector("#nextPage"))
+        .click(Selector("input[value='Complete']"))
+        .expect(Selector("h3").withText("Thank you for completing the survey!").visible).ok()
+        .click(getBarItemByText("Test Survey Again"))
+        .expect(Selector(".sv-question__title").withText("string_editor").visible).ok()
+});
+
 test('Show invisible elements switcher', async (t) => {
     await ClientFunction((json) => { creator.JSON = json; })(json2);
     const switcher = getBarItemByText("Show invisible elements");
