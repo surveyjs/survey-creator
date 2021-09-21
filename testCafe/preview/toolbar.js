@@ -33,6 +33,11 @@ const json2 = {
             type: "checkbox",
             name: "string_editor",
             choices: ["item1", "item2", "item3"]
+        },
+        {
+            type: "text",
+            name: "hidden_question",
+            visible: false
         }],
         title: {
             default: "First page",
@@ -82,7 +87,7 @@ test('Language switcher', async (t) => {
         .expect(getBarItemByText("deutsch").visible).ok()
 });
 
-test.only('Page switcher', async (t) => {
+test('Page switcher', async (t) => {
     await ClientFunction((json) => { creator.JSON = json; })(json2);
 
     await t
@@ -119,6 +124,18 @@ test.only('Page switcher', async (t) => {
         .expect(getListItemByText("page2").hasClass("sv-list__item--selected")).ok()
         .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).notOk()
         .click(getListItemByText("page2"))
+});
+
+test('Show invisible elements switcher', async (t) => {
+    await ClientFunction((json) => { creator.JSON = json; })(json2);
+    const switcher = getBarItemByText("Show invisible elements");
+
+    await t
+        .click(getTabbedMenuItemByText("Test Survey"))
+        .expect(Selector(".sv-question__title").withText("string_editor").visible).ok()
+        .expect(switcher.visible).ok("Switcher is visible")
+        .click(switcher)
+        .expect(Selector(".sv-question__title").withText("hidden_question").visible).ok()
 });
 
 test('Landscape switcher', async (t) => {
