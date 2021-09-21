@@ -272,10 +272,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         matrix.property
       ).setupObjPanel(panel, true);
     };
+    matrix.allowRowsDragAndDrop = this.getAllowRowDragDrop() && !matrix.isReadOnly;
     if (!!matrix.options) {
       this.setupUsingOptions(obj, matrix, matrix.options, prop);
     }
   }
+  protected getAllowRowDragDrop(): boolean { return false; }
   private calcHasPropertiesInDetail(
     matrix: QuestionMatrixDynamicModel,
     prop: JsonObjectProperty
@@ -430,8 +432,8 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   ) {
     super.setupMatrixQuestion(obj, matrix, prop);
     matrix.showHeader = false;
-    matrix.allowRowsDragAndDrop = true;
   }
+  protected getAllowRowDragDrop(): boolean { return true; }
   public createPropertyEditorSetup(
     obj: Base,
     prop: JsonObjectProperty,
@@ -523,14 +525,7 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   ): number {
     return options.maximumColumnsCount;
   }
-  protected setupMatrixQuestion(
-    obj: Base,
-    matrix: QuestionMatrixDynamicModel,
-    prop: JsonObjectProperty
-  ) {
-    super.setupMatrixQuestion(obj, matrix, prop);
-    matrix.allowRowsDragAndDrop = true;
-  }
+  protected getAllowRowDragDrop(): boolean { return true; }
 }
 
 export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
@@ -559,14 +554,7 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "page";
   }
-  protected setupMatrixQuestion(
-    obj: Base,
-    matrix: QuestionMatrixDynamicModel,
-    prop: JsonObjectProperty
-  ) {
-    super.setupMatrixQuestion(obj, matrix, prop);
-    matrix.allowRowsDragAndDrop = true;
-  }
+  protected getAllowRowDragDrop(): boolean { return true; }
 }
 
 export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditorMatrix {
