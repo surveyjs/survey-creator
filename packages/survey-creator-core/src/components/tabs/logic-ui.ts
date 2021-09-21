@@ -14,7 +14,7 @@ import "./logic-ui.scss";
 
 interface ILogicItemUI {
   expressionEditor: ConditionEditor;
-   itemEditor: LogicItemEditor;
+  itemEditor: LogicItemEditor;
 }
 
 export class SurveyLogicUI extends SurveyLogic {
@@ -23,7 +23,7 @@ export class SurveyLogicUI extends SurveyLogic {
   private itemsSurveyValue: SurveyModel;
   private visibleItems: SurveyLogicItem[];
   private itemUIHash: HashTable<ILogicItemUI> = {};
-  public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+  public addNewButton: Action;
 
   constructor(
     public survey: SurveyModel,
@@ -69,19 +69,12 @@ export class SurveyLogicUI extends SurveyLogic {
   }) actionTypeFilter: string;
   public dispose(): void {
     super.dispose();
-    for(let key in this.itemUIHash) {
+    for (let key in this.itemUIHash) {
       const itemUI = this.itemUIHash[key];
       itemUI.expressionEditor.dispose();
       itemUI.itemEditor.dispose();
     }
     this.itemUIHash = {};
-  }
-  /**
-   * The list of toolbar items. You may add/remove/replace them.
-   * @see IAction
-   */
-  public get toolbarItems(): Array<IAction> {
-    return this.toolbar.actions;
   }
   public addNewUI() {
     if (this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
@@ -110,7 +103,7 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private getLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
     let res: ILogicItemUI = this.itemUIHash[item.id];
-    if(!res) {
+    if (!res) {
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
       res.expressionEditor.text = item.expression;
       this.itemUIHash[item.id] = res;
@@ -126,13 +119,16 @@ export class SurveyLogicUI extends SurveyLogic {
   public get itemsSurvey(): SurveyModel {
     return this.itemsSurveyValue;
   }
+  public get hasItems(): boolean {
+    return this.items.length > 0;
+  }
   protected onStartEditing() {
     super.onStartEditing();
     this.expressionEditorValue = this.getExpressionEditor(this.editableItem);
     this.itemEditorValue = this.getLogicItemEditor(this.editableItem);
   }
   protected onEndEditing() {
-    if(!!this.editableItem) {
+    if (!!this.editableItem) {
       this.editableItem.isModified = !!this.itemEditor && !!this.expressionEditor && (this.itemEditor.isModified || this.expressionEditor.text !== this.editableItem.expression);
     }
     super.onEndEditing();
@@ -185,6 +181,7 @@ export class SurveyLogicUI extends SurveyLogic {
           detailPanelMode: "underRowSingle",
           allowAddRows: false,
           rowCount: 0,
+          showHeader: false,
           columns: [
             {
               cellType: "linkvalue",
@@ -265,28 +262,27 @@ export class SurveyLogicUI extends SurveyLogic {
     };
   }
   private updateNewActionState(): void {
-    const action = findAction(this.toolbar.actions, "svd-logic-addNew");
-    if (!!action) {
-      action.enabled = this.mode !== "new";
-    }
+    this.addNewButton.enabled = this.mode !== "new";
   }
   private setupToolbarItems() {
-    this.toolbar.actions.push(
-      new Action({
-        id: "svd-logic-addNew",
-        title: this.addNewText,
-        tooltip: this.addNewText,
-        component: "sv-action-bar-item",
-        enabled: true,
-        action: () => {
-          this.addNewUI();
-        }
-      })
-    );
+    this.addNewButton = new Action({
+      id: "svd-logic-addNew",
+      title: this.addNewText,
+      tooltip: this.addNewText,
+      component: "sv-action-bar-item",
+      enabled: true,
+      action: () => {
+        this.addNewUI();
+      }
+    })
   }
   public get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");
     return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
+  }
+
+  public get emptyTabPlaceHolder(): string {
+    return getLogicString("empty_tab");
   }
 }
 
