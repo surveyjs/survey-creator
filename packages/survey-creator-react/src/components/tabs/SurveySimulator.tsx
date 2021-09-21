@@ -21,7 +21,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     }
     if (this.model.hasFrame) {
       return (
-        <div className="svd-simulator-main">
+        <div className={"svd-simulator-main " + this.model.simulatorMainCssClass}>
           <div
             className="svd-simulator-wrapper"
             style={{

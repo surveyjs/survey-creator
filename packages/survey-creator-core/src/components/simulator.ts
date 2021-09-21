@@ -64,6 +64,10 @@ export class SurveySimulatorComponent extends Base {
     return this.simulatorEnabled && device.deviceType !== "desktop";
   }
 
+  public get simulatorMainCssClass() {
+    return this.hasFrame?"svd-simulator-main--frame":"";
+  }
+
   public get simulatorFrame() {
     if (!this.hasFrame) {
       return undefined;

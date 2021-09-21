@@ -91,16 +91,16 @@ test("Check page list state after change page arrows click", (): any => {
     ]
   };
   const model: TestSurveyTabViewModel = getTestModel(creator);
-  const pageList: ListModel = model.actions.filter(
+  const pageList: ListModel = model.pageActions.filter(
     (item: IAction) => item.id === "pageSelector"
   )[0].popupModel.contentComponentData.model;
   expect(pageList.selectedItem.data).toEqual(model.activePage);
-  const nextPage: IAction = model.actions.filter(
+  const nextPage: IAction = model.pageActions.filter(
     (item: IAction) => item.id === "nextPage"
   )[0];
   nextPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
-  const prevPage: IAction = model.actions.filter(
+  const prevPage: IAction = model.pageActions.filter(
     (item: IAction) => item.id === "prevPage"
   )[0];
   prevPage.action();
@@ -162,4 +162,20 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
   model.survey.pages[1].visible = true;
   expect(model.pageListItems[1].enabled).toBeTruthy();
   expect(model.pageListItems[2].visible).toEqual(true);
+});
+
+test("Simulator view switch", (): any => {
+  let creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  let model: TestSurveyTabViewModel = getTestModel(creator);
+  expect(model.simulator.simulatorMainCssClass).toEqual("");
+  model.simulator.device = "iPhone5";
+  expect(model.simulator.simulatorMainCssClass).toEqual("svd-simulator-main--frame");
 });

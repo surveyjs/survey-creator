@@ -32,6 +32,7 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 export class TestSurveyTabViewModel extends Base {
   private json: any;
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+  public pages: AdaptiveActionContainer = new AdaptiveActionContainer();
   private deviceSelectorAction: Action;
   private orientationSelectorAction: Action;
   private prevPageAction: Action;
@@ -65,13 +66,17 @@ export class TestSurveyTabViewModel extends Base {
   public get activeLanguage(): string {
     return this.getPropertyValue(
       "activeLanguage",
-      this.simulator.survey.locale || surveyLocalization.defaultLocale
+      this.survey.locale || surveyLocalization.defaultLocale
     );
   }
   public set activeLanguage(val: string) {
     if (val === this.activeLanguage) return;
     this.setPropertyValue("activeLanguage", val);
-    this.simulator.survey.locale = val;
+    this.survey.locale = val;
+  }
+
+  public get survey(): SurveyModel {
+    return this.simulator.survey;
   }
 
   @property({
@@ -93,6 +98,9 @@ export class TestSurveyTabViewModel extends Base {
    */
   public get actions(): Array<Action> {
     return this.toolbar.actions;
+  }
+  public get pageActions(): Array<Action> {
+    return this.pages.actions;
   }
 
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
@@ -119,13 +127,13 @@ export class TestSurveyTabViewModel extends Base {
       }
     }
     this.simulator.survey = this.surveyProvider.createSurvey(json || {}, "test");
-    if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.simulator.survey);
+    if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
-    this.simulator.survey.onComplete.add((sender: SurveyModel) => {
+    this.survey.onComplete.add((sender: SurveyModel) => {
       self.isRunning = false;
     });
-    if (!!this.simulator.survey["onNavigateToUrl"]) {
-      this.simulator.survey["onNavigateToUrl"].add(function (sender, options) {
+    if (!!this.survey["onNavigateToUrl"]) {
+      this.survey["onNavigateToUrl"].add(function (sender, options) {
         const url: string = options.url;
         options.url = "";
         if (!!url) {
@@ -139,15 +147,15 @@ export class TestSurveyTabViewModel extends Base {
         }
       });
     }
-    this.simulator.survey.onStarted.add((sender: SurveyModel) => {
+    this.survey.onStarted.add((sender: SurveyModel) => {
       self.setActivePageItem(self.simulator.survey.currentPage, true);
     });
-    this.simulator.survey.onCurrentPageChanged.add((sender: SurveyModel, options) => {
+    this.survey.onCurrentPageChanged.add((sender: SurveyModel, options) => {
       self.activePage = options.newCurrentPage;
       self.setActivePageItem(options.oldCurrentPage, false);
       self.setActivePageItem(options.newCurrentPage, true);
     });
-    this.simulator.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
+    this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
       self.updatePageItem(options.page);
     });
   }
@@ -182,13 +190,13 @@ export class TestSurveyTabViewModel extends Base {
   }
   private getCurrentPageItem(): IAction {
     return this.pageListItems[
-      this.simulator.survey.pages.indexOf(this.simulator.survey.currentPage)
+      this.survey.pages.indexOf(this.survey.currentPage)
     ];
   }
   private updatePageList() {
     const pages: Array<IAction> = [];
-    for (let i: number = 0; i < this.simulator.survey.pages.length; i++) {
-      const page: PageModel = this.simulator.survey.pages[i];
+    for (let i: number = 0; i < this.survey.pages.length; i++) {
+      const page: PageModel = this.survey.pages[i];
       pages.push({
         id: page.name,
         data: page,
@@ -202,8 +210,8 @@ export class TestSurveyTabViewModel extends Base {
 
   public show() {
     this.showInvisibleElements = false;
-    this.activePage = this.simulator.survey.currentPage;
-    this.simulator.survey.locale = this.activeLanguage;
+    this.activePage = this.survey.currentPage;
+    this.survey.locale = this.activeLanguage;
     this.isRunning = true;
   }
 
@@ -225,11 +233,11 @@ export class TestSurveyTabViewModel extends Base {
     const vis: boolean =
       opt === true ||
       opt === "all" ||
-      (opt === "auto" && this.simulator.survey.getUsedLocales().length > 1);
+      (opt === "auto" && this.survey.getUsedLocales().length > 1);
     this.showDefaultLanguageInTestSurveyTab = vis;
     if (vis) {
       this.languages = this.getLanguages(
-        opt !== "all" ? this.simulator.survey.getUsedLocales() : null
+        opt !== "all" ? this.survey.getUsedLocales() : null
       );
     }
   }
@@ -270,6 +278,7 @@ export class TestSurveyTabViewModel extends Base {
       "right"
     );
     const actions: Array<Action> = [];
+    const pageActions: Array<Action> = [];
     this.deviceSelectorAction = new Action({
       id: "deviceSelector",
       css: "sv-action-bar-item--secondary",
@@ -311,12 +320,12 @@ export class TestSurveyTabViewModel extends Base {
       this.getCurrentPageItem()
     );
     const setNearPage: (isNext: boolean) => void = (isNext: boolean) => {
-      const currentIndex: number = this.simulator.survey.currentPageNo;
+      const currentIndex: number = this.survey.currentPageNo;
       const shift: number = isNext ? 1 : -1;
       const nearPage: PageModel =
-        this.simulator.survey.visiblePages[currentIndex + shift];
-      const pageIndex: number = this.simulator.survey.pages.indexOf(nearPage);
-      this.activePage = this.simulator.survey.pages[pageIndex];
+        this.survey.visiblePages[currentIndex + shift];
+      const pageIndex: number = this.survey.pages.indexOf(nearPage);
+      this.activePage = this.survey.pages[pageIndex];
       pageList.selectedItem = this.pageListItems[pageIndex];
     };
     this.pagePopupModel = new PopupModel(
@@ -329,16 +338,16 @@ export class TestSurveyTabViewModel extends Base {
     this.prevPageAction = new Action({
       id: "prevPage",
       css:
-        this.simulator.survey && !this.simulator.survey.isFirstPage
+        this.survey && !this.survey.isFirstPage
           ? "sv-action-bar-item--secondary"
           : "",
       iconName: "icon-leftarrow_16x16",
       visible: this.isRunning && this.pageListItems.length > 1,
-      enabled: this.simulator.survey && !this.simulator.survey.isFirstPage,
+      enabled: this.survey && !this.survey.isFirstPage,
       title: "",
       action: () => setNearPage(false)
     });
-    actions.push(this.prevPageAction);
+    pageActions.push(this.prevPageAction);
 
     this.selectPageAction = new Action({
       id: "pageSelector",
@@ -359,21 +368,21 @@ export class TestSurveyTabViewModel extends Base {
         this.pagePopupModel.toggleVisibility();
       }
     });
-    actions.push(this.selectPageAction);
+    pageActions.push(this.selectPageAction);
 
     this.nextPageAction = new Action({
       id: "nextPage",
       css:
-        this.simulator.survey && !this.simulator.survey.isLastPage
+        this.survey && !this.survey.isLastPage
           ? "sv-action-bar-item--secondary"
           : "",
       iconName: "icon-rightarrow_16x16",
       visible: this.isRunning && this.pageListItems.length > 1,
-      enabled: this.simulator.survey && !this.simulator.survey.isLastPage,
+      enabled: this.survey && !this.survey.isLastPage,
       title: "",
       action: () => setNearPage(true)
     });
-    actions.push(this.nextPageAction);
+    pageActions.push(this.nextPageAction);
 
     this.languageSelectorAction = new Action({
       id: "languageSelector",
@@ -422,6 +431,8 @@ export class TestSurveyTabViewModel extends Base {
     actions.push(this.testAgainAction);
 
     this.toolbar.actions = actions;
+    this.pages.actions = pageActions;
+    this.pages.containerCss = "sv-action-bar--pages";
   }
   private setActivePageItem(page: PageModel, val: boolean) {
     const item: IAction = this.getPageItemByPage(page);
@@ -456,22 +467,22 @@ export class TestSurveyTabViewModel extends Base {
 
     if (name === "activePage") {
       this.prevPageAction.css =
-        this.simulator.survey && this.simulator.survey.visiblePages.indexOf(this.activePage) !== 0
+        this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0
           ? "sv-action-bar-item--secondary"
           : "";
       this.prevPageAction.enabled =
-        this.simulator.survey && this.simulator.survey.visiblePages.indexOf(this.activePage) !== 0;
+        this.survey && this.survey.visiblePages.indexOf(this.activePage) !== 0;
 
       this.nextPageAction.css =
-        this.simulator.survey &&
-        this.simulator.survey.visiblePages.indexOf(this.activePage) !==
-          this.simulator.survey.visiblePages.length - 1
+        this.survey &&
+        this.survey.visiblePages.indexOf(this.activePage) !==
+          this.survey.visiblePages.length - 1
           ? "sv-action-bar-item--secondary"
           : "";
       this.nextPageAction.enabled =
-        this.simulator.survey &&
-        this.simulator.survey.visiblePages.indexOf(this.activePage) !==
-          this.simulator.survey.visiblePages.length - 1;
+        this.survey &&
+        this.survey.visiblePages.indexOf(this.activePage) !==
+          this.survey.visiblePages.length - 1;
 
       this.selectPageAction.title =
         (this.activePage &&
