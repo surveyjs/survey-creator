@@ -1,11 +1,4 @@
-import {
-  Base,
-  SurveyModel,
-  property,
-  PopupModel,
-  AdaptiveActionContainer,
-  Action
-} from "survey-core";
+import { Base, SurveyModel, property, PopupModel, AdaptiveActionContainer, Action } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
@@ -14,29 +7,75 @@ import { CreatorBase } from "../creator-base";
 import { settings } from "../settings";
 import { getLocString } from "../editorLocalization";
 
-export class PropertyGridViewModel<T extends SurveyModel> extends Base {
+export class PropertyGridViewModelBase extends Base {
+  public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+  private _expandAction: Action;
+
+  @property() survey: SurveyModel;
+  @property() headerText: string;
+  @property({ defaultValue: true }) visible: boolean;
+
+  constructor(public model?: Base, private collapseAction?: () => void, private expandAction?: () => void) {
+    super();
+    if (settings.propertyGrid.allowCollapse) {
+      this.toolbar.actions.push(
+        new Action({
+          id: "svd-grid-hide",
+          iconName: "icon-hide",
+          component: "sv-action-bar-item",
+          title: getLocString("ed.hidePanel"),
+          showTitle: false,
+          action: () => {
+            if (collapseAction)
+              collapseAction();
+            else
+              this.visible = false;
+
+            this._expandAction && (this._expandAction.visible = true);
+          }
+        })
+      );
+    }
+  }
+  public createExpandAction(visible: boolean) {
+    this._expandAction = new Action({
+      id: "svd-grid-expand",
+      iconName: "icon-expand_20x20",
+      component: "sv-action-bar-item",
+      action: () => {
+        if (this.expandAction)
+          this.expandAction()
+        else
+          this.visible = true;
+        this._expandAction.visible = false;
+      },
+      title: getLocString("ed.showPanel"),
+      visible: visible,
+      showTitle: false
+    });
+    return this._expandAction;
+  }
+}
+
+export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridViewModelBase {
   private nextSelectionAction: Action;
   private prevSelectionAction: Action;
   private objectSelectionAction: Action;
   private onPropertyGridVisibilityChanged;
 
-  @property() survey: SurveyModel;
   @property() title: string;
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
-  @property({ defaultValue: true }) visible: boolean;
 
-  public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
   public get toolbarItems(): Array<Action> {
     return this.toolbar.actions;
   }
 
-  constructor(private creator: CreatorBase<T>) {
-    super();
-    this.onPropertyGridVisibilityChanged = (
-      sender: CreatorBase<T>,
-      options: any
-    ) => {
+  constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase<T>) {
+    super(propertyGridModel as any,
+      () => { this.creator.showPropertyGrid = false; },
+      () => { this.creator.showPropertyGrid = true; });
+    this.onPropertyGridVisibilityChanged = (sender: CreatorBase<T>, options: any) => {
       if (this.isDisposed) return;
       this.visible = options.show;
     };
@@ -44,10 +83,10 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
       this.onPropertyGridVisibilityChanged
     );
     this.visible = this.creator.showPropertyGrid;
-    this.model.objValueChangedCallback = () => {
+    this.propertyGridModel.objValueChangedCallback = () => {
       this.onSurveyChanged();
     };
-    this.model.changedFromActionCallback = (
+    this.propertyGridModel.changedFromActionCallback = (
       obj: Base,
       propertyName: string
     ) => {
@@ -55,20 +94,6 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
         this.selectionController.selectFromAction(obj, propertyName);
       }
     };
-
-    var actions: Array<Action> = [];
-    actions.push(
-      new Action({
-        id: "svd-grid-hide",
-        iconName: "icon-hide",
-        component: "sv-action-bar-item",
-        title: getLocString("ed.hidePanel"),
-        showTitle: false,
-        action: () => {
-          this.creator.showPropertyGrid = false;
-        }
-      })
-    );
 
     if (settings.propertyGrid.showNavigationButtons) {
       this.prevSelectionAction = new Action({
@@ -82,7 +107,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
           this.selectionController.prev();
         }
       });
-      actions.push(this.prevSelectionAction);
+      this.toolbar.actions.push(this.prevSelectionAction);
 
       this.nextSelectionAction = new Action({
         id: "svd-grid-history-next",
@@ -95,12 +120,12 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
           this.selectionController.next();
         }
       });
-      actions.push(this.nextSelectionAction);
+      this.toolbar.actions.push(this.nextSelectionAction);
     }
 
     const selectorModel = new ObjectSelectorModel(
       (obj: Base, reason: string, displayName: string) => {
-        return this.model.options.getObjectDisplayName(
+        return this.propertyGridModel.options.getObjectDisplayName(
           obj,
           reason,
           displayName
@@ -125,7 +150,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
       action: () => {
         selectorModel.show(
           this.selectionController.creator.survey,
-          this.model.obj,
+          this.propertyGridModel.obj,
           (obj: Base) => {
             this.selectionController.selectFromAction(obj, "name");
             selectorPopupModel.toggleVisibility();
@@ -135,9 +160,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
       },
       popupModel: selectorPopupModel
     });
-    actions.push(this.objectSelectionAction);
-    this.toolbar.actions = actions;
-
+    this.toolbar.actions.push(this.objectSelectionAction);
     this.onSurveyChanged();
   }
 
@@ -165,15 +188,12 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
     }
     super.dispose();
   }
-  private get model(): PropertyGridModel {
-    return this.creator.propertyGrid;
-  }
   private get selectionController(): SelectionHistory {
     return this.creator.selectionHistoryController;
   }
 
   private onSurveyChanged() {
-    this.survey = this.model.survey;
+    this.survey = this.propertyGridModel.survey;
     if (!!this.survey) {
       this.survey.onValueChanged.add((sender: SurveyModel, options: any) => {
         if (options.name == "name" || options.name == "title") {
@@ -191,13 +211,13 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
     this.title = this.getTitle();
   }
   private getTitle(): string {
-    var obj = this.model.obj;
+    var obj = this.propertyGridModel.obj;
     if (!obj) return "";
     var displayName = SurveyHelper.getObjectName(
       obj,
-      this.model.options.showObjectTitles
+      this.propertyGridModel.options.showObjectTitles
     );
-    return this.model.options.getObjectDisplayName(
+    return this.propertyGridModel.options.getObjectDisplayName(
       obj,
       "property-grid",
       displayName

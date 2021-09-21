@@ -1,8 +1,11 @@
-<div class="svc-property-panel" data-bind="visible:visible">
+<!-- ko with: model -->
+<div class="svc-property-panel" data-bind="visible: visible">
   <div class="svc-property-panel__header">
     <div class="svc-property-panel__actions">
       <!-- ko component: { name: 'sv-action-bar', params: { model: toolbar } } -->
       <!-- /ko -->
+    </div>
+    <div class="svc-property-panel__title" data-bind="text: headerText">
     </div>
   </div>
   <div class="svc-property-panel__expander">
@@ -10,3 +13,4 @@
     <!-- /ko -->
   </div>
 </div>
+<!-- /ko -->

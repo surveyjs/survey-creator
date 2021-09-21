@@ -19,7 +19,6 @@ import {
 } from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import {
-  SurveyLogicTypes,
   SurveyLogicType,
   getLogicString
 } from "./logic-types";
@@ -61,11 +60,16 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       if (options.name == "logicTypeName") {
         this.onLogicTypeChanged(options.panel);
       }
-      var obj = this.getElementPanelObj(options.panel);
+      const obj = this.getElementPanelObj(options.panel);
       if (!!obj) {
-        var panelElement = options.panel.getElementByName("elementPanel");
+        const panel = options.panel;
+        const panelElement = panel.getElementByName("elementPanel");
         if (!!panelElement.getQuestionByName(options.name)) {
           obj[options.name] = options.value;
+        }
+        const logicType = this.getLogicTypeByPanel(panel);
+        if(!!logicType && logicType.dependedOnPropertyName === options.name) {
+          this.recreateQuestion(panel, obj, logicType.dynamicPropertyName);
         }
         options.panel.runCondition(this.editSurvey.getAllValues(), {
           survey: this.editSurvey
@@ -405,6 +409,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       logicType
     );
     this.setElementPanelObj(panel, obj);
+    //TODO
     if(logicType.name === "trigger_complete") {
       elementPanel.visible = false;
       return;
@@ -414,7 +419,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       this.options
     );
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
-    propGenerator.setupObjPanel(elementPanel, true);
+    propGenerator.setupObjPanel(elementPanel, true, "logic");
     elementPanel.title = "";
     const runExpressionQuestion = elementPanel.getQuestionByName("runExpression");
     runExpressionQuestion && (runExpressionQuestion.titleLocation = "top"); // TODO
@@ -427,6 +432,22 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         q.value = obj[q.getValueName()];
       }
     }
+  }
+  private recreateQuestion(panel: PanelModel, obj: Base, name: string): void {
+    const oldQuestion = !!name ? panel.getQuestionByName(name) : null;
+    if(!oldQuestion) return;
+    const elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+    if(!elementPanel) return;
+    const tempPanel = Serializer.createClass("panel");
+    var propGenerator = new PropertyJSONGenerator(obj, this.options);
+    propGenerator.setupObjPanel(tempPanel, true, "logic");
+    const newQuestion = tempPanel.getQuestionByName(name);
+    if(!!newQuestion) {
+      const index = elementPanel.elements.indexOf(oldQuestion);
+      elementPanel.addElement(newQuestion, index);
+      oldQuestion.delete();
+    }
+    tempPanel.dispose();
   }
   private static elementSelectorTypes = ["question", "page", "panel"];
   private isElementSelectorVisible(logicType: SurveyLogicType): boolean {

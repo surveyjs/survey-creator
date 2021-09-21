@@ -3,9 +3,18 @@
 .svc-property-panel {
   display: block;
   font-family: $font-family;
-  min-width: 450px;
-  max-width: 450px;
+  min-width: 338px;
+  max-width: 944px;
+  width: 450px;
   height: 100%;
+}
+
+.svc-property-panel .svc-resizer {
+  width: 3px;
+  height: 100%;
+  position: absolute;
+  background-color: transparent;
+  cursor: e-resize;
 }
 
 .svc-property-panel__header {
@@ -78,6 +87,7 @@
   display: flex;
   line-height: 36px;
   flex-grow: 1;
+  flex-shrink: 0;
   justify-content: flex-end;
 }
 

@@ -1,7 +1,10 @@
 import { Base, PageModel, property, SurveyModel, Action } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
+import { PropertyGridModel } from "../../property-grid";
 import "./designer.scss";
+import { PropertyGridViewModel, PropertyGridViewModelBase } from "../../property-grid/property-grid-view-model";
+import { settings } from "../../settings";
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   @property() newPage: PageModel;
@@ -103,30 +106,34 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   }
 }
 
-export class TabDesignerPlugin<T extends SurveyModel>
-implements ICreatorPlugin
-{
+export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin {
   public model: TabDesignerViewModel<T>;
+  public propertyGrid: PropertyGridViewModelBase;
   private undoAction: Action;
   private redoAction: Action;
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
+  private expandAction: Action;
 
   constructor(private creator: CreatorBase<T>) {
     creator.addPluginTab("designer", this);
+    const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
+    this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
     this.undoAction && (this.undoAction.visible = true);
     this.redoAction && (this.redoAction.visible = true);
     this.surveySettingsAction && (this.surveySettingsAction.visible = true);
+    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible)
   }
   public deactivate(): boolean {
     this.model = undefined;
 
-    this.undoAction.visible = false;
-    this.redoAction.visible = false;
+    this.undoAction && (this.undoAction.visible = false);
+    this.redoAction && (this.redoAction.visible = false);
     this.surveySettingsAction.visible = false;
+    this.expandAction && (this.expandAction.visible = false);
     return true;
   }
   public designerSurveyCreated(): void {
@@ -177,8 +184,7 @@ implements ICreatorPlugin
       action: () => this.creator.doSave(),
       active: this.creator.state === "modified",
       enabled: this.creator.state === "modified",
-      visible:
-        this.creator.showSaveButton && this.creator.activeTab === "designer",
+      visible: this.creator.showSaveButton && this.creator.activeTab === "designer",
       title: this.creator.getLocString("ed.saveSurvey"),
       tooltip: this.creator.getLocString("ed.saveSurveyTooltip")
     });
@@ -186,6 +192,10 @@ implements ICreatorPlugin
     items.push(this.redoAction);
     items.push(this.saveSurveyAction);
     items.push(this.surveySettingsAction);
+    if (settings.propertyGrid.allowCollapse) {
+      this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
+      items.push(this.expandAction)
+    }
     this.updateUndeRedoActions();
     this.creator.onActiveTabChanged.add((sender, options) => {
       this.saveSurveyAction.visible =
