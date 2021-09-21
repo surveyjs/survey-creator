@@ -1824,7 +1824,6 @@ export class CreatorBase<T extends SurveyModel>
       var questions = obj.questions;
     }
     if (!questions) return;
-    // TODO: remove SurveyLogic call here
     var logic = new SurveyLogic(<any>this.survey, <any>this);
     for (var i = 0; i < questions.length; i++) {
       logic.removeQuestion(questions[i].getValueName());
@@ -2287,34 +2286,6 @@ export class CreatorBase<T extends SurveyModel>
   onValueChangingCallback(options: any) {
     this.onPropertyValueChanging.fire(this, options);
   }
-  public onSurveyElementPropertyValueChanged(
-    property: Survey.JsonObjectProperty,
-    obj: any,
-    newValue: any
-  ) {
-    /*
-    //TODO We likely do not need this callback and can remove it for V2
-    //We called "PROPERTY_CHANGED" from obj.propertyValueChanged with undoRedoManager object
-    var oldValue = obj[property.name];
-    this.setModified({
-      type: "PROPERTY_CHANGED",
-      name: property.name,
-      target: obj,
-      oldValue: oldValue,
-      newValue: newValue,
-    });
-    //TODO add a flag to a property, may change other properties
-    if (
-      property.name == "hasComment" ||
-      property.name == "hasNone" ||
-      property.name == "hasOther" ||
-      property.name == "hasSelectAll" ||
-      property.name == "locale"
-    ) {
-      this.doPropertyGridChanged();
-    }
-    */
-  }
   onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
     return title;
   }
@@ -2517,7 +2488,7 @@ export class CreatorBase<T extends SurveyModel>
   }
   public createNewItemValue(question: Survey.QuestionSelectBase) {
     const nextValue = this.getNextItemValue(question);
-    // TODO: get item type from question
+    // TODO: Add question.createItemValue() function for QuestionSelectBase
     if (question.getType() === "imagepicker") {
       return new Survey.ImageItemValue(nextValue);
     }
