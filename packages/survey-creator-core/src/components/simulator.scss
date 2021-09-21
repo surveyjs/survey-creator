@@ -99,6 +99,9 @@
     display: flex;
     align-items: center;
   }
+  &:not(.svd-simulator-main--frame){
+    background-color: white;
+  }
 }
 
 .svd-simulator-content {
