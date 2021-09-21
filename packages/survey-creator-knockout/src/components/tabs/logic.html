@@ -1,9 +1,16 @@
 <div class="svc-creator-tab__content">
-  <div class="svc-plugin-tab__content-actions">
-    <!-- ko component: { name: 'sv-action-bar', params: { model: toolbar } } -->
+  <div class="svc-plugin-tab__content svc-logic-tab__content" data-bind="css: { 'svc-logic-tab__empty': !hasItems }">
+    <!-- ko template: { name: 'survey-content', data: itemsSurvey  } -->
     <!-- /ko -->
-  </div>
-  <div class="svc-plugin-tab__content">
-    <!-- ko template: { name: 'survey-content', data: itemsSurvey  } --><!-- /ko -->
+    <!-- ko if: !hasItems -->
+    <div class="svc-logic-tab__content-empty">
+      <span class="svc-text" data-bind="text: $data.emptyTabPlaceHolder"></span>
+    </div>
+    <!-- /ko -->
+    <div class="svc-logic-tab__content-action"
+      data-bind="click: addNewButton.action, key2click, clickBubble: false">
+      <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: addNewButton.title">
+      </span>
+    </div>
   </div>
 </div>

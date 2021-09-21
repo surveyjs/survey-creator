@@ -47,77 +47,116 @@
   color: $foreground-light;
 
   option {
-      background: $background;
-      color: $foreground;
+    background: $background;
+    color: $foreground;
   }
 }
 
-.svc-logic-question--answered .svc-logic-operator { 
+.svc-logic-question--answered .svc-logic-operator {
   color: $foreground;
 }
 
 .svc-logic-operator.svc-logic-operator--conjunction {
-    background-color: rgba(25, 179, 148, 0.1);
+  background-color: rgba(25, 179, 148, 0.1);
 }
 
 .svc-logic-operator.svc-logic-operator--question {
-    background-color: rgba(67, 127, 217, 0.1);
+  background-color: rgba(67, 127, 217, 0.1);
 }
 
 .svc-logic-operator.svc-logic-operator--operator {
-    background-color: rgba(255, 152, 20, 0.1);
+  background-color: rgba(255, 152, 20, 0.1);
 }
 
 .svc-logic-operator.svc-logic-operator--action {
-    background-color: rgba(230, 10, 62, 0.1);
+  background-color: rgba(230, 10, 62, 0.1);
 }
 
 .svc-logic-operator.svc-logic-operator--error {
-  background-color: #FFFFFF;
-  color:  $red;
+  background-color: #ffffff;
+  color: $red;
   box-shadow: inset 0 0 0 2px $red;
 }
 
-.svc-logic-operator__error{
-  display: none;    
+.svc-logic-operator__error {
+  display: none;
 }
 
 .sd-paneldynamic__separator {
-    border: none;
-    margin: 0;
+  border: none;
+  margin: 0;
 }
 
 .svc-icon-remove {
-    display: block;
-    width: 20px;
-    height: 22px;
-    background-repeat: no-repeat;
-    background-image: url("data:image/svg+xml,%3Csvg width='20' height='22' viewBox='0 0 20 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 4H18H14V2C14 0.9 13.1 0 12 0H8C6.9 0 6 0.9 6 2V4H2H0V6H2V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V6H20V4ZM8 2H12V4H8V2ZM16 20H4V6H6H14H16V20ZM12 8H14V18H12V8ZM9 8H11V18H9V8ZM6 8H8V18H6V8Z' fill='%23E60A3E'/%3E%3C/svg%3E%0A");
+  display: block;
+  width: 20px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='22' viewBox='0 0 20 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 4H18H14V2C14 0.9 13.1 0 12 0H8C6.9 0 6 0.9 6 2V4H2H0V6H2V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V6H20V4ZM8 2H12V4H8V2ZM16 20H4V6H6H14H16V20ZM12 8H14V18H12V8ZM9 8H11V18H9V8ZM6 8H8V18H6V8Z' fill='%23E60A3E'/%3E%3C/svg%3E%0A");
 }
 
 .svc-logic-paneldynamic__button-remove-text {
-    display: none;
+  display: none;
 }
 
 .svc-logic-paneldynamic__button {
-    appearance: none;
-    border: none;
-    padding: 0;
+  appearance: none;
+  border: none;
+  padding: 0;
 }
 
 .svc-question-wrapper {
-    max-width: initial !important;
-    min-width: initial !important;
-    width: initial !important;
-    flex: initial !important;
+  max-width: initial !important;
+  min-width: initial !important;
+  width: initial !important;
+  flex: initial !important;
 }
 .svc-question-wrapper {
-    .sv-title-actions__title {
-        max-width: none;
-    }
+  .sv-title-actions__title {
+    max-width: none;
+  }
 }
 
 .svc-logic-operator--action.sd-paneldynamic__add-btn.sd-paneldynamic__add-btn,
 .svc-logic-operator--operator.sd-paneldynamic__add-btn.sd-paneldynamic__add-btn {
-    color: $foreground-light;
-} 
+  color: $foreground-light;
+}
+
+.svc-logic-tab__content {
+  &.svc-logic-tab__empty {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .svc-logic-tab__content-action {
+      width: calcSize(40);
+      margin-top: calcSize(4);
+    }
+  }
+
+  .svc-logic-tab__content-action {
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: calcSize(10);
+    height: calcSize(7);
+    line-height: calcSize(7);
+    vertical-align: baseline;
+    text-align: center;
+    background-color: $background;
+    color: $primary;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+    border-radius: calcSize(0.5);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .svc-text {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+  }
+}

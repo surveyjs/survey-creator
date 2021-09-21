@@ -143,6 +143,7 @@ export var enStrings = {
     lg: {
       addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
+      empty_tab: "Create a rule to customize the flow of the survey.",
       page_visibilityName: "Page visibility",
       panel_visibilityName: "Panel visibility",
       panel_enableName: "Panel enable/disable",

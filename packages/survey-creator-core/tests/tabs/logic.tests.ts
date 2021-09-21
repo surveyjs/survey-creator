@@ -858,7 +858,7 @@ test("LogicItemEditorUI: create new logic several times", () => {
     logic.itemsSurvey.getQuestionByName("items")
   );
   expect(itemsQuestion.rowCount).toEqual(0);
-  expect(logic.toolbar.actions[0].enabled).toBeTruthy();
+  expect(logic.addNewButton.enabled).toBeTruthy();
   logic.addNewUI();
   expect(logic.items).toHaveLength(1);
   expect(logic.items[0].isNew).toBeTruthy();
@@ -867,19 +867,19 @@ test("LogicItemEditorUI: create new logic several times", () => {
   expect(row.hasPanel).toBeTruthy();
   expect(logic.mode).toEqual("new");
   expect(row.detailPanel).toBeTruthy();
-  expect(logic.toolbar.actions[0].enabled).toBeFalsy();
+  expect(logic.addNewButton.enabled).toBeFalsy();
   row.hideDetailPanel();
   expect(logic.items).toHaveLength(1);
   expect(logic.items[0].isNew).toBeTruthy();
-  expect(logic.toolbar.actions[0].enabled).toBeTruthy();
+  expect(logic.addNewButton.enabled).toBeTruthy();
   logic.addNewUI();
   expect(logic.items).toHaveLength(1);
   expect(logic.items[0].isNew).toBeTruthy();
-  expect(logic.toolbar.actions[0].enabled).toBeFalsy();
+  expect(logic.addNewButton.enabled).toBeFalsy();
   itemsQuestion.removeRow(0);
   expect(itemsQuestion.rowCount).toEqual(0);
   expect(logic.items).toHaveLength(0);
-  expect(logic.toolbar.actions[0].enabled).toBeTruthy();
+  expect(logic.addNewButton.enabled).toBeTruthy();
 });
 
 test("LogicItemEditorUI: filter by question", () => {
