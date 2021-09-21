@@ -2172,3 +2172,20 @@ test("Different property editors for trigger value in panel", () => {
   expect(question).toBeTruthy();
   expect(question.getType()).toEqual("dropdown");
 });
+test("AllowRowsDragDrop and property readOnly", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  let propertyGrid = new PropertyGridModelTester(question);
+  let choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion).toBeTruthy();
+  expect(choicesQuestion.allowRowsDragAndDrop).toBeTruthy();
+  Serializer.findProperty("selectbase", "choices").readOnly = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.allowRowsDragAndDrop).toBeFalsy();
+  Serializer.findProperty("selectbase", "choices").readOnly = false;
+});
