@@ -82,3 +82,9 @@
     }
   }
 }
+
+.svc-toolbox__tool:hover {
+  .svc-toolbox__item:focus {
+    outline: none;
+  }
+}

@@ -119,6 +119,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       title: this.getFilterPageActionTitle(),
       visible: false,
       component: "sv-action-bar-item-dropdown",
+      mode: "small",
       popupModel: this.pagePopupModel,
       action: (newPage) => {
         this.pagePopupModel.toggleVisibility();
@@ -132,6 +133,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       title: this.showAllStringsText,
       visible: false,
       // iconName: this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16",
+      mode: "small",
       action: () => {
         this.model.showAllStrings = !this.model.showAllStrings;
         this.showAllStringsAction.css = this.model.showAllStrings ? "sv-action-bar-item--secondary" : "";
@@ -147,6 +149,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       title: translationMergeLocaleWithDefaultStr,
       tooltip: translationMergeLocaleWithDefaultStr,
       component: "sv-action-bar-item",
+      mode: "small",
       action: () => {
         this.model.mergeLocaleWithDefault();
       }
@@ -159,6 +162,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       tooltip: this.importFromCSVText,
       title: this.importFromCSVText,
       visible: false,
+      mode: "small",
       component: "sv-action-bar-item",
       action: () => {
         if (!document) return;
@@ -181,6 +185,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       tooltip: this.exportToCSVText,
       title: this.exportToCSVText,
       visible: false,
+      mode: "small",
       component: "sv-action-bar-item",
       action: () => {
         this.model.exportToSCVFile("survey_translation.csv");
