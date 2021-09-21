@@ -73,8 +73,8 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         className={
           "svc-item-value-wrapper" +
           (this.model.allowAdd ? " svc-item-value--new" : "") +
-          (this.model.isDragging ? " svc-item-value--dragging" : "") + 
-          (this.model.isDragDropGhost ? " svc-item-value--ghost" : "") + 
+          (this.model.isDragging ? " svc-item-value--dragging" : "") +
+          (this.model.isDragDropGhost ? " svc-item-value--ghost" : "") +
           (this.model.isDragDropMoveDown ? " svc-item-value--movedown" : "") +
           (this.model.isDragDropMoveUp ? " svc-item-value--moveup" : "")
         }
