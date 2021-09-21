@@ -6,9 +6,8 @@ const templateHtml = require("./simulator.html");
 ko.components.register("survey-simulator", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      const component = new SurveySimulatorComponent(params.options);
-      new ImplementorBase(component);
-      return component;
+      new ImplementorBase(params.model);
+      return params.model;
     },
   },
   template: templateHtml,
