@@ -1,4 +1,4 @@
-import { simulatorDevices, SurveySimulatorComponent } from "../simulator";
+import { simulatorDevices, SurveySimulatorModel } from "../simulator";
 
 import "./test.scss";
 import {
@@ -26,7 +26,7 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 // export * from "@survey/creator/utils/boolean";
 // export * from "@survey/creator/utils/svg-icon";
 // export * from "@survey/creator/utils/survey-widget";
-// export { SurveySimulatorComponent as SurveySimulatorComponentV1 } from "@survey/creator/components/simulator";
+// export { SurveySimulatorModel as SurveySimulatorComponentV1 } from "@survey/creator/components/simulator";
 // export { SurveyResultsModel as SurveyResultsModelV1 } from "@survey/creator/components/results";
 
 export class TestSurveyTabViewModel extends Base {
@@ -90,7 +90,7 @@ export class TestSurveyTabViewModel extends Base {
   @property({ defaultValue: true }) showSimulator;
   @property({ defaultValue: true }) showDefaultLanguageInTestSurveyTab;
   @property({ defaultValue: true }) showInvisibleElementsInTestSurveyTab;
-  public simulator: SurveySimulatorComponent;
+  public simulator: SurveySimulatorModel;
   private pagePopupModel: PopupModel;
   /**
    * The list of action bar items.
@@ -106,7 +106,7 @@ export class TestSurveyTabViewModel extends Base {
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
   constructor(private surveyProvider: CreatorBase<SurveyModel>) {
     super();
-    this.simulator = new SurveySimulatorComponent();
+    this.simulator = new SurveySimulatorModel();
 
     this.simulator.registerFunctionOnPropertyValueChanged(
       "device",

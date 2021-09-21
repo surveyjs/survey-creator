@@ -2,7 +2,7 @@ import { Base, property, SurveyModel } from "survey-core";
 
 import "./simulator.scss";
 
-export class SurveySimulatorComponent extends Base {
+export class SurveySimulatorModel extends Base {
   constructor() {
     super();
     // if (!!_toolbarHolder) {

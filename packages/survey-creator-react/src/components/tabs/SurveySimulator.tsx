@@ -1,10 +1,10 @@
 import { Base } from "survey-core";
 import { Survey, SurveyElementBase } from "survey-react-ui";
-import { SurveySimulatorComponent } from "@survey/creator";
+import { SurveySimulatorModel } from "@survey/creator";
 import React from "react";
 
 export class SurveySimulator extends SurveyElementBase<any, any> {
-  private get model(): SurveySimulatorComponent {
+  private get model(): SurveySimulatorModel {
     return this.props.model;
   }
 
