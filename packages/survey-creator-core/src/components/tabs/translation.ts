@@ -485,6 +485,7 @@ export class Translation extends Base implements ITranslationLocales {
   private onBaseObjCreatingCallback: (obj: Base) => void;
   private chooseLanguagePopupModel: PopupModel;
   private placeHolderText = editorLocalization.getString("ed.translationPlaceHolder");
+  public chooseLanguageActions: Array<IAction> = [];
 
   constructor(
     survey: SurveyModel,
@@ -799,17 +800,21 @@ export class Translation extends Base implements ITranslationLocales {
       this.settingsSurvey.setValue(valueName, val);
     }
   }
-
+  private isLocaleVisible(locale: string): boolean {
+    return locale !== surveyLocalization.defaultLocale && !this.hasLocale(locale);
+  }
   private setupToolbarItems() {
+    this.chooseLanguageActions = this.getSurveyLocales()[0].map((locale: ItemValue) => ({
+      id: locale.value,
+      title: locale.text,
+      data: locale,
+      visible: this.isLocaleVisible(locale.value)
+    }));
     this.chooseLanguagePopupModel = new PopupModel(
       "sv-list",
       {
         model: new ListModel(
-          this.getSurveyLocales()[0].map((locale: ItemValue) => ({
-            id: locale.value,
-            title: locale.text,
-            data: locale
-          })),
+          this.chooseLanguageActions,
           (item: IAction) => {
             this.addLocale(item.id);
             this.chooseLanguagePopupModel.toggleVisibility();
@@ -886,6 +891,10 @@ export class Translation extends Base implements ITranslationLocales {
   public addLocale(locale: string) {
     if (!this.hasLocale(locale)) {
       this.addLocaleIntoValue(locale, true);
+    }
+    var actions = this.chooseLanguageActions.filter(item => { return item.id === locale; });
+    if(Array.isArray(actions) && actions.length == 1) {
+      actions[0].visible = this.isLocaleVisible(locale);
     }
   }
   public resetLocales() {

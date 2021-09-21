@@ -406,6 +406,7 @@ test("StringsHeaderSurvey layout", () => {
   expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
 });
 
+
 test("Actions mode small", () => {
   const creator = new CreatorTester();
   const tabTranslation = new TabTranslationPlugin(creator);
@@ -418,3 +419,39 @@ test("Actions mode small", () => {
   expect(actions[3].mode).toBe("small");
   expect(actions[4].mode).toBe("small");
 });
+
+test("Make invisible locales in language selector, that has been already choosen", () => {
+  var survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  });
+  surveyLocalization.supportedLocales = ["en", "fr", "de", "se"];
+  var translation = new Translation(survey);
+  expect(translation.chooseLanguageActions).toHaveLength(4);
+  expect(translation.chooseLanguageActions[0].id).toEqual("en");
+  expect(translation.chooseLanguageActions[1].id).toEqual("fr");
+  expect(translation.chooseLanguageActions[0].visible).toBeFalsy();
+  expect(translation.chooseLanguageActions[1].visible).toBeTruthy();
+  translation.addLocale("fr");
+  expect(translation.chooseLanguageActions[1].visible).toBeFalsy();
+  surveyLocalization.supportedLocales = [];
+});
+
