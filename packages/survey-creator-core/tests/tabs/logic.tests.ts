@@ -18,7 +18,7 @@ import { getLogicString } from "../../src/components/tabs/logic-types";
 import { PropertyGridEditorCollection } from "../../src/property-grid/index";
 import { PropertyGridEditorExpression } from "../../src/property-grid/condition";
 import { EmptySurveyCreatorOptions } from "../../src/settings";
-import { PropertyGridTriggerValueEditor } from "../../src/property-grid/values";
+import { PropertyGridTriggerValueEditor, PropertyGridTriggerValueInLogicEditor } from "../../src/property-grid/values";
 import { QuestionEmbeddedSurveyModel } from "../../src/components/embedded-survey";
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 
@@ -630,10 +630,10 @@ test("LogicItemEditorUI: remove item", () => {
   expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
 });
 test("Create setValue trigger in logic", () => {
-  PropertyGridEditorCollection.register(new PropertyGridTriggerValueEditor());
+  PropertyGridEditorCollection.register(new PropertyGridTriggerValueInLogicEditor());
   var survey = new SurveyModel({
     elements: [
-      { type: "text", name: "q1" },
+      { type: "dropdown", name: "q1", choices: [1, 2, 3] },
       { type: "text", name: "q2", readOnly: true }
     ]
   });
@@ -641,41 +641,39 @@ test("Create setValue trigger in logic", () => {
   logic.addNew();
   logic.expressionEditor.text = "{q1} = 1";
   var panel = logic.itemEditor.panels[0];
+
+  const getSetValueQuestion = () => {
+    const elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+    return elementPanel.getQuestionByName("setValue");
+  };
+  const getSetToNameQuestion = () => {
+    const elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+    return elementPanel.getQuestionByName("setToName");
+  };
+
   panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
-  var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-  var setValueQuestion = <QuestionCustomModel>(
-    elementPanel.getQuestionByName("setValue")
-  );
+  var setValueQuestion = getSetValueQuestion();
   expect(setValueQuestion).toBeTruthy();
   expect(setValueQuestion.isVisible).toBeFalsy();
-  elementPanel.getQuestionByName("setToName").value = "q2";
+  expect(setValueQuestion.getType()).toEqual("linkvalue");
+  getSetToNameQuestion().value = "q1";
+  setValueQuestion = getSetValueQuestion();
   expect(setValueQuestion.isVisible).toBeTruthy();
-  elementPanel.getQuestionByName("setToName").clearValue();
+  expect(setValueQuestion.getType()).toEqual("dropdown");
+  getSetToNameQuestion().clearValue();
+  setValueQuestion = getSetValueQuestion();
+  expect(setValueQuestion.getType()).toEqual("linkvalue");
   expect(setValueQuestion.isVisible).toBeFalsy();
-  elementPanel.getQuestionByName("setToName").value = "q2";
+  getSetToNameQuestion().value = "q2";
+  setValueQuestion = getSetValueQuestion();
   expect(setValueQuestion.isVisible).toBeTruthy();
-  var setValuePropEditor = PropertyGridEditorCollection.getEditor(
-    setValueQuestion.property
-  );
-  expect(setValuePropEditor).toBeTruthy();
-  var setupValueEditor = setValuePropEditor.createPropertyEditorSetup(
-    survey,
-    setValueQuestion.property,
-    setValueQuestion,
-    new EmptySurveyCreatorOptions()
-  );
-  expect(setupValueEditor).toBeTruthy();
-  var editorSetValueQuestion = setupValueEditor.editSurvey.getAllQuestions()[0];
-  expect(editorSetValueQuestion.isReadOnly).toBeFalsy();
-  editorSetValueQuestion.value = 2;
-  setupValueEditor.apply();
-  expect(setValueQuestion.value).toEqual(2);
+  expect(setValueQuestion.getType()).toEqual("text");
+  setValueQuestion.value = 2;
 
   panel.getQuestionByName("logicTypeName").value = "trigger_complete";
   panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
-  elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-  expect(elementPanel.getQuestionByName("setToName").value).toBeFalsy();
-  expect(elementPanel.getQuestionByName("setValue").value).toBeFalsy();
+  expect(getSetToNameQuestion().value).toBeFalsy();
+  expect(getSetValueQuestion().value).toBeFalsy();
 });
 test("LogicItemEditorUI: edit item two times and do Build/Edit", () => {
   const survey = new SurveyModel({

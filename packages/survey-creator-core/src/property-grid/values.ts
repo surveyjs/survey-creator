@@ -6,7 +6,8 @@ import {
   QuestionMatrixModel,
   Serializer,
   QuestionFactory,
-  property
+  property,
+  SurveyModel
 } from "survey-core";
 import {
   PropertyGridEditorCollection,
@@ -22,6 +23,7 @@ import {
 } from "./values-survey";
 import { ISurveyCreatorOptions } from "../settings";
 import { editorLocalization } from "../editorLocalization";
+import { SurveyHelper } from "../survey-helper";
 
 export class QuestionLinkValueModel extends Question {
   public linkClickCallback: () => void;
@@ -194,12 +196,38 @@ export class PropertyGridTriggerValueEditor extends PropertyGridValueEditorBase 
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
     const trigger = question.obj;
-    if (!trigger["setToName"] || !trigger["owner"]) return;
-    var setQuestion = trigger["owner"].getQuestionByValueName(
-      trigger["setToName"]
-    );
-    if (!setQuestion) return;
+    const setQuestion = this.getSetToNameQuestion(trigger);
     return new TriggerValueEditor(setQuestion, trigger, prop.name, options);
+  }
+  protected getSetToNameQuestion(obj: Base): Question {
+    let survey = <SurveyModel>obj.getSurvey();
+    if(!survey) {
+      survey = obj["owner"];
+    }
+    if (!obj["setToName"] || !survey) return null;
+    return <Question>survey.getQuestionByValueName(
+      obj["setToName"]
+    );
+  }
+}
+export class PropertyGridTriggerValueInLogicEditor extends PropertyGridTriggerValueEditor {
+  public fit(prop: JsonObjectProperty, context?: string): boolean {
+    return context === "logic" && prop.type == "triggervalue";
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    const setQuestion = this.getSetToNameQuestion(obj);
+    if(!setQuestion)
+      return {
+        type: "linkvalue"
+      };
+    const json: any = setQuestion.toJSON();
+    json.type = setQuestion.getType();
+    SurveyHelper.updateQuestionJson(json);
+    return json;
   }
 }
 
@@ -208,3 +236,4 @@ PropertyGridEditorCollection.register(new PropertyGridValueEditor());
 PropertyGridEditorCollection.register(new PropertyGridRowValueEditor());
 PropertyGridEditorCollection.register(new PropertyGridPanelValueEditor());
 PropertyGridEditorCollection.register(new PropertyGridTriggerValueEditor());
+PropertyGridEditorCollection.register(new PropertyGridTriggerValueInLogicEditor());

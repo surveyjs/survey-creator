@@ -1,6 +1,7 @@
 import {
   PropertyGridModel,
-  PropertyGridEditorCollection
+  PropertyGridEditorCollection,
+  PropertyJSONGenerator
 } from "../../src/property-grid";
 import {
   Base,
@@ -2117,4 +2118,57 @@ test("expression editor in trigger expression", () => {
   conditionEditor.text = "{q1} = 1";
   conditionEditor.apply();
   expect(survey.triggers[0].expression).toEqual("{q1} = 1");
+});
+test("Different property editors for trigger value", () => {
+  const prop = Serializer.findProperty("setvaluetrigger", "setValue");
+  expect(prop).toBeTruthy();
+  const editor1 = PropertyGridEditorCollection.getEditor(prop);
+  const editor2 = PropertyGridEditorCollection.getEditor(prop, "logic");
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      {
+        type: "setvalue",
+        expression: "{q2} = 1",
+        setToName: "q1",
+        setValue: 1
+      }
+    ]
+  });
+  const trigger = <SurveyTriggerSetValue>survey.triggers[0];
+  const options = new EmptySurveyCreatorOptions();
+  expect(editor1.getJSON(trigger, prop, options).type).toEqual("linkvalue");
+  expect(editor2.getJSON(trigger, prop, options).type).toEqual("dropdown");
+});
+test("Different property editors for trigger value in panel", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      {
+        type: "setvalue",
+        expression: "{q2} = 1",
+        setToName: "q1",
+        setValue: 1
+      }
+    ]
+  });
+  const trigger = <SurveyTriggerSetValue>survey.triggers[0];
+  const options = new EmptySurveyCreatorOptions();
+  const generator = new PropertyJSONGenerator(trigger, options);
+  let panel = new PanelModel("panel");
+  generator.setupObjPanel(panel);
+  let question = panel.getQuestionByName("setValue");
+  expect(question).toBeTruthy();
+  expect(question.getType()).toEqual("linkvalue");
+  panel = new PanelModel("panel");
+  generator.setupObjPanel(panel, false, "logic");
+  question = panel.getQuestionByName("setValue");
+  expect(question).toBeTruthy();
+  expect(question.getType()).toEqual("dropdown");
 });
