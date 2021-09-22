@@ -5,6 +5,7 @@ import { PropertyGridModel } from "../../property-grid";
 import "./designer.scss";
 import { PropertyGridViewModel, PropertyGridViewModelBase } from "../../property-grid/property-grid-view-model";
 import { settings } from "../../settings";
+import { getLocString } from "../../editorLocalization";
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   @property() newPage: PageModel;
@@ -125,7 +126,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.undoAction && (this.undoAction.visible = true);
     this.redoAction && (this.redoAction.visible = true);
     this.surveySettingsAction && (this.surveySettingsAction.visible = true);
-    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible)
+    // this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible)
   }
   public deactivate(): boolean {
     this.model = undefined;
@@ -133,7 +134,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.undoAction && (this.undoAction.visible = false);
     this.redoAction && (this.redoAction.visible = false);
     this.surveySettingsAction.visible = false;
-    this.expandAction && (this.expandAction.visible = false);
+    // this.expandAction && (this.expandAction.visible = false);
     return true;
   }
   public designerSurveyCreated(): void {
@@ -149,7 +150,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.undoAction = new Action({
       id: "icon-undo",
       iconName: "icon-undo",
-      title: "Undo",
+      title: getLocString("ed.undo"),
       showTitle: false,
       visible: this.creator.viewType === "designer",
       action: () => this.creator.undo()
@@ -157,13 +158,13 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.redoAction = new Action({
       id: "icon-redo",
       iconName: "icon-redo",
-      title: "Redo",
+      title: getLocString("ed.redo"),
       showTitle: false,
       visible: this.creator.viewType === "designer",
       action: () => this.creator.redo()
     });
     this.surveySettingsAction = new Action({
-      id: "icon-settings",
+      id: "svd-settings",
       iconName: "icon-settings",
       needSeparator: true,
       action: () => {
@@ -192,10 +193,10 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     items.push(this.redoAction);
     items.push(this.saveSurveyAction);
     items.push(this.surveySettingsAction);
-    if (settings.propertyGrid.allowCollapse) {
-      this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
-      items.push(this.expandAction)
-    }
+    // if (settings.propertyGrid.allowCollapse) {
+    //   this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
+    //   items.push(this.expandAction)
+    // }
     this.updateUndeRedoActions();
     this.creator.onActiveTabChanged.add((sender, options) => {
       this.saveSurveyAction.visible =

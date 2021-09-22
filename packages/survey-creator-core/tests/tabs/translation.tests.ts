@@ -412,12 +412,14 @@ test("Actions mode small", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   const actions = [];
   tabTranslation.createActions(actions);
-  expect(actions.length).toBe(5);
+  expect(actions.length).toBe(6);
   expect(actions[0].mode).toBe("small");
   expect(actions[1].mode).toBe("small");
   expect(actions[2].mode).toBe("small");
   expect(actions[3].mode).toBe("small");
   expect(actions[4].mode).toBe("small");
+  expect(actions[5].mode).toBe("large");
+  expect(actions[5].showTitle).toBe(false);
 });
 
 test("Make invisible locales in language selector, that has been already choosen", () => {
