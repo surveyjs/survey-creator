@@ -120,6 +120,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     creator.addPluginTab("designer", this);
     const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
+    this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
@@ -137,7 +138,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     // this.expandAction && (this.expandAction.visible = false);
     return true;
   }
-  public designerSurveyCreated(): void {
+  public update(): void {
     if (!this.model) return;
     this.model.initSurvey();
     if (!!this.creator.undoRedoManager) {
@@ -146,7 +147,8 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       };
     }
   }
-  public createActions(items: Array<Action>) {
+  public createActions() {
+    const items: Array<Action> = [];
     this.undoAction = new Action({
       id: "icon-undo",
       iconName: "icon-undo",
@@ -216,6 +218,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.creator.onShowPropertyGridVisiblityChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
+    return items;
   }
   private updateUndeRedoActions() {
     if (!this.creator.undoRedoManager) return;

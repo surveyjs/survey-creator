@@ -28,6 +28,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     creator.addPluginTab("translation", this);
     this.propertyGrid = new PropertyGridViewModelBase();
     this.propertyGrid.headerText = editorLocalization.getString("ed.translationPropertyGridTitle");
+    this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
@@ -71,6 +72,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       }
     });
   }
+  public update(): void {
+    if (!this.model) return;
+    this.model.survey = this.creator.survey;
+  }
   public deactivate(): boolean {
     this.model = undefined;
     this.showAllStringsAction.visible = false;
@@ -97,7 +102,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   public get importFromCSVText(): string {
     return editorLocalization.getString("ed.translationImportFromSCVButton");
   }
-  public createActions(items: Array<Action>) {
+  public createActions() {
+    const items: Array<Action> = [];
     const translationMergeLocaleWithDefaultStr = editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
     this.pagePopupModel = new PopupModel<{ model: ListModel }>(
       "sv-list",
@@ -197,6 +203,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
       items.push(this.expandAction);
     }
+    return items;
   }
 
   private getFilterPageActionTitle() {
