@@ -506,7 +506,7 @@ test("canUndo/canRedo functions ", (): any => {
 
 test("Check survey settings button ", (): any => {
   var creator = new CreatorTester();
-  var item = creator.getActionBarItem("icon-settings");
+  var item = creator.getActionBarItem("svd-settings");
   expect(item.active).toBeTruthy();
   creator.selectElement(creator.survey.pages[0]);
   expect(item.active).toBeFalsy();
@@ -1002,7 +1002,7 @@ test("Show/hide property grid", (): any => {
     ]
   };
   var settingsBarItem = creator.toolbarItems.filter((item) => {
-    if (item.id === "icon-settings") return item;
+    if (item.id === "svd-settings") return item;
   })[0];
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(settingsBarItem).toBeTruthy();
@@ -1053,7 +1053,7 @@ test("Show/hide property grid and settings button active state", (): any => {
   };
   creator.showPropertyGrid = false;
   var settingsBarItem = creator.toolbarItems.filter((item) => {
-    if (item.id === "icon-settings") return item;
+    if (item.id === "svd-settings") return item;
   })[0];
   expect(creator.showPropertyGrid).toBeFalsy();
   expect(settingsBarItem.active).toBeFalsy();
@@ -1108,14 +1108,15 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
   const expandBarItem = creator.toolbarItems.filter((item) => {
     if (item.id === "svd-grid-expand") return item;
   })[0];
+  const settingsBarItem = creator.getActionBarItem("svd-settings");
   const propertyGridModel = creator.getPlugin("designer").propertyGrid as PropertyGridViewModel<SurveyModel>; // new PropertyGridViewModel(creator);
   const hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter(
     (item) => { if (item.id === "svd-grid-hide") return item; }
   )[0];
 
   expect(creator.showPropertyGrid).toBeTruthy();
-  expect(expandBarItem).toBeTruthy();
-  expect(expandBarItem.visible).toBeFalsy();
+  expect(expandBarItem).toBeFalsy();
+  expect(settingsBarItem).toBeTruthy();
   expect(propertyGridModel.visible).toBeTruthy();
   expect(hidePropertyModelBarItem).toBeTruthy();
   expect(hidePropertyModelBarItem.visible).toBeTruthy();
@@ -1123,12 +1124,11 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
   expect(propertyGridModel.visible).toBeFalsy();
-  expect(expandBarItem.visible).toBeTruthy();
 
-  expandBarItem.action();
+  settingsBarItem.action();
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(propertyGridModel.visible).toBeTruthy();
-  expect(expandBarItem.visible).toBeFalsy();
+  expect(settingsBarItem.visible).toBeTruthy();
 
   settings.propertyGrid.allowCollapse = prevValue;
 });

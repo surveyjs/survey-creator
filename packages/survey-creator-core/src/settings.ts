@@ -43,7 +43,7 @@ export var settings = {
    */
   questionConvertMode: QuestionConvertMode.AllTypes,
   propertyGrid: {
-    allowCollapse: false,
+    allowCollapse: true,
     useButtonGroup: true,
     maxCharsInButtonGroup: 25,
     showNavigationButtons: false,
@@ -203,7 +203,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     object: any,
     property: JsonObjectProperty,
     editor: Question
-  ) {}
+  ) { }
   onIsPropertyReadOnlyCallback(
     obj: Base,
     property: JsonObjectProperty,
@@ -235,23 +235,23 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     collection: Array<Base>,
     item: Base,
     options: ICollectionItemAllowOperations
-  ): void {}
+  ): void { }
   onItemValueAddedCallback(
     obj: Base,
     propertyName: string,
     itemValue: ItemValue,
     itemValues: Array<ItemValue>
-  ) {}
+  ) { }
   onMatrixDropdownColumnAddedCallback(
     matrix: Question,
     column: MatrixDropdownColumn,
     columns: Array<MatrixDropdownColumn>
-  ) {}
+  ) { }
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
     obj: Base,
     editorOptions: any
-  ) {}
+  ) { }
   onGetErrorTextOnValidationCallback(
     propertyName: string,
     obj: Base,
@@ -259,12 +259,12 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): string {
     return null;
   }
-  onValueChangingCallback(options: any) {}
+  onValueChangingCallback(options: any) { }
   onGetElementEditorTitleCallback(obj: Base, title: string): string {
     return title;
   }
-  startUndoRedoTransaction() {}
-  stopUndoRedoTransaction() {}
+  startUndoRedoTransaction() { }
+  stopUndoRedoTransaction() { }
   createSurvey(
     json: any,
     reason: string,
@@ -277,7 +277,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     obj: Base,
     editor: any,
     list: any[]
-  ) {}
+  ) { }
   onConditionGetTitleCallback(
     expression: string,
     title: string
