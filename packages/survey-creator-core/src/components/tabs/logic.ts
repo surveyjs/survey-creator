@@ -1,30 +1,9 @@
-import {
-  SurveyModel,
-  Base,
-  Serializer,
-  Event,
-  ExpressionRunner,
-  Question,
-  HashTable,
-  Helpers,
-  property,
-  propertyArray,
-} from "survey-core";
+import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
-import {
-  ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions,
-  settings,
-} from "../../settings";
-import {
-  ISurveyLogicItemOwner,
-  SurveyLogicItem,
-  SurveyLogicAction,
-} from "./logic-items";
-import {
-  SurveyLogicTypes,
-  SurveyLogicType,
-} from "./logic-types";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
+import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
+import { SurveyLogicTypes, SurveyLogicType } from "./logic-types";
+import "./logic.scss";
 
 export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   private editableItemValue: SurveyLogicItem;
@@ -290,7 +269,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     return eventOptions.allowRemove;
   }
   public removeItem(item: SurveyLogicItem, checkCanRemove: boolean = true): void {
-    if(checkCanRemove && !this.canRemoveItem(item)) return;
+    if (checkCanRemove && !this.canRemoveItem(item)) return;
     !!this.options && this.options.startUndoRedoTransaction();
     item.apply("");
     var index = this.items.indexOf(item);
