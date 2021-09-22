@@ -305,7 +305,7 @@ export class TestSurveyTabViewModel extends Base {
       visible: false,
       action: () => {
         this.simulator.landscape = !this.simulator.landscape;
-        this.orientationSelectorAction.title = this.getLocString(this.simulator.landscape?"pe.landscapeOrientation":"pe.portraitOrientation");
+        this.orientationSelectorAction.title = this.getLocString(this.simulator.landscape ? "pe.landscapeOrientation" : "pe.portraitOrientation");
       }
     });
     actions.push(this.orientationSelectorAction);
@@ -475,14 +475,14 @@ export class TestSurveyTabViewModel extends Base {
 
       this.nextPageAction.css =
         this.survey &&
-        this.survey.visiblePages.indexOf(this.activePage) !==
+          this.survey.visiblePages.indexOf(this.activePage) !==
           this.survey.visiblePages.length - 1
           ? "sv-action-bar-item--secondary"
           : "";
       this.nextPageAction.enabled =
         this.survey &&
         this.survey.visiblePages.indexOf(this.activePage) !==
-          this.survey.visiblePages.length - 1;
+        this.survey.visiblePages.length - 1;
 
       this.selectPageAction.title =
         (this.activePage &&
@@ -538,6 +538,10 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.creator["onTestSurveyCreated"] &&
         this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
     };
+    this.update();
+  }
+  public update(): void {
+    if (!this.model) return;
     const options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
       showDefaultLanguageInTestSurveyTab:

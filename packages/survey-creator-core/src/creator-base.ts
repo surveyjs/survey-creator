@@ -55,10 +55,9 @@ export interface ICreatorOptions {
 
 export interface ICreatorPlugin {
   activate: () => void;
-  model: Base;
+  update?: () => void;
   deactivate?: () => boolean;
-  designerSurveyCreated?: () => void;
-  createActions?: (items: Array<Action>) => void;
+  model: Base;
   propertyGrid?: PropertyGridViewModelBase;
 }
 
@@ -190,22 +189,23 @@ export class CreatorBase<T extends SurveyModel>
    * @see showEmbedEditor
    */
   public get showingViewName(): string {
-    return this.viewType;
+    return this.activeTab;
   }
   public get isDesignerShowing(): boolean {
-    return this.viewType === "designer";
+    return this.activeTab === "designer";
   }
   public showDesigner() {
-    this.viewType = "designer";
+    this.activeTab = "designer";
   }
   public get isTestSurveyShowing(): boolean {
-    return this.viewType === "test";
+    return this.activeTab === "test";
   }
   public showTestSurvey() {
-    this.viewType = "test";
+    this.activeTab = "test";
   }
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
+
   public addPluginTab(
     name: string,
     plugin: ICreatorPlugin,
@@ -232,9 +232,7 @@ export class CreatorBase<T extends SurveyModel>
     this.plugins[name] = plugin;
   }
   public getPlugin(name: string): ICreatorPlugin {
-    {
-      return this.plugins[name];
-    }
+    return this.plugins[name];
   }
 
   /**
@@ -761,7 +759,7 @@ export class CreatorBase<T extends SurveyModel>
    */
   public showPageSelectorInToolbar = false;
 
-  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem>;
+  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem> = new TabbedMenuContainer();
 
   get tabs() {
     return this.tabbedMenu.actions;
@@ -830,9 +828,8 @@ export class CreatorBase<T extends SurveyModel>
   public makeNewViewActive(viewName: string): boolean {
     if (viewName == this.viewType) return false;
     if (!this.canSwitchViewType()) return false;
-    this.activatePlugin(viewName);
+    const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
-    const plugin = this.currentPlugin;
     this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
     return true;
   }
@@ -840,11 +837,12 @@ export class CreatorBase<T extends SurveyModel>
     const plugin: ICreatorPlugin = this.currentPlugin;
     return !plugin || !plugin.deactivate || plugin.deactivate();
   }
-  private activatePlugin(newType: string) {
+  private activatePlugin(newType: string): ICreatorPlugin {
     const plugin: ICreatorPlugin = this.getPlugin(newType);
     if (!!plugin) {
       plugin.activate();
     }
+    return plugin;
   }
   private get currentPlugin(): ICreatorPlugin {
     return this.getPlugin(this.viewType);
@@ -857,12 +855,8 @@ export class CreatorBase<T extends SurveyModel>
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
-  public get designerPropertyGrid(): PropertyGridModel {
-    const designerPlugin = this.getPlugin("designer");
-    return designerPlugin ? (designerPlugin.propertyGrid.model as any as PropertyGridModel) : null;
-  }
   public get currentTabPropertyGrid(): PropertyGridViewModelBase {
-    return this.getPlugin(this.activeTab).propertyGrid || null;
+    return this.getTabPropertyGrid(this.activeTab);
   }
   public getTabPropertyGrid(id: string): PropertyGridViewModelBase {
     return this.getPlugin(id).propertyGrid || null;
@@ -886,7 +880,6 @@ export class CreatorBase<T extends SurveyModel>
     this.setOptions(this.options);
     this.patchMetadata();
     this.initTabs();
-    this.initToolbar();
     this.initSurveyWithJSON(
       JSON.parse(CreatorBase.defaultNewSurveyText),
       false
@@ -898,6 +891,9 @@ export class CreatorBase<T extends SurveyModel>
       this
     );
     this.initDragDrop();
+  }
+  onSurveyElementPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
+    throw new Error("Method not implemented.");
   }
   /**
    * Start: Obsolete properties and functins
@@ -999,17 +995,12 @@ export class CreatorBase<T extends SurveyModel>
     return page;
   }
   protected initTabs() {
-    this.initTabbedMenu();
-    this.tabs = [];
-    this.initTabsPlugin();
+    this.initPlugins();
     if (this.tabs.length > 0) {
       this.makeNewViewActive(this.tabs[0].id);
     }
   }
-  private initTabbedMenu() {
-    this.tabbedMenu = new TabbedMenuContainer();
-  }
-  private initTabsPlugin(): void {
+  private initPlugins(): void {
     if (this.showDesignerTab) {
       new TabDesignerPlugin<T>(this);
     }
@@ -1033,16 +1024,6 @@ export class CreatorBase<T extends SurveyModel>
       new TabEmbedPlugin(this);
     }
   }
-  private initToolbar() {
-    const items: Array<Action> = [];
-    for (var key in this.plugins) {
-      if (!!this.plugins[key].createActions) {
-        this.plugins[key].createActions(items);
-      }
-    }
-    this.toolbarValue.setItems(items);
-  }
-
   public getOptions() {
     return this.options || {};
   }
@@ -1232,6 +1213,7 @@ export class CreatorBase<T extends SurveyModel>
   }
   private existingPages: {};
   protected initSurveyWithJSON(json: any, clearState: boolean) {
+    // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};
     const survey = this.createSurvey({});
     survey.css = surveyDesignerCss;
@@ -1273,9 +1255,9 @@ export class CreatorBase<T extends SurveyModel>
     */
     this.undoRedoManagerValue = new UndoRedoManager();
     this.setSurvey(survey);
-    var plugin = this.plugins["designer"];
-    if (!!plugin && !!plugin.designerSurveyCreated) {
-      plugin.designerSurveyCreated();
+    const currentPlugin = this.getPlugin(this.activeTab);
+    if (!!currentPlugin && !!currentPlugin.update) {
+      currentPlugin.update();
     }
     survey.onPropertyValueChangedCallback = (
       name: string,
@@ -1875,6 +1857,11 @@ export class CreatorBase<T extends SurveyModel>
     return options.newSelectedElement;
   }
 
+  //#region Obsolete designerPropertyGrid
+  private get designerPropertyGrid(): PropertyGridModel {
+    const designerPlugin = this.getPlugin("designer");
+    return designerPlugin ? (designerPlugin.propertyGrid.model as any as PropertyGridModel) : null;
+  }
   /**
    * Collapse certain property editor tab (category) in properties panel/grid
    * name - tab category name
@@ -1929,7 +1916,6 @@ export class CreatorBase<T extends SurveyModel>
   public collapseAllPropertyTabs(): void {
     this.collapseAllPropertyGridCategories();
   }
-
   /**
    * @Deprecated Obsolete. Expand all property editor tabs (categories) in properties panel/grid
    * @see expandAllPropertyGridCategories
@@ -1937,7 +1923,6 @@ export class CreatorBase<T extends SurveyModel>
   public expandAllPropertyTabs(): void {
     this.expandAllPropertyGridCategories();
   }
-
   /**
    * @Deprecated Obsolete. Expand certain property editor tab (category) in properties panel/grid
    * name - tab category name
@@ -1946,7 +1931,6 @@ export class CreatorBase<T extends SurveyModel>
   public expandPropertyTab(name: string): void {
     this.expandPropertyGridCategory(name);
   }
-
   /**
    * @Deprecated Obsolete. Collapse certain property editor tab (category) in properties panel/grid
    * name - tab category name
@@ -1955,6 +1939,7 @@ export class CreatorBase<T extends SurveyModel>
   public collapsePropertyTab(name: string): void {
     this.collapsePropertyGridCategory(name);
   }
+  //#endregion Obsolete designerPropertyGrid
 
   /**
    * Check for errors in property grid and adorners of the selected elements.
