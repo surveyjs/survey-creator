@@ -541,7 +541,7 @@ export class PropertyJSONGenerator {
       elements: []
     };
     for (var key in panels) {
-      if (key == "general" && isNestedObj) {
+      if (key == cretorSettings.propertyGrid.generalTabName && isNestedObj) {
         var els = panels[key].elements;
         for (var i = 0; i < els.length; i++) {
           json.elements.push(els[i]);
@@ -1197,7 +1197,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       );
       charCount += !!text ? text.length : 0;
     }
-    return charCount < 25; //TODO
+    return charCount < cretorSettings.propertyGrid.maxCharsInButtonGroup;
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);

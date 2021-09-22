@@ -33,8 +33,11 @@ export var settings = {
     greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
   },
-  visibleLogicActions: [],
   defaultNewSurveyJSON: { pages: [{ name: "page1" }] },
+  logic: {
+    visibleActions: [],
+    logicItemTitleMaxChars: 50
+  },
   /**
    * Determines which types of questions the conversion will be available for.
    */
@@ -42,11 +45,13 @@ export var settings = {
   propertyGrid: {
     allowCollapse: false,
     useButtonGroup: true,
+    maxCharsInButtonGroup: 25,
     showNavigationButtons: false,
     maximumColumnsCount: 0,
     maximumChoicesCount: 0,
     maximumRowsCount: 0,
-    maximumRateValues: 0
+    maximumRateValues: 0,
+    generalTabName: "general"
   },
   /**
    * Notification settings
