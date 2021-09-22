@@ -31,12 +31,10 @@ export class SurveyLogicUI extends SurveyLogic {
   ) {
     super(survey, options);
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
-    //TODO
     this.itemsSurveyValue = this.options.createSurvey(
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
-    //this.itemsSurveyValue.css = surveyDesignerCss;
     this.itemsSurvey.onMatrixRowRemoving.add((sender, options) => {
       const item = this.visibleItems[options.rowIndex];
       options.allow = this.canRemoveItem(item);
