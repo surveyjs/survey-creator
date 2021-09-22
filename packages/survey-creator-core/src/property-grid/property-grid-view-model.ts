@@ -44,7 +44,7 @@ export class PropertyGridViewModelBase extends Base {
       component: "sv-action-bar-item",
       action: () => {
         if (this.expandAction)
-          this.expandAction()
+          this.expandAction();
         else
           this.visible = true;
         this._expandAction.visible = false;

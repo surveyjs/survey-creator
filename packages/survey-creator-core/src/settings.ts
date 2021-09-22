@@ -73,8 +73,6 @@ export var settings = {
     showTabs: true,
     showToolbar: true
   }
-
-  //TODO add maximumColumnCount
 };
 export interface ICollectionItemAllowOperations {
   allowDelete: boolean;
@@ -152,12 +150,6 @@ export interface ISurveyCreatorOptions {
     value: any
   ): string;
   onValueChangingCallback(options: any);
-  //onPropertyValueChanged(
-  onSurveyElementPropertyValueChanged(
-    property: JsonObjectProperty,
-    obj: any,
-    newValue: any
-  );
   onGetElementEditorTitleCallback(obj: Base, title: string): string;
   startUndoRedoTransaction();
   stopUndoRedoTransaction();
@@ -263,12 +255,6 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     return null;
   }
   onValueChangingCallback(options: any) {}
-  onSurveyElementPropertyValueChanged(
-    //onPropertyValueChanged(
-    property: JsonObjectProperty,
-    obj: any,
-    newValue: any
-  ) {}
   onGetElementEditorTitleCallback(obj: Base, title: string): string {
     return title;
   }

@@ -844,11 +844,6 @@ export class PropertyGridModel {
   private onValueChanged(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    this.options.onSurveyElementPropertyValueChanged(
-      q.property,
-      this.obj,
-      options.value
-    );
     this.changeDependedProperties(q);
     PropertyGridEditorCollection.onValueChanged(this.obj, q.property, q);
     if (
@@ -956,14 +951,6 @@ export class PropertyGridModel {
       this.obj,
       options.question.property,
       options
-    );
-    var rowObj = options.row.editingObj;
-    if (!rowObj) return;
-    var prop = Serializer.findProperty(rowObj.getType(), options.columnName);
-    this.options.onSurveyElementPropertyValueChanged(
-      <any>prop,
-      options.row.editingObj,
-      options.value
     );
   }
   private getMatrixAllowRemoveRow(question: Question, row: MatrixDynamicRowModel) : boolean {

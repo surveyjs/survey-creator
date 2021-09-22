@@ -1,4 +1,4 @@
-import { simulatorDevices, SimulatorOptions } from "../simulator";
+import { simulatorDevices, SurveySimulatorModel } from "../simulator";
 
 import "./test.scss";
 import {
@@ -26,13 +26,15 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 // export * from "@survey/creator/utils/boolean";
 // export * from "@survey/creator/utils/svg-icon";
 // export * from "@survey/creator/utils/survey-widget";
-// export { SurveySimulatorComponent as SurveySimulatorComponentV1 } from "@survey/creator/components/simulator";
+// export { SurveySimulatorModel as SurveySimulatorComponentV1 } from "@survey/creator/components/simulator";
 // export { SurveyResultsModel as SurveyResultsModelV1 } from "@survey/creator/components/results";
 
 export class TestSurveyTabViewModel extends Base {
   private json: any;
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
+  public pages: AdaptiveActionContainer = new AdaptiveActionContainer();
   private deviceSelectorAction: Action;
+  private orientationSelectorAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
   private selectPageAction: Action;
@@ -41,31 +43,14 @@ export class TestSurveyTabViewModel extends Base {
   private invisibleToggleAction: Action;
 
   @property({ defaultValue: true }) isRunning: boolean;
-  @property({
-    defaultValue: "desktop",
-    onSet: (val: string, target: TestSurveyTabViewModel) => {
-      if (!!val) {
-        target.simulator.device = val;
-      }
-    }
-  })
-  device: string;
-  @property({
-    onSet: (val: SurveyModel, target: TestSurveyTabViewModel) => {
-      if (!!val) {
-        target.simulator.survey = val;
-      }
-    }
-  })
-  survey: SurveyModel;
   @propertyArray() pageListItems: Array<IAction>;
   @property({
     onSet: (val: PageModel, target: TestSurveyTabViewModel) => {
       if (!!val) {
-        if (target.survey.state == "starting") {
-          target.survey.start();
+        if (target.simulator.survey.state == "starting") {
+          target.simulator.survey.start();
         }
-        target.survey.currentPage = val;
+        target.simulator.survey.currentPage = val;
       }
     }
   })
@@ -74,8 +59,8 @@ export class TestSurveyTabViewModel extends Base {
   @property({
     defaultValue: "",
     onSet: (val: string, target: TestSurveyTabViewModel) => {
-      if (target.survey.locale == val) return;
-      target.survey.locale = val;
+      if (target.simulator.survey.locale == val) return;
+      target.simulator.survey.locale = val;
     }
   })
   public get activeLanguage(): string {
@@ -90,10 +75,14 @@ export class TestSurveyTabViewModel extends Base {
     this.survey.locale = val;
   }
 
+  public get survey(): SurveyModel {
+    return this.simulator.survey;
+  }
+
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: TestSurveyTabViewModel) => {
-      target.survey.showInvisibleElements = val;
+      target.simulator.survey.showInvisibleElements = val;
     }
   })
   showInvisibleElements;
@@ -101,7 +90,7 @@ export class TestSurveyTabViewModel extends Base {
   @property({ defaultValue: true }) showSimulator;
   @property({ defaultValue: true }) showDefaultLanguageInTestSurveyTab;
   @property({ defaultValue: true }) showInvisibleElementsInTestSurveyTab;
-  public simulator: SimulatorOptions;
+  public simulator: SurveySimulatorModel;
   private pagePopupModel: PopupModel;
   /**
    * The list of action bar items.
@@ -110,11 +99,15 @@ export class TestSurveyTabViewModel extends Base {
   public get actions(): Array<Action> {
     return this.toolbar.actions;
   }
+  public get pageActions(): Array<Action> {
+    return this.pages.actions;
+  }
 
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
   constructor(private surveyProvider: CreatorBase<SurveyModel>) {
     super();
-    this.simulator = new SimulatorOptions();
+    this.simulator = new SurveySimulatorModel();
+
     this.simulator.registerFunctionOnPropertyValueChanged(
       "device",
       () => {
@@ -133,7 +126,7 @@ export class TestSurveyTabViewModel extends Base {
         delete json.cookieName;
       }
     }
-    this.survey = this.surveyProvider.createSurvey(json || {}, "test");
+    this.simulator.survey = this.surveyProvider.createSurvey(json || {}, "test");
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -155,7 +148,7 @@ export class TestSurveyTabViewModel extends Base {
       });
     }
     this.survey.onStarted.add((sender: SurveyModel) => {
-      self.setActivePageItem(self.survey.currentPage, true);
+      self.setActivePageItem(self.simulator.survey.currentPage, true);
     });
     this.survey.onCurrentPageChanged.add((sender: SurveyModel, options) => {
       self.activePage = options.newCurrentPage;
@@ -274,7 +267,8 @@ export class TestSurveyTabViewModel extends Base {
         model: new ListModel(
           deviceSelectorItems,
           (item: any) => {
-            this.device = item.id;
+            this.simulator.device = item.id;
+            this.orientationSelectorAction.visible = simulatorDevices[this.simulator.device].deviceType != "desktop";
             devicePopupModel.toggleVisibility();
           },
           true
@@ -284,9 +278,10 @@ export class TestSurveyTabViewModel extends Base {
       "right"
     );
     const actions: Array<Action> = [];
+    const pageActions: Array<Action> = [];
     this.deviceSelectorAction = new Action({
       id: "deviceSelector",
-      css: "sv-action--first sv-action-bar-item--secondary",
+      css: "sv-action-bar-item--secondary",
       iconName: "icon-change_16x16",
       title:
         simulatorDevices[this.simulator.device].title ||
@@ -299,6 +294,21 @@ export class TestSurveyTabViewModel extends Base {
       popupModel: devicePopupModel
     });
     actions.push(this.deviceSelectorAction);
+
+    this.orientationSelectorAction = new Action({
+      id: "orientationSelector",
+      css: "sv-action--first sv-action-bar-item--secondary",
+      title:
+        this.getLocString("pe.landscapeOrientation"),
+      //simulatorDevices[this.simulator.device].title ||
+      //this.getLocString("pe.simulator"),
+      visible: false,
+      action: () => {
+        this.simulator.landscape = !this.simulator.landscape;
+        this.orientationSelectorAction.title = this.getLocString(this.simulator.landscape?"pe.landscapeOrientation":"pe.portraitOrientation");
+      }
+    });
+    actions.push(this.orientationSelectorAction);
 
     const pageList: ListModel = new ListModel(
       this.pageListItems,
@@ -337,7 +347,7 @@ export class TestSurveyTabViewModel extends Base {
       title: "",
       action: () => setNearPage(false)
     });
-    actions.push(this.prevPageAction);
+    pageActions.push(this.prevPageAction);
 
     this.selectPageAction = new Action({
       id: "pageSelector",
@@ -358,7 +368,7 @@ export class TestSurveyTabViewModel extends Base {
         this.pagePopupModel.toggleVisibility();
       }
     });
-    actions.push(this.selectPageAction);
+    pageActions.push(this.selectPageAction);
 
     this.nextPageAction = new Action({
       id: "nextPage",
@@ -372,12 +382,11 @@ export class TestSurveyTabViewModel extends Base {
       title: "",
       action: () => setNearPage(true)
     });
-    actions.push(this.nextPageAction);
+    pageActions.push(this.nextPageAction);
 
     this.languageSelectorAction = new Action({
       id: "languageSelector",
       css: "sv-action--last sv-action-bar-item--secondary",
-      iconName: "icon-change_16x16",
       title: editorLocalization.getLocaleName(this.activeLanguage),
       visible: this.showDefaultLanguageInTestSurveyTab,
       component: "sv-action-bar-item-dropdown",
@@ -391,8 +400,8 @@ export class TestSurveyTabViewModel extends Base {
     this.invisibleToggleAction = new Action({
       id: "showInvisible",
       css: this.showInvisibleElements
-        ? "sv-action--last sv-action-bar-item--secondary"
-        : "sv-action--last",
+        ? "sv-action-bar-item--secondary"
+        : "",
       visible: this.isRunning,
       title: this.getLocString("ts.showInvisibleElements"),
       iconName: this.showInvisibleElements
@@ -401,8 +410,8 @@ export class TestSurveyTabViewModel extends Base {
       action: () => {
         this.showInvisibleElements = !this.showInvisibleElements;
         this.invisibleToggleAction.css = this.showInvisibleElements
-          ? "sv-action--last sv-action-bar-item--secondary"
-          : "sv-action--last";
+          ? "sv-action-bar-item--secondary"
+          : "";
         this.invisibleToggleAction.iconName = this.showInvisibleElements
           ? "icon-switchactive_16x16"
           : "icon-switchinactive_16x16";
@@ -412,7 +421,7 @@ export class TestSurveyTabViewModel extends Base {
 
     this.testAgainAction = new Action({
       id: "testSurveyAgain",
-      css: "sv-action--last",
+      css: "",
       visible: !this.isRunning,
       title: this.testSurveyAgainText,
       action: () => {
@@ -422,6 +431,8 @@ export class TestSurveyTabViewModel extends Base {
     actions.push(this.testAgainAction);
 
     this.toolbar.actions = actions;
+    this.pages.actions = pageActions;
+    this.pages.containerCss = "sv-action-bar--pages";
   }
   private setActivePageItem(page: PageModel, val: boolean) {
     const item: IAction = this.getPageItemByPage(page);
