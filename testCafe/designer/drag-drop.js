@@ -1,17 +1,17 @@
 import {
-    url,
-    getPagesLength,
-    getQuestionsLength,
-    setJSON,
-    getJSON,
-    getQuestionNameByIndex,
-    getItemValueByIndex
+  url,
+  getPagesLength,
+  getQuestionsLength,
+  setJSON,
+  getJSON,
+  getQuestionNameByIndex,
+  getItemValueByIndex,
 } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-    await t.maximizeWindow();
+  await t.maximizeWindow();
 });
 
 test("Drag Drop Toolbox Item and Empty Page", async (t) => {
@@ -417,4 +417,148 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
 
     let pageName = await getPageNameByIndex(0);
     await t.expect(pageName).eql(expectedPageName);
+});
+
+test("Drag Drop to Panel Dynamic Question", async (t) => {
+  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "paneldynamic",
+            name: "paneldynamic1",
+          },
+        ],
+      },
+    ],
+  };
+  await setJSON(json);
+
+  const DynamicPanel = Selector(`[data-sv-drop-target-survey-element="paneldynamic1"]`);
+  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+
+  await t.hover(RatingToolboxItem, { speed: 0.5 });
+  await t.dragToElement(RatingToolboxItem, DynamicPanel, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: -250,
+    speed: 0.5,
+  });
+
+  await t.hover(RatingToolboxItem, { speed: 0.5 });
+  await t.dragToElement(RatingToolboxItem, DynamicPanel, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: 350,
+    speed: 0.5,
+  });
+
+  await t.hover(RatingToolboxItem, { speed: 0.5 });
+  await t.dragToElement(RatingToolboxItem, DynamicPanel, {
+    offsetX: 5,
+    offsetY: 5,
+    speed: 0.5,
+  });
+
+  const Question3 = Selector(
+    `[data-sv-drop-target-survey-element="question3"]`
+  );
+
+  await t.hover(RatingToolboxItem, { speed: 0.5 });
+  await t.dragToElement(RatingToolboxItem, Question3, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: -120,
+    speed: 0.5,
+  });
+
+  await t.hover(RatingToolboxItem, { speed: 0.5 });
+  await t.dragToElement(RatingToolboxItem, Question3, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: 120,
+    speed: 0.5,
+  });
+
+  let expectedJson = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "rating", name: "question1" },
+          {
+            type: "paneldynamic",
+            name: "paneldynamic1",
+            templateElements: [
+              { type: "rating", name: "question4" },
+              { type: "rating", name: "question3" },
+              { type: "rating", name: "question5" },
+            ],
+          },
+          { type: "rating", name: "question2" },
+        ],
+      },
+    ],
+  };
+
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});
+
+test("Drag Drop from Panel Dynamic Question", async (t) => {
+  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "paneldynamic",
+            name: "paneldynamic1",
+            templateElements: [
+              { type: "rating", name: "rating1" },
+              { type: "rating", name: "rating2" },
+            ],
+          },
+          { type: "rating", name: "rating3" },
+        ],
+      },
+    ],
+  };
+  await setJSON(json);
+
+  const Rating2 = Selector(`[data-sv-drop-target-survey-element="rating2"]`);
+  const DragZoneRating2 = Rating2.find(".svc-question__drag-element");
+  const Rating3 = Selector(`[data-sv-drop-target-survey-element="rating3"]`);
+
+  await t.click(Rating2, { speed: 0.5 });
+  await t.hover(DragZoneRating2, { speed: 0.5 });
+  await t.dragToElement(DragZoneRating2, Rating3, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: -50,
+    speed: 0.5,
+  });
+
+  let expectedJson = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "paneldynamic",
+            name: "paneldynamic1",
+            templateElements: [{ type: "rating", name: "rating1" }],
+          },
+          { type: "rating", name: "rating3" },
+          { type: "rating", name: "rating2" },
+        ],
+      },
+    ],
+  };
+
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
 });
