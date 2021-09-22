@@ -4,7 +4,7 @@ import {
 } from "./definition";
 import * as Survey from "survey-core";
 import { SurveyHelper } from "../survey-helper";
-import { ISurveyCreatorOptions } from "../settings";
+import { ISurveyCreatorOptions, settings } from "../settings";
 
 export class SurveyQuestionEditorPropertyDefinition {
   public property: Survey.JsonObjectProperty;
@@ -160,7 +160,7 @@ export class SurveyQuestionProperties {
       (isString || (!isString && defProperty.visible !== true))
     )
       return false;
-    var tabName = isTab ? defProperty.name : "general";
+    var tabName = isTab ? defProperty.name : settings.propertyGrid.generalTabName;
     if (!isTab && !isString && !!defProperty.tab) {
       tabName = defProperty.tab;
     }
@@ -218,8 +218,7 @@ export class SurveyQuestionProperties {
     }
     var res = new SurveyQuestionEditorTabDefinition();
     res.name = tabName;
-    //TODO make "general" constant
-    if (tabName == "general") {
+    if (tabName == settings.propertyGrid.generalTabName) {
       res.index = -1;
     }
     this.tabs.unshift(res);
@@ -259,7 +258,7 @@ export class SurveyQuestionProperties {
           while (i < classRes.properties.length) {
             var prop = classRes.properties[i];
             var propName = typeof prop == "string" ? prop : prop.name;
-            var tabName = "general";
+            var tabName = settings.propertyGrid.generalTabName;
             if (typeof prop !== "string" && !!prop.tab) {
               tabName = prop.tab;
             }
@@ -313,9 +312,9 @@ export class SurveyQuestionProperties {
       let tabName = !!propCategory
         ? propCategory
         : tabs.length == 0
-          ? "general"
+          ? settings.propertyGrid.generalTabName
           : "others";
-      if (tabNames.indexOf(tabName) < 0 && tabName != "general") {
+      if (tabNames.indexOf(tabName) < 0 && tabName != settings.propertyGrid.generalTabName) {
         tabNames.push(tabName);
         classRes.tabs.push({
           name: tabName,

@@ -2488,11 +2488,7 @@ export class CreatorBase<T extends SurveyModel>
   }
   public createNewItemValue(question: Survey.QuestionSelectBase) {
     const nextValue = this.getNextItemValue(question);
-    // TODO: Add question.createItemValue() function for QuestionSelectBase
-    if (question.getType() === "imagepicker") {
-      return new Survey.ImageItemValue(nextValue);
-    }
-    return new Survey.ItemValue(nextValue);
+    return question.createItemValue(nextValue);
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);

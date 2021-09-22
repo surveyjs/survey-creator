@@ -671,6 +671,7 @@ test("Create setValue trigger in logic", () => {
   setValueQuestion.value = 2;
 
   panel.getQuestionByName("logicTypeName").value = "trigger_complete";
+  expect(panel.getElementByName("elementPanel").isVisible).toBeFalsy();
   panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
   expect(getSetToNameQuestion().value).toBeFalsy();
   expect(getSetValueQuestion().value).toBeFalsy();
