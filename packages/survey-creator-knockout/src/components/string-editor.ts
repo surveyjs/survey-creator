@@ -4,8 +4,19 @@ const template = require("./string-editor.html");
 
 export class StringEditorViewModel {
   private baseModel: StringEditorViewModelBase;
-  constructor(public locString: any) {
+
+  getEditorElement = (element) => {
+    return element.nextSibling.getElementsByClassName(
+      "sv-string-editor"
+    )[0];
+  };
+
+  constructor(public locString: any, element: any) {
     this.baseModel = new StringEditorViewModelBase(locString);
+    this.focusEditor = () => {
+      this.getEditorElement(element).focus();
+    };
+    this.baseModel.blurEditor = () => this.getEditorElement(element).blur();
   }
   public get koHasHtml(): boolean {
     return this.locString.koHasHtml();
@@ -13,42 +24,27 @@ export class StringEditorViewModel {
   public get editValue(): string {
     return this.locString.koRenderedHtml();
   }
-  public set editValue(value) {
-    this.locString.searchElement = undefined;
-    this.locString.text = value;
-  }
   public get placeholder(): string {
     return this.baseModel.placeholder;
   }
   public onInput(sender: StringEditorViewModel, event: any): void {
-    if (sender.editValue == event.target.innerText) return;
-    sender.editValue = event.target.innerText;
+    this.baseModel.onInput(event);
+    this.locString.searchElement = undefined;
   }
   public onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent): boolean {
-    if (event.keyCode === 13) {
-      this.blurEditor();
-      this.done(sender, event);
-    }
-    if (event.keyCode === 27) {
-      this.blurEditor();
-      this.done(sender, event);
-    }
-    this.baseModel.checkConstraints(event);
-    return true;
+    return this.baseModel.onKeyDown(event);
   }
   public edit(model: StringEditorViewModel, _: MouseEvent): void {
     model.focusEditor && model.focusEditor();
   }
   public done(_: StringEditorViewModel, event: Event): void {
-    event.stopImmediatePropagation();
-    event.preventDefault();
+    this.baseModel.done(event);
   }
   public focusEditor: () => void;
-  public blurEditor: () => void;
   public dispose(): void {
     this.locString.onSearchChanged = undefined;
     this.focusEditor = undefined;
-    this.blurEditor = undefined;
+    this.baseModel.blurEditor = undefined;
   }
 }
 
@@ -103,17 +99,8 @@ ko.components.register(editableStringRendererName, {
     createViewModel: (params: any, componentInfo: any) => {
       const locStr = params.locString;
       applyLocStrOnSearchChanged(componentInfo.element, locStr);
-      const model = new StringEditorViewModel(locStr);
-      const getEditorElement = () => {
-        return componentInfo.element.nextSibling.getElementsByClassName(
-          "sv-string-editor"
-        )[0];
-      };
-      model.focusEditor = () => {
-        getEditorElement().focus();
-        // document.execCommand('selectAll', false, null);
-      };
-      model.blurEditor = () => getEditorElement().blur();
+
+      const model = new StringEditorViewModel(locStr, componentInfo.element);
       return model;
     },
   },

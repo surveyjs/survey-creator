@@ -6,6 +6,7 @@ import { StringEditorViewModelBase } from "@survey/creator";
 export class SurveyLocStringEditor extends React.Component<any, any> {
   private baseModel: StringEditorViewModelBase;
   private svStringEditorRef: React.RefObject<HTMLDivElement>;
+  private blurredByEscape:boolean = false;
   constructor(props: any) {
     super(props);
     this.state = { changed: 0 };
@@ -37,25 +38,13 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     return this.baseModel.placeholder;
   }
   private onInput = (event: any) => {
-    this.done(event);
-    if (this.locString.renderedHtml == event.target.innerText) return;
-    this.locString.text = event.target.innerText;
+    this.baseModel.onInput(event.nativeEvent);
   };
   private onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
-    if (event.keyCode === 13) {
-      this.svStringEditorRef.current.blur();
-      this.done(event);
-    }
-    if (event.keyCode === 27) {
-      this.svStringEditorRef.current.blur();
-      this.done(event);
-    }
-    this.baseModel.checkConstraints(event);
-    return true;
+    return this.baseModel.onKeyDown(event.nativeEvent);
   };
   private done = (event: any) => {
-    event.preventDefault();
-    event.stopPropagation();
+    this.baseModel.done(event);
     this.locString["__isEditing"] = false;
   };
   private edit = () => {
