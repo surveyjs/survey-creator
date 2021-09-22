@@ -309,7 +309,6 @@ test("Translation show All strings and property visibility", () => {
     options.canShow = options.property.name == "title";
   });
   var tabTranslation = new TabTranslationPlugin(creator);
-  tabTranslation.createActions([]);
   tabTranslation.activate();
   var translation = tabTranslation.model;
   expect(translation.root.locItems).toHaveLength(1);
@@ -328,7 +327,6 @@ test("Translation make translation observable", () => {
     ]
   };
   var tabTranslation = new TabTranslationPlugin(creator);
-  tabTranslation.createActions([]);
   tabTranslation.activate();
   var translation = tabTranslation.model;
   translation.makeObservable((obj: Base) => {
@@ -350,7 +348,6 @@ test("Translation update filterPageActiontitle after activated", () => {
     ]
   };
   let tabTranslationPlugin = new TabTranslationPlugin(creator);
-  tabTranslationPlugin.createActions([]);
   tabTranslationPlugin.activate();
   expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages");
 
@@ -410,8 +407,7 @@ test("StringsHeaderSurvey layout", () => {
 test("Actions mode small", () => {
   const creator = new CreatorTester();
   const tabTranslation = new TabTranslationPlugin(creator);
-  const actions = [];
-  tabTranslation.createActions(actions);
+  const actions = tabTranslation.createActions();
   expect(actions.length).toBe(5);
   expect(actions[0].mode).toBe("small");
   expect(actions[1].mode).toBe("small");

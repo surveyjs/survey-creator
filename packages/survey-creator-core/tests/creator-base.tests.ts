@@ -685,7 +685,7 @@ test("Show error on entering non-unique column value", (): any => {
   };
   var matrixQuestion = creator.survey.getAllQuestions()[0];
   creator.selectElement(matrixQuestion.columns[1]);
-  var questionName = creator.designerPropertyGrid.survey.getQuestionByName("name");
+  var questionName = creator.getTabPropertyGrid("designer").survey.getQuestionByName("name");
   expect(questionName.value).toEqual("col2");
   questionName.value = "col1";
   expect(questionName.errors).toHaveLength(1);
@@ -1316,7 +1316,7 @@ test("Modify property editor settings on event", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeHolderQuestion = creator.designerPropertyGrid.survey.getQuestionByName("placeHolder");
+  const placeHolderQuestion = creator.getTabPropertyGrid("designer").survey.getQuestionByName("placeHolder");
   expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeHolderQuestion.dataList).toHaveLength(2);
 });
@@ -1357,4 +1357,42 @@ test("creator.onActiveTabChanged", (): any => {
   expect(tabName).toEqual("logic");
   expect(plugin).toEqual(creator.getPlugin("logic"));
   expect(model).toEqual(plugin.model);
+});
+test("update tab content", (): any => {
+  const creator = new CreatorTester({
+    showTranslationTab: true,
+    showLogicTab: true,
+  });
+  const newJson = {
+    elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
+  };
+  const hasQ1 = (survey: SurveyModel) => !!survey.getQuestionByName("q1");
+  expect(creator.viewType).toEqual("designer");
+  expect(hasQ1(creator.survey)).toBeFalsy();
+  creator.JSON = newJson;
+  expect(hasQ1(creator.survey)).toBeTruthy();
+
+  creator.JSON = {};
+  creator.makeNewViewActive("test");
+  expect(creator.viewType).toEqual("test");
+  const testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  expect(hasQ1(testPlugin.model.survey)).toBeFalsy();
+  creator.JSON = newJson;
+  expect(hasQ1(testPlugin.model.survey)).toBeTruthy();
+
+  creator.JSON = {};
+  creator.makeNewViewActive("logic");
+  expect(creator.viewType).toEqual("logic");
+  const logicPlugin = <TabLogicPlugin>creator.getPlugin("logic");
+  expect(hasQ1(logicPlugin.model.survey)).toBeFalsy();
+  creator.JSON = newJson;
+  expect(hasQ1(logicPlugin.model.survey)).toBeTruthy();
+
+  creator.JSON = {};
+  creator.makeNewViewActive("translation");
+  expect(creator.viewType).toEqual("translation");
+  const translationPlugin = <TabLogicPlugin>creator.getPlugin("translation");
+  expect(hasQ1(translationPlugin.model.survey)).toBeFalsy();
+  creator.JSON = newJson;
+  expect(hasQ1(translationPlugin.model.survey)).toBeTruthy();
 });
