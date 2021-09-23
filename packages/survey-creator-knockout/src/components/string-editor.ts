@@ -31,6 +31,9 @@ export class StringEditorViewModel {
     this.baseModel.onInput(event);
     this.locString.searchElement = undefined;
   }
+  public onFocus(sender: StringEditorViewModel, event: any): void {
+    this.baseModel.onFocus(event);
+  }
   public onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent): boolean {
     return this.baseModel.onKeyDown(event);
   }

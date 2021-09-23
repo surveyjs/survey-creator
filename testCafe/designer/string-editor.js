@@ -34,7 +34,7 @@ test('Edit question title', async (t) => {
     await t.typeText(svStringSelector, prefix, { caretPos: 0 });
     await t.pressKey('esc');
     await t.expect(Selector('textarea[aria-label=Title]').value).
-        eql(title, 'Question title in property grid not modified');
+        eql('', 'Question title in property grid still empty');
 
     await t.click(svStringSelector);
     await t.typeText(svStringSelector, prefix, { caretPos: 0 });

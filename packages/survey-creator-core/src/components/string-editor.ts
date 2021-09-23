@@ -3,6 +3,7 @@ import { editorLocalization } from "../editorLocalization";
 
 export class StringEditorViewModelBase extends Base {
   private blurredByEscape:boolean = false;
+  private valueBeforeEdit: string;
   constructor(private locString: LocalizableString) {
     super();
   }
@@ -17,10 +18,14 @@ export class StringEditorViewModelBase extends Base {
 
   public blurEditor: () => void;
 
+  public onFocus(event: any): void {
+    this.valueBeforeEdit = event.target.innerText;
+  }
+
   public onInput(event: any): void {
     if(this.blurredByEscape) {
       this.blurredByEscape = false;
-      event.target.innerText = this.locString.text;
+      event.target.innerText = this.valueBeforeEdit;
       return;
     }
     if (this.locString.text == event.target.innerText) return;

@@ -12,6 +12,9 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     this.state = { changed: 0 };
     this.baseModel = new StringEditorViewModelBase(this.locString);
     this.svStringEditorRef = React.createRef();
+    this.baseModel.blurEditor = ()=>{
+      this.svStringEditorRef.current.blur();
+    };
   }
   private get locString(): LocalizableString {
     return this.props.locStr;
@@ -39,6 +42,9 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   }
   private onInput = (event: any) => {
     this.baseModel.onInput(event.nativeEvent);
+  };
+  private onFocus = (event: any) => {
+    this.baseModel.onFocus(event.nativeEvent);
   };
   private onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
     return this.baseModel.onKeyDown(event.nativeEvent);
@@ -69,6 +75,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           // style={this.style}
           dangerouslySetInnerHTML={htmlValue}
           onBlur={this.onInput}
+          onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onClick={this.edit}
         />
@@ -83,6 +90,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           suppressContentEditableWarning={true}
           // style={this.style}
           onBlur={this.onInput}
+          onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onClick={this.edit}
         >
