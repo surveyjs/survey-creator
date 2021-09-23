@@ -7,10 +7,11 @@
 .svc-matrix-cell--selected {
   position: absolute;
   border: 2px solid $secondary;
-  top: calcSize(-2);
-  left: calcSize(-0.25);
-  right: calcSize(-0.25);
-  bottom: calcSize(-2);
+  border-radius: calcSize(0.5);
+  top: calcSize(-1);
+  left: calcSize(0);
+  right: calcSize(0);
+  bottom: calcSize(-1);
   display: none;
   &.svc-visible {
     display: block;
@@ -19,6 +20,7 @@
 
 .svc-hovered > .svc-matrix-cell--selected:not(.svc-visible) {
   border: 1px solid $secondary;
+  border-radius: calcSize(0.5);
   display: block;
 }
 

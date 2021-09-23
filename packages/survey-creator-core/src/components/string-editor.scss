@@ -68,7 +68,8 @@
 
 .svc-string-editor:hover:not(:focus-within) {
   .svc-string-editor__button--edit {
-    display: inline-block;
+    //display: inline-block;
+    display: none;
   }
 }
 
@@ -79,7 +80,8 @@
     top: calcSize(-0.5);
     bottom: calcSize(-0.5);
     left: calcSize(-0.5);
-    right: calcSize(-4.5);
+    //right: calcSize(-4.5); // if need pencil icon
+    right: calcSize(-0.5);
     border: none;
     background-color: $primary-light;
   }
@@ -98,23 +100,26 @@
   }
 }
   
-.sd-rating{
-  .sd-rating__item:focus-within{
+.sd-rating {
+  .sd-rating__item:focus-within {
     border: calcSize(0.25) solid $primary;
-  }
-  .svc-string-editor:hover {
-    .svc-string-editor__border {
-      right: calcSize(-0.5); // remove if we still need pencil icon
-    }
   }
   .svc-string-editor:focus-within {
     .svc-string-editor__border {
       display: none;
     }
   }
-  .svc-string-editor:hover:not(:focus-within) {
-    .svc-string-editor__button--edit {
-      display: none; // remove if we still need pencil icon
+}
+.sd-table__cell--header {
+  .svc-matrix-cell:focus-within {
+    .svc-matrix-cell--selected {
+      border: calcSize(0.25) solid $primary;
+      border-radius: calcSize(0.5);
+    }
+  }
+  .svc-string-editor:focus-within {
+    .svc-string-editor__border {
+      display: none;
     }
   }
 }
