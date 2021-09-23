@@ -1578,14 +1578,16 @@ export class SurveyCreator
    * @param creator creator instance
    */
   public onKeyDownHandler(e, creator) {
-    const evtobj = window.event ? event : e;
+    const evtobj: KeyboardEvent = window.event ? event : e;
     const commands = creator.commands;
     let command, hotKey;
     Object.keys(creator.commands || {}).forEach((key) => {
       command = commands[key];
-      hotKey = command.hotKey;
+      hotKey = evtobj.metaKey ? command.macOsHotkey : command.hotKey;
       if (!hotKey) return;
-      if (hotKey.ctrlKey !== evtobj.ctrlKey) return;
+
+      if (!!hotKey.ctrlKey !== evtobj.ctrlKey) return;
+      if (!!hotKey.shiftKey !== evtobj.shiftKey) return;
       if (hotKey.keyCode !== evtobj.keyCode) return;
 
       creator.execute(command);
