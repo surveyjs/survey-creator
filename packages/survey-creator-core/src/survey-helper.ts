@@ -142,7 +142,7 @@ export class SurveyHelper {
     if (!scrollableDiv) return;
     var height = scrollableDiv.clientHeight;
     if (rect.top < scrollableDiv.offsetTop) {
-      el.scrollIntoView();
+      el.scrollIntoView(true);
     } else {
       let offsetTop = height + scrollableDiv.offsetTop;
       if (rect.bottom > offsetTop && rect.height < height) {
