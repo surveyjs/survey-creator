@@ -101,21 +101,19 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     return (
       <span className="svc-string-editor">
         <span className="svc-string-editor__content">
-          <div className="svc-string-editor__border"></div>
-          {control}
-          <div className="svc-string-editor__controls">
+          <div className="svc-string-editor__border"
+            onClick={this.edit}
+          >
             <SvgIcon
               className="svc-string-editor__button svc-string-editor__button--edit"
-              onClick={this.edit}
               size={16}
               iconName={"icon-pencil"}
             ></SvgIcon>
-            <SvgIcon
-              className="svc-string-editor__button svc-string-editor__button--done"
-              onClick={this.done}
-              size={22}
-              iconName={"icon-check"}
-            ></SvgIcon>
+
+          </div>
+          {control}
+          <div className="svc-string-editor__controls"
+            onClick={this.edit}>
           </div>
         </span>
       </span>

@@ -25,14 +25,11 @@
 .svc-string-editor__border {
   display: none;
   position: absolute;
-  top: calcSize(-1);
-  bottom: calcSize(-1);
-  left: calcSize(-1);
-  right: calcSize(-6);
-  border: calcSize(0.25) solid $primary;
-  border-radius: calcSize(0.5);
-  background-color: $background;
   z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  line-height: 0px;
 }
 
 .svc-string-editor__controls {
@@ -52,12 +49,6 @@
 .svc-string-editor__button {
   display: none;
   position: relative;
-  cursor: pointer;
-  use {
-    fill: $foreground-light;
-  }
-}
-.svc-string-editor__button:hover {
   use {
     fill: $primary;
   }
@@ -66,11 +57,7 @@
 .svc-string-editor__button--edit {
   height: calcSize(2);
   width: calcSize(2);
-  border-radius: 50%;
   padding: calcSize(1);
-  &:hover {
-    background-color: $primary-light;
-  }
   .sv-svg-icon {
     vertical-align: bottom;
   }
@@ -85,19 +72,33 @@
   }
 }
 
-.svc-string-editor__button--done {
-  margin-top: calc(50% - 11px);
+.svc-string-editor:hover {
+  color: $foreground;
+  .svc-string-editor__border {
+    display: flex;
+    top: calcSize(-0.5);
+    bottom: calcSize(-0.5);
+    left: calcSize(-0.5);
+    right: calcSize(-4.5);
+    border: none;
+    background-color: $primary-light;
+  }
 }
-
 .svc-string-editor:focus-within {
   color: $foreground;
-  .svc-string-editor__button--done {
-    display: inline-block;
-  }
   .svc-string-editor__border {
-    display: block;
+    display: flex;
+    top: calcSize(-1);
+    bottom: calcSize(-1);
+    left: calcSize(-1);
+    right: calcSize(-1);
+    border: calcSize(0.25) solid $primary;
+    border-radius: calcSize(0.5);
+    background-color: $background;
   }
 }
+  
+
 
 // .sv-question__header,
 // .sv-title {
