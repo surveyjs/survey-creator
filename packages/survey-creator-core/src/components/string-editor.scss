@@ -98,7 +98,26 @@
   }
 }
   
-
+.sd-rating{
+  .sd-rating__item:focus-within{
+    border: calcSize(0.25) solid $primary;
+  }
+  .svc-string-editor:hover {
+    .svc-string-editor__border {
+      right: calcSize(-0.5); // remove if we still need pencil icon
+    }
+  }
+  .svc-string-editor:focus-within {
+    .svc-string-editor__border {
+      display: none;
+    }
+  }
+  .svc-string-editor:hover:not(:focus-within) {
+    .svc-string-editor__button--edit {
+      display: none; // remove if we still need pencil icon
+    }
+  }
+}
 
 // .sv-question__header,
 // .sv-title {
