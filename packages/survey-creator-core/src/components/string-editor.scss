@@ -8,7 +8,7 @@
     outline: none;
     white-space: normal;
     word-break: break-word;
-    z-index: 2;
+    z-index: 12;
     &[aria-placeholder]:empty:before {
       content: attr(aria-placeholder);
       color: $foreground-light;
@@ -19,7 +19,7 @@
 .svc-string-editor__content {
   display: inline-block;
   position: relative;
-  z-index: 0;
+  z-index: 10;
 }
 
 .svc-string-editor__border {
@@ -32,16 +32,21 @@
   border: calcSize(0.25) solid $primary;
   border-radius: calcSize(0.5);
   background-color: $background;
-  z-index: 1;
+  z-index: 11;
 }
 
 .svc-string-editor__controls {
   position: absolute;
   left: 100%;
   height: 100%;
+  width: calcSize(2);
   top: 0;
   padding-left: calcSize(2);
-  z-index: 2;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0px;
 }
 
 .svc-string-editor__button {
@@ -59,13 +64,10 @@
 }
 
 .svc-string-editor__button--edit {
-  margin-top: calcSize(-2);
-  margin-left: calcSize(-0.5);
   height: calcSize(2);
   width: calcSize(2);
   border-radius: 50%;
   padding: calcSize(1);
-  line-height: calcSize(2);
   &:hover {
     background-color: $primary-light;
   }

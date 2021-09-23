@@ -6,11 +6,15 @@ import { StringEditorViewModelBase } from "@survey/creator";
 export class SurveyLocStringEditor extends React.Component<any, any> {
   private baseModel: StringEditorViewModelBase;
   private svStringEditorRef: React.RefObject<HTMLDivElement>;
+  private blurredByEscape:boolean = false;
   constructor(props: any) {
     super(props);
     this.state = { changed: 0 };
     this.baseModel = new StringEditorViewModelBase(this.locString);
     this.svStringEditorRef = React.createRef();
+    this.baseModel.blurEditor = ()=>{
+      this.svStringEditorRef.current.blur();
+    };
   }
   private get locString(): LocalizableString {
     return this.props.locStr;
@@ -37,25 +41,16 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     return this.baseModel.placeholder;
   }
   private onInput = (event: any) => {
-    this.done(event);
-    if (this.locString.renderedHtml == event.target.innerText) return;
-    this.locString.text = event.target.innerText;
+    this.baseModel.onInput(event.nativeEvent);
+  };
+  private onFocus = (event: any) => {
+    this.baseModel.onFocus(event.nativeEvent);
   };
   private onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
-    if (event.keyCode === 13) {
-      this.svStringEditorRef.current.blur();
-      this.done(event);
-    }
-    if (event.keyCode === 27) {
-      this.svStringEditorRef.current.blur();
-      this.done(event);
-    }
-    this.baseModel.checkConstraints(event);
-    return true;
+    return this.baseModel.onKeyDown(event.nativeEvent);
   };
   private done = (event: any) => {
-    event.preventDefault();
-    event.stopPropagation();
+    this.baseModel.done(event);
     this.locString["__isEditing"] = false;
   };
   private edit = () => {
@@ -80,6 +75,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           // style={this.style}
           dangerouslySetInnerHTML={htmlValue}
           onBlur={this.onInput}
+          onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onClick={this.edit}
         />
@@ -94,6 +90,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           suppressContentEditableWarning={true}
           // style={this.style}
           onBlur={this.onInput}
+          onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onClick={this.edit}
         >

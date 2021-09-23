@@ -20,6 +20,7 @@ export interface ISurveyLogicType {
   propertyName: string;
   dynamicPropertyName?: string;
   dependedOnPropertyName?: string;
+  isInvisible?: boolean;
   showInUI?: boolean;
   showIf?: (survey: SurveyModel) => boolean;
   getCollection?: (survey: SurveyModel) => Array<Base>;
@@ -56,6 +57,9 @@ export class SurveyLogicType {
   }
   public get propertyName(): string {
     return this.logicType.propertyName;
+  }
+  public get hasVisibleElements(): boolean {
+    return this.logicType.isInvisible !== true;
   }
   public get dynamicPropertyName(): string {
     return this.logicType.dynamicPropertyName;
@@ -241,6 +245,7 @@ export class SurveyLogicTypes {
       baseClass: "completetrigger",
       propertyName: "expression",
       isUniqueItem: true,
+      isInvisible: true
     },
     {
       name: "trigger_setvalue",
