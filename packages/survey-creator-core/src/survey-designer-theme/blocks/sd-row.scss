@@ -4,6 +4,9 @@
   width: 100%;
   box-sizing: border-box;
   margin-top: 16px;
+}
+
+:not(.svc-row--ghost)>.sd-row {
   min-height: 50px;
 }
 
