@@ -768,6 +768,8 @@ export var enStrings = {
     noneText: "noneText",
 
     text: "text",
+    multiSelect: "Multi select",
+    showLabel: "Show label",
   },
 };
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
