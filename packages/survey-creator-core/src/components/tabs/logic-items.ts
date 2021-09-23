@@ -10,6 +10,7 @@ import {
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
 import { SurveyLogicType, getLogicString } from "./logic-types";
+import { settings } from "../../settings";
 
 export class SurveyLogicAction {
   private surveyValue: SurveyModel;
@@ -150,9 +151,9 @@ export class SurveyLogicItem {
   }
   public get title(): string {
     var res = this.getExpressionAsDisplayText();
-    //TODO 50 symbols
-    if (!!res && res.length > 50) {
-      res = res.substr(1, 50) + "...";
+    const maxChars = settings.logic.logicItemTitleMaxChars;
+    if (!!res && res.length > maxChars) {
+      res = res.substr(1, maxChars) + "...";
     }
     return res;
   }

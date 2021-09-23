@@ -12,7 +12,7 @@
     <!-- /ko -->
     <!-- ko foreach: survey.pages -->
     <svc-page
-      data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name }"
+      data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name, 'data-sv-drop-target-page': $data.name }"
       params="survey: $parent.survey, page: $data, creator: $parent.creator"
     ></svc-page>
     <!-- /ko -->

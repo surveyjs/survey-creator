@@ -1286,33 +1286,6 @@ test("options.onGetErrorTextOnValidationCallback", () => {
   expect(nameQuestion.errors).toHaveLength(0);
   expect(question.name).toEqual("qq2");
 });
-test("options.onPropertyValueChanged", () => {
-  var options = new EmptySurveyCreatorOptions();
-  var changedValue = "";
-  options.onSurveyElementPropertyValueChanged = (
-    // options.onPropertyValueChanged = (
-    property: JsonObjectProperty,
-    obj: any,
-    newValue: any
-  ) => {
-    if (property.name != "name") return;
-    if (obj.getType() == "dropdown") {
-      changedValue = newValue;
-    }
-  };
-
-  var question = new QuestionDropdownModel("q1");
-  question.choices = [1, 2, 3];
-  var propertyGrid = new PropertyGridModelTester(question, options);
-  var nameQuestion = <QuestionMatrixDynamicModel>(
-    propertyGrid.survey.getQuestionByName("name")
-  );
-  nameQuestion.value = "q2";
-  expect(changedValue).toEqual("q2");
-  nameQuestion.value = "qq22";
-  expect(changedValue).toEqual("qq22");
-});
-
 test("options.onValueChangingCallback in matrix", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onValueChangingCallback = (options: any) => {
@@ -1363,33 +1336,6 @@ test("options.onGetErrorTextOnValidationCallback in matrix", () => {
     "col12";
   expect(question.columns[0].name).toEqual("col12");
 });
-test("options.onPropertyValueChanged in matrix", () => {
-  var options = new EmptySurveyCreatorOptions();
-  var changedValue = "";
-  options.onSurveyElementPropertyValueChanged = (
-    // options.onPropertyValueChanged = (
-    property: JsonObjectProperty,
-    obj: any,
-    newValue: any
-  ) => {
-    if (property.name != "name") return;
-    if (obj.getType() == "matrixdropdowncolumn") {
-      changedValue = newValue;
-    }
-  };
-  var question = new QuestionMatrixDynamicModel("q1");
-  question.addColumn("col1");
-  question.addColumn("col2");
-  question.addColumn("col3");
-  var propertyGrid = new PropertyGridModelTester(question, options);
-  var columnsQuestion = <QuestionMatrixDynamicModel>(
-    propertyGrid.survey.getQuestionByName("columns")
-  );
-  columnsQuestion.visibleRows[0].getQuestionByColumnName("name").value =
-    "col1234";
-  expect(changedValue).toEqual("col1234");
-});
-
 test("QuestionLinekValueModel test", () => {
   const question = new QuestionLinkValueModel("q1");
   const checkQuestion = new QuestionCheckboxModel("q2");
@@ -2171,4 +2117,21 @@ test("Different property editors for trigger value in panel", () => {
   question = panel.getQuestionByName("setValue");
   expect(question).toBeTruthy();
   expect(question.getType()).toEqual("dropdown");
+});
+test("AllowRowsDragDrop and property readOnly", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  let propertyGrid = new PropertyGridModelTester(question);
+  let choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion).toBeTruthy();
+  expect(choicesQuestion.allowRowsDragAndDrop).toBeTruthy();
+  Serializer.findProperty("selectbase", "choices").readOnly = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.allowRowsDragAndDrop).toBeFalsy();
+  Serializer.findProperty("selectbase", "choices").readOnly = false;
 });

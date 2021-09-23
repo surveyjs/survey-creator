@@ -94,6 +94,14 @@
 }
 
 .svd-simulator-main {
+  min-height: 100%;
+  &.svd-simulator-main--frame{
+    display: flex;
+    align-items: center;
+  }
+  &:not(.svd-simulator-main--frame){
+    background-color: white;
+  }
 }
 
 .svd-simulator-content {

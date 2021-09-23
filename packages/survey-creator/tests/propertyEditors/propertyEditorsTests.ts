@@ -3252,7 +3252,6 @@ QUnit.test(
   }
 );
 
-
 QUnit.test("We should not have 'Others' category in our objects",
   function (assert) {
     const survey = new Survey.Survey();

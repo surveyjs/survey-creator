@@ -1,14 +1,15 @@
 import { Base } from "survey-core";
 import { Survey, SurveyElementBase } from "survey-react-ui";
-import { SurveySimulatorComponent } from "@survey/creator";
+import { SurveySimulatorModel } from "@survey/creator";
 import React from "react";
 
 export class SurveySimulator extends SurveyElementBase<any, any> {
-  private model: SurveySimulatorComponent;
+  private get model(): SurveySimulatorModel {
+    return this.props.model;
+  }
 
   constructor(props: any) {
     super(props);
-    this.model = new SurveySimulatorComponent(this.props.options);
   }
   protected getStateElement(): Base {
     return this.model;
@@ -20,7 +21,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     }
     if (this.model.hasFrame) {
       return (
-        <div className="svd-simulator-main">
+        <div className={"svd-simulator-main " + this.model.simulatorMainCssClass}>
           <div
             className="svd-simulator-wrapper"
             style={{

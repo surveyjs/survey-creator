@@ -3,5 +3,5 @@
 // initStoryshots({ framework: "knockout" });
 
 test("default", () => {
-    expect(true).toEqual(true);
+  expect(true).toEqual(true);
 });

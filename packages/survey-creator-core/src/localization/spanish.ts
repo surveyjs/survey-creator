@@ -15,7 +15,7 @@ var spanishTranslation = {
     deletePanel: "Eliminar panel",
     deleteQuestion: "Eliminar pregunta",
     convertTo: "Convertir a",
-    drag: "Elemento de arrastre"
+    drag: "Elemento de arrastre",
   },
   qt: {
     default: "Defecto",
@@ -39,7 +39,7 @@ var spanishTranslation = {
     boolean: "Booleano",
     expression: "Expresión (solo lectura)",
     signaturepad: "Almohadilla de firma",
-    flowpanel: "Panel de flujo"
+    flowpanel: "Panel de flujo",
   },
   ed: {
     defaultLocale: "Predeterminado ({0})",
@@ -93,15 +93,15 @@ var spanishTranslation = {
     editSelObject: "Editar objeto seleccionado",
     correctJSON: "Por favor, corrija JSON",
     surveyResults: "Resultado de la encuesta:",
-    surveyResultsTable: "Como mesa",
+    surveyResultsTable: "Como Tabla",
     surveyResultsJson: "Como JSON",
     resultsTitle: "Título de la pregunta",
     resultsName: "Nombre de la pregunta",
     resultsValue: "Valor de respuesta",
     resultsDisplayValue: "Valor de visualización",
     modified: "Modificada",
-    saving: "Ahorro",
-    saved: "Salvado",
+    saving: "Guardando",
+    saved: "Guardado",
     propertyEditorError: "error:",
     saveError: "¡Error!El contenido del editor no se ha guardado",
     translationAddLanguage: "Seleccione el idioma para traducir",
@@ -132,31 +132,31 @@ var spanishTranslation = {
       trigger_copyvalueName: "Copiar valor de la pregunta",
       trigger_skipName: "Saltar a la pregunta",
       trigger_runExpressionName: "Ejecutar la expresión personalizada",
-      completedHtmlOnConditionName: "Personalizado 'gracias página' texto",
+      completedHtmlOnConditionName: "Texto personalizado 'Página de agradecimiento'",
       page_visibilityDescription:
         "Haga que la página sea visible cuando la expresión lógica vuelva verdadera. De lo contrario, manténgalo invisible",
       panel_visibilityDescription:
         "Haga que el panel sea visible cuando la expresión lógica vuelva verdadera. De lo contrario, manténgalo invisible",
       panel_enableDescription:
-        "Haga el panel, y todos los elementos dentro de él, habiliten cuando la expresión lógica devuelve verdadera.De lo contrario, manténgalos discapacitados",
+        "Haga el panel, y todos los elementos dentro de él, habiliten cuando la expresión lógica devuelve verdadero. De lo contrario, manténgalos deshabilitados",
       question_visibilityDescription:
-        "Haz que la pregunta sea visible cuando la expresión lógica se devuelve VERDADERA.De lo contrario, manténgalo invisible",
+        "Haz que la pregunta sea visible cuando la expresión lógica se devuelve 'verdadero'. De lo contrario, se mantiene invisible",
       question_enableDescription:
-        "Haz que la pregunta permitiera habilitar cuando la expresión lógica devuelve verdadera.De lo contrario, manténgalo deshabilitado",
+        "Haz que la pregunta se habilite cuando la expresión lógica devuelve 'verdadero'. De lo contrario, se mantiene deshabilitado",
       question_requireDescription:
-        "La pregunta se requiere cuando la expresión lógica se devuelve VERDADERA",
+        "La pregunta se requiere cuando la expresión lógica devuelve 'verdadero'",
       trigger_completeDescription:
-        "Cuando la expresión lógica devuelve verdadera, entonces la encuesta se completa y un usuario final vea la 'Página de gracias'",
+        "Cuando la expresión lógica devuelve 'verdadero', la encuesta se completa y el usuario final ve la 'página de agradecimiento'",
       trigger_setvalueDescription:
-        "Cuando se cambian los valores de preguntas, que se usan en la expresión lógica, se cambian y la expresión lógica devuelve VERDADERO, entonces el valor se establece en la pregunta seleccionada",
+        "Cuando se cambian los valores de las preguntas, que se usan en la expresión lógica, se cambian y la expresión lógica devuelve 'verdadero', entonces el valor se establece en la pregunta seleccionada",
       trigger_copyvalueDescription:
-        "Cuando se cambian los valores de las preguntas, que se usan en la expresión lógica, se cambian y la expresión lógica devuelve verdadera, entonces el valor de una pregunta seleccionada se copia a otra pregunta seleccionada",
+        "Cuando se cambian los valores de las preguntas, que se usan en la expresión lógica, se cambian y la expresión lógica devuelve 'verdadero', entonces el valor de una pregunta seleccionada se copia a otra pregunta seleccionada",
       trigger_skipDescription:
-        "Cuando la expresión lógica devuelve verdadera, la encuesta se salte a / enfoca la pregunta seleccionada",
+        "Cuando la expresión lógica devuelve 'verdadero', la encuesta salta a la pregunta seleccionada",
       trigger_runExpressionDescription:
-        "Cuando la expresión lógica devuelve verdadera, entonces se realiza la expresión personalizada.Es posible que opcionalmente establezca este resultado de expresión en la pregunta seleccionada",
+        "Cuando la expresión lógica devuelve 'verdadero', entonces se realiza la expresión personalizada. Es posible que opcionalmente establezca este resultado de expresión en la pregunta seleccionada",
       completedHtmlOnConditionDescription:
-        "Si la expresión lógica devuelve verdadera, entonces el texto predeterminado para la 'página de agradecimiento' se cambia al uno dado",
+        "Si la expresión lógica devuelve 'verdadero', entonces el texto predeterminado para la 'página de agradecimiento' se cambia por el texto dado",
       itemExpressionText: "Cuando la expresión: '{0}' devuelve VERDADERO:",
       page_visibilityText: "Hacer la página {0} Visible",
       panel_visibilityText: "Hacer panel {0} visible",
@@ -172,33 +172,33 @@ var spanishTranslation = {
       trigger_runExpressionText2: "y establecer su resultado en cuestión: {0}",
       completedHtmlOnConditionText:
         "Mostrar texto personalizado para la 'gracias página'",
-      conditions: "Condición (s)",
-      actions: "Comportamiento)",
-      expressionEditorTitle: "Definir la (s) condición (s)",
-      actionsEditorTitle: "Definir la (s) acción (s)",
+      conditions: "Condición(es)",
+      actions: "Comportamiento",
+      expressionEditorTitle: "Definir la(s) condición(es)",
+      actionsEditorTitle: "Definir la(s) acción(es)",
       deleteAction: "Eliminar acción",
       addNewAction: "Añadir nueva acción",
       selectedActionCaption: "Seleccione una acción para agregar ...",
       expressionInvalid:
-        "La expresión lógica está vacía o inválida.Por favor corríjalo",
+        "La expresión lógica está vacía o inválida. Por favor corríjalo",
       noActionError: "Por favor, agregue al menos una acción",
-      actionInvalid: "Por favor, solucione problemas en su (s) acción (s)",
+      actionInvalid: "Por favor, solucione problemas en su(s) acción(es)",
       expressionSetup: "",
-      actionsSetup: " "
-    }
+      actionsSetup: " ",
+    },
   },
   pel: {
-    isRequired: "¿Requerida?"
+    isRequired: "¿Requerida?",
   },
   pe: {
     apply: "Solicitar",
     ok: "ok",
-    save: "Ahorrar",
-    saveTooltip: "Ahorrar",
+    save: "Guardar",
+    saveTooltip: "Guardar",
     cancel: "Cancelar",
     reset: "Reiniciar",
     refresh: "Actualizar",
-    close: "Cerca",
+    close: "Cerrar",
     delete: "Borrar",
     add: "Agregar",
     addNew: "Añadir nuevo",
@@ -255,18 +255,19 @@ var spanishTranslation = {
     path: "Camino",
     valueName: "Nombre de valor",
     titleName: "Nombre del título",
+    allowEmptyResponse: "Permitir respuestas vacías",
     titlePlaceholder: "Título de entrada aquí",
     surveyTitlePlaceholder: "Título de la encuesta de entrada aquí",
     pageTitlePlaceholder: "Título de la página de entrada aquí",
     descriptionPlaceholder: "Ingrese una descripción",
     surveyDescriptionPlaceholder: "Ingrese una descripción de la encuesta",
     pageDescriptionPlaceholder: "Ingrese una descripción de la página",
-    hasOther: "Tiene otro artículo",
-    otherText: "Otro texto de artículo",
-    hasNone: "No tiene un artículo",
-    noneText: "Ninguno artículo de texto",
-    hasSelectAll: "Ha seleccionado todo el artículo",
-    selectAllText: "Seleccione todo el texto del artículo",
+    hasOther: "Tiene opción 'Otro'",
+    otherText: "Cambiar texto 'Otro'",
+    hasNone: "Tiene opcion 'Ninguno'",
+    noneText: "Cambiar texto 'Ninguno'",
+    hasSelectAll: "Tiene opción 'Selecionar todo'",
+    selectAllText: "Cambiar texto de 'Seleccionar todo'",
     choicesMin: "Valor mínimo para artículos generados automáticos",
     choicesMax: "Valor máximo para artículos generados automáticos",
     choicesStep: "La diferencia entre los artículos generados automáticos",
@@ -294,13 +295,14 @@ var spanishTranslation = {
     addRowLocation: "Añadir la ubicación del botón de la fila",
     addRowText: "Añadir texto de botón de fila",
     removeRowText: "Eliminar el texto del botón de fila",
-    rateMin: "Tasa mínima",
-    rateMax: "Tasa máxima",
-    rateStep: "Paso de tarifa",
-    minRateDescription: "Tasa mínima Descripción",
-    maxRateDescription: "Descripción de la tasa máxima",
+    rateMin: "Valor mínimo",
+    rateMax: "Valor máximo",
+    rateStep: "Rango de los valores",
+    minRateDescription: "Descripción del valor mínimo",
+    maxRateDescription: "Descripción del valor máximo",
     inputType: "Tipo de entrada",
-    optionsCaption: "Captación de opciones",
+    optionsCaption: "Cambie texto de 'Seleccione'",
+    showOptionsCaption: "Mostrar el título de las opciones",
     defaultValue: "Valor por defecto",
     cellsDefaultRow: "Textos de celdas predeterminados",
     surveyEditorTitle: "Editar configuración de encuesta",
@@ -316,7 +318,7 @@ var spanishTranslation = {
     expandCollapseTitle: "Expandir / Contraer título",
     locale: "Idioma predeterminado",
     simulator: "Elige dispositivo",
-    landscapeOrientation: "Apaisado",
+    landscapeOrientation: "Orientación horizontal ",
     mode: "Modo (editar / leer solamente)",
     clearInvisibleValues: "Claros valores invisibles",
     cookieName:
@@ -324,7 +326,7 @@ var spanishTranslation = {
     sendResultOnPageNext:
       "Enviar resultados de encuestas en la página Siguiente",
     storeOthersAsComment: "Almacenar 'Otros' valor en campo separado",
-    showPageTitles: "Mostrar títulos de página",
+    showPageTitles: "Mostrar descripción de la página",
     showPageNumbers: "Mostrar números de página",
     pagePrevText: "Página de texto del botón anterior",
     pageNextText: "Página Siguiente botón de texto",
@@ -369,8 +371,8 @@ var spanishTranslation = {
     maxValue: "Valor máximo",
     minLength: "Longitud mínima",
     allowDigits: "Permitir dígitos",
-    minCount: "Cuenta mínima",
-    maxCount: "Recuento máximo",
+    minCount: "Cantidad mínima",
+    maxCount: "Cantidad máxima",
     regex: "Expresión regular",
     totalText: "Texto total",
     totalType: "Tipo total",
@@ -386,7 +388,7 @@ var spanishTranslation = {
       left: "Izquierda",
       right: "Derecha",
       top: "En la parte superior",
-      bottom: "En la parte inferior"
+      bottom: "En la parte inferior",
     },
     tabs: {
       general: "General",
@@ -424,7 +426,7 @@ var spanishTranslation = {
       showOnCompleted: "Mostrar en completado",
       logo: "Logo en el título de la encuesta",
       slider: "Slider",
-      others: "Otras"
+      others: "Otras",
     },
     editProperty: "Editar propiedad '{0}'",
     items: "[Artículos: {0}]",
@@ -449,7 +451,7 @@ var spanishTranslation = {
     triggerGotoName: "Ir a la pregunta:",
     triggerIsVariable: "No coloque la variable en el resultado de la encuesta",
     triggerRunExpressionEmpty: "Por favor ingrese una expresión válida",
-    noFile: "Ningún archivo elegido"
+    noFile: "Ningún archivo elegido",
   },
   pv: {
     true: "cierto",
@@ -470,7 +472,7 @@ var spanishTranslation = {
     currency: "divisa",
     percent: "por ciento",
     firstExpanded: "Primer Expandido",
-    off: "apagada",
+    off: "no mostrar",
     onPanel: "en Panel",
     onSurvey: "en Encuesta",
     list: "lista",
@@ -479,8 +481,8 @@ var spanishTranslation = {
     progressTopBottom: "Progreso inferior/superior",
     horizontal: "horizontal",
     vertical: "vertical",
-    top: "cima",
-    bottom: "fondo",
+    top: "arriba",
+    bottom: "abajo",
     topBottom: "arriba y abajo",
     both: "ambas",
     left: "izquierda",
@@ -499,7 +501,7 @@ var spanishTranslation = {
     url: "URL",
     week: "semana",
     hidden: "oculta",
-    on: "en",
+    on: "mostrar",
     onPage: "en la página",
     edit: "editar",
     display: "mostrar",
@@ -515,7 +517,14 @@ var spanishTranslation = {
     questionPerPage: "Pregunta por página",
     noPreview: "sin vista previa",
     showAllQuestions: "Mostrar vista previa con todas las preguntas",
-    showAnsweredQuestions: "Mostrar vista previa con preguntas contestadas"
+    showAnsweredQuestions: "Mostrar vista previa con preguntas contestadas",
+    pages: "páginas",
+    questions: "preguntas",
+    requiredQuestions: "preguntas requeridas",
+    correctQuestions: "preguntas correctas",
+    buttons: "botones",
+    underInput: "debajo de la respuesta",
+    underTitle: "debajo del título"
   },
   op: {
     empty: "esta vacio",
@@ -531,7 +540,7 @@ var spanishTranslation = {
     greaterorequal: "Mayor o igual",
     lessorequal: "Menos o iguales",
     and: "y",
-    or: "o"
+    or: "o",
   },
   ew: {
     angular: "Usar la versión angular",
@@ -553,19 +562,19 @@ var spanishTranslation = {
     loadFromServer: "Encuesta de carga JSON del servidor",
     titleScript: "Scripts y estilos",
     titleHtml: "Html",
-    titleJavaScript: "Javascript"
+    titleJavaScript: "Javascript",
   },
   ts: {
     selectPage: "Seleccione la página para probarlo:",
-    showInvisibleElements: "Mostrar elementos invisibles"
+    showInvisibleElements: "Mostrar elementos invisibles",
   },
   validators: {
-    answercountvalidator: "contar contesto",
+    answercountvalidator: "Cantidad de respuestas",
     emailvalidator: "Email",
     expressionvalidator: "expresión",
     numericvalidator: "numérica",
     regexvalidator: "regex",
-    textvalidator: "texto"
+    textvalidator: "texto",
   },
   triggers: {
     completetrigger: "encuesta completa",
@@ -573,13 +582,13 @@ var spanishTranslation = {
     copyvaluetrigger: "Valor de copia",
     skiptrigger: "Saltar a la pregunta",
     runexpressiontrigger: "expresión de ejecución",
-    visibletrigger: "Cambiar visibilidad"
+    visibletrigger: "Cambiar visibilidad",
   },
   p: {
     name: "nombre",
     title: {
       name: "título",
-      title: "Dejarlo vacío, si es lo mismo que 'Name'"
+      title: "Dejarlo vacío, si es lo mismo que 'Name'",
     },
     navigationButtonsVisibility: "Navegación botones visibilidad",
     questionsOrder: "Orden",
@@ -587,23 +596,23 @@ var spanishTranslation = {
     visible: "visible",
     visibleIf: "visible si",
     questionTitleLocation: "Localización del título",
-    description: "descripción",
+    description: "Descripción",
     state: "Expresar",
     isRequired: "se requiere",
     requiredIf: "Requerido si",
-    indent: "sangrar",
+    indent: "Indentar",
     requiredErrorText: "Requerido",
     startWithNewLine: "Comenzar con nueva línea",
     innerIndent: "Sangría interior",
     page: "página",
-    width: "ancho",
+    width: "Ancho",
     commentText: "comentario",
     valueName: "Nombre del valor",
     enableIf: "Habilitar si",
     defaultValue: "valor por defecto",
     correctAnswer: "respuesta correcta",
     readOnly: "solo lectura",
-    validators: "validadores",
+    validators: "Validadores",
     titleLocation: "Localización del título",
     hasComment: "tiene comentario",
     hasOther: "otro",
@@ -677,7 +686,7 @@ var spanishTranslation = {
     minRateDescription: "MinRate Descripción",
     maxRateDescription: "MaxRate Descripción",
     inputType: "tipo de entrada",
-    size: "Talla",
+    size: "Tamaño",
     locale: "lugar",
     focusFirstQuestionAutomatic:
       "Colocarse automáticamente en la primera pregunta",
@@ -712,10 +721,10 @@ var spanishTranslation = {
     showTimerPanelMode: "Mostrar temporizador Modo",
     defaultPanelValue: "Valor por defecto Panel",
     defaultRowValue: "Valor por defecto Fila",
-    hasNone: "No tiene",
+    hasNone: "Tiene opción 'Ninguno'",
     noneText: "Texto ninguno",
-    text: "texto"
-  }
+    text: "texto",
+  },
 };
 
 editorLocalization.locales["es"] = spanishTranslation;

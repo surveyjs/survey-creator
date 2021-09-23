@@ -520,7 +520,7 @@ var spanishTranslation = {
     showAnsweredQuestions: "Mostrar vista previa con preguntas contestadas",
     pages: "páginas",
     questions: "preguntas",
-    requiredQuestions: "preguntas requeridas", 
+    requiredQuestions: "preguntas requeridas",
     correctQuestions: "preguntas correctas",
     buttons: "botones",
     underInput: "debajo de la respuesta",
