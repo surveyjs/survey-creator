@@ -40,7 +40,7 @@
   top: 0;
   padding-left: calcSize(2);
   z-index: 12;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   line-height: 0px;
@@ -111,7 +111,7 @@
   }
 }
 .sd-table__cell--header {
-  .svc-matrix-cell:focus-within {
+  .svc-matrix-cell:not(:focus):focus-within {
     .svc-matrix-cell--selected {
       border: calcSize(0.25) solid $primary;
       border-radius: calcSize(0.5);
@@ -131,6 +131,7 @@
     }
   }
 }
+
 survey-creator,
 .svc-creator,
 .sv-popup {

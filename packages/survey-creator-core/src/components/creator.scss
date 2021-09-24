@@ -106,7 +106,7 @@ survey-creator,
 .svc-creator,
 .sv-popup {
   .sv-action-bar-item:not(button):focus,
-  *:not(button):focus,
+  *:not(.svc-matrix-cell):not(button):focus,
   .svc-page__question-type-selector:focus {
     outline: 1px dotted $primary;
   }
