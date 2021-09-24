@@ -61,6 +61,10 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     super.componentDidMount();
     this.creator.initKeyboardShortcuts(this.rootNode.current);
   }
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    this.creator.removeKeyboardShortcuts(this.rootNode.current);
+  }
   private rootNode: React.RefObject<HTMLElement>;
 
   renderElement() {
