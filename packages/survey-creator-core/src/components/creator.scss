@@ -114,4 +114,9 @@ survey-creator,
   .sv-button-group__item:focus-within {
     border: 1px dotted $primary;
   }
+  .sd-table__cell--header {
+    .svc-matrix-cell {
+      outline: none;
+    }
+  }
 }
