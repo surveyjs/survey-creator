@@ -9,7 +9,10 @@
   }
   .svd-toolbar-dropdown__select {
     display: inline-block;
-    padding: 6px 12px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 12px;
+    padding-right: 40px;
     border: 1px solid #ccc;
     height: 34px;
     min-width: 100px;
