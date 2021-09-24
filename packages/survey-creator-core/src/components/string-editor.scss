@@ -115,6 +115,7 @@
     .svc-matrix-cell--selected {
       border: calcSize(0.25) solid $primary;
       border-radius: calcSize(0.5);
+      display: block;
     }
   }
   .svc-string-editor:focus-within {
