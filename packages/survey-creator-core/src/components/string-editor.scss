@@ -123,6 +123,14 @@
     }
   }
 }
+.sd-item__control-label {
+  .svc-string-editor:focus-within {
+    .svc-string-editor__border {
+      left: calcSize(-0.7);
+      right: calcSize(-0.7);
+    }
+  }
+}
 
 // .sv-question__header,
 // .sv-title {
