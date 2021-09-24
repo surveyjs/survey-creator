@@ -127,7 +127,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.undoAction && (this.undoAction.visible = true);
     this.redoAction && (this.redoAction.visible = true);
     this.surveySettingsAction && (this.surveySettingsAction.visible = true);
-    // this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible)
+    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible)
   }
   public deactivate(): boolean {
     this.model = undefined;
@@ -135,7 +135,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.undoAction && (this.undoAction.visible = false);
     this.redoAction && (this.redoAction.visible = false);
     this.surveySettingsAction.visible = false;
-    // this.expandAction && (this.expandAction.visible = false);
+    this.expandAction && (this.expandAction.visible = false);
     return true;
   }
   public update(): void {
@@ -172,9 +172,8 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       action: () => {
         if (!this.creator.showPropertyGrid) {
           this.creator.showPropertyGrid = true;
-        } else {
-          this.creator.selectElement(this.creator.survey);
         }
+        this.creator.selectElement(this.creator.survey);
       },
       active: this.isSurveySelected,
       visible: this.creator.viewType === "designer",
@@ -195,10 +194,10 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     items.push(this.redoAction);
     items.push(this.saveSurveyAction);
     items.push(this.surveySettingsAction);
-    // if (settings.propertyGrid.allowCollapse) {
-    //   this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
-    //   items.push(this.expandAction)
-    // }
+    if (settings.propertyGrid.allowCollapse) {
+      this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
+      items.push(this.expandAction)
+    }
     this.updateUndeRedoActions();
     this.creator.onActiveTabChanged.add((sender, options) => {
       this.saveSurveyAction.visible =

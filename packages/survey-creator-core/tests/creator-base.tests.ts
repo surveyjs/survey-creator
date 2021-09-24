@@ -1026,13 +1026,10 @@ test("Show/hide property grid", (): any => {
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   settingsBarItem.action();
-  expect(creator.selectedElementName).toEqual("question1");
+  expect(creator.selectedElementName).toEqual("survey");
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(propertyGridModel.visible).toBeTruthy();
 
-  settingsBarItem.action();
-  expect(creator.selectedElementName).toEqual("survey");
-  expect(propertyGridModel.visible).toBeTruthy();
   settings.propertyGrid.allowCollapse = prevValue;
 });
 test("Show/hide property grid and settings button active state", (): any => {
@@ -1063,12 +1060,6 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(settingsBarItem.active).toBeFalsy();
   var propertyGridModel = creator.getPlugin("designer").propertyGrid as PropertyGridViewModel<SurveyModel>; //new PropertyGridViewModel(creator);
   expect(propertyGridModel.visible).toBeFalsy();
-
-  settingsBarItem.action();
-  expect(creator.showPropertyGrid).toBeTruthy();
-  expect(propertyGridModel.visible).toBeTruthy();
-  expect(creator.selectedElementName).toEqual("question1");
-  expect(settingsBarItem.active).toBeFalsy();
 
   settingsBarItem.action();
   expect(creator.showPropertyGrid).toBeTruthy();
@@ -1115,8 +1106,8 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
   )[0];
 
   expect(creator.showPropertyGrid).toBeTruthy();
-  expect(expandBarItem).toBeFalsy();
-  expect(settingsBarItem).toBeTruthy();
+  expect(expandBarItem).toBeTruthy();
+  expect(expandBarItem.visible).toBeFalsy();
   expect(propertyGridModel.visible).toBeTruthy();
   expect(hidePropertyModelBarItem).toBeTruthy();
   expect(hidePropertyModelBarItem.visible).toBeTruthy();
@@ -1124,11 +1115,12 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
   expect(propertyGridModel.visible).toBeFalsy();
+  expect(expandBarItem.visible).toBeTruthy();
 
-  settingsBarItem.action();
+  expandBarItem.action();
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(propertyGridModel.visible).toBeTruthy();
-  expect(settingsBarItem.visible).toBeTruthy();
+  expect(expandBarItem.visible).toBeFalsy();
 
   settings.propertyGrid.allowCollapse = prevValue;
 });
