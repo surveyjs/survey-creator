@@ -49,6 +49,13 @@ import { PropertyGridViewModel, PropertyGridViewModelBase, TabDesignerPlugin } f
 import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
 
+export interface IKeyboardShortcut {
+  name?: string,
+  hotKey: { ctrlKey?: boolean, keyCode: number },
+  macOsHotkey?: { shiftKey?: boolean, keyCode: number },
+  execute: (context: any) => void
+}
+
 export interface ICreatorOptions {
   [index: string]: any;
 }
@@ -2046,6 +2053,35 @@ export class CreatorBase<T extends SurveyModel>
         callback: uploadingCallback
       });
     }
+  }
+
+  public initKeyboardShortcuts(rootNode: HTMLElement) {
+    rootNode.addEventListener('keydown', this.onKeyDownHandler);
+  }
+  public removeKeyboardShortcuts(rootNode: HTMLElement) {
+    rootNode.removeEventListener('keydown', this.onKeyDownHandler);
+  }
+  private onKeyDownHandler = (event: KeyboardEvent) => {
+    let shortcut;
+    let hotKey;
+    Object.keys(this.shortcuts || {}).forEach((key) => {
+      shortcut = this.shortcuts[key];
+      hotKey = event.metaKey ? shortcut.macOsHotkey : shortcut.hotKey;
+      if (!hotKey) return;
+
+      if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
+      if (!!hotKey.shiftKey !== !!event.shiftKey) return;
+      if (hotKey.keyCode !== event.keyCode) return;
+
+      shortcut.execute(this.selectElement);
+    });
+  }
+  private shortcuts: { [index: string]: IKeyboardShortcut } = {};
+  public registerShortcut(name: string, shortcut: IKeyboardShortcut) {
+    this.shortcuts[name] = shortcut;
+  }
+  public unRegisterShortcut(name: string) {
+    delete this.shortcuts[name];
   }
 
   protected deletePanelOrQuestion(obj: Survey.Base): void {

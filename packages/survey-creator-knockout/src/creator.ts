@@ -78,11 +78,6 @@ export class DesignTimeSurveyModel extends Survey {
 export class SurveyCreator extends CreatorBase<Survey> {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
-    new ImplementorBase(this.notifier);
-    new ImplementorBase(this.toolbox);
-    new ImplementorBase(this.dragDropSurveyElements);
-    new ImplementorBase(this.dragDropChoices);
-    new ImplementorBase(this);
   }
 
   protected createSurveyCore(json: any = {}, reason: string): Survey {

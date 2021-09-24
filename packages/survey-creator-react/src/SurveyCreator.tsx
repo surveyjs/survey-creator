@@ -49,6 +49,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
 > {
   constructor(props: ISurveyCreatorComponentProps) {
     super(props);
+    this.rootNode = React.createRef();
   }
   get creator(): CreatorBase<SurveyModel> {
     return this.props.creator;
@@ -56,6 +57,11 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   protected getStateElement(): Base {
     return this.props.creator;
   }
+  componentDidMount() {
+    super.componentDidMount();
+    this.creator.initKeyboardShortcuts(this.rootNode.current);
+  }
+  private rootNode: React.RefObject<HTMLElement>;
 
   renderElement() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
@@ -73,7 +79,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     }
     //AM: width unrecognized by react
     return (
-      <div className="svc-creator">
+      <div className="svc-creator" ref={this.rootNode}>
         <div className="svc-full-container svc-creator__area svc-flex-column">
           <div className="svc-flex-row svc-full-container">
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
