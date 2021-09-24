@@ -30,15 +30,16 @@ export var editorLocalization = {
     return true;
   },
   getLocaleName: function (loc: string, defaultLocale: string = null): string {
-    var localeNames = Survey.surveyLocalization["localeNames"];
+    let localeNames = Survey.surveyLocalization["localeNames"];
     if (!defaultLocale) {
       defaultLocale = Survey.surveyLocalization.defaultLocale;
     }
-    return !!loc
+    let res = !!loc
       ? localeNames[loc]
       : editorLocalization
         .getString("ed.defaultLocale")
         ["format"](localeNames[defaultLocale]);
+    return !!res ? res : loc;
   },
   getPropertyName: function (strName: string, defaultName: string = null) {
     var obj = this.getProperty(strName, defaultName);
