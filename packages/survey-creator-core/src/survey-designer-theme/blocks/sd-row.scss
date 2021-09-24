@@ -6,6 +6,10 @@
   margin-top: 16px;
 }
 
+:not(.svc-row--ghost)>.sd-row {
+  min-height: 50px;
+}
+
 .sd-row__panel{
   box-sizing: border-box;
   width: calc(100% - 40px);
