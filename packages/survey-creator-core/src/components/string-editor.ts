@@ -20,6 +20,7 @@ export class StringEditorViewModelBase extends Base {
 
   public onFocus(event: any): void {
     this.valueBeforeEdit = event.target.innerText;
+    event.target.click();
   }
 
   public onInput(event: any): void {
