@@ -132,6 +132,12 @@
   }
 }
 
+.sd-table__cell:first-child {
+    .svc-string-editor{
+      margin-left: calcSize(1);
+  }
+}
+
 survey-creator,
 .svc-creator,
 .sv-popup {
