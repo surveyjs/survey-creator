@@ -58,6 +58,32 @@ const json3 = {
   ],
 };
 
+const surveyJSON = {
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1",
+          "visibleIf": "{question1} empty",
+          "title": "question1-title"
+        }
+      ],
+      "visibleIf": "{question2} contains 'qwqwqw'"
+    },
+    {
+      "name": "page2",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question2"
+        }
+      ]
+    }
+  ]
+};
+
 fixture(title)
   .page(url)
   .beforeEach(async (t) => await t.maximizeWindow());
@@ -257,4 +283,17 @@ test("Filtering rules", async (t) => {
     .expect(tableRulesSelector.count).eql(4)
     .expect(getBarItemByText("Show all action types").visible).ok()
     .expect(getBarItemByText("Show all questions").visible).ok();
+});
+
+test("Update rules", async (t) => {
+  await t
+    .click(getTabbedMenuItemByText("Survey Logic"))
+    .expect(tableRulesSelector.count).eql(0);
+
+  await ClientFunction((json) => { window["creator"].JSON = json; })(surveyJSON);
+  await t
+    .expect(tableRulesSelector.count).eql(2)
+    .expect(Selector(".sv-table__cell--actions").count).eql(4)
+    .expect(Selector(".sv-table__cell--detail-button").count).eql(2)
+    .expect(Selector("#remove-row").count).eql(2);
 });
