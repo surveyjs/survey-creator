@@ -131,6 +131,15 @@
     }
   }
 }
+survey-creator,
+.svc-creator,
+.sv-popup {
+  .svc-string-editor{
+    *:not(button):focus {
+      outline: none;
+    }
+  }
+}
 
 // .sv-question__header,
 // .sv-title {
