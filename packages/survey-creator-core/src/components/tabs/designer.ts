@@ -121,6 +121,27 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
+    creator.registerShortcut("undo", {
+      hotKey: {
+        ctrlKey: true,
+        keyCode: 90,
+      },
+      macOsHotkey: {
+        keyCode: 90,
+      },
+      execute: () => this.undoAction.action()
+    });
+    creator.registerShortcut("redo", {
+      hotKey: {
+        ctrlKey: true,
+        keyCode: 89,
+      },
+      macOsHotkey: {
+        shiftKey: true,
+        keyCode: 90,
+      },
+      execute: () => this.redoAction.action()
+    });
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
