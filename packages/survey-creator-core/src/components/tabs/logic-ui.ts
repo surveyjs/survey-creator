@@ -21,7 +21,7 @@ interface ILogicItemUI {
 export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
   private itemEditorValue: LogicItemEditor;
-  private itemsSurveyValue: SurveyModel;
+  @property() itemsSurveyValue: SurveyModel;
   private visibleItems: SurveyLogicItem[];
   private itemUIHash: HashTable<ILogicItemUI> = {};
   public addNewButton: Action;
@@ -32,11 +32,18 @@ export class SurveyLogicUI extends SurveyLogic {
   ) {
     super(survey, options);
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
-    //TODO
+    this.update();
+  }
+  public update(
+    survey: SurveyModel = null,
+    options: ISurveyCreatorOptions = null
+  ) {
+    super.update(survey, options);
     this.itemsSurveyValue = this.options.createSurvey(
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
+
     this.itemsSurveyValue.css = logicCss;
     this.itemsSurvey.onMatrixRowRemoving.add((sender, options) => {
       const item = this.visibleItems[options.rowIndex];
@@ -226,7 +233,6 @@ export class SurveyLogicUI extends SurveyLogic {
         actions: this.visibleItems[i].actionsText
       });
     }
-    matrix.value = data;
     matrix.onHasDetailPanelCallback = (row) => { return true; };
     matrix.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,
@@ -261,6 +267,7 @@ export class SurveyLogicUI extends SurveyLogic {
         }
       });
     };
+    matrix.value = data;
   }
   private updateNewActionState(): void {
     this.addNewButton.enabled = this.mode !== "new";
@@ -295,9 +302,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public model: SurveyLogicUI;
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("logic", this);
-  }
-  get propertyGrid() {
-    return null;
+    this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
     this.model = new SurveyLogicUI(this.creator.survey, this.creator);
@@ -317,6 +322,10 @@ export class TabLogicPlugin implements ICreatorPlugin {
       }
     });
   }
+  public update(): void {
+    if (!this.model) return;
+    this.model.update(this.creator.survey);
+  }
   public deactivate(): boolean {
     this.model.dispose();
     this.model = undefined;
@@ -326,7 +335,8 @@ export class TabLogicPlugin implements ICreatorPlugin {
 
     return true;
   }
-  public createActions(items: Array<Action>) {
+  public createActions() {
+    const items: Array<Action> = [];
     const onQuestionPopupShow = () => {
       questionPopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllQuestionsText }].concat(
         this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) }; })
@@ -390,5 +400,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
       action: () => { actionTypesPopupModel.toggleVisibility(); }
     });
     items.push(this.filterActionTypeAction);
+    return items;
   }
 }

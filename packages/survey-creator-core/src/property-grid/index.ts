@@ -27,7 +27,7 @@ import {
   EmptySurveyCreatorOptions,
   ISurveyCreatorOptions,
   ICollectionItemAllowOperations,
-  settings as cretorSettings
+  settings as creatorSettings
 } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
@@ -541,7 +541,7 @@ export class PropertyJSONGenerator {
       elements: []
     };
     for (var key in panels) {
-      if (key == "general" && isNestedObj) {
+      if (key == creatorSettings.propertyGrid.generalTabName && isNestedObj) {
         var els = panels[key].elements;
         for (var i = 0; i < els.length; i++) {
           json.elements.push(els[i]);
@@ -844,11 +844,6 @@ export class PropertyGridModel {
   private onValueChanged(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    this.options.onSurveyElementPropertyValueChanged(
-      q.property,
-      this.obj,
-      options.value
-    );
     this.changeDependedProperties(q);
     PropertyGridEditorCollection.onValueChanged(this.obj, q.property, q);
     if (
@@ -956,14 +951,6 @@ export class PropertyGridModel {
       this.obj,
       options.question.property,
       options
-    );
-    var rowObj = options.row.editingObj;
-    if (!rowObj) return;
-    var prop = Serializer.findProperty(rowObj.getType(), options.columnName);
-    this.options.onSurveyElementPropertyValueChanged(
-      <any>prop,
-      options.row.editingObj,
-      options.value
     );
   }
   private getMatrixAllowRemoveRow(question: Question, row: MatrixDynamicRowModel) : boolean {
@@ -1188,7 +1175,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     return json;
   }
   protected get canRenderAsButtonGroup(): boolean {
-    return cretorSettings.propertyGrid.useButtonGroup;
+    return creatorSettings.propertyGrid.useButtonGroup;
   }
   protected renderAsButtonGroup(
     prop: JsonObjectProperty,
@@ -1210,7 +1197,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       );
       charCount += !!text ? text.length : 0;
     }
-    return charCount < 25; //TODO
+    return charCount < creatorSettings.propertyGrid.maxCharsInButtonGroup;
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);

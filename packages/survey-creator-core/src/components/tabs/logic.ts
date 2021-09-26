@@ -8,10 +8,10 @@ import "./logic.scss";
 export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   private editableItemValue: SurveyLogicItem;
   public static get visibleActions(): Array<string> {
-    return settings.visibleLogicActions;
+    return settings.logic.visibleActions;
   }
   public static set visibleActions(val: Array<string>) {
-    settings.visibleLogicActions = val;
+    settings.logic.visibleActions = val;
   }
   public static get types() {
     return SurveyLogicTypes.types;
@@ -65,8 +65,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   ) {
     super();
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
-    //TODO
-    //this.hideExpressionHeader = options && options["hideExpressionHeader"];
     this.readOnly = this.optionsReadOnly;
     this.update();
     this.koAfterRender = function () { };
@@ -442,16 +440,4 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     }
     return res;
   }
-  /*
-  public get hideExpressionHeader(): boolean {
-    return (
-      !!this.expressionEditor && this.expressionEditor.koShowExpressionHeader()
-    );
-  }
-  public set hideExpressionHeader(val: boolean) {
-    if (!!this.expressionEditor) {
-      this.expressionEditor.koShowExpressionHeader(val);
-    }
-  }
-  */
 }

@@ -181,7 +181,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "logicTypeDescription",
               type: "html",
               startWithNewLine: false,
-              visible: false // TODO
+              visible: false // TODO we do not show description by the new design
             },
             {
               name: "elementSelector",
@@ -409,11 +409,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       logicType
     );
     this.setElementPanelObj(panel, obj);
-    //TODO
-    if(logicType.name === "trigger_complete") {
-      elementPanel.visible = false;
-      return;
-    }
+    elementPanel.visible = logicType.hasVisibleElements;
+    if(!elementPanel.visible) return;
     this.titleActionsCreator = new PropertyGridTitleActionsCreator(
       obj,
       this.options

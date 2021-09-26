@@ -33,6 +33,7 @@ export class TabDesignerComponent extends SurveyElementBase<
         return (
           <div
             className={"svc-page"}
+            data-sv-drop-target-page={page.name}
             data-sv-drop-target-survey-element={page.name}
             key={page.id}
           >

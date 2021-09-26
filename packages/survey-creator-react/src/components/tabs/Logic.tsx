@@ -24,7 +24,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
         <div className={logicTabClassName}>
           <Survey model={this.model.itemsSurvey}></Survey>
           {this.model.hasItems ? null : (
-            <div className="svc-logic-tab__content-empty" >
+            <div role="button" className="svc-logic-tab__content-empty" >
               <span className="svc-text">{this.model.emptyTabPlaceHolder}</span>
             </div>)}
 

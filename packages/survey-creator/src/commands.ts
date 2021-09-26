@@ -7,6 +7,7 @@ export class Commands {
     [index: string]: {
       name?: string,
       hotKey?: { ctrlKey: boolean, keyCode: number },
+      macOsHotkey?: { shiftKey?: boolean, keyCode: number },
       toolbar?: any,
     },
   } = {
@@ -14,6 +15,9 @@ export class Commands {
       name: "undo",
       hotKey: {
         ctrlKey: true,
+        keyCode: 90,
+      },
+      macOsHotkey: {
         keyCode: 90,
       },
       toolbar: {
@@ -30,6 +34,10 @@ export class Commands {
       hotKey: {
         ctrlKey: true,
         keyCode: 89,
+      },
+      macOsHotkey: {
+        shiftKey: true,
+        keyCode: 90,
       },
       toolbar: {
         id: "svd-redo",

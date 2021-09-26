@@ -1,12 +1,14 @@
 <div class="svc-creator-tab__content">
   <div class="svc-plugin-tab__content svc-test-tab__content">
-    <survey-simulator params="options: simulator"></survey-simulator>
+    <survey-simulator params="model: simulator"></survey-simulator>
     <!-- ko ifnot: isRunning -->
     <survey-results params="survey: survey"></survey-results>
     <!-- /ko -->
   </div>
   <div class="svc-plugin-tab__content-actions svc-test-tab__content-actions">
     <!-- ko component: { name: 'sv-action-bar', params: { model: toolbar } } -->
+    <!-- /ko -->
+    <!-- ko component: { name: 'sv-action-bar', params: { model: pages } } -->
     <!-- /ko -->
   </div>
 </div>
