@@ -104,9 +104,11 @@ const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator
 const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisible();
 const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
 
+const disabledClass = "svc-logic-tab__content-action--disabled";
 const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New");
 const addButton = Selector(".sd-paneldynamic__add-btn").filterVisible();
 const removeButton = Selector(".sv-paneldynamic__remove-btn--right").filterVisible();
+const doneButton = Selector("button").withExactText("Done").filterVisible();
 
 const errorNotifyBalloonSelector = Selector(".svc-notifier.svc-notifier--error").filterVisible();
 const notifyBalloonSelector = Selector(".svc-notifier").filterVisible();
@@ -118,8 +120,10 @@ test("Create logic rule", async (t) => {
     .click(getTabbedMenuItemByText("Survey Logic"))
     .expect(Selector(".svc-logic-tab__content-empty").exists).ok()
     .expect(Selector(".svc-logic-tab__content-empty").visible).ok()
+    .expect(addNewRuleButton.classNames).notContains(disabledClass)
 
     .click(addNewRuleButton)
+    .expect(addNewRuleButton.classNames).contains(disabledClass)
     .expect(Selector(".svc-logic-tab__content-empty").exists).notOk()
     .expect(titleSelector.innerText).eql("Rule is incorrect")
     .expect(logicQuestionSelector.count).eql(1)
@@ -185,14 +189,17 @@ test("Create logic rule", async (t) => {
 
     .click(logicActionSelector.nth(1))
     .click(getSelectOptionByText("Complete survey"))
-    .click(Selector("button").withExactText("Done").filterVisible())
+
+    .click(doneButton)
     .expect(errorNotifyBalloonSelector.innerText).eql("Please, fix problems in your action(s).")
     .expect(Selector(".svc-logic-operator.svc-logic-operator--question.svc-logic-operator--error").filterVisible().count).eql(2)
 
     .click(removeButton)
     .expect(removeButton.count).eql(0)
 
-    .click(Selector("button").withExactText("Done").filterVisible())
+    .expect(addNewRuleButton.classNames).contains(disabledClass)
+    .click(doneButton)
+    .expect(addNewRuleButton.classNames).notContains(disabledClass)
     .expect(notifyBalloonSelector.innerText).eql("Modified");
 });
 
@@ -210,7 +217,7 @@ test("Logic rules", async (t) => {
     .click(getSelectOptionByText("is not empty"))
     .click(logicActionSelector)
     .click(getSelectOptionByText("Complete survey"))
-    .click(Selector("button").withExactText("Done").filterVisible())
+    .click(doneButton)
     .expect(tableRulesSelector.count).eql(1)
     .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{string_editor} is not empty")
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
@@ -243,7 +250,7 @@ test("Edit Logic rule", async (t) => {
     .click(logicQuestionSelector.nth(-1))
     .click(getSelectOptionByText("q3"))
 
-    .click(Selector("button").withExactText("Done").filterVisible())
+    .click(doneButton)
     .expect(tableRulesSelector.count).eql(1)
     .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{q1} == \'item2\'")
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Make question {q3} visible");
@@ -280,7 +287,7 @@ test("Filtering rules", async (t) => {
     .click(getSelectOptionByText("is not empty"))
     .click(logicActionSelector)
     .click(getSelectOptionByText("Complete survey"))
-    .click(Selector("button").withExactText("Done").filterVisible())
+    .click(doneButton)
     .expect(tableRulesSelector.count).eql(4)
     .expect(getBarItemByText("Show all action types").visible).ok()
     .expect(getBarItemByText("Show all questions").visible).ok();

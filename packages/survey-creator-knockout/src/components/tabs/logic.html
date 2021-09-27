@@ -8,7 +8,7 @@
     </div>
     <!-- /ko -->
     <div class="svc-logic-tab__content-action"
-      data-bind="click: addNewButton.action, key2click, clickBubble: false">
+      data-bind="click: addNewButton.action, key2click, clickBubble: false, css: {'svc-logic-tab__content-action--disabled': (addNewButton.enabled !== undefined && !addNewButton.enabled) }">
       <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: addNewButton.title">
       </span>
     </div>

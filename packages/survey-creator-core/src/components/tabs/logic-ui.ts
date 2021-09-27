@@ -32,6 +32,7 @@ export class SurveyLogicUI extends SurveyLogic {
   ) {
     super(survey, options);
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
+    this.setupToolbarItems();
     this.update();
   }
   public update(
@@ -39,12 +40,12 @@ export class SurveyLogicUI extends SurveyLogic {
     options: ISurveyCreatorOptions = null
   ) {
     super.update(survey, options);
-    this.itemsSurveyValue = this.options.createSurvey(
+    const newItemsSurveyValue = this.options.createSurvey(
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
-
-    this.itemsSurveyValue.css = logicCss;
+    newItemsSurveyValue.css = logicCss;
+    this.itemsSurveyValue = newItemsSurveyValue;
     this.itemsSurvey.onMatrixRowRemoving.add((sender, options) => {
       const item = this.visibleItems[options.rowIndex];
       options.allow = this.canRemoveItem(item);
@@ -63,7 +64,6 @@ export class SurveyLogicUI extends SurveyLogic {
       updateMatrixRemoveAction(options.question, options.actions, options.row);
     });
     this.updateItemsSurveyData();
-    this.setupToolbarItems();
   }
   @property({
     onSet: (value, target: SurveyLogicUI) => {

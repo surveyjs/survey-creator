@@ -9,6 +9,7 @@ ko.components.register("svc-tab-logic", {
     createViewModel: (params: any, componentInfo: any) => {
       const plugin: TabLogicPlugin = params.data;
       new ImplementorBase(plugin.model);
+      new ImplementorBase(plugin.model.addNewButton);
       return plugin.model;
     }
   },
