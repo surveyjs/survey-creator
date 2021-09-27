@@ -152,6 +152,13 @@
     cursor: pointer;
     user-select: none;
   }
+  .svc-logic-tab__content-action--disabled {
+    cursor: default;
+    color: $foreground-disabled;
+    &:hover {
+      background-color: $background;
+    }
+  }
 
   .svc-text {
     display: flex;
