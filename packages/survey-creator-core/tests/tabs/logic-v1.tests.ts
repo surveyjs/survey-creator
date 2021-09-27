@@ -692,9 +692,7 @@ test("Displaying correct text for logic action", () => {
   for (var i = 0; i < logicTypes.length; i++) {
     expect(findOp(logicTypes[i])).toBeTruthy();
   }
-  expect(logic.items[0].expressionText).toEqual(
-    "When expression: '{q1} == 1' returns true:"
-  );
+  expect(logic.items[0].expressionText).toEqual("{q1} == 1");
   expect(findOp("page_visibility").text).toEqual("Make page {page1} visible");
   expect(findOp("panel_visibility").text).toEqual(
     "Make panel {panel1} visible"
@@ -813,9 +811,7 @@ test("Add existing visible Items", () => {
   options.showTitlesInExpressions = true;
   var logic = new SurveyLogic(survey, options);
   expect(logic.items).toHaveLength(1);
-  expect(logic.items[0].expressionText).toEqual(
-    "When expression: '{My Question 1} == 1' returns true:"
-  );
+  expect(logic.items[0].expressionText).toEqual("{My Question 1} == 1");
 });
 
 test("Allow logic type to be null and change it", () => {
