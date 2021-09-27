@@ -640,10 +640,13 @@ export class Translation extends Base implements ITranslationLocales {
       json,
       "translation_strings"
     );
+    survey.lazyRendering = true;
+    survey.startLoadingFromJson();
     survey.css = translationCss;
     survey.addNewPage("page");
     this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root, null);
     survey.data = this.getStringsSurveyData(survey);
+    survey.endLoadingFromJson();
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
       if(options.cell.question instanceof QuestionCommentModel) {
         options.cell.question.rows = 1;
