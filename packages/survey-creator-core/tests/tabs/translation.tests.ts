@@ -4,7 +4,9 @@ import {
   Base,
   QuestionDropdownModel,
   PanelModel,
-  QuestionMatrixDropdownModel
+  QuestionMatrixDropdownModel,
+  QuestionTextModel,
+  QuestionCommentModel
 } from "survey-core";
 import {
   Translation,
@@ -403,7 +405,6 @@ test("StringsHeaderSurvey layout", () => {
   expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
 });
 
-
 test("Actions mode small", () => {
   const creator = new CreatorTester();
   const tabTranslation = new TabTranslationPlugin(creator);
@@ -452,4 +453,70 @@ test("Make invisible locales in language selector, that has been already choosen
   expect(translation.chooseLanguageActions[1].visible).toBeFalsy();
   surveyLocalization.supportedLocales = [];
 });
-
+test("stringsSurvey - text question dataList property, default", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        dataList: {
+          default: ["Item1", "Item2"],
+        }
+      }
+    ]
+  });
+  var translation = new Translation(survey);
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  var page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  var pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(1);
+  expect(pagePanel.elements[0].name).toEqual("question1");
+  var question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(1);
+  var question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
+  expect(question1Props.name).toEqual("question1_props");
+  expect(question1Props.columns).toHaveLength(1);
+  expect(question1Props.columns[0].name).toEqual("default");
+  expect(question1Props.rows).toHaveLength(2);
+  expect(question1Props.rows[0].value).toEqual("dataList");
+  const cellQuestion = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
+  expect(cellQuestion.multiLine).toBeTruthy();
+  expect(cellQuestion.value).toEqual("Item1\nItem2");
+  cellQuestion.value = "Item1\nItem2\nItem3";
+  const question = <QuestionTextModel>survey.getAllQuestions()[0];
+  expect(question.dataList).toHaveLength(3);
+  expect(question.dataList[2]).toEqual("Item3");
+});
+test("stringsSurvey - text question dataList property, several locales", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        dataList: {
+          default: ["Item1", "Item2"],
+          de: ["Item1-de", "Item2-de"],
+        }
+      }
+    ]
+  });
+  var translation = new Translation(survey);
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  var page = translation.stringsSurvey.pages[0];
+  var pagePanel = <PanelModel>page.elements[0];
+  var question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(1);
+  var question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
+  expect(question1Props.columns).toHaveLength(2);
+  expect(question1Props.columns[0].name).toEqual("default");
+  expect(question1Props.columns[1].name).toEqual("de");
+  expect(question1Props.rows).toHaveLength(2);
+  expect(question1Props.rows[0].value).toEqual("dataList");
+  const cellQuestionDefault = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
+  expect(cellQuestionDefault.multiLine).toBeTruthy();
+  expect(cellQuestionDefault.value).toEqual("Item1\nItem2");
+  const cellQuestionDe = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  expect(cellQuestionDe.multiLine).toBeTruthy();
+  expect(cellQuestionDe.value).toEqual("Item1-de\nItem2-de");
+});

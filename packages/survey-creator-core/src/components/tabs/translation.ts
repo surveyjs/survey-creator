@@ -152,7 +152,18 @@ export class TranslationItem extends TranslationItemBase {
   }
   public toJSON(): any {
     var json = this.locString.getJson();
+    json = this.correctJSON(json);
     if (!json || typeof json === "string") return { default: json };
+    return json;
+  }
+  private correctJSON(json: any) : any {
+    if(!json || typeof json === "string") return json;
+    if(Array.isArray(json)) return json.join("\n");
+    for(let key in json) {
+      if(Array.isArray(json[key])) {
+        json[key] = json[key].join("\n");
+      }
+    }
     return json;
   }
   private getKeys(): Array<string> {
@@ -651,7 +662,7 @@ export class Translation extends Base implements ITranslationLocales {
       if(options.cell.question instanceof QuestionCommentModel) {
         options.cell.question.rows = 1;
         options.cell.question.placeHolder = this.placeHolderText;
-        options.cell.question.multiLine = false;
+        options.cell.question.multiLine = options.row.name === "dataList"; //TODO fix it, refactor ILocalizableString interface.
       }
     });
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
