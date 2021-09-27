@@ -11,6 +11,7 @@ import { QuestionEmbeddedSurveyModel } from "../embedded-survey";
 import { findAction, updateMatrixRemoveAction } from "../../utils/actions";
 
 import "./logic-ui.scss";
+import { logicCss } from "./logic-theme";
 
 interface ILogicItemUI {
   expressionEditor: ConditionEditor;
@@ -42,6 +43,8 @@ export class SurveyLogicUI extends SurveyLogic {
       this.getLogicItemSurveyJSON(),
       "logic-items"
     );
+
+    this.itemsSurveyValue.css = logicCss;
     this.itemsSurvey.onMatrixRowRemoving.add((sender, options) => {
       const item = this.visibleItems[options.rowIndex];
       options.allow = this.canRemoveItem(item);
