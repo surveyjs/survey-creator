@@ -45,7 +45,27 @@ test("Test language Bar Item", (): any => {
   testAgain.action();
   expect(model.survey.locale).toEqual("de");
 });
-
+test("Test languages dropdown with unknown language", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "1", de: "2", ff: "3" }
+      }
+    ]
+  };
+  const model: TestSurveyTabViewModel = getTestModel(creator);
+  expect(model.showDefaultLanguageInTestSurveyTab).toBeTruthy();
+  expect(model.languages).toHaveLength(3);
+  expect(model.languages[0].id).toEqual("en");
+  expect(model.languages[1].id).toEqual("de");
+  expect(model.languages[1].title).toEqual("deutsch");
+  expect(model.languages[2].id).toEqual("ff");
+  expect(model.languages[2].title).toEqual("ff");
+  expect(model.activeLanguage).toEqual("en");
+});
 test("Check page list state after change page arrows click", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
