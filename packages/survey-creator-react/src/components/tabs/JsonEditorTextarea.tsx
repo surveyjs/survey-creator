@@ -24,6 +24,7 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
       errors.push(<span key="{key}">Error: </span>);
       key++;
       errors.push(<span key="{key}">{this.model.errors[i].text}</span>);
+      key++;
     }
     return (
       <div className="svc-creator-tab__content">
