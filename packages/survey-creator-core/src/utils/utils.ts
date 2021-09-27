@@ -13,7 +13,6 @@ function getNumericFromString(str: string): string {
   }
   return num;
 }
-
 const opositeValues = {
   true: "false",
   True: "False",
@@ -205,10 +204,6 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement) {
   } else {
     element.className = element.className.replace(" svc-hovered", "");
   }
-}
-
-export function clearNewLines(text: string) {
-  return text.replace(new RegExp("(\r\n|\n|\r)", "gm"), "");
 }
 
 export function select(element: any) {
