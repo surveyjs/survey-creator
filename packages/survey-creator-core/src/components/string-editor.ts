@@ -20,6 +20,7 @@ export class StringEditorViewModelBase extends Base {
 
   public onFocus(event: any): void {
     this.valueBeforeEdit = event.target.innerText;
+    event.target.click();
   }
 
   public onInput(event: any): void {
@@ -28,8 +29,13 @@ export class StringEditorViewModelBase extends Base {
       event.target.innerText = this.valueBeforeEdit;
       return;
     }
-    if (this.locString.text == event.target.innerText) return;
-    this.locString.text = event.target.innerText;
+
+    if (this.locString.text != event.target.innerText) {
+      this.locString.text = event.target.innerText;
+    } else {
+      event.target.innerText = this.locString.renderedHtml;
+      this.locString.strChanged();
+    }
   }
   public done(event: Event): void {
     event.stopImmediatePropagation();

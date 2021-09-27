@@ -230,7 +230,6 @@ export class SurveyLogicUI extends SurveyLogic {
         actions: this.visibleItems[i].actionsText
       });
     }
-    matrix.value = data;
     matrix.onHasDetailPanelCallback = (row) => { return true; };
     matrix.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,
@@ -265,6 +264,7 @@ export class SurveyLogicUI extends SurveyLogic {
         }
       });
     };
+    matrix.value = data;
   }
   private updateNewActionState(): void {
     this.addNewButton.enabled = this.mode !== "new";

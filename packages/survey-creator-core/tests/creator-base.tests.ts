@@ -1388,3 +1388,30 @@ test("update tab content", (): any => {
   creator.JSON = newJson;
   expect(hasQ1(translationPlugin.model.survey)).toBeTruthy();
 });
+
+test("Keyboard Shortcuts", (): any => {
+  const creator = new CreatorTester();
+  let count = 0;
+
+  creator.registerShortcut("increase", {
+    hotKey: {
+      keyCode: 107, //numpad '-'
+    },
+    execute: () => { count++; }
+  });
+
+  creator.registerShortcut("decrease", {
+    hotKey: {
+      keyCode: 109, //numpad '+'
+    },
+    execute: () => { count--; }
+  });
+
+  const fakeIncreaseEvent: any = { keyCode: 107 };
+  creator["onKeyDownHandler"](fakeIncreaseEvent);
+  expect(count).toEqual(1);
+
+  const fakeDecreaseEvent: any = { keyCode: 109 };
+  creator["onKeyDownHandler"](fakeDecreaseEvent);
+  expect(count).toEqual(0);
+});

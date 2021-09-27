@@ -49,6 +49,13 @@ import { PropertyGridViewModel, PropertyGridViewModelBase, TabDesignerPlugin } f
 import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
 
+export interface IKeyboardShortcut {
+  name?: string;
+  hotKey: { ctrlKey?: boolean, keyCode: number };
+  macOsHotkey?: { shiftKey?: boolean, keyCode: number };
+  execute: (context: any) => void;
+}
+
 export interface ICreatorOptions {
   [index: string]: any;
 }
@@ -278,8 +285,14 @@ export class CreatorBase<T extends SurveyModel>
    * Use this event, if you want custom display name for objects.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object, Survey, Page, Panel or Question
-   * <br/> options.reason the name of the UI that requests the object display name
+   * <br/> options.reason the name of the UI that requests the object display name.
    * <br/> options.displayName change this property to show your custom display name for the object
+   * <br/> The list of possible values in options.reason:
+   * <br/> "condition" - raised from Condition modal window or on setup condition in a logic tab
+   * <br/> "survey-tester" - raised from page selector list in "Test Survey" tab
+   * <br/> "survey-tester-selected" - raised on setting page selector title in "Test Survey" tab
+   * <br/> "survey-translation" - raised from translation tab
+   * <br/> "property-grid" - raised from showing object selector for property grid in "Designer" tab.
    * @see showObjectTitles
    */
   public onGetObjectDisplayName: Survey.Event<
@@ -694,7 +707,7 @@ export class CreatorBase<T extends SurveyModel>
 
   /**
    * You need to set this property to true if you want to show titles instead of names in pages editor and object selector.
-   * @see onShowObjectDisplayName
+   * @see onGetObjectDisplayName
    */
   public showObjectTitles = false;
 
@@ -2046,6 +2059,35 @@ export class CreatorBase<T extends SurveyModel>
         callback: uploadingCallback
       });
     }
+  }
+
+  public initKeyboardShortcuts(rootNode: HTMLElement) {
+    rootNode.addEventListener("keydown", this.onKeyDownHandler);
+  }
+  public removeKeyboardShortcuts(rootNode: HTMLElement) {
+    rootNode.removeEventListener("keydown", this.onKeyDownHandler);
+  }
+  private onKeyDownHandler = (event: KeyboardEvent) => {
+    let shortcut;
+    let hotKey;
+    Object.keys(this.shortcuts || {}).forEach((key) => {
+      shortcut = this.shortcuts[key];
+      hotKey = event.metaKey ? shortcut.macOsHotkey : shortcut.hotKey;
+      if (!hotKey) return;
+
+      if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
+      if (!!hotKey.shiftKey !== !!event.shiftKey) return;
+      if (hotKey.keyCode !== event.keyCode) return;
+
+      shortcut.execute(this.selectElement);
+    });
+  }
+  private shortcuts: { [index: string]: IKeyboardShortcut } = {};
+  public registerShortcut(name: string, shortcut: IKeyboardShortcut) {
+    this.shortcuts[name] = shortcut;
+  }
+  public unRegisterShortcut(name: string) {
+    delete this.shortcuts[name];
   }
 
   protected deletePanelOrQuestion(obj: Survey.Base): void {

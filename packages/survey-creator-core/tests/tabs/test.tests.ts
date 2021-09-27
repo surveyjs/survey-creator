@@ -4,6 +4,7 @@ import {
   TestSurveyTabViewModel
 } from "../../src/components/tabs/test";
 import { IAction, ListModel } from "survey-core";
+import { assert } from "console";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
@@ -45,7 +46,27 @@ test("Test language Bar Item", (): any => {
   testAgain.action();
   expect(model.survey.locale).toEqual("de");
 });
-
+test("Test languages dropdown with unknown language", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "1", de: "2", ff: "3" }
+      }
+    ]
+  };
+  const model: TestSurveyTabViewModel = getTestModel(creator);
+  expect(model.showDefaultLanguageInTestSurveyTab).toBeTruthy();
+  expect(model.languages).toHaveLength(3);
+  expect(model.languages[0].id).toEqual("en");
+  expect(model.languages[1].id).toEqual("de");
+  expect(model.languages[1].title).toEqual("deutsch");
+  expect(model.languages[2].id).toEqual("ff");
+  expect(model.languages[2].title).toEqual("ff");
+  expect(model.activeLanguage).toEqual("en");
+});
 test("Check page list state after change page arrows click", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
@@ -162,6 +183,38 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
   model.survey.pages[1].visible = true;
   expect(model.pageListItems[1].enabled).toBeTruthy();
   expect(model.pageListItems[2].visible).toEqual(true);
+});
+test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page3" }
+    ]
+  };
+  creator.onGetObjectDisplayName.add((sender, options) => {
+    if(options.reason === "survey-tester") {
+      const survey = options.obj.survey;
+      const index = survey.pages.indexOf(options.obj);
+      options.displayName = (index + 1).toString() + ". " + options.displayName;
+    }
+    if(options.reason === "survey-tester-selected") {
+      const survey = options.obj.survey;
+      const index = survey.pages.indexOf(options.obj);
+      options.displayName = "Page " + (index + 1).toString() + " from " + survey.pages.length;
+    }
+  });
+  var model = getTestModel(creator);
+  expect(model.pageListItems).toHaveLength(3);
+  expect(model.pageListItems[0].title).toEqual("1. page1");
+  expect(model.pageListItems[1].title).toEqual("2. page2");
+  expect(model.pageListItems[2].title).toEqual("3. page3");
+  const selectedPage: IAction = model.pageActions.filter(
+    (item: IAction) => item.id === "pageSelector")[0];
+  expect(selectedPage.title).toEqual("Page 1 from 3");
+  model.survey.nextPage();
+  expect(selectedPage.title).toEqual("Page 2 from 3");
 });
 
 test("Simulator view switch", (): any => {

@@ -44,7 +44,7 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
       </div>;
     }
 
-    return attachKey2click(
+    return (
       <div
         className={"svc-matrix-cell"}
         key={this.props.element.key}
