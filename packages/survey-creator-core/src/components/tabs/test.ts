@@ -351,13 +351,7 @@ export class TestSurveyTabViewModel extends Base {
 
     this.selectPageAction = new Action({
       id: "pageSelector",
-      title:
-        (this.activePage &&
-          this.surveyProvider.getObjectDisplayName(
-            this.activePage,
-            "survey-tester"
-          )) ||
-        this.getLocString("ts.selectPage"),
+      title: this.getSelectPageTitle(),
       visible:
         this.isRunning &&
         this.pageListItems.length > 1 &&
@@ -484,13 +478,7 @@ export class TestSurveyTabViewModel extends Base {
         this.survey.visiblePages.indexOf(this.activePage) !==
         this.survey.visiblePages.length - 1;
 
-      this.selectPageAction.title =
-        (this.activePage &&
-          this.surveyProvider.getObjectDisplayName(
-            this.activePage,
-            "survey-tester"
-          )) ||
-        this.getLocString("ts.selectPage");
+      this.selectPageAction.title = this.getSelectPageTitle();
     }
     if (
       name === "isRunning" ||
@@ -518,7 +506,14 @@ export class TestSurveyTabViewModel extends Base {
       );
     }
   }
-
+  private getSelectPageTitle(): string {
+    return (this.activePage &&
+      this.surveyProvider.getObjectDisplayName(
+        this.activePage,
+        "survey-tester-selected"
+      )) ||
+    this.getLocString("ts.selectPage");
+  }
   public dispose() {
     this.simulator.unRegisterFunctionOnPropertyValueChanged(
       "device",

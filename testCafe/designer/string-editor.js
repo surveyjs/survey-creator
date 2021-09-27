@@ -41,4 +41,19 @@ test('Edit question title', async (t) => {
     await t.pressKey('enter');
     await t.expect(Selector('textarea[aria-label=Title]').value).
         eql(prefix + title, 'Question title in property grid is updated');
+
+    await 
+        t.click(svStringSelector)
+        .pressKey('ctrl+a')
+        .pressKey('delete')
+        .pressKey('enter')
+        .expect(Selector('.sv-string-editor').withText(title).visible).ok('Question title is reset to question name');
+    
+    await 
+        t.click(svStringSelector)
+        .pressKey('ctrl+a')
+        .pressKey('delete')
+        .pressKey('enter')
+        .expect(Selector('.sv-string-editor').withText(title).visible).ok('Question title still contains question name');
+
 });
