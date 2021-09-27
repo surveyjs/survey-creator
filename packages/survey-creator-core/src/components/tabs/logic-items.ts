@@ -260,9 +260,7 @@ export class SurveyLogicItem {
   public get expressionText(): string {
     const text = this.getExpressionAsDisplayText();
     if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
-    return editorLocalization
-      .getString("ed.lg.itemExpressionText")
-      ["format"](text);
+    return text;
   }
   private getQuestionNamesFromExpression(names: string[]) {
     const conditionRunner = new ConditionRunner(this.expression);

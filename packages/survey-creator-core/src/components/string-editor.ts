@@ -1,17 +1,17 @@
 import { Base, LocalizableString, Serializer, JsonObjectProperty } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
-import { clearNewLines } from "../utils/utils";
+import { clearNewLines, select } from "../utils/utils";
 
 export class StringEditorViewModelBase extends Base {
-  private blurredByEscape:boolean = false;
+  private blurredByEscape: boolean = false;
   private valueBeforeEdit: string;
   constructor(private locString: LocalizableString) {
     super();
   }
   public checkConstraints(event: any) {
-    if(this.maxLength > 0 && event.keyCode >= 32) {
+    if (this.maxLength > 0 && event.keyCode >= 32) {
       var text: string = (event.target as any).innerText || "";
-      if(text.length >= this.maxLength) {
+      if (text.length >= this.maxLength) {
         event.preventDefault();
       }
     }
@@ -22,10 +22,11 @@ export class StringEditorViewModelBase extends Base {
   public onFocus(event: any): void {
     this.valueBeforeEdit = event.target.innerText;
     event.target.click();
+    select(event.target);
   }
 
   public onInput(event: any): void {
-    if(this.blurredByEscape) {
+    if (this.blurredByEscape) {
       this.blurredByEscape = false;
       event.target.innerText = this.valueBeforeEdit;
       return;

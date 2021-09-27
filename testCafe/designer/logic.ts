@@ -92,7 +92,7 @@ function getSelectOptionByText(text: string) {
   return Selector("option").withExactText(text).filterVisible();
 }
 
-const tableRulesSelector = Selector(".sv-table.sv-matrixdynamic tbody tr").filterVisible();
+const tableRulesSelector = Selector(".sl-table tbody tr").filterVisible();
 
 const titleSelector = Selector(".sd-question__header.sd-question__header--location--top .sv-title-actions__title").filterVisible();
 const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
@@ -102,7 +102,7 @@ const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterV
 const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
 const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
 const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisible();
-const logicDetailButtonElement = Selector(".sv-table__cell--detail-button").filterVisible();
+const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
 
 const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New");
 const addButton = Selector(".sd-paneldynamic__add-btn").filterVisible();
@@ -212,13 +212,13 @@ test("Logic rules", async (t) => {
     .click(getSelectOptionByText("Complete survey"))
     .click(Selector("button").withExactText("Done").filterVisible())
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{string_editor} is not empty' returns true:")
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{string_editor} is not empty")
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
 
     .click(getTabbedMenuItemByText("Survey Designer"))
     .click(getTabbedMenuItemByText("Survey Logic"))
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{string_editor} is not empty' returns true:")
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{string_editor} is not empty")
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed");
 });
 
@@ -229,6 +229,7 @@ test("Edit Logic rule", async (t) => {
     .click(getTabbedMenuItemByText("Survey Logic"))
     .expect(tableRulesSelector.count).eql(1)
 
+    .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement)
 
     .expect(logicQuestionSelector.value).eql("q1")
@@ -244,7 +245,7 @@ test("Edit Logic rule", async (t) => {
 
     .click(Selector("button").withExactText("Done").filterVisible())
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("When expression: \'{q1} == \'item2\'\' returns true:")
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{q1} == \'item2\'")
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Make question {q3} visible");
 });
 
@@ -293,7 +294,7 @@ test("Update rules", async (t) => {
   await ClientFunction((json) => { window["creator"].JSON = json; })(surveyJSON);
   await t
     .expect(tableRulesSelector.count).eql(2)
-    .expect(Selector(".sv-table__cell--actions").count).eql(4)
-    .expect(Selector(".sv-table__cell--detail-button").count).eql(2)
+    .expect(Selector(".st-table__cell--actions").count).eql(4)
+    .expect(Selector(".sl-table__cell--detail-button").count).eql(2)
     .expect(Selector("#remove-row").count).eql(2);
 });

@@ -408,8 +408,7 @@ test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => 
   expect(rows[0].cells[0].question.getType()).toEqual("linkvalue");
   expect(rows[0].cells[1].question.getType()).toEqual("linkvalue");
   expect(itemsQuestion.value).toHaveLength(1);
-  expect(itemsQuestion.value[0].conditions).toEqual(
-    "When expression: '{q1} == 1' returns true:"
+  expect(itemsQuestion.value[0].conditions).toEqual("{q1} == 1"
   );
   expect(itemsQuestion.value[0].actions).toEqual("Make question {q3} visible");
   logic.editItem(logic.items[0]);
@@ -420,9 +419,7 @@ test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => 
   expect(res).toBeTruthy();
   itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.value).toHaveLength(1);
-  expect(itemsQuestion.value[0].conditions).toEqual(
-    "When expression: '{q2} == 1' returns true:"
-  );
+  expect(itemsQuestion.value[0].conditions).toEqual("{q2} == 1");
   expect(itemsQuestion.value[0].actions).toEqual("Make question {q4} visible");
 });
 test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
@@ -842,7 +839,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   row.detailPanel.footerActions[0].action();
   expect(logic.mode).toEqual("view");
   expect(row.detailPanel).toBeFalsy();
-  expect(row.cells[0].question.value).toEqual("When expression: '{q1} == 1' returns true:");
+  expect(row.cells[0].question.value).toEqual("{q1} == 1");
   expect(survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 1");
 });
 test("LogicItemEditorUI: create new logic several times", () => {
@@ -1342,7 +1339,7 @@ test("Logic onLogicItemRemoving events, Bug#1786", () => {
   let counter = 0;
   logic.onLogicItemRemoving.add((_, options) => {
     options.allowRemove = allowRemove;
-    counter ++;
+    counter++;
   });
   let itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.rowCount).toEqual(1);
