@@ -265,6 +265,7 @@ export var surveyDesignerCss = {
     fileList: "sd-file__list",
     fileSignBottom: "sd-file__sign",
     fileDecorator: "sd-file__decorator",
+    fileDecoratorDrag: "sd-file__decorator--drag",
     fileInput: "sd-visuallyhidden",
     noFileChosen: "sd-description sd-file__no-file-chosen",
     chooseFile: "sd-btn sd-file__choose-btn",
@@ -273,7 +274,9 @@ export var surveyDesignerCss = {
     removeButtonBottom: "sd-btn sd-file__clean-btn",
     removeFile: "sd-hidden",
     removeFileSvg: "sd-file__remove-svg",
-    wrapper: "sd-file__wrapper"
+    wrapper: "sd-file__wrapper",
+    defaultImage: "sd-file__default-image",
+    removeFileButton: "sd-file__remove-file-button"
   },
   signaturepad: {
     root: "sd-signaturepad sjs_sp_container",
