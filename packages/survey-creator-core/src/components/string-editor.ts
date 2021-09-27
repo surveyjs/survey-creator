@@ -1,5 +1,6 @@
 import { Base, LocalizableString, Serializer, JsonObjectProperty } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
+import { clearNewLines } from "../utils/utils";
 
 export class StringEditorViewModelBase extends Base {
   private blurredByEscape:boolean = false;
@@ -30,8 +31,10 @@ export class StringEditorViewModelBase extends Base {
       return;
     }
 
-    if (this.locString.text != event.target.innerText) {
-      this.locString.text = event.target.innerText;
+    //const clearedText = clearNewLines(event.target.innerText);
+    const clearedText = event.target.innerText;
+    if (this.locString.text != clearedText) {
+      this.locString.text = clearedText;
     } else {
       event.target.innerText = this.locString.renderedHtml;
       this.locString.strChanged();
