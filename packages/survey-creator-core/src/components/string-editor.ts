@@ -72,4 +72,8 @@ export class StringEditorViewModelBase extends Base {
     if (!property || !property.placeholder) return "";
     return editorLocalization.getString(property.placeholder);
   }
+
+  public className(text: any): string {
+    return "svc-string-editor"+(text == "" && this.placeholder==""?" svc-string-editor--hidden":"");
+  }
 }

@@ -24,6 +24,10 @@ export class StringEditorViewModel {
   public get editValue(): string {
     return this.locString.koRenderedHtml();
   }
+  public get className(): string {
+    return this.baseModel.className(this.locString.koRenderedHtml());
+  }
+
   public get placeholder(): string {
     return this.baseModel.placeholder;
   }

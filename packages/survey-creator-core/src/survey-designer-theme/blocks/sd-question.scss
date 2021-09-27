@@ -36,6 +36,11 @@
   }
 }
 
+.sd-question__content {
+  margin-top: calcSize(2);
+}
+
+
 .sd-scrollable .sd-question__content {
   overflow-x: auto;
   padding: calcSize(2) 0;

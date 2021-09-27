@@ -99,7 +99,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
       );
     }
     return (
-      <span className="svc-string-editor">
+      <span className={this.baseModel.className}>
         <span className="svc-string-editor__content">
           <div className="svc-string-editor__border"
             onClick={this.edit}
