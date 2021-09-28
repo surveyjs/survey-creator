@@ -79,7 +79,7 @@ export class TranslationItem extends TranslationItemBase {
   public afterRender: any;
   constructor(
     public name: string,
-    public locString: LocalizableString,
+    public locString: ILocalizableString,
     public defaultValue: string = "",
     translation: ITranslationLocales,
     private context: any
@@ -152,18 +152,22 @@ export class TranslationItem extends TranslationItemBase {
   }
   public toJSON(): any {
     var json = this.locString.getJson();
+    json = this.correctJSON(json);
     if (!json || typeof json === "string") return { default: json };
     return json;
   }
-  private getKeys(): Array<string> {
-    if (this.locString["getLocales"]) return this.locString["getLocales"]();
-    var json = this.locString.getJson();
-    if (!json || typeof json === "string") return [];
-    var res = [];
-    for (var key in json) {
-      res.push(key);
+  private correctJSON(json: any) : any {
+    if(!json || typeof json === "string") return json;
+    if(Array.isArray(json)) return json.join("\n");
+    for(let key in json) {
+      if(Array.isArray(json[key])) {
+        json[key] = json[key].join("\n");
+      }
     }
-    return res;
+    return json;
+  }
+  private getKeys(): Array<string> {
+    return this.locString.getLocales();
   }
   public mergeLocaleWithDefault(loc: string) {
     var locText = this.locString.getLocaleText(loc);
@@ -647,21 +651,29 @@ export class Translation extends Base implements ITranslationLocales {
     this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root, null);
     survey.data = this.getStringsSurveyData(survey);
     survey.endLoadingFromJson();
+    const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any):TranslationItem => {
+      var itemValue = ItemValue.getItemByValue(
+        question.rows,
+        rowName
+      );
+      return !!itemValue ? itemValue["translationData"] : null;
+    };
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
       if(options.cell.question instanceof QuestionCommentModel) {
-        options.cell.question.rows = 1;
         options.cell.question.placeHolder = this.placeHolderText;
-        options.cell.question.multiLine = false;
+        const item = getTransationItem(options.question, options.row.name);
+        const isMultiLine = !!item ? item.locString.getIsMultiple() : false;
+        options.cell.question.multiLine = isMultiLine;
+        if(!isMultiLine) {
+          options.cell.question.rows = 1;
+        }
       }
     });
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
-      var itemValue = ItemValue.getItemByValue(
-        options.question.rows,
-        options.row.name
-      );
-      if (!itemValue) return;
-      var item: TranslationItem = itemValue["translationData"];
-      item.setLocText(options.columnName, options.value);
+      const item = getTransationItem(options.question, options.row.name);
+      if(!!item) {
+        item.setLocText(options.columnName, options.value);
+      }
     });
     survey.currentPage = survey.pages[0];
     return survey;
