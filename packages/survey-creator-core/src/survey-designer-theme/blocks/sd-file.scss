@@ -19,6 +19,17 @@
   border: 1px solid $primary;
   box-shadow: inset 0 0 0 1px $primary;
   background: $green-light;
+  &:after {
+    content: ' ';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: transparent;
+    z-index: 2;
+  }
 }
 .sd-file__no-file-chosen {
   display: none;
