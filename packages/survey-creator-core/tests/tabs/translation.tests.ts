@@ -403,7 +403,6 @@ test("StringsHeaderSurvey layout", () => {
   expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
 });
 
-
 test("Actions mode small", () => {
   const creator = new CreatorTester();
   const tabTranslation = new TabTranslationPlugin(creator);
