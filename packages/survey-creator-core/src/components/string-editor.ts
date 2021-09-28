@@ -32,8 +32,7 @@ export class StringEditorViewModelBase extends Base {
       return;
     }
 
-    //const clearedText = clearNewLines(event.target.innerText);
-    const clearedText = event.target.innerText;
+    const clearedText = clearNewLines(event.target.innerText);
     if (this.locString.text != clearedText) {
       this.locString.text = clearedText;
     } else {
