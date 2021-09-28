@@ -4,8 +4,6 @@ import {
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid";
 
-
-
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
 });
@@ -33,15 +31,15 @@ test("Rename choice", async (t) => {
   await setJSON(json);
 
   const expectedNewChoiceName = "newItem1";
-  const question1 = Selector(`[name="question1"]`);
+  const question1 = Selector("[name=\"question1\"]");
   const choicesTab = Selector("h4").withExactText("Choices");
   const item1PGEditorInput = Selector(
-    `[name="choices"] [data-sv-drop-target-matrix-row]`
-  ).nth(0).find(`td`).nth(1).find(`input`);
+    "[name=\"choices\"] [data-sv-drop-target-matrix-row]"
+  ).nth(0).find("td").nth(1).find("input");
 
   await t.click(question1).click(choicesTab);
 
-  await t.typeText(item1PGEditorInput, expectedNewChoiceName, { replace: true }).pressKey('enter');
+  await t.typeText(item1PGEditorInput, expectedNewChoiceName, { replace: true }).pressKey("enter");
 
   const resultJson = await getJSON();
   await t.expect(resultJson.pages[0].elements[0].choices[0]).eql(expectedNewChoiceName);
