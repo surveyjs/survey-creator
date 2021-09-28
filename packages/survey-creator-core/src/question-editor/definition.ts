@@ -313,7 +313,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "hasSelectAll", tab: "choices" },
         { name: "hasNone", tab: "choices" },
         { name: "noneText", tab: "choices" },
-        { name: "maxSelectedChoices", tab: "choices" }
+        { name: "maxSelectedChoices", tab: "choices" },
+        { name: "selectAllText", tab: "choices" }
       ],
       tabs: [
         { name: "choices", index: 10 },

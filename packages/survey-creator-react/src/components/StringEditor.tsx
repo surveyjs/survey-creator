@@ -58,6 +58,9 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
     // document.execCommand('selectAll', false, null);
     this.locString["__isEditing"] = true;
   };
+  private get className() {
+    return this.baseModel.className(this.locString.renderedHtml);
+  }
   public render(): JSX.Element {
     if (!this.locString) {
       return null;
@@ -99,7 +102,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
       );
     }
     return (
-      <span className="svc-string-editor">
+      <span className={this.className}>
         <span className="svc-string-editor__content">
           <div className="svc-string-editor__border"
             onClick={this.edit}
