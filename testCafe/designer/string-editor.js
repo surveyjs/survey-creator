@@ -57,3 +57,18 @@ test('Edit question title', async (t) => {
         .expect(Selector('.sv-string-editor').withText(title).visible).ok('Question title still contains question name');
 
 });
+
+test.only('Check string editor visibility', async (t) => {
+    await ClientFunction((json) => { creator.JSON = json; })(json);
+
+    await t.expect(Selector('.sd-question__description .svc-string-editor').visible).notOk();
+    var newJson = json;
+    newJson.questions[0].description = "Desc";
+    await ClientFunction((json) => { creator.JSON = json;  })(newJson);
+    await t.expect(Selector('.sd-question__description .svc-string-editor').visible).ok();
+
+    await ClientFunction((json) => { 
+        Survey.Serializer.findProperty('question', 'description').placeholder = "Q placeholder";
+        creator.JSON = json; })(json);
+    await t.expect(Selector('.sd-question__description .svc-string-editor').visible).ok();
+});
