@@ -16,7 +16,6 @@ import {
 } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
 
 // import template from "./test.html";
 
@@ -128,7 +127,6 @@ export class TestSurveyTabViewModel extends Base {
       }
     }
     this.simulator.survey = this.surveyProvider.createSurvey(json || {}, "test");
-    this.survey.css = surveyDesignerCss;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
