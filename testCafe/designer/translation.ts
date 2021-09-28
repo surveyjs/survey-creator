@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Translation tab";
 
@@ -28,7 +28,7 @@ test("add language", async (t) => {
   const checkedClassName = "spg-checkbox--checked";
   const disabledClassName = "spg-checkbox--disabled";
 
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
 
   await t
     .click(getTabbedMenuItemByText("Translation"))
@@ -64,7 +64,7 @@ test("add language", async (t) => {
 });
 
 test("property grid", async (t) => {
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
 
   const expandButtonSelector = Selector(".sv-action-bar-item[title=\"Show Panel\"]");
   const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide Panel\"]");

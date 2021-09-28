@@ -1,74 +1,70 @@
-import { url } from '../helper';
-import { ClientFunction, Selector } from 'testcafe';
-const title = 'String Editor';
+import { setJSON, url } from "../helper";
+import { ClientFunction, Selector } from "testcafe";
+const title = "String Editor";
 
 const json = {
-    questions: [
-        {
-            type: 'checkbox',
-            name: 'string_editor',
-            choices: [
-                'item1',
-                'item2',
-                'item3'
-            ]
-        }
-    ]
+  questions: [
+    {
+      type: "checkbox",
+      name: "string_editor",
+      choices: [
+        "item1",
+        "item2",
+        "item3"
+      ]
+    }
+  ]
 };
 
 fixture`${title}`.page`${url}`.beforeEach(
-    async (t) => {
-        await t.maximizeWindow();
-    }
+  async (t) => {
+    await t.maximizeWindow();
+  }
 );
 
-test('Edit question title', async (t) => {
-    await ClientFunction((json) => { creator.JSON = json; })(json);
-    const title = json.questions[0].name;
-    const svStringSelector = Selector('.sv-string-editor').withText(title);
-    await t.click(svStringSelector);
+test("Edit question title", async (t) => {
+  await setJSON(json);
+  const title = json.questions[0].name;
+  const svStringSelector = Selector(".sv-string-editor").withText(title);
+  const prefix = "prefix";
 
+  await t
+    .click(svStringSelector)
+    .typeText(svStringSelector, prefix, { caretPos: 0 })
+    .pressKey("esc")
+    .expect(Selector("textarea[aria-label=Title]").value).eql("", "Question title in property grid still empty")
 
-    const prefix = 'prefix';
+    .click(svStringSelector)
+    .typeText(svStringSelector, prefix, { caretPos: 0 })
+    .pressKey("enter")
+    .expect(Selector("textarea[aria-label=Title]").value).eql(prefix + title, "Question title in property grid is updated")
 
-    await t.typeText(svStringSelector, prefix, { caretPos: 0 });
-    await t.pressKey('esc');
-    await t.expect(Selector('textarea[aria-label=Title]').value).
-        eql('', 'Question title in property grid still empty');
+    .click(svStringSelector)
+    .pressKey("ctrl+a")
+    .pressKey("delete")
+    .pressKey("enter")
+    .expect(Selector(".sv-string-editor").withText(title).visible).ok("Question title is reset to question name")
 
-    await t.click(svStringSelector);
-    await t.typeText(svStringSelector, prefix, { caretPos: 0 });
-    await t.pressKey('enter');
-    await t.expect(Selector('textarea[aria-label=Title]').value).
-        eql(prefix + title, 'Question title in property grid is updated');
-
-    await 
-        t.click(svStringSelector)
-        .pressKey('ctrl+a')
-        .pressKey('delete')
-        .pressKey('enter')
-        .expect(Selector('.sv-string-editor').withText(title).visible).ok('Question title is reset to question name');
-    
-    await 
-        t.click(svStringSelector)
-        .pressKey('ctrl+a')
-        .pressKey('delete')
-        .pressKey('enter')
-        .expect(Selector('.sv-string-editor').withText(title).visible).ok('Question title still contains question name');
-
+    .click(svStringSelector)
+    .pressKey("ctrl+a")
+    .pressKey("delete")
+    .pressKey("enter")
+    .expect(Selector(".sv-string-editor").withText(title).visible).ok("Question title still contains question name");
 });
 
-test.only('Check string editor visibility', async (t) => {
-    await ClientFunction((json) => { creator.JSON = json; })(json);
+test("Check string editor visibility", async (t) => {
+  await setJSON(json);
 
-    await t.expect(Selector('.sd-question__description .svc-string-editor').visible).notOk();
-    var newJson = json;
-    newJson.questions[0].description = "Desc";
-    await ClientFunction((json) => { creator.JSON = json;  })(newJson);
-    await t.expect(Selector('.sd-question__description .svc-string-editor').visible).ok();
+  await t.expect(Selector(".sd-question__description .svc-string-editor").visible).notOk();
 
-    await ClientFunction((json) => { 
-        Survey.Serializer.findProperty('question', 'description').placeholder = "Q placeholder";
-        creator.JSON = json; })(json);
-    await t.expect(Selector('.sd-question__description .svc-string-editor').visible).ok();
+  const newJson = json;
+  newJson.questions[0]["description"] = "Desc";
+  await setJSON(newJson);
+  await t.expect(Selector(".sd-question__description .svc-string-editor").visible).ok();
+
+  await ClientFunction((json) => {
+    window["Survey"].Serializer.findProperty("question", "description").placeholder = "Q placeholder";
+    window["creator"].JSON = json;
+  })(json);
+  await t.expect(Selector(".sd-question__description .svc-string-editor").visible).ok();
 });
