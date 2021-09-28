@@ -276,7 +276,8 @@ export var surveyDesignerCss = {
     removeFileSvg: "sd-file__remove-svg",
     wrapper: "sd-file__wrapper",
     defaultImage: "sd-file__default-image",
-    removeFileButton: "sd-file__remove-file-button"
+    removeFileButton: "sd-file__remove-file-button",
+    dragAreaPlaceholder: "sd-file__drag-area-placeholder"
   },
   signaturepad: {
     root: "sd-signaturepad sjs_sp_container",

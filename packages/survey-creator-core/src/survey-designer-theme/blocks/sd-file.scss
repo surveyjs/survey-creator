@@ -5,6 +5,7 @@
 }
 .sd-file__decorator {
   display: flex;
+  flex-direction: column;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -23,14 +24,25 @@
 .sd-hidden {
   display: none !important;
 }
-.sd-file__choose-btn {
+.sd-file__drag-area-placeholder {
   line-height: 24px;
   font-size: 16px;
+  color: $foreground-light;
+}
+.sd-file__choose-btn {
+  display: block;
+  margin-top: 8px;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 600;
   color: $primary;
 }
 .sd-question--answered {
+  .sd-file__drag-area-placeholder {
+    display: none;
+  }
   .sd-file__choose-btn {
-    display: block;
+    margin-top: 0;
     position: absolute;
     top: 8px;
     left: calc(100% - 112px);
