@@ -82,7 +82,7 @@ export class TranslationItem extends TranslationItemBase {
     public locString: ILocalizableString,
     public defaultValue: string = "",
     translation: ITranslationLocales,
-    private context: any
+    private context: any, private property: JsonObjectProperty = null
   ) {
     super(name, translation);
     if (!!this.translation) {
@@ -96,6 +96,9 @@ export class TranslationItem extends TranslationItemBase {
       }
     };
     this.fireOnObjCreating();
+  }
+  public get maxLength(): number {
+    return !!this.property ? this.property.maxLength : -1;
   }
   public makeObservable() {
     super.makeObservable();
@@ -384,7 +387,8 @@ export class TranslationGroup extends TranslationItemBase {
       locStr,
       defaultValue,
       this.translation,
-      obj
+      obj,
+      property
     );
   }
   private getDefaultValue(obj: any, property: JsonObjectProperty): string {
@@ -660,12 +664,16 @@ export class Translation extends Base implements ITranslationLocales {
     };
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
       if(options.cell.question instanceof QuestionCommentModel) {
-        options.cell.question.placeHolder = this.placeHolderText;
+        const cellQuestion = <QuestionCommentModel>options.cell.question;
+        cellQuestion.placeHolder = this.placeHolderText;
         const item = getTransationItem(options.question, options.row.name);
         const isMultiLine = !!item ? item.locString.getIsMultiple() : false;
-        options.cell.question.multiLine = isMultiLine;
+        cellQuestion.multiLine = isMultiLine;
+        if(!!item) {
+          cellQuestion.maxLength = item.maxLength;
+        }
         if(!isMultiLine) {
-          options.cell.question.rows = 1;
+          cellQuestion.rows = 1;
         }
       }
     });
