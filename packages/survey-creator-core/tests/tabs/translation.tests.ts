@@ -489,7 +489,7 @@ test("stringsSurvey - text question dataList property, default", () => {
   expect(question.dataList[2]).toEqual("Item3");
 });
 test("stringsSurvey - text question dataList property, several locales", () => {
-  var survey = new SurveyModel({
+  const survey = new SurveyModel({
     elements: [
       {
         type: "text",
@@ -501,11 +501,11 @@ test("stringsSurvey - text question dataList property, several locales", () => {
       }
     ]
   });
-  var translation = new Translation(survey);
+  const translation = new Translation(survey);
   expect(translation.stringsSurvey.pages).toHaveLength(1);
-  var page = translation.stringsSurvey.pages[0];
-  var pagePanel = <PanelModel>page.elements[0];
-  var question1 = <PanelModel>pagePanel.elements[0];
+  const page = translation.stringsSurvey.pages[0];
+  const pagePanel = <PanelModel>page.elements[0];
+  const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(1);
   var question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
   expect(question1Props.columns).toHaveLength(2);
@@ -519,4 +519,10 @@ test("stringsSurvey - text question dataList property, several locales", () => {
   const cellQuestionDe = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
   expect(cellQuestionDe.multiLine).toBeTruthy();
   expect(cellQuestionDe.value).toEqual("Item1-de\nItem2-de");
+  cellQuestionDe.value = "Item1-de\nItem2-de\nItem3-de";
+  const textQuestion = <QuestionTextModel>survey.getAllQuestions()[0];
+  expect(textQuestion.locDataList.getJson()).toEqual({
+    default: ["Item1", "Item2"],
+    de: ["Item1-de", "Item2-de", "Item3-de"],
+  });
 });
