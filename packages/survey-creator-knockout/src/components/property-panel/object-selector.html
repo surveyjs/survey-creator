@@ -1,7 +1,10 @@
+<!-- ko with: model -->
 <div class="svc-object-selector">
     <!-- ko if: isVisible -->
-    <input type="text" class="spg-input" data-bind="textInput: filteredText, attr: {placeholder: filteredTextPlaceholder}"></input>
-    <!-- ko component: { name: 'sv-list', params: { model: list } } --><!-- /ko -->
+    <input type="text" class="spg-input"
+        data-bind="textInput: filteredText, attr: {placeholder: filteredTextPlaceholder}"></input>
+    <!-- ko component: { name: 'sv-list', params: { model: list } } -->
+    <!-- /ko -->
     <!-- /ko -->
 </div>
-  
+<!-- /ko -->
