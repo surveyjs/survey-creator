@@ -17,7 +17,7 @@ import { PageNavigatorViewModel } from "../src/components/page-navigator/page-na
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
 import { TabTestPlugin } from "../src/components/tabs/test";
 import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
-import { TabLogicPlugin } from "../src/components/tabs/logic-ui";
+import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
