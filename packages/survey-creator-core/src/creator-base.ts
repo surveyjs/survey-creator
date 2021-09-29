@@ -1676,11 +1676,10 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
-  protected getNewName(type: string): string {
+  protected getNewName(type: string, isPanel?: boolean): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
-    return type == "panel" || type == "flowpanel"
-      ? this.getNewPanelName()
-      : this.getNewQuestionName();
+    if (isPanel) return this.getNewPanelName();
+    return this.getNewQuestionName();
   }
   protected getNewQuestionName(): string {
     return SurveyHelper.getNewQuestionName(this.getAllQuestions());
@@ -1691,7 +1690,7 @@ export class CreatorBase<T extends SurveyModel>
 
   protected setNewNamesCore(element: Survey.ISurveyElement) {
     var elType = element["getType"]();
-    var newName = this.getNewName(elType);
+    var newName = this.getNewName(elType, element.isPanel);
     if (newName != element.name) {
       this.newQuestionChangedNames[element.name] = newName;
       element.name = newName;

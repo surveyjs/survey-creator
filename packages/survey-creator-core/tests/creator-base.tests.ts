@@ -1415,3 +1415,21 @@ test("Keyboard Shortcuts", (): any => {
   creator["onKeyDownHandler"](fakeDecreaseEvent);
   expect(count).toEqual(0);
 });
+test("getNewName get new element name", (): any => {
+  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  const getNewName = (elementType: string, isPanel?: boolean) => { return creator["getNewName"](elementType, isPanel); };
+
+  let elementType = "rating";
+  expect(getNewName(elementType)).toBe("question1");
+
+  elementType = "page";
+  expect(getNewName(elementType)).toBe("page2");
+
+  elementType = "panel";
+  let isPanel = true;
+  expect(getNewName(elementType, isPanel)).toBe("panel1");
+
+  elementType = "custompanel";
+  isPanel = true;
+  expect(getNewName(elementType, isPanel)).toBe("panel1");
+});
