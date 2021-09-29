@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Translation tab";
 
@@ -28,7 +28,7 @@ test("add language", async (t) => {
   const checkedClassName = "spg-checkbox--checked";
   const disabledClassName = "spg-checkbox--disabled";
 
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
 
   await t
     .click(getTabbedMenuItemByText("Translation"))
@@ -61,4 +61,53 @@ test("add language", async (t) => {
     .expect(headerColumnSelector.count).eql(3)
     .expect(stringsColumnSelector.count).eql(3)
     .expect(languagesSelector.nth(1).classNames).contains(checkedClassName);
+});
+
+test("property grid", async (t) => {
+  await setJSON(json);
+
+  const expandButtonSelector = Selector(".sv-action-bar-item[title=\"Show Panel\"]");
+  const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide Panel\"]");
+  const propertyGridSelector = Selector(".svc-property-panel");
+
+  await t
+    .expect(propertyGridSelector.visible).ok()
+    .expect(expandButtonSelector.visible).notOk()
+    .expect(collapseButtonSelector.visible).ok()
+
+    .click(collapseButtonSelector)
+    .expect(collapseButtonSelector.visible).notOk()
+    .expect(expandButtonSelector.visible).ok()
+    .expect(propertyGridSelector.visible).notOk()
+
+    .click(expandButtonSelector)
+    .expect(collapseButtonSelector.visible).ok()
+    .expect(expandButtonSelector.visible).notOk()
+    .expect(propertyGridSelector.visible).ok()
+
+    .click(collapseButtonSelector)
+    .click(getTabbedMenuItemByText("Translation"))
+    .expect(propertyGridSelector.visible).ok()
+    .expect(expandButtonSelector.visible).notOk()
+    .expect(collapseButtonSelector.visible).ok()
+
+    .click(collapseButtonSelector)
+    .expect(collapseButtonSelector.visible).notOk()
+    .expect(expandButtonSelector.nth(1).visible).ok()
+    .expect(propertyGridSelector.visible).notOk()
+
+    .click(expandButtonSelector.nth(1))
+    .expect(collapseButtonSelector.visible).ok()
+    .expect(expandButtonSelector.visible).notOk()
+    .expect(propertyGridSelector.visible).ok()
+
+    .click(getTabbedMenuItemByText("Survey Designer"))
+    .expect(propertyGridSelector.visible).notOk()
+    .expect(expandButtonSelector.visible).ok()
+    .expect(collapseButtonSelector.visible).notOk()
+
+    .click(expandButtonSelector)
+    .expect(collapseButtonSelector.visible).ok()
+    .expect(expandButtonSelector.visible).notOk()
+    .expect(propertyGridSelector.visible).ok();
 });
