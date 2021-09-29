@@ -1,17 +1,6 @@
-import {
-  ObjectSelectorModel,
-  CreatorBase,
-  ObjectSelectorItem
-} from "@survey/creator";
+import { ObjectSelectorModel, ObjectSelectorItem } from "@survey/creator";
 import * as ko from "knockout";
-import {
-  ImplementorBase,
-  QuestionButtonGroup,
-  Survey
-} from "survey-knockout-ui";
-import { Base } from "survey-core";
-import { Serializer } from "survey-core";
-import { QuestionFactory } from "survey-core";
+import { ImplementorBase } from "survey-knockout-ui";
 const template = require("./object-selector.html");
 
 ko.components.register("svc-object-selector", {
@@ -23,10 +12,10 @@ ko.components.register("svc-object-selector", {
         new ImplementorBase(item);
       };
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        model.dispose();
+        model.onCreateItemCallback = null;
       });
 
-      return model;
+      return { model: model };
     }
   },
   template: template
