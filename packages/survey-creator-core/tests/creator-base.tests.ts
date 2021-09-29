@@ -1433,3 +1433,64 @@ test("getNewName get new element name", (): any => {
   isPanel = true;
   expect(getNewName(elementType, isPanel)).toBe("panel1");
 });
+test("change locale in several pages survey", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        title: {
+          default: "Page 1",
+          de: "Page 1 - de"
+        },
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            title: {
+              default: "Question 1",
+              de: "Question 1 - de"
+            }
+          }
+        ]
+      },
+      {
+        title: {
+          default: "Page 2",
+          de: "Page 2 - de"
+        },
+        elements: [
+          {
+            type: "text",
+            name: "q2",
+            title: {
+              default: "Question 2",
+              de: "Question 2 - de"
+            }
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.survey.pages[0].locTitle.renderedHtml).toEqual("Page 1");
+  expect(creator.survey.getAllQuestions()[0].locTitle.renderedHtml).toEqual("Question 1");
+  expect(creator.survey.pages[1].locTitle.renderedHtml).toEqual("Page 2");
+  expect(creator.survey.getAllQuestions()[1].locTitle.renderedHtml).toEqual("Question 2");
+  const data = {};
+  creator.survey.pages[0].locTitle.onChanged = () => {
+    data["page1"] = true;
+  };
+  creator.survey.pages[1].locTitle.onChanged = () => {
+    data["page2"] = true;
+  };
+  creator.survey.getAllQuestions()[0].locTitle.onChanged = () => {
+    data["q1"] = true;
+  };
+  creator.survey.getAllQuestions()[1].locTitle.onChanged = () => {
+    data["q2"] = true;
+  };
+  creator.survey.locale = "de";
+  expect(data["page1"]).toBeTruthy();
+  expect(data["page2"]).toBeTruthy();
+  expect(data["q1"]).toBeTruthy();
+  expect(data["q2"]).toBeTruthy();
+});
