@@ -11,13 +11,13 @@
   sv-svg-icon,
   .sv-svg-icon {
     display: block;
-    height: 24px;
+    height: calcSize(3);
   }
 }
 
 // is always visible
 .svc-toolbox__item-container {
-  padding: calcSize(1) 12px;
+  padding: calcSize(1) calcSize(1.5);
   outline: none;
 
   .sv-svg-icon use {
@@ -35,9 +35,9 @@
   height: 100%;
   max-width: 0;
   overflow: hidden;
-  border-radius: 100px;
+  border-radius: calcSize(12.5);
   background-color: $background;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 6px $shadow-medium;
   transition: max-width 0.1s ease-in-out, padding 0.2s ease-in-out;
 
   .svc-toolbox__item-title {
@@ -54,14 +54,14 @@
   white-space: nowrap;
   font-family: $font-family;
   font-weight: bold;
-  font-size: 12px;
+  font-size: calcSize(1.5);
   color: $foreground-light;
 }
 
 .svc-toolbox__item:hover {
   .svc-toolbox__item-banner {
-    max-width: 200px;
-    padding-left: 12px;
+    max-width: calcSize(25);
+    padding-left: calcSize(1.5);
     padding-right: calcSize(2);
   }
 }
@@ -69,9 +69,9 @@
 .svc-toolbox:not(.svc-toolbox--compact) {
   .svc-toolbox__tool:hover {
     overflow: hidden;
-    border-radius: 100px;
+    border-radius: calcSize(12.5);
     background-color: $background;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 6px $shadow-medium;
     transition: 0.1s ease-in-out;
 
     .svc-toolbox__item-title {

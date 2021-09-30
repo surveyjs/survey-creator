@@ -4,7 +4,7 @@
   position: absolute;
   bottom: calcSize(1);
   left: calcSize(1);
-  background: #ffffff;
+  background: $background;
   opacity: 0.75;
   padding: calcSize(1) calcSize(2);
   box-shadow: 0px 2px 6px $shadow-medium;

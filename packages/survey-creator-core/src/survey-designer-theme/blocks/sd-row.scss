@@ -3,7 +3,7 @@
   flex-direction: row;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 16px;
+  margin-top: calcSize(2);
 }
 
 :not(.svc-row--ghost)>.sd-row {
@@ -12,7 +12,7 @@
 
 .sd-row__panel{
   box-sizing: border-box;
-  width: calc(100% - 40px);
+  width: calc(100% - 5 * #{$base-unit});
 }
 
 .sd-row__question {

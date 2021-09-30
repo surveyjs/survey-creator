@@ -8,7 +8,7 @@
   width: 100%;
   height: calcSize(9);
   border: 1px solid $border-inside;
-  padding: 12px calcSize(2);
+  padding: calcSize(1.5) calcSize(2);
   outline: none;
   font-size: calcSize(2);
   color: $foreground;

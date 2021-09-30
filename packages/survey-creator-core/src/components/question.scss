@@ -24,8 +24,8 @@ svc-question {
   border-radius: calcSize(0.5);
   box-sizing: border-box;
   padding: calcSize(4) calcSize(5) calcSize(8);
-  background: #ffffff;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  background: $background;
+  box-shadow: 0px 1px 2px $shadow-inner;
   border: 1px solid transparent;
 }
 
@@ -52,14 +52,14 @@ svc-question {
   position: absolute;
   display: none;
   bottom: calcSize(2);
-  width: calc(100% - 80px);
+  width: calc(100% - 10 * #{$base-unit});
   left: calcSize(5);
   .sv-action-bar-item {
     font-size: calcSize(1.5);
     font-weight: 600;
     line-height: calcSize(2);
     align-items: center;
-    height: 32px;
+    height: calcSize(4);
   }
   .sv-action-bar-separator {
     margin-right: calcSize(1);
@@ -147,7 +147,7 @@ svc-question,
   top: 0;
   left: 0;
   visibility: hidden;
-  height: 28px;
+  height: calcSize(3.5);
   width: 100%;
   display: flex;
   align-items: center;
@@ -155,7 +155,7 @@ svc-question,
 }
 .svc-question__drag-element {
   cursor: move;
-  width: 24px;
+  width: calcSize(3);
   height: 6px;
   border: 1px solid $border;
   border-radius: 10px;
