@@ -138,7 +138,6 @@
   .svc-logic-tab__content-action {
     display: flex;
     align-items: center;
-    margin-top: calcSize(10);
     margin-left: 26%;
     margin-right: 24%;
     height: calcSize(7);
@@ -165,5 +164,21 @@
     align-items: center;
     flex-grow: 1;
     justify-content: center;
+  }
+
+  .sd-paneldynamic__panel-wrapper--in-row {
+    margin-top: calcSize(2);
+  }
+}
+
+.svc-logic-paneldynamic {
+  .sd-question__content {
+    margin-top: 0;
+  }
+  .sd-row__question {
+    margin-top: 0;
+  }
+  .sd-row {
+    margin-top: 0;
   }
 }

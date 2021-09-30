@@ -86,6 +86,7 @@ tr:hover #remove-row .sv-action-bar-item__icon use {
   }
   button.sv-action-bar-item {
     width: 100%;
+    margin-bottom: calcSize(10);
     background-color: $green-light;
     color: $green;
 

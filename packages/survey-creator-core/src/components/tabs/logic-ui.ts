@@ -21,6 +21,8 @@ export class SurveyLogicUI extends SurveyLogic {
   private expressionEditorValue: ConditionEditor;
   private itemEditorValue: LogicItemEditor;
   @property() itemsSurveyValue: SurveyModel;
+  @property() expressionEditorIsFastEntry: boolean;
+  @property() expressionEditorCanShowBuilder: boolean;
   private visibleItems: SurveyLogicItem[];
   private itemUIHash: HashTable<ILogicItemUI> = {};
   public addNewButton: Action;
@@ -90,6 +92,12 @@ export class SurveyLogicUI extends SurveyLogic {
     const matrix = <QuestionMatrixDynamicModel>this.itemsSurvey.getQuestionByName("items");
     matrix.visibleRows[matrix.visibleRows.length - 1].showDetailPanel();
   }
+  public toggleExpressionEditorIsFastEntry() {
+    this.expressionEditorIsFastEntry = !this.expressionEditorIsFastEntry;
+    if (!!this.expressionEditor) {
+      this.expressionEditor.setIsFastEntry(this.expressionEditorIsFastEntry, this.editableItem.expression);
+    }
+  }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "items") {
@@ -133,6 +141,8 @@ export class SurveyLogicUI extends SurveyLogic {
     super.onStartEditing();
     this.expressionEditorValue = this.getExpressionEditor(this.editableItem);
     this.itemEditorValue = this.getLogicItemEditor(this.editableItem);
+    this.expressionEditor.setIsFastEntry(this.expressionEditorIsFastEntry, this.editableItem.expression);
+    this.expressionEditorCanShowBuilder = ConditionEditor.canBuildExpression(this.expressionEditor.text);
   }
   protected onEndEditing() {
     if (!!this.editableItem) {
@@ -216,6 +226,11 @@ export class SurveyLogicUI extends SurveyLogic {
       this.options
     );
     res.isModal = false;
+    res.editSurvey.onValueChanged.add((sender, options) => {
+      if (options.name === "textEditor") {
+        this.expressionEditorCanShowBuilder = ConditionEditor.canBuildExpression(options.value);
+      }
+    })
     return res;
   }
   private getVisibleItems(): SurveyLogicItem[] {

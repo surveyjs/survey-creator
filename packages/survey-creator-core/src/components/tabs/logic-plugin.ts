@@ -24,7 +24,10 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.filterActionTypeAction.title = this.showAllActionTypesText;
     this.filterActionTypeAction.visible = true;
 
-    this.fastEntryAction.visible = true;
+    if (this.fastEntryAction) {
+      this.fastEntryAction.visible = true;
+      this.fastEntryAction.active = this.model.expressionEditorIsFastEntry;
+    }
 
     this.model.onPropertyChanged.add((sender, options) => {
       if (options.name === "questionFilter") {
@@ -32,6 +35,12 @@ export class TabLogicPlugin implements ICreatorPlugin {
       }
       if (options.name === "actionTypeFilter") {
         this.filterActionTypeAction.title = !!this.model.actionTypeFilter ? this.model.getTypeByName(this.model.actionTypeFilter).displayName : this.showAllActionTypesText;
+      }
+      if (!!this.fastEntryAction && options.name === "expressionEditorIsFastEntry") {
+        this.fastEntryAction.active = this.model.expressionEditorIsFastEntry;
+      }
+      if (!!this.fastEntryAction && options.name === "expressionEditorCanShowBuilder") {
+        this.fastEntryAction.enabled = this.model.expressionEditorCanShowBuilder;
       }
     });
   }
@@ -45,7 +54,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
 
     this.filterQuestionAction.visible = false;
     this.filterActionTypeAction.visible = false;
-    this.fastEntryAction.visible = false;
+    this.fastEntryAction && (this.fastEntryAction.visible = false);
 
     return true;
   }
@@ -123,7 +132,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
         visible: false,
         component: "sv-action-bar-item",
         action: () => {
-          this.model.toggleEntryMode();
+          this.model.toggleExpressionEditorIsFastEntry();
         }
       })
       items.push(this.fastEntryAction);
