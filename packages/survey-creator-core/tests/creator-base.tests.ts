@@ -466,6 +466,34 @@ test("Create new page on changing title/description in ghost", (): any => {
   expect(creator.survey.pages).toHaveLength(3);
   expect(designerPlugin.model.newPage).toBeFalsy();
 });
+test("Create new page on changing title/description in ghost PageViewModel resets isGhost", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+
+  let currentNewPage = designerPlugin.model.newPage;
+  const pageWrapperViewModel = new PageViewModel(creator, currentNewPage);
+  expect(pageWrapperViewModel.isGhost).toBeTruthy();
+
+  designerPlugin.model.newPage.title = "Some title";
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+
+  pageWrapperViewModel.addNewQuestion(null, undefined);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+});
+
 test("Create new page, set empty JSON", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {};
