@@ -138,8 +138,9 @@
   .svc-logic-tab__content-action {
     display: flex;
     align-items: center;
-    margin-left: 26%;
-    margin-right: 24%;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
     height: calcSize(7);
     line-height: calcSize(7);
     vertical-align: baseline;
@@ -180,5 +181,15 @@
   }
   .sd-row {
     margin-top: 0;
+  }
+}
+
+.sl-table__cell--detail-panel {
+  .sd-page.sd-body__page {
+    padding-left: 0;
+  }
+
+  .sl-panel__footer {
+    margin: 0;
   }
 }

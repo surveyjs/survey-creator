@@ -25,6 +25,7 @@ tr:hover #remove-row .sv-action-bar-item__icon use {
   font-size: calcSize(2);
   font-family: $font-family;
   padding: 0.9375em;
+  padding-left: 0;
   box-sizing: content-box;
   vertical-align: top;
 }
@@ -75,6 +76,8 @@ tr:hover #remove-row .sv-action-bar-item__icon use {
 }
 
 .sl-panel__footer {
+  padding-left: 0;
+
   &.sv-action-bar {
     width: 100%;
   }
