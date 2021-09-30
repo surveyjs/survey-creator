@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Logic tab";
 
@@ -114,7 +114,7 @@ const errorNotifyBalloonSelector = Selector(".svc-notifier.svc-notifier--error")
 const notifyBalloonSelector = Selector(".svc-notifier").filterVisible();
 
 test("Create logic rule", async (t) => {
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
 
   await t
     .click(getTabbedMenuItemByText("Survey Logic"))
@@ -204,7 +204,7 @@ test("Create logic rule", async (t) => {
 });
 
 test("Logic rules", async (t) => {
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
 
   await t
     .click(getTabbedMenuItemByText("Survey Logic"))
@@ -230,7 +230,7 @@ test("Logic rules", async (t) => {
 });
 
 test("Edit Logic rule", async (t) => {
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json2);
+  await setJSON(json2);
 
   await t
     .click(getTabbedMenuItemByText("Survey Logic"))
@@ -264,7 +264,7 @@ function getListItemByText(text) {
 }
 
 test("Filtering rules", async (t) => {
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json3);
+  await setJSON(json3);
 
   await t
     .click(getTabbedMenuItemByText("Survey Logic"))
@@ -298,7 +298,7 @@ test("Update rules", async (t) => {
     .click(getTabbedMenuItemByText("Survey Logic"))
     .expect(tableRulesSelector.count).eql(0);
 
-  await ClientFunction((json) => { window["creator"].JSON = json; })(surveyJSON);
+  await setJSON(surveyJSON);
   await t
     .expect(tableRulesSelector.count).eql(2)
     .expect(Selector(".st-table__cell--actions").count).eql(4)
