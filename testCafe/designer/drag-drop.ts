@@ -216,11 +216,11 @@ test.only("Drag Drop Question (StartWithNewLine === false)", async (t) => {
   name = await getQuestionNameByIndex(2);
   await t.expect(name).eql("question1");
 
-  const getStartWithNewLineByIndex = ClientFunction((index) => {
-    return creator.survey.getAllQuestions()[index].startWithNewLine;
-  });
-  const result = await getStartWithNewLineByIndex(2);
-  await t.expect(result).eql(false, "question1.startWithNewLine should set to false after drag");
+  // const getStartWithNewLineByIndex = ClientFunction((index) => {
+  //   return creator.survey.getAllQuestions()[index].startWithNewLine;
+  // });
+  // const result = await getStartWithNewLineByIndex(2);
+  // await t.expect(result).eql(false, "question1.startWithNewLine should set to false after drag");
 });
 
 test("Drag Drop ItemValue (choices)", async (t) => {
