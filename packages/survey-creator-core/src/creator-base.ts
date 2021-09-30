@@ -1351,8 +1351,19 @@ export class CreatorBase<T extends SurveyModel>
       arrayChanges
     );
     this.updatePagesController(sender, name);
+    this.updateElementsOnLocaleChanged(sender, name);
     this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
     this.undoRedoManager.stopTransaction();
+  }
+  private updateElementsOnLocaleChanged(
+    obj: Survey.Base,
+    propertyName: string
+  ) {
+    if(obj.getType() !== "survey" || propertyName !== "locale") return;
+    const pages = this.survey.pages;
+    for(var i = 0; i < pages.length; i ++) {
+      pages[i].locStrsChanged();
+    }
   }
   private updateConditionsOnQuestionNameChanged(
     obj: Survey.Base,
