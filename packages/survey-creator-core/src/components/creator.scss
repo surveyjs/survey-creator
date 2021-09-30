@@ -92,14 +92,14 @@ survey-creator,
 .sv-drag-drop-ghost {
   top: 0;
   width: 100%;
-  height: 4px;
+  height: calcSize(0.5);
   background: $secondary;
   position: absolute;
 }
 
 .sv-drag-drop-ghost--item-value-bottom {
   top: initial;
-  bottom: -4px;
+  bottom: calcSize(-0.5);
 }
 
 survey-creator,

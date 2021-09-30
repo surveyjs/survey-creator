@@ -8,7 +8,7 @@
   box-shadow: 0px 1px 0px $border;
 }
 .spg-table__cell {
-  padding: 4px 0;
+  padding: calcSize(0.5) 0;
 }
 
 .spg-table__cell--detail-panel {
@@ -20,8 +20,8 @@
 }
 .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-text {
   appearance: none;
-  line-height: 24px;
-  font-size: 16px;
+  line-height: calcSize(3);
+  font-size: calcSize(2);
   border: none;
   background-color: transparent;
 }

@@ -10,7 +10,7 @@
 .svc-question__content--selected {
   .sd-rating {
     margin-left: calcSize(9);
-    width: calc(100% - calcSize(9));
+    width: calc(100% - 9 * #{$base-unit});
   }
   .svc-rating-question-controls {
     display: block;

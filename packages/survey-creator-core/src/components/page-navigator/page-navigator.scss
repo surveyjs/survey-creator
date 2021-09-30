@@ -8,8 +8,8 @@ svc-page-navigator,
 
 .svc-page-navigator__navigator-icon {
   display: block;
-  height: calc(2.75 * var(--base-unit, 8px));
-  width: calc(2.75 * var(--base-unit, 8px));
+  height: calcSize(2.75);
+  width: calcSize(2.75);
   padding: 11px;
   border-radius: 50%;
   cursor: pointer;
@@ -35,5 +35,5 @@ svc-page-navigator,
 }
 
 .svc-page-navigator__popup {
-  min-width: 100px;
+  min-width: calcSize(12.5);
 }

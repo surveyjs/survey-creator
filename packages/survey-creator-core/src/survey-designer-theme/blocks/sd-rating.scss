@@ -11,7 +11,7 @@
 .sd-rating__item {
   background: $background;
   box-shadow: 0px 1px 2px $shadow-inner;
-  border-radius: 100px;
+  border-radius: calcSize(12.5);
   white-space: nowrap;
   padding: calcSize(1.25) calcSize(2);
   box-sizing: border-box;

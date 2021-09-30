@@ -29,8 +29,8 @@
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls {
-  top: calc(50% - 24px);
-  left: calc(50% - 24px);
+  top: calc(50% - 3 * #{$base-unit});
+  left: calc(50% - 3 * #{$base-unit});
 }
 
 .svc-question__content--selected .svc-image-item-value-controls {
@@ -50,8 +50,8 @@
   }
 
   .sv-svg-icon {
-    margin-top: calc(50% - 12px);
-    margin-left: calc(50% - 12px);
+    margin-top: calc(50% - 1.5 * #{$base-unit});
+    margin-left: calc(50% - 1.5 * #{$base-unit});
   }
 
   use {

@@ -14,7 +14,7 @@ svc-toolbox {
 }
 
 .svc-toolbox--compact {
-  width: 84px;
+  width: calcSize(10.5);
   overflow: visible;
   direction: ltr;
 }
