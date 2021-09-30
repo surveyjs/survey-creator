@@ -26,17 +26,14 @@ export class PageViewModel<
     page["surveyChangedCallback"] = () => {
       this.isPageLive = !!page.survey;
     };
-
-    if (typeof this.page["_addToSurvey"] === "function") {
-      this.isGhost = true;
-      this.page["_addGhostPageViewMobel"] = () => {
-        this.page["_addGhostPageViewMobel"] = undefined;
-        this.addGhostPage();
-      };
-    } else {
-      this.isGhost = false;
+    if(this.isGhost) {
+      this.page.registerFunctionOnPropertiesValueChanged(
+        ["title", "description"],
+        () => {
+          this.addGhostPage();
+        }
+      );
     }
-
     this.page.onFirstRendering();
     this.page.updateCustomWidgets();
     this.page.setWasShown(true);
@@ -44,20 +41,20 @@ export class PageViewModel<
   protected onElementSelectedChanged(isSelected: boolean) {
     super.onElementSelectedChanged(isSelected);
     this.isSelected = isSelected;
-    if (isSelected && this.onPageSelectedCallback) {
+    if (isSelected && !!this.onPageSelectedCallback) {
       this.onPageSelectedCallback();
     }
   }
   public dispose() {
     super.dispose();
+    this.page.unRegisterFunctionOnPropertiesValueChanged([
+      "title",
+      "description"
+    ]);
     this.onPropertyValueChangedCallback = undefined;
   }
   public get isGhost(): boolean {
-    return this.getPropertyValue("isGhost", false);
-  }
-  public set isGhost(val: boolean) {
-    this.setPropertyValue("isGhost", val);
-    this.updateActionsProperties();
+    return this.creator.survey.pages.indexOf(this.page) < 0;
   }
   protected isOperationsAllow(): boolean {
     return super.isOperationsAllow() && !this.isGhost;
@@ -66,14 +63,15 @@ export class PageViewModel<
     return this._page;
   }
 
-  private addGhostPage() {
+  public addGhostPage() {
     if (this.isGhost) {
-      this.isGhost = false;
-      if (typeof this.page["_addToSurvey"] === "function") {
-        this.page["_addToSurvey"]();
-      }
+      this.page.unRegisterFunctionOnPropertiesValueChanged([
+        "title",
+        "description"
+      ]);
+      this.creator.survey.addPage(this.page);
     }
-    this.creator.survey.currentPage = this.page;
+    this.creator.selectElement(this.page);
   }
 
   addNewQuestion(model: PageViewModel<T>, event: IPortableMouseEvent) {
@@ -84,7 +82,7 @@ export class PageViewModel<
   select(model: PageViewModel<T>, event: IPortableMouseEvent) {
     if (!model.isGhost) {
       model.creator.selectElement(model.page, undefined, false);
-      if (!this.onPageSelectedCallback) {
+      if (!!this.onPageSelectedCallback) {
         this.onPageSelectedCallback();
       }
     }
