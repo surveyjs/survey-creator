@@ -7,7 +7,7 @@ import "./page.scss";
 
 export class PageViewModel<
   T extends SurveyModel
-> extends ActionContainerViewModel<T> {
+  > extends ActionContainerViewModel<T> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   public onPageSelectedCallback: () => void;
@@ -29,8 +29,8 @@ export class PageViewModel<
 
     if (typeof this.page["_addToSurvey"] === "function") {
       this.isGhost = true;
-      this.page["_isGhost"] = true;
       this.page["_addGhostPageViewMobel"] = () => {
+        this.page["_addGhostPageViewMobel"] = undefined;
         this.addGhostPage();
       };
     } else {
@@ -69,7 +69,9 @@ export class PageViewModel<
   private addGhostPage() {
     if (this.isGhost) {
       this.isGhost = false;
-      this.page["_addToSurvey"]();
+      if (typeof this.page["_addToSurvey"] === "function") {
+        this.page["_addToSurvey"]();
+      }
     }
     this.creator.survey.currentPage = this.page;
   }
