@@ -2008,6 +2008,8 @@ test("Use maxLength property attribute", () => {
   );
   expect(titleQuestion.getType()).toEqual("comment");
   expect(titleQuestion.maxLength).toEqual(20);
+  Serializer.findProperty("question", "name").maxLength = -1;
+  Serializer.findProperty("question", "title").maxLength = -1;
 });
 test("We should not have 'Others' category in our objects", () => {
   const survey = new SurveyModel();

@@ -1351,8 +1351,19 @@ export class CreatorBase<T extends SurveyModel>
       arrayChanges
     );
     this.updatePagesController(sender, name);
+    this.updateElementsOnLocaleChanged(sender, name);
     this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
     this.undoRedoManager.stopTransaction();
+  }
+  private updateElementsOnLocaleChanged(
+    obj: Survey.Base,
+    propertyName: string
+  ) {
+    if(obj.getType() !== "survey" || propertyName !== "locale") return;
+    const pages = this.survey.pages;
+    for(var i = 0; i < pages.length; i ++) {
+      pages[i].locStrsChanged();
+    }
   }
   private updateConditionsOnQuestionNameChanged(
     obj: Survey.Base,
@@ -1676,11 +1687,10 @@ export class CreatorBase<T extends SurveyModel>
     }
   }
 
-  protected getNewName(type: string): string {
+  protected getNewName(type: string, isPanel?: boolean): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
-    return type == "panel" || type == "flowpanel"
-      ? this.getNewPanelName()
-      : this.getNewQuestionName();
+    if (isPanel) return this.getNewPanelName();
+    return this.getNewQuestionName();
   }
   protected getNewQuestionName(): string {
     return SurveyHelper.getNewQuestionName(this.getAllQuestions());
@@ -1691,7 +1701,7 @@ export class CreatorBase<T extends SurveyModel>
 
   protected setNewNamesCore(element: Survey.ISurveyElement) {
     var elType = element["getType"]();
-    var newName = this.getNewName(elType);
+    var newName = this.getNewName(elType, element.isPanel);
     if (newName != element.name) {
       this.newQuestionChangedNames[element.name] = newName;
       element.name = newName;

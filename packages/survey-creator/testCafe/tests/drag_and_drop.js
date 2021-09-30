@@ -114,6 +114,12 @@ test.skip(`check d&d all toolbox elements`, async (t) => {
     `.svd_container .svd_questions_editor`
   );
   assert.equal(await getQuestionsAddedCount(), 17 + 1); //panel dynamic adds two questions that's why 17+1
+
+  await t.dragToElement(
+    `[title="Ranking"]`,
+    `.svd_container .svd_questions_editor`
+  );
+  assert.equal(await getQuestionsAddedCount(), 19);
 });
 
 test(`check drop to the bottom`, async (t) => {

@@ -1,4 +1,5 @@
 import {
+  Serializer,
   SurveyModel,
   surveyLocalization,
   Base,
@@ -525,4 +526,38 @@ test("stringsSurvey - text question dataList property, several locales", () => {
     default: ["Item1", "Item2"],
     de: ["Item1-de", "Item2-de", "Item3-de"],
   });
+});
+test("Respect property maxLength attrigute in stringsSurvey comment questions", () => {
+  Serializer.findProperty("question", "title").maxLength = 10;
+  Serializer.findProperty("page", "title").maxLength = 20;
+  Serializer.findProperty("survey", "title").maxLength = 30;
+  const survey = new SurveyModel({
+    title: "Survey title",
+    pages: [
+      {
+        title: "Page title",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: "Question title"
+          }
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  const page = translation.stringsSurvey.pages[0];
+  const pagePanel = <PanelModel>page.elements[1];
+  const questionPanel = <PanelModel>pagePanel.elements[1];
+  const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
+  const pageProps = <QuestionMatrixDropdownModel>pagePanel.elements[0];
+  const questionProps = <QuestionMatrixDropdownModel>questionPanel.elements[0];
+  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).maxLength).toEqual(30);
+  expect((<QuestionCommentModel>pageProps.visibleRows[0].cells[0].question).maxLength).toEqual(20);
+  expect((<QuestionCommentModel>questionProps.visibleRows[0].cells[0].question).maxLength).toEqual(10);
+
+  Serializer.findProperty("question", "title").maxLength = -1;
+  Serializer.findProperty("page", "title").maxLength = -1;
+  Serializer.findProperty("survey", "title").maxLength = -1;
 });
