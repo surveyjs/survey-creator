@@ -17,7 +17,7 @@ import { PageNavigatorViewModel } from "../src/components/page-navigator/page-na
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
 import { TabTestPlugin } from "../src/components/tabs/test";
 import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
-import { TabLogicPlugin } from "../src/components/tabs/logic-ui";
+import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
@@ -31,7 +31,8 @@ import {
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
 import { editorLocalization } from "../src/editorLocalization";
-import { settings } from "../src/settings";
+import { EmptySurveyCreatorOptions, settings } from "../src/settings";
+import { FastEntryEditor } from "../src/property-grid/fast-entry";
 
 test("options.questionTypes", (): any => {
   var creator = new CreatorTester();
@@ -1443,6 +1444,54 @@ test("Keyboard Shortcuts", (): any => {
   creator["onKeyDownHandler"](fakeDecreaseEvent);
   expect(count).toEqual(0);
 });
+
+test("LogicPlugin Fast entry: options.allowEditExpressionsInTextEditor", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  let logicTabActions = logicPlugin.createActions();
+  expect(creator.allowEditExpressionsInTextEditor).toBeTruthy();
+  expect(logicTabActions).toHaveLength(3);
+  expect(logicTabActions[2].id).toEqual("svc-logic-fast-entry");
+
+  creator.allowEditExpressionsInTextEditor = false;
+  logicTabActions = logicPlugin.createActions();
+  expect(logicTabActions).toHaveLength(2);
+  expect(logicTabActions.filter(action => action.id === "svc-logic-fast-entry")).toHaveLength(0);
+});
+
+test("LogicPlugin Fast entry: fastEntryAction switch active", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  const fastEntryAction = logicPlugin.createActions().filter(action => action.id === "svc-logic-fast-entry")[0];
+
+  expect(fastEntryAction.visible).toBeFalsy();
+
+  logicPlugin.activate();
+  expect(fastEntryAction.visible).toBeTruthy();
+
+  logicPlugin.model.expressionEditorIsFastEntry = true;
+  expect(fastEntryAction.active).toBeTruthy();
+
+  logicPlugin.model.expressionEditorIsFastEntry = false;
+  expect(fastEntryAction.active).toBeFalsy();
+});
+
+test("LogicPlugin Fast entry: fastEntryAction enabled", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  const fastEntryAction = logicPlugin.createActions().filter(action => action.id === "svc-logic-fast-entry")[0];
+
+  expect(fastEntryAction.visible).toBeFalsy();
+
+  logicPlugin.activate();
+  expect(fastEntryAction.visible).toBeTruthy();
+
+  logicPlugin.model.expressionEditorCanShowBuilder = false;
+  expect(fastEntryAction.enabled).toBeFalsy();
+
+  logicPlugin.model.expressionEditorCanShowBuilder = true;
+  expect(fastEntryAction.enabled).toBeTruthy();
+});
 test("getNewName get new element name", (): any => {
   const creator = new CreatorTester({ allowEditSurveyTitle: false });
   const getNewName = (elementType: string, isPanel?: boolean) => { return creator["getNewName"](elementType, isPanel); };
@@ -1521,4 +1570,5 @@ test("change locale in several pages survey", (): any => {
   expect(data["page2"]).toBeTruthy();
   expect(data["q1"]).toBeTruthy();
   expect(data["q2"]).toBeTruthy();
+
 });

@@ -1,1 +1,5 @@
-<div data-bind="attr: { id: embeddedSurvey.currentPage.id }, template: { name: 'survey-page', data: embeddedSurvey.currentPage }"></div>
+<!-- ko if: (!!embeddedSurvey && !!embeddedSurvey.currentPage) -->
+<div
+  data-bind="attr: { id: embeddedSurvey.currentPage.id }, template: { name: 'survey-page', data: embeddedSurvey.currentPage }">
+</div>
+<!-- /ko -->

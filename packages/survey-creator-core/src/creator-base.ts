@@ -43,7 +43,7 @@ import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-texta
 import { TabTestPlugin } from "./components/tabs/test";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
-import { TabLogicPlugin } from "./components/tabs/logic-ui";
+import { TabLogicPlugin } from "./components/tabs/logic-plugin";
 import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
 import { PropertyGridViewModel, PropertyGridViewModelBase, TabDesignerPlugin } from "./entries";
 import { Notifier } from "./components/notifier";
