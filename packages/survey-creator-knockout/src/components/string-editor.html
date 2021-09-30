@@ -9,5 +9,6 @@
         <!-- ko if: koHasHtml -->
         <span class="sv-string-editor" data-bind="html: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown }, click: edit, attr: { 'aria-placeholder': placeholder }" contenteditable="true"></span>
         <!-- /ko -->
+        <div data-bind="visible:errorText, text: errorText"></div>
     </span>
 </span>

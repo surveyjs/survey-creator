@@ -37,7 +37,7 @@ export class StringEditorViewModelBase extends Base {
     const clearedText = clearNewLines(event.target.innerText);
 
     const creator = this.locString.owner.getRendererContext(this.locString).creator;
-    this.errorText = creator.onGetErrorTextOnValidationCallback(this.locString.owner, this.locString.name, clearedText);
+    this.errorText = creator.onGetErrorTextOnValidationCallback(this.locString.name, this.locString.owner, clearedText);
 
     if (this.locString.text != clearedText) {
       this.locString.text = clearedText;
