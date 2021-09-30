@@ -31,6 +31,9 @@ export class StringEditorViewModel {
   public get placeholder(): string {
     return this.baseModel.placeholder;
   }
+  public get errorText(): string {
+    return this.baseModel.errorText;
+  }
   public onInput(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onInput(event);
     this.locString.searchElement = undefined;

@@ -5,6 +5,8 @@ import { clearNewLines, select } from "../utils/utils";
 export class StringEditorViewModelBase extends Base {
   private blurredByEscape: boolean = false;
   private valueBeforeEdit: string;
+
+  public errorText: string;
   constructor(private locString: LocalizableString) {
     super();
   }
@@ -33,6 +35,10 @@ export class StringEditorViewModelBase extends Base {
     }
 
     const clearedText = clearNewLines(event.target.innerText);
+
+    const creator = this.locString.owner.getRendererContext(this.locString).creator;
+    this.errorText = creator.onGetErrorTextOnValidationCallback(this.locString.owner, this.locString.name, clearedText);
+
     if (this.locString.text != clearedText) {
       this.locString.text = clearedText;
     } else {

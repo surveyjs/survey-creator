@@ -6,7 +6,8 @@ import {
   Question,
   QuestionRowModel,
   QuestionSelectBase,
-  SurveyModel
+  SurveyModel,
+  LocalizableString
 } from "survey-core";
 import { Survey, ImplementorBase, Panel } from "survey-knockout-ui";
 import {
@@ -72,6 +73,16 @@ export class DesignTimeSurveyModel extends Survey {
       return editableStringRendererName;
     }
     return undefined;
+  }
+  public getRendererContextForString(element: Base, locStr: LocalizableString) {
+    if (!this.creator.readOnly && isStringEditable(element, locStr.name)) {
+      return {
+        creator: this.creator,
+        element,
+        locStr
+      };
+    }
+    return locStr;
   }
 }
 
