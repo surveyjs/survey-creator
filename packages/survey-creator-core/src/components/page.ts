@@ -27,6 +27,7 @@ export class PageViewModel<
       this.isPageLive = !!page.survey;
     };
     if(this.isGhost) {
+      this.updateActionsProperties();
       this.page.registerFunctionOnPropertiesValueChanged(
         ["title", "description"],
         () => {
@@ -72,6 +73,7 @@ export class PageViewModel<
       this.creator.survey.addPage(this.page);
     }
     this.creator.selectElement(this.page);
+    this.updateActionsProperties();
   }
 
   addNewQuestion(model: PageViewModel<T>, event: IPortableMouseEvent) {
