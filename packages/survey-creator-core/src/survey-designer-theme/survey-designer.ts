@@ -65,6 +65,7 @@ export var surveyDesignerCss = {
   pageTitle: "sd-title sd-page__title",
   pageDescription: "sd-description sd-page__description",
   row: "sd-row sd-clearfix",
+  rowMultiple: "sd-row--multiple",
   question: {
     mainRoot: "sd-element-with-frame sd-question sd-row__question",
     flowRoot: "sd-element-with-frame sd-question sd-row__question sd-row__question--flow",
