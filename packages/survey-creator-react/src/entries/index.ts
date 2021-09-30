@@ -35,6 +35,7 @@ export * from "../components/Navigation";
 export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
+export * from "../components/tabs/TranslationLineSkeleton";
 
 export {
   editorLocalization,
