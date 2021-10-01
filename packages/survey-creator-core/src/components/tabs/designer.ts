@@ -20,20 +20,6 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     newPage.updateCustomWidgets();
     newPage.setWasShown(true);
     newPage.setSurveyImpl(this.survey);
-    newPage["_addToSurvey"] = () => {
-      newPage["_addToSurvey"] = undefined;
-      newPage.unRegisterFunctionOnPropertiesValueChanged([
-        "title",
-        "description"
-      ]);
-      this.survey.addPage(newPage);
-    };
-    newPage.registerFunctionOnPropertiesValueChanged(
-      ["title", "description"],
-      () => {
-        newPage["_addToSurvey"]();
-      }
-    );
     var checkNewElementHandler = (sender: SurveyModel, options: any) => {
       if (options.name === "elements" && newPage.elements.length > 0) {
         newPage.onPropertyChanged.remove(checkNewElementHandler);
@@ -148,7 +134,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.undoAction && (this.undoAction.visible = true);
     this.redoAction && (this.redoAction.visible = true);
     this.surveySettingsAction && (this.surveySettingsAction.visible = true);
-    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible)
+    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible);
   }
   public deactivate(): boolean {
     this.model = undefined;
@@ -217,7 +203,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     items.push(this.surveySettingsAction);
     if (settings.propertyGrid.allowCollapse) {
       this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
-      items.push(this.expandAction)
+      items.push(this.expandAction);
     }
     this.updateUndeRedoActions();
     this.creator.onActiveTabChanged.add((sender, options) => {
