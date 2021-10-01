@@ -144,12 +144,12 @@ export var enStrings = {
       addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       empty_tab: "Create a rule to customize the flow of the survey.",
-      page_visibilityName: "Page visibility",
-      panel_visibilityName: "Panel visibility",
-      panel_enableName: "Panel enable/disable",
-      question_visibilityName: "Question visibility",
-      question_enableName: "Question enable/disable",
-      question_requireName: "Question optional required",
+      page_visibilityName: "Show (hide) page",
+      panel_visibilityName: "Show (hide) panel",
+      panel_enableName: "Enable (disable) panel",
+      question_visibilityName: "Show (hide) question",
+      question_enableName: "Enable (disable) question",
+      question_requireName: "Make question required",
       trigger_completeName: "Complete survey",
       trigger_setvalueName: "Set question value",
       trigger_copyvalueName: "Copy question value",
