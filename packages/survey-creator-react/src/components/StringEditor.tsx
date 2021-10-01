@@ -132,9 +132,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
             onClick={this.edit}>
           </div>
         </span>
-        <span className="svc-string-editor__error">
-          {this.errorText}
-        </span>
+        { this.errorText?<span className="svc-string-editor__error">{this.errorText}</span>:"" }
       </span>
     );
   }

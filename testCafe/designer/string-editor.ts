@@ -97,7 +97,7 @@ test.only("Check creator events on string editor", async (t) => {
 
   const svStringSelector = Selector(".sv-string-editor").withText("desc");
 
-  await t.expect(Selector(".svc-string-editor__error").visible).notOk()
+  await t
     .click(svStringSelector)
     .typeText(svStringSelector, "1234567890", { caretPos: 0 })
     .pressKey("enter")
