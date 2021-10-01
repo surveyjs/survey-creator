@@ -59,6 +59,7 @@ export class SurveyLogicUI extends SurveyLogic {
         this.mode = "view";
         this.updateNewActionState();
       }
+      this.expressionEditorCanShowBuilder = !!this.editableItem;
     });
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
       if (this.readOnly) return;
@@ -141,6 +142,7 @@ export class SurveyLogicUI extends SurveyLogic {
     super.onStartEditing();
     this.expressionEditorValue = this.getExpressionEditor(this.editableItem);
     this.itemEditorValue = this.getLogicItemEditor(this.editableItem);
+    this.expressionEditorIsFastEntry = false;
     this.expressionEditor.setIsFastEntry(this.expressionEditorIsFastEntry, this.editableItem.expression);
     this.expressionEditorCanShowBuilder = ConditionEditor.canBuildExpression(this.expressionEditor.text);
   }
@@ -253,6 +255,7 @@ export class SurveyLogicUI extends SurveyLogic {
       panel: PanelModel
     ) => {
       row.onDetailPanelShowingChanged = () => {
+        this.expressionEditorCanShowBuilder = row.isDetailPanelShowing;
         if (row.isDetailPanelShowing) {
           if (this.mode === "view") {
             const logicItem = this.visibleItems[row.rowIndex - 1];

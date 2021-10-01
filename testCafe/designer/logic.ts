@@ -98,7 +98,7 @@ function getListItemByText(text) {
   return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
 }
 
-const tableRulesSelector = Selector(".sl-table tbody tr").filterVisible();
+const tableRulesSelector = Selector(".sl-table tbody tr:not(.st-table__row--detail)").filterVisible();
 const conditionBuilder = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"panel\"]");
 const conditionTextEdit = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"textEditor\"]");
 
@@ -112,7 +112,7 @@ const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible(
 const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
 const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisible();
 const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
-
+const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New");
 const addButton = Selector(".sd-paneldynamic__add-btn").filterVisible();
@@ -317,8 +317,11 @@ test("Fast entry of the editing condition", async (t) => {
 
   await t
     .click(getTabbedMenuItemByText("Survey Logic"))
+    .expect(fastEntryAction.hasAttribute("disabled")).ok()
+
     .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement)
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
     .expect(conditionBuilder.exists).ok()
     .expect(conditionTextEdit.exists).notOk()
     .expect(fastEntryAction.classNames).notContains("sv-action-bar-item--active")
@@ -341,13 +344,23 @@ test("Fast entry of the editing condition", async (t) => {
     .expect(fastEntryAction.hasAttribute("disabled")).notOk()
 
     .click(addNewRuleButton)
-    .expect(conditionBuilder.exists).notOk()
-    .expect(conditionTextEdit.exists).ok()
-    .expect(fastEntryAction.classNames).contains("sv-action-bar-item--active")
+    .expect(conditionBuilder.exists).ok()
+    .expect(conditionTextEdit.exists).notOk()
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
+    .expect(fastEntryAction.classNames).notContains("sv-action-bar-item--active")
 
     .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement)
-    .expect(conditionBuilder.exists).notOk()
-    .expect(conditionTextEdit.exists).ok()
-    .expect(fastEntryAction.classNames).contains("sv-action-bar-item--active");
+    .expect(conditionBuilder.exists).ok()
+    .expect(conditionTextEdit.exists).notOk()
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
+    .expect(fastEntryAction.classNames).notContains("sv-action-bar-item--active")
+
+    .hover(tableRulesSelector.nth(1))
+    .click(removeRuleButton.nth(1))
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
+
+    .hover(tableRulesSelector.nth(0))
+    .click(removeRuleButton)
+    .expect(fastEntryAction.hasAttribute("disabled")).ok();
 });
