@@ -14,6 +14,7 @@ svc-question {
   height: 100%;
   width: 100%;
 }
+
 .svc-question__content {
   display: flex;
   flex-direction: column;
@@ -119,6 +120,16 @@ svc-question,
 }
 
 // reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
+.svc-question__adorner--start-with-new-line {
+  &[data-sv-drop-target-survey-element="sv-drag-drop-ghost-survey-element-name"] {
+    height: 100%;
+    overflow: hidden;
+    .svc-question__content {
+      padding: 0;
+    }
+  }
+}
+
 [data-sv-drop-target-survey-element="sv-drag-drop-ghost-survey-element-name"] {
   border: none;
   height: 0;

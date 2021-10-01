@@ -161,7 +161,7 @@ test("Drag Drop to Panel", async (t) => {
   await t.expect(resultJson).eql(expectedJson);
 });
 
-test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
+test.only("Drag Drop Question (StartWithNewLine === false)", async (t) => {
   const json = {
     pages: [
       {
@@ -169,8 +169,7 @@ test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
         elements: [
           {
             type: "rating",
-            name: "question1",
-            startWithNewLine: false
+            name: "question1"
           },
           {
             type: "rating",
@@ -191,25 +190,37 @@ test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
 
   await setJSON(json);
 
-  const Question1 = Selector("[data-sv-drop-target-survey-element=\"question1\"]");
-  const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
+  const Question1 = Selector(
+    "[data-sv-drop-target-survey-element=\"question1\"]"
+  );
+  const Question3 = Selector(
+    "[data-sv-drop-target-survey-element=\"question3\"]"
+  );
   const DragZoneQuestion1 = Question1.find(".svc-question__drag-element");
 
-  await t
-    .hover(Question1, { speed: 0.5 })
-    .hover(DragZoneQuestion1)
-    .dragToElement(DragZoneQuestion1, Question3, {
-      offsetX: 5,
-      offsetY: 5,
-      destinationOffsetX: 80,
-      speed: 0.5
-    });
+  await t.hover(Question1, { speed: 0.5 });
+  await t.hover(DragZoneQuestion1);
+  await t.dragToElement(DragZoneQuestion1, Question3, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetX: 80,
+    speed: 0.5
+  });
 
   let name = await getQuestionNameByIndex(0);
   await t.expect(name).eql("question2");
 
+  name = await getQuestionNameByIndex(1);
+  await t.expect(name).eql("question3");
+
   name = await getQuestionNameByIndex(2);
   await t.expect(name).eql("question1");
+
+  // const getStartWithNewLineByIndex = ClientFunction((index) => {
+  //   return creator.survey.getAllQuestions()[index].startWithNewLine;
+  // });
+  // const result = await getStartWithNewLineByIndex(2);
+  // await t.expect(result).eql(false, "question1.startWithNewLine should set to false after drag");
 });
 
 test("Drag Drop ItemValue (choices)", async (t) => {
