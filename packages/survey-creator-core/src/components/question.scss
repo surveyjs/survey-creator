@@ -161,7 +161,7 @@ svc-question,
   border-radius: 10px;
 }
 
-.sd-panel {
+.sd-panel, .sd-row--multiple {
   .svc-question__content {
     &:not(.svc-question__content--selected):not(:hover) {
       border: 1px dashed $border;
