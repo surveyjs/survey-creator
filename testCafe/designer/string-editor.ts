@@ -16,6 +16,21 @@ const json = {
   ]
 };
 
+const json2 = {
+  questions: [
+    {
+      type: "checkbox",
+      name: "string_editor",
+      description: "desc",
+      choices: [
+        "item1",
+        "item2",
+        "item3"
+      ]
+    }
+  ]
+};
+
 fixture`${title}`.page`${url}`.beforeEach(
   async (t) => {
     await t.maximizeWindow();
@@ -67,4 +82,24 @@ test("Check string editor visibility", async (t) => {
     window["creator"].JSON = json;
   })(json);
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).ok();
+});
+
+test.only("Check creator events on string editor", async (t) => {
+  const msg = "Description length can not be greater than 10 characters";
+  await ClientFunction((json, msg) => {
+    window["creator"].JSON = json;
+    window["creator"].onPropertyValidationCustomError.add(function (sender, options) {
+      if(options.obj.isQuestion && options.propertyName == "description" && options.value.length > 10) {
+        options.error = msg;
+      }
+    });
+  })(json2, msg);
+
+  const svStringSelector = Selector(".sv-string-editor").withText("desc");
+
+  await t.expect(Selector(".svc-string-editor__error").visible).notOk()
+    .click(svStringSelector)
+    .typeText(svStringSelector, "1234567890", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(Selector(".sd-question__description .svc-string-editor").withText(msg).visible).ok();
 });
