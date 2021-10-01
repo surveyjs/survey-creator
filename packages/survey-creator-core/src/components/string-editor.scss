@@ -34,6 +34,11 @@
   justify-content: right;
   line-height: 0px;
 }
+.svc-string-editor__error {
+  margin-left: calcSize(1);
+  line-height: calcSize(4);
+  color: red;
+}
 
 .svc-string-editor__controls {
   position: absolute;

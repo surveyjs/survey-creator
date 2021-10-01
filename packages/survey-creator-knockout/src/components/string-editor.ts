@@ -1,5 +1,6 @@
 import * as ko from "knockout";
 import { StringEditorViewModelBase } from "@survey/creator";
+import { LocalizableString } from "survey-core";
 const template = require("./string-editor.html");
 
 export class StringEditorViewModel {
@@ -18,6 +19,12 @@ export class StringEditorViewModel {
     };
     this.baseModel.blurEditor = () => this.getEditorElement(element).blur();
   }
+
+  public setLocString(locString: LocalizableString): LocalizableString {
+    this.baseModel.setLocString(locString);
+    return locString;
+  }
+
   public get koHasHtml(): boolean {
     return this.locString.koHasHtml();
   }
@@ -31,18 +38,19 @@ export class StringEditorViewModel {
   public get placeholder(): string {
     return this.baseModel.placeholder;
   }
-  public get errorText(): string {
-    return this.baseModel.errorText;
-  }
+  public errorText: ko.Observable<string> = ko.observable(null);
   public onInput(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onInput(event);
+    this.errorText(this.baseModel.errorText);
     this.locString.searchElement = undefined;
   }
   public onFocus(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onFocus(event);
   }
   public onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent): boolean {
-    return this.baseModel.onKeyDown(event);
+    var res = this.baseModel.onKeyDown(event);
+    this.errorText(this.baseModel.errorText);
+    return res;
   }
   public edit(model: StringEditorViewModel, _: MouseEvent): void {
     model.focusEditor && model.focusEditor();
@@ -107,10 +115,17 @@ export const editableStringRendererName = "svc-string-editor";
 ko.components.register(editableStringRendererName, {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const locStr = params.locString;
+      const locStr = params.locString.locStr;
       applyLocStrOnSearchChanged(componentInfo.element, locStr);
 
-      const model = new StringEditorViewModel(locStr, componentInfo.element);
+      const model = new StringEditorViewModel(ko.unwrap(locStr), componentInfo.element);
+      const subscrib = ko.computed(()=>{
+        return model.setLocString(ko.unwrap(locStr));
+      });
+
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        subscrib.dispose();
+      });
       return model;
     },
   },

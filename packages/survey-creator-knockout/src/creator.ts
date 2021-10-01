@@ -82,7 +82,7 @@ export class DesignTimeSurveyModel extends Survey {
         locStr
       };
     }
-    return locStr;
+    return <any>locStr;
   }
 }
 

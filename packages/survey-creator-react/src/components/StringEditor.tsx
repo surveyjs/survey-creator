@@ -1,9 +1,9 @@
 import React from "react";
-import { LocalizableString, Serializer, JsonObjectProperty } from "survey-core";
-import { ReactElementFactory, SvgIcon } from "survey-react-ui";
+import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
+import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import { StringEditorViewModelBase } from "@survey/creator";
 
-export class SurveyLocStringEditor extends React.Component<any, any> {
+export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   private baseModel: StringEditorViewModelBase;
   private svStringEditorRef: React.RefObject<HTMLDivElement>;
   private blurredByEscape:boolean = false;
@@ -22,6 +22,15 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   private get style(): any {
     return this.props.style;
   }
+
+  protected getStateElement(): Base {
+    return this.baseModel;
+  }
+
+  public get errorText(): string {
+    return this.baseModel.errorText;
+  }
+
   public componentDidMount() {
     if (!this.locString) return;
     const self: SurveyLocStringEditor = this;
@@ -42,6 +51,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   }
   private onInput = (event: any) => {
     this.baseModel.onInput(event.nativeEvent);
+    return this.baseModel.errorText;
   };
   private onFocus = (event: any) => {
     this.baseModel.onFocus(event.nativeEvent);
@@ -64,6 +74,9 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   public render(): JSX.Element {
     if (!this.locString) {
       return null;
+    }
+    else {
+      this.baseModel.setLocString(this.locString);
     }
     let control = null;
     if (this.locString.hasHtml) {
@@ -118,6 +131,9 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
           <div className="svc-string-editor__controls"
             onClick={this.edit}>
           </div>
+        </span>
+        <span className="svc-string-editor__error">
+          {this.errorText}
         </span>
       </span>
     );
