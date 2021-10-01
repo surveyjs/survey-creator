@@ -2,7 +2,16 @@ import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionN
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
-fixture`${title}`.page`${url}`.beforeEach(async (t) => {
+const explicitErrorHandler = () => {
+  window.addEventListener("error", e => {
+    if (e.message === "ResizeObserver loop completed with undelivered notifications." ||
+      e.message === "ResizeObserver loop limit exceeded") {
+      e.stopImmediatePropagation();
+    }
+  });
+};
+
+fixture`${title}`.page`${url}`.clientScripts({ content: `(${explicitErrorHandler.toString()})()` }).beforeEach(async (t) => {
   await t.maximizeWindow();
 });
 
