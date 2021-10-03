@@ -721,7 +721,7 @@ test("Displaying correct text for logic action", () => {
   expect(findOp("completedHtmlOnCondition").text).toEqual(
     "Show custom text for the 'Thank you page'."
   );
-  expect(findOp("page_visibility").name).toEqual("Page visibility");
+  expect(findOp("page_visibility").name).toEqual("Show (hide) page");
 });
 
 test("Logic editing errors", () => {

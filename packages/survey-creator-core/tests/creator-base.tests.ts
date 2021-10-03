@@ -444,7 +444,7 @@ test("Create new page with empty survey", (): any => {
   expect(designerPlugin.model.newPage.elements).toHaveLength(0);
 });
 test("Create new page on changing title/description in ghost", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [
       {
@@ -453,18 +453,31 @@ test("Create new page on changing title/description in ghost", (): any => {
       }
     ]
   };
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
+  let pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  expect(pageModel.isGhost).toBeTruthy();
   designerPlugin.model.newPage.title = "Some title";
+  expect(pageModel.isGhost).toBeFalsy();
   expect(creator.survey.pages).toHaveLength(2);
   expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
+
+  pageModel = new PageViewModel(creator, creator.survey.pages[1]);
+  pageModel.page.description = "Some text";
+  expect(creator.survey.pages).toHaveLength(2);
+
   creator.survey.pages[1].addNewQuestion("text", "q2");
+  pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  expect(pageModel.isGhost).toBeTruthy();
   expect(designerPlugin.model.newPage).toBeTruthy();
   designerPlugin.model.newPage.description = "Some description";
+  expect(pageModel.isGhost).toBeFalsy();
   expect(creator.survey.pages).toHaveLength(3);
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
   expect(designerPlugin.model.newPage).toBeFalsy();
 });
 test("Create new page on changing title/description in ghost PageViewModel resets isGhost", (): any => {
@@ -559,23 +572,29 @@ test("Check survey undo/redo buttons ", (): any => {
   expect(redoItem.active).toBeFalsy();
 });
 test("undo/redo add new page", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pageCount).toEqual(1);
   expect(creator.survey.pages[0].name).toEqual("page1");
   expect(designerPlugin.model.newPage.name).toEqual("page2");
-  designerPlugin.model.newPage["_addToSurvey"]();
+  let newPageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  expect(newPageModel.isGhost).toBeTruthy();
+  newPageModel.addGhostPage();
+  expect(newPageModel.isGhost).toBeFalsy();
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
   creator.survey.pages[1].addNewQuestion("text", "question2");
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
-  designerPlugin.model.newPage["_addToSurvey"]();
+  newPageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  expect(newPageModel.isGhost).toBeTruthy();
+  newPageModel.addGhostPage();
+  expect(newPageModel.isGhost).toBeFalsy();
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
   creator.survey.pages[2].addNewQuestion("text", "question3");

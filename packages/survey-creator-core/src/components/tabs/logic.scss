@@ -14,9 +14,15 @@ tr:hover .sl-detail-panel__icon:before {
 tr #remove-row .sv-action-bar-item__icon use {
   display: none;
 }
-tr:hover #remove-row .sv-action-bar-item__icon use {
-  fill: $red;
-  display: block;
+tr:hover #remove-row {
+  .sv-action-bar-item {
+    padding: calcSize(0.25);
+    border: none;
+  }
+  .sv-action-bar-item__icon use {
+    fill: $red;
+    display: block;
+  }
 }
 
 .sl-table__cell {
@@ -35,6 +41,7 @@ tr:hover #remove-row .sv-action-bar-item__icon use {
   appearance: none;
   border: none;
   background-color: transparent;
+  padding: calсSize(0.25);
 }
 
 .sl-table {
