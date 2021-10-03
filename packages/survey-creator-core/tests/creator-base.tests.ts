@@ -1504,6 +1504,7 @@ test("LogicPlugin Fast entry: fastEntryAction enabled", () => {
 
   logicPlugin.activate();
   expect(fastEntryAction.visible).toBeTruthy();
+  expect(fastEntryAction.enabled).toBeFalsy();
 
   logicPlugin.model.expressionEditorCanShowBuilder = false;
   expect(fastEntryAction.enabled).toBeFalsy();

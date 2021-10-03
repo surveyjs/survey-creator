@@ -676,13 +676,15 @@ test("LogicItemEditorUI: fast entry edit and change expressionEditorCanShowBuild
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2", visibleIf: "{q1} = 1" },
-      { type: "text", name: "q3", visibleIf: "{q1} = 1" }
+      { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+      { type: "text", name: "q4", visibleIf: "{q1} = 3" },
     ]
   });
   const logic = new SurveyLogicUI(survey);
   const itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
-  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(itemsQuestion.rowCount).toEqual(3);
   expect(logic.expressionEditor).toBeFalsy();
+  expect(logic.expressionEditorCanShowBuilder).toBeFalsy();
 
   logic.editItem(logic.items[0]);
   let editor = logic.expressionEditor;
@@ -695,9 +697,26 @@ test("LogicItemEditorUI: fast entry edit and change expressionEditorCanShowBuild
 
   editor.textEditor.value = "{q1} = 1";
   expect(logic.expressionEditorCanShowBuilder).toBeTruthy();
+
+  itemsQuestion.removeRow(1);
+  expect(logic.expressionEditorCanShowBuilder).toBeTruthy();
+
+  itemsQuestion.removeRow(0);
+  expect(logic.expressionEditorCanShowBuilder).toBeFalsy();
+  expect(itemsQuestion.rowCount).toEqual(1);
+
+  const row = itemsQuestion.visibleRows[0];
+  row.showDetailPanel();
+  expect(logic.expressionEditorCanShowBuilder).toBeTruthy();
+
+  row.hideDetailPanel();
+  expect(logic.expressionEditorCanShowBuilder).toBeFalsy();
+
+  itemsQuestion.removeRow(0);
+  expect(logic.expressionEditorCanShowBuilder).toBeFalsy();
 });
 
-test("LogicItemEditorUI: change expressionEditorCanShowBuilder", () => {
+test("LogicItemEditorUI: change expressionEditorIsFastEntry", () => {
   const survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },

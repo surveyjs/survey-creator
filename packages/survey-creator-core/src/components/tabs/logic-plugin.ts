@@ -27,6 +27,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
     if (this.fastEntryAction) {
       this.fastEntryAction.visible = true;
       this.fastEntryAction.active = this.model.expressionEditorIsFastEntry;
+      this.fastEntryAction.enabled = false;
     }
 
     this.model.onPropertyChanged.add((sender, options) => {
