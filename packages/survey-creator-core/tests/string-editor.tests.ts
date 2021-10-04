@@ -22,3 +22,16 @@ test("Test css", (): any => {
   expect(stringEditorQuestion.className("")).toEqual("svc-string-editor svc-string-editor--hidden");
   expect(stringEditorQuestion.className("desc")).toEqual("svc-string-editor");
 });
+test("onPropertyValueChanging callback", () => {
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  options.onValueChangingCallback = function (options) {
+    options.newValue = options.newValue.trim();
+  };
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var titleQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("title")
+  );
+  titleQuestion.value = " ss   ";
+  expect(question.title).toEqual("ss");
+});

@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { StringEditorViewModelBase } from "@survey/creator";
+import { CreatorBase, StringEditorViewModelBase } from "@survey/creator";
 import { LocalizableString } from "survey-core";
 const template = require("./string-editor.html");
 
@@ -12,8 +12,8 @@ export class StringEditorViewModel {
     )[0];
   };
 
-  constructor(public locString: any, element: any) {
-    this.baseModel = new StringEditorViewModelBase(locString);
+  constructor(public locString: any, private creator: CreatorBase, element: any) {
+    this.baseModel = new StringEditorViewModelBase(locString, creator);
     this.focusEditor = () => {
       this.getEditorElement(element).focus();
     };
@@ -115,12 +115,12 @@ export const editableStringRendererName = "svc-string-editor";
 ko.components.register(editableStringRendererName, {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const locStr = params.locString.locStr;
-      applyLocStrOnSearchChanged(componentInfo.element, locStr);
-
-      const model = new StringEditorViewModel(ko.unwrap(locStr), componentInfo.element);
-      const subscrib = ko.computed(()=>{
-        return model.setLocString(ko.unwrap(locStr));
+      const data = ko.unwrap(params.locString);
+      const model = new StringEditorViewModel(data.locStr, data.creator, componentInfo.element);
+      const subscrib = ko.computed(() => {
+        const locStr = ko.unwrap(params.locString).locStr;
+        applyLocStrOnSearchChanged(componentInfo.element, locStr);
+        model.setLocString(locStr);
       });
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {

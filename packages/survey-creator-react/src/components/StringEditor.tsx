@@ -1,7 +1,7 @@
 import React from "react";
 import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
-import { StringEditorViewModelBase } from "@survey/creator";
+import { CreatorBase, StringEditorViewModelBase } from "@survey/creator";
 
 export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   private baseModel: StringEditorViewModelBase;
@@ -10,14 +10,17 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   constructor(props: any) {
     super(props);
     this.state = { changed: 0 };
-    this.baseModel = new StringEditorViewModelBase(this.locString);
+    this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
     this.svStringEditorRef = React.createRef();
     this.baseModel.blurEditor = ()=>{
       this.svStringEditorRef.current.blur();
     };
   }
   private get locString(): LocalizableString {
-    return this.props.locStr;
+    return this.props.locStr.locStr;
+  }
+  private get creator(): CreatorBase {
+    return this.props.locStr.creator;
   }
   private get style(): any {
     return this.props.style;

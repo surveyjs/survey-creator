@@ -1,4 +1,5 @@
 import { Base, LocalizableString, Serializer, JsonObjectProperty, property } from "survey-core";
+import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
 
@@ -8,7 +9,7 @@ export class StringEditorViewModelBase extends Base {
   private valueBeforeEdit: string;
 
   @property() errorText: string;
-  constructor(private locString: LocalizableString) {
+  constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
   }
 
@@ -45,8 +46,7 @@ export class StringEditorViewModelBase extends Base {
 
     const clearedText = clearNewLines(event.target.innerText);
 
-    const creator = this.locString.owner.getRendererContext(this.locString).creator;
-    this.errorText = creator.onGetErrorTextOnValidationCallback(this.locString.name, this.locString.owner, clearedText);
+    this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, <any>this.locString.owner, clearedText);
 
     if (this.locString.text != clearedText) {
       if(!this.errorText)
