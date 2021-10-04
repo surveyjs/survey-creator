@@ -961,6 +961,9 @@ export class SurveyQuestionEditor extends SurveyElementEditorContentModel {
       self.doCloseWindow(true);
     };
     this.onTabClick = function (tab) {
+      if(!!tab.beforeShow) {
+        tab.beforeShow();
+      }
       self.koActiveTab(tab.name);
     };
     this.koShowApplyButton = ko.observable(
