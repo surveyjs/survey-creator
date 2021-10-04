@@ -30,12 +30,12 @@ test("Survey/page title/description placeholders text", () => {
 
 test("Save survey action properties", () => {
   const creator = new CreatorTester();
-  const action = creator.getActionBarItem("icon-save");
+  const action = creator.getActionBarItem("svd-save");
   expect(action.visible).toBeFalsy();
   expect(action.active).toBeFalsy();
   expect(action.enabled).toBeFalsy();
 
-  creator.saveSurveyFunc = () => {};
+  creator.saveSurveyFunc = () => { };
   expect(action.visible).toBeTruthy();
   expect(action.active).toBeFalsy();
   expect(action.enabled).toBeFalsy();
@@ -57,12 +57,12 @@ test("Save survey action properties", () => {
 });
 
 test("StringEditorViewModelBase maxLength", () => {
-  let survey: SurveyModel = new SurveyModel({ });
+  let survey: SurveyModel = new SurveyModel({});
   let editor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle);
   expect(editor.maxLength).toBe(-1);
-  try{
+  try {
     Serializer.findProperty("survey", "title").maxLength = 4;
-    survey = new SurveyModel({ });
+    survey = new SurveyModel({});
     editor = new StringEditorViewModelBase(survey.locTitle);
     expect(editor.maxLength).toBe(4);
   }

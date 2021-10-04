@@ -1,4 +1,4 @@
-import { Base, PageModel, property, SurveyModel, Action } from "survey-core";
+import { Base, PageModel, property, SurveyModel, Action, ComputedUpdater } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
 import { PropertyGridModel } from "../../property-grid";
@@ -183,19 +183,25 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
         this.creator.selectElement(this.creator.survey);
       },
       active: this.isSurveySelected,
-      visible: this.creator.viewType === "designer",
+      visible: this.creator.activeTab === "designer",
       title: "Settings",
       showTitle: false
     });
     this.saveSurveyAction = new Action({
-      id: "icon-save",
-      iconName: "icon-import",
+      id: "svd-save",
+      iconName: "icon-save",
       action: () => this.creator.doSave(),
-      active: this.creator.state === "modified",
-      enabled: this.creator.state === "modified",
-      visible: this.creator.showSaveButton && this.creator.activeTab === "designer",
+      active: <any>new ComputedUpdater<boolean>(() => {
+        return this.creator.state === "modified";
+      }),
+      enabled: <any>new ComputedUpdater<boolean>(() => this.creator.state === "modified"),
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        const isDesignerTabActive = this.creator.activeTab === "designer";
+        return this.creator.showSaveButton && isDesignerTabActive;
+      }),
       title: this.creator.getLocString("ed.saveSurvey"),
-      tooltip: this.creator.getLocString("ed.saveSurveyTooltip")
+      tooltip: this.creator.getLocString("ed.saveSurveyTooltip"),
+      showTitle: false
     });
     items.push(this.undoAction);
     items.push(this.redoAction);
@@ -206,18 +212,6 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       items.push(this.expandAction);
     }
     this.updateUndeRedoActions();
-    this.creator.onActiveTabChanged.add((sender, options) => {
-      this.saveSurveyAction.visible =
-        this.creator.showSaveButton && this.creator.activeTab === "designer";
-    });
-    this.creator.onShowSaveButtonVisiblityChanged.add((sender, options) => {
-      this.saveSurveyAction.visible =
-        this.creator.showSaveButton && this.creator.activeTab === "designer";
-    });
-    this.creator.onStateChanged.add((sender, options) => {
-      this.saveSurveyAction.active = this.creator.state === "modified";
-      this.saveSurveyAction.enabled = this.creator.state === "modified";
-    });
     this.creator.onSelectedElementChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
