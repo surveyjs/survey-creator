@@ -3,8 +3,8 @@
 svc-page-navigator-item,
 .svc-page-navigator-item {
   display: block;
-  width: 44px;
-  height: 36px;
+  width: calcSize(5.5);
+  height: calcSize(4.5);
   cursor: pointer;
   position: relative;
 }
@@ -29,8 +29,8 @@ svc-page-navigator-item,
   .svc-page-navigator-item__dot {
     width: calcSize(1);
     height: calcSize(1);
-    right: calc(50% - 12px / 2);
-    top: calc(50% - 12px / 2);
+    right: calc(50% - 1.5 * #{$base-unit} / 2);
+    top: calc(50% - 1.5 * #{$base-unit} / 2);
     background: $background;
     border: calcSize(0.25) solid $primary;
   }
@@ -47,10 +47,10 @@ svc-page-navigator-item,
   transition: max-width 0.1s ease-in-out, padding 0.1s ease-in-out;
   white-space: nowrap;
   height: 100%;
-  line-height: 36px;
+  line-height: calcSize(4.5);
   background: $background;
   /* Shadow / Medium */
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 6px $shadow-medium;
   border-radius: calcSize(12.5);
 
   .svc-page-navigator-item__dot {
@@ -58,7 +58,7 @@ svc-page-navigator-item,
     display: inline-block;
     top: -2px;
     right: calcSize(-1);
-    line-height: 36px;
+    line-height: calcSize(4.5);
     vertical-align: middle;
   }
 }
@@ -77,7 +77,7 @@ svc-page-navigator-item,
 .svc-page-navigator-item-content:hover {
   .svc-page-navigator-item__banner {
     padding: 0 calcSize(3);
-    max-width: 200px;
+    max-width: calcSize(25);
   }
 }
 

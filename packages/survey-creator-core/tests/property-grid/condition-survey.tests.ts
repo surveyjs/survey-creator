@@ -1277,53 +1277,33 @@ test("Set minWidth property to question correctly", () => {
   expect(panel.getQuestionByName("operator").minWidth).toEqual("50px");
   expect(panel.getQuestionByName("questionValue").minWidth).toEqual("50px");
 });
-test("Show Build/Edit tabs and switch between, not a modal mode", () => {
-  var survey = new SurveyModel({
+test("setIsFastEntry method, not a modal mode", () => {
+  const survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text", visibleIf: "{q2} = 1" },
       { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
       { name: "q3", type: "checkbox", choices: [1, 2, 3] }
     ]
   });
-  var question = survey.getQuestionByName("q1");
-  var editor = new ConditionEditor(survey, question, undefined, "visibleIf");
+  const question = survey.getQuestionByName("q1");
+  const editor = new ConditionEditor(survey, question, undefined, "visibleIf");
   expect(editor.panel.titleLocation).toEqual("hidden");
   editor.isModal = false;
-  expect(editor.panel.titleLocation).toEqual("default");
-  expect(editor.panel.getTitleLocation()).toEqual("top");
   expect(editor.panel.visible).toBeTruthy();
   expect(editor.textEditor.visible).toBeFalsy();
-  var actions = editor.panel.getTitleActions();
-  expect(actions).toHaveLength(2);
-  expect(actions[0].title).toEqual("Build");
-  expect(actions[1].title).toEqual("Edit");
-  expect(actions[0].active).toBeTruthy();
-  expect(actions[1].active).toBeFalsy();
-  actions[1].action();
+
+  editor.setIsFastEntry(true, question.visibleIf);
   expect(editor.panel.visible).toBeFalsy();
   expect(editor.textEditor.visible).toBeTruthy();
-  expect(editor.textEditor.getTitleLocation()).toEqual("top");
   expect(editor.textEditor.value).toEqual("{q2} = 1");
   editor.textEditor.value = "{q2} = 2";
-  actions = editor.textEditor.getTitleActions();
-  expect(actions[0].title).toEqual("Build");
-  expect(actions[1].title).toEqual("Edit");
-  expect(actions[0].active).toBeFalsy();
-  expect(actions[1].active).toBeTruthy();
 
-  actions[0].action();
+  editor.setIsFastEntry(false, "");
   expect(editor.panel.visible).toBeTruthy();
   expect(editor.textEditor.visible).toBeFalsy();
   expect(editor.text).toEqual("{q2} = 2");
-
-  editor.panel.getTitleActions()[1].action();
-  expect(actions[0].enabled).toBeTruthy();
-  editor.textEditor.value = "{q2} = 2 dfdfdf";
-  expect(actions[0].enabled).toBeFalsy();
-  editor.textEditor.value = "{q2} = 2 or {q2} = 1";
-  expect(actions[0].enabled).toBeTruthy();
 });
-test("Show Build/Edit tabs and switch between, not a modal mode", () => {
+test("Set text property, not a modal mode", () => {
   var survey = new SurveyModel({
     elements: [
       { name: "q1", type: "text" },
@@ -1350,28 +1330,6 @@ test("Show Build/Edit tabs and switch between, not a modal mode", () => {
 test("Can parse expression", () => {
   expect(ConditionEditor.canBuildExpression("{q1} = 1")).toBeTruthy();
   expect(ConditionEditor.canBuildExpression("age({q1}) = 1")).toBeFalsy();
-});
-test("modal mode and options.allowEditExpressionsInTextEditor", () => {
-  var survey = new SurveyModel({
-    elements: [
-      { name: "q1", type: "text", visibleIf: "{q2} = 1" },
-      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
-      { name: "q3", type: "checkbox", choices: [1, 2, 3] }
-    ]
-  });
-  var question = survey.getQuestionByName("q1");
-  var options = new EmptySurveyCreatorOptions();
-  options.allowEditExpressionsInTextEditor = false;
-  var editor = new ConditionEditor(survey, question, options);
-  editor.isModal = false;
-  var actions = editor.panel.getTitleActions();
-  expect(actions).toHaveLength(0);
-
-  options.allowEditExpressionsInTextEditor = true;
-  var editor = new ConditionEditor(survey, question, options);
-  editor.isModal = false;
-  var actions = editor.panel.getTitleActions();
-  expect(actions).toHaveLength(2);
 });
 test("questionName choices", () => {
   const survey = new SurveyModel({

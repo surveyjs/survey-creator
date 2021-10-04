@@ -107,3 +107,8 @@
   background-color: $primary-bg-color;
   resize: none;
 }
+
+.sd-translation-line-skeleton {
+  min-height: calcSize(5);
+  background-color: $background-dim;
+}

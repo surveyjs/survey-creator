@@ -42,8 +42,8 @@ export class TranslationItemBase extends Base {
   public get isGroup() {
     return false;
   }
-  public fillLocales(locales: Array<string>) {}
-  public mergeLocaleWithDefault(loc: string) {}
+  public fillLocales(locales: Array<string>) { }
+  public mergeLocaleWithDefault(loc: string) { }
   public makeObservable() {
     this.fireOnObjCreating();
   }
@@ -159,11 +159,11 @@ export class TranslationItem extends TranslationItemBase {
     if (!json || typeof json === "string") return { default: json };
     return json;
   }
-  private correctJSON(json: any) : any {
-    if(!json || typeof json === "string") return json;
-    if(Array.isArray(json)) return json.join("\n");
-    for(let key in json) {
-      if(Array.isArray(json[key])) {
+  private correctJSON(json: any): any {
+    if (!json || typeof json === "string") return json;
+    if (Array.isArray(json)) return json.join("\n");
+    for (let key in json) {
+      if (Array.isArray(json[key])) {
         json[key] = json[key].join("\n");
       }
     }
@@ -522,12 +522,16 @@ export class Translation extends Base implements ITranslationLocales {
   @property() mergeLocaleWithDefaultText: string;
   @property({ defaultValue: false }) readOnly: boolean;
   @property() root: TranslationGroup;
-  @property({ defaultValue: false, onSet: (_, target: Translation) => {
-    target.reset();
-  } }) showAllStrings: boolean;
-  @property({ onSet: (_, target: Translation) => {
-    target.reset();
-  } }) filteredPage: PageModel;
+  @property({
+    defaultValue: false, onSet: (_, target: Translation) => {
+      target.reset();
+    }
+  }) showAllStrings: boolean;
+  @property({
+    onSet: (_, target: Translation) => {
+      target.reset();
+    }
+  }) filteredPage: PageModel;
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
   @property({ defaultValue: true }) isEmpty: boolean;
@@ -649,13 +653,14 @@ export class Translation extends Base implements ITranslationLocales {
       "translation_strings"
     );
     survey.lazyRendering = true;
+    survey.skeletonComponentName = "sd-translation-line-skeleton";
     survey.startLoadingFromJson();
     survey.css = translationCss;
     survey.addNewPage("page");
     this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root, null);
     survey.data = this.getStringsSurveyData(survey);
     survey.endLoadingFromJson();
-    const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any):TranslationItem => {
+    const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any): TranslationItem => {
       var itemValue = ItemValue.getItemByValue(
         question.rows,
         rowName
@@ -663,23 +668,23 @@ export class Translation extends Base implements ITranslationLocales {
       return !!itemValue ? itemValue["translationData"] : null;
     };
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
-      if(options.cell.question instanceof QuestionCommentModel) {
+      if (options.cell.question instanceof QuestionCommentModel) {
         const cellQuestion = <QuestionCommentModel>options.cell.question;
         cellQuestion.placeHolder = this.placeHolderText;
         const item = getTransationItem(options.question, options.row.name);
         const isMultiLine = !!item ? item.locString.getIsMultiple() : false;
         cellQuestion.multiLine = isMultiLine;
-        if(!!item) {
+        if (!!item) {
           cellQuestion.maxLength = item.maxLength;
         }
-        if(!isMultiLine) {
+        if (!isMultiLine) {
           cellQuestion.rows = 1;
         }
       }
     });
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
       const item = getTransationItem(options.question, options.row.name);
-      if(!!item) {
+      if (!!item) {
         item.setLocText(options.columnName, options.value);
       }
     });
@@ -744,7 +749,7 @@ export class Translation extends Base implements ITranslationLocales {
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
     var locs = this.getSelectedLocales();
     matrix.rowTitleWidth = "300px";
-    const width = "calc((100% - "+ matrix.rowTitleWidth +")/"+ (locs.length + 1) +")";
+    const width = "calc((100% - " + matrix.rowTitleWidth + ")/" + (locs.length + 1) + ")";
     const defaultColumn = matrix.addColumn("default", this.getLocaleName(""));
     defaultColumn.width = width;
     for (var i = 0; i < locs.length; i++) {
@@ -864,7 +869,7 @@ export class Translation extends Base implements ITranslationLocales {
     var locText = this.getLocaleName(this.defaultLocale);
     return editorLocalization
       .getString("ed.translationMergeLocaleWithDefault")
-      ["format"](locText);
+    ["format"](locText);
   }
 
   public get survey(): SurveyModel {
@@ -916,7 +921,7 @@ export class Translation extends Base implements ITranslationLocales {
       this.addLocaleIntoValue(locale, true);
     }
     var actions = this.chooseLanguageActions.filter(item => { return item.id === locale; });
-    if(Array.isArray(actions) && actions.length == 1) {
+    if (Array.isArray(actions) && actions.length == 1) {
       actions[0].visible = this.isLocaleVisible(locale);
     }
   }

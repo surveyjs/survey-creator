@@ -42,7 +42,7 @@
       td {
         border: 1px solid;
         padding: 0.5em 1em;
-        max-width: 400px;
+        max-width: calcSize(50);
         overflow: auto;
 
         &:nth-child(1) {
@@ -81,12 +81,12 @@
 }
 .nav-link {
   border-radius: 0;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
+  border-top-left-radius: calcSize(0.25);
+  border-top-right-radius: calcSize(0.25);
   padding: 0.5em 1em;
   text-align: center;
   &.active {
-    border: 1px solid $border;
+    border: calcSize(0.125) solid $border;
     border-color: $border;
     border-bottom-color: transparent;
   }

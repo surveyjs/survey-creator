@@ -17,7 +17,7 @@ import { PageNavigatorViewModel } from "../src/components/page-navigator/page-na
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
 import { TabTestPlugin } from "../src/components/tabs/test";
 import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
-import { TabLogicPlugin } from "../src/components/tabs/logic-ui";
+import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
@@ -31,7 +31,8 @@ import {
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
 import { editorLocalization } from "../src/editorLocalization";
-import { settings } from "../src/settings";
+import { EmptySurveyCreatorOptions, settings } from "../src/settings";
+import { FastEntryEditor } from "../src/property-grid/fast-entry";
 
 test("options.questionTypes", (): any => {
   var creator = new CreatorTester();
@@ -443,6 +444,43 @@ test("Create new page with empty survey", (): any => {
   expect(designerPlugin.model.newPage.elements).toHaveLength(0);
 });
 test("Create new page on changing title/description in ghost", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  let pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  expect(pageModel.isGhost).toBeTruthy();
+  designerPlugin.model.newPage.title = "Some title";
+  expect(pageModel.isGhost).toBeFalsy();
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
+
+  pageModel = new PageViewModel(creator, creator.survey.pages[1]);
+  pageModel.page.description = "Some text";
+  expect(creator.survey.pages).toHaveLength(2);
+
+  creator.survey.pages[1].addNewQuestion("text", "q2");
+  pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  expect(pageModel.isGhost).toBeTruthy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  designerPlugin.model.newPage.description = "Some description";
+  expect(pageModel.isGhost).toBeFalsy();
+  expect(creator.survey.pages).toHaveLength(3);
+  expect(designerPlugin.model.showNewPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeFalsy();
+});
+test("Create new page on changing title/description in ghost PageViewModel resets isGhost", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -457,15 +495,19 @@ test("Create new page on changing title/description in ghost", (): any => {
   );
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
+
+  let currentNewPage = designerPlugin.model.newPage;
+  const pageWrapperViewModel = new PageViewModel(creator, currentNewPage);
+  expect(pageWrapperViewModel.isGhost).toBeTruthy();
+
   designerPlugin.model.newPage.title = "Some title";
   expect(creator.survey.pages).toHaveLength(2);
   expect(designerPlugin.model.newPage).toBeFalsy();
-  creator.survey.pages[1].addNewQuestion("text", "q2");
+
+  pageWrapperViewModel.addNewQuestion(null, undefined);
   expect(designerPlugin.model.newPage).toBeTruthy();
-  designerPlugin.model.newPage.description = "Some description";
-  expect(creator.survey.pages).toHaveLength(3);
-  expect(designerPlugin.model.newPage).toBeFalsy();
 });
+
 test("Create new page, set empty JSON", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {};
@@ -530,23 +572,29 @@ test("Check survey undo/redo buttons ", (): any => {
   expect(redoItem.active).toBeFalsy();
 });
 test("undo/redo add new page", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pageCount).toEqual(1);
   expect(creator.survey.pages[0].name).toEqual("page1");
   expect(designerPlugin.model.newPage.name).toEqual("page2");
-  designerPlugin.model.newPage["_addToSurvey"]();
+  let newPageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  expect(newPageModel.isGhost).toBeTruthy();
+  newPageModel.addGhostPage();
+  expect(newPageModel.isGhost).toBeFalsy();
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
   creator.survey.pages[1].addNewQuestion("text", "question2");
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
-  designerPlugin.model.newPage["_addToSurvey"]();
+  newPageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  expect(newPageModel.isGhost).toBeTruthy();
+  newPageModel.addGhostPage();
+  expect(newPageModel.isGhost).toBeFalsy();
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
   creator.survey.pages[2].addNewQuestion("text", "question3");
@@ -1415,6 +1463,55 @@ test("Keyboard Shortcuts", (): any => {
   creator["onKeyDownHandler"](fakeDecreaseEvent);
   expect(count).toEqual(0);
 });
+
+test("LogicPlugin Fast entry: options.allowEditExpressionsInTextEditor", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  let logicTabActions = logicPlugin.createActions();
+  expect(creator.allowEditExpressionsInTextEditor).toBeTruthy();
+  expect(logicTabActions).toHaveLength(3);
+  expect(logicTabActions[2].id).toEqual("svc-logic-fast-entry");
+
+  creator.allowEditExpressionsInTextEditor = false;
+  logicTabActions = logicPlugin.createActions();
+  expect(logicTabActions).toHaveLength(2);
+  expect(logicTabActions.filter(action => action.id === "svc-logic-fast-entry")).toHaveLength(0);
+});
+
+test("LogicPlugin Fast entry: fastEntryAction switch active", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  const fastEntryAction = logicPlugin.createActions().filter(action => action.id === "svc-logic-fast-entry")[0];
+
+  expect(fastEntryAction.visible).toBeFalsy();
+
+  logicPlugin.activate();
+  expect(fastEntryAction.visible).toBeTruthy();
+
+  logicPlugin.model.expressionEditorIsFastEntry = true;
+  expect(fastEntryAction.active).toBeTruthy();
+
+  logicPlugin.model.expressionEditorIsFastEntry = false;
+  expect(fastEntryAction.active).toBeFalsy();
+});
+
+test("LogicPlugin Fast entry: fastEntryAction enabled", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  const fastEntryAction = logicPlugin.createActions().filter(action => action.id === "svc-logic-fast-entry")[0];
+
+  expect(fastEntryAction.visible).toBeFalsy();
+
+  logicPlugin.activate();
+  expect(fastEntryAction.visible).toBeTruthy();
+  expect(fastEntryAction.enabled).toBeFalsy();
+
+  logicPlugin.model.expressionEditorCanShowBuilder = false;
+  expect(fastEntryAction.enabled).toBeFalsy();
+
+  logicPlugin.model.expressionEditorCanShowBuilder = true;
+  expect(fastEntryAction.enabled).toBeTruthy();
+});
 test("getNewName get new element name", (): any => {
   const creator = new CreatorTester({ allowEditSurveyTitle: false });
   const getNewName = (elementType: string, isPanel?: boolean) => { return creator["getNewName"](elementType, isPanel); };
@@ -1493,4 +1590,5 @@ test("change locale in several pages survey", (): any => {
   expect(data["page2"]).toBeTruthy();
   expect(data["q1"]).toBeTruthy();
   expect(data["q2"]).toBeTruthy();
+
 });

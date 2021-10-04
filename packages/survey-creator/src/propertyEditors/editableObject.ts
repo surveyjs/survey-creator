@@ -95,6 +95,9 @@ export class EditableObject {
       if (excludedProps.indexOf(key) > -1 || props.indexOf(key) > -1) continue;
       props.push(key);
     }
+    if(!!this.obj["page"] && this.obj["page"] !== this.editableObj["page"]) {
+      props.push("page");
+    }
     return props;
   }
   protected createEditableObj(): Survey.Base {
@@ -118,6 +121,13 @@ export class EditableObject {
     }
     if (!!this.obj["parent"]) {
       res["parent"] = this.obj["parent"];
+    }
+    if(!!this.obj["page"]) {
+      res["copyPageValue"] = this.obj["page"];
+      Object.defineProperty(res, "page", {
+        get: function () { return res["copyPageValue"]; },
+        set: function(value) { res["copyPageValue"] = value; }
+      });
     }
     res["isCopy"] = true;
     res["originalObj"] = this.obj;

@@ -53,7 +53,7 @@
     width: calcSize(6);
     height: calcSize(6);
     background: $background;
-    border-radius: 100px;
+    border-radius: calcSize(12.5);
     color: transparent;
     &:after {
       content: " ";
@@ -89,8 +89,8 @@
     left: calc(100% - 7 * #{$base-unit});
     &:after {
       top: 13.5px;
-      left: 12px;
-      width: 24px;
+      left: calcSize(1.5);
+      width: calcSize(3);
       height: 21px;
       background-repeat: no-repeat;
       background-image: url("data:image/svg+xml,%3Csvg width='24' height='21' viewBox='0 0 24 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22.6 7.60005L16.4 1.40005C16 1.00005 15.5 0.800049 15 0.800049C14.5 0.800049 14 1.00005 13.6 1.40005L1.39999 13.6C0.599988 14.4 0.599988 15.6 1.39999 16.4L5.99999 21H12L22.6 10.4C23.3 9.60005 23.3 8.30005 22.6 7.60005ZM11.1 19H6.79999L2.79999 15L6.19999 11.6L12.4 17.8L11.1 19ZM13.8 16.4L7.59999 10.2L15 2.80005L21.2 9.00005L13.8 16.4ZM16 19H23V21H14L16 19Z' fill='%23909090'/%3E%3C/svg%3E ");

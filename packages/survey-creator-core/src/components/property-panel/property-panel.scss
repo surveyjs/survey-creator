@@ -4,7 +4,7 @@
   display: block;
   font-family: $font-family;
   min-width: 338px;
-  max-width: 944px;
+  max-width: calcSize(118);
   width: 450px;
   height: 100%;
 }
@@ -85,7 +85,7 @@
 
 .svc-property-panel__title {
   display: flex;
-  line-height: 36px;
+  line-height: calcSize(4.5);
   flex-grow: 1;
   flex-shrink: 0;
   justify-content: flex-end;

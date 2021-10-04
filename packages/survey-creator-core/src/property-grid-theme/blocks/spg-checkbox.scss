@@ -20,13 +20,13 @@
   margin-left: calcSize(1);
 }
 .spg-checkbox__rectangle {
-  background: #ffffff;
+  background: $background;
   border: 1px solid $border;
   box-sizing: border-box;
   width: calcSize(3);
   height: calcSize(3);
   flex-shrink: 0;
-  padding: 4px;
+  padding: calcSize(0.5);
 }
 .spg-checkbox--checked .spg-checkbox__rectangle:after {
   display: block;

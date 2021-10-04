@@ -24,8 +24,8 @@
   }
 
   .sv-svg-icon {
-    margin-top: calc(50% - 12px);
-    margin-left: calc(50% - 12px);
+    margin-top: calc(50% - 1.5 * #{$base-unit});
+    margin-left: calc(50% - 1.5 * #{$base-unit});
   }
 
   use {

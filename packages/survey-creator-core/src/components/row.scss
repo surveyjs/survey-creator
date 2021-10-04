@@ -3,6 +3,9 @@
 .svc-row {
   width: 100%;
 }
+.svc-row .sd-row--multiple {
+  padding: calcSize(1);
+}
 .svc-row.svc-row--ghost {
   .svc-question__content {
     padding: 0;

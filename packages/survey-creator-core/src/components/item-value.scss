@@ -16,7 +16,7 @@
 .svc-item-value--dragging {
   background: $background;
   box-shadow: 0px calcSize(1) calcSize(2) $shadow-medium;
-  border-radius: 100px;
+  border-radius: calcSize(12.5);
   padding-right: calcSize(3);
   padding-left: calcSize(0.5);
 }
@@ -159,5 +159,12 @@ sv-svg-icon.svc-item-value-controls__button {
 }
 
 .svc-item-value__ghost {
-  display: none;background: #f3f3f3;border-radius: 100px;width: 200px;height: 55px;z-index: 11;position: absolute;left: 35px;
+  display: none;
+  background: $background-dim;
+  border-radius: calcSize(12.5);
+  width: calcSize(25);
+  height: 55px;
+  z-index: 11;
+  position: absolute;
+  left: 35px;
 }

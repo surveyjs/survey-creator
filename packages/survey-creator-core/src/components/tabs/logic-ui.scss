@@ -12,7 +12,7 @@
   overflow-x: hidden;
   padding-left: 16%;
   padding-right: 16%;
-  //max-width: 600px;
+  //max-width: calcSize(75);
   //margin: auto;
   // background: $background;
 }
@@ -38,7 +38,7 @@
 .svc-logic-operator {
   appearance: none;
   padding: calcSize(1) calcSize(2);
-  border-radius: 100px;
+  border-radius: calcSize(12.5);
   border: none;
   outline: none;
   font-weight: 600;
@@ -57,23 +57,23 @@
 }
 
 .svc-logic-operator.svc-logic-operator--conjunction {
-  background-color: rgba(25, 179, 148, 0.1);
+  background-color: $primary-light;
 }
 
 .svc-logic-operator.svc-logic-operator--question {
-  background-color: rgba(67, 127, 217, 0.1);
+  background-color: $blue-light;
 }
 
 .svc-logic-operator.svc-logic-operator--operator {
-  background-color: rgba(255, 152, 20, 0.1);
+  background-color: $secondary-light;
 }
 
 .svc-logic-operator.svc-logic-operator--action {
-  background-color: rgba(230, 10, 62, 0.1);
+  background-color: $red-light;
 }
 
 .svc-logic-operator.svc-logic-operator--error {
-  background-color: #ffffff;
+  background-color: $background;
   color: $red;
   box-shadow: inset 0 0 0 2px $red;
 }
@@ -89,7 +89,7 @@
 
 .svc-icon-remove {
   display: block;
-  width: 20px;
+  width: calcSize(2.5);
   height: 22px;
   background-repeat: no-repeat;
   background-image: url("data:image/svg+xml,%3Csvg width='20' height='22' viewBox='0 0 20 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 4H18H14V2C14 0.9 13.1 0 12 0H8C6.9 0 6 0.9 6 2V4H2H0V6H2V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V6H20V4ZM8 2H12V4H8V2ZM16 20H4V6H6H14H16V20ZM12 8H14V18H12V8ZM9 8H11V18H9V8ZM6 8H8V18H6V8Z' fill='%23E60A3E'/%3E%3C/svg%3E%0A");
@@ -138,9 +138,9 @@
   .svc-logic-tab__content-action {
     display: flex;
     align-items: center;
-    margin-top: calcSize(10);
-    margin-left: 26%;
-    margin-right: 24%;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
     height: calcSize(7);
     line-height: calcSize(7);
     vertical-align: baseline;
@@ -165,5 +165,31 @@
     align-items: center;
     flex-grow: 1;
     justify-content: center;
+  }
+
+  .sd-paneldynamic__panel-wrapper--in-row {
+    margin-top: calcSize(2);
+  }
+}
+
+.svc-logic-paneldynamic {
+  .sd-question__content {
+    margin-top: 0;
+  }
+  .sd-row__question {
+    margin-top: 0;
+  }
+  .sd-row {
+    margin-top: 0;
+  }
+}
+
+.sl-table__cell--detail-panel {
+  .sd-page.sd-body__page {
+    padding-left: 0;
+  }
+
+  .sl-panel__footer {
+    margin: 0;
   }
 }

@@ -14,6 +14,7 @@ export class TabLogicAddButtonComponent extends SurveyElementBase<any, any> {
   renderElement(): JSX.Element {
     const buttonClassName = "svc-logic-tab__content-action" + ((this.model.enabled !== undefined && !this.model.enabled) ? " svc-logic-tab__content-action--disabled" : "");
     return attachKey2click(<div
+      role="button"
       onClick={(e) => {
         e.stopPropagation();
         this.model.action();
@@ -53,7 +54,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
         <div className={logicTabClassName}>
           <Survey model={this.model.itemsSurvey}></Survey>
           {this.model.hasItems ? null : (
-            <div role="button" className="svc-logic-tab__content-empty" >
+            <div className="svc-logic-tab__content-empty" >
               <span className="svc-text">{this.model.emptyTabPlaceHolder}</span>
             </div>)}
           <TabLogicAddButtonComponent button={this.model.addNewButton} />

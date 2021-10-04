@@ -26,8 +26,8 @@ svc-page {
 .svc-page__content--selected,
 .svc-hovered.svc-page__content--selected {
   border: 2px solid $secondary;
-  background: rgba(255, 152, 20, 0.1);
-  border-radius: 4px;
+  background: $secondary-light;
+  border-radius: calcSize(0.5);
   .svc-page__content-actions {
     display: block;
   }

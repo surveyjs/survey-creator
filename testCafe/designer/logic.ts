@@ -91,10 +91,19 @@ fixture(title)
 function getSelectOptionByText(text: string) {
   return Selector("option").withExactText(text).filterVisible();
 }
+function getBarItemByText(text) {
+  return Selector(".sv-action-bar-item__title").withText(text).parent(".sv-action-bar-item");
+}
+function getListItemByText(text) {
+  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
+}
 
-const tableRulesSelector = Selector(".sl-table tbody tr").filterVisible();
+const tableRulesSelector = Selector(".sl-table tbody tr:not(.st-table__row--detail)").filterVisible();
+const conditionBuilder = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"panel\"]");
+const conditionTextEdit = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"textEditor\"]");
 
-const titleSelector = Selector(".sd-question__header.sd-question__header--location--top .sv-title-actions__title").filterVisible();
+const cellConditions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Condition(s)\"]"));
+const cellActions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Action(s)\"]"));
 const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
 const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sd-paneldynamic__add-btn)").filterVisible();
 const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
@@ -103,7 +112,7 @@ const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible(
 const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
 const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisible();
 const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
-
+const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New");
 const addButton = Selector(".sd-paneldynamic__add-btn").filterVisible();
@@ -125,7 +134,8 @@ test("Create logic rule", async (t) => {
     .click(addNewRuleButton)
     .expect(addNewRuleButton.classNames).contains(disabledClass)
     .expect(Selector(".svc-logic-tab__content-empty").exists).notOk()
-    .expect(titleSelector.innerText).eql("Rule is incorrect")
+    .expect(cellConditions.innerText).eql("New rule is not set")
+    .expect(cellActions.innerText).eql("Value is empty")
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.value).eql("")
     .expect(logicOperatorSelector.innerText).eql("equals")
@@ -144,7 +154,6 @@ test("Create logic rule", async (t) => {
     .click(logicOperatorSelector)
     .click(getSelectOptionByText("not equals"))
     .click(Selector(".sd-checkbox").filterVisible())
-    .expect(titleSelector.innerText).eql("{string_editor} <> ['item1']")
 
     .click(addButton)
     .expect(removeButton.count).eql(2)
@@ -153,7 +162,6 @@ test("Create logic rule", async (t) => {
     .expect(logicOperatorSelector.count).eql(2)
 
     .click(removeButton)
-    .expect(titleSelector.innerText).eql("Rule is incorrect")
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.value).eql("")
     .expect(logicOperatorSelector.innerText).eql("equals")
@@ -167,7 +175,6 @@ test("Create logic rule", async (t) => {
     .click(getSelectOptionByText("string_editor"))
     .click(logicOperatorSelector)
     .click(getSelectOptionByText("is not empty"))
-    .expect(titleSelector.innerText).eql("{string_editor} notempty")
     .expect(addButton.count).eql(1)
     .expect(removeButton.count).eql(0)
 
@@ -198,9 +205,14 @@ test("Create logic rule", async (t) => {
     .expect(removeButton.count).eql(0)
 
     .expect(addNewRuleButton.classNames).contains(disabledClass)
+    .expect(cellConditions.innerText).eql("New rule is not set")
+    .expect(cellActions.innerText).eql("Value is empty")
+
     .click(doneButton)
     .expect(addNewRuleButton.classNames).notContains(disabledClass)
-    .expect(notifyBalloonSelector.innerText).eql("Modified");
+    .expect(notifyBalloonSelector.innerText).eql("Modified")
+    .expect(cellConditions.innerText).eql("{string_editor} is not empty")
+    .expect(cellActions.innerText).eql("Survey becomes completed");
 });
 
 test("Logic rules", async (t) => {
@@ -256,13 +268,6 @@ test("Edit Logic rule", async (t) => {
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Make question {q3} visible");
 });
 
-function getBarItemByText(text) {
-  return Selector(".sv-action-bar-item .sv-action-bar-item__title").withText(text);
-}
-function getListItemByText(text) {
-  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
-}
-
 test("Filtering rules", async (t) => {
   await setJSON(json3);
 
@@ -304,4 +309,58 @@ test("Update rules", async (t) => {
     .expect(Selector(".st-table__cell--actions").count).eql(4)
     .expect(Selector(".sl-table__cell--detail-button").count).eql(2)
     .expect(Selector("#remove-row").count).eql(2);
+});
+
+test("Fast entry of the editing condition", async (t) => {
+  const fastEntryAction = getBarItemByText("Fast Entry");
+  await setJSON(json2);
+
+  await t
+    .click(getTabbedMenuItemByText("Survey Logic"))
+    .expect(fastEntryAction.hasAttribute("disabled")).ok()
+
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement)
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
+    .expect(conditionBuilder.exists).ok()
+    .expect(conditionTextEdit.exists).notOk()
+    .expect(fastEntryAction.classNames).notContains("sv-action-bar-item--active")
+
+    .click(fastEntryAction)
+    .expect(conditionBuilder.exists).notOk()
+    .expect(conditionTextEdit.exists).ok()
+    .expect(fastEntryAction.classNames).contains("sv-action-bar-item--active")
+
+    .click(fastEntryAction)
+    .expect(conditionBuilder.exists).ok()
+    .expect(conditionTextEdit.exists).notOk()
+    .expect(fastEntryAction.classNames).notContains("sv-action-bar-item--active")
+
+    .click(fastEntryAction)
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
+    .typeText(conditionTextEdit, "werwerwer")
+    .expect(fastEntryAction.hasAttribute("disabled")).ok()
+    .typeText(conditionTextEdit, "{q1}='item1'", { replace: true })
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
+
+    .click(addNewRuleButton)
+    .expect(conditionBuilder.exists).ok()
+    .expect(conditionTextEdit.exists).notOk()
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
+    .expect(fastEntryAction.classNames).notContains("sv-action-bar-item--active")
+
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement)
+    .expect(conditionBuilder.exists).ok()
+    .expect(conditionTextEdit.exists).notOk()
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
+    .expect(fastEntryAction.classNames).notContains("sv-action-bar-item--active")
+
+    .hover(tableRulesSelector.nth(1))
+    .click(removeRuleButton.nth(1))
+    .expect(fastEntryAction.hasAttribute("disabled")).notOk()
+
+    .hover(tableRulesSelector.nth(0))
+    .click(removeRuleButton)
+    .expect(fastEntryAction.hasAttribute("disabled")).ok();
 });

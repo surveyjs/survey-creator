@@ -58,6 +58,11 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     model.creator.selectElement(model.surveyElement, undefined, false);
     return true;
   }
+
+  rootCss() {
+    return this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine ? "svc-question__adorner--start-with-new-line" : "";
+  }
+
   css() {
     let result = this.creator.isElementSelected(this.surveyElement)
       ? "svc-question__content--selected"
@@ -67,13 +72,20 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       result += " svc-question__content--empty";
     }
 
-    if (this.surveyElement.isDragOverMe) {
+    if (this.isDragOverMe) {
       result += " svc-question__content--drag-overred";
     } else {
       result = result.replace(" svc-question__content--drag-overred", "");
     }
 
     return result;
+  }
+
+  get isDragOverMe(): boolean {
+    if (this.surveyElement.getType() === "paneldynamic") {
+      return (<any>this.surveyElement).template.isDragOverMe;
+    }
+    return this.surveyElement.isDragOverMe;
   }
 
   dispose() {
