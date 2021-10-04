@@ -257,7 +257,9 @@ module.exports = function (options) {
     ]);
     config.devServer = {
       contentBase: __dirname,
+      //host: "0.0.0.0",
       compress: false,
+
       port: 8082
     };
   }
