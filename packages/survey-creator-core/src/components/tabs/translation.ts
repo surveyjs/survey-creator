@@ -497,7 +497,8 @@ export class Translation extends Base implements ITranslationLocales {
 
   constructor(
     survey: SurveyModel,
-    private options: ISurveyCreatorOptions = null
+    private options: ISurveyCreatorOptions = null,
+    private hasUI: boolean = true
   ) {
     super();
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
@@ -642,6 +643,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.localesQuestion.value = locales;
   }
   private resetStringsSurvey() {
+    if(!this.hasUI) return;
     this.stringsSurvey = this.createStringsSurvey();
     this.stringsHeaderSurvey = this.createStringsHeaderSurvey();
   }
@@ -797,12 +799,14 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private updateStringsSurveyColumns() {
     if (!this.stringsSurvey) return;
+    this.stringsSurvey.startLoadingFromJson();
     var questions = this.stringsSurvey.getAllQuestions();
     for (var i = 0; i < questions.length; i++) {
       var matrix = <QuestionMatrixDropdownModel>questions[i];
       matrix.columns = [];
       this.addLocaleColumns(matrix);
     }
+    this.stringsSurvey.endLoadingFromJson();
   }
   private addLocaleIntoChoices(
     loc: string,
@@ -869,7 +873,7 @@ export class Translation extends Base implements ITranslationLocales {
     var locText = this.getLocaleName(this.defaultLocale);
     return editorLocalization
       .getString("ed.translationMergeLocaleWithDefault")
-    ["format"](locText);
+      ["format"](locText);
   }
 
   public get survey(): SurveyModel {
@@ -982,7 +986,7 @@ export class Translation extends Base implements ITranslationLocales {
     if (locales[0] === "default") {
       locales[0] = "";
     }
-    let translation = new Translation(this.survey);
+    let translation = new Translation(this.survey, this.options, false);
     translation.showAllStrings = true;
     let itemsHash = <HashTable<TranslationItem>>{};
     this.fillItemsHash("", translation.root, itemsHash);
