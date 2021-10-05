@@ -72,12 +72,11 @@ test("collapse/expand buttons", async (t) => {
 });
 
 test("SelectObject", async (t: TestController) => {
-
   await t
     .click(getTabbedMenuItemByText("Test Survey"))
     .click(getTabbedMenuItemByText("Translation"))
     .click(getTabbedMenuItemByText("Survey Designer"))
-    .expect(objectSelectorPopup.exists).ok()
+    .expect(objectSelectorPopup.exists).notOk()
 
     .click(objectSelectorButton)
     .expect(objectSelectorPopup.visible).ok()
