@@ -4,6 +4,7 @@ import { IPortableMouseEvent } from "../utils/events";
 import { ActionContainerViewModel } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
 import "./page.scss";
+import { SurveyHelper } from "../survey-helper";
 
 export class PageViewModel<
   T extends SurveyModel
@@ -70,6 +71,7 @@ export class PageViewModel<
         "title",
         "description"
       ]);
+      this.page.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
       this.creator.survey.addPage(this.page);
     }
     this.creator.selectElement(this.page);
