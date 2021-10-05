@@ -199,6 +199,7 @@ export class SurveyLogicUI extends SurveyLogic {
           titleLocation: "hidden",
           detailPanelMode: "underRowSingle",
           allowAddRows: false,
+          allowAdaptiveActions: false,
           rowCount: 0,
           showHeader: false,
           columns: [
