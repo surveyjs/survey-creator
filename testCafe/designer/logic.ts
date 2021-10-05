@@ -364,3 +364,16 @@ test("Fast entry of the editing condition", async (t) => {
     .click(removeRuleButton)
     .expect(fastEntryAction.hasAttribute("disabled")).ok();
 });
+
+test("Availability of the Done button", async (t) => {
+  await setJSON(json3);
+
+  await t
+    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(addNewRuleButton)
+    .expect(doneButton.visible).ok()
+
+    .click(logicQuestionSelector)
+    .click(getSelectOptionByText("q4"))
+    .expect(doneButton.visible).ok();
+});
