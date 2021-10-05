@@ -170,7 +170,7 @@ test("Drag Drop to Panel", async (t) => {
   await t.expect(resultJson).eql(expectedJson);
 });
 
-test.only("Drag Drop Question (StartWithNewLine === false)", async (t) => {
+test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
   const json = {
     pages: [
       {
