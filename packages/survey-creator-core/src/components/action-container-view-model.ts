@@ -29,10 +29,13 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
     this.buildActions(actions);
     this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
     this.actionContainer.setItems(actions);
+  }
+  protected checkActionProperties() {
     if (this.creator.isElementSelected(this.surveyElement)) {
       this.updateActionsProperties();
     }
   }
+
   public dispose() {
     super.dispose();
     this.surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);

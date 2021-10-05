@@ -48,6 +48,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
         }
       );
     }
+    this.checkActionProperties();
   }
   select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
     if (!model.surveyElement.isInteractiveDesignElement) {
