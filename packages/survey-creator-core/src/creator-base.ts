@@ -1359,9 +1359,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     obj: Survey.Base,
     propertyName: string
   ) {
-    if(obj.getType() !== "survey" || propertyName !== "locale") return;
+    if (obj.getType() !== "survey" || propertyName !== "locale") return;
     const pages = this.survey.pages;
-    for(var i = 0; i < pages.length; i ++) {
+    for (var i = 0; i < pages.length; i++) {
       pages[i].locStrsChanged();
     }
   }
@@ -1545,15 +1545,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   protected createSurveyCore(json: any = {}, reason: string): T {
     throw new Error("createSurveyCore method should be overridden/implemented");
   }
-  private stateValue: string;
+  @property() _stateValue: string;
   /**
    * Returns the creator state. It may return empty string or "saving" and "saved".
    */
   public get state(): string {
-    return !!this.stateValue ? this.stateValue : "";
+    return !!this._stateValue ? this._stateValue : "";
   }
   protected setState(value: string) {
-    this.stateValue = value;
+    this._stateValue = value;
     this.onStateChanged.fire(this, { val: value });
     if (!!value) {
       this.notify(this.getLocString("ed." + value));
@@ -2404,11 +2404,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
   }
 
-  public onShowSaveButtonVisiblityChanged: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-
   @property({ defaultValue: false }) showSaveButton: boolean;
 
   /**
@@ -2421,9 +2416,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public set saveSurveyFunc(value: any) {
     this.saveSurveyFuncValue = value;
     this.showSaveButton = value != null && !this.isAutoSave;
-    this.onShowSaveButtonVisiblityChanged.fire(this, {
-      val: this.showSaveButton
-    });
   }
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;
