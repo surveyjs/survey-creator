@@ -847,11 +847,15 @@ It is an optional attribute. You may assign a function to return a value differe
 **onSetValue**
 
 It is an optional attribute. You may assign a function to set a different object property and/or perform some actions.
+If you set the the property value directly: "obj.myValue = value" then it will call onSetValue again. You have to use obj.setPropertyValue function.
 ```javascript
 { 
     name: "myValue", 
     onSetValue: function (obj, value, jsonConverter) {
-        obj.myValue = value; /* Perform some actions */ 
+        //Optionally do some checks, modify value if needed.
+        //Set value directly
+        obj.setPropertyValue("myValue", value);
+        //Perform some actions, for example change other properties of the object
     }
 }
 ```
