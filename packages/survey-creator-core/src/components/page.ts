@@ -39,6 +39,7 @@ export class PageViewModel<
     this.page.onFirstRendering();
     this.page.updateCustomWidgets();
     this.page.setWasShown(true);
+    this.checkActionProperties();
   }
   protected onElementSelectedChanged(isSelected: boolean) {
     super.onElementSelectedChanged(isSelected);
@@ -91,6 +92,7 @@ export class PageViewModel<
       }
     }
   }
+
   get css(): string {
     if (this.isGhost) {
       return "svc-page__content--new";

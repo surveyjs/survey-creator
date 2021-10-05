@@ -731,6 +731,32 @@ test("Page duplicate and add new page, check name", (): any => {
   expect(creator.survey.pages[3].name).toEqual("page4");
 
 });
+test("Page duplicate and check actions visibility", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }]
+      },
+    ]
+  };
+  var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  var action = creator.getActionBarItemByActions(
+    pageModel.actionContainer.actions,
+    "duplicate"
+  );
+  expect(action.visible).toEqual(true);
+  action.action();
+
+  let pageModelNew = new PageViewModel(creator, creator.survey.pages[1]);
+  var actionDuplicate = creator.getActionBarItemByActions(
+    pageModelNew.actionContainer.actions,
+    "duplicate"
+  );
+
+  expect(actionDuplicate.visible).toEqual(true);
+
+});
 test("Check action container for new added page", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
