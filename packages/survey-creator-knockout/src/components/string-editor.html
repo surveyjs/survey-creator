@@ -10,4 +10,7 @@
         <span class="sv-string-editor" data-bind="html: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown }, click: edit, attr: { 'aria-placeholder': placeholder }" contenteditable="true"></span>
         <!-- /ko -->
     </span>
+    <!-- ko if: errorText -->
+    <span class="svc-string-editor__error" data-bind="text: errorText"></span>
+     <!-- /ko -->
 </span>

@@ -89,7 +89,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
 /**
  * Base class for Survey Creator.
  */
-export class CreatorBase<T extends SurveyModel>
+export class CreatorBase<T extends SurveyModel = SurveyModel>
   extends Survey.Base
   implements ISurveyCreatorOptions, ICreatorSelectionOwner {
   /**

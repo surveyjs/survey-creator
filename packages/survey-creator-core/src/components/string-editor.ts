@@ -1,12 +1,20 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property } from "survey-core";
+import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
 
 export class StringEditorViewModelBase extends Base {
   private blurredByEscape: boolean = false;
+  private focusedProgram: boolean = false;
   private valueBeforeEdit: string;
-  constructor(private locString: LocalizableString) {
+
+  @property() errorText: string;
+  constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
+  }
+
+  public setLocString(locString: LocalizableString) {
+    this.locString = locString;
   }
   public checkConstraints(event: any) {
     if (this.maxLength > 0 && event.keyCode >= 32) {
@@ -20,7 +28,10 @@ export class StringEditorViewModelBase extends Base {
   public blurEditor: () => void;
 
   public onFocus(event: any): void {
-    this.valueBeforeEdit = event.target.innerText;
+    if(!this.focusedProgram) {
+      this.valueBeforeEdit = event.target.innerText;
+      this.focusedProgram = false;
+    }
     event.target.click();
     select(event.target);
   }
@@ -29,12 +40,21 @@ export class StringEditorViewModelBase extends Base {
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
       event.target.innerText = this.valueBeforeEdit;
+      this.errorText = null;
       return;
     }
 
     const clearedText = clearNewLines(event.target.innerText);
+
+    this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, <any>this.locString.owner, clearedText);
+
     if (this.locString.text != clearedText) {
-      this.locString.text = clearedText;
+      if(!this.errorText)
+        this.locString.text = clearedText;
+      else{
+        this.focusedProgram = true;
+        event.target.focus();
+      }
     } else {
       event.target.innerText = this.locString.renderedHtml;
       this.locString.strChanged();

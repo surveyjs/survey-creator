@@ -13,7 +13,8 @@ import {
   ItemValue,
   QuestionSelectBase,
   AdaptiveActionContainer,
-  QuestionRowModel
+  QuestionRowModel,
+  LocalizableString
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -203,6 +204,18 @@ export class DesignTimeSurveyModel extends Model {
       return editableStringRendererName;
     }
     return undefined;
+  }
+
+  public getRendererContextForString(element: Base, locStr: LocalizableString) {
+    const lStr: any = locStr;
+    if (!this.creator.readOnly && isStringEditable(element, locStr.name)) {
+      return {
+        creator: this.creator,
+        element,
+        locStr
+      };
+    }
+    return lStr;
   }
 }
 export class SurveyCreator extends CreatorBase<SurveyModel> {

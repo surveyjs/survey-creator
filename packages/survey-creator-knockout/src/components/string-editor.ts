@@ -1,5 +1,6 @@
 import * as ko from "knockout";
-import { StringEditorViewModelBase } from "@survey/creator";
+import { CreatorBase, StringEditorViewModelBase } from "@survey/creator";
+import { LocalizableString } from "survey-core";
 const template = require("./string-editor.html");
 
 export class StringEditorViewModel {
@@ -11,13 +12,19 @@ export class StringEditorViewModel {
     )[0];
   };
 
-  constructor(public locString: any, element: any) {
-    this.baseModel = new StringEditorViewModelBase(locString);
+  constructor(public locString: any, private creator: CreatorBase, element: any) {
+    this.baseModel = new StringEditorViewModelBase(locString, creator);
     this.focusEditor = () => {
       this.getEditorElement(element).focus();
     };
     this.baseModel.blurEditor = () => this.getEditorElement(element).blur();
   }
+
+  public setLocString(locString: LocalizableString): LocalizableString {
+    this.baseModel.setLocString(locString);
+    return locString;
+  }
+
   public get koHasHtml(): boolean {
     return this.locString.koHasHtml();
   }
@@ -31,15 +38,19 @@ export class StringEditorViewModel {
   public get placeholder(): string {
     return this.baseModel.placeholder;
   }
+  public errorText: ko.Observable<string> = ko.observable(null);
   public onInput(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onInput(event);
+    this.errorText(this.baseModel.errorText);
     this.locString.searchElement = undefined;
   }
   public onFocus(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onFocus(event);
   }
   public onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent): boolean {
-    return this.baseModel.onKeyDown(event);
+    var res = this.baseModel.onKeyDown(event);
+    this.errorText(this.baseModel.errorText);
+    return res;
   }
   public edit(model: StringEditorViewModel, _: MouseEvent): void {
     model.focusEditor && model.focusEditor();
@@ -104,10 +115,17 @@ export const editableStringRendererName = "svc-string-editor";
 ko.components.register(editableStringRendererName, {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const locStr = params.locString;
-      applyLocStrOnSearchChanged(componentInfo.element, locStr);
+      const data = ko.unwrap(params.locString);
+      const model = new StringEditorViewModel(data.locStr, data.creator, componentInfo.element);
+      const subscrib = ko.computed(() => {
+        const locStr = ko.unwrap(params.locString).locStr;
+        applyLocStrOnSearchChanged(componentInfo.element, locStr);
+        model.setLocString(locStr);
+      });
 
-      const model = new StringEditorViewModel(locStr, componentInfo.element);
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        subscrib.dispose();
+      });
       return model;
     },
   },

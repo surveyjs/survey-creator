@@ -1,27 +1,39 @@
 import React from "react";
-import { LocalizableString, Serializer, JsonObjectProperty } from "survey-core";
-import { ReactElementFactory, SvgIcon } from "survey-react-ui";
-import { StringEditorViewModelBase } from "@survey/creator";
+import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
+import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { CreatorBase, StringEditorViewModelBase } from "@survey/creator";
 
-export class SurveyLocStringEditor extends React.Component<any, any> {
+export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   private baseModel: StringEditorViewModelBase;
   private svStringEditorRef: React.RefObject<HTMLDivElement>;
   private blurredByEscape:boolean = false;
   constructor(props: any) {
     super(props);
     this.state = { changed: 0 };
-    this.baseModel = new StringEditorViewModelBase(this.locString);
+    this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
     this.svStringEditorRef = React.createRef();
     this.baseModel.blurEditor = ()=>{
       this.svStringEditorRef.current.blur();
     };
   }
   private get locString(): LocalizableString {
-    return this.props.locStr;
+    return this.props.locStr.locStr;
+  }
+  private get creator(): CreatorBase {
+    return this.props.locStr.creator;
   }
   private get style(): any {
     return this.props.style;
   }
+
+  protected getStateElement(): Base {
+    return this.baseModel;
+  }
+
+  public get errorText(): string {
+    return this.baseModel.errorText;
+  }
+
   public componentDidMount() {
     if (!this.locString) return;
     const self: SurveyLocStringEditor = this;
@@ -42,6 +54,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   }
   private onInput = (event: any) => {
     this.baseModel.onInput(event.nativeEvent);
+    return this.baseModel.errorText;
   };
   private onFocus = (event: any) => {
     this.baseModel.onFocus(event.nativeEvent);
@@ -64,6 +77,9 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
   public render(): JSX.Element {
     if (!this.locString) {
       return null;
+    }
+    else {
+      this.baseModel.setLocString(this.locString);
     }
     let control = null;
     if (this.locString.hasHtml) {
@@ -119,6 +135,7 @@ export class SurveyLocStringEditor extends React.Component<any, any> {
             onClick={this.edit}>
           </div>
         </span>
+        { this.errorText?<span className="svc-string-editor__error">{this.errorText}</span>:"" }
       </span>
     );
   }
