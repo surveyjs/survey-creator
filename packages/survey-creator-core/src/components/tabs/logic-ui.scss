@@ -34,7 +34,6 @@
     width: 100%;
   }
 }
-
 .svc-logic-operator {
   appearance: none;
   padding: calcSize(1) calcSize(2);
@@ -173,6 +172,14 @@
 }
 
 .svc-logic-paneldynamic {
+  .sd-row--multiple {
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    gap: 0;
+    overflow: visible;
+  }
   .sd-question__content {
     margin-top: 0;
   }
