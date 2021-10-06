@@ -1291,14 +1291,18 @@ test("setIsFastEntry method, not a modal mode", () => {
   editor.isModal = false;
   expect(editor.panel.visible).toBeTruthy();
   expect(editor.textEditor.visible).toBeFalsy();
+  expect(editor.text).toEqual("{q2} = 1");
 
-  editor.setIsFastEntry(true, question.visibleIf);
+  editor.setIsFastEntry(true);
   expect(editor.panel.visible).toBeFalsy();
   expect(editor.textEditor.visible).toBeTruthy();
   expect(editor.textEditor.value).toEqual("{q2} = 1");
-  editor.textEditor.value = "{q2} = 2";
+  expect(editor.text).toEqual("{q2} = 1");
 
-  editor.setIsFastEntry(false, "");
+  editor.textEditor.value = "{q2} = 2";
+  expect(editor.text).toEqual("{q2} = 2");
+
+  editor.setIsFastEntry(false);
   expect(editor.panel.visible).toBeTruthy();
   expect(editor.textEditor.visible).toBeFalsy();
   expect(editor.text).toEqual("{q2} = 2");

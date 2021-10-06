@@ -364,7 +364,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       this.showTextEditor(val);
     } else {
       this.textEditor.value = val;
-      this.showBuilder();
+      this.showBuilder(val);
     }
   }
   private processText(val: string) {
@@ -400,11 +400,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.object[this.propertyName] = this.text;
     return true;
   }
-  public setIsFastEntry(showTextEdit: boolean, text: string) {
+  public setIsFastEntry(showTextEdit: boolean) {
     if (showTextEdit) {
-      this.showTextEditor(text);
+      this.showTextEditor(this.text);
     } else {
-      this.showBuilder();
+      this.showBuilder(this.text);
     }
   }
   private buildPanels(items: Array<ConditionEditorItem>) {
@@ -750,13 +750,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.textEditor.value = expression;
     this.textEditor.visible = true;
   }
-  private showBuilder() {
-    if (!this.isModal && !this.canShowBuilder) return;
+  private showBuilder(expression: string) {
+    if (!this.isModal && !this.getCanShowBuilder(expression)) return;
     this.textEditor.visible = false;
-    this.processText(this.textEditor.value);
+    this.processText(expression);
     this.panel.visible = true;
   }
-  private get canShowBuilder(): boolean {
-    return ConditionEditor.canBuildExpression(this.textEditor.value);
+  private getCanShowBuilder(expression: string): boolean {
+    return ConditionEditor.canBuildExpression(expression);
   }
 }
