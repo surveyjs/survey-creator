@@ -436,9 +436,6 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
     })
 
     .hover(RatingToolboxItem, { speed: 0.5 })
-    .dragToElement(RatingToolboxItem, DynamicPanel, { offsetX: 5, offsetY: 5, speed: 0.5, })
-
-    .hover(RatingToolboxItem, { speed: 0.5 })
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
