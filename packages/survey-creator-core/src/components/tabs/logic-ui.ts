@@ -96,7 +96,7 @@ export class SurveyLogicUI extends SurveyLogic {
   public toggleExpressionEditorIsFastEntry() {
     this.expressionEditorIsFastEntry = !this.expressionEditorIsFastEntry;
     if (!!this.expressionEditor) {
-      this.expressionEditor.setIsFastEntry(this.expressionEditorIsFastEntry, this.editableItem.expression);
+      this.expressionEditor.setIsFastEntry(this.expressionEditorIsFastEntry);
     }
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
@@ -143,7 +143,7 @@ export class SurveyLogicUI extends SurveyLogic {
     this.expressionEditorValue = this.getExpressionEditor(this.editableItem);
     this.itemEditorValue = this.getLogicItemEditor(this.editableItem);
     this.expressionEditorIsFastEntry = false;
-    this.expressionEditor.setIsFastEntry(this.expressionEditorIsFastEntry, this.editableItem.expression);
+    this.expressionEditor.setIsFastEntry(this.expressionEditorIsFastEntry);
     this.expressionEditorCanShowBuilder = ConditionEditor.canBuildExpression(this.expressionEditor.text);
   }
   protected onEndEditing() {

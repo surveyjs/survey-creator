@@ -1,5 +1,5 @@
 import { url, getTabbedMenuItemByText, setJSON } from "../helper";
-import { ClientFunction, Selector } from "testcafe";
+import { Selector } from "testcafe";
 const title = "Logic tab";
 
 const json = {
@@ -102,6 +102,8 @@ const tableRulesSelector = Selector(".sl-table tbody tr:not(.st-table__row--deta
 const conditionBuilder = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"panel\"]");
 const conditionTextEdit = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"textEditor\"]");
 
+const newRuleCondition = "New rule is not set";
+const newRuleActions = "Value is empty";
 const cellConditions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Condition(s)\"]"));
 const cellActions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Action(s)\"]"));
 const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
@@ -134,8 +136,8 @@ test("Create logic rule", async (t) => {
     .click(addNewRuleButton)
     .expect(addNewRuleButton.classNames).contains(disabledClass)
     .expect(Selector(".svc-logic-tab__content-empty").exists).notOk()
-    .expect(cellConditions.innerText).eql("New rule is not set")
-    .expect(cellActions.innerText).eql("Value is empty")
+    .expect(cellConditions.innerText).eql(newRuleCondition)
+    .expect(cellActions.innerText).eql(newRuleActions)
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.value).eql("")
     .expect(logicOperatorSelector.innerText).eql("equals")
@@ -376,4 +378,80 @@ test("Availability of the Done button", async (t) => {
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("q4"))
     .expect(doneButton.visible).ok();
+});
+
+async function check1Rule(t: TestController, ruleCondition: string, ruleActions: string) {
+  await t
+    .expect(cellConditions.nth(0).innerText).eql(ruleCondition)
+    .expect(cellActions.nth(0).innerText).eql(ruleActions)
+    .expect(logicQuestionSelector.value).eql("q3")
+    .expect(logicOperatorSelector.value).eql("equal")
+    .expect(logicQuestionValueSelector.find("input").value).eql("45")
+    .expect(logicActionSelector.value).eql("trigger_complete");
+}
+async function check2Rule(t: TestController) {
+  await t
+    .expect(cellConditions.nth(1).innerText).eql(newRuleCondition)
+    .expect(cellActions.nth(1).innerText).eql(newRuleActions)
+    .expect(logicQuestionSelector.value).eql("q1")
+    .expect(logicOperatorSelector.value).eql("equal")
+    .expect(logicDropdownValueSelector.value).eql("item2")
+    .expect(logicActionSelector.value).eql("question_visibility")
+    .expect(logicQuestionSelector.nth(1).value).eql("q3");
+}
+
+test("Modified rules without saving", async (t) => {
+  const rule1Condition = "{q1} == 'item1'";
+  const rule1Actions = "Make question {q2} visible";
+
+  await setJSON(json2);
+
+  await t
+    .click(getTabbedMenuItemByText("Survey Logic"))
+    .expect(cellConditions.nth(0).innerText).eql(rule1Condition)
+    .expect(cellActions.nth(0).innerText).eql(rule1Actions)
+
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement.nth(0))
+    .click(logicQuestionSelector)
+    .click(getSelectOptionByText("q3"))
+    .typeText(logicQuestionValueSelector, "45", { replace: true })
+    .click(logicActionSelector)
+    .click(getSelectOptionByText("Complete survey"));
+  await check1Rule(t, rule1Condition, rule1Actions);
+
+  await t
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement.nth(0))
+    .click(addNewRuleButton)
+    .click(logicQuestionSelector)
+    .click(getSelectOptionByText("q1"))
+    .click(logicDropdownValueSelector)
+    .click(getSelectOptionByText("item2"))
+    .click(logicActionSelector)
+    .click(getSelectOptionByText("Show (hide) question"))
+    .click(logicQuestionSelector.nth(1))
+    .click(getSelectOptionByText("q3"));
+  await check2Rule(t);
+
+  await t
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement.nth(0));
+  await check1Rule(t, rule1Condition, rule1Actions);
+
+  await t
+    .hover(tableRulesSelector.nth(1))
+    .click(logicDetailButtonElement.nth(1));
+  await check2Rule(t);
+
+  await t
+    .click(doneButton)
+    .expect(cellConditions.nth(1).innerText).eql("{q1} == 'item2'")
+    .expect(cellActions.nth(1).innerText).eql("Make question {q3} visible")
+
+    .hover(tableRulesSelector)
+    .click(logicDetailButtonElement)
+    .click(doneButton)
+    .expect(cellConditions.nth(0).innerText).eql("{q3} == 45")
+    .expect(cellActions.nth(0).innerText).eql("Survey becomes completed");
 });

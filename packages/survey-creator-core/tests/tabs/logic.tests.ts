@@ -735,14 +735,18 @@ test("LogicItemEditorUI: change expressionEditorIsFastEntry", () => {
   expect(editor).toBeTruthy();
   expect(editor.textEditor.visible).toBeFalsy();
   expect(logic.expressionEditorIsFastEntry).toBeFalsy();
+  expect(editor.text).toEqual("{q1} = 1");
+  editor.text = "{q2} = 2";
 
   logic.toggleExpressionEditorIsFastEntry();
   expect(editor.textEditor.visible).toBeTruthy();
   expect(logic.expressionEditorIsFastEntry).toBeTruthy();
+  expect(editor.text).toEqual("{q2} = 2");
 
   logic.toggleExpressionEditorIsFastEntry();
   expect(editor.textEditor.visible).toBeFalsy();
   expect(logic.expressionEditorIsFastEntry).toBeFalsy();
+  expect(editor.text).toEqual("{q2} = 2");
 });
 
 test("LogicItemEditorUI: edit item two times and do Build/Edit", () => {
