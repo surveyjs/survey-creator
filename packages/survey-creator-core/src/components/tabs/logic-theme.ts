@@ -200,6 +200,7 @@ export var logicCss = {
     mainRoot: "sl-question st-row__question st-scrollable",
     tableWrapper: "sl-matrix",
     root: "sl-table",
+    row: "sl-table__row",
     rowError: "sl-matrix__row--error",
     cell: "sl-table__cell st-matrix__cell",
     headerCell: "sl-table__cell st-table__cell--header",
@@ -217,12 +218,14 @@ export var logicCss = {
   matrixdropdown: {
     mainRoot: "sl-question st-row__question st-scrollable",
     root: "sl-table",
+    row: "sl-table__row",
     cell: "sl-table__cell",
     headerCell: "sl-table__cell st-table__cell--header"
   },
   matrixdynamic: {
     mainRoot: "sl-question st-row__question st-scrollable",
     root: "sl-table st-matrixdynamic",
+    row: "sl-table__row",
     cell: "sl-table__cell",
     headerCell: "sl-table__cell st-table__cell--header",
     button: "sl-btn",
