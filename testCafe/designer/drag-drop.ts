@@ -424,7 +424,7 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
     .dragToElement(RatingToolboxItem, DynamicPanel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 350,
+      destinationOffsetY: 320,
       speed: 0.5,
     })
 
