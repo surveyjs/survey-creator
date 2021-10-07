@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.71](https://github.com/surveyjs/survey-creator/compare/v1.8.70...v1.8.71) (2021-10-07)
+
+
+### Bug Fixes
+
+* Condition editor does not work after re-open in modal window with tabs [#1947](https://github.com/surveyjs/survey-creator/issues/1947) ([#1948](https://github.com/surveyjs/survey-creator/issues/1948)) ([51fd073](https://github.com/surveyjs/survey-creator/commit/51fd073202e5587b52391046974845cafe91f5ca))
+* MaxLength in designer Tab fields, doesn't work for Translation tab [#1905](https://github.com/surveyjs/survey-creator/issues/1905) ([7bb23a9](https://github.com/surveyjs/survey-creator/commit/7bb23a9cd5ddf5b3b92c45cd10f51fa78a79276c))
+
 ### [1.8.70](https://github.com/surveyjs/survey-creator/compare/v1.8.69...v1.8.70) (2021-09-29)
 
 ### [1.8.69](https://github.com/surveyjs/survey-creator/compare/v1.8.68...v1.8.69) (2021-09-28)
