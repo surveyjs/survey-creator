@@ -171,7 +171,7 @@ export class DesignTimeSurveyModel extends Model {
       this.isPopupEditorContent
     );
     if (!componentName && element instanceof PanelModel) {
-      return "svc-question";
+      return "svc-panel";
     }
     return (
       componentName || super.getElementWrapperComponentName(element, reason)
