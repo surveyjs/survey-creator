@@ -892,11 +892,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.setOptions(this.options);
     this.patchMetadata();
-    this.initTabs();
     this.initSurveyWithJSON(
       JSON.parse(CreatorBase.defaultNewSurveyText),
       false
     );
+    this.initTabs();
     this.toolbox = new QuestionToolbox(
       this.options && this.options.questionTypes
         ? this.options.questionTypes

@@ -47,6 +47,9 @@ test("options.questionTypes", (): any => {
   expect(creator.isElementSelected(question)).toBeTruthy();
   expect(creator.isElementSelected(creator.survey)).toBeFalsy();
 });
+test("init creator with showDesignerTab=false", (): any => {
+  var creator = new CreatorTester({ showDesignerTab: false });
+});
 test("do not deactivate/activate tabs on selecting the active tab", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
