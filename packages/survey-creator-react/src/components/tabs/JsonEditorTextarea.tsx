@@ -21,9 +21,9 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
     const errors: JSX.Element[] = [];
     var key = 1;
     for (let i: number = 0; i < this.model.errors.length; i++) {
-      errors.push(<span key="{key}">Error: </span>);
+      errors.push(<span key="{key}"><b>Error: </b></span>);
       key++;
-      errors.push(<span key="{key}">{this.model.errors[i].text}</span>);
+      errors.push(<span key="{key}">{this.model.errors[i].text + (i !== this.model.errors.length - 1 ? "\n": "")}</span>);
       key++;
     }
     return (

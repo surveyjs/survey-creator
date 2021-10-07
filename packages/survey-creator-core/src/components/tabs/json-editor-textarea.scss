@@ -20,9 +20,26 @@ svc-tab-json-editor-textarea {
   position: absolute;
   right: 0%;
   top: 0%;
-  padding: 0.14em;
-  background-color: $red;
+  max-width: calc(100% - 8px);
+  padding: 3px 4px;
+
+  background-color: #FFF;
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
+  border: 1px solid gray;
+  border-radius: 1px;
+  
+  color: black;
+  font-family: monospace;
+
+  span {
+    white-space: pre;
+    
+    > b {
+      color: $red;
+    }
+  }  
 }
+
 .svc-json-editor-tab__content-errors:empty {
   display: none;
 }
