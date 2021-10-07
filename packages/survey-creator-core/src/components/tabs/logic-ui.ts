@@ -90,8 +90,7 @@ export class SurveyLogicUI extends SurveyLogic {
     if (this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
       this.addNew();
     }
-    const matrix = <QuestionMatrixDynamicModel>this.itemsSurvey.getQuestionByName("items");
-    matrix.visibleRows[matrix.visibleRows.length - 1].showDetailPanel();
+    this.matrixItems.visibleRows[this.matrixItems.visibleRows.length - 1].showDetailPanel();
   }
   public toggleExpressionEditorIsFastEntry() {
     this.expressionEditorIsFastEntry = !this.expressionEditorIsFastEntry;
@@ -137,6 +136,9 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   public get hasItems(): boolean {
     return this.items.length > 0;
+  }
+  get matrixItems(): QuestionMatrixDynamicModel {
+    return this.itemsSurvey.getQuestionByName("items") as QuestionMatrixDynamicModel;
   }
   protected onStartEditing() {
     super.onStartEditing();
@@ -241,7 +243,6 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
-    const matrix = this.itemsSurvey.getQuestionByName("items");
     var data = [];
     this.visibleItems = this.getVisibleItems();
     for (var i = 0; i < this.visibleItems.length; i++) {
@@ -250,8 +251,8 @@ export class SurveyLogicUI extends SurveyLogic {
         actions: this.visibleItems[i].actionsText
       });
     }
-    matrix.onHasDetailPanelCallback = (row) => { return true; };
-    matrix.onCreateDetailPanelCallback = (
+    this.matrixItems.onHasDetailPanelCallback = (row) => { return true; };
+    this.matrixItems.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,
       panel: PanelModel
     ) => {
@@ -266,8 +267,10 @@ export class SurveyLogicUI extends SurveyLogic {
           const actionsQuestion = <QuestionEmbeddedSurveyModel>panel.getQuestionByName("actions");
           condQuestion.embeddedSurvey = this.expressionEditor.editSurvey;
           actionsQuestion.embeddedSurvey = this.itemEditorValue.editSurvey;
+          this.updateRowIsAdditionalClasses(row.rowIndex - 1, false);
         } else {
           this.mode = "view";
+          this.updateRowIsAdditionalClasses(row.rowIndex - 1, this.visibleItems[row.rowIndex - 1].isModified || this.visibleItems[row.rowIndex - 1].isNew);
         }
         this.updateNewActionState();
       };
@@ -285,7 +288,18 @@ export class SurveyLogicUI extends SurveyLogic {
         }
       });
     };
-    matrix.value = data;
+    this.matrixItems.value = data;
+    this.updateRenderedRows();
+  }
+  private updateRenderedRows() {
+    this.visibleItems.forEach((_, index) => {
+      this.updateRowIsAdditionalClasses(index, this.visibleItems[index].isModified);
+    })
+  }
+  private updateRowIsAdditionalClasses(index: number, isAdditionalClasses: boolean) {
+    if (!!this.matrixItems.renderedTable) {
+      this.matrixItems.renderedTable.rows[index].isAdditionalClasses = isAdditionalClasses;
+    }
   }
   private updateNewActionState(): void {
     this.addNewButton.enabled = this.mode !== "new";

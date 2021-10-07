@@ -24,6 +24,9 @@
     display: block;
   }
 }
+.sl-table__row.sl-tab__row--additional .sl-table__cell{
+  color: $secondary;
+}
 
 .sl-table__cell {
   color: $foreground;
