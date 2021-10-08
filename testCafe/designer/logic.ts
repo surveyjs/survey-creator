@@ -403,7 +403,7 @@ async function check2Rule(t: TestController) {
 test("Modified rules without saving", async (t) => {
   const rule1Condition = "{q1} == 'item1'";
   const rule1Actions = "Make question {q2} visible";
-  const additinalClass = "sl-tab__row--additional";
+  const additinalClass = "sl-table__row--additional";
 
   await setJSON(json2);
 
