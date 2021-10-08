@@ -1610,7 +1610,16 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.initSurveyWithJSON(val, true);
     }
   }
-
+  public loadSurvey(surveyId: string): void {
+    new Survey.dxSurveyService().loadSurvey(
+      surveyId,
+      (success: boolean, result: string, response: any) => {
+        if (success && result) {
+          this.JSON = result;
+        }
+      }
+    );
+  }
   protected doClickQuestionCore(
     element: IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX",
