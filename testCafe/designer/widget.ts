@@ -6,7 +6,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
 });
 
-test("Designer with empty json should show only one page", async (t) => {
+test("Custom widgets should be locked in design mode", async (t) => {
   const json = {
     pages: [
       {
