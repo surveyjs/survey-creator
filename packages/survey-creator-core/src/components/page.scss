@@ -10,6 +10,11 @@ svc-page {
   border: 2px solid transparent;
   box-sizing: border-box;
   width: 100%;
+  .sd-page {
+    width: 100%;
+    margin: 0;
+    padding-top: 8px;
+  }
 }
 
 .svc-page__content-actions {
