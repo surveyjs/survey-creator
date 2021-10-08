@@ -42,7 +42,7 @@ So, let’s say, you need to allow users to select a country. The right solution
     "type": "dropdown",
     optionsCaption: "Select a country...",
     choicesByUrl: {
-        url: "https://restcountries.eu/rest/v2/all"
+        url: "https://surveyjs.io/api/CountriesExample"
     }
 }
 ```
@@ -66,7 +66,7 @@ Survey.ComponentCollection.Instance.add({
     type: "dropdown",
     optionsCaption: "Select a country...",
     choicesByUrl: {
-      url: "https://restcountries.eu/rest/v2/all",
+      url: "https://surveyjs.io/api/CountriesExample",
     },
   },
 });
