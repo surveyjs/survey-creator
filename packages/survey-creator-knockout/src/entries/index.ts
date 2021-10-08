@@ -1,7 +1,6 @@
 export let Version: string;
 Version = `${process.env.VERSION}`;
 
-export * from "../components/button";
 export * from "../components/creator";
 export * from "../components/tabs/designer";
 export * from "../components/tabs/embed";

@@ -4,7 +4,7 @@ export var surveyDesignerCss = {
   header: "sd-title sd-container-modern__title",
   body: "sd-body",
   bodyEmpty: "sd-body sd-body--empty",
-  footer: "sd-footer sd-body__footer sd-clearfix",
+  footer: "sd-footer sd-body__navigation sd-clearfix",
   title: "sd-title",
   description: "sd-description",
   logo: "sd-logo",
@@ -13,12 +13,12 @@ export var surveyDesignerCss = {
   navigationButton: "",
   completedPage: "sd-completedpage",
   navigation: {
-    complete: "sd-btn sd-footer__complete-btn",
-    prev: "sd-btn sd-footer__prev-btn",
-    next: "sd-btn sd-footer__next-btn",
-    start: "sd-btn sd-footer__start-btn",
-    preview: "sd-btn sd-footer__preview-btn",
-    edit: "sd-btn sd-footer__edit-btn"
+    complete: "sd-btn sd-btn--action sd-navigation__complete-btn",
+    prev: "sd-btn sd-navigation__prev-btn",
+    next: "sd-btn sd-navigation__next-btn",
+    start: "sd-btn sd-navigation__start-btn",
+    preview: "sd-btn sd-navigation__preview-btn",
+    edit: "sd-btn sd-navigation__edit-btn"
   },
   panel: {
     title: "sd-title sd-panel__title",
