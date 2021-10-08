@@ -18,6 +18,7 @@ export * from "../components/question-link-value";
 export * from "../components/question-embedded-survey";
 export * from "../components/question-image";
 export * from "../components/question-rating";
+export * from "../components/question-widget";
 export * from "../components/item-value";
 export * from "../components/image-item-value";
 export * from "../components/panel";

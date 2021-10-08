@@ -2554,6 +2554,9 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
       if (isPopupEditorContent) {
         return element.getType() == "dropdown" ? "svc-cell-dropdown-question" : "svc-cell-question";
       }
+      if (element.customWidget) {
+        return "svc-widget-question";
+      }
       if (element.getType() == "dropdown") {
         return "svc-dropdown-question";
       }

@@ -12,6 +12,7 @@ export * from "../components/QuestionImage";
 export * from "../components/QuestionLinkValue";
 export * from "../components/QuestionEmbeddedSurvey";
 export * from "../components/QuestionRating";
+export * from "../components/QuestionWidget";
 export * from "../components/CellQuestion";
 export * from "../components/CellQuestionDropdown";
 export * from "../components/QuestionEditorContent";
