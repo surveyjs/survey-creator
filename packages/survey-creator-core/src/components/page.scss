@@ -11,9 +11,8 @@ svc-page {
   box-sizing: border-box;
   width: 100%;
   .sd-page {
-    width: 100%;
     margin: 0;
-    padding-top: 8px;
+    padding-top: calcSize(1);
   }
 }
 

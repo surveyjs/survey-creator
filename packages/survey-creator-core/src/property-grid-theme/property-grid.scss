@@ -20,9 +20,8 @@
       background-color: transparent;
     }
     .sd-page {
-      width: 100%;
       margin: 0;
-      padding-top: 8px;
+      padding-top: calcSize(1);
     }
   }
   .sv-popup__footer {
