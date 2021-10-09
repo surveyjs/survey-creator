@@ -148,7 +148,7 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected onEndEditing() {
     if (!!this.editableItem) {
-      this.editableItem.isModified = !!this.itemEditor && !!this.expressionEditor && (this.itemEditor.isModified || this.expressionEditor.text !== this.editableItem.expression);
+      this.editableItem.isModified = !!this.itemEditor && !!this.expressionEditor && (this.itemEditor.isModified || this.expressionEditor.isModified(this.editableItem.expression));
     }
     super.onEndEditing();
     this.expressionEditorValue = null;
@@ -233,7 +233,7 @@ export class SurveyLogicUI extends SurveyLogic {
       if (options.name === "textEditor") {
         this.expressionEditorCanShowBuilder = ConditionEditor.canBuildExpression(options.value);
       }
-    })
+    });
     return res;
   }
   private getVisibleItems(): SurveyLogicItem[] {
@@ -300,7 +300,7 @@ export class SurveyLogicUI extends SurveyLogic {
       action: () => {
         this.addNewUI();
       }
-    })
+    });
   }
   public get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");
