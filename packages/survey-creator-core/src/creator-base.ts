@@ -2565,6 +2565,9 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
       }
       return "svc-question";
     }
+    if (element instanceof PanelModel) {
+      return "svc-panel";
+    }
   }
   return undefined;
 }
