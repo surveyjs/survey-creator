@@ -862,6 +862,42 @@ test("Undo converting question type", (): any => {
   q = creator.survey.getQuestionByName("question1");
   expect(q.getType()).toEqual("checkbox");
 });
+test("Merge Undo for string and text property editors", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  var q = creator.survey.getQuestionByName("question1");
+  q.title = "Title 1";
+  q.isRequired = true;
+  q.title = "Title 11";
+  q.title = "Title 111";
+  q.title = "Title 1111";
+  creator.undo();
+  expect(q.title).toEqual("Title 1");
+  q.title = "Title 11";
+  q.title = "Title 1";
+  creator.undo();
+  expect(q.title).toEqual("Title 11");
+  creator.undo();
+  expect(q.title).toEqual("Title 1");
+  q.visible = false;
+  q.visible = true;
+  q.visible = false;
+  creator.undo();
+  expect(q.visible).toBeTruthy();
+  creator.undo();
+  expect(q.visible).toBeFalsy();
+  creator.undo();
+  expect(q.visible).toBeTruthy();
+  q.name = "q1";
+  q.name = "q22";
+  creator.undo();
+  expect(q.name).toEqual("q1");
+  creator.undo();
+  expect(q.name).toEqual("question1");
+});
+
 test("Question type selector", (): any => {
   const creator = new CreatorTester();
   const survey: SurveyModel = <SurveyModel>creator.survey;

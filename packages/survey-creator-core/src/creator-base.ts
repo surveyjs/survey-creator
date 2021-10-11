@@ -1342,18 +1342,21 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       !this.undoRedoManager.isCorrectProperty(sender, name)
     )
       return;
-    this.undoRedoManager.startTransaction(name + " changed");
-    this.undoRedoManager.onPropertyValueChanged(
-      name,
-      oldValue,
-      newValue,
-      sender,
-      arrayChanges
-    );
-    this.updatePagesController(sender, name);
-    this.updateElementsOnLocaleChanged(sender, name);
-    this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
-    this.undoRedoManager.stopTransaction();
+    const canUndoRedoMerge = this.undoRedoManager.tryMergeTransaction(sender, name, newValue);
+    if(!canUndoRedoMerge) {
+      this.undoRedoManager.startTransaction(name + " changed");
+      this.undoRedoManager.onPropertyValueChanged(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
+      this.updatePagesController(sender, name);
+      this.updateElementsOnLocaleChanged(sender, name);
+      this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
+      this.undoRedoManager.stopTransaction();
+    }
   }
   private updateElementsOnLocaleChanged(
     obj: Survey.Base,
