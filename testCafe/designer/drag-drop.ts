@@ -32,6 +32,9 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
 
   const questionsLength = await getQuestionsLength();
   await t.expect(questionsLength).eql(2);
+
+  const ghostPageRowsCount = newGhostPagePage.find(".svc-row").count;
+  await t.expect(ghostPageRowsCount).eql(0);
 });
 
 test("Drag Drop Question", async (t) => {
