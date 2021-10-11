@@ -607,6 +607,45 @@ test("SurveyLogicUI: create trigger_runExpression trigger", () => {
   expect(actions).toHaveLength(2);
   expect(actions[0].id).toEqual("property-grid-clear");
 });
+test("SurveyLogicUI: Add new item and isModified", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", enableIf: "{q1} = 1" },
+      { type: "text", name: "q3" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(1);
+  logic.editItem(logic.items[0]);
+  expect(logic.editableItem.isNew).toBeFalsy();
+  expect(logic.editableItem.isModified).toBeFalsy();
+  logic.expressionEditor.text = "{q1} = 2";
+  logic["onEndEditing"]();
+  expect(logic.items[0].isModified).toBeTruthy();
+
+  logic.addNew();
+  expect(logic.editableItem.isNew).toBeTruthy();
+  expect(logic.editableItem.isModified).toBeFalsy();
+  logic.expressionEditor.text = "{q1} = 1";
+  const panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("elementSelector").value = "q2";
+  expect(logic.editableItem.isNew).toBeTruthy();
+  expect(logic.editableItem.isModified).toBeFalsy();
+
+  const res = logic.saveEditableItem();
+  expect(res).toBeTruthy();
+  expect(logic.items[0].isModified).toBeTruthy();
+  expect(logic.items[1].isNew).toBeFalsy();
+  expect(logic.items[1].isModified).toBeFalsy();
+
+  logic.editItem(logic.items[1]);
+  logic.expressionEditor.text = "{q1} = 2";
+  logic["onEndEditing"]();
+  expect(logic.items[0].isModified).toBeTruthy();
+  expect(logic.items[1].isModified).toBeTruthy();
+});
 test("LogicItemEditorUI: remove item", () => {
   var survey = new SurveyModel({
     elements: [
