@@ -1610,7 +1610,16 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.initSurveyWithJSON(val, true);
     }
   }
-
+  public loadSurvey(surveyId: string): void {
+    new Survey.dxSurveyService().loadSurvey(
+      surveyId,
+      (success: boolean, result: string, response: any) => {
+        if (success && result) {
+          this.JSON = result;
+        }
+      }
+    );
+  }
   protected doClickQuestionCore(
     element: IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX",
@@ -2554,6 +2563,9 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
       if (isPopupEditorContent) {
         return element.getType() == "dropdown" ? "svc-cell-dropdown-question" : "svc-cell-question";
       }
+      if (element.customWidget) {
+        return "svc-widget-question";
+      }
       if (element.getType() == "dropdown") {
         return "svc-dropdown-question";
       }
@@ -2564,6 +2576,9 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
         return "svc-rating-question";
       }
       return "svc-question";
+    }
+    if (element instanceof PanelModel) {
+      return "svc-panel";
     }
   }
   return undefined;

@@ -127,3 +127,10 @@ ReactElementFactory.Instance.registerElement(
     return React.createElement(QuestionAdornerComponent, props);
   }
 );
+
+ReactElementFactory.Instance.registerElement(
+  "svc-panel",
+  (props: QuestionAdornerComponentProps) => {
+    return React.createElement(QuestionAdornerComponent, props);
+  }
+);
