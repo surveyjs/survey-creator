@@ -270,7 +270,7 @@ export class SurveyLogicUI extends SurveyLogic {
           this.updateRowIsAdditionalClasses(row.rowIndex - 1, false);
         } else {
           this.mode = "view";
-          this.updateRowIsAdditionalClasses(row.rowIndex - 1, this.visibleItems[row.rowIndex - 1].isModified || this.visibleItems[row.rowIndex - 1].isNew);
+          this.updateRenderedRows();
         }
         this.updateNewActionState();
       };
@@ -293,7 +293,7 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private updateRenderedRows() {
     this.visibleItems.forEach((_, index) => {
-      this.updateRowIsAdditionalClasses(index, this.visibleItems[index].isModified);
+      this.updateRowIsAdditionalClasses(index, this.visibleItems[index].isModified || this.visibleItems[index].isNew);
     })
   }
   private updateRowIsAdditionalClasses(index: number, isAdditionalClasses: boolean) {
