@@ -55,10 +55,13 @@ export class ItemValueWrapperViewModel extends Base {
   private handleDragDropGhostPositionChanged = () => {
     this.ghostPosition = this.dragDropHelper.getGhostPosition(this.item);
     this.isDragDropGhost = this.item === this.dragDropHelper.draggedElement;
-    
-    if (this.item === this.dragDropHelper.dropTarget) {
+
+    if (this.item === this.dragDropHelper.prevDropTarget) {
       this.isDragDropMoveDown = this.item.isDragDropMoveDown;
       this.isDragDropMoveUp = this.item.isDragDropMoveUp;
+    } else {
+      this.isDragDropMoveDown = false;
+      this.isDragDropMoveUp = false;
     }
   };
   get isDraggable() {
