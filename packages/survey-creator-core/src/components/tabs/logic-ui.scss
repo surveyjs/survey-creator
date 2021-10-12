@@ -34,7 +34,7 @@
     width: 100%;
   }
 }
-.svc-logic-tab__content .svc-logic-operator {
+.svc-logic-paneldynamic .svc-logic-operator {
   appearance: none;
   padding: calcSize(1) calcSize(2);
   border-radius: calcSize(12.5);
@@ -49,6 +49,10 @@
     background: $background;
     color: $foreground;
   }
+}
+
+.svc-logic-operator:focus {
+  outline: 1px dotted $primary;
 }
 
 .svc-logic-question--answered .svc-logic-operator {
@@ -94,11 +98,11 @@
   background-image: url("data:image/svg+xml,%3Csvg width='20' height='22' viewBox='0 0 20 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 4H18H14V2C14 0.9 13.1 0 12 0H8C6.9 0 6 0.9 6 2V4H2H0V6H2V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V6H20V4ZM8 2H12V4H8V2ZM16 20H4V6H6H14H16V20ZM12 8H14V18H12V8ZM9 8H11V18H9V8ZM6 8H8V18H6V8Z' fill='%23E60A3E'/%3E%3C/svg%3E%0A");
 }
 
-.svc-logic-tab__content .svc-logic-paneldynamic__button-remove-text {
+.svc-logic-paneldynamic .svc-logic-paneldynamic__button-remove-text {
   display: none;
 }
 
-.svc-logic-tab__content .svc-logic-paneldynamic__button {
+.svc-logic-paneldynamic .svc-logic-paneldynamic__button {
   background: none;
   box-shadow: none;
   appearance: none;
@@ -198,6 +202,7 @@
 .sl-table__cell--detail-panel {
   .sd-page.sd-body__page {
     padding-left: 0;
+    padding-top: 0;
   }
 
   .sl-panel__footer {
