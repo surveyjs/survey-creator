@@ -27,7 +27,7 @@ export class PageViewModel<
     page["surveyChangedCallback"] = () => {
       this.isPageLive = !!page.survey;
     };
-    if(this.isGhost) {
+    if (this.isGhost) {
       this.updateActionsProperties();
       this.page.registerFunctionOnPropertiesValueChanged(
         ["title", "description"],
@@ -35,6 +35,7 @@ export class PageViewModel<
           this.addGhostPage();
         }
       );
+      this.patchPageForDragDrop(this.page, this.addGhostPage);
     }
     this.page.onFirstRendering();
     this.page.updateCustomWidgets();
@@ -47,6 +48,15 @@ export class PageViewModel<
     if (isSelected && !!this.onPageSelectedCallback) {
       this.onPageSelectedCallback();
     }
+  }
+  private patchPageForDragDrop(page: PageModel, addGhostPage: () => void) {
+    // need for the drag drop see https://github.com/surveyjs/survey-library/blob/871492817561de11f934ebdf50481770300a396a/src/dragdrop/survey-elements.ts#L266
+    page["_isGhost"] = true;
+    page["_addGhostPageViewModel"] = () => {
+      delete page["_isGhost"];
+      delete page["_addGhostPageViewModel"];
+      addGhostPage();
+    };
   }
   public dispose() {
     super.dispose();
@@ -66,7 +76,7 @@ export class PageViewModel<
     return this._page;
   }
 
-  public addGhostPage() {
+  public addGhostPage = () => {
     if (this.isGhost) {
       this.page.unRegisterFunctionOnPropertiesValueChanged([
         "title",
