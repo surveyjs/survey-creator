@@ -4,7 +4,7 @@ import {
   JsonObjectProperty,
   Serializer
 } from "survey-core";
-import { EditableObject } from "./editable-object";
+import { EditableObject } from "../../editable-object";
 
 export interface IUndoRedoChange {
   object: any;
@@ -14,7 +14,7 @@ export interface IUndoRedoChange {
 }
 
 export class UndoRedoManager {
-  constructor() {}
+  constructor() { }
   public onPropertyValueChanged(
     name: string,
     oldValue: any,
@@ -51,7 +51,7 @@ export class UndoRedoManager {
   private _transactions: Transaction[] = [];
   private _currentTransactionIndex: number = -1;
 
-  public isCopyObject(sender: Base) {}
+  public isCopyObject(sender: Base) { }
   private _cutOffTail() {
     if (this._currentTransactionIndex + 1 !== this._transactions.length) {
       this._transactions.length = this._currentTransactionIndex + 1;
@@ -81,7 +81,7 @@ export class UndoRedoManager {
         this.changesFinishedCallback(transaction.actions[0].getChanges());
     }
   }
-  canUndoRedoCallback() {}
+  canUndoRedoCallback() { }
   private transactionCounter = 0;
   startTransaction(name: string) {
     this.transactionCounter++;
@@ -129,11 +129,17 @@ export class UndoRedoManager {
     this.canUndoRedoCallback();
     this.notifyChangesFinished(nextTransaction);
   }
+  suspend() {
+    this._ignoreChanges = true;
+  }
+  resume() {
+    this._ignoreChanges = false;
+  }
   public changesFinishedCallback: (changes: IUndoRedoChange) => void;
 }
 
 export class Transaction {
-  constructor(private _name: string) {}
+  constructor(private _name: string) { }
 
   private _actions: UndoRedoAction[] = [];
 
@@ -178,7 +184,7 @@ export class UndoRedoAction {
     private _oldValue: any,
     private _newValue: any,
     private _sender: Base
-  ) {}
+  ) { }
 
   apply() {
     this._sender[this._propertyName] = this._newValue;

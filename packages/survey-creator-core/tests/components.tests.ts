@@ -1,10 +1,12 @@
-import { QuestionCheckboxModel, QuestionImageModel, QuestionRatingModel } from "survey-core";
+import { QuestionCheckboxModel, QuestionImageModel, QuestionRatingModel, settings } from "survey-core";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionImageAdornerViewModel } from "../src/components/question-image";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
 
-beforeEach(() => {});
+beforeEach(() => { });
+
+settings.supportCreatorV2 = true;
 
 test("item value isNew isDraggable allowRemove", () => {
   const creator = new CreatorTester();

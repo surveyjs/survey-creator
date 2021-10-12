@@ -27,10 +27,9 @@ import { DragDropSurveyElements, DragDropChoices } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
-import { getNextValue, isPropertyVisible, propertyExists } from "./utils/utils";
+import { getNextValue } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
-import { UndoRedoManager, IUndoRedoChange } from "./undoredomanager";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import { ICreatorSelectionOwner } from "./selection-owner";
@@ -45,9 +44,13 @@ import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
 import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
-import { PropertyGridViewModel, PropertyGridViewModelBase, TabDesignerPlugin } from "./entries";
 import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
+import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
+import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/undo-redo";
+import { PropertyGridViewModelBase } from "./property-grid/property-grid-view-model";
+import { TabDesignerPlugin } from "./components/tabs/designer";
+import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -174,7 +177,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private newQuestionChangedNames: {};
-  private undoRedoManagerValue: UndoRedoManager;
   private pagesControllerValue: PagesController;
   private selectionHistoryControllerValue: SelectionHistory;
 
@@ -238,8 +240,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public addPlugin(name: string, plugin: ICreatorPlugin) {
     this.plugins[name] = plugin;
   }
-  public getPlugin(name: string): ICreatorPlugin {
-    return this.plugins[name];
+  public getPlugin<P extends ICreatorPlugin = ICreatorPlugin>(name: string): P {
+    return this.plugins[name] as P;
   }
 
   /**
@@ -617,38 +619,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
-   * The event is called before undo happens.
-   * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
-   */
-  public onBeforeUndo: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-  /**
-   * The event is called before redo happens.
-   * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
-   */
-  public onBeforeRedo: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-  /**
-   * The event is called after undo happens.
-   * <br/> options.state is an undo/redo item.
-   */
-  public onAfterUndo: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-  /**
-   * The event is called after redo happens.
-   * <br/> options.state is an undo/redo item.
-   */
-  public onAfterRedo: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-  /**
    * The event is called on changing the selected element. You may change the new selected element by changing the property options.newSelectedElement to your own
    * <br/> options.newSelectedElement the element that is going to be selected in the survey desiger: question, panel, page or survey.
    */
@@ -858,7 +828,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return plugin;
   }
   private get currentPlugin(): ICreatorPlugin {
-    return this.getPlugin(this.viewType);
+    return this.getPlugin(this.activeTab);
   }
 
   public static defaultNewSurveyText: string =
@@ -908,9 +878,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   onSurveyElementPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
     throw new Error("Method not implemented.");
   }
-  /**
-   * Start: Obsolete properties and functins
-   */
+
+  //#region Obsolete properties and functins
   public get showToolbox(): string {
     SurveyHelper.warnNonSupported("showToolbox");
     return undefined;
@@ -946,48 +915,64 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public leftContainerActiveItem(name: string) {
     SurveyHelper.warnNonSupported("leftContainerActiveItem");
   }
+  //#endregion Obsolete properties and functins
+
+  //#region Obsolete Undo/Redo
   /**
-   * End: Obsolete properties and functins
+   * The event is called before undo happens.
+   * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
+  public onBeforeUndo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called before redo happens.
+   * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
+   */
+  public onBeforeRedo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called after undo happens.
+   * <br/> options.state is an undo/redo item.
+   */
+  public onAfterUndo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * The event is called after redo happens.
+   * <br/> options.state is an undo/redo item.
+   */
+  public onAfterRedo: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
 
   public get undoRedoManager(): UndoRedoManager {
-    return this.undoRedoManagerValue;
+    const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
+    return plugin && plugin.model.undoRedoManager;
+  }
+  public get undoRedoController(): UndoRedoController {
+    const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
+    return plugin && plugin.model;
+  }
+  startUndoRedoTransaction(name: string = "") {
+    this.undoRedoManager && this.undoRedoManager.startTransaction(name);
+  }
+  stopUndoRedoTransaction() {
+    this.undoRedoManager && this.undoRedoManager.stopTransaction();
   }
   public undo() {
-    if (!this.undoRedoManager) return;
-    var options = { canUndo: true };
-    this.onBeforeUndo.fire(self, options);
-    if (options.canUndo) {
-      var item = this.undoRedoManager.undo();
-      this.onAfterUndo.fire(self, { state: item });
-      this.selectElementAfterUndo();
-    }
+    this.undoRedoController && this.undoRedoController.undo();
   }
   public redo() {
-    if (!this.undoRedoManager) return;
-    const options = { canRedo: true };
-    this.onBeforeRedo.fire(self, options);
-    if (options.canRedo) {
-      const item = this.undoRedoManager.redo();
-      this.onAfterRedo.fire(self, { state: item });
-      this.selectElementAfterUndo();
-    }
+    this.undoRedoController && this.undoRedoController.redo();
   }
-  private selectElementAfterUndo() {
-    this.selectElementAfterUndoCore(this.selectedElement);
-  }
-  private selectElementAfterUndoCore(obj: Base) {
-    if (
-      !!obj &&
-      !obj.isDisposed &&
-      !!obj.getSurvey() &&
-      (!this.isObjQuestion(obj) || !!obj["parent"])
-    ) {
-      this.selectElement(obj);
-      return;
-    }
-    this.selectElement(this.survey);
-  }
+  //#endregion Obsolete Undo/Redo
+
   public get pagesController(): PagesController {
     return this.pagesControllerValue;
   }
@@ -1014,6 +999,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
   }
   private initPlugins(): void {
+    this.addPlugin("undoredo", new UndoRedoPlugin<T>(this));
     if (this.showDesignerTab) {
       new TabDesignerPlugin<T>(this);
     }
@@ -1266,39 +1252,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.doOnElementRemoved(options.question);
     });
     */
-    this.undoRedoManagerValue = new UndoRedoManager();
     this.setSurvey(survey);
     const currentPlugin = this.getPlugin(this.activeTab);
     if (!!currentPlugin && !!currentPlugin.update) {
       currentPlugin.update();
     }
-    survey.onPropertyValueChangedCallback = (
-      name: string,
-      oldValue: any,
-      newValue: any,
-      sender: Survey.Base,
-      arrayChanges: Survey.ArrayChanges
-    ) => {
-      this.onSurveyPropertyValueChangedCallback(
-        name,
-        oldValue,
-        newValue,
-        sender,
-        arrayChanges
-      );
-    };
     survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
-    this.undoRedoManager.changesFinishedCallback = (
-      changes: IUndoRedoChange
-    ) => {
-      this.setModified({
-        type: "PROPERTY_CHANGED",
-        name: changes.propertyName,
-        target: changes.object,
-        oldValue: changes.oldValue,
-        newValue: changes.newValue
-      });
-    };
   }
 
   protected initDragDrop() {
@@ -1310,52 +1269,25 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
-      this.undoRedoManager.startTransaction("drag drop");
+      this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
-      this.undoRedoManager.stopTransaction();
+      this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
     });
   }
   private initDragDropChoices() {
     this.dragDropChoices = new DragDropChoices(null, this);
     this.dragDropChoices.onBeforeDrop.add((sender, options) => {
-      this.undoRedoManager.startTransaction("drag drop");
+      this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropChoices.onAfterDrop.add((sender, options) => {
-      this.undoRedoManager.stopTransaction();
+      this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
     });
   }
 
-  private addingObject: Survey.Base;
-  private onSurveyPropertyValueChangedCallback(
-    name: string,
-    oldValue: any,
-    newValue: any,
-    sender: Survey.Base,
-    arrayChanges: Survey.ArrayChanges
-  ) {
-    if (
-      this.addingObject == sender ||
-      !this.undoRedoManager ||
-      !this.undoRedoManager.isCorrectProperty(sender, name)
-    )
-      return;
-    this.undoRedoManager.startTransaction(name + " changed");
-    this.undoRedoManager.onPropertyValueChanged(
-      name,
-      oldValue,
-      newValue,
-      sender,
-      arrayChanges
-    );
-    this.updatePagesController(sender, name);
-    this.updateElementsOnLocaleChanged(sender, name);
-    this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
-    this.undoRedoManager.stopTransaction();
-  }
-  private updateElementsOnLocaleChanged(
+  public updateElementsOnLocaleChanged(
     obj: Survey.Base,
     propertyName: string
   ) {
@@ -1365,7 +1297,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       pages[i].locStrsChanged();
     }
   }
-  private updateConditionsOnQuestionNameChanged(
+  public updateConditionsOnQuestionNameChanged(
     obj: Survey.Base,
     propertyName: string,
     oldValue: any
@@ -1380,7 +1312,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.updateConditions(oldName, newName);
     }
   }
-  private updatePagesController(sender: Survey.Base, name: string) {
+  public updatePagesController(sender: Survey.Base, name: string) {
     if ((name == "name" || name == "title") && this.isObjPage(sender)) {
       this.pagesController.pageNameChanged(<PageModel>sender);
     }
@@ -1390,7 +1322,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
   }
 
-  private isObjQuestion(obj: Survey.Base) {
+  public isObjQuestion(obj: Survey.Base) {
     return this.isObjThisType(obj, "question");
   }
   public isObjPage(obj: Survey.Base) {
@@ -1406,36 +1338,33 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return !!classInfo && classInfo.name === typeName;
   }
 
+  @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
     var options = { question: question, page: page };
-    this.addingObject = question;
     this.onQuestionAdded.fire(this, options);
-    this.addingObject = null;
     /*
     if (parentPanel.elements.indexOf(question) !== -1) {
       this.surveyObjects.addElement(question, parentPanel);
     }
     */
   }
+  @ignoreUndoRedo()
   private doOnPanelAdded(panel: PanelModel, parentPanel: any) {
     var page = this.getPageByElement(panel);
     var options = { panel: panel, page: page };
-    this.addingObject = panel;
     this.onPanelAdded.fire(this, options);
-    this.addingObject = null;
     /*
     if (parentPanel.elements.indexOf(panel) !== -1) {
       this.surveyObjects.addElement(panel, parentPanel);
     }
     */
   }
+  @ignoreUndoRedo()
   private doOnPageAdded(page: PageModel) {
     var options = { page: page };
-    this.addingObject = page;
     this.onPageAdded.fire(this, options);
-    this.addingObject = null;
     this.setModified({ type: "PAGE_ADDED", newValue: options.page });
   }
   private getPageByElement(obj: Base): PageModel {
@@ -1810,6 +1739,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     if (index < 0 || index > this.survey.pages.length - 1) return null;
     return this.survey.pages[index];
   }
+  @undoRedoTransaction()
   protected deleteObject(obj: any) {
     var options = {
       element: obj,
@@ -1881,8 +1811,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   //#region Obsolete designerPropertyGrid
-  private get designerPropertyGrid(): PropertyGridModel {
-    const designerPlugin = this.getPlugin("designer");
+  protected get designerPropertyGrid(): PropertyGridModel {
+    const designerPlugin = this.getPlugin<TabDesignerPlugin<T>>("designer");
     return designerPlugin ? (designerPlugin.propertyGrid.model as any as PropertyGridModel) : null;
   }
   /**
@@ -2357,12 +2287,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.onConditionGetTitle.fire(this, options);
     return options.title;
   }
-  startUndoRedoTransaction(name: string = "") {
-    this.undoRedoManager.startTransaction(name);
-  }
-  stopUndoRedoTransaction() {
-    this.undoRedoManager.stopTransaction();
-  }
   /**
    * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
    * If during this period of time an end-user modify survey, then the last version will be saved only. Set to 0 to save immediately.
@@ -2417,13 +2341,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.saveSurveyFuncValue = value;
     this.showSaveButton = value != null && !this.isAutoSave;
   }
+  @undoRedoTransaction()
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;
     if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
-    this.undoRedoManager.startTransaction("Convert question");
     el = this.convertQuestion(<Survey.Question>el, newType);
     this.selectElement(el);
-    this.undoRedoManager.stopTransaction();
   }
 
   public get addNewQuestionText() {
@@ -2466,10 +2389,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       popupModel: popupModel
     };
   }
+  @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: () => void) {
-    if (this.undoRedoManager) {
-      this.undoRedoManager.startTransaction("add new page");
-    }
     beforeAdd();
     const newElement = Survey.ElementFactory.Instance.createElement(
       this.currentAddQuestionType || "text",
@@ -2477,10 +2398,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     );
     this.setNewNames(newElement);
     this.clickToolboxItem(newElement);
-
-    if (this.undoRedoManager) {
-      this.undoRedoManager.stopTransaction();
-    }
   }
   createIActionBarItemByClass(className: string): Action {
     return new Action({

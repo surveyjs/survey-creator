@@ -2,10 +2,10 @@ import { Base, PageModel, property, SurveyModel, Action, ComputedUpdater } from 
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
 import { PropertyGridModel } from "../../property-grid";
-import "./designer.scss";
 import { PropertyGridViewModel, PropertyGridViewModelBase } from "../../property-grid/property-grid-view-model";
 import { settings } from "../../settings";
 import { getLocString } from "../../editorLocalization";
+import "./designer.scss";
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   @property() newPage: PageModel;
@@ -96,8 +96,6 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
 export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin {
   public model: TabDesignerViewModel<T>;
   public propertyGrid: PropertyGridViewModelBase;
-  private undoAction: Action;
-  private redoAction: Action;
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
   private expandAction: Action;
@@ -107,40 +105,24 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
-    creator.registerShortcut("undo", {
+    creator.registerShortcut("delete", {
       hotKey: {
-        ctrlKey: true,
-        keyCode: 90,
+        keyCode: 46,
       },
       macOsHotkey: {
-        keyCode: 90,
+        keyCode: 46,
       },
-      execute: () => this.undoAction.action()
-    });
-    creator.registerShortcut("redo", {
-      hotKey: {
-        ctrlKey: true,
-        keyCode: 89,
-      },
-      macOsHotkey: {
-        shiftKey: true,
-        keyCode: 90,
-      },
-      execute: () => this.redoAction.action()
+      execute: () => this.creator.deleteCurrentElement()
     });
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
-    this.undoAction && (this.undoAction.visible = true);
-    this.redoAction && (this.redoAction.visible = true);
     this.surveySettingsAction && (this.surveySettingsAction.visible = true);
     this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible);
   }
   public deactivate(): boolean {
     this.model = undefined;
 
-    this.undoAction && (this.undoAction.visible = false);
-    this.redoAction && (this.redoAction.visible = false);
     this.surveySettingsAction.visible = false;
     this.expandAction && (this.expandAction.visible = false);
     return true;
@@ -148,30 +130,9 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   public update(): void {
     if (!this.model) return;
     this.model.initSurvey();
-    if (!!this.creator.undoRedoManager) {
-      this.creator.undoRedoManager.canUndoRedoCallback = () => {
-        this.updateUndeRedoActions();
-      };
-    }
   }
   public createActions() {
     const items: Array<Action> = [];
-    this.undoAction = new Action({
-      id: "icon-undo",
-      iconName: "icon-undo",
-      title: getLocString("ed.undo"),
-      showTitle: false,
-      visible: this.creator.viewType === "designer",
-      action: () => this.creator.undo()
-    });
-    this.redoAction = new Action({
-      id: "icon-redo",
-      iconName: "icon-redo",
-      title: getLocString("ed.redo"),
-      showTitle: false,
-      visible: this.creator.viewType === "designer",
-      action: () => this.creator.redo()
-    });
     this.surveySettingsAction = new Action({
       id: "svd-settings",
       iconName: "icon-settings",
@@ -203,15 +164,12 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       tooltip: this.creator.getLocString("ed.saveSurveyTooltip"),
       showTitle: false
     });
-    items.push(this.undoAction);
-    items.push(this.redoAction);
     items.push(this.saveSurveyAction);
     items.push(this.surveySettingsAction);
     if (settings.propertyGrid.allowCollapse) {
       this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
       items.push(this.expandAction);
     }
-    this.updateUndeRedoActions();
     this.creator.onSelectedElementChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
@@ -219,11 +177,6 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       this.surveySettingsAction.active = this.isSettingsActive;
     });
     return items;
-  }
-  private updateUndeRedoActions() {
-    if (!this.creator.undoRedoManager) return;
-    this.undoAction.active = this.creator.undoRedoManager.canUndo();
-    this.redoAction.active = this.creator.undoRedoManager.canRedo();
   }
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);
