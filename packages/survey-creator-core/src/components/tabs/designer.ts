@@ -24,9 +24,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
       if (options.name === "elements" && newPage.elements.length > 0) {
         newPage.onPropertyChanged.remove(checkNewElementHandler);
         if (this.survey.pages.indexOf(newPage) > -1) return;
-        this.creator.startUndoRedoTransaction("Add new page");
-        this.survey.addPage(newPage);
-        this.creator.stopUndoRedoTransaction();
+        this.creator.addPage(newPage);
       }
     };
     newPage.onPropertyChanged.add(checkNewElementHandler);

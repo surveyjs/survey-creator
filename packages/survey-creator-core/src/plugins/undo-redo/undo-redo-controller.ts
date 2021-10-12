@@ -114,6 +114,12 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
       this.selectElementAfterUndo();
     }
   }
+  startTransaction(name: string = "") {
+    this.undoRedoManager && this.undoRedoManager.startTransaction(name);
+  }
+  stopTransaction() {
+    this.undoRedoManager && this.undoRedoManager.stopTransaction();
+  }
 
   public createActions() {
     const items: Array<Action> = [];

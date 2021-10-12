@@ -917,7 +917,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   //#endregion Obsolete properties and functins
 
-  //#region Obsolete Undo/Redo
+  //#region Undo/Redo
   /**
    * The event is called before undo happens.
    * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
@@ -959,19 +959,31 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
     return plugin && plugin.model;
   }
+  /**
+   * This method starts undo/redo transaction: all changes will be stored as one undo/redo item.
+   */
   startUndoRedoTransaction(name: string = "") {
-    this.undoRedoManager && this.undoRedoManager.startTransaction(name);
+    this.undoRedoController && this.undoRedoController.startTransaction(name);
   }
+  /**
+   * This method stops undo/redo transaction.
+   */
   stopUndoRedoTransaction() {
-    this.undoRedoManager && this.undoRedoManager.stopTransaction();
+    this.undoRedoController && this.undoRedoController.stopTransaction();
   }
+  /**
+   * This method performs undo uperation if possible.
+   */
   public undo() {
     this.undoRedoController && this.undoRedoController.undo();
   }
+  /**
+   * This method performs redo uperation if possible.
+   */
   public redo() {
     this.undoRedoController && this.undoRedoController.redo();
   }
-  //#endregion Obsolete Undo/Redo
+  //#endregion Undo/Redo
 
   public get pagesController(): PagesController {
     return this.pagesControllerValue;
@@ -986,9 +998,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public set currentPage(value: PageModel) {
     this.survey.currentPage = value;
   }
-  public addPage(): PageModel {
-    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
-    const page: PageModel = this.survey.addNewPage(name);
+  @undoRedoTransaction()
+  public addPage(pagetoAdd?: PageModel): PageModel {
+    let page = pagetoAdd;
+    if (!page) {
+      const name: string = SurveyHelper.getNewPageName(this.survey.pages);
+      page = this.survey.addNewPage(name);
+    } else {
+      this.survey.addPage(page);
+    }
     this.selectElement(page);
     return page;
   }

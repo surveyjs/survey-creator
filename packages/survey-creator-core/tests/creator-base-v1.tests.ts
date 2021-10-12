@@ -12,6 +12,7 @@ import { getNextValue } from "../src/utils/utils";
 import { editorLocalization } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 import { CreatorTester } from "./creator-tester";
+export { PropertyGridEditorMatrix } from "../src/property-grid/matrices";
 
 settings.supportCreatorV2 = true;
 

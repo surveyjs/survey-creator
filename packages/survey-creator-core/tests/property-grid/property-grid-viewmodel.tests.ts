@@ -7,6 +7,7 @@ import {
   QuestionMatrixDynamicModel
 } from "survey-core";
 import { PropertyGridViewModel } from "../../src/property-grid/property-grid-view-model";
+export { PropertyGridEditorMatrix } from "../../src/property-grid/matrices";
 import { CreatorTester } from "../creator-tester";
 import { ObjectSelectorModel } from "../../src/property-grid/object-selector";
 import { settings } from "../../src/settings";
