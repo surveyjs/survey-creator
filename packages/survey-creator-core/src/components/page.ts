@@ -76,7 +76,7 @@ export class PageViewModel<
     return this._page;
   }
 
-  public addGhostPage() {
+  public addGhostPage = () => {
     if (this.isGhost) {
       this.page.unRegisterFunctionOnPropertiesValueChanged([
         "title",
