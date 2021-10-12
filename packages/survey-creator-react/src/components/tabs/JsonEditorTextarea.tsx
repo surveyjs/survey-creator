@@ -11,6 +11,10 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
   ITabJsonEditorTextareaComponentProps,
   any
 > {
+  constructor(props) {
+    super(props);
+    this.model.canShowErrors = false;
+  }
   protected getStateElement(): Base {
     return this.model;
   }
@@ -20,10 +24,11 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
   renderElement(): JSX.Element {
     const errors: JSX.Element[] = [];
     var key = 1;
-    for (let i: number = 0; i < this.model.errors.length; i++) {
+    const userFriendlyErrors: any[] = this.model.userFriendlyErrors;
+    for (let i: number = 0; i < userFriendlyErrors.length; i++) {
       errors.push(<span key={key}><b>Error: </b></span>);
       key++;
-      errors.push(<span key={key}>{this.model.errors[i].text + (i !== this.model.errors.length - 1 ? "\n": "")}</span>);
+      errors.push(<span key={key}>{userFriendlyErrors[i]}</span>);
       key++;
     }
     return (
@@ -38,7 +43,14 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
             disabled={this.model.readOnly}
             aria-label={this.model.ariaLabel}
           ></textarea>
-          <div className="svc-json-editor-tab__content-errors">{errors}</div>
+          { errors.length > 0 &&
+              <button className="svc-json-editor-tab__errros_button" onClick={() => this.model.toggleErrors()}>
+                {this.model.errorButtonText}
+              </button>
+          }
+          { this.model.canShowErrors && 
+            <div className="svc-json-editor-tab__content-errors">{errors}</div>
+          }
         </div>
       </div>
     );

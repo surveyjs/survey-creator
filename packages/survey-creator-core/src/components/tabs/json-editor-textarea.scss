@@ -16,24 +16,36 @@ svc-tab-json-editor-textarea {
   height: 100%;
 }
 
+.svc-json-editor-tab__errros_button {
+  position: absolute;
+  top: 0%;
+  right: calc(0% + calc(2 * #{$base-unit}));
+  min-height: calc(2.5 * #{$base-unit});
+  max-height: calc(2.5 * #{$base-unit});
+  border: none;
+  background-color: $primary;
+  color: white;
+  font-weight: bold;
+}
+
 .svc-json-editor-tab__content-errors {
   position: absolute;
   right: 0%;
-  top: 0%;
-  max-width: calc(100% - 8px);
-  padding: 3px 4px;
+  top: calc(0% + calc(3 * #{$base-unit}));
+  max-width: calc(100% - calc(2 * #{$base-unit}));
+  padding: $base-unit;
 
-  background-color: #FFF;
+  background-color: $background;
   background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
-  border: 1px solid gray;
+  border: 1px solid $border;
   border-radius: 1px;
   
-  color: black;
+  color: $foreground;
   font-family: monospace;
 
   span {
-    white-space: pre;
-    
+    white-space: pre-line;
+
     > b {
       color: $red;
     }
