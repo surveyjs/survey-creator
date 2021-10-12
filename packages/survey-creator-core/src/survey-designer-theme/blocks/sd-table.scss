@@ -35,6 +35,8 @@
   }
 }
 .sd-table__cell--actions{
+  width: 1%;
+  white-space: nowrap;
   .sv-action-bar {
     opacity: 0.5;
     padding: 0;
