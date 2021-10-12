@@ -385,7 +385,7 @@ surveyCreator.toolbox.addItem({
         "type": "dropdown",
         optionsCaption: "Select a country...",
         choicesByUrl: {
-            url: "https://restcountries.eu/rest/v2/all"
+            url: "https://surveyjs.io/api/CountriesExample"
         }
     }
 });
@@ -588,7 +588,7 @@ Survey.Serializer.addProperty("survey",
     choices: function(obj, choicesCallback) {
       //We are going to use choicesCallback here
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "https://restcountries.eu/rest/v2/all");
+      xhr.open("GET", "https://surveyjs.io/api/CountriesExample");
       xhr.setRequestHeader(
       "Content-Type",
       "application/x-www-form-urlencoded"
@@ -804,8 +804,8 @@ Survey.Serializer.addProperty("survey", {
     //if region is empty then get all countries, otherwise get coutries by region.
     var url =
       !!obj && !!obj.region
-        ? "https://restcountries.eu/rest/v2/region/" + obj.region
-        : "https://restcountries.eu/rest/v2/all";
+        ? "https://surveyjs.io/api/CountriesExample?region=" + obj.region
+        : "https://surveyjs.io/api/CountriesExample";
     xhr.open("GET", url);
     xhr.setRequestHeader(
       "Content-Type",

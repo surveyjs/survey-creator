@@ -31,7 +31,8 @@ import {
   QuestionRatingModel,
   QuestionCustomModel,
   surveyLocalization,
-  AdaptiveActionContainer
+  AdaptiveActionContainer,
+  QuestionCommentModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -2136,4 +2137,21 @@ test("AllowRowsDragDrop and property readOnly", () => {
   );
   expect(choicesQuestion.allowRowsDragAndDrop).toBeFalsy();
   Serializer.findProperty("selectbase", "choices").readOnly = false;
+});
+test("Check textUpdate mode for question", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const nameQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("name");
+  const titleQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("title");
+  const placeholderQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("placeHolder");
+  const stepQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("step");
+
+  expect(nameQuestion.getType()).toEqual("text");
+  expect(nameQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(titleQuestion.getType()).toEqual("comment");
+  expect(titleQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(placeholderQuestion.getType()).toEqual("text");
+  expect(placeholderQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(stepQuestion.getType()).toEqual("text");
+  expect(stepQuestion.isSurveyInputTextUpdate).toBeFalsy();
 });

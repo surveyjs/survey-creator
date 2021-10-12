@@ -1342,18 +1342,21 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       !this.undoRedoManager.isCorrectProperty(sender, name)
     )
       return;
-    this.undoRedoManager.startTransaction(name + " changed");
-    this.undoRedoManager.onPropertyValueChanged(
-      name,
-      oldValue,
-      newValue,
-      sender,
-      arrayChanges
-    );
-    this.updatePagesController(sender, name);
-    this.updateElementsOnLocaleChanged(sender, name);
-    this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
-    this.undoRedoManager.stopTransaction();
+    const canUndoRedoMerge = this.undoRedoManager.tryMergeTransaction(sender, name, newValue);
+    if(!canUndoRedoMerge) {
+      this.undoRedoManager.startTransaction(name + " changed");
+      this.undoRedoManager.onPropertyValueChanged(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
+      this.updatePagesController(sender, name);
+      this.updateElementsOnLocaleChanged(sender, name);
+      this.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
+      this.undoRedoManager.stopTransaction();
+    }
   }
   private updateElementsOnLocaleChanged(
     obj: Survey.Base,
@@ -1610,7 +1613,16 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.initSurveyWithJSON(val, true);
     }
   }
-
+  public loadSurvey(surveyId: string): void {
+    new Survey.dxSurveyService().loadSurvey(
+      surveyId,
+      (success: boolean, result: string, response: any) => {
+        if (success && result) {
+          this.JSON = result;
+        }
+      }
+    );
+  }
   protected doClickQuestionCore(
     element: IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX",
@@ -2554,6 +2566,9 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
       if (isPopupEditorContent) {
         return element.getType() == "dropdown" ? "svc-cell-dropdown-question" : "svc-cell-question";
       }
+      if (element.customWidget) {
+        return "svc-widget-question";
+      }
       if (element.getType() == "dropdown") {
         return "svc-dropdown-question";
       }
@@ -2564,6 +2579,9 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
         return "svc-rating-question";
       }
       return "svc-question";
+    }
+    if (element instanceof PanelModel) {
+      return "svc-panel";
     }
   }
   return undefined;
