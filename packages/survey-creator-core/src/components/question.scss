@@ -181,3 +181,10 @@ svc-question,
     border-radius: 0;
   }
 }
+
+.svc-widget__content {
+  .sd-question__content {
+    pointer-events: none;
+  }
+  width: 100%; 
+}

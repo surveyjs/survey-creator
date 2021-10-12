@@ -17,18 +17,22 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
     if (!this.undoRedoManager || !this.undoRedoManager.isCorrectProperty(sender, name)) {
       return;
     }
-    this.undoRedoManager.startTransaction(name + " changed");
-    this.undoRedoManager.onPropertyValueChanged(
-      name,
-      oldValue,
-      newValue,
-      sender,
-      arrayChanges
-    );
-    this.creator.updatePagesController(sender, name);
-    this.creator.updateElementsOnLocaleChanged(sender, name);
-    this.creator.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
-    this.undoRedoManager.stopTransaction();
+    const canUndoRedoMerge = this.undoRedoManager.tryMergeTransaction(sender, name, newValue);
+    if (!canUndoRedoMerge) {
+      this.undoRedoManager.startTransaction(name + " changed");
+      this.undoRedoManager.onPropertyValueChanged(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
+      this.creator.updatePagesController(sender, name);
+      this.creator.updateElementsOnLocaleChanged(sender, name);
+      this.creator.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
+      this.undoRedoManager.stopTransaction();
+    }
+
   }
 
   constructor(private creator: CreatorBase<T>) {

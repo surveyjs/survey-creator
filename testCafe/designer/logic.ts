@@ -98,7 +98,7 @@ function getListItemByText(text) {
   return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
 }
 
-const tableRulesSelector = Selector(".sl-table tbody tr:not(.st-table__row--detail)").filterVisible();
+const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();
 const conditionBuilder = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"panel\"]");
 const conditionTextEdit = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"textEditor\"]");
 
@@ -403,6 +403,7 @@ async function check2Rule(t: TestController) {
 test("Modified rules without saving", async (t) => {
   const rule1Condition = "{q1} == 'item1'";
   const rule1Actions = "Make question {q2} visible";
+  const additinalClass = "sl-table__row--additional";
 
   await setJSON(json2);
 
@@ -410,6 +411,7 @@ test("Modified rules without saving", async (t) => {
     .click(getTabbedMenuItemByText("Survey Logic"))
     .expect(cellConditions.nth(0).innerText).eql(rule1Condition)
     .expect(cellActions.nth(0).innerText).eql(rule1Actions)
+    .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
 
     .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement.nth(0))
@@ -423,6 +425,8 @@ test("Modified rules without saving", async (t) => {
   await t
     .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement.nth(0))
+    .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
+
     .click(addNewRuleButton)
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("q1"))
@@ -435,23 +439,33 @@ test("Modified rules without saving", async (t) => {
   await check2Rule(t);
 
   await t
+    .hover(tableRulesSelector.nth(1))
+    .click(logicDetailButtonElement.nth(1))
     .hover(tableRulesSelector.nth(0))
-    .click(logicDetailButtonElement.nth(0));
+    .click(logicDetailButtonElement.nth(0))
+    .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
+    .expect(tableRulesSelector.nth(1).classNames).contains(additinalClass);
   await check1Rule(t, rule1Condition, rule1Actions);
 
   await t
     .hover(tableRulesSelector.nth(1))
-    .click(logicDetailButtonElement.nth(1));
+    .click(logicDetailButtonElement.nth(1))
+    .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
+    .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass);
   await check2Rule(t);
 
   await t
     .click(doneButton)
     .expect(cellConditions.nth(1).innerText).eql("{q1} == 'item2'")
     .expect(cellActions.nth(1).innerText).eql("Make question {q3} visible")
+    .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
+    .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass)
 
     .hover(tableRulesSelector)
     .click(logicDetailButtonElement)
     .click(doneButton)
     .expect(cellConditions.nth(0).innerText).eql("{q3} == 45")
-    .expect(cellActions.nth(0).innerText).eql("Survey becomes completed");
+    .expect(cellActions.nth(0).innerText).eql("Survey becomes completed")
+    .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
+    .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass);
 });

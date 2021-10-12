@@ -60,13 +60,11 @@ export * from "../utils/resizer";
 export * from "../plugins/undo-redo";
 export * from "../plugins/undo-redo/undo-redo-manager";
 
-import "../components/button.scss";
 import "../components/property-panel/property-panel-item.scss";
 import "../components/property-panel/property-panel.scss";
 import "../components/tabbed-menu/tabbed-menu-item.scss";
 import "../components/tabbed-menu/tabbed-menu.scss";
 import "../components/toolbox/toolbox-item.scss";
-import "../components/button.scss";
 import "../components/question-dropdown.scss";
 import "../components/toolbox/toolbox.scss";
 import "../property-grid-theme/property-grid.scss";

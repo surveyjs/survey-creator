@@ -16,6 +16,13 @@
 .sv-popup--modal {
   &.sv-property-editor .sv-popup__container {
     background-color: $background-for-editors;
+    .sd-root-modern {
+      background-color: transparent;
+    }
+    .sd-page {
+      margin: 0;
+      padding-top: calcSize(1);
+    }
   }
   .sv-popup__footer {
     padding-bottom: 2px;
