@@ -373,7 +373,6 @@ test("fast copy tests, set the correct parent", () => {
   expect(newQuestion.name).toEqual("question3");
 });
 
-//TODO doesn't work
 test("addQuestion into the QuestionPanelDynamic into second page", () => {
   var creator = new CreatorTester();
   var survey = creator.survey;
@@ -381,9 +380,8 @@ test("addQuestion into the QuestionPanelDynamic into second page", () => {
   var page = survey.addNewPage("p2");
   var pnlQuestion = page.addNewQuestion("paneldynamic", "newQuestion");
   var newQuestion = pnlQuestion["template"].addNewQuestion("text", "question1");
-  survey.selectedElement = newQuestion;
-  //TODO
-  //expect(creator.selectedElementName).toEqual(newQuestion.name);
+  creator.selectElement(newQuestion);
+  expect(creator.selectedElementName).toEqual(newQuestion.name);
 });
 
 test("generateValidJSON should be true by default, bug #135", () => {
@@ -525,8 +523,6 @@ test("Change elemenent page", () => {
   pageEditor.value = "page2";
   expect(creator.selectedElement["name"]).toEqual("question1");
   expect(question.page.name).toEqual("page2");
-  //TODO
-  //expect(creator.survey.currentPage.name).toEqual("page2");
 });
 
 test("Undo-redo creator add/remove page", () => {
@@ -584,11 +580,6 @@ test("The onModified event is called on property changed", () => {
 
   choicesQuestion.removeRow(0);
   expect(counter).toEqual(3);
-
-  /* TODO get access to clear button
-    creator.onClearClick();
-    expect(counter).toEqual(4);
-    */
 });
 
 test("deleteElement function", () => {
