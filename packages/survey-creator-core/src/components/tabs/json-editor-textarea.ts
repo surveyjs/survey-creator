@@ -12,24 +12,18 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   protected _text: string;
   @propertyArray() private _errors: any[];
   public ariaLabel: string = getLocString("ed.jsonEditor");
-  @property({ defaultValue: false }) private _canShowErrors: boolean;
+  @property({ defaultValue: false }) canShowErrors: boolean;
 
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
     this.onPluginActivate();
   }
 
-  public get canShowErrors(): boolean {
-    return this._canShowErrors;
-  }
-  public set canShowErrors(val) {
-    this._canShowErrors = val;
-  }
   public get text(): string {
     return this._text;
   }
   public get errorButtonText(): string {
-    return this._canShowErrors ? getLocString("ed.jsonHideErrors") : getLocString("ed.jsonShowErrors");
+    return this.canShowErrors ? getLocString("ed.jsonHideErrors") : getLocString("ed.jsonShowErrors");
   }
   public set text(value: string) {
     this.isProcessingImmediately = true;
@@ -38,7 +32,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
     this.isProcessingImmediately = false;
   }
   public toggleErrors(): void {
-    this._canShowErrors = !this._canShowErrors;
+    this.canShowErrors = !this.canShowErrors;
   }
   public get userFriendlyErrors(): any[] {
     if (this._errors.length === 0) {
