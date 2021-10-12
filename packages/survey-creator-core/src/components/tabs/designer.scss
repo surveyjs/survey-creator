@@ -16,7 +16,8 @@ svc-tab-designer {
 
 .svc-tab-designer {
   .sd-container-modern {
-    //max-width: calcSize(102);
+    max-width: calcSize(102);
+    min-width: calcSize(70);
     width: 100%;
     margin-left: auto;
     margin-right: auto;
