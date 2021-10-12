@@ -105,9 +105,11 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     creator.registerShortcut("delete", {
       hotKey: {
+        ctrlKey: true,
         keyCode: 46,
       },
       macOsHotkey: {
+        shiftKey: true,
         keyCode: 46,
       },
       execute: () => this.creator.deleteCurrentElement()
