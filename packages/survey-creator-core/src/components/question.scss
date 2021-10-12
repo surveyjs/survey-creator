@@ -173,13 +173,17 @@ svc-question,
 }
 
 .sd-panel, .sd-row--multiple {
-  .svc-question__content {
-    &:not(.svc-question__content--selected):not(:hover) {
-      border: 1px dashed $border;
-      box-shadow: none;
+    .svc-question__content {
+      &:not(.svc-question__content--selected):not(:hover) {
+        border: 1px dashed $border;
+        box-shadow: none;
+      }
+      border-radius: 0;
     }
-    border-radius: 0;
-  }
+}
+
+.sd-panel .svc-row--ghost.svc-row--ghost .svc-question__content.svc-question__content {
+  border: none;
 }
 
 .svc-widget__content {
