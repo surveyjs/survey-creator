@@ -193,10 +193,11 @@
   .sd-row__question {
     margin-top: 0;
   }
-  .sd-row {
-    margin-top: 0;
-    flex-flow: row wrap;
-  }
+}
+
+.svc-logic-tab__content .svc-logic-paneldynamic .sd-row {
+  margin-top: 0;
+  flex-flow: row wrap;
 }
 
 .sl-table__cell--detail-panel {
