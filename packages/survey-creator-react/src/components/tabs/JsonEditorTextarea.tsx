@@ -40,6 +40,7 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
               (this.model.text = e.target.value)
             }
+            onKeyDown={(e) => this.model.checkKey(e, e)}
             disabled={this.model.readOnly}
             aria-label={this.model.ariaLabel}
           ></textarea>
