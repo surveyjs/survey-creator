@@ -44,7 +44,6 @@ export * from "../property-grid/condition";
 export * from "../property-grid/matrices";
 export * from "../property-grid/property-grid-view-model";
 export * from "../property-grid/object-selector";
-//export * from "../property-grid/modal-action";
 export * from "../property-grid/restfull";
 export * from "../property-grid/values";
 export { propertyGridCss } from "../property-grid-theme/property-grid";
@@ -58,6 +57,8 @@ export * from "../question-editor/definition";
 export * from "../survey-helper";
 export * from "../components/notifier";
 export * from "../utils/resizer";
+export * from "../plugins/undo-redo";
+export * from "../plugins/undo-redo/undo-redo-manager";
 
 import "../components/property-panel/property-panel-item.scss";
 import "../components/property-panel/property-panel.scss";

@@ -39,7 +39,7 @@ export class PropertyGridViewModelBase extends Base {
           else
             this.visible = false;
         }
-      })
+      });
       this.toolbar.actions.push(this._collapseAction);
     }
   }

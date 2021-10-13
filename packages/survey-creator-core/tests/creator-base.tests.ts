@@ -9,7 +9,8 @@ import {
   QuestionImageModel,
   QuestionRatingModel,
   QuestionDropdownModel,
-  ItemValue
+  ItemValue,
+  settings as surveySettings
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -33,6 +34,8 @@ import { CreatorTester } from "./creator-tester";
 import { editorLocalization } from "../src/editorLocalization";
 import { EmptySurveyCreatorOptions, settings } from "../src/settings";
 import { FastEntryEditor } from "../src/property-grid/fast-entry";
+
+surveySettings.supportCreatorV2 = true;
 
 test("options.questionTypes", (): any => {
   var creator = new CreatorTester();

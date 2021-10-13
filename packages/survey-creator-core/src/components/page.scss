@@ -24,7 +24,7 @@ svc-page {
 }
 
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-  border: 2px solid $secondary;
+  border: 2px solid $secondary-light;
 }
 
 .svc-page__content--selected,
