@@ -17,7 +17,9 @@ import {
   QuestionRadiogroupModel,
   SurveyTriggerVisible,
   NumericValidator,
-  QuestionExpressionModel
+  QuestionExpressionModel,
+  SurveyTriggerComplete,
+  SurveyTriggerSkip
 } from "survey-core";
 import {
   PropertyGridModel,
@@ -956,41 +958,19 @@ test("SurveyPropertyItemValuesEditor check if there are visibleIf and enableIf p
   expect(rows[0].getQuestionByName("visibleIf").isVisible).toBeTruthy();
   expect(rows[0].getQuestionByName("enableIf").isVisible).toBeTruthy();
 });
-/* TODO
-QUnit.test(
-    "SurveyPropertyMatrixDropdownColumns change nested property content on changing column type",
-    function (assert) {
-      var survey = new Survey.Survey();
-      survey.addNewPage("p");
-      var question = new Survey.QuestionMatrixDropdown("q1");
-      question.addColumn("column 1");
-      question.addColumn("column 2");
-      survey.pages[0].addElement(question);
-      var columnsEditor = new SurveyPropertyDropdownColumnsEditor(
-        Survey.Serializer.findProperty("matrixdropdownbase", "columns")
-      );
-      columnsEditor.object = question;
-      columnsEditor.beforeShow();
-      var itemViewModel = <SurveyNestedPropertyEditorItem>(
-        columnsEditor.createItemViewModel(question.columns[0])
-      );
-      itemViewModel.obj.cellType = "dropdown";
-      columnsEditor.onEditItemClick(itemViewModel);
-      var colDetailEditor = <SurveyElementEditorContentModel>(
-        columnsEditor.koEditItem().itemEditor
-      );
-      assert.ok(colDetailEditor.getPropertyEditorByName("choices"));
-      columnsEditor.onReturnToListClick();
 
-      itemViewModel.obj.cellType = "default";
-      columnsEditor.onEditItemClick(itemViewModel);
-      colDetailEditor = <SurveyElementEditorContentModel>(
-        columnsEditor.koEditItem().itemEditor
-      );
-      assert.notOk(colDetailEditor.getPropertyEditorByName("choices"));
-    }
-  );
-  */
+test("SurveyPropertyMatrixDropdownColumns change nested property content on changing column type", () => {
+  const survey = new SurveyModel();
+  survey.addNewPage("p");
+  const question = new QuestionMatrixDropdownModel("q1");
+  const column = question.addColumn("column 1");
+  survey.pages[0].addElement(question);
+  const propertyGrid = new PropertyGridModelTester(column);
+  expect(propertyGrid.survey.getQuestionByName("choices")).toBeFalsy();
+  propertyGrid.survey.getQuestionByName("cellType").value = "dropdown";
+  expect(propertyGrid.survey.getQuestionByName("choices")).toBeTruthy();
+});
+
 test("SurveyNestedPropertyEditorItem koCanDeleteItem", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p");
@@ -1224,77 +1204,55 @@ test("SurveyPropertyResultfullEditor test", () => {
 });
 
 test("Triggers property editor", () => {
-  var survey = createSurvey();
+  const survey = createSurvey();
   survey.getQuestionByName("question1").title = "Question1 title";
-  var trigger = new SurveyTriggerVisible();
+  let trigger = new SurveyTriggerComplete();
   trigger.expression = "{question1} != val1";
-  trigger.questions.push("question2");
   survey.triggers.push(trigger);
-  var options = new EmptySurveyCreatorOptions();
+  const options = new EmptySurveyCreatorOptions();
   options.showTitlesInExpressions = true;
-  var propertyGrid = new PropertyGridModelTester(survey, options);
-  var triggersQuestion = <QuestionMatrixDynamicModel>(
+  const propertyGrid = new PropertyGridModelTester(survey, options);
+  const triggersQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("triggers")
   );
   expect(triggersQuestion.columns).toHaveLength(1);
   expect(triggersQuestion.columns[0].name).toEqual("triggerType");
-  var rows = triggersQuestion.visibleRows;
+  let rows = triggersQuestion.visibleRows;
   expect(rows).toHaveLength(1);
-  var triggerTypes =
+  const triggerTypes =
     Serializer.getChildrenClasses("surveytrigger", true).length - 1;
 
   expect(rows[0].getQuestionByColumnName("triggerType").choices).toHaveLength(
     triggerTypes
   );
-  /* TODO not implmeneted yet
-    assert.equal(
-      propEditor.getItemText(propEditor.koSelected()),
-      "Run if: {Question1 title} != val1",
-      "display text shows correctly"
-    );
+  triggersQuestion.addRow();
+  rows = triggersQuestion.visibleRows;
+  expect(rows).toHaveLength(2);
+  expect(survey.triggers).toHaveLength(2);
+  rows[1].showDetailPanel();
+  rows[1].cells[0].question.value = "skiptrigger";
+  let expressionQuestion = rows[1].detailPanel.getQuestionByName("expression");
+  let gotoNameQuestion = rows[1].detailPanel.getQuestionByName("gotoName");
+  expect(expressionQuestion).toBeTruthy();
+  expect(gotoNameQuestion).toBeTruthy();
+  expressionQuestion.value = "{question2} notempty";
+  gotoNameQuestion.value = "question3";
+  let skipToTrigger = <SurveyTriggerSkip>survey.triggers[1];
+  expect(skipToTrigger.getType()).toEqual("skiptrigger");
+  expect(skipToTrigger.expression).toEqual("{question2} notempty");
+  expect(skipToTrigger.gotoName).toEqual("question3");
 
-    propEditor.onAddClick({ value: "skiptrigger" });
-    assert.equal(survey.triggers.length, 2, "There are two triggers now");
-
-    var trigerEditor = <SurveyElementEditorContentModel>(
-      propEditor.selectedObjectEditor()
-    );
-    trigerEditor
-      .getPropertyEditorByName("expression")
-      .editor.koValue("{question2} notempty");
-    assert.equal(
-      propEditor.getItemText(propEditor.koSelected()),
-      "Run if: {question2} is not empty",
-      "text for valid trigger"
-    );
-    trigerEditor.getPropertyEditorByName("gotoName").editor.koValue("question3");
-    assert.equal(survey.triggers[1].expression, "{question2} notempty");
-    assert.equal(
-      (<Survey.SurveyTriggerSkip>survey.triggers[1]).gotoName,
-      "question3"
-    );
-
-    propEditor.onAddClick({ value: "copyvaluetrigger" });
-    assert.equal(survey.triggers.length, 3, "There are three triggers now");
-    propEditor.onDeleteClick();
-    assert.equal(survey.triggers.length, 2, "There are again two triggers");
-    propEditor.onAddClick({ value: "completetrigger" });
-    trigerEditor = <SurveyElementEditorContentModel>(
-      propEditor.selectedObjectEditor()
-    );
-    assert.equal(survey.triggers[1].expression, "{question2} notempty");
-    assert.equal(survey.triggers.length, 3, "There are 3 triggers");
-    assert.equal(
-      survey.triggers[2].getType(),
-      "completetrigger",
-      "Complete trigger is created"
-    );
-    propEditor.onDeleteClick();
-    propEditor.onDeleteClick();
-    propEditor.onDeleteClick();
-    assert.equal(survey.triggers.length, 0, "Delete all triggers");
-    assert.notOk(propEditor.selectedObjectEditor(), "Nothing to select");
-    */
+  triggersQuestion.addRow();
+  rows = triggersQuestion.visibleRows;
+  expect(rows).toHaveLength(3);
+  expect(survey.triggers).toHaveLength(3);
+  rows[2].cells[0].question.value = "copyvaluetrigger";
+  expect(survey.triggers[2].getType()).toEqual("copyvaluetrigger");
+  triggersQuestion.removeRow(2);
+  triggersQuestion.removeRow(0);
+  triggersQuestion.removeRow(0);
+  expect(rows).toHaveLength(0);
+  expect(survey.triggers).toHaveLength(0);
 });
 test("Triggers property editor and setvalue trigger", () => {
   var survey = createSurvey();
@@ -1956,44 +1914,6 @@ test("SurveyPropertyDefaultValueEditor for matrixdropdown with cellType equals b
   expect(defaultValueEditor.question.getType()).toEqual("matrixdropdown");
   expect(defaultValueEditor.question.cellType).toEqual("boolean");
 });
-
-/* It works out of the box. expression/condition properties editors are comment questions with title actions
-test(
-    "SurveyPropertyEditorFactory.createEditor, isCellEditor=true, for expression and condition",
-     () => {
-      var expressionProperty = Survey.Serializer.findProperty(
-        "expression",
-        "expression"
-      );
-      assert.equal(
-        SurveyPropertyEditorFactory.createEditor(expressionProperty).editorType,
-        "expression",
-        "By default create expression"
-      );
-      assert.equal(
-        SurveyPropertyEditorFactory.createEditor(expressionProperty, true)
-          .editorType,
-        "string",
-        "For cell editor create string, not expression"
-      );
-      var conditionProperty = Survey.Serializer.findProperty(
-        "question",
-        "visibleIf"
-      );
-      assert.equal(
-        SurveyPropertyEditorFactory.createEditor(conditionProperty).editorType,
-        "condition",
-        "By default create condition"
-      );
-      assert.equal(
-        SurveyPropertyEditorFactory.createEditor(conditionProperty, true)
-          .editorType,
-        "string",
-        "For cell editor create string, not condition"
-      );
-    }
-  );
-  */
 
 /* TODO Do not have multiple values property editor yet.
 QUnit.test("SurveyPropertyMultipleValuesEditor", function (assert) {

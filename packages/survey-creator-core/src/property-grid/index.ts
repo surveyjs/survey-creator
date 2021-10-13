@@ -129,6 +129,10 @@ export interface IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions
   ) => boolean;
+  canClearPropertyValue?:(obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions) => boolean;
   clearPropertyValue?: (
     obj: Base,
     prop: JsonObjectProperty,
@@ -280,13 +284,14 @@ export var PropertyGridEditorCollection = {
 export class PropertyGridTitleActionsCreator {
   constructor(public obj: Base, private options: ISurveyCreatorOptions) {}
   public onGetQuestionTitleActions(options) {
-    var question = options.question;
-    var property = question.property;
-    var editor = PropertyGridEditorCollection.getEditor(property);
+    const question = options.question;
+    const property = question.property;
+    const editor = PropertyGridEditorCollection.getEditor(property);
     if (!editor) return;
-    var actions = [];
-    var enabled = !question.isReadOnly;
-    if (!!editor.clearPropertyValue) {
+    const actions = [];
+    let enabled = !question.isReadOnly;
+    const hasClear = !!editor.clearPropertyValue && (!editor.canClearPropertyValue || editor.canClearPropertyValue(this.obj, property, question, this.options));
+    if (hasClear) {
       actions.push(
         this.createClearValueAction(editor, property, question, enabled)
       );
