@@ -86,6 +86,8 @@ export var enStrings = {
     saveSurveyTooltip: "Save Survey",
     designer: "Survey Designer",
     jsonEditor: "JSON Editor",
+    jsonHideErrors: "Hide errors",
+    jsonShowErrors: "Show errors",
     undo: "Undo",
     redo: "Redo",
     undoTooltip: "Undo last change",

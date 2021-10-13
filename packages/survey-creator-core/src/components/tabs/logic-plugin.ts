@@ -135,7 +135,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
         action: () => {
           this.model.toggleExpressionEditorIsFastEntry();
         }
-      })
+      });
       items.push(this.fastEntryAction);
     }
     return items;

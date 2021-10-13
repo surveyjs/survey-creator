@@ -163,6 +163,7 @@ export class SurveyLogicUI extends SurveyLogic {
     if (this.editableItem.actions.length != this.itemEditor.panels.length) {
       this.itemEditor.setEditableItem(this.editableItem);
     }
+    this.itemEditor.resetModified();
     this.editableItem.isNew = false;
     if (!this.editableItem.isSuitable(this.questionFilter, this.actionTypeFilter)) {
       this.questionFilter = "";
@@ -294,7 +295,7 @@ export class SurveyLogicUI extends SurveyLogic {
   private updateRenderedRows() {
     this.visibleItems.forEach((_, index) => {
       this.updateRowIsAdditionalClasses(index, this.visibleItems[index].isModified || this.visibleItems[index].isNew);
-    })
+    });
   }
   private updateRowIsAdditionalClasses(index: number, isAdditionalClasses: boolean) {
     if (!!this.matrixItems.renderedTable) {

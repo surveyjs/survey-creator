@@ -12,12 +12,30 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   protected _text: string;
   @propertyArray() private _errors: any[];
   public ariaLabel: string = getLocString("ed.jsonEditor");
+  @property({ defaultValue: false }) canShowErrors: boolean;
 
   constructor(creator: CreatorBase<SurveyModel>) {
     super(creator);
     this.onPluginActivate();
   }
 
+  public checkKey(data: any, e: any) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const textareaElement: any = e.target;
+      const start = textareaElement.selectionStart;
+      const end = textareaElement.selectionEnd;
+  
+      textareaElement.value = textareaElement.value.substring(0, start) +
+        "\t" + textareaElement.value.substring(end);
+  
+      textareaElement.selectionStart =
+      textareaElement.selectionEnd = start + 1;
+    
+      e.stopPropagation();
+    } 
+    return true;
+  }
   public get text(): string {
     return this._text;
   }
@@ -26,6 +44,24 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
     this._text = value;
     this.processErrors(value);
     this.isProcessingImmediately = false;
+  }
+  public get errorButtonText(): string {
+    return this.canShowErrors ? getLocString("ed.jsonHideErrors") : getLocString("ed.jsonShowErrors");
+  }
+  public toggleErrors(): void {
+    this.canShowErrors = !this.canShowErrors;
+  }
+  public get userFriendlyErrors(): any[] {
+    if (this._errors.length === 0) {
+      return [];
+    }
+    const customErrors: string[] = [];
+    for (let i = 0; i < this._errors.length - 1; i++) {
+      customErrors[i] = this._errors[i].text;
+      customErrors[i] += "\n\n";
+    }
+    customErrors[this._errors.length - 1] = this._errors[this._errors.length - 1].text;
+    return customErrors;
   }
   public get errors(): any[] {
     return this._errors;
