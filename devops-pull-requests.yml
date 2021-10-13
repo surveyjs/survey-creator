@@ -241,6 +241,10 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     npm run testcafe:ci
   displayName: 'Functional tests creator v2 react'
+  env:
+    TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN: $(TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN_V2_REACT)
+    TESTCAFE_DASHBOARD_URL: $(TESTCAFE_DASHBOARD_URL)
+
 
 - task: CopyFiles@2
   inputs:
@@ -273,6 +277,9 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     npm run testcafe:ci
   displayName: 'Functional tests creator v2 knockout'
+  env:
+    TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN: $(TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN_V2_KNOCKOUT)
+    TESTCAFE_DASHBOARD_URL: $(TESTCAFE_DASHBOARD_URL)  
 
 - task: CopyFiles@2
   inputs:
@@ -300,6 +307,11 @@ steps:
     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
     npm run testcafe_ci
   displayName: 'Functional tests'
+  env:
+    TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN: $(TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN_V1)
+    TESTCAFE_DASHBOARD_URL: $(TESTCAFE_DASHBOARD_URL)
+
+
 
 - script: |
     mkdir $(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs
