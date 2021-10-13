@@ -48,7 +48,7 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
                 {this.model.errorButtonText}
               </button>
           }
-          { this.model.canShowErrors && 
+          { this.model.canShowErrors &&
             <div className="svc-json-editor-tab__content-errors">{errors}</div>
           }
         </div>
