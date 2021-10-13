@@ -399,6 +399,8 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       matrix.allowAddRows = false;
       matrix.allowRemoveRows = false;
     }
+    matrix.allowRemoveAllItems = evtOptions.allowRemoveAllItems;
+    matrix.showTextView = evtOptions.showTextView;
   }
 }
 
@@ -414,6 +416,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     question: Question,
     options: ISurveyCreatorOptions
   ): boolean {
+    if(question.showTextView === false) return false;
     var matrix = <QuestionMatrixDynamicModel>question;
     var column = matrix.getColumnByName("value");
     var items = question.value;
@@ -445,6 +448,14 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       names.push(col.name);
     });
     return new FastEntryEditor(obj[prop.name], options, prop.className, names);
+  }
+  public canClearPropertyValue(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): boolean {
+    return question.allowRemoveAllItems !== false;
   }
   public clearPropertyValue(
     obj: Base,

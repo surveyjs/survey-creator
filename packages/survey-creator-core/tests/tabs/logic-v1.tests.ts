@@ -1047,7 +1047,6 @@ test("Hide/show logic types in actions", () => {
   expect(lt2Skip.isVisible).toBeTruthy();
   expect(lt2Complete.isVisible).toBeTruthy();
 });
-
 //TODO Can not implement these tests yet
 /*
   test("Make Survey Creator modified on changes", () => {
@@ -1087,41 +1086,6 @@ test("Hide/show logic types in actions", () => {
     logic.removeItem(logic.items[0]);
     expect(modifiedCounter, 2, "It was changed two times");
   });
-
-  test(
-    "Hide Expression Header in Condition Property Editor in Logic tab",
-    () => {
-      var creator = new SurveyCreator(null, {
-        hideExpressionHeaderInLogicTab: true,
-      });
-      creator.JSON = {
-        pages: [
-          {
-            elements: [
-              { type: "text", name: "q1" },
-              { type: "text", name: "q2", visibleIf: "{q1} = 1" },
-              { type: "text", name: "q3" },
-            ],
-          },
-        ],
-        triggers: [
-          {
-            type: "skip",
-            expression: "{q1} = 1",
-            gotoName: "q2",
-          },
-        ],
-      };
-      var logic = new SurveyLogic(creator.survey, creator);
-      var item = logic.items[0];
-      item.edit();
-      expect(
-        logic.expressionEditor.koShowExpressionHeader(),
-        false,
-        "Do not show expression header"
-      );
-    }
-  );
   test(
     "SurveyCreator with logictab only, set creator json",
     () => {

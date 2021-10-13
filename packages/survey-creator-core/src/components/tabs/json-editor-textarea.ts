@@ -19,17 +19,34 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
     this.onPluginActivate();
   }
 
+  public checkKey(data: any, e: any) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const textareaElement: any = e.target;
+      const start = textareaElement.selectionStart;
+      const end = textareaElement.selectionEnd;
+  
+      textareaElement.value = textareaElement.value.substring(0, start) +
+        "\t" + textareaElement.value.substring(end);
+  
+      textareaElement.selectionStart =
+      textareaElement.selectionEnd = start + 1;
+    
+      e.stopPropagation();
+    } 
+    return true;
+  }
   public get text(): string {
     return this._text;
-  }
-  public get errorButtonText(): string {
-    return this.canShowErrors ? getLocString("ed.jsonHideErrors") : getLocString("ed.jsonShowErrors");
   }
   public set text(value: string) {
     this.isProcessingImmediately = true;
     this._text = value;
     this.processErrors(value);
     this.isProcessingImmediately = false;
+  }
+  public get errorButtonText(): string {
+    return this.canShowErrors ? getLocString("ed.jsonHideErrors") : getLocString("ed.jsonShowErrors");
   }
   public toggleErrors(): void {
     this.canShowErrors = !this.canShowErrors;
