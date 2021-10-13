@@ -495,7 +495,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     const srcElement = !!action && action.logicType == logicType ? action.element : null;
     return logicType.createNewObj(srcElement);
   }
-  public getLocString(name: string) {
+  public getLocString(name: string): string {
     return editorLocalization.getString(name);
   }
   private getSelectorChoices(logicType: SurveyLogicType): Array<ItemValue> {

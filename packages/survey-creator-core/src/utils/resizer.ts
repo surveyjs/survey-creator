@@ -19,12 +19,12 @@ export class ResizeManager {
     );
   }
   private isEventSupported(eventName: string) {
-    let el = document.createElement('div');
-    eventName = 'on' + eventName;
+    let el = document.createElement("div");
+    eventName = "on" + eventName;
     let isSupported = (eventName in el);
     if (!isSupported) {
-      el.setAttribute(eventName, 'return;');
-      isSupported = typeof el[eventName] == 'function';
+      el.setAttribute(eventName, "return;");
+      isSupported = typeof el[eventName] == "function";
     }
     el = null;
     return isSupported;
