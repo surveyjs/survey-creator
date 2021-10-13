@@ -17,7 +17,7 @@ test("Survey/page title/description placeholders text", () => {
   });
   const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string) => {
     const locStr: LocalizableString = new LocalizableString(owner, false, propertyName);
-    const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr);
+    const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr, null);
     const property: JsonObjectProperty = Serializer.findProperty(ownerName, propertyName);
     const placeholder: string = editorLocalization.getString(property.placeholder);
     expect(editor.placeholder).toEqual(placeholder);
@@ -58,12 +58,12 @@ test("Save survey action properties", () => {
 
 test("StringEditorViewModelBase maxLength", () => {
   let survey: SurveyModel = new SurveyModel({});
-  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle);
+  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle, null);
   expect(editor.maxLength).toBe(-1);
   try {
     Serializer.findProperty("survey", "title").maxLength = 4;
     survey = new SurveyModel({});
-    editor = new StringEditorViewModelBase(survey.locTitle);
+    editor = new StringEditorViewModelBase(survey.locTitle, null);
     expect(editor.maxLength).toBe(4);
   }
   finally {

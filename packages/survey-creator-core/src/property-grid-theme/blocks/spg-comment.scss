@@ -12,6 +12,9 @@
   outline: none;
   font-size: calcSize(2);
   color: $foreground;
+  max-width: 100%;
+  min-width: calcSize(6);
+  min-height: calcSize(6);
 }
 
 .spg-comment::placeholder {

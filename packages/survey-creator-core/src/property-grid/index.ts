@@ -812,7 +812,6 @@ export class PropertyGridModel {
   protected getSurveyJSON(): any {
     var res = {};
     setSurveyJSONForPropertyGrid(res);
-    delete res["textUpdateMode"];
     return res;
   }
   private onValidateQuestion(options: any) {
@@ -1063,7 +1062,11 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return this.updateMaxLength(prop, { type: "text" });
+    const json = this.updateMaxLength(prop, { type: "text" });
+    if (prop.name == "name") {
+      json.textUpdateMode = "onBlur";
+    }
+    return json;
   }
 }
 export class PropertyGridEditorNumber extends PropertyGridEditor {
@@ -1075,7 +1078,7 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    var res: any = { type: "text", inputType: "number" };
+    var res: any = { type: "text", inputType: "number", textUpdateMode: "onBlur" };
     if (prop.minValue !== undefined) {
       res.min = prop.minValue;
     }
@@ -1095,8 +1098,7 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
     options: ISurveyCreatorOptions
   ): any {
     return this.updateMaxLength(prop, {
-      type: "comment",
-      textUpdateMode: "onTyping"
+      type: "comment"
     });
   }
 }
@@ -1110,8 +1112,7 @@ export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
     options: ISurveyCreatorOptions
   ): any {
     return this.updateMaxLength(prop, {
-      type: "comment",
-      textUpdateMode: "onTyping"
+      type: "comment"
     });
   }
 }

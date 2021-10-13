@@ -37,11 +37,6 @@ export class DesignTimeSurveyModel extends Survey {
       reason,
       this.isPopupEditorContent
     );
-    if (!componentName && element instanceof Panel) {
-      if (element.koElementType() == "survey-panel") {
-        return "svc-panel";
-      }
-    }
     return (
       componentName || super.getElementWrapperComponentName(element, reason)
     );

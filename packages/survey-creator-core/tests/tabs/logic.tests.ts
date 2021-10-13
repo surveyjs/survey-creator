@@ -133,6 +133,36 @@ test("LogicUI: do not reset editing and logic item isModified ", () => {
   logic.mode = "view";
   expect(item.isModified).toBeFalsy();
 });
+test("LogicUI: isModified for new item", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" },
+      { type: "text", name: "q4" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(0);
+  logic.addNew();
+  expect(logic.matrixItems.visibleRows).toHaveLength(1);
+  const row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  logic.expressionEditor.text = "{q1}=1";
+  const panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
+  const elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+  elementPanel.getQuestionByName("setToName").value = "q2";
+  elementPanel.getQuestionByName("setValue").value = 2;
+  row.detailPanel.footerActions[0].action();
+  expect(row.isDetailPanelShowing).toBeFalsy();
+  expect(survey.triggers).toHaveLength(1);
+  const trigger = <SurveyTriggerSetValue>survey.triggers[0];
+  expect(trigger.getType()).toEqual("setvaluetrigger");
+  expect(trigger.setToName).toEqual("q2");
+  expect(trigger.setValue).toEqual(2);
+  expect(logic.items[0].isModified).toBeFalsy();
+});
 test("LogicUI: dispose logic item ui", () => {
   const survey = new SurveyModel({
     elements: [
@@ -607,6 +637,45 @@ test("SurveyLogicUI: create trigger_runExpression trigger", () => {
   expect(actions).toHaveLength(2);
   expect(actions[0].id).toEqual("property-grid-clear");
 });
+test("SurveyLogicUI: Add new item and isModified", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", enableIf: "{q1} = 1" },
+      { type: "text", name: "q3" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(1);
+  logic.editItem(logic.items[0]);
+  expect(logic.editableItem.isNew).toBeFalsy();
+  expect(logic.editableItem.isModified).toBeFalsy();
+  logic.expressionEditor.text = "{q1} = 2";
+  logic["onEndEditing"]();
+  expect(logic.items[0].isModified).toBeTruthy();
+
+  logic.addNew();
+  expect(logic.editableItem.isNew).toBeTruthy();
+  expect(logic.editableItem.isModified).toBeFalsy();
+  logic.expressionEditor.text = "{q1} = 1";
+  const panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("elementSelector").value = "q2";
+  expect(logic.editableItem.isNew).toBeTruthy();
+  expect(logic.editableItem.isModified).toBeFalsy();
+
+  const res = logic.saveEditableItem();
+  expect(res).toBeTruthy();
+  expect(logic.items[0].isModified).toBeTruthy();
+  expect(logic.items[1].isNew).toBeFalsy();
+  expect(logic.items[1].isModified).toBeFalsy();
+
+  logic.editItem(logic.items[1]);
+  logic.expressionEditor.text = "{q1} = 2";
+  logic["onEndEditing"]();
+  expect(logic.items[0].isModified).toBeTruthy();
+  expect(logic.items[1].isModified).toBeTruthy();
+});
 test("LogicItemEditorUI: remove item", () => {
   var survey = new SurveyModel({
     elements: [
@@ -861,6 +930,40 @@ test("LogicItemEditorUI: edit logic item using detail panel", () => {
   expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
   expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 1");
 });
+test("LogicItemEditorUI: do not lost expression if it is incorrect and check isModified", () => {
+  const dummy = new QuestionEmbeddedSurveyModel("dummy");
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  expect(logic.items[0].isModified).toBeFalsy();
+  const row = itemsQuestion.visibleRows[0];
+  row.showDetailPanel();
+  expect(logic.items[0].isModified).toBeFalsy();
+  expect(logic.expressionEditor.text).toEqual("{q1} = 1");
+  row.hideDetailPanel();
+  expect(logic.items[0].isModified).toBeFalsy();
+  row.showDetailPanel();
+  expect(logic.items[0].isModified).toBeFalsy();
+  logic.expressionEditor.text = "{q1} = 2";
+  row.hideDetailPanel();
+  expect(logic.items[0].isModified).toBeTruthy();
+  row.showDetailPanel();
+  logic.expressionEditor.panel.addPanel();
+  row.hideDetailPanel();
+  row.showDetailPanel();
+  expect(logic.expressionEditor.panel.panels).toHaveLength(2);
+  logic.expressionEditor.panel.removePanel(1);
+  expect(logic.expressionEditor.text).toEqual("{q1} = 2");
+});
+
 test("LogicItemEditorUI: create new logic item using detail panel", () => {
   const dummy = new QuestionEmbeddedSurveyModel("dummy");
   const survey = new SurveyModel({

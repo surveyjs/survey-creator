@@ -188,16 +188,13 @@ creator.onDefineElementMenuItems.add((sender, options) => {
     // Define a new bar item (action).
     var barItem = {
         id: "startWithNewLine", // Unique id
-        css: () =>
-            question.startWithNewLine ? "sv-action-bar-item--secondary" : "",
+        css: new Survey.ComputedUpdater(() => (question.startWithNewLine
+           ? "sv-action-bar-item--secondary" : "")),        
         title: "On new line", // Item text
         // An icon to render depending on a property's value:
-        iconName: () => {
-            if (question.startWithNewLine) {
-                return "icon-switchactive_16x16";
-            }
-            return "icon-switchinactive_16x16";
-        },
+        iconName: new Survey.ComputedUpdater(() => {
+           return question.startWithNewLine ? "icon-new-line" : "icon-one-line";
+        }),
         // An action to perform on a click:
         action: () => {
             question.startWithNewLine = !question.startWithNewLine;

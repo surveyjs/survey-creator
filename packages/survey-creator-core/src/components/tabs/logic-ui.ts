@@ -90,8 +90,7 @@ export class SurveyLogicUI extends SurveyLogic {
     if (this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
       this.addNew();
     }
-    const matrix = <QuestionMatrixDynamicModel>this.itemsSurvey.getQuestionByName("items");
-    matrix.visibleRows[matrix.visibleRows.length - 1].showDetailPanel();
+    this.matrixItems.visibleRows[this.matrixItems.visibleRows.length - 1].showDetailPanel();
   }
   public toggleExpressionEditorIsFastEntry() {
     this.expressionEditorIsFastEntry = !this.expressionEditorIsFastEntry;
@@ -138,6 +137,9 @@ export class SurveyLogicUI extends SurveyLogic {
   public get hasItems(): boolean {
     return this.items.length > 0;
   }
+  get matrixItems(): QuestionMatrixDynamicModel {
+    return this.itemsSurvey.getQuestionByName("items") as QuestionMatrixDynamicModel;
+  }
   protected onStartEditing() {
     super.onStartEditing();
     this.expressionEditorValue = this.getExpressionEditor(this.editableItem);
@@ -148,7 +150,7 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected onEndEditing() {
     if (!!this.editableItem) {
-      this.editableItem.isModified = !!this.itemEditor && !!this.expressionEditor && (this.itemEditor.isModified || this.expressionEditor.text !== this.editableItem.expression);
+      this.editableItem.isModified = !!this.itemEditor && !!this.expressionEditor && (this.itemEditor.isModified || this.expressionEditor.isModified(this.editableItem.expression));
     }
     super.onEndEditing();
     this.expressionEditorValue = null;
@@ -161,6 +163,7 @@ export class SurveyLogicUI extends SurveyLogic {
     if (this.editableItem.actions.length != this.itemEditor.panels.length) {
       this.itemEditor.setEditableItem(this.editableItem);
     }
+    this.itemEditor.resetModified();
     this.editableItem.isNew = false;
     if (!this.editableItem.isSuitable(this.questionFilter, this.actionTypeFilter)) {
       this.questionFilter = "";
@@ -233,7 +236,7 @@ export class SurveyLogicUI extends SurveyLogic {
       if (options.name === "textEditor") {
         this.expressionEditorCanShowBuilder = ConditionEditor.canBuildExpression(options.value);
       }
-    })
+    });
     return res;
   }
   private getVisibleItems(): SurveyLogicItem[] {
@@ -241,7 +244,6 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
-    const matrix = this.itemsSurvey.getQuestionByName("items");
     var data = [];
     this.visibleItems = this.getVisibleItems();
     for (var i = 0; i < this.visibleItems.length; i++) {
@@ -250,8 +252,8 @@ export class SurveyLogicUI extends SurveyLogic {
         actions: this.visibleItems[i].actionsText
       });
     }
-    matrix.onHasDetailPanelCallback = (row) => { return true; };
-    matrix.onCreateDetailPanelCallback = (
+    this.matrixItems.onHasDetailPanelCallback = (row) => { return true; };
+    this.matrixItems.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,
       panel: PanelModel
     ) => {
@@ -266,8 +268,10 @@ export class SurveyLogicUI extends SurveyLogic {
           const actionsQuestion = <QuestionEmbeddedSurveyModel>panel.getQuestionByName("actions");
           condQuestion.embeddedSurvey = this.expressionEditor.editSurvey;
           actionsQuestion.embeddedSurvey = this.itemEditorValue.editSurvey;
+          this.updateRowIsAdditionalClasses(row.rowIndex - 1, false);
         } else {
           this.mode = "view";
+          this.updateRenderedRows();
         }
         this.updateNewActionState();
       };
@@ -285,7 +289,18 @@ export class SurveyLogicUI extends SurveyLogic {
         }
       });
     };
-    matrix.value = data;
+    this.matrixItems.value = data;
+    this.updateRenderedRows();
+  }
+  private updateRenderedRows() {
+    this.visibleItems.forEach((_, index) => {
+      this.updateRowIsAdditionalClasses(index, this.visibleItems[index].isModified || this.visibleItems[index].isNew);
+    });
+  }
+  private updateRowIsAdditionalClasses(index: number, isAdditionalClasses: boolean) {
+    if (!!this.matrixItems.renderedTable) {
+      this.matrixItems.renderedTable.rows[index].isAdditionalClasses = isAdditionalClasses;
+    }
   }
   private updateNewActionState(): void {
     this.addNewButton.enabled = this.mode !== "new";
@@ -300,7 +315,7 @@ export class SurveyLogicUI extends SurveyLogic {
       action: () => {
         this.addNewUI();
       }
-    })
+    });
   }
   public get addNewText(): string {
     var lgAddNewItem = getLogicString("addNewItem");

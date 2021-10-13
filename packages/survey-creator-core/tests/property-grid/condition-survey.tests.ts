@@ -1378,3 +1378,25 @@ test("questionName title visibility", () => {
   panel2 = editor.panel.panels[1];
   expect(panel2.getQuestionByName("questionName").titleLocation).toEqual("hidden");
 });
+test("isModified", () => {
+  const survey = new SurveyModel({
+    questions: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const conditionEditor = new ConditionEditor(survey, survey.getQuestionByName("q1"));
+  expect(conditionEditor.isModified("")).toBeFalsy();
+  conditionEditor.text = "{q} > 2";
+  expect(conditionEditor.isModified("")).toBeTruthy();
+  expect(conditionEditor.isModified("{q}   > 2")).toBeFalsy();
+  conditionEditor.panel.removePanel(0);
+  expect(conditionEditor.isModified("")).toBeFalsy();
+  expect(conditionEditor.isModified("{q} > 2")).toBeTruthy();
+  conditionEditor.text = "{q} > 2";
+  conditionEditor.setIsFastEntry(true);
+  expect(conditionEditor.isModified("{q} > 2")).toBeFalsy();
+  conditionEditor.text = "{q} >   2";
+  expect(conditionEditor.isModified("{q} > 2")).toBeFalsy();
+});

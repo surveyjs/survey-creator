@@ -75,7 +75,7 @@ To build library yourself:
     ```
     npm test
     ```
-    This command will run unit tests usign [Karma](https://karma-runner.github.io/0.13/index.html)
+    This command will run unit tests using [Karma](https://karma-runner.github.io/0.13/index.html)
 
 ## Dependencies
 

@@ -5,12 +5,16 @@ import {
   QuestionTextModel,
   Serializer,
   QuestionRadiogroupModel,
-  QuestionMatrixDynamicModel
+  QuestionMatrixDynamicModel,
+  settings
 } from "survey-core";
 import { getNextValue } from "../src/utils/utils";
 import { editorLocalization } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 import { CreatorTester } from "./creator-tester";
+export { PropertyGridEditorMatrix } from "../src/property-grid/matrices";
+
+settings.supportCreatorV2 = true;
 
 function getSurveyJson(): any {
   return {
@@ -396,9 +400,9 @@ test("Element name should be unique - property grid + Question Editor", () => {
   creator.survey.currentPage.addNewQuestion("text", "question2");
   var question = creator.survey.currentPage.addNewQuestion("text", "question");
   creator.selectElement(question);
-  expect(creator.designerPropertyGrid.obj).toBeTruthy();
-  expect(creator.designerPropertyGrid.obj).toEqual(question);
-  var questionName = creator.designerPropertyGrid.survey.getQuestionByName("name");
+  expect(creator["designerPropertyGrid"].obj).toBeTruthy();
+  expect(creator["designerPropertyGrid"].obj).toEqual(question);
+  var questionName = creator["designerPropertyGrid"].survey.getQuestionByName("name");
   expect(questionName).toBeTruthy();
   expect(questionName.value).toEqual("question");
   questionName.value = "question2";
@@ -421,7 +425,7 @@ test("Validate Selected Element Errors", () => {
   var question = creator.survey.currentPage.addNewQuestion("text", "question1");
   creator.selectedElement = question;
   expect(creator.validateSelectedElement()).toBeFalsy();
-  var titleQuestion = creator.designerPropertyGrid.survey.getQuestionByName("title");
+  var titleQuestion = creator["designerPropertyGrid"].survey.getQuestionByName("title");
   expect(titleQuestion.errors).toHaveLength(1);
   question.title = "My title";
   expect(creator.validateSelectedElement()).toBeTruthy();
@@ -436,7 +440,7 @@ test("Update conditions/expressions on changing question.name", () => {
   var q2 = creator.survey.getAllQuestions()[1];
   q2.visibleIf = "{question1} = 1";
   creator.selectElement(q1);
-  var nameQuestion = creator.designerPropertyGrid.survey.getQuestionByName("name");
+  var nameQuestion = creator["designerPropertyGrid"].survey.getQuestionByName("name");
   nameQuestion.value = "myUpdatedQuestion1";
   expect(q2.visibleIf).toEqual("{myUpdatedQuestion1} = 1");
 });
@@ -449,8 +453,8 @@ test("Update conditions/expressions on changing question.valueName", () => {
   var q2 = creator.survey.getAllQuestions()[1];
   q2.visibleIf = "{question1} = 1";
   creator.selectElement(q1);
-  var nameQuestion = creator.designerPropertyGrid.survey.getQuestionByName("name");
-  var valueNameQuestion = creator.designerPropertyGrid.survey.getQuestionByName("valueName");
+  var nameQuestion = creator["designerPropertyGrid"].survey.getQuestionByName("name");
+  var valueNameQuestion = creator["designerPropertyGrid"].survey.getQuestionByName("valueName");
   valueNameQuestion.value = "valueName1";
   expect(q2.visibleIf).toEqual("{valueName1} = 1");
   valueNameQuestion.value = "valueName2";
@@ -520,7 +524,7 @@ test("Change elemenent page", () => {
   creator.selectedElement = question;
   expect(creator.selectedElement["name"]).toEqual("question1");
   expect(creator.survey.currentPage.name).toEqual("page1");
-  var pageEditor = creator.designerPropertyGrid.survey.getQuestionByName("page");
+  var pageEditor = creator["designerPropertyGrid"].survey.getQuestionByName("page");
   expect(pageEditor).toBeTruthy();
   pageEditor.value = "page2";
   expect(creator.selectedElement["name"]).toEqual("question1");
@@ -560,7 +564,7 @@ test("The onModified event is called on property changed", () => {
     survey.pages[0].addNewQuestion("radiogroup", "q1")
   );
   creator.selectElement(question);
-  var titleQuestion = creator.designerPropertyGrid.survey.getQuestionByName("title");
+  var titleQuestion = creator["designerPropertyGrid"].survey.getQuestionByName("title");
   counter = 0;
   titleQuestion.value = "some title";
   expect(counter).toEqual(1);
@@ -572,7 +576,7 @@ test("The onModified event is called on property changed", () => {
   expect(counter).toEqual(3);
 
   var choicesQuestion = <QuestionMatrixDynamicModel>(
-    creator.designerPropertyGrid.survey.getQuestionByName("choices")
+    creator["designerPropertyGrid"].survey.getQuestionByName("choices")
   );
   counter = 0;
   var rows = choicesQuestion.visibleRows;
@@ -629,10 +633,10 @@ test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab co
   var q1 = page.addNewQuestion("text", "q1");
   creator.selectElement(q1);
   var generalPanel = <PanelModel>(
-    creator.designerPropertyGrid.survey.getPanelByName("general")
+    creator["designerPropertyGrid"].survey.getPanelByName("general")
   );
   var logicPanel = <PanelModel>(
-    creator.designerPropertyGrid.survey.getPanelByName("logic")
+    creator["designerPropertyGrid"].survey.getPanelByName("logic")
   );
   expect(generalPanel.isExpanded).toBeTruthy();
   creator.collapsePropertyTab("general");
@@ -792,7 +796,7 @@ test("SurveyPropertyConditionEditor, set correct locale into internal survey, Bu
     ]
   };
   expect(creator.survey.locale).toBeFalsy();
-  expect(creator.designerPropertyGrid.survey.locale).toEqual("de");
+  expect(creator["designerPropertyGrid"].survey.locale).toEqual("de");
   var question = creator.survey.getQuestionByName("q2");
   var editor = new ConditionEditor(creator.survey, question, creator);
   expect(editor.editSurvey.locale).toEqual("de");

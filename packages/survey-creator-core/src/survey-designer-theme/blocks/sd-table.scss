@@ -12,6 +12,7 @@
   line-height: calcSize(3);
   padding-bottom: calcSize(2);
   color: $foreground;
+  text-align: center;
 }
 .sd-table__cell:not(:last-child) {
   padding-right: calcSize(2);
@@ -34,6 +35,8 @@
   }
 }
 .sd-table__cell--actions{
+  width: 1%;
+  white-space: nowrap;
   .sv-action-bar {
     opacity: 0.5;
     padding: 0;

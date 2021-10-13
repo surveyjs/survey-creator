@@ -32,6 +32,9 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
 
   const questionsLength = await getQuestionsLength();
   await t.expect(questionsLength).eql(2);
+
+  const ghostPageRowsCount = newGhostPagePage.find(".svc-row").count;
+  await t.expect(ghostPageRowsCount).eql(0);
 });
 
 test("Drag Drop Question", async (t) => {
@@ -277,6 +280,109 @@ test("Drag Drop ItemValue (choices)", async (t) => {
   });
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
+});
+
+test("Drag Drop Ranking (choices)", async (t) => {
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "ranking",
+            name: "question1",
+            choices: ["item1", "item2", "item3"]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Question1 = Selector("[name=\"question1\"]");
+  const Item1 = Selector("[data-sv-drop-target-item-value=\"item1\"]");
+  const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
+  const Item3 = Selector("[data-sv-drop-target-item-value=\"item3\"]");
+  const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
+
+  await t
+    .click(Question1, { speed: 0.5 })
+    .hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2)
+
+    .dragToElement(DragZoneItem2, Item1, {
+      offsetX: 5,
+      offsetY: 5,
+      destinationOffsetY: -40,
+      speed: 0.1
+    });
+  let value = await getItemValueByIndex("question1", 0);
+  const expectedValue = "item2";
+  await t.expect(value).eql(expectedValue);
+
+  await t.dragToElement(DragZoneItem2, Item3, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: 30,
+    speed: 0.1
+  });
+  value = await getItemValueByIndex("question1", 2);
+  await t.expect(value).eql(expectedValue);
+});
+
+test("Animation (choices)", async (t) => {
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "radiogroup",
+            name: "question1",
+            choices: ["item1", "item2", "item3"]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Question1 = Selector("[name=\"question1\"]");
+  const Item1 = Selector("[data-sv-drop-target-item-value=\"item1\"]");
+  const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
+  const Item3 = Selector("[data-sv-drop-target-item-value=\"item3\"]");
+  const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
+
+  await t
+    .click(Question1, { speed: 0.5 })
+    .hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2)
+
+    .dragToElement(DragZoneItem2, Item1, {
+      offsetX: 5,
+      offsetY: 5,
+      destinationOffsetY: -40,
+      speed: 0.1
+    });
+
+  await t.dragToElement(DragZoneItem2, Item3, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: 30,
+    speed: 0.1
+  });
+
+  const animationClassesCount = await ClientFunction(() => {
+    let result = 0;
+    const itemValueNodes = document.querySelector("[name='question1']").querySelectorAll(".svc-item-value-wrapper");
+    itemValueNodes.forEach(itemValueNode=>{
+      if (itemValueNode.classList.contains("svc-item-value--movedown") || 
+        itemValueNode.classList.contains("svc-item-value--moveup")) {
+          result++;
+      }
+    });
+    return result;
+  })();
+
+  await t.expect(animationClassesCount).eql(0, "there is no any animation classes after DnD");
 });
 
 test("Drag Drop MatrixRows (property grid)", async (t) => {

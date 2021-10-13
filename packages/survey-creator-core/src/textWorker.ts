@@ -30,7 +30,7 @@ export class SurveyTextWorker {
     return this.surveyValue;
   }
   public get isJsonCorrect(): boolean {
-    return this.surveyValue != null;
+    return this.errors.length === 0 && this.surveyValue !== null;
   }
   protected process() {
     try {
