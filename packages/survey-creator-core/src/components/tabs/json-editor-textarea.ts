@@ -22,14 +22,14 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   public get text(): string {
     return this._text;
   }
-  public get errorButtonText(): string {
-    return this.canShowErrors ? getLocString("ed.jsonHideErrors") : getLocString("ed.jsonShowErrors");
-  }
   public set text(value: string) {
     this.isProcessingImmediately = true;
     this._text = value;
     this.processErrors(value);
     this.isProcessingImmediately = false;
+  }
+  public get errorButtonText(): string {
+    return this.canShowErrors ? getLocString("ed.jsonHideErrors") : getLocString("ed.jsonShowErrors");
   }
   public toggleErrors(): void {
     this.canShowErrors = !this.canShowErrors;
