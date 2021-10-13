@@ -122,7 +122,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editableItemValue = val;
     this.buildInitialSelectedElements();
     this.buildPanels();
-    this.isModifiedValue = false;
+    this.resetModified();
   }
   public get survey(): SurveyModel {
     return this.editableItem.survey;
@@ -205,12 +205,15 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   protected getSurveyCreationReason(): string {
     return "logic-item-editor";
   }
+  public resetModified(): void {
+    this.isModifiedValue = false;
+  }
   public apply(): boolean {
     if (this.editSurvey.hasErrors()) return false;
     for (var i = 0; i < this.panels.length; i++) {
       this.applyPanel(this.panels[i]);
     }
-    this.isModifiedValue = false;
+    this.resetModified();
     return true;
   }
   public getEditingActions(): Array<SurveyLogicAction> {
