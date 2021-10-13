@@ -289,7 +289,7 @@ export class PropertyGridTitleActionsCreator {
     const editor = PropertyGridEditorCollection.getEditor(property);
     if (!editor) return;
     const actions = [];
-    const enabled = !question.isReadOnly;
+    let enabled = !question.isReadOnly;
     const hasClear = !!editor.clearPropertyValue && (!editor.canClearPropertyValue || editor.canClearPropertyValue(this.obj, property, question, this.options));
     if (hasClear) {
       actions.push(
