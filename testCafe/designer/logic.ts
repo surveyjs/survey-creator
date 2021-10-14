@@ -540,8 +540,8 @@ test("Check logic elements styles in Logic tab", async (t) => {
     .expect(logicOperatorConjuction.getStyleProperty("color")).eql(foregroundColor);
 
   await checkLogicOperatorStyles(t, logicQuestionSelector, "rgba(67, 127, 217, 0.1)", "logicQuestionSelector");
-  await checkLogicOperatorStyles(t, logicOperatorSelector, "rgba(255, 152, 20, 0.1)", "logicOperatorSelector");
-  await checkLogicOperatorStyles(t, addButton.nth(0), "rgba(255, 152, 20, 0.1)", "addButton Condition");
+  await checkLogicOperatorStyles(t, logicOperatorSelector, "rgba(255, 152, 20, 0.25)", "logicOperatorSelector");
+  await checkLogicOperatorStyles(t, addButton.nth(0), "rgba(255, 152, 20, 0.25)", "addButton Condition");
   await checkLogicOperatorStyles(t, addButton.nth(1), "rgba(230, 10, 62, 0.1)", "addButton Action");
   await checkLogicOperatorStyles(t, logicActionSelector, "rgba(230, 10, 62, 0.1)", "logicActionSelector");
   await checkLogicOperatorStyles(t, logicOperatorConjuction, "rgba(25, 179, 148, 0.1)", "logicOperatorConjuction");
@@ -575,8 +575,8 @@ test("Check logic elements styles in Popup", async (t) => {
 
   await checkLogicOperatorStyles(t, logicQuestionSelector, "rgba(67, 127, 217, 0.1)", "logicQuestionSelector");
   await checkLogicOperatorStyles(t, logicQuestionSelector.nth(0), "rgba(67, 127, 217, 0.1)", "logicQuestionSelector");
-  await checkLogicOperatorStyles(t, logicOperatorSelector, "rgba(255, 152, 20, 0.1)", "logicOperatorSelector");
-  await checkLogicOperatorStyles(t, addButton.nth(0), "rgba(255, 152, 20, 0.1)", "addButton Condition");
+  await checkLogicOperatorStyles(t, logicOperatorSelector, "rgba(255, 152, 20, 0.25)", "logicOperatorSelector");
+  await checkLogicOperatorStyles(t, addButton.nth(0), "rgba(255, 152, 20, 0.25)", "addButton Condition");
   await checkLogicOperatorStyles(t, logicOperatorConjuction, "rgba(25, 179, 148, 0.1)", "logicOperatorConjuction");
   await checkLogicRemoveStyles(t, removeButton.nth(0), "removeButton1");
   await checkLogicRemoveStyles(t, removeButton.nth(1), "removeButton2");
