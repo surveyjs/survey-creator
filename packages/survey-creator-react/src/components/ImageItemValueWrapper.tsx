@@ -40,16 +40,6 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
     this.model.itemsRoot = this.rootRef.current;
   }
 
-  private getDragDropGhost(topOrBottom: string) {
-    if (this.model.ghostPosition === topOrBottom) {
-      let className = "sv-drag-drop-ghost";
-      if (topOrBottom === "bottom")
-        className += " sv-drag-drop-ghost--item-value-bottom";
-      return <div className={className}></div>;
-    }
-    return null;
-  }
-
   render(): JSX.Element {
     // if (this.model.question.isDragged) {
     //   return null;
@@ -78,8 +68,6 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
     } else {
       content = (
         <>
-          {this.getDragDropGhost("top")}
-
           <div className={"svc-image-item-value__item"}>
             {this.props.element}
           </div>
@@ -98,8 +86,6 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
               <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
             </span>) : null}
           </div>
-
-          {this.getDragDropGhost("bottom")}
         </>
       );
     }
