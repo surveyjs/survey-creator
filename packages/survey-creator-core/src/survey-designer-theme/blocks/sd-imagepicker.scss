@@ -37,7 +37,14 @@
   background-color: white;
 }
 .sd-imagepicker__item--allowhover {
-  img:hover {
+  .sd-imagepicker__item__image:hover {
     opacity: 0.5;
   }
+}
+.sd-imagepicker__item__image {
+  box-sizing: border-box;
+}
+.sd-imagepicker__text {
+  line-height: 24px;
+  margin-top: 8px;
 }

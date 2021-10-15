@@ -5,12 +5,13 @@
   position: relative;
 }
 
-.svc-question__content--selected .svc-image-item-value-wrapper {
-  border: 1px dashed $border;
-}
-
 .svc-image-item-value--new {
   display: none;
+  height: max-content;
+  .sd-imagepicker__image {
+    box-sizing: border-box;
+    border: 1px dashed $border;
+  }
 }
 
 .svc-question__content--selected .svc-image-item-value--new {
