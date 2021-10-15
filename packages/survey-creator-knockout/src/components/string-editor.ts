@@ -18,6 +18,7 @@ export class StringEditorViewModel {
       this.getEditorElement(element).focus();
     };
     this.baseModel.blurEditor = () => this.getEditorElement(element).blur();
+    locString.strChanged();
   }
 
   public setLocString(locString: LocalizableString): LocalizableString {
