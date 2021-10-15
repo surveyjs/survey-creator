@@ -38,7 +38,7 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
 });
 
 test("Drag Drop Question", async (t) => {
-  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  await t.resizeWindow(2560, 1440);
   const json = {
     pages: [
       {
@@ -89,7 +89,7 @@ test("Drag Drop Question", async (t) => {
   await t.expect(name).eql(questionName);
 });
 test("Drag Drop to Panel", async (t) => {
-  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  await t.resizeWindow(2560, 1440);
   const json = {
     pages: [
       {
@@ -374,9 +374,9 @@ test("Animation (choices)", async (t) => {
     let result = 0;
     const itemValueNodes = document.querySelector("[name='question1']").querySelectorAll(".svc-item-value-wrapper");
     itemValueNodes.forEach(itemValueNode=>{
-      if (itemValueNode.classList.contains("svc-item-value--movedown") || 
+      if (itemValueNode.classList.contains("svc-item-value--movedown") ||
         itemValueNode.classList.contains("svc-item-value--moveup")) {
-          result++;
+        result++;
       }
     });
     return result;
@@ -425,8 +425,7 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   const PandaItem = Selector("[data-sv-drop-target-item-value=\"panda\"]");
   const CamelItem = Selector("[data-sv-drop-target-item-value=\"camel\"]");
 
-  //TODO change after the https://github.com/surveyjs/survey-creator/issues/1936
-  const DragZoneLionItem = GiraffeItem; /*GiraffeItem.find(".svc-item-value-controls__drag");*/
+  const DragZoneLionItem = GiraffeItem.find(".svc-image-item__drag-element");
 
   await t
     .click(Question1, { speed: 0.5 })
@@ -473,7 +472,6 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   const Question1 = Selector("[name=\"question1\"]");
   await t.click(Question1, { speed: 0.5 });
 
-  // TODO uncomment after the fix https://github.com/surveyjs/survey-creator/issues/1618
   const ChoicesTab = Selector("h4").withExactText("Choices");
   await t.click(ChoicesTab);
 
@@ -565,7 +563,7 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
 });
 
 test("Drag Drop to Panel Dynamic Question", async (t) => {
-  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  await t.resizeWindow(2560, 1440);
   const json = {
     pages: [
       {
@@ -651,7 +649,7 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
 });
 
 test("Drag Drop from Panel Dynamic Question", async (t) => {
-  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  await t.resizeWindow(2560, 1440);
   const json = {
     pages: [
       {
