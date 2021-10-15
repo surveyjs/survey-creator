@@ -16,7 +16,7 @@
 }
 .sd-imagepicker__control + div {
   position: relative;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
 }
@@ -37,14 +37,30 @@
   background-color: white;
 }
 .sd-imagepicker__item--allowhover {
-  .sd-imagepicker__item__image:hover {
+  .sd-imagepicker__image:hover {
     opacity: 0.5;
   }
 }
-.sd-imagepicker__item__image {
+.sd-imagepicker__image {
   box-sizing: border-box;
+  max-width: 100%;
 }
 .sd-imagepicker__text {
   line-height: 24px;
   margin-top: 8px;
+}
+.sd-imagepicker__item.sv-q-col-1 {
+  width: 100%;
+}
+.sd-imagepicker__item.sv-q-col-2 {
+  width: calc(50% - calc(1 * #{$base-unit}));
+}
+.sd-imagepicker__item.sv-q-col-3 {
+  width: calc(33% - calc(2/3 * #{$base-unit}));
+}
+.sd-imagepicker__item.sv-q-col-4 {
+  width: calc(25% - calc(6/4 * #{$base-unit}));
+}
+.sd-imagepicker__item.sv-q-col-5 {
+  width: calc(20% - calc(8/5 * #{$base-unit}));
 }
