@@ -1,5 +1,5 @@
 import { url, getTabbedMenuItemByText, setJSON } from "../helper";
-import { ClientFunction, Selector } from "testcafe";
+import { Selector } from "testcafe";
 const title = "Logic tab";
 
 const json = {
@@ -97,11 +97,16 @@ function getBarItemByText(text) {
 function getListItemByText(text) {
   return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
 }
+function getPropertyGridCategory(categoryName) {
+  return Selector(".spg-title span").withText(categoryName);
+}
 
-const tableRulesSelector = Selector(".sl-table tbody tr:not(.st-table__row--detail)").filterVisible();
+const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();
 const conditionBuilder = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"panel\"]");
 const conditionTextEdit = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"textEditor\"]");
 
+const newRuleCondition = "New rule is not set";
+const newRuleActions = "Value is empty";
 const cellConditions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Condition(s)\"]"));
 const cellActions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Action(s)\"]"));
 const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
@@ -134,8 +139,8 @@ test("Create logic rule", async (t) => {
     .click(addNewRuleButton)
     .expect(addNewRuleButton.classNames).contains(disabledClass)
     .expect(Selector(".svc-logic-tab__content-empty").exists).notOk()
-    .expect(cellConditions.innerText).eql("New rule is not set")
-    .expect(cellActions.innerText).eql("Value is empty")
+    .expect(cellConditions.innerText).eql(newRuleCondition)
+    .expect(cellActions.innerText).eql(newRuleActions)
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.value).eql("")
     .expect(logicOperatorSelector.innerText).eql("equals")
@@ -377,3 +382,203 @@ test("Availability of the Done button", async (t) => {
     .click(getSelectOptionByText("q4"))
     .expect(doneButton.visible).ok();
 });
+
+async function check1Rule(t: TestController, ruleCondition: string, ruleActions: string) {
+  await t
+    .expect(cellConditions.nth(0).innerText).eql(ruleCondition)
+    .expect(cellActions.nth(0).innerText).eql(ruleActions)
+    .expect(logicQuestionSelector.value).eql("q3")
+    .expect(logicOperatorSelector.value).eql("equal")
+    .expect(logicQuestionValueSelector.find("input").value).eql("45")
+    .expect(logicActionSelector.value).eql("trigger_complete");
+}
+async function check2Rule(t: TestController) {
+  await t
+    .expect(cellConditions.nth(1).innerText).eql(newRuleCondition)
+    .expect(cellActions.nth(1).innerText).eql(newRuleActions)
+    .expect(logicQuestionSelector.value).eql("q1")
+    .expect(logicOperatorSelector.value).eql("equal")
+    .expect(logicDropdownValueSelector.value).eql("item2")
+    .expect(logicActionSelector.value).eql("question_visibility")
+    .expect(logicQuestionSelector.nth(1).value).eql("q3");
+}
+
+test("Modified rules without saving", async (t) => {
+  const rule1Condition = "{q1} == 'item1'";
+  const rule1Actions = "Make question {q2} visible";
+  const additinalClass = "sl-table__row--additional";
+
+  await setJSON(json2);
+
+  await t
+    .click(getTabbedMenuItemByText("Survey Logic"))
+    .expect(cellConditions.nth(0).innerText).eql(rule1Condition)
+    .expect(cellActions.nth(0).innerText).eql(rule1Actions)
+    .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
+
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement.nth(0))
+    .click(logicQuestionSelector)
+    .click(getSelectOptionByText("q3"))
+    .typeText(logicQuestionValueSelector, "45", { replace: true })
+    .click(logicActionSelector)
+    .click(getSelectOptionByText("Complete survey"));
+  await check1Rule(t, rule1Condition, rule1Actions);
+
+  await t
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement.nth(0))
+    .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
+
+    .click(addNewRuleButton)
+    .click(logicQuestionSelector)
+    .click(getSelectOptionByText("q1"))
+    .click(logicDropdownValueSelector)
+    .click(getSelectOptionByText("item2"))
+    .click(logicActionSelector)
+    .click(getSelectOptionByText("Show (hide) question"))
+    .click(logicQuestionSelector.nth(1))
+    .click(getSelectOptionByText("q3"));
+  await check2Rule(t);
+
+  await t
+    .hover(tableRulesSelector.nth(1))
+    .click(logicDetailButtonElement.nth(1))
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement.nth(0))
+    .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
+    .expect(tableRulesSelector.nth(1).classNames).contains(additinalClass);
+  await check1Rule(t, rule1Condition, rule1Actions);
+
+  await t
+    .hover(tableRulesSelector.nth(1))
+    .click(logicDetailButtonElement.nth(1))
+    .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
+    .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass);
+  await check2Rule(t);
+
+  await t
+    .click(doneButton)
+    .expect(cellConditions.nth(1).innerText).eql("{q1} == 'item2'")
+    .expect(cellActions.nth(1).innerText).eql("Make question {q3} visible")
+    .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
+    .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass)
+
+    .hover(tableRulesSelector)
+    .click(logicDetailButtonElement)
+    .click(doneButton)
+    .expect(cellConditions.nth(0).innerText).eql("{q3} == 45")
+    .expect(cellActions.nth(0).innerText).eql("Survey becomes completed")
+    .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
+    .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass);
+});
+
+async function checkLogicOperatorStyles(t: TestController, selector: Selector, backgroundColor: string, selectorName?: string) {
+  await t
+    .expect(selector.getStyleProperty("appearance")).eql("none", selectorName)
+    .expect(selector.getStyleProperty("border")).notOk(selectorName)
+    .expect(selector.getStyleProperty("outline")).notOk(selectorName)
+    .expect(selector.getStyleProperty("font-weight")).eql("600", selectorName)
+    .expect(selector.getStyleProperty("font-family")).eql("\"Open Sans\"", selectorName)
+    .expect(selector.getStyleProperty("font-size")).eql("16px", selectorName)
+
+    .expect(selector.getStyleProperty("padding-left")).eql("16px", selectorName)
+    .expect(selector.getStyleProperty("padding-right")).eql("16px", selectorName)
+    .expect(selector.getStyleProperty("padding-top")).eql("8px", selectorName)
+    .expect(selector.getStyleProperty("padding-bottom")).eql("8px", selectorName)
+
+    .expect(selector.getStyleProperty("border-top-left-radius")).eql("100px", selectorName)
+    .expect(selector.getStyleProperty("border-top-right-radius")).eql("100px", selectorName)
+    .expect(selector.getStyleProperty("border-bottom-right-radius")).eql("100px", selectorName)
+    .expect(selector.getStyleProperty("border-bottom-left-radius")).eql("100px", selectorName)
+
+    .expect(selector.getStyleProperty("background-color")).eql(backgroundColor, selectorName);
+}
+
+async function checkLogicRemoveStyles(t: TestController, selector: Selector, selectorName?: string) {
+  await t
+    .expect(selector.getStyleProperty("background")).notOk(selectorName)
+    .expect(selector.getStyleProperty("box-shadow")).eql("none", selectorName)
+    .expect(selector.getStyleProperty("appearance")).eql("none", selectorName)
+    .expect(selector.getStyleProperty("border")).notOk(selectorName)
+    .expect(selector.getStyleProperty("padding-left")).eql("0px", selectorName)
+    .expect(selector.getStyleProperty("padding-right")).eql("0px", selectorName)
+    .expect(selector.getStyleProperty("padding-top")).eql("0px", selectorName)
+    .expect(selector.getStyleProperty("padding-bottom")).eql("0px", selectorName)
+
+    .expect(selector.getStyleProperty("margin-left")).eql("4px", selectorName)
+    .expect(selector.getStyleProperty("margin-right")).eql("4px", selectorName)
+    .expect(selector.getStyleProperty("margin-top")).eql("4px", selectorName)
+    .expect(selector.getStyleProperty("margin-bottom")).eql("4px", selectorName);
+}
+async function checkFocusStyles(t: TestController, selector: Selector, selectorName?: string) {
+  await t
+    .expect(selector.getStyleProperty("outline-color")).eql("rgb(25, 179, 148)", selectorName)
+    .expect(selector.getStyleProperty("outline-style")).eql("dotted", selectorName)
+    .expect(selector.getStyleProperty("outline-width")).eql("1px", selectorName);
+}
+
+const foregroundLightColor = "rgb(144, 144, 144)";
+const foregroundColor = "rgb(22, 22, 22)";
+
+test("Check logic elements styles in Logic tab", async (t) => {
+  await setJSON(json3);
+
+  await t
+    .click(getTabbedMenuItemByText("Survey Logic"))
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement)
+    .click(addButton.nth(0));
+
+  await checkFocusStyles(t, addButton.nth(0), "addButton");
+  await t
+    .expect(logicQuestionSelector.getStyleProperty("color")).eql(foregroundColor)
+    .expect(logicOperatorSelector.getStyleProperty("color")).eql(foregroundColor)
+    .expect(addButton.nth(0).getStyleProperty("color")).eql(foregroundLightColor)
+    .expect(addButton.nth(1).getStyleProperty("color")).eql(foregroundLightColor)
+    .expect(logicActionSelector.getStyleProperty("color")).eql(foregroundColor)
+    .expect(logicOperatorConjuction.getStyleProperty("color")).eql(foregroundColor);
+
+  await checkLogicOperatorStyles(t, logicQuestionSelector, "rgba(67, 127, 217, 0.1)", "logicQuestionSelector");
+  await checkLogicOperatorStyles(t, logicOperatorSelector, "rgba(255, 152, 20, 0.25)", "logicOperatorSelector");
+  await checkLogicOperatorStyles(t, addButton.nth(0), "rgba(255, 152, 20, 0.25)", "addButton Condition");
+  await checkLogicOperatorStyles(t, addButton.nth(1), "rgba(230, 10, 62, 0.1)", "addButton Action");
+  await checkLogicOperatorStyles(t, logicActionSelector, "rgba(230, 10, 62, 0.1)", "logicActionSelector");
+  await checkLogicOperatorStyles(t, logicOperatorConjuction, "rgba(25, 179, 148, 0.1)", "logicOperatorConjuction");
+  await checkLogicRemoveStyles(t, removeButton.nth(0), "removeButton1");
+  await checkLogicRemoveStyles(t, removeButton.nth(1), "removeButton2");
+  await checkLogicRemoveStyles(t, removeButton.nth(2), "removeButton3");
+  await checkLogicRemoveStyles(t, removeButton.nth(3), "removeButton4");
+});
+
+test("Check logic elements styles in Popup", async (t) => {
+  const objectSelectorButton = Selector(".svc-property-panel__header #svd-grid-object-selector .sv-action-bar-item");
+  const objectSelectorPopup = Selector(".sv-popup .svc-object-selector");
+
+  await setJSON(json3);
+
+  await t
+    .click(objectSelectorButton)
+    .click(objectSelectorPopup.find("span").withText("q2"))
+    .click(getPropertyGridCategory("General"))
+    .click(getPropertyGridCategory("Logic"))
+    .click(Selector("#property-grid-setup").filterVisible().nth(0))
+    .click(addButton);
+
+  await checkFocusStyles(t, addButton, "addButton");
+  await t
+    .expect(logicQuestionSelector.getStyleProperty("color")).eql(foregroundColor)
+    .expect(logicQuestionSelector.nth(1).getStyleProperty("color")).eql(foregroundLightColor)
+    .expect(logicOperatorSelector.getStyleProperty("color")).eql(foregroundColor)
+    .expect(addButton.nth(0).getStyleProperty("color")).eql(foregroundLightColor)
+    .expect(logicOperatorConjuction.getStyleProperty("color")).eql(foregroundColor);
+
+  await checkLogicOperatorStyles(t, logicQuestionSelector, "rgba(67, 127, 217, 0.1)", "logicQuestionSelector");
+  await checkLogicOperatorStyles(t, logicQuestionSelector.nth(0), "rgba(67, 127, 217, 0.1)", "logicQuestionSelector");
+  await checkLogicOperatorStyles(t, logicOperatorSelector, "rgba(255, 152, 20, 0.25)", "logicOperatorSelector");
+  await checkLogicOperatorStyles(t, addButton.nth(0), "rgba(255, 152, 20, 0.25)", "addButton Condition");
+  await checkLogicOperatorStyles(t, logicOperatorConjuction, "rgba(25, 179, 148, 0.1)", "logicOperatorConjuction");
+  await checkLogicRemoveStyles(t, removeButton.nth(0), "removeButton1");
+  await checkLogicRemoveStyles(t, removeButton.nth(1), "removeButton2");
+});
+

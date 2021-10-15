@@ -377,7 +377,7 @@ test("Image question inplace editor - choose image via inplace editor", async (t
   await t.expect(imageLink.substring(0, 48)).eql("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABA");
 });
 
-test.only("Matrix dropdown question inplace popup editor", async (t) => {
+test("Matrix dropdown question inplace popup editor", async (t) => {
   const row1Column1Cell = getVisibleElement("tbody .svc-matrix-cell").nth(1);
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()

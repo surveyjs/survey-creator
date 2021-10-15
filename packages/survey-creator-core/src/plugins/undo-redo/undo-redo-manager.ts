@@ -4,7 +4,7 @@ import {
   JsonObjectProperty,
   Serializer
 } from "survey-core";
-import { EditableObject } from "./editable-object";
+import { EditableObject } from "../../editable-object";
 
 export interface IUndoRedoChange {
   object: any;
@@ -14,7 +14,7 @@ export interface IUndoRedoChange {
 }
 
 export class UndoRedoManager {
-  constructor() {}
+  constructor() { }
   public onPropertyValueChanged(
     name: string,
     oldValue: any,
@@ -46,12 +46,19 @@ export class UndoRedoManager {
     );
     return !!prop && prop.isSerializable;
   }
+  public tryMergeTransaction(sender: Base, propertyName: string, newValue: any): boolean {
+    if(propertyName === "name") return false; //TODO check on
+    const lastTransaction = this._getCurrentTransaction();
+    if(!lastTransaction || lastTransaction.actions.length == 0) return false;
+    const lastAction = lastTransaction.actions[lastTransaction.actions.length - 1];
+    return lastAction.tryMerge(sender, propertyName, newValue);
+  }
   private _ignoreChanges = false;
   private _preparingTransaction: Transaction = null;
   private _transactions: Transaction[] = [];
   private _currentTransactionIndex: number = -1;
 
-  public isCopyObject(sender: Base) {}
+  public isCopyObject(sender: Base) { }
   private _cutOffTail() {
     if (this._currentTransactionIndex + 1 !== this._transactions.length) {
       this._transactions.length = this._currentTransactionIndex + 1;
@@ -81,7 +88,7 @@ export class UndoRedoManager {
         this.changesFinishedCallback(transaction.actions[0].getChanges());
     }
   }
-  canUndoRedoCallback() {}
+  canUndoRedoCallback() { }
   private transactionCounter = 0;
   startTransaction(name: string) {
     this.transactionCounter++;
@@ -129,11 +136,17 @@ export class UndoRedoManager {
     this.canUndoRedoCallback();
     this.notifyChangesFinished(nextTransaction);
   }
+  suspend() {
+    this._ignoreChanges = true;
+  }
+  resume() {
+    this._ignoreChanges = false;
+  }
   public changesFinishedCallback: (changes: IUndoRedoChange) => void;
 }
 
 export class Transaction {
-  constructor(private _name: string) {}
+  constructor(private _name: string) { }
 
   private _actions: UndoRedoAction[] = [];
 
@@ -157,7 +170,7 @@ export class Transaction {
     this._actions.push(action);
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this._actions.length === 0;
   }
 
@@ -170,21 +183,22 @@ export interface IUndoRedoAction {
   apply: () => void;
   rollback: () => void;
   getChanges(): IUndoRedoChange;
+  tryMerge(sender: Base, propertyName: string, newValue: any): boolean;
 }
 
-export class UndoRedoAction {
+export class UndoRedoAction implements IUndoRedoAction {
   constructor(
     private _propertyName: string,
     private _oldValue: any,
     private _newValue: any,
     private _sender: Base
-  ) {}
+  ) { }
 
-  apply() {
+  apply(): void {
     this._sender[this._propertyName] = this._newValue;
   }
 
-  rollback() {
+  rollback(): void {
     this._sender[this._propertyName] = this._oldValue;
   }
 
@@ -196,9 +210,16 @@ export class UndoRedoAction {
       newValue: this._newValue
     };
   }
+  tryMerge(sender: Base, propertyName: string, newValue: any): boolean {
+    if(sender !== this._sender || propertyName !== this._propertyName || newValue == this._oldValue) return false;
+    const prop = Serializer.findProperty(sender.getType(), propertyName);
+    if(!prop || (prop.type !== "string" && prop.type !== "text")) return false;
+    this._newValue = newValue;
+    return true;
+  }
 }
 
-export class UndoRedoArrayAction {
+export class UndoRedoArrayAction implements IUndoRedoAction {
   private _index: number = 0;
   private _itemsToAdd: any[] = [];
   private _deletedItems: any[] = [];
@@ -212,10 +233,10 @@ export class UndoRedoArrayAction {
     this._itemsToAdd = arrayChanges.itemsToAdd;
     this._deletedItems = arrayChanges.deletedItems;
   }
-  apply() {
+  apply(): void {
     this.rollback();
   }
-  rollback() {
+  rollback(): void {
     const array = this._sender[this._propertyName];
     const index = this._index;
     const deleteCount = this._itemsToAdd.length;
@@ -234,5 +255,8 @@ export class UndoRedoArrayAction {
       oldValue: this._deletedItems,
       newValue: this._itemsToAdd
     };
+  }
+  tryMerge(sender: Base, propertyName: string, newValue: any): boolean {
+    return false;
   }
 }

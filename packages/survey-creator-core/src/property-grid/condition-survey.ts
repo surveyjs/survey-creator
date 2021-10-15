@@ -364,8 +364,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       this.showTextEditor(val);
     } else {
       this.textEditor.value = val;
-      this.showBuilder();
+      this.showBuilder(val);
     }
+  }
+  public isModified(prevText: string): boolean {
+    if(this.textEditor.visible) return prevText != this.text;
+    const items = this.getEditorItems();
+    const prevOp = !!prevText ? new ConditionsParser().parseExpression(prevText) : null;
+    if(!prevOp) return !(items.length == 1 && !items[0].questionName);
+    if(!this.isReady) return true;
+    const curOp = new ConditionsParser().parseExpression(this.text);
+    return !prevOp.isEqual(curOp);
   }
   private processText(val: string) {
     this.panel.panelCount = 0;
@@ -400,11 +409,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.object[this.propertyName] = this.text;
     return true;
   }
-  public setIsFastEntry(showTextEdit: boolean, text: string) {
+  public setIsFastEntry(showTextEdit: boolean): void {
     if (showTextEdit) {
-      this.showTextEditor(text);
+      this.showTextEditor(this.text);
     } else {
-      this.showBuilder();
+      if(!this.panel.visible) {
+        this.showBuilder(this.text);
+      }
     }
   }
   private buildPanels(items: Array<ConditionEditorItem>) {
@@ -435,16 +446,20 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private getText(): string {
     if (this.textEditor.visible) return this.textEditor.value;
     let res = "";
-    const items = [];
-    for (let i = 0; i < this.panel.panels.length; i++) {
-      items.push(this.createEditorItemFromPanel(this.panel.panels[i]));
-    }
+    const items = this.getEditorItems();
     for (let i = 0; i < items.length; i++) {
       if (!items[i].isReady) return "";
       if (!!res) {
         res += " " + items[i].conjunction + " ";
       }
       res += items[i].toExpression();
+    }
+    return res;
+  }
+  private getEditorItems(): Array<SurveyConditionEditorItem> {
+    const res = [];
+    for (let i = 0; i < this.panel.panels.length; i++) {
+      res.push(this.createEditorItemFromPanel(this.panel.panels[i]));
     }
     return res;
   }
@@ -550,7 +565,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       panel.addElement(newQuestion);
     }
   }
-  rebuildQuestionValueOnOperandChanging(panel: PanelModel) {
+  rebuildQuestionValueOnOperandChanging(panel: PanelModel): void {
     const json = this.getQuestionConditionJson(
       panel.getQuestionByName("questionName").value,
       panel.getQuestionByName("operator").value
@@ -750,13 +765,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.textEditor.value = expression;
     this.textEditor.visible = true;
   }
-  private showBuilder() {
-    if (!this.isModal && !this.canShowBuilder) return;
+  private showBuilder(expression: string) {
+    if (!this.isModal && !this.getCanShowBuilder(expression)) return;
     this.textEditor.visible = false;
-    this.processText(this.textEditor.value);
+    this.processText(expression);
     this.panel.visible = true;
   }
-  private get canShowBuilder(): boolean {
-    return ConditionEditor.canBuildExpression(this.textEditor.value);
+  private getCanShowBuilder(expression: string): boolean {
+    return ConditionEditor.canBuildExpression(expression);
   }
 }

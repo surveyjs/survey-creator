@@ -208,7 +208,7 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement) {
 }
 
 export function clearNewLines(text: string) {
-  return text.replace(new RegExp("(\r\n|\n|\r)", "gm"), "");
+  return text.replace(new RegExp("(\\r\\n|\\n|\\r)", "gm"), "");
 }
 
 export function select(element: any) {

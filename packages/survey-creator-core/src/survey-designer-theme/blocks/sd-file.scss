@@ -35,6 +35,8 @@
   display: none;
 }
 .sd-file__drag-area-placeholder {
+  word-break: break-word;
+  white-space: normal;
   color: $foreground-light;
 }
 .sd-file__choose-btn {

@@ -31,7 +31,8 @@ import {
   QuestionRatingModel,
   QuestionCustomModel,
   surveyLocalization,
-  AdaptiveActionContainer
+  AdaptiveActionContainer,
+  QuestionCommentModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -1209,7 +1210,7 @@ test("options.onMatrixDropdownColumnAddedCallback", () => {
   expect(question.columns[3].title).toEqual("q1:4");
 });
 test("options.onSetPropertyEditorOptionsCallback", () => {
-  var options = new EmptySurveyCreatorOptions();
+  const options = new EmptySurveyCreatorOptions();
   var propName = "";
   var object = null;
   options.onSetPropertyEditorOptionsCallback = (
@@ -1221,22 +1222,24 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
     propName = propertyName;
     object = obj;
     options.allowAddRemoveItems = false;
-    //TODO we do not have these functionality yet
-    //options.allowRemoveAllItems
-    //options.showTextView
-    //options.itemsEntryType
+    options.allowRemoveAllItems = false;
+    options.showTextView = false;
   };
 
-  var question = new QuestionDropdownModel("q1");
+  const question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3];
-  var propertyGrid = new PropertyGridModelTester(question, options);
-  var choicesQuestion = <QuestionMatrixDynamicModel>(
+  const propertyGrid = new PropertyGridModelTester(question, options);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
   expect(propName).toEqual("choices");
   expect(object.getType()).toEqual("dropdown");
   expect(choicesQuestion.allowAddRows).toEqual(false);
   expect(choicesQuestion.allowRemoveRows).toEqual(false);
+  const actions = choicesQuestion.getTitleActions();
+  expect(actions).toHaveLength(2);
+  expect(actions[0].enabled).toBeFalsy();
+  expect(actions[1].enabled).toBeFalsy();
 });
 
 test("options.onValueChangingCallback", () => {
@@ -2136,4 +2139,21 @@ test("AllowRowsDragDrop and property readOnly", () => {
   );
   expect(choicesQuestion.allowRowsDragAndDrop).toBeFalsy();
   Serializer.findProperty("selectbase", "choices").readOnly = false;
+});
+test("Check textUpdate mode for question", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const nameQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("name");
+  const titleQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("title");
+  const placeholderQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("placeHolder");
+  const stepQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("step");
+
+  expect(nameQuestion.getType()).toEqual("text");
+  expect(nameQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(titleQuestion.getType()).toEqual("comment");
+  expect(titleQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(placeholderQuestion.getType()).toEqual("text");
+  expect(placeholderQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  expect(stepQuestion.getType()).toEqual("text");
+  expect(stepQuestion.isSurveyInputTextUpdate).toBeFalsy();
 });

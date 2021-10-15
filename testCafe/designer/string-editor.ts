@@ -84,7 +84,7 @@ test("Check string editor visibility", async (t) => {
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).ok();
 });
 
-test.only("Check creator events on string editor", async (t) => {
+test("Check creator events on string editor", async (t) => {
   const msg = "Description length can not be greater than 10 characters";
   await ClientFunction((json, msg) => {
     window["creator"].JSON = json;

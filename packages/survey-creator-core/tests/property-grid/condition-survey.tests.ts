@@ -1291,14 +1291,18 @@ test("setIsFastEntry method, not a modal mode", () => {
   editor.isModal = false;
   expect(editor.panel.visible).toBeTruthy();
   expect(editor.textEditor.visible).toBeFalsy();
+  expect(editor.text).toEqual("{q2} = 1");
 
-  editor.setIsFastEntry(true, question.visibleIf);
+  editor.setIsFastEntry(true);
   expect(editor.panel.visible).toBeFalsy();
   expect(editor.textEditor.visible).toBeTruthy();
   expect(editor.textEditor.value).toEqual("{q2} = 1");
-  editor.textEditor.value = "{q2} = 2";
+  expect(editor.text).toEqual("{q2} = 1");
 
-  editor.setIsFastEntry(false, "");
+  editor.textEditor.value = "{q2} = 2";
+  expect(editor.text).toEqual("{q2} = 2");
+
+  editor.setIsFastEntry(false);
   expect(editor.panel.visible).toBeTruthy();
   expect(editor.textEditor.visible).toBeFalsy();
   expect(editor.text).toEqual("{q2} = 2");
@@ -1373,4 +1377,26 @@ test("questionName title visibility", () => {
   expect(panel1.getQuestionByName("questionName").titleLocation).toEqual("left");
   panel2 = editor.panel.panels[1];
   expect(panel2.getQuestionByName("questionName").titleLocation).toEqual("hidden");
+});
+test("isModified", () => {
+  const survey = new SurveyModel({
+    questions: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const conditionEditor = new ConditionEditor(survey, survey.getQuestionByName("q1"));
+  expect(conditionEditor.isModified("")).toBeFalsy();
+  conditionEditor.text = "{q} > 2";
+  expect(conditionEditor.isModified("")).toBeTruthy();
+  expect(conditionEditor.isModified("{q}   > 2")).toBeFalsy();
+  conditionEditor.panel.removePanel(0);
+  expect(conditionEditor.isModified("")).toBeFalsy();
+  expect(conditionEditor.isModified("{q} > 2")).toBeTruthy();
+  conditionEditor.text = "{q} > 2";
+  conditionEditor.setIsFastEntry(true);
+  expect(conditionEditor.isModified("{q} > 2")).toBeFalsy();
+  conditionEditor.text = "{q} >   2";
+  expect(conditionEditor.isModified("{q} > 2")).toBeFalsy();
 });
