@@ -1,9 +1,7 @@
 import { SurveyModel } from "survey-core";
 import { CreatorTester } from "../creator-tester";
-import {
-  TabTestPlugin,
-  TestSurveyTabViewModel
-} from "../../src/components/tabs/test";
+import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
+import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   var testPlugin = <TabTestPlugin>creator.getPlugin("test");
