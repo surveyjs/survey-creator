@@ -490,6 +490,7 @@ export class SurveyQuestionEditorDefinition {
         "locale",
         "mode",
         "cookieName",
+        "widthMode"
 
         { name: "showPreviewBeforeComplete", tab: "navigation" },
         { name: "pagePrevText", tab: "navigation" },
