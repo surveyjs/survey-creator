@@ -373,7 +373,7 @@ test("Animation (choices)", async (t) => {
   const animationClassesCount = await ClientFunction(() => {
     let result = 0;
     const itemValueNodes = document.querySelector("[name='question1']").querySelectorAll(".svc-item-value-wrapper");
-    itemValueNodes.forEach(itemValueNode=>{
+    itemValueNodes.forEach(itemValueNode => {
       if (itemValueNode.classList.contains("svc-item-value--movedown") ||
         itemValueNode.classList.contains("svc-item-value--moveup")) {
         result++;
@@ -425,13 +425,13 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   const PandaItem = Selector("[data-sv-drop-target-item-value=\"panda\"]");
   const CamelItem = Selector("[data-sv-drop-target-item-value=\"camel\"]");
 
-  const DragZoneLionItem = GiraffeItem.find(".svc-image-item__drag-element");
+  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item__drag-element");
 
   await t
     .click(Question1, { speed: 0.5 })
-    .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneLionItem)
+    .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
 
-    .dragToElement(DragZoneLionItem, LionItem, {
+    .dragToElement(DragZoneGiraffeItem, LionItem, {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: -40,
@@ -442,7 +442,9 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   const expectedValue = "giraffe";
   await t.expect(value).eql(expectedValue);
 
-  await t.dragToElement(DragZoneLionItem, PandaItem, {
+  await t.click(Question1, { speed: 0.5 }).hover(GiraffeItem, { speed: 0.5 });
+
+  await t.dragToElement(DragZoneGiraffeItem, PandaItem, {
     offsetX: 5,
     offsetY: 5,
     destinationOffsetY: 30,
