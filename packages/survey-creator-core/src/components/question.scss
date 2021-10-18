@@ -124,7 +124,9 @@ svc-question,
   &[data-sv-drop-target-survey-element="sv-drag-drop-ghost-survey-element-name"] {
     height: 100%;
     overflow: hidden;
-    .svc-question__content {
+    min-width: 4px;
+    .svc-question__content.svc-question__content.svc-question__content   {
+      border: 0;
       padding: 0;
     }
   }
