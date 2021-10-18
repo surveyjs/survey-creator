@@ -3,6 +3,7 @@
 .svc-image-item-value-wrapper {
   display: inline-block;
   position: relative;
+  padding-top: 10px;
 }
 
 .svc-image-item-value--new {
@@ -18,13 +19,9 @@
   display: inline-block;
 }
 
-.svc-image-item-value__item {
-  pointer-events: none;
-}
-
 .svc-image-item-value-controls {
   position: absolute;
-  top: calcSize(1.5);
+  top: calcSize(2.5);
   right: calcSize(1.5);
   display: none;
 }
@@ -96,4 +93,22 @@
   .sd-imagepicker__item.sd-imagepicker__item {
     width: 100%;
   }
+}
+
+.svc-question__content--selected .svc-image-item-value-wrapper:hover {
+  .svc-image-item__drag-element {
+    display: block;
+  }
+}
+
+.svc-image-item__drag-element {
+  cursor: move;
+  width: calcSize(3);
+  height: 6px;
+  border: 1px solid $border;
+  border-radius: 10px;
+  position: absolute;
+  top: 5px;
+  left: 38%;
+  display: none;
 }
