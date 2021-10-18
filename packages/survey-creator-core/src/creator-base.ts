@@ -86,6 +86,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
   constructor() {
     super();
     this.dotsItemPopupModel.horizontalPosition = "center";
+    this.minVisibleItemsCount = 1;
   }
 }
 
@@ -2034,7 +2035,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public removeKeyboardShortcuts(rootNode: HTMLElement) {
     rootNode.removeEventListener("keydown", this.onKeyDownHandler);
   }
-  private onKeyDownHandler = (event: KeyboardEvent) => {
+  protected onKeyDownHandler = (event: KeyboardEvent) => {
     let shortcut;
     let hotKey;
     Object.keys(this.shortcuts || {}).forEach((key) => {
@@ -2045,7 +2046,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
       if (!!hotKey.shiftKey !== !!event.shiftKey) return;
       if (hotKey.keyCode !== event.keyCode) return;
-
+      if (hotKey.keyCode < 48 && isTextInput(event.target)) return;
       shortcut.execute(this.selectElement);
     });
   }
@@ -2579,3 +2580,13 @@ export function isStringEditable(element: any, name: string): boolean {
     element.isEditableTemplateElement
   );
 }
+function isTextInput(target: any) {
+  if (!target.tagName) return false;
+  const tagName = target.tagName.toLowerCase();
+  if (["input", "textarea"].indexOf(tagName) !== -1) return true;
+  if (tagName === "span") {
+    return target.isContentEditable;
+  }
+  return false;
+}
+

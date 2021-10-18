@@ -1688,3 +1688,30 @@ test("change locale in several pages survey", (): any => {
   expect(data["q2"]).toBeTruthy();
 
 });
+
+test("process shortcut for text inputs", (): any => {
+  var creator = new CreatorTester({ showDesignerTab: false });
+  let log = "";
+  creator.registerShortcut("delete_test", {
+    hotKey: {
+      keyCode: 46,
+    },
+    macOsHotkey: {
+      keyCode: 46,
+    },
+    execute: () => log += "->execute"
+  });
+  expect(log).toEqual("");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: {} });
+  expect(log).toEqual("->execute");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: { tagName: "input" } });
+  expect(log).toEqual("->execute");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: { tagName: "textarea" } });
+  expect(log).toEqual("->execute");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: { tagName: "span" } });
+  expect(log).toEqual("->execute->execute");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: { tagName: "div" } });
+  expect(log).toEqual("->execute->execute->execute");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: { tagName: "span", isContentEditable: true } });
+  expect(log).toEqual("->execute->execute->execute");
+});

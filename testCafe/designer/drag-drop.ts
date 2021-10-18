@@ -385,6 +385,74 @@ test("Animation (choices)", async (t) => {
   await t.expect(animationClassesCount).eql(0, "there is no any animation classes after DnD");
 });
 
+test("Drag Drop ImagePicker (choices)", async (t) => {
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            "type": "imagepicker",
+            "name": "question1",
+            "choices": [
+              {
+                "value": "lion",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+              },
+              {
+                "value": "giraffe",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+              },
+              {
+                "value": "panda",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+              },
+              {
+                "value": "camel",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Question1 = Selector("[name=\"question1\"]");
+  const LionItem = Selector("[data-sv-drop-target-item-value=\"lion\"]");
+  const GiraffeItem = Selector("[data-sv-drop-target-item-value=\"giraffe\"]");
+  const PandaItem = Selector("[data-sv-drop-target-item-value=\"panda\"]");
+  const CamelItem = Selector("[data-sv-drop-target-item-value=\"camel\"]");
+
+  //TODO change after the https://github.com/surveyjs/survey-creator/issues/1936
+  const DragZoneLionItem = GiraffeItem; /*GiraffeItem.find(".svc-item-value-controls__drag");*/
+
+  await t
+    .click(Question1, { speed: 0.5 })
+    .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneLionItem)
+
+    .dragToElement(DragZoneLionItem, LionItem, {
+      offsetX: 5,
+      offsetY: 5,
+      destinationOffsetY: -40,
+      speed: 0.1
+    });
+
+  let value = await getItemValueByIndex("question1", 0);
+  const expectedValue = "giraffe";
+  await t.expect(value).eql(expectedValue);
+
+  await t.dragToElement(DragZoneLionItem, PandaItem, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: 30,
+    speed: 0.1
+  });
+  value = await getItemValueByIndex("question1", 2);
+  await t.expect(value).eql(expectedValue);
+});
+
 test("Drag Drop MatrixRows (property grid)", async (t) => {
   const json = {
     pages: [
