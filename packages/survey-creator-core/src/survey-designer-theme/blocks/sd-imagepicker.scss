@@ -56,7 +56,7 @@
   width: calc(50% - calc(1 * #{$base-unit}));
 }
 .sd-imagepicker__item.sv-q-col-3 {
-  width: calc(33% - calc(2/3 * #{$base-unit}));
+  width: calc(33% - calc(4/3 * #{$base-unit}));
 }
 .sd-imagepicker__item.sv-q-col-4 {
   width: calc(25% - calc(6/4 * #{$base-unit}));
