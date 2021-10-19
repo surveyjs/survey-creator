@@ -23,7 +23,7 @@ export class TabEmbedComponent extends SurveyElementBase<
   }
   renderElement(): JSX.Element {
     return (
-      <div className="svc-creator-tab__content">
+      <div className="svc-creator-tab__content svc-embed-tab__content">
         {this.model.survey ? <Survey model={this.model.survey}></Survey> : null}
       </div>
     );
