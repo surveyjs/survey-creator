@@ -30,6 +30,7 @@ export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";
 export * from "../components/property-panel/object-selector";
 export * from "../components/property-panel/property-panel";
+export * from "../components/property-panel/property-grid";
 export * from "../components/results";
 export * from "../components/simulator";
 export * from "../components/survey-renderers/dropdown";
