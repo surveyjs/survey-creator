@@ -87,7 +87,7 @@ test("Language switcher", async (t) => {
     .expect(getBarItemByText("deutsch").visible).ok();
 });
 
-test.skip("Page switcher", async (t) => { // TODO fix
+test("Page switcher", async (t) => {
   await setJSON(json2);
 
   await t
