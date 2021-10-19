@@ -1326,10 +1326,10 @@ test("LogicItemEditorUI: getUsedActionTypes", () => {
   expect(types).toHaveLength(3);
   expect(types[0].name).toEqual("trigger_copyvalue");
   expect(types[0].displayName).toEqual("Copy question value");
-  expect(types[1].name).toEqual("trigger_skip");
-  expect(types[1].displayName).toEqual("Skip to question");
-  expect(types[2].name).toEqual("question_visibility");
-  expect(types[2].displayName).toEqual("Show (hide) question");
+  expect(types[1].name).toEqual("question_visibility");
+  expect(types[1].displayName).toEqual("Show (hide) question");
+  expect(types[2].name).toEqual("trigger_skip");
+  expect(types[2].displayName).toEqual("Skip to question");
 });
 
 test("LogicItem isSuitable", () => {
