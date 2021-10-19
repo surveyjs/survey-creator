@@ -799,20 +799,13 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private updateStringsSurveyColumns() {
     if (!this.stringsSurvey) return;
-    this.stringsSurvey.startLoadingFromJson();
     var questions = this.stringsSurvey.getAllQuestions();
     for (var i = 0; i < questions.length; i++) {
       var matrix = <QuestionMatrixDropdownModel>questions[i];
+      matrix.beginUpdate();
       matrix.columns = [];
       this.addLocaleColumns(matrix);
-    }
-    this.stringsSurvey.endLoadingFromJson();
-    //TODO replace with beginUpdate/endUpdate. this code trigger updates rendered table
-    for (var i = 0; i < questions.length; i++) {
-      var matrix = <QuestionMatrixDropdownModel>questions[i];
-      if(matrix.columns.length > 0) {
-        matrix.onColumnCellTypeChanged(matrix.columns[0]);
-      }
+      matrix.endUpdate();
     }
   }
   private addLocaleIntoChoices(
