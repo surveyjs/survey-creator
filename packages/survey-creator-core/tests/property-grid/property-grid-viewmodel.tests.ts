@@ -98,10 +98,10 @@ test("Element Selector Bar Item", () => {
   expect(popupModel.isVisible).toBeTruthy();
   expect(selectorModel.isVisible).toBeTruthy();
   expect(selectorModel.list).toBeTruthy();
-  expect(selectorModel.list.items).toHaveLength(4);
-  expect(selectorModel.list.items[2].title).toEqual("q1");
+  expect(selectorModel.list.actions).toHaveLength(4);
+  expect(selectorModel.list.actions[2].title).toEqual("q1");
   expect(creator.selectedElementName).toEqual("survey");
-  selectorModel.list.selectItem(selectorModel.list.items[2]);
+  selectorModel.list.selectItem(selectorModel.list.actions[2]);
   expect(creator.selectedElementName).toEqual("q1");
   expect(popupModel.isVisible).toBeFalsy();
 });
@@ -130,10 +130,10 @@ test("Element Selector Bar Item", () => {
   expect(popupModel.isVisible).toBeTruthy();
   expect(selectorModel.isVisible).toBeTruthy();
   expect(selectorModel.list).toBeTruthy();
-  expect(selectorModel.list.items).toHaveLength(4);
-  expect(selectorModel.list.items[2].title).toEqual("q1");
+  expect(selectorModel.list.actions).toHaveLength(4);
+  expect(selectorModel.list.actions[2].title).toEqual("q1");
   expect(creator.selectedElementName).toEqual("survey");
-  selectorModel.list.selectItem(selectorModel.list.items[2]);
+  selectorModel.list.selectItem(selectorModel.list.actions[2]);
   expect(creator.selectedElementName).toEqual("q1");
   expect(popupModel.isVisible).toBeFalsy();
 });

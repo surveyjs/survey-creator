@@ -80,7 +80,7 @@ test("SelectObject", async (t: TestController) => {
 
     .click(objectSelectorButton)
     .expect(objectSelectorPopup.visible).ok()
-    .expect(objectSelectorPopup.find("input").focused).ok()
+    .expect(objectSelectorPopup.find(".sv-list__item").nth(0).focused).ok()
     .expect(Selector(".svc-page__content").classNames).notContains("svc-page__content--selected")
 
     .click(objectSelectorPopup.find("span").withText("page1"))
