@@ -38,7 +38,7 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
 });
 
 test("Drag Drop Question", async (t) => {
-  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  await t.resizeWindow(2560, 1440);
   const json = {
     pages: [
       {
@@ -89,7 +89,7 @@ test("Drag Drop Question", async (t) => {
   await t.expect(name).eql(questionName);
 });
 test("Drag Drop to Panel", async (t) => {
-  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  await t.resizeWindow(2560, 1440);
   const json = {
     pages: [
       {
@@ -373,16 +373,85 @@ test("Animation (choices)", async (t) => {
   const animationClassesCount = await ClientFunction(() => {
     let result = 0;
     const itemValueNodes = document.querySelector("[name='question1']").querySelectorAll(".svc-item-value-wrapper");
-    itemValueNodes.forEach(itemValueNode=>{
-      if (itemValueNode.classList.contains("svc-item-value--movedown") || 
+    itemValueNodes.forEach(itemValueNode => {
+      if (itemValueNode.classList.contains("svc-item-value--movedown") ||
         itemValueNode.classList.contains("svc-item-value--moveup")) {
-          result++;
+        result++;
       }
     });
     return result;
   })();
 
   await t.expect(animationClassesCount).eql(0, "there is no any animation classes after DnD");
+});
+
+test("Drag Drop ImagePicker (choices)", async (t) => {
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            "type": "imagepicker",
+            "name": "question1",
+            "choices": [
+              {
+                "value": "lion",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+              },
+              {
+                "value": "giraffe",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+              },
+              {
+                "value": "panda",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+              },
+              {
+                "value": "camel",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Question1 = Selector("[name=\"question1\"]");
+  const LionItem = Selector("[data-sv-drop-target-item-value=\"lion\"]");
+  const GiraffeItem = Selector("[data-sv-drop-target-item-value=\"giraffe\"]");
+  const PandaItem = Selector("[data-sv-drop-target-item-value=\"panda\"]");
+  const CamelItem = Selector("[data-sv-drop-target-item-value=\"camel\"]");
+
+  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item__drag-element");
+
+  await t
+    .click(Question1, { speed: 0.5 })
+    .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
+
+    .dragToElement(DragZoneGiraffeItem, LionItem, {
+      offsetX: 5,
+      offsetY: 5,
+      destinationOffsetY: -40,
+      speed: 0.1
+    });
+
+  let value = await getItemValueByIndex("question1", 0);
+  const expectedValue = "giraffe";
+  await t.expect(value).eql(expectedValue);
+
+  await t.click(Question1, { speed: 0.5 }).hover(GiraffeItem, { speed: 0.5 });
+
+  await t.dragToElement(DragZoneGiraffeItem, PandaItem, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: 30,
+    speed: 0.1
+  });
+  value = await getItemValueByIndex("question1", 2);
+  await t.expect(value).eql(expectedValue);
 });
 
 test("Drag Drop MatrixRows (property grid)", async (t) => {
@@ -405,7 +474,6 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   const Question1 = Selector("[name=\"question1\"]");
   await t.click(Question1, { speed: 0.5 });
 
-  // TODO uncomment after the fix https://github.com/surveyjs/survey-creator/issues/1618
   const ChoicesTab = Selector("h4").withExactText("Choices");
   await t.click(ChoicesTab);
 
@@ -497,7 +565,7 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
 });
 
 test("Drag Drop to Panel Dynamic Question", async (t) => {
-  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  await t.resizeWindow(2560, 1440);
   const json = {
     pages: [
       {
@@ -583,7 +651,7 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
 });
 
 test("Drag Drop from Panel Dynamic Question", async (t) => {
-  await t.resizeWindow(2560, 1440); //TODO why do we need it?
+  await t.resizeWindow(2560, 1440);
   const json = {
     pages: [
       {

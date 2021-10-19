@@ -76,7 +76,7 @@ export class TabDesignerComponent extends SurveyElementBase<
           })}
         </div>
         <div className={"svc-tab-designer " + survey.css.root}>
-          <div className={survey.css.container}>
+          <div className={this.model.getDesignerCss()}>
             {!this.creator.allowEditSurveyTitle ? null :
               <div
                 onClick={() => this.creator.selectElement(survey)}

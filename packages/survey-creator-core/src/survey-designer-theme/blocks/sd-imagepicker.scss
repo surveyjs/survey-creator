@@ -1,4 +1,7 @@
 .sd-imagepicker {
   padding: 0;
   border: none;
+  .sd-imagepicker__image {
+    display: block;
+  }
 }

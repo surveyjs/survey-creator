@@ -70,3 +70,14 @@ test("StringEditorViewModelBase maxLength", () => {
     Serializer.findProperty("survey", "title").maxLength = -1;
   }
 });
+
+test("Designer widthMode css test", () => {
+  const creator = new CreatorTester();
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  creator.survey.widthMode = "static";
+  expect(designerPlugin.model.getDesignerCss()).toEqual("sd-container-modern sd-container-modern--static");
+  creator.survey.widthMode = "responsive";
+  expect(designerPlugin.model.getDesignerCss()).toEqual("sd-container-modern sd-container-modern--responsive");
+});
