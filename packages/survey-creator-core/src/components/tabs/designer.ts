@@ -59,7 +59,13 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     this.survey.onPanelAdded.add(this.checkNewPageHandler);
     this.survey.onPanelRemoved.add(this.checkNewPageHandler);
     this.checkNewPage();
+    this.widthUpdater && this.widthUpdater.dispose();
+    this.widthUpdater = new ComputedUpdater(() => {
+      return this.survey.calculateWidthMode();
+    });
+    this.withModifier = <any>this.widthUpdater;
   }
+  private widthUpdater: ComputedUpdater;
   public dispose() {
     super.dispose();
     this.survey.onPropertyChanged.remove(this.surveyOnPropertyChanged);
@@ -88,6 +94,10 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     if (!this.survey || this.creator.pageEditMode === "single") return false;
     const pages: PageModel[] = this.survey.pages;
     return pages.length === 0 || pages[pages.length - 1].elements.length > 0;
+  }
+  @property() withModifier: string;
+  public getDesignerCss(): string {
+    return this.survey.css.container + " " + this.survey.css.container + "--" + this.withModifier;
   }
 }
 
