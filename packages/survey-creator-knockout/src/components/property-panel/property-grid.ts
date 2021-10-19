@@ -2,24 +2,32 @@ import { PropertyGridViewModelBase, PropertyGridViewModel, CreatorBase, ResizeMa
 import * as ko from "knockout";
 import { ImplementorBase, QuestionButtonGroup } from "survey-knockout-ui";
 import { QuestionFactory, Serializer } from "survey-core";
-//import "./property-panel.scss";
+//import "./property-grid.scss";
 //import "../../survey-theme/survey.scss";
-const template = require("./property-panel.html");
+const template = require("./property-grid.html");
 
-ko.components.register("svc-property-panel", {
+ko.components.register("svc-property-grid", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const resizeManager: ResizeManager = new ResizeManager(componentInfo.element.children[0]);
       const subscrib = ko.computed(() => {
         const model: PropertyGridViewModelBase = ko.unwrap(params.model);
         new ImplementorBase(model);
       });
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         subscrib.dispose();
-        resizeManager.dispose();
       });
       return params;
     }
   },
   template: template
+});
+
+Serializer.overrideClassCreator("buttongroup", function () {
+  return new QuestionButtonGroup("");
+});
+
+QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
+  var q = new QuestionButtonGroup(name);
+  q.choices = QuestionFactory.DefaultChoices;
+  return q;
 });
