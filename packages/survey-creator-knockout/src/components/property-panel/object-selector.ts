@@ -8,12 +8,12 @@ ko.components.register("svc-object-selector", {
     createViewModel: (params: any, componentInfo: any) => {
       var model: ObjectSelectorModel = params.model;
       new ImplementorBase(model);
-      model.onCreateItemCallback = (item: ObjectSelectorItem) => {
-        new ImplementorBase(item);
-      };
-      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        model.onCreateItemCallback = null;
-      });
+      // model.onCreateItemCallback = (item: ObjectSelectorItem) => {
+      //   new ImplementorBase(item);
+      // };
+      // ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+      //   model.onCreateItemCallback = null;
+      // });
 
       return { model: model };
     }

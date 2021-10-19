@@ -21,20 +21,20 @@ class ObjectSelectorComponent extends SurveyElementBase<
   }
   renderElement(): JSX.Element {
     if (!this.model.isVisible) return null;
-    const onChange = (e: any) => {
-      if (e.target === document.activeElement) {
-        this.model.filteredText = e.target.value;
-      }
-    };
+    // const onChange = (e: any) => {
+    //   if (e.target === document.activeElement) {
+    //     this.model.filteredText = e.target.value;
+    //   }
+    // };
 
     return (
       <div className="svc-object-selector">
-        <input
+        {/* <input
           type="text"
           className="spg-input"
           placeholder={this.model.filteredTextPlaceholder}
           onChange={onChange}
-        ></input>
+        ></input> */}
         <List model={this.model.list}></List>
       </div>
     );

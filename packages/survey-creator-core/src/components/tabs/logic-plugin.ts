@@ -62,9 +62,10 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public createActions() {
     const items: Array<Action> = [];
     const onQuestionPopupShow = () => {
-      questionPopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllQuestionsText }].concat(
+      const items = [{ id: null, title: this.showAllQuestionsText }].concat(
         this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) }; })
       );
+      questionPopupModel.contentComponentData.model.setItems(items);
     };
     const questionPopupModel = new PopupModel<{ model: ListModel }>(
       "sv-list",
@@ -94,9 +95,10 @@ export class TabLogicPlugin implements ICreatorPlugin {
     items.push(this.filterQuestionAction);
 
     const onActionTypesPopupShow = () => {
-      actionTypesPopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllActionTypesText }].concat(
+      const items = [{ id: null, title: this.showAllActionTypesText }].concat(
         this.model.getUsedActionTypes().map(type => { return { id: type.name, title: type.displayName }; })
       );
+      actionTypesPopupModel.contentComponentData.model.setItems(items);
     };
     const actionTypesPopupModel = new PopupModel<{ model: ListModel }>(
       "sv-list",
