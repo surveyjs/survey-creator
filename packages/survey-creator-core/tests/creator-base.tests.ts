@@ -912,7 +912,7 @@ test("Question type selector", (): any => {
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
   const listModel: ListModel =
     selectorModel.popupModel.contentComponentData.model;
-  const ratingItem = listModel.items.filter((item) => item.id == "rating")[0];
+  const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
   listModel.selectItem(ratingItem);
   expect(creator.addNewQuestionText).toEqual("Add Rating");
   expect(survey.getAllQuestions().length).toEqual(1);
@@ -934,7 +934,7 @@ test("Question type selector localization", (): any => {
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
   const listModel: ListModel =
     selectorModel.popupModel.contentComponentData.model;
-  const ratingItem = listModel.items.filter((item) => item.id == "rating")[0];
+  const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
   listModel.selectItem(ratingItem);
   expect(creator.addNewQuestionText).toEqual("Add New Rating");
   locStrings.ed.addNewQuestion = oldAddNewQuestion;
