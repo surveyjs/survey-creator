@@ -108,7 +108,8 @@
   border: 1px solid $border;
   border-radius: 10px;
   position: absolute;
-  top: 5px;
-  left: 38%;
+  top: 1px;
+  left: 50%;
+  transform: translateX(-50%);
   display: none;
 }
