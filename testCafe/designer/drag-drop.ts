@@ -1,4 +1,4 @@
-import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, } from "../helper";
+import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
@@ -280,90 +280,90 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", async (t)
   //EO 2 to 4
 });
 
-// test("Drag Drop Question with Multiline and OtherPage (StartWithNewLine === false)", async (t) => {
-//   const json = {
-//     "pages": [
-//       {
-//         "name": "page1",
-//         "elements": [
-//           {
-//             "type": "text",
-//             "name": "question4"
-//           },
-//           {
-//             "type": "boolean",
-//             "name": "question1"
-//           },
-//           {
-//             "type": "radiogroup",
-//             "name": "question2",
-//             "startWithNewLine": false,
-//             "choices": [
-//               "item1",
-//               "item2",
-//               "item3"
-//             ]
-//           },
-//           {
-//             "type": "rating",
-//             "name": "question3",
-//             "startWithNewLine": false
-//           }
-//         ]
-//       },
-//       {
-//         "name": "page2",
-//         "elements": [
-//           {
-//             "type": "text",
-//             "name": "question5"
-//           },
-//         ]
-//       }
-//     ]
-//   };
+test("Drag Drop Question with Multiline and OtherPage (StartWithNewLine === false)", async (t) => {
+  await t.resizeWindow(2560, 1440);
 
-//   await setJSON(json);
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question4"
+          },
+          {
+            "type": "boolean",
+            "name": "question1"
+          },
+          {
+            "type": "radiogroup",
+            "name": "question2",
+            "startWithNewLine": false,
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          },
+          {
+            "type": "rating",
+            "name": "question3",
+            "startWithNewLine": false
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question5"
+          },
+        ]
+      }
+    ]
+  };
 
-//   const Question1 = Selector(
-//     "[data-sv-drop-target-survey-element=\"question1\"]"
-//   );
-//   const Question2 = Selector(
-//     "[data-sv-drop-target-survey-element=\"question2\"]"
-//   );
-//   const Question5 = Selector(
-//     "[data-sv-drop-target-survey-element=\"question5\"]"
-//   );
-//   const DragZoneQuestion1 = Question1.find(".svc-question__drag-element");
+  await setJSON(json);
 
-//   await t.debug();
+  const Question1 = Selector(
+    "[data-sv-drop-target-survey-element=\"question1\"]"
+  );
+  const Question2 = Selector(
+    "[data-sv-drop-target-survey-element=\"question2\"]"
+  );
+  const Question5 = Selector(
+    "[data-sv-drop-target-survey-element=\"question5\"]"
+  );
+  const DragZoneQuestion1 = Question1.find(".svc-question__drag-element");
 
-//   await t.hover(Question5, { speed: 0.1 });
-//   await t.hover(Question1, { speed: 0.1 });
-//   await t.hover(DragZoneQuestion1);
+  await t.hover(Question5, { speed: 0.5 });
+  await t.hover(Question1, { speed: 0.5 });
+  await t.hover(DragZoneQuestion1);
 
-//   await t.dragToElement(DragZoneQuestion1, Question5, {
-//     offsetX: 5,
-//     offsetY: 5,
-//     destinationOffsetY: 80,
-//     speed: 0.1
-//   });
+  await t.dragToElement(DragZoneQuestion1, Question5, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: 80,
+    speed: 0.1
+  });
 
-//   await t.hover(Question1, { speed: 0.1 });
-//   await t.hover(DragZoneQuestion1);
-//   await t.dragToElement(DragZoneQuestion1, Question2, {
-//     offsetX: 5,
-//     offsetY: 5,
-//     destinationOffsetX: 80,
-//     speed: 0.1
-//   });
+  await t.hover(Question1, { speed: 0.5 });
+  await t.hover(DragZoneQuestion1);
+  await t.dragToElement(DragZoneQuestion1, Question2, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetX: 80,
+    speed: 0.1
+  });
 
-//   const check = ClientFunction(() => {
-//     return window["creator"].survey.getAllQuestions()[1].startWithNewLine;
-//   });
-//   const result = await check();
-//   await t.expect(result).eql(true);
-// });
+  const check = ClientFunction(() => {
+    return window["creator"].survey.getAllQuestions()[1].startWithNewLine;
+  });
+  const result = await check();
+  await t.expect(result).eql(true);
+});
 
 test("Drag Drop ItemValue (choices)", async (t) => {
   const json = {
