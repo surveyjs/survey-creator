@@ -43,7 +43,7 @@ import { TabTestPlugin } from "./components/tabs/test";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
-import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
+import { surveyDesignerCss } from "survey-core";
 import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";

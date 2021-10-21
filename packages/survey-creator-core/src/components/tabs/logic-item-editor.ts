@@ -23,7 +23,7 @@ import {
   getLogicString
 } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
-import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
+import { surveyDesignerCss } from "survey-core";
 import { SurveyHelper } from "../../survey-helper";
 
 function logicTypeVisibleIf(params: any): boolean {

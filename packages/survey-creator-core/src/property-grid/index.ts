@@ -31,7 +31,7 @@ import {
 } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
-import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
+import { surveyDesignerCss } from "survey-core";
 import { updateMatrixRemoveAction } from "../utils/actions";
 import { SurveyHelper } from "../survey-helper";
 

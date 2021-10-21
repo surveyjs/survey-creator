@@ -3,7 +3,7 @@ import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
-import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
+import { surveyDesignerCss } from "survey-core";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";

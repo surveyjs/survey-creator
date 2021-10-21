@@ -7,7 +7,7 @@ import {
   property,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
+import { surveyDesignerCss } from "survey-core";
 import { toggleHovered } from "../utils/utils";
 
 import "./matrix-cell.scss";
