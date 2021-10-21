@@ -1,11 +1,10 @@
 import * as ko from "knockout";
 import { SurveyCreator } from "../../creator";
-import { ToolboxItemViewModel } from "@survey/creator";
 import { editorLocalization } from "@survey/creator";
 import { IQuestionToolboxItem } from "@survey/creator";
 const template = require("./toolbox-item.html");
 
-export class KnockoutToolboxItemViewModel extends ToolboxItemViewModel {
+export class KnockoutToolboxItemViewModel {
   public title: ko.Observable<string> = ko.observable("");
   public iconName: ko.Observable<string> = ko.observable("");
 
@@ -14,7 +13,6 @@ export class KnockoutToolboxItemViewModel extends ToolboxItemViewModel {
     protected creator: SurveyCreator,
     public isCompact = true
   ) {
-    super(item, creator);
     var icon = item.iconName;
     if (item.iconName.indexOf("icon-") === -1) {
       icon = "icon-" + icon;
