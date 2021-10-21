@@ -1271,12 +1271,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.doOnElementRemoved(options.question);
     });
     */
+    survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     this.setSurvey(survey);
     const currentPlugin = this.getPlugin(this.activeTab);
     if (!!currentPlugin && !!currentPlugin.update) {
       currentPlugin.update();
     }
-    survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
   }
 
   protected initDragDrop() {
