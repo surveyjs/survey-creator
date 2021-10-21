@@ -69,7 +69,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
   }
   private setItems(items: Array<IAction>) {
     this.items = items;
-    this.pageListModel.items = items;
+    this.pageListModel.setItems(items);
     this.visible = items.length > 1;
   }
   private buildItems() {

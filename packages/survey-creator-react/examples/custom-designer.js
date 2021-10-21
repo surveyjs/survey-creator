@@ -88,7 +88,7 @@ class CustomDesignerTab extends SurveyCreator.TabDesignerComponent {
             <SurveyCreator.SurveyNavigation survey={survey} location="bottom" css={survey.css} />
           </div>
         </div>
-        {SurveyReact.ReactElementFactory.Instance.createElement('svc-property-grid', { model: this.creator })}
+        {SurveyReact.ReactElementFactory.Instance.createElement('svc-property-panel', { model: this.creator })}
       </React.Fragment>
     );
   }

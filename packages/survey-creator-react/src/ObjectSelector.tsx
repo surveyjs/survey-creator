@@ -6,10 +6,7 @@ import { ReactElementFactory, SurveyElementBase, List } from "survey-react-ui";
 interface IObjectSelectorComponentProps {
   model: ObjectSelectorModel;
 }
-class ObjectSelectorComponent extends SurveyElementBase<
-  IObjectSelectorComponentProps,
-  any
-> {
+class ObjectSelectorComponent extends SurveyElementBase<IObjectSelectorComponentProps, any> {
   constructor(props: IObjectSelectorComponentProps) {
     super(props);
   }
@@ -21,20 +18,9 @@ class ObjectSelectorComponent extends SurveyElementBase<
   }
   renderElement(): JSX.Element {
     if (!this.model.isVisible) return null;
-    const onChange = (e: any) => {
-      if (e.target === document.activeElement) {
-        this.model.filteredText = e.target.value;
-      }
-    };
 
     return (
       <div className="svc-object-selector">
-        <input
-          type="text"
-          className="spg-input"
-          placeholder={this.model.filteredTextPlaceholder}
-          onChange={onChange}
-        ></input>
         <List model={this.model.list}></List>
       </div>
     );

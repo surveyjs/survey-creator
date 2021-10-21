@@ -1,6 +1,6 @@
 <svc-toolbox params="creator: creator"></svc-toolbox>
 <div class="svc-tab-designer" data-bind="css: survey.css.root">
-  <div data-bind="css: survey.css.container">
+  <div data-bind="css: getDesignerCss()">
     <!-- ko if: creator.allowEditSurveyTitle -->
     <div data-bind="click: function() { creator.selectElement(survey); }">
       <!-- ko template: { name: 'survey-header', data: survey } -->

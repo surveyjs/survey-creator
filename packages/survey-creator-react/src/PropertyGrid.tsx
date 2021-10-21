@@ -7,7 +7,7 @@ interface IPropertyGridComponentProps {
   model: PropertyGridViewModelBase;
 }
 
-export class PropertyGridComponent extends SurveyElementBase<IPropertyGridComponentProps, any> {
+export class PropertyPanelComponent extends SurveyElementBase<IPropertyGridComponentProps, any> {
   private resizeManager: ResizeManager;
   private containerRef: React.RefObject<HTMLDivElement>;
 
@@ -50,10 +50,27 @@ export class PropertyGridComponent extends SurveyElementBase<IPropertyGridCompon
             </div>
           </div>
           <div className="svc-property-panel__expander">
-            <Survey model={this.model.survey}></Survey>
+            {ReactElementFactory.Instance.createElement("svc-property-grid", { model: this.model })}
           </div>
         </div>
       </div>
+    );
+  }
+}
+
+export class PropertyGridComponent extends SurveyElementBase<IPropertyGridComponentProps, any> {
+
+  get model(): PropertyGridViewModelBase {
+    return this.props.model;
+  }
+
+  protected getStateElement(): Base {
+    return this.model;
+  }
+
+  renderElement() {
+    return (
+      <Survey model={this.model.survey}></Survey>
     );
   }
 }
@@ -62,8 +79,12 @@ ReactQuestionFactory.Instance.registerQuestion("buttongroup", (props) => {
   return React.createElement(SurveyQuestionButtonGroup, props);
 });
 
-export default PropertyGridComponent;
+export default PropertyPanelComponent;
 
 ReactElementFactory.Instance.registerElement("svc-property-grid", (props) => {
   return React.createElement(PropertyGridComponent, props);
+});
+
+ReactElementFactory.Instance.registerElement("svc-property-panel", (props) => {
+  return React.createElement(PropertyPanelComponent, props);
 });

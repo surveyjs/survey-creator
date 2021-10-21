@@ -1,27 +1,17 @@
-import {
-  Base,
-  SurveyModel,
-  property,
-  ListModel,
-  propertyArray,
-  IAction
-} from "survey-core";
-import { editorLocalization } from "../editorLocalization";
+import { Base, SurveyModel, property, ListModel, IAction, Action } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 
-export class ObjectSelectorItem extends Base implements IAction {
+export class ObjectSelectorItem extends Action {
   private textInLow: string;
-  public id: string;
+
   constructor(
     id: number,
     public data: Base,
     public title: string,
     public level: number
   ) {
-    super();
-    this.id = "sv_item_selector_" + id.toString();
+    super({ id: "sv_item_selector_" + id.toString(), title: title});
   }
-  @property({ defaultValue: true }) visible: boolean;
   public hasText(filteredTextInLow: string): boolean {
     if (!filteredTextInLow) return true;
     if (!this.textInLow) {
@@ -61,9 +51,7 @@ export class ObjectSelector {
     return null;
   }
   public filterByText(filteredText: string) {
-    this.filteredTextInLow = !!filteredText
-      ? filteredText.toLocaleLowerCase()
-      : "";
+    this.filteredTextInLow = !!filteredText ? filteredText.toLocaleLowerCase() : "";
     this.updateItemsVisibility();
   }
   private rebuild() {
@@ -88,8 +76,7 @@ export class ObjectSelector {
     for (var i = 0; i < this.items.length; i++) {
       var item = this.items[i];
       if (item.level !== level) continue;
-      item.visible =
-        this.hasVisibleChildren(i) || item.hasText(this.filteredTextInLow);
+      item.visible = this.hasVisibleChildren(i) || item.hasText(this.filteredTextInLow);
     }
   }
   private hasVisibleChildren(index: number): boolean {
@@ -138,16 +125,10 @@ export class ObjectSelector {
 export class ObjectSelectorModel extends Base {
   private selector: ObjectSelector;
   private listModelValue: ListModel;
-  @property() filteredText: string;
+
   @property() isVisible: boolean;
-  public onCreateItemCallback: (item: ObjectSelectorItem) => void;
-  constructor(
-    private getObjectDisplayName: (
-      obj: Base,
-      reason: string,
-      displayName: string
-    ) => string = undefined
-  ) {
+
+  constructor(private getObjectDisplayName: (obj: Base, reason: string, displayName: string) => string = undefined) {
     super();
   }
   public get list(): ListModel {
@@ -158,41 +139,21 @@ export class ObjectSelectorModel extends Base {
     selectedObj: Base,
     onClose: (obj: Base) => void
   ) {
-    this.filteredText = "";
     this.selector = new ObjectSelector(survey, this.getObjectDisplayName);
-    this.onItemsCreated();
     const selectedItem = this.selector.getItemByObj(selectedObj);
     if (!this.listModelValue) {
       this.listModelValue = new ListModel(
         this.selector.items,
-        (item: IAction) => {
-          onClose(item.data);
-        },
-        true,
-        selectedItem
-      );
+        (item: IAction) => { onClose(item.data); },
+        true, selectedItem,
+        (text: string) => { this.selector.filterByText(text); });
     } else {
-      this.listModelValue.items = this.selector.items;
+      this.listModelValue.setItems(this.selector.items);
       this.listModelValue.selectedItem = selectedItem;
     }
     this.isVisible = true;
   }
-  public get filteredTextPlaceholder(): string {
-    return editorLocalization.getString(
-      "ed.propertyGridFilteredTextPlaceholder"
-    );
-  }
-  private onItemsCreated() {
-    if (!this.onCreateItemCallback) return;
-    var items = this.selector.items;
-    for (var i = 0; i < items.length; i++) {
-      this.onCreateItemCallback(items[i]);
-    }
-  }
-  protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
-    super.onPropertyValueChanged(name, oldValue, newValue);
-    if (name === "filteredText" && !!this.selector) {
-      this.selector.filterByText(this.filteredText);
-    }
+  public refresh() {
+    this.listModelValue.refresh();
   }
 }

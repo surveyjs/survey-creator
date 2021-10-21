@@ -1,4 +1,4 @@
-import { Question, SurveyModel, Base } from "survey-core";
+import { Question, SurveyModel, Base, ListModel } from "survey-core";
 import {
   ObjectSelector,
   ObjectSelectorItem,
@@ -164,21 +164,26 @@ test("Filter items, set visible property", () => {
   checkVisiblity("", [true, true, true, true, true, true, true, true]);
 });
 test("Check ObjectSelectorModel", () => {
+  const oldValueMINELEMENTCOUNT = ListModel.MINELEMENTCOUNT;
+  ListModel.MINELEMENTCOUNT = 5;
   var survey = createSurvey2();
   var model = new ObjectSelectorModel();
   var selectedItem: any;
+
   model.show(survey, survey.pages[0], (obj: Base) => {
     selectedItem = obj;
   });
-  expect(model.list.items).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
+  expect(model.list.actions).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
   expect(model.list.selectedItem.title).toEqual("page1");
-  expect(model.list.items[3].visible).toBeTruthy();
-  model.filteredText = "date";
-  expect(model.list.items[3].visible).toBeFalsy();
-  model.filteredText = "";
-  expect(model.list.items[3].visible).toBeTruthy();
-  model.list.selectItem(model.list.items[3]);
+  expect(model.list.actions[3].visible).toBeTruthy();
+  model.list.filteredText = "date";
+  expect(model.list.actions[3].visible).toBeFalsy();
+  model.list.filteredText = "";
+  expect(model.list.actions[3].visible).toBeTruthy();
+  model.list.selectItem(model.list.actions[3]);
   expect(selectedItem.title).toEqual("First name");
+
+  ListModel.MINELEMENTCOUNT = oldValueMINELEMENTCOUNT;
 });
 test("ObjectSelectorModel, do not recreate list model", () => {
   var survey = createSurvey2();
@@ -187,13 +192,13 @@ test("ObjectSelectorModel, do not recreate list model", () => {
   model.show(survey, survey.pages[0], (obj: Base) => {
     selectedItem = obj;
   });
-  expect(model.list.items).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
+  expect(model.list.actions).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
   var list = model.list;
   model.show(survey, survey.pages[0], (obj: Base) => {
     selectedItem = obj;
   });
   expect(model.list).toStrictEqual(list);
-  expect(model.list.items).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
+  expect(model.list.actions).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
 });
 test("ObjectSelectorModel, list model selection on show issue", () => {
   var survey = createSurvey2();
@@ -205,7 +210,7 @@ test("ObjectSelectorModel, list model selection on show issue", () => {
   });
   expect(model.list.selectedItem).toBeTruthy();
   expect(model.list.selectedItem.data).toEqual(selectedQuestion);
-  model.list.selectItem(model.list.items[0]);
+  model.list.selectItem(model.list.actions[0]);
   model.show(survey, selectedQuestion, (obj: Base) => {
     selectedItem = obj;
   });
