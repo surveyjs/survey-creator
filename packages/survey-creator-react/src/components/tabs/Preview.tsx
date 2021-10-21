@@ -24,11 +24,20 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
           <SurveySimulator model={this.model.simulator}></SurveySimulator>
           {!this.model.isRunning ? (<SurveyResults survey={this.model.simulator.survey} />) : null}
         </div>
+        {this.getBottomToolbar()}
+      </div>
+    );
+  }
+  getBottomToolbar(): JSX.Element {
+    if (this.model.pages.visibleActions.length > 0) {
+      return (
         <div className="svc-test-tab__content-actions">
           <SurveyActionBar model={this.model.pages}></SurveyActionBar>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return null;
+    }
   }
 }
 

@@ -3,7 +3,7 @@ import { SurveySimulatorModel } from "../simulator";
 import "./test.scss";
 import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, AdaptiveActionContainer, IAction } from "survey-core";
 import { CreatorBase } from "../../creator-base";
-import { editorLocalization, getLocString } from "../../editorLocalization";
+import { getLocString } from "../../editorLocalization";
 import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
 
 
@@ -38,9 +38,6 @@ export class TestSurveyTabViewModel extends Base {
   })
   showInvisibleElements;
   @property({ defaultValue: true }) showPagesInTestSurveyTab;
-  @property({ defaultValue: true }) showSimulator;
-  @property({ defaultValue: true }) showDefaultLanguageInTestSurveyTab;
-  @property({ defaultValue: true }) showInvisibleElementsInTestSurveyTab;
   @property({ defaultValue: true }) isRunning: boolean;
   @propertyArray() pageListItems: Array<IAction>;
   @property({
@@ -54,14 +51,6 @@ export class TestSurveyTabViewModel extends Base {
     }
   })
   activePage: PageModel;
-  @propertyArray() languages: Array<IAction>;
-  @property({
-    defaultValue: "",
-    onSet: (val: string, target: TestSurveyTabViewModel) => {
-      if (target.simulator.survey.locale == val) return;
-      target.simulator.survey.locale = val;
-    }
-  })
   public get activeLanguage(): string {
     return this.getPropertyValue("activeLanguage", this.survey.locale || surveyLocalization.defaultLocale);
   }
@@ -127,18 +116,10 @@ export class TestSurveyTabViewModel extends Base {
     this.setJSON(json);
     this.updatePageList();
 
-    if (!!options && options.showSimulatorInTestSurveyTab !== undefined) {
-      this.showSimulator = options.showSimulatorInTestSurveyTab;
-    }
-    if (!!options && options.showPagesInTestSurveyTab !== undefined) {
+    if (options.showPagesInTestSurveyTab !== undefined) {
       this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
     }
-    if (!!options && options.showDefaultLanguageInTestSurveyTab != undefined) {
-      this.setDefaultLanguageOption(options.showDefaultLanguageInTestSurveyTab);
-    }
-    if (!!options && options.showInvisibleElementsInTestSurveyTab !== undefined) {
-      this.showInvisibleElementsInTestSurveyTab = options.showInvisibleElementsInTestSurveyTab;
-    }
+
     this.buildActions();
   }
   private updatePageItem(page: PageModel) {
@@ -177,13 +158,7 @@ export class TestSurveyTabViewModel extends Base {
     this.updatePageList();
     this.show();
   }
-  private setDefaultLanguageOption(opt: boolean | string) {
-    const vis: boolean = opt === true || opt === "all" || (opt === "auto" && this.survey.getUsedLocales().length > 1);
-    this.showDefaultLanguageInTestSurveyTab = vis;
-    if (vis) {
-      this.languages = this.getLanguages(opt !== "all" ? this.survey.getUsedLocales() : null);
-    }
-  }
+
   public buildActions() {
     const pageActions: Array<Action> = [];
 
@@ -255,15 +230,6 @@ export class TestSurveyTabViewModel extends Base {
       if (items[i].data === page) return items[i];
     }
     return null;
-  }
-  private getLanguages(usedLanguages: Array<string> = null): Array<IAction> {
-    const res: Array<IAction> = [];
-    const locales = !!usedLanguages && usedLanguages.length > 1 ? usedLanguages : surveyLocalization.getLocales();
-    for (let i = 0; i < locales.length; i++) {
-      const loc: string = locales[i];
-      res.push({ id: loc, title: editorLocalization.getLocaleName(loc) });
-    }
-    return res;
   }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
