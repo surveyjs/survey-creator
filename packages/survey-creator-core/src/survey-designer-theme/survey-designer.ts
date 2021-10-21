@@ -86,6 +86,7 @@ export var surveyDesignerCss = {
     description: "sd-description sd-question__description",
     descriptionUnderInput: "sd-description sd-question__description",
     comment: "sd-input sd-comment",
+    other: "sd-input sd-comment",
     required: "sd-question--required",
     titleRequired: "sd-question__title--required",
     indent: 20,
@@ -117,7 +118,7 @@ export var surveyDesignerCss = {
     itemDecorator: "sd-item__svg sd-checkbox__svg",
     controlLabel: "sd-item__control-label",
     materialDecorator: "sd-item__decorator sd-checkbox__decorator",
-    other: "sd-input sd-comment sd-question__other",
+    other: "sd-input sd-comment sd-selectbase__other",
     column: "sd-selectbase__column"
   },
   radiogroup: {
@@ -133,7 +134,7 @@ export var surveyDesignerCss = {
     itemDecorator: "sd-item__svg sd-radio__svg",
     controlLabel: "sd-item__control-label",
     materialDecorator: "sd-item__decorator sd-radio__decorator",
-    other: "sd-input sd-comment sd-question__other",
+    other: "sd-input sd-comment sd-selectbase__other",
     clearButton: "sd-btn sd-selectbase__clear-btn",
     column: "sd-selectbase__column"
   },
@@ -171,7 +172,7 @@ export var surveyDesignerCss = {
     small: "sd-row__question--small",
     control: "sd-input sd-dropdown",
     selectWrapper: "",
-    other: "sd-input sd-comment sd-question__other",
+    other: "sd-input sd-comment",
     onError: "sd-input--error",
     label: "sd-selectbase__label",
     item: "sd-item sd-radio sd-selectbase__item",
@@ -197,7 +198,7 @@ export var surveyDesignerCss = {
     image: "sd-imagepicker__image",
     itemText: "sd-imagepicker__text",
     clearButton: "sd-btn",
-    other: "sd-input sd-comment sd-question__other"
+    other: "sd-input sd-comment"
   },
   matrix: {
     mainRoot: "sd-element-with-frame sd-question sd-row__question sd-scrollable",
@@ -259,7 +260,7 @@ export var surveyDesignerCss = {
   expression: "",
   file: {
     root: "sd-file",
-    other: "sd-input sd-comment sd-question__other",
+    other: "sd-input sd-comment",
     placeholderInput: "sd-visuallyhidden",
     preview: "sd-file__preview",
     fileSign: "sd-hidden",

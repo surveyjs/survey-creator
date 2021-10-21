@@ -562,8 +562,8 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
     .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
 
     .dragToElement(DragZoneGiraffeItem, LionItem, {
-      offsetX: 5,
-      offsetY: 5,
+      offsetX: 1,
+      offsetY: 1,
       destinationOffsetY: -40,
       speed: 0.1
     });
