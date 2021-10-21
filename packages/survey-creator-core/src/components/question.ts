@@ -61,7 +61,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   }
 
   rootCss() {
-    return this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine ? "svc-question__adorner--start-with-new-line" : "";
+    return this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine ? " svc-question__adorner--start-with-new-line" : "";
   }
 
   css() {

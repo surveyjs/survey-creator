@@ -1,4 +1,4 @@
-import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, } from "../helper";
+import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
@@ -173,29 +173,36 @@ test("Drag Drop to Panel", async (t) => {
   await t.expect(resultJson).eql(expectedJson);
 });
 
-test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
+test("Drag Drop Question with Multiline (StartWithNewLine === false)", async (t) => {
   const json = {
-    pages: [
+    "pages": [
       {
-        name: "page1",
-        elements: [
+        "name": "page1",
+        "elements": [
           {
-            type: "rating",
-            name: "question1"
+            "type": "text",
+            "name": "question4"
           },
           {
-            type: "rating",
-            name: "question2",
-            startWithNewLine: false
+            "type": "boolean",
+            "name": "question1"
           },
           {
-            type: "rating",
-            name: "question3",
-            startWithNewLine: false
+            "type": "radiogroup",
+            "name": "question2",
+            "startWithNewLine": false,
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          },
+          {
+            "type": "rating",
+            "name": "question3",
+            "startWithNewLine": false
           }
-        ],
-        title: "page1 -- title",
-        description: "page1 -- description"
+        ]
       }
     ]
   };
@@ -205,34 +212,157 @@ test("Drag Drop Question (StartWithNewLine === false)", async (t) => {
   const Question1 = Selector(
     "[data-sv-drop-target-survey-element=\"question1\"]"
   );
+  const Question2 = Selector(
+    "[data-sv-drop-target-survey-element=\"question2\"]"
+  );
   const Question3 = Selector(
     "[data-sv-drop-target-survey-element=\"question3\"]"
   );
+  const Question4 = Selector(
+    "[data-sv-drop-target-survey-element=\"question4\"]"
+  );
   const DragZoneQuestion1 = Question1.find(".svc-question__drag-element");
+  const DragZoneQuestion2 = Question2.find(".svc-question__drag-element");
+  const DragZoneQuestion3 = Question3.find(".svc-question__drag-element");
+  let questionName;
 
+  // 1 to 2
   await t.hover(Question1, { speed: 0.5 });
   await t.hover(DragZoneQuestion1);
-  await t.dragToElement(DragZoneQuestion1, Question3, {
+  await t.dragToElement(DragZoneQuestion1, Question2, {
     offsetX: 5,
     offsetY: 5,
     destinationOffsetX: 80,
     speed: 0.5
   });
+  questionName = await getQuestionNameByIndex(1);
+  await t.expect(questionName).eql("question2");
+  questionName = await getQuestionNameByIndex(2);
+  await t.expect(questionName).eql("question1");
+  questionName = await getQuestionNameByIndex(3);
+  await t.expect(questionName).eql("question3");
+  // EO 1 to 2
 
-  let name = await getQuestionNameByIndex(0);
-  await t.expect(name).eql("question2");
+  // 3 to 1
+  await t.hover(Question3, { speed: 0.5 });
+  await t.hover(DragZoneQuestion3);
+  await t.dragToElement(DragZoneQuestion3, Question1, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetX: -80,
+    speed: 0.5
+  });
+  questionName = await getQuestionNameByIndex(1);
+  await t.expect(questionName).eql("question2");
+  questionName = await getQuestionNameByIndex(2);
+  await t.expect(questionName).eql("question3");
+  questionName = await getQuestionNameByIndex(3);
+  await t.expect(questionName).eql("question1");
+  //EO 3 to 1
 
-  name = await getQuestionNameByIndex(1);
-  await t.expect(name).eql("question3");
+  // 2 to 4
+  await t.hover(Question2, { speed: 0.5 });
+  await t.hover(DragZoneQuestion2);
+  await t.dragToElement(DragZoneQuestion2, Question4, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: 80,
+    speed: 0.5
+  });
+  questionName = await getQuestionNameByIndex(0);
+  await t.expect(questionName).eql("question2");
+  questionName = await getQuestionNameByIndex(1);
+  await t.expect(questionName).eql("question4");
+  questionName = await getQuestionNameByIndex(2);
+  await t.expect(questionName).eql("question3");
+  questionName = await getQuestionNameByIndex(3);
+  await t.expect(questionName).eql("question1");
+  //EO 2 to 4
+});
 
-  name = await getQuestionNameByIndex(2);
-  await t.expect(name).eql("question1");
+test("Drag Drop Question with Multiline and OtherPage (StartWithNewLine === false)", async (t) => {
+  await t.resizeWindow(2560, 1440);
 
-  // const getStartWithNewLineByIndex = ClientFunction((index) => {
-  //   return creator.survey.getAllQuestions()[index].startWithNewLine;
-  // });
-  // const result = await getStartWithNewLineByIndex(2);
-  // await t.expect(result).eql(false, "question1.startWithNewLine should set to false after drag");
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question4"
+          },
+          {
+            "type": "boolean",
+            "name": "question1"
+          },
+          {
+            "type": "radiogroup",
+            "name": "question2",
+            "startWithNewLine": false,
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          },
+          {
+            "type": "rating",
+            "name": "question3",
+            "startWithNewLine": false
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question5"
+          },
+        ]
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const Question1 = Selector(
+    "[data-sv-drop-target-survey-element=\"question1\"]"
+  );
+  const Question2 = Selector(
+    "[data-sv-drop-target-survey-element=\"question2\"]"
+  );
+  const Question5 = Selector(
+    "[data-sv-drop-target-survey-element=\"question5\"]"
+  );
+  const DragZoneQuestion1 = Question1.find(".svc-question__drag-element");
+
+  await t.hover(Question5, { speed: 0.5 });
+  await t.hover(Question1, { speed: 0.5 });
+  await t.hover(DragZoneQuestion1);
+
+  await t.dragToElement(DragZoneQuestion1, Question5, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetY: 80,
+    speed: 0.1
+  });
+
+  await t.hover(Question1, { speed: 0.5 });
+  await t.hover(DragZoneQuestion1);
+  await t.dragToElement(DragZoneQuestion1, Question2, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetX: 80,
+    speed: 0.1
+  });
+
+  const check = ClientFunction(() => {
+    return window["creator"].survey.getAllQuestions()[1].startWithNewLine;
+  });
+  const result = await check();
+  await t.expect(result).eql(true);
 });
 
 test("Drag Drop ItemValue (choices)", async (t) => {
