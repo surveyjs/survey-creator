@@ -2494,7 +2494,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   if (reason === "cell" || reason === "column-header" || reason === "row-header") {
     return "svc-matrix-cell";
   }
-  if (!element.parentQuestionValue && !element.isContentElement) {
+  if (!element.isContentElement) {
     if (element instanceof Question) {
       if (isPopupEditorContent) {
         return element.getType() == "dropdown" ? "svc-cell-dropdown-question" : "svc-cell-question";
@@ -2538,14 +2538,12 @@ export function getElementWrapperComponentData(
       column: element.column
     };
   }
-  if (!element["parentQuestionValue"]) {
-    if (element instanceof Question) {
-      return creator;
-    }
-    if (element instanceof PanelModel) {
-      return creator;
-    }
-  }
+  const hasWrapper = getElementWrapperComponentName(element, reason, false);
+  if (!hasWrapper) return undefined;
+  if (element instanceof Question)
+    return creator;
+  if (element instanceof PanelModel)
+    return creator;
   return null;
 }
 export function getItemValueWrapperComponentName(
@@ -2575,10 +2573,7 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  return (
-    (!element.parentQuestionValue && !element.isContentElement) ||
-    element.isEditableTemplateElement
-  );
+  return !element.isContentElement || element.isEditableTemplateElement;
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;

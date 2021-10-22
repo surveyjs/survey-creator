@@ -10,7 +10,8 @@ import {
   QuestionRatingModel,
   QuestionDropdownModel,
   ItemValue,
-  settings as surveySettings
+  settings as surveySettings,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -25,6 +26,7 @@ import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import { PropertyGridViewModel } from "../src/property-grid/property-grid-view-model";
 
 import {
+  getElementWrapperComponentData,
   getElementWrapperComponentName,
   ICreatorPlugin,
   isStringEditable
@@ -970,10 +972,25 @@ test("getElementWrapperComponentName", (): any => {
   expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", false)).toEqual("svc-dropdown-question");
   expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", true)).toEqual("svc-cell-dropdown-question");
   expect(getElementWrapperComponentName({ isContentElement: true }, "", false)).toEqual(undefined);
+  const panelDynamic = new QuestionPanelDynamicModel("q1");
+  const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
+  expect(getElementWrapperComponentName(panelDynamictemplateQuestion, "", false)).toEqual("svc-dropdown-question");
 });
+
+test("getElementWrapperComponentData", (): any => {
+  const testCreator: any = { test: "test" };
+  expect(getElementWrapperComponentData(new QuestionTextModel(""), "", testCreator)).toEqual(testCreator);
+  expect(getElementWrapperComponentData(new QuestionImageModel(""), "", testCreator)).toEqual(testCreator);
+  expect(getElementWrapperComponentData(new QuestionRatingModel(""), "", testCreator)).toEqual(testCreator);
+  expect(getElementWrapperComponentData(new QuestionDropdownModel(""), "", testCreator)).toEqual(testCreator);
+  expect(getElementWrapperComponentData({ isContentElement: true }, "", testCreator)).toEqual(undefined);
+  const panelDynamic = new QuestionPanelDynamicModel("q1");
+  const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
+  expect(getElementWrapperComponentData(panelDynamictemplateQuestion, "", testCreator)).toEqual(testCreator);
+});
+
 test("isStringEditable", (): any => {
   expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
-  expect(isStringEditable({ parentQuestionValue: {} }, "")).toBeFalsy();
   expect(isStringEditable({}, "")).toBeTruthy();
   expect(
     isStringEditable({ isEditableTemplateElement: true }, "")
