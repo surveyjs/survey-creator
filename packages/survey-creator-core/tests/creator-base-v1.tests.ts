@@ -986,7 +986,6 @@ test("addQuestion into the QuestionPanelDynamic into second page", () => {
     "text",
     "question1"
   );
-  newQuestion.setParentQuestion(pnlQuestion); //TODO remove this line
   creator.selectElement(newQuestion);
   expect(creator.selectedElement).toEqual(newQuestion);
   expect(creator.currentPage.name).toEqual("p2");
