@@ -1577,16 +1577,41 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.survey.addNewPage();
     }
     var parent: IPanel = this.currentPage;
-    var elElement = this.getSelectedSurveyElement();
-    if (elElement && elElement.parent && elElement["page"] == parent) {
-      parent = elElement.parent;
+    var selectedElement = this.getSelectedSurveyElement();
+    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent) {
+      parent = selectedElement.parent;
       if (index < 0) {
-        index = parent.elements.indexOf(elElement);
+        index = parent.elements.indexOf(selectedElement);
         if (index > -1) index++;
       }
     }
-    parent.addElement(element, index);
+    const currentRow = this.findRowByElement(selectedElement, parent);
+    if (this.isRowMultiline(currentRow)) {
+      this.addElemenMultiline(parent, element, index, currentRow);
+    } else {
+      parent.addElement(element, index);
+    }
+
     this.setModified({ type: modifiedType, question: element });
+  }
+
+  private isRowMultiline(row) {
+    return row.elements.length > 1
+  }
+
+  private findRowByElement(element, parent) {
+    if (element.isPage) {
+      return element.rows[element.rows.length - 1];
+    }
+    return parent.rows.find(row => row.elements.indexOf(element) !== -1);
+  }
+
+  private addElemenMultiline(parent: any, element: any, index, currentRow: any) {
+    const elsCount = currentRow.elements.length;
+    const prevElement = currentRow.elements[elsCount - 1];
+    prevElement.startWithNewLine = true;
+    parent.addElement(element, index);
+    prevElement.startWithNewLine = false;
   }
 
   public setNewNames(element: Survey.ISurveyElement) {

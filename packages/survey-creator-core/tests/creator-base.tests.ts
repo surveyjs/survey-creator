@@ -1732,3 +1732,46 @@ test("process shortcut for text inputs", (): any => {
   creator["onKeyDownHandler"](<any>{ keyCode: 46, target: { tagName: "span", isContentEditable: true } });
   expect(log).toEqual("->execute->execute->execute");
 });
+
+test("doClickQuestionCore", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question4"
+          },
+          {
+            "type": "boolean",
+            "name": "question1"
+          },
+          {
+            "type": "radiogroup",
+            "name": "question2",
+            "startWithNewLine": false,
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          },
+          {
+            "type": "rating",
+            "name": "question3",
+            "startWithNewLine": false
+          }
+        ]
+      }
+    ]
+  };
+  const q3 = creator.survey.getQuestionByName("question3");
+  creator.selectElement(q3);
+  const newQuestion1 = new QuestionTextModel("newQuestion1");
+  creator["doClickQuestionCore"](newQuestion1);
+  expect(creator.survey.getAllQuestions[4].name).toEqual("newQuestion1");
+  expect(creator.survey.getAllQuestions[4].startWithNewLine).toEqual(true);
+  expect(creator.survey.getAllQuestions[3].startWithNewLine).toEqual(false);
+});
