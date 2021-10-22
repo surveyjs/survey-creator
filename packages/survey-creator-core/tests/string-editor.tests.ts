@@ -53,9 +53,10 @@ test("Test string editor content editable", (): any => {
 
   var stringEditorQuestion1Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1"), false, "description"), creator);
   expect(stringEditorQuestion1Description.contentEditable).toEqual(true);
+  expect(stringEditorQuestion1Description.className("desc")).toEqual("svc-string-editor");
   var stringEditorQuestion2Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2"), false, "description"), creator);
   expect(stringEditorQuestion2Description.contentEditable).toEqual(false);
+  expect(stringEditorQuestion2Description.className("desc")).toEqual("svc-string-editor svc-string-editor--readonly");
   var stringEditorQuestion3Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q3"), false, "description"), creator);
   expect(stringEditorQuestion3Description.contentEditable).toEqual(false);
-
 });

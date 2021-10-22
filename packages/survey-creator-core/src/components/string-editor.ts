@@ -100,6 +100,8 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public className(text: any): string {
-    return "svc-string-editor"+(text == "" && this.placeholder==""?" svc-string-editor--hidden":"");
+    return "svc-string-editor"+
+          (text == "" && this.placeholder==""?" svc-string-editor--hidden":"") +
+          (this.contentEditable?"":" svc-string-editor--readonly");
   }
 }
