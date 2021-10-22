@@ -99,7 +99,7 @@ export class SurveyForDesigner extends Survey.Survey {
     return editorLocalization.getString(value);
   }
   private get _hasLogo() {
-    return !!this.isLogoImageChoosen && this.logoPosition !== "none";
+    return !!this.isLogoImageChoosen() && this.logoPosition !== "none";
   }
   public get _isLogoBefore() {
     return (
@@ -130,12 +130,11 @@ export class SurveyForDesigner extends Survey.Survey {
   }
   public get isLogoAfter() {
     return (
-      (SurveyForDesigner.isTitleLogoEditable() &&
-        ((this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly())) ||
+      (SurveyForDesigner.isTitleLogoEditable() && ((this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly())) ||
       (!SurveyForDesigner.isTitleLogoEditable() && this._isLogoAfter)
     );
   }
-  public get isLogoImageChoosen() {
+  public isLogoImageChoosen() {
     return this.locLogo["koRenderedHtml"]();
   }
   public koShowHeader = ko.observable(true);
