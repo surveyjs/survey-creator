@@ -1586,7 +1586,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       }
     }
     const currentRow = this.findRowByElement(selectedElement, parent);
-    if (this.isRowMultiline(currentRow)) {
+    if (currentRow && this.isRowMultiline(currentRow)) {
       this.addElemenMultiline(parent, element, index, currentRow);
     } else {
       parent.addElement(element, index);
@@ -1600,9 +1600,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   private findRowByElement(element, parent) {
-    if (element.isPage) {
-      return element.rows[element.rows.length - 1];
-    }
+    if (!element) return null;
+    if (element.isPage) return element.rows[element.rows.length - 1];
     return parent.rows.find(row => row.elements.indexOf(element) !== -1);
   }
 

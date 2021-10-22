@@ -1771,7 +1771,7 @@ test("doClickQuestionCore", () => {
   creator.selectElement(q3);
   const newQuestion1 = new QuestionTextModel("newQuestion1");
   creator["doClickQuestionCore"](newQuestion1);
-  expect(creator.survey.getAllQuestions[4].name).toEqual("newQuestion1");
-  expect(creator.survey.getAllQuestions[4].startWithNewLine).toEqual(true);
-  expect(creator.survey.getAllQuestions[3].startWithNewLine).toEqual(false);
+  expect(creator.survey.getAllQuestions()[4].name).toEqual("newQuestion1");
+  expect(creator.survey.getAllQuestions()[4].startWithNewLine).toEqual(true);
+  expect(creator.survey.getAllQuestions()[3].startWithNewLine).toEqual(false);
 });
