@@ -52,6 +52,9 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   private get placeholder(): string {
     return this.baseModel.placeholder;
   }
+  private get contentEditable(): boolean {
+    return this.baseModel.contentEditable;
+  }
   private onInput = (event: any) => {
     this.baseModel.onInput(event.nativeEvent);
     return this.baseModel.errorText;
@@ -88,7 +91,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
         <span
           ref={this.svStringEditorRef}
           className="sv-string-editor"
-          contentEditable="true"
+          contentEditable={this.contentEditable}
           aria-placeholder={this.placeholder}
           suppressContentEditableWarning={true}
           // style={this.style}
@@ -104,7 +107,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
         <span
           ref={this.svStringEditorRef}
           className="sv-string-editor"
-          contentEditable="true"
+          contentEditable={this.contentEditable}
           aria-placeholder={this.placeholder}
           suppressContentEditableWarning={true}
           // style={this.style}
