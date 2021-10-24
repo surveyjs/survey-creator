@@ -1915,70 +1915,31 @@ test("SurveyPropertyDefaultValueEditor for matrixdropdown with cellType equals b
   expect(defaultValueEditor.question.cellType).toEqual("boolean");
 });
 
-/* TODO Do not have multiple values property editor yet.
-QUnit.test("SurveyPropertyMultipleValuesEditor", function (assert) {
-    Survey.Serializer.addProperty("question", {
-      name: "multiple:multiplevalues",
-      choices: [
-        { value: 1, text: "Item 1" },
-        { value: 2, text: "Item 2" },
-        { value: 3, text: "Item 3" },
-      ],
-    });
-    var property = Survey.Serializer.findProperty("question", "multiple");
-    var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
-    assert.equal(
-      propertyEditor.getValueText([1, 3]),
-      "[Item 1, Item 3]",
-      "Use text for displaying the value"
-    );
-    Survey.Serializer.removeProperty("question", "multiple");
+test("SurveyPropertyMultipleValuesEditor", () => {
+  Serializer.addProperty("question", {
+    name: "multiple:multiplevalues",
+    choices: [
+      { value: 1, text: "Item 1" },
+      { value: 2, text: "Item 2" },
+      { value: 3, text: "Item 3" },
+    ],
   });
-*/
-/* We do not have multiple values editor yet
-QUnit.test("SurveyPropertyMultipleValuesEditor - categories ",
-    () => {
-      Serializer.addProperty("question", {
-        name: "multiple:multiplevalues",
-        choices: function (obj) {
-          return [
-            { value: 5, text: "item 5", category: "category 2" },
-            { value: 4, text: "item 4", category: "category 1" },
-            { value: 6, text: "item 6", category: "category 2" },
-            { value: 1, text: "item 1" },
-            { value: 3, text: "item 3", category: "category 1" },
-            { value: 2, text: "item 2" },
-          ];
-        },
-      });
-      var property = Survey.Serializer.findProperty("question", "multiple");
-
-      var propertyEditor = new SurveyPropertyMultipleValuesEditor(property);
-      var categories = propertyEditor.koCategories();
-      assert.equal(categories.length, 3, "There are 3 categories");
-      assert.equal(categories[0].koCategory(), "", "The first category is empty");
-      assert.equal(
-        categories[0].koTitleVisible(),
-        false,
-        "The first category is invisible"
-      );
-      assert.equal(
-        categories[1].koCategory(),
-        "category 1",
-        "The second category is 1"
-      );
-      assert.equal(
-        categories[1].koTitleVisible(),
-        true,
-        "The second category is visible"
-      );
-      assert.equal(
-        categories[2].koCategory(),
-        "category 2",
-        "The third category is 2"
-      );
-
-      Survey.Serializer.removeProperty("question", "multiple");
-    }
-  );
-  */
+  const question = new Question("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const multipleQuestion = <QuestionCheckboxModel>(
+      propertyGrid.survey.getQuestionByName("multiple")
+    );
+  expect(multipleQuestion).toBeTruthy();
+  expect(multipleQuestion.getType()).toEqual("checkbox");
+  expect(multipleQuestion.choices).toHaveLength(3);
+  expect(multipleQuestion.choices[0].value).toEqual(1);
+  expect(multipleQuestion.choices[2].text).toEqual("Item 3");
+  question.multiple = [1, 3];
+  expect(multipleQuestion.value).toHaveLength(2);
+  expect(multipleQuestion.value[0]).toEqual(1);
+  expect(multipleQuestion.value[1]).toEqual(3);
+  multipleQuestion.value = [2];
+  expect(question.multiple).toHaveLength(1);
+  expect(question.multiple[0]).toEqual(2);
+  Serializer.removeProperty("question", "multiple");
+});

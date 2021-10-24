@@ -1964,17 +1964,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return isValid;
   }
   private selectionChanged(element: Base, propertyName?: string, focus = true) {
-    if (
-      !!element &&
-      typeof element.getType === "function" &&
-      element.getType() === "page"
-    ) {
-      this.survey.currentPage = <PageModel>element;
-    } else if (!!element && !!element["page"]) {
-      this.survey.currentPage = element["page"];
-    } else {
-      this.survey.currentPage = undefined;
-    }
+    this.survey.currentPage = this.getCurrentPageByElement(element);
     this.selectionHistoryController.onObjSelected(element);
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
@@ -1984,6 +1974,13 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     var options = { newSelectedElement: element };
     this.onSelectedElementChanged.fire(this, options);
+  }
+  private getCurrentPageByElement(element: Base): PageModel {
+    if(!element) return undefined;
+    if(element["isPage"]) return element as PageModel;
+    if(!!element["page"]) return element["page"];
+    if(!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
+    return undefined;
   }
   public clickToolboxItem(newElement: any) {
     if (!this.readOnly) {
