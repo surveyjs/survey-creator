@@ -39,6 +39,10 @@ export class StringEditorViewModel {
   public get placeholder(): string {
     return this.baseModel.placeholder;
   }
+  public get contentEditable(): boolean {
+    return this.baseModel.contentEditable;
+  }
+
   public errorText: ko.Observable<string> = ko.observable(null);
   public onInput(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onInput(event);

@@ -4,7 +4,7 @@ import {
   IQuestionToolboxItem
 } from "@survey/creator";
 import React, { CSSProperties } from "react";
-import { ToolboxItemViewModel } from "@survey/creator";
+import { ToolboxToolViewModel } from "@survey/creator";
 import {
   Action,
   Base,
@@ -18,17 +18,20 @@ import {
 } from "survey-react-ui";
 
 export interface ISurveyCreatorToolboxItemProps {
-    item: IQuestionToolboxItem;
-    creator: CreatorBase<SurveyModel>;
-    isCompact: boolean;
-  }
+  item: IQuestionToolboxItem;
+  creator: CreatorBase<SurveyModel>;
+  isCompact: boolean;
+}
 
 export class SurveyCreatorToolboxTool extends SurveyElementBase<
-    ISurveyCreatorToolboxItemProps,
-    any
-  > {
+  ISurveyCreatorToolboxItemProps,
+  any
+> {
+  model: ToolboxToolViewModel;
+
   constructor(props) {
     super(props);
+    this.model = new ToolboxToolViewModel(this.item, this.props.creator);
   }
   public get item() {
     return this.props.item;
@@ -56,7 +59,16 @@ export class SurveyCreatorToolboxTool extends SurveyElementBase<
       }
     );
     return (
-      <div className={className} key={item.id}>
+      <div className={className} key={item.id}
+        onPointerDown={(event: any) => {
+          event.persist();
+          this.model.onPointerDown(event);
+        }}
+        onClick={(event: any) => {
+          event.persist();
+          this.model.click(event);
+        }}
+      >
         <div className="sv-action__content">
           {(this.isCompact && item.needSeparator) ? (
             <div className="svc-toolbox__category-separator"></div>
@@ -69,62 +81,54 @@ export class SurveyCreatorToolboxTool extends SurveyElementBase<
 }
 
 export class SurveyCreatorToolboxItem extends SurveyElementBase<
-    ISurveyCreatorToolboxItemProps,
-    any
-  > {
-    model: ToolboxItemViewModel;
-    constructor(props) {
-      super(props);
-      const toolboxItem: IQuestionToolboxItem = this.props.item;
-      this.model = new ToolboxItemViewModel(toolboxItem, this.props.creator);
-    }
-    public get item() {
-      return this.props.item;
-    }
-    public get creator() {
-      return this.props.creator;
-    }
-    protected getStateElement(): Base {
-      return this.model;
-    }
-    render(): JSX.Element {
-      const className =
-        "svc-toolbox__item svc-toolbox__item--" + this.item.iconName;
-      return attachKey2click(
-        <div
-          className={className}
-          tabIndex={0}
-          title={this.item.tooltip}
-          role="button"
-          aria-label={
-            this.item.tooltip +
-            " " +
-            editorLocalization.getString("toolbox") +
-            " item"
-          }
-          onPointerDown={(event: any) => {
-            event.persist();
-            this.model.onPointerDown(event);
-          }}
-          onClick={(event: any) => {
-            event.persist();
-            this.model.click(event);
-          }}
-        >
-          <span className="svc-toolbox__item-container">
+  ISurveyCreatorToolboxItemProps,
+  any
+> {
+  model: ToolboxToolViewModel;
+  constructor(props) {
+    super(props);
+    const toolboxItem: IQuestionToolboxItem = this.props.item;
+    this.model = new ToolboxToolViewModel(toolboxItem, this.props.creator);
+  }
+  public get item() {
+    return this.props.item;
+  }
+  public get creator() {
+    return this.props.creator;
+  }
+  protected getStateElement(): Base {
+    return this.model;
+  }
+  render(): JSX.Element {
+    const className =
+      "svc-toolbox__item svc-toolbox__item--" + this.item.iconName;
+    return attachKey2click(
+      <div
+        className={className}
+        tabIndex={0}
+        title={this.item.tooltip}
+        role="button"
+        aria-label={
+          this.item.tooltip +
+          " " +
+          editorLocalization.getString("toolbox") +
+          " item"
+        }
+      >
+        <span className="svc-toolbox__item-container">
+          <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon>
+        </span>
+        {(this.props.isCompact ?
+          <span className="svc-toolbox__item-banner">
             <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon>
-          </span>
-          {(this.props.isCompact ?
-            <span className="svc-toolbox__item-banner">
-              <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon>
-              <span className="svc-toolbox__item-title">{this.item.title}</span>
-            </span>
-            :
             <span className="svc-toolbox__item-title">{this.item.title}</span>
-          )}
-        </div>
-      );
-    }
+          </span>
+          :
+          <span className="svc-toolbox__item-title">{this.item.title}</span>
+        )}
+      </div>
+    );
+  }
 }
 
 ReactElementFactory.Instance.registerElement("svc-toolbox-item", (props) => {

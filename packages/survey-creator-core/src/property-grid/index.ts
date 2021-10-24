@@ -1156,6 +1156,7 @@ export class PropertyGridEditorStringArray extends PropertyGridEditor {
     };
   }
 }
+
 export class PropertyGridEditorDropdown extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return this.isLocaleProp(prop) || prop.hasChoices;
@@ -1288,7 +1289,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
 
 export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "set";
+    return prop.type == "set" || prop.type == "multiplevalues";
   }
   public getJSON(
     obj: Base,
