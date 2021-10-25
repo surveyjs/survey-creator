@@ -205,6 +205,11 @@ jobs:
       npm run remove-package-lock
     displayName: 'Npm install survey-creator-core'
 
+  - powershell: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run release
+    displayName: 'Release specific version survey-creator-core'
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run build
