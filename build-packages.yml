@@ -35,7 +35,7 @@ jobs:
       SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-knockout'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
-    OverWrite: true
+      OverWrite: true
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
