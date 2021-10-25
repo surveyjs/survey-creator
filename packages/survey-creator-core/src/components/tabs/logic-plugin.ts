@@ -103,7 +103,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
       "sv-list",
       {
         model: new ListModel(
-          [{ id: null, title: this.showAllQuestionsText }],
+          [{ id: null, title: this.showAllActionTypesText }],
           (item: IAction) => {
             this.model.actionTypeFilter = !!item.id ? item.id : "";
             actionTypesPopupModel.toggleVisibility();
