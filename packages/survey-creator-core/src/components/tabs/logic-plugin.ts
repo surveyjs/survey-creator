@@ -3,6 +3,7 @@ import { getLogicString } from "./logic-types";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyLogicUI } from "./logic-ui";
+import { SurveyHelper } from "../../survey-helper";
 
 export class TabLogicPlugin implements ICreatorPlugin {
   private filterQuestionAction: Action;
@@ -62,10 +63,9 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public createActions() {
     const items: Array<Action> = [];
     const onQuestionPopupShow = () => {
-      const items = [{ id: null, title: this.showAllQuestionsText }].concat(
-        this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) }; })
-      );
-      questionPopupModel.contentComponentData.model.setItems(items);
+      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) }; })
+      SurveyHelper.sortItems(items, "title");
+      questionPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
     };
     const questionPopupModel = new PopupModel<{ model: ListModel }>(
       "sv-list",
@@ -95,10 +95,9 @@ export class TabLogicPlugin implements ICreatorPlugin {
     items.push(this.filterQuestionAction);
 
     const onActionTypesPopupShow = () => {
-      const items = [{ id: null, title: this.showAllActionTypesText }].concat(
-        this.model.getUsedActionTypes().map(type => { return { id: type.name, title: type.displayName }; })
-      );
-      actionTypesPopupModel.contentComponentData.model.setItems(items);
+      const items = this.model.getUsedActionTypes().map(type => { return { id: type.name, title: type.displayName }; });
+      SurveyHelper.sortItems(items, "title");
+      actionTypesPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllActionTypesText }].concat(items));
     };
     const actionTypesPopupModel = new PopupModel<{ model: ListModel }>(
       "sv-list",
