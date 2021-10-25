@@ -63,7 +63,7 @@ jobs:
 
 
 - job: CreatorV1
-  dependsOn: Into
+  dependsOn: Intro
 
   steps:
   - script: |
@@ -134,7 +134,7 @@ jobs:
 
 
 - job: CreatorV2Core
-  dependsOn: Into
+  dependsOn: Intro
 
   steps:
   - script: |
