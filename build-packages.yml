@@ -129,6 +129,7 @@ jobs:
 - job: CreatorV2Core
   steps:
   - checkout: self
+  - checkout: Service
     persistCredentials: true
     clean: true
 
@@ -170,7 +171,7 @@ jobs:
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run build
-    displayName: 'Build creator v2 core'
+    displayName: 'Build Creator V2 Core'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
