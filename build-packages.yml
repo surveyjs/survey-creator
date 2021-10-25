@@ -66,6 +66,42 @@ jobs:
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
       OverWrite: true
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/'
+      Contents: 'version.txt'
+      TargetFolder: '$(Build.SourcesDirectory)/'
+      OverWrite: true
+    displayName: 'Copy build artifact - SurveyJSVersion File'
+
+  - powershell: |
+      $version = Get-Content $(Build.SourcesDirectory)/version.txt
+      Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
+    displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
+
+  - powershell: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+      npm run release -- --release-as $(SurveyJSVersion)
+    displayName: 'Release specific version survey-creator'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '42'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSWidgetsBuild'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSWidgetsBuild/packages/survey-widgets'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/surveyjs-widgets'
+      OverWrite: true
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
       npm run build_prod
@@ -262,6 +298,27 @@ jobs:
       npm run remove-package-lock
     displayName: 'Npm install survey-creator-react'
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-react-ui'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - powershell: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npm run release
+    displayName: 'Release specific version survey-creator-react'
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run build
@@ -359,6 +416,27 @@ jobs:
       npm install
       npm run remove-package-lock
     displayName: 'Npm install survey-creator-knockout'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-knockout-ui'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - powershell: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+      npm run release
+    displayName: 'Release specific version survey-creator-knockout'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
