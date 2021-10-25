@@ -275,9 +275,19 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-      npm run testcafe
+      npm run testcafe:ci
     displayName: 'Functional test CreatorV2 React'
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build'
+      targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-react'
+      ArtifactName: 'SurveyJSCreatorV2BuildReact'
+      publishLocation: 'Container'
 
 
 - job: CreatorV2Knockout
@@ -349,5 +359,16 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-      npm run testcafe
+      npm run testcafe:ci
     displayName: 'Functional test CreatorV2 Knockout'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/build'
+      targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-knockout
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-knockout'
+      ArtifactName: 'SurveyJSCreatorV2BuildKnockout'
+      publishLocation: 'Container'  
