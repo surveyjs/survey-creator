@@ -126,12 +126,10 @@ jobs:
       ArtifactName: 'SurveyJSCreatorBuild'
       publishLocation: 'Container'
 
+
 - job: CreatorV2Core
   steps:
   - checkout: self
-  - checkout: Service
-    persistCredentials: true
-    clean: true
 
   - task: NodeTool@0
     inputs:
@@ -194,8 +192,6 @@ jobs:
   dependsOn: CreatorV2Core
   steps:
   - checkout: self
-    persistCredentials: true
-    clean: true
 
   - task: NodeTool@0
     inputs:
@@ -291,8 +287,6 @@ jobs:
   dependsOn: CreatorV2Core
   steps:
   - checkout: self
-    persistCredentials: true
-    clean: true
 
   - task: NodeTool@0
     inputs:
