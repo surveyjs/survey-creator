@@ -1577,16 +1577,40 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.survey.addNewPage();
     }
     var parent: IPanel = this.currentPage;
-    var elElement = this.getSelectedSurveyElement();
-    if (elElement && elElement.parent && elElement["page"] == parent) {
-      parent = elElement.parent;
+    var selectedElement = this.getSelectedSurveyElement();
+    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent) {
+      parent = selectedElement.parent;
       if (index < 0) {
-        index = parent.elements.indexOf(elElement);
+        index = parent.elements.indexOf(selectedElement);
         if (index > -1) index++;
       }
     }
-    parent.addElement(element, index);
+    const currentRow = this.findRowByElement(selectedElement, parent);
+    if (currentRow && this.isRowMultiline(currentRow)) {
+      this.addElemenMultiline(parent, element, index, currentRow);
+    } else {
+      parent.addElement(element, index);
+    }
+
     this.setModified({ type: modifiedType, question: element });
+  }
+
+  private isRowMultiline(row) {
+    return row.elements.length > 1
+  }
+
+  private findRowByElement(element, parent) {
+    if (!element) return null;
+    if (element.isPage) return element.rows[element.rows.length - 1];
+    return parent.rows.find(row => row.elements.indexOf(element) !== -1);
+  }
+
+  private addElemenMultiline(parent: any, element: any, index, currentRow: any) {
+    const elsCount = currentRow.elements.length;
+    const prevElement = currentRow.elements[elsCount - 1];
+    prevElement.startWithNewLine = true;
+    parent.addElement(element, index);
+    prevElement.startWithNewLine = false;
   }
 
   public setNewNames(element: Survey.ISurveyElement) {
@@ -1940,17 +1964,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return isValid;
   }
   private selectionChanged(element: Base, propertyName?: string, focus = true) {
-    if (
-      !!element &&
-      typeof element.getType === "function" &&
-      element.getType() === "page"
-    ) {
-      this.survey.currentPage = <PageModel>element;
-    } else if (!!element && !!element["page"]) {
-      this.survey.currentPage = element["page"];
-    } else {
-      this.survey.currentPage = undefined;
-    }
+    this.survey.currentPage = this.getCurrentPageByElement(element);
     this.selectionHistoryController.onObjSelected(element);
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
@@ -1960,6 +1974,13 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     var options = { newSelectedElement: element };
     this.onSelectedElementChanged.fire(this, options);
+  }
+  private getCurrentPageByElement(element: Base): PageModel {
+    if(!element) return undefined;
+    if(element["isPage"]) return element as PageModel;
+    if(!!element["page"]) return element["page"];
+    if(!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
+    return undefined;
   }
   public clickToolboxItem(newElement: any) {
     if (!this.readOnly) {

@@ -1,9 +1,17 @@
-import { url } from "../helper";
+import { url, getJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
+});
+
+test("Simple click", async (t) => {
+  const toolboxTool = Selector(".svc-toolbox__tool").nth(0);
+  await t.hover(toolboxTool);
+  await t.click(toolboxTool, { offsetX: -20});
+  const resultJson = await getJSON();
+  await t.expect(resultJson.pages[0].elements.length).eql(1);
 });
 
 test("Categories", async (t) => {

@@ -47,7 +47,7 @@ export {
   SurveyQuestionEditorDefinition,
   ISurveyCreatorOptions,
   IPropertyGridEditor,
-  ToolboxItemViewModel,
+  ToolboxToolViewModel,
   PropertyGridEditorCollection
 } from "@survey/creator";
 

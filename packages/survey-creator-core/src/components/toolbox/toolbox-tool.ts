@@ -3,7 +3,7 @@ import { IQuestionToolboxItem } from "../../toolbox";
 import { CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
 
-export class ToolboxItemViewModel extends Base {
+export class ToolboxToolViewModel extends Base {
   constructor(
     protected item: IQuestionToolboxItem,
     protected creator: CreatorBase<SurveyModel>
