@@ -235,7 +235,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(Build.ArtifactsDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
+      SourceFolder: $(Build.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
 
   # - script: |
@@ -332,7 +332,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(Build.ArtifactsDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
+      SourceFolder: $(Build.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
 
   # - script: |
