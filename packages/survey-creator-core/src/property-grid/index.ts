@@ -111,6 +111,12 @@ export interface IPropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any;
+  showModalPropertyEditor (
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): any;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
   onAfterRenderQuestion?: (
     obj: Base,
@@ -347,30 +353,12 @@ export class PropertyGridTitleActionsCreator {
     property: JsonObjectProperty,
     question: Question
   ) {
-    const surveyPropertyEditor = editor.createPropertyEditorSetup(
-      question.obj,
+    return editor.showModalPropertyEditor(
+      editor,
       property,
       question,
       this.options
     );
-    if (!surveyPropertyEditor) return null;
-    surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
-    surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
-    if(!settings.showModal) return surveyPropertyEditor;
-    settings.showModal(
-      "survey",
-      {
-        survey: surveyPropertyEditor.editSurvey,
-        model: surveyPropertyEditor.editSurvey
-      },
-      (): boolean => {
-        return surveyPropertyEditor.apply();
-      },
-      undefined,
-      "sv-property-editor",
-      question.title
-    );
-    return surveyPropertyEditor;
   }
 
   private createEditorSetupAction(
@@ -1028,6 +1016,38 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any;
+  showModalPropertyEditor(
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): any {
+    const surveyPropertyEditor = editor.createPropertyEditorSetup(
+      question.obj,
+      property,
+      question,
+      options
+    );
+    if (!surveyPropertyEditor) return null;
+    surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
+    surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
+    if(!settings.showModal) return surveyPropertyEditor;
+    settings.showModal(
+      "survey",
+      {
+        survey: surveyPropertyEditor.editSurvey,
+        model: surveyPropertyEditor.editSurvey
+      },
+      (): boolean => {
+        return surveyPropertyEditor.apply();
+      },
+      undefined,
+      "sv-property-editor",
+      question.title
+    );
+    return surveyPropertyEditor;
+  }
+
 }
 
 export class PropertyGridEditorBoolean extends PropertyGridEditor {
