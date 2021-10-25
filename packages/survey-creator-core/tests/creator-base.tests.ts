@@ -17,7 +17,7 @@ import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
-import { TabTestPlugin } from "../src/components/tabs/test";
+import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
 import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";

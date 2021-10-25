@@ -5,10 +5,10 @@
     <survey-results params="survey: survey"></survey-results>
     <!-- /ko -->
   </div>
+  <!-- ko if: pages.visibleActions.length > 0 -->
   <div class="svc-plugin-tab__content-actions svc-test-tab__content-actions">
-    <!-- ko component: { name: 'sv-action-bar', params: { model: toolbar } } -->
-    <!-- /ko -->
     <!-- ko component: { name: 'sv-action-bar', params: { model: pages } } -->
     <!-- /ko -->
   </div>
+  <!-- /ko -->
 </div>
