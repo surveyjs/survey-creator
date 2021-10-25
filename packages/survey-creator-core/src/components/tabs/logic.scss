@@ -17,7 +17,7 @@
   display: none;
 }
 .sl-table__row:hover #remove-row,
-#remove-row:focus-within {
+.sl-table__row #remove-row:focus-within {
   .sv-action-bar-item {
     padding: calcSize(0.25);
     border: none;

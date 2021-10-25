@@ -148,6 +148,39 @@ SurveyReact.ReactElementFactory.Instance.registerElement(
   }
 );
 
+// class CustomPropertyGridWrapper extends React.Component {
+//   constructor(props) {
+//       super(props);
+//       this.btnClick = this
+//           .btnClick
+//           .bind(this);
+//   }
+//   btnClick() {
+//       alert("The Button is clicked");
+//   }
+//   render() {
+//       const model = this.props.model;
+//       if (!model) 
+//           return null;
+//       const btnStyle = {
+//           width: "100%",
+//           height: "32px"
+//       };
+//       return <div>
+//           <button onClick={this.btnClick} style={btnStyle}>Click me...</button>
+//           <SurveyCreator.PropertyGridComponent model={model}></SurveyCreator.PropertyGridComponent>
+//       </div>;
+//   }
+// }
+
+// SurveyReact
+//   .ReactElementFactory
+//   .Instance
+//   .registerElement("svc-property-grid", (props) => {
+//       return React.createElement(CustomPropertyGridWrapper, props);
+//   });
+
+
 const creator = new SurveyCreator.SurveyCreator(options);
 creator.JSON = json;
 window.creator = creator;

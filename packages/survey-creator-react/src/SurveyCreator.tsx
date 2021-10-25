@@ -151,7 +151,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     if (!!this.creator.currentTabPropertyGrid)
       return (
         <div>
-          {ReactElementFactory.Instance.createElement("svc-property-grid", { model: this.creator.currentTabPropertyGrid })}
+          {ReactElementFactory.Instance.createElement("svc-property-panel", { model: this.creator.currentTabPropertyGrid })}
         </div>);
     else
       return null;

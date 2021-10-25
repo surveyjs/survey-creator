@@ -9,7 +9,8 @@ import {
   PopupModel,
   ListModel,
   Question,
-  ItemValue
+  ItemValue,
+  Serializer
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -61,7 +62,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   }
 
   rootCss() {
-    return this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine ? "svc-question__adorner--start-with-new-line" : "";
+    return this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine ? " svc-question__adorner--start-with-new-line" : "";
   }
 
   css() {
@@ -113,10 +114,11 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       "convertTo",
       operationsAllow && options.allowChangeType
     );
+    const prop = Serializer.findProperty(this.surveyElement.getType(), "isRequired");
+    const isPropReadOnly = this.creator.onIsPropertyReadOnlyCallback(this.surveyElement, prop, prop.readOnly, null, null);
     this.updateActionVisibility(
       "isrequired",
-      operationsAllow && options.allowChangeRequired
-    );
+      operationsAllow && options.allowChangeRequired && !isPropReadOnly);
   }
 
   public get isEmptyElement(): boolean {

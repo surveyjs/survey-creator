@@ -23,7 +23,7 @@ export class TitleActionsViewModel {
         visible: ko.computed(() => survey.koShowHeader()),
         text: ko.computed(() =>
           this.getLocString(
-            survey.isLogoImageChoosen ? "pe.changeLogo" : "pe.addLogo"
+            survey.isLogoImageChoosen() ? "pe.changeLogo" : "pe.addLogo"
           )
         ),
         hasTitle: true,
@@ -35,7 +35,7 @@ export class TitleActionsViewModel {
         name: "setLogoPosition",
         text: this.getLocString("pe.logoPosition"),
         visible: ko.computed(
-          () => survey.koShowHeader() && survey.isLogoImageChoosen
+          () => survey.koShowHeader() && survey.isLogoImageChoosen()
         ),
         value: ko.computed(() => survey.logoPosition),
         template: "choice-action",
