@@ -5,7 +5,7 @@
 
 resources:
   repositories:
-    - repository: Service # The name used to reference this repository in the checkout step
+    - repository: Service
       type: github
       endpoint: dmitrykurmanov:admin
       name: surveyjs/service
@@ -129,8 +129,7 @@ jobs:
 
 - job: CreatorV2Core
   steps:
-  - checkout: self
-
+  
   - task: NodeTool@0
     inputs:
       versionSpec: '14.x'
