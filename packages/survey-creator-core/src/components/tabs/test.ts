@@ -79,7 +79,6 @@ export class TestSurveyTabViewModel extends Base {
       }
     }
     this.simulator.survey = this.surveyProvider.createSurvey(json || {}, "test");
-    this.simulator.survey.css = surveyDesignerCss;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
