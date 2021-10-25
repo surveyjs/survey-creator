@@ -221,11 +221,7 @@ jobs:
 
   - task: DownloadBuildArtifacts@0
     inputs:
-      buildType: 'specific'
-      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
-      pipeline: '7'
-      specificBuildWithTriggering: true
-      buildVersionToDownload: 'latest'
+      buildType: 'current'
       downloadType: 'single'
       artifactName: 'SurveyJSCreatorV2BuildCore'
       downloadPath: '$(System.ArtifactsDirectory)'
@@ -322,11 +318,7 @@ jobs:
 
   - task: DownloadBuildArtifacts@0
     inputs:
-      buildType: 'specific'
-      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
-      pipeline: '7'
-      specificBuildWithTriggering: true
-      buildVersionToDownload: 'latest'
+      buildType: 'current'
       downloadType: 'single'
       artifactName: 'SurveyJSCreatorV2BuildCore'
       downloadPath: '$(System.ArtifactsDirectory)'
