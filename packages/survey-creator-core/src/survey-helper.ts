@@ -286,10 +286,10 @@ export class SurveyHelper {
 
     return items;
   }
-  public static sortItems(items: Array<any>) {
+  public static sortItems(items: Array<any>, propertyName = "text") {
     items.sort((a: any, b: any): number => {
-      const aVal = !!a.text ? a.text : "";
-      const bVal = !!b.text ? b.text : "";
+      const aVal = !!a[propertyName] ? a[propertyName] : "";
+      const bVal = !!b[propertyName] ? b[propertyName] : "";
       let index = 0;
       while(index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
       if(index < aVal.length && index < bVal.length) {

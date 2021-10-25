@@ -18,6 +18,8 @@ import { PropertyGridEditorExpression } from "../../src/property-grid/condition"
 import { PropertyGridTriggerValueInLogicEditor } from "../../src/property-grid/values";
 import { QuestionEmbeddedSurveyModel } from "../../src/components/embedded-survey";
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
+import { CreatorTester } from "../creator-tester";
+import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 
 test("SurveyLogicItem, logicType and logicType name", () => {
   var survey = new SurveyModel({
@@ -1324,12 +1326,67 @@ test("LogicItemEditorUI: getUsedActionTypes", () => {
   const types = logic.getUsedActionTypes();
 
   expect(types).toHaveLength(3);
-  expect(types[0].name).toEqual("trigger_copyvalue");
-  expect(types[0].displayName).toEqual("Copy question value");
-  expect(types[1].name).toEqual("question_visibility");
-  expect(types[1].displayName).toEqual("Show (hide) question");
-  expect(types[2].name).toEqual("trigger_skip");
-  expect(types[2].displayName).toEqual("Skip to question");
+  expect(types[0].name).toEqual("question_visibility");
+  expect(types[0].displayName).toEqual("Show (hide) question");
+  expect(types[1].name).toEqual("trigger_skip");
+  expect(types[1].displayName).toEqual("Skip to question");
+  expect(types[2].name).toEqual("trigger_copyvalue");
+  expect(types[2].displayName).toEqual("Copy question value");
+});
+
+test("LogicPlugin: question & action types are sorted ", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q10", visibleIf: "{q2} = 2" },
+          { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q4",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q2} = 2",
+        setToName: "q10",
+        fromName: "q4"
+      }
+    ],
+  };
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  const filterActionType = logicPlugin.createActions().filter(action => action.id === "svc-logic-filter-actiontype")[0];
+  const actionTypes = filterActionType.popupModel.contentComponentData.model.actions;
+  const filterQuestion = logicPlugin.createActions().filter(action => action.id === "svc-logic-filter-question")[0];
+  const questions = filterQuestion.popupModel.contentComponentData.model.actions;
+
+  logicPlugin.activate();
+  expect(actionTypes).toHaveLength(1);
+  expect(actionTypes[0].title).toEqual("Show all action types");
+  expect(questions).toHaveLength(1);
+  expect(questions[0].title).toEqual("Show all questions");
+
+  filterActionType.action();
+  expect(actionTypes).toHaveLength(4);
+  expect(actionTypes[0].title).toEqual("Show all action types");
+  expect(actionTypes[1].title).toEqual("Copy question value");
+  expect(actionTypes[2].title).toEqual("Show (hide) question");
+  expect(actionTypes[3].title).toEqual("Skip to question");
+
+  filterQuestion.action();
+  expect(questions).toHaveLength(5);
+  expect(questions[0].title).toEqual("Show all questions");
+  expect(questions[1].title).toEqual("q1");
+  expect(questions[2].title).toEqual("q2");
+  expect(questions[3].title).toEqual("q4");
+  expect(questions[4].title).toEqual("q10");
 });
 
 test("LogicItem isSuitable", () => {
