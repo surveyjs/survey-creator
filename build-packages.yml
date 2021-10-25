@@ -30,6 +30,11 @@ jobs:
       artifactName: 'SurveyJSLibraryBuild'
       downloadPath: '$(System.ArtifactsDirectory)'
 
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+      npm install
+    displayName: 'npm install SurveyJS Creator V1'
+
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages/survey-knockout'
@@ -39,7 +44,6 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-      npm install
       npm run build_prod
     displayName: 'npm install and build SurveyJS Creator V1'
 
@@ -78,6 +82,11 @@ jobs:
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
+
+  # - script: |
+  #     npm install
+  #     npm run remove-package-lock
+  #   displayName: 'Npm install'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
