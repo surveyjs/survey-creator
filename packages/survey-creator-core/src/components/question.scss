@@ -184,6 +184,13 @@ svc-question,
     }
 }
 
+.sd-row--multiple .svc-hovered > .svc-question__content {
+  &:not(.svc-question__content--selected) {
+    border: 1px solid $secondary-light;
+    outline: 1px solid $secondary-light;
+  }
+}
+
 .sd-panel .svc-row--ghost.svc-row--ghost .svc-question__content.svc-question__content {
   border: none;
 }
