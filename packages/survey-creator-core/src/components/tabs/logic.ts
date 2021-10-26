@@ -196,15 +196,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
         res.push(names[item]);
       }
     });
-    res = res.sort((a: Question, b: Question) => {
-      if (a.name > b.name) {
-        return 1;
-      }
-      if (a.name < b.name) {
-        return -1;
-      }
-      return 0;
-    });
     return res;
   }
   public getUsedActionTypes(): SurveyLogicType[] {
@@ -222,15 +213,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       if (!!types[item]) {
         res.push(types[item]);
       }
-    });
-    res = res.sort((a,b) => {
-      if (a.displayName > b.displayName) {
-        return 1;
-      }
-      if (a.displayName < b.displayName) {
-        return -1;
-      }
-      return 0;
     });
     return res;
   }

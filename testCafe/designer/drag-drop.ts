@@ -365,6 +365,61 @@ test("Drag Drop Question with Multiline and OtherPage (StartWithNewLine === fals
   await t.expect(result).eql(true);
 });
 
+test("Drag Drop Question out of Multiline (StartWithNewLine === false)", async (t) => {
+  await t.resizeWindow(2560, 1440);
+
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "startWithNewLine": false,
+            "name": "question2"
+          },
+          {
+            "type": "text",
+            "startWithNewLine": false,
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const Question1 = Selector(
+    "[data-sv-drop-target-survey-element=\"question1\"]"
+  );
+  const Question2 = Selector(
+    "[data-sv-drop-target-survey-element=\"question2\"]"
+  );
+  const DragZoneQuestion2 = Question2.find(".svc-question__drag-element");
+
+  await t.hover(Question2, { speed: 0.5, offsetY: 30 });
+  await t.hover(DragZoneQuestion2);
+
+  await t.dragToElement(DragZoneQuestion2, Question1, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetX: -1,
+    destinationOffsetY: -1,
+    speed: 0.1
+  });
+
+  const check = ClientFunction(() => {
+    return window["creator"].survey.getAllQuestions()[2].startWithNewLine;
+  });
+  const result = await check();
+  await t.expect(result).eql(true);
+});
+
 test("Drag Drop ItemValue (choices)", async (t) => {
   const json = {
     pages: [
