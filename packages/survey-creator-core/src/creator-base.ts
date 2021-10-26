@@ -1596,7 +1596,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   private isRowMultiline(row) {
-    return row.elements.length > 1
+    return row.elements.length > 1;
   }
 
   private findRowByElement(element, parent) {
@@ -2594,7 +2594,8 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  return !element.isContentElement || element.isEditableTemplateElement;
+  const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
+  return !parentIsMatrix&& (!element.isContentElement || element.isEditableTemplateElement);
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;
