@@ -27,17 +27,23 @@ import { SurveyHelper } from "../survey-helper";
 
 export class QuestionLinkValueModel extends Question {
   public linkClickCallback: () => void;
+  public resetClickCallback: () => void;
   @property() linkValueText: string;
-  constructor(name: string) {
+  @property({ defaultValue: false }) showClear: boolean;
+  @property({ defaultValue: true }) showValueInLink : boolean;
+  constructor(name: string, json: any = null) {
     super(name);
-    this.linkValueText = editorLocalization.getString("pe.emptyValue");
+    const linkValueText = json && !json.showValueInLink && (editorLocalization.getString("pe.set")) + " " + json.title || null;
+    this.linkValueText = linkValueText || editorLocalization.getString("pe.emptyValue");
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "value") {
       this.updateLinkValueText();
+      this.showClear = !!newValue;
     }
   }
+
   public getType(): string {
     return "linkvalue";
   }
@@ -46,10 +52,24 @@ export class QuestionLinkValueModel extends Question {
       this.linkClickCallback();
     }
   }
+  public doClearClick() {
+    if (!!this.clearClickCallback) {
+      this.clearClickCallback();
+    }
+  }
   private updateLinkValueText() {
-    var displayValue = this.isEmpty()
-      ? editorLocalization.getString("pe.emptyValue")
-      : this.getObjDisplayValue();
+    var displayValue;
+    if(this.showValueInLink) {
+      displayValue = this.isEmpty()
+        ? editorLocalization.getString("pe.emptyValue")
+        : this.getObjDisplayValue();
+    }
+    else {
+      displayValue = this.isEmpty()
+        ? editorLocalization.getString("pe.set") + " " + this.title
+        : editorLocalization.getString("pe.change") + " " + this.title;
+    }
+
     this.linkValueText = displayValue;
   }
   private stringifyValue(val: any): string {
@@ -67,9 +87,10 @@ export class QuestionLinkValueModel extends Question {
 
 Serializer.addClass(
   "linkvalue",
-  [],
-  function () {
-    return new QuestionLinkValueModel("");
+  ["showValueInLink"],
+  function (json) {
+    const viewModel = new QuestionLinkValueModel("", json);
+    return viewModel;
   },
   "nonvalue"
 );
@@ -85,21 +106,24 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     options: ISurveyCreatorOptions
   ): any {
     return {
-      type: "linkvalue"
+      type: "linkvalue",
+      showValueInLink: false,
+      titleLocation: "hidden"
     };
   }
-  public onGetQuestionTitleActions(obj: Base, options: any): void {
-    var action = undefined;
-    for (var i = 0; i < options.titleActions.length; i++) {
-      if (options.titleActions[i].id === "property-grid-setup") {
-        action = options.titleActions[i];
-        break;
-      }
-    }
-    options.question.linkClickCallback = () => {
-      action.action();
+  public onCreated = (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => {
+    question.linkClickCallback = () => {
+      this.showModalPropertyEditor(this, prop, question, options);
     };
-  }
+    question.clearClickCallback = () => {
+      this.clearPropertyValue(
+        question.obj,
+        prop,
+        question,
+        null /*this.options*/
+      );
+    };
+  };
 
   public clearPropertyValue(
     obj: Base,
