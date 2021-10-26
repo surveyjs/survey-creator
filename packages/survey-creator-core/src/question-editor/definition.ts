@@ -56,10 +56,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "cols", tab: "layout" },
         "placeHolder",
         { name: "maxLength", tab: "validation" },
-        { name: "multiLine", tab: "data" },
         { name: "textUpdateMode", tab: "data" },
         { name: "autoGrow", tab: "layout" },
-        { name: "multiLine", tab: "layout" }
       ]
     },
     file: {
