@@ -39,7 +39,7 @@ import { SelectionHistory } from "./selection-history";
 import { TabEmbedPlugin } from "./components/tabs/embed";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
-import { TabTestPlugin } from "./components/tabs/test";
+import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";

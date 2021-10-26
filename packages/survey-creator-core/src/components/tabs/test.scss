@@ -22,11 +22,9 @@ svc-tab-test {
     width: 100%;
     position: absolute;
     &.sv-action-bar--pages {
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
       left: 0;
       right: 0;
+      justify-content: center;
     }
   }
 }
