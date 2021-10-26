@@ -117,7 +117,7 @@ export interface IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions
   ): any;
-  onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
+  onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   onAfterRenderQuestion?: (
     obj: Base,
     prop: JsonObjectProperty,
@@ -210,10 +210,10 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop, context);
     return !!res ? res.getJSON(obj, prop, options) : null;
   },
-  onCreated(obj: Base, question: Question, prop: JsonObjectProperty): any {
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     var res = this.getEditor(prop);
     if (!!res && !!res.onCreated) {
-      res.onCreated(obj, question, prop);
+      res.onCreated(obj, question, prop, options);
     }
   },
   onAfterRenderQuestion(obj: Base, prop: JsonObjectProperty, evtOptions: any) {
@@ -476,7 +476,7 @@ export class PropertyJSONGenerator {
       if (!!helpText) {
         q.description = helpText;
       }
-      PropertyGridEditorCollection.onCreated(this.obj, q, prop);
+      PropertyGridEditorCollection.onCreated(this.obj, q, prop, this.options);
       this.options.onPropertyEditorCreatedCallback(this.obj, prop, q);
     }
   }

@@ -100,22 +100,20 @@ QuestionFactory.Instance.registerQuestion("linkvalue", (name) => {
 });
 
 export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
-  private options: ISurveyCreatorOptions;
   public getJSON(
     obj: Base,
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    this.options = options;
     return {
       type: "linkvalue",
       showValueInLink: false,
       titleLocation: "hidden"
     };
   }
-  public onCreated = (obj: Base, question: Question, prop: JsonObjectProperty) => {
+  public onCreated = (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => {
     question.linkClickCallback = () => {
-      this.showModalPropertyEditor(this, prop, question, this.options);
+      this.showModalPropertyEditor(this, prop, question, options);
     };
     question.clearClickCallback = () => {
       this.clearPropertyValue(
