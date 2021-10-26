@@ -2571,7 +2571,7 @@ export function getItemValueWrapperComponentName(
   item: ItemValue,
   question: QuestionSelectBase
 ): string {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return SurveyModel.TemplateRendererComponentName;
   }
   if (question.getType() === "imagepicker") {
@@ -2584,7 +2584,7 @@ export function getItemValueWrapperComponentData(
   question: QuestionSelectBase,
   creator: CreatorBase<SurveyModel>
 ): any {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return item;
   }
   return {
