@@ -1,20 +1,26 @@
 import { Serializer, QuestionFactory } from "survey-core";
 import { QuestionImplementor, SurveyTemplateText } from "survey-knockout-ui";
-import { QuestionLinkValueModel } from "@survey/creator";
+import { editorLocalization, QuestionLinkValueModel } from "@survey/creator";
 const questionTemplate = require("./question-link-value.html");
 
 export class QuestionLinkValue extends QuestionLinkValueModel {
   private _implementor: QuestionImplementor;
   public koClickLink: (model: QuestionLinkValue, event: MouseEvent) => void;
-  constructor(name: string) {
-    super(name);
+  public koClearLink: (model: QuestionLinkValue, event: MouseEvent) => void;
+  constructor(name: string, json: any = null) {
+    super(name, json);
   }
+  public clearCaption = editorLocalization.getString("pe.clear");
   protected onBaseCreating() {
     super.onBaseCreating();
     this._implementor = new QuestionImplementor(this);
     this.koClickLink = (model: QuestionLinkValue, event: MouseEvent) => {
       event.stopPropagation();
       this.doLinkClick();
+    };
+    this.koClearLink = (model: QuestionLinkValue, event: MouseEvent) => {
+      event.stopPropagation();
+      this.doClearClick();
     };
   }
   public dispose() {
@@ -26,8 +32,8 @@ export class QuestionLinkValue extends QuestionLinkValueModel {
 
 new SurveyTemplateText().addText(questionTemplate, "question", "linkvalue");
 
-Serializer.overrideClassCreator("linkvalue", function () {
-  return new QuestionLinkValue("");
+Serializer.overrideClassCreator("linkvalue", <any>function (json) {
+  return new QuestionLinkValue("", json);
 });
 QuestionFactory.Instance.registerQuestion("linkvalue", (name) => {
   return new QuestionLinkValue(name);

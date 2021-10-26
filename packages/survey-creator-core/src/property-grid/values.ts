@@ -31,8 +31,9 @@ export class QuestionLinkValueModel extends Question {
   @property() linkValueText: string;
   @property({ defaultValue: false }) showClear: boolean;
   @property({ defaultValue: true }) showValueInLink : boolean;
-  constructor(name: string, linkValueText: string = null) {
+  constructor(name: string, json: any = null) {
     super(name);
+    const linkValueText = json && !json.showValueInLink && (editorLocalization.getString("pe.set")) + " " + json.title || null;
     this.linkValueText = linkValueText || editorLocalization.getString("pe.emptyValue");
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
@@ -88,8 +89,7 @@ Serializer.addClass(
   "linkvalue",
   ["showValueInLink"],
   function (json) {
-    const viewModel = new QuestionLinkValueModel("",
-      !json.showValueInLink && (editorLocalization.getString("pe.set")) + " " + json.title || null);
+    const viewModel = new QuestionLinkValueModel("", json);
     return viewModel;
   },
   "nonvalue"
