@@ -179,7 +179,7 @@ export class QuestionToolbox
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
   @property({ defaultValue: false }) isCompact: boolean;
-  @property({ defaultValue: false }) visible: boolean;
+  @property({ defaultValue: true }) visible: boolean;
 
   constructor(
     supportedQuestions: Array<string> = null,

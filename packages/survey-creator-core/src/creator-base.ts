@@ -2496,6 +2496,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public initResponsivityManager(container: HTMLDivElement): void {
     this.responsivityManager = new CreatorResponsivityManager(container, this);
   }
+  public resetResponsivityManager(): void {
+    if(!!this.responsivityManager) {
+      this.responsivityManager.dispose();
+      this.responsivityManager = undefined;
+    }
+  }
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
 }

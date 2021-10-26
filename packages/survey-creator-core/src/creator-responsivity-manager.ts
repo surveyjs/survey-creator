@@ -23,6 +23,7 @@ export class CreatorResponsivityManager {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.container.parentElement);
+      this.process();
     }
 
   }

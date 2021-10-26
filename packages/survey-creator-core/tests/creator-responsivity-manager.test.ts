@@ -54,7 +54,7 @@ test("CreatorResponsivityManager process", (): any => {
     expect(creator.toolbox.visible).toEqual(visible);
     expect(creator.toolbox.isCompact).toEqual(isCompact);
   };
-  responsivityManager.process();
+
   expect(creator.toolbox.visible).toBeTruthy();
   expect(creator.toolbox.isCompact).toBeFalsy();
 

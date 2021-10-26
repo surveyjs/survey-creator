@@ -18,6 +18,7 @@ export class CreatorViewModel {
   }
   dispose(): void {
     this.creator.removeKeyboardShortcuts(this.rootNode);
+    this.creator.resetResponsivityManager();
   }
 }
 
