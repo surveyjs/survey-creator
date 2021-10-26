@@ -11,9 +11,6 @@ svc-toolbox {
   box-sizing: border-box;
   overflow-y: auto;
   direction: rtl;
-  @media screen and (max-width: 1160px) {
-      max-width: calcSize(9);
-  }
 }
 
 .svc-toolbox--compact {
