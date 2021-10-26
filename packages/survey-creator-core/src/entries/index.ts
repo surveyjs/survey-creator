@@ -7,6 +7,7 @@ export { editorLocalization as localization } from "../editorLocalization";
 export * from "../settings";
 
 export * from "../creator-base";
+export * from "../creator-responsivity-manager";
 
 export * from "../components/tabs/embed";
 export * from "../components/tabs/json-editor-ace";

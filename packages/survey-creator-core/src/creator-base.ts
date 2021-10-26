@@ -51,6 +51,7 @@ import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/u
 import { PropertyGridViewModelBase } from "./property-grid/property-grid-view-model";
 import { TabDesignerPlugin } from "./components/tabs/designer";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
+import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -153,6 +154,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
+  private responsivityManager: CreatorResponsivityManager;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -1976,10 +1978,10 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.onSelectedElementChanged.fire(this, options);
   }
   private getCurrentPageByElement(element: Base): PageModel {
-    if(!element) return undefined;
-    if(element["isPage"]) return element as PageModel;
-    if(!!element["page"]) return element["page"];
-    if(!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
+    if (!element) return undefined;
+    if (element["isPage"]) return element as PageModel;
+    if (!!element["page"]) return element["page"];
+    if (!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
     return undefined;
   }
   public clickToolboxItem(newElement: any) {
@@ -2490,6 +2492,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     if (name === "viewType") {
       this.tabs.forEach((tab) => (tab.active = this.viewType === tab.id));
     }
+  }
+  public initResponsivityManager(container: HTMLDivElement): void {
+    this.responsivityManager = new CreatorResponsivityManager(container, this);
   }
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
