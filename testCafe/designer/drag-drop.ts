@@ -124,7 +124,7 @@ test("Drag Drop Toolbox All Questions", async (t) => {
     .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 });
 
   const pagesLength = await getPagesLength();
-  await t.expect(pagesLength).eql(20 + 1); // +1 for the first empty page
+  await t.expect(pagesLength).eql(20);
 });
 
 test("Drag Drop Question", async (t) => {
