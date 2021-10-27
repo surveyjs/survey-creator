@@ -67,6 +67,7 @@ export var surveyDesignerCss = {
   row: "sd-row sd-clearfix",
   rowMultiple: "sd-row--multiple",
   question: {
+    questionWrapper: "sd-question-wrapper",
     mainRoot: "sd-element-with-frame sd-question sd-row__question",
     flowRoot: "sd-element-with-frame sd-question sd-row__question sd-row__question--flow",
     asCell: "sd-table__cell",
