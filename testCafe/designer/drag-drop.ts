@@ -39,6 +39,7 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
 
 test("Drag Drop Toolbox All Questions", async (t) => {
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
   const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
   const CheckboxItem = Selector("[aria-label='Checkbox toolbox item']");
@@ -63,7 +64,7 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 
   await t
     .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(SingleInputItem, EmptyPage, { speed: 0.5 }) // first time drag to single Empty page, next times drag to ghost page
 
     .hover(CheckboxItem)
     .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 })
