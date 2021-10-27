@@ -38,19 +38,23 @@ export class PropertyPanelComponent extends SurveyElementBase<IPropertyGridCompo
   }
   renderElement() {
     const style = { display: !this.model.visible ? "none" : "" };
+    const className = this.model.flyoutPanelMode ? "svc-flyoutPanelMode-panel" : "";
     return (
-      <div className="svc-flex-column svc-properties-wrapper">
-        <div ref={this.containerRef} style={style} className="svc-property-panel">
-          <div className="svc-property-panel__header">
-            <div className="svc-property-panel__actions">
-              <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
+      <div className={className}>
+        <div className="svc-properties-shadow"></div>
+        <div className="svc-flex-column svc-properties-wrapper">
+          <div ref={this.containerRef} style={style} className="svc-property-panel">
+            <div className="svc-property-panel__header">
+              <div className="svc-property-panel__actions">
+                <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
+              </div>
+              <div className="svc-property-panel__title">
+                {this.model.headerText}
+              </div>
             </div>
-            <div className="svc-property-panel__title">
-              {this.model.headerText}
+            <div className="svc-property-panel__expander">
+              {ReactElementFactory.Instance.createElement("svc-property-grid", { model: this.model })}
             </div>
-          </div>
-          <div className="svc-property-panel__expander">
-            {ReactElementFactory.Instance.createElement("svc-property-grid", { model: this.model })}
           </div>
         </div>
       </div>
