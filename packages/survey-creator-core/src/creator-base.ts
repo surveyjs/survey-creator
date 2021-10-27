@@ -1598,7 +1598,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   private isRowMultiline(row) {
-    return row.elements.length > 1
+    return row.elements.length > 1;
   }
 
   private findRowByElement(element, parent) {
@@ -2497,7 +2497,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.responsivityManager = new CreatorResponsivityManager(container, this);
   }
   public resetResponsivityManager(): void {
-    if (!!this.responsivityManager) {
+    if(!!this.responsivityManager) {
       this.responsivityManager.dispose();
       this.responsivityManager = undefined;
     }
@@ -2583,7 +2583,7 @@ export function getItemValueWrapperComponentName(
   item: ItemValue,
   question: QuestionSelectBase
 ): string {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return SurveyModel.TemplateRendererComponentName;
   }
   if (question.getType() === "imagepicker") {
@@ -2596,7 +2596,7 @@ export function getItemValueWrapperComponentData(
   question: QuestionSelectBase,
   creator: CreatorBase<SurveyModel>
 ): any {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return item;
   }
   return {
@@ -2606,7 +2606,8 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  return !element.isContentElement || element.isEditableTemplateElement;
+  const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
+  return !parentIsMatrix&& (!element.isContentElement || element.isEditableTemplateElement);
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;

@@ -67,7 +67,7 @@ export class ItemInplaceEditor extends TitleInplaceEditor {
       }
     });
     rootElement.addEventListener("keyup", (event) => {
-      if (event.keyCode === 13) {
+      if (!this.isEditing() && event.keyCode === 13) {
         this.startEdit(this, event);
         return;
       }

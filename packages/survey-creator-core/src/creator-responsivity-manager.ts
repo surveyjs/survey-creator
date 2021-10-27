@@ -45,7 +45,6 @@ export class CreatorResponsivityManager {
       this._process(true, false, true);
     }
   }
-
   public dispose(): void {
     if (!!this.resizeObserver) {
       this.resizeObserver.disconnect();

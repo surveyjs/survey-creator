@@ -2,5 +2,8 @@
 <span data-bind="text:linkValueText"></span>
 <!-- /ko -->
 <!-- ko ifnot: isReadOnly -->
-<a data-bind="text:linkValueText, click: koClickLink, key2click"></a>
+<a class="spg-question-link__set-button" data-bind="text:linkValueText, click: koClickLink, key2click"></a>
+<!-- ko if: showClear -->
+<a class="spg-question-link__clear-button" data-bind="text: clearCaption, click: koClearLink, key2click"></a>
+<!-- /ko -->
 <!-- /ko -->
