@@ -19,60 +19,62 @@ test("CreatorResponsivityManager getScreenWidth", (): any => {
   const container: SimpleContainer = new SimpleContainer({});
   const creator = new CreatorTester();
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
-  const checkToolboxWidth = (newWidth: number, widthSize: string) => {
+  const checkScreenWidth = (newWidth: number, widthSize: string) => {
     container.offsetWidth = newWidth;
     expect(responsivityManager["getScreenWidth"]()).toEqual(widthSize);
   };
   expect(responsivityManager["getScreenWidth"]()).toEqual("xxl");
 
-  checkToolboxWidth(2000, "xxl");
-  checkToolboxWidth(1920, "xxl");
+  checkScreenWidth(2000, "xxl");
+  checkScreenWidth(1920, "xxl");
 
-  checkToolboxWidth(1900, "xl");
-  checkToolboxWidth(1280, "xl");
+  checkScreenWidth(1900, "xl");
+  checkScreenWidth(1280, "xl");
 
-  checkToolboxWidth(1270, "l");
-  checkToolboxWidth(960, "l");
+  checkScreenWidth(1270, "l");
+  checkScreenWidth(960, "l");
 
-  checkToolboxWidth(950, "m");
-  checkToolboxWidth(768, "m");
+  checkScreenWidth(950, "m");
+  checkScreenWidth(768, "m");
 
-  checkToolboxWidth(750, "s");
-  checkToolboxWidth(376, "s");
+  checkScreenWidth(750, "s");
+  checkScreenWidth(376, "s");
 
-  checkToolboxWidth(360, "xs");
-  checkToolboxWidth(200, "xs");
+  checkScreenWidth(360, "xs");
+  checkScreenWidth(200, "xs");
 });
 
 test("CreatorResponsivityManager process", (): any => {
   const container: SimpleContainer = new SimpleContainer({});
   const creator = new CreatorTester();
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
-  const checkToolbox = (newOffsetWidth: number, visible: boolean, isCompact: boolean) => {
+  const checkByWidth = (newOffsetWidth: number, toolboxVisible: boolean, toolboxIsCompact: boolean, showPageNavigator: boolean, propertyGridFlyoutMode: boolean) => {
     container.offsetWidth = newOffsetWidth;
     responsivityManager.process();
-    expect(creator.toolbox.visible).toEqual(visible);
-    expect(creator.toolbox.isCompact).toEqual(isCompact);
+    expect(creator.toolbox.visible).toEqual(toolboxVisible);
+    expect(creator.toolbox.isCompact).toEqual(toolboxIsCompact);
+    expect(creator.showPageNavigator).toEqual(showPageNavigator);
+    expect(creator.currentTabPropertyGrid.flyoutMode).toEqual(propertyGridFlyoutMode);
   };
 
   expect(creator.toolbox.visible).toBeTruthy();
   expect(creator.toolbox.isCompact).toBeFalsy();
 
-  checkToolbox(1920, true, false);
-  checkToolbox(2000, true, false);
+  checkByWidth(1920, true, false, false, true);
+  checkByWidth(2000, true, false, false, true);
 
-  checkToolbox(1900, true, false);
-  checkToolbox(1280, true, false);
+  checkByWidth(1900, true, false, false, true);
+  checkByWidth(1280, true, false, false, true);
 
-  checkToolbox(1270, true, true);
-  checkToolbox(960, true, true);
+  checkByWidth(1270, true, true, false, true);
+  checkByWidth(960, true, true, false, true);
 
-  checkToolbox(950, true, true);
-  checkToolbox(768, true, true);
+  checkByWidth(950, true, true, true, true);
+  checkByWidth(768, true, true, true, true);
 
-  checkToolbox(750, false, true);
-  checkToolbox(376, false, true);
+  checkByWidth(750, false, true, true, false);
+  checkByWidth(376, false, true, true, false);
 
-  checkToolbox(360, false, true);
-  checkToolbox(200, false, true);
+  checkByWidth(360, false, true, true, false);
+  checkByWidth(200, false, true, true, false);
 });
