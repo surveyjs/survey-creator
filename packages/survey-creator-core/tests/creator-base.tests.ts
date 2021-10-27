@@ -776,7 +776,7 @@ test("Check action container for new added page", (): any => {
   var pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
   pageModel.addNewQuestion(pageModel, null);
   expect(creator.survey.pages).toHaveLength(2);
-  expect(pageModel.actionContainer.actions).toHaveLength(2);
+  expect(pageModel.actionContainer.actions).toHaveLength(3);
 });
 test("Show error on entering non-unique column value", (): any => {
   var creator = new CreatorTester();
