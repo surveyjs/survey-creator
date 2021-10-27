@@ -5,23 +5,6 @@
 }
 .svc-row .sd-row--multiple {
   padding: calcSize(1);
-  .sd-question-wrapper {
-    position: relative;
-  }
-
-  // reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
-  .svc-question__adorner--start-with-new-line {
-    &[data-sv-drop-target-survey-element="sv-drag-drop-ghost-survey-element-name"] {
-      height: 100%;
-      overflow: hidden;
-      position: static;
-      .svc-question__content.svc-question__content.svc-question__content   {
-        border: 0;
-        padding: 0;
-        position: static;
-      }
-    }
-  }
 }
 .svc-row.svc-row--ghost {
   .svc-question__content {

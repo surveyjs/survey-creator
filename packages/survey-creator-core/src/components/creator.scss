@@ -98,10 +98,8 @@ survey-creator,
 }
 
 .sv-drag-drop-ghost--vertical {
-  height: 100%;
+  height: 10000px;
   width: 4px;
-  top:0;
-  bottom: 0;
 }
 
 .sv-drag-drop-ghost--item-value-bottom {
