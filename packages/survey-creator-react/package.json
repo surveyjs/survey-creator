@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "1.8.74-beta.0",
+  "version": "1.8.75-beta.0",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -21,7 +21,7 @@
     "doc:update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
     "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500\"",
     "testcafe:ci": "http-server --silent & testcafe chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal,dashboard",
-    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/string-editor.ts --reporter minimal --debug-mode\"",
+    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/drag-drop.ts -t \\\"Drag Drop to Panel Dynamic Question\\\" --reporter minimal --debug-mode\"",
     "testcafe:a11y": "concurrently \"http-server --silent\" \"testcafe chrome ./testCafe/accessibility.js  --selector-timeout 1500\"",
     "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease beta",
     "remove-package-lock": "rimraf package-lock.json",

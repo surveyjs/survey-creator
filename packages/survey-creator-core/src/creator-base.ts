@@ -51,6 +51,7 @@ import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/u
 import { PropertyGridViewModelBase } from "./property-grid/property-grid-view-model";
 import { TabDesignerPlugin } from "./components/tabs/designer";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
+import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -153,6 +154,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
+  private responsivityManager: CreatorResponsivityManager;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -1596,7 +1598,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   private isRowMultiline(row) {
-    return row.elements.length > 1
+    return row.elements.length > 1;
   }
 
   private findRowByElement(element, parent) {
@@ -1976,10 +1978,10 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.onSelectedElementChanged.fire(this, options);
   }
   private getCurrentPageByElement(element: Base): PageModel {
-    if(!element) return undefined;
-    if(element["isPage"]) return element as PageModel;
-    if(!!element["page"]) return element["page"];
-    if(!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
+    if (!element) return undefined;
+    if (element["isPage"]) return element as PageModel;
+    if (!!element["page"]) return element["page"];
+    if (!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
     return undefined;
   }
   public clickToolboxItem(newElement: any) {
@@ -2491,6 +2493,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.tabs.forEach((tab) => (tab.active = this.viewType === tab.id));
     }
   }
+  public initResponsivityManager(container: HTMLDivElement): void {
+    this.responsivityManager = new CreatorResponsivityManager(container, this);
+  }
+  public resetResponsivityManager(): void {
+    if(!!this.responsivityManager) {
+      this.responsivityManager.dispose();
+      this.responsivityManager = undefined;
+    }
+  }
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
 }
@@ -2571,7 +2582,7 @@ export function getItemValueWrapperComponentName(
   item: ItemValue,
   question: QuestionSelectBase
 ): string {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return SurveyModel.TemplateRendererComponentName;
   }
   if (question.getType() === "imagepicker") {
@@ -2584,7 +2595,7 @@ export function getItemValueWrapperComponentData(
   question: QuestionSelectBase,
   creator: CreatorBase<SurveyModel>
 ): any {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return item;
   }
   return {
@@ -2594,7 +2605,8 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  return !element.isContentElement || element.isEditableTemplateElement;
+  const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
+  return !parentIsMatrix&& (!element.isContentElement || element.isEditableTemplateElement);
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;
