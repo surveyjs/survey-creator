@@ -1970,9 +1970,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.selectionHistoryController.onObjSelected(element);
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
-      if (!!propertyName) {
-        this.designerPropertyGrid.selectProperty(propertyName, focus);
+
+      if(!propertyName) {
+        propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
+
+      if (!!propertyName) {
+        this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+      }
+      this.selectFromStringEditor = false;
     }
     var options = { newSelectedElement: element };
     this.onSelectedElementChanged.fire(this, options);
@@ -2504,6 +2510,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
+  selectFromStringEditor: boolean;
 }
 
 export class StylesManager {

@@ -645,6 +645,10 @@ export class PropertyGridModel {
   private titleActionsCreator: PropertyGridTitleActionsCreator;
   private classNameProperty: string;
   private classNameValue: any;
+
+  currentlySelectedProperty: string;
+  currentlySelectedPanel: PanelModel;
+
   public objValueChangedCallback: () => void;
   public changedFromActionCallback: (obj: Base, propertyName: string) => void;
   public refresh(): void {
@@ -761,6 +765,19 @@ export class PropertyGridModel {
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
     }
+    this.survey.getAllPanels().forEach((panel: PanelModel) => {
+      panel.onFocusIn.add((sender, options)=>{
+        if(!!options.question) {
+          this.currentlySelectedProperty = options.question.name;
+          this.currentlySelectedPanel = options.panel;
+        }
+        else {
+          if(this.currentlySelectedPanel !== options.panel)
+            this.currentlySelectedProperty = options.panel.getFirstQuestionToFocus().name;
+          this.currentlySelectedPanel = options.panel;
+        }
+      });
+    });
   }
   public get options(): ISurveyCreatorOptions {
     return this.optionsValue;
