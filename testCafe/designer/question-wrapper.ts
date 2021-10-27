@@ -1,4 +1,4 @@
-import { url } from "../helper";
+import { questions, questionToolbarActions, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -10,16 +10,14 @@ function normalize(str) {
   return str.replace(/\xa0/gi, " ").replace(/(?:\r\n|\r|\n)/g, "");
 }
 
-const controls = Selector(".svc-question__content-actions .sv-action").filterVisible();
-const requiredActionButton = controls.nth(2).find('button[title="Is required?"]');
-const deleteActionButton = controls.nth(3).find('button[title="Delete"]');
-const convertActionButton = controls.nth(0).find('button[title="Single Input"]');
-const duplicateActionButton = controls.nth(1).find('button[title="Duplicate"]');
-const dotsButton = Selector(".svc-question__content-actions .sv-action").nth(4);
-const questions = Selector(".svc-question__content");
+const requiredActionButton = questionToolbarActions.find('button[title="Is required?"]');
+const deleteActionButton = questionToolbarActions.find('button[title="Delete"]');
+const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
+const duplicateActionButton = questionToolbarActions.find('button[title="Duplicate"]');
+const dotsButton = Selector(".svc-question__content-actions .sv-action.sv-dots");
 
 test("Single input question wrapper actions", async (t) => {
-  const separator = controls.nth(3).find(".sv-action-bar-separator");
+  const separator = questionToolbarActions.nth(3).find(".sv-action-bar-separator");
 
   await t
     .expect(questions.exists).notOk()
@@ -28,7 +26,7 @@ test("Single input question wrapper actions", async (t) => {
     .click(Selector("div[title='Single Input']"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
-    .expect(controls.count).eql(4)
+    .expect(questionToolbarActions.count).eql(4)
     .expect(convertActionButton.visible).ok()
     .expect(duplicateActionButton.visible).ok()
     .expect(requiredActionButton.visible).ok()
@@ -39,7 +37,7 @@ test("Single input question wrapper actions", async (t) => {
 });
 
 test("Single input question wrapper action convert", async (t) => {
-  const convertActionButton = controls.find('button[title="Single Input"]');
+  const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
   const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
 
   await t
@@ -59,7 +57,7 @@ test("Single input question wrapper action convert", async (t) => {
     .click(listItems.nth(3))
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
 
-    .click(controls.find('button[title="Comment"]'))
+    .click(questionToolbarActions.find('button[title="Comment"]'))
     .expect(listItems.count).eql(18)
     .expect(listItems.nth(0).innerText).eql("Single Input")
     .expect(listItems.nth(1).innerText).eql("Checkbox")
@@ -102,17 +100,18 @@ test("Single input question wrapper action change require", async (t) => {
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok();
 
-  const requiredActionRoot = controls.nth(2);
   await t.expect(requiredActionButton.visible).ok();
 
   let title = await questionTitle.innerText;
   await t
-    .expect(normalize(title)).eql("1. question1").expect(requiredActionRoot.hasClass("sv-action-bar-item--secondary")).notOk()
+    .expect(normalize(title)).eql("1. question1")
+    .expect(requiredActionButton.parent(".sv-action").hasClass("sv-action-bar-item--secondary")).notOk()
 
     .click(requiredActionButton);
   title = await questionTitle.innerText;
   await t
-    .expect(normalize(title)).eql("1. question1 *").expect(requiredActionRoot.hasClass("sv-action-bar-item--secondary")).ok();
+    .expect(normalize(title)).eql("1. question1 *")
+    .expect(requiredActionButton.parent(".sv-action").hasClass("sv-action-bar-item--secondary")).ok();
 });
 
 test("Single input question wrapper action delete", async (t) => {
