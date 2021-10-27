@@ -119,18 +119,6 @@ svc-question,
   bottom: 0;
 }
 
-// reset styles for drag-drop-ghost-survey-element to avoid layout jumping while dragging
-.svc-question__adorner--start-with-new-line {
-  &[data-sv-drop-target-survey-element="sv-drag-drop-ghost-survey-element-name"] {
-    height: 100%;
-    overflow: hidden;
-    min-width: 4px;
-    .svc-question__content.svc-question__content.svc-question__content   {
-      border: 0;
-      padding: 0;
-    }
-  }
-}
 
 [data-sv-drop-target-survey-element="sv-drag-drop-ghost-survey-element-name"] {
   border: none;
