@@ -38,7 +38,7 @@ export class PropertyPanelComponent extends SurveyElementBase<IPropertyGridCompo
   }
   renderElement() {
     const style = { display: !this.model.visible ? "none" : "" };
-    const className = this.model.flyoutPanelMode ? "svc-flyoutPanelMode-panel" : "";
+    const className = "svc-properties-container" + (this.model.flyoutPanelMode ? " svc-flyoutPanelMode-panel" : "");
     return (
       <div className={className}>
         <div className="svc-properties-shadow"></div>
