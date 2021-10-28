@@ -1,4 +1,4 @@
-import { getTabbedMenuItemByText, url } from "../helper";
+import { collapseButtonSelector, expandButtonSelector, getTabbedMenuItemByText, objectSelectorButton, objectSelectorPopup, propertyGridSelector, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid";
 
@@ -19,12 +19,6 @@ const json = {
 fixture(title)
   .page(url)
   .beforeEach(async (t) => await t.maximizeWindow());
-
-const expandButtonSelector = Selector(".sv-action-bar-item[title=\"Show Panel\"]");
-const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide Panel\"]");
-const propertyGridSelector = Selector(".svc-property-panel");
-const objectSelectorButton = Selector(".svc-property-panel__header #svd-grid-object-selector .sv-action-bar-item");
-const objectSelectorPopup = Selector(".sv-popup .svc-object-selector");
 
 test("collapse/expand buttons", async (t) => {
   await ClientFunction((json) => { window["creator"].JSON = json; })(json);

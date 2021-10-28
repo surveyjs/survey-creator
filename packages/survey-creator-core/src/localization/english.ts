@@ -12,6 +12,7 @@ export var enStrings = {
     addLogicItem: "Create a rule to customize the flow of the survey.",
     copy: "Copy",
     duplicate: "Duplicate",
+    settings: "Settings",
     addToToolbox: "Add to toolbox",
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",

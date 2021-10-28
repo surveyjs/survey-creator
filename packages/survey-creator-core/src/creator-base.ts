@@ -2503,11 +2503,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.responsivityManager = new CreatorResponsivityManager(container, this);
   }
   public resetResponsivityManager(): void {
-    if(!!this.responsivityManager) {
+    if (!!this.responsivityManager) {
       this.responsivityManager.dispose();
       this.responsivityManager = undefined;
     }
   }
+  @property({ defaultValue: true }) showPageNavigator;
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
   selectFromStringEditor: boolean;
