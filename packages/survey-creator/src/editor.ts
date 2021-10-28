@@ -515,6 +515,7 @@ export class SurveyCreator
     (sender: SurveyCreator, options: any) => any,
     any
   > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  selectFromStringEditor: boolean;
 
   /**
    * You need to set this property to true if you want to inplace edit item values instead of texts.
