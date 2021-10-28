@@ -1,10 +1,7 @@
 import { CreatorTester } from "../creator-tester";
-import {
-  TabTestPlugin,
-  TestSurveyTabViewModel
-} from "../../src/components/tabs/test";
+import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { IAction, ListModel } from "survey-core";
-import { assert } from "console";
+import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
@@ -23,25 +20,24 @@ test("Test language Bar Item", (): any => {
       }
     ]
   };
-  const model: TestSurveyTabViewModel = getTestModel(creator);
-  expect(model.showDefaultLanguageInTestSurveyTab).toBeTruthy();
-  expect(model.languages).toHaveLength(2);
-  expect(model.languages[0].id).toEqual("en");
-  expect(model.languages[1].id).toEqual("de");
-  expect(model.languages[1].title).toEqual("deutsch");
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(testPlugin["languageListModel"].actions).toHaveLength(2);
+  expect(testPlugin["languageListModel"].actions[0].id).toEqual("en");
+  expect(testPlugin["languageListModel"].actions[1].id).toEqual("de");
+  expect(testPlugin["languageListModel"].actions[1].title).toEqual("deutsch");
   expect(model.activeLanguage).toEqual("en");
-  let langAction = model.actions.filter(
-    (action) => action.id === "languageSelector"
-  )[0];
+  let langActions = creator.toolbar.actions.filter((action) => action.id === "languageSelector");
+  expect(langActions).toHaveLength(1);
+  let langAction = langActions[0];
   expect(langAction).toBeTruthy();
   expect(langAction.title).toEqual("english");
-  model.activeLanguage = "de";
+  testPlugin["languageListModel"].selectItem(testPlugin["languageListModel"].actions.filter(act => act.id === "de")[0]);
   expect(model.survey.locale).toEqual("de");
   expect(langAction.title).toEqual("deutsch");
 
-  let testAgain = model.actions.filter(
-    (action) => action.id === "testSurveyAgain"
-  )[0];
+  let testAgain = creator.toolbar.actions.filter((action) => action.id === "testSurveyAgain")[0];
   expect(testAgain).toBeTruthy();
   testAgain.action();
   expect(model.survey.locale).toEqual("de");
@@ -57,14 +53,15 @@ test("Test languages dropdown with unknown language", (): any => {
       }
     ]
   };
-  const model: TestSurveyTabViewModel = getTestModel(creator);
-  expect(model.showDefaultLanguageInTestSurveyTab).toBeTruthy();
-  expect(model.languages).toHaveLength(3);
-  expect(model.languages[0].id).toEqual("en");
-  expect(model.languages[1].id).toEqual("de");
-  expect(model.languages[1].title).toEqual("deutsch");
-  expect(model.languages[2].id).toEqual("ff");
-  expect(model.languages[2].title).toEqual("ff");
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(testPlugin["languageListModel"].actions).toHaveLength(3);
+  expect(testPlugin["languageListModel"].actions[0].id).toEqual("en");
+  expect(testPlugin["languageListModel"].actions[1].id).toEqual("de");
+  expect(testPlugin["languageListModel"].actions[1].title).toEqual("deutsch");
+  expect(testPlugin["languageListModel"].actions[2].id).toEqual("ff");
+  expect(testPlugin["languageListModel"].actions[2].title).toEqual("ff");
   expect(model.activeLanguage).toEqual("en");
 });
 test("Check page list state after change page arrows click", (): any => {
@@ -112,18 +109,12 @@ test("Check page list state after change page arrows click", (): any => {
     ]
   };
   const model: TestSurveyTabViewModel = getTestModel(creator);
-  const pageList: ListModel = model.pageActions.filter(
-    (item: IAction) => item.id === "pageSelector"
-  )[0].popupModel.contentComponentData.model;
+  const pageList: ListModel = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0].popupModel.contentComponentData.model;
   expect(pageList.selectedItem.data).toEqual(model.activePage);
-  const nextPage: IAction = model.pageActions.filter(
-    (item: IAction) => item.id === "nextPage"
-  )[0];
+  const nextPage: IAction = model.pageActions.filter((item: IAction) => item.id === "nextPage")[0];
   nextPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
-  const prevPage: IAction = model.pageActions.filter(
-    (item: IAction) => item.id === "prevPage"
-  )[0];
+  const prevPage: IAction = model.pageActions.filter((item: IAction) => item.id === "prevPage")[0];
   prevPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
 });
@@ -137,11 +128,9 @@ test("Show/hide device similator", (): any => {
       }
     ]
   };
-  let model: TestSurveyTabViewModel = getTestModel(creator);
-  expect(model.showSimulator).toBeTruthy();
-  let similatorAction = model.actions.filter(
-    (action) => action.id === "deviceSelector"
-  )[0];
+  let testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  let similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
   expect(similatorAction).toBeTruthy();
   expect(similatorAction.visible).toBeTruthy();
 
@@ -154,13 +143,10 @@ test("Show/hide device similator", (): any => {
       }
     ]
   };
-  model = getTestModel(creator);
-  expect(model.showSimulator).toBeFalsy();
-  similatorAction = model.actions.filter(
-    (action) => action.id === "deviceSelector"
-  )[0];
-  expect(similatorAction).toBeTruthy();
-  expect(similatorAction.visible).toBeFalsy();
+  testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
+  expect(similatorAction).toBeFalsy();
 });
 test("pages, PageListItems, makes items enable/disable and do not touch visibility", (): any => {
   var creator = new CreatorTester();
@@ -194,12 +180,12 @@ test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", ():
     ]
   };
   creator.onGetObjectDisplayName.add((sender, options) => {
-    if(options.reason === "survey-tester") {
+    if (options.reason === "survey-tester") {
       const survey = options.obj.survey;
       const index = survey.pages.indexOf(options.obj);
       options.displayName = (index + 1).toString() + ". " + options.displayName;
     }
-    if(options.reason === "survey-tester-selected") {
+    if (options.reason === "survey-tester-selected") {
       const survey = options.obj.survey;
       const index = survey.pages.indexOf(options.obj);
       options.displayName = "Page " + (index + 1).toString() + " from " + survey.pages.length;

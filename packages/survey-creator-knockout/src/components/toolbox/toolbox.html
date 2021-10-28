@@ -1,3 +1,4 @@
+<!-- ko if: $data.toolbox.visible -->
 <div class="svc-toolbox" data-bind="css: { 'svc-toolbox--compact': $data.toolbox.isCompact }">
   <div class="svc-toolbox__container">
     <!-- ko ifnot: $data.toolbox.isCompact || categories().length == 1 -->
@@ -7,15 +8,17 @@
       <div class="svc-toolbox__category-header" data-bind="click: toggleState, key2click">
         <span class="svc-toolbox__category-title" data-bind="text: name"></span>
         <div class="svc-toolbox__category-header__controls">
-          <sv-svg-icon class="svc-toolbox__category-header__button svc-string-editor__button--expand" data-bind="visible: collapsed" params="iconName: 'icon-expand', size: 16"></sv-svg-icon>
-          <sv-svg-icon class="svc-toolbox__category-header__button svc-string-editor__button--collapse" data-bind="visible: !collapsed" params="iconName: 'icon-collapse', size: 16"></sv-svg-icon>
+          <sv-svg-icon class="svc-toolbox__category-header__button svc-string-editor__button--expand"
+            data-bind="visible: collapsed" params="iconName: 'icon-expand', size: 16"></sv-svg-icon>
+          <sv-svg-icon class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
+            data-bind="visible: !collapsed" params="iconName: 'icon-collapse', size: 16"></sv-svg-icon>
         </div>
       </div>
       <!-- /ko -->
       <!-- ko ifnot: collapsed -->
       <!-- ko foreach: items -->
-        <!-- ko component: { name: $data.component || 'svc-toolbox-tool', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
-        <!-- /ko -->
+      <!-- ko component: { name: $data.component || 'svc-toolbox-tool', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
+      <!-- /ko -->
       <!-- /ko -->
       <!-- /ko -->
     </div>
@@ -32,3 +35,4 @@
     <!-- /ko -->
   </div>
 </div>
+<!-- /ko -->

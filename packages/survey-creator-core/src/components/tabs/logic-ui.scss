@@ -180,6 +180,7 @@
 }
 
 .svc-logic-paneldynamic {
+  font-family: $font-family;
   .sd-row--multiple {
     padding: 0;
     background: none;
@@ -192,6 +193,9 @@
   }
   .sd-row__question {
     margin-top: 0;
+  }
+  .sd-row__panel {
+    width: calc(100% - 5 * #{$base-unit});
   }
 }
 

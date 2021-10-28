@@ -95,8 +95,13 @@ export class StringEditorViewModelBase extends Base {
     if (!property || !property.placeholder) return "";
     return editorLocalization.getString(property.placeholder);
   }
+  public get contentEditable(): boolean {
+    return this.creator.isCanModifyProperty(<any>this.locString.owner, this.locString.name);
+  }
 
   public className(text: any): string {
-    return "svc-string-editor"+(text == "" && this.placeholder==""?" svc-string-editor--hidden":"");
+    return "svc-string-editor"+
+          (text == "" && this.placeholder==""?" svc-string-editor--hidden":"") +
+          (this.contentEditable?"":" svc-string-editor--readonly");
   }
 }

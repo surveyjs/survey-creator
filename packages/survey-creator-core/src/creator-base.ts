@@ -39,7 +39,7 @@ import { SelectionHistory } from "./selection-history";
 import { TabEmbedPlugin } from "./components/tabs/embed";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
-import { TabTestPlugin } from "./components/tabs/test";
+import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
@@ -51,6 +51,7 @@ import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/u
 import { PropertyGridViewModelBase } from "./property-grid/property-grid-view-model";
 import { TabDesignerPlugin } from "./components/tabs/designer";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
+import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -153,6 +154,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
+  private responsivityManager: CreatorResponsivityManager;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -1271,12 +1273,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.doOnElementRemoved(options.question);
     });
     */
+    survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     this.setSurvey(survey);
     const currentPlugin = this.getPlugin(this.activeTab);
     if (!!currentPlugin && !!currentPlugin.update) {
       currentPlugin.update();
     }
-    survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
   }
 
   protected initDragDrop() {
@@ -1577,16 +1579,40 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.survey.addNewPage();
     }
     var parent: IPanel = this.currentPage;
-    var elElement = this.getSelectedSurveyElement();
-    if (elElement && elElement.parent && elElement["page"] == parent) {
-      parent = elElement.parent;
+    var selectedElement = this.getSelectedSurveyElement();
+    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent) {
+      parent = selectedElement.parent;
       if (index < 0) {
-        index = parent.elements.indexOf(elElement);
+        index = parent.elements.indexOf(selectedElement);
         if (index > -1) index++;
       }
     }
-    parent.addElement(element, index);
+    const currentRow = this.findRowByElement(selectedElement, parent);
+    if (currentRow && this.isRowMultiline(currentRow)) {
+      this.addElemenMultiline(parent, element, index, currentRow);
+    } else {
+      parent.addElement(element, index);
+    }
+
     this.setModified({ type: modifiedType, question: element });
+  }
+
+  private isRowMultiline(row) {
+    return row.elements.length > 1;
+  }
+
+  private findRowByElement(element, parent) {
+    if (!element) return null;
+    if (element.isPage) return element.rows[element.rows.length - 1];
+    return parent.rows.find(row => row.elements.indexOf(element) !== -1);
+  }
+
+  private addElemenMultiline(parent: any, element: any, index, currentRow: any) {
+    const elsCount = currentRow.elements.length;
+    const prevElement = currentRow.elements[elsCount - 1];
+    prevElement.startWithNewLine = true;
+    parent.addElement(element, index);
+    prevElement.startWithNewLine = false;
   }
 
   public setNewNames(element: Survey.ISurveyElement) {
@@ -1940,17 +1966,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return isValid;
   }
   private selectionChanged(element: Base, propertyName?: string, focus = true) {
-    if (
-      !!element &&
-      typeof element.getType === "function" &&
-      element.getType() === "page"
-    ) {
-      this.survey.currentPage = <PageModel>element;
-    } else if (!!element && !!element["page"]) {
-      this.survey.currentPage = element["page"];
-    } else {
-      this.survey.currentPage = undefined;
-    }
+    this.survey.currentPage = this.getCurrentPageByElement(element);
     this.selectionHistoryController.onObjSelected(element);
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
@@ -1960,6 +1976,13 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     var options = { newSelectedElement: element };
     this.onSelectedElementChanged.fire(this, options);
+  }
+  private getCurrentPageByElement(element: Base): PageModel {
+    if (!element) return undefined;
+    if (element["isPage"]) return element as PageModel;
+    if (!!element["page"]) return element["page"];
+    if (!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
+    return undefined;
   }
   public clickToolboxItem(newElement: any) {
     if (!this.readOnly) {
@@ -2470,6 +2493,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.tabs.forEach((tab) => (tab.active = this.viewType === tab.id));
     }
   }
+  public initResponsivityManager(container: HTMLDivElement): void {
+    this.responsivityManager = new CreatorResponsivityManager(container, this);
+  }
+  public resetResponsivityManager(): void {
+    if(!!this.responsivityManager) {
+      this.responsivityManager.dispose();
+      this.responsivityManager = undefined;
+    }
+  }
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
 }
@@ -2494,7 +2526,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   if (reason === "cell" || reason === "column-header" || reason === "row-header") {
     return "svc-matrix-cell";
   }
-  if (!element.parentQuestionValue && !element.isContentElement) {
+  if (!element.isContentElement) {
     if (element instanceof Question) {
       if (isPopupEditorContent) {
         return element.getType() == "dropdown" ? "svc-cell-dropdown-question" : "svc-cell-question";
@@ -2538,21 +2570,19 @@ export function getElementWrapperComponentData(
       column: element.column
     };
   }
-  if (!element["parentQuestionValue"]) {
-    if (element instanceof Question) {
-      return creator;
-    }
-    if (element instanceof PanelModel) {
-      return creator;
-    }
-  }
+  const hasWrapper = getElementWrapperComponentName(element, reason, false);
+  if (!hasWrapper) return undefined;
+  if (element instanceof Question)
+    return creator;
+  if (element instanceof PanelModel)
+    return creator;
   return null;
 }
 export function getItemValueWrapperComponentName(
   item: ItemValue,
   question: QuestionSelectBase
 ): string {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return SurveyModel.TemplateRendererComponentName;
   }
   if (question.getType() === "imagepicker") {
@@ -2565,7 +2595,7 @@ export function getItemValueWrapperComponentData(
   question: QuestionSelectBase,
   creator: CreatorBase<SurveyModel>
 ): any {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return item;
   }
   return {
@@ -2575,10 +2605,8 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  return (
-    (!element.parentQuestionValue && !element.isContentElement) ||
-    element.isEditableTemplateElement
-  );
+  const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
+  return !parentIsMatrix&& (!element.isContentElement || element.isEditableTemplateElement);
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;

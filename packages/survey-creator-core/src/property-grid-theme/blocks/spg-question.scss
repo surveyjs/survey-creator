@@ -23,6 +23,18 @@
 
 .spg-question__content {
   width: 100%;
+  color: $primary;
+  cursor: pointer;
+}
+.spg-question-link__set-button {
+  font-weight: 600;
+  cursor: pointer;
+}
+.spg-question-link__clear-button {
+  margin-left: calcSize(4);
+  color: $red;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .spg-question__description {

@@ -37,6 +37,96 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
   await t.expect(ghostPageRowsCount).eql(0);
 });
 
+test("Drag Drop Toolbox All Questions", async (t) => {
+  const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
+
+  const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
+  const CheckboxItem = Selector("[aria-label='Checkbox toolbox item']");
+  const RadiogroupItem = Selector("[aria-label='Radiogroup toolbox item']");
+  const DropdownItem = Selector("[aria-label='Dropdown toolbox item']");
+  const CommentItem = Selector("[aria-label='Comment toolbox item']");
+  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+  const RankingItem = Selector("[aria-label='Ranking toolbox item']");
+  const ImagePickerItem = Selector("[aria-label='Image picker toolbox item']");
+  const BooleanItem = Selector("[aria-label='Boolean toolbox item']");
+  const ImageItem = Selector("[aria-label='Image toolbox item']");
+  const HtmlItem = Selector("[aria-label='Html toolbox item']");
+  const SignatureItem = Selector("[aria-label='Signature pad toolbox item']");
+  const ExpressionItem = Selector("[aria-label='Expression (read-only) toolbox item']");
+  const FileItem = Selector("[aria-label='File toolbox item']");
+  const MatrixSingleChoiceItem = Selector("[aria-label='Matrix (single choice) toolbox item']");
+  const MatrixMultipleChoiceItem = Selector("[aria-label='Matrix (multiple choice) toolbox item']");
+  const MatrixDynamicRowsItem = Selector("[aria-label='Matrix (dynamic rows) toolbox item']");
+  const MultipleTextItem = Selector("[aria-label='Multiple Text toolbox item']");
+  const PanelItem = Selector("[aria-label='Panel toolbox item']");
+  const PanelDynamicItem = Selector("[aria-label='Panel toolbox item']");
+
+  await t
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, EmptyPage, { speed: 0.5 }) // first time drag to single Empty page, next times drag to ghost page
+
+    .hover(CheckboxItem)
+    .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(RadiogroupItem)
+    .dragToElement(RadiogroupItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(DropdownItem)
+    .dragToElement(DropdownItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(CommentItem)
+    .dragToElement(CommentItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(RankingItem)
+    .dragToElement(RankingItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(ImagePickerItem)
+    .dragToElement(ImagePickerItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(HtmlItem)
+    .dragToElement(HtmlItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(SignatureItem)
+    .dragToElement(SignatureItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(ExpressionItem)
+    .dragToElement(ExpressionItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(FileItem)
+    .dragToElement(FileItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(MatrixSingleChoiceItem)
+    .dragToElement(MatrixSingleChoiceItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(MatrixMultipleChoiceItem)
+    .dragToElement(MatrixMultipleChoiceItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(MatrixDynamicRowsItem)
+    .dragToElement(MatrixDynamicRowsItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(MultipleTextItem)
+    .dragToElement(MultipleTextItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(PanelItem)
+    .dragToElement(PanelItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(PanelDynamicItem)
+    .dragToElement(PanelDynamicItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(BooleanItem)
+    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 })
+
+    .hover(ImageItem)
+    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 });
+
+  const pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(20);
+});
+
 test("Drag Drop Question", async (t) => {
   await t.resizeWindow(2560, 1440);
   const json = {
@@ -360,6 +450,61 @@ test("Drag Drop Question with Multiline and OtherPage (StartWithNewLine === fals
 
   const check = ClientFunction(() => {
     return window["creator"].survey.getAllQuestions()[1].startWithNewLine;
+  });
+  const result = await check();
+  await t.expect(result).eql(true);
+});
+
+test("Drag Drop Question out of Multiline (StartWithNewLine === false)", async (t) => {
+  await t.resizeWindow(2560, 1440);
+
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "startWithNewLine": false,
+            "name": "question2"
+          },
+          {
+            "type": "text",
+            "startWithNewLine": false,
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const Question1 = Selector(
+    "[data-sv-drop-target-survey-element=\"question1\"]"
+  );
+  const Question2 = Selector(
+    "[data-sv-drop-target-survey-element=\"question2\"]"
+  );
+  const DragZoneQuestion2 = Question2.find(".svc-question__drag-element");
+
+  await t.hover(Question2, { speed: 0.5, offsetY: 30 });
+  await t.hover(DragZoneQuestion2);
+
+  await t.dragToElement(DragZoneQuestion2, Question1, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetX: -1,
+    destinationOffsetY: -1,
+    speed: 0.1
+  });
+
+  const check = ClientFunction(() => {
+    return window["creator"].survey.getAllQuestions()[2].startWithNewLine;
   });
   const result = await check();
   await t.expect(result).eql(true);

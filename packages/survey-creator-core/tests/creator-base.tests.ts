@@ -10,13 +10,14 @@ import {
   QuestionRatingModel,
   QuestionDropdownModel,
   ItemValue,
-  settings as surveySettings
+  settings as surveySettings,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
-import { TabTestPlugin } from "../src/components/tabs/test";
+import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
 import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
@@ -25,6 +26,7 @@ import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import { PropertyGridViewModel } from "../src/property-grid/property-grid-view-model";
 
 import {
+  getElementWrapperComponentData,
   getElementWrapperComponentName,
   ICreatorPlugin,
   isStringEditable
@@ -970,10 +972,25 @@ test("getElementWrapperComponentName", (): any => {
   expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", false)).toEqual("svc-dropdown-question");
   expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", true)).toEqual("svc-cell-dropdown-question");
   expect(getElementWrapperComponentName({ isContentElement: true }, "", false)).toEqual(undefined);
+  const panelDynamic = new QuestionPanelDynamicModel("q1");
+  const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
+  expect(getElementWrapperComponentName(panelDynamictemplateQuestion, "", false)).toEqual("svc-dropdown-question");
 });
+
+test("getElementWrapperComponentData", (): any => {
+  const testCreator: any = { test: "test" };
+  expect(getElementWrapperComponentData(new QuestionTextModel(""), "", testCreator)).toEqual(testCreator);
+  expect(getElementWrapperComponentData(new QuestionImageModel(""), "", testCreator)).toEqual(testCreator);
+  expect(getElementWrapperComponentData(new QuestionRatingModel(""), "", testCreator)).toEqual(testCreator);
+  expect(getElementWrapperComponentData(new QuestionDropdownModel(""), "", testCreator)).toEqual(testCreator);
+  expect(getElementWrapperComponentData({ isContentElement: true }, "", testCreator)).toEqual(undefined);
+  const panelDynamic = new QuestionPanelDynamicModel("q1");
+  const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
+  expect(getElementWrapperComponentData(panelDynamictemplateQuestion, "", testCreator)).toEqual(testCreator);
+});
+
 test("isStringEditable", (): any => {
   expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
-  expect(isStringEditable({ parentQuestionValue: {} }, "")).toBeFalsy();
   expect(isStringEditable({}, "")).toBeTruthy();
   expect(
     isStringEditable({ isEditableTemplateElement: true }, "")
@@ -1714,4 +1731,47 @@ test("process shortcut for text inputs", (): any => {
   expect(log).toEqual("->execute->execute->execute");
   creator["onKeyDownHandler"](<any>{ keyCode: 46, target: { tagName: "span", isContentEditable: true } });
   expect(log).toEqual("->execute->execute->execute");
+});
+
+test("doClickQuestionCore", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question4"
+          },
+          {
+            "type": "boolean",
+            "name": "question1"
+          },
+          {
+            "type": "radiogroup",
+            "name": "question2",
+            "startWithNewLine": false,
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          },
+          {
+            "type": "rating",
+            "name": "question3",
+            "startWithNewLine": false
+          }
+        ]
+      }
+    ]
+  };
+  const q3 = creator.survey.getQuestionByName("question3");
+  creator.selectElement(q3);
+  const newQuestion1 = new QuestionTextModel("newQuestion1");
+  creator["doClickQuestionCore"](newQuestion1);
+  expect(creator.survey.getAllQuestions()[4].name).toEqual("newQuestion1");
+  expect(creator.survey.getAllQuestions()[4].startWithNewLine).toEqual(true);
+  expect(creator.survey.getAllQuestions()[3].startWithNewLine).toEqual(false);
 });

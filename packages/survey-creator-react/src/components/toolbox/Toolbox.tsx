@@ -56,7 +56,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
 
   render(): JSX.Element {
-    if (!this.toolbox.hasActions) return null;
+    if (!this.toolbox.hasActions || !this.toolbox.visible) return null;
     if (this.toolbox.isCompact || this.toolbox.categories.length == 1) {
       const items = this.renderItems();
       return (

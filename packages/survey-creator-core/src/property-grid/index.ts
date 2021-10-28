@@ -111,7 +111,13 @@ export interface IPropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any;
-  onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
+  showModalPropertyEditor (
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): any;
+  onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   onAfterRenderQuestion?: (
     obj: Base,
     prop: JsonObjectProperty,
@@ -204,10 +210,10 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop, context);
     return !!res ? res.getJSON(obj, prop, options) : null;
   },
-  onCreated(obj: Base, question: Question, prop: JsonObjectProperty): any {
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     var res = this.getEditor(prop);
     if (!!res && !!res.onCreated) {
-      res.onCreated(obj, question, prop);
+      res.onCreated(obj, question, prop, options);
     }
   },
   onAfterRenderQuestion(obj: Base, prop: JsonObjectProperty, evtOptions: any) {
@@ -347,30 +353,12 @@ export class PropertyGridTitleActionsCreator {
     property: JsonObjectProperty,
     question: Question
   ) {
-    const surveyPropertyEditor = editor.createPropertyEditorSetup(
-      question.obj,
+    return editor.showModalPropertyEditor(
+      editor,
       property,
       question,
       this.options
     );
-    if (!surveyPropertyEditor) return null;
-    surveyPropertyEditor.editSurvey.css = defaultV2Css;
-    surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
-    if(!settings.showModal) return surveyPropertyEditor;
-    settings.showModal(
-      "survey",
-      {
-        survey: surveyPropertyEditor.editSurvey,
-        model: surveyPropertyEditor.editSurvey
-      },
-      (): boolean => {
-        return surveyPropertyEditor.apply();
-      },
-      undefined,
-      "sv-property-editor",
-      question.title
-    );
-    return surveyPropertyEditor;
   }
 
   private createEditorSetupAction(
@@ -488,7 +476,7 @@ export class PropertyJSONGenerator {
       if (!!helpText) {
         q.description = helpText;
       }
-      PropertyGridEditorCollection.onCreated(this.obj, q, prop);
+      PropertyGridEditorCollection.onCreated(this.obj, q, prop, this.options);
       this.options.onPropertyEditorCreatedCallback(this.obj, prop, q);
     }
   }
@@ -1028,6 +1016,38 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any;
+  showModalPropertyEditor(
+    editor: IPropertyGridEditor,
+    property: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): any {
+    const surveyPropertyEditor = editor.createPropertyEditorSetup(
+      question.obj,
+      property,
+      question,
+      options
+    );
+    if (!surveyPropertyEditor) return null;
+    surveyPropertyEditor.editSurvey.css = defaultV2Css;
+    surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
+    if(!settings.showModal) return surveyPropertyEditor;
+    settings.showModal(
+      "survey",
+      {
+        survey: surveyPropertyEditor.editSurvey,
+        model: surveyPropertyEditor.editSurvey
+      },
+      (): boolean => {
+        return surveyPropertyEditor.apply();
+      },
+      undefined,
+      "sv-property-editor",
+      question.title
+    );
+    return surveyPropertyEditor;
+  }
+
 }
 
 export class PropertyGridEditorBoolean extends PropertyGridEditor {
@@ -1156,6 +1176,7 @@ export class PropertyGridEditorStringArray extends PropertyGridEditor {
     };
   }
 }
+
 export class PropertyGridEditorDropdown extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return this.isLocaleProp(prop) || prop.hasChoices;
@@ -1288,7 +1309,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
 
 export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "set";
+    return prop.type == "set" || prop.type == "multiplevalues";
   }
   public getJSON(
     obj: Base,

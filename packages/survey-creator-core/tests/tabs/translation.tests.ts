@@ -482,7 +482,7 @@ test("stringsSurvey - text question dataList property, default", () => {
   expect(question1Props.rows).toHaveLength(2);
   expect(question1Props.rows[0].value).toEqual("dataList");
   const cellQuestion = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
-  expect(cellQuestion.multiLine).toBeTruthy();
+  expect(cellQuestion.acceptCarriageReturn).toBeTruthy();
   expect(cellQuestion.value).toEqual("Item1\nItem2");
   cellQuestion.value = "Item1\nItem2\nItem3";
   const question = <QuestionTextModel>survey.getAllQuestions()[0];
@@ -515,10 +515,10 @@ test("stringsSurvey - text question dataList property, several locales", () => {
   expect(question1Props.rows).toHaveLength(2);
   expect(question1Props.rows[0].value).toEqual("dataList");
   const cellQuestionDefault = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
-  expect(cellQuestionDefault.multiLine).toBeTruthy();
+  expect(cellQuestionDefault.acceptCarriageReturn).toBeTruthy();
   expect(cellQuestionDefault.value).toEqual("Item1\nItem2");
   const cellQuestionDe = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
-  expect(cellQuestionDe.multiLine).toBeTruthy();
+  expect(cellQuestionDe.acceptCarriageReturn).toBeTruthy();
   expect(cellQuestionDe.value).toEqual("Item1-de\nItem2-de");
   cellQuestionDe.value = "Item1-de\nItem2-de\nItem3-de";
   const textQuestion = <QuestionTextModel>survey.getAllQuestions()[0];

@@ -7,12 +7,14 @@ export { editorLocalization as localization } from "../editorLocalization";
 export * from "../settings";
 
 export * from "../creator-base";
+export * from "../creator-responsivity-manager";
 
 export * from "../components/tabs/embed";
 export * from "../components/tabs/json-editor-ace";
 export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
 export * from "../components/tabs/test";
+export * from "../components/tabs/test-plugin";
 export * from "../components/tabs/logic";
 export * from "../components/tabs/translation";
 export * from "../components/tabs/translation-theme";
@@ -22,7 +24,7 @@ export * from "../components/tabs/logic-ui";
 export * from "../components/tabs/logic-plugin";
 export * from "../components/tabs/logic-theme";
 
-export * from "../components/toolbox/toolbox-item";
+export * from "../components/toolbox/toolbox-tool";
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page";
 export * from "../components/row";
@@ -64,7 +66,7 @@ import "../components/property-panel/property-panel-item.scss";
 import "../components/property-panel/property-panel.scss";
 import "../components/tabbed-menu/tabbed-menu-item.scss";
 import "../components/tabbed-menu/tabbed-menu.scss";
-import "../components/toolbox/toolbox-item.scss";
+import "../components/toolbox/toolbox-tool.scss";
 import "../components/question-dropdown.scss";
 import "../components/toolbox/toolbox.scss";
 import "../property-grid-theme/property-grid.scss";

@@ -3,7 +3,7 @@ import { IQuestionToolboxItem } from "../../toolbox";
 import { CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
 
-export class ToolboxItemViewModel extends Base {
+export class ToolboxToolViewModel extends Base {
   constructor(
     protected item: IQuestionToolboxItem,
     protected creator: CreatorBase<SurveyModel>
@@ -24,6 +24,7 @@ export class ToolboxItemViewModel extends Base {
 
   public onPointerDown(pointerDownEvent) {
     if (!this.allowAdd) return;
+    if (this.item.id === 'dotsItem-id') return true; //toolbox responsive popup
     this.pointerDownEvent = pointerDownEvent;
     this.startX = pointerDownEvent.pageX;
     this.startY = pointerDownEvent.pageY;
@@ -31,6 +32,7 @@ export class ToolboxItemViewModel extends Base {
   }
   public click = (event) => {
     if (!this.allowAdd) return;
+    if (this.item.id === 'dotsItem-id') return true; //toolbox responsive popup
     this.clearListeners();
     this.creator.clickToolboxItem(this.item.json);
   };
