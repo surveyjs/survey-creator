@@ -765,18 +765,15 @@ export class PropertyGridModel {
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
     }
-    this.survey.getAllPanels().forEach((panel: PanelModel) => {
-      panel.onFocusIn.add((sender, options)=>{
-        if(!!options.question) {
-          this.currentlySelectedProperty = options.question.name;
-          this.currentlySelectedPanel = options.panel;
-        }
-        else {
-          if(this.currentlySelectedPanel !== options.panel)
-            this.currentlySelectedProperty = options.panel.getFirstQuestionToFocus().name;
-          this.currentlySelectedPanel = options.panel;
-        }
-      });
+    this.survey.onFocusInPanel.add((sender, options) => {
+      if(this.currentlySelectedPanel !== options.panel) {
+        this.currentlySelectedProperty = options.panel.getFirstQuestionToFocus().name;
+        this.currentlySelectedPanel = options.panel;
+      }
+    });
+    this.survey.onFocusInQuestion.add((sender, options) => {
+      this.currentlySelectedProperty = options.question.name;
+      this.currentlySelectedPanel = options.question.parent;
     });
   }
   public get options(): ISurveyCreatorOptions {
