@@ -7,7 +7,7 @@ import {
   property,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { surveyDesignerCss } from "survey-core";
+import { defaultV2Css } from "survey-core";
 import { toggleHovered } from "../utils/utils";
 
 import "./matrix-cell.scss";
@@ -35,7 +35,7 @@ export class MatrixCellWrapperViewModel extends Base {
     let questionJSON = model.question.toJSON();
     questionJSON.type = model.question.getType();
     const survey = model.creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor");
-    survey.css = surveyDesignerCss;
+    survey.css = defaultV2Css;
     survey.setDesignMode(true);
     survey.isPopupEditorContent = true;
     survey.showQuestionNumbers = "none";

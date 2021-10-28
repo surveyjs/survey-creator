@@ -23,7 +23,7 @@ import {
   getLogicString
 } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
-import { surveyDesignerCss } from "survey-core";
+import { defaultV2Css } from "survey-core";
 import { SurveyHelper } from "../../survey-helper";
 
 function logicTypeVisibleIf(params: any): boolean {
@@ -112,7 +112,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
-    this.editSurvey.css = surveyDesignerCss;
+    this.editSurvey.css = defaultV2Css;
     this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {

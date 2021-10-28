@@ -43,7 +43,7 @@ import { TabTestPlugin } from "./components/tabs/test";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
-import { surveyDesignerCss } from "survey-core";
+import { defaultV2Css } from "survey-core";
 import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
@@ -1234,7 +1234,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};
     const survey = this.createSurvey({});
-    survey.css = surveyDesignerCss;
+    survey.css = defaultV2Css;
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
