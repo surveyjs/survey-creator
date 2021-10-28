@@ -10,7 +10,8 @@ import {
   ListModel,
   Question,
   ItemValue,
-  Serializer
+  Serializer,
+  DragTypeOverMeEnum
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -74,20 +75,32 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       result += " svc-question__content--empty";
     }
 
-    if (this.isDragOverMe) {
-      result += " svc-question__content--drag-overred";
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel) {
+      result += " svc-question__content--drag-over-inside";
     } else {
-      result = result.replace(" svc-question__content--drag-overred", "");
+      result = result.replace(" svc-question__content--drag-over-inside", "");
+    }
+
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineLeft) {
+      result += " svc-question__content--drag-over-left";
+    } else {
+      result = result.replace(" svc-question__content--drag-over-left", "");
+    }
+
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineRight) {
+      result += " svc-question__content--drag-over-right";
+    } else {
+      result = result.replace(" svc-question__content--drag-over-right", "");
     }
 
     return result;
   }
 
-  get isDragOverMe(): boolean {
-    if (this.surveyElement.getType() === "paneldynamic") {
-      return (<any>this.surveyElement).template.isDragOverMe;
-    }
-    return this.surveyElement.isDragOverMe;
+  get dragTypeOverMe(): DragTypeOverMeEnum {
+    let element = this.surveyElement.getType() === "paneldynamic" ?
+      (<any>this.surveyElement).template :
+      this.surveyElement;
+    return element.dragTypeOverMe;
   }
 
   dispose() {
