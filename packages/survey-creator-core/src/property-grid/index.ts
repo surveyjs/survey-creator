@@ -31,7 +31,7 @@ import {
 } from "../settings";
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
-import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
+import { defaultV2Css } from "survey-core";
 import { updateMatrixRemoveAction } from "../utils/actions";
 import { SurveyHelper } from "../survey-helper";
 
@@ -1043,7 +1043,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       options
     );
     if (!surveyPropertyEditor) return null;
-    surveyPropertyEditor.editSurvey.css = surveyDesignerCss;
+    surveyPropertyEditor.editSurvey.css = defaultV2Css;
     surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     if(!settings.showModal) return surveyPropertyEditor;
     settings.showModal(

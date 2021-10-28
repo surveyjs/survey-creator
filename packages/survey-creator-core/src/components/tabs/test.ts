@@ -4,8 +4,6 @@ import "./test.scss";
 import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, AdaptiveActionContainer, IAction } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
-import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
-
 
 // import template from "./test.html";
 

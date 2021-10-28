@@ -3,7 +3,7 @@ import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
-import { surveyDesignerCss } from "../survey-designer-theme/survey-designer";
+import { defaultV2Css } from "survey-core";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";
@@ -266,7 +266,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
-    this.editSurvey.css = surveyDesignerCss;
+    this.editSurvey.css = defaultV2Css;
     this.text = !!this.object && this.propertyName ? this.object[this.propertyName] : "";
   }
   public get title(): string {
