@@ -18,6 +18,16 @@ export class CreatorResponsivityManager {
     });
     return res || "xs";
   }
+  private initMobileView() {
+    this.creator.showTabs = false;
+    this.creator.showToolbar = false;
+    this.creator.showFooterToolbar = true;
+  }
+  private resetMobileView() {
+    this.creator.showTabs = undefined;
+    this.creator.showToolbar = undefined;
+    this.creator.showFooterToolbar = undefined;
+  }
 
   constructor(protected container: HTMLDivElement, private creator: CreatorBase) {
     if (typeof ResizeObserver !== "undefined") {
@@ -25,7 +35,6 @@ export class CreatorResponsivityManager {
       this.resizeObserver.observe(this.container.parentElement);
       this.process();
     }
-
   }
 
   process() {
@@ -39,6 +48,12 @@ export class CreatorResponsivityManager {
     } else {
       this.creator.toolbox.isCompact = true;
       this.creator.toolbox.visible = false;
+    }
+
+    if (currentWidth == "xs") {
+      this.initMobileView();
+    } else {
+      this.resetMobileView();
     }
   }
 

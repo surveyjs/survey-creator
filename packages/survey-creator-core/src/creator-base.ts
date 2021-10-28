@@ -2497,13 +2497,14 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.responsivityManager = new CreatorResponsivityManager(container, this);
   }
   public resetResponsivityManager(): void {
-    if(!!this.responsivityManager) {
+    if (!!this.responsivityManager) {
       this.responsivityManager.dispose();
       this.responsivityManager = undefined;
     }
   }
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
+  @property({ defaultValue: false }) showFooterToolbar;
 }
 
 export class StylesManager {
@@ -2606,7 +2607,7 @@ export function getItemValueWrapperComponentData(
 }
 export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
-  return !parentIsMatrix&& (!element.isContentElement || element.isEditableTemplateElement);
+  return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;

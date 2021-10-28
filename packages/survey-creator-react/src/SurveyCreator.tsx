@@ -106,6 +106,13 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                   {this.renderActiveTab()}
                 </div>
               </div>
+              <div className="svc-footer-bar">
+                {(creator.showFooterToolbar ?
+                  <div className="svc-toolbar-wrapper">
+                    <SurveyActionBar model={creator.toolbar}></SurveyActionBar>
+                  </div>
+                  : null)}
+              </div>
             </div>
             {this.renderPropertyGrid()}
           </div>

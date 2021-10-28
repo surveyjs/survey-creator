@@ -60,7 +60,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     this.survey.onPanelRemoved.add(this.checkNewPageHandler);
     this.checkNewPage();
     this.widthUpdater && this.widthUpdater.dispose();
-    this.widthUpdater = new ComputedUpdater(() => {
+    this.widthUpdater = new ComputedUpdater<string>(() => {
       return this.survey.calculateWidthMode();
     });
     this.withModifier = <any>this.widthUpdater;
@@ -107,6 +107,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
   private expandAction: Action;
+  public previewAction: Action;
 
   constructor(private creator: CreatorBase<T>) {
     creator.addPluginTab("designer", this);
@@ -125,14 +126,9 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
-    this.surveySettingsAction && (this.surveySettingsAction.visible = true);
-    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible);
   }
   public deactivate(): boolean {
     this.model = undefined;
-
-    this.surveySettingsAction.visible = false;
-    this.expandAction && (this.expandAction.visible = false);
     return true;
   }
   public update(): void {
@@ -152,7 +148,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
         this.creator.selectElement(this.creator.survey);
       },
       active: this.isSurveySelected,
-      visible: this.creator.activeTab === "designer",
+      visible: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "designer"),
       title: "Settings",
       showTitle: false
     });
@@ -172,10 +168,30 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       tooltip: this.creator.getLocString("ed.saveSurveyTooltip"),
       showTitle: false
     });
+    this.previewAction = new Action({
+      id: "svd-preview",
+      iconName: "icon-preview",
+      needSeparator: true,
+      action: () => {
+        this.creator.makeNewViewActive(this.creator.viewType === "test" ? "designer" : "test");
+      },
+      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        const showFooterToolbar = this.creator.showFooterToolbar;
+        return (this.creator.activeTab === "designer" || this.creator.activeTab === "test") && showFooterToolbar;
+      }),
+      title: this.creator.getLocString("ed.testSurvey"),
+      showTitle: false
+    })
     items.push(this.saveSurveyAction);
     items.push(this.surveySettingsAction);
+    items.push(this.previewAction);
     if (settings.propertyGrid.allowCollapse) {
       this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
+      this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
+        const propertyGridvisible = !this.propertyGrid.visible;
+        return this.creator.activeTab === "designer" && propertyGridvisible;
+      })
       items.push(this.expandAction);
     }
     this.creator.onSelectedElementChanged.add((sender, options) => {
