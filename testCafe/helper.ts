@@ -32,6 +32,21 @@ export const getItemValueByIndex = ClientFunction((questionName, index) => {
   return choices[index].value;
 });
 
+export const expandButtonSelector = Selector(".sv-action-bar-item[title=\"Show Panel\"]");
+export const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide Panel\"]");
+export const propertyGridSelector = Selector(".svc-property-panel");
+export const objectSelectorButton = Selector(".svc-property-panel__header #svd-grid-object-selector .sv-action-bar-item");
+export const objectSelectorPopup = Selector(".sv-popup .svc-object-selector");
+
+export const questions = Selector(".svc-question__content");
+export const questionToolbarActions = Selector(".svc-question__content-actions").filterVisible().find(".sv-action").filterVisible();
+
+export const pageNavigator = Selector(".svc-page-navigator__selector").filterVisible();
+export const toolbox = Selector(".svc-toolbox");
+export const toolboxItems = Selector(".svc-toolbox__tool").filterVisible();
+export const toolboxItemIcons = Selector(".svc-toolbox__tool .svc-toolbox__item-container").filterVisible();
+export const toolboxItemTitles = Selector(".svc-toolbox__tool .svc-toolbox__item > .svc-toolbox__item-title").filterVisible();
+
 export function getTabbedMenuItemByText(text) {
   return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text).filterVisible();
 }

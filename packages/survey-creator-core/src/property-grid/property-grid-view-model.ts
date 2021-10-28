@@ -24,6 +24,11 @@ export class PropertyGridViewModelBase extends Base {
       }
     }
   }) visible: boolean;
+  @property({ defaultValue: false }) flyoutMode: boolean;
+
+  public get flyoutPanelMode(): boolean {
+    return this.visible && this.flyoutMode;
+  }
 
   constructor(public model?: Base, private collapseAction?: () => void, private expandAction?: () => void) {
     super();

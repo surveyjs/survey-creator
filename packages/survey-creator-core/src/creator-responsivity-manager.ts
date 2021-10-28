@@ -37,17 +37,22 @@ export class CreatorResponsivityManager {
     }
   }
 
+  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutTabPanel: boolean) {
+    this.creator.toolbox.isCompact = toolboxIsCompact;
+    this.creator.toolbox.visible = toolboxVisible;
+    this.creator.showPageNavigator = toolboxVisible;
+    this.creator.currentTabPropertyGrid && (this.creator.currentTabPropertyGrid.flyoutMode = flyoutTabPanel)
+  }
   process() {
     const currentWidth = this.getScreenWidth();
     if (currentWidth === "xl" || currentWidth === "xxl") {
-      this.creator.toolbox.isCompact = false;
-      this.creator.toolbox.visible = true;
-    } else if (currentWidth === "m" || currentWidth === "l") {
-      this.creator.toolbox.isCompact = true;
-      this.creator.toolbox.visible = true;
+      this._process(false, true, false);
+    } else if (currentWidth === "l") {
+      this._process(true, true, false);
+    } else if (currentWidth === "m") {
+      this._process(true, true, true);
     } else {
-      this.creator.toolbox.isCompact = true;
-      this.creator.toolbox.visible = false;
+      this._process(true, false, true);
     }
 
     if (currentWidth == "xs") {

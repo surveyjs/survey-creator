@@ -93,10 +93,13 @@ export class TabDesignerComponent extends SurveyElementBase<
             />
           </div>
         </div>
-        <SurveyPageNavigator
-          creator={this.creator}
-          pages={this.creator.pagesController.pages}
-        ></SurveyPageNavigator>
+        {this.creator.showPageNavigator ?
+          <SurveyPageNavigator
+            creator={this.creator}
+            pages={this.creator.pagesController.pages}
+          ></SurveyPageNavigator>
+          : null
+        }
       </React.Fragment>
     );
   }

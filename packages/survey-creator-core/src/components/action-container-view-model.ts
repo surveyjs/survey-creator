@@ -52,14 +52,9 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
     this.allowDragging = operationsAllow && options.allowDragging;
-    this.updateActionVisibility(
-      "delete",
-      operationsAllow && options.allowDelete
-    );
-    this.updateActionVisibility(
-      "duplicate",
-      operationsAllow && options.allowCopy
-    );
+    this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
+    this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
+    this.updateActionVisibility("settings", this.creator.currentTabPropertyGrid && this.creator.currentTabPropertyGrid.flyoutMode);
   }
   protected isOperationsAllow(): boolean {
     return !this.creator.readOnly;
@@ -80,8 +75,11 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
     items.push(
       new Action({
         id: "duplicate",
+        iconName: "icon-duplicate_16x16",
+        css: "sv-action-bar-item--secondary",
         title: this.creator.getLocString("survey.duplicate"),
         visibleIndex: 10,
+        iconSize: 16,
         action: () => {
           this.duplicate();
         }
@@ -90,10 +88,27 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
 
     items.push(
       new Action({
+        id: "settings",
+        iconName: "icon-settings_16x16",
+        css: "sv-action-bar-item--secondary",
+        title: this.creator.getLocString("survey.settings"),
+        visibleIndex: 20,
+        iconSize: 16,
+        action: () => {
+          this.creator.showPropertyGrid = true;
+        }
+      })
+    );
+
+    items.push(
+      new Action({
         id: "delete",
+        iconName: "icon-delete_16x16",
+        css: "sv-action-bar-item--secondary",
         needSeparator: items.length > 0,
         title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
+        iconSize: 16,
         action: () => {
           this.creator.deleteElement(this.surveyElement);
         }
@@ -101,5 +116,5 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
     );
   }
 
-  protected duplicate() {}
+  protected duplicate() { }
 }
