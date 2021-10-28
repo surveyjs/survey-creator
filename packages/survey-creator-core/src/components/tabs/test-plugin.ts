@@ -47,11 +47,19 @@ export class TabTestPlugin implements ICreatorPlugin {
     return res;
   }
   private updateActions() {
+    this.languageSelectorAction.title = editorLocalization.getLocaleName(this.model.activeLanguage);
+    this.languageSelectorAction.visible = true;
+
     if (this.creator.showSimulatorInTestSurveyTab) {
       this.setDevice(this.model.simulator.device);
       this.deviceListModel.selectedItem = { id: this.model.simulator.device };
+      this.orientationSelectorAction.title = getLocString("pe.landscapeOrientation");
     }
 
+    if (this.creator.showInvisibleElementsInTestSurveyTab) {
+      this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
+      this.invisibleToggleAction.visible = this.model.isRunning;
+    }
     if (this.creator.showDefaultLanguageInTestSurveyTab != undefined) {
       this.setDefaultLanguageOption(this.creator.showDefaultLanguageInTestSurveyTab);
     }
@@ -74,12 +82,23 @@ export class TabTestPlugin implements ICreatorPlugin {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
     this.model.initialize(this.creator.JSON, options);
+
     this.updateActions();
+
     this.model.show();
+    this.model.onPropertyChanged.add((sender, options) => {
+      if (options.name === "isRunning") {
+        this.invisibleToggleAction.visible = this.model.isRunning;
+        this.testAgainAction.visible = !this.model.isRunning;
+      }
+    });
   }
   public deactivate(): boolean {
     this.model.onSurveyCreatedCallback = undefined;
     this.model = undefined;
+
+    this.languageSelectorAction.visible = false;
+    this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
   }
   public createActions() {
@@ -87,10 +106,7 @@ export class TabTestPlugin implements ICreatorPlugin {
 
     this.testAgainAction = new Action({
       id: "testSurveyAgain",
-      visible: <any>new ComputedUpdater<boolean>(() => {
-        const modelIsRunning = this.model.isRunning;
-        return this.creator.activeTab === "test" && !modelIsRunning;
-      }),
+      visible: false,
       title: getLocString("ed.testSurveyAgain"),
       action: () => {
         this.model.testAgain();
@@ -146,30 +162,22 @@ export class TabTestPlugin implements ICreatorPlugin {
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
-        },
-        title: <any>new ComputedUpdater<string>(() => {
-          return getLocString(this.model.simulator.landscape ? "pe.landscapeOrientation" : "pe.portraitOrientation");
-        })
+          this.orientationSelectorAction.title = getLocString(this.model.simulator.landscape ? "pe.landscapeOrientation" : "pe.portraitOrientation");
+        }
       });
       items.push(this.orientationSelectorAction);
     }
-
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
       this.invisibleToggleAction = new Action({
         id: "showInvisible",
         iconName: "icon-invisible_items",
         mode: "small",
         needSeparator: true,
-        visible: <any>new ComputedUpdater<boolean>(() => {
-          const modelIsRunning = this.model.isRunning;
-          return this.creator.activeTab === "test" && modelIsRunning;
-        }),
-        css: <any>new ComputedUpdater<string>(() => {
-          return this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
-        }),
         title: getLocString("ts.showInvisibleElements"),
+        visible: false,
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
+          this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
         }
       });
       items.push(this.invisibleToggleAction);
@@ -179,6 +187,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       [],
       (item: any) => {
         this.model.activeLanguage = item.id;
+        this.languageSelectorAction.title = editorLocalization.getLocaleName(item.id);
         this.languagePopupModel.toggleVisibility();
       },
       true
@@ -195,11 +204,8 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.languageSelectorAction = new Action({
       id: "languageSelector",
       iconName: "icon-language",
-      visible: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
+      visible: false,
       component: "sv-action-bar-item-dropdown",
-      title: <any>new ComputedUpdater<string>(() => {
-        return editorLocalization.getLocaleName(this.model.activeLanguage);
-      }),
       action: () => {
         this.languagePopupModel.toggleVisibility();
       },
