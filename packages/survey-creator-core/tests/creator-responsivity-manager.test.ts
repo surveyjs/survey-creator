@@ -48,7 +48,7 @@ test("CreatorResponsivityManager process", (): any => {
   const container: SimpleContainer = new SimpleContainer({});
   const creator = new CreatorTester();
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
-  const checkByWidth = (newOffsetWidth: number, toolboxVisible: boolean, toolboxIsCompact: boolean, showPageNavigator: boolean, propertyGridFlyoutMode: boolean) => {
+  const checkByWidth = (newOffsetWidth: number, toolboxVisible: boolean, toolboxIsCompact: boolean, propertyGridFlyoutMode: boolean, showPageNavigator: boolean) => {
     container.offsetWidth = newOffsetWidth;
     responsivityManager.process();
     expect(creator.toolbox.visible).toEqual(toolboxVisible);
