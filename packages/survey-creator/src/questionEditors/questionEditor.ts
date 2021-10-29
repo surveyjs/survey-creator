@@ -16,6 +16,7 @@ import {
 import { EditableObject } from "../propertyEditors/editableObject";
 import { SurveyObjectProperty } from "../objectProperty";
 import { ISurveyCreatorOptions } from "../settings";
+import { SurveyCreator } from "../editor";
 
 export class PropertyGridObjectEditorModel {
   private selectedObjectValue: any = null;
@@ -417,14 +418,18 @@ export class SurveyElementEditorTabModel {
   }
   public doOnExpanded() {
     this.beforeShow();
-    setTimeout(() => {
-      ko.tasks.runEarly();
-      this.focusEditor();
-    }, 1);
+    if(this.options && !(this.options as SurveyCreator).selectFromStringEditor) {
+      setTimeout(() => {
+        ko.tasks.runEarly();
+        this.focusEditor();
+      }, 1);
+    }
   }
   private afterRender(elements: HTMLElement[], context) {
     this.htmlElements = elements;
     this.focusEditor();
+    if(this.options)
+      (this.options as SurveyCreator).selectFromStringEditor = false;
   }
   public focusEditor() {
     if (!!this.htmlElements) {
