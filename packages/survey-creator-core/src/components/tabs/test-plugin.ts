@@ -172,7 +172,9 @@ export class TabTestPlugin implements ICreatorPlugin {
         id: "showInvisible",
         iconName: "icon-invisible_items",
         mode: "small",
-        needSeparator: true,
+        needSeparator: <any>new ComputedUpdater<boolean>(() => {
+          return !this.creator.showFooterToolbar;
+        }),
         title: getLocString("ts.showInvisibleElements"),
         visible: false,
         action: () => {
@@ -209,10 +211,26 @@ export class TabTestPlugin implements ICreatorPlugin {
       action: () => {
         this.languagePopupModel.toggleVisibility();
       },
-      popupModel: this.languagePopupModel
+      popupModel: this.languagePopupModel,
+      mode: <any>new ComputedUpdater<string>(() => {
+        return this.creator.showFooterToolbar ? "small" : "large";
+      }),
     });
     items.push(this.languageSelectorAction);
-
+    const designerAction = new Action({
+      id: "svd-designer",
+      iconName: "icon-preview",
+      needSeparator: true,
+      action: () => { this.creator.makeNewViewActive("designer"); },
+      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        const showFooterToolbar = this.creator.showFooterToolbar;
+        return (this.creator.activeTab === "test") && showFooterToolbar;
+      }),
+      title: this.creator.getLocString("ed.designer"),
+      showTitle: false
+    })
+    items.push(designerAction);
     return items;
   }
 }

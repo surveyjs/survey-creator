@@ -140,7 +140,9 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.surveySettingsAction = new Action({
       id: "svd-settings",
       iconName: "icon-settings",
-      needSeparator: true,
+      needSeparator: <any>new ComputedUpdater<boolean>(() => {
+        return !this.creator.showFooterToolbar;
+      }),
       action: () => {
         if (!this.creator.showPropertyGrid) {
           this.creator.showPropertyGrid = true;
@@ -173,24 +175,24 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       iconName: "icon-preview",
       needSeparator: true,
       action: () => {
-        this.creator.makeNewViewActive(this.creator.viewType === "test" ? "designer" : "test");
+        this.creator.makeNewViewActive("test");
       },
-      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
       visible: <any>new ComputedUpdater<boolean>(() => {
         const showFooterToolbar = this.creator.showFooterToolbar;
-        return (this.creator.activeTab === "designer" || this.creator.activeTab === "test") && showFooterToolbar;
+        return (this.creator.activeTab === "designer") && showFooterToolbar;
       }),
       title: this.creator.getLocString("ed.testSurvey"),
       showTitle: false
     })
     items.push(this.saveSurveyAction);
     items.push(this.surveySettingsAction);
-    items.push(this.previewAction);
     if (settings.propertyGrid.allowCollapse) {
-      this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
+      this.expandAction = this.propertyGrid.createExpandAction();
       this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        const propertyGridvisible = !this.propertyGrid.visible;
-        return this.creator.activeTab === "designer" && propertyGridvisible;
+        const propertyGridVisible = this.propertyGrid.visible;
+        const showFooterToolbar = this.creator.showFooterToolbar;
+        if (this.creator.activeTab === "designer" && showFooterToolbar) return false;
+        return this.creator.activeTab === "designer" && !propertyGridVisible;
       })
       items.push(this.expandAction);
     }
@@ -200,6 +202,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.creator.onShowPropertyGridVisiblityChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
+    items.push(this.previewAction);
     return items;
   }
   private get isSurveySelected(): boolean {

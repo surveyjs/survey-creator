@@ -2,6 +2,7 @@ import { CreatorBase } from "./creator-base";
 
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
+  private currentWidth;
   private screenWidth: { [key: string]: number } = {
     "xxl": 1920,
     "xl": 1280,
@@ -34,6 +35,9 @@ export class CreatorResponsivityManager {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.container.parentElement);
       this.process();
+      if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
+        this.creator.showPropertyGrid = false;
+      }
     }
   }
 
@@ -41,21 +45,21 @@ export class CreatorResponsivityManager {
     this.creator.toolbox.isCompact = toolboxIsCompact;
     this.creator.toolbox.visible = toolboxVisible;
     this.creator.showPageNavigator = toolboxVisible;
-    this.creator.currentTabPropertyGrid && (this.creator.currentTabPropertyGrid.flyoutMode = flyoutTabPanel)
+    this.creator.currentTabPropertyGrid && (this.creator.currentTabPropertyGrid.flyoutMode = flyoutTabPanel);
   }
   process() {
-    const currentWidth = this.getScreenWidth();
-    if (currentWidth === "xl" || currentWidth === "xxl") {
+    this.currentWidth = this.getScreenWidth();
+    if (this.currentWidth === "xl" || this.currentWidth === "xxl") {
       this._process(false, true, false);
-    } else if (currentWidth === "l") {
+    } else if (this.currentWidth === "l") {
       this._process(true, true, false);
-    } else if (currentWidth === "m") {
+    } else if (this.currentWidth === "m") {
       this._process(true, true, true);
     } else {
       this._process(true, false, true);
     }
 
-    if (currentWidth == "xs") {
+    if (this.currentWidth == "xs") {
       this.initMobileView();
     } else {
       this.resetMobileView();

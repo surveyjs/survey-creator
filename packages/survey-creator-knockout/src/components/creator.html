@@ -2,18 +2,14 @@
   <div class="svc-flex-row svc-full-container">
     <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
       <div class="svc-top-bar">
-        <!-- ko if: creator.showTabs -->
-        <div class="svc-tabbed-menu-wrapper">
+        <div class="svc-tabbed-menu-wrapper" data-bind="visible: creator.showTabs">
           <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
           <!-- /ko -->
         </div>
-        <!-- /ko -->
-        <!-- ko if: creator.showToolbar -->
-        <div class="svc-toolbar-wrapper">
+        <div class="svc-toolbar-wrapper" data-bind="visible: creator.showToolbar">
           <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
           <!-- /ko -->
         </div>
-        <!-- /ko -->
       </div>
       <div class="svc-creator__content-wrapper svc-flex-row">
         <div class="svc-creator__content-holder svc-flex-column">

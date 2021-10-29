@@ -1,10 +1,4 @@
-import {
-  SurveyModel,
-  PopupModel,
-  ListModel,
-  Action,
-  IAction
-} from "survey-core";
+import { SurveyModel, PopupModel, ListModel, Action, IAction, ComputedUpdater } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { PropertyGridViewModelBase } from "../../property-grid/property-grid-view-model";
@@ -200,7 +194,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     items.push(this.exportCsvAction);
 
     if (settings.propertyGrid.allowCollapse) {
-      this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
+      this.expandAction = this.propertyGrid.createExpandAction();
+      this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
+        const propertyGridVisible = this.propertyGrid.visible;
+        return this.creator.activeTab === "translation" && !propertyGridVisible;
+      })
       items.push(this.expandAction);
     }
     return items;

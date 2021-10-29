@@ -1,4 +1,4 @@
-import { Base, SurveyModel, property, PopupModel, AdaptiveActionContainer, Action } from "survey-core";
+import { Base, SurveyModel, property, PopupModel, AdaptiveActionContainer, Action, ComputedUpdater } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
@@ -14,16 +14,7 @@ export class PropertyGridViewModelBase extends Base {
 
   @property() survey: SurveyModel;
   @property() headerText: string;
-  @property({
-    defaultValue: true, onSet: (val, target) => {
-      if (target._expandAction) {
-        target._expandAction.visible = !val;
-      }
-      if (target._collapseAction) {
-        target._collapseAction.visible = val;
-      }
-    }
-  }) visible: boolean;
+  @property({ defaultValue: true }) visible: boolean;
   @property({ defaultValue: false }) flyoutMode: boolean;
 
   public get flyoutPanelMode(): boolean {
@@ -38,6 +29,7 @@ export class PropertyGridViewModelBase extends Base {
         iconName: "icon-hide",
         title: getLocString("ed.hidePanel"),
         showTitle: false,
+        visible: <any>new ComputedUpdater<boolean>(() => this.visible),
         action: () => {
           if (collapseAction)
             collapseAction();
@@ -48,7 +40,7 @@ export class PropertyGridViewModelBase extends Base {
       this.toolbar.actions.push(this._collapseAction);
     }
   }
-  public createExpandAction(visible: boolean) {
+  public createExpandAction() {
     this._expandAction = new Action({
       id: "svd-grid-expand",
       iconName: "icon-expand_20x20",
@@ -59,7 +51,6 @@ export class PropertyGridViewModelBase extends Base {
           this.visible = true;
       },
       title: getLocString("ed.showPanel"),
-      visible: visible,
       showTitle: false
     });
     return this._expandAction;
