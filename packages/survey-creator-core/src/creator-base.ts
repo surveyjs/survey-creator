@@ -1849,6 +1849,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         const el = document.getElementById(selEl.id);
         if (!!el) {
           el.scrollIntoView({ block: "center" });
+          if (!propertyName) {
+            el.parentElement && el.parentElement.focus();
+          }
         }
       }, 100);
     }
