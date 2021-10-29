@@ -418,7 +418,7 @@ export class SurveyElementEditorTabModel {
   }
   public doOnExpanded() {
     this.beforeShow();
-    if(!(this.options as SurveyCreator).selectFromStringEditor) {
+    if(this.options && !(this.options as SurveyCreator).selectFromStringEditor) {
       setTimeout(() => {
         ko.tasks.runEarly();
         this.focusEditor();
@@ -428,7 +428,8 @@ export class SurveyElementEditorTabModel {
   private afterRender(elements: HTMLElement[], context) {
     this.htmlElements = elements;
     this.focusEditor();
-    (this.options as SurveyCreator).selectFromStringEditor = false;
+    if(this.options)
+      (this.options as SurveyCreator).selectFromStringEditor = false;
   }
   public focusEditor() {
     if (!!this.htmlElements) {
