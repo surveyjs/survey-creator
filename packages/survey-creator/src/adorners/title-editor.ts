@@ -202,12 +202,10 @@ export class TitleInplaceEditor {
     this.updatePrevName();
     this.editingName(this.prevName());
     this.isEditing(true);
-    /*
     this.forNeibours((element) => {
       element.dataset["sjsOldDisplay"] = element.style.display;
       element.style.display = "none";
     });
-    */
     var inputElement = this.getInputElement();
     this.draggableElement = this.findDraggableElement(inputElement);
     if (!!this.draggableElement) {
