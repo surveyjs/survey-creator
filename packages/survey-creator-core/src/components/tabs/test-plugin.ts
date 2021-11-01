@@ -138,9 +138,9 @@ export class TabTestPlugin implements ICreatorPlugin {
         component: "sv-action-bar-item-dropdown",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          const showFooterToolbar = this.creator.showFooterToolbar;
+          const isMobileView = this.creator.isMobileView;
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
-          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab && !showFooterToolbar;
+          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab && !isMobileView;
         }),
         action: () => {
           devicePopupModel.toggleVisibility();
@@ -156,9 +156,9 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device_rotate",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          const showFooterToolbar = this.creator.showFooterToolbar;
+          const isMobileView = this.creator.isMobileView;
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
-          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab && !showFooterToolbar;
+          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab && !isMobileView;
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
@@ -173,7 +173,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-invisible_items",
         mode: "small",
         needSeparator: <any>new ComputedUpdater<boolean>(() => {
-          return !this.creator.showFooterToolbar;
+          return !this.creator.isMobileView;
         }),
         title: getLocString("ts.showInvisibleElements"),
         visible: false,
@@ -213,7 +213,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       },
       popupModel: this.languagePopupModel,
       mode: <any>new ComputedUpdater<string>(() => {
-        return this.creator.showFooterToolbar ? "small" : "large";
+        return this.creator.isMobileView ? "small" : "large";
       }),
     });
     items.push(this.languageSelectorAction);
@@ -224,8 +224,8 @@ export class TabTestPlugin implements ICreatorPlugin {
       action: () => { this.creator.makeNewViewActive("designer"); },
       active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
       visible: <any>new ComputedUpdater<boolean>(() => {
-        const showFooterToolbar = this.creator.showFooterToolbar;
-        return (this.creator.activeTab === "test") && showFooterToolbar;
+        const isMobileView = this.creator.isMobileView;
+        return (this.creator.activeTab === "test") && isMobileView;
       }),
       title: this.creator.getLocString("ed.designer"),
       showTitle: false

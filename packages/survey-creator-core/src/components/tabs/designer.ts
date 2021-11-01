@@ -141,7 +141,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       id: "svd-settings",
       iconName: "icon-settings",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
-        return !this.creator.showFooterToolbar;
+        return !this.creator.isMobileView;
       }),
       action: () => {
         if (!this.creator.showPropertyGrid) {
@@ -178,8 +178,8 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
         this.creator.makeNewViewActive("test");
       },
       visible: <any>new ComputedUpdater<boolean>(() => {
-        const showFooterToolbar = this.creator.showFooterToolbar;
-        return (this.creator.activeTab === "designer") && showFooterToolbar;
+        const isMobileView = this.creator.isMobileView;
+        return (this.creator.activeTab === "designer") && isMobileView;
       }),
       title: this.creator.getLocString("ed.testSurvey"),
       showTitle: false
@@ -190,8 +190,8 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       this.expandAction = this.propertyGrid.createExpandAction();
       this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
         const propertyGridVisible = this.propertyGrid.visible;
-        const showFooterToolbar = this.creator.showFooterToolbar;
-        if (this.creator.activeTab === "designer" && showFooterToolbar) return false;
+        const isMobileView = this.creator.isMobileView;
+        if (this.creator.activeTab === "designer" && isMobileView) return false;
         return this.creator.activeTab === "designer" && !propertyGridVisible;
       })
       items.push(this.expandAction);

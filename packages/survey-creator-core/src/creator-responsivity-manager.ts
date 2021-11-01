@@ -22,12 +22,12 @@ export class CreatorResponsivityManager {
   private initMobileView() {
     this.creator.showTabs = false;
     this.creator.showToolbar = false;
-    this.creator.showFooterToolbar = true;
+    this.creator.isMobileView = true;
   }
   private resetMobileView() {
     this.creator.showTabs = undefined;
     this.creator.showToolbar = undefined;
-    this.creator.showFooterToolbar = undefined;
+    this.creator.isMobileView = undefined;
   }
 
   constructor(protected container: HTMLDivElement, private creator: CreatorBase) {

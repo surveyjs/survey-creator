@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="svc-footer-bar">
-        <!-- ko if: creator.showFooterToolbar -->
+        <!-- ko if: creator.isMobileView -->
         <div class="svc-toolbar-wrapper">
           <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
           <!-- /ko -->
@@ -32,7 +32,7 @@
         <!-- /ko -->
       </div>
     </div>
-    <div data-bind="if: creator.currentTabPropertyGrid">
+    <div data-bind="if: creator.currentTabPropertyGrid && !creator.isMobileView">
       <svc-property-panel params="model: creator.currentTabPropertyGrid"> </svc-property-panel>
     </div>
   </div>

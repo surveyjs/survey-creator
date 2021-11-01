@@ -2514,7 +2514,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: true }) showPageNavigator;
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
-  @property({ defaultValue: false }) showFooterToolbar;
+  @property({ defaultValue: false }) isMobileView;
   selectFromStringEditor: boolean;
 }
 
