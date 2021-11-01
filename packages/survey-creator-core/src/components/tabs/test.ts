@@ -5,7 +5,6 @@ import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, propert
 import { CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 
-
 // import template from "./test.html";
 
 // export * from "@survey/creator/components/toolbar";
