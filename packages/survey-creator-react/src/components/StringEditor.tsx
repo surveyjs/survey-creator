@@ -69,10 +69,11 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
     this.baseModel.done(event);
     this.locString["__isEditing"] = false;
   };
-  private edit = () => {
+  private edit = (event: any) => {
     this.svStringEditorRef.current.focus();
     // document.execCommand('selectAll', false, null);
     this.locString["__isEditing"] = true;
+    this.baseModel.onClick(event);
   };
   private get className() {
     return this.baseModel.className(this.locString.renderedHtml);

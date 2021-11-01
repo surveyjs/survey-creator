@@ -27,13 +27,17 @@ export class StringEditorViewModelBase extends Base {
 
   public blurEditor: () => void;
 
+  public onClick(event: any) {
+    event.stopPropagation();
+  }
+
   public onFocus(event: any): void {
     if(!this.focusedProgram) {
       this.valueBeforeEdit = event.target.innerText;
       this.focusedProgram = false;
     }
     this.creator.selectFromStringEditor = true;
-    event.target.click();
+    event.target.parentElement.click();
     select(event.target);
   }
 
