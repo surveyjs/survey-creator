@@ -221,3 +221,8 @@ svc-question,
   }
   width: 100%; 
 }
+.svc-question__content {
+  .sd-paneldynamic__footer, .sd-paneldynamic__separator {
+    display: none;
+  }
+}
