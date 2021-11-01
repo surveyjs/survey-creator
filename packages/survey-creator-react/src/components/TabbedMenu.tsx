@@ -46,6 +46,7 @@ export class TabbedMenuComponent extends SurveyElementBase<
   componentDidMount() {
     super.componentDidMount();
     const container: HTMLDivElement = this.rootRef.current;
+    if (!container) return;
     this.manager = new ResponsivityManager(
       container,
       this.model,
@@ -53,7 +54,7 @@ export class TabbedMenuComponent extends SurveyElementBase<
     );
   }
   componentWillUnmount() {
-    this.manager.dispose();
+    this.manager && (this.manager.dispose());
     super.componentWillUnmount();
   }
 }
