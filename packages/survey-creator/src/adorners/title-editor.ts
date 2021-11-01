@@ -112,7 +112,7 @@ export class TitleInplaceEditor {
         this.getLocString("pe.titleKeyboardAdornerTip")
       );
       element.setAttribute("role", "textbox");
-      element.onclick = (e) => {
+      element.onpointerdown = (e) => {
         this.startEdit(this, e);
         e.preventDefault();
       };
@@ -195,6 +195,7 @@ export class TitleInplaceEditor {
     if (this.readOnly) {
       return;
     }
+    this.editor.selectFromStringEditor = true;
     if (this._needSelectTargetOnStartEdit) {
       this.editor.selectedElement = this.target;
     }
@@ -279,7 +280,7 @@ export class TitleInplaceEditor {
   };
   dispose() {
     this.forNeibours((element) => {
-      element.onclick = undefined;
+      element.onpointerdown = undefined;
       element.onkeyup = undefined;
     });
     this._valueSubscription.dispose();

@@ -17,10 +17,7 @@ interface ISurveyCreatorToolboxProps {
   creator: CreatorBase<SurveyModel>;
 }
 
-export class SurveyCreatorToolbox extends SurveyElementBase<
-  ISurveyCreatorToolboxProps,
-  any
-> {
+export class SurveyCreatorToolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {
   private manager: VerticalResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
 
@@ -39,6 +36,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   componentDidMount() {
     super.componentDidMount();
     const container = this.rootRef.current;
+    if (!container) return;
     this.manager = new VerticalResponsivityManager(
       container,
       this.toolbox,
@@ -47,7 +45,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
     );
   }
   componentWillUnmount() {
-    this.manager.dispose();
+    this.manager && (this.manager.dispose());
     super.componentWillUnmount();
   }
 
@@ -56,7 +54,7 @@ export class SurveyCreatorToolbox extends SurveyElementBase<
   }
 
   render(): JSX.Element {
-    if (!this.toolbox.hasActions) return null;
+    if (!this.toolbox.hasActions || !this.toolbox.visible) return null;
     if (this.toolbox.isCompact || this.toolbox.categories.length == 1) {
       const items = this.renderItems();
       return (

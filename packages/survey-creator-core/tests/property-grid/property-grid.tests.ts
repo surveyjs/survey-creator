@@ -1350,6 +1350,13 @@ test("QuestionLinekValueModel test", () => {
   expect(question.linkValueText).toEqual("Value is empty");
   question.value = [1, 2];
   expect(question.linkValueText).toEqual("Item 1, Item 2");
+
+  question.showValueInLink = false;
+  question.value = null;
+  expect(question.linkValueText).toEqual("Set q1");
+  question.value = [1, 2];
+  expect(question.linkValueText).toEqual("Change q1");
+
 });
 
 test("DefaultValue editor", () => {
@@ -1362,7 +1369,7 @@ test("DefaultValue editor", () => {
   expect(editQuestion).toBeTruthy();
   expect(editQuestion.getType()).toEqual("linkvalue");
   expect(editQuestion.value).toEqual(2);
-  expect(editQuestion.linkValueText).toEqual("2");
+  expect(editQuestion.linkValueText).toEqual("Change Default value");
   expect(editQuestion.isReadOnly).toBeFalsy();
   var editor = <PropertyGridValueEditor>(
     PropertyGridEditorCollection.getEditor(editQuestion.property)
@@ -1401,11 +1408,12 @@ test("DefaultValue editor, use display value", () => {
   ];
   var propertyGrid = new PropertyGridModelTester(question);
   var editQuestion = propertyGrid.survey.getQuestionByName("defaultValue");
-  expect(editQuestion.linkValueText).toEqual("Value is empty");
+  expect(editQuestion.showValueInLink).toEqual(false);
+  expect(editQuestion.linkValueText).toEqual("Set Default value");
   question.defaultValue = [1, 2];
-  expect(editQuestion.linkValueText).toEqual("Item 1, Item 2");
+  expect(editQuestion.linkValueText).toEqual("Change Default value");
   question.defaultValue = undefined;
-  expect(editQuestion.linkValueText).toEqual("Value is empty");
+  expect(editQuestion.linkValueText).toEqual("Set Default value");
 });
 
 test("DefaultValue editor for invisible values", () => {
@@ -1646,7 +1654,7 @@ test("Create setvalue trigger", () => {
   editorSetValueQuestion.value = 2;
   setupValueEditor.apply();
   expect(setValueQuestion.value).toEqual(2);
-  expect(setValueQuestion.linkValueText).toEqual("2");
+  expect(setValueQuestion.linkValueText).toEqual("Change Set value");
   expect(survey.triggers).toHaveLength(1);
   var trigger = <SurveyTriggerSetValue>survey.triggers[0];
   expect(trigger.getType()).toEqual("setvaluetrigger");
@@ -1655,7 +1663,7 @@ test("Create setvalue trigger", () => {
   actions[0].action();
   expect(trigger.setValue).toBeFalsy();
   expect(setValueQuestion.value).toBeFalsy();
-  expect(setValueQuestion.linkValueText).toEqual("Value is empty");
+  expect(setValueQuestion.linkValueText).toEqual("Set Set value");
   setValueQuestion.value = 3;
   expect(trigger.setValue).toEqual(3);
   setToNameQuestion.value = "q2";
@@ -2021,6 +2029,8 @@ test("We should not have 'Others' category in our objects", () => {
   const objToCheck: Array<Base> = [survey, panel, page];
   const allQuestionTypes = Serializer.getChildrenClasses("question", true);
   for(let i = 0; i < allQuestionTypes.length; i ++) {
+    if (allQuestionTypes[i].name == "linkvalue")
+      continue;
     let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
     if(!!question && !question.isCompositeQuestion) {
       objToCheck.push(question);

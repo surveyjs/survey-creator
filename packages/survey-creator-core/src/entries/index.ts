@@ -7,12 +7,14 @@ export { editorLocalization as localization } from "../editorLocalization";
 export * from "../settings";
 
 export * from "../creator-base";
+export * from "../creator-responsivity-manager";
 
 export * from "../components/tabs/embed";
 export * from "../components/tabs/json-editor-ace";
 export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
 export * from "../components/tabs/test";
+export * from "../components/tabs/test-plugin";
 export * from "../components/tabs/logic";
 export * from "../components/tabs/translation";
 export * from "../components/tabs/translation-theme";
@@ -68,7 +70,6 @@ import "../components/toolbox/toolbox-tool.scss";
 import "../components/question-dropdown.scss";
 import "../components/toolbox/toolbox.scss";
 import "../property-grid-theme/property-grid.scss";
-import "../survey-designer-theme/survey-designer.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
 

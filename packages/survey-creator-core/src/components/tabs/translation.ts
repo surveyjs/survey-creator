@@ -675,7 +675,7 @@ export class Translation extends Base implements ITranslationLocales {
         cellQuestion.placeHolder = this.placeHolderText;
         const item = getTransationItem(options.question, options.row.name);
         const isMultiLine = !!item ? item.locString.getIsMultiple() : false;
-        cellQuestion.multiLine = isMultiLine;
+        cellQuestion.acceptCarriageReturn = isMultiLine;
         if (!!item) {
           cellQuestion.maxLength = item.maxLength;
         }

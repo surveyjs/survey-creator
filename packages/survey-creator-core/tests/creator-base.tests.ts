@@ -17,7 +17,7 @@ import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer";
-import { TabTestPlugin } from "../src/components/tabs/test";
+import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
 import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
@@ -776,7 +776,7 @@ test("Check action container for new added page", (): any => {
   var pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
   pageModel.addNewQuestion(pageModel, null);
   expect(creator.survey.pages).toHaveLength(2);
-  expect(pageModel.actionContainer.actions).toHaveLength(2);
+  expect(pageModel.actionContainer.actions).toHaveLength(3);
 });
 test("Show error on entering non-unique column value", (): any => {
   var creator = new CreatorTester();

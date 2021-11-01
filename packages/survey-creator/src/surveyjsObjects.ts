@@ -282,6 +282,7 @@ export function createAfterRenderHandler(
         }
       }
     };
+    domElement.onpointerdown = domElement.onclick;
     if (!isPanel) {
       var childs = domElement.childNodes;
       for (var i = 0; i < childs.length; i++) {

@@ -1,11 +1,25 @@
-import { SurveyModel, IAction } from "survey-core";
-import { CreatorBase, ICreatorOptions } from "../src/creator-base";
+import { SurveyModel, IAction, Base } from "survey-core";
+import { CreatorBase, ICreatorOptions, isStringEditable } from "../src/creator-base";
+
+class DesignTimeSurveyModel extends SurveyModel {
+  constructor(public creator: CreatorTester, jsonObj?: any) {
+    super(jsonObj);
+  }
+  public getRendererForString(element: Base, name: string): string {
+    if (!this.creator.readOnly && isStringEditable(element, name)) {
+      return "editableStringRendererName";
+    }
+    return undefined;
+  }
+}
 
 export class CreatorTester extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
   }
-  protected createSurveyCore(json: any = {}): SurveyModel {
+  protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
+    if (reason === "designer" || reason === "modal-question-editor")
+      return new DesignTimeSurveyModel(this, json);
     return new SurveyModel(json);
   }
   public get selectedElementName(): string {

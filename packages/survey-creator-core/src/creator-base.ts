@@ -39,11 +39,11 @@ import { SelectionHistory } from "./selection-history";
 import { TabEmbedPlugin } from "./components/tabs/embed";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
-import { TabTestPlugin } from "./components/tabs/test";
+import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
-import { surveyDesignerCss } from "./survey-designer-theme/survey-designer";
+import { defaultV2Css } from "survey-core";
 import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
@@ -51,6 +51,7 @@ import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/u
 import { PropertyGridViewModelBase } from "./property-grid/property-grid-view-model";
 import { TabDesignerPlugin } from "./components/tabs/designer";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
+import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -153,6 +154,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
+  private responsivityManager: CreatorResponsivityManager;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -1234,7 +1236,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};
     const survey = this.createSurvey({});
-    survey.css = surveyDesignerCss;
+    survey.css = defaultV2Css;
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
@@ -1596,7 +1598,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   private isRowMultiline(row) {
-    return row.elements.length > 1
+    return row.elements.length > 1;
   }
 
   private findRowByElement(element, parent) {
@@ -1847,6 +1849,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         const el = document.getElementById(selEl.id);
         if (!!el) {
           el.scrollIntoView({ block: "center" });
+          if (!propertyName) {
+            el.parentElement && el.parentElement.focus();
+          }
         }
       }, 100);
     }
@@ -1968,18 +1973,24 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.selectionHistoryController.onObjSelected(element);
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
-      if (!!propertyName) {
-        this.designerPropertyGrid.selectProperty(propertyName, focus);
+
+      if(!propertyName) {
+        propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
+
+      if (!!propertyName) {
+        this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+      }
+      this.selectFromStringEditor = false;
     }
     var options = { newSelectedElement: element };
     this.onSelectedElementChanged.fire(this, options);
   }
   private getCurrentPageByElement(element: Base): PageModel {
-    if(!element) return undefined;
-    if(element["isPage"]) return element as PageModel;
-    if(!!element["page"]) return element["page"];
-    if(!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
+    if (!element) return undefined;
+    if (element["isPage"]) return element as PageModel;
+    if (!!element["page"]) return element["page"];
+    if (!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
     return undefined;
   }
   public clickToolboxItem(newElement: any) {
@@ -2491,8 +2502,19 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.tabs.forEach((tab) => (tab.active = this.viewType === tab.id));
     }
   }
+  public initResponsivityManager(container: HTMLDivElement): void {
+    this.responsivityManager = new CreatorResponsivityManager(container, this);
+  }
+  public resetResponsivityManager(): void {
+    if (!!this.responsivityManager) {
+      this.responsivityManager.dispose();
+      this.responsivityManager = undefined;
+    }
+  }
+  @property({ defaultValue: true }) showPageNavigator;
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
+  selectFromStringEditor: boolean;
 }
 
 export class StylesManager {
@@ -2571,7 +2593,7 @@ export function getItemValueWrapperComponentName(
   item: ItemValue,
   question: QuestionSelectBase
 ): string {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return SurveyModel.TemplateRendererComponentName;
   }
   if (question.getType() === "imagepicker") {
@@ -2584,7 +2606,7 @@ export function getItemValueWrapperComponentData(
   question: QuestionSelectBase,
   creator: CreatorBase<SurveyModel>
 ): any {
-  if (!!question["parentQuestionValue"] || question.isContentElement) {
+  if (question.isContentElement) {
     return item;
   }
   return {
@@ -2594,7 +2616,8 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  return !element.isContentElement || element.isEditableTemplateElement;
+  const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
+  return !parentIsMatrix&& (!element.isContentElement || element.isEditableTemplateElement);
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;

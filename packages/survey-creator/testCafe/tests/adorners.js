@@ -74,7 +74,6 @@ test(`change page title`, async (t) => {
     .expect(pageTitle.visible)
     .ok()
     .click(pageTitle)
-    .click(pageTitle)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)
     .expect(Selector(`.svd_page .title_editable > span:nth-child(1)`).innerText)
@@ -88,7 +87,6 @@ test(`change page description`, async (t) => {
   await t
     .expect(pageDescription.visible)
     .ok()
-    .click(pageDescription)
     .click(pageDescription)
     .typeText(`input:focus`, `puppies`)
     .click(`input:focus+span.svda-edit-button`)

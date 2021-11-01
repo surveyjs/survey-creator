@@ -32,6 +32,7 @@ export class StringEditorViewModelBase extends Base {
       this.valueBeforeEdit = event.target.innerText;
       this.focusedProgram = false;
     }
+    this.creator.selectFromStringEditor = true;
     event.target.click();
     select(event.target);
   }

@@ -24,6 +24,7 @@ export class ToolboxToolViewModel extends Base {
 
   public onPointerDown(pointerDownEvent) {
     if (!this.allowAdd) return;
+    if (this.item.id === 'dotsItem-id') return true; //toolbox responsive popup
     this.pointerDownEvent = pointerDownEvent;
     this.startX = pointerDownEvent.pageX;
     this.startY = pointerDownEvent.pageY;
@@ -31,6 +32,7 @@ export class ToolboxToolViewModel extends Base {
   }
   public click = (event) => {
     if (!this.allowAdd) return;
+    if (this.item.id === 'dotsItem-id') return true; //toolbox responsive popup
     this.clearListeners();
     this.creator.clickToolboxItem(this.item.json);
   };
