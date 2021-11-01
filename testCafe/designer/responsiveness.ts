@@ -113,7 +113,9 @@ test("Responsive creator: property grid", async (t) => {
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
-    .expect(flyoutPropertyGrid.exists).notOk();
+    .expect(flyoutPropertyGrid.exists).notOk()
+
+    .resizeWindow(1920, 900); // reset for next tests
 });
 
 test("Responsive creator: designer tab for mobile devices", async (t) => {
