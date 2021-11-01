@@ -57,7 +57,7 @@ _Setup column cell properties_
 You can a new question or page by clicking a button on designer and so on.
 <p align="center">
   
-![Add new question](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-add-question?raw=true)
+![Add new question](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-add-question.png?raw=true)
 
 _Add new question from designer_
 </p>
@@ -66,7 +66,7 @@ _Add new question from designer_
 We change our element selector and show filtering if there are more then N elements in the list, ten by default.
 <p align="center">
   
-![Element selector](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-element-selector?raw=true)
+![Element selector](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-element-selector.png?raw=true)
 
 _Element selector_
 </p>
@@ -85,7 +85,7 @@ After we decided to show all pages at once in Creator V2, by supporting MS Word 
 Another big step was to change the way we render elements adorners on the design surface. We use [after render mechanism](https://surveyjs.io/Examples/Library?id=survey-lazy&platform=Reactjs) in Creator V1. We wanted to create a more robust solution for Creator V2 instead of modifying DOM elements after rendering. It looks more like a hack for us, and we wanted something more reliable. We have ended up with alternative rendering mechanism for SurveyJS Library elements. A developer can register a new render for UI elements in Library and use a new render code instead of default. It allows us to introduce better in-place editing support in the designer. For example, to make all our survey strings editable in Creator V2, we just override the default rendering by span with a span with a div supported editable content. 
 <p align="center">
   
-![Rating text adorner](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-rating-text-adorner?raw=true)
+![Rating text adorner](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-rating-text-adorner.png?raw=true)
 
 _Rating text adorner_
 </p>
@@ -93,7 +93,7 @@ _Rating text adorner_
 Tabs, toolbox, element selectors and many other elements are SurveyJS Library elements. They support adaptivity and accessibility out of the box.  
 <p align="center">
   
-![Toolbox adaptivity](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-toolbox-adaptivity?raw=true)
+![Toolbox adaptivity](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-toolbox-adaptivity.png?raw=true)
 
 _Toolbox adaptivity_
 </p>
@@ -106,7 +106,7 @@ Before starting to write the code for new property grid. We told to ourselves. W
 Property Grid is a one-page survey with several [expandable panels](https://surveyjs.io/Examples/Library?id=questiontype-panel) and turned-off navigation. Every property editor is a survey question. To introduce or override the existing property editor you need just to define a question JSON and optionally define several functions that are fired by survey events. [Here is the example](https://surveyjs.io/Examples/Survey-Creator?id=custompropertyeditor&platform=ReactjsV2#content-js) of creating a new property grid in Creator V2. We have introduced a lot of small improvements, for [example actions](https://surveyjs.io/Examples/Library?id=survey-titleactions) in question titles.
 <p align="center">
   
-![Choices property editor](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-choices-property-editor?raw=true)
+![Choices property editor](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-choices-property-editor.png?raw=true)
 
 _Title actions in choices property editor_
 </p>
@@ -114,7 +114,7 @@ _Title actions in choices property editor_
 Matrix in “Logic tab” is a dynamic matrix question. It uses a [new detail panel functionality](https://surveyjs.io/Examples/Library?id=questiontype-matrixdynamic-detail). In the detail panel we use panel dynamic to edit conditions and another panel dynamic to edit logic actions.
 <p align="center">
   
-![Detail panel in logic tab](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-logic-item-editing?raw=true)
+![Detail panel in logic tab](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-logic-item-editing.png?raw=true)
 
 _Using detail panel in Logic tab_
 </p>
