@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { collapseButtonSelector, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
+import { collapseButtonSelector, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
 const title = "Responsiveness";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -55,6 +55,7 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
     ]
   });
   await t
+    .click(collapseButtonSelector)
     .expect(toolbox.visible).ok()
     .expect(toolboxItemIcons.count).eql(20)
     .expect(toolboxItemTitles.count).eql(20)
@@ -68,7 +69,14 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
 
     .resizeWindow(750, 500)
     .expect(toolbox.exists).notOk()
-    .expect(pageNavigator.exists).notOk();
+    .expect(pageNavigator.exists).notOk()
+
+    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText("Survey Designer"))
+    .expect(toolbox.exists).notOk()
+    .expect(pageNavigator.exists).notOk()
+
+    .resizeWindow(1920, 900); // reset for next tests, beforeEach not work (((
 });
 
 test("Responsive creator: property grid", async (t) => {
