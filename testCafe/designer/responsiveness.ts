@@ -116,3 +116,24 @@ test("Responsive creator: property grid", async (t) => {
     .expect(flyoutPropertyGrid.exists).notOk();
 });
 
+test("Responsive creator: designer tab for mobile devices", async (t) => {
+  const topToolBar = Selector(".svc-top-bar .sv-action-bar");
+  const footerToolBar = Selector(".svc-footer-bar .sv-action-bar");
+
+  await t
+    .resizeWindow(750, 500)
+    .click(collapseButtonSelector)
+    .expect(topToolBar.visible).ok()
+    .expect(footerToolBar.visible).notOk()
+    .expect(topToolBar.find(".sv-action").filterVisible().count).eql(4)
+
+    .resizeWindow(370, 400)
+    .expect(topToolBar.visible).notOk()
+    .expect(footerToolBar.visible).ok()
+    .expect(footerToolBar.find(".sv-action").filterVisible().count).eql(4)
+
+    .resizeWindow(1920, 900)
+    .expect(topToolBar.visible).ok()
+    .expect(footerToolBar.visible).notOk()
+    .expect(topToolBar.find(".sv-action").filterVisible().count).eql(4);
+});
