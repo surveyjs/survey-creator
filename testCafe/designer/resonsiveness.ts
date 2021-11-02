@@ -91,15 +91,24 @@ test.before(async t => {
       }
     ]
   });
+  const resizer = Selector(".svc-resizer");
   await t
     .click(questions.find(".sv-string-editor").withText("question1"))
     .expect(propertyGridSelector.visible).ok()
+    .expect(propertyGridSelector.offsetWidth).eql(450)
     .expect(flyoutPropertyGrid.exists).notOk()
     .expect(questionToolbarActions.count).eql(4)
 
+    .drag(resizer, 100, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(350)
+
     .resizeWindow(750, 700)
     .expect(propertyGridSelector.visible).ok()
+    .expect(propertyGridSelector.offsetWidth).eql(350)
     .expect(flyoutPropertyGrid.exists).ok()
+
+    .drag(resizer, -100, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(450)
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
