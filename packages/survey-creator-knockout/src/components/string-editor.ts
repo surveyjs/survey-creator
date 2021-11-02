@@ -44,6 +44,9 @@ export class StringEditorViewModel {
   }
 
   public errorText: ko.Observable<string> = ko.observable(null);
+  public onClick(sender: StringEditorViewModel, event: any): void {
+    this.baseModel.onClick(event);
+  }
   public onInput(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onInput(event);
     this.errorText(this.baseModel.errorText);
@@ -59,6 +62,7 @@ export class StringEditorViewModel {
   }
   public edit(model: StringEditorViewModel, _: MouseEvent): void {
     model.focusEditor && model.focusEditor();
+    this.baseModel.onClick(_);
   }
   public done(_: StringEditorViewModel, event: Event): void {
     this.baseModel.done(event);

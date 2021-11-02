@@ -8,6 +8,9 @@ export class QuestionEmbeddedSurvey extends QuestionEmbeddedSurveyModel {
   constructor(name: string) {
     super(name);
   }
+  public get currentPageId(): string {
+    return !!this.embeddedSurvey.currentPage ? this.embeddedSurvey.currentPage.id : "";
+  }
   protected onBaseCreating() {
     super.onBaseCreating();
     this._implementor = new QuestionImplementor(this);

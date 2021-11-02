@@ -1849,6 +1849,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         const el = document.getElementById(selEl.id);
         if (!!el) {
           el.scrollIntoView({ block: "center" });
+          if (!propertyName) {
+            el.parentElement && el.parentElement.focus();
+          }
         }
       }, 100);
     }
@@ -2411,15 +2414,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       const str = this.getLocString("ed.addNewTypeQuestion");
       if (!!str && !!str["format"])
         return str["format"](
-          editorLocalization.getString("qt." + this.currentAddQuestionType)
+          this.toolbox.items.filter((item) => item.name == this.currentAddQuestionType)[0].title
         );
     }
     return this.getLocString("ed.addNewQuestion");
   }
 
   public getQuestionTypeSelectorModel(beforeAdd: () => void) {
-    var availableTypes = this.toolbox.itemNames.map((className) => {
-      return this.createIActionBarItemByClass(className);
+    var availableTypes = this.toolbox.items.map((item) => {
+      return this.createIActionBarItemByClass(item.name, item.title);
     });
     const popupModel = new PopupModel(
       "sv-list",
@@ -2449,16 +2452,19 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: () => void) {
     beforeAdd();
-    const newElement = Survey.ElementFactory.Instance.createElement(
+    let newElement = Survey.ElementFactory.Instance.createElement(
       this.currentAddQuestionType || "text",
       "q1"
     );
-    this.setNewNames(newElement);
+    if(newElement)
+      this.setNewNames(newElement);
+    else
+      newElement = this.createNewElement({ type: this.currentAddQuestionType });
     this.clickToolboxItem(newElement);
   }
-  createIActionBarItemByClass(className: string): Action {
+  createIActionBarItemByClass(className: string, title: string = null): Action {
     return new Action({
-      title: this.getLocString("qt." + className),
+      title: title || this.getLocString("qt." + className),
       id: className,
       iconName: "icon-" + className
     });
