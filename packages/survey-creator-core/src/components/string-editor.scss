@@ -81,7 +81,7 @@
   }
 }
 
-.svc-string-editor:hover:not(.svc-string-editor--readonly) {
+.svc-string-editor:hover:not(.svc-string-editor--readonly):not(:focus-within) {
   color: $foreground;
   .svc-string-editor__border {
     display: flex;

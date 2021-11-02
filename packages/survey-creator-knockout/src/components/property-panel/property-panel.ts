@@ -9,7 +9,7 @@ const template = require("./property-panel.html");
 ko.components.register("svc-property-panel", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const resizeManager: ResizeManager = new ResizeManager(componentInfo.element.children[0]);
+      const resizeManager: ResizeManager = new ResizeManager(componentInfo.element.getElementsByClassName("svc-property-panel")[0]);
       const subscrib = ko.computed(() => {
         const model: PropertyGridViewModelBase = ko.unwrap(params.model);
         new ImplementorBase(model);

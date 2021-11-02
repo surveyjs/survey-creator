@@ -11,7 +11,8 @@ import {
   QuestionDropdownModel,
   ItemValue,
   settings as surveySettings,
-  QuestionPanelDynamicModel
+  QuestionPanelDynamicModel,
+  CustomWidgetCollection
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -922,6 +923,48 @@ test("Question type selector", (): any => {
   expect(creator.addNewQuestionInPage(() => { }));
   expect(survey.getAllQuestions().length).toEqual(2);
   expect(survey.getAllQuestions()[1].getType()).toEqual("rating");
+});
+
+test("Question type custom widgets", (): any => {
+  const widget = {
+    name: "test_widget",
+    title: "Test Widget",
+    iconName: "icon-editor",
+    widgetIsLoaded: function () {
+      return true;
+    },
+    isFit: function (question) {
+      return question.getType() === "test_widget";
+    },
+    init() {
+      //Register a new type using the empty question as the base.
+      Serializer.addClass("test_widget", [], null, "empty");
+    },
+    htmlTemplate:
+        "<div>This is test widget</div>",
+    afterRender: function (question, element) {
+    }
+  };
+
+  CustomWidgetCollection.Instance.add(widget, "customtype");
+
+  const creator = new CreatorTester();
+  const survey: SurveyModel = <SurveyModel>creator.survey;
+  expect(survey.getAllQuestions().length).toEqual(0);
+  expect(creator.addNewQuestionText).toEqual("Add Question");
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  const listModel: ListModel =
+    selectorModel.popupModel.contentComponentData.model;
+  const customItem = listModel.actions.filter((item) => item.id == "test_widget")[0];
+  expect(customItem.title).toEqual("Test Widget");
+
+  listModel.selectItem(customItem);
+  expect(creator.addNewQuestionText).toEqual("Add Test Widget");
+  expect(survey.getAllQuestions().length).toEqual(1);
+  expect(survey.getAllQuestions()[0].getType()).toEqual("test_widget");
+  expect(creator.addNewQuestionInPage(() => { }));
+  expect(survey.getAllQuestions().length).toEqual(2);
+  expect(survey.getAllQuestions()[1].getType()).toEqual("test_widget");
 });
 
 test("Question type selector localization", (): any => {

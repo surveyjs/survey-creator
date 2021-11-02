@@ -30,6 +30,46 @@ const json2 = {
     }
   ]
 };
+const json3 = {
+  questions: [
+    {
+      type: "checkbox",
+      name: "string_editor",
+      description: "desc",
+      choices: [
+        "item1",
+        "item2",
+        "item3"
+      ]
+    },
+    {
+      "type": "matrixdropdown",
+      "name": "question1",
+      "columns": [
+        {
+          "name": "Column 1"
+        },
+        {
+          "name": "Column 2"
+        },
+        {
+          "name": "Column 3"
+        }
+      ],
+      "choices": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "rows": [
+        "Row 1",
+        "Row 2"
+      ]
+    }
+  ]
+};
 
 fixture`${title}`.page`${url}`.beforeEach(
   async (t) => {
@@ -102,4 +142,28 @@ test("Check creator events on string editor", async (t) => {
     .typeText(svStringSelector, "1234567890", { caretPos: 0 })
     .pressKey("enter")
     .expect(Selector(".sd-question__description .svc-string-editor").withText(msg).visible).ok();
+});
+
+test("Check string editor not loosing focus and selects underlying items", async (t) => {
+  await setJSON(json3);
+
+  const svStringSelector = Selector(".sv-string-editor").withText("string_editor");
+  const svItemSelector = Selector(".sv-string-editor").withText("item1");
+
+  await t
+    .click(svStringSelector)
+    .expect(svStringSelector.focused).ok()
+    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("string_editor").visible).ok()
+    .pressKey("tab")
+    .expect(Selector(".sv-string-editor").withText("desc").focused).ok()
+    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("string_editor").visible).ok()
+    .click(svItemSelector)
+    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("string_editor").visible).ok()
+    .expect(svItemSelector.focused).ok()
+    .click(Selector(".sv-string-editor").withText("Column 1"))
+    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("Column 1").visible).ok()
+    .click(Selector(".sv-string-editor").withText("Column 2"))
+    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("Column 2").visible).ok()
+    .pressKey("tab")
+    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("Column 3").visible).ok();
 });

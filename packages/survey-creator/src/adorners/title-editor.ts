@@ -195,6 +195,7 @@ export class TitleInplaceEditor {
     if (this.readOnly) {
       return;
     }
+    this.isCompositionSessionOpen = false;
     this.editor.selectFromStringEditor = true;
     if (this._needSelectTargetOnStartEdit) {
       this.editor.selectedElement = this.target;
@@ -254,12 +255,15 @@ export class TitleInplaceEditor {
   compositionStart = (model, event) => {
     this.isCompositionSessionOpen = true;
   };
+  compositionEnd = (model, event) => {
+    this.isCompositionSessionOpen = false;
+  };
   nameEditorKeypress = (model, event) => {
     resizeInput(event.target);
     switch (event.keyCode) {
       case 13:
         if (this.isCompositionSessionOpen) {
-          this.isCompositionSessionOpen = false;
+          // this.isCompositionSessionOpen = false;
           return true;
         }
         this.postEdit();
