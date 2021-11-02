@@ -237,7 +237,7 @@ export var enStrings = {
     reset: "Reset",
     change: "Change",
     refresh: "Refresh",
-    // close: "Close",
+    close: "Close",
     delete: "Delete",
     add: "Add",
     addNew: "Add New",

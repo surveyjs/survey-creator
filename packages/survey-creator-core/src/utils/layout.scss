@@ -41,12 +41,12 @@
   }
 }
 .svc-footer-bar {
-  position: relative;
-
   .svc-toolbar-wrapper {
     position: absolute;
     left: 0;
     right: 0;
+    bottom: 0;
+    height: calcSize(6);
 
     .sv-action-bar {
       justify-content: center;

@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { collapseButtonSelector, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
+import { collapseButtonSelector, getBarItemByTitle, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
 const title = "Responsiveness";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -147,4 +147,34 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
     .expect(topToolBar.visible).ok()
     .expect(footerToolBar.visible).notOk()
     .expect(topToolBar.find(".sv-action").filterVisible().count).eql(4);
+});
+
+test("proerty grid for mobile devices", async (t) => {
+  const mobilePropertGrid = Selector(".sv-mobile-property-panel .svc-property-panel");
+  const mobileCloseButton = Selector(".svc-property-panel__close");
+  const mobilePropertGridTitle = Selector(".svc-property-panel__title");
+
+  await t
+    .resizeWindow(750, 500)
+    .expect(mobilePropertGrid.exists).notOk()
+
+    .resizeWindow(370, 400)
+    .expect(mobilePropertGrid.visible).ok()
+    .expect(mobilePropertGridTitle.textContent).eql("Survey")
+
+    .click(mobileCloseButton)
+    .expect(mobilePropertGrid.visible).notOk()
+
+    .click(getBarItemByTitle("Settings").filterVisible())
+    .expect(mobilePropertGrid.visible).ok()
+    .expect(mobilePropertGridTitle.textContent).eql("Survey")
+
+    .click(mobileCloseButton)
+    .click(Selector("span").withText("Add Question"))
+    .click(getBarItemByTitle("Settings").filterVisible().nth(0))
+    .expect(mobilePropertGridTitle.textContent).eql("question1")
+
+    .resizeWindow(1920, 900)
+    .expect(mobilePropertGrid.exists).notOk()
+    .expect(propertyGridSelector.visible).ok();
 });

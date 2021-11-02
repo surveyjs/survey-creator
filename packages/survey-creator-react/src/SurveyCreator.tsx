@@ -157,13 +157,15 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     );
   }
   renderPropertyGrid() {
-    if (!!this.creator.currentTabPropertyGrid)
+    if (!!this.creator.currentTabPropertyGrid) {
+      const className = this.creator.isMobileView ? "sv-mobile-property-panel" : "";
       return (
-        <div>
+        <div className={className}>
           {ReactElementFactory.Instance.createElement("svc-property-panel", { model: this.creator.currentTabPropertyGrid })}
         </div>);
-    else
+    } else {
       return null;
+    }
   }
 }
 

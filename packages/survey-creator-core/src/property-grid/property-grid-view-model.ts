@@ -20,6 +20,9 @@ export class PropertyGridViewModelBase extends Base {
   public get flyoutPanelMode(): boolean {
     return this.visible && this.flyoutMode;
   }
+  public get closeText(): string {
+    return getLocString("pe.close");
+  }
 
   constructor(public model?: Base, private collapseAction?: () => void, private expandAction?: () => void) {
     super();
@@ -55,6 +58,9 @@ export class PropertyGridViewModelBase extends Base {
     });
     return this._expandAction;
   }
+  public closePropertyGrid() {
+    this._collapseAction.action();
+  }
 }
 
 export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridViewModelBase {
@@ -63,7 +69,6 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
   private objectSelectionAction: Action;
   private onPropertyGridVisibilityChanged;
 
-  @property() title: string;
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
 
@@ -143,7 +148,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
 
     this.objectSelectionAction = new Action({
       id: "svd-grid-object-selector",
-      title: this.title,
+      title: this.headerText,
       css: "sv-action--last sv-action-bar-item--secondary",
       iconName: "icon-more",
       component: "sv-action-bar-item-dropdown",
@@ -175,8 +180,8 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
     if (!!this.prevSelectionAction && name === "hasPrev") {
       this.prevSelectionAction.enabled = this.hasPrev;
     }
-    if (name === "title") {
-      this.objectSelectionAction.title = this.title;
+    if (name === "headerText") {
+      this.objectSelectionAction.title = this.headerText;
     }
   }
 
@@ -208,7 +213,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
     }
   }
   private updateTitle() {
-    this.title = this.getTitle();
+    this.headerText = this.getTitle();
   }
   private getTitle(): string {
     var obj = this.propertyGridModel.obj;

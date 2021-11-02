@@ -24,7 +24,7 @@ svc-tab-json-editor-textarea {
   max-height: calc(2.5 * #{$base-unit});
   border: none;
   background-color: $primary;
-  color: white;
+  color: $primary-foreground;
   font-weight: bold;
 }
 
