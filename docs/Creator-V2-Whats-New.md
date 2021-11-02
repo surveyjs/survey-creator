@@ -2,6 +2,8 @@
 
 We spent tremendous recourses of our team working on new Creator V2 and here we are going to share with you benefits of using our new version.
 
+**Important note:** If you are going to migrate from Creator V1 to Creator V2, please read our [Migration Guide](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2). Despite the fact, we re-write almost all code for V2, the most of your code from V1 should continue to work. It uses the same SurveyJS Library version as V1 and we did our best to keep the same API to make sure you can easily move from V1 to V2.
+
 One of the biggest complain of our customers for Creator V1, was that we bfuilt it using [knockoutjs](https://knockoutjs.com/). It is a good tiny MVVM framework that works great for many projects, but within the time [knockoutjs](https://knockoutjs.com/) lost the battle to Angular, React and Vue frameworks and it is rare choice for JavaScript developers nowadays. We chosen it because it works perfectly with all popular frameworks, it is tiny and there is no reason to invent your own MVVM library.  However, it has limitations and the biggest one is using “eval” function for parsing their templates. Despite the fact, it is ok for security point of view to do it in browser, many companies have security checks built in their CI/CD and it doesn’t allow them to use JavaScript libraries that uses “eval” function.
 
 Another issue with [knockoutjs](https://knockoutjs.com/), it makes SurveyJS Creator, for many our customers, a black box. It is still a JavaScript Library, but it is not in their JavaScript application life cycle. It means that we must provide a better solution for our Angular, React and Vue developers. We should have versions for Angular, React and Vue.
