@@ -178,8 +178,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
         this.creator.makeNewViewActive("test");
       },
       visible: <any>new ComputedUpdater<boolean>(() => {
-        const isMobileView = this.creator.isMobileView;
-        return (this.creator.activeTab === "designer") && isMobileView;
+        return (this.creator.activeTab === "designer");
       }),
       title: this.creator.getLocString("ed.testSurvey"),
       showTitle: false
@@ -190,8 +189,6 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       this.expandAction = this.propertyGrid.createExpandAction();
       this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
         const propertyGridVisible = this.propertyGrid.visible;
-        const isMobileView = this.creator.isMobileView;
-        if (this.creator.activeTab === "designer" && isMobileView) return false;
         return this.creator.activeTab === "designer" && !propertyGridVisible;
       })
       items.push(this.expandAction);
@@ -202,8 +199,11 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.creator.onShowPropertyGridVisiblityChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
-    items.push(this.previewAction);
     return items;
+  }
+  public addFooterActions() {
+    this.creator.footerToolbar.actions.push(this.surveySettingsAction); 
+    this.creator.footerToolbar.actions.push(this.previewAction); 
   }
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);

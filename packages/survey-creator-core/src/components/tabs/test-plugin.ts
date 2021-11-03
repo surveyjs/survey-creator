@@ -13,6 +13,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private orientationSelectorAction: Action;
   private invisibleToggleAction: Action;
   private testAgainAction: Action;
+  private designerAction: Action;
 
   public model: TestSurveyTabViewModel;
 
@@ -138,9 +139,8 @@ export class TabTestPlugin implements ICreatorPlugin {
         component: "sv-action-bar-item-dropdown",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          const isMobileView = this.creator.isMobileView;
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
-          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab && !isMobileView;
+          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab;
         }),
         action: () => {
           devicePopupModel.toggleVisibility();
@@ -156,9 +156,8 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device_rotate",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          const isMobileView = this.creator.isMobileView;
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
-          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab && !isMobileView;
+          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab;
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
@@ -217,20 +216,25 @@ export class TabTestPlugin implements ICreatorPlugin {
       }),
     });
     items.push(this.languageSelectorAction);
-    const designerAction = new Action({
+    this.designerAction = new Action({
       id: "svd-designer",
       iconName: "icon-preview",
       needSeparator: true,
       action: () => { this.creator.makeNewViewActive("designer"); },
       active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
       visible: <any>new ComputedUpdater<boolean>(() => {
-        const isMobileView = this.creator.isMobileView;
-        return (this.creator.activeTab === "test") && isMobileView;
+        return (this.creator.activeTab === "test");
       }),
       title: this.creator.getLocString("ed.designer"),
       showTitle: false
     })
-    items.push(designerAction);
     return items;
+  }
+
+  public addFooterActions() {
+    this.creator.footerToolbar.actions.push(this.testAgainAction);
+    this.invisibleToggleAction && (this.creator.footerToolbar.actions.push(this.invisibleToggleAction));
+    this.languageSelectorAction && (this.creator.footerToolbar.actions.push(this.languageSelectorAction));
+    this.creator.footerToolbar.actions.push(this.designerAction);
   }
 }

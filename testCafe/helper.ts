@@ -55,7 +55,7 @@ export function getBarItemByTitle(text) {
   return Selector(".sv-action-bar-item[title=\"" + text + "\"]");
 }
 export function getListItemByText(text) {
-  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
+  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text).filterVisible();
 }
 
 export function getVisibleElement(selector: string | Selector): Selector {

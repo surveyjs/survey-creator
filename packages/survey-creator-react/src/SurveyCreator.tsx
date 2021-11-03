@@ -109,7 +109,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
               <div className="svc-footer-bar">
                 {(creator.isMobileView ?
                   <div className="svc-toolbar-wrapper">
-                    <SurveyActionBar model={creator.toolbar}></SurveyActionBar>
+                    <SurveyActionBar model={creator.footerToolbar}></SurveyActionBar>
                   </div>
                   : null)}
               </div>
