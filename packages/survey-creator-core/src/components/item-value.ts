@@ -40,9 +40,48 @@ export class ItemValueWrapperViewModel extends Base {
     );
   }
 
-  startDragItemValue(event: PointerEvent) {
-    this.dragDropHelper.startDrag(event, this.item, this.question, <HTMLElement>event.currentTarget);
+  // correct handle click vs drag
+  private pointerDownEvent;
+  private currentTarget;
+  private startX;
+  private startY;
+  private currentX;
+  private currentY;
+
+  onPointerDown(pointerDownEvent: PointerEvent) {
+    this.pointerDownEvent = pointerDownEvent;
+    this.currentTarget = pointerDownEvent.currentTarget;
+    this.startX = pointerDownEvent.pageX;
+    this.startY = pointerDownEvent.pageY;
+    document.addEventListener("pointermove", this.startDragItemValue);
   }
+
+  startDragItemValue = (pointerMoveEvent: PointerEvent) => {
+    this.currentX = pointerMoveEvent.pageX;
+    this.currentY = pointerMoveEvent.pageY;
+    if (this.isMicroMovement) return;
+    this.clearListeners();
+
+    const event = this.pointerDownEvent;
+    this.dragDropHelper.startDrag(event, this.item, this.question, <HTMLElement>this.currentTarget);
+  }
+  public onPointerUp = (event) => {
+    this.clearListeners();
+  };
+  // see https://stackoverflow.com/questions/6042202/how-to-distinguish-mouse-click-and-drag
+  private get isMicroMovement() {
+    const delta = 10;
+    const diffX = Math.abs(this.currentX - this.startX);
+    const diffY = Math.abs(this.currentY - this.startY);
+    return diffX < delta && diffY < delta;
+  }
+  private clearListeners() {
+    if (!this.pointerDownEvent) return;
+    const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
+    document.removeEventListener("pointermove", this.startDragItemValue);
+  }
+  // EO correct handle click vs drag
+
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;
   }
