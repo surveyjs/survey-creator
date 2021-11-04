@@ -53,7 +53,6 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
           <span
             className="svc-item-value-controls__button svc-item-value-controls__drag"
             title={this.model.dragTooltip}
-            onPointerDown={(event: any) => this.model.startDragItemValue(event)}
           >
             <SvgIcon size={16} iconName={"icon-drag-handler"}></SvgIcon>
           </span>
@@ -82,6 +81,8 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         data-sv-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }
+        onPointerDown={(event: any) => this.model.onPointerDown(event)}
+        onPointerUp={(event: any) => this.model.onPointerUp(event)}
       >
         <div className="svc-item-value__ghost"></div>
 
