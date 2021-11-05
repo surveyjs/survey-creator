@@ -54,6 +54,7 @@ export class ItemValueWrapperViewModel extends Base {
     this.startX = pointerDownEvent.pageX;
     this.startY = pointerDownEvent.pageY;
     document.addEventListener("pointermove", this.startDragItemValue);
+    this.currentTarget.addEventListener("pointerup", this.onPointerUp);
   }
 
   startDragItemValue = (pointerMoveEvent: PointerEvent) => {
@@ -77,8 +78,8 @@ export class ItemValueWrapperViewModel extends Base {
   }
   private clearListeners() {
     if (!this.pointerDownEvent) return;
-    const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
     document.removeEventListener("pointermove", this.startDragItemValue);
+    this.currentTarget.removeEventListener("pointerup", this.onPointerUp);
   }
   // EO correct handle click vs drag
 

@@ -13,6 +13,7 @@ export class ToolboxToolViewModel extends Base {
 
   // correct handle click vs drag
   private pointerDownEvent;
+  private currentTarget;
   private startX;
   private startY;
   private currentX;
@@ -22,20 +23,25 @@ export class ToolboxToolViewModel extends Base {
     return !this.creator.readOnly;
   }
 
+  public click = (event) => {
+    if (!this.allowAdd) return;
+    if (this.item.id === 'dotsItem-id') return true; //toolbox responsive popup
+    this.creator.clickToolboxItem(this.item.json);
+  };
+
   public onPointerDown(pointerDownEvent) {
     if (!this.allowAdd) return;
     if (this.item.id === 'dotsItem-id') return true; //toolbox responsive popup
     this.pointerDownEvent = pointerDownEvent;
+    this.currentTarget = pointerDownEvent.currentTarget;
     this.startX = pointerDownEvent.pageX;
     this.startY = pointerDownEvent.pageY;
     document.addEventListener("pointermove", this.startDragToolboxItem);
+    this.currentTarget.addEventListener("pointerup", this.onPointerUp);
   }
-  public click = (event) => {
-    if (!this.allowAdd) return;
-    if (this.item.id === 'dotsItem-id') return true; //toolbox responsive popup
+  public onPointerUp = (pointerUpEvent) => {
     this.clearListeners();
-    this.creator.clickToolboxItem(this.item.json);
-  };
+  }
   private startDragToolboxItem = (pointerMoveEvent) => {
     this.currentX = pointerMoveEvent.pageX;
     this.currentY = pointerMoveEvent.pageY;
@@ -61,8 +67,8 @@ export class ToolboxToolViewModel extends Base {
   }
   private clearListeners() {
     if (!this.pointerDownEvent) return;
-    const toolboxItemHTMLElement = <HTMLElement>this.pointerDownEvent.target;
     document.removeEventListener("pointermove", this.startDragToolboxItem);
+    this.currentTarget.removeEventListener("pointerup", this.onPointerUp);
   }
   // EO correct handle click vs drag
 }
