@@ -104,7 +104,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
       >
         <div
           className={"svc-image-item__drag-element"}
-          onPointerDown={isNew ? undefined : (event: any) => this.model.startDragItemValue(event)}
+          onPointerDown={isNew ? undefined : (event: any) => this.model.startDragItemValue(event, event.currentTarget)}
         ></div>
         <input
           type="file"

@@ -82,7 +82,6 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
           this.model.isDraggable ? this.model.item.value : undefined
         }
         onPointerDown={(event: any) => this.model.onPointerDown(event)}
-        onPointerUp={(event: any) => this.model.onPointerUp(event)}
       >
         <div className="svc-item-value__ghost"></div>
 
