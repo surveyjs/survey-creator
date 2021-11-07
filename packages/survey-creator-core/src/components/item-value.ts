@@ -46,6 +46,7 @@ export class ItemValueWrapperViewModel extends Base {
   private dragOrClickHelper: DragOrClickHelper;
 
   onPointerDown(pointerDownEvent: PointerEvent) {
+    if (this.isNew) return;
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
   }
 
