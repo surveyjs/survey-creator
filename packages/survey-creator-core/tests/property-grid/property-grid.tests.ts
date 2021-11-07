@@ -1956,6 +1956,25 @@ test("DependedOn properties, dynamic choices", () => {
   Serializer.removeProperty("question", "targetEntity");
   Serializer.removeProperty("question", "targetField");
 });
+test("DependedOn an array property", () => {
+  Serializer.addProperty("dropdown", {
+    name: "custProp",
+    dependsOn: ["choices"],
+    visibleIf: function (obj) {
+      return obj.choices.length > 3;
+    },
+  });
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+
+  const propertyGrid = new PropertyGridModelTester(question);
+  const custPropQuestion = propertyGrid.survey.getQuestionByName("custProp");
+  expect(custPropQuestion.isVisible).toBeFalsy();
+  question.choices.push(new ItemValue(4));
+  expect(custPropQuestion.isVisible).toBeTruthy();
+
+  Serializer.removeProperty("dropdown", "custProp");
+});
 
 test("showOptionsCaption for dropdown with empty choice item", () => {
   Serializer.addProperty("question", {
