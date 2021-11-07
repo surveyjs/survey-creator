@@ -1016,6 +1016,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   protected initTabs() {
     this.initPlugins();
+    this.initFooterToolbar();
     if (this.tabs.length > 0) {
       this.makeNewViewActive(this.tabs[0].id);
     }
@@ -2529,12 +2530,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: true }) showPageNavigator;
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
-  @property({
-    defaultValue: false,
-    onSet: (_, target: CreatorBase) => {
-      target.initFooterToolbar();
-    }
-  }) isMobileView;
+  @property({ defaultValue: false }) isMobileView;
   selectFromStringEditor: boolean;
 }
 
