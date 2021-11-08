@@ -127,6 +127,28 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   await t.expect(pagesLength).eql(20);
 });
 
+//TODO REMOVE TEST ONLY
+test.only("Drag Drop Toolbox Responsivity", async (t) => {
+  const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-child(20)");
+  await t
+    .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
+    .resizeWindow(970, 632)
+    .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
+    .click(".svc-toolbox__tool.sv-dots");
+
+  const PopupSelector = Selector(".sv-popup").filterVisible();
+  const DynamicPanelItem = PopupSelector.find(".sv-list__item").withText("Panel (dynamic panels)");
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
+
+  await t.hover(DynamicPanelItem, { speed: 0.5 });
+  await t.hover(EmptyPage, { speed: 0.5 });
+
+  await t.dragToElement(DynamicPanelItem, EmptyPage, { speed: 0.5 });
+
+  const name = await getQuestionNameByIndex(0);
+  await t.expect(name).eql("question1");
+});
+
 test("Drag Drop Question", async (t) => {
   await t.resizeWindow(2560, 1440);
   const json = {
