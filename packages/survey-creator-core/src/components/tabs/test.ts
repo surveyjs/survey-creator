@@ -135,7 +135,7 @@ export class TestSurveyTabViewModel extends Base {
       pages.push({
         id: page.name,
         data: page,
-        title: this.surveyProvider.getObjectDisplayName(page, "survey-tester"),
+        title: this.surveyProvider.getObjectDisplayName(page, "survey-tester", page.title),
         enabled: page.isVisible,
         visible: true
       });
@@ -251,6 +251,6 @@ export class TestSurveyTabViewModel extends Base {
     }
   }
   private getSelectPageTitle(): string {
-    return (this.activePage && this.surveyProvider.getObjectDisplayName(this.activePage, "survey-tester-selected")) || getLocString("ts.selectPage");
+    return (this.activePage && this.surveyProvider.getObjectDisplayName(this.activePage, "survey-tester-selected", this.activePage.title)) || getLocString("ts.selectPage");
   }
 }
