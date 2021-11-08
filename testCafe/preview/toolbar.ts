@@ -80,19 +80,19 @@ test("Language switcher", async (t) => {
     .expect(getBarItemByTitle("deutsch").visible).ok();
 });
 
-test("Page switcher", async (t) => {
+test.only("Page switcher", async (t) => {
   await setJSON(json2);
 
   await t
     .click(getTabbedMenuItemByText("Test Survey"))
     .expect(Selector(".sv-question__title").withText("string_editor").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("page1")
+    .expect(Selector("#pageSelector").textContent).contains("First page")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(true)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
 
     .click(Selector("#nextPage"))
     .expect(Selector(".sv-question__title").withText("question1").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("page2")
+    .expect(Selector("#pageSelector").textContent).contains("Second page")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
 
@@ -103,20 +103,20 @@ test("Page switcher", async (t) => {
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(true)
 
     .click(getBarItemByTitle("page3"))
-    .expect(getListItemByText("page2").visible).ok()
-    .expect(getListItemByText("page1").hasClass("sv-list__item--selected")).notOk()
-    .expect(getListItemByText("page2").hasClass("sv-list__item--selected")).notOk()
+    .expect(getListItemByText("Second page").visible).ok()
+    .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
+    .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).notOk()
     .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).ok()
-    .click(getListItemByText("page2"))
+    .click(getListItemByText("Second page"))
     .expect(Selector(".sv-question__title").withText("question1").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("page2")
+    .expect(Selector("#pageSelector").textContent).contains("Second page")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
-    .click(getBarItemByTitle("page2"))
-    .expect(getListItemByText("page1").hasClass("sv-list__item--selected")).notOk()
-    .expect(getListItemByText("page2").hasClass("sv-list__item--selected")).ok()
+    .click(getBarItemByTitle("Second page"))
+    .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
+    .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).ok()
     .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).notOk()
-    .click(getListItemByText("page2"));
+    .click(getListItemByText("Second page"));
 });
 
 test("Test Survey Again", async (t) => {
