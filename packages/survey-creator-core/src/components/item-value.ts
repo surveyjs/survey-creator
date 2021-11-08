@@ -11,6 +11,8 @@ import { DragDropChoices } from "survey-core";
 import "./item-value.scss";
 import { getLocString } from "../editorLocalization";
 
+import {DragOrClickHelper} from "../utils/dragOrClickHelper";
+
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
   @property({ defaultValue: false }) isDragging: boolean;
@@ -38,11 +40,20 @@ export class ItemValueWrapperViewModel extends Base {
     this.dragDropHelper.onGhostPositionChanged.add(
       this.handleDragDropGhostPositionChanged
     );
+    this.dragOrClickHelper = new DragOrClickHelper(this.startDragItemValue);
   }
 
-  startDragItemValue(event: PointerEvent) {
-    this.dragDropHelper.startDrag(event, this.item, this.question, <HTMLElement>event.currentTarget);
+  private dragOrClickHelper: DragOrClickHelper;
+
+  onPointerDown(pointerDownEvent: PointerEvent) {
+    if (this.isNew) return;
+    this.dragOrClickHelper.onPointerDown(pointerDownEvent);
   }
+
+  startDragItemValue = (pointerDownEvent: PointerEvent, currentTarget: any) => {
+    this.dragDropHelper.startDrag(pointerDownEvent, this.item, this.question, <HTMLElement>currentTarget);
+  }
+
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;
   }
