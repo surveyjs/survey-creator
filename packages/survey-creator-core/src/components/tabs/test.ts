@@ -1,7 +1,7 @@
 import { SurveySimulatorModel } from "../simulator";
 
 import "./test.scss";
-import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, AdaptiveActionContainer, IAction } from "survey-core";
+import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 
@@ -19,7 +19,7 @@ import { getLocString } from "../../editorLocalization";
 
 export class TestSurveyTabViewModel extends Base {
   private json: any;
-  public pages: AdaptiveActionContainer = new AdaptiveActionContainer();
+  public pages: ActionContainer = new ActionContainer();
   private prevPageAction: Action;
   private nextPageAction: Action;
   private selectPageAction: Action;
@@ -82,6 +82,7 @@ export class TestSurveyTabViewModel extends Base {
     this.survey.onComplete.add((sender: SurveyModel) => {
       self.isRunning = false;
     });
+
     if (!!this.survey["onNavigateToUrl"]) {
       this.survey["onNavigateToUrl"].add(function (sender, options) {
         const url: string = options.url;

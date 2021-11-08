@@ -155,6 +155,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
   private responsivityManager: CreatorResponsivityManager;
+  footerToolbar: ActionContainer;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -1015,6 +1016,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   protected initTabs() {
     this.initPlugins();
+    this.initFooterToolbar();
     if (this.tabs.length > 0) {
       this.makeNewViewActive(this.tabs[0].id);
     }
@@ -1042,6 +1044,17 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     if (this.showEmbeddedSurveyTab) {
       new TabEmbedPlugin(this);
+    }
+  }
+  private initFooterToolbar(): void {
+    if (!this.footerToolbar) {
+      this.footerToolbar = new ActionContainer();
+      ["undoredo", "designer", "test"].forEach((pluginKey: string) => {
+        const plugin = this.getPlugin(pluginKey);
+        if (!!plugin && !!plugin["addFooterActions"]) {
+          plugin["addFooterActions"]();
+        }
+      })
     }
   }
   public getOptions() {
@@ -2517,6 +2530,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: true }) showPageNavigator;
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
+  @property({ defaultValue: false }) isMobileView;
   selectFromStringEditor: boolean;
 }
 
@@ -2620,7 +2634,7 @@ export function getItemValueWrapperComponentData(
 }
 export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
-  return !parentIsMatrix&& (!element.isContentElement || element.isEditableTemplateElement);
+  return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;

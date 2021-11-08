@@ -1,4 +1,4 @@
-import { Base, SurveyModel, property, PopupModel, AdaptiveActionContainer, Action } from "survey-core";
+import { Base, SurveyModel, property, PopupModel, AdaptiveActionContainer, Action, ComputedUpdater } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
@@ -14,20 +14,14 @@ export class PropertyGridViewModelBase extends Base {
 
   @property() survey: SurveyModel;
   @property() headerText: string;
-  @property({
-    defaultValue: true, onSet: (val, target) => {
-      if (target._expandAction) {
-        target._expandAction.visible = !val;
-      }
-      if (target._collapseAction) {
-        target._collapseAction.visible = val;
-      }
-    }
-  }) visible: boolean;
+  @property({ defaultValue: true }) visible: boolean;
   @property({ defaultValue: false }) flyoutMode: boolean;
 
   public get flyoutPanelMode(): boolean {
     return this.visible && this.flyoutMode;
+  }
+  public get closeText(): string {
+    return getLocString("pe.close");
   }
 
   constructor(public model?: Base, private collapseAction?: () => void, private expandAction?: () => void) {
@@ -38,6 +32,7 @@ export class PropertyGridViewModelBase extends Base {
         iconName: "icon-hide",
         title: getLocString("ed.hidePanel"),
         showTitle: false,
+        visible: <any>new ComputedUpdater<boolean>(() => this.visible),
         action: () => {
           if (collapseAction)
             collapseAction();
@@ -48,7 +43,7 @@ export class PropertyGridViewModelBase extends Base {
       this.toolbar.actions.push(this._collapseAction);
     }
   }
-  public createExpandAction(visible: boolean) {
+  public createExpandAction() {
     this._expandAction = new Action({
       id: "svd-grid-expand",
       iconName: "icon-expand_20x20",
@@ -59,10 +54,12 @@ export class PropertyGridViewModelBase extends Base {
           this.visible = true;
       },
       title: getLocString("ed.showPanel"),
-      visible: visible,
       showTitle: false
     });
     return this._expandAction;
+  }
+  public closePropertyGrid() {
+    this._collapseAction.action();
   }
 }
 
@@ -72,7 +69,6 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
   private objectSelectionAction: Action;
   private onPropertyGridVisibilityChanged;
 
-  @property() title: string;
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
 
@@ -152,7 +148,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
 
     this.objectSelectionAction = new Action({
       id: "svd-grid-object-selector",
-      title: this.title,
+      title: this.headerText,
       css: "sv-action--last sv-action-bar-item--secondary",
       iconName: "icon-more",
       component: "sv-action-bar-item-dropdown",
@@ -184,8 +180,8 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
     if (!!this.prevSelectionAction && name === "hasPrev") {
       this.prevSelectionAction.enabled = this.hasPrev;
     }
-    if (name === "title") {
-      this.objectSelectionAction.title = this.title;
+    if (name === "headerText") {
+      this.objectSelectionAction.title = this.headerText;
     }
   }
 
@@ -217,7 +213,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
     }
   }
   private updateTitle() {
-    this.title = this.getTitle();
+    this.headerText = this.getTitle();
   }
   private getTitle(): string {
     var obj = this.propertyGridModel.obj;

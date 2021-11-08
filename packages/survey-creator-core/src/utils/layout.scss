@@ -34,11 +34,27 @@
   .svc-toolbar-wrapper {
     flex: 0 0 auto;
     display: flex;
-    
-    .sv-action-bar{
+
+    .sv-action-bar {
       justify-content: flex-end;
     }
   }
 }
+.svc-footer-bar {
+  .svc-toolbar-wrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calcSize(6);
+
+    .sv-action-bar {
+      justify-content: center;
+      padding: 0;
+      width: 100%;
+    }
+  }
+}
+
 //TODO: fix to not breaking examples
 @import url("../../node_modules/survey-core/defaultV2.css");

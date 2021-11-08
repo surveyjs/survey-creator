@@ -46,7 +46,7 @@ svc-tab-designer {
 
   .svc-properties-shadow {
     z-index: 100;
-    background-color: $background-dim;
+    background-color: $foreground-light;
     opacity: 0.75;
     position: absolute;
     top: 0;
@@ -61,5 +61,42 @@ svc-tab-designer {
     display: inline-block;
     height: 100%;
     max-width: 100%;
+  }
+}
+
+.sv-mobile-property-panel {
+  .svc-property-panel__actions {
+    display: none;
+  }
+  .svc-property-panel__title {
+    display: block;
+    font-weight: bold;
+    font-size: calcSize(3);
+    line-height: calcSize(4);
+  }
+  .svc-properties-wrapper {
+    top: calcSize(2);
+    background: none;
+  }
+  .svc-property-panel {
+    width: 100%;
+  }
+  .svc-property-panel__header {
+    border: unset;
+    box-shadow: 0px calcSize(1) calcSize(2);
+    border-radius: calcSize(2) calcSize(2) 0px 0px;
+  }
+  .svc-property-panel__expander {
+    height: calc(100% - 20 * #{$base-unit});
+    background-color: $background-dim;
+  }
+  .svc-property-panel__close {
+    display: flex;
+    background-color: $background-dim;
+
+    .svc-property-panel__close-button {
+      width: 100%;
+      margin: calcSize(2);
+    }
   }
 }

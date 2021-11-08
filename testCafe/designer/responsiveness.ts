@@ -1,9 +1,9 @@
 import { Selector } from "testcafe";
-import { collapseButtonSelector, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
+import { collapseButtonSelector, getBarItemByTitle, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
 const title = "Responsiveness";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-  await t.maximizeWindow();
+  await t.resizeWindow(1920, 900);
 });
 
 const flyoutPropertyGrid = Selector(".svc-flyoutPanelMode-panel");
@@ -11,9 +11,8 @@ const flyoutPropertyGrid = Selector(".svc-flyoutPanelMode-panel");
 test("Check base responsiveness for tabbed menu", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
   await t
-    .click(collapseButtonSelector)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
-    .resizeWindow(932, 969)
+    .resizeWindow(970, 969)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
     .click(".svc-tabbed-menu-item-container.sv-dots");
   const popupSelector = Selector(".sv-popup").filterVisible();
@@ -21,16 +20,15 @@ test("Check base responsiveness for tabbed menu", async (t) => {
     .expect(popupSelector.find(".sv-list__item").withText("Translation").visible).ok()
     .pressKey("esc")
     .expect(popupSelector.visible).notOk()
-    .maximizeWindow()
+    .resizeWindow(1920, 900)
     .expect(await tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok();
 });
 
 test("Check base responsiveness for toolbox", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-child(20)");
   await t
-    .click(collapseButtonSelector)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
-    .resizeWindow(932, 632)
+    .resizeWindow(970, 632)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
     .click(".svc-toolbox__tool.sv-dots");
   const popupSelector = Selector(".sv-popup").filterVisible();
@@ -38,14 +36,11 @@ test("Check base responsiveness for toolbox", async (t) => {
     .expect(popupSelector.find(".sv-list__item").withText("Panel (dynamic panels)").visible).ok()
     .pressKey("esc")
     .expect(popupSelector.visible).notOk()
-    .maximizeWindow()
+    .resizeWindow(1920, 900)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk();
 });
 
-test.before(async t => {
-  await t.resizeWindow(1920, 900);
-})
-("Responsive creator: toolbox & page navigator", async (t) => {
+test("Responsive creator: toolbox & page navigator", async (t) => {
   await setJSON({
     pages: [
       {
@@ -74,13 +69,17 @@ test.before(async t => {
 
     .resizeWindow(750, 500)
     .expect(toolbox.exists).notOk()
-    .expect(pageNavigator.exists).notOk();
+    .expect(pageNavigator.exists).notOk()
+
+    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText("Survey Designer"))
+    .expect(toolbox.exists).notOk()
+    .expect(pageNavigator.exists).notOk()
+
+    .resizeWindow(1920, 900); // reset for next tests, beforeEach not work (((
 });
 
-test.before(async t => {
-  await t.resizeWindow(1920, 900);
-})
-("Responsive creator: property grid", async (t) => {
+test("Responsive creator: property grid", async (t) => {
   await setJSON({
     pages: [
       {
@@ -123,5 +122,59 @@ test.before(async t => {
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
-    .expect(flyoutPropertyGrid.exists).notOk();
+    .expect(flyoutPropertyGrid.exists).notOk()
+
+    .resizeWindow(1920, 900); // reset for next tests
+});
+
+test("Responsive creator: designer tab for mobile devices", async (t) => {
+  const topToolBar = Selector(".svc-top-bar .sv-action-bar");
+  const footerToolBar = Selector(".svc-footer-bar .sv-action-bar");
+
+  await t
+    .resizeWindow(750, 500)
+    .click(collapseButtonSelector)
+    .expect(topToolBar.visible).ok()
+    .expect(footerToolBar.visible).notOk()
+    .expect(topToolBar.find(".sv-action").filterVisible().count).eql(4)
+
+    .resizeWindow(370, 400)
+    .expect(topToolBar.visible).notOk()
+    .expect(footerToolBar.visible).ok()
+    .expect(footerToolBar.find(".sv-action").filterVisible().count).eql(4)
+
+    .resizeWindow(1920, 900)
+    .expect(topToolBar.visible).ok()
+    .expect(footerToolBar.visible).notOk()
+    .expect(topToolBar.find(".sv-action").filterVisible().count).eql(4);
+});
+
+test("proerty grid for mobile devices", async (t) => {
+  const mobilePropertGrid = Selector(".sv-mobile-property-panel .svc-property-panel");
+  const mobileCloseButton = Selector(".svc-property-panel__close");
+  const mobilePropertGridTitle = Selector(".svc-property-panel__title");
+
+  await t
+    .resizeWindow(750, 500)
+    .expect(mobilePropertGrid.exists).notOk()
+
+    .resizeWindow(370, 400)
+    .expect(mobilePropertGrid.visible).ok()
+    .expect(mobilePropertGridTitle.textContent).eql("Survey")
+
+    .click(mobileCloseButton)
+    .expect(mobilePropertGrid.visible).notOk()
+
+    .click(getBarItemByTitle("Settings").filterVisible())
+    .expect(mobilePropertGrid.visible).ok()
+    .expect(mobilePropertGridTitle.textContent).eql("Survey")
+
+    .click(mobileCloseButton)
+    .click(Selector("span").withText("Add Question"))
+    .click(getBarItemByTitle("Settings").filterVisible().nth(0))
+    .expect(mobilePropertGridTitle.textContent).eql("question1")
+
+    .resizeWindow(1920, 900)
+    .expect(mobilePropertGrid.exists).notOk()
+    .expect(propertyGridSelector.visible).ok();
 });

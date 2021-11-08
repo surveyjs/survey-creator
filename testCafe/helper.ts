@@ -47,7 +47,7 @@ export const toolboxItems = Selector(".svc-toolbox__tool").filterVisible();
 export const toolboxItemIcons = Selector(".svc-toolbox__tool .svc-toolbox__item-container").filterVisible();
 export const toolboxItemTitles = Selector(".svc-toolbox__tool .svc-toolbox__item > .svc-toolbox__item-title").filterVisible();
 
-export function getTabbedMenuItemByText(text) {
+export function getTabbedMenuItemByText(text: "Survey Designer" | "Test Survey" | "Survey Logic" | "Translation" | "JSON Editor" | "Embed Survey") {
   return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text).filterVisible();
 }
 
@@ -55,7 +55,7 @@ export function getBarItemByTitle(text) {
   return Selector(".sv-action-bar-item[title=\"" + text + "\"]");
 }
 export function getListItemByText(text) {
-  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
+  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text).filterVisible();
 }
 
 export function getVisibleElement(selector: string | Selector): Selector {

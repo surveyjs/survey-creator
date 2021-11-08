@@ -35,6 +35,10 @@
   overflow-y: auto;
 }
 
+.svc-property-panel-close {
+  display: none;
+}
+
 .svc-property-panel__group {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -84,11 +88,7 @@
 }
 
 .svc-property-panel__title {
-  display: flex;
-  line-height: calcSize(4.5);
-  flex-grow: 1;
-  flex-shrink: 0;
-  justify-content: flex-end;
+  display: none;
 }
 
 .svc-property-panel__actions {

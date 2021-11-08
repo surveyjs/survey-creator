@@ -2,14 +2,12 @@
   <div class="svc-flex-row svc-full-container">
     <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
       <div class="svc-top-bar">
-        <!-- ko if: creator.showTabs -->
-        <div class="svc-tabbed-menu-wrapper">
+        <div class="svc-tabbed-menu-wrapper" data-bind="visible: creator.showTabs">
           <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
           <!-- /ko -->
         </div>
-        <!-- /ko -->
         <!-- ko if: creator.showToolbar -->
-        <div class="svc-toolbar-wrapper">
+        <div class="svc-toolbar-wrapper" data-bind="visible: creator.showToolbar">
           <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
           <!-- /ko -->
         </div>
@@ -27,8 +25,16 @@
           <!-- /ko -->
         </div>
       </div>
+      <!-- ko if: creator.isMobileView -->
+      <div class="svc-footer-bar">
+        <div class="svc-toolbar-wrapper" data-bind="visible: creator.isMobileView">
+          <!-- ko component: { name: 'sv-action-bar', params: { model: creator.footerToolbar } } -->
+          <!-- /ko -->
+        </div>
+      </div>
+      <!-- /ko -->
     </div>
-    <div data-bind="if: creator.currentTabPropertyGrid">
+    <div data-bind="if: creator.currentTabPropertyGrid, css: { 'sv-mobile-property-panel': creator.isMobileView }">
       <svc-property-panel params="model: creator.currentTabPropertyGrid"> </svc-property-panel>
     </div>
   </div>
