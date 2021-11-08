@@ -5,16 +5,18 @@ export class DragOrClickHelper {
   private startY;
   private currentX;
   private currentY;
+  private itemModel;
 
   constructor(private dragHandler) { }
 
-  public onPointerDown(pointerDownEvent) {
+  public onPointerDown(pointerDownEvent, itemModel?) {
     this.pointerDownEvent = pointerDownEvent;
     this.currentTarget = pointerDownEvent.currentTarget;
     this.startX = pointerDownEvent.pageX;
     this.startY = pointerDownEvent.pageY;
     document.addEventListener("pointermove", this.tryToStartDrag);
     this.currentTarget.addEventListener("pointerup", this.onPointerUp);
+    this.itemModel = itemModel;
   }
 
   private onPointerUp = (pointerUpEvent) => {
@@ -28,7 +30,7 @@ export class DragOrClickHelper {
 
     this.clearListeners();
 
-    this.dragHandler(this.pointerDownEvent, this.currentTarget);
+    this.dragHandler(this.pointerDownEvent, this.currentTarget, this.itemModel);
     return true;
   };
 
