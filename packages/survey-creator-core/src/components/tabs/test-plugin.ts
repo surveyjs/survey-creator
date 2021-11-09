@@ -14,6 +14,8 @@ export class TabTestPlugin implements ICreatorPlugin {
   private invisibleToggleAction: Action;
   private testAgainAction: Action;
   private designerAction: Action;
+  private prevPageAction: Action;
+  private nextPageAction: Action;
 
   public model: TestSurveyTabViewModel;
 
@@ -82,6 +84,8 @@ export class TabTestPlugin implements ICreatorPlugin {
     const options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
+    this.model.prevPageAction = this.prevPageAction;
+    this.model.nextPageAction = this.nextPageAction;
     this.model.initialize(this.creator.JSON, options);
 
     this.updateActions();
@@ -228,6 +232,18 @@ export class TabTestPlugin implements ICreatorPlugin {
       title: this.creator.getLocString("ed.designer"),
       showTitle: false
     })
+
+    this.prevPageAction = new Action({
+      id: "prevPage",
+      iconName: "icon-leftarrow_16x16",
+      visible: false
+    });
+
+    this.nextPageAction = new Action({
+      id: "nextPage",
+      iconName: "icon-rightarrow_16x16",
+      visible: false
+    });
     return items;
   }
 
@@ -235,6 +251,8 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.creator.footerToolbar.actions.push(this.testAgainAction);
     this.invisibleToggleAction && (this.creator.footerToolbar.actions.push(this.invisibleToggleAction));
     this.languageSelectorAction && (this.creator.footerToolbar.actions.push(this.languageSelectorAction));
+    this.creator.footerToolbar.actions.push(this.prevPageAction);
+    this.creator.footerToolbar.actions.push(this.nextPageAction);
     this.creator.footerToolbar.actions.push(this.designerAction);
   }
 }

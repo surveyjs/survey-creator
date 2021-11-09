@@ -149,7 +149,7 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
     .expect(topToolBar.find(".sv-action").filterVisible().count).eql(4);
 });
 
-test("proerty grid for mobile devices", async (t) => {
+test("property grid for mobile devices", async (t) => {
   const mobilePropertGrid = Selector(".sv-mobile-property-panel .svc-property-panel");
   const mobileCloseButton = Selector(".svc-property-panel__close");
   const mobilePropertGridTitle = Selector(".svc-property-panel__title");
@@ -178,3 +178,60 @@ test("proerty grid for mobile devices", async (t) => {
     .expect(mobilePropertGrid.exists).notOk()
     .expect(propertyGridSelector.visible).ok();
 });
+
+test("test tab for mobile devices", async (t) => {
+  await setJSON({
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }]
+      }
+    ]
+  });
+  const testTabToolbar = Selector(".sv-action-bar--pages");
+  const creatorFooterToolbar = Selector(".svc-footer-bar .svc-toolbar-wrapper");
+  const creatorFooterToolbarActions = creatorFooterToolbar.find(".sv-action").filterVisible();
+  await t
+    .click(getTabbedMenuItemByText("Test Survey"))
+    .expect(testTabToolbar.exists).notOk()
+    .expect(creatorFooterToolbar.exists).notOk()
+
+    .resizeWindow(370, 400)
+    .expect(testTabToolbar.exists).notOk()
+    .expect(creatorFooterToolbarActions.count).eql(2)
+    .expect(creatorFooterToolbarActions.nth(0).id).eql("showInvisible")
+    .expect(creatorFooterToolbarActions.nth(1).id).eql("svd-designer")
+
+    .resizeWindow(1920, 900)
+    .expect(testTabToolbar.exists).notOk()
+    .expect(creatorFooterToolbar.exists).notOk()
+
+    .click(getTabbedMenuItemByText("Survey Designer"))
+    .click(Selector("span").withText("Add Question").nth(1))
+    .click(getTabbedMenuItemByText("Test Survey"))
+    .expect(testTabToolbar.exists).ok()
+    .expect(creatorFooterToolbar.exists).notOk()
+    .expect(testTabToolbar.find(".sv-action").filterVisible().count).eql(3)
+
+    .resizeWindow(370, 400)
+    .expect(testTabToolbar.exists).notOk()
+    .expect(creatorFooterToolbarActions.count).eql(4)
+    .expect(creatorFooterToolbarActions.nth(0).id).eql("showInvisible")
+    .expect(creatorFooterToolbarActions.nth(1).id).eql("prevPage")
+    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(1).hasAttribute("disabled")).eql(true)
+    .expect(creatorFooterToolbarActions.nth(1).hasClass("sv-action-bar-item--secondary")).notOk()
+    .expect(creatorFooterToolbarActions.nth(2).id).eql("nextPage")
+    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(false)
+    .expect(creatorFooterToolbarActions.nth(2).hasClass("sv-action-bar-item--secondary")).ok()
+    .expect(creatorFooterToolbarActions.nth(3).id).eql("svd-designer")
+
+    .click(creatorFooterToolbarActions.nth(2))
+    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(1).hasAttribute("disabled")).eql(false)
+    .expect(creatorFooterToolbarActions.nth(1).hasClass("sv-action-bar-item--secondary")).ok()
+    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(true)
+    .expect(creatorFooterToolbarActions.nth(2).hasClass("sv-action-bar-item--secondary")).notOk()
+
+    .resizeWindow(1920, 900)
+    .expect(testTabToolbar.exists).ok()
+    .expect(creatorFooterToolbar.exists).notOk();
+});
+
