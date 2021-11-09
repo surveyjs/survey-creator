@@ -29,7 +29,10 @@ survey-creator,
 
 .svc-creator__content-wrapper {
   width: 100%;
-  height: calc(100% - calc(8 * #{$base-unit}));
+  height: calc(100% - calc(8 * #{$base-unit})); // without top toolbar
+}
+.svc-creator__content-wrapper--footer-toolbar {
+  height: calc(100% - calc(6 * #{$base-unit})); // without footer toolbar
 }
 
 .svc-creator__content-holder {
@@ -53,7 +56,7 @@ survey-creator,
 }
 
 .svc-plugin-tab__content {
-  height: calc(100% - calc(6 * #{$base-unit}));
+  height: 100%;
   overflow-y: auto;
 }
 

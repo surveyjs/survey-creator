@@ -1,7 +1,7 @@
 import { SurveySimulatorModel } from "../simulator";
 
 import "./test.scss";
-import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer } from "survey-core";
+import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 
@@ -20,8 +20,8 @@ import { getLocString } from "../../editorLocalization";
 export class TestSurveyTabViewModel extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
-  private prevPageAction: Action;
-  private nextPageAction: Action;
+  public prevPageAction: Action;
+  public nextPageAction: Action;
   private selectPageAction: Action;
   private pagePopupModel: PopupModel;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
@@ -62,6 +62,9 @@ export class TestSurveyTabViewModel extends Base {
   }
   public get pageActions(): Array<Action> {
     return this.pages.actions;
+  }
+  public get isPageToolbarVisible(): boolean {
+    return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
   }
 
   constructor(private surveyProvider: CreatorBase<SurveyModel>) {
@@ -179,16 +182,17 @@ export class TestSurveyTabViewModel extends Base {
     };
     this.pagePopupModel = new PopupModel("sv-list", { model: pageList }, "top", "center");
 
-    this.prevPageAction = new Action({
-      id: "prevPage",
-      css: this.survey && !this.survey.isFirstPage ? "sv-action-bar-item--secondary" : "",
-      iconName: "icon-leftarrow_16x16",
-      visible: this.isRunning && this.pageListItems.length > 1,
-      enabled: this.survey && !this.survey.isFirstPage,
-      title: "",
-      action: () => setNearPage(false)
-    });
-    pageActions.push(this.prevPageAction);
+    if (this.prevPageAction) {
+      this.prevPageAction.css = this.survey && !this.survey.isFirstPage ? "sv-action-bar-item--secondary" : "";
+      this.prevPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
+        const pageListItems = this.pageListItems;
+        const isTestTabActive = this.surveyProvider.activeTab === "test";
+        return this.isRunning && isTestTabActive && pageListItems.length > 1;
+      });
+      this.prevPageAction.enabled = this.survey && !this.survey.isFirstPage;
+      this.prevPageAction.action = () => setNearPage(false);
+      pageActions.push(this.prevPageAction);
+    }
 
     this.selectPageAction = new Action({
       id: "pageSelector",
@@ -202,17 +206,17 @@ export class TestSurveyTabViewModel extends Base {
     });
     pageActions.push(this.selectPageAction);
 
-    this.nextPageAction = new Action({
-      id: "nextPage",
-      css: this.survey && !this.survey.isLastPage ? "sv-action-bar-item--secondary" : "",
-      iconName: "icon-rightarrow_16x16",
-      visible: this.isRunning && this.pageListItems.length > 1,
-      enabled: this.survey && !this.survey.isLastPage,
-      title: "",
-      action: () => setNearPage(true)
-    });
-    pageActions.push(this.nextPageAction);
-
+    if (this.nextPageAction) {
+      this.nextPageAction.css = this.survey && !this.survey.isLastPage ? "sv-action-bar-item--secondary" : "";
+      this.nextPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
+        const pageListItems = this.pageListItems;
+        const isTestTabActive = this.surveyProvider.activeTab === "test";
+        return this.isRunning && isTestTabActive && pageListItems.length > 1;
+      });
+      this.nextPageAction.enabled = this.survey && !this.survey.isLastPage;
+      this.nextPageAction.action = () => setNearPage(true);
+      pageActions.push(this.nextPageAction);
+    }
     this.pages.actions = pageActions;
     this.pages.containerCss = "sv-action-bar--pages";
   }
@@ -244,8 +248,6 @@ export class TestSurveyTabViewModel extends Base {
       this.selectPageAction.title = this.getSelectPageTitle();
     }
     if (name === "isRunning" || name === "pageListItems" || name === "showPagesInTestSurveyTab") {
-      this.prevPageAction.visible = this.isRunning && this.pageListItems.length > 1;
-      this.nextPageAction.visible = this.isRunning && this.pageListItems.length > 1;
       this.selectPageAction.popupModel.contentComponentData.model.items = this.pageListItems;
       this.selectPageAction.popupModel.contentComponentData.model.selectedItem = this.getCurrentPageItem();
       this.selectPageAction.visible = this.isRunning && this.pageListItems.length > 1 && this.showPagesInTestSurveyTab;

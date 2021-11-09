@@ -72,6 +72,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
 
   renderElement() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
       licenseBanner = (
@@ -101,7 +102,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                   </div>
                   : null)}
               </div>
-              <div className="svc-creator__content-wrapper svc-flex-row">
+              <div className={contentWrapperClassName}>
                 <div className="svc-creator__content-holder svc-flex-column">
                   {this.renderActiveTab()}
                 </div>
