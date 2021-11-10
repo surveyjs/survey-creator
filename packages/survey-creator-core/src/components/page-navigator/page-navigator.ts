@@ -42,11 +42,19 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
       true
     );
     this.popupModel = new PopupModel("sv-list", { model: this.pageListModel });
+    !!this.pagesController && (this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"]);
     this.popupModel.onShow = () => {
       this.pageListModel.selectedItem = this.getActionBarByPage(this.pagesController.currentPage);
       this.isPopupOpened = true;
     };
     this.popupModel.onHide = () => { this.isPopupOpened = false; };
+    if (!!this.pagesController.creator["onPropertyChanged"]) {
+      this.pagesController.creator["onPropertyChanged"].add((sender, options) => {
+        if (options.name === "toolboxLocation") {
+          this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"];
+        }
+      });
+    }
     this.buildItems();
   }
   public dispose() {

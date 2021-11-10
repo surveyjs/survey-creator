@@ -147,11 +147,12 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         survey: creator.survey,
         data: tab.data.model
       });
+    const className = "svc-creator-tab" + (creator.toolboxLocation == "right" ? " svc-creator__toolbox--right" : "");
     return (
       <div
         key={tab.id}
         id={"scrollableDiv-" + tab.id}
-        className="svc-creator-tab"
+        className={className}
       >
         {component}
       </div>

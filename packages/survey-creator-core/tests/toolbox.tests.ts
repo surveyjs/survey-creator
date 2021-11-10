@@ -10,6 +10,7 @@ import {
 } from "survey-core";
 import { QuestionLinkValueModel } from "../src/property-grid/values";
 import { QuestionToolbox } from "../src/toolbox";
+import { CreatorTester } from "./creator-tester";
 
 test("toolbox support options", (): any => {
   var allTypes = ElementFactory.Instance.getAllTypes();
@@ -312,4 +313,19 @@ test("Add customWidgets into toolbox", (): any => {
   expect(toolbox.items[4].name).toEqual("comp1");
   CustomWidgetCollection.Instance.clear();
   ComponentCollection.Instance.clear();
+});
+
+test("Creator layout: toolbox location", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.toolboxLocation).toEqual("left");
+  expect(creator.toolbox.isCompact).toEqual(false);
+  expect(creator.showPropertyGrid).toEqual(true);
+  expect(creator.toolbox.dotsItemPopupModel.horizontalPosition).toEqual("right");
+
+  creator.toolboxLocation = "right";
+  expect(creator.toolbox.isCompact).toEqual(true);
+  expect(creator.toolbox.dotsItemPopupModel.horizontalPosition).toEqual("left");
+
+  creator.showPropertyGrid = false;
+  expect(creator.toolbox.isCompact).toEqual(false);
 });

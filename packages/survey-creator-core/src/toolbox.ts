@@ -197,6 +197,14 @@ export class QuestionToolbox
     });
     this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
       this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
+    };
+    if (!!this.creator) {
+      this.creator.onPropertyChanged.add((sender, options) => {
+        if (options.name === "toolboxLocation") {
+          this.dotsItemPopupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
+          this.updateIsCompact();
+        }
+      });
     }
   }
   private onActiveCategoryChanged(newValue: string) {
@@ -204,6 +212,14 @@ export class QuestionToolbox
     for (var i = 0; i < categories.length; i++) {
       var category = categories[i];
       category.collapsed = category.name !== newValue;
+    }
+  }
+  public updateIsCompact(newVal?: boolean) {
+    if (!!this.creator && this.creator.toolboxLocation == "right" && this.creator.showPropertyGrid) {
+      this.isCompact = true;
+      return;
+    } else if (newVal != undefined && newVal != null) {
+      this.isCompact = newVal;
     }
   }
   /**

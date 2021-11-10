@@ -42,7 +42,7 @@ export class CreatorResponsivityManager {
   }
 
   private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutTabPanel: boolean) {
-    this.creator.toolbox.isCompact = toolboxIsCompact;
+    this.creator.toolbox.updateIsCompact(toolboxIsCompact);
     this.creator.toolbox.visible = toolboxVisible;
     this.creator.showPageNavigator = toolboxVisible;
     this.creator.currentTabPropertyGrid && (this.creator.currentTabPropertyGrid.flyoutMode = flyoutTabPanel);

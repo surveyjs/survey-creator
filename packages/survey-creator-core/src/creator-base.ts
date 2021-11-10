@@ -877,6 +877,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         : null,
       this
     );
+    this.toolbox.updateIsCompact();
     this.initDragDrop();
   }
   onSurveyElementPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
@@ -911,6 +912,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     if (this.showPropertyGrid === val) return;
     this.showPropertyGridValue = val;
+    this.toolbox.updateIsCompact(val);
     this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
   }
   public rightContainerActiveItem(name: string) {
@@ -2531,6 +2533,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
   @property({ defaultValue: false }) isMobileView;
+  @property({ defaultValue: "left" }) toolboxLocation: "left"| "right";
   selectFromStringEditor: boolean;
 }
 
