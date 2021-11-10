@@ -5,6 +5,10 @@ import { PropertyGridViewModelBase } from "../../property-grid/property-grid-vie
 import { settings } from "../../settings";
 import { Translation } from "./translation";
 
+export class PropertyGridViewTranslationModel extends PropertyGridViewModelBase {
+  public get propertyGridType(): string { return "translation"; }
+}
+
 export class TabTranslationPlugin implements ICreatorPlugin {
   private showAllStringsAction: Action;
   private filterPageAction: Action;
@@ -20,7 +24,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("translation", this);
-    this.propertyGrid = new PropertyGridViewModelBase();
+    this.propertyGrid = new PropertyGridViewTranslationModel();
     this.propertyGrid.headerText = editorLocalization.getString("ed.translationPropertyGridTitle");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
@@ -198,7 +202,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
         const propertyGridVisible = this.propertyGrid.visible;
         return this.creator.activeTab === "translation" && !propertyGridVisible;
-      })
+      });
       items.push(this.expandAction);
     }
     return items;
