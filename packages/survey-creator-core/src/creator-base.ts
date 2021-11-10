@@ -2534,6 +2534,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
   @property({ defaultValue: false }) isMobileView;
   @property({ defaultValue: "left" }) toolboxLocation: "left"| "right";
+  @property({ defaultValue: "right" }) propertyPanelLocation: "left"| "right";
   selectFromStringEditor: boolean;
 }
 

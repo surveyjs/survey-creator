@@ -1,5 +1,5 @@
 <div class="svc-full-container svc-creator__area svc-flex-column">
-  <div class="svc-flex-row svc-full-container">
+  <div class="svc-flex-row svc-full-container" data-bind="css : { 'svc-creator__property-panel--left': creator.propertyPanelLocation == 'left' }">
     <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
       <div class="svc-top-bar">
         <div class="svc-tabbed-menu-wrapper" data-bind="visible: creator.showTabs">
@@ -17,7 +17,7 @@
         <div class="svc-creator__content-holder svc-flex-column">
           <!-- ko foreach: creator.tabs -->
           <!-- ko if: $parent.creator.viewType == id && ($data.visible === undefined || $data.visible) -->
-          <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv-' + id }, css: { 'svc-creator__toolbox--right': creator.toolboxLocation == 'right'}">
+          <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv-' + id }, css: { 'svc-creator__toolbox--right': creator.toolboxLocation == 'right' }">
             <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
             <!-- /ko -->
           </div>

@@ -64,6 +64,26 @@ svc-tab-designer {
   }
 }
 
+.svc-full-container.svc-creator__property-panel--left {
+  flex-direction: row-reverse;
+
+  .svc-properties-wrapper {
+    left: 0;
+    right: unset;
+  }
+
+  .svc-property-panel__header .sv-action-bar {
+    flex-direction: row-reverse;
+  }
+  .sv-action--last {
+    justify-content: flex-start;
+  }
+
+  .svd-grid-hide .sv-svg-icon {
+    transform: rotate(180deg);
+  }
+}
+
 .sv-mobile-property-panel {
   .svc-property-panel__actions {
     display: none;

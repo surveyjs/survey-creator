@@ -73,6 +73,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   renderElement() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
+    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__property-panel--" + this.creator.propertyPanelLocation);
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
       licenseBanner = (
@@ -89,7 +90,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return (
       <div className="svc-creator" ref={this.rootNode}>
         <div className="svc-full-container svc-creator__area svc-flex-column">
-          <div className="svc-flex-row svc-full-container">
+          <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
               <div className="svc-top-bar">
                 {(creator.showTabs ?
@@ -147,7 +148,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         survey: creator.survey,
         data: tab.data.model
       });
-    const className = "svc-creator-tab" + (creator.toolboxLocation == "right" ? " svc-creator__toolbox--right" : "");
+    const className = "svc-creator-tab" + (" svc-creator__toolbox--" + creator.toolboxLocation);
     return (
       <div
         key={tab.id}

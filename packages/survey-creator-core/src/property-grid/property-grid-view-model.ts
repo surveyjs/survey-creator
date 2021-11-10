@@ -30,6 +30,7 @@ export class PropertyGridViewModelBase extends Base {
       this._collapseAction = new Action({
         id: "svd-grid-hide",
         iconName: "icon-hide",
+        css: "svd-grid-hide",
         title: getLocString("ed.hidePanel"),
         showTitle: false,
         visible: <any>new ComputedUpdater<boolean>(() => this.visible),
@@ -47,6 +48,7 @@ export class PropertyGridViewModelBase extends Base {
     this._expandAction = new Action({
       id: "svd-grid-expand",
       iconName: "icon-expand_20x20",
+      css: "svd-grid-expand",
       action: () => {
         if (this.expandAction)
           this.expandAction();
@@ -67,6 +69,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
   private nextSelectionAction: Action;
   private prevSelectionAction: Action;
   private objectSelectionAction: Action;
+  private selectorPopupModel: PopupModel;
   private onPropertyGridVisibilityChanged;
 
   @property() hasPrev: boolean;
@@ -91,81 +94,18 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
     this.propertyGridModel.objValueChangedCallback = () => {
       this.onSurveyChanged();
     };
-    this.propertyGridModel.changedFromActionCallback = (
-      obj: Base,
-      propertyName: string
-    ) => {
+    this.propertyGridModel.changedFromActionCallback = (obj: Base, propertyName: string) => {
       if (!!this.selectionController) {
         this.selectionController.selectFromAction(obj, propertyName);
       }
     };
+    this.initActions();
 
-    if (settings.propertyGrid.showNavigationButtons) {
-      this.prevSelectionAction = new Action({
-        id: "svd-grid-history-prev",
-        iconName: "icon-prev",
-        component: "sv-action-bar-item",
-        title: getLocString("ed.prevSelected"),
-        showTitle: false,
-        enabled: this.hasPrev,
-        action: () => {
-          this.selectionController.prev();
-        }
-      });
-      this.toolbar.actions.push(this.prevSelectionAction);
-
-      this.nextSelectionAction = new Action({
-        id: "svd-grid-history-next",
-        iconName: "icon-next",
-        component: "sv-action-bar-item",
-        title: getLocString("ed.nextSelected"),
-        showTitle: false,
-        enabled: this.hasNext,
-        action: () => {
-          this.selectionController.next();
-        }
-      });
-      this.toolbar.actions.push(this.nextSelectionAction);
-    }
-
-    const selectorModel = new ObjectSelectorModel(
-      (obj: Base, reason: string, displayName: string) => {
-        return this.propertyGridModel.options.getObjectDisplayName(
-          obj,
-          reason,
-          displayName
-        );
+    this.creator.onPropertyChanged.add((sender, options) => {
+      if (options.name === "propertyPanelLocation") {
+        this.selectorPopupModel.horizontalPosition = this.creator.propertyPanelLocation == "right" ? "left" : "right";
       }
-    );
-    const selectorPopupModel: PopupModel = new PopupModel(
-      "svc-object-selector",
-      {
-        model: selectorModel
-      },
-      "bottom",
-      "left"
-    );
-
-    this.objectSelectionAction = new Action({
-      id: "svd-grid-object-selector",
-      title: this.headerText,
-      css: "sv-action--last sv-action-bar-item--secondary",
-      iconName: "icon-more",
-      component: "sv-action-bar-item-dropdown",
-      action: () => {
-        selectorModel.show(
-          this.selectionController.creator.survey,
-          this.propertyGridModel.obj,
-          (obj: Base) => {
-            this.selectionController.selectFromAction(obj, "name");
-            selectorPopupModel.toggleVisibility();
-          }
-        );
-        selectorPopupModel.toggleVisibility();
-      },
-      popupModel: selectorPopupModel
     });
-    this.toolbar.actions.push(this.objectSelectionAction);
     this.onSurveyChanged();
   }
 
@@ -218,14 +158,69 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
   private getTitle(): string {
     var obj = this.propertyGridModel.obj;
     if (!obj) return "";
-    var displayName = SurveyHelper.getObjectName(
-      obj,
-      this.propertyGridModel.options.showObjectTitles
+    var displayName = SurveyHelper.getObjectName(obj, this.propertyGridModel.options.showObjectTitles);
+    return this.propertyGridModel.options.getObjectDisplayName(obj, "property-grid", displayName);
+  }
+  private initActions() {
+    if (settings.propertyGrid.showNavigationButtons) {
+      this.prevSelectionAction = new Action({
+        id: "svd-grid-history-prev",
+        iconName: "icon-prev",
+        component: "sv-action-bar-item",
+        title: getLocString("ed.prevSelected"),
+        showTitle: false,
+        enabled: this.hasPrev,
+        action: () => {
+          this.selectionController.prev();
+        }
+      });
+      this.toolbar.actions.push(this.prevSelectionAction);
+
+      this.nextSelectionAction = new Action({
+        id: "svd-grid-history-next",
+        iconName: "icon-next",
+        component: "sv-action-bar-item",
+        title: getLocString("ed.nextSelected"),
+        showTitle: false,
+        enabled: this.hasNext,
+        action: () => {
+          this.selectionController.next();
+        }
+      });
+      this.toolbar.actions.push(this.nextSelectionAction);
+    }
+
+    const selectorModel = new ObjectSelectorModel(
+      (obj: Base, reason: string, displayName: string) => {
+        return this.propertyGridModel.options.getObjectDisplayName(obj, reason, displayName);
+      }
     );
-    return this.propertyGridModel.options.getObjectDisplayName(
-      obj,
-      "property-grid",
-      displayName
+    this.selectorPopupModel = new PopupModel(
+      "svc-object-selector",
+      { model: selectorModel },
+      "bottom",
+      this.creator.propertyPanelLocation == "right" ? "left" : "right"
     );
+
+    this.objectSelectionAction = new Action({
+      id: "svd-grid-object-selector",
+      title: this.headerText,
+      css: "sv-action--last sv-action-bar-item--secondary",
+      iconName: "icon-more",
+      component: "sv-action-bar-item-dropdown",
+      action: () => {
+        selectorModel.show(
+          this.selectionController.creator.survey,
+          this.propertyGridModel.obj,
+          (obj: Base) => {
+            this.selectionController.selectFromAction(obj, "name");
+            this.selectorPopupModel.toggleVisibility();
+          }
+        );
+        this.selectorPopupModel.toggleVisibility();
+      },
+      popupModel: this.selectorPopupModel
+    });
+    this.toolbar.actions.push(this.objectSelectionAction);
   }
 }
