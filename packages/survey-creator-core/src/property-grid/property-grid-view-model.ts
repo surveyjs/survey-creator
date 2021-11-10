@@ -7,7 +7,7 @@ import { CreatorBase } from "../creator-base";
 import { settings } from "../settings";
 import { getLocString } from "../editorLocalization";
 
-export class PropertyGridViewModelBase extends Base {
+export abstract class PropertyGridViewModelBase extends Base {
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
   private _expandAction: Action;
   private _collapseAction: Action;
@@ -43,6 +43,7 @@ export class PropertyGridViewModelBase extends Base {
       this.toolbar.actions.push(this._collapseAction);
     }
   }
+  public abstract get propertyGridType(): string;
   public createExpandAction() {
     this._expandAction = new Action({
       id: "svd-grid-expand",
@@ -168,6 +169,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
     this.toolbar.actions.push(this.objectSelectionAction);
     this.onSurveyChanged();
   }
+  public get propertyGridType(): string { return "designer"; }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);

@@ -1212,6 +1212,7 @@ test("Show/hide property grid", (): any => {
   expect(settingsBarItem).toBeTruthy();
   var propertyGridModel = creator.getPlugin("designer").propertyGrid as PropertyGridViewModel<SurveyModel>; // new PropertyGridViewModel(creator);
   expect(propertyGridModel.visible).toBeTruthy();
+  expect(propertyGridModel.propertyGridType).toEqual("designer");
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   settingsBarItem.action();
