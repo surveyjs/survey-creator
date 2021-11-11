@@ -20,6 +20,7 @@ export * from "../components/tabs/translation";
 export * from "../components/tabs/translation-theme";
 export * from "../components/tabs/translation-plugin";
 export * from "../components/tabs/designer";
+export * from "../components/tabs/designer-plugin";
 export * from "../components/tabs/logic-ui";
 export * from "../components/tabs/logic-plugin";
 export * from "../components/tabs/logic-theme";
