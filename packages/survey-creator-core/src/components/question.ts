@@ -168,7 +168,9 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   }
 
   startDragSurveyElement(event: PointerEvent) {
-    this.dragDropHelper.startDrag(event, <any>this.surveyElement);
+    const element = <any>this.surveyElement;
+    const isElementSelected = this.creator.selectedElement === element;
+    this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
     return true;
   }
 
