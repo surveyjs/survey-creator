@@ -308,7 +308,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     ) {
       errorText = this.options.onGetErrorTextOnValidationCallback(
         this.property.name,
-        this.originalObject,
+        this.object,
         this.koValue()
       );
     }

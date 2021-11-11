@@ -206,6 +206,23 @@ QUnit.test("Survey Editor, modal apply, Bug #674", function (assert) {
   assert.equal(creator.survey.title, "Survey Title", "title assigned correct");
 });
 
+QUnit.test("Question Editor, show errors on apply", function (assert) {
+  const creator = new SurveyCreator();
+  creator.onPropertyValidationCustomError.add(function (sender, options) {
+    if (options.propertyName !== "description") return;
+    if(!!options.obj.title && !options.value) {
+      options.error = "Error.";
+    }
+  });
+  const editor = new SurveyQuestionEditor(creator.survey, null, creator);
+  editor.getPropertyEditorByName("title").editor.koValue("Survey Title");
+  editor.apply();
+  assert.equal(editor.getPropertyEditorByName("description").editor.koErrorText(), "Error.", "Error is here");
+  editor.getPropertyEditorByName("description").editor.koValue("test");
+  editor.apply();
+  assert.equal(editor.getPropertyEditorByName("description").editor.koErrorText(), "", "Error is not here");
+});
+
 QUnit.test("Question Editor name is not changed", function (assert) {
   var creator = new SurveyCreator();
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };

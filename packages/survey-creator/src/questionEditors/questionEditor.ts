@@ -409,15 +409,17 @@ export class SurveyElementEditorTabModel {
       self.afterRender(componentInfo, con);
     };
   }
-  public expand() {
+  public expand(doSetup: boolean = true) {
     if (!!this.onExpand) this.onExpand();
-    this.doOnExpanded();
+    this.doOnExpanded(doSetup);
   }
   public collapse() {
     if (!!this.onCollapse) this.onCollapse();
   }
-  public doOnExpanded() {
-    this.beforeShow();
+  public doOnExpanded(doSetup: boolean = true) {
+    if(doSetup) {
+      this.beforeShow();
+    }
     if(this.options && !(this.options as SurveyCreator).selectFromStringEditor) {
       setTimeout(() => {
         ko.tasks.runEarly();
@@ -1023,7 +1025,7 @@ export class SurveyQuestionEditor extends SurveyElementEditorContentModel {
     for (var i = 0; i < tabs.length; i++) {
       var tabRes = tabs[i].hasError();
       if (tabRes) {
-        tabs[i].expand();
+        tabs[i].expand(false);
         if (!isFirstError) {
           this.koActiveTab(tabs[i].name);
           isFirstError = true;
