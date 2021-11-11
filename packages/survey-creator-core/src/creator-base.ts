@@ -1054,7 +1054,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         if (!!plugin && !!plugin["addFooterActions"]) {
           plugin["addFooterActions"]();
         }
-      })
+      });
     }
   }
   public getOptions() {
@@ -1205,14 +1205,23 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       obj.getType(),
       propertyName
     );
+    let parentObj, parentProperty: Survey.JsonObjectProperty;
+    if(obj instanceof ItemValue) {
+      parentObj = obj.locOwner;
+      parentProperty = Survey.Serializer.findProperty(
+        parentObj.getType(),
+        obj.ownerPropertyName
+      );
+    }
+
     return (
       !property ||
       !this.onIsPropertyReadOnlyCallback(
         obj,
         property,
         property.readOnly,
-        undefined,
-        undefined
+        parentObj,
+        parentProperty
       )
     );
   }
@@ -2263,7 +2272,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     var options = {
       obj: obj,
       property: property,
-      propertyName: property.name,
+      propertyName: property && property.name,
       collection: collection,
       item: item,
       allowEdit: itemOptions.allowEdit,

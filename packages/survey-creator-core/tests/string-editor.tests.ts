@@ -61,6 +61,64 @@ test("Test string editor content editable", (): any => {
   expect(stringEditorQuestion3Description.contentEditable).toEqual(false);
 });
 
+test("Test string editor select questions items readonly", (): any => {
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          {
+            type: "dropdown",
+            name: "q1",
+            choices: ["Item 1"],
+          },
+          {
+            type: "dropdown",
+            name: "q2",
+            choices: ["Item 1"],
+          },
+          {
+            type: "imagepicker",
+            name: "q3",
+            choices: ["Item 1", "Item 2"],
+          }
+        ]
+      }
+    ]
+  });
+
+  Serializer.getProperty(
+    "comment",
+    "description"
+  ).readOnly = true;
+
+  creator.onGetPropertyReadOnly.add(function(editor, options) {
+    var obj = options.obj;
+    if (!obj) return;
+
+    //you may check obj.getType();
+    if (obj.getType() === "itemvalue") {
+      if(options.parentObj && options.parentObj.name == "q2")
+        options.readOnly = true;
+    }
+    if (obj.getType() === "imageitemvalue") {
+      if(options.parentObj && options.parentObj.name == "q3")
+        var index = options.parentObj.choices.indexOf(options.obj);
+      if(index == 1)
+        options.readOnly = true;
+    }
+  });
+
+  var stringEditorQuestion1Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1").choices[0], false, "text"), creator);
+  expect(stringEditorQuestion1Description.contentEditable).toEqual(true);
+  var stringEditorQuestion2Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2").choices[0], false, "text"), creator);
+  expect(stringEditorQuestion2Description.contentEditable).toEqual(false);
+  var stringEditorQuestion3Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q3").choices[0], false, "text"), creator);
+  expect(stringEditorQuestion3Description.contentEditable).toEqual(true);
+  var stringEditorQuestion3Item2 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q3").choices[1], false, "text"), creator);
+  expect(stringEditorQuestion3Item2.contentEditable).toEqual(false);
+});
+
 test("Test string editor content editable for matrix and panels", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {

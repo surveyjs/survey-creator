@@ -4,6 +4,7 @@ import {
   property,
   QuestionCheckboxModel,
   QuestionSelectBase,
+  Serializer,
   SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
@@ -11,7 +12,8 @@ import { DragDropChoices } from "survey-core";
 import "./item-value.scss";
 import { getLocString } from "../editorLocalization";
 
-import {DragOrClickHelper} from "../utils/dragOrClickHelper";
+import { DragOrClickHelper } from "../utils/dragOrClickHelper";
+import { ICollectionItemAllowOperations } from "../settings";
 
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
@@ -41,9 +43,32 @@ export class ItemValueWrapperViewModel extends Base {
       this.handleDragDropGhostPositionChanged
     );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragItemValue);
+    const allowQuestionOperations = this.creator.getElementAllowOperations(question);
+
+    this.allowItemOperations = { allowDelete: undefined, allowEdit: undefined };
+
+    this.creator.onCollectionItemAllowingCallback(question,
+      Serializer.findProperty(question.getType(), this.item.ownerPropertyName),
+      question.visibleChoices,
+      this.item,
+      this.allowItemOperations
+    );
+    if (this.allowItemOperations.allowDelete === undefined) {
+      this.allowItemOperations.allowDelete = allowQuestionOperations.allowEdit;
+    }
+    if (this.allowItemOperations.allowEdit === undefined) {
+      this.allowItemOperations.allowEdit = allowQuestionOperations.allowEdit;
+    }
+    if (this.allowItemOperations.allowDelete === undefined) {
+      this.allowItemOperations.allowDelete = true;
+    }
+    if (this.allowItemOperations.allowEdit === undefined) {
+      this.allowItemOperations.allowEdit = true;
+    }
   }
 
   private dragOrClickHelper: DragOrClickHelper;
+  private allowItemOperations: ICollectionItemAllowOperations;
 
   onPointerDown(pointerDownEvent: PointerEvent) {
     if (this.isNew) return;
@@ -119,7 +144,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   get allowRemove() {
-    return !this.creator.readOnly;
+    return !this.creator.readOnly && (this.allowItemOperations.allowDelete);
   }
   get tooltip() {
     return getLocString(this.isNew ? "pe.addItem" : "pe.removeItem");

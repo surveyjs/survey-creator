@@ -49,6 +49,38 @@ test("item value isNew isDraggable allowRemove", () => {
   expect(itemNoneAdorner.allowRemove).toBeFalsy();
 });
 
+test("item value isNew isDraggable allowRemove on events", () => {
+  const creator = new CreatorTester();
+
+  creator.onCollectionItemAllowOperations.add(function (sender, options) {
+    //console.log(options.obj, options, sender);
+    if(options.item && options.collection[1] == options.item) {
+      options.allowDelete = false;
+    }
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+
+  const allChoices = question.visibleChoices;
+  expect(allChoices.length).toEqual(7);
+
+  const firstItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    allChoices[1]
+  );
+  const secondItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    allChoices[2]
+  );
+
+  expect(firstItemAdorner.allowRemove).toBeFalsy();
+  expect(secondItemAdorner.allowRemove).toBeTruthy();
+});
+
 test("QuestionRatingAdornerViewModel read only mode", () => {
   const creator = new CreatorTester();
   creator.JSON = {
