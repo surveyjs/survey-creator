@@ -12,6 +12,17 @@
 .sd-selectbase__column:not(:first-of-type) .svc-item-value-wrapper {
   margin-left: 0;
 }
+.svc-creator--mobile {
+  .sd-question__content {
+    .sd-selectbase__column {
+      max-width: initial;
+      display: block;
+      .svc-item-value-wrapper {
+        margin-left: calcSize(0);
+      }
+    }
+  }
+}
 
 .svc-item-value--dragging {
   background: $background;

@@ -16,6 +16,13 @@ svc-page {
   }
 }
 
+.svc-creator--mobile {
+  .svc-page__content {
+    padding-left: 0;    
+    padding-right: 0;    
+  }
+}
+
 .svc-page__content-actions {
   position: absolute;
   top: 0;
