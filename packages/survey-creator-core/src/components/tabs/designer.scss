@@ -13,19 +13,6 @@ svc-tab-designer {
   height: 100%;
   overflow-y: auto;
 }
-.svc-creator--mobile {
-  .svc-tab-designer {
-    justify-content: initial;
-    .sd-title.sd-container-modern__title {
-      padding: calcSize(2);
-      h3 {
-        margin: 0;
-        font-size: calcSize(3);
-        line-height: calcSize(4);
-      }
-    }
-  }
-}
 
 .svc-tab-designer {
   .sd-container-modern {
@@ -41,14 +28,6 @@ svc-tab-designer {
     }
   }
 }
-.svc-creator--mobile {
-  .svc-tab-designer {
-    .sd-container-modern {
-      min-width: calcSize(46);
-    }
-  }
-}
-
 
 .svc-flex-column.svc-properties-wrapper {
   width: auto;

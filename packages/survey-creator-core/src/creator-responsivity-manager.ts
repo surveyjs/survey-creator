@@ -1,5 +1,5 @@
 import { CreatorBase } from "./creator-base";
-
+import "./responsivity.scss";
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
