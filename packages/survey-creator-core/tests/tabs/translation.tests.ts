@@ -561,3 +561,7 @@ test("Respect property maxLength attrigute in stringsSurvey comment questions", 
   Serializer.findProperty("page", "title").maxLength = -1;
   Serializer.findProperty("survey", "title").maxLength = -1;
 });
+test("Check property grid type", () => {
+  const tabTranslationPlugin = new TabTranslationPlugin(new CreatorTester());
+  expect(tabTranslationPlugin.propertyGrid.propertyGridType).toEqual("translation");
+});

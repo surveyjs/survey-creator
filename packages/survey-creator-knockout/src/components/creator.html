@@ -1,3 +1,4 @@
+<div class="svc-creator" data-bind="css: {'svc-creator--mobile' : creator.isMobileView }">
 <div class="svc-full-container svc-creator__area svc-flex-column">
   <div class="svc-flex-row svc-full-container">
     <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
@@ -13,7 +14,7 @@
         </div>
         <!-- /ko -->
       </div>
-      <div class="svc-creator__content-wrapper svc-flex-row">
+      <div class="svc-creator__content-wrapper svc-flex-row" data-bind="css: {'svc-creator__content-wrapper--footer-toolbar' : creator.isMobileView }">
         <div class="svc-creator__content-holder svc-flex-column">
           <!-- ko foreach: creator.tabs -->
           <!-- ko if: $parent.creator.viewType == id && ($data.visible === undefined || $data.visible) -->
@@ -46,4 +47,5 @@
   <!-- /ko -->
   <!-- ko component: { name: 'svc-notifier', params: { creator: creator, notifier: creator.notifier } } -->
   <!-- /ko -->
+</div>
 </div>

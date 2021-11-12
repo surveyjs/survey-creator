@@ -96,6 +96,26 @@ svc-question {
   }
 }
 
+.svc-dragged-element-shortcut {
+  height: 24px;
+  min-width: 100px;
+  border-radius: 36px;
+  background-color: white;
+  padding: 16px;
+  cursor: grabbing;
+  position: absolute;
+  z-index: 1000;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Open Sans';
+  font-size: 16px;
+  padding-left: 20px;
+  line-height: 24px;
+}
+
+.svc-dragged-element-shortcut--selected {
+  border: 2px solid $secondary;
+}
+
 .svc-question__content--drag-over-inside,
 .svc-hovered > .svc-question__content--drag-over-inside {
   border: 2px solid $primary;
