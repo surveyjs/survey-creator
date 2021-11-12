@@ -43,7 +43,6 @@ export class ItemValueWrapperViewModel extends Base {
       this.handleDragDropGhostPositionChanged
     );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragItemValue);
-    const allowQuestionOperations = this.creator.getElementAllowOperations(question);
 
     this.allowItemOperations = { allowDelete: undefined, allowEdit: undefined };
 
@@ -54,21 +53,17 @@ export class ItemValueWrapperViewModel extends Base {
       this.allowItemOperations
     );
     if (this.allowItemOperations.allowDelete === undefined) {
-      this.allowItemOperations.allowDelete = allowQuestionOperations.allowEdit;
-    }
-    if (this.allowItemOperations.allowEdit === undefined) {
-      this.allowItemOperations.allowEdit = allowQuestionOperations.allowEdit;
-    }
-    if (this.allowItemOperations.allowDelete === undefined) {
       this.allowItemOperations.allowDelete = true;
     }
-    if (this.allowItemOperations.allowEdit === undefined) {
-      this.allowItemOperations.allowEdit = true;
+
+    if(!this.creator.isCanModifyProperty(question, "choices")) {
+      this.canTouchItems = false;
     }
   }
 
   private dragOrClickHelper: DragOrClickHelper;
   private allowItemOperations: ICollectionItemAllowOperations;
+  private canTouchItems: boolean = true;
 
   onPointerDown(pointerDownEvent: PointerEvent) {
     if (this.isNew) return;
@@ -104,7 +99,7 @@ export class ItemValueWrapperViewModel extends Base {
     return this.isDraggableItem(this.item);
   }
   public isDraggableItem(item: ItemValue) {
-    if (this.creator.readOnly) return false;
+    if (this.creator.readOnly || !this.canTouchItems) return false;
     return this.question.choices.indexOf(item) !== -1;
   }
 
@@ -144,7 +139,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   get allowRemove() {
-    return !this.creator.readOnly && (this.allowItemOperations.allowDelete);
+    return !this.creator.readOnly && this.canTouchItems && (this.allowItemOperations.allowDelete);
   }
   get tooltip() {
     return getLocString(this.isNew ? "pe.addItem" : "pe.removeItem");
@@ -154,7 +149,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
   get allowAdd() {
     const isNew = !this.question.isItemInList(this.item);
-    return !this.creator.readOnly && isNew;
+    return !this.creator.readOnly && this.canTouchItems && isNew;
   }
   public select(model: ItemValueWrapperViewModel, event: Event) {
     model.creator.selectElement(model.question, "choices", false);

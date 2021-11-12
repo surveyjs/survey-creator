@@ -1238,7 +1238,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         return false;
       }
     }
-
+    if(obj instanceof SurveyElement) {
+      const allowElementOperations = this.getElementAllowOperations(obj);
+      if(allowElementOperations.allowEdit === false)
+        return false;
+    }
     return (
       !property ||
       !this.onIsPropertyReadOnlyCallback(
