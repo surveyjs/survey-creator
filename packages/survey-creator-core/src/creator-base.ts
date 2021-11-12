@@ -1212,6 +1212,31 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         parentObj.getType(),
         obj.ownerPropertyName
       );
+
+      const allowQuestionOperations = this.getElementAllowOperations(parentObj);
+      if(allowQuestionOperations.allowEdit === false)
+        return false;
+
+      const options :ICollectionItemAllowOperations = { allowDelete: true, allowEdit: true };
+      this.onCollectionItemAllowingCallback(parentObj,
+        property,
+        parentObj.getPropertyValue(parentProperty.name),
+        obj,
+        options
+      );
+      if (options.allowEdit === false) {
+        return false;
+      }
+
+      if(this.onIsPropertyReadOnlyCallback(
+        parentObj,
+        parentProperty,
+        parentProperty.readOnly,
+        null,
+        null
+      )) {
+        return false;
+      }
     }
 
     return (

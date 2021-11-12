@@ -62,6 +62,23 @@ test("Test string editor content editable", (): any => {
 });
 
 test("Test string editor select questions items readonly", (): any => {
+
+  function checkItemEdit() {
+    var seQ0ch0 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q0").choices[0], false, "text"), creator);
+    var seQ0ch1 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q0").choices[1], false, "text"), creator);
+    var seQ1ch0 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1").choices[0], false, "text"), creator);
+    var seQ1ch1 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1").choices[1], false, "text"), creator);
+    var seQ2ch0 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2").choices[0], false, "text"), creator);
+    var seQ2ch1 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2").choices[1], false, "text"), creator);
+    return [
+      seQ0ch0.contentEditable,
+      seQ0ch1.contentEditable,
+      seQ1ch0.contentEditable,
+      seQ1ch1.contentEditable,
+      seQ2ch0.contentEditable,
+      seQ2ch1.contentEditable
+    ];
+  }
   let creator = new CreatorTester();
   const survey: SurveyModel = new SurveyModel({
     pages: [
@@ -69,17 +86,17 @@ test("Test string editor select questions items readonly", (): any => {
         elements: [
           {
             type: "dropdown",
-            name: "q1",
-            choices: ["Item 1"],
+            name: "q0",
+            choices: ["Item 1", "Item 2"],
           },
           {
             type: "dropdown",
-            name: "q2",
-            choices: ["Item 1"],
+            name: "q1",
+            choices: ["Item 1", "Item 2"],
           },
           {
             type: "imagepicker",
-            name: "q3",
+            name: "q2",
             choices: ["Item 1", "Item 2"],
           }
         ]
@@ -87,36 +104,49 @@ test("Test string editor select questions items readonly", (): any => {
     ]
   });
 
-  Serializer.getProperty(
-    "comment",
-    "description"
-  ).readOnly = true;
+  expect(checkItemEdit()).toEqual([true, true, true, true, true, true]);
+
+  Serializer.getProperty("itemvalue", "text").readOnly = true;
+  expect(checkItemEdit()).toEqual([false, false, false, false, false, false]);
+  Serializer.getProperty("itemvalue", "text").readOnly = false;
+
+  Serializer.getProperty("dropdown", "choices").readOnly = true;
+  expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
+  Serializer.getProperty("dropdown", "choices").readOnly = false;
 
   creator.onGetPropertyReadOnly.add(function(editor, options) {
-    var obj = options.obj;
-    if (!obj) return;
-
-    //you may check obj.getType();
-    if (obj.getType() === "itemvalue") {
-      if(options.parentObj && options.parentObj.name == "q2")
-        options.readOnly = true;
-    }
-    if (obj.getType() === "imageitemvalue") {
-      if(options.parentObj && options.parentObj.name == "q3")
-        var index = options.parentObj.choices.indexOf(options.obj);
-      if(index == 1)
-        options.readOnly = true;
-    }
+    if (options.obj.getType() === "dropdown" && options.propertyName == "choices")
+      options.readOnly = true;
   });
+  expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
 
-  var stringEditorQuestion1Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1").choices[0], false, "text"), creator);
-  expect(stringEditorQuestion1Description.contentEditable).toEqual(true);
-  var stringEditorQuestion2Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2").choices[0], false, "text"), creator);
-  expect(stringEditorQuestion2Description.contentEditable).toEqual(false);
-  var stringEditorQuestion3Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q3").choices[0], false, "text"), creator);
-  expect(stringEditorQuestion3Description.contentEditable).toEqual(true);
-  var stringEditorQuestion3Item2 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q3").choices[1], false, "text"), creator);
-  expect(stringEditorQuestion3Item2.contentEditable).toEqual(false);
+  creator.onGetPropertyReadOnly.add(function(editor, options) {
+    if (options.obj.typeName === "itemvalue" && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+      options.readOnly = false;
+  });
+  expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
+  creator.onGetPropertyReadOnly.clear();
+
+  creator.onGetPropertyReadOnly.add(function(editor, options) {
+    if (options.obj.typeName === "itemvalue" && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+      options.readOnly = true;
+  });
+  expect(checkItemEdit()).toEqual([false, true, true, true, true, true]);
+  creator.onGetPropertyReadOnly.clear();
+
+  creator.onElementAllowOperations.add(function(editor, options) {
+    if (options.obj.name === "q1")
+      options.allowEdit = false;
+  });
+  expect(checkItemEdit()).toEqual([true, true, false, false, true, true]);
+
+  creator.onCollectionItemAllowOperations.add(function(editor, options) {
+    if (options.obj.name == "q0" && options.collection.indexOf(options.item) == 0)
+      options.allowEdit = false;
+    if (options.obj.name == "q1" && options.collection.indexOf(options.item) == 1)
+      options.allowEdit = true;
+  });
+  expect(checkItemEdit()).toEqual([false, true, false, false, true, true]);
 });
 
 test("Test string editor content editable for matrix and panels", (): any => {
