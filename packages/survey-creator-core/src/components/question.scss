@@ -82,6 +82,20 @@ svc-question {
   }
 }
 
+.svc-question__content--dragged {
+  background: $background-for-editors;
+
+  .sd-question__title {
+    color: $foreground-light;
+  }
+
+  &.svc-question__content--selected {
+    .svc-question__content-actions {
+      display: none
+    }
+  }
+}
+
 .svc-dragged-element-shortcut {
   height: 24px;
   min-width: 100px;
