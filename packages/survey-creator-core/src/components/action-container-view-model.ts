@@ -105,7 +105,7 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
         id: "delete",
         iconName: "icon-delete_16x16",
         css: "sv-action-bar-item--secondary",
-        needSeparator: items.length > 0,
+        //needSeparator: items.length > 0,
         title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
         iconSize: 16,

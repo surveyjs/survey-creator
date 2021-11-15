@@ -213,16 +213,22 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       "bottom",
       "center"
     );
-
+    let actionTitle = this.creator.getLocString("qt." + currentType);
+    // This is temporary solution and just waiting for design resolve
+    if(this.creator.isMobileView && actionTitle.length > 18) {
+      actionTitle = actionTitle.substr(0, 15)+"...";
+    }
+    /////////////////////////////////////////////////////////////////
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
       iconName: "icon-change_16x16",
       iconSize: 16,
-      title: this.creator.getLocString("qt." + currentType),
+      title: actionTitle,
       visibleIndex: 0,
       enabled: allowChangeType,
       component: "sv-action-bar-item-dropdown",
+      disableShrink: true,
       action: (newType) => {
         popupModel.toggleVisibility();
       },
