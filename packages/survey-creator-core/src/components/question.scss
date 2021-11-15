@@ -110,8 +110,6 @@ svc-question {
   font-size: 16px;
   padding-left: 20px;
   line-height: 24px;
-  display: flex;
-  justify-content: space-between;
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {
@@ -120,6 +118,14 @@ svc-question {
 
 .svc-dragged-element-shortcut--selected {
   border: 2px solid $secondary;
+}
+
+.svc-dragged-element-shortcut__text {
+  margin-left: 30px;
+}
+
+.svc-dragged-element-shortcut__icon {
+  position: absolute;
 }
 
 .svc-question__content--drag-over-inside,
