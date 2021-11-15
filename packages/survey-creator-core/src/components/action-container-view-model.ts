@@ -54,7 +54,7 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
     this.allowDragging = operationsAllow && options.allowDragging;
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
-    this.updateActionVisibility("settings", this.creator.currentTabPropertyGrid && this.creator.currentTabPropertyGrid.flyoutMode);
+    this.updateActionVisibility("settings", this.creator.sideBar.flyoutMode);
   }
   protected isOperationsAllow(): boolean {
     return !this.creator.readOnly;

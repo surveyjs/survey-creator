@@ -73,7 +73,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   renderElement() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
-    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__property-panel--" + this.creator.propertyPanelLocation);
+    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__property-panel--" + this.creator.sideBarLocation);
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
       licenseBanner = (
@@ -116,7 +116,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                   : null)}
               </div>
             </div>
-            {this.renderPropertyGrid()}
+            {this.renderSideBar()}
           </div>
           {licenseBanner}
           <NotifierComponent
@@ -159,12 +159,12 @@ export class SurveyCreatorComponent extends SurveyElementBase<
       </div>
     );
   }
-  renderPropertyGrid() {
-    if (!!this.creator.currentTabPropertyGrid) {
-      const className = this.creator.isMobileView ? "sv-mobile-property-panel" : "";
+  renderSideBar() {
+    if (!!this.creator.sideBar) {
+      const className = this.creator.isMobileView ? "sv-mobile-side-bar" : "";
       return (
         <div className={className}>
-          {ReactElementFactory.Instance.createElement("svc-property-panel", { model: this.creator.currentTabPropertyGrid })}
+          {ReactElementFactory.Instance.createElement("svc-side-bar", { model: this.creator.sideBar })}
         </div>);
     } else {
       return null;

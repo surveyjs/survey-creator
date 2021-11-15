@@ -24,7 +24,6 @@ import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
-import { PropertyGridViewModel } from "../src/property-grid/property-grid-view-model";
 
 import {
   getElementWrapperComponentData,
@@ -41,23 +40,23 @@ import { FastEntryEditor } from "../src/property-grid/fast-entry";
 surveySettings.supportCreatorV2 = true;
 
 test("options.questionTypes", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "q1" }]
   };
   expect(creator.selectedElementName).toEqual("survey");
   expect(creator.isElementSelected(creator.survey)).toBeTruthy();
-  var question = creator.survey.getAllQuestions()[0];
+  const question = creator.survey.getAllQuestions()[0];
   creator.selectElement(question);
   expect(creator.selectedElementName).toEqual("q1");
   expect(creator.isElementSelected(question)).toBeTruthy();
   expect(creator.isElementSelected(creator.survey)).toBeFalsy();
 });
 test("init creator with showDesignerTab=false", (): any => {
-  var creator = new CreatorTester({ showDesignerTab: false });
+  const creator = new CreatorTester({ showDesignerTab: false });
 });
 test("do not deactivate/activate tabs on selecting the active tab", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "q1" }]
   };
@@ -68,7 +67,7 @@ test("do not deactivate/activate tabs on selecting the active tab", (): any => {
   creator.activeTab = "test";
 });
 test("Select new added question", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
@@ -79,7 +78,7 @@ test("Select new added question", (): any => {
   expect(creator.selectedElementName).toEqual("question2");
 });
 test("Click on toolbox on empty survey", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.survey.pages.splice(0, 1);
   expect(creator.survey.pages).toHaveLength(0);
   creator.clickToolboxItem({ type: "text" });
@@ -89,13 +88,13 @@ test("Click on toolbox on empty survey", (): any => {
   expect(creator.selectedElement.getType()).toEqual("text");
 });
 test("Click on toolbox and cancel survey.lazyRendering", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   expect(creator.survey.isLazyRendering).toEqual(true);
   creator.clickToolboxItem({ type: "text" });
   expect(creator.survey.isLazyRendering).toEqual(false);
 });
 test("Click on toolbox and insert into correct index", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [
       { type: "text", name: "question1" },
@@ -108,14 +107,14 @@ test("Click on toolbox and insert into correct index", (): any => {
   expect(creator.survey.currentPage.elements[1].name).toEqual("question3");
 });
 test("Update JSON before drag&drop", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.activeTab).toEqual("designer");
   // eslint-disable-next-line no-self-assign
   creator.survey.currentPage = creator.survey.currentPage;
-  var json: any = {
+  let json: any = {
     type: "panel",
     elements: [{ type: "text", name: "question1" }]
   };
@@ -125,13 +124,13 @@ test("Update JSON before drag&drop", (): any => {
   expect(json.elements[0].name).toEqual("question2");
 });
 test("PageViewModel", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
-  var pageModel = new PageViewModel(creator, creator.survey.currentPage);
-  var counter = 0;
+  const pageModel = new PageViewModel(creator, creator.survey.currentPage);
+  let counter = 0;
   pageModel.onPageSelectedCallback = (): any => {
     counter++;
   };
@@ -151,11 +150,11 @@ test("PageViewModel", (): any => {
 });
 
 test("PagesController", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  var counter = 0;
+  let counter = 0;
   creator.pagesController.onPagesChanged.add((sender, options) => {
     counter++;
   });
@@ -169,8 +168,8 @@ test("PagesController", (): any => {
   expect(counter).toEqual(3);
 });
 test("PageNavigatorViewModel", (): any => {
-  var creator = new CreatorTester();
-  var model = new PageNavigatorViewModel(creator.pagesController);
+  const creator = new CreatorTester();
+  const model = new PageNavigatorViewModel(creator.pagesController);
   expect(model.items).toHaveLength(1);
   creator.JSON = {
     pages: [
@@ -196,7 +195,7 @@ test("PageNavigatorViewModel", (): any => {
 });
 
 test("SelectionHistoryController: Go to next/prev", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [
       {
@@ -209,7 +208,7 @@ test("SelectionHistoryController: Go to next/prev", (): any => {
       }
     ]
   };
-  var controller = creator.selectionHistoryController;
+  const controller = creator.selectionHistoryController;
   expect(controller.hasPrev).toBeFalsy();
   expect(controller.hasNext).toBeFalsy();
   creator.selectElement(creator.survey.pages[0]);
@@ -236,7 +235,7 @@ test("SelectionHistoryController: Go to next/prev", (): any => {
   expect(controller.hasNext).toBeTruthy();
 });
 test("SelectionHistoryController: Reset history on changing survey", (): any => {
-  var json = {
+  const json = {
     elements: [
       {
         type: "text",
@@ -248,10 +247,10 @@ test("SelectionHistoryController: Reset history on changing survey", (): any => 
       }
     ]
   };
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = json;
 
-  var controller = creator.selectionHistoryController;
+  const controller = creator.selectionHistoryController;
   expect(controller.hasPrev).toBeFalsy();
   expect(controller.hasNext).toBeFalsy();
   creator.selectElement(creator.survey.pages[0]);
@@ -261,7 +260,7 @@ test("SelectionHistoryController: Reset history on changing survey", (): any => 
   expect(controller.hasNext).toBeFalsy();
 });
 test("SelectionHistoryController: Update history on deleting elements", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     pages: [
       {
@@ -288,14 +287,14 @@ test("SelectionHistoryController: Update history on deleting elements", (): any 
       }
     ]
   };
-  var controller = creator.selectionHistoryController;
-  var page = creator.survey.pages[1];
+  const controller = creator.selectionHistoryController;
+  const page = creator.survey.pages[1];
   creator.selectElement(page);
-  var question = creator.survey.getQuestionByName("question1");
+  const question = creator.survey.getQuestionByName("question1");
   creator.selectElement(question);
-  var panel = <PanelModel>creator.survey.getPanelByName("panel1");
+  const panel = <PanelModel>creator.survey.getPanelByName("panel1");
   creator.selectElement(panel);
-  var column = creator.survey.getQuestionByName("question2").columns[0];
+  const column = creator.survey.getQuestionByName("question2").columns[0];
   creator.selectElement(column);
   creator.selectElement(creator.survey);
   expect(controller.hasInHistory(page)).toBeTruthy();
@@ -312,7 +311,7 @@ test("SelectionHistoryController: Update history on deleting elements", (): any 
   expect(controller.hasInHistory(column)).toBeFalsy();
 });
 test("Update expressions on deleting a question", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [
       {
@@ -333,7 +332,7 @@ test("Update expressions on deleting a question", (): any => {
   expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
 });
 test("Update expressions on deleting a panel with questions", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [
       {
@@ -355,7 +354,7 @@ test("Update expressions on deleting a panel with questions", (): any => {
   expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
 });
 test("Update expressions on deleting a page with questions", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     pages: [
       {
@@ -387,13 +386,13 @@ test("Update expressions on deleting a page with questions", (): any => {
   expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
 });
 test("Create new page on creating designer plugin", (): any => {
-  var creator = new CreatorTester();
+  let creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.viewType).toEqual("designer");
 
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  let designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.newPage).toBeTruthy();
@@ -434,9 +433,9 @@ test("Create new page on creating designer plugin", (): any => {
   expect(designerPlugin.model.showNewPage).toBeFalsy();
 });
 test("Create new page with empty survey", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   expect(creator.viewType).toEqual("designer");
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
@@ -490,7 +489,7 @@ test("Create new page on changing title/description in ghost", (): any => {
   expect(designerPlugin.model.newPage).toBeFalsy();
 });
 test("Create new page on changing title/description in ghost PageViewModel resets isGhost", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [
       {
@@ -499,7 +498,7 @@ test("Create new page on changing title/description in ghost PageViewModel reset
       }
     ]
   };
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
@@ -518,20 +517,20 @@ test("Create new page on changing title/description in ghost PageViewModel reset
 });
 
 test("Create new page, set empty JSON", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {};
   expect(creator.viewType).toEqual("designer");
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeFalsy();
 });
 test("Create new page, recreate designer survey via JSON", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "question1" }] };
   creator.showTestSurvey();
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   creator.JSON = {};
@@ -541,7 +540,7 @@ test("Create new page, recreate designer survey via JSON", (): any => {
 });
 
 test("canUndo/canRedo functions ", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
   expect(creator.undoRedoManager.canRedo()).toBeFalsy();
   creator.survey.title = "My title";
@@ -556,8 +555,8 @@ test("canUndo/canRedo functions ", (): any => {
 });
 
 test("Check survey settings button ", (): any => {
-  var creator = new CreatorTester();
-  var item = creator.getActionBarItem("svd-settings");
+  const creator = new CreatorTester();
+  const item = creator.getActionBarItem("svd-settings");
   expect(item.active).toBeTruthy();
   creator.selectElement(creator.survey.pages[0]);
   expect(item.active).toBeFalsy();
@@ -565,9 +564,9 @@ test("Check survey settings button ", (): any => {
   expect(item.active).toBeTruthy();
 });
 test("Check survey undo/redo buttons ", (): any => {
-  var creator = new CreatorTester();
-  var undoItem = creator.getActionBarItem("icon-undo");
-  var redoItem = creator.getActionBarItem("icon-redo");
+  const creator = new CreatorTester();
+  const undoItem = creator.getActionBarItem("icon-undo");
+  const redoItem = creator.getActionBarItem("icon-redo");
   expect(undoItem.active).toBeFalsy();
   expect(redoItem.active).toBeFalsy();
   creator.survey.title = "My title";
@@ -617,17 +616,17 @@ test("undo/redo add new page", (): any => {
   expect(designerPlugin.model.newPage.name).toEqual("page2");
 });
 test("undo/redo add new page, via page model by adding new question", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pageCount).toEqual(1);
   expect(creator.survey.pages[0].name).toEqual("page1");
   expect(designerPlugin.model.newPage.name).toEqual("page2");
-  var pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  let pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
   pageModel.addNewQuestion(pageModel, null);
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
@@ -649,7 +648,7 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   expect(designerPlugin.model.newPage.name).toEqual("page2");
 });
 test("undo/redo make sure that the deleting element is not active", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [
       { type: "text", name: "question1" },
@@ -668,7 +667,7 @@ test("undo/redo make sure that the deleting element is not active", (): any => {
 });
 
 test("fast copy tests, copy a question and check the index", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [
       { type: "text", name: "question1" },
@@ -682,7 +681,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
   expect(creator.survey.getQuestionByName("question4").visibleIndex).toEqual(1);
 });
 test("Page duplicate action, copy a page and check the index", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     pages: [
       {
@@ -698,8 +697,8 @@ test("Page duplicate action, copy a page and check the index", (): any => {
     ]
   };
   expect(creator.survey.pages).toHaveLength(2);
-  var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
-  var action = creator.getActionBarItemByActions(
+  const pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  const action = creator.getActionBarItemByActions(
     pageModel.actionContainer.actions,
     "duplicate"
   );
@@ -713,7 +712,7 @@ test("Page duplicate action, copy a page and check the index", (): any => {
   expect(creator.survey.pages[1].elements[2].name).toEqual("question7");
 });
 test("Page duplicate and add new page, check name", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     pages: [
       {
@@ -725,14 +724,14 @@ test("Page duplicate and add new page, check name", (): any => {
     ]
   };
   expect(creator.survey.pages).toHaveLength(2);
-  var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
-  var action = creator.getActionBarItemByActions(
+  const pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  const action = creator.getActionBarItemByActions(
     pageModel.actionContainer.actions,
     "duplicate"
   );
   action.action();
 
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   let pageModelNew = new PageViewModel(creator, designerPlugin.model.newPage);
@@ -741,7 +740,7 @@ test("Page duplicate and add new page, check name", (): any => {
 
 });
 test("Page duplicate and check actions visibility", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     pages: [
       {
@@ -749,8 +748,8 @@ test("Page duplicate and check actions visibility", (): any => {
       },
     ]
   };
-  var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
-  var action = creator.getActionBarItemByActions(
+  const pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  const action = creator.getActionBarItemByActions(
     pageModel.actionContainer.actions,
     "duplicate"
   );
@@ -758,7 +757,7 @@ test("Page duplicate and check actions visibility", (): any => {
   action.action();
 
   let pageModelNew = new PageViewModel(creator, creator.survey.pages[1]);
-  var actionDuplicate = creator.getActionBarItemByActions(
+  const actionDuplicate = creator.getActionBarItemByActions(
     pageModelNew.actionContainer.actions,
     "duplicate"
   );
@@ -767,20 +766,20 @@ test("Page duplicate and check actions visibility", (): any => {
 
 });
 test("Check action container for new added page", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
-  var pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  const pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
   pageModel.addNewQuestion(pageModel, null);
   expect(creator.survey.pages).toHaveLength(2);
   expect(pageModel.actionContainer.actions).toHaveLength(3);
 });
 test("Show error on entering non-unique column value", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     pages: [
       {
@@ -794,9 +793,9 @@ test("Show error on entering non-unique column value", (): any => {
       }
     ]
   };
-  var matrixQuestion = creator.survey.getAllQuestions()[0];
-  creator.selectElement(matrixQuestion.columns[1]);
-  var questionName = creator.getTabPropertyGrid("designer").survey.getQuestionByName("name");
+  const matrixQuestion = creator.survey.getAllQuestions()[0];
+  creator.selectElement(matrixQuestion.columns[1]); //
+  const questionName = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("name");
   expect(questionName.value).toEqual("col2");
   questionName.value = "col1";
   expect(questionName.errors).toHaveLength(1);
@@ -811,15 +810,15 @@ test("Show error on entering non-unique column value", (): any => {
   expect(matrixQuestion.columns[1].name).toEqual("col3");
 });
 test("Warn on incorrect using constructor", (): any => {
-  var oldFunc = SurveyHelper.warnText;
-  var warnings = [];
+  const oldFunc = SurveyHelper.warnText;
+  const warnings = [];
   SurveyHelper.warnText = (text: string): void => {
     warnings.push(text);
   };
   new CreatorTester(<any>"creator");
   expect(warnings).toHaveLength(1);
   expect(warnings[0].indexOf("constructor") > 0).toBeTruthy();
-  var creator = new CreatorTester(
+  const creator = new CreatorTester(
     <any>"creator",
     <any>{ showTranslationTab: true }
   );
@@ -829,7 +828,7 @@ test("Warn on incorrect using constructor", (): any => {
   SurveyHelper.warnText = oldFunc;
 });
 test("pageEditMode='single'", (): any => {
-  var creator = new CreatorTester();
+  let creator = new CreatorTester();
   expect(creator.pageEditMode).toEqual("standard");
   expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeTruthy();
   expect(
@@ -842,7 +841,7 @@ test("pageEditMode='single'", (): any => {
   expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeFalsy();
   expect(Serializer.findProperty("question", "page").isVisible("")).toBeFalsy();
   expect(Serializer.findProperty("panel", "page").isVisible("")).toBeFalsy();
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.showNewPage).toBeFalsy();
@@ -858,25 +857,25 @@ test("pageEditMode='single'", (): any => {
   expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
 });
 test("Undo converting question type", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "checkbox", name: "question1", choices: [1, 2] }]
   };
-  var q = creator.survey.getQuestionByName("question1");
+  let q = creator.survey.getQuestionByName("question1");
   creator.selectElement(q);
   creator.convertCurrentQuestion("radiogroup");
-  var el = creator.selectedElement;
+  const el = creator.selectedElement;
   expect(el.getType()).toEqual("radiogroup");
   creator.undo();
   q = creator.survey.getQuestionByName("question1");
   expect(q.getType()).toEqual("checkbox");
 });
 test("Merge Undo for string and text property editors", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  var q = creator.survey.getQuestionByName("question1");
+  const q = creator.survey.getQuestionByName("question1");
   q.title = "Title 1";
   q.isRequired = true;
   q.title = "Title 11";
@@ -941,7 +940,7 @@ test("Question type custom widgets", (): any => {
       Serializer.addClass("test_widget", [], null, "empty");
     },
     htmlTemplate:
-        "<div>This is test widget</div>",
+      "<div>This is test widget</div>",
     afterRender: function (question, element) {
     }
   };
@@ -1052,20 +1051,20 @@ test("Test plug-ins in creator", (): any => {
     showEmbeddedSurveyTab: true
   });
   expect(creator.viewType).toEqual("designer");
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
-  var testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  const testPlugin = <TabTestPlugin>creator.getPlugin("test");
   expect(testPlugin.model).toBeFalsy();
   creator.makeNewViewActive("test");
   expect(designerPlugin.model).toBeFalsy();
   expect(testPlugin.model).toBeTruthy();
-  var logicPlugin = <TabLogicPlugin>creator.getPlugin("logic");
-  var translationPlugin = <TabTranslationPlugin>(
+  const logicPlugin = <TabLogicPlugin>creator.getPlugin("logic");
+  const translationPlugin = <TabTranslationPlugin>(
     creator.getPlugin("translation")
   );
-  var embedPlugin = <TabEmbedPlugin>creator.getPlugin("embed");
+  const embedPlugin = <TabEmbedPlugin>creator.getPlugin("embed");
   expect(logicPlugin.model).toBeFalsy();
   expect(translationPlugin.model).toBeFalsy();
   expect(embedPlugin.model).toBeFalsy();
@@ -1086,11 +1085,11 @@ test("Test plug-ins in creator", (): any => {
 test("Test plug-ins JSON-Text in creator", (): any => {
   const creator = new CreatorTester();
   expect(creator.viewType).toEqual("designer");
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
-  var textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
   expect(textPlugin.model).toBeFalsy();
   creator.makeNewViewActive("editor");
   expect(textPlugin.model).toBeTruthy();
@@ -1117,7 +1116,7 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
     changedType = options.type;
   });
   expect(creator.viewType).toEqual("designer");
-  var textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
   expect(textPlugin.model).toBeFalsy();
   creator.makeNewViewActive("editor");
   expect(textPlugin.model).toBeTruthy();
@@ -1134,17 +1133,17 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
 });
 
 test("Test plug-ins JSON-Ace in creator", (): any => {
-  var oldFunc = TabJsonEditorAcePlugin.hasAceEditor;
+  const oldFunc = TabJsonEditorAcePlugin.hasAceEditor;
   TabJsonEditorAcePlugin.hasAceEditor = (): boolean => {
     return true;
   };
   const creator = new CreatorTester();
   expect(creator.viewType).toEqual("designer");
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
-  var textPlugin = <TabJsonEditorAcePlugin>creator.getPlugin("editor");
+  const textPlugin = <TabJsonEditorAcePlugin>creator.getPlugin("editor");
   expect(textPlugin.model).toBeFalsy();
   creator.makeNewViewActive("editor");
   expect(textPlugin.model).toBeTruthy();
@@ -1192,7 +1191,7 @@ test("Test plug-ins check order change viewtype and activate/deactivate", (): an
 test("Show/hide property grid", (): any => {
   const prevValue = settings.propertyGrid.allowCollapse;
   settings.propertyGrid.allowCollapse = true;
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     pages: [
       {
@@ -1205,42 +1204,34 @@ test("Show/hide property grid", (): any => {
       }
     ]
   };
-  var settingsBarItem = creator.toolbarItems.filter((item) => {
-    if (item.id === "svd-settings") return item;
-  })[0];
+  const settingsBarItem = creator.getActionBarItem("svd-settings");
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(settingsBarItem).toBeTruthy();
-  var propertyGridModel = creator.getPlugin("designer").propertyGrid as PropertyGridViewModel<SurveyModel>; // new PropertyGridViewModel(creator);
-  expect(propertyGridModel.visible).toBeTruthy();
-  expect(propertyGridModel.propertyGridType).toEqual("designer");
+  expect(creator.sideBar.visible).toBeTruthy();
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
 
-  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter(
-    (item) => {
-      if (item.id === "svd-grid-hide") return item;
-    }
-  )[0];
+  const hidePropertyModelBarItem = creator.sideBar.toolbar.actions.filter(item => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
-  expect(propertyGridModel.visible).toBeFalsy();
+  expect(creator.sideBar.visible).toBeFalsy();
 
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
   expect(creator.showPropertyGrid).toBeTruthy();
-  expect(propertyGridModel.visible).toBeTruthy();
+  expect(creator.sideBar.visible).toBeTruthy();
 
   settings.propertyGrid.allowCollapse = prevValue;
 });
 test("Show/hide property grid and settings button active state", (): any => {
   const prevValue = settings.propertyGrid.allowCollapse;
   settings.propertyGrid.allowCollapse = true;
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     pages: [
       {
@@ -1254,33 +1245,26 @@ test("Show/hide property grid and settings button active state", (): any => {
     ]
   };
   creator.showPropertyGrid = false;
-  var settingsBarItem = creator.toolbarItems.filter((item) => {
-    if (item.id === "svd-settings") return item;
-  })[0];
+  const settingsBarItem = creator.getActionBarItem("svd-settings");
   expect(creator.showPropertyGrid).toBeFalsy();
   expect(settingsBarItem.active).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   expect(settingsBarItem.active).toBeFalsy();
-  var propertyGridModel = creator.getPlugin("designer").propertyGrid as PropertyGridViewModel<SurveyModel>; //new PropertyGridViewModel(creator);
-  expect(propertyGridModel.visible).toBeFalsy();
+  expect(creator.sideBar.visible).toBeFalsy();
 
   settingsBarItem.action();
   expect(creator.showPropertyGrid).toBeTruthy();
-  expect(propertyGridModel.visible).toBeTruthy();
+  expect(creator.sideBar.visible).toBeTruthy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeTruthy();
 
-  var hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter(
-    (item) => {
-      if (item.id === "svd-grid-hide") return item;
-    }
-  )[0];
+  const hidePropertyModelBarItem = creator.sideBar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
-  expect(propertyGridModel.visible).toBeFalsy();
+  expect(creator.sideBar.visible).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeFalsy();
   settings.propertyGrid.allowCollapse = prevValue;
@@ -1301,36 +1285,30 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
       }
     ]
   };
-  const expandBarItem = creator.toolbarItems.filter((item) => {
-    if (item.id === "svd-grid-expand") return item;
-  })[0];
-  const settingsBarItem = creator.getActionBarItem("svd-settings");
-  const propertyGridModel = creator.getPlugin("designer").propertyGrid as PropertyGridViewModel<SurveyModel>; // new PropertyGridViewModel(creator);
-  const hidePropertyModelBarItem = propertyGridModel.toolbarItems.filter(
-    (item) => { if (item.id === "svd-grid-hide") return item; }
-  )[0];
+  const expandBarItem = creator.toolbarItems.filter((item) => { return item.id === "svd-grid-expand"; })[0];
+  const hidePropertyModelBarItem = creator.sideBar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
 
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(expandBarItem).toBeTruthy();
   expect(expandBarItem.visible).toBeFalsy();
-  expect(propertyGridModel.visible).toBeTruthy();
+  expect(creator.sideBar.visible).toBeTruthy();
   expect(hidePropertyModelBarItem).toBeTruthy();
   expect(hidePropertyModelBarItem.visible).toBeTruthy();
 
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
-  expect(propertyGridModel.visible).toBeFalsy();
+  expect(creator.sideBar.visible).toBeFalsy();
   expect(expandBarItem.visible).toBeTruthy();
 
   expandBarItem.action();
   expect(creator.showPropertyGrid).toBeTruthy();
-  expect(propertyGridModel.visible).toBeTruthy();
+  expect(creator.sideBar.visible).toBeTruthy();
   expect(expandBarItem.visible).toBeFalsy();
 
   settings.propertyGrid.allowCollapse = prevValue;
 });
 test("Show survey in property grid on deleting last page", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     pages: [
       {
@@ -1359,11 +1337,11 @@ test("Show survey in property grid on deleting last page", (): any => {
   expect(creator.selectedElementName).toEqual("survey");
 });
 test("Test TabDesignerViewModel.pageCount - reactive", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.pageCount).toEqual(1);
@@ -1373,7 +1351,7 @@ test("Test TabDesignerViewModel.pageCount - reactive", (): any => {
   expect(designerPlugin.model.pageCount).toEqual(1);
 });
 test("PageViewModel and onElementAllowOperations", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "q1" }]
   };
@@ -1383,44 +1361,44 @@ test("PageViewModel and onElementAllowOperations", (): any => {
       options.allowDelete = sender.survey.pageCount > 1;
     }
   });
-  var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  const pageModel = new PageViewModel(creator, creator.survey.pages[0]);
   expect(pageModel.getActionById("delete").visible).toBeTruthy();
   creator.selectElement(creator.survey.pages[1]);
   creator.deleteCurrentElement();
   expect(creator.selectedElementName).toEqual("page1");
   expect(pageModel.getActionById("delete").visible).toBeFalsy();
-  var pageModel2 = new PageViewModel(creator, creator.survey.pages[0]);
+  const pageModel2 = new PageViewModel(creator, creator.survey.pages[0]);
   expect(pageModel2.getActionById("delete").visible).toBeFalsy();
 });
 test("PageViewModel and creator readOnly", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.readOnly = true;
   creator.selectElement(creator.survey.pages[0]);
-  var pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  const pageModel = new PageViewModel(creator, creator.survey.pages[0]);
   expect(pageModel.getActionById("delete").visible).toBeFalsy();
   expect(pageModel.getActionById("duplicate").visible).toBeFalsy();
   expect(pageModel.allowDragging).toBeFalsy();
 });
 test("PageViewModel, actions and isGhost", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "q1" }]
   };
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.newPage).toBeTruthy();
-  var pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
+  const pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
   expect(pageModel.isGhost).toBeTruthy();
   expect(pageModel.getActionById("delete").visible).toBeFalsy();
   expect(pageModel.getActionById("duplicate").visible).toBeFalsy();
   expect(pageModel.allowDragging).toBeFalsy();
 });
 test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [
       { type: "text", name: "q1" },
@@ -1434,12 +1412,12 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
       options.allowChangeRequired = options.obj.getType() !== "text";
     }
   });
-  var q1Model = new QuestionAdornerViewModel(
+  const q1Model = new QuestionAdornerViewModel(
     creator,
     creator.survey.getAllQuestions()[0],
     undefined
   );
-  var q2Model = new QuestionAdornerViewModel(
+  const q2Model = new QuestionAdornerViewModel(
     creator,
     creator.survey.getAllQuestions()[1],
     undefined
@@ -1468,7 +1446,7 @@ test("QuestionAdornerViewModel and onElementAllowOperations on new elements", ()
   const newQuestion = creator.survey.pages[0].addNewQuestion("text", "q3");
   creator.selectElement(newQuestion);
 
-  var newQuestionModel = new QuestionAdornerViewModel(
+  const newQuestionModel = new QuestionAdornerViewModel(
     creator,
     newQuestion,
     undefined
@@ -1483,7 +1461,7 @@ test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", 
   };
   const q1 = creator.survey.getAllQuestions()[0];
   creator.maximumChoicesCount = 3;
-  var q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
+  const q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2 + 4);
   q1.choices.push(new ItemValue("item3"));
   expect(q1.visibleChoices).toHaveLength(3 + 3);
@@ -1495,7 +1473,7 @@ test("QuestionAdornerViewModel for selectbase and creator.readOnly", (): any => 
     elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
   };
   const q1 = creator.survey.getAllQuestions()[0];
-  var q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
+  const q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2);
 });
 test("Modify property editor settings on event", (): any => {
@@ -1513,7 +1491,7 @@ test("Modify property editor settings on event", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeHolderQuestion = creator.getTabPropertyGrid("designer").survey.getQuestionByName("placeHolder");
+  const placeHolderQuestion = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
   expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeHolderQuestion.dataList).toHaveLength(2);
 });
@@ -1751,7 +1729,7 @@ test("change locale in several pages survey", (): any => {
 });
 
 test("process shortcut for text inputs", (): any => {
-  var creator = new CreatorTester({ showDesignerTab: false });
+  const creator = new CreatorTester({ showDesignerTab: false });
   let log = "";
   creator.registerShortcut("delete_test", {
     hotKey: {

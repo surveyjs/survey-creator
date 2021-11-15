@@ -48,10 +48,10 @@ import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
 import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/undo-redo";
-import { PropertyGridViewModelBase } from "./property-grid/property-grid-view-model";
 import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
+import { SideBarModel } from "./components/side-bar/side-bar-model";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -69,7 +69,6 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   model: Base;
-  propertyGrid?: PropertyGridViewModelBase;
 }
 
 export interface ITabbedMenuItem extends IAction {
@@ -842,12 +841,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
-  public get currentTabPropertyGrid(): PropertyGridViewModelBase {
-    return this.getTabPropertyGrid(this.activeTab);
-  }
-  public getTabPropertyGrid(id: string): PropertyGridViewModelBase {
-    return this.getPlugin(id).propertyGrid || null;
-  }
+  public sideBar: SideBarModel;
 
   constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
     super();
@@ -857,27 +851,18 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.options instanceof String
     ) {
       this.options = !!options2 ? options2 : {};
-      SurveyHelper.warnText(
-        "Creator constructor has one parameter, as creator options, in V2."
-      );
+      SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     this.toolbarValue = new ActionContainer();
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
+    this.sideBar = new SideBarModel(this);
     this.setOptions(this.options);
     this.patchMetadata();
-    this.initSurveyWithJSON(
-      JSON.parse(CreatorBase.defaultNewSurveyText),
-      false
-    );
-    this.initTabs();
-    this.toolbox = new QuestionToolbox(
-      this.options && this.options.questionTypes
-        ? this.options.questionTypes
-        : null,
-      this
-    );
+    this.initSurveyWithJSON(JSON.parse(CreatorBase.defaultNewSurveyText), false);
+    this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this);
     this.toolbox.updateIsCompact();
+    this.initTabs();
     this.initDragDrop();
   }
   onSurveyElementPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
@@ -1884,8 +1869,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const designerPlugin = this.getPlugin<TabDesignerPlugin<T>>("designer");
-    return designerPlugin ? (designerPlugin.propertyGrid.model as any as PropertyGridModel) : null;
+    const propertyGridTab = this.sideBar.getTabById("propertyGrid"); 
+    if (!propertyGridTab) return null;
+    return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
   /**
    * Collapse certain property editor tab (category) in properties panel/grid
@@ -1989,7 +1975,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
 
-      if(!propertyName) {
+      if (!propertyName) {
         propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
 
@@ -2471,7 +2457,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.currentAddQuestionType || "text",
       "q1"
     );
-    if(newElement)
+    if (newElement)
       this.setNewNames(newElement);
     else
       newElement = this.createNewElement({ type: this.currentAddQuestionType });
@@ -2534,7 +2520,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
   @property({ defaultValue: false }) isMobileView;
   @property({ defaultValue: "left" }) toolboxLocation: "left"| "right";
-  @property({ defaultValue: "right" }) propertyPanelLocation: "left"| "right";
+  @property({ defaultValue: "right" }) sideBarLocation: "left" | "right";
   selectFromStringEditor: boolean;
 }
 

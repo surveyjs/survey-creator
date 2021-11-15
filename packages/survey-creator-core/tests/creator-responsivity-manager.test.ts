@@ -54,7 +54,7 @@ test("CreatorResponsivityManager process", (): any => {
     expect(creator.toolbox.visible).toEqual(toolboxVisible);
     expect(creator.toolbox.isCompact).toEqual(toolboxIsCompact);
     expect(creator.showPageNavigator).toEqual(showPageNavigator);
-    expect(creator.currentTabPropertyGrid.flyoutMode).toEqual(propertyGridFlyoutMode);
+    expect(creator.sideBar.flyoutMode).toEqual(propertyGridFlyoutMode);
   };
 
   expect(creator.toolbox.visible).toBeTruthy();

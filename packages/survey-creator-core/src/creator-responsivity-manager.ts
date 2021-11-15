@@ -41,11 +41,11 @@ export class CreatorResponsivityManager {
     }
   }
 
-  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutTabPanel: boolean) {
+  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSideBar: boolean) {
     this.creator.toolbox.updateIsCompact(toolboxIsCompact);
     this.creator.toolbox.visible = toolboxVisible;
     this.creator.showPageNavigator = toolboxVisible;
-    this.creator.currentTabPropertyGrid && (this.creator.currentTabPropertyGrid.flyoutMode = flyoutTabPanel);
+    this.creator.sideBar.flyoutMode = flyoutSideBar;
   }
   process() {
     this.currentWidth = this.getScreenWidth();

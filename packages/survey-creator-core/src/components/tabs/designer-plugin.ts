@@ -1,13 +1,15 @@
 import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { PropertyGridModel } from "../../property-grid";
-import { PropertyGridViewModel, PropertyGridViewModelBase } from "../../property-grid/property-grid-view-model";
+import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
+import { SideBarTabModel } from "../side-bar/side-bar-model";
 import { settings } from "../../settings";
 import { TabDesignerViewModel } from "./designer";
 
 export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin {
   public model: TabDesignerViewModel<T>;
-  public propertyGrid: PropertyGridViewModelBase;
+  public propertyGrid: PropertyGridViewModel<T>;
+  private propertyGridTab: SideBarTabModel;
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
   private expandAction: Action;
@@ -19,11 +21,43 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   private get isSettingsActive(): boolean {
     return this.creator.showPropertyGrid && this.isSurveySelected;
   }
+  private createVisibleUpdater() {
+    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "designer"; });
+  }
+  private updatePropertyGridTabCaption() {
+    this.propertyGridTab.caption = this.creator.isMobileView ? this.propertyGrid.selectedElementName : "";
+  }
 
   constructor(private creator: CreatorBase<T>) {
     creator.addPluginTab("designer", this);
     const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
+    this.propertyGridTab = this.creator.sideBar.addTab("propertyGrid", "svc-property-grid", this.propertyGrid, () => {
+      const result = [];
+      if (!!this.propertyGrid.prevSelectionAction) {
+        this.propertyGrid.prevSelectionAction.visible = this.createVisibleUpdater();
+        result.push(this.propertyGrid.prevSelectionAction)
+      };
+      if (!!this.propertyGrid.nextSelectionAction) {
+        this.propertyGrid.nextSelectionAction.visible = this.createVisibleUpdater();
+        result.push(this.propertyGrid.nextSelectionAction);
+      }
+      if (!!this.propertyGrid.objectSelectionAction) {
+        this.propertyGrid.objectSelectionAction.visible = this.createVisibleUpdater();
+        result.push(this.propertyGrid.objectSelectionAction);
+      }
+      return result;
+    });
+    this.creator.onPropertyChanged.add((sender, options) => {
+      if (options.name === "isMobileView") {
+        this.updatePropertyGridTabCaption();
+      }
+    });
+    this.propertyGrid.onPropertyChanged.add((sender, options) => {
+      if (options.name === "selectedElementName") {
+        this.updatePropertyGridTabCaption();
+      }
+    });
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     creator.registerShortcut("delete", {
       hotKey: {
@@ -37,9 +71,11 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
+    this.creator.sideBar.activeTab = this.propertyGridTab.id;
   }
   public deactivate(): boolean {
     this.model = undefined;
+    this.propertyGridTab.visible = false;
     return true;
   }
   public update(): void {
@@ -61,7 +97,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
         this.creator.selectElement(this.creator.survey);
       },
       active: this.isSurveySelected,
-      visible: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "designer"),
+      visible: this.createVisibleUpdater(),
       title: "Settings",
       showTitle: false
     });
@@ -88,18 +124,16 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       action: () => {
         this.creator.makeNewViewActive("test");
       },
-      visible: <any>new ComputedUpdater<boolean>(() => {
-        return (this.creator.activeTab === "designer");
-      }),
+      visible: this.createVisibleUpdater(),
       title: this.creator.getLocString("ed.testSurvey"),
       showTitle: false
     })
     items.push(this.saveSurveyAction);
     items.push(this.surveySettingsAction);
     if (settings.propertyGrid.allowCollapse) {
-      this.expandAction = this.propertyGrid.createExpandAction();
+      this.expandAction = this.creator.sideBar.createExpandAction();
       this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        const propertyGridVisible = this.propertyGrid.visible;
+        const propertyGridVisible = this.creator.sideBar.visible;
         return this.creator.activeTab === "designer" && !propertyGridVisible;
       })
       items.push(this.expandAction);

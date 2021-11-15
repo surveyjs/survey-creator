@@ -1,13 +1,9 @@
 import { SurveyModel, PopupModel, ListModel, Action, IAction, ComputedUpdater } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { PropertyGridViewModelBase } from "../../property-grid/property-grid-view-model";
+import { SideBarTabModel } from "../side-bar/side-bar-model";
 import { settings } from "../../settings";
 import { Translation } from "./translation";
-
-export class PropertyGridViewTranslationModel extends PropertyGridViewModelBase {
-  public get propertyGridType(): string { return "translation"; }
-}
 
 export class TabTranslationPlugin implements ICreatorPlugin {
   private showAllStringsAction: Action;
@@ -18,19 +14,21 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private expandAction: Action;
   private inputFileElement: HTMLInputElement;
   private pagePopupModel: PopupModel;
+  private sideBarTab: SideBarTabModel;
 
   public model: Translation;
-  public propertyGrid: PropertyGridViewModelBase;
 
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("translation", this);
-    this.propertyGrid = new PropertyGridViewTranslationModel();
-    this.propertyGrid.headerText = editorLocalization.getString("ed.translationPropertyGridTitle");
+    this.sideBarTab = this.creator.sideBar.addTab("translation");
+    this.sideBarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
-    this.propertyGrid.survey = this.model.settingsSurvey;
+    this.sideBarTab.model = this.model.settingsSurvey;
+    this.sideBarTab.componentName = "survey";
+    this.creator.sideBar.activeTab = this.sideBarTab.id;
 
     this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
@@ -44,16 +42,12 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterPageAction.visible = true;
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
-    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible);
+    this.expandAction && (this.expandAction.visible = !this.creator.sideBar.visible);
 
     this.pagePopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
         id: page.name,
-        title: this.creator.getObjectDisplayName(
-          page,
-          "survey-translation",
-          page.title
-        )
+        title: this.creator.getObjectDisplayName(page, "survey-translation", page.title)
       }))
     );
 
@@ -76,6 +70,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     this.model = undefined;
+    this.sideBarTab.visible = false;
     this.showAllStringsAction.visible = false;
     this.filterPageAction.visible = false;
     this.mergeLocaleWithDefaultAction.visible = false;
@@ -198,9 +193,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     items.push(this.exportCsvAction);
 
     if (settings.propertyGrid.allowCollapse) {
-      this.expandAction = this.propertyGrid.createExpandAction();
+      this.expandAction = this.creator.sideBar.createExpandAction();
       this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        const propertyGridVisible = this.propertyGrid.visible;
+        const propertyGridVisible = this.creator.sideBar.visible;
         return this.creator.activeTab === "translation" && !propertyGridVisible;
       });
       items.push(this.expandAction);

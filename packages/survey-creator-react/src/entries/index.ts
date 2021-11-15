@@ -33,6 +33,7 @@ export * from "../components/toolbox/ToolboxItem";
 export * from "../components/TabbedMenu";
 export * from "../components/Notifier";
 export * from "../components/Navigation";
+export * from "../components/SideBar";
 export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";

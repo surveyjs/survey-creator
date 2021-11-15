@@ -75,7 +75,7 @@ export class TabDesignerComponent extends SurveyElementBase<
             creator: this.creator
           })}
         </div>
-        <div className={"svc-tab-designer " + survey.css.root}>
+        <div className={designerTabClassName}>
           <div className={this.model.getDesignerCss()}>
             {!this.creator.allowEditSurveyTitle ? null :
               <div
