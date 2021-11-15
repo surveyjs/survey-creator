@@ -41,4 +41,9 @@
       min-width: calcSize(46);
     }
   }
+
+  .svc-question__content-actions {
+    width: calc(100% - 3 * #{$base-unit});
+    left: calcSize(2);
+  }
 }
