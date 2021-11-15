@@ -112,8 +112,20 @@ svc-question {
   line-height: 24px;
 }
 
+.svc-dragged-element-shortcut .sv-svg-icon use {
+  fill: $primary;
+}
+
 .svc-dragged-element-shortcut--selected {
   border: 2px solid $secondary;
+}
+
+.svc-dragged-element-shortcut__text {
+  margin-left: 30px;
+}
+
+.svc-dragged-element-shortcut__icon {
+  position: absolute;
 }
 
 .svc-question__content--drag-over-inside,
