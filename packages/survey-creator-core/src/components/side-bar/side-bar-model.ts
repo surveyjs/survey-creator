@@ -1,4 +1,4 @@
-import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater } from "survey-core";
+import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray } from "survey-core";
 import { settings } from "../../settings";
 import { getLocString } from "../../editorLocalization";
 import { CreatorBase } from "../../creator-base";
@@ -10,17 +10,20 @@ export class SideBarModel extends Base {
   private _collapseAction: Action;
   private _activeTab: SideBarTabModel;
   private onPropertyGridVisibilityChanged;
-  tabs: Array<SideBarTabModel> = [];
 
+  @propertyArray() tabs: Array<SideBarTabModel>;
   @property() headerText: string;
   @property({ defaultValue: true }) visible: boolean;
+  @property() hasVisibleTabs: boolean;
   @property({ defaultValue: false }) flyoutMode: boolean;
   @property({
     onSet: (val, target: SideBarModel) => {
       target.tabs.forEach(tab => tab.visible = false);
       target._activeTab = target.tabs.filter(tab => tab.id === val)[0];
-      target._activeTab.isActive = true;
-      target._activeTab.visible = true;
+      if (target._activeTab) {
+        target.headerText = target._activeTab.caption;
+        target._activeTab.visible = true;
+      }
     }
   }) activeTab: string;
 
@@ -30,9 +33,6 @@ export class SideBarModel extends Base {
 
   public get closeText(): string {
     return getLocString("pe.close");
-  }
-  public get visibleTabs(): Array<SideBarTabModel> {
-    return this.tabs.length !== 0 ? this.tabs.filter(tab => tab.visible) : [];
   }
   public getTabById(id: string) {
     return this.tabs.filter(tab => tab.id === id)[0];
@@ -100,6 +100,9 @@ export class SideBarModel extends Base {
       (buildActions() || []).forEach(action => this.toolbar.actions.push(action));
     }
     return tab;
+  }
+  public updateHasVisibleTabs() {
+    this.hasVisibleTabs = (this.tabs || []).filter(tab => tab.visible).length > 0;
   }
   public dispose() {
     if (!!this.creator && !this.isDisposed) {

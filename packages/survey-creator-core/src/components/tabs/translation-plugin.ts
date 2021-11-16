@@ -27,7 +27,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
     this.sideBarTab.model = this.model.settingsSurvey;
-    this.sideBarTab.componentName = "survey";
+    this.sideBarTab.componentName = "survey-widget";
     this.creator.sideBar.activeTab = this.sideBarTab.id;
 
     this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;

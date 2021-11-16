@@ -4,23 +4,16 @@ import { SideBarModel } from "./side-bar-model";
 export class SideBarTabModel extends Base {
   @property({
     onSet: (newVal, target: SideBarTabModel) => {
-      target.updateSideBarHeaderText();
+      target.sidePanel.headerText = target.caption;
     }
   }) caption: string;
-  @property() visible: boolean;
-  @property() model: any;
-  @property() componentName: string;
   @property({
     onSet: (newVal, target: SideBarTabModel) => {
-      if (newVal) {
-        target.updateSideBarHeaderText();
-      }
+      target.sidePanel.updateHasVisibleTabs();
     }
-  }) isActive: boolean;
-
-  private updateSideBarHeaderText() {
-    this.sidePanel.headerText = this.caption;
-  }
+  }) visible: boolean;
+  @property() model: any;
+  @property() componentName: string;
 
   constructor(public id: string, public sidePanel: SideBarModel, componentName?: string, model?: any,) {
     super();

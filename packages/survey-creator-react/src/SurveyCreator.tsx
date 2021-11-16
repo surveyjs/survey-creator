@@ -22,7 +22,8 @@ import {
   ReactQuestionFactory,
   Model,
   SurveyElementBase,
-  SurveyLocStringViewer
+  SurveyLocStringViewer,
+  Survey
 } from "survey-react-ui";
 import {
   ICreatorOptions,
@@ -286,3 +287,7 @@ export class SurveyCreator extends CreatorBase<SurveyModel> {
     return this.survey.questionErrorLocation;
   }
 }
+
+ReactElementFactory.Instance.registerElement("survey-widget", (props) => {
+  return React.createElement(Survey, props);
+});
