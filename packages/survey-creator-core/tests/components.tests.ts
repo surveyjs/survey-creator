@@ -54,7 +54,7 @@ test("item value allowAdd isDraggable allowRemove on events", () => {
 
   creator.onCollectionItemAllowOperations.add(function (sender, options) {
     //console.log(options.obj, options, sender);
-    if(options.item && options.collection[1] == options.item) {
+    if (options.item && options.collection[1] == options.item) {
       options.allowDelete = false;
     }
   });
@@ -81,65 +81,69 @@ test("item value allowAdd isDraggable allowRemove on events", () => {
   expect(secondItemAdorner.allowRemove).toBeTruthy();
 });
 
-test("item value isNew isDraggable allowRemove - complex test", (): any => {
-
-  let creator = new CreatorTester();
-  function checkItemAllowedActions(questionName, actionName) {
-    let question = creator.survey.getQuestionByName(questionName);
-    return question.visibleChoices.map(
-      item => (new ItemValueWrapperViewModel(
-        creator,
-        <any>question,
-        item
-      ))[actionName]);
-  }
+test("item value isBanStartDrag", (): any => {
+  const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
   };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const allChoices = question.visibleChoices;
+  const firstItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    allChoices[1]
+  );
+  const itemNoneAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    allChoices[6]
+  );
+  const div = document.createElement("div");
+  div.setAttribute("contenteditable", "true");
 
-  expect(checkItemAllowedActions("q1", "allowAdd")).toEqual([true, false, false, false, true, true, true]);
-  expect(checkItemAllowedActions("q1", "isDraggable")).toEqual([false, true, true, true, false, false, false]);
-  expect(checkItemAllowedActions("q1", "allowRemove")).toEqual([true, true, true, true, true, true, true]);
+  let fakePointerDownEvent: any = {
+    target: div
+  };
+  expect(firstItemAdorner["isBanStartDrag"](fakePointerDownEvent)).toEqual(false);
 
-  Serializer.getProperty("itemvalue", "text").readOnly = true;
-  expect(checkItemAllowedActions("q1", "allowAdd")).toEqual([true, false, false, false, true, true, true]);
-  expect(checkItemAllowedActions("q1", "isDraggable")).toEqual([false, true, true, true, false, false, false]);
-  expect(checkItemAllowedActions("q1", "allowRemove")).toEqual([true, true, true, true, true, true, true]);
-  Serializer.getProperty("itemvalue", "text").readOnly = false;
+  div.setAttribute("contenteditable", "false");
+  fakePointerDownEvent = {
+    target: div
+  };
+  expect(firstItemAdorner["isBanStartDrag"](fakePointerDownEvent)).toEqual(true);
+  expect(itemNoneAdorner["isBanStartDrag"](fakePointerDownEvent)).toEqual(false);
+});
 
-  Serializer.getProperty("checkbox", "choices").readOnly = true;
-  expect(checkItemAllowedActions("q1", "allowAdd")).toEqual([false, false, false, false, false, false, false]);
-  expect(checkItemAllowedActions("q1", "isDraggable")).toEqual([false, false, false, false, false, false, false]);
-  expect(checkItemAllowedActions("q1", "allowRemove")).toEqual([false, false, false, false, false, false, false]);
-  Serializer.getProperty("checkbox", "choices").readOnly = false;
+test("item value allowAdd isDraggable allowRemove on events", () => {
+  const creator = new CreatorTester();
 
-  creator.onGetPropertyReadOnly.add(function(editor, options) {
-    if (options.obj.getType() === "checkbox" && options.propertyName == "choices")
-      options.readOnly = true;
-  });
-  expect(checkItemAllowedActions("q1", "allowAdd")).toEqual([false, false, false, false, false, false, false]);
-  expect(checkItemAllowedActions("q1", "isDraggable")).toEqual([false, false, false, false, false, false, false]);
-  expect(checkItemAllowedActions("q1", "allowRemove")).toEqual([false, false, false, false, false, false, false]);
-  creator.onGetPropertyReadOnly.clear();
-
-  creator.onElementAllowOperations.add(function(editor, options) {
-    if (options.obj.name === "q1")
-      options.allowEdit = false;
-  });
-  expect(checkItemAllowedActions("q1", "allowAdd")).toEqual([false, false, false, false, false, false, false]);
-  expect(checkItemAllowedActions("q1", "isDraggable")).toEqual([false, false, false, false, false, false, false]);
-  expect(checkItemAllowedActions("q1", "allowRemove")).toEqual([false, false, false, false, false, false, false]);
-  creator.onElementAllowOperations.clear();
-
-  creator.onCollectionItemAllowOperations.add(function(editor, options) {
-    if (options.obj.name == "q1" && options.collection.indexOf(options.item) == 0)
-      options.allowEdit = false;
-    if (options.obj.name == "q1" && options.collection.indexOf(options.item) == 1)
+  creator.onCollectionItemAllowOperations.add(function (sender, options) {
+    //console.log(options.obj, options, sender);
+    if (options.item && options.collection[1] == options.item) {
       options.allowDelete = false;
+    }
   });
-  expect(checkItemAllowedActions("q1", "allowAdd")).toEqual([true, false, false, false, true, true, true]);
-  expect(checkItemAllowedActions("q1", "isDraggable")).toEqual([false, true, true, true, false, false, false]);
-  expect(checkItemAllowedActions("q1", "allowRemove")).toEqual([true, false, true, true, true, true, true]);
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+
+  const allChoices = question.visibleChoices;
+  expect(allChoices.length).toEqual(7);
+
+  const firstItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    allChoices[1]
+  );
+  const secondItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    allChoices[2]
+  );
+
+  expect(firstItemAdorner.allowRemove).toBeFalsy();
+  expect(secondItemAdorner.allowRemove).toBeTruthy();
 });
 
 test("QuestionRatingAdornerViewModel read only mode", () => {

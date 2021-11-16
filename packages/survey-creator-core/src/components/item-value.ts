@@ -56,7 +56,7 @@ export class ItemValueWrapperViewModel extends Base {
       this.allowItemOperations.allowDelete = true;
     }
 
-    if(!this.creator.isCanModifyProperty(question, "choices")) {
+    if (!this.creator.isCanModifyProperty(question, "choices")) {
       this.canTouchItems = false;
     }
   }
@@ -65,9 +65,13 @@ export class ItemValueWrapperViewModel extends Base {
   private allowItemOperations: ICollectionItemAllowOperations;
   private canTouchItems: boolean = true;
 
-  onPointerDown(pointerDownEvent: PointerEvent) {
+  private isBanStartDrag(pointerDownEvent: PointerEvent): boolean {
     const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
-    if (this.isNew || isContentEditable) return;
+    return !this.isNew && !isContentEditable;
+  }
+
+  onPointerDown(pointerDownEvent: PointerEvent) {
+    if (this.isBanStartDrag(pointerDownEvent)) return;
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
   }
 
