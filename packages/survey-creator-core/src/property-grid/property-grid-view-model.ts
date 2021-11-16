@@ -146,6 +146,9 @@ export class PropertyGridViewModel<T extends SurveyModel> extends PropertyGridVi
       "bottom",
       "left"
     );
+    if(this.creator.isMobileView) {
+      selectorPopupModel.displayMode = "overlay";
+    }
 
     this.objectSelectionAction = new Action({
       id: "svd-grid-object-selector",

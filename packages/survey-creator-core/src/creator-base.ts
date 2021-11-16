@@ -2491,6 +2491,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       "bottom",
       "center"
     );
+    if(this.isMobileView) {
+      popupModel.displayMode = "overlay";
+    }
 
     return {
       iconName: "icon-dots",

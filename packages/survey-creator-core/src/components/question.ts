@@ -213,6 +213,9 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       "bottom",
       "center"
     );
+    if(this.creator.isMobileView) {
+      popupModel.displayMode = "overlay";
+    }
 
     return new Action({
       id: "convertTo",

@@ -1057,7 +1057,8 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       },
       undefined,
       "sv-property-editor",
-      question.title
+      question.title,
+      "overlay"
     );
     return surveyPropertyEditor;
   }
