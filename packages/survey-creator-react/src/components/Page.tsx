@@ -25,7 +25,7 @@ interface ICreatorSurveyPageComponentProps {
 export class CreatorSurveyPageComponent extends SurveyElementBase<
   ICreatorSurveyPageComponentProps,
   any
-> {
+  > {
   private model: PageViewModel<SurveyModel>;
   private rootRef: React.RefObject<HTMLDivElement>;
   private propertyPageFunc: (sender: Base, options: any) => void;
@@ -87,7 +87,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
           }}
         >
           <span className="svc-text svc-text--normal svc-text--bold">
-            {this.model.creator.addNewQuestionText}
+            {this.model.addNewQuestionText}
           </span>
 
           {attachKey2click(<button
@@ -96,7 +96,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
               questionTypeSelectorModel.action();
             }}
             className="svc-page__question-type-selector"
-            title={this.model.creator.addNewQuestionText}
+            title={this.model.addNewQuestionText}
           >
             <span className="svc-page__question-type-selector-icon">
               <SvgIcon
