@@ -6,7 +6,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.resizeWindow(1920, 900);
 });
 
-const flyoutPropertyGrid = Selector(".svc-flyoutPanelMode-panel");
+const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
@@ -150,9 +150,9 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
 });
 
 test("property grid for mobile devices", async (t) => {
-  const mobilePropertGrid = Selector(".sv-mobile-property-panel .svc-property-panel");
-  const mobileCloseButton = Selector(".svc-property-panel__close");
-  const mobilePropertGridTitle = Selector(".svc-property-panel__title");
+  const mobilePropertGrid = Selector(".sv-mobile-side-bar .svc-side-bar__container");
+  const mobileCloseButton = Selector(".svc-side-bar__container-close");
+  const mobilePropertGridTitle = Selector(".svc-side-bar__container-title");
 
   await t
     .resizeWindow(750, 500)

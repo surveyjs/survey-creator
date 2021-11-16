@@ -6,7 +6,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
 });
 
-const selectedObjectTextSelector = ".svc-property-panel__header #svd-grid-object-selector .sv-action-bar-item__title";
+const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item__title";
 
 test("Matrix question", async (t) => {
   await t

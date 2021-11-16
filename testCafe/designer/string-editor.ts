@@ -153,17 +153,17 @@ test("Check string editor not loosing focus and selects underlying items", async
   await t
     .click(svStringSelector)
     .expect(svStringSelector.focused).ok()
-    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("string_editor").visible).ok()
+    .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("string_editor").visible).ok()
     .pressKey("tab")
     .expect(Selector(".sv-string-editor").withText("desc").focused).ok()
-    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("string_editor").visible).ok()
+    .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("string_editor").visible).ok()
     .click(svItemSelector)
-    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("string_editor").visible).ok()
+    .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("string_editor").visible).ok()
     .expect(svItemSelector.focused).ok()
     .click(Selector(".sv-string-editor").withText("Column 1"))
-    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("Column 1").visible).ok()
+    .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("Column 1").visible).ok()
     .click(Selector(".sv-string-editor").withText("Column 2"))
-    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("Column 2").visible).ok()
+    .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("Column 2").visible).ok()
     .pressKey("tab")
-    .expect(Selector(".svc-property-panel__header .sv-action-bar-item__title").withText("Column 3").visible).ok();
+    .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("Column 3").visible).ok();
 });

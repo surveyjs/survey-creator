@@ -552,7 +552,7 @@ test("Check logic elements styles in Logic tab", async (t) => {
 });
 
 test("Check logic elements styles in Popup", async (t) => {
-  const objectSelectorButton = Selector(".svc-property-panel__header #svd-grid-object-selector .sv-action-bar-item");
+  const objectSelectorButton = Selector(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item");
   const objectSelectorPopup = Selector(".sv-popup .svc-object-selector");
 
   await setJSON(json3);

@@ -1,6 +1,6 @@
 import { collapseButtonSelector, expandButtonSelector, getTabbedMenuItemByText, objectSelectorButton, objectSelectorPopup, propertyGridSelector, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
-const title = "Property Grid";
+const title = "Side bar";
 
 const json = {
   questions: [
@@ -40,11 +40,6 @@ test("collapse/expand buttons", async (t) => {
 
     .click(collapseButtonSelector)
     .click(getTabbedMenuItemByText("Translation"))
-    .expect(propertyGridSelector.visible).ok()
-    .expect(expandButtonSelector.visible).notOk()
-    .expect(collapseButtonSelector.visible).ok()
-
-    .click(collapseButtonSelector)
     .expect(collapseButtonSelector.visible).notOk()
     .expect(expandButtonSelector.nth(1).visible).ok()
     .expect(propertyGridSelector.visible).notOk()
@@ -55,11 +50,6 @@ test("collapse/expand buttons", async (t) => {
     .expect(propertyGridSelector.visible).ok()
 
     .click(getTabbedMenuItemByText("Survey Designer"))
-    .expect(propertyGridSelector.visible).notOk()
-    .expect(expandButtonSelector.visible).ok()
-    .expect(collapseButtonSelector.visible).notOk()
-
-    .click(expandButtonSelector)
     .expect(collapseButtonSelector.visible).ok()
     .expect(expandButtonSelector.visible).notOk()
     .expect(propertyGridSelector.visible).ok();
