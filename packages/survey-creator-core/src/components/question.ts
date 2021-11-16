@@ -214,11 +214,6 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       "center"
     );
     let actionTitle = this.creator.getLocString("qt." + currentType);
-    // This is temporary solution and just waiting for design resolve
-    if(this.creator.isMobileView && actionTitle.length > 18) {
-      actionTitle = actionTitle.substr(0, 15)+"...";
-    }
-    /////////////////////////////////////////////////////////////////
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
