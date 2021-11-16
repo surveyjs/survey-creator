@@ -468,7 +468,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "width", tab: "layout" },
         { name: "showNumber", tab: "numbering" },
         { name: "showQuestionNumbers", tab: "numbering" },
-        { name: "questionStartIndex", tab: "numbering" }
+        { name: "questionStartIndex", tab: "numbering" },
+        { name: "minWidth", tab: "layout" },
+        { name: "maxWidth", tab: "layout" },
       ],
       tabs: [{ name: "numbering", index: 350 }]
     },
