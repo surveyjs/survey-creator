@@ -50,4 +50,17 @@
       border: 0;
     }
   }
+  .svc-page__content-actions {
+    .sv-action-bar {
+      padding-right: calcSize(1);
+      .sv-action {
+        .sv-action__content {
+          padding-right: 0;
+          .sv-action-bar-item__title--with-icon {
+            display: none;
+          }
+        }
+      }
+    }
+  }
 }
