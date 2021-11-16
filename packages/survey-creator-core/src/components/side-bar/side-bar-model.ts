@@ -2,6 +2,7 @@ import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater } from
 import { settings } from "../../settings";
 import { getLocString } from "../../editorLocalization";
 import { CreatorBase } from "../../creator-base";
+import { SideBarTabModel } from "./side-bar-tab-model";
 
 export class SideBarModel extends Base {
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
@@ -107,33 +108,5 @@ export class SideBarModel extends Base {
       );
     }
     super.dispose();
-  }
-}
-
-export class SideBarTabModel extends Base {
-  @property({
-    onSet: (newVal, target: SideBarTabModel) => {
-      target.updateSideBarHeaderText();
-    }
-  }) caption: string;
-  @property() visible: boolean;
-  @property() model: any;
-  @property() componentName: string;
-  @property({
-    onSet: (newVal, target: SideBarTabModel) => {
-      if (newVal) {
-        target.updateSideBarHeaderText();
-      }
-    }
-  }) isActive: boolean;
-
-  private updateSideBarHeaderText() {
-    this.sidePanel.headerText = this.caption;
-  }
-
-  constructor(public id: string, public sidePanel: SideBarModel, componentName?: string, model?: any,) {
-    super();
-    !!componentName && (this.componentName = componentName);
-    !!model && (this.model = model);
   }
 }

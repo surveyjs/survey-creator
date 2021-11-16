@@ -2,7 +2,7 @@ import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
-import { SideBarTabModel } from "../side-bar/side-bar-model";
+import { SideBarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../settings";
 import { TabDesignerViewModel } from "./designer";
 

@@ -1,7 +1,7 @@
 import { SurveyModel, PopupModel, ListModel, Action, IAction, ComputedUpdater } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { SideBarTabModel } from "../side-bar/side-bar-model";
+import { SideBarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../settings";
 import { Translation } from "./translation";
 
