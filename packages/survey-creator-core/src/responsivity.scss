@@ -1,0 +1,44 @@
+@import "./variables.scss";
+
+.svc-creator--mobile {
+  .sd-question__content {
+    .sd-selectbase__column {
+      max-width: initial;
+      display: block;
+      .svc-item-value-wrapper {
+        margin-left: calcSize(0);
+      }
+    }
+  }
+
+  .svc-page__content {
+    padding-left: 0;    
+    padding-right: 0;    
+  }
+
+  .svc-question__content {
+    padding: calcSize(2) calcSize(3) calcSize(3);
+    &.svc-question__content--selected {
+      padding-bottom: calcSize(8);
+    }
+  }
+  .svc-tab-designer {
+    justify-content: initial;
+    .sd-title.sd-container-modern__title {
+      padding: calcSize(2);
+      h3 {
+        margin: 0;
+        font-size: calcSize(3);
+        line-height: calcSize(4);
+      }
+      h5 {
+        margin: 0;
+      }
+    }
+  }
+  .svc-tab-designer {
+    .sd-container-modern {
+      min-width: calcSize(46);
+    }
+  }
+}

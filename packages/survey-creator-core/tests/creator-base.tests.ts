@@ -12,7 +12,8 @@ import {
   ItemValue,
   settings as surveySettings,
   QuestionPanelDynamicModel,
-  CustomWidgetCollection
+  CustomWidgetCollection,
+  QuestionMatrixModel
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -869,6 +870,34 @@ test("Undo converting question type", (): any => {
   creator.undo();
   q = creator.survey.getQuestionByName("question1");
   expect(q.getType()).toEqual("checkbox");
+});
+test("Convert text question into dropdown", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  var q = creator.survey.getQuestionByName("question1");
+  creator.selectElement(q);
+  creator.convertCurrentQuestion("dropdown");
+  var el = <QuestionDropdownModel>creator.selectedElement;
+  expect(el.getType()).toEqual("dropdown");
+  expect(el.choices).toHaveLength(3);
+  expect(el.choices[0].value).toEqual("item1");
+});
+test("Convert text question into single matrix", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  var q = creator.survey.getQuestionByName("question1");
+  creator.selectElement(q);
+  creator.convertCurrentQuestion("matrix");
+  var el = <QuestionMatrixModel>creator.selectedElement;
+  expect(el.getType()).toEqual("matrix");
+  expect(el.columns).toHaveLength(3);
+  expect(el.columns[0].value).toEqual("Column 1");
+  expect(el.rows).toHaveLength(2);
+  expect(el.rows[0].value).toEqual("Row 1");
 });
 test("Merge Undo for string and text property editors", (): any => {
   const creator = new CreatorTester();

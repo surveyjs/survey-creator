@@ -82,6 +82,20 @@ svc-question {
   }
 }
 
+.svc-question__content--dragged {
+  background: $background-for-editors;
+
+  .sd-question__title {
+    color: $foreground-light;
+  }
+
+  &.svc-question__content--selected {
+    .svc-question__content-actions {
+      display: none
+    }
+  }
+}
+
 .svc-dragged-element-shortcut {
   height: 24px;
   min-width: 100px;
@@ -98,8 +112,20 @@ svc-question {
   line-height: 24px;
 }
 
+.svc-dragged-element-shortcut .sv-svg-icon use {
+  fill: $primary;
+}
+
 .svc-dragged-element-shortcut--selected {
   border: 2px solid $secondary;
+}
+
+.svc-dragged-element-shortcut__text {
+  margin-left: 30px;
+}
+
+.svc-dragged-element-shortcut__icon {
+  position: absolute;
 }
 
 .svc-question__content--drag-over-inside,

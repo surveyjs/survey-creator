@@ -119,6 +119,9 @@ export class PageViewModel<
     this.creator.selectElement(newElement);
   }
   public get allowEdit() {
-    return !this.creator.readOnly;
+    return !!this.creator && !this.creator.readOnly;
+  }
+  public get addNewQuestionText(): string {
+    return !!this.creator ? this.creator.addNewQuestionText : "";
   }
 }
