@@ -81,37 +81,41 @@ test("item value allowAdd isDraggable allowRemove on events", () => {
   expect(secondItemAdorner.allowRemove).toBeTruthy();
 });
 
-test("item value isBanStartDrag", (): any => {
+test("item value no pointer down on new or editable", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
   };
   const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
   const allChoices = question.visibleChoices;
+  let log = "";
+
   const firstItemAdorner = new ItemValueWrapperViewModel(
     creator,
     question,
     allChoices[1]
   );
+  firstItemAdorner["dragOrClickHelper"].onPointerDown = () => log += "->onPointerDown_1"
+
   const itemNoneAdorner = new ItemValueWrapperViewModel(
     creator,
     question,
     allChoices[6]
   );
+  itemNoneAdorner["dragOrClickHelper"].onPointerDown = () => log += "->onPointerDown_None"
+
   const div = document.createElement("div");
   div.setAttribute("contenteditable", "true");
+  let fakePointerDownEvent: any = { target: div };
 
-  let fakePointerDownEvent: any = {
-    target: div
-  };
-  expect(firstItemAdorner["isBanStartDrag"](fakePointerDownEvent)).toEqual(false);
+  firstItemAdorner.onPointerDown(fakePointerDownEvent)
+  expect(log).toEqual("");
 
   div.setAttribute("contenteditable", "false");
-  fakePointerDownEvent = {
-    target: div
-  };
-  expect(firstItemAdorner["isBanStartDrag"](fakePointerDownEvent)).toEqual(true);
-  expect(itemNoneAdorner["isBanStartDrag"](fakePointerDownEvent)).toEqual(false);
+  firstItemAdorner.onPointerDown(fakePointerDownEvent)
+  expect(log).toEqual("->onPointerDown_1");
+  itemNoneAdorner.onPointerDown(fakePointerDownEvent)
+  expect(log).toEqual("->onPointerDown_1");
 });
 
 test("item value allowAdd isDraggable allowRemove on events", () => {

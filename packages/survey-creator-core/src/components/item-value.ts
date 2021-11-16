@@ -67,7 +67,7 @@ export class ItemValueWrapperViewModel extends Base {
 
   private isBanStartDrag(pointerDownEvent: PointerEvent): boolean {
     const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
-    return !this.isNew && !isContentEditable;
+    return this.isNew || isContentEditable;
   }
 
   onPointerDown(pointerDownEvent: PointerEvent) {
