@@ -66,7 +66,8 @@ export class ItemValueWrapperViewModel extends Base {
   private canTouchItems: boolean = true;
 
   onPointerDown(pointerDownEvent: PointerEvent) {
-    if (this.isNew) return;
+    const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
+    if (this.isNew || isContentEditable) return;
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
   }
 
