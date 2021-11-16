@@ -50,6 +50,13 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     };
     this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question, prop);
   }
+  public onMatrixCellCreated(obj: Base, options: any) {
+    const rowObj = options.row.editingObj;
+    if(!rowObj) return;
+    const q = options.cellQuestion;
+    q.obj = rowObj;
+    q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
+  }
   public onGetMatrixRowAction(
     obj: Base,
     options: any,
@@ -650,12 +657,13 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     return res;
   }
   public onMatrixCellCreated(obj: Base, options: any) {
-    if (options.columnName != this.getObjTypeName()) {
-      return;
+    super.onMatrixCellCreated(obj, options);
+    const q = options.cellQuestion;
+    if(options.columnName === this.getObjTypeName()) {
+      q.showOptionsCaption = false;
+      q.choices = this.getChoices(obj);
+      q.value = options.row.editingObj.getType();
     }
-    options.cellQuestion.showOptionsCaption = false;
-    options.cellQuestion.choices = this.getChoices(obj);
-    options.cellQuestion.value = options.row.editingObj.getType();
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
     if (options.columnName != this.getObjTypeName()) {
