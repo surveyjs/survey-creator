@@ -68,6 +68,20 @@ svc-question {
   .sv-action:not(:last-child) > .sv-action__content {
     padding-right: calcSize(1);
   }
+
+  .sv-action--first {
+    min-width: calcSize(13);
+    .sv-action-bar-item {
+      max-width: 100%;
+      .sv-action-bar-item__title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        justify-content: left;
+      }
+    }
+  }
 }
 
 .svc-hovered > .svc-question__content {

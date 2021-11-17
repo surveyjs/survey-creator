@@ -13,7 +13,8 @@
 
   .svc-page__content {
     padding-left: 0;    
-    padding-right: 0;    
+    padding-right: 0;   
+    border: 0; 
   }
 
   .svc-question__content {
@@ -39,6 +40,27 @@
   .svc-tab-designer {
     .sd-container-modern {
       min-width: calcSize(46);
+    }
+  }
+
+  .svc-question__content-actions {
+    width: calc(100% - 3 * #{$base-unit});
+    left: calcSize(2);
+    .sv-action-bar-item {
+      border: 0;
+    }
+  }
+  .svc-page__content-actions {
+    .sv-action-bar {
+      padding-right: calcSize(1);
+      .sv-action {
+        .sv-action__content {
+          padding-right: 0;
+          .sv-action-bar-item__title--with-icon {
+            display: none;
+          }
+        }
+      }
     }
   }
 }

@@ -30,7 +30,7 @@ test("Single input question wrapper actions", async (t) => {
     .expect(convertActionButton.visible).ok()
     .expect(duplicateActionButton.visible).ok()
     .expect(requiredActionButton.visible).ok()
-    .expect(separator.visible).ok()
+    //.expect(separator.visible).ok()
     .expect(deleteActionButton.visible).ok()
     .expect(dotsButton.exists).ok()
     .expect(dotsButton.visible).notOk();
