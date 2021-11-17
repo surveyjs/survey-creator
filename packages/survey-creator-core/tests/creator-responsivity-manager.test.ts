@@ -26,21 +26,21 @@ test("CreatorResponsivityManager getScreenWidth", (): any => {
   expect(responsivityManager["getScreenWidth"]()).toEqual("xxl");
 
   checkScreenWidth(2000, "xxl");
-  checkScreenWidth(1920, "xxl");
+  checkScreenWidth(1801, "xxl");
 
-  checkScreenWidth(1900, "xl");
-  checkScreenWidth(1280, "xl");
+  checkScreenWidth(1799, "xl");
+  checkScreenWidth(1501, "xl");
 
-  checkScreenWidth(1270, "l");
-  checkScreenWidth(960, "l");
+  checkScreenWidth(1499, "l");
+  checkScreenWidth(1201, "l");
 
-  checkScreenWidth(950, "m");
-  checkScreenWidth(768, "m");
+  checkScreenWidth(1199, "m");
+  checkScreenWidth(901, "m");
 
-  checkScreenWidth(750, "s");
-  checkScreenWidth(376, "s");
+  checkScreenWidth(899, "s");
+  checkScreenWidth(601, "s");
 
-  checkScreenWidth(360, "xs");
+  checkScreenWidth(599, "xs");
   checkScreenWidth(200, "xs");
 });
 
@@ -60,21 +60,21 @@ test("CreatorResponsivityManager process", (): any => {
   expect(creator.toolbox.visible).toBeTruthy();
   expect(creator.toolbox.isCompact).toBeFalsy();
 
-  checkByWidth(1920, true, false, false, true);
   checkByWidth(2000, true, false, false, true);
+  checkByWidth(1801, true, false, false, true);
 
-  checkByWidth(1900, true, false, false, true);
-  checkByWidth(1280, true, false, false, true);
+  checkByWidth(1799, true, false, false, true);
+  checkByWidth(1501, true, false, false, true);
 
-  checkByWidth(1270, true, true, false, true);
-  checkByWidth(960, true, true, false, true);
+  checkByWidth(1499, true, true, false, true);
+  checkByWidth(1201, true, true, false, true);
 
-  checkByWidth(950, true, true, true, true);
-  checkByWidth(768, true, true, true, true);
+  checkByWidth(1199, true, true, true, true);
+  checkByWidth(901, true, true, true, true);
 
-  checkByWidth(750, false, true, true, false);
-  checkByWidth(376, false, true, true, false);
+  checkByWidth(899, false, true, true, false);
+  checkByWidth(601, false, true, true, false);
 
-  checkByWidth(360, false, true, true, false);
+  checkByWidth(599, false, true, true, false);
   checkByWidth(200, false, true, true, false);
 });
