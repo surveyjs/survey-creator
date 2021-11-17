@@ -33,6 +33,7 @@ test("Default value", async (t) => {
   const item1PGEditorInput = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
 
   await t
+    .click(Selector("#svd-grid-expand"))
     .click(question1)
     .click(dataTab)
     .click(Selector("a").withExactText("Set Default value"))

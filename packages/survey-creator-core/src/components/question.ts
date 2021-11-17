@@ -213,9 +213,6 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       "bottom",
       "center"
     );
-    if(this.creator.isMobileView) {
-      popupModel.displayMode = "overlay";
-    }
 
     return new Action({
       id: "convertTo",
@@ -227,6 +224,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       enabled: allowChangeType,
       component: "sv-action-bar-item-dropdown",
       action: (newType) => {
+        popupModel.displayMode = this.creator.isMobileView ? "overlay":"popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel
