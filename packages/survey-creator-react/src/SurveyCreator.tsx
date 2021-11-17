@@ -150,7 +150,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         survey: creator.survey,
         data: tab.data.model
       });
-    const className = "svc-creator-tab" + (" svc-creator__toolbox--" + creator.toolboxLocation);
+    const className = "svc-creator-tab" + (creator.toolboxLocation == "right" ? " svc-creator__toolbox--right" : "");
     return (
       <div
         key={tab.id}

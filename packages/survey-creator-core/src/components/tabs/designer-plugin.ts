@@ -10,6 +10,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   public model: TabDesignerViewModel<T>;
   public propertyGrid: PropertyGridViewModel<T>;
   private propertyGridTab: SideBarTabModel;
+  private toolboxTab: SideBarTabModel;
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
   private expandAction: Action;
@@ -48,9 +49,13 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       }
       return result;
     });
+    this.toolboxTab = this.creator.sideBar.addTab("toolbox", "svc-toolbox", creator);
     this.creator.onPropertyChanged.add((sender, options) => {
       if (options.name === "isMobileView") {
         this.updatePropertyGridTabCaption();
+      }
+      if (options.name === "toolboxLocation") {
+        this.toolboxTab.visible = options.newVal === "insideSideBar";
       }
     });
     this.propertyGrid.onPropertyChanged.add((sender, options) => {
@@ -84,23 +89,49 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   }
   public createActions() {
     const items: Array<Action> = [];
+
+    const toolboxAction = new Action({
+      id: "svd-toolbox",
+      iconName: "icon-toolbox",
+      needSeparator: true,
+      action: () => {
+        if (!this.creator.showPropertyGrid) {
+          this.creator.showPropertyGrid = true;
+        }
+        this.creator.sideBar.activeTab = "toolbox";
+      },
+      active: <any>new ComputedUpdater<boolean>(() => this.creator.sideBar.activeTab === "toolbox"),
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        const insideSideBar = this.creator.toolboxLocation === "insideSideBar";
+        return this.creator.activeTab === "designer" && insideSideBar;
+      }),
+      title: "Toolbox",
+      showTitle: false
+    })
+
     this.surveySettingsAction = new Action({
       id: "svd-settings",
       iconName: "icon-settings",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
-        return !this.creator.isMobileView;
+        const insideSideBar = this.creator.toolboxLocation === "insideSideBar";
+        return !this.creator.isMobileView && !insideSideBar;
       }),
       action: () => {
         if (!this.creator.showPropertyGrid) {
           this.creator.showPropertyGrid = true;
         }
         this.creator.selectElement(this.creator.survey);
+        this.creator.sideBar.activeTab = this.propertyGridTab.id;
       },
-      active: this.isSurveySelected,
+      active: <any>new ComputedUpdater<boolean>(() => {
+        const settingTabIsActive = this.creator.sideBar.activeTab === this.propertyGridTab.id;
+        return this.isSurveySelected && settingTabIsActive;
+      }),
       visible: this.createVisibleUpdater(),
       title: "Settings",
       showTitle: false
     });
+
     this.saveSurveyAction = new Action({
       id: "svd-save",
       iconName: "icon-save",
@@ -117,6 +148,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       tooltip: this.creator.getLocString("ed.saveSurveyTooltip"),
       showTitle: false
     });
+
     this.previewAction = new Action({
       id: "svd-preview",
       iconName: "icon-preview",
@@ -127,8 +159,10 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       visible: this.createVisibleUpdater(),
       title: this.creator.getLocString("ed.testSurvey"),
       showTitle: false
-    })
+    });
+
     items.push(this.saveSurveyAction);
+    items.push(toolboxAction);
     items.push(this.surveySettingsAction);
     if (settings.propertyGrid.allowCollapse) {
       this.expandAction = this.creator.sideBar.createExpandAction();

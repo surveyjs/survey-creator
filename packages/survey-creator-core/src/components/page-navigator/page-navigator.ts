@@ -51,7 +51,11 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     if (!!this.pagesController.creator["onPropertyChanged"]) {
       this.pagesController.creator["onPropertyChanged"].add((sender, options) => {
         if (options.name === "toolboxLocation") {
-          this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"];
+          if (this.pagesController.creator["toolboxLocation"] == "insideSideBar") {
+            this.popupModel.horizontalPosition = "right";
+          } else {
+            this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"];
+          }
         }
       });
     }

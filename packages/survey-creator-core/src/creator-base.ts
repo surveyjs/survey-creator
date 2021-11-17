@@ -2557,7 +2557,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
   @property({ defaultValue: false }) isMobileView;
-  @property({ defaultValue: "left" }) toolboxLocation: "left"| "right";
+  @property({ defaultValue: "left" }) toolboxLocation: "left"| "right" | "insideSideBar";
   @property({ defaultValue: "right" }) sideBarLocation: "left" | "right";
   selectFromStringEditor: boolean;
 }

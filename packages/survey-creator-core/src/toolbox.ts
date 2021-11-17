@@ -201,8 +201,11 @@ export class QuestionToolbox
     if (!!this.creator) {
       this.creator.onPropertyChanged.add((sender, options) => {
         if (options.name === "toolboxLocation") {
-          this.dotsItemPopupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
-          this.updateIsCompact();
+          this.visible = this.creator.toolboxLocation !== "insideSideBar";
+          if (this.visible) {
+            this.dotsItemPopupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
+            this.updateIsCompact();
+          }
         }
       });
     }
