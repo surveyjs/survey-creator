@@ -479,7 +479,7 @@ async function checkLogicOperatorStyles(t: TestController, selector: Selector, b
     .expect(selector.getStyleProperty("border")).notOk(selectorName)
     .expect(selector.getStyleProperty("outline")).notOk(selectorName)
     .expect(selector.getStyleProperty("font-weight")).eql("600", selectorName)
-    .expect(selector.getStyleProperty("font-family")).eql("\"Open Sans\"", selectorName)
+    .expect(selector.getStyleProperty("font-family")).eql("\"Open Sans\", Roboto, sans-serif", selectorName)
     .expect(selector.getStyleProperty("font-size")).eql("16px", selectorName)
 
     .expect(selector.getStyleProperty("padding-left")).eql("16px", selectorName)
