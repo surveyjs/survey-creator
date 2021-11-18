@@ -5,11 +5,11 @@ export class CreatorResponsivityManager {
   private currentWidth;
   private prevToolboxLocation;
   private screenWidth: { [key: string]: number } = {
-    "xxl": 1920,
-    "xl": 1280,
-    "l": 960,
-    "m": 768,
-    "s": 376,
+    "xxl": 1800,
+    "xl": 1500,
+    "l": 1200,
+    "m": 900,
+    "s": 600,
   }
   private getScreenWidth(): string {
     let res;

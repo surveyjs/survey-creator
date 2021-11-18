@@ -42,6 +42,9 @@
       min-width: calcSize(46);
     }
   }
+  .svc-properties-wrapper {
+    width: 100%
+  }
 
   .svc-question__content-actions {
     width: calc(100% - 3 * #{$base-unit});

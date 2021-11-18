@@ -225,6 +225,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       component: "sv-action-bar-item-dropdown",
       disableShrink: true,
       action: (newType) => {
+        popupModel.displayMode = this.creator.isMobileView ? "overlay":"popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel

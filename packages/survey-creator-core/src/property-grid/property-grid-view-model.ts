@@ -126,6 +126,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
       iconName: "icon-more",
       component: "sv-action-bar-item-dropdown",
       action: () => {
+        this.selectorPopupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
         selectorModel.show(
           this.selectionController.creator.survey,
           this.propertyGridModel.obj,
