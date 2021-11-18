@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { collapseButtonSelector, getBarItemByTitle, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
 const title = "Responsiveness";
 
@@ -10,8 +10,10 @@ const flyoutPropertyGrid = Selector(".svc-flyoutPanelMode-panel");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+  })();
   await t
-    .click(Selector("#svd-grid-expand"))
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
     .resizeWindow(1330, 969)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
@@ -261,9 +263,10 @@ test("Property grid editor popup", async (t) => {
   const question1 = Selector("[name=\"question1\"]");
   const dataTab = Selector("h4").withExactText("Data");
   const item1PGEditorInput = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
-
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+  })();
   await t
-    .click(Selector("#svd-grid-expand"))
     .click(question1)
     .click(dataTab)
     .click(Selector("a").withExactText("Set Default value"))
