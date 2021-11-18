@@ -34,6 +34,7 @@ import { QuestionFactory } from "survey-core";
 import { defaultV2Css } from "survey-core";
 import { updateMatrixRemoveAction } from "../utils/actions";
 import { SurveyHelper } from "../survey-helper";
+import { CreatorBase } from "../creator-base";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;
@@ -1063,7 +1064,8 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       },
       undefined,
       "sv-property-editor",
-      question.title
+      question.title,
+      (options as CreatorBase).isMobileView?"overlay":"popup"
     );
     return surveyPropertyEditor;
   }

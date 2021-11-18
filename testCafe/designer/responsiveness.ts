@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { collapseButtonSelector, getBarItemByTitle, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
 const title = "Responsiveness";
 
@@ -10,9 +10,12 @@ const flyoutPropertyGrid = Selector(".svc-flyoutPanelMode-panel");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+  })();
   await t
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
-    .resizeWindow(970, 969)
+    .resizeWindow(1330, 969)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
     .click(".svc-tabbed-menu-item-container.sv-dots");
   const popupSelector = Selector(".sv-popup").filterVisible();
@@ -28,7 +31,7 @@ test("Check base responsiveness for toolbox", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-child(20)");
   await t
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
-    .resizeWindow(970, 632)
+    .resizeWindow(1280, 632)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
     .click(".svc-toolbox__tool.sv-dots");
   const popupSelector = Selector(".sv-popup").filterVisible();
@@ -235,3 +238,66 @@ test("test tab for mobile devices", async (t) => {
     .expect(creatorFooterToolbar.exists).notOk();
 });
 
+test("Property grid editor popup", async (t) => {
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "checkbox",
+            "name": "question1",
+            "title": "question1",
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const question1 = Selector("[name=\"question1\"]");
+  const dataTab = Selector("h4").withExactText("Data");
+  const item1PGEditorInput = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+  })();
+  await t
+    .click(question1)
+    .click(dataTab)
+    .click(Selector("a").withExactText("Set Default value"))
+    .expect(Selector(".sv-popup--modal").visible).ok()
+    .click(Selector("button").withExactText("Cancel"))
+    .resizeWindow(380, 600)
+    .click(Selector("a").withExactText("Set Default value"))
+    .expect(Selector(".sv-popup--overlay").visible).ok();
+});
+
+test("Question type popup - wide", async (t) => {
+  const json = {
+  };
+  await setJSON(json);
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+  })();
+  await t
+    .click(Selector("button.svc-page__question-type-selector"))
+    .expect(Selector(".sv-popup:not(.sv-popup--overlay) li").withText("Single Input").visible).ok();
+});
+
+test("Question type popup - narrow", async (t) => {
+  const json = {
+  };
+  await setJSON(json);
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = false;
+  })();
+  await t
+    .resizeWindow(380, 600)
+    .click(Selector("button.svc-page__question-type-selector"))
+    .expect(Selector(".sv-popup.sv-popup--overlay li").withText("Single Input").visible).ok();
+});

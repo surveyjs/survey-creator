@@ -1,5 +1,5 @@
 import { url, setJSON, getJSON } from "../helper";
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -31,6 +31,10 @@ test("Default value", async (t) => {
   const question1 = Selector("[name=\"question1\"]");
   const dataTab = Selector("h4").withExactText("Data");
   const item1PGEditorInput = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
+
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+  })();
 
   await t
     .click(question1)
