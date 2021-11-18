@@ -4,6 +4,9 @@ const title = "Select context object then edit string";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+  })();
 });
 
 const selectedObjectTextSelector = ".svc-property-panel__header #svd-grid-object-selector .sv-action-bar-item__title";

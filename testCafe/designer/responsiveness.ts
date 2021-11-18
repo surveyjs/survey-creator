@@ -281,7 +281,9 @@ test("Question type popup - wide", async (t) => {
   const json = {
   };
   await setJSON(json);
-
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+  })();
   await t
     .click(Selector("button.svc-page__question-type-selector"))
     .expect(Selector(".sv-popup:not(.sv-popup--overlay) li").withText("Single Input").visible).ok();
@@ -291,7 +293,9 @@ test("Question type popup - narrow", async (t) => {
   const json = {
   };
   await setJSON(json);
-
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = false;
+  })();
   await t
     .resizeWindow(380, 600)
     .click(Selector("button.svc-page__question-type-selector"))
