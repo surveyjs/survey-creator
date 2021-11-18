@@ -29,13 +29,13 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
   protected renderPages(): JSX.Element[] {
     const surveyPages: JSX.Element[] = this.creator.survey.pages.map(
-      (page: PageModel) => {
+      (page: PageModel, index: number) => {
         return (
           <div
             className={"svc-page"}
             data-sv-drop-target-page={page.name}
             data-sv-drop-target-survey-element={page.name}
-            key={page.id}
+            key={page.id + "-" + index}
           >
             <CreatorSurveyPageComponent
               survey={this.creator.survey}
@@ -52,7 +52,7 @@ export class TabDesignerComponent extends SurveyElementBase<
         <div
           className={"svc-page"}
           data-sv-drop-target-survey-element={"newGhostPage"}
-          key={this.model.newPage.id}
+          key={this.model.newPage.id + "-ghost-new-page"}
         >
           <CreatorSurveyPageComponent
             survey={this.creator.survey}

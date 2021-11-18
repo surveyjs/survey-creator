@@ -355,7 +355,48 @@ test("itemvalue[] property editor + row actions", () => {
   detailAction.action();
   expect(detailAction.iconName).toEqual("icon-editingfinish");
 });
+test("itemvalue[] custom dropdown property", () => {
+  Serializer.addProperty("itemvalue", { name: "prop1", choices: ["item1", "item2"] });
 
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(3);
+  expect(choicesQuestion.columns[2].name).toEqual("prop1");
+  expect(choicesQuestion.columns[2].cellType).toEqual("dropdown");
+  expect(choicesQuestion.columns[2].choices).toHaveLength(2);
+  expect(choicesQuestion.columns[2].choices[0].value).toEqual("item1");
+
+  Serializer.removeProperty("itemvalue", "prop1");
+});
+test("itemvalue[] custom properties with dependsOn", () => {
+  Serializer.addProperty("itemvalue", { name: "prop1", choices: ["item1", "item2"] });
+  Serializer.addProperty("itemvalue", { name: "prop2", dependsOn: "prop1", visibleIf: (obj: any) => { return obj.prop1 == "item1"; } });
+
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(4);
+  const rows = choicesQuestion.visibleRows;
+  const cellProp1 = rows[0].cells[2];
+  const cellProp2 = rows[0].cells[3];
+  expect(cellProp1.question.choices).toHaveLength(2);
+  expect(cellProp2.question.visibleIf).toBeTruthy();
+  expect(cellProp2.question.isVisible).toBeFalsy();
+  cellProp1.question.value = "item1";
+  expect(cellProp2.question.isVisible).toBeTruthy();
+  cellProp1.question.value = "item2";
+  expect(cellProp2.question.isVisible).toBeFalsy();
+
+  Serializer.removeProperty("itemvalue", "prop1");
+  Serializer.removeProperty("itemvalue", "prop2");
+});
 test("column[] property editor", (): any => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
