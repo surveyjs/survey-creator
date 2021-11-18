@@ -26,11 +26,11 @@ test("Generate and update title correctly", () => {
   };
   var propertyGrid = creator["designerPropertyGrid"];
   var model = new PropertyGridViewModel(propertyGrid, creator);
-  expect(model.title).toEqual("Survey");
+  expect(model.headerText).toEqual("Survey");
   propertyGrid.obj = creator.survey.getQuestionByName("question1");
-  expect(model.title).toEqual("question1");
+  expect(model.headerText).toEqual("question1");
   propertyGrid.survey.getQuestionByName("name").value = "Q1";
-  expect(model.title).toEqual("Q1");
+  expect(model.headerText).toEqual("Q1");
   propertyGrid.options.getObjectDisplayName = (
     obj: Base,
     reason: string,
@@ -39,7 +39,7 @@ test("Generate and update title correctly", () => {
     return "Question:" + obj["name"];
   };
   propertyGrid.survey.getQuestionByName("name").value = "Q2";
-  expect(model.title).toEqual("Question:Q2");
+  expect(model.headerText).toEqual("Question:Q2");
 });
 test("Prev/next correctly, including columns via actions", () => {
   var creator = new CreatorTester();
@@ -50,9 +50,9 @@ test("Prev/next correctly, including columns via actions", () => {
   };
   var matrix = creator.survey.getQuestionByName("q1");
   var model = new PropertyGridViewModel(creator["designerPropertyGrid"], creator);
-  expect(model.title).toEqual("Survey");
+  expect(model.headerText).toEqual("Survey");
   creator.selectElement(matrix);
-  expect(model.title).toEqual("q1");
+  expect(model.headerText).toEqual("q1");
   var columnsQuestion = <QuestionMatrixDynamicModel>creator["designerPropertyGrid"].survey.getQuestionByName("columns");
   expect(columnsQuestion).toBeTruthy();
   var actions: Array<IAction> = [];
@@ -63,11 +63,11 @@ test("Prev/next correctly, including columns via actions", () => {
   );
   actions[0].action();
   expect(creator["designerPropertyGrid"].survey.editingObj["name"]).toEqual("col1");
-  expect(model.title).toEqual("col1");
+  expect(model.headerText).toEqual("col1");
   expect(creator.selectedElementName).toEqual("col1");
   creator.selectionHistoryController.prev();
   expect(creator.selectedElementName).toEqual("q1");
-  expect(model.title).toEqual("q1");
+  expect(model.headerText).toEqual("q1");
   var panelColumns = <PanelModel>(creator["designerPropertyGrid"].survey.getPanelByName("columns"));
   expect(panelColumns.isExpanded).toBeTruthy();
   var panelGeneral = <PanelModel>(creator["designerPropertyGrid"].survey.getPanelByName("general"));

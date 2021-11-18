@@ -55,6 +55,9 @@ export class PropertyPanelComponent extends SurveyElementBase<IPropertyGridCompo
             <div className="svc-property-panel__expander">
               {ReactElementFactory.Instance.createElement("svc-property-grid", { model: this.model })}
             </div>
+            <div className="svc-property-panel__close">
+              <div className="sd-btn sd-btn--action svc-property-panel__close-button" onClick={() => this.model.closePropertyGrid()}> {this.model.closeText} </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,12 +1,12 @@
 <div
   class="svc-item-value-wrapper"
-  data-bind="attr: attributes, css: { 'svc-item-value--new': isNew, 'svc-item-value--dragging': isDragging, 'svc-item-value--ghost': isDragDropGhost, 'svc-item-value--movedown':isDragDropMoveDown, 'svc-item-value--moveup':isDragDropMoveUp }"
+  data-bind="event: { pointerdown: function (model, event) { onPointerDown(event); } },attr: attributes, css: { 'svc-item-value--new': isNew, 'svc-item-value--dragging': isDragging, 'svc-item-value--ghost': isDragDropGhost, 'svc-item-value--movedown':isDragDropMoveDown, 'svc-item-value--moveup':isDragDropMoveUp }"
 >
   <div class="svc-item-value__ghost"></div>
   <div class="svc-item-value-controls">
     <!-- ko if: isDraggable -->
     <sv-svg-icon
-      data-bind="event: { pointerdown: function (model, event) { startDragItemValue(event); } }, attr: { title: dragTooltip }"
+      data-bind="attr: { title: dragTooltip }"
       class="svc-item-value-controls__button svc-item-value-controls__drag"
       data-bind="visible: !isNew"
       params="iconName: 'icon-drag-handler', size: 16"

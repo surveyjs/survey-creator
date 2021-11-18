@@ -185,6 +185,7 @@ export class SurveyPropertyItemValuesEditor extends SurveyNestedPropertyEditor {
     } else {
       SurveyHelper.applyItemValueArray(this.originalValue, items);
     }
+    this.doOnChanged(this.originalValue);
   }
   protected getItemsText(): string {
     var items = [];

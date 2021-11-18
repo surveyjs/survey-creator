@@ -60,7 +60,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     this.survey.onPanelRemoved.add(this.checkNewPageHandler);
     this.checkNewPage();
     this.widthUpdater && this.widthUpdater.dispose();
-    this.widthUpdater = new ComputedUpdater(() => {
+    this.widthUpdater = new ComputedUpdater<string>(() => {
       return this.survey.calculateWidthMode();
     });
     this.withModifier = <any>this.widthUpdater;
@@ -107,6 +107,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
   private expandAction: Action;
+  public previewAction: Action;
 
   constructor(private creator: CreatorBase<T>) {
     creator.addPluginTab("designer", this);
@@ -125,14 +126,9 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
-    this.surveySettingsAction && (this.surveySettingsAction.visible = true);
-    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible);
   }
   public deactivate(): boolean {
     this.model = undefined;
-
-    this.surveySettingsAction.visible = false;
-    this.expandAction && (this.expandAction.visible = false);
     return true;
   }
   public update(): void {
@@ -144,7 +140,9 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.surveySettingsAction = new Action({
       id: "svd-settings",
       iconName: "icon-settings",
-      needSeparator: true,
+      needSeparator: <any>new ComputedUpdater<boolean>(() => {
+        return !this.creator.isMobileView;
+      }),
       action: () => {
         if (!this.creator.showPropertyGrid) {
           this.creator.showPropertyGrid = true;
@@ -152,7 +150,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
         this.creator.selectElement(this.creator.survey);
       },
       active: this.isSurveySelected,
-      visible: this.creator.activeTab === "designer",
+      visible: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "designer"),
       title: "Settings",
       showTitle: false
     });
@@ -172,10 +170,27 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       tooltip: this.creator.getLocString("ed.saveSurveyTooltip"),
       showTitle: false
     });
+    this.previewAction = new Action({
+      id: "svd-preview",
+      iconName: "icon-preview",
+      needSeparator: true,
+      action: () => {
+        this.creator.makeNewViewActive("test");
+      },
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        return (this.creator.activeTab === "designer");
+      }),
+      title: this.creator.getLocString("ed.testSurvey"),
+      showTitle: false
+    })
     items.push(this.saveSurveyAction);
     items.push(this.surveySettingsAction);
     if (settings.propertyGrid.allowCollapse) {
-      this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
+      this.expandAction = this.propertyGrid.createExpandAction();
+      this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
+        const propertyGridVisible = this.propertyGrid.visible;
+        return this.creator.activeTab === "designer" && !propertyGridVisible;
+      })
       items.push(this.expandAction);
     }
     this.creator.onSelectedElementChanged.add((sender, options) => {
@@ -185,6 +200,10 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       this.surveySettingsAction.active = this.isSettingsActive;
     });
     return items;
+  }
+  public addFooterActions() {
+    this.creator.footerToolbar.actions.push(this.surveySettingsAction); 
+    this.creator.footerToolbar.actions.push(this.previewAction); 
   }
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);

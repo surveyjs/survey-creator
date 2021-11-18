@@ -1,7 +1,8 @@
 import { CreatorBase } from "./creator-base";
-
+import "./responsivity.scss";
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
+  private currentWidth;
   private screenWidth: { [key: string]: number } = {
     "xxl": 1920,
     "xl": 1280,
@@ -18,12 +19,25 @@ export class CreatorResponsivityManager {
     });
     return res || "xs";
   }
+  private initMobileView() {
+    this.creator.showTabs = false;
+    this.creator.showToolbar = false;
+    this.creator.isMobileView = true;
+  }
+  private resetMobileView() {
+    this.creator.showTabs = undefined;
+    this.creator.showToolbar = undefined;
+    this.creator.isMobileView = undefined;
+  }
 
   constructor(protected container: HTMLDivElement, private creator: CreatorBase) {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.container.parentElement);
       this.process();
+      if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
+        this.creator.showPropertyGrid = false;
+      }
     }
   }
 
@@ -31,18 +45,24 @@ export class CreatorResponsivityManager {
     this.creator.toolbox.isCompact = toolboxIsCompact;
     this.creator.toolbox.visible = toolboxVisible;
     this.creator.showPageNavigator = toolboxVisible;
-    this.creator.currentTabPropertyGrid && (this.creator.currentTabPropertyGrid.flyoutMode = flyoutTabPanel)
+    this.creator.currentTabPropertyGrid && (this.creator.currentTabPropertyGrid.flyoutMode = flyoutTabPanel);
   }
   process() {
-    const currentWidth = this.getScreenWidth();
-    if (currentWidth === "xl" || currentWidth === "xxl") {
+    this.currentWidth = this.getScreenWidth();
+    if (this.currentWidth === "xl" || this.currentWidth === "xxl") {
       this._process(false, true, false);
-    } else if (currentWidth === "l") {
+    } else if (this.currentWidth === "l") {
       this._process(true, true, false);
-    } else if (currentWidth === "m") {
+    } else if (this.currentWidth === "m") {
       this._process(true, true, true);
     } else {
       this._process(true, false, true);
+    }
+
+    if (this.currentWidth == "xs") {
+      this.initMobileView();
+    } else {
+      this.resetMobileView();
     }
   }
 

@@ -1,8 +1,9 @@
 <div class="svc-image-item-value-wrapper"
-  data-bind="attr: attributes, css: { 'svc-image-item-value--new': isNew }">
+  data-bind="event: { pointerdown: function(model, event) { onPointerDown(event); } }, attr: attributes, css: { 'svc-image-item-value--new': isNew }">
 
-  <div class="svc-image-item__drag-element"
-    data-bind="event: { pointerdown: function(model, event) { startDragItemValue(event); } }"></div>
+  <!-- ko ifnot: isNew -->
+  <div class="svc-image-item__drag-element"></div>
+  <!-- /ko -->
 
   <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
 

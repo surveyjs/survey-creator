@@ -129,7 +129,7 @@ test("Show/hide device similator", (): any => {
     ]
   };
   let testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
+  creator.makeNewViewActive("test");
   let similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
   expect(similatorAction).toBeTruthy();
   expect(similatorAction.visible).toBeTruthy();

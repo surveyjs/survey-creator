@@ -155,6 +155,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
   private responsivityManager: CreatorResponsivityManager;
+  footerToolbar: ActionContainer;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -1015,6 +1016,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   protected initTabs() {
     this.initPlugins();
+    this.initFooterToolbar();
     if (this.tabs.length > 0) {
       this.makeNewViewActive(this.tabs[0].id);
     }
@@ -1042,6 +1044,17 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     if (this.showEmbeddedSurveyTab) {
       new TabEmbedPlugin(this);
+    }
+  }
+  private initFooterToolbar(): void {
+    if (!this.footerToolbar) {
+      this.footerToolbar = new ActionContainer();
+      ["undoredo", "designer", "test"].forEach((pluginKey: string) => {
+        const plugin = this.getPlugin(pluginKey);
+        if (!!plugin && !!plugin["addFooterActions"]) {
+          plugin["addFooterActions"]();
+        }
+      });
     }
   }
   public getOptions() {
@@ -1192,14 +1205,52 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       obj.getType(),
       propertyName
     );
+    let parentObj, parentProperty: Survey.JsonObjectProperty;
+    if(obj instanceof ItemValue) {
+      parentObj = obj.locOwner;
+      parentProperty = Survey.Serializer.findProperty(
+        parentObj.getType(),
+        obj.ownerPropertyName
+      );
+
+      const allowQuestionOperations = this.getElementAllowOperations(parentObj);
+      if(allowQuestionOperations.allowEdit === false)
+        return false;
+
+      const options :ICollectionItemAllowOperations = { allowDelete: true, allowEdit: true };
+      this.onCollectionItemAllowingCallback(parentObj,
+        property,
+        parentObj.getPropertyValue(parentProperty.name),
+        obj,
+        options
+      );
+      if (options.allowEdit === false) {
+        return false;
+      }
+
+      if(this.onIsPropertyReadOnlyCallback(
+        parentObj,
+        parentProperty,
+        parentProperty.readOnly,
+        null,
+        null
+      )) {
+        return false;
+      }
+    }
+    if(obj instanceof SurveyElement) {
+      const allowElementOperations = this.getElementAllowOperations(obj);
+      if(allowElementOperations.allowEdit === false)
+        return false;
+    }
     return (
       !property ||
       !this.onIsPropertyReadOnlyCallback(
         obj,
         property,
         property.readOnly,
-        undefined,
-        undefined
+        parentObj,
+        parentProperty
       )
     );
   }
@@ -2250,7 +2301,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     var options = {
       obj: obj,
       property: property,
-      propertyName: property.name,
+      propertyName: property && property.name,
       collection: collection,
       item: item,
       allowEdit: itemOptions.allowEdit,
@@ -2414,15 +2465,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       const str = this.getLocString("ed.addNewTypeQuestion");
       if (!!str && !!str["format"])
         return str["format"](
-          editorLocalization.getString("qt." + this.currentAddQuestionType)
+          this.toolbox.items.filter((item) => item.name == this.currentAddQuestionType)[0].title
         );
     }
     return this.getLocString("ed.addNewQuestion");
   }
 
   public getQuestionTypeSelectorModel(beforeAdd: () => void) {
-    var availableTypes = this.toolbox.itemNames.map((className) => {
-      return this.createIActionBarItemByClass(className);
+    var availableTypes = this.toolbox.items.map((item) => {
+      return this.createIActionBarItemByClass(item.name, item.title);
     });
     const popupModel = new PopupModel(
       "sv-list",
@@ -2452,16 +2503,19 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: () => void) {
     beforeAdd();
-    const newElement = Survey.ElementFactory.Instance.createElement(
+    let newElement = Survey.ElementFactory.Instance.createElement(
       this.currentAddQuestionType || "text",
       "q1"
     );
-    this.setNewNames(newElement);
+    if(newElement)
+      this.setNewNames(newElement);
+    else
+      newElement = this.createNewElement({ type: this.currentAddQuestionType });
     this.clickToolboxItem(newElement);
   }
-  createIActionBarItemByClass(className: string): Action {
+  createIActionBarItemByClass(className: string, title: string = null): Action {
     return new Action({
-      title: this.getLocString("qt." + className),
+      title: title || this.getLocString("qt." + className),
       id: className,
       iconName: "icon-" + className
     });
@@ -2514,6 +2568,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: true }) showPageNavigator;
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
+  @property({ defaultValue: false }) isMobileView;
   selectFromStringEditor: boolean;
 }
 
@@ -2617,7 +2672,7 @@ export function getItemValueWrapperComponentData(
 }
 export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
-  return !parentIsMatrix&& (!element.isContentElement || element.isEditableTemplateElement);
+  return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;

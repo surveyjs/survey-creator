@@ -461,3 +461,36 @@ QUnit.test("SurveyPropertyEditor - onPropertyEditorUpdate", function (assert) {
   assert.equal(newPropEditor.inputType, "number", "It is number now");
   Survey.Serializer.removeProperty("text", "testInputType");
 });
+QUnit.test("DependedOn properties, koVisible for arrays properties", function (assert) {
+  Survey.Serializer.addProperty("dropdown", {
+    name: "customProp1",
+    dependsOn: ["choices"],
+    visibleIf: function (obj) {
+      return obj.choices.length > 3;
+    },
+  });
+  const question = new Survey.QuestionDropdown("q1");
+  question.choices = [1, 2, 3];
+  const editor = new SurveyElementEditorOldTableContentModel(
+    question,
+    "",
+    new EditorOptionsTests()
+  );
+  const custPropEditor = editor.getPropertyEditorByName("customProp1");
+  const choicesPropEditor = editor.getPropertyEditorByName("choices");
+  const itemValuesEditor = <SurveyPropertyItemValuesEditor>choicesPropEditor.editor;
+
+  assert.equal(custPropEditor.koVisible(), false, "It is invisible by default");
+  assert.equal(question.choices.length, 3, "There are 3 choices by default");
+  itemValuesEditor.onAddClick();
+  assert.equal(question.choices.length, 4, "There are 4 choices now");
+  assert.equal(custPropEditor.koVisible(), true, "It is visible now");
+  const itemViewModel = itemValuesEditor.createItemViewModel(
+    question.choices[1]
+  );
+  itemValuesEditor.onDeleteClick(itemViewModel);
+  assert.equal(question.choices.length, 3, "There are 3 choices again");
+  assert.equal(custPropEditor.koVisible(), false, "It is visible again");
+
+  Survey.Serializer.removeProperty("dropdown", "customProp1");
+});
