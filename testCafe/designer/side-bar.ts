@@ -41,10 +41,10 @@ test("collapse/expand buttons", async (t) => {
     .click(collapseButtonSelector)
     .click(getTabbedMenuItemByText("Translation"))
     .expect(collapseButtonSelector.visible).notOk()
-    .expect(expandButtonSelector.nth(1).visible).ok()
+    .expect(expandButtonSelector.visible).ok()
     .expect(propertyGridSelector.visible).notOk()
 
-    .click(expandButtonSelector.nth(1))
+    .click(expandButtonSelector)
     .expect(collapseButtonSelector.visible).ok()
     .expect(expandButtonSelector.visible).notOk()
     .expect(propertyGridSelector.visible).ok()
