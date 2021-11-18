@@ -55,6 +55,9 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
         this.updatePropertyGridTabCaption();
       }
       if (options.name === "toolboxLocation") {
+        if (this.toolboxTab.visible && options.newVal !== "insideSideBar") {
+          this.propertyGridTab.visible = true;
+        }
         this.toolboxTab.visible = options.newVal === "insideSideBar";
       }
     });

@@ -14,7 +14,7 @@ import {
   Serializer,
   SurveyModel
 } from "survey-core";
-import { CreatorBase } from "./creator-base";
+import { CreatorBase, toolBoxLocationType } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
 import { DragOrClickHelper } from "./utils/dragOrClickHelper";
 
@@ -180,7 +180,6 @@ export class QuestionToolbox
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
   @property({ defaultValue: false }) isCompact: boolean;
-  @property({ defaultValue: true }) visible: boolean;
 
   constructor(
     supportedQuestions: Array<string> = null,
@@ -198,17 +197,6 @@ export class QuestionToolbox
     this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
       this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
     };
-    if (!!this.creator) {
-      this.creator.onPropertyChanged.add((sender, options) => {
-        if (options.name === "toolboxLocation") {
-          this.visible = this.creator.toolboxLocation !== "insideSideBar";
-          if (this.visible) {
-            this.dotsItemPopupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
-            this.updateIsCompact();
-          }
-        }
-      });
-    }
   }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<any> = this.categories;
@@ -217,14 +205,14 @@ export class QuestionToolbox
       category.collapsed = category.name !== newValue;
     }
   }
-  public updateIsCompact(newVal?: boolean) {
-    if (!!this.creator && this.creator.toolboxLocation == "right" && this.creator.showPropertyGrid) {
-      this.isCompact = true;
-      return;
-    } else if (newVal != undefined && newVal != null) {
-      this.isCompact = newVal;
+  public setLocation(toolboxLocation: toolBoxLocationType) {
+    if (toolboxLocation === "insideSideBar") {
+      this.visibleActions.forEach((item) => (item.mode = "small"));
+    } else {
+      this.dotsItemPopupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
     }
   }
+
   /**
    * The Array of Toolbox items as Text JSON.
    */

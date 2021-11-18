@@ -7,13 +7,13 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   private widthUpdater: ComputedUpdater;
   private checkNewPageHandler: (sender: SurveyModel, options: any) => void;
   private surveyOnPropertyChanged: (sender: SurveyModel, options: any) => void;
-  
+
   @property() newPage: PageModel;
   @property({ defaultValue: false }) showNewPage: boolean;
   @property() pageCount: number;
   @property() withModifier: string;
   public creator: CreatorBase<T>;
-  
+
   private createNewPage() {
     const newPage: PageModel = this.survey.createNewPage("");
     this.creator.setNewNames(newPage);
@@ -45,6 +45,9 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   }
   get survey() {
     return this.creator.survey;
+  }
+  public get isToolboxVisible(): boolean {
+    return this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left";
   }
   public initSurvey() {
     if (!this.survey) return;

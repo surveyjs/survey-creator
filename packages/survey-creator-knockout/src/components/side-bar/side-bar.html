@@ -1,6 +1,5 @@
 <!-- ko using: model -->
-<!-- ko if: hasVisibleTabs -->
-<div class="svc-side-bar" data-bind="css: { 'svc-flyout-side-bar' : flyoutPanelMode }">
+<div class="svc-side-bar" data-bind="css: { 'svc-flyout-side-bar' : flyoutPanelMode }, visible: hasVisibleTabs">
   <div class="svc-side-bar__shadow"></div>
   <div class="svc-flex-column svc-side-bar__wrapper">
     <div class="svc-side-bar__container" data-bind="visible: visible">
@@ -24,5 +23,4 @@
     </div>
   </div>
 </div>
-<!-- /ko -->
 <!-- /ko -->

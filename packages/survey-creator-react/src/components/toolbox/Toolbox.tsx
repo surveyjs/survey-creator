@@ -30,7 +30,7 @@ export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> 
         <div className="svc-toolbox__container">
           {(this.toolbox.categories.length == 1) ?
             (<div className="svc-toolbox__category">
-              {this.renderItems(this.toolbox.renderedActions)}
+              {this.renderItems(this.toolbox.visibleActions)}
             </div>)
             : this.renderCategories()
           }

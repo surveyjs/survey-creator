@@ -3,6 +3,7 @@ import "./responsivity.scss";
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
+  private prevToolboxLocation;
   private screenWidth: { [key: string]: number } = {
     "xxl": 1920,
     "xl": 1280,
@@ -34,6 +35,7 @@ export class CreatorResponsivityManager {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.container.parentElement);
+      this.prevToolboxLocation = this.creator.toolboxLocation;
       this.process();
       if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
         this.creator.showPropertyGrid = false;
@@ -42,8 +44,13 @@ export class CreatorResponsivityManager {
   }
 
   private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSideBar: boolean) {
-    this.creator.toolbox.updateIsCompact(toolboxIsCompact);
-    this.creator.toolbox.visible = toolboxVisible;
+    this.creator.updateToolboxIsCompact(toolboxIsCompact);
+    if (toolboxVisible && this.creator.toolboxLocation === "none") {
+      this.creator.toolboxLocation = this.prevToolboxLocation;
+    } else if (!toolboxVisible && this.creator.toolboxLocation !== "none") {
+      this.prevToolboxLocation = this.creator.toolboxLocation;
+      this.creator.toolboxLocation = "none";
+    }
     this.creator.showPageNavigator = toolboxVisible;
     this.creator.sideBar.flyoutMode = flyoutSideBar;
   }

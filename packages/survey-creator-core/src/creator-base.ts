@@ -90,6 +90,8 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
   }
 }
 
+export type toolBoxLocationType = "left" | "right" | "insideSideBar" | "none";
+
 /**
  * Base class for Survey Creator.
  */
@@ -861,10 +863,19 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.patchMetadata();
     this.initSurveyWithJSON(JSON.parse(CreatorBase.defaultNewSurveyText), false);
     this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this);
-    this.toolbox.updateIsCompact();
+    this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
   }
+  public updateToolboxIsCompact(newVal?: boolean) {
+    if (this.toolboxLocation == "right" && this.showPropertyGrid) {
+      this.toolbox.isCompact = true;
+      return;
+    } else if (newVal != undefined && newVal != null) {
+      this.toolbox.isCompact = newVal;
+    }
+  }
+
   onSurveyElementPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
     throw new Error("Method not implemented.");
   }
@@ -897,7 +908,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     if (this.showPropertyGrid === val) return;
     this.showPropertyGridValue = val;
-    this.toolbox.updateIsCompact(val);
+    this.updateToolboxIsCompact(val);
     this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
   }
   public rightContainerActiveItem(name: string) {
@@ -1193,7 +1204,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       propertyName
     );
     let parentObj, parentProperty: Survey.JsonObjectProperty;
-    if(obj instanceof ItemValue) {
+    if (obj instanceof ItemValue) {
       parentObj = obj.locOwner;
       parentProperty = Survey.Serializer.findProperty(
         parentObj.getType(),
@@ -1201,10 +1212,10 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       );
 
       const allowQuestionOperations = this.getElementAllowOperations(parentObj);
-      if(allowQuestionOperations.allowEdit === false)
+      if (allowQuestionOperations.allowEdit === false)
         return false;
 
-      const options :ICollectionItemAllowOperations = { allowDelete: true, allowEdit: true };
+      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: true };
       this.onCollectionItemAllowingCallback(parentObj,
         property,
         parentObj.getPropertyValue(parentProperty.name),
@@ -1215,7 +1226,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         return false;
       }
 
-      if(this.onIsPropertyReadOnlyCallback(
+      if (this.onIsPropertyReadOnlyCallback(
         parentObj,
         parentProperty,
         parentProperty.readOnly,
@@ -1225,9 +1236,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         return false;
       }
     }
-    if(obj instanceof SurveyElement) {
+    if (obj instanceof SurveyElement) {
       const allowElementOperations = this.getElementAllowOperations(obj);
-      if(allowElementOperations.allowEdit === false)
+      if (allowElementOperations.allowEdit === false)
         return false;
     }
     return (
@@ -1907,7 +1918,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sideBar.getTabById("propertyGrid"); 
+    const propertyGridTab = this.sideBar.getTabById("propertyGrid");
     if (!propertyGridTab) return null;
     return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
@@ -2557,7 +2568,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
   @property({ defaultValue: false }) isMobileView;
-  @property({ defaultValue: "left" }) toolboxLocation: "left"| "right" | "insideSideBar";
+  @property({
+    defaultValue: "left", onSet: (newValue, target: CreatorBase<T>) => {
+      target.toolbox.setLocation(newValue);
+      target.updateToolboxIsCompact();
+    }
+  }) toolboxLocation: toolBoxLocationType;
   @property({ defaultValue: "right" }) sideBarLocation: "left" | "right";
   selectFromStringEditor: boolean;
 }

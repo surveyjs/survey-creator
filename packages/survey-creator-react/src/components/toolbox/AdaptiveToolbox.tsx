@@ -29,7 +29,7 @@ export class AdaptiveToolbox extends Toolbox {
     super.componentWillUnmount();
   }
   render(): JSX.Element {
-    if (!this.toolbox.hasActions || !this.toolbox.visible) return null;
+    if (!this.toolbox.hasActions) return null;
 
     const className = "svc-toolbox" + (this.toolbox.isCompact ? " svc-toolbox--compact" : "");
     return (
