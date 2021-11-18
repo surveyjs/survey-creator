@@ -13,8 +13,7 @@ export class CreatorResponsivityManager {
   private getScreenWidth(): string {
     let res;
     Object.keys(this.screenWidth).forEach((mode: string) => {
-      if (!res && this.container && !!this.screenWidth[mode] && this.container.offsetWidth >= this.screenWidth[mode] 
-        && this.container.offsetWidth >= this.screenWidth[mode]) {
+      if (!res && this.container && !!this.screenWidth[mode] && this.container.offsetWidth >= this.screenWidth[mode]) {
         res = mode;
       }
     });
