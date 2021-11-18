@@ -38,7 +38,7 @@ export class SideBarModel extends Base {
     return this.tabs.filter(tab => tab.id === id)[0];
   }
 
-  private createHideAction() {
+  private createActions() {
     if (settings.propertyGrid.allowCollapse) {
       this._collapseAction = new Action({
         id: "svd-grid-hide",
@@ -55,6 +55,24 @@ export class SideBarModel extends Base {
         }
       });
       this.toolbar.actions.push(this._collapseAction);
+
+      this._expandAction = new Action({
+        id: "svd-grid-expand",
+        iconName: "icon-expand_20x20",
+        css: "svd-grid-expand",
+        action: () => {
+          if (this.expandAction)
+            this.expandAction();
+          else
+            this.visible = true;
+        },
+        title: getLocString("ed.showPanel"),
+        visible: <any>new ComputedUpdater<boolean>(() => {
+          const visible = !this.visible;
+          return this.hasVisibleTabs && visible;
+        }),
+        showTitle: false
+      });
     }
   }
 
@@ -72,22 +90,10 @@ export class SideBarModel extends Base {
       this.onPropertyGridVisibilityChanged
     );
     this.visible = this.creator.showPropertyGrid;
-    this.createHideAction();
+    this.createActions();
   }
-  public createExpandAction() {
-    this._expandAction = new Action({
-      id: "svd-grid-expand",
-      iconName: "icon-expand_20x20",
-      css: "svd-grid-expand",
-      action: () => {
-        if (this.expandAction)
-          this.expandAction();
-        else
-          this.visible = true;
-      },
-      title: getLocString("ed.showPanel"),
-      showTitle: false
-    });
+
+  public getExpandAction() {
     return this._expandAction;
   }
   public closePropertyGrid() {

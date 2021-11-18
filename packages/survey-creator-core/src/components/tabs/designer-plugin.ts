@@ -13,7 +13,6 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   private toolboxTab: SideBarTabModel;
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
-  private expandAction: Action;
   public previewAction: Action;
 
   private get isSurveySelected(): boolean {
@@ -37,8 +36,8 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       const result = [];
       if (!!this.propertyGrid.prevSelectionAction) {
         this.propertyGrid.prevSelectionAction.visible = this.createVisibleUpdater();
-        result.push(this.propertyGrid.prevSelectionAction)
-      };
+        result.push(this.propertyGrid.prevSelectionAction);
+      }
       if (!!this.propertyGrid.nextSelectionAction) {
         this.propertyGrid.nextSelectionAction.visible = this.createVisibleUpdater();
         result.push(this.propertyGrid.nextSelectionAction);
@@ -110,7 +109,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       }),
       title: "Toolbox",
       showTitle: false
-    })
+    });
 
     this.surveySettingsAction = new Action({
       id: "svd-settings",
@@ -167,14 +166,6 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     items.push(this.saveSurveyAction);
     items.push(toolboxAction);
     items.push(this.surveySettingsAction);
-    if (settings.propertyGrid.allowCollapse) {
-      this.expandAction = this.creator.sideBar.createExpandAction();
-      this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        const propertyGridVisible = this.creator.sideBar.visible;
-        return this.creator.activeTab === "designer" && !propertyGridVisible;
-      })
-      items.push(this.expandAction);
-    }
     this.creator.onSelectedElementChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });

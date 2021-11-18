@@ -11,7 +11,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private mergeLocaleWithDefaultAction: Action;
   private importCsvAction: Action;
   private exportCsvAction: Action;
-  private expandAction: Action;
   private inputFileElement: HTMLInputElement;
   private pagePopupModel: PopupModel;
   private sideBarTab: SideBarTabModel;
@@ -42,7 +41,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterPageAction.visible = true;
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
-    this.expandAction && (this.expandAction.visible = !this.creator.sideBar.visible);
 
     this.pagePopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
@@ -76,7 +74,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
-    this.expandAction && (this.expandAction.visible = false);
 
     return true;
   }
@@ -192,14 +189,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.exportCsvAction);
 
-    if (settings.propertyGrid.allowCollapse) {
-      this.expandAction = this.creator.sideBar.createExpandAction();
-      this.expandAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        const propertyGridVisible = this.creator.sideBar.visible;
-        return this.creator.activeTab === "translation" && !propertyGridVisible;
-      });
-      items.push(this.expandAction);
-    }
     return items;
   }
 

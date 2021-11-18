@@ -866,6 +866,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
+    this.toolbar.actions.push(this.sideBar.getExpandAction());
   }
   public updateToolboxIsCompact(newVal?: boolean) {
     if (this.toolboxLocation == "right" && this.showPropertyGrid) {
