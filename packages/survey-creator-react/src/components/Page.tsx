@@ -25,7 +25,7 @@ interface ICreatorSurveyPageComponentProps {
 export class CreatorSurveyPageComponent extends SurveyElementBase<
   ICreatorSurveyPageComponentProps,
   any
-  > {
+> {
   private model: PageViewModel<SurveyModel>;
   private rootRef: React.RefObject<HTMLDivElement>;
   private propertyPageFunc: (sender: Base, options: any) => void;
@@ -91,6 +91,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
           </span>
 
           {attachKey2click(<button
+            type="button"
             onClick={(e) => {
               e.stopPropagation();
               questionTypeSelectorModel.action();
