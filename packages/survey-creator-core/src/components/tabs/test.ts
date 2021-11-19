@@ -1,7 +1,7 @@
 import { SurveySimulatorModel } from "../simulator";
 
 import "./test.scss";
-import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater } from "survey-core";
+import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 
@@ -80,6 +80,7 @@ export class TestSurveyTabViewModel extends Base {
       }
     }
     this.simulator.survey = this.surveyProvider.createSurvey(json || {}, "test");
+    this.simulator.survey.css = defaultV2Css;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
