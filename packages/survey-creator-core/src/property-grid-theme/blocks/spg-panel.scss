@@ -50,3 +50,8 @@
     margin-top: calcSize(2);
   }
 }
+.sv-mobile-side-bar {
+  .spg-panel__content {
+    padding: 0 calcSize(2) calcSize(5);
+  }
+}
