@@ -3,6 +3,7 @@ import "./responsivity.scss";
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
+  private prevToolboxLocation;
   private screenWidth: { [key: string]: number } = {
     "xxl": 1800,
     "xl": 1500,
@@ -34,6 +35,7 @@ export class CreatorResponsivityManager {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.container.parentElement);
+      this.prevToolboxLocation = this.creator.toolboxLocation;
       this.process();
       if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
         this.creator.showPropertyGrid = false;
@@ -41,11 +43,16 @@ export class CreatorResponsivityManager {
     }
   }
 
-  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutTabPanel: boolean) {
-    this.creator.toolbox.isCompact = toolboxIsCompact;
-    this.creator.toolbox.visible = toolboxVisible;
+  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSideBar: boolean) {
+    this.creator.updateToolboxIsCompact(toolboxIsCompact);
+    if (toolboxVisible && this.creator.toolboxLocation === "hidden") {
+      this.creator.toolboxLocation = this.prevToolboxLocation;
+    } else if (!toolboxVisible && this.creator.toolboxLocation !== "hidden") {
+      this.prevToolboxLocation = this.creator.toolboxLocation;
+      this.creator.toolboxLocation = "hidden";
+    }
     this.creator.showPageNavigator = toolboxVisible;
-    this.creator.currentTabPropertyGrid && (this.creator.currentTabPropertyGrid.flyoutMode = flyoutTabPanel);
+    this.creator.sideBar.flyoutMode = flyoutSideBar;
   }
   process() {
     this.currentWidth = this.getScreenWidth();

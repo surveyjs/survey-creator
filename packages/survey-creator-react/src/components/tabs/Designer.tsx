@@ -71,11 +71,9 @@ export class TabDesignerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div className="svc-flex-column">
-          {ReactElementFactory.Instance.createElement("svc-toolbox", {
-            creator: this.creator
-          })}
+          {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-adaptive-toolbox", { model: this.creator }) : null}
         </div>
-        <div className={"svc-tab-designer " + survey.css.root}>
+        <div className={designerTabClassName}>
           <div className={this.model.getDesignerCss()}>
             {!this.creator.allowEditSurveyTitle ? null :
               <div

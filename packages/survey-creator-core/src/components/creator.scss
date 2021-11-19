@@ -48,6 +48,10 @@ survey-creator,
   position: relative;
 }
 
+.svc-creator__toolbox--right.svc-creator-tab {
+  flex-direction: row-reverse;
+}
+
 .svc-creator-tab__content {
   position: relative;
   width: 100%;
@@ -77,6 +81,19 @@ survey-creator,
   line-height: calcSize(4);
   background-color: $secondary;
   text-align: center;
+}
+
+.svc-item__banner {
+  position: absolute;
+  top: 0;
+  max-width: 0;
+  overflow: hidden;
+  height: 100%;
+  background-color: $background;
+  /* Shadow / Medium */
+  border-radius: calcSize(12.5);
+  box-shadow: 0px 2px 6px $shadow-medium;
+  transition: max-width 0.1s ease-in-out, padding 0.2s ease-in-out;
 }
 
 .svc-creator__non-commercial-text {

@@ -22,7 +22,8 @@ import {
   ReactQuestionFactory,
   Model,
   SurveyElementBase,
-  SurveyLocStringViewer
+  SurveyLocStringViewer,
+  Survey
 } from "survey-react-ui";
 import {
   ICreatorOptions,
@@ -74,6 +75,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const creatorClassName = "svc-creator" + (this.props.creator.isMobileView ? " svc-creator--mobile" : "");
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
+    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__property-panel--" + this.creator.sideBarLocation);
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
       licenseBanner = (
@@ -90,7 +92,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return (
       <div className={creatorClassName} ref={this.rootNode}>
         <div className="svc-full-container svc-creator__area svc-flex-column">
-          <div className="svc-flex-row svc-full-container">
+          <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
               <div className="svc-top-bar">
                 {(creator.showTabs ?
@@ -116,7 +118,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                   : null)}
               </div>
             </div>
-            {this.renderPropertyGrid()}
+            {this.renderSideBar()}
           </div>
           {licenseBanner}
           <NotifierComponent
@@ -148,22 +150,23 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         survey: creator.survey,
         data: tab.data.model
       });
+    const className = "svc-creator-tab" + (creator.toolboxLocation == "right" ? " svc-creator__toolbox--right" : "");
     return (
       <div
         key={tab.id}
         id={"scrollableDiv-" + tab.id}
-        className="svc-creator-tab"
+        className={className}
       >
         {component}
       </div>
     );
   }
-  renderPropertyGrid() {
-    if (!!this.creator.currentTabPropertyGrid) {
-      const className = this.creator.isMobileView ? "sv-mobile-property-panel" : "";
+  renderSideBar() {
+    if (!!this.creator.sideBar) {
+      const className = this.creator.isMobileView ? "sv-mobile-side-bar" : "";
       return (
         <div className={className}>
-          {ReactElementFactory.Instance.createElement("svc-property-panel", { model: this.creator.currentTabPropertyGrid })}
+          {ReactElementFactory.Instance.createElement("svc-side-bar", { model: this.creator.sideBar })}
         </div>);
     } else {
       return null;
@@ -285,3 +288,7 @@ export class SurveyCreator extends CreatorBase<SurveyModel> {
     return this.survey.questionErrorLocation;
   }
 }
+
+ReactElementFactory.Instance.registerElement("survey-widget", (props) => {
+  return React.createElement(Survey, props);
+});

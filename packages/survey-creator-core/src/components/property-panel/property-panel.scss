@@ -1,44 +1,5 @@
 @import "../../variables.scss";
 
-.svc-property-panel {
-  display: block;
-  font-family: $font-family;
-  min-width: 370px;
-  max-width: calcSize(118);
-  width: 450px;
-  height: 100%;
-}
-
-.svc-property-panel .svc-resizer {
-  width: 3px;
-  height: 100%;
-  position: absolute;
-  background-color: transparent;
-  cursor: e-resize;
-}
-
-.svc-property-panel__header {
-  background: $background;
-  box-shadow: inset 0px -1px 0px $primary;
-  border-bottom: 1px solid $primary;
-  text-align: right;
-  line-height: calcSize(3);
-  padding: calcSize(1.5) calcSize(3);
-  display: flex;
-}
-
-.svc-property-panel__expander {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  height: calc(100% - calc(8 * #{$base-unit}));
-  overflow-y: auto;
-}
-
-.svc-property-panel-close {
-  display: none;
-}
-
 .svc-property-panel__group {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -74,29 +35,4 @@
   color: $foreground;
   font-weight: 600;
   background-color: $background;
-}
-
-.svc-property-panel__container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  padding: 0px calcSize(2) calcSize(3);
-  box-sizing: border-box;
-  background: $background-dim;
-  box-shadow: inset 0px -1px 0px $border;
-}
-
-.svc-property-panel__title {
-  display: none;
-}
-
-.svc-property-panel__actions {
-  width: 100%;
-  margin-left: initial;
-  flex-grow: 0;
-  padding: 0;
-  .sv-action-bar {
-    padding: 0;
-  }
 }

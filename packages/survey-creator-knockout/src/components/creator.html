@@ -1,6 +1,6 @@
 <div class="svc-creator" data-bind="css: {'svc-creator--mobile' : creator.isMobileView }">
 <div class="svc-full-container svc-creator__area svc-flex-column">
-  <div class="svc-flex-row svc-full-container">
+  <div class="svc-flex-row svc-full-container" data-bind="css : { 'svc-creator__side-bar--left': creator.sideBarLocation == 'left' }">
     <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
       <div class="svc-top-bar">
         <div class="svc-tabbed-menu-wrapper" data-bind="visible: creator.showTabs">
@@ -18,7 +18,7 @@
         <div class="svc-creator__content-holder svc-flex-column">
           <!-- ko foreach: creator.tabs -->
           <!-- ko if: $parent.creator.viewType == id && ($data.visible === undefined || $data.visible) -->
-          <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv-' + id }">
+          <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv-' + id }, css: { 'svc-creator__toolbox--right': creator.toolboxLocation == 'right' }">
             <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
             <!-- /ko -->
           </div>
@@ -35,8 +35,8 @@
       </div>
       <!-- /ko -->
     </div>
-    <div data-bind="if: creator.currentTabPropertyGrid, css: { 'sv-mobile-property-panel': creator.isMobileView }">
-      <svc-property-panel params="model: creator.currentTabPropertyGrid"> </svc-property-panel>
+    <div data-bind="if: creator.sideBar, css: { 'sv-mobile-side-bar': creator.isMobileView }">
+      <svc-side-bar params="model: creator.sideBar"> </svc-side-bar>
     </div>
   </div>
   <!-- ko ifnot: creator.haveCommercialLicense -->

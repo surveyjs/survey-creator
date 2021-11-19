@@ -1,3 +1,4 @@
+import { toolBoxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
 import { CreatorTester } from "./creator-tester";
 
@@ -48,33 +49,33 @@ test("CreatorResponsivityManager process", (): any => {
   const container: SimpleContainer = new SimpleContainer({});
   const creator = new CreatorTester();
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
-  const checkByWidth = (newOffsetWidth: number, toolboxVisible: boolean, toolboxIsCompact: boolean, propertyGridFlyoutMode: boolean, showPageNavigator: boolean) => {
+  const checkByWidth = (newOffsetWidth: number, toolboxLocation: toolBoxLocationType, toolboxIsCompact: boolean, propertyGridFlyoutMode: boolean, showPageNavigator: boolean) => {
     container.offsetWidth = newOffsetWidth;
     responsivityManager.process();
-    expect(creator.toolbox.visible).toEqual(toolboxVisible);
+    expect(creator.toolboxLocation).toEqual(toolboxLocation);
     expect(creator.toolbox.isCompact).toEqual(toolboxIsCompact);
     expect(creator.showPageNavigator).toEqual(showPageNavigator);
-    expect(creator.currentTabPropertyGrid.flyoutMode).toEqual(propertyGridFlyoutMode);
+    expect(creator.sideBar.flyoutMode).toEqual(propertyGridFlyoutMode);
   };
 
-  expect(creator.toolbox.visible).toBeTruthy();
+  expect(creator.toolboxLocation).toEqual("left");
   expect(creator.toolbox.isCompact).toBeFalsy();
 
-  checkByWidth(2000, true, false, false, true);
-  checkByWidth(1801, true, false, false, true);
+  checkByWidth(2000, "left", false, false, true);
+  checkByWidth(1801, "left", false, false, true);
 
-  checkByWidth(1799, true, false, false, true);
-  checkByWidth(1501, true, false, false, true);
+  checkByWidth(1799, "left", false, false, true);
+  checkByWidth(1501, "left", false, false, true);
 
-  checkByWidth(1499, true, true, false, true);
-  checkByWidth(1201, true, true, false, true);
+  checkByWidth(1499, "left", true, false, true);
+  checkByWidth(1201, "left", true, false, true);
 
-  checkByWidth(1199, true, true, true, true);
-  checkByWidth(901, true, true, true, true);
+  checkByWidth(1199, "left", true, true, true);
+  checkByWidth(901, "left", true, true, true);
 
-  checkByWidth(899, false, true, true, false);
-  checkByWidth(601, false, true, true, false);
+  checkByWidth(899, "hidden", true, true, false);
+  checkByWidth(601, "hidden", true, true, false);
 
-  checkByWidth(599, false, true, true, false);
-  checkByWidth(200, false, true, true, false);
+  checkByWidth(599, "hidden", true, true, false);
+  checkByWidth(200, "hidden", true, true, false);
 });

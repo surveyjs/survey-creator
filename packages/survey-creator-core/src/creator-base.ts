@@ -48,10 +48,10 @@ import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
 import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/undo-redo";
-import { PropertyGridViewModelBase } from "./property-grid/property-grid-view-model";
-import { TabDesignerPlugin } from "./components/tabs/designer";
+import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
+import { SideBarModel } from "./components/side-bar/side-bar-model";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -69,7 +69,6 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   model: Base;
-  propertyGrid?: PropertyGridViewModelBase;
 }
 
 export interface ITabbedMenuItem extends IAction {
@@ -90,6 +89,8 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     this.minVisibleItemsCount = 1;
   }
 }
+
+export type toolBoxLocationType = "left" | "right" | "insideSideBar" | "hidden";
 
 /**
  * Base class for Survey Creator.
@@ -842,12 +843,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
-  public get currentTabPropertyGrid(): PropertyGridViewModelBase {
-    return this.getTabPropertyGrid(this.activeTab);
-  }
-  public getTabPropertyGrid(id: string): PropertyGridViewModelBase {
-    return this.getPlugin(id).propertyGrid || null;
-  }
+  public sideBar: SideBarModel;
 
   constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
     super();
@@ -857,28 +853,30 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.options instanceof String
     ) {
       this.options = !!options2 ? options2 : {};
-      SurveyHelper.warnText(
-        "Creator constructor has one parameter, as creator options, in V2."
-      );
+      SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     this.toolbarValue = new ActionContainer();
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
+    this.sideBar = new SideBarModel(this);
     this.setOptions(this.options);
     this.patchMetadata();
-    this.initSurveyWithJSON(
-      JSON.parse(CreatorBase.defaultNewSurveyText),
-      false
-    );
+    this.initSurveyWithJSON(JSON.parse(CreatorBase.defaultNewSurveyText), false);
+    this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this);
+    this.updateToolboxIsCompact();
     this.initTabs();
-    this.toolbox = new QuestionToolbox(
-      this.options && this.options.questionTypes
-        ? this.options.questionTypes
-        : null,
-      this
-    );
     this.initDragDrop();
+    this.toolbar.actions.push(this.sideBar.getExpandAction());
   }
+  public updateToolboxIsCompact(newVal?: boolean) {
+    if (this.toolboxLocation == "right" && this.showPropertyGrid) {
+      this.toolbox.isCompact = true;
+      return;
+    } else if (newVal != undefined && newVal != null) {
+      this.toolbox.isCompact = newVal;
+    }
+  }
+
   onSurveyElementPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
     throw new Error("Method not implemented.");
   }
@@ -911,6 +909,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     if (this.showPropertyGrid === val) return;
     this.showPropertyGridValue = val;
+    this.updateToolboxIsCompact(val);
     this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
   }
   public rightContainerActiveItem(name: string) {
@@ -1206,7 +1205,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       propertyName
     );
     let parentObj, parentProperty: Survey.JsonObjectProperty;
-    if(obj instanceof ItemValue) {
+    if (obj instanceof ItemValue) {
       parentObj = obj.locOwner;
       parentProperty = Survey.Serializer.findProperty(
         parentObj.getType(),
@@ -1214,10 +1213,10 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       );
 
       const allowQuestionOperations = this.getElementAllowOperations(parentObj);
-      if(allowQuestionOperations.allowEdit === false)
+      if (allowQuestionOperations.allowEdit === false)
         return false;
 
-      const options :ICollectionItemAllowOperations = { allowDelete: true, allowEdit: true };
+      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: true };
       this.onCollectionItemAllowingCallback(parentObj,
         property,
         parentObj.getPropertyValue(parentProperty.name),
@@ -1228,7 +1227,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         return false;
       }
 
-      if(this.onIsPropertyReadOnlyCallback(
+      if (this.onIsPropertyReadOnlyCallback(
         parentObj,
         parentProperty,
         parentProperty.readOnly,
@@ -1238,9 +1237,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         return false;
       }
     }
-    if(obj instanceof SurveyElement) {
+    if (obj instanceof SurveyElement) {
       const allowElementOperations = this.getElementAllowOperations(obj);
-      if(allowElementOperations.allowEdit === false)
+      if (allowElementOperations.allowEdit === false)
         return false;
     }
     return (
@@ -1920,8 +1919,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const designerPlugin = this.getPlugin<TabDesignerPlugin<T>>("designer");
-    return designerPlugin ? (designerPlugin.propertyGrid.model as any as PropertyGridModel) : null;
+    const propertyGridTab = this.sideBar.getTabById("propertyGrid");
+    if (!propertyGridTab) return null;
+    return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
   /**
    * Collapse certain property editor tab (category) in properties panel/grid
@@ -2025,7 +2025,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
 
-      if(!propertyName) {
+      if (!propertyName) {
         propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
 
@@ -2508,7 +2508,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.currentAddQuestionType || "text",
       "q1"
     );
-    if(newElement)
+    if (newElement)
       this.setNewNames(newElement);
     else
       newElement = this.createNewElement({ type: this.currentAddQuestionType });
@@ -2570,6 +2570,13 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
   @property({ defaultValue: false }) isMobileView;
+  @property({
+    defaultValue: "left", onSet: (newValue, target: CreatorBase<T>) => {
+      target.toolbox.setLocation(newValue);
+      target.updateToolboxIsCompact();
+    }
+  }) toolboxLocation: toolBoxLocationType;
+  @property({ defaultValue: "right" }) sideBarLocation: "left" | "right";
   selectFromStringEditor: boolean;
 }
 
