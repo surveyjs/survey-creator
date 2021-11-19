@@ -53,8 +53,8 @@ svc-question {
   position: absolute;
   display: none;
   bottom: calcSize(2);
-  width: calc(100% - 10 * #{$base-unit});
-  left: calcSize(5);
+  width: calc(100% - 7 * #{$base-unit});
+  left: calcSize(4);
   .sv-action-bar-item {
     font-size: calcSize(1.5);
     font-weight: 600;
@@ -175,6 +175,7 @@ svc-question {
   .sv-action-bar {
     box-sizing: border-box;
     padding: 0;
+    justify-content: flex-end;
   }
 }
 
