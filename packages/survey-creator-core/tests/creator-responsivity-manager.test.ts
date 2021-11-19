@@ -73,9 +73,9 @@ test("CreatorResponsivityManager process", (): any => {
   checkByWidth(1199, "left", true, true, true);
   checkByWidth(901, "left", true, true, true);
 
-  checkByWidth(899, "none", true, true, false);
-  checkByWidth(601, "none", true, true, false);
+  checkByWidth(899, "hidden", true, true, false);
+  checkByWidth(601, "hidden", true, true, false);
 
-  checkByWidth(599, "none", true, true, false);
-  checkByWidth(200, "none", true, true, false);
+  checkByWidth(599, "hidden", true, true, false);
+  checkByWidth(200, "hidden", true, true, false);
 });

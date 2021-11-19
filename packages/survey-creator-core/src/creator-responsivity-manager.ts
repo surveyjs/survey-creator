@@ -45,11 +45,11 @@ export class CreatorResponsivityManager {
 
   private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSideBar: boolean) {
     this.creator.updateToolboxIsCompact(toolboxIsCompact);
-    if (toolboxVisible && this.creator.toolboxLocation === "none") {
+    if (toolboxVisible && this.creator.toolboxLocation === "hidden") {
       this.creator.toolboxLocation = this.prevToolboxLocation;
-    } else if (!toolboxVisible && this.creator.toolboxLocation !== "none") {
+    } else if (!toolboxVisible && this.creator.toolboxLocation !== "hidden") {
       this.prevToolboxLocation = this.creator.toolboxLocation;
-      this.creator.toolboxLocation = "none";
+      this.creator.toolboxLocation = "hidden";
     }
     this.creator.showPageNavigator = toolboxVisible;
     this.creator.sideBar.flyoutMode = flyoutSideBar;

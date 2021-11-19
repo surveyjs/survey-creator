@@ -90,7 +90,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
   }
 }
 
-export type toolBoxLocationType = "left" | "right" | "insideSideBar" | "none";
+export type toolBoxLocationType = "left" | "right" | "insideSideBar" | "hidden";
 
 /**
  * Base class for Survey Creator.
