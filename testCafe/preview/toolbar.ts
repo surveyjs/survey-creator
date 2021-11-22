@@ -72,11 +72,11 @@ test("Language switcher", async (t) => {
   await t
     .click(getTabbedMenuItemByText("Test Survey"))
     .expect(getBarItemByTitle("english").visible).ok()
-    .expect(Selector(".sv-title .sv-header__text").textContent).contains("My Survey")
+    .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("My Survey")
     .click(getBarItemByTitle("english"))
     .expect(getListItemByText("deutsch").visible).ok()
     .click(getListItemByText("deutsch"))
-    .expect(Selector(".sv-title .sv-header__text").textContent).contains("Meine Umfrage")
+    .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("Meine Umfrage")
     .expect(getBarItemByTitle("deutsch").visible).ok();
 });
 
@@ -85,19 +85,19 @@ test("Page switcher", async (t) => {
 
   await t
     .click(getTabbedMenuItemByText("Test Survey"))
-    .expect(Selector(".sv-question__title").withText("string_editor").visible).ok()
+    .expect(Selector(".sd-question__title").withText("string_editor").visible).ok()
     .expect(Selector("#pageSelector").textContent).contains("page1")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(true)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
 
     .click(Selector("#nextPage"))
-    .expect(Selector(".sv-question__title").withText("question1").visible).ok()
+    .expect(Selector(".sd-question__title").withText("question1").visible).ok()
     .expect(Selector("#pageSelector").textContent).contains("page2")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
 
     .click(Selector("#nextPage"))
-    .expect(Selector(".sv-question__title").withText("question2").visible).ok()
+    .expect(Selector(".sd-question__title").withText("question2").visible).ok()
     .expect(Selector("#pageSelector").textContent).contains("page3")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(true)
@@ -108,7 +108,7 @@ test("Page switcher", async (t) => {
     .expect(getListItemByText("page2").hasClass("sv-list__item--selected")).notOk()
     .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).ok()
     .click(getListItemByText("page2"))
-    .expect(Selector(".sv-question__title").withText("question1").visible).ok()
+    .expect(Selector(".sd-question__title").withText("question1").visible).ok()
     .expect(Selector("#pageSelector").textContent).contains("page2")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
@@ -130,7 +130,7 @@ test("Test Survey Again", async (t) => {
     .click(Selector("input[value='Complete']"))
     .expect(Selector("h3").withText("Thank you for completing the survey!").visible).ok()
     .click(getBarItemByTitle("Test Survey Again"))
-    .expect(Selector(".sv-question__title").withText("string_editor").visible).ok();
+    .expect(Selector(".sd-question__title").withText("string_editor").visible).ok();
 });
 
 test("Show invisible elements switcher", async (t) => {
@@ -139,10 +139,10 @@ test("Show invisible elements switcher", async (t) => {
 
   await t
     .click(getTabbedMenuItemByText("Test Survey"))
-    .expect(Selector(".sv-question__title").withText("string_editor").visible).ok()
+    .expect(Selector(".sd-question__title").withText("string_editor").visible).ok()
     .expect(switcher.visible).ok("Switcher is visible")
     .click(switcher)
-    .expect(Selector(".sv-question__title").withText("hidden_question").visible).ok();
+    .expect(Selector(".sd-question__title").withText("hidden_question").visible).ok();
 });
 
 test("Landscape switcher", async (t) => {
