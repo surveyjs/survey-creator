@@ -39,5 +39,5 @@ test("Set logo in designer, change it and check it in test tab", async (t) => {
   })();
   await t
     .click(Selector(".svc-tabbed-menu-item").withText(testTab))
-    .expect(Selector("img.sv-logo__image").exists).ok();
+    .expect(Selector("img.sd-logo__image").exists).ok();
 });
