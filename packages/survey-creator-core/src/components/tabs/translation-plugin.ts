@@ -1,4 +1,4 @@
-import { SurveyModel, PopupModel, ListModel, Action, IAction, ComputedUpdater } from "survey-core";
+import { SurveyModel, PopupModel, ListModel, Action, IAction, ComputedUpdater, JsonObjectProperty, Base } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { SideBarTabModel } from "../side-bar/side-bar-tab-model";
@@ -25,6 +25,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
+    this.model.translationStringVisibilityCallback = (obj: Base, prop: JsonObjectProperty, visible: boolean) => {
+      const options = { obj: obj, prop: prop, visible: visible };
+      !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(self, options);
+      return options.visible;
+    };
     this.sideBarTab.model = this.model.settingsSurvey;
     this.sideBarTab.componentName = "survey-widget";
     this.creator.sideBar.activeTab = this.sideBarTab.id;
@@ -61,6 +66,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
       }
     });
+
+    this.model.reset();
   }
   public update(): void {
     if (!this.model) return;

@@ -662,6 +662,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
   /**
    * This callback is used internally for providing survey JSON text.
    */
@@ -1261,9 +1264,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     parentObj: Survey.Base,
     parentProperty: Survey.JsonObjectProperty
   ): boolean {
-    var proposedValue = this.readOnly || readOnly;
+    const proposedValue = this.readOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
-    var options = {
+    const options = {
       obj: obj,
       property: property,
       readOnly: proposedValue,
@@ -2495,7 +2498,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return {
       iconName: "icon-dots",
       action: () => {
-        popupModel.displayMode = this.isMobileView ? "overlay":"popup";
+        popupModel.displayMode = this.isMobileView ? "overlay" : "popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel
