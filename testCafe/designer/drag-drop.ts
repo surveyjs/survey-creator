@@ -261,6 +261,7 @@ test("Drag Drop to Panel", async (t) => {
     });
 
   const expectedJson = {
+    logoPosition: "right",
     pages: [
       {
         name: "page1",
@@ -922,6 +923,7 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
     });
 
   let expectedJson = {
+    logoPosition: "right",
     pages: [
       {
         name: "page1",
@@ -983,6 +985,7 @@ test("Drag Drop from Panel Dynamic Question", async (t) => {
     });
 
   let expectedJson = {
+    logoPosition: "right",
     pages: [
       {
         name: "page1",
