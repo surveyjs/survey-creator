@@ -1826,3 +1826,36 @@ test("doClickQuestionCore", () => {
   expect(creator.survey.getAllQuestions()[4].startWithNewLine).toEqual(true);
   expect(creator.survey.getAllQuestions()[3].startWithNewLine).toEqual(false);
 });
+
+test("logoPosition set right", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.survey.logoPosition).toEqual("right");
+  creator.JSON = {
+    "logoPosition": "top",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.survey.logoPosition).toEqual("right");
+});
