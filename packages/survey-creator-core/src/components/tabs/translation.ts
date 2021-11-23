@@ -195,7 +195,7 @@ export interface ITranslationLocales {
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
   fireOnObjCreating(obj: Base);
   removeLocale(loc: string): void;
-  canShowProperty(obj: Base, prop: JsonObjectProperty): boolean;
+  canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -368,20 +368,12 @@ export class TranslationGroup extends TranslationItemBase {
     }
     return res;
   }
-  private createTranslationItem(
-    obj: any,
-    property: JsonObjectProperty
-  ): TranslationItem {
-    var defaultValue = this.getDefaultValue(obj, property);
-    var locStr = <LocalizableString>obj[property.serializationProperty];
+  private createTranslationItem(obj: any, property: JsonObjectProperty): TranslationItem {
+    const defaultValue = this.getDefaultValue(obj, property);
+    const locStr = <LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
-    if (
-      locStr.isEmpty &&
-      !!this.translation &&
-      !this.translation.canShowProperty(obj, property)
-    )
-      return null;
+    if (!!this.translation && !this.translation.canShowProperty(obj, property, locStr.isEmpty)) return null;
     return new TranslationItem(
       property.name,
       locStr,
@@ -488,6 +480,7 @@ export class Translation extends Base implements ITranslationLocales {
     value: string,
     context: any
   ) => void;
+  public translationStringVisibilityCallback: (obj: Base, propertyName: string, visible: boolean) => boolean;
   private surveyValue: SurveyModel;
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
@@ -643,7 +636,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.localesQuestion.value = locales;
   }
   private resetStringsSurvey() {
-    if(!this.hasUI) return;
+    if (!this.hasUI) return;
     this.stringsSurvey = this.createStringsSurvey();
     this.stringsHeaderSurvey = this.createStringsHeaderSurvey();
   }
@@ -870,10 +863,8 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private getMergeLocaleWithDefaultText(): string {
     if (!this.canMergeLocaleWithDefault) return "";
-    var locText = this.getLocaleName(this.defaultLocale);
-    return editorLocalization
-      .getString("ed.translationMergeLocaleWithDefault")
-      ["format"](locText);
+    const locText = this.getLocaleName(this.defaultLocale);
+    return editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"](locText);
   }
 
   public get survey(): SurveyModel {
@@ -895,8 +886,10 @@ export class Translation extends Base implements ITranslationLocales {
     this.updateLocales();
     this.resetStringsSurvey();
   }
-  public canShowProperty(obj: Base, prop: JsonObjectProperty): boolean {
-    return SurveyHelper.isPropertyVisible(obj, prop, this.options);
+
+  public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean {
+    const result = !isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options);
+    return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop.name, result) : result;
   }
   public get defaultLocale(): string {
     return surveyLocalization.defaultLocale;

@@ -663,6 +663,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
+   * Use this event to modify the list of the strings available in a translation tab.
+   * <br/> sender - the survey creator object that fires the event
+   * <br/> options.obj - the survey object which property translations are edited in the translation tab.
+   * <br/> options.propertyName - the name of the property.
+   * <br/> options.visible - a boolean value. You can change it to hide the property.
+   */
+  public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  /**
    * This callback is used internally for providing survey JSON text.
    */
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
@@ -1261,9 +1270,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     parentObj: Survey.Base,
     parentProperty: Survey.JsonObjectProperty
   ): boolean {
-    var proposedValue = this.readOnly || readOnly;
+    const proposedValue = this.readOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
-    var options = {
+    const options = {
       obj: obj,
       property: property,
       readOnly: proposedValue,
@@ -2495,7 +2504,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return {
       iconName: "icon-dots",
       action: () => {
-        popupModel.displayMode = this.isMobileView ? "overlay":"popup";
+        popupModel.displayMode = this.isMobileView ? "overlay" : "popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel
