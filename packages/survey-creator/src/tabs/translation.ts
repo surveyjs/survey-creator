@@ -12,12 +12,12 @@ var templateHtml = require("./translation.html");
 var groupTemplateHtml = require("./translation-group.html");
 
 export class TranslationItemBase {
-  constructor(public name: string) {}
+  constructor(public name: string) { }
   public get isGroup() {
     return false;
   }
-  public fillLocales(locales: Array<string>) {}
-  public mergeLocaleWithDefault(loc: string) {}
+  public fillLocales(locales: Array<string>) { }
+  public mergeLocaleWithDefault(loc: string) { }
 }
 
 export class TranslationItem extends TranslationItemBase {
@@ -119,7 +119,7 @@ export interface ITranslationLocales {
     context: any
   ) => void;
   translateItemAfterRender(item: TranslationItem, el: any, locale: string);
-  canShowProperty(obj: Survey.Base, prop: Survey.JsonObjectProperty): boolean;
+  canShowProperty(obj: Survey.Base, prop: Survey.JsonObjectProperty, isEmpty: boolean): boolean;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -315,21 +315,12 @@ export class TranslationGroup extends TranslationItemBase {
     }
     return res;
   }
-  private createTranslationItem(
-    obj: any,
-    property: Survey.JsonObjectProperty
-  ): TranslationItem {
-    var defaultValue = this.getDefaultValue(obj, property);
-    var locStr = <Survey.LocalizableString>obj[property.serializationProperty];
+  private createTranslationItem(obj: any, property: Survey.JsonObjectProperty): TranslationItem {
+    const defaultValue = this.getDefaultValue(obj, property);
+    const locStr = <Survey.LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
-    if (
-      locStr.isEmpty &&
-      !!this.translation &&
-      !!this.translation.canShowProperty &&
-      !this.translation.canShowProperty(this.obj, property)
-    )
-      return null;
+    if (!!this.translation && !!this.translation.canShowProperty && !this.translation.canShowProperty(this.obj, property, locStr.isEmpty)) return null;
     return new TranslationItem(
       property.name,
       locStr,
@@ -451,6 +442,7 @@ export class Translation implements ITranslationLocales {
     value: string,
     context: any
   ) => void;
+  public translationStringVisibilityCallback: (obj: Survey.Base, prop: Survey.JsonObjectProperty, visible: boolean) => boolean;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
 
@@ -464,10 +456,7 @@ export class Translation implements ITranslationLocales {
     survey: Survey.Survey,
     showAllStrings: boolean = false,
     public koReadOnly = ko.computed(() => false),
-    private onCanShowProperty?: (
-      obj: Survey.Base,
-      prop: Survey.JsonObjectProperty
-    ) => boolean
+    private onCanShowProperty?: (obj: Survey.Base, prop: Survey.JsonObjectProperty) => boolean
   ) {
     this.koLocales = ko.observableArray([
       {
@@ -486,9 +475,7 @@ export class Translation implements ITranslationLocales {
     this.koMergeLocaleWithDefaultText = ko.computed(function () {
       if (!this.koCanMergeLocaleWithDefault()) return "";
       var locText = this.getLocaleName(this.defaultLocale);
-      return editorLocalization
-        .getString("ed.translationMergeLocaleWithDefault")
-        ["format"](locText);
+      return editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"](locText);
     }, this);
     this.koFilteredPages = ko.observableArray([
       {
@@ -648,11 +635,9 @@ export class Translation implements ITranslationLocales {
   public get selectLanguageOptionsCaption() {
     return editorLocalization.getString("ed.translationAddLanguage");
   }
-  public canShowProperty(
-    obj: Survey.Base,
-    prop: Survey.JsonObjectProperty
-  ): boolean {
-    return !!this.onCanShowProperty ? this.onCanShowProperty(obj, prop) : true;
+  public canShowProperty(obj: Survey.Base, prop: Survey.JsonObjectProperty, isEmpty: boolean): boolean {
+    const result = !isEmpty || !this.onCanShowProperty || this.onCanShowProperty(obj, prop);
+    return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop, result) : result;
   }
   public get showAllStrings(): boolean {
     return this.koShowAllStrings();
@@ -870,62 +855,66 @@ export class Translation implements ITranslationLocales {
   }
 }
 
+export class TranslationViewModel {
+  public model: Translation;
+
+  constructor(creator: SurveyCreator) {
+    this.model = new Translation(
+      creator.survey,
+      false,
+      ko.computed(() => creator.readOnly),
+      (obj: Survey.Base, prop: Survey.JsonObjectProperty): boolean => {
+        return SurveyHelper.isPropertyVisible(obj, prop, creator);
+      }
+    );
+    this.model.translationStringVisibilityCallback = (obj: Survey.Base, prop: Survey.JsonObjectProperty, visible: boolean) => {
+      const options = { obj: obj, prop: prop, visible: visible };
+      !creator.onTranslationStringVisibility.isEmpty && creator.onTranslationStringVisibility.fire(self, options);
+      return options.visible;
+    };
+    this.model.importFinishedCallback = function () {
+      creator.onTranslationImported.fire(self, {});
+    };
+    this.model.translateItemAfterRenderCallback = function (item: TranslationItem, el: any, locale: string) {
+      if (creator.onTranslateItemAfterRender.isEmpty) return;
+      var options = {
+        item: item,
+        htmlElement: el,
+        locale: locale,
+        onDestroyCallback: undefined,
+      };
+      ko.utils.domNodeDisposal.addDisposeCallback(el, () => {
+        if (!!options.onDestroyCallback) {
+          options.onDestroyCallback();
+        }
+      });
+      creator.onTranslateItemAfterRender.fire(creator, options);
+    };
+    this.model.availableTranlationsChangedCallback = () => {
+      creator.setModified({ type: "TRANSLATIONS_CHANGED" });
+    };
+    this.model.tranlationChangedCallback = (locale: string, name: string, value: string, context: any) => {
+      creator.setModified({
+        type: "TRANSLATIONS_CHANGED",
+        locale,
+        name,
+        value,
+        context,
+      });
+    };
+    this.model.reset();
+  }
+}
+
 ko.components.register("survey-translation", {
   viewModel: {
     createViewModel: (params, componentInfo) => {
-      let creator: SurveyCreator = params.creator;
-
-      let model = new Translation(
-        creator.createSurvey({}, "translation"),
-        false,
-        ko.computed(() => creator.readOnly),
-        (obj: Survey.Base, prop: Survey.JsonObjectProperty): boolean => {
-          return SurveyHelper.isPropertyVisible(obj, prop, creator);
-        }
-      );
-      model.importFinishedCallback = function () {
-        creator.onTranslationImported.fire(self, {});
-      };
-      model.translateItemAfterRenderCallback = function (
-        item: TranslationItem,
-        el: any,
-        locale: string
-      ) {
-        if (creator.onTranslateItemAfterRender.isEmpty) return;
-        var options = {
-          item: item,
-          htmlElement: el,
-          locale: locale,
-          onDestroyCallback: undefined,
-        };
-        ko.utils.domNodeDisposal.addDisposeCallback(el, () => {
-          if (!!options.onDestroyCallback) {
-            options.onDestroyCallback();
-          }
-        });
-        creator.onTranslateItemAfterRender.fire(creator, options);
-      };
-      model.availableTranlationsChangedCallback = () => {
-        creator.setModified({ type: "TRANSLATIONS_CHANGED" });
-      };
-      model.tranlationChangedCallback = (
-        locale: string,
-        name: string,
-        value: string,
-        context: any
-      ) => {
-        creator.setModified({
-          type: "TRANSLATIONS_CHANGED",
-          locale,
-          name,
-          value,
-          context,
-        });
-      };
+      const creator: SurveyCreator = params.creator;
+      const viewModel = new TranslationViewModel(creator);
 
       var subscrViewType = creator.koViewType.subscribe((viewType) => {
         if (viewType === "translation") {
-          model.survey = creator.survey;
+          viewModel.model.survey = creator.survey;
         }
       });
 
@@ -935,8 +924,8 @@ ko.components.register("survey-translation", {
         creator.translation = undefined;
       });
 
-      creator.translation = model;
-      return model;
+      creator.translation = viewModel.model;
+      return viewModel.model;
     },
   },
   template: templateHtml,

@@ -17,8 +17,7 @@ export interface ICreatorOptions {
  * Base class for Survey Creator.
  */
 export class CreatorBase<T extends { [index: string]: any }>
-implements ISurveyCreatorOptions
-{
+implements ISurveyCreatorOptions {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);
@@ -248,6 +247,9 @@ implements ISurveyCreatorOptions
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
   /**
    * This callback is used internally for providing survey JSON text.
    */
@@ -411,7 +413,7 @@ implements ISurveyCreatorOptions
 
   koReadOnly = ko.observable(false);
 
-  protected onSetReadOnly(newVal: boolean) {}
+  protected onSetReadOnly(newVal: boolean) { }
 
   /**
    * A boolean property, false by default. Set it to true to deny editing.
@@ -468,7 +470,7 @@ implements ISurveyCreatorOptions
     return true;
   }
 
-  protected onViewTypeChanged(newType: string) {}
+  protected onViewTypeChanged(newType: string) { }
 
   protected canSwitchViewType(newType: string) {
     return true;
@@ -761,7 +763,7 @@ implements ISurveyCreatorOptions
     return survey;
   }
 
-  public setModified(options: any = null) {}
+  public setModified(options: any = null) { }
 
   protected convertCurrentObject(obj: Survey.Question, className: string) {
     this.startTransaction("Convert question to: " + className);
@@ -775,7 +777,7 @@ implements ISurveyCreatorOptions
     });
   }
 
-  protected initSurveyWithJSON(json: any, clearState: boolean) {}
+  protected initSurveyWithJSON(json: any, clearState: boolean) { }
 
   /**
    * The Survey JSON. Use it to get Survey JSON or change it.
@@ -973,7 +975,7 @@ implements ISurveyCreatorOptions
     }
   }
 
-  public selectElement(element: any) {}
+  public selectElement(element: any) { }
 
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
     var parent = obj["parent"];
@@ -1060,7 +1062,7 @@ implements ISurveyCreatorOptions
     }
     return true;
   }
-  protected doPropertyGridChanged() {}
+  protected doPropertyGridChanged() { }
 
   //implements ISurveyCreatorOptions
   get alwaySaveTextInPropertyEditors(): boolean {
@@ -1219,5 +1221,5 @@ implements ISurveyCreatorOptions
   protected startTransaction(name: string) {
 
   }
-  protected stopTransation() {}
+  protected stopTransation() { }
 }
