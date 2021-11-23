@@ -442,7 +442,7 @@ export class Translation implements ITranslationLocales {
     value: string,
     context: any
   ) => void;
-  public translationStringVisibilityCallback: (obj: Survey.Base, prop: Survey.JsonObjectProperty, visible: boolean) => boolean;
+  public translationStringVisibilityCallback: (obj: Survey.Base, propertyName: string, visible: boolean) => boolean;
   private rootValue: TranslationGroup;
   private surveyValue: Survey.Survey;
 
@@ -637,7 +637,7 @@ export class Translation implements ITranslationLocales {
   }
   public canShowProperty(obj: Survey.Base, prop: Survey.JsonObjectProperty, isEmpty: boolean): boolean {
     const result = !isEmpty || !this.onCanShowProperty || this.onCanShowProperty(obj, prop);
-    return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop, result) : result;
+    return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop.name, result) : result;
   }
   public get showAllStrings(): boolean {
     return this.koShowAllStrings();
@@ -867,8 +867,8 @@ export class TranslationViewModel {
         return SurveyHelper.isPropertyVisible(obj, prop, creator);
       }
     );
-    this.model.translationStringVisibilityCallback = (obj: Survey.Base, prop: Survey.JsonObjectProperty, visible: boolean) => {
-      const options = { obj: obj, prop: prop, visible: visible };
+    this.model.translationStringVisibilityCallback = (obj: Survey.Base, propertyName: string, visible: boolean) => {
+      const options = { obj: obj, propertyName: propertyName, visible: visible };
       !creator.onTranslationStringVisibility.isEmpty && creator.onTranslationStringVisibility.fire(self, options);
       return options.visible;
     };

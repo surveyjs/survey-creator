@@ -1,4 +1,4 @@
-import { SurveyModel, PopupModel, ListModel, Action, IAction, ComputedUpdater, JsonObjectProperty, Base } from "survey-core";
+import { SurveyModel, PopupModel, ListModel, Action, IAction, Base } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { SideBarTabModel } from "../side-bar/side-bar-tab-model";
@@ -25,8 +25,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
-    this.model.translationStringVisibilityCallback = (obj: Base, prop: JsonObjectProperty, visible: boolean) => {
-      const options = { obj: obj, prop: prop, visible: visible };
+    this.model.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean) => {
+      const options = { obj: obj, propertyName: propertyName, visible: visible };
       !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(self, options);
       return options.visible;
     };

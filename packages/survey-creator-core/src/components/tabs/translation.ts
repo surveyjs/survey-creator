@@ -480,7 +480,7 @@ export class Translation extends Base implements ITranslationLocales {
     value: string,
     context: any
   ) => void;
-  public translationStringVisibilityCallback: (obj: Base, prop: JsonObjectProperty, visible: boolean) => boolean;
+  public translationStringVisibilityCallback: (obj: Base, propertyName: string, visible: boolean) => boolean;
   private surveyValue: SurveyModel;
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
@@ -863,10 +863,8 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private getMergeLocaleWithDefaultText(): string {
     if (!this.canMergeLocaleWithDefault) return "";
-    var locText = this.getLocaleName(this.defaultLocale);
-    return editorLocalization
-      .getString("ed.translationMergeLocaleWithDefault")
-      ["format"](locText);
+    const locText = this.getLocaleName(this.defaultLocale);
+    return editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"](locText);
   }
 
   public get survey(): SurveyModel {
@@ -891,7 +889,7 @@ export class Translation extends Base implements ITranslationLocales {
 
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean {
     const result = !isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options);
-    return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop, result) : result;
+    return this.translationStringVisibilityCallback ? this.translationStringVisibilityCallback(obj, prop.name, result) : result;
   }
   public get defaultLocale(): string {
     return surveyLocalization.defaultLocale;

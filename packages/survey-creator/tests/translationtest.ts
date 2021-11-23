@@ -862,9 +862,9 @@ QUnit.test("translationStringVisibilityCallback", (assert) => {
   assert.equal(translation.root.groups[0].groups[0].items[0].name, "title");
   assert.equal(translation.root.groups[1].name, "page2");
 
-  translation.translationStringVisibilityCallback = (obj: Survey.Base, prop: Survey.JsonObjectProperty, visible: boolean) => {
-    if (obj.getType() == "survey" && prop.name === "title") return false;
-    if (obj["name"] === "question1" && prop.name === "title") return false;
+  translation.translationStringVisibilityCallback = (obj: Survey.Base, propertyName: string, visible: boolean) => {
+    if (obj.getType() == "survey" && propertyName === "title") return false;
+    if (obj["name"] === "question1" && propertyName === "title") return false;
     return true;
   };
   translation.reset();
@@ -880,9 +880,9 @@ QUnit.test("onTranslationStringVisibility", (assert) => {
   const creator = new SurveyCreator();
   creator.JSON = surveyJson;
   creator.onTranslationStringVisibility.add((sender, options) => {
-    if (options.obj.getType() == "survey" && options.prop.name === "title") {
+    if (options.obj.getType() == "survey" && options.propertyName === "title") {
       options.visible = false;
-    } else if (options.obj["name"] === "question1" && options.prop.name === "title") {
+    } else if (options.obj["name"] === "question1" && options.propertyName === "title") {
       options.visible = false;
     } else {
       options.visible = true;
