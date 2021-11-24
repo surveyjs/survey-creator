@@ -1,3 +1,4 @@
+import { toolBoxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
 import { CreatorTester } from "./creator-tester";
 
@@ -26,21 +27,21 @@ test("CreatorResponsivityManager getScreenWidth", (): any => {
   expect(responsivityManager["getScreenWidth"]()).toEqual("xxl");
 
   checkScreenWidth(2000, "xxl");
-  checkScreenWidth(1920, "xxl");
+  checkScreenWidth(1801, "xxl");
 
-  checkScreenWidth(1900, "xl");
-  checkScreenWidth(1280, "xl");
+  checkScreenWidth(1799, "xl");
+  checkScreenWidth(1501, "xl");
 
-  checkScreenWidth(1270, "l");
-  checkScreenWidth(960, "l");
+  checkScreenWidth(1499, "l");
+  checkScreenWidth(1201, "l");
 
-  checkScreenWidth(950, "m");
-  checkScreenWidth(768, "m");
+  checkScreenWidth(1199, "m");
+  checkScreenWidth(901, "m");
 
-  checkScreenWidth(750, "s");
-  checkScreenWidth(376, "s");
+  checkScreenWidth(899, "s");
+  checkScreenWidth(601, "s");
 
-  checkScreenWidth(360, "xs");
+  checkScreenWidth(599, "xs");
   checkScreenWidth(200, "xs");
 });
 
@@ -48,33 +49,33 @@ test("CreatorResponsivityManager process", (): any => {
   const container: SimpleContainer = new SimpleContainer({});
   const creator = new CreatorTester();
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
-  const checkByWidth = (newOffsetWidth: number, toolboxVisible: boolean, toolboxIsCompact: boolean, propertyGridFlyoutMode: boolean, showPageNavigator: boolean) => {
+  const checkByWidth = (newOffsetWidth: number, toolboxLocation: toolBoxLocationType, toolboxIsCompact: boolean, propertyGridFlyoutMode: boolean, showPageNavigator: boolean) => {
     container.offsetWidth = newOffsetWidth;
     responsivityManager.process();
-    expect(creator.toolbox.visible).toEqual(toolboxVisible);
+    expect(creator.toolboxLocation).toEqual(toolboxLocation);
     expect(creator.toolbox.isCompact).toEqual(toolboxIsCompact);
     expect(creator.showPageNavigator).toEqual(showPageNavigator);
-    expect(creator.currentTabPropertyGrid.flyoutMode).toEqual(propertyGridFlyoutMode);
+    expect(creator.sideBar.flyoutMode).toEqual(propertyGridFlyoutMode);
   };
 
-  expect(creator.toolbox.visible).toBeTruthy();
+  expect(creator.toolboxLocation).toEqual("left");
   expect(creator.toolbox.isCompact).toBeFalsy();
 
-  checkByWidth(1920, true, false, false, true);
-  checkByWidth(2000, true, false, false, true);
+  checkByWidth(2000, "left", false, false, true);
+  checkByWidth(1801, "left", false, false, true);
 
-  checkByWidth(1900, true, false, false, true);
-  checkByWidth(1280, true, false, false, true);
+  checkByWidth(1799, "left", false, false, true);
+  checkByWidth(1501, "left", false, false, true);
 
-  checkByWidth(1270, true, true, false, true);
-  checkByWidth(960, true, true, false, true);
+  checkByWidth(1499, "left", true, false, true);
+  checkByWidth(1201, "left", true, false, true);
 
-  checkByWidth(950, true, true, true, true);
-  checkByWidth(768, true, true, true, true);
+  checkByWidth(1199, "left", true, true, true);
+  checkByWidth(901, "left", true, true, true);
 
-  checkByWidth(750, false, true, true, false);
-  checkByWidth(376, false, true, true, false);
+  checkByWidth(899, "hidden", true, true, false);
+  checkByWidth(601, "hidden", true, true, false);
 
-  checkByWidth(360, false, true, true, false);
-  checkByWidth(200, false, true, true, false);
+  checkByWidth(599, "hidden", true, true, false);
+  checkByWidth(200, "hidden", true, true, false);
 });

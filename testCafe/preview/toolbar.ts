@@ -80,7 +80,7 @@ test("Language switcher", async (t) => {
     .expect(getBarItemByTitle("deutsch").visible).ok();
 });
 
-test.only("Page switcher", async (t) => {
+test("Page switcher", async (t) => {
   await setJSON(json2);
 
   await t

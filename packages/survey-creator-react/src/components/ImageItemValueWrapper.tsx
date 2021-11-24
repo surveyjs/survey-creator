@@ -40,6 +40,10 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
     this.model.itemsRoot = this.rootRef.current;
   }
 
+  preventDragHandler = (e) => {
+    e.preventDefault();
+  }
+
   render(): JSX.Element {
     // if (this.model.question.isDragged) {
     //   return null;
@@ -101,11 +105,10 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         data-sv-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }
+        onPointerDown={(event: any) => this.model.onPointerDown(event)}
+        onDragStart={this.preventDragHandler}
       >
-        <div
-          className={"svc-image-item__drag-element"}
-          onPointerDown={isNew ? undefined : (event: any) => this.model.startDragItemValue(event)}
-        ></div>
+        {isNew ? null : <div className={"svc-image-item__drag-element"} ></div>}
         <input
           type="file"
           aria-hidden="true"

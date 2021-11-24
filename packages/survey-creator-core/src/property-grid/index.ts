@@ -34,9 +34,10 @@ import { QuestionFactory } from "survey-core";
 import { defaultV2Css } from "survey-core";
 import { updateMatrixRemoveAction } from "../utils/actions";
 import { SurveyHelper } from "../survey-helper";
+import { CreatorBase } from "../creator-base";
 
 function propertyVisibleIf(params: any): boolean {
-  if (!this.question || !this.question.obj) return false;
+  if (!this.question || !this.question.obj || !this.question.property) return false;
   return this.question.property.visibleIf(this.question.obj);
 }
 
@@ -230,7 +231,7 @@ export var PropertyGridEditorCollection = {
   },
   onMatrixCellValueChanged(obj: Base, prop: JsonObjectProperty, options: any) {
     var res = this.getEditor(prop);
-    if (!!res && !!res.onMatrixCellCreated) {
+    if (!!res && !!res.onMatrixCellValueChanged) {
       res.onMatrixCellValueChanged(obj, options);
     }
     var row = options.row;
@@ -613,6 +614,12 @@ export class PropertyJSONGenerator {
     if (!!json.type) {
       json.cellType = json.type;
       delete json.type;
+    }
+    if(json.cellType === "buttongroup") {
+      json.cellType = "dropdown";
+    }
+    if (!!prop.visibleIf) {
+      json.visibleIf = "propertyVisibleIf() = true";
     }
     if (!!json.isReadOnly) {
       json.readOnly = json.isReadOnly;
@@ -1057,7 +1064,8 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       },
       undefined,
       "sv-property-editor",
-      question.title
+      question.title,
+      (options as CreatorBase).isMobileView?"overlay":"popup"
     );
     return surveyPropertyEditor;
   }
@@ -1206,6 +1214,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       type: this.renderAsButtonGroup(prop, choices)
         ? "buttongroup"
         : "dropdown",
+      choices: choices,
       showOptionsCaption: false
     };
     var emptyValueItem: ItemValue = this.getEmptyJsonItemValue(prop, choices);

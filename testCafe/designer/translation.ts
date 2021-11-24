@@ -23,7 +23,7 @@ fixture(title)
 test("add language", async (t) => {
   const headerColumnSelector = Selector(".st-strings-header table tr").nth(0).find("th");
   const stringsColumnSelector = Selector(".st-strings table tr").nth(0).find("td");
-  const languagesSelector = Selector(".svc-property-panel .spg-item.spg-checkbox");
+  const languagesSelector = Selector(".svc-side-bar__container .spg-item.spg-checkbox");
   const languageCaptionsSelector = languagesSelector.find(".spg-checkbox__caption");
   const checkedClassName = "spg-checkbox--checked";
   const disabledClassName = "spg-checkbox--disabled";

@@ -1,15 +1,9 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
 import { SurveyCreator } from "../../creator";
-import {
-  VerticalResponsivityManager,
-  Action,
-  Base
-} from "survey-core";
-//import "./toolbox.scss";
-import { IQuestionToolboxItem, QuestionToolbox } from "@survey/creator";
+import { Base } from "survey-core";
+import { QuestionToolbox } from "@survey/creator";
 const template = require("./toolbox.html");
-// import template from "./toolbox.html";
 
 export class ToolboxViewModel extends Base {
   private _categoriesSubscription: ko.Computed;
@@ -51,13 +45,7 @@ export class ToolboxViewModel extends Base {
 ko.components.register("svc-toolbox", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const model: ToolboxViewModel = new ToolboxViewModel(params.creator);
-      const container = componentInfo.element.querySelector(".svc-toolbox");
-      const manager: VerticalResponsivityManager = new VerticalResponsivityManager(container, params.creator.toolbox, ".svc-toolbox__tool:not(.sv-dots)>.sv-action__content", 40);
-      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        manager.dispose();
-        model.dispose();
-      });
+      const model: ToolboxViewModel = new ToolboxViewModel(params.model);
       return model;
     },
   },

@@ -1,25 +1,24 @@
+<div class="svc-creator" data-bind="css: {'svc-creator--mobile' : creator.isMobileView }">
 <div class="svc-full-container svc-creator__area svc-flex-column">
-  <div class="svc-flex-row svc-full-container">
+  <div class="svc-flex-row svc-full-container" data-bind="css : { 'svc-creator__side-bar--left': creator.sideBarLocation == 'left' }">
     <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
       <div class="svc-top-bar">
-        <!-- ko if: creator.showTabs -->
-        <div class="svc-tabbed-menu-wrapper">
+        <div class="svc-tabbed-menu-wrapper" data-bind="visible: creator.showTabs">
           <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
           <!-- /ko -->
         </div>
-        <!-- /ko -->
         <!-- ko if: creator.showToolbar -->
-        <div class="svc-toolbar-wrapper">
+        <div class="svc-toolbar-wrapper" data-bind="visible: creator.showToolbar">
           <!-- ko component: { name: 'sv-action-bar', params: { model: creator.toolbar } } -->
           <!-- /ko -->
         </div>
         <!-- /ko -->
       </div>
-      <div class="svc-creator__content-wrapper svc-flex-row">
+      <div class="svc-creator__content-wrapper svc-flex-row" data-bind="css: {'svc-creator__content-wrapper--footer-toolbar' : creator.isMobileView }">
         <div class="svc-creator__content-holder svc-flex-column">
           <!-- ko foreach: creator.tabs -->
           <!-- ko if: $parent.creator.viewType == id && ($data.visible === undefined || $data.visible) -->
-          <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv-' + id }">
+          <div class="svc-creator-tab" data-bind="attr: { id: 'scrollableDiv-' + id }, css: { 'svc-creator__toolbox--right': creator.toolboxLocation == 'right' }">
             <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
             <!-- /ko -->
           </div>
@@ -27,9 +26,17 @@
           <!-- /ko -->
         </div>
       </div>
+      <!-- ko if: creator.isMobileView -->
+      <div class="svc-footer-bar">
+        <div class="svc-toolbar-wrapper" data-bind="visible: creator.isMobileView">
+          <!-- ko component: { name: 'sv-action-bar', params: { model: creator.footerToolbar } } -->
+          <!-- /ko -->
+        </div>
+      </div>
+      <!-- /ko -->
     </div>
-    <div data-bind="if: creator.currentTabPropertyGrid">
-      <svc-property-panel params="model: creator.currentTabPropertyGrid"> </svc-property-panel>
+    <div data-bind="if: creator.sideBar, css: { 'sv-mobile-side-bar': creator.isMobileView }">
+      <svc-side-bar params="model: creator.sideBar"> </svc-side-bar>
     </div>
   </div>
   <!-- ko ifnot: creator.haveCommercialLicense -->
@@ -40,4 +47,5 @@
   <!-- /ko -->
   <!-- ko component: { name: 'svc-notifier', params: { creator: creator, notifier: creator.notifier } } -->
   <!-- /ko -->
+</div>
 </div>

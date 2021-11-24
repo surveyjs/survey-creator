@@ -18,8 +18,9 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   }
 
   renderElement(): JSX.Element {
+    const tabContentClassName = "svc-creator-tab__content svc-test-tab__content" + (this.model.isPageToolbarVisible ? " svc-creator-tab__content--with-toolbar" : "");
     return (
-      <div className="svc-creator-tab__content svc-test-tab__content">
+      <div className={tabContentClassName}>
         <div className="svc-plugin-tab__content">
           <SurveySimulator model={this.model.simulator}></SurveySimulator>
           {!this.model.isRunning ? (<SurveyResults survey={this.model.simulator.survey} />) : null}
@@ -29,7 +30,7 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
     );
   }
   getBottomToolbar(): JSX.Element {
-    if (this.model.pages.visibleActions.length > 0) {
+    if (this.model.isPageToolbarVisible) {
       return (
         <div className="svc-test-tab__content-actions">
           <SurveyActionBar model={this.model.pages}></SurveyActionBar>

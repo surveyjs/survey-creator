@@ -1,10 +1,8 @@
-<!-- ko if: $data.toolbox.visible -->
-<div class="svc-toolbox" data-bind="css: { 'svc-toolbox--compact': $data.toolbox.isCompact }">
+<div class="svc-toolbox">
   <div class="svc-toolbox__container">
-    <!-- ko ifnot: $data.toolbox.isCompact || categories().length == 1 -->
+    <!-- ko ifnot: categories().length == 1 -->
     <!-- ko foreach: categories -->
     <div class="svc-toolbox__category">
-      <!-- ko if: $parent.categories().length > 1 -->
       <div class="svc-toolbox__category-header" data-bind="click: toggleState, key2click">
         <span class="svc-toolbox__category-title" data-bind="text: name"></span>
         <div class="svc-toolbox__category-header__controls">
@@ -14,7 +12,6 @@
             data-bind="visible: !collapsed" params="iconName: 'icon-collapse', size: 16"></sv-svg-icon>
         </div>
       </div>
-      <!-- /ko -->
       <!-- ko ifnot: collapsed -->
       <!-- ko foreach: items -->
       <!-- ko component: { name: $data.component || 'svc-toolbox-tool', params: { item: $data, creator: $parents[1].creator, isCompact: false } } -->
@@ -25,14 +22,13 @@
     <!-- /ko -->
     <!-- /ko -->
 
-    <!-- ko if: $data.toolbox.isCompact || categories().length == 1 -->
+    <!-- ko if: categories().length == 1 -->
     <div class="svc-toolbox__category">
-      <!-- ko foreach: $data.toolbox.renderedActions -->
-      <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: $parent.toolbox.isCompact } } -->
+      <!-- ko foreach: $data.toolbox.visibleActions -->
+      <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: false } } -->
       <!-- /ko -->
       <!-- /ko -->
     </div>
     <!-- /ko -->
   </div>
 </div>
-<!-- /ko -->

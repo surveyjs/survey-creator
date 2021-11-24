@@ -4,6 +4,7 @@ import {
   Base,
   ComponentCollection,
   CustomWidgetCollection,
+  DragDropSurveyElements,
   ElementFactory,
   IAction,
   JsonObject,
@@ -13,8 +14,9 @@ import {
   Serializer,
   SurveyModel
 } from "survey-core";
-import { CreatorBase } from "./creator-base";
+import { CreatorBase, toolBoxLocationType } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
+import { DragOrClickHelper } from "./utils/dragOrClickHelper";
 
 /**
  * The Toolbox item description.
@@ -69,8 +71,7 @@ export class QuestionToolboxCategory extends Base {
 }
 export class QuestionToolboxItem
   extends Action
-  implements IQuestionToolboxItem
-{
+  implements IQuestionToolboxItem {
   constructor(private item: IQuestionToolboxItem) {
     super(item);
   }
@@ -90,8 +91,7 @@ export class QuestionToolboxItem
  */
 export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
-  implements IQuestionToolbox
-{
+  implements IQuestionToolbox {
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey"];
   private _orderedQuestions = [
     "text",
@@ -159,6 +159,7 @@ export class QuestionToolbox
   public copiedItemMaxCount: number = 3;
   private allowExpandMultipleCategoriesValue: boolean = false;
   private keepAllCategoriesExpandedValue: boolean = false;
+  private dragOrClickHelper: DragOrClickHelper;
 
   //koItems = ko.observableArray();
   @propertyArray() categories: Array<QuestionToolboxCategory>;
@@ -179,7 +180,6 @@ export class QuestionToolbox
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
   @property({ defaultValue: false }) isCompact: boolean;
-  @property({ defaultValue: true }) visible: boolean;
 
   constructor(
     supportedQuestions: Array<string> = null,
@@ -189,6 +189,14 @@ export class QuestionToolbox
     this.createDefaultItems(supportedQuestions);
     this.dotsItemPopupModel.horizontalPosition = "right";
     this.dotsItemPopupModel.verticalPosition = "top";
+    this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
+      const json = this.creator.getJSONForNewElement(itemModel.json);
+      this.dotsItemPopupModel.toggleVisibility();
+      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json);
+    });
+    this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
+      this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
+    };
   }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<any> = this.categories;
@@ -197,6 +205,14 @@ export class QuestionToolbox
       category.collapsed = category.name !== newValue;
     }
   }
+  public setLocation(toolboxLocation: toolBoxLocationType) {
+    if (toolboxLocation === "insideSideBar") {
+      this.visibleActions.forEach((item) => (item.mode = "small"));
+    } else {
+      this.dotsItemPopupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
+    }
+  }
+
   /**
    * The Array of Toolbox items as Text JSON.
    */
@@ -311,6 +327,9 @@ export class QuestionToolbox
   private correctItem(item: IQuestionToolboxItem) {
     if (!item.title) item.title = item.name;
     if (!item.tooltip) item.tooltip = item.title;
+  }
+  private get dragDropHelper(): DragDropSurveyElements {
+    return this.creator.dragDropSurveyElements;
   }
   /**
    * Add a new toolbox item, add delete the old item with the same name
@@ -669,5 +688,5 @@ export class QuestionToolbox
     return questions;
   }
 
-  public dispose() {}
+  public dispose() { }
 }

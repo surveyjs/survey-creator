@@ -29,7 +29,10 @@ survey-creator,
 
 .svc-creator__content-wrapper {
   width: 100%;
-  height: calc(100% - calc(8 * #{$base-unit}));
+  height: calc(100% - calc(8 * #{$base-unit})); // without top toolbar
+}
+.svc-creator__content-wrapper--footer-toolbar {
+  height: calc(100% - calc(6 * #{$base-unit})); // without footer toolbar
 }
 
 .svc-creator__content-holder {
@@ -45,6 +48,10 @@ survey-creator,
   position: relative;
 }
 
+.svc-creator__toolbox--right.svc-creator-tab {
+  flex-direction: row-reverse;
+}
+
 .svc-creator-tab__content {
   position: relative;
   width: 100%;
@@ -53,7 +60,7 @@ survey-creator,
 }
 
 .svc-plugin-tab__content {
-  height: calc(100% - calc(6 * #{$base-unit}));
+  height: 100%;
   overflow-y: auto;
 }
 
@@ -76,9 +83,22 @@ survey-creator,
   text-align: center;
 }
 
+.svc-item__banner {
+  position: absolute;
+  top: 0;
+  max-width: 0;
+  overflow: hidden;
+  height: 100%;
+  background-color: $background;
+  /* Shadow / Medium */
+  border-radius: calcSize(12.5);
+  box-shadow: 0px 2px 6px $shadow-medium;
+  transition: max-width 0.1s ease-in-out, padding 0.2s ease-in-out;
+}
+
 .svc-creator__non-commercial-text {
   color: $primary-foreground;
-  font-family: "Open Sans";
+  font-family: $font-family;
   font-weight: bold;
   font-size: calcSize(2);
   text-transform: uppercase;

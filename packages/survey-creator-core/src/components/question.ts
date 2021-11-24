@@ -75,6 +75,12 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       result += " svc-question__content--empty";
     }
 
+    if (this.isDragMe) {
+      result += " svc-question__content--dragged";
+    } else {
+      result = result.replace(" svc-question__content--dragged", "");
+    }
+
     if (this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel) {
       result += " svc-question__content--drag-over-inside";
     } else {
@@ -94,6 +100,10 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     }
 
     return result;
+  }
+
+  get isDragMe(): boolean {
+    return this.surveyElement.isDragMe;
   }
 
   get dragTypeOverMe(): DragTypeOverMeEnum {
@@ -168,7 +178,9 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   }
 
   startDragSurveyElement(event: PointerEvent) {
-    this.dragDropHelper.startDrag(event, <any>this.surveyElement);
+    const element = <any>this.surveyElement;
+    const isElementSelected = this.creator.selectedElement === element;
+    this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
     return true;
   }
 
@@ -201,17 +213,19 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       "bottom",
       "center"
     );
-
+    let actionTitle = this.creator.getLocString("qt." + currentType);
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
       iconName: "icon-change_16x16",
       iconSize: 16,
-      title: this.creator.getLocString("qt." + currentType),
+      title: actionTitle,
       visibleIndex: 0,
       enabled: allowChangeType,
       component: "sv-action-bar-item-dropdown",
+      disableShrink: true,
       action: (newType) => {
+        popupModel.displayMode = this.creator.isMobileView ? "overlay":"popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel

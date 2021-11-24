@@ -196,6 +196,7 @@ export class TitleInplaceEditor {
       return;
     }
     this.isCompositionSessionOpen = false;
+    this.shouldCloseCompositionSession = false;
     this.editor.selectFromStringEditor = true;
     if (this._needSelectTargetOnStartEdit) {
       this.editor.selectedElement = this.target;
@@ -248,22 +249,27 @@ export class TitleInplaceEditor {
     this.hideEditor();
   };
   isCompositionSessionOpen = false;
+  shouldCloseCompositionSession = false;
   cancelEdit = () => {
     this.editingName(this.prevName());
     this.hideEditor();
   };
   compositionStart = (model, event) => {
     this.isCompositionSessionOpen = true;
+    this.shouldCloseCompositionSession = false;
   };
   compositionEnd = (model, event) => {
-    this.isCompositionSessionOpen = false;
+    this.shouldCloseCompositionSession = true;
   };
   nameEditorKeypress = (model, event) => {
     resizeInput(event.target);
     switch (event.keyCode) {
       case 13:
         if (this.isCompositionSessionOpen) {
-          // this.isCompositionSessionOpen = false;
+          if (this.shouldCloseCompositionSession) {
+            this.isCompositionSessionOpen = false;
+            this.shouldCloseCompositionSession = false;
+          }
           return true;
         }
         this.postEdit();

@@ -479,7 +479,7 @@ async function checkLogicOperatorStyles(t: TestController, selector: Selector, b
     .expect(selector.getStyleProperty("border")).notOk(selectorName)
     .expect(selector.getStyleProperty("outline")).notOk(selectorName)
     .expect(selector.getStyleProperty("font-weight")).eql("600", selectorName)
-    .expect(selector.getStyleProperty("font-family")).eql("\"Open Sans\"", selectorName)
+    .expect(selector.getStyleProperty("font-family")).eql("\"Open Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif", selectorName)
     .expect(selector.getStyleProperty("font-size")).eql("16px", selectorName)
 
     .expect(selector.getStyleProperty("padding-left")).eql("16px", selectorName)
@@ -552,7 +552,7 @@ test("Check logic elements styles in Logic tab", async (t) => {
 });
 
 test("Check logic elements styles in Popup", async (t) => {
-  const objectSelectorButton = Selector(".svc-property-panel__header #svd-grid-object-selector .sv-action-bar-item");
+  const objectSelectorButton = Selector(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item");
   const objectSelectorPopup = Selector(".sv-popup .svc-object-selector");
 
   await setJSON(json3);

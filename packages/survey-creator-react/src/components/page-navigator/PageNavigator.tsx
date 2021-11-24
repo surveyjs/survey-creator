@@ -97,7 +97,7 @@ export class SurveyPageNavigatorItem extends SurveyElementBase<any, any> {
           title={item.title}
         >
           <div className="svc-page-navigator-item__dot"></div>
-          <div className="svc-page-navigator-item__banner">
+          <div className="svc-page-navigator-item__banner svc-item__banner">
             <span className="svc-text svc-text--normal">{item.title}</span>
             <span className="svc-page-navigator-item__dot"></span>
           </div>

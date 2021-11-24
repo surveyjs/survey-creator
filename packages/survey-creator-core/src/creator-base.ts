@@ -48,10 +48,10 @@ import { Notifier } from "./components/notifier";
 import { updateMatrixRemoveAction } from "./utils/actions";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
 import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/undo-redo";
-import { PropertyGridViewModelBase } from "./property-grid/property-grid-view-model";
-import { TabDesignerPlugin } from "./components/tabs/designer";
+import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
+import { SideBarModel } from "./components/side-bar/side-bar-model";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -69,7 +69,6 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   model: Base;
-  propertyGrid?: PropertyGridViewModelBase;
 }
 
 export interface ITabbedMenuItem extends IAction {
@@ -90,6 +89,8 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     this.minVisibleItemsCount = 1;
   }
 }
+
+export type toolBoxLocationType = "left" | "right" | "insideSideBar" | "hidden";
 
 /**
  * Base class for Survey Creator.
@@ -155,6 +156,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
   private responsivityManager: CreatorResponsivityManager;
+  footerToolbar: ActionContainer;
 
   private pageEditModeValue: "standard" | "single" = "standard";
   /**
@@ -661,6 +663,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
+   * Use this event to modify the list of the strings available in a translation tab.
+   * <br/> sender - the survey creator object that fires the event
+   * <br/> options.obj - the survey object which property translations are edited in the translation tab.
+   * <br/> options.propertyName - the name of the property.
+   * <br/> options.visible - a boolean value. You can change it to hide the property.
+   */
+  public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  /**
    * This callback is used internally for providing survey JSON text.
    */
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
@@ -841,12 +852,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
-  public get currentTabPropertyGrid(): PropertyGridViewModelBase {
-    return this.getTabPropertyGrid(this.activeTab);
-  }
-  public getTabPropertyGrid(id: string): PropertyGridViewModelBase {
-    return this.getPlugin(id).propertyGrid || null;
-  }
+  public sideBar: SideBarModel;
 
   constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
     super();
@@ -856,28 +862,30 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.options instanceof String
     ) {
       this.options = !!options2 ? options2 : {};
-      SurveyHelper.warnText(
-        "Creator constructor has one parameter, as creator options, in V2."
-      );
+      SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     this.toolbarValue = new ActionContainer();
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
+    this.sideBar = new SideBarModel(this);
     this.setOptions(this.options);
     this.patchMetadata();
-    this.initSurveyWithJSON(
-      JSON.parse(CreatorBase.defaultNewSurveyText),
-      false
-    );
+    this.initSurveyWithJSON(JSON.parse(CreatorBase.defaultNewSurveyText), false);
+    this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this);
+    this.updateToolboxIsCompact();
     this.initTabs();
-    this.toolbox = new QuestionToolbox(
-      this.options && this.options.questionTypes
-        ? this.options.questionTypes
-        : null,
-      this
-    );
     this.initDragDrop();
+    this.toolbar.actions.push(this.sideBar.getExpandAction());
   }
+  public updateToolboxIsCompact(newVal?: boolean) {
+    if (this.toolboxLocation == "right" && this.showPropertyGrid) {
+      this.toolbox.isCompact = true;
+      return;
+    } else if (newVal != undefined && newVal != null) {
+      this.toolbox.isCompact = newVal;
+    }
+  }
+
   onSurveyElementPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
     throw new Error("Method not implemented.");
   }
@@ -910,6 +918,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     if (this.showPropertyGrid === val) return;
     this.showPropertyGridValue = val;
+    this.updateToolboxIsCompact(val);
     this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
   }
   public rightContainerActiveItem(name: string) {
@@ -1015,6 +1024,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   protected initTabs() {
     this.initPlugins();
+    this.initFooterToolbar();
     if (this.tabs.length > 0) {
       this.makeNewViewActive(this.tabs[0].id);
     }
@@ -1042,6 +1052,17 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     if (this.showEmbeddedSurveyTab) {
       new TabEmbedPlugin(this);
+    }
+  }
+  private initFooterToolbar(): void {
+    if (!this.footerToolbar) {
+      this.footerToolbar = new ActionContainer();
+      ["undoredo", "designer", "test"].forEach((pluginKey: string) => {
+        const plugin = this.getPlugin(pluginKey);
+        if (!!plugin && !!plugin["addFooterActions"]) {
+          plugin["addFooterActions"]();
+        }
+      });
     }
   }
   public getOptions() {
@@ -1170,21 +1191,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   private patchMetadata(): void {
-    Serializer.findProperty("survey", "title").placeholder =
-      "pe.surveyTitlePlaceholder";
-    Serializer.findProperty("survey", "description").placeholder =
-      "pe.surveyDescriptionPlaceholder";
-    const logoPosition: Survey.JsonObjectProperty = Serializer.findProperty(
-      "survey",
-      "logoPosition"
-    );
-    logoPosition.defaultValue = "right";
-    logoPosition.isSerializable = false;
-    logoPosition.visible = false;
-    Serializer.findProperty("page", "title").placeholder =
-      "pe.pageTitlePlaceholder";
-    Serializer.findProperty("page", "description").placeholder =
-      "pe.pageDescriptionPlaceholder";
+    Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
+    Serializer.findProperty("survey", "description").placeholder = "pe.surveyDescriptionPlaceholder";
+    Serializer.findProperty("survey", "logoPosition").visible = false;
+    Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
+    Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
@@ -1192,14 +1203,52 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       obj.getType(),
       propertyName
     );
+    let parentObj, parentProperty: Survey.JsonObjectProperty;
+    if (obj instanceof ItemValue) {
+      parentObj = obj.locOwner;
+      parentProperty = Survey.Serializer.findProperty(
+        parentObj.getType(),
+        obj.ownerPropertyName
+      );
+
+      const allowQuestionOperations = this.getElementAllowOperations(parentObj);
+      if (allowQuestionOperations.allowEdit === false)
+        return false;
+
+      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: true };
+      this.onCollectionItemAllowingCallback(parentObj,
+        property,
+        parentObj.getPropertyValue(parentProperty.name),
+        obj,
+        options
+      );
+      if (options.allowEdit === false) {
+        return false;
+      }
+
+      if (this.onIsPropertyReadOnlyCallback(
+        parentObj,
+        parentProperty,
+        parentProperty.readOnly,
+        null,
+        null
+      )) {
+        return false;
+      }
+    }
+    if (obj instanceof SurveyElement) {
+      const allowElementOperations = this.getElementAllowOperations(obj);
+      if (allowElementOperations.allowEdit === false)
+        return false;
+    }
     return (
       !property ||
       !this.onIsPropertyReadOnlyCallback(
         obj,
         property,
         property.readOnly,
-        undefined,
-        undefined
+        parentObj,
+        parentProperty
       )
     );
   }
@@ -1211,9 +1260,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     parentObj: Survey.Base,
     parentProperty: Survey.JsonObjectProperty
   ): boolean {
-    var proposedValue = this.readOnly || readOnly;
+    const proposedValue = this.readOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
-    var options = {
+    const options = {
       obj: obj,
       property: property,
       readOnly: proposedValue,
@@ -1240,6 +1289,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
+    survey.logoPosition = "right";
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
     }
@@ -1869,8 +1919,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const designerPlugin = this.getPlugin<TabDesignerPlugin<T>>("designer");
-    return designerPlugin ? (designerPlugin.propertyGrid.model as any as PropertyGridModel) : null;
+    const propertyGridTab = this.sideBar.getTabById("propertyGrid");
+    if (!propertyGridTab) return null;
+    return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
   /**
    * Collapse certain property editor tab (category) in properties panel/grid
@@ -1974,7 +2025,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
 
-      if(!propertyName) {
+      if (!propertyName) {
         propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
 
@@ -2250,7 +2301,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     var options = {
       obj: obj,
       property: property,
-      propertyName: property.name,
+      propertyName: property && property.name,
       collection: collection,
       item: item,
       allowEdit: itemOptions.allowEdit,
@@ -2444,6 +2495,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return {
       iconName: "icon-dots",
       action: () => {
+        popupModel.displayMode = this.isMobileView ? "overlay" : "popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel
@@ -2456,7 +2508,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.currentAddQuestionType || "text",
       "q1"
     );
-    if(newElement)
+    if (newElement)
       this.setNewNames(newElement);
     else
       newElement = this.createNewElement({ type: this.currentAddQuestionType });
@@ -2517,6 +2569,14 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: true }) showPageNavigator;
   @property({ defaultValue: settings.layout.showTabs }) showTabs;
   @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
+  @property({ defaultValue: false }) isMobileView;
+  @property({
+    defaultValue: "left", onSet: (newValue, target: CreatorBase<T>) => {
+      target.toolbox.setLocation(newValue);
+      target.updateToolboxIsCompact();
+    }
+  }) toolboxLocation: toolBoxLocationType;
+  @property({ defaultValue: "right" }) sideBarLocation: "left" | "right";
   selectFromStringEditor: boolean;
 }
 
@@ -2620,7 +2680,7 @@ export function getItemValueWrapperComponentData(
 }
 export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
-  return !parentIsMatrix&& (!element.isContentElement || element.isEditableTemplateElement);
+  return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
 function isTextInput(target: any) {
   if (!target.tagName) return false;

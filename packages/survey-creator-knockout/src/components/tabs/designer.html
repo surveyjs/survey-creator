@@ -1,4 +1,6 @@
-<svc-toolbox params="creator: creator"></svc-toolbox>
+<!-- ko if: isToolboxVisible -->
+<svc-adaptive-toolbox params="model: creator"></svc-adaptive-toolbox>
+<!-- /ko -->
 <div class="svc-tab-designer" data-bind="css: survey.css.root">
   <div data-bind="css: getDesignerCss()">
     <!-- ko if: creator.allowEditSurveyTitle -->

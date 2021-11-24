@@ -37,7 +37,10 @@ export class UndoRedoPlugin<T extends SurveyModel = SurveyModel> implements ICre
   }
   public update(): void {
   }
-
+  public addFooterActions() {
+    this.model.undoAction && (this.creator.footerToolbar.actions.push(this.model.undoAction));
+    this.model.redoAction && (this.creator.footerToolbar.actions.push(this.model.redoAction));
+  }
 }
 
 export function undoRedoTransaction(transactionName?: string, undoRedoManagerProperty: string = "undoRedoManager") {

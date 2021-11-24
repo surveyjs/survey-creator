@@ -2,7 +2,7 @@ import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObje
 import { editorLocalization } from "../../src/editorLocalization";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
-import { TabDesignerPlugin } from "../../src/components/tabs/designer";
+import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 
 test("Survey/page title/description placeholders text", () => {
   new CreatorTester();

@@ -44,12 +44,12 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
             disabled={this.model.readOnly}
             aria-label={this.model.ariaLabel}
           ></textarea>
-          { errors.length > 0 &&
-              <button className="svc-json-editor-tab__errros_button" onClick={() => this.model.toggleErrors()}>
-                {this.model.errorButtonText}
-              </button>
+          {errors.length > 0 &&
+            <button type="button" className="svc-json-editor-tab__errros_button" onClick={() => this.model.toggleErrors()}>
+              {this.model.errorButtonText}
+            </button>
           }
-          { this.model.canShowErrors && <div className="svc-json-editor-tab__content-errors">{errors}</div>
+          {this.model.canShowErrors && <div className="svc-json-editor-tab__content-errors">{errors}</div>
           }
         </div>
       </div>

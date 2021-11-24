@@ -87,16 +87,17 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
           }}
         >
           <span className="svc-text svc-text--normal svc-text--bold">
-            {this.model.creator.addNewQuestionText}
+            {this.model.addNewQuestionText}
           </span>
 
           {attachKey2click(<button
+            type="button"
             onClick={(e) => {
               e.stopPropagation();
               questionTypeSelectorModel.action();
             }}
             className="svc-page__question-type-selector"
-            title={this.model.creator.addNewQuestionText}
+            title={this.model.addNewQuestionText}
           >
             <span className="svc-page__question-type-selector-icon">
               <SvgIcon

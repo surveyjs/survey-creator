@@ -1,115 +1,78 @@
-import { CreatorBase, IQuestionToolbox } from "@survey/creator";
-import React, { CSSProperties } from "react";
-import {
-  Base,
-  Action,
-  VerticalResponsivityManager,
-  SurveyModel
-} from "survey-core";
-import {
-  attachKey2click,
-  ReactElementFactory,
-  SurveyElementBase,
-  SvgIcon
-} from "survey-react-ui";
-import { SurveyCreatorToolboxTool } from "./ToolboxItem";
-interface ISurveyCreatorToolboxProps {
-  creator: CreatorBase<SurveyModel>;
+import React from "react";
+import { CreatorBase } from "@survey/creator";
+import { SurveyCreatorToolboxTool } from "src/entries";
+import { Base, SurveyModel } from "survey-core";
+import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
+
+export interface ISurveyCreatorToolboxProps {
+  model: CreatorBase<SurveyModel>;
 }
 
-export class SurveyCreatorToolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {
-  private manager: VerticalResponsivityManager;
-  private rootRef: React.RefObject<HTMLDivElement>;
-
+export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {
   constructor(props: ISurveyCreatorToolboxProps) {
     super(props);
-
-    this.rootRef = React.createRef();
   }
   public get creator() {
-    return this.props.creator;
+    return this.props.model;
   }
   public get toolbox() {
     return this.creator.toolbox;
   }
-
-  componentDidMount() {
-    super.componentDidMount();
-    const container = this.rootRef.current;
-    if (!container) return;
-    this.manager = new VerticalResponsivityManager(
-      container,
-      this.toolbox,
-      ".svc-toolbox__tool:not(.sv-dots)>.sv-action__content",
-      40
-    );
-  }
-  componentWillUnmount() {
-    this.manager && (this.manager.dispose());
-    super.componentWillUnmount();
-  }
-
   protected getStateElement(): Base {
     return this.toolbox;
   }
 
   render(): JSX.Element {
-    if (!this.toolbox.hasActions || !this.toolbox.visible) return null;
-    if (this.toolbox.isCompact || this.toolbox.categories.length == 1) {
-      const items = this.renderItems();
-      return (
-        <div ref={this.rootRef} className={"svc-toolbox" + (this.toolbox.isCompact ? " svc-toolbox--compact" : "")}>
-          <div className="svc-toolbox__container"><div className="svc-toolbox__category">{items}</div></div>
+    if (!this.toolbox.hasActions) return null;
+
+    return (
+      <div className="svc-toolbox">
+        <div className="svc-toolbox__container">
+          {(this.toolbox.categories.length == 1) ?
+            (<div className="svc-toolbox__category">
+              {this.renderItems(this.toolbox.visibleActions)}
+            </div>)
+            : this.renderCategories()
+          }
         </div>
-      );
-    } else {
-      const categories = this.renderCategories();
-      return (
-        <div ref={this.rootRef} className={"svc-toolbox"}>
-          <div className="svc-toolbox__container">{categories}</div>
-        </div>
-      );
-    }
+      </div>
+    );
   }
 
-  renderItems() {
-    return this.toolbox.renderedActions.map((item: Action, itemIndex) =>
-      <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={this.toolbox.isCompact} key={"item" + itemIndex}></SurveyCreatorToolboxTool>
+  renderItems(items: Array<any>) {
+    return items.map((item, itemIndex) =>
+      <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} key={"item" + itemIndex} isCompact={false}></SurveyCreatorToolboxTool>
     );
   }
   renderCategories() {
-    return this.toolbox.categories.map((category) =>
-      this.renderToolboxCategory(category)
-    );
+    return this.toolbox.categories.map((category) => {
+      const header = this.renderCategoryHeader(category);
+      const items = this.renderCategoryContent(category);
+      return (
+        <div className="svc-toolbox__category" key={category.name}>
+          {header}
+          {items}
+        </div>
+      );
+    });
   }
-  renderToolboxCategory(category: any): JSX.Element {
-    let header = null;
-    if (this.toolbox.categories.length > 1) {
-      header =
-        attachKey2click(<div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
-          <span className="svc-toolbox__category-title">{category.name}</span>
-          <div className="svc-toolbox__category-header__controls">
-            {(category.collapsed ?
-              <SvgIcon className="svc-toolbox__category-header__button svc-string-editor__button--expand" size={16} iconName={"icon-expand"}></SvgIcon>
-              :
-              <SvgIcon className="svc-toolbox__category-header__button svc-string-editor__button--collapse" size={16} iconName={"icon-collapse"}></SvgIcon>
-            )}
-          </div>
-        </div>);
-    }
-    let items = [];
-    if (!category.collapsed) {
-      items = category.items.map((item, itemIndex) => <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={false} key={"item" + itemIndex}></SurveyCreatorToolboxTool>);
-    }
-    return (
-      <div className="svc-toolbox__category" key={category.name}>
-        {header}
-        {items}
+  renderCategoryHeader(category: any): JSX.Element {
+    const nextState = category.collapsed ? "expand" : "collapse";
+    const svgIconClassName = "svc-toolbox__category-header__button svc-string-editor__button--" + nextState;
+    return attachKey2click(
+      <div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
+        <span className="svc-toolbox__category-title">{category.name}</span>
+        <div className="svc-toolbox__category-header__controls">
+          <SvgIcon className={svgIconClassName} size={16} iconName={"icon-" + nextState}></SvgIcon>
+        </div>
       </div>
     );
+  }
+  protected renderCategoryContent(category: any): Array<any> {
+    return !category.collapsed ? this.renderItems(category.items) : [];
   }
 }
 
 ReactElementFactory.Instance.registerElement("svc-toolbox", (props) => {
-  return React.createElement(SurveyCreatorToolbox, props);
+  return React.createElement(Toolbox, props);
 });

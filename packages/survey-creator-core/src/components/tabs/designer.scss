@@ -28,38 +28,3 @@ svc-tab-designer {
     }
   }
 }
-
-.svc-flex-column.svc-properties-wrapper {
-  width: auto;
-  border-left: 1px solid $border;
-  height: 100%;
-  background-color: $background-dim;
-}
-
-.svc-properties-container {
-  height: 100%;
-}
-
-.svc-flyoutPanelMode-panel {
-  width: 0;
-  overflow: visible;
-
-  .svc-properties-shadow {
-    z-index: 100;
-    background-color: $background-dim;
-    opacity: 0.75;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }
-  .svc-properties-wrapper {
-    z-index: 10000;
-    position: absolute;
-    right: 0;
-    display: inline-block;
-    height: 100%;
-    max-width: 100%;
-  }
-}

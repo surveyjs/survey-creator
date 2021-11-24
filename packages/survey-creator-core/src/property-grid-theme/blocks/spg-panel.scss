@@ -39,7 +39,7 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: 0 calcSize(2) calcSize(5);
+  padding: 0 calcSize(4) calcSize(5);
   box-sizing: border-box;
   background: $background-dim;
   box-shadow: inset 0px -1px 0px $border;
@@ -48,5 +48,10 @@
   .spg-row {
     width: 100%;
     margin-top: calcSize(2);
+  }
+}
+.sv-mobile-side-bar {
+  .spg-panel__content {
+    padding: 0 calcSize(2) calcSize(5);
   }
 }

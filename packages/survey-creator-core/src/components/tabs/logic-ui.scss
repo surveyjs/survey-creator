@@ -85,9 +85,10 @@
   display: none;
 }
 
-.sd-paneldynamic__separator {
-  border: none;
-  margin: 0;
+.svc-logic-paneldynamic {
+  .sd-paneldynamic__separator {
+    display:none
+  }
 }
 
 .svc-icon-remove {

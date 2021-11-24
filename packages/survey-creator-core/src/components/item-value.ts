@@ -4,12 +4,16 @@ import {
   property,
   QuestionCheckboxModel,
   QuestionSelectBase,
+  Serializer,
   SurveyModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropChoices } from "survey-core";
 import "./item-value.scss";
 import { getLocString } from "../editorLocalization";
+
+import { DragOrClickHelper } from "../utils/dragOrClickHelper";
+import { ICollectionItemAllowOperations } from "../settings";
 
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
@@ -38,11 +42,43 @@ export class ItemValueWrapperViewModel extends Base {
     this.dragDropHelper.onGhostPositionChanged.add(
       this.handleDragDropGhostPositionChanged
     );
+    this.dragOrClickHelper = new DragOrClickHelper(this.startDragItemValue);
+
+    this.allowItemOperations = { allowDelete: undefined, allowEdit: undefined };
+
+    this.creator.onCollectionItemAllowingCallback(question,
+      Serializer.findProperty(question.getType(), this.item.ownerPropertyName),
+      question.visibleChoices,
+      this.item,
+      this.allowItemOperations
+    );
+    if (this.allowItemOperations.allowDelete === undefined) {
+      this.allowItemOperations.allowDelete = true;
+    }
+
+    if (!this.creator.isCanModifyProperty(question, "choices")) {
+      this.canTouchItems = false;
+    }
   }
 
-  startDragItemValue(event: PointerEvent) {
-    this.dragDropHelper.startDrag(event, this.item, this.question, <HTMLElement>event.currentTarget);
+  private dragOrClickHelper: DragOrClickHelper;
+  private allowItemOperations: ICollectionItemAllowOperations;
+  private canTouchItems: boolean = true;
+
+  private isBanStartDrag(pointerDownEvent: PointerEvent): boolean {
+    const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
+    return this.isNew || isContentEditable;
   }
+
+  onPointerDown(pointerDownEvent: PointerEvent) {
+    if (this.isBanStartDrag(pointerDownEvent)) return;
+    this.dragOrClickHelper.onPointerDown(pointerDownEvent);
+  }
+
+  startDragItemValue = (pointerDownEvent: PointerEvent, currentTarget: any) => {
+    this.dragDropHelper.startDrag(pointerDownEvent, this.item, this.question, <HTMLElement>currentTarget);
+  }
+
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;
   }
@@ -68,7 +104,7 @@ export class ItemValueWrapperViewModel extends Base {
     return this.isDraggableItem(this.item);
   }
   public isDraggableItem(item: ItemValue) {
-    if (this.creator.readOnly) return false;
+    if (this.creator.readOnly || !this.canTouchItems) return false;
     return this.question.choices.indexOf(item) !== -1;
   }
 
@@ -108,7 +144,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   get allowRemove() {
-    return !this.creator.readOnly;
+    return !this.creator.readOnly && this.canTouchItems && (this.allowItemOperations.allowDelete);
   }
   get tooltip() {
     return getLocString(this.isNew ? "pe.addItem" : "pe.removeItem");
@@ -118,7 +154,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
   get allowAdd() {
     const isNew = !this.question.isItemInList(this.item);
-    return !this.creator.readOnly && isNew;
+    return !this.creator.readOnly && this.canTouchItems && isNew;
   }
   public select(model: ItemValueWrapperViewModel, event: Event) {
     model.creator.selectElement(model.question, "choices", false);
