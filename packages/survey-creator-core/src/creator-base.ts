@@ -1191,21 +1191,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   private patchMetadata(): void {
-    Serializer.findProperty("survey", "title").placeholder =
-      "pe.surveyTitlePlaceholder";
-    Serializer.findProperty("survey", "description").placeholder =
-      "pe.surveyDescriptionPlaceholder";
-    const logoPosition: Survey.JsonObjectProperty = Serializer.findProperty(
-      "survey",
-      "logoPosition"
-    );
-    logoPosition.defaultValue = "right";
-    logoPosition.isSerializable = false;
-    logoPosition.visible = false;
-    Serializer.findProperty("page", "title").placeholder =
-      "pe.pageTitlePlaceholder";
-    Serializer.findProperty("page", "description").placeholder =
-      "pe.pageDescriptionPlaceholder";
+    Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
+    Serializer.findProperty("survey", "description").placeholder = "pe.surveyDescriptionPlaceholder";
+    Serializer.findProperty("survey", "logoPosition").visible = false;
+    Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
+    Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
@@ -1299,6 +1289,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
+    survey.logoPosition = "right";
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
     }

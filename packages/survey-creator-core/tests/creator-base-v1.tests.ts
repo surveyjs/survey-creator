@@ -131,6 +131,7 @@ test("Set Text property", () => {
 
 test("Escape HTML question string", () => {
   const jsonText = JSON.stringify({
+    logoPosition: "right",
     pages: [
       {
         name: "page1",
@@ -897,7 +898,7 @@ test("Update expressions in copyElements", () => {
 test("onModified options", () => {
   const creator = new CreatorTester();
   const modifiedOptions = [];
-  creator.onModified.add(function(survey, options) {
+  creator.onModified.add(function (survey, options) {
     modifiedOptions.push(options);
   });
   creator.clickToolboxItem({
