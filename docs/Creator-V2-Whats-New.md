@@ -80,7 +80,7 @@ We have introduced a lot of changes in Creator V2. Actually, we have rewritten a
 ### Page navigation improved
 We have completely changed the way a user works with surveys that have multiple pages. Instead of displaying pages in horizontally oriented tabs, we now use a Microsoft Word inspired page layout (all pages, one by one) with a vertically oriented page navigator widget.
 
-![Page navigator](images/creator-v2-page-navigator.png)
+![Page navigator](images/creator-v2-page-navigator.png)  
 _Page navigator_
 
 <!-- 
