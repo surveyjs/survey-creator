@@ -80,12 +80,19 @@ We have introduced a lot of changes in Creator V2. Actually, we have rewritten a
 ### Page navigation improved
 We have completely changed the way a user works with surveys that have multiple pages. Instead of displaying pages in horizontally oriented tabs, we now use a Microsoft Word inspired page layout (all pages, one by one) with a vertically oriented page navigator widget.
 
+![Page navigator](images/creator-v2-page-navigator.png)
+_Page navigator_
+
+<!-- 
 <p align="center">
   
 ![Page navigator](images/creator-v2-page-navigator.png)
 
 _Page navigator_
-</p>
+</p> 
+-->
+
+
 
 
 <a id="action-buttons"></a> 
@@ -93,29 +100,22 @@ _Page navigator_
 ### Action buttons arranged
 Creator actions which are available in different tabs (Designer, Logic, etc.) and elements (such as pages, panels, or questions) are now displayed into one line. You have programmatic access to actions - they are in your full control.
 
-![Action buttons](images/creator-v2-action-buttons.png)
-
+![Action buttons](images/creator-v2-action-buttons.png)  
+_Action buttons_
 
 <a id="logic-tab"></a>
 
 ### Logic tab redesigned
 We've fully redesigned the Creator's Logic tab. A logical item can now be created and edited on the same screen.
 
-<p align="center">
-  
-![Logic item editing](images/creator-v2-logic-tab-item-editing.png)
-
+![Logic item editing](images/creator-v2-logic-tab-item-editing.png)  
 _Editing of a logical item_
-</p>
 
 A user can filter logical items by questions (to show only items related to a particular question) or by a logical type. Such filtering is useful for complex surveys that have a lot of logical conditions defined.
 
-<p align="center">
-  
-![Logic filtering](images/creator-v2-logic-tab-filtering.png)
-
+![Logic filtering](images/creator-v2-logic-tab-filtering.png)  
 _Filtering of logical items_
-</p>
+
 
 
 <a id="adorners"></a>
@@ -125,21 +125,16 @@ We've greatly modified element adorners displayed within pages, panels and quest
 
 With new adorners, users can edit any string element in a survey by simply clicking on the element.
 
-<p align="center">
-  
-![Column title adorner](images/creator-v2-adorner-column-title.png)
 
+![Column title adorner](images/creator-v2-adorner-column-title.png)  
 _Column title adorner_
-</p>
+
 
 Adorners allow users to setup column cell properties directly in the designer.
 
-<p align="center">
-  
-![Setup column cell editor](images/creator-v2-adorner-column-setup.png)
-
+![Setup column cell editor](images/creator-v2-adorner-column-setup.png)  
 _Setting up column cell properties_
-</p>
+
 
 
 <a id="element-creation"></a>
@@ -147,12 +142,9 @@ _Setting up column cell properties_
 ### Element creation made easier
 In the designer, users can quickly add new survey elements (such as questions or panels) by clicking the "Add Question" button and by using an ellipses button.
 
-<p align="center">
-  
-![Add new question](images/creator-v2-element-creation.png)
-
+![Add new question](images/creator-v2-element-creation.png)  
 _Adding a new question from the designer_
-</p>
+
 
 
 <a id="element-selector"></a>
@@ -160,12 +152,9 @@ _Adding a new question from the designer_
 ### Element selector modified
 We have improved the appearance of the survey element selector. In addition, it now displays the filter box only if the element list contains more than a specific number of elements (ten by default).
 
-<p align="center">
-  
-![Element selector](images/creator-v2-element-selector-2.png)
-
+![Element selector](images/creator-v2-element-selector-2.png)  
 _Element selector_
-</p>
+
 
 
 <a id="toolbox-and-property-grid"></a>
@@ -215,23 +204,17 @@ In Creator V1, we used the [after render](https://surveyjs.io/Examples/Library?i
 As a result, we have implemented an alternative render mechanism for SurveyJS Library elements. A developer can now register a new render for UI elements in SurveyJS Library and use a custom render code instead of the default one. This allows us to introduce better support for in-place editing within the Creator's designer. 
 For example, to make all our survey strings editable in Creator V2, we just override the default string element rendering with a `DIV` that supports editable content. 
 
-<p align="center">
-  
-![Rating text adorner](images/creator-v2-rating-text-adorner-2.png)
-
+![Rating text adorner](images/creator-v2-rating-text-adorner-2.png)  
 _Rating text adorner_
-</p>
+
 
 
 #### Creator elements as SurveyJS Library widgets
 In Creator V2, many UI elements are represented by SurveyJS Library elements/widgets, in particular: the Toolbox, Property Grid, element selectors, tabs, a list of logic items in the Logic tab, a list of matrices in the Translation tab, etc. Such Library elements provide out-of-the-box support for better adaptivity and accessibility.  
 
-<p align="center">
-  
-![Toolbox adaptivity](images/creator-v2-toolbox-adaptivity-2.png)
-
+![Toolbox adaptivity](images/creator-v2-toolbox-adaptivity-2.png)  
 _Toolbox adaptivity_
-</p>
+
 
 
 #### Property Grid rendered as a survey
@@ -241,12 +224,9 @@ As a result, the Property Grid in Creator V2 is now a one-page survey (with turn
 For more details, refer to the [Add a custom property editor for a custom property](https://surveyjs.io/Examples/Survey-Creator?id=custompropertyeditor&platform=ReactjsV2#content-js) example.  
 Note that while developing the Property Grid, we have additionally introduced a lot of small improvements in SurveyJS Library, such as [context actions](https://surveyjs.io/Examples/Library?id=survey-titleactions) in question titles and many others.
 
-<p align="center">
-  
-![Choices property editor](images/creator-v2-choices-property-editor-2.png)
-
+![Choices property editor](images/creator-v2-choices-property-editor-2.png)  
 _Context actions in the choices property editor_
-</p>
+
 
 
 #### Logic tab specificities
