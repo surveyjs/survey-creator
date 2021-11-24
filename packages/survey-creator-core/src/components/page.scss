@@ -73,7 +73,9 @@ svc-page {
   background-color: transparent;
   cursor: pointer;
   margin-right: calcSize(1);
-
+  use {
+    fill: $foreground-light;
+  }
   &:hover {
     background-color: $background-dim;
   }
