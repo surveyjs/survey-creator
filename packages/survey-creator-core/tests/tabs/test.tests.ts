@@ -220,13 +220,14 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
   expect(model.pageListItems[2].title).toEqual("page3");
   expect(selectedPage().title).toEqual("page1");
 
-  model.initialize({
+  creator.JSON = {
     pages: [
       { name: "page1", title: "page title 1", questions: [{ type: "text", name: "q1" }] },
       { name: "page2", title: "page title 2", questions: [{ type: "text", name: "q2" }] },
       { name: "page3", questions: [{ type: "text", name: "q3" }] }
     ]
-  }, creator);
+  };
+  creator.getPlugin("test").update();
   expect(model.pageListItems[0].title).toEqual("page title 1");
   expect(model.pageListItems[1].title).toEqual("page title 2");
   expect(model.pageListItems[2].title).toEqual("page3");
