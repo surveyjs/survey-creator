@@ -39,7 +39,6 @@ import { TabbedMenuComponent } from "./components/TabbedMenu";
 import { editableStringRendererName } from "./components/StringEditor";
 import { NotifierComponent } from "./components/Notifier";
 import { SvgBundleComponent } from "./components/SvgBundle";
-StylesManager.applyTheme("modern");
 
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;

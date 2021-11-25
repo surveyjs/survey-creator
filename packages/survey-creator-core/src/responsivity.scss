@@ -12,9 +12,9 @@
   }
 
   .svc-page__content {
-    padding-left: 0;    
-    padding-right: 0;   
-    border: 0; 
+    padding-left: 0;
+    padding-right: 0;
+    border: 0;
   }
 
   .svc-question__content {
@@ -27,6 +27,13 @@
     justify-content: initial;
     .sd-title.sd-container-modern__title {
       padding: calcSize(2);
+      flex-direction: column-reverse;
+
+      .svc-logo-image {
+        margin-bottom: calcSize(2);
+        margin-top: 0;
+      }
+
       h3 {
         margin: 0;
         font-size: calcSize(3);
@@ -43,7 +50,7 @@
     }
   }
   .svc-properties-wrapper {
-    width: 100%
+    width: 100%;
   }
 
   .svc-question__content-actions {
