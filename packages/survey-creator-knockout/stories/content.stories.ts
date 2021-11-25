@@ -4,8 +4,7 @@ import { SurveyCreator } from "../src/entries";
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 import { TabDesignerViewModel } from "@survey/creator";
 
-import "../node_modules/survey-core/modern.css";
-StylesManager.applyTheme("modern");
+import "../node_modules/survey-core/defaultV2.css";
 settings.lazyRowsRendering = true;
 
 import surveyJSON from "./sample-survey.json";

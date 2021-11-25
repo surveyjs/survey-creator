@@ -34,13 +34,12 @@
 
     <script src="http://127.0.0.1:8080/build/survey-core/survey.core.js"></script>
     <script src="http://127.0.0.1:8080/build/survey-react-ui/survey-react-ui.js"></script>
+    <script src="../build/survey-creator-react.js"></script>
     <link
       rel="stylesheet"
       type="text/css"
-      href="http://127.0.0.1:8080/build/survey-core/modern.css"
+      href="http://127.0.0.1:8080/build/survey-core/defaultV2.css"
     />
-
-    <script src="../build/survey-creator-react.js"></script>
     <link
       rel="stylesheet"
       type="text/css"
@@ -140,7 +139,6 @@
   }
  ]
 };
-    Survey.StylesManager.applyTheme("modern");
     let creator = new SurveyCreator.SurveyCreator({});
     window.creator = creator;
     creator.JSON = json;
