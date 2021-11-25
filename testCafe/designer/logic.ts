@@ -121,7 +121,7 @@ const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filte
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New");
 const addButton = Selector(".sd-paneldynamic__add-btn").filterVisible();
-const removeButton = Selector(".sv-paneldynamic__remove-btn--right").filterVisible();
+const removeButton = Selector(".svc-logic-paneldynamic__remove-btn--right").filterVisible();
 const doneButton = Selector("button").withExactText("Done").filterVisible();
 
 const errorNotifyBalloonSelector = Selector(".svc-notifier.svc-notifier--error").filterVisible();
