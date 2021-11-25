@@ -197,6 +197,7 @@ export class TestSurveyTabViewModel extends Base {
 
     this.selectPageAction = new Action({
       id: "pageSelector",
+      css: "svc-page-selector",
       title: this.getSelectPageTitle(),
       visible: this.isRunning && this.pageListItems.length > 1 && this.showPagesInTestSurveyTab,
       component: "sv-action-bar-item-dropdown",
