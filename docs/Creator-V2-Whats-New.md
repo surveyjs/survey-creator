@@ -36,8 +36,7 @@ From the very beginning of SurveyJS, we used [KnockoutJS](https://knockoutjs.com
 
 
 ### Problem: eval() function limitation
-[Knockout](https://knockoutjs.com/) has limitations. And the biggest one is the use of the  [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) function in template parsing. Although it might be OK to run `eval()` on the client browser in some scenarios, it is still quite a dangerous function which may end up running malicious code on the user's machine.  
-Companies usually minimize their security risks by adding security checks integrated into their DevOps pipelines. Such checks might prevent companies from using JavaScript libraries which have `eval()` function calls.
+[Knockout](https://knockoutjs.com/) has limitations. And the biggest one is the use of the [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) function in its code. Although it is OK that [Knockout](https://knockoutjs.com/) runs eval() to process templates, it is still quite dangerous to have the `eval()` function in the production code. An incorrect use of the `eval()` by application developers may end up running malicious code on the user's machine. That is why companies usually minimize their security risks (by adding security checks integrated into their DevOps pipelines) and do not allow applications to use the `eval()` function at all. Such security concerns might prevent companies from using third-party JavaScript libraries which have `eval()` function calls inside them.
 
 
 ### Problem: a black box
