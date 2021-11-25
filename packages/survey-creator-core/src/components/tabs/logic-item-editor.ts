@@ -255,7 +255,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.root += " svc-logic-paneldynamic";
       options.cssClasses.buttonAdd += " svc-logic-operator svc-logic-operator--action sd-paneldynamic__add-btn";
       options.cssClasses.iconRemove = "svc-icon-remove";
-      options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button";
+      options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
+      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right"
       options.cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
     }
   }

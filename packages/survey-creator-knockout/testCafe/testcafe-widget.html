@@ -7,12 +7,12 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="../node_modules/survey-core/modern.css"
+      href="../build/survey-creator-knockout.min.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="../build/survey-creator-knockout.min.css"
+      href="../node_modules/survey-core/defaultV2.css"
     />
     <script src="../node_modules/survey-core/survey.core.js"></script>
     <script src="../node_modules/survey-knockout-ui/survey-knockout-ui.js"></script>
@@ -42,7 +42,6 @@
       <survey-creator params="creator: creator"></survey-creator>
     </div>
     <script>
-      Survey.StylesManager.applyTheme("modern");
       const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true, haveCommercialLicense: true });
       window.creator = creator;
       ko.applyBindings({ creator: creator });
