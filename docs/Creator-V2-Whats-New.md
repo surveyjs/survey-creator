@@ -7,11 +7,13 @@ Welcome to the major update of SurveyJS Creator. A lot of hard work has been don
 - [Major changes in UX/UI](#ui-changes)
   - [Page navigation](#page-navigation)
   - [Action buttons](#action-buttons)
-  - [Logic tab](#logic-tab)
   - [Adorners](#adorners)
   - [Element creation](#element-creation)
   - [Element selector](#element-selector)
   - [Toolbox and Property Grid](#toolbox-and-property-grid)
+  - [Translation tab](#translation-tab)
+  - [Logic tab](#logic-tab)
+  - [Test tab](#test-tab)
 - [Technical changes](#technical-changes)
   - [Modifications made evolutionarily](#modifications-made-evolutionarily)
   - [Changes in SurveyJS Library](#changes-in-surveyjs-library)
@@ -102,19 +104,6 @@ Creator actions which are available in different tabs (Designer, Logic, etc.) an
 ![Action buttons](images/creator-v2-action-buttons.png)  
 _Action buttons_
 
-<a id="logic-tab"></a>
-
-### Logic tab redesigned
-We've fully redesigned the Creator's Logic tab. A logical item can now be created and edited on the same screen.
-
-![Logic item editing](images/creator-v2-logic-tab-item-editing.png)  
-_Editing of a logical item_
-
-A user can filter logical items by questions (to show only items related to a particular question) or by a logical type. Such filtering is useful for complex surveys that have a lot of logical conditions defined.
-
-![Logic filtering](images/creator-v2-logic-tab-filtering.png)  
-_Filtering of logical items_
-
 
 
 <a id="adorners"></a>
@@ -159,7 +148,42 @@ _Element selector_
 <a id="toolbox-and-property-grid"></a>
 
 ### Toolbox and Property Grid re-thought
-We have completely modified the design of Creator's Toolbox and Property Grid composite elements. Now they look more user-friendly and better adapt themselves to different layouts.  The Translation tab's contents take improvement as well due to embedding the redesigned Property Grid.
+We have completely modified the design of Creator's Toolbox and Property Grid composite elements. Now they look more user-friendly and better adapt themselves to different layouts.  
+
+![Toolbox and Property Grid](images/creator-v2-toolbox-and-property-grid.png)  
+_Toolbox and Property Grid_
+
+
+<a id="translation-tab"></a>
+
+### Translation tab improved
+The Translation tab's contents get improvements due to embedding the redesigned Property Grid and incorporating a survey widget with Matrix questions.
+
+![Translation tab](images/creator-v2-translation-tab-2.png)  
+_Translation tab_
+
+
+<a id="logic-tab"></a>
+
+### Logic tab redesigned
+We've fully redesigned the Creator's Logic tab. A logical item can now be created and edited on the same screen.
+
+![Logic item editing](images/creator-v2-logic-tab-item-editing.png)  
+_Editing of a logical item_
+
+A user can filter logical items by questions (to show only items related to a particular question) or by a logical type. Such filtering is useful for complex surveys that have a lot of logical conditions defined.
+
+![Logic filtering](images/creator-v2-logic-tab-filtering.png)  
+_Filtering of logical items_
+
+
+<a id="test-tab"></a>
+
+### Test tab improved
+We have added a new Device Type setting into the Test tab. With this switch, users can check how the tested survey looks on different devices, including smartphones.
+
+![Test tab's device type](images/creator-v2-device-type.png)  
+_Switching device type_
 
 
 
@@ -244,6 +268,10 @@ _Displaying a detail panel in the Logic tab_
 #### Translation tab specificities
 The Translation tab's content is rendered as a survey containing a dropdown matrix question with a column cell type set to comment.
 To create a better layout within the Translation tab, we introduced a new auto grow/shrink functionality into the comment question type. A comment automatically changes the number of its rows (and so its height and the height of the entire row in a matrix) depending upon the content entered by a user.
+
+![Comment auto-grow](images/creator-v2-comment-row-autogrow.png)  
+_Comment auto-grow_
+
 <!-- 
 (#image animated gif) 
 -->
