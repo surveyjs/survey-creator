@@ -34,6 +34,7 @@ export * from "../components/side-bar/side-bar";
 export * from "../components/side-bar/side-bar-tab";
 export * from "../components/results";
 export * from "../components/simulator";
+export * from "../components/svg-bundle";
 export * from "../components/survey-renderers/dropdown";
 export * from "../components/tabs/test";
 export * from "../components/tabbed-menu/tabbed-menu";
@@ -54,6 +55,7 @@ export {
   editorLocalization,
   editorLocalization as localization,
   settings,
+  svgBundle,
   SurveyLogicUI,
   SurveyLogic,
   SurveyQuestionEditorDefinition,

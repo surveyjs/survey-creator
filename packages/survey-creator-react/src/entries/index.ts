@@ -44,6 +44,7 @@ export {
   editorLocalization,
   editorLocalization as localization,
   settings,
+  svgBundle,
   SurveyLogic,
   SurveyLogicUI,
   SurveyQuestionEditorDefinition,
