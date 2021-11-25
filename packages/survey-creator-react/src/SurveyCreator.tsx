@@ -38,7 +38,7 @@ import {
 import { TabbedMenuComponent } from "./components/TabbedMenu";
 import { editableStringRendererName } from "./components/StringEditor";
 import { NotifierComponent } from "./components/Notifier";
-
+import { SvgBundleComponent } from "./components/SvgBundle";
 StylesManager.applyTheme("modern");
 
 interface ISurveyCreatorComponentProps {
@@ -126,6 +126,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
             notifier={creator.notifier}
           ></NotifierComponent>
         </div>
+        <SvgBundleComponent></SvgBundleComponent>
       </div>
     );
   }
