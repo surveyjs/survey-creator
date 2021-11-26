@@ -60,6 +60,9 @@
   padding: 0;
   .sv-action-bar {
     padding: 0;
+    > .sv-action.sv-dots.sv-action--hidden {
+      margin-right: calcSize(-2);
+    }
   }
 }
 
