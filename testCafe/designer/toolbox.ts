@@ -1,5 +1,6 @@
 import { url, getJSON, toolboxItems } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
+import { takeSnapshot } from "testcafe-blink-diff";
 const title = "Toolbox";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -54,4 +55,9 @@ test("Categories", async (t) => {
     .hover(categories.nth(2), { speed: 0.5 })
     .expect(categories.nth(2).find(".svc-string-editor__button--collapse").visible).notOk()
     .expect(categories.nth(2).find(".svc-string-editor__button--expand").visible).ok();
+});
+
+test("Screenshot", async (t) => {
+  const selector = Selector(".svc-toolbox");
+  await takeSnapshot(t, { selector });
 });
