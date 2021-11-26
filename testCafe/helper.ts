@@ -18,6 +18,10 @@ export const setJSON = ClientFunction((json) => {
   window["creator"].text = JSON.stringify(json);
 });
 
+export const setSurveyPropJSON = ClientFunction((propName, value) => {
+  window["creator"].survey[propName] = value;
+});
+
 export const getJSON = ClientFunction(() => {
   return JSON.parse(window["creator"].text);
 });
