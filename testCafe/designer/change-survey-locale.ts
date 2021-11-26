@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { setSurveyPropJSON, url, setJSON } from "../helper";
+import { setSurveyProp, url, setJSON } from "../helper";
 const title = "Change survey locale";
 
 const json = {
@@ -26,12 +26,12 @@ test("Change survey locale", async t => {
   await setJSON(json);
 
   await t.expect(Selector("div").withText("Choose...").visible).ok();
-  await setSurveyPropJSON("locale", "de");
+  await setSurveyProp("locale", "de");
   await t.expect(Selector("div").withText("Bitte auswählen...").visible).ok();
-  await setSurveyPropJSON("locale", "es");
+  await setSurveyProp("locale", "es");
   await t.expect(Selector("div").withText("Seleccione...").visible).ok();
-  await setSurveyPropJSON("locale", "it");
+  await setSurveyProp("locale", "it");
   await t.expect(Selector("div").withText("Scegli...").visible).ok();
-  await setSurveyPropJSON("locale", "");
+  await setSurveyProp("locale", "");
   await t.expect(Selector("div").withText("Choose...").visible).ok();
 });
