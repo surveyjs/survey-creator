@@ -61,9 +61,8 @@ jobs:
   
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator
-      npm install
-      npm run remove-package-lock
-    displayName: 'Npm install survey-creator root'
+      npm install devextreme-screenshot-comparer -D
+    displayName: 'install devextreme-screenshot-comparer to root'
   
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
@@ -152,9 +151,8 @@ jobs:
   
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator
-      npm install
-      npm run remove-package-lock
-    displayName: 'Npm install survey-creator root'
+      npm install devextreme-screenshot-comparer -D
+    displayName: 'install devextreme-screenshot-comparer to root'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
