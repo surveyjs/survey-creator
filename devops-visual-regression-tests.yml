@@ -111,6 +111,16 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run visual-regression-tests:ci
     displayName: 'Visual Regression Tests CreatorV2 React'
+  
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests/artifacts'
+      targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2VisualRegressionTests/artifacts
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2VisualRegressionTests'
+      ArtifactName: 'SurveyJSCreatorV2VisualRegressionTests'
+      publishLocation: 'Container'  
 
 # ======================= CreatorV2Knockout ======================= #
 - job: CreatorV2Knockout
