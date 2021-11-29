@@ -1,6 +1,10 @@
 import { Selector, ClientFunction } from "testcafe";
 export { url } from "../testCafe/helper";
 
+export const getSurveyJSFramework = ClientFunction(() => {
+  return window["surveyJSFramework"];
+});
+
 //devextreme-screenshot-comparer options
 export const screenshotComparerOptions = {
   path: "./tests",
