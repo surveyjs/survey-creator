@@ -1468,10 +1468,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private getSurveyTextFromDesigner() {
     if (!this.survey) return "";
     var json = (<any>this.survey).toJSON();
+    const indent = settings.jsonEditor.indentation;
     if (this.options && this.options.generateValidJSON) {
-      return JSON.stringify(json, null, 1);
+      return JSON.stringify(json, null, indent);
     }
-    return new SurveyJSON5().stringify(json, null, 1);
+    return new SurveyJSON5().stringify(json, null, indent);
   }
 
   protected setTextValue(value: string) {
