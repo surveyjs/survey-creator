@@ -116,7 +116,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
       "svc-object-selector",
       { model: selectorModel },
       "bottom",
-      this.creator.sideBarLocation == "right" ? "left" : "right"
+      "center"
     );
 
     this.objectSelectionAction = new Action({
