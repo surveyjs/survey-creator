@@ -56,13 +56,3 @@ test("Categories", async (t) => {
     .expect(categories.nth(2).find(".svc-string-editor__button--collapse").visible).notOk()
     .expect(categories.nth(2).find(".svc-string-editor__button--expand").visible).ok();
 });
-
-test("Screenshot", async (t) => {
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-  const toolboxElement = Selector(".svc-toolbox");
-
-  await takeScreenshot("toolbox.png", toolboxElement, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
-});
