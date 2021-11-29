@@ -10,7 +10,10 @@ export const screenshotComparerOptions = {
   path: "./tests",
   screenshotsRelativePath: "../../../visualRegressionTests/screenshots",
   destinationRelativePath: "../../../visualRegressionTests/artifacts",
-  textDiffTreshold: 0.05,
+  enableTextMask: true,
+  textMaskRadius: 5,
+  textDiffTreshold: 0.1,
+  maskRadius: 5,
   attempts: 2,
   attemptTimeout: 500,
   looksSameComparisonOptions: {
@@ -25,4 +28,6 @@ export const screenshotComparerOptions = {
     ignoreAntialiasing: true,
     ignoreCaret: true,
   },
+  generatePatch: false,
+  highlightColor: { r: 0xff, g: 0, b: 0xff },
 };
