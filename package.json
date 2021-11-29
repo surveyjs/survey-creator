@@ -27,12 +27,12 @@
         "@typescript-eslint/parser": "^4.31.0",
         "concurrently": "^6.2.0",
         "eslint": "^7.32.0",
+        "eslint-cli": "^1.1.1",
         "eslint-plugin-react": "^7.25.1",
         "husky": "^7.0.4",
         "lerna": "^3.22.1",
         "testcafe": "^1.16.0",
         "testcafe-reporter-dashboard": "^0.2.4-rc.1",
-        "typescript": "^4.4.4",
-        "eslint-cli": "^1.1.1"
+        "typescript": "4.4.4"
     }
 }
