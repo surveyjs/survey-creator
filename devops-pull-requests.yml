@@ -116,6 +116,9 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
       npm run testcafe_ci
     displayName: 'Functional tests'
+    env:
+      TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN: $(TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN_V1)
+      TESTCAFE_DASHBOARD_URL: $(TESTCAFE_DASHBOARD_URL)
 
 
 - job: CreatorV2Core
@@ -277,6 +280,9 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run testcafe:ci
     displayName: 'Functional test CreatorV2 React'
+    env:
+      TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN: $(TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN_V2_REACT)
+      TESTCAFE_DASHBOARD_URL: $(TESTCAFE_DASHBOARD_URL)
 
 
 - job: CreatorV2Knockout
@@ -369,3 +375,6 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
       npm run testcafe:ci
     displayName: 'Functional test CreatorV2 Knockout'
+    env:
+      TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN: $(TESTCAFE_DASHBOARD_AUTHENTICATION_TOKEN_V2_KNOCKOUT)
+      TESTCAFE_DASHBOARD_URL: $(TESTCAFE_DASHBOARD_URL)
