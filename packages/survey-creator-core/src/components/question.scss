@@ -251,9 +251,10 @@ svc-question,
 }
 .svc-question__drag-element {
   width: calcSize(3);
-  height: calcSize(0.5);
+  height: 6px;
   border: 1px solid $border;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .sd-panel,
