@@ -139,7 +139,7 @@ jobs:
       artifactName: 'SurveyJSLibraryBuild'
       downloadPath: '$(System.ArtifactsDirectory)'
 
-    - script: |
+  - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm install
       npm run remove-package-lock
