@@ -6,7 +6,7 @@ import { SurveyTextWorker } from "./textWorker";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
-import { ISurveyCreatorOptions } from "./settings";
+import { ISurveyCreatorOptions, settings } from "./settings";
 import { EditableObject } from "./propertyEditors/editableObject";
 
 export interface ICreatorOptions {
@@ -696,10 +696,11 @@ implements ISurveyCreatorOptions {
 
   private getSurveyTextFromDesigner() {
     var json = (<any>this.survey).toJSON();
+    const indent = settings.jsonEditor.indentation;
     if (this.options && this.options.generateValidJSON) {
-      return JSON.stringify(json, null, 1);
+      return JSON.stringify(json, null, indent);
     }
-    return new SurveyJSON5().stringify(json, null, 1);
+    return new SurveyJSON5().stringify(json, null, indent);
   }
 
   protected setTextValue(value: string) {

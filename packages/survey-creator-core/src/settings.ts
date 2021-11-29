@@ -77,6 +77,9 @@ export var settings = {
   layout: {
     showTabs: true,
     showToolbar: true
+  },
+  jsonEditor: {
+    indentation: 1
   }
 };
 export interface ICollectionItemAllowOperations {
