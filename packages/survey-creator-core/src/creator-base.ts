@@ -90,6 +90,22 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
   }
 }
 
+export class ToolbarActionContainer extends ActionContainer {
+  constructor(private creator: CreatorBase) {
+    super();
+  }
+  protected getRenderedActions(): Array<Action> {
+    let actions = this.actions;
+    const expandAction = this.creator.sideBar.getExpandAction();
+    var index = actions.indexOf(expandAction);
+    if (index !== -1) {
+      actions.splice(index, 1);
+      actions.push(expandAction);
+    }
+    return actions;
+  }
+}
+
 export type toolBoxLocationType = "left" | "right" | "insideSideBar" | "hidden";
 
 /**
@@ -864,7 +880,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.options = !!options2 ? options2 : {};
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
-    this.toolbarValue = new ActionContainer();
+    this.toolbarValue = new ToolbarActionContainer(this);
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sideBar = new SideBarModel(this);
