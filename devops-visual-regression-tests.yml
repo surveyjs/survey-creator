@@ -23,65 +23,6 @@ pool:
   vmImage: 'Ubuntu-18.04'
 
 jobs:
-
-- job: CreatorV2Core
-  steps:
-  - checkout: self
-  - checkout: Service
-    persistCredentials: true
-    clean: true
-
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '14.x'
-    displayName: 'Install Node.js'
-
-  - powershell: |
-      $env:GIT_REDIRECT_STDERR = '2>&1'
-      git config --global user.email "kurmanov.work@gmail.com"
-      git config --global user.name "dmitrykurmanov"
-    displayName: 'Set up git config'
-
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'specific'
-      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
-      pipeline: '56'
-      specificBuildWithTriggering: true
-      buildVersionToDownload: 'latest'
-      downloadType: 'single'
-      artifactName: 'SurveyJSLibraryBuild'
-      downloadPath: '$(System.ArtifactsDirectory)'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
-      Contents: '**'
-      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
-      OverWrite: true
-
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm install
-      npm run remove-package-lock
-    displayName: 'Npm install survey-creator-core'
-
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm run build
-    displayName: 'Build Creator V2 Core'
-
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm run test
-    displayName: 'Unit tests CreatorV2 Core'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
-      targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
-
-
 - job: CreatorV2React
   dependsOn: CreatorV2Core
   steps:
@@ -112,12 +53,16 @@ jobs:
       artifactName: 'SurveyJSLibraryBuild'
       downloadPath: '$(System.ArtifactsDirectory)'
 
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'current'
-      downloadType: 'single'
-      artifactName: 'SurveyJSCreatorV2BuildCore'
-      downloadPath: '$(System.ArtifactsDirectory)'
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm install
+      npm run remove-package-lock
+    displayName: 'Npm install survey-creator-core'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run build
+    displayName: 'Build Creator V2 Core'
 
   - task: CopyFiles@2
     inputs:
@@ -125,11 +70,6 @@ jobs:
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -199,12 +139,16 @@ jobs:
       artifactName: 'SurveyJSLibraryBuild'
       downloadPath: '$(System.ArtifactsDirectory)'
 
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'current'
-      downloadType: 'single'
-      artifactName: 'SurveyJSCreatorV2BuildCore'
-      downloadPath: '$(System.ArtifactsDirectory)'
+    - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm install
+      npm run remove-package-lock
+    displayName: 'Npm install survey-creator-core'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run build
+    displayName: 'Build Creator V2 Core'
 
   - task: CopyFiles@2
     inputs:
@@ -212,11 +156,6 @@ jobs:
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
