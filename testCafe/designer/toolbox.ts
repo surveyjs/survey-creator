@@ -1,6 +1,5 @@
-import { url, getJSON, toolboxItems, screenshotComparerOptions } from "../helper";
+import { url, getJSON, toolboxItems } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 const title = "Toolbox";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {

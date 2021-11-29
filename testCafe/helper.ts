@@ -75,11 +75,3 @@ export function visibility(node: Element, idx: number): boolean {
   if (style.display === "none" || style.visibility === "hidden") return false;
   return node.parentElement ? visibility(node.parentElement, idx) : true;
 }
-
-//devextreme-screenshot-comparer options
-const screenshotsBasePath = "./";
-export const screenshotComparerOptions = {
-  path: screenshotsBasePath,
-  screenshotsRelativePath: "../../testCafe/screenshots",
-  destinationRelativePath: "../../testCafe/artifacts"
-};

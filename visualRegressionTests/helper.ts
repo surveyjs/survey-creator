@@ -2,9 +2,8 @@ import { Selector, ClientFunction } from "testcafe";
 export { url } from "../testCafe/helper";
 
 //devextreme-screenshot-comparer options
-const screenshotsBasePath = "./tests";
 export const screenshotComparerOptions = {
-  path: screenshotsBasePath,
+  path: "./tests",
   screenshotsRelativePath: "../../../visualRegressionTests/screenshots",
   destinationRelativePath: "../../../visualRegressionTests/artifacts",
   textDiffTreshold: 0.05,
