@@ -1047,11 +1047,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         new TabJsonEditorTextareaPlugin(this);
       }
     }
-    if (this.showTranslationTab) {
-      new TabTranslationPlugin(this);
-    }
     if (this.showEmbeddedSurveyTab) {
       new TabEmbedPlugin(this);
+    }
+    if (this.showTranslationTab) {
+      new TabTranslationPlugin(this);
     }
   }
   private initFooterToolbar(): void {
