@@ -166,7 +166,7 @@ jobs:
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run visual-regression-tests:ci
-    displayName: 'Functional test CreatorV2 React'
+    displayName: 'Visual Regression Tests CreatorV2 React'
 
 
 - job: CreatorV2Knockout
@@ -253,4 +253,4 @@ jobs:
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
       npm run visual-regression-tests:ci
-    displayName: 'Functional test CreatorV2 Knockout'
+    displayName: 'Visual Regression Tests CreatorV2 Knockout'
