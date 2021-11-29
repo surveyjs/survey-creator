@@ -24,7 +24,6 @@ pool:
 
 jobs:
 - job: CreatorV2React
-  dependsOn: CreatorV2Core
   steps:
   - checkout: self
   - checkout: Service
@@ -110,7 +109,6 @@ jobs:
 
 
 - job: CreatorV2Knockout
-  dependsOn: CreatorV2Core
   steps:
   - checkout: self
   - checkout: Service
