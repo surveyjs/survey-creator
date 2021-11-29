@@ -90,6 +90,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     //AM: width unrecognized by react
     return (
       <div className={creatorClassName} ref={this.rootNode}>
+        <SvgBundleComponent></SvgBundleComponent>
         <div className="svc-full-container svc-creator__area svc-flex-column">
           <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
@@ -125,7 +126,6 @@ export class SurveyCreatorComponent extends SurveyElementBase<
             notifier={creator.notifier}
           ></NotifierComponent>
         </div>
-        <SvgBundleComponent></SvgBundleComponent>
       </div>
     );
   }
