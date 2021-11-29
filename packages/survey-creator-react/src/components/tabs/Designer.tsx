@@ -24,8 +24,8 @@ export class TabDesignerComponent extends SurveyElementBase<
   protected get creator(): CreatorBase<SurveyModel> {
     return this.model.creator;
   }
-  protected getStateElement(): Base {
-    return this.model;
+  protected getStateElements(): Array<Base> {
+    return [this.model, this.model.survey];
   }
   protected renderPages(): JSX.Element[] {
     const surveyPages: JSX.Element[] = this.creator.survey.pages.map(

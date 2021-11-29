@@ -21,6 +21,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     newPage.updateCustomWidgets();
     newPage.setWasShown(true);
     newPage.setSurveyImpl(this.survey);
+    newPage.updateElementCss();
     var checkNewElementHandler = (sender: SurveyModel, options: any) => {
       if (options.name === "elements" && newPage.elements.length > 0) {
         newPage.onPropertyChanged.remove(checkNewElementHandler);

@@ -20,7 +20,9 @@ export var settings = {
     greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
   },
-  //TODO add maximumColumnCount
+  jsonEditor: {
+    indentation: 1
+  }
 };
 
 export interface ISurveyCreatorOptions {
