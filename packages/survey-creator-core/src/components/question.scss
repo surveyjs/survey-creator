@@ -239,6 +239,7 @@ svc-question,
 
 .svc-question__drag-area {
   position: absolute;
+  cursor: move;
   top: 0;
   left: 0;
   visibility: hidden;
@@ -249,9 +250,8 @@ svc-question,
   justify-content: center;
 }
 .svc-question__drag-element {
-  cursor: move;
   width: calcSize(3);
-  height: 6px;
+  height: calcSize(0.5);
   border: 1px solid $border;
   border-radius: 10px;
 }
