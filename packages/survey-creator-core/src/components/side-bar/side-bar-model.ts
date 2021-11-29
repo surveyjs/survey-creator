@@ -60,6 +60,7 @@ export class SideBarModel extends Base {
         id: "svd-grid-expand",
         iconName: "icon-expand_20x20",
         css: "svd-grid-expand",
+        needSeparator: true,
         action: () => {
           if (this.expandAction)
             this.expandAction();

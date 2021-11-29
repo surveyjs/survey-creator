@@ -116,14 +116,13 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
       "svc-object-selector",
       { model: selectorModel },
       "bottom",
-      this.creator.sideBarLocation == "right" ? "left" : "right"
+      "center"
     );
 
     this.objectSelectionAction = new Action({
       id: "svd-grid-object-selector",
       title: this.selectedElementName,
       css: "sv-action--last sv-action-bar-item--secondary",
-      iconName: "icon-more",
       component: "sv-action-bar-item-dropdown",
       action: () => {
         this.selectorPopupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
