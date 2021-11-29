@@ -52,6 +52,13 @@ jobs:
       artifactName: 'SurveyJSLibraryBuild'
       downloadPath: '$(System.ArtifactsDirectory)'
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+  
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm install
@@ -62,13 +69,6 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run build
     displayName: 'Build Creator V2 Core'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
-      Contents: '**'
-      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
-      OverWrite: true
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -107,7 +107,7 @@ jobs:
       npm run visual-regression-tests:ci
     displayName: 'Visual Regression Tests CreatorV2 React'
 
-
+# ======================= CreatorV2Knockout ======================= #
 - job: CreatorV2Knockout
   steps:
   - checkout: self
@@ -137,6 +137,13 @@ jobs:
       artifactName: 'SurveyJSLibraryBuild'
       downloadPath: '$(System.ArtifactsDirectory)'
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm install
@@ -147,13 +154,6 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run build
     displayName: 'Build Creator V2 Core'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
-      Contents: '**'
-      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
-      OverWrite: true
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
