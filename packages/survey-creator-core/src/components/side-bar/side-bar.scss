@@ -2,6 +2,7 @@
 
 .svc-side-bar__container {
   display: block;
+  position: relative;
   font-family: $font-family;
   min-width: 370px;
   max-width: calcSize(118);
@@ -13,8 +14,16 @@
   width: 3px;
   height: 100%;
   position: absolute;
+  top: 0;
   background-color: transparent;
   cursor: e-resize;
+}
+
+.svc-resizer-west {
+  left: 0;
+}
+.svc-resizer-east {
+  right: 0;
 }
 
 .svc-side-bar__container-header {
