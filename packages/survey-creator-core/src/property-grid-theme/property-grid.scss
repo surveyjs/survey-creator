@@ -29,7 +29,10 @@
   }
   padding: calcSize(4);
 }
-
+.sv-popup__container {
+  margin-left: calcSize(1);
+  margin-right: calcSize(1);
+}
 .spg-root-modern {
   .sv-action-bar {
     padding-right: calcSize(0.5);

@@ -709,8 +709,7 @@ Survey.ComponentCollection.Instance.add({
         //without loosing the price property value
         Survey.Serializer.addProperty("itemvalue", {
           name: "price:number",
-          visible: false,
-          isSerializable: false,
+          visible: false
         });
         //Create a new class derived from Survey.ItemValue
         //It hides text, visibleIf and enableIf properties

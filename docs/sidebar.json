@@ -13,6 +13,10 @@
       "Title": "Creator V2 (Beta)",
       "Items": [
         {     
+          "Name": "Creator-V2-Whats-New",
+          "Title": "What's new, Creator V2"
+        },
+        {     
           "Name": "Migrate-from-V1-to-V2",
           "Title": "Migration Guide - from V1 to V2"
         },

@@ -7,11 +7,13 @@ Welcome to the major update of SurveyJS Creator. A lot of hard work has been don
 - [Major changes in UX/UI](#ui-changes)
   - [Page navigation](#page-navigation)
   - [Action buttons](#action-buttons)
-  - [Logic tab](#logic-tab)
   - [Adorners](#adorners)
   - [Element creation](#element-creation)
   - [Element selector](#element-selector)
   - [Toolbox and Property Grid](#toolbox-and-property-grid)
+  - [Translation tab](#translation-tab)
+  - [Logic tab](#logic-tab)
+  - [Test tab](#test-tab)
 - [Technical changes](#technical-changes)
   - [Modifications made evolutionarily](#modifications-made-evolutionarily)
   - [Changes in SurveyJS Library](#changes-in-surveyjs-library)
@@ -36,8 +38,7 @@ From the very beginning of SurveyJS, we used [KnockoutJS](https://knockoutjs.com
 
 
 ### Problem: eval() function limitation
-[Knockout](https://knockoutjs.com/) has limitations. And the biggest one is the use of the  [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) function in template parsing. Although it might be OK to run `eval()` on the client browser in some scenarios, it is still quite a dangerous function which may end up running malicious code on the user's machine.  
-Companies usually minimize their security risks by adding security checks integrated into their DevOps pipelines. Such checks might prevent companies from using JavaScript libraries which have `eval()` function calls.
+[Knockout](https://knockoutjs.com/) has limitations. And the biggest one is the use of the [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) function in its code. Although it is OK that [Knockout](https://knockoutjs.com/) runs eval() to process templates, it is still quite dangerous to have the `eval()` function in the production code. An incorrect use of the `eval()` by application developers may end up running malicious code on the user's machine. That is why companies usually minimize their security risks (by adding security checks integrated into their DevOps pipelines) and do not allow applications to use the `eval()` function at all. Such security concerns might prevent companies from using third-party JavaScript libraries which have `eval()` function calls inside them.
 
 
 ### Problem: a black box
@@ -80,12 +81,19 @@ We have introduced a lot of changes in Creator V2. Actually, we have rewritten a
 ### Page navigation improved
 We have completely changed the way a user works with surveys that have multiple pages. Instead of displaying pages in horizontally oriented tabs, we now use a Microsoft Word inspired page layout (all pages, one by one) with a vertically oriented page navigator widget.
 
+![Page navigator](images/creator-v2-page-navigator.png)  
+_Page navigator_
+
+<!-- 
 <p align="center">
   
 ![Page navigator](images/creator-v2-page-navigator.png)
 
 _Page navigator_
-</p>
+</p> 
+-->
+
+
 
 
 <a id="action-buttons"></a> 
@@ -93,29 +101,9 @@ _Page navigator_
 ### Action buttons arranged
 Creator actions which are available in different tabs (Designer, Logic, etc.) and elements (such as pages, panels, or questions) are now displayed into one line. You have programmatic access to actions - they are in your full control.
 
-![Action buttons](images/creator-v2-action-buttons.png)
+![Action buttons](images/creator-v2-action-buttons.png)  
+_Action buttons_
 
-
-<a id="logic-tab"></a>
-
-### Logic tab redesigned
-We've fully redesigned the Creator's Logic tab. A logical item can now be created and edited on the same screen.
-
-<p align="center">
-  
-![Logic item editing](images/creator-v2-logic-tab-item-editing.png)
-
-_Editing of a logical item_
-</p>
-
-A user can filter logical items by questions (to show only items related to a particular question) or by a logical type. Such filtering is useful for complex surveys that have a lot of logical conditions defined.
-
-<p align="center">
-  
-![Logic filtering](images/creator-v2-logic-tab-filtering.png)
-
-_Filtering of logical items_
-</p>
 
 
 <a id="adorners"></a>
@@ -125,21 +113,16 @@ We've greatly modified element adorners displayed within pages, panels and quest
 
 With new adorners, users can edit any string element in a survey by simply clicking on the element.
 
-<p align="center">
-  
-![Column title adorner](images/creator-v2-adorner-column-title.png)
 
+![Column title adorner](images/creator-v2-adorner-column-title.png)  
 _Column title adorner_
-</p>
+
 
 Adorners allow users to setup column cell properties directly in the designer.
 
-<p align="center">
-  
-![Setup column cell editor](images/creator-v2-adorner-column-setup.png)
-
+![Setup column cell editor](images/creator-v2-adorner-column-setup.png)  
 _Setting up column cell properties_
-</p>
+
 
 
 <a id="element-creation"></a>
@@ -147,12 +130,9 @@ _Setting up column cell properties_
 ### Element creation made easier
 In the designer, users can quickly add new survey elements (such as questions or panels) by clicking the "Add Question" button and by using an ellipses button.
 
-<p align="center">
-  
-![Add new question](images/creator-v2-element-creation.png)
-
+![Add new question](images/creator-v2-element-creation.png)  
 _Adding a new question from the designer_
-</p>
+
 
 
 <a id="element-selector"></a>
@@ -160,18 +140,50 @@ _Adding a new question from the designer_
 ### Element selector modified
 We have improved the appearance of the survey element selector. In addition, it now displays the filter box only if the element list contains more than a specific number of elements (ten by default).
 
-<p align="center">
-  
-![Element selector](images/creator-v2-element-selector-2.png)
-
+![Element selector](images/creator-v2-element-selector-2.png)  
 _Element selector_
-</p>
+
 
 
 <a id="toolbox-and-property-grid"></a>
 
 ### Toolbox and Property Grid re-thought
-We have completely modified the design of Creator's Toolbox and Property Grid composite elements. Now they look more user-friendly and better adapt themselves to different layouts.  The Translation tab's contents take improvement as well due to embedding the redesigned Property Grid.
+We have completely modified the design of Creator's Toolbox and Property Grid composite elements. Now they look more user-friendly and better adapt themselves to different layouts.  
+
+![Toolbox and Property Grid](images/creator-v2-toolbox-and-property-grid.png)  
+_Toolbox and Property Grid_
+
+
+<a id="translation-tab"></a>
+
+### Translation tab improved
+The Translation tab's contents get improvements due to embedding the redesigned Property Grid and incorporating a survey widget with Matrix questions.
+
+![Translation tab](images/creator-v2-translation-tab-2.png)  
+_Translation tab_
+
+
+<a id="logic-tab"></a>
+
+### Logic tab redesigned
+We've fully redesigned the Creator's Logic tab. A logical item can now be created and edited on the same screen.
+
+![Logic item editing](images/creator-v2-logic-tab-item-editing.png)  
+_Editing of a logical item_
+
+A user can filter logical items by questions (to show only items related to a particular question) or by a logical type. Such filtering is useful for complex surveys that have a lot of logical conditions defined.
+
+![Logic filtering](images/creator-v2-logic-tab-filtering.png)  
+_Filtering of logical items_
+
+
+<a id="test-tab"></a>
+
+### Test tab improved
+We have added a new Device Type setting into the Test tab. With this switch, users can check how the tested survey looks on different devices, including smartphones.
+
+![Test tab's device type](images/creator-v2-device-type.png)  
+_Switching device type_
 
 
 
@@ -215,23 +227,17 @@ In Creator V1, we used the [after render](https://surveyjs.io/Examples/Library?i
 As a result, we have implemented an alternative render mechanism for SurveyJS Library elements. A developer can now register a new render for UI elements in SurveyJS Library and use a custom render code instead of the default one. This allows us to introduce better support for in-place editing within the Creator's designer. 
 For example, to make all our survey strings editable in Creator V2, we just override the default string element rendering with a `DIV` that supports editable content. 
 
-<p align="center">
-  
-![Rating text adorner](images/creator-v2-rating-text-adorner-2.png)
-
+![Rating text adorner](images/creator-v2-rating-text-adorner-2.png)  
 _Rating text adorner_
-</p>
+
 
 
 #### Creator elements as SurveyJS Library widgets
 In Creator V2, many UI elements are represented by SurveyJS Library elements/widgets, in particular: the Toolbox, Property Grid, element selectors, tabs, a list of logic items in the Logic tab, a list of matrices in the Translation tab, etc. Such Library elements provide out-of-the-box support for better adaptivity and accessibility.  
 
-<p align="center">
-  
-![Toolbox adaptivity](images/creator-v2-toolbox-adaptivity-2.png)
-
+![Toolbox adaptivity](images/creator-v2-toolbox-adaptivity-2.png)  
 _Toolbox adaptivity_
-</p>
+
 
 
 #### Property Grid rendered as a survey
@@ -241,12 +247,9 @@ As a result, the Property Grid in Creator V2 is now a one-page survey (with turn
 For more details, refer to the [Add a custom property editor for a custom property](https://surveyjs.io/Examples/Survey-Creator?id=custompropertyeditor&platform=ReactjsV2#content-js) example.  
 Note that while developing the Property Grid, we have additionally introduced a lot of small improvements in SurveyJS Library, such as [context actions](https://surveyjs.io/Examples/Library?id=survey-titleactions) in question titles and many others.
 
-<p align="center">
-  
-![Choices property editor](images/creator-v2-choices-property-editor-2.png)
-
+![Choices property editor](images/creator-v2-choices-property-editor-2.png)  
 _Context actions in the choices property editor_
-</p>
+
 
 
 #### Logic tab specificities
@@ -265,6 +268,10 @@ _Displaying a detail panel in the Logic tab_
 #### Translation tab specificities
 The Translation tab's content is rendered as a survey containing a dropdown matrix question with a column cell type set to comment.
 To create a better layout within the Translation tab, we introduced a new auto grow/shrink functionality into the comment question type. A comment automatically changes the number of its rows (and so its height and the height of the entire row in a matrix) depending upon the content entered by a user.
+
+![Comment auto-grow](images/creator-v2-comment-row-autogrow.png)  
+_Comment auto-grow_
+
 <!-- 
 (#image animated gif) 
 -->
