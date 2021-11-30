@@ -112,7 +112,7 @@ jobs:
       npm run visual-regression-tests:ci
     displayName: 'Visual Regression Tests CreatorV2 React'
 
-- job: Oo_Fail_CreatorV2React
+- job: On_Fail_CreatorV2React
   dependsOn: CreatorV2React
   condition: failed() # this job will only run if Foo fails
   steps:
