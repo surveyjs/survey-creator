@@ -53,12 +53,10 @@ export class StringEditorViewModelBase extends Base {
     let owner = this.locString.owner as any;
 
     this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
-    if(!this.errorText) {
-      if(!clearedText) {
-        const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
-        if(propJSON && propJSON.isRequired) {
-          this.errorText = editorLocalization.getString("pe.propertyIsEmpty");
-        }
+    if(!this.errorText && !clearedText) {
+      const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
+      if(propJSON && propJSON.isRequired) {
+        this.errorText = editorLocalization.getString("pe.propertyIsEmpty");
       }
     }
 
