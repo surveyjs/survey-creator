@@ -38,6 +38,9 @@ svc-page {
 }
 
 .svc-page__add-new-question {
+  &:hover {
+    outline: 2px solid $primary;
+  }
   display: flex;
   align-items: center;
   margin-left: calcSize(2);
