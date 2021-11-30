@@ -24,13 +24,13 @@ svc-page {
 }
 
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-  border: 2px solid $secondary-light;
+  background: $secondary-back-light;
 }
 
-.svc-page__content--selected,
+.svc-creator .svc-page .svc-page__content--selected,
 .svc-hovered.svc-page__content--selected {
-  border: 2px solid $secondary;
-  background: $secondary-light;
+  outline: 2px solid $secondary;
+  background: $secondary-back-light;
   border-radius: calcSize(0.5);
   .svc-page__content-actions {
     display: block;

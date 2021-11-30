@@ -6,6 +6,7 @@ $primary-foreground: var(--primary-foreground, #fff);
 
 $secondary: var(--secondary, #ff9814);
 $secondary-light: var(--secondary-light, rgba(255, 152, 20, 0.25));
+$secondary-back-light: var(--secondary-back-light, rgba(255, 152, 20, 0.1));
 
 $secondary-foreground: var(--secondary-foreground, #fff);
 
@@ -17,10 +18,7 @@ $foreground: var(--foreground, #161616);
 $foreground-light: var(--foreground-light, #909090);
 //todo: discuss this variable
 $foreground-disabled: var(--foreground-disabled, rgba(#161616, 0.16));
-$foreground-disabled-for-editors: var(
-  --foreground-disabled,
-  rgba(#161616, 0.25)
-);
+$foreground-disabled-for-editors: var(--foreground-disabled, rgba(#161616, 0.25));
 
 $border: var(--border, #d6d6d6);
 $border-inside: var(--border-inside, rgba(0, 0, 0, 0.16));
