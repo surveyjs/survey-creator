@@ -13,7 +13,8 @@ import {
   settings as surveySettings,
   QuestionPanelDynamicModel,
   CustomWidgetCollection,
-  QuestionMatrixModel
+  QuestionMatrixModel,
+  Action
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -1336,6 +1337,34 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
 
   settings.propertyGrid.allowCollapse = prevValue;
 });
+
+test("Check property grid expand action is always last", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      }
+    ]
+  };
+
+  const index = creator.toolbar.renderedActions.length - 1;
+  expect(creator.toolbar.renderedActions[index].id).toEqual("svd-grid-expand");
+  creator.toolbarItems.push(new Action({
+    id: "test-action",
+    visible: true,
+    title: "Test action",
+    action: function () {}
+  }));
+  expect(creator.toolbar.renderedActions[index].id).toEqual("test-action");
+  expect(creator.toolbar.renderedActions[index + 1].id).toEqual("svd-grid-expand");
+});
+
 test("Show survey in property grid on deleting last page", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

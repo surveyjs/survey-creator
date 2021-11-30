@@ -1,4 +1,8 @@
 <div class="svc-creator" data-bind="css: {'svc-creator--mobile' : creator.isMobileView }">
+<div>
+  <!-- ko component: { name: 'svc-svg-bundle'} -->
+  <!-- /ko -->
+</div>
 <div class="svc-full-container svc-creator__area svc-flex-column">
   <div class="svc-flex-row svc-full-container" data-bind="css : { 'svc-creator__side-bar--left': creator.sideBarLocation == 'left' }">
     <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
@@ -46,10 +50,6 @@
   </div>
   <!-- /ko -->
   <!-- ko component: { name: 'svc-notifier', params: { creator: creator, notifier: creator.notifier } } -->
-  <!-- /ko -->
-</div>
-<div>
-  <!-- ko component: { name: 'svc-svg-bundle'} -->
   <!-- /ko -->
 </div>
 </div>
