@@ -29,4 +29,19 @@ svc-tab-test {
       justify-content: center;
     }
   }
+
+  .svc-page-selector {
+    max-width: 50%;
+
+    .sv-action-bar-item {
+      width: 100%;
+    }
+
+    .sv-action-bar-item__title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+    }
+  }
 }

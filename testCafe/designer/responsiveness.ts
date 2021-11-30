@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { collapseButtonSelector, getBarItemByTitle, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
+import { collapseButtonSelector, expandButtonSelector, getBarItemByTitle, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
 const title = "Responsiveness";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -82,6 +82,12 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
     .resizeWindow(1920, 900); // reset for next tests, beforeEach not work (((
 });
 
+async function changeSideBarLocation(newVal: string) {
+  await ClientFunction((newVal) => {
+    window["creator"].sideBarLocation = newVal;
+  })(newVal);
+}
+
 test("Responsive creator: property grid", async (t) => {
   await setJSON({
     pages: [
@@ -93,15 +99,19 @@ test("Responsive creator: property grid", async (t) => {
       }
     ]
   });
-  const resizer = Selector(".svc-resizer");
+  const westResizer = Selector(".svc-resizer-west");
+  const eastResizer = Selector(".svc-resizer-east");
   await t
+    .expect(westResizer.visible).ok()
+    .expect(eastResizer.visible).notOk()
+
     .click(questions.find(".sv-string-editor").withText("question1"))
     .expect(propertyGridSelector.visible).ok()
     .expect(propertyGridSelector.offsetWidth).eql(450)
     .expect(flyoutPropertyGrid.exists).notOk()
     .expect(questionToolbarActions.count).eql(4)
 
-    .drag(resizer, 100, 0)
+    .drag(westResizer, 100, 0)
     .expect(propertyGridSelector.offsetWidth).eql(370)
 
     .resizeWindow(750, 700)
@@ -109,8 +119,8 @@ test("Responsive creator: property grid", async (t) => {
     .expect(propertyGridSelector.offsetWidth).eql(370)
     .expect(flyoutPropertyGrid.exists).ok()
 
-    .drag(resizer, -100, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(470)
+    .drag(westResizer, -200, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(570)
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
@@ -127,7 +137,20 @@ test("Responsive creator: property grid", async (t) => {
     .expect(propertyGridSelector.visible).notOk()
     .expect(flyoutPropertyGrid.exists).notOk()
 
-    .resizeWindow(1920, 900); // reset for next tests
+    .click(expandButtonSelector);
+  await changeSideBarLocation("left");
+
+  await t
+    .expect(westResizer.visible).notOk()
+    .expect(eastResizer.visible).ok()
+    .expect(propertyGridSelector.offsetWidth).eql(570)
+
+    .drag(eastResizer, -170, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(400)
+
+    .resizeWindow(1920, 900) // reset for next tests
+    .drag(eastResizer, 200, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(600);
 });
 
 test("Responsive creator: designer tab for mobile devices", async (t) => {
