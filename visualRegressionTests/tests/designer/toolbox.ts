@@ -10,7 +10,6 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 test("Screenshot", async (t) => {
-  const framework = await getSurveyJSFramework();
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
   const toolboxElement = Selector(".svc-toolbox");
 
