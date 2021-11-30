@@ -12,15 +12,15 @@ export const screenshotComparerOptions = {
   destinationRelativePath: "../../../visualRegressionTests/artifacts",
   enableTextMask: true,
   textMaskRadius: 5,
-  textDiffTreshold: 0.1,
+  textDiffTreshold: 0.5,
   maskRadius: 5,
   attempts: 2,
   attemptTimeout: 500,
   looksSameComparisonOptions: {
     strict: false,
-    tolerance: 5,
+    tolerance: 8,
     ignoreAntialiasing: true,
-    antialiasingTolerance: 5,
+    antialiasingTolerance: 8,
     ignoreCaret: true,
   },
   textComparisonOptions: {
