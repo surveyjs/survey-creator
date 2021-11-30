@@ -145,8 +145,8 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
     return items;
   }
   private updateUndeRedoActions() {
-    // this.undoAction.active = this.undoRedoManager.canUndo();
-    // this.redoAction.active = this.undoRedoManager.canRedo();
+    this.undoAction.active = this.undoRedoManager.canUndo();
+    this.redoAction.active = this.undoRedoManager.canRedo();
   }
 
   /**
