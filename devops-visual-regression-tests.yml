@@ -102,10 +102,10 @@ jobs:
   #     npm run build
   #   displayName: 'Build CreatorV2 React'
 
-  # - script: |
-  #     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-  #     npm run test
-  #   displayName: 'Unit test CreatorV2 React'
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npm run test
+    displayName: 'Unit test CreatorV2 React'
 
   # - script: |
   #     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
