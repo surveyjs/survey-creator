@@ -107,19 +107,15 @@ jobs:
       npm run test
     displayName: 'Unit test CreatorV2 React'
 
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-      npm run visual-regression-tests:ci
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+        npm run visual-regression-tests:ci
+      errorActionPreference: 'continue'
     displayName: 'Visual Regression Tests CreatorV2 React'
 
-- job: On_Fail_CreatorV2React
-  dependsOn: CreatorV2React
-  condition: failed() # this job will only run if Foo fails
-  steps:
-  - checkout: self
-  - checkout: Service
-    persistCredentials: true
-    clean: false
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests/artifacts'
@@ -129,6 +125,7 @@ jobs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2_React_VisualRegressionTests'
       ArtifactName: 'SurveyJSCreatorV2_React_VisualRegressionTests'
       publishLocation: 'Container'  
+
 # ======================= CreatorV2Knockout ======================= #
 - job: CreatorV2Knockout
   steps:
