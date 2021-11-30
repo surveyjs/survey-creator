@@ -87,7 +87,7 @@
 
 .svc-logic-paneldynamic {
   .sd-paneldynamic__separator {
-    display:none
+    display: none;
   }
 }
 
@@ -127,6 +127,7 @@
 .svc-logic-operator--action.sd-paneldynamic__add-btn.sd-paneldynamic__add-btn,
 .svc-logic-operator--operator.sd-paneldynamic__add-btn.sd-paneldynamic__add-btn {
   color: $foreground-light;
+  margin-bottom: calcSize(2);
 }
 
 .svc-logic-tab__content {
@@ -175,7 +176,7 @@
   }
 
   .sd-paneldynamic__panel-wrapper--in-row {
-    margin-top: calcSize(2);
+    margin-top: 0;
     align-items: start;
   }
 }
@@ -212,8 +213,7 @@
     max-width: none;
   }
   .sd-page.sd-body__page {
-    padding-left: 0;
-    padding-top: 0;
+    padding: 0;
   }
 
   .sl-panel__footer {
