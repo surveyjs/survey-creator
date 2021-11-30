@@ -111,6 +111,22 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run visual-regression-tests:ci
     displayName: 'Visual Regression Tests CreatorV2 React'
+  
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT'
+      OverWrite: true
+    condition: always()
+    displayName: 'copy artifacts'
+  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT/'
+      ArtifactName: 'Creator_React_VRT'
+      publishLocation: 'Container'
+    condition: always()
 
 # ======================= CreatorV2Knockout ======================= #
 - job: CreatorV2Knockout
@@ -201,3 +217,19 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
       npm run visual-regression-tests:ci
     displayName: 'Visual Regression Tests CreatorV2 Knockout'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT'
+      OverWrite: true
+    condition: always()
+    displayName: 'copy artifacts'
+  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT/'
+      ArtifactName: 'Creator_React_VRT'
+      publishLocation: 'Container'
+    condition: always()
