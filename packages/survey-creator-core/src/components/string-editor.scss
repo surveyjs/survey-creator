@@ -106,6 +106,7 @@
     outline: calcSize(0.25) solid $primary;
     border-radius: 3px;
     background-color: $background;
+    box-shadow: 0px 2px 6px $shadow-medium;
   }
 }
 
