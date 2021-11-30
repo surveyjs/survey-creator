@@ -37,6 +37,7 @@
 .svc-string-editor__error {
   margin-left: calcSize(1);
   line-height: calcSize(4);
+  font-size: calcSize(2);
   color: red;
 }
 
@@ -107,7 +108,7 @@
     background-color: $background;
   }
 }
-  
+
 .sd-rating {
   .sd-rating__item:focus-within {
     border: calcSize(0.25) solid $primary;
@@ -142,15 +143,15 @@
 }
 
 .sd-table__cell:first-child {
-    .svc-string-editor{
-      margin-left: calcSize(1);
+  .svc-string-editor {
+    margin-left: calcSize(1);
   }
 }
 
 survey-creator,
 .svc-creator,
 .sv-popup {
-  .svc-string-editor{
+  .svc-string-editor {
     *:not(button):focus {
       outline: none;
     }
