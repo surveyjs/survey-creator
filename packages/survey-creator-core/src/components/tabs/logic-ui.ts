@@ -280,7 +280,7 @@ export class SurveyLogicUI extends SurveyLogic {
 
       panel.footerActions.push({
         id: "saveDetailPanel",
-        innerCss: "sv-btn sv-matrixdynamic__add-btn",
+        innerCss: "sl-panel__done-button",
         title: this.getLocString("pe.doneEditing"),
         action: () => {
           if (this.saveEditableItem()) {

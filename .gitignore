@@ -41,3 +41,6 @@ package
 tmp
 package-lock.json
 /packages/*/coverage/**/*
+
+visualRegressionTests/screenshots
+visualRegressionTests/artifacts

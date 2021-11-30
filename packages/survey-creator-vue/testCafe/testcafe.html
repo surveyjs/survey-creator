@@ -4,10 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+    <!--<script src="https://unpkg.com/browse/vue@3.2.23/dist/vue.global.js"></script>-->
+    <script src="https://unpkg.com/vue@next/dist/vue.global.js"></script>
     <link
       rel="stylesheet"
       type="text/css"
-      href="../build/survey-creator-knockout.min.css"
+      href="../node_modules/survey-creator-knockout/survey-creator-knockout.min.css"
     />
     <link
       rel="stylesheet"
@@ -17,17 +20,25 @@
     <script src="../node_modules/survey-core/survey.core.js"></script>
     <script src="../node_modules/survey-knockout-ui/survey-knockout-ui.js"></script>
     -->
-    <script src="../build/survey-creator-knockout.js"></script>
+    <script src="../node_modules/survey-creator-knockout/survey-creator-knockout.js"></script>
   </head>
   <body>
-    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
-      <survey-creator params="creator: creator"></survey-creator>
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;" id="surveyAppElement">
+      <div id="surveyCreatorElement"></div>
     </div>
     <script>
-      window.surveyJSFramework = "ko";
       const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true, haveCommercialLicense: true });
       window.creator = creator;
-      ko.applyBindings({ creator: creator });
+      const RootComponent = {
+        setup() {
+          return { json: {} };
+        },
+        mounted: function () {
+          creator.render("surveyCreatorElement");
+        }
+      };
+      const app = Vue.createApp(RootComponent);
+      app.mount('#surveyAppElement');
     </script>
   </body>
 </html>

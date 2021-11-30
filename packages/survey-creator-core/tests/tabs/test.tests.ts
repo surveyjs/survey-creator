@@ -202,6 +202,43 @@ test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", ():
   model.survey.nextPage();
   expect(selectedPage.title).toEqual("Page 2 from 3");
 });
+test("pages, PageListItems, pageSelector: check page titles", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page3", questions: [{ type: "text", name: "q3" }] }
+    ]
+  };
+  const model = getTestModel(creator);
+  const selectedPage: () => IAction = () => model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
+
+  expect(model.pageListItems).toHaveLength(3);
+  expect(model.pageListItems[0].title).toEqual("page1");
+  expect(model.pageListItems[1].title).toEqual("page2");
+  expect(model.pageListItems[2].title).toEqual("page3");
+  expect(selectedPage().title).toEqual("page1");
+
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "page title 1", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "page title 2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page3", questions: [{ type: "text", name: "q3" }] }
+    ]
+  };
+  creator.getPlugin("test").update();
+  expect(model.pageListItems[0].title).toEqual("page title 1");
+  expect(model.pageListItems[1].title).toEqual("page title 2");
+  expect(model.pageListItems[2].title).toEqual("page3");
+  expect(selectedPage().title).toEqual("page title 1");
+
+  model.survey.nextPage();
+  expect(selectedPage().title).toEqual("page title 2");
+
+  model.survey.nextPage();
+  expect(selectedPage().title).toEqual("page3");
+});
 
 test("Simulator view switch", (): any => {
   let creator: CreatorTester = new CreatorTester();

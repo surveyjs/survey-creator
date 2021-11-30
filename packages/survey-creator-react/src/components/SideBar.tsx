@@ -1,5 +1,5 @@
 import React from "react";
-import { SideBarTabModel, SideBarModel, ResizeManager } from "@survey/creator";
+import { SideBarTabModel, SideBarModel } from "@survey/creator";
 import { Base } from "survey-core";
 import { SurveyElementBase, SurveyActionBar, ReactQuestionFactory, ReactElementFactory } from "survey-react-ui";
 
@@ -8,7 +8,6 @@ interface ISideBarComponentProps {
 }
 
 export class SideBarComponent extends SurveyElementBase<ISideBarComponentProps, any> {
-  private resizeManager: ResizeManager;
   private containerRef: React.RefObject<HTMLDivElement>;
 
   get model(): SideBarModel {
@@ -26,11 +25,11 @@ export class SideBarComponent extends SurveyElementBase<ISideBarComponentProps, 
 
   componentDidMount() {
     super.componentDidMount();
-    this.resizeManager = new ResizeManager(this.containerRef.current);
+    this.model.initResizeManager(this.containerRef.current);
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    this.resizeManager.dispose();
+    this.model.resetResizeManager();
   }
   public canRender(): boolean {
     if (!this.model) return false;
