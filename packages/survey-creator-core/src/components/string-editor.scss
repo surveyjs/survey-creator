@@ -85,13 +85,14 @@
   color: $foreground;
   .svc-string-editor__border {
     display: flex;
-    top: calcSize(-0.5);
-    bottom: calcSize(-0.5);
+    top: calcSize(0);
+    bottom: calcSize(0);
     left: calcSize(-0.5);
     //right: calcSize(-4.5); // if need pencil icon
     right: calcSize(-0.5);
     border: none;
     background-color: $primary-light;
+    border-radius: 3px;
   }
 }
 .svc-string-editor:focus-within {
@@ -107,7 +108,7 @@
     background-color: $background;
   }
 }
-  
+
 .sd-rating {
   .sd-rating__item:focus-within {
     border: calcSize(0.25) solid $primary;
@@ -142,15 +143,15 @@
 }
 
 .sd-table__cell:first-child {
-    .svc-string-editor{
-      margin-left: calcSize(1);
+  .svc-string-editor {
+    margin-left: calcSize(1);
   }
 }
 
 survey-creator,
 .svc-creator,
 .sv-popup {
-  .svc-string-editor{
+  .svc-string-editor {
     *:not(button):focus {
       outline: none;
     }
