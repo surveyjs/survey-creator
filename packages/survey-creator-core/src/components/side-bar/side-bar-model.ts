@@ -3,6 +3,7 @@ import { settings } from "../../settings";
 import { getLocString } from "../../editorLocalization";
 import { CreatorBase } from "../../creator-base";
 import { SideBarTabModel } from "./side-bar-tab-model";
+import { ResizeManager } from "../../utils/resizer";
 
 export class SideBarModel extends Base {
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
@@ -10,6 +11,7 @@ export class SideBarModel extends Base {
   private _collapseAction: Action;
   private _activeTab: SideBarTabModel;
   private onPropertyGridVisibilityChanged;
+  private resizeManager: ResizeManager;
 
   @propertyArray() tabs: Array<SideBarTabModel>;
   @property() headerText: string;
@@ -76,6 +78,9 @@ export class SideBarModel extends Base {
       });
     }
   }
+  private getCurrentHandles(): string {
+    return this.creator.sideBarLocation == "right" ? "w" : "e";
+  }
 
   constructor(
     private creator: CreatorBase,
@@ -87,9 +92,12 @@ export class SideBarModel extends Base {
       if (this.isDisposed) return;
       this.visible = options.show;
     };
-    this.creator.onShowPropertyGridVisiblityChanged.add(
-      this.onPropertyGridVisibilityChanged
-    );
+    this.creator.onShowPropertyGridVisiblityChanged.add(this.onPropertyGridVisibilityChanged);
+    this.creator.onPropertyChanged.add((sender, options) => {
+      if (options.name === "sideBarLocation") {
+        this.resizeManager.setHandles(this.getCurrentHandles());
+      }
+    });
     this.visible = this.creator.showPropertyGrid;
     this.createActions();
   }
@@ -113,10 +121,17 @@ export class SideBarModel extends Base {
   }
   public dispose() {
     if (!!this.creator && !this.isDisposed) {
-      this.creator.onShowPropertyGridVisiblityChanged.remove(
-        this.onPropertyGridVisibilityChanged
-      );
+      this.creator.onShowPropertyGridVisiblityChanged.remove(this.onPropertyGridVisibilityChanged);
     }
     super.dispose();
+  }
+  public initResizeManager(container: HTMLDivElement): void {
+    this.resizeManager = new ResizeManager(container, this.getCurrentHandles());
+  }
+  public resetResizeManager(): void {
+    if (!!this.resizeManager) {
+      this.resizeManager.dispose();
+      this.resizeManager = undefined;
+    }
   }
 }

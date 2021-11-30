@@ -74,7 +74,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const creatorClassName = "svc-creator" + (this.props.creator.isMobileView ? " svc-creator--mobile" : "");
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
-    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__property-panel--" + this.creator.sideBarLocation);
+    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sideBarLocation);
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
       licenseBanner = (
