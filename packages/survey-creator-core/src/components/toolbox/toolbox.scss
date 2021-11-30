@@ -35,7 +35,7 @@ svc-toolbox {
 
 .svc-toolbox__tool:not(.sv-dots) {
   display: flex;
-  width: 100%;
+  width: auto;
   padding-right: calcSize(1);
 }
 
