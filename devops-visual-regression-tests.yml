@@ -114,7 +114,7 @@ jobs:
   
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests/artifacts'
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
       Contents: '**'
       TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT'
       OverWrite: true
