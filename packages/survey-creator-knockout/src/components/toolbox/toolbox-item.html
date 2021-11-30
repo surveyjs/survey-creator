@@ -1,8 +1,5 @@
-<div
-  class="svc-toolbox__item"
-  tabindex="0"
-  data-bind="attr: { title: item.tooltip, role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName"
->
+<div class="svc-toolbox__item" tabindex="0"
+  data-bind="attr: { role: 'button', 'aria-label': ariaLabel }, css: 'svc-toolbox__item--' + item.iconName">
   <span class="svc-toolbox__item-container">
     <sv-svg-icon params="iconName: iconName, size: 24"></sv-svg-icon>
   </span>

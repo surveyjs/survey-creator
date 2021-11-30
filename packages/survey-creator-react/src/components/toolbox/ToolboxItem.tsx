@@ -106,7 +106,6 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
       <div
         className={className}
         tabIndex={0}
-        title={this.item.tooltip}
         role="button"
         aria-label={
           this.item.tooltip +
