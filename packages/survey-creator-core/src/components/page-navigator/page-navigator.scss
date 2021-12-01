@@ -24,6 +24,12 @@ svc-page-navigator,
   }
 }
 
+.svc-page-navigator__selector {
+  width: calcSize(5.5);
+  height: calcSize(5.5);
+  min-height: calcSize(5.5);
+}
+
 .svc-page-navigator__selector--opened {
   opacity: 0.5;
   .svc-page-navigator__navigator-icon {

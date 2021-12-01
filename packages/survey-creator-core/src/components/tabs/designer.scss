@@ -14,6 +14,10 @@ svc-tab-designer {
   overflow-y: auto;
 }
 
+.svc-tab-designer--with-page-navigator {
+  padding-right: calcSize(6.5);
+}
+
 .svc-tab-designer {
   .sd-container-modern {
     min-width: calcSize(70);
@@ -27,4 +31,13 @@ svc-tab-designer {
       max-width: initial;
     }
   }
+}
+
+.svc-tab-designer__page-navigator {
+  width: calcSize(5.5);
+  height: 100%;
+  position: absolute;
+  padding-top: calcSize(16.5);
+  top: 0;
+  right: calcSize(1);  
 }

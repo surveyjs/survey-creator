@@ -5,6 +5,7 @@ svc-page-navigator-item,
   display: block;
   width: calcSize(5.5);
   height: calcSize(4.5);
+  min-height: calcSize(4.5);
   cursor: pointer;
   position: relative;
 }
@@ -44,16 +45,10 @@ svc-page-navigator-item,
   line-height: calcSize(4.5);
   
   .svc-page-navigator-item__dot {
-    position: relative;
+    position: absolute;
     display: inline-block;
-    top: 0;
-    right: unset;
-    line-height: calcSize(4.5);
-    vertical-align: middle;
-  }
-
-  .svc-text {
-    margin: 0 calcSize(1);
+    top: calcSize(1.75);
+    right: calcSize(1.75);
   }
 }
 
@@ -77,10 +72,12 @@ svc-page-navigator-item,
   }
 }
 
-.svc-page-navigator-item-content:hover {
+.svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover {
   .svc-page-navigator-item__banner {
-    padding: 0 calcSize(2);
+    padding: 0 calcSize(4.5) 0 calcSize(2.5);
     max-width: calcSize(25);
+    overflow: hidden;
+    text-overflow: ellipsis;    
   }
 }
 

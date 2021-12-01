@@ -66,7 +66,7 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
   renderElement(): JSX.Element {
     const survey: SurveyModel = this.creator.survey;
-    const designerTabClassName = "svc-tab-designer " + survey.css.root;
+    const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
 
     return (
       <React.Fragment>
@@ -90,14 +90,14 @@ export class TabDesignerComponent extends SurveyElementBase<
               css={survey.css}
             />
           </div>
+          {this.creator.showPageNavigator ?
+            <div className="svc-tab-designer__page-navigator"><SurveyPageNavigator
+              creator={this.creator}
+              pages={this.creator.pagesController.pages}
+            ></SurveyPageNavigator></div>
+            : null
+          }
         </div>
-        {this.creator.showPageNavigator ?
-          <SurveyPageNavigator
-            creator={this.creator}
-            pages={this.creator.pagesController.pages}
-          ></SurveyPageNavigator>
-          : null
-        }
       </React.Fragment>
     );
   }
