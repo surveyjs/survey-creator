@@ -92,6 +92,7 @@ export { SurveyCreator } from "../editor";
 export { StylesManager } from "../stylesmanager";
 
 //localization
+import "../localization/arabic";
 import "../localization/danish";
 import "../localization/french";
 import "../localization/german";

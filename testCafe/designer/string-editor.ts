@@ -129,7 +129,7 @@ test("Check creator events on string editor", async (t) => {
   await ClientFunction((json, msg) => {
     window["creator"].JSON = json;
     window["creator"].onPropertyValidationCustomError.add(function (sender, options) {
-      if(options.obj.isQuestion && options.propertyName == "description" && options.value.length > 10) {
+      if (options.obj.isQuestion && options.propertyName == "description" && options.value.length > 10) {
         options.error = msg;
       }
     });
@@ -140,6 +140,23 @@ test("Check creator events on string editor", async (t) => {
   await t
     .click(svStringSelector)
     .typeText(svStringSelector, "1234567890", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(Selector(".sd-question__description .svc-string-editor").withText(msg).visible).ok();
+});
+
+test("Check string editor on isRequired", async (t) => {
+  const msg = "Please enter a value";
+  await ClientFunction((json, msg) => {
+    window["Survey"].Serializer.findProperty("question", "description").isRequired = true;
+    window["creator"].JSON = json;
+  })(json2, msg);
+
+  const svStringSelector = Selector(".sv-string-editor").withText("desc");
+
+  await t
+    .click(svStringSelector)
+    .expect(svStringSelector.focused).ok()
+    .pressKey("ctrl+a delete")
     .pressKey("enter")
     .expect(Selector(".sd-question__description .svc-string-editor").withText(msg).visible).ok();
 });
