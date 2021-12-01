@@ -4,10 +4,16 @@ svc-page {
   display: block;
 }
 
+.svc-page {
+  margin-top: calcSize(2);
+  .sd-page__title {
+    margin: calcSize(2.5) 0 0 0;
+  }
+}
+
 .svc-page__content {
   position: relative;
-  padding: calcSize(1);
-  border: 2px solid transparent;
+  padding: calcSize(1) calcSize(1) calcSize(3);
   box-sizing: border-box;
   width: 100%;
   .sd-page {
@@ -18,9 +24,25 @@ svc-page {
 
 .svc-page__content-actions {
   position: absolute;
-  top: 0;
-  right: 0;
   display: none;
+  top: calcSize(1);
+  right: 0;
+  .sv-action-bar {
+    padding: 0 calcSize(1);
+    .sv-action-bar-item {
+      font-size: calcSize(1.5);
+      font-weight: 600;
+      line-height: calcSize(2);
+      align-items: center;
+      height: calcSize(4);
+    }
+    .sv-action-bar-separator {
+      margin-right: calcSize(1);
+    }
+    .sv-action:not(:last-child) > .sv-action__content {
+      padding-right: calcSize(1);
+    }
+  }
 }
 
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
@@ -28,12 +50,14 @@ svc-page {
 }
 
 .svc-creator .svc-page .svc-page__content--selected,
-.svc-hovered.svc-page__content--selected {
-  outline: 2px solid $secondary;
-  background: $secondary-back-light;
+.svc-hovered {
   border-radius: calcSize(0.5);
-  .svc-page__content-actions {
-    display: block;
+  .svc-page__content--selected {
+    outline: 2px solid $secondary;
+    background: $secondary-back-light;
+    .svc-page__content-actions {
+      display: block;
+    }
   }
 }
 
