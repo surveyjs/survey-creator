@@ -29,7 +29,7 @@
   display: flex;
   box-sizing: border-box;
   align-items: center;
-  
+
   .svc-toolbox__item-title {
     color: $foreground;
   }
@@ -72,7 +72,7 @@
 }
 
 .svc-toolbox:not(.svc-toolbox--compact) {
-  .svc-toolbox__tool:hover {
+  .svc-toolbox__tool:not(.sv-dots):hover {
     overflow: hidden;
     border-radius: calcSize(12.5);
     background-color: $background;
@@ -85,6 +85,15 @@
     .sv-svg-icon use {
       fill: $primary;
     }
+  }
+}
+
+.svc-toolbox__tool .sv-dots__item:hover {
+  background-color: $primary-light;
+  border-radius: calc(12.5 * var(--base-unit, 8px));
+
+  .sv-svg-icon use {
+    fill: $primary;
   }
 }
 
