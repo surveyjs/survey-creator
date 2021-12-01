@@ -52,7 +52,7 @@ svc-page {
 .svc-creator .svc-page .svc-page__content--selected,
 .svc-hovered {
   border-radius: calcSize(0.5);
-  .svc-page__content--selected {
+  &.svc-page__content--selected {
     outline: 2px solid $secondary;
     background: $secondary-back-light;
     .svc-page__content-actions {
