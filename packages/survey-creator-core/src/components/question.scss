@@ -13,6 +13,21 @@ svc-question {
   position: relative;
   height: 100%;
   width: 100%;
+  .sv-action-bar {
+    overflow: visible;
+    .sv-action:not(:first-child) {
+      .sv-action-bar-item {
+        border: none;
+        &:active {
+          opacity: 0.5;
+          background-color: var(--background-dim, #f3f3f3);
+        }
+        .sv-action-bar-item__title--with-icon {
+          margin-left: calc(0.5 * var(--base-unit, 8px));
+        }
+      }
+    }
+  }
 }
 
 .svc-question__content {
