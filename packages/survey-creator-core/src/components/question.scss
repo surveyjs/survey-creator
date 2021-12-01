@@ -251,6 +251,9 @@ svc-question,
 .svc-hovered > .svc-question__content > .svc-question__drag-area {
   visibility: visible;
 }
+.svc-question__content.svc-question__content--selected > .svc-question__drag-area {
+  visibility: visible;
+}
 
 .svc-question__drag-area {
   position: absolute;
