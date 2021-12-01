@@ -97,7 +97,9 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     item.action = () => {
       const el = document.getElementById(page.id);
       if (!!el) {
-        el.scrollIntoView({ block: "start" });
+        const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
+        el.scrollIntoView({ block: isLastPage ? "center" : "start" });
+        setTimeout(() => this.currentPage = page, 100);
       }
     };
     item.data = page;
