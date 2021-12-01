@@ -16,12 +16,6 @@ svc-page-navigator,
   use {
     fill: $foreground-light;
   }
-  &:hover {
-    background-color: $primary-light;
-    use {
-      fill: $primary;
-    }
-  }
 }
 
 .svc-page-navigator__selector {
@@ -29,6 +23,22 @@ svc-page-navigator,
   height: calcSize(5.5);
   min-height: calcSize(5.5);
 }
+
+survey-creator, .svc-creator {
+  .svc-page-navigator__selector {
+  
+    &:hover, &:focus {
+      outline: none;
+  
+      .svc-page-navigator__navigator-icon {
+        background-color: $primary-light;
+        use {
+          fill: $primary;
+        }
+      }
+    }
+  }
+  }
 
 .svc-page-navigator__selector--opened {
   opacity: 0.5;

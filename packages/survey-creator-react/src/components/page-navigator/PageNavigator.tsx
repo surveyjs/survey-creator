@@ -61,7 +61,7 @@ export class SurveyPageNavigator extends SurveyElementBase<
       className += " svc-page-navigator__selector--opened";
     return (
       <div className="svc-page-navigator" ref={this.containerRef} style={{ display: this.model.visible ? "flex" : "none" }}>
-        <div
+        {attachKey2click(<div
           className={className}
           onClick={() => this.model.togglePageSelector()}
           title={this.model.pageSelectorCaption}
@@ -76,7 +76,7 @@ export class SurveyPageNavigator extends SurveyElementBase<
             model={this.model.popupModel}
           //className="svc-page-navigator__popup"
           ></Popup>
-        </div>
+        </div>)}
         {this.model.items.map((item) => (
           <SurveyPageNavigatorItem
             key={item.id}
@@ -111,7 +111,7 @@ export class SurveyPageNavigatorItem extends SurveyElementBase<any, any> {
         >
           <div className="svc-page-navigator-item__dot" title={item.title}></div>
           <div className="svc-page-navigator-item__banner svc-item__banner">
-            <span className="svc-text svc-text--normal">{item.title}</span>
+            <span className="svc-text svc-text--small svc-text--bold">{item.title}</span>
             <span className="svc-page-navigator-item__dot"></span>
           </div>
         </div>)}

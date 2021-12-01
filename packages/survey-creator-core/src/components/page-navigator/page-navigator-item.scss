@@ -39,10 +39,14 @@ svc-page-navigator-item,
 
 .svc-page-navigator-item__banner {
   right: calcSize(0.5);
-  padding: 0;
   display: block;
   white-space: nowrap;
-  line-height: calcSize(4.5);
+  line-height: calcSize(4);
+  overflow: hidden;
+  text-overflow: ellipsis;    
+  animation: 0.5s ease-in;
+  padding: 0;
+  opacity: 0;
   
   .svc-page-navigator-item__dot {
     position: absolute;
@@ -72,12 +76,14 @@ svc-page-navigator-item,
   }
 }
 
-.svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover {
+.svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover,
+.svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):focus {
+  outline: none;
+
   .svc-page-navigator-item__banner {
     padding: 0 calcSize(4.5) 0 calcSize(2.5);
     max-width: calcSize(25);
-    overflow: hidden;
-    text-overflow: ellipsis;    
+    opacity: 1;
   }
 }
 
