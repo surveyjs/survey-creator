@@ -47,6 +47,7 @@ test("On the right side (default)", async (t) => {
   const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
 
   await t.expect(pageNavigatorElement.visible).ok();
+  await t.wait(1000);
   await takeScreenshot("page-navigator-right.png", pageNavigatorElement, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
@@ -54,6 +55,7 @@ test("On the right side (default)", async (t) => {
 
   await t
     .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"))
+  await t.wait(1000);
   await takeScreenshot("page-navigator-right-hovered.png", pageNavigatorElement, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
@@ -70,6 +72,7 @@ test("On the left side", async (t) => {
   await changeToolboxLocation("right");
 
   await t.expect(pageNavigatorElement.visible).ok();
+  await t.wait(1000);
   await takeScreenshot("page-navigator-left.png", pageNavigatorElement, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
@@ -77,6 +80,7 @@ test("On the left side", async (t) => {
 
   await t
     .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"))
+  await t.wait(1000);
   await takeScreenshot("page-navigator-left-hovered.png", pageNavigatorElement, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
