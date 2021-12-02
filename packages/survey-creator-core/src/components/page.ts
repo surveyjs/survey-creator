@@ -112,7 +112,7 @@ export class PageViewModel<
       : "";
   }
   public hover(event: MouseEvent, element: HTMLElement) {
-    toggleHovered(event, element);
+    toggleHovered(event, element, this.creator.pageHoverDelay);
   }
   protected duplicate() {
     var newElement = this.creator.copyPage(this.page);

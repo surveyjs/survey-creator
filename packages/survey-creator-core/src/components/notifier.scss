@@ -9,12 +9,11 @@
   padding: calcSize(1) calcSize(2);
   box-shadow: 0px 2px 6px $shadow-medium;
   border-radius: calcSize(0.5);
-  font-family: $font-family;
-  font-weight: bold;
-  font-size: calcSize(1.5);
   color: $foreground;
   min-width: calcSize(30);
   text-align: center;
+
+  @include smallBold;
 }
 
 .svc-notifier.svc-notifier--error {
