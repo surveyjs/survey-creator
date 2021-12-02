@@ -935,6 +935,36 @@ test("Merge Undo for string and text property editors", (): any => {
   creator.undo();
   expect(q.name).toEqual("question1");
 });
+test("Undo/redo survey properties", (): any => {
+  const creator = new CreatorTester();
+  creator.survey.title = "My title";
+  creator.survey.description = "My Description";
+  creator.undo();
+  creator.undo();
+  expect(creator.survey.title).toBeFalsy();
+  expect(creator.survey.description).toBeFalsy();
+  creator.redo();
+  expect(creator.survey.title).toEqual("My title");
+  expect(creator.survey.description).toBeFalsy();
+  creator.redo();
+  expect(creator.survey.title).toEqual("My title");
+  expect(creator.survey.description).toEqual("My Description");
+});
+test("Undo/redo question adding/removing", (): any => {
+  const creator = new CreatorTester();
+  creator.survey.pages[0].addNewQuestion("text", "q1");
+  creator.survey.pages[0].addNewQuestion("text", "q2");
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  creator.undo();
+  creator.undo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(0);
+  creator.redo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+  creator.redo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  expect(creator.survey.getAllQuestions()[0].name).toEqual("q1");
+  expect(creator.survey.getAllQuestions()[1].name).toEqual("q2");
+});
 
 test("Question type selector", (): any => {
   const creator = new CreatorTester();

@@ -96,6 +96,7 @@ export class UndoRedoManager {
     this._preparingTransaction = new Transaction(name);
   }
   stopTransaction() {
+    if(this._ignoreChanges) return;
     if (this.transactionCounter > 0) {
       this.transactionCounter--;
     }
