@@ -59,9 +59,11 @@ svc-page-navigator-item,
 .svc-creator__toolbox--right {
   .svc-page-navigator-item__banner {
     right: unset;
-    flex-direction: row-reverse;
-    align-items: center;
-    display: flex;
+    left: calc(0.5 * var(--base-unit, 8px));    
+    .svc-page-navigator-item__dot {
+      right: unset;
+      left: calcSize(1.75);
+    }
   }
 }
 
@@ -84,6 +86,16 @@ svc-page-navigator-item,
     padding: 0 calcSize(4.5) 0 calcSize(2.5);
     max-width: calcSize(25);
     opacity: 1;
+  }
+}
+
+.svc-creator__toolbox--right {
+  .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover,
+  .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):focus {
+  
+    .svc-page-navigator-item__banner {
+      padding: 0 calcSize(2.5) 0 calcSize(4.5);
+    }
   }
 }
 
