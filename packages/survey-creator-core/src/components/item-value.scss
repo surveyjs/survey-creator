@@ -100,7 +100,12 @@ sv-svg-icon.svc-item-value-controls__button {
 
 .svc-item-value--new {
   .svc-item-value__item {
-    opacity: 0.5;
+    .sd-item__control-label {
+      color: $foreground-light;
+    }
+    .sd-item__decorator {
+      opacity: 0.35;
+    }
   }
 }
 .sv-ranking {
@@ -136,8 +141,8 @@ sv-svg-icon.svc-item-value-controls__button {
 
 @keyframes svdragdropmovedown {
   0% {
-    transform: translate(0, -50px);    
-  } 
+    transform: translate(0, -50px);
+  }
   100% {
     transform: translate(0, 0);
   }
@@ -151,10 +156,10 @@ sv-svg-icon.svc-item-value-controls__button {
 
 @keyframes svdragdropmoveup {
   0% {
-    transform: translate(0, 50px);   
+    transform: translate(0, 50px);
   }
   100% {
-    transform: translate(0, 0); 
+    transform: translate(0, 0);
   }
 }
 
