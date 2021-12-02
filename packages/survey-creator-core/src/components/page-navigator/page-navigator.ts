@@ -86,6 +86,15 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     }
     this.setItems(items);
   }
+  private patchContainerOffset(el: HTMLElement) {
+    while(!!el) {
+      if(el.className.indexOf("svc-tab-designer--with-page-navigator") !== -1) {
+        el.offsetParent.scrollTop = 0;
+        return;
+      }
+      el = el.parentElement;
+    }
+  }
   private createActionBarItem(page: PageModel): Action {
     const item: IAction = {
       id: page.id,
@@ -95,14 +104,17 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     };
     item.active = <any>new ComputedUpdater<boolean>(() => page === this.currentPage);
     item.action = () => {
-      const el = document.getElementById(page.id);
+      const el: any = document.getElementById(page.id);
       if (!!el) {
+        el.scrollIntoView({ block: "start" });
+        this.patchContainerOffset(el);
         const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
-        el.scrollIntoView({ block: isLastPage ? "center" : "start" });
-        setTimeout(() => {
-          el.scrollIntoView({ block: isLastPage ? "center" : "start" });
-          this.currentPage = page;
-        }, 50);
+        if(isLastPage) {
+          setTimeout(() => {
+            el.scrollIntoView({ block: "start" });
+            this.patchContainerOffset(el);
+          }, 50);
+        }
       }
     };
     item.data = page;
