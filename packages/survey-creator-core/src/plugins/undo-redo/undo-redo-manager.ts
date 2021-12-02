@@ -23,7 +23,7 @@ export class UndoRedoManager {
     arrayChanges: ArrayChanges
   ) {
     if (EditableObject.isCopyObject(sender)) return;
-    if (this._ignoreChanges) return;
+    if (this.isIgnoring) return;
 
     let transaction = this._preparingTransaction;
     let action = arrayChanges
@@ -54,6 +54,7 @@ export class UndoRedoManager {
     return lastAction.tryMerge(sender, propertyName, newValue);
   }
   private _ignoreChanges = false;
+  private _isExecuting = false;
   private _preparingTransaction: Transaction = null;
   private _transactions: Transaction[] = [];
   private _currentTransactionIndex: number = -1;
@@ -63,6 +64,9 @@ export class UndoRedoManager {
     if (this._currentTransactionIndex + 1 !== this._transactions.length) {
       this._transactions.length = this._currentTransactionIndex + 1;
     }
+  }
+  private get isIgnoring(): boolean {
+    return this._ignoreChanges || this._isExecuting;
   }
   private _addTransaction(transaction: Transaction) {
     if (transaction.isEmpty()) return;
@@ -91,12 +95,13 @@ export class UndoRedoManager {
   canUndoRedoCallback() { }
   private transactionCounter = 0;
   startTransaction(name: string) {
+    if(this.isIgnoring) return;
     this.transactionCounter++;
     if (this._preparingTransaction) return;
     this._preparingTransaction = new Transaction(name);
   }
   stopTransaction() {
-    if(this._ignoreChanges) return;
+    if(this.isIgnoring) return;
     if (this.transactionCounter > 0) {
       this.transactionCounter--;
     }
@@ -114,9 +119,9 @@ export class UndoRedoManager {
     const currentTransaction = this._getCurrentTransaction();
     if (!this.canUndo()) return;
 
-    this._ignoreChanges = true;
+    this._isExecuting = true;
     currentTransaction.rollback();
-    this._ignoreChanges = false;
+    this._isExecuting = false;
 
     this._currentTransactionIndex--;
     this.canUndoRedoCallback();
@@ -129,9 +134,9 @@ export class UndoRedoManager {
     const nextTransaction = this._getNextTransaction();
     if (!this.canRedo()) return;
 
-    this._ignoreChanges = true;
+    this._isExecuting = true;
     nextTransaction.apply();
-    this._ignoreChanges = false;
+    this._isExecuting = false;
 
     this._currentTransactionIndex++;
     this.canUndoRedoCallback();

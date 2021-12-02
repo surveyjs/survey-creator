@@ -661,10 +661,13 @@ test("undo/redo make sure that the deleting element is not active", (): any => {
   expect(creator.selectedElementName).toEqual("question3");
   creator.undo();
   expect(creator.selectedElementName).toEqual("survey");
+  expect(creator.survey.pages).toHaveLength(1);
   creator.survey.addNewPage("page2");
   creator.selectElement(creator.survey.pages[1]);
   expect(creator.selectedElementName).toEqual("page2");
+  expect(creator.survey.pages).toHaveLength(2);
   creator.undo();
+  expect(creator.survey.pages).toHaveLength(1);
   expect(creator.selectedElementName).toEqual("survey");
 });
 
