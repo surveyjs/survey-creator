@@ -45,6 +45,12 @@ svc-question {
   border: 2px solid transparent;
 }
 
+.svc-question__content {
+  .sd-file__choose-btn {
+    cursor: default;
+  }
+}
+
 .svc-question__content > div {
   overflow: visible;
 }
