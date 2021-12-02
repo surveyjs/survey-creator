@@ -1,5 +1,5 @@
 <div class="svc-toolbox__tool"
-    data-bind="css: { 'sv-action--hidden': !$data.item.isVisible }, class: $data.item.css, event: { pointerdown: (model, event)=>{onPointerDown(event); return true;}, click: (model, event)=>{click(event); return true;} }, key2click">
+    data-bind="css: { 'sv-action--hidden': !$data.item.isVisible }, class: $data.item.css, event: { pointerdown: (model, event)=>{onPointerDown(event); return true;} }">
     <div class="sv-action__content">
         <!-- ko if: $data.item.needSeparator && $data.isCompact-->
         <div class="svc-toolbox__category-separator"></div>
