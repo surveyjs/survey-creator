@@ -54,16 +54,19 @@ sv-svg-icon.svc-item-value-controls__button {
   display: block;
 }
 
+.svc-item-value-wrapper:hover {
+  .svc-item-value-controls__drag {
+    display: inline-block;
+  }
+}
+
 .svc-item-value-controls__drag {
   padding: calcSize(1) calcSize(1.5);
+  display: none;
   cursor: move;
+  opacity: 0.25;
   use {
-    fill: $foreground-light;
-  }
-  &:hover {
-    use {
-      fill: $primary;
-    }
+    fill: $foreground;
   }
 }
 
