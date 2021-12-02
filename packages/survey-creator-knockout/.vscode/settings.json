@@ -16,6 +16,5 @@
     // "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
     "editor.tabSize": 2,
     "editor.formatOnSave": true,
-    "eslint.format.enable": true,
-    "editor.formatOnSave": null
+    "eslint.format.enable": true
 }
