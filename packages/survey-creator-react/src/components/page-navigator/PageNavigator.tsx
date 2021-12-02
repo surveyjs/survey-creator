@@ -44,7 +44,7 @@ export class SurveyPageNavigator extends SurveyElementBase<
       const self = this;
       el.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
         return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
-      }
+      };
     }
   }
   componentWillUnmount() {

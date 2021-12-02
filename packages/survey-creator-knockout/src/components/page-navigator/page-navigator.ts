@@ -30,7 +30,7 @@ ko.components.register("svc-page-navigator", {
       const scrollableViewPort = componentInfo.element.parentElement.parentElement;
       scrollableViewPort.onscroll = function (this: GlobalEventHandlers, ev: Event) {
         return model.onContainerScroll(ev.currentTarget as HTMLDivElement);
-      }
+      };
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         scrollableViewPort.onscroll = undefined;
         model.dispose();
