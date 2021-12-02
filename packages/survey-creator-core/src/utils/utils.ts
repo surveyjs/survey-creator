@@ -197,37 +197,31 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
   const processedFlagName = "__svc_question_processed";
   const name = "svc-hovered";
   const nameReady = "svc-hovered-ready";
-  var timeoutId = null;
-  function setHover(checkReady = false) {
+
+  function setClass(className, checkReady = null) {
     const arr = element.className.split(" ");
     if (checkReady) {
-      if(arr.indexOf(nameReady) == -1) {
+      if(arr.indexOf(checkReady) == -1) {
         return;
       }
     }
-    if (arr.indexOf(name) == -1) {
-      element.className += " " + name;
+    if (arr.indexOf(className) == -1) {
+      element.className += " " + className;
     }
   }
+
   if (!e[processedFlagName] && e.type === "mouseover") {
-    if(timeout && !timeoutId) {
-      const arr = element.className.split(" ");
-      if(arr.indexOf(nameReady) == -1) {
-        element.className += " " + nameReady;
-      }
-      timeoutId = setTimeout(()=>{
-        setHover(true);
+    if(timeout) {
+      setClass(nameReady);
+      setTimeout(()=>{
+        setClass(name, nameReady);
       }, timeout);
     }
     else {
-      setHover();
+      setClass(name);
     }
     e[processedFlagName] = true;
   } else {
-    if(timeoutId) {
-      clearTimeout(timeoutId);
-      timeoutId = null;
-    }
     element.className = element.className.replace(" svc-hovered-ready", "");
     element.className = element.className.replace(" svc-hovered", "");
   }
