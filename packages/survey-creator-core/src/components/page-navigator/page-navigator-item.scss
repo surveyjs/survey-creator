@@ -59,7 +59,7 @@ svc-page-navigator-item,
 .svc-creator__toolbox--right {
   .svc-page-navigator-item__banner {
     right: unset;
-    left: calc(0.5 * var(--base-unit, 8px));    
+    left: calc(0.625 * var(--base-unit, 8px));    
     .svc-page-navigator-item__dot {
       right: unset;
       left: calcSize(1.75);
