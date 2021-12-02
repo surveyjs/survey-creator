@@ -97,12 +97,13 @@ export class QuestionAdornerComponent extends SurveyElementBase<
   protected renderDragAria(): JSX.Element {
     if (!this.model.allowDragging) return null;
     return (
-      <div className={"svc-question__drag-area"}>
+      <div className={"svc-question__drag-area"}
+        onPointerDown={(event: any) =>
+          this.model.startDragSurveyElement(event)
+        }
+      >
         <div
           className={"svc-question__drag-element"}
-          onPointerDown={(event: any) =>
-            this.model.startDragSurveyElement(event)
-          }
         ></div>
       </div>
     );

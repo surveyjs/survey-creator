@@ -86,26 +86,28 @@
   color: $foreground;
   .svc-string-editor__border {
     display: flex;
-    top: calcSize(-0.5);
-    bottom: calcSize(-0.5);
+    top: calcSize(0);
+    bottom: calcSize(0);
     left: calcSize(-0.5);
     //right: calcSize(-4.5); // if need pencil icon
     right: calcSize(-0.5);
     border: none;
     background-color: $primary-light;
+    border-radius: 3px;
   }
 }
 .svc-string-editor:focus-within {
   color: $foreground;
   .svc-string-editor__border {
     display: flex;
-    top: calcSize(-1);
-    bottom: calcSize(-1);
+    top: calcSize(-0.5);
+    bottom: calcSize(-0.5);
     left: calcSize(-1);
     right: calcSize(-1);
-    border: calcSize(0.25) solid $primary;
-    border-radius: calcSize(0.5);
+    outline: calcSize(0.25) solid $primary;
+    border-radius: 3px;
     background-color: $background;
+    box-shadow: 0px 2px 6px $shadow-medium;
   }
 }
 

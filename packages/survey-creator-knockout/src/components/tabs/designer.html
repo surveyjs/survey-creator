@@ -15,11 +15,12 @@
     <!-- /ko -->
     <!-- ko foreach: survey.pages -->
     <svc-page
+      class="svc-page"
       data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name, 'data-sv-drop-target-page': $data.name }"
       params="survey: $parent.survey, page: $data, creator: $parent.creator"></svc-page>
     <!-- /ko -->
     <!-- ko if: showNewPage -->
-    <svc-page data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
+    <svc-page class="svc-page" data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
       params="survey: survey, creator: creator, page: newPage"></svc-page>
     <!-- /ko -->
     <!-- ko if: survey.isShowProgressBarOnBottom -->
