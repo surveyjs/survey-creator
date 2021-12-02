@@ -49,6 +49,9 @@ svc-question {
   .sd-file__choose-btn {
     cursor: default;
   }
+  .sd-multipletext__item-title {
+    color: $foreground;
+  }
 }
 
 .svc-question__content > div {
