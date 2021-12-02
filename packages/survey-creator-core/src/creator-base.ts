@@ -2514,7 +2514,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     );
 
     return {
-      iconName: "icon-dots",
+      iconName: "icon-more",
       action: () => {
         popupModel.displayMode = this.isMobileView ? "overlay" : "popup";
         popupModel.toggleVisibility();
