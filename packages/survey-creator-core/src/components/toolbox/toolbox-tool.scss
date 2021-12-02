@@ -6,6 +6,7 @@
   align-items: center;
   z-index: 20;
   outline: none;
+  padding: calcSize(1) calcSize(1.5);
 
   sv-svg-icon,
   .sv-svg-icon {
@@ -16,7 +17,6 @@
 
 // is always visible
 .svc-toolbox__item-container {
-  padding: calcSize(1) calcSize(1.5);
   outline: none;
 
   .sv-svg-icon use {
@@ -39,8 +39,10 @@
 }
 
 .svc-creator__toolbox--right {
-  .svc-toolbox__item-banner {
+  .svc-toolbox__item:hover .svc-toolbox__item-banner {
     flex-direction: row-reverse;
+    padding-right: calcSize(1.5);
+    padding-left: calcSize(2);
   }
 
   .svc-toolbox__item {
@@ -52,14 +54,18 @@
   .svc-toolbox__tool {
     justify-content: flex-end;
   }
+
+  .svc-toolbox__category {
+    align-items: flex-end;
+  }
 }
 
 .svc-toolbox__item-title {
   @include smallBold;
 
   display: block;
-  margin-left: calcSize(1);
-  margin-right: calcSize(1);
+  padding-left: calcSize(1);
+  padding-right: calcSize(1.5);
   white-space: nowrap;
   color: $foreground-light;
 }

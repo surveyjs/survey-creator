@@ -112,9 +112,10 @@ svc-question {
 
 .svc-dragged-element-shortcut {
   min-width: 100px;
+  height: calcSize(3);
   border-radius: calcSize(12.5);
   background-color: $background;
-  padding: calcSize(1.5);
+  padding: calcSize(1) calcSize(1.5);
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
@@ -131,11 +132,14 @@ svc-question {
 
 .svc-dragged-element-shortcut__text {
   @include smallBold;
-  margin-left: 30px;
+  margin-left: calcSize(4);
+  line-height: calcSize(3);
 }
 
 .svc-dragged-element-shortcut__icon {
   position: absolute;
+  width: calcSize(3);
+  height: calcSize(3);
 }
 
 .svc-question__content--drag-over-inside,
