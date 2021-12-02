@@ -6,7 +6,6 @@ import { url, screenshotComparerOptions, getSurveyJSFramework } from "../../help
 const title = "Page Navigator Screenshot";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-  await t.resizeWindow(1920, 1080);
 });
 
 const json = {
@@ -40,6 +39,8 @@ async function changeToolboxLocation(newVal: string) {
 }
 
 test("On the right side (default)", async (t) => {
+  await t.resizeWindow(1920, 1080);
+
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
   await ClientFunction((json) => { window["creator"].JSON = json; })(json);
@@ -60,6 +61,8 @@ test("On the right side (default)", async (t) => {
 });
 
 test("On the left side", async (t) => {
+  await t.resizeWindow(1920, 1080);
+
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
   await ClientFunction((json) => { window["creator"].JSON = json; })(json);
