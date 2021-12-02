@@ -16,13 +16,29 @@ svc-page-navigator,
   use {
     fill: $foreground-light;
   }
-  &:hover {
-    background-color: $primary-light;
-    use {
-      fill: $primary;
+}
+
+.svc-page-navigator__selector {
+  width: calcSize(5.5);
+  height: calcSize(5.5);
+  min-height: calcSize(5.5);
+}
+
+survey-creator, .svc-creator {
+  .svc-page-navigator__selector {
+  
+    &:hover, &:focus {
+      outline: none;
+  
+      .svc-page-navigator__navigator-icon {
+        background-color: $primary-light;
+        use {
+          fill: $primary;
+        }
+      }
     }
   }
-}
+  }
 
 .svc-page-navigator__selector--opened {
   opacity: 0.5;
@@ -36,4 +52,28 @@ svc-page-navigator,
 
 .svc-page-navigator__popup {
   min-width: calcSize(12.5);
+}
+
+.svc-tab-designer--with-page-navigator {
+  padding-right: calcSize(6.5);
+}
+
+.svc-tab-designer__page-navigator {
+  width: calcSize(5.5);
+  height: 100%;
+  position: absolute;
+  padding-top: calcSize(16.5);
+  top: 0;
+  right: calcSize(1);
+}
+
+.svc-creator__toolbox--right {
+  .svc-tab-designer--with-page-navigator {
+    padding-right: 0;
+    padding-left: calcSize(6.5);
+  }
+  .svc-tab-designer__page-navigator {  
+    right: unset;
+    left: calcSize(1);
+  }
 }

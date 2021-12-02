@@ -100,4 +100,11 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   public getDesignerCss(): string {
     return this.survey.css.container + " " + this.survey.css.container + "--" + this.withModifier;
   }
+  public getRootCss(): string {
+    let rootCss = this.survey.css.root;
+    if(this.creator.showPageNavigator && this.survey.pageCount > 1) {
+      rootCss += " svc-tab-designer--with-page-navigator";
+    }
+    return rootCss;
+  }
 }

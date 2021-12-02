@@ -188,12 +188,39 @@ test("PageNavigatorViewModel", (): any => {
   expect(model.items[1].active).toBeFalsy();
   creator.addPage();
   expect(model.items).toHaveLength(3);
-  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[0].active).toBeTruthy();
   expect(model.items[1].active).toBeFalsy();
-  expect(model.items[2].active).toBeTruthy();
+  expect(model.items[2].active).toBeFalsy();
   expect(model.items[0].title).toEqual("page1");
   creator.survey.pages[0].name = "page1-newName";
   expect(model.items[0].title).toEqual("page1-newName");
+});
+
+test("PageNavigatorViewModel currentPage", (): any => {
+  const creator = new CreatorTester();
+  const model = new PageNavigatorViewModel(creator.pagesController);
+  expect(model.items).toHaveLength(1);
+  creator.JSON = {
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }]
+      },
+      {
+        elements: [{ type: "text", name: "question2" }]
+      }
+    ]
+  };
+  const pages = creator.survey.pages; 
+
+  expect(model.items).toHaveLength(pages.length);
+  expect(model.items[0].active).toBeTruthy();
+  expect(model.items[1].active).toBeFalsy();
+  expect(model.currentPage).toEqual(pages[0]);
+
+  model.currentPage = pages[1];
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeTruthy();
+  expect(model.currentPage).toEqual(pages[1]);
 });
 
 test("SelectionHistoryController: Go to next/prev", (): any => {
