@@ -139,6 +139,10 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
   /**
+   * Set delay for page hover
+   */
+  @property({ defaultValue: 500 }) pageHoverDelay: number;
+  /**
    * Set it to false to hide survey title and coresponding properties
    */
   get allowEditSurveyTitle() {
@@ -2510,7 +2514,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     );
 
     return {
-      iconName: "icon-dots",
+      iconName: "icon-more",
       action: () => {
         popupModel.displayMode = this.isMobileView ? "overlay" : "popup";
         popupModel.toggleVisibility();

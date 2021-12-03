@@ -1,0 +1,34 @@
+{
+  "name": "survey-creator-vue",
+  "version": "1.9.0-beta.0",
+  "description": "",
+  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
+  "author": "Devsoft Baltic OU",
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surveyjs/survey-creator.git"
+  },
+  "scripts": {
+    "serve": "http-server --silent",
+    "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500\"",
+    "testcafe:ci": "http-server --silent & testcafe chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal,dashboard",
+    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/drag-drop.ts -t \\\"Drag Drop to Panel Dynamic Question\\\" --reporter minimal --debug-mode\""
+  },
+  "devDependencies": {
+    "@survey/creator": "../survey-creator-core/build",
+    "http-server": "^0.12.3",
+    "testcafe": "^1.16.0",
+    "testcafe-reporter-dashboard": "^0.2.4-rc.1"
+  },
+  "dependencies": {
+    "survey-core": "../../../survey-library/build/survey-core",
+    "survey-knockout-ui": "../../../survey-library/build/survey-knockout-ui",
+    "survey-creator-knockout": "../survey-creator-knockout/build"
+  },
+  "standard-version": {
+    "skip": {
+      "tag": true
+    }
+  }
+}

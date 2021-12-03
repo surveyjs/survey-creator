@@ -136,7 +136,7 @@ survey-creator,
   }
   button.sv-action-bar-item:focus,
   .sv-button-group__item:focus-within {
-    border: 1px dotted $primary;
+    outline: 1px dotted $primary;
   }
   .sd-table__cell--header {
     .svc-matrix-cell {

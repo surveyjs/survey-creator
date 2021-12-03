@@ -193,16 +193,36 @@ export function isPropertyVisible(obj: any, propertyName: string) {
   return result;
 }
 
-export function toggleHovered(e: MouseEvent, element: HTMLElement) {
+export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) {
   const processedFlagName = "__svc_question_processed";
   const name = "svc-hovered";
-  if (!e[processedFlagName] && e.type === "mouseover") {
+  const nameReady = "svc-hovered-ready";
+
+  function setClass(className, checkReady = null) {
     const arr = element.className.split(" ");
-    if (arr.indexOf(name) == -1) {
-      element.className += " " + name;
+    if (checkReady) {
+      if(arr.indexOf(checkReady) == -1) {
+        return;
+      }
+    }
+    if (arr.indexOf(className) == -1) {
+      element.className += " " + className;
+    }
+  }
+
+  if (!e[processedFlagName] && e.type === "mouseover") {
+    if(timeout) {
+      setClass(nameReady);
+      setTimeout(()=>{
+        setClass(name, nameReady);
+      }, timeout);
+    }
+    else {
+      setClass(name);
     }
     e[processedFlagName] = true;
   } else {
+    element.className = element.className.replace(" svc-hovered-ready", "");
     element.className = element.className.replace(" svc-hovered", "");
   }
 }

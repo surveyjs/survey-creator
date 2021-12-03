@@ -20,7 +20,7 @@ trigger:
       - v*.*.*
 
 pool:
-  vmImage: 'vs2017-win2016'
+  vmImage: 'windows-latest'
 
 jobs:
 - job: CreatorV2React
@@ -104,29 +104,25 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-      npm run test
-    displayName: 'Unit test CreatorV2 React'
-
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run visual-regression-tests:ci
     displayName: 'Visual Regression Tests CreatorV2 React'
   
-  # - task: CopyFiles@2
-  #   inputs:
-  #     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
-  #     Contents: '**'
-  #     TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT'
-  #     OverWrite: true
-  #   condition: always()
-  #   displayName: 'copy artifacts'
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT'
+      OverWrite: true
+    condition: always()
+    displayName: 'copy vrt react artifacts'
   
-  # - task: PublishBuildArtifacts@1
-  #   inputs:
-  #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT/'
-  #     ArtifactName: 'Creator_React_VRT'
-  #     publishLocation: 'Container'
-  #   condition: always()
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT/'
+      ArtifactName: 'Creator_React_VRT'
+      publishLocation: 'Container'
+    condition: always()
+    displayName: 'publish vrt react artifacts'
 
 # ======================= CreatorV2Knockout ======================= #
 - job: CreatorV2Knockout
@@ -210,26 +206,22 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-      npm run test
-    displayName: 'Unit test CreatorV2 Knockout'
-
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
       npm run visual-regression-tests:ci
     displayName: 'Visual Regression Tests CreatorV2 Knockout'
 
-  # - task: CopyFiles@2
-  #   inputs:
-  #     SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
-  #     Contents: '**'
-  #     TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT'
-  #     OverWrite: true
-  #   condition: always()
-  #   displayName: 'copy artifacts'
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_KO_VRT'
+      OverWrite: true
+    condition: always()
+    displayName: 'copy vrt ko artifacts'
   
-  # - task: PublishBuildArtifacts@1
-  #   inputs:
-  #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT/'
-  #     ArtifactName: 'Creator_React_VRT'
-  #     publishLocation: 'Container'
-  #   condition: always()
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_KO_VRT/'
+      ArtifactName: 'Creator_KO_VRT'
+      publishLocation: 'Container'
+    condition: always()
+    displayName: 'publish vrt ko artifacts'

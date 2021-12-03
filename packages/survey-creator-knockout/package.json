@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-knockout",
-  "version": "1.8.79-beta.0",
+  "version": "1.9.0-beta.0",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -24,7 +24,7 @@
     "testcafe:a11y": "concurrently \"http-server --silent\" \"testcafe chrome ./testCafe/accessibility.js --selector-timeout 1500\"",
     "testcafe:ci": "http-server --silent & testcafe chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal,dashboard",
     "visual-regression-tests:ci": "testcafe chrome:headless ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal,dashboard",
-    "visual-regression-tests:file": "testcafe chrome --app \"http-server\" ../../visualRegressionTests/tests/designer/toolbox.ts --screenshots ../../ --reporter minimal --selector-timeout 1500",
+    "visual-regression-tests:file": "testcafe chrome:headless --app \"http-server\" ../../visualRegressionTests/tests/designer/page-navigator.ts --screenshots ../../ --reporter minimal --selector-timeout 1500",
     "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease beta",
     "remove-package-lock": "rimraf package-lock.json",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",

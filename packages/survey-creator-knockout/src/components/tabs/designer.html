@@ -1,7 +1,7 @@
 <!-- ko if: isToolboxVisible -->
 <svc-adaptive-toolbox params="model: creator"></svc-adaptive-toolbox>
 <!-- /ko -->
-<div class="svc-tab-designer" data-bind="css: survey.css.root">
+<div class="svc-tab-designer" data-bind="css: getRootCss()">
   <div data-bind="css: getDesignerCss()">
     <!-- ko if: creator.allowEditSurveyTitle -->
     <div data-bind="click: function() { creator.selectElement(survey); }">
@@ -10,25 +10,27 @@
     </div>
     <!-- /ko -->
     <!-- ko if: survey.isShowProgressBarOnTop -->
-    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } --><!-- /ko -->
+    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+    <!-- /ko -->
     <!-- /ko -->
     <!-- ko foreach: survey.pages -->
     <svc-page
+      class="svc-page"
       data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name, 'data-sv-drop-target-page': $data.name }"
-      params="survey: $parent.survey, page: $data, creator: $parent.creator"
-    ></svc-page>
+      params="survey: $parent.survey, page: $data, creator: $parent.creator"></svc-page>
     <!-- /ko -->
     <!-- ko if: showNewPage -->
-    <svc-page
-      data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
-      params="survey: survey, creator: creator, page: newPage"
-    ></svc-page>
+    <svc-page class="svc-page" data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
+      params="survey: survey, creator: creator, page: newPage"></svc-page>
     <!-- /ko -->
     <!-- ko if: survey.isShowProgressBarOnBottom -->
-    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } --><!-- /ko -->
+    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+    <!-- /ko -->
     <!-- /ko -->
   </div>
+  <!-- ko if: creator.showPageNavigator -->
+  <div class="svc-tab-designer__page-navigator">
+    <svc-page-navigator params="creator: creator"></svc-page-navigator>
+  </div>
+  <!-- /ko -->
 </div>
-<!-- ko if: creator.showPageNavigator -->
-<svc-page-navigator params="creator: creator"></svc-page-navigator>
-<!-- /ko -->
