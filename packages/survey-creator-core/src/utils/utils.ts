@@ -1,4 +1,4 @@
-import { Serializer } from "survey-core";
+import { defaultV2Css, Serializer } from "survey-core";
 
 function getNumericFromString(str: string): string {
   if (!str) return "";
@@ -244,4 +244,27 @@ export function select(element: any) {
     range.moveToElementText(element);
     range.select();
   }
+}
+export function copyObject(dst: any, src: any) {
+  for (var key in src) {
+    var source = src[key];
+    if (typeof source === "object") {
+      source = {};
+      this.copyObject(source, src[key]);
+    }
+    dst[key] = source;
+  }
+}
+export function copyCssClasses(dest: any, source: any) {
+  if (!source) return;
+  if (typeof source === "string" || source instanceof String) {
+    dest["root"] = source;
+  } else {
+    copyObject(dest, source);
+  }
+}
+
+export function assignDefaultV2Classes(destination: any, questionType: string) {
+  copyCssClasses(destination, defaultV2Css.question);
+  copyCssClasses(destination, defaultV2Css[questionType]);
 }

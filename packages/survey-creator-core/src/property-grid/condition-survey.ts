@@ -3,7 +3,8 @@ import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
-import { defaultV2Css } from "survey-core";
+import { assignDefaultV2Classes } from "../utils/utils";
+import { logicEditCss } from "../entries";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";
@@ -263,6 +264,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);
     });
+    this.editSurvey.css = logicEditCss;
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
@@ -721,33 +723,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.updateOperatorEnables(panel);
     this.updateQuestionsWidth(panel);
   }
-  private copyObject(dst: any, src: any) {
-    for (var key in src) {
-      var source = src[key];
-      if (typeof source === "object") {
-        source = {};
-        this.copyObject(source, src[key]);
-      }
-      dst[key] = source;
-    }
-  }
-  private copyCssClasses(dest: any, source: any) {
-    if (!source) return;
-    if (typeof source === "string" || source instanceof String) {
-      dest["root"] = source;
-    } else {
-      this.copyObject(dest, source);
-    }
-  }
-  private assignDefaultV2Classes(destination: any, questionType: string) {
-    this.copyCssClasses(destination, defaultV2Css.question);
-    this.copyCssClasses(destination, defaultV2Css[questionType]);
-  }
   private onUpdateQuestionCssClasses(options: any) {
     options.cssClasses.answered = "svc-logic-question--answered";
 
     if (options.question.name === "conjunction") {
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--conjunction ";
+      options.cssClasses.control += "svc-logic-operator svc-logic-operator--conjunction ";
       options.cssClasses.questionWrapper = "svc-question-wrapper";
     }
     if (options.question.name === "questionName") {
@@ -758,14 +738,14 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--operator";
       options.cssClasses.questionWrapper = "svc-question-wrapper";
     }
-    options.cssClasses.mainRoot = "sd-question sd-row__question";
+    // options.cssClasses.mainRoot += "sd-question sd-row__question";
     if (options.question.name === "questionValue") {
-      this.assignDefaultV2Classes(options.cssClasses, options.question.getType());
+      assignDefaultV2Classes(options.cssClasses, options.question.getType());
       options.cssClasses.mainRoot += " svc-logic-question-value";
     }
     if (options.question.name === "panel") {
       options.cssClasses.root += " svc-logic-paneldynamic";
-      options.cssClasses.buttonAdd = "svc-logic-operator svc-logic-operator--operator sd-paneldynamic__add-btn";
+      options.cssClasses.buttonAdd += " svc-logic-operator--operator";
       options.cssClasses.iconRemove = "svc-icon-remove";
       options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
       options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";

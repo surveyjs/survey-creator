@@ -23,8 +23,8 @@ import {
   getLogicString
 } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
-import { defaultV2Css } from "survey-core";
 import { SurveyHelper } from "../../survey-helper";
+import { logicEditCss } from "./logic-theme";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)
@@ -100,6 +100,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         this.titleActionsCreator.onGetQuestionTitleActions(options);
       }
     });
+    this.editSurvey.css = logicEditCss;
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
@@ -250,10 +251,10 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
-    options.cssClasses.mainRoot = "sd-question sd-row__question";
+    // options.cssClasses.mainRoot = "sd-question sd-row__question";
     if(options.question.name === "panel") {
       options.cssClasses.root += " svc-logic-paneldynamic";
-      options.cssClasses.buttonAdd += " svc-logic-operator svc-logic-operator--action sd-paneldynamic__add-btn";
+      options.cssClasses.buttonAdd += " svc-logic-operator--action ";
       options.cssClasses.iconRemove = "svc-icon-remove";
       options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
       options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
