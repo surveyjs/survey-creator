@@ -339,6 +339,7 @@ export class PropertyGridTitleActionsCreator {
       showTitle: false,
       iconName: "icon-property_grid_clear",
       enabled: enabled,
+      visible: <any>new ComputedUpdater<boolean>(() => !!question.obj[property.name]),
       action: () => {
         editor.clearPropertyValue(
           question.obj,
@@ -370,8 +371,6 @@ export class PropertyGridTitleActionsCreator {
   ): any {
     var setupAction = {
       id: "property-grid-setup",
-      css: "sv-action--first sv-action-bar-item--secondary",
-      icon: "icon-property_grid_modal",
       iconName: "icon-property_grid_modal",
       enabled: enabled,
       title: getLocString("pe.edit"),
