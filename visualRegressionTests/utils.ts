@@ -5,3 +5,8 @@ export async function changeToolboxLocation(newVal: string) {
     window["creator"].toolboxLocation = newVal;
   })(newVal);
 }
+export async function setShowPropertyGrid(newVal: boolean) {
+  await ClientFunction((newVal) => {
+    window["creator"].showPropertyGrid = newVal;
+  })(newVal);
+}
