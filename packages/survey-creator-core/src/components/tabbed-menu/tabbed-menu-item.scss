@@ -51,3 +51,17 @@ svc-tabbed-menu-item {
 .svc-tabbed-menu-item-container .sv-dots__item {
   width: auto;
 }
+
+#icon-undo,
+#icon-redo {
+  .sv-action-bar-item .sv-action-bar-item__icon use {
+    fill: #C0C0C0;
+  }
+}
+
+#icon-undo,
+#icon-redo {
+  .sv-action-bar-item--active .sv-action-bar-item__icon use {
+    fill: #909090;
+  }
+}
