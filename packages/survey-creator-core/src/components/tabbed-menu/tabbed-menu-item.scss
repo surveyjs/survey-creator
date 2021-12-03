@@ -17,14 +17,20 @@ svc-tabbed-menu-item {
   cursor: pointer;
 }
 
+.svc-tabbed-menu-item:hover {
+  background-color: $background-dim;
+  box-shadow: inset 0px -1px 0px $border;
+}
+
 .svc-tabbed-menu-item--selected {
   background: $background;
   box-shadow: inset 0px -2px 0px $primary;
 }
 
-.svc-tabbed-menu-item:hover {
-  background-color: $background-dim;
+.svc-tabbed-menu-item--selected:hover {
+  box-shadow: inset 0px -2px 0px $primary;
 }
+
 
 .svc-tabbed-menu-item--disabled {
   cursor: default;
