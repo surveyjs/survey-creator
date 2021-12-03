@@ -39,15 +39,15 @@ test("Default value", async (t) => {
   await t
     .click(question1)
     .click(dataTab)
-    .click(Selector("a").withExactText("Set Default value"))
+    .click(Selector("span").withExactText("Set Default value"))
     .click(Selector(".sv-popup--modal span").withExactText("item1"))
     .click(Selector(".sv-popup--modal button").withExactText("Apply"))
-    .expect(Selector("a").withExactText("Change Default value").visible).ok();
+    .expect(Selector("span").withExactText("Change Default value").visible).ok();
   const resultJson = await getJSON();
   await t
     .expect(resultJson.pages[0].elements[0].defaultValue).eql(["item1"])
-    .click(Selector("a").withExactText("Clear"))
-    .expect(Selector("a").withExactText("Set Default value").visible).ok();
+    .click(Selector("span").withExactText("Clear"))
+    .expect(Selector("span").withExactText("Set Default value").visible).ok();
   const resultJson2 = await getJSON();
   await t
     .expect(resultJson2.pages[0].elements[0].defaultValue).eql(undefined);

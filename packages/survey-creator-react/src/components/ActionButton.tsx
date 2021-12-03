@@ -18,7 +18,9 @@ export class ActionButton extends SurveyElementBase<any, any> {
     return (
       <>
         {attachKey2click(
-          <span className={classes}
+          <span
+            role="button"
+            className={classes}
             onClick={(e) => {
               e.stopPropagation();
               this.props.click();
