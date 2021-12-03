@@ -2,7 +2,8 @@
 
 .svc-question__content {
   .sd-table {
-    td:empty, th:empty {
+    td:empty,
+    th:empty {
       width: initial;
     }
   }
@@ -11,14 +12,18 @@
   position: relative;
 }
 
+.sd-table thead tr th .svc-matrix-cell {
+  padding: calcSize(1.5);
+}
+
 .svc-matrix-cell--selected {
   position: absolute;
   border: calcSize(0.25) solid $secondary;
   border-radius: calcSize(0.5);
-  top: calcSize(-1);
+  top: calcSize(0);
   left: calcSize(0);
   right: calcSize(0);
-  bottom: calcSize(-1);
+  bottom: calcSize(0);
   display: none;
   &.svc-visible {
     display: block;
