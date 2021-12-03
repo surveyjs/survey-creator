@@ -56,7 +56,7 @@ creator.saveSurveyFunc = (saveNo, callback) => {
   //saveSurveyJSON(this.id, creator.JSON, () => {
   //  callback(saveNo, true);
   //});
-};
+});
 //Load survey definition that you can likely get from your web service
 //creator.JSON = yourJSON;
 creator.render("creatorElement");
@@ -105,11 +105,12 @@ export class SurveyCreatorComponent implements OnInit {
     creator.showState = true;
     //Save survey definition
     creator.saveSurveyFunc = (saveNo, callback) => {
-    //Call your webservice function to store survey definition JSON
-    //as alternative you can use creator.text string property
-    //saveSurveyJSON(this.id, creator.JSON, () => {
-     //  callback(saveNo, true);
-    //});
+      //Call your webservice function to store survey definition JSON
+      //as alternative you can use creator.text string property
+      //saveSurveyJSON(this.id, creator.JSON, () => {
+       //  callback(saveNo, true);
+      //});
+    });
     //Load survey definition that you can likely get from your web service
     //this.creator.JSON = yourJSON;
     creator.render("creatorElement");
@@ -149,11 +150,12 @@ export default {
     creator.showState = true;
     //Save survey definition
     creator.saveSurveyFunc = (saveNo, callback) => {
-    //Call your webservice function to store survey definition JSON
-    //as alternative you can use creator.text string property
-    //saveSurveyJSON(this.id, creator.JSON, () => {
-     //  callback(saveNo, true);
-    //});
+      //Call your webservice function to store survey definition JSON
+      //as alternative you can use creator.text string property
+      //saveSurveyJSON(this.id, creator.JSON, () => {
+       //  callback(saveNo, true);
+      //});
+    });
     //Load survey definition that you can likely get from your web service
     //this.creator.JSON = yourJSON;
     creator.render("creatorElement");
