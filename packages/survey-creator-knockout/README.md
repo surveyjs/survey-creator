@@ -17,7 +17,7 @@ npm install survey-creator-knockout
 
 ## Include into your project
 
-### Into knockout or jQuery web application
+### Into knockout or jQuery or Vanila web application
 
 ```html
 <head>
