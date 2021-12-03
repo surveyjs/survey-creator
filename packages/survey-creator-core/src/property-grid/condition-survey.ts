@@ -266,7 +266,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
-    this.editSurvey.css = defaultV2Css;
+    // this.editSurvey.css = defaultV2Css;
     this.text = !!this.object && this.propertyName ? this.object[this.propertyName] : "";
   }
   public get title(): string {
@@ -721,6 +721,28 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.updateOperatorEnables(panel);
     this.updateQuestionsWidth(panel);
   }
+  private copyObject(dst: any, src: any) {
+    for (var key in src) {
+      var source = src[key];
+      if (typeof source === "object") {
+        source = {};
+        this.copyObject(source, src[key]);
+      }
+      dst[key] = source;
+    }
+  }
+  private copyCssClasses(dest: any, source: any) {
+    if (!source) return;
+    if (typeof source === "string" || source instanceof String) {
+      dest["root"] = source;
+    } else {
+      this.copyObject(dest, source);
+    }
+  }
+  private assignDefaultV2Classes(destination: any, questionType: string) {
+    this.copyCssClasses(destination, defaultV2Css.question);
+    this.copyCssClasses(destination, defaultV2Css[questionType]);
+  }
   private onUpdateQuestionCssClasses(options: any) {
     options.cssClasses.answered = "svc-logic-question--answered";
 
@@ -738,6 +760,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     options.cssClasses.mainRoot = "sd-question sd-row__question";
     if (options.question.name === "questionValue") {
+      this.assignDefaultV2Classes(options.cssClasses, options.question.getType());
       options.cssClasses.mainRoot += " svc-logic-question-value";
     }
     if (options.question.name === "panel") {
@@ -745,7 +768,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       options.cssClasses.buttonAdd = "svc-logic-operator svc-logic-operator--operator sd-paneldynamic__add-btn";
       options.cssClasses.iconRemove = "svc-icon-remove";
       options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
-      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right"
+      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
       options.cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
     }
   }

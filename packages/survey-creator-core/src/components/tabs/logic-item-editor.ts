@@ -112,7 +112,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
-    this.editSurvey.css = defaultV2Css;
+    // this.editSurvey.css = defaultV2Css;
     this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {
@@ -256,7 +256,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.buttonAdd += " svc-logic-operator svc-logic-operator--action sd-paneldynamic__add-btn";
       options.cssClasses.iconRemove = "svc-icon-remove";
       options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
-      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right"
+      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
       options.cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
     }
   }
