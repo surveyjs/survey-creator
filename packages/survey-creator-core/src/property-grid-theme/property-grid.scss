@@ -41,3 +41,10 @@
     padding-right: 0;
   }
 }
+
+.spg-title {
+  .sv-action-bar {
+    margin-top: calcSize(-1);
+    margin-bottom: calcSize(-1);
+  }
+}
