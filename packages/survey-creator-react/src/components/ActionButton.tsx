@@ -1,0 +1,33 @@
+import React from "react";
+import { attachKey2click, SurveyElementBase, } from "survey-react-ui";
+
+export class ActionButton extends SurveyElementBase<any, any> {
+  constructor(props: any) {
+    super(props);
+  }
+
+  renderElement(): JSX.Element {
+    let classes = this.props.classes + " svc-action-button";
+    if (this.props.selected) {
+      classes += " svc-action-button--selected";
+    }
+    if (this.props.disabled) {
+      classes += " svc-action-button--disabled";
+      return <span className={classes}>{this.props.text}</span>;
+    }
+    return (
+      <>
+        {attachKey2click(
+          <span className={classes}
+            onClick={(e) => {
+              e.stopPropagation();
+              this.props.click();
+            }}
+          >
+            {this.props.text}
+          </span>
+        )}
+      </>
+    );
+  }
+}
