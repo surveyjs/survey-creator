@@ -7,6 +7,7 @@
 .sle-row {
   display: flex;
   align-items: center;
+  flex-flow: row wrap;
 }
 .sle-panel {
   padding-bottom: 16px;
@@ -15,6 +16,13 @@
   .sle-panel {
     padding-bottom: 0;
   }
+}
+.sle-row {
+  margin-top: calcSize(-1);
+}
+
+.sle-row > div {
+  margin-top:calcSize(1);
 }
 
 .sle-row:not(:last-child) {
