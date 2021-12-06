@@ -1888,7 +1888,8 @@ test("logoPosition set right", () => {
   };
   expect(creator.survey.logoPosition).toEqual("right");
 });
-test("add new question to Panel and Page", (): any => {
+
+test("Add new question to Panel and Page", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     pages: [
@@ -1965,22 +1966,22 @@ test("add new question to Panel and Page", (): any => {
   expect(panelModel.addNewQuestionText).toEqual("Add Rating");
   expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
   expect(pageModel.addNewQuestionText).toEqual("Add Ranking");
-  expect(pageModel2.addNewQuestionText).toEqual("Add HTML");
+  expect(pageModel2.addNewQuestionText).toEqual("Add Html");
 
-  expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "text", "raking", "comment", "html"]);
-  expect(creator.survey.pages[0].questions.map(q => q.getType())).toEqual(["text", "rating", "text", "raking"]);
-  expect(creator.survey.pages[1].questions.map(q => q.getType())).toEqual(["comment", "html"]);
   expect((creator.survey.getAllPanels()[0] as PanelModel).questions.map(q => q.getType())).toEqual(["text", "rating"]);
-  expect((creator.survey.getAllPanels()[0] as PanelModel).questions.map(q => q.getType())).toEqual(["comment"]);
+  expect((creator.survey.getAllPanels()[1] as PanelModel).questions.map(q => q.getType())).toEqual(["comment"]);
+  expect(creator.survey.pages[0].questions.map(q => q.getType())).toEqual(["text", "rating", "text", "ranking"]);
+  expect(creator.survey.pages[1].questions.map(q => q.getType())).toEqual(["comment", "html"]);
+  expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "text", "ranking", "comment", "html"]);
 
   pageModel.addNewQuestion(null, null);
   panelModel.addNewQuestion();
   pageModel2.addNewQuestion(null, null);
   panelModel2.addNewQuestion();
 
-  expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "raking", "raking", "comment", "comment", "html", "html"]);
-  expect(creator.survey.pages[0].questions.map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "raking", "raking"]);
-  expect(creator.survey.pages[1].questions.map(q => q.getType())).toEqual(["comment", "comment", "html", "html"]);
   expect((creator.survey.getAllPanels()[0] as PanelModel).questions.map(q => q.getType())).toEqual(["text", "rating", "rating"]);
-  expect((creator.survey.getAllPanels()[0] as PanelModel).questions.map(q => q.getType())).toEqual(["comment", "comment"]);
+  expect((creator.survey.getAllPanels()[1] as PanelModel).questions.map(q => q.getType())).toEqual(["comment", "comment"]);
+  expect(creator.survey.pages[0].questions.map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking"]);
+  expect(creator.survey.pages[1].questions.map(q => q.getType())).toEqual(["comment", "comment", "html", "html"]);
+  expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html"]);
 });
