@@ -1580,6 +1580,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.notify(this.getLocString("ed." + value));
     }
   }
+  public markAsModified(): void {
+    this.setState("modified");
+  }
 
   public onStateChanged: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,

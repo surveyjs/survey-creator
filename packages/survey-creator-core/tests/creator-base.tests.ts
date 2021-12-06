@@ -210,7 +210,7 @@ test("PageNavigatorViewModel currentPage", (): any => {
       }
     ]
   };
-  const pages = creator.survey.pages; 
+  const pages = creator.survey.pages;
 
   expect(model.items).toHaveLength(pages.length);
   expect(model.items[0].active).toBeTruthy();
@@ -1947,4 +1947,22 @@ test("logoPosition set right", () => {
     ]
   };
   expect(creator.survey.logoPosition).toEqual("right");
+});
+test("Creator state, change the same property", () => {
+  const creator = new CreatorTester();
+  creator.saveSurveyFunc = function (
+    no: number,
+    doSaveCallback: (no: number, isSuccess: boolean) => void
+  ) {
+    doSaveCallback(no, true);
+  };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.state).toBeFalsy();
+  const question = creator.survey.getAllQuestions()[0];
+  question.title = "Title 1";
+  expect(creator.state).toEqual("modified");
+  creator.doSaveFunc();
+  expect(creator.state).toEqual("saved");
+  question.title = "Title 2";
+  expect(creator.state).toEqual("modified");
 });

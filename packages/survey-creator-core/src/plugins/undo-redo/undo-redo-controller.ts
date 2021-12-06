@@ -31,6 +31,8 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
       this.creator.updateElementsOnLocaleChanged(sender, name);
       this.creator.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
       this.undoRedoManager.stopTransaction();
+    } else {
+      this.creator.markAsModified();
     }
 
   }
