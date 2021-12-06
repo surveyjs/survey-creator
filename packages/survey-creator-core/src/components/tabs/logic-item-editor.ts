@@ -23,8 +23,9 @@ import {
   getLogicString
 } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
-import { defaultV2Css } from "survey-core";
 import { SurveyHelper } from "../../survey-helper";
+import { logicCss } from "./logic-theme";
+import { assignDefaultV2Classes } from "../../utils/utils";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)
@@ -68,7 +69,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           obj[options.name] = options.value;
         }
         const logicType = this.getLogicTypeByPanel(panel);
-        if(!!logicType && logicType.dependedOnPropertyName === options.name) {
+        if (!!logicType && logicType.dependedOnPropertyName === options.name) {
           this.recreateQuestion(panel, obj, logicType.dynamicPropertyName);
         }
         options.panel.runCondition(this.editSurvey.getAllValues(), {
@@ -85,7 +86,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       if (this.panel.panelCount == 0) {
         this.panel.addPanel();
       }
-      if(this.panel.panelCount > 0)
+      if (this.panel.panelCount > 0)
         this.panel.panels[0].getQuestionByName("logicTypeName").title = editorLocalization.getString("pe.then");
     });
     this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
@@ -100,6 +101,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         this.titleActionsCreator.onGetQuestionTitleActions(options);
       }
     });
+    this.editSurvey.css = logicCss;
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
@@ -112,7 +114,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
-    this.editSurvey.css = defaultV2Css;
+    // this.editSurvey.css = defaultV2Css;
     this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {
@@ -235,14 +237,14 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
-    if(options.question.name === "elementSelector" || options.question.name === "setToName" || options.question.name === "fromName" || options.question.name === "gotoName") {
+    if (options.question.name === "elementSelector" || options.question.name === "setToName" || options.question.name === "fromName" || options.question.name === "gotoName") {
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
       options.cssClasses.questionWrapper = "svc-question-wrapper";
 
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
-    if(options.question.name === "setToName" || options.question.name === "fromName") {
+    if (options.question.name === "setToName" || options.question.name === "fromName") {
       options.question.titleLocation = "left";
       options.question.startWithNewLine = false;
       options.cssClasses.questionWrapper = "svc-question-wrapper";
@@ -250,18 +252,22 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
-    options.cssClasses.mainRoot = "sd-question sd-row__question";
-    if(options.question.name === "panel") {
+    if (options.question.name === "setValue") {
+      assignDefaultV2Classes(options.cssClasses, options.question.getType());
+      options.cssClasses.mainRoot += " svc-logic-question-value";
+    }
+    // options.cssClasses.mainRoot = "sd-question sd-row__question";
+    if (options.question.name === "panel") {
       options.cssClasses.root += " svc-logic-paneldynamic";
-      options.cssClasses.buttonAdd += " svc-logic-operator svc-logic-operator--action sd-paneldynamic__add-btn";
+      options.cssClasses.buttonAdd += " svc-logic-operator--action ";
       options.cssClasses.iconRemove = "svc-icon-remove";
       options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
-      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right"
+      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
       options.cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
     }
   }
   private onUpdatePanelCssClasses(options: any) {
-    if(options.panel.name === "elementPanel") {
+    if (options.panel.name === "elementPanel") {
       options.cssClasses.panel.container += " svc-logic-panel-element";
     }
   }
@@ -270,7 +276,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].logicTypeName) ? 1 : 100;
   }
   private onQuestionAdded(options: any) {
-    if(options.question.name === "setToName" || options.question.name === "fromName") {
+    if (options.question.name === "setToName" || options.question.name === "fromName") {
       options.question.titleLocation = "left";
       options.question.startWithNewLine = false;
     }
@@ -414,7 +420,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     );
     this.setElementPanelObj(panel, obj);
     elementPanel.visible = logicType.hasVisibleElements;
-    if(!elementPanel.visible) return;
+    if (!elementPanel.visible) return;
     this.titleActionsCreator = new PropertyGridTitleActionsCreator(
       obj,
       this.options
@@ -436,14 +442,14 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private recreateQuestion(panel: PanelModel, obj: Base, name: string): void {
     const oldQuestion = !!name ? panel.getQuestionByName(name) : null;
-    if(!oldQuestion) return;
+    if (!oldQuestion) return;
     const elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-    if(!elementPanel) return;
+    if (!elementPanel) return;
     const tempPanel = Serializer.createClass("panel");
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
     propGenerator.setupObjPanel(tempPanel, true, "logic");
     const newQuestion = tempPanel.getQuestionByName(name);
-    if(!!newQuestion) {
+    if (!!newQuestion) {
       const index = elementPanel.elements.indexOf(oldQuestion);
       elementPanel.addElement(newQuestion, index);
       oldQuestion.delete();
