@@ -21,7 +21,7 @@ Survey Creator V1 is the latest RTM version. It is powered by Knockout. You can 
 
 ## Survey Creator V2 (Beta)
 
-Survey Creator V2 is a successor of V1. It has an updated design and separates data model from the UI.
+Survey Creator V2 is a successor of V1. It has an updated design and separates model from the UI.
 
 V2 is also planned to be independent from Knockout. [React version](./packages/survey-creator-react) does not require Knockout already. Versions for other frameworks are scheduled for development. Until then, you can use the [Knockout version](./packages/survey-creator-knockout) with any framework.
 
