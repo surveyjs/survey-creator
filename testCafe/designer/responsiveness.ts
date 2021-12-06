@@ -13,10 +13,13 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = false;
+  })();
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
   await t
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
-    .resizeWindow(800, 969)
+    .resizeWindow(700, 969)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
     .click(".svc-tabbed-menu-item-container.sv-dots");
   const popupSelector = Selector(".sv-popup").filterVisible();
