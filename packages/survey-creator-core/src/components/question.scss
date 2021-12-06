@@ -160,10 +160,12 @@ svc-question {
 
 .svc-question__content--drag-over-inside,
 .svc-hovered > .svc-question__content--drag-over-inside {
-  border: 2px solid $primary;
-  background: $primary-light;
-  & > .svc-question__content-actions {
-    display: block;
+  .svc-panel__placeholder {
+    outline: 2px solid $primary;
+    background: $primary-light;
+    & > .svc-question__content-actions {
+      display: block;
+    }
   }
 }
 
