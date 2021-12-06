@@ -37,6 +37,7 @@ Survey Creator is a visual survey designer / form builder for [SurveyJS](https:/
 - Zip file  
   [Download zip](https://github.com/surveyjs/survey-creator/releases)
 
+    
 ## Dependencies
 
 Survey Creator depends on the following libaries:
@@ -45,6 +46,33 @@ Survey Creator depends on the following libaries:
 - [KnockoutJS](http://knockoutjs.com)
 
 Optionally, you can use [Bootstrap](http://getbootstrap.com), [Ace editor](https://ace.c9.io/), and [Select2](https://select2.org/).
+
+## Build Survey Creator from Sources
+
+If you want to build the library yourself, do the following:
+
+1.  **Clone the repo from GitHub and install build dependencies**
+
+    ```
+    git clone https://github.com/surveyjs/survey-creator.git
+    cd survey-creator/packages/survey-creator
+    npm install
+    ```
+
+1.  **Build the library**
+
+    ```
+    npm run build_prod
+    ```
+
+    You can find the built library in the "build" directory.
+
+1.  **Run unit tests**
+    ```
+    npm test
+    ```
+    This command runs unit tests using [Karma](https://karma-runner.github.io/0.13/index.html).
+
 
 ## License
 
