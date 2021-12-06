@@ -81,7 +81,7 @@ export var logicCss = {
     titleOnAnswer: "",
     titleOnError: "",
     title: "sl-question__title",
-    requiredText: "",
+    requiredText: "sl-question__required-text",
     number: "",
     description: "",
     descriptionUnderInput: "",
