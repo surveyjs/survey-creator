@@ -530,7 +530,7 @@ test("Check logic elements styles in Logic tab", async (t) => {
     .click(logicDetailButtonElement)
     .click(addButton.nth(0));
 
-  await checkF - ocusStyles(t, addButton.nth(0), "addButton");
+  await checkFocusStyles(t, addButton.nth(0), "addButton");
   await t
     .expect(logicQuestionSelector.getStyleProperty("color")).eql(foregroundColor)
     .expect(logicOperatorSelector.getStyleProperty("color")).eql(foregroundColor)
