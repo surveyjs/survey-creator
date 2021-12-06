@@ -29,14 +29,10 @@ svc-toolbox {
   align-items: flex-start;
 }
 
-.svc-toolbox__tool > .sv-action__content {
-  padding-right: 0;
-}
 
 .svc-toolbox__tool:not(.sv-dots) {
   display: flex;
-  width: 100%;
-  padding-right: calcSize(1);
+  width: auto;
 }
 
 .svc-toolbox__tool .sv-dots__item {

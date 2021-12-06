@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { getVisibleElement, url } from "../helper";
+import { getToolboxItemByText, getVisibleElement, url } from "../helper";
 const title = "Delete by key";
 
 fixture`${title}`.page`${url}`.beforeEach(
@@ -12,10 +12,10 @@ test("Correct focus agter delete by Del key", async t => {
   await t
     .maximizeWindow()
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getVisibleElement("div[title='Single Input']"), { speed: 0.5 })
-    .click(getVisibleElement("div[title='Single Input']"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Single Input"), { speed: 0.5 })
+    .click(getToolboxItemByText("Single Input"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content").count).eql(1)
-    .click(getVisibleElement("div[title='Single Input']"), { speed: 0.5 })
+    .click(getToolboxItemByText("Single Input"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content").count).eql(2)
     .pressKey("delete")
     .expect(getVisibleElement(".svc-question__content").count).eql(1)
