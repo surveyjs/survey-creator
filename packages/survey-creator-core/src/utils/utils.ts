@@ -246,8 +246,8 @@ export function select(element: any) {
   }
 }
 export function copyObject(dst: any, src: any) {
-  for (var key in src) {
-    var source = src[key];
+  for (let key in src) {
+    let source = src[key];
     if (typeof source === "object") {
       source = {};
       this.copyObject(source, src[key]);

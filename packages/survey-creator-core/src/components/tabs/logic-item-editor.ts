@@ -24,7 +24,7 @@ import {
 } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyHelper } from "../../survey-helper";
-import { logicEditCss } from "./logic-theme";
+import { logicCss } from "./logic-theme";
 import { assignDefaultV2Classes } from "../../entries";
 
 function logicTypeVisibleIf(params: any): boolean {
@@ -101,7 +101,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         this.titleActionsCreator.onGetQuestionTitleActions(options);
       }
     });
-    this.editSurvey.css = logicEditCss;
+    this.editSurvey.css = logicCss;
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
@@ -253,7 +253,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.onError = "svc-logic-operator--error";
     }
     if (options.question.name === "setValue") {
-      assignDefaultV2Classes(options.cssClasses, options.question.getType())
+      assignDefaultV2Classes(options.cssClasses, options.question.getType());
       options.cssClasses.mainRoot += " svc-logic-question-value";
     }
     // options.cssClasses.mainRoot = "sd-question sd-row__question";

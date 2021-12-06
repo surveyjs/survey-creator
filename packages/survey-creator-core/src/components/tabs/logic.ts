@@ -4,7 +4,6 @@ import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../.
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import { SurveyLogicTypes, SurveyLogicType } from "./logic-types";
 import "./logic.scss";
-import "./logic-edit.scss";
 
 export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   private editableItemValue: SurveyLogicItem;

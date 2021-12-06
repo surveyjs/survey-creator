@@ -1051,7 +1051,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     );
     if (!surveyPropertyEditor) return null;
     if (property.type !== "condition") {
-    surveyPropertyEditor.editSurvey.css = defaultV2Css;
+      surveyPropertyEditor.editSurvey.css = defaultV2Css;
     }
     surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     if(!settings.showModal) return surveyPropertyEditor;

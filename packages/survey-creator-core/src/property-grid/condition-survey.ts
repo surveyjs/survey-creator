@@ -4,7 +4,7 @@ import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
 import { assignDefaultV2Classes } from "../utils/utils";
-import { logicEditCss } from "../entries";
+import { logicCss } from "../components/tabs/logic-theme";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";
@@ -264,7 +264,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       this.onPanelValueChanged(options.panel, options.name);
     });
-    this.editSurvey.css = logicEditCss;
+    this.editSurvey.css = logicCss;
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
