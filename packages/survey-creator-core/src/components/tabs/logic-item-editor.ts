@@ -25,7 +25,7 @@ import {
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyHelper } from "../../survey-helper";
 import { logicCss } from "./logic-theme";
-import { assignDefaultV2Classes } from "../../entries";
+import { assignDefaultV2Classes } from "../../utils/utils";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)
