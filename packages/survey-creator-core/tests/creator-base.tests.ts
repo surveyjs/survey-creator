@@ -1899,6 +1899,9 @@ test("Add new question to Panel and Page", (): any => {
       {
         elements: [{ type: "panel", name: "panel2" }]
       },
+      {
+        elements: [{ type: "panel", name: "panel3" }]
+      }
     ]
   };
 
@@ -1912,14 +1915,21 @@ test("Add new question to Panel and Page", (): any => {
     <any> creator.survey.getAllPanels()[1],
     undefined
   );
+  const panelModel3: QuestionAdornerViewModel = new QuestionAdornerViewModel(
+    creator,
+    <any> creator.survey.getAllPanels()[2],
+    undefined
+  );
 
   const pageModel = new PageViewModel(creator, creator.survey.pages[0]);
   const pageModel2 = new PageViewModel(creator, creator.survey.pages[1]);
+  const pageModel3 = new PageViewModel(creator, creator.survey.pages[2]);
 
   expect(panelModel.addNewQuestionText).toEqual("Add Question");
   expect(panelModel2.addNewQuestionText).toEqual("Add Question");
   expect(pageModel.addNewQuestionText).toEqual("Add Question");
   expect(pageModel2.addNewQuestionText).toEqual("Add Question");
+  expect(pageModel3.addNewQuestionText).toEqual("Add Question");
 
   expect(creator.survey.getAllQuestions().length).toEqual(0);
   pageModel.addNewQuestion(null, null);
@@ -1984,4 +1994,9 @@ test("Add new question to Panel and Page", (): any => {
   expect(creator.survey.pages[0].questions.map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking"]);
   expect(creator.survey.pages[1].questions.map(q => q.getType())).toEqual(["comment", "comment", "html", "html"]);
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html"]);
+
+  pageModel3.addNewQuestion(null, null);
+  expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text"]);
+  panelModel3.addNewQuestion();
+  expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text", "text"]);
 });

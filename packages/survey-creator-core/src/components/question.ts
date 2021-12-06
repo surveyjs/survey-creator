@@ -291,7 +291,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   }
 
   addNewQuestion() {
-    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase? this.surveyElement:null, this.currentAddQuestionType);
+    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase? this.surveyElement:null, this.currentAddQuestionType || "text");
   }
   questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
     (type) => {

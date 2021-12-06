@@ -94,7 +94,7 @@ export class PageViewModel<
   addNewQuestion(model: PageViewModel<T>, event: IPortableMouseEvent) {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage();
-    }, null, this.currentAddQuestionType);
+    }, null, this.currentAddQuestionType || "text");
   }
   select(model: PageViewModel<T>, event: IPortableMouseEvent) {
     if (!model.isGhost) {
