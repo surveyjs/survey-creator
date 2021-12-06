@@ -19,6 +19,21 @@
     <!-- /ko -->
     <!-- /ko -->
 
+    <!-- ko if: question.isPanel && allowEdit -->
+    <div class="svc-panel__add-new-question" data-bind="click: addNewQuestion, key2click, clickBubble: false">
+      <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
+      </span>
+      <!-- ko with: questionTypeSelectorModel -->
+      <button type="button"
+        data-bind="click: action, key2click, clickBubble: false, attr: { title: $data.addNewQuestionText }"
+        class="svc-panel__question-type-selector">
+        <sv-svg-icon class="svc-panel__question-type-selector-icon" params="iconName: iconName, size: 24"></sv-svg-icon>
+        <sv-popup params="model: popupModel"></sv-popup>
+      </button>
+      <!-- /ko -->
+    </div>
+    <!-- /ko -->
+
     <div class="svc-question__content-actions">
       <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer } } -->
       <!-- /ko -->
