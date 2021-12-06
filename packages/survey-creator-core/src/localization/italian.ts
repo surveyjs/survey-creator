@@ -246,7 +246,7 @@ var italianTranslation = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Seleziona la pagina da testare:",
     showInvisibleElements: "Mostra elementi nascosti"

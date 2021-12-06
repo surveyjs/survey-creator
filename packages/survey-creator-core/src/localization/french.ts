@@ -502,7 +502,7 @@ var frenchTranslation = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Sélectionner une page pour la tester",
     showInvisibleElements: "Afficher les éléments invisibles",

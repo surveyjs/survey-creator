@@ -1,4 +1,4 @@
-import { getTabbedMenuItemByText, setJSON, url } from "../helper";
+import { getTabbedMenuItemByText, setJSON, url, creatorTabDesignerName } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "JSON tab";
 
@@ -26,7 +26,7 @@ test("Change title of text question", async (t) => {
     .pressKey("backspace")
     .pressKey("I space a m space c h a n g e d")
 
-    .click(getTabbedMenuItemByText("Survey Designer"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .expect(Selector("h5").withText("I am changed").exists).ok();
 });
 test("Check show/hide errors button visibility", async (t) => {
@@ -63,6 +63,6 @@ test("Check deactivating other tabs when json has errros", async (t) => {
     .pressKey("backspace")
     .pressKey("I space a m space e r r o r space s t r i n g )")
 
-    .click(getTabbedMenuItemByText("Survey Designer"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .expect(Selector("h5").withText("Change me").exists).notOk();
 });

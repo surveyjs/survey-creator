@@ -347,7 +347,7 @@ export let svStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Välj sida för att testa den:",
     showInvisibleElements: "Visa osynliga element",
