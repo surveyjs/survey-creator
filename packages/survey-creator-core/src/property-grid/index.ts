@@ -14,7 +14,8 @@ import {
   SurveyModel,
   Action,
   IAction,
-  MatrixDynamicRowModel
+  MatrixDynamicRowModel,
+  ComputedUpdater
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
