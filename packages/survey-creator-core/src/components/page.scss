@@ -74,7 +74,6 @@ svc-page {
   vertical-align: baseline;
   text-align: center;
   background-color: $background;
-  color: $primary;
   box-shadow: 0px 1px 2px $shadow-inner;
   border-radius: calcSize(0.5);
   cursor: pointer;
@@ -86,6 +85,7 @@ svc-page {
     flex-grow: 1;
     justify-content: center;
     margin-left: calcSize(6);
+    color: $primary;
   }
 }
 
