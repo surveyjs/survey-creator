@@ -14,12 +14,9 @@ const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
-  })();
   await t
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
-    .resizeWindow(1330, 969)
+    .resizeWindow(700, 969)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
     .click(".svc-tabbed-menu-item-container.sv-dots");
   const popupSelector = Selector(".sv-popup").filterVisible();
