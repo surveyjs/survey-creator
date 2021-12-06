@@ -188,12 +188,39 @@ test("PageNavigatorViewModel", (): any => {
   expect(model.items[1].active).toBeFalsy();
   creator.addPage();
   expect(model.items).toHaveLength(3);
-  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[0].active).toBeTruthy();
   expect(model.items[1].active).toBeFalsy();
-  expect(model.items[2].active).toBeTruthy();
+  expect(model.items[2].active).toBeFalsy();
   expect(model.items[0].title).toEqual("page1");
   creator.survey.pages[0].name = "page1-newName";
   expect(model.items[0].title).toEqual("page1-newName");
+});
+
+test("PageNavigatorViewModel currentPage", (): any => {
+  const creator = new CreatorTester();
+  const model = new PageNavigatorViewModel(creator.pagesController);
+  expect(model.items).toHaveLength(1);
+  creator.JSON = {
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }]
+      },
+      {
+        elements: [{ type: "text", name: "question2" }]
+      }
+    ]
+  };
+  const pages = creator.survey.pages; 
+
+  expect(model.items).toHaveLength(pages.length);
+  expect(model.items[0].active).toBeTruthy();
+  expect(model.items[1].active).toBeFalsy();
+  expect(model.currentPage).toEqual(pages[0]);
+
+  model.currentPage = pages[1];
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeTruthy();
+  expect(model.currentPage).toEqual(pages[1]);
 });
 
 test("SelectionHistoryController: Go to next/prev", (): any => {
@@ -661,10 +688,13 @@ test("undo/redo make sure that the deleting element is not active", (): any => {
   expect(creator.selectedElementName).toEqual("question3");
   creator.undo();
   expect(creator.selectedElementName).toEqual("survey");
+  expect(creator.survey.pages).toHaveLength(1);
   creator.survey.addNewPage("page2");
   creator.selectElement(creator.survey.pages[1]);
   expect(creator.selectedElementName).toEqual("page2");
+  expect(creator.survey.pages).toHaveLength(2);
   creator.undo();
+  expect(creator.survey.pages).toHaveLength(1);
   expect(creator.selectedElementName).toEqual("survey");
 });
 
@@ -934,6 +964,36 @@ test("Merge Undo for string and text property editors", (): any => {
   expect(q.name).toEqual("q1");
   creator.undo();
   expect(q.name).toEqual("question1");
+});
+test("Undo/redo survey properties", (): any => {
+  const creator = new CreatorTester();
+  creator.survey.title = "My title";
+  creator.survey.description = "My Description";
+  creator.undo();
+  creator.undo();
+  expect(creator.survey.title).toBeFalsy();
+  expect(creator.survey.description).toBeFalsy();
+  creator.redo();
+  expect(creator.survey.title).toEqual("My title");
+  expect(creator.survey.description).toBeFalsy();
+  creator.redo();
+  expect(creator.survey.title).toEqual("My title");
+  expect(creator.survey.description).toEqual("My Description");
+});
+test("Undo/redo question adding/removing", (): any => {
+  const creator = new CreatorTester();
+  creator.survey.pages[0].addNewQuestion("text", "q1");
+  creator.survey.pages[0].addNewQuestion("text", "q2");
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  creator.undo();
+  creator.undo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(0);
+  creator.redo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+  creator.redo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  expect(creator.survey.getAllQuestions()[0].name).toEqual("q1");
+  expect(creator.survey.getAllQuestions()[1].name).toEqual("q2");
 });
 
 test("Question type selector", (): any => {
