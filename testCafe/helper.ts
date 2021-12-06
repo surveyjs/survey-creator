@@ -69,6 +69,9 @@ export function getListItemByText(text) {
 export function getVisibleElement(selector: string | Selector): Selector {
   return selectorIsVisibleFilter(Selector(selector));
 }
+export function getToolboxItemByText(text: string) {
+  return getVisibleElement(".svc-toolbox__item-title").withText(text);
+}
 
 function selectorIsVisibleFilter(selector: Selector) {
   return selector.filter(visibility).with({ timeout: 1200 });

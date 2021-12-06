@@ -64,10 +64,6 @@ export class SurveyCreatorToolboxTool extends SurveyElementBase<
           event.persist();
           this.model.onPointerDown(event);
         }}
-        onClick={(event: any) => {
-          event.persist();
-          this.model.click(event);
-        }}
       >
         <div className="sv-action__content">
           {(this.isCompact && item.needSeparator) ? (
@@ -106,7 +102,6 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
       <div
         className={className}
         tabIndex={0}
-        title={this.item.tooltip}
         role="button"
         aria-label={
           this.item.tooltip +
@@ -114,6 +109,10 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
           editorLocalization.getString("toolbox") +
           " item"
         }
+        onClick={(event: any) => {
+          event.persist();
+          this.model.click(event);
+        }}
       >
         <span className="svc-toolbox__item-container">
           <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon>
