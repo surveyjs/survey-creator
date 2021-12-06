@@ -1,5 +1,5 @@
 import { url, getTabbedMenuItemByText, setJSON } from "../helper";
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 const title = "Logic tab";
 
 const json = {
@@ -86,7 +86,12 @@ const surveyJSON = {
 
 fixture(title)
   .page(url)
-  .beforeEach(async (t) => await t.maximizeWindow());
+  .beforeEach(async (t) => {
+    await t.maximizeWindow();
+    await ClientFunction(() => {
+      window["creator"].showPropertyGrid = true;
+    })();
+  });
 
 function getSelectOptionByText(text: string) {
   return Selector("option").withExactText(text).filterVisible();
@@ -110,7 +115,7 @@ const newRuleActions = "Value is empty";
 const cellConditions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Condition(s)\"]"));
 const cellActions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Action(s)\"]"));
 const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
-const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sd-paneldynamic__add-btn)").filterVisible();
+const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filterVisible();
 const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
 const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterVisible();
 const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
@@ -120,7 +125,7 @@ const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filt
 const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New");
-const addButton = Selector(".sd-paneldynamic__add-btn").filterVisible();
+const addButton = Selector(".sl-paneldynamic__add-btn ").filterVisible();
 const removeButton = Selector(".svc-logic-paneldynamic__remove-btn--right").filterVisible();
 const doneButton = Selector("button").withExactText("Done").filterVisible();
 
@@ -556,7 +561,6 @@ test("Check logic elements styles in Popup", async (t) => {
   const objectSelectorPopup = Selector(".sv-popup .svc-object-selector");
 
   await setJSON(json3);
-
   await t
     .click(objectSelectorButton)
     .click(objectSelectorPopup.find("span").withText("q2"))
