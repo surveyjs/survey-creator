@@ -309,3 +309,52 @@ svc-question,
     display: none;
   }
 }
+
+.svc-panel__add-new-question {
+  &:hover {
+    outline: 2px solid $primary;
+  }
+  display: flex;
+  align-items: center;
+  margin-top: calcSize(2);
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  height: calcSize(7);
+  line-height: calcSize(7);
+  vertical-align: baseline;
+  text-align: center;
+  background-color: $background;
+  box-shadow: 0px 1px 2px $shadow-inner;
+  border-radius: calcSize(0.5);
+  cursor: pointer;
+  user-select: none;
+
+  .svc-text {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    margin-left: calcSize(6);
+    color: $primary;
+  }
+}
+
+.svc-panel__question-type-selector {
+  appearance: none;
+  display: flex;
+  height: calcSize(5);
+  padding: calcSize(1);
+  box-sizing: border-box;
+  border: none;
+  border-radius: 2px;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: calcSize(1);
+  use {
+    fill: $foreground-light;
+  }
+  &:hover {
+    background-color: $background-dim;
+  }
+}
