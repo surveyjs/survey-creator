@@ -1,5 +1,9 @@
 import { ClientFunction, Selector } from "testcafe";
-import { collapseButtonSelector, expandButtonSelector, getBarItemByTitle, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
+import {
+  collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
+  getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName
+} from "../helper";
 const title = "Responsiveness";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -74,8 +78,8 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
     .expect(toolbox.exists).notOk()
     .expect(pageNavigator.exists).notOk()
 
-    .click(getTabbedMenuItemByText("Test Survey"))
-    .click(getTabbedMenuItemByText("Survey Designer"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .expect(toolbox.exists).notOk()
     .expect(pageNavigator.exists).notOk()
 
@@ -217,7 +221,7 @@ test("test tab for mobile devices", async (t) => {
   const creatorFooterToolbar = Selector(".svc-footer-bar .svc-toolbar-wrapper");
   const creatorFooterToolbarActions = creatorFooterToolbar.find(".sv-action").filterVisible();
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbar.exists).notOk()
 
@@ -231,9 +235,9 @@ test("test tab for mobile devices", async (t) => {
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbar.exists).notOk()
 
-    .click(getTabbedMenuItemByText("Survey Designer"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .click(Selector("span").withText("Add Question").nth(1))
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(testTabToolbar.exists).ok()
     .expect(creatorFooterToolbar.exists).notOk()
     .expect(testTabToolbar.find(".sv-action").filterVisible().count).eql(3)

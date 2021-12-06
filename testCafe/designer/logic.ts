@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName } from "../helper";
 import { Selector } from "testcafe";
 const title = "Logic tab";
 
@@ -131,7 +131,7 @@ test.skip("Create logic rule", async (t) => {
   await setJSON(json);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(Selector(".svc-logic-tab__content-empty").exists).ok()
     .expect(Selector(".svc-logic-tab__content-empty").visible).ok()
     .expect(addNewRuleButton.classNames).notContains(disabledClass)
@@ -224,7 +224,7 @@ test("Logic rules", async (t) => {
   await setJSON(json);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(0)
 
     .click(addNewRuleButton)
@@ -239,8 +239,8 @@ test("Logic rules", async (t) => {
     .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{string_editor} is not empty")
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
 
-    .click(getTabbedMenuItemByText("Survey Designer"))
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(1)
     .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{string_editor} is not empty")
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed");
@@ -250,7 +250,7 @@ test("Edit Logic rule", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(1)
 
     .hover(tableRulesSelector.nth(0))
@@ -277,7 +277,7 @@ test("Filtering rules", async (t) => {
   await setJSON(json3);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(3)
 
     .click(getBarItemByText("Show all questions"))
@@ -305,7 +305,7 @@ test("Filtering rules", async (t) => {
 
 test("Update rules", async (t) => {
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(0);
 
   await setJSON(surveyJSON);
@@ -321,7 +321,7 @@ test("Fast entry of the editing condition", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(fastEntryAction.hasAttribute("disabled")).ok()
 
     .hover(tableRulesSelector.nth(0))
@@ -374,7 +374,7 @@ test("Availability of the Done button", async (t) => {
   await setJSON(json3);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .click(addNewRuleButton)
     .expect(doneButton.visible).ok()
 
@@ -411,7 +411,7 @@ test("Modified rules without saving", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(cellConditions.nth(0).innerText).eql(rule1Condition)
     .expect(cellActions.nth(0).innerText).eql(rule1Actions)
     .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
@@ -525,7 +525,7 @@ test.skip("Check logic elements styles in Logic tab", async (t) => {
   await setJSON(json3);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement)
     .click(addButton.nth(0));
