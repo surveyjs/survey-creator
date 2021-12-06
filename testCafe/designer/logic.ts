@@ -127,7 +127,7 @@ const doneButton = Selector("button").withExactText("Done").filterVisible();
 const errorNotifyBalloonSelector = Selector(".svc-notifier.svc-notifier--error").filterVisible();
 const notifyBalloonSelector = Selector(".svc-notifier").filterVisible();
 
-test.skip("Create logic rule", async (t) => {
+test("Create logic rule", async (t) => {
   await setJSON(json);
 
   await t
@@ -521,7 +521,7 @@ async function checkFocusStyles(t: TestController, selector: Selector, selectorN
 const foregroundLightColor = "rgb(144, 144, 144)";
 const foregroundColor = "rgb(22, 22, 22)";
 
-test.skip("Check logic elements styles in Logic tab", async (t) => {
+test("Check logic elements styles in Logic tab", async (t) => {
   await setJSON(json3);
 
   await t
@@ -530,7 +530,7 @@ test.skip("Check logic elements styles in Logic tab", async (t) => {
     .click(logicDetailButtonElement)
     .click(addButton.nth(0));
 
-  await checkFocusStyles(t, addButton.nth(0), "addButton");
+  await checkF - ocusStyles(t, addButton.nth(0), "addButton");
   await t
     .expect(logicQuestionSelector.getStyleProperty("color")).eql(foregroundColor)
     .expect(logicOperatorSelector.getStyleProperty("color")).eql(foregroundColor)
@@ -551,7 +551,7 @@ test.skip("Check logic elements styles in Logic tab", async (t) => {
   await checkLogicRemoveStyles(t, removeButton.nth(3), "removeButton4");
 });
 
-test.skip("Check logic elements styles in Popup", async (t) => {
+test("Check logic elements styles in Popup", async (t) => {
   const objectSelectorButton = Selector(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item");
   const objectSelectorPopup = Selector(".sv-popup .svc-object-selector");
 
