@@ -79,7 +79,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
         {this.renderContentOnTop()}
         {this.renderDragAria()}
         {content}
-        {this.model.surveyElement.isPanel && this.model.allowEdit ? attachKey2click(<div
+        {!this.model.isEmptyElement && this.model.surveyElement.isPanel && this.model.allowEdit ? attachKey2click(<div
           className="svc-panel__add-new-question"
           onClick={(e) => {
             e.stopPropagation();
@@ -149,6 +149,17 @@ export class QuestionAdornerComponent extends SurveyElementBase<
         <div className="svc-panel__placeholder">
           {this.model.placeholderText}
         </div>
+        {this.model.allowEdit ? attachKey2click(<div
+          className="svc-panel__add-new-question"
+          onClick={(e) => {
+            e.stopPropagation();
+            this.model.addNewQuestion();
+          }}
+        >
+          <span className="svc-text svc-text--normal svc-text--bold">
+            {this.model.addNewQuestionText}
+          </span>
+        </div>) : null}
       </div>
     );
   }
