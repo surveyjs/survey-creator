@@ -1948,7 +1948,7 @@ test("logoPosition set right", () => {
   };
   expect(creator.survey.logoPosition).toEqual("right");
 });
-test("Creator state, change the same property", () => {
+test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
     no: number,
@@ -1965,4 +1965,30 @@ test("Creator state, change the same property", () => {
   expect(creator.state).toEqual("saved");
   question.title = "Title 2";
   expect(creator.state).toEqual("modified");
+});
+test("Creator state, change the same property, isAutoSave=true", () => {
+  const creator = new CreatorTester();
+  creator.isAutoSave = true;
+  creator.autoSaveDelay = 0;
+  var counter = 0;
+  var saveNo = 0;
+  creator.saveSurveyFunc = function (
+    no: number,
+    doSaveCallback: (no: number, isSuccess: boolean) => void
+  ) {
+    counter++;
+    saveNo = no;
+    doSaveCallback(no, true);
+  };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.state).toBeFalsy();
+  const question = creator.survey.getAllQuestions()[0];
+  question.title = "Title 1";
+  expect(counter).toEqual(1);
+  expect(saveNo).toEqual(1);
+  expect(creator.state).toEqual("saved");
+  question.title = "Title 2";
+  expect(counter).toEqual(2);
+  expect(saveNo).toEqual(2);
+  expect(creator.state).toEqual("saved");
 });
