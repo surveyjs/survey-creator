@@ -562,7 +562,7 @@ export var nbStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Velg side:",
     showInvisibleElements: "Vis usynlige elementer",

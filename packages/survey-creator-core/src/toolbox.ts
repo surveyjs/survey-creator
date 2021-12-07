@@ -197,6 +197,7 @@ export class QuestionToolbox
     this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
       this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
     };
+    this.dotsItemPopupModel.cssClass = "svc-toolbox-popup";
   }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<any> = this.categories;

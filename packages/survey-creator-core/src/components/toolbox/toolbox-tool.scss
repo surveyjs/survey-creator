@@ -6,7 +6,7 @@
   align-items: center;
   z-index: 20;
   outline: none;
-  cursor: copy;
+  padding: calcSize(1) calcSize(1.5);
 
   sv-svg-icon,
   .sv-svg-icon {
@@ -17,7 +17,6 @@
 
 // is always visible
 .svc-toolbox__item-container {
-  padding: calcSize(1) calcSize(1.5);
   outline: none;
 
   .sv-svg-icon use {
@@ -27,10 +26,13 @@
 
 //is visible only on hover
 .svc-toolbox__item-banner {
+  opacity: 0;
   display: flex;
   box-sizing: border-box;
   align-items: center;
-  
+  margin-right: 0;
+  margin-left: calcSize(-1.5);
+
   .svc-toolbox__item-title {
     color: $foreground;
   }
@@ -40,8 +42,13 @@
 }
 
 .svc-creator__toolbox--right {
-  .svc-toolbox__item-banner {
+  .svc-toolbox__item:hover .svc-toolbox__item-banner,
+  .svc-toolbox__item:focus .svc-toolbox__item-banner {
     flex-direction: row-reverse;
+    padding-right: calcSize(1.5);
+    padding-left: calcSize(2);
+    margin-left: 0;
+    margin-right: calcSize(-1.5);
   }
 
   .svc-toolbox__item {
@@ -53,29 +60,35 @@
   .svc-toolbox__tool {
     justify-content: flex-end;
   }
+
+  .svc-toolbox__category {
+    align-items: flex-end;
+  }
 }
 
 .svc-toolbox__item-title {
+  @include smallBold;
+
   display: block;
-  margin-left: calcSize(1);
-  margin-right: calcSize(1);
+  padding-left: calcSize(1);
+  padding-right: calcSize(1.5);
   white-space: nowrap;
-  font-family: $font-family;
-  font-weight: bold;
-  font-size: calcSize(1.5);
   color: $foreground-light;
 }
 
-.svc-toolbox__item:hover {
+.svc-toolbox__item:hover,
+.svc-toolbox__item:focus {
   .svc-toolbox__item-banner {
     max-width: calcSize(25);
     padding-left: calcSize(1.5);
     padding-right: calcSize(2);
+    opacity: 1;
   }
 }
 
 .svc-toolbox:not(.svc-toolbox--compact) {
-  .svc-toolbox__tool:hover {
+  .svc-toolbox__item:not(.sv-dots):focus,
+  .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
     border-radius: calcSize(12.5);
     background-color: $background;
@@ -91,8 +104,26 @@
   }
 }
 
-.svc-toolbox__tool:hover {
-  .svc-toolbox__item:focus {
-    outline: none;
+.svc-toolbox__tool .sv-dots__item:hover,
+.svc-toolbox__tool .sv-dots__item:focus,
+.svc-toolbox__tool .sv-dots__item.sv-action-bar-item--pressed {
+  background-color: $primary-light;
+  border-radius: calcSize(12.5);
+
+  .sv-svg-icon use {
+    fill: $primary;
+  }
+}
+.svc-toolbox__tool .sv-dots__item.sv-action-bar-item--pressed {
+  opacity: 0.5;
+}
+
+.svc-toolbox__item:focus {
+  outline: none !important;
+}
+
+.svc-toolbox-popup {
+  .sv-list__item {
+    padding: calcSize(1.5) calcSize(5);
   }
 }
