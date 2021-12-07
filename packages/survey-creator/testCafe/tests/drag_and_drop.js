@@ -173,7 +173,7 @@ test("check change order of questions", async (t) => {
 
   await t.doubleClick(`[title~=Checkbox]`);
   await t.dragToElement(
-    ".svd_questions_editor [name='question1']",
+    ".svd_questions_editor [data-name='question1']",
     ".svd_questions_editor",
     dragToBottomConfig
   );
@@ -184,7 +184,7 @@ const getQuestionsInPanel = ClientFunction(() => {
   var names = [];
   document
     .querySelectorAll(".svd_questions_editor .panel_actions .svd_question")
-    .forEach(function(question) {
+    .forEach(function (question) {
       names.push(question.name);
     });
   return names;
@@ -222,7 +222,7 @@ test.skip("check move question from panel to up", async (t) => {
   );
 
   await t.dragToElement(
-    ".svd_questions_editor .panel_actions [name=question1]",
+    ".svd_questions_editor .panel_actions [data-name=question1]",
     ".svd_questions_editor",
     dragToTopConfig
   );
@@ -238,7 +238,7 @@ test("check move question from panel to bottom", async (t) => {
   );
 
   await t.dragToElement(
-    ".svd_questions_editor .panel_actions [name=question1]",
+    ".svd_questions_editor .panel_actions [data-name=question1]",
     ".svd_questions_editor",
     dragToBottomConfig
   );
@@ -250,7 +250,7 @@ test("check move question from survey to panel", async (t) => {
   await t.click("[title=Panel]");
   await t.click("[title=Checkbox]");
   await t.dragToElement(
-    ".svd_questions_editor [name=question1]",
+    ".svd_questions_editor [data-name=question1]",
     ".svd_questions_editor .panel_actions"
   );
 
@@ -269,7 +269,7 @@ test("check change order of questions in panel", async (t) => {
     dragToBottomConfig
   );
   await t.dragToElement(
-    ".svd_questions_editor [name=question1]",
+    ".svd_questions_editor [data-name=question1]",
     ".svd_questions_editor .panel_actions",
     dragToBottomConfig
   );
