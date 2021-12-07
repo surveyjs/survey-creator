@@ -2,7 +2,7 @@ import { Base, SurveyModel } from "survey-core";
 import { IQuestionToolboxItem } from "../../toolbox";
 import { CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
-import {DragOrClickHelper} from "../../utils/dragOrClickHelper";
+import { DragOrClickHelper } from "../../utils/dragOrClickHelper";
 
 export class ToolboxToolViewModel extends Base {
   private dragOrClickHelper: DragOrClickHelper;
@@ -16,7 +16,6 @@ export class ToolboxToolViewModel extends Base {
 
   public click = (event) => {
     if (!this.allowAdd) return;
-    if (this.item.id === 'dotsItem-id') return true; //toolbox responsive popup
     this.creator.clickToolboxItem(this.item.json);
   };
 

@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON, getBarItemByTitle, getListItemByText } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, getBarItemByTitle, getListItemByText, creatorTabPreviewName } from "../helper";
 import { Selector } from "testcafe";
 const title = "Preview tab";
 
@@ -70,7 +70,7 @@ test("Language switcher", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(getBarItemByTitle("english").visible).ok()
     .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("My Survey")
     .click(getBarItemByTitle("english"))
@@ -84,7 +84,7 @@ test("Page switcher", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(Selector(".sd-question__title").withText("string_editor").visible).ok()
     .expect(Selector("#pageSelector").textContent).contains("First page")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(true)
@@ -124,7 +124,7 @@ test("Test Survey Again", async (t) => {
   const switcher = getBarItemByTitle("Show invisible elements");
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .click(Selector("#nextPage"))
     .click(Selector("#nextPage"))
     .click(Selector("input[value='Complete']"))
@@ -138,7 +138,7 @@ test("Show invisible elements switcher", async (t) => {
   const switcher = getBarItemByTitle("Show invisible elements");
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(Selector(".sd-question__title").withText("string_editor").visible).ok()
     .expect(switcher.visible).ok("Switcher is visible")
     .click(switcher)
@@ -149,7 +149,7 @@ test("Landscape switcher", async (t) => {
   await setJSON(json);
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(orientationAction.hasAttribute("disabled")).ok()
     .expect(Selector(".svd-simulator-main").hasClass("svd-simulator-main--frame")).notOk()
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
@@ -170,7 +170,7 @@ test("Device selector", async (t) => {
   await setJSON(json);
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(Selector(".svc-top-bar .sv-action-bar-item").filterVisible().count).eql(3)
     .expect(orientationAction.hasAttribute("disabled")).ok()
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()

@@ -575,7 +575,7 @@ export var hrStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Odaberite stranicu da biste je testirali:",
     showInvisibleElements: "Pokaži nevidljive elemente",

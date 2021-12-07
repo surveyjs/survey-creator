@@ -241,7 +241,7 @@ var polishStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Wybierz stronę, aby ją przetestować:",
   },

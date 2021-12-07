@@ -585,7 +585,7 @@ var germanTranslation = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Seite:",
     showInvisibleElements: "Unsichtbare Elemente anzeigen",

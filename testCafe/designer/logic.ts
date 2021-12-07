@@ -1,5 +1,6 @@
-import { url, getTabbedMenuItemByText, setJSON } from "../helper";
-import { Selector } from "testcafe";
+import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName } from "../helper";
+import { ClientFunction, Selector } from "testcafe";
+
 const title = "Logic tab";
 
 const json = {
@@ -86,7 +87,12 @@ const surveyJSON = {
 
 fixture(title)
   .page(url)
-  .beforeEach(async (t) => await t.maximizeWindow());
+  .beforeEach(async (t) => {
+    await t.maximizeWindow();
+    await ClientFunction(() => {
+      window["creator"].showPropertyGrid = true;
+    })();
+  });
 
 function getSelectOptionByText(text: string) {
   return Selector("option").withExactText(text).filterVisible();
@@ -102,15 +108,15 @@ function getPropertyGridCategory(categoryName) {
 }
 
 const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();
-const conditionBuilder = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"panel\"]");
-const conditionTextEdit = Selector(".sl-element[name=\"conditions\"] .sd-question[name=\"textEditor\"]");
+const conditionBuilder = Selector(".sl-embedded-survey[name=\"conditions\"] div[name=\"panel\"]");
+const conditionTextEdit = Selector(".sl-embedded-survey[name=\"conditions\"] div[name=\"textEditor\"]");
 
 const newRuleCondition = "New rule is not set";
 const newRuleActions = "Value is empty";
 const cellConditions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Condition(s)\"]"));
 const cellActions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Action(s)\"]"));
 const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
-const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sd-paneldynamic__add-btn)").filterVisible();
+const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filterVisible();
 const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
 const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterVisible();
 const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
@@ -120,7 +126,7 @@ const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filt
 const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New");
-const addButton = Selector(".sd-paneldynamic__add-btn").filterVisible();
+const addButton = Selector(".sl-paneldynamic__add-btn ").filterVisible();
 const removeButton = Selector(".svc-logic-paneldynamic__remove-btn--right").filterVisible();
 const doneButton = Selector("button").withExactText("Done").filterVisible();
 
@@ -131,7 +137,7 @@ test("Create logic rule", async (t) => {
   await setJSON(json);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(Selector(".svc-logic-tab__content-empty").exists).ok()
     .expect(Selector(".svc-logic-tab__content-empty").visible).ok()
     .expect(addNewRuleButton.classNames).notContains(disabledClass)
@@ -224,7 +230,7 @@ test("Logic rules", async (t) => {
   await setJSON(json);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(0)
 
     .click(addNewRuleButton)
@@ -239,8 +245,8 @@ test("Logic rules", async (t) => {
     .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{string_editor} is not empty")
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
 
-    .click(getTabbedMenuItemByText("Survey Designer"))
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(1)
     .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{string_editor} is not empty")
     .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed");
@@ -250,7 +256,7 @@ test("Edit Logic rule", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(1)
 
     .hover(tableRulesSelector.nth(0))
@@ -277,7 +283,7 @@ test("Filtering rules", async (t) => {
   await setJSON(json3);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(3)
 
     .click(getBarItemByText("Show all questions"))
@@ -305,7 +311,7 @@ test("Filtering rules", async (t) => {
 
 test("Update rules", async (t) => {
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(0);
 
   await setJSON(surveyJSON);
@@ -321,7 +327,7 @@ test("Fast entry of the editing condition", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(fastEntryAction.hasAttribute("disabled")).ok()
 
     .hover(tableRulesSelector.nth(0))
@@ -374,7 +380,7 @@ test("Availability of the Done button", async (t) => {
   await setJSON(json3);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .click(addNewRuleButton)
     .expect(doneButton.visible).ok()
 
@@ -411,7 +417,7 @@ test("Modified rules without saving", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(cellConditions.nth(0).innerText).eql(rule1Condition)
     .expect(cellActions.nth(0).innerText).eql(rule1Actions)
     .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
@@ -525,7 +531,7 @@ test("Check logic elements styles in Logic tab", async (t) => {
   await setJSON(json3);
 
   await t
-    .click(getTabbedMenuItemByText("Survey Logic"))
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
     .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement)
     .click(addButton.nth(0));
@@ -556,7 +562,6 @@ test("Check logic elements styles in Popup", async (t) => {
   const objectSelectorPopup = Selector(".sv-popup .svc-object-selector");
 
   await setJSON(json3);
-
   await t
     .click(objectSelectorButton)
     .click(objectSelectorPopup.find("span").withText("q2"))
