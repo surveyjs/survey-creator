@@ -567,7 +567,7 @@ export var fiStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Valitse sivu testataksesi sitä:",
     showInvisibleElements: "Näytä näkymätön elementti",

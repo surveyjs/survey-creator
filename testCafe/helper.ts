@@ -36,6 +36,10 @@ export const getItemValueByIndex = ClientFunction((questionName, index) => {
   return choices[index].value;
 });
 
+export const creatorTabDesignerName = "Designer";
+export const creatorTabPreviewName = "Preview";
+export const creatorTabLogicName = "Logic";
+
 export const expandButtonSelector = Selector(".sv-action-bar-item[title=\"Show Panel\"]");
 export const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide Panel\"]");
 export const propertyGridSelector = Selector(".svc-side-bar__container");
@@ -51,7 +55,7 @@ export const toolboxItems = Selector(".svc-toolbox__tool").filterVisible();
 export const toolboxItemIcons = Selector(".svc-toolbox__tool .svc-toolbox__item-container").filterVisible();
 export const toolboxItemTitles = Selector(".svc-toolbox__tool .svc-toolbox__item > .svc-toolbox__item-title").filterVisible();
 
-export function getTabbedMenuItemByText(text: "Survey Designer" | "Test Survey" | "Survey Logic" | "Translation" | "JSON Editor" | "Embed Survey") {
+export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey") {
   return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text).filterVisible();
 }
 

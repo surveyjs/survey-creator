@@ -76,16 +76,16 @@ export var enStrings = {
     newQuestionName: "question",
     newPanelName: "panel",
     newTextItemName: "text",
-    testSurvey: "Test Survey",
+    testSurvey: "Preview",
     testSurveyAgain: "Test Survey Again",
     testSurveyWidth: "Survey width: ",
     navigateToMsg: "You had to navigate to:",
-    logic: "Survey Logic",
+    logic: "Logic",
     embedSurvey: "Embed Survey",
     translation: "Translation",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
-    designer: "Survey Designer",
+    designer: "Designer",
     jsonEditor: "JSON Editor",
     jsonHideErrors: "Hide errors",
     jsonShowErrors: "Show errors",
@@ -622,7 +622,7 @@ export var enStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Select the page to test it:",
     showInvisibleElements: "Show invisible elements"
