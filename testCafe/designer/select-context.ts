@@ -1,4 +1,4 @@
-import { url } from "../helper";
+import { addQuestionByAddQuestionButton, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Select context object then edit string";
 
@@ -14,10 +14,10 @@ const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-ob
 test("Matrix question", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()
-    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-    .hover(getToolboxItemByText("Matrix (single choice)"), { speed: 0.5 })
-    .click(getToolboxItemByText("Matrix (single choice)"), { speed: 0.5 })
+  await addQuestionByAddQuestionButton(t, "Matrix (single choice)");
+  await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
@@ -44,10 +44,10 @@ test("Matrix question", async (t) => {
 test("Matrix dropdown question", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()
-    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-    .hover(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
-    .click(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
+  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
@@ -64,10 +64,10 @@ test("Matrix dropdown question", async (t) => {
 test("Matrix dropdown question select column", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()
-    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-    .hover(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
-    .click(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
+  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector(".svc-matrix-cell--selected").visible).notOk()
@@ -82,10 +82,10 @@ test("Matrix dropdown question select column", async (t) => {
 test("Matrix dynamic question select column", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()
-    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-    .hover(getToolboxItemByText("Matrix (dynamic rows)"), { speed: 0.5 })
-    .click(getToolboxItemByText("Matrix (dynamic rows)"), { speed: 0.5 })
+  await addQuestionByAddQuestionButton(t, "Matrix (dynamic rows)");
+  await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector(".svc-matrix-cell--selected").visible).notOk()
@@ -99,17 +99,13 @@ test("Matrix dynamic question select column", async (t) => {
 
 test("Dynamic panel inner panel not selectable", async (t) => {
   await t
-    .expect(Selector(".svc-question__content").exists).notOk()
+    .expect(Selector(".svc-question__content").exists).notOk();
 
-    .hover(getToolboxItemByText("Panel (dynamic panels)"), { speed: 0.5 })
-    .click(getToolboxItemByText("Panel (dynamic panels)"), { speed: 0.5 })
+  await addQuestionByAddQuestionButton(t, "Panel (dynamic panels)");
+  await t
     .expect(Selector(".svc-question__adorner").exists).ok()
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(".svc-question__adorner .svc-question__adorner").exists).ok()
     .expect(Selector(".svc-question__content .svc-question__content").exists).notOk()
     .expect(Selector(".svc-question__adorner .svc-question__adorner>.svc-panel__placeholder_frame").exists).ok();
 });
-function getToolboxItemByText(arg0: string): string | Selector | NodeSnapshot | SelectorPromise | ((...args: any[]) => Node | Node[] | NodeList | HTMLCollection) {
-  throw new Error("Function not implemented.");
-}
-

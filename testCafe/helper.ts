@@ -70,7 +70,12 @@ export function getVisibleElement(selector: string | Selector): Selector {
   return selectorIsVisibleFilter(Selector(selector));
 }
 export function getToolboxItemByText(text: string) {
-  return getVisibleElement(".svc-toolbox__item-title").withText(text);
+  return getVisibleElement(".svc-toolbox__item-title").withExactText(text);
+}
+export async function addQuestionByAddQuestionButton(t: TestController, text: string) {
+  await t
+    .click(Selector(".svc-page__add-new-question .svc-page__question-type-selector"))
+    .click(Selector(".sv-list__item span").withExactText(text).filterVisible());
 }
 
 function selectorIsVisibleFilter(selector: Selector) {
