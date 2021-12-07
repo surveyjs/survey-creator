@@ -9,7 +9,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 const items = getVisibleElement(".svc-item-value-wrapper");
 const imageItems = getVisibleElement(".svc-image-item-value-wrapper");
 
-test.only("Checkbox question inplace editor", async (t) => {
+test("Checkbox question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Checkbox"), { speed: 0.5 })
