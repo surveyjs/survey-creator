@@ -166,7 +166,7 @@ test("check change order of questions", async (t) => {
     document
       .querySelectorAll(".svd_questions_editor .svd_question")
       .forEach((questionTemplate) => {
-        names.push(questionTemplate.getAttribute("name"));
+        names.push(questionTemplate.getAttribute("data-name"));
       });
     return names;
   });
@@ -185,7 +185,7 @@ const getQuestionsInPanel = ClientFunction(() => {
   document
     .querySelectorAll(".svd_questions_editor .panel_actions .svd_question")
     .forEach(function (question) {
-      names.push(question.name);
+      names.push(question.getAttribute("data-name"));
     });
   return names;
 });
