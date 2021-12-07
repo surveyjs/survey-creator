@@ -18,8 +18,7 @@ test("Add New Question", async t => {
     .click(Selector(".svc-page__add-new-question > button.svc-page__question-type-selector"))
     .wait(100)
     .pressKey("p")
-    .expect(Selector(".sv-popup:not(.sv-popup--overlay) li").withText("Panel").visible).ok()
-    .click(Selector(".sv-popup:not(.sv-popup--overlay) li").withText("Panel"))
+    .click(Selector(".sv-popup:not(.sv-popup--overlay) li").withExactText("Panel").filterVisible())
     .click(Selector(".svc-panel__add-new-question > span").withText("Add Question"))
     .expect(Selector("span").withText("question1").visible).ok();
 });
