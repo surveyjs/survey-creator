@@ -1,4 +1,8 @@
-import { setJSON, collapseButtonSelector, expandButtonSelector, getPagesLength, getTabbedMenuItemByText, objectSelectorButton, objectSelectorPopup, propertyGridSelector, url, toolbox, pageNavigator } from "../helper";
+import {
+  setJSON, collapseButtonSelector, expandButtonSelector, getPagesLength, getTabbedMenuItemByText,
+  objectSelectorButton, objectSelectorPopup, propertyGridSelector, url,
+  pageNavigator, creatorTabDesignerName, creatorTabPreviewName
+} from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Side bar";
 
@@ -49,7 +53,7 @@ test("collapse/expand buttons", async (t) => {
     .expect(expandButtonSelector.visible).notOk()
     .expect(propertyGridSelector.visible).ok()
 
-    .click(getTabbedMenuItemByText("Survey Designer"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .expect(collapseButtonSelector.visible).ok()
     .expect(expandButtonSelector.visible).notOk()
     .expect(propertyGridSelector.visible).ok();
@@ -57,9 +61,9 @@ test("collapse/expand buttons", async (t) => {
 
 test("SelectObject", async (t: TestController) => {
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .click(getTabbedMenuItemByText("Translation"))
-    .click(getTabbedMenuItemByText("Survey Designer"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .expect(objectSelectorPopup.exists).notOk()
 
     .click(objectSelectorButton)
