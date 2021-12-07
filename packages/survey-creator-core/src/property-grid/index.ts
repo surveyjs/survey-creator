@@ -341,7 +341,10 @@ export class PropertyGridTitleActionsCreator {
       iconName: "icon-property_grid_clear",
       css: "spg-action-button spg-action-button--danger",
       enabled: enabled,
-      visible: <any>new ComputedUpdater<boolean>(() => !!question.obj[property.name]),
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        const propertyValue = question.obj[property.name];
+        return Array.isArray(propertyValue) ? propertyValue.length > 0 : !!propertyValue;
+      }),
       action: () => {
         editor.clearPropertyValue(
           question.obj,
