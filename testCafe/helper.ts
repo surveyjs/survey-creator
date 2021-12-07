@@ -70,7 +70,7 @@ export function getVisibleElement(selector: string | Selector): Selector {
   return selectorIsVisibleFilter(Selector(selector));
 }
 export function getToolboxItemByText(text: string) {
-  return getVisibleElement(".svc-toolbox__item-title").withText(text);
+  return getVisibleElement(".svc-toolbox__item-title").withExactText(text);
 }
 
 function selectorIsVisibleFilter(selector: Selector) {
