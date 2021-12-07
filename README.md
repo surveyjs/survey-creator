@@ -1,7 +1,5 @@
-**survey.creator** is the visual survey creator / form builder for [SurveyJS](https://github.com/surveyjs/survey-library). It uses JSON to store the survey metadata.
+# Survey Creator
 
-[![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Creator?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=8&branchName=master)
-<a href="https://www.npmjs.com/package/survey-creator"><img alt="NPM Version" src="https://img.shields.io/npm/v/survey-creator.svg" data-canonical-src="https://img.shields.io/npm/v/survey-creator.svg" style="max-width:100%;"></a>
 <a href="https://github.com/surveyjs/survey-creator/issues">
 <img alt="Issues" title="Open Issues" src="https://img.shields.io/github/issues/surveyjs/survey-creator.svg">
 </a>
@@ -9,79 +7,29 @@
 <img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/surveyjs/survey-creator.svg">
 </a>
 
-## See Survey Creator / Form Builder in action
+The Survey Creator is a visual survey designer / form builder for [SurveyJS](https://github.com/surveyjs/survey-library).
 
-[Create your Survey or Form now](https://surveyjs.io/create-survey/)
+Two Survey Creator versions are available. Both versions can be used in jQuery, Knockout, Angular, Vue, and React applications. Differences between them are described in the following help topic: [SurveyJS Creator V2: What's new](https://surveyjs.io/Documentation/Survey-Creator?id=Creator-V2-Whats-New).
 
+## Survey Creator V1
 
-## Download
+Survey Creator V1 is the latest RTM version. It is powered by Knockout. You can find its sources in the [survey-creator](./packages/survey-creator) directory.
 
-Dowload the latest version as zip file [Download](https://github.com/surveyjs/survey-creator/releases)
+- [Live Examples](https://surveyjs.io/Examples/Survey-Creator)
+- [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
+- [Create your Survey or Form now](https://surveyjs.io/create-survey/)
 
-Install the library using npm.
+## Survey Creator V2 (Beta)
 
-```
-npm install survey-creator
-```
+Survey Creator V2 is a successor of V1. It has an updated design and separates survey model from the UI.
 
-Or use Azure CDN:
-- https://unpkg.com/survey-creator@{version-number}/survey-creator.js
-- https://unpkg.com/survey-creator@{version-number}/survey-creator.css
+V2 is also planned to be independent from Knockout. [React version](./packages/survey-creator-react) does not require Knockout already. Versions for other frameworks are scheduled for development. Until then, you can use the [Knockout version](./packages/survey-creator-knockout) with any framework.
 
-## Include into your project
-
-### Explore examples
-
-To learn how to include the visual survey creator / form builder on your page and explore examples of using, please go to [surveyjs.io/Examples/Survey-Creator](https://surveyjs.io/Examples/Survey-Creator) web site
-
-### Read documentation
-
-To find out more about the library concepts and the you may customize it, please read [our documentation](https://surveyjs.io/Documentation/Survey-Creator)
-
-### Use quickstart repos
-
-[Angular CLI](https://github.com/surveyjs/surveyjs_angular_cli), [React](https://github.com/surveyjs/surveyjs_react_quickstart), [Vue](https://github.com/surveyjs/surveyjs_vue_quickstart)
-
-## See survey creator in action
-
-See the survey creator in [action](http://surveyjs.io/Survey/Builder/).
-
-## Building Survey Creator from sources
-
-To build library yourself:
-
-1.  **Clone the repo from GitHub**
-
-    ```
-    git clone https://github.com/surveyjs/survey-creator.git
-    cd survey-creator/packages/survey-creator
-    ```
-
-2.  **Acquire build dependencies.** Make sure you have [Node.js](http://nodejs.org/) installed on your workstation. You need a version of Node.js greater than 6.0.0 and npm greater than 2.7.0
-
-    ```
-    npm install
-    ```
-
-3.  **Build the library**
-
-    ```
-    npm run build_prod
-    ```
-
-    After that you should have the library at 'build' directory.
-
-4.  **Run unit tests**
-    ```
-    npm test
-    ```
-    This command will run unit tests using [Karma](https://karma-runner.github.io/0.13/index.html)
-
-## Dependencies
-
-The library depends on: [surveyjs](http://surveyjs.io/Library/) and [knockoutjs](http://knockoutjs.com)
-Optionally you may use [bootstrap](http://getbootstrap.com), [ace editor](https://ace.c9.io/) and [select2](https://select2.org/)
+- [Live Examples](https://surveyjs.io/Examples/Survey-Creator?platform=KnockoutjsV2)
+- [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
+- [Create your Survey or Form now](https://surveyjs.io/create-survey-v2)
+- [How to Migrate from V1 to V2](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2)
 
 ## License
 
-The Survey Creator (Form Builder) is NOT FREE for commercial using. Please find more about licensing the product [here](http://surveyjs.io/Licenses).
+The Survey Creator (Form Builder) is **not available for free commercial usage**. You can find more information about licensing this product on the following page: [Licenses](http://surveyjs.io/Licenses).

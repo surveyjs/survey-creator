@@ -345,7 +345,7 @@ var portugueseTranslation = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Selecione a página para testar:",
     showInvisibleElements: "Mostrar elementos invisíveis"

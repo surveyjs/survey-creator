@@ -10,6 +10,7 @@ import { QuestionEmbeddedSurveyModel } from "../embedded-survey";
 import { updateMatrixRemoveAction } from "../../utils/actions";
 
 import "./logic-ui.scss";
+
 import { logicCss } from "./logic-theme";
 
 interface ILogicItemUI {

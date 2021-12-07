@@ -375,7 +375,7 @@ export var huStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Válassza ki a tesztelni kívánt lapot:",
     showInvisibleElements: "Nemlátható elemek megjelnítése"

@@ -192,6 +192,7 @@ creator.onElementAllowOperations.add((sender, options) => {
 });
 
 creator.saveSurveyFunc = (no, callback) => {
+  console.log(no);
   setTimeout(function () {
     callback(no, true);
   }, 1000);

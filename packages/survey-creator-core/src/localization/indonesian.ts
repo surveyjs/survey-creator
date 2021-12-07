@@ -375,7 +375,7 @@ export var indonesianStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Pilih halaman untuk dicoba:",
     showInvisibleElements: "Tampilkan elemen tak terlihat",
