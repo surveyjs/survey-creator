@@ -376,7 +376,7 @@ export class PropertyGridTitleActionsCreator {
   ): any {
     var setupAction = {
       id: "property-grid-setup",
-      iconName: "icon-property_grid_modal",
+      iconName: property.isArray ? "icon-fast-entry" : "icon-property_grid_modal",
       css: "spg-action-button",
       enabled: enabled,
       title: getLocString("pe.edit"),
