@@ -16,8 +16,8 @@ test("Matrix question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
 
-    .hover(Selector("div[title=\"Matrix (single choice)\"]"), { speed: 0.5 })
-    .click(Selector("div[title=\"Matrix (single choice)\"]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Matrix (single choice)"), { speed: 0.5 })
+    .click(getToolboxItemByText("Matrix (single choice)"), { speed: 0.5 })
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
@@ -46,8 +46,8 @@ test("Matrix dropdown question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
 
-    .hover(Selector("div[title=\"Matrix (multiple choice)\"]"), { speed: 0.5 })
-    .click(Selector("div[title=\"Matrix (multiple choice)\"]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
+    .click(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
@@ -66,8 +66,8 @@ test("Matrix dropdown question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
 
-    .hover(Selector("div[title=\"Matrix (multiple choice)\"]"), { speed: 0.5 })
-    .click(Selector("div[title=\"Matrix (multiple choice)\"]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
+    .click(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector(".svc-matrix-cell--selected").visible).notOk()
@@ -84,8 +84,8 @@ test("Matrix dynamic question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
 
-    .hover(Selector("div[title=\"Matrix (dynamic rows)\"]"), { speed: 0.5 })
-    .click(Selector("div[title=\"Matrix (dynamic rows)\"]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Matrix (dynamic rows)"), { speed: 0.5 })
+    .click(getToolboxItemByText("Matrix (dynamic rows)"), { speed: 0.5 })
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector(".svc-matrix-cell--selected").visible).notOk()
@@ -101,11 +101,15 @@ test("Dynamic panel inner panel not selectable", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()
 
-    .hover(Selector("div[title=\"Panel (dynamic panels)\"]"), { speed: 0.5 })
-    .click(Selector("div[title=\"Panel (dynamic panels)\"]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Panel (dynamic panels)"), { speed: 0.5 })
+    .click(getToolboxItemByText("Panel (dynamic panels)"), { speed: 0.5 })
     .expect(Selector(".svc-question__adorner").exists).ok()
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(".svc-question__adorner .svc-question__adorner").exists).ok()
     .expect(Selector(".svc-question__content .svc-question__content").exists).notOk()
     .expect(Selector(".svc-question__adorner .svc-question__adorner>.svc-panel__placeholder_frame").exists).ok();
 });
+function getToolboxItemByText(arg0: string): string | Selector | NodeSnapshot | SelectorPromise | ((...args: any[]) => Node | Node[] | NodeList | HTMLCollection) {
+  throw new Error("Function not implemented.");
+}
+

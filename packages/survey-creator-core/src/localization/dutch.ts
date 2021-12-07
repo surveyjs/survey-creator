@@ -591,7 +591,7 @@ export var nlStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Selecteer de pagina om deze te testen:",
     showInvisibleElements: "Toon onzichtbare elementen",

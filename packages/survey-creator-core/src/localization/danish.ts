@@ -338,7 +338,7 @@ export var danishStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Vælg siden for at teste den:"
   },

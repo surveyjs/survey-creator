@@ -115,7 +115,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   extends Survey.Base
   implements ISurveyCreatorOptions, ICreatorSelectionOwner {
   /**
-   * Set it to true to show "JSON Editor" tab and to false to hide the tab
+   * Set it to true to show "Designer" tab and to false to hide the tab
    */
   @property({ defaultValue: false }) showDesignerTab: boolean;
   /**
@@ -123,9 +123,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    */
   @property({ defaultValue: false }) showJSONEditorTab: boolean;
   /**
-   * Set it to true to show "Test Survey" tab and to false to hide the tab
+   * Obsolete. Please use showPreviewTab property
+   * @see showPreviewTab
    */
   @property({ defaultValue: false }) showTestSurveyTab: boolean;
+  /**
+   * Set it to true to show "Preview" tab and to false to hide the tab
+   */
+  public get showPreviewTab(): boolean { return this.showTestSurveyTab; }
+  public set showPreviewTab(val: boolean) { this.showTestSurveyTab = val; }
   /**
    * Set it to true to show "Embed Survey" tab and to false to hide the tab
    */
@@ -216,7 +222,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * Returns the current show view name. The possible returns values are:
    * "designer", "editor", "test", "embed", "logic" and "translation".
    * @see showDesigner
-   * @see showTestSurvey
+   * @see showPreview
    * @see showJsonEditor
    * @see showLogicEditor
    * @see showTranslationEditor
@@ -231,10 +237,23 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public showDesigner() {
     this.activeTab = "designer";
   }
+
   public get isTestSurveyShowing(): boolean {
+    return this.isPreviewShowing;
+  }
+  /**
+   * Return true if Preview tab is currently active
+   */
+  public get isPreviewShowing(): boolean {
     return this.activeTab === "test";
   }
   public showTestSurvey() {
+    this.showPreview();
+  }
+  /**
+   * Show Preview tab
+   */
+  public showPreview() {
     this.activeTab = "test";
   }
 
@@ -300,7 +319,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * The event is fired when the survey creator creates a survey object (Survey.Survey).
    * <br/> sender the survey creator object that fires the event
    * <br/> options.survey the survey object showing in the creator.
-   * <br/> options.reason indicates what component of the creator requests the survey. There are several reason types: "designer" - survey for designer survey, "test" - survey for "Test Survey" tab and "conditionEditor", "defaultValueEditor", "restfulEditor" - surveys for different property editors.
+   * <br/> options.reason indicates what component of the creator requests the survey. There are several reason types: "designer" - survey for designer survey, "test" - survey for "Preview" tab and "conditionEditor", "defaultValueEditor", "restfulEditor" - surveys for different property editors.
    */
   public onSurveyInstanceCreated: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
@@ -316,8 +335,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.displayName change this property to show your custom display name for the object
    * <br/> The list of possible values in options.reason:
    * <br/> "condition" - raised from Condition modal window or on setup condition in a logic tab
-   * <br/> "survey-tester" - raised from page selector list in "Test Survey" tab
-   * <br/> "survey-tester-selected" - raised on setting page selector title in "Test Survey" tab
+   * <br/> "survey-tester" - raised from page selector list in "Preview" tab
+   * <br/> "survey-tester-selected" - raised on setting page selector title in "Preview" tab
    * <br/> "survey-translation" - raised from translation tab
    * <br/> "property-grid" - raised from showing object selector for property grid in "Designer" tab.
    * @see showObjectTitles
@@ -626,14 +645,22 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
-   * The event is fired when the survey creator runs the survey in the test mode.
+   * The event is fired when the survey creator creates survey in Preview tab for testing.
    * <br/> sender the survey creator object that fires the event
-   * <br/> options.survey  the survey object showing in the "Test survey" tab.
+   * <br/> options.survey  the survey object showing in the "Preview" tab.
    */
-  public onTestSurveyCreated: Survey.Event<
+  public onPreviewSurveyCreated: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+    * Obsolete. Please use onPreviewSurveyCreated event.
+    * @see onPreviewSurveyCreated
+    */
+  public onTestSurveyCreated: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = this.onPreviewSurveyCreated;
   /**
    * The event is called in case of UI notifications. By default all notifications are done via built-in alert () function.
    * In case of any subscriptions to this event all notifications will be redirected into the event handler.
@@ -743,14 +770,25 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    */
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
   /**
-   * Set this property to false to hide the pages selector in the Test Survey Tab
+   * Obsolete. Please use showPagesInPreviewTab
    */
   public showPagesInTestSurveyTab = true;
+  /**
+   * Set this property to false to hide the pages selector in the Preview Tab
+   */
+  public get showPagesInPreviewTab(): boolean { return this.showPagesInTestSurveyTab; }
+  public set showPagesInPreviewTab(val: boolean) { this.showPagesInTestSurveyTab = val; }
 
   /**
-   * Set this property to false to hide the device simulator in the Test Survey Tab
+   * Obsolete. Please use showSimulatorInPreviewTab.
+   * @see showSimulatorInPreviewTab
    */
   public showSimulatorInTestSurveyTab = true;
+  /**
+   * Set this property to false to hide the device simulator in the Preview Tab
+   */
+  public get showSimulatorInPreviewTab(): boolean { return this.showSimulatorInTestSurveyTab; }
+  public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
 
   /**
    * Set this property to false to disable pages adding, editing and deleting
@@ -758,18 +796,29 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public allowModifyPages = true;
 
   /**
+   * Obsolete. Please use showDefaultLanguageInPreviewTab
+   * @see showDefaultLanguageInPreviewTab
+   */
+  public showDefaultLanguageInTestSurveyTab: boolean | string = "auto";
+  /**
    * The default value is _"auto"_. It shows the language selector if there are more than two languages are using in the survey.
    * It shows only used languages in the survey.
-   * Set this property to _false_ to hide the default language selector in the Test Survey Tab.
+   * Set this property to _false_ to hide the default language selector in the Preview Tab.
    * Set it to _true_ to show this selector even if there is only one language in the survey
    * Set it to _all_ to show the selector with all available languages (30+)
    */
-  public showDefaultLanguageInTestSurveyTab: boolean | string = "auto";
+  public get showDefaultLanguageInPreviewTab(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
+  public set showDefaultLanguageInPreviewTab(val: boolean | string) { this.showDefaultLanguageInTestSurveyTab = val; }
 
   /**
-   * Set this property to false to hide the show invisible element checkbox in the Test Survey Tab
+   * Set this property to false to hide the show invisible element checkbox in the Preview Tab
    */
   public showInvisibleElementsInTestSurveyTab = true;
+  /**
+   * Set this property to false to hide the show invisible element checkbox in the Preview Tab
+   */
+  public get showInvisibleElementsInPreviewTab(): boolean { return this.showInvisibleElementsInTestSurveyTab; }
+  public set showInvisibleElementsInPreviewTab(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
 
   /**
    * Set this property to true if you want to show "page selector" in the toolabar instead of "pages editor"
@@ -1054,7 +1103,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     if (this.showDesignerTab) {
       new TabDesignerPlugin<T>(this);
     }
-    if (this.showTestSurveyTab) {
+    if (this.showPreviewTab) {
       new TabTestPlugin(this);
     }
     if (this.showLogicTab) {
@@ -1106,10 +1155,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       typeof options.showJSONEditorTab !== "undefined"
         ? options.showJSONEditorTab
         : true;
-    this.showTestSurveyTab =
-      typeof options.showTestSurveyTab !== "undefined"
-        ? options.showTestSurveyTab
-        : true;
+    this.showPreviewTab =
+      typeof options.showPreviewTab !== "undefined"
+        ? options.showPreviewTab
+        : (typeof options.showTestSurveyTab !== "undefined"
+          ? options.showTestSurveyTab : true);
     this.allowEditSurveyTitle =
       typeof options.allowEditSurveyTitle !== "undefined"
         ? options.allowEditSurveyTitle
@@ -1183,18 +1233,32 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.readOnly = options.readOnly;
     }
     if (typeof options.showPagesInTestSurveyTab !== "undefined") {
-      this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
+      this.showPagesInPreviewTab = options.showPagesInTestSurveyTab;
+    }
+    if (typeof options.showPagesInPreviewTab !== "undefined") {
+      this.showPagesInPreviewTab = options.showPagesInPreviewTab;
     }
     if (typeof options.showSimulatorInTestSurveyTab !== "undefined") {
-      this.showSimulatorInTestSurveyTab = options.showSimulatorInTestSurveyTab;
+      this.showSimulatorInPreviewTab = options.showSimulatorInTestSurveyTab;
+    }
+    if (typeof options.showSimulatorInPreviewTab !== "undefined") {
+      this.showSimulatorInPreviewTab = options.showSimulatorInPreviewTab;
     }
     if (typeof options.showDefaultLanguageInTestSurveyTab !== "undefined") {
-      this.showDefaultLanguageInTestSurveyTab =
+      this.showDefaultLanguageInPreviewTab =
         options.showDefaultLanguageInTestSurveyTab;
     }
+    if (typeof options.showDefaultLanguageInPreviewTab !== "undefined") {
+      this.showDefaultLanguageInPreviewTab =
+        options.showDefaultLanguageInPreviewTab;
+    }
     if (typeof options.showInvisibleElementsInTestSurveyTab !== "undefined") {
-      this.showInvisibleElementsInTestSurveyTab =
+      this.showInvisibleElementsInPreviewTab =
         options.showInvisibleElementsInTestSurveyTab;
+    }
+    if (typeof options.showInvisibleElementsInPreviewTab !== "undefined") {
+      this.showInvisibleElementsInPreviewTab =
+        options.showInvisibleElementsInPreviewTab;
     }
     if (typeof options.allowModifyPages !== "undefined") {
       this.allowModifyPages = options.allowModifyPages;
@@ -1580,7 +1644,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.notify(this.getLocString("ed." + value));
     }
   }
-
   public onStateChanged: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any

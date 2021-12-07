@@ -1,4 +1,4 @@
-import { getVisibleElement, setJSON, url } from "../helper";
+import { getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Inplace editors";
 
@@ -9,11 +9,11 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 const items = getVisibleElement(".svc-item-value-wrapper");
 const imageItems = getVisibleElement(".svc-image-item-value-wrapper");
 
-test("Checkbox question inplace editor", async (t) => {
+test.only("Checkbox question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getVisibleElement("div[title=Checkbox]"), { speed: 0.5 })
-    .click(getVisibleElement("div[title=Checkbox]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Checkbox"), { speed: 0.5 })
+    .click(getToolboxItemByText("Checkbox"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(items.count).eql(7)
     .expect(items.nth(0).hasClass("svc-item-value--new")).ok()
@@ -91,8 +91,8 @@ test("Checkbox question inplace editor", async (t) => {
 test("Radiogroup question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getVisibleElement("div[title=Radiogroup]"), { speed: 0.5 })
-    .click(getVisibleElement("div[title=Radiogroup]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Radiogroup"), { speed: 0.5 })
+    .click(getToolboxItemByText("Radiogroup"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(items.count).eql(6)
     .expect(items.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -262,8 +262,8 @@ test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
 test("Dropdown question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getVisibleElement("div[title=Dropdown]"), { speed: 0.5 })
-    .click(getVisibleElement("div[title=Dropdown]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Dropdown"), { speed: 0.5 })
+    .click(getToolboxItemByText("Dropdown"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(items.count).eql(6)
     .expect(items.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -332,16 +332,16 @@ test("Dropdown question inplace editor", async (t) => {
     .expect(items.nth(4).find(".svc-item-value-controls__drag").visible).notOk()
     .expect(items.nth(4).find("span").withText("Other (describe)").exists).ok()
 
-    .hover(getVisibleElement("div[title='Single Input']"), { speed: 0.5 })
-    .click(getVisibleElement("div[title='Single Input']"), { speed: 0.5 })
+    .hover(getToolboxItemByText("'Single Input'"), { speed: 0.5 })
+    .click(getToolboxItemByText("'Single Input'"), { speed: 0.5 })
     .expect(items.count).eql(0); // Choice editors are hidden if another question is selected
 });
 
 test("Ranking question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getVisibleElement("div[title=Ranking]"), { speed: 0.5 })
-    .click(getVisibleElement("div[title=Ranking]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Ranking"), { speed: 0.5 })
+    .click(getToolboxItemByText("Ranking"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(items.count).eql(4)
     .expect(items.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -388,8 +388,8 @@ test("Ranking question inplace editor", async (t) => {
 test("Image picker question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getVisibleElement("div[title='Image picker']"), { speed: 0.5 })
-    .click(getVisibleElement("div[title='Image picker']"), { speed: 0.5 })
+    .hover(getToolboxItemByText("'Image picker'"), { speed: 0.5 })
+    .click(getToolboxItemByText("'Image picker'"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
     .expect(imageItems.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -424,8 +424,8 @@ test("Image picker question inplace editor", async (t) => {
 test("Image picker question inplace editor - add new item", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getVisibleElement("div[title='Image picker']"), { speed: 0.5 })
-    .click(getVisibleElement("div[title='Image picker']"), { speed: 0.5 })
+    .hover(getToolboxItemByText("'Image picker'"), { speed: 0.5 })
+    .click(getToolboxItemByText("'Image picker'"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
 
@@ -448,8 +448,8 @@ test("Image question inplace editor", async (t) => {
   const controls = getVisibleElement(".svc-image-question-controls");
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getVisibleElement("div[title=Image]"), { speed: 0.5 })
-    .click(getVisibleElement("div[title=Image]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Image"), { speed: 0.5 })
+    .click(getToolboxItemByText("Image"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(getVisibleElement(".svc-question__content--selected").find("img[alt=question1]").exists).ok()
     .expect(controls.count).eql(1)
@@ -459,8 +459,8 @@ test("Image question inplace editor", async (t) => {
 test("Image question inplace editor - choose image via inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getVisibleElement("div[title=Image]"), { speed: 0.5 })
-    .click(getVisibleElement("div[title=Image]"), { speed: 0.5 });
+    .hover(getToolboxItemByText("Image"), { speed: 0.5 })
+    .click(getToolboxItemByText("Image"), { speed: 0.5 });
 
   const getImageLink = ClientFunction(() => {
     return document.querySelectorAll("img.sv_image_image")[0]["src"];
@@ -469,7 +469,7 @@ test("Image question inplace editor - choose image via inplace editor", async (t
   await t.expect(imageLink).eql("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
   await t
     .click(getVisibleElement(".svc-image-question-controls__button"))
-    .setFilesToUpload(getVisibleElement(".svc-question__content input[type=file]"), "./image.jpg");
+    .setFilesToUpload(getVisibleElement(".svc-question__content input[type=file"), "./image.jpg");
   imageLink = await getImageLink();
   await t.expect(imageLink.substring(0, 48)).eql("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABA");
 });
@@ -483,8 +483,8 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()
 
-    .hover(Selector("div[title=\"Matrix (multiple choice)\"]"), { speed: 0.5 })
-    .click(Selector("div[title=\"Matrix (multiple choice)\"]"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
+    .click(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
     .expect(Selector(".svc-question__content").exists).ok()
     .hover(row1Column1Cell, { speed: 0.5 });
 

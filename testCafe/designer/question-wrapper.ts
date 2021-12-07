@@ -1,4 +1,4 @@
-import { questions, questionToolbarActions, url } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -22,8 +22,8 @@ test("Single input question wrapper actions", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(Selector("div[title='Single Input']"))
-    .click(Selector("div[title='Single Input']"))
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(questionToolbarActions.count).eql(4)
@@ -43,8 +43,8 @@ test("Single input question wrapper action convert", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(Selector("div[title='Single Input']"))
-    .click(Selector("div[title='Single Input']"))
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(convertActionButton.visible).ok()
@@ -70,8 +70,8 @@ test("Single input question wrapper action duplicate", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(Selector("div[title='Single Input']"))
-    .click(Selector("div[title='Single Input']"))
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(duplicateActionButton.visible).ok()
@@ -95,8 +95,8 @@ test("Single input question wrapper action change require", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(Selector("div[title='Single Input']"))
-    .click(Selector("div[title='Single Input']"))
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok();
 
@@ -118,8 +118,8 @@ test("Single input question wrapper action delete", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(Selector("div[title='Single Input']"))
-    .click(Selector("div[title='Single Input']"))
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(deleteActionButton.visible).ok()
