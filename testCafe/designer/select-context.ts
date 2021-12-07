@@ -1,4 +1,4 @@
-import { url } from "../helper";
+import { addQuestionByAddQuestionButton, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Select context object then edit string";
 
@@ -11,18 +11,12 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item__title";
 
-async function addQuestion(t: TestController, text: string) {
-  await t
-    .click(Selector(".svc-page__add-new-question .svc-page__question-type-selector"))
-    .click(Selector(".sv-list__item span").withText(text).filterVisible());
-}
-
 test("Matrix question", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestion(t, "Matrix (single choice)");
+  await addQuestionByAddQuestionButton(t, "Matrix (single choice)");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -52,7 +46,7 @@ test("Matrix dropdown question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestion(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -72,7 +66,7 @@ test("Matrix dropdown question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestion(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -90,7 +84,7 @@ test("Matrix dynamic question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestion(t, "Matrix (dynamic rows)");
+  await addQuestionByAddQuestionButton(t, "Matrix (dynamic rows)");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -107,7 +101,7 @@ test("Dynamic panel inner panel not selectable", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk();
 
-  await addQuestion(t, "Panel (dynamic panels)");
+  await addQuestionByAddQuestionButton(t, "Panel (dynamic panels)");
   await t
     .expect(Selector(".svc-question__adorner").exists).ok()
     .expect(Selector(".svc-question__content").exists).ok()

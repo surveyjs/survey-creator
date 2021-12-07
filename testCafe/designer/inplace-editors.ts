@@ -1,4 +1,4 @@
-import { getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
+import { addQuestionByAddQuestionButton, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Inplace editors";
 
@@ -480,11 +480,9 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
     el.style.display = "block";
   });
   const row1Column1Cell = Selector("tbody .svc-matrix-cell").filterVisible().nth(1);
+  await t.expect(Selector(".svc-question__content").exists).notOk();
+  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
   await t
-    .expect(Selector(".svc-question__content").exists).notOk()
-
-    .hover(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
-    .click(getToolboxItemByText("Matrix (multiple choice)"), { speed: 0.5 })
     .expect(Selector(".svc-question__content").exists).ok()
     .hover(row1Column1Cell, { speed: 0.5 });
 
