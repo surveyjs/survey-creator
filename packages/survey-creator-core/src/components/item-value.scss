@@ -48,18 +48,21 @@ sv-svg-icon.svc-item-value-controls__button {
   display: block;
 }
 
-.svc-item-value-wrapper:hover {
-  .svc-item-value-controls__drag {
-    margin-left: calcSize(-5);
-    display: inline-block;
+.svc-item-value-wrapper:hover,
+.svc-item-value-controls__drag:hover {
+  .svc-item-value-controls__drag-icon {
+    visibility: visible;
   }
 }
 
 .svc-item-value-controls__drag {
   padding: calcSize(1) calcSize(1.5);
-  display: none;
+  margin-left: calcSize(-5);
   cursor: move;
   opacity: 0.25;
+  .svc-item-value-controls__drag-icon {
+    visibility: hidden;
+  }
   use {
     fill: $foreground;
   }
