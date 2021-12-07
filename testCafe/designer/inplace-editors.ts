@@ -190,7 +190,7 @@ test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
   await setJSON(json);
 
   await t
-    .click(Selector("[name='question1']"))
+    .click(Selector("[data-name='question1']"))
     .expect(items.count).eql(6)
     .expect(items.nth(0).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(0).find(".svc-item-value-controls__add").visible).notOk()
