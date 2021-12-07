@@ -75,11 +75,14 @@
   }
 }
 
-.svc-image-item-value-controls__add:hover {
-  background-color: $primary-light;
+.svc-image-item-value-controls__add {
   use {
     fill: $primary;
   }
+}
+
+.svc-image-item-value-controls__add:hover {
+  background-color: $primary-light;
 }
 
 .svc-choose-file-input {

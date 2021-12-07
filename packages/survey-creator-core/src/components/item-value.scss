@@ -67,23 +67,25 @@ sv-svg-icon.svc-item-value-controls__button {
   }
 }
 
-.svc-item-value-controls__remove,
+.svc-item-value-controls__remove {
+  float: right;
+  use {
+    fill: $red;
+  }
+}
 .svc-item-value-controls__add {
   float: right;
-}
-
-.svc-item-value-controls__add:hover {
-  background-color: $primary-light;
   use {
     fill: $primary;
   }
 }
 
+.svc-item-value-controls__add:hover {
+  background-color: $primary-light;
+}
+
 .svc-item-value-controls__remove:hover {
   background-color: $red-light;
-  use {
-    fill: $red;
-  }
 }
 
 .svc-question__content--selected-no-border .svc-item-value-controls {
@@ -136,8 +138,8 @@ sv-svg-icon.svc-item-value-controls__button {
 
 @keyframes svdragdropmovedown {
   0% {
-    transform: translate(0, -50px);    
-  } 
+    transform: translate(0, -50px);
+  }
   100% {
     transform: translate(0, 0);
   }
@@ -151,10 +153,10 @@ sv-svg-icon.svc-item-value-controls__button {
 
 @keyframes svdragdropmoveup {
   0% {
-    transform: translate(0, 50px);   
+    transform: translate(0, 50px);
   }
   100% {
-    transform: translate(0, 0); 
+    transform: translate(0, 0);
   }
 }
 
