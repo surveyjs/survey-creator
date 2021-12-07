@@ -170,4 +170,4 @@ Use the [survey-creator-react](./packages/survey-creator-react) package instead.
 
 ## License
 
-The Survey Creator (Form Builder) is NOT FREE for commercial usage. Please find more about licensing the product on the following page: [Licenses](http://surveyjs.io/Licenses).
+The Survey Creator (Form Builder) is **not available for free commercial usage**. You can find more information about licensing this product on the following page: [Licenses](http://surveyjs.io/Licenses).

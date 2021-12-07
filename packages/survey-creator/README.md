@@ -3,7 +3,7 @@
 [![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Creator?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=8&branchName=master)
 <a href="https://www.npmjs.com/package/survey-creator"><img alt="NPM Version" src="https://img.shields.io/npm/v/survey-creator.svg" data-canonical-src="https://img.shields.io/npm/v/survey-creator.svg" style="max-width:100%;"></a>
 
-Survey Creator is a visual survey designer / form builder for [SurveyJS](https://github.com/surveyjs/survey-library).
+The Survey Creator is a visual survey designer / form builder for [SurveyJS](https://github.com/surveyjs/survey-library).
 
 - [Live Examples](https://surveyjs.io/Examples/Survey-Creator)
 - [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
@@ -39,14 +39,14 @@ Survey Creator is a visual survey designer / form builder for [SurveyJS](https:/
 
 ## Dependencies
 
-Survey Creator depends on the following libaries:
+The Survey Creator depends on the following libraries:
 
 - [SurveyJS](http://surveyjs.io/Library/)
 - [Knockout](http://knockoutjs.com)
 
 Optionally, you can use [Bootstrap](http://getbootstrap.com), [Ace editor](https://ace.c9.io/), and [Select2](https://select2.org/).
 
-## Build Survey Creator from Sources
+## Build the Survey Creator from Sources
 
 If you want to build the library yourself, do the following:
 
@@ -74,4 +74,4 @@ If you want to build the library yourself, do the following:
 
 ## License
 
-The Survey Creator (Form Builder) is NOT FREE for commercial usage. Please find more about licensing the product on the following page: [Licenses](http://surveyjs.io/Licenses).
+The Survey Creator (Form Builder) is **not available for free commercial usage**. You can find more information about licensing this product on the following page: [Licenses](http://surveyjs.io/Licenses).
