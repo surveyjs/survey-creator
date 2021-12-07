@@ -55,7 +55,7 @@ svc-tabbed-menu-item {
 #icon-undo,
 #icon-redo {
   .sv-action-bar-item .sv-action-bar-item__icon use {
-    fill: $border;
+    opacity: 0.25;
   }
 }
 
@@ -63,5 +63,6 @@ svc-tabbed-menu-item {
 #icon-redo {
   .sv-action-bar-item--active .sv-action-bar-item__icon use {
     fill: $foreground-light;
+    opacity: 1;
   }
 }
