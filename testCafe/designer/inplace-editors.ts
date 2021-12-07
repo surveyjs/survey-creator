@@ -332,8 +332,8 @@ test("Dropdown question inplace editor", async (t) => {
     .expect(items.nth(4).find(".svc-item-value-controls__drag").visible).notOk()
     .expect(items.nth(4).find("span").withText("Other (describe)").exists).ok()
 
-    .hover(getToolboxItemByText("'Single Input'"), { speed: 0.5 })
-    .click(getToolboxItemByText("'Single Input'"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Single Input"), { speed: 0.5 })
+    .click(getToolboxItemByText("Single Input"), { speed: 0.5 })
     .expect(items.count).eql(0); // Choice editors are hidden if another question is selected
 });
 
@@ -388,8 +388,8 @@ test("Ranking question inplace editor", async (t) => {
 test("Image picker question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("'Image picker'"), { speed: 0.5 })
-    .click(getToolboxItemByText("'Image picker'"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Image picker"), { speed: 0.5 })
+    .click(getToolboxItemByText("Image picker"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
     .expect(imageItems.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -424,8 +424,8 @@ test("Image picker question inplace editor", async (t) => {
 test("Image picker question inplace editor - add new item", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("'Image picker'"), { speed: 0.5 })
-    .click(getToolboxItemByText("'Image picker'"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Image picker"), { speed: 0.5 })
+    .click(getToolboxItemByText("Image picker"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
 
