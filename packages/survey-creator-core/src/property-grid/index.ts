@@ -339,6 +339,7 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-property_grid_clear",
+      css: "spg-action-button spg-action-button--danger",
       enabled: enabled,
       visible: <any>new ComputedUpdater<boolean>(() => !!question.obj[property.name]),
       action: () => {
@@ -373,6 +374,7 @@ export class PropertyGridTitleActionsCreator {
     var setupAction = {
       id: "property-grid-setup",
       iconName: "icon-property_grid_modal",
+      css: "spg-action-button",
       enabled: enabled,
       title: getLocString("pe.edit"),
       showTitle: false,
@@ -387,6 +389,7 @@ export class PropertyGridTitleActionsCreator {
     const action = new Action({
       title: "",
       id: "property-grid-help",
+      css: "spg-action-button",
       iconName: this.getHelpActionIconName(question),
       showTitle: false,
       action: () => {
