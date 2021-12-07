@@ -83,6 +83,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     updateMatrixRemoveAction(question, actions, row);
     if (!!showDetailAction) {
       showDetailAction.component = "sv-action-bar-item";
+      showDetailAction.css ="spg-action-button";
       showDetailAction.iconName = this.getShowDetailActionIconName(row);
       showDetailAction.showTitle = false;
       showDetailAction.location = "end";
