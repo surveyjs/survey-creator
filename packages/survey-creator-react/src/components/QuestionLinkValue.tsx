@@ -14,7 +14,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
     return this.questionBase as QuestionLinkValueModel;
   }
   protected renderClear(): JSX.Element {
-    if (this.questionBase.showClear) {
+    if (!this.questionBase.isReadOnly && this.questionBase.showClear) {
       return (
         <ActionButton
           classes="spg-question-link__clear-button"

@@ -1,7 +1,7 @@
 <svc-action-button
   params="text: linkValueText, click: koClickLink, selected: isSelected, disabled: isReadOnly, classes: 'spg-action-button spg-question-link__set-button'">
 </svc-action-button>
-<!-- ko if: showClear -->
+<!-- ko if: !isReadOnly && showClear -->
 <svc-action-button
   params="text: clearCaption, click: koClearLink, selected: isSelected, disabled: false, classes: 'spg-question-link__clear-button'">
 </svc-action-button>
