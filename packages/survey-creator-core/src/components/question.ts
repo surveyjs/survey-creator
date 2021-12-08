@@ -189,16 +189,11 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     return !this.creator.readOnly;
   }
   public getConvertToTypesActions(): Array<IAction> {
-    const curType = this.currentType
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
-      curType, this.creator.toolbox.itemNames, true
+      this.currentType, this.creator.toolbox.itemNames, true
     );
     return convertClasses.map((className) => {
-      const item = this.creator.createIActionBarItemByClass(className);
-      if(item.id === curType) {
-        item.enabled = false;
-      }
-      return item;
+      return this.creator.createIActionBarItemByClass(className);
     });
   }
   private get currentType() : string {
@@ -208,6 +203,8 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   private createConverToAction() {
     const availableTypes = this.getConvertToTypesActions();
     const allowChangeType: boolean = availableTypes.length > 0;
+    const curType = this.currentType;
+    const selectedItems = availableTypes.filter(item => item.id === curType);
     const popupModel = new PopupModel(
       "sv-list",
       {
@@ -216,7 +213,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
           (item: any) => {
             this.creator.convertCurrentQuestion(item.id);
           },
-          false
+          true, selectedItems.length > 0 ? selectedItems[0]: undefined
         )
       },
       "bottom",
