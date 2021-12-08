@@ -9,18 +9,18 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
- "logoPosition": "right",
- "pages": [
-  {
-   "name": "page1",
-   "elements": [
+  "logoPosition": "right",
+  "pages": [
     {
-     "type": "text",
-     "name": "question1"
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1"
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 };
 
 test("Chaeck states", async (t) => {
@@ -50,7 +50,7 @@ test("Chaeck states", async (t) => {
     .ok(compareResults.errorMessages());
 
   await t
-    .hover(buttonElement)
+    .hover(buttonElement);
   await t.wait(1000);
   await takeScreenshot("action-button-hovered.png", buttonElement, screenshotComparerOptions);
   await t
