@@ -11,7 +11,8 @@ import {
   Question,
   ItemValue,
   Serializer,
-  DragTypeOverMeEnum
+  DragTypeOverMeEnum,
+  IAction
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -187,18 +188,26 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   public get allowEdit() {
     return !this.creator.readOnly;
   }
+  public getConvertToTypesActions(): Array<IAction> {
+    const curType = this.currentType
+    const convertClasses: string[] = QuestionConverter.getConvertToClasses(
+      curType, this.creator.toolbox.itemNames, true
+    );
+    return convertClasses.map((className) => {
+      const item = this.creator.createIActionBarItemByClass(className);
+      if(item.id === curType) {
+        item.enabled = false;
+      }
+      return item;
+    });
+  }
+  private get currentType() : string {
+    return this.surveyElement.getType();
+  }
 
   private createConverToAction() {
-    var currentType = this.surveyElement.getType();
-    const convertClasses: string[] = QuestionConverter.getConvertToClasses(
-      currentType,
-      this.creator.toolbox.itemNames
-    );
-    const allowChangeType: boolean = convertClasses.length > 0;
-
-    var availableTypes = convertClasses.map((className) => {
-      return this.creator.createIActionBarItemByClass(className);
-    });
+    const availableTypes = this.getConvertToTypesActions();
+    const allowChangeType: boolean = availableTypes.length > 0;
     const popupModel = new PopupModel(
       "sv-list",
       {
@@ -213,7 +222,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       "bottom",
       "center"
     );
-    let actionTitle = this.creator.getLocString("qt." + currentType);
+    let actionTitle = this.creator.getLocString("qt." + this.currentType);
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",

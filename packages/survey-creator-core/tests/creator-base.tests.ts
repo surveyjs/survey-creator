@@ -1572,6 +1572,26 @@ test("QuestionAdornerViewModel and onElementAllowOperations on new elements", ()
   expect(newQuestionModel.getActionById("convertTo").visible).toBeFalsy();
   expect(newQuestionModel.getActionById("isrequired").visible).toBeFalsy();
 });
+test("ConvertTo, show the current question type disabled", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+
+  const questionModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined
+  );
+  const items = questionModel.getConvertToTypesActions();
+  expect(items.length > 15).toBeTruthy();
+  expect(items[0].id).toEqual("text");
+  expect(items[0].enabled === false).toBeTruthy();
+});
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
