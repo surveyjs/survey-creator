@@ -3,9 +3,10 @@
   <div class="svc-item-value__ghost"></div>
   <div class="svc-item-value-controls">
     <!-- ko if: isDraggable -->
-    <sv-svg-icon data-bind="attr: { title: dragTooltip }"
-      class="svc-item-value-controls__button svc-item-value-controls__drag" data-bind="visible: !isNew"
-      params="iconName: 'icon-drag-area-indicator', size: 16"></sv-svg-icon>
+    <span class="svc-item-value-controls__button svc-item-value-controls__drag">
+      <sv-svg-icon data-bind="attr: { title: dragTooltip }, visible: !isNew" class="svc-item-value-controls__drag-icon"
+        params="iconName: 'icon-drag-area-indicator', size: 16"></sv-svg-icon>
+    </span>
     <!-- /ko -->
     <!-- ko if: allowAdd -->
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__add"

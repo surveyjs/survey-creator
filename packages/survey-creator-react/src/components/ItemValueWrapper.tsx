@@ -54,7 +54,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
             className="svc-item-value-controls__button svc-item-value-controls__drag"
             title={this.model.dragTooltip}
           >
-            <SvgIcon size={16} iconName={"icon-drag-area-indicator"}></SvgIcon>
+            <SvgIcon className="svc-item-value-controls__drag-icon" size={16} iconName={"icon-drag-area-indicator"}></SvgIcon>
           </span>
         ) : null}
         {this.model.allowRemove ? attachKey2click(<span

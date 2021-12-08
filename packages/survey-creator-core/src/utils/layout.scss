@@ -37,6 +37,10 @@
 
     .sv-action-bar {
       justify-content: flex-end;
+
+      .sv-action-bar-separator {
+        height: calcSize(4);
+      }
     }
   }
 }
