@@ -56,7 +56,7 @@ sv-svg-icon.svc-item-value-controls__button {
 }
 
 .svc-item-value-controls__drag {
-  padding: calcSize(1) calcSize(1.5);
+  padding: calcSize(0.5) calcSize(1);
   margin-left: calcSize(-5);
   cursor: move;
   opacity: 0.25;
