@@ -26,6 +26,9 @@
   padding: calcSize(1.5) 0;
   padding-right: calcSize(2);
 }
+.spg-table__cell:not(.spg-table__cell--detail-panel):first-of-type .spg-text {
+  padding-left: calcSize(2);
+}
 .spg-table__cell--actions .sv-action-bar {
   opacity: 0.5;
 }

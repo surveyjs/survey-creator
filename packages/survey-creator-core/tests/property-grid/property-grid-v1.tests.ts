@@ -784,7 +784,7 @@ test("SurveyPropertyMatrixDropdownColumns set properties", (): any => {
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
-  expect(columnsQuestion.columns).toHaveLength(3);
+  expect(columnsQuestion.columns).toHaveLength(2);
   var rows = columnsQuestion.visibleRows;
   expect(rows[0].getQuestionByColumnName("name").value).toEqual("column 1");
   columnsQuestion.addRow();

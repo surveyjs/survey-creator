@@ -68,9 +68,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (this.getEditItemAsStandAlone()) {
       actions.push({
         id: "svd-grid-edit-column",
+        iconName: "icon-edit",
         title: editorLocalization.getString("pe.edit"),
+        visibleIndex: 0,
+        showTitle: false,
+        location: "end",
         css: "spg-action-button",
-        component: "sv-action-bar-item",
         action: () => {
           var column = <MatrixDropdownColumn>options.row.editingObj;
           setObjFunc(column);
@@ -333,15 +336,13 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       cellType: "text",
       rowCount: 0,
       columns: columns,
+      showHeader: false,
       addRowText: this.getAddRowText(prop),
       keyDuplicationError: editorLocalization.getString(
         "pe.propertyIsNoUnique"
       ),
       emptyRowsText: editorLocalization.getString("pe.listIsEmpty")
     };
-    if (columns.length < 2) {
-      res.showHeader = false;
-    }
     if (this.getShowDetailPanelOnAdding()) {
       res.detailPanelShowOnAdding = true;
     }
