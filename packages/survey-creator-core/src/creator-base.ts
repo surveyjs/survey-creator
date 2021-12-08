@@ -30,8 +30,6 @@ import { QuestionToolbox } from "./toolbox";
 import { getNextValue } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
-import "./components/creator.scss";
-import "./components/string-editor.scss";
 import { ICreatorSelectionOwner } from "./selection-owner";
 import { PagesController } from "./pages-controller";
 import { SelectionHistory } from "./selection-history";
@@ -52,6 +50,10 @@ import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SideBarModel } from "./components/side-bar/side-bar-model";
+
+import "./components/creator.scss";
+import "./components/string-editor.scss";
+import "./creator-theme/creator.scss";
 
 export interface IKeyboardShortcut {
   name?: string;
