@@ -56,14 +56,15 @@ export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> 
       );
     });
   }
+
   renderCategoryHeader(category: any): JSX.Element {
-    const nextState = category.collapsed ? "arrow-down" : "arrow-up";
-    const svgIconClassName = "svc-toolbox__category-header__button svc-string-editor__button--" + nextState;
+    const iconName = category.collapsed ? "arrow-down" : "arrow-up";
+    const svgIconClassName = "svc-toolbox__category-header__button svc-string-editor__button--" + (category.collapsed ? "expand" : "collapse");
     return attachKey2click(
       <div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
         <span className="svc-toolbox__category-title">{category.name}</span>
         <div className="svc-toolbox__category-header__controls">
-          <SvgIcon className={svgIconClassName} iconName={"icon-" + nextState} size={24}></SvgIcon>
+          <SvgIcon className={svgIconClassName} iconName={"icon-" + iconName} size={24}></SvgIcon>
         </div>
       </div>
     );
