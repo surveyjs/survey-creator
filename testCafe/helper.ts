@@ -72,6 +72,11 @@ export function getVisibleElement(selector: string | Selector): Selector {
 export function getToolboxItemByText(text: string) {
   return getVisibleElement(".svc-toolbox__item-title").withExactText(text);
 }
+export async function addQuestionByAddQuestionButton(t: TestController, text: string) {
+  await t
+    .click(Selector(".svc-page__add-new-question .svc-page__question-type-selector"))
+    .click(Selector(".sv-list__item span").withExactText(text).filterVisible());
+}
 
 function selectorIsVisibleFilter(selector: Selector) {
   return selector.filter(visibility).with({ timeout: 1200 });
