@@ -30,7 +30,6 @@ test("Page hover test", async t => {
   const question = Selector(".svc-question__adorner");
   await t.hover(page, { offsetX: 5, offsetY: 5 })
     .expect(page.hasClass("svc-hovered-ready")).ok({ timeout: 50 })
-    .wait(50)
     .expect(page.hasClass("svc-hovered")).notOk({ timeout: 20 })
     .expect(page.hasClass("svc-hovered")).ok({ timeout: 300 })
     .hover(Selector(".svc-toolbox"))
