@@ -2,7 +2,6 @@ import { Base, PageModel, property, SurveyModel, ComputedUpdater } from "survey-
 import { CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
 import "./designer.scss";
-import { TabDesignerPlugin } from "./designer-plugin";
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   private widthUpdater: ComputedUpdater;
@@ -100,7 +99,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   }
 
   public clickDesigner() {
-    (this.creator.getPlugin("designer") as TabDesignerPlugin<SurveyModel>).selectSurvey();
+    this.creator.selectedElement = this.creator.survey;
   }
 
   public getDesignerCss(): string {
