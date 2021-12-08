@@ -1037,7 +1037,8 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     editor: IPropertyGridEditor,
     property: JsonObjectProperty,
     question: Question,
-    options: ISurveyCreatorOptions
+    options: ISurveyCreatorOptions,
+    onClose?: (reason: "apply" | "cancel") => void
   ): any {
     const surveyPropertyEditor = editor.createPropertyEditorSetup(
       question.obj,
@@ -1058,16 +1059,32 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
         model: surveyPropertyEditor.editSurvey
       },
       (): boolean => {
+        this.onModalPropertyEditorClosed(editor, property, question, options, "apply");
+        onClose && onClose("apply");
         return surveyPropertyEditor.apply();
       },
-      undefined,
+      () => {
+        this.onModalPropertyEditorClosed(editor, property, question, options, "cancel");
+        onClose && onClose("cancel");
+      },
       "sv-property-editor",
       question.title,
       (options as CreatorBase).isMobileView ? "overlay" : "popup"
     );
+    this.onModalPropertyEditorShown(editor, property, question, options);
     return surveyPropertyEditor;
   }
+  protected onModalPropertyEditorShown(editor: IPropertyGridEditor,
+    property: JsonObjectProperty, question: Question,
+    options: ISurveyCreatorOptions
+  ) {
 
+  }
+  protected onModalPropertyEditorClosed(editor: IPropertyGridEditor,
+    property: JsonObjectProperty, question: Question,
+    options: ISurveyCreatorOptions, reason: "apply" | "cancel") {
+
+  }
 }
 
 export class PropertyGridEditorBoolean extends PropertyGridEditor {

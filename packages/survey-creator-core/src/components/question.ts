@@ -28,6 +28,7 @@ import "./question.scss";
 
 export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyModel> {
   @property() isDragged: boolean;
+  @property({ defaultValue: "" }) currentAddQuestionType: string;
 
   constructor(
     creator: CreatorBase<SurveyModel>,
@@ -281,5 +282,20 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   protected duplicate() {
     var newElement = this.creator.fastCopyQuestion(this.surveyElement);
     this.creator.selectElement(newElement);
+  }
+
+  addNewQuestion() {
+    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase? this.surveyElement:null, this.currentAddQuestionType || "text");
+  }
+  questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
+    (type) => {
+      this.currentAddQuestionType = type;
+    },
+    this.surveyElement instanceof PanelModelBase? this.surveyElement:null
+  );
+  public get addNewQuestionText(): string {
+    if(!this.currentAddQuestionType && this.creator)
+      return this.creator.getLocString("ed.addNewQuestion");
+    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType):"";
   }
 }
