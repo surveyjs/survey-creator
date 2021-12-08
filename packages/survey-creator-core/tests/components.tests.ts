@@ -28,6 +28,11 @@ test("item value isNew isDraggable allowRemove", () => {
     question,
     allChoices[6]
   );
+  const selectAllItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    allChoices[0]
+  );
 
   expect(firstItemAdorner.isNew).toBeFalsy();
   expect(firstItemAdorner.allowAdd).toBeFalsy();
@@ -37,7 +42,18 @@ test("item value isNew isDraggable allowRemove", () => {
   expect(itemNoneAdorner.isNew).toBeTruthy();
   expect(itemNoneAdorner.allowAdd).toBeTruthy();
   expect(itemNoneAdorner.isDraggable).toBeFalsy();
-  expect(itemNoneAdorner.allowRemove).toBeTruthy();
+  expect(itemNoneAdorner.allowRemove).toBeFalsy();
+
+  expect(selectAllItemAdorner.isNew).toBeTruthy();
+  expect(selectAllItemAdorner.allowAdd).toBeTruthy();
+  expect(selectAllItemAdorner.isDraggable).toBeFalsy();
+  expect(selectAllItemAdorner.allowRemove).toBeFalsy();
+
+  question.hasSelectAll = true;
+  expect(selectAllItemAdorner.isNew).toBeTruthy();
+  expect(selectAllItemAdorner.allowAdd).toBeFalsy();
+  expect(selectAllItemAdorner.isDraggable).toBeFalsy();
+  expect(selectAllItemAdorner.allowRemove).toBeTruthy();
 
   creator.readOnly = true;
   expect(firstItemAdorner.allowAdd).toBeFalsy();
@@ -95,26 +111,26 @@ test("item value no pointer down on new or editable", (): any => {
     question,
     allChoices[1]
   );
-  firstItemAdorner["dragOrClickHelper"].onPointerDown = () => log += "->onPointerDown_1"
+  firstItemAdorner["dragOrClickHelper"].onPointerDown = () => log += "->onPointerDown_1";
 
   const itemNoneAdorner = new ItemValueWrapperViewModel(
     creator,
     question,
     allChoices[6]
   );
-  itemNoneAdorner["dragOrClickHelper"].onPointerDown = () => log += "->onPointerDown_None"
+  itemNoneAdorner["dragOrClickHelper"].onPointerDown = () => log += "->onPointerDown_None";
 
   const div = document.createElement("div");
   div.setAttribute("contenteditable", "true");
   let fakePointerDownEvent: any = { target: div };
 
-  firstItemAdorner.onPointerDown(fakePointerDownEvent)
+  firstItemAdorner.onPointerDown(fakePointerDownEvent);
   expect(log).toEqual("");
 
   div.setAttribute("contenteditable", "false");
-  firstItemAdorner.onPointerDown(fakePointerDownEvent)
+  firstItemAdorner.onPointerDown(fakePointerDownEvent);
   expect(log).toEqual("->onPointerDown_1");
-  itemNoneAdorner.onPointerDown(fakePointerDownEvent)
+  itemNoneAdorner.onPointerDown(fakePointerDownEvent);
   expect(log).toEqual("->onPointerDown_1");
 });
 
