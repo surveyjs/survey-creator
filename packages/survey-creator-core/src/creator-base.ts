@@ -2545,6 +2545,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @undoRedoTransaction()
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;
+    if(!el || el.getType() === newType) return;
     if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
     el = this.convertQuestion(<Survey.Question>el, newType);
     this.selectElement(el);

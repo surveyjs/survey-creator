@@ -50,17 +50,19 @@ test("Single input question wrapper action convert", async (t) => {
     .expect(convertActionButton.visible).ok()
 
     .click(convertActionButton)
-    .expect(listItems.count).eql(18)
-    .expect(listItems.nth(0).innerText).eql("Checkbox")
-    .expect(listItems.nth(3).innerText).eql("Comment")
+    .expect(listItems.count).eql(19)
+    .expect(listItems.nth(0).innerText).eql("Single Input")
+    .expect(listItems.nth(1).innerText).eql("Checkbox")
+    .expect(listItems.nth(4).innerText).eql("Comment")
 
-    .click(listItems.nth(3))
+    .click(listItems.nth(4))
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
 
     .click(questionToolbarActions.find('button[title="Comment"]'))
-    .expect(listItems.count).eql(18)
+    .expect(listItems.count).eql(19)
     .expect(listItems.nth(0).innerText).eql("Single Input")
     .expect(listItems.nth(1).innerText).eql("Checkbox")
+    .expect(listItems.nth(4).innerText).eql("Comment")
 
     .click(listItems.nth(0))
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok();

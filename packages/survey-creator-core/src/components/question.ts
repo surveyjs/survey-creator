@@ -11,7 +11,8 @@ import {
   Question,
   ItemValue,
   Serializer,
-  DragTypeOverMeEnum
+  DragTypeOverMeEnum,
+  IAction
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -188,18 +189,23 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   public get allowEdit() {
     return !this.creator.readOnly;
   }
-
-  private createConverToAction() {
-    var currentType = this.surveyElement.getType();
+  public getConvertToTypesActions(): Array<IAction> {
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
-      currentType,
-      this.creator.toolbox.itemNames
+      this.currentType, this.creator.toolbox.itemNames, true
     );
-    const allowChangeType: boolean = convertClasses.length > 0;
-
-    var availableTypes = convertClasses.map((className) => {
+    return convertClasses.map((className) => {
       return this.creator.createIActionBarItemByClass(className);
     });
+  }
+  private get currentType() : string {
+    return this.surveyElement.getType();
+  }
+
+  private createConverToAction() {
+    const availableTypes = this.getConvertToTypesActions();
+    const allowChangeType: boolean = availableTypes.length > 0;
+    const curType = this.currentType;
+    const selectedItems = availableTypes.filter(item => item.id === curType);
     const popupModel = new PopupModel(
       "sv-list",
       {
@@ -208,13 +214,13 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
           (item: any) => {
             this.creator.convertCurrentQuestion(item.id);
           },
-          false
+          true, selectedItems.length > 0 ? selectedItems[0]: undefined
         )
       },
       "bottom",
       "center"
     );
-    let actionTitle = this.creator.getLocString("qt." + currentType);
+    let actionTitle = this.creator.getLocString("qt." + this.currentType);
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
