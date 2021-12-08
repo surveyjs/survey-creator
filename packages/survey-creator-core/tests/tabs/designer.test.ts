@@ -81,3 +81,16 @@ test("Designer widthMode css test", () => {
   creator.survey.widthMode = "responsive";
   expect(designerPlugin.model.getDesignerCss()).toEqual("sd-container-modern sd-container-modern--responsive");
 });
+
+test("Select survey in designer", ()=> {
+  const creator = new CreatorTester();
+  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+    creator.getPlugin("designer")
+  );
+  creator.addNewQuestionInPage(()=>{});
+
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  expect(creator.selectedElementName).toEqual("question1");
+  designerPlugin.model.clickDesigner();
+  expect(creator.selectedElementName).toEqual("survey");
+});

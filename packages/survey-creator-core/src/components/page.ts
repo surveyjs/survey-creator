@@ -103,6 +103,8 @@ export class PageViewModel<
         this.onPageSelectedCallback();
       }
     }
+    event.stopPropagation();
+    event.cancelBubble = true;
   }
 
   get css(): string {
