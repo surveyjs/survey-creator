@@ -149,7 +149,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   /**
    * Set delay for page hover
    */
-  @property({ defaultValue: 500 }) pageHoverDelay: number;
+  @property({ defaultValue: 200 }) pageHoverDelay: number;
   /**
    * Set it to false to hide survey title and coresponding properties
    */
