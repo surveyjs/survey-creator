@@ -6,13 +6,13 @@ import { CreatorBase, StringEditorViewModelBase } from "@survey/creator";
 export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   private baseModel: StringEditorViewModelBase;
   private svStringEditorRef: React.RefObject<HTMLDivElement>;
-  private blurredByEscape:boolean = false;
+  private blurredByEscape: boolean = false;
   constructor(props: any) {
     super(props);
     this.state = { changed: 0 };
     this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
     this.svStringEditorRef = React.createRef();
-    this.baseModel.blurEditor = ()=>{
+    this.baseModel.blurEditor = () => {
       this.svStringEditorRef.current.blur();
     };
   }
@@ -40,14 +40,14 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
     this.locString.onChanged = function () {
       self.setState({ changed: self.state.changed + 1 });
     };
-    if(this.locString["__isEditing"]) {
+    if (this.locString["__isEditing"]) {
       this.svStringEditorRef.current.focus();
       // document.execCommand('selectAll', false, null);
     }
   }
   public componentWillUnmount() {
     if (!this.locString) return;
-    this.locString.onChanged = function () {};
+    this.locString.onChanged = function () { };
   }
   private get placeholder(): string {
     return this.baseModel.placeholder;
@@ -130,7 +130,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
             <SvgIcon
               className="svc-string-editor__button svc-string-editor__button--edit"
               size={16}
-              iconName={"icon-pencil"}
+              iconName={"icon-edit"}
             ></SvgIcon>
 
           </div>
@@ -139,7 +139,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
             onClick={this.edit}>
           </div>
         </span>
-        { this.errorText?<span className="svc-string-editor__error">{this.errorText}</span>:"" }
+        {this.errorText ? <span className="svc-string-editor__error">{this.errorText}</span> : ""}
       </span>
     );
   }

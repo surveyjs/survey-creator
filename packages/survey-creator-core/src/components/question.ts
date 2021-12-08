@@ -224,7 +224,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
-      iconName: "icon-change_16x16",
+      iconName: "icon-change-question-type_16x16",
       iconSize: 16,
       title: actionTitle,
       visibleIndex: 0,
@@ -232,7 +232,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       component: "sv-action-bar-item-dropdown",
       disableShrink: true,
       action: (newType) => {
-        popupModel.displayMode = this.creator.isMobileView ? "overlay":"popup";
+        popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel
@@ -246,9 +246,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       css: this.isRequired ? "sv-action-bar-item--secondary" : "",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
-      iconName: this.isRequired
-        ? "icon-switchactive_16x16"
-        : "icon-switchinactive_16x16",
+      iconName: this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16",
       iconSize: 16,
       action: () => {
         if (
@@ -264,12 +262,8 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       "isRequired",
       () => {
-        requiredAction.iconName = this.isRequired
-          ? "icon-switchactive_16x16"
-          : "icon-switchinactive_16x16";
-        requiredAction.css = this.isRequired
-          ? "sv-action-bar-item--secondary"
-          : "";
+        requiredAction.iconName = this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
+        requiredAction.css = this.isRequired ? "sv-action-bar-item--secondary" : "";
       },
       "isRequiredAdorner"
     );

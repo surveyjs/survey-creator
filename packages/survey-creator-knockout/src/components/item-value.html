@@ -4,19 +4,19 @@
   <div class="svc-item-value-controls">
     <!-- ko if: isDraggable -->
     <span class="svc-item-value-controls__button svc-item-value-controls__drag">
-      <sv-svg-icon data-bind="attr: { title: dragTooltip }" class="svc-item-value-controls__drag-icon"
-        data-bind="visible: !isNew" params="iconName: 'icon-drag-handler', size: 16"></sv-svg-icon>
+      <sv-svg-icon data-bind="attr: { title: dragTooltip }, visible: !isNew" class="svc-item-value-controls__drag-icon"
+        params="iconName: 'icon-drag-area-indicator', size: 24"></sv-svg-icon>
     </span>
     <!-- /ko -->
     <!-- ko if: allowAdd -->
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__add"
       data-bind="visible: isNew, click: add, key2click, attr: { title: tooltip }"
-      params="iconName: 'icon-add-item-value', size: 16"></sv-svg-icon>
+      params="iconName: 'icon-add_16x16', size: 16"></sv-svg-icon>
     <!-- /ko -->
     <!-- ko if: allowRemove -->
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__remove"
       data-bind="visible: !isNew, click: remove, key2click, attr: { title: tooltip }"
-      params="iconName: 'icon-remove-item-value', size: 16"></sv-svg-icon>
+      params="iconName: 'icon-remove_16x16', size: 16"></sv-svg-icon>
     <!-- /ko -->
   </div>
 

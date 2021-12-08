@@ -1419,7 +1419,7 @@ test("Check property grid expand action is always last", (): any => {
     id: "test-action",
     visible: true,
     title: "Test action",
-    action: function () {}
+    action: function () { }
   }));
   expect(creator.toolbar.renderedActions[index].id).toEqual("test-action");
   expect(creator.toolbar.renderedActions[index + 1].id).toEqual("svd-grid-expand");

@@ -44,7 +44,7 @@ export class SideBarModel extends Base {
     if (settings.propertyGrid.allowCollapse) {
       this._collapseAction = new Action({
         id: "svd-grid-hide",
-        iconName: "icon-hide",
+        iconName: "icon-collapse-panel",
         css: "svd-grid-hide",
         title: getLocString("ed.hidePanel"),
         showTitle: false,
@@ -60,7 +60,7 @@ export class SideBarModel extends Base {
 
       this._expandAction = new Action({
         id: "svd-grid-expand",
-        iconName: "icon-expand_20x20",
+        iconName: "icon-expand-panel",
         css: "svd-grid-expand",
         needSeparator: true,
         action: () => {

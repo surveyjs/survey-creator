@@ -334,10 +334,9 @@ export class PropertyGridTitleActionsCreator {
   ): any {
     return {
       id: "property-grid-clear",
-      icon: "icon-property_grid_clear",
       title: getLocString("pe.clear"),
       showTitle: false,
-      iconName: "icon-property_grid_clear",
+      iconName: "icon-clear",
       enabled: enabled,
       action: () => {
         editor.clearPropertyValue(
@@ -371,8 +370,7 @@ export class PropertyGridTitleActionsCreator {
     var setupAction = {
       id: "property-grid-setup",
       css: "sv-action--first sv-action-bar-item--secondary",
-      icon: "icon-property_grid_modal",
-      iconName: "icon-property_grid_modal",
+      iconName: "icon-wizard",
       enabled: enabled,
       title: getLocString("pe.edit"),
       showTitle: false,
@@ -398,9 +396,7 @@ export class PropertyGridTitleActionsCreator {
     return action;
   }
   private getHelpActionIconName(question: Question): string {
-    return question.descriptionLocation != "hidden"
-      ? "icon-helpfinish"
-      : "icon-help";
+    return question.descriptionLocation != "hidden" ? "icon-description-hide" : "icon-description";
   }
 }
 

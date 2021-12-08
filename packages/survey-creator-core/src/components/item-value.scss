@@ -56,7 +56,7 @@ sv-svg-icon.svc-item-value-controls__button {
 }
 
 .svc-item-value-controls__drag {
-  padding: calcSize(1) calcSize(1.5);
+  padding: calcSize(0.5) calcSize(1);
   margin-left: calcSize(-5);
   cursor: move;
   opacity: 0.25;
@@ -68,23 +68,25 @@ sv-svg-icon.svc-item-value-controls__button {
   }
 }
 
-.svc-item-value-controls__remove,
+.svc-item-value-controls__remove {
+  float: right;
+  use {
+    fill: $red;
+  }
+}
 .svc-item-value-controls__add {
   float: right;
-}
-
-.svc-item-value-controls__add:hover {
-  background-color: $primary-light;
   use {
     fill: $primary;
   }
 }
 
+.svc-item-value-controls__add:hover {
+  background-color: $primary-light;
+}
+
 .svc-item-value-controls__remove:hover {
   background-color: $red-light;
-  use {
-    fill: $red;
-  }
 }
 
 .svc-question__content--selected-no-border .svc-item-value-controls {
