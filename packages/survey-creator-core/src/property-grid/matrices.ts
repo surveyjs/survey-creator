@@ -1,5 +1,6 @@
 import {
   Base,
+  ComputedUpdater,
   IAction,
   ItemValue,
   JsonObjectProperty,
@@ -50,11 +51,23 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     };
     this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question, prop);
   }
+  private initializePlaceholder(rowObj: any, cellQuestion: Question, propertyName: string) {
+    const objType = typeof rowObj.getType === "function" && rowObj.getType();
+    if (cellQuestion.getType() === "text" && !!objType) {
+      if (propertyName === "text" && objType === "itemvalue") {
+        cellQuestion.placeHolder = new ComputedUpdater<string>(() => rowObj.text);
+      }
+      if (propertyName === "title" && objType === "matrixdropdowncolumn") {
+        cellQuestion.placeHolder = new ComputedUpdater<string>(() => rowObj.title);
+      }
+    }
+  }
   public onMatrixCellCreated(obj: Base, options: any) {
     const rowObj = options.row.editingObj;
     if(!rowObj) return;
     const q = options.cellQuestion;
     q.obj = rowObj;
+    this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
   }
   public onGetMatrixRowAction(
