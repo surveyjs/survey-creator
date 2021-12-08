@@ -87,7 +87,7 @@ test("Checkbox question inplace editor", async (t) => {
     .expect(items.nth(4).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(4).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).ok()
-
+    .hover(items.nth(4))
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).ok()
     .expect(items.nth(5).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
@@ -184,7 +184,7 @@ test("Radiogroup question inplace editor", async (t) => {
     .expect(items.nth(3).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__remove").visible).ok()
-
+    .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).ok()
     .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
@@ -304,6 +304,7 @@ test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
     .expect(items.nth(3).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__remove").visible).ok()
+    .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).ok()
     .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
@@ -400,7 +401,7 @@ test("Dropdown question inplace editor", async (t) => {
     .expect(items.nth(3).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__remove").visible).ok()
-
+    .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).ok()
     .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
