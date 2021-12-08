@@ -26,7 +26,7 @@ export default async function (t) {
 }
 
 test("Delete second page", async (t) => {
-  const deleteButtons = Selector("div[name=pages]").find("button[title=Remove]");
+  const deleteButtons = Selector("div[data-name=pages]").find("button[title=Remove]");
   await setJSON(json);
   await t
     .click(Selector("h4").withExactText("General"))
@@ -37,8 +37,8 @@ test("Delete second page", async (t) => {
 });
 
 test("Add calculated values", async (t) => {
-  const addButton = Selector("div[name=calculatedValues]").find("button[title='Add New']");
-  const rows = Selector("div[name=calculatedValues]").find("tbody").find("tr");
+  const addButton = Selector("div[data-name=calculatedValues]").find("button[title='Add New']");
+  const rows = Selector("div[data-name=calculatedValues]").find("tbody").find("tr");
 
   await setJSON(json);
   await t

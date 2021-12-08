@@ -210,7 +210,7 @@ test("PageNavigatorViewModel currentPage", (): any => {
       }
     ]
   };
-  const pages = creator.survey.pages; 
+  const pages = creator.survey.pages;
 
   expect(model.items).toHaveLength(pages.length);
   expect(model.items[0].active).toBeTruthy();
@@ -2059,4 +2059,49 @@ test("Add new question to Panel and Page", (): any => {
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text"]);
   panelModel3.addNewQuestion();
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text", "text"]);
+});
+
+test("Creator state, change the same property, isAutoSave=false", () => {
+  const creator = new CreatorTester();
+  creator.saveSurveyFunc = function (
+    no: number,
+    doSaveCallback: (no: number, isSuccess: boolean) => void
+  ) {
+    doSaveCallback(no, true);
+  };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.state).toBeFalsy();
+  const question = creator.survey.getAllQuestions()[0];
+  question.title = "Title 1";
+  expect(creator.state).toEqual("modified");
+  creator.doSaveFunc();
+  expect(creator.state).toEqual("saved");
+  question.title = "Title 2";
+  expect(creator.state).toEqual("modified");
+});
+test("Creator state, change the same property, isAutoSave=true", () => {
+  const creator = new CreatorTester();
+  creator.isAutoSave = true;
+  creator.autoSaveDelay = 0;
+  var counter = 0;
+  var saveNo = 0;
+  creator.saveSurveyFunc = function (
+    no: number,
+    doSaveCallback: (no: number, isSuccess: boolean) => void
+  ) {
+    counter++;
+    saveNo = no;
+    doSaveCallback(no, true);
+  };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.state).toBeFalsy();
+  const question = creator.survey.getAllQuestions()[0];
+  question.title = "Title 1";
+  expect(counter).toEqual(1);
+  expect(saveNo).toEqual(1);
+  expect(creator.state).toEqual("saved");
+  question.title = "Title 2";
+  expect(counter).toEqual(2);
+  expect(saveNo).toEqual(2);
+  expect(creator.state).toEqual("saved");
 });

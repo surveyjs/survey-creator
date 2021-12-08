@@ -20,11 +20,11 @@ test(`Set visibleIf property`, async (t) => {
     .click(page.propertyGridCategory("General"))
     .click(page.propertyGridCategory("Logic"))
     .click(Selector(".svd-expression-header").nth(0));
-  const questionSelect = Selector(`div[name="questionName"]`).find("select");
+  const questionSelect = Selector(`div[data-name="questionName"]`).find("select");
   await t
     .click(questionSelect)
     .click(questionSelect.find("option").withText("question1"));
-  const questionValue = Selector(`div[name="questionValue"]`).find("select");
+  const questionValue = Selector(`div[data-name="questionValue"]`).find("select");
   await t
     .click(questionValue)
     .click(questionValue.find("option").withText("item1"));
@@ -49,6 +49,6 @@ test(`Set visibleIf property`, async (t) => {
 
   await t
     .click(Selector(`button`).withText("Build"))
-    .expect(Selector(`div[name="questionName"]`).count)
+    .expect(Selector(`div[data-name="questionName"]`).count)
     .eql(2);
 });

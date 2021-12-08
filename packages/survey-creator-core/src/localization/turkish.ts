@@ -564,7 +564,7 @@ export var turkishStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Test edilecek sayfayı seçin:",
     showInvisibleElements: "Görünmez öğeleri göster",

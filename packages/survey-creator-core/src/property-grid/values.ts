@@ -28,9 +28,10 @@ import { SurveyHelper } from "../survey-helper";
 export class QuestionLinkValueModel extends Question {
   public linkClickCallback: () => void;
   public resetClickCallback: () => void;
+  @property({ defaultValue: false }) isSelected: boolean;
   @property() linkValueText: string;
   @property({ defaultValue: false }) showClear: boolean;
-  @property({ defaultValue: true }) showValueInLink : boolean;
+  @property({ defaultValue: true }) showValueInLink: boolean;
   constructor(name: string, json: any = null) {
     super(name);
     const linkValueText = json && !json.showValueInLink && (editorLocalization.getString("pe.set")) + " " + json.title || null;
@@ -59,7 +60,7 @@ export class QuestionLinkValueModel extends Question {
   }
   private updateLinkValueText() {
     var displayValue;
-    if(this.showValueInLink) {
+    if (this.showValueInLink) {
       displayValue = this.isEmpty()
         ? editorLocalization.getString("pe.emptyValue")
         : this.getObjDisplayValue();
@@ -113,7 +114,8 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   }
   public onCreated = (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => {
     question.linkClickCallback = () => {
-      this.showModalPropertyEditor(this, prop, question, options);
+      this.showModalPropertyEditor(this, prop, question, options, () => question.isSelected = false);
+      question.isSelected = true;
     };
     question.clearClickCallback = () => {
       this.clearPropertyValue(
@@ -225,7 +227,7 @@ export class PropertyGridTriggerValueEditor extends PropertyGridValueEditorBase 
   }
   protected getSetToNameQuestion(obj: Base): Question {
     let survey = <SurveyModel>obj.getSurvey();
-    if(!survey) {
+    if (!survey) {
       survey = obj["owner"];
     }
     if (!obj["setToName"] || !survey) return null;
@@ -244,7 +246,7 @@ export class PropertyGridTriggerValueInLogicEditor extends PropertyGridTriggerVa
     options: ISurveyCreatorOptions
   ): any {
     const setQuestion = this.getSetToNameQuestion(obj);
-    if(!setQuestion)
+    if (!setQuestion)
       return {
         type: "linkvalue"
       };

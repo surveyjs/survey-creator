@@ -2,6 +2,7 @@ import { Selector, ClientFunction } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
 import { url, screenshotComparerOptions, getSurveyJSFramework } from "../../helper";
+import { changeToolboxLocation } from "../../utils";
 
 const title = "Page Navigator Screenshot";
 
@@ -9,34 +10,28 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
- "logoPosition": "right",
- "pages": [
-  {
-   "name": "page1",
-   "elements": [
+  "logoPosition": "right",
+  "pages": [
     {
-     "type": "text",
-     "name": "question1"
-    }
-   ]
-  },
-  {
-   "name": "page2",
-   "elements": [
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1"
+        }
+      ]
+    },
     {
-     "type": "text",
-     "name": "question2"
+      "name": "page2",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question2"
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 };
-
-async function changeToolboxLocation(newVal: string) {
-  await ClientFunction((newVal) => {
-    window["creator"].toolboxLocation = newVal;
-  })(newVal);
-}
 
 test("On the right side (default)", async (t) => {
   await t.resizeWindow(1920, 1080);
@@ -54,7 +49,7 @@ test("On the right side (default)", async (t) => {
     .ok(compareResults.errorMessages());
 
   await t
-    .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"))
+    .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
   await t.wait(1000);
   await takeScreenshot("page-navigator-right-hovered.png", pageNavigatorElement, screenshotComparerOptions);
   await t
@@ -79,7 +74,7 @@ test("On the left side", async (t) => {
     .ok(compareResults.errorMessages());
 
   await t
-    .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"))
+    .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
   await t.wait(1000);
   await takeScreenshot("page-navigator-left-hovered.png", pageNavigatorElement, screenshotComparerOptions);
   await t

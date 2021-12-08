@@ -45,6 +45,18 @@ svc-question {
   border: 2px solid transparent;
 }
 
+.svc-question__content {
+  .sd-file__choose-btn {
+    cursor: default;
+  }
+  .sd-multipletext__item-title {
+    color: $foreground;
+  }
+  .sd-multipletext__item-container.sd-input:focus-within {
+    box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
+  }
+}
+
 .svc-question__content > div {
   overflow: visible;
 }
@@ -116,19 +128,15 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut {
-  height: 24px;
   min-width: 100px;
-  border-radius: 36px;
-  background-color: white;
-  padding: 16px;
+  height: calcSize(3);
+  border-radius: calcSize(12.5);
+  background-color: $background;
+  padding: calcSize(1) calcSize(1.5);
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-  font-family: "Open Sans";
-  font-size: 16px;
-  padding-left: 20px;
-  line-height: 24px;
+  box-shadow: 0px 8px 16px $shadow-medium;
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {
@@ -140,11 +148,15 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut__text {
-  margin-left: 30px;
+  @include smallBold;
+  margin-left: calcSize(4);
+  line-height: calcSize(3);
 }
 
 .svc-dragged-element-shortcut__icon {
   position: absolute;
+  width: calcSize(3);
+  height: calcSize(3);
 }
 
 .svc-question__content--drag-over-inside,

@@ -320,7 +320,7 @@ export var koreanStrings = {
     titleHtml: "HTML",
     titleJavaScript: "자바스크립트"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "테스트 할 페이지를 선택하십시오:"
   },

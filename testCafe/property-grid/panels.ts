@@ -38,15 +38,15 @@ test("Panel stay focused on question change", async (t) => {
   };
   await setJSON(json);
 
-  const question1 = Selector("[name=\"question1\"]");
-  const question2 = Selector("[name=\"question2\"]");
+  const question1 = Selector("[data-name=\"question1\"]");
+  const question2 = Selector("[data-name=\"question2\"]");
 
   await t
     .click(question1)
     .click(Selector("h4").withExactText("Layout"))
     .click(question2)
     .expect(Selector("span").withExactText("Is start with new line?").parent().find("input").focused).ok()
-    .click(Selector("div [name=\"minWidth\"] input"))
+    .click(Selector("div [data-name=\"minWidth\"] input"))
     .click(question1)
-    .expect(Selector("div [name=\"minWidth\"] input").focused).ok();
+    .expect(Selector("div [data-name=\"minWidth\"] input").focused).ok();
 });

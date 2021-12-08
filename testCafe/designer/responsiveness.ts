@@ -1,5 +1,9 @@
 import { ClientFunction, Selector } from "testcafe";
-import { collapseButtonSelector, expandButtonSelector, getBarItemByTitle, getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions, setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url } from "../helper";
+import {
+  collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
+  getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName
+} from "../helper";
 const title = "Responsiveness";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -9,13 +13,13 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
-  const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
+    window["creator"].showPropertyGrid = false;
   })();
+  const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
   await t
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
-    .resizeWindow(1330, 969)
+    .resizeWindow(700, 969)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
     .click(".svc-tabbed-menu-item-container.sv-dots");
   const popupSelector = Selector(".sv-popup").filterVisible();
@@ -74,8 +78,8 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
     .expect(toolbox.exists).notOk()
     .expect(pageNavigator.exists).notOk()
 
-    .click(getTabbedMenuItemByText("Test Survey"))
-    .click(getTabbedMenuItemByText("Survey Designer"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .expect(toolbox.exists).notOk()
     .expect(pageNavigator.exists).notOk()
 
@@ -217,7 +221,7 @@ test("test tab for mobile devices", async (t) => {
   const creatorFooterToolbar = Selector(".svc-footer-bar .svc-toolbar-wrapper");
   const creatorFooterToolbarActions = creatorFooterToolbar.find(".sv-action").filterVisible();
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbar.exists).notOk()
 
@@ -231,9 +235,9 @@ test("test tab for mobile devices", async (t) => {
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbar.exists).notOk()
 
-    .click(getTabbedMenuItemByText("Survey Designer"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .click(Selector("span").withText("Add Question").nth(1))
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(testTabToolbar.exists).ok()
     .expect(creatorFooterToolbar.exists).notOk()
     .expect(testTabToolbar.find(".sv-action").filterVisible().count).eql(3)
@@ -283,20 +287,20 @@ test("Property grid editor popup", async (t) => {
   };
   await setJSON(json);
 
-  const question1 = Selector("[name=\"question1\"]");
+  const question1 = Selector("[data-name=\"question1\"]");
   const dataTab = Selector("h4").withExactText("Data");
-  const item1PGEditorInput = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
+  const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
   await ClientFunction(() => {
     window["creator"].showPropertyGrid = true;
   })();
   await t
     .click(question1)
     .click(dataTab)
-    .click(Selector("a").withExactText("Set Default value"))
+    .click(Selector("span").withExactText("Set Default value"))
     .expect(Selector(".sv-popup--modal").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
-    .click(Selector("a").withExactText("Set Default value"))
+    .click(Selector("span").withExactText("Set Default value"))
     .expect(Selector(".sv-popup--overlay").visible).ok();
 });
 
