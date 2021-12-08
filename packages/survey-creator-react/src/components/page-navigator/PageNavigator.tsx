@@ -69,7 +69,7 @@ export class SurveyPageNavigator extends SurveyElementBase<
           <SvgIcon
             className="svc-page-navigator__navigator-icon"
             iconName={this.model.icon}
-            size={22}
+            size={24}
           ></SvgIcon>
 
           <Popup

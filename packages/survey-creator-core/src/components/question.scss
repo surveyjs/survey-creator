@@ -47,13 +47,20 @@ svc-question {
 
 .svc-question__content {
   .sd-file__choose-btn {
+    &.sd-action.sd-action:not(:disabled):not(.sd-action--disabled):hover {
+      background-color: initial;
+    }
     cursor: default;
+    color: $foreground-disabled-for-editors;
   }
   .sd-multipletext__item-title {
     color: $foreground;
   }
   .sd-multipletext__item-container.sd-input:focus-within {
     box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
+  }
+  .sd-matrixdynamic__btn.sd-matrixdynamic__add-btn {
+    color: $foreground-disabled-for-editors;
   }
 }
 

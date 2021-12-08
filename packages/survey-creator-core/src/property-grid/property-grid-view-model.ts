@@ -84,7 +84,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
     if (settings.propertyGrid.showNavigationButtons) {
       this.prevSelectionAction = new Action({
         id: "svd-grid-history-prev",
-        iconName: "icon-prev",
+        iconName: "icon-arrow-left",
         component: "sv-action-bar-item",
         title: getLocString("ed.prevSelected"),
         showTitle: false,
@@ -96,7 +96,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
 
       this.nextSelectionAction = new Action({
         id: "svd-grid-history-next",
-        iconName: "icon-next",
+        iconName: "icon-arrow-right",
         component: "sv-action-bar-item",
         title: getLocString("ed.nextSelected"),
         showTitle: false,
