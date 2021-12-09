@@ -157,6 +157,7 @@ export class EditableObject {
       if (!!page) {
         page.name = editablePage.name;
         page.title = editablePage.title;
+        page.description = editablePage.description;
       } else {
         editablePage.originalObj = editablePage;
         pages.splice(i, 0, editablePage);

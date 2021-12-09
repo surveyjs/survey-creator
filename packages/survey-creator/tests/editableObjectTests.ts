@@ -154,3 +154,24 @@ QUnit.test("Change question page, Bug#1942", function (assert) {
   assert.equal(survey.getAllQuestions().length, 1, "Just one question");
   assert.equal(question.page.name, "page2", "Copy to correct page");
 });
+QUnit.test("Change page description, Bug#2374", function (assert) {
+  const survey = new Survey.Survey({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "text", name: "q1" },
+        ],
+      },
+      {
+        name: "page2",
+      },
+    ],
+  });
+  const editableObj = new EditableObject(survey);
+  const obj = editableObj.editableObj;
+  assert.ok(obj["pages"], "pages was created");
+  obj["pages"][1].description = "Test desc";
+  editableObj.applyAll();
+  assert.equal(survey.pages[1].description, "Test desc", "Description sets correctly");
+});
