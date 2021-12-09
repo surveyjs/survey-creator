@@ -32,7 +32,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
     return (
       <>
         <ActionButton
-          classes="spg-action-button spg-question-link__set-button"
+          classes="spg-link-value-button spg-question-link__set-button"
           click={() => this.question.doLinkClick()}
           selected={this.question.isSelected}
           disabled={this.question.isReadOnly}

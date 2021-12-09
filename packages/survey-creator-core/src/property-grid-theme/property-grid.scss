@@ -42,3 +42,37 @@
     padding-right: 0;
   }
 }
+
+.spg-title {
+  .sv-action-bar {
+    margin-top: calcSize(-1);
+    margin-bottom: calcSize(-1);
+  }
+}
+
+survey-creator, .svc-creator {
+  .spg-action-button {
+    .sv-action-bar-item {
+      border-radius: 50%;
+      padding: calcSize(1);
+      cursor: pointer;
+      &:hover, &:focus {
+        outline: none;
+        background-color: $primary-light;
+        use {
+          fill: $primary;
+        }
+      }
+    }
+  }
+  .spg-action-button--danger {
+    .sv-action-bar-item {
+      &:hover, &:focus {
+        background-color: $red-light;
+        use {
+          fill: $red;
+        }
+      }
+    }
+  }
+}

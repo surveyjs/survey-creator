@@ -69,6 +69,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       actions.push({
         id: "svd-grid-edit-column",
         title: editorLocalization.getString("pe.edit"),
+        css: "spg-action-button",
         component: "sv-action-bar-item",
         action: () => {
           var column = <MatrixDropdownColumn>options.row.editingObj;
@@ -103,6 +104,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     options.titleActions.push({
       id: "add-item",
       iconName: "icon-add",
+      css: "spg-action-button",
       title: question.addRowText,
       showTitle: false,
       action: () => {

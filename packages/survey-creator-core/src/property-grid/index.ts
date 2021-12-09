@@ -14,7 +14,8 @@ import {
   SurveyModel,
   Action,
   IAction,
-  MatrixDynamicRowModel
+  MatrixDynamicRowModel,
+  ComputedUpdater
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -337,7 +338,9 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-clear",
+      css: "spg-action-button spg-action-button--danger",
       enabled: enabled,
+      visible: <any>new ComputedUpdater<boolean>(() => !!question.obj[property.name]),
       action: () => {
         editor.clearPropertyValue(
           question.obj,
@@ -369,8 +372,8 @@ export class PropertyGridTitleActionsCreator {
   ): any {
     var setupAction = {
       id: "property-grid-setup",
-      css: "sv-action--first sv-action-bar-item--secondary",
       iconName: "icon-wizard",
+      css: "spg-action-button",
       enabled: enabled,
       title: getLocString("pe.edit"),
       showTitle: false,
@@ -385,6 +388,7 @@ export class PropertyGridTitleActionsCreator {
     const action = new Action({
       title: "",
       id: "property-grid-help",
+      css: "spg-action-button",
       iconName: this.getHelpActionIconName(question),
       showTitle: false,
       action: () => {
