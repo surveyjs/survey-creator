@@ -23,7 +23,7 @@ const json = {
   ]
 };
 
-test("Chaeck states", async (t) => {
+test("Check states", async (t) => {
   await t.resizeWindow(1920, 1080);
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
@@ -40,7 +40,7 @@ test("Chaeck states", async (t) => {
   await t
     .click(Selector("h4[aria-label=Data]"));
 
-  const buttonElement=Selector(".svc-action-button.spg-action-button.spg-question-link__set-button");
+  const buttonElement=Selector(".svc-action-button.spg-link-value-button.spg-question-link__set-button");
 
   await t.expect(buttonElement.visible).ok();
   await t.wait(1000);
