@@ -34,7 +34,7 @@ export class LogoImageComponent extends SurveyElementBase<ILogoImageComponentPro
       </>;
     }
     else {
-      content = this.model.allowEdit ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}>{this.model.chooseLogoPlaceholder}</div>) : null;
+      content = this.model.allowEdit ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}><svg><use xlinkHref="#icon-logo"></use></svg></div>) : null;
     }
     return (
       <div ref={this.rootRef} className="svc-logo-image">
