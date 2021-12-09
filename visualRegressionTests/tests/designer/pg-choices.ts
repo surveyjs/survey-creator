@@ -9,23 +9,23 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
- "logoPosition": "right",
- "pages": [
-  {
-   "name": "page1",
-   "elements": [
+  "logoPosition": "right",
+  "pages": [
     {
-     "type": "checkbox",
-     "name": "question1",
-     "choices": [
-      "item1",
-      "item2",
-      "item3"
-     ]
+      "name": "page1",
+      "elements": [
+        {
+          "type": "checkbox",
+          "name": "question1",
+          "choices": [
+            "item1",
+            "item2",
+            "item3"
+          ]
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 };
 
 test("Check section", async (t) => {
@@ -44,7 +44,7 @@ test("Check section", async (t) => {
   await t
     .click(Selector("h4[aria-label=Choices]"));
 
-  const sectionContentElement=Selector("h4[aria-label=Choices]+div");
+  const sectionContentElement = Selector("h4[aria-label=Choices]+div");
 
   await t.expect(sectionContentElement.visible).ok();
   await takeScreenshot("choices-section-default.png", sectionContentElement, screenshotComparerOptions);
