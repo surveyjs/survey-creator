@@ -552,6 +552,7 @@ export class Translation extends Base implements ITranslationLocales {
     setSurveyJSONForPropertyGrid(json);
     var res = this.options.createSurvey(json, "translation_settings");
     res.css = propertyGridCss;
+    res.css.root += " st-properties";
     res.onValueChanged.add((sender, options) => {
       if (options.name == "locales") {
         this.updateLocales();
@@ -723,6 +724,7 @@ export class Translation extends Base implements ITranslationLocales {
         matrix.titleLocation = "hidden";
         matrix.name = this.getStringsSurveyQuestionName(group, parent);
         matrix.showHeader = false;
+        matrix.showColumnHeader = false;
         panel.addQuestion(matrix);
         this.addLocaleColumns(matrix);
       }
