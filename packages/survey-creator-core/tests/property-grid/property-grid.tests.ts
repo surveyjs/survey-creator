@@ -332,7 +332,7 @@ test("itemvalue[] property editor + row actions", () => {
   expect(detailAction).toBeTruthy();
   expect(detailAction.iconName).toEqual("icon-edit");
   detailAction.action();
-  expect(detailAction.iconName).toEqual("icon-editingfinish");
+  expect(detailAction.iconName).toEqual("icon-editing-finish");
 });
 test("itemvalue[] property editor + row actions", () => {
   var question = new QuestionDropdownModel("q1");
@@ -353,7 +353,7 @@ test("itemvalue[] property editor + row actions", () => {
   expect(detailAction).toBeTruthy();
   expect(detailAction.iconName).toEqual("icon-edit");
   detailAction.action();
-  expect(detailAction.iconName).toEqual("icon-editingfinish");
+  expect(detailAction.iconName).toEqual("icon-editing-finish");
 });
 test("itemvalue[] custom dropdown property", () => {
   Serializer.addProperty("itemvalue", { name: "prop1", choices: ["item1", "item2"] });
@@ -1150,7 +1150,7 @@ test("options.onCollectionItemAllowingCallback", () => {
     options.allowEdit = (<ItemValue>item).value > 2;
   };
   const question = new QuestionDropdownModel("q1");
-  for(let i = 0; i < 5; i ++) {
+  for (let i = 0; i < 5; i++) {
     question.choices.push(new ItemValue(i + 1));
   }
   var propertyGrid = new PropertyGridModelTester(question, options);
@@ -2053,16 +2053,16 @@ test("property editor show help as description", () => {
   ).toBeTruthy();
   expect(actions).toHaveLength(2);
   expect(actions[1].id).toEqual("property-grid-help");
-  expect(actions[1].iconName).toEqual("icon-help");
+  expect(actions[1].iconName).toEqual("icon-description");
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
   actions[1].action();
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual(
     "underTitle"
   );
-  expect(actions[1].iconName).toEqual("icon-helpfinish");
+  expect(actions[1].iconName).toEqual("icon-description-hide");
   actions[1].action();
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
-  expect(actions[1].iconName).toEqual("icon-help");
+  expect(actions[1].iconName).toEqual("icon-description");
 });
 test("Use maxLength property attribute", () => {
   Serializer.findProperty("question", "name").maxLength = 10;
@@ -2088,24 +2088,24 @@ test("We should not have 'Others' category in our objects", () => {
   const panel = page.addNewPanel("panel");
   const objToCheck: Array<Base> = [survey, panel, page];
   const allQuestionTypes = Serializer.getChildrenClasses("question", true);
-  for(let i = 0; i < allQuestionTypes.length; i ++) {
+  for (let i = 0; i < allQuestionTypes.length; i++) {
     if (allQuestionTypes[i].name == "linkvalue")
       continue;
     let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
-    if(!!question && !question.isCompositeQuestion) {
+    if (!!question && !question.isCompositeQuestion) {
       objToCheck.push(question);
     }
   }
   const matrix = new QuestionMatrixDynamicModel("matrix");
   page.addQuestion(matrix);
   objToCheck.push(matrix.addColumn("col1"));
-  for(let i = 0; i < objToCheck.length; i ++) {
+  for (let i = 0; i < objToCheck.length; i++) {
     let propGrid = new PropertyGridModelTester(objToCheck[i]);
     let panel = <PanelModel>propGrid.survey.getPanelByName("others");
-    if(!!panel) {
+    if (!!panel) {
       const props = panel.questions;
       const questionNames: Array<string> = [];
-      for(var j = 0; j < props.length; j ++) {
+      for (var j = 0; j < props.length; j++) {
         questionNames.push(props[j].name);
       }
       expect("obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(questionNames)).toBeFalsy();

@@ -97,6 +97,11 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
       this.newPage = undefined;
     }
   }
+
+  public clickDesigner() {
+    this.creator.selectedElement = this.creator.survey;
+  }
+
   public getDesignerCss(): string {
     return this.survey.css.container + " " + this.survey.css.container + "--" + this.withModifier;
   }

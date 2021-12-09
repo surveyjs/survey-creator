@@ -27,7 +27,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.model.simulator.device = newVal;
     let currentType = simulatorDevices[this.model.simulator.device].deviceType;
     this.orientationSelectorAction.enabled = currentType != "desktop";
-    this.deviceSelectorAction.iconName = "icon-device_" + currentType;
+    this.deviceSelectorAction.iconName = "icon-device-" + currentType;
     this.deviceSelectorAction.title = this.getSimulatorDevicesTitle();
   }
   private setDefaultLanguageOption(opt: boolean | string) {
@@ -139,7 +139,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       );
       this.deviceSelectorAction = new Action({
         id: "deviceSelector",
-        iconName: "icon-device_desktop",
+        iconName: "icon-device-desktop",
         component: "sv-action-bar-item-dropdown",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
@@ -157,7 +157,7 @@ export class TabTestPlugin implements ICreatorPlugin {
 
       this.orientationSelectorAction = new Action({
         id: "orientationSelector",
-        iconName: "icon-device_rotate",
+        iconName: "icon-device-rotate",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
@@ -173,7 +173,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
       this.invisibleToggleAction = new Action({
         id: "showInvisible",
-        iconName: "icon-invisible_items",
+        iconName: "icon-invisible-items",
         mode: "small",
         needSeparator: <any>new ComputedUpdater<boolean>(() => {
           return !this.creator.isMobileView;
@@ -235,13 +235,13 @@ export class TabTestPlugin implements ICreatorPlugin {
 
     this.prevPageAction = new Action({
       id: "prevPage",
-      iconName: "icon-leftarrow_16x16",
+      iconName: "icon-arrow-left_16x16",
       visible: false
     });
 
     this.nextPageAction = new Action({
       id: "nextPage",
-      iconName: "icon-rightarrow_16x16",
+      iconName: "icon-arrow-right_16x16",
       visible: false
     });
     return items;

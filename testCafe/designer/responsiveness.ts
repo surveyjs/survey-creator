@@ -296,11 +296,11 @@ test("Property grid editor popup", async (t) => {
   await t
     .click(question1)
     .click(dataTab)
-    .click(Selector("a").withExactText("Set Default value"))
+    .click(Selector("span").withExactText("Set Default value"))
     .expect(Selector(".sv-popup--modal").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
-    .click(Selector("a").withExactText("Set Default value"))
+    .click(Selector("span").withExactText("Set Default value"))
     .expect(Selector(".sv-popup--overlay").visible).ok();
 });
 

@@ -29,7 +29,6 @@ svc-toolbox {
   align-items: flex-start;
 }
 
-
 .svc-toolbox__tool:not(.sv-dots) {
   display: flex;
   width: auto;
@@ -69,8 +68,8 @@ svc-toolbox {
 
 .svc-toolbox__category-header__controls {
   position: absolute;
-  right: calcSize(1.2);
-  top: calcSize(1.2);
+  right: calcSize(1);
+  top: calcSize(1);
   display: none;
 }
 

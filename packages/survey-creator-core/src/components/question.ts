@@ -11,7 +11,8 @@ import {
   Question,
   ItemValue,
   Serializer,
-  DragTypeOverMeEnum
+  DragTypeOverMeEnum,
+  IAction
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -28,6 +29,7 @@ import "./question.scss";
 
 export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyModel> {
   @property() isDragged: boolean;
+  @property({ defaultValue: "" }) currentAddQuestionType: string;
 
   constructor(
     creator: CreatorBase<SurveyModel>,
@@ -187,18 +189,23 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   public get allowEdit() {
     return !this.creator.readOnly;
   }
-
-  private createConverToAction() {
-    var currentType = this.surveyElement.getType();
+  public getConvertToTypesActions(): Array<IAction> {
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
-      currentType,
-      this.creator.toolbox.itemNames
+      this.currentType, this.creator.toolbox.itemNames, true
     );
-    const allowChangeType: boolean = convertClasses.length > 0;
-
-    var availableTypes = convertClasses.map((className) => {
+    return convertClasses.map((className) => {
       return this.creator.createIActionBarItemByClass(className);
     });
+  }
+  private get currentType() : string {
+    return this.surveyElement.getType();
+  }
+
+  private createConverToAction() {
+    const availableTypes = this.getConvertToTypesActions();
+    const allowChangeType: boolean = availableTypes.length > 0;
+    const curType = this.currentType;
+    const selectedItems = availableTypes.filter(item => item.id === curType);
     const popupModel = new PopupModel(
       "sv-list",
       {
@@ -207,17 +214,17 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
           (item: any) => {
             this.creator.convertCurrentQuestion(item.id);
           },
-          false
+          true, selectedItems.length > 0 ? selectedItems[0]: undefined
         )
       },
       "bottom",
       "center"
     );
-    let actionTitle = this.creator.getLocString("qt." + currentType);
+    let actionTitle = this.creator.getLocString("qt." + this.currentType);
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
-      iconName: "icon-change_16x16",
+      iconName: "icon-change-question-type_16x16",
       iconSize: 16,
       title: actionTitle,
       visibleIndex: 0,
@@ -225,7 +232,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       component: "sv-action-bar-item-dropdown",
       disableShrink: true,
       action: (newType) => {
-        popupModel.displayMode = this.creator.isMobileView ? "overlay":"popup";
+        popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel
@@ -239,9 +246,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       css: this.isRequired ? "sv-action-bar-item--secondary" : "",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
-      iconName: this.isRequired
-        ? "icon-switchactive_16x16"
-        : "icon-switchinactive_16x16",
+      iconName: this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16",
       iconSize: 16,
       action: () => {
         if (
@@ -257,12 +262,8 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       "isRequired",
       () => {
-        requiredAction.iconName = this.isRequired
-          ? "icon-switchactive_16x16"
-          : "icon-switchinactive_16x16";
-        requiredAction.css = this.isRequired
-          ? "sv-action-bar-item--secondary"
-          : "";
+        requiredAction.iconName = this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
+        requiredAction.css = this.isRequired ? "sv-action-bar-item--secondary" : "";
       },
       "isRequiredAdorner"
     );
@@ -287,5 +288,20 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   protected duplicate() {
     var newElement = this.creator.fastCopyQuestion(this.surveyElement);
     this.creator.selectElement(newElement);
+  }
+
+  addNewQuestion() {
+    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase? this.surveyElement:null, this.currentAddQuestionType || "text");
+  }
+  questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
+    (type) => {
+      this.currentAddQuestionType = type;
+    },
+    this.surveyElement instanceof PanelModelBase? this.surveyElement:null
+  );
+  public get addNewQuestionText(): string {
+    if(!this.currentAddQuestionType && this.creator)
+      return this.creator.getLocString("ed.addNewQuestion");
+    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType):"";
   }
 }

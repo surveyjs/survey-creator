@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  attachKey2click,
   ReactQuestionFactory,
   SurveyQuestionElementBase
 } from "survey-react-ui";
 import { editorLocalization, QuestionLinkValueModel } from "@survey/creator";
+import { ActionButton } from "src/entries";
 
 export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
   constructor(props: any) {
@@ -14,20 +14,14 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
     return this.questionBase as QuestionLinkValueModel;
   }
   protected renderClear(): JSX.Element {
-    if(this.questionBase.showClear) {
+    if (!this.questionBase.isReadOnly && this.questionBase.showClear) {
       return (
-        <>
-          {attachKey2click(
-            <a className="spg-question-link__clear-button"
-              onClick={(e) => {
-                e.stopPropagation();
-                this.question.doClearClick();
-              }}
-            >
-              { editorLocalization.getString("pe.clear") }
-            </a>
-          )}
-        </>
+        <ActionButton
+          classes="spg-question-link__clear-button"
+          click={() => this.question.doClearClick()}
+          selected={this.question.isSelected}
+          text={editorLocalization.getString("pe.clear")}
+        ></ActionButton>
       );
     }
     else {
@@ -35,23 +29,16 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
     }
   }
   protected renderElement(): JSX.Element {
-    if (this.question.isReadOnly) {
-      return <span>{this.question.linkValueText}</span>;
-    }
     return (
       <>
-        {attachKey2click(
-          <a className="spg-question-link__set-button"
-            onClick={(e) => {
-              e.stopPropagation();
-              this.question.doLinkClick();
-            }}
-          >
-            {this.question.linkValueText}
-          </a>
-        )}
+        <ActionButton
+          classes="spg-action-button spg-question-link__set-button"
+          click={() => this.question.doLinkClick()}
+          selected={this.question.isSelected}
+          disabled={this.question.isReadOnly}
+          text={this.question.linkValueText}
+        ></ActionButton>
         {this.renderClear()}
-
       </>
     );
   }

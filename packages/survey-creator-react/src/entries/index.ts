@@ -39,6 +39,7 @@ export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
 export * from "../components/tabs/TranslationLineSkeleton";
+export * from "../components/ActionButton";
 
 export {
   editorLocalization,

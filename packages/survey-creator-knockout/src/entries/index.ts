@@ -25,6 +25,7 @@ export * from "../components/matrix-cell";
 export * from "../components/question-editor-content";
 export * from "../components/cell-question";
 export * from "../components/cell-question-dropdown";
+export * from "../components/action-button";
 
 export * from "../components/page-navigator/page-navigator";
 export * from "../components/page-navigator/page-navigator-item";
