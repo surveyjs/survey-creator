@@ -11,6 +11,21 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item__title";
 
+test("Select questions and survey", async (t) => {
+  await t
+    .expect(Selector(".svc-question__content").exists).notOk()
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
+
+  await addQuestionByAddQuestionButton(t, "Rating");
+  await t
+    .click(Selector(".svc-tab-designer .svc-page .svc-question__content"), { offsetX: 5, offsetY: 50 })
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
+    .click(Selector(".svc-tab-designer .svc-page"), { offsetX: 5, offsetY: 50 })
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("page1")
+    .click(Selector(".svc-tab-designer"), { offsetX: 5, offsetY: 50 })
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
+});
+
 test("Matrix question", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()

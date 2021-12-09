@@ -73,12 +73,11 @@ export class TabDesignerComponent extends SurveyElementBase<
         <div className="svc-flex-column">
           {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-adaptive-toolbox", { model: this.creator }) : null}
         </div>
-        <div className={designerTabClassName}>
+        <div className={designerTabClassName}
+          onClick={() => this.model.clickDesigner()}>
           <div className={this.model.getDesignerCss()}>
             {!this.creator.allowEditSurveyTitle ? null :
-              <div
-                onClick={() => this.creator.selectElement(survey)}
-              >
+              <div>
                 <SurveyHeader survey={survey}></SurveyHeader>
               </div>
             }
