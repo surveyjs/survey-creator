@@ -30,11 +30,11 @@ test(`Create logic: question visibility`, async (t) => {
     )
     .ok();
 
-  const questionSelect = Selector(`div[name="questionName"]`).find("select");
+  const questionSelect = Selector(`div[data-name="questionName"]`).find("select");
   await t
     .click(questionSelect)
     .click(questionSelect.find("option").withText("question1"));
-  const questionValue = Selector(`div[name="questionValue"]`).find("select");
+  const questionValue = Selector(`div[data-name="questionValue"]`).find("select");
   await t
     .click(questionValue)
     .click(questionValue.find("option").withText("item1"));

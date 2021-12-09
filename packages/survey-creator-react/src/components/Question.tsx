@@ -7,7 +7,9 @@ import {
   ReactElementFactory,
   SurveyElementBase,
   SurveyQuestion,
-  attachKey2click
+  attachKey2click,
+  SvgIcon,
+  Popup
 } from "survey-react-ui";
 
 export interface QuestionAdornerComponentProps {
@@ -77,6 +79,36 @@ export class QuestionAdornerComponent extends SurveyElementBase<
         {this.renderContentOnTop()}
         {this.renderDragAria()}
         {content}
+        {!this.model.isEmptyElement && this.model.surveyElement.isPanel && this.model.allowEdit ? attachKey2click(<div
+          className="svc-panel__add-new-question"
+          onClick={(e) => {
+            e.stopPropagation();
+            this.model.addNewQuestion();
+          }}
+        >
+          <span className="svc-text svc-text--normal svc-text--bold">
+            {this.model.addNewQuestionText}
+          </span>
+
+          {attachKey2click(<button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              this.model.questionTypeSelectorModel.action();
+            }}
+            className="svc-panel__question-type-selector"
+            title={this.model.addNewQuestionText}
+          >
+            <span className="svc-panel__question-type-selector-icon">
+              <SvgIcon
+                iconName={this.model.questionTypeSelectorModel.iconName}
+                size={24}
+              ></SvgIcon>
+            </span>
+            <Popup model={this.model.questionTypeSelectorModel.popupModel}></Popup>
+          </button>)}
+        </div>) : null}
+
         <div className="svc-question__content-actions">
           <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
         </div>
@@ -117,6 +149,17 @@ export class QuestionAdornerComponent extends SurveyElementBase<
         <div className="svc-panel__placeholder">
           {this.model.placeholderText}
         </div>
+        {this.model.allowEdit ? attachKey2click(<div
+          className="svc-panel__add-new-question"
+          onClick={(e) => {
+            e.stopPropagation();
+            this.model.addNewQuestion();
+          }}
+        >
+          <span className="svc-text svc-text--normal svc-text--bold">
+            {this.model.addNewQuestionText}
+          </span>
+        </div>) : null}
       </div>
     );
   }

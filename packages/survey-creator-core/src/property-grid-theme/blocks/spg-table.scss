@@ -9,6 +9,9 @@
 }
 .spg-table__cell {
   padding: 0;
+  .spg-checkbox {
+    margin: 0 calcSize(2);
+  }
 }
 
 .spg-table__cell--detail-panel {

@@ -294,7 +294,7 @@ export class QuestionToolbox
       title: title,
       tooltip: tooltip,
       isCopied: options.isCopied !== false,
-      iconName: !!options.iconName ? options.iconName : "icon-default",
+      iconName: !!options.iconName ? options.iconName : "icon-custom-question",
       json: !!options.json ? options.json : this.getQuestionJSON(question),
       category: !!options.category ? options.category : ""
     };
@@ -631,7 +631,7 @@ export class QuestionToolbox
   }
   private addItemFromJSON(json: any) {
     if (json.showInToolbox === false) return;
-    const iconName: string = json.iconName ? json.iconName : "icon-default";
+    const iconName: string = json.iconName ? json.iconName : "icon-custom-question";
     let title: string = editorLocalization.getString("qt." + json.name);
     if (!title || title == json.name) {
       title = json.title;

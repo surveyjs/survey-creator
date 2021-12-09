@@ -11,10 +11,10 @@ export class QuestionConverter {
   }
   public static getConvertToClasses(
     className: string,
-    availableTypes: Array<string> = null
+    availableTypes: Array<string> = null, includeCurrent: boolean = false
   ): Array<string> {
     var res = settings.questionConvertMode == QuestionConvertMode.AllTypes
-      ? getAllQuestionTypes(className)
+      ? getAllQuestionTypes(className, includeCurrent)
       : QuestionConverter.convertInfo[className];
     if (!res) return [];
     if (
@@ -50,11 +50,11 @@ export class QuestionConverter {
   }
 }
 
-function getAllQuestionTypes(className: string): Array<string> {
+function getAllQuestionTypes(className: string, includeCurrent: boolean = false): Array<string> {
   var classes = Survey.Serializer.getChildrenClasses("question", true);
   var res = [];
   for (var i = 0; i < classes.length; i++) {
-    if (classes[i].name !== className) {
+    if (includeCurrent || classes[i].name !== className) {
       res.push(classes[i].name);
     }
   }

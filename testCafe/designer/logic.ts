@@ -108,8 +108,8 @@ function getPropertyGridCategory(categoryName) {
 }
 
 const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();
-const conditionBuilder = Selector(".sl-embedded-survey[name=\"conditions\"] div[name=\"panel\"]");
-const conditionTextEdit = Selector(".sl-embedded-survey[name=\"conditions\"] div[name=\"textEditor\"]");
+const conditionBuilder = Selector(".sl-embedded-survey[data-name=\"conditions\"] div[data-name=\"panel\"]");
+const conditionTextEdit = Selector(".sl-embedded-survey[data-name=\"conditions\"] div[data-name=\"textEditor\"]");
 
 const newRuleCondition = "New rule is not set";
 const newRuleActions = "Value is empty";

@@ -30,8 +30,6 @@ import { QuestionToolbox } from "./toolbox";
 import { getNextValue } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
-import "./components/creator.scss";
-import "./components/string-editor.scss";
 import { ICreatorSelectionOwner } from "./selection-owner";
 import { PagesController } from "./pages-controller";
 import { SelectionHistory } from "./selection-history";
@@ -52,6 +50,10 @@ import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SideBarModel } from "./components/side-bar/side-bar-model";
+
+import "./components/creator.scss";
+import "./components/string-editor.scss";
+import "./creator-theme/creator.scss";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -147,7 +149,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   /**
    * Set delay for page hover
    */
-  @property({ defaultValue: 500 }) pageHoverDelay: number;
+  @property({ defaultValue: 200 }) pageHoverDelay: number;
   /**
    * Set it to false to hide survey title and coresponding properties
    */
@@ -1116,11 +1118,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         new TabJsonEditorTextareaPlugin(this);
       }
     }
-    if (this.showTranslationTab) {
-      new TabTranslationPlugin(this);
-    }
     if (this.showEmbeddedSurveyTab) {
       new TabEmbedPlugin(this);
+    }
+    if (this.showTranslationTab) {
+      new TabTranslationPlugin(this);
     }
   }
   private initFooterToolbar(): void {
@@ -1707,7 +1709,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   protected doClickQuestionCore(
     element: IElement,
     modifiedType: string = "ADDED_FROM_TOOLBOX",
-    index: number = -1
+    index: number = -1,
+    panel: IPanel = null
   ) {
     if (this.survey.pageCount == 0) {
       this.survey.addNewPage();
@@ -1720,6 +1723,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         index = parent.elements.indexOf(selectedElement);
         if (index > -1) index++;
       }
+    }
+    if(panel) {
+      parent = panel;
     }
     const currentRow = this.findRowByElement(selectedElement, parent);
     if (currentRow && this.isRowMultiline(currentRow)) {
@@ -2128,13 +2134,13 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     if (!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
     return undefined;
   }
-  public clickToolboxItem(newElement: any) {
+  public clickToolboxItem(newElement: any, panel: IPanel = null) {
     if (!this.readOnly) {
       if (newElement["getType"] === undefined) {
         newElement = this.createNewElement(newElement);
       }
       this.survey.lazyRendering = false;
-      this.doClickQuestionCore(newElement);
+      this.doClickQuestionCore(newElement, "ADDED_FROM_TOOLBOX", -1, panel);
       this.selectElement(newElement);
     }
   }
@@ -2539,23 +2545,30 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @undoRedoTransaction()
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;
+    if(!el || el.getType() === newType) return;
     if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
     el = this.convertQuestion(<Survey.Question>el, newType);
     this.selectElement(el);
   }
 
-  public get addNewQuestionText() {
-    if (!!this.currentAddQuestionType) {
+  public getAddNewQuestionText(currentAddQuestionType: string = null) {
+    if(!currentAddQuestionType)
+      currentAddQuestionType = this.currentAddQuestionType;
+    if (!!currentAddQuestionType) {
       const str = this.getLocString("ed.addNewTypeQuestion");
       if (!!str && !!str["format"])
         return str["format"](
-          this.toolbox.items.filter((item) => item.name == this.currentAddQuestionType)[0].title
+          this.toolbox.items.filter((item) => item.name == currentAddQuestionType)[0].title
         );
     }
     return this.getLocString("ed.addNewQuestion");
   }
 
-  public getQuestionTypeSelectorModel(beforeAdd: () => void) {
+  public get addNewQuestionText() {
+    return this.getAddNewQuestionText();
+  }
+
+  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, panel: IPanel = null) {
     var availableTypes = this.toolbox.items.map((item) => {
       return this.createIActionBarItemByClass(item.name, item.title);
     });
@@ -2566,7 +2579,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
           availableTypes,
           (item: any) => {
             this.currentAddQuestionType = item.id;
-            this.addNewQuestionInPage(beforeAdd);
+            this.addNewQuestionInPage(beforeAdd, panel);
             popupModel.toggleVisibility();
           },
           false
@@ -2586,17 +2599,19 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     };
   }
   @undoRedoTransaction()
-  public addNewQuestionInPage(beforeAdd: () => void) {
-    beforeAdd();
+  public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
+    if(!type)
+      type = this.currentAddQuestionType;
+    beforeAdd(type);
     let newElement = Survey.ElementFactory.Instance.createElement(
-      this.currentAddQuestionType || "text",
+      type || "text",
       "q1"
     );
     if (newElement)
       this.setNewNames(newElement);
     else
-      newElement = this.createNewElement({ type: this.currentAddQuestionType });
-    this.clickToolboxItem(newElement);
+      newElement = this.createNewElement({ type: type });
+    this.clickToolboxItem(newElement, panel);
   }
   createIActionBarItemByClass(className: string, title: string = null): Action {
     return new Action({

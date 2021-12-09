@@ -1,9 +1,8 @@
-<!-- ko if: isReadOnly -->
-<span data-bind="text:linkValueText"></span>
-<!-- /ko -->
-<!-- ko ifnot: isReadOnly -->
-<a class="spg-question-link__set-button" data-bind="text:linkValueText, click: koClickLink, key2click"></a>
-<!-- ko if: showClear -->
-<a class="spg-question-link__clear-button" data-bind="text: clearCaption, click: koClearLink, key2click"></a>
-<!-- /ko -->
+<svc-action-button
+  params="text: linkValueText, click: koClickLink, selected: isSelected, disabled: isReadOnly, classes: 'spg-link-value-button spg-question-link__set-button'">
+</svc-action-button>
+<!-- ko if: !isReadOnly && showClear -->
+<svc-action-button
+  params="text: clearCaption, click: koClearLink, selected: isSelected, disabled: false, classes: 'spg-question-link__clear-button'">
+</svc-action-button>
 <!-- /ko -->

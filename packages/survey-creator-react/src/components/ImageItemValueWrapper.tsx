@@ -65,7 +65,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
 
         <div className="svc-image-item-value-controls">
           {this.model.allowAdd ? attachKey2click(<span className="svc-image-item-value-controls__button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
-            <SvgIcon size={24} iconName={"icon-add-item-value"}></SvgIcon>
+            <SvgIcon size={24} iconName={"icon-add-lg"}></SvgIcon>
           </span>) : null}
         </div>
       </>);

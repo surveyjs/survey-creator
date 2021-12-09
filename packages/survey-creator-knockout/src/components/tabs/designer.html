@@ -1,10 +1,10 @@
 <!-- ko if: isToolboxVisible -->
 <svc-adaptive-toolbox params="model: creator"></svc-adaptive-toolbox>
 <!-- /ko -->
-<div class="svc-tab-designer" data-bind="css: getRootCss()">
+<div class="svc-tab-designer" data-bind="css: getRootCss(), click: clickDesigner">
   <div data-bind="css: getDesignerCss()">
     <!-- ko if: creator.allowEditSurveyTitle -->
-    <div data-bind="click: function() { creator.selectElement(survey); }">
+    <div>
       <!-- ko template: { name: 'survey-header', data: survey } -->
       <!-- /ko -->
     </div>
@@ -14,8 +14,7 @@
     <!-- /ko -->
     <!-- /ko -->
     <!-- ko foreach: survey.pages -->
-    <svc-page
-      class="svc-page"
+    <svc-page class="svc-page"
       data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name, 'data-sv-drop-target-page': $data.name }"
       params="survey: $parent.survey, page: $data, creator: $parent.creator"></svc-page>
     <!-- /ko -->

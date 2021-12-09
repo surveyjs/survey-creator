@@ -15,7 +15,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
 
   constructor(private pagesController: PagesController) {
     super();
-    this.icon = "icon-navigation";
+    this.icon = "icon-select-page";
     this.pagesChangedFunc = (sender: PagesController, options: any) => {
       this.buildItems();
     };
@@ -87,8 +87,8 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     this.setItems(items);
   }
   private patchContainerOffset(el: HTMLElement) {
-    while(!!el) {
-      if(el.className.indexOf("svc-tab-designer--with-page-navigator") !== -1) {
+    while (!!el) {
+      if (el.className.indexOf("svc-tab-designer--with-page-navigator") !== -1) {
         el.offsetParent.scrollTop = 0;
         return;
       }
@@ -109,7 +109,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
         el.scrollIntoView({ block: "start" });
         this.patchContainerOffset(el);
         const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
-        if(isLastPage) {
+        if (isLastPage) {
           setTimeout(() => {
             el.scrollIntoView({ block: "start" });
             this.patchContainerOffset(el);
@@ -136,27 +136,27 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     let maxVisiblePagePart = 0;
     this.pagesController.pages.forEach(page => {
       const pageElement = document.getElementById(page.id);
-      if(!!pageElement) {
+      if (!!pageElement) {
         const pageTop = pageElement.offsetTop;
         const pageBottom = pageTop + pageElement.clientHeight;
         const possiblyVisible = pageTop < viewPortBottom || pageBottom > viewPortTop;
-        if(!possiblyVisible) return;
+        if (!possiblyVisible) return;
         const deltaTop = pageTop - viewPortTop;
         const deltaBottom = viewPortBottom - pageBottom;
         let visiblePart = pageElement.clientHeight;
-        if(deltaTop < 0) {
+        if (deltaTop < 0) {
           visiblePart += deltaTop;
         }
-        if(deltaBottom < 0) {
+        if (deltaBottom < 0) {
           visiblePart += deltaBottom;
         }
         visiblePart = visiblePart / pageElement.clientHeight;
-        if(visiblePart > 0) {
+        if (visiblePart > 0) {
           visiblePages.push({
             page,
             visiblePart
           });
-          if(visiblePart > maxVisiblePagePart) {
+          if (visiblePart > maxVisiblePagePart) {
             maxVisiblePagePart = visiblePart;
             maxVisiblePage = page;
           }

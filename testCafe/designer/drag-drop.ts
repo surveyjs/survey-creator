@@ -549,7 +549,7 @@ test("Drag Drop ItemValue (choices)", async (t) => {
   };
   await setJSON(json);
 
-  const Question1 = Selector("[name=\"question1\"]");
+  const Question1 = Selector("[data-name=\"question1\"]");
   const Item1 = Selector("[data-sv-drop-target-item-value=\"item1\"]");
   const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
   const Item3 = Selector("[data-sv-drop-target-item-value=\"item3\"]");
@@ -596,7 +596,7 @@ test("Drag Drop Ranking (choices)", async (t) => {
   };
   await setJSON(json);
 
-  const Question1 = Selector("[name=\"question1\"]");
+  const Question1 = Selector("[data-name=\"question1\"]");
   const Item1 = Selector("[data-sv-drop-target-item-value=\"item1\"]");
   const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
   const Item3 = Selector("[data-sv-drop-target-item-value=\"item3\"]");
@@ -643,7 +643,7 @@ test("Animation (choices)", async (t) => {
   };
   await setJSON(json);
 
-  const Question1 = Selector("[name=\"question1\"]");
+  const Question1 = Selector("[data-name=\"question1\"]");
   const Item1 = Selector("[data-sv-drop-target-item-value=\"item1\"]");
   const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
   const Item3 = Selector("[data-sv-drop-target-item-value=\"item3\"]");
@@ -669,7 +669,7 @@ test("Animation (choices)", async (t) => {
 
   const animationClassesCount = await ClientFunction(() => {
     let result = 0;
-    const itemValueNodes = document.querySelector("[name='question1']").querySelectorAll(".svc-item-value-wrapper");
+    const itemValueNodes = document.querySelector("[data-name='question1']").querySelectorAll(".svc-item-value-wrapper");
     itemValueNodes.forEach(itemValueNode => {
       if (itemValueNode.classList.contains("svc-item-value--movedown") ||
         itemValueNode.classList.contains("svc-item-value--moveup")) {
@@ -716,7 +716,7 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   };
   await setJSON(json);
 
-  const Question1 = Selector("[name=\"question1\"]");
+  const Question1 = Selector("[data-name=\"question1\"]");
   const LionItem = Selector("[data-sv-drop-target-item-value=\"lion\"]");
   const GiraffeItem = Selector("[data-sv-drop-target-item-value=\"giraffe\"]");
   const PandaItem = Selector("[data-sv-drop-target-item-value=\"panda\"]");
@@ -768,16 +768,16 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   };
   await setJSON(json);
 
-  const Question1 = Selector("[name=\"question1\"]");
+  const Question1 = Selector("[data-name=\"question1\"]");
   await t.click(Question1, { speed: 0.5 });
 
   const ChoicesTab = Selector("h4").withExactText("Choices");
   await t.click(ChoicesTab);
 
-  const Item1 = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
-  const Item2 = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
-  const Item3 = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
-  let DragZoneItem2 = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
+  const Item1 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
+  const Item2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
+  const Item3 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
+  let DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
   await t
     .hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2)
     .dragToElement(DragZoneItem2, Item1, {
@@ -790,7 +790,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   let value = await getItemValueByIndex("question1", 0);
   await t.expect(value).eql(expectedValue);
 
-  DragZoneItem2 = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find(".spg-matrixdynamic__drag-element");
+  DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find(".spg-matrixdynamic__drag-element");
   await t.dragToElement(DragZoneItem2, Item3, { offsetX: 5, offsetY: 5, speed: 0.5 });
 
   value = await getItemValueByIndex("question1", 2);
@@ -840,10 +840,10 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
     .click(Settings, { speed: 0.5 })
     .click(PagesTab);
 
-  const Page1 = Selector("[name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(0);
-  const Page2 = Selector("[name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1);
-  const Page3 = Selector("[name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(2);
-  let DragZonePage2 = Selector("[name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
+  const Page1 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(0);
+  const Page2 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1);
+  const Page3 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(2);
+  let DragZonePage2 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
   await t
     .hover(Page1).hover(Page2).hover(Page3).hover(DragZonePage2)
     .dragToElement(DragZonePage2, Page1, {
