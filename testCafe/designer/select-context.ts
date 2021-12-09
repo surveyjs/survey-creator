@@ -1,4 +1,4 @@
-import { addQuestionByAddQuestionButton, url } from "../helper";
+import { addQuestionByAddQuestionButton, url, selectedObjectTextSelector } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Select context object then edit string";
 
@@ -9,7 +9,6 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   })();
 });
 
-const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item__title";
 
 test("Select questions and survey", async (t) => {
   await t

@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -128,4 +128,20 @@ test("Single input question wrapper action delete", async (t) => {
 
     .click(deleteActionButton)
     .expect(questions.exists).notOk();
+});
+
+test("Matrix dropdown with vertical layout and and selecting rows", async (t) => {
+  await t.expect(questions.exists).notOk()
+    .hover(getToolboxItemByText("Matrix (multiple choice)"))
+    .click(getToolboxItemByText("Matrix (multiple choice)"));
+
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+    window["creator"].survey.getQuestionByName("question1").columnLayout = "vertical";
+  })();
+
+  await t.click(Selector(".sv-string-editor").withText("Row 1"))
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
+    .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
+    .expect(Selector("h5.spg-title").withText("Row count").visible).ok();
 });
