@@ -144,7 +144,8 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   get allowRemove() {
-    return !this.creator.readOnly && this.canTouchItems && (this.allowItemOperations.allowDelete);
+    const isNew = !this.question.isItemInList(this.item);
+    return !this.creator.readOnly && this.canTouchItems && (this.allowItemOperations.allowDelete) && !isNew;
   }
   get tooltip() {
     return getLocString(this.isNew ? "pe.addItem" : "pe.removeItem");
