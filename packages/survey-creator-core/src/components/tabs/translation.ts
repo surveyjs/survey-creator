@@ -561,7 +561,7 @@ export class Translation extends Base implements ITranslationLocales {
       if (options.panel.name == "languages") {
         const addLanguageAction = new Action({
           id: "svc-translation-choose-language",
-          iconName: "icon-add(small)",
+          iconName: "icon-add",
           component: "sv-action-bar-item-dropdown",
           popupModel: this.chooseLanguagePopupModel,
           action: (language) => {

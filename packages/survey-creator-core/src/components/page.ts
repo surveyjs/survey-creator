@@ -13,12 +13,14 @@ export class PageViewModel<
   @property({ defaultValue: true }) isPageLive: boolean;
   public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel;
+  @property({ defaultValue: "" }) currentAddQuestionType: string;
   private _page: PageModel;
 
   constructor(creator: CreatorBase<T>, page: PageModel) {
     super(creator, page);
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
-      () => {
+      (type) => {
+        this.currentAddQuestionType = type;
         this.addGhostPage();
       }
     );
@@ -90,9 +92,9 @@ export class PageViewModel<
   }
 
   addNewQuestion(model: PageViewModel<T>, event: IPortableMouseEvent) {
-    this.creator.addNewQuestionInPage(() => {
+    this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage();
-    });
+    }, null, this.currentAddQuestionType || "text");
   }
   select(model: PageViewModel<T>, event: IPortableMouseEvent) {
     if (!model.isGhost) {
@@ -101,6 +103,8 @@ export class PageViewModel<
         this.onPageSelectedCallback();
       }
     }
+    event.stopPropagation();
+    event.cancelBubble = true;
   }
 
   get css(): string {
@@ -122,6 +126,8 @@ export class PageViewModel<
     return !!this.creator && !this.creator.readOnly;
   }
   public get addNewQuestionText(): string {
-    return !!this.creator ? this.creator.addNewQuestionText : "";
+    if(!this.currentAddQuestionType && this.creator)
+      return this.creator.getLocString("ed.addNewQuestion");
+    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType):"";
   }
 }

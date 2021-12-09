@@ -287,20 +287,20 @@ test("Property grid editor popup", async (t) => {
   };
   await setJSON(json);
 
-  const question1 = Selector("[name=\"question1\"]");
+  const question1 = Selector("[data-name=\"question1\"]");
   const dataTab = Selector("h4").withExactText("Data");
-  const item1PGEditorInput = Selector("[name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
+  const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
   await ClientFunction(() => {
     window["creator"].showPropertyGrid = true;
   })();
   await t
     .click(question1)
     .click(dataTab)
-    .click(Selector("a").withExactText("Set Default value"))
+    .click(Selector("span").withExactText("Set Default value"))
     .expect(Selector(".sv-popup--modal").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
-    .click(Selector("a").withExactText("Set Default value"))
+    .click(Selector("span").withExactText("Set Default value"))
     .expect(Selector(".sv-popup--overlay").visible).ok();
 });
 

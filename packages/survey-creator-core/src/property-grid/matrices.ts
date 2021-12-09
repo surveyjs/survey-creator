@@ -52,7 +52,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   }
   public onMatrixCellCreated(obj: Base, options: any) {
     const rowObj = options.row.editingObj;
-    if(!rowObj) return;
+    if (!rowObj) return;
     const q = options.cellQuestion;
     q.obj = rowObj;
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
@@ -88,9 +88,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       showDetailAction.location = "end";
       showDetailAction.action = () => {
         row.showHideDetailPanelClick();
-        showDetailAction.iconName = row.isDetailPanelShowing
-          ? "icon-editingfinish"
-          : "icon-edit";
+        showDetailAction.iconName = row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";
       };
       showDetailAction.visibleIndex = 0;
       row.onDetailPanelShowingChanged = () => {
@@ -99,13 +97,13 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
   }
   private getShowDetailActionIconName(row: MatrixDynamicRowModel) {
-    return row.isDetailPanelShowing ? "icon-editingfinish" : "icon-edit";
+    return row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";
   }
   public onGetQuestionTitleActions(obj: Base, options: any): void {
     const question: QuestionMatrixDynamicModel = options.question;
     options.titleActions.push({
       id: "add-item",
-      iconName: "icon-add(small)",
+      iconName: "icon-add",
       css: "spg-action-button",
       title: question.addRowText,
       showTitle: false,
@@ -425,7 +423,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     question: Question,
     options: ISurveyCreatorOptions
   ): boolean {
-    if(question.showTextView === false) return false;
+    if (question.showTextView === false) return false;
     var matrix = <QuestionMatrixDynamicModel>question;
     var column = matrix.getColumnByName("value");
     var items = question.value;
@@ -661,7 +659,7 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
   public onMatrixCellCreated(obj: Base, options: any) {
     super.onMatrixCellCreated(obj, options);
     const q = options.cellQuestion;
-    if(options.columnName === this.getObjTypeName()) {
+    if (options.columnName === this.getObjTypeName()) {
       q.showOptionsCaption = false;
       q.choices = this.getChoices(obj);
       q.value = options.row.editingObj.getType();

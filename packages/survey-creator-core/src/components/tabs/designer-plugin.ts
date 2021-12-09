@@ -119,11 +119,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
         return !this.creator.isMobileView && !insideSideBar;
       }),
       action: () => {
-        if (!this.creator.showPropertyGrid) {
-          this.creator.showPropertyGrid = true;
-        }
-        this.creator.selectElement(this.creator.survey);
-        this.creator.sideBar.activeTab = this.propertyGridTab.id;
+        this.selectSurvey();
       },
       active: <any>new ComputedUpdater<boolean>(() => {
         const settingTabIsActive = this.creator.sideBar.activeTab === this.propertyGridTab.id;
@@ -174,6 +170,14 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     });
     return items;
   }
+  public selectSurvey() {
+    if (!this.creator.showPropertyGrid) {
+      this.creator.showPropertyGrid = true;
+    }
+    this.creator.selectElement(this.creator.survey);
+    this.creator.sideBar.activeTab = this.propertyGridTab.id;
+  }
+
   public addFooterActions() {
     this.creator.footerToolbar.actions.push(this.surveySettingsAction);
     this.creator.footerToolbar.actions.push(this.previewAction);

@@ -39,7 +39,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
 
     this.showAllStringsAction.css = this.model.showAllStrings ? "sv-action-bar-item--secondary" : "";
-    this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
+    this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
     this.showAllStringsAction.visible = true;
 
     this.filterPageAction.title = this.getFilterPageActionTitle();
@@ -135,12 +135,12 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       // css: this.model.showAllStrings ? "sv-action-bar-item--secondary" : "",
       title: this.showAllStringsText,
       visible: false,
-      // iconName: this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16",
+      // iconName: this.model.showAllStrings ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16",
       mode: "small",
       action: () => {
         this.model.showAllStrings = !this.model.showAllStrings;
         this.showAllStringsAction.css = this.model.showAllStrings ? "sv-action-bar-item--secondary" : "";
-        this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
+        this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
       }
     });
     items.push(this.showAllStringsAction);
@@ -161,7 +161,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     this.importCsvAction = new Action({
       id: "svc-translation-import",
-      iconName: "icon-import_20x20",
+      iconName: "icon-import",
       tooltip: this.importFromCSVText,
       title: this.importFromCSVText,
       visible: false,
@@ -184,7 +184,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     this.exportCsvAction = new Action({
       id: "svc-translation-export",
-      iconName: "icon-export_20x20",
+      iconName: "icon-export",
       tooltip: this.exportToCSVText,
       title: this.exportToCSVText,
       visible: false,
