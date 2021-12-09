@@ -22,13 +22,22 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
   model: MatrixCellWrapperViewModel;
   constructor(props: MatrixCellAdornerComponentProps) {
     super(props);
+    const data = this.props.componentData;
     this.model = new MatrixCellWrapperViewModel(
-      this.props.componentData.creator,
-      this.props.componentData.element,
-      this.props.componentData.question,
-      this.props.componentData.row,
-      this.props.componentData.column,
+      data.creator,
+      data.element,
+      data.question,
+      data.row,
+      data.column,
     );
+  }
+  componentDidUpdate(prevProps: any, prevState: any) {
+    super.componentDidUpdate(prevProps, prevState);
+    const data = this.props.componentData;
+    this.model.templateData = data.element;
+    this.model.row = data.row;
+    this.model.column = data.column;
+    this.model.question = data.question;
   }
   protected getStateElement(): Base {
     return this.model;
