@@ -1,5 +1,6 @@
 import {
   Base,
+  ComputedUpdater,
   IAction,
   ItemValue,
   JsonObjectProperty,
@@ -50,11 +51,23 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     };
     this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question, prop);
   }
+  private initializePlaceholder(rowObj: any, cellQuestion: Question, propertyName: string) {
+    const objType = typeof rowObj.getType === "function" && rowObj.getType();
+    if (cellQuestion.getType() === "text" && !!objType) {
+      if (propertyName === "text" && objType === "itemvalue") {
+        cellQuestion.placeHolder = new ComputedUpdater<string>(() => rowObj.text);
+      }
+      if (propertyName === "title" && objType === "matrixdropdowncolumn") {
+        cellQuestion.placeHolder = new ComputedUpdater<string>(() => rowObj.title);
+      }
+    }
+  }
   public onMatrixCellCreated(obj: Base, options: any) {
     const rowObj = options.row.editingObj;
     if (!rowObj) return;
     const q = options.cellQuestion;
     q.obj = rowObj;
+    this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
   }
   public onGetMatrixRowAction(
@@ -68,9 +81,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (this.getEditItemAsStandAlone()) {
       actions.push({
         id: "svd-grid-edit-column",
+        iconName: "icon-edit",
         title: editorLocalization.getString("pe.edit"),
+        visibleIndex: 0,
+        showTitle: false,
+        location: "end",
         css: "spg-action-button",
-        component: "sv-action-bar-item",
         action: () => {
           var column = <MatrixDropdownColumn>options.row.editingObj;
           setObjFunc(column);
@@ -83,6 +99,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     updateMatrixRemoveAction(question, actions, row);
     if (!!showDetailAction) {
       showDetailAction.component = "sv-action-bar-item";
+      showDetailAction.css ="spg-action-button";
       showDetailAction.iconName = this.getShowDetailActionIconName(row);
       showDetailAction.showTitle = false;
       showDetailAction.location = "end";
@@ -330,15 +347,13 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       cellType: "text",
       rowCount: 0,
       columns: columns,
+      showHeader: false,
       addRowText: this.getAddRowText(prop),
       keyDuplicationError: editorLocalization.getString(
         "pe.propertyIsNoUnique"
       ),
       emptyRowsText: editorLocalization.getString("pe.listIsEmpty")
     };
-    if (columns.length < 2) {
-      res.showHeader = false;
-    }
     if (this.getShowDetailPanelOnAdding()) {
       res.detailPanelShowOnAdding = true;
     }

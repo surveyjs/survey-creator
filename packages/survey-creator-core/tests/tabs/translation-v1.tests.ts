@@ -566,6 +566,9 @@ test("Add pages as a custom property, it should not produce the error, Bug#991",
   Serializer.removeProperty("page", "pages");
 });
 test("Show questions as they are in survey. Do not sort them", () => {
+  const oldValue = settings.traslation.sortByName;
+  settings.traslation.sortByName = true;
+
   const survey: SurveyModel = new SurveyModel({
     elements: [
       {
@@ -594,6 +597,8 @@ test("Show questions as they are in survey. Do not sort them", () => {
   expect(group.items[0].name).toEqual("question2");
   expect(group.items[1].name).toEqual("question1");
   settings.traslation.sortByName = true;
+
+  settings.traslation.sortByName = oldValue;
 });
 test("Localize the group and item text", () => {
   const question: QuestionCheckboxModel = new QuestionCheckboxModel("q1");
