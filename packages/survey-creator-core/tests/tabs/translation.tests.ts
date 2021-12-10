@@ -1,6 +1,7 @@
 import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
+import { settings } from "../../src/settings";
 import { CreatorTester } from "../creator-tester";
 
 test("Fire callback on base objects creation", () => {
@@ -435,6 +436,8 @@ test("Make invisible locales in language selector, that has been already choosen
   surveyLocalization.supportedLocales = [];
 });
 test("stringsSurvey - text question dataList property, default", () => {
+  const oldValue = settings.traslation.sortByName;
+  settings.traslation.sortByName = true;
   const survey = new SurveyModel({
     elements: [
       {
@@ -468,8 +471,13 @@ test("stringsSurvey - text question dataList property, default", () => {
   const question = <QuestionTextModel>survey.getAllQuestions()[0];
   expect(question.dataList).toHaveLength(3);
   expect(question.dataList[2]).toEqual("Item3");
+
+  settings.traslation.sortByName = oldValue;
 });
 test("stringsSurvey - text question dataList property, several locales", () => {
+  const oldValue = settings.traslation.sortByName;
+  settings.traslation.sortByName = true;
+
   const survey = new SurveyModel({
     elements: [
       {
@@ -506,6 +514,8 @@ test("stringsSurvey - text question dataList property, several locales", () => {
     default: ["Item1", "Item2"],
     de: ["Item1-de", "Item2-de", "Item3-de"],
   });
+
+  settings.traslation.sortByName = oldValue;
 });
 test("Respect property maxLength attrigute in stringsSurvey comment questions", () => {
   Serializer.findProperty("question", "title").maxLength = 10;
@@ -567,6 +577,9 @@ const surveyJson = {
   ]
 };
 test("translationStringVisibilityCallback", () => {
+  const oldValue = settings.traslation.sortByName;
+  settings.traslation.sortByName = true;
+
   const survey = new SurveyModel(surveyJson);
 
   const translation = new Translation(survey, null);
@@ -593,6 +606,8 @@ test("translationStringVisibilityCallback", () => {
   expect(translation.root.groups[0].items).toHaveLength(1);
   expect(translation.root.groups[0].items[0].name).toEqual("title");
   expect(translation.root.groups[1].name).toEqual("page2");
+
+  settings.traslation.sortByName = oldValue;
 });
 
 test("onTranslationStringVisibility", () => {
