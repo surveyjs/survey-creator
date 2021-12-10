@@ -296,4 +296,4 @@ Currently, we support two platforms in Creator V2: [React](https://reactjs.org/)
 
 ## How to get Creator V2
 If you purchased a commercial license for the SurveyJS Creator or SurveyJS Pro within a year of the Creator V2 release, you can already start using Creator V2.  
-If your subscription is over, you can continue to use the old version as long as you wish. To get our latest versions (including Creator V2), you will have to [renewal your subscription](https://surveyjs.io/Buy#surveyjs-updates).
+If your subscription is over, you can continue to use the old version as long as you wish. To get our latest versions (including Creator V2), you will have to [renew your subscription](https://surveyjs.io/Buy#surveyjs-updates).
