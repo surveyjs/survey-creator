@@ -2227,3 +2227,22 @@ test("Check textUpdate mode for question", () => {
   expect(stepQuestion.getType()).toEqual("text");
   expect(stepQuestion.isSurveyInputTextUpdate).toBeFalsy();
 });
+test("nextToProperty on the same line", () => {
+  const maxProperty = Serializer.findProperty("text", "max");
+  const oldNextToProperty = maxProperty.nextToProperty;
+  maxProperty.nextToProperty = "*min";
+  const question = new QuestionTextModel("q1");
+  question.inputType = "number";
+  const propertyGrid = new PropertyGridModelTester(question);
+  const minQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("min");
+  const maxQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("max");
+  expect(minQuestion.isVisible).toBeTruthy();
+  expect(maxQuestion.isVisible).toBeTruthy();
+  expect(minQuestion.startWithNewLine).toBeTruthy();
+  expect(maxQuestion.startWithNewLine).toBeFalsy();
+  expect(minQuestion.titleLocation).toEqual("left");
+  expect(maxQuestion.titleLocation).toEqual("left");
+  expect(minQuestion.minWidth).toEqual("50px");
+  expect(maxQuestion.minWidth).toEqual("50px");
+  maxProperty.nextToProperty = oldNextToProperty;
+});

@@ -559,10 +559,21 @@ export class PropertyJSONGenerator {
         false,
         context
       );
+      if(propDef.onSameLine) {
+        propJSON.startWithNewLine = false;
+        this.updateQuestionJSONOnSameLine(propJSON);
+        if(panel.elements.length > 0) {
+          this.updateQuestionJSONOnSameLine(panel.elements[panel.elements.length - 1]);
+        }
+      }
       if (!propJSON) continue;
       panel.elements.push(propJSON);
     }
     return panel;
+  }
+  private updateQuestionJSONOnSameLine(json: any) {
+    json.titleLocation = "left";
+    json.minWidth = "50px";
   }
   private createPanelJSON(
     category: string,
