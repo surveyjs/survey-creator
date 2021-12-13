@@ -2234,6 +2234,9 @@ test("nextToProperty on the same line", () => {
   const question = new QuestionTextModel("q1");
   question.inputType = "number";
   const propertyGrid = new PropertyGridModelTester(question);
+  expect(propertyGrid.survey.questionTitleLocation).toEqual("top");
+  const nameQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("name");
+  expect(nameQuestion.titleLocation).toEqual("default");
   const minQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("min");
   const maxQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("max");
   expect(minQuestion.isVisible).toBeTruthy();

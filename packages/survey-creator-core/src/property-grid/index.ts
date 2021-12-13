@@ -836,7 +836,7 @@ export class PropertyGridModel {
   }
   protected getSurveyJSON(): any {
     var res = {};
-    setSurveyJSONForPropertyGrid(res);
+    setSurveyJSONForPropertyGrid(res, true, false);
     return res;
   }
   private onValidateQuestion(options: any) {

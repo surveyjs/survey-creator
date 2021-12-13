@@ -63,7 +63,7 @@ export var propertyGridCss = {
   pageTitle: "spg-title spg-page__title",
   pageDescription: "spg-description spg-page__description",
   row: "spg-row spg-clearfix",
-  rowMultiple: "sd-row sd-row--multiple",
+  rowMultiple: "spg-row--multiple",
   question: {
     mainRoot: "spg-question spg-row__question",
     flowRoot: "spg-question spg-row__question spg-row__question--flow",
