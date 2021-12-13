@@ -34,7 +34,6 @@ test("Check section", async (t) => {
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
   await ClientFunction((json) => { window["creator"].JSON = json; })(json);
-
   // await t
   //   .click(Selector(".svd-grid-expand"));
   await t
@@ -44,8 +43,7 @@ test("Check section", async (t) => {
   await t
     .click(Selector("h4[aria-label=Choices]"));
 
-  const sectionContentElement = Selector("h4[aria-label=Choices]+div");
-
+  const sectionContentElement = Selector("h4[aria-label=Choices]").parent().nextSibling();
   await t.expect(sectionContentElement.visible).ok();
   await takeScreenshot("choices-section-default.png", sectionContentElement, screenshotComparerOptions);
   await t
