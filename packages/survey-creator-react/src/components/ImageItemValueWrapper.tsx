@@ -99,7 +99,8 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         ref={this.rootRef}
         className={
           "svc-image-item-value-wrapper" +
-          (isNew ? " svc-image-item-value--new" : "")
+          (isNew ? " svc-image-item-value--new" : "") +
+          (this.model.isDragDropGhost ? " svc-image-item-value-wrapper--ghost" : "")
         }
         key={this.props.element.key}
         data-sv-drop-target-item-value={
@@ -108,22 +109,25 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         onPointerDown={(event: any) => this.model.onPointerDown(event)}
         onDragStart={this.preventDragHandler}
       >
-        {isNew ? null : <div className={"svc-image-item__drag-element"} ></div>}
-        <input
-          type="file"
-          aria-hidden="true"
-          tabIndex={-1}
-          accept="image/*"
-          className="svc-choose-file-input"
-          style={{
-            position: "absolute",
-            opacity: 0,
-            width: "1px",
-            height: "1px",
-            overflow: "hidden"
-          }}
-        />
-        {content}
+        <div className={"svc-image-item-value-wrapper__ghost"}></div>
+        <div className={"svc-image-item-value-wrapper__content"}>
+          {isNew ? null : <div className={"svc-image-item__drag-element"} ></div>}
+          <input
+            type="file"
+            aria-hidden="true"
+            tabIndex={-1}
+            accept="image/*"
+            className="svc-choose-file-input"
+            style={{
+              position: "absolute",
+              opacity: 0,
+              width: "1px",
+              height: "1px",
+              overflow: "hidden"
+            }}
+          />
+          {content}
+        </div>
       </div>
     );
   }

@@ -115,3 +115,20 @@
   transform: translateX(-50%);
   display: none;
 }
+
+.svc-image-item-value-wrapper--ghost {
+  .svc-image-item-value-wrapper__ghost {
+    display: block;
+  }
+  .svc-image-item-value-wrapper__content {
+    display: none;
+  }
+}
+
+.svc-image-item-value-wrapper__ghost {
+  display: none;
+  background: $background-dim;
+  width: 200px;
+  height: 135px;
+  margin-top: 8px;
+}
