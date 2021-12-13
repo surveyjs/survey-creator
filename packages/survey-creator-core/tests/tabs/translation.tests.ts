@@ -3,6 +3,7 @@ import { Translation, TranslationItem } from "../../src/components/tabs/translat
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { settings } from "../../src/settings";
 import { CreatorTester } from "../creator-tester";
+export * from "../../src/localization/russian";
 
 test("Fire callback on base objects creation", () => {
   const survey = new SurveyModel();
@@ -632,4 +633,166 @@ test("onTranslationStringVisibility", () => {
   expect(translation.root.groups[0].items).toHaveLength(1);
   expect(translation.root.groups[0].items[0].name).toEqual("title");
   expect(translation.root.groups[1].name).toEqual("page2");
+});
+test("empty title placeholders", () => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            "title": {
+              "da": "test"
+            }
+          }
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(1);
+  expect(pagePanel.elements[0].name).toEqual("question1");
+  const question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(1);
+  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
+  expect(question1Props.name).toEqual("question1_props");
+  expect(question1Props.columns).toHaveLength(2);
+  expect(question1Props.columns[0].name).toEqual("default");
+  expect(question1Props.columns[1].name).toEqual("da");
+  expect(question1Props.rows).toHaveLength(1);
+  expect(question1Props.rows[0].value).toEqual("title");
+  let cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
+  let cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  expect(cellQuestion1.placeHolder).toEqual("question1");
+  expect(cellQuestion1.value).toEqual(null);
+  expect(cellQuestion2.placeHolder).toEqual("question1");
+  expect(cellQuestion2.value).toEqual("test");
+
+  cellQuestion1.value = "Question 1";
+  cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
+  cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  expect(cellQuestion1.placeHolder).toEqual("Question 1");
+  expect(cellQuestion1.value).toEqual("Question 1");
+  expect(cellQuestion2.placeHolder).toEqual("Question 1");
+  expect(cellQuestion2.value).toEqual("test");
+
+  cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
+  cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  cellQuestion1.value = "";
+  expect(cellQuestion1.placeHolder).toEqual("question1");
+  expect(cellQuestion1.value).toEqual("");
+  expect(cellQuestion2.placeHolder).toEqual("question1");
+  expect(cellQuestion2.value).toEqual("test");
+});
+
+test("init placeholders", () => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            "title": {
+              "default": "Question 1",
+              "da": "Q 1"
+            }
+          }
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(1);
+  expect(pagePanel.elements[0].name).toEqual("question1");
+  const question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(1);
+  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
+  expect(question1Props.name).toEqual("question1_props");
+  expect(question1Props.columns).toHaveLength(2);
+  expect(question1Props.columns[0].name).toEqual("default");
+  expect(question1Props.columns[1].name).toEqual("da");
+  expect(question1Props.rows).toHaveLength(1);
+  expect(question1Props.rows[0].value).toEqual("title");
+  const cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
+  const cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  expect(cellQuestion1.placeHolder).toEqual("Question 1");
+  expect(cellQuestion1.value).toEqual("Question 1");
+  expect(cellQuestion2.placeHolder).toEqual("Question 1");
+  expect(cellQuestion2.value).toEqual("Q 1");
+
+  cellQuestion1.value = "";
+  expect(cellQuestion1.placeHolder).toEqual("question1");
+  expect(cellQuestion1.value).toEqual("");
+  expect(cellQuestion2.placeHolder).toEqual("question1");
+  expect(cellQuestion2.value).toEqual("Q 1");
+});
+
+test("localize placeholders", () => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            "title": {
+              "default": "Question 1",
+              "ru": "Q 1"
+            }
+          }
+        ]
+      }
+    ]
+  });
+
+  const translation = new Translation(survey);
+  translation.showAllStrings = true;
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(2);
+  const pagePanel = <PanelModel>page.elements[1];
+  expect(pagePanel.elements).toHaveLength(2);
+  expect(pagePanel.elements[0].name).toEqual("page1_props");
+  expect(pagePanel.elements[1].name).toEqual("question1");
+  const page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
+  expect(page1Props.columns).toHaveLength(2);
+  expect(page1Props.columns[0].name).toEqual("default");
+  expect(page1Props.columns[1].name).toEqual("ru");
+  expect(page1Props.rows).toHaveLength(4);
+  expect(page1Props.rows[0].value).toEqual("title");
+
+  const cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
+  const cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
+  expect(cellQuestion1.placeHolder).toEqual("Translation...");
+  expect(cellQuestion1.value).toEqual(null);
+  expect(cellQuestion2.placeHolder).toEqual("Перевод...");
+  expect(cellQuestion2.value).toEqual(null);
+
+  const survey_props = <QuestionMatrixDropdownModel>page.elements[0];
+  expect(survey_props.columns).toHaveLength(2);
+  expect(survey_props.columns[0].name).toEqual("default");
+  expect(survey_props.columns[1].name).toEqual("ru");
+  expect(survey_props.rows).toHaveLength(12);
+  expect(survey_props.rows[0].value).toEqual("title");
+  expect(survey_props.rows[11].value).toEqual("editText");
+
+  const surveyCell1 = <QuestionCommentModel>survey_props.visibleRows[11].cells[0].question;
+  const surveyCell2 = <QuestionCommentModel>survey_props.visibleRows[11].cells[1].question;
+  expect(surveyCell1.placeHolder).toEqual("Edit");
+  expect(surveyCell1.value).toEqual(null);
+  expect(surveyCell2.placeHolder).toEqual("Редактирование");
+  expect(surveyCell2.value).toEqual(null);
 });
