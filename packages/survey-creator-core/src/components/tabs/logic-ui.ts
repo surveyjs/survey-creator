@@ -290,12 +290,14 @@ export class SurveyLogicUI extends SurveyLogic {
     };
     this.matrixItems.onCellCreatedCallback = (options: any) => {
       options.cell.question.linkClickCallback = () => {
-        if (options.row.isDetailPanelShowing)
+        if (options.row.isDetailPanelShowing) {
           options.row.hideDetailPanel();
-        else
+        } else {
           options.row.showDetailPanel();
+        }
       }
       options.cell.question.showClear = false;
+      options.cell.question.allowClear = false;
     };
     this.matrixItems.value = data;
     this.updateRenderedRows();
