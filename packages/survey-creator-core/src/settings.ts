@@ -1,5 +1,6 @@
 import {
   Base,
+  IAction,
   ItemValue,
   JsonObjectProperty,
   MatrixDropdownColumn,
@@ -111,6 +112,12 @@ export interface ISurveyCreatorOptions {
     property: JsonObjectProperty,
     editor: Question
   );
+  onPropertyEditorUpdateTitleActionsCallback(
+    object: any,
+    property: JsonObjectProperty,
+    editor: Question,
+    titleActions: IAction[]
+  );
   onIsPropertyReadOnlyCallback(
     obj: Base,
     property: JsonObjectProperty,
@@ -206,6 +213,12 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     object: any,
     property: JsonObjectProperty,
     editor: Question
+  ) { }
+  onPropertyEditorUpdateTitleActionsCallback(
+    object: any,
+    property: JsonObjectProperty,
+    editor: Question,
+    titleActions: IAction[]
   ) { }
   onIsPropertyReadOnlyCallback(
     obj: Base,
