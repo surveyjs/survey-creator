@@ -12,6 +12,7 @@
   .sd-imagepicker__image {
     box-sizing: border-box;
     border: 1px dashed $border;
+    border-radius: 4px;
   }
 }
 
@@ -94,6 +95,10 @@
 .svc-image-item-value__item {
   .sd-imagepicker__item.sd-imagepicker__item {
     width: 100%;
+  }
+  .sd-imagepicker__image-container {
+    border: 1px dashed $border;
+    border-radius: 4px;
   }
 }
 
