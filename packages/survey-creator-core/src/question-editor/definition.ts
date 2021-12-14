@@ -276,7 +276,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     matrixdropdowncolumn: {
-      properties: ["isRequired", "name", "title"]
+      properties: ["name", "title"]
     },
     "matrixdropdowncolumn@default": {
       properties: [
@@ -401,7 +401,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     "multipletext@items": {
-      properties: ["isRequired", "name", "title"]
+      properties: ["name", "title"]
     },
     calculatedvalue: {
       properties: ["name", "expression", "includeIntoResult"]

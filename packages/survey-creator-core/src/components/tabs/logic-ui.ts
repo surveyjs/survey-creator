@@ -210,13 +210,11 @@ export class SurveyLogicUI extends SurveyLogic {
             {
               cellType: "linkvalue",
               name: "conditions",
-              readOnly: true,
               title: this.getLocString("ed.lg.conditions")
             },
             {
               cellType: "linkvalue",
               name: "actions",
-              readOnly: true,
               title: this.getLocString("ed.lg.actions")
             }
           ]
@@ -289,6 +287,17 @@ export class SurveyLogicUI extends SurveyLogic {
           }
         }
       });
+    };
+    this.matrixItems.onCellCreatedCallback = (options: any) => {
+      options.cell.question.linkClickCallback = () => {
+        if (options.row.isDetailPanelShowing) {
+          options.row.hideDetailPanel();
+        } else {
+          options.row.showDetailPanel();
+        }
+      }
+      options.cell.question.showClear = false;
+      options.cell.question.allowClear = false;
     };
     this.matrixItems.value = data;
     this.updateRenderedRows();

@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-knockout",
-  "version": "1.9.1-beta.0",
+  "version": "1.9.2-beta.0",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -23,8 +23,8 @@
     "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/toolbox.ts --reporter minimal --selector-timeout 1500\"",
     "testcafe:a11y": "concurrently \"http-server --silent\" \"testcafe chrome ./testCafe/accessibility.js --selector-timeout 1500\"",
     "testcafe:ci": "http-server --silent & testcafe chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal,dashboard",
-    "visual-regression-tests:ci": "testcafe chrome:headless ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal,dashboard",
-    "visual-regression-tests:file": "testcafe chrome:headless --app \"http-server\" ../../visualRegressionTests/tests/designer/page-navigator.ts --screenshots ../../ --reporter minimal --selector-timeout 1500",
+    "visual-regression-tests:ci": "testcafe chrome:headless --disable-font-subpixel-positioning ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal,dashboard",
+    "visual-regression-tests:file": "testcafe chrome:headless --disable-font-subpixel-positioning --app \"http-server\" ../../visualRegressionTests/tests/designer/pg-choices.ts --screenshots ../../ --reporter minimal --selector-timeout 1500",
     "release": "standard-version --message \"Release: %s [skip ci]\" --prerelease beta",
     "remove-package-lock": "rimraf package-lock.json",
     "build": "webpack --env.buildType dev && webpack --env.buildType prod",

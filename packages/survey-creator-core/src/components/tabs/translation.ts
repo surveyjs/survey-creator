@@ -1,33 +1,7 @@
-import {
-  property,
-  Base,
-  propertyArray,
-  SurveyModel,
-  HashTable,
-  LocalizableString,
-  JsonObjectProperty,
-  Serializer,
-  PageModel,
-  surveyLocalization,
-  ILocalizableString,
-  ItemValue,
-  QuestionCheckboxModel,
-  PopupModel,
-  ListModel,
-  PanelModelBase,
-  QuestionMatrixDropdownModel,
-  PanelModel,
-  Action,
-  IAction,
-  QuestionCommentModel
-} from "survey-core";
+import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
-import {
-  EmptySurveyCreatorOptions,
-  ISurveyCreatorOptions,
-  settings
-} from "../../settings";
+import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 
 import "./translation.scss";
@@ -411,13 +385,13 @@ export class TranslationGroup extends TranslationItemBase {
     );
   }
   private createGroups(value: any, property: JsonObjectProperty) {
-    for (var i = 0; i < value.length; i++) {
-      var obj = value[i];
+    for (let i = 0; i < value.length; i++) {
+      const obj = value[i];
       if (!!obj && obj.getType) {
-        var name = obj["name"];
-        var text = editorLocalization.getPropertyName(name);
+        let name = obj["name"];
+        let text = obj["title"] || name;
         if (!name) {
-          var index = "[" + i.toString() + "]";
+          const index = "[" + i.toString() + "]";
           name = property.name + index;
           text = editorLocalization.getPropertyName(property.name) + index;
         }
@@ -485,7 +459,6 @@ export class Translation extends Base implements ITranslationLocales {
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
   private chooseLanguagePopupModel: PopupModel;
-  private placeHolderText = editorLocalization.getString("ed.translationPlaceHolder");
   public chooseLanguageActions: Array<IAction> = [];
 
   constructor(
@@ -644,10 +617,7 @@ export class Translation extends Base implements ITranslationLocales {
   private createStringsSurvey(): SurveyModel {
     var json = { autoGrowComment: true };
     setSurveyJSONForPropertyGrid(json, false);
-    var survey: SurveyModel = this.options.createSurvey(
-      json,
-      "translation_strings"
-    );
+    var survey: SurveyModel = this.options.createSurvey(json, "translation_strings");
     survey.lazyRendering = true;
     survey.skeletonComponentName = "sd-translation-line-skeleton";
     survey.startLoadingFromJson();
@@ -657,17 +627,14 @@ export class Translation extends Base implements ITranslationLocales {
     survey.data = this.getStringsSurveyData(survey);
     survey.endLoadingFromJson();
     const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any): TranslationItem => {
-      var itemValue = ItemValue.getItemByValue(
-        question.rows,
-        rowName
-      );
+      var itemValue = ItemValue.getItemByValue(question.rows, rowName);
       return !!itemValue ? itemValue["translationData"] : null;
     };
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
       if (options.cell.question instanceof QuestionCommentModel) {
         const cellQuestion = <QuestionCommentModel>options.cell.question;
-        cellQuestion.placeHolder = this.placeHolderText;
         const item = getTransationItem(options.question, options.row.name);
+        this.setPlaceHolder(cellQuestion, item, options.columnName);
         const isMultiLine = !!item ? item.locString.getIsMultiple() : false;
         cellQuestion.acceptCarriageReturn = isMultiLine;
         if (!!item) {
@@ -682,24 +649,42 @@ export class Translation extends Base implements ITranslationLocales {
       const item = getTransationItem(options.question, options.row.name);
       if (!!item) {
         item.setLocText(options.columnName, options.value);
+        if (options.columnName == "default") {
+          options.row.cells.forEach(cell => {
+            this.updateCellPlaceholdersByDefault(cell, options.value, item);
+          });
+        }
       }
     });
     survey.currentPage = survey.pages[0];
     return survey;
   }
+  private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
+    const itemContext = item["context"];
+    const placeHolderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
+    if (itemContext instanceof SurveyModel) {
+      cellQuestion.placeHolder = surveyLocalization.getString(item.name, locale) || placeHolderText;
+    } else if (!(itemContext instanceof PageModel) && item.name === "title") {
+      cellQuestion.placeHolder = itemContext[item.name] || itemContext.name;
+    } else {
+      cellQuestion.placeHolder = placeHolderText;
+    }
+  }
+  private updateCellPlaceholdersByDefault(cell: MatrixDropdownCell, newValue: string, item: TranslationItem) {
+    if (!!newValue) {
+      cell.question.placeHolder = newValue;
+    } else {
+      this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
+    }
+  }
   private createStringsHeaderSurvey() {
     let json = {};
     setSurveyJSONForPropertyGrid(json, false);
-    let survey: SurveyModel = this.options.createSurvey(
-      json,
-      "translation_strings_header"
-    );
+    let survey: SurveyModel = this.options.createSurvey(json, "translation_strings_header");
     survey.css = translationCss;
     const newPage = survey.addNewPage("page");
 
-    let matrix = <QuestionMatrixDropdownModel>(
-      Serializer.createClass("matrixdropdown")
-    );
+    let matrix = <QuestionMatrixDropdownModel>(Serializer.createClass("matrixdropdown"));
     matrix.name = "stringsHeader";
     matrix.titleLocation = "hidden";
     this.addLocaleColumns(matrix);

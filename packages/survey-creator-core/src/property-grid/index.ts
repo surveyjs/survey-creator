@@ -340,7 +340,10 @@ export class PropertyGridTitleActionsCreator {
       iconName: "icon-clear",
       css: "spg-action-button spg-action-button--danger",
       enabled: enabled,
-      visible: <any>new ComputedUpdater<boolean>(() => !!question.obj[property.name]),
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        const propertyValue = question.obj[property.name];
+        return Array.isArray(propertyValue) ? propertyValue.length > 0 : !!propertyValue;
+      }),
       action: () => {
         editor.clearPropertyValue(
           question.obj,
@@ -372,7 +375,7 @@ export class PropertyGridTitleActionsCreator {
   ): any {
     var setupAction = {
       id: "property-grid-setup",
-      iconName: "icon-wizard",
+      iconName: property.isArray ? "icon-fast-entry" : "icon-wizard",
       css: "spg-action-button",
       enabled: enabled,
       title: getLocString("pe.edit"),
