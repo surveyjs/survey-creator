@@ -2228,3 +2228,11 @@ test("Check textUpdate mode for question", () => {
   expect(stepQuestion.getType()).toEqual("text");
   expect(stepQuestion.isSurveyInputTextUpdate).toBeFalsy();
 });
+test("Has narrow style between link value questions", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const defaultValueQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("defaultValue");
+  const correctAnswerQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("correctAnswer");
+  expect(defaultValueQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeFalsy();
+  expect(correctAnswerQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeTruthy();
+});
