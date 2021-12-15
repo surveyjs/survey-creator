@@ -74,7 +74,7 @@ export var propertyGridCss = {
     headerBottom: "spg-question__header--location--bottom",
     content: "spg-question__content",
     contentLeft: "spg-question__content--left",
-    titleLeftRoot: "",
+    titleLeftRoot: "spg-question--location--left",
     titleOnAnswer: "spg-question__title--answer",
     titleOnError: "spg-question__title--error",
     title: "spg-title spg-question__title",
