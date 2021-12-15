@@ -10,11 +10,12 @@
   border: 1px solid $border-inside;
   padding: calcSize(1.5) calcSize(2);
   outline: none;
-  font-size: calcSize(2);
   color: $foreground;
   max-width: 100%;
   min-width: calcSize(6);
   min-height: calcSize(6);
+  font-family: $font-family;
+  font-size: calcSize(2);
 }
 
 .spg-comment::placeholder {
@@ -22,7 +23,7 @@
 }
 
 .spg-comment:focus {
-  border: 1px solid $primary;
+  border: 2px solid $primary;
 }
 
 .spg-comment:disabled,
