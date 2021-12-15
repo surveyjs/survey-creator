@@ -9,7 +9,6 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   })();
 });
 
-
 test("Select questions and survey", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()

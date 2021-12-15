@@ -83,13 +83,13 @@
   margin: 0;
 
   background-color: $background-for-editors;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid $border-light;
 }
 
 .st-table__cell {
   height: calcSize(5);
   background-color: $primary-bg-color;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid $border-light;
   padding: 0;
 }
 
