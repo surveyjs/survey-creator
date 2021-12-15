@@ -175,12 +175,7 @@ export interface ITranslationLocales {
 export class TranslationGroup extends TranslationItemBase {
   private isRootValue: boolean = false;
   private itemValues: Array<TranslationItemBase>;
-  constructor(
-    public name,
-    public obj: any,
-    translation: ITranslationLocales = null,
-    public text: string = ""
-  ) {
+  constructor(public name, public obj: any, translation: ITranslationLocales = null, public text: string = "", public hasIndent: boolean = false) {
     super(name, translation);
     if (!this.text) {
       this.text = name;
@@ -296,7 +291,8 @@ export class TranslationGroup extends TranslationItemBase {
           property.name,
           value,
           this.translation,
-          editorLocalization.getPropertyName(property.name)
+          editorLocalization.getPropertyName(property.name),
+          true
         );
         if (group.hasItems) {
           this.itemValues.push(group);
@@ -725,6 +721,9 @@ export class Translation extends Base implements ITranslationLocales {
       pnl.name = item.name;
       panel.addElement(pnl);
       pnl.title = item.text;
+      if (item.hasIndent) {
+        pnl.cssClasses.panel.content += " st-panel-indent";
+      }
       this.addTranslationGroupIntoStringsSurvey(pnl, item, group);
     }
   }
