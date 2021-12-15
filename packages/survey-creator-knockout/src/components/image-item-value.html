@@ -3,10 +3,6 @@
   <div class="svc-image-item-value-wrapper__ghost"></div>
 
   <div class="svc-image-item-value-wrapper__content">
-    <!-- ko ifnot: isNew -->
-    <div class="svc-image-item__drag-element"></div>
-    <!-- /ko -->
-
     <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
 
     <!-- ko ifnot: isNew -->
@@ -14,6 +10,11 @@
       <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
       <!-- /ko -->
     </div>
+
+    <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__drag-area-indicator"
+      data-bind="event: { pointerdown: function(model, event) { onPointerDown(event); } }"
+      params="iconName: 'icon-drag-area-indicator', size: 24">
+    </sv-svg-icon>
 
     <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
       <!-- ko if: allowRemove -->

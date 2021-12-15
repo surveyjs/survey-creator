@@ -76,6 +76,12 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
             {this.props.element}
           </div>
 
+          <span className="svc-image-item-value-controls__button svc-image-item-value-controls__drag-area-indicator"
+            onPointerDown={(event: any) => this.model.onPointerDown(event)}
+          >
+            <SvgIcon size={24} iconName={"icon-drag-area-indicator"}></SvgIcon>
+          </span>
+
           <div className="svc-image-item-value-controls">
             {this.model.allowRemove ? attachKey2click(<span
               className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
@@ -111,7 +117,6 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
       >
         <div className={"svc-image-item-value-wrapper__ghost"}></div>
         <div className={"svc-image-item-value-wrapper__content"}>
-          {isNew ? null : <div className={"svc-image-item__drag-element"} ></div>}
           <input
             type="file"
             aria-hidden="true"

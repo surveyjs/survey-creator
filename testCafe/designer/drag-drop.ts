@@ -722,7 +722,7 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   const PandaItem = Selector("[data-sv-drop-target-item-value=\"panda\"]");
   const CamelItem = Selector("[data-sv-drop-target-item-value=\"camel\"]");
 
-  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item__drag-element");
+  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item-value-controls__drag-area-indicator");
 
   await t
     .click(Question1, { speed: 0.5 })

@@ -102,21 +102,16 @@
 }
 
 .svc-question__content--selected .svc-image-item-value-wrapper:hover {
-  .svc-image-item__drag-element {
+  .svc-image-item-value-controls__drag-area-indicator {
     display: block;
   }
 }
 
-.svc-image-item__drag-element {
+.svc-image-item-value-controls__drag-area-indicator {
   cursor: move;
-  width: calcSize(3);
-  height: 6px;
-  border: 1px solid $border;
-  border-radius: 10px;
   position: absolute;
-  top: 1px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: calcSize(2.5);
+  left: calcSize(0.5);
   display: none;
 }
 
