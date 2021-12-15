@@ -328,8 +328,7 @@ export class SurveyLogicUI extends SurveyLogic {
     });
   }
   public get addNewText(): string {
-    var lgAddNewItem = getLogicString("addNewItem");
-    return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
+    return getLogicString("addNewItem");
   }
 
   public get emptyTabPlaceHolder(): string {

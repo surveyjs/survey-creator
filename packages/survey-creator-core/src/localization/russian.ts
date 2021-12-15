@@ -102,6 +102,7 @@ export var ruStrings = {
     fpAddQuestion: "Добавить вопрос...",
     completedHtmlOnConditionItemText: "Показывать, если:",
     lg: {
+      addNewItem: "Добавить новое правило",
       //Logic tab strings
       page_visibilityName: "Видимость страницы",
       panel_visibilityName: "Видимость панели",
