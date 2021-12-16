@@ -5,6 +5,10 @@ export const getSurveyJSFramework = ClientFunction(() => {
   return window["surveyJSFramework"];
 });
 
+export const setJSON = ClientFunction((json) => {
+  window["creator"].text = JSON.stringify(json);
+});
+
 //devextreme-screenshot-comparer options
 export const screenshotComparerOptions = {
   path: "./tests",
