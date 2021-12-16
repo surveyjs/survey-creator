@@ -414,6 +414,18 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
+   * The event is called after a property editor setups its title actions.
+   * You can use this event to modify the property editor title actions
+   * <br/> options.obj the survey object that is currently editing in the property grid
+   * <br/> options.property the property that the current property editor is editing
+   * <br/> options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
+   * <br/> options.titleActions the list of title actions.
+   */
+   public onPropertyEditorUpdateTitleActions: Survey.Event<
+   (sender: CreatorBase<T>, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+ /**
    * The event is called before rendering a delete button in the Property Grid or in Question Editor.
    * Obsolete, please use onCollectionItemAllowOperations
    * <br/> sender the survey creator object that fires the event
@@ -2354,6 +2366,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   ) {
     const options = { obj: object, property: property, editor: editor };
     this.onPropertyEditorCreated.fire(this, options);
+  }
+  onPropertyEditorUpdateTitleActionsCallback(
+    object: any,
+    property: Survey.JsonObjectProperty,
+    editor: Question,
+    titleActions: IAction[]
+  ) {
+    const options = { obj: object, property: property, editor: editor, titleActions: titleActions };
+    this.onPropertyEditorUpdateTitleActions.fire(this, options);
   }
   onCanDeleteItemCallback(
     object: any,

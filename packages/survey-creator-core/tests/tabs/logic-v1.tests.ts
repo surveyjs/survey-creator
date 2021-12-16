@@ -975,14 +975,6 @@ test("Logic onLogicItemRemoving/onLogicItemRemoved events", () => {
   expect(removingCallCount).toEqual(2);
   expect(removedCallCount).toEqual(1);
 });
-test("Logic addNewText", () => {
-  var logic = new SurveyLogicUI(new SurveyModel());
-  expect(logic.addNewText).toEqual("Add New");
-  (<any>defaultStrings).ed.lg["addNewItem"] = "Add New Rule";
-  expect(logic.addNewText).toEqual("Add New Rule");
-  (<any>defaultStrings).ed.lg["addNewItem"] = "";
-  expect(logic.addNewText).toEqual("Add New");
-});
 
 test("Hide/show logic types in actions", () => {
   var survey = new SurveyModel({

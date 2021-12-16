@@ -39,7 +39,7 @@ test("Check states", async (t) => {
   await t
     .click(Selector("h4[aria-label=Logic]"));
 
-  const sectionContentElement=Selector("h4[aria-label=Logic]+div");
+  const sectionContentElement = Selector("h4[aria-label=Logic]").parent().nextSibling();
 
   await t.expect(sectionContentElement.visible).ok();
   await takeScreenshot("logic-button-default.png", sectionContentElement, screenshotComparerOptions);

@@ -144,7 +144,7 @@ export var enStrings = {
     chooseLogoPlaceholder: "[LOGO]",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
-      addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
+      addNewItem: "Add New Rule",
       //Logic tab strings
       empty_tab: "Create a rule to customize the flow of the survey.",
       page_visibilityName: "Show (hide) page",
