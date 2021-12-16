@@ -125,7 +125,7 @@ const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisib
 const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
 const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
-const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New");
+const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New Rule");
 const addButton = Selector(".sl-paneldynamic__add-btn ").filterVisible();
 const removeButton = Selector(".svc-logic-paneldynamic__remove-btn--right").filterVisible();
 const doneButton = Selector("button").withExactText("Done").filterVisible();

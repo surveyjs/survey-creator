@@ -754,6 +754,8 @@ export class PropertyGridModel {
     this.survey.onGetQuestionTitleActions.add((sender, options) => {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
       this.onGetQuestionTitleActions(options);
+      const q = options.question;
+      this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.titleActions);
     });
     this.survey.onGetPanelTitleActions.add((sender, options) => {
       options.titleActions.splice(0, options.titleActions.length);

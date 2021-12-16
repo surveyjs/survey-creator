@@ -102,6 +102,12 @@
   }
 }
 
+.st-panel-indent .st-table__cell:first-child {
+  span {
+    padding-left: calcSize(6);
+  }
+}
+
 .st-table {
   width: 100%;
   table-layout: fixed;

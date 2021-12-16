@@ -120,7 +120,6 @@ export var nlStrings = {
     chooseElement: "Kies element...",
     //completedHtmlOnConditionItemText: "Laat zien of:",
     lg: {
-      addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       page_visibilityName: "Pagina zichtbaarheid",
       panel_visibilityName: "Paneel zichtbaarheid",
