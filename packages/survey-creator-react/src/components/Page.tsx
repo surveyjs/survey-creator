@@ -3,6 +3,7 @@ import {
   attachKey2click,
   Popup,
   SurveyActionBar,
+  ReactElementFactory,
   SurveyElementBase,
   SurveyPage,
   SvgIcon
@@ -28,7 +29,6 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
 > {
   private model: PageViewModel<SurveyModel>;
   private rootRef: React.RefObject<HTMLDivElement>;
-  private propertyPageFunc: (sender: Base, options: any) => void;
   constructor(props: ICreatorSurveyPageComponentProps) {
     super(props);
     this.model = new PageViewModel<SurveyModel>(
@@ -61,7 +61,6 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     );
   }
   renderElement(): JSX.Element {
-    const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
     return (
       attachKey2click(<div
         ref={this.rootRef}
@@ -73,47 +72,55 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
         onMouseOut={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
       >
-        <SurveyPage
-          page={this.props.page}
-          survey={this.props.survey}
-          creator={this.props.creator}
-          css={this.model.css}
-        ></SurveyPage>
-        {this.model.allowEdit ? attachKey2click(<div
-          className="svc-page__add-new-question"
-          onClick={(e) => {
-            e.stopPropagation();
-            this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
-          }}
-        >
-          <span className="svc-text svc-text--normal svc-text--bold">
-            {this.model.addNewQuestionText}
-          </span>
-
-          {attachKey2click(<button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              questionTypeSelectorModel.action();
-            }}
-            className="svc-page__question-type-selector"
-            title={this.model.addNewQuestionText}
-          >
-            <span className="svc-page__question-type-selector-icon">
-              <SvgIcon
-                iconName={questionTypeSelectorModel.iconName}
-                size={24}
-              ></SvgIcon>
-            </span>
-            <Popup model={questionTypeSelectorModel.popupModel}></Popup>
-          </button>)}
-        </div>) : null}
-        <div className="svc-page__content-actions">
-          <SurveyActionBar
-            model={this.model.actionContainer}
-          ></SurveyActionBar>
-        </div>
+        {this.renderHeader()}
+        {this.renderContent()}
+        {this.renderFooter()}
       </div>)
     );
   }
+  protected renderContent(): JSX.Element {
+    return (<SurveyPage page={this.props.page} survey={this.props.survey} creator={this.props.creator} css={this.model.css}></SurveyPage>);
+  }
+  protected renderHeader(): JSX.Element {
+    return (<div className="svc-page__content-actions">
+      <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
+    </div>);
+  }
+  protected renderFooter(): JSX.Element {
+    if(!this.model.allowEdit) return null;
+    const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
+    return attachKey2click(<div
+      className="svc-page__add-new-question"
+      onClick={(e) => {
+        e.stopPropagation();
+        this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
+      }}
+    >
+      <span className="svc-text svc-text--normal svc-text--bold">
+        {this.model.addNewQuestionText}
+      </span>
+
+      {attachKey2click(<button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          questionTypeSelectorModel.action();
+        }}
+        className="svc-page__question-type-selector"
+        title={this.model.addNewQuestionText}
+      >
+        <span className="svc-page__question-type-selector-icon">
+          <SvgIcon
+            iconName={questionTypeSelectorModel.iconName}
+            size={24}
+          ></SvgIcon>
+        </span>
+        <Popup model={questionTypeSelectorModel.popupModel}></Popup>
+      </button>)}
+    </div>);
+  }
 }
+
+ReactElementFactory.Instance.registerElement("svc-page", (props) => {
+  return React.createElement(CreatorSurveyPageComponent, props);
+});

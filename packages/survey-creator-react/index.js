@@ -180,6 +180,15 @@ SurveyReact.ReactElementFactory.Instance.registerElement(
 //       return React.createElement(CustomPropertyGridWrapper, props);
 //   });
 
+class CreatorSurveyPageComponent2 extends SurveyCreator.CreatorSurveyPageComponent {
+  renderFooter() {
+    return (<div>Some Text {super.renderFooter()}</div>);
+  }
+}
+
+SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => {
+  return React.createElement(CreatorSurveyPageComponent2, props);
+});
 
 const creator = new SurveyCreator.SurveyCreator(options);
 creator.JSON = json;
