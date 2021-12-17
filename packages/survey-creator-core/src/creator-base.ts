@@ -421,19 +421,19 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
    * <br/> options.titleActions the list of title actions.
    */
-   public onPropertyEditorUpdateTitleActions: Survey.Event<
-   (sender: CreatorBase<T>, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
- /**
-   * The event is called before rendering a delete button in the Property Grid or in Question Editor.
-   * Obsolete, please use onCollectionItemAllowOperations
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey Question
-   * <br/> options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
-   * <br/> options.canDelete a boolean value. It is true by default. Set it false to remove delete button from the Property Grid or in Question Editor
-   * @see onCollectionItemAllowOperations
-   */
+  public onPropertyEditorUpdateTitleActions: Survey.Event<
+    (sender: CreatorBase<T>, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+    * The event is called before rendering a delete button in the Property Grid or in Question Editor.
+    * Obsolete, please use onCollectionItemAllowOperations
+    * <br/> sender the survey creator object that fires the event
+    * <br/> options.obj the survey Question
+    * <br/> options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
+    * <br/> options.canDelete a boolean value. It is true by default. Set it false to remove delete button from the Property Grid or in Question Editor
+    * @see onCollectionItemAllowOperations
+    */
   public onCanDeleteItem: Survey.Event<
     (sender: CreatorBase<T>, options: any) => any,
     any
@@ -958,7 +958,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
-    this.toolbar.actions.push(this.sideBar.getExpandAction());
+    const expandAction = this.sideBar.getExpandAction();
+    !!expandAction && this.toolbar.actions.push(expandAction);
   }
   public updateToolboxIsCompact(newVal?: boolean) {
     if (this.toolboxLocation == "right" && this.showPropertyGrid) {
@@ -1736,7 +1737,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         if (index > -1) index++;
       }
     }
-    if(panel) {
+    if (panel) {
       parent = panel;
     }
     const currentRow = this.findRowByElement(selectedElement, parent);
@@ -2566,14 +2567,14 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @undoRedoTransaction()
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;
-    if(!el || el.getType() === newType) return;
+    if (!el || el.getType() === newType) return;
     if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
     el = this.convertQuestion(<Survey.Question>el, newType);
     this.selectElement(el);
   }
 
   public getAddNewQuestionText(currentAddQuestionType: string = null) {
-    if(!currentAddQuestionType)
+    if (!currentAddQuestionType)
       currentAddQuestionType = this.currentAddQuestionType;
     if (!!currentAddQuestionType) {
       const str = this.getLocString("ed.addNewTypeQuestion");
@@ -2621,7 +2622,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
-    if(!type)
+    if (!type)
       type = this.currentAddQuestionType;
     beforeAdd(type);
     let newElement = Survey.ElementFactory.Instance.createElement(
@@ -2687,8 +2688,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
   }
   @property({ defaultValue: true }) showPageNavigator;
-  @property({ defaultValue: settings.layout.showTabs }) showTabs;
-  @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
+  @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
+  @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
   @property({ defaultValue: false }) isMobileView;
   @property({
     defaultValue: "left", onSet: (newValue, target: CreatorBase<T>) => {

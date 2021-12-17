@@ -103,6 +103,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.model = undefined;
 
     this.languageSelectorAction.visible = false;
+    this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
   }
@@ -231,7 +232,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       }),
       title: this.creator.getLocString("ed.designer"),
       showTitle: false
-    })
+    });
 
     this.prevPageAction = new Action({
       id: "prevPage",

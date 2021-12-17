@@ -20,6 +20,7 @@ export * from "../components/ItemValueWrapper";
 export * from "../components/ImageItemValueWrapper";
 export * from "../components/MatrixCellWrapper";
 export * from "../components/Results";
+export * from "../components/Page";
 export * from "../components/tabs/Designer";
 export * from "../components/tabs/Embed";
 export * from "../components/tabs/JsonEditorAce";
