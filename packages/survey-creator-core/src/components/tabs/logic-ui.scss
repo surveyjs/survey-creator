@@ -134,10 +134,11 @@
     flex-direction: column;
     display: flex;
     align-items: center;
-    justify-content: center;
+    position: absolute;
+    top: 35%;
 
     .svc-logic-tab__content-action {
-      width: calcSize(40);
+      width: calcSize(33);
       margin-top: calcSize(4);
     }
   }
@@ -166,7 +167,7 @@
     }
   }
 
-  .svc-text {
+  .svc-logic-tab__content-action .svc-text {
     color: $primary;
     display: flex;
     align-items: center;

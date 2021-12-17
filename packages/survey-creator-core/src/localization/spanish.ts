@@ -120,7 +120,6 @@ var spanishTranslation = {
     chooseElement: "Elige el elemento ...",
     completedHtmlOnConditionItemText: "Mostrar si:",
     lg: {
-      addNewItem: "",
       page_visibilityName: "Visibilidad de la pagina",
       panel_visibilityName: "Visibilidad del panel",
       panel_enableName: "Panel habilitar / deshabilitar",

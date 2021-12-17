@@ -95,12 +95,14 @@ export var ruStrings = {
     translationExportToSCVButton: "Экспорт в CSV",
     translationImportFromSCVButton: "Импорт из CSV",
     translationMergeLocaleWithDefault: "Объединить {0} с локалью по умолчанию",
+    translationPlaceHolder: "Перевод...",
     bold: "Жирный",
     italic: "Курсив",
     underline: "Подчеркивание",
     fpAddQuestion: "Добавить вопрос...",
     completedHtmlOnConditionItemText: "Показывать, если:",
     lg: {
+      addNewItem: "Добавить новое правило",
       //Logic tab strings
       page_visibilityName: "Видимость страницы",
       panel_visibilityName: "Видимость панели",

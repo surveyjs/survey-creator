@@ -121,7 +121,6 @@ export var hrStrings = {
     chooseElement: "Odaberite element...",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
-      addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       page_visibilityName: "Vidljivost stranice",
       panel_visibilityName: "Vidljivost panela",
