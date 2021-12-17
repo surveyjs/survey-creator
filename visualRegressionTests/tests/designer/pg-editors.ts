@@ -50,3 +50,37 @@ test("Properties on the same line", async (t) => {
     .ok(compareResults.errorMessages());
 
 });
+test("Values editors, keep them close", async (t) => {
+  const json = {
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  };
+  await t.resizeWindow(2560, 1440);
+  await setJSON(json);
+  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+
+  const question1 = Selector("[data-name=\"question1\"]");
+  const generalTab = Selector("h4").withExactText("General");
+  const dataTab = Selector("h4").withExactText("Data");
+
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+  })();
+
+  await t
+    .click(question1)
+    .pressKey("enter")
+    .click(generalTab)
+    .click(dataTab)
+    .expect(Selector(".spg-panel__content").filterVisible().visible).ok();
+
+  await takeScreenshot("properties-data-tab.png", Selector(".spg-panel__content").filterVisible(), screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+
+});
