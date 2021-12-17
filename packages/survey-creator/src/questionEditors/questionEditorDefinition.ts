@@ -65,6 +65,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "hasComment",
         "commentText",
+        "commentPlaceHolder",
         "allowMultiple",
         "allowImagesPreview",
         "acceptedTypes",
@@ -154,6 +155,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "hasComment",
         "commentText",
+        "commentPlaceHolder",
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
@@ -166,6 +168,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "hasComment",
         "commentText",
+        "commentPlaceHolder",
         { name: "choicesFromQuestion", tab: "choices" },
         { name: "choicesFromQuestionMode", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
