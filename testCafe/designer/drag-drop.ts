@@ -722,18 +722,12 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   const PandaItem = Selector("[data-sv-drop-target-item-value=\"panda\"]");
   const CamelItem = Selector("[data-sv-drop-target-item-value=\"camel\"]");
 
-  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item__drag-element");
+  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item-value-controls__drag-area-indicator").filterVisible();
 
   await t
     .click(Question1, { speed: 0.5 })
     .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
-
-    .dragToElement(DragZoneGiraffeItem, LionItem, {
-      offsetX: 1,
-      offsetY: 1,
-      destinationOffsetY: -40,
-      speed: 0.1
-    });
+    .dragToElement(DragZoneGiraffeItem, LionItem);
 
   let value = await getItemValueByIndex("question1", 0);
   const expectedValue = "giraffe";
@@ -741,12 +735,7 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
 
   await t.click(Question1, { speed: 0.5 }).hover(GiraffeItem, { speed: 0.5 });
 
-  await t.dragToElement(DragZoneGiraffeItem, PandaItem, {
-    offsetX: 5,
-    offsetY: 5,
-    destinationOffsetY: 30,
-    speed: 0.1
-  });
+  await t.dragToElement(DragZoneGiraffeItem, PandaItem);
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
 });

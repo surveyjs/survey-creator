@@ -6,7 +6,6 @@ import {
   SurveyHeader
 } from "survey-react-ui";
 import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
-import { CreatorSurveyPageComponent } from "../Page";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 import { SurveyNavigation } from "../Navigation";
 
@@ -37,11 +36,7 @@ export class TabDesignerComponent extends SurveyElementBase<
             data-sv-drop-target-survey-element={page.name}
             key={page.id + "-" + index}
           >
-            <CreatorSurveyPageComponent
-              survey={this.creator.survey}
-              page={page}
-              creator={this.creator}
-            ></CreatorSurveyPageComponent>
+            {this.renderPage(page)}
           </div>
         );
       }
@@ -54,15 +49,15 @@ export class TabDesignerComponent extends SurveyElementBase<
           data-sv-drop-target-survey-element={"newGhostPage"}
           key={this.model.newPage.id + "-ghost-new-page"}
         >
-          <CreatorSurveyPageComponent
-            survey={this.creator.survey}
-            page={this.model.newPage}
-            creator={this.creator}
-          ></CreatorSurveyPageComponent>
+          {this.renderPage(this.model.newPage)}
         </div>
       );
     }
     return surveyPages;
+  }
+  protected renderPage(pageV: PageModel): JSX.Element {
+    return ReactElementFactory.Instance.createElement("svc-page",
+      { survey: this.creator.survey, page: pageV, creator: this.creator });
   }
   renderElement(): JSX.Element {
     const survey: SurveyModel = this.creator.survey;

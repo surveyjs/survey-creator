@@ -2163,3 +2163,18 @@ test("Creator state, change the same property, isAutoSave=true", () => {
   expect(saveNo).toEqual(2);
   expect(creator.state).toEqual("saved");
 });
+
+test("hide top panel", () => {
+  const oldValueShowTabs = settings.layout.showTabs;
+  const oldValueShowToolbar = settings.layout.showToolbar;
+
+  settings.layout.showTabs = false;
+  settings.layout.showToolbar = false;
+
+  const creator = new CreatorTester();
+  expect(creator.showTabs).toEqual(false);
+  expect(creator.showToolbar).toEqual(false);
+
+  settings.layout.showTabs = oldValueShowTabs;
+  settings.layout.showToolbar = oldValueShowToolbar;
+});

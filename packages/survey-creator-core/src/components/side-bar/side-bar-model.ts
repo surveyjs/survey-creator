@@ -49,12 +49,7 @@ export class SideBarModel extends Base {
         title: getLocString("ed.hidePanel"),
         showTitle: false,
         visible: <any>new ComputedUpdater<boolean>(() => this.visible),
-        action: () => {
-          if (this.collapseAction)
-            this.collapseAction();
-          else
-            this.visible = false;
-        }
+        action: () => { this.collapseSideBar(); }
       });
       this.toolbar.actions.push(this._collapseAction);
 
@@ -63,12 +58,7 @@ export class SideBarModel extends Base {
         iconName: "icon-expand-panel",
         css: "svd-grid-expand",
         needSeparator: true,
-        action: () => {
-          if (this.expandAction)
-            this.expandAction();
-          else
-            this.visible = true;
-        },
+        action: () => { this.expandSideBar(); },
         title: getLocString("ed.showPanel"),
         visible: <any>new ComputedUpdater<boolean>(() => {
           const visible = !this.visible;
@@ -94,7 +84,7 @@ export class SideBarModel extends Base {
     };
     this.creator.onShowPropertyGridVisiblityChanged.add(this.onPropertyGridVisibilityChanged);
     this.creator.onPropertyChanged.add((sender, options) => {
-      if (options.name === "sideBarLocation") {
+      if (options.name === "sideBarLocation" && !!this.resizeManager) {
         this.resizeManager.setHandles(this.getCurrentHandles());
       }
     });
@@ -105,8 +95,17 @@ export class SideBarModel extends Base {
   public getExpandAction() {
     return this._expandAction;
   }
-  public closePropertyGrid() {
-    this._collapseAction.action();
+  public collapseSideBar() {
+    if (this.collapseAction)
+      this.collapseAction();
+    else
+      this.visible = false;
+  }
+  public expandSideBar() {
+    if (this.expandAction)
+      this.expandAction();
+    else
+      this.visible = true;
   }
   public addTab(id: string, componentName?: string, model?: any, buildActions?: () => Array<Action>): SideBarTabModel {
     const tab = new SideBarTabModel(id, this, componentName, model);

@@ -9,6 +9,31 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     super(creator, question, item);
   }
 
+  chooseFile(model: ImageItemValueWrapperViewModel) {
+    const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
+    model.creator.chooseFiles(fileInput, (files: File[]) => {
+      model.creator.uploadFiles(files, (_, link) => {
+        model.item.imageLink = link;
+      });
+    });
+  }
+
+  chooseNewFile(model: ImageItemValueWrapperViewModel) {
+    const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
+    model.creator.chooseFiles(fileInput, (files: File[]) => {
+      model.creator.uploadFiles(files, (_, link) => {
+        const itemValue = <ImageItemValue>model.creator.createNewItemValue(model.question);
+        itemValue.imageLink = link;
+        model.question.choices.push(itemValue);
+        const nextValue = model.creator.getNextItemValue(model.question);
+        model.item.value = nextValue;
+      });
+    });
+  }
+}
+
+
+
   // chooseFiles() {
   //   editor.chooseFiles(fileInput, (files: File[]) => {
   //     var itemText = Survey.surveyLocalization.getString("choices_Item");
@@ -64,26 +89,3 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   //   });
   // });
   // }
-
-  chooseFile(model: ImageItemValueWrapperViewModel) {
-    const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
-    model.creator.chooseFiles(fileInput, (files: File[]) => {
-      model.creator.uploadFiles(files, (_, link) => {
-        model.item.imageLink = link;
-      });
-    });
-  }
-
-  chooseNewFile(model: ImageItemValueWrapperViewModel) {
-    const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
-    model.creator.chooseFiles(fileInput, (files: File[]) => {
-      model.creator.uploadFiles(files, (_, link) => {
-        const itemValue = <ImageItemValue>model.creator.createNewItemValue(model.question);
-        itemValue.imageLink = link;
-        model.question.choices.push(itemValue);
-        const nextValue = model.creator.getNextItemValue(model.question);
-        model.item.value = nextValue;
-      });
-    });
-  }
-}

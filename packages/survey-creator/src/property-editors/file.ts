@@ -22,7 +22,7 @@ export class PropertyEditorFileViewModel {
     private editor: any,
     public koValue: any,
     public readOnly: boolean,
-    public isDiplayNameVisible: boolean,
+    public isDisplayNameVisible: boolean,
     public displayName: string,
     public afterRender: any
   ) {
@@ -78,7 +78,7 @@ ko.components.register("svd-property-editor-file", {
         model.options,
         model.koValue,
         model.readOnly,
-        model.isDiplayNameVisible,
+        model.isDisplayNameVisible,
         model.displayName,
         () => {
           typeof params.afterRender === "function" &&

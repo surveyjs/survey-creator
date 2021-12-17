@@ -27,6 +27,7 @@ svc-page {
   display: none;
   top: calcSize(1);
   right: 0;
+  z-index: 1;
   .sv-action-bar {
     padding: 0 calcSize(1);
     .sv-action-bar-item {

@@ -56,7 +56,7 @@ export class SideBarComponent extends SurveyElementBase<ISideBarComponentProps, 
               {items}
             </div>
             <div className="svc-side-bar__container-close">
-              <div className="sd-btn sd-btn--action svc-side-bar__container-close-button" onClick={() => this.model.closePropertyGrid()}> {this.model.closeText} </div>
+              <div className="sd-btn sd-btn--action svc-side-bar__container-close-button" onClick={() => this.model.collapseSideBar()}> {this.model.closeText} </div>
             </div>
           </div>
         </div>

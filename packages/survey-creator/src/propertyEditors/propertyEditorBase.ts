@@ -158,7 +158,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.isInPropertyGridValue = val;
     this.setTitleAndDisplayName();
   }
-  public get isDiplayNameVisible() {
+  public get isDisplayNameVisible() {
     return (
       this.showDisplayName &&
       !this.isInPropertyGrid &&
@@ -181,7 +181,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.showDisplayNameValue = val;
   }
   public get showDisplayNameOnTop(): boolean {
-    return this.isDiplayNameVisible && this.canShowDisplayNameOnTop;
+    return this.isDisplayNameVisible && this.canShowDisplayNameOnTop;
   }
   public get canShowDisplayNameOnTop(): boolean {
     return true;
