@@ -46,6 +46,9 @@
   color: $foreground;
   padding-bottom: calcSize(2);
 }
+.spg-row-narrow__question {
+  margin-top: calcSize(-2);
+}
 .spg-question--location--left {
   flex-direction: row;
   padding-right: 0 !important;
