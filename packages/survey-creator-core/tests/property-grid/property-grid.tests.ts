@@ -2093,7 +2093,7 @@ test("We should not have 'Others' category in our objects", () => {
     if (allQuestionTypes[i].name == "linkvalue")
       continue;
     let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
-    if (!!question && !question.isCompositeQuestion) {
+    if (!!question) {
       objToCheck.push(question);
     }
   }
@@ -2109,7 +2109,9 @@ test("We should not have 'Others' category in our objects", () => {
       for (var j = 0; j < props.length; j++) {
         questionNames.push(props[j].name);
       }
-      expect("obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(questionNames)).toBeFalsy();
+      if (JSON.stringify(questionNames) !== "[\"width\"]") { // for some reasons in composite questions (paneldynamic) we have the width property here but it doesn't appear in PG UI
+        expect("obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(questionNames)).toBeFalsy();
+      }
     }
   }
 });
