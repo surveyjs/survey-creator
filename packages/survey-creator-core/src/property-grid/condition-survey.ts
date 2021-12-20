@@ -295,7 +295,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           panelRemoveButtonLocation: "right",
           panelAddText: editorLocalization.getString("pe.addCondition"),
           minPanelCount: 1,
-          maxPanelCount: 1,
           startWithNewLine: false,
           templateElements: [
             {
@@ -325,6 +324,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               showOptionsCaption: false,
               isRequired: true,
               enableIf: "{panel.questionName} notempty"
+            },
+            {
+              name: "removeAction",
+              type: "linkvalue",
+              titleLocation: "hidden",
+              showOptionsCaption: false,
+              visible: false,
+              startWithNewLine: false,
+              showValueInLink: false,
+              allowClear: false,
+              showClear: false
             },
             {
               name: "questionValue",
@@ -443,6 +453,14 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!!panel.getQuestionByName("questionValue")) {
       panel.getQuestionByName("questionValue").value = item.value;
     }
+    const dynamicPanel: QuestionPanelDynamicModel = <QuestionPanelDynamicModel>(panel.getQuestionByName("removeAction").parentQuestion);
+    panel.getQuestionByName("removeAction").linkClickCallback = () => {
+      if (!!dynamicPanel) {
+        dynamicPanel.removePanelUI(panel);
+      }
+    }
+    panel.getQuestionByName("removeAction").linkValueText = "";
+    panel.getQuestionByName("removeAction").linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
     this.isSettingPanelValues = false;
   }
   private getText(): string {
@@ -738,6 +756,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--operator";
       options.cssClasses.questionWrapper = "svc-question-wrapper";
     }
+    if (options.question.name === "removeAction") {
+      options.cssClasses.questionWrapper = "svc-question-wrapper";
+      options.cssClasses.mainRoot += " svc-logic-condition-remove-question";
+    }
     // options.cssClasses.mainRoot += "sd-question sd-row__question";
     if (options.question.name === "questionValue") {
       assignDefaultV2Classes(options.cssClasses, options.question.getType());
@@ -754,8 +776,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private onValueChanged(options: any) {
     if (options.question.name === "panel" && options.value.length > 0) {
-      const maxLogicItems = this.options.maxLogicItemsInCondition > 0 ? this.options.maxLogicItemsInCondition : 100;
-      options.question.maxPanelCount = options.value.length === 1 && !options.value[0].questionName ? 1 : maxLogicItems;
+      this.panel.panels.forEach(panel => {
+        panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
+      })
     }
     this.setTitle();
   }

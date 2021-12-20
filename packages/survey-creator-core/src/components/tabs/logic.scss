@@ -18,8 +18,10 @@
 .sl-table__row:hover #remove-row,
 .sl-table__row #remove-row:focus-within {
   .sv-action-bar-item {
-    padding: calcSize(0.25);
+    padding: calcSize(1);
     border: none;
+    width: calcSize(5);
+    height: calcSize(5);
   }
   .sv-action-bar-item__icon use {
     fill: $red;
@@ -182,19 +184,15 @@
     display: none;
   }
 }
+.sl-row--multiple .sl-question {
+  padding-right: calcSize(1) !important;
+}
 .svc-logic-question-value {
   padding-right: calcSize(5) !important;
 }
 
-.sl-panel-wrapper--in-row {
-  display: flex;
-  align-items: flex-start;
-}
 .sl-comment {
   margin-bottom: calcSize(2);
-}
-.svc-logic-paneldynamic .sl-panel {
-  width: calc(100% - 5 * var(--base-unit, 8px));
 }
 
 .sv-popup.sv-property-editor {

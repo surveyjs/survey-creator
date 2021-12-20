@@ -28,6 +28,9 @@ import { SurveyHelper } from "../survey-helper";
 export class QuestionLinkValueModel extends Question {
   public linkClickCallback: () => void;
   public resetClickCallback: () => void;
+  public linkSetButtonCssClasses = "spg-link-value-button spg-question-link__set-button";
+  public linkClearButtonCssClasses = "spg-question-link__clear-button";
+
   @property({ defaultValue: false }) isSelected: boolean;
   @property() linkValueText: string;
   @property({ defaultValue: false }) showClear: boolean;

@@ -26,6 +26,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { SurveyHelper } from "../../survey-helper";
 import { logicCss } from "./logic-theme";
 import { assignDefaultV2Classes } from "../../utils/utils";
+import { QuestionLinkValueModel } from "../../property-grid/values";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)
@@ -168,7 +169,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           panelRemoveButtonLocation: "right",
           panelCount: 0,
           minPanelCount: 1,
-          maxPanelCount: 1,
           templateElements: [
             {
               name: "logicTypeName",
@@ -198,7 +198,18 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               type: "panel",
               startWithNewLine: false,
               visible: false
-            }
+            },
+            {
+              name: "removeAction",
+              type: "linkvalue",
+              titleLocation: "hidden",
+              showOptionsCaption: false,
+              visible: false,
+              startWithNewLine: false,
+              showValueInLink: false,
+              allowClear: false,
+              showClear: false
+            },
           ]
         }
       ]
@@ -256,6 +267,10 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       assignDefaultV2Classes(options.cssClasses, options.question.getType());
       options.cssClasses.mainRoot += " svc-logic-question-value";
     }
+    if (options.question.name === "removeAction") {
+      options.cssClasses.questionWrapper = "svc-question-wrapper";
+      options.cssClasses.mainRoot += " svc-logic-condition-remove-question";
+    }
     // options.cssClasses.mainRoot = "sd-question sd-row__question";
     if (options.question.name === "panel") {
       options.cssClasses.root += " svc-logic-paneldynamic";
@@ -273,7 +288,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private onValueChanged(options: any) {
     this.isModifiedValue = true;
-    options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].logicTypeName) ? 1 : 100;
+    this.panel.panels.forEach(panel => {
+      panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
+    })
   }
   private onQuestionAdded(options: any) {
     if (options.question.name === "setToName" || options.question.name === "fromName") {
@@ -347,17 +364,24 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       this.onPanelAdded(this.panel.addPanel(), null);
     }
   }
-  private onPanelAdded(
-    panel: PanelModel,
-    action: SurveyLogicAction
-  ): PanelModel {
-    var ltQuestion = panel.getQuestionByName("logicTypeName");
+  private onPanelAdded(panel: PanelModel, action: SurveyLogicAction): PanelModel {
+    const ltQuestion = panel.getQuestionByName("logicTypeName");
     ltQuestion.title = this.panel.panelCount > 1 ? editorLocalization.getString("pe.and").toLowerCase() : editorLocalization.getString("pe.then");
     ltQuestion.choices = this.logicTypeChoices;
     if (!!action) {
       panel["action"] = action;
       ltQuestion.value = action.logicTypeName;
     }
+    const removeActionLinkQuestion: QuestionLinkValueModel = <QuestionLinkValueModel>(panel.getQuestionByName("removeAction"));
+    const dynamicPanel: QuestionPanelDynamicModel = <QuestionPanelDynamicModel>(removeActionLinkQuestion.parentQuestion);
+    removeActionLinkQuestion.linkClickCallback = () => {
+      if (!!dynamicPanel) {
+        dynamicPanel.removePanelUI(panel);
+      }
+    }
+    removeActionLinkQuestion.linkValueText = "";
+    removeActionLinkQuestion.linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
+
     return panel;
   }
   private getLogicTypeChoices(): Array<ItemValue> {
