@@ -31,6 +31,7 @@ export class QuestionLinkValueModel extends Question {
   @property({ defaultValue: false }) isSelected: boolean;
   @property() linkValueText: string;
   @property({ defaultValue: false }) showClear: boolean;
+  @property({ defaultValue: true }) allowClear: boolean;
   @property({ defaultValue: true }) showValueInLink: boolean;
   constructor(name: string, json: any = null) {
     super(name);
@@ -41,7 +42,9 @@ export class QuestionLinkValueModel extends Question {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "value") {
       this.updateLinkValueText();
-      this.showClear = !!newValue;
+      if (this.allowClear) {
+        this.showClear = !!newValue;
+      }
     }
   }
 
@@ -134,6 +137,14 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     options: ISurveyCreatorOptions
   ): void {
     obj[prop.name] = undefined;
+  }
+  onUpdateQuestionCssClasses(obj: Base, options: any) {
+    const question = options.question;
+    if(!question || !question.parent) return;
+    const index = question.parent.elements.indexOf(question);
+    if(index < 1) return;
+    if(question.parent.elements[index - 1].getType() !== question.getType()) return;
+    options.cssClasses.mainRoot += " spg-row-narrow__question";
   }
   protected isValueEmpty(val: any): boolean {
     return Helpers.isValueEmpty(val);

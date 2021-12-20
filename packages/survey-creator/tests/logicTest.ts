@@ -1431,15 +1431,3 @@ QUnit.test("Hide/show logic types in actions", function (assert) {
     "action3 is removed, lt2Complete"
   );
 });
-QUnit.test("Logic addNewText", function (assert) {
-  var logic = new SurveyLogic(new Survey.SurveyModel());
-  assert.equal(logic.addNewText, "Add New", "Get default value");
-  (<any>defaultStrings).ed.lg["addNewItem"] = "Add New Rule";
-  assert.equal(
-    logic.addNewText,
-    "Add New Rule",
-    "Get value from logic strings"
-  );
-  (<any>defaultStrings).ed.lg["addNewItem"] = "";
-  assert.equal(logic.addNewText, "Add New", "Get default value again");
-});

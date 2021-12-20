@@ -163,6 +163,7 @@ export interface IPropertyGridEditor {
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
   onMatrixAllowRemoveRow?: (obj: Base, row: any) => boolean;
   onGetQuestionTitleActions?: (obj: Base, options: any) => void;
+  onUpdateQuestionCssClasses?: (obj: Base, options: any) => void;
 }
 
 export var PropertyGridEditorCollection = {
@@ -263,6 +264,14 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetMatrixRowAction) {
       res.onGetMatrixRowAction(obj, options, setObjFunc);
+    }
+  },
+  onUpdateQuestionCssClasses(obj: Base,
+    prop: JsonObjectProperty,
+    options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onUpdateQuestionCssClasses) {
+      res.onUpdateQuestionCssClasses(obj, options);
     }
   },
   onGetQuestionTitleActions(obj: Base, prop: JsonObjectProperty, options: any) {
@@ -562,10 +571,21 @@ export class PropertyJSONGenerator {
         false,
         context
       );
+      if(propDef.onSameLine) {
+        propJSON.startWithNewLine = false;
+        this.updateQuestionJSONOnSameLine(propJSON);
+        if(panel.elements.length > 0) {
+          this.updateQuestionJSONOnSameLine(panel.elements[panel.elements.length - 1]);
+        }
+      }
       if (!propJSON) continue;
       panel.elements.push(propJSON);
     }
     return panel;
+  }
+  private updateQuestionJSONOnSameLine(json: any) {
+    json.titleLocation = "left";
+    json.minWidth = "50px";
   }
   private createPanelJSON(
     category: string,
@@ -743,6 +763,8 @@ export class PropertyGridModel {
     this.survey.onGetQuestionTitleActions.add((sender, options) => {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
       this.onGetQuestionTitleActions(options);
+      const q = options.question;
+      this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.titleActions);
     });
     this.survey.onGetPanelTitleActions.add((sender, options) => {
       options.titleActions.splice(0, options.titleActions.length);
@@ -767,6 +789,9 @@ export class PropertyGridModel {
     });
     this.survey.onGetMatrixRowActions.add((sender, options) => {
       this.onGetMatrixRowAction(options);
+    });
+    this.survey.onUpdateQuestionCssClasses.add((sender, options) => {
+      this.onUpdateQuestionCssClasses(options);
     });
     this.survey.onAfterRenderQuestion.add((sender, options) => {
       this.onAfterRenderQuestion(options);
@@ -828,7 +853,7 @@ export class PropertyGridModel {
   }
   protected getSurveyJSON(): any {
     var res = {};
-    setSurveyJSONForPropertyGrid(res);
+    setSurveyJSONForPropertyGrid(res, true, false);
     return res;
   }
   private onValidateQuestion(options: any) {
@@ -952,6 +977,13 @@ export class PropertyGridModel {
       (obj: Base): void => {
         this.setObjFromAction(obj, options.question.name);
       }
+    );
+  }
+  private onUpdateQuestionCssClasses(options: any) {
+    PropertyGridEditorCollection.onUpdateQuestionCssClasses(
+      this.obj,
+      options.question.property,
+      options
     );
   }
   private onGetQuestionTitleActions(options: any) {

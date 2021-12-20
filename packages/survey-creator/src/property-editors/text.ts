@@ -8,7 +8,7 @@ export class PropertyEditorTextViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
-    public isDiplayNameVisible: boolean,
+    public isDisplayNameVisible: boolean,
     public koMaxLength: any,
     public displayName: string,
     public onBlur: any,
@@ -28,7 +28,7 @@ ko.components.register("svd-property-editor-text", {
       return new PropertyEditorTextViewModel(
         model.koValue,
         model.readOnly,
-        model.isDiplayNameVisible,
+        model.isDisplayNameVisible,
         model.koMaxLength,
         model.displayName,
         model.onBlur,

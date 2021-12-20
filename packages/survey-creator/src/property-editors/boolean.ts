@@ -8,7 +8,7 @@ export class PropertyEditorBooleanViewModel {
   constructor(
     public koValue: any,
     public readOnly: boolean,
-    public isDiplayNameVisible: boolean,
+    public isDisplayNameVisible: boolean,
     public displayName: string,
     public afterRender: any
   ) {
@@ -23,7 +23,7 @@ ko.components.register("svd-property-editor-boolean", {
       return new PropertyEditorBooleanViewModel(
         model.koValue,
         model.readOnly,
-        model.isDiplayNameVisible,
+        model.isDisplayNameVisible,
         model.displayName,
         () => {
           typeof params.afterRender === "function" &&

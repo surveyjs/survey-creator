@@ -63,6 +63,7 @@ export var propertyGridCss = {
   pageTitle: "spg-title spg-page__title",
   pageDescription: "spg-description spg-page__description",
   row: "spg-row spg-clearfix",
+  rowMultiple: "spg-row--multiple",
   question: {
     mainRoot: "spg-question spg-row__question",
     flowRoot: "spg-question spg-row__question spg-row__question--flow",
@@ -73,7 +74,7 @@ export var propertyGridCss = {
     headerBottom: "spg-question__header--location--bottom",
     content: "spg-question__content",
     contentLeft: "spg-question__content--left",
-    titleLeftRoot: "",
+    titleLeftRoot: "spg-question--location--left",
     titleOnAnswer: "spg-question__title--answer",
     titleOnError: "spg-question__title--error",
     title: "spg-title spg-question__title",

@@ -255,3 +255,25 @@ test("Simulator view switch", (): any => {
   model.simulator.device = "iPhone5";
   expect(model.simulator.simulatorMainCssClass).toEqual("svd-simulator-main--frame");
 });
+test("Hide Test Again action on leaving Preview", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  let testAgain = creator.toolbar.actions.filter((action) => action.id === "testSurveyAgain")[0];
+  expect(testAgain).toBeTruthy();
+  expect(testAgain.visible).toBeFalsy();
+  model.survey.doComplete();
+  expect(testAgain.visible).toBeTruthy();
+  creator.makeNewViewActive("designer");
+  expect(testAgain.visible).toBeFalsy();
+});

@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-export { url } from "../testCafe/helper";
+export { url, setJSON } from "../testCafe/helper";
 
 export const getSurveyJSFramework = ClientFunction(() => {
   return window["surveyJSFramework"];

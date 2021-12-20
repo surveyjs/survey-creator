@@ -37,7 +37,8 @@ import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
 import { editorLocalization } from "../src/editorLocalization";
 import { EmptySurveyCreatorOptions, settings } from "../src/settings";
-import { FastEntryEditor } from "../src/property-grid/fast-entry";
+import { PropertyGridEditorCollection } from "../src/property-grid/index";
+import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -1640,6 +1641,36 @@ test("Modify property editor settings on event", (): any => {
   expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeHolderQuestion.dataList).toHaveLength(2);
 });
+test("Modify property editor titleActions on event", (): any => {
+  PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
+  const creator = new CreatorTester();
+  creator.onPropertyEditorUpdateTitleActions.add((sender, options) => {
+    const obj = options.obj;
+    if (
+      obj.getType() === "checkbox" &&
+      options.property.name === "choices" &&
+      obj.name === "q2"
+    ) {
+      options.titleActions.push({ id: "test", title: "test", action: () => { obj.choices = [1, 2]; }
+      });
+    }
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1" }, { type: "checkbox", name: "q2" }]
+  };
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  let choicesQuestion = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
+  expect(choicesQuestion).toBeTruthy();
+  expect(choicesQuestion.getType()).toEqual("matrixdynamic");
+  expect(choicesQuestion.getTitleActions()).toHaveLength(3);
+  const question = creator.survey.getAllQuestions()[1];
+  creator.selectElement(question);
+  choicesQuestion = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
+  expect(choicesQuestion.getTitleActions()).toHaveLength(4);
+  expect(question.choices).toHaveLength(0);
+  choicesQuestion.titleActions[3].action();
+  expect(question.choices).toHaveLength(2);
+});
 test("Set readOnly option", (): any => {
   try {
     const creator = new CreatorTester({ readOnly: true });
@@ -2131,4 +2162,19 @@ test("Creator state, change the same property, isAutoSave=true", () => {
   expect(counter).toEqual(2);
   expect(saveNo).toEqual(2);
   expect(creator.state).toEqual("saved");
+});
+
+test("hide top panel", () => {
+  const oldValueShowTabs = settings.layout.showTabs;
+  const oldValueShowToolbar = settings.layout.showToolbar;
+
+  settings.layout.showTabs = false;
+  settings.layout.showToolbar = false;
+
+  const creator = new CreatorTester();
+  expect(creator.showTabs).toEqual(false);
+  expect(creator.showToolbar).toEqual(false);
+
+  settings.layout.showTabs = oldValueShowTabs;
+  settings.layout.showToolbar = oldValueShowToolbar;
 });
