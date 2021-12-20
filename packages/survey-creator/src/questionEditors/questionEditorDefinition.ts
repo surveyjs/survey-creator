@@ -88,6 +88,7 @@ export class SurveyQuestionEditorDefinition {
         "detailPanelMode",
         "detailPanelShowOnAdding",
         { name: "showHeader", tab: "layout" },
+        { name: "showColumnHeader", tab: "layout" },
         { name: "columnsVisibleIf", tab: "logic" },
         { name: "columnLayout", tab: "layout" },
         { name: "horizontalScroll", tab: "layout" },
@@ -133,6 +134,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "isAllRowRequired", tab: "validation" },
         { name: "showHeader", tab: "layout" },
+        { name: "showColumnHeader", tab: "layout" },
         { name: "rowsOrder", tab: "rows" },
         { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "columnsVisibleIf", tab: "logic" },

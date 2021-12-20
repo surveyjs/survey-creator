@@ -3262,7 +3262,7 @@ QUnit.test("We should not have 'Others' category in our objects",
     for(let i = 0; i < allQuestionTypes.length; i ++) {
       if(allQuestionTypes[i].name === "signaturepad") continue; //TODO
       let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
-      if(!!question && !question.isCompositeQuestion) {
+      if(!!question) {
         objToCheck.push(question);
       }
     }
