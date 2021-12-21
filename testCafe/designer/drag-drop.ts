@@ -221,43 +221,38 @@ test("Drag Drop to Panel", async (t) => {
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
 
   await t
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -250,
-      speed: 0.5
+      destinationOffsetY: 1
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 250,
-      speed: 0.5
+      destinationOffsetY: -1,
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      speed: 0.5
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -120,
-      speed: 0.5
+      destinationOffsetY: 1,
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 120,
-      speed: 0.5
+      destinationOffsetY: -1,
     });
 
   const expectedJson = {
@@ -872,43 +867,38 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
 
   await t
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, DynamicPanel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -250,
-      speed: 0.5,
+      destinationOffsetY: 1,
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, DynamicPanel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 320,
-      speed: 0.5,
+      destinationOffsetY: -1,
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, DynamicPanel, {
       offsetX: 5,
       offsetY: 5,
-      speed: 0.5,
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -120,
-      speed: 0.5,
+      destinationOffsetY: 1,
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 120,
-      speed: 0.5,
+      destinationOffsetY: -1,
     });
 
   let expectedJson = {
