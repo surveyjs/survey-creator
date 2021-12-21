@@ -1,7 +1,7 @@
-import { Selector, ClientFunction } from "testcafe";
+import { Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, getSurveyJSFramework } from "../../helper";
+import { url, screenshotComparerOptions, setJSON } from "../../helper";
 
 const title = "ValueLink Actions in Data section Screenshot";
 
@@ -28,7 +28,7 @@ test("Check states", async (t) => {
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
 
   // await t
   //   .click(Selector(".svd-grid-expand"));
@@ -40,7 +40,7 @@ test("Check states", async (t) => {
   await t
     .click(Selector("h4[aria-label=Data]"));
 
-  const buttonElement=Selector(".svc-action-button.spg-link-value-button.spg-question-link__set-button");
+  const buttonElement = Selector(".svc-action-button.spg-link-value-button.spg-question-link__set-button");
 
   await t.expect(buttonElement.visible).ok();
   await t.wait(1000);
