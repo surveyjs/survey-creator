@@ -145,3 +145,21 @@ test("Matrix dropdown with vertical layout and and selecting rows", async (t) =>
     .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
     .expect(Selector("h5.spg-title").withText("Row count").visible).ok();
 });
+
+test("Matrix dropdown with detail panel", async (t) => {
+  await t.expect(questions.exists).notOk()
+    .hover(getToolboxItemByText("Matrix (multiple choice)"))
+    .click(getToolboxItemByText("Matrix (multiple choice)"));
+
+  await ClientFunction(() => {
+    window["creator"].showPropertyGrid = true;
+    window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
+  })();
+  const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
+  await t
+    .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
+    .expect((Selector(".sd-question[data-name=question1] .sv_matrix_detail_row #convertTo").withText("Single Input").visible)).ok();
+
+});
