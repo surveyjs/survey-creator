@@ -169,6 +169,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           panelRemoveButtonLocation: "right",
           panelCount: 0,
           minPanelCount: 1,
+          maxPanelCount: 1,
           templateElements: [
             {
               name: "logicTypeName",
@@ -288,6 +289,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private onValueChanged(options: any) {
     this.isModifiedValue = true;
+    options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].logicTypeName) ? 1 : 100;
     this.panel.panels.forEach(panel => {
       panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
     });

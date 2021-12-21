@@ -1073,6 +1073,30 @@ test("getObjectDisplayName", () => {
   expect(questionName.choices[0].text).toEqual("Question 2 [q2]");
 });
 
+test("options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", title: "Question 2", type: "text" }
+    ]
+  });
+  var question = survey.getQuestionByName("q1");
+  var options = new EmptySurveyCreatorOptions();
+  options.maxLogicItemsInCondition = 2;
+  options.getObjectDisplayName = (
+    obj: any,
+    reason: string,
+    displayName
+  ): string => {
+    return obj.title + " [" + obj.name + "]";
+  };
+  var editor = new ConditionEditor(survey, question, options, "visibleIf");
+  expect(editor.panel.maxPanelCount).toEqual(1);
+
+  editor.panel.addPanel();
+  expect(editor.panel.maxPanelCount).toEqual(2);
+});
+
 test("valueName with ':', Bug #953", () => {
   var survey = new SurveyModel({
     elements: [

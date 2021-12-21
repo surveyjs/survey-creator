@@ -295,6 +295,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           panelRemoveButtonLocation: "right",
           panelAddText: editorLocalization.getString("pe.addCondition"),
           minPanelCount: 1,
+          maxPanelCount: 1,
           startWithNewLine: false,
           templateElements: [
             {
@@ -776,6 +777,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private onValueChanged(options: any) {
     if (options.question.name === "panel" && options.value.length > 0) {
+      const maxLogicItems = this.options.maxLogicItemsInCondition > 0 ? this.options.maxLogicItemsInCondition : 100;
+      options.question.maxPanelCount = options.value.length === 1 && !options.value[0].questionName ? 1 : maxLogicItems;
       this.panel.panels.forEach(panel => {
         panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
       });

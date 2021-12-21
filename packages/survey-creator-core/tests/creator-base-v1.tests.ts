@@ -768,6 +768,22 @@ test(
   }
 );
 
+test("creator options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value", () => {
+  const creator = new CreatorTester({ maxLogicItemsInCondition: 2 });
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "text" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  const editor = new ConditionEditor(creator.survey, question, creator);
+  expect(editor.panel.maxPanelCount).toEqual(1);
+
+  editor.panel.addPanel();
+  expect(editor.panel.maxPanelCount).toEqual(2);
+});
+
 test("creator.onAddQuestion and undo-redo manager, Bug#972", () => {
   const creator = new CreatorTester();
   creator.onQuestionAdded.add(function (sender, options) {
