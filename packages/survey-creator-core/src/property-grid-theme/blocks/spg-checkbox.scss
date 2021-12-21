@@ -2,6 +2,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  margin-top: calcSize(1);
 }
 .spg-checkbox--disabled {
   cursor: default;

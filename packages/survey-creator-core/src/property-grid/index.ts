@@ -1124,6 +1124,18 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     options: ISurveyCreatorOptions, reason: "apply" | "cancel") {
 
   }
+  protected isSupportGrouping(): boolean {
+    return false;
+  }
+  onUpdateQuestionCssClasses(obj: Base, options: any) {
+    if(!this.isSupportGrouping()) return;
+    const question = options.question;
+    if(!question || !question.parent) return;
+    const index = question.parent.elements.indexOf(question);
+    if(index < 1) return;
+    if(question.parent.elements[index - 1].getType() !== question.getType()) return;
+    options.cssClasses.mainRoot += " spg-row-narrow__question";
+  }
 }
 
 export class PropertyGridEditorBoolean extends PropertyGridEditor {
@@ -1141,6 +1153,9 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
       renderAs: "checkbox",
       titleLocation: "hidden"
     };
+  }
+  protected isSupportGrouping(): boolean {
+    return true;
   }
 }
 export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
