@@ -184,3 +184,31 @@ test("Check string editor not loosing focus and selects underlying items", async
     .pressKey("tab")
     .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("Column 3").visible).ok();
 });
+
+test("Check string editor inplaceEditForValues property", async (t) => {
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("item1");
+
+  await t
+    .click(svItemSelector)
+    .typeText(svItemSelector, "new", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(ClientFunction(() => {
+      var itemvalue = window["creator"].survey.getQuestionByName("string_editor").choices[0];
+      return { value: itemvalue.value, text: itemvalue.text };
+    })()).eql({ value: "item1", text: "newitem1" });
+
+  await ClientFunction(() => {
+    window["creator"].inplaceEditForValues = true;
+  })();
+
+  await t
+    .click(Selector(".sv-string-editor").withText("newitem1"))
+    .typeText(Selector(".sv-string-editor").withText("newitem1"), "Ok", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(ClientFunction(() => {
+      var itemvalue = window["creator"].survey.getQuestionByName("string_editor").choices[0];
+      return { value: itemvalue.value, text: itemvalue.text };
+    })()).eql({ value: "Oknewitem1", text: "newitem1" });
+});
