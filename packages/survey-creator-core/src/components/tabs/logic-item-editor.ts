@@ -26,7 +26,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { SurveyHelper } from "../../survey-helper";
 import { logicCss } from "./logic-theme";
 import { assignDefaultV2Classes } from "../../utils/utils";
-import { QuestionLinkValueModel } from "../../property-grid/values";
+import { QuestionLinkValueModel } from "../../components/link-value";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)
@@ -290,7 +290,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.isModifiedValue = true;
     this.panel.panels.forEach(panel => {
       panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
-    })
+    });
   }
   private onQuestionAdded(options: any) {
     if (options.question.name === "setToName" || options.question.name === "fromName") {
@@ -378,7 +378,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       if (!!dynamicPanel) {
         dynamicPanel.removePanelUI(panel);
       }
-    }
+    };
     removeActionLinkQuestion.linkValueText = "";
     removeActionLinkQuestion.linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
 

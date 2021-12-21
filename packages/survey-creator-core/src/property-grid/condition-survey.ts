@@ -458,7 +458,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       if (!!dynamicPanel) {
         dynamicPanel.removePanelUI(panel);
       }
-    }
+    };
     panel.getQuestionByName("removeAction").linkValueText = "";
     panel.getQuestionByName("removeAction").linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
     this.isSettingPanelValues = false;
@@ -778,7 +778,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (options.question.name === "panel" && options.value.length > 0) {
       this.panel.panels.forEach(panel => {
         panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
-      })
+      });
     }
     this.setTitle();
   }
