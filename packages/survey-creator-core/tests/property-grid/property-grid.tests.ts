@@ -2093,7 +2093,7 @@ test("We should not have 'Others' category in our objects", () => {
     if (allQuestionTypes[i].name == "linkvalue")
       continue;
     let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
-    if (!!question && !question.isCompositeQuestion) {
+    if (!!question) {
       objToCheck.push(question);
     }
   }
@@ -2109,7 +2109,9 @@ test("We should not have 'Others' category in our objects", () => {
       for (var j = 0; j < props.length; j++) {
         questionNames.push(props[j].name);
       }
-      expect("obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(questionNames)).toBeFalsy();
+      if (JSON.stringify(questionNames) !== "[\"width\"]") { // for some reasons in composite questions (paneldynamic) we have the width property here but it doesn't appear in PG UI
+        expect("obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(questionNames)).toBeFalsy();
+      }
     }
   }
 });
@@ -2227,6 +2229,14 @@ test("Check textUpdate mode for question", () => {
   expect(placeholderQuestion.isSurveyInputTextUpdate).toBeTruthy();
   expect(stepQuestion.getType()).toEqual("text");
   expect(stepQuestion.isSurveyInputTextUpdate).toBeFalsy();
+});
+test("Has narrow style between link value questions", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const defaultValueQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("defaultValue");
+  const correctAnswerQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("correctAnswer");
+  expect(defaultValueQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeFalsy();
+  expect(correctAnswerQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeTruthy();
 });
 test("nextToProperty on the same line", () => {
   const maxProperty = Serializer.findProperty("text", "max");

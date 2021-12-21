@@ -138,6 +138,14 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   ): void {
     obj[prop.name] = undefined;
   }
+  onUpdateQuestionCssClasses(obj: Base, options: any) {
+    const question = options.question;
+    if(!question || !question.parent) return;
+    const index = question.parent.elements.indexOf(question);
+    if(index < 1) return;
+    if(question.parent.elements[index - 1].getType() !== question.getType()) return;
+    options.cssClasses.mainRoot += " spg-row-narrow__question";
+  }
   protected isValueEmpty(val: any): boolean {
     return Helpers.isValueEmpty(val);
   }
