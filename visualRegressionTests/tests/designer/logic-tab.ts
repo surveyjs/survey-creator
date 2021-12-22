@@ -44,7 +44,7 @@ const jsonMultipleConditionsMultipleActions = {
   ]
 };
 
-test("rule content", async (t) => {
+test.skip("rule content", async (t) => {
   await t.resizeWindow(1920, 1080);
   const ruleContent = Selector(".sl-table__cell--detail-panel");
   await setJSON(jsonMultipleConditionsMultipleActions);
@@ -52,4 +52,15 @@ test("rule content", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .click(logicDetailButtonElement);
   await checkElementScreenshot("logic-tab-rule-content.png", ruleContent, t);
+});
+
+test("rule rows", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const ruleRows = Selector(".sl-table__cell--detail-panel .sl-row.sl-row--multiple");
+  await setJSON(jsonMultipleConditionsMultipleActions);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(logicDetailButtonElement);
+  await checkElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t);
+  await checkElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t);
 });
