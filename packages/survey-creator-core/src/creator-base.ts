@@ -151,16 +151,20 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    */
   @property({ defaultValue: 200 }) pageHoverDelay: number;
   /**
+   * You need to set this property to true if you want to inplace edit item values instead of texts.
+   */
+   @property({ defaultValue: false }) inplaceEditForValues: boolean;
+   /**
    * Set it to false to hide survey title and coresponding properties
    */
-  get allowEditSurveyTitle() {
-    return this.getPropertyValue("allowEditSurveyTitle", true);
-  }
-  set allowEditSurveyTitle(val: boolean) {
-    ["title", "description", "logo", "showTitle", "logoWidth", "logoHeight", "logoFit"].forEach(propertyName => Serializer.findProperty("survey", propertyName).visible = val);
-    this.setPropertyValue("allowEditSurveyTitle", val);
-    this.designerPropertyGrid && this.designerPropertyGrid.refresh();
-  }
+   get allowEditSurveyTitle() {
+     return this.getPropertyValue("allowEditSurveyTitle", true);
+   }
+   set allowEditSurveyTitle(val: boolean) {
+     ["title", "description", "logo", "showTitle", "logoWidth", "logoHeight", "logoFit"].forEach(propertyName => Serializer.findProperty("survey", propertyName).visible = val);
+     this.setPropertyValue("allowEditSurveyTitle", val);
+     this.designerPropertyGrid && this.designerPropertyGrid.refresh();
+   }
   /**
    * You have right to set this property to true if you have bought the commercial licence only.
    * It will remove the text about non-commerical usage on the top of the widget.

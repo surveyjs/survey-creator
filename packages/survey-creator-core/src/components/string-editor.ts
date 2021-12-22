@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
@@ -61,8 +61,14 @@ export class StringEditorViewModelBase extends Base {
     }
 
     if (this.locString.text != clearedText) {
-      if(!this.errorText)
-        this.locString.text = clearedText;
+      if(!this.errorText) {
+        if(this.locString.owner instanceof ItemValue && this.creator.inplaceEditForValues) {
+          this.locString.owner.value = clearedText;
+        }
+        else {
+          this.locString.text = clearedText;
+        }
+      }
       else{
         this.focusedProgram = true;
         event.target.focus();
