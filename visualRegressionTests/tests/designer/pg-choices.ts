@@ -76,8 +76,7 @@ test("Check items empty", async (t) => {
   await t.resizeWindow(1920, 1080);
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-  await ClientFunction((json) => { window["creator"].JSON = json; })({
+  const checkBoxEmptyItemsSurvey = {
     "logoPosition": "right",
     "pages": [
       {
@@ -91,7 +90,8 @@ test("Check items empty", async (t) => {
         ]
       }
     ]
-  });
+  };
+  await setJSON(checkBoxEmptyItemsSurvey);
   await t
     .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
   await t
