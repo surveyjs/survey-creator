@@ -5,6 +5,7 @@
 }
 .svc-row .sd-row--multiple {
   padding: calcSize(1);
+  gap: calcSize(1);
 }
 .svc-row.svc-row--ghost {
   .svc-question__content {

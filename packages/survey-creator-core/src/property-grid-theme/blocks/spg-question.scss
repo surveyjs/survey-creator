@@ -26,19 +26,6 @@
   color: $primary;
   cursor: pointer;
 }
-.spg-question-link__set-button {
-  font-weight: 600;
-  cursor: pointer;
-}
-.spg-link-value-button {
-  margin-left: calcSize(-2);
-}
-.spg-question-link__clear-button {
-  margin-left: calcSize(4);
-  color: $red;
-  font-weight: 600;
-  cursor: pointer;
-}
 
 .spg-question__description {
   line-height: calcSize(3);
@@ -71,7 +58,7 @@
 .spg-question__content--left {
   padding-left: calcSize(1);
   .spg-input {
-    border: none;    
+    border: none;
   }
 }
 .spg-row--multiple {

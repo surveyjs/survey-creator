@@ -1,6 +1,6 @@
-import { ClientFunction, Selector } from "testcafe";
+import { Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-import { url, screenshotComparerOptions } from "../../helper";
+import { url, screenshotComparerOptions, getTabbedMenuItemByText, getBarItemByTitle, setJSON, checkElementScreenshot as checkElementScreenshot } from "../../helper";
 
 const title = "Translation tab Screenshot";
 
@@ -44,28 +44,16 @@ const json = {
     }
   ]
 };
-const translationTab = Selector(".svc-tabbed-menu-item__text").withText("Translation");
-export function getBarItemByTitle(text) {
-  return Selector(".sv-action-bar-item[title=\"" + text + "\"]");
-}
 
 test("strings view", async (t) => {
   await t.resizeWindow(2560, 1440);
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
   const stringsView = Selector(".svc-creator-tab__content.svc-translation-tab");
-  const checkScreenshot = async (screenshotName: string) => {
-    await t.wait(1000);
-    await takeScreenshot(screenshotName, stringsView, screenshotComparerOptions);
-    await t
-      .expect(compareResults.isValid())
-      .ok(compareResults.errorMessages());
-  };
 
-  await t.click(translationTab);
-  await checkScreenshot("translation-tab.png");
+  await t.click(getTabbedMenuItemByText("Translation"));
+  await checkElementScreenshot("translation-tab.png", stringsView, t);
 
   await t.click(getBarItemByTitle("Show all strings"));
-  await checkScreenshot("translation-tab-show-all-strings.png");
+  await checkElementScreenshot("translation-tab-show-all-strings.png", stringsView, t);
 });
