@@ -16,6 +16,7 @@ test("Check section", async (t) => {
 
   await ClientFunction((json) => { window["creator"].JSON = json; })({
     "showQuestionNumbers": "off",
+    "widthMode": "static",
     "pages": [
       {
         "name": "page1",
@@ -31,12 +32,6 @@ test("Check section", async (t) => {
             title: "Question 2",
             startWithNewLine: false,
           },
-          {
-            "type": "text",
-            "name": "question3",
-            title: "Question 3",
-            startWithNewLine: false,
-          }
         ]
       }
     ]
