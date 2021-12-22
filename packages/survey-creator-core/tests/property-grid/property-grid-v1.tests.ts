@@ -35,21 +35,17 @@ import {
   editorLocalization
 } from "../../src/editorLocalization";
 import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
+import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
+import { ConditionEditor } from "../../src/property-grid/condition-survey";
+import { DefaultValueEditor } from "../../src/property-grid/values-survey";
+import { PropertyGridValueEditor } from "../../src/property-grid/values";
+import { FastEntryEditor } from "../../src/property-grid/fast-entry";
+import { PropertiesHelpTexts } from "../../src/property-grid/properties-helptext";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/fast-entry";
-import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
-import { ConditionEditor } from "../../src/property-grid/condition-survey";
-import { DefaultValueEditor } from "../../src/property-grid/values-survey";
-
-import { CellsEditor } from "../../src/property-grid/cells-survey";
-import {
-  PropertyGridValueEditor,
-  PropertyGridRowValueEditor
-} from "../../src/property-grid/values";
-import { FastEntryEditor } from "../../src/property-grid/fast-entry";
-import { PropertiesHelpTexts } from "../../src/property-grid/properties-helptext";
+export * from "../../src/components/link-value";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
