@@ -71,3 +71,43 @@ test("Check section", async (t) => {
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
 });
+
+test("Check items empty", async (t) => {
+  await t.resizeWindow(1920, 1080);
+
+  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+  const checkBoxEmptyItemsSurvey = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "checkbox",
+            "name": "question1",
+            "choices": []
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(checkBoxEmptyItemsSurvey);
+  await t
+    .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
+  await t
+    .click(Selector("h4[aria-label=General]"));
+  await t
+    .click(Selector("h4[aria-label=Choices]"));
+
+  const sectionContentElement = Selector("h4[aria-label=Choices]").parent().nextSibling();
+  await takeScreenshot("choices-empty-items.png", sectionContentElement, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+  await t
+    .hover(sectionContentElement.find(".spg-matrixdynamic__add-btn"));
+  await takeScreenshot("choices-empty-add-btn-hovered.png", sectionContentElement, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+});

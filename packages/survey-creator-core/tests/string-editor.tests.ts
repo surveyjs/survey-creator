@@ -256,3 +256,40 @@ test("Test string editor content editable for matrix and panels", (): any => {
   itemValue = <ItemValue> (creator.survey.getQuestionByName("panDynQ").template.getQuestionByName("panDynQ1").choices[0]);
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
 });
+
+test("Test string editor inplaceEditForValues", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "q0",
+            "choices": [
+              "item1",
+              "item2"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  var itemValue;
+
+  itemValue = <ItemValue> (creator.survey.getQuestionByName("q0").choices[0]);
+  var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
+  expect(itemValue.text).toEqual("item1");
+  seChoice.onInput({ target: { innerText: "newItem" } });
+  expect(itemValue.locText.text).toEqual("newItem");
+  expect(itemValue.value).toEqual("item1");
+  expect(itemValue.text).toEqual("newItem");
+
+  creator.inplaceEditForValues = true;
+  seChoice.onInput({ target: { innerText: "newItemValue" } });
+  expect(itemValue.locText.text).toEqual("newItem");
+  expect(itemValue.value).toEqual("newItemValue");
+  expect(itemValue.text).toEqual("newItem");
+});
