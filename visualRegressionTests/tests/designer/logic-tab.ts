@@ -43,7 +43,7 @@ const jsonOneRule = {
 };
 
 test("one rule view", async (t) => {
-  await t.resizeWindow(1920, 1080);
+  await t.resizeWindow(1920, 900);
   await setJSON(jsonOneRule);
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
@@ -102,4 +102,3 @@ test("rule rows", async (t) => {
   await checkElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t);
   await checkElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t);
 });
-

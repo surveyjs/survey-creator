@@ -34,6 +34,9 @@
     width: 100%;
   }
 }
+.svc-logic-paneldynamic div.svc-logic-operator {
+  height: calcSize(3);
+}
 .svc-logic-paneldynamic .svc-logic-operator {
   appearance: none;
   padding: calcSize(1) calcSize(2);
@@ -92,7 +95,7 @@
   }
 }
 
-.svc-icon-remove {
+.svc-logic-condition-remove.svc-icon-remove {
   display: block;
   width: calcSize(5);
   height: calcSize(5);
