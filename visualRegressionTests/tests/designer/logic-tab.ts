@@ -41,6 +41,7 @@ const jsonOneRule = {
     }
   ]
 };
+const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
 
 test("one rule view", async (t) => {
   await t.resizeWindow(1920, 900);
@@ -52,7 +53,6 @@ test("one rule view", async (t) => {
   await checkElementScreenshot("logic-tab-one-rule-content.png", tabContent, t);
 });
 
-const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
 const jsonMultipleConditionsMultipleActions = {
   "logoPosition": "right",
   "pages": [
@@ -81,7 +81,6 @@ const jsonMultipleConditionsMultipleActions = {
     }
   ]
 };
-
 test("rule content", async (t) => {
   await t.resizeWindow(1920, 900);
   const ruleContent = Selector(".sl-table__cell--detail-panel");
