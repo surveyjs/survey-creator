@@ -35,6 +35,7 @@
   }
 }
 .svc-logic-paneldynamic .svc-logic-operator {
+  -webkit-appearance: none;
   appearance: none;
   padding: calcSize(1) calcSize(2);
   border-radius: calcSize(12.5);
