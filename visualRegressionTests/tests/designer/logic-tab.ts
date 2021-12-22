@@ -45,6 +45,7 @@ const jsonMultipleConditionsMultipleActions = {
 };
 
 test("rule content", async (t) => {
+  await t.resizeWindow(2560, 1440);
   const ruleContent = Selector(".sl-table__cell--detail-panel");
   await setJSON(jsonMultipleConditionsMultipleActions);
   await t
