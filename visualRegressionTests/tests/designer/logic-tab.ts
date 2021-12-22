@@ -14,6 +14,44 @@ test("empty view", async (t) => {
   await checkElementScreenshot("logic-tab-empty.png", tabContent, t);
 });
 
+const jsonOneRule = {
+  "logoPosition": "right",
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "q1"
+        },
+        {
+          "type": "text",
+          "name": "q2",
+          "visibleIf": "{q1} = 1"
+        },
+        {
+          "type": "text",
+          "name": "q3"
+        },
+        {
+          "type": "text",
+          "name": "q4"
+        }
+      ]
+    }
+  ]
+};
+
+test("one rule view", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  await setJSON(jsonOneRule);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(logicDetailButtonElement);
+  const tabContent = Selector(".svc-creator-tab__content");
+  await checkElementScreenshot("logic-tab-one-rule-content.png", tabContent, t);
+});
+
 const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
 const jsonMultipleConditionsMultipleActions = {
   "logoPosition": "right",
@@ -64,3 +102,4 @@ test("rule rows", async (t) => {
   await checkElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t);
   await checkElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t);
 });
+
