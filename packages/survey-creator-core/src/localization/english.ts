@@ -289,6 +289,8 @@ export var enStrings = {
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
     listIsEmpty: "Add a new item",
+    choicesListIsEmpty: "No choices have been added yet",
+    "addNew@choices": "Add a choice",
     expressionIsEmpty: "Expression is empty",
     value: "Value",
     text: "Text",

@@ -58,28 +58,29 @@
 }
 
 survey-creator, .svc-creator {
-  .spg-action-button {
-    .sv-action-bar-item {
-      border-radius: 50%;
-      padding: calcSize(1);
-      cursor: pointer;
-      &:hover, &:focus {
-        outline: none;
-        background-color: $primary-light;
-        use {
-          fill: $primary;
-        }
+  button.spg-action-button,
+  .spg-action-button .sv-action-bar-item{
+    border-radius: calcSize(12.5);
+    padding: calcSize(1);
+    cursor: pointer;
+    &:hover, &:focus {
+      outline: none;
+      background-color: $primary-light;
+      use {
+        fill: $primary;
       }
     }
   }
-  .spg-action-button--danger {
-    .sv-action-bar-item {
-      &:hover, &:focus {
-        background-color: $red-light;
-        use {
-          fill: $red;
-        }
+  button.spg-action-button--danger,
+  .spg-action-button--danger .sv-action-bar-item{
+    &:hover, &:focus {
+      background-color: $red-light;
+      use {
+        fill: $red;
       }
     }
+  }
+  button.spg-action-button--large {
+    padding: calcSize(0.5) calcSize(2); 
   }
 }

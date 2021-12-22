@@ -352,7 +352,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       keyDuplicationError: editorLocalization.getString(
         "pe.propertyIsNoUnique"
       ),
-      emptyRowsText: editorLocalization.getString("pe.listIsEmpty")
+      emptyRowsText: this.getEmptyRowsText(prop)
     };
     if (this.getShowDetailPanelOnAdding()) {
       res.detailPanelShowOnAdding = true;
@@ -361,7 +361,14 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (maxRowCount > 0) {
       res.maxRowCount = maxRowCount;
     }
+    res.hideColumnsIfEmpty = this.getHideColumnsEmpty(prop);
     return res;
+  }
+  protected getHideColumnsEmpty(prop: JsonObjectProperty) {
+    return false;
+  }
+  protected getEmptyRowsText(props) {
+    return editorLocalization.getString("pe.listIsEmpty")
   }
   protected getMaximumRowCount(
     obj: Base,
@@ -499,6 +506,12 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   }
   protected getKeyValue(): string {
     return "value";
+  }
+  protected getHideColumnsEmpty(prop: JsonObjectProperty): boolean {
+    return (prop.name === "choices") ? true : false;
+  }
+  protected getEmptyRowsText(prop) {
+    return (prop.name === "choices") ? editorLocalization.getString("pe.choicesListIsEmpty") : super.getEmptyRowsText(prop);
   }
   protected getMaximumRowCount(
     obj: Base,
