@@ -3,7 +3,7 @@
   <!-- ko if: question.isInteractiveDesignElement -->
   <div class="svc-question__content" data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
     <div class="svc-question__drag-area"
-      data-bind="visible:allowDragging, event: {pointerdown: (model, event)=>{startDragSurveyElement(event)}}">
+      data-bind="visible:allowDragging, event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
       <div class="svc-question__drag-element"></div>
     </div>
     <div class="svc-widget__content">
