@@ -6,7 +6,7 @@ const title = "Logic tab Screenshot";
 fixture`${title}`.page`${url}`;
 
 test("empty view", async (t) => {
-  await t.resizeWindow(2560, 1440);
+  await t.resizeWindow(1920, 1080);
 
   const tabContent = Selector(".svc-creator-tab__content");
 
@@ -45,7 +45,7 @@ const jsonMultipleConditionsMultipleActions = {
 };
 
 test("rule content", async (t) => {
-  await t.resizeWindow(2560, 1440);
+  await t.resizeWindow(1920, 1080);
   const ruleContent = Selector(".sl-table__cell--detail-panel");
   await setJSON(jsonMultipleConditionsMultipleActions);
   await t
