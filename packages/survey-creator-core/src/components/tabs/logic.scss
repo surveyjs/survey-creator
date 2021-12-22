@@ -18,7 +18,6 @@
 .sl-table__row:hover #remove-row,
 .sl-table__row #remove-row:focus-within {
   .sv-action-bar-item {
-    padding: calcSize(0.25);
     border: none;
   }
   .sv-action-bar-item__icon use {
