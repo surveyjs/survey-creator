@@ -29,8 +29,8 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
     super.componentDidMount();
     this.imageModel.questionRoot = this.rootRef.current;
   }
-  protected renderContentOnTop(): JSX.Element {
-    return (
+  protected renderHeader(): JSX.Element {
+    return (<React.Fragment>
       <input
         type="file"
         aria-hidden="true"
@@ -45,9 +45,10 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
           overflow: "hidden"
         }}
       />
-    );
-  }
 
+      {super.renderHeader()}
+    </React.Fragment>);
+  }
   renderElementPlaceholder(): JSX.Element {
     return (
       <div className="svc-image-question-controls">
