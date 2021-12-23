@@ -1,26 +1,66 @@
 import { Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-import { url, screenshotComparerOptions } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot } from "../../helper";
 
 const title = "Logic tab Screenshot";
 
 fixture`${title}`.page`${url}`;
 
-const logicTab = Selector(".svc-tabbed-menu-item__text").withText("Logic");
-
 test("empty view", async (t) => {
-  await t.resizeWindow(2560, 1440);
+  await t.resizeWindow(1920, 900);
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
   const tabContent = Selector(".svc-creator-tab__content");
-  const checkScreenshot = async (screenshotName: string) => {
-    await t.wait(1000);
-    await takeScreenshot(screenshotName, tabContent, screenshotComparerOptions);
-    await t
-      .expect(compareResults.isValid())
-      .ok(compareResults.errorMessages());
-  };
 
-  await t.click(logicTab);
-  await checkScreenshot("logic-tab-empty.png");
+  await t.click(getTabbedMenuItemByText(creatorTabLogicName));
+  await checkElementScreenshot("logic-tab-empty.png", tabContent, t);
+});
+
+const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
+const jsonMultipleConditionsMultipleActions = {
+  "logoPosition": "right",
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "q1"
+        },
+        {
+          "type": "text",
+          "name": "q2",
+          "visibleIf": "{q1} = 1 and {q2} = 2"
+        },
+        {
+          "type": "text",
+          "name": "q3"
+        },
+        {
+          "type": "text",
+          "name": "q4",
+          "enableIf": "{q1} = 1 and {q2} = 2"
+        }
+      ]
+    }
+  ]
+};
+
+test.skip("rule content", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const ruleContent = Selector(".sl-table__cell--detail-panel");
+  await setJSON(jsonMultipleConditionsMultipleActions);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(logicDetailButtonElement);
+  await checkElementScreenshot("logic-tab-rule-content.png", ruleContent, t);
+});
+
+test("rule rows", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const ruleRows = Selector(".sl-table__cell--detail-panel .sl-row.sl-row--multiple");
+  await setJSON(jsonMultipleConditionsMultipleActions);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(logicDetailButtonElement);
+  await checkElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t);
+  await checkElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t);
 });

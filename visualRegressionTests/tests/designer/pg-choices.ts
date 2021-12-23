@@ -1,7 +1,7 @@
-import { Selector, ClientFunction } from "testcafe";
+import { Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, getSurveyJSFramework } from "../../helper";
+import { url, screenshotComparerOptions, setJSON } from "../../helper";
 
 const title = "Choices section Screenshot";
 
@@ -33,7 +33,7 @@ test("Check section", async (t) => {
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
   // await t
   //   .click(Selector(".svd-grid-expand"));
   await t
@@ -76,8 +76,7 @@ test("Check items empty", async (t) => {
   await t.resizeWindow(1920, 1080);
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-  await ClientFunction((json) => { window["creator"].JSON = json; })({
+  const checkBoxEmptyItemsSurvey = {
     "logoPosition": "right",
     "pages": [
       {
@@ -91,7 +90,8 @@ test("Check items empty", async (t) => {
         ]
       }
     ]
-  });
+  };
+  await setJSON(checkBoxEmptyItemsSurvey);
   await t
     .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
   await t

@@ -23,7 +23,7 @@ export class QuestionWrapperHeader extends React.Component<QuestionWrapperHeader
     return (
       <div className={"svc-question__drag-area"}
         onPointerDown={(event: any) =>
-          this.props.model.startDragSurveyElement(event)
+          this.props.model.onPointerDown(event)
         }
       >
         <div

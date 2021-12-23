@@ -17,7 +17,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
     if (!this.questionBase.isReadOnly && this.questionBase.showClear) {
       return (
         <ActionButton
-          classes="spg-question-link__clear-button"
+          classes={this.question.linkClearButtonCssClasses}
           click={() => this.question.doClearClick()}
           selected={this.question.isSelected}
           text={editorLocalization.getString("pe.clear")}
@@ -32,7 +32,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
     return (
       <>
         <ActionButton
-          classes="spg-link-value-button spg-question-link__set-button"
+          classes={this.question.linkSetButtonCssClasses}
           click={() => this.question.doLinkClick()}
           selected={this.question.isSelected}
           disabled={this.question.isReadOnly}
