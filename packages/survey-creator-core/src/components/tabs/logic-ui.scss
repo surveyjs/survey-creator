@@ -113,7 +113,9 @@
     display: none;
   }
 }
-
+.svc-action-button.svc-logic-condition-remove.svc-icon-remove:focus {
+  outline: none;
+}
 .svc-logic-condition-remove.svc-icon-remove {
   display: block;
   width: calcSize(5);
