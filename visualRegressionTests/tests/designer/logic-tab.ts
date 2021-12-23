@@ -65,15 +65,15 @@ test("Check actions hover states", async (t) => {
   await t.hover(removeRuleSelector);
   await checkElementScreenshot("logic-rule-remove-hover.png", removeRuleSelector, t);
   await t.click(logicDetailButtonElement);
-  const questionOperator = Selector(".svc-logic-operator--question");
-  await t.hover(questionOperator)
-  await checkElementScreenshot("logic-question-action-hover.png", questionOperator, t);
-  const operator = Selector(".svc-logic-operator--operator");
-  await t.hover(operator)
-  await checkElementScreenshot("logic-operator-hover.png", operator, t);
-  const action = Selector(".svc-logic-operator--action");
-  await t.hover(action)
-  await checkElementScreenshot("logic-action-hover.png", action, t);
+  // const questionOperator = Selector(".svc-logic-operator--question");
+  // await t.hover(questionOperator)
+  // await checkElementScreenshot("logic-question-action-hover.png", questionOperator, t);
+  // const operator = Selector(".svc-logic-operator--operator");
+  // await t.hover(operator)
+  // await checkElementScreenshot("logic-operator-hover.png", operator, t);
+  // const action = Selector(".svc-logic-operator--action");
+  // await t.hover(action)
+  // await checkElementScreenshot("logic-action-hover.png", action, t);
   await t.hover(logicDetailButtonElement);
   await checkElementScreenshot("logic-collapse-hover.png", logicDetailButtonElement, t);
 });
