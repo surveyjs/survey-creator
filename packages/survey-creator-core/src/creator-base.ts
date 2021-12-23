@@ -966,8 +966,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     !!expandAction && this.toolbar.actions.push(expandAction);
   }
   public updateToolboxIsCompact(newVal?: boolean) {
-    if (this.toolboxLocation == "right" && this.showPropertyGrid) {
-      this.toolbox.isCompact = true;
+    if (this.toolboxLocation == "right") {
+      this.toolbox.isCompact = this.showPropertyGrid;
       return;
     } else if (newVal != undefined && newVal != null) {
       this.toolbox.isCompact = newVal;
@@ -1006,7 +1006,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     if (this.showPropertyGrid === val) return;
     this.showPropertyGridValue = val;
-    this.updateToolboxIsCompact(val);
+    this.updateToolboxIsCompact();
     this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
   }
   public rightContainerActiveItem(name: string) {
