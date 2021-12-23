@@ -222,13 +222,15 @@ export var propertyGridCss = {
     detailIconExpanded: "spg-detail-panel__icon--expanded",
     detailPanelCell: "spg-table__cell--detail-panel",
     actionsCell: "spg-table__cell spg-table__cell--actions",
-    buttonAdd: "spg-matrixdynamic__add-btn",
+    buttonAdd: "spg-matrixdynamic__add-btn spg-action-button spg-action-button--large",
     buttonRemove: "spg-matrixdynamic__remove-btn",
     iconAdd: "",
     iconRemove: "",
     iconDrag: "spg-matrixdynamic__drag-element",
     dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
+    emptyRowsSection: "spg-matrixdynamic__placeholder",
+    emptyRowsText: "spg-matrixdynamic__placeholder-text"
   },
   rating: {
     root: "spg-rating",

@@ -41,18 +41,18 @@ import {
   ICollectionItemAllowOperations,
   settings
 } from "../../src/settings";
-
-export * from "../../src/property-grid/matrices";
-export * from "../../src/property-grid/condition";
-export * from "../../src/property-grid/restfull";
+import { ConditionEditor } from "../../src/property-grid/condition-survey";
+import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
+import { QuestionLinkValueModel } from "../../src/components/link-value";
 import {
-  QuestionLinkValueModel,
   PropertyGridValueEditor,
   PropertyGridRowValueEditor,
   PropertyGridValueEditorBase
 } from "../../src/property-grid/values";
-import { ConditionEditor } from "../../src/property-grid/condition-survey";
-import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
+
+export * from "../../src/property-grid/matrices";
+export * from "../../src/property-grid/condition";
+export * from "../../src/property-grid/restfull";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {

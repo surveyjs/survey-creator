@@ -8,7 +8,7 @@ import {
   Question,
   QuestionButtonGroupModel
 } from "survey-core";
-import { QuestionLinkValueModel } from "../src/property-grid/values";
+import { QuestionLinkValueModel } from "../src/components/link-value";
 import { QuestionToolbox } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
 

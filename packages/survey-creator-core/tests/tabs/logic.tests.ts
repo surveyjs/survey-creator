@@ -21,6 +21,8 @@ import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 import { CreatorTester } from "../creator-tester";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 
+export * from "../../src/components/link-value";
+
 test("SurveyLogicItem, logicType and logicType name", () => {
   var survey = new SurveyModel({
     pages: [

@@ -55,22 +55,22 @@ Since, Survey Creator commonly requires integration with existing solutions, we 
 
 The code for creating and rendering the Survey Creator widget with default options can be written literraly as one line:
 ```javascript
-var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorDivElementID");
+var creator = new SurveyCreator.SurveyCreator("surveyCreatorDivElementID");
 ```
 You may pass to the constructor the element ID or a link to the DOM element.
             
 In many cases you may want to set some options:
 ```javascript
 var options = {}; //Use default options
-var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorDivElementID", options);
+var creator = new SurveyCreator.SurveyCreator("surveyCreatorDivElementID", options);
 ```
 
 Finally, if you are going to set events, then it is better to create a widget, set events and then render it. In this case you may have the following code:
 ```javascript
 var options = {}; //Use default options
-var surveyCreator = new SurveyCreator.SurveyCreator(null, options);
+var creator = new SurveyCreator.SurveyCreator(null, options);
 //set events here
-surveyCreator.render("surveyCreatorDivElementID");
+creator.render("surveyCreatorDivElementID");
 ```
 
 There are several options that you may set to change the Survey Creator behavior.
@@ -110,13 +110,13 @@ There are several options that you may set to change the Survey Creator behavior
 To load the Survey Definition into the Survey Creator you have to simply set its text property. The next line load the Survey Definition from the local storage:
 ```javascript
 //Load the survey definition from a local storage
-surveyCreator.text = window.localStorage.getItem("YourStorageName") || "";
+creator.text = window.localStorage.getItem("YourStorageName") || "";
 ```
 When Survey Creator needs to save the data it calls the **saveSurveyFunc** callback function. As soon as you assign a function to this callback, the "Save" button will appeare on the Survey Creator Toolbox.
 ```javascript
-surveyCreator.saveSurveyFunc = function(saveNo, callback) {
+creator.saveSurveyFunc = function(saveNo, callback) {
     //Save the survey definition into a local storage
-    //window.localStorage.setItem("YourStorageName", surveyCreator.text);
+    //window.localStorage.setItem("YourStorageName", creator.text);
     !!callback && callback(saveNo, true);
 };
 ```
@@ -127,13 +127,13 @@ The reason it is done as a callback function and we have a **saveNo** parameter 
 
 Here is the example of **saveSurveyFunc** callback implementation (with help of jQuery magic).
 ```javascript
-surveyCreator.saveSurveyFunc = function (saveNo, callback) {
+creator.saveSurveyFunc = function (saveNo, callback) {
     $.ajax({
         url: "UrlToYourWebService",
         type: "POST",
         data: {
             surveyId: yourEditUniqueSurveyId,
-            surveyText : surveyCreator.text
+            surveyText : creator.text
         },
         success: function (data) {
             callback(saveNo, data.isSuccess);
@@ -151,8 +151,8 @@ The modern online editors do not have a "Save" button. They are saving the chang
 Optionally, you may ask Survey Creator to show the current status on the Toolbar: Saving/Saved/Error. Set the property showState to true as well.
             
 ```javascript
-surveyCreator.isAutoSave = true;
-surveyCreator.showState = true;
+creator.isAutoSave = true;
+creator.showState = true;
 ```
 
 <div id="localization"></div>
@@ -261,7 +261,7 @@ By default, all these question types are shown on the Toolbox. You may show only
 var options = {
     questionTypes: ["text", "checkbox", "radiogroup", "dropdown"]
 };
-var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorDivId", options);
+var creator = new SurveyCreator.SurveyCreator("surveyCreatorDivId", options);
 ```
 
 <div id="toolbox-customwidgets"></div>
@@ -282,22 +282,22 @@ Let’s talk here about available options that you have.
 
 By default, a user may add only 3 elements from the designer. If there are already 3 custom/copied elements on the Toolbox, then on adding a new one, the first added element will be removed. To change the number of copied elements your user may have, you must set this property to the value you need:
 ```javascript
-surveyCreator.toolbox.copiedItemMaxCount = 10;
+creator.toolbox.copiedItemMaxCount = 10;
 ```
 To disable the ability of adding an element from designer into toolbox you will have to use **onElementAllowOperations** event. Here is the example:
 
 ```javascript
-surveyCreator.onElementAllowOperations.add(function(sender, options){
+creator.onElementAllowOperations.add(function(sender, options){
     options.allowAddToToolbox = false;
 });
 ```
 If you want to persist the copied items on the Toolbox for your end-user for another session or another survey, then you must use the copiedJsonText properties:
 
 ```javascript
-var savedItems = surveyCreator.toolbox.copiedJsonText; //save into localstorage or your database
+var savedItems = creator.toolbox.copiedJsonText; //save into localstorage or your database
 //....
 //Restored savedItems from localstorage or your database.
-surveyCreator.toolbox.copiedJsonText = savedItems;
+creator.toolbox.copiedJsonText = savedItems;
 ```
 
 <div id="toolbox-categories"></div>
@@ -306,12 +306,12 @@ surveyCreator.toolbox.copiedJsonText = savedItems;
 
 By default there is one category in the Toolbox (General) and its title is not shown. You may change the category of the default question types by calling **changeCategory** function:
 ```javascript
-surveyCreator.toolbox.changeCategory("panel", "Panels");
-surveyCreator.toolbox.changeCategory("paneldynamic", "Panels");
+creator.toolbox.changeCategory("panel", "Panels");
+creator.toolbox.changeCategory("paneldynamic", "Panels");
 ```
 The better way is to use changeCategories function. It will rebuild toolbox presentation model just one time:
 ```javascript
-surveyCreator.toolbox.changeCategories([
+creator.toolbox.changeCategories([
     { name: "panel", category: "Panels" }, 
     { name: "paneldynamic", category: "Panels" }, 
     { name: "matrix", category: "Matrix" }
@@ -333,7 +333,7 @@ Please go to the [Survey Toolbox categories example](https://surveyjs.io/Example
 
 <div id="toolbox-property"></div>
 
-### Full control via surveyCreator.toolbox property
+### Full control via creator.toolbox property
 
 Edtor **toolbox** property contains the information about items are shown Toolbox and functions and properties to allow adding/deleting/changing items.
 
@@ -348,7 +348,7 @@ Here are properties of the item object:
 |isCopied|true if the item is created by clicking on 'Add to Toolbox' question menu item.|
 |category|The category to which this item is belong to. It is empty (default value) then category is “General”. Please read topic Toolbox Categories in this section for more information.|
                 
-Here is the list of functions and properties for **surveyCreator.toolbox** object:
+Here is the list of functions and properties for **creator.toolbox** object:
 
 ---
 **jsonText**
@@ -376,7 +376,7 @@ Returns the list of current copied toolbox items. End-user may add a queston int
 Add a new item into toolobx. If the item with the same name already exists, then replace it. The current code will add a new item into Toolbox 
 ```javascript
 //Add all countries question into toolbox
-surveyCreator.toolbox.addItem({
+creator.toolbox.addItem({
     name: "countries",
     isCopied: true,
     iconName: "icon-default",
@@ -405,7 +405,7 @@ Add a question into Toolbox as a copied item.
 
 Returns toolbox item by its name. Returns null if there is no toolbox item with this name. The following code change the default json for radiogroup
 ```javascript
-surveyCreator.toolbox.getItemByName("radiogroup").json = {
+creator.toolbox.getItemByName("radiogroup").json = {
     "type": "radiogroup",
     choices: ["Blue", "Red"]
 };
@@ -430,8 +430,8 @@ Find an existing item by item.name and replace its properties. Return false if t
 
 Find an existing item by name parameter and remove it. Here is the example of removing complex matrix questions
 ```javascript
-surveyCreator.toolbox.removeItem("matrixdropdown");
-surveyCreator.toolbox.removeItem("matrixdynamic");
+creator.toolbox.removeItem("matrixdropdown");
+creator.toolbox.removeItem("matrixdynamic");
 ```
 ---
 **activeCategory**
@@ -453,7 +453,7 @@ Change the category of the toolbox item
 
 Change categories for several toolbox items. changedItems parameter is an array of objects {name: "your toolbox item name", category: "new category name"}. Here is the example
 ```javascript
-surveyCreator.toolbox.changeCategories([
+creator.toolbox.changeCategories([
     { name: "panel", category: "Panels" }, 
     { name: "paneldynamic", category: "Panels" }, 
     { name: "matrix", category: "Matrix" }
@@ -489,7 +489,7 @@ Survey.Serializer.findProperty("selectbase", "choicesByUrl").visible = false;
 ```
 This work perfect, if you need to hide a few properties. If the list of properties you want to make invisible is large, you can use SurveyCreator's [onShowingProperty](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onShowingProperty) event.
 ```javascript
-surveyCreator.onShowingProperty.add(function (sender, options) {
+creator.onShowingProperty.add(function (sender, options) {
     //check options.obj.getType() if needed. if (options.obj.getType() == "survey")
     options.canShow = myBlackList.indexOf(options.property.name) < 0; //show if it is not in a blacklist
     //You may do opposite and use the white list
@@ -1002,7 +1002,7 @@ The code bellow generated a custom question name as "Question" + "Questiontype" 
 ```javascript
 var questionCounter = {};
 //Set the name property different from the default value
-surveyCreator.onQuestionAdded.add(function (sender, options) {
+creator.onQuestionAdded.add(function (sender, options) {
     var q = options.question;
     var t = q.getType();
     if(!questionCounter[t]) questionCounter[t] = 1;
@@ -1014,7 +1014,7 @@ surveyCreator.onQuestionAdded.add(function (sender, options) {
 
 This code adds a new text question into new created page
 ```javascript
-surveyCreator.onPageAdded.add(function (sender, options) {
+creator.onPageAdded.add(function (sender, options) {
     options.page.addNewQuestion("text", "Question_" + page.name);
 });
 ```
@@ -1025,16 +1025,16 @@ surveyCreator.onPageAdded.add(function (sender, options) {
 
 There are two surveys instance inside the Survey Creator. Designer survey that you may see on “Survey Designer” tab and test survey that you may test on “Test Survey” tab.
 
-The designer survey looks and behavior different since it works in designer mode and we are rendering [adorners](#adorners) on its elements. You may get access to it at any time as **surveyCreator.survey**.
+The designer survey looks and behavior different since it works in designer mode and we are rendering [adorners](#adorners) on its elements. You may get access to it at any time as **creator.survey**.
 
 However, you should be careful and do not cache this instance, since Survey Creator may recreate it, for example after switching into “Survey Designer” tab from “JSON Editor” tab. You may handle the survey recreation by using [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onDesignerSurveyCreated) event.
 
 By accessing the designer survey instance, you may modify the survey as you need it. For example, the following code add a new page, make it current and add a panel with two questions in it.
 ```javascript
 //add New Page and make it current;
-surveyCreator.addPage();
+creator.addPage();
 //get survey instance
-var survey = surveyCreator.survey;
+var survey = creator.survey;
 //Add panel and questions as you would do with the regular survey instance
 var panel = survey.currentPage.addNewPanel("address");
 panel.title = "Please type your contact information:";
@@ -1048,7 +1048,7 @@ phone.inputType = "tel";
 
 Unlike designer survey, test survey instance exists when end-user switches into “Test Survey” tab. You should handle onTestSurveyCreated event to get its instance and make all required modification.
 ```javascript
-surveyCreator.onTestSurveyCreated.add(function(sender, options) {
+creator.onTestSurveyCreated.add(function(sender, options) {
   options.survey.title = "You are testing survey at: " + new Date().toLocaleTimeString();
 });
 ```
@@ -1094,7 +1094,7 @@ There are a lot of actions in "question-actions" and "panel-actions" adorners. Y
 
 Here is the example of using it:
 ```javascript
-surveyCreator.onElementAllowOperations.add(function (sender, options) {
+creator.onElementAllowOperations.add(function (sender, options) {
     var obj = options.obj;
     if (!obj || !obj.page) return;
     //if it is panel

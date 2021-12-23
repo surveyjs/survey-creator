@@ -7,15 +7,12 @@ import {
   QuestionRadiogroupModel,
   QuestionPanelDynamicModel,
   ItemValue,
-  Base,
   QuestionTextModel
 } from "survey-core";
-import {
-  ConditionEditor,
-  ConditionEditorItemsBuilder,
-  ConditionEditorItem
-} from "../../src/property-grid/condition-survey";
+import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/settings";
+
+export * from "../../src/components/link-value";
 
 test("Items Builder, simple test", () => {
   var builder = new ConditionEditorItemsBuilder();
