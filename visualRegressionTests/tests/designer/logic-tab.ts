@@ -41,7 +41,7 @@ const jsonOneRule = {
     }
   ]
 };
-const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
+const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
 
 test("one rule view", async (t) => {
   await t.resizeWindow(1920, 900);
