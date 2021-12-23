@@ -180,7 +180,7 @@ test("Drag Drop Question", async (t) => {
     .dragToElement(DragZoneRating2, Rating1, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -120,
+      destinationOffsetY: 1,
       speed: 0.5
     });
 
@@ -192,7 +192,7 @@ test("Drag Drop Question", async (t) => {
     .dragToElement(DragZoneRating2, Rating1, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 120,
+      destinationOffsetY: -1,
       speed: 0.5
     });
 
