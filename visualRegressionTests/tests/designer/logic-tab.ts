@@ -48,8 +48,10 @@ test("one rule view", async (t) => {
   await setJSON(jsonOneRule);
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .hover(Selector(".sl-table__row"))
     .click(logicDetailButtonElement);
   const tabContent = Selector(".svc-creator-tab__content");
+
   await checkElementScreenshot("logic-tab-one-rule-content.png", tabContent, t);
 });
 
@@ -87,6 +89,7 @@ test("rule content", async (t) => {
   await setJSON(jsonMultipleConditionsMultipleActions);
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .hover(Selector(".sl-table__row"))
     .click(logicDetailButtonElement);
   await checkElementScreenshot("logic-tab-rule-content.png", ruleContent, t);
 });
@@ -97,6 +100,7 @@ test("rule rows", async (t) => {
   await setJSON(jsonMultipleConditionsMultipleActions);
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .hover(Selector(".sl-table__row"))
     .click(logicDetailButtonElement);
   await checkElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t);
   await checkElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t);

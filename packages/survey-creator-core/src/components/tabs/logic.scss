@@ -4,7 +4,7 @@
 .sl-table__cell.st-table__cell--actions:first-child .sv-action-bar{
   margin-top: -4px;
 }
-.sl-table__detail-button {
+.sl-table__detail-button.sl-table__detail-button {
   display: none;
   width: 48px;
   height: 48px;
@@ -26,8 +26,8 @@
   }
 }
 
-.sl-table__row:hover .sl-table__detail-button,
-.sl-table__detail-button:focus  {
+.sl-table__row:hover .sl-table__detail-button.sl-table__detail-button ,
+.sl-table__detail-button.sl-table__detail-button:focus {  
   display: block;
 }
 .sl-table__row #remove-row .sv-action-bar-item__icon use {
