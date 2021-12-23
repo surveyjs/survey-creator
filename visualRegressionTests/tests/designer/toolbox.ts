@@ -1,7 +1,5 @@
 import { Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-
-import { url, screenshotComparerOptions, getSurveyJSFramework, changeToolboxLocation, setShowPropertyGrid, getTabbedMenuItemByText, checkElementScreenshot } from "../../helper";
+import { url, changeToolboxLocation, setShowPropertyGrid, getTabbedMenuItemByText, checkElementScreenshot } from "../../helper";
 
 const title = "Toolbox Screenshot";
 
