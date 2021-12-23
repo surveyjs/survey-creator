@@ -49,9 +49,9 @@ Inside your web page
 
 ```javascript
 var options = { showEmbeddedSurveyTab: true }; //see examples below
-var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorContainer", options);
+var creator = new SurveyCreator.SurveyCreator("surveyCreatorContainer", options);
 //set function on save callback
-surveyCreator.saveSurveyFunc = saveMySurvey;
+creator.saveSurveyFunc = saveMySurvey;
 ```
 
 ## Step 5. Save and load surveys
@@ -59,15 +59,15 @@ surveyCreator.saveSurveyFunc = saveMySurvey;
 Save survey
 ```javascript
 function saveMySurvey(){
-    var yourNewSurveyJSON = surveyCreator.text;
+    var yourNewSurveyJSON = creator.text;
     //send updated json in your storage  
 }
 ```
 Set Survey JSON directly
-```surveyCreator.text = yourSurveyJSON;```
+```creator.text = yourSurveyJSON;```
 
 Load Survey from SurveyJS Service
-```surveyCreator.loadSurvey(yourSurveyId);```
+```creator.loadSurvey(yourSurveyId);```
 
 ## Step 6. Customize Survey Creator via options
 
@@ -83,7 +83,7 @@ var options = {
  showOptions: true                          
 };
 // pass the options into the constructor. It is an optional parameter.
-var surveyCreator = new SurveyCreator.SurveyCreator("surveyCreatorContainer", options);
+var creator = new SurveyCreator.SurveyCreator("surveyCreatorContainer", options);
 ```
 
 ## Step 7. Optional external libraries.

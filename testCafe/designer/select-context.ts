@@ -24,6 +24,40 @@ test("Select questions and survey", async (t) => {
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 });
 
+test("Check page selector does not select survey", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].JSON = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        },
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question2"
+            }
+          ]
+        }
+      ]
+    };
+  })();
+
+  await t
+    .click(Selector(".svc-tab-designer .svc-page .svc-question__content"), { offsetX: 5, offsetY: 50 })
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
+    .click(Selector(".svc-page-navigator-item__dot[title=\"page2\"]"))
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("question1");
+});
+
 test("Matrix question", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()
