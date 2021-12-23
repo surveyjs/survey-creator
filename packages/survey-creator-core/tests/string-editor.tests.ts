@@ -64,12 +64,12 @@ test("Test string editor content editable", (): any => {
 test("Test string editor select questions items readonly", (): any => {
 
   function checkItemEdit() {
-    var seQ0ch0 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q0").choices[0], false, "text"), creator);
-    var seQ0ch1 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q0").choices[1], false, "text"), creator);
-    var seQ1ch0 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1").choices[0], false, "text"), creator);
-    var seQ1ch1 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1").choices[1], false, "text"), creator);
-    var seQ2ch0 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2").choices[0], false, "text"), creator);
-    var seQ2ch1 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2").choices[1], false, "text"), creator);
+    var seQ0ch0 = new StringEditorViewModelBase(survey.getQuestionByName("q0").choices[0].locText, creator);
+    var seQ0ch1 = new StringEditorViewModelBase(survey.getQuestionByName("q0").choices[1].locText, creator);
+    var seQ1ch0 = new StringEditorViewModelBase(survey.getQuestionByName("q1").choices[0].locText, creator);
+    var seQ1ch1 = new StringEditorViewModelBase(survey.getQuestionByName("q1").choices[1].locText, creator);
+    var seQ2ch0 = new StringEditorViewModelBase(survey.getQuestionByName("q2").choices[0].locText, creator);
+    var seQ2ch1 = new StringEditorViewModelBase(survey.getQuestionByName("q2").choices[1].locText, creator);
     return [
       seQ0ch0.contentEditable,
       seQ0ch1.contentEditable,
