@@ -5,12 +5,15 @@
   margin-top: -4px;
 }
 .sl-table__detail-button.sl-table__detail-button {
-  display: none;
+  display: block;
   width: 48px;
   height: 48px;
   box-sizing: border-box;
   border-radius: 100px;
   padding: 0;
+  use {
+    display: none;
+  }
   &:hover, &:focus {
     background-color: $primary-light;
     use {
@@ -28,7 +31,7 @@
 
 .sl-table__row:hover .sl-table__detail-button.sl-table__detail-button ,
 .sl-table__detail-button.sl-table__detail-button:focus {  
-  display: block;
+  use { display: initial; }
 }
 .sl-table__row #remove-row .sv-action-bar-item__icon use {
   display: none;

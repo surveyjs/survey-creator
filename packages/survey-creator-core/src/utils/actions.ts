@@ -21,6 +21,7 @@ export function updateMatrixLogicExpandAction(question: QuestionMatrixDynamicMod
   action.iconName = "icon-logic-expand";
   action.innerCss = "sl-table__detail-button";
   action.iconSize = 48;
+  action.showTitle = false;
   action.action = () => {
     row.showHideDetailPanelClick();
     action.iconName = row.isDetailPanelShowing ? "icon-logic-collapse" : "icon-logic-expand";
