@@ -8,15 +8,9 @@
   display: none;
   width: 48px;
   height: 48px;
-  justify-content: center;
-  align-items: center;
   box-sizing: border-box;
   border-radius: 100px;
   padding: 0;
-  svg {
-    width: 10px;
-    height: 22px;
-  }
   &:hover, &:focus {
     background-color: $primary-light;
     use {
@@ -34,7 +28,7 @@
 
 .sl-table__row:hover .sl-table__detail-button,
 .sl-table__detail-button:focus  {
-  display: flex;
+  display: block;
 }
 .sl-table__row #remove-row .sv-action-bar-item__icon use {
   display: none;
