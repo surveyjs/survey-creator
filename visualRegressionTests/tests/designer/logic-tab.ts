@@ -14,7 +14,45 @@ test("empty view", async (t) => {
   await checkElementScreenshot("logic-tab-empty.png", tabContent, t);
 });
 
+const jsonOneRule = {
+  "logoPosition": "right",
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "q1"
+        },
+        {
+          "type": "text",
+          "name": "q2",
+          "visibleIf": "{q1} = 1"
+        },
+        {
+          "type": "text",
+          "name": "q3"
+        },
+        {
+          "type": "text",
+          "name": "q4"
+        }
+      ]
+    }
+  ]
+};
 const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
+
+test("one rule view", async (t) => {
+  await t.resizeWindow(1920, 900);
+  await setJSON(jsonOneRule);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(logicDetailButtonElement);
+  const tabContent = Selector(".svc-creator-tab__content");
+  await checkElementScreenshot("logic-tab-one-rule-content.png", tabContent, t);
+});
+
 const jsonMultipleConditionsMultipleActions = {
   "logoPosition": "right",
   "pages": [
@@ -43,8 +81,7 @@ const jsonMultipleConditionsMultipleActions = {
     }
   ]
 };
-
-test.skip("rule content", async (t) => {
+test("rule content", async (t) => {
   await t.resizeWindow(1920, 900);
   const ruleContent = Selector(".sl-table__cell--detail-panel");
   await setJSON(jsonMultipleConditionsMultipleActions);
