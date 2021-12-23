@@ -51,8 +51,31 @@ test("one rule view", async (t) => {
     .hover(Selector(".sl-table__row"))
     .click(logicDetailButtonElement);
   const tabContent = Selector(".svc-creator-tab__content");
-
   await checkElementScreenshot("logic-tab-one-rule-content.png", tabContent, t);
+});
+
+test("Check actions hover states", async (t) => {
+  await t.resizeWindow(1920, 900);
+  await setJSON(jsonOneRule);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName));
+  await t.hover(logicDetailButtonElement);
+  await checkElementScreenshot("logic-expand-hover.png", logicDetailButtonElement, t);
+  const removeRuleSelector = Selector("#remove-row .sv-action-bar-item");
+  await t.hover(removeRuleSelector);
+  await checkElementScreenshot("logic-rule-remove-hover.png", removeRuleSelector, t);
+  await t.click(logicDetailButtonElement);
+  const questionOperator = Selector(".svc-logic-operator--question");
+  await t.hover(questionOperator)
+  await checkElementScreenshot("logic-question-action-hover.png", questionOperator, t);
+  const operator = Selector(".svc-logic-operator--operator");
+  await t.hover(operator)
+  await checkElementScreenshot("logic-operator-hover.png", operator, t);
+  const action = Selector(".svc-logic-operator--action");
+  await t.hover(action)
+  await checkElementScreenshot("logic-action-hover.png", action, t);
+  await t.hover(logicDetailButtonElement);
+  await checkElementScreenshot("logic-collapse-hover.png", logicDetailButtonElement, t);
 });
 
 const jsonMultipleConditionsMultipleActions = {
