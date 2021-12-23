@@ -111,8 +111,8 @@ svc-question {
   outline: 2px solid $secondary-light;
 }
 
-.svc-creator .svc-page .svc-question__content--selected,
-.svc-creator .svc-page .svc-hovered > .svc-question__content--selected {
+.svc-creator .svc-page .svc-question__content--selected:not(.svc-question__content--dragged),
+.svc-creator .svc-page .svc-hovered > .svc-question__content--selected:not(.svc-question__content--dragged) {
   outline: 2px solid $secondary;
   box-shadow: initial;
   & > .svc-question__content-actions {

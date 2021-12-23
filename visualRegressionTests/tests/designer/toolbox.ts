@@ -91,3 +91,23 @@ test("toolbox inside sidebar", async (t) => {
   await t.hover(toolboxItem);
   await checkElementScreenshot("toolbox-inside-sidebar-hover-item.png", toolboxElement, t);
 });
+
+test("Toolbox tool pressed state", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+
+  const toolboxTool = Selector(".svc-toolbox__tool");
+
+  await t.dispatchEvent(toolboxTool, "pointerdown");
+
+  await takeScreenshot("toolbox-tool-pressed-state.png", toolboxTool, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+
+  await t.dispatchEvent(toolboxTool, "pointerup");
+  await takeScreenshot("toolbox-tool-normal-state.png", toolboxTool, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+});
