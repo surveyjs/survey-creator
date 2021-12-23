@@ -10,9 +10,10 @@ export class PageNavigatorItemViewModel {
   get text() {
     return this.item.title;
   }
-  action = () => {
+  action = (data, event) => {
     if (!this.disabled) {
       this.item.action();
+      event.stopPropagation();
     }
   };
   private unwrap<T>(value: T | (() => T)): T {
