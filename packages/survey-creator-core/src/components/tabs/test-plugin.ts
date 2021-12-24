@@ -84,6 +84,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     const options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
+    this.model.testAgainAction = this.testAgainAction;
     this.model.prevPageAction = this.prevPageAction;
     this.model.nextPageAction = this.nextPageAction;
     this.model.initialize(this.creator.JSON, options);
@@ -118,7 +119,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         this.model.testAgain();
       }
     });
-    items.push(this.testAgainAction);
+    // items.push(this.testAgainAction);
 
     if (this.creator.showSimulatorInTestSurveyTab) {
       const deviceSelectorItems = Object.keys(simulatorDevices)
