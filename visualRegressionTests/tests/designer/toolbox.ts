@@ -94,20 +94,13 @@ test("toolbox inside sidebar", async (t) => {
 
 test("Toolbox tool pressed state", async (t) => {
   await t.resizeWindow(2560, 1440);
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
   const toolboxTool = Selector(".svc-toolbox__tool");
 
   await t.dispatchEvent(toolboxTool, "pointerdown");
 
-  await takeScreenshot("toolbox-tool-pressed-state.png", toolboxTool, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+  await checkElementScreenshot("toolbox-tool-pressed-state.png", toolboxTool, t);
 
   await t.dispatchEvent(toolboxTool, "pointerup");
-  await takeScreenshot("toolbox-tool-normal-state.png", toolboxTool, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+  await checkElementScreenshot("toolbox-tool-normal-state.png", toolboxTool, t);
+
 });
