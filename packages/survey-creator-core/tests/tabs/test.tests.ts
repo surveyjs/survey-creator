@@ -9,7 +9,7 @@ function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   return testPlugin.model;
 }
 
-test("Test language Bar Item", (): any => {
+test.skip("Test language Bar Item", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
     questions: [
@@ -255,7 +255,7 @@ test("Simulator view switch", (): any => {
   model.simulator.device = "iPhone5";
   expect(model.simulator.simulatorMainCssClass).toEqual("svd-simulator-main--frame");
 });
-test("Hide Test Again action on leaving Preview", (): any => {
+test.skip("Hide Test Again action on leaving Preview", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
     questions: [
