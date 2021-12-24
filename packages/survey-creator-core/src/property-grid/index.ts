@@ -1008,6 +1008,8 @@ export class PropertyGridModel {
     return (<any>row).allowDeleteRow;
   }
   private getMatrixAllowEditRow(question: Question, row: MatrixDynamicRowModel): boolean {
+    if(question.readOnly)
+      return false;
     if ((<any>row).allowEditRow === undefined) {
       this.calculateMatrixAllowOperations(question, row);
     }
