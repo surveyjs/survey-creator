@@ -69,3 +69,12 @@
   min-width: calcSize(70);
   box-shadow: none;
 }
+
+.svc-matrix-cell__popup {
+  .sv-popup__container {
+    background-color: $background;
+  }
+  .sv-popup_shadow.sv-popup_shadow {
+    filter: unset;
+  }
+}
