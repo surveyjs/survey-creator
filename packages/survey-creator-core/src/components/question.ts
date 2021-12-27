@@ -12,7 +12,8 @@ import {
   ItemValue,
   Serializer,
   DragTypeOverMeEnum,
-  IAction
+  IAction,
+  ComputedUpdater
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -57,6 +58,12 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     }
     this.checkActionProperties();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
+    this.dragTypeOverMe = <any>new ComputedUpdater(() => {
+      let element = this.surveyElement.getType() === "paneldynamic" ?
+      (<any>this.surveyElement).template :
+      this.surveyElement;
+      return element.dragTypeOverMe;
+    });
   }
   select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
     if (!model.surveyElement.isInteractiveDesignElement) {
@@ -112,12 +119,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     return this.surveyElement.isDragMe;
   }
 
-  get dragTypeOverMe(): DragTypeOverMeEnum {
-    let element = this.surveyElement.getType() === "paneldynamic" ?
-      (<any>this.surveyElement).template :
-      this.surveyElement;
-    return element.dragTypeOverMe;
-  }
+  @property() dragTypeOverMe: DragTypeOverMeEnum;
 
   dispose() {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged(
