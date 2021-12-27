@@ -142,18 +142,6 @@
   display: none;
 }
 
-.svc-question-wrapper {
-  max-width: initial !important;
-  min-width: initial !important;
-  width: initial !important;
-  flex: initial !important;
-}
-.svc-question-wrapper {
-  .sv-title-actions__title {
-    max-width: none;
-  }
-}
-
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
   color: $foreground-light;
