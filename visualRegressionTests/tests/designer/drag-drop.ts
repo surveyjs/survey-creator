@@ -68,8 +68,7 @@ test("Empty Panel Styles", async (t) => {
     .ok(compareResults.errorMessages());
 });
 
-//REMOVE TEST ONLY
-test.only("Empty Panel Dynamic Styles", async (t) => {
+test("Empty Panel Dynamic Styles", async (t) => {
   await t.resizeWindow(2560, 1440);
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
