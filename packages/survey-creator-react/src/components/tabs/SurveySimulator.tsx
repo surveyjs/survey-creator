@@ -8,8 +8,8 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     return this.props.model;
   }
 
-  private get isRunning(): boolean {
-    return this.props.isRunning;
+  private get isRunningOnDesktop(): boolean {
+    return !this.props.isRunning && this.model.device === "desktop";
   }
 
   constructor(props: any) {
@@ -20,14 +20,14 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
   }
 
   renderElement(): JSX.Element {
+    const mainSimulatorClass = "svd-simulator-main" + (this.isRunningOnDesktop ? " svd-simulator-main--desktop" : "");
     if (!this.model.survey) {
-      return <div style={!this.isRunning ? { minHeight: "auto" } : null}
-        className="svd-simulator-main"></div>;
+      return <div className={mainSimulatorClass}></div>;
     }
     if (this.model.hasFrame) {
       return (
-        <div style={!this.isRunning ? { minHeight: "auto" } : null}
-          className={"svd-simulator-main " + this.model.simulatorMainCssClass}>
+        <div
+          className={mainSimulatorClass}>
           <div
             className="svd-simulator-wrapper"
             style={{
@@ -76,7 +76,8 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
       );
     } else {
       return (
-        <div style={!this.isRunning ? { minHeight: "auto" } : null} className="svd-simulator-main">
+        <div
+          className={mainSimulatorClass}>
           <div className="svd-simulator-content">
             <Survey model={this.model.survey}></Survey>
           </div>
