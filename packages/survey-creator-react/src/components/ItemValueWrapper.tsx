@@ -41,7 +41,7 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
     const button = this.model.allowAdd ? (
       attachKey2click(<span
         className="svc-item-value-controls__button svc-item-value-controls__add"
-        title={this.model.tooltip}
+        aria-label={this.model.tooltip}
         onClick={() => this.model.add(this.model)}
       >
         <SvgIcon size={16} iconName={"icon-add_16x16"}></SvgIcon>
@@ -52,14 +52,14 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
         {this.model.isDraggable ? (
           <span
             className="svc-item-value-controls__button svc-item-value-controls__drag"
-            title={this.model.dragTooltip}
+            aria-label={this.model.dragTooltip}
           >
             <SvgIcon className="svc-item-value-controls__drag-icon" size={24} iconName={"icon-drag-area-indicator"}></SvgIcon>
           </span>
         ) : null}
         {this.model.allowRemove ? attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__remove"
-          title={this.model.tooltip}
+          aria-label={this.model.tooltip}
           onClick={() => this.model.remove(this.model)}
         >
           <SvgIcon size={16} iconName={"icon-remove_16x16"}></SvgIcon>

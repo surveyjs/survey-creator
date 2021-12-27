@@ -2210,6 +2210,34 @@ test("AllowRowsDragDrop and property readOnly", () => {
   expect(choicesQuestion.allowRowsDragAndDrop).toBeFalsy();
   Serializer.findProperty("selectbase", "choices").readOnly = false;
 });
+
+test("Edit matrix and property readOnly ", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 4];
+  let propertyGrid = new PropertyGridModelTester(question);
+  let choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion).toBeTruthy();
+  expect(choicesQuestion.visibleRows[0].cells[1].question.readOnly).toBeFalsy();
+
+  Serializer.findProperty("itemvalue", "text").readOnly = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.visibleRows[0].cells[1].question.readOnly).toBeTruthy();
+
+  Serializer.findProperty("itemvalue", "text").readOnly = false;
+  Serializer.findProperty("selectbase", "choices").readOnly = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.visibleRows[0].cells[1].question.readOnly).toBeTruthy();
+  Serializer.findProperty("selectbase", "choices").readOnly = false;
+});
+
 test("Check textUpdate mode for question", () => {
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
