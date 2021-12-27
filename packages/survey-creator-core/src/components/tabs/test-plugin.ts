@@ -119,7 +119,6 @@ export class TabTestPlugin implements ICreatorPlugin {
         this.model.testAgain();
       }
     });
-    // items.push(this.testAgainAction);
 
     if (this.creator.showSimulatorInTestSurveyTab) {
       const deviceSelectorItems = Object.keys(simulatorDevices)

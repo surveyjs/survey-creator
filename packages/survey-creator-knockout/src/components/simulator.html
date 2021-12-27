@@ -1,4 +1,4 @@
-<div data-bind="class:'svd-simulator-main '+simulatorMainCssClass">
+<div data-bind="style: { minHeight: (!this.isRunning ? 'auto' : null) }, class: 'svd-simulator-main ' + simulatorMainCssClass">
   <!-- ko if: hasFrame -->
   <div
     class="svd-simulator-wrapper"

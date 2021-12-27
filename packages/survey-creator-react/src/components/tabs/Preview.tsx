@@ -19,7 +19,7 @@ export class TabPreviewTestSurveyAgainComponent extends SurveyElementBase<any, a
   }
 
   renderElement(): JSX.Element {
-    const buttonClassName = "svc-btn" + ((this.model.enabled !== undefined && !this.model.enabled) ? " svc-test-tab__content-action--disabled" : "");
+    const buttonClassName = "svc-preview__test-again svc-btn";
     return attachKey2click(<div
       role="button"
       onClick={(e) => {
@@ -52,7 +52,7 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
     return (
       <div className={tabContentClassName}>
         <div className="svc-plugin-tab__content">
-          <SurveySimulator model={this.model.simulator}></SurveySimulator>
+          <SurveySimulator model={this.model.simulator} isRunning={this.model.isRunning}></SurveySimulator>
           {!this.model.isRunning ? <TabPreviewTestSurveyAgainComponent button={this.model.testAgainAction} /> : null}
           {!this.model.isRunning ? <SurveyResults survey={this.model.simulator.survey} /> : null}
         </div>

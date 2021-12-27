@@ -8,6 +8,10 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     return this.props.model;
   }
 
+  private get isRunning(): boolean {
+    return this.props.isRunning;
+  }
+
   constructor(props: any) {
     super(props);
   }
@@ -17,11 +21,13 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
 
   renderElement(): JSX.Element {
     if (!this.model.survey) {
-      return <div className="svd-simulator-main"></div>;
+      return <div style={!this.isRunning ? { minHeight: "auto" } : null}
+        className="svd-simulator-main"></div>;
     }
     if (this.model.hasFrame) {
       return (
-        <div className={"svd-simulator-main " + this.model.simulatorMainCssClass}>
+        <div style={!this.isRunning ? { minHeight: "auto" } : null}
+          className={"svd-simulator-main " + this.model.simulatorMainCssClass}>
           <div
             className="svd-simulator-wrapper"
             style={{
@@ -49,11 +55,11 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
               style={{
                 width:
                   this.model.simulatorFrame.width /
-                    this.model.simulatorFrame.scale +
+                  this.model.simulatorFrame.scale +
                   "px",
                 height:
                   this.model.simulatorFrame.height /
-                    this.model.simulatorFrame.scale +
+                  this.model.simulatorFrame.scale +
                   "px",
                 transform:
                   "scale(" +
@@ -70,7 +76,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
       );
     } else {
       return (
-        <div className="svd-simulator-main">
+        <div style={!this.isRunning ? { minHeight: "auto" } : null} className="svd-simulator-main">
           <div className="svd-simulator-content">
             <Survey model={this.model.survey}></Survey>
           </div>
