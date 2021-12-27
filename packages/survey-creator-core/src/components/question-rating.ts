@@ -10,6 +10,7 @@ import {
   ItemValue
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
+import { getLocString } from "../editorLocalization";
 import { getNextValue } from "../utils/utils";
 import { QuestionAdornerViewModel } from "./question";
 
@@ -94,5 +95,11 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
   }
   public get allowRemove() {
     return !this.creator.readOnly;
+  }
+  get addTooltip() {
+    return getLocString("pe.addItem");
+  }
+  get removeTooltip() {
+    return getLocString("pe.removeItem");
   }
 }
