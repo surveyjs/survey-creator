@@ -211,8 +211,12 @@ export class SurveyHelper {
   public static canSelectObj(obj: Base) {
     return !obj || obj["disableSelecting"] !== true;
   }
-  public static warnNonSupported(name: string) {
-    SurveyHelper.warnText("'" + name + "'" + " is not supported in V2.");
+  public static warnNonSupported(name: string, newPropertyName?: string) {
+    let outputText = "'" + name + "' is not supported in V2.";
+    if (!!newPropertyName) {
+      outputText += " Use the '" + newPropertyName + "' property instead";
+    }
+    SurveyHelper.warnText(outputText);
   }
   public static warnText(text: string) {
     // eslint-disable-next-line no-console
@@ -291,15 +295,15 @@ export class SurveyHelper {
       const aVal = !!a[propertyName] ? a[propertyName] : "";
       const bVal = !!b[propertyName] ? b[propertyName] : "";
       let index = 0;
-      while(index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
-      if(index < aVal.length && index < bVal.length) {
-        while(index > 0 && (aVal[index-1] >= "0" && aVal[index-1] <= "9")) index --;
+      while (index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
+      if (index < aVal.length && index < bVal.length) {
+        while (index > 0 && (aVal[index - 1] >= "0" && aVal[index - 1] <= "9")) index--;
         const aDiv = aVal.substr(index);
         const bDiv = bVal.substr(index);
-        if(Helpers.isNumber(aDiv) && Helpers.isNumber(bDiv)) {
+        if (Helpers.isNumber(aDiv) && Helpers.isNumber(bDiv)) {
           const aNum = parseFloat(aDiv);
           const bNum = parseFloat(bDiv);
-          return aNum === bNum ? 0 : (aNum < bNum ? -1: 1);
+          return aNum === bNum ? 0 : (aNum < bNum ? -1 : 1);
         }
       }
       return aVal.localeCompare(bVal);
