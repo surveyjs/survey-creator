@@ -153,18 +153,18 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   /**
    * You need to set this property to true if you want to inplace edit item values instead of texts.
    */
-   @property({ defaultValue: false }) inplaceEditForValues: boolean;
-   /**
-   * Set it to false to hide survey title and coresponding properties
-   */
-   get allowEditSurveyTitle() {
-     return this.getPropertyValue("allowEditSurveyTitle", true);
-   }
-   set allowEditSurveyTitle(val: boolean) {
-     ["title", "description", "logo", "showTitle", "logoWidth", "logoHeight", "logoFit"].forEach(propertyName => Serializer.findProperty("survey", propertyName).visible = val);
-     this.setPropertyValue("allowEditSurveyTitle", val);
-     this.designerPropertyGrid && this.designerPropertyGrid.refresh();
-   }
+  @property({ defaultValue: false }) inplaceEditForValues: boolean;
+  /**
+  * Set it to false to hide survey title and coresponding properties
+  */
+  get allowEditSurveyTitle() {
+    return this.getPropertyValue("allowEditSurveyTitle", true);
+  }
+  set allowEditSurveyTitle(val: boolean) {
+    ["title", "description", "logo", "showTitle", "logoWidth", "logoHeight", "logoFit"].forEach(propertyName => Serializer.findProperty("survey", propertyName).visible = val);
+    this.setPropertyValue("allowEditSurveyTitle", val);
+    this.designerPropertyGrid && this.designerPropertyGrid.refresh();
+  }
   /**
    * You have right to set this property to true if you have bought the commercial licence only.
    * It will remove the text about non-commerical usage on the top of the widget.
@@ -966,10 +966,10 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     !!expandAction && this.toolbar.actions.push(expandAction);
   }
   public updateToolboxIsCompact(newVal?: boolean) {
-    if (this.toolboxLocation == "right" && this.showPropertyGrid) {
-      this.toolbox.isCompact = true;
-      return;
-    } else if (newVal != undefined && newVal != null) {
+    const hasValue = newVal != undefined && newVal != null;
+    if (this.toolboxLocation == "right") {
+      this.toolbox.isCompact = this.showPropertyGrid || (hasValue && newVal);
+    } else if (hasValue) {
       this.toolbox.isCompact = newVal;
     }
   }
@@ -1006,7 +1006,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     if (this.showPropertyGrid === val) return;
     this.showPropertyGridValue = val;
-    this.updateToolboxIsCompact(val);
+    this.updateToolboxIsCompact();
     this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
   }
   public rightContainerActiveItem(name: string) {

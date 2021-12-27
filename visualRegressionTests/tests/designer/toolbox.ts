@@ -1,7 +1,5 @@
 import { Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-
-import { url, screenshotComparerOptions, getSurveyJSFramework, changeToolboxLocation, setShowPropertyGrid, getTabbedMenuItemByText, checkElementScreenshot } from "../../helper";
+import { url, changeToolboxLocation, setShowPropertyGrid, getTabbedMenuItemByText, checkElementScreenshot } from "../../helper";
 
 const title = "Toolbox Screenshot";
 
@@ -92,4 +90,17 @@ test("toolbox inside sidebar", async (t) => {
 
   await t.hover(toolboxItem);
   await checkElementScreenshot("toolbox-inside-sidebar-hover-item.png", toolboxElement, t);
+});
+
+test("Toolbox tool pressed state", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  const toolboxTool = Selector(".svc-toolbox__tool");
+
+  await t.dispatchEvent(toolboxTool, "pointerdown");
+
+  await checkElementScreenshot("toolbox-tool-pressed-state.png", toolboxTool, t);
+
+  await t.dispatchEvent(toolboxTool, "pointerup");
+  await checkElementScreenshot("toolbox-tool-normal-state.png", toolboxTool, t);
+
 });
