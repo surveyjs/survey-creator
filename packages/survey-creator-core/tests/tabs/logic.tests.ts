@@ -21,6 +21,8 @@ import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 import { CreatorTester } from "../creator-tester";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 
+export * from "../../src/components/link-value";
+
 test("SurveyLogicItem, logicType and logicType name", () => {
   var survey = new SurveyModel({
     pages: [
@@ -1584,4 +1586,27 @@ test("Logic onLogicItemRemoving events, Bug#1786", () => {
   expect(itemsQuestion.rowCount).toEqual(0);
   expect(logic.items).toHaveLength(0);
   expect(counter).toEqual(2);
+});
+test("Logic action expand/collapse icon update", () => {
+  const dummy = new QuestionEmbeddedSurveyModel("dummy");
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  const expandAction = itemsQuestion.renderedTable["rowsActions"][0][1];
+  const row = itemsQuestion.visibleRows[0];
+  expect(row.isDetailPanelShowing).toBe(false)
+  expect(expandAction.iconName).toEqual("icon-logic-expand")
+  row.showDetailPanel();
+  expect(row.isDetailPanelShowing).toBe(true)
+  expect(expandAction.iconName).toEqual("icon-logic-collapse")
+  row.hideDetailPanel();
+  expect(row.isDetailPanelShowing).toBe(false)
+  expect(expandAction.iconName).toEqual("icon-logic-expand")
 });

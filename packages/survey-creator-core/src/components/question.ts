@@ -26,10 +26,13 @@ import {
 } from "../utils/utils";
 import { ActionContainerViewModel } from "./action-container-view-model";
 import "./question.scss";
+import { DragOrClickHelper } from "../utils/dragOrClickHelper";
 
 export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyModel> {
   @property() isDragged: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
+
+  private dragOrClickHelper: DragOrClickHelper;
 
   constructor(
     creator: CreatorBase<SurveyModel>,
@@ -53,6 +56,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       );
     }
     this.checkActionProperties();
+    this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
   }
   select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
     if (!model.surveyElement.isInteractiveDesignElement) {
@@ -179,7 +183,11 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     (<any>this.surveyElement).isRequired = newVal;
   }
 
-  startDragSurveyElement(event: PointerEvent) {
+  onPointerDown(pointerDownEvent: PointerEvent) {
+    this.dragOrClickHelper.onPointerDown(pointerDownEvent);
+  }
+
+  startDragSurveyElement = (event: PointerEvent) => {
     const element = <any>this.surveyElement;
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
@@ -197,7 +205,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       return this.creator.createIActionBarItemByClass(className);
     });
   }
-  private get currentType() : string {
+  private get currentType(): string {
     return this.surveyElement.getType();
   }
 
@@ -214,7 +222,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
           (item: any) => {
             this.creator.convertCurrentQuestion(item.id);
           },
-          true, selectedItems.length > 0 ? selectedItems[0]: undefined
+          true, selectedItems.length > 0 ? selectedItems[0] : undefined
         )
       },
       "bottom",
@@ -291,17 +299,17 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   }
 
   addNewQuestion() {
-    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase? this.surveyElement:null, this.currentAddQuestionType || "text");
+    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null, this.currentAddQuestionType || "text");
   }
   questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
     (type) => {
       this.currentAddQuestionType = type;
     },
-    this.surveyElement instanceof PanelModelBase? this.surveyElement:null
+    this.surveyElement instanceof PanelModelBase ? this.surveyElement : null
   );
   public get addNewQuestionText(): string {
-    if(!this.currentAddQuestionType && this.creator)
+    if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
-    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType):"";
+    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType) : "";
   }
 }

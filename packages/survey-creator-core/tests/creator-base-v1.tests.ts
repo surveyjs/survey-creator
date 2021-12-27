@@ -23,6 +23,8 @@ import { ObjectSelectorModel } from "../src/property-grid/object-selector";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { QuestionAdornerViewModel } from "../src/components/question";
 
+export * from "../src/components/link-value";
+
 settings.supportCreatorV2 = true;
 
 function getSurveyJson(): any {

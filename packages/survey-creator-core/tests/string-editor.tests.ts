@@ -64,12 +64,12 @@ test("Test string editor content editable", (): any => {
 test("Test string editor select questions items readonly", (): any => {
 
   function checkItemEdit() {
-    var seQ0ch0 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q0").choices[0], false, "text"), creator);
-    var seQ0ch1 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q0").choices[1], false, "text"), creator);
-    var seQ1ch0 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1").choices[0], false, "text"), creator);
-    var seQ1ch1 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1").choices[1], false, "text"), creator);
-    var seQ2ch0 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2").choices[0], false, "text"), creator);
-    var seQ2ch1 = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2").choices[1], false, "text"), creator);
+    var seQ0ch0 = new StringEditorViewModelBase(survey.getQuestionByName("q0").choices[0].locText, creator);
+    var seQ0ch1 = new StringEditorViewModelBase(survey.getQuestionByName("q0").choices[1].locText, creator);
+    var seQ1ch0 = new StringEditorViewModelBase(survey.getQuestionByName("q1").choices[0].locText, creator);
+    var seQ1ch1 = new StringEditorViewModelBase(survey.getQuestionByName("q1").choices[1].locText, creator);
+    var seQ2ch0 = new StringEditorViewModelBase(survey.getQuestionByName("q2").choices[0].locText, creator);
+    var seQ2ch1 = new StringEditorViewModelBase(survey.getQuestionByName("q2").choices[1].locText, creator);
     return [
       seQ0ch0.contentEditable,
       seQ0ch1.contentEditable,
@@ -255,4 +255,41 @@ test("Test string editor content editable for matrix and panels", (): any => {
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
   itemValue = <ItemValue> (creator.survey.getQuestionByName("panDynQ").template.getQuestionByName("panDynQ1").choices[0]);
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
+});
+
+test("Test string editor inplaceEditForValues", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "q0",
+            "choices": [
+              "item1",
+              "item2"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  var itemValue;
+
+  itemValue = <ItemValue> (creator.survey.getQuestionByName("q0").choices[0]);
+  var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
+  expect(itemValue.text).toEqual("item1");
+  seChoice.onInput({ target: { innerText: "newItem" } });
+  expect(itemValue.locText.text).toEqual("newItem");
+  expect(itemValue.value).toEqual("item1");
+  expect(itemValue.text).toEqual("newItem");
+
+  creator.inplaceEditForValues = true;
+  seChoice.onInput({ target: { innerText: "newItemValue" } });
+  expect(itemValue.locText.text).toEqual("newItem");
+  expect(itemValue.value).toEqual("newItemValue");
+  expect(itemValue.text).toEqual("newItem");
 });

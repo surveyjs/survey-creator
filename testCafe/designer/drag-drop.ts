@@ -180,7 +180,7 @@ test("Drag Drop Question", async (t) => {
     .dragToElement(DragZoneRating2, Rating1, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -120,
+      destinationOffsetY: 1,
       speed: 0.5
     });
 
@@ -192,13 +192,14 @@ test("Drag Drop Question", async (t) => {
     .dragToElement(DragZoneRating2, Rating1, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 120,
+      destinationOffsetY: -1,
       speed: 0.5
     });
 
   name = await getQuestionNameByIndex(1);
   await t.expect(name).eql(questionName);
 });
+
 test("Drag Drop to Panel", async (t) => {
   await t.resizeWindow(2560, 1440);
   const json = {
@@ -225,7 +226,8 @@ test("Drag Drop to Panel", async (t) => {
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 1
+      destinationOffsetY: 1,
+      speed: 0.5
     })
 
     .hover(RatingToolboxItem)
@@ -233,12 +235,14 @@ test("Drag Drop to Panel", async (t) => {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: -1,
+      speed: 0.5
     })
 
     .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
+      speed: 0.5
     })
 
     .hover(RatingToolboxItem)
@@ -246,6 +250,7 @@ test("Drag Drop to Panel", async (t) => {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: 1,
+      speed: 0.5
     })
 
     .hover(RatingToolboxItem)
@@ -253,6 +258,7 @@ test("Drag Drop to Panel", async (t) => {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: -1,
+      speed: 0.5
     });
 
   const expectedJson = {
@@ -722,7 +728,7 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   await t
     .click(Question1, { speed: 0.5 })
     .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
-    .dragToElement(DragZoneGiraffeItem, LionItem);
+    .dragToElement(DragZoneGiraffeItem, LionItem, { speed: 0.5 });
 
   let value = await getItemValueByIndex("question1", 0);
   const expectedValue = "giraffe";
@@ -730,7 +736,7 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
 
   await t.click(Question1, { speed: 0.5 }).hover(GiraffeItem, { speed: 0.5 });
 
-  await t.dragToElement(DragZoneGiraffeItem, PandaItem);
+  await t.dragToElement(DragZoneGiraffeItem, PandaItem, { speed: 0.5 });
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
 });
@@ -872,6 +878,7 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: 1,
+      speed: 0.5
     })
 
     .hover(RatingToolboxItem)
@@ -879,12 +886,14 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: -1,
+      speed: 0.5
     })
 
     .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, DynamicPanel, {
       offsetX: 5,
       offsetY: 5,
+      speed: 0.5
     })
 
     .hover(RatingToolboxItem)
@@ -892,6 +901,7 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: 1,
+      speed: 0.5
     })
 
     .hover(RatingToolboxItem)
@@ -899,6 +909,7 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: -1,
+      speed: 0.5
     });
 
   let expectedJson = {
@@ -983,4 +994,39 @@ test("Drag Drop from Panel Dynamic Question", async (t) => {
 
   const resultJson = await getJSON();
   await t.expect(resultJson).eql(expectedJson);
+});
+
+test("Drag Drop Question: click on drag area should work withot drag start", async (t) => {
+  const getSelectedElementName = ClientFunction(() => {
+    return window["creator"].selectedElement.name;
+  });
+
+  await t.resizeWindow(2560, 1440);
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "rating",
+            name: "rating1"
+          },
+          {
+            type: "rating",
+            name: "rating2"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Rating1 = Selector("[data-sv-drop-target-survey-element=\"rating1\"]");
+  const Rating2 = Selector("[data-sv-drop-target-survey-element=\"rating2\"]");
+  const DragZoneRating2 = Rating2.find(".svc-question__drag-element");
+
+  await t.click(Rating1); // select Rating1
+  await t.expect(getSelectedElementName()).eql("rating1");
+  await t.hover(Rating2).click(DragZoneRating2); // select Rating2 without drag start
+  await t.expect(getSelectedElementName()).eql("rating2");
 });

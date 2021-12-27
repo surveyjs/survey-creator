@@ -5,6 +5,7 @@
 }
 .svc-row .sd-row--multiple {
   padding: calcSize(1);
+  gap: calcSize(1);
 }
 .svc-row.svc-row--ghost {
   .svc-question__content {
@@ -13,6 +14,7 @@
     box-shadow: none;
   }
   .sd-row {
-    margin-top: 0;
+    margin-top: calcSize(2);
+    margin-bottom: calcSize(2);
   }
 }

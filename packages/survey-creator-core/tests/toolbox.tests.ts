@@ -8,7 +8,7 @@ import {
   Question,
   QuestionButtonGroupModel
 } from "survey-core";
-import { QuestionLinkValueModel } from "../src/property-grid/values";
+import { QuestionLinkValueModel } from "../src/components/link-value";
 import { QuestionToolbox } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
 
@@ -327,5 +327,17 @@ test("Creator layout: toolbox location", (): any => {
   expect(creator.toolbox.dotsItemPopupModel.horizontalPosition).toEqual("left");
 
   creator.showPropertyGrid = false;
+  expect(creator.toolbox.isCompact).toEqual(false);
+});
+
+test("the toolbox gets compact after the sidebar was collapsed/expanded ", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.toolbox.isCompact).toEqual(false);
+  expect(creator.showPropertyGrid).toEqual(true);
+
+  creator.showPropertyGrid = false;
+  expect(creator.toolbox.isCompact).toEqual(false);
+
+  creator.showPropertyGrid = true;
   expect(creator.toolbox.isCompact).toEqual(false);
 });

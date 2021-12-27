@@ -127,3 +127,16 @@
     padding: calcSize(1.5) calcSize(5);
   }
 }
+
+.svc-toolbox, .svc-toolbox:not(.svc-toolbox--compact) {
+  .svc-toolbox__tool--pressed {
+    .svc-toolbox__item:not(.sv-dots), .svc-toolbox__item:not(.sv-dots):hover {
+      .sv-svg-icon use {
+        fill: $foreground;
+        opacity: 0.5;
+      }
+      color: $foreground;
+      opacity: 0.5;
+    }
+  }
+}

@@ -1,9 +1,9 @@
 import {
   setJSON, collapseButtonSelector, expandButtonSelector, getPagesLength, getTabbedMenuItemByText,
   objectSelectorButton, objectSelectorPopup, propertyGridSelector, url,
-  pageNavigator, creatorTabDesignerName, creatorTabPreviewName
+  pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation
 } from "../helper";
-import { ClientFunction, Selector } from "testcafe";
+import { Selector } from "testcafe";
 const title = "Side bar";
 
 const json = {
@@ -25,7 +25,7 @@ fixture(title)
   .beforeEach(async (t) => await t.maximizeWindow());
 
 test("collapse/expand buttons", async (t) => {
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
 
   await t
     .expect(propertyGridSelector.visible).ok()
@@ -76,11 +76,6 @@ test("SelectObject", async (t: TestController) => {
     .expect(objectSelectorPopup.visible).notOk();
 });
 
-async function changeToolboxLocation(newVal: string) {
-  await ClientFunction((newVal) => {
-    window["creator"].toolboxLocation = newVal;
-  })(newVal);
-}
 const toolboxInDesigner = Selector(".svc-creator-tab .svc-toolbox");
 const toolboxInSideBar = Selector(".svc-side-bar .svc-toolbox");
 const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");

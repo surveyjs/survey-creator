@@ -40,17 +40,14 @@ import {
   ICollectionItemAllowOperations,
   settings
 } from "../../src/settings";
+import { PropertyGridValueEditor, PropertyGridRowValueEditor } from "../../src/property-grid/values";
+import { ConditionEditor } from "../../src/property-grid/condition-survey";
+import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
+import { QuestionLinkValueModel } from "../../src/components/link-value";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
-import {
-  QuestionLinkValueModel,
-  PropertyGridValueEditor,
-  PropertyGridRowValueEditor
-} from "../../src/property-grid/values";
-import { ConditionEditor } from "../../src/property-grid/condition-survey";
-import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -2213,6 +2210,34 @@ test("AllowRowsDragDrop and property readOnly", () => {
   expect(choicesQuestion.allowRowsDragAndDrop).toBeFalsy();
   Serializer.findProperty("selectbase", "choices").readOnly = false;
 });
+
+test("Edit matrix and property readOnly ", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 4];
+  let propertyGrid = new PropertyGridModelTester(question);
+  let choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion).toBeTruthy();
+  expect(choicesQuestion.visibleRows[0].cells[1].question.readOnly).toBeFalsy();
+
+  Serializer.findProperty("itemvalue", "text").readOnly = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.visibleRows[0].cells[1].question.readOnly).toBeTruthy();
+
+  Serializer.findProperty("itemvalue", "text").readOnly = false;
+  Serializer.findProperty("selectbase", "choices").readOnly = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.visibleRows[0].cells[1].question.readOnly).toBeTruthy();
+  Serializer.findProperty("selectbase", "choices").readOnly = false;
+});
+
 test("Check textUpdate mode for question", () => {
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);

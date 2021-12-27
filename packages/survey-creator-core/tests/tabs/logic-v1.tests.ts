@@ -16,7 +16,8 @@ import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 import { EmptySurveyCreatorOptions } from "../../src/settings";
-import { defaultStrings } from "../../src/editorLocalization";
+
+export * from "../../src/components/link-value";
 
 test("Page visibility logic", () => {
   var survey = new SurveyModel({});
