@@ -5,7 +5,10 @@ survey-creator,
   display: flex;
   width: 100%;
   height: 100%;
-
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: $border transparent;
+  }
   ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
