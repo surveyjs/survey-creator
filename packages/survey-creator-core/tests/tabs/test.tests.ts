@@ -9,7 +9,7 @@ function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   return testPlugin.model;
 }
 
-test.skip("Test language Bar Item", (): any => {
+test("Test language Bar Item", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
     questions: [
@@ -37,7 +37,7 @@ test.skip("Test language Bar Item", (): any => {
   expect(model.survey.locale).toEqual("de");
   expect(langAction.title).toEqual("deutsch");
 
-  let testAgain = creator.toolbar.actions.filter((action) => action.id === "testSurveyAgain")[0];
+  let testAgain = model.testAgainAction;
   expect(testAgain).toBeTruthy();
   testAgain.action();
   expect(model.survey.locale).toEqual("de");
@@ -255,7 +255,7 @@ test("Simulator view switch", (): any => {
   model.simulator.device = "iPhone5";
   expect(model.simulator.simulatorMainCssClass).toEqual("svd-simulator-main--frame");
 });
-test.skip("Hide Test Again action on leaving Preview", (): any => {
+test("Hide Test Again action on leaving Preview", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {
     questions: [
@@ -269,7 +269,7 @@ test.skip("Hide Test Again action on leaving Preview", (): any => {
   creator.makeNewViewActive("test");
   const model: TestSurveyTabViewModel = testPlugin.model;
 
-  let testAgain = creator.toolbar.actions.filter((action) => action.id === "testSurveyAgain")[0];
+  let testAgain = model.testAgainAction;
   expect(testAgain).toBeTruthy();
   expect(testAgain.visible).toBeFalsy();
   model.survey.doComplete();
