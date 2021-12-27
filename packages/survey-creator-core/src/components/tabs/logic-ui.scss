@@ -49,6 +49,7 @@
   font-size: calcSize(2);
   color: $foreground-light;
   height: calcSize(5);
+  line-height: calcSize(3);
 
   option {
     background: $background;
@@ -63,21 +64,39 @@
 .svc-logic-question--answered .svc-logic-operator {
   color: $foreground;
 }
+.svc-logic-operator.svc-logic-operator {
+  &:hover, &:focus {
+    color: $background;
+    outline: none;
+  }
+}
 
 .svc-logic-operator.svc-logic-operator--conjunction {
   background-color: $primary-light;
+  &:hover, &:focus {
+    background-color: $primary;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--question {
   background-color: $blue-light;
+  &:hover, &:focus {
+    background-color: $blue;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--operator {
-  background-color: $secondary-light;
+  background-color: $secondary-back-light;
+  &:hover, &:focus {
+    background-color: $secondary;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--action {
   background-color: $red-light;
+  &:hover, &:focus {
+    background-color: $red;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--error {
@@ -95,7 +114,9 @@
     display: none;
   }
 }
-
+.svc-action-button.svc-logic-condition-remove.svc-icon-remove:focus {
+  outline: none;
+}
 .svc-logic-condition-remove.svc-icon-remove {
   display: block;
   width: calcSize(5);
@@ -136,6 +157,9 @@
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
   color: $foreground-light;
+  &:hover, &:focus {
+    color: $background;
+  }
 }
 
 .svc-logic-tab__content {

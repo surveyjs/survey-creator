@@ -329,3 +329,15 @@ test("Creator layout: toolbox location", (): any => {
   creator.showPropertyGrid = false;
   expect(creator.toolbox.isCompact).toEqual(false);
 });
+
+test("the toolbox gets compact after the sidebar was collapsed/expanded ", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.toolbox.isCompact).toEqual(false);
+  expect(creator.showPropertyGrid).toEqual(true);
+
+  creator.showPropertyGrid = false;
+  expect(creator.toolbox.isCompact).toEqual(false);
+
+  creator.showPropertyGrid = true;
+  expect(creator.toolbox.isCompact).toEqual(false);
+});

@@ -122,7 +122,7 @@ const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterV
 const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
 const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
 const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisible();
-const logicDetailButtonElement = Selector(".sl-table__cell--detail-button").filterVisible();
+const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
 const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New Rule");
@@ -318,7 +318,7 @@ test("Update rules", async (t) => {
   await t
     .expect(tableRulesSelector.count).eql(2)
     .expect(Selector(".st-table__cell--actions").count).eql(4)
-    .expect(Selector(".sl-table__cell--detail-button").count).eql(2)
+    .expect(Selector(".sl-table__detail-button").count).eql(2)
     .expect(Selector("#remove-row").count).eql(2);
 });
 
