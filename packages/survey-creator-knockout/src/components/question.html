@@ -1,5 +1,5 @@
 <div class="svc-question__adorner"
-  data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': surveyElement.name }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
+  data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': surveyElement.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
   <!-- ko if: question.isInteractiveDesignElement -->
   <div class="svc-question__content" data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
     <div class="svc-question__drag-area"
