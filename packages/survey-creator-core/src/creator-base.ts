@@ -1297,13 +1297,18 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       }
     }
   }
-
+  private setPropertyPlaceHolder(className: string, propertyName: string, value: string) {
+    const prop: any = Serializer.findProperty(className, propertyName);
+    if(!!prop) {
+      prop.placeHolder = value;
+    }
+  }
   private patchMetadata(): void {
-    Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
-    Serializer.findProperty("survey", "description").placeholder = "pe.surveyDescriptionPlaceholder";
+    this.setPropertyPlaceHolder("survey", "title", "pe.surveyTitlePlaceholder");
+    this.setPropertyPlaceHolder("survey", "description", "pe.surveyDescriptionPlaceholder");
     Serializer.findProperty("survey", "logoPosition").visible = false;
-    Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
-    Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
+    this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
+    this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
