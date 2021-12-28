@@ -113,8 +113,7 @@ const conditionTextEdit = Selector(".sl-embedded-survey[data-name=\"conditions\"
 
 const newRuleCondition = "New rule is not set";
 const newRuleActions = "Value is empty";
-const cellConditions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Condition(s)\"]"));
-const cellActions = Selector(tableRulesSelector.find(".sl-table__cell[title=\"Action(s)\"]"));
+const cellRules = Selector(tableRulesSelector.find(".sl-table__cell[data-responsive-title=\"rules\"]"));
 const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
 const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filterVisible();
 const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
@@ -145,8 +144,7 @@ test("Create logic rule", async (t) => {
     .click(addNewRuleButton)
     .expect(addNewRuleButton.classNames).contains(disabledClass)
     .expect(Selector(".svc-logic-tab__content-empty").exists).notOk()
-    .expect(cellConditions.innerText).eql(newRuleCondition)
-    .expect(cellActions.innerText).eql(newRuleActions)
+    .expect(cellRules.innerText).eql(newRuleCondition)
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.value).eql("")
     .expect(logicOperatorSelector.innerText).eql("equals")
@@ -216,14 +214,12 @@ test("Create logic rule", async (t) => {
     .expect(removeButton.count).eql(0)
 
     .expect(addNewRuleButton.classNames).contains(disabledClass)
-    .expect(cellConditions.innerText).eql("New rule is not set")
-    .expect(cellActions.innerText).eql("Value is empty")
+    .expect(cellRules.innerText).eql("New rule is not set")
 
     .click(doneButton)
     .expect(addNewRuleButton.classNames).notContains(disabledClass)
     .expect(notifyBalloonSelector.innerText).eql("Modified")
-    .expect(cellConditions.innerText).eql("{string_editor} is not empty")
-    .expect(cellActions.innerText).eql("Survey becomes completed");
+    .expect(cellRules.innerText).eql("If {string_editor} is not empty, Survey becomes completed");
 });
 
 test("Logic rules", async (t) => {
@@ -242,14 +238,12 @@ test("Logic rules", async (t) => {
     .click(getSelectOptionByText("Complete survey"))
     .click(doneButton)
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{string_editor} is not empty")
-    .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed")
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If {string_editor} is not empty, Survey becomes completed")
 
     .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{string_editor} is not empty")
-    .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Survey becomes completed");
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If {string_editor} is not empty, Survey becomes completed");
 });
 
 test("Edit Logic rule", async (t) => {
@@ -275,8 +269,7 @@ test("Edit Logic rule", async (t) => {
 
     .click(doneButton)
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("{q1} == \'item2\'")
-    .expect(tableRulesSelector.find("td").nth(2).innerText).eql("Make question {q3} visible");
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If {q1} == \'item2\', Make question {q3} visible");
 });
 
 test("Filtering rules", async (t) => {
@@ -389,10 +382,9 @@ test("Availability of the Done button", async (t) => {
     .expect(doneButton.visible).ok();
 });
 
-async function check1Rule(t: TestController, ruleCondition: string, ruleActions: string) {
+async function check1Rule(t: TestController, ruleCondition: string) {
   await t
-    .expect(cellConditions.nth(0).innerText).eql(ruleCondition)
-    .expect(cellActions.nth(0).innerText).eql(ruleActions)
+    .expect(cellRules.nth(0).innerText).eql(ruleCondition)
     .expect(logicQuestionSelector.value).eql("q3")
     .expect(logicOperatorSelector.value).eql("equal")
     .expect(logicQuestionValueSelector.find("input").value).eql("45")
@@ -400,8 +392,7 @@ async function check1Rule(t: TestController, ruleCondition: string, ruleActions:
 }
 async function check2Rule(t: TestController) {
   await t
-    .expect(cellConditions.nth(1).innerText).eql(newRuleCondition)
-    .expect(cellActions.nth(1).innerText).eql(newRuleActions)
+    .expect(cellRules.nth(1).innerText).eql(newRuleCondition)
     .expect(logicQuestionSelector.value).eql("q1")
     .expect(logicOperatorSelector.value).eql("equal")
     .expect(logicDropdownValueSelector.value).eql("item2")
@@ -410,16 +401,14 @@ async function check2Rule(t: TestController) {
 }
 
 test("Modified rules without saving", async (t) => {
-  const rule1Condition = "{q1} == 'item1'";
-  const rule1Actions = "Make question {q2} visible";
+  const rule1Condition = "If {q1} == 'item1', Make question {q2} visible";
   const additinalClass = "sl-table__row--additional";
 
   await setJSON(json2);
 
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .expect(cellConditions.nth(0).innerText).eql(rule1Condition)
-    .expect(cellActions.nth(0).innerText).eql(rule1Actions)
+    .expect(cellRules.nth(0).innerText).eql(rule1Condition)
     .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
 
     .hover(tableRulesSelector.nth(0))
@@ -429,7 +418,7 @@ test("Modified rules without saving", async (t) => {
     .typeText(logicQuestionValueSelector, "45", { replace: true })
     .click(logicActionSelector)
     .click(getSelectOptionByText("Complete survey"));
-  await check1Rule(t, rule1Condition, rule1Actions);
+  await check1Rule(t, rule1Condition);
 
   await t
     .hover(tableRulesSelector.nth(0))
@@ -454,7 +443,7 @@ test("Modified rules without saving", async (t) => {
     .click(logicDetailButtonElement.nth(0))
     .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
     .expect(tableRulesSelector.nth(1).classNames).contains(additinalClass);
-  await check1Rule(t, rule1Condition, rule1Actions);
+  await check1Rule(t, rule1Condition);
 
   await t
     .hover(tableRulesSelector.nth(1))
@@ -465,16 +454,14 @@ test("Modified rules without saving", async (t) => {
 
   await t
     .click(doneButton)
-    .expect(cellConditions.nth(1).innerText).eql("{q1} == 'item2'")
-    .expect(cellActions.nth(1).innerText).eql("Make question {q3} visible")
+    .expect(cellRules.nth(1).innerText).eql("If {q1} == 'item2', Make question {q3} visible")
     .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
     .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass)
 
     .hover(tableRulesSelector)
     .click(logicDetailButtonElement)
     .click(doneButton)
-    .expect(cellConditions.nth(0).innerText).eql("{q3} == 45")
-    .expect(cellActions.nth(0).innerText).eql("Survey becomes completed")
+    .expect(cellRules.nth(0).innerText).eql("If {q3} == 45, Survey becomes completed")
     .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
     .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass);
 });
