@@ -13,6 +13,9 @@ svc-page-navigator-item,
 .svc-page-navigator-item-content {
   height: 100%;
   width: 100%;
+  &:hover, &:focus {
+    outline: none;
+  }
 }
 
 .svc-page-navigator-item__dot {
@@ -80,8 +83,6 @@ svc-page-navigator-item,
 
 .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover,
 .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):focus {
-  outline: none;
-
   .svc-page-navigator-item__banner {
     padding: 0 calcSize(4.5) 0 calcSize(2.5);
     max-width: calcSize(25);
