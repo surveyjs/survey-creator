@@ -11,6 +11,16 @@
     }
   }
 
+  .svc-rating-question-controls {
+    bottom: calcSize(5);
+    left: calcSize(3);
+  }
+  .svc-question__content--selected {
+    .svc-rating-question-controls {
+      bottom: calcSize(10);
+    }
+  }
+
   .svc-page__content {
     padding-left: 0;
     padding-right: 0;
