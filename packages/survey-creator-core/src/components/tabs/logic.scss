@@ -49,9 +49,17 @@
 .sl-table__cell .svc-action-button,
 .sl-table__cell .svc-action-button:hover,
 .sl-table__cell .svc-action-button:focus {
+  @include mediumBold;
+
   background: transparent;
   color: $foreground;
   outline: none;
+
+  max-height: calcSize(13.5);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .sl-table__cell {

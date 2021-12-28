@@ -38,9 +38,8 @@ svc-tab-test {
     }
 
     .sv-action-bar-item__title {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      @include textEllipsis;
+
       display: inline-block;
     }
   }

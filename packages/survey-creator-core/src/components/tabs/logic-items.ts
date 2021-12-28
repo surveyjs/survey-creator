@@ -150,14 +150,14 @@ export class SurveyLogicItem {
   public getVisibleLogicTypes(): Array<SurveyLogicType> {
     return this.owner.getVisibleLogicTypes();
   }
-  public get title(): string {
+  /*public get title(): string {
     var res = this.getDisplayText();
     const maxChars = settings.logic.logicItemTitleMaxChars;
     if (!!res && res.length > maxChars) {
-      res = res.substr(1, maxChars) + "..."; //!!!
+      res = res.substr(1, maxChars) + "...";
     }
     return res;
-  }
+  }*/
 
   public getDisplayText() {
     const conditionText = this.getExpressionAsDisplayText();
