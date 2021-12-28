@@ -8,10 +8,6 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     return this.props.model;
   }
 
-  private get isRunningOnDesktop(): boolean {
-    return !this.props.isRunning && this.model.device === "desktop";
-  }
-
   constructor(props: any) {
     super(props);
   }
@@ -20,7 +16,8 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
   }
 
   renderElement(): JSX.Element {
-    const mainSimulatorClass = "svd-simulator-main" + (this.isRunningOnDesktop ? " svd-simulator-main--desktop" : "");
+    const mainSimulatorClass = "svd-simulator-main" +
+      (this.model.device === "desktop" ? " svd-simulator-main--desktop" : "");
     if (!this.model.survey) {
       return <div className={mainSimulatorClass}></div>;
     }
