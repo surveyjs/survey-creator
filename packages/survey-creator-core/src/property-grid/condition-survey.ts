@@ -577,11 +577,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       panel.removeElement(oldQuestion);
     }
     if (this.canShowQuestionValue(panel)) {
+      const title = newQuestion.title;
       newQuestion.name = "questionValue";
       newQuestion.visibleIf = "questionValueVisibleIf({panel.questionName}, {panel.operator})";
-      newQuestion.title = editorLocalization.getString("pe.conditionValueQuestionTitle");
+      newQuestion.title = title;
       newQuestion.description = "";
-      newQuestion.titleLocation = "default";
+      newQuestion.titleLocation = "top";
       newQuestion.hasComment = false;
       panel.addElement(newQuestion);
     }
