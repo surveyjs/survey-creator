@@ -78,6 +78,32 @@ test("Check actions hover states", async (t) => {
   await checkElementScreenshot("logic-collapse-hover.png", logicDetailButtonElement, t);
 });
 
+test("Check logic error notifier", async (t) => {
+  await t.resizeWindow(1920, 900);
+  await setJSON({
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "q1"
+          },
+          {
+            "type": "text",
+            "name": "q2",
+          },
+        ]
+      }
+    ]
+  });
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName));
+  await t.click(Selector(".svc-logic-tab__content-action")).click(Selector(".sl-panel__done-button"));
+  await checkElementScreenshot("logic-error-notifier.png", Selector(".svc-notifier--error"), t);
+});
+
 const jsonMultipleConditionsMultipleActions = {
   "logoPosition": "right",
   "pages": [
