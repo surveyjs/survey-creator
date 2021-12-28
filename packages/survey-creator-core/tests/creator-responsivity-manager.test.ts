@@ -79,3 +79,40 @@ test("CreatorResponsivityManager process", (): any => {
   checkByWidth(599, "hidden", true, true, false);
   checkByWidth(200, "hidden", true, true, false);
 });
+
+test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hidden", (): any => {
+  const container: SimpleContainer = new SimpleContainer({});
+  const creator = new CreatorTester();
+  const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+  creator.toolboxLocation = "right";
+  creator.showPropertyGrid = false;
+
+  const checkByWidth = (newOffsetWidth: number, toolboxLocation: toolBoxLocationType, toolboxIsCompact: boolean, propertyGridFlyoutMode: boolean, showPageNavigator: boolean) => {
+    container.offsetWidth = newOffsetWidth;
+    responsivityManager.process();
+    expect(creator.toolboxLocation).toEqual(toolboxLocation);
+    expect(creator.toolbox.isCompact).toEqual(toolboxIsCompact);
+    expect(creator.showPageNavigator).toEqual(showPageNavigator);
+    expect(creator.sideBar.flyoutMode).toEqual(propertyGridFlyoutMode);
+  };
+
+  expect(creator.toolbox.isCompact).toBeFalsy();
+
+  checkByWidth(2000, "right", false, false, true);
+  checkByWidth(1801, "right", false, false, true);
+
+  checkByWidth(1799, "right", false, false, true);
+  checkByWidth(1501, "right", false, false, true);
+
+  checkByWidth(1499, "right", true, false, true);
+  checkByWidth(1201, "right", true, false, true);
+
+  checkByWidth(1199, "right", true, true, true);
+  checkByWidth(901, "right", true, true, true);
+
+  checkByWidth(899, "hidden", true, true, false);
+  checkByWidth(601, "hidden", true, true, false);
+
+  checkByWidth(599, "hidden", true, true, false);
+  checkByWidth(200, "hidden", true, true, false);
+});
