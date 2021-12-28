@@ -27,12 +27,14 @@ export class QuestionRatingAdornerComponent extends QuestionAdornerComponent {
       <div className="svc-rating-question-controls svc-item-value-controls">
         {model.allowRemove ? attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__remove"
+          aria-label={model.removeTooltip}
           onClick={() => model.removeItem(model)}
         >
           <SvgIcon size={16} iconName={"icon-remove_16x16"}></SvgIcon>
         </span>) : null}
         {model.allowAdd ? attachKey2click(<span
           className="svc-item-value-controls__button svc-item-value-controls__add"
+          aria-label={model.addTooltip}
           onClick={() => model.addItem(model)}
         >
           <SvgIcon size={16} iconName={"icon-add_16x16"}></SvgIcon>

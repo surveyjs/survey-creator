@@ -67,3 +67,40 @@ test("Empty Panel Styles", async (t) => {
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
 });
+
+test("Empty Panel Dynamic Styles", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "paneldynamic",
+            name: "question1"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const patchDragDropToDisableDrop = ClientFunction(() => {
+    window["creator"].dragDropSurveyElements.drop = () => { };
+  });
+  await patchDragDropToDisableDrop();
+
+  const PanelDynamic = Selector("[data-sv-drop-target-survey-element=\"question1\"]");
+  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, PanelDynamic, { speed: 0.5 });
+
+  await takeScreenshot("drag-drop-survey-element-empty-panel-dynamic.png", PanelDynamic, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+});

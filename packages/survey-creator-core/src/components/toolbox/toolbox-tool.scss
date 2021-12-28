@@ -118,10 +118,6 @@
   opacity: 0.5;
 }
 
-.svc-toolbox__item:focus {
-  outline: none !important;
-}
-
 .svc-toolbox-popup {
   .sv-list__item {
     padding: calcSize(1.5) calcSize(5);

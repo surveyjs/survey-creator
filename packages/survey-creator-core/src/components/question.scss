@@ -43,6 +43,7 @@ svc-question {
   background: $background;
   box-shadow: 0px 1px 2px $shadow-inner;
   border: 2px solid transparent;
+  outline: none;
 }
 
 .svc-question__content {

@@ -33,7 +33,7 @@ $green-light: var(--green-light, rgba(25, 179, 148, 0.1));
 $blue: var(--blue, #437FD9);
 $blue-light: var(--blue-light, rgba(67, 127, 217, 0.1));
 
-$font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family: var(--font-family);
 
 $base-unit: var(--base-unit, 8px);
 

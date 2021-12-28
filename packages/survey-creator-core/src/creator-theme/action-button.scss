@@ -14,9 +14,9 @@
 }
 
 .svc-action-button {
-  &:focus,
-  &:hover {
-    background-color: rgba(25, 179, 148, 0.1); // $primary-hover-color
+  &:focus, &:hover {
+    background: $primary-light;
+    outline: none;
   }
 }
 

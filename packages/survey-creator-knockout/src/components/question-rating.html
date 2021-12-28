@@ -1,10 +1,14 @@
 <div class="svc-rating-question-controls svc-item-value-controls">
   <!-- ko if: allowAdd -->
   <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__add"
-    data-bind="click: addItem, key2click" params="iconName: 'icon-add_16x16', size: 16"></sv-svg-icon>
+    data-bind="click: addItem, key2click, attr: { 'aria-label': addTooltip }"
+    params="iconName: 'icon-add_16x16', size: 16">
+  </sv-svg-icon>
   <!-- /ko -->
   <!-- ko if: allowRemove -->
   <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__remove"
-    data-bind="click: removeItem, key2click" params="iconName: 'icon-remove_16x16', size: 16"></sv-svg-icon>
+    data-bind="click: removeItem, key2click, attr: { 'aria-label': removeTooltip }"
+    params="iconName: 'icon-remove_16x16', size: 16">
+  </sv-svg-icon>
   <!-- /ko -->
 </div>

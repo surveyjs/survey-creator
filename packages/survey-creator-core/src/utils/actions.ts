@@ -24,8 +24,11 @@ export function updateMatrixLogicExpandAction(question: QuestionMatrixDynamicMod
   action.showTitle = false;
   action.action = () => {
     row.showHideDetailPanelClick();
-    action.iconName = row.isDetailPanelShowing ? "icon-logic-collapse" : "icon-logic-expand";
   }
+  const updateIcon = () => { action.iconName = row.isDetailPanelShowing ? "icon-logic-collapse" : "icon-logic-expand"; };
+  question.registerFunctionOnPropertyValueChanged("isRowShowing" + row.id, updateIcon)
+  updateIcon();
+
 }
 export function updateMatrixRemoveAction(
   question: QuestionMatrixDynamicModel,
