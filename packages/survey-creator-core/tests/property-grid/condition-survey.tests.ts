@@ -1204,22 +1204,22 @@ test("Show rating/ranking in new line", () => {
   var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   var questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 
   panel.getQuestionByName("questionName").value = "q3";
   questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 
   panel.getQuestionByName("questionName").value = "q4";
   questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 
   panel.getQuestionByName("questionName").value = "q2";
   questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 });
 test("Make question value invisible for empty/notempty if they are in the new line", () => {

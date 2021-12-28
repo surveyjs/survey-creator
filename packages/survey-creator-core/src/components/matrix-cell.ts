@@ -23,7 +23,7 @@ export class MatrixCellWrapperViewModel extends Base {
   @property() isSelected: boolean;
 
   private onSelectionChanged = (sender, options) => {
-    if(this.context && this.context.getPropertyValue) {
+    if (this.context && this.context.getPropertyValue) {
       this.isSelected = this.creator.isElementSelected(this.context);
     } else {
       this.isSelected = false;
@@ -53,23 +53,24 @@ export class MatrixCellWrapperViewModel extends Base {
         model.question.parentQuestion.onColumnCellTypeChanged(column);
         return true;
       },
-      undefined, undefined, model.question.name
+      undefined, "svc-matrix-cell__popup", model.question.name,
+      this.creator.isMobileView ? "overlay" : "popup"
     );
   }
   get context() {
     return this.row || this.column || this.templateData;
   }
   public selectContext(model: MatrixCellWrapperViewModel, event: MouseEvent) {
-    if(!!model.row) {
+    if (!!model.row) {
       model.creator.selectElement(model.row.data, "rows", false);
       event.stopPropagation();
       return;
     }
-    if(typeof model.context.getType !== "function") {
+    if (typeof model.context.getType !== "function") {
       return;
     }
     const contextType = model.context.getType();
-    if(contextType === "itemvalue") {
+    if (contextType === "itemvalue") {
       model.creator.selectElement(model.context.locOwner, model.context.ownerPropertyName, false);
     } else {
       model.creator.selectElement(model.context);
@@ -77,7 +78,7 @@ export class MatrixCellWrapperViewModel extends Base {
     event.stopPropagation();
   }
   public hover(event: MouseEvent, element: HTMLElement) {
-    if(!this.row && this.context && this.context.getPropertyValue && this.context.getType && this.context.getType() !== "itemvalue") {
+    if (!this.row && this.context && this.context.getPropertyValue && this.context.getType && this.context.getType() !== "itemvalue") {
       toggleHovered(event, element);
     }
   }

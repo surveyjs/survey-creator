@@ -37,18 +37,9 @@ export class CellQuestionAdornerComponent extends SurveyElementBase<
           data-sv-drop-target-survey-element={this.model.surveyElement.name}
           className={"svc-question__adorner"}
         >
-          {attachKey2click(
-            <div
-              className={
-                " svc-question__content--selected-no-border svc-question__content"
-              }
-              onClick={(e) =>
-                this.model.select(this.model, new ReactMouseEvent(e))
-              }
-            >
-              {this.props.element}
-            </div>
-          )}
+          <div className={" svc-question__content--selected-no-border svc-question__content"}>
+            {this.props.element}
+          </div>
         </div>
       </React.Fragment>
     );

@@ -167,6 +167,37 @@ test("LogicUI: isModified for new item", () => {
   expect(trigger.setValue).toEqual(2);
   expect(logic.items[0].isModified).toBeFalsy();
 });
+test("LogicUI: check 'setValue' question title", () => {
+  let survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", },
+      { type: "text", name: "q3", title: "Question 3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  let row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  logic.expressionEditor.text = "{q1}=1";
+  let panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
+  let elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+  elementPanel.getQuestionByName("setToName").value = "q2";
+  let setValueQuestion = elementPanel.getQuestionByName("setValue");
+  expect(setValueQuestion.title).toEqual("q2");
+  expect(setValueQuestion.titleLocation).toEqual("top");
+  expect(setValueQuestion.getTitleActions().length).toEqual(0);
+  logic.itemEditor.panel.addPanel();
+  panel = logic.itemEditor.panels[1];
+  panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
+  elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+  elementPanel.getQuestionByName("setToName").value = "q3";
+  setValueQuestion = elementPanel.getQuestionByName("setValue");
+  expect(setValueQuestion.title).toEqual("Question 3");
+  expect(setValueQuestion.titleLocation).toEqual("top");
+  expect(setValueQuestion.getTitleActions().length).toEqual(0);
+});
 test("LogicUI: dispose logic item ui", () => {
   const survey = new SurveyModel({
     elements: [
@@ -1601,12 +1632,12 @@ test("Logic action expand/collapse icon update", () => {
   );
   const expandAction = itemsQuestion.renderedTable["rowsActions"][0][1];
   const row = itemsQuestion.visibleRows[0];
-  expect(row.isDetailPanelShowing).toBe(false)
-  expect(expandAction.iconName).toEqual("icon-logic-expand")
+  expect(row.isDetailPanelShowing).toBe(false);
+  expect(expandAction.iconName).toEqual("icon-logic-expand");
   row.showDetailPanel();
-  expect(row.isDetailPanelShowing).toBe(true)
-  expect(expandAction.iconName).toEqual("icon-logic-collapse")
+  expect(row.isDetailPanelShowing).toBe(true);
+  expect(expandAction.iconName).toEqual("icon-logic-collapse");
   row.hideDetailPanel();
-  expect(row.isDetailPanelShowing).toBe(false)
-  expect(expandAction.iconName).toEqual("icon-logic-expand")
+  expect(row.isDetailPanelShowing).toBe(false);
+  expect(expandAction.iconName).toEqual("icon-logic-expand");
 });
