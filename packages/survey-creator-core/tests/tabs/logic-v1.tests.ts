@@ -693,35 +693,19 @@ test("Displaying correct text for logic action", () => {
   for (var i = 0; i < logicTypes.length; i++) {
     expect(findOp(logicTypes[i])).toBeTruthy();
   }
-  expect(logic.items[0].expressionText).toEqual("{q1} == 1");
+  expect(logic.items[0].getDisplayText()).toEqual("If {q1} == 1, Make page {page1} visible, Make question {q2} visible, Make question {q3} enable, Make question {q4} required, Make panel {panel1} visible, Make panel {panel1} enable, Survey becomes completed, Survey skip to the question {q2}, Run expression: '{q2} + 1' and set its result into question: {q3}, Copy into question: {q1} value from question {q2}, Set into question: {q2} value q2Value, Show custom text for the 'Thank you page'.");
   expect(findOp("page_visibility").text).toEqual("Make page {page1} visible");
-  expect(findOp("panel_visibility").text).toEqual(
-    "Make panel {panel1} visible"
-  );
+  expect(findOp("panel_visibility").text).toEqual("Make panel {panel1} visible");
   expect(findOp("panel_enable").text).toEqual("Make panel {panel1} enable");
-  expect(findOp("question_visibility").text).toEqual(
-    "Make question {q2} visible"
-  );
+  expect(findOp("question_visibility").text).toEqual("Make question {q2} visible");
   expect(findOp("question_enable").text).toEqual("Make question {q3} enable");
-  expect(findOp("question_require").text).toEqual(
-    "Make question {q4} required"
-  );
+  expect(findOp("question_require").text).toEqual("Make question {q4} required");
   expect(findOp("trigger_complete").text).toEqual("Survey becomes completed");
-  expect(findOp("trigger_setvalue").text).toEqual(
-    "Set into question: {q2} value q2Value"
-  );
-  expect(findOp("trigger_copyvalue").text).toEqual(
-    "Copy into question: {q1} value from question {q2}"
-  );
-  expect(findOp("trigger_skip").text).toEqual(
-    "Survey skip to the question {q2}"
-  );
-  expect(findOp("trigger_runExpression").text).toEqual(
-    "Run expression: '{q2} + 1' and set its result into question: {q3}"
-  );
-  expect(findOp("completedHtmlOnCondition").text).toEqual(
-    "Show custom text for the 'Thank you page'."
-  );
+  expect(findOp("trigger_setvalue").text).toEqual("Set into question: {q2} value q2Value");
+  expect(findOp("trigger_copyvalue").text).toEqual("Copy into question: {q1} value from question {q2}");
+  expect(findOp("trigger_skip").text).toEqual("Survey skip to the question {q2}");
+  expect(findOp("trigger_runExpression").text).toEqual("Run expression: '{q2} + 1' and set its result into question: {q3}");
+  expect(findOp("completedHtmlOnCondition").text).toEqual("Show custom text for the 'Thank you page'.");
   expect(findOp("page_visibility").name).toEqual("Show (hide) page");
 });
 
@@ -812,7 +796,7 @@ test("Add existing visible Items", () => {
   options.showTitlesInExpressions = true;
   var logic = new SurveyLogic(survey, options);
   expect(logic.items).toHaveLength(1);
-  expect(logic.items[0].expressionText).toEqual("{My Question 1} == 1");
+  expect(logic.items[0].getDisplayText()).toEqual("If {My Question 1} == 1, Make question {q2} visible, Make question {q3} visible");
 });
 
 test("Allow logic type to be null and change it", () => {

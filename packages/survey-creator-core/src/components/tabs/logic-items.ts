@@ -150,23 +150,28 @@ export class SurveyLogicItem {
     return this.owner.getVisibleLogicTypes();
   }
   public get title(): string {
-    var res = this.getExpressionAsDisplayText();
+    var res = this.getDisplayText();
     const maxChars = settings.logic.logicItemTitleMaxChars;
     if (!!res && res.length > maxChars) {
-      res = res.substr(1, maxChars) + "...";
+      res = res.substr(1, maxChars) + "..."; //!!!
     }
     return res;
   }
-  public get actionsText(): string {
-    var res = "";
-    for (var i = 0; i < this.actions.length; i++) {
-      if (!!res) {
-        res += "<br/>";
-      }
-      res += this.actions[i].text;
+
+  public getDisplayText() {
+    const conditionText = this.getExpressionAsDisplayText();
+    let actionsText = "";
+    this.actions.forEach(action => {
+      actionsText += (", " + action.text);
+    });
+
+    if (!!conditionText && !!actionsText) {
+      return this.ifText + " " + conditionText + actionsText;
+    } else {
+      return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
     }
-    return res;
   }
+
   public edit() {
     if (!!this.owner) {
       this.owner.editItem(this);
@@ -257,11 +262,7 @@ export class SurveyLogicItem {
   public getActionTypes(): string[] {
     return this.actions.map(action => action.logicTypeName);
   }
-  public get expressionText(): string {
-    const text = this.getExpressionAsDisplayText();
-    if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
-    return text;
-  }
+
   private getQuestionNamesFromExpression(names: string[]) {
     const conditionRunner = new ConditionRunner(this.expression);
     conditionRunner.getVariables().forEach(item => {
@@ -282,6 +283,9 @@ export class SurveyLogicItem {
   }
   public get deleteText(): string {
     return editorLocalization.getString("pe.delete");
+  }
+  public get ifText(): string {
+    return editorLocalization.getString("pe.if");
   }
   public isSuitable(filteredName: string, logicTypeName: string = ""): boolean {
     if (!filteredName && !logicTypeName) return true;

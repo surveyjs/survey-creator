@@ -422,7 +422,7 @@ test("SurveyLogicItem, clonse and equals", () => {
   expect(item.equals(clonedItem)).toBeTruthy();
 });
 test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => {
-  var survey = new SurveyModel({
+  const survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2" },
@@ -430,28 +430,24 @@ test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => 
       { type: "text", name: "q4" }
     ]
   });
-  var logic = new SurveyLogicUI(survey);
+  const logic = new SurveyLogicUI(survey);
   expect(logic.items).toHaveLength(1);
-  var itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
-  var rows = itemsQuestion.visibleRows;
+  let itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  const rows = itemsQuestion.visibleRows;
   expect(rows).toHaveLength(1);
-  expect(rows[0].cells).toHaveLength(2);
+  expect(rows[0].cells).toHaveLength(1);
   expect(rows[0].cells[0].question.getType()).toEqual("linkvalue");
-  expect(rows[0].cells[1].question.getType()).toEqual("linkvalue");
   expect(itemsQuestion.value).toHaveLength(1);
-  expect(itemsQuestion.value[0].conditions).toEqual("{q1} == 1"
-  );
-  expect(itemsQuestion.value[0].actions).toEqual("Make question {q3} visible");
+  expect(itemsQuestion.value[0].rules).toEqual("If {q1} == 1, Make question {q3} visible");
   logic.editItem(logic.items[0]);
   logic.expressionEditor.text = "{q2}=1";
-  var panel = logic.itemEditor.panels[0];
+  const panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("elementSelector").value = "q4";
-  var res = logic.saveEditableItemAndBack();
+  const res = logic.saveEditableItemAndBack();
   expect(res).toBeTruthy();
   itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.value).toHaveLength(1);
-  expect(itemsQuestion.value[0].conditions).toEqual("{q2} == 1");
-  expect(itemsQuestion.value[0].actions).toEqual("Make question {q4} visible");
+  expect(itemsQuestion.value[0].rules).toEqual("If {q2} == 1, Make question {q4} visible");
 });
 test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
   var survey = new SurveyModel({
@@ -469,12 +465,12 @@ test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
     logic.itemsSurvey.getQuestionByName("items")
   );
   var rows = itemsQuestion.visibleRows;
-  expect(rows[0].cells[0].value).toEqual(logic.items[0].expressionText);
+  expect(rows[0].cells[0].value).toEqual("If {q1} == 1, Make question {q2} visible, Make question {q3} visible");
   logic.editItem(logic.items[0]);
   logic.expressionEditor.text = "{q1}=3";
   logic.saveEditableItem();
   rows = itemsQuestion.visibleRows;
-  expect(rows[0].cells[0].value).toEqual(logic.items[0].expressionText);
+  expect(rows[0].cells[0].value).toEqual("If {q1} == 3, Make question {q2} visible, Make question {q3} visible");
 });
 
 test("SurveyLogicUI: Test logicItemEditor", () => {
@@ -874,8 +870,8 @@ test("LogicItemEditorUI: check remove row action", () => {
     logic.itemsSurvey.getQuestionByName("items")
   );
   expect(itemsQuestion.rowCount).toEqual(1);
-  expect(itemsQuestion.renderedTable.rows[0].cells).toHaveLength(4);
-  const cell = itemsQuestion.renderedTable.rows[0].cells[3];
+  expect(itemsQuestion.renderedTable.rows[0].cells).toHaveLength(3);
+  const cell = itemsQuestion.renderedTable.rows[0].cells[2];
   expect(cell.isActionsCell).toBeTruthy();
   expect(cell.item.value).toBeTruthy();
   const actions = <AdaptiveActionContainer>cell.item.value;
@@ -984,7 +980,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   expect(itemsQuestion.rowCount).toEqual(0);
   logic.addNewUI();
   expect(logic.items).toHaveLength(1);
-  expect(logic.items[0].expressionText).toEqual("New rule is not set");
+  expect(logic.items[0].getDisplayText()).toEqual("New rule is not set");
   expect(itemsQuestion.rowCount).toEqual(1);
   const row = itemsQuestion.visibleRows[0];
   expect(row.cells[0].question.value).toEqual("New rule is not set");
@@ -1014,7 +1010,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   row.detailPanel.footerActions[0].action();
   expect(logic.mode).toEqual("view");
   expect(row.detailPanel).toBeFalsy();
-  expect(row.cells[0].question.value).toEqual("{q1} == 1");
+  expect(row.cells[0].question.value).toEqual("If {q1} == 1, Make question {q2} visible");
   expect(survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 1");
 });
 test("LogicItemEditorUI: create new logic several times", () => {
@@ -1601,12 +1597,12 @@ test("Logic action expand/collapse icon update", () => {
   );
   const expandAction = itemsQuestion.renderedTable["rowsActions"][0][1];
   const row = itemsQuestion.visibleRows[0];
-  expect(row.isDetailPanelShowing).toBe(false)
-  expect(expandAction.iconName).toEqual("icon-logic-expand")
+  expect(row.isDetailPanelShowing).toBe(false);
+  expect(expandAction.iconName).toEqual("icon-logic-expand");
   row.showDetailPanel();
-  expect(row.isDetailPanelShowing).toBe(true)
-  expect(expandAction.iconName).toEqual("icon-logic-collapse")
+  expect(row.isDetailPanelShowing).toBe(true);
+  expect(expandAction.iconName).toEqual("icon-logic-collapse");
   row.hideDetailPanel();
-  expect(row.isDetailPanelShowing).toBe(false)
-  expect(expandAction.iconName).toEqual("icon-logic-expand")
+  expect(row.isDetailPanelShowing).toBe(false);
+  expect(expandAction.iconName).toEqual("icon-logic-expand");
 });

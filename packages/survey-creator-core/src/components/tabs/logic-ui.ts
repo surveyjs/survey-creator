@@ -42,10 +42,7 @@ export class SurveyLogicUI extends SurveyLogic {
     options: ISurveyCreatorOptions = null
   ) {
     super.update(survey, options);
-    const newItemsSurveyValue = this.options.createSurvey(
-      this.getLogicItemSurveyJSON(),
-      "logic-items"
-    );
+    const newItemsSurveyValue = this.options.createSurvey(this.getLogicItemSurveyJSON(), "logic-items");
     newItemsSurveyValue.css = logicCss;
     this.itemsSurveyValue = newItemsSurveyValue;
     this.itemsSurvey.onMatrixRowRemoving.add((sender, options) => {
@@ -202,6 +199,7 @@ export class SurveyLogicUI extends SurveyLogic {
           type: "matrixdynamic",
           name: "items",
           titleLocation: "hidden",
+          showColumnHeader: false,
           detailPanelMode: "underRowSingle",
           allowAddRows: false,
           allowAdaptiveActions: false,
@@ -210,13 +208,8 @@ export class SurveyLogicUI extends SurveyLogic {
           columns: [
             {
               cellType: "linkvalue",
-              name: "conditions",
-              title: this.getLocString("ed.lg.conditions")
-            },
-            {
-              cellType: "linkvalue",
-              name: "actions",
-              title: this.getLocString("ed.lg.actions")
+              name: "rules",
+              width: "50%"
             }
           ]
         }
@@ -247,10 +240,7 @@ export class SurveyLogicUI extends SurveyLogic {
     var data = [];
     this.visibleItems = this.getVisibleItems();
     for (var i = 0; i < this.visibleItems.length; i++) {
-      data.push({
-        conditions: this.visibleItems[i].expressionText,
-        actions: this.visibleItems[i].actionsText
-      });
+      data.push({ rules: this.visibleItems[i].getDisplayText() });
     }
     this.matrixItems.onHasDetailPanelCallback = (row) => { return true; };
     this.matrixItems.onCreateDetailPanelCallback = (
@@ -296,7 +286,7 @@ export class SurveyLogicUI extends SurveyLogic {
         } else {
           options.row.showDetailPanel();
         }
-      }
+      };
       options.cell.question.showClear = false;
       options.cell.question.allowClear = false;
     };

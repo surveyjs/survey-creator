@@ -1,37 +1,36 @@
 @import "../../variables.scss";
 @import "../../colors.scss";
 
-.sl-table__cell.st-table__cell--actions:first-child .sv-action-bar{
+.sl-table__cell.st-table__cell--actions:first-child .sv-action-bar {
   margin-top: -4px;
 }
-.sl-table__detail-button.sl-table__detail-button {
-  display: block;
-  width: 48px;
-  height: 48px;
+.sl-table .sl-table__detail-button.sl-table__detail-button {
+  width: calcSize(6);
+  height: calcSize(6);
+
   box-sizing: border-box;
   border-radius: 100px;
   padding: 0;
-  use {
-    display: none;
-  }
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     background-color: $primary-light;
+    outline: none;
+
     use {
       fill: $primary;
     }
   }
 }
-#show-detail .sl-table__detail-button {
-    outline: none;
-}
 
-.sl-table__row:hover .sl-table__detail-button.sl-table__detail-button ,
-.sl-table__detail-button.sl-table__detail-button:focus {  
-  use { display: initial; }
-}
-.sl-table__row #remove-row .sv-action-bar-item__icon use {
+.sl-table__cell .sv-action-bar-item__icon {
   display: none;
 }
+.sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
+.sl-table__cell .sv-action-bar-item:focus .sv-action-bar-item__icon {
+  display: block;
+}
+
 .sl-table__row:hover #remove-row,
 .sl-table__row #remove-row:focus-within {
   .sv-action-bar-item {
@@ -41,7 +40,6 @@
   }
   .sv-action-bar-item__icon use {
     fill: $red;
-    display: block;
   }
 }
 .sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {
@@ -54,17 +52,15 @@
   background: transparent;
   color: $foreground;
   outline: none;
-}
-
-.sl-table__cell {
-  color: $foreground;
   font-weight: bold;
   font-size: calcSize(2);
   font-family: $font-family;
+}
+
+.sl-table__cell {
+  vertical-align: top;
   padding: 0.9375em;
   padding-left: 0;
-  box-sizing: content-box;
-  vertical-align: top;
 }
 
 .sl-table__cell--detail-button {
@@ -117,10 +113,7 @@
 .sl-panel .sl-panel__footer {
   padding: 0;
 
-  &.sv-action-bar {
-    width: 100%;
-  }
-  #saveDetailPanel {
+  .sv-action {
     width: 100%;
   }
   .sv-action__content {
