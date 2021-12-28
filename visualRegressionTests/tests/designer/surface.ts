@@ -1,7 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-
-import { url, screenshotComparerOptions } from "../../helper";
+import { url, setJSON, checkElementScreenshot, addQuestionByAddQuestionButton } from "../../helper";
 
 const title = "Designer surface";
 
@@ -10,11 +8,8 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 test("Check section", async (t) => {
   await t.resizeWindow(1920, 1080);
-  await t.wait(1000);
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-  await ClientFunction((json) => { window["creator"].JSON = json; })({
+  const surveyJSON = {
     "showQuestionNumbers": "off",
     "widthMode": "static",
     "pages": [
@@ -35,10 +30,31 @@ test("Check section", async (t) => {
         ]
       }
     ]
-  });
-  await takeScreenshot("questions-in-one-row.png", Selector(".svc-row .sd-row"), screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+  };
 
+  await setJSON(surveyJSON);
+  await checkElementScreenshot("questions-in-one-row.png", Selector(".svc-row .sd-row"), t);
+});
+
+test("Matrix column editor", async (t) => {
+  await t.resizeWindow(1920, 900);
+  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  const row1Column1Cell = Selector(".sv_matrix_row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
+  const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
+
+  const showControl = ClientFunction(() => {
+    const el: any = document.querySelectorAll("td:nth-child(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
+    el.style.display = "block";
+  });
+
+  await t
+    .expect(Selector(".svc-question__content").exists).ok()
+    .hover(row1Column1Cell, { speed: 0.5 });
+
+  // TODO: remove this line after TestCafe implements workig hover
+  await showControl();
+
+  await t.click(editColumnButton);
+
+  await checkElementScreenshot("matrix-cell-edit.png", Selector(".svc-matrix-cell__popup .sv-popup__container"), t);
 });
