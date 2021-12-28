@@ -349,6 +349,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           titleLocation: "hidden",
           name: "textEditor",
           textUpdateMode: "onTyping",
+          placeHolder: editorLocalization.getString("pe.emptyExpressionPlaceHolder"),
           visible: false
         }
       ]
