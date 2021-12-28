@@ -1300,7 +1300,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private setPropertyPlaceHolder(className: string, propertyName: string, value: string) {
     const prop: any = Serializer.findProperty(className, propertyName);
     if(!!prop) {
-      prop.placeHolder = value;
+      prop.placeholder = value;
     }
   }
   private patchMetadata(): void {
