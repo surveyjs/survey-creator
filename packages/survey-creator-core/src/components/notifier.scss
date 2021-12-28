@@ -18,5 +18,6 @@
 
 .svc-notifier.svc-notifier--error {
   background-color: $red;
-  color: white;
+  color: $background;
+  opacity: 1;
 }
