@@ -34,6 +34,9 @@
     width: 100%;
   }
 }
+.svc-logic-paneldynamic div.svc-logic-operator {
+  height: calcSize(3);
+}
 .svc-logic-paneldynamic .svc-logic-operator {
   -webkit-appearance: none;
   appearance: none;
@@ -45,6 +48,8 @@
   font-family: $font-family;
   font-size: calcSize(2);
   color: $foreground-light;
+  height: calcSize(5);
+  line-height: calcSize(3);
 
   option {
     background: $background;
@@ -59,21 +64,39 @@
 .svc-logic-question--answered .svc-logic-operator {
   color: $foreground;
 }
+.svc-logic-operator.svc-logic-operator {
+  &:hover, &:focus {
+    color: $background;
+    outline: none;
+  }
+}
 
 .svc-logic-operator.svc-logic-operator--conjunction {
   background-color: $primary-light;
+  &:hover, &:focus {
+    background-color: $primary;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--question {
   background-color: $blue-light;
+  &:hover, &:focus {
+    background-color: $blue;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--operator {
-  background-color: $secondary-light;
+  background-color: $secondary-back-light;
+  &:hover, &:focus {
+    background-color: $secondary;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--action {
   background-color: $red-light;
+  &:hover, &:focus {
+    background-color: $red;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--error {
@@ -91,8 +114,10 @@
     display: none;
   }
 }
-
-.svc-icon-remove {
+.svc-action-button.svc-logic-condition-remove.svc-icon-remove:focus {
+  outline: none;
+}
+.svc-logic-condition-remove.svc-icon-remove {
   display: block;
   width: calcSize(5);
   height: calcSize(5);
@@ -113,13 +138,8 @@
   display: none;
 }
 
-.svc-logic-paneldynamic .svc-logic-paneldynamic__button {
-  background: none;
-  box-shadow: none;
-  appearance: none;
-  border: none;
-  padding: 0;
-  margin: calcSize(0.5);
+.svc-logic-paneldynamic__button.svc-logic-paneldynamic__remove-btn {
+  display: none;
 }
 
 .svc-question-wrapper {
@@ -137,6 +157,9 @@
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
   color: $foreground-light;
+  &:hover, &:focus {
+    color: $background;
+  }
 }
 
 .svc-logic-tab__content {
@@ -159,6 +182,7 @@
     width: 50%;
     margin-left: 25%;
     margin-right: 25%;
+    margin-bottom: calcSize(8);
     height: calcSize(7);
     line-height: calcSize(7);
     vertical-align: baseline;

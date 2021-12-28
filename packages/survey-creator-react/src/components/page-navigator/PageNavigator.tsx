@@ -107,7 +107,10 @@ export class SurveyPageNavigatorItem extends SurveyElementBase<any, any> {
       <div className="svc-page-navigator-item">
         {attachKey2click(<div
           className={className}
-          onClick={() => item.action(item)}
+          onClick={(e) => {
+            item.action(item);
+            e.stopPropagation();
+          }}
         >
           <div className="svc-page-navigator-item__dot" title={item.title}></div>
           <div className="svc-page-navigator-item__banner svc-item__banner">

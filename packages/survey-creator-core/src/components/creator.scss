@@ -5,6 +5,9 @@ survey-creator,
   display: flex;
   width: 100%;
   height: 100%;
+  position: relative;
+  z-index: 0;
+
   * {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
@@ -136,26 +139,4 @@ survey-creator,
 .sv-drag-drop-ghost--item-value-bottom {
   top: initial;
   bottom: calcSize(-0.5);
-}
-
-survey-creator,
-.svc-creator,
-.sv-popup {
-  .svc-tabbed-menu-item--selected:not(button):focus {
-    outline: none;
-  }
-  .sv-action-bar-item:not(button):focus,
-  *:not(button):focus,
-  .svc-page__question-type-selector:focus {
-    outline: 1px dotted $primary;
-  }
-  button.sv-action-bar-item:focus,
-  .sv-button-group__item:focus-within {
-    outline: 1px dotted $primary;
-  }
-  .sd-table__cell--header {
-    .svc-matrix-cell {
-      outline: none;
-    }
-  }
 }

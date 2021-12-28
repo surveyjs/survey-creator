@@ -1,7 +1,8 @@
 import {
   PropertyGridModel,
   PropertyGridEditorCollection,
-  PropertyJSONGenerator
+  PropertyJSONGenerator,
+  PropertyGridEditorBoolean
 } from "../../src/property-grid";
 import {
   Base,
@@ -40,10 +41,14 @@ import {
   ICollectionItemAllowOperations,
   settings
 } from "../../src/settings";
-import { PropertyGridValueEditor, PropertyGridRowValueEditor } from "../../src/property-grid/values";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
+import {
+  PropertyGridValueEditor,
+  PropertyGridRowValueEditor,
+  PropertyGridValueEditorBase
+} from "../../src/property-grid/values";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
@@ -2210,6 +2215,34 @@ test("AllowRowsDragDrop and property readOnly", () => {
   expect(choicesQuestion.allowRowsDragAndDrop).toBeFalsy();
   Serializer.findProperty("selectbase", "choices").readOnly = false;
 });
+
+test("Edit matrix and property readOnly ", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 4];
+  let propertyGrid = new PropertyGridModelTester(question);
+  let choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion).toBeTruthy();
+  expect(choicesQuestion.visibleRows[0].cells[1].question.readOnly).toBeFalsy();
+
+  Serializer.findProperty("itemvalue", "text").readOnly = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.visibleRows[0].cells[1].question.readOnly).toBeTruthy();
+
+  Serializer.findProperty("itemvalue", "text").readOnly = false;
+  Serializer.findProperty("selectbase", "choices").readOnly = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.visibleRows[0].cells[1].question.readOnly).toBeTruthy();
+  Serializer.findProperty("selectbase", "choices").readOnly = false;
+});
+
 test("Check textUpdate mode for question", () => {
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
@@ -2256,4 +2289,16 @@ test("nextToProperty on the same line", () => {
   expect(minQuestion.minWidth).toEqual("50px");
   expect(maxQuestion.minWidth).toEqual("50px");
   maxProperty.nextToProperty = oldNextToProperty;
+});
+
+class TestValueEditor extends PropertyGridValueEditorBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    throw new Error("Method not implemented.");
+  }
+}
+test("isSupportGrouping", () => {
+  const testValueEditor = new TestValueEditor();
+  expect(testValueEditor.isSupportGrouping()).toBeTruthy();
+  const testBooleanEditor = new PropertyGridEditorBoolean();
+  expect(testBooleanEditor.isSupportGrouping()).toBeTruthy();
 });

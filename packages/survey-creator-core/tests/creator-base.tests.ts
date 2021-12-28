@@ -1651,7 +1651,8 @@ test("Modify property editor titleActions on event", (): any => {
       options.property.name === "choices" &&
       obj.name === "q2"
     ) {
-      options.titleActions.push({ id: "test", title: "test", action: () => { obj.choices = [1, 2]; }
+      options.titleActions.push({
+        id: "test", title: "test", action: () => { obj.choices = [1, 2]; }
       });
     }
   });
@@ -2025,17 +2026,17 @@ test("Add new question to Panel and Page", (): any => {
 
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(
     creator,
-    <any> creator.survey.getAllPanels()[0],
+    <any>creator.survey.getAllPanels()[0],
     undefined
   );
   const panelModel2: QuestionAdornerViewModel = new QuestionAdornerViewModel(
     creator,
-    <any> creator.survey.getAllPanels()[1],
+    <any>creator.survey.getAllPanels()[1],
     undefined
   );
   const panelModel3: QuestionAdornerViewModel = new QuestionAdornerViewModel(
     creator,
-    <any> creator.survey.getAllPanels()[2],
+    <any>creator.survey.getAllPanels()[2],
     undefined
   );
 
@@ -2177,4 +2178,34 @@ test("hide top panel", () => {
 
   settings.layout.showTabs = oldValueShowTabs;
   settings.layout.showToolbar = oldValueShowToolbar;
+});
+
+test("creator showToolbox support", () => {
+  const creator = new CreatorTester();
+  expect(creator.showToolbox).toEqual(true);
+  expect(creator.toolboxLocation).toEqual("left");
+
+  creator.showToolbox = false;
+  expect(creator.showToolbox).toEqual(false);
+  expect(creator.toolboxLocation).toEqual("hidden");
+
+  creator.showToolbox = "left";
+  expect(creator.showToolbox).toEqual(true);
+  expect(creator.toolboxLocation).toEqual("left");
+
+  creator.showToolbox = "right";
+  expect(creator.showToolbox).toEqual(true);
+  expect(creator.toolboxLocation).toEqual("right");
+
+  creator.showToolbox = "none";
+  expect(creator.showToolbox).toEqual(false);
+  expect(creator.toolboxLocation).toEqual("hidden");
+
+  creator.showToolbox = "top";
+  expect(creator.showToolbox).toEqual(false);
+  expect(creator.toolboxLocation).toEqual("hidden");
+
+  creator.showToolbox = true;
+  expect(creator.showToolbox).toEqual(true);
+  expect(creator.toolboxLocation).toEqual("left");
 });

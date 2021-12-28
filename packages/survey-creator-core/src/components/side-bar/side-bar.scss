@@ -41,6 +41,7 @@
   align-items: flex-start;
   height: calc(100% - calc(8 * #{$base-unit}));
   overflow-y: auto;
+  background-color: $background;
 }
 
 .svc-side-bar__container-container {
@@ -95,7 +96,6 @@
   overflow: visible;
 
   .svc-side-bar__shadow {
-    z-index: 100;
     background-color: $foreground-light;
     opacity: 0.75;
     position: absolute;

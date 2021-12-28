@@ -1,16 +1,33 @@
 @import "../../variables.scss";
 @import "../../colors.scss";
 
-.sl-table__row:hover .sl-detail-panel__icon:before,
-.sl-table__cell--detail-button:focus .sl-detail-panel__icon:before {
-  content: "";
+.sl-table__cell.st-table__cell--actions:first-child .sv-action-bar{
+  margin-top: -4px;
+}
+.sl-table__detail-button.sl-table__detail-button {
   display: block;
-  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%2223%22%20viewBox%3D%220%200%2010%2023%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cg%20clip-path%3D%22url(%23clip0)%22%3E%0A%3Cpath%20d%3D%22M0%204.7L1.4%206.1L3.7%203.8V9.4H5.7V3.8L8%206.1L9.4%204.7L4.7%200L0%204.7Z%22%20fill%3D%22%23909090%22%2F%3E%0A%3Cpath%20d%3D%22M5.7%2018.9999V13.3999H3.7V18.9999L1.4%2016.6999L0%2018.0999L4.7%2022.7999L9.4%2018.0999L8%2016.6999L5.7%2018.9999Z%22%20fill%3D%22%23909090%22%2F%3E%0A%3C%2Fg%3E%0A%3Cdefs%3E%0A%3CclipPath%20id%3D%22clip0%22%3E%0A%3Crect%20width%3D%229.4%22%20height%3D%2222.8%22%20fill%3D%22white%22%2F%3E%0A%3C%2FclipPath%3E%0A%3C%2Fdefs%3E%0A%3C%2Fsvg%3E%0A");
-  background-repeat: no-repeat;
-  background-position: center center;
-  height: calcSize(3);
-  width: calcSize(3);
-  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  border-radius: 100px;
+  padding: 0;
+  use {
+    display: none;
+  }
+  &:hover, &:focus {
+    background-color: $primary-light;
+    use {
+      fill: $primary;
+    }
+  }
+}
+#show-detail .sl-table__detail-button {
+    outline: none;
+}
+
+.sl-table__row:hover .sl-table__detail-button.sl-table__detail-button ,
+.sl-table__detail-button.sl-table__detail-button:focus {  
+  use { display: initial; }
 }
 .sl-table__row #remove-row .sv-action-bar-item__icon use {
   display: none;
@@ -18,7 +35,6 @@
 .sl-table__row:hover #remove-row,
 .sl-table__row #remove-row:focus-within {
   .sv-action-bar-item {
-    padding: calcSize(1);
     border: none;
     width: calcSize(5);
     height: calcSize(5);
@@ -37,7 +53,6 @@
 .sl-table__cell .svc-action-button:focus {
   background: transparent;
   color: $foreground;
-  outline: none;
 }
 
 .sl-table__cell {
@@ -180,6 +195,8 @@
   font-size: calcSize(2);
   line-height: calcSize(3);
   margin: 0;
+  font-weight: 600;
+
   span + span {
     display: none;
   }
