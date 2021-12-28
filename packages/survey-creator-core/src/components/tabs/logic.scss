@@ -52,6 +52,10 @@
   background: transparent;
   color: $foreground;
   outline: none;
+}
+
+.sl-table__cell {
+  color: $foreground;
   font-weight: bold;
   font-size: calcSize(2);
   font-family: $font-family;
