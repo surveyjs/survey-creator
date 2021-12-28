@@ -11,6 +11,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { settings } from "../../settings";
+import { wrapTextByCurlyBraces } from "../../utils/utils";
 
 export class SurveyLogicAction {
   private surveyValue: SurveyModel;
@@ -298,7 +299,7 @@ export class SurveyLogicItem {
     return (this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName)) && this.isSuitableByLogicTypeInActions(logicTypeName);
   }
   private isSuitableInExpression(filteredName: string): boolean {
-    return this.expression.indexOf("{" + filteredName + "}") !== -1 || this.expression.indexOf("{" + filteredName + ".") !== -1;
+    return this.expression.indexOf(wrapTextByCurlyBraces(filteredName)) !== -1 || this.expression.indexOf("'" + filteredName + ".") !== -1;
   }
   private isSuitableByNameInActions(filteredName: string): boolean {
     return this.actions.some(action => action.isSuitableByQuestionName(filteredName));
@@ -310,8 +311,8 @@ export class SurveyLogicItem {
     if (!this.expression) return;
     var newExpression = this.expression;
     var expression = this.expression.toLocaleLowerCase();
-    oldName = "{" + oldName.toLowerCase() + "}";
-    newName = "{" + newName + "}";
+    oldName = wrapTextByCurlyBraces(oldName.toLowerCase());
+    newName = wrapTextByCurlyBraces(newName);
     var index = expression.lastIndexOf(oldName, expression.length);
     while (index > -1) {
       newExpression = newExpression.substring(0, index) + newName + newExpression.substr(index + oldName.length, +newExpression.length);

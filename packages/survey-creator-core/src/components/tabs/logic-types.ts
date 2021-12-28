@@ -9,6 +9,7 @@ import {
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
 import { ISurveyCreatorOptions } from "../../settings";
+import { wrapTextByCurlyBraces } from "../../utils/utils";
 
 export function getLogicString(name: string) {
   return editorLocalization.getString("ed.lg." + name);
@@ -146,7 +147,7 @@ export class SurveyLogicType {
         name = question.title;
       }
     }
-    return "'" + name + "'";
+    return wrapTextByCurlyBraces(name);
   }
   public formatExpression(expression: string): string {
     return SurveyLogicType.expressionToDisplayText(
