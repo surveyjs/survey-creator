@@ -14,7 +14,7 @@ Survey Creator V2 for React is a visual survey designer / form builder for the R
 ## Install
 
 ```
-npm install survey-creator-react --save
+npm install survey-creator-react
 ```
 
 ## Add Survey Creator V2 to Your Project

@@ -66,7 +66,7 @@ creator.render("creatorElement");
 Install the package:
 
 ```
-npm install survey-creator-knockout --save
+npm install survey-creator-knockout
 ```
 
 Create a new component and use it in your Angular application:
@@ -120,7 +120,7 @@ export class SurveyCreatorComponent implements OnInit {
 Install the package:
 
 ```
-npm install survey-creator-knockout --save
+npm install survey-creator-knockout
 ```
 
 Create a new component and use it in your Vue application:
