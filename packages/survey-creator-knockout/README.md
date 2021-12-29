@@ -52,7 +52,7 @@ creator.saveSurveyFunc = (saveNo, callback) => {
   // saveSurveyJSON(this.id, creator.JSON, () => {
   //   callback(saveNo, true);
   // });
-});
+}
 // Load a survey definition JSON from you web service
 // ...
 // Assign the survey definition to Survey Creator
@@ -73,7 +73,6 @@ Create a new component and use it in your Angular application:
 
 ```js
 import { Component, Input, EventEmitter, Output, OnInit } from "@angular/core";
-import * as Survey from "survey-core";
 import * as SurveyCreator from "survey-creator-knockout";
 // Import CSS stylesheets for SurveyJS (survey-core) and Survey Creator
 import "survey-core/defaultV2.min.css";
@@ -88,8 +87,7 @@ import "survey-creator-knockout/survey-creator-knockout.css";
 })
 export class SurveyCreatorComponent implements OnInit {
   @Output() submitSurvey = new EventEmitter<any>();
-  @Input()
-  result: any;
+  @Input() result: any;
 
   ngOnInit() {
     // Instantiate Survey Creator
@@ -105,7 +103,7 @@ export class SurveyCreatorComponent implements OnInit {
       // saveSurveyJSON(this.id, creator.JSON, () => {
       //   callback(saveNo, true);
       // });
-    });
+    }
     // Load a survey definition JSON from you web service
     // ...
     // Assign the survey definition to Survey Creator
@@ -152,7 +150,7 @@ export default {
       // saveSurveyJSON(this.id, creator.JSON, () => {
       //   callback(saveNo, true);
       // });
-    });
+    }
     // Load a survey definition JSON from you web service
     // ...
     // Assign the survey definition to Survey Creator
@@ -161,7 +159,6 @@ export default {
   }
 };
 </script>
-   
 ```
 
 ## Use with React
