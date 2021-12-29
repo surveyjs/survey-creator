@@ -322,7 +322,7 @@ jobs:
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types'
       Contents: '**'
-      TargetFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/node_modules/@types'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/node_modules/@types'
       OverWrite: true
     displayName: 'copy @types into library directory'
 
