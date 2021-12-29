@@ -20,26 +20,24 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   }
 
   public checkKey(data: any, e: any) {
-    if (e.key === 'Tab') {
+    if (e.key === "Tab") {
       e.preventDefault();
       const textareaElement: any = e.target;
       const start = textareaElement.selectionStart;
       const end = textareaElement.selectionEnd;
-  
+
       textareaElement.value = textareaElement.value.substring(0, start) +
         "\t" + textareaElement.value.substring(end);
-  
       textareaElement.selectionStart =
       textareaElement.selectionEnd = start + 1;
-    
       e.stopPropagation();
-    } 
+    }
     return true;
   }
-  public get text(): string {
+  protected getText(): string {
     return this._text;
   }
-  public set text(value: string) {
+  protected setText(value: string): void {
     this.isProcessingImmediately = true;
     this._text = value;
     this.processErrors(value);
