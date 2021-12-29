@@ -2,14 +2,15 @@
 @import "../../colors.scss";
 
 .sl-table__cell.st-table__cell--actions:first-child .sv-action-bar {
-  margin-top: -4px;
+  margin-top: calcSize(-0.5);
+  padding-right: calcSize(4);
 }
 .sl-table .sl-table__detail-button.sl-table__detail-button {
   width: calcSize(6);
   height: calcSize(6);
 
   box-sizing: border-box;
-  border-radius: 100px;
+  border-radius: calcSize(12.5);
   padding: 0;
 
   &:hover,
@@ -54,6 +55,8 @@
   background: transparent;
   color: $foreground;
   outline: none;
+  border: none;
+  box-shadow: none;
 
   max-height: calcSize(13.5);
   overflow: hidden;
@@ -67,12 +70,8 @@
   font-weight: bold;
   font-size: calcSize(2);
   font-family: $font-family;
-}
-
-.sl-table__cell {
   vertical-align: top;
-  padding: 0.9375em;
-  padding-left: 0;
+  padding: calcSize(2) 0;
 }
 
 .sl-table__cell--detail-button {
@@ -81,7 +80,6 @@
   outline: none;
   border: none;
   background-color: transparent;
-  padding: calcSize(0.25);
 }
 
 .sl-table {
@@ -93,21 +91,21 @@
   tbody {
     tr:last-child {
       .sl-table__cell {
-        padding-bottom: 2.5em;
+        padding-bottom: calcSize(5);
       }
     }
   }
 
   tr:first-child {
     .sl-table__cell {
-      padding-top: 1.875em;
+      padding-top: calcSize(4);
     }
   }
 
   td,
   th {
     &:first-child {
-      padding-left: 1.875em;
+      padding-left: calcSize(4);
 
       .sv-action-bar {
         justify-content: flex-end;
@@ -117,7 +115,7 @@
   td,
   th {
     &:last-child {
-      padding-right: 1.875em;
+      padding-right: calcSize(4);
     }
   }
 }
@@ -176,7 +174,7 @@
   flex-flow: row wrap;
 }
 .sl-panel {
-  padding-bottom: 16px;
+  padding-bottom: calcSize(2);
 }
 .sl-row--multiple {
   .sl-panel {
