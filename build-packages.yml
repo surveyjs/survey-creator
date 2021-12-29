@@ -318,17 +318,18 @@ jobs:
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
       OverWrite: true
     displayName: 'copy build from library for f-f tests'
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types'
+      Contents: '**'
+      TargetFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/node_modules/@types'
+      OverWrite: true
+    displayName: 'copy @types into library directory'
 
   - powershell: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run release
     displayName: 'Release specific version survey-creator-react'
-
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui
-      ls -al
-      head -100 ./survey-react-ui.d.ts
-    displayName: 'Log'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
