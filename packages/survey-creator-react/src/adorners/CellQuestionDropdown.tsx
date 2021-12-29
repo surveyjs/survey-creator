@@ -1,7 +1,7 @@
 import { QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
 import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
-import { Base, ItemValue } from "survey-core";
+import { Base, ItemValue, QuestionSelectBase } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { QuestionAdornerComponentProps } from "./Question";
 import { attachKey2click } from "survey-react-ui";
@@ -27,7 +27,8 @@ export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
     if (this.model.isDragged) {
       return null;
     }
-    const question = this.props.question;
+    const question = this.props.question as QuestionSelectBase;
+    const textStyle = (this.props.question as any).textStyle;
     return (
       <React.Fragment>
         <div
@@ -52,7 +53,7 @@ export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
                           cssClasses: question.cssClasses,
                           isDisplayMode: true,
                           item: item,
-                          textStyle: question.textStyle,
+                          textStyle: textStyle,
                           index: index,
                           isChecked: question.value === item.value
                         }

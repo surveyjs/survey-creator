@@ -75,6 +75,7 @@ export class QuestionToolboxItem
   constructor(private item: IQuestionToolboxItem) {
     super(item);
   }
+  iconName: string;
   name: string;
   json: any;
   title: string;
