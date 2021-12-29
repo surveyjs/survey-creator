@@ -219,7 +219,8 @@ test("Create logic rule", async (t) => {
     .click(doneButton)
     .expect(addNewRuleButton.classNames).notContains(disabledClass)
     .expect(notifyBalloonSelector.innerText).eql("Modified")
-    .expect(cellRules.innerText).eql("If {string_editor} is not empty, survey becomes completed");
+    .expect(cellRules.innerText).eql("If {string_editor} is not empty, survey becomes completed")
+    .expect(cellRules.find("span").getAttribute("title")).eql("If {string_editor} is not empty, survey becomes completed");
 });
 
 test("Logic rules", async (t) => {

@@ -14,6 +14,7 @@ export class QuestionLinkValueModel extends Question {
   @property({ defaultValue: false }) showClear: boolean;
   @property({ defaultValue: true }) allowClear: boolean;
   @property({ defaultValue: true }) showValueInLink: boolean;
+  @property({ defaultValue: false }) showTooltip: boolean;
   constructor(name: string, json: any = null) {
     super(name);
     const linkValueText = json && !json.showValueInLink && (editorLocalization.getString("pe.set")) + " " + json.title || null;
@@ -29,6 +30,9 @@ export class QuestionLinkValueModel extends Question {
     }
   }
 
+  public get tooltip() {
+    return this.showTooltip ? this.linkValueText : undefined;
+  }
   public getType(): string {
     return "linkvalue";
   }
@@ -43,13 +47,12 @@ export class QuestionLinkValueModel extends Question {
     }
   }
   private updateLinkValueText() {
-    var displayValue;
+    let displayValue;
     if (this.showValueInLink) {
       displayValue = this.isEmpty() ? editorLocalization.getString("pe.emptyValue") : this.getObjDisplayValue();
     } else {
       displayValue = editorLocalization.getString(this.isEmpty() ? "pe.set" : "pe.change") + " " + this.title;
     }
-
     this.linkValueText = displayValue;
   }
   private stringifyValue(val: any): string {
@@ -67,7 +70,12 @@ export class QuestionLinkValueModel extends Question {
 
 Serializer.addClass(
   "linkvalue",
-  ["showValueInLink"],
+  ["showValueInLink",
+    {
+      name: "showTooltip: boolean",
+      default: false,
+      visible: false
+    }],
   function (json) {
     const viewModel = new QuestionLinkValueModel("", json);
     return viewModel;

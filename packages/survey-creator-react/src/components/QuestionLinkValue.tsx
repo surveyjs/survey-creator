@@ -4,7 +4,7 @@ import {
   SurveyQuestionElementBase
 } from "survey-react-ui";
 import { editorLocalization, QuestionLinkValueModel } from "@survey/creator";
-import { ActionButton } from "src/entries";
+import { ActionButton } from "./ActionButton";
 
 export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
   constructor(props: any) {
@@ -37,6 +37,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
           selected={this.question.isSelected}
           disabled={this.question.isReadOnly}
           text={this.question.linkValueText}
+          title={this.question.tooltip}
         ></ActionButton>
         {this.renderClear()}
       </>

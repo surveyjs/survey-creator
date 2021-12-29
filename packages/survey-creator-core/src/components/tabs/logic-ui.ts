@@ -209,6 +209,7 @@ export class SurveyLogicUI extends SurveyLogic {
             {
               cellType: "linkvalue",
               name: "rules",
+              showTooltip: true,
               width: "50%"
             }
           ]
