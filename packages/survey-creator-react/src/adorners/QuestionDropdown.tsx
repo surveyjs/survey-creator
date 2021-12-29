@@ -1,5 +1,5 @@
 import React from "react";
-import { ItemValue } from "survey-core";
+import { ItemValue, QuestionSelectBase } from "survey-core";
 import { ReactElementFactory } from "survey-react-ui";
 import {
   QuestionAdornerComponent,
@@ -8,7 +8,8 @@ import {
 
 export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
   renderElementPlaceholder(): JSX.Element {
-    const question = this.props.question;
+    const question = this.props.question as QuestionSelectBase;
+    const textStyle = (this.props.question as any).textStyle;
     return (
       <div className="svc-question__dropdown-choices">
         {(question.visibleChoices || []).map(
@@ -25,7 +26,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
                     cssClasses: question.cssClasses,
                     isDisplayMode: true,
                     item: item,
-                    textStyle: question.textStyle,
+                    textStyle: textStyle,
                     index: index,
                     isChecked: question.value === item.value
                   }

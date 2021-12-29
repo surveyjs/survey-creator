@@ -18,10 +18,10 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     super(creator);
   }
 
-  public get text(): string {
+  protected getText(): string {
     return !!this.aceEditor ? this.aceEditor.getValue() : "";
   }
-  public set text(value: string) {
+  protected setText(value: string): void {
     this.isProcessingImmediately = true;
     this.aceEditor.setValue(value);
     this.aceEditor.renderer.updateFull(true);

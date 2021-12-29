@@ -6,7 +6,10 @@ import {
   PanelModel,
   Helpers,
   Base,
-  FunctionFactory
+  FunctionFactory,
+  Question,
+  QuestionHtmlModel,
+  QuestionDropdownModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -111,6 +114,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     });
     this.editSurvey.onQuestionAdded.add((sender, options) => {
       this.onQuestionAdded(options);
+    });
+    this.editSurvey.onGetQuestionTitleActions.add((sender, options) => {
+      this.onGetQuestionTitleActions(options);
     });
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
@@ -300,6 +306,11 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.question.startWithNewLine = false;
     }
   }
+  private onGetQuestionTitleActions(options: any) {
+    if(options.question.name === "setValue") {
+      options.titleActions = [];
+    }
+  }
 
   private applyPanel(panel: PanelModel) {
     var action = this.getActionByPanel(panel);
@@ -367,7 +378,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private onPanelAdded(panel: PanelModel, action: SurveyLogicAction): PanelModel {
-    const ltQuestion = panel.getQuestionByName("logicTypeName");
+    const ltQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
     ltQuestion.title = this.panel.panelCount > 1 ? editorLocalization.getString("pe.and").toLowerCase() : editorLocalization.getString("pe.then");
     ltQuestion.choices = this.logicTypeChoices;
     if (!!action) {
@@ -400,8 +411,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     return res;
   }
   private onLogicTypeChanged(panel: PanelModel) {
-    var logicType = this.getLogicTypeByPanel(panel);
-    panel.getQuestionByName("logicTypeDescription").html = !!logicType
+    const logicType = this.getLogicTypeByPanel(panel);
+    const qTypeDescription = <QuestionHtmlModel>panel.getQuestionByName("logicTypeDescription");
+    qTypeDescription.html = !!logicType
       ? logicType.description
       : "";
     this.setElementPanelObj(panel, null);
@@ -417,7 +429,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     return null;
   }
   private setupElementSelector(panel: PanelModel, logicType: SurveyLogicType) {
-    var question = panel.getQuestionByName("elementSelector");
+    var question = <QuestionDropdownModel>panel.getQuestionByName("elementSelector");
     question.visible = this.isElementSelectorVisible(logicType);
     if (!question.visible) return;
     question.choices = this.getSelectorChoices(logicType);
@@ -480,7 +492,23 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       elementPanel.addElement(newQuestion, index);
       oldQuestion.delete();
     }
+    if(newQuestion.name === "setValue") {
+      this.updateSetValueQuestion(newQuestion, this.options);
+    }
     tempPanel.dispose();
+  }
+  private updateSetValueQuestion(question: Question, options: any) {
+    const obj = (<any>question).obj;
+    let survey = obj.getSurvey();
+    if (!survey) {
+      survey = obj["owner"];
+    }
+    if (!obj["setToName"] || !survey) return;
+    const originalQuestion = <Question>survey.getQuestionByValueName(
+      obj["setToName"]
+    );
+    question.title = originalQuestion.title;
+    question.titleLocation = "top";
   }
   private static elementSelectorTypes = ["question", "page", "panel"];
   private isElementSelectorVisible(logicType: SurveyLogicType): boolean {
