@@ -69,14 +69,20 @@ Install the package:
 npm install survey-creator-knockout
 ```
 
+Add CSS stylesheets for SurveyJS (survey-core) and Survey Creator to your angular.json
+
+```
+"styles": [
+  "node_modules/survey-core/defaultV2.min.css",
+  "node_modules/survey-creator-knockout/survey-creator-knockout.min.css"
+]
+```
+
 Create a new component and use it in your Angular application:
 
 ```js
 import { Component, Input, EventEmitter, Output, OnInit } from "@angular/core";
-import * as SurveyCreator from "survey-creator-knockout";
-// Import CSS stylesheets for SurveyJS (survey-core) and Survey Creator
-import "survey-core/defaultV2.min.css";
-import "survey-creator-knockout/survey-creator-knockout.css";
+import { SurveyCreator } from "survey-creator-knockout";
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -91,7 +97,7 @@ export class SurveyCreatorComponent implements OnInit {
 
   ngOnInit() {
     // Instantiate Survey Creator
-    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true });
+    const creator = new SurveyCreator({ showLogicTab: true });
     // Enable auto save
     creator.isAutoSave = true;
     // Show notifications before and after a survey definition JSON is saved
