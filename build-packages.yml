@@ -325,6 +325,12 @@ jobs:
     displayName: 'Release specific version survey-creator-react'
 
   - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui
+      ls -al
+      head -100 ./survey-react-ui.d.ts
+    displayName: 'Log'
+
+  - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run build
     displayName: 'Build CreatorV2 React'
