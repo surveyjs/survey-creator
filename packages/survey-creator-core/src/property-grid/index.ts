@@ -15,7 +15,9 @@ import {
   Action,
   IAction,
   MatrixDynamicRowModel,
-  ComputedUpdater
+  ComputedUpdater,
+  QuestionDropdownModel,
+  QuestionSelectBase
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -350,12 +352,12 @@ export class PropertyGridTitleActionsCreator {
       css: "spg-action-button spg-action-button--danger",
       enabled: enabled,
       visible: <any>new ComputedUpdater<boolean>(() => {
-        const propertyValue = question.obj[property.name];
+        const propertyValue = (<any>question).obj[property.name];
         return Array.isArray(propertyValue) ? propertyValue.length > 0 : !!propertyValue;
       }),
       action: () => {
         editor.clearPropertyValue(
-          question.obj,
+          (<any>question).obj,
           property,
           question,
           this.options
@@ -896,7 +898,7 @@ export class PropertyGridModel {
     }
   }
   private changeDependedProperties(question: Question) {
-    var prop: JsonObjectProperty = question.property;
+    var prop: JsonObjectProperty = (<any>question).property;
     var properties = prop.getDependedProperties();
     if (!properties) return;
     for (var i = 0; i < properties.length; i++) {
@@ -908,7 +910,7 @@ export class PropertyGridModel {
       }
       PropertyGridEditorCollection.onMasterValueChanged(
         this.obj,
-        q.property,
+        (<any>q).property,
         q
       );
     }
@@ -1018,7 +1020,7 @@ export class PropertyGridModel {
   private calculateMatrixAllowOperations(question: Question, row: MatrixDynamicRowModel) {
     const rowOptions: ICollectionItemAllowOperations = { allowDelete: this.onMatrixAllowRemoveRow(question, row), allowEdit: true };
     this.options.onCollectionItemAllowingCallback(<any>this.obj,
-      question.property,
+      (<any>question).property,
       question.value,
       row.editingObj,
       rowOptions
@@ -1030,13 +1032,13 @@ export class PropertyGridModel {
   private onMatrixAllowRemoveRow(question: Question, row: MatrixDynamicRowModel): boolean {
     var res = PropertyGridEditorCollection.onMatrixAllowRemoveRow(
       this.obj,
-      question.property,
+      (<any>question).property,
       row
     );
     res =
       this.options.onCollectionItemDeletingCallback(
         <any>this.obj,
-        question.property,
+        (<any>question).property,
         question.value,
         row.editingObj
       ) && res;
@@ -1082,7 +1084,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     onClose?: (reason: "apply" | "cancel") => void
   ): any {
     const surveyPropertyEditor = editor.createPropertyEditorSetup(
-      question.obj,
+      (<any>question).obj,
       property,
       question,
       options
@@ -1323,7 +1325,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     this.setChoices(obj, question, prop);
     question.displayValueCallback = (text: string): string => {
-      return !text ? question.optionsCaption : text;
+      return !text ? (<QuestionDropdownModel>question).optionsCaption : text;
     };
   }
   onMasterValueChanged(
@@ -1340,7 +1342,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   ) {
     if (!propChoices || !Array.isArray(propChoices) || propChoices.length == 0)
       return;
-    question.choices = this.choicesFromPropChoices(prop, propChoices);
+    (<QuestionSelectBase>question).choices = this.choicesFromPropChoices(prop, propChoices);
   }
   private isLocaleProp(prop: JsonObjectProperty): boolean {
     return prop.name === "locale";

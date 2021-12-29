@@ -14,7 +14,8 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
     return this.questionBase as QuestionLinkValueModel;
   }
   protected renderClear(): JSX.Element {
-    if (!this.questionBase.isReadOnly && this.questionBase.showClear) {
+    const showClear = (this.questionBase as any).showClear;
+    if (!this.questionBase.isReadOnly && showClear) {
       return (
         <ActionButton
           classes={this.question.linkClearButtonCssClasses}

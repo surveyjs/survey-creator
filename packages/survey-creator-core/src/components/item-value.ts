@@ -93,8 +93,8 @@ export class ItemValueWrapperViewModel extends Base {
     this.isDragDropGhost = this.item === this.dragDropHelper.draggedElement;
 
     if (this.item === this.dragDropHelper.prevDropTarget) {
-      this.isDragDropMoveDown = this.item.isDragDropMoveDown;
-      this.isDragDropMoveUp = this.item.isDragDropMoveUp;
+      this.isDragDropMoveDown = (<any>this.item).isDragDropMoveDown;
+      this.isDragDropMoveUp = (<any>this.item).isDragDropMoveUp;
     } else {
       this.isDragDropMoveDown = false;
       this.isDragDropMoveUp = false;
@@ -117,7 +117,7 @@ export class ItemValueWrapperViewModel extends Base {
       model.question.getType() === "checkbox" &&
       (<QuestionCheckboxModel>model.question).selectAllItem === model.item
     ) {
-      model.question.hasSelectAll = true;
+      (<any>model.question).hasSelectAll = true;
     } else {
       const itemValue = model.creator.createNewItemValue(model.question);
       model.question.choices.push(itemValue);
@@ -135,7 +135,7 @@ export class ItemValueWrapperViewModel extends Base {
       model.question.getType() === "checkbox" &&
       (<QuestionCheckboxModel>model.question).selectAllItem === model.item
     ) {
-      model.question.hasSelectAll = false;
+      (<any>model.question).hasSelectAll = false;
     } else {
       var index = model.question.choices.indexOf(model.item);
       model.question.choices.splice(index, 1);
