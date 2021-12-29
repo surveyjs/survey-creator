@@ -469,7 +469,7 @@ test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => 
   expect(rows[0].cells).toHaveLength(1);
   expect(rows[0].cells[0].question.getType()).toEqual("linkvalue");
   expect(itemsQuestion.value).toHaveLength(1);
-  expect(itemsQuestion.value[0].rules).toEqual("If {q1} == 1, make question {q3} visible");
+  expect(itemsQuestion.value[0].rules).toEqual("If 'q1' == 1, make question 'q3' visible");
   logic.editItem(logic.items[0]);
   logic.expressionEditor.text = "{q2}=1";
   const panel = logic.itemEditor.panels[0];
@@ -478,7 +478,7 @@ test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => 
   expect(res).toBeTruthy();
   itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.value).toHaveLength(1);
-  expect(itemsQuestion.value[0].rules).toEqual("If {q2} == 1, make question {q4} visible");
+  expect(itemsQuestion.value[0].rules).toEqual("If 'q2' == 1, make question 'q4' visible");
 });
 test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
   var survey = new SurveyModel({
@@ -496,12 +496,12 @@ test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
     logic.itemsSurvey.getQuestionByName("items")
   );
   var rows = itemsQuestion.visibleRows;
-  expect(rows[0].cells[0].value).toEqual("If {q1} == 1, make question {q2} visible, make question {q3} visible");
+  expect(rows[0].cells[0].value).toEqual("If 'q1' == 1, make question 'q2' visible, make question 'q3' visible");
   logic.editItem(logic.items[0]);
   logic.expressionEditor.text = "{q1}=3";
   logic.saveEditableItem();
   rows = itemsQuestion.visibleRows;
-  expect(rows[0].cells[0].value).toEqual("If {q1} == 3, make question {q2} visible, make question {q3} visible");
+  expect(rows[0].cells[0].value).toEqual("If 'q1' == 3, make question 'q2' visible, make question 'q3' visible");
 });
 
 test("SurveyLogicUI: Test logicItemEditor", () => {
@@ -1041,7 +1041,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   row.detailPanel.footerActions[0].action();
   expect(logic.mode).toEqual("view");
   expect(row.detailPanel).toBeFalsy();
-  expect(row.cells[0].question.value).toEqual("If {q1} == 1, make question {q2} visible");
+  expect(row.cells[0].question.value).toEqual("If 'q1' == 1, make question 'q2' visible");
   expect(survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 1");
 });
 test("LogicItemEditorUI: create new logic several times", () => {

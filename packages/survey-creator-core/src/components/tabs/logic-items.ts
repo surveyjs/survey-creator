@@ -167,7 +167,8 @@ export class SurveyLogicItem {
     });
 
     if (!!conditionText && !!actionsText) {
-      return this.ifText + " " + conditionText + actionsText;
+      const text = this.ifText + " " + conditionText + actionsText;
+      return text.replace(new RegExp("({|})", "gm"), "'");
     } else {
       return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
     }

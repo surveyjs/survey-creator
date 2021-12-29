@@ -691,7 +691,7 @@ test("Displaying correct text for logic action", () => {
   for (var i = 0; i < logicTypes.length; i++) {
     expect(findOp(logicTypes[i])).toBeTruthy();
   }
-  expect(logic.items[0].getDisplayText()).toEqual("If {q1} == 1, make page {page1} visible, make question {q2} visible, make question {q3} enable, make question {q4} required, make panel {panel1} visible, make panel {panel1} enable, survey becomes completed, survey skip to the question {q2}, run expression: '{q2} + 1' and set its result into question: {q3}, copy into question: {q1} value from question {q2}, set into question: {q2} value q2Value, show custom text for the 'Thank you page'.");
+  expect(logic.items[0].getDisplayText()).toEqual("If 'q1' == 1, make page 'page1' visible, make question 'q2' visible, make question 'q3' enable, make question 'q4' required, make panel 'panel1' visible, make panel 'panel1' enable, survey becomes completed, survey skip to the question 'q2', run expression: ''q2' + 1' and set its result into question: 'q3', copy into question: 'q1' value from question 'q2', set into question: 'q2' value q2Value, show custom text for the 'Thank you page'.");
   expect(findOp("page_visibility").text).toEqual("make page {page1} visible");
   expect(findOp("panel_visibility").text).toEqual("make panel {panel1} visible");
   expect(findOp("panel_enable").text).toEqual("make panel {panel1} enable");
@@ -794,7 +794,7 @@ test("Add existing visible Items", () => {
   options.showTitlesInExpressions = true;
   var logic = new SurveyLogic(survey, options);
   expect(logic.items).toHaveLength(1);
-  expect(logic.items[0].getDisplayText()).toEqual("If {My Question 1} == 1, make question {q2} visible, make question {q3} visible");
+  expect(logic.items[0].getDisplayText()).toEqual("If 'My Question 1' == 1, make question 'q2' visible, make question 'q3' visible");
 });
 
 test("Allow logic type to be null and change it", () => {
