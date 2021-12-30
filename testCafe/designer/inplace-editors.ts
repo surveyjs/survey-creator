@@ -605,3 +605,17 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
     .click(Selector(".sv-popup__button--cancel"))
     .expect(Selector(".svc-question__content--selected-no-border").exists).notOk();
 });
+
+test.only("Rating question inplace editor", async (t) => {
+  await t
+    .expect(getVisibleElement(".svc-question__content").exists).notOk()
+    .hover(getToolboxItemByText("Rating"), { speed: 0.5 })
+    .click(getToolboxItemByText("Rating"), { speed: 0.5 })
+    .click(Selector(".sd-rating__item-text .sv-string-editor").withText("3"))
+    .typeText(Selector(".sd-rating__item-text .sv-string-editor").withText("3"), "abc")
+    .pressKey("Enter")
+    .expect(ClientFunction(() => {
+      return window["creator"].survey.getAllQuestions()[0].rateValues.map(v => v.text);
+    })()).eql(["1", "2", "3abc", "4", "5"]);
+
+});
