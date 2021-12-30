@@ -3,7 +3,7 @@ import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
-import { assignDefaultV2Classes } from "../utils/utils";
+import { assignDefaultV2Classes, wrapTextByCurlyBraces } from "../utils/utils";
 import { logicCss } from "../components/tabs/logic-theme";
 
 export class ConditionEditorItem {
@@ -48,7 +48,7 @@ export class SurveyConditionEditorItem extends ConditionEditorItem {
     );
   }
   public toExpression(): string {
-    let text = "{" + this.getQuestionValueByName() + "} " + this.getOperatorText();
+    let text = wrapTextByCurlyBraces(this.getQuestionValueByName()) + " " + this.getOperatorText();
     if (this.isValueRequired) {
       text += " " + this.getValueText();
     }

@@ -9,6 +9,7 @@ import {
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
 import { ISurveyCreatorOptions } from "../../settings";
+import { wrapTextByCurlyBraces } from "../../utils/utils";
 
 export function getLogicString(name: string) {
   return editorLocalization.getString("ed.lg." + name);
@@ -141,12 +142,12 @@ export class SurveyLogicType {
   }
   public formatElName(name: string): string {
     if (this.showTitlesInExpression && !!this.survey) {
-      var question = this.survey.getQuestionByName(name);
+      const question = this.survey.getQuestionByName(name);
       if (!!question && !!question.title) {
         name = question.title;
       }
     }
-    return "{" + name + "}";
+    return wrapTextByCurlyBraces(name);
   }
   public formatExpression(expression: string): string {
     return SurveyLogicType.expressionToDisplayText(
