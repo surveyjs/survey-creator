@@ -261,6 +261,14 @@ jobs:
       OverWrite: true
     displayName: 'copy build from library for f-f tests'
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/node_modules/@types'
+      OverWrite: true
+    displayName: 'copy @types into library directory'
+
   - powershell: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run release
