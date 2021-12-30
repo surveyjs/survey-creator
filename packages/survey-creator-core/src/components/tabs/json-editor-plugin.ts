@@ -11,8 +11,14 @@ export abstract class JsonEditorBaseModel extends Base {
   constructor(protected creator: CreatorBase<SurveyModel>) {
     super();
   }
-
-  public abstract text: string;
+  public get text(): string {
+    return this.getText();
+  }
+  public set text(val: string) {
+    this.setText(val);
+  }
+  protected abstract getText(): string;
+  protected abstract setText(val: string): void;
   protected onEditorActivated(): void {}
   public onPluginActivate(): void {
     this.text = this.creator.text;

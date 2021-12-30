@@ -3,7 +3,6 @@
 var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
-var dts = require("dts-bundle");
 var rimraf = require("rimraf");
 var packageJson = require("./package.json");
 var fs = require("fs");
@@ -21,15 +20,6 @@ var banner = [
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator"
-].join("\n");
-
-var dts_banner = [
-  "Type definitions for SurveyJS Creator JavaScript library v" +
-    packageJson.version,
-  "(c) 2015-" + year + " 2020 Devsoft Baltic OÜ - http://surveyjs.io/",
-  "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#SurveyCreator",
-  ""
 ].join("\n");
 
 var packagePlatformJson = {
@@ -123,6 +113,7 @@ var buildPlatformJson = {
 module.exports = function(options) {
   var packagePath =  __dirname + "/package/";
   var buildPath = __dirname + "/build/";
+  var dts_generator = __dirname + "/d_ts_generator.js";
   var isProductionBuild = options.buildType === "prod";
 
   function createSVGBundle() {
@@ -151,28 +142,8 @@ module.exports = function(options) {
       createSVGBundle();
     } else if (1 == percentage) {
       if (isProductionBuild) {
-        dts.bundle({
-          name: "../../survey-creator",
-          main: buildPath + "typings/entries/index.d.ts",
-          outputAsModuleFolder: true,
-          headerText: dts_banner
-        });
-
-        replace.sync(
-          {
-            files: buildPath + "survey-creator.d.ts",
-            from: /export let\s+\w+:\s+\w+;/,
-            to: ""
-          },
-          (error, changes) => {
-            if (error) {
-              return console.error("Error occurred:", error);
-            }
-            console.log("check me :     " + buildPath + "survey-creator.d.ts");
-            console.log("Modified files:", changes.join(", "));
-          }
-        );
-
+        console.log("Generating d.ts file: " + dts_generator);
+        require(dts_generator);
         rimraf.sync(buildPath + "typings");
         fs.createReadStream("./LICENSE").pipe(
           fs.createWriteStream(buildPath + "LICENSE")

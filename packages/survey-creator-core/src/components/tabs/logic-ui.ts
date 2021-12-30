@@ -172,16 +172,17 @@ export class SurveyLogicUI extends SurveyLogic {
     }
   }
   protected hasErrorInUI(): boolean {
+    const creator = (<any>this.survey).creator;
     if (!this.expressionEditor.isReady) {
       this.errorText = getLogicString("expressionInvalid");
-      !!this.survey.creator &&
-        this.survey.creator.notify(this.errorText, "error");
+      !!creator &&
+        creator.notify(this.errorText, "error");
       return true;
     }
     if (this.itemEditor.hasErrors()) {
       this.errorText = getLogicString("actionInvalid");
-      !!this.survey.creator &&
-        this.survey.creator.notify(this.errorText, "error");
+      !!creator &&
+        creator.notify(this.errorText, "error");
       return true;
     }
     return false;

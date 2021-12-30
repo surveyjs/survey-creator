@@ -64,7 +64,7 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     if (!choices || !Array.isArray(choices) || !choices.length) return;
     Survey.ItemValue.setData(this.items, choices);
     this.setCategories(choices);
-    this.items.sort(function(a, b) {
+    this.items.sort(function(a: any, b: any) {
       var ca = !!a.category ? a.category : "";
       var cb = !!b.category ? b.category : "";
       if (ca != cb) return ca < cb ? -1 : 1;
@@ -102,8 +102,9 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
   }
   private setCategories(choices: Array<Survey.ItemValue>) {
     for (var i = 0; i < this.items.length; i++) {
-      if (!!choices[i].category) {
-        this.items[i].category = choices[i].category;
+      const category = (<any>choices[i]).category;
+      if (!!category) {
+        (<any>this.items[i]).category = category;
       }
     }
   }
@@ -112,7 +113,7 @@ export class SurveyPropertyMultipleValuesEditor extends SurveyPropertyModalEdito
     var curCategory = "";
     var category = null;
     for (var i = 0; i < this.items.length; i++) {
-      var item = this.items[i];
+      var item = <any>this.items[i];
       var itemCategory = !!item.category ? item.category : "";
       if (category == null || curCategory != itemCategory) {
         curCategory = itemCategory;
