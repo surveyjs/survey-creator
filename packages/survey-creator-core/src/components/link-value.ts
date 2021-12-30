@@ -38,8 +38,8 @@ export class QuestionLinkValueModel extends Question {
     }
   }
   public doClearClick() {
-    if (!!this.clearClickCallback) {
-      this.clearClickCallback();
+    if (!!(<any>this).clearClickCallback) {
+      (<any>this).clearClickCallback();
     }
   }
   private updateLinkValueText() {
@@ -57,7 +57,7 @@ export class QuestionLinkValueModel extends Question {
     return val;
   }
   private getObjDisplayValue(): string {
-    const obj = this.obj;
+    const obj = (<any>this).obj;
     if (!obj || !obj["getDisplayValue"]) return this.stringifyValue(this.value);
     var res = obj["getDisplayValue"](true, this.value);
     if (typeof res !== "string") return JSON.stringify(res);

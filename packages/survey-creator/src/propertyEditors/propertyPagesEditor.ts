@@ -70,7 +70,7 @@ export class SurveyPropertyPagesEditor extends SurveyNestedPropertyEditor {
   protected startDragItem() {
     var survey = EditableObject.getSurvey(this.object);
     if (!!survey) {
-      survey.onContainsPageCallback = function () {
+      survey["onContainsPageCallback"] = function () {
         return true;
       };
     }
@@ -78,7 +78,7 @@ export class SurveyPropertyPagesEditor extends SurveyNestedPropertyEditor {
   protected endDragItem() {
     var survey = EditableObject.getSurvey(this.object);
     if (!!survey) {
-      survey.onContainsPageCallback = null;
+      survey["onContainsPageCallback"] = null;
     }
   }
 }

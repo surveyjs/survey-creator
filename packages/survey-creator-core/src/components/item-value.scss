@@ -23,6 +23,7 @@
   // position: absolute;
   // left: calcSize(-10);
   height: calcSize(4);
+  width: calcSize(4);
   box-sizing: border-box;
   // text-align: right;
   // white-space: nowrap;
@@ -83,13 +84,15 @@ sv-svg-icon.svc-item-value-controls__button {
 }
 
 .svc-item-value-controls__add {
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $primary-light;
   }
 }
 
 .svc-item-value-controls__remove {
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $red-light;
   }
 }

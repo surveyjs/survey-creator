@@ -4,6 +4,7 @@ import { PageModel } from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { findParentNode } from "./utils/utils";
 import { StylesManager } from "./stylesmanager";
+import { SurveyEditor } from "./editor";
 
 export interface ISurveyObjectMenuItem {
   name: string;
@@ -36,6 +37,11 @@ export class SurveyForDesigner extends Survey.Survey {
     any
   > = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
   public onUpdateElementAllowingOptions: (options: any) => any;
+  public getEditor: () => SurveyEditor;
+  public emptyPageTemplate: string;
+  public emptyPageTemplateData: any;
+  public dragDropHelper: any;
+
   constructor(
     jsonObj: any = null,
     renderedElement: any = null,

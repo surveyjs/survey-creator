@@ -5,6 +5,7 @@ import {
   settings,
   MatrixDropdownColumn,
   property,
+  QuestionMatrixDropdownModelBase,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { defaultV2Css } from "survey-core";
@@ -31,13 +32,13 @@ export class MatrixCellWrapperViewModel extends Base {
   }
 
   public editQuestion(model: MatrixCellWrapperViewModel) {
-    const column: MatrixDropdownColumn = model.question.parentQuestion.getColumnByName(model.question.name);
+    const column: MatrixDropdownColumn = (<any>model.question.parentQuestion).getColumnByName(model.question.name);
     let questionJSON = model.question.toJSON();
     questionJSON.type = model.question.getType();
     const survey = model.creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor");
     survey.css = defaultV2Css;
     survey.setDesignMode(true);
-    survey.isPopupEditorContent = true;
+    (<any>survey).isPopupEditorContent = true;
     survey.showQuestionNumbers = "none";
     survey.questionTitleLocation = "hidden";
     survey.getAllQuestions()[0].setSurveyImpl(survey);
@@ -50,7 +51,7 @@ export class MatrixCellWrapperViewModel extends Base {
       () => {
         questionJSON = survey.getAllQuestions()[0].toJSON();
         column.fromJSON(questionJSON);
-        model.question.parentQuestion.onColumnCellTypeChanged(column);
+        (<QuestionMatrixDropdownModelBase>model.question.parentQuestion).onColumnCellTypeChanged(column);
         return true;
       },
       undefined, "svc-matrix-cell__popup", model.question.name,
