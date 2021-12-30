@@ -21,6 +21,7 @@ export class TestSurveyTabViewModel extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
+  public testAgainAction: Action;
   public nextPageAction: Action;
   private selectPageAction: Action;
   private pagePopupModel: PopupModel;

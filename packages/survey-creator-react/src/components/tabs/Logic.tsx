@@ -12,7 +12,7 @@ export class TabLogicAddButtonComponent extends SurveyElementBase<any, any> {
   }
 
   renderElement(): JSX.Element {
-    const buttonClassName = "svc-logic-tab__content-action" + ((this.model.enabled !== undefined && !this.model.enabled) ? " svc-logic-tab__content-action--disabled" : "");
+    const buttonClassName = "svc-logic-tab__content-action svc-btn" + ((this.model.enabled !== undefined && !this.model.enabled) ? " svc-logic-tab__content-action--disabled" : "");
     return attachKey2click(<div
       role="button"
       onClick={(e) => {
@@ -48,7 +48,6 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
   }
   private renderViewContent(): JSX.Element {
     const logicTabClassName = "svc-plugin-tab__content svc-logic-tab__content " + (this.model.hasItems ? "" : "svc-logic-tab__empty");
-    const buttonClassName = "svc-logic-tab__content-action" + ((this.model.addNewButton.enabled !== undefined && !this.model.addNewButton.enabled) ? " svc-logic-tab__content-action--disabled" : "");
     return (
       <Fragment>
         <div className={logicTabClassName}>
