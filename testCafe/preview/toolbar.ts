@@ -129,7 +129,7 @@ test("Test Survey Again", async (t) => {
     .click(Selector("#nextPage"))
     .click(Selector("input[value='Complete']"))
     .expect(Selector("h3").withText("Thank you for completing the survey!").visible).ok()
-    .click(getBarItemByTitle("Test Survey Again"))
+    .click(Selector(".svc-preview__test-again span").withText("Test Survey Again"))
     .expect(Selector(".sd-question__title").withText("string_editor").visible).ok();
 });
 
@@ -181,13 +181,13 @@ test("Device selector", async (t) => {
     .click(getListItemByText("iPad"))
     .click(Selector("input[value='Complete']"))
     .expect(orientationAction.hasAttribute("disabled")).notOk()
-    .expect(getBarItemByTitle("Test Survey Again").visible).ok()
+    .expect(Selector(".svc-preview__test-again span").withText("Test Survey Again").visible).ok()
 
     .click(getBarItemByTitle("iPad"))
     .expect(getListItemByText("Desktop").visible).ok()
 
     .click(getListItemByText("Desktop"))
-    .click(getBarItemByTitle("Test Survey Again"))
+    .click(Selector(".svc-preview__test-again span").withText("Test Survey Again"))
     .expect(orientationAction.hasAttribute("disabled")).ok()
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
