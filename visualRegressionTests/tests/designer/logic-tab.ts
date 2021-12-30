@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot } from "../../helper";
 
 const title = "Logic tab Screenshot";
@@ -134,7 +134,8 @@ test("Check logic fast entry", async (t) => {
     .click("#svc-logic-fast-entry button");
   const conditionContentSelector = Selector(".sl-table__cell--detail-panel .sl-panel");
   await checkElementScreenshot("logic-fast-entry.png", conditionContentSelector, t);
-  await t.click(".sl-comment").pressKey("ctrl+a delete").click("body");
+  await t.click(Selector(".sl-comment")).pressKey("ctrl+a delete");
+  await ClientFunction(() => { document.body.focus(); })();
   await checkElementScreenshot("logic-fast-entry-empty.png", conditionContentSelector, t);
 });
 
