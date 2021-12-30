@@ -87,10 +87,10 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     </div>);
   }
   protected renderFooter(): JSX.Element {
-    if(!this.model.allowEdit) return null;
+    if (!this.model.allowEdit) return null;
     const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
     return attachKey2click(<div
-      className="svc-page__add-new-question"
+      className="svc-page__add-new-question svc-btn"
       onClick={(e) => {
         e.stopPropagation();
         this.model.addNewQuestion(this.model, new ReactMouseEvent(e));

@@ -37,7 +37,7 @@ test("Test language Bar Item", (): any => {
   expect(model.survey.locale).toEqual("de");
   expect(langAction.title).toEqual("deutsch");
 
-  let testAgain = creator.toolbar.actions.filter((action) => action.id === "testSurveyAgain")[0];
+  let testAgain = model.testAgainAction;
   expect(testAgain).toBeTruthy();
   testAgain.action();
   expect(model.survey.locale).toEqual("de");
@@ -269,7 +269,7 @@ test("Hide Test Again action on leaving Preview", (): any => {
   creator.makeNewViewActive("test");
   const model: TestSurveyTabViewModel = testPlugin.model;
 
-  let testAgain = creator.toolbar.actions.filter((action) => action.id === "testSurveyAgain")[0];
+  let testAgain = model.testAgainAction;
   expect(testAgain).toBeTruthy();
   expect(testAgain.visible).toBeFalsy();
   model.survey.doComplete();
