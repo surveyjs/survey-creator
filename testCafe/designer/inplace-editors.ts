@@ -606,7 +606,7 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
     .expect(Selector(".svc-question__content--selected-no-border").exists).notOk();
 });
 
-test.only("Rating question inplace editor", async (t) => {
+test("Rating question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Rating"), { speed: 0.5 })
