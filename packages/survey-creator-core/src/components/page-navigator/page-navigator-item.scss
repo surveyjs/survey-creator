@@ -41,16 +41,15 @@ svc-page-navigator-item,
 }
 
 .svc-page-navigator-item__banner {
+  @include textEllipsis;
+
   right: calcSize(0.5);
   display: block;
-  white-space: nowrap;
   line-height: calcSize(4);
-  overflow: hidden;
-  text-overflow: ellipsis;    
   animation: 0.5s ease-in;
   padding: 0;
   opacity: 0;
-  
+
   .svc-page-navigator-item__dot {
     position: absolute;
     display: inline-block;

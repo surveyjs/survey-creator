@@ -268,3 +268,7 @@ export function assignDefaultV2Classes(destination: any, questionType: string) {
   copyCssClasses(destination, defaultV2Css.question);
   copyCssClasses(destination, defaultV2Css[questionType]);
 }
+
+export function wrapTextByCurlyBraces(text: string) {
+  return "{" + text + "}";
+}
