@@ -4,7 +4,8 @@ import {
   QuestionRadiogroupModel,
   QuestionCommentModel,
   QuestionCheckboxModel,
-  QuestionTextModel
+  QuestionTextModel,
+  ComponentCollection
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
 import { QuestionConvertMode, settings } from "../src/settings";
@@ -82,4 +83,16 @@ test("Allow to convert to all question types", () => {
     "text"
   ]);
   expect(classes).toHaveLength(2);
+});
+test("Convert to custom component", () => {
+  ComponentCollection.Instance.add({
+    name: "fullname",
+    title: "Full Name",
+    elementsJSON: []
+  });
+  const survey = new SurveyModel({ questions: [{ type: "text", name: "q1" }] });
+  const questionText = survey.getAllQuestions()[0];
+  const component = QuestionConverter.convertObject(questionText, "fullname");
+  expect(component.name).toBe("q1");
+  ComponentCollection.Instance.clear();
 });

@@ -1,4 +1,4 @@
-<div data-bind="class:'svd-simulator-main '+simulatorMainCssClass">
+<div data-bind="class: 'svd-simulator-main ' + simulatorMainCssClass + (device === 'desktop' ? ' svd-simulator-main--desktop' : '')">
   <!-- ko if: hasFrame -->
   <div
     class="svd-simulator-wrapper"
