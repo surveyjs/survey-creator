@@ -109,7 +109,7 @@ export var ruStrings = {
       panel_enableName: "Панель включена/выключена",
       question_visibilityName: "Видимость вопроса",
       question_enableName: "Вопрос включен/выключен",
-      question_requireName: "Вопрос необязательный",
+      question_requireName: "Вопрос обязательный",
       trigger_completeName: "Опрос завершен",
       trigger_setvalueName: "Установить значение вопроса",
       trigger_copyvalueName: "Копировать значение вопроса",

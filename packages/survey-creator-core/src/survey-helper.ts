@@ -9,6 +9,7 @@ import {
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./settings";
+import { wrapTextByCurlyBraces } from "./utils/utils";
 
 export enum ObjType {
   Unknown,
@@ -212,7 +213,7 @@ export class SurveyHelper {
     return !obj || obj["disableSelecting"] !== true;
   }
   public static warnNonSupported(name: string, newPropertyName?: string) {
-    let outputText = "'" + name + "' is not supported in V2.";
+    let outputText = wrapTextByCurlyBraces(name) + " is not supported in V2.";
     if (!!newPropertyName) {
       outputText += " Use the '" + newPropertyName + "' property instead";
     }

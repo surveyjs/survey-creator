@@ -25,6 +25,7 @@ export class ActionButton extends SurveyElementBase<any, any> {
               e.stopPropagation();
               this.props.click();
             }}
+            title={this.props.title}
           >
             {this.props.text}
           </span>

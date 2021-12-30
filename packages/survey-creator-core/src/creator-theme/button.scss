@@ -1,6 +1,6 @@
 .svc-btn {
   &:hover {
-    outline: 2px solid $primary;
+    outline: calcSize(0.25) solid $primary;
   }
   display: flex;
   align-items: center;
@@ -13,6 +13,7 @@
   border-radius: calcSize(0.5);
   cursor: pointer;
   user-select: none;
+  outline-color: $primary;
 
   .svc-text {
     display: flex;
