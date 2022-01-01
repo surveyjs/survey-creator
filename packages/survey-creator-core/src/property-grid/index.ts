@@ -918,9 +918,11 @@ export class PropertyGridModel {
     }
   }
   private updateDependedPropertiesEditor(editor: Question) {
+    const obj: Base = (<any>editor).obj;
+    if(!obj) return;
     const property: JsonObjectProperty = (<any>editor).property;
     if(!!property && property.onPropertyEditorUpdate) {
-      property.onPropertyEditorUpdate(this.obj, editor);
+      property.onPropertyEditorUpdate(obj, editor);
     }
   }
   private updateDependedPropertiesEditors() {
