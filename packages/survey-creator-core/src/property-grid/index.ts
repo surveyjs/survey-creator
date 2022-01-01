@@ -802,6 +802,7 @@ export class PropertyGridModel {
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
     }
+    this.updateDependedPropertiesEditors();
     this.survey.onFocusInPanel.add((sender, options) => {
       if (this.currentlySelectedPanel !== options.panel) {
         this.currentlySelectedProperty = options.panel.getFirstQuestionToFocus().name;
@@ -905,6 +906,7 @@ export class PropertyGridModel {
       var name = properties[i];
       var q = this.survey.getQuestionByName(name);
       if (!q) continue;
+      this.updateDependedPropertiesEditor(q);
       if (!Helpers.isTwoValueEquals(q.value, this.survey.getValue(name))) {
         q.value = this.survey.getValue(name);
       }
@@ -915,7 +917,18 @@ export class PropertyGridModel {
       );
     }
   }
-
+  private updateDependedPropertiesEditor(editor: Question) {
+    const property: JsonObjectProperty = (<any>editor).property;
+    if(!!property && property.onPropertyEditorUpdate) {
+      property.onPropertyEditorUpdate(this.obj, editor);
+    }
+  }
+  private updateDependedPropertiesEditors() {
+    const questions = this.survey.getAllQuestions();
+    for(var i = 0; i < questions.length; i ++) {
+      this.updateDependedPropertiesEditor(questions[i]);
+    }
+  }
   private onAfterRenderQuestion(options: any) {
     PropertyGridEditorCollection.onAfterRenderQuestion(
       this.obj,
