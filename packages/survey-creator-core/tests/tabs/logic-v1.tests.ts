@@ -523,9 +523,7 @@ test("Edit triggers via trigger editor", () => {
   expect(elementPanel.getQuestionByName("expression").isVisible).toBeFalsy();
   elementPanel.getQuestionByName("setToName").value = "q3";
   logic.saveEditableItem();
-  expect(logic.items[0].actions[0].text).toEqual(
-    "Run expression: '{Question 2} + 1' and set its result into question: {Question 3}"
-  );
+  expect(logic.items[0].actions[0].text).toEqual("run expression: '{Question 2} + 1' and set its result into question: {Question 3}");
   expect(survey.triggers[0]["setToName"]).toEqual("q3");
   expect(survey.triggers[0].expression).toEqual("{q1} = 10");
 });
@@ -693,35 +691,19 @@ test("Displaying correct text for logic action", () => {
   for (var i = 0; i < logicTypes.length; i++) {
     expect(findOp(logicTypes[i])).toBeTruthy();
   }
-  expect(logic.items[0].expressionText).toEqual("{q1} == 1");
-  expect(findOp("page_visibility").text).toEqual("Make page {page1} visible");
-  expect(findOp("panel_visibility").text).toEqual(
-    "Make panel {panel1} visible"
-  );
-  expect(findOp("panel_enable").text).toEqual("Make panel {panel1} enable");
-  expect(findOp("question_visibility").text).toEqual(
-    "Make question {q2} visible"
-  );
-  expect(findOp("question_enable").text).toEqual("Make question {q3} enable");
-  expect(findOp("question_require").text).toEqual(
-    "Make question {q4} required"
-  );
-  expect(findOp("trigger_complete").text).toEqual("Survey becomes completed");
-  expect(findOp("trigger_setvalue").text).toEqual(
-    "Set into question: {q2} value q2Value"
-  );
-  expect(findOp("trigger_copyvalue").text).toEqual(
-    "Copy into question: {q1} value from question {q2}"
-  );
-  expect(findOp("trigger_skip").text).toEqual(
-    "Survey skip to the question {q2}"
-  );
-  expect(findOp("trigger_runExpression").text).toEqual(
-    "Run expression: '{q2} + 1' and set its result into question: {q3}"
-  );
-  expect(findOp("completedHtmlOnCondition").text).toEqual(
-    "Show custom text for the 'Thank you page'."
-  );
+  expect(logic.items[0].getDisplayText()).toEqual("If 'q1' == 1, make page 'page1' visible, make question 'q2' visible, make question 'q3' enable, make question 'q4' required, make panel 'panel1' visible, make panel 'panel1' enable, survey becomes completed, survey skip to the question 'q2', run expression: ''q2' + 1' and set its result into question: 'q3', copy into question: 'q1' value from question 'q2', set into question: 'q2' value q2Value, show custom text for the 'Thank you page'.");
+  expect(findOp("page_visibility").text).toEqual("make page {page1} visible");
+  expect(findOp("panel_visibility").text).toEqual("make panel {panel1} visible");
+  expect(findOp("panel_enable").text).toEqual("make panel {panel1} enable");
+  expect(findOp("question_visibility").text).toEqual("make question {q2} visible");
+  expect(findOp("question_enable").text).toEqual("make question {q3} enable");
+  expect(findOp("question_require").text).toEqual("make question {q4} required");
+  expect(findOp("trigger_complete").text).toEqual("survey becomes completed");
+  expect(findOp("trigger_setvalue").text).toEqual("set into question: {q2} value q2Value");
+  expect(findOp("trigger_copyvalue").text).toEqual("copy into question: {q1} value from question {q2}");
+  expect(findOp("trigger_skip").text).toEqual("survey skip to the question {q2}");
+  expect(findOp("trigger_runExpression").text).toEqual("run expression: '{q2} + 1' and set its result into question: {q3}");
+  expect(findOp("completedHtmlOnCondition").text).toEqual("show custom text for the 'Thank you page'.");
   expect(findOp("page_visibility").name).toEqual("Show (hide) page");
 });
 
@@ -812,7 +794,7 @@ test("Add existing visible Items", () => {
   options.showTitlesInExpressions = true;
   var logic = new SurveyLogic(survey, options);
   expect(logic.items).toHaveLength(1);
-  expect(logic.items[0].expressionText).toEqual("{My Question 1} == 1");
+  expect(logic.items[0].getDisplayText()).toEqual("If 'My Question 1' == 1, make question 'q2' visible, make question 'q3' visible");
 });
 
 test("Allow logic type to be null and change it", () => {

@@ -98,9 +98,8 @@ svc-question {
     .sv-action-bar-item {
       max-width: 100%;
       .sv-action-bar-item__title {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        @include textEllipsis;
+
         display: inline-block;
         justify-content: left;
       }
