@@ -616,7 +616,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (!name) return null;
     var elementType = logicType.baseClass;
     if (elementType == "question") return this.survey.getQuestionByName(name);
-    if (elementType == "page") return this.survey.getPageByName(name);
+    if (elementType == "panel") return <Base><any>this.survey.getPanelByName(name);
     return this.survey.getPageByName(name);
   }
 }
