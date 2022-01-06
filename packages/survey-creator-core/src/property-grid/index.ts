@@ -1128,7 +1128,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     options: ISurveyCreatorOptions, reason: "apply" | "cancel") {
 
   }
-  protected isSupportGrouping(): boolean {
+  public isSupportGrouping(): boolean {
     return false;
   }
   onUpdateQuestionCssClasses(obj: Base, options: any) {
@@ -1158,7 +1158,7 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
       titleLocation: "hidden"
     };
   }
-  protected isSupportGrouping(): boolean {
+  public isSupportGrouping(): boolean {
     return true;
   }
 }

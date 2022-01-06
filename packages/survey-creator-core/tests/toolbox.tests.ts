@@ -320,11 +320,11 @@ test("Creator layout: toolbox location", (): any => {
   expect(creator.toolboxLocation).toEqual("left");
   expect(creator.toolbox.isCompact).toEqual(false);
   expect(creator.showPropertyGrid).toEqual(true);
-  expect(creator.toolbox.dotsItemPopupModel.horizontalPosition).toEqual("right");
+  expect((<any>creator.toolbox).dotsItemPopupModel.horizontalPosition).toEqual("right");
 
   creator.toolboxLocation = "right";
   expect(creator.toolbox.isCompact).toEqual(true);
-  expect(creator.toolbox.dotsItemPopupModel.horizontalPosition).toEqual("left");
+  expect((<any>creator.toolbox).dotsItemPopupModel.horizontalPosition).toEqual("left");
 
   creator.showPropertyGrid = false;
   expect(creator.toolbox.isCompact).toEqual(false);
