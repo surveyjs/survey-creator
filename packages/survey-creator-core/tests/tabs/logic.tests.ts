@@ -281,7 +281,7 @@ test("LogicItemEditor: update a trigger", () => {
     getLogicString("trigger_runExpressionDescription")
   );
   expect(
-    editor.panels[0].getQuestionByName("elementSelector").visibl
+    editor.panels[0].getQuestionByName("elementSelector").visible
   ).toBeFalsy();
   var panelTrigger = <PanelModel>(
     editor.panels[0].getElementByName("elementPanel")
@@ -553,6 +553,30 @@ test("SurveyLogicUI: Add new item and action", () => {
   expect(item.actions).toHaveLength(1);
   expect(item.actions[0].logicTypeName).toEqual("question_visibility");
   expect(item.actions[0].element).toEqual(survey.getQuestionByName("q2"));
+});
+test("SurveyLogicUI: Add new item and action for panel.visibleIf", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      {
+        type: "panel", name: "panel1",
+        elements: [
+          { type: "text", name: "q2" }
+        ]
+      },
+    ]
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(0);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "panel_visibility";
+  panel.getQuestionByName("elementSelector").value = "panel1";
+  var res = logic.saveEditableItemAndBack();
+  expect(res).toBeTruthy();
+  const surveyPanel = <PanelModel>survey.getPanelByName("panel1");
+  expect(surveyPanel.visibleIf).toEqual("{q1} = 1");
 });
 test("SurveyLogicUI: Do not duplicate new items", () => {
   var survey = new SurveyModel({
