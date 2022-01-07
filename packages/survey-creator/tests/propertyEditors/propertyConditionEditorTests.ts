@@ -386,7 +386,7 @@ QUnit.test(
     editor.isEditorShowing = true;
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "val2";
-    var valueQuestion = editorItem.valueQuestion;
+    var valueQuestion = <Survey.QuestionDropdownModel>editorItem.valueQuestion;
     assert.ok(valueQuestion, "Value question created correctly");
     assert.equal(
       valueQuestion.choices.length,
@@ -395,7 +395,7 @@ QUnit.test(
     );
 
     editorItem.questionName = "matrix.row1.column1";
-    valueQuestion = editorItem.valueQuestion;
+    valueQuestion = <Survey.QuestionDropdownModel>editorItem.valueQuestion;
     assert.ok(
       valueQuestion,
       "Value question for matrix column created correctly"
@@ -557,7 +557,7 @@ QUnit.test(
     var survey = new Survey.Survey();
     var page = survey.addNewPage("p");
     var question = page.addNewQuestion("text", "q1");
-    var radioQuestion = page.addNewQuestion("dropdown", "q2");
+    var radioQuestion = <Survey.QuestionDropdownModel>page.addNewQuestion("dropdown", "q2");
     radioQuestion.choices = [
       { value: 1, visibleIf: "{a} = 1" },
       { value: 1, enabledIf: "{b} = 1" },
@@ -578,7 +578,7 @@ QUnit.test(
     );
     var editorItem = editor.koEditorItems()[0];
     editorItem.questionName = "q2";
-    var vQuestion = editorItem.valueQuestion;
+    var vQuestion = <Survey.QuestionDropdownModel>editorItem.valueQuestion;
     assert.equal(vQuestion.visibleChoices.length, 2, "Show all choices");
   }
 );
@@ -1452,7 +1452,7 @@ QUnit.test(
       "question value type is dropdown for editing radiogroup, #2"
     );
     assert.equal(
-      editorItem.valueQuestion.choices.length,
+      (<Survey.QuestionDropdownModel>editorItem.valueQuestion).choices.length,
       3,
       "There are 3 choices"
     );
