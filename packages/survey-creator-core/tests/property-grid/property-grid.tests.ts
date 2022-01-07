@@ -2290,6 +2290,16 @@ test("nextToProperty on the same line", () => {
   expect(maxQuestion.minWidth).toEqual("50px");
   maxProperty.nextToProperty = oldNextToProperty;
 });
+test("nextToProperty on the same line", () => {
+  const maxProperty: any = Serializer.findProperty("text", "max");
+  const question = new QuestionTextModel("q1");
+  question.inputType = "number";
+  const propertyGrid = new PropertyGridModelTester(question);
+  const maxQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("max");
+  expect(maxQuestion.inputType).toEqual("number");
+  question.inputType = "date";
+  expect(maxQuestion.inputType).toEqual("date");
+});
 
 class TestValueEditor extends PropertyGridValueEditorBase {
   public fit(prop: JsonObjectProperty): boolean {
