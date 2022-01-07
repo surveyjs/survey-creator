@@ -1,5 +1,5 @@
 import { StringEditorViewModelBase } from "../src/components/string-editor";
-import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue } from "survey-core";
+import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 test("Test css", (): any => {
   let creator = new CreatorTester();
@@ -64,12 +64,15 @@ test("Test string editor content editable", (): any => {
 test("Test string editor select questions items readonly", (): any => {
 
   function checkItemEdit() {
-    var seQ0ch0 = new StringEditorViewModelBase(survey.getQuestionByName("q0").choices[0].locText, creator);
-    var seQ0ch1 = new StringEditorViewModelBase(survey.getQuestionByName("q0").choices[1].locText, creator);
-    var seQ1ch0 = new StringEditorViewModelBase(survey.getQuestionByName("q1").choices[0].locText, creator);
-    var seQ1ch1 = new StringEditorViewModelBase(survey.getQuestionByName("q1").choices[1].locText, creator);
-    var seQ2ch0 = new StringEditorViewModelBase(survey.getQuestionByName("q2").choices[0].locText, creator);
-    var seQ2ch1 = new StringEditorViewModelBase(survey.getQuestionByName("q2").choices[1].locText, creator);
+    const q0 = <QuestionDropdownModel>survey.getQuestionByName("q0");
+    const q1 = <QuestionDropdownModel>survey.getQuestionByName("q1");
+    const q2 = <QuestionDropdownModel>survey.getQuestionByName("q2");
+    var seQ0ch0 = new StringEditorViewModelBase(q0.choices[0].locText, creator);
+    var seQ0ch1 = new StringEditorViewModelBase(q0.choices[1].locText, creator);
+    var seQ1ch0 = new StringEditorViewModelBase(q1.choices[0].locText, creator);
+    var seQ1ch1 = new StringEditorViewModelBase(q1.choices[1].locText, creator);
+    var seQ2ch0 = new StringEditorViewModelBase(q2.choices[0].locText, creator);
+    var seQ2ch1 = new StringEditorViewModelBase(q2.choices[1].locText, creator);
     return [
       seQ0ch0.contentEditable,
       seQ0ch1.contentEditable,
@@ -248,12 +251,15 @@ test("Test string editor content editable for matrix and panels", (): any => {
 
   itemValue = <ItemValue> (<QuestionMatrixDropdownModel>creator.survey.getQuestionByName("mxDynQ")).renderedTable.rows[1].cells[1].question.choices[0];
   expect(itemValue.locText.renderAs).toEqual(LocalizableString.defaultRenderer);
-
-  itemValue = <ItemValue> (creator.survey.getQuestionByName("singleQ").choices[0]);
+  const singleQ = <QuestionRadiogroupModel>creator.survey.getQuestionByName("singleQ");
+  itemValue = <ItemValue> (singleQ.choices[0]);
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
-  itemValue = <ItemValue> (creator.survey.getQuestionByName("panelQ").choices[0]);
+  const panelQ = <QuestionRadiogroupModel>creator.survey.getQuestionByName("panelQ");
+  itemValue = panelQ.choices[0];
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
-  itemValue = <ItemValue> (creator.survey.getQuestionByName("panDynQ").template.getQuestionByName("panDynQ1").choices[0]);
+  const panDynQ = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("panDynQ");
+  const panDynQ1 = <QuestionRadiogroupModel>panDynQ.template.getQuestionByName("panDynQ1");
+  itemValue = panDynQ1.choices[0];
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
 });
 
@@ -278,8 +284,8 @@ test("Test string editor inplaceEditForValues", (): any => {
   };
 
   var itemValue;
-
-  itemValue = <ItemValue> (creator.survey.getQuestionByName("q0").choices[0]);
+  const q0 = <QuestionRadiogroupModel>creator.survey.getQuestionByName("q0");
+  itemValue = q0.choices[0];
   var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
   expect(itemValue.text).toEqual("item1");
   seChoice.onInput({ target: { innerText: "newItem" } });

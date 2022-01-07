@@ -49,7 +49,7 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     return Helpers.isValueEmpty(val);
   }
 
-  protected isSupportGrouping(): boolean {
+  public isSupportGrouping(): boolean {
     return true;
   }
 }
