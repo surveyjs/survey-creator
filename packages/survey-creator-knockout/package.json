@@ -90,7 +90,8 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
-    "webpack-svgstore-plugin": "^4.1.0"
+    "webpack-svgstore-plugin": "^4.1.0",
+    "colors": "1.4.1"
   },
   "dependencies": {
     "knockout": "^3.5.1",
