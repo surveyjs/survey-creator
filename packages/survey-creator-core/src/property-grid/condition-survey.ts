@@ -665,7 +665,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
   }
   private updateQuestionsWidth(panel: PanelModel) {
-    const paddingRight = "20px";
     const valueQuestion = panel.getQuestionByName("questionValue");
     const conjunctionQuestion = panel.getQuestionByName("conjunction");
     const nameQuestion = panel.getQuestionByName("questionName");
@@ -675,21 +674,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!isFirst) {
       conjunctionQuestion.minWidth = "50px";
       conjunctionQuestion.width = "15%";
-      conjunctionQuestion.paddingRight = paddingRight;
     }
 
     nameQuestion.minWidth = "50px";
     nameQuestion.width = isFirst ? "40%" : "25%";
-    nameQuestion.paddingRight = paddingRight;
 
     operatorQuestion.minWidth = "50px";
     operatorQuestion.width = isValueSameLine ? "25%" : "60%";
-    operatorQuestion.paddingRight = paddingRight;
 
     if (!!valueQuestion) {
       valueQuestion.minWidth = "50px";
       valueQuestion.width = isValueSameLine ? "35%" : "";
-      valueQuestion.paddingRight = paddingRight;
     }
   }
   private getFirstEnabledOperator(choices: Array<ItemValue>): string {
