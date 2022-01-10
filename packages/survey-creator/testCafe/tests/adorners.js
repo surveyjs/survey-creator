@@ -175,57 +175,27 @@ test(`dropdown work with other`, async (t) => {
 });
 
 test(`checkbox work with other/select all/none`, async (t) => {
+  const customItemActions = Selector('.svda-add-new-item.svda-add-custom-item span').filterVisible();
+  const checkboxItems = Selector(".item_editable .sv-string-viewer").filterVisible();
   await t
     .click(`[title~=Checkbox]`)
-    .expect(
-      Selector(`.svda-add-custom-item+.svda-add-custom-item>span`).innerText
-    )
-    .eql("Other")
-    .expect(
-      Selector(
-        `.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item>span`
-      ).innerText
-    )
-    .eql("Select All")
-    .expect(
-      Selector(
-        `.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item>span`
-      ).innerText
-    )
-    .eql("None")
-    .click(`.svda-add-custom-item+.svda-add-custom-item`)
-    .click(`.svda-add-custom-item+.svda-add-custom-item`)
-    .click(`.svda-add-custom-item+.svda-add-custom-item`)
-    .expect(
-      Selector(`.sv_qcbx div:nth-child(2) label .item_editable > span`)
-        .innerText
-    )
-    .eql("Select All")
-    .expect(
-      Selector(`.sv_qcbx div:nth-child(3) label .item_editable > span`)
-        .innerText
-    )
-    .eql("item1")
-    .expect(
-      Selector(`.sv_qcbx div:nth-child(4) label .item_editable > span`)
-        .innerText
-    )
-    .eql("item2")
-    .expect(
-      Selector(`.sv_qcbx div:nth-child(5) label .item_editable > span`)
-        .innerText
-    )
-    .eql("item3")
-    .expect(
-      Selector(`.sv_qcbx div:nth-child(6) label .item_editable > span`)
-        .innerText
-    )
-    .eql("Other (describe)")
-    .expect(
-      Selector(`.sv_qcbx div:nth-child(7) label .item_editable > span`)
-        .innerText
-    )
-    .eql("None");
+    .expect(checkboxItems.count).eql(3)
+    .expect(customItemActions.count).eql(3)
+    .expect(customItemActions.nth(0).innerText).eql("Other")
+    .expect(customItemActions.nth(1).innerText).eql("Select All")
+    .expect(customItemActions.nth(2).innerText).eql("None")
+
+    .click(customItemActions.withText("Other"))
+    .click(customItemActions.withText("Select All"))
+    .click(customItemActions.withText("None"))
+    .expect(customItemActions.count).eql(0)
+    .expect(checkboxItems.count).eql(6)
+    .expect(checkboxItems.nth(0).innerText).eql("Select All")
+    .expect(checkboxItems.nth(1).innerText).eql("item1")
+    .expect(checkboxItems.nth(2).innerText).eql("item2")
+    .expect(checkboxItems.nth(3).innerText).eql("item3")
+    .expect(checkboxItems.nth(4).innerText).eql("Other (describe)")
+    .expect(checkboxItems.nth(5).innerText).eql("None");
   // .click(`.svda-add-custom-item+.svda-add-custom-item`)
   // .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)
   // .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)

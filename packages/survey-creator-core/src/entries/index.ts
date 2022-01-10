@@ -79,6 +79,7 @@ import "../utils/design.scss";
 import "../utils/layout.scss";
 
 //localization
+import "../localization/arabic";
 import "../localization/danish";
 import "../localization/french";
 import "../localization/german";

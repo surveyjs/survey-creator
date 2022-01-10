@@ -342,7 +342,7 @@ test("fast copy tests, copy a panel with questions and a nested panel", () => {
   const q1 = p1.addNewQuestion("text", "question1");
   const p2 = p1.addNewPanel("panel2");
   const q2 = p2.addNewQuestion("text", "question2");
-  creator.survey.selectedElement = p1;
+  (<any>creator.survey).selectedElement = p1;
   creator.fastCopyQuestion(p1);
 
   expect(survey.pages[0].elements).toHaveLength(2);
