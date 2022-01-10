@@ -1,4 +1,4 @@
-import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell } from "survey-core";
+import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../settings";
@@ -668,7 +668,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private updateCellPlaceholdersByDefault(cell: MatrixDropdownCell, newValue: string, item: TranslationItem) {
     if (!!newValue) {
-      cell.question.placeHolder = newValue;
+      (<QuestionTextBase>cell.question).placeHolder = newValue;
     } else {
       this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
     }

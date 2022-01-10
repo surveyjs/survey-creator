@@ -1,5 +1,5 @@
 {
-  "version": "1.9.3",
+  "version": "1.9.4",
   "name": "survey-creator",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -48,7 +48,6 @@
     "copy-webpack-plugin": "4.0.1",
     "css-loader": "^3.6.0",
     "dotenv": "4.0.0",
-    "dts-bundle": "0.7.2",
     "eslint": "^7.32.0",
     "file-loader": "0.10.0",
     "github-api": "^3.3.0",

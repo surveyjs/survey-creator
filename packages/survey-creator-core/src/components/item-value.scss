@@ -23,6 +23,7 @@
   // position: absolute;
   // left: calcSize(-10);
   height: calcSize(4);
+  width: calcSize(4);
   box-sizing: border-box;
   // text-align: right;
   // white-space: nowrap;
@@ -34,6 +35,7 @@
   padding: calcSize(1);
   cursor: pointer;
   display: inline-block;
+  outline: none;
 }
 .svc-item-value-controls__button > span,
 sv-svg-icon.svc-item-value-controls__button {
@@ -81,12 +83,18 @@ sv-svg-icon.svc-item-value-controls__button {
   }
 }
 
-.svc-item-value-controls__add:hover {
-  background-color: $primary-light;
+.svc-item-value-controls__add {
+  &:hover,
+  &:focus {
+    background-color: $primary-light;
+  }
 }
 
-.svc-item-value-controls__remove:hover {
-  background-color: $red-light;
+.svc-item-value-controls__remove {
+  &:hover,
+  &:focus {
+    background-color: $red-light;
+  }
 }
 
 .svc-question__content--selected-no-border .svc-item-value-controls {

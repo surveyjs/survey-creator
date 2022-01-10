@@ -1,37 +1,37 @@
 @import "../../variables.scss";
 @import "../../colors.scss";
 
-.sl-table__cell.st-table__cell--actions:first-child .sv-action-bar{
-  margin-top: -4px;
+.sl-table__cell.st-table__cell--actions:first-child .sv-action-bar {
+  margin-top: calcSize(-0.5);
+  padding-right: calcSize(4);
 }
-.sl-table__detail-button.sl-table__detail-button {
-  display: block;
-  width: 48px;
-  height: 48px;
+.sl-table .sl-table__detail-button.sl-table__detail-button {
+  width: calcSize(6);
+  height: calcSize(6);
+
   box-sizing: border-box;
-  border-radius: 100px;
+  border-radius: calcSize(12.5);
   padding: 0;
-  use {
-    display: none;
-  }
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     background-color: $primary-light;
+    outline: none;
+
     use {
       fill: $primary;
     }
   }
 }
-#show-detail .sl-table__detail-button {
-    outline: none;
-}
 
-.sl-table__row:hover .sl-table__detail-button.sl-table__detail-button ,
-.sl-table__detail-button.sl-table__detail-button:focus {  
-  use { display: initial; }
-}
-.sl-table__row #remove-row .sv-action-bar-item__icon use {
+.sl-table__cell .sv-action-bar-item__icon {
   display: none;
 }
+.sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
+.sl-table__cell .sv-action-bar-item:focus .sv-action-bar-item__icon {
+  display: block;
+}
+
 .sl-table__row:hover #remove-row,
 .sl-table__row #remove-row:focus-within {
   .sv-action-bar-item {
@@ -41,7 +41,6 @@
   }
   .sv-action-bar-item__icon use {
     fill: $red;
-    display: block;
   }
 }
 .sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {
@@ -51,9 +50,19 @@
 .sl-table__cell .svc-action-button,
 .sl-table__cell .svc-action-button:hover,
 .sl-table__cell .svc-action-button:focus {
+  @include mediumBold;
+
   background: transparent;
   color: $foreground;
   outline: none;
+  border: none;
+  box-shadow: none;
+
+  max-height: calcSize(13.5);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .sl-table__cell {
@@ -61,10 +70,8 @@
   font-weight: bold;
   font-size: calcSize(2);
   font-family: $font-family;
-  padding: 0.9375em;
-  padding-left: 0;
-  box-sizing: content-box;
   vertical-align: top;
+  padding: calcSize(2) 0;
 }
 
 .sl-table__cell--detail-button {
@@ -73,7 +80,6 @@
   outline: none;
   border: none;
   background-color: transparent;
-  padding: calcSize(0.25);
 }
 
 .sl-table {
@@ -85,21 +91,21 @@
   tbody {
     tr:last-child {
       .sl-table__cell {
-        padding-bottom: 2.5em;
+        padding-bottom: calcSize(5);
       }
     }
   }
 
   tr:first-child {
     .sl-table__cell {
-      padding-top: 1.875em;
+      padding-top: calcSize(4);
     }
   }
 
   td,
   th {
     &:first-child {
-      padding-left: 1.875em;
+      padding-left: calcSize(4);
 
       .sv-action-bar {
         justify-content: flex-end;
@@ -109,7 +115,7 @@
   td,
   th {
     &:last-child {
-      padding-right: 1.875em;
+      padding-right: calcSize(4);
     }
   }
 }
@@ -117,10 +123,7 @@
 .sl-panel .sl-panel__footer {
   padding: 0;
 
-  &.sv-action-bar {
-    width: 100%;
-  }
-  #saveDetailPanel {
+  .sv-action {
     width: 100%;
   }
   .sv-action__content {
@@ -171,7 +174,7 @@
   flex-flow: row wrap;
 }
 .sl-panel {
-  padding-bottom: 16px;
+  padding-bottom: calcSize(2);
 }
 .sl-row--multiple {
   .sl-panel {

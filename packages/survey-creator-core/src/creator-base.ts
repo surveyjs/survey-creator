@@ -979,12 +979,19 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   //#region Obsolete properties and functins
-  public get showToolbox(): string {
-    SurveyHelper.warnNonSupported("showToolbox");
-    return undefined;
+  public get showToolbox() {
+    SurveyHelper.warnNonSupported("showToolbox", "toolboxLocation");
+    return this.toolboxLocation !== "hidden";
   }
-  public set showToolbox(val: string) {
-    SurveyHelper.warnNonSupported("showToolbox");
+  public set showToolbox(val: "left" | "right" | "top" | "none" | boolean) {
+    SurveyHelper.warnNonSupported("showToolbox", "toolboxLocation");
+    if (val === "none" || val === false || val === "top") {
+      this.toolboxLocation = "hidden";
+    } else if (val === true) {
+      this.toolboxLocation = "left";
+    } else {
+      this.toolboxLocation = val;
+    }
   }
   private showPropertyGridValue: boolean = true;
   public onShowPropertyGridVisiblityChanged: Survey.Event<
@@ -999,9 +1006,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   public set showPropertyGrid(val: boolean) {
     if (<any>val !== true && <any>val !== false) {
-      SurveyHelper.warnText(
-        "showPropertyGrid propertry grid is a boolean property now."
-      );
+      SurveyHelper.warnText("showPropertyGrid propertry grid is a boolean property now.");
       return;
     }
     if (this.showPropertyGrid === val) return;
@@ -1292,13 +1297,18 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       }
     }
   }
-
+  private setPropertyPlaceHolder(className: string, propertyName: string, value: string) {
+    const prop: any = Serializer.findProperty(className, propertyName);
+    if(!!prop) {
+      prop.placeholder = value;
+    }
+  }
   private patchMetadata(): void {
-    Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
-    Serializer.findProperty("survey", "description").placeholder = "pe.surveyDescriptionPlaceholder";
+    this.setPropertyPlaceHolder("survey", "title", "pe.surveyTitlePlaceholder");
+    this.setPropertyPlaceHolder("survey", "description", "pe.surveyDescriptionPlaceholder");
     Serializer.findProperty("survey", "logoPosition").visible = false;
-    Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
-    Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
+    this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
+    this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {

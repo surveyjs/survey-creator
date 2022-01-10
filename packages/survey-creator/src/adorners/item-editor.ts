@@ -14,12 +14,12 @@ var templateHtml = require("html-loader?interpolate!val-loader!./item-editor.htm
 
 function focusAfterChange(question: QuestionSelectBase, index = 0) {
   setTimeout(() => {
-    if (question.renderedElement && index >= -1) {
+    if ((<any>question).renderedElement && index >= -1) {
       if (index === -1) {
         index = 0;
       }
       var focusables = <HTMLElement[]>(
-        (<any>question.renderedElement.getElementsByClassName("svda-focusable"))
+        ((<any>question).renderedElement.getElementsByClassName("svda-focusable"))
       );
       if (focusables.length > 0 && index <= focusables.length) {
         if (index >= focusables.length) {
@@ -453,17 +453,17 @@ export var itemDraggableAdorner = {
       );
     }
     if (
-      model.hasSelectAll !== undefined &&
-      model.hasSelectAll !== true &&
+      model["hasSelectAll"] !== undefined &&
+      model["hasSelectAll"] !== true &&
       editor.canShowObjectProperty(model, "hasSelectAll")
     ) {
       itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addSelectAll"),
           () => {
-            var newValue = !model.hasSelectAll;
+            var newValue = !model["hasSelectAll"];
             newValue = raiseChangingEvent(model, "hasSelectAll", newValue);
-            model.hasSelectAll = newValue;
+            model["hasSelectAll"] = newValue;
             raiseChangedEvent(model, "hasSelectAll", newValue);
             focusAfterChange(model, 0);
           }

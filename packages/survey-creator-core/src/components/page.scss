@@ -16,6 +16,7 @@ svc-page {
   padding: calcSize(1) calcSize(1) calcSize(3);
   box-sizing: border-box;
   width: 100%;
+  outline: none;
   .sd-page {
     margin: 0;
     padding-top: calcSize(1);
@@ -46,11 +47,13 @@ svc-page {
   }
 }
 
+.svc-page__content:not(.svc-page__content--new):focus,
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
   background: $secondary-back-light;
 }
 
 .svc-creator .svc-page .svc-page__content--selected,
+.svc-creator .svc-page .svc-page__content--selected:focus,
 .svc-hovered {
   border-radius: calcSize(0.5);
   &.svc-page__content--selected {
@@ -63,30 +66,11 @@ svc-page {
 }
 
 .svc-page__add-new-question {
-  &:hover {
-    outline: 2px solid $primary;
-  }
-  display: flex;
-  align-items: center;
   margin-left: calcSize(2);
   margin-right: calcSize(2);
-  height: calcSize(7);
-  line-height: calcSize(7);
-  vertical-align: baseline;
-  text-align: center;
-  background-color: $background;
-  box-shadow: 0px 1px 2px $shadow-inner;
-  border-radius: calcSize(0.5);
-  cursor: pointer;
-  user-select: none;
 
   .svc-text {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: center;
     margin-left: calcSize(6);
-    color: $primary;
   }
 }
 

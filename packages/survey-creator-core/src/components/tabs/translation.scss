@@ -120,6 +120,7 @@
 
   width: calc(100% - 3 * #{$base-unit});
   border: unset;
+  outline: none;
   background-color: $primary-bg-color;
   resize: none;
   padding: 0;

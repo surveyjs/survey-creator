@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-knockout",
-  "version": "1.9.3-beta.0",
+  "version": "1.9.4-beta.0",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -61,7 +61,6 @@
     "css-loader": "^3.6.0",
     "devextreme-screenshot-comparer": "^2.0.11",
     "dotenv": "4.0.0",
-    "dts-bundle": "0.7.2",
     "eslint": "^7.32.0",
     "github-api": "^3.3.0",
     "html-loader": "^0.4.4",

@@ -165,36 +165,17 @@
   }
 
   .svc-logic-tab__content-action {
-    display: flex;
-    align-items: center;
-    width: 50%;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: calcSize(8);
-    height: calcSize(7);
-    line-height: calcSize(7);
-    vertical-align: baseline;
-    text-align: center;
-    background-color: $background;
-    box-shadow: 0px 1px 2px $shadow-inner;
-    border-radius: calcSize(0.5);
-    cursor: pointer;
-    user-select: none;
   }
+
   .svc-logic-tab__content-action--disabled {
     cursor: default;
     color: $foreground-disabled;
     &:hover {
       background-color: $background;
     }
-  }
-
-  .svc-logic-tab__content-action .svc-text {
-    color: $primary;
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: center;
   }
 
   .sd-paneldynamic__panel-wrapper--in-row {

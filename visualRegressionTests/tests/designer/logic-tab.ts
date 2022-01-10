@@ -65,17 +65,46 @@ test("Check actions hover states", async (t) => {
   await t.hover(removeRuleSelector);
   await checkElementScreenshot("logic-rule-remove-hover.png", removeRuleSelector, t);
   await t.click(logicDetailButtonElement);
-  // const questionOperator = Selector(".svc-logic-operator--question");
-  // await t.hover(questionOperator)
-  // await checkElementScreenshot("logic-question-action-hover.png", questionOperator, t);
-  // const operator = Selector(".svc-logic-operator--operator");
-  // await t.hover(operator)
-  // await checkElementScreenshot("logic-operator-hover.png", operator, t);
-  // const action = Selector(".svc-logic-operator--action");
-  // await t.hover(action)
-  // await checkElementScreenshot("logic-action-hover.png", action, t);
+  const questionOperator = Selector(".svc-logic-operator--question");
+  await t.hover(questionOperator);
+  await checkElementScreenshot("logic-question-action-hover.png", questionOperator, t);
+  const operator = Selector(".svc-logic-operator--operator");
+  await t.hover(operator);
+  await checkElementScreenshot("logic-operator-hover.png", operator, t);
+  const action = Selector(".svc-logic-operator--action");
+  await t.hover(action);
+  await checkElementScreenshot("logic-action-hover.png", action, t);
+  const conditionRemoveSelector = Selector(".svc-logic-condition-remove.svc-icon-remove");
+  await t.click(Selector(".sl-paneldynamic__add-btn.svc-logic-operator--operator")).hover(conditionRemoveSelector);
+  await checkElementScreenshot("logic-condition-remove-hover.png", conditionRemoveSelector, t);
   await t.hover(logicDetailButtonElement);
   await checkElementScreenshot("logic-collapse-hover.png", logicDetailButtonElement, t);
+});
+
+test("Check logic error notifier", async (t) => {
+  await t.resizeWindow(1920, 900);
+  await setJSON({
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "q1"
+          },
+          {
+            "type": "text",
+            "name": "q2",
+          },
+        ]
+      }
+    ]
+  });
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName));
+  await t.click(Selector(".svc-logic-tab__content-action")).click(Selector(".sl-panel__done-button"));
+  await checkElementScreenshot("logic-error-notifier.png", Selector(".svc-notifier--error"), t);
 });
 
 const jsonMultipleConditionsMultipleActions = {

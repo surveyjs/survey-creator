@@ -19,7 +19,7 @@ test("Survey/page title/description placeholders text", () => {
     const locStr: LocalizableString = new LocalizableString(owner, false, propertyName);
     const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr, null);
     const property: JsonObjectProperty = Serializer.findProperty(ownerName, propertyName);
-    const placeholder: string = editorLocalization.getString(property.placeholder);
+    const placeholder: string = editorLocalization.getString((<any>property).placeholder);
     expect(editor.placeholder).toEqual(placeholder);
   };
   checkPlaceholder(survey, "survey", "title");

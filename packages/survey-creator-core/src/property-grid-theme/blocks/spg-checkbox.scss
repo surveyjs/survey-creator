@@ -2,14 +2,12 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-}
-.spg-checkbox:focus-within {
-  outline: 1px dotted $primary;
+  margin-top: calcSize(1);
 }
 .spg-checkbox--disabled {
   cursor: default;
   
-  .spg-checkbox{
+  .spg-checkbox {
     cursor: default;
   }
 }
@@ -19,6 +17,7 @@
   color: $foreground;
   margin-left: calcSize(1);
 }
+
 .spg-checkbox__rectangle {
   background: $background;
   border: 1px solid $border;
@@ -26,7 +25,14 @@
   width: calcSize(3);
   height: calcSize(3);
   flex-shrink: 0;
-  padding: calcSize(0.5);
+  // padding: calcSize(0.5);
+  padding: 4px 3px;
+  &:hover, &:focus {
+    background-color: $background-dim;
+  }
+}
+.spg-checkbox__control:focus+.spg-checkbox__rectangle {
+  background-color: $background-dim;
 }
 .spg-checkbox--checked .spg-checkbox__rectangle:after {
   display: block;

@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "1.9.3-beta.0",
+  "version": "1.9.4-beta.0",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -63,7 +63,6 @@
     "devextreme-screenshot-comparer": "^2.0.11",
     "dotenv": "4.0.0",
     "eslint": "^7.32.0",
-    "dts-bundle": "0.7.2",
     "github-api": "^3.3.0",
     "html-loader": "^0.4.4",
     "http-server": "^0.12.3",

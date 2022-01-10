@@ -177,8 +177,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     };
     this.onLogicItemValidation.fire(this, options);
     this.errorText = options.error;
-    if (!!this.errorText && !!this.survey.creator)
-      this.survey.creator.notify(this.errorText, "error");
+    const creator = (<any>this.survey).creator;
+    if (!!this.errorText && !!creator)
+      creator.notify(this.errorText, "error");
     return !!this.errorText;
   }
   public getUsedQuestions(): Question[] {

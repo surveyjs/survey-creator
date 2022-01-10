@@ -315,10 +315,10 @@ test("allCondtionQuestions for matrix column", () => {
 
   var editor = new ConditionEditor(survey, column);
   expect(
-    editor.allConditionQuestions.filter((e) => e.name === "row.col1").length > 0
+    editor.allConditionQuestions.filter((e) => e.value === "row.col1").length > 0
   ).toBeTruthy();
   expect(
-    editor.allConditionQuestions.filter((e) => e.name === "row.col2").length > 0
+    editor.allConditionQuestions.filter((e) => e.value === "row.col2").length > 0
   ).toBeFalsy();
 });
 test("allCondtionQuestions for panel dynamic", () => {
@@ -335,17 +335,17 @@ test("allCondtionQuestions for panel dynamic", () => {
 
   var editor = new ConditionEditor(survey, panelQuestion);
   expect(
-    editor.allConditionQuestions.filter((e) => e.name === "panel.q1").length > 0
+    editor.allConditionQuestions.filter((e) => e.value === "panel.q1").length > 0
   ).toBeTruthy();
   expect(
-    editor.allConditionQuestions.filter((e) => e.name === "panel.q2").length > 0
+    editor.allConditionQuestions.filter((e) => e.value === "panel.q2").length > 0
   ).toBeFalsy();
 });
 test("Show invisible choices and make all choices enabled, Bug: https://surveyjs.answerdesk.io/ticket/details/T1921", () => {
   var survey = new SurveyModel();
   var page = survey.addNewPage("p");
   var question = page.addNewQuestion("text", "q1");
-  var radioQuestion = page.addNewQuestion("dropdown", "q2");
+  var radioQuestion = <QuestionDropdownModel>page.addNewQuestion("dropdown", "q2");
   radioQuestion.choices = [
     { value: 1, visibleIf: "{a} = 1" },
     { value: 1, enabledIf: "{b} = 1" }
@@ -1204,22 +1204,22 @@ test("Show rating/ranking in new line", () => {
   var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   var questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 
   panel.getQuestionByName("questionName").value = "q3";
   questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 
   panel.getQuestionByName("questionName").value = "q4";
   questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 
   panel.getQuestionByName("questionName").value = "q2";
   questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 });
 test("Make question value invisible for empty/notempty if they are in the new line", () => {

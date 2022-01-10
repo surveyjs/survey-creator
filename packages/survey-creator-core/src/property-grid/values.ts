@@ -23,13 +23,13 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     };
   }
   public onCreated = (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => {
-    question.linkClickCallback = () => {
-      this.showModalPropertyEditor(this, prop, question, options, () => question.isSelected = false);
-      question.isSelected = true;
+    (<any>question).linkClickCallback = () => {
+      this.showModalPropertyEditor(this, prop, question, options, () => (<any>question).isSelected = false);
+      (<any>question).isSelected = true;
     };
-    question.clearClickCallback = () => {
+    (<any>question).clearClickCallback = () => {
       this.clearPropertyValue(
-        question.obj,
+        (<any>question).obj,
         prop,
         question,
         null /*this.options*/
@@ -45,16 +45,12 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   ): void {
     obj[prop.name] = undefined;
   }
-  onUpdateQuestionCssClasses(obj: Base, options: any) {
-    const question = options.question;
-    if(!question || !question.parent) return;
-    const index = question.parent.elements.indexOf(question);
-    if(index < 1) return;
-    if(question.parent.elements[index - 1].getType() !== question.getType()) return;
-    options.cssClasses.mainRoot += " spg-row-narrow__question";
-  }
   protected isValueEmpty(val: any): boolean {
     return Helpers.isValueEmpty(val);
+  }
+
+  public isSupportGrouping(): boolean {
+    return true;
   }
 }
 
@@ -139,7 +135,7 @@ export class PropertyGridTriggerValueEditor extends PropertyGridValueEditorBase 
     question: Question,
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
-    const trigger = question.obj;
+    const trigger = (<any>question).obj;
     const setQuestion = this.getSetToNameQuestion(trigger);
     return new TriggerValueEditor(setQuestion, trigger, prop.name, options);
   }
