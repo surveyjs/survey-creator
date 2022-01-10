@@ -50,6 +50,8 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
     // }
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
+    const imageWidth = (this.props.question as any).imageWidth;
+    const imageHeight = (this.props.question as any).imageHeight;
 
     let content = null;
     if (isNew) {
@@ -57,7 +59,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         <div className="svc-image-item-value__item">
           <div className="sd-imagepicker__item sd-imagepicker__item--inline">
             <label className="sd-imagepicker__label">
-              <div style={{ width: this.props.question.imageWidth ? this.props.question.imageWidth + "px" : undefined, height: this.props.question.imageHeight ? this.props.question.imageHeight + "px" : undefined }} className="sd-imagepicker__image">
+              <div style={{ width: imageWidth ? imageWidth + "px" : undefined, height: imageHeight ? imageHeight + "px" : undefined }} className="sd-imagepicker__image">
               </div>
             </label>
           </div>

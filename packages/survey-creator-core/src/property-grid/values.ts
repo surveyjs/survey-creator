@@ -23,13 +23,13 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     };
   }
   public onCreated = (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => {
-    question.linkClickCallback = () => {
-      this.showModalPropertyEditor(this, prop, question, options, () => question.isSelected = false);
-      question.isSelected = true;
+    (<any>question).linkClickCallback = () => {
+      this.showModalPropertyEditor(this, prop, question, options, () => (<any>question).isSelected = false);
+      (<any>question).isSelected = true;
     };
-    question.clearClickCallback = () => {
+    (<any>question).clearClickCallback = () => {
       this.clearPropertyValue(
-        question.obj,
+        (<any>question).obj,
         prop,
         question,
         null /*this.options*/
@@ -49,7 +49,7 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     return Helpers.isValueEmpty(val);
   }
 
-  protected isSupportGrouping(): boolean {
+  public isSupportGrouping(): boolean {
     return true;
   }
 }
@@ -135,7 +135,7 @@ export class PropertyGridTriggerValueEditor extends PropertyGridValueEditorBase 
     question: Question,
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
-    const trigger = question.obj;
+    const trigger = (<any>question).obj;
     const setQuestion = this.getSetToNameQuestion(trigger);
     return new TriggerValueEditor(setQuestion, trigger, prop.name, options);
   }

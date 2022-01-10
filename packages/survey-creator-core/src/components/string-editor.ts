@@ -109,7 +109,7 @@ export class StringEditorViewModelBase extends Base {
     return property.maxLength;
   }
   public get placeholder(): string {
-    const property: JsonObjectProperty = this.findProperty();
+    const property: any = this.findProperty();
     if (!property || !property.placeholder) return "";
     return editorLocalization.getString(property.placeholder);
   }

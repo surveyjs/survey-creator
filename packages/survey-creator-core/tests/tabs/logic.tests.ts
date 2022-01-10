@@ -167,6 +167,37 @@ test("LogicUI: isModified for new item", () => {
   expect(trigger.setValue).toEqual(2);
   expect(logic.items[0].isModified).toBeFalsy();
 });
+test("LogicUI: check 'setValue' question title", () => {
+  let survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", },
+      { type: "text", name: "q3", title: "Question 3" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  let row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  logic.expressionEditor.text = "{q1}=1";
+  let panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
+  let elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+  elementPanel.getQuestionByName("setToName").value = "q2";
+  let setValueQuestion = elementPanel.getQuestionByName("setValue");
+  expect(setValueQuestion.title).toEqual("q2");
+  expect(setValueQuestion.titleLocation).toEqual("top");
+  expect(setValueQuestion.getTitleActions().length).toEqual(0);
+  logic.itemEditor.panel.addPanel();
+  panel = logic.itemEditor.panels[1];
+  panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
+  elementPanel = <PanelModel>panel.getElementByName("elementPanel");
+  elementPanel.getQuestionByName("setToName").value = "q3";
+  setValueQuestion = elementPanel.getQuestionByName("setValue");
+  expect(setValueQuestion.title).toEqual("Question 3");
+  expect(setValueQuestion.titleLocation).toEqual("top");
+  expect(setValueQuestion.getTitleActions().length).toEqual(0);
+});
 test("LogicUI: dispose logic item ui", () => {
   const survey = new SurveyModel({
     elements: [
@@ -250,7 +281,7 @@ test("LogicItemEditor: update a trigger", () => {
     getLogicString("trigger_runExpressionDescription")
   );
   expect(
-    editor.panels[0].getQuestionByName("elementSelector").visibl
+    editor.panels[0].getQuestionByName("elementSelector").visible
   ).toBeFalsy();
   var panelTrigger = <PanelModel>(
     editor.panels[0].getElementByName("elementPanel")
@@ -261,7 +292,7 @@ test("LogicItemEditor: update a trigger", () => {
   expect(runExpressionQuestion).toBeTruthy();
   expect(runExpressionQuestion.visible).toBeTruthy();
   expect(runExpressionQuestion.value).toEqual("{q2} + 1");
-  var setToNameQuestion = panelTrigger.getQuestionByName("setToName");
+  var setToNameQuestion = <QuestionDropdownModel>panelTrigger.getQuestionByName("setToName");
   expect(setToNameQuestion).toBeTruthy();
   expect(setToNameQuestion.visible).toBeTruthy();
   expect(setToNameQuestion.value).toEqual("q2");
@@ -296,8 +327,7 @@ test("LogicItemEditor: add new actions", () => {
   expect(ltQuestion).toBeTruthy();
   expect(ltQuestion.choices).toHaveLength(logic.getVisibleLogicTypes().length);
   expect(ltQuestion.value).toBeFalsy();
-  var elSelectionQuestion =
-    editor.panels[0].getQuestionByName("elementSelector");
+  var elSelectionQuestion =<QuestionDropdownModel>editor.panels[0].getQuestionByName("elementSelector");
   expect(elSelectionQuestion.visible).toBeFalsy();
   ltQuestion.value = "question_visibility";
   expect(elSelectionQuestion.visible).toBeTruthy();
@@ -333,8 +363,7 @@ test("LogicItemEditor: remove actions", () => {
   expect(ltQuestion).toBeTruthy();
   expect(ltQuestion.value).toBeFalsy();
   ltQuestion.value = "question_visibility";
-  var elSelectionQuestion =
-    editor.panels[0].getQuestionByName("elementSelector");
+  var elSelectionQuestion = <QuestionDropdownModel>editor.panels[0].getQuestionByName("elementSelector");
   expect(elSelectionQuestion.visible).toBeTruthy();
   expect(elSelectionQuestion.choices).toHaveLength(3);
   elSelectionQuestion.value = "q1";
@@ -373,7 +402,7 @@ test("SurveyLogicUI: Test logicItemsSurvey", () => {
   });
   var logic = new SurveyLogicUI(survey);
   expect(logic.items).toHaveLength(2);
-  var itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  var itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.rowCount).toEqual(2);
   expect(itemsQuestion.value).toHaveLength(2);
   logic.addNew();
@@ -422,7 +451,7 @@ test("SurveyLogicItem, clonse and equals", () => {
   expect(item.equals(clonedItem)).toBeTruthy();
 });
 test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => {
-  var survey = new SurveyModel({
+  const survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2" },
@@ -430,28 +459,24 @@ test("SurveyLogicUI: Test changing list data on saveEditableItemAndBack", () => 
       { type: "text", name: "q4" }
     ]
   });
-  var logic = new SurveyLogicUI(survey);
+  const logic = new SurveyLogicUI(survey);
   expect(logic.items).toHaveLength(1);
-  var itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
-  var rows = itemsQuestion.visibleRows;
+  let itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
+  const rows = itemsQuestion.visibleRows;
   expect(rows).toHaveLength(1);
-  expect(rows[0].cells).toHaveLength(2);
+  expect(rows[0].cells).toHaveLength(1);
   expect(rows[0].cells[0].question.getType()).toEqual("linkvalue");
-  expect(rows[0].cells[1].question.getType()).toEqual("linkvalue");
   expect(itemsQuestion.value).toHaveLength(1);
-  expect(itemsQuestion.value[0].conditions).toEqual("{q1} == 1"
-  );
-  expect(itemsQuestion.value[0].actions).toEqual("Make question {q3} visible");
+  expect(itemsQuestion.value[0].rules).toEqual("If 'q1' == 1, make question 'q3' visible");
   logic.editItem(logic.items[0]);
   logic.expressionEditor.text = "{q2}=1";
-  var panel = logic.itemEditor.panels[0];
+  const panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("elementSelector").value = "q4";
-  var res = logic.saveEditableItemAndBack();
+  const res = logic.saveEditableItemAndBack();
   expect(res).toBeTruthy();
-  itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.value).toHaveLength(1);
-  expect(itemsQuestion.value[0].conditions).toEqual("{q2} == 1");
-  expect(itemsQuestion.value[0].actions).toEqual("Make question {q4} visible");
+  expect(itemsQuestion.value[0].rules).toEqual("If 'q2' == 1, make question 'q4' visible");
 });
 test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
   var survey = new SurveyModel({
@@ -469,12 +494,12 @@ test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
     logic.itemsSurvey.getQuestionByName("items")
   );
   var rows = itemsQuestion.visibleRows;
-  expect(rows[0].cells[0].value).toEqual(logic.items[0].expressionText);
+  expect(rows[0].cells[0].value).toEqual("If 'q1' == 1, make question 'q2' visible, make question 'q3' visible");
   logic.editItem(logic.items[0]);
   logic.expressionEditor.text = "{q1}=3";
   logic.saveEditableItem();
   rows = itemsQuestion.visibleRows;
-  expect(rows[0].cells[0].value).toEqual(logic.items[0].expressionText);
+  expect(rows[0].cells[0].value).toEqual("If 'q1' == 3, make question 'q2' visible, make question 'q3' visible");
 });
 
 test("SurveyLogicUI: Test logicItemEditor", () => {
@@ -526,6 +551,30 @@ test("SurveyLogicUI: Add new item and action", () => {
   expect(item.actions).toHaveLength(1);
   expect(item.actions[0].logicTypeName).toEqual("question_visibility");
   expect(item.actions[0].element).toEqual(survey.getQuestionByName("q2"));
+});
+test("SurveyLogicUI: Add new item and action for panel.visibleIf", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      {
+        type: "panel", name: "panel1",
+        elements: [
+          { type: "text", name: "q2" }
+        ]
+      },
+    ]
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(0);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "panel_visibility";
+  panel.getQuestionByName("elementSelector").value = "panel1";
+  var res = logic.saveEditableItemAndBack();
+  expect(res).toBeTruthy();
+  const surveyPanel = <PanelModel>survey.getPanelByName("panel1");
+  expect(surveyPanel.visibleIf).toEqual("{q1} = 1");
 });
 test("SurveyLogicUI: Do not duplicate new items", () => {
   var survey = new SurveyModel({
@@ -607,7 +656,7 @@ test("SurveyLogicUI: create skipTo trigger", () => {
   panel.getQuestionByName("logicTypeName").value = "trigger_skip";
   var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
   expect(elementPanel.visible).toBeTruthy();
-  var gotoNameQuestion = elementPanel.getQuestionByName("gotoName");
+  var gotoNameQuestion = <QuestionDropdownModel>elementPanel.getQuestionByName("gotoName");
   expect(gotoNameQuestion).toBeTruthy();
   expect(gotoNameQuestion.getType()).toEqual("dropdown");
   expect(gotoNameQuestion.choices).toHaveLength(4);
@@ -690,7 +739,7 @@ test("LogicItemEditorUI: remove item", () => {
   });
   expect(survey.getQuestionByName("q2").visibleIf).toBeTruthy();
   var logic = new SurveyLogicUI(survey);
-  var itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  var itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.rowCount).toEqual(1);
   itemsQuestion.removeRow(0);
   expect(itemsQuestion.rowCount).toEqual(0);
@@ -754,7 +803,7 @@ test("LogicItemEditorUI: fast entry edit and change expressionEditorCanShowBuild
     ]
   });
   const logic = new SurveyLogicUI(survey);
-  const itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  const itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.rowCount).toEqual(3);
   expect(logic.expressionEditor).toBeFalsy();
   expect(logic.expressionEditorCanShowBuilder).toBeFalsy();
@@ -798,7 +847,7 @@ test("LogicItemEditorUI: change expressionEditorIsFastEntry", () => {
     ]
   });
   const logic = new SurveyLogicUI(survey);
-  const itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  const itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.rowCount).toEqual(1);
   expect(logic.expressionEditor).toBeFalsy();
 
@@ -831,7 +880,7 @@ test("LogicItemEditorUI: edit item two times and do Build/Edit", () => {
     ]
   });
   const logic = new SurveyLogicUI(survey);
-  const itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  const itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.rowCount).toEqual(1);
   expect(logic.expressionEditor).toBeFalsy();
   logic.editItem(logic.items[0]);
@@ -874,8 +923,8 @@ test("LogicItemEditorUI: check remove row action", () => {
     logic.itemsSurvey.getQuestionByName("items")
   );
   expect(itemsQuestion.rowCount).toEqual(1);
-  expect(itemsQuestion.renderedTable.rows[0].cells).toHaveLength(4);
-  const cell = itemsQuestion.renderedTable.rows[0].cells[3];
+  expect(itemsQuestion.renderedTable.rows[0].cells).toHaveLength(3);
+  const cell = itemsQuestion.renderedTable.rows[0].cells[2];
   expect(cell.isActionsCell).toBeTruthy();
   expect(cell.item.value).toBeTruthy();
   const actions = <AdaptiveActionContainer>cell.item.value;
@@ -984,7 +1033,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   expect(itemsQuestion.rowCount).toEqual(0);
   logic.addNewUI();
   expect(logic.items).toHaveLength(1);
-  expect(logic.items[0].expressionText).toEqual("New rule is not set");
+  expect(logic.items[0].getDisplayText()).toEqual("New rule is not set");
   expect(itemsQuestion.rowCount).toEqual(1);
   const row = itemsQuestion.visibleRows[0];
   expect(row.cells[0].question.value).toEqual("New rule is not set");
@@ -1014,7 +1063,7 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   row.detailPanel.footerActions[0].action();
   expect(logic.mode).toEqual("view");
   expect(row.detailPanel).toBeFalsy();
-  expect(row.cells[0].question.value).toEqual("{q1} == 1");
+  expect(row.cells[0].question.value).toEqual("If 'q1' == 1, make question 'q2' visible");
   expect(survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 1");
 });
 test("LogicItemEditorUI: create new logic several times", () => {
@@ -1574,7 +1623,7 @@ test("Logic onLogicItemRemoving events, Bug#1786", () => {
     options.allowRemove = allowRemove;
     counter++;
   });
-  let itemsQuestion = logic.itemsSurvey.getQuestionByName("items");
+  let itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
   expect(itemsQuestion.rowCount).toEqual(1);
   expect(counter).toEqual(0);
   itemsQuestion.removeRow(0);
@@ -1601,12 +1650,12 @@ test("Logic action expand/collapse icon update", () => {
   );
   const expandAction = itemsQuestion.renderedTable["rowsActions"][0][1];
   const row = itemsQuestion.visibleRows[0];
-  expect(row.isDetailPanelShowing).toBe(false)
-  expect(expandAction.iconName).toEqual("icon-logic-expand")
+  expect(row.isDetailPanelShowing).toBe(false);
+  expect(expandAction.iconName).toEqual("icon-logic-expand");
   row.showDetailPanel();
-  expect(row.isDetailPanelShowing).toBe(true)
-  expect(expandAction.iconName).toEqual("icon-logic-collapse")
+  expect(row.isDetailPanelShowing).toBe(true);
+  expect(expandAction.iconName).toEqual("icon-logic-collapse");
   row.hideDetailPanel();
-  expect(row.isDetailPanelShowing).toBe(false)
-  expect(expandAction.iconName).toEqual("icon-logic-expand")
+  expect(row.isDetailPanelShowing).toBe(false);
+  expect(expandAction.iconName).toEqual("icon-logic-expand");
 });

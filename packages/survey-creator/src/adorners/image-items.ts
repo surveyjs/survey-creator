@@ -150,7 +150,7 @@ export var imageItemsAdorner = {
       }
     });
 
-    var input = createImageFileChooser(model.contentMode);
+    var input = createImageFileChooser(model["contentMode"]);
     itemsRoot.appendChild(input);
   }
 };
@@ -229,7 +229,7 @@ export var addImageItemAdorner = {
     addItemElement.style.lineHeight = addItemElement.style.height;
     itemsRoot.appendChild(addItemElement);
 
-    var input = createImageFileChooser(model.contentMode);
+    var input = createImageFileChooser(model["contentMode"]);
     itemsRoot.appendChild(input);
   }
 };

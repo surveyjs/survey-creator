@@ -1,9 +1,9 @@
-import { SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue, PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory } from "survey-core";
+import { SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue, PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
-import { assignDefaultV2Classes } from "../utils/utils";
+import { assignDefaultV2Classes, wrapTextByCurlyBraces } from "../utils/utils";
 import { logicCss } from "../components/tabs/logic-theme";
 
 export class ConditionEditorItem {
@@ -48,7 +48,7 @@ export class SurveyConditionEditorItem extends ConditionEditorItem {
     );
   }
   public toExpression(): string {
-    let text = "{" + this.getQuestionValueByName() + "} " + this.getOperatorText();
+    let text = wrapTextByCurlyBraces(this.getQuestionValueByName()) + " " + this.getOperatorText();
     if (this.isValueRequired) {
       text += " " + this.getValueText();
     }
@@ -444,9 +444,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private setItemToPanel(item: ConditionEditorItem, panel: PanelModel) {
     this.isSettingPanelValues = true;
     panel.getQuestionByName("conjunction").value = item.conjunction;
-    panel.getQuestionByName("operator").choices = this.getOperators();
+    (<QuestionDropdownModel>panel.getQuestionByName("operator")).choices = this.getOperators();
     panel.getQuestionByName("operator").value = item.operator;
-    panel.getQuestionByName("questionName").choices = this.allConditionQuestions;
+    (<QuestionDropdownModel>panel.getQuestionByName("questionName")).choices = this.allConditionQuestions;
     panel.getQuestionByName("questionName").titleLocation = this.panel.panels.indexOf(panel) == 0 ? "left" : "hidden";
     if (!!this.getConditionQuestion(item.questionName)) {
       panel.getQuestionByName("questionName").value = item.questionName;
@@ -455,13 +455,14 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       panel.getQuestionByName("questionValue").value = item.value;
     }
     const dynamicPanel: QuestionPanelDynamicModel = <QuestionPanelDynamicModel>(panel.getQuestionByName("removeAction").parentQuestion);
-    panel.getQuestionByName("removeAction").linkClickCallback = () => {
+    const removeQuestionQuestion: any = panel.getQuestionByName("removeAction");
+    removeQuestionQuestion.linkClickCallback = () => {
       if (!!dynamicPanel) {
         dynamicPanel.removePanelUI(panel);
       }
     };
-    panel.getQuestionByName("removeAction").linkValueText = "";
-    panel.getQuestionByName("removeAction").linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
+    removeQuestionQuestion.linkValueText = "";
+    removeQuestionQuestion.linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
     this.isSettingPanelValues = false;
   }
   private getText(): string {
@@ -577,11 +578,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       panel.removeElement(oldQuestion);
     }
     if (this.canShowQuestionValue(panel)) {
+      const title = newQuestion.title;
       newQuestion.name = "questionValue";
       newQuestion.visibleIf = "questionValueVisibleIf({panel.questionName}, {panel.operator})";
-      newQuestion.title = editorLocalization.getString("pe.conditionValueQuestionTitle");
+      newQuestion.title = title;
       newQuestion.description = "";
-      newQuestion.titleLocation = "default";
+      newQuestion.titleLocation = "top";
       newQuestion.hasComment = false;
       panel.addElement(newQuestion);
     }
@@ -599,7 +601,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.rebuildQuestionValue(panel);
   }
   private canShowQuestionValue(panel: PanelModel): boolean {
-    const questionOperator = panel.getQuestionByName("operator");
+    const questionOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
     if (!questionOperator) return false;
     this.updateOperatorEnables(panel);
     const choices = questionOperator.choices;
@@ -648,7 +650,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!questionName) return;
     const json = this.getQuestionConditionJson(questionName.value, "equal");
     const qType = !!json ? json.type : null;
-    const questionOperator = panel.getQuestionByName("operator");
+    const questionOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
     if (!questionOperator) return;
     const choices = questionOperator.choices;
     let isCurrentOperatorEnabled = true;
