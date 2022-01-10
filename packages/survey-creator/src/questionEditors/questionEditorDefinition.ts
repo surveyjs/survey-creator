@@ -40,6 +40,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "defaultValue", tab: "data" },
         { name: "correctAnswer", tab: "data" },
         { name: "useDisplayValuesInTitle", tab: "data" },
+        { name: "clearIfInvisible", tab: "data" },
         { name: "requiredErrorText", tab: "validation" },
         { name: "validators", tab: "validation" },
       ],

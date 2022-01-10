@@ -970,7 +970,7 @@ test("Hide/show logic types in actions", () => {
   var logic = new SurveyLogicUI(survey);
   logic.addNew();
   var panel1 = logic.itemEditor.panels[0];
-  var ltQuestion1 = panel1.getQuestionByName("logicTypeName");
+  var ltQuestion1 = <QuestionDropdownModel>panel1.getQuestionByName("logicTypeName");
   expect(ltQuestion1).toBeTruthy();
   var lt1Skip = ItemValue.getItemByValue(ltQuestion1.choices, "trigger_skip");
   var lt1Complete = ItemValue.getItemByValue(
@@ -980,7 +980,7 @@ test("Hide/show logic types in actions", () => {
   expect(lt1Skip).toBeTruthy();
   expect(lt1Complete).toBeTruthy();
   var panel2 = logic.itemEditor.panel.addPanel();
-  var ltQuestion2 = panel2.getQuestionByName("logicTypeName");
+  var ltQuestion2 = <QuestionDropdownModel>panel2.getQuestionByName("logicTypeName");
   expect(ltQuestion2).toBeTruthy();
   var lt2Skip = ItemValue.getItemByValue(ltQuestion2.choices, "trigger_skip");
   var lt2Complete = ItemValue.getItemByValue(
