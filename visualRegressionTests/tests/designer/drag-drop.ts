@@ -113,13 +113,13 @@ test("Choices: Ranking", async (t) => {
   await patchDragDropToDisableDrop();
 
   const QRoot = Selector(".svc-question__adorner").filterVisible();
-  const FirtItem = QRoot.find(".svc-item-value-wrapper").nth(0);
+  const FirstItem = QRoot.find(".svc-item-value-wrapper").nth(0);
 
   await checkElementScreenshot("drag-drop-item-values-ranking.png", QRoot, t);
 
-  await t.hover(FirtItem);
+  await t.hover(FirstItem);
   await checkElementScreenshot("drag-drop-item-values-ranking--hover.png", QRoot, t);
 
-  await t.dragToElement(FirtItem.find(".svc-item-value-controls__drag"), FirtItem);
+  await t.dragToElement(FirstItem.find(".svc-item-value-controls__drag"), FirstItem);
   await checkElementScreenshot("drag-drop-item-values-ranking--dragging.png", QRoot, t);
 });
