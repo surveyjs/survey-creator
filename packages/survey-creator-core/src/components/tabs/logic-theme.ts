@@ -88,7 +88,7 @@ export var logicCss = {
     comment: "",
     required: "",
     titleRequired: "",
-    indent: 20,
+    indent: 0,
     footer: "",
     formGroup: "",
     hasError: "",

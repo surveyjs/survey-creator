@@ -157,11 +157,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   /**
   * Set it to false to hide survey title and coresponding properties
   */
-  get allowEditSurveyTitle() {
+  get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
   set allowEditSurveyTitle(val: boolean) {
-    ["title", "description", "logo", "showTitle", "logoWidth", "logoHeight", "logoFit"].forEach(propertyName => Serializer.findProperty("survey", propertyName).visible = val);
+    this.setPropertyVisibility("survey", val, "title", "description", "logo", "showTitle", "logoWidth", "logoHeight");
     this.setPropertyValue("allowEditSurveyTitle", val);
     this.designerPropertyGrid && this.designerPropertyGrid.refresh();
   }
@@ -172,7 +172,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * @see haveCommercialLicense
    */
   @property({ defaultValue: false }) haveCommercialLicense: boolean;
-  public get licenseText() {
+  public get licenseText(): string {
     return this.getLocString("survey.license");
   }
   /**
@@ -1290,9 +1290,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     if (typeof options.pageEditMode !== "undefined") {
       this.pageEditModeValue = options.pageEditMode;
       if (this.pageEditModeValue === "single") {
-        Survey.Serializer.findProperty("survey", "pages").visible = false;
-        Survey.Serializer.findProperty("question", "page").visible = false;
-        Survey.Serializer.findProperty("panel", "page").visible = false;
+        this.setPropertyVisibility("survey", false, "pages");
+        this.setPropertyVisibility("question", false, "page");
+        this.setPropertyVisibility("panel", false, "page");
         this.showJSONEditorTab = false;
       }
     }
@@ -1303,10 +1303,19 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       prop.placeholder = value;
     }
   }
+  private setPropertyVisibility(className: string, visible: boolean, ...properties: string[]) {
+    if(!Array.isArray(properties)) return;
+    for(var i = 0; i < properties.length; i ++) {
+      const prop = Serializer.findProperty(className, properties[i]);
+      if(!!prop) {
+        prop.visible = visible;
+      }
+    }
+  }
   private patchMetadata(): void {
     this.setPropertyPlaceHolder("survey", "title", "pe.surveyTitlePlaceholder");
     this.setPropertyPlaceHolder("survey", "description", "pe.surveyDescriptionPlaceholder");
-    Serializer.findProperty("survey", "logoPosition").visible = false;
+    this.setPropertyVisibility("survey", false, "logoPosition");
     this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
     this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
   }
