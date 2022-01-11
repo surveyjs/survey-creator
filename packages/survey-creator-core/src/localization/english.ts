@@ -507,7 +507,7 @@ export var enStrings = {
     triggerGotoName: "Go to the question:",
     triggerIsVariable: "Do not put the variable into the survey result.",
     triggerRunExpressionEmpty: "Please enter a valid expression",
-
+    emptyExpressionPlaceHolder: "Type expression here...",
     noFile: "No file choosen"
   },
   //Property values
