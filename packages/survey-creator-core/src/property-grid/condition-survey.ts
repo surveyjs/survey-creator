@@ -268,7 +268,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
-    // this.editSurvey.css = defaultV2Css;
     this.text = !!this.object && this.propertyName ? this.object[this.propertyName] : "";
   }
   public get title(): string {
@@ -666,7 +665,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
   }
   private updateQuestionsWidth(panel: PanelModel) {
-    const paddingRight = "20px";
     const valueQuestion = panel.getQuestionByName("questionValue");
     const conjunctionQuestion = panel.getQuestionByName("conjunction");
     const nameQuestion = panel.getQuestionByName("questionName");
@@ -676,21 +674,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!isFirst) {
       conjunctionQuestion.minWidth = "50px";
       conjunctionQuestion.width = "15%";
-      conjunctionQuestion.paddingRight = paddingRight;
     }
 
     nameQuestion.minWidth = "50px";
     nameQuestion.width = isFirst ? "40%" : "25%";
-    nameQuestion.paddingRight = paddingRight;
 
     operatorQuestion.minWidth = "50px";
     operatorQuestion.width = isValueSameLine ? "25%" : "60%";
-    operatorQuestion.paddingRight = paddingRight;
 
     if (!!valueQuestion) {
       valueQuestion.minWidth = "50px";
       valueQuestion.width = isValueSameLine ? "35%" : "";
-      valueQuestion.paddingRight = paddingRight;
     }
   }
   private getFirstEnabledOperator(choices: Array<ItemValue>): string {
@@ -748,19 +742,19 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     options.cssClasses.answered = "svc-logic-question--answered";
 
     if (options.question.name === "conjunction") {
+      options.question.allowRootStyle = false;
       options.cssClasses.control += "svc-logic-operator svc-logic-operator--conjunction ";
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
     }
     if (options.question.name === "questionName") {
+      options.question.allowRootStyle = false;
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
     }
     if (options.question.name === "operator") {
+      options.question.allowRootStyle = false;
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--operator";
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
     }
     if (options.question.name === "removeAction") {
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
+      options.question.allowRootStyle = false;
       options.cssClasses.mainRoot += " svc-logic-condition-remove-question";
     }
     // options.cssClasses.mainRoot += "sd-question sd-row__question";
