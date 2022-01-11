@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot } from "../../helper";
 
 const title = "Logic tab Screenshot";
@@ -105,6 +105,38 @@ test("Check logic error notifier", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName));
   await t.click(Selector(".svc-logic-tab__content-action")).click(Selector(".sl-panel__done-button"));
   await checkElementScreenshot("logic-error-notifier.png", Selector(".svc-notifier--error"), t);
+});
+
+test("Check logic fast entry", async (t) => {
+  await t.resizeWindow(1920, 900);
+  await setJSON({
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "q1"
+          },
+          {
+            "type": "text",
+            "name": "q2",
+            "visibleIf": "{q1} empty"
+          },
+        ]
+      }
+    ]
+  });
+  await t.click(getTabbedMenuItemByText(creatorTabLogicName))
+    .hover(Selector(".sl-table__row"))
+    .click(logicDetailButtonElement)
+    .click("#svc-logic-fast-entry button");
+  const conditionContentSelector = Selector(".sl-table__cell--detail-panel .sl-panel");
+  await checkElementScreenshot("logic-fast-entry.png", conditionContentSelector, t);
+  await t.click(Selector(".sl-comment")).pressKey("ctrl+a delete");
+  await ClientFunction(() => { document.body.focus(); })();
+  await checkElementScreenshot("logic-fast-entry-empty.png", conditionContentSelector, t);
 });
 
 const jsonMultipleConditionsMultipleActions = {
