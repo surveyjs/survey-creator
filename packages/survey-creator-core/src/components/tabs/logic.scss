@@ -211,13 +211,11 @@
 .svc-logic-question-value {
   padding-right: calcSize(5);
 }
-
-.sl-comment {
-  margin-bottom: calcSize(2);
-}
-
 .sv-popup.sv-property-editor {
   .sl-row {
     flex-flow: nowrap;
   }
+}
+.spg-comment.sl-comment {
+  height: calcSize(17);
 }
