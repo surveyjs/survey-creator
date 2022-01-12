@@ -1,0 +1,236 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+resources:
+  repositories:
+    - repository: EmptyRepo
+      type: github
+      endpoint: dmitrykurmanov:admin
+      name: surveyjs/azure-pipelines-repo-dont-remove-please
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+  tags:
+    exclude:
+      - v*.*.*
+
+pool:
+  vmImage: 'windows-latest'
+
+jobs:
+- job: CreatorV2React
+  steps:
+  - checkout: self
+  - checkout: EmptyRepo
+    persistCredentials: true
+    clean: true
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - powershell: |
+      $env:GIT_REDIRECT_STDERR = '2>&1'
+      git config --global user.email "kurmanov.work@gmail.com"
+      git config --global user.name "dmitrykurmanov"
+    displayName: 'Set up git config'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuild'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+  
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator
+      npm install
+      npm run lint
+    displayName: 'root npm install and lint'
+  
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm install
+      npm run remove-package-lock
+    displayName: 'Npm install survey-creator-core'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run build
+    displayName: 'Build Creator V2 Core'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npm install
+      npm run remove-package-lock
+    displayName: 'Npm install survey-creator-react'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-react-ui'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/node_modules/@types'
+      OverWrite: true
+    displayName: 'copy @types into library directory'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npm run build
+    displayName: 'Build CreatorV2 React'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npm run visual-regression-tests:ci
+    displayName: 'Visual Regression Tests CreatorV2 React'
+  
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT'
+      OverWrite: true
+    condition: always()
+    displayName: 'copy vrt react artifacts'
+  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_React_VRT/'
+      ArtifactName: 'Creator_React_VRT'
+      publishLocation: 'Container'
+    condition: always()
+    displayName: 'publish vrt react artifacts'
+
+# ======================= CreatorV2Knockout ======================= #
+- job: CreatorV2Knockout
+  steps:
+  - checkout: self
+  - checkout: EmptyRepo
+    persistCredentials: true
+    clean: true
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - powershell: |
+      $env:GIT_REDIRECT_STDERR = '2>&1'
+      git config --global user.email "kurmanov.work@gmail.com"
+      git config --global user.name "dmitrykurmanov"
+    displayName: 'Set up git config'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuild'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+  
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator
+      npm install devextreme-screenshot-comparer -D
+    displayName: 'install devextreme-screenshot-comparer to root'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm install
+      npm run remove-package-lock
+    displayName: 'Npm install survey-creator-core'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run build
+    displayName: 'Build Creator V2 Core'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+      npm install
+      npm run remove-package-lock
+    displayName: 'Npm install survey-creator-knockout'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-knockout-ui'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
+      OverWrite: true
+    displayName: 'copy build from library for f-f tests'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+      npm run build
+    displayName: 'Build CreatorV2 Knockout'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+      npm run visual-regression-tests:ci
+    displayName: 'Visual Regression Tests CreatorV2 Knockout'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_KO_VRT'
+      OverWrite: true
+    condition: always()
+    displayName: 'copy vrt ko artifacts'
+  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_KO_VRT/'
+      ArtifactName: 'Creator_KO_VRT'
+      publishLocation: 'Container'
+    condition: always()
+    displayName: 'publish vrt ko artifacts'
