@@ -29,38 +29,28 @@ export class SurveyResults extends SurveyElementBase<
     return (
       <div className="svd_test_results">
         <div className="svd_results_header">
-          <h2>{this.model.surveyResultsText}</h2>
+          <div className="svd_results__header_text">{this.model.surveyResultsText}</div>
+          <div className="svd_results_types">
+            <div className={"svd_results_nav-item " + (this.model.resultViewType === "table" ? "svd_results_nav-item__active" : "")}>
+              {attachKey2click(<a
+                className="svd_results_nav-link"
+                href="#"
+                onClick={() => this.model.selectTableClick(this.model)}
+              >
+                {this.model.getLocString("ed.surveyResultsTable")}
+              </a>)}
+            </div>
+            <div className={"svd_results_nav-item " + (this.model.resultViewType === "text" ? "svd_results_nav-item__active" : "")}>
+              {attachKey2click(<a
+                className="svd_results_nav-link"
+                href="#"
+                onClick={() => this.model.selectJsonClick(this.model)}
+              >
+                {this.model.getLocString("ed.surveyResultsJson")}
+              </a>)}
+            </div>
+          </div>
         </div>
-        <ul className="navbar-default container-fluid nav nav-tabs editor-tabs">
-          <li
-            className={
-              "nav-item " + this.model.resultViewType === "table"
-                ? "active"
-                : ""
-            }
-          >
-            {attachKey2click(<a
-              className="nav-link"
-              href="#"
-              onClick={() => this.model.selectTableClick(this.model)}
-            >
-              {this.model.getLocString("ed.surveyResultsTable")}
-            </a>)}
-          </li>
-          <li
-            className={
-              "nav-item " + this.model.resultViewType === "text" ? "active" : ""
-            }
-          >
-            {attachKey2click(<a
-              className="nav-link"
-              href="#"
-              onClick={() => this.model.selectJsonClick(this.model)}
-            >
-              {this.model.getLocString("ed.surveyResultsJson")}
-            </a>)}
-          </li>
-        </ul>
         {this.renderResultAsText()}
         {this.renderResultAsTable()}
       </div>

@@ -1,20 +1,56 @@
 @import "../variables.scss";
 
 .svd_test_results {
-  padding: 1em;
+  font-family: $font-family;
+  width: 80%;
+  margin: auto;
+  margin-bottom: calcSize(5);
+  background-color: $background;
+  box-shadow: 0px 8px 16px $shadow-medium;
+  border-radius: 10px;
+
   .svd_results_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calcSize(1) calcSize(3);
+    color: $foreground-light;
+    border-bottom: 2px solid $background-dim;
+
+    .svd_results__header_text {
+      margin: 0;
+    }
+    .svd_results_types {
+      display: flex;
+      .svd_results_nav-item {
+        min-width: calcSize(12);
+        text-align: center;
+        border: 2px solid $background;
+        border-radius: 100px;
+        padding: calcSize(0.5);
+        margin: auto;
+      }
+      .svd_results_nav-item__active {
+        border-color: $primary;
+      }
+      .svd_results_nav-link {
+        text-decoration: none;
+        color: $primary;
+      }
+    }    
   }
+
   .svd_results_text {
-    padding: 1em;
-    white-space: pre-wrap;
-    width: 100%;
+    display: flex;
+    padding: calcSize(2) calcSize(3);
+    width: calc(100% - calcSize(6));
     overflow: auto;
+    user-select: text;
+    white-space: pre-wrap;
   }
   .svd_results_table {
-    padding: 1em;
-    width: 100%;
-    overflow: auto;
-
+    padding: calcSize(2) calcSize(3);
+    width: calc(100% - calcSize(6));
     table {
       border-collapse: collapse;
       width: 100%;
