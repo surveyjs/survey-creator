@@ -1,4 +1,4 @@
-import { SurveyModel, Action, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
+import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
 import { LogicItemEditor } from "./logic-item-editor";
@@ -122,6 +122,9 @@ export class SurveyLogicUI extends SurveyLogic {
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
       res.expressionEditor.context = context;
       res.expressionEditor.text = item.expression;
+      res.expressionEditor.onContextChanged = (context: Question): void => {
+        res.itemEditor.context = context;
+      };
       this.itemUIHash[item.id] = res;
     }
     return res;

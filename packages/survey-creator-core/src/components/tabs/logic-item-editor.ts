@@ -55,6 +55,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private titleActionsCreator: PropertyGridTitleActionsCreator;
   private initialSelectedElements: any = {};
   private isModifiedValue: boolean = false;
+  private contextValue: Question;
   constructor(
     editableItem: SurveyLogicItem,
     protected options: ISurveyCreatorOptions = null
@@ -158,6 +159,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   public getActionByPanel(panel: PanelModel): SurveyLogicAction {
     return panel["action"];
+  }
+  public get context(): Question { return this.contextValue; }
+  public set context(val: Question) {
+    if(val === this.context) return;
+    this.contextValue = val;
+    this.updatePanelsOnContextChanged();
   }
   private getLogicTypeByPanel(panel: PanelModel): SurveyLogicType {
     return this.getLogicTypeByName(
@@ -396,6 +403,33 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
 
     return panel;
   }
+  private updatePanelsOnContextChanged() {
+    if(!!this.context) {
+      for(var i = this.panels.length - 1; i >= 0; i --) {
+        const panel = this.panels[i];
+        if(!this.isPanelSupportContext(panel)) {
+          if(i === 0) {
+            panel.getQuestionByName("logicTypeName").clearValue();
+          }
+          else {
+            this.panel.removePanel(i);
+          }
+        }
+      }
+    }
+    for(var i = 0; i < this.panels.length; i ++) {
+      this.updateSelectorOnContextChanged(this.panels[i]);
+    }
+  }
+  private isPanelSupportContext(panel: PanelModel): boolean {
+    return true; //TODO
+  }
+  private updateSelectorOnContextChanged(panel: PanelModel) {
+    const logicType = this.getLogicTypeByPanel(panel);
+    if (!this.isElementSelectorVisible(logicType)) return;
+    var question = <QuestionDropdownModel>panel.getQuestionByName("elementSelector");
+    question.choices = this.getSelectorChoices(logicType);
+  }
   private getLogicTypeChoices(): Array<ItemValue> {
     var res = [];
     var logicTypes = this.editableItem.getVisibleLogicTypes();
@@ -581,8 +615,10 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if(elementType === "matrixdropdowncolumn") {
       const questions = this.survey.getAllQuestions();
       for(var i = 0; i < questions.length; i ++) {
-        if(questions[i] instanceof QuestionMatrixDropdownModelBase) {
-          const columns = (<QuestionMatrixDropdownModelBase>questions[i]).columns;
+        const question = questions[i];
+        if(question instanceof QuestionMatrixDropdownModelBase &&
+          (!this.context || this.context === question)) {
+          const columns = (<QuestionMatrixDropdownModelBase>question).columns;
           for(var j = 0; j < columns.length; j ++) {
             elements.push(columns[j]);
             elementsOwners.push(questions[i]);

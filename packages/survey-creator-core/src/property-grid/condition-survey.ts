@@ -233,6 +233,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private addConditionQuestionsHash = {};
   private isModalValue: boolean = true;
   public allConditionQuestions: Array<ItemValue>;
+  public onContextChanged: (context: Question) => void;
 
   constructor(
     survey: SurveyModel,
@@ -397,6 +398,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if(val === this.context) return;
     this.contextValue = val;
     this.updateNamesOnContextChanged();
+    if(this.onContextChanged) {
+      this.onContextChanged(val);
+    }
   }
   private processText(val: string) {
     this.panel.panelCount = 0;

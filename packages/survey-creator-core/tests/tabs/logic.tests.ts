@@ -1709,7 +1709,6 @@ test("LogicUI: edit matrix column visibleIf", () => {
   expect(matrix.columns[2].name).toEqual("col3");
   expect(matrix.columns[2].visibleIf).toEqual("{row.col1} = 1");
 });
-/*
 test("LogicUI: edit matrix column visibleIf. Filter selector if there is a context", () => {
   const survey = new SurveyModel({
     elements: [
@@ -1720,7 +1719,7 @@ test("LogicUI: edit matrix column visibleIf. Filter selector if there is a conte
       { type: "text", name: "q2" },
       {
         type: "matrixdynamic", name: "q3", cellType: "text",
-        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+        columns: [{ name: "col1" }, { name: "col2" }]
       },
     ]
   });
@@ -1731,19 +1730,22 @@ test("LogicUI: edit matrix column visibleIf. Filter selector if there is a conte
   const itemEditor = logic.itemEditor;
   expect(itemEditor.panels).toHaveLength(1);
   expect(itemEditor.context).toBeFalsy();
-  const actionPanel = itemEditor.panels[0];
+  let actionPanel = itemEditor.panels[0];
   actionPanel.getQuestionByName("logicTypeName").value = "column_visibility";
+  let colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3 + 2);
 
-  expect(actionPanel.getQuestionByName("logicTypeName").value).toEqual("column_visibility");
-  const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(expressionEditor.panel.panelCount).toEqual(1);
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = "q1.row.col1";
+  let questionValue = firstExpressionPanel.getQuestionByName("questionValue");
+  questionValue.value = 2;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(itemEditor.context).toBeTruthy();
+  colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(3);
-  expect(colSelector.choices[0].text).toEqual("q1.col1");
-  expect(colSelector.value).toEqual("q1.col2");
-  colSelector.value = "q1.col3";
-  logic.saveEditableItem();
-  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
-  expect(matrix.columns[1].visibleIf).toBeFalsy();
-  expect(matrix.columns[2].name).toEqual("col3");
-  expect(matrix.columns[2].visibleIf).toEqual("{row.col1} = 1");
+  questionName.value = "q2";
+  colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3 + 2);
 });
-*/
