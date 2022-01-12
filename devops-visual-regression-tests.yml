@@ -12,9 +12,6 @@ resources:
 
 trigger:
   batch: true
-  branches:
-    exclude:
-    - master
   tags:
     exclude:
       - v*.*.*
