@@ -28,6 +28,9 @@
   background-color: transparent;
   padding: calcSize(1.5) 0;
   padding-right: calcSize(2);
+  &[type="color"] {
+    padding-right: 0;
+  }
 }
 .spg-table__cell:not(.spg-table__cell--detail-panel):first-of-type .spg-text {
   padding-left: calcSize(2);
