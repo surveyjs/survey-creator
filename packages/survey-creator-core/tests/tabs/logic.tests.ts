@@ -1660,6 +1660,31 @@ test("Logic action expand/collapse icon update", () => {
   expect(row.isDetailPanelShowing).toBe(false);
   expect(expandAction.iconName).toEqual("icon-logic-expand");
 });
+test("SurveyLogicUI: check show/hide action switching placeholder 'Select panel/question'", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      {
+        type: "panel", name: "panel1",
+        elements: [
+          { type: "text", name: "q2" }
+        ]
+      },
+    ]
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(0);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "panel_visibility";
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select panel...");
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select question...");
+  panel.getQuestionByName("logicTypeName").value = "panel_visibility";
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select panel...");
+});
 test("Use logic for matrix columns", () => {
   const survey = new SurveyModel({
     elements: [

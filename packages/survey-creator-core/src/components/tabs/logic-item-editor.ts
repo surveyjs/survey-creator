@@ -124,7 +124,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
-    // this.editSurvey.css = defaultV2Css;
     this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {
@@ -259,23 +258,21 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     options.cssClasses.answered = "svc-logic-question--answered";
 
     if (options.question.name === "logicTypeName") {
+      options.question.allowRootStyle = false;
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--action";
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
     if (options.question.name === "elementSelector" || options.question.name === "setToName" || options.question.name === "fromName" || options.question.name === "gotoName") {
+      options.question.allowRootStyle = false;
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
-
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
     if (options.question.name === "setToName" || options.question.name === "fromName") {
+      options.question.allowRootStyle = false;
       options.question.titleLocation = "left";
       options.question.startWithNewLine = false;
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
-
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
@@ -284,7 +281,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.mainRoot += " svc-logic-question-value";
     }
     if (options.question.name === "removeAction") {
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
+      options.question.allowRootStyle = false;
       options.cssClasses.mainRoot += " svc-logic-condition-remove-question";
     }
     // options.cssClasses.mainRoot = "sd-question sd-row__question";
