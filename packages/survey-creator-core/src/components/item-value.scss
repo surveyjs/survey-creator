@@ -47,8 +47,8 @@ sv-svg-icon.svc-item-value-controls__button {
   display: block;
 }
 
-.svc-item-value-wrapper:hover,
-.svc-item-value-controls__drag:hover {
+.svc-item-value-wrapper:hover:not(.svc-item-value--ghost),
+.svc-item-value-controls__drag:hover:not(.svc-item-value--ghost) {
   .svc-item-value-controls__drag-icon {
     visibility: visible;
   }
