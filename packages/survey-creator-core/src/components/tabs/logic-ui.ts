@@ -118,11 +118,26 @@ export class SurveyLogicUI extends SurveyLogic {
   private getLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
     let res: ILogicItemUI = this.itemUIHash[item.id];
     if (!res) {
+      const context = this.getItemContext(item);
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
+      res.expressionEditor.context = context;
       res.expressionEditor.text = item.expression;
       this.itemUIHash[item.id] = res;
     }
     return res;
+  }
+  private getItemContext(item: SurveyLogicItem): any {
+    const exp = item.expression;
+    if(!exp) return null;
+    if(exp.indexOf("row.")) {
+      for(var i = 0; i < item.actions.length; i ++) {
+        const el = item.actions[i].element;
+        if(!!el && el.getType() === "matrixdropdowncolumn") {
+          return (<any>el).colOwner;
+        }
+      }
+    }
+    return null;
   }
   public get expressionSurvey(): SurveyModel {
     return this.expressionEditor.editSurvey;

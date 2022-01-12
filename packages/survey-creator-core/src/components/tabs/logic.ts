@@ -186,8 +186,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     const names: { [key: string]: Question } = {};
     this.items.forEach(item => {
       item.getQuestionNames().forEach(name => {
-        if (!names[name]) {
-          names[name] = this.survey.getQuestionByName(name);
+        const question = this.survey.getQuestionByName(name);
+        if (!!question && !names[name]) {
+          names[name] = question;
         }
       });
     });

@@ -9,7 +9,9 @@ import {
   FunctionFactory,
   Question,
   QuestionHtmlModel,
-  QuestionDropdownModel
+  QuestionDropdownModel,
+  SurveyElement,
+  QuestionMatrixDropdownModelBase
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -329,17 +331,14 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     var action = this.getActionByPanel(panel);
     var logicType = this.getLogicTypeByPanel(panel);
     var elementPanel = this.getElementPanelObj(panel);
-    var elementSelector = null;
+    var selectedElement = null;
     if (!elementPanel) {
-      elementSelector = this.getElementBySelectorName(
-        logicType,
-        panel.getQuestionByName("elementSelector").value
-      );
+      selectedElement = this.getElementBySelectorName(panel.getQuestionByName("elementSelector").value);
     }
     var createNewAction =
       !action ||
       action.logicType != logicType ||
-      (!!elementSelector && action.element != elementSelector);
+      (!!selectedElement && action.element != selectedElement);
     if (!createNewAction) {
       if (!!elementPanel) {
         action.element.fromJSON(elementPanel.toJSON());
@@ -348,7 +347,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
     return new SurveyLogicAction(
       logicType,
-      !!elementPanel ? elementPanel : elementSelector,
+      !!elementPanel ? elementPanel : selectedElement,
       this.survey
     );
   }
@@ -436,9 +435,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     question.optionsCaption = this.getSelectorOptionsText(logicType);
     var action = this.getActionByPanel(panel);
     question.value =
-      !!action && !!action.element && action.logicType == logicType
-        ? (<any>action.element).name
-        : undefined;
+      !!action && action.logicType == logicType ? action.elementName : undefined;
   }
   private setupElementPanel(panel: PanelModel, logicType: SurveyLogicType) {
     this.titleActionsCreator = null;
@@ -510,7 +507,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     question.title = originalQuestion.title;
     question.titleLocation = "top";
   }
-  private static elementSelectorTypes = ["question", "page", "panel"];
+  private static elementSelectorTypes = ["question", "page", "panel", "matrixdropdowncolumn"];
   private isElementSelectorVisible(logicType: SurveyLogicType): boolean {
     if (!logicType) return false;
     return (
@@ -559,9 +556,19 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   public getLocString(name: string): string {
     return editorLocalization.getString(name);
   }
+  private getElementText(el: SurveyElement, showTitles: boolean): string {
+    var text = "";
+    if (showTitles) {
+      text = el.locTitle.renderedHtml;
+    }
+    if (!text) text = el.name;
+    return text;
+  }
+  private selectorElementsHash = {};
   private getSelectorChoices(logicType: SurveyLogicType): Array<ItemValue> {
     var elementType = logicType.baseClass;
     var elements = [];
+    const elementsOwners = [];
     if (elementType == "question") {
       elements = this.survey.getAllQuestions();
     }
@@ -571,16 +578,33 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (elementType == "panel") {
       elements = this.survey.getAllPanels();
     }
-    var res = [];
+    if(elementType === "matrixdropdowncolumn") {
+      const questions = this.survey.getAllQuestions();
+      for(var i = 0; i < questions.length; i ++) {
+        if(questions[i] instanceof QuestionMatrixDropdownModelBase) {
+          const columns = (<QuestionMatrixDropdownModelBase>questions[i]).columns;
+          for(var j = 0; j < columns.length; j ++) {
+            elements.push(columns[j]);
+            elementsOwners.push(questions[i]);
+          }
+        }
+      }
+    }
+    const res = [];
     var showTitles = this.options.showTitlesInExpressions;
     for (var i = 0; i < elements.length; i++) {
-      var el = elements[i];
-      var text = "";
-      if (showTitles) {
-        text = el.locTitle.renderedHtml;
+      var namePrefix = "";
+      var textPrefix = "";
+      if(i < elementsOwners.length) {
+        const owner = elementsOwners[i];
+        namePrefix = owner.name + ".";
+        textPrefix = this.getElementText(owner, showTitles) + ".";
       }
-      if (!text) text = el.name;
-      var itemValue = new ItemValue(el.name, text);
+      const el = elements[i];
+      var text = this.getElementText(el, showTitles);
+      const value = namePrefix + el.name;
+      const itemValue = new ItemValue(value, textPrefix + text);
+      this.selectorElementsHash[value] = el;
       if (
         !!el[logicType.propertyName] &&
         !this.isElementInInitialSelection(logicType.name, el)
@@ -609,14 +633,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           : "pe.conditionSelectQuestion";
     return this.getLocString(optionsCaptionName);
   }
-  private getElementBySelectorName(
-    logicType: SurveyLogicType,
-    name: string
-  ): Base {
-    if (!name) return null;
-    var elementType = logicType.baseClass;
-    if (elementType == "question") return this.survey.getQuestionByName(name);
-    if (elementType == "panel") return <Base><any>this.survey.getPanelByName(name);
-    return this.survey.getPageByName(name);
+  private getElementBySelectorName(value: any): Base {
+    if(!value) return null;
+    return this.selectorElementsHash[value];
   }
 }

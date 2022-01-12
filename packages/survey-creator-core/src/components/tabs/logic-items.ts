@@ -93,8 +93,9 @@ export class SurveyLogicAction {
     return logicTypeName === this.logicTypeName;
   }
   public addQuestionNames(names: string[]) {
-    if (!!this.elementName && names.indexOf(this.elementName) === -1) {
-      names.push(this.elementName);
+    const name = this.elementOwnerName;
+    if (!!this.elementName && names.indexOf(name) === -1) {
+      names.push(name);
     }
     this.questionNamesValues.forEach(name => {
       if (!!name && names.indexOf(name) === -1) {
@@ -106,8 +107,26 @@ export class SurveyLogicAction {
     if (!this.logicType || !this.logicType.questionNames) return [];
     return this.logicType.questionNames;
   }
-  private get elementName(): string {
-    return !!this.element && (<any>this.element).name || "";
+  public get elementName(): string {
+    if(!this.element) return "";
+    var prefix = "";
+    const owner = this.getOwnerElement();
+    if(!!owner && owner !== this.element) {
+      prefix = (<any>owner).name + ".";
+    }
+    return (prefix + (<any>this.element).name) || "";
+  }
+  private get elementOwnerName(): string {
+    const owner = this.getOwnerElement();
+    return !!owner ? (<any>owner).name || "" : "";
+  }
+  private getOwnerElement() : Base {
+    if(!this.element) return null;
+    if(this.element.getType() === "matrixdropdowncolumn") {
+      const question = (<any>this.element).colOwner;
+      if(!!question) return question;
+    }
+    return this.element;
   }
   private get questionNamesValues(): Array<string> {
     return this.questionNames.map(name => this.element[name]);

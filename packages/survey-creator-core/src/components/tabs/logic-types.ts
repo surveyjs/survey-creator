@@ -5,6 +5,7 @@ import {
   SurveyTrigger,
   Serializer,
   Helpers,
+  QuestionMatrixDropdownModelBase,
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
@@ -161,13 +162,24 @@ export class SurveyLogicType {
   }
 }
 
+function hasMatrixColumns(survey: SurveyModel): boolean {
+  const questions = survey.getAllQuestions();
+  for(var i = 0; i < questions.length; i ++) {
+    const q = questions[i];
+    if(q instanceof QuestionMatrixDropdownModelBase) {
+      if((<QuestionMatrixDropdownModelBase>q).columns.length > 0) return true;
+    }
+  }
+  return false;
+}
+
 export class SurveyLogicTypes {
   public static types = [
     {
       name: "page_visibility",
       baseClass: "page",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) {
+      showIf: function (survey: SurveyModel) : boolean {
         return survey.pages.length > 1;
       },
     },
@@ -175,7 +187,7 @@ export class SurveyLogicTypes {
       name: "panel_visibility",
       baseClass: "panel",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) {
+      showIf: function (survey: SurveyModel) : boolean {
         return survey.getAllPanels().length > 0;
       },
     },
@@ -183,7 +195,7 @@ export class SurveyLogicTypes {
       name: "panel_enable",
       baseClass: "panel",
       propertyName: "enableIf",
-      showIf: function (survey: SurveyModel) {
+      showIf: function (survey: SurveyModel) : boolean {
         return survey.getAllPanels().length > 0;
       },
     },
@@ -191,15 +203,23 @@ export class SurveyLogicTypes {
       name: "question_visibility",
       baseClass: "question",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) {
+      showIf: function (survey: SurveyModel) : boolean {
         return survey.getAllQuestions().length > 0;
+      },
+    },
+    {
+      name: "column_visibility",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "visibleIf",
+      showIf: function (survey: SurveyModel) : boolean {
+        return hasMatrixColumns(survey);
       },
     },
     {
       name: "question_enable",
       baseClass: "question",
       propertyName: "enableIf",
-      showIf: function (survey: SurveyModel) {
+      showIf: function (survey: SurveyModel) : boolean {
         return survey.getAllQuestions().length > 0;
       },
     },
@@ -207,7 +227,7 @@ export class SurveyLogicTypes {
       name: "question_require",
       baseClass: "question",
       propertyName: "requiredIf",
-      showIf: function (survey: SurveyModel) {
+      showIf: function (survey: SurveyModel) : boolean {
         return survey.getAllQuestions().length > 0;
       },
     },

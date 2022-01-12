@@ -7,7 +7,8 @@ import {
   SurveyTriggerSkip,
   QuestionMatrixDynamicModel,
   AdaptiveActionContainer,
-  SurveyTriggerSetValue
+  SurveyTriggerSetValue,
+  QuestionMatrixDropdownModelBase
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -1659,3 +1660,90 @@ test("Logic action expand/collapse icon update", () => {
   expect(row.isDetailPanelShowing).toBe(false);
   expect(expandAction.iconName).toEqual("icon-logic-expand");
 });
+test("Use logic for matrix columns", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2", visibleIf: "{row.col1} = 1" }]
+      },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  const item = logic.items[0];
+  expect(item.expression).toEqual("{row.col1} = 1");
+  expect(item.actions).toHaveLength(1);
+  expect(item.actions[0].logicTypeName).toEqual(
+    "column_visibility"
+  );
+});
+test("LogicUI: edit matrix column visibleIf", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2", visibleIf: "{row.col1} = 1" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.editItem(logic.items[0]);
+  const expressionEditor = logic.expressionEditor;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(expressionEditor.context.name).toEqual("q1");
+  const itemEditor = logic.itemEditor;
+  expect(itemEditor.panels).toHaveLength(1);
+  const actionPanel = itemEditor.panels[0];
+  expect(actionPanel.getQuestionByName("logicTypeName").value).toEqual("column_visibility");
+  const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3);
+  expect(colSelector.choices[0].text).toEqual("q1.col1");
+  expect(colSelector.value).toEqual("q1.col2");
+  colSelector.value = "q1.col3";
+  logic.saveEditableItem();
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
+  expect(matrix.columns[1].visibleIf).toBeFalsy();
+  expect(matrix.columns[2].name).toEqual("col3");
+  expect(matrix.columns[2].visibleIf).toEqual("{row.col1} = 1");
+});
+/*
+test("LogicUI: edit matrix column visibleIf. Filter selector if there is a context", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "matrixdynamic", name: "q3", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  expect(expressionEditor.context).toBeFalsy();
+  const itemEditor = logic.itemEditor;
+  expect(itemEditor.panels).toHaveLength(1);
+  expect(itemEditor.context).toBeFalsy();
+  const actionPanel = itemEditor.panels[0];
+  actionPanel.getQuestionByName("logicTypeName").value = "column_visibility";
+
+  expect(actionPanel.getQuestionByName("logicTypeName").value).toEqual("column_visibility");
+  const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3);
+  expect(colSelector.choices[0].text).toEqual("q1.col1");
+  expect(colSelector.value).toEqual("q1.col2");
+  colSelector.value = "q1.col3";
+  logic.saveEditableItem();
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
+  expect(matrix.columns[1].visibleIf).toBeFalsy();
+  expect(matrix.columns[2].name).toEqual("col3");
+  expect(matrix.columns[2].visibleIf).toEqual("{row.col1} = 1");
+});
+*/
