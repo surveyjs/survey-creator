@@ -5,16 +5,13 @@
 
 resources:
   repositories:
-    - repository: Service
+    - repository: EmptyRepo
       type: github
       endpoint: dmitrykurmanov:admin
-      name: surveyjs/service
+      name: surveyjs/azure-pipelines-repo-dont-remove-please
 
 trigger:
   batch: true
-  branches:
-    exclude:
-    - master
   tags:
     exclude:
       - v*.*.*
@@ -26,7 +23,7 @@ jobs:
 - job: CreatorV2React
   steps:
   - checkout: self
-  - checkout: Service
+  - checkout: EmptyRepo
     persistCredentials: true
     clean: true
 
@@ -137,7 +134,7 @@ jobs:
 - job: CreatorV2Knockout
   steps:
   - checkout: self
-  - checkout: Service
+  - checkout: EmptyRepo
     persistCredentials: true
     clean: true
 
