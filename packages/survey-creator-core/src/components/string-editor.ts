@@ -117,15 +117,16 @@ export class StringEditorViewModelBase extends Base {
     if(!!placeholderValue) {
       var re = /\{([^}]+)\}/g;
       this.placeholderValue = <any>new ComputedUpdater<string>(() => {
-        let match = re.exec(placeholderValue);
+        let result = placeholderValue;
+        let match = re.exec(result);
         while (match != null) {
-          placeholderValue = placeholderValue.replace(re, propertyName => {
+          result = result.replace(re, propertyName => {
             const propertyValue = this.locString.owner && this.locString.owner[match[1]];
             return "" + propertyValue;
           });
-          match = re.exec(placeholderValue);
+          match = re.exec(result);
         }
-        return placeholderValue;
+        return result;
       });
     }
     return this.placeholderValue;
