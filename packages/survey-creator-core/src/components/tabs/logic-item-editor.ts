@@ -401,16 +401,16 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     return panel;
   }
   private updatePanelsOnContextChanged() {
+    this.logicTypeChoices = this.getLogicTypeChoices();
     if(!!this.context) {
       for(var i = this.panels.length - 1; i >= 0; i --) {
         const panel = this.panels[i];
-        if(!this.isPanelSupportContext(panel)) {
-          if(i === 0) {
-            panel.getQuestionByName("logicTypeName").clearValue();
-          }
-          else {
-            this.panel.removePanel(i);
-          }
+        if(this.isPanelSupportContext(panel)) continue;
+        if(i === 0 && this.panels.length === 1) {
+          panel.getQuestionByName("logicTypeName").clearValue();
+        }
+        else {
+          this.panel.removePanel(i);
         }
       }
     }
@@ -419,19 +419,23 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private isPanelSupportContext(panel: PanelModel): boolean {
-    return true; //TODO
+    const logicType = this.getLogicTypeByPanel(panel);
+    return logicType.supportContext(this.context);
   }
   private updateSelectorOnContextChanged(panel: PanelModel) {
+    const logicTypeQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
+    logicTypeQuestion.choices = this.logicTypeChoices;
     const logicType = this.getLogicTypeByPanel(panel);
     if (!this.isElementSelectorVisible(logicType)) return;
-    var question = <QuestionDropdownModel>panel.getQuestionByName("elementSelector");
-    question.choices = this.getSelectorChoices(logicType);
+    var selectorQuestion = <QuestionDropdownModel>panel.getQuestionByName("elementSelector");
+    selectorQuestion.choices = this.getSelectorChoices(logicType);
   }
   private getLogicTypeChoices(): Array<ItemValue> {
     var res = [];
     var logicTypes = this.editableItem.getVisibleLogicTypes();
     for (var i = 0; i < logicTypes.length; i++) {
       var lt = logicTypes[i];
+      if(!!this.context && !lt.supportContext(this.context)) continue;
       var item = new ItemValue(lt.name, lt.displayName);
       if (lt.isUniqueItem) {
         item.visibleIf = "logicTypeVisibleIf({item})";

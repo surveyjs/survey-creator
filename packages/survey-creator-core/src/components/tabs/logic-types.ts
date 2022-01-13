@@ -5,7 +5,7 @@ import {
   SurveyTrigger,
   Serializer,
   Helpers,
-  QuestionMatrixDropdownModelBase,
+  QuestionMatrixDropdownModelBase
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
@@ -34,6 +34,7 @@ export interface ISurveyLogicType {
     lt: SurveyLogicType
   ) => string;
   getDisplayTextName?: (element: Base) => string;
+  supportContext?: (question: Base) => boolean;
 }
 
 export class SurveyLogicType {
@@ -157,6 +158,10 @@ export class SurveyLogicType {
       expression
     );
   }
+  public supportContext(context: Base): boolean {
+    if(!this.logicType.supportContext) return false;
+    return this.logicType.supportContext(context);
+  }
   private get isTrigger(): boolean {
     return !!this.baseClass && this.baseClass.indexOf("trigger") > -1;
   }
@@ -214,6 +219,9 @@ export class SurveyLogicTypes {
       showIf: function (survey: SurveyModel) : boolean {
         return hasMatrixColumns(survey);
       },
+      supportContext(context: Base): boolean {
+        return Array.isArray(context["columns"]);
+      }
     },
     {
       name: "question_enable",

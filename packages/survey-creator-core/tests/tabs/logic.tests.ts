@@ -1774,3 +1774,48 @@ test("LogicUI: edit matrix column visibleIf. Filter selector if there is a conte
   colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(3 + 2);
 });
+test("LogicUI: edit matrix column visibleIf. Filter logic types and delete actions if there is a context", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "matrixdynamic", name: "q3", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2" }]
+      },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  const itemEditor = logic.itemEditor;
+  let actionPanel = itemEditor.panels[0];
+  let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.choices.length).toBeGreaterThan(3);
+  logicTypeName.value = "trigger_complete";
+  itemEditor.panel.addPanel();
+  actionPanel = itemEditor.panels[1];
+  actionPanel.getQuestionByName("logicTypeName").value = "column_visibility";
+  expect(itemEditor.panels).toHaveLength(2);
+
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = "q1.row.col1";
+  let questionValue = firstExpressionPanel.getQuestionByName("questionValue");
+  questionValue.value = 2;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(itemEditor.context).toBeTruthy();
+  expect(itemEditor.panels).toHaveLength(1);
+  actionPanel = itemEditor.panels[0];
+  logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.choices.length).toBeLessThan(4);
+  expect(logicTypeName.value).toEqual("column_visibility");
+
+  questionName.value = "q2";
+  logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.choices.length).toBeGreaterThan(4);
+  expect(logicTypeName.value).toEqual("column_visibility");
+});
