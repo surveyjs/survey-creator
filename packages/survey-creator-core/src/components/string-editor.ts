@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
@@ -108,10 +108,27 @@ export class StringEditorViewModelBase extends Base {
     if (!property || property.maxLength <= 0) return -1;
     return property.maxLength;
   }
+  @property() placeholderValue: string;
   public get placeholder(): string {
+    if(!!this.placeholderValue) return this.placeholderValue;
     const property: any = this.findProperty();
     if (!property || !property.placeholder) return "";
-    return editorLocalization.getString(property.placeholder);
+    let placeholderValue: string = editorLocalization.getString(property.placeholder);
+    if(!!placeholderValue) {
+      var re = /\{([^}]+)\}/g;
+      this.placeholderValue = <any>new ComputedUpdater<string>(() => {
+        let match = re.exec(placeholderValue);
+        while (match != null) {
+          placeholderValue = placeholderValue.replace(re, propertyName => {
+            const propertyValue = this.locString.owner && this.locString.owner[match[1]];
+            return "" + propertyValue;
+          });
+          match = re.exec(placeholderValue);
+        }
+        return placeholderValue;
+      });
+    }
+    return this.placeholderValue;
   }
   public get contentEditable(): boolean {
     return this.creator.isCanModifyProperty(<any>this.locString.owner, this.locString.name);

@@ -29,6 +29,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
         this.creator.addPage(newPage);
       }
     };
+    newPage.num = this.survey.pages.length + 1;
     newPage.onPropertyChanged.add(checkNewElementHandler);
     this.newPage = newPage;
     DragDropSurveyElements.newGhostPage = newPage;

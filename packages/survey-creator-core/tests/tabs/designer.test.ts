@@ -15,16 +15,16 @@ test("Survey/page title/description placeholders text", () => {
       }
     ]
   });
-  const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string) => {
+  const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string, placeholderText?: string) => {
     const locStr: LocalizableString = new LocalizableString(owner, false, propertyName);
     const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr, null);
     const property: JsonObjectProperty = Serializer.findProperty(ownerName, propertyName);
-    const placeholder: string = editorLocalization.getString((<any>property).placeholder);
+    const placeholder: string = placeholderText || editorLocalization.getString((<any>property).placeholder);
     expect(editor.placeholder).toEqual(placeholder);
   };
   checkPlaceholder(survey, "survey", "title");
   checkPlaceholder(survey, "survey", "description");
-  checkPlaceholder(survey.pages[0], "page", "title");
+  checkPlaceholder(survey.pages[0], "page", "title", "Page 1");
   checkPlaceholder(survey.pages[0], "page", "description");
 });
 
@@ -93,4 +93,24 @@ test("Select survey in designer", ()=> {
   expect(creator.selectedElementName).toEqual("question1");
   designerPlugin.model.clickDesigner();
   expect(creator.selectedElementName).toEqual("survey");
+});
+
+test("StringEditorViewModelBase page title placeholder", () => {
+  Serializer.findProperty("page", "title")["placeholder"] = "pe.pageTitlePlaceholder";
+  let survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text" }
+        ]
+      }
+    ]
+  });
+  let page1 = survey.pages[0];
+  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
+  expect(page1.visibleIndex).toBe(0);
+  expect(page1.num).toBe(1);
+  expect(editor.placeholderValue).toBeUndefined();
+  expect(editor.placeholder).toBe("Page 1");
+  expect(editor.placeholderValue).toBe("Page 1");
 });
