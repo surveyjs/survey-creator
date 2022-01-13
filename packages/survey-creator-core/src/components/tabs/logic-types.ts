@@ -33,8 +33,9 @@ export interface ISurveyLogicType {
     formatStr: string,
     lt: SurveyLogicType
   ) => string;
-  getDisplayTextName?: (element: Base) => string;
+  getElementName?: (element: Base) => string;
   supportContext?: (question: Base) => boolean;
+  getParentElement? (element: Base): Base;
 }
 
 export class SurveyLogicType {
@@ -129,27 +130,37 @@ export class SurveyLogicType {
     var str = getLogicString(this.name + "Text");
     if (!!this.logicType.getDisplayText)
       return this.logicType.getDisplayText(element, str, this);
-    var name = "";
-    if (!!this.logicType.getDisplayTextName) {
-      name = this.logicType.getDisplayTextName(element);
-    } else {
-      if (!!element && !!element["name"]) {
-        name = element["name"];
-      }
+    if (!!this.logicType.getElementName) {
+      element = this.getElementByName(this.logicType.getElementName(element));
     }
+    const name = this.getElementDisplayName(element);
     if (!!name) {
-      return str["format"](this.formatElName(name));
+      const parentElement = !!this.logicType.getParentElement? this.logicType.getParentElement(element) : null;
+      const parentName = this.getElementDisplayName(parentElement);
+      return str["format"](name, parentName);
     }
     return str;
   }
-  public formatElName(name: string): string {
-    if (this.showTitlesInExpression && !!this.survey) {
-      const question = this.survey.getQuestionByName(name);
-      if (!!question && !!question.title) {
-        name = question.title;
-      }
+  private getElementDisplayName(element: Base): string {
+    if(!element) return "";
+    let res = "";
+    if (this.showTitlesInExpression) {
+      res = element["title"];
     }
-    return wrapTextByCurlyBraces(name);
+    if(!res) {
+      res = element["name"] || "";
+    }
+    return wrapTextByCurlyBraces(res);
+  }
+  private getElementByName(name: string): Base {
+    if(!this.survey) return null;
+    const question = this.survey.getQuestionByName(name);
+    if(!!question) return question;
+    return this.survey.getPageByName(name);
+  }
+  public formatElName(name: string): string {
+    const el = this.getElementByName(name);
+    return this.getElementDisplayName(el);
   }
   public formatExpression(expression: string): string {
     return SurveyLogicType.expressionToDisplayText(
@@ -213,17 +224,6 @@ export class SurveyLogicTypes {
       },
     },
     {
-      name: "column_visibility",
-      baseClass: "matrixdropdowncolumn",
-      propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) : boolean {
-        return hasMatrixColumns(survey);
-      },
-      supportContext(context: Base): boolean {
-        return Array.isArray(context["columns"]);
-      }
-    },
-    {
       name: "question_enable",
       baseClass: "question",
       propertyName: "enableIf",
@@ -238,6 +238,48 @@ export class SurveyLogicTypes {
       showIf: function (survey: SurveyModel) : boolean {
         return survey.getAllQuestions().length > 0;
       },
+    },
+    {
+      name: "column_visibility",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "visibleIf",
+      showIf: function (survey: SurveyModel) : boolean {
+        return hasMatrixColumns(survey);
+      },
+      supportContext(context: Base): boolean {
+        return Array.isArray(context["columns"]);
+      },
+      getParentElement(element: Base): Base {
+        return !!element ? (<any>element).colOwner : null;
+      }
+    },
+    {
+      name: "column_enable",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "enableIf",
+      showIf: function (survey: SurveyModel) : boolean {
+        return hasMatrixColumns(survey);
+      },
+      supportContext(context: Base): boolean {
+        return Array.isArray(context["columns"]);
+      },
+      getParentElement(element: Base): Base {
+        return !!element ? (<any>element).colOwner : null;
+      }
+    },
+    {
+      name: "column_require",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "requiredIf",
+      showIf: function (survey: SurveyModel) : boolean {
+        return hasMatrixColumns(survey);
+      },
+      supportContext(context: Base): boolean {
+        return Array.isArray(context["columns"]);
+      },
+      getParentElement(element: Base): Base {
+        return !!element ? (<any>element).colOwner : null;
+      }
     },
     {
       name: "expression_expression",
@@ -316,7 +358,7 @@ export class SurveyLogicTypes {
       propertyName: "expression",
       questionNames: ["gotoName"],
       isUniqueItem: true,
-      getDisplayTextName: function (element: Base): string {
+      getElementName: function (element: Base): string {
         return element["gotoName"];
       },
     },

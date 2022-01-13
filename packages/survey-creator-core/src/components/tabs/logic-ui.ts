@@ -121,6 +121,7 @@ export class SurveyLogicUI extends SurveyLogic {
       const context = this.getItemContext(item);
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
       res.expressionEditor.context = context;
+      res.itemEditor.context = context;
       res.expressionEditor.text = item.expression;
       res.expressionEditor.onContextChanged = (context: Question): void => {
         res.itemEditor.context = context;
