@@ -104,10 +104,6 @@ test("Check logic error notifier", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName));
   await t.click(Selector(".svc-logic-tab__content-action")).click(Selector(".sl-panel__done-button"));
-  await ClientFunction(() => {
-    document.styleSheets[0].insertRule(".always-visible { display: block !important; }");
-    (<HTMLElement>document.querySelector(".svc-notifier--error")).classList.add(".always-visible");
-  })();
   await checkElementScreenshot("logic-error-notifier.png", Selector(".svc-notifier--error"), t);
 });
 
