@@ -558,10 +558,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i];
         if (this.object == question) continue;
-        question.addConditionObjectsByContext(res, this.object);
-        if(!this.object && (!this.context || this.context === question)) {
-          this.addConditionObjectsByContext(question, res);
-        }
+        const context = !!this.object ? this.object : (!this.context || this.context === question);
+        question.addConditionObjectsByContext(res, context);
       }
       this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res);
       for (let i = 0; i < res.length; i++) {
@@ -582,22 +580,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.addValuesIntoConditionQuestions(this.survey.getVariableNames(), res);
     SurveyHelper.sortItems(res);
     return res;
-  }
-  private addConditionObjectsByContext(question: Question, res: Array<any>) {
-    if(question instanceof QuestionMatrixDropdownModelBase) {
-      const matrix = <QuestionMatrixDropdownModelBase>question;
-      const prefixName = matrix.getValueName() + ".row.";
-      const prefixText = matrix.processedTitle + ".row.";
-      for(var i = 0; i < matrix.columns.length; i ++) {
-        const column = matrix.columns[i];
-        res.push({
-          name: prefixName + column.name,
-          text: prefixText + column.fullTitle,
-          question: matrix,
-          context: matrix
-        });
-      }
-    }
   }
   private addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>) {
     for (let i = 0; i < values.length; i++) {

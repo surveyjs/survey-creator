@@ -288,24 +288,6 @@ export class SurveyLogicTypes {
       showInUI: false,
     },
     {
-      name: "matrixdropdowncolumn_visibleIf",
-      baseClass: "matrixdropdowncolumn",
-      propertyName: "visibleIf",
-      showInUI: false,
-    },
-    {
-      name: "matrixdropdowncolumn_enableIf",
-      baseClass: "matrixdropdowncolumn",
-      propertyName: "enableIf",
-      showInUI: false,
-    },
-    {
-      name: "matrixdropdowncolumn_requiredIf",
-      baseClass: "matrixdropdowncolumn",
-      propertyName: "requiredIf",
-      showInUI: false,
-    },
-    {
       name: "matrixdropdowncolumn_totalExpression",
       baseClass: "matrixdropdowncolumn",
       propertyName: "totalExpression",
