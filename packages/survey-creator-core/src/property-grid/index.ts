@@ -802,6 +802,7 @@ export class PropertyGridModel {
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
     }
+    this.updateDependedPropertiesEditors();
     this.survey.onFocusInPanel.add((sender, options) => {
       if (this.currentlySelectedPanel !== options.panel) {
         this.currentlySelectedProperty = options.panel.getFirstQuestionToFocus().name;
@@ -905,6 +906,7 @@ export class PropertyGridModel {
       var name = properties[i];
       var q = this.survey.getQuestionByName(name);
       if (!q) continue;
+      this.updateDependedPropertiesEditor(q);
       if (!Helpers.isTwoValueEquals(q.value, this.survey.getValue(name))) {
         q.value = this.survey.getValue(name);
       }
@@ -915,7 +917,20 @@ export class PropertyGridModel {
       );
     }
   }
-
+  private updateDependedPropertiesEditor(editor: Question) {
+    const obj: Base = (<any>editor).obj;
+    if(!obj) return;
+    const property: JsonObjectProperty = (<any>editor).property;
+    if(!!property && property.onPropertyEditorUpdate) {
+      property.onPropertyEditorUpdate(obj, editor);
+    }
+  }
+  private updateDependedPropertiesEditors() {
+    const questions = this.survey.getAllQuestions();
+    for(var i = 0; i < questions.length; i ++) {
+      this.updateDependedPropertiesEditor(questions[i]);
+    }
+  }
   private onAfterRenderQuestion(options: any) {
     PropertyGridEditorCollection.onAfterRenderQuestion(
       this.obj,
@@ -1128,7 +1143,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     options: ISurveyCreatorOptions, reason: "apply" | "cancel") {
 
   }
-  protected isSupportGrouping(): boolean {
+  public isSupportGrouping(): boolean {
     return false;
   }
   onUpdateQuestionCssClasses(obj: Base, options: any) {
@@ -1158,7 +1173,7 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
       titleLocation: "hidden"
     };
   }
-  protected isSupportGrouping(): boolean {
+  public isSupportGrouping(): boolean {
     return true;
   }
 }

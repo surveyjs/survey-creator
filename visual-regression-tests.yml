@@ -13,8 +13,8 @@ resources:
 trigger:
   batch: true
   branches:
-    exclude:
-    - master
+    include:
+      - master
   tags:
     exclude:
       - v*.*.*
