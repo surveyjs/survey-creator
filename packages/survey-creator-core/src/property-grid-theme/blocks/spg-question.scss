@@ -3,8 +3,6 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  //todo: remove !important
-  min-width: auto !important;
 }
 .spg-question__header {
   width: 100%;
@@ -38,7 +36,6 @@
 }
 .spg-question--location--left {
   flex-direction: row;
-  padding-right: 0 !important;
   background: $background;
   border: 1px solid $border;
   line-height: calcSize(6);
@@ -64,6 +61,5 @@
 .spg-row--multiple {
   display: flex;
   gap: calcSize(1);
-  margin-top: calcSize(1) !important;
   overflow: hidden;
 }

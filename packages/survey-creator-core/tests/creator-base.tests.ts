@@ -14,7 +14,9 @@ import {
   QuestionPanelDynamicModel,
   CustomWidgetCollection,
   QuestionMatrixModel,
-  Action
+  Action,
+  QuestionMatrixDynamicModel,
+  QuestionCheckboxModel
 } from "survey-core";
 import { PageViewModel } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -324,7 +326,8 @@ test("SelectionHistoryController: Update history on deleting elements", (): any 
   creator.selectElement(question);
   const panel = <PanelModel>creator.survey.getPanelByName("panel1");
   creator.selectElement(panel);
-  const column = creator.survey.getQuestionByName("question2").columns[0];
+  const question2 = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question2");
+  const column = question2.columns[0];
   creator.selectElement(column);
   creator.selectElement(creator.survey);
   expect(controller.hasInHistory(page)).toBeTruthy();
@@ -337,7 +340,7 @@ test("SelectionHistoryController: Update history on deleting elements", (): any 
   panel.delete();
   expect(controller.hasInHistory(panel)).toBeFalsy();
   expect(controller.hasInHistory(column)).toBeTruthy();
-  creator.survey.getQuestionByName("question2").columns.splice(0, 1);
+  question2.columns.splice(0, 1);
   expect(controller.hasInHistory(column)).toBeFalsy();
 });
 test("Update expressions on deleting a question", (): any => {
@@ -826,7 +829,7 @@ test("Show error on entering non-unique column value", (): any => {
       }
     ]
   };
-  const matrixQuestion = creator.survey.getAllQuestions()[0];
+  const matrixQuestion = <QuestionMatrixDynamicModel>creator.survey.getAllQuestions()[0];
   creator.selectElement(matrixQuestion.columns[1]); //
   const questionName = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("name");
   expect(questionName.value).toEqual("col2");
@@ -1605,7 +1608,7 @@ test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", 
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
   };
-  const q1 = creator.survey.getAllQuestions()[0];
+  const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
   creator.maximumChoicesCount = 3;
   const q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2 + 4);
@@ -1618,7 +1621,7 @@ test("QuestionAdornerViewModel for selectbase and creator.readOnly", (): any => 
   creator.JSON = {
     elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
   };
-  const q1 = creator.survey.getAllQuestions()[0];
+  const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
   const q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2);
 });
@@ -1664,7 +1667,7 @@ test("Modify property editor titleActions on event", (): any => {
   expect(choicesQuestion).toBeTruthy();
   expect(choicesQuestion.getType()).toEqual("matrixdynamic");
   expect(choicesQuestion.getTitleActions()).toHaveLength(3);
-  const question = creator.survey.getAllQuestions()[1];
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[1];
   creator.selectElement(question);
   choicesQuestion = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
   expect(choicesQuestion.getTitleActions()).toHaveLength(4);
@@ -1686,6 +1689,15 @@ test("Set allowEditSurveyTitle option", (): any => {
   expect(Serializer.findProperty("survey", "title").visible).toBeFalsy();
   creator.allowEditSurveyTitle = true;
   expect(Serializer.findProperty("survey", "title").visible).toBeTruthy();
+});
+test("Set allowEditSurveyTitle option with removed logoHeight property", (): any => {
+  Serializer.removeProperty("survey", "logoHeight");
+  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  expect(creator.allowEditSurveyTitle).toBeFalsy();
+  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeFalsy();
+  creator.allowEditSurveyTitle = true;
+  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeTruthy();
+  Serializer.addProperty("survey", { name: "logoHeight", default: "200px", minValue: 0 });
 });
 test("creator.onActiveTabChanged", (): any => {
   const creator = new CreatorTester({

@@ -36,7 +36,10 @@ QUnit.test("editable object, apply function test", function (assert) {
   var edObj = <Survey.QuestionText>editableObj.editableObj;
   assert.equal((<any>edObj).isCopy, true, "Tell that it is a copy");
   (<Survey.NumericValidator>edObj.validators[0]).maxValue = 100;
-  edObj.validators.push(new Survey.TextValidator(5, 10));
+  const textValidator = new Survey.TextValidator;
+  textValidator.minLength = 5;
+  textValidator.maxLength = 5;
+  edObj.validators.push(textValidator);
   edObj.name = "question1";
   edObj.inputType = "color";
   assert.equal(

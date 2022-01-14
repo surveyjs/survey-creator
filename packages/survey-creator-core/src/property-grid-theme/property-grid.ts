@@ -85,7 +85,7 @@ export var propertyGridCss = {
     comment: "spg-comment",
     required: "spg-question--required",
     titleRequired: "spg-question__title--required",
-    indent: 20,
+    indent: 0,
     footer: "spg-question__footer",
     formGroup: "spg-question__form-group",
     hasError: "",
