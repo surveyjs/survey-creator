@@ -45,11 +45,13 @@
 }
 .spg-table__cell--header {
   font-size: calcSize(1.5);
-  font-weight: 600;
-  padding: calcSize(1) 0 calcSize(1) calcSize(2);
+  font-weight: normal;
   color: $foreground-light;
-  line-height: calcSize(2);
-  box-shadow: 0px 1px 0px $border;
+  line-height: calcSize(3);
   background: $background-dim;
   text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100px;  
 }
