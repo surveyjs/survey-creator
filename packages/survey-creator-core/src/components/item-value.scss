@@ -3,6 +3,8 @@
 .svc-item-value-wrapper {
   position: relative;
   display: flex;
+  align-items: center;
+  margin-left: calcSize(-5);
 }
 
 .sd-selectbase__column:not(:first-of-type) .svc-item-value-wrapper {
@@ -18,15 +20,11 @@
 }
 
 .svc-item-value-controls {
+  display: flex;
   margin: calcSize(1) 0;
   margin-right: calcSize(1);
-  // position: absolute;
-  // left: calcSize(-10);
   height: calcSize(4);
-  width: calcSize(4);
   box-sizing: border-box;
-  // text-align: right;
-  // white-space: nowrap;
   flex-shrink: 0;
 }
 
@@ -39,7 +37,6 @@
 }
 .svc-item-value-controls__button > span,
 sv-svg-icon.svc-item-value-controls__button {
-  width: calcSize(2);
   height: calcSize(2);
   box-sizing: content-box;
   .sv-svg-icon {
@@ -50,8 +47,8 @@ sv-svg-icon.svc-item-value-controls__button {
   display: block;
 }
 
-.svc-item-value-wrapper:hover,
-.svc-item-value-controls__drag:hover {
+.svc-item-value-wrapper:hover:not(.svc-item-value--ghost),
+.svc-item-value-controls__drag:hover:not(.svc-item-value--ghost) {
   .svc-item-value-controls__drag-icon {
     visibility: visible;
   }
@@ -59,14 +56,12 @@ sv-svg-icon.svc-item-value-controls__button {
 
 .svc-item-value-controls__drag {
   padding: calcSize(0.5) calcSize(1);
-  margin-left: calcSize(-5);
   cursor: move;
-  opacity: 0.25;
   .svc-item-value-controls__drag-icon {
     visibility: hidden;
   }
   use {
-    fill: $foreground;
+    fill: $primary;
   }
 }
 
@@ -118,6 +113,10 @@ sv-svg-icon.svc-item-value-controls__button {
       opacity: 0.35;
     }
   }
+  .sv-ranking-item__index {
+    background: $background-for-editors;
+  }
+  margin-left: 0;
 }
 .sv-ranking {
   .svc-item-value-wrapper {
