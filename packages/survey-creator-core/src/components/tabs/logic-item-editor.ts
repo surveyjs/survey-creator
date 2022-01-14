@@ -603,7 +603,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private getSelectorChoices(logicType: SurveyLogicType): Array<ItemValue> {
     var elementType = logicType.baseClass;
     var elements = [];
-    const elementsOwners = [];
     if (elementType == "question") {
       elements = this.survey.getAllQuestions();
     }
@@ -622,7 +621,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           const columns = (<QuestionMatrixDropdownModelBase>question).columns;
           for(var j = 0; j < columns.length; j ++) {
             elements.push(columns[j]);
-            elementsOwners.push(questions[i]);
           }
         }
       }
@@ -632,12 +630,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     for (var i = 0; i < elements.length; i++) {
       var namePrefix = "";
       var textPrefix = "";
-      if(i < elementsOwners.length) {
-        const owner = elementsOwners[i];
+      const el = elements[i];
+      const owner = <Question>logicType.getParentElement(el);
+      if(owner) {
         namePrefix = owner.name + ".";
         textPrefix = this.getElementText(owner, showTitles) + ".";
       }
-      const el = elements[i];
       var text = this.getElementText(el, showTitles);
       const value = namePrefix + el.name;
       const itemValue = new ItemValue(value, textPrefix + text);

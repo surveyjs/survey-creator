@@ -28,6 +28,10 @@ export class SurveyLogicAction {
   public get element(): Base {
     return this.elementValue;
   }
+  public get parentElement(): Base {
+    if(!this.element || !this.logicType) return null;
+    return this.logicType.getParentElement(this.element);
+  }
   public get survey(): SurveyModel {
     return this.surveyValue;
   }
@@ -122,11 +126,8 @@ export class SurveyLogicAction {
   }
   private getOwnerElement() : Base {
     if(!this.element) return null;
-    if(this.element.getType() === "matrixdropdowncolumn") {
-      const question = (<any>this.element).colOwner;
-      if(!!question) return question;
-    }
-    return this.element;
+    const parentElement = this.parentElement;
+    return !!parentElement ? parentElement : this.element;
   }
   private get questionNamesValues(): Array<string> {
     return this.questionNames.map(name => this.element[name]);

@@ -135,9 +135,9 @@ export class SurveyLogicUI extends SurveyLogic {
     if(!exp) return null;
     if(exp.indexOf("row.")) {
       for(var i = 0; i < item.actions.length; i ++) {
-        const el = item.actions[i].element;
-        if(!!el && el.getType() === "matrixdropdowncolumn") {
-          return (<any>el).colOwner;
+        const parentEl = item.actions[i].parentElement;
+        if(!!parentEl) {
+          return parentEl;
         }
       }
     }

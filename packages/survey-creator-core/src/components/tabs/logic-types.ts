@@ -138,6 +138,9 @@ export class SurveyLogicType {
   public get description(): string {
     return getLogicString(this.name + "Description");
   }
+  public getParentElement(element: Base): Base {
+    return !!this.logicType.getParentElement? this.logicType.getParentElement(element) : null;
+  }
   public getDisplayText(element: Base): string {
     var str = getLogicString(this.name + "Text");
     if (!!this.logicType.getDisplayText)
@@ -147,7 +150,7 @@ export class SurveyLogicType {
     }
     const name = this.getElementDisplayName(element);
     if (!!name) {
-      const parentElement = !!this.logicType.getParentElement? this.logicType.getParentElement(element) : null;
+      const parentElement = this.getParentElement(element);
       const parentName = this.getElementDisplayName(parentElement);
       return str["format"](name, parentName);
     }
