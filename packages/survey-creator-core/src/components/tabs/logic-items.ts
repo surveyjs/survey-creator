@@ -284,7 +284,18 @@ export class SurveyLogicItem {
   public getActionTypes(): string[] {
     return this.actions.map(action => action.logicTypeName);
   }
-
+  public getContext(): Base {
+    const exp = this.expression;
+    if(!exp) return null;
+    if(exp.indexOf("{row.") < 0) return null;
+    for(var i = 0; i < this.actions.length; i ++) {
+      const parentEl = this.actions[i].parentElement;
+      if(!!parentEl) {
+        return parentEl;
+      }
+    }
+    return null;
+  }
   private getQuestionNamesFromExpression(names: string[]) {
     const conditionRunner = new ConditionRunner(this.expression);
     conditionRunner.getVariables().forEach(item => {

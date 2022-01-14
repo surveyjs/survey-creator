@@ -118,7 +118,7 @@ export class SurveyLogicUI extends SurveyLogic {
   private getLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
     let res: ILogicItemUI = this.itemUIHash[item.id];
     if (!res) {
-      const context = this.getItemContext(item);
+      const context = <Question>item.getContext();
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
       res.expressionEditor.context = context;
       res.itemEditor.context = context;
@@ -129,19 +129,6 @@ export class SurveyLogicUI extends SurveyLogic {
       this.itemUIHash[item.id] = res;
     }
     return res;
-  }
-  private getItemContext(item: SurveyLogicItem): any {
-    const exp = item.expression;
-    if(!exp) return null;
-    if(exp.indexOf("row.")) {
-      for(var i = 0; i < item.actions.length; i ++) {
-        const parentEl = item.actions[i].parentElement;
-        if(!!parentEl) {
-          return parentEl;
-        }
-      }
-    }
-    return null;
   }
   public get expressionSurvey(): SurveyModel {
     return this.expressionEditor.editSurvey;

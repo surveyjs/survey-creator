@@ -677,16 +677,16 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const question = this.getConditionQuestion(questionName);
     if (!question) return null;
     if (questionName.indexOf(question.getValueName()) == 0) {
-      path = questionName.substr(question.getValueName().length);
+      path = questionName.substring(question.getValueName().length);
     }
     if (questionName.indexOf("row.") == 0) {
-      path = questionName.substr("row.".length);
+      path = questionName.substring("row.".length);
     }
     if (!path) {
       path = questionName;
     }
     if (!!path && path[0] == ".") {
-      path = path.substr(1);
+      path = path.substring(1);
     }
     const json = question && question.getConditionJson ? question.getConditionJson(operator, path) : null;
     if (!!json && json.type == "radiogroup") {
@@ -761,7 +761,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     for (let i = 0; i < operatorTypes.length; i++) {
       let name = operatorTypes[i];
       if (name[0] == "!") {
-        notContains.push(name.substr(1));
+        notContains.push(name.substring(1));
       } else {
         contains.push(name);
       }

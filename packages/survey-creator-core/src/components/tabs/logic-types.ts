@@ -5,7 +5,9 @@ import {
   SurveyTrigger,
   Serializer,
   Helpers,
-  QuestionMatrixDropdownModelBase
+  Question,
+  QuestionMatrixDropdownModelBase,
+  SurveyElement
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
@@ -34,6 +36,7 @@ export interface ISurveyLogicType {
     lt: SurveyLogicType
   ) => string;
   getElementName?: (element: Base) => string;
+  getSelectorChoices?: (survey: SurveyModel, context: Question) => Array<SurveyElement>;
   supportContext?: (question: Base) => boolean;
   getParentElement? (element: Base): Base;
 }
@@ -141,6 +144,13 @@ export class SurveyLogicType {
   public getParentElement(element: Base): Base {
     return !!this.logicType.getParentElement? this.logicType.getParentElement(element) : null;
   }
+  public get hasSelectorChoices(): boolean {
+    return !!this.logicType.getSelectorChoices;
+  }
+  public getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+    if(!this.hasSelectorChoices) return null;
+    return this.logicType.getSelectorChoices(survey, context);
+  }
   public getDisplayText(element: Base): string {
     var str = getLogicString(this.name + "Text");
     if (!!this.logicType.getDisplayText)
@@ -209,12 +219,18 @@ export class SurveyLogicTypes {
     panel: {
       showIf: function (survey: SurveyModel) : boolean {
         return survey.getAllPanels().length > 0;
+      },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        return <any>survey.getAllPanels();
       }
     },
     question: {
       showIf: function (survey: SurveyModel) : boolean {
         return survey.getAllQuestions().length > 0;
       },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        return <any>survey.getAllQuestions();
+      }
     },
     matrixdropdowncolumn: {
       showIf: function (survey: SurveyModel) : boolean {
@@ -225,6 +241,21 @@ export class SurveyLogicTypes {
       },
       getParentElement(element: Base): Base {
         return !!element ? (<any>element).colOwner : null;
+      },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        const res = [];
+        const questions = survey.getAllQuestions();
+        for(var i = 0; i < questions.length; i ++) {
+          const question = questions[i];
+          if(question instanceof QuestionMatrixDropdownModelBase &&
+            (!context || context === question)) {
+            const columns = (<QuestionMatrixDropdownModelBase>question).columns;
+            for(var j = 0; j < columns.length; j ++) {
+              res.push(columns[j]);
+            }
+          }
+        }
+        return res;
       }
     }
   };
@@ -236,6 +267,9 @@ export class SurveyLogicTypes {
       showIf: function (survey: SurveyModel) : boolean {
         return survey.pages.length > 1;
       },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        return survey.pages;
+      }
     },
     {
       name: "panel_visibility",

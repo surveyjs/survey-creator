@@ -542,12 +542,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     question.title = originalQuestion.title;
     question.titleLocation = "top";
   }
-  private static elementSelectorTypes = ["question", "page", "panel", "matrixdropdowncolumn"];
   private isElementSelectorVisible(logicType: SurveyLogicType): boolean {
-    if (!logicType) return false;
-    return (
-      LogicItemEditor.elementSelectorTypes.indexOf(logicType.baseClass) > -1
-    );
+    return !!logicType && logicType.hasSelectorChoices;
   }
   private isElementPanelVisible(logicType: SurveyLogicType): boolean {
     if (!logicType) return false;
@@ -601,30 +597,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private selectorElementsHash = {};
   private getSelectorChoices(logicType: SurveyLogicType): Array<ItemValue> {
-    var elementType = logicType.baseClass;
-    var elements = [];
-    if (elementType == "question") {
-      elements = this.survey.getAllQuestions();
-    }
-    if (elementType == "page") {
-      elements = this.survey.pages;
-    }
-    if (elementType == "panel") {
-      elements = this.survey.getAllPanels();
-    }
-    if(elementType === "matrixdropdowncolumn") {
-      const questions = this.survey.getAllQuestions();
-      for(var i = 0; i < questions.length; i ++) {
-        const question = questions[i];
-        if(question instanceof QuestionMatrixDropdownModelBase &&
-          (!this.context || this.context === question)) {
-          const columns = (<QuestionMatrixDropdownModelBase>question).columns;
-          for(var j = 0; j < columns.length; j ++) {
-            elements.push(columns[j]);
-          }
-        }
-      }
-    }
+    if(!logicType.hasSelectorChoices) return [];
+    const elements = logicType.getSelectorChoices(this.survey, this.context);
     const res = [];
     var showTitles = this.options.showTitlesInExpressions;
     for (var i = 0; i < elements.length; i++) {
