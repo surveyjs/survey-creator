@@ -52,7 +52,19 @@ export class SurveyLogicType {
     private logicType: ISurveyLogicType,
     public survey: SurveyModel,
     public options: ISurveyCreatorOptions = null
-  ) {}
+  ) {
+    this.mergeWithBaseClass();
+  }
+  private mergeWithBaseClass() {
+    if(!this.logicType.baseClass) return;
+    const baseClass = SurveyLogicTypes.baseTypes[this.logicType.baseClass];
+    if(!baseClass) return;
+    for(var key in baseClass) {
+      if(!this.logicType[key]) {
+        this.logicType[key] = baseClass[key];
+      }
+    }
+  }
   public get name(): string {
     return this.logicType.name;
   }
@@ -190,6 +202,29 @@ function hasMatrixColumns(survey: SurveyModel): boolean {
 }
 
 export class SurveyLogicTypes {
+  public static baseTypes = {
+    panel: {
+      showIf: function (survey: SurveyModel) : boolean {
+        return survey.getAllPanels().length > 0;
+      }
+    },
+    question: {
+      showIf: function (survey: SurveyModel) : boolean {
+        return survey.getAllQuestions().length > 0;
+      },
+    },
+    matrixdropdowncolumn: {
+      showIf: function (survey: SurveyModel) : boolean {
+        return hasMatrixColumns(survey);
+      },
+      supportContext(context: Base): boolean {
+        return Array.isArray(context["columns"]);
+      },
+      getParentElement(element: Base): Base {
+        return !!element ? (<any>element).colOwner : null;
+      }
+    }
+  };
   public static types = [
     {
       name: "page_visibility",
@@ -203,83 +238,41 @@ export class SurveyLogicTypes {
       name: "panel_visibility",
       baseClass: "panel",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) : boolean {
-        return survey.getAllPanels().length > 0;
-      },
     },
     {
       name: "panel_enable",
       baseClass: "panel",
       propertyName: "enableIf",
-      showIf: function (survey: SurveyModel) : boolean {
-        return survey.getAllPanels().length > 0;
-      },
     },
     {
       name: "question_visibility",
       baseClass: "question",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) : boolean {
-        return survey.getAllQuestions().length > 0;
-      },
     },
     {
       name: "question_enable",
       baseClass: "question",
       propertyName: "enableIf",
-      showIf: function (survey: SurveyModel) : boolean {
-        return survey.getAllQuestions().length > 0;
-      },
     },
     {
       name: "question_require",
       baseClass: "question",
       propertyName: "requiredIf",
-      showIf: function (survey: SurveyModel) : boolean {
-        return survey.getAllQuestions().length > 0;
-      },
     },
     {
       name: "column_visibility",
       baseClass: "matrixdropdowncolumn",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) : boolean {
-        return hasMatrixColumns(survey);
-      },
-      supportContext(context: Base): boolean {
-        return Array.isArray(context["columns"]);
-      },
-      getParentElement(element: Base): Base {
-        return !!element ? (<any>element).colOwner : null;
-      }
     },
     {
       name: "column_enable",
       baseClass: "matrixdropdowncolumn",
       propertyName: "enableIf",
-      showIf: function (survey: SurveyModel) : boolean {
-        return hasMatrixColumns(survey);
-      },
-      supportContext(context: Base): boolean {
-        return Array.isArray(context["columns"]);
-      },
-      getParentElement(element: Base): Base {
-        return !!element ? (<any>element).colOwner : null;
-      }
     },
     {
       name: "column_require",
       baseClass: "matrixdropdowncolumn",
       propertyName: "requiredIf",
-      showIf: function (survey: SurveyModel) : boolean {
-        return hasMatrixColumns(survey);
-      },
-      supportContext(context: Base): boolean {
-        return Array.isArray(context["columns"]);
-      },
-      getParentElement(element: Base): Base {
-        return !!element ? (<any>element).colOwner : null;
-      }
     },
     {
       name: "expression_expression",
