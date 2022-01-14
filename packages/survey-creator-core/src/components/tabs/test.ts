@@ -3,7 +3,7 @@ import { SurveySimulatorModel } from "../simulator";
 import "./test.scss";
 import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css } from "survey-core";
 import { CreatorBase } from "../../creator-base";
-import { getLocString } from "../../editorLocalization";
+import { editorLocalization, getLocString } from "../../editorLocalization";
 
 // import template from "./test.html";
 
@@ -134,6 +134,17 @@ export class TestSurveyTabViewModel extends Base {
   private getCurrentPageItem(): IAction {
     return this.pageListItems[this.survey.pages.indexOf(this.survey.currentPage)];
   }
+  private getSelectPageTitle(): string {
+    return (this.activePage && this.getPageTitle(this.activePage, "survey-tester-selected")) || getLocString("ts.selectPage");
+  }
+  private getPageTitle(page: PageModel, reason = "survey-tester") {
+    let title = this.surveyProvider.getObjectDisplayName(page, reason, page.title);
+    if(title === page.name && title.indexOf("page") === 0) {
+      const index: number = this.survey.pages.indexOf(page);
+      return editorLocalization.getString("ed.pageTypeName") + " " + (index + 1);
+    }
+    return title;
+  }
   private updatePageList() {
     const pages: Array<IAction> = [];
     for (let i: number = 0; i < this.survey.pages.length; i++) {
@@ -141,7 +152,7 @@ export class TestSurveyTabViewModel extends Base {
       pages.push({
         id: page.name,
         data: page,
-        title: this.surveyProvider.getObjectDisplayName(page, "survey-tester", page.title),
+        title: this.getPageTitle(page),
         enabled: page.isVisible,
         visible: true
       });
@@ -255,8 +266,5 @@ export class TestSurveyTabViewModel extends Base {
       this.selectPageAction.popupModel.contentComponentData.model.selectedItem = this.getCurrentPageItem();
       this.selectPageAction.visible = this.isRunning && this.pageListItems.length > 1 && this.showPagesInTestSurveyTab;
     }
-  }
-  private getSelectPageTitle(): string {
-    return (this.activePage && this.surveyProvider.getObjectDisplayName(this.activePage, "survey-tester-selected", this.activePage.title)) || getLocString("ts.selectPage");
   }
 }
