@@ -2,6 +2,7 @@ import { Question, Base } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../settings";
 import { SurveyHelper } from "../survey-helper";
+import { editorLocalization } from "../editorLocalization";
 
 export class DefaultValueEditor extends PropertyEditorSetupValue {
   constructor(
@@ -24,6 +25,7 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
   protected getQuestionJSON(): any {
     var json = this.editQuestion.toJSON();
     json.name = "question";
+    json.title = editorLocalization.getString("pe.defaultValue");
     json.type = this.editQuestion.getType();
     if (json.type == "expression") {
       json.type = "text";
