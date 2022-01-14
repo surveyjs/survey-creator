@@ -351,7 +351,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       cellType: "text",
       rowCount: 0,
       columns: columns,
-      showHeader: false,
+      showHeader: columns.length > 2,
       addRowText: this.getAddRowText(prop),
       keyDuplicationError: editorLocalization.getString(
         "pe.propertyIsNoUnique"
@@ -460,14 +460,6 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       !this.hasMultipleLanguage(items) &&
       !this.hasVisibleIfOrEnableIf(items)
     );
-  }
-  public setupMatrixQuestion(
-    obj: Base,
-    matrix: QuestionMatrixDynamicModel,
-    prop: JsonObjectProperty
-  ) {
-    super.setupMatrixQuestion(obj, matrix, prop);
-    matrix.showHeader = false;
   }
   protected getAllowRowDragDrop(): boolean { return true; }
   public createPropertyEditorSetup(
