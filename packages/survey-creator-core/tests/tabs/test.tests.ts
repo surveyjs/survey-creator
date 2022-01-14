@@ -215,10 +215,10 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
   const selectedPage: () => IAction = () => model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
 
   expect(model.pageListItems).toHaveLength(3);
-  expect(model.pageListItems[0].title).toEqual("page1");
-  expect(model.pageListItems[1].title).toEqual("page2");
-  expect(model.pageListItems[2].title).toEqual("page3");
-  expect(selectedPage().title).toEqual("page1");
+  expect(model.pageListItems[0].title).toEqual("Page 1");
+  expect(model.pageListItems[1].title).toEqual("Page 2");
+  expect(model.pageListItems[2].title).toEqual("Page 3");
+  expect(selectedPage().title).toEqual("Page 1");
 
   creator.JSON = {
     pages: [
@@ -230,14 +230,14 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
   creator.getPlugin("test").update();
   expect(model.pageListItems[0].title).toEqual("page title 1");
   expect(model.pageListItems[1].title).toEqual("page title 2");
-  expect(model.pageListItems[2].title).toEqual("page3");
+  expect(model.pageListItems[2].title).toEqual("Page 3");
   expect(selectedPage().title).toEqual("page title 1");
 
   model.survey.nextPage();
   expect(selectedPage().title).toEqual("page title 2");
 
   model.survey.nextPage();
-  expect(selectedPage().title).toEqual("page3");
+  expect(selectedPage().title).toEqual("Page 3");
 });
 
 test("Simulator view switch", (): any => {

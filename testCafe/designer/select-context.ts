@@ -68,7 +68,7 @@ test("Matrix question", async (t) => {
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
-    .click(Selector("span[aria-placeholder='Input page title here']"))
+    .click(Selector("span[aria-placeholder='Page 1']"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("page1")
 
     .click(Selector(".sv-string-editor").withText("question1"))
