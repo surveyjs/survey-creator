@@ -28,6 +28,10 @@ export class SurveyLogicAction {
   public get element(): Base {
     return this.elementValue;
   }
+  public get parentElement(): Base {
+    if(!this.element || !this.logicType) return null;
+    return this.logicType.getParentElement(this.element);
+  }
   public get survey(): SurveyModel {
     return this.surveyValue;
   }
@@ -93,8 +97,9 @@ export class SurveyLogicAction {
     return logicTypeName === this.logicTypeName;
   }
   public addQuestionNames(names: string[]) {
-    if (!!this.elementName && names.indexOf(this.elementName) === -1) {
-      names.push(this.elementName);
+    const name = this.elementOwnerName;
+    if (!!this.elementName && names.indexOf(name) === -1) {
+      names.push(name);
     }
     this.questionNamesValues.forEach(name => {
       if (!!name && names.indexOf(name) === -1) {
@@ -106,8 +111,23 @@ export class SurveyLogicAction {
     if (!this.logicType || !this.logicType.questionNames) return [];
     return this.logicType.questionNames;
   }
-  private get elementName(): string {
-    return !!this.element && (<any>this.element).name || "";
+  public get elementName(): string {
+    if(!this.element) return "";
+    var prefix = "";
+    const owner = this.getOwnerElement();
+    if(!!owner && owner !== this.element) {
+      prefix = (<any>owner).name + ".";
+    }
+    return (prefix + (<any>this.element).name) || "";
+  }
+  private get elementOwnerName(): string {
+    const owner = this.getOwnerElement();
+    return !!owner ? (<any>owner).name || "" : "";
+  }
+  private getOwnerElement() : Base {
+    if(!this.element) return null;
+    const parentElement = this.parentElement;
+    return !!parentElement ? parentElement : this.element;
   }
   private get questionNamesValues(): Array<string> {
     return this.questionNames.map(name => this.element[name]);
@@ -264,7 +284,18 @@ export class SurveyLogicItem {
   public getActionTypes(): string[] {
     return this.actions.map(action => action.logicTypeName);
   }
-
+  public getContext(): Base {
+    const exp = this.expression;
+    if(!exp) return null;
+    if(exp.indexOf("{row.") < 0) return null;
+    for(var i = 0; i < this.actions.length; i ++) {
+      const parentEl = this.actions[i].parentElement;
+      if(!!parentEl) {
+        return parentEl;
+      }
+    }
+    return null;
+  }
   private getQuestionNamesFromExpression(names: string[]) {
     const conditionRunner = new ConditionRunner(this.expression);
     conditionRunner.getVariables().forEach(item => {

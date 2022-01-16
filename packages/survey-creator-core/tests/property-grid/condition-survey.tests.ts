@@ -1397,3 +1397,61 @@ test("isModified", () => {
   conditionEditor.text = "{q} >   2";
   expect(conditionEditor.isModified("{q} > 2")).toBeFalsy();
 });
+test("Set and remove condition editor context based on matrix dynamic", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", choices: [1, 2, 3, 4],
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "matrixdynamic", name: "q3",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+    ]
+  });
+  const conditionEditor = new ConditionEditor(survey);
+  expect(conditionEditor.context).toBeFalsy();
+  const firstPanel = conditionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstPanel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3 * 2);
+  questionName.value = "q1.row.col1";
+  let questionValue = firstPanel.getQuestionByName("questionValue");
+  expect(questionValue.getType()).toEqual("dropdown");
+  expect((<QuestionDropdownModel>questionValue).choices).toHaveLength(4);
+  expect(conditionEditor.context).toBeTruthy();
+  expect(conditionEditor.context.name).toEqual("q1");
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3);
+  questionName.value = "q2";
+  expect(conditionEditor.context).toBeFalsy();
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3 * 2);
+  questionName.value = "q1.row.col1";
+  questionValue = firstPanel.getQuestionByName("questionValue");
+  questionValue.value = 3;
+  expect(conditionEditor.text).toEqual("{row.col1} = 3");
+});
+test("Setup context initially", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", choices: [1, 2, 3, 4],
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "matrixdynamic", name: "q3",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+    ]
+  });
+  const conditionEditor = new ConditionEditor(survey);
+  conditionEditor.context = survey.getQuestionByName("q1");
+  conditionEditor.text = "{row.col1} = 2";
+  expect(conditionEditor.context).toBeTruthy();
+  expect(conditionEditor.context.name).toEqual("q1");
+  const firstPanel = conditionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstPanel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3);
+  expect(questionName.value).toEqual("q1.row.col1");
+});

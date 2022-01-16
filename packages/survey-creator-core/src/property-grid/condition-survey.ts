@@ -1,4 +1,4 @@
-import { SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue, PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel } from "survey-core";
+import { SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue, PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel, QuestionMatrixDropdownModelBase } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
@@ -227,11 +227,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private objectValue: Base;
   private surveyValue: SurveyModel;
+  private contextValue: Question;
   private panelValue: QuestionPanelDynamicModel;
   private textEditorValue: QuestionCommentModel;
   private addConditionQuestionsHash = {};
   private isModalValue: boolean = true;
   public allConditionQuestions: Array<ItemValue>;
+  public onContextChanged: (context: Question) => void;
 
   constructor(
     survey: SurveyModel,
@@ -389,6 +391,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const curOp = new ConditionsParser().parseExpression(this.text);
     return !prevOp.isEqual(curOp);
   }
+  public get context(): Question {
+    return this.contextValue;
+  }
+  public set context(val: Question) {
+    if(val === this.context) return;
+    this.contextValue = val;
+    this.updateNamesOnContextChanged();
+    if(this.onContextChanged) {
+      this.onContextChanged(val);
+    }
+  }
   private processText(val: string) {
     this.panel.panelCount = 0;
     const items = new ConditionEditorItemsBuilder().build(val);
@@ -446,10 +459,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     panel.getQuestionByName("conjunction").value = item.conjunction;
     (<QuestionDropdownModel>panel.getQuestionByName("operator")).choices = this.getOperators();
     panel.getQuestionByName("operator").value = item.operator;
-    (<QuestionDropdownModel>panel.getQuestionByName("questionName")).choices = this.allConditionQuestions;
+    (<QuestionDropdownModel>panel.getQuestionByName("questionName")).choices = this.getConditionQuestions();
     panel.getQuestionByName("questionName").titleLocation = this.panel.panels.indexOf(panel) == 0 ? "left" : "hidden";
-    if (!!this.getConditionQuestion(item.questionName)) {
-      panel.getQuestionByName("questionName").value = item.questionName;
+    const questionName = this.getQuestionNameToPanel(item.questionName);
+    if (!!this.getConditionQuestion(questionName)) {
+      panel.getQuestionByName("questionName").value = questionName;
     }
     if (!!panel.getQuestionByName("questionValue")) {
       panel.getQuestionByName("questionValue").value = item.value;
@@ -464,6 +478,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     removeQuestionQuestion.linkValueText = "";
     removeQuestionQuestion.linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
     this.isSettingPanelValues = false;
+  }
+  private getConditionQuestions(): Array<ItemValue> {
+    if(!this.context) return this.allConditionQuestions;
+    const res = [];
+    for(var i = 0; i < this.allConditionQuestions.length; i ++) {
+      const item: any = this.allConditionQuestions[i];
+      if(!item.context || item.context === this.context) {
+        res.push(item);
+      }
+    }
+    return res;
   }
   private getText(): string {
     if (this.textEditor.visible) return this.textEditor.value;
@@ -488,12 +513,42 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private createEditorItemFromPanel(panel: PanelModel): SurveyConditionEditorItem {
     const item = new SurveyConditionEditorItem(this.survey);
     item.conjunction = panel.getQuestionByName("conjunction").value;
-    item.questionName = panel.getQuestionByName("questionName").value;
+    item.questionName = this.getQuestionNameFromPanel(panel.getQuestionByName("questionName").value);
     item.operator = panel.getQuestionByName("operator").value;
     if (!!panel.getQuestionByName("questionValue")) {
       item.value = panel.getQuestionByName("questionValue").value;
     }
     return item;
+  }
+  private getQuestionNameFromPanel(name: string): string {
+    if(!this.context || !name) return name;
+    const prefix = this.context.getValueName() + ".";
+    return name.replace(prefix, "");
+  }
+  private getQuestionNameToPanel(name: string): string {
+    if(!this.context || !name) return name;
+    if(name.indexOf("row.") !== 0) return name;
+    return this.context.getValueName() + "." + name;
+  }
+  private getContextFromPanels(): Question {
+    if(!!this.object) return null;
+    for(var i = 0; i < this.panel.panels.length; i ++) {
+      const questionName = this.panel.panels[i].getQuestionByName("questionName").value;
+      const context = this.getContextByQuestionName(questionName);
+      if(!!context) return context;
+    }
+    return null;
+  }
+  private updateNamesOnContextChanged() {
+    for(var i = 0; i < this.panel.panels.length; i ++) {
+      this.panel.panels[i].getQuestionByName("questionName").choices = this.getConditionQuestions();
+    }
+  }
+  private getContextByQuestionName(name: string): Question {
+    if(!name) return null;
+    if(name.indexOf(".row.") < 0) return null;
+    name = name.substring(0, name.indexOf(".row."));
+    return <Question>this.survey.getQuestionByValueName(name);
   }
   private createAllConditionQuestions(): Array<ItemValue> {
     if (!this.survey) return [];
@@ -501,8 +556,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const questions = this.survey.getAllQuestions();
     if (questions.length > 0) {
       for (let i = 0; i < questions.length; i++) {
-        if (this.object == questions[i]) continue;
-        questions[i].addConditionObjectsByContext(res, this.object);
+        const question = questions[i];
+        if (this.object == question) continue;
+        const context = !!this.object ? this.object : (!this.context || this.context === question);
+        question.addConditionObjectsByContext(res, context);
       }
       this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res);
       for (let i = 0; i < res.length; i++) {
@@ -620,16 +677,16 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const question = this.getConditionQuestion(questionName);
     if (!question) return null;
     if (questionName.indexOf(question.getValueName()) == 0) {
-      path = questionName.substr(question.getValueName().length);
+      path = questionName.substring(question.getValueName().length);
     }
     if (questionName.indexOf("row.") == 0) {
-      path = questionName.substr("row.".length);
+      path = questionName.substring("row.".length);
     }
     if (!path) {
       path = questionName;
     }
     if (!!path && path[0] == ".") {
-      path = path.substr(1);
+      path = path.substring(1);
     }
     const json = question && question.getConditionJson ? question.getConditionJson(operator, path) : null;
     if (!!json && json.type == "radiogroup") {
@@ -704,7 +761,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     for (let i = 0; i < operatorTypes.length; i++) {
       let name = operatorTypes[i];
       if (name[0] == "!") {
-        notContains.push(name.substr(1));
+        notContains.push(name.substring(1));
       } else {
         contains.push(name);
       }
@@ -728,6 +785,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private onPanelValueChanged(panel: PanelModel, name: string) {
     if (name == "questionName") {
+      this.context = this.getContextFromPanels();
       this.rebuildQuestionValue(panel);
       if (!this.isSettingPanelValues) {
         panel.getQuestionByName("operator").value = "equal";
