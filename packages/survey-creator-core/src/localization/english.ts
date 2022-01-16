@@ -306,7 +306,7 @@ export var enStrings = {
     allowEmptyResponse: "Allow empty respose",
     titlePlaceholder: "Input title here",
     surveyTitlePlaceholder: "Input survey title here",
-    pageTitlePlaceholder: "Input page title here",
+    pageTitlePlaceholder: "Page {num}",
     descriptionPlaceholder: "Enter a description",
     surveyDescriptionPlaceholder: "Enter a survey description",
     pageDescriptionPlaceholder: "Enter a page description",

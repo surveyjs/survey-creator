@@ -174,6 +174,7 @@ export class SurveyLogicUI extends SurveyLogic {
   protected hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;
     if (!this.expressionEditor.isReady) {
+      this.expressionEditor.hasErrors();
       this.errorText = getLogicString("expressionInvalid");
       !!creator &&
         creator.notify(this.errorText, "error");

@@ -749,6 +749,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (options.question.name === "questionName") {
       options.question.allowRootStyle = false;
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
+      options.cssClasses.error.root = "svc-logic-operator__error";
+      options.cssClasses.onError = "svc-logic-operator--error";
     }
     if (options.question.name === "operator") {
       options.question.allowRootStyle = false;
@@ -762,6 +764,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (options.question.name === "questionValue") {
       assignDefaultV2Classes(options.cssClasses, options.question.getType());
       options.cssClasses.mainRoot += " svc-logic-question-value";
+      options.cssClasses.error.root = "svc-logic-operator__error";
     }
     if (options.question.name === "panel") {
       options.cssClasses.root += " svc-logic-paneldynamic";

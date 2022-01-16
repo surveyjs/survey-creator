@@ -1,5 +1,5 @@
-import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot } from "../../helper";
+import { ClientFunction, Selector, t } from "testcafe";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, getSelectOptionByText, logicActionSelector } from "../../helper";
 
 const title = "Logic tab Screenshot";
 
@@ -42,6 +42,9 @@ const jsonOneRule = {
   ]
 };
 const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
+const ruleContent = Selector(".sl-table__cell--detail-panel");
+const addNewRuleSelector = Selector(".svc-logic-tab__content-action");
+const doneButtonSelector = Selector(".sl-panel__done-button");
 
 test("one rule view", async (t) => {
   await t.resizeWindow(1920, 900);
@@ -102,8 +105,9 @@ test("Check logic error notifier", async (t) => {
     ]
   });
   await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName));
-  await t.click(Selector(".svc-logic-tab__content-action")).click(Selector(".sl-panel__done-button"));
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(addNewRuleSelector)
+    .click(doneButtonSelector);
   await checkElementScreenshot("logic-error-notifier.png", Selector(".svc-notifier--error"), t);
 });
 
@@ -169,7 +173,6 @@ const jsonMultipleConditionsMultipleActions = {
 };
 test("rule content", async (t) => {
   await t.resizeWindow(1920, 900);
-  const ruleContent = Selector(".sl-table__cell--detail-panel");
   await setJSON(jsonMultipleConditionsMultipleActions);
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
@@ -188,4 +191,34 @@ test("rule rows", async (t) => {
     .click(logicDetailButtonElement);
   await checkElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t);
   await checkElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t);
+});
+
+test("unsaved rule", async (t) => {
+  await t.resizeWindow(1920, 900);
+  await setJSON(jsonOneRule);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(addNewRuleSelector)
+    .click(doneButtonSelector);
+
+  await checkElementScreenshot("logic-error-condition-question-name.png", ruleContent, t);
+  await t
+    .click(logicQuestionSelector)
+    .click(getSelectOptionByText("q1"))
+    .click(doneButtonSelector);
+
+  await checkElementScreenshot("logic-error-condition-question-value.png", ruleContent, t);
+
+  await t
+    .typeText(Selector(".sd-input.sd-input--error"), "test")
+    .click(doneButtonSelector);
+
+  await checkElementScreenshot("logic-error-action-empty.png", ruleContent, t);
+
+  await t
+    .click(logicActionSelector)
+    .click(getSelectOptionByText("Copy question value"))
+    .click(doneButtonSelector);
+
+  await checkElementScreenshot("logic-error-action-questions.png", ruleContent, t);
 });

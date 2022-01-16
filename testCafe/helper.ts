@@ -56,11 +56,29 @@ export const toolboxItems = Selector(".svc-toolbox__tool").filterVisible();
 export const toolboxItemIcons = Selector(".svc-toolbox__tool .svc-toolbox__item-container").filterVisible();
 export const toolboxItemTitles = Selector(".svc-toolbox__tool .svc-toolbox__item > .svc-toolbox__item-title").filterVisible();
 
+export const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
+export const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filterVisible();
+export const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
+export const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterVisible();
+export const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
+export const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
+export const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisible();
+export const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
+
 export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey") {
   return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text).filterVisible();
 }
+export function getSelectOptionByText(text: string) {
+  return Selector("option").withExactText(text).filterVisible();
+}
+export function getBarItemByText(text) {
+  return Selector(".sv-action-bar-item__title").withText(text).parent(".sv-action-bar-item");
+}
+export function getPropertyGridCategory(categoryName) {
+  return Selector(".spg-title span").withText(categoryName);
+}
 
-export function getBarItemByTitle(text) {
+export function getBarItemByTitle(text: string) {
   return Selector(".sv-action-bar-item[title=\"" + text + "\"]");
 }
 export function getListItemByText(text) {

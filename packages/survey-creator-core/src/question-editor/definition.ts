@@ -292,6 +292,7 @@ export class SurveyQuestionEditorDefinition {
         "title",
         "isRequired",
         "readOnly",
+        "isUnique",
         "showInMultipleColumns",
         "width",
         "minWidth",

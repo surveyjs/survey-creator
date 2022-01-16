@@ -1776,6 +1776,16 @@ test("SurveyPropertyDefaultValueEditor choicesVisibleIf/EnableIf", () => {
   expect(editQuestion.choices[0].isEnabled).toBeTruthy();
 });
 
+test("SurveyPropertyDefaultValueEditor: Default Value Title", () => {
+  PropertyGridEditorCollection.register(new PropertyGridValueEditor());
+  var question = new QuestionTextModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var defaultValueQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("defaultValue")
+  );
+  expect(editorLocalization.getString("pe.defaultValue")).toEqual(defaultValueQuestion.title);
+});
+
 test("SurveyHelper convertTextToItemValues", () => {
   var choices = new Array<ItemValue>();
   var editor = new FastEntryEditor(choices);
@@ -1829,7 +1839,7 @@ test("SurveyPropertyDefaultValueEditor json properties filtering", () => {
   expect(json.minWidth).toBeFalsy();
   expect(json.maxWidth).toBeFalsy();
   expect(json.cellType).toBeFalsy();
-  expect(json.title).toEqual("my title");
+  expect(json.title).toEqual(editorLocalization.getString("pe.defaultValue"));
   expect(json.readOnly).toBeFalsy();
   expect(defaultValueEditor.question.getType()).toEqual("text");
   expect(json.titleLocation).toEqual("hidden");

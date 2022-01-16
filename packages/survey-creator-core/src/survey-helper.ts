@@ -89,11 +89,7 @@ export class SurveyHelper {
     if (showObjectTitle && obj["title"]) return obj["title"];
     if (showObjectTitle && obj["text"]) return obj["text"];
     if (obj["name"]) return obj["name"];
-    if (objType != ObjType.Page) return "";
-    var data = <SurveyModel>(<PageModel>obj)["data"];
-    if (!data) data = <SurveyModel>(<PageModel>obj)["survey"]; //TODO
-    var index = data.pages.indexOf(<PageModel>obj);
-    return "[Page " + (index + 1) + "]";
+    return "";
   }
   public static getElements(
     element: any,
