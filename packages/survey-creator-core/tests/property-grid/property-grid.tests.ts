@@ -1247,6 +1247,16 @@ test("options.onMatrixDropdownColumnAddedCallback", () => {
   columnsQuestion.addRow();
   expect(question.columns[3].title).toEqual("q1:4");
 });
+test("matrix column has isUnique property", () => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  var propertyGrid = new PropertyGridModelTester(question.columns[0]);
+  var isUniqueQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("isUnique")
+  );
+  expect(isUniqueQuestion).toBeTruthy();
+  expect(isUniqueQuestion.getType()).toEqual("boolean");
+});
 test("options.onSetPropertyEditorOptionsCallback", () => {
   const options = new EmptySurveyCreatorOptions();
   var propName = "";
