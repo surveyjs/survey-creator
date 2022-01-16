@@ -1,7 +1,7 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, setJSON } from "../../helper";
+import { url, screenshotComparerOptions, setJSON, checkElementScreenshot } from "../../helper";
 
 const title = "Choices section Screenshot";
 
@@ -110,4 +110,40 @@ test("Check items empty", async (t) => {
   await t
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
+});
+
+test("Collection editor headers", async (t) => {
+  await t.resizeWindow(1920, 1080);
+
+  const addCustomProperty = ClientFunction(() => {
+    window["Survey"].JsonObject.metaData.addProperty("itemvalue", { name: "customColumn" });
+  });
+
+  const surveyJSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "question1",
+            "choices": [1, 2, 3],
+          },
+        ]
+      }
+    ]
+  };
+
+  await addCustomProperty();
+  await setJSON(surveyJSON);
+
+  await t
+    .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
+  await t
+    .click(Selector("h4[aria-label=General]"));
+  await t
+    .click(Selector("h4[aria-label=Choices]"));
+
+  const sectionContentElement = Selector("h4[aria-label=Choices]").parent().nextSibling();
+  await checkElementScreenshot("collection-editor-header.png", sectionContentElement, t);
 });

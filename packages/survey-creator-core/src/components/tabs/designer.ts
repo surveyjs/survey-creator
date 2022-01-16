@@ -29,6 +29,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
         this.creator.addPage(newPage);
       }
     };
+    newPage.num = this.survey.pages.length + 1;
     newPage.onPropertyChanged.add(checkNewElementHandler);
     this.newPage = newPage;
     DragDropSurveyElements.newGhostPage = newPage;
@@ -66,6 +67,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     this.survey.onQuestionRemoved.add(this.checkNewPageHandler);
     this.survey.onPanelAdded.add(this.checkNewPageHandler);
     this.survey.onPanelRemoved.add(this.checkNewPageHandler);
+    this.creator.pagesController.onPagesChanged.add(this.onPagesChangedHandler);
     this.checkNewPage();
     this.widthUpdater && this.widthUpdater.dispose();
     this.widthUpdater = new ComputedUpdater<string>(() => {
@@ -73,8 +75,14 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     });
     this.withModifier = <any>this.widthUpdater;
   }
+  private onPagesChangedHandler = (sender: any, options: any) => {
+    if(this.newPage) {
+      this.newPage.num = this.survey.pages.length + 1;
+    }
+  }
   public dispose() {
     super.dispose();
+    this.creator.pagesController.onPagesChanged.remove(this.onPagesChangedHandler);
     this.survey.onPropertyChanged.remove(this.surveyOnPropertyChanged);
     this.survey.onQuestionAdded.remove(this.checkNewPageHandler);
     this.survey.onQuestionRemoved.remove(this.checkNewPageHandler);

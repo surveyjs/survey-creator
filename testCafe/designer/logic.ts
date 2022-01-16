@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionPanelElement, logicDetailButtonElement, logicDropdownValueSelector, getSelectOptionByText, getBarItemByText, getListItemByText } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 
 const title = "Logic tab";
@@ -94,19 +94,6 @@ fixture(title)
     })();
   });
 
-function getSelectOptionByText(text: string) {
-  return Selector("option").withExactText(text).filterVisible();
-}
-function getBarItemByText(text) {
-  return Selector(".sv-action-bar-item__title").withText(text).parent(".sv-action-bar-item");
-}
-function getListItemByText(text) {
-  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
-}
-function getPropertyGridCategory(categoryName) {
-  return Selector(".spg-title span").withText(categoryName);
-}
-
 const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();
 const conditionBuilder = Selector(".sl-embedded-survey[data-name=\"conditions\"] div[data-name=\"panel\"]");
 const conditionTextEdit = Selector(".sl-embedded-survey[data-name=\"conditions\"] div[data-name=\"textEditor\"]");
@@ -114,14 +101,6 @@ const conditionTextEdit = Selector(".sl-embedded-survey[data-name=\"conditions\"
 const newRuleCondition = "New rule is not set";
 const newRuleActions = "Value is empty";
 const cellRules = Selector(tableRulesSelector.find(".sl-table__cell[data-responsive-title=\"rules\"]"));
-const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
-const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filterVisible();
-const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
-const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterVisible();
-const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
-const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
-const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisible();
-const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
 const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New Rule");

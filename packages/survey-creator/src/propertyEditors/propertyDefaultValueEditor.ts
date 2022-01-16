@@ -16,6 +16,7 @@ export class SurveyPropertyDefaultValueEditor extends SurveyPropertyModalEditor 
   public static createJsonFromQuestion(obj: any, readOnly: boolean): any {
     var qjson = new Survey.JsonObject().toJsonObject(obj);
     qjson.name = SurveyPropertyDefaultValueEditor.defaultQuestionName;
+    qjson.title = editorLocalization.getString("pe.defaultValue");
     qjson.type = obj.getType();
     if (qjson.type == "expression") {
       qjson.type = "text";
