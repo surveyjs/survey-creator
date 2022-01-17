@@ -1,9 +1,11 @@
 import * as ko from "knockout";
 import { CreatorBase, StringEditorViewModelBase } from "@survey/creator";
 import { LocalizableString } from "survey-core";
+import { ImplementorBase } from "survey-knockout-ui";
 const template = require("./string-editor.html");
 
 export class StringEditorViewModel {
+  private implementor = undefined;
   private baseModel: StringEditorViewModelBase;
 
   getEditorElement = (element) => {
@@ -14,6 +16,7 @@ export class StringEditorViewModel {
 
   constructor(public locString: any, private creator: CreatorBase, element: any) {
     this.baseModel = new StringEditorViewModelBase(locString, creator);
+    this.implementor = new ImplementorBase(this.baseModel);
     this.focusEditor = () => {
       this.getEditorElement(element).focus();
     };
@@ -72,6 +75,8 @@ export class StringEditorViewModel {
     this.locString.onSearchChanged = undefined;
     this.focusEditor = undefined;
     this.baseModel.blurEditor = undefined;
+    this.implementor.dispose();
+    this.implementor = undefined;
   }
 }
 

@@ -3159,7 +3159,7 @@ QUnit.test(
     assert.equal(json.minWidth, undefined);
     assert.equal(json.maxWidth, undefined);
     assert.equal(json.cellType, undefined);
-    assert.equal(json.title, "my title");
+    assert.equal(json.title, editorLocalization.getString("pe.defaultValue"));
     assert.equal(json.readOnly, true);
     assert.equal(json.type, "text");
     assert.equal(json.titleLocation, "hidden");
@@ -3172,7 +3172,7 @@ QUnit.test(
     assert.equal(json.minWidth, undefined);
     assert.equal(json.maxWidth, undefined);
     assert.equal(json.cellType, undefined);
-    assert.equal(json.title, "my title");
+    assert.equal(json.title, editorLocalization.getString("pe.defaultValue"));
     assert.equal(json.readOnly, false);
     assert.equal(json.type, "text");
     assert.equal(json.titleLocation, "hidden");

@@ -1,4 +1,4 @@
-import { SurveyModel, Action, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
+import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
 import { LogicItemEditor } from "./logic-item-editor";
@@ -118,8 +118,14 @@ export class SurveyLogicUI extends SurveyLogic {
   private getLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
     let res: ILogicItemUI = this.itemUIHash[item.id];
     if (!res) {
+      const context = <Question>item.getContext();
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
+      res.expressionEditor.context = context;
+      res.itemEditor.context = context;
       res.expressionEditor.text = item.expression;
+      res.expressionEditor.onContextChanged = (context: Question): void => {
+        res.itemEditor.context = context;
+      };
       this.itemUIHash[item.id] = res;
     }
     return res;
@@ -174,6 +180,7 @@ export class SurveyLogicUI extends SurveyLogic {
   protected hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;
     if (!this.expressionEditor.isReady) {
+      this.expressionEditor.hasErrors();
       this.errorText = getLogicString("expressionInvalid");
       !!creator &&
         creator.notify(this.errorText, "error");

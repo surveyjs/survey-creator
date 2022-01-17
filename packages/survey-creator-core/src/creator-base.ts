@@ -157,11 +157,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   /**
   * Set it to false to hide survey title and coresponding properties
   */
-  get allowEditSurveyTitle() {
+  get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
   set allowEditSurveyTitle(val: boolean) {
-    ["title", "description", "logo", "showTitle", "logoWidth", "logoHeight", "logoFit"].forEach(propertyName => Serializer.findProperty("survey", propertyName).visible = val);
+    this.setPropertyVisibility("survey", val, "title", "description", "logo", "showTitle", "logoWidth", "logoHeight");
     this.setPropertyValue("allowEditSurveyTitle", val);
     this.designerPropertyGrid && this.designerPropertyGrid.refresh();
   }
@@ -172,7 +172,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * @see haveCommercialLicense
    */
   @property({ defaultValue: false }) haveCommercialLicense: boolean;
-  public get licenseText() {
+  public get licenseText(): string {
     return this.getLocString("survey.license");
   }
   /**
@@ -728,11 +728,14 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
-   * Use this event to modify the list of the strings available in a translation tab.
-   * <br/> sender - the survey creator object that fires the event
-   * <br/> options.obj - the survey object which property translations are edited in the translation tab.
-   * <br/> options.propertyName - the name of the property.
-   * <br/> options.visible - a boolean value. You can change it to hide the property.
+   * Use this event to modify the list of the strings available in the Translation tab.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being edited in the Translation tab.
+   * - `options.propertyName` - The name of a property being translated.
+   * - `options.visible` - A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
    */
   public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
 
@@ -1290,9 +1293,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     if (typeof options.pageEditMode !== "undefined") {
       this.pageEditModeValue = options.pageEditMode;
       if (this.pageEditModeValue === "single") {
-        Survey.Serializer.findProperty("survey", "pages").visible = false;
-        Survey.Serializer.findProperty("question", "page").visible = false;
-        Survey.Serializer.findProperty("panel", "page").visible = false;
+        this.setPropertyVisibility("survey", false, "pages");
+        this.setPropertyVisibility("question", false, "page");
+        this.setPropertyVisibility("panel", false, "page");
         this.showJSONEditorTab = false;
       }
     }
@@ -1303,10 +1306,19 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       prop.placeholder = value;
     }
   }
+  private setPropertyVisibility(className: string, visible: boolean, ...properties: string[]) {
+    if(!Array.isArray(properties)) return;
+    for(var i = 0; i < properties.length; i ++) {
+      const prop = Serializer.findProperty(className, properties[i]);
+      if(!!prop) {
+        prop.visible = visible;
+      }
+    }
+  }
   private patchMetadata(): void {
     this.setPropertyPlaceHolder("survey", "title", "pe.surveyTitlePlaceholder");
     this.setPropertyPlaceHolder("survey", "description", "pe.surveyDescriptionPlaceholder");
-    Serializer.findProperty("survey", "logoPosition").visible = false;
+    this.setPropertyVisibility("survey", false, "logoPosition");
     this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
     this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
   }

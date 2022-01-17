@@ -7,7 +7,8 @@ import {
   SurveyTriggerSkip,
   QuestionMatrixDynamicModel,
   AdaptiveActionContainer,
-  SurveyTriggerSetValue
+  SurveyTriggerSetValue,
+  QuestionMatrixDropdownModelBase
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -1658,4 +1659,189 @@ test("Logic action expand/collapse icon update", () => {
   row.hideDetailPanel();
   expect(row.isDetailPanelShowing).toBe(false);
   expect(expandAction.iconName).toEqual("icon-logic-expand");
+});
+test("SurveyLogicUI: check show/hide action switching placeholder 'Select panel/question'", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      {
+        type: "panel", name: "panel1",
+        elements: [
+          { type: "text", name: "q2" }
+        ]
+      },
+    ]
+  });
+  var logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(0);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "panel_visibility";
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select panel...");
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select question...");
+  panel.getQuestionByName("logicTypeName").value = "panel_visibility";
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select panel...");
+});
+test("Use logic for matrix columns", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2", visibleIf: "{row.col1} = 1" }]
+      },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  const item = logic.items[0];
+  expect(item.expression).toEqual("{row.col1} = 1");
+  expect(item.actions).toHaveLength(1);
+  expect(item.actions[0].logicTypeName).toEqual(
+    "column_visibility"
+  );
+});
+test("LogicUI: edit matrix column visibleIf", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2", visibleIf: "{row.col1} = 1" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.editItem(logic.items[0]);
+  const expressionEditor = logic.expressionEditor;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(expressionEditor.context.name).toEqual("q1");
+  const itemEditor = logic.itemEditor;
+  expect(itemEditor.panels).toHaveLength(1);
+  const actionPanel = itemEditor.panels[0];
+  const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.value).toEqual("column_visibility");
+  expect(logicTypeName.displayValue).toEqual("Show (hide) column");
+  const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3);
+  expect(colSelector.choices[0].text).toEqual("q1.col1");
+  expect(colSelector.value).toEqual("q1.col2");
+  colSelector.value = "q1.col3";
+  logic.saveEditableItem();
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
+  expect(matrix.columns[1].visibleIf).toBeFalsy();
+  expect(matrix.columns[2].name).toEqual("col3");
+  expect(matrix.columns[2].visibleIf).toEqual("{row.col1} = 1");
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  const row = itemsQuestion.visibleRows[0];
+  expect(row.cells[0].value).toEqual("If 'row.col1' == 1, make column 'col3' of question 'q1' visible");
+});
+test("LogicUI: edit matrix column visibleIf. Filter selector if there is a context", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "matrixdynamic", name: "q3", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2" }]
+      },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  expect(expressionEditor.context).toBeFalsy();
+  const itemEditor = logic.itemEditor;
+  expect(itemEditor.panels).toHaveLength(1);
+  expect(itemEditor.context).toBeFalsy();
+  let actionPanel = itemEditor.panels[0];
+  actionPanel.getQuestionByName("logicTypeName").value = "column_visibility";
+  let colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3 + 2);
+
+  expect(expressionEditor.panel.panelCount).toEqual(1);
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = "q1.row.col1";
+  let questionValue = firstExpressionPanel.getQuestionByName("questionValue");
+  questionValue.value = 2;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(itemEditor.context).toBeTruthy();
+  colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3);
+  questionName.value = "q2";
+  colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3 + 2);
+});
+test("LogicUI: edit matrix column visibleIf. Filter logic types and delete actions if there is a context", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "matrixdynamic", name: "q3", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2" }]
+      },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  const itemEditor = logic.itemEditor;
+  let actionPanel = itemEditor.panels[0];
+  let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.choices.length).toBeGreaterThan(3);
+  logicTypeName.value = "trigger_complete";
+  itemEditor.panel.addPanel();
+  actionPanel = itemEditor.panels[1];
+  actionPanel.getQuestionByName("logicTypeName").value = "column_visibility";
+  expect(itemEditor.panels).toHaveLength(2);
+
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = "q1.row.col1";
+  let questionValue = firstExpressionPanel.getQuestionByName("questionValue");
+  questionValue.value = 2;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(itemEditor.context).toBeTruthy();
+  expect(itemEditor.panels).toHaveLength(1);
+  actionPanel = itemEditor.panels[0];
+  logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.value).toEqual("column_visibility");
+
+  questionName.value = "q2";
+  logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.choices.length).toBeGreaterThan(3);
+  expect(logicTypeName.value).toEqual("column_visibility");
+});
+test("LogicUI: edit matrix column visibleIf. Filter logic types by context initially", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2", visibleIf: "{row.col1} = 1" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.editItem(logic.items[0]);
+  const itemEditor = logic.itemEditor;
+  expect(itemEditor.context).toBeTruthy();
+  let actionPanel = itemEditor.panels[0];
+  let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.value).toEqual("column_visibility");
+  expect(logicTypeName.choices.length).toEqual(3);
 });

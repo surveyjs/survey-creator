@@ -9,7 +9,9 @@ import {
   FunctionFactory,
   Question,
   QuestionHtmlModel,
-  QuestionDropdownModel
+  QuestionDropdownModel,
+  SurveyElement,
+  QuestionMatrixDropdownModelBase
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -53,6 +55,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private titleActionsCreator: PropertyGridTitleActionsCreator;
   private initialSelectedElements: any = {};
   private isModifiedValue: boolean = false;
+  private contextValue: Question;
   constructor(
     editableItem: SurveyLogicItem,
     protected options: ISurveyCreatorOptions = null
@@ -121,7 +124,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
-    // this.editSurvey.css = defaultV2Css;
     this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {
@@ -156,6 +158,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   public getActionByPanel(panel: PanelModel): SurveyLogicAction {
     return panel["action"];
+  }
+  public get context(): Question { return this.contextValue; }
+  public set context(val: Question) {
+    if(val === this.context) return;
+    this.contextValue = val;
+    this.updatePanelsOnContextChanged();
   }
   private getLogicTypeByPanel(panel: PanelModel): SurveyLogicType {
     return this.getLogicTypeByName(
@@ -250,23 +258,21 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     options.cssClasses.answered = "svc-logic-question--answered";
 
     if (options.question.name === "logicTypeName") {
+      options.question.allowRootStyle = false;
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--action";
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
     if (options.question.name === "elementSelector" || options.question.name === "setToName" || options.question.name === "fromName" || options.question.name === "gotoName") {
+      options.question.allowRootStyle = false;
       options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
-
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
     if (options.question.name === "setToName" || options.question.name === "fromName") {
+      options.question.allowRootStyle = false;
       options.question.titleLocation = "left";
       options.question.startWithNewLine = false;
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
-
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
@@ -275,7 +281,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.mainRoot += " svc-logic-question-value";
     }
     if (options.question.name === "removeAction") {
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
+      options.question.allowRootStyle = false;
       options.cssClasses.mainRoot += " svc-logic-condition-remove-question";
     }
     // options.cssClasses.mainRoot = "sd-question sd-row__question";
@@ -329,17 +335,14 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     var action = this.getActionByPanel(panel);
     var logicType = this.getLogicTypeByPanel(panel);
     var elementPanel = this.getElementPanelObj(panel);
-    var elementSelector = null;
+    var selectedElement = null;
     if (!elementPanel) {
-      elementSelector = this.getElementBySelectorName(
-        logicType,
-        panel.getQuestionByName("elementSelector").value
-      );
+      selectedElement = this.getElementBySelectorName(panel.getQuestionByName("elementSelector").value);
     }
     var createNewAction =
       !action ||
       action.logicType != logicType ||
-      (!!elementSelector && action.element != elementSelector);
+      (!!selectedElement && action.element != selectedElement);
     if (!createNewAction) {
       if (!!elementPanel) {
         action.element.fromJSON(elementPanel.toJSON());
@@ -348,7 +351,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
     return new SurveyLogicAction(
       logicType,
-      !!elementPanel ? elementPanel : elementSelector,
+      !!elementPanel ? elementPanel : selectedElement,
       this.survey
     );
   }
@@ -397,11 +400,42 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
 
     return panel;
   }
+  private updatePanelsOnContextChanged() {
+    this.logicTypeChoices = this.getLogicTypeChoices();
+    if(!!this.context) {
+      for(var i = this.panels.length - 1; i >= 0; i --) {
+        const panel = this.panels[i];
+        if(this.isPanelSupportContext(panel)) continue;
+        if(i === 0 && this.panels.length === 1) {
+          panel.getQuestionByName("logicTypeName").clearValue();
+        }
+        else {
+          this.panel.removePanel(i);
+        }
+      }
+    }
+    for(var i = 0; i < this.panels.length; i ++) {
+      this.updateSelectorOnContextChanged(this.panels[i]);
+    }
+  }
+  private isPanelSupportContext(panel: PanelModel): boolean {
+    const logicType = this.getLogicTypeByPanel(panel);
+    return logicType.supportContext(this.context);
+  }
+  private updateSelectorOnContextChanged(panel: PanelModel) {
+    const logicTypeQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
+    logicTypeQuestion.choices = this.logicTypeChoices;
+    const logicType = this.getLogicTypeByPanel(panel);
+    if (!this.isElementSelectorVisible(logicType)) return;
+    var selectorQuestion = <QuestionDropdownModel>panel.getQuestionByName("elementSelector");
+    selectorQuestion.choices = this.getSelectorChoices(logicType);
+  }
   private getLogicTypeChoices(): Array<ItemValue> {
     var res = [];
     var logicTypes = this.editableItem.getVisibleLogicTypes();
     for (var i = 0; i < logicTypes.length; i++) {
       var lt = logicTypes[i];
+      if(!!this.context && !lt.supportContext(this.context)) continue;
       var item = new ItemValue(lt.name, lt.displayName);
       if (lt.isUniqueItem) {
         item.visibleIf = "logicTypeVisibleIf({item})";
@@ -436,9 +470,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     question.optionsCaption = this.getSelectorOptionsText(logicType);
     var action = this.getActionByPanel(panel);
     question.value =
-      !!action && !!action.element && action.logicType == logicType
-        ? (<any>action.element).name
-        : undefined;
+      !!action && action.logicType == logicType ? action.elementName : undefined;
   }
   private setupElementPanel(panel: PanelModel, logicType: SurveyLogicType) {
     this.titleActionsCreator = null;
@@ -510,12 +542,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     question.title = originalQuestion.title;
     question.titleLocation = "top";
   }
-  private static elementSelectorTypes = ["question", "page", "panel"];
   private isElementSelectorVisible(logicType: SurveyLogicType): boolean {
-    if (!logicType) return false;
-    return (
-      LogicItemEditor.elementSelectorTypes.indexOf(logicType.baseClass) > -1
-    );
+    return !!logicType && logicType.hasSelectorChoices;
   }
   private isElementPanelVisible(logicType: SurveyLogicType): boolean {
     if (!logicType) return false;
@@ -559,28 +587,33 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   public getLocString(name: string): string {
     return editorLocalization.getString(name);
   }
+  private getElementText(el: SurveyElement, showTitles: boolean): string {
+    var text = "";
+    if (showTitles) {
+      text = el.locTitle.renderedHtml;
+    }
+    if (!text) text = el.name;
+    return text;
+  }
+  private selectorElementsHash = {};
   private getSelectorChoices(logicType: SurveyLogicType): Array<ItemValue> {
-    var elementType = logicType.baseClass;
-    var elements = [];
-    if (elementType == "question") {
-      elements = this.survey.getAllQuestions();
-    }
-    if (elementType == "page") {
-      elements = this.survey.pages;
-    }
-    if (elementType == "panel") {
-      elements = this.survey.getAllPanels();
-    }
-    var res = [];
+    if(!logicType.hasSelectorChoices) return [];
+    const elements = logicType.getSelectorChoices(this.survey, this.context);
+    const res = [];
     var showTitles = this.options.showTitlesInExpressions;
     for (var i = 0; i < elements.length; i++) {
-      var el = elements[i];
-      var text = "";
-      if (showTitles) {
-        text = el.locTitle.renderedHtml;
+      var namePrefix = "";
+      var textPrefix = "";
+      const el = elements[i];
+      const owner = <Question>logicType.getParentElement(el);
+      if(owner) {
+        namePrefix = owner.name + ".";
+        textPrefix = this.getElementText(owner, showTitles) + ".";
       }
-      if (!text) text = el.name;
-      var itemValue = new ItemValue(el.name, text);
+      var text = this.getElementText(el, showTitles);
+      const value = namePrefix + el.name;
+      const itemValue = new ItemValue(value, textPrefix + text);
+      this.selectorElementsHash[value] = el;
       if (
         !!el[logicType.propertyName] &&
         !this.isElementInInitialSelection(logicType.name, el)
@@ -609,14 +642,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           : "pe.conditionSelectQuestion";
     return this.getLocString(optionsCaptionName);
   }
-  private getElementBySelectorName(
-    logicType: SurveyLogicType,
-    name: string
-  ): Base {
-    if (!name) return null;
-    var elementType = logicType.baseClass;
-    if (elementType == "question") return this.survey.getQuestionByName(name);
-    if (elementType == "panel") return <Base><any>this.survey.getPanelByName(name);
-    return this.survey.getPageByName(name);
+  private getElementBySelectorName(value: any): Base {
+    if(!value) return null;
+    return this.selectorElementsHash[value];
   }
 }

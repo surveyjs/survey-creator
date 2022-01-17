@@ -705,7 +705,6 @@ export class Translation extends Base implements ITranslationLocales {
         matrix.titleLocation = "hidden";
         matrix.name = this.getStringsSurveyQuestionName(group, parent);
         matrix.showHeader = false;
-        matrix.showColumnHeader = false;
         panel.addQuestion(matrix);
         this.addLocaleColumns(matrix);
       }

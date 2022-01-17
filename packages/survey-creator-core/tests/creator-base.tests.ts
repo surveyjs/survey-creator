@@ -1690,6 +1690,15 @@ test("Set allowEditSurveyTitle option", (): any => {
   creator.allowEditSurveyTitle = true;
   expect(Serializer.findProperty("survey", "title").visible).toBeTruthy();
 });
+test("Set allowEditSurveyTitle option with removed logoHeight property", (): any => {
+  Serializer.removeProperty("survey", "logoHeight");
+  const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  expect(creator.allowEditSurveyTitle).toBeFalsy();
+  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeFalsy();
+  creator.allowEditSurveyTitle = true;
+  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeTruthy();
+  Serializer.addProperty("survey", { name: "logoHeight", default: "200px", minValue: 0 });
+});
 test("creator.onActiveTabChanged", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,

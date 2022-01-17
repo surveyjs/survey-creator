@@ -98,15 +98,15 @@ test("Page switcher", async (t) => {
 
     .click(Selector("#nextPage"))
     .expect(Selector(".sd-question__title").withText("question2").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("page3")
+    .expect(Selector("#pageSelector").textContent).contains("Page 3")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(true)
 
-    .click(getBarItemByTitle("page3"))
+    .click(getBarItemByTitle("Page 3"))
     .expect(getListItemByText("Second page").visible).ok()
     .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
     .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).notOk()
-    .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).ok()
+    .expect(getListItemByText("Page 3").hasClass("sv-list__item--selected")).ok()
     .click(getListItemByText("Second page"))
     .expect(Selector(".sd-question__title").withText("question1").visible).ok()
     .expect(Selector("#pageSelector").textContent).contains("Second page")
@@ -115,7 +115,7 @@ test("Page switcher", async (t) => {
     .click(getBarItemByTitle("Second page"))
     .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
     .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).ok()
-    .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).notOk()
+    .expect(getListItemByText("Page 3").hasClass("sv-list__item--selected")).notOk()
     .click(getListItemByText("Second page"));
 });
 

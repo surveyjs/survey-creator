@@ -65,9 +65,11 @@
   color: $foreground;
 }
 .svc-logic-operator.svc-logic-operator {
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: $background;
     outline: none;
+    box-shadow: none;
   }
 }
 
@@ -140,18 +142,6 @@
 
 .svc-logic-paneldynamic__button.svc-logic-paneldynamic__remove-btn {
   display: none;
-}
-
-.svc-question-wrapper {
-  max-width: initial !important;
-  min-width: initial !important;
-  width: initial !important;
-  flex: initial !important;
-}
-.svc-question-wrapper {
-  .sv-title-actions__title {
-    max-width: none;
-  }
 }
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
