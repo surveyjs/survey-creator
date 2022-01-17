@@ -525,9 +525,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const prefix = this.context.getValueName() + ".";
     return name.replace(prefix, "");
   }
+  private getContextIndexInfo(name: string, prefix: string = ""): {index: number, name: string} {
+    return SurveyHelper.getQuestionContextIndexInfo(name, prefix);
+  }
   private getQuestionNameToPanel(name: string): string {
     if(!this.context || !name) return name;
-    if(name.indexOf("row.") !== 0) return name;
+    const indexInfo = this.getContextIndexInfo(name);
+    if(!indexInfo || indexInfo.index !== 0) return name;
     return this.context.getValueName() + "." + name;
   }
   private getContextFromPanels(): Question {
@@ -546,8 +550,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private getContextByQuestionName(name: string): Question {
     if(!name) return null;
-    if(name.indexOf(".row.") < 0) return null;
-    name = name.substring(0, name.indexOf(".row."));
+    const indexInfo = this.getContextIndexInfo(name, ".");
+    if(!indexInfo) return null;
+    name = name.substring(0, indexInfo.index);
     return <Question>this.survey.getQuestionByValueName(name);
   }
   private createAllConditionQuestions(): Array<ItemValue> {
@@ -679,8 +684,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (questionName.indexOf(question.getValueName()) == 0) {
       path = questionName.substring(question.getValueName().length);
     }
-    if (questionName.indexOf("row.") == 0) {
-      path = questionName.substring("row.".length);
+    const indexInfo = this.getContextIndexInfo(questionName);
+    if (!!indexInfo && indexInfo.index == 0) {
+      path = questionName.substring(indexInfo.name.length);
     }
     if (!path) {
       path = questionName;
