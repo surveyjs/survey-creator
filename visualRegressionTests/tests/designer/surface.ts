@@ -58,3 +58,10 @@ test("Matrix column editor", async (t) => {
 
   await checkElementScreenshot("matrix-cell-edit.png", Selector(".svc-matrix-cell__popup .sv-popup__container"), t);
 });
+
+test("Placeholder", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const designerTabContent = Selector(".svc-tab-designer");
+
+  await checkElementScreenshot("surface-placeholder.png", designerTabContent, t);
+});
