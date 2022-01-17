@@ -53,6 +53,16 @@ export class CreatorResponsivityManager {
     }
     this.creator.showPageNavigator = toolboxVisible;
     this.creator.sideBar.flyoutMode = flyoutSideBar;
+
+    if(!this.creator.sideBar.expandedManually && flyoutSideBar) {
+      this.creator.sideBar.collapseSideBar();
+    }
+    if(!this.creator.sideBar.collapsedManually && !flyoutSideBar) {
+      this.creator.sideBar.expandSideBar();
+    }
+    if(this.creator.sideBar.expandedManually && !flyoutSideBar) {
+      this.creator.sideBar.expandedManually = false;
+    }
   }
   process() {
     this.currentWidth = this.getScreenWidth();
