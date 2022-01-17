@@ -8,7 +8,8 @@ import {
   QuestionMatrixDynamicModel,
   AdaptiveActionContainer,
   SurveyTriggerSetValue,
-  QuestionMatrixDropdownModelBase
+  QuestionPanelDynamicModel,
+  Question
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -1843,5 +1844,164 @@ test("LogicUI: edit matrix column visibleIf. Filter logic types by context initi
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("column_visibility");
+  expect(logicTypeName.choices.length).toEqual(3);
+});
+test("LogicUI: edit visibleIf property for panel dynamic question template", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "paneldynamic", name: "q1",
+        templateElements: [
+          { type: "text", name: "q1_col1" },
+          { type: "text", name: "q1_col2", visibleIf: "{panel.q1_col1} = 1" },
+          { type: "text", name: "q1_col3" }]
+      },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(1);
+  logic.editItem(logic.items[0]);
+  const expressionEditor = logic.expressionEditor;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(expressionEditor.context.name).toEqual("q1");
+  const itemEditor = logic.itemEditor;
+  expect(itemEditor.panels).toHaveLength(1);
+  const actionPanel = itemEditor.panels[0];
+  const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.value).toEqual("question_visibility");
+  expect(logicTypeName.displayValue).toEqual("Show (hide) question");
+  const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3);
+  expect(colSelector.choices[0].text).toEqual("q1.q1_col1");
+  expect(colSelector.value).toEqual("q1.q1_col2");
+  colSelector.value = "q1.q1_col3";
+  logic.saveEditableItem();
+  const panel = <QuestionPanelDynamicModel>survey.getQuestionByName("q1");
+  expect(<Question>(panel.templateElements[1]).visibleIf).toBeFalsy();
+  expect((<Question>panel.templateElements[2]).visibleIf).toEqual("{panel.q1_col1} = 1");
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  const row = itemsQuestion.visibleRows[0];
+  expect(row.cells[0].value).toEqual("If 'panel.q1_col1' == 1, make question 'q1_col3' visible");
+});
+test("LogicUI: edit panel dynamic question visibleIf. Filter selector if there is a context", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "paneldynamic", name: "q1",
+        templateElements: [
+          { type: "text", name: "q1_col1" },
+          { type: "text", name: "q1_col2" },
+          { type: "text", name: "q1_col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "paneldynamic", name: "q3",
+        templateElements: [
+          { type: "text", name: "q3_col1" },
+          { type: "text", name: "q3_col2" },
+          { type: "text", name: "q3_col3" }]
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  expect(expressionEditor.context).toBeFalsy();
+  const itemEditor = logic.itemEditor;
+  expect(itemEditor.panels).toHaveLength(1);
+  expect(itemEditor.context).toBeFalsy();
+  let actionPanel = itemEditor.panels[0];
+  actionPanel.getQuestionByName("logicTypeName").value = "question_visibility";
+  let colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength((1 + 3) + 1 + (1 + 3));
+
+  expect(expressionEditor.panel.panelCount).toEqual(1);
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = "q1.panel.q1_col1";
+  let questionValue = firstExpressionPanel.getQuestionByName("questionValue");
+  questionValue.value = 2;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(itemEditor.context).toBeTruthy();
+  colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(3);
+  questionName.value = "q2";
+  colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength((1 + 3) + 1 + (1 + 3));
+});
+test("LogicUI: edit panel dynamic question visibleIf. Filter logic types and delete actions if there is a context", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "paneldynamic", name: "q1",
+        templateElements: [
+          { type: "text", name: "q1_col1" },
+          { type: "text", name: "q1_col2" },
+          { type: "text", name: "q1_col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "paneldynamic", name: "q3",
+        templateElements: [
+          { type: "text", name: "q3_col1" },
+          { type: "text", name: "q3_col2" },
+          { type: "text", name: "q3_col3" }]
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  const itemEditor = logic.itemEditor;
+  let actionPanel = itemEditor.panels[0];
+  let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.choices.length).toBeGreaterThan(3);
+  logicTypeName.value = "trigger_complete";
+  itemEditor.panel.addPanel();
+  actionPanel = itemEditor.panels[1];
+  actionPanel.getQuestionByName("logicTypeName").value = "question_visibility";
+  expect(itemEditor.panels).toHaveLength(2);
+
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = "q1.panel.q1_col1";
+  let questionValue = firstExpressionPanel.getQuestionByName("questionValue");
+  questionValue.value = 2;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(itemEditor.context).toBeTruthy();
+  expect(itemEditor.panels).toHaveLength(1);
+  actionPanel = itemEditor.panels[0];
+  logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.value).toEqual("question_visibility");
+
+  questionName.value = "q2";
+  logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.choices.length).toBeGreaterThan(3);
+  expect(logicTypeName.value).toEqual("question_visibility");
+});
+test("LogicUI: panel dynamic question visibleIf. Filter logic types by context initially", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "paneldynamic", name: "q1",
+        templateElements: [
+          { type: "text", name: "q1_col1" },
+          { type: "text", name: "q1_col2", visibleIf: "{panel.q1_col1} = 1" },
+          { type: "text", name: "q1_col3" }]
+      },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.editItem(logic.items[0]);
+  const itemEditor = logic.itemEditor;
+  expect(itemEditor.context).toBeTruthy();
+  let actionPanel = itemEditor.panels[0];
+  let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.value).toEqual("question_visibility");
   expect(logicTypeName.choices.length).toEqual(3);
 });

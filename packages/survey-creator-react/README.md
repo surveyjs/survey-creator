@@ -9,12 +9,12 @@ Survey Creator V2 for React is a visual survey designer / form builder for the R
 - [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
 - [Create your Survey or Form now](https://surveyjs.io/create-survey-v2)
 
-**NOTE**: This package contains Survey Creator V2. If you are looking for information on V1, refer to the [survey-creator](./packages/survey-creator) directory. Differences between these two versions are described in the following help topic: [SurveyJS Creator V2: What's new](https://surveyjs.io/Documentation/Survey-Creator?id=Creator-V2-Whats-New). For information on how to migrate to V2, refer to the [Migration Guide for SurveyJS Creator - from V1 to V2](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2) article.
+**NOTE**: This package contains Survey Creator V2. If you are looking for information on V1, refer to the [survey-creator](/packages/survey-creator) directory. Differences between these two versions are described in the following help topic: [SurveyJS Creator V2: What's new](https://surveyjs.io/Documentation/Survey-Creator?id=Creator-V2-Whats-New). For information on how to migrate to V2, refer to the [Migration Guide for SurveyJS Creator - from V1 to V2](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2) article.
 
 ## Install
 
 ```
-npm install survey-creator-react -- save
+npm install survey-creator-react --save
 ```
 
 ## Add Survey Creator V2 to Your Project
@@ -24,7 +24,7 @@ Create a new component and use it in your React application:
 ```js
 import { Component, Fragment } from "react";
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-// Import CSS stylesheets for SurveyJS (survey-core) and Survey Creator
+// Import CSS files for SurveyJS (survey-core) and Survey Creator
 import "survey-core/defaultV2.min.css";
 import "survey-creator-react/survey-creator-react.min.css";
 

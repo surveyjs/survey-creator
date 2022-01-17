@@ -7,7 +7,8 @@ import {
   Helpers,
   Question,
   QuestionMatrixDropdownModelBase,
-  SurveyElement
+  SurveyElement,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
@@ -228,8 +229,28 @@ export class SurveyLogicTypes {
       showIf: function (survey: SurveyModel) : boolean {
         return survey.getAllQuestions().length > 0;
       },
+      supportContext(context: Base): boolean {
+        return Array.isArray(context["templateElements"]);
+      },
+      getParentElement(element: Base): Base {
+        return !!element ? (<Question>element).parentQuestion : null;
+      },
       getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
-        return <any>survey.getAllQuestions();
+        const res = [];
+        const questions = survey.getAllQuestions();
+        for(var i = 0; i < questions.length; i ++) {
+          const q = questions[i];
+          if(!context) {
+            res.push(q);
+          }
+          if(q instanceof QuestionPanelDynamicModel && (!context || context === q)) {
+            const templates = q.templateElements;
+            for(var j = 0; j < templates.length; j ++) {
+              res.push(templates[j]);
+            }
+          }
+        }
+        return res;
       }
     },
     matrixdropdowncolumn: {
