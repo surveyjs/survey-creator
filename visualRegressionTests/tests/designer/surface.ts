@@ -58,3 +58,26 @@ test("Matrix column editor", async (t) => {
 
   await checkElementScreenshot("matrix-cell-edit.png", Selector(".svc-matrix-cell__popup .sv-popup__container"), t);
 });
+
+test.only("Check question width and position", async (t) => {
+  await t.resizeWindow(1920, 1080);
+
+  const surveyJSON = {
+    "showQuestionNumbers": "off",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            title: "Question 1",
+          },
+        ]
+      }
+    ]
+  };
+
+  await setJSON(surveyJSON);
+  await checkElementScreenshot("question-in-center", Selector(".svc-tab-designer"), t);
+});
