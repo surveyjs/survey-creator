@@ -1,6 +1,6 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
-import { SurveyResultsModel } from "@survey/creator";
+import { SurveyResultsItemModel, SurveyResultsModel } from "@survey/creator";
 import { attachKey2click, SurveyElementBase } from "survey-react-ui";
 
 interface ISurveyResultsProps {
@@ -79,94 +79,47 @@ export class SurveyResults extends SurveyElementBase<
                 {this.model.resultsTitle}
               </th>
               <th className="svd-dark-border-color">
-                {this.model.resultsName}
-              </th>
-              <th className="svd-dark-border-color">
-                {this.model.resultsValue}
-              </th>
-              <th className="svd-dark-border-color">
                 {this.model.resultsDisplayValue}
               </th>
             </tr>
           </thead>
-          <tbody>{this.renderRows(this.model.resultData)}</tbody>
+          <tbody>{SurveyResults.renderRows(this.model.resultData)}</tbody>
         </table>
       </div>
     );
   }
-  renderRows(data: Array<any>): Array<JSX.Element> {
-    return data.map((item) => this.renderRow(item));
+  static renderRows(data: Array<any>): Array<JSX.Element> {
+    return data.map((item) => <SurveyResultsByRow key={item.id} row={item} />);
   }
-  renderRow(row: any): JSX.Element {
+}
+
+export class SurveyResultsByRow extends SurveyElementBase<any, any> {
+  private get row(): SurveyResultsItemModel {
+    return this.props.row;
+  }
+
+  protected getStateElement(): Base {
+    return this.row;
+  }
+
+  render(): JSX.Element {
     return (
       <>
-        <tr data-bind="click: toggle">
+        {attachKey2click(<tr onClick={() => this.row.toggle()}>
           <td className="svd-dark-border-color">
-            {row.isNode ? (
-              <span
-                className={
-                  "survey-result-marker " + row.collapsed
-                    ? ""
-                    : "survey-result-marker--expanded"
-                }
-              >
+            {this.row.isNode ? (
+              <span className={"survey-result-marker " + (this.row.collapsed ? "" : "survey-result-marker--expanded")}>
                 ▶
               </span>
             ) : null}
-            <span>{row.title}</span>
-          </td>
-          <td className="svd-dark-border-color">{row.name}</td>
-          <td className="svd-dark-border-color">
-            <div className="survey-result-value">
-              {row.getString(row.value)}
-            </div>
+            <span>{this.row.title}</span>
           </td>
           <td className="svd-dark-border-color">
-            {row.getString(row.displayValue)}
+            {this.row.getString(this.row.displayValue)}
           </td>
-        </tr>
-        {this.renderRows(row.data)}
+        </tr>)}
+        {this.row.isNode && !this.row.collapsed ? SurveyResults.renderRows(this.row.data) : null}
       </>
     );
   }
 }
-
-/*
-
-<div class="svd_test_results">
-    <div class="svd_results_header">
-        <h2 data-bind="text: surveyResultsText"></h2>
-    </div>
-    <ul class="navbar-default container-fluid nav nav-tabs editor-tabs">
-        <li class="nav-item active" data-bind="css: {active: resultViewType === 'table'}">
-            <a class="nav-link" href="#"
-                data-bind="click: selectTableClick, text: $data.getLocString('ed.surveyResultsTable')"></a>
-        </li>
-        <li class="nav-item" data-bind="css: {active: resultViewType === 'text'}">
-            <a class="nav-link" href="#"
-                data-bind="click: selectJsonClick, text: $data.getLocString('ed.surveyResultsJson')"></a>
-        </li>
-    </ul>
-    <div class="svd_results_text svd-light-bg-color" data-bind="visible: resultViewType === 'text'">
-        <div data-bind="text: resultText"></div>
-    </div>
-    <div class="svd_results_table svd-light-bg-color" data-bind="visible: resultViewType === 'table'">
-        <table>
-            <thead>
-                <tr class="svd-light-background-color">
-                    <th class="svd-dark-border-color" data-bind="text: resultsTitle"></th>
-                    <th class="svd-dark-border-color" data-bind="text: resultsName"></th>
-                    <th class="svd-dark-border-color" data-bind="text: resultsValue"></th>
-                    <th class="svd-dark-border-color" data-bind="text: resultsDisplayValue"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- ko foreach: resultData -->
-                <!-- ko component: { name: 'survey-results-table-row', params: { model: $data } } -->
-                <!-- /ko -->
-                <!-- /ko -->
-            </tbody>
-        </table>
-    </div>
-</div>
-*/

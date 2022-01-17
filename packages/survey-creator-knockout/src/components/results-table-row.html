@@ -4,10 +4,6 @@
         <span class="survey-result-marker" data-bind="css: { 'survey-result-marker--expanded': !collapsed }">▶</span>
         <!-- /ko -->
         <span data-bind="text: title"></span></td>
-    <td class="svd-dark-border-color" data-bind="text: name"></td>
-    <td class="svd-dark-border-color">
-        <div class="survey-result-value" data-bind="text: getString(value)"></div>
-    </td>
     <td class="svd-dark-border-color" data-bind="text: getString(displayValue)"></td>
 </tr>
 <!-- ko if: isNode && !collapsed -->

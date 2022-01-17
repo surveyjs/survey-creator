@@ -13,7 +13,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: calcSize(1) calcSize(3);
+    padding: calcSize(1) calcSize(4);
+    font-size: calcSize(2);
     color: $foreground-light;
     border-bottom: 2px solid $background-dim;
 
@@ -49,16 +50,15 @@
     white-space: pre-wrap;
   }
   .svd_results_table {
-    padding: calcSize(2) calcSize(3);
-    width: calc(100% - calcSize(6));
+    width: 100%;
     table {
-      border-collapse: collapse;
       width: 100%;
+      border-collapse: collapse; 
 
       .survey-result-marker {
         position: absolute;
-        left: 1em;
-        top: 0.5em;
+        left: calcSize(2);
+        top: calcSize(1);
         transition: transform 0.2s ease-in-out;
 
         &.survey-result-marker--expanded {
@@ -74,29 +74,33 @@
         vertical-align: top;
       }
 
-      th,
+      th {
+        padding: calcSize(1) calcSize(0.5);
+        background-color: $background-dim;
+        text-align: left;
+        font-weight: 600;
+        color: $foreground-light;
+
+        &:nth-child(1) {
+          padding-left: 2em;
+        }
+      }
+
       td {
-        border: 1px solid;
-        padding: 0.5em 1em;
+        padding: calcSize(1) calcSize(1);
         max-width: calcSize(50);
         overflow: auto;
+        border-top: 2px solid $background-dim;
+        user-select: text;
 
         &:nth-child(1) {
           position: relative;
-          width: 30%;
-          font-weight: 500;
-          padding-left: 2em;
+          width: 50%;
+          font-weight: 600;
+          padding-left: calcSize(4);
         }
         &:nth-child(2) {
-          width: 20%;
-        }
-        &:nth-child(3) {
-          width: 20%;
-        }
-
-        &:nth-child(4) {
-          width: 30%;
-          font-weight: 500;
+          width: 50%;
         }
       }
     }
