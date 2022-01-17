@@ -54,15 +54,16 @@ export class CreatorResponsivityManager {
     this.creator.showPageNavigator = toolboxVisible;
     this.creator.sideBar.flyoutMode = flyoutSideBar;
 
-    if(!this.creator.sideBar.expandedManually && flyoutSideBar) {
+    if(this.creator.sideBar.visible && !flyoutSideBar) {
+      this.creator.sideBar.collapsedManually = false;
+    }
+    if(this.creator.sideBar.visible && !this.creator.sideBar.expandedManually && flyoutSideBar && this.creator.toolboxLocation != "right") {
       this.creator.sideBar.collapseSideBar();
     }
-    if(!this.creator.sideBar.collapsedManually && !flyoutSideBar) {
+    if(!this.creator.sideBar.visible && !this.creator.sideBar.collapsedManually && !flyoutSideBar && this.creator.toolboxLocation != "right") {
       this.creator.sideBar.expandSideBar();
     }
-    if(this.creator.sideBar.expandedManually && !flyoutSideBar) {
-      this.creator.sideBar.expandedManually = false;
-    }
+
   }
   process() {
     this.currentWidth = this.getScreenWidth();

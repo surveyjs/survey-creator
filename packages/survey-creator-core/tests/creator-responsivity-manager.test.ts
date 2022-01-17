@@ -116,3 +116,66 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   checkByWidth(599, "hidden", true, true, false);
   checkByWidth(200, "hidden", true, true, false);
 });
+
+test("CreatorResponsivityManager: SideBar expand/collapse on width change", (): any => {
+  const container: SimpleContainer = new SimpleContainer({});
+  const creator = new CreatorTester();
+  const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+
+  expect(creator.sideBar.visible).toEqual(true);
+  container.offsetWidth = 900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(false);
+  container.offsetWidth = 1900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(true);
+
+  expect(creator.sideBar.visible).toEqual(true);
+  container.offsetWidth = 900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(false);
+  creator.sideBar["_expandAction"].action();
+  expect(creator.sideBar.visible).toEqual(true);
+  creator.sideBar["_collapseAction"].action();
+  expect(creator.sideBar.visible).toEqual(false);
+  container.offsetWidth = 1900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(true);
+
+  creator.sideBar["_collapseAction"].action();
+  expect(creator.sideBar.visible).toEqual(false);
+  container.offsetWidth = 900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(false);
+  container.offsetWidth = 1900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(false);
+
+  container.offsetWidth = 900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(false);
+  creator.sideBar["_expandAction"].action();
+  expect(creator.sideBar.visible).toEqual(true);
+  container.offsetWidth = 1900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(true);
+  container.offsetWidth = 900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(false);
+
+  container.offsetWidth = 1900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(true);
+  creator.sideBar["_collapseAction"].action();
+  expect(creator.sideBar.visible).toEqual(false);
+  container.offsetWidth = 900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(false);
+  creator.sideBar["_expandAction"].action();
+  expect(creator.sideBar.visible).toEqual(true);
+  creator.sideBar["_collapseAction"].action();
+  expect(creator.sideBar.visible).toEqual(false);
+  container.offsetWidth = 1900;
+  responsivityManager.process();
+  expect(creator.sideBar.visible).toEqual(false);
+});

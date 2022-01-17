@@ -53,8 +53,10 @@ export class SideBarModel extends Base {
         visible: <any>new ComputedUpdater<boolean>(() => this.visible),
         action: () => {
           this.collapseSideBar();
-          this.collapsedManually = !this.flyoutMode;
-          this.expandedManually = false;
+          if(!this.flyoutMode) {
+            this.collapsedManually = true;
+            this.expandedManually = false;
+          }
         }
       });
       this.toolbar.actions.push(this._collapseAction);
@@ -66,8 +68,10 @@ export class SideBarModel extends Base {
         needSeparator: true,
         action: () => {
           this.expandSideBar();
-          this.collapsedManually = false;
-          this.expandedManually = this.flyoutMode;
+          if(!this.flyoutMode) {
+            this.collapsedManually = false;
+            this.expandedManually = this.flyoutMode;
+          }
         },
         title: getLocString("ed.showPanel"),
         visible: <any>new ComputedUpdater<boolean>(() => {
