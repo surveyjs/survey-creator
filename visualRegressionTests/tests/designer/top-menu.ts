@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, checkElementScreenshot } from "../../helper";
+import { url, checkElementScreenshot, setJSON } from "../../helper";
 
 const title = "Top Menu Screenshot";
 
@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 test("Top menu on designer tab", async (t) => {
+  await setJSON({ pages: [{ name: "page1" }] });
   await t.resizeWindow(1920, 1080);
 
   const topBarElement = Selector(".svc-top-bar");

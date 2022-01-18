@@ -12,6 +12,7 @@ const patchDragDropToDisableDrop = ClientFunction(() => {
 });
 
 test("Ghost Survey Element", async (t) => {
+  await setJSON({ pages: [{ name: "page1" }] });
   await t.resizeWindow(2560, 1440);
 
   const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
