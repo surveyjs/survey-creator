@@ -306,4 +306,13 @@ export class SurveyHelper {
       return aVal.localeCompare(bVal);
     });
   }
+  public static getQuestionContextIndexInfo(name: string, prefix: string = ""): {index: number, name: string} {
+    const contextStrings = ["row", "panel"];
+    for(var i = 0; i < contextStrings.length; i ++) {
+      const subStr = prefix + contextStrings[i] + ".";
+      const index = name.indexOf(subStr);
+      if(index > -1) return { index: index, name: subStr };
+    }
+    return undefined;
+  }
 }
