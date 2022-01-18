@@ -12,8 +12,8 @@ const explicitErrorHandler = () => {
 };
 
 fixture`${title}`.page`${url}`.clientScripts({ content: `(${explicitErrorHandler.toString()})()` }).beforeEach(async (t) => {
-  await t.maximizeWindow();
   await setJSON({ pages: [{ name: "page1" }] });
+  await t.maximizeWindow();
 });
 
 test("Drag Drop Toolbox Item and Empty Page", async (t) => {

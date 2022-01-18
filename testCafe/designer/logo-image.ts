@@ -5,6 +5,7 @@ const title = "Logo Image";
 fixture`${title}`.page`${url}`.beforeEach(
   async (t) => {
     await t.maximizeWindow();
+    await setJSON({ pages: [{ name: "page1" }] });
   }
 );
 

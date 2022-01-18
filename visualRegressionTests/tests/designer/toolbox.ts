@@ -15,6 +15,7 @@ test("Left toolbox", async (t) => {
 
   await setJSON({ pages: [{ name: "page1" }] });
   await t.resizeWindow(2560, 1440);
+  await setJSON({ pages: [{ name: "page1" }] });
   await checkElementScreenshot("toolbox-left.png", toolboxElement, t);
 
   await t.hover(toolboxItem);
