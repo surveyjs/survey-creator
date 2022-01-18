@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, changeToolboxLocation, setShowPropertyGrid, getTabbedMenuItemByText, checkElementScreenshot } from "../../helper";
+import { url, changeToolboxLocation, setShowPropertyGrid, getTabbedMenuItemByText, checkElementScreenshot, setJSON } from "../../helper";
 
 const title = "Toolbox Screenshot";
 
@@ -14,6 +14,7 @@ test("Left toolbox", async (t) => {
   const toolboxElement = Selector(".svc-toolbox");
 
   await t.resizeWindow(2560, 1440);
+  await setJSON({ pages: [{ name: "page1" }] });
   await checkElementScreenshot("toolbox-left.png", toolboxElement, t);
 
   await t.hover(toolboxItem);

@@ -1,10 +1,11 @@
-import { url, base64image } from "../helper";
+import { url, base64image, setJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Logo Image";
 
 fixture`${title}`.page`${url}`.beforeEach(
   async (t) => {
     await t.maximizeWindow();
+    await setJSON({ pages: [{ name: "page1" }] });
   }
 );
 
