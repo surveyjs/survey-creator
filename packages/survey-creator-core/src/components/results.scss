@@ -57,21 +57,12 @@
 
       .survey-result-marker {
         position: absolute;
-        left: calcSize(2);
         top: calcSize(1);
         transition: transform 0.2s ease-in-out;
 
         &.survey-result-marker--expanded {
           transform: rotate(90deg);
         }
-      }
-
-      .survey-result-value {
-        word-break: break-all;
-      }
-
-      tr {
-        vertical-align: top;
       }
 
       th {
@@ -97,12 +88,20 @@
           position: relative;
           width: 50%;
           font-weight: 600;
-          padding-left: calcSize(4);
         }
         &:nth-child(2) {
           width: 50%;
         }
       }
+
+      .survey-result-value {
+        word-break: break-all;
+      }
+
+      tr {
+        vertical-align: top;
+      }
+
     }
   }
 }

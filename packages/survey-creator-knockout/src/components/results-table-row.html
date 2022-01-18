@@ -1,7 +1,10 @@
 <tr data-bind="click: toggle, key2click">
-    <td class="svd-dark-border-color">
+    <td class="svd-dark-border-color"
+        data-bind="style: { paddingLeft: 'calc(' + (2.5 + 1.5 * lvl) + ' * 1em)' }">
         <!-- ko if: isNode -->
-        <span class="survey-result-marker" data-bind="css: { 'survey-result-marker--expanded': !collapsed }">▶</span>
+        <span class="survey-result-marker"
+              data-bind="css: { 'survey-result-marker--expanded': !collapsed },
+                         style: { left: 'calc(' + (1.5 * (lvl + 1)) + ' * 1em)' }">▶</span>
         <!-- /ko -->
         <span data-bind="text: title"></span></td>
     <td class="svd-dark-border-color" data-bind="text: getString(displayValue)"></td>

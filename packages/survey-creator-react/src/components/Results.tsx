@@ -106,12 +106,18 @@ export class SurveyResultsByRow extends SurveyElementBase<any, any> {
     return (
       <>
         {attachKey2click(<tr onClick={() => this.row.toggle()}>
-          <td className="svd-dark-border-color">
+          <td
+            style={{ paddingLeft: "calc(" + (2.5 + 1.5 * this.row.lvl) + " * 1em)" }}
+            className="svd-dark-border-color">
+
             {this.row.isNode ? (
-              <span className={"survey-result-marker " + (this.row.collapsed ? "" : "survey-result-marker--expanded")}>
+              <span
+                style={{ left: "calc(" + (1.5 * (this.row.lvl + 1)) + " * 1em)" }}
+                className={"survey-result-marker " + (this.row.collapsed ? "" : "survey-result-marker--expanded")}>
                 ▶
               </span>
             ) : null}
+
             <span>{this.row.title}</span>
           </td>
           <td className="svd-dark-border-color">
