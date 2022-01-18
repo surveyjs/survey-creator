@@ -12,6 +12,8 @@
 
 .spg-root-modern {
   width: 100%;
+  border-right: 1px solid $border;
+  box-sizing: border-box;
 }
 
 .sv-popup--modal {
@@ -57,13 +59,15 @@
   }
 }
 
-survey-creator, .svc-creator {
+survey-creator,
+.svc-creator {
   button.spg-action-button,
-  .spg-action-button .sv-action-bar-item{
+  .spg-action-button .sv-action-bar-item {
     border-radius: calcSize(12.5);
     padding: calcSize(1);
     cursor: pointer;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       outline: none;
       background-color: $primary-light;
       use {
@@ -72,8 +76,9 @@ survey-creator, .svc-creator {
     }
   }
   button.spg-action-button--danger,
-  .spg-action-button--danger .sv-action-bar-item{
-    &:hover, &:focus {
+  .spg-action-button--danger .sv-action-bar-item {
+    &:hover,
+    &:focus {
       background-color: $red-light;
       use {
         fill: $red;
@@ -81,6 +86,6 @@ survey-creator, .svc-creator {
     }
   }
   button.spg-action-button--large {
-    padding: calcSize(0.5) calcSize(2); 
+    padding: calcSize(0.5) calcSize(2);
   }
 }
