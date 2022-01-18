@@ -119,6 +119,7 @@ test("Responsive creator: property grid", async (t) => {
     .expect(propertyGridSelector.offsetWidth).eql(370)
 
     .resizeWindow(750, 700)
+    .click(expandButtonSelector)
     .expect(propertyGridSelector.visible).ok()
     .expect(propertyGridSelector.offsetWidth).eql(370)
     .expect(flyoutPropertyGrid.exists).ok()
@@ -163,7 +164,6 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
 
   await t
     .resizeWindow(750, 500)
-    .click(collapseButtonSelector)
     .expect(topToolBar.visible).ok()
     .expect(footerToolBar.visible).notOk()
     .expect(topToolBar.find(".sv-action").filterVisible().count).eql(4)
@@ -174,6 +174,7 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
     .expect(footerToolBar.find(".sv-action").filterVisible().count).eql(4)
 
     .resizeWindow(1920, 900)
+    .click(collapseButtonSelector)
     .expect(topToolBar.visible).ok()
     .expect(footerToolBar.visible).notOk()
     .expect(topToolBar.find(".sv-action").filterVisible().count).eql(4);
@@ -189,10 +190,6 @@ test("property grid for mobile devices", async (t) => {
     .expect(mobilePropertGrid.exists).notOk()
 
     .resizeWindow(370, 400)
-    .expect(mobilePropertGrid.visible).ok()
-    .expect(mobilePropertGridTitle.textContent).eql("Survey")
-
-    .click(mobileCloseButton)
     .expect(mobilePropertGrid.visible).notOk()
 
     .click(getBarItemByTitle("Settings").filterVisible())
@@ -290,6 +287,7 @@ test("Property grid editor popup", async (t) => {
   const question1 = Selector("[data-name=\"question1\"]");
   const dataTab = Selector("h4").withExactText("Data");
   const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
+  const mobileCloseButton = Selector(".svc-side-bar__container-close");
   await ClientFunction(() => {
     window["creator"].showPropertyGrid = true;
   })();
@@ -300,6 +298,10 @@ test("Property grid editor popup", async (t) => {
     .expect(Selector(".sv-popup--modal").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
+    .click(Selector(".sv-action-bar-item[title=\"Settings\"]").filterVisible())
+    .click(mobileCloseButton)
+    .click(question1)
+    .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Settings\"]").filterVisible())
     .click(Selector("span").withExactText("Set Default value"))
     .expect(Selector(".sv-popup--overlay").visible).ok();
 });
