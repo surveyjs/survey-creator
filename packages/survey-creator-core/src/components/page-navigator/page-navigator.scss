@@ -55,6 +55,10 @@ survey-creator,
   min-width: calcSize(12.5);
 }
 
+.svc-tab-designer--with-page-navigator {
+  padding-right: calcSize(6.5);
+}
+
 .svc-tab-designer__page-navigator {
   width: calcSize(5.5);
   height: 100%;

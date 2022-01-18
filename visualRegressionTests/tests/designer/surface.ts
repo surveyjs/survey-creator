@@ -59,6 +59,7 @@ test("Matrix column editor", async (t) => {
   await checkElementScreenshot("matrix-cell-edit.png", Selector(".svc-matrix-cell__popup .sv-popup__container"), t);
 });
 
+/*
 test("Check question width and position", async (t) => {
   await t.resizeWindow(1920, 1080);
 
@@ -81,3 +82,4 @@ test("Check question width and position", async (t) => {
   await setJSON(surveyJSON);
   await checkElementScreenshot("question-in-center", Selector(".svc-tab-designer"), t);
 });
+*/
