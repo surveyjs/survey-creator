@@ -33,6 +33,13 @@
   margin-right: 0;
   margin-left: calcSize(-1.5);
 
+  .svc-toolbox__item-icon {
+    position: absolute;
+    display: block;
+    left: calcSize(1.5);
+    top: calcSize(1);
+  }
+  
   .svc-toolbox__item-title {
     color: $foreground;
   }
@@ -49,6 +56,10 @@
     padding-left: calcSize(2);
     margin-left: 0;
     margin-right: calcSize(-1.5);
+    .svc-toolbox__item-title {
+      padding-left: calcSize(1);
+      padding-right: calcSize(4);
+    }
   }
 
   .svc-toolbox__item {
@@ -64,6 +75,13 @@
   .svc-toolbox__category {
     align-items: flex-end;
   }
+
+  .svc-toolbox__item-banner {
+    .svc-toolbox__item-icon {
+      left: auto;
+      right: calcSize(1.5);
+    }
+  }  
 }
 
 .svc-toolbox__item-title {
@@ -83,6 +101,9 @@
     padding-left: calcSize(1.5);
     padding-right: calcSize(2);
     opacity: 1;
+    .svc-toolbox__item-title {
+      padding-left: calcSize(4);
+    }
   }
 }
 
