@@ -99,7 +99,9 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   }
 
   private checkNewPage() {
-    this.showPlaceholder = this.survey.getAllQuestions().length === 0 && this.survey.pageCount === 0;
+    const showPlaceholder = this.survey.getAllQuestions().length === 0 && this.survey.pageCount === 0;
+    settings.allowShowEmptyTitleInDesignMode = showPlaceholder ? false : initialSettingsAllowShowEmptyTitleInDesignMode;
+    this.showPlaceholder = showPlaceholder;
     this.pageCount = this.survey.pageCount;
     if (this.showPlaceholder || this.canShowNewPage) {
       const pages = this.survey.pages;
@@ -111,7 +113,6 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
       this.showNewPage = false;
       this.newPage = undefined;
     }
-    settings.allowShowEmptyTitleInDesignMode = this.showPlaceholder ? false : initialSettingsAllowShowEmptyTitleInDesignMode;
   }
 
   public clickDesigner() {
