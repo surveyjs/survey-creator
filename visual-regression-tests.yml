@@ -23,7 +23,8 @@ pool:
   vmImage: 'windows-latest'
 
 jobs:
-- job: CreatorV2React
+
+- job: CreatorV2Core
   steps:
   - checkout: self
   - checkout: EmptyRepo
@@ -34,12 +35,13 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
-
-  - powershell: |
-      $env:GIT_REDIRECT_STDERR = '2>&1'
-      git config --global user.email "kurmanov.work@gmail.com"
-      git config --global user.name "dmitrykurmanov"
-    displayName: 'Set up git config'
+  
+  - task: Cache@2
+    inputs:
+      key: 'npm-cache-creator-core | $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/package.json'
+      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules
+      cacheHitVar: NPM_CACHE_RESTORED
+    displayName: Cache NPM Core
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -58,23 +60,85 @@ jobs:
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
+
+  - task: Npm@1
+    displayName: 'Npm install survey-creator-core'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run remove-package-lock
+    displayName: 'npm run remove-package-lock'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run build
+    displayName: 'Build Creator V2 Core'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
+      targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
+      ArtifactName: 'SurveyJSCreatorV2Build-VRT-Core'
+      publishLocation: 'Container'  
+
+- job: CreatorV2React
+  dependsOn: CreatorV2Core
+  steps:
+  - checkout: self
+  - checkout: EmptyRepo
+    persistCredentials: true
+    clean: true
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuild'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'SurveyJSCreatorV2Build-VRT-Core'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
   
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator
       npm install
       npm run lint
     displayName: 'root npm install and lint'
-  
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm install
-      npm run remove-package-lock
-    displayName: 'Npm install survey-creator-core'
-
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm run build
-    displayName: 'Build Creator V2 Core'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -135,6 +199,7 @@ jobs:
 
 # ======================= CreatorV2Knockout ======================= #
 - job: CreatorV2Knockout
+  dependsOn: CreatorV2Core
   steps:
   - checkout: self
   - checkout: EmptyRepo
@@ -145,12 +210,6 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
-
-  - powershell: |
-      $env:GIT_REDIRECT_STDERR = '2>&1'
-      git config --global user.email "kurmanov.work@gmail.com"
-      git config --global user.name "dmitrykurmanov"
-    displayName: 'Set up git config'
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -163,28 +222,29 @@ jobs:
       artifactName: 'SurveyJSLibraryBuild'
       downloadPath: '$(System.ArtifactsDirectory)'
 
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'SurveyJSCreatorV2Build-VRT-Core'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
   
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator
       npm install devextreme-screenshot-comparer -D
     displayName: 'install devextreme-screenshot-comparer to root'
-
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm install
-      npm run remove-package-lock
-    displayName: 'Npm install survey-creator-core'
-
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm run build
-    displayName: 'Build Creator V2 Core'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
