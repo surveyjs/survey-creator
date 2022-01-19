@@ -6,11 +6,11 @@
         </div>
         <!-- ko ifnot: koHasHtml -->
         <span class="sv-string-editor"
-            data-bind="text: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown }, click: edit, attr: { 'aria-placeholder': placeholder, contenteditable: contentEditable }"></span>
+            data-bind="text: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown, mouseup: onMouseUp }, click: edit, attr: { 'aria-placeholder': placeholder, contenteditable: contentEditable }"></span>
         <!-- /ko -->
         <!-- ko if: koHasHtml -->
         <span class="sv-string-editor"
-            data-bind="html: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown }, click: edit, attr: { 'aria-placeholder': placeholder, contenteditable: contentEditable }"></span>
+            data-bind="html: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown, mouseup: onMouseUp }, click: edit, attr: { 'aria-placeholder': placeholder, contenteditable: contentEditable }"></span>
         <!-- /ko -->
     </span>
     <!-- ko if: errorText -->
