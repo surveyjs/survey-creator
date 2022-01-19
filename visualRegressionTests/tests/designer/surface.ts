@@ -65,3 +65,28 @@ test("Placeholder", async (t) => {
 
   await checkElementScreenshot("surface-placeholder.png", designerTabContent, t);
 });
+
+/*
+test("Check question width and position", async (t) => {
+  await t.resizeWindow(1920, 1080);
+
+  const surveyJSON = {
+    "showQuestionNumbers": "off",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            title: "Question 1",
+          },
+        ]
+      }
+    ]
+  };
+
+  await setJSON(surveyJSON);
+  await checkElementScreenshot("question-in-center", Selector(".svc-tab-designer"), t);
+});
+*/
