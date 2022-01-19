@@ -98,13 +98,23 @@ _Page navigator_
 
 <a id="action-buttons"></a> 
 
-### Action buttons arranged
-Creator actions which are available in different tabs (Designer, Logic, etc.) and elements (such as pages, panels, or questions) are now displayed into one line. You have programmatic access to actions - they are in your full control.
+### Action buttons rearranged
+
+Action buttons used to be split between different tabs (Designer, Logic, etc.). Now, these actions are displayed within the question that you configure and can also be accessed programmatically.
 
 ![Action buttons](images/creator-v2-action-buttons.png)  
 _Action buttons_
 
+If you click the button that changes the question type, you will see a drop-down list of all supported types. In Survey Creator V1, this list was limited to the types that were interchangeable with the current element type. With the full list, you can now add multiple default questions to the survey to specify their types afterwards.
 
+![List of supported question types](images/creator-v2-question-types.png)   
+_Drop-down list of supported question types_
+
+If you switch between non-interchangeable question types, the question configuration may be lost. Use Undo and Redo buttons to roll back or reinstate the previous configuration. To revert to old behavior (limit the list to interchangeable types only), use the following code:
+
+```js
+SurveyCreator.settings.questionConvertMode = 1;
+```
 
 <a id="adorners"></a>
 
