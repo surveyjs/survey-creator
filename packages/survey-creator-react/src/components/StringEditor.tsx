@@ -59,11 +59,21 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
     this.baseModel.onInput(event.nativeEvent);
     return this.baseModel.errorText;
   };
+  private justFocused = false;
   private onFocus = (event: any) => {
     this.baseModel.onFocus(event.nativeEvent);
+    this.justFocused = true;
   };
   private onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
     return this.baseModel.onKeyDown(event.nativeEvent);
+  };
+  private onMouseUp = (event: React.MouseEvent<HTMLSpanElement>): boolean => {
+    if(this.justFocused) {
+      this.justFocused = false;
+      event.nativeEvent.preventDefault();
+      return false;
+    }
+    return undefined;
   };
   private done = (event: any) => {
     this.baseModel.done(event);
@@ -100,6 +110,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
           onBlur={this.onInput}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
+          onMouseUp={this.onMouseUp}
           onClick={this.edit}
         />
       );
@@ -115,6 +126,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
           onBlur={this.onInput}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
+          onMouseUp={this.onMouseUp}
           onClick={this.edit}
         >
           {this.locString.renderedHtml}
