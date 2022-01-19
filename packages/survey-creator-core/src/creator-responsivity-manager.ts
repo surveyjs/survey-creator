@@ -53,6 +53,17 @@ export class CreatorResponsivityManager {
     }
     this.creator.showPageNavigator = toolboxVisible;
     this.creator.sideBar.flyoutMode = flyoutSideBar;
+
+    if(this.creator.sideBar.visible && !flyoutSideBar) {
+      this.creator.sideBar.collapsedManually = false;
+    }
+    if(this.creator.sideBar.visible && !this.creator.sideBar.expandedManually && flyoutSideBar && this.creator.toolboxLocation != "right") {
+      this.creator.sideBar.collapseSideBar();
+    }
+    if(!this.creator.sideBar.visible && !this.creator.sideBar.collapsedManually && !flyoutSideBar && this.creator.toolboxLocation != "right") {
+      this.creator.sideBar.expandSideBar();
+    }
+
   }
   process() {
     this.currentWidth = this.getScreenWidth();

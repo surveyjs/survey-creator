@@ -16,6 +16,8 @@ export class SideBarModel extends Base {
   @propertyArray() tabs: Array<SideBarTabModel>;
   @property() headerText: string;
   @property({ defaultValue: true }) visible: boolean;
+  @property({ defaultValue: false }) collapsedManually: boolean;
+  @property({ defaultValue: false }) expandedManually: boolean;
   @property() hasVisibleTabs: boolean;
   @property({ defaultValue: false }) flyoutMode: boolean;
   @property({
@@ -49,7 +51,13 @@ export class SideBarModel extends Base {
         title: getLocString("ed.hidePanel"),
         showTitle: false,
         visible: <any>new ComputedUpdater<boolean>(() => this.visible),
-        action: () => { this.collapseSideBar(); }
+        action: () => {
+          this.collapseSideBar();
+          if(!this.flyoutMode) {
+            this.collapsedManually = true;
+            this.expandedManually = false;
+          }
+        }
       });
       this.toolbar.actions.push(this._collapseAction);
 
@@ -58,7 +66,13 @@ export class SideBarModel extends Base {
         iconName: "icon-expand-panel",
         css: "svd-grid-expand",
         needSeparator: true,
-        action: () => { this.expandSideBar(); },
+        action: () => {
+          this.expandSideBar();
+          if(!this.flyoutMode) {
+            this.collapsedManually = false;
+            this.expandedManually = this.flyoutMode;
+          }
+        },
         title: getLocString("ed.showPanel"),
         visible: <any>new ComputedUpdater<boolean>(() => {
           const visible = !this.visible;
