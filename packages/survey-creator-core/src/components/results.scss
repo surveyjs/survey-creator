@@ -30,7 +30,15 @@
         border-radius: 100px;
         padding: calcSize(0.5);
         margin: auto;
+        
+        &:hover, &:focus {
+          background-color: $primary-light;
+          use {
+            fill: $primary;
+          }
+        }
       }
+
       .svd_results_nav-item__active {
         border-color: $primary;
       }
@@ -57,23 +65,32 @@
 
       .survey-result-marker {
         position: absolute;
-        top: calcSize(1);
-        transition: transform 0.2s ease-in-out;
+        top: calcSize(1.5);
 
-        &.survey-result-marker--expanded {
-          transform: rotate(90deg);
+        .sv-svg-icon {
+          transition: transform 0.2s ease-in-out;
+
+          use {
+            fill: $foreground-light;
+          }
+        }
+
+        &.survey-result-marker--expanded .sv-svg-icon {
+          transform-origin: center;
+          transform: rotate(90deg) ;
         }
       }
 
       th {
-        padding: calcSize(1) calcSize(0.5);
+        padding: calcSize(1) calcSize(1);
         background-color: $background-dim;
         text-align: left;
         font-weight: 600;
+        font-size: 12px;
         color: $foreground-light;
 
         &:nth-child(1) {
-          padding-left: 2em;
+          padding-left: calcSize(4);
         }
       }
 
@@ -91,6 +108,7 @@
         }
         &:nth-child(2) {
           width: 50%;
+          padding-right: calcSize(4);
         }
       }
 
@@ -100,33 +118,11 @@
 
       tr {
         vertical-align: top;
+
+        .svd-node-value {
+          color: $foreground-light;
+        }
       }
-
     }
-  }
-}
-
-.nav-tabs {
-  margin-bottom: 0;
-  padding: 0; // border-bottom: 1px solid $secondary-border-color;
-  line-height: 2.5em;
-}
-.nav-item {
-  display: inline-block;
-  margin-left: -3px;
-  &:first-child {
-    margin-left: 0;
-  }
-}
-.nav-link {
-  border-radius: 0;
-  border-top-left-radius: calcSize(0.25);
-  border-top-right-radius: calcSize(0.25);
-  padding: 0.5em 1em;
-  text-align: center;
-  &.active {
-    border: calcSize(0.125) solid $border;
-    border-color: $border;
-    border-bottom-color: transparent;
   }
 }

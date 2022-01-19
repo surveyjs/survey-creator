@@ -1,13 +1,15 @@
 <tr data-bind="click: toggle, key2click">
     <td class="svd-dark-border-color"
-        data-bind="style: { paddingLeft: 'calc(' + (2.5 + 1.5 * lvl) + ' * 1em)' }">
+        data-bind="style: { paddingLeft: 'calc(' + (6 + 2 * lvl) + ' * 8px)' }">
         <!-- ko if: isNode -->
         <span class="survey-result-marker"
               data-bind="css: { 'survey-result-marker--expanded': !collapsed },
-                         style: { left: 'calc(' + (1.5 * (lvl + 1)) + ' * 1em)' }">▶</span>
+                         style: { left: 'calc(' + (3.5 + 2 * lvl) + ' * 8px)' }">
+            <sv-svg-icon params="iconName: 'icon-expand_16x16', size: 16"></sv-svg-icon>
+        </span>
         <!-- /ko -->
         <span data-bind="text: title"></span></td>
-    <td class="svd-dark-border-color" data-bind="text: getString(displayValue)"></td>
+    <td data-bind="css: (isNode ? 'svd-node-value' : 'svd-dark-border-color'), text: getString(displayValue)"></td>
 </tr>
 <!-- ko if: isNode && !collapsed -->
 <!-- ko foreach: data -->
