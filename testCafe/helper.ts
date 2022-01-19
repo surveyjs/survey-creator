@@ -40,6 +40,8 @@ export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
 
+export const creatorContentSelector = Selector(".svc-creator__content-holder");
+
 export const expandButtonSelector = Selector(".sv-action-bar-item[title=\"Show Panel\"]");
 export const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide Panel\"]");
 export const propertyGridSelector = Selector(".svc-side-bar__container");
