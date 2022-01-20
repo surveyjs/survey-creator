@@ -39,3 +39,15 @@ test("Page hover test", async t => {
     .wait(300)
     .expect(page.hasClass("svc-hovered")).notOk();
 });
+
+test("Page hover on Add Question button", async t => {
+  await setJSON(json);
+  await t
+    .maximizeWindow();
+  const page = Selector(".svc-page__content");
+  const question = Selector(".svc-page__add-new-question");
+  await t
+    .hover(question, { offsetX: 5, offsetY: 5 })
+    .wait(300)
+    .expect(page.hasClass("svc-hovered")).notOk();
+});
