@@ -334,7 +334,7 @@ test("Question type popup - narrow", async (t) => {
 test("Responsive creator: property grid - click the shadow", async (t) => {
   await t
     .resizeWindow(900, 700)
-    .click(Selector("body"), { offsetX: 237, offsetY: 347 })
+    .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 347 })
     .click(expandButtonSelector)
     .expect(propertyGridSelector.visible).ok()
     .expect(flyoutPropertyGrid.exists).ok()
@@ -342,7 +342,7 @@ test("Responsive creator: property grid - click the shadow", async (t) => {
     .click(collapseButtonSelector)
     .click(getBarItemByTitle("Settings").filterVisible())
     .expect(objectSelectorButton.withText("Survey").visible).ok()
-    .click(Selector("body"), { offsetX: 237, offsetY: 347 })
+    .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 347 })
 
     .expect(objectSelectorButton.withText("page1").visible).notOk();
 });
