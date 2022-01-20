@@ -298,7 +298,6 @@ test("Check item string editor focus out on near click", async (t) => {
   const svItemSelector = Selector(".sv-string-editor").withText("item1");
 
   await t
-    .debug()
     .click(svItemSelector)
     .expect(svItemSelector.focused).ok()
     .click(Selector(".svc-item-value-wrapper").withText("item1"), { offsetX: 200 })
