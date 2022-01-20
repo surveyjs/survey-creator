@@ -319,25 +319,25 @@ test("Creator layout: toolbox location", (): any => {
   const creator = new CreatorTester();
   expect(creator.toolboxLocation).toEqual("left");
   expect(creator.toolbox.isCompact).toEqual(false);
-  expect(creator.showPropertyGrid).toEqual(true);
+  expect(creator.showSidebar).toEqual(true);
   expect((<any>creator.toolbox).dotsItemPopupModel.horizontalPosition).toEqual("right");
 
   creator.toolboxLocation = "right";
   expect(creator.toolbox.isCompact).toEqual(true);
   expect((<any>creator.toolbox).dotsItemPopupModel.horizontalPosition).toEqual("left");
 
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
   expect(creator.toolbox.isCompact).toEqual(false);
 });
 
 test("the toolbox gets compact after the sidebar was collapsed/expanded ", (): any => {
   const creator = new CreatorTester();
   expect(creator.toolbox.isCompact).toEqual(false);
-  expect(creator.showPropertyGrid).toEqual(true);
+  expect(creator.showSidebar).toEqual(true);
 
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
   expect(creator.toolbox.isCompact).toEqual(false);
 
-  creator.showPropertyGrid = true;
+  creator.showSidebar = true;
   expect(creator.toolbox.isCompact).toEqual(false);
 });

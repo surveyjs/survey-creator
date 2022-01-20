@@ -33,7 +33,7 @@ test("Properties on the same line", async (t) => {
   const inputTab = Selector("h4").withExactText("Input");
 
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
+    window["creator"].showSidebar = true;
   })();
 
   await t
@@ -68,7 +68,7 @@ test("Values editors, keep them close", async (t) => {
   const dataTab = Selector("h4").withExactText("Data");
 
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
+    window["creator"].showSidebar = true;
   })();
 
   await t

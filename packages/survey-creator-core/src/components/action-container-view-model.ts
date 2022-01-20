@@ -102,7 +102,7 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
         visibleIndex: 20,
         iconSize: 16,
         action: () => {
-          this.creator.showPropertyGrid = true;
+          this.creator.showSidebar = true;
         }
       })
     );

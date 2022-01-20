@@ -1315,7 +1315,7 @@ test("Show/hide property grid", (): any => {
     ]
   };
   const settingsBarItem = creator.getActionBarItem("svd-settings");
-  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(creator.showSidebar).toBeTruthy();
   expect(settingsBarItem).toBeTruthy();
   expect(creator.sidebar.visible).toBeTruthy();
   creator.selectElement(creator.survey.getAllQuestions()[0]);
@@ -1326,14 +1326,14 @@ test("Show/hide property grid", (): any => {
   const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter(item => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
-  expect(creator.showPropertyGrid).toBeFalsy();
+  expect(creator.showSidebar).toBeFalsy();
   expect(creator.sidebar.visible).toBeFalsy();
 
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
-  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(creator.showSidebar).toBeTruthy();
   expect(creator.sidebar.visible).toBeTruthy();
 
   settings.propertyGrid.allowCollapse = prevValue;
@@ -1354,9 +1354,9 @@ test("Show/hide property grid and settings button active state", (): any => {
       }
     ]
   };
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
   const settingsBarItem = creator.getActionBarItem("svd-settings");
-  expect(creator.showPropertyGrid).toBeFalsy();
+  expect(creator.showSidebar).toBeFalsy();
   expect(settingsBarItem.active).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   creator.selectElement(creator.survey.getAllQuestions()[0]);
@@ -1365,7 +1365,7 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(creator.sidebar.visible).toBeFalsy();
 
   settingsBarItem.action();
-  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(creator.showSidebar).toBeTruthy();
   expect(creator.sidebar.visible).toBeTruthy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeTruthy();
@@ -1373,7 +1373,7 @@ test("Show/hide property grid and settings button active state", (): any => {
   const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
-  expect(creator.showPropertyGrid).toBeFalsy();
+  expect(creator.showSidebar).toBeFalsy();
   expect(creator.sidebar.visible).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeFalsy();
@@ -1398,7 +1398,7 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
   const expandBarItem = creator.toolbarItems.filter((item) => { return item.id === "svd-grid-expand"; })[0];
   const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
 
-  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(creator.showSidebar).toBeTruthy();
   expect(expandBarItem).toBeTruthy();
   expect(expandBarItem.visible).toBeFalsy();
   expect(creator.sidebar.visible).toBeTruthy();
@@ -1406,12 +1406,12 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
   expect(hidePropertyModelBarItem.visible).toBeTruthy();
 
   hidePropertyModelBarItem.action();
-  expect(creator.showPropertyGrid).toBeFalsy();
+  expect(creator.showSidebar).toBeFalsy();
   expect(creator.sidebar.visible).toBeFalsy();
   expect(expandBarItem.visible).toBeTruthy();
 
   expandBarItem.action();
-  expect(creator.showPropertyGrid).toBeTruthy();
+  expect(creator.showSidebar).toBeTruthy();
   expect(creator.sidebar.visible).toBeTruthy();
   expect(expandBarItem.visible).toBeFalsy();
 

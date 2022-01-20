@@ -136,7 +136,7 @@ test("Matrix dropdown with vertical layout and and selecting rows", async (t) =>
     .click(getToolboxItemByText("Matrix (multiple choice)"));
 
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
+    window["creator"].showSidebar = true;
     window["creator"].survey.getQuestionByName("question1").columnLayout = "vertical";
   })();
 
@@ -152,7 +152,7 @@ test("Matrix dropdown with detail panel", async (t) => {
     .click(getToolboxItemByText("Matrix (multiple choice)"));
 
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
+    window["creator"].showSidebar = true;
     window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
   })();
   const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");

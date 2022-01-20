@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, changeToolboxLocation, setShowPropertyGrid, getTabbedMenuItemByText, checkElementScreenshot, setJSON } from "../../helper";
+import { url, changeToolboxLocation, setShowSidebar, getTabbedMenuItemByText, checkElementScreenshot, setJSON } from "../../helper";
 
 const title = "Toolbox Screenshot";
 
@@ -48,7 +48,7 @@ test("Right toolbox", async (t) => {
   const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
   await changeToolboxLocation("right");
-  await setShowPropertyGrid(false);
+  await setShowSidebar(false);
   await t.resizeWindow(2560, 1440);
 
   const toolboxElement = Selector(".svc-toolbox");
@@ -82,7 +82,7 @@ test("toolbox inside sidebar", async (t) => {
   const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
 
   await changeToolboxLocation("sidebar");
-  await setShowPropertyGrid(true);
+  await setShowSidebar(true);
   await t
     .click(toolboxButtonSelector)
     .resizeWindow(2560, 1440);

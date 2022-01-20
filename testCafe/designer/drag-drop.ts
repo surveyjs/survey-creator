@@ -192,7 +192,7 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 
 test("Drag Drop Toolbox Responsivity", async (t) => {
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = false;
+    window["creator"].showSidebar = false;
   })();
   const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-child(20)");
   await t

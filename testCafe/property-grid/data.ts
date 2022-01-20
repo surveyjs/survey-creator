@@ -33,7 +33,7 @@ test("Default value", async (t) => {
   const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
 
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
+    window["creator"].showSidebar = true;
   })();
 
   await t

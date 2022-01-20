@@ -10,7 +10,7 @@ export class SidebarModel extends Base {
   private _expandAction: Action;
   private _collapseAction: Action;
   private _activeTab: SidebarTabModel;
-  private onPropertyGridVisibilityChanged;
+  private onSidebarVisibilityChanged;
   private resizeManager: ResizeManager;
 
   @propertyArray() tabs: Array<SidebarTabModel>;
@@ -53,7 +53,7 @@ export class SidebarModel extends Base {
         visible: <any>new ComputedUpdater<boolean>(() => this.visible),
         action: () => {
           this.collapseSidebar();
-          if(!this.flyoutMode) {
+          if (!this.flyoutMode) {
             this.collapsedManually = true;
             this.expandedManually = false;
           }
@@ -68,7 +68,7 @@ export class SidebarModel extends Base {
         needSeparator: true,
         action: () => {
           this.expandSidebar();
-          if(!this.flyoutMode) {
+          if (!this.flyoutMode) {
             this.collapsedManually = false;
             this.expandedManually = this.flyoutMode;
           }
@@ -88,21 +88,21 @@ export class SidebarModel extends Base {
 
   constructor(
     private creator: CreatorBase,
-    private collapseAction: () => void = () => { this.creator.showPropertyGrid = false; },
-    private expandAction: () => void = () => { this.creator.showPropertyGrid = true; }
+    private collapseAction: () => void = () => { this.creator.showSidebar = false; },
+    private expandAction: () => void = () => { this.creator.showSidebar = true; }
   ) {
     super();
-    this.onPropertyGridVisibilityChanged = (sender: CreatorBase, options: any) => {
+    this.onSidebarVisibilityChanged = (sender: CreatorBase, options: any) => {
       if (this.isDisposed) return;
       this.visible = options.show;
     };
-    this.creator.onShowPropertyGridVisiblityChanged.add(this.onPropertyGridVisibilityChanged);
+    this.creator.onShowSidebarVisiblityChanged.add(this.onSidebarVisibilityChanged);
     this.creator.onPropertyChanged.add((sender, options) => {
       if (options.name === "sidebarLocation" && !!this.resizeManager) {
         this.resizeManager.setHandles(this.getCurrentHandles());
       }
     });
-    this.visible = this.creator.showPropertyGrid;
+    this.visible = this.creator.showSidebar;
     this.createActions();
   }
 
@@ -134,7 +134,7 @@ export class SidebarModel extends Base {
   }
   public dispose() {
     if (!!this.creator && !this.isDisposed) {
-      this.creator.onShowPropertyGridVisiblityChanged.remove(this.onPropertyGridVisibilityChanged);
+      this.creator.onShowSidebarVisiblityChanged.remove(this.onSidebarVisibilityChanged);
     }
     super.dispose();
   }

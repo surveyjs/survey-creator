@@ -86,7 +86,7 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   const creator = new CreatorTester();
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
   creator.toolboxLocation = "right";
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
 
   const checkByWidth = (newOffsetWidth: number, toolboxLocation: toolBoxLocationType, toolboxIsCompact: boolean, propertyGridFlyoutMode: boolean, showPageNavigator: boolean) => {
     container.offsetWidth = newOffsetWidth;

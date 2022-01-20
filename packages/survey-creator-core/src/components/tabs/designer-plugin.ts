@@ -19,7 +19,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     return this.creator.isElementSelected(<any>this.creator.survey);
   }
   private get isSettingsActive(): boolean {
-    return this.creator.showPropertyGrid && this.isSurveySelected;
+    return this.creator.showSidebar && this.isSurveySelected;
   }
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "designer"; });
@@ -97,8 +97,8 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       iconName: "icon-toolbox",
       needSeparator: true,
       action: () => {
-        if (!this.creator.showPropertyGrid) {
-          this.creator.showPropertyGrid = true;
+        if (!this.creator.showSidebar) {
+          this.creator.showSidebar = true;
         }
         this.creator.sidebar.activeTab = "toolbox";
       },
@@ -165,14 +165,14 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.creator.onSelectedElementChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
-    this.creator.onShowPropertyGridVisiblityChanged.add((sender, options) => {
+    this.creator.onShowSidebarVisiblityChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
     return items;
   }
   public selectSurvey() {
-    if (!this.creator.showPropertyGrid) {
-      this.creator.showPropertyGrid = true;
+    if (!this.creator.showSidebar) {
+      this.creator.showSidebar = true;
     }
     this.creator.selectElement(this.creator.survey);
     this.creator.sidebar.activeTab = this.propertyGridTab.id;

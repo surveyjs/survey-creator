@@ -14,7 +14,7 @@ const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = false;
+    window["creator"].showSidebar = false;
   })();
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
   await t
@@ -289,7 +289,7 @@ test("Property grid editor popup", async (t) => {
   const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
   const mobileCloseButton = Selector(".svc-side-bar__container-close");
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
+    window["creator"].showSidebar = true;
   })();
   await t
     .click(question1)
@@ -311,7 +311,7 @@ test("Question type popup - wide", async (t) => {
   };
   await setJSON(json);
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
+    window["creator"].showSidebar = true;
   })();
   await t
     .click(Selector("button.svc-page__question-type-selector"))
@@ -323,7 +323,7 @@ test("Question type popup - narrow", async (t) => {
   };
   await setJSON(json);
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = false;
+    window["creator"].showSidebar = false;
   })();
   await t
     .resizeWindow(380, 600)

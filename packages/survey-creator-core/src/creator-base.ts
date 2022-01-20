@@ -968,7 +968,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public updateToolboxIsCompact(newVal?: boolean) {
     const hasValue = newVal != undefined && newVal != null;
     if (this.toolboxLocation == "right") {
-      this.toolbox.isCompact = this.showPropertyGrid || (hasValue && newVal);
+      this.toolbox.isCompact = this.showSidebar || (hasValue && newVal);
     } else if (hasValue) {
       this.toolbox.isCompact = newVal;
     }
@@ -978,7 +978,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     throw new Error("Method not implemented.");
   }
 
-  //#region Obsolete properties and functins
   public get showToolbox() {
     SurveyHelper.warnNonSupported("showToolbox", "toolboxLocation");
     return this.toolboxLocation !== "hidden";
@@ -993,26 +992,41 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.toolboxLocation = val;
     }
   }
-  private showPropertyGridValue: boolean = true;
-  public onShowPropertyGridVisiblityChanged: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  private showSidebarValue: boolean = true;
+  public onShowSidebarVisiblityChanged: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * Set this this property grid false to hide the property grid.
    */
-  public get showPropertyGrid(): boolean {
-    return this.showPropertyGridValue;
+  public get showSidebar(): boolean {
+    return this.showSidebarValue;
   }
-  public set showPropertyGrid(val: boolean) {
+  public set showSidebar(val: boolean) {
     if (<any>val !== true && <any>val !== false) {
-      SurveyHelper.warnText("showPropertyGrid propertry grid is a boolean property now.");
+      SurveyHelper.warnText("showSidebar is a boolean property now.");
       return;
     }
-    if (this.showPropertyGrid === val) return;
-    this.showPropertyGridValue = val;
+    if (this.showSidebar === val) return;
+    this.showSidebarValue = val;
     this.updateToolboxIsCompact();
-    this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
+    this.onShowSidebarVisiblityChanged.fire(this, { show: val });
+    if (!this.onShowPropertyGridVisiblityChanged.isEmpty) {
+      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisiblityChanged");
+      this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
+    }
+  }
+  //#region Obsolete properties and functins
+  public onShowPropertyGridVisiblityChanged: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public get showPropertyGrid(): boolean {
+    SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
+    return this.showSidebar;
+  }
+  public set showPropertyGrid(val: boolean) {
+    SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
+    if (<any>val !== true && <any>val !== false) {
+      SurveyHelper.warnText("showSidebar is a boolean property.");
+      return;
+    }
+    this.showSidebar = val;
   }
   public rightContainerActiveItem(name: string) {
     SurveyHelper.warnNonSupported("rightContainerActiveItem");

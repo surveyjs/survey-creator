@@ -90,7 +90,7 @@ fixture(title)
   .beforeEach(async (t) => {
     await t.maximizeWindow();
     await ClientFunction(() => {
-      window["creator"].showPropertyGrid = true;
+      window["creator"].showSidebar = true;
     })();
   });
 
