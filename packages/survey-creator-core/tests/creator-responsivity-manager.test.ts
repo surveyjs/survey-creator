@@ -56,7 +56,7 @@ test("CreatorResponsivityManager process", (): any => {
     expect(creator.toolboxLocation).toEqual(toolboxLocation);
     expect(creator.toolbox.isCompact).toEqual(toolboxIsCompact);
     expect(creator.showPageNavigator).toEqual(showPageNavigator);
-    expect(creator.sideBar.flyoutMode).toEqual(propertyGridFlyoutMode);
+    expect(creator.sidebar.flyoutMode).toEqual(propertyGridFlyoutMode);
   };
 
   expect(creator.toolboxLocation).toEqual("left");
@@ -94,7 +94,7 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
     expect(creator.toolboxLocation).toEqual(toolboxLocation);
     expect(creator.toolbox.isCompact).toEqual(toolboxIsCompact);
     expect(creator.showPageNavigator).toEqual(showPageNavigator);
-    expect(creator.sideBar.flyoutMode).toEqual(propertyGridFlyoutMode);
+    expect(creator.sidebar.flyoutMode).toEqual(propertyGridFlyoutMode);
   };
 
   expect(creator.toolbox.isCompact).toBeFalsy();
@@ -118,67 +118,67 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   checkByWidth(200, "hidden", true, true, false);
 });
 
-test("CreatorResponsivityManager: SideBar expand/collapse on width change", (): any => {
+test("CreatorResponsivityManager: Sidebar expand/collapse on width change", (): any => {
   const container: SimpleContainer = new SimpleContainer({});
   const creator = new CreatorTester();
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
 
-  expect(creator.sideBar.visible).toEqual(true);
+  expect(creator.sidebar.visible).toEqual(true);
   container.offsetWidth = 900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(false);
+  expect(creator.sidebar.visible).toEqual(false);
   container.offsetWidth = 1900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(true);
+  expect(creator.sidebar.visible).toEqual(true);
 
-  expect(creator.sideBar.visible).toEqual(true);
+  expect(creator.sidebar.visible).toEqual(true);
   container.offsetWidth = 900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(false);
-  creator.sideBar["_expandAction"].action();
-  expect(creator.sideBar.visible).toEqual(true);
-  creator.sideBar["_collapseAction"].action();
-  expect(creator.sideBar.visible).toEqual(false);
+  expect(creator.sidebar.visible).toEqual(false);
+  creator.sidebar["_expandAction"].action();
+  expect(creator.sidebar.visible).toEqual(true);
+  creator.sidebar["_collapseAction"].action();
+  expect(creator.sidebar.visible).toEqual(false);
   container.offsetWidth = 1900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(true);
+  expect(creator.sidebar.visible).toEqual(true);
 
-  creator.sideBar["_collapseAction"].action();
-  expect(creator.sideBar.visible).toEqual(false);
+  creator.sidebar["_collapseAction"].action();
+  expect(creator.sidebar.visible).toEqual(false);
   container.offsetWidth = 900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(false);
+  expect(creator.sidebar.visible).toEqual(false);
   container.offsetWidth = 1900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(false);
+  expect(creator.sidebar.visible).toEqual(false);
 
   container.offsetWidth = 900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(false);
-  creator.sideBar["_expandAction"].action();
-  expect(creator.sideBar.visible).toEqual(true);
+  expect(creator.sidebar.visible).toEqual(false);
+  creator.sidebar["_expandAction"].action();
+  expect(creator.sidebar.visible).toEqual(true);
   container.offsetWidth = 1900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(true);
+  expect(creator.sidebar.visible).toEqual(true);
   container.offsetWidth = 900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(false);
+  expect(creator.sidebar.visible).toEqual(false);
 
   container.offsetWidth = 1900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(true);
-  creator.sideBar["_collapseAction"].action();
-  expect(creator.sideBar.visible).toEqual(false);
+  expect(creator.sidebar.visible).toEqual(true);
+  creator.sidebar["_collapseAction"].action();
+  expect(creator.sidebar.visible).toEqual(false);
   container.offsetWidth = 900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(false);
-  creator.sideBar["_expandAction"].action();
-  expect(creator.sideBar.visible).toEqual(true);
-  creator.sideBar["_collapseAction"].action();
-  expect(creator.sideBar.visible).toEqual(false);
+  expect(creator.sidebar.visible).toEqual(false);
+  creator.sidebar["_expandAction"].action();
+  expect(creator.sidebar.visible).toEqual(true);
+  creator.sidebar["_collapseAction"].action();
+  expect(creator.sidebar.visible).toEqual(false);
   container.offsetWidth = 1900;
   responsivityManager.process();
-  expect(creator.sideBar.visible).toEqual(false);
+  expect(creator.sidebar.visible).toEqual(false);
 });
 
 test("CreatorResponsivityManager: Question Settings visibility", (): any => {
@@ -189,7 +189,7 @@ test("CreatorResponsivityManager: Question Settings visibility", (): any => {
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  creator.sideBar.flyoutMode = true;
+  creator.sidebar.flyoutMode = true;
 
   const question = creator.survey.getAllQuestions()[0];
   const qModel = new QuestionAdornerViewModel(

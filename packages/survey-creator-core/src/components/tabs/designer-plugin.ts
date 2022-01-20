@@ -2,15 +2,15 @@ import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
-import { SideBarTabModel } from "../side-bar/side-bar-tab-model";
+import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../settings";
 import { TabDesignerViewModel } from "./designer";
 
 export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin {
   public model: TabDesignerViewModel<T>;
   public propertyGrid: PropertyGridViewModel<T>;
-  private propertyGridTab: SideBarTabModel;
-  private toolboxTab: SideBarTabModel;
+  private propertyGridTab: SidebarTabModel;
+  private toolboxTab: SidebarTabModel;
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
   public previewAction: Action;
@@ -32,7 +32,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     creator.addPluginTab("designer", this);
     const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
-    this.propertyGridTab = this.creator.sideBar.addTab("propertyGrid", "svc-property-grid", this.propertyGrid, () => {
+    this.propertyGridTab = this.creator.sidebar.addTab("propertyGrid", "svc-property-grid", this.propertyGrid, () => {
       const result = [];
       if (!!this.propertyGrid.prevSelectionAction) {
         this.propertyGrid.prevSelectionAction.visible = this.createVisibleUpdater();
@@ -48,16 +48,16 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       }
       return result;
     });
-    this.toolboxTab = this.creator.sideBar.addTab("toolbox", "svc-toolbox", creator);
+    this.toolboxTab = this.creator.sidebar.addTab("toolbox", "svc-toolbox", creator);
     this.creator.onPropertyChanged.add((sender, options) => {
       if (options.name === "isMobileView") {
         this.updatePropertyGridTabCaption();
       }
       if (options.name === "toolboxLocation") {
-        if (this.toolboxTab.visible && options.newVal !== "insideSideBar") {
+        if (this.toolboxTab.visible && options.newVal !== "sidebar") {
           this.propertyGridTab.visible = true;
         }
-        this.toolboxTab.visible = options.newVal === "insideSideBar";
+        this.toolboxTab.visible = options.newVal === "sidebar";
       }
     });
     this.propertyGrid.onPropertyChanged.add((sender, options) => {
@@ -78,7 +78,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
   }
   public activate(): void {
     this.model = new TabDesignerViewModel<T>(this.creator);
-    this.creator.sideBar.activeTab = this.propertyGridTab.id;
+    this.creator.sidebar.activeTab = this.propertyGridTab.id;
   }
   public deactivate(): boolean {
     this.model = undefined;
@@ -100,12 +100,12 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
         if (!this.creator.showPropertyGrid) {
           this.creator.showPropertyGrid = true;
         }
-        this.creator.sideBar.activeTab = "toolbox";
+        this.creator.sidebar.activeTab = "toolbox";
       },
-      active: <any>new ComputedUpdater<boolean>(() => this.creator.sideBar.activeTab === "toolbox"),
+      active: <any>new ComputedUpdater<boolean>(() => this.creator.sidebar.activeTab === "toolbox"),
       visible: <any>new ComputedUpdater<boolean>(() => {
-        const insideSideBar = this.creator.toolboxLocation === "insideSideBar";
-        return this.creator.activeTab === "designer" && insideSideBar;
+        const toolboxLocationSidebar = this.creator.toolboxLocation === "sidebar";
+        return this.creator.activeTab === "designer" && toolboxLocationSidebar;
       }),
       title: "Toolbox",
       showTitle: false
@@ -115,14 +115,14 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       id: "svd-settings",
       iconName: "icon-settings",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
-        const insideSideBar = this.creator.toolboxLocation === "insideSideBar";
-        return !this.creator.isMobileView && !insideSideBar;
+        const toolboxLocationSidebar = this.creator.toolboxLocation === "sidebar";
+        return !this.creator.isMobileView && !toolboxLocationSidebar;
       }),
       action: () => {
         this.selectSurvey();
       },
       active: <any>new ComputedUpdater<boolean>(() => {
-        const settingTabIsActive = this.creator.sideBar.activeTab === this.propertyGridTab.id;
+        const settingTabIsActive = this.creator.sidebar.activeTab === this.propertyGridTab.id;
         return this.isSurveySelected && settingTabIsActive;
       }),
       visible: this.createVisibleUpdater(),
@@ -175,7 +175,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       this.creator.showPropertyGrid = true;
     }
     this.creator.selectElement(this.creator.survey);
-    this.creator.sideBar.activeTab = this.propertyGridTab.id;
+    this.creator.sidebar.activeTab = this.propertyGridTab.id;
   }
 
   public addFooterActions() {

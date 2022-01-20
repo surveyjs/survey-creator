@@ -1,7 +1,7 @@
 import { SurveyModel, PopupModel, ListModel, Action, IAction, Base } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { SideBarTabModel } from "../side-bar/side-bar-tab-model";
+import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../settings";
 import { Translation } from "./translation";
 
@@ -13,14 +13,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private exportCsvAction: Action;
   private inputFileElement: HTMLInputElement;
   private pagePopupModel: PopupModel;
-  private sideBarTab: SideBarTabModel;
+  private sidebarTab: SidebarTabModel;
 
   public model: Translation;
 
   constructor(private creator: CreatorBase<SurveyModel>) {
     creator.addPluginTab("translation", this);
-    this.sideBarTab = this.creator.sideBar.addTab("translation");
-    this.sideBarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");
+    this.sidebarTab = this.creator.sidebar.addTab("translation");
+    this.sidebarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
@@ -30,9 +30,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(self, options);
       return options.visible;
     };
-    this.sideBarTab.model = this.model.settingsSurvey;
-    this.sideBarTab.componentName = "survey-widget";
-    this.creator.sideBar.activeTab = this.sideBarTab.id;
+    this.sidebarTab.model = this.model.settingsSurvey;
+    this.sidebarTab.componentName = "survey-widget";
+    this.creator.sidebar.activeTab = this.sidebarTab.id;
 
     this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
@@ -75,7 +75,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     this.model = undefined;
-    this.sideBarTab.visible = false;
+    this.sidebarTab.visible = false;
     this.showAllStringsAction.visible = false;
     this.filterPageAction.visible = false;
     this.mergeLocaleWithDefaultAction.visible = false;

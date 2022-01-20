@@ -78,11 +78,11 @@ test("SelectObject", async (t: TestController) => {
 });
 
 const toolboxInDesigner = Selector(".svc-creator-tab .svc-toolbox");
-const toolboxInSideBar = Selector(".svc-side-bar .svc-toolbox");
+const toolboxInSidebar = Selector(".svc-side-bar .svc-toolbox");
 const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
 const settingsButtonSelector = Selector(".sv-action-bar-item[title=\"Settings\"]");
 
-test("toolboxLocation insideSideBar", async (t) => {
+test("toolboxLocation sidebar", async (t) => {
   const propertyGridSelector = Selector(".spg-root-modern");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
@@ -92,30 +92,30 @@ test("toolboxLocation insideSideBar", async (t) => {
   await setJSON({ pages: [{ name: "page1" }] });
   await t
     .expect(toolboxInDesigner.visible).ok()
-    .expect(toolboxInSideBar.exists).notOk()
+    .expect(toolboxInSidebar.exists).notOk()
     .expect(toolboxButtonSelector.visible).notOk();
 
-  await changeToolboxLocation("insideSideBar");
+  await changeToolboxLocation("sidebar");
   await t
     .expect(toolboxInDesigner.exists).notOk()
-    .expect(toolboxInSideBar.exists).notOk()
+    .expect(toolboxInSidebar.exists).notOk()
     .expect(toolboxButtonSelector.visible).ok()
 
     .click(toolboxButtonSelector)
     .expect(toolboxInDesigner.exists).notOk()
-    .expect(toolboxInSideBar.visible).ok()
+    .expect(toolboxInSidebar.visible).ok()
     .expect(propertyGridSelector.exists).notOk()
     .expect(toolboxButtonSelector.visible).ok()
 
     .click(settingsButtonSelector)
     .expect(toolboxInDesigner.exists).notOk()
-    .expect(toolboxInSideBar.exists).notOk()
+    .expect(toolboxInSidebar.exists).notOk()
     .expect(propertyGridSelector.visible).ok()
     .expect(toolboxButtonSelector.visible).ok()
 
     .click(toolboxButtonSelector)
     .expect(toolboxInDesigner.exists).notOk()
-    .expect(toolboxInSideBar.visible).ok()
+    .expect(toolboxInSidebar.visible).ok()
     .expect(propertyGridSelector.exists).notOk()
     .expect(toolboxButtonSelector.visible).ok();
 
@@ -132,7 +132,7 @@ test("toolboxLocation insideSideBar", async (t) => {
   await changeToolboxLocation("right");
   await t
     .expect(toolboxInDesigner.visible).ok()
-    .expect(toolboxInSideBar.exists).notOk()
+    .expect(toolboxInSidebar.exists).notOk()
     .expect(toolboxButtonSelector.visible).notOk()
     .expect(propertyGridSelector.visible).ok();
 });
@@ -182,12 +182,12 @@ test("toolboxLocation left", async (t) => {
     .resizeWindow(1920, 900); // reset window size
 });
 
-test("toolboxLocation insideSideBar: check toolbox items", async (t) => {
+test("toolboxLocation sidebar: check toolbox items", async (t) => {
   const toolboxItemCount = 20;
   const itemsInToolboxInDesigner = toolboxInDesigner.find(".svc-toolbox__item");
   const visibleItemsInToolboxInDesigner = itemsInToolboxInDesigner.filterVisible();
-  const itemsInToolboxInSideBar = toolboxInSideBar.find(".svc-toolbox__item");
-  const visibleItemsInToolboxInSideBar = itemsInToolboxInSideBar.filterVisible();
+  const itemsInToolboxInSidebar = toolboxInSidebar.find(".svc-toolbox__item");
+  const visibleItemsInToolboxInSidebar = itemsInToolboxInSidebar.filterVisible();
 
   await t
     .expect(toolboxInDesigner.visible).ok()
@@ -198,15 +198,15 @@ test("toolboxLocation insideSideBar: check toolbox items", async (t) => {
     .expect(toolboxInDesigner.visible).ok()
     .expect(itemsInToolboxInDesigner.count).eql(toolboxItemCount)
     .expect(visibleItemsInToolboxInDesigner.count).lt(toolboxItemCount)
-    .expect(toolboxInSideBar.exists).notOk();
+    .expect(toolboxInSidebar.exists).notOk();
 
-  await changeToolboxLocation("insideSideBar");
+  await changeToolboxLocation("sidebar");
   await t
     .click(toolboxButtonSelector)
-    .expect(toolboxInSideBar.visible).ok()
+    .expect(toolboxInSidebar.visible).ok()
     .expect(toolboxInDesigner.exists).notOk()
-    .expect(itemsInToolboxInSideBar.count).eql(toolboxItemCount)
-    .expect(visibleItemsInToolboxInSideBar.count).eql(toolboxItemCount)
+    .expect(itemsInToolboxInSidebar.count).eql(toolboxItemCount)
+    .expect(visibleItemsInToolboxInSidebar.count).eql(toolboxItemCount)
 
     .resizeWindow(1920, 900); // reset window size
 });

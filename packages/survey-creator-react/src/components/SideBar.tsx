@@ -1,20 +1,20 @@
 import React from "react";
-import { SideBarTabModel, SideBarModel } from "@survey/creator";
+import { SidebarTabModel, SidebarModel } from "@survey/creator";
 import { Base } from "survey-core";
 import { SurveyElementBase, SurveyActionBar, ReactQuestionFactory, ReactElementFactory } from "survey-react-ui";
 
-interface ISideBarComponentProps {
-  model: SideBarModel;
+interface ISidebarComponentProps {
+  model: SidebarModel;
 }
 
-export class SideBarComponent extends SurveyElementBase<ISideBarComponentProps, any> {
+export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, any> {
   private containerRef: React.RefObject<HTMLDivElement>;
 
-  get model(): SideBarModel {
+  get model(): SidebarModel {
     return this.props.model;
   }
 
-  constructor(props: ISideBarComponentProps) {
+  constructor(props: ISidebarComponentProps) {
     super(props);
     this.containerRef = React.createRef();
   }
@@ -38,7 +38,7 @@ export class SideBarComponent extends SurveyElementBase<ISideBarComponentProps, 
   renderElement() {
     const style = { display: !this.model.visible ? "none" : "" };
     const className = "svc-side-bar" + (this.model.flyoutPanelMode ? " svc-flyout-side-bar" : "");
-    const items = this.model.tabs.map((item) => <SideBarTab item={item} key={item.id} />);
+    const items = this.model.tabs.map((item) => <SidebarTab item={item} key={item.id} />);
     return (
       <div className={className} style={{ display: !this.model.hasVisibleTabs ? "none" : "" }}>
         <div className="svc-side-bar__shadow"></div>
@@ -56,7 +56,7 @@ export class SideBarComponent extends SurveyElementBase<ISideBarComponentProps, 
               {items}
             </div>
             <div className="svc-side-bar__container-close">
-              <div className="sd-btn sd-btn--action svc-side-bar__container-close-button" onClick={() => this.model.collapseSideBar()}> {this.model.closeText} </div>
+              <div className="sd-btn sd-btn--action svc-side-bar__container-close-button" onClick={() => this.model.collapseSidebar()}> {this.model.closeText} </div>
             </div>
           </div>
         </div>
@@ -65,8 +65,8 @@ export class SideBarComponent extends SurveyElementBase<ISideBarComponentProps, 
   }
 }
 
-class SideBarTab extends SurveyElementBase<any, any> {
-  private get item(): SideBarTabModel {
+class SidebarTab extends SurveyElementBase<any, any> {
+  private get item(): SidebarTabModel {
     return this.props.item;
   }
 
@@ -84,11 +84,11 @@ class SideBarTab extends SurveyElementBase<any, any> {
 }
 
 ReactQuestionFactory.Instance.registerQuestion("svc-side-bar-tab", (props) => {
-  return React.createElement(SideBarTab, props);
+  return React.createElement(SidebarTab, props);
 });
 
-export default SideBarComponent;
+export default SidebarComponent;
 
 ReactElementFactory.Instance.registerElement("svc-side-bar", (props) => {
-  return React.createElement(SideBarComponent, props);
+  return React.createElement(SidebarComponent, props);
 });

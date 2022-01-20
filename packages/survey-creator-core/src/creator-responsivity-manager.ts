@@ -43,7 +43,7 @@ export class CreatorResponsivityManager {
     }
   }
 
-  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSideBar: boolean) {
+  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean) {
     this.creator.updateToolboxIsCompact(toolboxIsCompact);
     if (toolboxVisible && this.creator.toolboxLocation === "hidden") {
       this.creator.toolboxLocation = this.prevToolboxLocation;
@@ -52,16 +52,16 @@ export class CreatorResponsivityManager {
       this.creator.toolboxLocation = "hidden";
     }
     this.creator.showPageNavigator = toolboxVisible;
-    this.creator.sideBar.flyoutMode = flyoutSideBar;
+    this.creator.sidebar.flyoutMode = flyoutSidebar;
 
-    if(this.creator.sideBar.visible && !flyoutSideBar) {
-      this.creator.sideBar.collapsedManually = false;
+    if(this.creator.sidebar.visible && !flyoutSidebar) {
+      this.creator.sidebar.collapsedManually = false;
     }
-    if(this.creator.sideBar.visible && !this.creator.sideBar.expandedManually && flyoutSideBar && this.creator.toolboxLocation != "right") {
-      this.creator.sideBar.collapseSideBar();
+    if(this.creator.sidebar.visible && !this.creator.sidebar.expandedManually && flyoutSidebar && this.creator.toolboxLocation != "right") {
+      this.creator.sidebar.collapseSidebar();
     }
-    if(!this.creator.sideBar.visible && !this.creator.sideBar.collapsedManually && !flyoutSideBar && this.creator.toolboxLocation != "right") {
-      this.creator.sideBar.expandSideBar();
+    if(!this.creator.sidebar.visible && !this.creator.sidebar.collapsedManually && !flyoutSidebar && this.creator.toolboxLocation != "right") {
+      this.creator.sidebar.expandSidebar();
     }
 
   }

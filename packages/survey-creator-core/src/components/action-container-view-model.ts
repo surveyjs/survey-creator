@@ -30,7 +30,7 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
       }
     };
     this.surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
-    this.creator.sideBar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
+    this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.actionContainer = new AdaptiveActionContainer();
     var actions: Array<Action> = [];
     this.buildActions(actions);
@@ -61,7 +61,7 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
     this.allowDragging = operationsAllow && options.allowDragging;
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
-    this.updateActionVisibility("settings", this.creator.sideBar.flyoutMode);
+    this.updateActionVisibility("settings", this.creator.sidebar.flyoutMode);
   }
   protected isOperationsAllow(): boolean {
     return !this.creator.readOnly;

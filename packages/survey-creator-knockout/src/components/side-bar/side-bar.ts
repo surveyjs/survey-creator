@@ -1,4 +1,4 @@
-import { SideBarModel } from "@survey/creator";
+import { SidebarModel } from "@survey/creator";
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
 
@@ -7,11 +7,11 @@ const template = require("./side-bar.html");
 ko.components.register("svc-side-bar", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
-      const model: SideBarModel = ko.unwrap(params.model);
+      const model: SidebarModel = ko.unwrap(params.model);
       model.initResizeManager(componentInfo.element.getElementsByClassName("svc-side-bar__container")[0]);
 
       const subscrib = ko.computed(() => {
-        const model: SideBarModel = ko.unwrap(params.model);
+        const model: SidebarModel = ko.unwrap(params.model);
         new ImplementorBase(model);
       });
 

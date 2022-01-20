@@ -208,7 +208,7 @@ export class QuestionToolbox
     }
   }
   public setLocation(toolboxLocation: toolBoxLocationType) {
-    if (toolboxLocation === "insideSideBar") {
+    if (toolboxLocation === "sidebar") {
       this.visibleActions.forEach((item) => (item.mode = "small"));
     } else {
       this.dotsItemPopupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";

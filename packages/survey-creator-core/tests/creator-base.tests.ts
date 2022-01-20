@@ -831,7 +831,7 @@ test("Show error on entering non-unique column value", (): any => {
   };
   const matrixQuestion = <QuestionMatrixDynamicModel>creator.survey.getAllQuestions()[0];
   creator.selectElement(matrixQuestion.columns[1]); //
-  const questionName = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("name");
+  const questionName = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("name");
   expect(questionName.value).toEqual("col2");
   questionName.value = "col1";
   expect(questionName.errors).toHaveLength(1);
@@ -898,7 +898,7 @@ test("Check page actions for pageEditMode is 'single'", (): any => {
     elements: [{ type: "text", name: "question1" }]
   };
   expect(creator.pageEditMode).toEqual("single");
-  creator.sideBar.flyoutMode = true;
+  creator.sidebar.flyoutMode = true;
 
   const pageModel = new PageViewModel(creator, creator.survey.pages[0]);
   creator.selectElement(creator.survey.pages[0]);
@@ -1317,24 +1317,24 @@ test("Show/hide property grid", (): any => {
   const settingsBarItem = creator.getActionBarItem("svd-settings");
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(settingsBarItem).toBeTruthy();
-  expect(creator.sideBar.visible).toBeTruthy();
+  expect(creator.sidebar.visible).toBeTruthy();
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
 
-  const hidePropertyModelBarItem = creator.sideBar.toolbar.actions.filter(item => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter(item => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
-  expect(creator.sideBar.visible).toBeFalsy();
+  expect(creator.sidebar.visible).toBeFalsy();
 
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   settingsBarItem.action();
   expect(creator.selectedElementName).toEqual("survey");
   expect(creator.showPropertyGrid).toBeTruthy();
-  expect(creator.sideBar.visible).toBeTruthy();
+  expect(creator.sidebar.visible).toBeTruthy();
 
   settings.propertyGrid.allowCollapse = prevValue;
 });
@@ -1362,19 +1362,19 @@ test("Show/hide property grid and settings button active state", (): any => {
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   expect(settingsBarItem.active).toBeFalsy();
-  expect(creator.sideBar.visible).toBeFalsy();
+  expect(creator.sidebar.visible).toBeFalsy();
 
   settingsBarItem.action();
   expect(creator.showPropertyGrid).toBeTruthy();
-  expect(creator.sideBar.visible).toBeTruthy();
+  expect(creator.sidebar.visible).toBeTruthy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeTruthy();
 
-  const hidePropertyModelBarItem = creator.sideBar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
   expect(hidePropertyModelBarItem).toBeTruthy();
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
-  expect(creator.sideBar.visible).toBeFalsy();
+  expect(creator.sidebar.visible).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeFalsy();
   settings.propertyGrid.allowCollapse = prevValue;
@@ -1396,23 +1396,23 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
     ]
   };
   const expandBarItem = creator.toolbarItems.filter((item) => { return item.id === "svd-grid-expand"; })[0];
-  const hidePropertyModelBarItem = creator.sideBar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
 
   expect(creator.showPropertyGrid).toBeTruthy();
   expect(expandBarItem).toBeTruthy();
   expect(expandBarItem.visible).toBeFalsy();
-  expect(creator.sideBar.visible).toBeTruthy();
+  expect(creator.sidebar.visible).toBeTruthy();
   expect(hidePropertyModelBarItem).toBeTruthy();
   expect(hidePropertyModelBarItem.visible).toBeTruthy();
 
   hidePropertyModelBarItem.action();
   expect(creator.showPropertyGrid).toBeFalsy();
-  expect(creator.sideBar.visible).toBeFalsy();
+  expect(creator.sidebar.visible).toBeFalsy();
   expect(expandBarItem.visible).toBeTruthy();
 
   expandBarItem.action();
   expect(creator.showPropertyGrid).toBeTruthy();
-  expect(creator.sideBar.visible).toBeTruthy();
+  expect(creator.sidebar.visible).toBeTruthy();
   expect(expandBarItem.visible).toBeFalsy();
 
   settings.propertyGrid.allowCollapse = prevValue;
@@ -1656,7 +1656,7 @@ test("Modify property editor settings on event", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeHolderQuestion = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
+  const placeHolderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
   expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeHolderQuestion.dataList).toHaveLength(2);
 });
@@ -1679,13 +1679,13 @@ test("Modify property editor titleActions on event", (): any => {
     elements: [{ type: "checkbox", name: "q1" }, { type: "checkbox", name: "q2" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  let choicesQuestion = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
+  let choicesQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
   expect(choicesQuestion).toBeTruthy();
   expect(choicesQuestion.getType()).toEqual("matrixdynamic");
   expect(choicesQuestion.getTitleActions()).toHaveLength(3);
   const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[1];
   creator.selectElement(question);
-  choicesQuestion = creator.sideBar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
+  choicesQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
   expect(choicesQuestion.getTitleActions()).toHaveLength(4);
   expect(question.choices).toHaveLength(0);
   choicesQuestion.titleActions[3].action();

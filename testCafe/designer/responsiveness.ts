@@ -86,9 +86,9 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
     .resizeWindow(1920, 900); // reset for next tests, beforeEach not work (((
 });
 
-async function changeSideBarLocation(newVal: string) {
+async function changeSidebarLocation(newVal: string) {
   await ClientFunction((newVal) => {
-    window["creator"].sideBarLocation = newVal;
+    window["creator"].sidebarLocation = newVal;
   })(newVal);
 }
 
@@ -143,7 +143,7 @@ test("Responsive creator: property grid", async (t) => {
     .expect(flyoutPropertyGrid.exists).notOk()
 
     .click(expandButtonSelector);
-  await changeSideBarLocation("left");
+  await changeSidebarLocation("left");
 
   await t
     .expect(westResizer.visible).notOk()

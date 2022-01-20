@@ -81,7 +81,7 @@ test("toolbox inside sidebar", async (t) => {
   const toolboxItem = Selector(".svc-toolbox__item");
   const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
 
-  await changeToolboxLocation("insideSideBar");
+  await changeToolboxLocation("sidebar");
   await setShowPropertyGrid(true);
   await t
     .click(toolboxButtonSelector)

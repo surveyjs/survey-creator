@@ -74,7 +74,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const creatorClassName = "svc-creator" + (this.props.creator.isMobileView ? " svc-creator--mobile" : "");
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
-    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sideBarLocation);
+    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sidebarLocation);
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
       licenseBanner = (
@@ -118,7 +118,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                   : null)}
               </div>
             </div>
-            {this.renderSideBar()}
+            {this.renderSidebar()}
           </div>
           {licenseBanner}
           <NotifierComponent
@@ -161,12 +161,12 @@ export class SurveyCreatorComponent extends SurveyElementBase<
       </div>
     );
   }
-  renderSideBar() {
-    if (!!this.creator.sideBar) {
+  renderSidebar() {
+    if (!!this.creator.sidebar) {
       const className = this.creator.isMobileView ? "sv-mobile-side-bar" : "";
       return (
         <div className={className}>
-          {ReactElementFactory.Instance.createElement("svc-side-bar", { model: this.creator.sideBar })}
+          {ReactElementFactory.Instance.createElement("svc-side-bar", { model: this.creator.sidebar })}
         </div>);
     } else {
       return null;

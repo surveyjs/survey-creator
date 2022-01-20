@@ -49,7 +49,7 @@ import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/u
 import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
-import { SideBarModel } from "./components/side-bar/side-bar-model";
+import { SidebarModel } from "./components/side-bar/side-bar-model";
 
 import "./components/creator.scss";
 import "./components/string-editor.scss";
@@ -98,7 +98,7 @@ export class ToolbarActionContainer extends ActionContainer {
   }
   protected getRenderedActions(): Array<Action> {
     let actions = this.actions;
-    const expandAction = this.creator.sideBar.getExpandAction();
+    const expandAction = this.creator.sidebar.getExpandAction();
     var index = actions.indexOf(expandAction);
     if (index !== -1) {
       actions.splice(index, 1);
@@ -108,7 +108,7 @@ export class ToolbarActionContainer extends ActionContainer {
   }
 }
 
-export type toolBoxLocationType = "left" | "right" | "insideSideBar" | "hidden";
+export type toolBoxLocationType = "left" | "right" | "sidebar" | "hidden";
 
 /**
  * Base class for Survey Creator.
@@ -939,7 +939,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
-  public sideBar: SideBarModel;
+  public sidebar: SidebarModel;
 
   constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
     super();
@@ -954,7 +954,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.toolbarValue = new ToolbarActionContainer(this);
     this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
-    this.sideBar = new SideBarModel(this);
+    this.sidebar = new SidebarModel(this);
     this.setOptions(this.options);
     this.patchMetadata();
     this.initSurveyWithJSON({}, false);
@@ -962,7 +962,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
-    const expandAction = this.sideBar.getExpandAction();
+    const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
   }
   public updateToolboxIsCompact(newVal?: boolean) {
@@ -1299,15 +1299,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   private setPropertyPlaceHolder(className: string, propertyName: string, value: string) {
     const prop: any = Serializer.findProperty(className, propertyName);
-    if(!!prop) {
+    if (!!prop) {
       prop.placeholder = value;
     }
   }
   private setPropertyVisibility(className: string, visible: boolean, ...properties: string[]) {
-    if(!Array.isArray(properties)) return;
-    for(var i = 0; i < properties.length; i ++) {
+    if (!Array.isArray(properties)) return;
+    for (var i = 0; i < properties.length; i++) {
       const prop = Serializer.findProperty(className, properties[i]);
-      if(!!prop) {
+      if (!!prop) {
         prop.visible = visible;
       }
     }
@@ -2045,7 +2045,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sideBar.getTabById("propertyGrid");
+    const propertyGridTab = this.sidebar.getTabById("propertyGrid");
     if (!propertyGridTab) return null;
     return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
@@ -2720,7 +2720,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       target.updateToolboxIsCompact();
     }
   }) toolboxLocation: toolBoxLocationType;
-  @property({ defaultValue: "right" }) sideBarLocation: "left" | "right";
+  @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
   selectFromStringEditor: boolean;
 }
 
