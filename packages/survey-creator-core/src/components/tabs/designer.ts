@@ -1,7 +1,10 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
 import "./designer.scss";
+import { getLocString } from "../../editorLocalization";
+
+export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
 
 export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   private widthUpdater: ComputedUpdater;
@@ -12,6 +15,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   @property({ defaultValue: false }) showNewPage: boolean;
   @property() pageCount: number;
   @property() withModifier: string;
+  @property() showPlaceholder: boolean;
   public creator: CreatorBase<T>;
 
   private createNewPage() {
@@ -51,6 +55,10 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   public get isToolboxVisible(): boolean {
     return this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left";
   }
+  public get placeholderText(): string {
+    return getLocString("ed.surveyPlaceHolder");
+  }
+
   public initSurvey() {
     if (!this.survey) return;
     this.showNewPage = false;
@@ -76,7 +84,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     this.withModifier = <any>this.widthUpdater;
   }
   private onPagesChangedHandler = (sender: any, options: any) => {
-    if(this.newPage) {
+    if (this.newPage) {
       this.newPage.num = this.survey.pages.length + 1;
     }
   }
@@ -89,14 +97,15 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     this.survey.onPanelAdded.remove(this.checkNewPageHandler);
     this.survey.onPanelRemoved.remove(this.checkNewPageHandler);
   }
+
   private checkNewPage() {
+    const showPlaceholder = this.survey.getAllQuestions().length === 0 && this.survey.pageCount === 0;
+    settings.allowShowEmptyTitleInDesignMode = showPlaceholder ? false : initialSettingsAllowShowEmptyTitleInDesignMode;
+    this.showPlaceholder = showPlaceholder;
     this.pageCount = this.survey.pageCount;
-    if (this.canShowNewPage) {
-      var pages = this.survey.pages;
-      if (
-        !this.newPage ||
-        (pages.length > 0 && this.newPage === pages[pages.length - 1])
-      ) {
+    if (this.showPlaceholder || this.canShowNewPage) {
+      const pages = this.survey.pages;
+      if (!this.newPage || (pages.length > 0 && this.newPage === pages[pages.length - 1])) {
         this.createNewPage();
         this.showNewPage = true;
       }
@@ -109,13 +118,12 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   public clickDesigner() {
     this.creator.selectedElement = this.creator.survey;
   }
-
   public getDesignerCss(): string {
     return this.survey.css.container + " " + this.survey.css.container + "--" + this.withModifier;
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if(this.creator.showPageNavigator && this.survey.pageCount > 1) {
+    if (this.creator.showPageNavigator && this.survey.pageCount > 1) {
       rootCss += " svc-tab-designer--with-page-navigator";
     }
     return rootCss;

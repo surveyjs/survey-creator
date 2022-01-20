@@ -1,4 +1,4 @@
-import { url, base64image } from "../helper";
+import { url, base64image, setJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Logo Image";
 
@@ -9,6 +9,7 @@ fixture`${title}`.page`${url}`.beforeEach(
 );
 
 test("Set logo in property grid and remove it in designer", async (t) => {
+  await setJSON({ pages: [{ name: "page1" }] });
   const logoSection = await ClientFunction(() => {
     return window["creator"].getLocString("pe.tabs.logo");
   })();
@@ -22,6 +23,7 @@ test("Set logo in property grid and remove it in designer", async (t) => {
 });
 
 test("Set logo in designer, change it and check it in test tab", async (t) => {
+  await setJSON({ pages: [{ name: "page1" }] });
   await t
     .setFilesToUpload(Selector(".svc-logo-image input[type=file]"), "./image.jpg")
     .click(Selector(".svc-logo-image-placeholder").withText("[LOGO]"));

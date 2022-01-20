@@ -34,7 +34,7 @@ export var settings = {
     greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
   },
-  defaultNewSurveyJSON: { pages: [{ name: "page1" }] },
+  defaultNewSurveyJSON: {},
   logic: {
     visibleActions: [],
     logicItemTitleMaxChars: 50
