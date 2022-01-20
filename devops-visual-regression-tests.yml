@@ -110,6 +110,13 @@ jobs:
       cacheHitVar: NPM_CACHE_RESTORED
     displayName: Cache NPM
 
+  - task: Cache@2
+    inputs:
+      key: 'npm-cache-creator-root | $(Build.SourcesDirectory)/survey-creator/package.json'
+      path: $(Build.SourcesDirectory)/survey-creator/node_modules
+      cacheHitVar: NPM_CACHE_RESTORED_ROOT
+    displayName: Cache NPM
+
   - task: DownloadBuildArtifacts@0
     inputs:
       buildType: 'specific'
@@ -140,18 +147,31 @@ jobs:
       SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
   
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator
-      npm install
-      npm run lint
-    displayName: 'root npm install and lint'
+  - task: Npm@1
+    displayName: 'Npm install root'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator
+    condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
   
   - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-      npm install
-      npm run remove-package-lock
+      cd $(Build.SourcesDirectory)/survey-creator
+      npm run lint
+    displayName: 'check lint'
+  
+  - task: Npm@1
     displayName: 'Npm install survey-creator-react'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npm run remove-package-lock
+    displayName: 'npm run remove-package-lock'
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
@@ -217,6 +237,12 @@ jobs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
 
+  - task: Cache@2
+    inputs:
+      key: 'npm-cache-creator-knockout | $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/package.json'
+      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules
+      cacheHitVar: NPM_CACHE_RESTORED
+    displayName: Cache NPM
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -253,11 +279,18 @@ jobs:
       npm install devextreme-screenshot-comparer -D
     displayName: 'install devextreme-screenshot-comparer to root'
 
+  - task: Npm@1
+    displayName: 'Npm install survey-creator-knockout'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-      npm install
       npm run remove-package-lock
-    displayName: 'Npm install survey-creator-knockout'
+    displayName: 'npm run remove-package-lock'
 
   - task: CopyFiles@2
     inputs:
