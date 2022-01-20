@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
-  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton
 } from "../helper";
 const title = "Responsiveness";
 
@@ -329,4 +329,20 @@ test("Question type popup - narrow", async (t) => {
     .resizeWindow(380, 600)
     .click(Selector("button.svc-page__question-type-selector"))
     .expect(Selector(".sv-popup.sv-popup--overlay li").withText("Single Input").visible).ok();
+});
+
+test("Responsive creator: property grid - click the shadow", async (t) => {
+  await t
+    .resizeWindow(900, 700)
+    .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 347 })
+    .click(expandButtonSelector)
+    .expect(propertyGridSelector.visible).ok()
+    .expect(flyoutPropertyGrid.exists).ok()
+    .expect(objectSelectorButton.withText("page1").visible).ok()
+    .click(collapseButtonSelector)
+    .click(getBarItemByTitle("Settings").filterVisible())
+    .expect(objectSelectorButton.withText("Survey").visible).ok()
+    .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 347 })
+
+    .expect(objectSelectorButton.withText("page1").visible).notOk();
 });
