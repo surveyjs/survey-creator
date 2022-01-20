@@ -332,6 +332,8 @@ test("Question type popup - narrow", async (t) => {
 });
 
 test("Responsive creator: property grid - click the shadow", async (t) => {
+  const json = { pages: [{ name: "page1" }] };
+  await setJSON(json);
   await t
     .resizeWindow(900, 700)
     .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 347 })
