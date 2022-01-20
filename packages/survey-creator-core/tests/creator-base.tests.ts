@@ -1299,9 +1299,8 @@ test("Test plug-ins check order change viewtype and activate/deactivate", (): an
 
 });
 test("Show/hide property grid", (): any => {
-  const prevValue = settings.propertyGrid.allowCollapse;
-  settings.propertyGrid.allowCollapse = true;
   const creator = new CreatorTester();
+  creator.allowCollapseSidebar = true;
   creator.JSON = {
     pages: [
       {
@@ -1335,13 +1334,10 @@ test("Show/hide property grid", (): any => {
   expect(creator.selectedElementName).toEqual("survey");
   expect(creator.showSidebar).toBeTruthy();
   expect(creator.sidebar.visible).toBeTruthy();
-
-  settings.propertyGrid.allowCollapse = prevValue;
 });
 test("Show/hide property grid and settings button active state", (): any => {
-  const prevValue = settings.propertyGrid.allowCollapse;
-  settings.propertyGrid.allowCollapse = true;
   const creator = new CreatorTester();
+  creator.allowCollapseSidebar = true;
   creator.JSON = {
     pages: [
       {
@@ -1377,12 +1373,10 @@ test("Show/hide property grid and settings button active state", (): any => {
   expect(creator.sidebar.visible).toBeFalsy();
   expect(creator.selectedElementName).toEqual("survey");
   expect(settingsBarItem.active).toBeFalsy();
-  settings.propertyGrid.allowCollapse = prevValue;
 });
 test("Show/hide property grid by collapse/expand actions", (): any => {
-  const prevValue = settings.propertyGrid.allowCollapse;
-  settings.propertyGrid.allowCollapse = true;
   const creator = new CreatorTester();
+  creator.allowCollapseSidebar = true;
   creator.JSON = {
     pages: [
       {
@@ -1414,8 +1408,6 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
   expect(creator.showSidebar).toBeTruthy();
   expect(creator.sidebar.visible).toBeTruthy();
   expect(expandBarItem.visible).toBeFalsy();
-
-  settings.propertyGrid.allowCollapse = prevValue;
 });
 
 test("Check property grid expand action is always last", (): any => {

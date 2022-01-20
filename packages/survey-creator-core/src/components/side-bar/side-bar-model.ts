@@ -43,7 +43,7 @@ export class SidebarModel extends Base {
   }
 
   private createActions() {
-    if (settings.propertyGrid.allowCollapse) {
+    if (this.creator.allowCollapseSidebar) {
       this._collapseAction = new Action({
         id: "svd-grid-hide",
         iconName: "icon-collapse-panel",

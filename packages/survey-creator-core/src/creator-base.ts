@@ -2727,6 +2727,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @property({ defaultValue: true }) showPageNavigator;
   @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
+  @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
   @property({ defaultValue: false }) isMobileView;
   @property({
     defaultValue: "left", onSet: (newValue, target: CreatorBase<T>) => {
