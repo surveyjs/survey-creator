@@ -55,7 +55,9 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   private get contentEditable(): boolean {
     return this.baseModel.contentEditable;
   }
-  private onInput = (event: any) => {
+  private onBlur = (event: any) => {
+    this.locString["__isEditing"] = false;
+    this.justFocused = false;
     this.baseModel.onInput(event.nativeEvent);
     return this.baseModel.errorText;
   };
@@ -107,7 +109,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
           suppressContentEditableWarning={true}
           // style={this.style}
           dangerouslySetInnerHTML={htmlValue}
-          onBlur={this.onInput}
+          onBlur={this.onBlur}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onMouseUp={this.onMouseUp}
@@ -123,7 +125,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
           aria-placeholder={this.placeholder}
           suppressContentEditableWarning={true}
           // style={this.style}
-          onBlur={this.onInput}
+          onBlur={this.onBlur}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onMouseUp={this.onMouseUp}
