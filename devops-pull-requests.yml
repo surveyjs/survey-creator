@@ -70,24 +70,6 @@ jobs:
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules/survey-knockout'
       OverWrite: true
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/'
-      Contents: 'version.txt'
-      TargetFolder: '$(Build.SourcesDirectory)/'
-      OverWrite: true
-    displayName: 'Copy build artifact - SurveyJSVersion File'
-
-  - powershell: |
-      $version = Get-Content $(Build.SourcesDirectory)/version.txt
-      Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
-    displayName: 'Setup SurveyJSVersion variable from SurveyJSVersionFile'
-
-  - powershell: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-      npm run release -- --release-as $(SurveyJSVersion)
-    displayName: 'Release specific version survey-creator'
-
   - task: DownloadBuildArtifacts@0
     inputs:
       buildType: 'specific'
@@ -174,11 +156,6 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run remove-package-lock
     displayName: 'npm run remove-package-lock'
-
-  - powershell: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm run release
-    displayName: 'Release specific version survey-creator-core'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
@@ -289,11 +266,6 @@ jobs:
       OverWrite: true
     displayName: 'copy @types into library directory'
 
-  - powershell: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-      npm run release
-    displayName: 'Release specific version survey-creator-react'
-
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run build
@@ -391,11 +363,6 @@ jobs:
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
       OverWrite: true
     displayName: 'copy build from library for f-f tests'
-
-  - powershell: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-      npm run release
-    displayName: 'Release specific version survey-creator-knockout'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout

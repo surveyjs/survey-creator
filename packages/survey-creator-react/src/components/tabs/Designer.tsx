@@ -13,10 +13,7 @@ interface ITabDesignerComponentProps {
   data: TabDesignerViewModel<SurveyModel>;
 }
 
-export class TabDesignerComponent extends SurveyElementBase<
-  ITabDesignerComponentProps,
-  any
-> {
+export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponentProps, any> {
   private get model(): TabDesignerViewModel<SurveyModel> {
     return this.props.data;
   }
@@ -25,6 +22,17 @@ export class TabDesignerComponent extends SurveyElementBase<
   }
   protected getStateElements(): Array<Base> {
     return [this.model, this.model.survey];
+  }
+  private renderNewPage(className: string, key: string = "") {
+    return (
+      <React.Fragment key={key}>
+        <div
+          className={className}
+          data-sv-drop-target-survey-element={"newGhostPage"}
+        >
+          {this.renderPage(this.model.newPage)}
+        </div>
+      </React.Fragment>);
   }
   protected renderPages(): JSX.Element[] {
     const surveyPages: JSX.Element[] = this.creator.survey.pages.map(
@@ -43,24 +51,14 @@ export class TabDesignerComponent extends SurveyElementBase<
     );
 
     if (this.model.showNewPage) {
-      surveyPages.push(
-        <div
-          className={"svc-page"}
-          data-sv-drop-target-survey-element={"newGhostPage"}
-          key={this.model.newPage.id + "-ghost-new-page"}
-        >
-          {this.renderPage(this.model.newPage)}
-        </div>
-      );
+      surveyPages.push(this.renderNewPage("svc-page", this.model.newPage.id + "-ghost-new-page"));
     }
     return surveyPages;
   }
   protected renderPage(pageV: PageModel): JSX.Element {
-    return ReactElementFactory.Instance.createElement("svc-page",
-      { survey: this.creator.survey, page: pageV, creator: this.creator });
+    return ReactElementFactory.Instance.createElement("svc-page", { survey: this.creator.survey, page: pageV, creator: this.creator });
   }
   renderElement(): JSX.Element {
-    const survey: SurveyModel = this.creator.survey;
     const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
 
     return (
@@ -68,32 +66,50 @@ export class TabDesignerComponent extends SurveyElementBase<
         <div className="svc-flex-column">
           {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-adaptive-toolbox", { model: this.creator }) : null}
         </div>
-        <div className={designerTabClassName}
-          onClick={() => this.model.clickDesigner()}>
-          <div className={this.model.getDesignerCss()}>
-            {!this.creator.allowEditSurveyTitle ? null :
-              <div>
-                <SurveyHeader survey={survey}></SurveyHeader>
-              </div>
-            }
-            <SurveyNavigation survey={survey} location="top" />
-            {this.renderPages()}
-            <SurveyNavigation
-              survey={survey}
-              location="bottom"
-              css={survey.css}
-            />
-          </div>
-          {this.creator.showPageNavigator ?
-            <div className="svc-tab-designer__page-navigator"><SurveyPageNavigator
-              creator={this.creator}
-              pages={this.creator.pagesController.pages}
-            ></SurveyPageNavigator></div>
-            : null
-          }
+        <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
+          {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
         </div>
       </React.Fragment>
     );
+  }
+
+  renderPlaceHolder(): JSX.Element {
+    return (<React.Fragment>
+      <div className="svc-designer__placeholder-container">
+        <span className="svc-designer-placeholder-text svc-text svc-text--normal">
+          {this.model.placeholderText}
+        </span>
+        {this.renderNewPage("svc-designer-placeholder-page")}
+      </div>
+    </React.Fragment>);
+  }
+
+  renderTabContent(): JSX.Element {
+    const survey: SurveyModel = this.creator.survey;
+
+    return (<React.Fragment>
+      <div className={this.model.getDesignerCss()}>
+        {!this.creator.allowEditSurveyTitle ? null :
+          <div>
+            <SurveyHeader survey={survey}></SurveyHeader>
+          </div>
+        }
+        <SurveyNavigation survey={survey} location="top" />
+        {this.renderPages()}
+        <SurveyNavigation
+          survey={survey}
+          location="bottom"
+          css={survey.css}
+        />
+      </div>
+      {this.creator.showPageNavigator ?
+        <div className="svc-tab-designer__page-navigator"><SurveyPageNavigator
+          creator={this.creator}
+          pages={this.creator.pagesController.pages}
+        ></SurveyPageNavigator></div>
+        : null
+      }
+    </React.Fragment>);
   }
 }
 

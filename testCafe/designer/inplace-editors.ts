@@ -619,3 +619,18 @@ test("Rating question inplace editor", async (t) => {
     })()).eql(["1", "2", "3abc", "4", "5"]);
 
 });
+
+test("Matrix dropdown question inplace row header editor #2553", async (t) => {
+  await t.expect(Selector(".svc-question__content").exists).notOk();
+  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await t.expect(Selector(".svc-question__content").exists).ok();
+
+  await t
+    // .click(Selector("button[title='ShowPanel']"))
+    .click(Selector(".sv_matrix_row .svc-matrix-cell .sv-string-editor"))
+    .typeText(Selector(".sv_matrix_row .svc-matrix-cell .sv-string-editor"), "Row header")
+    .click(Selector("h4.spg-title[aria-label='Layout']"))
+    .click(Selector("input.spg-input[aria-label='Row title width']"))
+    .pressKey("ctrl+a delete 3 0 0 p x")
+    .expect(Selector("input.spg-input[aria-label='Row title width']").value).eql("300px");
+});

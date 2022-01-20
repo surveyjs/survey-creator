@@ -34,6 +34,7 @@ const json = {
 
 test("On the right side (default)", async (t) => {
   await t.resizeWindow(1920, 1080);
+  await setJSON({ pages: [{ name: "page1" }] });
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
@@ -58,6 +59,7 @@ test("On the right side (default)", async (t) => {
 
 test("On the left side", async (t) => {
   await t.resizeWindow(1920, 1080);
+  await setJSON({ pages: [{ name: "page1" }] });
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 

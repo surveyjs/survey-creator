@@ -61,6 +61,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     );
   }
   renderElement(): JSX.Element {
+    if (!this.props.page) return null;
     return (
       attachKey2click(<div
         ref={this.rootRef}

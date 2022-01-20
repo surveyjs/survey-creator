@@ -139,6 +139,7 @@ export var enStrings = {
     chooseElement: "Choose element...",
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
+    surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
     addNewQuestion: "Add Question",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
