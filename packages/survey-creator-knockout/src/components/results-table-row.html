@@ -1,3 +1,4 @@
+<!-- ko with: model -->
 <tr data-bind="click: toggle, key2click">
     <td class="svd-dark-border-color"
         data-bind="style: { paddingLeft: 'calc(' + (6 + 2 * lvl) + ' * 8px)' }">
@@ -9,11 +10,12 @@
         </span>
         <!-- /ko -->
         <span data-bind="text: title"></span></td>
-    <td data-bind="css: (isNode ? 'svd-node-value' : 'svd-dark-border-color'), text: getString(displayValue)"></td>
+    <td data-bind="css: (isNode ? 'svd-test-results__node-value' : 'svd-dark-border-color'), text: getString(displayValue)"></td>
 </tr>
 <!-- ko if: isNode && !collapsed -->
 <!-- ko foreach: data -->
 <!-- ko component: { name: 'survey-results-table-row', params: { model: $data } } -->
+<!-- /ko -->
 <!-- /ko -->
 <!-- /ko -->
 <!-- /ko -->

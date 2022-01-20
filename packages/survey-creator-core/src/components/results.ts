@@ -78,11 +78,17 @@ export class SurveyResultsModel extends Base {
   public get resultsDisplayValue() {
     return this.getLocString("ed.resultsDisplayValue");
   }
-
-  public selectTableClick(model: SurveyResultsModel) {
-    model.resultViewType = "table";
+  public get isTableSelected() {
+    return this.resultViewType === "table";
   }
-  public selectJsonClick(model: SurveyResultsModel) {
-    model.resultViewType = "text";
+  public get isJsonSelected() {
+    return this.resultViewType === "text";
+  }
+
+  public selectTableClick = () => {
+    this.resultViewType = "table";
+  }
+  public selectJsonClick = () => {
+    this.resultViewType = "text";
   }
 }

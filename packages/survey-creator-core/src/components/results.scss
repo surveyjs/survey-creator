@@ -1,6 +1,6 @@
 @import "../variables.scss";
 
-.svd_test_results {
+.svd-test-results {
   font-family: $font-family;
   width: 80%;
   margin: auto;
@@ -9,7 +9,7 @@
   box-shadow: 0px 8px 16px $shadow-medium;
   border-radius: 10px;
 
-  .svd_results_header {
+  .svd-test-results__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,38 +18,15 @@
     color: $foreground-light;
     border-bottom: 2px solid $background-dim;
 
-    .svd_results__header_text {
+    .svd-test-results__header-text {
       margin: 0;
     }
-    .svd_results_types {
+    .svd-test-results__header-types {
       display: flex;
-      .svd_results_nav-item {
-        min-width: calcSize(12);
-        text-align: center;
-        border: 2px solid $background;
-        border-radius: 100px;
-        padding: calcSize(0.5);
-        margin: auto;
-        
-        &:hover, &:focus {
-          background-color: $primary-light;
-          use {
-            fill: $primary;
-          }
-        }
-      }
-
-      .svd_results_nav-item__active {
-        border-color: $primary;
-      }
-      .svd_results_nav-link {
-        text-decoration: none;
-        color: $primary;
-      }
     }    
   }
 
-  .svd_results_text {
+  .svd-test-results__text {
     display: flex;
     padding: calcSize(2) calcSize(3);
     width: calc(100% - calcSize(6));
@@ -57,7 +34,7 @@
     user-select: text;
     white-space: pre-wrap;
   }
-  .svd_results_table {
+  .svd-test-results__table {
     width: 100%;
     table {
       width: 100%;
@@ -119,7 +96,7 @@
       tr {
         vertical-align: top;
 
-        .svd-node-value {
+        .svd-test-results__node-value {
           color: $foreground-light;
         }
       }

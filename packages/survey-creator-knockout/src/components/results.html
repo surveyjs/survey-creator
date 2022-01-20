@@ -1,21 +1,19 @@
-<div class="svd_test_results">
-    <div class="svd_results_header">
-        <div class="svd_results__header_text" data-bind="text: surveyResultsText"></div>
-        <div class="svd_results_types">
-            <div class="svd_results_nav-item " data-bind="css: {'svd_results_nav-item__active': resultViewType === 'table'}">
-                <a class="svd_results_nav-link" href="#"
-                     data-bind="click: selectTableClick, key2click, text: $data.getLocString('ed.surveyResultsTable')"></a>    
-            </div>
-            <div class="svd_results_nav-item " data-bind="css: {'svd_results_nav-item__active': resultViewType === 'text'}">
-                <a class="svd_results_nav-link" href="#"
-                     data-bind="click: selectJsonClick, key2click, text: $data.getLocString('ed.surveyResultsJson')"></a>    
-            </div>
+<div class="svd-test-results">
+    <div class="svd-test-results__header">
+        <div class="svd-test-results__header-text" data-bind="text: surveyResultsText"></div>
+        <div class="svd-test-results__header-types">
+            <svc-action-button
+                params="text: $data.getLocString('ed.surveyResultsTable'), click: selectTableClick, disabled: false, selected: isTableSelected">
+            </svc-action-button>            
+            <svc-action-button
+                params="text: $data.getLocString('ed.surveyResultsJson'), click: selectJsonClick, disabled: false, selected: isJsonSelected">
+            </svc-action-button>
         </div>
     </div>
-    <div class="svd_results_text svd-light-bg-color" data-bind="visible: resultViewType === 'text'">
+    <div class="svd-test-results__text svd-light-bg-color" data-bind="visible: resultViewType === 'text'">
         <div data-bind="text: resultText"></div>
     </div>
-    <div class="svd_results_table svd-light-bg-color" data-bind="visible: resultViewType === 'table'">
+    <div class="svd-test-results__table svd-light-bg-color" data-bind="visible: resultViewType === 'table'">
         <table>
             <thead>
                 <tr class="svd-light-background-color">

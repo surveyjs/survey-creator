@@ -2,6 +2,7 @@ import React from "react";
 import { Base, SurveyModel } from "survey-core";
 import { SurveyResultsItemModel, SurveyResultsModel } from "@survey/creator";
 import { attachKey2click, SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { ActionButton } from "./ActionButton";
 
 interface ISurveyResultsProps {
   survey: SurveyModel;
@@ -27,28 +28,22 @@ export class SurveyResults extends SurveyElementBase<
       return null;
     }
     return (
-      <div className="svd_test_results">
-        <div className="svd_results_header">
-          <div className="svd_results__header_text">{this.model.surveyResultsText}</div>
-          <div className="svd_results_types">
-            <div className={"svd_results_nav-item " + (this.model.resultViewType === "table" ? "svd_results_nav-item__active" : "")}>
-              {attachKey2click(<a
-                className="svd_results_nav-link"
-                href="#"
-                onClick={() => this.model.selectTableClick(this.model)}
-              >
-                {this.model.getLocString("ed.surveyResultsTable")}
-              </a>)}
-            </div>
-            <div className={"svd_results_nav-item " + (this.model.resultViewType === "text" ? "svd_results_nav-item__active" : "")}>
-              {attachKey2click(<a
-                className="svd_results_nav-link"
-                href="#"
-                onClick={() => this.model.selectJsonClick(this.model)}
-              >
-                {this.model.getLocString("ed.surveyResultsJson")}
-              </a>)}
-            </div>
+      <div className="svd-test-results">
+        <div className="svd-test-results__header">
+          <div className="svd-test-results__header-text">{this.model.surveyResultsText}</div>
+          <div className="svd-test-results__header-types">
+            <ActionButton
+              click={() => this.model.selectTableClick(this.model)}
+              text={this.model.getLocString("ed.surveyResultsTable")}
+              selected={this.model.isTableSelected}
+              disabled={false}
+            ></ActionButton>
+            <ActionButton
+              click={() => this.model.selectJsonClick(this.model)}
+              text={this.model.getLocString("ed.surveyResultsJson")}
+              selected={this.model.isJsonSelected}
+              disabled={false}
+            ></ActionButton>
           </div>
         </div>
         {this.renderResultAsText()}
@@ -61,7 +56,7 @@ export class SurveyResults extends SurveyElementBase<
       return null;
     }
     return (
-      <div className="svd_results_text svd-light-bg-color">
+      <div className="svd-test-results__text svd-light-bg-color">
         <div>{this.model.resultText}</div>
       </div>
     );
@@ -71,7 +66,7 @@ export class SurveyResults extends SurveyElementBase<
       return null;
     }
     return (
-      <div className="svd_results_table svd-light-bg-color">
+      <div className="svd-test-results__table svd-light-bg-color">
         <table>
           <thead>
             <tr className="svd-light-background-color">
@@ -113,7 +108,7 @@ export class SurveyResultsByRow extends SurveyElementBase<any, any> {
             {this.row.isNode ? (
               <span
                 style={{ left: "calc(" + (3.5 + 2 * this.row.lvl) + " * 8px)" }}
-                className={"survey-result-marker " + (this.row.collapsed ? "" : "survey-result-marker--expanded")}>
+                className={"svd-test-results__marker " + (this.row.collapsed ? "" : "svd-test-results__marker--expanded")}>
                 <SvgIcon
                   iconName={"icon-expand_16x16"}
                   size={16}
@@ -123,7 +118,7 @@ export class SurveyResultsByRow extends SurveyElementBase<any, any> {
 
             <span>{this.row.title}</span>
           </td>
-          <td className={this.row.isNode ? "svd-node-value" : "svd-dark-border-color"}>
+          <td className={this.row.isNode ? "svd-test-results__node-value" : "svd-dark-border-color"}>
             {this.row.getString(this.row.displayValue)}
           </td>
         </tr>)}
