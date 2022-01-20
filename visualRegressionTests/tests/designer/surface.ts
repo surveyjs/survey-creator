@@ -59,8 +59,7 @@ test("Matrix column editor", async (t) => {
   await checkElementScreenshot("matrix-cell-edit.png", Selector(".svc-matrix-cell__popup .sv-popup__container"), t);
 });
 
-//TODO remove test.only
-test.only("Choices (Checkbox): Layout", async (t) => {
+test("Choices (Checkbox): Layout", async (t) => {
   await t.resizeWindow(2560, 1440);
 
   const json = {
