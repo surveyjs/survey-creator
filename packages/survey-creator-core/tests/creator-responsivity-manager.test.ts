@@ -1,3 +1,4 @@
+import { QuestionAdornerViewModel } from "../src/components/question";
 import { toolBoxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
 import { CreatorTester } from "./creator-tester";
@@ -178,4 +179,35 @@ test("CreatorResponsivityManager: SideBar expand/collapse on width change", (): 
   container.offsetWidth = 1900;
   responsivityManager.process();
   expect(creator.sideBar.visible).toEqual(false);
+});
+
+test("CreatorResponsivityManager: Question Settings visibility", (): any => {
+  const container: SimpleContainer = new SimpleContainer({});
+  const creator = new CreatorTester();
+  const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  creator.sideBar.flyoutMode = true;
+
+  const question = creator.survey.getAllQuestions()[0];
+  const qModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined
+  );
+
+  container.offsetWidth = 1900;
+  responsivityManager.process();
+  creator.selectElement(question);
+  expect(qModel.getActionById("settings").visible).toBeFalsy();
+
+  container.offsetWidth = 900;
+  responsivityManager.process();
+  expect(qModel.getActionById("settings").visible).toBeTruthy();
+
+  container.offsetWidth = 1900;
+  responsivityManager.process();
+  expect(qModel.getActionById("settings").visible).toBeFalsy();
 });
