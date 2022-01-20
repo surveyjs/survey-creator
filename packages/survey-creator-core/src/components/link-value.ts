@@ -1,4 +1,4 @@
-import { Question, Serializer, QuestionFactory, property } from "survey-core";
+import { Question, Serializer, QuestionFactory, property, Helpers } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 
 import "./link-value.scss";
@@ -25,7 +25,7 @@ export class QuestionLinkValueModel extends Question {
     if (name === "value") {
       this.updateLinkValueText();
       if (this.allowClear) {
-        this.showClear = !!newValue;
+        this.showClear = !Helpers.isValueEmpty(newValue);
       }
     }
   }
