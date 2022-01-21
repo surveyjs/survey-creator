@@ -257,8 +257,16 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
+      ArtifactName: 'SurveyJSCreatorV2BuildCore'
+      publishLocation: 'Container'
+    displayName: 'publish artifact SurveyJSCreatorV2BuildCore for release'
+      
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
       ArtifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
-      publishLocation: 'Container'  
+      publishLocation: 'Container'
+    displayName: 'publish artifact SurveyJSCreatorV2BuildCore-$(Build.BuildId) for next jobs'
 
 
 - job: CreatorV2React
