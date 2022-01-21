@@ -40,7 +40,7 @@
       width: 100%;
       border-collapse: collapse; 
 
-      .survey-result-marker {
+      .svd-test-results__marker {
         position: absolute;
         top: calcSize(1.5);
 
@@ -52,7 +52,7 @@
           }
         }
 
-        &.survey-result-marker--expanded .sv-svg-icon {
+        &.svd-test-results__marker--expanded .sv-svg-icon {
           transform-origin: center;
           transform: rotate(90deg) ;
         }
