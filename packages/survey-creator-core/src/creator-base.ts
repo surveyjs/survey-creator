@@ -108,7 +108,7 @@ export class ToolbarActionContainer extends ActionContainer {
   }
 }
 
-export type toolBoxLocationType = "left" | "right" | "sidebar" | "hidden";
+export type toolboxLocationType = "left" | "right" | "sidebar";
 
 /**
  * Base class for Survey Creator.
@@ -978,18 +978,21 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     throw new Error("Method not implemented.");
   }
 
+  private showToolboxValue: boolean = true;
   public get showToolbox() {
-    SurveyHelper.warnNonSupported("showToolbox", "toolboxLocation");
-    return this.toolboxLocation !== "hidden";
+    return this.showToolboxValue;
   }
-  public set showToolbox(val: "left" | "right" | "top" | "none" | boolean) {
-    SurveyHelper.warnNonSupported("showToolbox", "toolboxLocation");
-    if (val === "none" || val === false || val === "top") {
-      this.toolboxLocation = "hidden";
+  public set showToolbox(val: boolean) {
+    if (<any>val !== true && <any>val !== false) {
+      SurveyHelper.warnText("showToolbox is a boolean property now.");
+    }
+    if (<any>val === "none" || val === false || <any>val === "top") {
+      this.showToolboxValue = false;
     } else if (val === true) {
-      this.toolboxLocation = "left";
+      this.showToolboxValue = true;
     } else {
       this.toolboxLocation = val;
+      this.showToolboxValue = true;
     }
   }
   private showSidebarValue: boolean = true;
@@ -2734,7 +2737,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       target.toolbox.setLocation(newValue);
       target.updateToolboxIsCompact();
     }
-  }) toolboxLocation: toolBoxLocationType;
+  }) toolboxLocation: toolboxLocationType;
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
   selectFromStringEditor: boolean;
 }

@@ -14,7 +14,7 @@ import {
   Serializer,
   SurveyModel
 } from "survey-core";
-import { CreatorBase, toolBoxLocationType } from "./creator-base";
+import { CreatorBase, toolboxLocationType } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
 import { DragOrClickHelper } from "./utils/dragOrClickHelper";
 
@@ -207,7 +207,7 @@ export class QuestionToolbox
       category.collapsed = category.name !== newValue;
     }
   }
-  public setLocation(toolboxLocation: toolBoxLocationType) {
+  public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {
       this.visibleActions.forEach((item) => (item.mode = "small"));
     } else {

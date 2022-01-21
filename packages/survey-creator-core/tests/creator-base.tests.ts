@@ -2207,25 +2207,25 @@ test("creator showToolbox support", () => {
 
   creator.showToolbox = false;
   expect(creator.showToolbox).toEqual(false);
-  expect(creator.toolboxLocation).toEqual("hidden");
+  expect(creator.toolboxLocation).toEqual("left");
 
-  creator.showToolbox = "left";
+  creator.showToolbox = <any>"left";
   expect(creator.showToolbox).toEqual(true);
   expect(creator.toolboxLocation).toEqual("left");
 
-  creator.showToolbox = "right";
+  creator.showToolbox = <any>"right";
   expect(creator.showToolbox).toEqual(true);
   expect(creator.toolboxLocation).toEqual("right");
 
-  creator.showToolbox = "none";
+  creator.showToolbox = <any>"none";
   expect(creator.showToolbox).toEqual(false);
-  expect(creator.toolboxLocation).toEqual("hidden");
+  expect(creator.toolboxLocation).toEqual("right");
 
-  creator.showToolbox = "top";
+  creator.showToolbox = <any>"top";
   expect(creator.showToolbox).toEqual(false);
-  expect(creator.toolboxLocation).toEqual("hidden");
+  expect(creator.toolboxLocation).toEqual("right");
 
   creator.showToolbox = true;
   expect(creator.showToolbox).toEqual(true);
-  expect(creator.toolboxLocation).toEqual("left");
+  expect(creator.toolboxLocation).toEqual("right");
 });
