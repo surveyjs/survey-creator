@@ -96,6 +96,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
         e.stopPropagation();
         this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
       }}
+      onMouseOver={(e) => this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
     >
       <span className="svc-text svc-text--normal svc-text--bold">
         {this.model.addNewQuestionText}
