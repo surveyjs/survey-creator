@@ -46,7 +46,7 @@ test("CreatorResponsivityManager getScreenWidth", (): any => {
   checkScreenWidth(200, "xs");
 });
 
-function checkCreatorLayoutPropertiesByWidth(creator: CreatorBase, newOffsetWidth: number, showToolbox: boolean, toolboxLocation: toolboxLocationType, toolboxIsCompact: boolean, propertyGridFlyoutMode: boolean, showPageNavigator: boolean) {
+function checkCreatorLayoutPropertiesByWidth(creator: CreatorBase, newOffsetWidth: number, showToolbox: boolean, toolboxLocation: toolboxLocationType, toolboxIsCompact: boolean, sidebarFlyoutMode: boolean, showPageNavigator: boolean) {
   const container: SimpleContainer = new SimpleContainer({});
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
 
@@ -56,7 +56,7 @@ function checkCreatorLayoutPropertiesByWidth(creator: CreatorBase, newOffsetWidt
   expect(creator.toolboxLocation).toEqual(toolboxLocation);
   expect(creator.toolbox.isCompact).toEqual(toolboxIsCompact);
   expect(creator.showPageNavigator).toEqual(showPageNavigator);
-  expect(creator.sidebar.flyoutMode).toEqual(propertyGridFlyoutMode);
+  expect(creator.sidebar.flyoutMode).toEqual(sidebarFlyoutMode);
 }
 
 test("CreatorResponsivityManager process screenWidth is greater xxl ", (): any => {
@@ -96,7 +96,7 @@ test("CreatorResponsivityManager process screenWidth is [0; s)", (): any => {
 test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hidden screenWidth is greater xxl ", (): any => {
   const creator = new CreatorTester();
   creator.toolboxLocation = "right";
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
 
   expect(creator.toolboxLocation).toEqual("right");
   expect(creator.toolbox.isCompact).toBeFalsy();
@@ -107,7 +107,7 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
 test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hidden screenWidth is [xl; xxl)", (): any => {
   const creator = new CreatorTester();
   creator.toolboxLocation = "right";
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
 
   checkCreatorLayoutPropertiesByWidth(creator, 1799, true, "right", false, false, true);
   checkCreatorLayoutPropertiesByWidth(creator, 1501, true, "right", false, false, true);
@@ -115,7 +115,7 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
 test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hidden screenWidth is [l; xl)", (): any => {
   const creator = new CreatorTester();
   creator.toolboxLocation = "right";
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
 
   checkCreatorLayoutPropertiesByWidth(creator, 1499, true, "right", true, false, true);
   checkCreatorLayoutPropertiesByWidth(creator, 1201, true, "right", true, false, true);
@@ -123,7 +123,7 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
 test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hidden screenWidth is [m; l)", (): any => {
   const creator = new CreatorTester();
   creator.toolboxLocation = "right";
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
 
   checkCreatorLayoutPropertiesByWidth(creator, 1199, true, "right", true, true, true);
   checkCreatorLayoutPropertiesByWidth(creator, 901, true, "right", true, true, true);
@@ -131,7 +131,7 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
 test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hidden screenWidth is [s; m)", (): any => {
   const creator = new CreatorTester();
   creator.toolboxLocation = "right";
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
 
   checkCreatorLayoutPropertiesByWidth(creator, 899, false, "right", true, true, false);
   checkCreatorLayoutPropertiesByWidth(creator, 601, false, "right", true, true, false);
@@ -139,7 +139,7 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
 test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hidden screenWidth is [0; s)", (): any => {
   const creator = new CreatorTester();
   creator.toolboxLocation = "right";
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
 
   checkCreatorLayoutPropertiesByWidth(creator, 599, false, "right", true, true, false);
   checkCreatorLayoutPropertiesByWidth(creator, 200, false, "right", true, true, false);
