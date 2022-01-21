@@ -87,6 +87,13 @@ test("Choices (Checkbox): Layout", async (t) => {
   await checkElementScreenshot("surface-checkbox-layout.png", QRoot, t);
 });
 
+test("Placeholder", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const designerTabContent = Selector(".svc-tab-designer");
+
+  await checkElementScreenshot("surface-placeholder.png", designerTabContent, t);
+});
+
 /*
 test("Check question width and position", async (t) => {
   await t.resizeWindow(1920, 1080);

@@ -118,6 +118,10 @@ export class PageViewModel<
   public hover(event: MouseEvent, element: HTMLElement) {
     toggleHovered(event, element, this.creator.pageHoverDelay);
   }
+  public hoverStopper(event: MouseEvent, element: HTMLElement) {
+    event["__svc_question_processed"] = true;
+  }
+
   protected duplicate() {
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);

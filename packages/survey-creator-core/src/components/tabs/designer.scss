@@ -29,3 +29,19 @@ svc-tab-designer {
     }
   }
 }
+
+.svc-designer__placeholder-container {
+  position: absolute;
+  top: 35%;
+}
+
+.svc-designer-placeholder-page {
+  margin-top: calcSize(2);
+}
+.svc-designer-placeholder-page .svc-page__add-new-question {
+  width: calcSize(33);
+  margin: auto;
+}
+.svc-designer-placeholder-page .svc-row--ghost {
+  display: none;
+}
