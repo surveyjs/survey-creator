@@ -33,13 +33,13 @@ export class SurveyResults extends SurveyElementBase<
           <div className="svd-test-results__header-text">{this.model.surveyResultsText}</div>
           <div className="svd-test-results__header-types">
             <ActionButton
-              click={() => this.model.selectTableClick(this.model)}
+              click={() => this.model.selectTableClick()}
               text={this.model.getLocString("ed.surveyResultsTable")}
               selected={this.model.isTableSelected}
               disabled={false}
             ></ActionButton>
             <ActionButton
-              click={() => this.model.selectJsonClick(this.model)}
+              click={() => this.model.selectJsonClick()}
               text={this.model.getLocString("ed.surveyResultsJson")}
               selected={this.model.isJsonSelected}
               disabled={false}
