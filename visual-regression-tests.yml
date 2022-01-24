@@ -87,7 +87,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
-      ArtifactName: 'SurveyJSCreatorV2Build-VRT-Core'
+      ArtifactName: 'SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)'
       publishLocation: 'Container'  
 
 - job: CreatorV2React
@@ -132,7 +132,7 @@ jobs:
     inputs:
       buildType: 'current'
       downloadType: 'single'
-      artifactName: 'SurveyJSCreatorV2Build-VRT-Core'
+      artifactName: 'SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)'
       downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: CopyFiles@2
@@ -144,7 +144,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
   
   - task: Npm@1
@@ -261,7 +261,7 @@ jobs:
     inputs:
       buildType: 'current'
       downloadType: 'single'
-      artifactName: 'SurveyJSCreatorV2Build-VRT-Core'
+      artifactName: 'SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)'
       downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: CopyFiles@2
@@ -273,7 +273,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
   
   - script: |
