@@ -9,7 +9,8 @@ import {
   AdaptiveActionContainer,
   SurveyTriggerSetValue,
   QuestionPanelDynamicModel,
-  Question
+  Question,
+  QuestionCommentModel
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -2004,4 +2005,25 @@ test("LogicUI: panel dynamic question visibleIf. Filter logic types by context i
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("question_visibility");
   expect(logicTypeName.choices.length).toEqual(3);
+});
+test("LogicUI: check runExpression question", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      {
+        type: "panel", name: "panel1",
+        elements: [
+          { type: "text", name: "q2" }
+        ]
+      },
+    ]
+  });
+  var logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "trigger_runExpression";
+  const runExpressionQuestion = (<QuestionCommentModel>panel.getQuestionByName("runExpression"));
+  expect(runExpressionQuestion.titleLocation).toEqual("hidden");
+  expect(runExpressionQuestion.placeHolder).toEqual("Type expression here...");
 });
