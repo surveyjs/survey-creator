@@ -978,7 +978,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     throw new Error("Method not implemented.");
   }
 
-  private showToolboxValue: boolean = true;
+  @property({ defaultValue: true }) showToolboxValue: boolean;
   public get showToolbox() {
     return this.showToolboxValue;
   }
