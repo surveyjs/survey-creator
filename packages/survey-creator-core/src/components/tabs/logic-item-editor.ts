@@ -382,7 +382,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private onPanelAdded(panel: PanelModel, action: SurveyLogicAction): PanelModel {
     const ltQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
-    ltQuestion.title = this.panel.panelCount > 1 ? editorLocalization.getString("pe.and").toLowerCase() : editorLocalization.getString("pe.then");
+    ltQuestion.title = this.panel.panelCount > 1 ? editorLocalization.getString("pe.and") : editorLocalization.getString("pe.then");
     ltQuestion.choices = this.logicTypeChoices;
     if (!!action) {
       panel["action"] = action;

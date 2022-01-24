@@ -368,8 +368,8 @@ export var enStrings = {
 
     buildExpression: "Build",
     editExpression: "Edit",
-    and: "And",
-    or: "Or",
+    and: "and",
+    or: "or",
     remove: "Remove",
     addCondition: "Add condition",
     if: "If",
