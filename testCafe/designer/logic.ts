@@ -89,9 +89,6 @@ fixture(title)
   .page(url)
   .beforeEach(async (t) => {
     await t.maximizeWindow();
-    await ClientFunction(() => {
-      window["creator"].showSidebar = true;
-    })();
   });
 
 const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();

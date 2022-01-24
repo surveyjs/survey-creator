@@ -32,10 +32,6 @@ test("Properties on the same line", async (t) => {
   const generalTab = Selector("h4").withExactText("General");
   const inputTab = Selector("h4").withExactText("Input");
 
-  await ClientFunction(() => {
-    window["creator"].showSidebar = true;
-  })();
-
   await t
     .click(question1)
     .pressKey("enter")
@@ -66,10 +62,6 @@ test("Values editors, keep them close", async (t) => {
   const question1 = Selector("[data-name=\"question1\"]");
   const generalTab = Selector("h4").withExactText("General");
   const dataTab = Selector("h4").withExactText("Data");
-
-  await ClientFunction(() => {
-    window["creator"].showSidebar = true;
-  })();
 
   await t
     .click(question1)

@@ -105,7 +105,8 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
       active: <any>new ComputedUpdater<boolean>(() => this.creator.sidebar.activeTab === "toolbox"),
       visible: <any>new ComputedUpdater<boolean>(() => {
         const toolboxLocationSidebar = this.creator.toolboxLocation === "sidebar";
-        return this.creator.activeTab === "designer" && toolboxLocationSidebar;
+        const toolboxVisibility = this.creator.showToolbox;
+        return this.creator.activeTab === "designer" && toolboxVisibility && toolboxLocationSidebar;
       }),
       title: "Toolbox",
       showTitle: false
