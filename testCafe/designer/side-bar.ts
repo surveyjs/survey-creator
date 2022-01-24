@@ -60,6 +60,7 @@ test("collapse/expand buttons", async (t) => {
 });
 
 test("SelectObject", async (t: TestController) => {
+  await setJSON({ pages: [{ name: "page1" }] });
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .click(getTabbedMenuItemByText("Translation"))
@@ -88,6 +89,7 @@ test("toolboxLocation insideSideBar", async (t) => {
   const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
   const CheckboxItem = Selector("[aria-label='Checkbox toolbox item']");
 
+  await setJSON({ pages: [{ name: "page1" }] });
   await t
     .expect(toolboxInDesigner.visible).ok()
     .expect(toolboxInSideBar.exists).notOk()

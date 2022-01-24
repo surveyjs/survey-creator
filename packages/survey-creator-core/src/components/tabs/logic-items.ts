@@ -12,6 +12,7 @@ import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { settings } from "../../settings";
 import { wrapTextByCurlyBraces } from "../../utils/utils";
+import { SurveyHelper } from "../../survey-helper";
 
 export class SurveyLogicAction {
   private surveyValue: SurveyModel;
@@ -287,7 +288,7 @@ export class SurveyLogicItem {
   public getContext(): Base {
     const exp = this.expression;
     if(!exp) return null;
-    if(exp.indexOf("{row.") < 0) return null;
+    if(!SurveyHelper.getQuestionContextIndexInfo(exp, "{")) return null;
     for(var i = 0; i < this.actions.length; i ++) {
       const parentEl = this.actions[i].parentElement;
       if(!!parentEl) {

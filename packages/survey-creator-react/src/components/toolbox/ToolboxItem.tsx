@@ -119,7 +119,7 @@ export class SurveyCreatorToolboxItem extends SurveyElementBase<
         </span>
         {(this.props.isCompact ?
           <span className="svc-toolbox__item-banner svc-item__banner">
-            <SvgIcon size={24} iconName={this.item.iconName}></SvgIcon>
+            <SvgIcon size={24} iconName={this.item.iconName} className="svc-toolbox__item-icon"></SvgIcon>
             <span className="svc-toolbox__item-title">{this.item.title}</span>
           </span>
           :

@@ -334,27 +334,14 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected getAllElements(): Array<Base> {
     var res = [];
     this.AddElements(this.survey.pages, res);
-    this.AddElements(this.survey.getAllQuestions(), res);
+    this.AddElements(SurveyLogicTypes.baseTypes.question.getSelectorChoices(this.survey, null), res);
     this.AddElements(this.survey.getAllPanels(), res);
     this.AddElements(this.survey.triggers, res);
     this.AddElements(this.survey.completedHtmlOnCondition, res);
     this.AddElements(this.survey.calculatedValues, res);
-    this.AddElements(this.getMatrixColumns(), res);
+    this.AddElements(SurveyLogicTypes.baseTypes.matrixdropdowncolumn.getSelectorChoices(this.survey, null), res);
     this.AddElements(this.getValidators(), res);
     this.AddElements(this.getItemValues(), res);
-    return res;
-  }
-  private getMatrixColumns(): Array<Base> {
-    var res = [];
-    var questions = this.survey.getAllQuestions();
-    for (var i = 0; i < questions.length; i++) {
-      var q = questions[i];
-      var columns = q["columns"];
-      if (!columns) continue;
-      var prop = Serializer.findProperty(q.getType(), "columns");
-      if (!prop || prop.className !== "matrixdropdowncolumn") continue;
-      this.AddElements(columns, res);
-    }
     return res;
   }
   private getValidators(): Array<Base> {

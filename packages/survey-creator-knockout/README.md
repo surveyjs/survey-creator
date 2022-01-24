@@ -5,13 +5,13 @@
 
 Survey Creator V2 for Knockout is a visual survey designer / form builder for the Knockout version of [SurveyJS](https://github.com/surveyjs/survey-library).
 
-Although it is powered by Knockout, this library can also be used with Angular, Vue, and jQuery. For React, we ship an individual version: [survey-creator-react](./packages/survey-creator-react).
+Although it is powered by Knockout, this library can also be used with Angular, Vue, and jQuery. For React, we ship an individual version: [survey-creator-react](/packages/survey-creator-react).
 
 - [Live Examples](https://surveyjs.io/Examples/Survey-Creator?platform=KnockoutjsV2)
 - [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
 - [Create your Survey or Form now](https://surveyjs.io/create-survey-v2)
 
-**NOTE**: This package contains Survey Creator V2. If you are looking for information on V1, refer to the [survey-creator](./packages/survey-creator) directory. Differences between these two versions are described in the following help topic: [SurveyJS Creator V2: What's new](https://surveyjs.io/Documentation/Survey-Creator?id=Creator-V2-Whats-New). For information on how to migrate to V2, refer to the [Migration Guide for SurveyJS Creator - from V1 to V2](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2) article.
+**NOTE**: This package contains Survey Creator V2. If you are looking for information on V1, refer to the [survey-creator](/packages/survey-creator) directory. Differences between these two versions are described in the following help topic: [SurveyJS Creator V2: What's new](https://surveyjs.io/Documentation/Survey-Creator?id=Creator-V2-Whats-New). For information on how to migrate to V2, refer to the [Migration Guide for SurveyJS Creator - from V1 to V2](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2) article.
 
 ## Use with Knockout, jQuery, or Vanilla JS
 
@@ -52,7 +52,7 @@ creator.saveSurveyFunc = (saveNo, callback) => {
   // saveSurveyJSON(this.id, creator.JSON, () => {
   //   callback(saveNo, true);
   // });
-});
+};
 // Load a survey definition JSON from you web service
 // ...
 // Assign the survey definition to Survey Creator
@@ -66,18 +66,34 @@ creator.render("creatorElement");
 Install the package:
 
 ```
-npm install survey-creator-knockout -- save
+npm install survey-creator-knockout --save
 ```
+
+Open the `angular.json` file and reference CSS files for SurveyJS (survey-core) and Survey Creator:
+
+{
+  ...
+  "projects": {
+    "project-name": {
+      ...
+      "architect": {
+        "build": {
+          ...
+          "options": {
+            ...
+            "styles": [
+              ...
+              "node_modules/survey-core/defaultV2.min.css",
+              "node_modules/survey-creator-knockout/survey-creator-knockout.min.css"
+            ],
+            ...
+
 
 Create a new component and use it in your Angular application:
 
 ```js
 import { Component, Input, EventEmitter, Output, OnInit } from "@angular/core";
-import * as Survey from "survey-core";
-import * as SurveyCreator from "survey-creator-knockout";
-// Import CSS stylesheets for SurveyJS (survey-core) and Survey Creator
-import "survey-core/defaultV2.min.css";
-import "survey-creator-knockout/survey-creator-knockout.css";
+import { SurveyCreator } from "survey-creator-knockout";
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -88,12 +104,11 @@ import "survey-creator-knockout/survey-creator-knockout.css";
 })
 export class SurveyCreatorComponent implements OnInit {
   @Output() submitSurvey = new EventEmitter<any>();
-  @Input()
-  result: any;
+  @Input() result: any;
 
   ngOnInit() {
     // Instantiate Survey Creator
-    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true });
+    const creator = new SurveyCreator({ showLogicTab: true });
     // Enable auto save
     creator.isAutoSave = true;
     // Show notifications before and after a survey definition JSON is saved
@@ -105,7 +120,7 @@ export class SurveyCreatorComponent implements OnInit {
       // saveSurveyJSON(this.id, creator.JSON, () => {
       //   callback(saveNo, true);
       // });
-    });
+    };
     // Load a survey definition JSON from you web service
     // ...
     // Assign the survey definition to Survey Creator
@@ -120,7 +135,7 @@ export class SurveyCreatorComponent implements OnInit {
 Install the package:
 
 ```
-npm install survey-creator-knockout -- save
+npm install survey-creator-knockout --save
 ```
 
 Create a new component and use it in your Vue application:
@@ -131,8 +146,8 @@ Create a new component and use it in your Vue application:
 </template>
 
 <script>
-import * as SurveyCreator from "survey-creator-knockout";
-// Import CSS stylesheets for SurveyJS (survey-core) and Survey Creator
+import { SurveyCreator } from "survey-creator-knockout";
+// Import CSS files for SurveyJS (survey-core) and Survey Creator
 import "survey-core/defaultV2.min.css";
 import "survey-creator-knockout/survey-creator-knockout.min.css";
 
@@ -140,7 +155,7 @@ export default {
   name: "surveyjs-creator-component",
   mounted() {
     // Instantiate Survey Creator
-    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true });
+    const creator = new SurveyCreator({ showLogicTab: true });
     // Enable auto save
     creator.isAutoSave = true;
     // Show notifications before and after a survey definition JSON is saved
@@ -152,7 +167,7 @@ export default {
       // saveSurveyJSON(this.id, creator.JSON, () => {
       //   callback(saveNo, true);
       // });
-    });
+    };
     // Load a survey definition JSON from you web service
     // ...
     // Assign the survey definition to Survey Creator
@@ -166,7 +181,7 @@ export default {
 
 ## Use with React
 
-Use the [survey-creator-react](./packages/survey-creator-react) package instead.
+Use the [survey-creator-react](/packages/survey-creator-react) package instead.
 
 ## License
 

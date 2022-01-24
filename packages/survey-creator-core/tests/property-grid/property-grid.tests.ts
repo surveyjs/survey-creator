@@ -2322,3 +2322,12 @@ test("isSupportGrouping", () => {
   const testBooleanEditor = new PropertyGridEditorBoolean();
   expect(testBooleanEditor.isSupportGrouping()).toBeTruthy();
 });
+
+test("QuestionLinkValueModel showClear #2563", (): any => {
+  const q = new QuestionLinkValueModel("q1");
+  expect(q.showClear).toBeFalsy();
+  q.value = ["one"];
+  expect(q.showClear).toBeTruthy();
+  q.value = [];
+  expect(q.showClear).toBeFalsy();
+});

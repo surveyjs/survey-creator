@@ -281,3 +281,25 @@ test("Check string editor inplaceEditForValues property", async (t) => {
       return { value: itemvalue.value, text: itemvalue.text };
     })()).eql({ value: "Oknewitem1", text: "newitem1" });
 });
+
+test("Check item string editor focus out on near click", async (t) => {
+  let json = {
+    "elements": [
+      {
+        "type": "checkbox",
+        "name": "question1",
+        "choices": ["item1"]
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("item1");
+
+  await t
+    .click(svItemSelector)
+    .expect(svItemSelector.focused).ok()
+    .click(Selector(".svc-item-value-wrapper").withText("item1"), { offsetX: 200 })
+    .expect(svItemSelector.focused).notOk();
+});

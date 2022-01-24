@@ -7,7 +7,7 @@
   margin-left: calcSize(-5);
 }
 
-.sd-selectbase__column:not(:first-of-type) .svc-item-value-wrapper {
+.sd-selectbase__column:not(:first-of-type) {
   margin-left: calcSize(5);
 }
 

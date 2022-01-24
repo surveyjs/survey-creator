@@ -55,16 +55,28 @@ export class StringEditorViewModel {
     this.errorText(this.baseModel.errorText);
     this.locString.searchElement = undefined;
   }
+  private justFocused = false;
   public onFocus(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onFocus(event);
+    this.justFocused = true;
   }
   public onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent): boolean {
     var res = this.baseModel.onKeyDown(event);
     this.errorText(this.baseModel.errorText);
     return res;
   }
+  public onMouseUp(sender: StringEditorViewModel, event: MouseEvent): boolean {
+    if(this.justFocused) {
+      this.justFocused = false;
+      // event.preventDefault();
+      return false;
+    }
+    return undefined;
+  }
   public edit(model: StringEditorViewModel, _: MouseEvent): void {
-    model.focusEditor && model.focusEditor();
+    setTimeout(() => {
+      model.focusEditor && model.focusEditor();
+    }, 100);
     this.baseModel.onClick(_);
   }
   public done(_: StringEditorViewModel, event: Event): void {

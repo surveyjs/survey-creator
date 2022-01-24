@@ -12,6 +12,7 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
   public actionContainer: AdaptiveActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
+  private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
 
   constructor(
     public creator: CreatorBase<T>,
@@ -23,7 +24,13 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
         this.onElementSelectedChanged(options.newValue);
       }
     };
+    this.sidebarFlyoutModeChangedFunc = (sender: Base, options: any) => {
+      if (options.name === "flyoutMode") {
+        this.updateActionsProperties();
+      }
+    };
     this.surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+    this.creator.sideBar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.actionContainer = new AdaptiveActionContainer();
     var actions: Array<Action> = [];
     this.buildActions(actions);

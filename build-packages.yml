@@ -41,6 +41,13 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
+  
+  - task: Cache@2
+    inputs:
+      key: 'npm-cache-creator-v1 | $(Build.SourcesDirectory)/survey-creator/packages/survey-creator/package.json'
+      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules
+      cacheHitVar: NPM_CACHE_RESTORED
+    displayName: Cache NPM
 
   - powershell: |
       $env:GIT_REDIRECT_STDERR = '2>&1'
@@ -59,10 +66,13 @@ jobs:
       artifactName: 'SurveyJSLibraryBuild'
       downloadPath: '$(System.ArtifactsDirectory)'
 
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-      npm install
-    displayName: 'Npm install survey-creator'
+  - task: Npm@1
+    displayName: 'NPM install survey-creator v1'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
+    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
   - task: CopyFiles@2
     inputs:
@@ -179,6 +189,13 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
+  
+  - task: Cache@2
+    inputs:
+      key: 'npm-cache-creator-core | $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/package.json'
+      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules
+      cacheHitVar: NPM_CACHE_RESTORED
+    displayName: Cache NPM Core
 
   - powershell: |
       $env:GIT_REDIRECT_STDERR = '2>&1'
@@ -204,11 +221,18 @@ jobs:
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
 
+  - task: Npm@1
+    displayName: 'Npm install survey-creator-core'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-      npm install
       npm run remove-package-lock
-    displayName: 'Npm install survey-creator-core'
+    displayName: 'npm run remove-package-lock'
 
   - powershell: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
@@ -234,7 +258,15 @@ jobs:
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
       ArtifactName: 'SurveyJSCreatorV2BuildCore'
-      publishLocation: 'Container'  
+      publishLocation: 'Container'
+    displayName: 'publish artifact SurveyJSCreatorV2BuildCore for release'
+      
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
+      ArtifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
+      publishLocation: 'Container'
+    displayName: 'publish artifact SurveyJSCreatorV2BuildCore-$(Build.BuildId) for next jobs'
 
 
 - job: CreatorV2React
@@ -249,6 +281,13 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
+  
+  - task: Cache@2
+    inputs:
+      key: 'npm-cache-creator-react | $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/package.json'
+      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules
+      cacheHitVar: NPM_CACHE_RESTORED
+    displayName: Cache NPM
 
   - powershell: |
       $env:GIT_REDIRECT_STDERR = '2>&1'
@@ -271,7 +310,7 @@ jobs:
     inputs:
       buildType: 'current'
       downloadType: 'single'
-      artifactName: 'SurveyJSCreatorV2BuildCore'
+      artifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
       downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: CopyFiles@2
@@ -283,7 +322,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
 
   # - script: |
@@ -302,11 +341,18 @@ jobs:
   #     npm run test
   #   displayName: 'Unit tests CreatorV2 Core'
 
+  - task: Npm@1
+    displayName: 'Npm install survey-creator-react'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-      npm install
       npm run remove-package-lock
-    displayName: 'Npm install survey-creator-react'
+    displayName: 'npm run remove-package-lock'
 
   - task: CopyFiles@2
     inputs:
@@ -376,6 +422,13 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
+  
+  - task: Cache@2
+    inputs:
+      key: 'npm-cache-creator-knockout | $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/package.json'
+      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules
+      cacheHitVar: NPM_CACHE_RESTORED
+    displayName: Cache NPM
 
   - powershell: |
       $env:GIT_REDIRECT_STDERR = '2>&1'
@@ -398,7 +451,7 @@ jobs:
     inputs:
       buildType: 'current'
       downloadType: 'single'
-      artifactName: 'SurveyJSCreatorV2BuildCore'
+      artifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
       downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: CopyFiles@2
@@ -410,7 +463,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
 
   # - script: |
@@ -429,11 +482,18 @@ jobs:
   #     npm run test
   #   displayName: 'Unit tests CreatorV2 Core'
 
+  - task: Npm@1
+    displayName: 'Npm install survey-creator-knockout'
+    inputs:
+      command: install
+      verbose: false
+      workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-      npm install
       npm run remove-package-lock
-    displayName: 'Npm install survey-creator-knockout'
+    displayName: 'npm run remove-package-lock'
 
   - task: CopyFiles@2
     inputs:

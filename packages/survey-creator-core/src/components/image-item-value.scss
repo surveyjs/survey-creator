@@ -30,12 +30,12 @@
   left: calc(50% - 3 * #{$base-unit});
 }
 
-.svc-question__content--selected .svc-image-item-value-controls {
-  display: block;
+.svc-image-item-value-controls {
+  display: flex;
 }
 
 .svc-image-item-value-controls__button {
-  display: inline-block;
+  display: block;
   background-color: $background;
   border-radius: 50%;
   width: calcSize(6);
@@ -43,7 +43,7 @@
   cursor: pointer;
 
   &:not(:last-child) {
-    margin-right: calcSize(0.5);
+    margin-right: calcSize(1);
   }
 
   .sv-svg-icon {

@@ -935,9 +935,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return this.getPlugin(this.activeTab);
   }
 
-  public static defaultNewSurveyText: string =
-    '{ "pages": [ { "name": "page1"}] }';
-
   public toolbox: QuestionToolbox;
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
@@ -960,7 +957,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.sideBar = new SideBarModel(this);
     this.setOptions(this.options);
     this.patchMetadata();
-    this.initSurveyWithJSON(JSON.parse(CreatorBase.defaultNewSurveyText), false);
+    this.initSurveyWithJSON({}, false);
     this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this);
     this.updateToolboxIsCompact();
     this.initTabs();

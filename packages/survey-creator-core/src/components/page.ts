@@ -72,7 +72,7 @@ export class PageViewModel<
     return this.creator.survey.pages.indexOf(this.page) < 0;
   }
   protected isOperationsAllow(): boolean {
-    return super.isOperationsAllow() && !this.isGhost;
+    return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single";
   }
   get page(): PageModel {
     return this._page;
@@ -118,6 +118,10 @@ export class PageViewModel<
   public hover(event: MouseEvent, element: HTMLElement) {
     toggleHovered(event, element, this.creator.pageHoverDelay);
   }
+  public hoverStopper(event: MouseEvent, element: HTMLElement) {
+    event["__svc_question_processed"] = true;
+  }
+
   protected duplicate() {
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);
@@ -126,8 +130,8 @@ export class PageViewModel<
     return !!this.creator && !this.creator.readOnly;
   }
   public get addNewQuestionText(): string {
-    if(!this.currentAddQuestionType && this.creator)
+    if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
-    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType):"";
+    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType) : "";
   }
 }

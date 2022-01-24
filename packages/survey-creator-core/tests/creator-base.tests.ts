@@ -892,6 +892,22 @@ test("pageEditMode='single'", (): any => {
   ).toBeTruthy();
   expect(Serializer.findProperty("panel", "page").isVisible("")).toBeTruthy();
 });
+test("Check page actions for pageEditMode is 'single'", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "single" });
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  expect(creator.pageEditMode).toEqual("single");
+  creator.sideBar.flyoutMode = true;
+
+  const pageModel = new PageViewModel(creator, creator.survey.pages[0]);
+  creator.selectElement(creator.survey.pages[0]);
+
+  expect(pageModel.actionContainer.actions).toHaveLength(3);
+  expect(pageModel.getActionById("delete").visible).toBeFalsy();
+  expect(pageModel.getActionById("duplicate").visible).toBeFalsy();
+  expect(pageModel.getActionById("settings").visible).toBeTruthy();
+});
 test("Undo converting question type", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

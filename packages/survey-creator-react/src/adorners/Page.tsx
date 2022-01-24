@@ -61,6 +61,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
     );
   }
   renderElement(): JSX.Element {
+    if (!this.props.page) return null;
     return (
       attachKey2click(<div
         ref={this.rootRef}
@@ -95,6 +96,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
         e.stopPropagation();
         this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
       }}
+      onMouseOver={(e) => this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
     >
       <span className="svc-text svc-text--normal svc-text--bold">
         {this.model.addNewQuestionText}
