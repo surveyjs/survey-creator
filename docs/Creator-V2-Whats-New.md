@@ -224,7 +224,7 @@ Some evolutionary changes in SurveyJS Library are listed below.
 #### Performance improved for multi-page surveys
 Previously, SurveyJS Library could render up to 100 questions on one page with a good performance. However, when we started to implement support for Microsoft Word page layout in Creator V2 and tried to display all pages at once, we began to encounter performance issues. For instance, it was a problem to render 40 pages at once if each page contained 25 questions (a total of 1000 questions to render).  
 
-Since we do have customers who develop complex surveys containing more that 1000 questions, we had to resolve such performance issues and reduce the render time (by keeping it below 1 second for large surveys).  
+Since we do have customers who develop complex surveys containing more than 1000 questions, we had to resolve such performance issues and reduce the render time (by keeping it below 1 second for large surveys).  
 
 To improve performance, we introduced support for [lazy rendering](https://surveyjs.io/Examples/Library?id=survey-lazy&platform=Reactjs) in our SurveyJS Library. This feature forces a survey to render question skeletons for questions that are not visible on the screen. As a result, we dramatically optimized operation performance in the SurveyJS model.
 
