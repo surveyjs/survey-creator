@@ -258,7 +258,15 @@ jobs:
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
       ArtifactName: 'SurveyJSCreatorV2BuildCore'
-      publishLocation: 'Container'  
+      publishLocation: 'Container'
+    displayName: 'publish artifact SurveyJSCreatorV2BuildCore for release'
+      
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
+      ArtifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
+      publishLocation: 'Container'
+    displayName: 'publish artifact SurveyJSCreatorV2BuildCore-$(Build.BuildId) for next jobs'
 
 
 - job: CreatorV2React
@@ -302,7 +310,7 @@ jobs:
     inputs:
       buildType: 'current'
       downloadType: 'single'
-      artifactName: 'SurveyJSCreatorV2BuildCore'
+      artifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
       downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: CopyFiles@2
@@ -314,7 +322,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
 
   # - script: |
@@ -443,7 +451,7 @@ jobs:
     inputs:
       buildType: 'current'
       downloadType: 'single'
-      artifactName: 'SurveyJSCreatorV2BuildCore'
+      artifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
       downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: CopyFiles@2
@@ -455,7 +463,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
 
   # - script: |
