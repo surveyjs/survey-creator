@@ -50,24 +50,24 @@ if (!window["%hammerhead%"]) {
   Survey.StylesManager.applyTheme();
   SurveyCreator.StylesManager.applyTheme();
   //
-  
+
   SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
 
 
   var options = {
-    questionTypes: [
-      "text",
-      "checkbox",
-      "radiogroup",
-      "dropdown",
-      "comment",
-      "rating",
-      "imagepicker",
-      "boolean",
-      "html",
-      "file",
-      "expression"
-    ],
+    // questionTypes: [
+    //   "text",
+    //   "checkbox",
+    //   "radiogroup",
+    //   "dropdown",
+    //   "comment",
+    //   "rating",
+    //   "imagepicker",
+    //   "boolean",
+    //   "html",
+    //   "file",
+    //   "expression"
+    // ],
     pageEditMode: "single"
   };
   var creator = new SurveyCreator.SurveyCreator("editorElement", options);
@@ -83,7 +83,7 @@ if (!window["%hammerhead%"]) {
       </div>
     </div>`;
 
-  creator.saveSurveyFunc = function(saveNo, callback) {
+  creator.saveSurveyFunc = function (saveNo, callback) {
     alert("ok");
     callback(saveNo, true);
   };
