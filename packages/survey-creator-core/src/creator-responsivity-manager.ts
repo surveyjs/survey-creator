@@ -3,7 +3,9 @@ import "./responsivity.scss";
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
-  private prevToolboxLocation;
+  private prevShowToolbox;
+  private prevToolboxIsCompact;
+  private prevShowPageNavigator;
   private screenWidth: { [key: string]: number } = {
     "xxl": 1800,
     "xl": 1500,
@@ -30,12 +32,29 @@ export class CreatorResponsivityManager {
     this.creator.showToolbar = undefined;
     this.creator.isMobileView = undefined;
   }
+  private procesShowToolbox(toolboxVisible: boolean) {
+    if (toolboxVisible && !this.creator.showToolbox && this.prevShowToolbox !== undefined) {
+      this.creator.showToolbox = this.prevShowToolbox;
+      this.prevShowToolbox = undefined;
+    } else if (!toolboxVisible && this.creator.showToolbox && this.prevShowToolbox === undefined) {
+      this.prevShowToolbox = this.creator.showToolbox;
+      this.creator.showToolbox = false;
+    }
+  }
+  private procesShowPageNavigator(pageNavigatorVisibility: boolean) {
+    if (pageNavigatorVisibility && !this.creator.showPageNavigator && this.prevShowPageNavigator !== undefined) {
+      this.creator.showPageNavigator = this.prevShowPageNavigator;
+      this.prevShowPageNavigator = undefined;
+    } else if (!pageNavigatorVisibility && this.creator.showPageNavigator && this.prevShowPageNavigator === undefined) {
+      this.prevShowPageNavigator = this.creator.showPageNavigator;
+      this.creator.showPageNavigator = false;
+    }
+  }
 
   constructor(protected container: HTMLDivElement, private creator: CreatorBase) {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.container.parentElement);
-      this.prevToolboxLocation = this.creator.toolboxLocation;
       this.process();
       if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
         this.creator.showSidebar = false;
@@ -45,14 +64,8 @@ export class CreatorResponsivityManager {
 
   private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean) {
     this.creator.updateToolboxIsCompact(toolboxIsCompact);
-    /*if (toolboxVisible && this.creator.toolboxLocation === "hidden") {
-      this.creator.toolboxLocation = this.prevToolboxLocation;
-    } else if (!toolboxVisible && this.creator.toolboxLocation !== "hidden") {
-      this.prevToolboxLocation = this.creator.toolboxLocation;
-      this.creator.toolboxLocation = "hidden";
-    }*/
-    this.creator.showToolbox = toolboxVisible;
-    this.creator.showPageNavigator = toolboxVisible;
+    this.procesShowToolbox(toolboxVisible);
+    this.procesShowPageNavigator(toolboxVisible);
     this.creator.sidebar.flyoutMode = flyoutSidebar;
 
     if (this.creator.sidebar.visible && !flyoutSidebar) {

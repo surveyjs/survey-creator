@@ -167,27 +167,21 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   checkCreatorLayoutPropertiesByWidth(creator, 200, expectedValues);
 });
 
-test.skip("CreatorResponsivityManager process if all layout elements is hidden", (): any => {
+test("CreatorResponsivityManager process if Sidebar, PageNavigator and Toolbox is hidden", (): any => {
   const creator = new CreatorTester();
   creator.showSidebar = false;
   creator.showPageNavigator = false;
   creator.showToolbox = false;
   creator.toolboxLocation = "right";
-  creator.toolbox.isCompact = true;
-  creator.showTabs = false;
-  creator.showToolbar = false;
   const container: SimpleContainer = new SimpleContainer({});
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
 
   const checkInitialValues = () => {
     expect(creator.showSidebar).toEqual(false);
+    expect(creator.sidebar.flyoutMode).toEqual(false);
     expect(creator.showPageNavigator).toEqual(false);
     expect(creator.showToolbox).toEqual(false);
     expect(creator.toolboxLocation).toEqual("right");
-    expect(creator.toolbox.isCompact).toEqual(true);
-    expect(creator.sidebar.flyoutMode).toEqual(false);
-    expect(creator.showTabs).toEqual(false);
-    expect(creator.showToolbar).toEqual(false);
   };
 
   checkInitialValues();
@@ -198,15 +192,10 @@ test.skip("CreatorResponsivityManager process if all layout elements is hidden",
   expect(creator.showPageNavigator).toEqual(false);
   expect(creator.showToolbox).toEqual(false);
   expect(creator.toolboxLocation).toEqual("right");
-  expect(creator.toolbox.isCompact).toEqual(true);
-  expect(creator.sidebar.flyoutMode).toEqual(true);
-  expect(creator.showTabs).toEqual(false);
-  expect(creator.showToolbar).toEqual(false);
 
   container.offsetWidth = 2000;
   responsivityManager.process();
   checkInitialValues();
-
 });
 
 test("CreatorResponsivityManager: sidebar expand/collapse on width change", (): any => {
