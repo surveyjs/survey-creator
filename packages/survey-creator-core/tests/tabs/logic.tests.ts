@@ -2007,7 +2007,7 @@ test("LogicUI: panel dynamic question visibleIf. Filter logic types by context i
   expect(logicTypeName.choices.length).toEqual(3);
 });
 test("LogicUI: check runExpression question", () => {
-  var survey = new SurveyModel({
+  const survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
       { type: "text", name: "q2" },
@@ -2019,9 +2019,9 @@ test("LogicUI: check runExpression question", () => {
       },
     ]
   });
-  var logic = new SurveyLogicUI(survey);
+  const logic = new SurveyLogicUI(survey);
   logic.addNew();
-  var panel = logic.itemEditor.panels[0];
+  const panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "trigger_runExpression";
   const runExpressionQuestion = (<QuestionCommentModel>panel.getQuestionByName("runExpression"));
   expect(runExpressionQuestion.titleLocation).toEqual("hidden");
