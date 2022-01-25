@@ -11,7 +11,8 @@ import {
   QuestionHtmlModel,
   QuestionDropdownModel,
   SurveyElement,
-  QuestionMatrixDropdownModelBase
+  QuestionMatrixDropdownModelBase,
+  QuestionCommentModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -382,7 +383,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private onPanelAdded(panel: PanelModel, action: SurveyLogicAction): PanelModel {
     const ltQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
-    ltQuestion.title = this.panel.panelCount > 1 ? editorLocalization.getString("pe.and").toLowerCase() : editorLocalization.getString("pe.then");
+    ltQuestion.title = this.panel.panelCount > 1 ? editorLocalization.getString("pe.and") : editorLocalization.getString("pe.then");
     ltQuestion.choices = this.logicTypeChoices;
     if (!!action) {
       panel["action"] = action;
@@ -498,8 +499,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     var propGenerator = new PropertyJSONGenerator(obj, this.options);
     propGenerator.setupObjPanel(elementPanel, true, "logic");
     elementPanel.title = "";
-    const runExpressionQuestion = elementPanel.getQuestionByName("runExpression");
-    runExpressionQuestion && (runExpressionQuestion.titleLocation = "top"); // TODO
+    const runExpressionQuestion = <QuestionCommentModel>elementPanel.getQuestionByName("runExpression");
+    runExpressionQuestion && this.updateRunExpressionQuestion(runExpressionQuestion);
     elementPanel.visible = true;
     elementPanel.getElementByName(logicType.propertyName).visible = false;
     elementPanel.onSurveyLoad();
@@ -509,6 +510,10 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         q.value = obj[q.getValueName()];
       }
     }
+  }
+  private updateRunExpressionQuestion(question: QuestionCommentModel) {
+    question.titleLocation = "hidden";
+    question.placeHolder = editorLocalization.getString("pe.emptyExpressionPlaceHolder");
   }
   private recreateQuestion(panel: PanelModel, obj: Base, name: string): void {
     const oldQuestion = !!name ? panel.getQuestionByName(name) : null;
