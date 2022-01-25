@@ -848,9 +848,9 @@ test("Create expression from scratch", () => {
   expect(panel.getQuestionByName("conjunction").choices[0].value).toEqual(
     "and"
   );
-  expect(panel.getQuestionByName("conjunction").choices[0].text).toEqual("And");
+  expect(panel.getQuestionByName("conjunction").choices[0].text).toEqual("and");
   expect(panel.getQuestionByName("conjunction").choices[1].value).toEqual("or");
-  expect(panel.getQuestionByName("conjunction").choices[1].text).toEqual("Or");
+  expect(panel.getQuestionByName("conjunction").choices[1].text).toEqual("or");
   panel.getQuestionByName("questionName").value = "q2";
   expect(editor.isReady).toBeFalsy();
   panel.getQuestionByName("questionValue").value = 2;
