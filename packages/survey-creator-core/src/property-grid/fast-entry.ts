@@ -1,4 +1,4 @@
-import { ItemValue, QuestionCommentModel, Serializer } from "survey-core";
+import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../settings";
 import { editorLocalization } from "../editorLocalization";
@@ -47,6 +47,7 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
       this.editSurvey.getQuestionByName("question")
     );
     this.setComment();
+    (this.editSurvey.getQuestionByName("question") as QuestionTextBase).placeHolder = this.getPlaceHolder();
     this.editSurvey.onValidateQuestion.add((sender, options) => {
       const maxChoicesCount = this.options.maximumChoicesCount;
       if (maxChoicesCount > 0) {
@@ -66,6 +67,11 @@ export class FastEntryEditor extends PropertyEditorSetupValue {
           ["format"](uniqueValue);
       }
     });
+  }
+  private getPlaceHolder(): string {
+    return this.names.map(name => name+" 1").join(ItemValue.Separator)+"\n"+
+           this.names.map(name => name+" 2").join(ItemValue.Separator)+"\n"+
+           this.names[0]+" 3";
   }
   protected getSurveyJSON(): any {
     return {
