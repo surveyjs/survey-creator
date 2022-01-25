@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, changeToolboxLocation, getTabbedMenuItemByText, checkElementScreenshot, setJSON } from "../../helper";
+import { url, changeToolboxLocation, getTabbedMenuItemByText, checkElementScreenshot, setJSON, collapseButtonSelector } from "../../helper";
 
 const title = "Toolbox Screenshot";
 
@@ -15,7 +15,6 @@ test("Left toolbox", async (t) => {
 
   await setJSON({ pages: [{ name: "page1" }] });
   await t.resizeWindow(2560, 1440);
-  await setJSON({ pages: [{ name: "page1" }] });
   await checkElementScreenshot("toolbox-left.png", toolboxElement, t);
 
   await t.hover(toolboxItem);
@@ -47,8 +46,11 @@ test("Right toolbox", async (t) => {
   const toolboxItem = Selector(".svc-toolbox__item");
   const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
+  await setJSON({ pages: [{ name: "page1" }] });
+  await t
+    .resizeWindow(2560, 1440)
+    .click(collapseButtonSelector);
   await changeToolboxLocation("right");
-  await t.resizeWindow(2560, 1440);
 
   const toolboxElement = Selector(".svc-toolbox");
   await checkElementScreenshot("toolbox-right.png", toolboxElement, t);
