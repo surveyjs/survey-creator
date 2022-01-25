@@ -59,6 +59,34 @@ test("Matrix column editor", async (t) => {
   await checkElementScreenshot("matrix-cell-edit.png", Selector(".svc-matrix-cell__popup .sv-popup__container"), t);
 });
 
+test("Choices (Checkbox): Layout", async (t) => {
+  await t.resizeWindow(2560, 1440);
+
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            "type": "checkbox",
+            "name": "question1",
+            "choices": [
+              "item1",
+              "item2"
+            ],
+            "hasOther": true,
+            "colCount": 2
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const QRoot = Selector(".svc-question__adorner").filterVisible();
+  await checkElementScreenshot("surface-checkbox-layout.png", QRoot, t);
+});
+
 test("Placeholder", async (t) => {
   await t.resizeWindow(1920, 900);
   const designerTabContent = Selector(".svc-tab-designer");
