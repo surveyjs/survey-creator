@@ -1,3 +1,4 @@
+import { IsTouch } from "survey-core";
 export class DragOrClickHelper {
   private pointerDownEvent;
   private currentTarget;
@@ -10,6 +11,10 @@ export class DragOrClickHelper {
   constructor(private dragHandler) { }
 
   public onPointerDown(pointerDownEvent, itemModel?) {
+    if (IsTouch) {
+      this.dragHandler(pointerDownEvent, pointerDownEvent.currentTarget, itemModel); //TODO handle inside in the library's drag drop core, need refactorign
+      return;
+    }
     this.pointerDownEvent = pointerDownEvent;
     this.currentTarget = pointerDownEvent.currentTarget;
     this.startX = pointerDownEvent.pageX;
