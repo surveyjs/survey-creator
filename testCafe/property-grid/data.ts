@@ -32,10 +32,6 @@ test("Default value", async (t) => {
   const dataTab = Selector("h4").withExactText("Data");
   const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
 
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
-  })();
-
   await t
     .click(question1)
     .click(dataTab)

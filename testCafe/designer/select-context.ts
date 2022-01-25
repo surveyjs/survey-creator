@@ -4,9 +4,6 @@ const title = "Select context object then edit string";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
-  })();
 });
 
 test("Select questions and survey", async (t) => {
