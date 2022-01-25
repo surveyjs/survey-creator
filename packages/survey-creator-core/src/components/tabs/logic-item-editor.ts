@@ -69,16 +69,16 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       if (options.name == "logicTypeName") {
         this.onLogicTypeChanged(options.panel);
       }
-      const obj = this.getElementPanelObj(options.panel);
-      if (!!obj) {
+      const panelObj = this.getPanelObj(options.panel);
+      if (!!panelObj) {
         const panel = options.panel;
-        const panelElement = panel.getElementByName("elementPanel");
-        if (!!panelElement.getQuestionByName(options.name)) {
-          obj[options.name] = options.value;
+        const elementPanel = panel.getElementByName("elementPanel");
+        if (!!elementPanel.getQuestionByName(options.name)) {
+          panelObj[options.name] = options.value;
         }
         const logicType = this.getLogicTypeByPanel(panel);
         if (!!logicType && logicType.dependedOnPropertyName === options.name) {
-          this.recreateQuestion(panel, obj, logicType.dynamicPropertyName);
+          this.recreateQuestion(panel, panelObj, logicType.dynamicPropertyName);
         }
         options.panel.runCondition(this.editSurvey.getAllValues(), {
           survey: this.editSurvey
@@ -325,19 +325,19 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (action === newAction) return;
     this.editableItem.replaceAction(newAction, action);
     panel["action"] = newAction;
-    this.setElementPanelObj(panel, newAction.element);
-    const elementPanel = this.getElementPanelObj(panel);
-    if (!!elementPanel) {
+    this.setPanelObj(panel, newAction.element);
+    const panelObj = this.getPanelObj(panel);
+    if (!!panelObj) {
       const logicType = this.getLogicTypeByPanel(panel);
-      logicType.saveNewElement(elementPanel);
+      logicType.saveNewElement(panelObj);
     }
   }
   private getOrCreateActionByPanel(panel: PanelModel): SurveyLogicAction {
     const action = this.getActionByPanel(panel);
     const logicType = this.getLogicTypeByPanel(panel);
-    const elementPanel = this.getElementPanelObj(panel);
+    const panelObj = this.getPanelObj(panel);
     let selectedElement = null;
-    if (!elementPanel) {
+    if (!panelObj) {
       selectedElement = this.getElementBySelectorName(panel.getQuestionByName("elementSelector").value);
     }
     const createNewAction =
@@ -345,14 +345,14 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       action.logicType != logicType ||
       (!!selectedElement && action.element != selectedElement);
     if (!createNewAction) {
-      if (!!elementPanel) {
-        action.element.fromJSON(elementPanel.toJSON());
+      if (!!panelObj) {
+        action.element.fromJSON(panelObj.toJSON());
       }
       return action;
     }
     return new SurveyLogicAction(
       logicType,
-      !!elementPanel ? elementPanel : selectedElement,
+      !!panelObj ? panelObj : selectedElement,
       this.survey
     );
   }
@@ -448,10 +448,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private onLogicTypeChanged(panel: PanelModel) {
     const logicType = this.getLogicTypeByPanel(panel);
     const qTypeDescription = <QuestionHtmlModel>panel.getQuestionByName("logicTypeDescription");
-    qTypeDescription.html = !!logicType
-      ? logicType.description
-      : "";
-    this.setElementPanelObj(panel, null);
+    qTypeDescription.html = !!logicType ? logicType.description : "";
+    this.setPanelObj(panel, null);
     this.setupElementSelector(panel, logicType);
     this.setupElementPanel(panel, logicType);
   }
@@ -470,32 +468,22 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     question.choices = this.getSelectorChoices(logicType);
     question.optionsCaption = this.getSelectorOptionsText(logicType);
     const action = this.getActionByPanel(panel);
-    question.value =
-      !!action && action.logicType == logicType ? action.elementName : undefined;
+    question.value = !!action && action.logicType == logicType ? action.elementName : undefined;
   }
   private setupElementPanel(panel: PanelModel, logicType: SurveyLogicType) {
     this.titleActionsCreator = null;
     const elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-    const elementPanelQuestions = elementPanel.questions;
-    for (let i = 0; i < elementPanelQuestions.length; i++) {
-      elementPanelQuestions[i].clearValue();
-    }
+    elementPanel.questions.forEach(q => { q.clearValue(); });
     elementPanel.elements.splice(0, elementPanel.elements.length);
     if (!this.isElementPanelVisible(logicType)) {
       elementPanel.visible = false;
       return;
     }
-    const obj = this.createElementPanelObj(
-      this.getActionByPanel(panel),
-      logicType
-    );
-    this.setElementPanelObj(panel, obj);
+    const obj = this.createElementPanelObj(this.getActionByPanel(panel), logicType);
+    this.setPanelObj(panel, obj);
     elementPanel.visible = logicType.hasVisibleElements;
     if (!elementPanel.visible) return;
-    this.titleActionsCreator = new PropertyGridTitleActionsCreator(
-      obj,
-      this.options
-    );
+    this.titleActionsCreator = new PropertyGridTitleActionsCreator(obj, this.options);
     const propGenerator = new PropertyJSONGenerator(obj, this.options);
     propGenerator.setupObjPanel(elementPanel, true, "logic");
     elementPanel.title = "";
@@ -554,13 +542,13 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (!logicType) return false;
     return !this.isElementSelectorVisible(logicType);
   }
-  private getElementPanelObj(panel: PanelModel): Base {
+  private getPanelObj(panel: PanelModel): Base {
     return panel["panelObj"];
   }
-  private setElementPanelObj(panel: PanelModel, obj: Base) {
-    const oldObj = this.getElementPanelObj(panel);
-    if (!!oldObj) {
-      oldObj.onPropertyValueChangedCallback = undefined;
+  private setPanelObj(panel: PanelModel, obj: Base) {
+    const oldPanelObj = this.getPanelObj(panel);
+    if (!!oldPanelObj) {
+      oldPanelObj.onPropertyValueChangedCallback = undefined;
     }
     panel["panelObj"] = obj;
     if (!!obj) {
@@ -572,7 +560,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         arrayChanges: any
       ) => {
         if (!panel || panel.isDisposed) {
-          oldObj.onPropertyValueChangedCallback = undefined;
+          oldPanelObj.onPropertyValueChangedCallback = undefined;
           return;
         }
         const q = panel.getQuestionByName(name);
