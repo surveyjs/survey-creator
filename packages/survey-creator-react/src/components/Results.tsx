@@ -102,12 +102,12 @@ export class SurveyResultsByRow extends SurveyElementBase<any, any> {
       <>
         {attachKey2click(<tr onClick={() => this.row.toggle()}>
           <td
-            style={{ paddingLeft: "calc(" + (6 + 2 * this.row.lvl) + " * 8px)" }}
+            style={{ paddingLeft: this.row.textMargin }}
             className="svd-dark-border-color">
 
             {this.row.isNode ? (
               <span
-                style={{ left: "calc(" + (3.5 + 2 * this.row.lvl) + " * 8px)" }}
+                style={{ left: this.row.markerMargin }}
                 className={"svd-test-results__marker " + (this.row.collapsed ? "" : "svd-test-results__marker--expanded")}>
                 <SvgIcon
                   iconName={"icon-expand_16x16"}

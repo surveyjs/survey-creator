@@ -40,6 +40,14 @@ export class SurveyResultsItemModel extends Base {
   public getString(data: any): string {
     return this._data.getString(data);
   }
+
+  private markerWidth: number = 16
+  public get markerMargin(): string {
+    return (1.75 + this.lvl) * this.markerWidth + "px";
+  }
+  public get textMargin(): string {
+    return (3 + this.lvl) * this.markerWidth + "px";
+  }
 }
 
 function addCollapsed(items: any[] = [], initLvl: number) {
