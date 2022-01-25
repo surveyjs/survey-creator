@@ -20,7 +20,7 @@ ko.components.register("survey-results-table-row", {
     createViewModel: (params) => {
       const model = params.model;
       new ImplementorBase(model);
-      return model;
+      return { model };
     }
   },
   template: rowTemplateHtml

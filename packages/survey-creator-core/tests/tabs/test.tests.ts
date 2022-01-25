@@ -1,5 +1,6 @@
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
+import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
 import { IAction, ListModel } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 
@@ -276,4 +277,57 @@ test("Hide Test Again action on leaving Preview", (): any => {
   expect(testAgain.visible).toBeTruthy();
   creator.makeNewViewActive("designer");
   expect(testAgain.visible).toBeFalsy();
+});
+test("Test correct survey results node levels", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "matrixdynamic",
+            name: "Question1",
+            defaultValue: [
+              {
+                "Column 1": [
+                  1
+                ]
+              },
+              {
+                "Column 1": [
+                  2
+                ]
+              }
+            ],
+            columns: [
+              {
+                "name": "Column 1"
+              }
+            ],
+            choices: [
+              1,
+              2
+            ],
+            cellType: "checkbox"
+          }
+        ]
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const resultsModel: SurveyResultsModel = new SurveyResultsModel(testPlugin.model.simulator.survey);
+
+  const zeroLvl: SurveyResultsItemModel[] = resultsModel.resultData;
+  expect(zeroLvl.length).toEqual(1);
+  expect(zeroLvl[0].lvl).toEqual(0);
+
+  const firstLvl: SurveyResultsItemModel[] = zeroLvl[0].items;
+  expect(firstLvl.length).toEqual(2);
+  expect(firstLvl[0].lvl).toEqual(1);
+
+  const secondLvl: SurveyResultsItemModel[] = firstLvl[0].items;
+  expect(secondLvl.length).toEqual(1);
+  expect(secondLvl[0].lvl).toEqual(2);
 });

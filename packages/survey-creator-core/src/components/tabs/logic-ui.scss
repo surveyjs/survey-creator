@@ -72,21 +72,13 @@
     box-shadow: none;
   }
 }
-
-.svc-logic-operator.svc-logic-operator--conjunction {
-  background-color: $primary-light;
-  &:hover, &:focus {
-    background-color: $primary;
-  }
-}
-
 .svc-logic-operator.svc-logic-operator--question {
   background-color: $blue-light;
   &:hover, &:focus {
     background-color: $blue;
   }
 }
-
+.svc-logic-operator.svc-logic-operator--conjunction,
 .svc-logic-operator.svc-logic-operator--operator {
   background-color: $secondary-back-light;
   &:hover, &:focus {
