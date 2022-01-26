@@ -145,7 +145,7 @@ test("Responsive creator: property grid", async (t) => {
   await t
     .expect(westResizer.visible).notOk()
     .expect(eastResizer.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(570)
+    .expect(propertyGridSelector.offsetWidth).eql(520)
 
     .drag(eastResizer, -170, 0)
     .expect(propertyGridSelector.offsetWidth).eql(400)
