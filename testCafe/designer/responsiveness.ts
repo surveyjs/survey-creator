@@ -121,8 +121,8 @@ test("Responsive creator: property grid", async (t) => {
     .expect(propertyGridSelector.offsetWidth).eql(370)
     .expect(flyoutPropertyGrid.exists).ok()
 
-    .drag(westResizer, -200, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(570)
+    .drag(westResizer, -150, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(520)
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
@@ -145,14 +145,14 @@ test("Responsive creator: property grid", async (t) => {
   await t
     .expect(westResizer.visible).notOk()
     .expect(eastResizer.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(570)
+    .expect(propertyGridSelector.offsetWidth).eql(520)
 
-    .drag(eastResizer, -170, 0)
+    .drag(eastResizer, -120, 0)
     .expect(propertyGridSelector.offsetWidth).eql(400)
 
     .resizeWindow(1920, 900) // reset for next tests
-    .drag(eastResizer, 200, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(600);
+    .drag(eastResizer, 100, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(500);
 });
 
 test("Responsive creator: designer tab for mobile devices", async (t) => {
