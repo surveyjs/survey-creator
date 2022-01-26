@@ -1,5 +1,5 @@
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-import { url, setJSON, screenshotComparerOptions } from "../../helper";
+import { url, setJSON, screenshotComparerOptions, propertyGridSelector } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -40,6 +40,14 @@ test("Properties on the same line", async (t) => {
     .expect(Selector("span").withExactText("Min").visible).ok()
     .expect(Selector(".spg-panel__content").filterVisible().visible).ok();
 
+  await takeScreenshot("properties-on-one-line-narrow.png", Selector(".spg-panel__content").filterVisible(), screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+
+  const westResizer = Selector(".svc-resizer-west");
+  await t
+    .drag(westResizer, -50, 0);
   await takeScreenshot("properties-on-one-line.png", Selector(".spg-panel__content").filterVisible(), screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())

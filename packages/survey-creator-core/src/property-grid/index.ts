@@ -813,6 +813,7 @@ export class PropertyGridModel {
       this.currentlySelectedProperty = options.question.name;
       this.currentlySelectedPanel = options.question.parent;
     });
+    this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
   }
   public get options(): ISurveyCreatorOptions {
     return this.optionsValue;
