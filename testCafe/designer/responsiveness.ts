@@ -121,8 +121,8 @@ test("Responsive creator: property grid", async (t) => {
     .expect(propertyGridSelector.offsetWidth).eql(370)
     .expect(flyoutPropertyGrid.exists).ok()
 
-    .drag(westResizer, -200, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(570)
+    .drag(westResizer, -150, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(520)
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
