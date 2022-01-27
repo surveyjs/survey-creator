@@ -278,6 +278,25 @@ test("Hide Test Again action on leaving Preview", (): any => {
   creator.makeNewViewActive("designer");
   expect(testAgain.visible).toBeFalsy();
 });
+test("invisibleToggleAction doesn't created, there are no exceptions", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showInvisibleElementsInTestSurveyTab: false });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  expect(model.invisibleToggleAction).toBeFalsy();
+  model.survey.doComplete();
+  expect(model.invisibleToggleAction).toBeFalsy();
+});
+
 test("Test correct survey results node levels", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {

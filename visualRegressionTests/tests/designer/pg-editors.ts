@@ -1,5 +1,5 @@
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-import { url, setJSON, screenshotComparerOptions } from "../../helper";
+import { url, setJSON, screenshotComparerOptions, propertyGridSelector } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -32,10 +32,6 @@ test("Properties on the same line", async (t) => {
   const generalTab = Selector("h4").withExactText("General");
   const inputTab = Selector("h4").withExactText("Input");
 
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
-  })();
-
   await t
     .click(question1)
     .pressKey("enter")
@@ -44,6 +40,14 @@ test("Properties on the same line", async (t) => {
     .expect(Selector("span").withExactText("Min").visible).ok()
     .expect(Selector(".spg-panel__content").filterVisible().visible).ok();
 
+  await takeScreenshot("properties-on-one-line-narrow.png", Selector(".spg-panel__content").filterVisible(), screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+
+  const westResizer = Selector(".svc-resizer-west");
+  await t
+    .drag(westResizer, -50, 0);
   await takeScreenshot("properties-on-one-line.png", Selector(".spg-panel__content").filterVisible(), screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
@@ -66,10 +70,6 @@ test("Values editors, keep them close", async (t) => {
   const question1 = Selector("[data-name=\"question1\"]");
   const generalTab = Selector("h4").withExactText("General");
   const dataTab = Selector("h4").withExactText("Data");
-
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
-  })();
 
   await t
     .click(question1)

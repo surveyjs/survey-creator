@@ -5,7 +5,7 @@
   </div>
   <div class="svc-full-container svc-creator__area svc-flex-column">
     <div class="svc-flex-row svc-full-container"
-      data-bind="css : { 'svc-creator__side-bar--left': creator.sideBarLocation == 'left' }">
+      data-bind="css : { 'svc-creator__side-bar--left': creator.sidebarLocation == 'left' }">
       <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
         <div class="svc-top-bar">
           <div class="svc-tabbed-menu-wrapper" data-bind="visible: creator.showTabs">
@@ -42,8 +42,8 @@
         </div>
         <!-- /ko -->
       </div>
-      <div data-bind="if: creator.sideBar, css: { 'sv-mobile-side-bar': creator.isMobileView }">
-        <svc-side-bar params="model: creator.sideBar"> </svc-side-bar>
+      <div data-bind="if: creator.sidebar, css: { 'sv-mobile-side-bar': creator.isMobileView }">
+        <svc-side-bar params="model: creator.sidebar"> </svc-side-bar>
       </div>
     </div>
     <!-- ko ifnot: creator.haveCommercialLicense -->

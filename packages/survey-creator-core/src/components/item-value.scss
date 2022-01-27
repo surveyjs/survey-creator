@@ -26,6 +26,8 @@
   height: calcSize(4);
   box-sizing: border-box;
   flex-shrink: 0;
+  min-width: 72px;
+  justify-content: flex-end;
 }
 
 .svc-item-value-controls__button {
@@ -57,11 +59,12 @@ sv-svg-icon.svc-item-value-controls__button {
 .svc-item-value-controls__drag {
   padding: calcSize(0.5) calcSize(1);
   cursor: move;
+  opacity: 0.25;
   .svc-item-value-controls__drag-icon {
     visibility: hidden;
   }
   use {
-    fill: $primary;
+    fill: $foreground;
   }
 }
 
@@ -116,7 +119,6 @@ sv-svg-icon.svc-item-value-controls__button {
   .sv-ranking-item__index {
     background: $background-for-editors;
   }
-  margin-left: 0;
 }
 .sv-ranking {
   .svc-item-value-wrapper {

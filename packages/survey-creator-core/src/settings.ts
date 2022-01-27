@@ -44,7 +44,6 @@ export var settings = {
    */
   questionConvertMode: QuestionConvertMode.AllTypes,
   propertyGrid: {
-    allowCollapse: true,
     useButtonGroup: true,
     maxCharsInButtonGroup: 25,
     showNavigationButtons: false,
@@ -77,7 +76,8 @@ export var settings = {
    */
   layout: {
     showTabs: true,
-    showToolbar: true
+    showToolbar: true,
+    allowCollapseSidebar: true
   },
   jsonEditor: {
     indentation: 1

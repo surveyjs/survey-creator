@@ -22,6 +22,30 @@ const json = {
   ]
 };
 
+const json_pages = {
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "name": "page2",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1"
+        }
+      ]
+    }
+  ]
+};
+
 test("Page hover test", async t => {
   await setJSON(json);
   await t
@@ -50,4 +74,19 @@ test("Page hover on Add Question button", async t => {
     .hover(question, { offsetX: 5, offsetY: 5 })
     .wait(300)
     .expect(page.hasClass("svc-hovered")).notOk();
+});
+
+test("Page navigator hover", async t => {
+  await setJSON(json_pages);
+  await t
+    .maximizeWindow();
+  const pageHoverSelector = Selector(".svc-page-navigator-item__banner").withExactText("page2");
+
+  await t
+    .hover(Selector(".svc-page-navigator-item__dot[title=\"page2\"]"))
+    .expect(pageHoverSelector.visible).ok();
+  const zIndex = await pageHoverSelector.getStyleProperty("z-index");
+  await t
+    .expect(parseInt(zIndex))
+    .gte(20);
 });

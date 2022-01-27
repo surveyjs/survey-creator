@@ -13,9 +13,6 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = false;
-  })();
   const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
   await t
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
@@ -86,9 +83,9 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
     .resizeWindow(1920, 900); // reset for next tests, beforeEach not work (((
 });
 
-async function changeSideBarLocation(newVal: string) {
+async function changeSidebarLocation(newVal: string) {
   await ClientFunction((newVal) => {
-    window["creator"].sideBarLocation = newVal;
+    window["creator"].sidebarLocation = newVal;
   })(newVal);
 }
 
@@ -124,8 +121,8 @@ test("Responsive creator: property grid", async (t) => {
     .expect(propertyGridSelector.offsetWidth).eql(370)
     .expect(flyoutPropertyGrid.exists).ok()
 
-    .drag(westResizer, -200, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(570)
+    .drag(westResizer, -150, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(520)
 
     .click(collapseButtonSelector)
     .expect(propertyGridSelector.visible).notOk()
@@ -143,19 +140,19 @@ test("Responsive creator: property grid", async (t) => {
     .expect(flyoutPropertyGrid.exists).notOk()
 
     .click(expandButtonSelector);
-  await changeSideBarLocation("left");
+  await changeSidebarLocation("left");
 
   await t
     .expect(westResizer.visible).notOk()
     .expect(eastResizer.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(570)
+    .expect(propertyGridSelector.offsetWidth).eql(520)
 
-    .drag(eastResizer, -170, 0)
+    .drag(eastResizer, -120, 0)
     .expect(propertyGridSelector.offsetWidth).eql(400)
 
     .resizeWindow(1920, 900) // reset for next tests
-    .drag(eastResizer, 200, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(600);
+    .drag(eastResizer, 100, 0)
+    .expect(propertyGridSelector.offsetWidth).eql(500);
 });
 
 test("Responsive creator: designer tab for mobile devices", async (t) => {
@@ -288,9 +285,6 @@ test("Property grid editor popup", async (t) => {
   const dataTab = Selector("h4").withExactText("Data");
   const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
   const mobileCloseButton = Selector(".svc-side-bar__container-close");
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
-  })();
   await t
     .click(question1)
     .click(dataTab)
@@ -310,9 +304,6 @@ test("Question type popup - wide", async (t) => {
   const json = {
   };
   await setJSON(json);
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
-  })();
   await t
     .click(Selector("button.svc-page__question-type-selector"))
     .expect(Selector(".sv-popup:not(.sv-popup--overlay) li").withText("Single Input").visible).ok();
@@ -322,9 +313,6 @@ test("Question type popup - narrow", async (t) => {
   const json = {
   };
   await setJSON(json);
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = false;
-  })();
   await t
     .resizeWindow(380, 600)
     .click(Selector("button.svc-page__question-type-selector"))

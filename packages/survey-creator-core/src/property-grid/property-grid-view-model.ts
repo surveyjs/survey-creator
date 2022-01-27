@@ -32,8 +32,8 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
     this.initActions();
 
     this.creator.onPropertyChanged.add((sender, options) => {
-      if (options.name === "sideBarLocation") {
-        this.selectorPopupModel.horizontalPosition = this.creator.sideBarLocation == "right" ? "left" : "right";
+      if (options.name === "sidebarLocation") {
+        this.selectorPopupModel.horizontalPosition = this.creator.sidebarLocation == "right" ? "left" : "right";
       }
     });
     this.onSurveyChanged();
