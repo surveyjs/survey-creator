@@ -94,7 +94,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.model.show();
     this.model.onPropertyChanged.add((sender, options) => {
       if (options.name === "isRunning") {
-        this.invisibleToggleAction.visible = this.model.isRunning;
+        this.invisibleToggleAction && (this.invisibleToggleAction.visible = this.model.isRunning);
         this.testAgainAction.visible = !this.model.isRunning;
       }
     });
