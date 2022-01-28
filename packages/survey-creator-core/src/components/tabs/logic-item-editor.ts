@@ -53,7 +53,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private logicTypeChoices: Array<ItemValue>;
   private editableItemValue: SurveyLogicItem;
   private isBuildingPanels: boolean;
-  private titleActionsCreator: PropertyGridTitleActionsCreator;
   private initialSelectedElements: any = {};
   private isModifiedValue: boolean = false;
   private contextValue: Question;
@@ -101,13 +100,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       if (this.isBuildingPanels) return;
       const panel = this.panels[this.panel.panelCount - 1];
       this.onPanelAdded(panel, null);
-    });
-    this.editSurvey.onGetQuestionTitleActions.add((sender, options) => {
-      if (!this.titleActionsCreator) return;
-      const q = options.question;
-      if (!!q.parent && q.parent.name === "elementPanel") {
-        this.titleActionsCreator.onGetQuestionTitleActions(options);
-      }
     });
     this.editSurvey.css = logicCss;
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
@@ -471,7 +463,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     question.value = !!action && action.logicType == logicType ? action.elementName : undefined;
   }
   private setupElementPanel(panel: PanelModel, logicType: SurveyLogicType) {
-    this.titleActionsCreator = null;
     const elementPanel = <PanelModel>panel.getElementByName("elementPanel");
     elementPanel.questions.forEach(q => { q.clearValue(); });
     elementPanel.elements.splice(0, elementPanel.elements.length);
@@ -483,7 +474,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.setPanelObj(panel, obj);
     elementPanel.visible = logicType.hasVisibleElements;
     if (!elementPanel.visible) return;
-    this.titleActionsCreator = new PropertyGridTitleActionsCreator(obj, this.options);
     const propGenerator = new PropertyJSONGenerator(obj, this.options);
     propGenerator.setupObjPanel(elementPanel, true, "logic");
     elementPanel.title = "";
