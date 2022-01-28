@@ -1,4 +1,5 @@
 import {
+  settings as surveySettings,
   Base,
   JsonObjectProperty,
   QuestionTextModel,
@@ -48,6 +49,8 @@ export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/fast-entry";
 export * from "../../src/components/link-value";
 
+surveySettings.supportCreatorV2 = true;
+
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
     PropertyGridEditorCollection.clearHash();
@@ -88,6 +91,9 @@ class BindingsTester extends Base {
   }
   public set property3(val: number) {
     this.setPropertyValue("property3", val);
+  }
+  public get data() {
+    return this.survey;
   }
 }
 
@@ -1671,7 +1677,7 @@ test("SurveyHelper.applyItemValueArray", () => {
   );
 });
 
-test("property editor propertyHelpText", () => {
+test("property editor titleQuestion.description", () => {
   PropertiesHelpTexts.instance.reset();
   var survey = new SurveyModel();
   survey.addNewPage("p");
@@ -1717,7 +1723,7 @@ test("property editor propertyHelpText", () => {
   ).toBeTruthy();
 });
 
-test("property editor propertyHelpText", () => {
+test("binding property editor", () => {
   var tester = new BindingsTester();
   tester.bindings.setBinding("property1", "q1");
   var propertyGrid = new PropertyGridModelTester(tester);

@@ -1,21 +1,4 @@
-import {
-  Base,
-  ComputedUpdater,
-  IAction,
-  ItemValue,
-  JsonObjectProperty,
-  MatrixDropdownColumn,
-  MatrixDropdownRowModelBase,
-  MatrixDynamicRowModel,
-  PanelModel,
-  Question,
-  QuestionMatrixDropdownModelBase,
-  QuestionMatrixDropdownRenderedRow,
-  QuestionMatrixDynamicModel,
-  QuestionTextBase,
-  QuestionTextModel,
-  Serializer
-} from "survey-core";
+import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../settings";
@@ -773,33 +756,75 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   }
 }
 
+export class BindingsEditorDataProxy implements ISurveyData {
+  constructor(private data: ISurveyData) {
+  }
+  getValue(name: string) {
+    let value = this.data.getValue(name);
+    if (!value) return value;
+    let result: any = {};
+    Object.keys(value).forEach(bindingName => result[bindingName] = { value: value[bindingName] });
+    return result;
+  }
+  setValue(name: string, newValue: any, locNotification: any, allowNotifyValueChanged?: boolean) {
+    let patchedValue: any = {};
+    if (!!newValue) {
+      Object.keys(newValue).forEach(bindingName => patchedValue[bindingName] = newValue[bindingName].value);
+    } else {
+      patchedValue = newValue;
+    }
+    this.data.setValue(name, patchedValue, locNotification, allowNotifyValueChanged);
+  }
+  getVariable(name: string) {
+    return this.data.getVariable(name);
+  }
+  setVariable(name: string, newValue: any): void {
+    this.data.setVariable(name, newValue);
+  }
+  getComment(name: string): string {
+    return this.data.getComment(name);
+  }
+  setComment(name: string, newValue: string, locNotification: any) {
+    this.data.setComment(name, newValue, locNotification);
+  }
+  getAllValues() {
+    return this.data.getAllValues();
+  }
+  getFilteredValues() {
+    return this.data.getFilteredValues();
+  }
+  getFilteredProperties() {
+    return this.data.getFilteredProperties();
+  }
+}
+
 export class PropertyGridEditorBindings extends PropertyGridEditor {
+
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "bindings";
   }
-  public getJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): any {
-    var res = {
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const res = {
       type: "matrixdropdown",
       rows: this.getRows(obj),
       columns: this.getColumns(obj, options)
     };
     return res;
   }
+  onBeforeEditingObjectChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
+    const surveyData: any = obj["data"];
+    if (!!surveyData) {
+      surveyData.editingObj = obj;
+      question.__setData(new BindingsEditorDataProxy(surveyData));
+    }
+  }
   public onMatrixCellCreated(obj: Base, options: any) {
-    var bindingValue = obj.bindings.getValueNameByPropertyName(
-      options.row.rowName
-    );
+    var bindingValue = obj.bindings.getValueNameByPropertyName(options.row.rowName);
     if (!!bindingValue) {
       options.cellQuestion.value = bindingValue;
     }
   }
-  public onMatrixCellValueChanged(obj: Base, options: any) {
-    obj.bindings.setBinding(options.row.rowName, options.value);
-  }
+
   private getRows(obj: Base): Array<any> {
     var props = obj.bindings.getProperties();
     var res = [];

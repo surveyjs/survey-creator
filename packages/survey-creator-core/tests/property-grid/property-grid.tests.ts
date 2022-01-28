@@ -5,6 +5,7 @@ import {
   PropertyGridEditorBoolean
 } from "../../src/property-grid";
 import {
+  settings as surveySettings,
   Base,
   JsonObjectProperty,
   QuestionTextModel,
@@ -33,7 +34,8 @@ import {
   QuestionCustomModel,
   surveyLocalization,
   AdaptiveActionContainer,
-  QuestionCommentModel
+  QuestionCommentModel,
+  ISurveyData
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -49,11 +51,13 @@ import {
   PropertyGridRowValueEditor,
   PropertyGridValueEditorBase
 } from "../../src/property-grid/values";
+import { BindingsEditorDataProxy } from "../../src/property-grid/matrices";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
 
+surveySettings.supportCreatorV2 = true;
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
     PropertyGridEditorCollection.clearHash();
@@ -890,6 +894,62 @@ test("bindings property editor", () => {
   q.value = "q3";
   expect(matrix.bindings.getValueNameByPropertyName("rowCount")).toEqual("q3");
 });
+
+test("Dynamic panel 'Panel count' binding property editor", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "numberInput",
+        "inputType": "number"
+      },
+      {
+        "type": "text",
+        "name": "q1",
+        "inputType": "number"
+      },
+      {
+        "type": "paneldynamic",
+        "name": "paneldynamic",
+        "bindings": {
+          "panelCount": "numberInput"
+        }
+      }
+    ]
+  });
+  const paneldynamic = <QuestionPanelDynamicModel>survey.getQuestionByName("paneldynamic");
+  const propertyGrid = new PropertyGridModelTester(survey);
+
+  propertyGrid.obj = paneldynamic;
+  expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("numberInput");
+  let bindingsQuestion = <QuestionMatrixDropdownModel>(propertyGrid.survey.getQuestionByName("bindings"));
+  bindingsQuestion["createRenderedTable"]();
+  expect(bindingsQuestion.renderedTable).toBeDefined();
+  expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("numberInput");
+  expect(bindingsQuestion.visibleRows[0].cells[0].question.value).toEqual("numberInput");
+
+  bindingsQuestion.visibleRows[0].cells[0].question.value = "q1";
+  expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("q1");
+});
+
+test("BindingsEditorDataProxy: getValue/setValue", () => {
+  const editableObj = { property: { name: "binding" } };
+  const data = {
+    getValue: (name: string) => {
+      return editableObj[name];
+    },
+    setValue: (name: string, newValue: any, locNotification: any, allowNotifyValueChanged?: boolean) => {
+      expect(newValue).toEqual({ name: "test" });
+      editableObj[name] = newValue;
+    }
+  };
+  const proxy = new BindingsEditorDataProxy(<ISurveyData>data);
+  expect(proxy.getValue("property")).toEqual({ name: { value: "binding" } });
+
+  proxy.setValue("property", { name: { value: "test" } }, false, true);
+  expect(editableObj).toEqual({ "property": { name: "test" } });
+});
+
 test("restfull property editor", () => {
   var question = new QuestionDropdownModel("q1");
   question.choicesByUrl.url = "myUrl";
