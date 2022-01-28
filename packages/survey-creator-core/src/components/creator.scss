@@ -40,6 +40,9 @@ survey-creator,
   -ms-user-select: none;
   user-select: none;
 }
+.svc-creator__area.svc-creator__area--with-banner {
+  height: calc(100% - calc(4 * #{$base-unit}));
+}
 
 .svc-creator__content-wrapper {
   width: 100%;
@@ -90,7 +93,7 @@ survey-creator,
 
 .svc-creator__banner {
   position: absolute;
-  bottom: 0;
+  bottom: calcSize(-4);
   width: 100%;
   height: calcSize(4);
   line-height: calcSize(4);
