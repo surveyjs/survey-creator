@@ -35,10 +35,18 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
-  
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/"
+      Contents: "package.json"
+      TargetFolder: "$(Build.SourcesDirectory)/Temp/"
+      OverWrite: true
+    displayName: "Copy package.json for cache key"
+
   - task: Cache@2
     inputs:
-      key: 'npm-cache-creator-core | $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/package.json'
+      key: 'npm-cache-creator-core | $(Build.SourcesDirectory)/Temp/package.json'
       path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules
       cacheHitVar: NPM_CACHE_RESTORED
     displayName: Cache NPM Core
@@ -103,16 +111,31 @@ jobs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/"
+      Contents: "package.json"
+      TargetFolder: "$(Build.SourcesDirectory)/Temp/react/"
+      OverWrite: true
+    displayName: "Copy package.json for cache key (react)"
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
+      Contents: "package.json"
+      TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
+      OverWrite: true
+    displayName: "Copy package.json for cache key (root)"
   - task: Cache@2
     inputs:
-      key: 'npm-cache-creator-react | $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/package.json'
+      key: 'npm-cache-creator-react | $(Build.SourcesDirectory)/Temp/react/package.json'
       path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules
       cacheHitVar: NPM_CACHE_RESTORED
     displayName: Cache NPM
 
   - task: Cache@2
     inputs:
-      key: 'npm-cache-creator-root | $(Build.SourcesDirectory)/survey-creator/package.json'
+      key: 'npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json'
       path: $(Build.SourcesDirectory)/survey-creator/node_modules
       cacheHitVar: NPM_CACHE_RESTORED_ROOT
     displayName: Cache NPM
@@ -237,9 +260,17 @@ jobs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/"
+      Contents: "package.json"
+      TargetFolder: "$(Build.SourcesDirectory)/Temp/"
+      OverWrite: true
+    displayName: "Copy package.json for cache key"
+
   - task: Cache@2
     inputs:
-      key: 'npm-cache-creator-knockout | $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/package.json'
+      key: 'npm-cache-creator-knockout | $(Build.SourcesDirectory)/Temp/package.json'
       path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules
       cacheHitVar: NPM_CACHE_RESTORED
     displayName: Cache NPM
