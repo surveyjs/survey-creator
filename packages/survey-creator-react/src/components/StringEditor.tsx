@@ -14,6 +14,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
     this.svStringEditorRef = React.createRef();
     this.baseModel.blurEditor = () => {
       this.svStringEditorRef.current.blur();
+      this.svStringEditorRef.current.spellcheck = false;
     };
   }
   private get locString(): LocalizableString {
@@ -56,6 +57,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
     return this.baseModel.contentEditable;
   }
   private onBlur = (event: any) => {
+    this.svStringEditorRef.current.spellcheck = false;
     this.locString["__isEditing"] = false;
     this.justFocused = false;
     this.baseModel.onInput(event.nativeEvent);
@@ -105,6 +107,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
           ref={this.svStringEditorRef}
           className="sv-string-editor"
           contentEditable={this.contentEditable}
+          spellCheck={false}
           aria-placeholder={this.placeholder}
           suppressContentEditableWarning={true}
           // style={this.style}
@@ -122,6 +125,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
           ref={this.svStringEditorRef}
           className="sv-string-editor"
           contentEditable={this.contentEditable}
+          spellCheck={false}
           aria-placeholder={this.placeholder}
           suppressContentEditableWarning={true}
           // style={this.style}
