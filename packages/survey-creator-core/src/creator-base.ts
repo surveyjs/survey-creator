@@ -1094,6 +1094,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.undoRedoController && this.undoRedoController.stopTransaction();
   }
   /**
+   * Returns true if Creator is currently doing undo or redo opertaions
+   */
+  public get isProcessingUndoRedo(): boolean {
+    return this.undoRedoManager && this.undoRedoManager.isProcessingUndoRedo;
+  }
+  /**
    * This method performs undo uperation if possible.
    */
   public undo() {

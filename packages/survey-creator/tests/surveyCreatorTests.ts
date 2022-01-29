@@ -193,10 +193,11 @@ QUnit.test("SurveyJSON always return correct data, bug #53", function (assert) {
   );
 });
 
-QUnit.test("onQuestionAdded event", function (assert) {
+QUnit.test("onQuestionAdded event + undo/redo", function (assert) {
   var editor = new SurveyCreator();
   var counter = 0;
   editor.onQuestionAdded.add(function () {
+    if(editor.isProcessingUndoRedo) return;
     counter++;
   });
   assert.equal(counter, 0, "No question was added");
@@ -204,6 +205,9 @@ QUnit.test("onQuestionAdded event", function (assert) {
   assert.equal(counter, 0, "No question was added");
   editor.survey.pages[0].addNewQuestion("text", "q1");
   assert.equal(counter, 1, "One question was added");
+  editor.undo();
+  editor.redo();
+  assert.equal(counter, 1, "Ignore undo/redo");
 });
 
 QUnit.test("onElementDeleting event", function (assert) {
