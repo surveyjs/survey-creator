@@ -899,6 +899,25 @@ QUnit.test("onTranslationStringVisibility", (assert) => {
   assert.equal(translation.root.groups[1].name, "page2");
 });
 
+QUnit.test("onTraslationLocaleSelected", (assert) => {
+  const creator = new SurveyCreator();
+  creator.JSON = {
+    title: {
+      default: "Title",
+      de: "Title de",
+      fr: "Title fr"
+    }
+  };
+  creator.onTranslationLocaleInitiallySelected.add((sender, options) => {
+    options.isSelected = options.locale === "de";
+  });
+  const tabTranslation = new TranslationViewModel(creator);
+  const translation = tabTranslation.model;
+  assert.equal(translation.koLocales().length, 3, "There are 3 locales");
+  assert.equal(translation.getSelectedLocales().length, 2, "There is one selected locales");
+  assert.equal(translation.getSelectedLocales()[1], "de", "The selected locales are default and de");
+});
+
 /* TODO wait for v1.8.29
 QUnit.test("check LocalizableStrings/dataList property", function (assert) {
   var survey = new Survey.Survey();
