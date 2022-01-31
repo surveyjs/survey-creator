@@ -20,7 +20,11 @@ export class StringEditorViewModel {
     this.focusEditor = () => {
       this.getEditorElement(element).focus();
     };
-    this.baseModel.blurEditor = () => this.getEditorElement(element).blur();
+    this.baseModel.blurEditor = () => {
+      const editorElement = this.getEditorElement(element);
+      editorElement.blur();
+      editorElement.spellcheck = false;
+    };
     locString.strChanged();
   }
 
@@ -51,6 +55,7 @@ export class StringEditorViewModel {
     this.baseModel.onClick(event);
   }
   public onInput(sender: StringEditorViewModel, event: any): void {
+    event.currentTarget.spellcheck = false;
     this.baseModel.onInput(event);
     this.errorText(this.baseModel.errorText);
     this.locString.searchElement = undefined;

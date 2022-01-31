@@ -3,7 +3,8 @@
     <!-- ko component: { name: 'svc-svg-bundle'} -->
     <!-- /ko -->
   </div>
-  <div class="svc-full-container svc-creator__area svc-flex-column">
+  <div class="svc-full-container svc-creator__area svc-flex-column"
+    data-bind="css: { 'svc-creator__area--with-banner': !creator.haveCommercialLicense }">
     <div class="svc-flex-row svc-full-container"
       data-bind="css : { 'svc-creator__side-bar--left': creator.sidebarLocation == 'left' }">
       <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">

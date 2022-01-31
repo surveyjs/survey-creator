@@ -85,7 +85,11 @@ test("Check actions hover states", async (t) => {
 });
 
 test("Check logic error notifier", async (t) => {
+  const patchNotifierLifeTime = ClientFunction(() => {
+    window["creator"].notifier.timeout = 30000;
+  });
   await t.resizeWindow(1920, 900);
+  await patchNotifierLifeTime();
   await setJSON({
     "logoPosition": "right",
     "pages": [

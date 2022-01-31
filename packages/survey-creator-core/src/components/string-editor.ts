@@ -38,6 +38,7 @@ export class StringEditorViewModelBase extends Base {
     }
     this.creator.selectFromStringEditor = true;
     event.target.parentElement.click();
+    event.target.spellcheck = true;
     select(event.target);
   }
 

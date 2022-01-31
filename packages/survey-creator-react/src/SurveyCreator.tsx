@@ -73,6 +73,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   renderElement() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
     const creatorClassName = "svc-creator" + (this.props.creator.isMobileView ? " svc-creator--mobile" : "");
+    const areaClassName = "svc-full-container svc-creator__area svc-flex-column" + (this.props.creator.haveCommercialLicense ? "" : " svc-creator__area--with-banner");
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
     const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sidebarLocation);
     let licenseBanner = null;
@@ -91,7 +92,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return (
       <div className={creatorClassName} ref={this.rootNode}>
         <SvgBundleComponent></SvgBundleComponent>
-        <div className="svc-full-container svc-creator__area svc-flex-column">
+        <div className={areaClassName}>
           <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
               <div className="svc-top-bar">

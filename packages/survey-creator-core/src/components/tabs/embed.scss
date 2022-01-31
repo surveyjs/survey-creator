@@ -6,6 +6,13 @@
   
   .spg-row {
     display: flex;
+
+    .spg-question__content  {
+      .spg-comment:disabled,
+      .spg-comment:disabled::placeholder {
+          color: $foreground;
+      }
+    }
   }
   
   .spg-question__description {

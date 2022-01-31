@@ -112,7 +112,7 @@ test("Check string editor visibility", async (t) => {
 
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).notOk();
 
-  const newJson = json;
+  const newJson = JSON.parse(JSON.stringify(json));
   newJson.questions[0]["description"] = "Desc";
   await setJSON(newJson);
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).ok();
