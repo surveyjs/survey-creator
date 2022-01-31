@@ -142,13 +142,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   public get panels(): Array<PanelModel> {
     return this.panel.panels;
   }
-  public getPanelByAction(action: SurveyLogicAction): PanelModel {
-    const panels = this.panels;
-    for (let i = 0; i < panels.length; i++) {
-      if (panels[i]["action"] == action) return panels[i];
-    }
-    return null;
-  }
   public getActionByPanel(panel: PanelModel): SurveyLogicAction {
     return panel["action"];
   }
