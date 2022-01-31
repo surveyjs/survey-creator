@@ -1,5 +1,5 @@
 import * as Survey from "survey-knockout";
-import { SurveyLiveTester } from "../src/tabs/test";
+import { SurveyLiveTester, SurveySimulatorComponent } from "../src/tabs/test";
 import { SurveyCreator } from "../src/editor";
 
 export default QUnit.module("surveyLiveTests");
@@ -16,6 +16,15 @@ QUnit.test("Create survey", function (assert) {
     "q1",
     "Survey was created"
   );
+});
+
+QUnit.test("Simulate survey in iPhone5", function (assert) {
+  var test = new SurveyLiveTester(surveyCreator);
+  test.setJSON({ questions: [{ type: "text", name: "q1" }] });
+  const simulator = new SurveySimulatorComponent(test);
+  simulator.activeDevice = "iPhone5";
+  assert.equal(simulator.koSimulatorFrame().realWidth, 284);
+  assert.equal(simulator.koSimulatorFrame().realHeight, 160);
 });
 
 QUnit.test("koPages, koActive", function (assert) {
