@@ -32,7 +32,8 @@
     "watch:prod": "webpack --env.buildType prod --watch",
     "-prestorybook": "npm run test:generate-output",
     "storybook": "start-storybook -p 9000",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "test": "test"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "6.0.21",
