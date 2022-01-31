@@ -744,8 +744,6 @@ test("Animation (choices)", async (t) => {
 });
 
 test("Drag Drop ImagePicker (choices)", async (t) => {
-  await t.resizeWindow(2560, 1440);
-
   const json = {
     pages: [
       {
