@@ -20,7 +20,7 @@
     "doc:gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "doc:update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
     "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500\"",
-    "testcafe:ci": "http-server --silent & testcafe -c 4 -q chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal,dashboard",
+    "testcafe:ci": "http-server --silent & testcafe -c 4 -q chrome:headless ../../testCafe/ --selector-timeout 1500 --video tcartifacts/videos failedOnly=true --reporter minimal,dashboard",
     "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/property-grid/test.ts --reporter minimal --debug-mode\"",
     "testcafe:a11y": "concurrently \"http-server --silent\" \"testcafe chrome ./testCafe/accessibility.js --selector-timeout 1500\"",
     "visual-regression-tests:ci": "testcafe chrome:headless -c 4 -q --disable-font-subpixel-positioning ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal,dashboard",
@@ -94,6 +94,7 @@
     "colors": "1.4.0"
   },
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rmodal": "^1.0.36",
