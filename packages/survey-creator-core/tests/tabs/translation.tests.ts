@@ -437,8 +437,8 @@ test("Make invisible locales in language selector, that has been already choosen
   surveyLocalization.supportedLocales = [];
 });
 test("stringsSurvey - text question dataList property, default", () => {
-  const oldValue = settings.traslation.sortByName;
-  settings.traslation.sortByName = true;
+  const oldValue = settings.translation.sortByName;
+  settings.translation.sortByName = true;
   const survey = new SurveyModel({
     elements: [
       {
@@ -473,11 +473,11 @@ test("stringsSurvey - text question dataList property, default", () => {
   expect(question.dataList).toHaveLength(3);
   expect(question.dataList[2]).toEqual("Item3");
 
-  settings.traslation.sortByName = oldValue;
+  settings.translation.sortByName = oldValue;
 });
 test("stringsSurvey - text question dataList property, several locales", () => {
-  const oldValue = settings.traslation.sortByName;
-  settings.traslation.sortByName = true;
+  const oldValue = settings.translation.sortByName;
+  settings.translation.sortByName = true;
 
   const survey = new SurveyModel({
     elements: [
@@ -516,7 +516,7 @@ test("stringsSurvey - text question dataList property, several locales", () => {
     de: ["Item1-de", "Item2-de", "Item3-de"],
   });
 
-  settings.traslation.sortByName = oldValue;
+  settings.translation.sortByName = oldValue;
 });
 test("Respect property maxLength attrigute in stringsSurvey comment questions", () => {
   Serializer.findProperty("question", "title").maxLength = 10;
@@ -578,8 +578,8 @@ const surveyJson = {
   ]
 };
 test("translationStringVisibilityCallback", () => {
-  const oldValue = settings.traslation.sortByName;
-  settings.traslation.sortByName = true;
+  const oldValue = settings.translation.sortByName;
+  settings.translation.sortByName = true;
 
   const survey = new SurveyModel(surveyJson);
 
@@ -608,7 +608,7 @@ test("translationStringVisibilityCallback", () => {
   expect(translation.root.groups[0].items[0].name).toEqual("title");
   expect(translation.root.groups[1].name).toEqual("page2");
 
-  settings.traslation.sortByName = oldValue;
+  settings.translation.sortByName = oldValue;
 });
 
 test("onTranslationStringVisibility", () => {
@@ -795,4 +795,56 @@ test("localize placeholders", () => {
   expect(surveyCell1.value).toEqual(null);
   expect(surveyCell2.placeHolder).toEqual("Редактирование");
   expect(surveyCell2.value).toEqual(null);
+});
+test("Test settings.translation.maximumSelectedLocales", () => {
+  const oldMaximumSelectedLocales = settings.translation.maximumSelectedLocales;
+  settings.translation.maximumSelectedLocales = 2;
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title en",
+          de: "title de",
+          fr: "title fr",
+          es: "title es",
+          it: "title it"
+        }
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  expect(translation.localesQuestion.visibleChoices).toHaveLength(4);
+  expect(translation.localesQuestion.value).toHaveLength(2);
+  expect(translation.localesQuestion.value[0]).toEqual("de");
+  expect(translation.localesQuestion.value[1]).toEqual("fr");
+  settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
+});
+test("Translation show All strings and property visibility", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title en",
+          de: "title de",
+          fr: "title fr",
+          es: "title es",
+          it: "title it"
+        }
+      }
+    ]
+  };
+  creator.onTranslationLocaleInitiallySelected.add((sender, options) => {
+    options.isSelected = options.locale === "de";
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  expect(translation.localesQuestion.visibleChoices).toHaveLength(4);
+  expect(translation.localesQuestion.value).toHaveLength(1);
+  expect(translation.localesQuestion.value[0]).toEqual("de");
 });

@@ -304,7 +304,7 @@ export class TranslationGroup extends TranslationItemBase {
     this.sortItems();
   }
   private sortItems() {
-    if (!settings.traslation.sortByName) return;
+    if (!settings.translation.sortByName) return;
     this.itemValues.sort(function (
       a: TranslationItemBase,
       b: TranslationItemBase
@@ -451,6 +451,7 @@ export class Translation extends Base implements ITranslationLocales {
     context: any
   ) => void;
   public translationStringVisibilityCallback: (obj: Base, propertyName: string, visible: boolean) => boolean;
+  public localeInitialVisibleCallback: (locale: string) => boolean;
   private surveyValue: SurveyModel;
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
@@ -574,7 +575,8 @@ export class Translation extends Base implements ITranslationLocales {
               type: "checkbox",
               name: "locales",
               choicesVisibleIf: "{selLocales} contains {item}",
-              titleLocation: "hidden"
+              titleLocation: "hidden",
+              maxSelectedChoices: settings.translation.maximumSelectedLocales
             }
           ],
           title: editorLocalization.getString("ed.translationLanguages")
@@ -601,9 +603,19 @@ export class Translation extends Base implements ITranslationLocales {
     return [usedLocales, locales];
   }
   private updateSettingsSurveyLocales() {
-    const [choices, locales] = this.getSurveyLocales();
+    let [choices, locales] = this.getSurveyLocales();
     this.localesQuestion.choices = choices;
-    this.localesQuestion.value = locales;
+    const selectedLocales = [];
+    if(!locales) locales = [];
+    for(var i = 0; i < locales.length; i ++) {
+      if(!!this.localeInitialVisibleCallback && !this.localeInitialVisibleCallback(locales[i])) continue;
+      selectedLocales.push(locales[i]);
+    }
+    const maxLocales = settings.translation.maximumSelectedLocales;
+    if(maxLocales > 0 && selectedLocales.length > maxLocales) {
+      selectedLocales.splice(maxLocales);
+    }
+    this.localesQuestion.value = selectedLocales;
   }
   private resetStringsSurvey() {
     if (!this.hasUI) return;
@@ -805,7 +817,7 @@ export class Translation extends Base implements ITranslationLocales {
     if (!loc) return;
     var val = this.settingsSurvey.getValue(valueName);
     if (!Array.isArray(val)) val = [];
-    if (val.indexOf(loc) < 0) {
+    if (val.indexOf(loc) < 0 && (valueName !== "locales" || val.length < settings.translation.maximumSelectedLocales)) {
       val.push(loc);
       this.settingsSurvey.setValue(valueName, val);
     }
@@ -942,7 +954,7 @@ export class Translation extends Base implements ITranslationLocales {
       }
       res.push(row);
     }
-    let prefix = settings.traslation.exportPrefix;
+    let prefix = settings.translation.exportPrefix;
     if (!prefix) prefix = "";
     return (
       prefix +

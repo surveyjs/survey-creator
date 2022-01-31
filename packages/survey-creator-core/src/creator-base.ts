@@ -738,7 +738,16 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * - `options.visible` - A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
    */
   public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-
+  /**
+   * Use this event to define is the locale initially selected (default value) and ready for translaion or it is unselected.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.locale` - the locale name, like 'en', 'de' and so on.
+   * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
+   */
+  public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
    * This callback is used internally for providing survey JSON text.
    */
