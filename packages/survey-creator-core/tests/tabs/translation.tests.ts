@@ -338,15 +338,15 @@ test("Translation update filterPageActiontitle after activated", () => {
   const filterPageAction = tabTranslationPlugin["filterPageAction"];
   const filterPageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
   tabTranslationPlugin.activate();
-  expect(filterPageAction.title).toEqual("All pages");
-  expect(filterPageList.selectedItem.title).toEqual("All pages");
+  expect(filterPageAction.title).toEqual("All Pages");
+  expect(filterPageList.selectedItem.title).toEqual("All Pages");
   tabTranslationPlugin.model.filteredPage = creator.survey.pages[0];
   expect(filterPageAction.title).toEqual("page1");
 
   tabTranslationPlugin.deactivate();
   tabTranslationPlugin.activate();
-  expect(filterPageAction.title).toEqual("All pages");
-  expect(filterPageList.selectedItem.title).toEqual("All pages");
+  expect(filterPageAction.title).toEqual("All Pages");
+  expect(filterPageList.selectedItem.title).toEqual("All Pages");
 });
 test("Translation update filterStringsAction after activated", () => {
   let creator = new CreatorTester();
@@ -366,7 +366,7 @@ test("Translation update filterStringsAction after activated", () => {
   expect(filterStringsAction.title).toEqual("Used Strings Only");
   expect(filterStringsList.selectedItem.title).toEqual("Used Strings Only");
   tabTranslationPlugin.model.showAllStrings = true;
-  expect(filterStringsAction.title).toEqual("All strings");
+  expect(filterStringsAction.title).toEqual("All Strings");
 
   tabTranslationPlugin.deactivate();
   tabTranslationPlugin.activate();
@@ -395,12 +395,12 @@ test("Translation filterPage action content and visiblity after activate", () =>
   const pageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
   const filterPageAction = <Action>tabTranslationPlugin["filterPageAction"];
   tabTranslationPlugin.activate();
-  expect(pageList.actions.map((action: Action)=> action.title)).toEqual(["All pages", "page1", "page2"]);
+  expect(pageList.actions.map((action: Action) => action.title)).toEqual(["All Pages", "page1", "page2"]);
   expect(filterPageAction.visible).toBeTruthy();
   tabTranslationPlugin.deactivate();
   creator.survey.removePage(creator.survey.getPageByName("page2"));
   tabTranslationPlugin.activate();
-  expect(pageList.actions.map((action: Action)=> action.title)).toEqual(["All pages", "page1"]);
+  expect(pageList.actions.map((action: Action) => action.title)).toEqual(["All Pages", "page1"]);
   expect(filterPageAction.visible).toBeFalsy();
 });
 
