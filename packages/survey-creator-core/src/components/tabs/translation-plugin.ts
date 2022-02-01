@@ -220,7 +220,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterStringsAction = new Action({
       id: "svc-translation-show-all-strings",
       title: this.getFilterStringsActionTitle(),
-      visible: true,
+      visible: false,
       component: "sv-action-bar-item-dropdown",
       mode: "small",
       popupModel: this.stringsPopupModel,
