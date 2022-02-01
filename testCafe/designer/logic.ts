@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionPanelElement, logicDetailButtonElement, logicDropdownValueSelector, getSelectOptionByText, getBarItemByText, getListItemByText } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionTriggerEditorElement, logicDetailButtonElement, logicDropdownValueSelector, getSelectOptionByText, getBarItemByText, getListItemByText, logicActionTriggerQuestionsElement } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 
 const title = "Logic tab";
@@ -165,13 +165,15 @@ test("Create logic rule", async (t) => {
 
     .click(logicActionSelector)
     .click(getSelectOptionByText("Complete survey"))
-    .expect(logicActionPanelElement.exists).notOk()
+    .expect(logicActionTriggerEditorElement.exists).notOk()
+    .expect(logicActionTriggerQuestionsElement.exists).notOk()
     .expect(addButton.count).eql(2)
     .expect(removeButton.count).eql(0)
 
     .click(logicActionSelector)
     .click(getSelectOptionByText("Copy question value"))
-    .expect(logicActionPanelElement.exists).ok()
+    .expect(logicActionTriggerQuestionsElement.exists).ok()
+    .expect(logicActionTriggerEditorElement.exists).notOk()
     .expect(addButton.count).eql(2)
     .expect(removeButton.count).eql(0)
 

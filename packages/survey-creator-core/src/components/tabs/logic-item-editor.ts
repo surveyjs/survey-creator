@@ -159,7 +159,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               visible: false
             },
             {
-              name: "elementPanel",
+              name: "triggerQuestionsPanel",
               type: "panel",
               startWithNewLine: false,
               visible: false
@@ -174,6 +174,11 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               showValueInLink: false,
               allowClear: false,
               showClear: false
+            },
+            {
+              name: "triggerEditorPanel",
+              type: "panel",
+              visible: false
             },
           ]
         }
@@ -242,8 +247,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private onUpdatePanelCssClasses(options: any) {
-    if (options.panel.name === "elementPanel") {
-      options.cssClasses.panel.container += " svc-logic-panel-element";
+    if (options.panel.name === "triggerEditorPanel") {
+      options.cssClasses.panel.container += " svc-logic_trigger-editor";
+    }
+    if (options.panel.name === "triggerQuestionsPanel") {
+      options.panel.allowRootStyle = false;
+      options.cssClasses.panel.container += " svc-logic_trigger-questions";
     }
   }
   private onValueChanged(options: any) {

@@ -64,7 +64,8 @@ export const logicActionSelector = Selector(".svc-logic-operator--action").filte
 export const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterVisible();
 export const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
 export const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
-export const logicActionPanelElement = Selector(".svc-logic-panel-element").filterVisible();
+export const logicActionTriggerEditorElement = Selector(".svc-logic_trigger-editor").filterVisible();
+export const logicActionTriggerQuestionsElement = Selector(".svc-logic_trigger-questions").filterVisible();
 export const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
 
 export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey") {

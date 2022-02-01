@@ -5,21 +5,9 @@ import { ISurveyCreatorOptions } from "../../settings";
 import { SurveyLogicAction } from "./logic-items";
 import { SurveyLogicType } from "./logic-types";
 
-export interface ILogicActionModel {
-  currentLogicAction: SurveyLogicAction;
-  initialLogicAction: SurveyLogicAction;
-  isTrigger?: boolean;
-
-  updateInitialLogicAction(): void;
-  afterUpdateInitialLogicAction(): void;
-  updateCurrentLogicAction: (survey: SurveyModel) => boolean;
-
-  resetElements(): void;
-  getSelectedElement(): string;
-}
-export class LogicActionModelBase implements ILogicActionModel {
+export class LogicActionModelBase {
+  public isTrigger: boolean;
   public currentLogicAction: SurveyLogicAction;
-  isTrigger?: boolean;
 
   static createActionModel(panel: PanelModel, logicAction: SurveyLogicAction, logicType: SurveyLogicType, selectorElementsHash): LogicActionModelBase {
     if (!!logicType && logicType.hasSelectorChoices) {
@@ -95,25 +83,26 @@ export class LogicActionSimpleModel extends LogicActionModelBase {
 export class LogicActionTriggerModel extends LogicActionModelBase {
   private panelObj: Base;
 
-  isTrigger = true;
+  public isTrigger = true;
 
   private recreateQuestion(panel: PanelModel, obj: Base, name: string, options: ISurveyCreatorOptions): void {
     const oldQuestion = !!name ? panel.getQuestionByName(name) : null;
     if (!oldQuestion) return;
-    const elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-    if (!elementPanel) return;
+    const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+
     const tempPanel = Serializer.createClass("panel");
     const propGenerator = new PropertyJSONGenerator(obj, options);
     propGenerator.setupObjPanel(tempPanel, true, "logic");
     const newQuestion = tempPanel.getQuestionByName(name);
     if (!!newQuestion) {
-      let index = elementPanel.elements.indexOf(oldQuestion);
-      elementPanel.addElement(newQuestion, index);
+      let index = triggerEditorPanel.elements.indexOf(oldQuestion);
+      triggerEditorPanel.addElement(newQuestion, index);
       oldQuestion.delete();
     }
     if (newQuestion.name === "setValue") {
       this.updateSetValueQuestion(newQuestion);
     }
+    this.updateVisibilityPanel(triggerEditorPanel);
     tempPanel.dispose();
   }
   private updateSetValueQuestion(question: Question) {
@@ -140,23 +129,44 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     return newObj;
   }
   private getQuestions(): Array<IElement> {
-    const elementPanel = <PanelModel>this.panel.getElementByName("elementPanel");
-    if (elementPanel.elements.length === 0 || !this.logicType.questionNames || this.logicType.questionNames.length === 0) {
+    const triggerQuestionsPanel = <PanelModel>this.panel.getElementByName("triggerQuestionsPanel");
+    if (triggerQuestionsPanel.elements.length === 0 || !this.logicType.questionNames) {
       return null;
     }
-    return this.logicType.questionNames.map(qName => elementPanel.getElementByName(qName));
+    return triggerQuestionsPanel.elements.filter(el => this.logicType.questionNames.indexOf(el.name) !== -1);
   }
-  afterUpdateInitialLogicAction(): void {
-    this.setPanelObj(this.initialLogicAction.element);
-    if (!!this.panelObj) {
-      this.logicType.saveNewElement(this.panelObj);
+  private resetPanel(panelName: string) {
+    const panel = <PanelModel>this.panel.getElementByName(panelName);
+    panel.questions.forEach(q => { q.clearValue(); });
+    panel.elements.splice(0, panel.elements.length);
+    panel.visible = false;
+  }
+  private updateVisibilityPanel(panel: PanelModel) {
+    if (panel.elements.length > 0) {
+      panel.visible = panel.elements.filter(el => el.visible).length > 0;
+    } else {
+      panel.visible = false;
     }
+  }
+  private updatePanelQuestionsValue(panel: PanelModel) {
+    panel.onSurveyLoad();
+    panel.questions.forEach(q => {
+      if (!Helpers.isValueEmpty(this.panelObj[q.getValueName()])) {
+        q.value = this.panelObj[q.getValueName()];
+      }
+    });
   }
 
   constructor(panel: PanelModel, logicAction: SurveyLogicAction, logicType: SurveyLogicType) {
     super(panel, logicAction, logicType);
   }
 
+  public afterUpdateInitialLogicAction(): void {
+    this.setPanelObj(this.initialLogicAction.element);
+    if (!!this.panelObj) {
+      this.logicType.saveNewElement(this.panelObj);
+    }
+  }
   public updateCurrentLogicAction(survey: SurveyModel): boolean {
     const createNewAction = !this.initialLogicAction || this.initialLogicAction.logicType != this.logicType;
     if (!createNewAction) {
@@ -200,35 +210,38 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
 
   public resetElements(): void {
     this.setPanelObj(null);
-
-    const elementPanel = <PanelModel>this.panel.getElementByName("elementPanel");
-    elementPanel.questions.forEach(q => { q.clearValue(); });
-    elementPanel.elements.splice(0, elementPanel.elements.length);
-    elementPanel.visible = false;
+    this.resetPanel("triggerQuestionsPanel");
+    this.resetPanel("triggerEditorPanel");
   }
+
   public updatePanelElements(selectedElement: string, options?: ISurveyCreatorOptions): void {
-    const elementPanel = <PanelModel>this.panel.getElementByName("elementPanel");
+    const triggerEditorPanel = <PanelModel>this.panel.getElementByName("triggerEditorPanel");
+    const triggerQuestionsPanel = <PanelModel>this.panel.getElementByName("triggerQuestionsPanel");
     const obj = this.createElementPanelObj();
 
     const propGenerator = new PropertyJSONGenerator(obj, options);
-    propGenerator.setupObjPanel(elementPanel, true, "logic");
+    propGenerator.setupObjPanel(triggerEditorPanel, true, "logic");
 
-    elementPanel.title = "";
-    const runExpressionQuestion = <QuestionCommentModel>elementPanel.getQuestionByName("runExpression");
+    triggerEditorPanel.title = "";
+    const runExpressionQuestion = <QuestionCommentModel>triggerEditorPanel.getQuestionByName("runExpression");
     runExpressionQuestion && this.updateRunExpressionQuestion(runExpressionQuestion);
-    elementPanel.visible = true;
-    elementPanel.getElementByName(this.logicType.propertyName).visible = false;
-    elementPanel.onSurveyLoad();
-    for (let i = 0; i < elementPanel.questions.length; i++) {
-      const q = elementPanel.questions[i];
-      if (!Helpers.isValueEmpty(obj[q.getValueName()])) {
-        q.value = obj[q.getValueName()];
-      }
+
+    if (!!this.logicType.questionNames) {
+      const questionsToMove = triggerEditorPanel.elements.filter(el => this.logicType.questionNames.indexOf(el.name) !== -1);
+      questionsToMove.forEach(question => { triggerQuestionsPanel.addQuestion(question); });
     }
+
+    triggerEditorPanel.getElementByName(this.logicType.propertyName).visible = false;
+    this.updateVisibilityPanel(triggerQuestionsPanel);
+    this.updatePanelQuestionsValue(triggerQuestionsPanel);
+    this.updateVisibilityPanel(triggerEditorPanel);
+    this.updatePanelQuestionsValue(triggerEditorPanel);
+
     const questions = this.getQuestions();
     if (!!questions && !!selectedElement) {
       questions.forEach(question => {
         this.setInitialElementValue(<QuestionDropdownModel>question, this.initialLogicAction, selectedElement);
+        selectedElement = null;
       });
     }
   }
