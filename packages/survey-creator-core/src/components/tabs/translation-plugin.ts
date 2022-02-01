@@ -44,11 +44,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
 
-    this.filterStringsAction.visible = true;
-    this.updateFilterStrigsAction(true);
-
     this.filterPageAction.visible = this.creator.survey.pageCount > 1;
     this.updateFilterPageAction(true);
+
+    this.filterStringsAction.visible = true;
+    this.updateFilterStrigsAction(true);
 
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
@@ -127,6 +127,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       tooltip: translationMergeLocaleWithDefaultStr,
       component: "sv-action-bar-item",
       mode: "small",
+      needSeparator: true,
       action: () => {
         this.model.mergeLocaleWithDefault();
       }
@@ -141,6 +142,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       visible: false,
       mode: "small",
       component: "sv-action-bar-item",
+      needSeparator: true,
       action: () => {
         if (!document) return;
         if (!this.inputFileElement) {
@@ -233,6 +235,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     const title = this.getFilterStringsActionTitle();
     this.filterStringsAction.title = title;
     if(updateSelectedItem) {
+      this.filterStringsAction.needSeparator = this.filterPageAction.visible;
       const list = <ListModel>this.stringsPopupModel.contentComponentData.model;
       list.selectedItem = list.actions.filter((el: IAction) => el.title === title)[0];
     }
