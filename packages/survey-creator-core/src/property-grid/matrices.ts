@@ -814,7 +814,7 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
   onBeforeEditingObjectChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
     const surveyData: any = obj["data"];
     if (!!surveyData) {
-      surveyData.editingObj = obj;
+      // surveyData.editingObj = obj;
       question.__setData(new BindingsEditorDataProxy(surveyData));
     }
   }
@@ -823,6 +823,9 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
     if (!!bindingValue) {
       options.cellQuestion.value = bindingValue;
     }
+  }
+  public onMatrixCellValueChanged(obj: Base, options: any) {
+    obj.bindings.setBinding(options.row.rowName, options.value);
   }
 
   private getRows(obj: Base): Array<any> {
