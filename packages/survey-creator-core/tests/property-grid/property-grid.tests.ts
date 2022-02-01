@@ -2,7 +2,8 @@ import {
   PropertyGridModel,
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
-  PropertyGridEditorBoolean
+  PropertyGridEditorBoolean,
+  IPropertyGridEditor
 } from "../../src/property-grid";
 import {
   Base,
@@ -2330,4 +2331,27 @@ test("QuestionLinkValueModel showClear #2563", (): any => {
   expect(q.showClear).toBeTruthy();
   q.value = [];
   expect(q.showClear).toBeFalsy();
+});
+test("Using html question in property grid", (): any => {
+  Serializer.addProperty("question", { name: "nameLink", type: "namelink", category: "nameLink" });
+  const propEditor: IPropertyGridEditor = {
+    fit: function (prop) {
+      return prop.type === "namelink";
+    },
+    getJSON: function (obj, prop, options) {
+      return {
+        type: "html",
+        html: "<span>Some text</span>"
+      };
+    }
+  };
+  PropertyGridEditorCollection.register(propEditor);
+  const question = new Question("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const panel = <PanelModel>propertyGrid.survey.getPanelByName("nameLink");
+  expect(panel).toBeTruthy();
+  panel.expand();
+  propertyGrid.survey.whenPanelFocusIn(panel);
+  expect(panel.questions).toHaveLength(1);
+  Serializer.removeProperty("survey", "surveyLink");
 });
