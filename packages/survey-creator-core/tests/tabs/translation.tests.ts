@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { settings } from "../../src/settings";
@@ -331,19 +331,48 @@ test("Translation update filterPageActiontitle after activated", () => {
       {
         name: "page1",
         elements: [{ type: "checkbox", name: "question1" }]
-      }
+      },
     ]
   };
   let tabTranslationPlugin = new TabTranslationPlugin(creator);
   tabTranslationPlugin.activate();
-  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages");
+  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("All pages");
 
   tabTranslationPlugin.model.filteredPage = creator.survey.pages[0];
   expect(tabTranslationPlugin["filterPageAction"].title).toEqual("page1");
 
   tabTranslationPlugin.deactivate();
   tabTranslationPlugin.activate();
-  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages");
+  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("All pages");
+});
+test("Translation filterPage action content and visiblity after activate", () => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    completedHtml: "Test",
+    pages: [
+      {
+        name: "page1",
+        title: "page1",
+        elements: [{ type: "checkbox", name: "question1" }]
+      },
+      {
+        name: "page2",
+        title: "page2",
+        elements: [{ type: "checkbox", name: "question1" }]
+      }
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  const pageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
+  const filterPageAction = <Action>tabTranslationPlugin["filterPageAction"];
+  tabTranslationPlugin.activate();
+  expect(pageList.actions.map((action: Action)=> action.title)).toEqual(["All pages", "page1", "page2"]);
+  expect(filterPageAction.visible).toBeTruthy();
+  tabTranslationPlugin.deactivate();
+  creator.survey.removePage(creator.survey.getPageByName("page2"));
+  tabTranslationPlugin.activate();
+  expect(pageList.actions.map((action: Action)=> action.title)).toEqual(["All pages", "page1"]);
+  expect(filterPageAction.visible).toBeFalsy();
 });
 
 test("StringsHeaderSurvey layout", () => {

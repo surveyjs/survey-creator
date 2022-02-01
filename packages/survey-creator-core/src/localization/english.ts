@@ -125,7 +125,7 @@ export var enStrings = {
     translationLanguages: "Languages",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "Show all strings",
-    translationShowAllPages: "Show all pages",
+    translationShowAllPages: "All pages",
     translationNoStrings: "No strings to translate. Please, change the filter.",
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",

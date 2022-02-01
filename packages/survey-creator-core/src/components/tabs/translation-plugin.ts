@@ -52,12 +52,13 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
 
-    this.pagePopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllPagesText }].concat(
+    this.pagePopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
         id: page.name,
         title: this.creator.getObjectDisplayName(page, "survey-translation", page.title)
       }))
-    );
+    ), false);
+    this.filterPageAction.visible = this.creator.survey.pageCount > 1;
 
     this.model.onPropertyChanged.add((sender, options) => {
       if (options.name === "filteredPage") {
