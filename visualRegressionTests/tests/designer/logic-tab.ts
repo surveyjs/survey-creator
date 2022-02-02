@@ -1,5 +1,5 @@
-import { ClientFunction, Selector, t } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, getSelectOptionByText, logicActionSelector } from "../../helper";
+import { ClientFunction, Selector } from "testcafe";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, getSelectOptionByText, logicActionSelector, tableRulesSelector } from "../../helper";
 
 const title = "Logic tab Screenshot";
 
@@ -225,4 +225,166 @@ test("unsaved rule", async (t) => {
     .click(doneButtonSelector);
 
   await checkElementScreenshot("logic-error-action-questions.png", ruleContent, t);
+});
+
+var jsonAllActionTypes = {
+  "logoPosition": "right",
+  "completedHtmlOnCondition": [
+    {
+      "expression": "{question4} = ['item1']",
+      "html": "Thanks"
+    }
+  ],
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question11"
+        },
+        {
+          "type": "rating",
+          "name": "nps_score",
+          "title": "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+          "isRequired": true,
+          "rateMin": 0,
+          "rateMax": 10,
+          "minRateDescription": "(Most unlikely)",
+          "maxRateDescription": "(Most likely)"
+        },
+        {
+          "type": "checkbox",
+          "name": "promoter_features",
+          "title": "What features do you value the most?",
+          "isRequired": true,
+          "validators": [
+            {
+              "type": "answercount",
+              "text": "Please select two features maximum.",
+              "maxCount": 2
+            }
+          ],
+          "choices": [
+            "Performance",
+            "Stability",
+            "User Interface",
+            "Complete Functionality"
+          ],
+          "hasOther": true,
+          "otherText": "Other feature:",
+          "colCount": 2
+        },
+        {
+          "type": "comment",
+          "name": "passive_experience",
+          "title": "What is the primary reason for your score?"
+        },
+        {
+          "type": "comment",
+          "name": "disappointed_experience",
+          "title": "What do you miss and what was disappointing in your experience with us?"
+        },
+        {
+          "type": "checkbox",
+          "name": "question4",
+          "visibleIf": "{question4} = ['item1']",
+          "choices": [
+            "item1",
+            "item2",
+            "item3"
+          ]
+        },
+        {
+          "type": "dropdown",
+          "name": "question5",
+          "enableIf": "{question4} = ['item1']",
+          "choices": [
+            "item1",
+            "item2",
+            "item3"
+          ]
+        },
+        {
+          "type": "rating",
+          "name": "question6",
+          "requiredIf": "{question4} = ['item1']"
+        }
+      ],
+      "title": "page1 -- title",
+      "description": "page1 -- description"
+    },
+    {
+      "name": "page2",
+      "elements": [
+        {
+          "type": "panel",
+          "name": "panel1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "panel2",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question2"
+            }
+          ],
+          "visibleIf": "{question1} = 12"
+        }
+      ],
+      "visibleIf": "{question1} = 12"
+    }
+  ],
+  "triggers": [
+    {
+      "type": "complete",
+      "expression": "{question4} = ['item1']"
+    },
+    {
+      "type": "setvalue",
+      "expression": "{question4} = ['item1']",
+      "setToName": "question4",
+      "setValue": [
+        "item1",
+        "item2"
+      ]
+    },
+    {
+      "type": "copyvalue",
+      "expression": "{question4} = ['item1']",
+      "fromName": "question6",
+      "setToName": "question11"
+    },
+    {
+      "type": "skip",
+      "expression": "{question4} = ['item1']",
+      "gotoName": "nps_score"
+    },
+    {
+      "type": "runexpression",
+      "expression": "{question4} = ['item1']",
+      "setToName": "question11",
+      "runExpression": "{sdfsd}"
+    }
+  ]
+};
+test("logic actions", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  await setJSON(jsonAllActionTypes);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(tableRulesSelector.nth(0));
+  await checkElementScreenshot("logic-panel-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t);
+
+  await t
+    .click(logicQuestionSelector)
+    .click(tableRulesSelector.nth(1));
+  await checkElementScreenshot("logic-question-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t);
 });
