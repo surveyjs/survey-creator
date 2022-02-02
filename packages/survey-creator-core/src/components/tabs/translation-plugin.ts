@@ -114,7 +114,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   public createActions() {
     const items: Array<Action> = [];
     const translationMergeLocaleWithDefaultStr = editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
-    this.createFilerPageAction();
+    this.createFilterPageAction();
     items.push(this.filterPageAction);
     this.createFilterStringsAction();
     items.push(this.filterStringsAction);
@@ -175,7 +175,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     return items;
   }
 
-  private createFilerPageAction() {
+  private createFilterPageAction() {
     this.pagePopupModel = new PopupModel<{ model: ListModel }>(
       "sv-list",
       {
