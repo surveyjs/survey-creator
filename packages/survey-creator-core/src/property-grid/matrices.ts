@@ -769,13 +769,26 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
     return res;
   }
   public onMatrixCellCreated(obj: Base, options: any) {
-    var bindingValue = obj.bindings.getValueNameByPropertyName(options.row.rowName);
+    const bindingValue = obj.bindings.getValueNameByPropertyName(options.row.rowName);
     if (!!bindingValue) {
       options.cellQuestion.value = bindingValue;
     }
   }
-  public onMatrixCellValueChanged(obj: Base, options: any) {
-    obj.bindings.setBinding(options.row.rowName, options.value);
+
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    question.valueFromDataCallback = function (value: any): any {
+      if (!value) return value;
+      let result: any = {};
+      Object.keys(value).forEach(bindingName => result[bindingName] = { value: value[bindingName] });
+      return result;
+    };
+
+    question.valueToDataCallback = function (newValue: any): any {
+      if (!newValue) return newValue;
+      const result: any = {};
+      Object.keys(newValue).forEach(bindingName => result[bindingName] = newValue[bindingName].value);
+      return result;
+    };
   }
 
   private getRows(obj: Base): Array<any> {
