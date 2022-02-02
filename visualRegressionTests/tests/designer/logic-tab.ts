@@ -227,7 +227,7 @@ test("unsaved rule", async (t) => {
   await checkElementScreenshot("logic-error-action-questions.png", ruleContent, t);
 });
 
-var jsonAllActionTypes = {
+const jsonAllActionTypes = {
   "logoPosition": "right",
   "completedHtmlOnCondition": [
     {
