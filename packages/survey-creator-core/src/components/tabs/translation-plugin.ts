@@ -30,6 +30,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(self, options);
       return options.visible;
     };
+    this.model.localeInitialVisibleCallback = (locale: string): boolean => {
+      let options = { locale: locale, isSelected: true };
+      this.creator.onTranslationLocaleInitiallySelected.fire(this.creator, options);
+      return options.isSelected;
+    };
     this.sidebarTab.model = this.model.settingsSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;

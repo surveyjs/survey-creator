@@ -236,16 +236,20 @@ test("SurveyJSON always return correct data, bug #53", () => {
   expect(JSON.stringify(creator.text).indexOf("q1") > -1).toBeTruthy();
 });
 
-test("onQuestionAdded event", () => {
+test("onQuestionAdded event + undo/redo", () => {
   const creator = new CreatorTester();
   let counter = 0;
   creator.onQuestionAdded.add(function () {
+    if(creator.isProcessingUndoRedo) return;
     counter++;
   });
   expect(counter).toEqual(0);
   creator.JSON = getSurveyJson();
   expect(counter).toEqual(0);
   creator.survey.pages[0].addNewQuestion("text", "q1");
+  expect(counter).toEqual(1);
+  creator.undo();
+  creator.redo();
   expect(counter).toEqual(1);
 });
 

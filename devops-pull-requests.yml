@@ -394,6 +394,15 @@ jobs:
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
       OverWrite: true
     displayName: 'copy build from library for f-f tests'
+  
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/knockout'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui/node_modules/knockout'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy knockout from node_modules for survey-knockout-ui'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
