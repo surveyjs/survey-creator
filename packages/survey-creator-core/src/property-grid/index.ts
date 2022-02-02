@@ -288,16 +288,12 @@ export var PropertyGridEditorCollection = {
       res.onValueChanged(obj, prop, question);
     }
   },
-  onMasterValueChanged(
-    obj: Base,
-    prop: JsonObjectProperty,
-    question: Question
-  ) {
+  onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onMasterValueChanged) {
       res.onMasterValueChanged(obj, prop, question);
     }
-  }
+  },
 };
 
 export class PropertyGridTitleActionsCreator {

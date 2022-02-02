@@ -1,21 +1,4 @@
-import {
-  Base,
-  ComputedUpdater,
-  IAction,
-  ItemValue,
-  JsonObjectProperty,
-  MatrixDropdownColumn,
-  MatrixDropdownRowModelBase,
-  MatrixDynamicRowModel,
-  PanelModel,
-  Question,
-  QuestionMatrixDropdownModelBase,
-  QuestionMatrixDropdownRenderedRow,
-  QuestionMatrixDynamicModel,
-  QuestionTextBase,
-  QuestionTextModel,
-  Serializer
-} from "survey-core";
+import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../settings";
@@ -772,17 +755,13 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
     return res;
   }
 }
-
 export class PropertyGridEditorBindings extends PropertyGridEditor {
+
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "bindings";
   }
-  public getJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): any {
-    var res = {
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const res = {
       type: "matrixdropdown",
       rows: this.getRows(obj),
       columns: this.getColumns(obj, options)
@@ -790,16 +769,28 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
     return res;
   }
   public onMatrixCellCreated(obj: Base, options: any) {
-    var bindingValue = obj.bindings.getValueNameByPropertyName(
-      options.row.rowName
-    );
+    const bindingValue = obj.bindings.getValueNameByPropertyName(options.row.rowName);
     if (!!bindingValue) {
       options.cellQuestion.value = bindingValue;
     }
   }
-  public onMatrixCellValueChanged(obj: Base, options: any) {
-    obj.bindings.setBinding(options.row.rowName, options.value);
+
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    question.valueFromDataCallback = function (value: any): any {
+      if (!value) return value;
+      let result: any = {};
+      Object.keys(value).forEach(bindingName => result[bindingName] = { value: value[bindingName] });
+      return result;
+    };
+
+    question.valueToDataCallback = function (newValue: any): any {
+      if (!newValue) return newValue;
+      const result: any = {};
+      Object.keys(newValue).forEach(bindingName => result[bindingName] = newValue[bindingName].value);
+      return result;
+    };
   }
+
   private getRows(obj: Base): Array<any> {
     var props = obj.bindings.getProperties();
     var res = [];
