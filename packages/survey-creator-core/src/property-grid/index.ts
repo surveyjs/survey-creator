@@ -166,7 +166,6 @@ export interface IPropertyGridEditor {
   onMatrixAllowRemoveRow?: (obj: Base, row: any) => boolean;
   onGetQuestionTitleActions?: (obj: Base, options: any) => void;
   onUpdateQuestionCssClasses?: (obj: Base, options: any) => void;
-  onBeforeEditingObjectChanged?: (obj: Base, prop: JsonObjectProperty, question: Question) => void;
 }
 
 export var PropertyGridEditorCollection = {
@@ -295,12 +294,6 @@ export var PropertyGridEditorCollection = {
       res.onMasterValueChanged(obj, prop, question);
     }
   },
-  onBeforeEditingObjectChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
-    const res = this.getEditor(prop);
-    if (!!res && !!res.onBeforeEditingObjectChanged) {
-      res.onBeforeEditingObjectChanged(obj, prop, question);
-    }
-  }
 };
 
 export class PropertyGridTitleActionsCreator {
@@ -801,11 +794,6 @@ export class PropertyGridModel {
     this.survey.onAfterRenderQuestion.add((sender, options) => {
       this.onAfterRenderQuestion(options);
     });
-    const allQuestions = this.survey.getAllQuestions();
-    allQuestions.forEach(q => {
-      q.allowRootStyle = false;
-      PropertyGridEditorCollection.onBeforeEditingObjectChanged(this.obj, (<any>q).property, q);
-    });
     this.survey.editingObj = this.obj;
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
@@ -821,6 +809,7 @@ export class PropertyGridModel {
       this.currentlySelectedProperty = options.question.name;
       this.currentlySelectedPanel = options.question.parent;
     });
+    this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
   }
   public get options(): ISurveyCreatorOptions {
     return this.optionsValue;
