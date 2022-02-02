@@ -8,7 +8,7 @@ import { SurveyHelper } from "../../survey-helper";
 import { logicCss } from "./logic-theme";
 import { assignDefaultV2Classes } from "../../utils/utils";
 import { QuestionLinkValueModel } from "../../components/link-value";
-import { LogicActionModelBase, LogicActionSimpleModel, LogicActionTriggerModel } from "./logic-actions-model";
+import { LogicActionModelBase, LogicActionModel, LogicActionTriggerModel } from "./logic-actions-model";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)
@@ -393,7 +393,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (newActionModel.isTrigger) {
       (<LogicActionTriggerModel>newActionModel).updatePanelElements(prevSelectedQuestion, this.options);
     } else {
-      (<LogicActionSimpleModel>newActionModel).updatePanelElements(prevSelectedQuestion, this.getSelectorChoices(newActionModel.logicType));
+      (<LogicActionModel>newActionModel).updatePanelElements(prevSelectedQuestion, this.getSelectorChoices(newActionModel.logicType));
     }
   }
   private getLogicTypeByName(ltName: string): SurveyLogicType {

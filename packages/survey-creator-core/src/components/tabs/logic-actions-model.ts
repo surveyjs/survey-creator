@@ -11,7 +11,7 @@ export class LogicActionModelBase {
 
   static createActionModel(panel: PanelModel, logicAction: SurveyLogicAction, logicType: SurveyLogicType, selectorElementsHash): LogicActionModelBase {
     if (!!logicType && logicType.hasSelectorChoices) {
-      return new LogicActionSimpleModel(panel, logicAction, logicType, selectorElementsHash);
+      return new LogicActionModel(panel, logicAction, logicType, selectorElementsHash);
     } else {
       return new LogicActionTriggerModel(panel, logicAction, logicType);
     }
@@ -40,7 +40,7 @@ export class LogicActionModelBase {
   }
 }
 
-export class LogicActionSimpleModel extends LogicActionModelBase {
+export class LogicActionModel extends LogicActionModelBase {
   private getSelectorOptionsText(logicType: SurveyLogicType): string {
     const elementType = logicType.baseClass;
     const optionsCaptionName = elementType == "page" ? "pe.conditionSelectPage" : (elementType == "panel" ? "pe.conditionSelectPanel" : "pe.conditionSelectQuestion");
