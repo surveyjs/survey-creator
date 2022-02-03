@@ -192,6 +192,16 @@ jobs:
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@survey/creator'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npm run remove-package-lock
+    displayName: 'npm run remove-package-lock'
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run remove-package-lock
