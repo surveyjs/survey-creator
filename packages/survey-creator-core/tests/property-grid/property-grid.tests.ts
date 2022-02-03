@@ -2,7 +2,8 @@ import {
   PropertyGridModel,
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
-  PropertyGridEditorBoolean
+  PropertyGridEditorBoolean,
+  IPropertyGridEditor
 } from "../../src/property-grid";
 import {
   Base,
@@ -890,6 +891,44 @@ test("bindings property editor", () => {
   q.value = "q3";
   expect(matrix.bindings.getValueNameByPropertyName("rowCount")).toEqual("q3");
 });
+
+test("Dynamic panel 'Panel count' binding property editor", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "numberInput",
+        "inputType": "number"
+      },
+      {
+        "type": "text",
+        "name": "q1",
+        "inputType": "number"
+      },
+      {
+        "type": "paneldynamic",
+        "name": "paneldynamic",
+        "bindings": {
+          "panelCount": "numberInput"
+        }
+      }
+    ]
+  });
+  const paneldynamic = <QuestionPanelDynamicModel>survey.getQuestionByName("paneldynamic");
+  const propertyGrid = new PropertyGridModelTester(survey);
+
+  propertyGrid.obj = paneldynamic;
+  expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("numberInput");
+  let bindingsQuestion = <QuestionMatrixDropdownModel>(propertyGrid.survey.getQuestionByName("bindings"));
+  bindingsQuestion["createRenderedTable"]();
+  expect(bindingsQuestion.renderedTable).toBeDefined();
+  expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("numberInput");
+  expect(bindingsQuestion.visibleRows[0].cells[0].question.value).toEqual("numberInput");
+
+  bindingsQuestion.visibleRows[0].cells[0].question.value = "q1";
+  expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("q1");
+});
+
 test("restfull property editor", () => {
   var question = new QuestionDropdownModel("q1");
   question.choicesByUrl.url = "myUrl";
@@ -2330,4 +2369,27 @@ test("QuestionLinkValueModel showClear #2563", (): any => {
   expect(q.showClear).toBeTruthy();
   q.value = [];
   expect(q.showClear).toBeFalsy();
+});
+test("Using html question in property grid", (): any => {
+  Serializer.addProperty("question", { name: "nameLink", type: "namelink", category: "nameLink" });
+  const propEditor: IPropertyGridEditor = {
+    fit: function (prop) {
+      return prop.type === "namelink";
+    },
+    getJSON: function (obj, prop, options) {
+      return {
+        type: "html",
+        html: "<span>Some text</span>"
+      };
+    }
+  };
+  PropertyGridEditorCollection.register(propEditor);
+  const question = new Question("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const panel = <PanelModel>propertyGrid.survey.getPanelByName("nameLink");
+  expect(panel).toBeTruthy();
+  panel.expand();
+  propertyGrid.survey.whenPanelFocusIn(panel);
+  expect(panel.questions).toHaveLength(1);
+  Serializer.removeProperty("survey", "surveyLink");
 });

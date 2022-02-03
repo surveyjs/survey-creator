@@ -115,12 +115,12 @@ export interface IPropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any;
-  showModalPropertyEditor(
+  showModalPropertyEditor?: (
     editor: IPropertyGridEditor,
     property: JsonObjectProperty,
     question: Question,
     options: ISurveyCreatorOptions
-  ): any;
+  ) => any;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   onAfterRenderQuestion?: (
     obj: Base,
@@ -288,16 +288,12 @@ export var PropertyGridEditorCollection = {
       res.onValueChanged(obj, prop, question);
     }
   },
-  onMasterValueChanged(
-    obj: Base,
-    prop: JsonObjectProperty,
-    question: Question
-  ) {
+  onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onMasterValueChanged) {
       res.onMasterValueChanged(obj, prop, question);
     }
-  }
+  },
 };
 
 export class PropertyGridTitleActionsCreator {
@@ -805,7 +801,8 @@ export class PropertyGridModel {
     this.updateDependedPropertiesEditors();
     this.survey.onFocusInPanel.add((sender, options) => {
       if (this.currentlySelectedPanel !== options.panel) {
-        this.currentlySelectedProperty = options.panel.getFirstQuestionToFocus().name;
+        const qustionToFocus = options.panel.getFirstQuestionToFocus();
+        this.currentlySelectedProperty = !!qustionToFocus ? qustionToFocus.name : "";
         this.currentlySelectedPanel = options.panel;
       }
     });

@@ -54,6 +54,7 @@ test("strings view", async (t) => {
   await t.click(getTabbedMenuItemByText("Translation"));
   await checkElementScreenshot("translation-tab.png", stringsView, t);
 
-  await t.click(getBarItemByTitle("Show all strings"));
+  await t.click(getBarItemByTitle("Used Strings Only"));
+  await t.click(Selector(".sv-list__item").withText("All Strings"));
   await checkElementScreenshot("translation-tab-show-all-strings.png", stringsView, t);
 });

@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { settings } from "../../src/settings";
@@ -331,19 +331,77 @@ test("Translation update filterPageActiontitle after activated", () => {
       {
         name: "page1",
         elements: [{ type: "checkbox", name: "question1" }]
-      }
+      },
     ]
   };
-  let tabTranslationPlugin = new TabTranslationPlugin(creator);
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  const filterPageAction = tabTranslationPlugin["filterPageAction"];
+  const filterPageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
   tabTranslationPlugin.activate();
-  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages");
-
+  expect(filterPageAction.title).toEqual("All Pages");
+  expect(filterPageList.selectedItem.title).toEqual("All Pages");
   tabTranslationPlugin.model.filteredPage = creator.survey.pages[0];
-  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("page1");
+  expect(filterPageAction.title).toEqual("page1");
 
   tabTranslationPlugin.deactivate();
   tabTranslationPlugin.activate();
-  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages");
+  expect(filterPageAction.title).toEqual("All Pages");
+  expect(filterPageList.selectedItem.title).toEqual("All Pages");
+});
+test("Translation update filterStringsAction after activated", () => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    completedHtml: "Test",
+    pages: [
+      {
+        name: "page1",
+        elements: [{ type: "checkbox", name: "question1" }]
+      },
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  const filterStringsAction = tabTranslationPlugin["filterStringsAction"];
+  const filterStringsList = <ListModel>tabTranslationPlugin["stringsPopupModel"].contentComponentData.model;
+  tabTranslationPlugin.activate();
+  expect(filterStringsAction.title).toEqual("Used Strings Only");
+  expect(filterStringsList.selectedItem.title).toEqual("Used Strings Only");
+  tabTranslationPlugin.model.showAllStrings = true;
+  expect(filterStringsAction.title).toEqual("All Strings");
+
+  tabTranslationPlugin.deactivate();
+  tabTranslationPlugin.activate();
+
+  expect(filterStringsAction.title).toEqual("Used Strings Only");
+  expect(filterStringsList.selectedItem.title).toEqual("Used Strings Only");
+});
+test("Translation filterPage action content and visiblity after activate", () => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    completedHtml: "Test",
+    pages: [
+      {
+        name: "page1",
+        title: "page1",
+        elements: [{ type: "checkbox", name: "question1" }]
+      },
+      {
+        name: "page2",
+        title: "page2",
+        elements: [{ type: "checkbox", name: "question1" }]
+      }
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  const pageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
+  const filterPageAction = <Action>tabTranslationPlugin["filterPageAction"];
+  tabTranslationPlugin.activate();
+  expect(pageList.actions.map((action: Action) => action.title)).toEqual(["All Pages", "page1", "page2"]);
+  expect(filterPageAction.visible).toBeTruthy();
+  tabTranslationPlugin.deactivate();
+  creator.survey.removePage(creator.survey.getPageByName("page2"));
+  tabTranslationPlugin.activate();
+  expect(pageList.actions.map((action: Action) => action.title)).toEqual(["All Pages", "page1"]);
+  expect(filterPageAction.visible).toBeFalsy();
 });
 
 test("StringsHeaderSurvey layout", () => {
