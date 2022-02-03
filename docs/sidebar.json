@@ -58,10 +58,6 @@
         {
           "Name": "iquestiontoolboxitem",
           "Title": "Toolbox Item"
-        },
-        {
-          "Name": "itoolbaritem",
-          "Title": "Toolbar Item"
         }
       ]
     }
