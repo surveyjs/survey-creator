@@ -196,6 +196,8 @@ jobs:
     inputs:
       SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@survey/creator'
+      OverWrite: true
+    displayName: 'copy survey-creator-core in case of npm cache'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
