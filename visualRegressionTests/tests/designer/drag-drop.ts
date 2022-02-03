@@ -126,8 +126,7 @@ test("Choices: Ranking", async (t) => {
   await checkElementScreenshot("drag-drop-item-values-ranking--dragging.png", QRoot, t);
 });
 
-//TODO remove test.only
-test.only("Matrix: Property Grid: Choices", async (t) => {
+test("Matrix: Property Grid: Choices", async (t) => {
   await t.resizeWindow(2560, 1440);
 
   const patchMatrixDragDropToDisableDrop = ClientFunction(() => {
