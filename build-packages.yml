@@ -571,6 +571,13 @@ jobs:
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
   # update 'file' npm dependencies in case of cache
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules
+      rm -rf survey-core survey-knockout-ui @survey
+      mkdir -p @survey/creator
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'remove symlinks from node_modules'
+
   - task: CopyFiles@2
     inputs:
       SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
