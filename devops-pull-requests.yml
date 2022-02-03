@@ -290,7 +290,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@survey/creator'
       OverWrite: true
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -430,7 +430,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/@survey/creator'
       OverWrite: true
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
