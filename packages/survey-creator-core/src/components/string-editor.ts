@@ -47,7 +47,7 @@ export class StringEditorViewModelBase extends Base {
   public onInput(event: any): void {
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
-      event.target.innerText = this.valueBeforeEdit;
+      this.locString.text = this.valueBeforeEdit;
       this.errorText = null;
       this.focused = false;
       return;
