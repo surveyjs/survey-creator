@@ -33,21 +33,21 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onFocus(event: any): void {
-    this.focused = true;
     if(!this.focusedProgram) {
-      this.valueBeforeEdit = this.locString.text;
+      this.valueBeforeEdit = event.target.innerText;
       this.focusedProgram = false;
     }
     this.creator.selectFromStringEditor = true;
     event.target.parentElement.click();
     event.target.spellcheck = true;
+    this.focused = true;
     select(event.target);
   }
 
   public onInput(event: any): void {
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
-      this.locString.text = this.valueBeforeEdit;
+      event.target.innerText = this.valueBeforeEdit;
       this.errorText = null;
       this.focused = false;
       return;
