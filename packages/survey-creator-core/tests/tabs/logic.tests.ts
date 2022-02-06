@@ -1427,6 +1427,21 @@ test("LogicPlugin: question & action types are sorted ", () => {
   expect(questions[4].title).toEqual("q10");
 });
 
+test("LogicPlugin: creator.readOnly", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.readOnly = true;
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+    ]
+  };
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  logicPlugin.activate();
+  expect(logicPlugin.model.readOnly).toBeTruthy();
+  expect(logicPlugin.model.matrixItems.isReadOnly).toBeTruthy();
+});
+
 test("LogicItem isSuitable", () => {
   const survey = new SurveyModel({
     pages: [
@@ -2181,4 +2196,28 @@ test("logic item editing: restoring selected elements after changing the logical
   expect(elementSelector().visible).toBeTruthy();
   expect(elementSelector().value).toEqual(undefined);
   expect(getTriggerQuestionsPanel().visible).toBeFalsy();
+});
+test("LogicItemUI readOnly", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3" },
+          { type: "text", name: "q4" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q4",
+      },
+    ],
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.readOnly = true;
+  expect(logic.matrixItems.isReadOnly).toBeTruthy();
 });

@@ -65,6 +65,7 @@ export class SurveyLogicUI extends SurveyLogic {
       updateMatrixRemoveAction(options.question, options.actions, options.row);
     });
     this.updateItemsSurveyData();
+    this.onReadOnlyChanged();
   }
   @property({
     onSet: (value, target: SurveyLogicUI) => {
@@ -102,6 +103,10 @@ export class SurveyLogicUI extends SurveyLogic {
     if (name === "items") {
       this.updateItemsSurveyData();
     }
+  }
+  protected onReadOnlyChanged(): void {
+    if(!this.itemsSurvey) return;
+    this.itemsSurvey.mode = this.readOnly ? "display" : "edit";
   }
   public get expressionEditor(): ConditionEditor {
     return this.expressionEditorValue;
