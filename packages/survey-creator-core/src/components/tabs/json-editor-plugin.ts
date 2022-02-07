@@ -61,7 +61,9 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       return false;
     }
     if (!this.model.readOnly && this.model.isJSONChanged) {
+      this.creator.selectedElement = undefined;
       this.creator.text = this.model.text;
+      this.creator.selectedElement = this.creator.survey;
       this.creator.setModified({ type: "JSON_EDITOR" });
     }
     this.model = undefined;
