@@ -101,7 +101,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
     }
     let control = null;
     if (this.locString.hasHtml) {
-      const htmlValue = { __html: this.locString.renderedHtml };
+      const htmlValue = { __html: this.baseModel.focused && this.locString.text || this.locString.renderedHtml };
       control = (
         <span
           ref={this.svStringEditorRef}

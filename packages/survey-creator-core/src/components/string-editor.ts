@@ -9,6 +9,7 @@ export class StringEditorViewModelBase extends Base {
   private valueBeforeEdit: string;
 
   @property() errorText: string;
+  @property() focused: boolean;
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
   }
@@ -39,6 +40,7 @@ export class StringEditorViewModelBase extends Base {
     this.creator.selectFromStringEditor = true;
     event.target.parentElement.click();
     event.target.spellcheck = true;
+    this.focused = true;
     select(event.target);
   }
 
@@ -47,6 +49,7 @@ export class StringEditorViewModelBase extends Base {
       this.blurredByEscape = false;
       event.target.innerText = this.valueBeforeEdit;
       this.errorText = null;
+      this.focused = false;
       return;
     }
 
@@ -78,6 +81,7 @@ export class StringEditorViewModelBase extends Base {
       event.target.innerText = this.locString.renderedHtml;
       this.locString.strChanged();
     }
+    this.focused = false;
   }
   public done(event: Event): void {
     event.stopImmediatePropagation();

@@ -303,3 +303,28 @@ test("Check item string editor focus out on near click", async (t) => {
     .click(Selector(".svc-item-value-wrapper").withText("item1"), { offsetX: 200 })
     .expect(svItemSelector.focused).notOk();
 });
+
+test("Check markdown events", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => options.html = options.text.replaceAll("*", "$"));
+    });
+  })();
+
+  await setJSON({
+    "description": "*abc*",
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  });
+
+  await t
+    .click(Selector(".sv-string-editor").withText("$abc$"))
+    .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
+    .typeText(Selector(".sv-string-editor").withText("*abc*"), "d", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok();
+});

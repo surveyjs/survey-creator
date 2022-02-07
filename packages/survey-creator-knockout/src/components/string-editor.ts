@@ -37,7 +37,7 @@ export class StringEditorViewModel {
     return this.locString.koHasHtml();
   }
   public get editValue(): string {
-    return this.locString.koRenderedHtml();
+    return this.baseModel.focused && this.locString.text || this.locString.koRenderedHtml();
   }
   public get className(): string {
     return this.baseModel.className(this.locString.koRenderedHtml());

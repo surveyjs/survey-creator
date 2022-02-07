@@ -77,7 +77,11 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   @propertyArray() items: Array<SurveyLogicItem>;
   @propertyArray() logicTypes: Array<SurveyLogicType>;
   @property() errorText: string;
-  @property() readOnly: boolean;
+  @property({
+    onSet: (value, target: SurveyLogic) => {
+      target.onReadOnlyChanged();
+    }
+  }) readOnly: boolean;
   @property() placeholderHtml: string;
 
   public get editableItem(): SurveyLogicItem {
@@ -227,6 +231,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected getEditingActions(): Array<SurveyLogicAction> {
     return [];
   }
+  protected onReadOnlyChanged(): void {}
   private renameQuestionCore(
     oldName: string,
     newName: string,
