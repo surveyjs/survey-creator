@@ -12,11 +12,11 @@ import {
   propertyArray,
   Question,
   Serializer,
-  SurveyModel
+  SurveyModel,
+  DragOrClickHelper
 } from "survey-core";
 import { CreatorBase, toolboxLocationType } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
-import { DragOrClickHelper } from "./utils/dragOrClickHelper";
 
 /**
  * The Toolbox item description.

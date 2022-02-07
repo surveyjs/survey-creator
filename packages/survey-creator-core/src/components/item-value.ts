@@ -5,14 +5,14 @@ import {
   QuestionCheckboxModel,
   QuestionSelectBase,
   Serializer,
-  SurveyModel
+  SurveyModel,
+  DragOrClickHelper
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropChoices } from "survey-core";
 import "./item-value.scss";
 import { getLocString } from "../editorLocalization";
 
-import { DragOrClickHelper } from "../utils/dragOrClickHelper";
 import { ICollectionItemAllowOperations } from "../settings";
 
 export class ItemValueWrapperViewModel extends Base {
