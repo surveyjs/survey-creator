@@ -47,8 +47,10 @@ const json_pages = {
 };
 
 test("Page hover test", async t => {
+  var creatorOldPageHoverDelay;
   await setJSON(json);
   await ClientFunction(() => {
+    creatorOldPageHoverDelay = window["creator"].pageHoverDelay;
     window["creator"].pageHoverDelay = 2000;
   })();
   await t
@@ -68,7 +70,7 @@ test("Page hover test", async t => {
     .expect(page.hasClass("svc-hovered")).notOk();
 
   await ClientFunction(() => {
-    window["creator"].pageHoverDelay = 200;
+    window["creator"].pageHoverDelay = creatorOldPageHoverDelay;
   })();
 });
 
