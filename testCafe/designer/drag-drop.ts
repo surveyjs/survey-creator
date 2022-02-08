@@ -779,6 +779,9 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   };
   await setJSON(json);
 
+  const expectedValue = "giraffe";
+  let value;
+
   const Question1 = Selector("[data-name=\"question1\"]");
   const LionItem = Selector("[data-sv-drop-target-item-value=\"lion\"]");
   const GiraffeItem = Selector("[data-sv-drop-target-item-value=\"giraffe\"]");
@@ -791,14 +794,15 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
     .click(Question1, { speed: 0.5 })
     .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
     .dragToElement(DragZoneGiraffeItem, LionItem, { speed: 0.5 });
-
-  let value = await getItemValueByIndex("question1", 0);
-  const expectedValue = "giraffe";
+  value = await getItemValueByIndex("question1", 0);
   await t.expect(value).eql(expectedValue);
 
-  await t.click(Question1, { speed: 0.5 }).hover(GiraffeItem, { speed: 0.5 });
+  await t.click("body");
 
-  await t.dragToElement(DragZoneGiraffeItem, PandaItem, { speed: 0.5 });
+  await t
+    .click(Question1, { speed: 0.5 })
+    .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
+    .dragToElement(DragZoneGiraffeItem, PandaItem, { speed: 0.5 });
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
 });
