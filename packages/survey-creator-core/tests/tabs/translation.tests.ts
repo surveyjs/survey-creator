@@ -3,6 +3,8 @@ import { Translation, TranslationItem } from "../../src/components/tabs/translat
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { settings } from "../../src/settings";
 import { CreatorTester } from "../creator-tester";
+
+import "survey-core/survey.i18n";
 export * from "../../src/localization/russian";
 
 test("Fire callback on base objects creation", () => {
