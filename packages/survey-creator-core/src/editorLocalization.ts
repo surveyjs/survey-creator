@@ -75,6 +75,8 @@ export var editorLocalization = {
   },
   convertToCamelCase(value: string, toLowCase: boolean = false): string {
     if (!value) return value;
+    value = value.trim();
+    if(value.indexOf(" ") > -1) return value;
     var hasLowCase = false;
     for (var i = 0; i < value.length; i++) {
       if(value[i] !== value[i].toUpperCase()) {
