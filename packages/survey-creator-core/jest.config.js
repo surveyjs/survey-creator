@@ -14,6 +14,9 @@ module.exports = {
     "\\.(css|scss)$": "<rootDir>/tests/empty-module.js",
     "\\.(jpg|png|svg)$": "<rootDir>/tests/empty-module.js",
     "\\.html?$": "<rootDir>/tests/empty-module.js",
+    "survey.i18n": "<rootDir>/node_modules/survey-core/survey.i18n.js",
+    "survey-creator-core": "<rootDir>/src/editorLocalization.ts",
+    "survey-core": "<rootDir>/node_modules/survey-core/survey.core.js"
   },
   testRegex: "\/tests\/.*\.(tests?|spec)\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],

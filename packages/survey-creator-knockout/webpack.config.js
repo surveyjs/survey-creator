@@ -39,7 +39,9 @@ const buildPlatformJson = {
     packageJson.name + ".min.css",
     packageJson.name + ".js",
     packageJson.name + ".d.ts",
-    packageJson.name + ".min.js"
+    packageJson.name + ".min.js",
+    "survey-creator-knockout.i18n.js",
+    "survey-creator-knockout.i18n.min.js",
   ],
   main: packageJson.name + ".js",
   repository: {
