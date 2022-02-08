@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { TabDesignerViewModel } from "@survey/creator";
+import { TabDesignerViewModel } from "survey-creator-core";
 import { ImplementorBase, Survey } from "survey-knockout-ui";
 
 const template = require("./designer.html");

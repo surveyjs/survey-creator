@@ -11,7 +11,7 @@ import {
   Popup,
   attachKey2click
 } from "survey-react-ui";
-import { CreatorBase, getLocString, PageNavigatorViewModel } from "@survey/creator";
+import { CreatorBase, getLocString, PageNavigatorViewModel } from "survey-creator-core";
 import React from "react";
 
 interface ISurveyPageNavigatorProps {

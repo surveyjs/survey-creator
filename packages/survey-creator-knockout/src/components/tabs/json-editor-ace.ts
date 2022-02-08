@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
-import { TabJsonEditorAcePlugin, AceJsonEditorModel } from "@survey/creator";
+import { TabJsonEditorAcePlugin, AceJsonEditorModel } from "survey-creator-core";
 const template: string = require("./json-editor-ace.html");
 // import template from "./json-editor-ace.html";
 

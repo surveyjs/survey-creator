@@ -1,7 +1,6 @@
 import * as ko from "knockout";
 import { ActionContainerImplementor } from "survey-knockout-ui";
 
-//import "./tabbed-menu.scss";
 import { ResponsivityManager } from "survey-core";
 const template = require("./tabbed-menu.html");
 // import template from "./tabbed-menu.html";

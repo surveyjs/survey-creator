@@ -1,6 +1,6 @@
 import { Serializer, QuestionFactory } from "survey-core";
 import { QuestionImplementor, SurveyTemplateText } from "survey-knockout-ui";
-import { QuestionEmbeddedSurveyModel } from "@survey/creator";
+import { QuestionEmbeddedSurveyModel } from "survey-creator-core";
 const questionTemplate = require("./question-embedded-survey.html");
 
 export class QuestionEmbeddedSurvey extends QuestionEmbeddedSurveyModel {

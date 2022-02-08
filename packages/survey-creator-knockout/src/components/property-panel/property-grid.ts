@@ -1,9 +1,8 @@
-import { PropertyGridViewModel } from "@survey/creator";
+import { PropertyGridViewModel } from "survey-creator-core";
 import * as ko from "knockout";
 import { ImplementorBase, QuestionButtonGroup, Survey } from "survey-knockout-ui";
 import { QuestionFactory, Serializer } from "survey-core";
-//import "./property-grid.scss";
-//import "../../survey-theme/survey.scss";
+
 const template = require("./property-grid.html");
 
 ko.components.register("svc-property-grid", {

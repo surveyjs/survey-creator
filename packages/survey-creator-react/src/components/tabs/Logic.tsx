@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Action, Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, Survey, attachKey2click } from "survey-react-ui";
-import { SurveyLogicUI } from "@survey/creator";
+import { SurveyLogicUI } from "survey-creator-core";
 
 export class TabLogicAddButtonComponent extends SurveyElementBase<any, any> {
   private get model(): Action {

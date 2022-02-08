@@ -7,7 +7,7 @@ import {
   settings,
   MatrixDropdownColumn,
 } from "survey-core";
-import { MatrixCellWrapperViewModel } from "@survey/creator";
+import { MatrixCellWrapperViewModel } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
 
 const template = require("./matrix-cell.html");

@@ -55,8 +55,8 @@ var buildPlatformJson = {
     packageJson.name + ".js",
     packageJson.name + ".d.ts",
     packageJson.name + ".min.js",
-    "survey-creator.core.i18n.js",
-    "survey-creator.core.i18n.min.js",
+    "survey-creator-core.i18n.js",
+    "survey-creator-core.i18n.min.js",
   ],
   main: packageJson.name + ".js",
   repository: {

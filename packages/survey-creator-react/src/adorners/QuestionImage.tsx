@@ -1,7 +1,7 @@
 import {
   QuestionImageAdornerViewModel,
   QuestionAdornerViewModel
-} from "@survey/creator";
+} from "survey-creator-core";
 import React from "react";
 import { attachKey2click, ReactElementFactory, SvgIcon } from "survey-react-ui";
 import {

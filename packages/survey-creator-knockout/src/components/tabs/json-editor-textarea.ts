@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
-import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "@survey/creator";
+import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "survey-creator-core";
 const template: string = require("./json-editor-textarea.html");
 // import template from "./json-editor-textarea.html";
 

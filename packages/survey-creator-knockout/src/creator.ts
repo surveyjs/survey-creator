@@ -18,7 +18,7 @@ import {
   getElementWrapperComponentData,
   getItemValueWrapperComponentName,
   getItemValueWrapperComponentData
-} from "@survey/creator";
+} from "survey-creator-core";
 import { editableStringRendererName } from "./components/string-editor";
 
 if (!!ko.options) {

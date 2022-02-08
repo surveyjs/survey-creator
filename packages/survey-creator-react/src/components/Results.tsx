@@ -1,6 +1,6 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
-import { SurveyResultsItemModel, SurveyResultsModel } from "@survey/creator";
+import { SurveyResultsItemModel, SurveyResultsModel } from "survey-creator-core";
 import { attachKey2click, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import { ActionButton } from "./ActionButton";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { ObjectSelectorModel } from "@survey/creator";
+import { ObjectSelectorModel } from "survey-creator-core";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, List } from "survey-react-ui";
 

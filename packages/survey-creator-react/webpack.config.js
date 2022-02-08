@@ -35,8 +35,6 @@ const buildPlatformJson = {
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
   license: "https://surveyjs.io/Licenses#SurveyCreator",
   files: [
-    packageJson.name + ".css",
-    packageJson.name + ".min.css",
     packageJson.name + ".js",
     packageJson.name + ".d.ts",
     packageJson.name + ".min.js"
@@ -57,8 +55,9 @@ const buildPlatformJson = {
     //TODO: Return back when release
     // "survey-core": "^" + packageJson.version,
     // "survey-react-ui": "^" + packageJson.version,
-    "survey-core": "^1.8.0",
-    "survey-react-ui": "^1.8.0",
+    "survey-core": "^1.9.0",
+    "survey-react-ui": "^1.9.0",
+    "survey-creator-core": "^1.9.0",
     react: "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -195,6 +194,12 @@ module.exports = function (options) {
         commonjs2: "survey-react-ui",
         commonjs: "survey-react-ui",
         amd: "survey-react-ui"
+      },
+      "survey-creator-core": {
+        root: "SurveyCreatorCore",
+        commonjs2: "survey-creator-core",
+        commonjs: "survey-creator-core",
+        amd: "survey-creator-core"
       }
     },
     plugins: [

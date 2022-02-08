@@ -5,7 +5,7 @@ import {
   Survey,
   SurveyElementBase
 } from "survey-react-ui";
-import { EmbedModel } from "@survey/creator";
+import { EmbedModel } from "survey-creator-core";
 
 interface ITabEmbedComponentProps {
   data: EmbedModel;
