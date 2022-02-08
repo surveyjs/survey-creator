@@ -7,7 +7,7 @@ var packageJson = require("./package.json");
 
 const config = {
   entry: {
-    "survey-creator.core.i18n": path.resolve(__dirname, "./src/entries/i18n.ts"),
+    "survey-creator-core.i18n": path.resolve(__dirname, "./src/entries/i18n.ts"),
   },
   externals: {
     "survey-creator-core": {
