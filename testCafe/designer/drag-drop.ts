@@ -797,8 +797,6 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   value = await getItemValueByIndex("question1", 0);
   await t.expect(value).eql(expectedValue);
 
-  await t.click("body");
-
   await t
     .click(Question1, { speed: 0.5 })
     .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
