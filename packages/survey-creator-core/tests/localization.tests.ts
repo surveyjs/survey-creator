@@ -71,4 +71,10 @@ test("getPropertyValue and convertToCamelCase", () => {
   expect(editorLocalization.convertToCamelCase("USD", true)).toEqual("USD");
   expect(editorLocalization.getPropertyValue("USD")).toEqual("USD");
 });
-
+test("getPropertyValue and spaces", () => {
+  expect(editorLocalization.convertToCamelCase("Top")).toEqual("Top");
+  expect(editorLocalization.convertToCamelCase("On top")).toEqual("On top");
+  expect(editorLocalization.convertToCamelCase("On Top")).toEqual("On Top");
+  expect(editorLocalization.convertToCamelCase("My First Option")).toEqual("My First Option");
+  expect(editorLocalization.getPropertyValue("Another test")).toEqual("Another test");
+});
