@@ -82,12 +82,12 @@ test("Designer widthMode css test", () => {
   expect(designerPlugin.model.getDesignerCss()).toEqual("sd-container-modern sd-container-modern--responsive");
 });
 
-test("Select survey in designer", ()=> {
+test("Select survey in designer", () => {
   const creator = new CreatorTester();
   var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
     creator.getPlugin("designer")
   );
-  creator.addNewQuestionInPage(()=>{});
+  creator.JSON = { elements: [{ name: "question1", type: "text" }] };
 
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");

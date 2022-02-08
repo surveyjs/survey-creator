@@ -48,6 +48,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
   }
   private renderViewContent(): JSX.Element {
     const logicTabClassName = "svc-plugin-tab__content svc-logic-tab__content " + (this.model.hasItems ? "" : "svc-logic-tab__empty");
+    const addLogic = !this.model.readOnly ? <TabLogicAddButtonComponent button={this.model.addNewButton} /> : undefined;
     return (
       <Fragment>
         <div className={logicTabClassName}>
@@ -56,7 +57,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
             <div className="svc-logic-tab__content-empty" >
               <span className="svc-text">{this.model.emptyTabPlaceHolder}</span>
             </div>)}
-          <TabLogicAddButtonComponent button={this.model.addNewButton} />
+          {addLogic}
         </div>
       </Fragment>
     );

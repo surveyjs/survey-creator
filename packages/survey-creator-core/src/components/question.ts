@@ -13,7 +13,8 @@ import {
   Serializer,
   DragTypeOverMeEnum,
   IAction,
-  ComputedUpdater
+  ComputedUpdater,
+  DragOrClickHelper
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -27,7 +28,6 @@ import {
 } from "../utils/utils";
 import { ActionContainerViewModel } from "./action-container-view-model";
 import "./question.scss";
-import { DragOrClickHelper } from "../utils/dragOrClickHelper";
 
 export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyModel> {
   @property() isDragged: boolean;
