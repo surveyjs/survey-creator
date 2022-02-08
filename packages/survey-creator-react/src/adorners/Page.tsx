@@ -13,7 +13,7 @@ import {
   PageViewModel,
   SurveyHelper,
   toggleHovered
-} from "@survey/creator";
+} from "survey-creator-core";
 import React from "react";
 import { ReactMouseEvent } from "../events";
 

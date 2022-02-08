@@ -1,4 +1,4 @@
-import { SidebarTabModel } from "@survey/creator";
+import { SidebarTabModel } from "survey-creator-core";
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
 const template = require("./side-bar-tab.html");

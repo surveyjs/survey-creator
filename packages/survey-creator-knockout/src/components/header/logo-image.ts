@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { SurveyModel } from "survey-core";
-import { CreatorBase, LogoImageViewModel } from "@survey/creator";
+import { CreatorBase, LogoImageViewModel } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
 const template: string = require("./logo-image.html");
 

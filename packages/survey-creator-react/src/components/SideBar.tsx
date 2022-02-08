@@ -1,5 +1,5 @@
 import React from "react";
-import { SidebarTabModel, SidebarModel } from "@survey/creator";
+import { SidebarTabModel, SidebarModel } from "survey-creator-core";
 import { Base } from "survey-core";
 import { SurveyElementBase, SurveyActionBar, ReactQuestionFactory, ReactElementFactory } from "survey-react-ui";
 
