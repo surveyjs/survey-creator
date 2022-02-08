@@ -2,7 +2,6 @@ import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
 import { SurveyCreator } from "../creator";
 
-//import "./creator.scss";
 const template = require("./creator.html");
 // import template from "./creator.html";
 

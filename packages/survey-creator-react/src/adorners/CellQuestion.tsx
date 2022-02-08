@@ -5,7 +5,7 @@ import {
   ReactElementFactory,
   SurveyElementBase
 } from "survey-react-ui";
-import { QuestionAdornerViewModel, toggleHovered } from "@survey/creator";
+import { QuestionAdornerViewModel, toggleHovered } from "survey-creator-core";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { QuestionAdornerComponentProps } from "./Question";
 

@@ -1,7 +1,7 @@
 export let Version: string;
 Version = `${process.env.VERSION}`;
 
-import "@survey/creator/survey-creator-core.css";
+// import "@survey/creator/survey-creator-core.css";
 
 export * from "../SurveyCreator";
 
@@ -61,7 +61,7 @@ export {
   IPropertyGridEditor,
   ToolboxToolViewModel,
   PropertyGridEditorCollection
-} from "@survey/creator";
+} from "survey-creator-core";
 
 //Obsolete
-export { StylesManager } from "@survey/creator";
+export { StylesManager } from "survey-creator-core";

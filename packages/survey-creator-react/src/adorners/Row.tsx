@@ -1,4 +1,4 @@
-import { RowViewModel } from "@survey/creator";
+import { RowViewModel } from "survey-creator-core";
 import React from "react";
 import { Base, QuestionRowModel } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";

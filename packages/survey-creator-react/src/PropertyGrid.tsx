@@ -1,5 +1,5 @@
 import React from "react";
-import { PropertyGridViewModel } from "@survey/creator";
+import { PropertyGridViewModel } from "survey-creator-core";
 import { Base, SurveyModel } from "survey-core";
 import { Survey, SurveyElementBase, ReactQuestionFactory, SurveyQuestionButtonGroup, ReactElementFactory } from "survey-react-ui";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { CreatorBase } from "@survey/creator";
+import { CreatorBase } from "survey-creator-core";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";
 import { Base, SurveyModel } from "survey-core";
 import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";

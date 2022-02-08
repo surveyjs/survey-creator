@@ -1,6 +1,6 @@
 import { Serializer, QuestionFactory } from "survey-core";
 import { QuestionImplementor, SurveyTemplateText } from "survey-knockout-ui";
-import { editorLocalization, QuestionLinkValueModel } from "@survey/creator";
+import { editorLocalization, QuestionLinkValueModel } from "survey-creator-core";
 const questionTemplate = require("./question-link-value.html");
 
 export class QuestionLinkValue extends QuestionLinkValueModel {

@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 var germanTranslation = {
   //survey templates
