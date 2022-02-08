@@ -19,6 +19,8 @@ import {
 import { parse } from "papaparse";
 import { settings } from "../../src/settings";
 
+import "survey-core/survey.i18n";
+
 test("Text question localization properties", () => {
   const question: QuestionTextModel = new QuestionTextModel("q1");
   const group: TranslationGroup = new TranslationGroup(question.name, question);
