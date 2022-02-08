@@ -458,6 +458,7 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+      npm run build:i18n
       npm run build
     displayName: 'Build CreatorV2 React'
 
@@ -641,6 +642,7 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
+      npm run build:i18n
       npm run build
     displayName: 'Build CreatorV2 Knockout'
 
