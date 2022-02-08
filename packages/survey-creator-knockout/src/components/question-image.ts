@@ -3,7 +3,7 @@ import {
   SurveyTemplateRendererViewModel,
   QuestionImageModel
 } from "survey-core";
-import { QuestionImageAdornerViewModel } from "@survey/creator";
+import { QuestionImageAdornerViewModel } from "survey-creator-core";
 import { createQuestionViewModel } from "./question";
 const questionTemplate = require("./question.html");
 const template = require("./question-image.html");

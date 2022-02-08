@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var tgStrings = {
   // strings for survey templates

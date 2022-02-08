@@ -5,7 +5,7 @@ import {
   SurveyElementBase,
   Survey
 } from "survey-react-ui";
-import { Translation } from "@survey/creator";
+import { Translation } from "survey-creator-core";
 
 export class TabTranslationComponent extends SurveyElementBase<any, any> {
   private get model(): Translation {
@@ -23,7 +23,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     );
   }
   renderElementContent(): JSX.Element {
-    if(this.model.isEmpty) {
+    if (this.model.isEmpty) {
       return (
         <div className="st-no-strings">
           <span>{this.model.noStringsText}</span>

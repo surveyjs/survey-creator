@@ -1,4 +1,4 @@
-import { ImageItemValueWrapperViewModel } from "@survey/creator";
+import { ImageItemValueWrapperViewModel } from "survey-creator-core";
 import React from "react";
 import { QuestionSelectBase, Base, ImageItemValue } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";

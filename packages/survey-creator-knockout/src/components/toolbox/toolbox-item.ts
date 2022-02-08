@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { SurveyCreator } from "../../creator";
-import { editorLocalization } from "@survey/creator";
-import { IQuestionToolboxItem } from "@survey/creator";
+import { editorLocalization } from "survey-creator-core";
+import { IQuestionToolboxItem } from "survey-creator-core";
 const template = require("./toolbox-item.html");
 
 export class KnockoutToolboxItemViewModel {

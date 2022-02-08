@@ -259,7 +259,7 @@ export var enStrings = {
     value: "Value",
     text: "Text",
     rowid: "Row ID",
-    imageLink: "Image Link",
+    imageLink: "Image (video) link",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
     itemView: "View item: {0}",

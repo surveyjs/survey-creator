@@ -1,4 +1,4 @@
-import { ObjectSelectorModel } from "@survey/creator";
+import { ObjectSelectorModel } from "survey-creator-core";
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
 const template = require("./object-selector.html");

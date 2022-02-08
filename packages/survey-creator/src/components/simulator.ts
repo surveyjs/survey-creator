@@ -60,19 +60,24 @@ export class SurveySimulatorComponent {
         ((this.landscapeOrientation ? device.frameWidth : device.frameHeight) /
           device.cssPixelRatio) *
         scale;
+      const calculatedScale = this.simulatorScaleEnabled ? scale * 2 : 1;
       return {
-        scale: this.simulatorScaleEnabled ? scale * 2 : 1,
+        scale: calculatedScale,
         width: width,
         height: height,
         frameWidth: frameWidth,
         frameHeight: frameHeight,
+        realWidth: width / calculatedScale,
+        realHeight: height / calculatedScale,
+        widthWithLandscape: this.landscapeOrientation ? frameHeight : frameWidth,
+        heightWithLandscape: this.landscapeOrientation ? frameWidth : frameHeight,
         cssClass: ko.computed(() => {
           return device.cssClass + (this.landscapeOrientation ? " svd-simulator-frame-landscape" : "");
         })
       };
     });
 
-    if(!!_toolbarHolder) {
+    if (!!_toolbarHolder) {
       this._options.survey = this._toolbarHolder.koSurvey;
       ko.computed(() => {
         this.simulatorEnabled = _toolbarHolder.showSimulator();
@@ -126,7 +131,7 @@ export class SurveySimulatorComponent {
     return this._options.device();
   }
   set activeDevice(device: string) {
-    if(this.survey && typeof this.survey.setIsMobile === "function") {
+    if (this.survey && typeof this.survey.setIsMobile === "function") {
       this.survey.setIsMobile(device !== "desktop");
     }
     this._options.device(device);

@@ -1,6 +1,6 @@
 import {
   QuestionAdornerViewModel
-} from "@survey/creator";
+} from "survey-creator-core";
 import React from "react";
 import {
   QuestionAdornerComponent,

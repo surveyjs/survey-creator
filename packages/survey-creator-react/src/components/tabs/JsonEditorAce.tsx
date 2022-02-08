@@ -1,7 +1,7 @@
 import React from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { AceJsonEditorModel } from "@survey/creator";
+import { AceJsonEditorModel } from "survey-creator-core";
 
 interface ITabJsonEditorAceComponentProps {
   data: AceJsonEditorModel;

@@ -15,10 +15,14 @@ export enum QuestionConvertMode {
   CompatibleTypes
 }
 export var settings = {
-  traslation: {
+  translation: {
     sortByName: false,
     //Set it to \xef\xbb\xbf; to tell system that it is UTF8 file. You can use other prefix as well
-    exportPrefix: ""
+    exportPrefix: "",
+    /**
+     * The maximum number of locales that user can select at once for translation
+     */
+    maximumSelectedLocales: 7
   },
   operators: {
     empty: [],

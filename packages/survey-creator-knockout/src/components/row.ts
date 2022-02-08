@@ -10,7 +10,7 @@ import {
   CreatorBase,
   ItemValueWrapperViewModel,
   RowViewModel
-} from "@survey/creator";
+} from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
 
 const template = require("./row.html");

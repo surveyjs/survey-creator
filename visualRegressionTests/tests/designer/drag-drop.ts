@@ -125,3 +125,57 @@ test("Choices: Ranking", async (t) => {
   await t.dragToElement(FirstItem.find(".svc-item-value-controls__drag"), FirstItem);
   await checkElementScreenshot("drag-drop-item-values-ranking--dragging.png", QRoot, t);
 });
+
+test("Matrix: Property Grid: Choices", async (t) => {
+  await t.resizeWindow(2560, 1440);
+
+  const patchMatrixDragDropToDisableDrop = ClientFunction(() => {
+    const matrix = window["creator"].designerPropertyGrid.survey.getAllQuestions().filter((q) => q.name === "choices")[0];
+    matrix.dragDropMatrixRows.drop = () => { };
+  });
+
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            "type": "checkbox",
+            "name": "question1",
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Question1 = Selector("[data-name=\"question1\"]");
+  await t.click(Question1, { speed: 0.5 });
+
+  const ChoicesTab = Selector("h4").withExactText("Choices");
+  await t.click(ChoicesTab);
+
+  await patchMatrixDragDropToDisableDrop();
+
+  const Item1 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
+  const Item2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
+  const Item3 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
+
+  let DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
+  await t
+    .hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2)
+    .dragToElement(DragZoneItem2, Item1, {
+      offsetX: 5,
+      offsetY: 5,
+      destinationOffsetX: 20,
+      destinationOffsetY: 20,
+      speed: 0.5
+    });
+
+  await checkElementScreenshot("drag-drop-matrix-pg-choices.png", Selector("[data-name=\"choices\"]"), t);
+});

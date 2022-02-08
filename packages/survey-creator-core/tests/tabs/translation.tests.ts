@@ -1,8 +1,10 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { settings } from "../../src/settings";
 import { CreatorTester } from "../creator-tester";
+
+import "survey-core/survey.i18n";
 export * from "../../src/localization/russian";
 
 test("Fire callback on base objects creation", () => {
@@ -331,19 +333,77 @@ test("Translation update filterPageActiontitle after activated", () => {
       {
         name: "page1",
         elements: [{ type: "checkbox", name: "question1" }]
-      }
+      },
     ]
   };
-  let tabTranslationPlugin = new TabTranslationPlugin(creator);
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  const filterPageAction = tabTranslationPlugin["filterPageAction"];
+  const filterPageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
   tabTranslationPlugin.activate();
-  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages");
-
+  expect(filterPageAction.title).toEqual("All Pages");
+  expect(filterPageList.selectedItem.title).toEqual("All Pages");
   tabTranslationPlugin.model.filteredPage = creator.survey.pages[0];
-  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("page1");
+  expect(filterPageAction.title).toEqual("page1");
 
   tabTranslationPlugin.deactivate();
   tabTranslationPlugin.activate();
-  expect(tabTranslationPlugin["filterPageAction"].title).toEqual("Show all pages");
+  expect(filterPageAction.title).toEqual("All Pages");
+  expect(filterPageList.selectedItem.title).toEqual("All Pages");
+});
+test("Translation update filterStringsAction after activated", () => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    completedHtml: "Test",
+    pages: [
+      {
+        name: "page1",
+        elements: [{ type: "checkbox", name: "question1" }]
+      },
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  const filterStringsAction = tabTranslationPlugin["filterStringsAction"];
+  const filterStringsList = <ListModel>tabTranslationPlugin["stringsPopupModel"].contentComponentData.model;
+  tabTranslationPlugin.activate();
+  expect(filterStringsAction.title).toEqual("Used Strings Only");
+  expect(filterStringsList.selectedItem.title).toEqual("Used Strings Only");
+  tabTranslationPlugin.model.showAllStrings = true;
+  expect(filterStringsAction.title).toEqual("All Strings");
+
+  tabTranslationPlugin.deactivate();
+  tabTranslationPlugin.activate();
+
+  expect(filterStringsAction.title).toEqual("Used Strings Only");
+  expect(filterStringsList.selectedItem.title).toEqual("Used Strings Only");
+});
+test("Translation filterPage action content and visiblity after activate", () => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    completedHtml: "Test",
+    pages: [
+      {
+        name: "page1",
+        title: "page1",
+        elements: [{ type: "checkbox", name: "question1" }]
+      },
+      {
+        name: "page2",
+        title: "page2",
+        elements: [{ type: "checkbox", name: "question1" }]
+      }
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  const pageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
+  const filterPageAction = <Action>tabTranslationPlugin["filterPageAction"];
+  tabTranslationPlugin.activate();
+  expect(pageList.actions.map((action: Action) => action.title)).toEqual(["All Pages", "page1", "page2"]);
+  expect(filterPageAction.visible).toBeTruthy();
+  tabTranslationPlugin.deactivate();
+  creator.survey.removePage(creator.survey.getPageByName("page2"));
+  tabTranslationPlugin.activate();
+  expect(pageList.actions.map((action: Action) => action.title)).toEqual(["All Pages", "page1"]);
+  expect(filterPageAction.visible).toBeFalsy();
 });
 
 test("StringsHeaderSurvey layout", () => {
@@ -437,8 +497,8 @@ test("Make invisible locales in language selector, that has been already choosen
   surveyLocalization.supportedLocales = [];
 });
 test("stringsSurvey - text question dataList property, default", () => {
-  const oldValue = settings.traslation.sortByName;
-  settings.traslation.sortByName = true;
+  const oldValue = settings.translation.sortByName;
+  settings.translation.sortByName = true;
   const survey = new SurveyModel({
     elements: [
       {
@@ -473,11 +533,11 @@ test("stringsSurvey - text question dataList property, default", () => {
   expect(question.dataList).toHaveLength(3);
   expect(question.dataList[2]).toEqual("Item3");
 
-  settings.traslation.sortByName = oldValue;
+  settings.translation.sortByName = oldValue;
 });
 test("stringsSurvey - text question dataList property, several locales", () => {
-  const oldValue = settings.traslation.sortByName;
-  settings.traslation.sortByName = true;
+  const oldValue = settings.translation.sortByName;
+  settings.translation.sortByName = true;
 
   const survey = new SurveyModel({
     elements: [
@@ -516,7 +576,7 @@ test("stringsSurvey - text question dataList property, several locales", () => {
     de: ["Item1-de", "Item2-de", "Item3-de"],
   });
 
-  settings.traslation.sortByName = oldValue;
+  settings.translation.sortByName = oldValue;
 });
 test("Respect property maxLength attrigute in stringsSurvey comment questions", () => {
   Serializer.findProperty("question", "title").maxLength = 10;
@@ -578,8 +638,8 @@ const surveyJson = {
   ]
 };
 test("translationStringVisibilityCallback", () => {
-  const oldValue = settings.traslation.sortByName;
-  settings.traslation.sortByName = true;
+  const oldValue = settings.translation.sortByName;
+  settings.translation.sortByName = true;
 
   const survey = new SurveyModel(surveyJson);
 
@@ -608,7 +668,7 @@ test("translationStringVisibilityCallback", () => {
   expect(translation.root.groups[0].items[0].name).toEqual("title");
   expect(translation.root.groups[1].name).toEqual("page2");
 
-  settings.traslation.sortByName = oldValue;
+  settings.translation.sortByName = oldValue;
 });
 
 test("onTranslationStringVisibility", () => {
@@ -795,4 +855,56 @@ test("localize placeholders", () => {
   expect(surveyCell1.value).toEqual(null);
   expect(surveyCell2.placeHolder).toEqual("Редактирование");
   expect(surveyCell2.value).toEqual(null);
+});
+test("Test settings.translation.maximumSelectedLocales", () => {
+  const oldMaximumSelectedLocales = settings.translation.maximumSelectedLocales;
+  settings.translation.maximumSelectedLocales = 2;
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title en",
+          de: "title de",
+          fr: "title fr",
+          es: "title es",
+          it: "title it"
+        }
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  expect(translation.localesQuestion.visibleChoices).toHaveLength(4);
+  expect(translation.localesQuestion.value).toHaveLength(2);
+  expect(translation.localesQuestion.value[0]).toEqual("de");
+  expect(translation.localesQuestion.value[1]).toEqual("fr");
+  settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
+});
+test("Translation show All strings and property visibility", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title en",
+          de: "title de",
+          fr: "title fr",
+          es: "title es",
+          it: "title it"
+        }
+      }
+    ]
+  };
+  creator.onTranslationLocaleInitiallySelected.add((sender, options) => {
+    options.isSelected = options.locale === "de";
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  expect(translation.localesQuestion.visibleChoices).toHaveLength(4);
+  expect(translation.localesQuestion.value).toHaveLength(1);
+  expect(translation.localesQuestion.value[0]).toEqual("de");
 });

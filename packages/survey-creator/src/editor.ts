@@ -1039,6 +1039,12 @@ export class SurveyCreator
     this.isAutoSave && this.doAutoSave();
   }
   /**
+   * Returns true if Creator is currently doing undo or redo opertaions
+   */
+  public get isProcessingUndoRedo(): boolean {
+    return this.undoRedoManager.isProcessingUndoRedo;
+  }
+  /**
    * Undo the latest user operation. Returns true if it performes successful.
    */
   public undo = () => {

@@ -2,9 +2,9 @@ import {
   CreatorBase,
   editorLocalization,
   IQuestionToolboxItem
-} from "@survey/creator";
+} from "survey-creator-core";
 import React, { CSSProperties } from "react";
-import { ToolboxToolViewModel } from "@survey/creator";
+import { ToolboxToolViewModel } from "survey-creator-core";
 import {
   Action,
   Base,

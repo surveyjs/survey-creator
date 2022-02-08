@@ -15,6 +15,8 @@ module.exports = {
     "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
     "react": "<rootDir>/node_modules/react",
     "survey-core": "<rootDir>/node_modules/survey-core",
+    "survey-creator-core": "<rootDir>/node_modules/survey-creator-core",
+    "survey-react-ui": "<rootDir>/node_modules/survey-react-ui",
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],

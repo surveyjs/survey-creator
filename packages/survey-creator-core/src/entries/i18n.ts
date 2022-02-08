@@ -1,0 +1,23 @@
+//localization
+import "../localization/arabic";
+import "../localization/danish";
+import "../localization/french";
+import "../localization/german";
+import "../localization/finnish";
+import "../localization/italian";
+import "../localization/indonesian";
+import "../localization/korean";
+import "../localization/persian";
+import "../localization/polish";
+import "../localization/portuguese";
+import "../localization/simplified-chinese";
+import "../localization/spanish";
+import "../localization/swedish";
+import "../localization/traditional-chinese";
+import "../localization/turkish";
+import "../localization/norwegian";
+import "../localization/hungarian";
+import "../localization/russian";
+import "../localization/tajik";
+import "../localization/dutch";
+import "../localization/croatian";

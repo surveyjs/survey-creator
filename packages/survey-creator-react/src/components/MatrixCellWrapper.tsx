@@ -1,6 +1,6 @@
 import React from "react";
 import { QuestionSelectBase, Base, ItemValue, SurveyModel } from "survey-core";
-import { MatrixCellWrapperViewModel, toggleHovered } from "@survey/creator";
+import { MatrixCellWrapperViewModel, toggleHovered } from "survey-creator-core";
 import {
   attachKey2click,
   ReactElementFactory,

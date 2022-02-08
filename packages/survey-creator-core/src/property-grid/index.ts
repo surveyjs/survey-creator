@@ -115,12 +115,12 @@ export interface IPropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any;
-  showModalPropertyEditor(
+  showModalPropertyEditor?: (
     editor: IPropertyGridEditor,
     property: JsonObjectProperty,
     question: Question,
     options: ISurveyCreatorOptions
-  ): any;
+  ) => any;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   onAfterRenderQuestion?: (
     obj: Base,
@@ -288,16 +288,12 @@ export var PropertyGridEditorCollection = {
       res.onValueChanged(obj, prop, question);
     }
   },
-  onMasterValueChanged(
-    obj: Base,
-    prop: JsonObjectProperty,
-    question: Question
-  ) {
+  onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onMasterValueChanged) {
       res.onMasterValueChanged(obj, prop, question);
     }
-  }
+  },
 };
 
 export class PropertyGridTitleActionsCreator {
@@ -573,10 +569,10 @@ export class PropertyJSONGenerator {
         false,
         context
       );
-      if(propDef.onSameLine) {
+      if (propDef.onSameLine) {
         propJSON.startWithNewLine = false;
         this.updateQuestionJSONOnSameLine(propJSON);
-        if(panel.elements.length > 0) {
+        if (panel.elements.length > 0) {
           this.updateQuestionJSONOnSameLine(panel.elements[panel.elements.length - 1]);
         }
       }
@@ -741,6 +737,14 @@ export class PropertyGridModel {
       json.mode = "display";
     }
     if (!!this.surveyValue) {
+      this.surveyValue.onValidateQuestion.clear();
+      this.surveyValue.onValueChanging.clear();
+      this.surveyValue.onValueChanged.clear();
+      this.surveyValue.onMatrixCellValueChanging.clear();
+      this.surveyValue.onMatrixCellValidate.clear();
+      this.surveyValue.onMatrixCellValueChanged.clear();
+      this.surveyValue.editingObj = undefined;
+      this.surveyValue.data = {};
       this.surveyValue.dispose();
     }
     this.surveyValue = this.createSurvey(json);
@@ -805,7 +809,8 @@ export class PropertyGridModel {
     this.updateDependedPropertiesEditors();
     this.survey.onFocusInPanel.add((sender, options) => {
       if (this.currentlySelectedPanel !== options.panel) {
-        this.currentlySelectedProperty = options.panel.getFirstQuestionToFocus().name;
+        const qustionToFocus = options.panel.getFirstQuestionToFocus();
+        this.currentlySelectedProperty = !!qustionToFocus ? qustionToFocus.name : "";
         this.currentlySelectedPanel = options.panel;
       }
     });
@@ -920,15 +925,15 @@ export class PropertyGridModel {
   }
   private updateDependedPropertiesEditor(editor: Question) {
     const obj: Base = (<any>editor).obj;
-    if(!obj) return;
+    if (!obj) return;
     const property: JsonObjectProperty = (<any>editor).property;
-    if(!!property && property.onPropertyEditorUpdate) {
+    if (!!property && property.onPropertyEditorUpdate) {
       property.onPropertyEditorUpdate(obj, editor);
     }
   }
   private updateDependedPropertiesEditors() {
     const questions = this.survey.getAllQuestions();
-    for(var i = 0; i < questions.length; i ++) {
+    for (var i = 0; i < questions.length; i++) {
       this.updateDependedPropertiesEditor(questions[i]);
     }
   }
@@ -1026,7 +1031,7 @@ export class PropertyGridModel {
     return (<any>row).allowDeleteRow;
   }
   private getMatrixAllowEditRow(question: Question, row: MatrixDynamicRowModel): boolean {
-    if(question.readOnly)
+    if (question.readOnly)
       return false;
     if ((<any>row).allowEditRow === undefined) {
       this.calculateMatrixAllowOperations(question, row);
@@ -1148,12 +1153,12 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     return false;
   }
   onUpdateQuestionCssClasses(obj: Base, options: any) {
-    if(!this.isSupportGrouping()) return;
+    if (!this.isSupportGrouping()) return;
     const question = options.question;
-    if(!question || !question.parent) return;
+    if (!question || !question.parent) return;
     const index = question.parent.elements.indexOf(question);
-    if(index < 1) return;
-    if(question.parent.elements[index - 1].getType() !== question.getType()) return;
+    if (index < 1) return;
+    if (question.parent.elements[index - 1].getType() !== question.getType()) return;
     options.cssClasses.mainRoot += " spg-row-narrow__question";
   }
 }

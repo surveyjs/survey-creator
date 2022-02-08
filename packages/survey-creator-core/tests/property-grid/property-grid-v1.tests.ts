@@ -1671,7 +1671,7 @@ test("SurveyHelper.applyItemValueArray", () => {
   );
 });
 
-test("property editor propertyHelpText", () => {
+test("property editor titleQuestion.description", () => {
   PropertiesHelpTexts.instance.reset();
   var survey = new SurveyModel();
   survey.addNewPage("p");
@@ -1717,7 +1717,7 @@ test("property editor propertyHelpText", () => {
   ).toBeTruthy();
 });
 
-test("property editor propertyHelpText", () => {
+test("binding property editor", () => {
   var tester = new BindingsTester();
   tester.bindings.setBinding("property1", "q1");
   var propertyGrid = new PropertyGridModelTester(tester);
