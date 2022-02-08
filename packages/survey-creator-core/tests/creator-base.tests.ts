@@ -1104,6 +1104,18 @@ test("Add question with default choices", (): any => {
   expect(question.getType()).toEqual("radiogroup");
   expect(question.visibleChoices.length).toEqual(6);
 });
+test("Add question based on json in toolbox", (): any => {
+  const creator = new CreatorTester();
+  const toolboxItem = creator.toolbox.getItemByName("text");
+  toolboxItem.json.placeHolder = "Test holder";
+  const survey: SurveyModel = <SurveyModel>creator.survey;
+  creator.currentAddQuestionType = "text";
+  creator.addNewQuestionInPage(() => { });
+  const question = <QuestionTextModel>survey.getAllQuestions()[0];
+  expect(question.getType()).toEqual("text");
+  expect(question.placeHolder).toEqual("Test holder");
+  delete toolboxItem.json.placeHolder;
+});
 test("getElementWrapperComponentName", (): any => {
   expect(getElementWrapperComponentName(null, "logo-image", false)).toEqual("svc-logo-image");
   expect(getElementWrapperComponentName(null, "logo-image", true)).toEqual("svc-logo-image");
