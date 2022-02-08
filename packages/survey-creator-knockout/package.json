@@ -47,7 +47,6 @@
     "@storybook/addon-storysource": "6.0.21",
     "@storybook/addon-viewport": "6.0.21",
     "@storybook/knockout": "file:./storybook-knockout",
-    "@survey/creator": "../survey-creator-core/build",
     "@types/ace": "0.0.44",
     "@types/jest": "23.3.3",
     "@types/jquery": "3.3.29",
@@ -97,6 +96,7 @@
     "knockout": "^3.5.1",
     "rmodal": "^1.0.36",
     "survey-core": "../../../survey-library/build/survey-core",
+    "survey-creator-core": "../survey-creator-core/build",
     "survey-knockout-ui": "../../../survey-library/build/survey-knockout-ui"
   },
   "standard-version": {

@@ -1,4 +1,4 @@
-import { SidebarModel } from "@survey/creator";
+import { SidebarModel } from "survey-creator-core";
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
 

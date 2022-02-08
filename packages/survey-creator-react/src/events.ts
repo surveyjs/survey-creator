@@ -1,4 +1,4 @@
-import { IPortableDragEvent, IPortableMouseEvent } from "@survey/creator";
+import { IPortableDragEvent, IPortableMouseEvent } from "survey-creator-core";
 
 export class ReactMouseEvent implements IPortableMouseEvent {
   constructor(public event: React.MouseEvent<HTMLDivElement, MouseEvent>) {}

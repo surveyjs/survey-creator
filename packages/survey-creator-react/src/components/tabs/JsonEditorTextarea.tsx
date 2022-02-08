@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { TextareaJsonEditorModel } from "@survey/creator";
+import { TextareaJsonEditorModel } from "survey-creator-core";
 
 interface ITabJsonEditorTextareaComponentProps {
   data: TextareaJsonEditorModel;

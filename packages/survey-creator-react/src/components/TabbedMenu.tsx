@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSProperties } from "react";
-import { ITabbedMenuItem, TabbedMenuItem, TabbedMenuContainer } from "@survey/creator";
+import { ITabbedMenuItem, TabbedMenuItem, TabbedMenuContainer } from "survey-creator-core";
 import {
   Base,
   IAction,

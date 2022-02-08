@@ -51,7 +51,7 @@ export * from "../utils/survey-widget";
 export * from "../utils/utils";
 
 export * from "../creator";
-export * as core from "@survey/creator";
+export * as core from "survey-creator-core";
 export {
   editorLocalization,
   editorLocalization as localization,
@@ -64,11 +64,11 @@ export {
   IPropertyGridEditor,
   ToolboxToolViewModel,
   PropertyGridEditorCollection
-} from "@survey/creator";
+} from "survey-creator-core";
 //Obsolete
-export { StylesManager } from "@survey/creator";
+export { StylesManager } from "survey-creator-core";
 
-import "@survey/creator/survey-creator-core.css";
+// import "survey-creator-core/survey-creator-core.css";
 
 // export * from "@survey/creator/tabs/embed";
 
