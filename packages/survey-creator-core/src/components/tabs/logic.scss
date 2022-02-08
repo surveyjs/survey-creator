@@ -1,6 +1,25 @@
 @import "../../variables.scss";
 @import "../../colors.scss";
 
+.sl-table {
+  width: 50%;
+  margin: 0 25%;
+}
+.sl-table__row {
+  position: relative;
+}
+.sl-table__cell--actions {
+  position: absolute;
+  &:first-child {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  &:last-child {
+    right: 0;
+    transform: translateX(100%);
+  }
+}
+
 .sl-table__cell.st-table__cell--actions:first-child .sv-action-bar {
   margin-top: calcSize(-0.5);
   padding-right: calcSize(4);
@@ -83,7 +102,6 @@
 }
 
 .sl-table {
-  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;

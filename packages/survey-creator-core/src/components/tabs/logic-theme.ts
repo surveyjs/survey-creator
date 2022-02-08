@@ -240,7 +240,7 @@ export var logicCss = {
     detailIcon: "sl-detail-panel__icon",
     detailIconExpanded: "sl-detail-panel__icon--expanded",
     detailPanelCell: "sl-table__cell--detail-panel",
-    actionsCell: "sl-table__cell st-table__cell--actions",
+    actionsCell: "sl-table__cell sl-table__cell--actions st-table__cell--actions",
     buttonAdd: "sl-matrixdynamic__add-btn",
     buttonRemove: "sl-matrixdynamic__remove-btn",
     iconAdd: "",
