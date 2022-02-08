@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { CreatorBase, StringEditorViewModelBase } from "@survey/creator";
+import { CreatorBase, StringEditorViewModelBase } from "survey-creator-core";
 import { LocalizableString } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
 const template = require("./string-editor.html");

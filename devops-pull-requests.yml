@@ -303,7 +303,7 @@ jobs:
   - task: CopyFiles@2
     inputs:
       SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@survey/creator'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-creator-core'
       OverWrite: true
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'copy survey-creator-core in case of npm cache'
@@ -340,7 +340,6 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-      npm run build:i18n
       npm run build
     displayName: 'Build CreatorV2 React'
 
@@ -451,7 +450,7 @@ jobs:
   - task: CopyFiles@2
     inputs:
       SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/@survey/creator'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-creator-core'
       OverWrite: true
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'copy survey-creator-core in case of npm cache'
@@ -489,7 +488,6 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-      npm run build:i18n
       npm run build
     displayName: 'Build CreatorV2 Knockout'
 

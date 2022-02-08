@@ -34,7 +34,7 @@ import {
   getElementWrapperComponentData,
   getItemValueWrapperComponentName,
   getItemValueWrapperComponentData
-} from "@survey/creator";
+} from "survey-creator-core";
 import { TabbedMenuComponent } from "./components/TabbedMenu";
 import { editableStringRendererName } from "./components/StringEditor";
 import { NotifierComponent } from "./components/Notifier";

@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { SurveyResultsModel } from "@survey/creator";
+import { SurveyResultsModel } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
 const templateHtml = require("./results.html");
 const rowTemplateHtml = require("./results-table-row.html");

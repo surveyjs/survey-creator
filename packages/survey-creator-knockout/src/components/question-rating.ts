@@ -1,4 +1,4 @@
-import { QuestionRatingAdornerViewModel } from "@survey/creator";
+import { QuestionRatingAdornerViewModel } from "survey-creator-core";
 import * as ko from "knockout";
 import {
   SurveyTemplateRendererViewModel,

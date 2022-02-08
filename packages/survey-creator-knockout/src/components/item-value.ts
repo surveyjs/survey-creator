@@ -5,7 +5,7 @@ import {
   SurveyTemplateRendererViewModel,
   SurveyModel
 } from "survey-core";
-import { CreatorBase, ItemValueWrapperViewModel } from "@survey/creator";
+import { CreatorBase, ItemValueWrapperViewModel } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
 import { KnockoutDragEvent } from "../events";
 

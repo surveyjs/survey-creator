@@ -1,4 +1,4 @@
-import { svgBundle } from "@survey/creator";
+import { svgBundle } from "survey-creator-core";
 import * as ko from "knockout";
 
 ko.components.register("svc-svg-bundle", {

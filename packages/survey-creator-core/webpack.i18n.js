@@ -22,6 +22,10 @@ const config = {
 module.exports = function (options) {
   options.platform = "i18n";
   options.libraryName = "SurveyCreatorLocales";
+
+  const mainConfig = webpackCommonConfigCreator(options);
+  delete mainConfig.entry[packageJson.name];
+  mainConfig.plugins.shift();
  
-  return merge(webpackCommonConfigCreator(options), config);
+  return merge(mainConfig, config);
 };

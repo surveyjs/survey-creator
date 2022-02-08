@@ -1,7 +1,6 @@
 import * as ko from "knockout";
 import { ItemValue, RendererFactory } from "survey-core";
 
-import "./dropdown-editor.scss";
 const template = require("./dropdown.html");
 
 export class DropdownEditorViewModel {

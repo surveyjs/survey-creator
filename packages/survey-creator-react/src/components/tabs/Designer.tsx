@@ -5,7 +5,7 @@ import {
   SurveyElementBase,
   SurveyHeader
 } from "survey-react-ui";
-import { CreatorBase, TabDesignerViewModel } from "@survey/creator";
+import { CreatorBase, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../page-navigator/PageNavigator";
 import { SurveyNavigation } from "../Navigation";
 
