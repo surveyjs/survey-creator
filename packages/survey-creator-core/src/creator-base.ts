@@ -2679,15 +2679,14 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
     if (!type)
       type = this.currentAddQuestionType;
+    if(!type) type = "text";
     beforeAdd(type);
-    let newElement = Survey.ElementFactory.Instance.createElement(
-      type || "text",
-      "q1"
-    );
-    if (newElement)
-      this.setNewNames(newElement);
-    else
-      newElement = this.createNewElement({ type: type });
+    let json = { type: type };
+    const toolboxItem = this.toolbox.getItemByName(type);
+    if(!!toolboxItem && !!toolboxItem.json) {
+      json = toolboxItem.json;
+    }
+    let newElement = this.createNewElement(json);
     this.clickToolboxItem(newElement, panel);
   }
   createIActionBarItemByClass(className: string, title: string = null): Action {
