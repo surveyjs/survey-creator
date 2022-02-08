@@ -4,6 +4,8 @@ import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components
 import { IAction, ListModel } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 
+import "survey-core/survey.i18n";
+
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
