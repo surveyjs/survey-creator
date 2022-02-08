@@ -6,7 +6,7 @@ import {
   SurveyElementBase,
   attachKey2click
 } from "survey-react-ui";
-import { TestSurveyTabViewModel } from "@survey/creator";
+import { TestSurveyTabViewModel } from "survey-creator-core";
 import { SurveySimulator } from "./SurveySimulator";
 import { SurveyResults } from "../Results";
 

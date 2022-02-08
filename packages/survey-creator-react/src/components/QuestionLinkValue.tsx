@@ -3,7 +3,7 @@ import {
   ReactQuestionFactory,
   SurveyQuestionElementBase
 } from "survey-react-ui";
-import { editorLocalization, QuestionLinkValueModel } from "@survey/creator";
+import { editorLocalization, QuestionLinkValueModel } from "survey-creator-core";
 import { ActionButton } from "./ActionButton";
 
 export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {

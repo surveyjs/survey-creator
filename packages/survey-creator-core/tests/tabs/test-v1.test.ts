@@ -3,6 +3,8 @@ import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 
+import "survey-core/survey.i18n";
+
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   var testPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();

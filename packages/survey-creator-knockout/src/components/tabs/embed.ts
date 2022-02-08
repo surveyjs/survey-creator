@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
-import { TabEmbedPlugin } from "@survey/creator";
+import { TabEmbedPlugin } from "survey-creator-core";
 const template: string = require("./embed.html");
 // import template from "./json-editor-textarea.html";
 

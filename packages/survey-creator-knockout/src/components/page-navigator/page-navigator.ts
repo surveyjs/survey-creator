@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { PageNavigatorViewModel, PagesController } from "@survey/creator";
+import { PageNavigatorViewModel, PagesController } from "survey-creator-core";
 import {
   PageModel,
   IAction,

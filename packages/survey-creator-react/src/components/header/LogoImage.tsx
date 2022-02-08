@@ -1,7 +1,7 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, LogoImage, SvgIcon, attachKey2click } from "survey-react-ui";
-import { CreatorBase, LogoImageViewModel } from "@survey/creator";
+import { CreatorBase, LogoImageViewModel } from "survey-creator-core";
 
 interface ILogoImageComponentProps {
   data: CreatorBase<SurveyModel>;

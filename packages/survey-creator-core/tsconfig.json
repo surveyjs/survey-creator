@@ -8,7 +8,13 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "moduleResolution": "node",
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "survey-creator-core": [
+        "./src/editorLocalization.ts"
+      ],
+    }
   },
   "include": [
     "src/**/*.ts"

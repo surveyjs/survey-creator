@@ -4,7 +4,7 @@ import {
   CreatorViewModel,
   DropdownEditorViewModel
 } from "../src/entries";
-import { PropertyGridModel } from "@survey/creator";
+import { PropertyGridModel } from "survey-creator-core";
 
 import "../node_modules/survey-core/defaultV2.css";
 settings.lazyRowsRendering = true;

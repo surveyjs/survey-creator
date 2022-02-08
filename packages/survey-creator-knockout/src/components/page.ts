@@ -1,9 +1,8 @@
 import * as ko from "knockout";
 import { ImplementorBase, Survey } from "survey-knockout-ui";
 import { SurveyCreator } from "../creator";
-import { PageViewModel, SurveyHelper, toggleHovered } from "@survey/creator";
+import { PageViewModel, SurveyHelper, toggleHovered } from "survey-creator-core";
 
-//import "./page.scss";
 const template = require("./page.html");
 
 ko.components.register("svc-page", {

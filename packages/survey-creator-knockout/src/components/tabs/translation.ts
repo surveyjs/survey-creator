@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { TabTranslationPlugin } from "@survey/creator";
+import { TabTranslationPlugin } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
 import { Base } from "survey-core";
 var templateHtml = require("./translation.html");

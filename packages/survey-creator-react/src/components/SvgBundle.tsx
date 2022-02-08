@@ -1,6 +1,6 @@
 
 import React from "react";
-import { svgBundle } from "@survey/creator";
+import { svgBundle } from "survey-creator-core";
 import { ReactElementFactory } from "survey-react-ui";
 
 export class SvgBundleComponent extends React.Component {

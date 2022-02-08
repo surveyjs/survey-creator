@@ -1,7 +1,7 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
 import { SurveyElementBase, } from "survey-react-ui";
-import { CreatorBase, Notifier } from "@survey/creator";
+import { CreatorBase, Notifier } from "survey-creator-core";
 
 export interface NotifierComponentProps {
   creator: CreatorBase<SurveyModel>;
@@ -9,7 +9,7 @@ export interface NotifierComponentProps {
 }
 
 export class NotifierComponent extends SurveyElementBase<
-    NotifierComponentProps,
+  NotifierComponentProps,
   any
 > {
   constructor(props: NotifierComponentProps) {
