@@ -48,20 +48,3 @@ export * from "../components/tabs/SurveySimulator";
 export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
-
-export {
-  editorLocalization,
-  editorLocalization as localization,
-  settings,
-  svgBundle,
-  SurveyLogic,
-  SurveyLogicUI,
-  SurveyQuestionEditorDefinition,
-  ISurveyCreatorOptions,
-  IPropertyGridEditor,
-  ToolboxToolViewModel,
-  PropertyGridEditorCollection
-} from "survey-creator-core";
-
-//Obsolete
-export { StylesManager } from "survey-creator-core";
