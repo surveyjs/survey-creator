@@ -55,9 +55,9 @@ const buildPlatformJson = {
     //TODO: Return back when release
     // "survey-core": "^" + packageJson.version,
     // "survey-react-ui": "^" + packageJson.version,
-    "survey-core": "^1.9.0",
-    "survey-react-ui": "^1.9.0",
-    "survey-creator-core": "^1.9.0",
+    "survey-core": "^1.9.10",
+    "survey-react-ui": "^1.9.10",
+    "survey-creator-core": "^1.9.10-beta.1",
     react: "^17.0.1",
     "react-dom": "^17.0.1"
   },

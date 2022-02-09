@@ -72,7 +72,7 @@ var buildPlatformJson = {
   },
   dependencies: {
     //"survey-core": "^" + packageJson.version,
-    "survey-core": "^1.9.8",
+    "survey-core": "^1.9.10",
   },
   devDependencies: {},
 };
