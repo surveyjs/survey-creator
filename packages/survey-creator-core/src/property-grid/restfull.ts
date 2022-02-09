@@ -24,7 +24,9 @@ var json = {
   },
 };
 
-ComponentCollection.Instance.add(json);
+if(!ComponentCollection.Instance.getCustomQuestionByName(json.name)) {
+  ComponentCollection.Instance.add(json);
+}
 
 export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuestion {
   public fit(prop: JsonObjectProperty): boolean {

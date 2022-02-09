@@ -51,30 +51,3 @@ export * from "../utils/survey-widget";
 export * from "../utils/utils";
 
 export * from "../creator";
-export * as core from "survey-creator-core";
-export {
-  editorLocalization,
-  editorLocalization as localization,
-  settings,
-  svgBundle,
-  SurveyLogicUI,
-  SurveyLogic,
-  SurveyQuestionEditorDefinition,
-  ISurveyCreatorOptions,
-  IPropertyGridEditor,
-  ToolboxToolViewModel,
-  PropertyGridEditorCollection
-} from "survey-creator-core";
-//Obsolete
-export { StylesManager } from "survey-creator-core";
-
-// import "survey-creator-core/survey-creator-core.css";
-
-// export * from "@survey/creator/tabs/embed";
-
-// export * from "@survey/creator/property-grid";
-// export * from "@survey/creator/property-grid/condition";
-// export * from "@survey/creator/property-grid/matrices";
-// //export * from "../property-grid/modal-action";
-// export * from "@survey/creator/property-grid/restfull";
-// export * from "@survey/creator/property-grid/values";

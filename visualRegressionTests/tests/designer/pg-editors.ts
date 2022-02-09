@@ -18,7 +18,7 @@ test("Properties on the same line", async (t) => {
   };
   await t.resizeWindow(2560, 1440);
   await ClientFunction(() => {
-    const qDef = window["SurveyCreator"].SurveyQuestionEditorDefinition.definition.text;
+    const qDef = window["SurveyCreatorCore"].SurveyQuestionEditorDefinition.definition.text;
     const props = qDef.properties;
     props.splice(0, 1, { name: "inputType", tab: "Input" });
     props.splice(1, 1, { name: "min", tab: "Input" });
