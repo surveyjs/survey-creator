@@ -1,7 +1,7 @@
 if (!window["%hammerhead%"]) {
   // SurveyCreator.SurveyJSONEditor.aceBasePath = "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/";
 
-  SurveyCreator.editorLocalization.currentLocale = "en";
+  SurveyCreator.localization.currentLocale = "en";
   let options = {
     // showTestSurveyTab: false,
     // showJSONEditorTab: false

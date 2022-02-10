@@ -25,7 +25,7 @@ export function createQuestionViewModel(
       return !model.surveyElement.locHtml["koRenderedHtml"]();
     }
     return model.isEmptyElement;
-  })
+  });
   model["adornerComponent"] = undefined;
   new ImplementorBase(model);
   ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
