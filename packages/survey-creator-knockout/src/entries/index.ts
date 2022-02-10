@@ -51,3 +51,16 @@ export * from "../utils/survey-widget";
 export * from "../utils/utils";
 
 export * from "../creator";
+
+import * as core from "survey-creator-core";
+export const localization = core.editorLocalization;
+export const settings = core.settings;
+export const svgBundle = core.svgBundle;
+export const SurveyLogicUI = core.SurveyLogicUI;
+export const SurveyLogic = core.SurveyLogic;
+export const SurveyQuestionEditorDefinition = core.SurveyQuestionEditorDefinition;
+// export const ISurveyCreatorOptions = core.ISurveyCreatorOptions;
+// export const IPropertyGridEditor = core.IPropertyGridEditor;
+export const ToolboxToolViewModel = core.ToolboxToolViewModel;
+export const PropertyGridEditorCollection = core.PropertyGridEditorCollection;
+export const StylesManager = core.StylesManager;
