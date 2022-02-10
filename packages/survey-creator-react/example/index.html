@@ -24,103 +24,19 @@
 
   <script src="http://127.0.0.1:7766/build/survey-core/survey.core.js"></script>
   <script src="http://127.0.0.1:7766/build/survey-react-ui/survey-react-ui.js"></script>
+  <script src="../../survey-creator-core/build/survey-creator-core.js"></script>
   <script src="../build/survey-creator-react.js"></script>
   <link rel="stylesheet" type="text/css" href="http://127.0.0.1:7766/build/survey-core/defaultV2.css" />
-  <link rel="stylesheet" type="text/css" href="../build/survey-creator-react.css" />
+  <link rel="stylesheet" type="text/css" href="../../survey-creator-core/build/survey-creator-core.css" />
 </head>
 
 <body>
   <div id="surveyCreator" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"></div>
 </body>
 <script type="text/babel">
-  const json = {
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "rating",
-            "name": "question1"
-          },
-          {
-            "type": "rating",
-            "name": "question2"
-          },
-          {
-            "type": "rating",
-            "name": "question3"
-          },
-          {
-            "type": "rating",
-            "name": "question4"
-          },
-          {
-            "type": "rating",
-            "name": "question5"
-          },
-          {
-            "type": "rating",
-            "name": "question6"
-          },
-          {
-            "type": "rating",
-            "name": "question7"
-          },
-          {
-            "type": "rating",
-            "name": "question8"
-          },
-          {
-            "type": "rating",
-            "name": "question9"
-          },
-          {
-            "type": "rating",
-            "name": "question10"
-          },
-          {
-            "type": "rating",
-            "name": "question11"
-          },
-          {
-            "type": "rating",
-            "name": "question12"
-          },
-          {
-            "type": "rating",
-            "name": "question13"
-          },
-          {
-            "type": "rating",
-            "name": "question14"
-          },
-          {
-            "type": "rating",
-            "name": "question15"
-          },
-          {
-            "type": "rating",
-            "name": "question16"
-          },
-          {
-            "type": "rating",
-            "name": "question17"
-          },
-          {
-            "type": "rating",
-            "name": "question18"
-          },
-          {
-            "type": "rating",
-            "name": "question19"
-          }
-        ]
-      }
-    ]
-  };
   let creator = new SurveyCreator.SurveyCreator({});
   window.creator = creator;
-  creator.JSON = json;
+  //creator.JSON = json;
   ReactDOM.render(<React.StrictMode>
     <SurveyCreator.SurveyCreatorComponent creator={creator} />
   </React.StrictMode>, document.getElementById("surveyCreator"));
