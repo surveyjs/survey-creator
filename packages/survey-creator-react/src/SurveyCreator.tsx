@@ -20,7 +20,6 @@ import {
   SurveyActionBar,
   ReactElementFactory,
   ReactQuestionFactory,
-  Model,
   SurveyElementBase,
   SurveyLocStringViewer,
   Survey
@@ -176,7 +175,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 }
 
-export class DesignTimeSurveyModel extends Model {
+export class DesignTimeSurveyModel extends SurveyModel {
   constructor(public creator: SurveyCreator, jsonObj?: any) {
     super(jsonObj);
   }
@@ -237,10 +236,10 @@ export class SurveyCreator extends CreatorBase<SurveyModel> {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
   }
-  protected createSurveyCore(json: any = {}, reason: string): Model {
+  protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
     if (reason === "designer" || reason === "modal-question-editor")
       return new DesignTimeSurveyModel(this, json);
-    return new Model(json);
+    return new SurveyModel(json);
   }
   public render(target: string | HTMLElement) {
     let node: HTMLElement = target as HTMLElement;
