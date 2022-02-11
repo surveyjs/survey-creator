@@ -70,6 +70,7 @@ export interface ICreatorPlugin {
   activate: () => void;
   update?: () => void;
   deactivate?: () => boolean;
+  dispose?: () => void;
   model: Base;
 }
 
@@ -2679,11 +2680,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
     if (!type)
       type = this.currentAddQuestionType;
-    if(!type) type = "text";
+    if (!type) type = "text";
     beforeAdd(type);
     let json = { type: type };
     const toolboxItem = this.toolbox.getItemByName(type);
-    if(!!toolboxItem && !!toolboxItem.json) {
+    if (!!toolboxItem && !!toolboxItem.json) {
       json = toolboxItem.json;
     }
     let newElement = this.createNewElement(json);
@@ -2754,6 +2755,29 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }) toolboxLocation: toolboxLocationType;
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
   selectFromStringEditor: boolean;
+
+  @property({
+    defaultValue: false, onSet: (newValue: boolean, target: CreatorBase<T>) => {
+      if (!newValue) {
+        throw new Error("Creator is disposed");
+      }
+    }
+  }) isCreatorDisposed: boolean;
+
+  dispose(): void {
+    this.isCreatorDisposed = true;
+    this.tabs = [];
+    Object.keys(this.plugins).forEach(pluginName => {
+      const plugin = this.plugins[pluginName];
+      if (typeof plugin.deactivate === "function") {
+        plugin.deactivate();
+      }
+      if (typeof plugin.dispose === "function") {
+        plugin.dispose();
+      }
+    });
+    super.dispose();
+  }
 }
 
 export class StylesManager {

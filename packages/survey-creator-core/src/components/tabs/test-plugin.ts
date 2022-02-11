@@ -100,9 +100,10 @@ export class TabTestPlugin implements ICreatorPlugin {
     });
   }
   public deactivate(): boolean {
-    this.model.onSurveyCreatedCallback = undefined;
-    this.model = undefined;
-
+    if (this.model) {
+      this.model.onSurveyCreatedCallback = undefined;
+      this.model = undefined;
+    }
     this.languageSelectorAction.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);

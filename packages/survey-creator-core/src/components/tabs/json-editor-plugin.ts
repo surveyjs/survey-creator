@@ -19,7 +19,7 @@ export abstract class JsonEditorBaseModel extends Base {
   }
   protected abstract getText(): string;
   protected abstract setText(val: string): void;
-  protected onEditorActivated(): void {}
+  protected onEditorActivated(): void { }
   public onPluginActivate(): void {
     this.text = this.creator.text;
     this.onEditorActivated();
@@ -51,22 +51,24 @@ export abstract class JsonEditorBaseModel extends Base {
 
 export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   public model: JsonEditorBaseModel;
-  constructor(private creator: CreatorBase<SurveyModel>) {}
+  constructor(private creator: CreatorBase<SurveyModel>) { }
   public activate(): void {
     this.model = this.createModel(this.creator);
   }
   public deactivate(): boolean {
-    const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
-    if (!textWorker.isJsonCorrect) {
-      return false;
+    if (this.model) {
+      const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
+      if (!textWorker.isJsonCorrect) {
+        return false;
+      }
+      if (!this.model.readOnly && this.model.isJSONChanged) {
+        this.creator.selectedElement = undefined;
+        this.creator.text = this.model.text;
+        this.creator.selectedElement = this.creator.survey;
+        this.creator.setModified({ type: "JSON_EDITOR" });
+      }
+      this.model = undefined;
     }
-    if (!this.model.readOnly && this.model.isJSONChanged) {
-      this.creator.selectedElement = undefined;
-      this.creator.text = this.model.text;
-      this.creator.selectedElement = this.creator.survey;
-      this.creator.setModified({ type: "JSON_EDITOR" });
-    }
-    this.model = undefined;
     return true;
   }
   protected abstract createModel(
