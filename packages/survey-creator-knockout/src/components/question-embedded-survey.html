@@ -1,5 +1,5 @@
-<!-- ko if: (!!embeddedSurvey && !!embeddedSurvey.koCurrentPage()) -->
+<!-- ko if: (!!embeddedSurvey && !!embeddedSurvey.currentPage) -->
 <div
-  data-bind="attr: { id: currentPageId }, template: { name: 'survey-page', data: embeddedSurvey.koCurrentPage() }">
+  data-bind="attr: { id: currentPageId }, template: { name: 'survey-page', data: embeddedSurvey.currentPage }">
 </div>
 <!-- /ko -->
