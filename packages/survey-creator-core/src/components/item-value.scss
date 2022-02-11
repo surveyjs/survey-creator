@@ -46,7 +46,7 @@
   display: inline-block;
   outline: none;
 }
-.svc-item-value-controls__button > span,
+span.svc-item-value-controls__button,
 sv-svg-icon.svc-item-value-controls__button {
   height: calcSize(2);
   box-sizing: content-box;
@@ -54,7 +54,7 @@ sv-svg-icon.svc-item-value-controls__button {
     display: block;
   }
 }
-.svc-item-value-controls__button > span {
+span.svc-item-value-controls__button {
   display: block;
 }
 
