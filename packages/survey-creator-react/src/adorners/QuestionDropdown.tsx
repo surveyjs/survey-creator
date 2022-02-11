@@ -1,6 +1,6 @@
 import React from "react";
-import { ItemValue, QuestionSelectBase } from "survey-core";
-import { ReactElementFactory } from "survey-react-ui";
+import { ItemValue, QuestionSelectBase, SurveyModel } from "survey-core";
+import { ReactElementFactory, ReactSurveyElementsWrapper } from "survey-react-ui";
 import {
   QuestionAdornerComponent,
   QuestionAdornerComponentProps
@@ -18,7 +18,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
               className="svc-question__dropdown-choice"
               key={`editable_choice_${index}`}
             >
-              {question.survey["wrapItemValue"](
+              {ReactSurveyElementsWrapper.wrapItemValue(question.survey as SurveyModel,
                 ReactElementFactory.Instance.createElement(
                   "survey-radiogroup-item",
                   {

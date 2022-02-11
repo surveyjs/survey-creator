@@ -1,8 +1,8 @@
 import { QuestionAdornerViewModel, toggleHovered } from "survey-creator-core";
 import React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
-import { Base, ItemValue, QuestionSelectBase } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import { Base, ItemValue, QuestionSelectBase, SurveyModel } from "survey-core";
+import { ReactElementFactory, SurveyElementBase, ReactSurveyElementsWrapper } from "survey-react-ui";
 import { QuestionAdornerComponentProps } from "./Question";
 import { attachKey2click } from "survey-react-ui";
 
@@ -45,7 +45,7 @@ export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
                     className="svc-question__dropdown-choice"
                     key={`editable_choice_${index}`}
                   >
-                    {question.survey["wrapItemValue"](
+                    {ReactSurveyElementsWrapper.wrapItemValue(question.survey as SurveyModel,
                       ReactElementFactory.Instance.createElement(
                         "survey-radiogroup-item",
                         {
