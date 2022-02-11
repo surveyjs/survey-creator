@@ -51,8 +51,10 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.model.update(this.creator.survey);
   }
   public deactivate(): boolean {
-    this.model.dispose();
-    this.model = undefined;
+    if (this.model) {
+      this.model.dispose();
+      this.model = undefined;
+    }
 
     this.filterQuestionAction.visible = false;
     this.filterActionTypeAction.visible = false;
@@ -63,7 +65,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public createActions() {
     const items: Array<Action> = [];
     const onQuestionPopupShow = () => {
-      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) }; })
+      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) }; });
       SurveyHelper.sortItems(items, "title");
       questionPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
     };
