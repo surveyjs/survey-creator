@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Question, SurveyTemplateRendererViewModel } from "survey-core";
+import { Question, QuestionHtmlModel, SurveyTemplateRendererViewModel } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
 import { CreatorBase, QuestionAdornerViewModel } from "survey-creator-core";
 import { KnockoutMouseEvent } from "../events";
@@ -20,6 +20,12 @@ export function createQuestionViewModel(
   model["koSelect"] = (model: QuestionAdornerViewModel, event: MouseEvent) => {
     return model.select(model, new KnockoutMouseEvent(event));
   };
+  model["koIsEmptyElement"] = ko.computed(() => {
+    if (model.surveyElement instanceof QuestionHtmlModel) {
+      return !model.surveyElement.locHtml["koRenderedHtml"]();
+    }
+    return model.isEmptyElement;
+  });
   model["adornerComponent"] = undefined;
   new ImplementorBase(model);
   ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
