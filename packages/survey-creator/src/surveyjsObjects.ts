@@ -47,7 +47,8 @@ export class SurveyForDesigner extends Survey.Survey {
     renderedElement: any = null,
     css: any = null
   ) {
-    super(jsonObj, renderedElement, css);
+    super(jsonObj, renderedElement);
+    if (!css) this.css = css;
     var self = this;
     this.setDesignMode(true);
     this.onAfterRenderPage.add((sender: Survey.Survey, options) => {
