@@ -6,11 +6,20 @@
   align-items: center;
   margin-left: calcSize(-5);
 }
-
-.sd-selectbase__column:not(:first-of-type) {
-  margin-left: calcSize(5);
+.svc-question__dropdown-choice,
+.sd-selectbase {
+  .svc-item-value-wrapper {
+    align-items: flex-start;
+  }
 }
-
+.svc-question__content {
+  .sd-selectbase__column:not(:first-of-type) {
+    margin-left: calcSize(5);
+  }
+  .sd-selectbase__column:not(:last-child) {
+    padding-right: 0;
+  }
+}
 .svc-item-value--dragging {
   background: $background;
   box-shadow: 0px calcSize(1) calcSize(2) $shadow-medium;

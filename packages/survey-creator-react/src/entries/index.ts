@@ -48,3 +48,16 @@ export * from "../components/tabs/SurveySimulator";
 export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
+
+import * as core from "survey-creator-core";
+export const localization = core.editorLocalization;
+export const settings = core.settings;
+export const svgBundle = core.svgBundle;
+export const SurveyLogicUI = core.SurveyLogicUI;
+export const SurveyLogic = core.SurveyLogic;
+export const SurveyQuestionEditorDefinition = core.SurveyQuestionEditorDefinition;
+// export const ISurveyCreatorOptions = core.ISurveyCreatorOptions;
+// export const IPropertyGridEditor = core.IPropertyGridEditor;
+export const ToolboxToolViewModel = core.ToolboxToolViewModel;
+export const PropertyGridEditorCollection = core.PropertyGridEditorCollection;
+export const StylesManager = core.StylesManager;
