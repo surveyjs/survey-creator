@@ -3,8 +3,6 @@
 var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-//var TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-var dts = require("dts-bundle");
 var rimraf = require("rimraf");
 var packageJson = require("./package.json");
 var fs = require("fs");
@@ -79,6 +77,7 @@ var buildPlatformJson = {
 
 module.exports = function (options) {
   var buildPath = __dirname + "/build/";
+  var dts_generator = __dirname + "/d_ts_generator.js";
   var isProductionBuild = options.buildType === "prod";
 
   function createSVGBundle() {
@@ -127,39 +126,8 @@ module.exports = function (options) {
       createSVGBundle();
     } else if (1 == percentage) {
       if (isProductionBuild) {
-        dts.bundle({
-          name: "../../" + packageJson.name,
-          main: buildPath + "typings/entries/index.d.ts",
-          outputAsModuleFolder: true,
-          headerText: dts_banner,
-        });
-        
-        var fileName = buildPath + packageName + ".d.ts";
-
-        //removeLines(
-        //  fileName,
-        //  /^import\s+.*("|')survey-core("|');\s*(\n|\r)?/gm
-        //);
-        //removeLines(fileName, /^import\s+.*("|')\..*("|');\s*(\n|\r)?/gm);
-        removeLines(fileName, /export let\s+\w+:\s+\w+;/g);
-        //removeLines(fileName, /export default\s+\w+;/g);
-        /*replace.sync(
-          {
-            files: buildPath + packageJson.name + ".d.ts",
-            from: /export let\s+\w+:\s+\w+;/,
-            to: "",
-          },
-          (error, changes) => {
-            if (error) {
-              return console.error("Error occurred:", error);
-            }
-            console.log(
-              "check me :     " + buildPath + packageJson.name + ".d.ts"
-            );
-            console.log("Modified files:", changes.join(", "));
-          }
-        );*/
-
+        console.log("Generating d.ts file: " + dts_generator);
+        require(dts_generator);
         rimraf.sync(buildPath + "typings");
         fs.createReadStream("./README.md").pipe(
           fs.createWriteStream(buildPath + "README.md")
