@@ -12,8 +12,8 @@ import {
 } from "./index";
 import { updateMatrixRemoveAction } from "../utils/actions";
 
-class SurveyHelper {
-  public static getNewColumnName(
+export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
+  static getNewColumnName(
     objs: Array<any>,
     keyPropName: string,
     baseName: string
@@ -26,9 +26,6 @@ class SurveyHelper {
     }
     return getNextValue(baseName, arr);
   }
-}
-
-export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     (<any>question).onGetValueForNewRowCallBack = (
       sender: QuestionMatrixDynamicModel
@@ -143,7 +140,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     var keyValue = null;
     if (!!baseValue && !!keyPropName) {
-      var newName = SurveyHelper.getNewColumnName(
+      var newName = PropertyGridEditorMatrix.getNewColumnName(
         matrix.value,
         keyPropName,
         baseValue

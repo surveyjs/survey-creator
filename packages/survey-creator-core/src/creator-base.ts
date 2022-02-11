@@ -115,7 +115,7 @@ export type toolboxLocationType = "left" | "right" | "sidebar";
  * Base class for Survey Creator.
  */
 export class CreatorBase<T extends SurveyModel = SurveyModel>
-  extends Survey.Base
+  extends Base
   implements ISurveyCreatorOptions, ICreatorSelectionOwner {
   /**
    * Set it to true to show "Designer" tab and to false to hide the tab
