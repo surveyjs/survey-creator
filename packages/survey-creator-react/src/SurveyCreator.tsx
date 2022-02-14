@@ -94,7 +94,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         <SvgBundleComponent></SvgBundleComponent>
         <div className={areaClassName}>
           <div className={fullContainerClassName}>
-            <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
+            <div className="svc-flex-column svc-flex-row__element svc-flex-grow">
               <div className="svc-top-bar">
                 {(creator.showTabs ?
                   <div className="svc-tabbed-menu-wrapper">

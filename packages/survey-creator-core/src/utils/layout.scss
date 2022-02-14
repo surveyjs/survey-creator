@@ -20,6 +20,10 @@
   overflow: auto;
 }
 
+.svc-flex-grow {
+  flex-grow: 1;
+}
+
 .svc-flex-column {
   display: flex;
   flex-direction: column;
