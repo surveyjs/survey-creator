@@ -8,7 +8,7 @@
     data-bind="css: { 'svc-creator__area--with-banner': !creator.haveCommercialLicense }">
     <div class="svc-flex-row svc-full-container"
       data-bind="css : { 'svc-creator__side-bar--left': creator.sidebarLocation == 'left' }">
-      <div class="svc-flex-column svc-flex-row__element svc-flex-grow">
+      <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
         <div class="svc-top-bar">
           <div class="svc-tabbed-menu-wrapper" data-bind="visible: creator.showTabs">
             <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
