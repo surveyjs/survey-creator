@@ -1326,7 +1326,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
         this.setPropertyVisibility("survey", false, "pages");
         this.setPropertyVisibility("question", false, "page");
         this.setPropertyVisibility("panel", false, "page");
-        this.showJSONEditorTab = false;
+        this.showJSONEditorTab = (options.showJSONEditorTab === true);
       }
     }
   }
