@@ -2241,3 +2241,9 @@ test("creator showToolbox support", () => {
   expect(creator.showToolbox).toEqual(true);
   expect(creator.toolboxLocation).toEqual("right");
 });
+test("init creator with pageEditModeValue=single", (): any => {
+  let creator = new CreatorTester({ pageEditMode: "single" });
+  expect(creator.showJSONEditorTab).toBeFalsy();
+  creator = new CreatorTester({ pageEditModeValue: "single", showJSONEditorTab: true });
+  expect(creator.showJSONEditorTab).toBeTruthy();
+});
