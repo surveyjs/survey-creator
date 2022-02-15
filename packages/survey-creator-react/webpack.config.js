@@ -57,7 +57,7 @@ const buildPlatformJson = {
     // "survey-react-ui": "^" + packageJson.version,
     "survey-core": "^1.9.9",
     "survey-react-ui": "^1.9.9",
-    "survey-creator-core": "^1.9.9-beta.1",
+    "survey-creator-core": packageJson.version,
     react: "^17.0.1",
     "react-dom": "^17.0.1"
   },
