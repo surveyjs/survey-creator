@@ -908,3 +908,19 @@ test("Translation show All strings and property visibility", () => {
   expect(translation.localesQuestion.value).toHaveLength(1);
   expect(translation.localesQuestion.value[0]).toEqual("de");
 });
+test("LogicPlugin: creator.readOnly", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.readOnly = true;
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  };
+  const translationPlugin = <TabTranslationPlugin>(creator.getPlugin("translation"));
+  translationPlugin.activate();
+  expect(translationPlugin.model.readOnly).toBeTruthy();
+  expect(translationPlugin.model.stringsSurvey.mode).toEqual("display");
+  const firstQuestion = translationPlugin.model.stringsSurvey.getAllQuestions()[0];
+  expect(firstQuestion.isReadOnly).toBeTruthy();
+});
