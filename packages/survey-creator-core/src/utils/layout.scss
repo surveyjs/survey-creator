@@ -14,7 +14,9 @@
   height: 100%;
   width: 100%;
 }
-
+.svc-flex-row__element {
+  max-width: 100%;
+} 
 .svc-flex-row__element--growing {
   flex: 1;
   overflow: auto;
