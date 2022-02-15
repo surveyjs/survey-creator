@@ -34,7 +34,8 @@ import {
   QuestionCustomModel,
   surveyLocalization,
   AdaptiveActionContainer,
-  QuestionCommentModel
+  QuestionCommentModel,
+  QuestionImagePickerModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -944,6 +945,25 @@ test("restfull property editor", () => {
   urlQuestion.value = "myUrl2";
   expect(question.choicesByUrl.url).toEqual("myUrl2");
 });
+test("restfull property editor, show imageLinkName", () => {
+  const dropdown = new QuestionDropdownModel("q1");
+  const imagePicker = new QuestionImagePickerModel("q2");
+  let propertyGrid = new PropertyGridModelTester(imagePicker);
+  let restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  let imageLinkQuestion = restFullQuestion.contentPanel.getQuestionByName("imageLinkName");
+  expect(imageLinkQuestion.visibleIf).toBeTruthy();
+  expect(imageLinkQuestion.isVisible).toBeTruthy();
+
+  propertyGrid = new PropertyGridModelTester(dropdown);
+  restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  imageLinkQuestion = restFullQuestion.contentPanel.getQuestionByName("imageLinkName");
+  expect(imageLinkQuestion.isVisible).toBeFalsy();
+});
+
 test("options.readOnly is true", () => {
   var options = new EmptySurveyCreatorOptions();
   options.readOnly = true;
