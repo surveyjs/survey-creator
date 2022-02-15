@@ -3,7 +3,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-  await t.maximizeWindow();
+  await t.resizeWindow(1920, 1080);
 });
 
 function normalize(str) {
