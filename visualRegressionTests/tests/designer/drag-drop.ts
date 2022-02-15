@@ -122,7 +122,7 @@ test("Choices: Ranking", async (t) => {
   await t.hover(FirstItem);
   await checkElementScreenshot("drag-drop-item-values-ranking--hover.png", QRoot, t);
 
-  await t.dragToElement(FirstItem.find(".svc-item-value-controls__drag"), FirstItem);
+  await t.dragToElement(FirstItem.find(".svc-item-value-controls__drag"), FirstItem).wait(500);
   await checkElementScreenshot("drag-drop-item-values-ranking--dragging.png", QRoot, t);
 });
 
