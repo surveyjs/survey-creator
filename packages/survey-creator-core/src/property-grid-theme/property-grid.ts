@@ -114,7 +114,7 @@ export var propertyGridCss = {
     labelChecked: "",
     //itemControl: "spg-visuallyhidden spg-item__control",
     itemControl: "spg-checkbox__control",
-    //itemDecorator: "spg-item__svg spg-checkbox__svg",
+    itemDecorator: "spg-checkbox__svg",
     //itemDecorator: "spg-checkbox__hidden",
     //controlLabel: "spg-item__control-label",
     controlLabel: "spg-checkbox__caption",
@@ -151,7 +151,7 @@ export var propertyGridCss = {
     svgIconId: "#icon-v2check",
     label: "spg-checkbox__caption",
     disabledLabel: "spg-checkbox__label--disabled",
-    //itemDecorator: "spg-checkbox__hidden",
+    itemDecorator: "spg-checkbox__svg",
     materialDecorator: "spg-checkbox__rectangle"
   },
   text: {

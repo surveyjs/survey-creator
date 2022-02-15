@@ -35,10 +35,10 @@
 .spg-checkbox__control:focus + .spg-checkbox__rectangle {
   background-color: $background-dim;
 }
-.spg-checkbox .sv-boolean__svg {
+.spg-checkbox .spg-checkbox__svg {
   display: none;
 }
-.spg-checkbox--checked .sv-boolean__svg {
+.spg-checkbox--checked .spg-checkbox__svg {
   display: block;
   width: calcSize(2.5);
   height: calcSize(2.5);
@@ -46,7 +46,7 @@
   background-size: calcSize(2) calcSize(2);
   fill: $primary;
 }
-.spg-checkbox--disabled.spg-checkbox--checked .sv-boolean__svg {
+.spg-checkbox--disabled.spg-checkbox--checked .spg-checkbox__svg {
   fill: $border;
 }
 .spg-checkbox__control {
