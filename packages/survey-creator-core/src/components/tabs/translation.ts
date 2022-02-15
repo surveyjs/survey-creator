@@ -484,7 +484,9 @@ export class Translation extends Base implements ITranslationLocales {
   @propertyArray() locales: Array<string>;
   @property() canMergeLocaleWithDefault: boolean;
   @property() mergeLocaleWithDefaultText: string;
-  @property({ defaultValue: false }) readOnly: boolean;
+  @property({ defaultValue: false, onSet: (_, target: Translation) => {
+    target.updateReadOnly();
+  } }) readOnly: boolean;
   @property() root: TranslationGroup;
   @property({
     defaultValue: false, onSet: (_, target: Translation) => {
@@ -621,6 +623,7 @@ export class Translation extends Base implements ITranslationLocales {
     if (!this.hasUI) return;
     this.stringsSurvey = this.createStringsSurvey();
     this.stringsHeaderSurvey = this.createStringsHeaderSurvey();
+    this.updateReadOnly();
   }
   private createStringsSurvey(): SurveyModel {
     var json = { autoGrowComment: true };
@@ -882,6 +885,11 @@ export class Translation extends Base implements ITranslationLocales {
     this.updateSettingsSurveyLocales();
     this.updateLocales();
     this.resetStringsSurvey();
+  }
+  private updateReadOnly(): void {
+    if(this.stringsSurvey) {
+      this.stringsSurvey.mode = this.readOnly ? "display" : "edit";
+    }
   }
 
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean {
