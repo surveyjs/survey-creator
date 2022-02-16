@@ -57,7 +57,7 @@ const buildPlatformJson = {
     // "survey-knockout-ui": "^" + packageJson.version,
     "survey-core": "^1.9.9",
     "survey-knockout-ui": "^1.9.9",
-    "survey-creator-core": "^1.9.9-beta.1",
+    "survey-creator-core": packageJson.version,
     knockout: "^3.5.0"
   },
   devDependencies: {}

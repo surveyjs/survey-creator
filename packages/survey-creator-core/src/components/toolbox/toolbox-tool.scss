@@ -97,7 +97,7 @@
 .svc-toolbox__item:hover,
 .svc-toolbox__item:focus {
   .svc-toolbox__item-banner {
-    max-width: calcSize(25);
+    max-width: calcSize(100);
     padding-left: calcSize(1.5);
     padding-right: calcSize(2);
     opacity: 1;

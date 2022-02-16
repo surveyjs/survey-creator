@@ -45,26 +45,25 @@
   cursor: pointer;
   display: inline-block;
   outline: none;
-}
-.svc-item-value-controls__button > span,
-sv-svg-icon.svc-item-value-controls__button {
   height: calcSize(2);
   box-sizing: content-box;
   .sv-svg-icon {
     display: block;
   }
 }
+
 .svc-item-value-controls__button > span {
   display: block;
 }
-
+.svc-item-value-controls__drag-icon {
+  display: block;
+}
 .svc-item-value-wrapper:hover:not(.svc-item-value--ghost),
 .svc-item-value-controls__drag:hover:not(.svc-item-value--ghost) {
   .svc-item-value-controls__drag-icon {
     visibility: visible;
   }
 }
-
 .svc-item-value-controls__drag {
   padding: calcSize(0.5) calcSize(1);
   cursor: move;

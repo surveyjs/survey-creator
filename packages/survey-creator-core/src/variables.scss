@@ -42,7 +42,7 @@ $base-unit: var(--base-unit, 8px);
   @return $result;
 }
 
-$tab-min-height: var(--tab-min-height, 600px);
+$tab-min-height: var(--tab-min-height, auto);
 
 @mixin smallBold {
   font-family: $font-family;
