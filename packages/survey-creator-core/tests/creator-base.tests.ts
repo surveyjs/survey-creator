@@ -922,6 +922,26 @@ test("Undo converting question type", (): any => {
   q = creator.survey.getQuestionByName("question1");
   expect(q.getType()).toEqual("checkbox");
 });
+test("Convert checkbox into rating", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "question1", choices: [1, 2] }]
+  };
+  let q = creator.survey.getQuestionByName("question1");
+  creator.selectElement(q);
+  creator.convertCurrentQuestion("rating");
+  let el = <QuestionRatingModel>creator.selectedElement;
+  expect(el.getType()).toEqual("rating");
+  expect(el.rateValues).toHaveLength(2);
+  expect(el.rateValues[0].value).toEqual(1);
+  creator.clickToolboxItem(creator.toolbox.getItemByName("checkbox").json);
+  expect(creator.selectedElement.getType()).toEqual("checkbox");
+  creator.convertCurrentQuestion("rating");
+  el = <QuestionRatingModel>creator.selectedElement;
+  expect(el.getType()).toEqual("rating");
+  expect(el.rateValues).toHaveLength(0);
+});
+
 test("Convert text question into dropdown", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {

@@ -30,7 +30,8 @@ export class QuestionConverter {
   }
   public static convertObject(
     obj: Survey.Question,
-    convertToClass: string
+    convertToClass: string,
+    defaultJSON: any = null
   ): Survey.Question {
     if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
     var newQuestion = Survey.QuestionFactory.Instance.createQuestion(convertToClass, obj.name);
@@ -43,6 +44,7 @@ export class QuestionConverter {
     for (var key in qJson) {
       json[key] = qJson[key];
     }
+    QuestionConverter.updateJSON(json, convertToClass, defaultJSON);
     newQuestion.fromJSON(json);
     var panel = <Survey.PanelModelBase>obj.parent;
     var index = panel.elements.indexOf(obj);
@@ -50,6 +52,18 @@ export class QuestionConverter {
     panel.addElement(newQuestion, index);
     newQuestion.onSurveyLoad();
     return <Survey.Question>newQuestion;
+  }
+  private static updateJSON(json: any, convertToClass: string, defaultJSON: any): any {
+    if(convertToClass === "rating" && json.choices) {
+      if(!defaultJSON || !defaultJSON.choices ||
+        !Survey.Helpers.isArraysEqual(defaultJSON.choices, json.choices)) {
+        json.rateValues = json.choices;
+      }
+    } else {
+      if(json.rateValues) {
+        json.choices = json.rateValues;
+      }
+    }
   }
 }
 
