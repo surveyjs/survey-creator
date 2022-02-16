@@ -45,15 +45,13 @@
   cursor: pointer;
   display: inline-block;
   outline: none;
-}
-.svc-item-value-controls__button > span,
-sv-svg-icon.svc-item-value-controls__button {
   height: calcSize(2);
   box-sizing: content-box;
   .sv-svg-icon {
     display: block;
   }
 }
+
 .svc-item-value-controls__button > span {
   display: block;
 }
