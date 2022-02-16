@@ -463,7 +463,7 @@ export class PropertyJSONGenerator {
     panel.fromJSON(this.toJSON(isNestedObj, context));
     this.onQuestionsCreated(panel);
   }
-  private onQuestionsCreated(panel: PanelModelBase) {
+  private onQuestionsCreated(panel: PanelModelBase): void {
     var properties = Serializer.getPropertiesByObj(this.obj);
     var props: any = {};
     for (var i = 0; i < properties.length; i++) {
