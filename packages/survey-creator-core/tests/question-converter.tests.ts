@@ -5,7 +5,8 @@ import {
   QuestionCommentModel,
   QuestionCheckboxModel,
   QuestionTextModel,
-  ComponentCollection
+  ComponentCollection,
+  QuestionRatingModel
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
 import { QuestionConvertMode, settings } from "../src/settings";
@@ -95,4 +96,27 @@ test("Convert to custom component", () => {
   const component = QuestionConverter.convertObject(questionText, "fullname");
   expect(component.name).toBe("q1");
   ComponentCollection.Instance.clear();
+});
+test("Convert choices to rateValues", () => {
+  const survey = new SurveyModel({ questions: [{ type: "radiogroup", name: "q1", choices: ["i1", "i2"] }] });
+  const src = survey.getAllQuestions()[0];
+  const dest = <QuestionRatingModel>QuestionConverter.convertObject(src, "rating");
+  expect(dest.getType()).toBe("rating");
+  expect(dest.rateValues).toHaveLength(2);
+  expect(dest.rateValues[0].value).toEqual("i1");
+});
+test("Convert rateValues to choices", () => {
+  const survey = new SurveyModel({ questions: [{ type: "rating", name: "q1", rateValues: ["i1", "i2"] }] });
+  const src = survey.getAllQuestions()[0];
+  const dest = <QuestionRadiogroupModel>QuestionConverter.convertObject(src, "radiogroup");
+  expect(dest.getType()).toBe("radiogroup");
+  expect(dest.choices).toHaveLength(2);
+  expect(dest.choices[0].value).toEqual("i1");
+});
+test("Do not convert default choices", () => {
+  const survey = new SurveyModel({ questions: [{ type: "radiogroup", name: "q1", choices: ["item1", "item2", "item3"] }] });
+  const src = survey.getAllQuestions()[0];
+  const dest = <QuestionRatingModel>QuestionConverter.convertObject(src, "rating", { type: "radiogroup", name: "question1", choices: ["item1", "item2", "item3"] });
+  expect(dest.getType()).toBe("rating");
+  expect(dest.rateValues).toHaveLength(0);
 });

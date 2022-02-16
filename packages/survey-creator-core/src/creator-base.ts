@@ -1741,7 +1741,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   protected convertQuestion(obj: Survey.Question, className: string) {
-    var newQuestion = QuestionConverter.convertObject(obj, className);
+    var newQuestion = QuestionConverter.convertObject(obj, className, this.getDefaultElementJSON(obj.getType()));
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -1750,7 +1750,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     });
     return newQuestion;
   }
-
+  private getDefaultElementJSON(elType: string): any {
+    if(!this.toolbox) return null;
+    const item = this.toolbox.getItemByName(elType);
+    return !!item ? item.json : null;
+  }
   /**
    * The Survey JSON. Use it to get Survey JSON or change it.
    * @see text
