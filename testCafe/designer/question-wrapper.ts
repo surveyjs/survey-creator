@@ -65,7 +65,7 @@ test("Single input question wrapper action convert", async (t) => {
     .expect(listItems.nth(4).innerText).eql("Comment")
 
     .click(listItems.nth(0))
-    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok();
+    .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
 
 test("Single input question wrapper action duplicate", async (t) => {
