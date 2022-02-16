@@ -46,7 +46,7 @@
   display: inline-block;
   outline: none;
 }
-span.svc-item-value-controls__button,
+.svc-item-value-controls__button > span,
 sv-svg-icon.svc-item-value-controls__button {
   height: calcSize(2);
   box-sizing: content-box;
@@ -54,8 +54,7 @@ sv-svg-icon.svc-item-value-controls__button {
     display: block;
   }
 }
-sv-svg-icon.svc-item-value-controls__button,
-span.svc-item-value-controls__button {
+.svc-item-value-controls__button > span {
   display: block;
 }
 
@@ -106,11 +105,11 @@ span.svc-item-value-controls__button {
 }
 
 .svc-question__content--selected-no-border .svc-item-value-controls {
-  display: flex;
+  display: block;
 }
 
 .svc-question__content--selected .svc-item-value-controls {
-  display: flex;
+  display: block;
 }
 
 .sv-string-editor {
