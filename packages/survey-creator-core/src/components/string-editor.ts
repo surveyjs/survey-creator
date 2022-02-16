@@ -41,7 +41,7 @@ export class StringEditorViewModelBase extends Base {
     event.target.parentElement.click();
     event.target.spellcheck = true;
     this.focused = true;
-    select(event.target);
+    this.justFocused = true;
   }
 
   public onInput(event: any): void {
@@ -100,7 +100,17 @@ export class StringEditorViewModelBase extends Base {
     this.checkConstraints(event);
     return true;
   }
-
+  private justFocused = false;
+  public onMouseUp(event: MouseEvent): boolean {
+    if(this.justFocused) {
+      this.justFocused = false;
+      if(window.getSelection().focusNode && (window.getSelection().focusNode.parentElement !== event.target) || window.getSelection().toString().length == 0) {
+        select(event.target);
+      }
+      return false;
+    }
+    return true;
+  }
   public findProperty() {
     if (!(<any>this.locString.owner).getType) return undefined;
     const ownerType: string = (<any>this.locString.owner).getType();

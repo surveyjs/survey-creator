@@ -328,3 +328,29 @@ test("Check markdown events", async (t) => {
     .pressKey("enter")
     .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok();
 });
+
+test("Test selection", async (t) => {
+  let json = {
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("question1");
+
+  await t
+    .click(svItemSelector)
+    .expect(ClientFunction(() => {
+      return window.getSelection().toString();
+    })()).eql("question1")
+    .wait(300)
+    .click(svItemSelector)
+    .expect(ClientFunction(() => {
+      return window.getSelection().toString();
+    })()).eql("");
+});
