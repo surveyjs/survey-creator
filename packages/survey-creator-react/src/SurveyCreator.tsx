@@ -36,7 +36,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     super(props);
     this.rootNode = React.createRef();
   }
-  get creator(): CreatorBase<SurveyModel> {
+  get creator(): CreatorBase {
     return this.props.creator;
   }
   protected getStateElement(): Base {
@@ -55,7 +55,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   private rootNode: React.RefObject<HTMLDivElement>;
 
   renderElement() {
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const creator: CreatorBase = this.props.creator;
     if (creator.isCreatorDisposed) return null;
     const creatorClassName = "svc-creator" + (this.props.creator.isMobileView ? " svc-creator--mobile" : "");
     const areaClassName = "svc-full-container svc-creator__area svc-flex-column" + (this.props.creator.haveCommercialLicense ? "" : " svc-creator__area--with-banner");
@@ -116,7 +116,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     );
   }
   renderActiveTab() {
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const creator: CreatorBase = this.props.creator;
     for (var i = 0; i < creator.tabs.length; i++) {
       if (creator.tabs[i].id === creator.activeTab) {
         return this.renderCreatorTab(creator.tabs[i]);
@@ -128,7 +128,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     if (tab.visible === false) {
       return null;
     }
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const creator: CreatorBase = this.props.creator;
     const component = !!tab.renderTab
       ? tab.renderTab()
       : ReactElementFactory.Instance.createElement(tab.componentContent, {
@@ -160,7 +160,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 }
 
-export class SurveyCreator extends CreatorBase<SurveyModel> {
+export class SurveyCreator extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
   }

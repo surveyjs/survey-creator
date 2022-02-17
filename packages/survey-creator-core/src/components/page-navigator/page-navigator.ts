@@ -6,7 +6,7 @@ import "./page-navigator.scss";
 import "./page-navigator-item.scss";
 import { getLocString } from "../../editorLocalization";
 
-export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
+export class PageNavigatorViewModel extends Base {
   public icon: string;
   public pageListModel: ListModel;
   public popupModel: PopupModel;

@@ -3,7 +3,7 @@ import { CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { IUndoRedoChange, UndoRedoManager } from "./undo-redo-manager";
 
-export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Base {
+export class UndoRedoController extends Base {
   private undoAction: Action;
   private redoAction: Action;
 
@@ -42,11 +42,11 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
     }
   }
 
-  constructor(private creator: CreatorBase<T>) {
+  constructor(private creator: CreatorBase) {
     super();
     this.undoRedoManager = <any>new ComputedUpdater<UndoRedoManager>(() => {
       const undoRedoManager = new UndoRedoManager();
-      const surveyModel: T = this.creator.survey;
+      const surveyModel = this.creator.survey;
       if (!!surveyModel) {
         surveyModel.onPropertyValueChangedCallback = (
           name: string,
@@ -161,31 +161,31 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
    * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
   public onBeforeUndo: Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called before redo happens.
     * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
     */
   public onBeforeRedo: Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called after undo happens.
     * <br/> options.state is an undo/redo item.
     */
   public onAfterUndo: Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called after redo happens.
     * <br/> options.state is an undo/redo item.
     */
   public onAfterRedo: Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Event<(sender: CreatorBase, options: any) => any, any>();
 }

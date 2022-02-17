@@ -14,7 +14,7 @@ import { toggleHovered } from "../utils/utils";
 import "./matrix-cell.scss";
 
 export class MatrixCellWrapperViewModel extends Base {
-  constructor(public creator: CreatorBase<SurveyModel>, public templateData: any, public question: Question, public row: any, public column: any) {
+  constructor(public creator: CreatorBase, public templateData: any, public question: Question, public row: any, public column: any) {
     super();
     // if(!question && !!this.templateData.data) {
     //   this.question = this.templateData.data;

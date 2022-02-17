@@ -12,7 +12,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   private showAllQuestionsText = getLogicString("showAllQuestions");
   private showAllActionTypesText = getLogicString("showAllActionTypes");
   public model: SurveyLogicUI;
-  constructor(private creator: CreatorBase<SurveyModel>) {
+  constructor(private creator: CreatorBase) {
     creator.addPluginTab("logic", this);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }

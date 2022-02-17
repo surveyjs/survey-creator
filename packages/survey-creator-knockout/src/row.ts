@@ -17,7 +17,7 @@ const template = require("./row.html");
 
 class KnockoutRowViewModel extends RowViewModel {
   constructor(
-    public creator: CreatorBase<SurveyModel>,
+    public creator: CreatorBase,
     public row: QuestionRowModel,
     public templateData: any
   ) {

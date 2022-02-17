@@ -68,7 +68,7 @@ export class TestSurveyTabViewModel extends Base {
     return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
   }
 
-  constructor(private surveyProvider: CreatorBase<SurveyModel>) {
+  constructor(private surveyProvider: CreatorBase) {
     super();
     this.simulator = new SurveySimulatorModel();
   }

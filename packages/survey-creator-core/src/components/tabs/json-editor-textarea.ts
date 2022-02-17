@@ -14,7 +14,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   public ariaLabel: string = getLocString("ed.jsonEditor");
   @property({ defaultValue: false }) canShowErrors: boolean;
 
-  constructor(creator: CreatorBase<SurveyModel>) {
+  constructor(creator: CreatorBase) {
     super(creator);
     this.onPluginActivate();
   }
@@ -78,7 +78,7 @@ export class TabJsonEditorTextareaPlugin
   extends TabJsonEditorBasePlugin
   implements ICreatorPlugin
 {
-  constructor(creator: CreatorBase<SurveyModel>) {
+  constructor(creator: CreatorBase) {
     super(creator);
     creator.addPluginTab(
       "editor",
@@ -88,7 +88,7 @@ export class TabJsonEditorTextareaPlugin
     );
   }
   protected createModel(
-    creator: CreatorBase<SurveyModel>
+    creator: CreatorBase
   ): JsonEditorBaseModel {
     return new TextareaJsonEditorModel(creator);
   }

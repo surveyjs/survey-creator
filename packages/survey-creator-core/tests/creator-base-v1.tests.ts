@@ -752,7 +752,7 @@ test(
     creator.JSON = {
       elements: [{ type: "text", name: "q1", title: "question1", description: "New Title" }],
     };
-    const propertyGrid = creator.sidebar.getTabById("propertyGrid").model as PropertyGridViewModel<SurveyModel>;
+    const propertyGrid = creator.sidebar.getTabById("propertyGrid").model as PropertyGridViewModel;
     expect(propertyGrid).toBeTruthy();
     const selectorBarItem = propertyGrid.objectSelectionAction;
     expect(selectorBarItem).toBeTruthy();

@@ -14,7 +14,7 @@ class DesignTimeSurveyModel extends SurveyModel {
   }
 }
 
-export class CreatorTester extends CreatorBase<SurveyModel> {
+export class CreatorTester extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
     if (setOldDefaultNewSurveyJSON) {
       creatorSetting.defaultNewSurveyJSON = { pages: [{ name: "page1" }] };

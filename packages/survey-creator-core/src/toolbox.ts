@@ -184,7 +184,7 @@ export class QuestionToolbox
 
   constructor(
     supportedQuestions: Array<string> = null,
-    public creator: CreatorBase<SurveyModel> = null
+    public creator: CreatorBase = null
   ) {
     super();
     this.createDefaultItems(supportedQuestions);

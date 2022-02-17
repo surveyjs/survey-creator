@@ -8,14 +8,14 @@ import {
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 
-export class ActionContainerViewModel<T extends SurveyModel> extends Base {
+export class ActionContainerViewModel extends Base {
   public actionContainer: AdaptiveActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
 
   constructor(
-    public creator: CreatorBase<T>,
+    public creator: CreatorBase,
     public surveyElement: SurveyElement
   ) {
     super();

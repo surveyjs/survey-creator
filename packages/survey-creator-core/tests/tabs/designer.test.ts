@@ -73,7 +73,7 @@ test("StringEditorViewModelBase maxLength", () => {
 
 test("Designer widthMode css test", () => {
   const creator = new CreatorTester();
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  var designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   creator.survey.widthMode = "static";
@@ -84,7 +84,7 @@ test("Designer widthMode css test", () => {
 
 test("Select survey in designer", () => {
   const creator = new CreatorTester();
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  var designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   creator.JSON = { elements: [{ name: "question1", type: "text" }] };

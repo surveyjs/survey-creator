@@ -9,7 +9,7 @@ if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;
 }
 
-export class SurveyCreator extends CreatorBase<Survey> {
+export class SurveyCreator extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
   }
