@@ -277,6 +277,7 @@ test("Check string editor inplaceEditForValues property", async (t) => {
 
   await t
     .click(Selector(".sv-string-editor").withText("newitem1"))
+    .click(Selector(".sv-string-editor").withText("newitem1"))
     .typeText(Selector(".sv-string-editor").withText("newitem1"), "Ok", { caretPos: 0 })
     .pressKey("enter")
     .expect(ClientFunction(() => {
