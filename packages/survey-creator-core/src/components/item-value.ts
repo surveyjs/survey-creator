@@ -23,7 +23,7 @@ export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isDragDropMoveUp: boolean;
   @property({ defaultValue: null }) ghostPosition: string; // need fot image-item-value
   constructor(
-    public creator: CreatorBase<SurveyModel>,
+    public creator: CreatorBase,
     public question: QuestionSelectBase,
     public item: ItemValue
   ) {

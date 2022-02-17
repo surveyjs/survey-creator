@@ -19,7 +19,7 @@ import {
 
 export interface ISurveyCreatorToolboxItemProps {
   item: IQuestionToolboxItem;
-  creator: CreatorBase<SurveyModel>;
+  creator: CreatorBase;
   isCompact: boolean;
 }
 

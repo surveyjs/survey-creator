@@ -9,7 +9,7 @@ ko.components.register("svc-property-grid", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const subscrib = ko.computed(() => {
-        const model: PropertyGridViewModel<Survey> = ko.unwrap(params.model);
+        const model: PropertyGridViewModel = ko.unwrap(params.model);
         new ImplementorBase(model);
       });
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {

@@ -6,9 +6,9 @@ import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../settings";
 import { TabDesignerViewModel } from "./designer";
 
-export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin {
-  public model: TabDesignerViewModel<T>;
-  public propertyGrid: PropertyGridViewModel<T>;
+export class TabDesignerPlugin implements ICreatorPlugin {
+  public model: TabDesignerViewModel;
+  public propertyGrid: PropertyGridViewModel;
   private propertyGridTab: SidebarTabModel;
   private toolboxTab: SidebarTabModel;
   private surveySettingsAction: Action;
@@ -28,7 +28,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     this.propertyGridTab.caption = this.creator.isMobileView ? this.propertyGrid.selectedElementName : "";
   }
 
-  constructor(private creator: CreatorBase<T>) {
+  constructor(private creator: CreatorBase) {
     creator.addPluginTab("designer", this);
     const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);
@@ -77,7 +77,7 @@ export class TabDesignerPlugin<T extends SurveyModel> implements ICreatorPlugin 
     });
   }
   public activate(): void {
-    this.model = new TabDesignerViewModel<T>(this.creator);
+    this.model = new TabDesignerViewModel(this.creator);
     this.creator.sidebar.activeTab = this.propertyGridTab.id;
   }
   public deactivate(): boolean {

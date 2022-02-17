@@ -5,7 +5,7 @@ import { Base, SurveyModel } from "survey-core";
 import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 export interface ISurveyCreatorToolboxProps {
-  model: CreatorBase<SurveyModel>;
+  model: CreatorBase;
 }
 
 export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {

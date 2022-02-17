@@ -5,7 +5,7 @@ export class ToolboxToolViewModel extends Base {
   private dragOrClickHelper: DragOrClickHelper;
   constructor(
     protected item: IQuestionToolboxItem,
-    protected creator: CreatorBase<SurveyModel>
+    protected creator: CreatorBase
   ) {
     super();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragToolboxItem);
@@ -22,7 +22,7 @@ export class ToolboxToolViewModel extends Base {
 
   public onPointerDown(pointerDownEvent) {
     if (!this.allowAdd) return;
-    if (this.item.id === 'dotsItem-id') return true; //toolbox responsive popup
+    if (this.item.id === "dotsItem-id") return true; //toolbox responsive popup
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
 
     this._node = pointerDownEvent.currentTarget;

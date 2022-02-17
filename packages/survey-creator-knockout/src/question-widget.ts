@@ -4,7 +4,7 @@ import {
   SurveyTemplateRendererViewModel,
   Question
 } from "survey-core";
-import { createQuestionViewModel } from "./question";
+import { createQuestionViewModel } from "./adorners/question";
 const template = require("./question-widget.html");
 
 ko.components.register("svc-widget-question", {

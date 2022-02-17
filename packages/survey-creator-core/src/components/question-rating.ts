@@ -18,7 +18,7 @@ import "./question-rating.scss";
 
 export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
   constructor(
-    creator: CreatorBase<SurveyModel>,
+    creator: CreatorBase,
     surveyElement: SurveyElement,
     templateData: SurveyTemplateRendererTemplateData
   ) {

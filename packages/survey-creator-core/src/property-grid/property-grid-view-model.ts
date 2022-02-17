@@ -7,7 +7,7 @@ import { CreatorBase } from "../creator-base";
 import { settings } from "../settings";
 import { getLocString } from "../editorLocalization";
 
-export class PropertyGridViewModel<T extends SurveyModel> extends Base {
+export class PropertyGridViewModel extends Base {
   public nextSelectionAction: Action;
   public prevSelectionAction: Action;
   public objectSelectionAction: Action;
@@ -18,7 +18,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
   @property() survey: SurveyModel;
   @property() selectedElementName: string;
 
-  constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase<T>) {
+  constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase) {
     super();
     this.selectedElementName = this.getTitle();
     this.propertyGridModel.objValueChangedCallback = () => {

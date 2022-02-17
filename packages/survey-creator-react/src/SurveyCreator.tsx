@@ -4,17 +4,8 @@ import ReactDOM from "react-dom";
 import {
   Base,
   Question,
-  PanelModel,
-  StylesManager,
   SurveyError,
-  unwrap,
-  SurveyModel,
-  SurveyElement,
-  ItemValue,
-  QuestionSelectBase,
-  AdaptiveActionContainer,
-  QuestionRowModel,
-  LocalizableString
+  SurveyModel
 } from "survey-core";
 import {
   SurveyActionBar,
@@ -27,15 +18,9 @@ import {
 import {
   ICreatorOptions,
   CreatorBase,
-  ITabbedMenuItem,
-  getElementWrapperComponentName,
-  isStringEditable,
-  getElementWrapperComponentData,
-  getItemValueWrapperComponentName,
-  getItemValueWrapperComponentData
+  ITabbedMenuItem
 } from "survey-creator-core";
 import { TabbedMenuComponent } from "./TabbedMenu";
-import { editableStringRendererName } from "./StringEditor";
 import { NotifierComponent } from "./Notifier";
 import { SvgBundleComponent } from "./SvgBundle";
 
@@ -51,7 +36,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     super(props);
     this.rootNode = React.createRef();
   }
-  get creator(): CreatorBase<SurveyModel> {
+  get creator(): CreatorBase {
     return this.props.creator;
   }
   protected getStateElement(): Base {
@@ -70,7 +55,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   private rootNode: React.RefObject<HTMLDivElement>;
 
   renderElement() {
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const creator: CreatorBase = this.props.creator;
     if (creator.isCreatorDisposed) return null;
     const creatorClassName = "svc-creator" + (this.props.creator.isMobileView ? " svc-creator--mobile" : "");
     const areaClassName = "svc-full-container svc-creator__area svc-flex-column" + (this.props.creator.haveCommercialLicense ? "" : " svc-creator__area--with-banner");
@@ -131,7 +116,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     );
   }
   renderActiveTab() {
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const creator: CreatorBase = this.props.creator;
     for (var i = 0; i < creator.tabs.length; i++) {
       if (creator.tabs[i].id === creator.activeTab) {
         return this.renderCreatorTab(creator.tabs[i]);
@@ -143,7 +128,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     if (tab.visible === false) {
       return null;
     }
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const creator: CreatorBase = this.props.creator;
     const component = !!tab.renderTab
       ? tab.renderTab()
       : ReactElementFactory.Instance.createElement(tab.componentContent, {
@@ -175,71 +160,9 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 }
 
-export class DesignTimeSurveyModel extends SurveyModel {
-  constructor(public creator: SurveyCreator, jsonObj?: any) {
-    super(jsonObj);
-  }
-  public isPopupEditorContent = false;
-
-  public getElementWrapperComponentName(element: any, reason?: string): string {
-    let componentName = getElementWrapperComponentName(
-      element,
-      reason,
-      this.isPopupEditorContent
-    );
-    return (
-      componentName || super.getElementWrapperComponentName(element, reason)
-    );
-  }
-  public getElementWrapperComponentData(element: any, reason?: string): any {
-    const data = getElementWrapperComponentData(element, reason, this.creator);
-    return data || super.getElementWrapperComponentData(element);
-  }
-
-  public getRowWrapperComponentName(row: QuestionRowModel): string {
-    return "svc-row";
-  }
-  public getRowWrapperComponentData(row: QuestionRowModel): any {
-    return {
-      creator: this.creator,
-      row
-    };
-  }
-
-  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    return getItemValueWrapperComponentName(item, question);
-  }
-  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    return getItemValueWrapperComponentData(item, question, this.creator);
-  }
-
-  public getRendererForString(element: Base, name: string): string {
-    if (!this.creator.readOnly && isStringEditable(element, name)) {
-      return editableStringRendererName;
-    }
-    return undefined;
-  }
-
-  public getRendererContextForString(element: Base, locStr: LocalizableString) {
-    const lStr: any = locStr;
-    if (!this.creator.readOnly && isStringEditable(element, locStr.name)) {
-      return {
-        creator: this.creator,
-        element,
-        locStr
-      };
-    }
-    return lStr;
-  }
-}
-export class SurveyCreator extends CreatorBase<SurveyModel> {
+export class SurveyCreator extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
-  }
-  protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
-    if (reason === "designer" || reason === "modal-question-editor")
-      return new DesignTimeSurveyModel(this, json);
-    return new SurveyModel(json);
   }
   public render(target: string | HTMLElement) {
     let node: HTMLElement = target as HTMLElement;

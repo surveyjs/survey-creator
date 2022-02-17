@@ -46,7 +46,7 @@ test("the creator can be empty", () => {
   creator.text = undefined;
   expect(creator.survey.pages).toHaveLength(0);
 
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(creator.getPlugin("designer"));
+  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
 });
@@ -54,7 +54,7 @@ test("the creator can be empty", () => {
 test("Create new page, set empty JSON", (): any => {
   const creator = new CreatorTester(undefined, undefined, false);
   expect(creator.viewType).toEqual("designer");
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(creator.getPlugin("designer"));
+  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.survey.pages).toHaveLength(0);
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
@@ -64,7 +64,7 @@ test("Create new page, recreate designer survey via JSON", (): any => {
   const creator = new CreatorTester(undefined, undefined, false);
   creator.JSON = { elements: [{ type: "text", name: "question1" }] };
   creator.showTestSurvey();
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(creator.getPlugin("designer"));
+  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   creator.JSON = {};
   creator.showDesigner();
   expect(creator.survey.pages).toHaveLength(0);
@@ -73,13 +73,13 @@ test("Create new page, recreate designer survey via JSON", (): any => {
 
 test("pageEditMode='single'", (): any => {
   let creator = new CreatorTester(undefined, undefined, false);
-  let designerPlugin = <TabDesignerPlugin<SurveyModel>>(creator.getPlugin("designer"));
+  let designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.pageEditMode).toEqual("standard");
   expect(designerPlugin.model.showNewPage).toBeTruthy();
   expect(designerPlugin.model.newPage).toBeTruthy();
 
   creator = new CreatorTester({ pageEditMode: "single" }, undefined, false);
-  designerPlugin = <TabDesignerPlugin<SurveyModel>>(creator.getPlugin("designer"));
+  designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.showNewPage).toBeTruthy();
   expect(designerPlugin.model.newPage).toBeTruthy();
 });

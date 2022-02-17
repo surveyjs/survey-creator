@@ -104,8 +104,9 @@
     bottom: calcSize(-0.5);
     left: calcSize(-1);
     right: calcSize(-1);
-    outline: calcSize(0.25) solid $primary;
-    border-radius: 3px;
+    border: 2px solid $primary;
+    border-radius: 5px;
+    box-sizing: content-box;
     background-color: $background;
     box-shadow: 0px 2px 6px $shadow-medium;
   }
@@ -115,9 +116,11 @@
   .sd-rating__item:focus-within {
     border: calcSize(0.25) solid $primary;
   }
-  .svc-string-editor:focus-within {
-    .svc-string-editor__border {
-      display: none;
+  &:not(.sd-rating__min-text) {
+    .svc-string-editor:focus-within {
+      .svc-string-editor__border {
+        display: none;
+      }
     }
   }
 }
