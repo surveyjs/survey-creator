@@ -11,6 +11,7 @@ export * from "../tabs/translation";
 
 export * from "../page";
 export * from "../row";
+export * from "../string-editor";
 export * from "../adorners/question";
 export * from "../adorners/question-dropdown";
 export * from "../question-link-value";

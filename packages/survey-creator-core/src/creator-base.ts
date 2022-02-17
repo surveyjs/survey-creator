@@ -18,7 +18,9 @@ import {
   IPanel,
   SurveyElement,
   ItemValue,
-  QuestionSelectBase
+  QuestionSelectBase,
+  QuestionRowModel,
+  LocalizableString
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -1699,7 +1701,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return survey;
   }
   protected createSurveyCore(json: any = {}, reason: string): T {
-    throw new Error("createSurveyCore method should be overridden/implemented");
+    //TODO
+    let res;
+    if (reason === "designer" || reason === "modal-question-editor")
+      res = new DesignTimeSurveyModel(this, json);
+    else res = new SurveyModel(json);
+    return <T>res;
   }
   @property() _stateValue: string;
   /**
@@ -2797,7 +2804,64 @@ export class StylesManager {
   }
 }
 
-export function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
+export class DesignTimeSurveyModel extends SurveyModel {
+  constructor(public creator: CreatorBase<SurveyModel>, jsonObj?: any) {
+    super(jsonObj);
+  }
+  public isPopupEditorContent = false;
+
+  public getElementWrapperComponentName(element: any, reason?: string): string {
+    let componentName = getElementWrapperComponentName(
+      element,
+      reason,
+      this.isPopupEditorContent
+    );
+    return (
+      componentName || super.getElementWrapperComponentName(element, reason)
+    );
+  }
+  public getElementWrapperComponentData(element: any, reason?: string): any {
+    const data = getElementWrapperComponentData(element, reason, this.creator);
+    return data || super.getElementWrapperComponentData(element);
+  }
+
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
+  }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
+    return {
+      creator: this.creator,
+      row
+    };
+  }
+
+  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+    return getItemValueWrapperComponentName(item, question);
+  }
+  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
+    return getItemValueWrapperComponentData(item, question, this.creator);
+  }
+
+  public getRendererForString(element: Base, name: string): string {
+    if (!this.creator.readOnly && isStringEditable(element, name)) {
+      return editableStringRendererName;
+    }
+    return undefined;
+  }
+  public getRendererContextForString(element: Base, locStr: LocalizableString): any {
+    if (!this.creator.readOnly && isStringEditable(element, locStr.name)) {
+      return {
+        creator: this.creator,
+        element,
+        locStr
+      };
+    }
+    return <any>locStr;
+  }
+}
+
+export const editableStringRendererName = "svc-string-editor";
+function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
   if (reason === "logo-image") {
     return "svc-logo-image";
   }
@@ -2829,7 +2893,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   return undefined;
 }
-export function getElementWrapperComponentData(
+function getElementWrapperComponentData(
   element: any,
   reason: string,
   creator: CreatorBase<SurveyModel>
@@ -2856,7 +2920,7 @@ export function getElementWrapperComponentData(
     return creator;
   return null;
 }
-export function getItemValueWrapperComponentName(
+function getItemValueWrapperComponentName(
   item: ItemValue,
   question: QuestionSelectBase
 ): string {
@@ -2868,7 +2932,7 @@ export function getItemValueWrapperComponentName(
   }
   return "svc-item-value";
 }
-export function getItemValueWrapperComponentData(
+function getItemValueWrapperComponentData(
   item: ItemValue,
   question: QuestionSelectBase,
   creator: CreatorBase<SurveyModel>
@@ -2882,7 +2946,7 @@ export function getItemValueWrapperComponentData(
     item
   };
 }
-export function isStringEditable(element: any, name: string): boolean {
+function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
   return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }

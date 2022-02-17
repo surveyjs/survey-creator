@@ -1,7 +1,7 @@
 import React from "react";
 import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
-import { CreatorBase, StringEditorViewModelBase } from "survey-creator-core";
+import { CreatorBase, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
 
 export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   private baseModel: StringEditorViewModelBase;
@@ -158,7 +158,6 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   }
 }
 
-export const editableStringRendererName = "svc-string-editor";
 ReactElementFactory.Instance.registerElement(
   editableStringRendererName,
   (props) => {

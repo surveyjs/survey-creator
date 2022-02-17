@@ -35,6 +35,7 @@ export * from "../Navigation";
 export * from "../SideBar";
 export * from "../tabs/TranslationLineSkeleton";
 export * from "../ActionButton";
+export * from "../StringEditor";
 
 export * from "../tabs/Designer";
 export * from "../tabs/Embed";
