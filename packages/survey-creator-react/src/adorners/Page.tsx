@@ -70,7 +70,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
         onClick={(e) => {
           return this.model.select(this.model, new ReactMouseEvent(e));
         }}
-        onMouseOut={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
+        onMouseLeave={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
       >
         {this.renderHeader()}
