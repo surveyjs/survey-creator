@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { SurveyTemplateRendererViewModel } from "survey-core";
-import { createQuestionViewModel } from "./question";
-const template = require("./question.html");
+import { createQuestionViewModel } from "./adorners/question";
+const template = require("./adorners/question.html");
 
 ko.components.register("svc-panel", {
   viewModel: {
