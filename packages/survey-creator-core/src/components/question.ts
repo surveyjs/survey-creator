@@ -29,14 +29,14 @@ import {
 import { ActionContainerViewModel } from "./action-container-view-model";
 import "./question.scss";
 
-export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyModel> {
+export class QuestionAdornerViewModel extends ActionContainerViewModel {
   @property() isDragged: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
 
   private dragOrClickHelper: DragOrClickHelper;
 
   constructor(
-    creator: CreatorBase<SurveyModel>,
+    creator: CreatorBase,
     surveyElement: SurveyElement,
     public templateData: SurveyTemplateRendererTemplateData
   ) {
@@ -60,8 +60,8 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
     this.dragTypeOverMe = <any>new ComputedUpdater(() => {
       let element = this.surveyElement.getType() === "paneldynamic" ?
-      (<any>this.surveyElement).template :
-      this.surveyElement;
+        (<any>this.surveyElement).template :
+        this.surveyElement;
       return element.dragTypeOverMe;
     });
   }

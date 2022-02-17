@@ -7,7 +7,7 @@ import "./question-image.scss";
 
 export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   constructor(
-    creator: CreatorBase<SurveyModel>,
+    creator: CreatorBase,
     surveyElement: SurveyElement,
     templateData: SurveyTemplateRendererTemplateData,
       public questionRoot: HTMLElement

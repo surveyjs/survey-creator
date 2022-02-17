@@ -10,14 +10,14 @@ import { SurveyPageNavigator } from "../PageNavigator";
 import { SurveyNavigation } from "../Navigation";
 
 interface ITabDesignerComponentProps {
-  data: TabDesignerViewModel<SurveyModel>;
+  data: TabDesignerViewModel;
 }
 
 export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponentProps, any> {
-  private get model(): TabDesignerViewModel<SurveyModel> {
+  private get model(): TabDesignerViewModel {
     return this.props.data;
   }
-  protected get creator(): CreatorBase<SurveyModel> {
+  protected get creator(): CreatorBase {
     return this.model.creator;
   }
   protected getStateElements(): Array<Base> {

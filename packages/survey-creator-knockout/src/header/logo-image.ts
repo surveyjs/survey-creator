@@ -6,7 +6,7 @@ const template: string = require("./logo-image.html");
 
 ko.components.register("svc-logo-image", {
   viewModel: {
-    createViewModel: (params: CreatorBase<SurveyModel>, componentInfo: any) => {
+    createViewModel: (params: CreatorBase, componentInfo: any) => {
       const model = new LogoImageViewModel(params, componentInfo.element.nextElementSibling);
       new ImplementorBase(model);
       return model;

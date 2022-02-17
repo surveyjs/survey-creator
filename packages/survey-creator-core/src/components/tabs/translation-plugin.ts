@@ -18,7 +18,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
   public model: Translation;
 
-  constructor(private creator: CreatorBase<SurveyModel>) {
+  constructor(private creator: CreatorBase) {
     creator.addPluginTab("translation", this);
     this.sidebarTab = this.creator.sidebar.addTab("translation");
     this.sidebarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");

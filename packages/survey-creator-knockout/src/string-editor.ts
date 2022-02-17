@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { CreatorBase, StringEditorViewModelBase } from "survey-creator-core";
+import { CreatorBase, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
 import { LocalizableString } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
 const template = require("./string-editor.html");
@@ -133,8 +133,6 @@ function applyLocStrOnSearchChanged(element: any, locStr: any) {
     }
   };
 }
-
-export const editableStringRendererName = "svc-string-editor";
 
 ko.components.register(editableStringRendererName, {
   viewModel: {

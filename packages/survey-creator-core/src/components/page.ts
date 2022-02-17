@@ -6,9 +6,7 @@ import { toggleHovered } from "../utils/utils";
 import "./page.scss";
 import { SurveyHelper } from "../survey-helper";
 
-export class PageViewModel<
-  T extends SurveyModel
-  > extends ActionContainerViewModel<T> {
+export class PageViewModel extends ActionContainerViewModel {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   public onPageSelectedCallback: () => void;
@@ -16,7 +14,7 @@ export class PageViewModel<
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   private _page: PageModel;
 
-  constructor(creator: CreatorBase<T>, page: PageModel) {
+  constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
       (type) => {
@@ -91,12 +89,12 @@ export class PageViewModel<
     this.updateActionsProperties();
   }
 
-  addNewQuestion(model: PageViewModel<T>, event: IPortableMouseEvent) {
+  addNewQuestion(model: PageViewModel, event: IPortableMouseEvent) {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage();
     }, null, this.currentAddQuestionType || "text");
   }
-  select(model: PageViewModel<T>, event: IPortableMouseEvent) {
+  select(model: PageViewModel, event: IPortableMouseEvent) {
     if (!model.isGhost) {
       model.creator.selectElement(model.page, undefined, false);
       if (!!this.onPageSelectedCallback) {

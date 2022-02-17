@@ -425,7 +425,7 @@ test("Create new page on creating designer plugin", (): any => {
   };
   expect(creator.viewType).toEqual("designer");
 
-  let designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  let designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.newPage).toBeTruthy();
@@ -433,7 +433,7 @@ test("Create new page on creating designer plugin", (): any => {
 
   creator = new CreatorTester();
   expect(creator.survey.pages).toHaveLength(1);
-  designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.newPage).toBeFalsy();
@@ -443,7 +443,7 @@ test("Create new page on creating designer plugin", (): any => {
   creator.survey.pages[0].addNewQuestion("text", "question1");
   creator.survey.addNewPage("page2");
   expect(creator.survey.pages).toHaveLength(2);
-  designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.newPage).toBeFalsy();
@@ -468,7 +468,7 @@ test("Create new page on creating designer plugin", (): any => {
 test("Create new page with empty survey", (): any => {
   const creator = new CreatorTester();
   expect(creator.viewType).toEqual("designer");
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
@@ -494,7 +494,7 @@ test("Create new page on changing title/description in ghost", (): any => {
       }
     ]
   };
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
@@ -531,7 +531,7 @@ test("Create new page on changing title/description in ghost PageViewModel reset
       }
     ]
   };
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
@@ -553,7 +553,7 @@ test("Create new page, set empty JSON", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {};
   expect(creator.viewType).toEqual("designer");
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pages).toHaveLength(1);
@@ -563,7 +563,7 @@ test("Create new page, recreate designer survey via JSON", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "question1" }] };
   creator.showTestSurvey();
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   creator.JSON = {};
@@ -617,7 +617,7 @@ test("undo/redo add new page", (): any => {
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pageCount).toEqual(1);
@@ -653,7 +653,7 @@ test("undo/redo add new page, via page model by adding new question", (): any =>
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(creator.survey.pageCount).toEqual(1);
@@ -767,7 +767,7 @@ test("Page duplicate and add new page, check name", (): any => {
   );
   action.action();
 
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   let pageModelNew = new PageViewModel(creator, designerPlugin.model.newPage);
@@ -806,7 +806,7 @@ test("Check action container for new added page", (): any => {
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   const pageModel = new PageViewModel(creator, designerPlugin.model.newPage);
@@ -877,7 +877,7 @@ test("pageEditMode='single'", (): any => {
   expect(Serializer.findProperty("survey", "pages").isVisible("")).toBeFalsy();
   expect(Serializer.findProperty("question", "page").isVisible("")).toBeFalsy();
   expect(Serializer.findProperty("panel", "page").isVisible("")).toBeFalsy();
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.showNewPage).toBeFalsy();
@@ -1038,7 +1038,7 @@ test("Undo/redo question adding/removing", (): any => {
 
 test("Question type selector", (): any => {
   const creator = new CreatorTester();
-  const survey: SurveyModel = <SurveyModel>creator.survey;
+  const survey: SurveyModel = creator.survey;
   expect(survey.getAllQuestions().length).toEqual(0);
   expect(creator.addNewQuestionText).toEqual("Add Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
@@ -1078,7 +1078,7 @@ test("Question type custom widgets", (): any => {
   CustomWidgetCollection.Instance.add(widget, "customtype");
 
   const creator = new CreatorTester();
-  const survey: SurveyModel = <SurveyModel>creator.survey;
+  const survey: SurveyModel = creator.survey;
   expect(survey.getAllQuestions().length).toEqual(0);
   expect(creator.addNewQuestionText).toEqual("Add Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
@@ -1103,7 +1103,7 @@ test("Question type selector localization", (): any => {
   locStrings.ed.addNewQuestion = "Add New Question";
   locStrings.ed.addNewTypeQuestion = "Add New {0}";
   const creator = new CreatorTester();
-  const survey: SurveyModel = <SurveyModel>creator.survey;
+  const survey: SurveyModel = creator.survey;
   expect(creator.addNewQuestionText).toEqual("Add New Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
   const listModel: ListModel =
@@ -1117,7 +1117,7 @@ test("Question type selector localization", (): any => {
 
 test("Add question with default choices", (): any => {
   const creator = new CreatorTester();
-  const survey: SurveyModel = <SurveyModel>creator.survey;
+  const survey: SurveyModel = creator.survey;
   creator.currentAddQuestionType = "radiogroup";
   creator.addNewQuestionInPage(() => { });
   const question = <QuestionRadiogroupModel>survey.getAllQuestions()[0];
@@ -1128,7 +1128,7 @@ test("Add question based on json in toolbox", (): any => {
   const creator = new CreatorTester();
   const toolboxItem = creator.toolbox.getItemByName("text");
   toolboxItem.json.placeHolder = "Test holder";
-  const survey: SurveyModel = <SurveyModel>creator.survey;
+  const survey: SurveyModel = creator.survey;
   creator.currentAddQuestionType = "text";
   creator.addNewQuestionInPage(() => { });
   const question = <QuestionTextModel>survey.getAllQuestions()[0];
@@ -1193,7 +1193,7 @@ test("Test plug-ins in creator", (): any => {
     showEmbeddedSurveyTab: true
   });
   expect(creator.viewType).toEqual("designer");
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
@@ -1227,7 +1227,7 @@ test("Test plug-ins in creator", (): any => {
 test("Test plug-ins JSON-Text in creator", (): any => {
   const creator = new CreatorTester();
   expect(creator.viewType).toEqual("designer");
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
@@ -1281,7 +1281,7 @@ test("Test plug-ins JSON-Ace in creator", (): any => {
   };
   const creator = new CreatorTester();
   expect(creator.viewType).toEqual("designer");
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
@@ -1503,7 +1503,7 @@ test("Test TabDesignerViewModel.pageCount - reactive", (): any => {
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.pageCount).toEqual(1);
@@ -1549,7 +1549,7 @@ test("PageViewModel, actions and isGhost", (): any => {
   creator.JSON = {
     elements: [{ type: "text", name: "q1" }]
   };
-  const designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model.newPage).toBeTruthy();

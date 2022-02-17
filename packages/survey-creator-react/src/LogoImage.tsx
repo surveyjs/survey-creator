@@ -4,7 +4,7 @@ import { ReactElementFactory, SurveyElementBase, LogoImage, SvgIcon, attachKey2c
 import { CreatorBase, LogoImageViewModel } from "survey-creator-core";
 
 interface ILogoImageComponentProps {
-  data: CreatorBase<SurveyModel>;
+  data: CreatorBase;
 }
 
 export class LogoImageComponent extends SurveyElementBase<ILogoImageComponentProps, any> {

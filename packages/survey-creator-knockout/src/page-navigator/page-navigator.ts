@@ -11,7 +11,7 @@ import { ImplementorBase } from "survey-knockout-ui";
 const template = require("./page-navigator.html");
 // import template from "./page-navigator.html";
 
-export class PageNavigatorView extends PageNavigatorViewModel<SurveyModel> {
+export class PageNavigatorView extends PageNavigatorViewModel {
   constructor(private pagesController: PagesController) {
     super(pagesController);
   }

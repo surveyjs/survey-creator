@@ -8,7 +8,7 @@ export abstract class JsonEditorBaseModel extends Base {
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
 
-  constructor(protected creator: CreatorBase<SurveyModel>) {
+  constructor(protected creator: CreatorBase) {
     super();
   }
   public get text(): string {
@@ -51,7 +51,7 @@ export abstract class JsonEditorBaseModel extends Base {
 
 export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   public model: JsonEditorBaseModel;
-  constructor(private creator: CreatorBase<SurveyModel>) { }
+  constructor(private creator: CreatorBase) { }
   public activate(): void {
     this.model = this.createModel(this.creator);
   }
@@ -72,6 +72,6 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
     return true;
   }
   protected abstract createModel(
-    creator: CreatorBase<SurveyModel>
+    creator: CreatorBase
   ): JsonEditorBaseModel;
 }

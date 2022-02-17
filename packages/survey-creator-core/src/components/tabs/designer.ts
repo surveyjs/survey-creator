@@ -6,7 +6,7 @@ import { getLocString } from "../../editorLocalization";
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
 
-export class TabDesignerViewModel<T extends SurveyModel> extends Base {
+export class TabDesignerViewModel extends Base {
   private widthUpdater: ComputedUpdater;
   private checkNewPageHandler: (sender: SurveyModel, options: any) => void;
   private surveyOnPropertyChanged: (sender: SurveyModel, options: any) => void;
@@ -16,7 +16,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
   @property() pageCount: number;
   @property() withModifier: string;
   @property() showPlaceholder: boolean;
-  public creator: CreatorBase<T>;
+  public creator: CreatorBase;
 
   private createNewPage() {
     const newPage: PageModel = this.survey.createNewPage("");
@@ -44,7 +44,7 @@ export class TabDesignerViewModel<T extends SurveyModel> extends Base {
     return pages.length === 0 || pages[pages.length - 1].elements.length > 0;
   }
 
-  constructor(creator: CreatorBase<T>) {
+  constructor(creator: CreatorBase) {
     super();
     this.creator = creator;
     this.initSurvey();

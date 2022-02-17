@@ -9,7 +9,7 @@ ko.components.register("svc-page", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const creator: SurveyCreator = params.creator;
-      const model = new PageViewModel<Survey>(creator, ko.unwrap(params.page));
+      const model = new PageViewModel(creator, ko.unwrap(params.page));
       model.onPageSelectedCallback = () => {
         SurveyHelper.scrollIntoViewIfNeeded(componentInfo.element);
       };

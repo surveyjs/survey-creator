@@ -4,12 +4,12 @@ import { Base, SurveyModel } from "survey-core";
 import { Survey, SurveyElementBase, ReactQuestionFactory, SurveyQuestionButtonGroup, ReactElementFactory } from "survey-react-ui";
 
 interface IPropertyGridComponentProps {
-  model: PropertyGridViewModel<SurveyModel>;
+  model: PropertyGridViewModel;
 }
 
 export class PropertyGridComponent extends SurveyElementBase<IPropertyGridComponentProps, any> {
 
-  get model(): PropertyGridViewModel<SurveyModel> {
+  get model(): PropertyGridViewModel {
     return this.props.model;
   }
 

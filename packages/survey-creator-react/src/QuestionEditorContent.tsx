@@ -4,7 +4,7 @@ import { CreatorBase } from "survey-creator-core";
 import React from "react";
 
 interface IQuestionEditorContentComponentProps {
-  creator: CreatorBase<SurveyModel>;
+  creator: CreatorBase;
   survey: SurveyModel;
 }
 

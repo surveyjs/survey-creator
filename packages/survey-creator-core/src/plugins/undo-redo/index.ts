@@ -3,9 +3,9 @@ import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { UndoRedoController } from "./undo-redo-controller";
 import { UndoRedoManager } from "./undo-redo-manager";
 
-export class UndoRedoPlugin<T extends SurveyModel = SurveyModel> implements ICreatorPlugin {
+export class UndoRedoPlugin implements ICreatorPlugin {
 
-  constructor(private creator: CreatorBase<T>) {
+  constructor(private creator: CreatorBase) {
     this.model = new UndoRedoController(creator);
     this.model.createActions().forEach(action => creator.toolbar.actions.push(action));
     creator.registerShortcut("undo", {

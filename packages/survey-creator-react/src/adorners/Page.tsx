@@ -18,7 +18,7 @@ import React from "react";
 import { ReactMouseEvent } from "../events";
 
 interface ICreatorSurveyPageComponentProps {
-  creator: CreatorBase<SurveyModel>;
+  creator: CreatorBase;
   survey: SurveyModel;
   page: PageModel;
 }
@@ -27,11 +27,11 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   ICreatorSurveyPageComponentProps,
   any
 > {
-  private model: PageViewModel<SurveyModel>;
+  private model: PageViewModel;
   private rootRef: React.RefObject<HTMLDivElement>;
   constructor(props: ICreatorSurveyPageComponentProps) {
     super(props);
-    this.model = new PageViewModel<SurveyModel>(
+    this.model = new PageViewModel(
       this.props.creator,
       this.props.page
     );

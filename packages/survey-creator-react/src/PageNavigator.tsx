@@ -15,7 +15,7 @@ import { CreatorBase, getLocString, PageNavigatorViewModel } from "survey-creato
 import React from "react";
 
 interface ISurveyPageNavigatorProps {
-  creator: CreatorBase<SurveyModel>;
+  creator: CreatorBase;
   pages: Array<PageModel>;
 }
 
@@ -23,13 +23,13 @@ export class SurveyPageNavigator extends SurveyElementBase<
   ISurveyPageNavigatorProps,
   any
 > {
-  private model: PageNavigatorViewModel<SurveyModel>;
+  private model: PageNavigatorViewModel;
   private containerRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: ISurveyPageNavigatorProps) {
     super(props);
     this.containerRef = React.createRef();
-    this.model = new PageNavigatorViewModel<SurveyModel>(
+    this.model = new PageNavigatorViewModel(
       props.creator.pagesController
     );
   }
