@@ -32,8 +32,7 @@ test("Ghost Survey Element", async (t) => {
   await checkElementScreenshot("drag-drop-survey-element-ghost.png", Selector(".sv-drag-drop-ghost"), t);
 });
 
-//TODO REMOVE TEST ONLY
-test.only("Toolbox Item State After Drag", async (t) => {
+test("Toolbox Item State After Drag", async (t) => {
   await setJSON({ pages: [{ name: "page1" }] });
   await t.resizeWindow(2560, 1440);
   await setJSON({ pages: [{ name: "page1" }] });
