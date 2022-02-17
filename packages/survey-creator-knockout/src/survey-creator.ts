@@ -1,8 +1,8 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
-import { SurveyCreator } from "../creator";
+import { SurveyCreator } from "./creator";
 
-const template = require("./creator.html");
+const template = require("./survey-creator.html");
 // import template from "./creator.html";
 
 export class CreatorViewModel {

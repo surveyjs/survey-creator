@@ -1,5 +1,5 @@
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
-import { TabbedMenuViewModel } from "../src/components/tabbed-menu/tabbed-menu";
+import { TabbedMenuViewModel } from "../src/tabbed-menu/tabbed-menu";
 // We need import something from the component source code in order the component to be registered in KnockoutJS
 
 export default {

@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { ImplementorBase } from "survey-knockout-ui";
-import { SurveyCreator } from "../../creator";
+import { SurveyCreator } from "../creator";
 import { Base } from "survey-core";
 import { QuestionToolbox } from "survey-creator-core";
 const template = require("./toolbox.html");

@@ -19,7 +19,7 @@ import {
   getItemValueWrapperComponentName,
   getItemValueWrapperComponentData
 } from "survey-creator-core";
-import { editableStringRendererName } from "./components/string-editor";
+import { editableStringRendererName } from "./string-editor";
 
 if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;

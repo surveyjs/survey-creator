@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { ImplementorBase, Survey } from "survey-knockout-ui";
-import { SurveyCreator } from "../creator";
+import { SurveyCreator } from "./creator";
 
 import template from "./notifier.html";
 

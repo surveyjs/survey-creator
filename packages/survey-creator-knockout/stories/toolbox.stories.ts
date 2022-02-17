@@ -1,5 +1,5 @@
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { ToolboxViewModel } from "../src/components/toolbox/toolbox";
+import { ToolboxViewModel } from "../src/toolbox/toolbox";
 import { SvgBundleViewModel } from "survey-creator-core";
 
 export default {
