@@ -2861,7 +2861,7 @@ export class DesignTimeSurveyModel extends SurveyModel {
 }
 
 export const editableStringRendererName = "svc-string-editor";
-function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
+export function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
   if (reason === "logo-image") {
     return "svc-logo-image";
   }
@@ -2893,7 +2893,7 @@ function getElementWrapperComponentName(element: any, reason: string, isPopupEdi
   }
   return undefined;
 }
-function getElementWrapperComponentData(
+export function getElementWrapperComponentData(
   element: any,
   reason: string,
   creator: CreatorBase<SurveyModel>
@@ -2920,7 +2920,7 @@ function getElementWrapperComponentData(
     return creator;
   return null;
 }
-function getItemValueWrapperComponentName(
+export function getItemValueWrapperComponentName(
   item: ItemValue,
   question: QuestionSelectBase
 ): string {
@@ -2932,7 +2932,7 @@ function getItemValueWrapperComponentName(
   }
   return "svc-item-value";
 }
-function getItemValueWrapperComponentData(
+export function getItemValueWrapperComponentData(
   item: ItemValue,
   question: QuestionSelectBase,
   creator: CreatorBase<SurveyModel>
@@ -2946,7 +2946,7 @@ function getItemValueWrapperComponentData(
     item
   };
 }
-function isStringEditable(element: any, name: string): boolean {
+export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
   return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
