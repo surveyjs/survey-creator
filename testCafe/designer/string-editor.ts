@@ -90,6 +90,7 @@ test("Edit question title", async (t) => {
     .expect(Selector("textarea[aria-label=Title]").value).eql("", "Question title in property grid still empty")
 
     .click(svStringSelector)
+    .click(svStringSelector)
     .typeText(svStringSelector, prefix, { caretPos: 0 })
     .pressKey("enter")
     .expect(Selector("textarea[aria-label=Title]").value).eql(prefix + title, "Question title in property grid is updated")
@@ -208,6 +209,7 @@ test("Check creator events on string editor", async (t) => {
 
   await t
     .click(svStringSelector)
+    .click(svStringSelector)
     .typeText(svStringSelector, "1234567890", { caretPos: 0 })
     .pressKey("enter")
     .expect(Selector(".sd-question__description .svc-string-editor").withText(msg).visible).ok();
@@ -260,6 +262,7 @@ test("Check string editor inplaceEditForValues property", async (t) => {
   const svItemSelector = Selector(".sv-string-editor").withText("item1");
 
   await t
+    .click(svItemSelector)
     .click(svItemSelector)
     .typeText(svItemSelector, "new", { caretPos: 0 })
     .pressKey("enter")
@@ -324,6 +327,7 @@ test("Check markdown events", async (t) => {
   await t
     .click(Selector(".sv-string-editor").withText("$abc$"))
     .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
+    .click(Selector(".sv-string-editor").withText("*abc*"))
     .typeText(Selector(".sv-string-editor").withText("*abc*"), "d", { caretPos: 0 })
     .pressKey("enter")
     .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok();
