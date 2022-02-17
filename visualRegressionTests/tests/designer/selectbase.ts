@@ -32,7 +32,7 @@ test("Dropdown adorners", async (t) => {
   await setJSON(json);
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-  const question = Selector(".svc-question__dropdown-choices");
+  const question = Selector(".svc-question__content");
   await takeScreenshot("dropdown-not-selected.png", question, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
