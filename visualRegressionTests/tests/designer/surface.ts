@@ -94,6 +94,42 @@ test("Placeholder", async (t) => {
   await checkElementScreenshot("surface-placeholder.png", designerTabContent, t);
 });
 
+test("Page and question borders", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  const designerTabContent = Selector(".svc-tab-designer");
+  const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+  const qContent = Selector(".svc-question__content");
+  await checkElementScreenshot("page-content.png", designerTabContent, t);
+  await checkElementScreenshot("question-content.png", pageContent, t);
+  await t.hover(pageContent, { offsetX: 5, offsetY: 5 }).wait(300);
+  await checkElementScreenshot("page-content-hover.png", designerTabContent, t);
+  await t.hover(qContent, { offsetX: 5, offsetY: 5 }).wait(300);
+  await checkElementScreenshot("question-content-hover.png", pageContent, t);
+  await t.hover(pageContent.find(".svc-page__add-new-question"));
+  await checkElementScreenshot("question-add-hover.png", pageContent, t);
+  await t.click(qContent, { offsetX: 5, offsetY: 5 });
+  await checkElementScreenshot("question-content-click.png", pageContent, t);
+  await t.click(pageContent, { offsetX: 5, offsetY: 5 });
+  await checkElementScreenshot("page-content-click.png", designerTabContent, t);
+  await t.click(pageContent.find(".sd-page__title"), { offsetX: 5, offsetY: 5 });
+  await checkElementScreenshot("page-title-click.png", designerTabContent, t);
+
+});
 /*
 test("Check question width and position", async (t) => {
   await t.resizeWindow(1920, 1080);
