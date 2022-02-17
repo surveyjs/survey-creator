@@ -72,12 +72,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
     return this.baseModel.onKeyDown(event.nativeEvent);
   };
   private onMouseUp = (event: React.MouseEvent<HTMLSpanElement>): boolean => {
-    if(this.justFocused) {
-      this.justFocused = false;
-      event.nativeEvent.preventDefault();
-      return false;
-    }
-    return undefined;
+    return this.baseModel.onMouseUp(event.nativeEvent);
   };
   private done = (event: any) => {
     this.baseModel.done(event);

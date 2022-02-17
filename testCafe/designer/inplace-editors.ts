@@ -616,7 +616,7 @@ test("Rating question inplace editor", async (t) => {
     .pressKey("Enter")
     .expect(ClientFunction(() => {
       return window["creator"].survey.getAllQuestions()[0].rateValues.map(v => v.text);
-    })()).eql(["1", "2", "3abc", "4", "5"]);
+    })()).eql(["1", "2", "abc", "4", "5"]);
 
 });
 
