@@ -34,10 +34,10 @@ import {
   getItemValueWrapperComponentName,
   getItemValueWrapperComponentData
 } from "survey-creator-core";
-import { TabbedMenuComponent } from "./components/TabbedMenu";
-import { editableStringRendererName } from "./components/StringEditor";
-import { NotifierComponent } from "./components/Notifier";
-import { SvgBundleComponent } from "./components/SvgBundle";
+import { TabbedMenuComponent } from "./TabbedMenu";
+import { editableStringRendererName } from "./StringEditor";
+import { NotifierComponent } from "./Notifier";
+import { SvgBundleComponent } from "./SvgBundle";
 
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;
@@ -71,7 +71,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
 
   renderElement() {
     const creator: CreatorBase<SurveyModel> = this.props.creator;
-    if(creator.isCreatorDisposed) return null;
+    if (creator.isCreatorDisposed) return null;
     const creatorClassName = "svc-creator" + (this.props.creator.isMobileView ? " svc-creator--mobile" : "");
     const areaClassName = "svc-full-container svc-creator__area svc-flex-column" + (this.props.creator.haveCommercialLicense ? "" : " svc-creator__area--with-banner");
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
