@@ -3,7 +3,7 @@ import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
 import { url, screenshotComparerOptions, setJSON } from "../../helper";
 
-const title = "Rating Screenshot";
+const title = "SelectBase Screenshot";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
@@ -15,20 +15,25 @@ const json = {
       "name": "page1",
       "elements": [
         {
-          "type": "rating",
-          "name": "question1"
+          "type": "dropdown",
+          "name": "question1",
+          "choices": [
+            "item1",
+            "item2",
+            "item3"
+          ]
         }
       ]
     }
   ]
 };
 
-test("Rating adorners", async (t) => {
+test("Dropdown adorners", async (t) => {
   await setJSON(json);
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-  const question = Selector("div[data-name=question1]");
-  await takeScreenshot("rating-not-selected.png", question, screenshotComparerOptions);
+  const question = Selector(".svc-question__dropdown-choices");
+  await takeScreenshot("dropdown-not-selected.png", question, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
@@ -36,7 +41,7 @@ test("Rating adorners", async (t) => {
   await t
     .click(question, { offsetY: 40 })
     .expect(Selector(".svc-question__content--selected div[data-name=question1]").visible).ok();
-  await takeScreenshot("rating-selected.png", question, screenshotComparerOptions);
+  await takeScreenshot("dropdown-selected.png", question, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
