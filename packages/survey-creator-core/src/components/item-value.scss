@@ -77,13 +77,11 @@
 }
 
 .svc-item-value-controls__remove {
-  float: right;
   use {
     fill: $red;
   }
 }
 .svc-item-value-controls__add {
-  float: right;
   use {
     fill: $primary;
   }
@@ -101,14 +99,6 @@
   &:focus {
     background-color: $red-light;
   }
-}
-
-.svc-question__content--selected-no-border .svc-item-value-controls {
-  display: block;
-}
-
-.svc-question__content--selected .svc-item-value-controls {
-  display: block;
 }
 
 .sv-string-editor {
