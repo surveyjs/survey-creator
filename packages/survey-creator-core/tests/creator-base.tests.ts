@@ -1094,6 +1094,7 @@ test("Question type custom widgets", (): any => {
   expect(creator.addNewQuestionInPage(() => { }));
   expect(survey.getAllQuestions().length).toEqual(2);
   expect(survey.getAllQuestions()[1].getType()).toEqual("test_widget");
+  CustomWidgetCollection.Instance.clear();
 });
 
 test("Question type selector localization", (): any => {
@@ -1642,6 +1643,51 @@ test("ConvertTo, show the current question type selected", (): any => {
   expect(list.selectedItem.id).toEqual("text");
   creator.convertCurrentQuestion("text");
   expect((<any>creator.selectedElement).id).toEqual(question.id);
+});
+test("ConvertTo, show custom widgets in ConvertTo action", (): any => {
+  const widget = {
+    name: "test_widget",
+    title: "Test Widget",
+    iconName: "icon-editor",
+    widgetIsLoaded: function () {
+      return true;
+    },
+    isFit: function (question) {
+      return question.getType() === "test_widget";
+    },
+    init() {
+      //Register a new type using the empty question as the base.
+      Serializer.addClass("test_widget", [], null, "empty");
+    },
+    htmlTemplate:
+      "<div>This is test widget</div>",
+    afterRender: function (question, element) {
+    }
+  };
+
+  CustomWidgetCollection.Instance.add(widget, "customtype");
+
+  const creator = new CreatorTester({ questionTypes: ["text", "comment"] });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  };
+  expect(creator.toolbox.items).toHaveLength(3);
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+
+  const questionModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined
+  );
+  const items = questionModel.getConvertToTypesActions();
+  expect(items).toHaveLength(3);
+  expect(items[0].id).toEqual("text");
+  expect(items[1].id).toEqual("comment");
+  expect(items[2].id).toEqual("test_widget");
+  CustomWidgetCollection.Instance.clear();
 });
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
