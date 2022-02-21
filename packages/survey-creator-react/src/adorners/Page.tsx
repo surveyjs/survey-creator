@@ -68,7 +68,7 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
         className={"svc-page__content " + this.model.css}
         id={this.props.page.id}
         onClick={(e) => {
-          return this.model.select((this.props.creator.pageEditMode !== "single" ? this.model : this.props.survey) as any, new ReactMouseEvent(e));
+          return this.model.select(this.model, new ReactMouseEvent(e));
         }}
         onMouseLeave={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}

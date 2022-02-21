@@ -1628,6 +1628,7 @@ export class CreatorBase extends Base
   private getSurveyTextFromDesigner() {
     if (!this.survey) return "";
     var json = (<any>this.survey).toJSON();
+    json = this.singlePageJSON(json);
     const indent = settings.jsonEditor.indentation;
     if (this.options && this.options.generateValidJSON) {
       return JSON.stringify(json, null, indent);
@@ -1762,12 +1763,21 @@ export class CreatorBase extends Base
     const item = this.toolbox.getItemByName(elType);
     return !!item ? item.json : null;
   }
+  private singlePageJSON(json: any) {
+    if(this.pageEditMode === "single") {
+      const pages = json.pages;
+      json.elements = pages[0].elements;
+      delete json.pages;
+    }
+    return json;
+  }
   /**
    * The Survey JSON. Use it to get Survey JSON or change it.
    * @see text
    */
   public get JSON(): any {
-    return (<any>this.survey).toJSON();
+    const json = (<any>this.survey).toJSON();
+    return this.singlePageJSON(json);
   }
   public set JSON(val: any) {
     if (this.viewType == "editor") {
