@@ -100,7 +100,6 @@ export class TabDesignerViewModel extends Base {
 
   private checkNewPage() {
     const showPlaceholder = this.survey.getAllQuestions().length === 0 && this.survey.pageCount === 0;
-    settings.allowShowEmptyTitleInDesignMode = showPlaceholder ? false : initialSettingsAllowShowEmptyTitleInDesignMode;
     this.showPlaceholder = showPlaceholder;
     this.pageCount = this.survey.pageCount;
     if (this.showPlaceholder || this.canShowNewPage) {
