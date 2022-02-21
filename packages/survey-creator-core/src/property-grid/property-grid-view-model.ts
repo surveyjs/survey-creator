@@ -108,6 +108,7 @@ export class PropertyGridViewModel extends Base {
     }
 
     const selectorModel = new ObjectSelectorModel(
+      this.creator,
       (obj: Base, reason: string, displayName: string) => {
         return this.propertyGridModel.options.getObjectDisplayName(obj, reason, displayName);
       }

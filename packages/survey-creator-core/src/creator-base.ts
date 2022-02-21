@@ -1328,6 +1328,8 @@ export class CreatorBase extends Base
         this.setPropertyVisibility("question", false, "page");
         this.setPropertyVisibility("panel", false, "page");
         this.showJSONEditorTab = (options.showJSONEditorTab === true);
+        Survey.settings.allowShowEmptyTitleInDesignMode = false;
+        Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
       }
     }
   }
@@ -1350,8 +1352,10 @@ export class CreatorBase extends Base
     this.setPropertyPlaceHolder("survey", "title", "pe.surveyTitlePlaceholder");
     this.setPropertyPlaceHolder("survey", "description", "pe.surveyDescriptionPlaceholder");
     this.setPropertyVisibility("survey", false, "logoPosition");
-    this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
-    this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
+    if (this.pageEditMode !== "single") {
+      this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
+      this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
+    }
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
@@ -1754,7 +1758,7 @@ export class CreatorBase extends Base
     return newQuestion;
   }
   private getDefaultElementJSON(elType: string): any {
-    if(!this.toolbox) return null;
+    if (!this.toolbox) return null;
     const item = this.toolbox.getItemByName(elType);
     return !!item ? item.json : null;
   }
