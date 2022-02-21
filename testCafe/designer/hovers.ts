@@ -61,6 +61,8 @@ test("Page hover test", async t => {
     .expect(page.hasClass("svc-hovered-ready")).ok({ timeout: 500 })
     .expect(page.hasClass("svc-hovered")).notOk({ timeout: 200 })
     .expect(page.hasClass("svc-hovered")).ok({ timeout: 3000 })
+    .hover(Selector(".sd-page__title"))
+    .expect(page.hasClass("svc-hovered")).ok({ timeout: 200 })
     .hover(Selector(".svc-toolbox"))
     .expect(page.hasClass("svc-hovered")).notOk({ timeout: 500 })
     .hover(question, { offsetX: 5, offsetY: 5 })

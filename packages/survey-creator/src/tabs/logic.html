@@ -1,5 +1,5 @@
 <div class="svd-logic-tab">
-  <div data-bind="visible: koMode() == 'view'">
+  <!-- ko if: koMode() == 'view' -->
     <div data-bind="visible: $data.koItems().length > 0">
       <p>
         <input type="button" class="btn sv-btn btn-primary"
@@ -56,9 +56,8 @@
         <!-- /ko -->
       </div>
     </div>
-
-  </div>
-  <div data-bind="visible: koMode() == 'new' || koMode() == 'edit'">
+  <!-- /ko -->
+  <!-- ko if: koMode() == 'new' || koMode() == 'edit' -->
     <h4 class="svd-logic-tab__rule-editor__title" data-bind="text: $data.getLocString('ed.lg.expressionEditorTitle')">
     </h4>
     <svd-property-editor params="model: $data.expressionEditor"></svd-property-editor>
@@ -119,5 +118,5 @@
     </div>
     </p>
     <!-- /ko -->
-  </div>
+  <!-- /ko -->
 </div>

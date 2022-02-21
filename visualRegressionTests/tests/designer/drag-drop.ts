@@ -32,6 +32,21 @@ test("Ghost Survey Element", async (t) => {
   await checkElementScreenshot("drag-drop-survey-element-ghost.png", Selector(".sv-drag-drop-ghost"), t);
 });
 
+test("Toolbox Item State After Drag", async (t) => {
+  await setJSON({ pages: [{ name: "page1" }] });
+  await t.resizeWindow(2560, 1440);
+  await setJSON({ pages: [{ name: "page1" }] });
+
+  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, EmptyPage, { speed: 0.5 });
+
+  await checkElementScreenshot("toolbox-item-state-after-drag.png", Selector(RatingToolboxItem), t);
+});
+
 test("Empty Panel Styles", async (t) => {
   await t.resizeWindow(2560, 1440);
 
