@@ -29,6 +29,8 @@ export class TabDesignerViewModel extends Base {
     var checkNewElementHandler = (sender: SurveyModel, options: any) => {
       if (options.name === "elements" && newPage.elements.length > 0) {
         newPage.onPropertyChanged.remove(checkNewElementHandler);
+        newPage.showTitle = true;
+        newPage.showDescription = true;
         if (this.survey.pages.indexOf(newPage) > -1) return;
         this.creator.addPage(newPage);
       }
@@ -100,7 +102,6 @@ export class TabDesignerViewModel extends Base {
 
   private checkNewPage() {
     const showPlaceholder = this.survey.getAllQuestions().length === 0 && this.survey.pageCount === 0;
-    settings.allowShowEmptyTitleInDesignMode = showPlaceholder ? false : initialSettingsAllowShowEmptyTitleInDesignMode;
     this.showPlaceholder = showPlaceholder;
     this.pageCount = this.survey.pageCount;
     if (this.showPlaceholder || this.canShowNewPage) {
@@ -109,6 +110,8 @@ export class TabDesignerViewModel extends Base {
         this.createNewPage();
         this.showNewPage = true;
       }
+      this.newPage.showTitle = !showPlaceholder;
+      this.newPage.showDescription = !showPlaceholder;
     } else {
       this.showNewPage = false;
       this.newPage = undefined;

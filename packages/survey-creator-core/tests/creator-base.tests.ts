@@ -41,6 +41,7 @@ import { editorLocalization } from "../src/editorLocalization";
 import { EmptySurveyCreatorOptions, settings } from "../src/settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
+import { ObjectSelector } from "../src/property-grid/object-selector";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -2308,8 +2309,29 @@ test("creator showToolbox support", () => {
   expect(creator.toolboxLocation).toEqual("right");
 });
 test("init creator with pageEditModeValue=single", (): any => {
-  let creator = new CreatorTester({ pageEditMode: "single" });
-  expect(creator.showJSONEditorTab).toBeFalsy();
-  creator = new CreatorTester({ pageEditModeValue: "single", showJSONEditorTab: true });
-  expect(creator.showJSONEditorTab).toBeTruthy();
+  try {
+    let creator = new CreatorTester({ pageEditMode: "single" });
+    expect(creator.showJSONEditorTab).toBeFalsy();
+    creator = new CreatorTester({ pageEditModeValue: "single", showJSONEditorTab: true });
+    expect(creator.showJSONEditorTab).toBeTruthy();
+    creator = new CreatorTester({ pageEditMode: "single" });
+    creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+    expect(surveySettings.allowShowEmptyTitleInDesignMode).toBeFalsy();
+    expect(surveySettings.allowShowEmptyDescriptionInDesignMode).toBeFalsy();
+    expect(creator.JSON.pages).toBeUndefined();
+    expect(creator.JSON.elements).toBeDefined();
+    expect(creator.text.indexOf("pages")).toBe(-1);
+
+    var objects = new ObjectSelector(creator, creator.survey);
+    const allQuestions = creator.survey.getAllQuestions();
+    expect(objects.items).toHaveLength(1 + allQuestions.length); // survey + questions
+    expect(objects.items[0].title).toEqual("Survey");
+    expect(objects.items[0].data).toEqual(creator.survey);
+    expect(objects.items[1].title).toEqual(allQuestions[0].name);
+    expect(objects.items[1].data).toEqual(allQuestions[0]);
+
+  } finally {
+    surveySettings.allowShowEmptyTitleInDesignMode = true;
+    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+  }
 });
