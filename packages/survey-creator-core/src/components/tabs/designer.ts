@@ -29,6 +29,8 @@ export class TabDesignerViewModel extends Base {
     var checkNewElementHandler = (sender: SurveyModel, options: any) => {
       if (options.name === "elements" && newPage.elements.length > 0) {
         newPage.onPropertyChanged.remove(checkNewElementHandler);
+        newPage.showTitle = true;
+        newPage.showDescription = true;
         if (this.survey.pages.indexOf(newPage) > -1) return;
         this.creator.addPage(newPage);
       }
