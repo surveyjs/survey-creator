@@ -108,6 +108,8 @@ export class TabDesignerViewModel extends Base {
         this.createNewPage();
         this.showNewPage = true;
       }
+      this.newPage.showTitle = !showPlaceholder;
+      this.newPage.showDescription = !showPlaceholder;
     } else {
       this.showNewPage = false;
       this.newPage = undefined;
