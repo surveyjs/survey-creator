@@ -47,7 +47,12 @@ export class StringEditorViewModelBase extends Base {
   public onInput(event: any): void {
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
-      event.target.innerHTML = this.valueBeforeEdit;
+      if(this.locString.hasHtml) {
+        event.target.innerHTML = this.valueBeforeEdit;
+      }
+      else {
+        event.target.innerText = this.valueBeforeEdit;
+      }
       this.errorText = null;
       this.focused = false;
       return;
@@ -78,7 +83,12 @@ export class StringEditorViewModelBase extends Base {
         event.target.focus();
       }
     } else {
-      event.target.innerHTML = this.locString.renderedHtml;
+      if(this.locString.hasHtml) {
+        event.target.innerHTML = this.locString.renderedHtml;
+      }
+      else {
+        event.target.innerText = this.locString.renderedHtml;
+      }
       this.locString.strChanged();
     }
     this.focused = false;
