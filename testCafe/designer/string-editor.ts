@@ -334,6 +334,45 @@ test("Check markdown events", async (t) => {
     .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok();
 });
 
+test("Check markdown events with HTML", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => options.html = options.text.replaceAll("*", "$"));
+    });
+  })();
+
+  var getValue = ClientFunction(()=>{
+    return window["creator"].survey.description;
+  });
+
+  await setJSON({
+    "description": "*a<b>b</b>c*",
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  });
+
+  await t
+    .debug()
+    .expect(getValue()).eql("*a<b>b</b>c*")
+    .click(Selector(".sv-string-editor").withText("$abc$"))
+    .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
+    .click(Selector(".sv-string-editor").withText("*abc*"))
+    .pressKey("esc")
+    .expect(Selector(".sv-string-editor").withText("$abc$").visible).ok()
+    .expect(getValue()).eql("*a<b>b</b>c*")
+    .click(Selector(".sv-string-editor").withText("$abc$"))
+    .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
+    .click(Selector(".sv-string-editor").withText("*abc*"))
+    .typeText(Selector(".sv-string-editor").withText("*abc*"), "d", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok()
+    .expect(getValue()).eql("d*a<b>b</b>c*");
+});
+
 test("Test selection", async (t) => {
   let json = {
     "elements": [
