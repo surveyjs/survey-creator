@@ -26,7 +26,7 @@ import { Component, Fragment } from "react";
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 // Import CSS files for SurveyJS (survey-core) and Survey Creator
 import "survey-core/defaultV2.min.css";
-import "survey-creator-react/survey-creator-react.min.css";
+import "survey-creator-core/survey-creator-core.min.css";
 
 export class SurveyCreatorWidget extends Component {
   constructor() {
