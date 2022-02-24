@@ -341,7 +341,7 @@ test("Check markdown events with HTML", async (t) => {
     });
   })();
 
-  var getValue = ClientFunction(()=>{
+  var getValue = ClientFunction(() => {
     return window["creator"].survey.description;
   });
 
@@ -356,12 +356,13 @@ test("Check markdown events with HTML", async (t) => {
   });
 
   await t
-    .debug()
     .expect(getValue()).eql("*a<b>b</b>c*")
     .click(Selector(".sv-string-editor").withText("$abc$"))
     .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
     .click(Selector(".sv-string-editor").withText("*abc*"))
+    .wait(100)
     .pressKey("esc")
+    .wait(100)
     .expect(Selector(".sv-string-editor").withText("$abc$").visible).ok()
     .expect(getValue()).eql("*a<b>b</b>c*")
     .click(Selector(".sv-string-editor").withText("$abc$"))
