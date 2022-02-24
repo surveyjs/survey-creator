@@ -19,7 +19,7 @@ Survey Creator V1 is the latest RTM version. It is powered by Knockout. You can 
 - [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
 - [Create your Survey or Form now](https://surveyjs.io/create-survey/)
 
-## Survey Creator V2 (Beta)
+## Survey Creator V2
 
 Survey Creator V2 is a successor of V1. It has an updated design and separates survey model from the UI.
 
