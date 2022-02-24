@@ -2345,3 +2345,17 @@ test("get survey JSON with pageEditModeValue=single #2711", (): any => {
     surveySettings.allowShowEmptyDescriptionInDesignMode = true;
   }
 });
+test("delete last question and selection with pageEditModeValue=single #2712", (): any => {
+  try {
+    let creator = new CreatorTester({ pageEditMode: "single" });
+    creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+    const question = creator.survey.getAllQuestions()[0];
+    creator.selectElement(question);
+    expect(creator.selectedElement).toBe(question);
+    creator.deleteElement(question);
+    expect(creator.selectedElement).toBe(creator.survey);
+  } finally {
+    surveySettings.allowShowEmptyTitleInDesignMode = true;
+    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+  }
+});

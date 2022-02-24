@@ -2332,6 +2332,9 @@ export class CreatorBase extends Base
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
+    if(this.pageEditMode === "single" && parent.getType() === "page") {
+      parent = this.survey;
+    }
     obj["delete"]();
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
