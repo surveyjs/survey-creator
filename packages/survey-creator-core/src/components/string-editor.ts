@@ -34,7 +34,7 @@ export class StringEditorViewModelBase extends Base {
 
   public onFocus(event: any): void {
     if(!this.focusedProgram) {
-      this.valueBeforeEdit = event.target.innerHTML;
+      this.valueBeforeEdit = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
       this.focusedProgram = false;
     }
     this.creator.selectFromStringEditor = true;
@@ -47,13 +47,18 @@ export class StringEditorViewModelBase extends Base {
   public onInput(event: any): void {
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
-      event.target.innerHTML = this.valueBeforeEdit;
+      if(this.locString.hasHtml) {
+        event.target.innerHTML = this.valueBeforeEdit;
+      }
+      else {
+        event.target.innerText = this.valueBeforeEdit;
+      }
       this.errorText = null;
       this.focused = false;
       return;
     }
 
-    const clearedText = clearNewLines(event.target.innerHTML);
+    const clearedText = clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
     let owner = this.locString.owner as any;
 
     this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
@@ -78,7 +83,12 @@ export class StringEditorViewModelBase extends Base {
         event.target.focus();
       }
     } else {
-      event.target.innerHTML = this.locString.renderedHtml;
+      if(this.locString.hasHtml) {
+        event.target.innerHTML = this.locString.renderedHtml;
+      }
+      else {
+        event.target.innerText = this.locString.renderedHtml;
+      }
       this.locString.strChanged();
     }
     this.focused = false;
