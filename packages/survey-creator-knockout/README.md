@@ -19,11 +19,14 @@ Although it is powered by Knockout, this library can also be used with Angular, 
 <head>
   <!-- ... -->
   <script src="https://unpkg.com/knockout@3.5.1/build/output/knockout-latest.js"></script>
+  
+  <link  href="https://unpkg.com/survey-core/defaultV2.min.css" type="text/css" rel="stylesheet">
   <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
   <script src="https://unpkg.com/survey-knockout-ui/survey-knockout-ui.min.js"></script>
-  <link href="https://unpkg.com/survey-coredefaultV2.min.css" type="text/css" rel="stylesheet"/>
+  
+  <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">
+  <script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
   <script src="https://unpkg.com/survey-creator-knockout/survey-creator-knockout.min.js"></script>
-  <link href="https://unpkg.com/survey-creator-knockout/survey-creator-knockout.min.css" type="text/css" rel="stylesheet"/>
   <!-- ... -->
 </head>
 ```
@@ -84,7 +87,7 @@ Open the `angular.json` file and reference CSS files for SurveyJS (survey-core) 
             "styles": [
               ...
               "node_modules/survey-core/defaultV2.min.css",
-              "node_modules/survey-creator-knockout/survey-creator-knockout.min.css"
+              "node_modules/survey-creator-core/survey-creator-core.min.css"
             ],
             ...
 
@@ -149,7 +152,7 @@ Create a new component and use it in your Vue application:
 import { SurveyCreator } from "survey-creator-knockout";
 // Import CSS files for SurveyJS (survey-core) and Survey Creator
 import "survey-core/defaultV2.min.css";
-import "survey-creator-knockout/survey-creator-knockout.min.css";
+import "survey-creator-core/survey-creator-core.min.css";
 
 export default {
   name: "surveyjs-creator-component",
