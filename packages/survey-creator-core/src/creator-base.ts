@@ -1766,8 +1766,12 @@ export class CreatorBase extends Base
   private singlePageJSON(json: any) {
     if(this.pageEditMode === "single") {
       const pages = json.pages;
-      json.elements = pages[0].elements;
-      delete json.pages;
+      if(Array.isArray(pages) && pages.length > 0) {
+        if(pages[0].elements !== undefined) {
+          json.elements = pages[0].elements;
+        }
+        delete json.pages;
+      }
     }
     return json;
   }

@@ -2335,3 +2335,13 @@ test("init creator with pageEditModeValue=single", (): any => {
     surveySettings.allowShowEmptyDescriptionInDesignMode = true;
   }
 });
+test("get survey JSON with pageEditModeValue=single #2711", (): any => {
+  try {
+    let creator = new CreatorTester({ pageEditMode: "single" });
+    creator.text = "";
+    expect(creator.JSON).toStrictEqual({ "logoPosition": "right" });
+  } finally {
+    surveySettings.allowShowEmptyTitleInDesignMode = true;
+    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+  }
+});
