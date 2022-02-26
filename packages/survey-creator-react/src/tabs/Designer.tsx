@@ -20,6 +20,26 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   protected get creator(): CreatorBase {
     return this.model.creator;
   }
+
+  constructor(props: any) {
+    super(props);
+    this.creator.onBeforeDrop.add(this.banUpdate);
+    this.creator.onAfterDrop.add(this.allowUpdate);
+  }
+
+  private banUpdate = () => {
+    this.canComponentUpdate = false;
+  }
+
+  private allowUpdate = () => {
+    this.canComponentUpdate = true;
+  }
+
+  componentWillUnmount(): void {
+    this.creator.onBeforeDrop.remove(this.banUpdate);
+    this.creator.onAfterDrop.remove(this.allowUpdate);
+  }
+
   protected getStateElements(): Array<Base> {
     return [this.model, this.model.survey];
   }
