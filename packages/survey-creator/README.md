@@ -9,7 +9,7 @@ The Survey Creator is a visual survey designer / form builder for [SurveyJS](htt
 - [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
 - [Create your Survey or Form now](https://surveyjs.io/create-survey/)
 
-**NOTE**: This package contains Survey Creator V1. For information on Survey Creator V2 (now in Beta), refer to the following directories:
+**NOTE**: This package contains Survey Creator V1. For information on Survey Creator V2, refer to the following directories:
 
 - [survey-creator-react](../survey-creator-react) for React
 - [survey-creator-knockout](../survey-creator-knockout) for Knockout, jQuery, Angular, and Vue

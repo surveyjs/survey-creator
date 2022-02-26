@@ -40,41 +40,31 @@ Change the links to the [SurveyJS Library](https://surveyjs.io/Documentation/Lib
 
 #### Links to the SurveyJS Library's scripts
 
-We still use the same base library (SurveyJS Library). However, for V2 of Creator you need to refer to the SurveyJS Library as to a library divided in two modules: a framework-independent part (core) and a framework-dependent part (Knockout in our case).
+We still use the same base library (SurveyJS Library). However, for V2 of Creator you need to refer to the SurveyJS Library as to a library divided in two modules: a framework-independent part (core) and a framework-dependent part (Knockout in our case). Find and replace the following links (used in V1 as the [Add Survey Creator into your page](https://surveyjs.io/Documentation/Survey-Creator?id=Add-Survey-Creator-into-your-Web-Page#step-2.add-links-to-survey-creator-and-survey-library) topic suggested):
 
-So, find and remove the following link (used in V1 as the [Add Survey Creator into your page](https://surveyjs.io/Documentation/Survey-Creator?id=Add-Survey-Creator-into-your-Web-Page#step-2.add-links-to-survey-creator-and-survey-library) topic suggested):
+```html
+<!-- Replace this: -->
+<script src="https://unpkg.com/survey-knockout/survey.ko.min.js"></script>
 
-```javascript
-<script src="https://unpkg.com/survey-knockout@SurveyJSVersion/survey-ko.min.js"></script>
-```
-
-And, in V2, add the following two references instead:
-
-```javascript
-<script src="https://unpkg.com/survey-core@SurveyJSVersion/survey.core.min.js"></script>
-
-<script src="https://unpkg.com/survey-knockout@SurveyJSVersion/survey-knockout-ui.min.js"></script>
+<!-- with this: -->
+<script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
+<script src="https://unpkg.com/survey-knockout-ui/survey-knockout-ui.min.js"></script>
 ```
 
 #### Links to the SurveyJS Creator's scripts and CSS
 
-Additionally, make sure to remove the following old V1 links to SurveyJS Creator resources (script and CSS files):
+Make sure to replace the following old V1 links to SurveyJS Creator resources (script and CSS files):
 
-```javascript
-<script src="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator.min.js"></script>
+```html
+<!-- Replace this: -->
+<link  href="https://unpkg.com/survey-creator/survey-creator.css" type="text/css" rel="stylesheet">
+<script src="https://unpkg.com/survey-creator/survey-creator.min.js"></script>
 
-<link href="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator.css" type="text/css" rel="stylesheet" />
+<!-- with this: -->
+<link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">
+<script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
+<script src="https://unpkg.com/survey-creator-knockout/survey-creator-knockout.min.js"></script>
 ```
-
-Replace them with new references in V2, as follows:
-
-```javascript
-<script src="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator-knockout.min.js"></script>
-
-<link href="https://unpkg.com/survey-creator@SurveyJSVersion/survey-creator-knockout.css" type="text/css" rel="stylesheet"/>
-```
-
-
 
 ### Step 2. Optionally change constructor parameters and explicitly call a render function
 
@@ -109,7 +99,7 @@ In V2, the React version of the SurveyJS Creator is implemented as a [React comp
 The most code is still valid, with an exception of the code that deals with rendering and some advanced functionality, such as custom property editors.
 
 If your application uses SurveyJS Creator and you migrate from V1 to V2, make sure you use correct packages.
-You need to install `survey-creator-react`. It depends on `survey-react-ui` and `survey-core` that will be installed as well.
+You need to install `survey-creator-react`. It depends on `survey-creator-core`, `survey-react-ui`, and `survey-core` that will be installed as well.
 
 As a result, your Survey Creator component code can look as follows:
 
@@ -118,7 +108,7 @@ As a result, your Survey Creator component code can look as follows:
 import React, { Component } from "react";
 import * as SurveyCreator from "survey-creator-react";
 import "survey-core/modern.css";
-import "survey-creator-react/survey-creator-react.css";
+import "survey-creator-core/survey-creator-core.css";
 
 class SurveyComponent extends Component {
     constructor() {

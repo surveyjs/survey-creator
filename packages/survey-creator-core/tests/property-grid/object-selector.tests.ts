@@ -65,7 +65,7 @@ function createSurvey2(): SurveyModel {
 
 test("Initial objects building", () => {
   var survey = createSurvey();
-  var objects = new ObjectSelector(survey);
+  var objects = new ObjectSelector(null, survey);
   expect(objects.items).toHaveLength(1 + 3 + 2 + 1 + 2); //    "survey + 3 pages + 5 questions."
   expect(objects.items[0].title).toEqual("Survey");
   expect(objects.items[0].data).toEqual(survey);
@@ -94,7 +94,7 @@ test("Initial objects building, panel support", () => {
   page1.addNewQuestion("text", "q5");
   page2.addNewQuestion("text", "q6");
 
-  var objects = new ObjectSelector(survey);
+  var objects = new ObjectSelector(null, survey);
   expect(objects.items).toHaveLength(1 + 2 + 2 + 6); //"survey + 2 pages + 2 panels +  5 questions."
   expect(objects.items[0].title).toEqual("Survey"); //"The first item is Survey");
   expect(objects.items[3].title).toEqual("panel1"); //  "The first panel"
@@ -109,11 +109,11 @@ test("PanelDynamic test", () => {
   var q = survey.pages[0].addNewQuestion("paneldynamic", "q1");
   q["template"].addNewQuestion("text", "question1");
   var question = q["template"].addNewQuestion("text", "question2");
-  var objects = new ObjectSelector(survey);
+  var objects = new ObjectSelector(null, survey);
   expect(objects.items).toHaveLength(1 + 1 + 1 + 2); //"survey + 1 pages + 1 dynamic page +  2 questions."
 });
 test("Initial objects building with titles - https://surveyjs.answerdesk.io/ticket/details/T1380", () => {
-  var objects = new ObjectSelector(createSurvey(), (obj: any) => {
+  var objects = new ObjectSelector(null, createSurvey(), (obj: any) => {
     return obj["title"];
   });
   expect(objects.items[1].title).toEqual("Page 1");
@@ -122,7 +122,7 @@ test("Initial objects building with titles - https://surveyjs.answerdesk.io/tick
   expect(objects.items[2].level).toEqual(2);
 });
 test("Filter items, set visible property", () => {
-  var objects = new ObjectSelector(createSurvey2());
+  var objects = new ObjectSelector(null, createSurvey2());
   expect(objects.items).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
   expect(objects.items[2].title).toEqual("Person name");
   expect(objects.items[2].level).toEqual(2);
@@ -167,7 +167,7 @@ test("Check ObjectSelectorModel", () => {
   const oldValueMINELEMENTCOUNT = ListModel.MINELEMENTCOUNT;
   ListModel.MINELEMENTCOUNT = 5;
   var survey = createSurvey2();
-  var model = new ObjectSelectorModel();
+  var model = new ObjectSelectorModel(null);
   var selectedItem: any;
 
   model.show(survey, survey.pages[0], (obj: Base) => {
@@ -187,7 +187,7 @@ test("Check ObjectSelectorModel", () => {
 });
 test("ObjectSelectorModel, do not recreate list model", () => {
   var survey = createSurvey2();
-  var model = new ObjectSelectorModel();
+  var model = new ObjectSelectorModel(null);
   var selectedItem: any;
   model.show(survey, survey.pages[0], (obj: Base) => {
     selectedItem = obj;
@@ -202,7 +202,7 @@ test("ObjectSelectorModel, do not recreate list model", () => {
 });
 test("ObjectSelectorModel, list model selection on show issue", () => {
   var survey = createSurvey2();
-  var model = new ObjectSelectorModel();
+  var model = new ObjectSelectorModel(null);
   var selectedItem: any;
   var selectedQuestion = survey.getAllQuestions()[0];
   model.show(survey, selectedQuestion, (obj: Base) => {

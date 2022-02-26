@@ -75,6 +75,12 @@ function getAllQuestionTypes(className: string, includeCurrent: boolean = false)
       res.push(classes[i].name);
     }
   }
+  const widgets = Survey.CustomWidgetCollection.Instance.widgets;
+  for(var i = 0; i < widgets.length; i ++) {
+    if (includeCurrent || widgets[i].name !== className) {
+      res.push(widgets[i].name);
+    }
+  }
   return res;
 }
 

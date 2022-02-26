@@ -1328,6 +1328,8 @@ export class CreatorBase extends Base
         this.setPropertyVisibility("question", false, "page");
         this.setPropertyVisibility("panel", false, "page");
         this.showJSONEditorTab = (options.showJSONEditorTab === true);
+        Survey.settings.allowShowEmptyTitleInDesignMode = false;
+        Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
       }
     }
   }
@@ -1350,8 +1352,10 @@ export class CreatorBase extends Base
     this.setPropertyPlaceHolder("survey", "title", "pe.surveyTitlePlaceholder");
     this.setPropertyPlaceHolder("survey", "description", "pe.surveyDescriptionPlaceholder");
     this.setPropertyVisibility("survey", false, "logoPosition");
-    this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
-    this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
+    if (this.pageEditMode !== "single") {
+      this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
+      this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
+    }
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
@@ -1628,6 +1632,7 @@ export class CreatorBase extends Base
   private getSurveyTextFromDesigner() {
     if (!this.survey) return "";
     var json = (<any>this.survey).toJSON();
+    json = this.singlePageJSON(json);
     const indent = settings.jsonEditor.indentation;
     if (this.options && this.options.generateValidJSON) {
       return JSON.stringify(json, null, indent);
@@ -1762,12 +1767,25 @@ export class CreatorBase extends Base
     const item = this.toolbox.getItemByName(elType);
     return !!item ? item.json : null;
   }
+  private singlePageJSON(json: any) {
+    if(this.pageEditMode === "single") {
+      const pages = json.pages;
+      if(Array.isArray(pages) && pages.length > 0) {
+        if(pages[0].elements !== undefined) {
+          json.elements = pages[0].elements;
+        }
+        delete json.pages;
+      }
+    }
+    return json;
+  }
   /**
    * The Survey JSON. Use it to get Survey JSON or change it.
    * @see text
    */
   public get JSON(): any {
-    return (<any>this.survey).toJSON();
+    const json = (<any>this.survey).toJSON();
+    return this.singlePageJSON(json);
   }
   public set JSON(val: any) {
     if (this.viewType == "editor") {
@@ -2317,6 +2335,9 @@ export class CreatorBase extends Base
     var objIndex = elements.indexOf(obj);
     if (objIndex == elements.length - 1) {
       objIndex--;
+    }
+    if(this.pageEditMode === "single" && parent.getType() === "page") {
+      parent = this.survey;
     }
     obj["delete"]();
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);

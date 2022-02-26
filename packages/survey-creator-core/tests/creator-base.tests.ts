@@ -41,6 +41,7 @@ import { editorLocalization } from "../src/editorLocalization";
 import { EmptySurveyCreatorOptions, settings } from "../src/settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
+import { ObjectSelector } from "../src/property-grid/object-selector";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -1094,6 +1095,7 @@ test("Question type custom widgets", (): any => {
   expect(creator.addNewQuestionInPage(() => { }));
   expect(survey.getAllQuestions().length).toEqual(2);
   expect(survey.getAllQuestions()[1].getType()).toEqual("test_widget");
+  CustomWidgetCollection.Instance.clear();
 });
 
 test("Question type selector localization", (): any => {
@@ -1642,6 +1644,51 @@ test("ConvertTo, show the current question type selected", (): any => {
   expect(list.selectedItem.id).toEqual("text");
   creator.convertCurrentQuestion("text");
   expect((<any>creator.selectedElement).id).toEqual(question.id);
+});
+test("ConvertTo, show custom widgets in ConvertTo action", (): any => {
+  const widget = {
+    name: "test_widget",
+    title: "Test Widget",
+    iconName: "icon-editor",
+    widgetIsLoaded: function () {
+      return true;
+    },
+    isFit: function (question) {
+      return question.getType() === "test_widget";
+    },
+    init() {
+      //Register a new type using the empty question as the base.
+      Serializer.addClass("test_widget", [], null, "empty");
+    },
+    htmlTemplate:
+      "<div>This is test widget</div>",
+    afterRender: function (question, element) {
+    }
+  };
+
+  CustomWidgetCollection.Instance.add(widget, "customtype");
+
+  const creator = new CreatorTester({ questionTypes: ["text", "comment"] });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  };
+  expect(creator.toolbox.items).toHaveLength(3);
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+
+  const questionModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined
+  );
+  const items = questionModel.getConvertToTypesActions();
+  expect(items).toHaveLength(3);
+  expect(items[0].id).toEqual("text");
+  expect(items[1].id).toEqual("comment");
+  expect(items[2].id).toEqual("test_widget");
+  CustomWidgetCollection.Instance.clear();
 });
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
@@ -2262,8 +2309,53 @@ test("creator showToolbox support", () => {
   expect(creator.toolboxLocation).toEqual("right");
 });
 test("init creator with pageEditModeValue=single", (): any => {
-  let creator = new CreatorTester({ pageEditMode: "single" });
-  expect(creator.showJSONEditorTab).toBeFalsy();
-  creator = new CreatorTester({ pageEditModeValue: "single", showJSONEditorTab: true });
-  expect(creator.showJSONEditorTab).toBeTruthy();
+  try {
+    let creator = new CreatorTester({ pageEditMode: "single" });
+    expect(creator.showJSONEditorTab).toBeFalsy();
+    creator = new CreatorTester({ pageEditModeValue: "single", showJSONEditorTab: true });
+    expect(creator.showJSONEditorTab).toBeTruthy();
+    creator = new CreatorTester({ pageEditMode: "single" });
+    creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+    expect(surveySettings.allowShowEmptyTitleInDesignMode).toBeFalsy();
+    expect(surveySettings.allowShowEmptyDescriptionInDesignMode).toBeFalsy();
+    expect(creator.JSON.pages).toBeUndefined();
+    expect(creator.JSON.elements).toBeDefined();
+    expect(creator.text.indexOf("pages")).toBe(-1);
+
+    var objects = new ObjectSelector(creator, creator.survey);
+    const allQuestions = creator.survey.getAllQuestions();
+    expect(objects.items).toHaveLength(1 + allQuestions.length); // survey + questions
+    expect(objects.items[0].title).toEqual("Survey");
+    expect(objects.items[0].data).toEqual(creator.survey);
+    expect(objects.items[1].title).toEqual(allQuestions[0].name);
+    expect(objects.items[1].data).toEqual(allQuestions[0]);
+
+  } finally {
+    surveySettings.allowShowEmptyTitleInDesignMode = true;
+    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+  }
+});
+test("get survey JSON with pageEditModeValue=single #2711", (): any => {
+  try {
+    let creator = new CreatorTester({ pageEditMode: "single" });
+    creator.text = "";
+    expect(creator.JSON).toStrictEqual({ "logoPosition": "right" });
+  } finally {
+    surveySettings.allowShowEmptyTitleInDesignMode = true;
+    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+  }
+});
+test("delete last question and selection with pageEditModeValue=single #2712", (): any => {
+  try {
+    let creator = new CreatorTester({ pageEditMode: "single" });
+    creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+    const question = creator.survey.getAllQuestions()[0];
+    creator.selectElement(question);
+    expect(creator.selectedElement).toBe(question);
+    creator.deleteElement(question);
+    expect(creator.selectedElement).toBe(creator.survey);
+  } finally {
+    surveySettings.allowShowEmptyTitleInDesignMode = true;
+    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+  }
 });

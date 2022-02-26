@@ -96,9 +96,14 @@ export class PageViewModel extends ActionContainerViewModel {
   }
   select(model: PageViewModel, event: IPortableMouseEvent) {
     if (!model.isGhost) {
-      model.creator.selectElement(model.page, undefined, false);
-      if (!!this.onPageSelectedCallback) {
-        this.onPageSelectedCallback();
+      if(model.creator.pageEditMode !== "single") {
+        model.creator.selectElement(model.page, undefined, false);
+        if (!!this.onPageSelectedCallback) {
+          this.onPageSelectedCallback();
+        }
+      }
+      else {
+        model.creator.selectElement(model.creator.survey, undefined, false);
       }
     }
     event.stopPropagation();
