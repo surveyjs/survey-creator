@@ -154,3 +154,32 @@ test("Check question width and position", async (t) => {
   await checkElementScreenshot("question-in-center", Selector(".svc-tab-designer"), t);
 });
 */
+test("Panel gap between items", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              },
+              {
+                "type": "text",
+                "name": "question2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  await setJSON(json);
+  await checkElementScreenshot("surface-panel.png", Selector(".svc-question__content"), t);
+});
