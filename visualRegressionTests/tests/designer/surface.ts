@@ -179,7 +179,7 @@ test("Panel gap between items", async (t) => {
         ]
       }
     ]
-  }
+  };
   await setJSON(json);
   await checkElementScreenshot("surface-panel.png", Selector(".svc-question__content"), t);
 });
