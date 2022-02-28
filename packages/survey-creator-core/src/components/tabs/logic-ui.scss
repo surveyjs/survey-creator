@@ -139,7 +139,10 @@
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
   color: $foreground-light;
-  &:hover, &:focus {
+  margin-top: calcSize(2);
+
+  &:hover,
+  &:focus {
     color: $background;
   }
 }
