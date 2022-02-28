@@ -23,21 +23,32 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
 
   constructor(props: any) {
     super(props);
-    this.creator.onBeforeDrop.add(this.banUpdate);
-    this.creator.onAfterDrop.add(this.allowUpdate);
   }
 
-  private banUpdate = () => {
-    this.canComponentUpdate = false;
+  private denyUpdate = () => {
+    this.denyComponentUpdate();
   }
 
   private allowUpdate = () => {
-    this.canComponentUpdate = true;
+    this.allowComponentUpdate();
+  }
+
+  private addDragDropEvents = () => {
+    this.creator.onBeforeDrop.add(this.denyUpdate);
+    this.creator.onAfterDrop.add(this.allowUpdate);
+  }
+
+  private clearDragDropEvents = () => {
+    this.creator.onBeforeDrop.remove(this.denyUpdate);
+    this.creator.onAfterDrop.remove(this.allowUpdate);
+  }
+
+  componentDidMount(): void {
+    this.addDragDropEvents();
   }
 
   componentWillUnmount(): void {
-    this.creator.onBeforeDrop.remove(this.banUpdate);
-    this.creator.onAfterDrop.remove(this.allowUpdate);
+    this.clearDragDropEvents();
   }
 
   protected getStateElements(): Array<Base> {
