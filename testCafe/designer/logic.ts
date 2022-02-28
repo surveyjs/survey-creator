@@ -94,8 +94,7 @@ fixture(title)
 const conditionBuilder = Selector(".sl-embedded-survey[data-name=\"conditions\"] div[data-name=\"panel\"]");
 const conditionTextEdit = Selector(".sl-embedded-survey[data-name=\"conditions\"] div[data-name=\"textEditor\"]");
 
-const newRuleCondition = "New rule is not set";
-const newRuleActions = "Value is empty";
+const newRuleDisplayText = "New rule";
 const cellRules = Selector(tableRulesSelector.find(".sl-table__cell[data-responsive-title=\"rules\"]"));
 const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
@@ -119,7 +118,7 @@ test("Create logic rule", async (t) => {
     .click(addNewRuleButton)
     .expect(addNewRuleButton.classNames).contains(disabledClass)
     .expect(Selector(".svc-logic-tab__content-empty").exists).notOk()
-    .expect(cellRules.innerText).eql(newRuleCondition)
+    .expect(cellRules.innerText).eql(newRuleDisplayText)
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.value).eql("")
     .expect(logicOperatorSelector.innerText).eql("equals")
@@ -191,7 +190,7 @@ test("Create logic rule", async (t) => {
     .expect(removeButton.count).eql(0)
 
     .expect(addNewRuleButton.classNames).contains(disabledClass)
-    .expect(cellRules.innerText).eql("New rule is not set")
+    .expect(cellRules.innerText).eql(newRuleDisplayText)
 
     .click(doneButton)
     .expect(addNewRuleButton.classNames).notContains(disabledClass)
@@ -370,7 +369,7 @@ async function check1Rule(t: TestController, ruleCondition: string) {
 }
 async function check2Rule(t: TestController) {
   await t
-    .expect(cellRules.nth(1).innerText).eql(newRuleCondition)
+    .expect(cellRules.nth(1).innerText).eql(newRuleDisplayText)
     .expect(logicQuestionSelector.value).eql("q1")
     .expect(logicOperatorSelector.value).eql("equal")
     .expect(logicDropdownValueSelector.value).eql("item2")
