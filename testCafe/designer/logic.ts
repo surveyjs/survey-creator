@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionTriggerEditorElement, logicDetailButtonElement, logicDropdownValueSelector, getSelectOptionByText, getBarItemByText, getListItemByText, logicActionTriggerQuestionsElement, tableRulesSelector } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionTriggerEditorElement, logicDetailButtonElement, logicDropdownValueSelector, getSelectOptionByText, getBarItemByText, getListItemByText, logicActionTriggerQuestionsElement, tableRulesSelector, logicAddNewRuleButton } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 
 const title = "Logic tab";
@@ -98,7 +98,6 @@ const newRuleDisplayText = "New rule";
 const cellRules = Selector(tableRulesSelector.find(".sl-table__cell[data-responsive-title=\"rules\"]"));
 const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
-const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New Rule");
 const addButton = Selector(".sl-paneldynamic__add-btn ").filterVisible();
 const removeButton = Selector(".svc-logic-condition-remove").filterVisible();
 const doneButton = Selector("button").withExactText("Done").filterVisible();
@@ -113,10 +112,10 @@ test("Create logic rule", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(Selector(".svc-logic-tab__content-empty").exists).ok()
     .expect(Selector(".svc-logic-tab__content-empty").visible).ok()
-    .expect(addNewRuleButton.classNames).notContains(disabledClass)
+    .expect(logicAddNewRuleButton.classNames).notContains(disabledClass)
 
-    .click(addNewRuleButton)
-    .expect(addNewRuleButton.classNames).contains(disabledClass)
+    .click(logicAddNewRuleButton)
+    .expect(logicAddNewRuleButton.classNames).contains(disabledClass)
     .expect(Selector(".svc-logic-tab__content-empty").exists).notOk()
     .expect(cellRules.innerText).eql(newRuleDisplayText)
     .expect(logicQuestionSelector.count).eql(1)
@@ -189,11 +188,11 @@ test("Create logic rule", async (t) => {
     .click(removeButton)
     .expect(removeButton.count).eql(0)
 
-    .expect(addNewRuleButton.classNames).contains(disabledClass)
+    .expect(logicAddNewRuleButton.classNames).contains(disabledClass)
     .expect(cellRules.innerText).eql(newRuleDisplayText)
 
     .click(doneButton)
-    .expect(addNewRuleButton.classNames).notContains(disabledClass)
+    .expect(logicAddNewRuleButton.classNames).notContains(disabledClass)
     .expect(notifyBalloonSelector.innerText).eql("Modified")
     .expect(cellRules.innerText).eql("If 'string_editor' is not empty, survey becomes completed")
     .expect(cellRules.find("span").getAttribute("title")).eql("If 'string_editor' is not empty, survey becomes completed");
@@ -206,7 +205,7 @@ test("Logic rules", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(0)
 
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("string_editor"))
     .click(logicOperatorSelector)
@@ -266,7 +265,7 @@ test("Filtering rules", async (t) => {
     .expect(tableRulesSelector.count).eql(1)
     .expect(getBarItemByText("Skip to question").visible).ok()
 
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("q4"))
     .click(logicOperatorSelector)
@@ -324,7 +323,7 @@ test("Fast entry of the editing condition", async (t) => {
     .typeText(conditionTextEdit, "{q1}='item1'", { replace: true })
     .expect(fastEntryAction.hasAttribute("disabled")).notOk()
 
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .expect(conditionBuilder.exists).ok()
     .expect(conditionTextEdit.exists).notOk()
     .expect(fastEntryAction.hasAttribute("disabled")).notOk()
@@ -351,7 +350,7 @@ test("Availability of the Done button", async (t) => {
 
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .expect(doneButton.visible).ok()
 
     .click(logicQuestionSelector)
@@ -402,7 +401,7 @@ test("Modified rules without saving", async (t) => {
     .click(logicDetailButtonElement.nth(0))
     .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
 
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("q1"))
     .click(logicDropdownValueSelector)

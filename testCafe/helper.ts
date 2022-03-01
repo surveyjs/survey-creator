@@ -58,6 +58,7 @@ export const toolboxItems = Selector(".svc-toolbox__tool").filterVisible();
 export const toolboxItemIcons = Selector(".svc-toolbox__tool .svc-toolbox__item-container").filterVisible();
 export const toolboxItemTitles = Selector(".svc-toolbox__tool .svc-toolbox__item > .svc-toolbox__item-title").filterVisible();
 
+export const logicAddNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New Rule");
 export const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
 export const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filterVisible();
 export const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();

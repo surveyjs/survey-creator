@@ -172,6 +172,7 @@
 
   .svc-logic-tab__content-action--disabled {
     cursor: default;
+    outline: none;
 
     &:hover {
       background-color: $background;
@@ -199,9 +200,6 @@
     overflow: visible;
   }
   .sd-question__content {
-    margin-top: 0;
-  }
-  .sd-row__question {
     margin-top: 0;
   }
   .sd-row__panel {
