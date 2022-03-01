@@ -2837,6 +2837,13 @@ export class DesignTimeSurveyModel extends SurveyModel {
       componentName || super.getElementWrapperComponentName(element, reason)
     );
   }
+  public getQuestionContentWrapperComponentName(element: any, reason?: string): string {
+    let componentName = getQuestionContentWrapperComponentName(element);
+    return (
+      componentName || super.getQuestionContentWrapperComponentName(element)
+    );
+  }
+
   public getElementWrapperComponentData(element: any, reason?: string): any {
     const data = getElementWrapperComponentData(element, reason, this.creator);
     return data || super.getElementWrapperComponentData(element);
@@ -2909,6 +2916,11 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
     }
   }
   return undefined;
+}
+export function getQuestionContentWrapperComponentName (element) {
+  if (element.getType() == "rating") {
+    return "svc-rating-question-content";
+  }
 }
 export function getElementWrapperComponentData(
   element: any,

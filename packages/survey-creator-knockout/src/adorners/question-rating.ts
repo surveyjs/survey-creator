@@ -20,16 +20,26 @@ ko.components.register("svc-rating-question", {
         params.templateData
       );
       createQuestionViewModel(params, componentInfo, model);
-      model["adornerComponent"] = "svc-rating-question-adorner";
+      //model["adornerComponent"] = "svc-rating-question-adorner";
       return model;
     }
   },
   template: questionTemplate
 });
-ko.components.register("svc-rating-question-adorner", {
+ko.components.register("svc-rating-question-content", {
   viewModel: {
-    createViewModel: (params: any, componentInfo: any) => {
-      return params.model;
+    createViewModel: (
+      params: SurveyTemplateRendererViewModel,
+      componentInfo: any
+    ) => {
+      const model = new QuestionRatingAdornerViewModel(
+        params.componentData,
+        params.templateData.data as QuestionRatingModel,
+        params.templateData
+      );
+      //createQuestionViewModel(params, componentInfo, model);
+      //model["adornerComponent"] = "svc-rating-question-adorner";
+      return model;
     }
   },
   template: template
