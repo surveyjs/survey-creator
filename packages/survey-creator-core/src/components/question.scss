@@ -405,3 +405,23 @@ svc-question,
     background-color: $background-dim;
   }
 }
+
+.sd-panel {
+  .svc-row {
+    margin-top: calcSize(1);
+  }
+  .svc-row:first-child {
+    margin-top: 0;
+  }
+  .svc-row .sd-row {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .svc-row.svc-row--ghost {
+    margin-top: calcSize(1);
+    margin-bottom: calcSize(1.5);
+    .sv-drag-drop-ghost {
+      top: 0;
+    }
+  }
+}
