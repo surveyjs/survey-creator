@@ -32,6 +32,7 @@ import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import {
   getElementWrapperComponentData,
   getElementWrapperComponentName,
+  getQuestionContentWrapperComponentName,
   ICreatorPlugin,
   isStringEditable
 } from "../src/creator-base";
@@ -1153,7 +1154,7 @@ test("getElementWrapperComponentName", (): any => {
   expect(getElementWrapperComponentName(new QuestionTextModel(""), "", true)).toEqual("svc-cell-question");
   expect(getElementWrapperComponentName(new QuestionImageModel(""), "", false)).toEqual("svc-image-question");
   expect(getElementWrapperComponentName(new QuestionImageModel(""), "", true)).toEqual("svc-cell-question");
-  expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", false)).toEqual("svc-rating-question");
+  expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", false)).toEqual("svc-question");
   expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", true)).toEqual("svc-cell-question");
   expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", false)).toEqual("svc-dropdown-question");
   expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", true)).toEqual("svc-cell-dropdown-question");
@@ -1161,6 +1162,10 @@ test("getElementWrapperComponentName", (): any => {
   const panelDynamic = new QuestionPanelDynamicModel("q1");
   const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
   expect(getElementWrapperComponentName(panelDynamictemplateQuestion, "", false)).toEqual("svc-dropdown-question");
+});
+
+test("getQuestionContentWrapperComponentName", (): any => {
+  expect(getQuestionContentWrapperComponentName(new QuestionRatingModel(""))).toEqual("svc-rating-question-content");
 });
 
 test("getElementWrapperComponentData", (): any => {
