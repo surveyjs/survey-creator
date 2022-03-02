@@ -322,9 +322,9 @@ test("Question type popup - narrow", async (t) => {
 test("Responsive creator: property grid - click the shadow", async (t) => {
   const json = { pages: [{ name: "page1" }] };
   await setJSON(json);
-  await t
+  await t.debug()
     .resizeWindow(900, 700)
-    .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 347 })
+    .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 273 })
     .click(expandButtonSelector)
     .expect(propertyGridSelector.visible).ok()
     .expect(flyoutPropertyGrid.exists).ok()
@@ -332,7 +332,7 @@ test("Responsive creator: property grid - click the shadow", async (t) => {
     .click(collapseButtonSelector)
     .click(getBarItemByTitle("Settings").filterVisible())
     .expect(objectSelectorButton.withText("Survey").visible).ok()
-    .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 347 })
+    .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 273 })
 
     .expect(objectSelectorButton.withText("page1").visible).notOk();
 });
