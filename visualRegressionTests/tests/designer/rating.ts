@@ -57,7 +57,7 @@ test("Rating adorners", async (t) => {
     .ok(compareResults.errorMessages());
 });
 
-test.only("Rating adorners with comment", async (t) => {
+test("Rating adorners with comment", async (t) => {
   await setJSON(jsonComment);
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);

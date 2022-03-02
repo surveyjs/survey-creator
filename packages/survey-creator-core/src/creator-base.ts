@@ -2906,9 +2906,6 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
       if (element.getType() == "image") {
         return "svc-image-question";
       }
-      if (element.getType() == "rating") {
-        return "svc-rating-question";
-      }
       return "svc-question";
     }
     if (element instanceof PanelModel) {
