@@ -71,7 +71,7 @@ test("Matrix question", async (t) => {
     .click(Selector(".sv-string-editor").withText("question1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
-    .click(Selector("span[aria-placeholder='Input survey title here']"))
+    .click(Selector("span[aria-placeholder='Survey Title']"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
     .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
 
