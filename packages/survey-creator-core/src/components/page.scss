@@ -19,7 +19,7 @@ svc-page {
   outline: none;
   .sd-page {
     margin: 0;
-    padding-top: calcSize(1);
+    padding: calcSize(1) calcSize(3) calcSize(2);
   }
 }
 
