@@ -33,7 +33,7 @@
   padding: 0;
 
   &:hover,
-  &:focus {
+  &.sv-focused--by-key {
     background-color: $primary-light;
     outline: none;
 
@@ -43,11 +43,27 @@
   }
 }
 
+.sl-table__remove-button .sv-action-bar-item {
+  border-radius: calcSize(12.5);
+  padding: calcSize(1);
+  cursor: pointer;
+
+  &:hover,
+  &.sv-focused--by-key {
+    background-color: $red-light;
+    outline: none;
+
+    use {
+      fill: $red;
+    }
+  }
+}
+
 .sl-table__cell .sv-action-bar-item__icon {
   display: none;
 }
 .sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
-.sl-table__cell .sv-action-bar-item:focus .sv-action-bar-item__icon {
+.sl-table__cell .sv-action-bar-item.sv-focused--by-key .sv-action-bar-item__icon {
   display: block;
 }
 

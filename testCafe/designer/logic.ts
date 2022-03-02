@@ -96,7 +96,7 @@ const conditionTextEdit = Selector(".sl-embedded-survey[data-name=\"conditions\"
 
 const newRuleDisplayText = "New rule";
 const cellRules = Selector(tableRulesSelector.find(".sl-table__cell[data-responsive-title=\"rules\"]"));
-const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
+const removeRuleButton = Selector(".sl-table__remove-button").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addButton = Selector(".sl-paneldynamic__add-btn ").filterVisible();
 const removeButton = Selector(".svc-logic-condition-remove").filterVisible();
@@ -440,4 +440,45 @@ test("Modified rules without saving", async (t) => {
     .expect(cellRules.nth(0).innerText).eql("If 'q3' == 45, survey becomes completed")
     .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
     .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass);
+});
+
+test("check button hover/focus state", async (t) => {
+  const removeButton = Selector(".sl-table__remove-button .sv-action-bar-item__icon");
+  const detailButton = Selector(".sl-table__detail-button .sv-action-bar-item__icon");
+  const focusedClassName = "sv-focused--by-key";
+
+  await setJSON(surveyJSON);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .expect(tableRulesSelector.count).eql(2)
+    .expect(removeButton.visible).notOk()
+    .expect(detailButton.visible).notOk()
+
+    .hover(tableRulesSelector.nth(0))
+    .hover(removeButton.nth(0))
+    .expect(removeButton.nth(0).visible).ok()
+    .expect(removeButton.nth(1).visible).notOk()
+    .click(detailButton)
+    .click(detailButton)
+
+    .hover(tableRulesSelector.nth(1))
+    .hover(removeButton.nth(1))
+    .expect(removeButton.nth(0).visible).notOk()
+    .expect(removeButton.nth(1).visible).ok()
+
+    .click(detailButton.nth(1))
+    .click(detailButton.nth(1))
+    .pressKey("tab tab")
+    .hover(logicAddNewRuleButton)
+    .expect(detailButton.nth(1).visible).notOk()
+    .expect(detailButton.classNames).notContains(focusedClassName)
+    .expect(removeButton.nth(1).visible).ok()
+    .expect(Selector(".sl-table__remove-button .sv-action-bar-item").classNames).contains(focusedClassName)
+
+    .pressKey("shift+tab")
+    .pressKey("shift+tab")
+    .expect(detailButton.nth(1).visible).ok()
+    .expect(detailButton.classNames).contains(focusedClassName)
+    .expect(removeButton.nth(1).visible).notOk()
+    .expect(Selector(".sl-table__remove-button .sv-action-bar-item").classNames).notContains(focusedClassName);
 });
