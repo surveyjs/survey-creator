@@ -65,7 +65,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           className={className}
           data-sv-drop-target-survey-element={"newGhostPage"}
         >
-          {this.renderPage(this.model.newPage)}
+          {!!this.model.newPage ? this.renderPage(this.model.newPage) : null}
         </div>
       </React.Fragment>);
   }
