@@ -74,21 +74,24 @@
 }
 .svc-logic-operator.svc-logic-operator--question {
   background-color: $blue-light;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $blue;
   }
 }
 .svc-logic-operator.svc-logic-operator--conjunction,
 .svc-logic-operator.svc-logic-operator--operator {
   background-color: $secondary-back-light;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $secondary;
   }
 }
 
 .svc-logic-operator.svc-logic-operator--action {
   background-color: $red-light;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $red;
   }
 }
@@ -139,7 +142,10 @@
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
   color: $foreground-light;
-  &:hover, &:focus {
+  margin-top: calcSize(2);
+
+  &:hover,
+  &:focus {
     color: $background;
   }
 }
@@ -166,10 +172,16 @@
 
   .svc-logic-tab__content-action--disabled {
     cursor: default;
-    color: $foreground-disabled;
+    outline: none;
+
     &:hover {
       background-color: $background;
+      box-shadow: 0px 1px 2px $shadow-inner;
     }
+  }
+
+  .svc-logic-tab__content-action--disabled .svc-text {
+    color: $foreground-disabled;
   }
 
   .sd-paneldynamic__panel-wrapper--in-row {
@@ -188,9 +200,6 @@
     overflow: visible;
   }
   .sd-question__content {
-    margin-top: 0;
-  }
-  .sd-row__question {
     margin-top: 0;
   }
   .sd-row__panel {

@@ -33,7 +33,7 @@
   padding: 0;
 
   &:hover,
-  &:focus {
+  &.sv-focused--by-key {
     background-color: $primary-light;
     outline: none;
 
@@ -43,11 +43,27 @@
   }
 }
 
+.sl-table__remove-button .sv-action-bar-item {
+  border-radius: calcSize(12.5);
+  padding: calcSize(1);
+  cursor: pointer;
+
+  &:hover,
+  &.sv-focused--by-key {
+    background-color: $red-light;
+    outline: none;
+
+    use {
+      fill: $red;
+    }
+  }
+}
+
 .sl-table__cell .sv-action-bar-item__icon {
   display: none;
 }
 .sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
-.sl-table__cell .sv-action-bar-item:focus .sv-action-bar-item__icon {
+.sl-table__cell .sv-action-bar-item.sv-focused--by-key .sv-action-bar-item__icon {
   display: block;
 }
 
@@ -91,6 +107,7 @@
   font-family: $font-family;
   vertical-align: top;
   padding: calcSize(2) 0;
+  width: 100%;
 }
 
 .sl-table__cell--detail-button {
@@ -109,7 +126,7 @@
   tbody {
     tr:last-child {
       .sl-table__cell {
-        padding-bottom: calcSize(5);
+        padding-bottom: calcSize(10);
       }
     }
   }
@@ -149,6 +166,7 @@
   }
   button.sl-panel__done-button {
     width: 100%;
+    margin-top: calcSize(2);
     margin-bottom: calcSize(10);
     background-color: $green-light;
     color: $green;
@@ -185,30 +203,17 @@
 .sl-question {
   display: flex;
   align-items: center;
+  margin-top: calcSize(2);
 }
 .sl-row {
   display: flex;
   align-items: flex-start;
   flex-flow: row wrap;
 }
-.sl-panel {
-  padding-bottom: calcSize(2);
-}
 .sl-row--multiple {
   .sl-panel {
     padding-bottom: 0;
   }
-}
-.sl-row {
-  margin-top: calcSize(-1);
-}
-
-.sl-row > div {
-  margin-top: calcSize(1);
-}
-
-.sl-row:not(:last-child) {
-  margin-bottom: calcSize(2);
 }
 .sl-question__header--left {
   margin-right: calcSize(1);
@@ -228,7 +233,15 @@
 }
 .svc-logic-question-value {
   padding-right: calcSize(5);
+  margin-top: calcSize(2);
 }
+.svc-logic_trigger-editor {
+  margin-top: calcSize(2);
+}
+.svc-logic_trigger-editor .svc-logic-question-value {
+  margin-top: 0;
+}
+
 .sv-popup.sv-property-editor {
   .sl-row {
     flex-flow: nowrap;
