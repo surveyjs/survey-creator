@@ -1495,16 +1495,20 @@ export class CreatorBase extends Base
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
+  public onBeforeDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
+  public onAfterDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
+      this.onBeforeDrop.fire(null, null);
       this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
+      this.onAfterDrop.fire(null, null);
     });
   }
   private initDragDropChoices() {
