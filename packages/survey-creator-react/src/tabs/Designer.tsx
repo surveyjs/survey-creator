@@ -54,6 +54,41 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   protected getStateElements(): Array<Base> {
     return [this.model, this.model.survey];
   }
+
+  private renderedPagesCache: any = {};
+  protected getRenderedPages(): JSX.Element[] {
+    if (this.changedStatePropName !== "pages") {
+      this.renderedPagesCache = {};
+    }
+    const renderedPages = [];
+    const pages = this.creator.survey.pages;
+
+    pages.forEach((page, index) => {
+      let cachedPage = this.renderedPagesCache[page.id];
+      if (!cachedPage) {
+        cachedPage = this.createRenderedPage(page, index);
+        this.renderedPagesCache[page.id] = cachedPage;
+      }
+      renderedPages.push(cachedPage);
+    });
+
+    if (this.model.showNewPage) {
+      renderedPages.push(this.renderNewPage("svc-page", this.model.newPage.id + "-ghost-new-page"));
+    }
+    return renderedPages;
+  }
+  protected createRenderedPage(page: PageModel, index: number): any {
+    return (
+      <div
+        className={"svc-page"}
+        data-sv-drop-target-page={page.name}
+        data-sv-drop-target-survey-element={page.name}
+        key={page.id + "-" + index}
+      >
+        {this.renderPage(page)}
+      </div>
+    );
+  }
   private renderNewPage(className: string, key: string = "") {
     return (
       <React.Fragment key={key}>
@@ -61,30 +96,9 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           className={className}
           data-sv-drop-target-survey-element={"newGhostPage"}
         >
-          {this.renderPage(this.model.newPage)}
+          {!!this.model.newPage ? this.renderPage(this.model.newPage) : null}
         </div>
       </React.Fragment>);
-  }
-  protected renderPages(): JSX.Element[] {
-    const surveyPages: JSX.Element[] = this.creator.survey.pages.map(
-      (page: PageModel, index: number) => {
-        return (
-          <div
-            className={"svc-page"}
-            data-sv-drop-target-page={page.name}
-            data-sv-drop-target-survey-element={page.name}
-            key={page.id + "-" + index}
-          >
-            {this.renderPage(page)}
-          </div>
-        );
-      }
-    );
-
-    if (this.model.showNewPage) {
-      surveyPages.push(this.renderNewPage("svc-page", this.model.newPage.id + "-ghost-new-page"));
-    }
-    return surveyPages;
   }
   protected renderPage(pageV: PageModel): JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-page", { survey: this.creator.survey, page: pageV, creator: this.creator });
@@ -126,7 +140,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           </div>
         }
         <SurveyNavigation survey={survey} location="top" />
-        {this.renderPages()}
+        {this.getRenderedPages()}
         <SurveyNavigation
           survey={survey}
           location="bottom"

@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, getSelectOptionByText, logicActionSelector, tableRulesSelector } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, getSelectOptionByText, logicActionSelector, tableRulesSelector, logicAddNewRuleButton } from "../../helper";
 
 const title = "Logic tab Screenshot";
 
@@ -12,6 +12,17 @@ test("empty view", async (t) => {
 
   await t.click(getTabbedMenuItemByText(creatorTabLogicName));
   await checkElementScreenshot("logic-tab-empty.png", tabContent, t);
+});
+
+test("new rule", async (t) => {
+  await t.resizeWindow(1280, 700);
+
+  const tabContent = Selector(".svc-creator-tab__content");
+
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(logicAddNewRuleButton);
+  await checkElementScreenshot("logic-tab-new-rule.png", tabContent, t);
 });
 
 const jsonOneRule = {

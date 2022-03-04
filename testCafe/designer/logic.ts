@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionTriggerEditorElement, logicDetailButtonElement, logicDropdownValueSelector, getSelectOptionByText, getBarItemByText, getListItemByText, logicActionTriggerQuestionsElement, tableRulesSelector } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionTriggerEditorElement, logicDetailButtonElement, logicDropdownValueSelector, getSelectOptionByText, getBarItemByText, getListItemByText, logicActionTriggerQuestionsElement, tableRulesSelector, logicAddNewRuleButton } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 
 const title = "Logic tab";
@@ -94,12 +94,10 @@ fixture(title)
 const conditionBuilder = Selector(".sl-embedded-survey[data-name=\"conditions\"] div[data-name=\"panel\"]");
 const conditionTextEdit = Selector(".sl-embedded-survey[data-name=\"conditions\"] div[data-name=\"textEditor\"]");
 
-const newRuleCondition = "New rule is not set";
-const newRuleActions = "Value is empty";
+const newRuleDisplayText = "New rule";
 const cellRules = Selector(tableRulesSelector.find(".sl-table__cell[data-responsive-title=\"rules\"]"));
-const removeRuleButton = Selector(".sv-action-bar-item[title=\"Remove\"]").filterVisible();
+const removeRuleButton = Selector(".sl-table__remove-button").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
-const addNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New Rule");
 const addButton = Selector(".sl-paneldynamic__add-btn ").filterVisible();
 const removeButton = Selector(".svc-logic-condition-remove").filterVisible();
 const doneButton = Selector("button").withExactText("Done").filterVisible();
@@ -114,12 +112,12 @@ test("Create logic rule", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(Selector(".svc-logic-tab__content-empty").exists).ok()
     .expect(Selector(".svc-logic-tab__content-empty").visible).ok()
-    .expect(addNewRuleButton.classNames).notContains(disabledClass)
+    .expect(logicAddNewRuleButton.classNames).notContains(disabledClass)
 
-    .click(addNewRuleButton)
-    .expect(addNewRuleButton.classNames).contains(disabledClass)
+    .click(logicAddNewRuleButton)
+    .expect(logicAddNewRuleButton.classNames).contains(disabledClass)
     .expect(Selector(".svc-logic-tab__content-empty").exists).notOk()
-    .expect(cellRules.innerText).eql(newRuleCondition)
+    .expect(cellRules.innerText).eql(newRuleDisplayText)
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.value).eql("")
     .expect(logicOperatorSelector.innerText).eql("equals")
@@ -190,11 +188,11 @@ test("Create logic rule", async (t) => {
     .click(removeButton)
     .expect(removeButton.count).eql(0)
 
-    .expect(addNewRuleButton.classNames).contains(disabledClass)
-    .expect(cellRules.innerText).eql("New rule is not set")
+    .expect(logicAddNewRuleButton.classNames).contains(disabledClass)
+    .expect(cellRules.innerText).eql(newRuleDisplayText)
 
     .click(doneButton)
-    .expect(addNewRuleButton.classNames).notContains(disabledClass)
+    .expect(logicAddNewRuleButton.classNames).notContains(disabledClass)
     .expect(notifyBalloonSelector.innerText).eql("Modified")
     .expect(cellRules.innerText).eql("If 'string_editor' is not empty, survey becomes completed")
     .expect(cellRules.find("span").getAttribute("title")).eql("If 'string_editor' is not empty, survey becomes completed");
@@ -207,7 +205,7 @@ test("Logic rules", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(0)
 
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("string_editor"))
     .click(logicOperatorSelector)
@@ -267,7 +265,7 @@ test("Filtering rules", async (t) => {
     .expect(tableRulesSelector.count).eql(1)
     .expect(getBarItemByText("Skip to question").visible).ok()
 
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("q4"))
     .click(logicOperatorSelector)
@@ -325,7 +323,7 @@ test("Fast entry of the editing condition", async (t) => {
     .typeText(conditionTextEdit, "{q1}='item1'", { replace: true })
     .expect(fastEntryAction.hasAttribute("disabled")).notOk()
 
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .expect(conditionBuilder.exists).ok()
     .expect(conditionTextEdit.exists).notOk()
     .expect(fastEntryAction.hasAttribute("disabled")).notOk()
@@ -352,7 +350,7 @@ test("Availability of the Done button", async (t) => {
 
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .expect(doneButton.visible).ok()
 
     .click(logicQuestionSelector)
@@ -370,7 +368,7 @@ async function check1Rule(t: TestController, ruleCondition: string) {
 }
 async function check2Rule(t: TestController) {
   await t
-    .expect(cellRules.nth(1).innerText).eql(newRuleCondition)
+    .expect(cellRules.nth(1).innerText).eql(newRuleDisplayText)
     .expect(logicQuestionSelector.value).eql("q1")
     .expect(logicOperatorSelector.value).eql("equal")
     .expect(logicDropdownValueSelector.value).eql("item2")
@@ -403,7 +401,7 @@ test("Modified rules without saving", async (t) => {
     .click(logicDetailButtonElement.nth(0))
     .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
 
-    .click(addNewRuleButton)
+    .click(logicAddNewRuleButton)
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("q1"))
     .click(logicDropdownValueSelector)
@@ -442,4 +440,47 @@ test("Modified rules without saving", async (t) => {
     .expect(cellRules.nth(0).innerText).eql("If 'q3' == 45, survey becomes completed")
     .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
     .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass);
+});
+
+test("check button hover/focus state", async (t) => {
+  const removeButtonIcon = Selector(".sl-table__remove-button .sv-action-bar-item__icon");
+  const detailButtonIcon = Selector(".sl-table__detail-button .sv-action-bar-item__icon");
+  const removeButton = Selector(".sl-table__remove-button .sv-action-bar-item");
+  const detailButton = Selector(".sl-table__detail-button.sv-action-bar-item");
+  const focusedClassName = "sv-focused--by-key";
+
+  await setJSON(surveyJSON);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .expect(tableRulesSelector.count).eql(2)
+    .expect(removeButtonIcon.visible).notOk()
+    .expect(detailButtonIcon.visible).notOk()
+
+    .hover(tableRulesSelector.nth(0))
+    .hover(removeButtonIcon.nth(0))
+    .expect(removeButtonIcon.nth(0).visible).ok()
+    .expect(removeButtonIcon.nth(1).visible).notOk()
+    .click(detailButtonIcon)
+    .click(detailButtonIcon)
+
+    .hover(tableRulesSelector.nth(1))
+    .hover(removeButtonIcon.nth(1))
+    .expect(removeButtonIcon.nth(0).visible).notOk()
+    .expect(removeButtonIcon.nth(1).visible).ok()
+
+    .click(detailButtonIcon.nth(1))
+    .click(detailButtonIcon.nth(1))
+    .pressKey("tab tab")
+    .hover(logicAddNewRuleButton)
+    .expect(detailButtonIcon.nth(1).visible).notOk()
+    .expect(detailButton.nth(1).classNames).notContains(focusedClassName)
+    .expect(removeButtonIcon.nth(1).visible).ok()
+    .expect(removeButton.nth(1).classNames).contains(focusedClassName)
+
+    .pressKey("shift+tab")
+    .pressKey("shift+tab")
+    .expect(detailButtonIcon.nth(1).visible).ok()
+    .expect(detailButton.nth(1).classNames).contains(focusedClassName)
+    .expect(removeButtonIcon.nth(1).visible).notOk()
+    .expect(removeButton.nth(1).classNames).notContains(focusedClassName);
 });
