@@ -58,7 +58,8 @@
   <div class="svc-panel__placeholder_frame">
     <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
     <!-- ko if: allowEdit -->
-    <div class="svc-panel__add-new-question" data-bind="click: addNewQuestion, key2click, clickBubble: false">
+    <div class="svc-panel__add-new-question svc-action-button"
+      data-bind="click: addNewQuestion, key2click, clickBubble: false">
       <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
       </span>
     </div>
