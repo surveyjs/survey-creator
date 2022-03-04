@@ -31,6 +31,7 @@ test("Check base responsiveness for tabbed menu", async (t) => {
 test("Check base responsiveness for toolbox", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-child(20)");
   await t
+    .resizeWindow(1280, 1100)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
     .resizeWindow(1280, 632)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
@@ -40,7 +41,7 @@ test("Check base responsiveness for toolbox", async (t) => {
     .expect(popupSelector.find(".sv-list__item").withText("Panel (dynamic panels)").visible).ok()
     .pressKey("esc")
     .expect(popupSelector.visible).notOk()
-    .resizeWindow(1920, 900)
+    .resizeWindow(1280, 1100)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk();
 });
 
@@ -59,13 +60,14 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
     ]
   });
   await t
+    .resizeWindow(1280, 1000)
     .click(collapseButtonSelector)
     .expect(toolbox.visible).ok()
     .expect(toolboxItemIcons.count).eql(20)
     .expect(toolboxItemTitles.count).eql(20)
     .expect(pageNavigator.visible).ok()
 
-    .resizeWindow(1000, 900)
+    .resizeWindow(1000, 1000)
     .expect(toolbox.visible).ok()
     .expect(toolboxItemIcons.count).eql(20)
     .expect(toolboxItemTitles.count).eql(0)
