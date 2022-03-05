@@ -1,4 +1,3 @@
-import { CreatorBase } from "../../creator-base";
 import { PagesController } from "../../pages-controller";
 import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
 
@@ -75,7 +74,7 @@ export class PageNavigatorViewModel extends Base {
   private setItems(items: Array<IAction>) {
     this.items = items;
     this.pageListModel.setItems(items);
-    this.visible = items.length > 1;
+    this.visible = items.length > 1 || this.pagesController.creator["pageEditMode"] === "bypage";
   }
   private buildItems() {
     this.currentPage = this.pagesController.currentPage || this.pagesController.pages[0];
@@ -83,6 +82,12 @@ export class PageNavigatorViewModel extends Base {
     var pages = this.pagesController.pages;
     for (var i = 0; i < pages.length; i++) {
       items.push(this.createActionBarItem(pages[i]));
+    }
+    if(this.pagesController.creator["pageEditMode"] === "bypage") {
+      const newPage = (<any>this.pagesController["creator"]).getPlugin("designer").model.newPage;
+      if(!!newPage) {
+        items.push(this.createActionBarItem(newPage));
+      }
     }
     this.setItems(items);
   }
@@ -103,7 +108,11 @@ export class PageNavigatorViewModel extends Base {
         : page.title
     };
     item.active = <any>new ComputedUpdater<boolean>(() => page === this.currentPage);
-    item.action = () => {
+    item.action = (item: any) => {
+      if(this.pagesController.creator["pageEditMode"] === "bypage") {
+        this.pagesController.currentPage = page;
+        this.currentPage = page;
+      }
       const el: any = document.getElementById(page.id);
       if (!!el) {
         el.scrollIntoView({ block: "start" });

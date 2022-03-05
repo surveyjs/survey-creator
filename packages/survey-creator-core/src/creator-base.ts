@@ -192,7 +192,7 @@ export class CreatorBase extends Base
   private responsivityManager: CreatorResponsivityManager;
   footerToolbar: ActionContainer;
 
-  private pageEditModeValue: "standard" | "single" = "standard";
+  private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
   /**
    * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
    * You can set this option in creator constructor only
@@ -1330,6 +1330,9 @@ export class CreatorBase extends Base
         this.showJSONEditorTab = (options.showJSONEditorTab === true);
         Survey.settings.allowShowEmptyTitleInDesignMode = false;
         Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
+      }
+      if (this.pageEditModeValue === "bypage") {
+        this.showPageNavigator = true;
       }
     }
   }

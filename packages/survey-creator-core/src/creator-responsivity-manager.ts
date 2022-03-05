@@ -43,6 +43,10 @@ export class CreatorResponsivityManager {
     }
   }
   private procesShowPageNavigator(pageNavigatorVisibility: boolean) {
+    if(this.creator.pageEditMode === "bypage") {
+      this.creator.showPageNavigator = true;
+      return;
+    }
     if (pageNavigatorVisibility && !this.creator.showPageNavigator && this.prevShowPageNavigator !== undefined) {
       this.creator.showPageNavigator = this.prevShowPageNavigator;
       this.prevShowPageNavigator = undefined;

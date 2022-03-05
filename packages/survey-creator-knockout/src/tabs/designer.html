@@ -22,6 +22,8 @@
     <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
     <!-- /ko -->
     <!-- /ko -->
+
+    <!-- ko ifnot: creator.pageEditMode === 'bypage' -->
     <!-- ko foreach: survey.pages -->
     <svc-page class="svc-page"
       data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name, 'data-sv-drop-target-page': $data.name }"
@@ -35,6 +37,14 @@
     <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
     <!-- /ko -->
     <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko if: creator.pageEditMode === 'bypage' -->
+    <svc-page class="svc-page"
+      data-bind="attr: { 'data-sv-drop-target-survey-element': currentPage.name, 'data-sv-drop-target-page': currentPage.name }"
+      params="survey: survey, page: currentPage, creator: creator"></svc-page>
+    <!-- /ko -->
+
   </div>
   <!-- ko if: creator.showPageNavigator -->
   <div class="svc-tab-designer__page-navigator">

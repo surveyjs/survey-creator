@@ -1,4 +1,4 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
 import "./designer.scss";
@@ -42,6 +42,7 @@ export class TabDesignerViewModel extends Base {
   }
   private get canShowNewPage(): boolean {
     if (!this.survey || this.creator.pageEditMode === "single") return false;
+    if (this.creator.pageEditMode === "bypage") return true;
     const pages: PageModel[] = this.survey.pages;
     return pages.length === 0 || pages[pages.length - 1].elements.length > 0;
   }
@@ -126,9 +127,13 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if (this.creator.showPageNavigator && this.survey.pageCount > 1) {
+    if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage") {
       rootCss += " svc-tab-designer--with-page-navigator";
     }
     return rootCss;
+  }
+
+  public get currentPage(): IPage {
+    return this.creator.pagesController.currentPage;
   }
 }
