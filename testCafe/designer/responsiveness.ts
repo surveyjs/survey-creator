@@ -41,7 +41,7 @@ test("Check base responsiveness for toolbox", async (t) => {
     .expect(popupSelector.find(".sv-list__item").withText("Panel (dynamic panels)").visible).ok()
     .pressKey("esc")
     .expect(popupSelector.visible).notOk()
-    .resizeWindow(1280, 1100)
+    .resizeWindow(1920, 1100)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk();
 });
 
@@ -60,7 +60,7 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
     ]
   });
   await t
-    .resizeWindow(1280, 1000)
+    .resizeWindow(1920, 1000)
     .click(collapseButtonSelector)
     .expect(toolbox.visible).ok()
     .expect(toolboxItemIcons.count).eql(20)
@@ -324,7 +324,7 @@ test("Question type popup - narrow", async (t) => {
 test("Responsive creator: property grid - click the shadow", async (t) => {
   const json = { pages: [{ name: "page1" }] };
   await setJSON(json);
-  await t.debug()
+  await t
     .resizeWindow(900, 700)
     .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 273 })
     .click(expandButtonSelector)
