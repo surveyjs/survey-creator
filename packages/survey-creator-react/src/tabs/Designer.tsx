@@ -20,6 +20,37 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   protected get creator(): CreatorBase {
     return this.model.creator;
   }
+
+  constructor(props: any) {
+    super(props);
+  }
+
+  private denyUpdate = () => {
+    this.denyComponentUpdate();
+  }
+
+  private allowUpdate = () => {
+    this.allowComponentUpdate();
+  }
+
+  private addDragDropEvents = () => {
+    this.creator.onBeforeDrop.add(this.denyUpdate);
+    this.creator.onAfterDrop.add(this.allowUpdate);
+  }
+
+  private clearDragDropEvents = () => {
+    this.creator.onBeforeDrop.remove(this.denyUpdate);
+    this.creator.onAfterDrop.remove(this.allowUpdate);
+  }
+
+  componentDidMount(): void {
+    this.addDragDropEvents();
+  }
+
+  componentWillUnmount(): void {
+    this.clearDragDropEvents();
+  }
+
   protected getStateElements(): Array<Base> {
     return [this.model, this.model.survey];
   }
@@ -65,7 +96,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           className={className}
           data-sv-drop-target-survey-element={"newGhostPage"}
         >
-          {this.renderPage(this.model.newPage)}
+          {!!this.model.newPage ? this.renderPage(this.model.newPage) : null}
         </div>
       </React.Fragment>);
   }

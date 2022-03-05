@@ -1498,16 +1498,20 @@ export class CreatorBase extends Base
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
+  public onBeforeDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
+  public onAfterDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
+      this.onBeforeDrop.fire(null, null);
       this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
+      this.onAfterDrop.fire(null, null);
     });
   }
   private initDragDropChoices() {
@@ -2840,6 +2844,13 @@ export class DesignTimeSurveyModel extends SurveyModel {
       componentName || super.getElementWrapperComponentName(element, reason)
     );
   }
+  public getQuestionContentWrapperComponentName(element: any, reason?: string): string {
+    let componentName = getQuestionContentWrapperComponentName(element);
+    return (
+      componentName || super.getQuestionContentWrapperComponentName(element)
+    );
+  }
+
   public getElementWrapperComponentData(element: any, reason?: string): any {
     const data = getElementWrapperComponentData(element, reason, this.creator);
     return data || super.getElementWrapperComponentData(element);
@@ -2902,9 +2913,6 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
       if (element.getType() == "image") {
         return "svc-image-question";
       }
-      if (element.getType() == "rating") {
-        return "svc-rating-question";
-      }
       return "svc-question";
     }
     if (element instanceof PanelModel) {
@@ -2912,6 +2920,11 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
     }
   }
   return undefined;
+}
+export function getQuestionContentWrapperComponentName (element) {
+  if (element.getType() == "rating") {
+    return "svc-rating-question-content";
+  }
 }
 export function getElementWrapperComponentData(
   element: any,

@@ -27,7 +27,7 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
           {this.model.placeholderText}
         </div>
         {this.model.allowEdit ? attachKey2click(<div
-          className="svc-panel__add-new-question"
+          className="svc-panel__add-new-question svc-action-button"
           onClick={(e) => {
             e.stopPropagation();
             this.model.addNewQuestion();
@@ -42,35 +42,38 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
   }
   protected renderFooter(): JSX.Element {
     return (<React.Fragment>
-      {!this.model.isEmptyElement && this.model.surveyElement.isPanel && this.model.allowEdit ? attachKey2click(<div
-        className="svc-panel__add-new-question"
-        onClick={(e) => {
-          e.stopPropagation();
-          this.model.addNewQuestion();
-        }}
-      >
-        <span className="svc-text svc-text--normal svc-text--bold">
-          {this.model.addNewQuestionText}
-        </span>
+      {!this.model.isEmptyElement && this.model.surveyElement.isPanel && this.model.allowEdit ? attachKey2click(
+        <div className="svc-panel__add-new-question-container">
+          <div
+            className="svc-panel__add-new-question svc-action-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              this.model.addNewQuestion();
+            }}
+          >
+            <span className="svc-text svc-text--normal svc-text--bold">
+              {this.model.addNewQuestionText}
+            </span>
 
-        {attachKey2click(<button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            this.model.questionTypeSelectorModel.action();
-          }}
-          className="svc-panel__question-type-selector"
-          title={this.model.addNewQuestionText}
-        >
-          <span className="svc-panel__question-type-selector-icon">
-            <SvgIcon
-              iconName={this.model.questionTypeSelectorModel.iconName}
-              size={24}
-            ></SvgIcon>
-          </span>
-          <Popup model={this.model.questionTypeSelectorModel.popupModel}></Popup>
-        </button>)}
-      </div>) : null}
+          </div>
+          {attachKey2click(<button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              this.model.questionTypeSelectorModel.action();
+            }}
+            className="svc-panel__question-type-selector"
+            title={this.model.addNewQuestionText}
+          >
+            <span className="svc-panel__question-type-selector-icon">
+              <SvgIcon
+                iconName={this.model.questionTypeSelectorModel.iconName}
+                size={24}
+              ></SvgIcon>
+            </span>
+            <Popup model={this.model.questionTypeSelectorModel.popupModel}></Popup>
+          </button>)}
+        </div>) : null}
 
       {super.renderFooter()}
     </React.Fragment>);

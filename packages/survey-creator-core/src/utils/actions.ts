@@ -19,7 +19,7 @@ export function updateMatrixLogicExpandAction(question: QuestionMatrixDynamicMod
   if (!action) return;
   action.component = "sv-action-bar-item";
   action.iconName = "icon-logic-expand";
-  action.innerCss = "sl-table__detail-button";
+  action.innerCss = "sl-table__action-button sl-table__detail-button";
   action.iconSize = 48;
   action.showTitle = false;
   action.action = () => {
@@ -28,7 +28,13 @@ export function updateMatrixLogicExpandAction(question: QuestionMatrixDynamicMod
   const updateIcon = () => { action.iconName = row.isDetailPanelShowing ? "icon-logic-collapse" : "icon-logic-expand"; };
   question.registerFunctionOnPropertyValueChanged("isRowShowing" + row.id, updateIcon)
   updateIcon();
+}
 
+export function updateMatrixLogicRemoveAction(question: QuestionMatrixDynamicModel, actions: Array<IAction>, row: MatrixDynamicRowModel) {
+  updateMatrixRemoveAction(question, actions, row);
+  const action = findAction(actions, "remove-row");
+  if (!action) return;
+  action.css = "sl-table__action-button sl-table__remove-button";
 }
 export function updateMatrixRemoveAction(
   question: QuestionMatrixDynamicModel,
