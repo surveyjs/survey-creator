@@ -7,7 +7,7 @@ import { SurveyLogicAction, SurveyLogicItem } from "./logic-items";
 import { SurveyLogic } from "./logic";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { QuestionEmbeddedSurveyModel } from "../embedded-survey";
-import { updateMatrixRemoveAction, updateMatrixLogicExpandAction } from "../../utils/actions";
+import { updateMatrixLogicRemoveAction, updateMatrixLogicExpandAction } from "../../utils/actions";
 
 import "./logic-ui.scss";
 
@@ -62,7 +62,7 @@ export class SurveyLogicUI extends SurveyLogic {
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
       if (this.readOnly) return;
       updateMatrixLogicExpandAction(options.question, options.actions, options.row);
-      updateMatrixRemoveAction(options.question, options.actions, options.row);
+      updateMatrixLogicRemoveAction(options.question, options.actions, options.row);
     });
     this.updateItemsSurveyData();
     this.onReadOnlyChanged();

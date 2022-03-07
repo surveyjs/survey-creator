@@ -15,10 +15,10 @@
 .svc-tabbed-menu-item--selected {
   background: $background;
   box-shadow: inset 0px -2px 0px $primary;
-}
-
-.svc-tabbed-menu-item--selected:hover {
-  box-shadow: inset 0px -2px 0px $primary;
+  &:hover, &:focus {
+    background: $background;
+    box-shadow: inset 0px -2px 0px $primary;
+  }
 }
 
 .svc-tabbed-menu-item--disabled {

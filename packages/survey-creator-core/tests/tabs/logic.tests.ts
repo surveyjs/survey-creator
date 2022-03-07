@@ -1020,10 +1020,10 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   expect(itemsQuestion.rowCount).toEqual(0);
   logic.addNewUI();
   expect(logic.items).toHaveLength(1);
-  expect(logic.items[0].getDisplayText()).toEqual("New rule is not set");
+  expect(logic.items[0].getDisplayText()).toEqual("New rule");
   expect(itemsQuestion.rowCount).toEqual(1);
   const row = itemsQuestion.visibleRows[0];
-  expect(row.cells[0].question.value).toEqual("New rule is not set");
+  expect(row.cells[0].question.value).toEqual("New rule");
   expect(row.hasPanel).toBeTruthy();
   expect(logic.mode).toEqual("new");
   expect(row.detailPanel).toBeTruthy();

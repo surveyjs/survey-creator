@@ -32,6 +32,7 @@ import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import {
   getElementWrapperComponentData,
   getElementWrapperComponentName,
+  getQuestionContentWrapperComponentName,
   ICreatorPlugin,
   isStringEditable
 } from "../src/creator-base";
@@ -1153,7 +1154,7 @@ test("getElementWrapperComponentName", (): any => {
   expect(getElementWrapperComponentName(new QuestionTextModel(""), "", true)).toEqual("svc-cell-question");
   expect(getElementWrapperComponentName(new QuestionImageModel(""), "", false)).toEqual("svc-image-question");
   expect(getElementWrapperComponentName(new QuestionImageModel(""), "", true)).toEqual("svc-cell-question");
-  expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", false)).toEqual("svc-rating-question");
+  expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", false)).toEqual("svc-question");
   expect(getElementWrapperComponentName(new QuestionRatingModel(""), "", true)).toEqual("svc-cell-question");
   expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", false)).toEqual("svc-dropdown-question");
   expect(getElementWrapperComponentName(new QuestionDropdownModel(""), "", true)).toEqual("svc-cell-dropdown-question");
@@ -1161,6 +1162,10 @@ test("getElementWrapperComponentName", (): any => {
   const panelDynamic = new QuestionPanelDynamicModel("q1");
   const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
   expect(getElementWrapperComponentName(panelDynamictemplateQuestion, "", false)).toEqual("svc-dropdown-question");
+});
+
+test("getQuestionContentWrapperComponentName", (): any => {
+  expect(getQuestionContentWrapperComponentName(new QuestionRatingModel(""))).toEqual("svc-rating-question-content");
 });
 
 test("getElementWrapperComponentData", (): any => {
@@ -2330,6 +2335,30 @@ test("init creator with pageEditModeValue=single", (): any => {
     expect(objects.items[1].title).toEqual(allQuestions[0].name);
     expect(objects.items[1].data).toEqual(allQuestions[0]);
 
+  } finally {
+    surveySettings.allowShowEmptyTitleInDesignMode = true;
+    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+  }
+});
+test("get survey JSON with pageEditModeValue=single #2711", (): any => {
+  try {
+    let creator = new CreatorTester({ pageEditMode: "single" });
+    creator.text = "";
+    expect(creator.JSON).toStrictEqual({ "logoPosition": "right" });
+  } finally {
+    surveySettings.allowShowEmptyTitleInDesignMode = true;
+    surveySettings.allowShowEmptyDescriptionInDesignMode = true;
+  }
+});
+test("delete last question and selection with pageEditModeValue=single #2712", (): any => {
+  try {
+    let creator = new CreatorTester({ pageEditMode: "single" });
+    creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+    const question = creator.survey.getAllQuestions()[0];
+    creator.selectElement(question);
+    expect(creator.selectedElement).toBe(question);
+    creator.deleteElement(question);
+    expect(creator.selectedElement).toBe(creator.survey);
   } finally {
     surveySettings.allowShowEmptyTitleInDesignMode = true;
     surveySettings.allowShowEmptyDescriptionInDesignMode = true;

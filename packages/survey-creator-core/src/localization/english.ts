@@ -191,7 +191,7 @@ export var enStrings = {
         "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
 
       itemExpressionText: "When expression: '{0}' returns true:", //{0} - the expression
-      itemEmptyExpressionText: "New rule is not set",
+      itemEmptyExpressionText: "New rule",
       page_visibilityText: "make page {0} visible", //{0} page name
       panel_visibilityText: "make panel {0} visible", //{0} panel name
       panel_enableText: "make panel {0} enable", //{0} panel name
@@ -312,12 +312,12 @@ export var enStrings = {
     valueName: "Value name",
     titleName: "Title name",
     allowEmptyResponse: "Allow empty respose",
-    titlePlaceholder: "Input title here",
-    surveyTitlePlaceholder: "Input survey title here",
+    titlePlaceholder: "Title",
+    surveyTitlePlaceholder: "Survey Title",
     pageTitlePlaceholder: "Page {num}",
-    descriptionPlaceholder: "Enter a description",
-    surveyDescriptionPlaceholder: "Enter a survey description",
-    pageDescriptionPlaceholder: "Enter a page description",
+    descriptionPlaceholder: "Description",
+    surveyDescriptionPlaceholder: "Description",
+    pageDescriptionPlaceholder: "Description",
 
     hasOther: "Has other item",
     otherText: "Other item text",

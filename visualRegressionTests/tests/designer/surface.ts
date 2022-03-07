@@ -154,3 +154,82 @@ test("Check question width and position", async (t) => {
   await checkElementScreenshot("question-in-center", Selector(".svc-tab-designer"), t);
 });
 */
+test("Panel empty", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await checkElementScreenshot("surface-empty-panel.png", Selector(".svc-question__content"), t);
+  await t.hover(Selector(".svc-question__content div").withText("Add Question"));
+  await checkElementScreenshot("surface-empty-panel-hover.png", Selector(".svc-question__content"), t);
+});
+
+test("Panel not empty", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await checkElementScreenshot("surface-not-empty-panel.png", Selector(".svc-question__content"), t);
+  await t.hover(Selector(".svc-question__content div").withText("Add Question"));
+  await checkElementScreenshot("surface-not-empty-panel-hover.png", Selector(".svc-question__content"), t);
+});
+
+test("Panel gap between items", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              },
+              {
+                "type": "text",
+                "name": "question2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await checkElementScreenshot("surface-panel.png", Selector(".svc-question__content"), t);
+});

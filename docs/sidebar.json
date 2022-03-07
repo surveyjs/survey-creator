@@ -10,22 +10,22 @@
     },
     {
       "Name": "CreatorV2",
-      "Title": "Creator V2 (Beta)",
+      "Title": "Creator V2",
       "Items": [
-        {     
+        {
           "Name": "Creator-V2-Whats-New",
           "Title": "What's new, Creator V2"
         },
-        {     
+        {
           "Name": "Migrate-from-V1-to-V2",
           "Title": "Migration Guide - from V1 to V2"
         },
-        {     
+        {
           "Name": "React-Performance-Problems",
           "Title": "React: Visualization of drag-and-drop operations is slow for large surveys"
-        }        
-      ] 
-    },    
+        }
+      ]
+    },
     {
       "Name": "Build-Component-Questions",
       "Title": "Components: Simplify and Enrich SurveyJS Creator Functionality"
@@ -37,7 +37,7 @@
     {
       "Name": "End-User-Guide",
       "Title": "End-User Guide"
-    },    
+    },
     {
       "Name": "BuilderOverview",
       "Title": "Overview",

@@ -11,10 +11,9 @@
   line-height: calcSize(3);
 
   border: calcSize(0.25) solid transparent;
-}
 
-.svc-action-button {
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     background-color: $primary-light;
     outline: none;
   }
