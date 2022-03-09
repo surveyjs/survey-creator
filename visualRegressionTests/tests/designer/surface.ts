@@ -233,3 +233,61 @@ test("Panel gap between items", async (t) => {
   await setJSON(json);
   await checkElementScreenshot("surface-panel.png", Selector(".svc-question__content"), t);
 });
+
+test("Matrix dynamic with detail", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const json = {
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "matrix",
+        rowCount: 2,
+        detailPanelMode: "underRow",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
+        detailElements: [{ type: "text", name: "q1" }],
+        width: "800px"
+      },
+    ],
+  };
+  await setJSON(json);
+  await checkElementScreenshot("surface-matrix-detail.png", Selector(".svc-question__content"), t);
+});
+
+test("Matrix dynamic with detail empty", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const json = {
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "matrix",
+        rowCount: 2,
+        detailPanelMode: "underRow",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
+        width: "800px"
+      },
+    ],
+  };
+  await setJSON(json);
+  await checkElementScreenshot("surface-matrix-detail-empty.png", Selector(".svc-question__content"), t);
+});
+
+test("Matrix dynamic with detail two questions + select", async (t) => {
+  await t.resizeWindow(1920, 1900);
+  const json = {
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "matrix",
+        rowCount: 2,
+        detailPanelMode: "underRow",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
+        detailElements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
+        width: "800px"
+      },
+    ],
+  };
+  await setJSON(json);
+  await t.click(Selector(".sd-table__cell--detail-panel .svc-row").nth(0), { offsetX: -5, offsetY: -5 })
+    .expect(Selector(".svc-question__content--selected").visible).ok();
+  await checkElementScreenshot("surface-matrix-detail-two-questions-select.png", Selector(".svc-question__content"), t);
+});
