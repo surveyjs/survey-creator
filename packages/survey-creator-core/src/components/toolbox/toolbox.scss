@@ -37,6 +37,7 @@ svc-toolbox {
 
 .svc-toolbox__tool .sv-dots__item {
   width: calcSize(6);
+  margin-top: calcSize(0.5);
 }
 
 .svc-toolbox__category-separator {
@@ -83,5 +84,6 @@ svc-toolbox {
 .svc-toolbox__tool {
   .sv-action__content {
     display: block;
+    padding-top: calcSize(0.5);
   }
 }
