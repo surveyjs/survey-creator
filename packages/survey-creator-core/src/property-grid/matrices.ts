@@ -736,6 +736,7 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   protected getDefaultClassName(prop: JsonObjectProperty): string {
     return "runexpressiontrigger";
   }
+  protected getAllowRowDragDrop(): boolean { return true; }
   protected getChoices(obj: Base): Array<any> {
     var classes = Serializer.getChildrenClasses("surveytrigger", true);
     var res = [];
