@@ -65,7 +65,7 @@ export class SurveySimulatorModel extends Base {
   }
 
   public get simulatorMainCssClass() {
-    return this.hasFrame?"svd-simulator-main--frame":"";
+    return this.hasFrame ? "svd-simulator-main--frame" : "";
   }
 
   public get simulatorFrame() {
@@ -103,7 +103,7 @@ export class SurveySimulatorModel extends Base {
   }
 }
 
-export var DEFAULT_MONITOR_DPI = 102.69;
+export var DEFAULT_MONITOR_DPI = window.devicePixelRatio * 96;
 export var simulatorDevices = {
   desktop: {
     deviceType: "desktop",
