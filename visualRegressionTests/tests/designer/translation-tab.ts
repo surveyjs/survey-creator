@@ -1,6 +1,5 @@
 import { Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-import { url, screenshotComparerOptions, getTabbedMenuItemByText, getBarItemByTitle, setJSON, checkElementScreenshot as checkElementScreenshot } from "../../helper";
+import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, checkElementScreenshot } from "../../helper";
 
 const title = "Translation tab Screenshot";
 

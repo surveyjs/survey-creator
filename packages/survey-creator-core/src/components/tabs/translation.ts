@@ -677,6 +677,8 @@ export class Translation extends Base implements ITranslationLocales {
       cellQuestion.placeHolder = surveyLocalization.getString(item.name, locale) || placeHolderText;
     } else if (!(itemContext instanceof PageModel) && item.name === "title") {
       cellQuestion.placeHolder = itemContext[item.name] || itemContext.name;
+    } else if (itemContext.ownerPropertyName === "choices" && itemContext.typeName === "itemvalue") {
+      cellQuestion.placeHolder = itemContext.text || placeHolderText;
     } else {
       cellQuestion.placeHolder = placeHolderText;
     }
