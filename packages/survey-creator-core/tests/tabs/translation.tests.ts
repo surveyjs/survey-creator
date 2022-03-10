@@ -434,20 +434,20 @@ test("StringsHeaderSurvey layout", () => {
   const headerMatrix = <QuestionMatrixDropdownModel>(translation.stringsHeaderSurvey.getAllQuestions()[0]);
   expect(stringsMatrix.rowTitleWidth).toEqual("300px");
   expect(stringsMatrix.columns).toHaveLength(1);
-  expect(stringsMatrix.columns[0].width).toEqual("calc((100% - 300px)/1)");
+  // expect(stringsMatrix.columns[0].width).toEqual("calc((100% - 300px)/1)");
 
   expect(headerMatrix.rowTitleWidth).toEqual("300px");
   expect(headerMatrix.columns).toHaveLength(1);
-  expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/1)");
+  // expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/1)");
 
   translation.addLocale("de");
   expect(stringsMatrix.rowTitleWidth).toEqual("300px");
   expect(stringsMatrix.columns).toHaveLength(2);
-  expect(stringsMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
+  // expect(stringsMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
 
   expect(headerMatrix.rowTitleWidth).toEqual("300px");
   expect(headerMatrix.columns).toHaveLength(2);
-  expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
+  // expect(headerMatrix.columns[0].width).toEqual("calc((100% - 300px)/2)");
 });
 
 test("Actions mode small", () => {

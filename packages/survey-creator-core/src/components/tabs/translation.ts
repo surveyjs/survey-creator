@@ -744,12 +744,14 @@ export class Translation extends Base implements ITranslationLocales {
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
     var locs = this.getSelectedLocales();
     matrix.rowTitleWidth = "300px";
-    const width = "calc((100% - " + matrix.rowTitleWidth + ")/" + (locs.length + 1) + ")";
-    const defaultColumn = matrix.addColumn("default", this.getLocaleName(""));
-    defaultColumn.width = width;
+    // const width = "calc((100% - " + matrix.rowTitleWidth + ")/" + (locs.length + 1) + ")";
+    // const defaultColumn =
+    matrix.addColumn("default", this.getLocaleName(""));
+    // defaultColumn.width = width;
     for (var i = 0; i < locs.length; i++) {
-      let column = matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
-      column.width = width;
+      // let column =
+      matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
+      // column.width = width;
     }
   }
   private getStringsSurveyQuestionName(
