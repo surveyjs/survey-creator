@@ -10,6 +10,9 @@
   .spg-checkbox {
     cursor: default;
   }
+  .spg-checkbox__caption {
+    color: $foreground-light;
+  }
 }
 .spg-checkbox__caption {
   font-family: $font-family;
@@ -28,13 +31,22 @@
   flex-shrink: 0;
   // padding: calcSize(0.5);
   padding: 1px 1px;
-  &:hover,
-  &:focus {
+}
+.spg-checkbox:hover {
+  .spg-checkbox__rectangle {
     background-color: $background-dim;
   }
 }
+
+.spg-checkbox--disabled {
+  .spg-checkbox__rectangle:hover {
+    background: $background;
+  }
+}
+
 .spg-checkbox__control:focus + .spg-checkbox__rectangle {
-  background-color: $background-dim;
+  outline: 2px solid $primary;
+  outline-offset: -2px;
 }
 .spg-checkbox .spg-checkbox__svg {
   display: none;
