@@ -122,11 +122,11 @@ test("Property grid checkbox - all states", async (t) => {
 
   await setCheckboxProperty("value", true);
   await setCheckboxProperty("readOnly", false);
-  await t.click(checkbox).hover(Selector("body"), { offsetX: 0, offsetY: 0 });
+  await t.click(checkbox).hover(Selector(".sd-container-modern__title"), { offsetX: 0, offsetY: 0 });
   await checkElementScreenshot("pg-checkbox-unchecked-focused.png", checkbox, t);
 
   await setCheckboxProperty("value", false);
   await setCheckboxProperty("readOnly", false);
-  await t.click(checkbox).hover(Selector("body"), { offsetX: 0, offsetY: 0 });
+  await t.click(checkbox).hover(Selector(".sd-container-modern__title"), { offsetX: 0, offsetY: 0 });
   await checkElementScreenshot("pg-checkbox-checked-focused.png", checkbox, t);
 });
