@@ -4,7 +4,6 @@ export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
   private prevShowToolbox;
-  private prevToolboxIsCompact;
   private prevShowPageNavigator;
   private screenWidth: { [key: string]: number } = {
     "xxl": 1800,
