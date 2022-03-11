@@ -1,5 +1,5 @@
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-import { url, setJSON, screenshotComparerOptions, propertyGridSelector } from "../../helper";
+import { url, setJSON, screenshotComparerOptions, propertyGridSelector, checkElementScreenshot } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -83,4 +83,50 @@ test("Values editors, keep them close", async (t) => {
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
 
+});
+test("Property grid checkbox - all states", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  await setJSON({});
+
+  const setCheckboxProperty = ClientFunction((prop, value) => {
+    window["creator"].designerPropertyGrid.survey.getQuestionByName("showTitle")[prop] = value;
+  });
+
+  const checkbox = Selector("[data-name=\"showTitle\"] .spg-checkbox");
+
+  await setCheckboxProperty("value", false);
+  await setCheckboxProperty("readOnly", false);
+  await checkElementScreenshot("pg-checkbox-unchecked.png", checkbox, t);
+
+  await setCheckboxProperty("value", true);
+  await setCheckboxProperty("readOnly", false);
+  await checkElementScreenshot("pg-checkbox-checked.png", checkbox, t);
+
+  await setCheckboxProperty("value", false);
+  await setCheckboxProperty("readOnly", true);
+  await checkElementScreenshot("pg-checkbox-unchecked-readonly.png", checkbox, t);
+
+  await setCheckboxProperty("value", true);
+  await setCheckboxProperty("readOnly", true);
+  await checkElementScreenshot("pg-checkbox-checked-readonly.png", checkbox, t);
+
+  await setCheckboxProperty("value", false);
+  await setCheckboxProperty("readOnly", false);
+  await t.hover(checkbox.find(".spg-checkbox__caption"));
+  await checkElementScreenshot("pg-checkbox-unchecked-hover.png", checkbox, t);
+
+  await setCheckboxProperty("value", true);
+  await setCheckboxProperty("readOnly", false);
+  await t.hover(checkbox.find(".spg-checkbox__caption"));
+  await checkElementScreenshot("pg-checkbox-checked-hover.png", checkbox, t);
+
+  await setCheckboxProperty("value", true);
+  await setCheckboxProperty("readOnly", false);
+  await t.click(checkbox).hover(Selector("body"), { offsetX: 0, offsetY: 0 });
+  await checkElementScreenshot("pg-checkbox-unchecked-focused.png", checkbox, t);
+
+  await setCheckboxProperty("value", false);
+  await setCheckboxProperty("readOnly", false);
+  await t.click(checkbox).hover(Selector("body"), { offsetX: 0, offsetY: 0 });
+  await checkElementScreenshot("pg-checkbox-checked-focused.png", checkbox, t);
 });
