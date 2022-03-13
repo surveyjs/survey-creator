@@ -2258,7 +2258,7 @@ export class CreatorBase extends Base
     onFilesChosen: (files: File[]) => void
   ) {
     if (this.onOpenFileChooser.isEmpty) {
-      if (!window["FileReader"]) return;
+      if (!window || !window["FileReader"]) return;
       input.value = "";
       input.onchange = (event) => {
         if (!window["FileReader"]) return;

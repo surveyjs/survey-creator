@@ -1000,6 +1000,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
 
   public exportToSCVFile(fileName: string) {
+    if(!window) return;
     var data = this.exportToCSV();
     var blob = new Blob([data], { type: "text/csv" });
     if (window.navigator["msSaveOrOpenBlob"]) {
