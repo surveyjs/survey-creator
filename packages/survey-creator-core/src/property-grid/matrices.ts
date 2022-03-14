@@ -623,7 +623,7 @@ export class PropertyGridEditorMatrixUrlConditions extends PropertyGridEditorMat
 }
 export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "textitems";
+    return prop.type == "textitem[]";
   }
   /*
   protected getEditItemAsStandAlone(): boolean {

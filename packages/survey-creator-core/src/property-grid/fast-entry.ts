@@ -6,9 +6,9 @@ import { editorLocalization } from "../editorLocalization";
 export class FastEntryEditorBase extends PropertyEditorSetupValue {
   protected commentValue: QuestionCommentModel;
 
-  protected static calcBeforeApplyItemValueArray(
-    dest: Array<ItemValue>,
-    src: Array<ItemValue>,
+  protected static calcBeforeApplyItemsArray(
+    dest: Array<any>,
+    src: Array<any>,
     names: Array<string>
   ): void {
     if (!src || src.length == 0) {
@@ -27,12 +27,12 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
     }
   }
 
-  public static applyItemValueArray(
-    dest: Array<ItemValue>,
-    src: Array<ItemValue>,
+  public static applyItemsArray(
+    dest: Array<any>,
+    src: Array<any>,
     names: Array<string> = []
   ): void {
-    this.calcBeforeApplyItemValueArray(dest, src, names);
+    this.calcBeforeApplyItemsArray(dest, src, names);
     for (var i = 0; i < dest.length; i++) {
       names.forEach((name) => {
         dest[i][name] = src[i][name];
@@ -94,7 +94,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
     if (this.comment.isEmpty()) return false;
     if (this.editSurvey.hasErrors(true)) return false;
     const items = this.convertTextToItemValues(this.comment.value);
-    FastEntryEditorBase.applyItemValueArray(<any>this.choices, items, this.names);
+    FastEntryEditorBase.applyItemsArray(<any>this.choices, items, this.names);
     return true;
   }
 
@@ -195,7 +195,7 @@ export class FastEntryEditor extends FastEntryEditorBase {
     src: Array<ItemValue>,
     names: Array<string> = []
   ): void {
-    this.calcBeforeApplyItemValueArray(dest, src, names);
+    this.calcBeforeApplyItemsArray(dest, src, names);
     for (var i = 0; i < dest.length; i++) {
       if (dest[i].value != src[i].value) {
         dest[i].value = src[i].value;
