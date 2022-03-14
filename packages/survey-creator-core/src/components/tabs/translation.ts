@@ -677,6 +677,8 @@ export class Translation extends Base implements ITranslationLocales {
       cellQuestion.placeHolder = surveyLocalization.getString(item.name, locale) || placeHolderText;
     } else if (!(itemContext instanceof PageModel) && item.name === "title") {
       cellQuestion.placeHolder = itemContext[item.name] || itemContext.name;
+    } else if (itemContext.ownerPropertyName === "choices" && itemContext.typeName === "itemvalue") {
+      cellQuestion.placeHolder = itemContext.text || placeHolderText;
     } else {
       cellQuestion.placeHolder = placeHolderText;
     }
@@ -744,12 +746,9 @@ export class Translation extends Base implements ITranslationLocales {
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
     var locs = this.getSelectedLocales();
     matrix.rowTitleWidth = "300px";
-    const width = "calc((100% - " + matrix.rowTitleWidth + ")/" + (locs.length + 1) + ")";
-    const defaultColumn = matrix.addColumn("default", this.getLocaleName(""));
-    defaultColumn.width = width;
+    matrix.addColumn("default", this.getLocaleName(""));
     for (var i = 0; i < locs.length; i++) {
-      let column = matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
-      column.width = width;
+      matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
     }
   }
   private getStringsSurveyQuestionName(
@@ -1000,6 +999,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
 
   public exportToSCVFile(fileName: string) {
+    if(!window) return;
     var data = this.exportToCSV();
     var blob = new Blob([data], { type: "text/csv" });
     if (window.navigator["msSaveOrOpenBlob"]) {

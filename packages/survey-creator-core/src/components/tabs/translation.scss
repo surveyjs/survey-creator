@@ -8,11 +8,14 @@
 }
 
 .st-properties {
-  .spg-item.spg-checkbox:focus-within {
+  .spg-item.spg-selectbase__label:focus-within {
     outline: 1px dotted $primary;
   }
-  .spg-checkbox:focus-within {
+  .spg-selectbase__label:focus-within {
     outline: none;
+  }
+  .spg-panel__content .spg-row {
+    margin-top: 0;
   }
 }
 

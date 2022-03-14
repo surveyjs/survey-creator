@@ -202,6 +202,12 @@ export class TestSurveyTabViewModel extends Base {
         const isTestTabActive = this.surveyProvider.activeTab === "test";
         return this.isRunning && isTestTabActive && pageListItems.length > 1;
       });
+      this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
+        return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
+      });
+      this.prevPageAction.iconSize = <any>new ComputedUpdater<boolean>(() => {
+        return this.surveyProvider.isMobileView ? 24 : 16;
+      });
       this.prevPageAction.enabled = this.survey && !this.survey.isFirstPage;
       this.prevPageAction.action = () => setNearPage(false);
       pageActions.push(this.prevPageAction);
@@ -226,6 +232,12 @@ export class TestSurveyTabViewModel extends Base {
         const pageListItems = this.pageListItems;
         const isTestTabActive = this.surveyProvider.activeTab === "test";
         return this.isRunning && isTestTabActive && pageListItems.length > 1;
+      });
+      this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
+        return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
+      });
+      this.nextPageAction.iconSize = <any>new ComputedUpdater<boolean>(() => {
+        return this.surveyProvider.isMobileView ? 24 : 16;
       });
       this.nextPageAction.enabled = this.survey && !this.survey.isLastPage;
       this.nextPageAction.action = () => setNearPage(true);

@@ -26,12 +26,13 @@ export class ResizeManager {
     (inputVal || []).forEach(handrail => {
       if (handrail == "w") isThereWestResizer = true;
       if (handrail == "e") isThereEastResizer = true;
-    })
+    });
 
     this.westResizer.style["display"] = isThereWestResizer ? "block" : "none";
     this.eastResizer.style["display"] = isThereEastResizer ? "block" : "none";
   }
   private getStyleValue(element: HTMLElement, style: string): number {
+    if(!window) return 0;
     return parseFloat(window.getComputedStyle(element).getPropertyValue(style).replace("px", ""));
   }
   private isEventSupported(eventName: string) {
@@ -63,6 +64,7 @@ export class ResizeManager {
     return this.events[eventName][this.getEventPrefix()];
   }
   private onMouseDownListener = (e: any) => {
+    if(!window) return;
     e.preventDefault();
     this.originalWidth = this.getStyleValue(this.container, "width");
     this.originalMouseX = e.pageX;
@@ -86,6 +88,7 @@ export class ResizeManager {
     this.container.style.width = width + "px";
   };
   private stopResize = (e: any) => {
+    if(!window) return;
     window.removeEventListener(this.getMouseEvent("mousemove"), this.resize);
     window.removeEventListener(this.getMouseEvent("mouseup"), this.stopResize);
   };
