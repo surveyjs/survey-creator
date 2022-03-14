@@ -135,7 +135,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     return (<React.Fragment>
       <div className={this.model.getDesignerCss()}>
         {!this.creator.allowEditSurveyTitle ? null :
-          <div>
+          <div className="svc-designer-header">
             <SurveyHeader survey={survey}></SurveyHeader>
           </div>
         }
