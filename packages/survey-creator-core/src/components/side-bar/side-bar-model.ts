@@ -86,17 +86,13 @@ export class SidebarModel extends Base {
     return this.creator.sidebarLocation == "right" ? "w" : "e";
   }
 
-  constructor(
-    private creator: CreatorBase,
-    private collapseAction: () => void = () => { this.creator.showSidebar = false; },
-    private expandAction: () => void = () => { this.creator.showSidebar = true; }
-  ) {
+  constructor(private creator: CreatorBase) {
     super();
     this.onSidebarVisibilityChanged = (sender: CreatorBase, options: any) => {
       if (this.isDisposed) return;
       this.visible = options.show;
     };
-    this.creator.onShowSidebarVisiblityChanged.add(this.onSidebarVisibilityChanged);
+    this.creator.onShowSidebarVisibilityChanged.add(this.onSidebarVisibilityChanged);
     this.creator.onPropertyChanged.add((sender, options) => {
       if (options.name === "sidebarLocation" && !!this.resizeManager) {
         this.resizeManager.setHandles(this.getCurrentHandles());
@@ -110,16 +106,10 @@ export class SidebarModel extends Base {
     return this._expandAction;
   }
   public collapseSidebar() {
-    if (this.collapseAction)
-      this.collapseAction();
-    else
-      this.visible = false;
+    this.creator.setShowSidebar(false);
   }
   public expandSidebar() {
-    if (this.expandAction)
-      this.expandAction();
-    else
-      this.visible = true;
+    this.creator.setShowSidebar(true);
   }
   public addTab(id: string, componentName?: string, model?: any, buildActions?: () => Array<Action>): SidebarTabModel {
     const tab = new SidebarTabModel(id, this, componentName, model);
@@ -134,7 +124,7 @@ export class SidebarModel extends Base {
   }
   public dispose() {
     if (!!this.creator && !this.isDisposed) {
-      this.creator.onShowSidebarVisiblityChanged.remove(this.onSidebarVisibilityChanged);
+      this.creator.onShowSidebarVisibilityChanged.remove(this.onSidebarVisibilityChanged);
     }
     super.dispose();
   }
