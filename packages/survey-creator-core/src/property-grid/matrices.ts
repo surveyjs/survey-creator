@@ -280,12 +280,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         q.property
       ).setupObjPanel(panel, true);
     };
-    matrix.allowRowsDragAndDrop = this.getAllowRowDragDrop() && !matrix.isReadOnly;
+    matrix.allowRowsDragAndDrop = this.getAllowRowDragDrop(prop) && !matrix.isReadOnly;
     if (!!q.options) {
       this.setupUsingOptions(obj, matrix, q.options, prop);
     }
   }
-  protected getAllowRowDragDrop(): boolean { return false; }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return false; }
   private calcHasPropertiesInDetail(
     matrix: QuestionMatrixDynamicModel,
     prop: JsonObjectProperty
@@ -441,7 +441,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       !this.hasVisibleIfOrEnableIf(items)
     );
   }
-  protected getAllowRowDragDrop(): boolean { return true; }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
   public createPropertyEditorSetup(
     obj: Base,
     prop: JsonObjectProperty,
@@ -547,7 +547,7 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   ): number {
     return options.maximumColumnsCount;
   }
-  protected getAllowRowDragDrop(): boolean { return true; }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
 
 export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
@@ -576,7 +576,7 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "page";
   }
-  protected getAllowRowDragDrop(): boolean { return true; }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
 
 export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditorMatrix {
@@ -736,7 +736,7 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   protected getDefaultClassName(prop: JsonObjectProperty): string {
     return "runexpressiontrigger";
   }
-  protected getAllowRowDragDrop(): boolean { return true; }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
   protected getChoices(obj: Base): Array<any> {
     var classes = Serializer.getChildrenClasses("surveytrigger", true);
     var res = [];
