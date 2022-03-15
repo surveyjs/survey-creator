@@ -98,7 +98,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       needSeparator: true,
       action: () => {
         if (!this.creator.showSidebar) {
-          this.creator.showSidebar = true;
+          this.creator.setShowSidebar(true, true);
         }
         this.creator.sidebar.activeTab = "toolbox";
       },
@@ -166,14 +166,14 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.onSelectedElementChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
-    this.creator.onShowSidebarVisiblityChanged.add((sender, options) => {
+    this.creator.onShowSidebarVisibilityChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
     return items;
   }
   public selectSurvey() {
     if (!this.creator.showSidebar) {
-      this.creator.showSidebar = true;
+      this.creator.setShowSidebar(true, true);
     }
     this.creator.selectElement(this.creator.survey);
     this.creator.sidebar.activeTab = this.propertyGridTab.id;

@@ -1009,7 +1009,7 @@ export class CreatorBase extends Base
     }
   }
   private showSidebarValue: boolean = true;
-  public onShowSidebarVisiblityChanged: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  public onShowSidebarVisibilityChanged: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * Set this this property grid false to hide the property grid.
    */
@@ -1022,13 +1022,23 @@ export class CreatorBase extends Base
       return;
     }
     if (this.showSidebar === val) return;
-    this.showSidebarValue = val;
-    this.updateToolboxIsCompact();
-    this.onShowSidebarVisiblityChanged.fire(this, { show: val });
+    this.setShowSidebar(val, true);
     if (!this.onShowPropertyGridVisiblityChanged.isEmpty) {
-      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisiblityChanged");
+      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisibilityChanged");
       this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
     }
+  }
+  public setShowSidebar(value: boolean, isManualMode = false) {
+    this.showSidebarValue = value;
+    if (isManualMode) {
+      if (value) {
+        this.sidebar.expandedManually = true;
+      } else {
+        this.sidebar.collapsedManually = true;
+      }
+    }
+    this.updateToolboxIsCompact();
+    this.onShowSidebarVisibilityChanged.fire(this, { show: value });
   }
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();

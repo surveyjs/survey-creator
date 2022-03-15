@@ -102,7 +102,7 @@ export class ActionContainerViewModel extends Base {
         visibleIndex: 20,
         iconSize: 16,
         action: () => {
-          this.creator.showSidebar = true;
+          this.creator.setShowSidebar(true, true);
         }
       })
     );
