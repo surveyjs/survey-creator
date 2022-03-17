@@ -139,26 +139,6 @@ jobs:
       npm run testcafe_ci
     displayName: 'Functional tests'
 
-  - script: |
-      mkdir $(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator
-      npm run doc_gen
-    displayName: 'Generate docs'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
-      TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
-      CleanTargetFolder: true
-    displayName: 'Copy root docs to the local surveyjs/service repo'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/docs'
-      TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
-      CleanTargetFolder: false
-    displayName: 'Copy generated docs to the local surveyjs/service repo'
-
   # read about the problem with git output ($env:GIT_REDIRECT_STDERR = '2>&1') :
   # https://github.com/microsoft/azure-pipelines-yaml/issues/248
   # https://stackoverflow.com/questions/58485585/azure-pipeline-powershell-and-git-on-windows-server-2019-gives-error-in-output
@@ -301,6 +281,25 @@ jobs:
       publishLocation: 'Container'
     displayName: 'publish artifact SurveyJSCreatorV2BuildCore-$(Build.BuildId) for next jobs'
 
+  - script: |
+      mkdir $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run doc_gen
+    displayName: 'Generate docs'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/docs'
+      TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
+      CleanTargetFolder: true
+    displayName: 'Copy root docs to the local surveyjs/service repo'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs'
+      TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
+      CleanTargetFolder: false
+    displayName: 'Copy generated docs to the local surveyjs/service repo'
 
 - job: CreatorV2React
   dependsOn: CreatorV2Core

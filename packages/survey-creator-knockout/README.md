@@ -74,6 +74,7 @@ npm install survey-creator-knockout --save
 
 Open the `angular.json` file and reference CSS files for SurveyJS (survey-core) and Survey Creator:
 
+```json
 {
   ...
   "projects": {
@@ -90,7 +91,7 @@ Open the `angular.json` file and reference CSS files for SurveyJS (survey-core) 
               "node_modules/survey-creator-core/survey-creator-core.min.css"
             ],
             ...
-
+```
 
 Create a new component and use it in your Angular application:
 

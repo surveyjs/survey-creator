@@ -282,43 +282,43 @@ test("Drag Drop to Panel", async (t) => {
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
 
   await t
-    .hover(RatingToolboxItem)
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: 1,
-      speed: 0.5
+      speed: 0.01
     })
 
-    .hover(RatingToolboxItem)
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: -1,
-      speed: 0.5
+      speed: 0.01
     })
 
-    .hover(RatingToolboxItem)
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      speed: 0.5
+      speed: 0.01
     })
 
-    .hover(RatingToolboxItem)
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: 1,
-      speed: 0.5
+      speed: 0.01
     })
 
-    .hover(RatingToolboxItem)
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: -1,
-      speed: 0.5
+      speed: 0.01
     });
 
   const expectedJson = {
@@ -791,16 +791,16 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item-value-controls__drag-area-indicator").filterVisible();
 
   await t
-    .click(Question1, { speed: 0.5 })
-    .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
-    .dragToElement(DragZoneGiraffeItem, LionItem, { speed: 0.5 });
+    .click(Question1, { speed: 0.1 })
+    .hover(PandaItem, { speed: 0.1 }).hover(LionItem, { speed: 0.1 }).hover(CamelItem, { speed: 0.1 }).hover(GiraffeItem, { speed: 0.1 }).hover(DragZoneGiraffeItem, { speed: 0.1 })
+    .dragToElement(DragZoneGiraffeItem, LionItem, { speed: 0.1 });
   value = await getItemValueByIndex("question1", 0);
   await t.expect(value).eql(expectedValue);
 
   await t
-    .click(Question1, { speed: 0.5 })
-    .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
-    .dragToElement(DragZoneGiraffeItem, PandaItem, { speed: 0.5 });
+    .click(Question1, { speed: 0.1 })
+    .hover(PandaItem, { speed: 0.1 }).hover(LionItem, { speed: 0.1 }).hover(CamelItem, { speed: 0.1 }).hover(GiraffeItem, { speed: 0.1 }).hover(DragZoneGiraffeItem, { speed: 0.1 })
+    .dragToElement(DragZoneGiraffeItem, PandaItem, { speed: 0.1 });
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
 });

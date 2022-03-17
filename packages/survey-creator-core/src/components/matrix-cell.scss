@@ -78,3 +78,6 @@
     filter: unset;
   }
 }
+.sd-table__cell--actions:not(.sd-table__cell--vertical):first-child {
+  z-index: initial;
+}

@@ -232,6 +232,7 @@ export function clearNewLines(text: string) {
 }
 
 export function select(element: any) {
+  if(!window) return;
   var range, selection;
   if (window.getSelection && document.createRange) {
     selection = window.getSelection();
