@@ -656,6 +656,17 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
     });
     return new FastEntryEditorBase(obj[prop.name], options, prop.className, names);
   }
+  public onMatrixCellCreated(obj: Base, options: any): void {
+    super.onMatrixCellCreated(obj, options);
+    const q = options.cellQuestion;
+    if (!options.row.editingObj) return;
+    const editor = options.row.editingObj.editor;
+    if (!!editor && !!q.property) {
+      editor.registerFunctionOnPropertyValueChanged(q.property.name, () => {
+        q.value = editor[q.property.name];
+      });
+    }
+  }
 }
 
 export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGridEditorMatrix {

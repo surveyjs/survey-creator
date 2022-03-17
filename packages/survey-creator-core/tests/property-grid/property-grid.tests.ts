@@ -867,6 +867,22 @@ test("QuestionMultipleTextModel items property editor + validators editor", () =
   expect(textItem.validators[0].getType()).toEqual("numericvalidator");
   expect(textItem.validators[1].getType()).toEqual("numericvalidator");
 });
+test("textitem[] property editor", () => {
+  const question = new QuestionMultipleTextModel("q1");
+  const textItem = question.addItem("item1", "Item 1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("items")
+  );
+  expect(itemsQuestion).toBeTruthy(); //"choices property editor created");
+  expect(itemsQuestion.getType()).toEqual("matrixdynamic"); //"It is a matrix");
+  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(itemsQuestion.renderedTable.rows[0].cells).toHaveLength(4);
+  expect(itemsQuestion.renderedTable.rows[0].cells[1].question.value).toEqual("item1");
+  expect(itemsQuestion.renderedTable.rows[0].cells[2].question.value).toEqual("Item 1");
+  textItem.title = "not Item 1";
+  expect(itemsQuestion.renderedTable.rows[0].cells[2].question.value).toEqual("not Item 1");
+});
 
 test("bindings property editor", () => {
   var survey = new SurveyModel({
