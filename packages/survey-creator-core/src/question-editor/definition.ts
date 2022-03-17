@@ -214,12 +214,12 @@ export class SurveyQuestionEditorDefinition {
     },
     imagepicker: {
       properties: [
-        "multiSelect",
-        "showLabel",
         "contentMode",
         "imageFit",
         "imageHeight",
-        "imageWidth"
+        "imageWidth",
+        "multiSelect",
+        "showLabel",
       ]
     },
     image: {
