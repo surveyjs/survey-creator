@@ -454,8 +454,7 @@ export class SurveyLogicItem {
   }
   public get expressionText(): string {
     return editorLocalization
-      .getString("ed.lg.itemExpressionText")
-    ["format"](this.getExpressionAsDisplayText());
+      .getString("ed.lg.itemExpressionText")["format"](this.getExpressionAsDisplayText());
   }
   private getExpressionAsDisplayText(): string {
     return !!this.owner
