@@ -459,7 +459,7 @@ test("Update conditions/expressions on changing question.name", () => {
   const nameQuestion = creator["designerPropertyGrid"].survey.getQuestionByName("name");
   nameQuestion.value = "myUpdatedQuestion1";
   expect(q2.visibleIf).toEqual("{myUpdatedQuestion1} = 1");
-  expect(page.visibleIf).toEqual("{myUpdatedQuestion1} = 1");
+  expect(page.enableIf).toEqual("{myUpdatedQuestion1} = 1");
 });
 
 test("Update conditions/expressions on changing question.valueName", () => {
