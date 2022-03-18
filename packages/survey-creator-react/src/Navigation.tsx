@@ -3,6 +3,7 @@ import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 export class SurveyNavigation extends SurveyElementBase<any, any> {
   componentDidMount() {
+    super.componentDidMount();
     this.setHandler();
   }
   componentDidUpdate(prevProps: any, prevState: any) {
@@ -32,6 +33,7 @@ export class SurveyNavigation extends SurveyElementBase<any, any> {
       this.setState(val);
     };
     componentWillUnmount() {
+      super.componentWillUnmount();
       if (this.survey) {
         this.survey.onPropertyChanged.remove(this.onPropChangedHandler);
       }
