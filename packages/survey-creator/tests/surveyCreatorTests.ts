@@ -197,7 +197,7 @@ QUnit.test("onQuestionAdded event + undo/redo", function (assert) {
   var editor = new SurveyCreator();
   var counter = 0;
   editor.onQuestionAdded.add(function () {
-    if(editor.isProcessingUndoRedo) return;
+    if (editor.isProcessingUndoRedo) return;
     counter++;
   });
   assert.equal(counter, 0, "No question was added");
@@ -1016,6 +1016,7 @@ QUnit.test(
   "Update conditions/expressions on changing question.name",
   function (assert) {
     var editor = new SurveyCreator();
+    editor.survey.currentPage.enableIf = "{question1} = 1";
     editor.survey.currentPage.addNewQuestion("text", "question1");
     editor.survey.currentPage.addNewQuestion("text", "question2");
     var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
@@ -1032,9 +1033,13 @@ QUnit.test(
       "{myUpdatedQuestion1} = 1",
       "Update the condition accordingly"
     );
+    assert.equal(
+      editor.survey.currentPage.enableIf,
+      "{myUpdatedQuestion1} = 1",
+      "Update the condition accordingly on the page"
+    );
   }
 );
-
 QUnit.test(
   "Update conditions/expressions on changing question.valueName",
   function (assert) {
@@ -2398,8 +2403,8 @@ QUnit.test("isCanModifyProperty", function (assert) {
     "Readonly by Serializer"
   );
   Survey.Serializer.findProperty("text", "title").readOnly = false;
-  creator.onGetPropertyReadOnly.add(function(s, o) {
-    if(o.property.name == "title")
+  creator.onGetPropertyReadOnly.add(function (s, o) {
+    if (o.property.name == "title")
       o.readOnly = true;
   });
   assert.equal(
