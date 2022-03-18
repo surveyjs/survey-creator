@@ -8,7 +8,7 @@ svc-tab-test {
 
 .svc-test-tab__content .svc-plugin-tab__content {
   overflow-y: auto;
-  
+
   .svc-preview__test-again {
     width: calcSize(33);
     margin-left: auto;
@@ -34,20 +34,31 @@ svc-tab-test {
       left: 0;
       right: 0;
       justify-content: center;
+
+      .sv-action:not(:last-child) > .sv-action__content {
+        padding-right: calcSize(1);
+      }
     }
+  }
+
+  .sv-action-bar-item {
+    @include smallBold;
+    width: 100%;
+    height: calcSize(4);
   }
 
   .svc-page-selector {
     max-width: 50%;
 
-    .sv-action-bar-item {
-      width: 100%;
-    }
-
     .sv-action-bar-item__title {
       @include textEllipsis;
 
+      color: $foreground;
       display: inline-block;
     }
   }
+}
+
+.svc-test-tab__content.svc-creator-tab__content--with-toolbar .sd-body__navigation {
+  padding-bottom: calcSize(8);
 }

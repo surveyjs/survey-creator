@@ -1072,7 +1072,25 @@ test("getObjectDisplayName", () => {
   expect(questionName.choices[0].value).toEqual("q2");
   expect(questionName.choices[0].text).toEqual("Question 2 [q2]");
 });
-
+test("show calculated values", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "text" }
+    ],
+    calculatedValues: [
+      { name: "val1", expression: "{q2} + 2" }
+    ],
+  });
+  var question = survey.getQuestionByName("q1");
+  var options = new EmptySurveyCreatorOptions();
+  var editor = new ConditionEditor(survey, question, options, "visibleIf");
+  var panel = editor.panel.panels[0];
+  var questionName = panel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(2);
+  expect(questionName.choices[0].value).toEqual("q2");
+  expect(questionName.choices[1].value).toEqual("val1");
+});
 test("options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value", () => {
   var survey = new SurveyModel({
     elements: [

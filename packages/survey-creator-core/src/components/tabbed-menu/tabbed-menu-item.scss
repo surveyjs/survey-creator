@@ -1,21 +1,24 @@
 @import "../../variables.scss";
 
 .svc-tabbed-menu-item {
-  padding: 0px calcSize(3);
-  line-height: calcSize(8);
+  padding: calcSize(2) calcSize(3);
+  height: calcSize(8);
+  line-height: calcSize(4);
   box-sizing: border-box;
   cursor: pointer;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $background-dim;
     box-shadow: inset 0px -1px 0px $border;
     outline: none;
-  }  
+  }
 }
 
 .svc-tabbed-menu-item--selected {
   background: $background;
   box-shadow: inset 0px -2px 0px $primary;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $background;
     box-shadow: inset 0px -2px 0px $primary;
   }

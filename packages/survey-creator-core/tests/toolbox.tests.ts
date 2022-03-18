@@ -330,6 +330,20 @@ test("Creator layout: toolbox location", (): any => {
   expect(creator.toolbox.isCompact).toEqual(false);
 });
 
+test("Toolbox forceCompact property", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.toolbox.forceCompact).toEqual(undefined);
+  expect(creator.toolbox.isCompact).toEqual(false);
+
+  creator.toolbox.forceCompact = true;
+  creator.updateToolboxIsCompact(false);
+  expect(creator.toolbox.isCompact).toEqual(true);
+
+  creator.toolbox.forceCompact = false;
+  creator.updateToolboxIsCompact(true);
+  expect(creator.toolbox.isCompact).toEqual(false);
+});
+
 test("the toolbox gets compact after the sidebar was collapsed/expanded ", (): any => {
   const creator = new CreatorTester();
   expect(creator.toolbox.isCompact).toEqual(false);

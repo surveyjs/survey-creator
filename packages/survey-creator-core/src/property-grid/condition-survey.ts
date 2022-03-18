@@ -581,7 +581,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         this.addConditionQuestionsHash[res[i].name] = question;
       }
     }
-    this.addValuesIntoConditionQuestions(this.survey.calculatedValues, res);
     this.addValuesIntoConditionQuestions(this.survey.getVariableNames(), res);
     SurveyHelper.sortItems(res);
     return res;

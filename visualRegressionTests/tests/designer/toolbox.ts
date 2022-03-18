@@ -84,6 +84,7 @@ test("toolbox inside sidebar", async (t) => {
 
   await changeToolboxLocation("sidebar");
   await t
+    .resizeWindow(1240, 870)
     .click(toolboxButtonSelector)
     .resizeWindow(2560, 1440);
 

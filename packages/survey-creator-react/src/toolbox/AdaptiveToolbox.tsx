@@ -21,7 +21,8 @@ export class AdaptiveToolbox extends Toolbox {
       container,
       this.toolbox,
       ".svc-toolbox__tool:not(.sv-dots)>.sv-action__content",
-      40
+      44,
+      44
     );
   }
   componentWillUnmount() {

@@ -33,10 +33,12 @@ export abstract class JsonEditorBaseModel extends Base {
       this.jsonEditorChangedTimeoutId = -1;
     } else {
       const self: JsonEditorBaseModel = this;
-      this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
-        self.jsonEditorChangedTimeoutId = -1;
-        self.processErrors(self.text);
-      }, JsonEditorBaseModel.updateTextTimeout);
+      if(!!window) {
+        this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
+          self.jsonEditorChangedTimeoutId = -1;
+          self.processErrors(self.text);
+        }, JsonEditorBaseModel.updateTextTimeout);
+      }
     }
   }
   protected abstract setErrors(errors: any[]): void;
