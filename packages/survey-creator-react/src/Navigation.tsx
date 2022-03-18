@@ -7,6 +7,7 @@ export class SurveyNavigation extends SurveyElementBase<any, any> {
     this.setHandler();
   }
   componentDidUpdate(prevProps: any, prevState: any) {
+    super.componentDidUpdate(prevProps, prevState);
     this.setHandler();
   }
   private setHandler() {
