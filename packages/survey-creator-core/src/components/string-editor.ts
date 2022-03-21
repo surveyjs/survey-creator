@@ -114,6 +114,7 @@ export class StringEditorViewModelBase extends Base {
   public onMouseUp(event: MouseEvent): boolean {
     if(this.justFocused) {
       this.justFocused = false;
+      if(!window) return false;
       if(window.getSelection().focusNode && (window.getSelection().focusNode.parentElement !== event.target) || window.getSelection().toString().length == 0) {
         select(event.target);
       }

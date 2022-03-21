@@ -1,6 +1,6 @@
 <div class="svc-question__adorner"
   data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': surveyElement.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
-  <!-- ko if: question.isInteractiveDesignElement -->
+  <!-- ko if: $data.surveyElement.isInteractiveDesignElement -->
   <div class="svc-question__content" data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
     <div class="svc-question__drag-area"
       data-bind="visible:allowDragging, event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
@@ -51,7 +51,7 @@
     </div>
   </div>
   <!-- /ko -->
-  <!-- ko ifnot: question.isInteractiveDesignElement -->
+  <!-- ko ifnot:  $data.surveyElement.isInteractiveDesignElement -->
   <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
   <!-- /ko -->
   <!-- ko if: koIsEmptyElement -->
@@ -63,6 +63,23 @@
       <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
       </span>
     </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+  <!-- ko if: !koIsEmptyElement() -->
+  <div class="svc-panel__add-new-question-container">
+    <div class="svc-panel__add-new-question svc-action-button"
+      data-bind="click: addNewQuestion, key2click, clickBubble: false">
+      <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
+      </span>
+    </div>
+    <!-- ko with: questionTypeSelectorModel -->
+    <button type="button"
+      data-bind="click: action, key2click, clickBubble: false, attr: { title: $data.addNewQuestionText }"
+      class="svc-panel__question-type-selector">
+      <sv-svg-icon class="svc-panel__question-type-selector-icon" params="iconName: iconName, size: 24"></sv-svg-icon>
+      <sv-popup params="model: popupModel"></sv-popup>
+    </button>
     <!-- /ko -->
   </div>
   <!-- /ko -->

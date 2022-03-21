@@ -64,7 +64,7 @@ export class QuestionAdornerComponent extends SurveyElementBase<
   }
   protected renderContent(allowInteractions: boolean): JSX.Element {
     var content = this.renderElementContent();
-    if (!allowInteractions) return content;
+    if (!allowInteractions) return <>{ content }{this.renderFooter()}</>;
     return attachKey2click(
       <div
         className={"svc-question__content " + this.model.css()}

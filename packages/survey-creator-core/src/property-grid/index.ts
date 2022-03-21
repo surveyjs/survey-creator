@@ -38,6 +38,7 @@ import { defaultV2Css } from "survey-core";
 import { updateMatrixRemoveAction } from "../utils/actions";
 import { SurveyHelper } from "../survey-helper";
 import { CreatorBase } from "../creator-base";
+import { IPropertyEditorInfo, SurveyQuestionEditorDefinition } from "../question-editor/definition";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;
@@ -619,6 +620,9 @@ export class PropertyJSONGenerator {
     json.isRequired = prop.isRequired;
     json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     json.title = this.getQuestionTitle(prop, title);
+
+    const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
+    json.placeHolder = typeof propDescr === "object" ? propDescr.placeholder : undefined;
     return json;
   }
   private getColumnPropertyJSON(className: string, propName: string): any {
@@ -1229,6 +1233,24 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
     return res;
   }
 }
+
+export class PropertyGridEditorImageSize extends PropertyGridEditorNumber {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "number" && (prop.name == "imageHeight" || prop.name == "imageWidth");
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    const isDefaultValue = (imageHeight: number, imageWidth: number) => {
+      const imageHeightProperty = Serializer.findProperty("image", "imageHeight");
+      const imageWidthProperty = Serializer.findProperty("image", "imageWidth");
+      return imageHeightProperty.isDefaultValue(imageHeight) && imageWidthProperty.isDefaultValue(imageWidth);
+    };
+
+    question.valueFromDataCallback = function (value: any): any {
+      const isDefaultSize = isDefaultValue(obj["imageHeight"], obj["imageWidth"]);
+      return isDefaultSize ? undefined : value;
+    };
+  }
+}
 export class PropertyGridEditorText extends PropertyGridEditorStringBase {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type === "text";
@@ -1542,9 +1564,8 @@ PropertyGridEditorCollection.register(new PropertyGridEditorPage());
 PropertyGridEditorCollection.register(new PropertyGridEditorStringArray());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
-PropertyGridEditorCollection.register(
-  new PropertyGridEditorQuestionSelectBase()
-);
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
+PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

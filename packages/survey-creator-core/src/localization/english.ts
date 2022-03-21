@@ -150,6 +150,7 @@ export var enStrings = {
       //Logic tab strings
       empty_tab: "Create a rule to customize the flow of the survey.",
       page_visibilityName: "Show (hide) page",
+      page_enableName: "Enable (disable) page",
       panel_visibilityName: "Show (hide) panel",
       panel_enableName: "Enable (disable) panel",
       question_visibilityName: "Show (hide) question",

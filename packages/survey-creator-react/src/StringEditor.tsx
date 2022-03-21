@@ -36,6 +36,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   }
 
   public componentDidMount() {
+    super.componentDidMount();
     if (!this.locString) return;
     const self: SurveyLocStringEditor = this;
     this.locString.onChanged = function () {
@@ -47,6 +48,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
     }
   }
   public componentWillUnmount() {
+    super.componentWillUnmount();
     if (!this.locString) return;
     this.locString.onChanged = function () { };
   }
