@@ -10,24 +10,14 @@ export class PageNavigatorViewModel extends Base {
   public pageListModel: ListModel;
   public popupModel: PopupModel;
   private pagesChangedFunc: (sender: PagesController, options: any) => any;
-  private pageNameChangedFunc: (sender: PagesController, options: any) => any;
 
-  constructor(private pagesController: PagesController) {
+  constructor(private pagesController: PagesController, private pageEditMode: string) {
     super();
     this.icon = "icon-select-page";
     this.pagesChangedFunc = (sender: PagesController, options: any) => {
       this.buildItems();
     };
-    this.pageNameChangedFunc = (sender: PagesController, options: any) => {
-      var page = options.page;
-      if (!page) return;
-      var item = this.getActionBarByPage(page);
-      if (!!item) {
-        item.title = this.pagesController.getDisplayName(page);
-      }
-    };
     this.pagesController.onPagesChanged.add(this.pagesChangedFunc);
-    this.pagesController.onPageNameChanged.add(this.pageNameChangedFunc);
     this.pageListModel = new ListModel(
       [],
       (item) => {
@@ -59,7 +49,6 @@ export class PageNavigatorViewModel extends Base {
   public dispose() {
     super.dispose();
     this.pagesController.onPagesChanged.remove(this.pagesChangedFunc);
-    this.pagesController.onPageNameChanged.add(this.pageNameChangedFunc);
   }
 
   @propertyArray() items: Array<IAction>;
@@ -74,7 +63,7 @@ export class PageNavigatorViewModel extends Base {
   private setItems(items: Array<IAction>) {
     this.items = items;
     this.pageListModel.setItems(items);
-    this.visible = items.length > 1 || this.pagesController.creator["pageEditMode"] === "bypage";
+    this.visible = items.length > 1 || this.pageEditMode === "bypage";
   }
   private buildItems() {
     this.currentPage = this.pagesController.currentPage || this.pagesController.pages[0];
@@ -103,15 +92,16 @@ export class PageNavigatorViewModel extends Base {
   private createActionBarItem(page: PageModel): Action {
     const item: IAction = {
       id: page.id,
-      title: this.pagesController
+      title: <any>new ComputedUpdater<boolean>(() => this.pagesController
         ? this.pagesController.getDisplayName(page)
-        : page.title
+        : page.title)
     };
     item.active = <any>new ComputedUpdater<boolean>(() => page === this.currentPage);
     item.action = (item: any) => {
-      if(this.pagesController.creator["pageEditMode"] === "bypage") {
+      if(this.pageEditMode === "bypage") {
         this.pagesController.currentPage = page;
         this.currentPage = page;
+        return;
       }
       const el: any = document.getElementById(page.id);
       if (!!el) {

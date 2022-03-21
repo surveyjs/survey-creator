@@ -1,21 +1,22 @@
-import { Base, SurveyModel, EventBase, PageModel } from "survey-core";
+import { Base, SurveyModel, EventBase, PageModel, property } from "survey-core";
 import { ICreatorSelectionOwner } from "./selection-owner";
 
 export class PagesController extends Base {
   public onPagesChanged: EventBase<PagesController> = this.addEvent<PagesController>();
-  public onCurrentPagesChanged: EventBase<PagesController> = this.addEvent<PagesController>();
-  public onPageNameChanged: EventBase<PagesController> = this.addEvent<PagesController>();
+  public onCurrentPageChanged: EventBase<PagesController> = this.addEvent<PagesController>();
   private pagesChangedFunc: (sender: SurveyModel, options: any) => any;
-  private currentpagedChangedFunc: (sender: SurveyModel, options: any) => any;
+  private currentPageChangedFunc: (sender: SurveyModel, options: any) => any;
   private surveyValue: SurveyModel;
+  @property() page2Display: PageModel;
   constructor(public creator: ICreatorSelectionOwner) {
     super();
     this.pagesChangedFunc = (sender: SurveyModel, options: any) => {
       if (options.name !== "pages") return;
-      this.onPagesChanged.fire(this, {});
+      this.raisePagesChanged();
     };
-    this.currentpagedChangedFunc = (sender: SurveyModel, options: any) => {
-      this.onCurrentPagesChanged.fire(this, {});
+    this.currentPageChangedFunc = (sender: SurveyModel, options: any) => {
+      this.page2Display = this.survey.currentPage;
+      this.onCurrentPageChanged.fire(this, {});
     };
     this.onSurveyChanged();
   }
@@ -30,6 +31,7 @@ export class PagesController extends Base {
   }
   public set currentPage(value: PageModel) {
     (<any>this.survey).currentPage = value;
+    this.page2Display = value;
   }
   public selectPage(value: PageModel) {
     this.currentPage = value;
@@ -39,16 +41,17 @@ export class PagesController extends Base {
     if (!page) return "";
     return this.creator.getObjectDisplayName(page);
   }
+  public raisePagesChanged() {
+    this.onPagesChanged.fire(this, {});
+  }
   public onSurveyChanged() {
     this.removeFunctions();
     this.surveyValue = this.creator.survey;
     if (!this.surveyValue) return;
-    this.onPagesChanged.fire(this, {});
+    this.raisePagesChanged();
+    this.page2Display = this.survey.currentPage;
     this.surveyValue.onPropertyChanged.add(this.pagesChangedFunc);
-    this.surveyValue.onCurrentPageChanged.add(this.currentpagedChangedFunc);
-  }
-  public pageNameChanged(page: PageModel) {
-    this.onPageNameChanged.fire(this, { page: page });
+    this.surveyValue.onCurrentPageChanged.add(this.currentPageChangedFunc);
   }
   public dispose() {
     super.dispose();
@@ -58,7 +61,7 @@ export class PagesController extends Base {
     if (!!this.surveyValue && !this.surveyValue.isDisposed) {
       this.surveyValue.onPropertyChanged.remove(this.pagesChangedFunc);
       this.surveyValue.onCurrentPageChanged.remove(
-        this.currentpagedChangedFunc
+        this.currentPageChangedFunc
       );
     }
   }

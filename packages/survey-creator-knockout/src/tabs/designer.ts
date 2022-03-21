@@ -10,6 +10,7 @@ ko.components.register("svc-tab-designer", {
     createViewModel: (params: any) => {
       const model = <TabDesignerViewModel>params.data.model;
       new ImplementorBase(model);
+      new ImplementorBase(model.pagesController);
       return model;
     }
   },

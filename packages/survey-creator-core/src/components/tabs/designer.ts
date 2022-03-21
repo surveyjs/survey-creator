@@ -3,6 +3,7 @@ import { CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
 import "./designer.scss";
 import { getLocString } from "../../editorLocalization";
+import { PagesController } from "../../pages-controller";
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
 
@@ -10,6 +11,7 @@ export class TabDesignerViewModel extends Base {
   private widthUpdater: ComputedUpdater;
   private checkNewPageHandler: (sender: SurveyModel, options: any) => void;
   private surveyOnPropertyChanged: (sender: SurveyModel, options: any) => void;
+  private pagesControllerValue: PagesController;
 
   @property() newPage: PageModel;
   @property({ defaultValue: false }) showNewPage: boolean;
@@ -50,10 +52,14 @@ export class TabDesignerViewModel extends Base {
   constructor(creator: CreatorBase) {
     super();
     this.creator = creator;
+    this.pagesControllerValue = new PagesController(creator);
     this.initSurvey();
   }
   get survey() {
     return this.creator.survey;
+  }
+  public get pagesController(): PagesController {
+    return this.pagesControllerValue;
   }
   public get isToolboxVisible(): boolean {
     return this.creator.showToolboxValue && (this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left");
@@ -64,6 +70,7 @@ export class TabDesignerViewModel extends Base {
 
   public initSurvey() {
     if (!this.survey) return;
+    this.pagesController.onSurveyChanged();
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPageHandler = (sender: SurveyModel, options: any) => {
@@ -78,7 +85,7 @@ export class TabDesignerViewModel extends Base {
     this.survey.onQuestionRemoved.add(this.checkNewPageHandler);
     this.survey.onPanelAdded.add(this.checkNewPageHandler);
     this.survey.onPanelRemoved.add(this.checkNewPageHandler);
-    this.creator.pagesController.onPagesChanged.add(this.onPagesChangedHandler);
+    this.pagesController.onPagesChanged.add(this.onPagesChangedHandler);
     this.checkNewPage();
     this.widthUpdater && this.widthUpdater.dispose();
     this.widthUpdater = new ComputedUpdater<string>(() => {
@@ -93,7 +100,7 @@ export class TabDesignerViewModel extends Base {
   }
   public dispose() {
     super.dispose();
-    this.creator.pagesController.onPagesChanged.remove(this.onPagesChangedHandler);
+    this.pagesController.onPagesChanged.remove(this.onPagesChangedHandler);
     this.survey.onPropertyChanged.remove(this.surveyOnPropertyChanged);
     this.survey.onQuestionAdded.remove(this.checkNewPageHandler);
     this.survey.onQuestionRemoved.remove(this.checkNewPageHandler);
@@ -110,6 +117,7 @@ export class TabDesignerViewModel extends Base {
       if (!this.newPage || (pages.length > 0 && this.newPage === pages[pages.length - 1])) {
         this.createNewPage();
         this.showNewPage = true;
+        // this.pagesController.raisePagesChanged();
       }
       this.newPage.showTitle = !showPlaceholder;
       this.newPage.showDescription = !showPlaceholder;
@@ -131,9 +139,5 @@ export class TabDesignerViewModel extends Base {
       rootCss += " svc-tab-designer--with-page-navigator";
     }
     return rootCss;
-  }
-
-  public get currentPage(): IPage {
-    return this.creator.pagesController.currentPage;
   }
 }

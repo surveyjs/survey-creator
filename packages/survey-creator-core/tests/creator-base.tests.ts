@@ -43,6 +43,8 @@ import { EmptySurveyCreatorOptions, settings } from "../src/settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
 import { ObjectSelector } from "../src/property-grid/object-selector";
+import { PagesController } from "../src/pages-controller";
+import { TabDesignerViewModel } from "../src/components/tabs/designer";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -158,11 +160,13 @@ test("PageViewModel", (): any => {
 
 test("PagesController", (): any => {
   const creator = new CreatorTester();
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const pagesController = desigerTab.pagesController;
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
   let counter = 0;
-  creator.pagesController.onPagesChanged.add((sender, options) => {
+  pagesController.onPagesChanged.add((sender, options) => {
     counter++;
   });
   creator.addPage();
@@ -176,7 +180,9 @@ test("PagesController", (): any => {
 });
 test("PageNavigatorViewModel", (): any => {
   const creator = new CreatorTester();
-  const model = new PageNavigatorViewModel(creator.pagesController);
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const pagesController = desigerTab.pagesController;
+  const model = new PageNavigatorViewModel(pagesController, "");
   expect(model.items).toHaveLength(1);
   creator.JSON = {
     pages: [
@@ -203,7 +209,9 @@ test("PageNavigatorViewModel", (): any => {
 
 test("PageNavigatorViewModel currentPage", (): any => {
   const creator = new CreatorTester();
-  const model = new PageNavigatorViewModel(creator.pagesController);
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const pagesController = desigerTab.pagesController;
+  const model = new PageNavigatorViewModel(pagesController, "");
   expect(model.items).toHaveLength(1);
   creator.JSON = {
     pages: [

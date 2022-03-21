@@ -44,15 +44,17 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   }
 
   componentDidMount(): void {
+    super.componentDidMount();
     this.addDragDropEvents();
   }
 
   componentWillUnmount(): void {
     this.clearDragDropEvents();
+    super.componentWillUnmount();
   }
 
   protected getStateElements(): Array<Base> {
-    return [this.model, this.model.survey];
+    return [this.model, this.model.survey, this.model.pagesController];
   }
 
   private renderedPagesCache: any = {};
@@ -61,20 +63,32 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       this.renderedPagesCache = {};
     }
     const renderedPages = [];
-    const pages = this.creator.survey.pages;
 
-    pages.forEach((page, index) => {
-      let cachedPage = this.renderedPagesCache[page.id];
+    if(this.creator.pageEditMode !== "bypage") {
+      const pages = this.creator.survey.pages;
+
+      pages.forEach((page, index) => {
+        let cachedPage = this.renderedPagesCache[page.id];
+        if (!cachedPage) {
+          cachedPage = this.createRenderedPage(page, index);
+          this.renderedPagesCache[page.id] = cachedPage;
+        }
+        renderedPages.push(cachedPage);
+      });
+
+      if (this.model.showNewPage) {
+        renderedPages.push(this.renderNewPage("svc-page", this.model.newPage.id + "-ghost-new-page"));
+      }
+    } else {
+      const page2Display = this.model.pagesController.page2Display;
+      let cachedPage = this.renderedPagesCache[page2Display.id];
       if (!cachedPage) {
-        cachedPage = this.createRenderedPage(page, index);
-        this.renderedPagesCache[page.id] = cachedPage;
+        cachedPage = this.createRenderedPage(page2Display, 0);
+        this.renderedPagesCache[page2Display.id] = cachedPage;
       }
       renderedPages.push(cachedPage);
-    });
-
-    if (this.model.showNewPage) {
-      renderedPages.push(this.renderNewPage("svc-page", this.model.newPage.id + "-ghost-new-page"));
     }
+
     return renderedPages;
   }
   protected createRenderedPage(page: PageModel, index: number): any {
@@ -149,8 +163,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       </div>
       {this.creator.showPageNavigator ?
         <div className="svc-tab-designer__page-navigator"><SurveyPageNavigator
-          creator={this.creator}
-          pages={this.creator.pagesController.pages}
+          pagesController={this.model.pagesController} pageEditMode={this.model.creator.pageEditMode}
         ></SurveyPageNavigator></div>
         : null
       }
