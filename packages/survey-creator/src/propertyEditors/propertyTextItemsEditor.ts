@@ -14,7 +14,7 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
     super(property);
   }
   public get editorType(): string {
-    return "textitems";
+    return "textitem[]";
   }
   public get editorTypeTemplate(): string {
     return "nested-items";
@@ -49,7 +49,7 @@ export class SurveyPropertyTextItemsEditor extends SurveyNestedPropertyEditor {
   }
 }
 
-SurveyPropertyEditorFactory.registerEditor("textitems", function(
+SurveyPropertyEditorFactory.registerEditor("textitem[]", function (
   property: Survey.JsonObjectProperty
 ): SurveyPropertyEditorBase {
   return new SurveyPropertyTextItemsEditor(property);

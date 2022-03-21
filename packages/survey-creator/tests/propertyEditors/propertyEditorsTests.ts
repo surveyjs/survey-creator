@@ -185,7 +185,7 @@ QUnit.test("Create correct property editor", function (assert) {
     "html",
     "itemvalue[]",
     "matrixdropdowncolumns",
-    "textitems",
+    "textitem[]",
     "triggers",
     "validators",
     "restfull",
@@ -3262,21 +3262,21 @@ QUnit.test("We should not have 'Others' category in our objects",
     const panel = page.addNewPanel("panel");
     const objToCheck: Array<Survey.Base> = [survey, panel, page];
     const allQuestionTypes = Survey.Serializer.getChildrenClasses("question", true);
-    for(let i = 0; i < allQuestionTypes.length; i ++) {
-      if(allQuestionTypes[i].name === "signaturepad") continue; //TODO
+    for (let i = 0; i < allQuestionTypes.length; i++) {
+      if (allQuestionTypes[i].name === "signaturepad") continue; //TODO
       let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
-      if(!!question) {
+      if (!!question) {
         objToCheck.push(question);
       }
     }
     assert.ok(true);
-    for(let i = 0; i < objToCheck.length; i ++) {
+    for (let i = 0; i < objToCheck.length; i++) {
       let properties = new SurveyQuestionProperties(objToCheck[i]);
       let tab = properties.getTabByName("others");
-      if(!!tab) {
+      if (!!tab) {
         const props = tab.properties;
         const propNames: Array<string> = [];
-        for(var j = 0; j < props.length; j ++) {
+        for (var j = 0; j < props.length; j++) {
           propNames.push(props[j].name);
         }
         assert.notOk(true, "obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(propNames));
