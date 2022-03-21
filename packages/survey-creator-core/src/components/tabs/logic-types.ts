@@ -39,7 +39,7 @@ export interface ISurveyLogicType {
   getElementName?: (element: Base) => string;
   getSelectorChoices?: (survey: SurveyModel, context: Question) => Array<SurveyElement>;
   supportContext?: (question: Base) => boolean;
-  getParentElement? (element: Base): Base;
+  getParentElement?(element: Base): Base;
 }
 
 export class SurveyLogicType {
@@ -60,11 +60,11 @@ export class SurveyLogicType {
     this.mergeWithBaseClass();
   }
   private mergeWithBaseClass() {
-    if(!this.logicType.baseClass) return;
+    if (!this.logicType.baseClass) return;
     const baseClass = SurveyLogicTypes.baseTypes[this.logicType.baseClass];
-    if(!baseClass) return;
-    for(var key in baseClass) {
-      if(!this.logicType[key]) {
+    if (!baseClass) return;
+    for (var key in baseClass) {
+      if (!this.logicType[key]) {
         this.logicType[key] = baseClass[key];
       }
     }
@@ -108,12 +108,12 @@ export class SurveyLogicType {
     return obj;
   }
   public cloneElement(el: Base): Base {
-    if(this.isTrigger) return this.createNewObj(el);
+    if (this.isTrigger) return this.createNewObj(el);
     return el;
   }
   public areElementsEqual(el1: Base, el2: Base): boolean {
-    if(el1 === el2) return true;
-    if(!this.isTrigger || el1.getType() !== el2.getType()) return false;
+    if (el1 === el2) return true;
+    if (!this.isTrigger || el1.getType() !== el2.getType()) return false;
     return Helpers.isTwoValueEquals(el1.toJSON(), el2.toJSON());
   }
   public saveNewElement(el: Base): void {
@@ -143,13 +143,13 @@ export class SurveyLogicType {
     return getLogicString(this.name + "Description");
   }
   public getParentElement(element: Base): Base {
-    return !!this.logicType.getParentElement? this.logicType.getParentElement(element) : null;
+    return !!this.logicType.getParentElement ? this.logicType.getParentElement(element) : null;
   }
   public get hasSelectorChoices(): boolean {
     return !!this.logicType.getSelectorChoices;
   }
   public getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
-    if(!this.hasSelectorChoices) return null;
+    if (!this.hasSelectorChoices) return null;
     return this.logicType.getSelectorChoices(survey, context);
   }
   public getDisplayText(element: Base): string {
@@ -168,20 +168,20 @@ export class SurveyLogicType {
     return str;
   }
   private getElementDisplayName(element: Base): string {
-    if(!element) return "";
+    if (!element) return "";
     let res = "";
     if (this.showTitlesInExpression) {
       res = element["title"];
     }
-    if(!res) {
+    if (!res) {
       res = element["name"] || "";
     }
     return wrapTextByCurlyBraces(res);
   }
   private getElementByName(name: string): Base {
-    if(!this.survey) return null;
+    if (!this.survey) return null;
     const question = this.survey.getQuestionByName(name);
-    if(!!question) return question;
+    if (!!question) return question;
     return this.survey.getPageByName(name);
   }
   public formatElName(name: string): string {
@@ -196,7 +196,7 @@ export class SurveyLogicType {
     );
   }
   public supportContext(context: Base): boolean {
-    if(!this.logicType.supportContext) return false;
+    if (!this.logicType.supportContext) return false;
     return this.logicType.supportContext(context);
   }
   private get isTrigger(): boolean {
@@ -206,10 +206,10 @@ export class SurveyLogicType {
 
 function hasMatrixColumns(survey: SurveyModel): boolean {
   const questions = survey.getAllQuestions();
-  for(var i = 0; i < questions.length; i ++) {
+  for (var i = 0; i < questions.length; i++) {
     const q = questions[i];
-    if(q instanceof QuestionMatrixDropdownModelBase) {
-      if((<QuestionMatrixDropdownModelBase>q).columns.length > 0) return true;
+    if (q instanceof QuestionMatrixDropdownModelBase) {
+      if ((<QuestionMatrixDropdownModelBase>q).columns.length > 0) return true;
     }
   }
   return false;
@@ -218,7 +218,7 @@ function hasMatrixColumns(survey: SurveyModel): boolean {
 export class SurveyLogicTypes {
   public static baseTypes = {
     panel: {
-      showIf: function (survey: SurveyModel) : boolean {
+      showIf: function (survey: SurveyModel): boolean {
         return survey.getAllPanels().length > 0;
       },
       getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
@@ -226,7 +226,7 @@ export class SurveyLogicTypes {
       }
     },
     question: {
-      showIf: function (survey: SurveyModel) : boolean {
+      showIf: function (survey: SurveyModel): boolean {
         return survey.getAllQuestions().length > 0;
       },
       supportContext(context: Base): boolean {
@@ -238,14 +238,14 @@ export class SurveyLogicTypes {
       getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
         const res = [];
         const questions = survey.getAllQuestions();
-        for(var i = 0; i < questions.length; i ++) {
+        for (var i = 0; i < questions.length; i++) {
           const q = questions[i];
-          if(!context) {
+          if (!context) {
             res.push(q);
           }
-          if(q instanceof QuestionPanelDynamicModel && (!context || context === q)) {
+          if (q instanceof QuestionPanelDynamicModel && (!context || context === q)) {
             const templates = q.templateElements;
-            for(var j = 0; j < templates.length; j ++) {
+            for (var j = 0; j < templates.length; j++) {
               res.push(templates[j]);
             }
           }
@@ -254,7 +254,7 @@ export class SurveyLogicTypes {
       }
     },
     matrixdropdowncolumn: {
-      showIf: function (survey: SurveyModel) : boolean {
+      showIf: function (survey: SurveyModel): boolean {
         return hasMatrixColumns(survey);
       },
       supportContext(context: Base): boolean {
@@ -266,12 +266,12 @@ export class SurveyLogicTypes {
       getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
         const res = [];
         const questions = survey.getAllQuestions();
-        for(var i = 0; i < questions.length; i ++) {
+        for (var i = 0; i < questions.length; i++) {
           const question = questions[i];
-          if(question instanceof QuestionMatrixDropdownModelBase &&
+          if (question instanceof QuestionMatrixDropdownModelBase &&
             (!context || context === question)) {
             const columns = (<QuestionMatrixDropdownModelBase>question).columns;
-            for(var j = 0; j < columns.length; j ++) {
+            for (var j = 0; j < columns.length; j++) {
               res.push(columns[j]);
             }
           }
@@ -285,7 +285,18 @@ export class SurveyLogicTypes {
       name: "page_visibility",
       baseClass: "page",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) : boolean {
+      showIf: function (survey: SurveyModel): boolean {
+        return survey.pages.length > 1;
+      },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        return survey.pages;
+      }
+    },
+    {
+      name: "page_enable",
+      baseClass: "page",
+      propertyName: "enableIf",
+      showIf: function (survey: SurveyModel): boolean {
         return survey.pages.length > 1;
       },
       getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
