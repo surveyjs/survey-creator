@@ -46,8 +46,6 @@ Although it is powered by Knockout, this library can also be used with Angular, 
 const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true });
 // Enable auto save
 creator.isAutoSave = true;
-// Show notifications before and after a survey definition JSON is saved
-creator.showState = true;
 // Save the survey definition JSON to your web service
 creator.saveSurveyFunc = (saveNo, callback) => {
   // Call a function on your web service to store the survey definition JSON
@@ -115,8 +113,6 @@ export class SurveyCreatorComponent implements OnInit {
     const creator = new SurveyCreator({ showLogicTab: true });
     // Enable auto save
     creator.isAutoSave = true;
-    // Show notifications before and after a survey definition JSON is saved
-    creator.showState = true;
     // Save the survey definition JSON to your web service
     creator.saveSurveyFunc = (saveNo, callback) => {
       // Call a function on your web service to store the survey definition JSON
@@ -162,8 +158,6 @@ export default {
     const creator = new SurveyCreator({ showLogicTab: true });
     // Enable auto save
     creator.isAutoSave = true;
-    // Show notifications before and after a survey definition JSON is saved
-    creator.showState = true;
     // Save the survey definition JSON to your web service
     creator.saveSurveyFunc = (saveNo, callback) => {
       // Call a function on your web service to store the survey definition JSON

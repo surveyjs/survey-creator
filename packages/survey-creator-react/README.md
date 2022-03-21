@@ -35,8 +35,6 @@ export class SurveyCreatorWidget extends Component {
     this.creator = new SurveyCreator({ showLogicTab: true });
     // Enable auto save
     this.creator.isAutoSave = true;
-    // Show notifications before and after a survey definition JSON is saved
-    this.creator.showState = true;
     // Save the survey definition JSON to your web service
     this.creator.saveSurveyFunc = (saveNo, callback) => {
       // Call a function on your web service to store the survey definition JSON

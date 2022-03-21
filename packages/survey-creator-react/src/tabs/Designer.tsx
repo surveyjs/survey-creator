@@ -49,6 +49,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   }
 
   componentWillUnmount(): void {
+    super.componentWillUnmount();
     this.clearDragDropEvents();
     super.componentWillUnmount();
   }
