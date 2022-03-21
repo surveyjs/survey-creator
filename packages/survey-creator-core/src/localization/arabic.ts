@@ -450,7 +450,7 @@ export var arStrings = {
             others: "غير ذلك",
         },
         editProperty: "Edit property '{0}'",
-        items: "[ Items: {0} ]",
+        items: "Items",
         enterNewValue: "Please, enter the value.",
         noquestions: "There is no any question in the survey.",
         createtrigger: "Please create a trigger",
