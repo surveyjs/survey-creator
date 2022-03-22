@@ -70,7 +70,6 @@ export class TabDesignerViewModel extends Base {
 
   public initSurvey() {
     if (!this.survey) return;
-    this.pagesController.onSurveyChanged();
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPageHandler = (sender: SurveyModel, options: any) => {
@@ -79,28 +78,26 @@ export class TabDesignerViewModel extends Base {
     this.surveyOnPropertyChanged = (sender: SurveyModel, options: any) => {
       if (options.name !== "pages") return;
       this.checkNewPage();
+      if (this.newPage) {
+        this.newPage.num = this.survey.pages.length + 1;
+      }
+      this.pagesController.raisePagesChanged();
     };
     this.survey.onPropertyChanged.add(this.surveyOnPropertyChanged);
     this.survey.onQuestionAdded.add(this.checkNewPageHandler);
     this.survey.onQuestionRemoved.add(this.checkNewPageHandler);
     this.survey.onPanelAdded.add(this.checkNewPageHandler);
     this.survey.onPanelRemoved.add(this.checkNewPageHandler);
-    this.pagesController.onPagesChanged.add(this.onPagesChangedHandler);
     this.checkNewPage();
     this.widthUpdater && this.widthUpdater.dispose();
     this.widthUpdater = new ComputedUpdater<string>(() => {
       return this.survey.calculateWidthMode();
     });
     this.withModifier = <any>this.widthUpdater;
-  }
-  private onPagesChangedHandler = (sender: any, options: any) => {
-    if (this.newPage) {
-      this.newPage.num = this.survey.pages.length + 1;
-    }
+    this.pagesController.onSurveyChanged();
   }
   public dispose() {
     super.dispose();
-    this.pagesController.onPagesChanged.remove(this.onPagesChangedHandler);
     this.survey.onPropertyChanged.remove(this.surveyOnPropertyChanged);
     this.survey.onQuestionAdded.remove(this.checkNewPageHandler);
     this.survey.onQuestionRemoved.remove(this.checkNewPageHandler);
@@ -117,7 +114,6 @@ export class TabDesignerViewModel extends Base {
       if (!this.newPage || (pages.length > 0 && this.newPage === pages[pages.length - 1])) {
         this.createNewPage();
         this.showNewPage = true;
-        // this.pagesController.raisePagesChanged();
       }
       this.newPage.showTitle = !showPlaceholder;
       this.newPage.showDescription = !showPlaceholder;

@@ -9,15 +9,18 @@ export class PageNavigatorViewModel extends Base {
   public icon: string;
   public pageListModel: ListModel;
   public popupModel: PopupModel;
-  private pagesChangedFunc: (sender: PagesController, options: any) => any;
+  private pagesChangedFunc = (sender: PagesController, options: any) => {
+    this.buildItems();
+  };
+  private currentPagesChangedFunc = (sender: PagesController, options: any) => {
+    this.currentPage = this.pagesController.currentPage;
+  };
 
   constructor(private pagesController: PagesController, private pageEditMode: string) {
     super();
     this.icon = "icon-select-page";
-    this.pagesChangedFunc = (sender: PagesController, options: any) => {
-      this.buildItems();
-    };
     this.pagesController.onPagesChanged.add(this.pagesChangedFunc);
+    this.pagesController.onCurrentPageChanged.add(this.currentPagesChangedFunc);
     this.pageListModel = new ListModel(
       [],
       (item) => {
@@ -49,6 +52,7 @@ export class PageNavigatorViewModel extends Base {
   public dispose() {
     super.dispose();
     this.pagesController.onPagesChanged.remove(this.pagesChangedFunc);
+    this.pagesController.onCurrentPageChanged.remove(this.currentPagesChangedFunc);
   }
 
   @propertyArray() items: Array<IAction>;

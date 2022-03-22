@@ -4,16 +4,11 @@ import { ICreatorSelectionOwner } from "./selection-owner";
 export class PagesController extends Base {
   public onPagesChanged: EventBase<PagesController> = this.addEvent<PagesController>();
   public onCurrentPageChanged: EventBase<PagesController> = this.addEvent<PagesController>();
-  private pagesChangedFunc: (sender: SurveyModel, options: any) => any;
   private currentPageChangedFunc: (sender: SurveyModel, options: any) => any;
   private surveyValue: SurveyModel;
   @property() page2Display: PageModel;
   constructor(public creator: ICreatorSelectionOwner) {
     super();
-    this.pagesChangedFunc = (sender: SurveyModel, options: any) => {
-      if (options.name !== "pages") return;
-      this.raisePagesChanged();
-    };
     this.currentPageChangedFunc = (sender: SurveyModel, options: any) => {
       this.page2Display = this.survey.currentPage;
       this.onCurrentPageChanged.fire(this, {});
@@ -42,6 +37,7 @@ export class PagesController extends Base {
     return this.creator.getObjectDisplayName(page);
   }
   public raisePagesChanged() {
+    this.page2Display = (<any>this.survey).currentPage;
     this.onPagesChanged.fire(this, {});
   }
   public onSurveyChanged() {
@@ -50,7 +46,6 @@ export class PagesController extends Base {
     if (!this.surveyValue) return;
     this.raisePagesChanged();
     this.page2Display = this.survey.currentPage;
-    this.surveyValue.onPropertyChanged.add(this.pagesChangedFunc);
     this.surveyValue.onCurrentPageChanged.add(this.currentPageChangedFunc);
   }
   public dispose() {
@@ -59,7 +54,6 @@ export class PagesController extends Base {
   }
   private removeFunctions() {
     if (!!this.surveyValue && !this.surveyValue.isDisposed) {
-      this.surveyValue.onPropertyChanged.remove(this.pagesChangedFunc);
       this.surveyValue.onCurrentPageChanged.remove(
         this.currentPageChangedFunc
       );
