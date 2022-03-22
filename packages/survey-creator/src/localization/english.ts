@@ -125,6 +125,7 @@ export var enStrings = {
       addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       page_visibilityName: "Page visibility",
+      page_enableName: "Page enable/disable",
       panel_visibilityName: "Panel visibility",
       panel_enableName: "Panel enable/disable",
       question_visibilityName: "Question visibility",

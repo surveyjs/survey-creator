@@ -55,7 +55,7 @@ export class SurveyLogicType {
     private logicType: ISurveyLogicType,
     public survey: Survey.SurveyModel,
     public options: ISurveyObjectEditorOptions = null
-  ) {}
+  ) { }
   public get name(): string {
     return this.logicType.name;
   }
@@ -247,7 +247,7 @@ export class SurveyLogicAction {
       self.doLogicTypeChanged();
     });
     this.doLogicTypeChanged();
-    this.koAfterRender = function () {};
+    this.koAfterRender = function () { };
   }
   public get logicType(): SurveyLogicType {
     return this.koLogicType();
@@ -454,8 +454,7 @@ export class SurveyLogicItem {
   }
   public get expressionText(): string {
     return editorLocalization
-      .getString("ed.lg.itemExpressionText")
-      ["format"](this.getExpressionAsDisplayText());
+      .getString("ed.lg.itemExpressionText")["format"](this.getExpressionAsDisplayText());
   }
   private getExpressionAsDisplayText(): string {
     return !!this.owner
@@ -528,6 +527,14 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       name: "page_visibility",
       baseClass: "page",
       propertyName: "visibleIf",
+      showIf: function (survey: Survey.SurveyModel) {
+        return survey.pages.length > 1;
+      },
+    },
+    {
+      name: "page_enable",
+      baseClass: "page",
+      propertyName: "enableIf",
       showIf: function (survey: Survey.SurveyModel) {
         return survey.pages.length > 1;
       },
@@ -867,7 +874,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     };
     this.koEditableItem = ko.observable(null);
     this.update();
-    this.koAfterRender = function () {};
+    this.koAfterRender = function () { };
   }
 
   private _placeholderHtml = ko.observable("");
@@ -1289,7 +1296,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     this.expressionEditor.options = this.options;
     this.expressionEditor.koSetupText(this.expressionSetupText);
   }
-  dispose() {}
+  dispose() { }
 }
 
 ko.components.register("survey-logic", {

@@ -92,7 +92,6 @@ There are several options that you may set to change the Survey Creator behavior
 |_designerHeight: '1200px',_|Set the designer heigth to the specific value.|
 |_showPagesToolbox: false,_|If you are going to allow your users creating only one page surveys, then set this property to false. It will hide the pages toolbox.|
 |_useTabsInElementEditor: true,_|If you want to tabs instead of accordion in the element popup editor, then set this property to true. It will change accordion to tab control.|
-|_showState: false,_|Set it to true to show the state in the toolbar (saving/saved).|
 |_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
 |_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
 |_showDefaultLanguageInTestSurveyTab: "auto",_|Before v1.1.3 the default value was _true_. The language selector was visible by default and allows to select all available languages. You could set this property to _false_ to hide it. Since v1.1.3 the behavior has been changed. The default value is _"auto"_ and the selector is visible when there are more than one language in at least one localizable string in the survey. If you set it to _true_ or _"all"_ it will be shown always. Setting it to _"all"_ will display all available languages (30+) in the selector, while _"auto"_ and _true_ only languages that are used in the current survey. Set it to _false_ to hide the language selector.|
@@ -148,11 +147,8 @@ creator.saveSurveyFunc = function (saveNo, callback) {
 
 The modern online editors do not have a "Save" button. They are saving the changes automatically after every change with a small delay. Survey Creator has this functionality as well. You have to set **isAutoSave** property to true (default is false). 
 
-Optionally, you may ask Survey Creator to show the current status on the Toolbar: Saving/Saved/Error. Set the property showState to true as well.
-            
 ```javascript
 creator.isAutoSave = true;
-creator.showState = true;
 ```
 
 <div id="localization"></div>

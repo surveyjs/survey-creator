@@ -449,7 +449,7 @@ export var nlStrings = {
       others: "Anderen",
     },
     editProperty: "Eigenschap '{0}' bewerken",
-    items: "[ Items: {0} ]",
+    items: "Items",
 
     enterNewValue: "Voer de waarde in.",
     noquestions: "Er is geen enkele vraag in de enquête.",
