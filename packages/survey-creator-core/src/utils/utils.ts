@@ -1,4 +1,5 @@
 import { defaultV2Css, Serializer } from "survey-core";
+import { settings } from "../settings";
 
 function getNumericFromString(str: string): string {
   if (!str) return "";
@@ -201,7 +202,7 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
   function setClass(className, checkReady = null) {
     const arr = element.className.split(" ");
     if (checkReady) {
-      if(arr.indexOf(checkReady) == -1) {
+      if (arr.indexOf(checkReady) == -1) {
         return;
       }
     }
@@ -211,9 +212,9 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
   }
 
   if (!e[processedFlagName] && e.type === "mouseover") {
-    if(timeout) {
+    if (timeout) {
       setClass(nameReady);
-      setTimeout(()=>{
+      setTimeout(() => {
         setClass(name, nameReady);
       }, timeout);
     }
@@ -232,7 +233,7 @@ export function clearNewLines(text: string) {
 }
 
 export function select(element: any) {
-  if(!window) return;
+  if (!window) return;
   var range, selection;
   if (window.getSelection && document.createRange) {
     selection = window.getSelection();
@@ -271,5 +272,5 @@ export function assignDefaultV2Classes(destination: any, questionType: string) {
 }
 
 export function wrapTextByCurlyBraces(text: string) {
-  return "{" + text + "}";
+  return settings.logic.openBracket + text + settings.logic.closeBracket;
 }
