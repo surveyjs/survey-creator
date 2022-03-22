@@ -1,5 +1,6 @@
 import * as Survey from "survey-core";
 import { QuestionConvertMode, settings } from "./settings";
+import { IQuestionToolboxItem } from "./toolbox";
 
 export class QuestionConverter {
   public static convertInfo = {};
