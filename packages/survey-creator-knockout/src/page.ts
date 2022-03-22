@@ -10,7 +10,9 @@ ko.components.register("svc-page", {
     createViewModel: (params: any, componentInfo: any) => {
       const creator: SurveyCreator = params.creator;
       const model = ko.computed(() => {
-        var pageViewModel = new PageViewModel(creator, ko.unwrap(params.page));
+        const page = ko.unwrap(params.page);
+        if(!page) return null;
+        const pageViewModel = new PageViewModel(creator, page);
         pageViewModel.onPageSelectedCallback = () => {
           SurveyHelper.scrollIntoViewIfNeeded(componentInfo.element);
         };
@@ -18,7 +20,7 @@ ko.components.register("svc-page", {
         return pageViewModel;
       });
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        model().dispose();
+        model() && model().dispose();
       });
       return { model };
     }
