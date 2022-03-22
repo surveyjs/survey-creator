@@ -5,8 +5,26 @@
       "Title": "Survey Creator Overview"
     },
     {
-      "Name": "Add-Survey-Creator-into-your-Web-Page",
-      "Title": "Add Survey Creator into Your Web Page"
+      "Name": "get-started",
+      "Title": "Get Started with Survey Creator",
+      "Items": [
+        {
+          "Name": "get-started-angular",
+          "Title": "Use with Angular"
+        },
+        {
+          "Name": "get-started-vue",
+          "Title": "Use with Vue"
+        },
+        {
+          "Name": "get-started-react",
+          "Title": "Use with React"
+        },
+        {
+          "Name": "get-started-knockout-jquery",
+          "Title": "Use with Knockout or jQuery"
+        }
+      ]
     },
     {
       "Name": "CreatorV2",
