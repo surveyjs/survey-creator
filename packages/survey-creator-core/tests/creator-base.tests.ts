@@ -178,6 +178,7 @@ test("PagesController", (): any => {
   };
   expect(counter).toEqual(3);
 });
+
 test("PageNavigatorViewModel", (): any => {
   const creator = new CreatorTester();
   const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
@@ -199,9 +200,9 @@ test("PageNavigatorViewModel", (): any => {
   expect(model.items[1].active).toBeFalsy();
   creator.addPage();
   expect(model.items).toHaveLength(3);
-  expect(model.items[0].active).toBeTruthy();
+  expect(model.items[0].active).toBeFalsy();
   expect(model.items[1].active).toBeFalsy();
-  expect(model.items[2].active).toBeFalsy();
+  expect(model.items[2].active).toBeTruthy();
   expect(model.items[0].title).toEqual("page1");
   creator.survey.pages[0].name = "page1-newName";
   expect(model.items[0].title).toEqual("page1-newName");
@@ -234,6 +235,57 @@ test("PageNavigatorViewModel currentPage", (): any => {
   expect(model.items[0].active).toBeFalsy();
   expect(model.items[1].active).toBeTruthy();
   expect(model.currentPage).toEqual(pages[1]);
+});
+
+test("PageNavigatorViewModel bypage mode", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "bypage" });
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const pagesController = desigerTab.pagesController;
+  const model = new PageNavigatorViewModel(pagesController, "bypage");
+  expect(model.items).toHaveLength(2);
+  creator.JSON = {
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }]
+      },
+      {
+        elements: [{ type: "text", name: "question2" }]
+      }
+    ]
+  };
+  const pages = creator.survey.pages;
+
+  expect(model.items).toHaveLength(pages.length + 1);
+  expect(model.items[0].active).toBeTruthy();
+  expect(model.items[1].active).toBeFalsy();
+  expect(model.items[2].active).toBeFalsy();
+  expect(model.currentPage).toEqual(pages[0]);
+
+  model.currentPage = pages[1];
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeTruthy();
+  expect(model.items[2].active).toBeFalsy();
+  expect(model.currentPage).toEqual(pages[1]);
+
+  creator.deleteElement(pages[1]);
+  expect(model.items).toHaveLength(2);
+  expect(model.items[0].active).toBeTruthy();
+  expect(model.items[1].active).toBeFalsy();
+  expect(model.currentPage).toEqual(pages[0]);
+
+  model.items[1].action();
+  expect(model.items).toHaveLength(2);
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeTruthy();
+  expect(model.currentPage).toEqual(desigerTab.newPage);
+
+  creator.addPage(desigerTab.newPage);
+  expect(model.items).toHaveLength(3);
+  expect(model.items[0].active).toBeFalsy();
+  expect(model.items[1].active).toBeTruthy();
+  expect(model.items[2].active).toBeFalsy();
+  expect(model.currentPage).toEqual(pages[1]);
+  expect(model.items[2].data).toEqual(desigerTab.newPage);
 });
 
 test("SelectionHistoryController: Go to next/prev", (): any => {
