@@ -1,0 +1,343 @@
+# Add Survey Creator / Form Builder to an Angular Application
+
+This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in an Angular application. To add the component to your application, follow the steps below:
+
+- [Install the `survey-creator-knockout` npm Package](#install-the-survey-creator-knockout-npm-package)
+- [Configure Styles](#configure-styles)
+- [Configure Survey Creator](#configure-survey-creator)
+- [Render Survey Creator](#render-survey-creator)
+- [Save and Load Survey Model Definitions](#save-and-load-survey-model-definitions)
+
+You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-angular" target="_blank">Get Started with Survey Creator / Form Builder - Angular</a>.
+
+## Install the `survey-creator-knockout` npm Package
+
+Survey Creator does not yet have a native implementation for Angular. However, you can integrate the version for Knockout into your Angular application. Run the following command to install the <a href="https://www.npmjs.com/package/survey-creator-knockout" target="_blank">survey-creator-knockout</a> package:
+
+```cmd
+npm install survey-creator-knockout --save
+```
+
+## Configure Styles
+
+Open the `angular.json` file and reference Survey Creator and SurveyJS Library style sheets as shown below. Note that although SurveyJS Library supports [different UI themes](https://surveyjs.io/Documentation/Library?id=get-started-angular#configure-styles), Survey Creator can use only the Default V2 theme:
+
+```js
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  // ...
+  "projects": {
+    "project-name": {
+      "projectType": "application",
+      // ...
+      "architect": {
+        "build": {
+          // ...
+          "options": {
+            // ...
+            "styles": [
+              "src/styles.css",
+              "node_modules/survey-core/defaultV2.min.css",
+              "node_modules/survey-creator-core/survey-creator-core.min.css"
+            ],
+            // ...
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Configure Survey Creator
+
+To configure the Survey Creator component, specify [its properties](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator) in a configuration object. In this tutorial, the object enables the following properties:
+
+- [`showLogicTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showLogicTab)        
+Displays the Logic tab in the tab panel.
+
+- [`isAutoSave`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#isAutoSave)        
+Automatically saves the survey definition JSON on every change.
+
+```js
+const creatorOptions = {
+    showLogicTab: true,
+    isAutoSave: true
+};
+```
+
+Pass the configuration object to the `SurveyCreator` constructor as shown in the code below to instantiate Survey Creator. Assign the produced instance to a constant that will be used later to render the component:
+
+```js
+import { Component, OnInit } from '@angular/core';
+import { SurveyCreator } from "survey-creator-knockout";
+
+@Component({
+  // ...
+})
+export class SurveyCreatorComponent implements OnInit {
+  ngOnInit() {
+    const creator = new SurveyCreator(creatorOptions);
+  }
+}
+```
+
+<details>
+  <summary>View full code</summary>
+
+```js
+import { Component, OnInit } from "@angular/core";
+import { SurveyCreator } from "survey-creator-knockout";
+
+const creatorOptions = {
+  showLogicTab: true,
+  isAutoSave: true
+};
+
+@Component({
+  selector: 'survey-creator',
+  templateUrl: './survey-creator.component.html',
+  styleUrls: ['./survey-creator.component.css']
+})
+export class SurveyCreatorComponent implements OnInit {
+  ngOnInit() {
+    const creator = new SurveyCreator(creatorOptions);
+  }
+}
+```
+</details>
+
+## Render Survey Creator
+
+Survey Creator should be rendered in a page element. Add this element to your component template:
+
+```html
+<div id="surveyCreator"></div>
+```
+
+```css
+#surveyCreator {
+    height: 100vh;
+    width: 100vw;
+}
+```
+
+To render Survey Creator in the page element, call the `render(containerId)` method on the Survey Creator instance you created in the previous step:
+
+```js
+// ...
+@Component({
+  // ...
+})
+export class SurveyCreatorComponent implements OnInit {
+  ngOnInit() {
+    // ...
+    creator.render("surveyCreator");
+  }
+}
+```
+
+<details>
+  <summary>View full code</summary>
+
+```html
+<div id="surveyCreator"></div>
+```
+
+```js
+import { Component, OnInit } from "@angular/core";
+import { SurveyCreator } from "survey-creator-knockout";
+
+const creatorOptions = {
+  showLogicTab: true,
+  isAutoSave: true
+};
+
+@Component({
+  selector: 'survey-creator',
+  templateUrl: './survey-creator.component.html',
+  styleUrls: ['./survey-creator.component.css']
+})
+export class SurveyCreatorComponent implements OnInit {
+  ngOnInit() {
+    const creator = new SurveyCreator(creatorOptions);
+    creator.render("surveyCreator");
+  }
+}
+```
+
+```css
+#surveyCreator {
+    height: 100vh;
+    width: 100vw;
+}
+```
+</details>
+
+## Save and Load Survey Model Definitions
+
+Survey Creator is designed to produce survey model definitions as JSON objects. You can save these objects on your server and load them from it. To save a JSON object, implement the `saveSurveyFunc` function. It accepts two arguments:
+
+- `saveNo`      
+An incremental number of the current change. Because web services are asynchronous, you cannot guarantee that the change that came to the service last is the latest. For example, change #11 may precede change #10. In your web service code, compare `saveNo` of the coming change with `saveNo` of the saved change to decide whether to override the latter.
+
+- `callback`        
+A callback function that should be called after the current change is saved or rejected. Pass `saveNo` as the first argument. The second argument should be `true` if the change was successfully saved or `false` if the change was rejected.
+
+The following code shows how to use the `saveSurveyFunc` function to save a survey model definition in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+
+
+```js
+// ...
+@Component({
+  // ...
+})
+export class SurveyCreatorComponent implements OnInit {
+  ngOnInit() {
+    // ...
+    creator.saveSurveyFunc = (saveNo: number, callback: Function) => { 
+      // If you use localStorage:
+      window.localStorage.setItem("survey-json", creator.text);
+      callback(saveNo, true);
+
+      // If you use a web service:
+      saveSurveyJson(
+          "https://your-web-service.com/",
+          creator.JSON,
+          saveNo,
+          callback
+      );
+    };
+    // ...
+  }
+}
+
+// If you use a web service:
+function saveSurveyJson(url, json, saveNo, callback) {
+  const request = new XMLHttpRequest();
+  request.open('POST', url);
+  request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  request.addEventListener('load', () => {
+      callback(saveNo, true);
+  });
+  request.addEventListener('error', () => {
+      callback(saveNo, false);
+  });
+  request.send(JSON.stringify(json));
+}
+```
+
+To load a survey model definition JSON into Survey Creator, assign the definition to Survey Creator's [`JSON`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#JSON) or [`text`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#text) property. Use `text` if the JSON object is converted to string; otherwise, use `JSON`. The following code takes a survey model definition from the `localStorage`. If the definition is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
+
+
+```js
+const defaultJson = {
+    pages: [{
+        name: "Name",
+        elements: [{
+            name: "FirstName",
+            title: "Enter your first name:",
+            type: "text"
+        }, {
+            name: "LastName",
+            title: "Enter your last name:",
+            type: "text"
+        }]
+    }]
+};
+
+// ...
+@Component({
+  // ...
+})
+export class SurveyCreatorComponent implements OnInit {
+  ngOnInit() {
+    // ...
+    creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
+    // ...
+  }
+}
+```
+
+<details>
+  <summary>View full code</summary>
+
+```html
+<div id="surveyCreator"></div>
+```
+
+```js
+import { Component, OnInit } from "@angular/core";
+import { SurveyCreator } from "survey-creator-knockout";
+
+const creatorOptions = {
+  showLogicTab: true,
+  isAutoSave: true
+};
+
+const defaultJson = {
+  pages: [{
+    name: "Name",
+    elements: [{
+      name: "FirstName",
+      title: "Enter your first name:",
+      type: "text"
+    }, {
+      name: "LastName",
+      title: "Enter your last name:",
+      type: "text"
+    }]
+  }]
+};
+
+@Component({
+  selector: 'survey-creator',
+  templateUrl: './survey-creator.component.html',
+  styleUrls: ['./survey-creator.component.css']
+})
+export class SurveyCreatorComponent implements OnInit {
+  ngOnInit() {
+    const creator = new SurveyCreator(creatorOptions);
+    creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
+
+    creator.saveSurveyFunc = (saveNo: number, callback: Function) => { 
+      window.localStorage.setItem("survey-json", creator.text);
+      callback(saveNo, true);
+      // saveSurveyJson(
+      //     "https://your-web-service.com/",
+      //     creator.JSON,
+      //     saveNo,
+      //     callback
+      // );
+    };
+    creator.render("surveyCreator");
+  }
+}
+
+// function saveSurveyJson(url: string | URL, json: object, saveNo: number, callback: Function) {
+//   const request = new XMLHttpRequest();
+//   request.open('POST', url);
+//   request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+//   request.addEventListener('load', () => {
+//       callback(saveNo, true);
+//   });
+//   request.addEventListener('error', () => {
+//       callback(saveNo, false);
+//   });
+//   request.send(JSON.stringify(json));
+// }
+```
+
+```css
+#surveyCreator {
+    height: 100vh;
+    width: 100vw;
+}
+```
+</details>
+
+<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-angular" target="_blank">View full code on GitHub</a>
+
+## Conclusion
+
+You have learnt how to add Survey Creator to your Angular application. For further information, refer the [Survey Creator / Form Builder Overview](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview) help topic.
