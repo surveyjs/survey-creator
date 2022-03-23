@@ -194,8 +194,8 @@ test(`checkbox work with other/select all/none`, async (t) => {
     .expect(checkboxItems.nth(1).innerText).eql("item1")
     .expect(checkboxItems.nth(2).innerText).eql("item2")
     .expect(checkboxItems.nth(3).innerText).eql("item3")
-    .expect(checkboxItems.nth(4).innerText).eql("Other (describe)")
-    .expect(checkboxItems.nth(5).innerText).eql("None");
+    .expect(checkboxItems.nth(5).innerText).eql("Other (describe)")
+    .expect(checkboxItems.nth(4).innerText).eql("None");
   // .click(`.svda-add-custom-item+.svda-add-custom-item`)
   // .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)
   // .click(`.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item+.svda-add-custom-item`)
@@ -289,7 +289,7 @@ test(`rating change item`, async (t) => {
     // .debug()
     .expect(Selector(`input[aria-label~=Text]`).value)
     .eql("new item")
-    // .wait(3000);
+  // .wait(3000);
 });
 
 test(`rating add item from property grid`, async (t) => {
