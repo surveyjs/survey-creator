@@ -851,7 +851,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   await t.expect(value).eql(expectedValue);
 });
 
-test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
+test.skip("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
   const json = {
     pages: [
       {
