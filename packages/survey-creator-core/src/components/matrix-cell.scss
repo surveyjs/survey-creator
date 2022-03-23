@@ -74,6 +74,9 @@
   .sv-popup__container {
     background-color: $background;
   }
+  .sv-popup__scrolling-content {
+    margin-top: calcSize(2);
+  }
   .sv-popup_shadow.sv-popup_shadow {
     filter: unset;
   }
