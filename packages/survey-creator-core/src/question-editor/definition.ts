@@ -1,18 +1,23 @@
 export interface ISurveyQuestionEditorDefinition {
   title?: string;
-  properties?: Array<string | { name: string, title?: string, tab?: string }>;
-  tabs?: Array<{
-    name: string,
-    index?: number,
-    title?: string,
-    visible?: boolean,
-  }>;
+  properties?: Array<string | IPropertyEditorInfo>;
+  tabs?: Array<IPropertyTabInfo>;
+}
+export interface IPropertyEditorInfo {
+  name: string;
+  title?: string;
+  tab?: string;
+  placeholder?: string;
 }
 
+export interface IPropertyTabInfo {
+  name: string;
+  index?: number;
+  title?: string;
+  visible?: boolean;
+}
 export class SurveyQuestionEditorDefinition {
-  public static definition: {
-    [key: string]: ISurveyQuestionEditorDefinition,
-  } = {
+  public static definition: { [key: string]: ISurveyQuestionEditorDefinition } = {
     question: {
       properties: [
         "name",
@@ -185,7 +190,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "hideIfChoicesEmpty", tab: "logic" },
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
-        { name: "otherErrorText", tab: "validation" }
+        { name: "otherErrorText", tab: "validation" },
+        { name: "separateSpecialChoices", tab: "choices" },
       ],
       tabs: [
         { name: "choices", index: 10 },
@@ -196,11 +202,15 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "hasSelectAll", tab: "choices" },
         { name: "selectAllText", tab: "choices" },
-        { name: "maxSelectedChoices", tab: "choices" }
+        { name: "maxSelectedChoices", tab: "choices" },
+        { name: "separateSpecialChoices", tab: "choices" },
       ]
     },
     radiogroup: {
-      properties: [{ name: "showClearButton", tab: "choices" }]
+      properties: [
+        { name: "showClearButton", tab: "choices" },
+        { name: "separateSpecialChoices", tab: "choices" },
+      ]
     },
     dropdown: {
       properties: [
@@ -214,12 +224,12 @@ export class SurveyQuestionEditorDefinition {
     },
     imagepicker: {
       properties: [
-        "multiSelect",
-        "showLabel",
         "contentMode",
         "imageFit",
         "imageHeight",
-        "imageWidth"
+        "imageWidth",
+        "multiSelect",
+        "showLabel",
       ]
     },
     image: {
@@ -227,8 +237,8 @@ export class SurveyQuestionEditorDefinition {
         "imageLink",
         "contentMode",
         "imageFit",
-        "imageHeight",
-        "imageWidth",
+        { name: "imageHeight", placeholder: "auto" },
+        { name: "imageWidth", placeholder: "auto" },
         "text"
       ]
     },

@@ -28,6 +28,12 @@ svc-tab-designer {
       padding: 0 calcSize(1);
     }
   }
+  .sd-question.sd-question--image {
+    width: 100%;
+  }
+}
+.svc-designer-header {
+  border-bottom: 2px solid;
 }
 .svc-designer-header {
   border-bottom: 2px solid;

@@ -23,6 +23,8 @@ import { QuestionEmbeddedSurveyModel } from "../../src/components/embedded-surve
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 import { CreatorTester } from "../creator-tester";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
+import { wrapTextByCurlyBraces } from "../../src/utils/utils";
+import { settings } from "../../src/settings";
 
 export * from "../../src/components/link-value";
 
@@ -2220,4 +2222,13 @@ test("LogicItemUI readOnly", () => {
   const logic = new SurveyLogicUI(survey);
   logic.readOnly = true;
   expect(logic.matrixItems.isReadOnly).toBeTruthy();
+});
+test("wrapTextByCurlyBraces", () => {
+  expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
+  settings.logic.openBracket = "[";
+  settings.logic.closeBracket = "]";
+  expect(wrapTextByCurlyBraces("q1")).toEqual("[q1]");
+  settings.logic.openBracket = "{";
+  settings.logic.closeBracket = "}";
+  expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
 });

@@ -57,7 +57,7 @@ export class CreatorResponsivityManager {
       this.resizeObserver.observe(this.container.parentElement);
       this.process();
       if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
-        this.creator.showSidebar = false;
+        this.creator.setShowSidebar(false);
       }
     }
   }

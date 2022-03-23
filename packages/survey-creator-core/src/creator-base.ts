@@ -182,7 +182,6 @@ export class CreatorBase extends Base
    */
   @property({ defaultValue: false }) isAutoSave: boolean;
   @property() showOptions: boolean;
-  @property({ defaultValue: false }) showState: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
@@ -1009,7 +1008,7 @@ export class CreatorBase extends Base
     }
   }
   private showSidebarValue: boolean = true;
-  public onShowSidebarVisiblityChanged: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  public onShowSidebarVisibilityChanged: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * Set this this property grid false to hide the property grid.
    */
@@ -1022,13 +1021,23 @@ export class CreatorBase extends Base
       return;
     }
     if (this.showSidebar === val) return;
-    this.showSidebarValue = val;
-    this.updateToolboxIsCompact();
-    this.onShowSidebarVisiblityChanged.fire(this, { show: val });
+    this.setShowSidebar(val, true);
     if (!this.onShowPropertyGridVisiblityChanged.isEmpty) {
-      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisiblityChanged");
+      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisibilityChanged");
       this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
     }
+  }
+  public setShowSidebar(value: boolean, isManualMode = false) {
+    this.showSidebarValue = value;
+    if (isManualMode) {
+      if (value) {
+        this.sidebar.expandedManually = true;
+      } else {
+        this.sidebar.collapsedManually = true;
+      }
+    }
+    this.updateToolboxIsCompact();
+    this.onShowSidebarVisibilityChanged.fire(this, { show: value });
   }
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
@@ -1274,8 +1283,6 @@ export class CreatorBase extends Base
       typeof options.maxLogicItemsInCondition !== "undefined"
         ? options.maxLogicItemsInCondition
         : -1;
-    this.showState =
-      typeof options.showState !== "undefined" ? options.showState : false;
     this.showOptions =
       typeof options.showOptions !== "undefined" ? options.showOptions : false;
 
@@ -1770,10 +1777,10 @@ export class CreatorBase extends Base
     return !!item ? item.json : null;
   }
   private singlePageJSON(json: any) {
-    if(this.pageEditMode === "single") {
+    if (this.pageEditMode === "single") {
       const pages = json.pages;
-      if(Array.isArray(pages) && pages.length > 0) {
-        if(pages[0].elements !== undefined) {
+      if (Array.isArray(pages) && pages.length > 0) {
+        if (pages[0].elements !== undefined) {
           json.elements = pages[0].elements;
         }
         delete json.pages;
@@ -2338,7 +2345,7 @@ export class CreatorBase extends Base
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
-    if(this.pageEditMode === "single" && parent.getType() === "page") {
+    if (this.pageEditMode === "single" && parent.getType() === "page") {
       parent = this.survey;
     }
     obj["delete"]();
@@ -2920,7 +2927,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   return undefined;
 }
-export function getQuestionContentWrapperComponentName (element) {
+export function getQuestionContentWrapperComponentName(element) {
   if (element.getType() == "rating") {
     return "svc-rating-question-content";
   }

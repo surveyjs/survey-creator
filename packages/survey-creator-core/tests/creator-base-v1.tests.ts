@@ -240,7 +240,7 @@ test("onQuestionAdded event + undo/redo", () => {
   const creator = new CreatorTester();
   let counter = 0;
   creator.onQuestionAdded.add(function () {
-    if(creator.isProcessingUndoRedo) return;
+    if (creator.isProcessingUndoRedo) return;
     counter++;
   });
   expect(counter).toEqual(0);
@@ -448,8 +448,10 @@ test("Validate Selected Element Errors", () => {
 });
 test("Update conditions/expressions on changing question.name", () => {
   const creator = new CreatorTester();
-  creator.survey.currentPage.addNewQuestion("text", "question1");
-  creator.survey.currentPage.addNewQuestion("text", "question2");
+  const page = creator.survey.currentPage;
+  page.enableIf = "{question1} = 1";
+  page.addNewQuestion("text", "question1");
+  page.addNewQuestion("text", "question2");
   const q1 = creator.survey.getAllQuestions()[0];
   const q2 = creator.survey.getAllQuestions()[1];
   q2.visibleIf = "{question1} = 1";
@@ -457,6 +459,7 @@ test("Update conditions/expressions on changing question.name", () => {
   const nameQuestion = creator["designerPropertyGrid"].survey.getQuestionByName("name");
   nameQuestion.value = "myUpdatedQuestion1";
   expect(q2.visibleIf).toEqual("{myUpdatedQuestion1} = 1");
+  expect(page.enableIf).toEqual("{myUpdatedQuestion1} = 1");
 });
 
 test("Update conditions/expressions on changing question.valueName", () => {
