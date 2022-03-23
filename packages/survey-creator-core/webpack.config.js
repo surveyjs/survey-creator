@@ -123,7 +123,6 @@ module.exports = function (options) {
   var percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
-      createSVGBundle();
     } else if (1 == percentage) {
       if (isProductionBuild) {
         console.log("Generating d.ts file: " + dts_generator);
