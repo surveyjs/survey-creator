@@ -1,5 +1,5 @@
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-import { url, setJSON, screenshotComparerOptions, propertyGridSelector, checkElementScreenshot } from "../../helper";
+import { url, setJSON, screenshotComparerOptions, checkElementScreenshot, getToolboxItemByText } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -84,6 +84,22 @@ test("Values editors, keep them close", async (t) => {
     .ok(compareResults.errorMessages());
 
 });
+
+test("Default value popup", async (t) => {
+  await t.resizeWindow(1240, 870);
+
+  const generalTab = Selector("h4").withExactText("General");
+  const dataTab = Selector("h4").withExactText("Data");
+
+  await t
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
+    .click(generalTab)
+    .click(dataTab)
+    .click(Selector(".svc-action-button.svc-question-link__set-button").withText("Set Default value"));
+  await checkElementScreenshot("pg-default-value-popup.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t);
+});
+
 test("Property grid checkbox - all states", async (t) => {
   await t.resizeWindow(2560, 1440);
   await setJSON({});
