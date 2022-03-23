@@ -202,11 +202,15 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "hasSelectAll", tab: "choices" },
         { name: "selectAllText", tab: "choices" },
-        { name: "maxSelectedChoices", tab: "choices" }
+        { name: "maxSelectedChoices", tab: "choices" },
+        { name: "separateSpecialChoices", tab: "choices" },
       ]
     },
     radiogroup: {
-      properties: [{ name: "showClearButton", tab: "choices" }]
+      properties: [
+        { name: "showClearButton", tab: "choices" },
+        { name: "separateSpecialChoices", tab: "choices" },
+      ]
     },
     dropdown: {
       properties: [
