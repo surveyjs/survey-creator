@@ -16,7 +16,7 @@ fixture`${title}`.page`${url}`.clientScripts({ content: `(${explicitErrorHandler
   await t.maximizeWindow();
 });
 
-test("Drag Drop Toolbox Item and Empty Page", async (t) => {
+test.only("Drag Drop Toolbox Item and Empty Page", async (t) => {
   const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
@@ -851,7 +851,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   await t.expect(value).eql(expectedValue);
 });
 
-test.skip("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
+test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
   const json = {
     pages: [
       {
