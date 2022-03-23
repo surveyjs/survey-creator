@@ -187,6 +187,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
         { name: "otherErrorText", tab: "validation" },
+        { name: "separateSpecialChoices", tab: "choices" },
       ],
       tabs: [
         { name: "choices", index: 10 },

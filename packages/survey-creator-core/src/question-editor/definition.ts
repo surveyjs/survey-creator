@@ -4,17 +4,17 @@ export interface ISurveyQuestionEditorDefinition {
   tabs?: Array<IPropertyTabInfo>;
 }
 export interface IPropertyEditorInfo {
-  name: string,
-  title?: string,
-  tab?: string,
-  placeholder?: string
+  name: string;
+  title?: string;
+  tab?: string;
+  placeholder?: string;
 }
 
 export interface IPropertyTabInfo {
-  name: string,
-  index?: number,
-  title?: string,
-  visible?: boolean,
+  name: string;
+  index?: number;
+  title?: string;
+  visible?: boolean;
 }
 export class SurveyQuestionEditorDefinition {
   public static definition: { [key: string]: ISurveyQuestionEditorDefinition } = {
@@ -190,7 +190,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "hideIfChoicesEmpty", tab: "logic" },
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
-        { name: "otherErrorText", tab: "validation" }
+        { name: "otherErrorText", tab: "validation" },
+        { name: "separateSpecialChoices", tab: "choices" },
       ],
       tabs: [
         { name: "choices", index: 10 },
