@@ -16,7 +16,7 @@ fixture`${title}`.page`${url}`.clientScripts({ content: `(${explicitErrorHandler
   await t.maximizeWindow();
 });
 
-test.only("Drag Drop Toolbox Item and Empty Page", async (t) => {
+test("Drag Drop Toolbox Item and Empty Page", async (t) => {
   const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
