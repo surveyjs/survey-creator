@@ -207,7 +207,7 @@ module.exports = function (options) {
         {
           test: /\.(svg|png)$/,
           use: {
-            loader: "url-loader",
+            loader: "svg-inline-loader",
             options: {},
           },
         },
