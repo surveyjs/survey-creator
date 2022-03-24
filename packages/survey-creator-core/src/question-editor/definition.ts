@@ -310,6 +310,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "visibleIf", tab: "logic" },
         { name: "enableIf", tab: "logic" },
         { name: "requiredIf", tab: "logic" },
+        { name: "defaultValueExpression", tab: "logic" },
         { name: "totalType", tab: "totals" },
         { name: "totalDisplayStyle", tab: "totals" },
         { name: "totalCurrency", tab: "totals" },
