@@ -338,6 +338,9 @@ export class SurveyCreatorComponent implements OnInit {
 
 <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-angular" target="_blank">View full code on GitHub</a>
 
-## Conclusion
+## Further Reading
 
-You have learnt how to add Survey Creator to your Angular application. For further information, refer the [Survey Creator / Form Builder Overview](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview) help topic.
+- [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#localization)
+- [Appearance Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#appearance)
+- [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#toolbox)
+- [Create a Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
