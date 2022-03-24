@@ -205,11 +205,17 @@ module.exports = function (options) {
           loader: "html-loader",
         },
         {
-          test: /\.(svg|png)$/,
-          use: {
-            loader: "svg-inline-loader",
-            options: {},
-          },
+          test: /\.svg$/,
+          oneOf: [
+            {
+              exclude: path.resolve(__dirname, "./src/images/simulator/"),
+              use: "svg-inline-loader"
+            },
+            {
+              include: path.resolve(__dirname, "./src/images/simulator/"),
+              use: "url-loader"
+            },
+          ]
         },
       ],
     },

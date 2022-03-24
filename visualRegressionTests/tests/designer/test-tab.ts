@@ -51,3 +51,16 @@ test("toolbar view", async (t) => {
   await t.resizeWindow(380, 600);
   await checkElementScreenshot("test-tab-toolbar_responsive.png", Selector(".svc-footer-bar .svc-toolbar-wrapper"), t);
 });
+
+test("mobile iphone", async (t) => {
+  await t.resizeWindow(1280, 900);
+
+  await setJSON(json1);
+
+  await t
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .click(Selector("#deviceSelector .sv-action-bar-item-dropdown"))
+    .click(Selector(".sv-list__item").withText("iPhone 5"));
+
+  await checkElementScreenshot("test-tab-iphone.png", Selector(".svd-simulator-wrapper"), t);
+});
