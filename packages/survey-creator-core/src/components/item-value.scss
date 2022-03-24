@@ -26,6 +26,7 @@
   border-radius: calcSize(12.5);
   padding-right: calcSize(3);
   padding-left: calcSize(0.5);
+  @include disableUserSelect;
 }
 
 .svc-item-value-controls {

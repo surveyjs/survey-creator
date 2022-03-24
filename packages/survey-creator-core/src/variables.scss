@@ -80,3 +80,10 @@ $tab-min-height: var(--tab-min-height, auto);
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+@mixin disableUserSelect {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

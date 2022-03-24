@@ -2661,7 +2661,7 @@ export class CreatorBase extends Base
 
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, panel: IPanel = null) {
     var availableTypes = this.toolbox.items.map((item) => {
-      return this.createIActionBarItemByClass(item.name, item.title);
+      return this.createIActionBarItemByClass(item.name, item.title, item.iconName);
     });
     const popupModel = new PopupModel(
       "sv-list",
@@ -2703,11 +2703,11 @@ export class CreatorBase extends Base
     let newElement = this.createNewElement(json);
     this.clickToolboxItem(newElement, panel);
   }
-  createIActionBarItemByClass(className: string, title: string = null): Action {
+  createIActionBarItemByClass(className: string, title: string, iconName: string): Action {
     return new Action({
-      title: title || this.getLocString("qt." + className),
+      title: title,
       id: className,
-      iconName: "icon-" + className
+      iconName: iconName
     });
   }
 
