@@ -1088,6 +1088,7 @@ test("Question type custom widgets", (): any => {
     selectorModel.popupModel.contentComponentData.model;
   const customItem = listModel.actions.filter((item) => item.id == "test_widget")[0];
   expect(customItem.title).toEqual("Test Widget");
+  expect(customItem.iconName).toEqual("icon-editor");
 
   listModel.selectItem(customItem);
   expect(creator.addNewQuestionText).toEqual("Add Test Widget");
@@ -1735,6 +1736,7 @@ test("ConvertTo, show custom widgets in ConvertTo action", (): any => {
   expect(items[0].id).toEqual("text");
   expect(items[1].id).toEqual("comment");
   expect(items[2].id).toEqual("test_widget");
+  expect(items[2].iconName).toEqual("icon-editor");
   CustomWidgetCollection.Instance.clear();
 });
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
