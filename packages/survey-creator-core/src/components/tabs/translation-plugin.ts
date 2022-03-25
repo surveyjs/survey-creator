@@ -137,7 +137,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     this.importCsvAction = new Action({
       id: "svc-translation-import",
-      iconName: "icon-import",
+      iconName: "icon-load",
       tooltip: this.importFromCSVText,
       title: this.importFromCSVText,
       visible: false,
@@ -161,7 +161,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     this.exportCsvAction = new Action({
       id: "svc-translation-export",
-      iconName: "icon-export",
+      iconName: "icon-download",
       tooltip: this.exportToCSVText,
       title: this.exportToCSVText,
       visible: false,
