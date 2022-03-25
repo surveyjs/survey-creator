@@ -1,6 +1,6 @@
 # Survey Creator / Form Builder Overview
 
-If you want to use Survey Creator on your website with minimum customization, then we recommend you go to [Survey Creator examples](https://surveyjs.io/Examples/Survey-Creator/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration, refer to a [Get Started](https://surveyjs.io/Documentation/Survey-Creator?id=get-started) help topic for you framework.
+If you want to use Survey Creator on your website with minimum customization, then we recommend you go to [Survey Creator examples](https://surveyjs.io/Examples/Survey-Creator/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration, refer to a [Get Started](https://surveyjs.io/Documentation/Survey-Creator?id=get-started) help topic for your framework.
 
 Please visit our [what's new page](https://surveyjs.io/WhatsNew) to see what we have added recently or what is coming soon.
 
@@ -31,10 +31,10 @@ If you want to get the most from our Survey Creator, then we hope that the follo
 
 Survey Creator supports Knockout and React natively and allows you to integrate the Knockout version into Angular, jQuery, and Vue applications. Refer to the following articles to get started with Survey Creator in your frontend framework:
 
-- [Angular Tutorial](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-angular)
-- [Vue Tutorial](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue)
-- [React Tutorial](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-react)
-- [Knockout / jQuery Tutorial](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-knockout-jquery)
+- [Angular](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-angular)
+- [Vue](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue)
+- [React](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-react)
+- [Knockout / jQuery](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-knockout-jquery)
 
 We also created several Quick Start GitHub repositories for different frontend frameworks to give you an easy start:
 
