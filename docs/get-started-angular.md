@@ -73,7 +73,9 @@ import { Component, OnInit } from '@angular/core';
 import { SurveyCreator } from "survey-creator-knockout";
 
 @Component({
-  // ...
+  selector: 'survey-creator',
+  templateUrl: './survey-creator.component.html',
+  styleUrls: ['./survey-creator.component.css']
 })
 export class SurveyCreatorComponent implements OnInit {
   ngOnInit() {
@@ -109,7 +111,7 @@ export class SurveyCreatorComponent implements OnInit {
 
 ## Render Survey Creator
 
-Survey Creator should be rendered in a page element. Add this element to your component template:
+Switch to the component template. Add a page element that will serve as the Survey Creator container:
 
 ```html
 <div id="surveyCreator"></div>
@@ -176,13 +178,13 @@ export class SurveyCreatorComponent implements OnInit {
 
 ## Save and Load Survey Model Definitions
 
-Survey Creator is designed to produce survey model definitions as JSON objects. You can save these objects on your server and load them from it. To save a JSON object, implement the `saveSurveyFunc` function. It accepts two arguments:
+Survey Creator produces survey model definitions as JSON objects. You can persist these objects on your server: save updates and restore previously saved definitions. To save a JSON object, implement the `saveSurveyFunc` function. It accepts two arguments:
 
 - `saveNo`      
-An incremental number of the current change. Because web services are asynchronous, you cannot guarantee that the change that came to the service last is the latest. For example, change #11 may precede change #10. In your web service code, compare `saveNo` of the coming change with `saveNo` of the saved change to decide whether to override the latter.
+An incremental number of the current change. Since web services are asynchronous, you cannot guarantee that the service receives the changes in the same order as the client sends them. For example, change #11 may arrive to the server faster than change #10. In your web service code, update the storage only if you receive changes with a higher `saveNo`.
 
 - `callback`        
-A callback function that should be called after the current change is saved or rejected. Pass `saveNo` as the first argument. The second argument should be `true` if the change was successfully saved or `false` if the change was rejected.
+A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
 The following code shows how to use the `saveSurveyFunc` function to save a survey model definition in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
