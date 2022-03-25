@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, checkElementScreenshot, creatorTabPreviewName } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, checkElementScreenshot, creatorTabPreviewName, explicitErrorHandler } from "../../helper";
 
 const title = "Test tab Screenshot";
 
@@ -54,7 +54,7 @@ test("toolbar view", async (t) => {
 
 test("mobile iphone", async (t) => {
   await t.resizeWindow(1280, 900);
-
+  await explicitErrorHandler();
   await setJSON(json1);
 
   await t
