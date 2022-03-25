@@ -1,198 +1,150 @@
 # Survey Creator / Form Builder Overview
 
-If you want to use Survey Creator on your website with minimum customization, then we recommend you go to [Survey Creator examples](https://surveyjs.io/Examples/Survey-Creator/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration you may here [Add Survey Creator / Form Builder into your Web Page article](https://surveyjs.io/Documentation/Survey-Creator/?id=Add-Survey-Builder-into-your-Web-Page).
+If you want to use Survey Creator on your website with minimum customization, then we recommend you go to [Survey Creator examples](https://surveyjs.io/Examples/Survey-Creator/), click on "Edit in Plunker" button and copy the code into your web page. To get more information about integration, refer to a [Get Started](https://surveyjs.io/Documentation/Survey-Creator?id=get-started) help topic for you framework.
 
 Please visit our [what's new page](https://surveyjs.io/WhatsNew) to see what we have added recently or what is coming soon.
 
 If you want to get the most from our Survey Creator, then we hope that the following article helps you. You may read this document from the beginning to the end or just navigate to the topic you are interested in.
 
-* [Supported Platforms and Examples](#platforms)
-* [Show Survey Creator on the page and set its options](#show_survey_creator_options)
-* [Load and Save Survey](#loadsavesurvey)
-* [Localization and changing the default strings text](#localization)
-* [Multiple languages support](#multiplelanguages)
-* [Appearance: Bootstrap and Themes](#appearance)
-* [Customize Toolbox](#toolbox)
-* [Remove properties from SurveyJS Elements or hide them](#removeproperties)
-* [Add properties into SurveyJS Elements](#addproperties)
-* [Customize SurveyJS Elements Editor](#elementseditor)
-* [Modify new created objects (Questions, Panels, Pages, Columns and Items)](#modifynewobjects)
-* [Accessing Surveys instance: designer and test surveys](#accesssurveys)
-* [Adorners ― change element properties on its designer surface](#adorners)
+- [Supported Platforms and Examples](#supported-platforms-and-examples)
+- [Localization](#localization)
+  - [Localize Survey Creator UI](#localize-survey-creator-ui)
+  - [Localize Survey Contents](#localize-survey-contents)
+- [Appearance: Bootstrap and Themes](#appearance-bootstrap-and-themes)
+- [Customize Toolbox](#customize-toolbox)
+  - [Limit the default question types](#limit-the-default-question-types)
+  - [Add custom widgets](#add-custom-widgets)
+  - [Add existing Elements from designer into Toolbox](#add-existing-elements-from-designer-into-toolbox)
+  - [Toolbox categories](#toolbox-categories)
+  - [Full control via creator.toolbox property](#full-control-via-creatortoolbox-property)
+- [Remove properties from SurveyJS Elements or hide them](#remove-properties-from-surveyjs-elements-or-hide-them)
+- [Add properties into SurveyJS Elements](#add-properties-into-surveyjs-elements)
+- [Customize SurveyJS Elements Editor</h2>](#customize-surveyjs-elements-editorh2)
+- [Modify new created objects (Questions, Panels, Pages, Columns and Items)](#modify-new-created-objects-questions-panels-pages-columns-and-items)
+- [Accessing Surveys instance: designer and test surveys](#accessing-surveys-instance-designer-and-test-surveys)
+- [Adorners ― change element properties on its designer surface](#adorners--change-element-properties-on-its-designer-surface)
 
 
 <div id="platforms"></div>
 
 ## Supported Platforms and Examples
 
-Unlike SurveyJS Library, Survey Creator uses only knockoutjs. The reason we have chosen this framework is simple. It has a tiny size, comparing with other popular modern frameworks, and it works perfectly with Angular, reactjs and others.
+Survey Creator supports Knockout and React natively and allows you to integrate the Knockout version into Angular, jQuery, and Vue applications. Refer to the following articles to get started with Survey Creator in your frontend framework:
 
-We have created several Quick Start GitHub repositories for different client platforms, to give you an easy start.
+- [Angular Tutorial](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-angular)
+- [Vue Tutorial](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue)
+- [React Tutorial](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-react)
+- [Knockout / jQuery Tutorial](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-knockout-jquery)
 
-| Client Libraries | GitHub Repository |
+We also created several Quick Start GitHub repositories for different frontend frameworks to give you an easy start:
+
+| Frontend Framework | GitHub Repository |
 |---|---|
-| [Angular CLI](https://cli.angular.io/) | [Angular 5 Cli + SurveyJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_angular_cli) |
-| [React](https://facebook.github.io/react/) | [React + SurveyJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_react_quickstart) |
-| [Vue.js](https://vuejs.org/) | [SurveyJS + VueJS QuickStart Boilerplate](https://github.com/surveyjs/surveyjs_vue_quickstart) |
+| Angular | [Angular CLI + SurveyJS Quick Start Boilerplate](https://github.com/surveyjs/surveyjs_angular_cli) |
+| React | [React + SurveyJS Quick Start Boilerplate](https://github.com/surveyjs/surveyjs_react_quickstart) |
+| Vue | [SurveyJS + VueJS Quick Start Boilerplate](https://github.com/surveyjs/surveyjs_vue_quickstart) |
 
-We have created a plugin for WordPress and we are working on plugins for other popular CMS. You may use our code to integrate our Library and Survey Creator into these popular CMS.
+In many use cases, Survey Creator communicates with a remote storage. Use the following GitHub repositories integrate Survey Creator with your backend framework:
+
+| Backend Framework | GitHub Repository | Demo Site |
+|---|---|---|
+| PHP | [Sample PHP backend for SurveyJS library and Survey Creator](https://github.com/surveyjs/surveyjs-php) | [Run demo](https://surveyjs-php.herokuapp.com/) |
+|  ASP.NET Core | [Sample .NET Core backend for SurveyJS library and Survey Creator](https://github.com/surveyjs/surveyjs-aspnet-mvc) | [Run demo](https://surveyjs-aspnet-mvc.azurewebsites.net/) |
+| NodeJS | [Sample NodeJS backend for SurveyJS library and Survey Creator](https://github.com/surveyjs/surveyjs-nodejs) | [Run demo](https://surveyjs-nodejs.herokuapp.com/) |
+
+We also created a plugin for WordPress. You can use it as is or modify it to integrate SurveyJS Library and Survey Creator into another CMS:
 
 | Product Name | GitHub Repository | Plugin Site |
 |---|---|---|
 | WordPress | [Sources for SurveyJS WordPress plugin](https://github.com/surveyjs/surveyjs-wordpress) | [WordPress plugin](https://wordpress.org/plugins/surveyjs/) |
 
-Since, Survey Creator commonly requires integration with existing solutions, we have created several samples for different Server Frameworks.
+## Localization
 
-| Server Frameworks | GitHub Repository | Example Site |
-|---|---|---|
-| PHP | [Sample PHP backend for SurveyJS library and Survey Creator](https://github.com/surveyjs/surveyjs-php) | [Run demo](https://surveyjs-php.herokuapp.com/) |
-|  Asp.Net Core | [Sample .NET Core backend for SurveyJS library and Survey Creator](https://github.com/surveyjs/surveyjs-aspnet-mvc) | [Run demo](https://surveyjs-aspnet-mvc.azurewebsites.net/) |
-| NodeJS | [Sample NodeJS backend for SurveyJS library and Survey Creator](https://github.com/surveyjs/surveyjs-nodejs) | [Run demo](https://surveyjs-nodejs.herokuapp.com/) |
+### Localize Survey Creator UI
 
-<div id="show_survey_creator_options"></div>
+Survey Creator UI is translated to multiple languages. We ship translation strings as [dictionary files](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). Localization engine that works with these files is implemented in a separate script/module. Reference this script in the `<head>` tag of your page or import this module in the component that renders Survey Creator:
 
-## Show Survey Creator / Form Builder on the web page and set its options
-
-The code for creating and rendering the Survey Creator widget with default options can be written literraly as one line:
-```javascript
-var creator = new SurveyCreator.SurveyCreator("surveyCreatorDivElementID");
-```
-You may pass to the constructor the element ID or a link to the DOM element.
-            
-In many cases you may want to set some options:
-```javascript
-var options = {}; //Use default options
-var creator = new SurveyCreator.SurveyCreator("surveyCreatorDivElementID", options);
+```html
+<script src="https://unpkg.com/survey-creator-core/survey-creator-core.i18n.min.js"></script>
 ```
 
-Finally, if you are going to set events, then it is better to create a widget, set events and then render it. In this case you may have the following code:
-```javascript
-var options = {}; //Use default options
-var creator = new SurveyCreator.SurveyCreator(null, options);
-//set events here
-creator.render("surveyCreatorDivElementID");
+```js
+import "survey-creator-core/survey-creator-core.i18n";
 ```
 
-There are several options that you may set to change the Survey Creator behavior.
+The default language for UI elements is English. To change it, set the `currentLocale` property. For example, the following code translates Survey Creator UI to French:
 
-| Option Name | Description |
-|---|---|
-|_options = {_||
-|_generateValidJSON: false,_| The default value of this options is true. By default, the valid JSON is generated. You may want to use non-standard, but more readable format, [JSON5](https://json5.org/).|
-|_showJSONEditorTab: false,_|Set this option to false to hide the JSON Tab.|
-|_showTestSurveyTab: false,_|Set this option to false to hide the Survey Test Tab.|
-|_showEmbeddedSurveyTab: true,_|Set this option to true to show the Survey Embedded Tab. This tab is hidden by default. It shows how to integrate the survey into another web page.|
-|_showTranslationTab: true,_|Set this option to true to show the Translation Tab. This tab is hidden by default. It allows to edit all localizable strings for several languages on one page. It allows to import/export into from csv file.|
-|_showLogicTab: true,_|Set this option to true to show the Logic Tab. This tab is hidden by default. It allows to view and edit the survey logic (expressions) in one place.|
-|_showElementEditorAsPropertyGrid: true_|Set this property to false to show property grid in old style, without categories, and allow to show Element Editor as modal window.|
-|_showPropertyGrid: false,_|Set this option to false to hide the property grid on the right. It is shown by default.|
-|_questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],_|Use this option to define question types you want to see on the Toolbox. Go to [Customize Toolbox](#toolbox) section to get more information.|
-|_isAutoSave: true,_|Set this options to true and Survey Creator will call the "save callback" function on every change. By default, the "Save" button is shown. For more information, please go to [Load and Save Survey](#loadsavesurvey) section.|
-|_isRTL: true,_|Set this options to true for Right-to-Left web sites.|
-|_designerHeight: '1200px',_|Set the designer heigth to the specific value.|
-|_showPagesToolbox: false,_|If you are going to allow your users creating only one page surveys, then set this property to false. It will hide the pages toolbox.|
-|_useTabsInElementEditor: true,_|If you want to tabs instead of accordion in the element popup editor, then set this property to true. It will change accordion to tab control.|
-|_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
-|_showPagesInTestSurveyTab: false,_|Set this property to false to hide the page selector in the "Test Survey" tab.|
-|_showDefaultLanguageInTestSurveyTab: "auto",_|Before v1.1.3 the default value was _true_. The language selector was visible by default and allows to select all available languages. You could set this property to _false_ to hide it. Since v1.1.3 the behavior has been changed. The default value is _"auto"_ and the selector is visible when there are more than one language in at least one localizable string in the survey. If you set it to _true_ or _"all"_ it will be shown always. Setting it to _"all"_ will display all available languages (30+) in the selector, while _"auto"_ and _true_ only languages that are used in the current survey. Set it to _false_ to hide the language selector.|
-|_showInvisibleElementsInTestSurveyTab: false_|Set this property to false to hide the checkbox, that allow to show invsible elements: questions/panels/pages in the "Test Survey" tab.|
-|_showTitlesInExpressions: false_|Set this property to true if you want to show titles instead of names in expression editor.|
-|_hideExpressionHeaderInLogicTab: true_|Set this property to true to hide the expression header text and expand/collapse button in editing item in logic tab.|
-|_allowControlSurveyTitleVisibility: false_|Set this property to false if you want to hide the expand/collapse button for showing survey logo/title.|
-|_showSurveyTitle: "never"_|Set this property to "never" to hide survey title and logo from designer and to "always" to show it all the time and to "ifentered" to show when the logo or title is not empty.|
-|_};_||
+```js
+SurveyCreator.localization.currentLocale = "fr";
 
-<div id="loadsavesurvey"></div>
-
-## Load and Save Survey
-
-To load the Survey Definition into the Survey Creator you have to simply set its text property. The next line load the Survey Definition from the local storage:
-```javascript
-//Load the survey definition from a local storage
-creator.text = window.localStorage.getItem("YourStorageName") || "";
-```
-When Survey Creator needs to save the data it calls the **saveSurveyFunc** callback function. As soon as you assign a function to this callback, the "Save" button will appeare on the Survey Creator Toolbox.
-```javascript
-creator.saveSurveyFunc = function(saveNo, callback) {
-    //Save the survey definition into a local storage
-    //window.localStorage.setItem("YourStorageName", creator.text);
-    !!callback && callback(saveNo, true);
-};
+// In modular applications:
+import { localization } from "survey-creator-core";
+localization.currentLocale = "fr";
 ```
 
-The first line in this callback function is obvious. The second one tells Survey Creator that the saving operation **#saveNo** was successfully execuated. Set the last parameter of the callback function to **false**, if an error during saving was happened.
+You can modify individual translation strings. Call the `getLocale(locale)` method to get an object with locale translations. Refer to any [dictionary file](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization) for information about the structure of this object. To modify a translation string, change the corresponding object property:
 
-The reason it is done as a callback function and we have a **saveNo** parameter (the numeric parameter that increase with every saving operation, starting from 1), because in a real world application, you will likely save the Survey definition into your Storage/Database. You will make an asyn call of your web service. It means that if two saving operations are happened almost at the same time, the last operation may be processed by your server code faster than the previous one. In this case you will have to ignore all saving operations that has the **saveNo** parameter less than you have already processed.
+```js
+// Get current locale translations
+const translations = SurveyCreator.localization.getLocale("");
+// In modular applications
+const translations = localization.getLocale("");
 
-Here is the example of **saveSurveyFunc** callback implementation (with help of jQuery magic).
-```javascript
-creator.saveSurveyFunc = function (saveNo, callback) {
-    $.ajax({
-        url: "UrlToYourWebService",
-        type: "POST",
-        data: {
-            surveyId: yourEditUniqueSurveyId,
-            surveyText : creator.text
-        },
-        success: function (data) {
-            callback(saveNo, data.isSuccess);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            callback(saveNo, false);
-            alert(thrownError);
-        }
-    });
-}
+// Change text for the `visible` property in Property Grid
+translations.p.visible = "Is visible";
+// Change text for the `visible` property in Modal Editor
+translations.pe.visible = "Is element visible?";
+// Change text for the `visible` property in JSON Editor
+translations.ed.jsonEditor = "Edit As Text";
 ```
 
-The modern online editors do not have a "Save" button. They are saving the changes automatically after every change with a small delay. Survey Creator has this functionality as well. You have to set **isAutoSave** property to true (default is false). 
+[View Localization example](https://surveyjs.io/Examples/Survey-Creator/?id=localization)
 
-```javascript
-creator.isAutoSave = true;
+Translation dictionaries are supported by the community and may be incomplete. Feel free to add missing translations to existing dictionaries or create new dictionaries for other languages. You can use English as a base dictionary: copy the file, replace English translations in it, and submit a pull request with the resulting file to the [survey-creator](https://github.com/surveyjs/survey-creator) repository.
+
+### Localize Survey Contents
+
+If you want your users to create multi-language surveys, add the following script to the `<head>` tag of your page or import the following module in the component that renders Survey Creator:
+
+```html
+<script src="https://unpkg.com/survey-core/survey.i18n.min.js"></script>
 ```
 
-<div id="localization"></div>
-
-## Localization and changing the default strings text
-
-The strings localization is supported by the community. Survey Creator strings are localized on 7 languages so far. You may check the current localization progress on our [GitHub repo](https://github.com/surveyjs/survey-creator/tree/master/src/localization). SurveyJS Library (Runner) itself, are localized on 24 languages.
-
-To change the current "en" locale to another one, you will have to write one line of code:
-```javascript
-//Make french locale active
-SurveyCreator.editorLocalization.currentLocale = "fr";
-```
-If you want to change a text of any Survey Creator element, then you may use the following code:
-```javascript
-var curLocale = SurveyCreator.editorLocalization.currentLocale;
-// get the current locale strings object
-var curStrings = SurveyCreator.editorLocalization.getLocale("");
-//change the text for visible property in Property Grid
-curStrings.p.visible = "Is visible";
-//change the text for visible property in Modal Editor
-curStrings.pe.visible = "Is element visible?";
-//change the text for visible property in Modal Editor
-curStrings.ed.jsonEditor = "Edit As Text";
+```js
+import "survey-core/survey.i18n";
 ```
 
-All localizable strings you may find in our [GitHub repo in english.ts file](https://github.com/surveyjs/survey-creator/blob/master/src/localization/english.ts).
+This script/module allows Survey Creator users to select a default language different from English:
 
-Here is the link on [localization example](https://surveyjs.io/Examples/Survey-Creator/?id=localization) on our site.
+<img src="./images/survey-creator-default-language-dropdown.png" alt="Survey Creator - Default Language dropdown" width="50%">
 
-<div id="multiplelanguages"></div>
+If you want to restrict the list of available languages, specify the `supportedLocales` array:
 
-## Multiple languages support
-
-You may build one survey for several languages. The default strings, like text for buttons “Next” and “Previous” are translated on many languages. All you need to do is to set the **survey.locale** property in run-time into needed locale, as “fr” or “es” or any other from over twenty languages that our users have localized and you are done.
-
-However, except the default strings, there are strings that you must localize in the survey itself, like page or question title, dropdown or checkbox choices, text errors and so on. Users of SurveyJS Creator integrated into your app must localize them by themselves. It is not the easy task for a large survey. However, you may help them here.
-
-First of all, you may limited the number of languages they may choose in the **survey.locale** property and in **Translation** tab. It can be done via this code 
-```javascript
+```js
 Survey.surveyLocalization.supportedLocales = ["en", "de", "es", "fr"];
+
+// In modular applications
+import { surveyLocalization } from 'survey-core';
+surveyLocalization.supportedLocales = ["en", "de", "es", "fr"];
 ```
 
-And the most important, is to show the **Translation** tab. It would allow your Survey Creator users to see all localizable strings on one page and localize them into the needed languages. Please go to “Translation” tab in [multiple languages example](https://surveyjs.io/Examples/Survey-Creator/?id=multiplelanguages).
+Predefined survey texts are translated to the selected language automatically. SurveyJS Library takes translation strings from [community-supported dictionaries](https://github.com/surveyjs/survey-library/tree/master/src/localization). Custom texts (questions, choices, page titles, error messages) should be translated by Survey Creator users in the Translation tab. To display it, enable the [`showTranslationTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showTranslationTab) property as shown below. Note that users can specify translation strings only for the languages that you list in the `supportedLocales` array.
+
+```js
+const creatorOptions = {
+  showTranslationTab: true
+};
+
+const creator = new SurveyCreator.SurveyCreator(creatorOptions);
+
+// In modular applications
+import { SurveyCreator } from "survey-creator-knockout";
+// or
+import { SurveyCreator } from "survey-creator-react";
+const creator = new SurveyCreator(creatorOptions);
+```
+
+[View Multiple Languages example](https://surveyjs.io/Examples/Survey-Creator/?id=multiplelanguages)
 
 <div id="appearance"></div>
 
