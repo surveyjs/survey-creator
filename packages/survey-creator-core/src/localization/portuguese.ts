@@ -239,7 +239,7 @@ var portugueseTranslation = {
       templateTitle: "Título do template"
     },
     editProperty: "Editar propriedade '{0}'",
-    items: "[ Items: {0} ]",
+    items: "Items",
 
     enterNewValue: "Por favor, informe o valor.",
     noquestions: "Não há nenhuma pergunta na pesquisa.",

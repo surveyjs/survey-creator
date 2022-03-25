@@ -3,7 +3,7 @@ import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../settings";
 import { getNextValue } from "../utils/utils";
-import { FastEntryEditor } from "./fast-entry";
+import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
   IPropertyEditorSetup,
   PropertyGridEditor,
@@ -82,7 +82,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     updateMatrixRemoveAction(question, actions, row);
     if (!!showDetailAction) {
       showDetailAction.component = "sv-action-bar-item";
-      showDetailAction.css ="spg-action-button";
+      showDetailAction.css = "spg-action-button";
       showDetailAction.iconName = this.getShowDetailActionIconName(row);
       showDetailAction.showTitle = false;
       showDetailAction.location = "end";
@@ -623,7 +623,7 @@ export class PropertyGridEditorMatrixUrlConditions extends PropertyGridEditorMat
 }
 export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "textitems";
+    return prop.type == "textitem[]";
   }
   /*
   protected getEditItemAsStandAlone(): boolean {
@@ -640,6 +640,32 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
   }
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "item";
+  }
+  protected getAllowRowDragDrop(): boolean {
+    return true;
+  }
+  public createPropertyEditorSetup(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): IPropertyEditorSetup {
+    var names = [];
+    (<any>question).columns.forEach((col) => {
+      names.push(col.name);
+    });
+    return new FastEntryEditorBase(obj[prop.name], options, prop.className, names);
+  }
+  public onMatrixCellCreated(obj: Base, options: any): void {
+    super.onMatrixCellCreated(obj, options);
+    const q = options.cellQuestion;
+    if (!options.row.editingObj) return;
+    const editor = options.row.editingObj.editor;
+    if (!!editor && !!q.property) {
+      editor.registerFunctionOnPropertyValueChanged(q.property.name, () => {
+        q.value = editor[q.property.name];
+      });
+    }
   }
 }
 

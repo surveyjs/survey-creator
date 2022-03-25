@@ -182,7 +182,6 @@ export class CreatorBase extends Base
    */
   @property({ defaultValue: false }) isAutoSave: boolean;
   @property() showOptions: boolean;
-  @property({ defaultValue: false }) showState: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
@@ -1284,8 +1283,6 @@ export class CreatorBase extends Base
       typeof options.maxLogicItemsInCondition !== "undefined"
         ? options.maxLogicItemsInCondition
         : -1;
-    this.showState =
-      typeof options.showState !== "undefined" ? options.showState : false;
     this.showOptions =
       typeof options.showOptions !== "undefined" ? options.showOptions : false;
 
@@ -1780,10 +1777,10 @@ export class CreatorBase extends Base
     return !!item ? item.json : null;
   }
   private singlePageJSON(json: any) {
-    if(this.pageEditMode === "single") {
+    if (this.pageEditMode === "single") {
       const pages = json.pages;
-      if(Array.isArray(pages) && pages.length > 0) {
-        if(pages[0].elements !== undefined) {
+      if (Array.isArray(pages) && pages.length > 0) {
+        if (pages[0].elements !== undefined) {
           json.elements = pages[0].elements;
         }
         delete json.pages;
@@ -2348,7 +2345,7 @@ export class CreatorBase extends Base
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
-    if(this.pageEditMode === "single" && parent.getType() === "page") {
+    if (this.pageEditMode === "single" && parent.getType() === "page") {
       parent = this.survey;
     }
     obj["delete"]();
@@ -2930,7 +2927,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   return undefined;
 }
-export function getQuestionContentWrapperComponentName (element) {
+export function getQuestionContentWrapperComponentName(element) {
   if (element.getType() == "rating") {
     return "svc-rating-question-content";
   }

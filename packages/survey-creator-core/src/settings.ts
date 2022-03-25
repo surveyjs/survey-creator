@@ -41,7 +41,9 @@ export var settings = {
   defaultNewSurveyJSON: {},
   logic: {
     visibleActions: [],
-    logicItemTitleMaxChars: 50
+    logicItemTitleMaxChars: 50,
+    openBracket: "{",
+    closeBracket: "}"
   },
   /**
    * Determines which types of questions the conversion will be available for.

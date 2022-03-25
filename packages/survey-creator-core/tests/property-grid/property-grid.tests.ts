@@ -51,6 +51,7 @@ import {
   PropertyGridRowValueEditor,
   PropertyGridValueEditorBase
 } from "../../src/property-grid/values";
+import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
@@ -867,7 +868,45 @@ test("QuestionMultipleTextModel items property editor + validators editor", () =
   expect(textItem.validators[0].getType()).toEqual("numericvalidator");
   expect(textItem.validators[1].getType()).toEqual("numericvalidator");
 });
-
+test("textitem[] property editor", () => {
+  const question = new QuestionMultipleTextModel("q1");
+  const textItem = question.addItem("item1", "Item 1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("items")
+  );
+  expect(itemsQuestion).toBeTruthy(); //"choices property editor created");
+  expect(itemsQuestion.getType()).toEqual("matrixdynamic"); //"It is a matrix");
+  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(itemsQuestion.renderedTable.rows[0].cells).toHaveLength(4);
+  expect(itemsQuestion.renderedTable.rows[0].cells[1].question.value).toEqual("item1");
+  expect(itemsQuestion.renderedTable.rows[0].cells[2].question.value).toEqual("Item 1");
+  textItem.title = "not Item 1";
+  expect(itemsQuestion.renderedTable.rows[0].cells[2].question.value).toEqual("not Item 1");
+});
+test("check multiple text items editing by fast entry", () => {
+  const question = new QuestionMultipleTextModel("q1");
+  const textItem = question.addItem("item1", "Item 1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("items")
+  );
+  expect(itemsQuestion.rowCount).toEqual(1);
+  expect(itemsQuestion.renderedTable.rows[0].cells[1].question.value).toEqual("item1");
+  expect(itemsQuestion.renderedTable.rows[0].cells[2].question.value).toEqual("Item 1");
+  const propertyEditor = new PropertyGridEditorMatrixMutlipleTextItems();
+  const fastEntry: any = propertyEditor.createPropertyEditorSetup(propertyGrid.obj, (<any>itemsQuestion).property,
+    itemsQuestion, new EmptySurveyCreatorOptions());
+  let fastEntryValue: string = fastEntry.commentValue.value;
+  expect(fastEntryValue).toEqual("item1|Item 1");
+  fastEntry.commentValue.value = "notitem1|not Item 1\nitem2|Item 2";
+  fastEntry.apply();
+  expect(itemsQuestion.rowCount).toEqual(2);
+  expect(itemsQuestion.renderedTable.rows[0].cells[1].question.value).toEqual("notitem1");
+  expect(itemsQuestion.renderedTable.rows[0].cells[2].question.value).toEqual("not Item 1");
+  expect(itemsQuestion.renderedTable.rows[1].cells[1].question.value).toEqual("item2");
+  expect(itemsQuestion.renderedTable.rows[1].cells[2].question.value).toEqual("Item 2");
+});
 test("bindings property editor", () => {
   var survey = new SurveyModel({
     elements: [
