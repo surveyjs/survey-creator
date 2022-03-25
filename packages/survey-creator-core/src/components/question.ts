@@ -203,9 +203,12 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel {
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
       this.currentType, this.creator.toolbox.itemNames, true
     );
-    return convertClasses.map((className) => {
-      return this.creator.createIActionBarItemByClass(className);
+    const res = [];
+    convertClasses.forEach((className: string) => {
+      const item = this.creator.toolbox.items.filter(item => item.name == className)[0];
+      res.push(this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName));
     });
+    return res;
   }
   private get currentType(): string {
     return this.surveyElement.getType();

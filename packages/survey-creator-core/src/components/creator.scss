@@ -36,9 +36,8 @@ survey-creator,
 
 .svc-creator__area {
   position: relative;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  
+  @include disableUserSelect;
 }
 .svc-creator__area.svc-creator__area--with-banner {
   height: calc(100% - calc(4 * #{$base-unit}));

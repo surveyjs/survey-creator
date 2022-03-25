@@ -136,6 +136,7 @@ svc-question {
   position: absolute;
   z-index: 1000;
   box-shadow: 0px 8px 16px $shadow-medium;
+  @include disableUserSelect;
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {

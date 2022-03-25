@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON, getBarItemByTitle, getListItemByText, creatorTabPreviewName } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, getBarItemByTitle, getListItemByText, creatorTabPreviewName, explicitErrorHandler } from "../helper";
 import { Selector } from "testcafe";
 const title = "Preview tab";
 
@@ -146,6 +146,7 @@ test("Show invisible elements switcher", async (t) => {
 });
 
 test("Landscape switcher", async (t) => {
+  await explicitErrorHandler();
   await setJSON(json);
 
   await t
@@ -167,6 +168,7 @@ test("Landscape switcher", async (t) => {
     .expect(Selector(".svd-simulator-wrapper").clientHeight).gt(900);
 });
 test("Device selector", async (t) => {
+  await explicitErrorHandler();
   await setJSON(json);
 
   await t
