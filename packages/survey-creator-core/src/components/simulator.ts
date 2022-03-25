@@ -90,8 +90,12 @@ export class SurveySimulatorModel extends Base {
       ((this.landscapeOrientation ? device.frameWidth : device.frameHeight) /
         device.cssPixelRatio) *
       scale;
+    let deviceWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
+    let deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
     return {
       scale: this.simulatorScaleEnabled ? scale * 2 : 1,
+      deviceWidth: deviceWidth,
+      deviceHeight: deviceHeight,
       width: width,
       height: height,
       frameWidth: frameWidth,
@@ -167,7 +171,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-iphone6",
   },
   iPhone6plus: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 2.6,
     ppi: 401,
     width: 1080,
     height: 1920,
@@ -189,7 +193,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-iphone8",
   },
   iPhone8plus: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 3,
     ppi: 401,
     width: 1080,
     height: 1920,
@@ -200,7 +204,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-iphone8plus",
   },
   iPhoneX: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 3,
     ppi: 458,
     width: 1125,
     height: 2436,
@@ -211,7 +215,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-iphonex",
   },
   iPhoneXmax: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 3,
     ppi: 458,
     width: 1242,
     height: 2688,
@@ -233,7 +237,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-ipad",
   },
   iPadMini: {
-    cssPixelRatio: 1,
+    cssPixelRatio: 2,
     ppi: 163,
     width: 768,
     height: 1024,
@@ -244,7 +248,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-ipadmini",
   },
   iPadPro: {
-    cssPixelRatio: 1,
+    cssPixelRatio: 2,
     ppi: 264,
     width: 1688,
     height: 2388,
@@ -255,7 +259,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-ipadpro",
   },
   iPadPro13: {
-    cssPixelRatio: 1,
+    cssPixelRatio: 2,
     ppi: 264,
     width: 2048,
     height: 2732,

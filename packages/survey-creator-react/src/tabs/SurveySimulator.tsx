@@ -51,16 +51,16 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
               className="svd-simulator"
               style={{
                 width:
-                  this.model.simulatorFrame.width /
-                  this.model.simulatorFrame.scale +
+                  this.model.simulatorFrame.deviceWidth +
                   "px",
                 height:
-                  this.model.simulatorFrame.height /
-                  this.model.simulatorFrame.scale +
+                  this.model.simulatorFrame.deviceHeight +
                   "px",
                 transform:
                   "scale(" +
-                  this.model.simulatorFrame.scale +
+                  this.model.simulatorFrame.width / this.model.simulatorFrame.deviceWidth +
+                  ", " +
+                  this.model.simulatorFrame.height / this.model.simulatorFrame.deviceHeight +
                   ") translate(-50%, -50%)"
               }}
             >
