@@ -47,13 +47,13 @@ export class QuestionAdornerComponent extends SurveyElementBase<
   }
 
   renderElement(): JSX.Element {
-    const allowInteractions = this.model.surveyElement
+    const allowInteractions = this.model.element
       .isInteractiveDesignElement;
     const content = this.renderContent(allowInteractions);
     return (
       <div
         ref={this.rootRef}
-        data-sv-drop-target-survey-element={this.model.surveyElement.name || null}
+        data-sv-drop-target-survey-element={this.model.element.name || null}
         className={"svc-question__adorner" + this.model.rootCss()}
         onMouseOut={e => allowInteractions && toggleHovered(e.nativeEvent, e.currentTarget)}
         onMouseOver={e => allowInteractions && toggleHovered(e.nativeEvent, e.currentTarget)}

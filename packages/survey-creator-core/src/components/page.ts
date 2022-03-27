@@ -1,18 +1,17 @@
 import { PageModel, property, SurveyElement, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
-import { ActionContainerViewModel } from "./action-container-view-model";
+import { SurveyElementAdornerBase } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
 import "./page.scss";
 import { SurveyHelper } from "../survey-helper";
 
-export class PageViewModel extends ActionContainerViewModel {
+export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
-  protected _page: PageModel;
 
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
@@ -22,12 +21,11 @@ export class PageViewModel extends ActionContainerViewModel {
         this.addGhostPage();
       }
     );
-    this._page = page;
-    this.updateSurveyElement(this.page);
+    this.attachElement(this.page);
   }
 
-  protected updateSurveyElement(surveyElement: SurveyElement) {
-    super.updateSurveyElement(surveyElement);
+  protected attachElement(surveyElement: PageModel): void {
+    super.attachElement(surveyElement);
 
     if(!!this.page) {
 
@@ -84,7 +82,7 @@ export class PageViewModel extends ActionContainerViewModel {
     return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single";
   }
   protected getPage(): PageModel {
-    return this._page;
+    return this.surveyElement as PageModel;
   }
   get page(): PageModel {
     return this.getPage();
@@ -103,12 +101,12 @@ export class PageViewModel extends ActionContainerViewModel {
     this.updateActionsProperties();
   }
 
-  addNewQuestion(model: PageViewModel, event: IPortableMouseEvent) {
+  addNewQuestion(model: PageAdorner, event: IPortableMouseEvent) {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage();
     }, null, this.currentAddQuestionType || "text");
   }
-  select(model: PageViewModel, event: IPortableMouseEvent) {
+  select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {
       if(model.creator.pageEditMode !== "single") {
         model.creator.selectElement(model.page, undefined, false);
