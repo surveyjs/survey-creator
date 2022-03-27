@@ -242,7 +242,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
-      iconName: "icon-change-question-type_16x16",
+      iconName: "icon-drop-down-arrow",
       iconSize: 16,
       title: actionTitle,
       visibleIndex: 0,

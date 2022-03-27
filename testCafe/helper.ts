@@ -122,3 +122,9 @@ export async function setShowSidebar(newVal: boolean) {
     window["creator"].showSidebar = newVal;
   })(newVal);
 }
+export const explicitErrorHandler = ClientFunction(() => { window.addEventListener("error", e => {
+  if (e.message === "ResizeObserver loop completed with undelivered notifications." ||
+    e.message === "ResizeObserver loop limit exceeded") {
+    e.stopImmediatePropagation();
+  } });
+});
