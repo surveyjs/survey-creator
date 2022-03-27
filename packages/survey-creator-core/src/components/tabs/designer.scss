@@ -16,6 +16,8 @@ svc-tab-designer {
 .svc-tab-designer {
   .svc-tab-designer_content {
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
   .sd-container-modern {
     min-width: calcSize(70);
