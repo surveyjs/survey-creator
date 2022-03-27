@@ -1,4 +1,4 @@
-import { PageModel, property, SurveyModel } from "survey-core";
+import { PageModel, property, SurveyElement, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { ActionContainerViewModel } from "./action-container-view-model";
@@ -12,7 +12,7 @@ export class PageViewModel extends ActionContainerViewModel {
   public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
-  private _page: PageModel;
+  protected _page: PageModel;
 
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
@@ -22,26 +22,35 @@ export class PageViewModel extends ActionContainerViewModel {
         this.addGhostPage();
       }
     );
-
     this._page = page;
-    page["surveyChangedCallback"] = () => {
-      this.isPageLive = !!page.survey;
-    };
-    if (this.isGhost) {
-      this.updateActionsProperties();
-      this.page.registerFunctionOnPropertiesValueChanged(
-        ["title", "description"],
-        () => {
-          this.addGhostPage();
-        }
-      );
-      this.patchPageForDragDrop(this.page, this.addGhostPage);
-    }
-    this.page.onFirstRendering();
-    this.page.updateCustomWidgets();
-    this.page.setWasShown(true);
-    this.checkActionProperties();
+    this.updateSurveyElement(this.page);
   }
+
+  protected updateSurveyElement(surveyElement: SurveyElement) {
+    super.updateSurveyElement(surveyElement);
+
+    if(!!this.page) {
+
+      this.page["surveyChangedCallback"] = () => {
+        this.isPageLive = !!this.page.survey;
+      };
+      if (this.isGhost) {
+        this.updateActionsProperties();
+        this.page.registerFunctionOnPropertiesValueChanged(
+          ["title", "description"],
+          () => {
+            this.addGhostPage();
+          }
+        );
+        this.patchPageForDragDrop(this.page, this.addGhostPage);
+      }
+      this.page.onFirstRendering();
+      this.page.updateCustomWidgets();
+      this.page.setWasShown(true);
+      this.checkActionProperties();
+    }
+  }
+
   protected onElementSelectedChanged(isSelected: boolean) {
     super.onElementSelectedChanged(isSelected);
     this.isSelected = isSelected;
@@ -60,10 +69,12 @@ export class PageViewModel extends ActionContainerViewModel {
   }
   public dispose() {
     super.dispose();
-    this.page.unRegisterFunctionOnPropertiesValueChanged([
-      "title",
-      "description"
-    ]);
+    if(!!this.page) {
+      this.page.unRegisterFunctionOnPropertiesValueChanged([
+        "title",
+        "description"
+      ]);
+    }
     this.onPropertyValueChangedCallback = undefined;
   }
   public get isGhost(): boolean {
@@ -72,8 +83,11 @@ export class PageViewModel extends ActionContainerViewModel {
   protected isOperationsAllow(): boolean {
     return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single";
   }
-  get page(): PageModel {
+  protected getPage(): PageModel {
     return this._page;
+  }
+  get page(): PageModel {
+    return this.getPage();
   }
 
   public addGhostPage = () => {

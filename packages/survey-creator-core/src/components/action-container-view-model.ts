@@ -29,15 +29,26 @@ export class ActionContainerViewModel extends Base {
         this.updateActionsProperties();
       }
     };
-    this.surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
-    this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.actionContainer = new AdaptiveActionContainer();
     var actions: Array<Action> = [];
     this.buildActions(actions);
-    this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
-    this.actionContainer.setItems(actions);
+    if(this.surveyElement) {
+      this.surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+      this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
+      this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
+      this.actionContainer.setItems(actions);
+    }
   }
-  protected checkActionProperties() {
+  protected updateSurveyElement(surveyElement: SurveyElement): void {
+    if(this.surveyElement) {
+      this.surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+    }
+    this.surveyElement = surveyElement;
+    if(this.surveyElement) {
+      this.surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+    }
+  }
+  protected checkActionProperties(): void {
     if (this.creator.isElementSelected(this.surveyElement)) {
       this.updateActionsProperties();
     }
@@ -45,7 +56,9 @@ export class ActionContainerViewModel extends Base {
 
   public dispose() {
     super.dispose();
-    this.surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+    if(this.surveyElement) {
+      this.surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+    }
   }
   protected onElementSelectedChanged(isSelected: boolean) {
     if (!isSelected) return;
