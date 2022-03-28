@@ -1,5 +1,4 @@
 import { Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 import { url, urlByPage, setJSON, changeToolboxLocation, addQuestionByAddQuestionButton, getToolboxItemByText, getVisibleElement } from "../helper";
 
 const title = "Page Edit Modes";
