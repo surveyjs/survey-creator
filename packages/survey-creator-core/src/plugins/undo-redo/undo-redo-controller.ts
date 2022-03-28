@@ -27,7 +27,6 @@ export class UndoRedoController extends Base {
         sender,
         arrayChanges
       );
-      this.creator.updatePagesController(sender, name);
       this.creator.updateElementsOnLocaleChanged(sender, name);
       this.creator.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
       this.undoRedoManager.stopTransaction();

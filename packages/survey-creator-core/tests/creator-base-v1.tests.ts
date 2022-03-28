@@ -22,6 +22,7 @@ import { PropertyGridViewModel } from "../src/property-grid/property-grid-view-m
 import { ObjectSelectorModel } from "../src/property-grid/object-selector";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { PagesController } from "../src/pages-controller";
 
 export * from "../src/components/link-value";
 
@@ -955,7 +956,7 @@ test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () =>
   const creator = new CreatorTester();
   creator.showObjectTitles = true;
   creator.JSON = getSurveyJson();
-  const model = new PageNavigatorViewModel(creator.pagesController);
+  const model = new PageNavigatorViewModel(new PagesController(creator), "");
   expect(model.items[0].title).toEqual("Page 1");
 });
 test(

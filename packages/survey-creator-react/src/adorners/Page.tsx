@@ -10,7 +10,7 @@ import {
 } from "survey-react-ui";
 import {
   CreatorBase,
-  PageViewModel,
+  PageAdorner,
   SurveyHelper,
   toggleHovered
 } from "survey-creator-core";
@@ -27,11 +27,11 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   ICreatorSurveyPageComponentProps,
   any
 > {
-  private model: PageViewModel;
+  private model: PageAdorner;
   private rootRef: React.RefObject<HTMLDivElement>;
   constructor(props: ICreatorSurveyPageComponentProps) {
     super(props);
-    this.model = new PageViewModel(
+    this.model = new PageAdorner(
       this.props.creator,
       this.props.page
     );

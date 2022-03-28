@@ -33,7 +33,6 @@ import { getNextValue } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
-import { PagesController } from "./pages-controller";
 import { SelectionHistory } from "./selection-history";
 
 import { TabEmbedPlugin } from "./components/tabs/embed";
@@ -191,7 +190,7 @@ export class CreatorBase extends Base
   private responsivityManager: CreatorResponsivityManager;
   footerToolbar: ActionContainer;
 
-  private pageEditModeValue: "standard" | "single" = "standard";
+  private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
   /**
    * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
    * You can set this option in creator constructor only
@@ -215,7 +214,6 @@ export class CreatorBase extends Base
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private newQuestionChangedNames: {};
-  private pagesControllerValue: PagesController;
   private selectionHistoryControllerValue: SelectionHistory;
 
   private saveSurveyFuncValue: (
@@ -962,7 +960,6 @@ export class CreatorBase extends Base
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     this.toolbarValue = new ToolbarActionContainer(this);
-    this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sidebar = new SidebarModel(this);
     this.setOptions(this.options);
@@ -984,10 +981,6 @@ export class CreatorBase extends Base
     } else if (hasValue) {
       this.toolbox.isCompact = newVal;
     }
-  }
-
-  onSurveyElementPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
-    throw new Error("Method not implemented.");
   }
 
   @property({ defaultValue: true }) showToolboxValue: boolean;
@@ -1135,9 +1128,6 @@ export class CreatorBase extends Base
   }
   //#endregion Undo/Redo
 
-  public get pagesController(): PagesController {
-    return this.pagesControllerValue;
-  }
   public get selectionHistoryController(): SelectionHistory {
     return this.selectionHistoryControllerValue;
   }
@@ -1340,6 +1330,9 @@ export class CreatorBase extends Base
         Survey.settings.allowShowEmptyTitleInDesignMode = false;
         Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
       }
+      if (this.pageEditModeValue === "bypage") {
+        this.showPageNavigator = true;
+      }
     }
   }
   private setPropertyPlaceHolder(className: string, propertyName: string, value: string) {
@@ -1466,13 +1459,6 @@ export class CreatorBase extends Base
       this.existingPages[page.id] = true;
     });
     this.onDesignerSurveyCreated.fire(this, { survey: survey });
-    // this.survey.render(this.surveyjs);
-    /*
-    survey.onSelectedElementChanged.add((sender: SurveyModel, options) => {
-      if (this.disableSurveySelectedElementChanging) return;
-      this.selectedElement = sender["selectedElement"];
-    });
-    */
     survey.onQuestionAdded.add((sender: SurveyModel, options) => {
       this.doOnQuestionAdded(options.question, options.parentPanel);
     });
@@ -1484,14 +1470,6 @@ export class CreatorBase extends Base
       this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
-    /*
-    survey.onPanelRemoved.add((sender: SurveyModel, options) => {
-      this.doOnElementRemoved(options.panel);
-    });
-    survey.onQuestionRemoved.add((sender: SurveyModel, options) => {
-      this.doOnElementRemoved(options.question);
-    });
-    */
     survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     this.setSurvey(survey);
     const currentPlugin = this.getPlugin(this.activeTab);
@@ -1554,11 +1532,6 @@ export class CreatorBase extends Base
       var oldName = !!oldValue ? oldValue : obj["name"];
       var newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
       this.updateConditions(oldName, newName);
-    }
-  }
-  public updatePagesController(sender: Survey.Base, name: string) {
-    if ((name == "name" || name == "title") && this.isObjPage(sender)) {
-      this.pagesController.pageNameChanged(<PageModel>sender);
     }
   }
   private updateConditions(oldName: string, newName: string) {
@@ -1634,7 +1607,6 @@ export class CreatorBase extends Base
     }
     this.surveyValue = survey;
     this.selectElement(survey);
-    this.pagesController.onSurveyChanged();
     this.selectionHistoryController.reset();
   }
 

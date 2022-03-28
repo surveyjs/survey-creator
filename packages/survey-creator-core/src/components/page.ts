@@ -1,18 +1,17 @@
-import { PageModel, property, SurveyModel } from "survey-core";
+import { PageModel, property, SurveyElement, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
-import { ActionContainerViewModel } from "./action-container-view-model";
+import { SurveyElementAdornerBase } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
 import "./page.scss";
 import { SurveyHelper } from "../survey-helper";
 
-export class PageViewModel extends ActionContainerViewModel {
+export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
-  private _page: PageModel;
 
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
@@ -22,26 +21,34 @@ export class PageViewModel extends ActionContainerViewModel {
         this.addGhostPage();
       }
     );
-
-    this._page = page;
-    page["surveyChangedCallback"] = () => {
-      this.isPageLive = !!page.survey;
-    };
-    if (this.isGhost) {
-      this.updateActionsProperties();
-      this.page.registerFunctionOnPropertiesValueChanged(
-        ["title", "description"],
-        () => {
-          this.addGhostPage();
-        }
-      );
-      this.patchPageForDragDrop(this.page, this.addGhostPage);
-    }
-    this.page.onFirstRendering();
-    this.page.updateCustomWidgets();
-    this.page.setWasShown(true);
-    this.checkActionProperties();
+    this.attachElement(this.page);
   }
+
+  protected attachElement(surveyElement: PageModel): void {
+    super.attachElement(surveyElement);
+
+    if(!!this.page) {
+
+      this.page["surveyChangedCallback"] = () => {
+        this.isPageLive = !!this.page.survey;
+      };
+      if (this.isGhost) {
+        this.updateActionsProperties();
+        this.page.registerFunctionOnPropertiesValueChanged(
+          ["title", "description"],
+          () => {
+            this.addGhostPage();
+          }
+        );
+        this.patchPageForDragDrop(this.page, this.addGhostPage);
+      }
+      this.page.onFirstRendering();
+      this.page.updateCustomWidgets();
+      this.page.setWasShown(true);
+      this.checkActionProperties();
+    }
+  }
+
   protected onElementSelectedChanged(isSelected: boolean) {
     super.onElementSelectedChanged(isSelected);
     this.isSelected = isSelected;
@@ -60,10 +67,12 @@ export class PageViewModel extends ActionContainerViewModel {
   }
   public dispose() {
     super.dispose();
-    this.page.unRegisterFunctionOnPropertiesValueChanged([
-      "title",
-      "description"
-    ]);
+    if(!!this.page) {
+      this.page.unRegisterFunctionOnPropertiesValueChanged([
+        "title",
+        "description"
+      ]);
+    }
     this.onPropertyValueChangedCallback = undefined;
   }
   public get isGhost(): boolean {
@@ -72,29 +81,34 @@ export class PageViewModel extends ActionContainerViewModel {
   protected isOperationsAllow(): boolean {
     return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single";
   }
+  protected getPage(): PageModel {
+    return this.surveyElement as PageModel;
+  }
   get page(): PageModel {
-    return this._page;
+    return this.getPage();
   }
 
   public addGhostPage = () => {
+    const currentPage = this.page;
     if (this.isGhost) {
-      this.page.unRegisterFunctionOnPropertiesValueChanged([
+      currentPage.unRegisterFunctionOnPropertiesValueChanged([
         "title",
         "description"
       ]);
-      this.page.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
-      this.creator.survey.addPage(this.page);
+      currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
+      this.creator.survey.addPage(currentPage);
+      this.creator.survey.currentPage = currentPage;
     }
-    this.creator.selectElement(this.page);
+    this.creator.selectElement(currentPage);
     this.updateActionsProperties();
   }
 
-  addNewQuestion(model: PageViewModel, event: IPortableMouseEvent) {
+  addNewQuestion(model: PageAdorner, event: IPortableMouseEvent) {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage();
     }, null, this.currentAddQuestionType || "text");
   }
-  select(model: PageViewModel, event: IPortableMouseEvent) {
+  select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {
       if(model.creator.pageEditMode !== "single") {
         model.creator.selectElement(model.page, undefined, false);

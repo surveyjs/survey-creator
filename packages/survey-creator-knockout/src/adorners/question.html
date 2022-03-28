@@ -1,6 +1,6 @@
 <div class="svc-question__adorner"
-  data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': surveyElement.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
-  <!-- ko if: $data.surveyElement.isInteractiveDesignElement -->
+  data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
+  <!-- ko if: $data.element.isInteractiveDesignElement -->
   <div class="svc-question__content" data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
     <div class="svc-question__drag-area"
       data-bind="visible:allowDragging, event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
@@ -11,7 +11,7 @@
     <!-- ko if: koIsEmptyElement -->
     <div class="svc-panel__placeholder_frame">
       <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
-      <!-- ko if: surveyElement.isPanel && allowEdit -->
+      <!-- ko if: element.isPanel && allowEdit -->
       <div class="svc-panel__add-new-question svc-action-button"
         data-bind="click: addNewQuestion, key2click, clickBubble: false">
         <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
@@ -27,7 +27,7 @@
     <!-- /ko -->
     <!-- /ko -->
 
-    <!-- ko if: !koIsEmptyElement() && surveyElement.isPanel && allowEdit -->
+    <!-- ko if: !koIsEmptyElement() && element.isPanel && allowEdit -->
     <div class="svc-panel__add-new-question-container">
       <div class="svc-panel__add-new-question svc-action-button"
         data-bind="click: addNewQuestion, key2click, clickBubble: false">
@@ -51,7 +51,7 @@
     </div>
   </div>
   <!-- /ko -->
-  <!-- ko ifnot:  $data.surveyElement.isInteractiveDesignElement -->
+  <!-- ko ifnot:  $data.element.isInteractiveDesignElement -->
   <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
   <!-- /ko -->
   <!-- ko if: koIsEmptyElement -->

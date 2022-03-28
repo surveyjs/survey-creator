@@ -26,10 +26,10 @@ import {
   propertyExists,
   toggleHovered
 } from "../utils/utils";
-import { ActionContainerViewModel } from "./action-container-view-model";
+import { SurveyElementAdornerBase } from "./action-container-view-model";
 import "./question.scss";
 
-export class QuestionAdornerViewModel extends ActionContainerViewModel {
+export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
 
@@ -65,6 +65,11 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel {
       return element.dragTypeOverMe;
     });
   }
+
+  get element() {
+    return this.surveyElement;
+  }
+
   select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
     if (!model.surveyElement.isInteractiveDesignElement) {
       return;

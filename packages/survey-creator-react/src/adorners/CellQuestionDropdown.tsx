@@ -32,7 +32,7 @@ export class CellQuestionDropdownAdornerComponent extends SurveyElementBase<
     return (
       <React.Fragment>
         <div
-          data-sv-drop-target-survey-element={this.model.surveyElement.name}
+          data-sv-drop-target-survey-element={this.model.element.name}
           className={"svc-question__adorner"}
         >
           <div className={" svc-question__content--selected-no-border svc-question__content"}>
