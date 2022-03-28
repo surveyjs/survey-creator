@@ -9,12 +9,16 @@ svc-tab-designer {
 .svc-tab-designer {
   display: flex;
   flex-grow: 1;
-  justify-content: center;
   height: 100%;
   overflow-y: auto;
 }
 
 .svc-tab-designer {
+  .svc-tab-designer_content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   .sd-container-modern {
     min-width: calcSize(70);
     width: 100%;
