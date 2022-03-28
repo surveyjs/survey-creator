@@ -72,34 +72,24 @@ export class SurveySimulatorModel extends Base {
     if (!this.hasFrame) {
       return undefined;
     }
-    var device = simulatorDevices[this.activeDevice];
-    var scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
-    var width =
-      ((this.landscapeOrientation ? device.height : device.width) /
-        device.cssPixelRatio) *
-      scale;
-    var height =
-      ((this.landscapeOrientation ? device.width : device.height) /
-        device.cssPixelRatio) *
-      scale;
-    var frameWidth =
-      ((this.landscapeOrientation ? device.frameHeight : device.frameWidth) /
-        device.cssPixelRatio) *
-      scale;
-    var frameHeight =
-      ((this.landscapeOrientation ? device.frameWidth : device.frameHeight) /
-        device.cssPixelRatio) *
-      scale;
-    let deviceWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
-    let deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
+    const device = simulatorDevices[this.activeDevice];
+    const scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
+
+    const deviceWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
+    const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
+    const deviceLandscapedFrameWidth = (this.landscapeOrientation ? device.frameHeight : device.frameWidth);
+    const deviceLandscapedFrameHeight = (this.landscapeOrientation ? device.frameWidth : device.frameHeight);
+    const frameWidth = (deviceLandscapedFrameWidth / device.cssPixelRatio) * scale;
+    const frameHeight = (deviceLandscapedFrameHeight / device.cssPixelRatio) * scale;
+
     return {
-      scale: this.simulatorScaleEnabled ? scale * 2 : 1,
-      deviceWidth: deviceWidth,
-      deviceHeight: deviceHeight,
-      width: width,
-      height: height,
+      scale: this.simulatorScaleEnabled ? scale : 1,
       frameWidth: frameWidth,
       frameHeight: frameHeight,
+      landscapedFrameWidth: this.landscapeOrientation ? frameHeight : frameWidth,
+      landscapedFrameHeight: this.landscapeOrientation ? frameWidth : frameHeight,
+      deviceWidth: deviceWidth,
+      deviceHeight: deviceHeight,
       cssClass:
         device.cssClass +
         (this.landscapeOrientation ? " svd-simulator-frame-landscape" : ""),

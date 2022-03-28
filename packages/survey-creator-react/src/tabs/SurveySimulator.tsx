@@ -38,29 +38,21 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
               }
               style={{
                 width:
-                  (this.model.landscapeOrientation
-                    ? this.model.simulatorFrame.frameHeight
-                    : this.model.simulatorFrame.frameWidth) + "px",
+                  this.model.simulatorFrame.landscapedFrameWidth + "px",
                 height:
-                  (this.model.landscapeOrientation
-                    ? this.model.simulatorFrame.frameWidth
-                    : this.model.simulatorFrame.frameHeight) + "px"
+                  this.model.simulatorFrame.landscapedFrameHeight + "px"
               }}
             ></div>
             <div
               className="svd-simulator"
               style={{
                 width:
-                  this.model.simulatorFrame.deviceWidth +
-                  "px",
+                  this.model.simulatorFrame.deviceWidth + "px",
                 height:
-                  this.model.simulatorFrame.deviceHeight +
-                  "px",
+                  this.model.simulatorFrame.deviceHeight + "px",
                 transform:
                   "scale(" +
-                  this.model.simulatorFrame.width / this.model.simulatorFrame.deviceWidth +
-                  ", " +
-                  this.model.simulatorFrame.height / this.model.simulatorFrame.deviceHeight +
+                  this.model.simulatorFrame.scale +
                   ") translate(-50%, -50%)"
               }}
             >
