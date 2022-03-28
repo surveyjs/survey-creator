@@ -105,6 +105,7 @@ export class PageNavigatorViewModel extends Base {
       if(this.pageEditMode === "bypage") {
         this.pagesController.currentPage = page;
         this.currentPage = page;
+        this.pagesController.creator.selectElement(this.pagesController.currentPage);
         return;
       }
       const el: any = document.getElementById(page.id);

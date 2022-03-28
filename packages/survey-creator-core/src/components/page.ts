@@ -89,15 +89,17 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   public addGhostPage = () => {
+    const currentPage = this.page;
     if (this.isGhost) {
-      this.page.unRegisterFunctionOnPropertiesValueChanged([
+      currentPage.unRegisterFunctionOnPropertiesValueChanged([
         "title",
         "description"
       ]);
-      this.page.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
-      this.creator.survey.addPage(this.page);
+      currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
+      this.creator.survey.addPage(currentPage);
+      this.creator.survey.currentPage = currentPage;
     }
-    this.creator.selectElement(this.page);
+    this.creator.selectElement(currentPage);
     this.updateActionsProperties();
   }
 
