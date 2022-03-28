@@ -146,31 +146,6 @@ const creator = new SurveyCreator(creatorOptions);
 
 [View Multiple Languages example](https://surveyjs.io/Examples/Survey-Creator/?id=multiplelanguages)
 
-<div id="appearance"></div>
-
-## Appearance: Bootstrap and Themes
-
-Initially, we were using bootstrap functionality, to show modal windows. We have made Survey Creator "bootstrap free" on April 2018. Since that you may use bootstrap, only if you need it, for example you have a site built on bootstrap. It stopped to be a requirement.
-
-Right now, you have two options. You may use the bootstrap or use our themes. Survey Creator is using bootstrap by default, all you need is to include the bootstrap css into your web page. If you want to set one of our theme, then you have to call the following function:
-```javascript
-SurveyCreator.StylesManager.applyTheme("orange");
-```
-The following themes are available:
-
-|Theme name|Required library|
-|---|---|
-|default||
-|bootstrap|Required bootstrap|
-|orange||
-|darkblue||
-|darkrows||
-|stone||
-|winter||
-|winterstone||
-            
-You may change any our theme. Please review [this demo](https://surveyjs.io/Examples/Survey-Creator?id=editor-custom-theme) to see how to do it.
-
 <div id="toolbox"></div>
 
 ## Customize Toolbox
