@@ -12,39 +12,51 @@
     </div>
     <!-- /ko -->
 
-    <!-- ko if: survey.isShowProgressBarOnTop -->
-    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
-    <!-- /ko -->
-    <!-- /ko -->
+    <!-- ko if: !showPlaceholder -->
 
-    <!-- ko ifnot: creator.pageEditMode === 'bypage' -->
-    <!-- ko foreach: survey.pages -->
-    <svc-page class="svc-page"
-      data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name, 'data-sv-drop-target-page': $data.name }"
-      params="survey: $parent.survey, page: $data, creator: $parent.creator"></svc-page>
-    <!-- /ko -->
-    <!-- ko if: showNewPage -->
-    <svc-page class="svc-page" data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
-      params="survey: survey, creator: creator, page: newPage"></svc-page>
-    <!-- /ko -->
-    <!-- /ko -->
+    <div data-bind="css: getDesignerCss()">
+      <!-- ko if: creator.allowEditSurveyTitle -->
+      <div class="svc-designer-header">
+        <!-- ko template: { name: 'survey-header', data: survey } -->
+        <!-- /ko -->
+      </div>
+      <!-- /ko -->
 
-    <!-- ko if: pagesController.page2Display && creator.pageEditMode === 'bypage' -->
-    <svc-page class="svc-page"
-      data-bind="attr: { 'data-sv-drop-target-survey-element': pagesController.page2Display.name, 'data-sv-drop-target-page': pagesController.page2Display.name }"
-      params="survey: survey, page: pagesController.page2Display, creator: creator"></svc-page>
-    <!-- /ko -->
+      <!-- ko if: survey.isShowProgressBarOnTop -->
+      <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+      <!-- /ko -->
+      <!-- /ko -->
 
-    <!-- ko if: survey.isShowProgressBarOnBottom -->
-    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
-    <!-- /ko -->
-    <!-- /ko -->
+      <!-- ko ifnot: creator.pageEditMode === 'bypage' -->
+      <!-- ko foreach: survey.pages -->
+      <svc-page class="svc-page"
+        data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name, 'data-sv-drop-target-page': $data.name }"
+        params="survey: $parent.survey, page: $data, creator: $parent.creator"></svc-page>
+      <!-- /ko -->
+      <!-- ko if: showNewPage -->
+      <svc-page class="svc-page" data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
+        params="survey: survey, creator: creator, page: newPage"></svc-page>
+      <!-- /ko -->
+      <!-- /ko -->
+
+      <!-- ko if: pagesController.page2Display && creator.pageEditMode === 'bypage' -->
+      <svc-page class="svc-page"
+        data-bind="attr: { 'data-sv-drop-target-survey-element': pagesController.page2Display.name, 'data-sv-drop-target-page': pagesController.page2Display.name }"
+        params="survey: survey, page: pagesController.page2Display, creator: creator"></svc-page>
+      <!-- /ko -->
+
+      <!-- ko if: survey.isShowProgressBarOnBottom -->
+      <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+      <!-- /ko -->
+      <!-- /ko -->
+    </div>
 
     <!-- ko if: creator.showPageNavigator -->
     <div class="svc-tab-designer__page-navigator">
-      <svc-page-navigator params="controller: pagesController, pageEditMode: creator.pageEditMode"></svc-page-navigator>
+      <svc-page-navigator params="controller: pagesController, pageEditMode: creator.pageEditMode">
+      </svc-page-navigator>
     </div>
     <!-- /ko -->
-
+    <!-- /ko -->
   </div>
 </div>
