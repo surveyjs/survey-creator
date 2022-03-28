@@ -57,7 +57,7 @@ svc-page {
 .svc-hovered {
   border-radius: calcSize(0.5);
   &.svc-page__content--selected {
-    box-shadow: 0 0 0 2px $secondary;
+    box-shadow: 0 0 0 2px $secondary inset;
     background: $secondary-back-light;
     .svc-page__content-actions {
       display: block;

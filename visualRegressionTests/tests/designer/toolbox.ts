@@ -107,3 +107,26 @@ test("Toolbox tool pressed state", async (t) => {
   await checkElementScreenshot("toolbox-tool-normal-state.png", toolboxTool, t);
 
 });
+
+test("designer tab view with page navigator", async (t) => {
+  await setJSON({
+    pages: [
+      {
+        "name": "page1",
+        "elements": [{ "type": "text", "name": "question1" }]
+      },
+      {
+        "name": "page2",
+        "elements": [{ "type": "text", "name": "question2" }]
+      }
+    ]
+  });
+  const designerTab = Selector(".svc-creator-tab");
+  await t
+    .click(".sd-page__title")
+    .resizeWindow(1450, 600);
+  await checkElementScreenshot("designer-tab-page-navigator-toolbox-left.png", designerTab, t);
+
+  await changeToolboxLocation("right");
+  await checkElementScreenshot("designer-tab-page-navigator-toolbox-right.png", designerTab, t);
+});

@@ -127,7 +127,9 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-adaptive-toolbox", { model: this.creator }) : null}
         </div>
         <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
-          {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
+          <div className="svc-tab-designer_content">
+            {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
+          </div>
         </div>
       </React.Fragment>
     );

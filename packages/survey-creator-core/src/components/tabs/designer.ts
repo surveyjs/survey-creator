@@ -134,6 +134,9 @@ export class TabDesignerViewModel extends Base {
     if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage") {
       rootCss += " svc-tab-designer--with-page-navigator";
     }
+    if (this.showPlaceholder) {
+      rootCss += " svc-tab-designer--with-place-holder";
+    }
     return rootCss;
   }
 }

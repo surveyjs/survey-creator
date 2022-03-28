@@ -2,22 +2,16 @@
 <svc-adaptive-toolbox params="model: creator"></svc-adaptive-toolbox>
 <!-- /ko -->
 <div class="svc-tab-designer" data-bind="css: getRootCss(), click: clickDesigner">
-  <!-- ko if: showPlaceholder -->
-  <div class="svc-designer__placeholder-container">
-    <span class="svc-designer-placeholder-text svc-text svc-text--normal" data-bind="text: placeholderText"> </span>
-    <svc-page class="svc-designer-placeholder-page"
-      data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
-      params="survey: survey, creator: creator, page: newPage"></svc-page>
-  </div>
-  <!-- /ko -->
-  <!-- ko if: !showPlaceholder -->
-  <div data-bind="css: getDesignerCss()">
-    <!-- ko if: creator.allowEditSurveyTitle -->
-    <div class="svc-designer-header">
-      <!-- ko template: { name: 'survey-header', data: survey } -->
-      <!-- /ko -->
+  <div class="svc-tab-designer_content">
+    <!-- ko if: showPlaceholder -->
+    <div class="svc-designer__placeholder-container">
+      <span class="svc-designer-placeholder-text svc-text svc-text--normal" data-bind="text: placeholderText"> </span>
+      <svc-page class="svc-designer-placeholder-page"
+        data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
+        params="survey: survey, creator: creator, page: newPage"></svc-page>
     </div>
     <!-- /ko -->
+
     <!-- ko if: survey.isShowProgressBarOnTop -->
     <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
     <!-- /ko -->
@@ -45,11 +39,13 @@
     <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
     <!-- /ko -->
     <!-- /ko -->
+
+    <!-- ko if: creator.showPageNavigator -->
+    <div class="svc-tab-designer__page-navigator">
+      <svc-page-navigator params="controller: pagesController, pageEditMode: creator.pageEditMode"></svc-page-navigator>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+
   </div>
-  <!-- ko if: creator.showPageNavigator -->
-  <div class="svc-tab-designer__page-navigator">
-    <svc-page-navigator params="controller: pagesController, pageEditMode: creator.pageEditMode"></svc-page-navigator>
-  </div>
-  <!-- /ko -->
-  <!-- /ko -->
 </div>
