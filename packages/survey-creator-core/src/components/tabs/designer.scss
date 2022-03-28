@@ -13,11 +13,14 @@ svc-tab-designer {
   overflow-y: auto;
 }
 
+.svc-tab-designer--with-place-holder .svc-tab-designer_content {
+  display: flex;
+  justify-content: center;
+}
+
 .svc-tab-designer {
   .svc-tab-designer_content {
     width: 100%;
-    display: flex;
-    justify-content: center;
   }
   .sd-container-modern {
     min-width: calcSize(70);
