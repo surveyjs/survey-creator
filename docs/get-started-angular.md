@@ -20,7 +20,7 @@ npm install survey-creator-knockout --save
 
 ## Configure Styles
 
-Open the `angular.json` file and reference Survey Creator and SurveyJS Library style sheets as shown below. Note that although SurveyJS Library supports [different UI themes](https://surveyjs.io/Documentation/Library?id=get-started-angular#configure-styles), Survey Creator can use only the Default V2 theme:
+Open the `angular.json` file and reference Survey Creator and SurveyJS Library style sheets:
 
 ```js
 {
@@ -49,6 +49,9 @@ Open the `angular.json` file and reference Survey Creator and SurveyJS Library s
 }
 ```
 
+Note that although standalone surveys support [multiple predefined themes](https://surveyjs.io/Documentation/Library?id=get-started-angular#configure-styles), surveys within Survey Creator apply only one theme ("Default V2"). However, you can use the survey configuration (JSON object) produced by Survey Creator to build a standalone survey and apply any theme to it. You can also customize Survey Creator theme colors as shown in the following example:
+
+[View Customize Theme Using CSS Variables example](https://surveyjs.io/Examples/Survey-Creator?id=editor-custom-theme-css-vars)
 ## Configure Survey Creator
 
 To configure the Survey Creator component, specify [its properties](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator) in a configuration object. In this tutorial, the object enables the following properties:
