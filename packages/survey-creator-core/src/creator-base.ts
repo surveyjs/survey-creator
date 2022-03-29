@@ -2282,10 +2282,14 @@ export class CreatorBase extends Base
   }
 
   public initKeyboardShortcuts(rootNode: HTMLElement) {
-    rootNode.addEventListener("keydown", this.onKeyDownHandler);
+    if (!!rootNode) {
+      rootNode.addEventListener("keydown", this.onKeyDownHandler);
+    }
   }
   public removeKeyboardShortcuts(rootNode: HTMLElement) {
-    rootNode.removeEventListener("keydown", this.onKeyDownHandler);
+    if (!!rootNode) {
+      rootNode.removeEventListener("keydown", this.onKeyDownHandler);
+    }
   }
   protected onKeyDownHandler = (event: KeyboardEvent) => {
     let shortcut;

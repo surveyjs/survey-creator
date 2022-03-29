@@ -12,7 +12,9 @@ export class SvgBundleComponent extends React.Component {
     this.containerRef = React.createRef();
   }
   componentDidMount() {
-    this.containerRef.current.innerHTML = SvgRegistry.iconsRenderedHtml();
+    if (!!this.containerRef.current) {
+      this.containerRef.current.innerHTML = SvgRegistry.iconsRenderedHtml();
+    }
   }
   componentWillUnmount() {
   }
@@ -20,7 +22,7 @@ export class SvgBundleComponent extends React.Component {
     const svgStyle = {
       display: "none"
     };
-    return <svg style = {svgStyle} ref={this.containerRef}></svg>;
+    return <svg style={svgStyle} ref={this.containerRef}></svg>;
   }
 }
 
