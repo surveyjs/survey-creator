@@ -10,13 +10,12 @@ If you want to get the most from our Survey Creator, then we hope that the follo
 - [Localization](#localization)
   - [Localize Survey Creator UI](#localize-survey-creator-ui)
   - [Localize Survey Contents](#localize-survey-contents)
-- [Appearance: Bootstrap and Themes](#appearance-bootstrap-and-themes)
-- [Customize Toolbox](#customize-toolbox)
-  - [Limit the default question types](#limit-the-default-question-types)
-  - [Add custom widgets](#add-custom-widgets)
-  - [Add existing Elements from designer into Toolbox](#add-existing-elements-from-designer-into-toolbox)
-  - [Toolbox categories](#toolbox-categories)
-  - [Full control via creator.toolbox property](#full-control-via-creatortoolbox-property)
+- [Customize the Toolbox](#customize-the-toolbox)
+  - [Full and Compact Modes](#full-and-compact-modes)
+  - [Limit Available Question and Panel Types](#limit-available-question-and-panel-types)
+  - [Group Toolbox Items by Categories](#group-toolbox-items-by-categories)
+  - [Customize Predefined Toolbox Items](#customize-predefined-toolbox-items)
+  - [Add a Custom Toolbox Item](#add-a-custom-toolbox-item)
 - [Remove properties from SurveyJS Elements or hide them](#remove-properties-from-surveyjs-elements-or-hide-them)
 - [Add properties into SurveyJS Elements](#add-properties-into-surveyjs-elements)
 - [Customize SurveyJS Elements Editor</h2>](#customize-surveyjs-elements-editorh2)
@@ -148,244 +147,217 @@ const creator = new SurveyCreator(creatorOptions);
 
 <div id="toolbox"></div>
 
-## Customize Toolbox
+## Customize the Toolbox
 
-You may fully customize Toolbox as you want. You may add/remove any item on it (question/panel types), change items names and icons, the generated json and categories and so on.
+### Full and Compact Modes
+
+Toolbox contains available question and panel types. Users can click questions and panels or drag and drop them onto the design surface to add them to the survey.
+
+<img src="./images/survey-creator-toolbox-full.png" alt="Survey Creator - Toolbox in full mode" width="50%">
+
+Toolbox supports full mode (illustrated above) and compact mode. In compact mode, element names are hidden. To see an individual element name, a user should move the mouse pointer over the element icon.
+
+<img src="./images/survey-creator-toolbox-compact.png" alt="Survey Creator - Toolbox in compact mode" width="50%">
+
+Toolbox switches between the modes automatically based on available width. Specify the [`forceCompact`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#forceCompact) property if you want the toolbox to always use a specific mode:
+
+```js
+// Compact mode
+creator.toolbox.forceCompact = true;
+// Full mode
+creator.toolbox.forceCompact = false;
+```
+
+You can also use the [`isCompact`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#isCompact) property to find out whether the toolbox is currently in compact mode:
+
+```js
+console.log(creator.toolbox.isCompact);
+```
 
 <div id="toolbox-limit"></div>
 
-### Limit the default question types
+### Limit Available Question and Panel Types
 
-The most common task is to show only the part of the available question types on the Toolbox.
+All available question and panel types are listed in the [`getType()`](https://surveyjs.io/Documentation/Library?id=Question#getType) method description. If you need to show only a part of these types, specify them in the Survey Creator's [`questionTypes`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#questionTypes) array:
 
-Here is the list of available default question types.
-
-|Question Type|Description|
-|---|---|
-|boolean|A boolean question|
-|checkbox|Checkbox question, for multiple choices|
-|comment|Comment question, a multiline textbox|
-|dropdown|Dropdown question, a select widget|
-|expression|Expression question. It is a read-only question. It calculates value based on epxression property|
-|file|File question. It uses for uploading file(s)|
-|html|Html question. It renders its html property. Unlike other questions it doesn't have value and title.|
-|matrix|Simple matrix question. It has one choice per row|
-|matrixdropdown|Matrix dropdown question. You may use a dropdown, checkbox, radiogroup, text and comment and others questions as a cell editors|
-|matrixdynamic|Matrix dymanic question. You may use a dropdown, checkbox, radiogroup, text and comment questions as a cell editors. An end-user may dynamically add/remove rows, unlike in matrix dropdown question|
-|multipletext|Multiple text question. Several text inputs in one question can be placed in one or several columns|
-|panel|Container element. It may contain questions and other panels.|
-|paneldynamic|Panel dymanic question. You setup the template panel, but adding elements (any question or a panel) and assign a text to its title, and this panel will be used as a template on creating dynamic panels. The number of panels is defined by panelCount property. An end-user may dynamically add/remove panels, unless you forbidden this.|
-|radiogroup|Radiogroup question. A single choice question.|
-|rating|Rating question|
-|text|Input text question|
-
-By default, all these question types are shown on the Toolbox. You may show only some of them by using the following code:
-```javascript
-var options = {
+```js
+const creatorOptions = {
     questionTypes: ["text", "checkbox", "radiogroup", "dropdown"]
 };
-var creator = new SurveyCreator.SurveyCreator("surveyCreatorDivId", options);
+
+const creator = new SurveyCreator.SurveyCreator(creatorOptions);
+
+// In modular applications
+import { SurveyCreator } from "survey-creator-knockout";
+// or
+import { SurveyCreator } from "survey-creator-react";
+const creator = new SurveyCreator(creatorOptions);
 ```
 
-<div id="toolbox-customwidgets"></div>
-
-### Add custom widgets
-
-To add a custom widget to your Toolbox, all you need to do is to include the third-party library scripts and our custom widget scripts on your web page. Survey Creator will recognize custom widgets as new question types and add them into Toolbox. Please review [this example](https://surveyjs.io/Examples/Survey-Creator/?id=customwidgets).
-                
-<div id="toolbox-existing"></div>
-
-### Add existing Elements from designer into Toolbox
-
-By default, there is a “Add to Toolbox” button on an element (question/panel) in the designer. Your end-user may customize question/panel as he/she wants, add it into toolbox and then drop it on another page.
-
-You may go even further and persist the current Toolbox state, so the user may use these custom toolbox items for building other surveys.
-
-Let’s talk here about available options that you have.
-
-By default, a user may add only 3 elements from the designer. If there are already 3 custom/copied elements on the Toolbox, then on adding a new one, the first added element will be removed. To change the number of copied elements your user may have, you must set this property to the value you need:
-```javascript
-creator.toolbox.copiedItemMaxCount = 10;
-```
-To disable the ability of adding an element from designer into toolbox you will have to use **onElementAllowOperations** event. Here is the example:
-
-```javascript
-creator.onElementAllowOperations.add(function(sender, options){
-    options.allowAddToToolbox = false;
-});
-```
-If you want to persist the copied items on the Toolbox for your end-user for another session or another survey, then you must use the copiedJsonText properties:
-
-```javascript
-var savedItems = creator.toolbox.copiedJsonText; //save into localstorage or your database
-//....
-//Restored savedItems from localstorage or your database.
-creator.toolbox.copiedJsonText = savedItems;
-```
+[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization)
 
 <div id="toolbox-categories"></div>
 
-### Toolbox categories
+### Group Toolbox Items by Categories
 
-By default there is one category in the Toolbox (General) and its title is not shown. You may change the category of the default question types by calling **changeCategory** function:
-```javascript
-creator.toolbox.changeCategory("panel", "Panels");
-creator.toolbox.changeCategory("paneldynamic", "Panels");
-```
-The better way is to use changeCategories function. It will rebuild toolbox presentation model just one time:
-```javascript
+> NOTE: Compact toolbox does not display categories.
+
+To group toolbox items, call the [`changeCategories()`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#changeCategories) method. It accepts an array of objects with the following fields:
+
+- `name`        
+The name of the item that should be grouped. Refer to the [`getType()`](https://surveyjs.io/Documentation/Library?id=Question#getType) method description for a list of accepted values.
+
+- `category`      
+A category for this item.
+
+The following code places the [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) and [Panel Dynamic](https://surveyjs.io/Documentation/Library?id=questionpaneldynamicmodel) types into the Panels category and the [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel), and [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) types into the Matrices category:
+
+```js
 creator.toolbox.changeCategories([
     { name: "panel", category: "Panels" }, 
     { name: "paneldynamic", category: "Panels" }, 
-    { name: "matrix", category: "Matrix" }
+    { name: "matrix", category: "Matrices" },
+    { name: "matrixdropdown", category: "Matrices" },
+    { name: "matrixdynamic", category: "Matrices" }
 ]);
 ```
-You may change the name of the default (General) category as any other localizable string. Please make sure to run this code before creating the Survey Creator.
-```javascript
-SurveyCreator.defaultStrings.ed.toolboxGeneralCategory = "Common";
+
+[View Toolbox Categories example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories)
+
+Ungrouped items fall into the General category. You can use [localization capabilities](#localize-survey-creator-ui) to change its caption. If your application does not employ modules, use the following code:
+
+```html
+<script src="https://unpkg.com/survey-creator-core/survey-creator-core.i18n.min.js"></script>
 ```
 
-To allow expand more than one category, set the property **allowExpandMultipleCategories** to true.
-If you want to keep all your categories always expanded, then set the following property **keepAllCategoriesExpanded** property to true.
-```javascript
+```js
+const translations = SurveyCreator.localization.getLocale("");
+translations.ed.toolboxGeneralCategory = "Common";
+```
+
+In modular applications, use the code below:
+
+```js
+import "survey-creator-core/survey-creator-core.i18n";
+import { localization } from "survey-creator-core";
+const translations = localization.getLocale("");
+translations.ed.toolboxGeneralCategory = "Common";
+```
+
+The following properties control the behavior of categories:
+
+- [`allowExpandMultipleCategories`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#allowExpandMultipleCategories)     
+Allows more than one category to be in expanded state. If this property is `false`, when a user expands a category, other categories collapse.
+
+- [`keepAllCategoriesExpanded`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#keepAllCategoriesExpanded)       
+Expands all categories. Users cannot collapse them.
+
+```js
 creator.toolbox.allowExpandMultipleCategories = true;
-creator.toolbox.keepAllCategoriesExpanded = true;` 
+creator.toolbox.keepAllCategoriesExpanded = false;
 ```
 
-Please go to the [Survey Toolbox categories example](https://surveyjs.io/Examples/Survey-Creator/?id=toolboxcategories) to see how it works.
+### Customize Predefined Toolbox Items
 
-<div id="toolbox-property"></div>
+To customize a predefined toolbox item, pass its [type](https://surveyjs.io/Documentation/Library?id=Question#getType) as an argument to the [`getItemByName(itemName)`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#getItemByName) method. This method returns the item's configuration object. Change the [properties of this object](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem) to customize the toolbox item. For example, the following code uses the [`json`](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem#json) property to override predefined [choices](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel#choices) for a [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel) question:
 
-### Full control via creator.toolbox property
+```js
+creator.toolbox
+  .getItemByName("dropdown")
+  .json
+  .choices = [
+    { text: "Option 1", value: 1 },
+    { text: "Option 2", value: 2 },
+    { text: "Option 3", value: 3 }
+  ];
+```
 
-Edtor **toolbox** property contains the information about items are shown Toolbox and functions and properties to allow adding/deleting/changing items.
+[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization)
 
-Here are properties of the item object:
+### Add a Custom Toolbox Item
 
-|Property Name|Description|
-|---|---|
-|name| The required attribute. The unique item id. By default it is a question type|
-|iconName|The optional attribute. The icon name. The default value is 'icon-default'. It is 'icon-' + [question_type] for a standard Survey question|
-|json|The required attribute. A new element on designer is created based on this json. The json should has at least the 'type' string property. You may change it to set other question properties by default.|
-|title|The toolbox item title. For default questions, titles are defined in localization files. Here is the example of changing title for **comment** question: _SurveyCreator.defaultStrings.qt.comment = "Multiple line input";_ Please go to <a href="#localization">Localization section</a> to get more information.|
-|isCopied|true if the item is created by clicking on 'Add to Toolbox' question menu item.|
-|category|The category to which this item is belong to. It is empty (default value) then category is “General”. Please read topic Toolbox Categories in this section for more information.|
-                
-Here is the list of functions and properties for **creator.toolbox** object:
+If you want to extend the predefined toolbox item collection, call the `addItem(itemConfiguration, [index])` method to add a custom item. This method accepts the following arguments:
 
----
-**jsonText**
+- `itemConfiguration`       
+A [toolbox item configuration object](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem). The [`name`](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem#name), [`iconName`](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem#iconName), and [`json`](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem#json) properties are required. When you configure an object for the `json` property, refer to the API help section of your question type for a list of available properties. For example, if you configure a Dropdown question, refer to the [Dropdown API](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel) help section.
 
-The string property. Allows to get and set all toolbox items as a string.
+- `index`       
+The target index of the item. Use `0` to add the item at the first position, `1` to add it at the second position, and so on. Do not specify `index` if you want to display the item at the end.
 
----
-**copiedJsonText**
+The following code adds a custom item that allows users to select a country from a drop-down menu. Since the `index` argument is `0`, the toolbox displays the item at the beginning.
 
-The string property. Allows to get and set copied questions as a string. End-user may add a queston into toolbox by clicking on 'Add to Toolbox' question menu item.
-
----
-**items**
-
-Returns the list of current toolbox items. Toolbox item properties are described above.
-
----
-**copiedItems**
-
-Returns the list of current copied toolbox items. End-user may add a queston into toolbox by clicking on 'Add to Toolbox' question menu item
-
----
-**addItem(item)**
-
-Add a new item into toolobx. If the item with the same name already exists, then replace it. The current code will add a new item into Toolbox 
-```javascript
-//Add all countries question into toolbox
+```js
 creator.toolbox.addItem({
-    name: "countries",
-    isCopied: true,
-    iconName: "icon-default",
-    title: "All countries",
-    json: {
-        "type": "dropdown",
-        optionsCaption: "Select a country...",
-        choicesByUrl: {
-            url: "https://surveyjs.io/api/CountriesExample"
-        }
+  name: "countries",
+  iconName: "icon-dropdown",
+  title: "Countries",
+  json: {
+    type: "dropdown",
+    optionsCaption: "Select a country...",
+    choicesByUrl: {
+        url: "https://surveyjs.io/api/CountriesExample"
     }
-});
+  }
+}, 0);
 ```
----
-**addItems(items[, clearAll])**
 
-Add the list of toolbox items into toolbox. If an optional parameter clearAll is set to true, all previous items will be removed.
+[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization)
 
----
-**addCopiedItem(question)**
+<!--
 
-Add a question into Toolbox as a copied item.
+    <div id="toolbox-customwidgets"></div>
 
----
-**getItemByName(name)**
+    ### Integrate 3rd-Party Components as Question Editors
 
-Returns toolbox item by its name. Returns null if there is no toolbox item with this name. The following code change the default json for radiogroup
-```javascript
-creator.toolbox.getItemByName("radiogroup").json = {
-    "type": "radiogroup",
-    choices: ["Blue", "Red"]
-};
-```
----
-**clearItems()**
+    Survey Creator supports integration with the following 3rd-party components out of the box:
 
-Remove all items from the toolbox.
+    %LIST%
 
----
-**clearCopiedItems()**
+    To enable the integration with one of these components, reference or import the [surveyjs-widgets](https://github.com/surveyjs/custom-widgets) library next to the 3rd-party component sources:
 
-Remove all copied items from the toolbox.
+    ```html
+    <script src="https://unpkg.com/surveyjs-widgets/surveyjs-widgets.min.js"></script>
+    ```
 
----
-**replaceItem(item)**
+    ```js
+    import "survey-creator-core/survey-creator-core.i18n";
+    ```
 
-Find an existing item by item.name and replace its properties. Return false if the item with the same name doesn't exist.
+    If you did not find a desired component in the list above, refer to the following help topic for instructions on how to integrate any 3rd-party component into Survey Creator: [Create Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget).
+-->
 
----
-**removeItem(name)**
+<!--  
 
-Find an existing item by name parameter and remove it. Here is the example of removing complex matrix questions
-```javascript
-creator.toolbox.removeItem("matrixdropdown");
-creator.toolbox.removeItem("matrixdynamic");
-```
----
-**activeCategory**
+    <div id="toolbox-existing"></div>
 
-Set and get and active category. This property doesn't work if allowExpandMultipleCategories is true. Its default value is empty. You should have at least one category in your items that is not empty or 'General'.
+    ### Save User-Defined Elements in the Toolbox
 
----
-**allowExpandMultipleCategories**
+    By default, there is a “Add to Toolbox” button on an element (question/panel) in the designer. Your end-user may customize question/panel as he/she wants, add it into toolbox and then drop it on another page.
 
-Set it to true, to allow end-user to expand more than one category. There will no active category in this case
+    You may go even further and persist the current Toolbox state, so the user may use these custom toolbox items for building other surveys.
 
----
-**changeCategory(name, newCategory)**
+    Let’s talk here about available options that you have.
 
-Change the category of the toolbox item
+    By default, a user may add only 3 elements from the designer. If there are already 3 custom/copied elements on the Toolbox, then on adding a new one, the first added element will be removed. To change the number of copied elements your user may have, you must set this property to the value you need:
+    ```javascript
+    creator.toolbox.copiedItemMaxCount = 10;
+    ```
+    To disable the ability of adding an element from designer into toolbox you will have to use **onElementAllowOperations** event. Here is the example:
 
----
-**changeCategories(changedItems)**
+    ```javascript
+    creator.onElementAllowOperations.add(function(sender, options){
+        options.allowAddToToolbox = false;
+    });
+    ```
+    If you want to persist the copied items on the Toolbox for your end-user for another session or another survey, then you must use the copiedJsonText properties:
 
-Change categories for several toolbox items. changedItems parameter is an array of objects {name: "your toolbox item name", category: "new category name"}. Here is the example
-```javascript
-creator.toolbox.changeCategories([
-    { name: "panel", category: "Panels" }, 
-    { name: "paneldynamic", category: "Panels" }, 
-    { name: "matrix", category: "Matrix" }
-]);
-```
----
-
-Please review and play with the [Survey Toolbox customization](https://surveyjs.io/Examples/Survey-Creator/?id=toolboxcustomization) example.
-
+    ```javascript
+    var savedItems = creator.toolbox.copiedJsonText; //save into localstorage or your database
+    //....
+    //Restored savedItems from localstorage or your database.
+    creator.toolbox.copiedJsonText = savedItems;
+    ```
+-->
 
 <div id="removeproperties"></div>
 
