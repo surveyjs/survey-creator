@@ -19,8 +19,8 @@ If you want to get the most from our Survey Creator, then we hope that the follo
 - [Remove properties from SurveyJS Elements or hide them](#remove-properties-from-surveyjs-elements-or-hide-them)
 - [Add properties into SurveyJS Elements](#add-properties-into-surveyjs-elements)
 - [Customize Survey Elements on Creation](#customize-survey-elements-on-creation)
+- [Adorners](#adorners)
 - [Accessing Surveys instance: designer and test surveys](#accessing-surveys-instance-designer-and-test-surveys)
-- [Adorners ― change element properties on its designer surface](#adorners--change-element-properties-on-its-designer-surface)
 
 
 <div id="platforms"></div>
@@ -806,6 +806,50 @@ creator.onQuestionAdded.add(function (_, options) {
 });
 ```
 
+<div id="adorners"></div>
+
+## Adorners
+
+Adorners are UI elements that allow Survey Creator users to manipulate survey elements. Adorners overlay survey elements on the design surface. Displayed adorners depend on the survey element type. The following image highlights adorners on a Dropdown question:
+
+<img src="./images/surver-creator-dropdown-adorners.png" alt="Survey Creator - Adorners" width="50%">
+
+You can control the visibility of adorners using the `onElementAllowOperations` event. As the second parameter, the event handler accepts an object that exposes the following Boolean properties:
+
+| Property | Description |
+|--------- | ----------- |
+| `allowAddToToolbox` | Shows or hides the adorner that saves the current question configuration in the toolbox |
+| `allowChangeRequired` | Shows or hides the adorner that makes the question required |
+| `allowChangeType` | Shows or hides the adorner that changes the question type |
+| `allowCopy` | Shows or hides the adorner that duplicates the question |
+| `allowDelete` | Shows or hides the adorner that deletes the question |
+| `allowDragging` | Shows or hides the adorner that allows users to drag and drop questions |
+| `allowEdit` | Shows or hides the adorners that allow users to edit question properties on the design surface. If you disable this property, users can edit question properties only in Property Grid. |
+
+The following code shows how to hide the adorner that changes the question type for Dropdown questions:
+
+```js
+creator.onElementAllowOperations.add(function (_, options) {
+  if (options.obj?.getType() === "dropdown") {
+    options.allowChangeType = false;
+  }
+});
+```
+<!--
+DEPENDS ON THE FOLLOWING ISSUE: https://github.com/surveyjs/survey-creator/issues/2843
+
+You may register your own adorner or remove an existing adorner or remove all of them.
+
+```javascript
+//Register a new adorner
+SurveyCreator.registerAdorner("adornerName", adornerInstance);
+//Remove two existing adorners
+SurveyCreator.removeAdorners(["adornerName1", "adornerName2"]);
+//The removeAdorners function without parameters, will remove all adorners
+SurveyCreator.removeAdorners();
+```
+-->
+
 <div id="accesssurveys"></div>
 
 ## Accessing Surveys instance: designer and test surveys
@@ -837,78 +881,5 @@ Unlike designer survey, test survey instance exists when end-user switches into 
 ```javascript
 creator.onTestSurveyCreated.add(function(sender, options) {
   options.survey.title = "You are testing survey at: " + new Date().toLocaleTimeString();
-});
-```
-
-<div id="adorners"></div>
-
-## Adorners ― change element properties on its designer surface
-
-Working on end-user usability issues, we have introduced adorners concepts in spring 2018. End-users were trying to modify SurveyJS elements (questions and panels) directly in designer surface and do not use Property Grid or Question/Panel Editors.
-
-As result the UI has been changed greatly, and additionally, developers got more control under it. You may register your own adorner or remove an existing adorner or remove all of them.
-```javascript
-//Register a new adorner
-SurveyCreator.registerAdorner("adornerName", adornerInstance);
-//Remove two existing adorners
-SurveyCreator.removeAdorners(["adornerName1", "adornerName2"]);
-//The removeAdorners function without parameters, will remove all adorners
-SurveyCreator.removeAdorners();
-```
-<p align="center">
-
-![Survey Creator Adorners](images/builder-adorners.png)
-
-_Dropdown question standard adorners_
-
-</p>
-
-  Here is the list of available adorners
-
-|Name|Applies to|Description|
-|---|---|---|
-|choices-label|checkbox, radiogroup and dropdown questions|Add, edit and delete choices items|
-|choices-draggable|checkbox, radiogroup and dropdown questions|Drag&drop choices items to change their order|
-|title|all questions, panel and page|In-place editing question, panel or page title|
-|question-actions|all questions|It has several actions as: showing Question Editor, delete question, copy question, make this question as required and others|
-|panel-actions|panel|It has several actions as: showing Panel Editor, delete panel, copy panel and others|
-|rating-item|rating question|It allows to add a new rating item, delete the existing and change rating item text|
-|select-choices|dropdown question|a link that show/hide the choices, so a end-user is able to edit them|
-|item-title|multiple text question|In-place editing a multiple text item title|
-|label|boolean question|In-place editing of boolean question label|
-
-There are a lot of actions in "question-actions" and "panel-actions" adorners. You may additionally control them by removing the functionality for all of them or for an element by using **onElementAllowOperations** event.
-
-Here is the example of using it:
-```javascript
-creator.onElementAllowOperations.add(function (sender, options) {
-    var obj = options.obj;
-    if (!obj || !obj.page) return;
-    //if it is panel
-    if (obj.getType() == "panel") {
-        //disable editing if panel has at least one question
-        options.allowDelete = obj.questions.length == 0;
-        //disable adding the panel into toolbox if there is no question in it
-        options.allowAddToToolbox = obj.questions.length > 0;
-        //disable copying the panel  if there is no question in it
-        options.allowCopy = obj.questions.length > 0;
-    }
-    //It it is a text question
-    if (obj.getType() == "text") {
-        //disable changing type
-        options.allowChangeType = false;
-    }
-    
-    //Show/hide "Edit" button for showing modal Question/Panel Editor Window
-    //options.allowEdit = false;
-    
-    //Enable/disable element drag&drop
-    //options.allowDragging = false;
-    
-    //Enable/disable element changing isRequired property
-    //options.allowChangeRequired = false
-
-    //Enable/disable element changing titleLocation property to hidden/default
-    //options.allowShowHideTitle = false
 });
 ```
