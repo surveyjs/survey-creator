@@ -18,8 +18,7 @@ If you want to get the most from our Survey Creator, then we hope that the follo
   - [Add a Custom Toolbox Item](#add-a-custom-toolbox-item)
 - [Remove properties from SurveyJS Elements or hide them](#remove-properties-from-surveyjs-elements-or-hide-them)
 - [Add properties into SurveyJS Elements](#add-properties-into-surveyjs-elements)
-- [Customize SurveyJS Elements Editor</h2>](#customize-surveyjs-elements-editorh2)
-- [Modify new created objects (Questions, Panels, Pages, Columns and Items)](#modify-new-created-objects-questions-panels-pages-columns-and-items)
+- [Customize Survey Elements on Creation](#customize-survey-elements-on-creation)
 - [Accessing Surveys instance: designer and test surveys](#accessing-surveys-instance-designer-and-test-surveys)
 - [Adorners ― change element properties on its designer surface](#adorners--change-element-properties-on-its-designer-surface)
 
@@ -778,38 +777,32 @@ You may review the [Add properties](https://surveyjs.io/Examples/Survey-Creator/
 
 <div id="modifynewobjects"></div>
 
-## Modify new created objects (Questions, Panels, Pages, Columns and Items)
+## Customize Survey Elements on Creation
 
-There are several events that allows you to modify new created objects, for example when end-user drop a question or panel from toolbox into designer surface or create a new page or add a new column or item value in choices or rows properties.
+Survey Creator raises events when users add new elements to a survey. You can handle these events to customize the elements.
 
-Here is the list of these events
+| Event name | Raised when |
+| ---------- | ----------- |
+| [onQuestionAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onQuestionAdded) | Raised when users add a question to the survey. |
+| [onPanelAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPanelAdded) | Raised when users add a panel to the survey. |
+| [onPageAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPageAdded) | Raised when users add a page to the survey. |
+| [onMatrixColumnAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onMatrixColumnAdded) | Raised when users add a column to the [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) or [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) question. |
+| [onItemValueAdded](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onItemValueAdded) | Raised when users add a new item value (column, row, choice) |
 
-|Event name|Fires on|
-|---|---|
-|[onQuestionAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onQuestionAdded)|Fires on dropping a question from the Toolbox into designer surface|
-|[onPanelAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onPanelAdded)|Fires on dropping a panel (container) from the Toolbox into designer surface|
-|[onPageAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onPageAdded)|Fires on pressing "Add New Page" button or on selecting "Add New Page" item in the page selector|
-|[onMatrixColumnAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onMatrixColumnAdded)|Fires on clicking "Add New" button in the columns Property Editor of matrix dropdown or matrix dynamic questions|
-|[onItemValueAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onItemValueAdded)|Fires on clicking "Add New" button in the itemvalue Property Editor or on clicking a "+" button during inplace editing checkbox, dropdown and radigroup questions|
+The code below shows how you can handle the `onQuestionAdded` event to customize the default question name:
 
-The code bellow generated a custom question name as "Question" + "Questiontype" + Counter, for example: QuestionCheckbox1, QuestionDropdown1, QuestionCheckbox2.
-```javascript
-var questionCounter = {};
-//Set the name property different from the default value
-creator.onQuestionAdded.add(function (sender, options) {
-    var q = options.question;
-    var t = q.getType();
-    if(!questionCounter[t]) questionCounter[t] = 1;
-    var counter = questionCounter[t];
-    q.name = "Question" + t[0].toUpperCase() + t.substring(1) + counter;
-    questionCounter[t] = counter + 1;
-});
-```
-
-This code adds a new text question into new created page
-```javascript
-creator.onPageAdded.add(function (sender, options) {
-    options.page.addNewQuestion("text", "Question_" + page.name);
+```js
+let questionNumbers = {};
+creator.onQuestionAdded.add(function (_, options) {
+  const question = options.question;
+  const type = question.getType();
+  if (!questionNumbers[type]) {
+    questionNumbers[type] = 1;
+  }
+  const number = questionNumbers[type];
+  // Set `name` in the following format: DropdownQuestion1, CheckboxQuestion6, etc.
+  question.name = type[0].toUpperCase() + type.substring(1) + "Question" + number;
+  questionNumbers[type] = number + 1;
 });
 ```
 
