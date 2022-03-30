@@ -258,6 +258,13 @@ test("Simulator view switch", (): any => {
   model.simulator.device = "iPhone5";
   expect(model.simulator.simulatorMainCssClass).toEqual("svd-simulator-main--frame");
 });
+test("Simulator in iphone5", (): any => {
+  let creator: CreatorTester = new CreatorTester();
+  let model: TestSurveyTabViewModel = getTestModel(creator);
+  model.simulator.device = "iPhone5";
+  expect(model.simulator.simulatorFrame.deviceWidth).toEqual(568);
+  expect(model.simulator.simulatorFrame.deviceHeight).toEqual(320);
+});
 test("Hide Test Again action on leaving Preview", (): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = {

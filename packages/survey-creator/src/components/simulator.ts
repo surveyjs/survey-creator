@@ -43,17 +43,17 @@ export class SurveySimulatorComponent {
         return undefined;
       }
       const device = simulatorDevices[this.activeDevice];
-      const scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
+      const scale = DEFAULT_MONITOR_DPI / device.ppi;
 
       const deviceWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
       const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
       const deviceLandscapedFrameWidth = (this.landscapeOrientation ? device.frameHeight : device.frameWidth);
       const deviceLandscapedFrameHeight = (this.landscapeOrientation ? device.frameWidth : device.frameHeight);
-      const frameWidth = (deviceLandscapedFrameWidth / device.cssPixelRatio) * scale;
-      const frameHeight = (deviceLandscapedFrameHeight / device.cssPixelRatio) * scale;
+      const frameWidth = deviceLandscapedFrameWidth * scale;
+      const frameHeight = deviceLandscapedFrameHeight * scale;
 
       return {
-        scale: this.simulatorScaleEnabled ? scale : 1,
+        scale: this.simulatorScaleEnabled ? scale * device.cssPixelRatio : 1,
         frameWidth: frameWidth,
         frameHeight: frameHeight,
         landscapedFrameWidth: this.landscapeOrientation ? frameHeight : frameWidth,
