@@ -748,6 +748,21 @@ export class CreatorBase extends Base
    */
   public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
+   * Use this event to control drag&drop operations.
+   * <br/> sender the survey creator object that fires the event.
+   * <br/> options.survey the editing survey object.
+   * <br/> options.allow set it to false to disable dragging.
+   * <br/> options.target a target element that is dragging.
+   * <br/> options.source a source element. It can be null, if it is a new element, dragging from toolbox.
+   * <br/> options.parent a page or panel where target element is dragging.
+   * <br/> options.insertBefore an element before the target element is dragging. It can be null if parent container (page or panel) is empty or dragging an element under the last element of the container.
+   * <br/> options.insertAfter an element after the target element is dragging. It can be null if parent container (page or panel) is empty or dragging element to the top of the parent container.
+   */
+  public onDragDropAllow: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
    * This callback is used internally for providing survey JSON text.
    */
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
@@ -1471,6 +1486,10 @@ export class CreatorBase extends Base
       this.doOnPageAdded(options.page);
     });
     survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
+    survey.onDragDropAllow.add(function (sender, options) {
+      options.survey = sender;
+      this.onDragDropAllow.fire(self, options);
+    });
     this.setSurvey(survey);
     const currentPlugin = this.getPlugin(this.activeTab);
     if (!!currentPlugin && !!currentPlugin.update) {
