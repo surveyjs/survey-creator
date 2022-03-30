@@ -23,8 +23,8 @@ QUnit.test("Simulate survey in iPhone5", function (assert) {
   test.setJSON({ questions: [{ type: "text", name: "q1" }] });
   const simulator = new SurveySimulatorComponent(test);
   simulator.activeDevice = "iPhone5";
-  assert.equal(simulator.koSimulatorFrame().realWidth, 284);
-  assert.equal(simulator.koSimulatorFrame().realHeight, 160);
+  assert.equal(simulator.koSimulatorFrame().deviceWidth, 568);
+  assert.equal(simulator.koSimulatorFrame().deviceHeight, 320);
 });
 
 QUnit.test("koPages, koActive", function (assert) {

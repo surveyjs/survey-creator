@@ -6,11 +6,11 @@
   >
     <div
       class="svd-simulator-frame"
-      data-bind="style: { width: (landscapeOrientation ? simulatorFrame.frameHeight: simulatorFrame.frameWidth) + 'px', height: (landscapeOrientation ? simulatorFrame.frameWidth : simulatorFrame.frameHeight) + 'px' }, css: simulatorFrame.cssClass"
+      data-bind="style: { width: simulatorFrame.landscapedFrameWidth + 'px', height: simulatorFrame.landscapedFrameHeight + 'px' }, css: simulatorFrame.cssClass"
     ></div>
     <div
       class="svd-simulator"
-      data-bind="style: { width: simulatorFrame.width / simulatorFrame.scale + 'px', height: simulatorFrame.height / simulatorFrame.scale + 'px', transform: 'scale(' + simulatorFrame.scale + ') translate(-50%, -50%)' }"
+      data-bind="style: { width: simulatorFrame.deviceWidth + 'px', height: simulatorFrame.deviceHeight + 'px', transform: 'scale(' + simulatorFrame.scale + ') translate(-50%, -50%)' }"
     >
       <survey-widget
         class="svd-simulator-content"
