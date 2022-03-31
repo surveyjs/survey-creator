@@ -1486,10 +1486,11 @@ export class CreatorBase extends Base
       this.doOnPageAdded(options.page);
     });
     survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
-    survey.onDragDropAllow.add(function (sender, options) {
+    survey.onDragDropAllow.add((sender, options) => {
       options.survey = sender;
-      this.onDragDropAllow.fire(self, options);
+      this.onDragDropAllow.fire(this, options);
     });
+
     this.setSurvey(survey);
     const currentPlugin = this.getPlugin(this.activeTab);
     if (!!currentPlugin && !!currentPlugin.update) {
