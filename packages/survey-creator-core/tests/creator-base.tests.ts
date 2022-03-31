@@ -1913,10 +1913,32 @@ test("creator.onActiveTabChanged", (): any => {
   expect(tabName).toEqual("test");
   expect(plugin).toEqual(creator.getPlugin("test"));
   expect(model).toEqual(plugin.model);
+  expect(creator.activeTab).toEqual("test");
   creator.makeNewViewActive("logic");
   expect(tabName).toEqual("logic");
   expect(plugin).toEqual(creator.getPlugin("logic"));
   expect(model).toEqual(plugin.model);
+  expect(creator.activeTab).toEqual("logic");
+});
+test("creator.onActiveTabChaning", (): any => {
+  const creator = new CreatorTester({
+    showTranslationTab: true,
+    showLogicTab: true,
+  });
+  let tabName;
+  let allow = true;
+  creator.onActiveTabChanging.add((sender, options) => {
+    tabName = options.tabName;
+    options.allow = allow;
+  });
+  expect(creator.viewType).toEqual("designer");
+  creator.makeNewViewActive("test");
+  expect(tabName).toEqual("test");
+  expect(creator.activeTab).toEqual("test");
+  allow = false;
+  creator.makeNewViewActive("logic");
+  expect(tabName).toEqual("logic");
+  expect(creator.activeTab).toEqual("test");
 });
 test("update tab content", (): any => {
   const creator = new CreatorTester({

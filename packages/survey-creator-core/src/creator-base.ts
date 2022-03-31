@@ -900,7 +900,21 @@ export class CreatorBase extends Base
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
   }
+  /**
+   * The event is called when creator is going to change the active tab.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.tabName the name of new active tab
+   */
+  public onActiveTabChanging: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
+  /**
+   * The event is called when creator active tab is changed.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.tabName the name of new active tab
+   */
   public onActiveTabChanged: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
@@ -922,6 +936,9 @@ export class CreatorBase extends Base
    */
   public makeNewViewActive(viewName: string): boolean {
     if (viewName == this.viewType) return false;
+    const chaningOptions = { tabName: viewName, allow: true };
+    this.onActiveTabChanging.fire(this, chaningOptions);
+    if (!chaningOptions.allow) return;
     if (!this.canSwitchViewType()) return false;
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
