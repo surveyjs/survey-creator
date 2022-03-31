@@ -16,7 +16,7 @@ If you want to get the most from our Survey Creator, then we hope that the follo
   - [Group Toolbox Items by Categories](#group-toolbox-items-by-categories)
   - [Customize Predefined Toolbox Items](#customize-predefined-toolbox-items)
   - [Add a Custom Toolbox Item](#add-a-custom-toolbox-item)
-- [Remove properties from SurveyJS Elements or hide them](#remove-properties-from-surveyjs-elements-or-hide-them)
+- [Hide Properties from the Property Grid](#hide-properties-from-the-property-grid)
 - [Add properties into SurveyJS Elements](#add-properties-into-surveyjs-elements)
 - [Customize Survey Elements on Creation](#customize-survey-elements-on-creation)
 - [Adorners](#adorners)
@@ -366,39 +366,37 @@ NEW SURVEY CREATOR DOESN'T HAVE THE ADD TO TOOLBOX ADORNER YET
 
 <div id="removeproperties"></div>
 
-## Remove properties from SurveyJS Elements or hide them
+## Hide Properties from the Property Grid
 
-The most popular task is to remove or hide existing properties in the Survey Creator.
+If you do not want users to change a survey property, you can hide it from the Property Grid. Survey Creator allows you to hide an individual property or multiple properties at once.
 
-There is a difference between removing and hiding. If you remove a property, then SurveyJS will not be able to restore it from JSON and save it back to JSON. SurveyJS will not have any information about the removed property. So, to remove properties, make sure that you do not need these properties anymore.
+To hide a single survey property, call the `getProperty(questionType, propertyName)` method on the `Survey.Serializer` object as follows:
 
-Here is an example of removing the [title](https://surveyjs.io/Documentation/Library?id=Question#title) and [choicesByUrl](https://surveyjs.io/Documentation/Library?id=QuestionSelectBase#choicesByUrl) properties.
-```javascript
-//remove a property from the question class and as result from all questions
-Survey.Serializer.removeProperty("question", "title");
-//remove choicesByUrl from checkbox, dropdown and radiogroup questions
-Survey.Serializer.removeProperty("selectbase", "choicesByUrl");
+```js
+// Hide the `title` property for Boolean questions
+Survey.Serializer.getProperty("boolean", "title").visible = false;
+
+// In modular applications:
+import { Serializer } from "survey-core";
+Serializer.getProperty("boolean", "title").visible = false;
 ```
 
-You can make these properties invisible in Survey Creator and still be able to load/save them in JSON by setting their [visible](https://surveyjs.io/Documentation/Library?id=Question#visible) property to false.
-```javascript
-//make a property, from the question class and as result from all questions, invisible
-Survey.Serializer.findProperty("question", "title").visible = false;
-//make choicesByUrl property from checkbox, dropdown and radiogroup questions invisible
-Survey.Serializer.findProperty("selectbase", "choicesByUrl").visible = false;
-```
-This work perfect, if you need to hide a few properties. If the list of properties you want to make invisible is large, you can use SurveyCreator's [onShowingProperty](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onShowingProperty) event.
-```javascript
-creator.onShowingProperty.add(function (sender, options) {
-    //check options.obj.getType() if needed. if (options.obj.getType() == "survey")
-    options.canShow = myBlackList.indexOf(options.property.name) < 0; //show if it is not in a blacklist
-    //You may do opposite and use the white list
-    //options.canShow = myWhiteList.indexOf(options.property.name) > -1; //show if it is in a white list
+If you want to hide multiple properties, handle the Survey Creator's [`onShowingProperty`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onShowingProperty) event. Its second parameter exposes the `canShow` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
+
+```js
+const blackList = [ "visible", "isRequired" ];
+// const whiteList = [ "title", "name" ];
+
+creator.onShowingProperty.add(function (_, options) {
+  if (options.obj.getType() == "panel") {
+    // Hide properties found in `blackList`
+    options.canShow = blackList.indexOf(options.property.name) < 0;
+
+    // Hide all properties except those found in `whiteList`
+    // options.canShow = whiteList.indexOf(options.property.name) > -1;
+  }
 });
 ```
-
-For more details, review the [Remove properties](https://surveyjs.io/Examples/Survey-Creator/?id=removeproperties) example.
-
 
 <div id="addproperties"></div>
 
