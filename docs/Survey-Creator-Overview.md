@@ -20,7 +20,9 @@ If you want to get the most from our Survey Creator, then we hope that the follo
 - [Add properties into SurveyJS Elements](#add-properties-into-surveyjs-elements)
 - [Customize Survey Elements on Creation](#customize-survey-elements-on-creation)
 - [Adorners](#adorners)
-- [Accessing Surveys instance: designer and test surveys](#accessing-surveys-instance-designer-and-test-surveys)
+- [Access Survey Instances Within Survey Creator](#access-survey-instances-within-survey-creator)
+  - [Design Mode Survey Instance](#design-mode-survey-instance)
+  - [Preview Mode Survey Instance](#preview-mode-survey-instance)
 
 
 <div id="platforms"></div>
@@ -304,6 +306,8 @@ creator.toolbox.addItem({
 
 <!--
 
+WE HAVEN'T COME UP WITH A VERSION FOR REACT YET
+
     <div id="toolbox-customwidgets"></div>
 
     ### Integrate 3rd-Party Components as Question Editors
@@ -326,6 +330,8 @@ creator.toolbox.addItem({
 -->
 
 <!--  
+
+NEW SURVEY CREATOR DOESN'T HAVE THE ADD TO TOOLBOX ADORNER YET 
 
     <div id="toolbox-existing"></div>
 
@@ -810,7 +816,7 @@ creator.onQuestionAdded.add(function (_, options) {
 
 ## Adorners
 
-Adorners are UI elements that allow Survey Creator users to manipulate survey elements. Adorners overlay survey elements on the design surface. Displayed adorners depend on the survey element type. The following image highlights adorners on a Dropdown question:
+Adorners are UI elements that allow Survey Creator users to manipulate survey elements. Adorners are added to survey elements on the design surface. Displayed adorners depend on the survey element type. The following image highlights adorners on a Dropdown question:
 
 <img src="./images/surver-creator-dropdown-adorners.png" alt="Survey Creator - Adorners" width="50%">
 
@@ -852,34 +858,33 @@ SurveyCreator.removeAdorners();
 
 <div id="accesssurveys"></div>
 
-## Accessing Surveys instance: designer and test surveys
+## Access Survey Instances Within Survey Creator
 
-There are two surveys instance inside the Survey Creator. Designer survey that you may see on “Survey Designer” tab and test survey that you may test on “Test Survey” tab.
+Survey Creator contains different survey instances for design and preview modes. In design mode, survey elements have [adorners](#adorners). In preview mode, the survey is displayed as respondents will see it.
 
-The designer survey looks and behavior different since it works in designer mode and we are rendering [adorners](#adorners) on its elements. You may get access to it at any time as **creator.survey**.
+### Design Mode Survey Instance
 
-However, you should be careful and do not cache this instance, since Survey Creator may recreate it, for example after switching into “Survey Designer” tab from “JSON Editor” tab. You may handle the survey recreation by using [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onDesignerSurveyCreated) event.
+To access the design mode survey instance, use the Survey Creator's [survey](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#survey) property. You can do that at any point in your application. Use the [Survey API](https://surveyjs.io/Documentation/Library?id=surveymodel) to manipulate the survey instance. For example, the following code changes the survey [`title`](https://surveyjs.io/Documentation/Library?id=surveymodel#title):
 
-By accessing the designer survey instance, you may modify the survey as you need it. For example, the following code add a new page, make it current and add a panel with two questions in it.
-```javascript
-//add New Page and make it current;
-creator.addPage();
-//get survey instance
-var survey = creator.survey;
-//Add panel and questions as you would do with the regular survey instance
-var panel = survey.currentPage.addNewPanel("address");
-panel.title = "Please type your contact information:";
-var email = panel.addNewQuestion("text", "email");
-email.title = "E-mail:";
-email.inputType = "email";
-var phone = panel.addNewQuestion("text", "phone");
-phone.title = "Phone:";
-phone.inputType = "tel";
+```js
+creator.survey.title = "My Survey";
 ```
 
-Unlike designer survey, test survey instance exists when end-user switches into “Test Survey” tab. You should handle onTestSurveyCreated event to get its instance and make all required modification.
-```javascript
-creator.onTestSurveyCreated.add(function(sender, options) {
-  options.survey.title = "You are testing survey at: " + new Date().toLocaleTimeString();
+Survey Creator may create a new design mode survey instance during the design process, for example, when the user switches from the JSON Editor tab back to Designer. To handle the survey recreation, use the [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onDesignerSurveyCreated) event.
+
+```js
+creator.onDesignerSurveyCreated.add(function (_, options) {
+  // Recreated survey instance is stored in the `options.survey` property
+  console.log(options.survey);
+})
+```
+
+### Preview Mode Survey Instance
+
+The preview mode survey instance is recreated each time a user opens the Preview tab. To access this instance, handle the [onTestSurveyCreated](https://surveyjs.io/Documentation/Survey-Creator?id=surveyeditor#onTestSurveyCreated) event:
+
+```js
+creator.onTestSurveyCreated.add(function (_, options) {
+  options.survey.title = "You started previewing the survey at: " + new Date().toLocaleTimeString();
 });
 ```
