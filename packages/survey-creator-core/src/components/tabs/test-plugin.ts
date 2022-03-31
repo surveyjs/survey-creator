@@ -1,6 +1,7 @@
 import { Action, ComputedUpdater, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
+import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
 
@@ -16,6 +17,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private designerAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
+  private sidebarTab: SidebarTabModel;
 
   public model: TestSurveyTabViewModel;
 
@@ -70,6 +72,7 @@ export class TabTestPlugin implements ICreatorPlugin {
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("test", this, getLocString("ed.testSurvey"));
+    this.sidebarTab = this.creator.sidebar.addTab("test");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
@@ -77,6 +80,9 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.model.onSurveyCreatedCallback = (survey) => {
       this.creator["onTestSurveyCreated"] && this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
     };
+    this.sidebarTab.model = this.model.settingsSurvey;
+    this.sidebarTab.componentName = "survey-widget";
+    this.creator.sidebar.activeTab = this.sidebarTab.id;
     this.update();
   }
   public update(): void {
@@ -107,6 +113,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.languageSelectorAction.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
+    this.sidebarTab.visible = false;
     return true;
   }
   public createActions() {

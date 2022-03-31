@@ -4,6 +4,8 @@ import "./test.scss";
 import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
+import { setSurveyJSONForPropertyGrid } from "../../property-grid";
+import { propertyGridCss } from "../../property-grid-theme/property-grid";
 
 // import template from "./test.html";
 
@@ -28,6 +30,7 @@ export class TestSurveyTabViewModel extends Base {
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
+  private settingsSurveyValue: SurveyModel;
 
   @property({
     defaultValue: false,
@@ -70,6 +73,7 @@ export class TestSurveyTabViewModel extends Base {
 
   constructor(private surveyProvider: CreatorBase) {
     super();
+    this.settingsSurveyValue = this.createSettingsSurvey();
     this.simulator = new SurveySimulatorModel();
   }
 
@@ -139,7 +143,7 @@ export class TestSurveyTabViewModel extends Base {
   }
   private getPageTitle(page: PageModel, reason = "survey-tester") {
     let title = this.surveyProvider.getObjectDisplayName(page, reason, page.title);
-    if(title === page.name && title.indexOf("page") === 0) {
+    if (title === page.name && title.indexOf("page") === 0) {
       const index: number = this.survey.pages.indexOf(page);
       return editorLocalization.getString("ed.pageTypeName") + " " + (index + 1);
     }
@@ -258,6 +262,47 @@ export class TestSurveyTabViewModel extends Base {
       if (items[i].data === page) return items[i];
     }
     return null;
+  }
+  public get settingsSurvey(): SurveyModel {
+    return this.settingsSurveyValue;
+  }
+  private getAvailableThemes(): string[] {
+    return ["defaultV2", "modern"];
+  }
+  private getSettingsSurveyJSON(): any {
+    const availableThemes = this.getAvailableThemes();
+    return {
+      elements: [
+        {
+          type: "panel",
+          name: "languages",
+          elements: [
+            {
+              type: "dropdown",
+              name: "defaultTheme",
+              titleLocation: "hidden",
+              readOnly: true,
+              choices: [availableThemes],
+              defaultValue: "defaultV2"
+            },
+          ],
+          title: "Themes"
+        }
+      ]
+    };
+  }
+  protected createSettingsSurvey(): SurveyModel {
+    var json = this.getSettingsSurveyJSON();
+    setSurveyJSONForPropertyGrid(json);
+    var res = this.surveyProvider.createSurvey(json, "test_settings");
+    res.css = propertyGridCss;
+    res.css.root += " st-properties";
+    res.onValueChanged.add((sender, options) => {
+      if (options.name == "locales") {
+
+      }
+    });
+    return res;
   }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
