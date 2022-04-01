@@ -13,27 +13,30 @@ test("Simple click", async (t) => {
   await t.expect(resultJson.pages[0].elements.length).eql(1);
 });
 
-const setupCategories = ClientFunction(async (t, windowWidth = 1210) => {
-  window["creator"].toolbox.changeCategories([
-    {
-      name: "panel",
-      category: "Panels"
-    }, {
-      name: "paneldynamic",
-      category: "Panels"
-    }, {
-      name: "matrix",
-      category: "Matrix"
-    }, {
-      name: "matrixdropdown",
-      category: "Matrix"
-    }, {
-      name: "matrixdynamic",
-      category: "Matrix"
-    }
-  ]);
+async function setupCategories(t, windowWidth = 1210) {
+  const changeCategories = ClientFunction(() => {
+    window["creator"].toolbox.changeCategories([
+      {
+        name: "panel",
+        category: "Panels"
+      }, {
+        name: "paneldynamic",
+        category: "Panels"
+      }, {
+        name: "matrix",
+        category: "Matrix"
+      }, {
+        name: "matrixdropdown",
+        category: "Matrix"
+      }, {
+        name: "matrixdynamic",
+        category: "Matrix"
+      }
+    ]);
+  });
+  await changeCategories();
   await t.resizeWindow(windowWidth, 600);
-});
+}
 
 test("Categories check hover icons", async (t) => {
   await setupCategories(t);
