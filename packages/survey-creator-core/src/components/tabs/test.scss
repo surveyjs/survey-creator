@@ -9,11 +9,18 @@ svc-tab-test {
 .svc-test-tab__content .svc-plugin-tab__content {
   overflow-y: auto;
 
+  .sv-root-modern .sv-completedpage,
+  .sv_default_css .sv_completed_page {
+    margin: 0;
+    background-color: $background-dim;
+  }
+
   .svc-preview__test-again {
     width: calcSize(33);
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 72px;
+    margin-top: 8px;
   }
 }
 
