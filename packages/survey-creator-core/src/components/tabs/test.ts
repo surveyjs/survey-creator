@@ -1,7 +1,7 @@
 import { SurveySimulatorModel } from "../simulator";
 
 import "./test.scss";
-import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css } from "survey-core";
+import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, modernCss, defaultStandardCss } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -71,21 +71,15 @@ export class TestSurveyTabViewModel extends Base {
     return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
   }
 
-  constructor(private surveyProvider: CreatorBase) {
+  constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
     super();
     this.settingsSurveyValue = this.createSettingsSurvey();
     this.simulator = new SurveySimulatorModel();
   }
 
-  public setJSON(json: any) {
-    this.json = json;
-    if (json != null) {
-      if (json.cookieName) {
-        delete json.cookieName;
-      }
-    }
+  private updateSimulatorSurvey(json: any, theme: any) {
     this.simulator.survey = this.surveyProvider.createSurvey(json || {}, "test");
-    this.simulator.survey.css = defaultV2Css;
+    this.simulator.survey.css = theme;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -119,8 +113,18 @@ export class TestSurveyTabViewModel extends Base {
     });
   }
 
+  public setJSON(json: any, currTheme: any) {
+    this.json = json;
+    if (json != null) {
+      if (json.cookieName) {
+        delete json.cookieName;
+      }
+    }
+    this.updateSimulatorSurvey(json, currTheme);
+  }
+
   public initialize(json: any, options: any) {
-    this.setJSON(json);
+    this.setJSON(json, this.startTheme);
     this.updatePageList();
 
     if (options.showPagesInTestSurveyTab !== undefined) {
@@ -172,7 +176,7 @@ export class TestSurveyTabViewModel extends Base {
   }
 
   public testAgain() {
-    this.setJSON(this.json);
+    this.setJSON(this.json, this.simulator.survey.css);
     this.updatePageList();
     this.show();
   }
@@ -266,8 +270,20 @@ export class TestSurveyTabViewModel extends Base {
   public get settingsSurvey(): SurveyModel {
     return this.settingsSurveyValue;
   }
+  private get themeMapper() {
+    return [
+      { name: "Default", theme: defaultV2Css },
+      { name: "Modern", theme: modernCss },
+      { name: "Default (legacy)", theme: defaultStandardCss }
+    ];
+  }
   private getAvailableThemes(): string[] {
-    return ["defaultV2", "modern"];
+    return ["Default", "Modern", "Default (legacy)"];
+  }
+  private getStartThemeName(): string {
+    const availableThemes = this.themeMapper.filter(item => item.theme.root === this.startTheme.root);
+    if (availableThemes.length > 0) return availableThemes[0].name;
+    return "Default";
   }
   private getSettingsSurveyJSON(): any {
     const availableThemes = this.getAvailableThemes();
@@ -275,21 +291,34 @@ export class TestSurveyTabViewModel extends Base {
       elements: [
         {
           type: "panel",
-          name: "languages",
+          name: "themes",
           elements: [
             {
               type: "dropdown",
-              name: "defaultTheme",
-              titleLocation: "hidden",
-              readOnly: true,
-              choices: [availableThemes],
-              defaultValue: "defaultV2"
+              name: "appliedTheme",
+              title: "Applied theme",
+              titleLocation: "top",
+              choices: availableThemes,
+              defaultValue: this.getStartThemeName(),
+              showOptionsCaption: false
             },
           ],
           title: "Themes"
         }
       ]
     };
+  }
+  private updateResultsTemplate(theme) {
+    this.simulator.survey.css = theme;
+    this.simulator.survey.render();
+  }
+  private setTheme(themeName: string): void {
+    const availableThemes = this.themeMapper.filter(item => item.name === themeName);
+    let theme = <any>defaultV2Css;
+    if (availableThemes.length > 0) {
+      theme = availableThemes[0].theme;
+    }
+    this.isRunning ? this.updateSimulatorSurvey(this.json, theme) : this.updateResultsTemplate(theme);
   }
   protected createSettingsSurvey(): SurveyModel {
     var json = this.getSettingsSurveyJSON();
@@ -298,8 +327,8 @@ export class TestSurveyTabViewModel extends Base {
     res.css = propertyGridCss;
     res.css.root += " st-properties";
     res.onValueChanged.add((sender, options) => {
-      if (options.name == "locales") {
-
+      if (options.name === "appliedTheme") {
+        this.setTheme(options.value);
       }
     });
     return res;

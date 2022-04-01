@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
+import { Action, ComputedUpdater, defaultV2Css, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
@@ -18,6 +18,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private prevPageAction: Action;
   private nextPageAction: Action;
   private sidebarTab: SidebarTabModel;
+  private simulatorTheme: any = defaultV2Css;
 
   public model: TestSurveyTabViewModel;
 
@@ -72,17 +73,19 @@ export class TabTestPlugin implements ICreatorPlugin {
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("test", this, getLocString("ed.testSurvey"));
-    this.sidebarTab = this.creator.sidebar.addTab("test");
+    // this.sidebarTab = this.creator.sidebar.addTab("test");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
-    this.model = new TestSurveyTabViewModel(this.creator);
+    this.model = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
     this.model.onSurveyCreatedCallback = (survey) => {
       this.creator["onTestSurveyCreated"] && this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
     };
-    this.sidebarTab.model = this.model.settingsSurvey;
-    this.sidebarTab.componentName = "survey-widget";
-    this.creator.sidebar.activeTab = this.sidebarTab.id;
+    if (this.sidebarTab) {
+      this.sidebarTab.model = this.model.settingsSurvey;
+      this.sidebarTab.componentName = "survey-widget";
+      this.creator.sidebar.activeTab = this.sidebarTab.id;
+    }
     this.update();
   }
   public update(): void {
@@ -107,13 +110,16 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
+      this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
       this.model = undefined;
+    }
+    if (this.sidebarTab) {
+      this.sidebarTab.visible = false;
     }
     this.languageSelectorAction.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
-    this.sidebarTab.visible = false;
     return true;
   }
   public createActions() {
