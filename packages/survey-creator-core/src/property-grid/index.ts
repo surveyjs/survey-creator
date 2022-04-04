@@ -1211,6 +1211,9 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     if (prop.name == "name") {
       json.textUpdateMode = "onBlur";
     }
+    if (!!prop.dataList) {
+      json.dataList = prop.dataList;
+    }
     return json;
   }
 }
