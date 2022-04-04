@@ -372,7 +372,7 @@ export class SurveyCreator
    * - `options.allowDragging` - Allows users to drag and drop the survey element.
    * - `options.allowEdit` - Allows users to edit survey element properties on the design surface. If you disable this property, users can edit the properties only in the Property Grid.
    * - `options.allowShowHideTitle` - Specifies whether users can change the `titleLocation` property to "hidden" or "default".
-   * 
+   *
    * To disable a user interaction, set the correponding `allow...` property to `false`.
    */
   public onElementAllowOperations: Survey.Event<
