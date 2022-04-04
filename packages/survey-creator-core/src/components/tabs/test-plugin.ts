@@ -73,7 +73,9 @@ export class TabTestPlugin implements ICreatorPlugin {
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("test", this, getLocString("ed.testSurvey"));
-    // this.sidebarTab = this.creator.sidebar.addTab("test");
+    if (creator.showPreviewSettings) {
+      this.sidebarTab = this.creator.sidebar.addTab("test");
+    }
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {

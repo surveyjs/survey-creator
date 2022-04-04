@@ -1,7 +1,7 @@
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
-import { IAction, ListModel } from "survey-core";
+import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 
 import "survey-core/survey.i18n";
@@ -358,4 +358,21 @@ test("Test correct survey results node levels", (): any => {
   const secondLvl: SurveyResultsItemModel[] = firstLvl[0].items;
   expect(secondLvl.length).toEqual(1);
   expect(secondLvl[0].lvl).toEqual(2);
+});
+test("Test sidebar with theme switcher", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showPreviewSettings: true });
+  creator.makeNewViewActive("test");
+  expect(creator.sidebar.hasVisibleTabs).toEqual(true);
+
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  const settingsModel: SurveyModel = testPlugin.model.settingsSurvey;
+  const questions: Question[] = settingsModel.getAllQuestions();
+  expect(questions.length).toEqual(1);
+
+  const switcherQw: QuestionDropdownModel = <QuestionDropdownModel>questions[0];
+  expect(switcherQw.name).toEqual("appliedTheme");
+  expect(switcherQw.value).toEqual("Default");
+
+  const possibleChoices = switcherQw.choices.map(item => item.text);
+  expect(possibleChoices).toEqual(["Default", "Modern", "Default (legacy)"]);
 });

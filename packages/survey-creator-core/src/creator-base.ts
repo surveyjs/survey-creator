@@ -850,6 +850,11 @@ export class CreatorBase extends Base
   public set showInvisibleElementsInPreviewTab(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
 
   /**
+   * Set this property to true if you want to show preview tab theme settings
+   */
+  public showPreviewSettings: boolean = false;
+
+  /**
    * Set this property to true if you want to show "page selector" in the toolabar instead of "pages editor"
    */
   public showPageSelectorInToolbar = false;
@@ -1312,6 +1317,10 @@ export class CreatorBase extends Base
     if (typeof options.showInvisibleElementsInTestSurveyTab !== "undefined") {
       this.showInvisibleElementsInPreviewTab =
         options.showInvisibleElementsInTestSurveyTab;
+    }
+    if (typeof options.showPreviewSettings !== "undefined") {
+      this.showPreviewSettings =
+        options.showPreviewSettings;
     }
     if (typeof options.showInvisibleElementsInPreviewTab !== "undefined") {
       this.showInvisibleElementsInPreviewTab =

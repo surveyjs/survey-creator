@@ -12,7 +12,12 @@ svc-tab-test {
   .sv-root-modern .sv-completedpage,
   .sv_default_css .sv_completed_page {
     margin: 0;
+    border: 0;
     background-color: $background-dim;
+  }
+
+  .sv_default_css .sv_body {
+    border: 0;
   }
 
   .svc-preview__test-again {
