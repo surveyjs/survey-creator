@@ -2921,9 +2921,10 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   return undefined;
 }
 export function getQuestionContentWrapperComponentName(element) {
-  if (element.getType() == "rating") {
+  if (element.getType() == "rating" && !element.isContentElement) {
     return "svc-rating-question-content";
   }
+  return undefined;
 }
 export function getElementWrapperComponentData(
   element: any,
