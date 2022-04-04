@@ -184,7 +184,20 @@ export class QuestionToolbox
    * Indicates whether the toolbox is currently in compact mode.
    * @see forceCompact
    */
-  @property({ defaultValue: false }) isCompact: boolean;
+  @property({
+    defaultValue: false,
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      if (target.hasCategories) {
+        if (val) {
+          target.isResponsivenessDisabled = false;
+          target.raiseUpdate(true);
+        } else {
+          target.isResponsivenessDisabled = true;
+          target.setActionsMode("large");
+        }
+      }
+    }
+  }) isCompact: boolean;
   /**
    * Specifies whether the toolbox should be in compact or full mode.
    * Accepts the following values:
@@ -214,7 +227,7 @@ export class QuestionToolbox
     this.dotsItemPopupModel.cssClass = "svc-toolbox-popup";
   }
   private onActiveCategoryChanged(newValue: string) {
-    const categories: Array<any> = this.categories;
+    const categories: Array<QuestionToolboxCategory> = this.categories;
     for (var i = 0; i < categories.length; i++) {
       var category = categories[i];
       category.collapsed = category.name !== newValue;
@@ -418,8 +431,7 @@ export class QuestionToolbox
     this.updateCategoriesState();
   }
   private updateCategoriesState() {
-    var noActive =
-      this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
+    var noActive = this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
     if (noActive) {
       this.activeCategory = "";
       if (this.keepAllCategoriesExpanded) {
