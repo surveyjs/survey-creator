@@ -1731,7 +1731,7 @@ export class CreatorBase extends Base
       return new DesignTimeSurveyModel(this, json);
     return new SurveyModel(json);
   }
-  @property() _stateValue: string;
+  private _stateValue: string;
   /**
    * Returns the creator state. It may return empty string or "saving" and "saved".
    */
