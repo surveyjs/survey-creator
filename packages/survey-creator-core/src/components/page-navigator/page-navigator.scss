@@ -56,7 +56,9 @@ survey-creator,
 }
 
 .svc-tab-designer--with-page-navigator {
-  padding-right: calcSize(6.5);
+  .svc-tab-designer_content {
+    margin-right: calcSize(6.5);
+  }
 }
 
 .svc-tab-designer__page-navigator {
@@ -70,7 +72,10 @@ survey-creator,
 
 .svc-creator__toolbox--right {
   .svc-tab-designer--with-page-navigator {
-    padding-right: 0;
+    .svc-tab-designer_content {
+      margin-right: 0;
+      margin-left: calcSize(6.5);
+    }
   }
   .svc-tab-designer__page-navigator {
     right: unset;

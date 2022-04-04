@@ -123,7 +123,6 @@ module.exports = function (options) {
   var percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
-      createSVGBundle();
     } else if (1 == percentage) {
       if (isProductionBuild) {
         console.log("Generating d.ts file: " + dts_generator);
@@ -206,11 +205,17 @@ module.exports = function (options) {
           loader: "html-loader",
         },
         {
-          test: /\.(svg|png)$/,
-          use: {
-            loader: "url-loader",
-            options: {},
-          },
+          test: /\.svg$/,
+          oneOf: [
+            {
+              exclude: path.resolve(__dirname, "./src/images/simulator/"),
+              use: "svg-inline-loader"
+            },
+            {
+              include: path.resolve(__dirname, "./src/images/simulator/"),
+              use: "url-loader"
+            },
+          ]
         },
       ],
     },

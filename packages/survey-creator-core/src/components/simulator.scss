@@ -11,7 +11,7 @@
   transform-origin: 0 0;
   top: 50%;
   left: 50%;
-  transform: scale(1.26) translate(-50%, -50%);  
+  transform: scale(1.26) translate(-50%, -50%);
 }
 
 .svd-simulator-wrapper {
@@ -92,19 +92,18 @@
   &.svd-simulator-genphone:before {
     background-image: url(../images/simulator/device-p.svg);
   }
-  
 }
 
 .svd-simulator-main {
   min-height: 100%;
-  &.svd-simulator-main--desktop{
+  &.svd-simulator-main--desktop {
     min-height: auto;
   }
-  &.svd-simulator-main--frame{
+  &.svd-simulator-main--frame {
     display: flex;
     align-items: center;
   }
-  &:not(.svd-simulator-main--frame){
+  &:not(.svd-simulator-main--frame) {
     background-color: transparent;
   }
   .sd-root-modern {

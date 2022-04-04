@@ -21,8 +21,8 @@ export function createQuestionViewModel(
     return model.select(model, new KnockoutMouseEvent(event));
   };
   model["koIsEmptyElement"] = ko.computed(() => {
-    if (model.surveyElement instanceof QuestionHtmlModel) {
-      return !model.surveyElement.locHtml["koRenderedHtml"]();
+    if (model.element instanceof QuestionHtmlModel) {
+      return !model.element.locHtml["koRenderedHtml"]();
     }
     return model.isEmptyElement;
   });

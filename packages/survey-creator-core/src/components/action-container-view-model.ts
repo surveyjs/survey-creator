@@ -8,7 +8,7 @@ import {
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 
-export class ActionContainerViewModel extends Base {
+export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: AdaptiveActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
@@ -16,7 +16,7 @@ export class ActionContainerViewModel extends Base {
 
   constructor(
     public creator: CreatorBase,
-    public surveyElement: SurveyElement
+    protected surveyElement: T
   ) {
     super();
     this.selectedPropPageFunc = (sender: Base, options: any) => {
@@ -29,15 +29,34 @@ export class ActionContainerViewModel extends Base {
         this.updateActionsProperties();
       }
     };
-    this.surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
-    this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
     this.actionContainer = new AdaptiveActionContainer();
     var actions: Array<Action> = [];
     this.buildActions(actions);
-    this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
-    this.actionContainer.setItems(actions);
+    this.setSurveyElement(surveyElement);
+    if(this.surveyElement) {
+      this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
+      this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
+      this.actionContainer.setItems(actions);
+    }
   }
-  protected checkActionProperties() {
+
+  protected detachElement(surveyElement: T): void {
+    if(surveyElement) {
+      surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+    }
+  }
+  protected attachElement(surveyElement: T): void {
+    if(surveyElement) {
+      surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+    }
+  }
+  protected setSurveyElement(surveyElement: T): void {
+    this.detachElement(this.surveyElement);
+    this.surveyElement = surveyElement;
+    this.attachElement(this.surveyElement);
+  }
+
+  protected checkActionProperties(): void {
     if (this.creator.isElementSelected(this.surveyElement)) {
       this.updateActionsProperties();
     }
@@ -45,7 +64,7 @@ export class ActionContainerViewModel extends Base {
 
   public dispose() {
     super.dispose();
-    this.surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+    this.detachElement(this.surveyElement);
   }
   protected onElementSelectedChanged(isSelected: boolean) {
     if (!isSelected) return;

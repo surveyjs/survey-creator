@@ -24,32 +24,32 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
   ) {
     super(creator, surveyElement, templateData);
     let stopEventProcessing = false;
-    this.question.onItemValuePropertyChanged.add((sender, options)=>{
-      if (!stopEventProcessing && this.question.rateValues.length === 0) {
+    this.element.onItemValuePropertyChanged.add((sender, options)=>{
+      if (!stopEventProcessing && this.element.rateValues.length === 0) {
         stopEventProcessing = true;
-        const rateValues = this.question.visibleRateValues;
+        const rateValues = this.element.visibleRateValues;
         var index = rateValues
           .map((item) => item.value)
           .indexOf(options.obj.value);
         rateValues[index][options.name] = options.newValue;
-        this.question.rateValues = rateValues;
+        this.element.rateValues = rateValues;
         stopEventProcessing = false;
       }
       return "";
     });
   }
 
-  get question(): QuestionRatingModel {
+  get element(): QuestionRatingModel {
     return this.surveyElement as QuestionRatingModel;
   }
 
   public addItem(model: QuestionRatingAdornerViewModel) {
     if (!model.allowAdd) return;
-    if (model.question.rateValues.length === 0) {
-      model.question.rateMax += model.question.rateStep;
+    if (model.element.rateValues.length === 0) {
+      model.element.rateMax += model.element.rateStep;
     } else {
       var nextValue = null;
-      var values = model.question.rateValues.map(function (item) {
+      var values = model.element.rateValues.map(function (item) {
         return item.value;
       });
       var itemText = surveyLocalization.getString("choices_Item");
@@ -58,7 +58,7 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
       var itemValue = new ItemValue(nextValue);
       itemValue.locOwner = <any>{
         getLocale: () => {
-          if (!!model.question["getLocale"]) return model.question.getLocale();
+          if (!!model.element["getLocale"]) return model.element.getLocale();
           return "";
         },
         getMarkdownHtml: (text: string) => {
@@ -68,28 +68,28 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
           return text;
         }
       };
-      model.question.rateValues = model.question.rateValues.concat([itemValue]);
+      model.element.rateValues = model.element.rateValues.concat([itemValue]);
     }
   }
   public removeItem(model: QuestionRatingAdornerViewModel) {
     if (!model.allowRemove) return;
     const property = Serializer.findProperty(
-      model.question.getType(),
+      model.element.getType(),
       "rateValues"
     );
     const itemIndex =
-      model.question.rateValues && model.question.rateValues.length - 1;
+      model.element.rateValues && model.element.rateValues.length - 1;
     const item =
-      (model.question.rateValues && model.question.rateValues[itemIndex]) ||
+      (model.element.rateValues && model.element.rateValues[itemIndex]) ||
       null;
     var allowDelete = model.creator.onCollectionItemDeletingCallback(
-      model.question,
+      model.element,
       property,
-      model.question.rateValues,
+      model.element.rateValues,
       item
     );
     if (allowDelete) {
-      var question = model.question;
+      var question = model.element;
       if (
         question.rateValues.length === 0 &&
         itemIndex === question.rateValues.length - 1

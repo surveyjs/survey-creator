@@ -1,8 +1,6 @@
 import {
   Base,
   IAction,
-  SurveyModel,
-  PageModel,
   unwrap
 } from "survey-core";
 import {
@@ -11,12 +9,12 @@ import {
   Popup,
   attachKey2click
 } from "survey-react-ui";
-import { CreatorBase, getLocString, PageNavigatorViewModel } from "survey-creator-core";
+import { PageNavigatorViewModel, PagesController } from "survey-creator-core";
 import React from "react";
 
 interface ISurveyPageNavigatorProps {
-  creator: CreatorBase;
-  pages: Array<PageModel>;
+  pagesController: PagesController;
+  pageEditMode: string;
 }
 
 export class SurveyPageNavigator extends SurveyElementBase<
@@ -30,7 +28,8 @@ export class SurveyPageNavigator extends SurveyElementBase<
     super(props);
     this.containerRef = React.createRef();
     this.model = new PageNavigatorViewModel(
-      props.creator.pagesController
+      props.pagesController,
+      props.pageEditMode
     );
   }
 
@@ -39,12 +38,14 @@ export class SurveyPageNavigator extends SurveyElementBase<
   }
   componentDidMount() {
     super.componentDidMount();
-    const el = this.containerRef.current as HTMLDivElement;
-    if (!!el) {
-      const self = this;
-      el.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
-        return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
-      };
+    if(this.props.pageEditMode !== "bypage") {
+      const el = this.containerRef.current as HTMLDivElement;
+      if (!!el) {
+        const self = this;
+        el.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
+          return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
+        };
+      }
     }
   }
   componentWillUnmount() {

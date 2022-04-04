@@ -3,6 +3,8 @@ import { Selector, ClientFunction } from "testcafe";
 export const url = "http://127.0.0.1:8080/testCafe/testcafe.html";
 // export const url =
 //     "http://127.0.0.1:7777/packages/survey-creator-knockout/example/index.html";
+export const urlByPage = "http://127.0.0.1:8080/testCafe/by-page.html";
+
 export const base64image =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==";
 
@@ -122,3 +124,9 @@ export async function setShowSidebar(newVal: boolean) {
     window["creator"].showSidebar = newVal;
   })(newVal);
 }
+export const explicitErrorHandler = ClientFunction(() => { window.addEventListener("error", e => {
+  if (e.message === "ResizeObserver loop completed with undelivered notifications." ||
+    e.message === "ResizeObserver loop limit exceeded") {
+    e.stopImmediatePropagation();
+  } });
+});

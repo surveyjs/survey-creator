@@ -180,7 +180,19 @@ export class QuestionToolbox
   @property({ defaultValue: false }) hasCategories: boolean;
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
+  /**
+   * Indicates whether the toolbox is currently in compact mode.
+   * @see forceCompact
+   */
   @property({ defaultValue: false }) isCompact: boolean;
+  /**
+   * Specifies whether the toolbox should be in compact or full mode.
+   * Accepts the following values:
+   * - `true` - Toolbox is always in compact mode.
+   * - `false` - Toolbox is always in full mode.
+   * - `undefined` - Toolbox switches between the full and compact modes automatically based on available width.
+   * @see isCompact
+   */
   @property() forceCompact: boolean;
 
   constructor(

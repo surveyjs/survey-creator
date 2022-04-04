@@ -26,6 +26,7 @@ import { SvgBundleComponent } from "./SvgBundle";
 
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;
+  style?: any;
 }
 
 export class SurveyCreatorComponent extends SurveyElementBase<
@@ -41,6 +42,9 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
   protected getStateElement(): Base {
     return this.props.creator;
+  }
+  get style(): any {
+    return this.props.style;
   }
   componentDidMount() {
     super.componentDidMount();
@@ -75,7 +79,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     }
     //AM: width unrecognized by react
     return (
-      <div className={creatorClassName} ref={this.rootNode}>
+      <div className={creatorClassName} ref={this.rootNode} style={this.style}>
         <SvgBundleComponent></SvgBundleComponent>
         <div className={areaClassName}>
           <div className={fullContainerClassName}>

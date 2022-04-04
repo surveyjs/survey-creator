@@ -8,17 +8,6 @@
 .sl-table__row {
   position: relative;
 }
-.sl-table__cell--actions {
-  position: absolute;
-  &:first-child {
-    left: 0;
-    transform: translateX(-100%);
-  }
-  &:last-child {
-    right: 0;
-    transform: translateX(100%);
-  }
-}
 
 .sl-table__cell.st-table__cell--actions:first-child .sv-action-bar {
   margin-top: calcSize(-0.5);
@@ -108,6 +97,19 @@
   vertical-align: top;
   padding: calcSize(2) 0;
   width: 100%;
+}
+
+.sl-table__cell--actions {
+  position: absolute;
+  width: max-content;
+  &:first-child {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  &:last-child {
+    right: 0;
+    transform: translateX(100%);
+  }
 }
 
 .sl-table__cell--detail-button {
