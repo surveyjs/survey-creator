@@ -135,10 +135,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       id: "svd-save",
       iconName: "icon-save",
       action: () => this.creator.doSave(),
-      active: <any>new ComputedUpdater<boolean>(() => {
-        return this.creator.state === "modified";
-      }),
-      enabled: <any>new ComputedUpdater<boolean>(() => this.creator.state === "modified"),
+      active: false,
+      enabled: false,
       visible: <any>new ComputedUpdater<boolean>(() => {
         const isDesignerTabActive = this.creator.activeTab === "designer";
         return this.creator.showSaveButton && isDesignerTabActive;
