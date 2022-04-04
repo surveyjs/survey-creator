@@ -3,7 +3,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-  await t.resizeWindow(1200, 600);
+  await t.resizeWindow(1900, 600);
 });
 
 test("Simple click", async (t) => {
@@ -13,7 +13,7 @@ test("Simple click", async (t) => {
   await t.expect(resultJson.pages[0].elements.length).eql(1);
 });
 
-async function setupCategories(t, windowWidth = 1210) {
+async function setupCategories(t, windowWidth = 1910) {
   const changeCategories = ClientFunction(() => {
     window["creator"].toolbox.changeCategories([
       {
@@ -78,17 +78,17 @@ test("Categories large mode", async (t) => {
 });
 
 test.before(async (t) => {
-  await t.resizeWindow(1100, 600);
+  await t.resizeWindow(1200, 600);
 })("Categories Responsiveness small -> large", async (t) => {
   const categories = Selector(".svc-toolbox__category-header");
   const visibleToolboxItems = Selector(".svc-toolbox__tool").filterVisible();
   await setupCategories(t, 1110);
   await t
-    .expect(Selector(".sv-dots__item").visible).ok()
+    .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(categories.count).eql(0)
     .expect(visibleToolboxItems.count).eql(11)
 
-    .resizeWindow(1200, 600)
+    .resizeWindow(1900, 600)
     .expect(categories.count).eql(3)
     .expect(visibleToolboxItems.count).eql(15)
 
@@ -100,7 +100,7 @@ test.before(async (t) => {
 });
 
 test.before(async (t) => {
-  await t.resizeWindow(1200, 600);
+  await t.resizeWindow(1900, 600);
 })("Categories Responsiveness large -> small", async (t) => {
   const categories = Selector(".svc-toolbox__category-header");
   const visibleToolboxItems = Selector(".svc-toolbox__tool").filterVisible();
@@ -110,7 +110,7 @@ test.before(async (t) => {
     .expect(categories.count).eql(3)
     .expect(visibleToolboxItems.count).eql(15)
 
-    .resizeWindow(1100, 600)
+    .resizeWindow(1200, 600)
     .expect(Selector(".sv-dots__item").visible).ok()
     .expect(categories.count).eql(0)
     .expect(visibleToolboxItems.count).eql(11);
