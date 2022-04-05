@@ -33,7 +33,7 @@ jobs:
 
   steps:
   - checkout: self
-  - checkout: Service
+  - checkout: EmptyRepo
     persistCredentials: true
     clean: true
 
@@ -49,13 +49,14 @@ jobs:
       TargetFolder: "$(Build.SourcesDirectory)/Temp/"
       OverWrite: true
     displayName: "Copy package.json for cache key"
+
   - task: Cache@2
     inputs:
       key: 'npm-cache-creator-v1 | $(Build.SourcesDirectory)/Temp/package.json'
       path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator/node_modules
       cacheHitVar: NPM_CACHE_RESTORED
     displayName: Cache NPM
-
+  
   - powershell: |
       $env:GIT_REDIRECT_STDERR = '2>&1'
       git config --global user.email "kurmanov.work@gmail.com"
@@ -139,20 +140,6 @@ jobs:
       npm run testcafe_ci
     displayName: 'Functional tests'
 
-  # read about the problem with git output ($env:GIT_REDIRECT_STDERR = '2>&1') :
-  # https://github.com/microsoft/azure-pipelines-yaml/issues/248
-  # https://stackoverflow.com/questions/58485585/azure-pipeline-powershell-and-git-on-windows-server-2019-gives-error-in-output
-  - powershell: |
-      cd $(Build.SourcesDirectory)/service
-      git checkout master
-      git pull origin master
-      git fetch --tags --force
-      git add surveyjs.io/App_Data/DocsEditor
-      git commit -m "updated survey-creator docs"
-      git pull origin master
-      git push origin master
-    displayName: 'Git surveyjs/service push updated docs'
-
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator/build'
@@ -168,7 +155,7 @@ jobs:
 - job: CreatorV2Core
   steps:
   - checkout: self
-  - checkout: EmptyRepo
+  - checkout: Service
     persistCredentials: true
     clean: true
 
@@ -300,6 +287,20 @@ jobs:
       TargetFolder: '$(Build.SourcesDirectory)/service/surveyjs.io/App_Data/DocsEditor'
       CleanTargetFolder: false
     displayName: 'Copy generated docs to the local surveyjs/service repo'
+
+  # read about the problem with git output ($env:GIT_REDIRECT_STDERR = '2>&1') :
+  # https://github.com/microsoft/azure-pipelines-yaml/issues/248
+  # https://stackoverflow.com/questions/58485585/azure-pipeline-powershell-and-git-on-windows-server-2019-gives-error-in-output
+  - powershell: |
+      cd $(Build.SourcesDirectory)/service
+      git checkout master
+      git pull origin master
+      git fetch --tags --force
+      git add surveyjs.io/App_Data/DocsEditor
+      git commit -m "updated survey-creator docs"
+      git pull origin master
+      git push origin master
+    displayName: 'Git surveyjs/service push updated docs'
 
 - job: CreatorV2React
   dependsOn: CreatorV2Core
