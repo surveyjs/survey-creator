@@ -1,7 +1,7 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, setJSON } from "../../helper";
+import { url, screenshotComparerOptions, setJSON, explicitErrorHandler } from "../../helper";
 
 const title = "ImagePicker Screenshot";
 
@@ -42,6 +42,7 @@ const json = {
 };
 
 test("Hover", async (t) => {
+  await explicitErrorHandler();
   await t.resizeWindow(2560, 1440);
   await setJSON(json);
   await t.wait(3000);
@@ -52,6 +53,11 @@ test("Hover", async (t) => {
 
   await t.click(imagePicker).hover(firstImage);
   await takeScreenshot("image-picker-hover.png", imagePicker, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+  await ClientFunction(() => { (<any>window).creator.survey.getAllQuestions()[0].isResponsive = true; })();
+  await takeScreenshot("image-picker-responsive-hover.png", imagePicker, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
