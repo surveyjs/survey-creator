@@ -1,6 +1,6 @@
 import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
 import { SurveyLogicAction, SurveyLogicItem } from "./logic-items";
@@ -105,7 +105,7 @@ export class SurveyLogicUI extends SurveyLogic {
     }
   }
   protected onReadOnlyChanged(): void {
-    if(!this.itemsSurvey) return;
+    if (!this.itemsSurvey) return;
     this.itemsSurvey.mode = this.readOnly ? "display" : "edit";
   }
   public get expressionEditor(): ConditionEditor {
@@ -205,8 +205,42 @@ export class SurveyLogicUI extends SurveyLogic {
   protected getEditingActions(): Array<SurveyLogicAction> {
     return this.itemEditor.getEditingActions();
   }
+
   protected getLogicItemSurveyJSON(): any {
-    var json = {
+    const creator = (<any>this.survey).creator;
+    const json = (creator && creator.useTableViewInLogicTab) ? this.getTwoColumnsLayout() : this.getOneColumnLayout();
+    setSurveyJSONForPropertyGrid(json);
+    return json;
+  }
+  private getTwoColumnsLayout() {
+    return {
+      elements: [
+        {
+          type: "matrixdynamic",
+          name: "items",
+          titleLocation: "hidden",
+          detailPanelMode: "underRowSingle",
+          allowAddRows: false,
+          allowAdaptiveActions: false,
+          rowCount: 0,
+          columns: [
+            {
+              cellType: "linkvalue",
+              name: "conditions",
+              title: this.getLocString("ed.lg.conditions")
+            },
+            {
+              cellType: "linkvalue",
+              name: "actions",
+              title: this.getLocString("ed.lg.actions")
+            }
+          ]
+        }
+      ]
+    };
+  }
+  private getOneColumnLayout() {
+    return {
       elements: [
         {
           type: "matrixdynamic",
@@ -229,8 +263,6 @@ export class SurveyLogicUI extends SurveyLogic {
         }
       ]
     };
-    setSurveyJSONForPropertyGrid(json);
-    return json;
   }
   private createExpressionPropertyEditor(): ConditionEditor {
     const res = new ConditionEditor(
@@ -249,13 +281,25 @@ export class SurveyLogicUI extends SurveyLogic {
   private getVisibleItems(): SurveyLogicItem[] {
     return this.items.filter(item => item.isNew || item.isSuitable(this.questionFilter, this.actionTypeFilter));
   }
+  private getDataFromItem(item: SurveyLogicItem) {
+    const creator = (<any>this.survey).creator;
+    if (creator && creator.useTableViewInLogicTab) {
+      return {
+        conditions: item.expressionText,
+        actions: item.actionsText
+      };
+    } else {
+      return { rules: item.getDisplayText() };
+    }
+  }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
     var data = [];
     this.visibleItems = this.getVisibleItems();
-    for (var i = 0; i < this.visibleItems.length; i++) {
-      data.push({ rules: this.visibleItems[i].getDisplayText() });
-    }
+    this.visibleItems.forEach(item => {
+      data.push(this.getDataFromItem(item));
+    });
+
     this.matrixItems.onHasDetailPanelCallback = (row) => { return true; };
     this.matrixItems.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,

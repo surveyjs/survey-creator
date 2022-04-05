@@ -125,6 +125,24 @@
   border-spacing: 0;
   table-layout: fixed;
 
+  thead {
+    th:first-child {
+      position: absolute;
+      left: 0;
+      transform: translateX(-100%);
+    }
+
+    th:last-child {
+      position: absolute;
+      right: 0;
+      transform: translateX(100%);
+    }
+
+    .sl-table__cell.st-table__cell--header {
+      text-align: left;
+    }
+  }
+
   tbody {
     tr:last-child {
       .sl-table__cell {

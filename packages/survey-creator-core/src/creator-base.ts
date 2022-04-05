@@ -147,6 +147,7 @@ export class CreatorBase extends Base
    * Set it to true to show "Logic" tab and to false to hide the tab
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
+  @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
   /**
    * Set delay for page hover
    */
@@ -351,14 +352,21 @@ export class CreatorBase extends Base
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * Use this event to disable some operations for an element (question/panel).
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object question/panel
-   * <br/> options.allowDelete set it to false to disable deleting the object
-   * <br/> options.allowCopy set it to false to disable copying the object
-   * <br/> options.allowDragging set it to false to disable dragging the element
-   * <br/> options.allowChangeType set it to false to disable changing element type
-   * <br/> options.allowChangeRequired set it to false to disable changing isRequired property
+   * Use this event to disable user interactions with a question or panel on the design surface.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey element instance (question or panel) for which you can disable user interactions.
+   * - `options.allowAddToToolbox` - Allows users to save the current survey element configuration in the Toolbox.
+   * - `options.allowChangeRequired` - Allows users to make the survey element required.
+   * - `options.allowChangeType` - Allows users to change the survey element type.
+   * - `options.allowCopy` - Allows users to duplicate the survey element.
+   * - `options.allowDelete` - Allows users to delete the survey element.
+   * - `options.allowDragging` - Allows users to drag and drop the survey element.
+   * - `options.allowEdit` - Allows users to edit survey element properties on the design surface. If you disable this property, users can edit the properties only in the Property Grid.
+   *
+   * To disable a user interaction, set the correponding `allow...` property to `false`.
    */
   public onElementAllowOperations: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -1731,7 +1739,7 @@ export class CreatorBase extends Base
       return new DesignTimeSurveyModel(this, json);
     return new SurveyModel(json);
   }
-  @property() _stateValue: string;
+  private _stateValue: string;
   /**
    * Returns the creator state. It may return empty string or "saving" and "saved".
    */
@@ -1743,6 +1751,11 @@ export class CreatorBase extends Base
     this.onStateChanged.fire(this, { val: value });
     if (!!value) {
       this.notify(this.getLocString("ed." + value));
+      const actions = this.toolbarItems.filter(a => a.id === "svd-save");
+      if (Array.isArray(actions) && actions.length > 0) {
+        actions[0].enabled = this.state === "modified";
+        actions[0].active = this.state === "modified";
+      }
     }
   }
   public onStateChanged: Survey.Event<
