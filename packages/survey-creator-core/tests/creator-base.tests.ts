@@ -1940,6 +1940,23 @@ test("creator.onActiveTabChaning", (): any => {
   expect(tabName).toEqual("logic");
   expect(creator.activeTab).toEqual("test");
 });
+test("creator.onDragDropAllow", (): any => {
+  const creator = new CreatorTester({});
+  let fired = false;
+  creator.onDragDropAllow.add((sender, options) => {
+    fired = true;
+  });
+
+  const survey = creator.survey;
+  const page = survey.addNewPage("page1");
+  const q1 = page.addNewQuestion("text", "q1");
+  const q2 = page.addNewQuestion("text", "q2");
+  const target = new QuestionTextModel("q1");
+  page.dragDropStart(q1, target);
+  page.dragDropMoveTo(q2, true);
+
+  expect(fired).toBeTruthy();
+});
 test("update tab content", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
