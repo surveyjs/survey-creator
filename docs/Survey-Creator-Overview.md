@@ -1,6 +1,6 @@
 # Survey Creator / Form Builder Overview
 
-The Survey Creator / Form Builder JavaScript component is a visual designer that allows the users of your application to create surveys and forms. Our component produces survey definitions in JSON format. You can store them in your database and load the definitions from it to display the surveys to respondents.
+Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in the JSON format. This configuration can be later used by the SurveyJS library to display the survey or form in your application.
 
 Survey Creator / Form Builder ships with the following features:
 
@@ -14,6 +14,8 @@ Survey Creator / Form Builder ships with the following features:
 - [3rd-party component integration](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
 
 [Try Survey Creator / Form Builder](https://surveyjs.io/create-survey)
+
+Survey Creator is **not available for free commercial usage**. If you want to integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/Licenses#SurveyCreator). However, you can use [online Survey Creator](https://surveyjs.io/create-survey) to produce JSON survey configurations and use them with SurveyJS in your application free of charge.
 
 For information on how to add Survey Creator / Form Builder to your application, refer to one of the following Get Started help topics:
 
