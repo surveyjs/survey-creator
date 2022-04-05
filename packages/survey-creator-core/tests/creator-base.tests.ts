@@ -17,6 +17,8 @@ import {
   Action,
   QuestionMatrixDynamicModel,
   QuestionCheckboxModel,
+  ComponentCollection,
+  QuestionCompositeModel
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -29,6 +31,7 @@ import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
+import { DesignTimeSurveyModel } from "../src/creator-base";
 
 import {
   getElementWrapperComponentData,
@@ -1228,6 +1231,20 @@ test("getElementWrapperComponentName", (): any => {
 
 test("getQuestionContentWrapperComponentName", (): any => {
   expect(getQuestionContentWrapperComponentName(new QuestionRatingModel(""))).toEqual("svc-rating-question-content");
+});
+
+test("getQuestionContentWrapperComponentName for component", (): any => {
+  ComponentCollection.Instance.add({
+    name: "test",
+    elementsJSON: [{ type: "rating", name: "rate1" }]
+  });
+  const creator = new CreatorTester();
+  const survey = new DesignTimeSurveyModel(creator, { questions: [{ type: "test", name: "q1" }] });
+  const qCustom = <QuestionCompositeModel>survey.getAllQuestions()[0];
+  const q = qCustom.panelWrapper.questions[0];
+  expect(q.name).toBe("rate1");
+  expect(survey.getQuestionContentWrapperComponentName(q)).toEqual("sv-template-renderer");
+  ComponentCollection.Instance.clear();
 });
 
 test("getElementWrapperComponentData", (): any => {
