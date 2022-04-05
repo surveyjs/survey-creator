@@ -180,6 +180,15 @@ export class SurveyLogicItem {
     return res;
   }*/
 
+  public get expressionText() {
+    const text = this.getExpressionAsDisplayText();
+    if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
+    return text;
+  }
+  public get actionsText() {
+    return this.actions.map(action => action.text).join(", ");
+  }
+
   public getDisplayText() {
     const conditionText = this.getExpressionAsDisplayText();
     let actionsText = "";

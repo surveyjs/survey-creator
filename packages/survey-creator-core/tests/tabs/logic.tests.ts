@@ -2232,3 +2232,30 @@ test("wrapTextByCurlyBraces", () => {
   settings.logic.closeBracket = "}";
   expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
 });
+
+test("SurveyLogicUI: useTableViewInLogicTab property", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.useTableViewInLogicTab = true;
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" }
+    ]
+  };
+  const survey = creator.survey;
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(logic.itemsSurvey.getQuestionByName("items"));
+  let rows = itemsQuestion.visibleRows;
+  expect(rows[0].cells[0].value).toEqual("{q1} == 1");
+  expect(rows[0].cells[1].value).toEqual("make question {q2} visible, make question {q3} visible");
+  logic.editItem(logic.items[0]);
+  logic.expressionEditor.text = "{q1}=3";
+  logic.saveEditableItem();
+  rows = itemsQuestion.visibleRows;
+  expect(rows[0].cells[0].value).toEqual("{q1} == 3");
+  expect(rows[0].cells[1].value).toEqual("make question {q2} visible, make question {q3} visible");
+});
