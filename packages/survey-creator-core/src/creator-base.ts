@@ -147,6 +147,7 @@ export class CreatorBase extends Base
    * Set it to true to show "Logic" tab and to false to hide the tab
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
+  @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
   /**
    * Set delay for page hover
    */
