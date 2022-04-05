@@ -1913,10 +1913,49 @@ test("creator.onActiveTabChanged", (): any => {
   expect(tabName).toEqual("test");
   expect(plugin).toEqual(creator.getPlugin("test"));
   expect(model).toEqual(plugin.model);
+  expect(creator.activeTab).toEqual("test");
   creator.makeNewViewActive("logic");
   expect(tabName).toEqual("logic");
   expect(plugin).toEqual(creator.getPlugin("logic"));
   expect(model).toEqual(plugin.model);
+  expect(creator.activeTab).toEqual("logic");
+});
+test("creator.onActiveTabChaning", (): any => {
+  const creator = new CreatorTester({
+    showTranslationTab: true,
+    showLogicTab: true,
+  });
+  let tabName;
+  let allow = true;
+  creator.onActiveTabChanging.add((sender, options) => {
+    tabName = options.tabName;
+    options.allow = allow;
+  });
+  expect(creator.viewType).toEqual("designer");
+  creator.makeNewViewActive("test");
+  expect(tabName).toEqual("test");
+  expect(creator.activeTab).toEqual("test");
+  allow = false;
+  creator.makeNewViewActive("logic");
+  expect(tabName).toEqual("logic");
+  expect(creator.activeTab).toEqual("test");
+});
+test("creator.onDragDropAllow", (): any => {
+  const creator = new CreatorTester({});
+  let fired = false;
+  creator.onDragDropAllow.add((sender, options) => {
+    fired = true;
+  });
+
+  const survey = creator.survey;
+  const page = survey.addNewPage("page1");
+  const q1 = page.addNewQuestion("text", "q1");
+  const q2 = page.addNewQuestion("text", "q2");
+  const target = new QuestionTextModel("q1");
+  page.dragDropStart(q1, target);
+  page.dragDropMoveTo(q2, true);
+
+  expect(fired).toBeTruthy();
 });
 test("update tab content", (): any => {
   const creator = new CreatorTester({

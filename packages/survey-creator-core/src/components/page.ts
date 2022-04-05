@@ -100,7 +100,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.creator.survey.currentPage = currentPage;
     }
     this.creator.selectElement(currentPage);
-    this.updateActionsProperties();
   }
 
   addNewQuestion(model: PageAdorner, event: IPortableMouseEvent) {

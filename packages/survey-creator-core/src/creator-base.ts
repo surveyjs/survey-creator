@@ -748,6 +748,21 @@ export class CreatorBase extends Base
    */
   public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
+   * Use this event to control drag&drop operations.
+   * <br/> sender the survey creator object that fires the event.
+   * <br/> options.survey the editing survey object.
+   * <br/> options.allow set it to false to disable dragging.
+   * <br/> options.target a target element that is dragging.
+   * <br/> options.source a source element. It can be null, if it is a new element, dragging from toolbox.
+   * <br/> options.parent a page or panel where target element is dragging.
+   * <br/> options.insertBefore an element before the target element is dragging. It can be null if parent container (page or panel) is empty or dragging an element under the last element of the container.
+   * <br/> options.insertAfter an element after the target element is dragging. It can be null if parent container (page or panel) is empty or dragging element to the top of the parent container.
+   */
+  public onDragDropAllow: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
    * This callback is used internally for providing survey JSON text.
    */
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
@@ -905,7 +920,21 @@ export class CreatorBase extends Base
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
   }
+  /**
+   * The event is called when creator is going to change the active tab.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.tabName the name of new active tab
+   */
+  public onActiveTabChanging: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
+  /**
+   * The event is called when creator active tab is changed.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.tabName the name of new active tab
+   */
   public onActiveTabChanged: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
@@ -927,6 +956,9 @@ export class CreatorBase extends Base
    */
   public makeNewViewActive(viewName: string): boolean {
     if (viewName == this.viewType) return false;
+    const chaningOptions = { tabName: viewName, allow: true };
+    this.onActiveTabChanging.fire(this, chaningOptions);
+    if (!chaningOptions.allow) return;
     if (!this.canSwitchViewType()) return false;
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
@@ -1480,6 +1512,11 @@ export class CreatorBase extends Base
       this.doOnPageAdded(options.page);
     });
     survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
+    survey.onDragDropAllow.add((sender, options) => {
+      options.survey = sender;
+      this.onDragDropAllow.fire(this, options);
+    });
+
     this.setSurvey(survey);
     const currentPlugin = this.getPlugin(this.activeTab);
     if (!!currentPlugin && !!currentPlugin.update) {

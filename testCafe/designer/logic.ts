@@ -484,3 +484,16 @@ test("check button hover/focus state", async (t) => {
     .expect(removeButtonIcon.nth(1).visible).notOk()
     .expect(removeButton.nth(1).classNames).notContains(focusedClassName);
 });
+
+test("Bug #2857: check scroll not appear", async (t) => {
+  await setJSON(surveyJSON);
+
+  const compareWidths = ClientFunction(() => {
+    const scrollableSelector = <HTMLElement>document.querySelector(".svc-logic-tab__content");
+    return scrollableSelector.offsetWidth >= scrollableSelector.scrollWidth;
+  });
+
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .expect(compareWidths()).ok();
+});
