@@ -1739,7 +1739,7 @@ export class CreatorBase extends Base
       return new DesignTimeSurveyModel(this, json);
     return new SurveyModel(json);
   }
-  @property() _stateValue: string;
+  private _stateValue: string;
   /**
    * Returns the creator state. It may return empty string or "saving" and "saved".
    */
@@ -1751,6 +1751,11 @@ export class CreatorBase extends Base
     this.onStateChanged.fire(this, { val: value });
     if (!!value) {
       this.notify(this.getLocString("ed." + value));
+      const actions = this.toolbarItems.filter(a => a.id === "svd-save");
+      if (Array.isArray(actions) && actions.length > 0) {
+        actions[0].enabled = this.state === "modified";
+        actions[0].active = this.state === "modified";
+      }
     }
   }
   public onStateChanged: Survey.Event<
