@@ -7,7 +7,7 @@ This article describes how to localize Survey Creator UI and give users the abil
 
 ## Localize Survey Creator UI
 
-Survey Creator UI is translated to multiple languages. We ship translation strings as [dictionary files](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). Localization engine that works with these files is implemented in a separate script/module. Reference this script in the `<head>` tag of your page or import this module in the component that renders Survey Creator:
+Survey Creator includes UI translations into several languages. We ship localized strings as [dictionary files](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). Localization engine that works with these files is available as a separate script/module. Reference this script in the `<head>` tag of your page or import this module in the component that renders Survey Creator:
 
 ```html
 <script src="https://unpkg.com/survey-creator-core/survey-creator-core.i18n.min.js"></script>
@@ -39,7 +39,7 @@ const translations = localization.getLocale("");
 translations.p.visible = "Is visible";
 // Change text for the `visible` property in Modal Editor
 translations.pe.visible = "Is element visible?";
-// Change text for the `visible` property in JSON Editor
+// Change the JSON Editor tab name
 translations.ed.jsonEditor = "Edit As Text";
 ```
 

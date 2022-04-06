@@ -63,15 +63,15 @@ The name of the item that should be grouped. Refer to the [`getType()`](https://
 - `category`      
 A category for this item.
 
-The following code places the [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) and [Panel Dynamic](https://surveyjs.io/Documentation/Library?id=questionpaneldynamicmodel) types into the Panels category and the [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel), and [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) types into the Matrices category:
+The following code places the [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) and [Panel Dynamic](https://surveyjs.io/Documentation/Library?id=questionpaneldynamicmodel) types into the Panels category and the [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel), and [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) types into the Matrixes category:
 
 ```js
 creator.toolbox.changeCategories([
     { name: "panel", category: "Panels" }, 
     { name: "paneldynamic", category: "Panels" }, 
-    { name: "matrix", category: "Matrices" },
-    { name: "matrixdropdown", category: "Matrices" },
-    { name: "matrixdynamic", category: "Matrices" }
+    { name: "matrix", category: "Matrixes" },
+    { name: "matrixdropdown", category: "Matrixes" },
+    { name: "matrixdynamic", category: "Matrixes" }
 ]);
 ```
 

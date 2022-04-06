@@ -1,6 +1,6 @@
 # Integration with Backend
 
-In many use cases, Survey Creator communicates with a remote storage. Use the following GitHub repositories integrate Survey Creator with your backend framework:
+In many use cases, Survey Creator communicates with a remote storage. Use the following GitHub repositories to integrate Survey Creator with your backend framework:
 
 | Backend Framework | GitHub Repository | Demo Site |
 |---|---|---|

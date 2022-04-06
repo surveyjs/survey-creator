@@ -10,7 +10,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 
 You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-angular" target="_blank">Get Started with Survey Creator / Form Builder - Angular</a>.
 
-If you are looking for a quick-start application that have all Survey Creator features enabled, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_angular_cli" target="_blank">Angular CLI + SurveyJS Quick Start Boilerplate</a>.
+If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_angular_cli" target="_blank">Angular CLI + SurveyJS Quick Start Boilerplate</a>.
 
 ## Install the `survey-creator-knockout` npm Package
 

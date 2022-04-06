@@ -1,16 +1,16 @@
 # Survey Customization
 
-This help topic describes how you can customize the survey that users configure.
+This help topic describes how you can customize the following aspects of Survey Creator functionality:
 
-- [Adorners](#adorners)
+- [Specify Adorner Availability](#specify-adorner-availability)
 - [Customize Survey Elements on Creation](#customize-survey-elements-on-creation)
 - [Access Survey Instances Within Survey Creator](#access-survey-instances-within-survey-creator)
   - [Design Mode Survey Instance](#design-mode-survey-instance)
   - [Preview Mode Survey Instance](#preview-mode-survey-instance)
 
-## Adorners
+## Specify Adorner Availability
 
-Adorners are UI elements that allow Survey Creator users to manipulate survey elements. Adorners are added to survey elements on the design surface. Displayed adorners depend on the survey element type. The following image highlights adorners on a Dropdown question:
+Adorners are design-surface controls that allow Survey Creator users to manipulate survey elements. Each element type has an associated set of default adorners. The following image highlights adorners on a Dropdown question:
 
 <img src="./images/survey-creator-dropdown-adorners.png" alt="Survey Creator - Adorners" width="50%">
 
@@ -18,15 +18,15 @@ You can control the visibility of adorners using the `onElementAllowOperations` 
 
 | Property | Description |
 |--------- | ----------- |
-| `allowAddToToolbox` | Shows or hides the adorner that saves the current survey element configuration in the toolbox |
-| `allowChangeRequired` | Shows or hides the adorner that makes the question required |
-| `allowChangeType` | Shows or hides the adorner that changes the survey element type |
-| `allowCopy` | Shows or hides the adorner that duplicates the survey element |
-| `allowDelete` | Shows or hides the adorner that deletes the survey element |
-| `allowDragging` | Shows or hides the adorner that allows users to drag and drop survey elements |
+| `allowAddToToolbox` | Shows or hides the adorner that saves the current survey element configuration in the toolbox. |
+| `allowChangeRequired` | Shows or hides the adorner that makes the question required. |
+| `allowChangeType` | Shows or hides the adorner that changes the survey element type. |
+| `allowCopy` | Shows or hides the adorner that duplicates the survey element. |
+| `allowDelete` | Shows or hides the adorner that deletes the survey element. |
+| `allowDragging` | Shows or hides the adorner that allows users to drag and drop survey elements. |
 | `allowEdit` | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in Property Grid. |
 
-The following code shows how to hide the adorner that changes the question type for Dropdown questions:
+The following code hides the "Change Type" adorner for Dropdown questions:
 
 ```js
 creator.onElementAllowOperations.add(function (_, options) {
@@ -61,7 +61,7 @@ Survey Creator raises events when users add new elements to a survey. You can ha
 | [onPanelAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPanelAdded) | Raised when users add a panel to the survey. |
 | [onPageAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPageAdded) | Raised when users add a page to the survey. |
 | [onMatrixColumnAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onMatrixColumnAdded) | Raised when users add a column to the [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) or [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) question. |
-| [onItemValueAdded](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onItemValueAdded) | Raised when users add a new item value (column, row, choice) |
+| [onItemValueAdded](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onItemValueAdded) | Raised when users add a new item value (column, row, choice). |
 
 The code below shows how you can handle the `onQuestionAdded` event to customize the default question name:
 
@@ -82,7 +82,7 @@ creator.onQuestionAdded.add(function (_, options) {
 
 ## Access Survey Instances Within Survey Creator
 
-Survey Creator contains different survey instances for design and preview modes. In design mode, survey elements have [adorners](#adorners). In preview mode, the survey is displayed as respondents will see it.
+Survey Creator contains different survey instances for design and preview modes. In design mode, survey elements have [adorners](#specify-adorner-availability). In preview mode, the survey is displayed as respondents will see it.
 
 ### Design Mode Survey Instance
 
