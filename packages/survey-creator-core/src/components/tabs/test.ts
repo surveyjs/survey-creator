@@ -278,7 +278,10 @@ export class TestSurveyTabViewModel extends Base {
     ];
   }
   private getAvailableThemes(): string[] {
-    return ["Default", "Modern", "Default (legacy)"];
+    const styles = getComputedStyle(document.body);
+    return this.themeMapper
+      .filter(item => styles.getPropertyValue(item.theme.variables.themeMark))
+      .map(item => item.name);
   }
   private getStartThemeName(): string {
     const availableThemes = this.themeMapper.filter(item => item.theme.root === this.startTheme.root);
@@ -298,6 +301,7 @@ export class TestSurveyTabViewModel extends Base {
               name: "appliedTheme",
               title: "Applied theme",
               titleLocation: "top",
+              descriptionLocation: "hidden",
               choices: availableThemes,
               defaultValue: this.getStartThemeName(),
               showOptionsCaption: false
@@ -325,7 +329,6 @@ export class TestSurveyTabViewModel extends Base {
     setSurveyJSONForPropertyGrid(json);
     var res = this.surveyProvider.createSurvey(json, "test_settings");
     res.css = propertyGridCss;
-    res.css.root += " st-properties";
     res.onValueChanged.add((sender, options) => {
       if (options.name === "appliedTheme") {
         this.setTheme(options.value);
