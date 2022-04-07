@@ -6,7 +6,9 @@ import {
   QuestionCheckboxModel,
   QuestionTextModel,
   ComponentCollection,
-  QuestionRatingModel
+  QuestionRatingModel,
+  QuestionImagePickerModel,
+  QuestionImageModel
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
 import { QuestionConvertMode, settings } from "../src/settings";
@@ -119,4 +121,31 @@ test("Do not convert default choices", () => {
   const dest = <QuestionRatingModel>QuestionConverter.convertObject(src, "rating", { type: "radiogroup", name: "question1", choices: ["item1", "item2", "item3"] });
   expect(dest.getType()).toBe("rating");
   expect(dest.rateValues).toHaveLength(0);
+});
+test("Convert text question to image", () => {
+  var survey = new SurveyModel();
+  var page = survey.addNewPage();
+  var q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
+  QuestionConverter.convertObject(q1, "image");
+  expect((<Base>(<any>page.elements[0])).getType()).toEqual("image");
+  var newQ1 = <QuestionImageModel>page.elements[0];
+  expect(newQ1.imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+});
+test("Convert text and radio question to image picker", () => {
+  var survey = new SurveyModel();
+  var page = survey.addNewPage();
+  var q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
+  var q2 = <QuestionRadiogroupModel>page.addNewQuestion("radiogroup");
+  QuestionConverter.convertObject(q1, "imagepicker");
+  QuestionConverter.convertObject(q2, "imagepicker");
+  expect((<Base>(<any>page.elements[0])).getType()).toEqual("imagepicker");
+  expect((<Base>(<any>page.elements[1])).getType()).toEqual("imagepicker");
+  var newQ1 = <QuestionImagePickerModel>page.elements[0];
+  var newQ2 = <QuestionImagePickerModel>page.elements[1];
+  expect(newQ1.choices).toHaveLength(4);
+  expect(newQ1.choices[0].value).toEqual("lion");
+  expect(newQ1.choices[0].imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+  expect(newQ2.choices).toHaveLength(3);
+  expect(newQ2.choices[0].value).toEqual("item1");
+  expect(newQ2.choices[0].imageLink).toEqual(null);
 });
