@@ -77,7 +77,7 @@ export var enStrings = {
     newPanelName: "panel",
     newTextItemName: "text",
     testSurvey: "Preview",
-    testSurveyAgain: "Test Survey Again",
+    testSurveyAgain: "Preview Survey Again",
     testSurveyWidth: "Survey width: ",
     navigateToMsg: "You had to navigate to:",
     logic: "Logic",
