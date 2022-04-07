@@ -2452,3 +2452,11 @@ test("Using html question in property grid", (): any => {
   expect(panel.questions).toHaveLength(1);
   Serializer.removeProperty("survey", "surveyLink");
 });
+test("autoComplate property", () => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const autoCompleteQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("autoComplete");
+  expect(autoCompleteQuestion.dataList).toBeTruthy();
+  expect(Array.isArray(autoCompleteQuestion.dataList)).toBeTruthy();
+  expect(autoCompleteQuestion.dataList.length > 10).toBeTruthy();
+});

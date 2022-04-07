@@ -16,10 +16,13 @@ import {
   QuestionMatrixModel,
   Action,
   QuestionMatrixDynamicModel,
-  QuestionCheckboxModel
+  QuestionCheckboxModel,
+  ComponentCollection,
+  QuestionCompositeModel
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { SurveyElementAdornerBase } from "../src/components/action-container-view-model";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
@@ -28,6 +31,7 @@ import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
+import { DesignTimeSurveyModel } from "../src/creator-base";
 
 import {
   getElementWrapperComponentData,
@@ -1229,6 +1233,20 @@ test("getQuestionContentWrapperComponentName", (): any => {
   expect(getQuestionContentWrapperComponentName(new QuestionRatingModel(""))).toEqual("svc-rating-question-content");
 });
 
+test("getQuestionContentWrapperComponentName for component", (): any => {
+  ComponentCollection.Instance.add({
+    name: "test",
+    elementsJSON: [{ type: "rating", name: "rate1" }]
+  });
+  const creator = new CreatorTester();
+  const survey = new DesignTimeSurveyModel(creator, { questions: [{ type: "test", name: "q1" }] });
+  const qCustom = <QuestionCompositeModel>survey.getAllQuestions()[0];
+  const q = qCustom.panelWrapper.questions[0];
+  expect(q.name).toBe("rate1");
+  expect(survey.getQuestionContentWrapperComponentName(q)).toEqual("sv-template-renderer");
+  ComponentCollection.Instance.clear();
+});
+
 test("getElementWrapperComponentData", (): any => {
   const testCreator: any = { test: "test" };
   expect(getElementWrapperComponentData(new QuestionTextModel(""), "", testCreator)).toEqual(testCreator);
@@ -1940,6 +1958,23 @@ test("creator.onActiveTabChaning", (): any => {
   expect(tabName).toEqual("logic");
   expect(creator.activeTab).toEqual("test");
 });
+test("creator.onDragDropAllow", (): any => {
+  const creator = new CreatorTester({});
+  let fired = false;
+  creator.onDragDropAllow.add((sender, options) => {
+    fired = true;
+  });
+
+  const survey = creator.survey;
+  const page = survey.addNewPage("page1");
+  const q1 = page.addNewQuestion("text", "q1");
+  const q2 = page.addNewQuestion("text", "q2");
+  const target = new QuestionTextModel("q1");
+  page.dragDropStart(q1, target);
+  page.dragDropMoveTo(q2, true);
+
+  expect(fired).toBeTruthy();
+});
 test("update tab content", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
@@ -2490,3 +2525,20 @@ test("delete last question and selection with pageEditModeValue=single #2712", (
     surveySettings.allowShowEmptyDescriptionInDesignMode = true;
   }
 });
+
+test("SurveyElementAdornerBase setSurveyElement updateActionsProperties", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "single" });
+  creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+  const question = creator.survey.getAllQuestions()[0];
+  let count = 0;
+  const adorderBase = new SurveyElementAdornerBase(creator, null);
+
+
+  creator.onElementAllowOperations.add(function (_, options) {
+    count++;
+  });
+  adorderBase["setSurveyElement"](question);
+  expect(count).toBe(1);
+});
+
+
