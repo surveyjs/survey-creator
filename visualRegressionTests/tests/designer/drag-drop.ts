@@ -181,7 +181,7 @@ test("Matrix: Property Grid: Choices", async (t) => {
   const Item2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
   const Item3 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
 
-  let DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
+  let DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-drag-element__svg");
   await t
     .hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2)
     .dragToElement(DragZoneItem2, Item1, {
