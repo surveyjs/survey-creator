@@ -66,7 +66,7 @@ creator.onShowingProperty.add(function (_, options) {
 Custom properties can be serialized and included in the survey JSON definition. To add a custom property, call the `addProperty(questionType, propertySettings)` method on the `Survey.Serializer` object. This method accepts the following arguments:
 
 - `questionType`        
-A string value that specifies the question type to which the property should be added. You can use a specific type (see the [getType](https://surveyjs.io/Documentation/Library?id=Question#getType) description) or one of the base types. In the latter case, the new property will be added to all question types that derive from the base type. Refer to the API of a specific question type for information on its inheritance chain. For example, the following image illustrates the inheritance chain of the [Text](https://surveyjs.io/Documentation/Library?id=questiontextmodel) question type:
+A string value that specifies the question type to which the property should be added. You can use a specific type (see the [getType](https://surveyjs.io/Documentation/Library?id=Question#getType) description) or one of the base types. In the latter case, the new property is added to all question types derived from the base type. Refer to the API of a specific question type for information on its inheritance chain. For example, the following image illustrates the inheritance chain of the [Text](https://surveyjs.io/Documentation/Library?id=questiontextmodel) question type:
 
   <img src="./images/survey-creator-inheritance-chain.png" alt="Survey Creator - Survey member's inheritance chain" width="75%">
 
@@ -109,7 +109,7 @@ Survey.Serializer.addProperty("question",
 
 #### `default`
 
-A default value for the property. If not specified, `default` equals to `""` for string values, 0 for numbers, `false` for Boolean values. The default value is not serialized into survey JSON definition.
+A default value for the property. If not specified, `default` equals `""` for string values, 0 for numbers, and `false` for Boolean values. The default value is not serialized into a survey JSON definition.
 
 ```js
 Survey.Serializer.addProperty("dropdown", 
@@ -215,7 +215,7 @@ A function that specifies a condition based on which to show or hide the propert
 
 If the property visibility depends on another property, use the [`dependsOn`](#dependson) setting. You can use `visibleIf` in conjunction with `dependsOn` to impose more specific rules on property visibility. In this case, Survey Creator calls the `visibleIf` function only when one of the properties from the `dependsOn` array is changed.
 
-In the following code, the `dateFormat` property depends on the `inputType` property and is visible only if `inputType` is set to one of date types:
+In the following code, the `dateFormat` property depends on the `inputType` property and is visible only if `inputType` is set to one of the date types:
 
 ```js
 Survey.Serializer.addProperty("text", {
@@ -401,7 +401,7 @@ A function that you can use to adjust or exclude the property value from the sur
 ```
 #### `onSetValue`
 
-A function that you can use to perform actions when the property value is set, for example, update another property value.
+A function that you can use to perform actions when the property value is set (for example, update another property value).
 
 > NOTE: Do not assign a value directly to an object property because this will trigger the `onSetValue` function again. Use the object's `setPropertyValue(propertyName, newValue)` method instead.
 

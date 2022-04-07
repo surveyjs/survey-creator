@@ -24,7 +24,7 @@ You can control the visibility of adorners using the `onElementAllowOperations` 
 | `allowCopy` | Shows or hides the adorner that duplicates the survey element. |
 | `allowDelete` | Shows or hides the adorner that deletes the survey element. |
 | `allowDragging` | Shows or hides the adorner that allows users to drag and drop survey elements. |
-| `allowEdit` | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in Property Grid. |
+| `allowEdit` | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in the Property Grid. |
 
 The following code hides the "Change Type" adorner for Dropdown questions:
 
@@ -86,17 +86,17 @@ Survey Creator contains different survey instances for design and preview modes.
 
 ### Design Mode Survey Instance
 
-To access the design mode survey instance, use the Survey Creator's [survey](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#survey) property. You can do that at any point in your application. Use the [Survey API](https://surveyjs.io/Documentation/Library?id=surveymodel) to manipulate the survey instance. For example, the following code changes the survey [`title`](https://surveyjs.io/Documentation/Library?id=surveymodel#title):
+To access the design mode survey instance, use the Survey Creator's [survey](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#survey) property. You can do this at any point in your application. Use the [Survey API](https://surveyjs.io/Documentation/Library?id=surveymodel) to manipulate the survey instance. For example, the following code changes the survey [`title`](https://surveyjs.io/Documentation/Library?id=surveymodel#title):
 
 ```js
 creator.survey.title = "My Survey";
 ```
 
-Survey Creator may create a new design mode survey instance during the design process, for example, when the user switches from the JSON Editor tab back to Designer. To handle the survey recreation, use the [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onDesignerSurveyCreated) event.
+Survey Creator may create a new design mode survey instance during the design process (for example, when a user switches from the JSON Editor tab back to the Designer). To handle the survey recreation, use the [onDesignerSurveyCreated](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onDesignerSurveyCreated) event.
 
 ```js
 creator.onDesignerSurveyCreated.add(function (_, options) {
-  // Recreated survey instance is stored in the `options.survey` property
+  // The recreated survey instance is stored in the `options.survey` property.
   console.log(options.survey);
 })
 ```

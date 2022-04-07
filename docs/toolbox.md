@@ -1,6 +1,6 @@
 # Toolbox Customization
 
-Toolbox contains available question and panel types. Users can click questions and panels or drag and drop them onto the design surface to add them to the survey. This help topic describes how you can customize the toolbox.
+The toolbox contains available question and panel types. Users can click questions and panels or drag and drop them onto the design surface to add them to the survey. This help topic describes how you can customize the toolbox.
 
 <img src="./images/survey-creator-toolbox-full.png" alt="Survey Creator - Toolbox in full mode" width="50%">
 
@@ -12,11 +12,11 @@ Toolbox contains available question and panel types. Users can click questions a
 
 ## Full and Compact Modes
 
-Toolbox supports full mode (illustrated above) and compact mode. In compact mode, element names are hidden. To see an individual element name, a user should move the mouse pointer over the element icon.
+The toolbox supports full mode (illustrated above) and compact mode. In compact mode, element names are hidden. To see an individual element name, a user should move the mouse pointer over the element icon.
 
 <img src="./images/survey-creator-toolbox-compact.png" alt="Survey Creator - Toolbox in compact mode" width="50%">
 
-Toolbox switches between the modes automatically based on available width. Specify the [`forceCompact`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#forceCompact) property if you want the toolbox to always use a specific mode:
+The toolbox switches between the modes automatically based on available width. Specify the [`forceCompact`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#forceCompact) property if you want the toolbox to always use a specific mode:
 
 ```js
 // Compact mode
@@ -53,7 +53,7 @@ const creator = new SurveyCreator(creatorOptions);
 
 ## Group Toolbox Items by Categories
 
-> NOTE: Compact toolbox does not display categories.
+> NOTE: The compact toolbox does not display categories.
 
 To group toolbox items, call the [`changeCategories()`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#changeCategories) method. It accepts an array of objects with the following fields:
 
@@ -176,7 +176,7 @@ WE HAVEN'T COME UP WITH A VERSION FOR REACT YET
     import "survey-creator-core/survey-creator-core.i18n";
     ```
 
-    If you did not find a desired component in the list above, refer to the following help topic for instructions on how to integrate any 3rd-party component into Survey Creator: [Create Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget).
+    If you did not find the desired component in the list above, refer to the following help topic for instructions on how to integrate any third-party component into Survey Creator: [Create Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget).
 -->
 
 <!--  

@@ -1,13 +1,13 @@
 # Localization & Globalization
 
-This article describes how to localize Survey Creator UI and give users the ability to localize their surveys.
+This article describes how to localize the Survey Creator UI and give users the ability to localize their surveys.
 
 - [Localize Survey Creator UI](#localize-survey-creator-ui)
 - [Localize Survey Contents](#localize-survey-contents)
 
 ## Localize Survey Creator UI
 
-Survey Creator includes UI translations into several languages. We ship localized strings as [dictionary files](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). Localization engine that works with these files is available as a separate script/module. Reference this script in the `<head>` tag of your page or import this module in the component that renders Survey Creator:
+Survey Creator includes UI translations into several languages. We ship localized strings as [dictionary files](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). The localization engine that works with these files is available as a separate script/module. Reference this script in the `<head>` tag of your page or import this module in the component that renders Survey Creator:
 
 ```html
 <script src="https://unpkg.com/survey-creator-core/survey-creator-core.i18n.min.js"></script>
@@ -17,7 +17,7 @@ Survey Creator includes UI translations into several languages. We ship localize
 import "survey-creator-core/survey-creator-core.i18n";
 ```
 
-The default language for UI elements is English. To change it, set the `currentLocale` property. For example, the following code translates Survey Creator UI to French:
+The default language for UI elements is English. To change it, set the `currentLocale` property. For example, the following code translates the Survey Creator UI to French:
 
 ```js
 SurveyCreator.localization.currentLocale = "fr";
