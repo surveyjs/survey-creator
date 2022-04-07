@@ -80,7 +80,7 @@ export var enStrings = {
     defaultV2Theme: "Default",
     modernTheme: "Modern",
     defaultTheme: "Default (legacy)",
-    testSurveyAgain: "Test Survey Again",
+    testSurveyAgain: "Preview Survey Again",
     testSurveyWidth: "Survey width: ",
     navigateToMsg: "You had to navigate to:",
     logic: "Logic",

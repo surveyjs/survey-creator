@@ -38,12 +38,13 @@ svc-tab-designer {
   .sd-question.sd-question--image {
     width: 100%;
   }
+
+  .sd-progress, .sd-progress__bar {
+    background-color: transparent;
+  }
 }
 .svc-designer-header {
-  border-bottom: 2px solid;
-}
-.svc-designer-header {
-  border-bottom: 2px solid;
+  border-bottom: 2px solid transparent;
 }
 
 .svc-designer__placeholder-container {

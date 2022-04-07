@@ -65,6 +65,7 @@ const json2 = {
 };
 
 const orientationAction = Selector("#orientationSelector .sv-action-bar-item");
+const restartSurveyButtonText = "Preview Survey Again";
 
 test("Language switcher", async (t) => {
   await setJSON(json2);
@@ -119,7 +120,7 @@ test("Page switcher", async (t) => {
     .click(getListItemByText("Second page"));
 });
 
-test("Test Survey Again", async (t) => {
+test("Preview Survey Again", async (t) => {
   await setJSON(json2);
   const switcher = getBarItemByTitle("Show invisible elements");
 
@@ -129,7 +130,7 @@ test("Test Survey Again", async (t) => {
     .click(Selector("#nextPage"))
     .click(Selector("input[value='Complete']"))
     .expect(Selector("h3").withText("Thank you for completing the survey!").visible).ok()
-    .click(Selector(".svc-preview__test-again span").withText("Test Survey Again"))
+    .click(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText))
     .expect(Selector(".sd-question__title").withText("string_editor").visible).ok();
 });
 
@@ -183,13 +184,13 @@ test("Device selector", async (t) => {
     .click(getListItemByText("iPad"))
     .click(Selector("input[value='Complete']"))
     .expect(orientationAction.hasAttribute("disabled")).notOk()
-    .expect(Selector(".svc-preview__test-again span").withText("Test Survey Again").visible).ok()
+    .expect(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText).visible).ok()
 
     .click(getBarItemByTitle("iPad"))
     .expect(getListItemByText("Desktop").visible).ok()
 
     .click(getListItemByText("Desktop"))
-    .click(Selector(".svc-preview__test-again span").withText("Test Survey Again"))
+    .click(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText))
     .expect(orientationAction.hasAttribute("disabled")).ok()
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
