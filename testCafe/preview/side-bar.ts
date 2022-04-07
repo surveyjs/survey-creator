@@ -1,4 +1,4 @@
-import { getTabbedMenuItemByText, setJSON, creatorTabPreviewName, urlSideBarPreview } from "../helper";
+import { getTabbedMenuItemByText, setJSON, creatorTabPreviewName, urlSideBarPreview, creatorTabDesignerName } from "../helper";
 import { Selector } from "testcafe";
 const title = "Preview tab";
 
@@ -35,6 +35,12 @@ test("Test theme switcher", async (t) => {
     .expect(defaultRoot.visible).ok()
     .click(drpdwnSelector)
     .click(drpdwnSelector.child(1))
+    .expect(modernRoot.visible).ok()
+    .expect(defaultRoot.visible).notOk();
+
+  await t
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(modernRoot.visible).ok()
     .expect(defaultRoot.visible).notOk();
 });
