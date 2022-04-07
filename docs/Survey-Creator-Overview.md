@@ -11,7 +11,7 @@ Survey Creator / Form Builder ships with the following features:
 - [Community-supported UI localization to 25+ languages](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
 - [Integration with any backend framework](https://surveyjs.io/Documentation/Survey-Creator?id=integration-with-backend) (examples for PHP, NodeJS, and ASP.NET included)
 - Survey JSON definitions can be stored in any database
-- [3rd-party component integration](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
+- [Third-party component integration](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
 
 [Try Survey Creator / Form Builder](https://surveyjs.io/create-survey)
 
@@ -24,6 +24,6 @@ For information on how to add Survey Creator / Form Builder to your application,
 - [React](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-react)
 - [Knockout / jQuery](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-knockout-jquery)
 
-We also provide over [40 demo examples](https://surveyjs.io/Examples/Survey-Creator) that you can edit and copy code from.
+We also include over [40 demo examples](https://surveyjs.io/Examples/Survey-Creator) that allow you to edit and copy code.
 
 Visit our [What's New page](https://surveyjs.io/WhatsNew) for information on new features, recent bug fixes, and latest additions. If you want to migrate from the old version of Survey Creator, refer to the [Migration Guide](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2).

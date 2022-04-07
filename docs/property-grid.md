@@ -166,8 +166,8 @@ Survey.Serializer.addProperty("survey", {
         const result = [];
         // Make the property nullable
         result.push({ value: null });
-        // Web service returns objects that we convert to the `{ value, text }` format
-        // If your web service returns an array of strings, simply pass it to `choicesCallback`
+        // Web service returns objects that are converted to the `{ value, text }` format
+        // If your web service returns an array of strings, pass this array to `choicesCallback`
         response.forEach(item => {
           result.push({ value: item.cioc, text: item.name });
         });
@@ -300,8 +300,6 @@ Survey.Serializer.addProperty("question",
 
 A numeric value that specifies the maximum number of characters users can enter into the text input.
 
-The following code limits the size of the question name, that user may enter, to 20.
-
 ```js
 Survey.Serializer.addProperty("question",
   { name: "my-text-property", type: "text", maxLength: 280 }
@@ -393,11 +391,13 @@ Survey.Serializer.addProperty("survey", {
 A function that you can use to adjust or exclude the property value from the survey JSON definition.
 
 ```js
-// get title property returns a title with question number and so on "5) My super title.",
-//but we want to serialize only a "pure" question title "My super title".
-{ name: "title:text", onGetValue: function (obj: any) { return obj.titleValue; } }
-// the function always returns null. It means that the library will never serialize the property in JSON.
-{ name: "calcProperty", onGetValue: function (obj: any) { return null; } }
+Survey.Serializer.addProperty("question", {
+  name: "calculated-property",
+  onGetValue: function (surveyElement) {
+    // Do not serialize the property to JSON
+    return null;
+  }
+});
 ```
 #### `onSetValue`
 
@@ -406,13 +406,15 @@ A function that you can use to perform actions when the property value is set (f
 > NOTE: Do not assign a value directly to an object property because this will trigger the `onSetValue` function again. Use the object's `setPropertyValue(propertyName, newValue)` method instead.
 
 ```js
-{ 
-    name: "myValue", 
-    onSetValue: function (obj, value) {
-        //Optionally do some checks, modify value if needed.
-        //Set value directly
-        obj.setPropertyValue("myValue", value);
-        //Perform some actions, for example change other properties of the object
-    }
-}
+Survey.Serializer.addProperty("question", {
+  name: "my-string-property",
+  onSetValue: function (surveyElement, value) {
+    // You can perform required checks or modify the `value` here
+    // ...
+    // Set the `value`
+    surveyElement.setPropertyValue("my-string-property", value);
+    // You can perform required actions after the `value` is set
+    // ...
+  }
+});
 ```

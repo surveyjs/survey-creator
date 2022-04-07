@@ -160,13 +160,13 @@ creator.toolbox.addItem({
 
 WE HAVEN'T COME UP WITH A VERSION FOR REACT YET
 
-    ### Integrate 3rd-Party Components as Question Editors
+    ### Integrate Third-Party Components as Question Editors
 
-    Survey Creator supports integration with the following 3rd-party components out of the box:
+    Survey Creator supports integration with the following third-party components out of the box:
 
     %LIST%
 
-    To enable the integration with one of these components, reference or import the [surveyjs-widgets](https://github.com/surveyjs/custom-widgets) library next to the 3rd-party component sources:
+    To enable the integration with one of these components, reference or import the [surveyjs-widgets](https://github.com/surveyjs/custom-widgets) library next to the third-party component sources:
 
     ```html
     <script src="https://unpkg.com/surveyjs-widgets/surveyjs-widgets.min.js"></script>
