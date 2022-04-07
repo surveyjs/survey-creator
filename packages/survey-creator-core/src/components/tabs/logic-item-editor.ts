@@ -350,7 +350,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private isPanelSupportContext(panel: PanelModel): boolean {
     const logicType = this.getLogicTypeByPanel(panel);
-    return logicType.supportContext(this.context);
+    return !!logicType ? logicType.supportContext(this.context) : false;
   }
   private updateSelectorOnContextChanged(panel: PanelModel) {
     const logicTypeQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
