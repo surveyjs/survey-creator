@@ -270,22 +270,25 @@ export class TestSurveyTabViewModel extends Base {
   public get settingsSurvey(): SurveyModel {
     return this.settingsSurveyValue;
   }
+  private getThemeTitle(name: string) {
+    return this.surveyProvider.getLocString("ed." + name + "Theme");
+  }
   private get themeMapper() {
     return [
-      { name: "Default", theme: defaultV2Css },
-      { name: "Modern", theme: modernCss },
-      { name: "Default (legacy)", theme: defaultStandardCss }
+      { name: "defaultV2", title: this.getThemeTitle("defaultV2"), theme: defaultV2Css },
+      { name: "modern", title: this.getThemeTitle("modern"), theme: modernCss },
+      { name: "default", title: this.getThemeTitle("default"), theme: defaultStandardCss }
     ];
   }
   private getAvailableThemes(): string[] {
     const styles = getComputedStyle(document.body);
     return this.themeMapper
       .filter(item => styles.getPropertyValue(item.theme.variables.themeMark))
-      .map(item => item.name);
+      .map(item => item.title);
   }
   private getStartThemeName(): string {
     const availableThemes = this.themeMapper.filter(item => item.theme.root === this.startTheme.root);
-    if (availableThemes.length > 0) return availableThemes[0].name;
+    if (availableThemes.length > 0) return availableThemes[0].title;
     return "Default";
   }
   private getSettingsSurveyJSON(): any {
@@ -317,7 +320,7 @@ export class TestSurveyTabViewModel extends Base {
     this.simulator.survey.render();
   }
   private setTheme(themeName: string): void {
-    const availableThemes = this.themeMapper.filter(item => item.name === themeName);
+    const availableThemes = this.themeMapper.filter(item => item.title === themeName);
     let theme = <any>defaultV2Css;
     if (availableThemes.length > 0) {
       theme = availableThemes[0].theme;
