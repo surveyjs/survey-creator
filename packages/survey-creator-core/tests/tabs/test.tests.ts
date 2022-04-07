@@ -371,5 +371,5 @@ test("Test sidebar with theme switcher", (): any => {
 
   const switcherQw: QuestionDropdownModel = <QuestionDropdownModel>questions[0];
   expect(switcherQw.name).toEqual("appliedTheme");
-  expect(switcherQw.value).toEqual("Default");
+  expect(switcherQw.value).toEqual("defaultV2");
 });
