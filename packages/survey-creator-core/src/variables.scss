@@ -87,3 +87,16 @@ $tab-min-height: var(--tab-min-height, auto);
   -ms-user-select: none;
   user-select: none;
 }
+@mixin centerText {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calcSize(2);
+  color: $foreground;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  overflow: hidden;
+}
