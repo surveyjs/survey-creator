@@ -100,7 +100,7 @@ translations.ed.toolboxGeneralCategory = "Common";
 The following properties control the behavior of categories:
 
 - [`allowExpandMultipleCategories`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#allowExpandMultipleCategories)     
-Allows more than one category to be in expanded state. If this property is `false`, when a user expands a category, other categories collapse.
+Allows more than one category to be in an expanded state. If this property is `false`, when a user expands a category, other categories collapse.
 
 - [`keepAllCategoriesExpanded`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#keepAllCategoriesExpanded)       
 Expands all categories. Users cannot collapse them.
