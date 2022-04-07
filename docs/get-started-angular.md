@@ -10,6 +10,8 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 
 You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-angular" target="_blank">Get Started with Survey Creator / Form Builder - Angular</a>.
 
+If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_angular_cli" target="_blank">Angular CLI + SurveyJS Quick Start Boilerplate</a>.
+
 ## Install the `survey-creator-knockout` npm Package
 
 Survey Creator does not yet have a native implementation for Angular. However, you can integrate the version for Knockout into your Angular application. Run the following command to install the <a href="https://www.npmjs.com/package/survey-creator-knockout" target="_blank">survey-creator-knockout</a> package:
@@ -345,7 +347,8 @@ export class SurveyCreatorComponent implements OnInit {
 
 ## Further Reading
 
-- [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#localization)
-- [Appearance Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#appearance)
-- [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#toolbox)
+- [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+- [Property Grid Customization](https://surveyjs.io/Documentation/Survey-Creator?id=property-grid)
+- [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox)
+- [Survey Customization](https://surveyjs.io/Documentation/Survey-Creator?id=survey-customization)
 - [Create a Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
