@@ -7,11 +7,19 @@
     content: " ";
     display: block;
     height: calcSize(0.5);
-    width: calcSize(2);
-    border: 1px solid $border;
-    box-sizing: border-box;
-    border-radius: 10px;
   }
+}
+
+.spg-drag-element__svg {
+    width: calcSize(2);
+    height: calcSize(2);
+    padding: calcSize(2);
+    display: block;
+    opacity: 0.5;
+  
+    use {
+      fill: $foreground-light;
+    }
 }
 
 .spg-matrixdynamic__drag-drop-ghost-position-top,
