@@ -107,7 +107,7 @@ As a result, your Survey Creator component code can look as follows:
 ```javascript
 import React, { Component } from "react";
 import * as SurveyCreator from "survey-creator-react";
-import "survey-core/modern.css";
+import "survey-core/defaultV2.css";
 import "survey-creator-core/survey-creator-core.css";
 
 class SurveyComponent extends Component {

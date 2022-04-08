@@ -2,11 +2,11 @@
   "Categories": [
     {
       "Name": "Survey-Creator-Overview",
-      "Title": "Survey Creator Overview"
+      "Title": "Survey Creator / Form Builder Overview"
     },
     {
       "Name": "get-started",
-      "Title": "Get Started with Survey Creator",
+      "Title": "Get Started with Survey Creator / Form Builder",
       "Items": [
         {
           "Name": "get-started-angular",
@@ -27,16 +27,50 @@
       ]
     },
     {
-      "Name": "CreatorV2",
-      "Title": "Creator V2",
+      "Name": "property-grid",
+      "Title": "Property Grid Customization"
+    },
+    {
+      "Name": "toolbox",
+      "Title": "Toolbox Customization"
+    },
+    {
+      "Name": "survey-customization",
+      "Title": "Survey Customization"
+    },
+    {
+      "Name": "localization",
+      "Title": "Localization & Globalization"
+    },
+    {
+      "Name": "integration-with-backend",
+      "Title": "Integration with Backend"
+    },
+    {
+      "Name": "advanced-topics",
+      "Title": "Advanced Topics",
+      "Items": [
+        {
+          "Name": "Create-Custom-Widget",
+          "Title": "Create a Custom Widget"
+        },
+        {
+          "Name": "Build-Component-Questions",
+          "Title": "Create a Custom Question Type"
+        }
+      ]
+    },
+    {
+      "Name": "migration-from-survey-creator-v1",
+      "Title": "Migration from Survey Creator V1",
       "Items": [
         {
           "Name": "Creator-V2-Whats-New",
-          "Title": "What's new, Creator V2"
+          "Title": "What's New in Survey Creator V2"
         },
         {
           "Name": "Migrate-from-V1-to-V2",
-          "Title": "Migration Guide - from V1 to V2"
+          "Title": "Migration from Survey Creator V1 to V2"
         },
         {
           "Name": "React-Performance-Problems",
@@ -45,16 +79,8 @@
       ]
     },
     {
-      "Name": "Build-Component-Questions",
-      "Title": "Components: Simplify and Enrich SurveyJS Creator Functionality"
-    },
-    {
-      "Name": "Create-Custom-Widget",
-      "Title": "Create Custom Widget"
-    },
-    {
       "Name": "End-User-Guide",
-      "Title": "End-User Guide"
+      "Title": "End-User Documentation"
     },
     {
       "Name": "BuilderOverview",
