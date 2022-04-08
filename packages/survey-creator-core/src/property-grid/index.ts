@@ -17,7 +17,7 @@ import {
   MatrixDynamicRowModel,
   ComputedUpdater,
   QuestionDropdownModel,
-  QuestionSelectBase
+  QuestionSelectBase,
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -1240,14 +1240,26 @@ export class PropertyGridEditorImageSize extends PropertyGridEditorNumber {
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     const isDefaultValue = (imageHeight: number, imageWidth: number) => {
-      const imageHeightProperty = Serializer.findProperty("image", "imageHeight");
-      const imageWidthProperty = Serializer.findProperty("image", "imageWidth");
+      const imageHeightProperty = Serializer.findProperty(obj.getType(), "imageHeight");
+      const imageWidthProperty = Serializer.findProperty(obj.getType(), "imageWidth");
       return imageHeightProperty.isDefaultValue(imageHeight) && imageWidthProperty.isDefaultValue(imageWidth);
     };
-
     question.valueFromDataCallback = function (value: any): any {
       const isDefaultSize = isDefaultValue(obj["imageHeight"], obj["imageWidth"]);
       return isDefaultSize ? undefined : value;
+    };
+  }
+}
+
+export class PropertyGridEditorImageResponsiveSize extends PropertyGridEditorNumber {
+  private static fitProperties = ["minImageWidth", "maxImageWidth", "minImageHeight", "maxImageHeight"]
+
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "number" && PropertyGridEditorImageResponsiveSize.fitProperties.indexOf(prop.name) > -1;
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    question.valueFromDataCallback = function (value: any): any {
+      return obj["responsivePropertiesAreDefault"] ? undefined : value;
     };
   }
 }
@@ -1566,6 +1578,8 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
+PropertyGridEditorCollection.register(new PropertyGridEditorImageResponsiveSize());
+
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);
