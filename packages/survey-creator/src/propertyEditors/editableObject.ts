@@ -59,6 +59,10 @@ export class EditableObject {
       this.applyPages();
       return;
     }
+    if (propertyName == "bindings") {
+      this.obj.bindings.setJson(this.editableObj.bindings.getJson());
+      return;
+    }
     if (!this.isPropertyChanged(propertyName)) return;
     if (
       Array.isArray(this.obj[propertyName]) &&
