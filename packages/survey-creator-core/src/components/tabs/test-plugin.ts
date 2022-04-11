@@ -1,7 +1,6 @@
-import { Action, ComputedUpdater, defaultV2Css, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
+import { Action, ComputedUpdater, defaultStandardCss, defaultV2Css, IAction, ListModel, modernCss, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
 
@@ -9,6 +8,9 @@ export class TabTestPlugin implements ICreatorPlugin {
   private languageSelectorAction: Action;
   private languagePopupModel: PopupModel;
   private languageListModel: ListModel;
+  private changeThemePopupModel: PopupModel;
+  private changeThemeModel: ListModel;
+  private changeThemeAction: Action;
   private deviceSelectorAction: Action;
   private deviceListModel: ListModel;
   private orientationSelectorAction: Action;
@@ -17,7 +19,6 @@ export class TabTestPlugin implements ICreatorPlugin {
   private designerAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
-  private sidebarTab: SidebarTabModel;
   private simulatorTheme: any = defaultV2Css;
 
   public model: TestSurveyTabViewModel;
@@ -73,9 +74,6 @@ export class TabTestPlugin implements ICreatorPlugin {
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("test", this, getLocString("ed.testSurvey"));
-    if (creator.showPreviewSettings) {
-      this.sidebarTab = this.creator.sidebar.addTab("test");
-    }
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
@@ -83,11 +81,6 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.model.onSurveyCreatedCallback = (survey) => {
       this.creator["onTestSurveyCreated"] && this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
     };
-    if (this.sidebarTab) {
-      this.sidebarTab.model = this.model.settingsSurvey;
-      this.sidebarTab.componentName = "survey-widget";
-      this.creator.sidebar.activeTab = this.sidebarTab.id;
-    }
     this.update();
   }
   public update(): void {
@@ -115,9 +108,6 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
       this.model = undefined;
-    }
-    if (this.sidebarTab) {
-      this.sidebarTab.visible = false;
     }
     this.languageSelectorAction.visible = false;
     this.testAgainAction.visible = false;
@@ -203,6 +193,59 @@ export class TabTestPlugin implements ICreatorPlugin {
         }
       });
       items.push(this.invisibleToggleAction);
+    }
+
+    const getThemeTitle = name => this.creator.getLocString("ed." + name + "Theme");
+    const themeMapper = [
+      { name: "defaultV2", title: getThemeTitle("defaultV2"), theme: defaultV2Css },
+      { name: "modern", title: getThemeTitle("modern"), theme: modernCss },
+      { name: "default", title: getThemeTitle("default"), theme: defaultStandardCss }
+    ];
+    const styles = getComputedStyle(document.body);
+    const availableThemes = themeMapper
+      .filter(item => styles.getPropertyValue(item.theme.variables.themeMark))
+      .map(item => { return { value: item.name, title: item.title }; });
+    const availableThemesToItems = Object.keys(availableThemes)
+      .map(key => ({ id: key, value: availableThemes[key].value, title: availableThemes[key].title }));
+
+    if (availableThemesToItems.length > 1) {
+      this.changeThemeModel = new ListModel(
+        availableThemesToItems,
+        (item: any) => {
+          this.model.setTheme(item.value, themeMapper);
+          this.changeThemeAction.title = this.model.getCurrThemeTitle(themeMapper);
+          this.changeThemePopupModel.toggleVisibility();
+        },
+        true
+      );
+
+      this.changeThemePopupModel = new PopupModel(
+        "sv-list",
+        { model: this.changeThemeModel },
+        "bottom",
+        "center"
+      );
+
+      this.changeThemeAction = new Action({
+        id: "themeChanger",
+        iconName: "icon-theme",
+        component: "sv-action-bar-item-dropdown",
+        mode: "large",
+        title: getThemeTitle("defaultV2"),
+        needSeparator: true,
+        visible: <any>new ComputedUpdater<boolean>(() => {
+          const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
+          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab;
+        }),
+        action: () => {
+          this.changeThemePopupModel.toggleVisibility();
+        },
+        popupModel: this.changeThemePopupModel
+      });
+      this.changeThemePopupModel.onHide = () => { this.changeThemeAction.enabled = true; };
+      this.changeThemePopupModel.onShow = () => { this.changeThemeAction.enabled = false; };
+
+      items.push(this.changeThemeAction);
     }
 
     this.languageListModel = new ListModel(

@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, checkElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlSideBarPreview } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, checkElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeChanger } from "../../helper";
 
 const title = "Test tab Screenshot";
 
@@ -65,7 +65,7 @@ test("mobile iphone", async (t) => {
   await checkElementScreenshot("test-tab-iphone.png", Selector(".svd-simulator-wrapper"), t);
 });
 
-fixture`${title}`.page`${urlSideBarPreview}`;
+fixture`${title}`.page`${urlPreviewThemeChanger}`;
 
 const json2 = {
   "pages": [
@@ -89,40 +89,36 @@ const json2 = {
   ]
 };
 
-test("side bar with theme switcher", async (t) => {
+test("Theme changer", async (t) => {
+  const simulator = Selector(".svd-simulator-content");
+  const checkTheme = async (listID, screnName) => {
+    await t
+      .click(Selector("#themeChanger"))
+      .click(Selector(".sv-popup__container .sv-list .sv-list__item").filterVisible().nth(listID));
+    await checkElementScreenshot(screnName, simulator, t);
+  };
+
   await t.resizeWindow(1280, 900);
   await explicitErrorHandler();
   await setJSON(json2);
 
   await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
-  await checkElementScreenshot("preview-side-bar.png", Selector(".svc-side-bar"), t);
-
-  const drpdwnSelector = Selector(".svc-side-bar .spg-panel .spg-question__content .spg-dropdown");
-  const simulator = Selector(".svd-simulator-content");
-
+  await checkElementScreenshot("theme-changer.png", Selector("#themeChanger"), t);
   await checkElementScreenshot("theme-default-preview.png", simulator, t);
 
-  await t
-    .click(drpdwnSelector)
-    .click(drpdwnSelector.child(1));
-  await checkElementScreenshot("theme-modern-preview.png", simulator, t);
+  await t.click(Selector("#themeChanger"));
+  await checkElementScreenshot("theme-changer-popup.png", Selector(".sv-popup__container").filterVisible().nth(0), t);
 
   await t
-    .click(drpdwnSelector)
-    .click(drpdwnSelector.child(2));
-  await checkElementScreenshot("theme-legacy-preview.png", simulator, t);
+    .click(Selector("#themeChanger"))
+    .click(Selector(".sd-navigation__complete-btn"));
 
-  await t
-    .click(Selector(".sv_complete_btn"));
-  await checkElementScreenshot("theme-legacy-test-again.png", simulator, t);
-
-  await t
-    .click(drpdwnSelector)
-    .click(drpdwnSelector.child(1));
-  await checkElementScreenshot("theme-modern-test-again.png", simulator, t);
-
-  await t
-    .click(drpdwnSelector)
-    .click(drpdwnSelector.child(0));
   await checkElementScreenshot("theme-default-test-again.png", simulator, t);
+
+  await checkTheme(1, "theme-modern-test-again.png");
+  await checkTheme(2, "theme-legacy-test-again.png");
+  await checkTheme(0, "theme-default-test-again.png");
+
+  await t.click(Selector(".svc-preview__test-again"));
+  await checkElementScreenshot("theme-default-preview.png", simulator, t);
 });

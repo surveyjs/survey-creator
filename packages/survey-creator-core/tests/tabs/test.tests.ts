@@ -359,17 +359,3 @@ test("Test correct survey results node levels", (): any => {
   expect(secondLvl.length).toEqual(1);
   expect(secondLvl[0].lvl).toEqual(2);
 });
-test("Test sidebar with theme switcher", (): any => {
-  const creator: CreatorTester = new CreatorTester({ showPreviewSettings: true });
-  creator.makeNewViewActive("test");
-  expect(creator.sidebar.hasVisibleTabs).toEqual(true);
-
-  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  const settingsModel: SurveyModel = testPlugin.model.settingsSurvey;
-  const questions: Question[] = settingsModel.getAllQuestions();
-  expect(questions.length).toEqual(1);
-
-  const switcherQw: QuestionDropdownModel = <QuestionDropdownModel>questions[0];
-  expect(switcherQw.name).toEqual("appliedTheme");
-  expect(switcherQw.value).toEqual("defaultV2");
-});

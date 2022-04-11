@@ -30,8 +30,6 @@ export class TestSurveyTabViewModel extends Base {
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
-  private settingsSurveyValue: SurveyModel;
-
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: TestSurveyTabViewModel) => {
@@ -73,11 +71,10 @@ export class TestSurveyTabViewModel extends Base {
 
   constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
     super();
-    this.settingsSurveyValue = this.createSettingsSurvey();
     this.simulator = new SurveySimulatorModel();
   }
 
-  private updateSimulatorSurvey(json: any, theme: any) {
+  public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "test");
     newSurvey.css = theme;
     this.simulator.survey = newSurvey;
@@ -268,79 +265,26 @@ export class TestSurveyTabViewModel extends Base {
     }
     return null;
   }
-  public get settingsSurvey(): SurveyModel {
-    return this.settingsSurveyValue;
-  }
-  private getThemeTitle(name: string) {
-    return this.surveyProvider.getLocString("ed." + name + "Theme");
-  }
-  private get themeMapper() {
-    return [
-      { name: "defaultV2", title: this.getThemeTitle("defaultV2"), theme: defaultV2Css },
-      { name: "modern", title: this.getThemeTitle("modern"), theme: modernCss },
-      { name: "default", title: this.getThemeTitle("default"), theme: defaultStandardCss }
-    ];
-  }
-  private getAvailableThemes(): { value: string, text: string }[] {
-    const styles = getComputedStyle(document.body);
-    return this.themeMapper
-      .filter(item => styles.getPropertyValue(item.theme.variables.themeMark))
-      .map(item => { return { value: item.name, text: item.title }; });
-  }
-  private getStartThemeValue(): string {
-    const availableThemes = this.themeMapper.filter(item => item.theme.root === this.startTheme.root);
-    if (availableThemes.length > 0) return availableThemes[0].name;
-    return "defaultV2";
-  }
-  private getSettingsSurveyJSON(): any {
-    const availableThemes = this.getAvailableThemes();
-    return {
-      elements: [
-        {
-          type: "panel",
-          name: "themes",
-          elements: [
-            {
-              type: "dropdown",
-              name: "appliedTheme",
-              title: "Applied theme",
-              titleLocation: "top",
-              descriptionLocation: "hidden",
-              choices: availableThemes,
-              defaultValue: this.getStartThemeValue(),
-              showOptionsCaption: false
-            },
-          ],
-          title: "Themes"
-        }
-      ]
-    };
-  }
-  private updateResultsTemplate(theme) {
+  private updateResultsTemplate(theme: any) {
     this.simulator.survey.css = theme;
     this.simulator.survey.render();
   }
-  private setTheme(themeName: string): void {
-    const availableThemes = this.themeMapper.filter(item => item.name === themeName);
+  public setTheme(themeName: string, themeMapper: any): void {
+    const availableThemes = themeMapper.filter(item => item.name === themeName);
     let theme = <any>defaultV2Css;
     if (availableThemes.length > 0) {
       theme = availableThemes[0].theme;
     }
     this.isRunning ? this.updateSimulatorSurvey(this.json, theme) : this.updateResultsTemplate(theme);
   }
-  protected createSettingsSurvey(): SurveyModel {
-    var json = this.getSettingsSurveyJSON();
-    setSurveyJSONForPropertyGrid(json);
-    var res = this.surveyProvider.createSurvey(json, "test_settings");
-    res.css = propertyGridCss;
-    res.onValueChanged.add((sender, options) => {
-      if (options.name === "appliedTheme") {
-        this.setTheme(options.value);
-      }
-    });
-    return res;
+  public getCurrThemeTitle(themeMapper: any): string {
+    const availableThemes = themeMapper.filter(item => item.theme.root === this.simulator.survey.css.root);
+    let themeTitle = this.surveyProvider.getLocString("ed.defaultV2Theme");
+    if (availableThemes.length > 0) {
+      themeTitle = availableThemes[0].title;
+    }
+    return themeTitle;
   }
-
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
 
