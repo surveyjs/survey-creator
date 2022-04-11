@@ -1255,7 +1255,7 @@ export class PropertyGridEditorImageResponsiveSize extends PropertyGridEditorNum
   private static fitProperties = ["minImageWidth", "maxImageWidth", "minImageHeight", "maxImageHeight"]
 
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "number" && PropertyGridEditorImageResponsiveSize.fitProperties.indexOf(prop.name) > -1;
+    return prop.type == "responsiveImageSize" && PropertyGridEditorImageResponsiveSize.fitProperties.indexOf(prop.name) > -1;
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     question.valueFromDataCallback = function (value: any): any {
