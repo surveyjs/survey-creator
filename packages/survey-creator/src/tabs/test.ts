@@ -87,7 +87,7 @@ export class SurveyLiveTester {
       afterRender: this.setPageDisable,
       items: <any>ko.computed(() => this.koPages()),
     });
-    this.toolbarItems.push({
+    (<any>this.toolbarItems).push({
       id: "svd-test-locale-selector",
       title: this.localeText,
       visible: <any>this.koShowDefaultLanguageInTestSurveyTab,
