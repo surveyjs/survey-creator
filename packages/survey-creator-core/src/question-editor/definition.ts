@@ -231,8 +231,8 @@ export class SurveyQuestionEditorDefinition {
         "maxImageWidth",
         "minImageHeight",
         "maxImageHeight",
-        "imageHeight",
-        "imageWidth",
+        { name: "imageHeight", placeholder: "auto" },
+        { name: "imageWidth", placeholder: "auto" },
         "multiSelect",
         "showLabel",
       ]

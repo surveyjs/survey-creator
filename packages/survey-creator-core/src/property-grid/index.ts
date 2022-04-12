@@ -1216,7 +1216,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
 }
 export class PropertyGridEditorNumber extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "number";
+    return prop.type == "number" || prop.type == "responsiveImageSize";
   }
   public getJSON(
     obj: Base,
@@ -1247,19 +1247,6 @@ export class PropertyGridEditorImageSize extends PropertyGridEditorNumber {
     question.valueFromDataCallback = function (value: any): any {
       const isDefaultSize = isDefaultValue(obj["imageHeight"], obj["imageWidth"]);
       return isDefaultSize ? undefined : value;
-    };
-  }
-}
-
-export class PropertyGridEditorImageResponsiveSize extends PropertyGridEditorNumber {
-  private static fitProperties = ["minImageWidth", "maxImageWidth", "minImageHeight", "maxImageHeight"]
-
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "responsiveImageSize" && PropertyGridEditorImageResponsiveSize.fitProperties.indexOf(prop.name) > -1;
-  }
-  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
-    question.valueFromDataCallback = function (value: any): any {
-      return obj["responsivePropertiesAreDefault"] ? undefined : value;
     };
   }
 }
@@ -1578,7 +1565,6 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
-PropertyGridEditorCollection.register(new PropertyGridEditorImageResponsiveSize());
 
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
