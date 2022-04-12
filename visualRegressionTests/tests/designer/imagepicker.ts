@@ -56,11 +56,27 @@ test("Hover", async (t) => {
   await t
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
+
   await ClientFunction(() => {
     const q = (<any>window).creator.survey.getAllQuestions()[0];
+    q.colCount = 3;
+    q.minImageHeight = 65;
+    q.minImageWidth = 100;
+  })();
+  await t.click(imagePicker).hover(imagePicker.find(".svc-image-item-value-wrapper"));
+
+  await takeScreenshot("image-picker-responsive-col-count-3-hover.png", imagePicker, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+
+  await ClientFunction(() => {
+    const q = (<any>window).creator.survey.getAllQuestions()[0];
+    q.colCount = 0;
     q.imageWidth = 200;
     q.imageHeight = 150;
   })();
+  await t.click(imagePicker).hover(firstImage);
   await takeScreenshot("image-picker-hover.png", imagePicker, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
