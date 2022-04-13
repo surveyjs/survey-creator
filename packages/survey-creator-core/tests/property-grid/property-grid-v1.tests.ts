@@ -184,12 +184,12 @@ test("Create correct questions for property editors", () => {
   }
 });
 test("propertyEditor.displayName", () => {
-  var oldValue = defaultStrings.p["enableIf"];
-  defaultStrings.p["enableIf"] = "It is enableIf";
+  var oldValue = defaultStrings.pe["enableIf"];
+  defaultStrings.pe["enableIf"] = "It is enableIf";
   var propertyGrid = new PropertyGridModelTester(new Question("q1"));
   var enableIfQuestion = propertyGrid.survey.getQuestionByName("enableIf");
   expect(enableIfQuestion.title).toEqual("It is enableIf");
-  defaultStrings.p["enableIf"] = oldValue;
+  defaultStrings.pe["enableIf"] = oldValue;
 });
 /**
  * Skip several tests with custom property editors. We do not it completely different now and any question, including custom widget, can become a property editors.

@@ -146,19 +146,22 @@ test("dropdown property editor", () => {
 test("dropdown property editor localization", (): any => {
   var survey = new SurveyModel();
   var propertyGrid = new PropertyGridModelTester(survey);
-  var questionDescriptionLocationQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("questionDescriptionLocation");
+  var questionDescriptionLocationQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("logoFit");
   expect(questionDescriptionLocationQuestion.getType()).toEqual("buttongroup"); //"correct property editor is created" //since choices.length < 5 buttongroup rendered instead of dropdown
+
+  var questionDescriptionLocationQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("questionDescriptionLocation");
+  expect(questionDescriptionLocationQuestion.getType()).toEqual("dropdown");
   expect(questionDescriptionLocationQuestion.choices[0].value).toEqual(
     "underInput"
   );
   expect(questionDescriptionLocationQuestion.choices[0].text).toEqual(
-    "under input"
+    "Under the input"
   );
 
   var showPreviewQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("showPreviewBeforeComplete");
   expect(showPreviewQuestion.getType()).toEqual("dropdown"); //"correct property editor is created" a lot of text
   expect(showPreviewQuestion.choices[0].value).toEqual("noPreview");
-  expect(showPreviewQuestion.choices[0].text).toEqual("no preview");
+  expect(showPreviewQuestion.choices[0].text).toEqual("No preview");
 
   var localeQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("locale");
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
@@ -187,12 +190,12 @@ test("settings.propertyGrid.useButtonGroup", (): any => {
   var survey = new SurveyModel();
   var propertyGrid = new PropertyGridModelTester(survey);
   var questionDescriptionLocationQuestion =
-    propertyGrid.survey.getQuestionByName("questionDescriptionLocation");
+    propertyGrid.survey.getQuestionByName("logoFit");
   expect(questionDescriptionLocationQuestion.getType()).toEqual("buttongroup");
   settings.propertyGrid.useButtonGroup = false;
   propertyGrid = new PropertyGridModelTester(survey);
   questionDescriptionLocationQuestion = propertyGrid.survey.getQuestionByName(
-    "questionDescriptionLocation"
+    "logoFit"
   );
   expect(questionDescriptionLocationQuestion.getType()).toEqual("dropdown");
   settings.propertyGrid.useButtonGroup = true;
