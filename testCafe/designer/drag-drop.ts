@@ -68,8 +68,8 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   let pagesLength;
 
   await t
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
+    .hover(ImagePickerItem)
+    .dragToElement(ImagePickerItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(1);
 
@@ -110,8 +110,8 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   await t.expect(pagesLength).eql(7);
 
   await t
-    .hover(ImagePickerItem)
-    .dragToElement(ImagePickerItem, newGhostPagePage, { speed: 0.5 });
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(8);
 

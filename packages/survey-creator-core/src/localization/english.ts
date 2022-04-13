@@ -432,6 +432,12 @@ export var enStrings = {
     html: "Html",
     expression: "Expression",
 
+    responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height.",
+    minImageWidth: "Minimum image width",
+    maxImageWidth: "Maximum image width",
+    minImageHeight: "Minimum image height",
+    maxImageHeight: "Maximum image height",
+
     minValue: "Minimum value",
     maxValue: "Maximum value",
     minLength: "Minimum length",
