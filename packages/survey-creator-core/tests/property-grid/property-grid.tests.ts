@@ -1002,13 +1002,6 @@ test("restfull property editor, show imageLinkName", () => {
   imageLinkQuestion = restFullQuestion.contentPanel.getQuestionByName("imageLinkName");
   expect(imageLinkQuestion.isVisible).toBeFalsy();
 });
-test("check imagepicker responsiveImageSize properties", () => {
-  const imagePicker = new QuestionImagePickerModel("q2");
-  let propertyGrid = new PropertyGridModelTester(imagePicker);
-  const minWidth = <QuestionTextModel>propertyGrid.survey.getQuestionByName("minImageWidth");
-  expect(minWidth.description).toEqual("Does not apply if you specify the exact image width or height.");
-  expect(minWidth.inputType).toEqual("number");
-});
 
 test("options.readOnly is true", () => {
   var options = new EmptySurveyCreatorOptions();
@@ -1957,6 +1950,14 @@ test("Edit columns in property grid", () => {
   expect(question.columns[0].name).toEqual("col3");
   propertyGrid.survey.getQuestionByName("cellType").value = "text";
   expect(question.columns[0].cellType).toEqual("text");
+  expect(question.columns[0].inputType).toEqual("text");
+  expect(propertyGrid.survey.getQuestionByName("inputType").value).toEqual("text");
+  propertyGrid.survey.getQuestionByName("inputType").value = "number";
+  expect(question.columns[0].inputType).toEqual("number");
+  propertyGrid.survey.getQuestionByName("title").value = "New title";
+  expect(question.columns[0].title).toEqual("New title");
+  expect(propertyGrid.survey.getQuestionByName("min")).toBeTruthy();
+  expect(propertyGrid.survey.getQuestionByName("min").isVisible).toBeTruthy();
 });
 test("Change cellType in the column in property grid", () => {
   var question = new QuestionMatrixDynamicModel("q1");
