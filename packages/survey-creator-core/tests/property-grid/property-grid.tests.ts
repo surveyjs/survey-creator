@@ -1005,6 +1005,13 @@ test("restfull property editor, show imageLinkName", () => {
   imageLinkQuestion = restFullQuestion.contentPanel.getQuestionByName("imageLinkName");
   expect(imageLinkQuestion.isVisible).toBeFalsy();
 });
+test("check imagepicker responsiveImageSize properties", () => {
+  const imagePicker = new QuestionImagePickerModel("q2");
+  let propertyGrid = new PropertyGridModelTester(imagePicker);
+  const minWidth = <QuestionTextModel>propertyGrid.survey.getQuestionByName("minImageWidth");
+  expect(minWidth.description).toEqual("Does not apply if you specify the exact image width or height.");
+  expect(minWidth.inputType).toEqual("number");
+});
 
 test("options.readOnly is true", () => {
   var options = new EmptySurveyCreatorOptions();

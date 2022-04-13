@@ -1,4 +1,4 @@
-import { addQuestionByAddQuestionButton, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
+import { addQuestionByAddQuestionButton, explicitErrorHandler, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Inplace editors";
 
@@ -494,6 +494,7 @@ test("Ranking question inplace editor", async (t) => {
 });
 
 test("Image picker question inplace editor", async (t) => {
+  await explicitErrorHandler();
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Image picker"), { speed: 0.5 })
@@ -530,6 +531,7 @@ test("Image picker question inplace editor", async (t) => {
 });
 
 test("Image picker question inplace editor - add new item", async (t) => {
+  await explicitErrorHandler();
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Image picker"), { speed: 0.5 })
