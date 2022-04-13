@@ -303,7 +303,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ## Further Reading
 
-- [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#localization)
-- [Appearance Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#appearance)
-- [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#toolbox)
+- [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+- [Property Grid Customization](https://surveyjs.io/Documentation/Survey-Creator?id=property-grid)
+- [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox)
+- [Survey Customization](https://surveyjs.io/Documentation/Survey-Creator?id=survey-customization)
 - [Create a Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)

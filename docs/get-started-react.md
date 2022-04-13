@@ -10,6 +10,8 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 
 You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-react" target="_blank">Get Started with Survey Creator / Form Builder - React</a>.
 
+If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_react_quickstart" target="_blank">React + SurveyJS Quick Start Boilerplate</a>.
+
 ## Install the `survey-creator-react` npm Package
 
 Survey Creator for React is distributed as a <a href="https://www.npmjs.com/package/survey-creator-react" target="_blank">survey-creator-react</a> npm package. Run the following command to install it:
@@ -256,7 +258,8 @@ export function SurveyCreatorWidget() {
 
 ## Further Reading
 
-- [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#localization)
-- [Appearance Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#appearance)
-- [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#toolbox)
+- [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+- [Property Grid Customization](https://surveyjs.io/Documentation/Survey-Creator?id=property-grid)
+- [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox)
+- [Survey Customization](https://surveyjs.io/Documentation/Survey-Creator?id=survey-customization)
 - [Create a Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)

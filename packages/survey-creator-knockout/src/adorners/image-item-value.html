@@ -1,6 +1,6 @@
 <div class="svc-image-item-value-wrapper"
   data-bind="event: { pointerdown: function(model, event) { onPointerDown(event); } }, attr: attributes, css: { 'svc-image-item-value--new': isNew, 'svc-image-item-value-wrapper--ghost': isDragDropGhost }">
-  <div class="svc-image-item-value-wrapper__ghost"></div>
+  <div class="svc-image-item-value-wrapper__ghost" data-bind="style: { width: question.renderedImageWidth, height: question.renderedImageHeight }"></div>
 
   <div class="svc-image-item-value-wrapper__content">
     <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
@@ -31,7 +31,7 @@
       <div class="sd-imagepicker__item sd-imagepicker__item--inline">
         <label class="sd-imagepicker__label">
           <div
-            data-bind="style: { width: question.imageWidth ? question.imageWidth + 'px' : undefined, height: question.imageHeight ? question.imageHeight + 'px' : undefined }"
+            data-bind="style: { width: question.renderedImageWidth, height: question.renderedImageHeight }"
             class="sd-imagepicker__image"></div>
         </label>
       </div>

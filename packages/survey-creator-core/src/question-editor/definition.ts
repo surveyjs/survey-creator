@@ -226,8 +226,13 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "contentMode",
         "imageFit",
-        "imageHeight",
-        "imageWidth",
+        "isResponsive",
+        "minImageWidth",
+        "maxImageWidth",
+        "minImageHeight",
+        "maxImageHeight",
+        { name: "imageHeight", placeholder: "auto" },
+        { name: "imageWidth", placeholder: "auto" },
         "multiSelect",
         "showLabel",
       ]

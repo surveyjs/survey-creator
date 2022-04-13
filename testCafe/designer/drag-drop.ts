@@ -68,8 +68,8 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   let pagesLength;
 
   await t
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
+    .hover(ImagePickerItem)
+    .dragToElement(ImagePickerItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(1);
 
@@ -110,8 +110,8 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   await t.expect(pagesLength).eql(7);
 
   await t
-    .hover(ImagePickerItem)
-    .dragToElement(ImagePickerItem, newGhostPagePage, { speed: 0.5 });
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(8);
 
@@ -831,7 +831,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   const Item1 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
   const Item2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
   const Item3 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
-  let DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
+  let DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-drag-element__svg");
   await t
     .hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2)
     .dragToElement(DragZoneItem2, Item1, {
@@ -844,7 +844,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   let value = await getItemValueByIndex("question1", 0);
   await t.expect(value).eql(expectedValue);
 
-  DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find(".spg-matrixdynamic__drag-element");
+  DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find(".spg-drag-element__svg");
   await t.dragToElement(DragZoneItem2, Item3, { offsetX: 5, offsetY: 5, speed: 0.5 });
 
   value = await getItemValueByIndex("question1", 2);
@@ -897,7 +897,7 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
   const Page1 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(0);
   const Page2 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1);
   const Page3 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(2);
-  let DragZonePage2 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
+  let DragZonePage2 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-drag-element__svg");
   await t
     .hover(Page1).hover(Page2).hover(Page3).hover(DragZonePage2)
     .dragToElement(DragZonePage2, Page1, {

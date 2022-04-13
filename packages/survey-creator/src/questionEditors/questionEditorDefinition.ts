@@ -222,6 +222,10 @@ export class SurveyQuestionEditorDefinition {
         "imageFit",
         "imageHeight",
         "imageWidth",
+        "minImageWidth",
+        "maxImageWidth",
+        "minImageHeight",
+        "maxImageHeight",
       ],
     },
     image: {

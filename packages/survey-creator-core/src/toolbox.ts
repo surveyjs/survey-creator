@@ -109,7 +109,11 @@ export class QuestionToolbox
     "signaturepad"
   ];
 
-  private _questionDefaultSettings = {
+  public static getQuestionDefaultSettings(questionType: string) {
+    return this._questionDefaultSettings[questionType] && this._questionDefaultSettings[questionType]();
+  }
+
+  private static _questionDefaultSettings = {
     imagepicker: () => {
       return {
         choices: [
@@ -685,8 +689,8 @@ export class QuestionToolbox
   private getQuestionJSON(question: any): any {
     var json = new JsonObject().toJsonObject(question);
     json.type = question.getType();
-    if (!!this._questionDefaultSettings[json.type]) {
-      var defaultSettings = this._questionDefaultSettings[json.type]();
+    let defaultSettings = QuestionToolbox.getQuestionDefaultSettings(json.type);
+    if (defaultSettings) {
       for (var key in defaultSettings) {
         json[key] = defaultSettings[key];
       }

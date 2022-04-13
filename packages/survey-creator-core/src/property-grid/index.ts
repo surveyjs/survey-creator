@@ -17,7 +17,7 @@ import {
   MatrixDynamicRowModel,
   ComputedUpdater,
   QuestionDropdownModel,
-  QuestionSelectBase
+  QuestionSelectBase,
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -1219,7 +1219,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
 }
 export class PropertyGridEditorNumber extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "number";
+    return prop.type == "number" || prop.type == "responsiveImageSize";
   }
   public getJSON(
     obj: Base,
@@ -1243,11 +1243,10 @@ export class PropertyGridEditorImageSize extends PropertyGridEditorNumber {
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     const isDefaultValue = (imageHeight: number, imageWidth: number) => {
-      const imageHeightProperty = Serializer.findProperty("image", "imageHeight");
-      const imageWidthProperty = Serializer.findProperty("image", "imageWidth");
+      const imageHeightProperty = Serializer.findProperty(obj.getType(), "imageHeight");
+      const imageWidthProperty = Serializer.findProperty(obj.getType(), "imageWidth");
       return imageHeightProperty.isDefaultValue(imageHeight) && imageWidthProperty.isDefaultValue(imageWidth);
     };
-
     question.valueFromDataCallback = function (value: any): any {
       const isDefaultSize = isDefaultValue(obj["imageHeight"], obj["imageWidth"]);
       return isDefaultSize ? undefined : value;
@@ -1569,6 +1568,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
+
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

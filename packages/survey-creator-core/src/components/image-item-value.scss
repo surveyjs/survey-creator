@@ -95,10 +95,6 @@
   .sd-imagepicker__item.sd-imagepicker__item {
     width: 100%;
   }
-  .sd-imagepicker__image-container {
-    border: 1px dashed $border;
-    border-radius: 4px;
-  }
 }
 
 .svc-question__content--selected .svc-image-item-value-wrapper:hover {
@@ -127,7 +123,4 @@
 .svc-image-item-value-wrapper__ghost {
   display: none;
   background: $background-dim;
-  width: 200px;
-  height: 135px;
-  margin-top: 8px;
 }
