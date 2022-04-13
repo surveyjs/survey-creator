@@ -1190,7 +1190,7 @@ test("Change displayName for existing property. It should have higher priority t
   visibleQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("visible")
   );
-  expect(visibleQuestion.title).toEqual("Is visible?");
+  expect(visibleQuestion.title).toEqual("Visible");
 });
 
 test("SurveyPropertyResultfullEditor test", () => {
@@ -1712,7 +1712,7 @@ test("property editor titleQuestion.description", () => {
   );
   expect(
     defaultValueExpressionQuestion.description.indexOf(
-      "You can use curly brackets"
+      "Use curly brackets"
     ) > -1
   ).toBeTruthy();
 });
@@ -1935,8 +1935,8 @@ test("SurveyPropertyMultipleValuesEditor", () => {
   const question = new Question("q1");
   const propertyGrid = new PropertyGridModelTester(question);
   const multipleQuestion = <QuestionCheckboxModel>(
-      propertyGrid.survey.getQuestionByName("multiple")
-    );
+    propertyGrid.survey.getQuestionByName("multiple")
+  );
   expect(multipleQuestion).toBeTruthy();
   expect(multipleQuestion.getType()).toEqual("checkbox");
   expect(multipleQuestion.choices).toHaveLength(3);

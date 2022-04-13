@@ -45,6 +45,6 @@ test("property editor propertyHelpText", () => {
   expect(
     helptexts
       .getHelpText(questionText, defaultValueExpressionProp)
-      .indexOf("You can use curly brackets") > -1
+      .indexOf("Use curly brackets") > -1
   ).toBeTruthy();
 });

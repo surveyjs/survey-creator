@@ -2159,7 +2159,7 @@ test("property editor show help as description", () => {
   var actions = defaultValueExpressionQuestion.getTitleActions();
   expect(
     defaultValueExpressionQuestion.description.indexOf(
-      "You can use curly brackets"
+      "Use curly brackets"
     ) > -1
   ).toBeTruthy();
   expect(actions).toHaveLength(2);

@@ -50,7 +50,7 @@ test("change string to empty string", () => {
 });
 
 test("getPropertyNameInEditor", () => {
-  expect(editorLocalization.getPropertyNameInEditor("rateMin")).toEqual("Minimum rate");
+  expect(editorLocalization.getPropertyNameInEditor("rateMin")).toEqual("Minimum rate value");
   expect(editorLocalization.getPropertyNameInEditor("someGoodProperty")).toEqual("Some good property");
   expect(editorLocalization.getPropertyNameInEditor("title")).toEqual("Title");
 });
