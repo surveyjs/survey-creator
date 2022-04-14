@@ -1771,6 +1771,27 @@ test("ConvertTo, show the current question type selected", (): any => {
   creator.convertCurrentQuestion("text");
   expect((<any>creator.selectedElement).id).toEqual(question.id);
 });
+
+test("ConverTo, change title of question item", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.getItemByName("radiogroup").title = "Single selector";
+
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+
+  const questionModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined
+  );
+  const action = questionModel.getActionById("convertTo");
+  expect(action.title).toEqual("Single selector");
+});
 test("ConvertTo, show custom widgets in ConvertTo action", (): any => {
   const widget = {
     name: "test_widget",
@@ -2533,12 +2554,10 @@ test("SurveyElementAdornerBase setSurveyElement updateActionsProperties", (): an
   let count = 0;
   const adorderBase = new SurveyElementAdornerBase(creator, null);
 
-
   creator.onElementAllowOperations.add(function (_, options) {
     count++;
   });
   adorderBase["setSurveyElement"](question);
   expect(count).toBe(1);
 });
-
 
