@@ -41,7 +41,7 @@ test("add language", async (t) => {
     .expect(languagesSelector.nth(0).classNames).contains(checkedClassName)
     .expect(languageCaptionsSelector.nth(0).innerText).eql("Default (english)")
 
-    .click(Selector(".spg-panel__title").withText("Languages").find(".sv-action-bar-item"))
+    .click(Selector(".spg-panel__title").withText("Languages").find(".spg-action-button"))
     .click(Selector("span").withText("deutsch"))
     .expect(headerColumnSelector.count).eql(3)
     .expect(stringsColumnSelector.count).eql(3)
