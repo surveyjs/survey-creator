@@ -202,11 +202,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       { name: "default", title: getThemeTitle("default"), theme: defaultStandardCss }
     ];
     const styles = getComputedStyle(document.body);
-    const availableThemes = themeMapper
+    const availableThemesToItems = themeMapper
       .filter(item => styles.getPropertyValue(item.theme.variables.themeMark))
-      .map(item => { return { value: item.name, title: item.title }; });
-    const availableThemesToItems = Object.keys(availableThemes)
-      .map(key => ({ id: key, value: availableThemes[key].value, title: availableThemes[key].title }));
+      .map(item => ({ id: item.name + "_themeSwitcher", value: item.name, title: item.title }));
 
     if (availableThemesToItems.length > 1) {
       this.changeThemeModel = new ListModel(
@@ -227,7 +225,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       );
 
       this.changeThemeAction = new Action({
-        id: "themeChanger",
+        id: "themeSwitcher",
         iconName: "icon-theme",
         component: "sv-action-bar-item-dropdown",
         mode: "large",
@@ -242,8 +240,6 @@ export class TabTestPlugin implements ICreatorPlugin {
         },
         popupModel: this.changeThemePopupModel
       });
-      this.changeThemePopupModel.onHide = () => { this.changeThemeAction.enabled = true; };
-      this.changeThemePopupModel.onShow = () => { this.changeThemeAction.enabled = false; };
 
       items.push(this.changeThemeAction);
     }
