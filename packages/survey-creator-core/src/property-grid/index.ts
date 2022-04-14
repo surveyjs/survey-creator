@@ -345,6 +345,7 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-clear",
+      innerCss: "spg-action-button--danger",
       enabled: enabled,
       visible: <any>new ComputedUpdater<boolean>(() => {
         const propertyValue = (<any>question).obj[property.name];
