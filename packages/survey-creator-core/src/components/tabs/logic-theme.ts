@@ -1,3 +1,5 @@
+import { defaultActionBarCss } from "survey-core";
+
 export var logicCss = {
   root: "",
   container: "",
@@ -307,5 +309,6 @@ export var logicCss = {
   },
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
-  }
+  },
+  actionBar: defaultActionBarCss
 };
