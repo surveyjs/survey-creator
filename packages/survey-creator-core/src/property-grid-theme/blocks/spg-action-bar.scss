@@ -1,0 +1,54 @@
+.spg-action-bar {
+  display: flex;
+  box-sizing: content-box;
+  padding-right: calcSize(0.5);
+  position: relative;
+  align-items: center;
+  margin-left: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  .sv-action:not(.sv-action--hidden):not(:last-of-type)>.sv-action__content {
+    padding-right: 0;
+  }
+}
+
+
+.spg-action-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: flex;
+  height: calcSize(5);
+  padding: calcSize(1);
+  box-sizing: border-box;
+  border: none;
+  border-radius: calcSize(12.5);
+  background-color: transparent;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+      outline: none;
+      background-color: $primary-light;
+      use {
+          fill: $primary;
+      }
+  }
+}
+.spg-action-button__icon {
+  display: block;
+  use {
+    fill: $foreground-light;
+  }
+}
+.spg-action-button--danger {
+  &:hover,
+  &:focus {
+    background-color: $red-light;
+    use {
+        fill: $red;
+    }
+  }
+}
+button.spg-action-button--large {
+  padding: calcSize(0.5) calcSize(2);
+}

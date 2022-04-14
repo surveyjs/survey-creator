@@ -346,7 +346,6 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-clear",
-      css: "spg-action-button spg-action-button--danger",
       enabled: enabled,
       visible: <any>new ComputedUpdater<boolean>(() => {
         const propertyValue = (<any>question).obj[property.name];
@@ -384,7 +383,6 @@ export class PropertyGridTitleActionsCreator {
     var setupAction = {
       id: "property-grid-setup",
       iconName: property.isArray ? "icon-fast-entry" : "icon-wizard",
-      css: "spg-action-button",
       enabled: enabled,
       title: getLocString("pe.edit"),
       showTitle: false,
@@ -399,7 +397,6 @@ export class PropertyGridTitleActionsCreator {
     const action = new Action({
       title: "",
       id: "property-grid-help",
-      css: "spg-action-button",
       iconName: this.getHelpActionIconName(question),
       showTitle: false,
       action: () => {
@@ -1568,7 +1565,6 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
-
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

@@ -69,7 +69,6 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         visibleIndex: 0,
         showTitle: false,
         location: "end",
-        css: "spg-action-button",
         action: () => {
           var column = <MatrixDropdownColumn>options.row.editingObj;
           setObjFunc(column);
@@ -82,7 +81,6 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     updateMatrixRemoveAction(question, actions, row);
     if (!!showDetailAction) {
       showDetailAction.component = "sv-action-bar-item";
-      showDetailAction.css = "spg-action-button";
       showDetailAction.iconName = this.getShowDetailActionIconName(row);
       showDetailAction.showTitle = false;
       showDetailAction.location = "end";
@@ -104,7 +102,6 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     options.titleActions.push({
       id: "add-item",
       iconName: "icon-add",
-      css: "spg-action-button",
       title: question.addRowText,
       showTitle: false,
       action: () => {
