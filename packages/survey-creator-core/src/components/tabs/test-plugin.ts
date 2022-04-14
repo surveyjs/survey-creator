@@ -204,7 +204,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     const styles = getComputedStyle(document.body);
     const availableThemesToItems = themeMapper
       .filter(item => styles.getPropertyValue(item.theme.variables.themeMark))
-      .map(item => ({ id: item.name + "_themeChanger", value: item.name, title: item.title }));
+      .map(item => ({ id: item.name + "_themeSwitcher", value: item.name, title: item.title }));
 
     if (availableThemesToItems.length > 1) {
       this.changeThemeModel = new ListModel(
@@ -225,7 +225,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       );
 
       this.changeThemeAction = new Action({
-        id: "themeChanger",
+        id: "themeSwitcher",
         iconName: "icon-theme",
         component: "sv-action-bar-item-dropdown",
         mode: "large",

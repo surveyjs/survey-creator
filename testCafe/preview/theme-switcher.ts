@@ -1,4 +1,4 @@
-import { getTabbedMenuItemByText, setJSON, creatorTabPreviewName, urlPreviewThemeChanger, creatorTabDesignerName, url } from "../helper";
+import { getTabbedMenuItemByText, setJSON, creatorTabPreviewName, urlPreviewThemeSwitcher, creatorTabDesignerName, url } from "../helper";
 import { Selector } from "testcafe";
 const title = "Preview tab";
 
@@ -22,24 +22,24 @@ fixture`${title}`.page`${url}`.beforeEach(
   }
 );
 
-test("Test theme changer with one loaded theme", async (t) => {
+test("Test theme switcher with one loaded theme", async (t) => {
   await setJSON(json);
 
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
-    .expect(Selector("#themeChanger").visible).notOk();
+    .expect(Selector("#themeSwitcher").visible).notOk();
 });
 
-fixture`${title}`.page`${urlPreviewThemeChanger}`.beforeEach(
+fixture`${title}`.page`${urlPreviewThemeSwitcher}`.beforeEach(
   async (t) => {
     await t.maximizeWindow();
   }
 );
 
-test("Test theme changer with 3 themes", async (t) => {
+test("Test theme switcher with 3 themes", async (t) => {
   const clickAndCheck = async (listID, themeName, visibleSelector, notVisibleSelector_1, notVisibleSelector_2) => {
     await t
-      .click(Selector("#themeChanger"))
+      .click(Selector("#themeSwitcher"))
       .click(Selector(".sv-popup__container .sv-list .sv-list__item").filterVisible().nth(listID));
     await checkVisibility(themeName, visibleSelector, notVisibleSelector_1, notVisibleSelector_2);
   };
@@ -49,7 +49,7 @@ test("Test theme changer with 3 themes", async (t) => {
       .expect(visibleSelector.visible).ok()
       .expect(notVisibleSelector_1.visible).notOk()
       .expect(notVisibleSelector_2.visible).notOk()
-      .expect(Selector("#themeChanger button").withText(themeName).visible).ok();
+      .expect(Selector("#themeSwitcher button").withText(themeName).visible).ok();
   };
 
   const defaultRoot = Selector(".sd-root-modern");
