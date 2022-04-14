@@ -35,7 +35,6 @@ import {
 import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
 import { defaultV2Css } from "survey-core";
-import { updateMatrixRemoveAction } from "../utils/actions";
 import { SurveyHelper } from "../survey-helper";
 import { CreatorBase } from "../creator-base";
 import { IPropertyEditorInfo, SurveyQuestionEditorDefinition } from "../question-editor/definition";
@@ -1115,7 +1114,6 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     if (property.type !== "condition") {
       surveyPropertyEditor.editSurvey.css = defaultV2Css;
     }
-    surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     if (!settings.showModal) return surveyPropertyEditor;
     settings.showModal(
       "survey",
