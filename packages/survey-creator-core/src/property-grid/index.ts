@@ -666,7 +666,7 @@ export class PropertyJSONGenerator {
   private getQuestionTitle(prop: JsonObjectProperty, title: string): string {
     if (!!prop.displayName) return prop.displayName;
     if (!!title && title !== prop.name) return title;
-    return editorLocalization.getPropertyNameInEditor(prop.name);
+    return editorLocalization.getPropertyNameInEditor(this.obj.getType(), prop.name);
   }
 }
 
@@ -1402,7 +1402,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       if (text) return text;
     }
     if (value === null) return null;
-    return editorLocalization.getPropertyValue(value);
+    return editorLocalization.getPropertyValueInEditor(prop.name, value);
   }
   private choicesFromPropChoices(
     prop: JsonObjectProperty,
@@ -1568,7 +1568,6 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
-
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);
