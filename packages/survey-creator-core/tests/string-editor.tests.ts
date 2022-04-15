@@ -299,3 +299,24 @@ test("Test string editor inplaceEditForValues", (): any => {
   expect(itemValue.value).toEqual("newItemValue");
   expect(itemValue.text).toEqual("newItem");
 });
+test("Test string editor onTextMarkdownSave event", (): any => {
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { name: "q", type: "text" }
+        ]
+      }
+    ]
+  });
+  const q = <QuestionRadiogroupModel>creator.survey.getQuestionByName("q");
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+  expect(stringEditorSurveyTitle.editAsText).toEqual(true);
+  creator.onTextMarkdownSave.add((survey, options) => {
+    options.text = options.html.replace(/\$/g, "*");
+  });
+  stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+  expect(stringEditorSurveyTitle.editAsText).toEqual(false);
+});

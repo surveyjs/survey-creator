@@ -10,8 +10,10 @@ export class StringEditorViewModelBase extends Base {
 
   @property() errorText: string;
   @property() focused: boolean;
+  @property({ defaultValue: true }) editAsText: boolean;
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
+    this.checkMarkdownToTextConver(this.locString.owner, this.locString.name);
   }
 
   public setLocString(locString: LocalizableString) {
@@ -42,6 +44,19 @@ export class StringEditorViewModelBase extends Base {
     event.target.spellcheck = true;
     this.focused = true;
     this.justFocused = true;
+  }
+
+  private checkMarkdownToTextConver(element, name) {
+    var options = {
+      element: element,
+      text: <any>null,
+      name: name,
+      html: "",
+    };
+    if(this.creator) {
+      this.creator.onTextMarkdownSave.fire(this, options);
+      this.editAsText = (options.text === null);
+    }
   }
 
   public onInput(event: any): void {

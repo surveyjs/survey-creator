@@ -351,6 +351,20 @@ export class CreatorBase extends Base
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
+  /**
+   * Use this event to process the markdown text save from string editor.
+   * <br/> `sender` - the survey object that fires the event.
+   * <br/> `options.element` - SurveyJS element (a question, panel, page, or survey) where the string is going to be rendered.
+   * <br/> `options.name` - a property name is going to be rendered.
+   * <br/> `options.html` - an HTML content to be saved.
+   * <br/> `options.text` - a text that need to be saved. It is `null` by default. Use this property to specify the text instead of `options.html`.
+   */
+  public onTextMarkdownSave: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
   /**
    * Use this event to disable user interactions with a question or panel on the design surface.
    *
