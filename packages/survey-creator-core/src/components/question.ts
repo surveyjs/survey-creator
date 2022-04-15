@@ -238,7 +238,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       "bottom",
       "center"
     );
-    let actionTitle = this.creator.getLocString("qt." + this.currentType);
+    let actionTitle = selectedItems.length > 0 ? selectedItems[0].title : this.creator.getLocString("qt." + this.currentType);
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
