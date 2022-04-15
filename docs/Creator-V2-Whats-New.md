@@ -81,7 +81,7 @@ If you click the button that changes the question type, you will see a drop-down
 
 <img src="./images/survey-creator-question-types.png" alt="Survey Creator - Question types dropdown" width="100%">
 
-If you switch between non-interchangeable question types, the question configuration may be lost. Use Undo and Redo buttons to roll back or reinstate the previous configuration. To revert to old behavior (limit the list to interchangeable types only), use the following code:
+If you switch between non-interchangeable question types, the question configuration may be lost. Use Undo and Redo buttons to roll back or reinstate the previous configuration. Alternatively, you can revert to old behavior. Use the following code to limit the list to interchangeable types only:
 
 ```js
 SurveyCreator.settings.questionConvertMode = 1;
@@ -139,7 +139,7 @@ Users can now create and edit logic rules within the same view.
 
 <img src="./images/creator-v2-logic-tab-item-editing.png" alt="Survey Creator - Logic tab" width="75%">
 
-We also added a capability to filter the rules by questions or action types. This capability is useful for surveys with complex logic.
+We also added the capability to filter rules by questions or action types. This capability is useful for surveys with complex logic.
 
 <img src="./images/creator-v2-logic-tab-filtering.png" alt="Survey Creator - Question selector in the Logic tab" width="75%">
 
@@ -179,14 +179,14 @@ Previously, we used to render survey elements first, and only then added [adorne
 
 ## Native Survey Creator for Angular and Vue (Planned)
 
-The new Survey Creator includes native support for React and Knockout. We also plan to develop native versions for Angular and Vue in the future. For the time being, you can integrate the Knockout version into your Angular or Vue application as described in the following articles:
+The new Survey Creator includes native support for React and Knockout. We also plan to develop native versions for Angular and Vue in the future. For now, you can integrate the Knockout version into your Angular or Vue application as described in the following articles:
 
 - [Get Started with Survey Creator in Angular](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-angular)
 - [Get Started with Survey Creator in Vue](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue)
 
 ## Migration to the New Survey Creator
 
-If you already have a [commercial license](https://surveyjs.io/Licenses#SurveyCreator) for the Survey Creator or a [SurveyJS Pro subscription](https://surveyjs.io/Home/Buy?#surveyjs-products) and purchased them within a year of the new Survey Creator release, you can migrate to the new version now and without additional payment.
+If you already have a [commercial license](https://surveyjs.io/Licenses#SurveyCreator) for the Survey Creator or a [SurveyJS Pro subscription](https://surveyjs.io/Home/Buy?#surveyjs-products), and you purchased them within a year of the new Survey Creator release, then you can migrate to the new version now without additional payment.
 
 If your subscription has ended, you can continue using the old Survey Creator version as long as you wish. To upgrade to the latest SurveyJS releases that include the new Survey Creator, [renew your subscription](https://surveyjs.io/Buy#surveyjs-updates).
 
