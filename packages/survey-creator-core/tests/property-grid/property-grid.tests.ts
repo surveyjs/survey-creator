@@ -52,6 +52,7 @@ import {
   PropertyGridValueEditorBase
 } from "../../src/property-grid/values";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
+import { editorLocalization } from "../../src/editorLocalization";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
@@ -2474,4 +2475,14 @@ test("autoComplate property", () => {
   expect(autoCompleteQuestion.dataList).toBeTruthy();
   expect(Array.isArray(autoCompleteQuestion.dataList)).toBeTruthy();
   expect(autoCompleteQuestion.dataList.length > 10).toBeTruthy();
+});
+test("property editor title description html", () => {
+  var survey = new SurveyModel();
+  var curStrings = editorLocalization.getLocale("");
+  curStrings.pehelp.title = "Common **Title**";
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var titleQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("title")
+  );
+  expect(titleQuestion.locDescription.html).toEqual("Common <span class='spg-bold'>Title</span>");
 });

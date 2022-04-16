@@ -6,6 +6,11 @@ export class EditorLocalization {
   public currentLocale = "";
   public locales = {};
   private peByClass = {};
+  private peHelpByClass = {};
+  public reset() : void {
+    this.peByClass = {};
+    this.peHelpByClass = {};
+  }
   public getString(strName: string, locale: string = null): string {
     var loc = this.getLocale(locale);
     var defaultLocale = this.getLocale("en");
@@ -57,40 +62,61 @@ export class EditorLocalization {
     return "";
   }
   public getPropertyNameInEditor(typeName: string, propName: string, defaultName: string = null): string {
-    let obj = this.getPropertyNameInEditorByType(typeName, propName);
+    let obj = this.getPropertyInfoInEditorByType(typeName, propName, this.peByClass, "pe");
     if(!obj) {
       obj = this.getString("pe." + propName);
     }
     if (obj !== propName) return obj;
     return this.getPropertyName(propName, defaultName);
   }
-  private getPropertyNameInEditorByType(typeName: string, propName: string): string {
-    if(!typeName) return undefined;
-    let peClass = this.peByClass[typeName];
-    if(peClass === undefined) {
-      peClass = this.getObjInEditorByType(typeName);
+  public getPropertyHelpInEditor(typeName: string, propName: string, propType: string = undefined): string {
+    let helpStr = this.getPropertyInfoInEditorByType(typeName, propName, this.peHelpByClass, "pehelp");
+    if(!!helpStr) return helpStr;
+    const loc = this.getLocale();
+    if(!!loc && !!loc.pehelp) {
+      helpStr = loc.pehelp[propName];
     }
-    return !!peClass ? peClass[propName] : undefined;
+    if(!!helpStr) return helpStr;
+    if(!!propType && !!loc.pe) return loc.pe[propType + "Help"];
+    return undefined;
   }
-  private getObjInEditorByType(typeName: string): any {
+  private getPropertyInfoInEditorByType(typeName: string, propName: string, peInfoByClass: any, postFix: string): string {
     if(!typeName) return undefined;
-    const peClass = this.peByClass[typeName];
+    let peClass = peInfoByClass[typeName];
+    if(peClass === undefined) {
+      peClass = this.getObjInEditorByType(typeName, peInfoByClass, postFix);
+    }
+    while(!!peClass) {
+      if(!!peClass.props[propName]) return peClass.props[propName];
+      peClass = peClass.parent;
+    }
+    return undefined;
+  }
+  private getObjInEditorByType(typeName: string, peInfoByClass: any, postFix: string): any {
+    if(!typeName) return undefined;
+    const peClass = peInfoByClass[typeName];
     if(peClass !== undefined) peClass;
     const loc: any = this.getLocale();
-    const pe = !!loc ? loc.pe : undefined;
+    const pe = !!loc ? loc[postFix] : undefined;
     if(!pe) return undefined;
     let classInfo = Serializer.findClass(typeName);
+    const classNames = [];
     let res = undefined;
     while(!!classInfo) {
       const tName = classInfo.name;
+      res = peInfoByClass[typeName];
+      if(!!res) break;
+      classNames.push(tName);
       if(pe[tName]) {
-        res = pe[tName];
+        res = { props: pe[tName], parent: this.getObjInEditorByType(classInfo.parentName, peInfoByClass, postFix) };
         break;
       }
       if(!classInfo.parentName) break;
       classInfo = Serializer.findClass(classInfo.parentName);
     }
-    this.peByClass[typeName] = null;
+    for(var i = 0; i < classNames.length; i ++) {
+      peInfoByClass[classNames[i]] = res;
+    }
     return res;
   }
   public getProperty(strName: string, defaultName: string = null): string {

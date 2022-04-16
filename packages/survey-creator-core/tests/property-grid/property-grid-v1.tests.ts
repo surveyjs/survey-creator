@@ -41,7 +41,6 @@ import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { DefaultValueEditor } from "../../src/property-grid/values-survey";
 import { PropertyGridValueEditor } from "../../src/property-grid/values";
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
-import { PropertiesHelpTexts } from "../../src/property-grid/properties-helptext";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/restfull";
@@ -1672,15 +1671,14 @@ test("SurveyHelper.applyItemValueArray", () => {
 });
 
 test("property editor titleQuestion.description", () => {
-  PropertiesHelpTexts.instance.reset();
   var survey = new SurveyModel();
   survey.addNewPage("p");
   var question = survey.pages[0].addNewQuestion("text", "q1");
   var curStrings = editorLocalization.getLocale("");
   curStrings.pehelp.title = "Common Title";
-  curStrings.pehelp.survey_title = "Survey Title";
-  curStrings.pehelp.page_title = "Page Title";
-  curStrings.pehelp.question_title = "Question Title";
+  curStrings.pehelp.survey = { title: "Survey Title" };
+  curStrings.pehelp.page = { title: "Page Title" };
+  curStrings.pehelp.question = { title: "Question Title" };
   var propertyGrid = new PropertyGridModelTester(question);
   var titleQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("title")
@@ -1699,8 +1697,8 @@ test("property editor titleQuestion.description", () => {
   );
   expect(titleQuestion.description).toEqual("Survey Title");
 
-  delete curStrings.pehelp["page_title"];
-  PropertiesHelpTexts.instance.reset();
+  delete curStrings.pehelp["page"];
+  editorLocalization.reset();
   propertyGrid = new PropertyGridModelTester(survey.pages[0]);
   titleQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("title")

@@ -287,7 +287,7 @@ export var enStrings = {
     // conditionHelp:
     //   "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
-      "You can use curly brackets to get access to the question values: {question1} + {question2}, ({price}*{quantity}) * (100 - {discount}). You can use functions as: iif(), today(), age(), min(), max(), count(), avg() and others.",
+      "You can use curly brackets to get access to the question values:\n`{question1} + {question2}`,\n`({price}*{quantity}) * (100 - {discount})`.\nYou can use functions as:\n`iif()`, `today()`, `age()`, `min()`, `max()`, `count()`, `avg()` and others.",
     aceEditorHelp: "Press ctrl+space to get expression completion hint",
     aceEditorRowTitle: "Current row",
     aceEditorPanelTitle: "Current panel",
