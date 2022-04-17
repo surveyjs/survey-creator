@@ -42,7 +42,10 @@ export class ItemValueAdornerComponent extends SurveyElementBase<
       attachKey2click(<span
         className="svc-item-value-controls__button svc-item-value-controls__add"
         aria-label={this.model.tooltip}
-        onClick={() => this.model.add(this.model)}
+        onClick={() => {
+          this.model.add(this.model);
+          this.model.isNew = false;
+        }}
       >
         <SvgIcon size={16} iconName={"icon-add_16x16"}></SvgIcon>
       </span>)
