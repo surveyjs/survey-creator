@@ -353,12 +353,15 @@ export class CreatorBase extends Base
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
-   * Use this event to process the markdown text save from string editor.
-   * <br/> `sender` - the survey object that fires the event.
-   * <br/> `options.element` - SurveyJS element (a question, panel, page, or survey) where the string is going to be rendered.
-   * <br/> `options.name` - a property name is going to be rendered.
-   * <br/> `options.html` - an HTML content to be saved.
-   * <br/> `options.text` - a text that need to be saved. It is `null` by default. Use this property to specify the text instead of `options.html`.
+   * This event is raised after a user has edited a text value on the design surface. This value may include HTML markup. You can handle the `onHtmlToMarkdown` event to convert the HTML markup to Markdown.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.element` - The instance of a survey element (survey, page, panel, question) that the user configures.
+   * - `options.name` - The name of a property whose value has been edited.
+   * - `options.html` - HTML content. Pass this field's value to an HTML-to-Markdown converter.
+   * - `options.text` - A text string that may contain Markdown. Assign the result of the HTML-to-Markdown conversion to this field.
    */
   public onHtmlToMarkdown: Survey.Event<
     (sender: CreatorBase, options: any) => any,
