@@ -11,6 +11,62 @@ test("Get property name and title", () => {
   expect(editorLocalization.getPropertyName("text_title")).toEqual(defaultStrings.p.title.name);
   expect(editorLocalization.getPropertyTitle("text_title")).toEqual(defaultStrings.p.title.title);
 });
+test("Get property name from pe. based on class name", () => {
+  const pe: any = defaultStrings.pe;
+  pe.testProperty = "All";
+  pe.testProperty2 = "All2";
+  pe.survey = { testProperty: "Survey" };
+  pe.question = { testProperty: "Question", testProperty2: "Question2", testProperty3: "Question3" };
+  pe.text = { testProperty: "Text" };
+
+  expect(editorLocalization.getPropertyNameInEditor("base", "testProperty")).toEqual("All");
+  expect(editorLocalization.getPropertyNameInEditor("page", "testProperty")).toEqual("All");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "testProperty")).toEqual("Survey");
+  expect(editorLocalization.getPropertyNameInEditor("question", "testProperty")).toEqual("Question");
+  expect(editorLocalization.getPropertyNameInEditor("matrix", "testProperty")).toEqual("Question");
+  expect(editorLocalization.getPropertyNameInEditor("text", "testProperty")).toEqual("Text");
+
+  expect(editorLocalization.getPropertyNameInEditor("base", "testProperty2")).toEqual("All2");
+  expect(editorLocalization.getPropertyNameInEditor("page", "testProperty2")).toEqual("All2");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "testProperty2")).toEqual("All2");
+  expect(editorLocalization.getPropertyNameInEditor("question", "testProperty2")).toEqual("Question2");
+  expect(editorLocalization.getPropertyNameInEditor("matrix", "testProperty2")).toEqual("Question2");
+  expect(editorLocalization.getPropertyNameInEditor("text", "testProperty2")).toEqual("Question2");
+  expect(editorLocalization.getPropertyNameInEditor("matrix", "testProperty3")).toEqual("Question3");
+  expect(editorLocalization.getPropertyNameInEditor("text", "testProperty3")).toEqual("Question3");
+});
+test("Get property description from peHelp. based on class name", () => {
+  const peHelp: any = defaultStrings.pehelp;
+  peHelp.testProperty = "Help_All";
+  peHelp.testProperty2 = "Help_All2";
+  peHelp.survey = { testProperty: "Help_Survey" };
+  peHelp.question = { testProperty: "Help_Question", testProperty2: "Help_Question2", testProperty3: "Help_Question3" };
+  peHelp.text = { testProperty: "Help_Text" };
+
+  expect(editorLocalization.getPropertyHelpInEditor("base", "testProperty")).toEqual("Help_All");
+  expect(editorLocalization.getPropertyHelpInEditor("page", "testProperty")).toEqual("Help_All");
+  expect(editorLocalization.getPropertyHelpInEditor("survey", "testProperty")).toEqual("Help_Survey");
+  expect(editorLocalization.getPropertyHelpInEditor("question", "testProperty")).toEqual("Help_Question");
+  expect(editorLocalization.getPropertyHelpInEditor("matrix", "testProperty")).toEqual("Help_Question");
+  expect(editorLocalization.getPropertyHelpInEditor("text", "testProperty")).toEqual("Help_Text");
+
+  expect(editorLocalization.getPropertyHelpInEditor("base", "testProperty2")).toEqual("Help_All2");
+  expect(editorLocalization.getPropertyHelpInEditor("page", "testProperty2")).toEqual("Help_All2");
+  expect(editorLocalization.getPropertyHelpInEditor("survey", "testProperty2")).toEqual("Help_All2");
+  expect(editorLocalization.getPropertyHelpInEditor("question", "testProperty2")).toEqual("Help_Question2");
+  expect(editorLocalization.getPropertyHelpInEditor("matrix", "testProperty2")).toEqual("Help_Question2");
+  expect(editorLocalization.getPropertyHelpInEditor("text", "testProperty2")).toEqual("Help_Question2");
+  expect(editorLocalization.getPropertyHelpInEditor("matrix", "testProperty3")).toEqual("Help_Question3");
+  expect(editorLocalization.getPropertyHelpInEditor("text", "testProperty3")).toEqual("Help_Question3");
+  expect(editorLocalization.getPropertyHelpInEditor("text", "test", "expression")).toBeTruthy();
+});
+test("Get value name from pv. based on property name", () => {
+  const pv: any = defaultStrings.pv;
+  pv.testValue = "All";
+  pv.questionsOrder = { testValue: "Question" };
+  expect(editorLocalization.getPropertyValueInEditor("questionsOrder", "testValue")).toEqual("Question");
+  expect(editorLocalization.getPropertyValueInEditor("noQuestionOrder", "testValue")).toEqual("All");
+});
 test("getProperty function breaks on word automatically", () => {
   expect(editorLocalization.getProperty("someGoodProperty")).toEqual("Some good property");
   expect(editorLocalization.getPropertyName("title")).toEqual("Title");
@@ -50,9 +106,9 @@ test("change string to empty string", () => {
 });
 
 test("getPropertyNameInEditor", () => {
-  expect(editorLocalization.getPropertyNameInEditor("rateMin")).toEqual("Minimum rate value");
-  expect(editorLocalization.getPropertyNameInEditor("someGoodProperty")).toEqual("Some good property");
-  expect(editorLocalization.getPropertyNameInEditor("title")).toEqual("Title");
+  expect(editorLocalization.getPropertyNameInEditor("rating", "rateMin")).toEqual("Minimum rate value");
+  expect(editorLocalization.getPropertyNameInEditor("question", "someGoodProperty")).toEqual("Some good property");
+  expect(editorLocalization.getPropertyNameInEditor("question", "title")).toEqual("Title");
 });
 
 test("getPropertyNameInEditor, go to p, if pe is emtpy", () => {
@@ -62,7 +118,7 @@ test("getPropertyNameInEditor, go to p, if pe is emtpy", () => {
   editorLocalization.locales["en"] = enStrings;
   editorLocalization.currentLocale = "en";
 
-  expect(editorLocalization.getPropertyNameInEditor("isRequired2")).toEqual("some new text");
+  expect(editorLocalization.getPropertyNameInEditor("question", "isRequired2")).toEqual("some new text");
 });
 test("getPropertyValue and convertToCamelCase", () => {
   expect(editorLocalization.getPropertyValue("progressTop")).toEqual("progress on top");

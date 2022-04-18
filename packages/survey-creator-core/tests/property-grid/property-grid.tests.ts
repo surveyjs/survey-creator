@@ -52,6 +52,7 @@ import {
   PropertyGridValueEditorBase
 } from "../../src/property-grid/values";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
+import { editorLocalization } from "../../src/editorLocalization";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
@@ -1960,6 +1961,14 @@ test("Edit columns in property grid", () => {
   expect(question.columns[0].name).toEqual("col3");
   propertyGrid.survey.getQuestionByName("cellType").value = "text";
   expect(question.columns[0].cellType).toEqual("text");
+  expect(question.columns[0].inputType).toEqual("text");
+  expect(propertyGrid.survey.getQuestionByName("inputType").value).toEqual("text");
+  propertyGrid.survey.getQuestionByName("inputType").value = "number";
+  expect(question.columns[0].inputType).toEqual("number");
+  propertyGrid.survey.getQuestionByName("title").value = "New title";
+  expect(question.columns[0].title).toEqual("New title");
+  expect(propertyGrid.survey.getQuestionByName("min")).toBeTruthy();
+  expect(propertyGrid.survey.getQuestionByName("min").isVisible).toBeTruthy();
 });
 test("Change cellType in the column in property grid", () => {
   var question = new QuestionMatrixDynamicModel("q1");
@@ -2469,4 +2478,14 @@ test("autoComplate property", () => {
   expect(autoCompleteQuestion.dataList).toBeTruthy();
   expect(Array.isArray(autoCompleteQuestion.dataList)).toBeTruthy();
   expect(autoCompleteQuestion.dataList.length > 10).toBeTruthy();
+});
+test("property editor title description html", () => {
+  var survey = new SurveyModel();
+  var curStrings = editorLocalization.getLocale("");
+  curStrings.pehelp.title = "Common **Title**";
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var titleQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("title")
+  );
+  expect(titleQuestion.locDescription.html).toEqual("Common <span class='spg-bold'>Title</span>");
 });

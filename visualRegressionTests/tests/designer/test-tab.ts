@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, checkElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeChanger } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, checkElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher } from "../../helper";
 
 const title = "Test tab Screenshot";
 
@@ -65,7 +65,7 @@ test("mobile iphone", async (t) => {
   await checkElementScreenshot("test-tab-iphone.png", Selector(".svd-simulator-wrapper"), t);
 });
 
-fixture`${title}`.page`${urlPreviewThemeChanger}`;
+fixture`${title}`.page`${urlPreviewThemeSwitcher}`;
 
 const json2 = {
   "pages": [
@@ -89,11 +89,11 @@ const json2 = {
   ]
 };
 
-test("Theme changer", async (t) => {
+test("Theme Switcher", async (t) => {
   const simulator = Selector(".svd-simulator-content");
   const checkTheme = async (listID, screnName) => {
     await t
-      .click(Selector("#themeChanger"))
+      .click(Selector("#themeSwitcher"))
       .click(Selector(".sv-popup__container .sv-list .sv-list__item").filterVisible().nth(listID));
     await checkElementScreenshot(screnName, simulator, t);
   };
@@ -103,14 +103,14 @@ test("Theme changer", async (t) => {
   await setJSON(json2);
 
   await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
-  await checkElementScreenshot("theme-changer.png", Selector("#themeChanger"), t);
+  await checkElementScreenshot("theme-switcher.png", Selector("#themeSwitcher"), t);
   await checkElementScreenshot("theme-default-preview.png", simulator, t);
 
-  await t.click(Selector("#themeChanger"));
-  await checkElementScreenshot("theme-changer-popup.png", Selector(".sv-popup__container").filterVisible().nth(0), t);
+  await t.click(Selector("#themeSwitcher"));
+  await checkElementScreenshot("theme-switcher-popup.png", Selector(".sv-popup__container").filterVisible().nth(0), t);
 
   await t
-    .click(Selector("#themeChanger"))
+    .click(Selector("#themeSwitcher"))
     .click(Selector(".sd-navigation__complete-btn"));
 
   await checkElementScreenshot("theme-default-test-again.png", simulator, t);

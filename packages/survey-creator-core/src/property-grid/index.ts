@@ -32,13 +32,13 @@ import {
   ICollectionItemAllowOperations,
   settings as creatorSettings
 } from "../settings";
-import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
 import { defaultV2Css } from "survey-core";
 import { updateMatrixRemoveAction } from "../utils/actions";
 import { SurveyHelper } from "../survey-helper";
 import { CreatorBase } from "../creator-base";
 import { IPropertyEditorInfo, SurveyQuestionEditorDefinition } from "../question-editor/definition";
+import { parsePropertyDescription } from "./description-parser";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;
@@ -484,7 +484,7 @@ export class PropertyJSONGenerator {
         q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
       }
       q.descriptionLocation = "hidden";
-      var helpText = PropertiesHelpTexts.instance.getHelpText(this.obj, prop);
+      let helpText = editorLocalization.getPropertyHelpInEditor(this.obj.getType(), prop.name, prop.type);
       if (!!helpText) {
         q.description = helpText;
       }
@@ -666,7 +666,7 @@ export class PropertyJSONGenerator {
   private getQuestionTitle(prop: JsonObjectProperty, title: string): string {
     if (!!prop.displayName) return prop.displayName;
     if (!!title && title !== prop.name) return title;
-    return editorLocalization.getPropertyNameInEditor(prop.name);
+    return editorLocalization.getPropertyNameInEditor(this.obj.getType(), prop.name);
   }
 }
 
@@ -805,6 +805,11 @@ export class PropertyGridModel {
     });
     this.survey.onAfterRenderQuestion.add((sender, options) => {
       this.onAfterRenderQuestion(options);
+    });
+    this.survey.onTextMarkdown.add((sender, options) => {
+      if(options.name === "description") {
+        options.html = parsePropertyDescription(options.text);
+      }
     });
     this.survey.editingObj = this.obj;
     if (this.objValueChangedCallback) {
@@ -1402,7 +1407,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       if (text) return text;
     }
     if (value === null) return null;
-    return editorLocalization.getPropertyValue(value);
+    return editorLocalization.getPropertyValueInEditor(prop.name, value);
   }
   private choicesFromPropChoices(
     prop: JsonObjectProperty,
@@ -1568,7 +1573,6 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
-
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);
