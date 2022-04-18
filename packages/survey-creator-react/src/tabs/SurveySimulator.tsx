@@ -24,9 +24,14 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     if (this.model.hasFrame) {
       return (
         <div
-          className={mainSimulatorClass + " " + this.model.simulatorMainCssClass}>
+          className={mainSimulatorClass + " " + this.model.simulatorMainCssClass}
+          onKeyDown={e => this.model.tryToZoom(e)}
+          onMouseEnter={this.model.activateZoom}
+          onMouseLeave={this.model.deactivateZoom}
+        >
           <div
             className="svd-simulator-wrapper"
+            id="svd-simulator-wrapper"
             style={{
               width: this.model.simulatorFrame.frameWidth + "px",
               height: this.model.simulatorFrame.frameHeight + "px"

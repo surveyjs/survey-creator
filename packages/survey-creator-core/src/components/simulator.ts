@@ -45,6 +45,53 @@ export class SurveySimulatorModel extends Base {
   @property({ defaultValue: true }) simulatorEnabled: boolean;
   @property({ defaultValue: true }) simulatorScaleEnabled: boolean;
 
+  public activateZoom = () => {
+    document.addEventListener("keydown", e => this.tryToZoom(e));
+  }
+  public deactivateZoom = () => {
+    document.removeEventListener("keydown", e => this.tryToZoom(e));
+  }
+  public tryToZoom(event: any) {
+    if (event.ctrlKey || event.metaKey) {
+      if (event.keyCode == 107 || event.keyCode == 187) {
+        this.zoomSimulator("up", event);
+      }
+      if (event.keyCode == 109 || event.keyCode == 189) {
+        this.zoomSimulator("down", event);
+      }
+      if (event.keyCode == 48 || event.keyCode == 96) {
+        this.zoomSimulator("zero", event);
+      }
+    }
+  }
+  private zoomSimulator(type: "up" | "down" | "zero", event: any) {
+    event.preventDefault();
+
+    const simulatorStyle = document.getElementById("svd-simulator-wrapper").style;
+    const multiplier = type === "up" ? 1.01 : (type === "down" ? 1 / 1.01 : 1);
+    const currZoomScale = type === "zero" ? 1 : this.getZoomScale(simulatorStyle.transform) * multiplier;
+
+    simulatorStyle.transform = "scale(" + currZoomScale + ")";
+
+    event.stopPropagation();
+  }
+  private getZoomScale(styles: string): number {
+    const scaleIndex = styles.indexOf("scale(");
+    if (scaleIndex === -1) return 1;
+
+    let i = scaleIndex + 6;
+    let scaleString = "";
+    while (i < styles.length && styles[i] !== ")") {
+      scaleString += styles[i];
+      i++;
+    }
+    return +scaleString;
+  }
+  public resetZoomParameters(): void {
+    const simulator = document.getElementById("svd-simulator-wrapper");
+    if (!!simulator) simulator.style.transform = "";
+  }
+
   public get activeDevice(): string {
     return this.device;
   }

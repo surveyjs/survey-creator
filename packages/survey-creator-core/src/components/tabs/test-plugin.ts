@@ -29,6 +29,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
   private setDevice(newVal: string) {
     this.model.simulator.device = newVal;
+    this.model.simulator.resetZoomParameters();
     let currentType = simulatorDevices[this.model.simulator.device].deviceType;
     this.orientationSelectorAction.enabled = currentType != "desktop";
     this.deviceSelectorAction.iconName = "icon-device-" + currentType;
