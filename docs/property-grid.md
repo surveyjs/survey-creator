@@ -97,6 +97,32 @@ A string value that specifies the property type. Accepts one of the values descr
 | `"itemvalues"` | Customized text inputs for entering value-text pairs | Use this type for arrays of objects with the following structure: `{ value: any, text: string }`. For example, Dropdown, Checkbox, and Radiogroup questions use this type for the [`choices`](https://surveyjs.io/Documentation/Library?id=QuestionSelectBase#choices) property. |
 | `"value"` | Button that opens a dialog window | The dialog window displays the survey element and allows users to set the element's default value. |
 
+`type` can also accept custom values. In this case, you need to register a property editor for the custom type in the `PropertyGridEditorCollection` and specify a standard JSON object that the custom type should produce. For example, the following code configures a `"shortname"` property that has a custom `"shorttext"` type: 
+
+```js
+Survey.Serializer.addProperty("question", {
+  name: "shortname",
+  type: "shorttext",
+  isRequired: true,
+  category: "general",
+  visibleIndex: 3
+});
+
+SurveyCreator.PropertyGridEditorCollection.register({
+  // Returns `true` for a property with type "shorttext"
+  fit: function (prop) {
+    return prop.type === "shorttext";
+  },
+  // Returns a standard question JSON configuration for the property editor
+  // (a text editor that is limited to 5 characters)
+  getJSON: function (obj, prop, options) {
+    return { type: "text", maxLength: 5 };
+  }
+});
+```
+
+[View Custom Property example](https://surveyjs.io/Examples/Survey-Creator/?id=custompropertyeditor)
+
 You can add the type to the `name` property after a colon character as a shortcut:
 
 ```js

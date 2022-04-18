@@ -70,13 +70,13 @@
         },
         {
           "Name": "Migrate-from-V1-to-V2",
-          "Title": "Migration from Survey Creator V1 to V2"
-        },
-        {
-          "Name": "React-Performance-Problems",
-          "Title": "React: Visualization of drag-and-drop operations is slow for large surveys"
+          "Title": "Migration to Survey Creator V2"
         }
       ]
+    },
+    {
+      "Name": "Troubleshooting",
+      "Title": "Troubleshooting"
     },
     {
       "Name": "End-User-Guide",
