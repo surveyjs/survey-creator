@@ -73,7 +73,18 @@ export class StringEditorViewModelBase extends Base {
       return;
     }
 
-    const clearedText = clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
+    let mdText = null;
+    if(!this.editAsText) {
+      var options = {
+        element: this.locString.owner,
+        text: <any>null,
+        name: this.locString.name,
+        html: event.target.innerHTML
+      };
+      this.creator.onTextMarkdownSave.fire(this, options);
+      mdText = options.text;
+    }
+    const clearedText = mdText || clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
     let owner = this.locString.owner as any;
 
     this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
