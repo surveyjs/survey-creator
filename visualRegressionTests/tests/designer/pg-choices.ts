@@ -44,10 +44,10 @@ test("Check section", async (t) => {
   await t.hover(sectionContentElement.find(".spg-action-button").nth(0));
   await checkElementScreenshot("choices-clear-button-hovered.png", sectionContentElement, t);
 
-  await t.hover(sectionContentElement.find(".spg-action-button").nth(4));
+  await t.hover(sectionContentElement.find(".spg-action-button").nth(3));
   await checkElementScreenshot("choices-edit-item-button-hovered.png", sectionContentElement, t);
 
-  await t.click(sectionContentElement.find(".spg-action-button").nth(4));
+  await t.click(sectionContentElement.find(".spg-action-button").nth(3));
   await checkElementScreenshot("choices-edit-item-content.png", sectionContentElement, t);
 });
 
