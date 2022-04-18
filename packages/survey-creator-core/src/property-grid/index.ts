@@ -34,7 +34,6 @@ import {
 } from "../settings";
 import { QuestionFactory } from "survey-core";
 import { defaultV2Css } from "survey-core";
-import { updateMatrixRemoveAction } from "../utils/actions";
 import { SurveyHelper } from "../survey-helper";
 import { CreatorBase } from "../creator-base";
 import { IPropertyEditorInfo, SurveyQuestionEditorDefinition } from "../question-editor/definition";
@@ -346,7 +345,7 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-clear",
-      css: "spg-action-button spg-action-button--danger",
+      innerCss: "spg-action-button--danger",
       enabled: enabled,
       visible: <any>new ComputedUpdater<boolean>(() => {
         const propertyValue = (<any>question).obj[property.name];
@@ -384,7 +383,6 @@ export class PropertyGridTitleActionsCreator {
     var setupAction = {
       id: "property-grid-setup",
       iconName: property.isArray ? "icon-fast-entry" : "icon-wizard",
-      css: "spg-action-button",
       enabled: enabled,
       title: getLocString("pe.edit"),
       showTitle: false,
@@ -399,7 +397,6 @@ export class PropertyGridTitleActionsCreator {
     const action = new Action({
       title: "",
       id: "property-grid-help",
-      css: "spg-action-button",
       iconName: this.getHelpActionIconName(question),
       showTitle: false,
       action: () => {
@@ -1123,7 +1120,6 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     if (property.type !== "condition") {
       surveyPropertyEditor.editSurvey.css = defaultV2Css;
     }
-    surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     if (!settings.showModal) return surveyPropertyEditor;
     settings.showModal(
       "survey",
