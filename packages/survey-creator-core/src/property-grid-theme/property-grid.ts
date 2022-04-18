@@ -289,5 +289,13 @@ export var propertyGridCss = {
       buttonExpanded: "",
       buttonCollapsed: ""
     }
-  }
+  },
+  actionBar: {
+    root: "spg-action-bar",
+    item: "spg-action-button",
+    itemPressed: "spg-action-button--pressed",
+    itemAsIcon: "spg-action-button--icon",
+    itemIcon: "spg-action-button__icon",
+    itemTitle: "spg-action-button__title",
+  },
 };

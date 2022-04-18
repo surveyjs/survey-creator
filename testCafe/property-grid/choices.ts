@@ -69,8 +69,8 @@ test("https://github.com/surveyjs/survey-library/issues/4170, responsiveness bug
   const question1 = Selector("[data-name=\"question1\"]");
   const choicesTabTitle = Selector("h4").withExactText("Choices");
   const choicesTabContent = choicesTabTitle.parent().nextSibling();
-  const clearButton = choicesTabContent.find(".sv-action-bar-item[title='Clear']");
-  const addButton = choicesTabContent.find(".sv-action-bar-item[title='Add a choice']");
+  const clearButton = choicesTabContent.find(".spg-action-button[title='Clear']");
+  const addButton = choicesTabContent.find(".spg-action-button[title='Add a choice']");
 
   await t
     .click(question1)
