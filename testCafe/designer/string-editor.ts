@@ -339,7 +339,7 @@ test("Check markdown back events", async (t) => {
     window["creator"].onSurveyInstanceCreated.add((sender, options) => {
       options.survey.onTextMarkdown.add((survey, options) => options.html = options.text.replaceAll("*", "$"));
     });
-    window["creator"].onTextMarkdownSave.add((survey, options) => options.text = options.html.replaceAll("$", "*"));
+    window["creator"].onHtmlToMarkdown.add((survey, options) => options.text = options.html.replaceAll("$", "*"));
   })();
   var getValue = ClientFunction(() => {
     return window["creator"].survey.description;

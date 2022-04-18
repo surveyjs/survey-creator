@@ -360,7 +360,7 @@ export class CreatorBase extends Base
    * <br/> `options.html` - an HTML content to be saved.
    * <br/> `options.text` - a text that need to be saved. It is `null` by default. Use this property to specify the text instead of `options.html`.
    */
-  public onTextMarkdownSave: Survey.Event<
+  public onHtmlToMarkdown: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
