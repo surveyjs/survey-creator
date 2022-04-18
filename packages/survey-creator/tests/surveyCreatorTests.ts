@@ -2253,7 +2253,7 @@ QUnit.test("Update expressions in copyElements", function (assert) {
     "{question3} = 'a'",
     "Expression is updated"
   );
-  assert.equal(newPanel.questions[1].visible, true, "Do not make it invisible");
+  assert.equal(newPanel.questions[1].isVisible, true, "Do not make it invisible");
 });
 QUnit.test("Update expressions on deleting a question", function (assert) {
   var creator = new SurveyCreator();
