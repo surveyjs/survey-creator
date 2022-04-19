@@ -1,7 +1,7 @@
 
 import React from "react";
 import { SvgRegistry } from "survey-core";
-import { svgBundle } from "survey-creator-core";
+import { disableRenderIcons, enableRenderIcons } from "survey-creator-core";
 import { ReactElementFactory } from "survey-react-ui";
 
 export class SvgBundleComponent extends React.Component {
@@ -17,12 +17,14 @@ export class SvgBundleComponent extends React.Component {
     }
   }
   componentWillUnmount() {
+    enableRenderIcons();
   }
   render() {
+    disableRenderIcons();
     const svgStyle = {
       display: "none"
     };
-    return <svg style={svgStyle} ref={this.containerRef}></svg>;
+    return <svg style={svgStyle} id="sv-icon-holder-global-container" ref={this.containerRef}></svg>;
   }
 }
 
