@@ -6,13 +6,13 @@ ko.components.register("svc-svg-bundle", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const element = componentInfo.element.querySelector && componentInfo.element.querySelector("svg") || componentInfo.element.nextElementSibling;
-      disableRenderIcons()
+      disableRenderIcons();
       element.innerHTML = SvgRegistry.iconsRenderedHtml();
       return {
         dispose: () => {
           enableRenderIcons();
         }
-      }
+      };
     }
   },
   template: "<svg id='sv-icon-holder-global-container' style=\"display:none\"></svg>"
