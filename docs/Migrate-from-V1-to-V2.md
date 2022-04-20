@@ -1,13 +1,44 @@
 # Migration to Survey Creator V2
 
+- [Migration in React](#migration-in-react)
 - [Migration in Angular, jQuery, Knockout, and Vue](#migration-in-angular-jquery-knockout-and-vue)
   - [Replace Packages / Source Links](#replace-packages--source-links)
   - [Update the Survey Creator Constructor](#update-the-survey-creator-constructor)
-- [Migration in React](#migration-in-react)
 - [Customized Property Editors](#customized-property-editors)
 - [Customized Adorners](#customized-adorners)
 - [Localization](#localization)
 - [Other Features](#other-features)
+
+## Migration in React
+
+Survey Creator V2 introduces a native implementation for React. Although this is a major update, the changes mostly affect rendering and UI customization. The rest of your code for V1 should work fine in V2.
+
+To migrate to the new Survey Creator, uninstall `survey-creator` and install the `survey-creator-react` package. Its dependencies (`survey-core`, `survey-creator-core`, and `survey-react-ui`) will be installed automatically:
+
+```cmd
+npm uninstall survey-creator
+npm install survey-creator-react --save
+```
+
+Most of the imports will break after that operation. Run your application and fix import errors that you see in the console. As a result, the Survey Creator code should look as follows:
+
+```js
+import "survey-core/defaultV2.css";
+import "survey-creator-core/survey-creator-core.css";
+import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
+
+const options = {
+  showLogicTab: true
+};
+
+export default function SurveyComponent() {
+  const creator = new SurveyCreator(options);
+  // ...
+  // Add event handlers, survey JSON, and customizations here
+  // ...
+  return <SurveyCreatorComponent creator={creator} />;
+}
+```
 
 ## Migration in Angular, jQuery, Knockout, and Vue
 
@@ -119,37 +150,6 @@ const creator = new SurveyCreator(options);
 // Add event handlers, survey JSON, and customizations here
 // ...
 creator.render("creatorElement");
-```
-
-## Migration in React
-
-Survey Creator V2 introduces a native implementation for React. Although this is a major update, the changes mostly affect rendering and UI customization. The rest of your code for V1 should work fine in V2.
-
-To migrate to the new Survey Creator, uninstall `survey-creator` and install the `survey-creator-react` package. Its dependencies (`survey-core`, `survey-creator-core`, and `survey-react-ui`) will be installed automatically:
-
-```cmd
-npm uninstall survey-creator
-npm install survey-creator-react --save
-```
-
-Most of the imports will break after that operation. Run your application and fix import errors that you see in the console. As a result, the Survey Creator code should look as follows:
-
-```js
-import "survey-core/defaultV2.css";
-import "survey-creator-core/survey-creator-core.css";
-import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
-
-const options = {
-  showLogicTab: true
-};
-
-export default function SurveyComponent() {
-  const creator = new SurveyCreator(options);
-  // ...
-  // Add event handlers, survey JSON, and customizations here
-  // ...
-  return <SurveyCreatorComponent creator={creator} />;
-}
 ```
 
 ## Customized Property Editors
