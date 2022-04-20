@@ -35,7 +35,7 @@ export class DescriptionMardownParser {
 
       const contentStr = str.substring(1, index);
       const linkStr = str.substring(index + 2, str.length - 1);
-      const newStr = "<a class='" + className + "' href='" + linkStr + "'>" + contentStr + "</a>";
+      const newStr = "<a class='" + className + "' target='_blank' href='" + linkStr + "'>" + contentStr + "</a>";
       return text.replace(str, newStr);
     };
     text = this.replace(DescriptionMardownParser.boldRegEx, text, "spg-bold", "**", createSpan);
