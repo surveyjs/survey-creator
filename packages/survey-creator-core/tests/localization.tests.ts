@@ -121,7 +121,7 @@ test("getPropertyNameInEditor, go to p, if pe is emtpy", () => {
   expect(editorLocalization.getPropertyNameInEditor("question", "isRequired2")).toEqual("some new text");
 });
 test("getPropertyValue and convertToCamelCase", () => {
-  expect(editorLocalization.getPropertyValue("progressTop")).toEqual("progress on top");
+  expect(editorLocalization.getPropertyValue("progressTop")).toEqual("Panel navigator + Progress bar at the top");
   expect(editorLocalization.convertToCamelCase("onTop")).toEqual("On top");
   expect(editorLocalization.convertToCamelCase("USD")).toEqual("USD");
   expect(editorLocalization.convertToCamelCase("USD", true)).toEqual("USD");

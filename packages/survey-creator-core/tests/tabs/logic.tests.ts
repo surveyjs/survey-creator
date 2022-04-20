@@ -1371,7 +1371,7 @@ test("LogicItemEditorUI: getUsedActionTypes", () => {
   expect(types[1].name).toEqual("trigger_skip");
   expect(types[1].displayName).toEqual("Skip to question");
   expect(types[2].name).toEqual("trigger_copyvalue");
-  expect(types[2].displayName).toEqual("Copy question value");
+  expect(types[2].displayName).toEqual("Copy answer");
 });
 
 test("LogicPlugin: question & action types are sorted ", () => {
@@ -1409,20 +1409,20 @@ test("LogicPlugin: question & action types are sorted ", () => {
 
   logicPlugin.activate();
   expect(actionTypes).toHaveLength(1);
-  expect(actionTypes[0].title).toEqual("Show all action types");
+  expect(actionTypes[0].title).toEqual("All Action Types");
   expect(questions).toHaveLength(1);
-  expect(questions[0].title).toEqual("Show all questions");
+  expect(questions[0].title).toEqual("All Questions");
 
   filterActionType.action();
   expect(actionTypes).toHaveLength(4);
-  expect(actionTypes[0].title).toEqual("Show all action types");
-  expect(actionTypes[1].title).toEqual("Copy question value");
+  expect(actionTypes[0].title).toEqual("All Action Types");
+  expect(actionTypes[1].title).toEqual("Copy answer");
   expect(actionTypes[2].title).toEqual("Show (hide) question");
   expect(actionTypes[3].title).toEqual("Skip to question");
 
   filterQuestion.action();
   expect(questions).toHaveLength(5);
-  expect(questions[0].title).toEqual("Show all questions");
+  expect(questions[0].title).toEqual("All Questions");
   expect(questions[1].title).toEqual("q1");
   expect(questions[2].title).toEqual("q2");
   expect(questions[3].title).toEqual("q4");

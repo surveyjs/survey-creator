@@ -87,7 +87,7 @@ test("Custom text for condition title", () => {
   });
   const options = new EmptySurveyCreatorOptions();
   options.onConditionGetTitleCallback = (expression: string, title: string): string => {
-    if(!expression) return "Please setup the expression";
+    if (!expression) return "Please setup the expression";
     return "Your expression is: " + title;
   };
   const conditionEditor = new ConditionEditor(survey, survey.getQuestionByName("q1"), options);
@@ -1207,7 +1207,7 @@ test("Check text for add panel button", () => {
     new SurveyModel(),
     new QuestionTextModel("q1")
   );
-  expect(editor.panel.panelAddText).toEqual("Add condition");
+  expect(editor.panel.panelAddText).toEqual("Add Condition");
 });
 test("Show rating/ranking in new line", () => {
   var survey = new SurveyModel({

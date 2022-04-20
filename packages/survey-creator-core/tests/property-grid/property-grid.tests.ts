@@ -1527,7 +1527,7 @@ test("DefaultValue editor", () => {
   expect(editQuestion).toBeTruthy();
   expect(editQuestion.getType()).toEqual("linkvalue");
   expect(editQuestion.value).toEqual(2);
-  expect(editQuestion.linkValueText).toEqual("Change Default value");
+  expect(editQuestion.linkValueText).toEqual("Change Default Answer");
   expect(editQuestion.isReadOnly).toBeFalsy();
   var editor = <PropertyGridValueEditor>(
     PropertyGridEditorCollection.getEditor(property)
@@ -1567,11 +1567,11 @@ test("DefaultValue editor, use display value", () => {
   var propertyGrid = new PropertyGridModelTester(question);
   var editQuestion = <QuestionLinkValueModel>propertyGrid.survey.getQuestionByName("defaultValue");
   expect(editQuestion.showValueInLink).toEqual(false);
-  expect(editQuestion.linkValueText).toEqual("Set Default value");
+  expect(editQuestion.linkValueText).toEqual("Set Default Answer");
   question.defaultValue = [1, 2];
-  expect(editQuestion.linkValueText).toEqual("Change Default value");
+  expect(editQuestion.linkValueText).toEqual("Change Default Answer");
   question.defaultValue = undefined;
-  expect(editQuestion.linkValueText).toEqual("Set Default value");
+  expect(editQuestion.linkValueText).toEqual("Set Default Answer");
 });
 
 test("DefaultValue editor for invisible values", () => {
@@ -1817,7 +1817,7 @@ test("Create setvalue trigger", () => {
   editorSetValueQuestion.value = 2;
   setupValueEditor.apply();
   expect(setValueQuestion.value).toEqual(2);
-  expect(setValueQuestion.linkValueText).toEqual("Change Set value");
+  expect(setValueQuestion.linkValueText).toEqual("Change Answer");
   expect(survey.triggers).toHaveLength(1);
   var trigger = <SurveyTriggerSetValue>survey.triggers[0];
   expect(trigger.getType()).toEqual("setvaluetrigger");
@@ -1826,7 +1826,7 @@ test("Create setvalue trigger", () => {
   actions[0].action();
   expect(trigger.setValue).toBeFalsy();
   expect(setValueQuestion.value).toBeFalsy();
-  expect(setValueQuestion.linkValueText).toEqual("Set Set value");
+  expect(setValueQuestion.linkValueText).toEqual("Set Answer");
   setValueQuestion.value = 3;
   expect(trigger.setValue).toEqual(3);
   setToNameQuestion.value = "q2";
