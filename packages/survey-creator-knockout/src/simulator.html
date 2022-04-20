@@ -1,7 +1,8 @@
-<div data-bind="class: 'svd-simulator-main ' + simulatorMainCssClass + (device === 'desktop' ? ' svd-simulator-main--desktop' : '')">
+<div data-bind="class: 'svd-simulator-main ' + simulatorMainCssClass + (device === 'desktop' ? ' svd-simulator-main--desktop' : ''), event: { keydown: tryToZoom, mouseover: activateZoom, mouseout: deactivateZoom }">
   <!-- ko if: hasFrame -->
   <div
     class="svd-simulator-wrapper"
+    id="svd-simulator-wrapper"
     data-bind="style: { width: simulatorFrame.frameWidth + 'px', height: simulatorFrame.frameHeight + 'px' }"
   >
     <div

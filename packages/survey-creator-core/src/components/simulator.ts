@@ -46,12 +46,12 @@ export class SurveySimulatorModel extends Base {
   @property({ defaultValue: true }) simulatorScaleEnabled: boolean;
 
   public activateZoom = () => {
-    document.addEventListener("keydown", e => this.tryToZoom(e));
+    document.addEventListener("keydown", e => this.tryToZoom(e, e));
   }
   public deactivateZoom = () => {
-    document.removeEventListener("keydown", e => this.tryToZoom(e));
+    document.removeEventListener("keydown", e => this.tryToZoom(e, e));
   }
-  public tryToZoom(event: any) {
+  public tryToZoom(data: any, event: any) {
     if (event.ctrlKey || event.metaKey) {
       if (event.keyCode == 107 || event.keyCode == 187) {
         this.zoomSimulator("up", event);
@@ -63,6 +63,7 @@ export class SurveySimulatorModel extends Base {
         this.zoomSimulator("zero", event);
       }
     }
+    return true;
   }
   private zoomSimulator(type: "up" | "down" | "zero", event: any) {
     event.preventDefault();
