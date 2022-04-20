@@ -16,11 +16,7 @@ export class SvgBundleComponent extends React.Component {
       this.containerRef.current.innerHTML = SvgRegistry.iconsRenderedHtml();
     }
   }
-  componentWillUnmount() {
-    enableRenderIcons();
-  }
   render() {
-    disableRenderIcons();
     const svgStyle = {
       display: "none"
     };
