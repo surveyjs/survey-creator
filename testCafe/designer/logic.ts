@@ -120,7 +120,7 @@ test("Create logic rule", async (t) => {
     .expect(cellRules.innerText).eql(newRuleDisplayText)
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.value).eql("")
-    .expect(logicOperatorSelector.innerText).eql("equals")
+    .expect(logicOperatorSelector.innerText).eql("Equals")
     .expect(logicActionSelector.value).eql("")
     .expect(logicQuestionValueSelector.exists).notOk()
     .expect(addButton.count).eql(0)
@@ -134,7 +134,7 @@ test("Create logic rule", async (t) => {
     .expect(removeButton.count).eql(0)
 
     .click(logicOperatorSelector)
-    .click(getSelectOptionByText("not equals"))
+    .click(getSelectOptionByText("Does not equal"))
     .click(Selector(".sd-checkbox").filterVisible())
 
     .click(addButton)
@@ -146,7 +146,7 @@ test("Create logic rule", async (t) => {
     .click(removeButton)
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.value).eql("")
-    .expect(logicOperatorSelector.innerText).eql("equals")
+    .expect(logicOperatorSelector.innerText).eql("Equals")
     .expect(logicActionSelector.value).eql("")
     .expect(logicQuestionValueSelector.exists).notOk()
     .expect(addButton.count).eql(0)
@@ -156,7 +156,7 @@ test("Create logic rule", async (t) => {
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("string_editor"))
     .click(logicOperatorSelector)
-    .click(getSelectOptionByText("is not empty"))
+    .click(getSelectOptionByText("Not empty"))
     .expect(addButton.count).eql(1)
     .expect(removeButton.count).eql(0)
 
@@ -168,7 +168,7 @@ test("Create logic rule", async (t) => {
     .expect(removeButton.count).eql(0)
 
     .click(logicActionSelector)
-    .click(getSelectOptionByText("Copy question value"))
+    .click(getSelectOptionByText("Copy answer"))
     .expect(logicActionTriggerQuestionsElement.exists).ok()
     .expect(logicActionTriggerEditorElement.exists).notOk()
     .expect(addButton.count).eql(2)
@@ -194,8 +194,8 @@ test("Create logic rule", async (t) => {
     .click(doneButton)
     .expect(logicAddNewRuleButton.classNames).notContains(disabledClass)
     .expect(notifyBalloonSelector.innerText).eql("Modified")
-    .expect(cellRules.innerText).eql("If 'string_editor' is not empty, survey becomes completed")
-    .expect(cellRules.find("span").getAttribute("title")).eql("If 'string_editor' is not empty, survey becomes completed");
+    .expect(cellRules.innerText).eql("If 'string_editor' Not empty, survey becomes completed")
+    .expect(cellRules.find("span").getAttribute("title")).eql("If 'string_editor' Not empty, survey becomes completed");
 });
 
 test("Logic rules", async (t) => {
@@ -209,17 +209,17 @@ test("Logic rules", async (t) => {
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("string_editor"))
     .click(logicOperatorSelector)
-    .click(getSelectOptionByText("is not empty"))
+    .click(getSelectOptionByText("Not empty"))
     .click(logicActionSelector)
     .click(getSelectOptionByText("Complete survey"))
     .click(doneButton)
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If 'string_editor' is not empty, survey becomes completed")
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If 'string_editor' Not empty, survey becomes completed")
 
     .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If 'string_editor' is not empty, survey becomes completed");
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If 'string_editor' Not empty, survey becomes completed");
 });
 
 test("Edit Logic rule", async (t) => {
@@ -255,12 +255,12 @@ test("Filtering rules", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(tableRulesSelector.count).eql(3)
 
-    .click(getBarItemByText("Show all questions"))
+    .click(getBarItemByText("All Questions"))
     .click(getListItemByText("q2"))
     .expect(tableRulesSelector.count).eql(2)
     .expect(getBarItemByText("q2").visible).ok()
 
-    .click(getBarItemByText("Show all action types"))
+    .click(getBarItemByText("All Action Types"))
     .click(getListItemByText("Skip to question"))
     .expect(tableRulesSelector.count).eql(1)
     .expect(getBarItemByText("Skip to question").visible).ok()
@@ -269,13 +269,13 @@ test("Filtering rules", async (t) => {
     .click(logicQuestionSelector)
     .click(getSelectOptionByText("q4"))
     .click(logicOperatorSelector)
-    .click(getSelectOptionByText("is not empty"))
+    .click(getSelectOptionByText("Not empty"))
     .click(logicActionSelector)
     .click(getSelectOptionByText("Complete survey"))
     .click(doneButton)
     .expect(tableRulesSelector.count).eql(4)
-    .expect(getBarItemByText("Show all action types").visible).ok()
-    .expect(getBarItemByText("Show all questions").visible).ok();
+    .expect(getBarItemByText("All Action Types").visible).ok()
+    .expect(getBarItemByText("All Questions").visible).ok();
 });
 
 test("Update rules", async (t) => {
@@ -291,8 +291,8 @@ test("Update rules", async (t) => {
     .expect(Selector("#remove-row").count).eql(2);
 });
 
-test("Fast entry of the editing condition", async (t) => {
-  const fastEntryAction = getBarItemByText("Fast Entry");
+test("Manual Entry of the editing condition", async (t) => {
+  const fastEntryAction = getBarItemByText("Manual Entry");
   await setJSON(json2);
 
   await t

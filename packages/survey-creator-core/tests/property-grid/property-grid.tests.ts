@@ -888,7 +888,7 @@ test("textitem[] property editor", () => {
   textItem.title = "not Item 1";
   expect(itemsQuestion.renderedTable.rows[0].cells[2].question.value).toEqual("not Item 1");
 });
-test("check multiple text items editing by fast entry", () => {
+test("check multiple text items editing by Manual Entry", () => {
   const question = new QuestionMultipleTextModel("q1");
   const textItem = question.addItem("item1", "Item 1");
   const propertyGrid = new PropertyGridModelTester(question);

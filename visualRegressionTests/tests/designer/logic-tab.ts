@@ -126,7 +126,7 @@ test("Check logic error notifier", async (t) => {
   await checkElementScreenshot("logic-error-notifier.png", Selector(".svc-notifier--error"), t);
 });
 
-test("Check logic fast entry", async (t) => {
+test("Check logic Manual Entry", async (t) => {
   await t.resizeWindow(1920, 900);
   await setJSON({
     "logoPosition": "right",

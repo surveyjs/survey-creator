@@ -49,11 +49,11 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   const CommentItem = Selector("[aria-label='Comment toolbox item']");
   const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
   const RankingItem = Selector("[aria-label='Ranking toolbox item']");
-  const ImagePickerItem = Selector("[aria-label='Image picker toolbox item']");
+  const ImagePickerItem = Selector("[aria-label='Image Picker toolbox item']");
   const BooleanItem = Selector("[aria-label='Boolean toolbox item']");
   const ImageItem = Selector("[aria-label='Image toolbox item']");
   const HtmlItem = Selector("[aria-label='Html toolbox item']");
-  const SignatureItem = Selector("[aria-label='Signature pad toolbox item']");
+  const SignatureItem = Selector("[aria-label='Signature Pad toolbox item']");
   const ExpressionItem = Selector("[aria-label='Expression (read-only) toolbox item']");
   const FileItem = Selector("[aria-label='File toolbox item']");
   const MatrixSingleChoiceItem = Selector("[aria-label='Matrix (single choice) toolbox item']");

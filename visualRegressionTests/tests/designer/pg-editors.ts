@@ -96,7 +96,7 @@ test("Default value popup", async (t) => {
     .click(getToolboxItemByText("Single Input"))
     .click(generalTab)
     .click(dataTab)
-    .click(Selector(".svc-action-button.svc-question-link__set-button").withText("Set Default value"));
+    .click(Selector(".svc-action-button.svc-question-link__set-button").withText("Set Default Answer"));
   await checkElementScreenshot("pg-default-value-popup.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t);
 });
 

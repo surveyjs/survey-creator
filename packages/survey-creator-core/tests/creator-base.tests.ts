@@ -2062,7 +2062,7 @@ test("Keyboard Shortcuts", (): any => {
   expect(count).toEqual(0);
 });
 
-test("LogicPlugin Fast entry: options.allowEditExpressionsInTextEditor", () => {
+test("LogicPlugin Manual Entry: options.allowEditExpressionsInTextEditor", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   let logicTabActions = logicPlugin.createActions();
@@ -2076,7 +2076,7 @@ test("LogicPlugin Fast entry: options.allowEditExpressionsInTextEditor", () => {
   expect(logicTabActions.filter(action => action.id === "svc-logic-fast-entry")).toHaveLength(0);
 });
 
-test("LogicPlugin Fast entry: fastEntryAction switch active", () => {
+test("LogicPlugin Manual Entry: fastEntryAction switch active", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   const fastEntryAction = logicPlugin.createActions().filter(action => action.id === "svc-logic-fast-entry")[0];
@@ -2093,7 +2093,7 @@ test("LogicPlugin Fast entry: fastEntryAction switch active", () => {
   expect(fastEntryAction.active).toBeFalsy();
 });
 
-test("LogicPlugin Fast entry: fastEntryAction enabled", () => {
+test("LogicPlugin Manual Entry: fastEntryAction enabled", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   const fastEntryAction = logicPlugin.createActions().filter(action => action.id === "svc-logic-fast-entry")[0];

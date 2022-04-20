@@ -348,7 +348,7 @@ test("SurveyPropertyItemValue different view type", () => {
   valueEditor.apply();
   expect(question.choices).toHaveLength(1);
 });
-test("SurveyPropertyItemValuesEditor - fast entry is available - https://surveyjs.answerdesk.io/ticket/details/T1534", () => {
+test("SurveyPropertyItemValuesEditor - Manual Entry is available - https://surveyjs.answerdesk.io/ticket/details/T1534", () => {
   const question = new QuestionCheckboxModel("q1");
   question.choices = ["1|item1", "item2"];
   const propertyGrid = new PropertyGridModelTester(question);
@@ -371,7 +371,7 @@ test("SurveyPropertyItemValuesEditor - fast entry is available - https://surveyj
   expect(valueQuestion.isReadOnly).toEqual(false);
 });
 
-test("SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemvalue.value property is readonly or invisible - https://surveyjs.answerdesk.io/ticket/details/T1837", () => {
+test("SurveyPropertyItemValuesEditor - disable Manual Entry functionality if itemvalue.value property is readonly or invisible - https://surveyjs.answerdesk.io/ticket/details/T1837", () => {
   Serializer.findProperty("ItemValue", "value").readOnly = true;
   var question = new QuestionCheckboxModel("q1");
   question.choices = ["1|item1", "item2"];

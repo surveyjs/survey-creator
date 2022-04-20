@@ -782,7 +782,7 @@ test("Create setValue trigger in logic", () => {
   expect(getSetValueQuestion().value).toBeFalsy();
 });
 
-test("LogicItemEditorUI: fast entry edit and change expressionEditorCanShowBuilder", () => {
+test("LogicItemEditorUI: Manual Entry edit and change expressionEditorCanShowBuilder", () => {
   const survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
