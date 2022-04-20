@@ -350,6 +350,23 @@ export class CreatorBase extends Base
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
+  /**
+   * This event is raised after a user has edited a text value on the design surface. This value may include HTML markup. You can handle the `onHtmlToMarkdown` event to convert the HTML markup to Markdown.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.element` - The instance of a survey element (survey, page, panel, question) that the user configures.
+   * - `options.name` - The name of a property whose value has been edited.
+   * - `options.html` - HTML content. Pass this field's value to an HTML-to-Markdown converter.
+   * - `options.text` - A text string that may contain Markdown. Assign the result of the HTML-to-Markdown conversion to this field.
+   */
+  public onHtmlToMarkdown: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
   /**
    * Use this event to disable user interactions with a question or panel on the design surface.
    *

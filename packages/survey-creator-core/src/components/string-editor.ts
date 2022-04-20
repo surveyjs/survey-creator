@@ -10,8 +10,10 @@ export class StringEditorViewModelBase extends Base {
 
   @property() errorText: string;
   @property() focused: boolean;
+  @property({ defaultValue: true }) editAsText: boolean;
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
+    this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
 
   public setLocString(locString: LocalizableString) {
@@ -33,7 +35,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onFocus(event: any): void {
-    if(!this.focusedProgram) {
+    if (!this.focusedProgram) {
       this.valueBeforeEdit = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
       this.focusedProgram = false;
     }
@@ -44,10 +46,23 @@ export class StringEditorViewModelBase extends Base {
     this.justFocused = true;
   }
 
+  private checkMarkdownToTextConversion(element, name) {
+    var options = {
+      element: element,
+      text: <any>null,
+      name: name,
+      html: "",
+    };
+    if (this.creator) {
+      this.creator.onHtmlToMarkdown.fire(this, options);
+      this.editAsText = (options.text === null);
+    }
+  }
+
   public onInput(event: any): void {
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
-      if(this.locString.hasHtml) {
+      if (this.locString.hasHtml) {
         event.target.innerHTML = this.valueBeforeEdit;
       }
       else {
@@ -58,32 +73,43 @@ export class StringEditorViewModelBase extends Base {
       return;
     }
 
-    const clearedText = clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
+    let mdText = null;
+    if (!this.editAsText) {
+      var options = {
+        element: this.locString.owner,
+        text: <any>null,
+        name: this.locString.name,
+        html: event.target.innerHTML
+      };
+      this.creator.onHtmlToMarkdown.fire(this, options);
+      mdText = options.text;
+    }
+    const clearedText = mdText || clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
     let owner = this.locString.owner as any;
 
     this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
-    if(!this.errorText && !clearedText) {
+    if (!this.errorText && !clearedText) {
       const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
-      if(propJSON && propJSON.isRequired) {
+      if (propJSON && propJSON.isRequired) {
         this.errorText = editorLocalization.getString("pe.propertyIsEmpty");
       }
     }
 
     if (this.locString.text != clearedText) {
-      if(!this.errorText) {
-        if(this.locString.owner instanceof ItemValue && this.creator.inplaceEditForValues) {
+      if (!this.errorText) {
+        if (this.locString.owner instanceof ItemValue && this.creator.inplaceEditForValues) {
           this.locString.owner.value = clearedText;
         }
         else {
           this.locString.text = clearedText;
         }
       }
-      else{
+      else {
         this.focusedProgram = true;
         event.target.focus();
       }
     } else {
-      if(this.locString.hasHtml) {
+      if (this.locString.hasHtml) {
         event.target.innerHTML = this.locString.renderedHtml;
       }
       else {
@@ -112,10 +138,10 @@ export class StringEditorViewModelBase extends Base {
   }
   private justFocused = false;
   public onMouseUp(event: MouseEvent): boolean {
-    if(this.justFocused) {
+    if (this.justFocused) {
       this.justFocused = false;
-      if(!window) return false;
-      if(window.getSelection().focusNode && (window.getSelection().focusNode.parentElement !== event.target) || window.getSelection().toString().length == 0) {
+      if (!window) return false;
+      if (window.getSelection().focusNode && (window.getSelection().focusNode.parentElement !== event.target) || window.getSelection().toString().length == 0) {
         select(event.target);
       }
       return false;
@@ -136,11 +162,11 @@ export class StringEditorViewModelBase extends Base {
   }
   @property() placeholderValue: string;
   public get placeholder(): string {
-    if(!!this.placeholderValue) return this.placeholderValue;
+    if (!!this.placeholderValue) return this.placeholderValue;
     const property: any = this.findProperty();
     if (!property || !property.placeholder) return "";
     let placeholderValue: string = editorLocalization.getString(property.placeholder);
-    if(!!placeholderValue) {
+    if (!!placeholderValue) {
       var re = /\{([^}]+)\}/g;
       this.placeholderValue = <any>new ComputedUpdater<string>(() => {
         let result = placeholderValue;
@@ -162,8 +188,8 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public className(text: any): string {
-    return "svc-string-editor"+
-          (text == "" && this.placeholder==""?" svc-string-editor--hidden":"") +
-          (this.contentEditable?"":" svc-string-editor--readonly");
+    return "svc-string-editor" +
+      (text == "" && this.placeholder == "" ? " svc-string-editor--hidden" : "") +
+      (this.contentEditable ? "" : " svc-string-editor--readonly");
   }
 }
