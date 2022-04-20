@@ -48,7 +48,7 @@ test("Check states", async (t) => {
     .ok(compareResults.errorMessages());
 
   await t
-    .hover(sectionContentElement.find(".sv-action-bar-item").nth(1));
+    .hover(sectionContentElement.find(".spg-action-button").nth(1));
   await takeScreenshot("logic-button-hovered.png", sectionContentElement, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())

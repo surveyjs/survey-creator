@@ -1,5 +1,6 @@
 @import "../variables.scss";
 
+@import "blocks/spg-action-bar.scss";
 @import "blocks/spg-question.scss";
 @import "blocks/spg-input.scss";
 @import "blocks/spg-dropdown.scss";
@@ -8,7 +9,6 @@
 @import "blocks/spg-checkbox.scss";
 @import "blocks/spg-matrixdynamic.scss";
 @import "blocks/spg-table.scss";
-@import "blocks/spg-action-button.scss";
 
 .spg-root-modern {
   width: 100%;
@@ -43,57 +43,12 @@
   margin-left: calcSize(1);
   margin-right: calcSize(1);
 }
-.spg-root-modern {
-  .sv-action-bar {
-    padding-right: calcSize(0.5);
-  }
-  .sv-action:not(.sv-action--hidden):not(:last-of-type) > .sv-action__content {
-    padding-right: 0;
-  }
-}
 
 .spg-title {
-  .sv-action-bar {
+  .spg-action-bar {
     margin-top: calcSize(-1);
     margin-bottom: calcSize(-1);
     margin-right: 1px;
-  }
-}
-
-.spg-table__cell {
-  .sv-action-bar {
-    padding-left: 0;
-  }
-}
-
-survey-creator,
-.svc-creator {
-  button.spg-action-button,
-  .spg-action-button .sv-action-bar-item {
-    border-radius: calcSize(12.5);
-    padding: calcSize(1);
-    cursor: pointer;
-    &:hover,
-    &:focus {
-      outline: none;
-      background-color: $primary-light;
-      use {
-        fill: $primary;
-      }
-    }
-  }
-  button.spg-action-button--danger,
-  .spg-action-button--danger .sv-action-bar-item {
-    &:hover,
-    &:focus {
-      background-color: $red-light;
-      use {
-        fill: $red;
-      }
-    }
-  }
-  button.spg-action-button--large {
-    padding: calcSize(0.5) calcSize(2);
   }
 }
 
