@@ -45,6 +45,10 @@ export class SurveySimulatorModel extends Base {
   @property({ defaultValue: true }) simulatorEnabled: boolean;
   @property({ defaultValue: true }) simulatorScaleEnabled: boolean;
 
+  private currZoomScale: number;
+  public get zoomScale(): number {
+    return this.currZoomScale;
+  }
   public activateZoom = () => {
     document.addEventListener("keydown", e => this.tryToZoom(e, e));
   }
@@ -65,30 +69,23 @@ export class SurveySimulatorModel extends Base {
     }
     return true;
   }
+  private changeZoomScale(type: "up" | "down" | "zero") {
+    const coef: number = 1.01;
+    const multiplier: number = type === "up" ? coef : (type === "down" ? 1 / coef : 1);
+    this.currZoomScale = type === "zero" ? 1 : this.currZoomScale * multiplier;
+  }
   private zoomSimulator(type: "up" | "down" | "zero", event: any) {
     event.preventDefault();
 
-    const simulatorStyle = document.getElementById("svd-simulator-wrapper").style;
-    const multiplier = type === "up" ? 1.01 : (type === "down" ? 1 / 1.01 : 1);
-    const currZoomScale = type === "zero" ? 1 : this.getZoomScale(simulatorStyle.transform) * multiplier;
+    this.changeZoomScale(type);
 
-    simulatorStyle.transform = "scale(" + currZoomScale + ")";
+    const simulator = document.getElementById("svd-simulator-wrapper");
+    if (!!simulator) simulator.style.transform = "scale(" + this.currZoomScale + ")";
 
     event.stopPropagation();
   }
-  private getZoomScale(styles: string): number {
-    const scaleIndex = styles.indexOf("scale(");
-    if (scaleIndex === -1) return 1;
-
-    let i = scaleIndex + 6;
-    let scaleString = "";
-    while (i < styles.length && styles[i] !== ")") {
-      scaleString += styles[i];
-      i++;
-    }
-    return +scaleString;
-  }
   public resetZoomParameters(): void {
+    this.currZoomScale = 1;
     const simulator = document.getElementById("svd-simulator-wrapper");
     if (!!simulator) simulator.style.transform = "";
   }

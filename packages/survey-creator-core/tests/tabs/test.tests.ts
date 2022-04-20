@@ -3,6 +3,7 @@ import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
 import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
+import { SurveySimulatorModel } from "../../src/components/simulator";
 
 import "survey-core/survey.i18n";
 
@@ -358,4 +359,29 @@ test("Test correct survey results node levels", (): any => {
   const secondLvl: SurveyResultsItemModel[] = firstLvl[0].items;
   expect(secondLvl.length).toEqual(1);
   expect(secondLvl[0].lvl).toEqual(2);
+});
+test("Check zoom in mobile preview", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const simulator: SurveySimulatorModel = testPlugin.model.simulator;
+  simulator.resetZoomParameters();
+
+  expect(simulator.zoomScale).toEqual(1);
+  simulator.changeZoomScale("up");
+  expect(simulator.zoomScale).toEqual(1.01);
+  simulator.changeZoomScale("up");
+  expect(simulator.zoomScale).toEqual(1.0201);
+  simulator.changeZoomScale("down");
+  expect(simulator.zoomScale).toEqual(1.01);
+  simulator.changeZoomScale("up");
+  expect(simulator.zoomScale).toEqual(1.0201);
+  simulator.changeZoomScale("zero");
+  expect(simulator.zoomScale).toEqual(1);
+
+  simulator.changeZoomScale("up");
+  simulator.changeZoomScale("up");
+  expect(simulator.zoomScale).toEqual(1.0201);
+  simulator.resetZoomParameters();
+  expect(simulator.zoomScale).toEqual(1);
 });
