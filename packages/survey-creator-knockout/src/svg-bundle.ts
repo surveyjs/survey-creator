@@ -1,6 +1,5 @@
 import * as ko from "knockout";
 import { SvgRegistry } from "survey-core";
-import { enableRenderIcons, disableRenderIcons } from "survey-creator-core";
 
 ko.components.register("svc-svg-bundle", {
   viewModel: {

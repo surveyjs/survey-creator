@@ -1,7 +1,7 @@
 
 import React from "react";
 import { SvgRegistry } from "survey-core";
-import { disableRenderIcons, enableRenderIcons } from "survey-creator-core";
+import { svgBundle } from "survey-creator-core";
 import { ReactElementFactory } from "survey-react-ui";
 
 export class SvgBundleComponent extends React.Component {
