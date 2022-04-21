@@ -45,6 +45,62 @@ export class SurveySimulatorModel extends Base {
   @property({ defaultValue: true }) simulatorEnabled: boolean;
   @property({ defaultValue: true }) simulatorScaleEnabled: boolean;
 
+  private currZoomScale: number;
+  public get zoomScale(): number {
+    return this.currZoomScale;
+  }
+  public activateZoom = () => {
+    document.addEventListener("keydown", this.listenTryToZoom);
+    document.addEventListener("wheel", this.listenTryToZoomWithWheel, { passive: false });
+  }
+  public deactivateZoom = () => {
+    document.removeEventListener("keydown", this.listenTryToZoom);
+    document.removeEventListener("wheel", this.listenTryToZoomWithWheel);
+  }
+  private listenTryToZoomWithWheel = e => this.tryToZoomWithWheel(e, e);
+  private tryToZoomWithWheel(data: any, event: any) {
+    const diff: number = event.deltaY;
+    if (event.ctrlKey || event.metaKey) {
+      diff < 0 ? this.zoomSimulator("up", event) : this.zoomSimulator("down", event);
+    }
+    return true;
+  }
+  private listenTryToZoom = e => this.tryToZoom(e, e);
+  public tryToZoom(data: any, event: any) {
+    if (event.ctrlKey || event.metaKey) {
+      if (event.keyCode == 107 || event.keyCode == 187) {
+        this.zoomSimulator("up", event);
+      }
+      if (event.keyCode == 109 || event.keyCode == 189) {
+        this.zoomSimulator("down", event);
+      }
+      if (event.keyCode == 48 || event.keyCode == 96) {
+        this.zoomSimulator("zero", event);
+      }
+    }
+    return true;
+  }
+  private changeZoomScale(type: "up" | "down" | "zero") {
+    const coef: number = 1.01;
+    const multiplier: number = type === "up" ? coef : (type === "down" ? 1 / coef : 1);
+    this.currZoomScale = type === "zero" ? 1 : this.currZoomScale * multiplier;
+  }
+  private zoomSimulator(type: "up" | "down" | "zero", event: any) {
+    event.preventDefault();
+
+    this.changeZoomScale(type);
+
+    const simulator = document.getElementById("svd-simulator-wrapper");
+    if (!!simulator) simulator.style.transform = "scale(" + this.currZoomScale + ")";
+
+    event.stopPropagation();
+  }
+  public resetZoomParameters(): void {
+    this.currZoomScale = 1;
+    const simulator = document.getElementById("svd-simulator-wrapper");
+    if (!!simulator) simulator.style.transform = "";
+  }
+
   public get activeDevice(): string {
     return this.device;
   }
