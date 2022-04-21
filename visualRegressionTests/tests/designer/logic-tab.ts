@@ -232,7 +232,7 @@ test("unsaved rule", async (t) => {
 
   await t
     .click(logicActionSelector)
-    .click(getSelectOptionByText("Copy question value"))
+    .click(getSelectOptionByText("Copy answer"))
     .click(doneButtonSelector);
 
   await checkElementScreenshot("logic-error-action-questions.png", ruleContent, t);
