@@ -44,7 +44,7 @@ export default function SurveyComponent() {
 
 ### Replace Packages / Source Links
 
-Angular, jQuery, and Vue continue using the Knockout version. However, we separated the Knockout monolith module into a platform-independent core ([`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core)) and platform-specific view models ([`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout)). You need to change references to SurveyJS and Survey Creator scripts and style sheets or replace npm packages accordingly:
+Survey Creator versions for Angular, jQuery, and Vue continue to use the Knockout engine. The new version does introduce a change though. We separated the Knockout monolith module into a platform-independent core ([`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core)) and platform-specific view models ([`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout)). You need to change references to SurveyJS and Survey Creator scripts and style sheets or replace npm packages accordingly:
 
 <details>
   <summary>Angular</summary>  
@@ -154,7 +154,7 @@ creator.render("creatorElement");
 
 ## Customized Property Editors
 
-In Survey Creator V2, we changed the internal design of the Property Grid. Most of your old customization code have to be rewritten. However, the customization became easier because we use our own survey in the new design. To add a new property editor, you just need to add a property to the survey. Refer to the following help topic for more information: [Add Custom Properties to the Property Grid](https://surveyjs.io/Documentation/Survey-Creator?id=property-grid#add-custom-properties-to-the-property-grid).
+In Survey Creator V2, we changed the internal design of the Property Grid. You need to rewrite most of your old customization code. On the other hand, we simplified customization. The Property Grid is now a survey. To add a new property editor, you simply need to add a question to the survey. Refer to the following help topic for more information: [Add Custom Properties to the Property Grid](https://surveyjs.io/Documentation/Survey-Creator?id=property-grid#add-custom-properties-to-the-property-grid).
 
 ## Customized Adorners
 
@@ -169,4 +169,4 @@ Previously, localization utilities were part of the main Survey Creator module. 
 
 ## Other Features
 
-To facilitate migration, the new Survey Creator logs backward-compatibility warnings into console. These warnings suggest how you can replace deprecated properties and outdated functionality. Please follow these suggestions to keep your code up to date.
+To facilitate migration, the new Survey Creator logs backward-compatibility warnings into the console. These warnings suggest how you can replace deprecated properties and outdated functionality. Please follow these suggestions to keep your code up to date.
