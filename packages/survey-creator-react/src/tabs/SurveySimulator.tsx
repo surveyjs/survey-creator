@@ -26,8 +26,8 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
         <div
           className={mainSimulatorClass + " " + this.model.simulatorMainCssClass}
           onKeyDown={e => this.model.tryToZoom(e, e)}
-          onMouseEnter={this.model.activateZoom}
-          onMouseLeave={this.model.deactivateZoom}
+          onMouseEnter={this.model.device === "desktop" ? null : this.model.activateZoom}
+          onMouseLeave={this.model.device === "desktop" ? null : this.model.deactivateZoom}
         >
           <div
             className="svd-simulator-wrapper"

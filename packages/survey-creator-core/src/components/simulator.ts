@@ -50,11 +50,22 @@ export class SurveySimulatorModel extends Base {
     return this.currZoomScale;
   }
   public activateZoom = () => {
-    document.addEventListener("keydown", e => this.tryToZoom(e, e));
+    document.addEventListener("keydown", this.listenTryToZoom);
+    document.addEventListener("wheel", this.listenTryToZoomWithWheel, { passive: false });
   }
   public deactivateZoom = () => {
-    document.removeEventListener("keydown", e => this.tryToZoom(e, e));
+    document.removeEventListener("keydown", this.listenTryToZoom);
+    document.removeEventListener("wheel", this.listenTryToZoomWithWheel);
   }
+  private listenTryToZoomWithWheel = e => this.tryToZoomWithWheel(e, e);
+  private tryToZoomWithWheel(data: any, event: any) {
+    const diff: number = event.deltaY;
+    if (event.ctrlKey || event.metaKey) {
+      diff < 0 ? this.zoomSimulator("up", event) : this.zoomSimulator("down", event);
+    }
+    return true;
+  }
+  private listenTryToZoom = e => this.tryToZoom(e, e);
   public tryToZoom(data: any, event: any) {
     if (event.ctrlKey || event.metaKey) {
       if (event.keyCode == 107 || event.keyCode == 187) {
