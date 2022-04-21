@@ -189,7 +189,6 @@ export class EditorLocalization {
     if (!res) res = defaultStrings[prefix][value];
     if (!!res) return res;
     return this.camelCaseBreaking
-      ? this.convertToCamelCase(value, true)
       : value;
   }
   public getLocales(): Array<string> {
