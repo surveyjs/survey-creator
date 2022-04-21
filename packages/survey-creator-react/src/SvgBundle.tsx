@@ -16,13 +16,11 @@ export class SvgBundleComponent extends React.Component {
       this.containerRef.current.innerHTML = SvgRegistry.iconsRenderedHtml();
     }
   }
-  componentWillUnmount() {
-  }
   render() {
     const svgStyle = {
       display: "none"
     };
-    return <svg style={svgStyle} ref={this.containerRef}></svg>;
+    return <svg style={svgStyle} id="sv-icon-holder-global-container" ref={this.containerRef}></svg>;
   }
 }
 

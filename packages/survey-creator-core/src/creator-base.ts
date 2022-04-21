@@ -1743,6 +1743,7 @@ export class CreatorBase extends Base
 
   public createSurvey(json: any = {}, reason: string = "designer"): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
+    survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "test") {
       (<any>survey).locale = editorLocalization.currentLocale;
     }

@@ -9,5 +9,5 @@ ko.components.register("svc-svg-bundle", {
       return params;
     }
   },
-  template: "<svg style=\"display:none\"></svg>"
+  template: "<svg id='sv-icon-holder-global-container' style=\"display:none\"></svg>"
 });
