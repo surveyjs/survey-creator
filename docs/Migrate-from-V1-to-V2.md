@@ -13,14 +13,14 @@
 
 Survey Creator V2 introduces a native implementation for React. Although this is a major update, the changes mostly affect rendering and UI customization. The rest of your code for V1 should work fine in V2.
 
-To migrate to the new Survey Creator, uninstall `survey-creator` and install the `survey-creator-react` package. Its dependencies (`survey-core`, `survey-creator-core`, and `survey-react-ui`) will be installed automatically:
+To migrate to the new Survey Creator, uninstall `survey-creator` and install the `survey-creator-react` package. Its dependencies (`survey-core`, `survey-creator-core`, and `survey-react-ui`) are installed automatically:
 
 ```cmd
 npm uninstall survey-creator
 npm install survey-creator-react --save
 ```
 
-Most of the imports will break after that operation. Run your application and fix import errors that you see in the console. As a result, the Survey Creator code should look as follows:
+Most of the imports will break after this operation. Run your application and fix import errors shown in the console. As a result, the Survey Creator code should look as follows:
 
 ```js
 import "survey-core/defaultV2.css";
