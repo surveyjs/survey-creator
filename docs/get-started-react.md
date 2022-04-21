@@ -52,7 +52,7 @@ import { SurveyCreator } from "survey-creator-react";
 
 // ...
 
-export class SurveyCreatorWidget extends Component {
+export function SurveyCreatorWidget() {
   const creator = new SurveyCreator(creatorOptions);
 }
 ```
@@ -88,7 +88,7 @@ import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 
 // ...
 
-export class SurveyCreatorWidget extends Component {
+export function SurveyCreatorWidget() {
   const creator = new SurveyCreator(creatorOptions);
 
   return (
