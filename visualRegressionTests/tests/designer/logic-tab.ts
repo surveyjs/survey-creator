@@ -394,8 +394,6 @@ test("logic actions", async (t) => {
     .click(tableRulesSelector.nth(0));
   await checkElementScreenshot("logic-panel-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t);
 
-  await t
-    .click(logicQuestionSelector)
-    .click(tableRulesSelector.nth(1));
+  await t.click(tableRulesSelector.nth(1));
   await checkElementScreenshot("logic-question-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t);
 });
