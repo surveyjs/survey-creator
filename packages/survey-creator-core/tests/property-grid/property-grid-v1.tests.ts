@@ -183,12 +183,12 @@ test("Create correct questions for property editors", () => {
   }
 });
 test("propertyEditor.displayName", () => {
-  var oldValue = defaultStrings.p["enableIf"];
-  defaultStrings.p["enableIf"] = "It is enableIf";
+  var oldValue = defaultStrings.pe["enableIf"];
+  defaultStrings.pe["enableIf"] = "It is enableIf";
   var propertyGrid = new PropertyGridModelTester(new Question("q1"));
   var enableIfQuestion = propertyGrid.survey.getQuestionByName("enableIf");
   expect(enableIfQuestion.title).toEqual("It is enableIf");
-  defaultStrings.p["enableIf"] = oldValue;
+  defaultStrings.pe["enableIf"] = oldValue;
 });
 /**
  * Skip several tests with custom property editors. We do not it completely different now and any question, including custom widget, can become a property editors.
@@ -348,7 +348,7 @@ test("SurveyPropertyItemValue different view type", () => {
   valueEditor.apply();
   expect(question.choices).toHaveLength(1);
 });
-test("SurveyPropertyItemValuesEditor - fast entry is available - https://surveyjs.answerdesk.io/ticket/details/T1534", () => {
+test("SurveyPropertyItemValuesEditor - Manual Entry is available - https://surveyjs.answerdesk.io/ticket/details/T1534", () => {
   const question = new QuestionCheckboxModel("q1");
   question.choices = ["1|item1", "item2"];
   const propertyGrid = new PropertyGridModelTester(question);
@@ -371,7 +371,7 @@ test("SurveyPropertyItemValuesEditor - fast entry is available - https://surveyj
   expect(valueQuestion.isReadOnly).toEqual(false);
 });
 
-test("SurveyPropertyItemValuesEditor - disable Fast Entry functionality if itemvalue.value property is readonly or invisible - https://surveyjs.answerdesk.io/ticket/details/T1837", () => {
+test("SurveyPropertyItemValuesEditor - disable Manual Entry functionality if itemvalue.value property is readonly or invisible - https://surveyjs.answerdesk.io/ticket/details/T1837", () => {
   Serializer.findProperty("ItemValue", "value").readOnly = true;
   var question = new QuestionCheckboxModel("q1");
   question.choices = ["1|item1", "item2"];
@@ -1189,7 +1189,7 @@ test("Change displayName for existing property. It should have higher priority t
   visibleQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("visible")
   );
-  expect(visibleQuestion.title).toEqual("Is visible?");
+  expect(visibleQuestion.title).toEqual("Visible");
 });
 
 test("SurveyPropertyResultfullEditor test", () => {
@@ -1710,7 +1710,7 @@ test("property editor titleQuestion.description", () => {
   );
   expect(
     defaultValueExpressionQuestion.description.indexOf(
-      "You can use curly brackets"
+      "Use curly brackets"
     ) > -1
   ).toBeTruthy();
 });
@@ -1933,8 +1933,8 @@ test("SurveyPropertyMultipleValuesEditor", () => {
   const question = new Question("q1");
   const propertyGrid = new PropertyGridModelTester(question);
   const multipleQuestion = <QuestionCheckboxModel>(
-      propertyGrid.survey.getQuestionByName("multiple")
-    );
+    propertyGrid.survey.getQuestionByName("multiple")
+  );
   expect(multipleQuestion).toBeTruthy();
   expect(multipleQuestion.getType()).toEqual("checkbox");
   expect(multipleQuestion.choices).toHaveLength(3);

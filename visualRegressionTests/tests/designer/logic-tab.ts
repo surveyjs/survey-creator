@@ -126,7 +126,7 @@ test("Check logic error notifier", async (t) => {
   await checkElementScreenshot("logic-error-notifier.png", Selector(".svc-notifier--error"), t);
 });
 
-test("Check logic fast entry", async (t) => {
+test("Check logic Manual Entry", async (t) => {
   await t.resizeWindow(1920, 900);
   await setJSON({
     "logoPosition": "right",
@@ -232,7 +232,7 @@ test("unsaved rule", async (t) => {
 
   await t
     .click(logicActionSelector)
-    .click(getSelectOptionByText("Copy question value"))
+    .click(getSelectOptionByText("Copy answer"))
     .click(doneButtonSelector);
 
   await checkElementScreenshot("logic-error-action-questions.png", ruleContent, t);

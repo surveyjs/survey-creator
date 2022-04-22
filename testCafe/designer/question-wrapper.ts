@@ -10,7 +10,7 @@ function normalize(str) {
   return str.replace(/\xa0/gi, " ").replace(/(?:\r\n|\r|\n)/g, "");
 }
 
-const requiredActionButton = questionToolbarActions.find('button[title="Is required?"]');
+const requiredActionButton = questionToolbarActions.find('button[title="Required"]');
 const deleteActionButton = questionToolbarActions.find('button[title="Delete"]');
 const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
 const duplicateActionButton = questionToolbarActions.find('button[title="Duplicate"]');
@@ -142,7 +142,7 @@ test("Matrix dropdown with vertical layout and and selecting rows", async (t) =>
   await t.click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
-    .expect(Selector("h5.spg-title").withText("Row count").visible).ok();
+    .expect(Selector("h5.spg-title").withText("Rows").visible).ok();
 });
 
 test("Matrix dropdown with detail panel", async (t) => {

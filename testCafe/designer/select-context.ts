@@ -82,7 +82,7 @@ test("Matrix question", async (t) => {
     .click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
-    .expect(Selector("h5.spg-title").withText("Row count").visible).ok();
+    .expect(Selector("h5.spg-title").withText("Rows").visible).ok();
 });
 
 test("Matrix dropdown question", async (t) => {
@@ -102,7 +102,7 @@ test("Matrix dropdown question", async (t) => {
     .click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
-    .expect(Selector("h5.spg-title").withText("Row count").visible).ok();
+    .expect(Selector("h5.spg-title").withText("Rows").visible).ok();
 });
 
 test("Matrix dropdown question select column", async (t) => {
