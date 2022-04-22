@@ -85,10 +85,11 @@ svc-page {
   background-color: transparent;
   cursor: pointer;
   margin-right: calcSize(1);
+  outline: none;
   use {
     fill: $foreground-light;
   }
-  &:hover {
+  &:hover, &:focus {
     background-color: $background-dim;
   }
 }
