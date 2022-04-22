@@ -54,23 +54,28 @@
   use {
     fill: $foreground-light;
   }
+  outline: none;
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls__button {
   background-color: transparent;
 }
 
-.svc-image-item-value-controls__choose-file:hover {
+.svc-image-item-value-controls__choose-file {
   // background-color: $primary-light;
-  use {
-    fill: $primary;
+  &:hover, &:focus {
+    use {
+      fill: $primary;
+    }
   }
 }
 
-.svc-image-item-value-controls__remove:hover {
+.svc-image-item-value-controls__remove {
   // background-color: $red-light;
-  use {
-    fill: $red;
+  &:hover, &:focus {
+    use {
+      fill: $red;
+    }
   }
 }
 
@@ -80,8 +85,10 @@
   }
 }
 
-.svc-image-item-value-controls__add:hover {
-  background-color: $primary-light;
+.svc-image-item-value-controls__add {
+  &:hover, &:focus {
+    background-color: $primary-light;
+  }
 }
 
 .svc-choose-file-input {
