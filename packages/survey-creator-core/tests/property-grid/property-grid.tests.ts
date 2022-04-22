@@ -374,6 +374,27 @@ test("itemvalue[] custom dropdown property", () => {
 
   Serializer.removeProperty("itemvalue", "prop1");
 });
+test("itemvalue[] custom dropdown property add showMode as 'form'", () => {
+  Serializer.addProperty("itemvalue", { name: "prop1", category: "general", choices: ["item1", "item2", "item3", "item4", "item5"], showMode: "form" });
+
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(2);
+  const row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  expect(row.detailPanel.elements).toHaveLength(3);
+  const thirdElement = row.detailPanel.elements[2];
+  expect(thirdElement.name).toEqual("prop1");
+  expect(thirdElement.getType()).toEqual("dropdown");
+  expect(thirdElement.choices).toHaveLength(5);
+  expect(thirdElement.choices[0].value).toEqual("item1");
+
+  Serializer.removeProperty("itemvalue", "prop1");
+});
 test("itemvalue[] custom properties with dependsOn", () => {
   Serializer.addProperty("itemvalue", { name: "prop1", choices: ["item1", "item2"] });
   Serializer.addProperty("itemvalue", { name: "prop2", dependsOn: "prop1", visibleIf: (obj: any) => { return obj.prop1 == "item1"; } });
