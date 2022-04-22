@@ -77,7 +77,7 @@ export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" |
   return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text).filterVisible();
 }
 export function getSelectOptionByText(text: string) {
-  return Selector(".sv-list__item span").withExactText(text).filterVisible();
+  return Selector("option").withExactText(text).filterVisible();
 }
 export function getBarItemByText(text) {
   return Selector(".sv-action-bar-item__title").withText(text).parent(".sv-action-bar-item");

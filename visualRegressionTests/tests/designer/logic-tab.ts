@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, getSelectOptionByText, logicActionSelector, tableRulesSelector, logicAddNewRuleButton } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, getSelectOptionByText, logicActionSelector, tableRulesSelector, logicAddNewRuleButton, getListItemByText } from "../../helper";
 
 const title = "Logic tab Screenshot";
 
@@ -219,7 +219,7 @@ test("unsaved rule", async (t) => {
   await checkElementScreenshot("logic-error-condition-question-name.png", ruleContent, t);
   await t
     .click(logicQuestionSelector)
-    .click(getSelectOptionByText("q1"))
+    .click(getListItemByText("q1"))
     .click(doneButtonSelector);
 
   await checkElementScreenshot("logic-error-condition-question-value.png", ruleContent, t);
@@ -232,7 +232,7 @@ test("unsaved rule", async (t) => {
 
   await t
     .click(logicActionSelector)
-    .click(getSelectOptionByText("Copy answer"))
+    .click(getListItemByText("Copy answer"))
     .click(doneButtonSelector);
 
   await checkElementScreenshot("logic-error-action-questions.png", ruleContent, t);
