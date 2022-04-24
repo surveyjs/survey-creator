@@ -92,18 +92,30 @@ export class CreatorAction extends Action implements ICreatorAction {
   onUpdateTooltip?: () => string;
   public updateTitle(): void {
     if(!!this.onUpdateTooltip) {
-      this.tooltip = this.onUpdateTooltip();
+      this.setTooltip(this.onUpdateTooltip());
     } else {
       if(!!this.locTooltipName) {
-        this.tooltip = editorLocalization.getString(this.locTooltipName);
+        this.setTooltip(editorLocalization.getString(this.locTooltipName));
       }
     }
     if(!!this.onUpdateTitle) {
-      this.title = this.onUpdateTitle();
+      this.setTitle(this.onUpdateTitle());
     } else {
       if(!!this.locTitleName) {
-        this.title = editorLocalization.getString(this.locTitleName);
+        this.setTitle(editorLocalization.getString(this.locTitleName));
       }
+    }
+  }
+  private setTitle(newVal: string): void {
+    this.title = newVal;
+    if(!!this.innerItem) {
+      this.innerItem.title = newVal;
+    }
+  }
+  private setTooltip(newVal: string): void {
+    this.tooltip = newVal;
+    if(!!this.innerItem) {
+      this.innerItem.tooltip = newVal;
     }
   }
 }

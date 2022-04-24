@@ -1,5 +1,6 @@
 import { editorLocalization, defaultStrings } from "../src/editorLocalization";
 import { CreatorTester } from "./creator-tester";
+import { CreatorAction } from "../src/creator-base";
 
 test("Get nested property", () => {
   expect(editorLocalization.getString("qt.text")).toEqual("Single Input");
@@ -134,6 +135,30 @@ test("getPropertyValue and spaces", () => {
   expect(editorLocalization.convertToCamelCase("On Top")).toEqual("On Top");
   expect(editorLocalization.convertToCamelCase("My First Option")).toEqual("My First Option");
   expect(editorLocalization.getPropertyValue("Another test")).toEqual("Another test");
+});
+test("Update innerItem on changign title, onUpdateTitle", (): any => {
+  const item: any = {
+    id: "test",
+    onUpdateTitle: () => { return "Designer"; },
+    onUpdateTooltip: () => { return "Designer"; }
+  };
+  const action = new CreatorAction(item);
+  expect(action.title).toEqual("Designer");
+  expect(item.title).toEqual("Designer");
+  expect(action.tooltip).toEqual("Designer");
+  expect(item.tooltip).toEqual("Designer");
+});
+test("Update innerItem on changign title", (): any => {
+  const item: any = {
+    id: "test",
+    locTitleName: "ed.designer",
+    locTooltipName: "ed.designer"
+  };
+  const action = new CreatorAction(item);
+  expect(action.title).toEqual("Designer");
+  expect(item.title).toEqual("Designer");
+  expect(action.tooltip).toEqual("Designer");
+  expect(item.tooltip).toEqual("Designer");
 });
 test("Change Creator locale property", (): any => {
   const deutschStrings: any = {
