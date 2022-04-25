@@ -236,10 +236,21 @@ export class SurveyQuestionProperties {
     this.tabs.unshift(res);
     return res;
   }
+  private setUsedProperties(res: Array<ISurveyQuestionEditorDefinition>, usedProperties: any): void {
+    for(let i = 0; i < res.length; i ++) {
+      const props = res[i].properties;
+      if(!Array.isArray(props)) continue;
+      for(let j = 0; j < props.length; j ++) {
+        const propName = !!props[j]["name"] ? props[j]["name"] : props[j];
+        usedProperties[propName] = true;
+      }
+    }
+  }
   private getAllDefinitionsByClass(
     className: string
   ): Array<ISurveyQuestionEditorDefinition> {
     var result = [];
+    var usedProperties = {};
     if (
       className.indexOf("@") > -1 &&
       SurveyQuestionEditorDefinition.definition[className]
@@ -253,10 +264,11 @@ export class SurveyQuestionProperties {
         result.push(SurveyQuestionEditorDefinition.definition[defaultName]);
       }
       result.push(SurveyQuestionEditorDefinition.definition[className]);
+      this.setUsedProperties(result, usedProperties);
+      this.addNonTabProperties(result, usedProperties, true);
       return result;
     }
     var curClassName = className;
-    var usedProperties = {};
     var hasNonTabProperties = false;
     while (curClassName) {
       let metaClass = <Survey.JsonMetadataClass>(
@@ -312,13 +324,14 @@ export class SurveyQuestionProperties {
   }
   private addNonTabProperties(
     tabs: Array<ISurveyQuestionEditorDefinition>,
-    usedProperties: any
+    usedProperties: any, isFormMode: boolean = false
   ) {
     let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
     for (var i = 0; i < this.properties.length; i++) {
       let prop = this.properties[i];
-      if (!this.isJSONPropertyVisible(prop) || !!usedProperties[prop.name])
+      if (!this.isJSONPropertyVisible(prop) || !!usedProperties[prop.name] ||
+        (isFormMode && prop.showMode !== "form"))
         continue;
       let propCategory = this.getJsonPropertyCategory(prop);
       let tabName = !!propCategory
