@@ -74,11 +74,57 @@ export interface ICreatorPlugin {
   model: Base;
 }
 
-export interface ITabbedMenuItem extends IAction {
+export interface ICreatorAction extends IAction {
+  locTitleName?: string;
+  locTooltipName?: string;
+  onUpdateTitle?: () => string;
+  onUpdateTooltip?: () => string;
+}
+
+export class CreatorAction extends Action implements ICreatorAction {
+  constructor(item: ICreatorAction) {
+    super(item);
+    this.updateTitle();
+  }
+  locTitleName?: string;
+  locTooltipName?: string;
+  onUpdateTitle?: () => string;
+  onUpdateTooltip?: () => string;
+  public updateTitle(): void {
+    if(!!this.onUpdateTooltip) {
+      this.setTooltip(this.onUpdateTooltip());
+    } else {
+      if(!!this.locTooltipName) {
+        this.setTooltip(editorLocalization.getString(this.locTooltipName));
+      }
+    }
+    if(!!this.onUpdateTitle) {
+      this.setTitle(this.onUpdateTitle());
+    } else {
+      if(!!this.locTitleName) {
+        this.setTitle(editorLocalization.getString(this.locTitleName));
+      }
+    }
+  }
+  private setTitle(newVal: string): void {
+    this.title = newVal;
+    if(!!this.innerItem) {
+      this.innerItem.title = newVal;
+    }
+  }
+  private setTooltip(newVal: string): void {
+    this.tooltip = newVal;
+    if(!!this.innerItem) {
+      this.innerItem.tooltip = newVal;
+    }
+  }
+}
+
+export interface ITabbedMenuItem extends ICreatorAction {
   componentContent: string;
   renderTab?: () => any;
 }
-export class TabbedMenuItem extends Action implements ITabbedMenuItem {
+export class TabbedMenuItem extends CreatorAction implements ITabbedMenuItem {
   constructor(item: ITabbedMenuItem) {
     super(item);
   }
@@ -271,9 +317,11 @@ export class CreatorBase extends Base
     componentContent?: string,
     index?: number
   ) {
-    var tab: TabbedMenuItem = new TabbedMenuItem({
+    const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
+    const tab: TabbedMenuItem = new TabbedMenuItem({
       id: name,
-      title: !!title ? title : editorLocalization.getString("ed." + name),
+      locTitleName: locStrName,
+      title: title,
       componentContent: componentContent ? componentContent : "svc-tab-" + name,
       data: plugin,
       action: () => this.makeNewViewActive(name),
@@ -916,6 +964,43 @@ export class CreatorBase extends Base
 
   protected onSetReadOnly(newVal: boolean) { }
 
+  /**
+   * Gets or sets the survey locale. The default value it is empty, this means the 'en' locale is used.
+   * You can set it to 'de' - German, 'fr' - French and so on.
+   */
+  public get locale(): string {
+    return editorLocalization.currentLocale;
+  }
+  public set locale(value: string) {
+    if(editorLocalization.currentLocale === value) return;
+    editorLocalization.currentLocale = value;
+    this.toolbox.updateTitles();
+    this.refreshPlugin();
+    const selEl = this.selectedElement;
+    if(!!selEl) {
+      this.selectElement(null);
+      this.selectElement(selEl);
+    }
+    this.locStrsChanged();
+    this.tabs.forEach(item => (<TabbedMenuItem>item).updateTitle());
+    this.toolbar.actions.forEach(item => {
+      if(!!(<any>item).updateTitle) {
+        (<any>item).updateTitle();
+      }
+    });
+  }
+  private refreshPlugin() {
+    const plugin = this.currentPlugin;
+    if(!!plugin) {
+      if(plugin.deactivate) {
+        plugin.deactivate();
+      }
+      const viewType = this.viewType;
+      this.viewType = "";
+      plugin.activate();
+      this.viewType = viewType;
+    }
+  }
   /**
    * A boolean property, false by default. Set it to true to deny editing.
    */

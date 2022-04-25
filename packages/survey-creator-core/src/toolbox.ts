@@ -434,6 +434,15 @@ export class QuestionToolbox
     this.canCollapseCategories = !this.keepAllCategoriesExpanded;
     this.updateCategoriesState();
   }
+  public updateTitles(): void {
+    this.actions.forEach(action => {
+      const newTitle = editorLocalization.getString("qt." + action.name);
+      if(!!newTitle) {
+        action.title = newTitle;
+        action.tooltip = newTitle;
+      }
+    });
+  }
   private updateCategoriesState() {
     var noActive = this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
     if (noActive) {

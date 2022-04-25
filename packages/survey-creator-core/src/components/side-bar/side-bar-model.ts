@@ -1,7 +1,7 @@
 import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray } from "survey-core";
 import { settings } from "../../settings";
 import { getLocString } from "../../editorLocalization";
-import { CreatorBase } from "../../creator-base";
+import { CreatorBase, CreatorAction } from "../../creator-base";
 import { SidebarTabModel } from "./side-bar-tab-model";
 import { ResizeManager } from "../../utils/resizer";
 
@@ -44,11 +44,11 @@ export class SidebarModel extends Base {
 
   private createActions() {
     if (this.creator.allowCollapseSidebar) {
-      this._collapseAction = new Action({
+      this._collapseAction = new CreatorAction({
         id: "svd-grid-hide",
         iconName: "icon-collapse-panel",
         css: "svd-grid-hide",
-        title: getLocString("ed.hidePanel"),
+        locTitleName: "ed.hidePanel",
         showTitle: false,
         visible: <any>new ComputedUpdater<boolean>(() => this.visible),
         action: () => {
@@ -61,7 +61,7 @@ export class SidebarModel extends Base {
       });
       this.toolbar.actions.push(this._collapseAction);
 
-      this._expandAction = new Action({
+      this._expandAction = new CreatorAction({
         id: "svd-grid-expand",
         iconName: "icon-expand-panel",
         css: "svd-grid-expand",
@@ -73,7 +73,7 @@ export class SidebarModel extends Base {
             this.expandedManually = this.flyoutMode;
           }
         },
-        title: getLocString("ed.showPanel"),
+        locTitleName: "ed.showPanel",
         visible: <any>new ComputedUpdater<boolean>(() => {
           const visible = !this.visible;
           return this.hasVisibleTabs && visible;

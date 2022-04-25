@@ -1,5 +1,5 @@
 import { Action, ComputedUpdater, defaultStandardCss, defaultV2Css, IAction, ListModel, modernCss, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
@@ -74,7 +74,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: CreatorBase) {
-    creator.addPluginTab("test", this, getLocString("ed.testSurvey"));
+    creator.addPluginTab("test", this, "ed.testSurvey");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
@@ -118,10 +118,10 @@ export class TabTestPlugin implements ICreatorPlugin {
   public createActions() {
     const items: Array<Action> = [];
 
-    this.testAgainAction = new Action({
+    this.testAgainAction = new CreatorAction({
       id: "testSurveyAgain",
       visible: false,
-      title: getLocString("ed.testSurveyAgain"),
+      locTitleName: "ed.testSurveyAgain",
       action: () => {
         this.model.testAgain();
       }
@@ -179,14 +179,14 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.orientationSelectorAction);
     }
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction = new Action({
+      this.invisibleToggleAction = new CreatorAction({
         id: "showInvisible",
         iconName: "icon-invisible-items",
         mode: "small",
         needSeparator: <any>new ComputedUpdater<boolean>(() => {
           return !this.creator.isMobileView;
         }),
-        title: getLocString("ts.showInvisibleElements"),
+        locTitleName: "ts.showInvisibleElements",
         visible: false,
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
@@ -277,7 +277,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       }),
     });
     items.push(this.languageSelectorAction);
-    this.designerAction = new Action({
+    this.designerAction = new CreatorAction({
       id: "svd-designer",
       iconName: "icon-preview",
       needSeparator: true,
@@ -286,7 +286,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       visible: <any>new ComputedUpdater<boolean>(() => {
         return (this.creator.activeTab === "test");
       }),
-      title: this.creator.getLocString("ed.designer"),
+      locTitleName: "ed.designer",
       showTitle: false
     });
 
