@@ -804,7 +804,7 @@ export class PropertyGridModel {
       this.onAfterRenderQuestion(options);
     });
     this.survey.onTextMarkdown.add((sender, options) => {
-      if(options.name === "description") {
+      if (options.name === "description") {
         options.html = parsePropertyDescription(options.text);
       }
     });
@@ -1487,24 +1487,16 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "question";
   }
-  public getJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): any {
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     return {
       type: "dropdown",
-      optionsCaption: editorLocalization.getString(
-        "pe.conditionSelectQuestion"
-      ),
+      renderAs: "select",
+      dropdownWidthMode: "contentWidth",
+      optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
       choices: this.getChoices(obj, prop, options)
     };
   }
-  private getChoices(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): Array<any> {
+  private getChoices(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): Array<any> {
     var survey = EditableObject.getSurvey(obj);
     if (!survey) return [];
     var questions = this.getQuestions(survey, obj);
