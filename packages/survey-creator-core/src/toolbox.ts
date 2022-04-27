@@ -69,9 +69,7 @@ export class QuestionToolboxCategory extends Base {
     }
   }
 }
-export class QuestionToolboxItem
-  extends Action
-  implements IQuestionToolboxItem {
+export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
   constructor(private item: IQuestionToolboxItem) {
     super(item);
   }
@@ -343,9 +341,13 @@ export class QuestionToolbox
    * @see IQuestionToolboxItem
    */
   private getActionByItem(item: IQuestionToolboxItem) {
-    return item instanceof QuestionToolboxItem
-      ? item
-      : new QuestionToolboxItem(item);
+    if (item instanceof QuestionToolboxItem) {
+      return item;
+    }
+    else {
+      item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
+      return new QuestionToolboxItem(item);
+    }
   }
   public addItem(item: IQuestionToolboxItem, index?: number) {
     this.correctItem(item);
