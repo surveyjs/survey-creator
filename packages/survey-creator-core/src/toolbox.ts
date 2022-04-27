@@ -94,6 +94,7 @@ export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey"];
+  static defaultIconName = "icon-default";
   private _orderedQuestions = [
     "text",
     "checkbox",
@@ -325,7 +326,7 @@ export class QuestionToolbox
       title: title,
       tooltip: tooltip,
       isCopied: options.isCopied !== false,
-      iconName: !!options.iconName ? options.iconName : "icon-custom-question",
+      iconName: !!options.iconName ? options.iconName : QuestionToolbox.defaultIconName,
       json: !!options.json ? options.json : this.getQuestionJSON(question),
       category: !!options.category ? options.category : ""
     };
@@ -437,7 +438,7 @@ export class QuestionToolbox
   public updateTitles(): void {
     this.actions.forEach(action => {
       const newTitle = editorLocalization.getString("qt." + action.name);
-      if(!!newTitle) {
+      if (!!newTitle) {
         action.title = newTitle;
         action.tooltip = newTitle;
       }
@@ -670,7 +671,7 @@ export class QuestionToolbox
   }
   private addItemFromJSON(json: any) {
     if (json.showInToolbox === false) return;
-    const iconName: string = json.iconName ? json.iconName : "icon-custom-question";
+    const iconName: string = json.iconName ? json.iconName : QuestionToolbox.defaultIconName;
     let title: string = editorLocalization.getString("qt." + json.name);
     if (!title || title == json.name) {
       title = json.title;
