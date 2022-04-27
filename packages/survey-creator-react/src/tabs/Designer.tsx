@@ -65,7 +65,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     }
     const renderedPages = [];
 
-    if(this.creator.pageEditMode !== "bypage") {
+    if (this.creator.pageEditMode !== "bypage") {
       const pages = this.creator.survey.pages;
 
       pages.forEach((page, index) => {
@@ -137,7 +137,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
 
   renderPlaceHolder(): JSX.Element {
     return (<React.Fragment>
-      <div className="svc-designer__placeholder-container">
+      <div className="svc-designer__placeholder-container" data-sv-drop-target-survey-element={"newGhostPage"}>
         <span className="svc-designer-placeholder-text svc-text svc-text--normal">
           {this.model.placeholderText}
         </span>
