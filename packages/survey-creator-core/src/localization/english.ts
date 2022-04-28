@@ -33,7 +33,7 @@ export var enStrings = {
     file: "File",
     html: "HTML",
     matrix: "Single-Choice Matrix",
-    matrixdropdown: "Mutliple-Choice Matrix",
+    matrixdropdown: "Multiple-Choice Matrix",
     matrixdynamic: "Dynamic Matrix",
     multipletext: "Multiple Text",
     panel: "Panel",
