@@ -202,10 +202,14 @@ export class TabTestPlugin implements ICreatorPlugin {
       { name: "modern", title: getThemeTitle("modern"), theme: modernCss },
       { name: "default", title: getThemeTitle("default"), theme: defaultStandardCss }
     ];
-    const styles = getComputedStyle(document.body);
-    const availableThemesToItems = themeMapper
-      .filter(item => styles.getPropertyValue(item.theme.variables.themeMark))
-      .map(item => ({ id: item.name + "_themeSwitcher", value: item.name, title: item.title }));
+
+    let availableThemesToItems = [];
+    if (!!document && !!document.body) {
+      const styles = getComputedStyle(document.body);
+      availableThemesToItems = themeMapper
+        .filter(item => styles.getPropertyValue(item.theme.variables.themeMark))
+        .map(item => ({ id: item.name + "_themeSwitcher", value: item.name, title: item.title }));
+    }
 
     if (availableThemesToItems.length > 1) {
       this.changeThemeModel = new ListModel(
