@@ -37,7 +37,7 @@ test("Check base responsiveness for toolbox", async (t) => {
     .click(".svc-toolbox__tool.sv-dots");
   const popupSelector = Selector(".sv-popup").filterVisible();
   await t
-    .expect(popupSelector.find(".sv-list__item").withText("Panel (dynamic panels)").visible).ok()
+    .expect(popupSelector.find(".sv-list__item").withText("Dynamic Panel").visible).ok()
     .pressKey("esc")
     .expect(popupSelector.visible).notOk()
     .resizeWindow(1920, 1100)

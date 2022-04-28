@@ -56,9 +56,9 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   const SignatureItem = Selector("[aria-label='Signature Pad toolbox item']");
   const ExpressionItem = Selector("[aria-label='Expression (read-only) toolbox item']");
   const FileItem = Selector("[aria-label='File toolbox item']");
-  const MatrixSingleChoiceItem = Selector("[aria-label='Matrix (single choice) toolbox item']");
-  const MatrixMultipleChoiceItem = Selector("[aria-label='Matrix (multiple choice) toolbox item']");
-  const MatrixDynamicRowsItem = Selector("[aria-label='Matrix (dynamic rows) toolbox item']");
+  const MatrixSingleChoiceItem = Selector("[aria-label='Single-Choice Matrix toolbox item']");
+  const MatrixMultipleChoiceItem = Selector("[aria-label='Multiple-Choice Matrix toolbox item']");
+  const MatrixDynamicRowsItem = Selector("[aria-label='Dynamic Matrix toolbox item']");
   const MultipleTextItem = Selector("[aria-label='Multiple Text toolbox item']");
   const PanelItem = Selector("[aria-label='Panel toolbox item']");
   const PanelDynamicItem = Selector("[aria-label='Panel toolbox item']");
@@ -199,7 +199,7 @@ test("Drag Drop Toolbox Responsivity", async (t) => {
     .click(".svc-toolbox__tool.sv-dots");
 
   const PopupSelector = Selector(".sv-popup").filterVisible();
-  const DynamicPanelItem = PopupSelector.find(".sv-list__item").withText("Panel (dynamic panels)");
+  const DynamicPanelItem = PopupSelector.find(".sv-list__item").withText("Dynamic Panel");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
   await t.dragToElement(DynamicPanelItem, EmptyPage, { speed: 0.5 });

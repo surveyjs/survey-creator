@@ -591,7 +591,7 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
   });
   const row1Column1Cell = Selector("tbody .svc-matrix-cell").filterVisible().nth(1);
   await t.expect(Selector(".svc-question__content").exists).notOk();
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .hover(row1Column1Cell, { speed: 0.5 });
@@ -624,7 +624,7 @@ test("Rating question inplace editor", async (t) => {
 
 test("Matrix dropdown question inplace row header editor #2553", async (t) => {
   await t.expect(Selector(".svc-question__content").exists).notOk();
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   await t.expect(Selector(".svc-question__content").exists).ok();
 
   await t
