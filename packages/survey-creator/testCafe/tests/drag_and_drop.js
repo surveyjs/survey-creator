@@ -80,7 +80,7 @@ test.skip(`check d&d all toolbox elements`, async (t) => {
   assert.equal(await getQuestionsAddedCount(), 11);
 
   await t.dragToElement(
-    `[title="Single-Choide Matrix"]`,
+    `[title="Single-Choice Matrix"]`,
     `.svd_container .svd_questions_editor`
   );
   assert.equal(await getQuestionsAddedCount(), 12);
