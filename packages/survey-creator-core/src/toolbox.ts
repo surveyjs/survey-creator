@@ -222,7 +222,7 @@ export class QuestionToolbox
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
       const json = this.creator.getJSONForNewElement(itemModel.json);
       this.dotsItemPopupModel.toggleVisibility();
-      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json);
+      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel.title);
     });
     this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
       this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
