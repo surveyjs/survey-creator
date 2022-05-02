@@ -2381,7 +2381,7 @@ test("Add new question to Panel and Page", (): any => {
   expect(panelModel.addNewQuestionText).toEqual("Add Rating");
   expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
   expect(pageModel.addNewQuestionText).toEqual("Add Ranking");
-  expect(pageModel2.addNewQuestionText).toEqual("Add Html");
+  expect(pageModel2.addNewQuestionText).toEqual("Add HTML");
 
   expect((creator.survey.getAllPanels()[0] as PanelModel).questions.map(q => q.getType())).toEqual(["text", "rating"]);
   expect((creator.survey.getAllPanels()[1] as PanelModel).questions.map(q => q.getType())).toEqual(["comment"]);
