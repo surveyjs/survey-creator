@@ -5,6 +5,7 @@ import { SurveyElementAdornerBase } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
 import "./page.scss";
 import { SurveyHelper } from "../survey-helper";
+import { settings } from "../settings";
 
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
@@ -27,7 +28,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
 
-    if(!!this.page) {
+    if (!!this.page) {
 
       this.page["surveyChangedCallback"] = () => {
         this.isPageLive = !!this.page.survey;
@@ -67,7 +68,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   public dispose() {
     super.dispose();
-    if(!!this.page) {
+    if (!!this.page) {
       this.page.unRegisterFunctionOnPropertiesValueChanged([
         "title",
         "description"
@@ -105,11 +106,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   addNewQuestion(model: PageAdorner, event: IPortableMouseEvent) {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage();
-    }, null, this.currentAddQuestionType || "text");
+    }, null, this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
   select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {
-      if(model.creator.pageEditMode !== "single") {
+      if (model.creator.pageEditMode !== "single") {
         model.creator.selectElement(model.page, undefined, false);
         if (!!this.onPageSelectedCallback) {
           this.onPageSelectedCallback();
