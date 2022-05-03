@@ -11,8 +11,7 @@ export interface ISurveyQuestionEditorDefinition {
 
 export class SurveyQuestionEditorDefinition {
   public static definition: {
-    [key: string]: ISurveyQuestionEditorDefinition,
-  } = {
+    [key: string]: ISurveyQuestionEditorDefinition, } = {
       question: {
         properties: [
           "name",
