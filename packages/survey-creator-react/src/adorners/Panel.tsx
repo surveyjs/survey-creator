@@ -26,7 +26,7 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
         <div className="svc-panel__placeholder">
           {this.model.placeholderText}
         </div>
-        {this.model.allowEdit ? attachKey2click(<div
+        {this.model.showAddQuestionButton ? attachKey2click(<div
           className="svc-panel__add-new-question svc-action-button"
           onClick={(e) => {
             e.stopPropagation();
@@ -42,7 +42,7 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
   }
   protected renderFooter(): JSX.Element {
     return (<React.Fragment>
-      {!this.model.isEmptyElement && this.model.element.isPanel && this.model.allowEdit ? attachKey2click(
+      {!this.model.isEmptyElement && this.model.element.isPanel && this.model.showAddQuestionButton ? attachKey2click(
         <div className="svc-panel__add-new-question-container">
           <div
             className="svc-panel__add-new-question svc-action-button"
