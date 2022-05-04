@@ -447,6 +447,7 @@ export class SurveyQuestionEditorDefinition {
         "panelRemoveText",
         "templateTitle",
         "templateDescription",
+        "noEntriesText",
         "confirmDelete",
         "confirmDeleteText",
         "panelPrevText",

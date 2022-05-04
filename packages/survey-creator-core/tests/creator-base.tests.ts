@@ -2405,7 +2405,6 @@ test("Add new question to Panel and Page", (): any => {
   panelModel3.addNewQuestion();
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text", "text"]);
 });
-
 test("Use settings.designer.defaultAddQuestionType", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
@@ -2418,7 +2417,6 @@ test("Use settings.designer.defaultAddQuestionType", (): any => {
   panelModel.addNewQuestion();
   expect(panel.questions[0].getType()).toEqual("radiogroup");
 });
-
 test("Use settings.designer.showAddQuestionButton = false", (): any => {
   settings.designer.showAddQuestionButton = false;
   const creator = new CreatorTester();
@@ -2433,7 +2431,6 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
   expect(pageModel.showAddQuestionButton).toBeTruthy();
   expect(panelModel.showAddQuestionButton).toBeTruthy();
 });
-
 test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (

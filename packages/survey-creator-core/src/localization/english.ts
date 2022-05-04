@@ -436,6 +436,7 @@ export var enStrings = {
     renderMode: "Panel display mode",
     allowAddPanel: "Allow adding panels",
     allowRemovePanel: "Allow removing panels",
+    noEntriesText: "Empty entries text",
     panelAddText: "Add Panel button text",
     panelRemoveText: "Remove Panel button text",
     isSinglePage: "Show all elements on one page",

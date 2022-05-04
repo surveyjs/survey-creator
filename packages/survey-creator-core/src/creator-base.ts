@@ -791,7 +791,9 @@ export class CreatorBase extends Base
    * <br/> sender the survey creator object that fires the event
    * <br/> There are two properties in options:
    * <br/> files the Javascript File objects array
-   * <br/> callback called on upload complete
+   * <br/> callback called on upload complete,
+   * <br/> which takes two string arguments:
+   * <br/> a status and an image link
    * @see uploadFile
    */
   public onUploadFile: Survey.Event<
