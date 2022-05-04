@@ -13,7 +13,7 @@
     <!-- ko if: koIsEmptyElement -->
     <div class="svc-panel__placeholder_frame">
       <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
-      <!-- ko if: element.isPanel && allowEdit -->
+      <!-- ko if: element.isPanel && showAddQuestionButton -->
       <div class="svc-panel__add-new-question svc-action-button"
         data-bind="click: addNewQuestion, key2click, clickBubble: false">
         <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
@@ -29,7 +29,7 @@
     <!-- /ko -->
     <!-- /ko -->
 
-    <!-- ko if: !koIsEmptyElement() && element.isPanel && allowEdit -->
+    <!-- ko if: !koIsEmptyElement() && element.isPanel && showAddQuestionButton -->
     <div class="svc-panel__add-new-question-container">
       <div class="svc-panel__add-new-question svc-action-button"
         data-bind="click: addNewQuestion, key2click, clickBubble: false">
@@ -59,7 +59,7 @@
   <!-- ko if: koIsEmptyElement -->
   <div class="svc-panel__placeholder_frame">
     <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
-    <!-- ko if: allowEdit -->
+    <!-- ko if: showAddQuestionButton -->
     <div class="svc-panel__add-new-question svc-action-button"
       data-bind="click: addNewQuestion, key2click, clickBubble: false">
       <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">

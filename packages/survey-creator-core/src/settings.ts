@@ -43,7 +43,11 @@ export var settings = {
     /**
      * The default question type on clicking Add Question button.
      */
-    defaultAddQuestionType: "text"
+    defaultAddQuestionType: "text",
+    /**
+     * Set this property to false, to hide "Add Question" button on designer surface
+     */
+    showAddQuestionButton: true
   },
   logic: {
     visibleActions: [],
