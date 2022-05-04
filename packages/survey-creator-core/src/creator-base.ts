@@ -909,6 +909,11 @@ export class CreatorBase extends Base
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
 
   /**
+   * Set theme in preview tab. Can be modern, default or defaultV2
+   */
+  public previewTheme: string = "defaultV2";
+
+  /**
    * Set this property to false to disable pages adding, editing and deleting
    */
   public allowModifyPages = true;
@@ -1440,6 +1445,9 @@ export class CreatorBase extends Base
     }
     if (typeof options.showSimulatorInTestSurveyTab !== "undefined") {
       this.showSimulatorInPreviewTab = options.showSimulatorInTestSurveyTab;
+    }
+    if (typeof options.previewTheme !== "undefined") {
+      this.previewTheme = options.previewTheme;
     }
     if (typeof options.showSimulatorInPreviewTab !== "undefined") {
       this.showSimulatorInPreviewTab = options.showSimulatorInPreviewTab;

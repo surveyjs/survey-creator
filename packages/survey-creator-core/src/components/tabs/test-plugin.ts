@@ -72,9 +72,23 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.setDefaultLanguageOption(this.creator.showDefaultLanguageInTestSurveyTab);
     }
   }
+  private setPreviewTheme(themeName: string): void {
+    switch (themeName) {
+      case "modern":
+        this.simulatorTheme = modernCss;
+        break;
+      case "default":
+        this.simulatorTheme = defaultStandardCss;
+        break;
+      default:
+        this.simulatorTheme = defaultV2Css;
+        break;
+    }
+  }
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("test", this, "ed.testSurvey");
+    this.setPreviewTheme(this.creator.previewTheme);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
@@ -229,12 +243,21 @@ export class TabTestPlugin implements ICreatorPlugin {
         "center"
       );
 
+      const getStartThemeTitle = (): string => {
+        const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
+        let themeTitle = getThemeTitle("defaultV2");
+        if (availableThemes.length > 0) {
+          themeTitle = availableThemes[0].title;
+        }
+        return themeTitle;
+      };
+
       this.changeThemeAction = new Action({
         id: "themeSwitcher",
         iconName: "icon-theme",
         component: "sv-action-bar-item-dropdown",
         mode: "large",
-        title: getThemeTitle("defaultV2"),
+        title: getStartThemeTitle(),
         needSeparator: true,
         visible: <any>new ComputedUpdater<boolean>(() => {
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
