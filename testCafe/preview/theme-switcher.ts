@@ -1,4 +1,4 @@
-import { getTabbedMenuItemByText, setJSON, creatorTabPreviewName, urlPreviewThemeSwitcher, creatorTabDesignerName, url } from "../helper";
+import { getTabbedMenuItemByText, setJSON, creatorTabPreviewName, urlPreviewThemeSwitcher, urlThemeForPreview, creatorTabDesignerName, url } from "../helper";
 import { Selector } from "testcafe";
 const title = "Preview tab";
 
@@ -69,4 +69,19 @@ test("Test theme switcher with 3 themes", async (t) => {
 
   await clickAndCheck(2, "Default (legacy)", legacyRoot, defaultRoot, modernRoot);
   await clickAndCheck(0, "Default", defaultRoot, modernRoot, legacyRoot);
+});
+
+fixture`${title}`.page`${urlThemeForPreview}`.beforeEach(
+  async (t) => {
+    await t.maximizeWindow();
+  }
+);
+
+test("Test themeForPreview option", async (t) => {
+  await setJSON(json);
+
+  await t
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .expect(Selector(".sv-root-modern").visible).ok()
+    .expect(Selector("#themeSwitcher button").withText("Modern").visible).ok();
 });
