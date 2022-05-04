@@ -909,7 +909,8 @@ export class CreatorBase extends Base
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
 
   /**
-   * Set theme in preview tab. Can be modern, default or defaultV2
+   * Specifies a theme to use for the survey in the Preview tab.
+   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
    */
   public themeForPreview: string = "defaultV2";
 
