@@ -2848,7 +2848,7 @@ export class CreatorBase extends Base
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
     if (!type)
       type = this.currentAddQuestionType;
-    if (!type) type = "text";
+    if (!type) type = settings.designer.defaultAddQuestionType;
     beforeAdd(type);
     let json = { type: type };
     const toolboxItem = this.toolbox.getItemByName(type);

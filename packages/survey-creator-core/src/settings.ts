@@ -39,6 +39,12 @@ export var settings = {
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
   },
   defaultNewSurveyJSON: {},
+  designer: {
+    /**
+     * The default question type on clicking Add Question button.
+     */
+    defaultAddQuestionType: "text"
+  },
   logic: {
     visibleActions: [],
     logicItemTitleMaxChars: 50,

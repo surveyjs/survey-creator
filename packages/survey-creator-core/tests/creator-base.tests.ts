@@ -2406,6 +2406,19 @@ test("Add new question to Panel and Page", (): any => {
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text", "text"]);
 });
 
+test("Use settings.designer.defaultAddQuestionType", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  settings.designer.defaultAddQuestionType = "radiogroup";
+  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  const panel = <PanelModel>creator.survey.getAllPanels()[0];
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  pageModel.addNewQuestion(null, null);
+  expect(creator.survey.getAllQuestions()[0].getType()).toEqual("radiogroup");
+  panelModel.addNewQuestion();
+  expect(panel.questions[0].getType()).toEqual("radiogroup");
+});
+
 test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
