@@ -31,7 +31,7 @@ import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
-import { DesignTimeSurveyModel } from "../src/creator-base";
+import { DesignTimeSurveyModel, isTextInput } from "../src/creator-base";
 
 import {
   getElementWrapperComponentData,
@@ -2586,3 +2586,19 @@ test("SurveyElementAdornerBase setSurveyElement updateActionsProperties", (): an
   expect(count).toBe(1);
 });
 
+test("isTextInput", (): any => {
+  const textarea = document.createElement("textarea");
+  expect(isTextInput(textarea)).toBeTruthy();
+  const input = document.createElement("input");
+  expect(isTextInput(input)).toBeTruthy();
+
+  const div = document.createElement("div");
+  expect(isTextInput(div)).toBeFalsy();
+  (<any>div)["isContentEditable"] = true;
+  expect(isTextInput(div)).toBeTruthy();
+
+  const span = document.createElement("span");
+  expect(isTextInput(span)).toBeFalsy();
+  (<any>span)["isContentEditable"] = true;
+  expect(isTextInput(span)).toBeTruthy();
+});
