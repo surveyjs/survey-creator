@@ -3128,11 +3128,11 @@ export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
   return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
-function isTextInput(target: any) {
+export function isTextInput(target: any): boolean {
   if (!target.tagName) return false;
   const tagName = target.tagName.toLowerCase();
   if (["input", "textarea"].indexOf(tagName) !== -1) return true;
-  if (tagName === "span") {
+  if (["span", "div"].indexOf(tagName) !== -1) {
     return target.isContentEditable;
   }
   return false;
