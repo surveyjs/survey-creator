@@ -909,6 +909,12 @@ export class CreatorBase extends Base
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
 
   /**
+   * Specifies a theme to use for the survey in the Preview tab.
+   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
+   */
+  public themeForPreview: string = "defaultV2";
+
+  /**
    * Set this property to false to disable pages adding, editing and deleting
    */
   public allowModifyPages = true;
@@ -1440,6 +1446,9 @@ export class CreatorBase extends Base
     }
     if (typeof options.showSimulatorInTestSurveyTab !== "undefined") {
       this.showSimulatorInPreviewTab = options.showSimulatorInTestSurveyTab;
+    }
+    if (typeof options.themeForPreview !== "undefined") {
+      this.themeForPreview = options.themeForPreview;
     }
     if (typeof options.showSimulatorInPreviewTab !== "undefined") {
       this.showSimulatorInPreviewTab = options.showSimulatorInPreviewTab;
