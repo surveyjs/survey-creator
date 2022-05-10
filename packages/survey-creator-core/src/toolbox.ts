@@ -76,7 +76,6 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   iconName: string;
   name: string;
   json: any;
-  title: string;
   tooltip: string;
   isCopied: boolean;
   category: string;

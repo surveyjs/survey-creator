@@ -8,7 +8,7 @@ export class ObjectSelectorItem extends Action {
   constructor(
     id: number,
     public data: Base,
-    public title: string,
+    title: string,
     public level: number
   ) {
     super({ id: "sv_item_selector_" + id.toString(), title: title });
