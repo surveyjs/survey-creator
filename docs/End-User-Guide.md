@@ -140,11 +140,11 @@ Respondents switch a Boolean editor to Yes or No. The response is saved in the s
 
 #### Image
 
-Use the Image type to add an image or video to the survey. This type is used for presentation; it doesn't produce a value to be saved in the survey results.
+Use the Image type to add an image or video to the survey. This type is used for presentation only and does not produce a value to be saved in the survey results.
 
 #### HTML
 
-Use the HTML type to format text in a desired manner, include links, insert media or other custom elements into the survey. However, be warned that HTML content may be vulnerable to security breaches. Ensure that the links you insert lead to trusted resources. This type is used for presentation; it doesn't produce a value to be saved in the survey results.
+Use the HTML type to format text as needed, include links, and insert media or other custom elements into the survey. This type is used for presentation only and does not produce a value to be saved in the survey results. Be aware that HTML content can be vulnerable to security breaches. Ensure that the links you insert lead to trusted resources.
 
 #### Signature Pad
 
@@ -170,18 +170,18 @@ Expand the **General** category and select the desired color from the **Pen colo
 
 #### Expression
 
-Use the Expression type to calculate values and present them to the respondent. For example, you can sum up the scores of previous responses, display current date and time, or find an average value. The calculated value is saved in the survey results. In the following image, the Expression type concatenates first and last names to display a full name:
+Use the Expression type to calculate values and present them to respondents. For example, you can sum up the scores of previous responses, display current date and time, or find an average value. The calculated value is saved in the survey results. In the following image, the Expression type concatenates the first and last names to display a full name:
 
 <img src="images/question-types-expression.png" alt="Question types - Expression" width="50%">
 
-To specify the expression, enter it into the **Expression** field in the **General** category. Your expression can reference other survey questions (for example, `{question1} + {question2}`) or use built-in calculation functions. Refer to the following help topics for more information:
+To specify an expression, enter it into the **Expression** field in the **General** category. Your expression can reference other survey questions (for example, `{question1} + {question2}`) or use built-in calculation functions. Refer to the following help topics for more information:
 
 - [Boolean Expressions](https://surveyjs.io/Documentation/Library#boolean-expressions)
 - [Built-In Functions](https://surveyjs.io/Documentation/Library#built-in-functions)
 
 #### File
 
-Use the File type to allow respondents to upload files. Respondents drag and drop one or several files onto the allocated area or select them in the browser's Upload File dialog window. The uploaded files are saved in the survey results as base64-encoded strings.
+Use the File type to allow respondents to upload files. Respondents drag and drop one or several files onto the allocated area or select files in the browser's Upload File dialog window. The uploaded files are saved in the survey results as base64-encoded strings.
 
 <img src="images/question-types-file.png" alt="Question types - File" width="50%">
 
@@ -247,7 +247,7 @@ See also:
 
 #### Dynamic Matrix
 
-The Dynamic Matrix type is similar to a [Multiple-Choice Matrix](#multiple-choice-matrix), but respondents can add and remove rows to and from the matrix.
+The Dynamic Matrix type is similar to a [Multiple-Choice Matrix](#multiple-choice-matrix), but respondents can add and remove matrix rows.
 
 <img src="images/question-types-matrix-dynamic-rows.png" alt="Question types - Dynamic Matrix" width="50%">
 
@@ -274,15 +274,15 @@ The Dynamic Panel type is a template panel that can contain multiple questions. 
 
 ### Adorners
 
-Adorners are design-surface controls for survey element manipulation. Use them to edit UI texts in place, reorder choices, duplicate and delete elements, specify whether an answer is required or not, and perform other actions on survey elements. Settings that you specify using adorners are synchronized with settings in the Property Grid, and vice versa.
+Adorners are design-surface controls for survey element manipulation. Use adorners to edit UI texts in place, reorder choices, duplicate and delete elements, specify whether an answer is required, and perform other actions on survey elements. Settings that you specify using adorners are synchronized with settings in the Property Grid, and vice versa.
 
-Each element type has an associated set of adorners. The following image highlights adorners on a [Dropdown](#dropdown) question:
+Each element type has an associated set of adorners. The following image highlights adorners for a [Dropdown](#dropdown) question:
 
 <img src="images/survey-creator-dropdown-adorners.png" alt="Survey Creator - Adorners" width="50%">
 
 ### How to: Add a question to the survey
 
-Drag and drop the desired question type from the Toolbox onto the design surface. Alternatively, you can click the **Add Question** button to add a [Single Input](#single-input) question. This button also displays a three-dots icon that allows you to change the type of questions that the button adds.
+Drag and drop the desired question type from the Toolbox onto the design surface. Alternatively, you can click the **Add Question** button to add a [Single Input](#single-input) question. This button also displays a three-dots icon that allows you to change the type of inserted questions.
 
 <img src="images/survey-creator-add-question-button.png" alt="Survey Creator - Add Question button" width="50%">
 
@@ -306,7 +306,7 @@ Some question types are non-interchangeable. For example, a [Dropdown](#dropdown
 
 ### How to: Clear the survey
 
-Click the **Clear Survey** button in the Toolbar:
+Click the **Clear Survey** button on the Toolbar:
 
 <img src="images/survey-creator-clear-survey.png" alt="Survey Creator - The Clear Survey button" width="50%">
 
@@ -318,7 +318,7 @@ The Preview tab allows you to see and take the resulting survey as respondents w
 
 ### How to: Re-run the preview
 
-After you complete the survey, you can see the survey results in the format of a table or JSON object. Above the results, you can see the Preview Survey Again button. Click it to preview the survey again:
+After you complete the survey, you can see the survey results in the table or JSON format. Click the Preview Survey Again button above the results to preview the survey again:
 
 <img src="images/survey-creator-preview-survey-again.png" alt="Survey Creator - Preview survey again" width="50%">
 
@@ -336,7 +336,7 @@ The Logic tab displays and allows you to edit logical rules that specify the sur
 
 ### How to: Add a new rule
 
-Click **Add New Rule** at the bottom of the Logic tab. You will see editors that enable you to specify conditions and actions to perform when these conditions are met.
+Click **Add New Rule** at the bottom of the Logic tab to display editors that allow you to specify conditions and select actions to perform when these conditions are met.
 
 #### Specify conditions (if-clauses)       
 
@@ -344,11 +344,11 @@ Select a question whose answer should be checked and a logical operation from th
 
 <img src="images/survey-creator-logic-tab-add-new-rule.png" alt="Survey Creator - Add new logical rule" width="50%">
 
-If the rule needs more than one condition, click the **Add Condition** button. You can specify the logical operation that combines the new and the previous conditions: AND or OR.
+If the rule needs more than one condition, click the **Add Condition** button. You can use the AND or OR logical operator to combine the new and previous conditions.
 
 <img src="images/survey-creator-multiple-conditions.png" alt="Survey Creator - Add new logical rule" width="33%">
 
-Conditions that you specify in the UI are then converted to logical expressions. If you prefer to enter the expressions directly, click the **Manual Entry** button in the Toolbar.
+Conditions that you specify in the UI are converted to logical expressions. If you prefer to enter the expressions directly, click the **Manual Entry** button on the Toolbar.
 
 <img src="images/survey-creator-logic-tab-manual-entry.png" alt="Survey Creator - Manual entry" width="75%">
 
@@ -395,13 +395,13 @@ Click a rule to expand it and use UI elements to edit the rule. Click **Done** t
 
 ### How to: Filter rules
 
-Use the Question Filter to filter rules by specific question. You can also use the Action Type Filter to view only rules for the selected action type:
+Use the Question Filter to filter rules by a specific question. You can also use the Action Type Filter to view only rules for the selected action type:
 
 <img src="images/survey-creator-logic-tab-filter-rules.png" alt="Survey Creator - Filter rules in the Logic tab" width="50%">
 
 ## JSON Editor Tab
 
-The JSON Editor tab enables you to preview and edit the resulting survey configuration. In most cases, you don't need to change the JSON object in this tab. Change survey settings in the Property Grid instead.
+The JSON Editor tab enables you to preview and edit the resulting survey configuration. In most cases, you do not need to modify the JSON object on this tab. Change survey settings in the Property Grid instead.
 
 <img src="images/survey-creator-json-editor-tab.png" alt="Survey Creator - JSON Editor tab" width="50%">
 
@@ -419,12 +419,12 @@ In the Language Settings sidebar, click the **Add** icon and select the desired 
 
 ### How to: Filter translation strings
 
-Use the Page Filter to filter strings by specific page. You can also use the Used Strings Filter to view only the strings that were changed:
+Use the Page Filter to filter strings by a specific page. You can also use the Used Strings Filter to view only the strings that were changed:
 
 <img src="images/survey-creator-translation-tab-filters.png" alt="Survey Creator - Filter strings in the Translation tab" width="50%">
 
 ### How to: Import or export translation strings to CSV
 
-Click the **Import to CSV** or **Export to CSV** button in the Toolbar:
+Click the **Import to CSV** or **Export to CSV** button on the Toolbar:
 
 <img src="images/survey-creator-translation-tab-import-export.png" alt="Survey Creator - Filter strings in the Translation tab" width="50%">
