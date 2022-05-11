@@ -297,3 +297,18 @@ test("Matrix dynamic with detail two questions + select", async (t) => {
     .expect(Selector(".svc-question__content--selected").visible).ok();
   await checkElementScreenshot("surface-matrix-detail-two-questions-select.png", Selector(".svc-question__content"), t);
 });
+
+test("Logo image adorners", async (t) => {
+  await t.resizeWindow(1920, 1900);
+  const json = {
+    logo: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      },
+    ],
+  };
+  await setJSON(json);
+  await checkElementScreenshot("logo-image-adorners.png", Selector(".svc-logo-image"), t);
+});
