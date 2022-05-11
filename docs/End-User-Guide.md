@@ -282,7 +282,7 @@ Each element type has an associated set of adorners. The following image highlig
 
 ### How to: Add a question to the survey
 
-Drag and drop the desired question type from the Toolbox onto the design surface. Alternatively, you can click the **Add Question** button to add a [Single Input](#single-input) question. This button also displays a three-dots icon that allows you to change the type of inserted questions.
+Drag and drop the desired question type from the Toolbox onto the design surface. Alternatively, you can click the **Add Question** button to add a [Single Input](#single-input) question. This button also displays an ellipsis icon that allows you to change the type of inserted questions.
 
 <img src="images/survey-creator-add-question-button.png" alt="Survey Creator - Add Question button" width="50%">
 
@@ -296,7 +296,7 @@ Alternatively, you can add a page on the design surface. The surface displays th
 
 ### How to: Change the question type
 
-Use the element type selector on the question:
+Use the element type selector in the question:
 
 <img src="images/survey-creator-element-type-selector.png" alt="Survey Creator - Element type selector" width="50%">
 
