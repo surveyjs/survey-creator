@@ -106,13 +106,13 @@ See also:
 
 #### Rating
 
-Respondents select one number within a range. Use the Rating type when you want the respondents to give a rating.
+Respondents select one number within a range. Use the Rating type when you want respondents to enter a rating.
 
 <img src="images/question-types-rating.png" alt="Question types - Rating" width="50%">
 
 #### Ranking 
 
-Respondents drag and drop items from a list to rearrange them according to rank or preference. Use the Ranking type for questions in which respondents must set their order of items.
+Respondents drag and drop items from a list to rearrange them according to rank or preference. Use the Ranking type for questions in which respondents must set the order of items.
 
 <img src="images/question-types-ranking.png" alt="Question types - Ranking" width="50%">
 
@@ -186,7 +186,7 @@ Use the File type to allow respondents to upload files. Respondents drag and dro
 <img src="images/question-types-file.png" alt="Question types - File" width="50%">
 
 - **How to: Restrict uploaded file types**          
-The File type is build upon the standard `<input type="file">` HTML element. To restrict file types, the standard element uses the <a href="https://www.w3schools.com/tags/att_input_accept.asp" target="_blank">`accept`</a> attribute. Enter its value into the **Accepted file types** field in the **General** category:
+The File type is built upon the standard `<input type="file">` HTML element. To restrict file types, the standard element uses the <a href="https://www.w3schools.com/tags/att_input_accept.asp" target="_blank">`accept`</a> attribute. Enter its value into the **Accepted file types** field in the **General** category:
 
     <img src="images/survey-creator-accepted-file-types.png" alt="Survey Creator - Accepted file types" width="40%">
 
@@ -253,7 +253,7 @@ The Dynamic Matrix type is similar to a [Multiple-Choice Matrix](#multiple-choic
 
 #### Multiple Text
 
-Respondents enter their answers into multiple single-line text editors. Use the Multiple Text type for open-ended questions that demand more than one short answer.
+Respondents enter their answers into multiple single-line text editors. Use the Multiple Text type for open-ended questions that require more than one short answer.
 
 <img src="images/question-types-multiple-text.png" alt="Question types - Multiple text" width="50%">
 
@@ -274,7 +274,7 @@ The Dynamic Panel type is a template panel that can contain multiple questions. 
 
 ### Adorners
 
-Adorners are design-surface controls for survey element manipulation. Use adorners to edit UI texts in place, reorder choices, duplicate and delete elements, specify whether an answer is required, and perform other actions on survey elements. Settings that you specify using adorners are synchronized with settings in the Property Grid, and vice versa.
+Adorners are design-surface controls for survey element manipulation. Use adorners to edit UI text in place, reorder choices, duplicate and delete elements, specify whether an answer is required, and perform other actions on survey elements. Settings that you specify using adorners are synchronized with settings in the Property Grid, and vice versa.
 
 Each element type has an associated set of adorners. The following image highlights adorners for a [Dropdown](#dropdown) question:
 
@@ -324,7 +324,7 @@ After you complete the survey, you can see the survey results in the table or JS
 
 ### How to: Preview the survey on different devices
 
-Click the **Device** icon and select the desired device from the appeared drop-down menu. You can also click the **Orientation** icon to switch between the landscape and portrait orientations:
+Click the **Device** icon and select the desired device from the drop-down menu. You can also click the **Orientation** icon to switch between the landscape and portrait orientations:
 
 <img src="images/survey-creator-preview-different-devices.png" alt="Survey Creator - Preview the survey on different devices" width="50%">
 
@@ -369,7 +369,7 @@ Makes the selected question visible. If you want to hide the question, invert th
 Makes the selected question editable. If you want to make the question read-only, invert the logic of your condition.
 
 - **Make question required**            
-Demands an answer for the selected question.
+Requires an answer for the selected question.
 
 - **Complete survey**           
 Completes the survey.
@@ -387,7 +387,7 @@ Navigates the survey to the selected question.
 Runs a custom expression on the selected question.
 
 - **Set "Survey Complete" page markup**         
-Specifies a custom HTML markup for the Survey Complete page.
+Specifies custom HTML markup for the Survey Complete page.
 
 ### How to: Edit a rule
 
