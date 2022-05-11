@@ -8,7 +8,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 - [Render Survey Creator](#render-survey-creator)
 - [Save and Load Survey Model Definitions](#save-and-load-survey-model-definitions)
 
-You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-react" target="_blank">Get Started with Survey Creator / Form Builder - React</a>.
+You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react" target="_blank">Get Started with Survey Creator / Form Builder - React</a>.
 
 If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_react_quickstart" target="_blank">React + SurveyJS Quick Start Boilerplate</a>.
 
@@ -254,7 +254,7 @@ export function SurveyCreatorWidget() {
 ```
 </details>
 
-<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-react" target="_blank">View full code on GitHub</a>
+<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react" target="_blank">View full code on GitHub</a>
 
 ## Further Reading
 

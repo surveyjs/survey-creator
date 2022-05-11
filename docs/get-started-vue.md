@@ -8,7 +8,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 - [Render Survey Creator](#render-survey-creator)
 - [Save and Load Survey Model Definitions](#save-and-load-survey-model-definitions)
 
-You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-vue" target="_blank">Get Started with Survey Creator / Form Builder - Vue</a>.
+You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue" target="_blank">Get Started with Survey Creator / Form Builder - Vue</a>.
 
 If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_vue_quickstart" target="_blank">SurveyJS + Vue Quick Start Boilerplate</a>.
 
@@ -317,7 +317,7 @@ export default {
 ```
 </details>
 
-<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-vue" target="_blank">View full code on GitHub</a>
+<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue" target="_blank">View full code on GitHub</a>
 
 ## Further Reading
 
