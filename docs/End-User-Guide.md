@@ -64,7 +64,7 @@ The Toolbox contains the question and panel types described below.
 
 #### Single Input
 
-Respondents enter their answer into a single-line text editor. Use the Single Input type for open-ended questions that demand short answers.
+Respondents enter their answer into a single-line text editor. Use the Single Input type for open-ended questions that require short answers.
 
 <img src="images/question-types-single-input.png" alt="Question types - Single input" width="50%">
 
@@ -312,7 +312,7 @@ Click the **Clear Survey** button on the Toolbar:
 
 ## Preview Tab
 
-The Preview tab allows you to see and take the resulting survey as respondents will do it.
+The Preview tab allows you to view and take the survey as a respondent.
 
 <img src="images/survey-creator-preview-tab.png" alt="Survey Creator - The Preview tab" width="50%">
 
