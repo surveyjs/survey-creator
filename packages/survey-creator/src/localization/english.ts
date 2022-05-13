@@ -708,6 +708,7 @@ export var enStrings = {
     templateDescription: "templateDescription",
     allowAddPanel: "allowAddPanel",
     allowRemovePanel: "allowRemovePanel",
+    noEntriesText: "Empty entries text",
     panelCount: "panelCount",
     minPanelCount: "minPanelCount",
     maxPanelCount: "maxPanelCount",

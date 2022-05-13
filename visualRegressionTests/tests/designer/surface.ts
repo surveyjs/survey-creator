@@ -38,7 +38,7 @@ test("Check section", async (t) => {
 
 test("Matrix column editor", async (t) => {
   await t.resizeWindow(1920, 900);
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   const row1Column1Cell = Selector(".sv_matrix_row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
   const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
 
@@ -88,14 +88,17 @@ test("Choices (Checkbox): Layout", async (t) => {
 });
 
 test("Placeholder", async (t) => {
-  await t.resizeWindow(1920, 900);
+  await t.resizeWindow(1767, 900);
   const designerTabContent = Selector(".svc-tab-designer");
+  await ClientFunction(()=> {
+    (<any>window).creator.toolbox.isCompact = true;
+  })();
 
   await checkElementScreenshot("surface-placeholder.png", designerTabContent, t);
 });
 
 test("Page and question borders", async (t) => {
-  await t.resizeWindow(1920, 900);
+  await t.resizeWindow(1767, 900);
   const json = {
     "logoPosition": "right",
     "pages": [
@@ -111,6 +114,9 @@ test("Page and question borders", async (t) => {
     ]
   };
   await setJSON(json);
+  await ClientFunction(()=> {
+    (<any>window).creator.toolbox.isCompact = true;
+  })();
   const designerTabContent = Selector(".svc-tab-designer");
   const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
   const qContent = Selector(".svc-question__content");
@@ -290,4 +296,19 @@ test("Matrix dynamic with detail two questions + select", async (t) => {
   await t.click(Selector(".sd-table__cell--detail-panel .svc-row").nth(0), { offsetX: -5, offsetY: -5 })
     .expect(Selector(".svc-question__content--selected").visible).ok();
   await checkElementScreenshot("surface-matrix-detail-two-questions-select.png", Selector(".svc-question__content"), t);
+});
+
+test("Logo image adorners", async (t) => {
+  await t.resizeWindow(1920, 1900);
+  const json = {
+    logo: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      },
+    ],
+  };
+  await setJSON(json);
+  await checkElementScreenshot("logo-image-adorners.png", Selector(".svc-logo-image"), t);
 });

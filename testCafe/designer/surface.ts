@@ -47,3 +47,25 @@ test("Image question", async (t) => {
     .expect(imageQuestionSelector.clientWidth).eql(640)
     .expect(imageQuestionSelector.clientHeight).eql(426);
 });
+
+test("Check scrollbar is not appear when width mode is responsive", async (t) => {
+  const json = {
+    widthMode: "responsive",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "text",
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  const rootSelector = Selector(".svc-tab-designer");
+  await t
+    .resizeWindow(1920, 1080)
+    .expect(await rootSelector.scrollWidth === await rootSelector.offsetWidth).ok();
+});

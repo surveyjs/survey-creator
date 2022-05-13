@@ -791,7 +791,9 @@ export class CreatorBase extends Base
    * <br/> sender the survey creator object that fires the event
    * <br/> There are two properties in options:
    * <br/> files the Javascript File objects array
-   * <br/> callback called on upload complete
+   * <br/> callback called on upload complete,
+   * <br/> which takes two string arguments:
+   * <br/> a status and an image link
    * @see uploadFile
    */
   public onUploadFile: Survey.Event<
@@ -905,6 +907,12 @@ export class CreatorBase extends Base
    */
   public get showSimulatorInPreviewTab(): boolean { return this.showSimulatorInTestSurveyTab; }
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
+
+  /**
+   * Specifies a theme to use for the survey in the Preview tab.
+   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
+   */
+  public themeForPreview: string = "defaultV2";
 
   /**
    * Set this property to false to disable pages adding, editing and deleting
@@ -1438,6 +1446,9 @@ export class CreatorBase extends Base
     }
     if (typeof options.showSimulatorInTestSurveyTab !== "undefined") {
       this.showSimulatorInPreviewTab = options.showSimulatorInTestSurveyTab;
+    }
+    if (typeof options.themeForPreview !== "undefined") {
+      this.themeForPreview = options.themeForPreview;
     }
     if (typeof options.showSimulatorInPreviewTab !== "undefined") {
       this.showSimulatorInPreviewTab = options.showSimulatorInPreviewTab;
@@ -2848,7 +2859,7 @@ export class CreatorBase extends Base
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
     if (!type)
       type = this.currentAddQuestionType;
-    if (!type) type = "text";
+    if (!type) type = settings.designer.defaultAddQuestionType;
     beforeAdd(type);
     let json = { type: type };
     const toolboxItem = this.toolbox.getItemByName(type);
@@ -3117,11 +3128,11 @@ export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
   return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
-function isTextInput(target: any) {
+export function isTextInput(target: any): boolean {
   if (!target.tagName) return false;
   const tagName = target.tagName.toLowerCase();
   if (["input", "textarea"].indexOf(tagName) !== -1) return true;
-  if (tagName === "span") {
+  if (["span", "div"].indexOf(tagName) !== -1) {
     return target.isContentEditable;
   }
   return false;

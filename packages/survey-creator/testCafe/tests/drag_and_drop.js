@@ -80,19 +80,19 @@ test.skip(`check d&d all toolbox elements`, async (t) => {
   assert.equal(await getQuestionsAddedCount(), 11);
 
   await t.dragToElement(
-    `[title="Matrix (single choice)"]`,
+    `[title="Single-Choice Matrix"]`,
     `.svd_container .svd_questions_editor`
   );
   assert.equal(await getQuestionsAddedCount(), 12);
 
   await t.dragToElement(
-    `[title="Matrix (multiple choice)"]`,
+    `[title="Multiple-Choice Matrix"]`,
     `.svd_container .svd_questions_editor`
   );
   assert.equal(await getQuestionsAddedCount(), 13);
 
   await t.dragToElement(
-    `[title="Matrix (dynamic rows)"]`,
+    `[title="Dynamic Matrix"]`,
     `.svd_container .svd_questions_editor`
   );
   assert.equal(await getQuestionsAddedCount(), 14);
@@ -110,7 +110,7 @@ test.skip(`check d&d all toolbox elements`, async (t) => {
   assert.equal(await getQuestionsAddedCount(), 16);
 
   await t.dragToElement(
-    `[title="Panel (dynamic panels)"]`,
+    `[title="Dynamic Panel"]`,
     `.svd_container .svd_questions_editor`
   );
   assert.equal(await getQuestionsAddedCount(), 17 + 1); //panel dynamic adds two questions that's why 17+1

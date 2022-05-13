@@ -60,7 +60,7 @@ test("Matrix question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Matrix (single choice)");
+  await addQuestionByAddQuestionButton(t, "Single-Choice Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -90,7 +90,7 @@ test("Matrix dropdown question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -110,7 +110,7 @@ test("Matrix dropdown question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -128,7 +128,7 @@ test("Matrix dynamic question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Matrix (dynamic rows)");
+  await addQuestionByAddQuestionButton(t, "Dynamic Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -145,7 +145,7 @@ test("Dynamic panel inner panel not selectable", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk();
 
-  await addQuestionByAddQuestionButton(t, "Panel (dynamic panels)");
+  await addQuestionByAddQuestionButton(t, "Dynamic Panel");
   await t
     .expect(Selector(".svc-question__adorner").exists).ok()
     .expect(Selector(".svc-question__content").exists).ok()

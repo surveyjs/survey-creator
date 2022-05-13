@@ -28,6 +28,7 @@ import {
 } from "../utils/utils";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
 import "./question.scss";
+import { settings } from "../settings";
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;
@@ -204,6 +205,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   public get allowEdit() {
     return !this.creator.readOnly;
   }
+  public get showAddQuestionButton(): boolean {
+    return this.allowEdit && settings.designer.showAddQuestionButton;
+  }
   public getConvertToTypesActions(): Array<IAction> {
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
       this.currentType, this.creator.toolbox.itemNames, true
@@ -307,9 +311,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     var newElement = this.creator.fastCopyQuestion(this.surveyElement);
     this.creator.selectElement(newElement);
   }
-
-  addNewQuestion() {
-    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null, this.currentAddQuestionType || "text");
+  addNewQuestion(): void {
+    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,
+      this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
   questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
     (type) => {

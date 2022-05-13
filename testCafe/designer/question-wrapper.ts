@@ -132,8 +132,8 @@ test("Single input question wrapper action delete", async (t) => {
 
 test("Matrix dropdown with vertical layout and and selecting rows", async (t) => {
   await t.expect(questions.exists).notOk()
-    .hover(getToolboxItemByText("Matrix (multiple choice)"))
-    .click(getToolboxItemByText("Matrix (multiple choice)"));
+    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
+    .click(getToolboxItemByText("Multiple-Choice Matrix"));
 
   await ClientFunction(() => {
     window["creator"].survey.getQuestionByName("question1").columnLayout = "vertical";
@@ -147,8 +147,8 @@ test("Matrix dropdown with vertical layout and and selecting rows", async (t) =>
 
 test("Matrix dropdown with detail panel", async (t) => {
   await t.expect(questions.exists).notOk()
-    .hover(getToolboxItemByText("Matrix (multiple choice)"))
-    .click(getToolboxItemByText("Matrix (multiple choice)"));
+    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
+    .click(getToolboxItemByText("Multiple-Choice Matrix"));
 
   await ClientFunction(() => {
     window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
@@ -164,8 +164,8 @@ test("Matrix dropdown with detail panel", async (t) => {
 
 test("Matrix dropdown with detail panel - add question button", async (t) => {
   await t.expect(questions.exists).notOk()
-    .hover(getToolboxItemByText("Matrix (multiple choice)"))
-    .click(getToolboxItemByText("Matrix (multiple choice)"));
+    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
+    .click(getToolboxItemByText("Multiple-Choice Matrix"));
 
   await ClientFunction(() => {
     window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";

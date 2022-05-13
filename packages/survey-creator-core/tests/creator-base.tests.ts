@@ -31,7 +31,7 @@ import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
-import { DesignTimeSurveyModel } from "../src/creator-base";
+import { DesignTimeSurveyModel, isTextInput } from "../src/creator-base";
 
 import {
   getElementWrapperComponentData,
@@ -2381,7 +2381,7 @@ test("Add new question to Panel and Page", (): any => {
   expect(panelModel.addNewQuestionText).toEqual("Add Rating");
   expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
   expect(pageModel.addNewQuestionText).toEqual("Add Ranking");
-  expect(pageModel2.addNewQuestionText).toEqual("Add Html");
+  expect(pageModel2.addNewQuestionText).toEqual("Add HTML");
 
   expect((creator.survey.getAllPanels()[0] as PanelModel).questions.map(q => q.getType())).toEqual(["text", "rating"]);
   expect((creator.survey.getAllPanels()[1] as PanelModel).questions.map(q => q.getType())).toEqual(["comment"]);
@@ -2405,7 +2405,32 @@ test("Add new question to Panel and Page", (): any => {
   panelModel3.addNewQuestion();
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text", "text"]);
 });
-
+test("Use settings.designer.defaultAddQuestionType", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  settings.designer.defaultAddQuestionType = "radiogroup";
+  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  const panel = <PanelModel>creator.survey.getAllPanels()[0];
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  pageModel.addNewQuestion(null, null);
+  expect(creator.survey.getAllQuestions()[0].getType()).toEqual("radiogroup");
+  panelModel.addNewQuestion();
+  expect(panel.questions[0].getType()).toEqual("radiogroup");
+});
+test("Use settings.designer.showAddQuestionButton = false", (): any => {
+  settings.designer.showAddQuestionButton = false;
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  let panel = <PanelModel>creator.survey.getAllPanels()[0];
+  let panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  expect(pageModel.showAddQuestionButton).toBeFalsy();
+  expect(panelModel.showAddQuestionButton).toBeFalsy();
+  settings.designer.showAddQuestionButton = true;
+  panelModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  expect(pageModel.showAddQuestionButton).toBeTruthy();
+  expect(panelModel.showAddQuestionButton).toBeTruthy();
+});
 test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
@@ -2561,3 +2586,19 @@ test("SurveyElementAdornerBase setSurveyElement updateActionsProperties", (): an
   expect(count).toBe(1);
 });
 
+test("isTextInput", (): any => {
+  const textarea = document.createElement("textarea");
+  expect(isTextInput(textarea)).toBeTruthy();
+  const input = document.createElement("input");
+  expect(isTextInput(input)).toBeTruthy();
+
+  const div = document.createElement("div");
+  expect(isTextInput(div)).toBeFalsy();
+  (<any>div)["isContentEditable"] = true;
+  expect(isTextInput(div)).toBeTruthy();
+
+  const span = document.createElement("span");
+  expect(isTextInput(span)).toBeFalsy();
+  (<any>span)["isContentEditable"] = true;
+  expect(isTextInput(span)).toBeTruthy();
+});

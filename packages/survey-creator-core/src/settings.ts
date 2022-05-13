@@ -39,6 +39,16 @@ export var settings = {
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
   },
   defaultNewSurveyJSON: {},
+  designer: {
+    /**
+     * The default question type on clicking Add Question button.
+     */
+    defaultAddQuestionType: "text",
+    /**
+     * Set this property to false, to hide "Add Question" button on designer surface
+     */
+    showAddQuestionButton: true
+  },
   logic: {
     visibleActions: [],
     logicItemTitleMaxChars: 50,
