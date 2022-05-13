@@ -483,13 +483,17 @@ test("Make invisible locales in language selector, that has been already choosen
   });
   surveyLocalization.supportedLocales = ["en", "fr", "de", "se"];
   const translation = new Translation(survey);
+  const list = translation["chooseLanguagePopupModel"].contentComponentData.model;
   expect(translation.chooseLanguageActions).toHaveLength(4);
   expect(translation.chooseLanguageActions[0].id).toEqual("en");
   expect(translation.chooseLanguageActions[1].id).toEqual("fr");
   expect(translation.chooseLanguageActions[0].visible).toBeFalsy();
+  expect(list.actions[0].visible).toBeFalsy();
   expect(translation.chooseLanguageActions[1].visible).toBeTruthy();
+  expect(list.actions[1].visible).toBeTruthy();
   translation.addLocale("fr");
   expect(translation.chooseLanguageActions[1].visible).toBeFalsy();
+  expect(list.actions[1].visible).toBeFalsy();
   surveyLocalization.supportedLocales = [];
 });
 test("stringsSurvey - text question dataList property, default", () => {
