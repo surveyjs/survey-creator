@@ -19,7 +19,7 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.tabs[2].visible).toEqual(false);
 
   creator.sidebar.activeTab = "translation";
-  expect(creator.sidebar.headerText).toEqual("Translation Setting");
+  expect(creator.sidebar.headerText).toEqual("Language Settings");
   expect(creator.sidebar.activeTab).toEqual("translation");
   expect(creator.sidebar.tabs[0].visible).toEqual(false);
   expect(creator.sidebar.tabs[1].visible).toEqual(false);
