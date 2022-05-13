@@ -266,6 +266,8 @@ export class SurveyCreatorComponent implements OnInit {
 }
 ```
 
+To view the application, run `ng serve` in a command line and open [http://localhost:4200/](http://localhost:4200/) in your browser.
+
 <details>
   <summary>View full code</summary>
 

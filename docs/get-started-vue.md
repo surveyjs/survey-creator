@@ -243,6 +243,8 @@ export default {
 };
 ```
 
+To view the application, run `npm run serve` in a command line and open [http://localhost:8080/](http://localhost:8080/) in your browser.
+
 <details>
   <summary>View full code</summary>
 

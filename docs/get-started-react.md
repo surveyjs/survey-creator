@@ -193,6 +193,8 @@ export function SurveyCreatorWidget() {
 }
 ```
 
+To view the application, run `npm run start` in a command line and open [http://localhost:3000/](http://localhost:3000/) in your browser.
+
 <details>
   <summary>View full code</summary>
 
