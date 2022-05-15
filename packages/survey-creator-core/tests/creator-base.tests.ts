@@ -1879,6 +1879,22 @@ test("Modify property editor settings on event", (): any => {
   expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeHolderQuestion.dataList).toHaveLength(2);
 });
+test("Modify property editor via property grid survey", (): any => {
+  const creator = new CreatorTester();
+  creator.onPropertyGridSurveyCreated.add((sender, options) => {
+    if(options.obj.getType() !== "text") return;
+    const question = options.survey.getQuestionByName("placeHolder");
+    question.textUpdateMode = "onTyping";
+    question.dataList = ["item1", "item2"];
+  });
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  const placeHolderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
+  expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
+  expect(placeHolderQuestion.dataList).toHaveLength(2);
+});
 test("Modify property editor titleActions on event", (): any => {
   PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
   const creator = new CreatorTester();

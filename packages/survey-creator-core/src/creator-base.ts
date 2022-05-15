@@ -478,6 +478,16 @@ export class CreatorBase extends Base
     any
   > = this.onShowingProperty;
   /**
+   * The event is called after a survey that represents the Property Grid is created and all its questions (property editors) are setup.
+   * You can use this event to modify this survey to change the property grid behavior
+   * <br/> options.obj the survey object that is currently editing in the property grid
+   * <br/> options.survey the property grid survey
+   */
+   public onPropertyGridSurveyCreated: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+ /**
    * The event is called after a property editor (in fact a survey question) has been created and all it's properties have been assign.
    * You can use this event to modify the property editor properties or set event handlers to customize it's behavior
    * <br/> options.obj the survey object that is currently editing in the property grid
@@ -2595,6 +2605,13 @@ export class CreatorBase extends Base
       parentObj,
       parentProperty
     );
+  }
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
+  ) {
+    const options = { obj: object, survey: survey };
+    this.onPropertyGridSurveyCreated.fire(this, options);
   }
   onPropertyEditorCreatedCallback(
     object: any,
