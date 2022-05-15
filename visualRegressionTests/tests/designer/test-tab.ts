@@ -122,3 +122,28 @@ test("Theme Switcher", async (t) => {
   await t.click(Selector(".svc-preview__test-again"));
   await checkElementScreenshot("theme-default-preview.png", simulator, t);
 });
+
+test("Bug #2933: empty matrix look", async (t) => {
+  await t.resizeWindow(1280, 900);
+  await explicitErrorHandler();
+  await setJSON({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "matrixdynamic",
+            "name": "question1",
+            "columnsVisibleIf": "false",
+            "choices": [
+              1
+            ]
+          }
+        ]
+      }
+    ],
+    "showQuestionNumbers": "off"
+  });
+  await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+  await checkElementScreenshot("matrix-no-columns.png", Selector(".sd-question"), t);
+});

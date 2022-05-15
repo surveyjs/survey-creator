@@ -81,6 +81,10 @@
     filter: unset;
   }
 }
-.sd-table__cell--actions:not(.sd-table__cell--vertical):first-child {
-  z-index: initial;
+.svc-question__content {
+  .sd-table__cell--detail-panel {
+    .svc-question__adorner {
+      z-index: 13;
+    }
+  }
 }
