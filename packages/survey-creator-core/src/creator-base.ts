@@ -1958,7 +1958,8 @@ export class CreatorBase extends Base
     }
     var parent: IPanel = this.currentPage;
     var selectedElement = this.getSelectedSurveyElement();
-    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent) {
+    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
+      (<any>selectedElement !== <any>panel)) {
       parent = selectedElement.parent;
       if (index < 0) {
         index = parent.elements.indexOf(selectedElement);

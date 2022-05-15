@@ -2431,6 +2431,25 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
   expect(pageModel.showAddQuestionButton).toBeTruthy();
   expect(panelModel.showAddQuestionButton).toBeTruthy();
 });
+test("Add Questions with selection", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  const panel = <PanelModel>creator.survey.getAllPanels()[0];
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  panelModel.addNewQuestion();
+  panelModel.addNewQuestion();
+  panelModel.addNewQuestion();
+  creator.selectElement(panel.elements[1]);
+  panelModel.addNewQuestion();
+  creator.selectElement(panel);
+  panelModel.addNewQuestion();
+  expect(panel.elements).toHaveLength(5);
+  expect(panel.elements[0].name).toEqual("question1");
+  expect(panel.elements[1].name).toEqual("question2");
+  expect(panel.elements[2].name).toEqual("question4");
+  expect(panel.elements[3].name).toEqual("question3");
+  expect(panel.elements[4].name).toEqual("question5");
+});
 test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
