@@ -828,12 +828,16 @@ export class Translation extends Base implements ITranslationLocales {
     return locale !== surveyLocalization.defaultLocale && !this.hasLocale(locale);
   }
   private setupToolbarItems() {
-    this.chooseLanguageActions = this.getSurveyLocales()[0].map((locale: ItemValue) => ({
-      id: locale.value,
-      title: locale.text,
-      data: locale,
-      visible: this.isLocaleVisible(locale.value)
-    }));
+    this.chooseLanguageActions = this.getSurveyLocales()[0].map((locale: ItemValue) => (
+      new Action(
+        {
+          id: locale.value,
+          title: locale.text,
+          data: locale,
+          visible: this.isLocaleVisible(locale.value)
+        }
+      )
+    ));
     this.chooseLanguagePopupModel = new PopupModel(
       "sv-list",
       {

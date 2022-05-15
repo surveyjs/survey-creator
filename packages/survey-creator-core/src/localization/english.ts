@@ -124,7 +124,7 @@ export var enStrings = {
     saved: "Saved",
     propertyEditorError: "Error:",
     saveError: "Error! Editor content is not saved.",
-    translationPropertyGridTitle: "Translation Setting",
+    translationPropertyGridTitle: "Language Settings",
     translationLanguages: "Languages",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "All Strings",
