@@ -97,7 +97,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       <div
         className={"svc-page"}
         data-sv-drop-target-page={page.name}
-        data-sv-drop-target-survey-element={page.name}
+        data-sv-drop-target-survey-element={"newGhostPage"}
         key={page.id + "-" + index}
       >
         {this.renderPage(page)}
