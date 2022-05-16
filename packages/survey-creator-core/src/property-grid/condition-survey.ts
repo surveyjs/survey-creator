@@ -856,7 +856,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.setTitle();
   }
   private setTitle() {
-    const text = this.text;
+    const text = this.isReady ? this.text : "";
     this.title = this.options.onConditionGetTitleCallback(text, text || editorLocalization.getString("pe.ruleIsNotSet"));
   }
 
