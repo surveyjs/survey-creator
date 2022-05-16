@@ -31,8 +31,7 @@ export class UndoRedoController extends Base {
       this.creator.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
       this.undoRedoManager.stopTransaction();
     } else {
-      this.creator.setModified({
-        type: "PROPERTY_CHANGED",
+      this.creator.notifySurveyPropertyChanged({
         name: name,
         target: sender,
         oldValue: oldValue,
@@ -65,8 +64,7 @@ export class UndoRedoController extends Base {
         undoRedoManager.changesFinishedCallback = (
           changes: IUndoRedoChange
         ) => {
-          this.creator.setModified({
-            type: "PROPERTY_CHANGED",
+          this.creator.notifySurveyPropertyChanged({
             name: changes.propertyName,
             target: changes.object,
             oldValue: changes.oldValue,
