@@ -24,7 +24,7 @@
     .svd-test-results__header-types {
       display: flex;
 
-      > *:first-child {
+      .svc-action-button:first-child {
         margin-right: calcSize(1);
       }
     }
