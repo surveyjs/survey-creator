@@ -496,6 +496,45 @@ test("Make invisible locales in language selector, that has been already choosen
   expect(list.actions[1].visible).toBeFalsy();
   surveyLocalization.supportedLocales = [];
 });
+
+test("Make add language button disabled if there are no options", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  });
+  surveyLocalization.supportedLocales = ["en"];
+  let translation = new Translation(survey);
+  expect(translation["isChooseLanguageEnabled"]).toEqual(false);
+  surveyLocalization.supportedLocales = ["fr", "de", "se"];
+  translation = new Translation(survey);
+  expect(translation["isChooseLanguageEnabled"]).toEqual(true);
+  translation.addLocale("fr");
+  expect(translation["isChooseLanguageEnabled"]).toEqual(true);
+  translation.addLocale("de");
+  expect(translation["isChooseLanguageEnabled"]).toEqual(true);
+  translation.addLocale("se");
+  expect(translation["isChooseLanguageEnabled"]).toEqual(false);
+  surveyLocalization.supportedLocales = [];
+});
+
 test("stringsSurvey - text question dataList property, default", () => {
   const oldValue = settings.translation.sortByName;
   settings.translation.sortByName = true;

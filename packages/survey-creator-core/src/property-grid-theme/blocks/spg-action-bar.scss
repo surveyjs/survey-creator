@@ -24,13 +24,15 @@
   border-radius: calcSize(12.5);
   background-color: transparent;
   cursor: pointer;
-  &:hover,
-  &:focus {
-      outline: none;
-      background-color: $primary-light;
-      use {
-          fill: $primary;
-      }
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+        outline: none;
+        background-color: $primary-light;
+        use {
+            fill: $primary;
+        }
+    }
   }
 }
 .spg-action-button__icon {
@@ -39,7 +41,7 @@
     fill: $foreground-light;
   }
 }
-.spg-action-button--danger {
+.spg-action-button--danger:not(:disabled) {
   &:hover,
   &:focus {
     background-color: $red-light;
@@ -50,4 +52,8 @@
 }
 button.spg-action-button--large {
   padding: calcSize(0.5) calcSize(2);
+}
+.spg-action-button:disabled {
+  opacity: 0.25;
+  cursor: default;
 }

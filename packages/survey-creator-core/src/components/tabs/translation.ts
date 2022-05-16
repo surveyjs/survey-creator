@@ -1,4 +1,4 @@
-import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase } from "survey-core";
+import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../settings";
@@ -477,6 +477,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.settingsSurveyValue = this.createSettingsSurvey();
     this.survey = survey;
     this.setupToolbarItems();
+    this.calcIsChooseLanguageEnabled();
   }
   public getType(): string {
     return "translation";
@@ -535,6 +536,7 @@ export class Translation extends Base implements ITranslationLocales {
         const addLanguageAction = new Action({
           id: "svc-translation-choose-language",
           iconName: "icon-add",
+          enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled)),
           component: "sv-action-bar-item-dropdown",
           popupModel: this.chooseLanguagePopupModel,
           action: (language) => {
@@ -546,6 +548,13 @@ export class Translation extends Base implements ITranslationLocales {
     });
     return res;
   }
+
+  @property({ defaultValue: true }) private isChooseLanguageEnabled: boolean;
+
+  private calcIsChooseLanguageEnabled() {
+    this.isChooseLanguageEnabled = this.chooseLanguageActions.filter((item: IAction) => item.visible).length > 0;
+  }
+
   private updateLocales() {
     if (!this.localesQuestion) return;
     var res = [""];
@@ -929,7 +938,9 @@ export class Translation extends Base implements ITranslationLocales {
     if (Array.isArray(actions) && actions.length == 1) {
       actions[0].visible = this.isLocaleVisible(locale);
     }
+    this.calcIsChooseLanguageEnabled();
   }
+
   public resetLocales() {
     var locales = [""];
     this.root.fillLocales(locales);
