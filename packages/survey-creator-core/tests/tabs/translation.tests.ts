@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { settings } from "../../src/settings";
@@ -181,7 +181,7 @@ test("stringsSurvey - one question in survey", () => {
   expect(choicesProps.columns[0].name).toEqual("default");
   expect(choicesProps.columns[0].title).toEqual("Default (english)");
   expect(choicesProps.columns[1].name).toEqual("fr");
-  expect(choicesProps.columns[1].title).toEqual("français");
+  expect(choicesProps.columns[1].title).toEqual("Français");
   expect(choicesProps.rows).toHaveLength(3);
   expect(choicesProps.rows[0].value).toEqual("item1");
   expect(choicesProps.rows[0].text).toEqual("Item 1");
@@ -996,4 +996,28 @@ test("LogicPlugin: creator.readOnly", () => {
   expect(translationPlugin.model.stringsSurvey.mode).toEqual("display");
   const firstQuestion = translationPlugin.model.stringsSurvey.getAllQuestions()[0];
   expect(firstQuestion.isReadOnly).toBeTruthy();
+});
+test("Translation check all locale name are capitalized", () => {
+  surveyLocalization.locales["test_locale"] = {}
+  surveyLocalization.localeNames["test_locale"] = "test locale name";
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1",
+      }
+    ]
+  });
+
+  const translation = new Translation(survey);
+  const testLocaleAction = translation.chooseLanguageActions.filter((item: IAction) => item.id === "test_locale")[0];
+  expect(testLocaleAction.title).toEqual("Test Locale Name");
+  translation.addLocale("test_locale");
+  const testLocaleChoice = translation.localesQuestion.choices.filter((choice: ItemValue) => choice.value === "test_locale")[0];
+  expect(testLocaleChoice.text).toEqual("Test Locale Name");
+  translation.localesQuestion.value = ["test_locale"];
+  const testLocaleColumn = (<QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getAllQuestions()[0]).columns[1];
+  expect(testLocaleColumn.title).toEqual("Test Locale Name");
+  surveyLocalization.locales["test_locale"] = undefined
+  surveyLocalization.localeNames["test_locale"] = undefined;
 });

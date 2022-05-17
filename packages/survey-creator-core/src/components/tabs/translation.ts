@@ -8,6 +8,7 @@ import "./translation.scss";
 import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
+import { capitalize } from "../../utils/utils";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -819,7 +820,7 @@ export class Translation extends Base implements ITranslationLocales {
   ) {
     if (!loc || addedLocales[loc]) return;
     addedLocales[loc] = true;
-    choices.push(new ItemValue(loc, editorLocalization.getLocaleName(loc)));
+    choices.push(new ItemValue(loc, this.getLocaleName(loc)));
   }
   private addLocaleIntoValue(loc: string, updateValue: boolean) {
     this.addLocaleIntoValueCore("selLocales", loc);
@@ -844,7 +845,7 @@ export class Translation extends Base implements ITranslationLocales {
       new Action(
         {
           id: locale.value,
-          title: locale.text,
+          title: this.getLocaleName(locale.value),
           data: locale,
           visible: this.isLocaleVisible(locale.value)
         }
@@ -915,7 +916,7 @@ export class Translation extends Base implements ITranslationLocales {
     return surveyLocalization.defaultLocale;
   }
   public getLocaleName(loc: string) {
-    return editorLocalization.getLocaleName(loc, this.defaultLocale);
+    return capitalize(editorLocalization.getLocaleName(loc, this.defaultLocale));
   }
   public removeLocale(locale: string) {
     if (this.hasLocale(locale)) {
