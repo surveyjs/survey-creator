@@ -1,36 +1,31 @@
 import {
   SurveyElement,
   SurveyTemplateRendererTemplateData,
-  SurveyTemplateRendererViewModel,
-  SurveyModel,
-  Base,
   Serializer,
   QuestionRatingModel,
   surveyLocalization,
-  ItemValue
+  ItemValue,
+  Base
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { getLocString } from "../editorLocalization";
 import { getNextValue } from "../utils/utils";
-import { QuestionAdornerViewModel } from "./question";
 
 import "./question-rating.scss";
 
-export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
+export class QuestionRatingAdornerViewModel extends Base {
   constructor(
-    creator: CreatorBase,
-    surveyElement: SurveyElement,
-    templateData: SurveyTemplateRendererTemplateData
+    public creator: CreatorBase,
+    public surveyElement: SurveyElement,
+    public templateData: SurveyTemplateRendererTemplateData
   ) {
-    super(creator, surveyElement, templateData);
+    super();
     let stopEventProcessing = false;
-    this.element.onItemValuePropertyChanged.add((sender, options)=>{
+    this.element.onItemValuePropertyChanged.add((sender, options) => {
       if (!stopEventProcessing && this.element.rateValues.length === 0) {
         stopEventProcessing = true;
         const rateValues = this.element.visibleRateValues;
-        var index = rateValues
-          .map((item) => item.value)
-          .indexOf(options.obj.value);
+        const index = rateValues.map((item) => item.value).indexOf(options.obj.value);
         rateValues[index][options.name] = options.newValue;
         this.element.rateValues = rateValues;
         stopEventProcessing = false;
@@ -48,14 +43,14 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
     if (model.element.rateValues.length === 0) {
       model.element.rateMax += model.element.rateStep;
     } else {
-      var nextValue = null;
-      var values = model.element.rateValues.map(function (item) {
+      let nextValue = null;
+      const values = model.element.rateValues.map(function (item) {
         return item.value;
       });
-      var itemText = surveyLocalization.getString("choices_Item");
+      const itemText = surveyLocalization.getString("choices_Item");
       nextValue = getNextValue(itemText, values);
 
-      var itemValue = new ItemValue(nextValue);
+      const itemValue = new ItemValue(nextValue);
       itemValue.locOwner = <any>{
         getLocale: () => {
           if (!!model.element["getLocale"]) return model.element.getLocale();
@@ -73,23 +68,17 @@ export class QuestionRatingAdornerViewModel extends QuestionAdornerViewModel {
   }
   public removeItem(model: QuestionRatingAdornerViewModel) {
     if (!model.allowRemove) return;
-    const property = Serializer.findProperty(
-      model.element.getType(),
-      "rateValues"
-    );
-    const itemIndex =
-      model.element.rateValues && model.element.rateValues.length - 1;
-    const item =
-      (model.element.rateValues && model.element.rateValues[itemIndex]) ||
-      null;
-    var allowDelete = model.creator.onCollectionItemDeletingCallback(
+    const property = Serializer.findProperty(model.element.getType(), "rateValues");
+    const itemIndex = model.element.rateValues && model.element.rateValues.length - 1;
+    const item = (model.element.rateValues && model.element.rateValues[itemIndex]) || null;
+    const allowDelete = model.creator.onCollectionItemDeletingCallback(
       model.element,
       property,
       model.element.rateValues,
       item
     );
     if (allowDelete) {
-      var question = model.element;
+      const question = model.element;
       if (
         question.rateValues.length === 0 &&
         itemIndex === question.rateValues.length - 1
