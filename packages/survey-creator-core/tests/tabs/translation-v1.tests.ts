@@ -466,7 +466,7 @@ test("Merging a locale with default", () => {
   expect(translation.locales).toContain("de");
   expect(translation.canMergeLocaleWithDefault).toBeTruthy();
   expect(translation.mergeLocaleWithDefaultText).toEqual(
-    "Merge deutsch with default locale"
+    "Merge Deutsch with default locale"
   );
   translation.mergeLocaleWithDefault();
   expect(translation.locales).toHaveLength(2);

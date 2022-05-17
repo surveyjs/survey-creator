@@ -391,7 +391,7 @@ export var enStrings = {
     //survey
     showTitle: "Show the title",
     expandCollapseTitle: "Expand/collapse title",
-    locale: "Default language",
+    locale: "Survey Language",
     simulator: "Choose device",
     landscapeOrientation: "Landscape",
     portraitOrientation: "Portrait",
