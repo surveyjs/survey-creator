@@ -2637,3 +2637,27 @@ test("isTextInput", (): any => {
   (<any>span)["isContentEditable"] = true;
   expect(isTextInput(span)).toBeTruthy();
 });
+test("onSurveyPropertyValueChanged event", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  let propertyName;
+  let propertyValue;
+  let objType;
+  let counter = 0;
+  creator.onSurveyPropertyValueChanged.add((sender, options) => {
+    counter ++;
+    objType = options.obj.getType();
+    propertyName = options.propertyName;
+    propertyValue = options.value;
+  });
+  creator.survey.title = "New Survey";
+  expect(counter).toEqual(1);
+  expect(objType).toEqual("survey");
+  expect(propertyName).toEqual("title");
+  expect(propertyValue).toEqual("New Survey");
+  creator.survey.getAllQuestions()[0].title = "New Question";
+  expect(counter).toEqual(2);
+  expect(objType).toEqual("text");
+  expect(propertyName).toEqual("title");
+  expect(propertyValue).toEqual("New Question");
+});

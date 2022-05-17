@@ -502,7 +502,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     let res = "";
     const items = this.getEditorItems();
     for (let i = 0; i < items.length; i++) {
-      if (!items[i].isReady) return "";
+      if (!items[i].isReady) break;
       if (!!res) {
         res += " " + items[i].conjunction + " ";
       }
@@ -856,7 +856,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.setTitle();
   }
   private setTitle() {
-    const text = this.text;
+    const text = this.isReady ? this.text : "";
     this.title = this.options.onConditionGetTitleCallback(text, text || editorLocalization.getString("pe.ruleIsNotSet"));
   }
 
