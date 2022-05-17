@@ -631,7 +631,7 @@ export class CreatorBase extends Base
    * - `options.newValue` - A corrected property value. Specify this field if you want to override the `options.value`.
    * - `options.doValidation` - Enable this field to validate the property value while the user enters it.
    * @see onPropertyValidationCustomError
-   * @see onPropertyValueChanged
+   * @see onSurveyPropertyValueChanged
    */
   public onPropertyValueChanging: Survey.Event<
     (sender: CreatorBase, options: any) => any,
