@@ -619,7 +619,7 @@ export class CreatorBase extends Base
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * An event that is raised on each edit to a property value in a survey object.
+   * An event that is raised each time a user edits a survey object property.
    * Use this event to correct or validate the property value while the user enters it.
    * 
    * The event handler accepts the following arguments:
