@@ -5,6 +5,7 @@ import { settings } from "../../src/settings";
 import { CreatorTester } from "../creator-tester";
 
 import "survey-core/survey.i18n";
+import { editorLocalization } from "../../src/editorLocalization";
 export * from "../../src/localization/russian";
 
 test("Fire callback on base objects creation", () => {
@@ -201,6 +202,39 @@ test("stringsSurvey - one question in survey", () => {
   question1Props.visibleRows[0].cells[1].question.value = "changed fr";
   expect(translationItem.getLocText("fr")).toEqual("changed fr");
 });
+
+test("stringsSurvey - check properties text, should use pe. from localization instead of p.", () => {
+  const testLocale = editorLocalization.getLocale("test_locale");
+  testLocale.pe.rating = {
+    title: "test rating title"
+  }
+  testLocale.pe.minRateDescription = "test rating min description";
+  editorLocalization.currentLocale = "test_locale";
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            "type": "rating",
+            "name": "nps_score",
+            "minRateDescription": "(Most unlikely)",
+          },
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  const pagePanel = <PanelModel>page.elements[0];
+  const question = <PanelModel>pagePanel.elements[0];
+  const question1Props = <QuestionMatrixDropdownModel>question.elements[0];
+  expect(question1Props.rows[0].text).toEqual("test rating title");
+  expect(question1Props.rows[1].text).toEqual("test rating min description");
+  editorLocalization.currentLocale = "";
+});
+
 
 test("Add/remove columns on adding/removing locales", () => {
   const survey = new SurveyModel({
