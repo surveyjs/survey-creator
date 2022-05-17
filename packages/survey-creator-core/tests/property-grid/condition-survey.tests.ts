@@ -1530,3 +1530,24 @@ test("Setup context initially for question in panel dynamic", () => {
   expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3);
   expect(questionName.value).toEqual("q1.panel.q1_col1");
 });
+test("if conditionEditorItem is not ready then text edit is empty", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+      { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" }
+    ],
+    calculatedValues: [{ name: "val1", expression: "{q1} + {q2}" }]
+  });
+  const question = survey.getQuestionByName("q4");
+  const conditionEditor = new ConditionEditor(survey, question);
+  conditionEditor.text = "{q1} = 'abc' or {q2} = 1 and {q2} = 2";
+
+  expect(conditionEditor["getEditorItems"]()).toHaveLength(3);
+  expect(conditionEditor.text).toEqual("{q1} = 'abc' or {q2} = 1 and {q2} = 2");
+
+  conditionEditor.panel.addPanel();
+  expect(conditionEditor["getEditorItems"]()).toHaveLength(4);
+  expect(conditionEditor.text).toEqual("{q1} = 'abc' or {q2} = 1 and {q2} = 2");
+});
