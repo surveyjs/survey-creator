@@ -612,14 +612,14 @@ export class CreatorBase extends Base
    * <br/> options.propertyName  the name of the edited property.
    * <br/> options.value the property value.
    * <br/> options.error the error you want to display. Set the empty string (the default value) or null if there is no errors.
-   * @see onPropertyValueChanging
+   * @see onSurveyPropertyValueChanging
    */
   public onPropertyValidationCustomError: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * An event that is raised on each edit to a property value in the Property Grid.
+   * An event that is raised on each edit to a property value in a survey object.
    * Use this event to correct or validate the property value while the user enters it.
    * 
    * The event handler accepts the following arguments:
@@ -631,9 +631,9 @@ export class CreatorBase extends Base
    * - `options.newValue` - A corrected property value. Specify this field if you want to override the `options.value`.
    * - `options.doValidation` - Enable this field to validate the property value while the user enters it.
    * @see onPropertyValidationCustomError
-   * @see onPropertyValueChanged
+   * @see onSurveyPropertyValueChanged
    */
-  public onPropertyValueChanging: Survey.Event<
+  public onSurveyPropertyValueChanging: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
@@ -645,7 +645,7 @@ export class CreatorBase extends Base
    * - `options.propertyName` - The name of the property.
    * - `options.value` - A new property value.
    * @see onPropertyValidationCustomError
-   * @see onPropertyValueChanging
+   * @see onSurveyPropertyValueChanging
    */
    public onSurveyPropertyValueChanged: Survey.Event<
    (sender: CreatorBase, options: any) => any,
@@ -1912,7 +1912,7 @@ export class CreatorBase extends Base
     this.isAutoSave && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {
-    if(!this.onSurveyPropertyValueChanged.isEmpty) {
+    if (!this.onSurveyPropertyValueChanged.isEmpty) {
       options.propertyName = options.name;
       options.obj = options.target;
       options.value = options.newValue;
@@ -2756,7 +2756,7 @@ export class CreatorBase extends Base
     return options.error;
   }
   onValueChangingCallback(options: any) {
-    this.onPropertyValueChanging.fire(this, options);
+    this.onSurveyPropertyValueChanging.fire(this, options);
   }
   onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
     return title;

@@ -1450,7 +1450,7 @@ test("be able to modify empty items, bug#428", () => {
   expect(question.items).toHaveLength(1);
   expect(question.items[0].name).toEqual("item1");
 });
-test("onPropertyValueChanging callback, Bug #438", () => {
+test("onSurveyPropertyValueChanging callback, Bug #438", () => {
   var question = new QuestionTextModel("q1");
   var options = new EmptySurveyCreatorOptions();
   options.onValueChangingCallback = function (options) {
@@ -1463,7 +1463,7 @@ test("onPropertyValueChanging callback, Bug #438", () => {
   titleQuestion.value = " ss   ";
   expect(question.title).toEqual("ss");
 });
-test("onPropertyValueChanging callback, set empty string, Bug#1158", () => {
+test("onSurveyPropertyValueChanging callback, set empty string, Bug#1158", () => {
   var question = new QuestionTextModel("q1");
   var options = new EmptySurveyCreatorOptions();
   options.onValueChangingCallback = function (options) {
