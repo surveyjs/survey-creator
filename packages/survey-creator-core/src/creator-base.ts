@@ -627,12 +627,26 @@ export class CreatorBase extends Base
    * <br/> options.newValue set the corrected value into this property. Leave it null if you are ok with the entered value.
    * <br/> options.doValidation set the value to true to call the property validation. If there is an error, the user sees it immediately.
    * @see onPropertyValidationCustomError
+   * @see onSurveyPropertyValueChanged
    */
   public onPropertyValueChanging: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
+   * The event is fired when a property in any survey object object is changed.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.obj the survey object which property has been changed.
+   * <br/> options.propertyName  the name of the changed property.
+   * <br/> options.value the property value.
+   * @see onPropertyValidationCustomError
+   * @see onPropertyValueChanging
+   */
+   public onSurveyPropertyValueChanged: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+ /**
    * Use this event to modify the list (name and titles) of the questions available in a condition editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object which property is edited in the Property Editor.
@@ -1887,10 +1901,20 @@ export class CreatorBase extends Base
 
   notifier = new Notifier();
 
-  public setModified(options: any = null) {
+  public setModified(options: any = null): void {
     this.setState("modified");
     this.onModified.fire(this, options);
     this.isAutoSave && this.doAutoSave();
+  }
+  public notifySurveyPropertyChanged(options: any): void {
+    if(!this.onSurveyPropertyValueChanged.isEmpty) {
+      options.propertyName = options.name;
+      options.obj = options.target;
+      options.value = options.newValue;
+      this.onSurveyPropertyValueChanged.fire(this, options);
+    }
+    options.type = "PROPERTY_CHANGED";
+    this.setModified(options);
   }
   /**
    * This function triggers user notification (via the alert() function if no onNotify event handler added).
