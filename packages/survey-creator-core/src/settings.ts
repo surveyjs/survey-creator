@@ -128,6 +128,10 @@ export interface ISurveyCreatorOptions {
     property: JsonObjectProperty,
     editor: Question
   );
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
+  );
   onPropertyEditorUpdateTitleActionsCallback(
     object: any,
     property: JsonObjectProperty,
@@ -225,6 +229,10 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): boolean {
     return true;
   }
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
+  ) {}
   onPropertyEditorCreatedCallback(
     object: any,
     property: JsonObjectProperty,

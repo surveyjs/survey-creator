@@ -23,7 +23,11 @@
     }
     .svd-test-results__header-types {
       display: flex;
-    }    
+
+      .svc-action-button:first-child {
+        margin-right: calcSize(1);
+      }
+    }
   }
 
   .svd-test-results__text {

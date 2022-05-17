@@ -221,7 +221,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     if (!!document && !!document.body) {
       const styles = getComputedStyle(document.body);
       availableThemesToItems = themeMapper
-        .filter(item => styles.getPropertyValue(item.theme.variables.themeMark))
+        .filter(item => item.theme.variables && styles.getPropertyValue(item.theme.variables.themeMark))
         .map(item => ({ id: item.name + "_themeSwitcher", value: item.name, title: item.title }));
     }
 

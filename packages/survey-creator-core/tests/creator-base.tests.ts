@@ -1879,6 +1879,22 @@ test("Modify property editor settings on event", (): any => {
   expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeHolderQuestion.dataList).toHaveLength(2);
 });
+test("Modify property editor via property grid survey", (): any => {
+  const creator = new CreatorTester();
+  creator.onPropertyGridSurveyCreated.add((sender, options) => {
+    if(options.obj.getType() !== "text") return;
+    const question = options.survey.getQuestionByName("placeHolder");
+    question.textUpdateMode = "onTyping";
+    question.dataList = ["item1", "item2"];
+  });
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  const placeHolderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
+  expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
+  expect(placeHolderQuestion.dataList).toHaveLength(2);
+});
 test("Modify property editor titleActions on event", (): any => {
   PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
   const creator = new CreatorTester();
@@ -2431,6 +2447,25 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
   expect(pageModel.showAddQuestionButton).toBeTruthy();
   expect(panelModel.showAddQuestionButton).toBeTruthy();
 });
+test("Add Questions with selection", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  const panel = <PanelModel>creator.survey.getAllPanels()[0];
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  panelModel.addNewQuestion();
+  panelModel.addNewQuestion();
+  panelModel.addNewQuestion();
+  creator.selectElement(panel.elements[1]);
+  panelModel.addNewQuestion();
+  creator.selectElement(panel);
+  panelModel.addNewQuestion();
+  expect(panel.elements).toHaveLength(5);
+  expect(panel.elements[0].name).toEqual("question1");
+  expect(panel.elements[1].name).toEqual("question2");
+  expect(panel.elements[2].name).toEqual("question4");
+  expect(panel.elements[3].name).toEqual("question3");
+  expect(panel.elements[4].name).toEqual("question5");
+});
 test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
@@ -2601,4 +2636,28 @@ test("isTextInput", (): any => {
   expect(isTextInput(span)).toBeFalsy();
   (<any>span)["isContentEditable"] = true;
   expect(isTextInput(span)).toBeTruthy();
+});
+test("onSurveyPropertyValueChanged event", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  let propertyName;
+  let propertyValue;
+  let objType;
+  let counter = 0;
+  creator.onSurveyPropertyValueChanged.add((sender, options) => {
+    counter ++;
+    objType = options.obj.getType();
+    propertyName = options.propertyName;
+    propertyValue = options.value;
+  });
+  creator.survey.title = "New Survey";
+  expect(counter).toEqual(1);
+  expect(objType).toEqual("survey");
+  expect(propertyName).toEqual("title");
+  expect(propertyValue).toEqual("New Survey");
+  creator.survey.getAllQuestions()[0].title = "New Question";
+  expect(counter).toEqual(2);
+  expect(objType).toEqual("text");
+  expect(propertyName).toEqual("title");
+  expect(propertyValue).toEqual("New Question");
 });

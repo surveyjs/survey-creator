@@ -478,6 +478,16 @@ export class CreatorBase extends Base
     any
   > = this.onShowingProperty;
   /**
+   * The event is called after a survey that represents the Property Grid is created and all its questions (property editors) are setup.
+   * You can use this event to modify this survey to change the property grid behavior
+   * <br/> options.obj the survey object that is currently editing in the property grid
+   * <br/> options.survey the property grid survey
+   */
+   public onPropertyGridSurveyCreated: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+ /**
    * The event is called after a property editor (in fact a survey question) has been created and all it's properties have been assign.
    * You can use this event to modify the property editor properties or set event handlers to customize it's behavior
    * <br/> options.obj the survey object that is currently editing in the property grid
@@ -609,20 +619,39 @@ export class CreatorBase extends Base
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object which property is edited in the Property Editor.
-   * <br/> options.propertyName  the name of the edited property.
-   * <br/> options.value the property value.
-   * <br/> options.newValue set the corrected value into this property. Leave it null if you are ok with the entered value.
-   * <br/> options.doValidation set the value to true to call the property validation. If there is an error, the user sees it immediately.
+   * An event that is raised each time a user edits a survey object property.
+   * Use this event to correct or validate the property value while the user enters it.
+   * 
+   * The event handler accepts the following arguments:
+   * 
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (question or panel) whose property is being edited.
+   * - `options.propertyName` - The name of the property.
+   * - `options.value` - A property value entered by a user.
+   * - `options.newValue` - A corrected property value. Specify this field if you want to override the `options.value`.
+   * - `options.doValidation` - Enable this field to validate the property value while the user enters it.
    * @see onPropertyValidationCustomError
+   * @see onSurveyPropertyValueChanged
    */
   public onPropertyValueChanging: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
+   * An event that is raised after a property in a survey object has changed. 
+   * 
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (question or panel) whose property has changed.
+   * - `options.propertyName` - The name of the property.
+   * - `options.value` - A new property value.
+   * @see onPropertyValidationCustomError
+   * @see onPropertyValueChanging
+   */
+   public onSurveyPropertyValueChanged: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+ /**
    * Use this event to modify the list (name and titles) of the questions available in a condition editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object which property is edited in the Property Editor.
@@ -1877,10 +1906,20 @@ export class CreatorBase extends Base
 
   notifier = new Notifier();
 
-  public setModified(options: any = null) {
+  public setModified(options: any = null): void {
     this.setState("modified");
     this.onModified.fire(this, options);
     this.isAutoSave && this.doAutoSave();
+  }
+  public notifySurveyPropertyChanged(options: any): void {
+    if(!this.onSurveyPropertyValueChanged.isEmpty) {
+      options.propertyName = options.name;
+      options.obj = options.target;
+      options.value = options.newValue;
+      this.onSurveyPropertyValueChanged.fire(this, options);
+    }
+    options.type = "PROPERTY_CHANGED";
+    this.setModified(options);
   }
   /**
    * This function triggers user notification (via the alert() function if no onNotify event handler added).
@@ -1958,7 +1997,8 @@ export class CreatorBase extends Base
     }
     var parent: IPanel = this.currentPage;
     var selectedElement = this.getSelectedSurveyElement();
-    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent) {
+    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
+      (<any>selectedElement !== <any>panel)) {
       parent = selectedElement.parent;
       if (index < 0) {
         index = parent.elements.indexOf(selectedElement);
@@ -2594,6 +2634,13 @@ export class CreatorBase extends Base
       parentObj,
       parentProperty
     );
+  }
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
+  ) {
+    const options = { obj: object, survey: survey };
+    this.onPropertyGridSurveyCreated.fire(this, options);
   }
   onPropertyEditorCreatedCallback(
     object: any,
