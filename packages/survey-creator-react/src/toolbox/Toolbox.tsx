@@ -58,17 +58,28 @@ export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> 
   }
 
   renderCategoryHeader(category: any): JSX.Element {
-    const iconName = category.collapsed ? "arrow-down" : "arrow-up";
-    const svgIconClassName = "svc-toolbox__category-header__button svc-string-editor__button--" + (category.collapsed ? "expand" : "collapse");
+    let className = "svc-toolbox__category-header";
+    if (this.toolbox.canCollapseCategories) {
+      className += " svc-toolbox__category-header--collapsed";
+    }
     return attachKey2click(
-      <div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
+      <div className={className} onClick={e => category.toggleState()}>
         <span className="svc-toolbox__category-title">{category.name}</span>
-        <div className="svc-toolbox__category-header__controls">
-          <SvgIcon className={svgIconClassName} iconName={"icon-" + iconName} size={24}></SvgIcon>
-        </div>
+        {this.renderButton(category)}
       </div>
     );
   }
+
+  renderButton(category: any): JSX.Element {
+    if (!this.toolbox.canCollapseCategories) return null;
+
+    const iconName = category.collapsed ? "arrow-down" : "arrow-up";
+    const svgIconClassName = "svc-toolbox__category-header__button svc-string-editor__button--" + (category.collapsed ? "expand" : "collapse");
+    return (<div className="svc-toolbox__category-header__controls">
+      <SvgIcon className={svgIconClassName} iconName={"icon-" + iconName} size={24}></SvgIcon>
+    </div>);
+  }
+
   protected renderCategoryContent(category: any): Array<any> {
     return !category.collapsed ? this.renderItems(category.items) : [];
   }
