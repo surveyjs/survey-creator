@@ -92,6 +92,7 @@
   color: $foreground;
 
   span {
+    display: inline-block;
     padding-left: calcSize(3);
   }
 }
