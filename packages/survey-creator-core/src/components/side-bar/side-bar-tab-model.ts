@@ -12,6 +12,12 @@ export class SidebarTabModel extends Base {
       target.sidePanel.updateHasVisibleTabs();
     }
   }) visible: boolean;
+  @property({
+    defaultValue: true,
+    onSet: (newVal, target: SidebarTabModel) => {
+      target.sidePanel.updateHasVisibleTabs();
+    }
+  }) allowShow: boolean;
   @property() model: any;
   @property() componentName: string;
 

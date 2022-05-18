@@ -480,6 +480,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.survey = survey;
     this.setupToolbarItems();
     this.calcIsChooseLanguageEnabled();
+    this.showSettings = this.getShowSettings()
   }
   public getType(): string {
     return "translation";
@@ -557,6 +558,20 @@ export class Translation extends Base implements ITranslationLocales {
 
   private calcIsChooseLanguageEnabled() {
     this.isChooseLanguageEnabled = this.chooseLanguageActions.filter((item: IAction) => item.visible).length > 0;
+  }
+  public showSettings: boolean = true;
+
+  private getShowSettings(): boolean {
+    if (surveyLocalization.supportedLocales.length > 1) {
+      return true;
+    }
+    if (surveyLocalization.supportedLocales.length == 1) {
+      return surveyLocalization.supportedLocales[0] !== surveyLocalization.defaultLocale;
+    }
+    if (Object.keys(surveyLocalization.locales).length > 1) {
+      return true;
+    }
+    return false;
   }
 
   private updateLocales() {

@@ -1021,3 +1021,44 @@ test("Translation check all locale name are capitalized", () => {
   surveyLocalization.locales["test_locale"] = undefined
   surveyLocalization.localeNames["test_locale"] = undefined;
 });
+
+test("Translation check getShowSettings method", () => {
+  const oldLocales = surveyLocalization.locales;
+  const oldSupportedLocales = surveyLocalization.supportedLocales;
+
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1",
+      }
+    ]
+  });
+  let translation = new Translation(survey);
+  expect(translation.showSettings).toEqual(true);
+
+  surveyLocalization.locales = { "en": surveyLocalization.locales["en"] }
+  translation = new Translation(survey);
+  expect(translation.showSettings).toEqual(false);
+
+  surveyLocalization.locales["test_locale"] = {}
+  translation = new Translation(survey);
+  expect(translation.showSettings).toEqual(true);
+
+  surveyLocalization.locales["test_locale"] = undefined
+  surveyLocalization.localeNames["test_locale"] = undefined;
+  surveyLocalization.supportedLocales = ["fr"];
+  translation = new Translation(survey);
+  expect(translation.showSettings).toEqual(true);
+
+  surveyLocalization.supportedLocales = ["en"];
+  translation = new Translation(survey);
+  expect(translation.showSettings).toEqual(false);
+
+  surveyLocalization.supportedLocales = ["en", "fr"];
+  translation = new Translation(survey);
+  expect(translation.showSettings).toEqual(true);
+
+  surveyLocalization.locales = oldLocales;
+  surveyLocalization.supportedLocales = oldSupportedLocales;
+});
