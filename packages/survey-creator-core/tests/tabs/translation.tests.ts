@@ -535,6 +535,23 @@ test("stringsSurvey - text question dataList property, default", () => {
 
   settings.translation.sortByName = oldValue;
 });
+test("stringsSurvey - use question's name instead of question's title in title of translation group", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: "Question 1"
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  const page = translation.stringsSurvey.pages[0];
+  const pagePanel = <PanelModel>page.elements[0];
+  const panel = pagePanel.elements[0];
+  expect(panel.name).toEqual("question1");
+  expect(panel.title).toEqual("question1");
+});
 test("stringsSurvey - text question dataList property, several locales", () => {
   const oldValue = settings.translation.sortByName;
   settings.translation.sortByName = true;
