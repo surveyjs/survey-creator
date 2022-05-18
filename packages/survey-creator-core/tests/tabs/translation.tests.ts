@@ -466,17 +466,13 @@ test("StringsHeaderSurvey layout", () => {
   const translation = new Translation(survey);
   const stringsMatrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
   const headerMatrix = <QuestionMatrixDropdownModel>(translation.stringsHeaderSurvey.getAllQuestions()[0]);
-  expect(stringsMatrix.rowTitleWidth).toEqual("300px");
   expect(stringsMatrix.columns).toHaveLength(1);
 
-  expect(headerMatrix.rowTitleWidth).toEqual("300px");
   expect(headerMatrix.columns).toHaveLength(1);
 
   translation.addLocale("de");
-  expect(stringsMatrix.rowTitleWidth).toEqual("300px");
   expect(stringsMatrix.columns).toHaveLength(2);
 
-  expect(headerMatrix.rowTitleWidth).toEqual("300px");
   expect(headerMatrix.columns).toHaveLength(2);
 });
 

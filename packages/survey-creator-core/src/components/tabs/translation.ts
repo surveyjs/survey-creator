@@ -773,7 +773,6 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
     var locs = this.getSelectedLocales();
-    matrix.rowTitleWidth = "300px";
     matrix.addColumn("default", this.getLocaleName(""));
     for (var i = 0; i < locs.length; i++) {
       matrix.addColumn(locs[i], this.getLocaleName(locs[i]));

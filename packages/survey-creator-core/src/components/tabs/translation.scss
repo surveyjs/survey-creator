@@ -54,7 +54,7 @@
 .st-strings-header {
   .st-table__cell {
     background-color: $background-dim;
-    height: calcSize(4);
+    height: auto;
   }
 }
 
@@ -78,10 +78,16 @@
   background-color: $background-for-editors;
   border-bottom: 1px solid $border-light;
 }
-
+.st-table {
+  tr {
+    display: flex;
+    align-items: stretch;
+  }
+}
 .st-table__cell {
+  display: block;
+  flex: 1 1;
   box-sizing: border-box;
-  vertical-align: top;
   background-color: $primary-bg-color;
   border-bottom: 1px solid $border-light;
   padding: calcSize(1) 0;
@@ -90,7 +96,8 @@
 .st-table__cell:first-child {
   @include defaultBold;
   color: $foreground;
-
+  max-width: 300px;
+  padding-right: calcSize(3);
   span {
     display: inline-block;
     padding-left: calcSize(3);
