@@ -1,25 +1,17 @@
-import {
-  QuestionAdornerViewModel,
-  QuestionRatingAdornerViewModel
-} from "survey-creator-core";
 import React from "react";
-import {
-  QuestionAdornerComponent,
-  QuestionAdornerComponentProps
-} from "./Question";
-import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import { Base } from "survey-core";
+import { QuestionRatingAdornerViewModel } from "survey-creator-core";
+import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { QuestionAdornerComponentProps } from "./Question";
 
-export class QuestionRatingAdornerComponent extends SurveyElementBase<
-  QuestionAdornerComponentProps,
-  any
-> {
-  private modelValue: QuestionAdornerViewModel;
+export class QuestionRatingAdornerComponent extends SurveyElementBase<QuestionAdornerComponentProps, any> {
+  private modelValue: QuestionRatingAdornerViewModel;
+
   constructor(props: QuestionAdornerComponentProps) {
     super(props);
     this.modelValue = this.createQuestionViewModel();
   }
-  protected createQuestionViewModel(): QuestionAdornerViewModel {
+  protected createQuestionViewModel(): QuestionRatingAdornerViewModel {
     return new QuestionRatingAdornerViewModel(
       this.props.componentData,
       this.props.question as any,
@@ -30,7 +22,7 @@ export class QuestionRatingAdornerComponent extends SurveyElementBase<
     return this.model as QuestionRatingAdornerViewModel;
   }
 
-  public get model(): QuestionAdornerViewModel {
+  public get model(): QuestionRatingAdornerViewModel {
     return this.modelValue;
   }
   protected getStateElement(): Base {

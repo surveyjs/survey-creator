@@ -385,7 +385,7 @@ export class TranslationGroup extends TranslationItemBase {
       const obj = value[i];
       if (!!obj && obj.getType) {
         let name = obj["name"];
-        let text = obj["title"] || name;
+        let text = name;
         if (!name) {
           const index = "[" + i.toString() + "]";
           name = property.name + index;
@@ -484,9 +484,11 @@ export class Translation extends Base implements ITranslationLocales {
   @propertyArray() locales: Array<string>;
   @property() canMergeLocaleWithDefault: boolean;
   @property() mergeLocaleWithDefaultText: string;
-  @property({ defaultValue: false, onSet: (_, target: Translation) => {
-    target.updateReadOnly();
-  } }) readOnly: boolean;
+  @property({
+    defaultValue: false, onSet: (_, target: Translation) => {
+      target.updateReadOnly();
+    }
+  }) readOnly: boolean;
   @property() root: TranslationGroup;
   @property({
     defaultValue: false, onSet: (_, target: Translation) => {
@@ -608,13 +610,13 @@ export class Translation extends Base implements ITranslationLocales {
     let [choices, locales] = this.getSurveyLocales();
     this.localesQuestion.choices = choices;
     const selectedLocales = [];
-    if(!locales) locales = [];
-    for(var i = 0; i < locales.length; i ++) {
-      if(!!this.localeInitialVisibleCallback && !this.localeInitialVisibleCallback(locales[i])) continue;
+    if (!locales) locales = [];
+    for (var i = 0; i < locales.length; i++) {
+      if (!!this.localeInitialVisibleCallback && !this.localeInitialVisibleCallback(locales[i])) continue;
       selectedLocales.push(locales[i]);
     }
     const maxLocales = settings.translation.maximumSelectedLocales;
-    if(maxLocales > 0 && selectedLocales.length > maxLocales) {
+    if (maxLocales > 0 && selectedLocales.length > maxLocales) {
       selectedLocales.splice(maxLocales);
     }
     this.localesQuestion.value = selectedLocales;
@@ -890,7 +892,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.resetStringsSurvey();
   }
   private updateReadOnly(): void {
-    if(this.stringsSurvey) {
+    if (this.stringsSurvey) {
       this.stringsSurvey.mode = this.readOnly ? "display" : "edit";
     }
   }
@@ -1003,7 +1005,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
 
   public exportToSCVFile(fileName: string) {
-    if(!window) return;
+    if (!window) return;
     var data = this.exportToCSV();
     var blob = new Blob([data], { type: "text/csv" });
     if (window.navigator["msSaveOrOpenBlob"]) {

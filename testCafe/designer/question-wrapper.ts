@@ -180,3 +180,19 @@ test("Matrix dropdown with detail panel - add question button", async (t) => {
     .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
     .expect(Selector(".sd-question[data-name=question3]").visible).ok();
 });
+
+test("Rating question required property", async (t) => {
+  const isrequiredButton = Selector("#isrequired");
+  await t
+    .expect(questions.exists).notOk()
+
+    .hover(getToolboxItemByText("Rating"))
+    .click(getToolboxItemByText("Rating"))
+    .expect(isrequiredButton.visible).ok()
+    .expect(isrequiredButton.classNames).notContains("sv-action-bar-item--secondary")
+    .expect(isrequiredButton.find("use").getAttribute("xlink:href")).eql("#icon-switch-inactive_16x16")
+
+    .click(isrequiredButton)
+    .expect(isrequiredButton.classNames).contains("sv-action-bar-item--secondary")
+    .expect(isrequiredButton.find("use").getAttribute("xlink:href")).eql("#icon-switch-active_16x16");
+});
