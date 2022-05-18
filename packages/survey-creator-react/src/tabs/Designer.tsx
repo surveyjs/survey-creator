@@ -138,14 +138,14 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   renderPlaceHolder(): JSX.Element {
     return (<React.Fragment>
       <div className="svc-designer__placeholder-container" data-sv-drop-target-survey-element={"newGhostPage"}>
-        <span className="svc-designer-placeholder-text svc-text svc-text--normal">
-          {this.model.placeholderText}
-        </span>
+        {this.renderPlaceHolderContent()}
         {this.renderNewPage("svc-designer-placeholder-page")}
       </div>
     </React.Fragment>);
   }
-
+  renderPlaceHolderContent(): JSX.Element {
+    return <span className="svc-designer-placeholder-text svc-text svc-text--normal">{this.model.placeholderText}</span>;
+  }
   renderTabContent(): JSX.Element {
     const survey: SurveyModel = this.creator.survey;
 
