@@ -276,9 +276,9 @@ export function wrapTextByCurlyBraces(text: string) {
 }
 
 export function capitalize(str: string): string {
-  if(!str) return str;
+  if (!str) return str;
   str = str.replace(/[\s]+/g, " ")
-  str = str.replace(/([\s]|^)(\w)/g, (_, p1, p2) => {
+  str = str.replace(/([\s]|^)(\S)/g, (_, p1, p2) => {
     return p1 + p2.toUpperCase()
   })
   return str;
