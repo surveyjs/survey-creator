@@ -1,16 +1,14 @@
 import { SurveyModel, Action, IAction, PopupModel, ListModel } from "survey-core";
 import { getLogicString } from "./logic-types";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyLogicUI } from "./logic-ui";
 import { SurveyHelper } from "../../survey-helper";
 
 export class TabLogicPlugin implements ICreatorPlugin {
-  private filterQuestionAction: Action;
-  private filterActionTypeAction: Action;
-  private fastEntryAction: Action;
-  private showAllQuestionsText = getLogicString("showAllQuestions");
-  private showAllActionTypesText = getLogicString("showAllActionTypes");
+  private filterQuestionAction: CreatorAction;
+  private filterActionTypeAction: CreatorAction;
+  private fastEntryAction: CreatorAction;
   public model: SurveyLogicUI;
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("logic", this);
@@ -33,10 +31,10 @@ export class TabLogicPlugin implements ICreatorPlugin {
 
     this.model.onPropertyChanged.add((sender, options) => {
       if (options.name === "questionFilter") {
-        this.filterQuestionAction.title = !!this.model.questionFilter ? this.model.questionFilter : this.showAllQuestionsText;
+        this.filterQuestionAction.updateTitle();
       }
       if (options.name === "actionTypeFilter") {
-        this.filterActionTypeAction.title = !!this.model.actionTypeFilter ? this.model.getTypeByName(this.model.actionTypeFilter).displayName : this.showAllActionTypesText;
+        this.filterActionTypeAction.updateTitle();
       }
       if (!!this.fastEntryAction && options.name === "expressionEditorIsFastEntry") {
         this.fastEntryAction.active = this.model.expressionEditorIsFastEntry;
@@ -86,9 +84,9 @@ export class TabLogicPlugin implements ICreatorPlugin {
       undefined, undefined, undefined, undefined, undefined, onQuestionPopupShow
     );
 
-    this.filterQuestionAction = new Action({
+    this.filterQuestionAction = new CreatorAction({
       id: "svc-logic-filter-question",
-      title: this.showAllQuestionsText,
+      onUpdateTitle: () => { return !!this.model && !!this.model.questionFilter ? this.model.questionFilter : this.showAllQuestionsText; },
       visible: false,
       component: "sv-action-bar-item-dropdown",
       popupModel: questionPopupModel,
@@ -118,9 +116,10 @@ export class TabLogicPlugin implements ICreatorPlugin {
       undefined, undefined, undefined, undefined, undefined, onActionTypesPopupShow
     );
 
-    this.filterActionTypeAction = new Action({
+    this.filterActionTypeAction = new CreatorAction({
       id: "svc-logic-filter-actiontype",
-      title: this.showAllActionTypesText,
+      onUpdateTitle: () => { return !!this.model && !!this.model.actionTypeFilter ?
+        this.model.getTypeByName(this.model.actionTypeFilter).displayName : this.showAllActionTypesText; },
       visible: false,
       component: "sv-action-bar-item-dropdown",
       popupModel: actionTypesPopupModel,
@@ -129,10 +128,10 @@ export class TabLogicPlugin implements ICreatorPlugin {
     items.push(this.filterActionTypeAction);
 
     if (this.creator.allowEditExpressionsInTextEditor) {
-      this.fastEntryAction = new Action({
+      this.fastEntryAction = new CreatorAction({
         id: "svc-logic-fast-entry",
         iconName: "icon-fast-entry",
-        title: editorLocalization.getString("pe.fastEntry"),
+        locTitleName: "pe.fastEntry",
         visible: false,
         component: "sv-action-bar-item",
         action: () => {
@@ -143,4 +142,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
     }
     return items;
   }
+  private get showAllQuestionsText() { return getLogicString("showAllQuestions"); }
+  private get showAllActionTypesText() { return getLogicString("showAllActionTypes"); }
 }

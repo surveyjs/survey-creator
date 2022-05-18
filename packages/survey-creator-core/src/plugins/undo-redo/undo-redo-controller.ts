@@ -1,5 +1,5 @@
 import { Action, ArrayChanges, Base, ComputedUpdater, Event, property, SurveyModel } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { CreatorBase, CreatorAction } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { IUndoRedoChange, UndoRedoManager } from "./undo-redo-manager";
 
@@ -31,8 +31,7 @@ export class UndoRedoController extends Base {
       this.creator.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
       this.undoRedoManager.stopTransaction();
     } else {
-      this.creator.setModified({
-        type: "PROPERTY_CHANGED",
+      this.creator.notifySurveyPropertyChanged({
         name: name,
         target: sender,
         oldValue: oldValue,
@@ -65,8 +64,7 @@ export class UndoRedoController extends Base {
         undoRedoManager.changesFinishedCallback = (
           changes: IUndoRedoChange
         ) => {
-          this.creator.setModified({
-            type: "PROPERTY_CHANGED",
+          this.creator.notifySurveyPropertyChanged({
             name: changes.propertyName,
             target: changes.object,
             oldValue: changes.oldValue,
@@ -129,18 +127,18 @@ export class UndoRedoController extends Base {
 
   public createActions() {
     const items: Array<Action> = [];
-    this.undoAction = new Action({
+    this.undoAction = new CreatorAction({
       id: "icon-undo",
       iconName: "icon-undo",
-      title: getLocString("ed.undo"),
+      locTitleName: "ed.undo",
       showTitle: false,
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),
       action: () => this.undo()
     });
-    this.redoAction = new Action({
+    this.redoAction = new CreatorAction({
       id: "icon-redo",
       iconName: "icon-redo",
-      title: getLocString("ed.redo"),
+      locTitleName: "ed.redo",
       showTitle: false,
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),
       action: () => this.redo()

@@ -44,7 +44,6 @@ import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
 import { defaultV2Css } from "survey-core";
 import { Notifier } from "./components/notifier";
-import { updateMatrixRemoveAction } from "./utils/actions";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
 import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/undo-redo";
 import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
@@ -75,11 +74,57 @@ export interface ICreatorPlugin {
   model: Base;
 }
 
-export interface ITabbedMenuItem extends IAction {
+export interface ICreatorAction extends IAction {
+  locTitleName?: string;
+  locTooltipName?: string;
+  onUpdateTitle?: () => string;
+  onUpdateTooltip?: () => string;
+}
+
+export class CreatorAction extends Action implements ICreatorAction {
+  constructor(item: ICreatorAction) {
+    super(item);
+    this.updateTitle();
+  }
+  locTitleName?: string;
+  locTooltipName?: string;
+  onUpdateTitle?: () => string;
+  onUpdateTooltip?: () => string;
+  public updateTitle(): void {
+    if(!!this.onUpdateTooltip) {
+      this.setTooltip(this.onUpdateTooltip());
+    } else {
+      if(!!this.locTooltipName) {
+        this.setTooltip(editorLocalization.getString(this.locTooltipName));
+      }
+    }
+    if(!!this.onUpdateTitle) {
+      this.setTitle(this.onUpdateTitle());
+    } else {
+      if(!!this.locTitleName) {
+        this.setTitle(editorLocalization.getString(this.locTitleName));
+      }
+    }
+  }
+  private setTitle(newVal: string): void {
+    this.title = newVal;
+    if(!!this.innerItem) {
+      this.innerItem.title = newVal;
+    }
+  }
+  private setTooltip(newVal: string): void {
+    this.tooltip = newVal;
+    if(!!this.innerItem) {
+      this.innerItem.tooltip = newVal;
+    }
+  }
+}
+
+export interface ITabbedMenuItem extends ICreatorAction {
   componentContent: string;
   renderTab?: () => any;
 }
-export class TabbedMenuItem extends Action implements ITabbedMenuItem {
+export class TabbedMenuItem extends CreatorAction implements ITabbedMenuItem {
   constructor(item: ITabbedMenuItem) {
     super(item);
   }
@@ -147,6 +192,7 @@ export class CreatorBase extends Base
    * Set it to true to show "Logic" tab and to false to hide the tab
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
+  @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
   /**
    * Set delay for page hover
    */
@@ -271,9 +317,11 @@ export class CreatorBase extends Base
     componentContent?: string,
     index?: number
   ) {
-    var tab: TabbedMenuItem = new TabbedMenuItem({
+    const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
+    const tab: TabbedMenuItem = new TabbedMenuItem({
       id: name,
-      title: !!title ? title : editorLocalization.getString("ed." + name),
+      locTitleName: locStrName,
+      title: title,
       componentContent: componentContent ? componentContent : "svc-tab-" + name,
       data: plugin,
       action: () => this.makeNewViewActive(name),
@@ -350,15 +398,39 @@ export class CreatorBase extends Base
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
   /**
-   * Use this event to disable some operations for an element (question/panel).
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object question/panel
-   * <br/> options.allowDelete set it to false to disable deleting the object
-   * <br/> options.allowCopy set it to false to disable copying the object
-   * <br/> options.allowDragging set it to false to disable dragging the element
-   * <br/> options.allowChangeType set it to false to disable changing element type
-   * <br/> options.allowChangeRequired set it to false to disable changing isRequired property
+   * This event is raised after a user has edited a text value on the design surface. This value may include HTML markup. You can handle the `onHtmlToMarkdown` event to convert the HTML markup to Markdown.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.element` - The instance of a survey element (survey, page, panel, question) that the user configures.
+   * - `options.name` - The name of a property whose value has been edited.
+   * - `options.html` - HTML content. Pass this field's value to an HTML-to-Markdown converter.
+   * - `options.text` - A text string that may contain Markdown. Assign the result of the HTML-to-Markdown conversion to this field.
+   */
+  public onHtmlToMarkdown: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
+  /**
+   * Use this event to disable user interactions with a question or panel on the design surface.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey element instance (question or panel) for which you can disable user interactions.
+   * - `options.allowAddToToolbox` - Allows users to save the current survey element configuration in the Toolbox.
+   * - `options.allowChangeRequired` - Allows users to make the survey element required.
+   * - `options.allowChangeType` - Allows users to change the survey element type.
+   * - `options.allowCopy` - Allows users to duplicate the survey element.
+   * - `options.allowDelete` - Allows users to delete the survey element.
+   * - `options.allowDragging` - Allows users to drag and drop the survey element.
+   * - `options.allowEdit` - Allows users to edit survey element properties on the design surface. If you disable this property, users can edit the properties only in the Property Grid.
+   *
+   * To disable a user interaction, set the correponding `allow...` property to `false`.
    */
   public onElementAllowOperations: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -406,6 +478,16 @@ export class CreatorBase extends Base
     any
   > = this.onShowingProperty;
   /**
+   * The event is called after a survey that represents the Property Grid is created and all its questions (property editors) are setup.
+   * You can use this event to modify this survey to change the property grid behavior
+   * <br/> options.obj the survey object that is currently editing in the property grid
+   * <br/> options.survey the property grid survey
+   */
+   public onPropertyGridSurveyCreated: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+ /**
    * The event is called after a property editor (in fact a survey question) has been created and all it's properties have been assign.
    * You can use this event to modify the property editor properties or set event handlers to customize it's behavior
    * <br/> options.obj the survey object that is currently editing in the property grid
@@ -505,8 +587,8 @@ export class CreatorBase extends Base
    * <br/> options.editorOptions  options that can be changed.
    * <br/> options.editorOptions.allowAddRemoveItems a boolean property, true by default. Set it false to disable add/remove items in array properties. For example 'choices', 'columns', 'rows'.
    * <br/> options.editorOptions.allowRemoveAllItems a boolean property, true by default. Set it false to disable remove all items in array properties. For example 'choices', 'columns', 'rows'.
-   * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Fast Entry" tab for "choices" property.
-   * <br/> options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Fast Entry" tab for "choices" property by default.
+   * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Manual Entry" tab for "choices" property.
+   * <br/> options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Manual Entry" tab for "choices" property by default.
    */
   public onSetPropertyEditorOptions: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -537,20 +619,39 @@ export class CreatorBase extends Base
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object which property is edited in the Property Editor.
-   * <br/> options.propertyName  the name of the edited property.
-   * <br/> options.value the property value.
-   * <br/> options.newValue set the corrected value into this property. Leave it null if you are ok with the entered value.
-   * <br/> options.doValidation set the value to true to call the property validation. If there is an error, the user sees it immediately.
+   * An event that is raised each time a user edits a survey object property.
+   * Use this event to correct or validate the property value while the user enters it.
+   * 
+   * The event handler accepts the following arguments:
+   * 
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (question or panel) whose property is being edited.
+   * - `options.propertyName` - The name of the property.
+   * - `options.value` - A property value entered by a user.
+   * - `options.newValue` - A corrected property value. Specify this field if you want to override the `options.value`.
+   * - `options.doValidation` - Enable this field to validate the property value while the user enters it.
    * @see onPropertyValidationCustomError
+   * @see onSurveyPropertyValueChanged
    */
   public onPropertyValueChanging: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
+   * An event that is raised after a property in a survey object has changed. 
+   * 
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (question or panel) whose property has changed.
+   * - `options.propertyName` - The name of the property.
+   * - `options.value` - A new property value.
+   * @see onPropertyValidationCustomError
+   * @see onPropertyValueChanging
+   */
+   public onSurveyPropertyValueChanged: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+ /**
    * Use this event to modify the list (name and titles) of the questions available in a condition editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object which property is edited in the Property Editor.
@@ -719,7 +820,9 @@ export class CreatorBase extends Base
    * <br/> sender the survey creator object that fires the event
    * <br/> There are two properties in options:
    * <br/> files the Javascript File objects array
-   * <br/> callback called on upload complete
+   * <br/> callback called on upload complete,
+   * <br/> which takes two string arguments:
+   * <br/> a status and an image link
    * @see uploadFile
    */
   public onUploadFile: Survey.Event<
@@ -747,6 +850,21 @@ export class CreatorBase extends Base
    * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
    */
   public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+   * Use this event to control drag&drop operations.
+   * <br/> sender the survey creator object that fires the event.
+   * <br/> options.survey the editing survey object.
+   * <br/> options.allow set it to false to disable dragging.
+   * <br/> options.target a target element that is dragging.
+   * <br/> options.source a source element. It can be null, if it is a new element, dragging from toolbox.
+   * <br/> options.parent a page or panel where target element is dragging.
+   * <br/> options.insertBefore an element before the target element is dragging. It can be null if parent container (page or panel) is empty or dragging an element under the last element of the container.
+   * <br/> options.insertAfter an element after the target element is dragging. It can be null if parent container (page or panel) is empty or dragging element to the top of the parent container.
+   */
+  public onDragDropAllow: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * This callback is used internally for providing survey JSON text.
    */
@@ -820,6 +938,12 @@ export class CreatorBase extends Base
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
 
   /**
+   * Specifies a theme to use for the survey in the Preview tab.
+   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
+   */
+  public themeForPreview: string = "defaultV2";
+
+  /**
    * Set this property to false to disable pages adding, editing and deleting
    */
   public allowModifyPages = true;
@@ -877,6 +1001,43 @@ export class CreatorBase extends Base
 
   protected onSetReadOnly(newVal: boolean) { }
 
+  /**
+   * Gets or sets the survey locale. The default value it is empty, this means the 'en' locale is used.
+   * You can set it to 'de' - German, 'fr' - French and so on.
+   */
+  public get locale(): string {
+    return editorLocalization.currentLocale;
+  }
+  public set locale(value: string) {
+    if(editorLocalization.currentLocale === value) return;
+    editorLocalization.currentLocale = value;
+    this.toolbox.updateTitles();
+    this.refreshPlugin();
+    const selEl = this.selectedElement;
+    if(!!selEl) {
+      this.selectElement(null);
+      this.selectElement(selEl);
+    }
+    this.locStrsChanged();
+    this.tabs.forEach(item => (<TabbedMenuItem>item).updateTitle());
+    this.toolbar.actions.forEach(item => {
+      if(!!(<any>item).updateTitle) {
+        (<any>item).updateTitle();
+      }
+    });
+  }
+  private refreshPlugin() {
+    const plugin = this.currentPlugin;
+    if(!!plugin) {
+      if(plugin.deactivate) {
+        plugin.deactivate();
+      }
+      const viewType = this.viewType;
+      this.viewType = "";
+      plugin.activate();
+      this.viewType = viewType;
+    }
+  }
   /**
    * A boolean property, false by default. Set it to true to deny editing.
    */
@@ -1315,6 +1476,9 @@ export class CreatorBase extends Base
     if (typeof options.showSimulatorInTestSurveyTab !== "undefined") {
       this.showSimulatorInPreviewTab = options.showSimulatorInTestSurveyTab;
     }
+    if (typeof options.themeForPreview !== "undefined") {
+      this.themeForPreview = options.themeForPreview;
+    }
     if (typeof options.showSimulatorInPreviewTab !== "undefined") {
       this.showSimulatorInPreviewTab = options.showSimulatorInPreviewTab;
     }
@@ -1487,7 +1651,11 @@ export class CreatorBase extends Base
       this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
-    survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
+    survey.onDragDropAllow.add((sender, options) => {
+      options.survey = sender;
+      this.onDragDropAllow.fire(this, options);
+    });
+
     this.setSurvey(survey);
     const currentPlugin = this.getPlugin(this.activeTab);
     if (!!currentPlugin && !!currentPlugin.update) {
@@ -1700,6 +1868,7 @@ export class CreatorBase extends Base
 
   public createSurvey(json: any = {}, reason: string = "designer"): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
+    survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "test") {
       (<any>survey).locale = editorLocalization.currentLocale;
     }
@@ -1711,7 +1880,7 @@ export class CreatorBase extends Base
       return new DesignTimeSurveyModel(this, json);
     return new SurveyModel(json);
   }
-  @property() _stateValue: string;
+  private _stateValue: string;
   /**
    * Returns the creator state. It may return empty string or "saving" and "saved".
    */
@@ -1723,6 +1892,11 @@ export class CreatorBase extends Base
     this.onStateChanged.fire(this, { val: value });
     if (!!value) {
       this.notify(this.getLocString("ed." + value));
+      const actions = this.toolbarItems.filter(a => a.id === "svd-save");
+      if (Array.isArray(actions) && actions.length > 0) {
+        actions[0].enabled = this.state === "modified";
+        actions[0].active = this.state === "modified";
+      }
     }
   }
   public onStateChanged: Survey.Event<
@@ -1732,10 +1906,20 @@ export class CreatorBase extends Base
 
   notifier = new Notifier();
 
-  public setModified(options: any = null) {
+  public setModified(options: any = null): void {
     this.setState("modified");
     this.onModified.fire(this, options);
     this.isAutoSave && this.doAutoSave();
+  }
+  public notifySurveyPropertyChanged(options: any): void {
+    if(!this.onSurveyPropertyValueChanged.isEmpty) {
+      options.propertyName = options.name;
+      options.obj = options.target;
+      options.value = options.newValue;
+      this.onSurveyPropertyValueChanged.fire(this, options);
+    }
+    options.type = "PROPERTY_CHANGED";
+    this.setModified(options);
   }
   /**
    * This function triggers user notification (via the alert() function if no onNotify event handler added).
@@ -1813,7 +1997,8 @@ export class CreatorBase extends Base
     }
     var parent: IPanel = this.currentPage;
     var selectedElement = this.getSelectedSurveyElement();
-    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent) {
+    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
+      (<any>selectedElement !== <any>panel)) {
       parent = selectedElement.parent;
       if (index < 0) {
         index = parent.elements.indexOf(selectedElement);
@@ -2450,6 +2635,13 @@ export class CreatorBase extends Base
       parentProperty
     );
   }
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
+  ) {
+    const options = { obj: object, survey: survey };
+    this.onPropertyGridSurveyCreated.fire(this, options);
+  }
   onPropertyEditorCreatedCallback(
     object: any,
     property: Survey.JsonObjectProperty,
@@ -2714,7 +2906,7 @@ export class CreatorBase extends Base
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
     if (!type)
       type = this.currentAddQuestionType;
-    if (!type) type = "text";
+    if (!type) type = settings.designer.defaultAddQuestionType;
     beforeAdd(type);
     let json = { type: type };
     const toolboxItem = this.toolbox.getItemByName(type);
@@ -2921,9 +3113,10 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   return undefined;
 }
 export function getQuestionContentWrapperComponentName(element) {
-  if (element.getType() == "rating") {
+  if (element.getType() == "rating" && !element.isContentElement) {
     return "svc-rating-question-content";
   }
+  return undefined;
 }
 export function getElementWrapperComponentData(
   element: any,
@@ -2982,11 +3175,11 @@ export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
   return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
-function isTextInput(target: any) {
+export function isTextInput(target: any): boolean {
   if (!target.tagName) return false;
   const tagName = target.tagName.toLowerCase();
   if (["input", "textarea"].indexOf(tagName) !== -1) return true;
-  if (tagName === "span") {
+  if (["span", "div"].indexOf(tagName) !== -1) {
     return target.isContentEditable;
   }
   return false;

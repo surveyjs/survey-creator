@@ -897,11 +897,13 @@ test("Update expressions in copyElements", () => {
       }
     ]
   };
-  const panel = new PanelModel("panel1");
-  panel.addNewQuestion("text", "question1");
-  panel.addNewQuestion("text", "question2");
+  const panel = <PanelModel>creator.survey.getPanelByName("panel1");
   panel.questions[1].visibleIf = "{question1} = 'a'";
   const newPanel = <PanelModel>creator.copyElement(panel);
+  expect(newPanel.survey).toBeTruthy();
+  expect(newPanel.isDesignMode).toBeTruthy();
+  expect(newPanel.questions[1].survey).toBeTruthy();
+  expect(newPanel.questions[1].isDesignMode).toBeTruthy();
   expect(newPanel.questions[1].visibleIf).toEqual("{question3} = 'a'");
   expect(newPanel.questions[1].visible).toBeTruthy();
 });

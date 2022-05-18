@@ -37,7 +37,7 @@ test("Check base responsiveness for toolbox", async (t) => {
     .click(".svc-toolbox__tool.sv-dots");
   const popupSelector = Selector(".sv-popup").filterVisible();
   await t
-    .expect(popupSelector.find(".sv-list__item").withText("Panel (dynamic panels)").visible).ok()
+    .expect(popupSelector.find(".sv-list__item").withText("Dynamic Panel").visible).ok()
     .pressKey("esc")
     .expect(popupSelector.visible).notOk()
     .resizeWindow(1920, 1100)
@@ -289,7 +289,7 @@ test("Property grid editor popup", async (t) => {
     .resizeWindow(1920, 900)
     .click(question1)
     .click(dataTab)
-    .click(Selector("span").withExactText("Set Default value"))
+    .click(Selector("span").withExactText("Set Default Answer"))
     .expect(Selector(".sv-popup--modal").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
@@ -297,7 +297,7 @@ test("Property grid editor popup", async (t) => {
     .click(mobileCloseButton)
     .click(question1)
     .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Settings\"]").filterVisible())
-    .click(Selector("span").withExactText("Set Default value"))
+    .click(Selector("span").withExactText("Set Default Answer"))
     .expect(Selector(".sv-popup--overlay").visible).ok();
 });
 

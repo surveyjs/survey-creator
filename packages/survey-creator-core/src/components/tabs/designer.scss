@@ -25,6 +25,7 @@ svc-tab-designer {
   .sd-container-modern {
     min-width: calcSize(70);
     width: 100%;
+    box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
     &.sd-container-modern--static {
@@ -38,12 +39,13 @@ svc-tab-designer {
   .sd-question.sd-question--image {
     width: 100%;
   }
+
+  .sd-progress, .sd-progress__bar {
+    background-color: transparent;
+  }
 }
 .svc-designer-header {
-  border-bottom: 2px solid;
-}
-.svc-designer-header {
-  border-bottom: 2px solid;
+  border-bottom: 2px solid transparent;
 }
 
 .svc-designer__placeholder-container {

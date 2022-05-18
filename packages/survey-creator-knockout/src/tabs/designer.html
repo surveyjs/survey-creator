@@ -4,11 +4,11 @@
 <div class="svc-tab-designer" data-bind="css: getRootCss(), click: clickDesigner">
   <div class="svc-tab-designer_content">
     <!-- ko if: showPlaceholder -->
-    <div class="svc-designer__placeholder-container">
+    <div class="svc-designer__placeholder-container"
+      data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }">
       <span class="svc-designer-placeholder-text svc-text svc-text--normal" data-bind="text: placeholderText"> </span>
-      <svc-page class="svc-designer-placeholder-page"
-        data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
-        params="survey: survey, creator: creator, page: newPage"></svc-page>
+      <svc-page class="svc-designer-placeholder-page" params="survey: survey, creator: creator, page: newPage">
+      </svc-page>
     </div>
     <!-- /ko -->
 

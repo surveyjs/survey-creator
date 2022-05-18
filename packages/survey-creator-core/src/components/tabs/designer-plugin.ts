@@ -1,9 +1,8 @@
 import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
-import { ICreatorPlugin, CreatorBase } from "../../creator-base";
+import { ICreatorPlugin, CreatorBase, CreatorAction } from "../../creator-base";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
-import { settings } from "../../settings";
 import { TabDesignerViewModel } from "./designer";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
@@ -131,24 +130,22 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       showTitle: false
     });
 
-    this.saveSurveyAction = new Action({
+    this.saveSurveyAction = new CreatorAction({
       id: "svd-save",
       iconName: "icon-save",
       action: () => this.creator.doSave(),
-      active: <any>new ComputedUpdater<boolean>(() => {
-        return this.creator.state === "modified";
-      }),
-      enabled: <any>new ComputedUpdater<boolean>(() => this.creator.state === "modified"),
+      active: false,
+      enabled: false,
       visible: <any>new ComputedUpdater<boolean>(() => {
         const isDesignerTabActive = this.creator.activeTab === "designer";
         return this.creator.showSaveButton && isDesignerTabActive;
       }),
-      title: this.creator.getLocString("ed.saveSurvey"),
-      tooltip: this.creator.getLocString("ed.saveSurveyTooltip"),
+      locTitleName: "ed.saveSurvey",
+      locTooltipName: "ed.saveSurveyTooltip",
       showTitle: false
     });
 
-    this.previewAction = new Action({
+    this.previewAction = new CreatorAction({
       id: "svd-preview",
       iconName: "icon-preview",
       needSeparator: true,
@@ -156,7 +153,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         this.creator.makeNewViewActive("test");
       },
       visible: this.createVisibleUpdater(),
-      title: this.creator.getLocString("ed.testSurvey"),
+      locTitleName: "ed.testSurvey",
       showTitle: false
     });
 

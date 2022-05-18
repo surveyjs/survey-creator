@@ -1,9 +1,11 @@
 import { SurveySimulatorModel } from "../simulator";
 
 import "./test.scss";
-import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css } from "survey-core";
+import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, modernCss, defaultStandardCss } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
+import { setSurveyJSONForPropertyGrid } from "../../property-grid";
+import { propertyGridCss } from "../../property-grid-theme/property-grid";
 
 // import template from "./test.html";
 
@@ -28,7 +30,6 @@ export class TestSurveyTabViewModel extends Base {
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
-
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: TestSurveyTabViewModel) => {
@@ -68,20 +69,15 @@ export class TestSurveyTabViewModel extends Base {
     return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
   }
 
-  constructor(private surveyProvider: CreatorBase) {
+  constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
   }
 
-  public setJSON(json: any) {
-    this.json = json;
-    if (json != null) {
-      if (json.cookieName) {
-        delete json.cookieName;
-      }
-    }
-    this.simulator.survey = this.surveyProvider.createSurvey(json || {}, "test");
-    this.simulator.survey.css = defaultV2Css;
+  public updateSimulatorSurvey(json: any, theme: any) {
+    const newSurvey = this.surveyProvider.createSurvey(json || {}, "test");
+    newSurvey.css = theme;
+    this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -115,8 +111,18 @@ export class TestSurveyTabViewModel extends Base {
     });
   }
 
+  public setJSON(json: any, currTheme: any) {
+    this.json = json;
+    if (json != null) {
+      if (json.cookieName) {
+        delete json.cookieName;
+      }
+    }
+    this.updateSimulatorSurvey(json, currTheme);
+  }
+
   public initialize(json: any, options: any) {
-    this.setJSON(json);
+    this.setJSON(json, this.startTheme);
     this.updatePageList();
 
     if (options.showPagesInTestSurveyTab !== undefined) {
@@ -139,7 +145,7 @@ export class TestSurveyTabViewModel extends Base {
   }
   private getPageTitle(page: PageModel, reason = "survey-tester") {
     let title = this.surveyProvider.getObjectDisplayName(page, reason, page.title);
-    if(title === page.name && title.indexOf("page") === 0) {
+    if (title === page.name && title.indexOf("page") === 0) {
       const index: number = this.survey.pages.indexOf(page);
       return editorLocalization.getString("ed.pageTypeName") + " " + (index + 1);
     }
@@ -168,7 +174,7 @@ export class TestSurveyTabViewModel extends Base {
   }
 
   public testAgain() {
-    this.setJSON(this.json);
+    this.setJSON(this.json, this.simulator.survey.css);
     this.updatePageList();
     this.show();
   }
@@ -259,7 +265,26 @@ export class TestSurveyTabViewModel extends Base {
     }
     return null;
   }
-
+  private updateResultsTemplate(theme: any) {
+    this.simulator.survey.css = theme;
+    this.simulator.survey.render();
+  }
+  public setTheme(themeName: string, themeMapper: any): void {
+    const availableThemes = themeMapper.filter(item => item.name === themeName);
+    let theme = <any>defaultV2Css;
+    if (availableThemes.length > 0) {
+      theme = availableThemes[0].theme;
+    }
+    this.isRunning ? this.updateSimulatorSurvey(this.json, theme) : this.updateResultsTemplate(theme);
+  }
+  public getCurrThemeTitle(themeMapper: any): string {
+    const availableThemes = themeMapper.filter(item => item.theme.root === this.simulator.survey.css.root);
+    let themeTitle = this.surveyProvider.getLocString("ed.defaultV2Theme");
+    if (availableThemes.length > 0) {
+      themeTitle = availableThemes[0].title;
+    }
+    return themeTitle;
+  }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
 

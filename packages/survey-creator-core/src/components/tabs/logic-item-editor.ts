@@ -138,6 +138,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "logicTypeName",
               type: "dropdown",
+              renderAs: "select",
+              denySearch: true,
+              dropdownWidthMode: "contentWidth",
               title: editorLocalization.getString("pe.then"),
               titleLocation: "left",
               isRequired: true,
@@ -153,6 +156,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "elementSelector",
               type: "dropdown",
+              renderAs: "select",
+              dropdownWidthMode: "contentWidth",
               titleLocation: "hidden",
               isRequired: true,
               startWithNewLine: false,
@@ -350,7 +355,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private isPanelSupportContext(panel: PanelModel): boolean {
     const logicType = this.getLogicTypeByPanel(panel);
-    return logicType.supportContext(this.context);
+    return !!logicType ? logicType.supportContext(this.context) : false;
   }
   private updateSelectorOnContextChanged(panel: PanelModel) {
     const logicTypeQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");

@@ -1,6 +1,6 @@
 import { ImageItemValueWrapperViewModel } from "survey-creator-core";
 import React from "react";
-import { QuestionSelectBase, Base, ImageItemValue } from "survey-core";
+import { QuestionSelectBase, Base, ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import {
   attachKey2click,
@@ -35,6 +35,10 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
     return this.model;
   }
 
+  protected get question(): QuestionImagePickerModel {
+    return this.props.question as QuestionImagePickerModel;
+  }
+
   componentDidMount() {
     super.componentDidMount();
     this.model.itemsRoot = this.rootRef.current;
@@ -50,8 +54,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
     // }
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
-    const imageWidth = (this.props.question as any).imageWidth;
-    const imageHeight = (this.props.question as any).imageHeight;
+    const imageStyle = { width: this.question.renderedImageWidth, height: this.question.renderedImageHeight };
 
     let content = null;
     if (isNew) {
@@ -59,7 +62,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         <div className="svc-image-item-value__item">
           <div className="sd-imagepicker__item sd-imagepicker__item--inline">
             <label className="sd-imagepicker__label">
-              <div style={{ width: imageWidth ? imageWidth + "px" : undefined, height: imageHeight ? imageHeight + "px" : undefined }} className="sd-imagepicker__image">
+              <div style={imageStyle} className="sd-imagepicker__image">
               </div>
             </label>
           </div>
@@ -117,7 +120,7 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
         onPointerDown={(event: any) => this.model.onPointerDown(event)}
         onDragStart={this.preventDragHandler}
       >
-        <div className={"svc-image-item-value-wrapper__ghost"}></div>
+        <div className={"svc-image-item-value-wrapper__ghost"} style={imageStyle}></div>
         <div className={"svc-image-item-value-wrapper__content"}>
           <input
             type="file"

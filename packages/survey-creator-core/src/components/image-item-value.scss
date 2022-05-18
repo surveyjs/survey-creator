@@ -54,23 +54,28 @@
   use {
     fill: $foreground-light;
   }
+  outline: none;
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls__button {
   background-color: transparent;
 }
 
-.svc-image-item-value-controls__choose-file:hover {
+.svc-image-item-value-controls__choose-file {
   // background-color: $primary-light;
-  use {
-    fill: $primary;
+  &:hover, &:focus {
+    use {
+      fill: $primary;
+    }
   }
 }
 
-.svc-image-item-value-controls__remove:hover {
+.svc-image-item-value-controls__remove {
   // background-color: $red-light;
-  use {
-    fill: $red;
+  &:hover, &:focus {
+    use {
+      fill: $red;
+    }
   }
 }
 
@@ -80,8 +85,10 @@
   }
 }
 
-.svc-image-item-value-controls__add:hover {
-  background-color: $primary-light;
+.svc-image-item-value-controls__add {
+  &:hover, &:focus {
+    background-color: $primary-light;
+  }
 }
 
 .svc-choose-file-input {
@@ -94,10 +101,6 @@
 .svc-image-item-value__item {
   .sd-imagepicker__item.sd-imagepicker__item {
     width: 100%;
-  }
-  .sd-imagepicker__image-container {
-    border: 1px dashed $border;
-    border-radius: 4px;
   }
 }
 
@@ -127,7 +130,4 @@
 .svc-image-item-value-wrapper__ghost {
   display: none;
   background: $background-dim;
-  width: 200px;
-  height: 135px;
-  margin-top: 8px;
 }

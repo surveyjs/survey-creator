@@ -302,6 +302,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
             {
               name: "conjunction",
               type: "dropdown",
+              renderAs: "select",
+              dropdownWidthMode: "contentWidth",
               titleLocation: "hidden",
               showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
@@ -313,6 +315,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
             {
               name: "questionName",
               type: "dropdown",
+              renderAs: "select",
+              dropdownWidthMode: "contentWidth",
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
               startWithNewLine: false,
@@ -321,6 +325,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
             {
               name: "operator",
               type: "dropdown",
+              renderAs: "select",
+              denySearch: true,
+              dropdownWidthMode: "contentWidth",
               titleLocation: "hidden",
               startWithNewLine: false,
               showOptionsCaption: false,
@@ -383,11 +390,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
   }
   public isModified(prevText: string): boolean {
-    if(this.textEditor.visible) return prevText != this.text;
+    if (this.textEditor.visible) return prevText != this.text;
     const items = this.getEditorItems();
     const prevOp = !!prevText ? new ConditionsParser().parseExpression(prevText) : null;
-    if(!prevOp) return !(items.length == 1 && !items[0].questionName);
-    if(!this.isReady) return true;
+    if (!prevOp) return !(items.length == 1 && !items[0].questionName);
+    if (!this.isReady) return true;
     const curOp = new ConditionsParser().parseExpression(this.text);
     return !prevOp.isEqual(curOp);
   }
@@ -395,10 +402,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return this.contextValue;
   }
   public set context(val: Question) {
-    if(val === this.context) return;
+    if (val === this.context) return;
     this.contextValue = val;
     this.updateNamesOnContextChanged();
-    if(this.onContextChanged) {
+    if (this.onContextChanged) {
       this.onContextChanged(val);
     }
   }
@@ -439,7 +446,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (showTextEdit) {
       this.showTextEditor(this.text);
     } else {
-      if(!this.panel.visible) {
+      if (!this.panel.visible) {
         this.showBuilder(this.text);
       }
     }
@@ -480,11 +487,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.isSettingPanelValues = false;
   }
   private getConditionQuestions(): Array<ItemValue> {
-    if(!this.context) return this.allConditionQuestions;
+    if (!this.context) return this.allConditionQuestions;
     const res = [];
-    for(var i = 0; i < this.allConditionQuestions.length; i ++) {
+    for (var i = 0; i < this.allConditionQuestions.length; i++) {
       const item: any = this.allConditionQuestions[i];
-      if(!item.context || item.context === this.context) {
+      if (!item.context || item.context === this.context) {
         res.push(item);
       }
     }
@@ -495,7 +502,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     let res = "";
     const items = this.getEditorItems();
     for (let i = 0; i < items.length; i++) {
-      if (!items[i].isReady) return "";
+      if (!items[i].isReady) break;
       if (!!res) {
         res += " " + items[i].conjunction + " ";
       }
@@ -521,37 +528,37 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return item;
   }
   private getQuestionNameFromPanel(name: string): string {
-    if(!this.context || !name) return name;
+    if (!this.context || !name) return name;
     const prefix = this.context.getValueName() + ".";
     return name.replace(prefix, "");
   }
-  private getContextIndexInfo(name: string, prefix: string = ""): {index: number, name: string} {
+  private getContextIndexInfo(name: string, prefix: string = ""): { index: number, name: string } {
     return SurveyHelper.getQuestionContextIndexInfo(name, prefix);
   }
   private getQuestionNameToPanel(name: string): string {
-    if(!this.context || !name) return name;
+    if (!this.context || !name) return name;
     const indexInfo = this.getContextIndexInfo(name);
-    if(!indexInfo || indexInfo.index !== 0) return name;
+    if (!indexInfo || indexInfo.index !== 0) return name;
     return this.context.getValueName() + "." + name;
   }
   private getContextFromPanels(): Question {
-    if(!!this.object) return null;
-    for(var i = 0; i < this.panel.panels.length; i ++) {
+    if (!!this.object) return null;
+    for (var i = 0; i < this.panel.panels.length; i++) {
       const questionName = this.panel.panels[i].getQuestionByName("questionName").value;
       const context = this.getContextByQuestionName(questionName);
-      if(!!context) return context;
+      if (!!context) return context;
     }
     return null;
   }
   private updateNamesOnContextChanged() {
-    for(var i = 0; i < this.panel.panels.length; i ++) {
+    for (var i = 0; i < this.panel.panels.length; i++) {
       this.panel.panels[i].getQuestionByName("questionName").choices = this.getConditionQuestions();
     }
   }
   private getContextByQuestionName(name: string): Question {
-    if(!name) return null;
+    if (!name) return null;
     const indexInfo = this.getContextIndexInfo(name, ".");
-    if(!indexInfo) return null;
+    if (!indexInfo) return null;
     name = name.substring(0, indexInfo.index);
     return <Question>this.survey.getQuestionByValueName(name);
   }
@@ -849,7 +856,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.setTitle();
   }
   private setTitle() {
-    const text = this.text;
+    const text = this.isReady ? this.text : "";
     this.title = this.options.onConditionGetTitleCallback(text, text || editorLocalization.getString("pe.ruleIsNotSet"));
   }
 

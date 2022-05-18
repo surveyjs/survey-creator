@@ -28,8 +28,8 @@ test("No Add New Question in HTML question placeholder", async t => {
   await t
     .maximizeWindow()
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Html"), { speed: 0.5 })
-    .click(getToolboxItemByText("Html"), { speed: 0.5 })
+    .hover(getToolboxItemByText("HTML"), { speed: 0.5 })
+    .click(getToolboxItemByText("HTML"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
 
     .expect(Selector(".sd-question--html+.svc-panel__placeholder_frame .svc-panel__add-new-question > span").withText("Add Question").exists).notOk();

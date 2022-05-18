@@ -16,10 +16,13 @@ import {
   QuestionMatrixModel,
   Action,
   QuestionMatrixDynamicModel,
-  QuestionCheckboxModel
+  QuestionCheckboxModel,
+  ComponentCollection,
+  QuestionCompositeModel
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { SurveyElementAdornerBase } from "../src/components/action-container-view-model";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
@@ -28,6 +31,7 @@ import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
+import { DesignTimeSurveyModel, isTextInput } from "../src/creator-base";
 
 import {
   getElementWrapperComponentData,
@@ -1229,6 +1233,20 @@ test("getQuestionContentWrapperComponentName", (): any => {
   expect(getQuestionContentWrapperComponentName(new QuestionRatingModel(""))).toEqual("svc-rating-question-content");
 });
 
+test("getQuestionContentWrapperComponentName for component", (): any => {
+  ComponentCollection.Instance.add({
+    name: "test",
+    elementsJSON: [{ type: "rating", name: "rate1" }]
+  });
+  const creator = new CreatorTester();
+  const survey = new DesignTimeSurveyModel(creator, { questions: [{ type: "test", name: "q1" }] });
+  const qCustom = <QuestionCompositeModel>survey.getAllQuestions()[0];
+  const q = qCustom.panelWrapper.questions[0];
+  expect(q.name).toBe("rate1");
+  expect(survey.getQuestionContentWrapperComponentName(q)).toEqual("sv-template-renderer");
+  ComponentCollection.Instance.clear();
+});
+
 test("getElementWrapperComponentData", (): any => {
   const testCreator: any = { test: "test" };
   expect(getElementWrapperComponentData(new QuestionTextModel(""), "", testCreator)).toEqual(testCreator);
@@ -1753,6 +1771,27 @@ test("ConvertTo, show the current question type selected", (): any => {
   creator.convertCurrentQuestion("text");
   expect((<any>creator.selectedElement).id).toEqual(question.id);
 });
+
+test("ConverTo, change title of question item", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.getItemByName("radiogroup").title = "Single selector";
+
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+
+  const questionModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined
+  );
+  const action = questionModel.getActionById("convertTo");
+  expect(action.title).toEqual("Single selector");
+});
 test("ConvertTo, show custom widgets in ConvertTo action", (): any => {
   const widget = {
     name: "test_widget",
@@ -1831,6 +1870,22 @@ test("Modify property editor settings on event", (): any => {
       options.editor.textUpdateMode = "onTyping";
       options.editor.dataList = ["item1", "item2"];
     }
+  });
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  const placeHolderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
+  expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
+  expect(placeHolderQuestion.dataList).toHaveLength(2);
+});
+test("Modify property editor via property grid survey", (): any => {
+  const creator = new CreatorTester();
+  creator.onPropertyGridSurveyCreated.add((sender, options) => {
+    if(options.obj.getType() !== "text") return;
+    const question = options.survey.getQuestionByName("placeHolder");
+    question.textUpdateMode = "onTyping";
+    question.dataList = ["item1", "item2"];
   });
   creator.JSON = {
     elements: [{ type: "text", name: "q1" }]
@@ -1940,6 +1995,23 @@ test("creator.onActiveTabChaning", (): any => {
   expect(tabName).toEqual("logic");
   expect(creator.activeTab).toEqual("test");
 });
+test("creator.onDragDropAllow", (): any => {
+  const creator = new CreatorTester({});
+  let fired = false;
+  creator.onDragDropAllow.add((sender, options) => {
+    fired = true;
+  });
+
+  const survey = creator.survey;
+  const page = survey.addNewPage("page1");
+  const q1 = page.addNewQuestion("text", "q1");
+  const q2 = page.addNewQuestion("text", "q2");
+  const target = new QuestionTextModel("q1");
+  page.dragDropStart(q1, target);
+  page.dragDropMoveTo(q2, true);
+
+  expect(fired).toBeTruthy();
+});
 test("update tab content", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
@@ -2006,7 +2078,7 @@ test("Keyboard Shortcuts", (): any => {
   expect(count).toEqual(0);
 });
 
-test("LogicPlugin Fast entry: options.allowEditExpressionsInTextEditor", () => {
+test("LogicPlugin Manual Entry: options.allowEditExpressionsInTextEditor", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   let logicTabActions = logicPlugin.createActions();
@@ -2020,7 +2092,7 @@ test("LogicPlugin Fast entry: options.allowEditExpressionsInTextEditor", () => {
   expect(logicTabActions.filter(action => action.id === "svc-logic-fast-entry")).toHaveLength(0);
 });
 
-test("LogicPlugin Fast entry: fastEntryAction switch active", () => {
+test("LogicPlugin Manual Entry: fastEntryAction switch active", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   const fastEntryAction = logicPlugin.createActions().filter(action => action.id === "svc-logic-fast-entry")[0];
@@ -2037,7 +2109,7 @@ test("LogicPlugin Fast entry: fastEntryAction switch active", () => {
   expect(fastEntryAction.active).toBeFalsy();
 });
 
-test("LogicPlugin Fast entry: fastEntryAction enabled", () => {
+test("LogicPlugin Manual Entry: fastEntryAction enabled", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   const fastEntryAction = logicPlugin.createActions().filter(action => action.id === "svc-logic-fast-entry")[0];
@@ -2325,7 +2397,7 @@ test("Add new question to Panel and Page", (): any => {
   expect(panelModel.addNewQuestionText).toEqual("Add Rating");
   expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
   expect(pageModel.addNewQuestionText).toEqual("Add Ranking");
-  expect(pageModel2.addNewQuestionText).toEqual("Add Html");
+  expect(pageModel2.addNewQuestionText).toEqual("Add HTML");
 
   expect((creator.survey.getAllPanels()[0] as PanelModel).questions.map(q => q.getType())).toEqual(["text", "rating"]);
   expect((creator.survey.getAllPanels()[1] as PanelModel).questions.map(q => q.getType())).toEqual(["comment"]);
@@ -2349,7 +2421,51 @@ test("Add new question to Panel and Page", (): any => {
   panelModel3.addNewQuestion();
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text", "text"]);
 });
-
+test("Use settings.designer.defaultAddQuestionType", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  settings.designer.defaultAddQuestionType = "radiogroup";
+  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  const panel = <PanelModel>creator.survey.getAllPanels()[0];
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  pageModel.addNewQuestion(null, null);
+  expect(creator.survey.getAllQuestions()[0].getType()).toEqual("radiogroup");
+  panelModel.addNewQuestion();
+  expect(panel.questions[0].getType()).toEqual("radiogroup");
+});
+test("Use settings.designer.showAddQuestionButton = false", (): any => {
+  settings.designer.showAddQuestionButton = false;
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  let panel = <PanelModel>creator.survey.getAllPanels()[0];
+  let panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  expect(pageModel.showAddQuestionButton).toBeFalsy();
+  expect(panelModel.showAddQuestionButton).toBeFalsy();
+  settings.designer.showAddQuestionButton = true;
+  panelModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  expect(pageModel.showAddQuestionButton).toBeTruthy();
+  expect(panelModel.showAddQuestionButton).toBeTruthy();
+});
+test("Add Questions with selection", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  const panel = <PanelModel>creator.survey.getAllPanels()[0];
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  panelModel.addNewQuestion();
+  panelModel.addNewQuestion();
+  panelModel.addNewQuestion();
+  creator.selectElement(panel.elements[1]);
+  panelModel.addNewQuestion();
+  creator.selectElement(panel);
+  panelModel.addNewQuestion();
+  expect(panel.elements).toHaveLength(5);
+  expect(panel.elements[0].name).toEqual("question1");
+  expect(panel.elements[1].name).toEqual("question2");
+  expect(panel.elements[2].name).toEqual("question4");
+  expect(panel.elements[3].name).toEqual("question3");
+  expect(panel.elements[4].name).toEqual("question5");
+});
 test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
@@ -2489,4 +2605,59 @@ test("delete last question and selection with pageEditModeValue=single #2712", (
     surveySettings.allowShowEmptyTitleInDesignMode = true;
     surveySettings.allowShowEmptyDescriptionInDesignMode = true;
   }
+});
+
+test("SurveyElementAdornerBase setSurveyElement updateActionsProperties", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "single" });
+  creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+  const question = creator.survey.getAllQuestions()[0];
+  let count = 0;
+  const adorderBase = new SurveyElementAdornerBase(creator, null);
+
+  creator.onElementAllowOperations.add(function (_, options) {
+    count++;
+  });
+  adorderBase["setSurveyElement"](question);
+  expect(count).toBe(1);
+});
+
+test("isTextInput", (): any => {
+  const textarea = document.createElement("textarea");
+  expect(isTextInput(textarea)).toBeTruthy();
+  const input = document.createElement("input");
+  expect(isTextInput(input)).toBeTruthy();
+
+  const div = document.createElement("div");
+  expect(isTextInput(div)).toBeFalsy();
+  (<any>div)["isContentEditable"] = true;
+  expect(isTextInput(div)).toBeTruthy();
+
+  const span = document.createElement("span");
+  expect(isTextInput(span)).toBeFalsy();
+  (<any>span)["isContentEditable"] = true;
+  expect(isTextInput(span)).toBeTruthy();
+});
+test("onSurveyPropertyValueChanged event", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  let propertyName;
+  let propertyValue;
+  let objType;
+  let counter = 0;
+  creator.onSurveyPropertyValueChanged.add((sender, options) => {
+    counter ++;
+    objType = options.obj.getType();
+    propertyName = options.propertyName;
+    propertyValue = options.value;
+  });
+  creator.survey.title = "New Survey";
+  expect(counter).toEqual(1);
+  expect(objType).toEqual("survey");
+  expect(propertyName).toEqual("title");
+  expect(propertyValue).toEqual("New Survey");
+  creator.survey.getAllQuestions()[0].title = "New Question";
+  expect(counter).toEqual(2);
+  expect(objType).toEqual("text");
+  expect(propertyName).toEqual("title");
+  expect(propertyValue).toEqual("New Question");
 });

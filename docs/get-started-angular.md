@@ -8,7 +8,9 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 - [Render Survey Creator](#render-survey-creator)
 - [Save and Load Survey Model Definitions](#save-and-load-survey-model-definitions)
 
-You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-angular" target="_blank">Get Started with Survey Creator / Form Builder - Angular</a>.
+You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular" target="_blank">Get Started with Survey Creator / Form Builder - Angular</a>.
+
+If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_angular_cli" target="_blank">Angular CLI + SurveyJS Quick Start Boilerplate</a>.
 
 ## Install the `survey-creator-knockout` npm Package
 
@@ -264,6 +266,8 @@ export class SurveyCreatorComponent implements OnInit {
 }
 ```
 
+To view the application, run `ng serve` in a command line and open [http://localhost:4200/](http://localhost:4200/) in your browser.
+
 <details>
   <summary>View full code</summary>
 
@@ -341,11 +345,12 @@ export class SurveyCreatorComponent implements OnInit {
 ```
 </details>
 
-<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator-angular" target="_blank">View full code on GitHub</a>
+<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular" target="_blank">View full code on GitHub</a>
 
 ## Further Reading
 
-- [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#localization)
-- [Appearance Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#appearance)
-- [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=Survey-Creator-Overview#toolbox)
+- [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+- [Property Grid Customization](https://surveyjs.io/Documentation/Survey-Creator?id=property-grid)
+- [Toolbox Customization](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox)
+- [Survey Customization](https://surveyjs.io/Documentation/Survey-Creator?id=survey-customization)
 - [Create a Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)

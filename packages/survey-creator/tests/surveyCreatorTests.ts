@@ -2243,9 +2243,7 @@ QUnit.test("Update expressions in copyElements", function (assert) {
       },
     ],
   };
-  var panel = new Survey.Panel("panel1");
-  panel.addNewQuestion("text", "question1");
-  panel.addNewQuestion("text", "question2");
+  const panel = <Survey.PageModel>creator.survey.getPanelByName("panel1");
   panel.questions[1].visibleIf = "{question1} = 'a'";
   var newPanel = <Survey.Panel>creator.copyElement(panel);
   assert.equal(

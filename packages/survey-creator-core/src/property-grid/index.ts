@@ -17,7 +17,7 @@ import {
   MatrixDynamicRowModel,
   ComputedUpdater,
   QuestionDropdownModel,
-  QuestionSelectBase
+  QuestionSelectBase,
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -32,13 +32,12 @@ import {
   ICollectionItemAllowOperations,
   settings as creatorSettings
 } from "../settings";
-import { PropertiesHelpTexts } from "./properties-helptext";
 import { QuestionFactory } from "survey-core";
 import { defaultV2Css } from "survey-core";
-import { updateMatrixRemoveAction } from "../utils/actions";
 import { SurveyHelper } from "../survey-helper";
 import { CreatorBase } from "../creator-base";
 import { IPropertyEditorInfo, SurveyQuestionEditorDefinition } from "../question-editor/definition";
+import { parsePropertyDescription } from "./description-parser";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;
@@ -346,7 +345,7 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-clear",
-      css: "spg-action-button spg-action-button--danger",
+      innerCss: "spg-action-button--danger",
       enabled: enabled,
       visible: <any>new ComputedUpdater<boolean>(() => {
         const propertyValue = (<any>question).obj[property.name];
@@ -384,7 +383,6 @@ export class PropertyGridTitleActionsCreator {
     var setupAction = {
       id: "property-grid-setup",
       iconName: property.isArray ? "icon-fast-entry" : "icon-wizard",
-      css: "spg-action-button",
       enabled: enabled,
       title: getLocString("pe.edit"),
       showTitle: false,
@@ -399,7 +397,6 @@ export class PropertyGridTitleActionsCreator {
     const action = new Action({
       title: "",
       id: "property-grid-help",
-      css: "spg-action-button",
       iconName: this.getHelpActionIconName(question),
       showTitle: false,
       action: () => {
@@ -484,7 +481,7 @@ export class PropertyJSONGenerator {
         q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
       }
       q.descriptionLocation = "hidden";
-      var helpText = PropertiesHelpTexts.instance.getHelpText(this.obj, prop);
+      let helpText = editorLocalization.getPropertyHelpInEditor(this.obj.getType(), prop.name, prop.type);
       if (!!helpText) {
         q.description = helpText;
       }
@@ -666,7 +663,7 @@ export class PropertyJSONGenerator {
   private getQuestionTitle(prop: JsonObjectProperty, title: string): string {
     if (!!prop.displayName) return prop.displayName;
     if (!!title && title !== prop.name) return title;
-    return editorLocalization.getPropertyNameInEditor(prop.name);
+    return editorLocalization.getPropertyNameInEditor(this.obj.getType(), prop.name);
   }
 }
 
@@ -806,6 +803,11 @@ export class PropertyGridModel {
     this.survey.onAfterRenderQuestion.add((sender, options) => {
       this.onAfterRenderQuestion(options);
     });
+    this.survey.onTextMarkdown.add((sender, options) => {
+      if (options.name === "description") {
+        options.html = parsePropertyDescription(options.text);
+      }
+    });
     this.survey.editingObj = this.obj;
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
@@ -823,6 +825,7 @@ export class PropertyGridModel {
       this.currentlySelectedPanel = options.question.parent;
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
+    this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
   }
   public get options(): ISurveyCreatorOptions {
     return this.optionsValue;
@@ -1118,7 +1121,6 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     if (property.type !== "condition") {
       surveyPropertyEditor.editSurvey.css = defaultV2Css;
     }
-    surveyPropertyEditor.editSurvey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
     if (!settings.showModal) return surveyPropertyEditor;
     settings.showModal(
       "survey",
@@ -1211,12 +1213,15 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     if (prop.name == "name") {
       json.textUpdateMode = "onBlur";
     }
+    if (!!prop.dataList) {
+      json.dataList = prop.dataList;
+    }
     return json;
   }
 }
 export class PropertyGridEditorNumber extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "number";
+    return prop.type == "number" || prop.type == "responsiveImageSize";
   }
   public getJSON(
     obj: Base,
@@ -1240,11 +1245,10 @@ export class PropertyGridEditorImageSize extends PropertyGridEditorNumber {
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     const isDefaultValue = (imageHeight: number, imageWidth: number) => {
-      const imageHeightProperty = Serializer.findProperty("image", "imageHeight");
-      const imageWidthProperty = Serializer.findProperty("image", "imageWidth");
+      const imageHeightProperty = Serializer.findProperty(obj.getType(), "imageHeight");
+      const imageWidthProperty = Serializer.findProperty(obj.getType(), "imageWidth");
       return imageHeightProperty.isDefaultValue(imageHeight) && imageWidthProperty.isDefaultValue(imageWidth);
     };
-
     question.valueFromDataCallback = function (value: any): any {
       const isDefaultSize = isDefaultValue(obj["imageHeight"], obj["imageWidth"]);
       return isDefaultSize ? undefined : value;
@@ -1400,7 +1404,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       if (text) return text;
     }
     if (value === null) return null;
-    return editorLocalization.getPropertyValue(value);
+    return editorLocalization.getPropertyValueInEditor(prop.name, value);
   }
   private choicesFromPropChoices(
     prop: JsonObjectProperty,
@@ -1484,24 +1488,16 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "question";
   }
-  public getJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): any {
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     return {
       type: "dropdown",
-      optionsCaption: editorLocalization.getString(
-        "pe.conditionSelectQuestion"
-      ),
+      renderAs: "select",
+      dropdownWidthMode: "contentWidth",
+      optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
       choices: this.getChoices(obj, prop, options)
     };
   }
-  private getChoices(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): Array<any> {
+  private getChoices(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): Array<any> {
     var survey = EditableObject.getSurvey(obj);
     if (!survey) return [];
     var questions = this.getQuestions(survey, obj);

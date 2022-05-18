@@ -5,18 +5,18 @@ export class CreatorResponsivityManager {
   private currentWidth;
   private prevShowToolbox;
   private prevShowPageNavigator;
-  private screenWidth: { [key: string]: number } = {
+  public static screenSizeBreakpoints: { [key: string]: number } = {
     "xxl": 1800,
     "xl": 1500,
     "l": 1200,
     "m": 900,
     "s": 600,
   }
-  private devicePixelRatio = (window && window.devicePixelRatio) || 1;
   private getScreenWidth(): string {
     let res;
-    Object.keys(this.screenWidth).forEach((mode: string) => {
-      if (!res && this.container && !!this.screenWidth[mode] && this.container.offsetWidth * this.devicePixelRatio >= this.screenWidth[mode]) {
+    Object.keys(CreatorResponsivityManager.screenSizeBreakpoints).forEach((mode: string) => {
+      const breakpoint = CreatorResponsivityManager.screenSizeBreakpoints[mode];
+      if (!res && this.container && !!breakpoint && this.container.offsetWidth >= breakpoint) {
         res = mode;
       }
     });
@@ -42,7 +42,7 @@ export class CreatorResponsivityManager {
     }
   }
   private procesShowPageNavigator(pageNavigatorVisibility: boolean) {
-    if(this.creator.pageEditMode === "bypage") {
+    if (this.creator.pageEditMode === "bypage") {
       this.creator.showPageNavigator = true;
       return;
     }

@@ -18,7 +18,7 @@
   "devDependencies": {
     "@survey/creator": "../survey-creator-core/build",
     "http-server": "^0.12.3",
-    "testcafe": "^1.16.0",
+    "testcafe": "1.18.4",
     "testcafe-reporter-dashboard": "^0.2.4-rc.1"
   },
   "dependencies": {

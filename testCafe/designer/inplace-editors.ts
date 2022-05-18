@@ -1,4 +1,4 @@
-import { addQuestionByAddQuestionButton, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
+import { addQuestionByAddQuestionButton, explicitErrorHandler, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Inplace editors";
 
@@ -494,10 +494,11 @@ test("Ranking question inplace editor", async (t) => {
 });
 
 test("Image picker question inplace editor", async (t) => {
+  await explicitErrorHandler();
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Image picker"), { speed: 0.5 })
-    .click(getToolboxItemByText("Image picker"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Image Picker"), { speed: 0.5 })
+    .click(getToolboxItemByText("Image Picker"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
     .expect(imageItems.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -530,10 +531,11 @@ test("Image picker question inplace editor", async (t) => {
 });
 
 test("Image picker question inplace editor - add new item", async (t) => {
+  await explicitErrorHandler();
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Image picker"), { speed: 0.5 })
-    .click(getToolboxItemByText("Image picker"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Image Picker"), { speed: 0.5 })
+    .click(getToolboxItemByText("Image Picker"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
 
@@ -589,7 +591,7 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
   });
   const row1Column1Cell = Selector("tbody .svc-matrix-cell").filterVisible().nth(1);
   await t.expect(Selector(".svc-question__content").exists).notOk();
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .hover(row1Column1Cell, { speed: 0.5 });
@@ -622,7 +624,7 @@ test("Rating question inplace editor", async (t) => {
 
 test("Matrix dropdown question inplace row header editor #2553", async (t) => {
   await t.expect(Selector(".svc-question__content").exists).notOk();
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   await t.expect(Selector(".svc-question__content").exists).ok();
 
   await t
@@ -630,7 +632,7 @@ test("Matrix dropdown question inplace row header editor #2553", async (t) => {
     .click(Selector(".sv_matrix_row .svc-matrix-cell .sv-string-editor"))
     .typeText(Selector(".sv_matrix_row .svc-matrix-cell .sv-string-editor"), "Row header")
     .click(Selector("h4.spg-title[aria-label='Layout']"))
-    .click(Selector("input.spg-input[aria-label='Row title width']"))
+    .click(Selector("input.spg-input[aria-label='Row header width (in CSS-accepted values)']"))
     .pressKey("ctrl+a delete 3 0 0 p x")
-    .expect(Selector("input.spg-input[aria-label='Row title width']").value).eql("300px");
+    .expect(Selector("input.spg-input[aria-label='Row header width (in CSS-accepted values)']").value).eql("300px");
 });

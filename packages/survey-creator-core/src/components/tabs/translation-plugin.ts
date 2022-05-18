@@ -1,8 +1,7 @@
 import { SurveyModel, PopupModel, ListModel, Action, IAction, Base } from "survey-core";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
-import { editorLocalization, getLocString } from "../../editorLocalization";
+import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
+import { editorLocalization } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
-import { settings } from "../../settings";
 import { Translation } from "./translation";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
@@ -114,18 +113,18 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public createActions() {
     const items: Array<Action> = [];
-    const translationMergeLocaleWithDefaultStr = editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
+    const translationMergeLocaleWithDefaultStr = (): string => editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
     this.createFilterPageAction();
     items.push(this.filterPageAction);
     this.createFilterStringsAction();
     items.push(this.filterStringsAction);
 
-    this.mergeLocaleWithDefaultAction = new Action({
+    this.mergeLocaleWithDefaultAction = new CreatorAction({
       id: "svd-translation-merge_locale_withdefault",
       visible: false,
       //visible: this.model.canMergeLocaleWithDefault,
-      title: translationMergeLocaleWithDefaultStr,
-      tooltip: translationMergeLocaleWithDefaultStr,
+      onUpdateTitle: () => { return translationMergeLocaleWithDefaultStr(); },
+      onUpdateTooltip: () => { return translationMergeLocaleWithDefaultStr(); },
       component: "sv-action-bar-item",
       mode: "small",
       needSeparator: true,
@@ -135,11 +134,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.mergeLocaleWithDefaultAction);
 
-    this.importCsvAction = new Action({
+    this.importCsvAction = new CreatorAction({
       id: "svc-translation-import",
       iconName: "icon-load",
-      tooltip: this.importFromCSVText,
-      title: this.importFromCSVText,
+      locTitleName: "ed.translationImportFromSCVButton",
+      locTooltipName: "ed.translationImportFromSCVButton",
       visible: false,
       mode: "small",
       component: "sv-action-bar-item",
@@ -159,11 +158,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.importCsvAction);
 
-    this.exportCsvAction = new Action({
+    this.exportCsvAction = new CreatorAction({
       id: "svc-translation-export",
       iconName: "icon-download",
-      tooltip: this.exportToCSVText,
-      title: this.exportToCSVText,
+      locTitleName: "ed.translationExportToSCVButton",
+      locTooltipName: "ed.translationExportToSCVButton",
       visible: false,
       mode: "small",
       component: "sv-action-bar-item",

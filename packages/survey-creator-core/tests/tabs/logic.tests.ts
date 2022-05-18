@@ -782,7 +782,7 @@ test("Create setValue trigger in logic", () => {
   expect(getSetValueQuestion().value).toBeFalsy();
 });
 
-test("LogicItemEditorUI: fast entry edit and change expressionEditorCanShowBuilder", () => {
+test("LogicItemEditorUI: Manual Entry edit and change expressionEditorCanShowBuilder", () => {
   const survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
@@ -1371,7 +1371,7 @@ test("LogicItemEditorUI: getUsedActionTypes", () => {
   expect(types[1].name).toEqual("trigger_skip");
   expect(types[1].displayName).toEqual("Skip to question");
   expect(types[2].name).toEqual("trigger_copyvalue");
-  expect(types[2].displayName).toEqual("Copy question value");
+  expect(types[2].displayName).toEqual("Copy answer");
 });
 
 test("LogicPlugin: question & action types are sorted ", () => {
@@ -1409,20 +1409,20 @@ test("LogicPlugin: question & action types are sorted ", () => {
 
   logicPlugin.activate();
   expect(actionTypes).toHaveLength(1);
-  expect(actionTypes[0].title).toEqual("Show all action types");
+  expect(actionTypes[0].title).toEqual("All Action Types");
   expect(questions).toHaveLength(1);
-  expect(questions[0].title).toEqual("Show all questions");
+  expect(questions[0].title).toEqual("All Questions");
 
   filterActionType.action();
   expect(actionTypes).toHaveLength(4);
-  expect(actionTypes[0].title).toEqual("Show all action types");
-  expect(actionTypes[1].title).toEqual("Copy question value");
+  expect(actionTypes[0].title).toEqual("All Action Types");
+  expect(actionTypes[1].title).toEqual("Copy answer");
   expect(actionTypes[2].title).toEqual("Show (hide) question");
   expect(actionTypes[3].title).toEqual("Skip to question");
 
   filterQuestion.action();
   expect(questions).toHaveLength(5);
-  expect(questions[0].title).toEqual("Show all questions");
+  expect(questions[0].title).toEqual("All Questions");
   expect(questions[1].title).toEqual("q1");
   expect(questions[2].title).toEqual("q2");
   expect(questions[3].title).toEqual("q4");
@@ -1984,6 +1984,40 @@ test("LogicUI: edit panel dynamic question visibleIf. Filter logic types and del
   logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.choices.length).toBeGreaterThan(3);
   expect(logicTypeName.value).toEqual("question_visibility");
+});
+test("LogicUI: Check panel context with empty actions", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        "type": "dropdown",
+        "name": "question1",
+        "choices": ["item1", "item2"]
+      },
+      {
+        "type": "paneldynamic",
+        "name": "question2",
+        "templateElements": [
+          {
+            "type": "text",
+            "name": "question3",
+          },
+          {
+            "type": "text",
+            "name": "question4",
+          }
+        ]
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  const itemEditor = logic.itemEditor;
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = "question2.panel.question3";
+  expect(expressionEditor.context).toBeTruthy();
+  expect(itemEditor.context).toBeTruthy();
 });
 test("LogicUI: panel dynamic question visibleIf. Filter logic types by context initially", () => {
   const survey = new SurveyModel({

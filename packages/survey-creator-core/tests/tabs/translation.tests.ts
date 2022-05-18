@@ -483,13 +483,17 @@ test("Make invisible locales in language selector, that has been already choosen
   });
   surveyLocalization.supportedLocales = ["en", "fr", "de", "se"];
   const translation = new Translation(survey);
+  const list = translation["chooseLanguagePopupModel"].contentComponentData.model;
   expect(translation.chooseLanguageActions).toHaveLength(4);
   expect(translation.chooseLanguageActions[0].id).toEqual("en");
   expect(translation.chooseLanguageActions[1].id).toEqual("fr");
   expect(translation.chooseLanguageActions[0].visible).toBeFalsy();
+  expect(list.actions[0].visible).toBeFalsy();
   expect(translation.chooseLanguageActions[1].visible).toBeTruthy();
+  expect(list.actions[1].visible).toBeTruthy();
   translation.addLocale("fr");
   expect(translation.chooseLanguageActions[1].visible).toBeFalsy();
+  expect(list.actions[1].visible).toBeFalsy();
   surveyLocalization.supportedLocales = [];
 });
 test("stringsSurvey - text question dataList property, default", () => {
@@ -530,6 +534,23 @@ test("stringsSurvey - text question dataList property, default", () => {
   expect(question.dataList[2]).toEqual("Item3");
 
   settings.translation.sortByName = oldValue;
+});
+test("stringsSurvey - use question's name instead of question's title in title of translation group", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: "Question 1"
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  const page = translation.stringsSurvey.pages[0];
+  const pagePanel = <PanelModel>page.elements[0];
+  const panel = pagePanel.elements[0];
+  expect(panel.name).toEqual("question1");
+  expect(panel.title).toEqual("question1");
 });
 test("stringsSurvey - text question dataList property, several locales", () => {
   const oldValue = settings.translation.sortByName;

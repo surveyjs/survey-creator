@@ -54,6 +54,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.detachElement(this.surveyElement);
     this.surveyElement = surveyElement;
     this.attachElement(this.surveyElement);
+    this.updateActionsProperties();
   }
 
   protected checkActionProperties(): void {

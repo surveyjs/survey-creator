@@ -98,7 +98,7 @@ export class EmbedModel extends Base {
 export class TabEmbedPlugin implements ICreatorPlugin {
   public model: EmbedModel;
   constructor(private creator: CreatorBase) {
-    creator.addPluginTab("embed", this, getLocString("ed.embedSurvey"));
+    creator.addPluginTab("embed", this, "ed.embedSurvey");
   }
   public activate(): void {
     this.model = new EmbedModel(this.creator);

@@ -69,16 +69,13 @@ export class QuestionToolboxCategory extends Base {
     }
   }
 }
-export class QuestionToolboxItem
-  extends Action
-  implements IQuestionToolboxItem {
+export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
   constructor(private item: IQuestionToolboxItem) {
     super(item);
   }
   iconName: string;
   name: string;
   json: any;
-  title: string;
   tooltip: string;
   isCopied: boolean;
   category: string;
@@ -94,6 +91,7 @@ export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey"];
+  static defaultIconName = "icon-default";
   private _orderedQuestions = [
     "text",
     "checkbox",
@@ -109,7 +107,11 @@ export class QuestionToolbox
     "signaturepad"
   ];
 
-  private _questionDefaultSettings = {
+  public static getQuestionDefaultSettings(questionType: string) {
+    return this._questionDefaultSettings[questionType] && this._questionDefaultSettings[questionType]();
+  }
+
+  private static _questionDefaultSettings = {
     imagepicker: () => {
       return {
         choices: [
@@ -219,7 +221,7 @@ export class QuestionToolbox
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
       const json = this.creator.getJSONForNewElement(itemModel.json);
       this.dotsItemPopupModel.toggleVisibility();
-      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json);
+      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel.title);
     });
     this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
       this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
@@ -321,7 +323,7 @@ export class QuestionToolbox
       title: title,
       tooltip: tooltip,
       isCopied: options.isCopied !== false,
-      iconName: !!options.iconName ? options.iconName : "icon-custom-question",
+      iconName: !!options.iconName ? options.iconName : QuestionToolbox.defaultIconName,
       json: !!options.json ? options.json : this.getQuestionJSON(question),
       category: !!options.category ? options.category : ""
     };
@@ -338,9 +340,13 @@ export class QuestionToolbox
    * @see IQuestionToolboxItem
    */
   private getActionByItem(item: IQuestionToolboxItem) {
-    return item instanceof QuestionToolboxItem
-      ? item
-      : new QuestionToolboxItem(item);
+    if (item instanceof QuestionToolboxItem) {
+      return item;
+    }
+    else {
+      item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
+      return new QuestionToolboxItem(item);
+    }
   }
   public addItem(item: IQuestionToolboxItem, index?: number) {
     this.correctItem(item);
@@ -429,6 +435,15 @@ export class QuestionToolbox
     this.keepAllCategoriesExpandedValue = val;
     this.canCollapseCategories = !this.keepAllCategoriesExpanded;
     this.updateCategoriesState();
+  }
+  public updateTitles(): void {
+    this.actions.forEach(action => {
+      const newTitle = editorLocalization.getString("qt." + action.name);
+      if (!!newTitle) {
+        action.title = newTitle;
+        action.tooltip = newTitle;
+      }
+    });
   }
   private updateCategoriesState() {
     var noActive = this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
@@ -657,7 +672,7 @@ export class QuestionToolbox
   }
   private addItemFromJSON(json: any) {
     if (json.showInToolbox === false) return;
-    const iconName: string = json.iconName ? json.iconName : "icon-custom-question";
+    const iconName: string = json.iconName ? json.iconName : QuestionToolbox.defaultIconName;
     let title: string = editorLocalization.getString("qt." + json.name);
     if (!title || title == json.name) {
       title = json.title;
@@ -685,8 +700,8 @@ export class QuestionToolbox
   private getQuestionJSON(question: any): any {
     var json = new JsonObject().toJsonObject(question);
     json.type = question.getType();
-    if (!!this._questionDefaultSettings[json.type]) {
-      var defaultSettings = this._questionDefaultSettings[json.type]();
+    let defaultSettings = QuestionToolbox.getQuestionDefaultSettings(json.type);
+    if (defaultSettings) {
       for (var key in defaultSettings) {
         json[key] = defaultSettings[key];
       }

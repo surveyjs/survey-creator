@@ -41,7 +41,7 @@ test("Test string editor content editable", (): any => {
     "description"
   ).readOnly = true;
 
-  creator.onGetPropertyReadOnly.add(function(editor, options) {
+  creator.onGetPropertyReadOnly.add(function (editor, options) {
     var obj = options.obj;
     if (!obj || !obj.page) return;
 
@@ -117,33 +117,33 @@ test("Test string editor select questions items readonly", (): any => {
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
   Serializer.getProperty("dropdown", "choices").readOnly = false;
 
-  creator.onGetPropertyReadOnly.add(function(editor, options) {
+  creator.onGetPropertyReadOnly.add(function (editor, options) {
     if (options.obj.getType() === "dropdown" && options.propertyName == "choices")
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
 
-  creator.onGetPropertyReadOnly.add(function(editor, options) {
+  creator.onGetPropertyReadOnly.add(function (editor, options) {
     if (options.obj.typeName === "itemvalue" && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
       options.readOnly = false;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
   creator.onGetPropertyReadOnly.clear();
 
-  creator.onGetPropertyReadOnly.add(function(editor, options) {
+  creator.onGetPropertyReadOnly.add(function (editor, options) {
     if (options.obj.typeName === "itemvalue" && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, true, true, true, true, true]);
   creator.onGetPropertyReadOnly.clear();
 
-  creator.onElementAllowOperations.add(function(editor, options) {
+  creator.onElementAllowOperations.add(function (editor, options) {
     if (options.obj.name === "q1")
       options.allowEdit = false;
   });
   expect(checkItemEdit()).toEqual([true, true, false, false, true, true]);
 
-  creator.onCollectionItemAllowOperations.add(function(editor, options) {
+  creator.onCollectionItemAllowOperations.add(function (editor, options) {
     if (options.obj.name == "q0" && options.collection.indexOf(options.item) == 0)
       options.allowEdit = false;
     if (options.obj.name == "q1" && options.collection.indexOf(options.item) == 1)
@@ -246,13 +246,13 @@ test("Test string editor content editable for matrix and panels", (): any => {
   };
 
   var itemValue;
-  itemValue = <ItemValue> (<QuestionMatrixDropdownModel>creator.survey.getQuestionByName("mxDDQ")).renderedTable.rows[1].cells[1].question.choices[0];
+  itemValue = <ItemValue>(<QuestionMatrixDropdownModel>creator.survey.getQuestionByName("mxDDQ")).renderedTable.rows[1].cells[1].question.choices[0];
   expect(itemValue.locText.renderAs).toEqual(LocalizableString.defaultRenderer);
 
-  itemValue = <ItemValue> (<QuestionMatrixDropdownModel>creator.survey.getQuestionByName("mxDynQ")).renderedTable.rows[1].cells[1].question.choices[0];
+  itemValue = <ItemValue>(<QuestionMatrixDropdownModel>creator.survey.getQuestionByName("mxDynQ")).renderedTable.rows[1].cells[1].question.choices[0];
   expect(itemValue.locText.renderAs).toEqual(LocalizableString.defaultRenderer);
   const singleQ = <QuestionRadiogroupModel>creator.survey.getQuestionByName("singleQ");
-  itemValue = <ItemValue> (singleQ.choices[0]);
+  itemValue = <ItemValue>(singleQ.choices[0]);
   expect(itemValue.locText.renderAs).toEqual("editableStringRendererName");
   const panelQ = <QuestionRadiogroupModel>creator.survey.getQuestionByName("panelQ");
   itemValue = panelQ.choices[0];
@@ -298,4 +298,25 @@ test("Test string editor inplaceEditForValues", (): any => {
   expect(itemValue.locText.text).toEqual("newItem");
   expect(itemValue.value).toEqual("newItemValue");
   expect(itemValue.text).toEqual("newItem");
+});
+test("Test string editor onHtmlToMarkdown event", (): any => {
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { name: "q", type: "text" }
+        ]
+      }
+    ]
+  });
+  const q = <QuestionRadiogroupModel>creator.survey.getQuestionByName("q");
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+  expect(stringEditorSurveyTitle.editAsText).toEqual(true);
+  creator.onHtmlToMarkdown.add((survey, options) => {
+    options.text = options.html.replace(/\$/g, "*");
+  });
+  stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+  expect(stringEditorSurveyTitle.editAsText).toEqual(false);
 });

@@ -39,6 +39,16 @@ export var settings = {
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
   },
   defaultNewSurveyJSON: {},
+  designer: {
+    /**
+     * The default question type on clicking Add Question button.
+     */
+    defaultAddQuestionType: "text",
+    /**
+     * Set this property to false, to hide "Add Question" button on designer surface
+     */
+    showAddQuestionButton: true
+  },
   logic: {
     visibleActions: [],
     logicItemTitleMaxChars: 50,
@@ -117,6 +127,10 @@ export interface ISurveyCreatorOptions {
     object: any,
     property: JsonObjectProperty,
     editor: Question
+  );
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
   );
   onPropertyEditorUpdateTitleActionsCallback(
     object: any,
@@ -215,6 +229,10 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): boolean {
     return true;
   }
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
+  ) {}
   onPropertyEditorCreatedCallback(
     object: any,
     property: JsonObjectProperty,

@@ -1,6 +1,6 @@
 import * as Survey from "survey-core";
 import { QuestionConvertMode, settings } from "./settings";
-import { IQuestionToolboxItem } from "./toolbox";
+import { IQuestionToolboxItem, QuestionToolbox } from "./toolbox";
 
 export class QuestionConverter {
   public static convertInfo = {};
@@ -55,6 +55,15 @@ export class QuestionConverter {
     return <Survey.Question>newQuestion;
   }
   private static updateJSON(json: any, convertToClass: string, defaultJSON: any): any {
+    let questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
+    if(questionDefaultSettings) {
+      if(convertToClass === "image" && !json.imageLink) {
+        json.imageLink = questionDefaultSettings.imageLink;
+      }
+      if(convertToClass === "imagepicker" && !json.choices) {
+        json.choices = questionDefaultSettings.choices;
+      }
+    }
     if(convertToClass === "rating" && json.choices) {
       if(!defaultJSON || !defaultJSON.choices ||
         !Survey.Helpers.isArraysEqual(defaultJSON.choices, json.choices)) {

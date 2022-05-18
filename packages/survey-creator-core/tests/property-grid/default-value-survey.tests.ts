@@ -134,7 +134,7 @@ test("Cells-Editor", () => {
   expect(cellsEditor.editMatrix.columns[0].name).toEqual("Column 1");
   expect(cellsEditor.editMatrix.columns[0].title).toEqual("Column 1 Text");
   expect(cellsEditor.editMatrix.rows[0].value).toEqual("default");
-  expect(cellsEditor.editMatrix.rows[0].text).toEqual("Default cells texts");
+  expect(cellsEditor.editMatrix.rows[0].text).toEqual("Default texts");
   expect(cellsEditor.editMatrix.rows[1].value).toEqual("Row 1");
   expect(cellsEditor.editMatrix.rows[2].value).toEqual("Row 2");
   expect(cellsEditor.editMatrix.rows[2].text).toEqual("Row 2 Text");

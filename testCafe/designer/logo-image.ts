@@ -15,7 +15,7 @@ test("Set logo in property grid and remove it in designer", async (t) => {
   })();
   await t
     .click(Selector(".spg-title").withText(logoSection))
-    .typeText(Selector("input[aria-label=Logo]"), base64image)
+    .typeText(Selector("input[aria-label=\"Logo (URL or base64-encoded string)\"]"), base64image)
     .pressKey("tab")
     .expect(Selector("img").withAttribute("src", base64image).exists).ok()
     .click(Selector(".svc-logo-image .svc-image-item-value-controls__remove"))

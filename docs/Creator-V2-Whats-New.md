@@ -1,309 +1,193 @@
-# SurveyJS Creator V2: What's new
+# What's New in Survey Creator V2
 
-Welcome to the major update of SurveyJS Creator. A lot of hard work has been done to release the Creator's new version - Creator V2. There are many benefits in this version that we hope you will like. Some of the key highlights include:  
+This help topic gives a detailed overview of UI, UX, and internal design changes that we introduced into the latest major update of the Survey Creator.
 
-- [KnockoutJS - complaints got heard](#knockout-complaints)
-- [React version developed](#react-version)
-- [Major changes in UX/UI](#ui-changes)
-  - [Page navigation](#page-navigation)
+- [Knockout - we addressed your concerns](#knockout---we-addressed-your-concerns)
+  - [Issue 1: Use of the `eval()` function](#issue-1-use-of-the-eval-function)
+  - [Issue 2: Component as a black box](#issue-2-component-as-a-black-box)
+  - [Issue 3: Knockout adoption decline](#issue-3-knockout-adoption-decline)
+  - [Solution](#solution)
+- [Native Survey Creator for React](#native-survey-creator-for-react)
+- [Major UI/UX changes](#major-uiux-changes)
+  - [New Toolbox and Property Grid design](#new-toolbox-and-property-grid-design)
   - [Action buttons](#action-buttons)
+  - [Page navigation](#page-navigation)
   - [Adorners](#adorners)
-  - [Element creation](#element-creation)
-  - [Element selector](#element-selector)
-  - [Toolbox and Property Grid](#toolbox-and-property-grid)
+  - [Survey element creation](#survey-element-creation)
+  - [Survey element selector](#survey-element-selector)
   - [Translation tab](#translation-tab)
   - [Logic tab](#logic-tab)
-  - [Test tab](#test-tab)
+  - [Preview survey on different devices](#preview-survey-on-different-devices)
 - [Technical changes](#technical-changes)
-  - [Modifications made evolutionarily](#modifications-made-evolutionarily)
-  - [Changes in SurveyJS Library](#changes-in-surveyjs-library)
-  - [Benefits of using SurveyJS elements in Creator](#benefits)
-- [Platforms and plans](#platforms-and-plans)
-
-
->**Note - Migrate with Ease:**  
-Although we have rewritten almost all Creator code in V2, the most of your V1-related code should continue to work.   
-If you'd like to learn how to migrate to the new V2 version, refer to [Creator V2 Migration Guide](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2).  
-
+  - [Survey Creator UI elements are surveys](#survey-creator-ui-elements-are-surveys)
+  - [Lazy Rendering](#lazy-rendering)
+  - [Alternative Rendering for Adorners](#alternative-rendering-for-adorners)
+- [Native Survey Creator for Angular and Vue (Planned)](#native-survey-creator-for-angular-and-vue-planned)
+- [Migration to the New Survey Creator](#migration-to-the-new-survey-creator)
 
 <a id="knockout-complaints"></a>
 
-## KnockoutJS - complaints got heard
+## Knockout - we addressed your concerns
 
-From the very beginning of SurveyJS, we used [KnockoutJS](https://knockoutjs.com/) to implement the first version of Creator - Creator V1. And the use of this library was one of the biggest complaint we have received from Creator V1 customers.
+Survey Creator V1 depended on [Knockout](https://knockoutjs.com/). This fact was one of the most frequent concerns we heard from our customers. Indeed, the dependency raised the following important issues. 
 
+### Issue 1: Use of the `eval()` function
 
-### Problem: loss of popularity
-[Knockout](https://knockoutjs.com/) is a tiny JavaScript MVVM framework that works great for many scenarios. We chosen it because it works perfectly with all popular web frameworks, it is small and lightweight, and so there was no reason to invent our own MVVM library. However, nowadays [Knockout](https://knockoutjs.com/) seems to lose the battle with the Angular, React and Vue frameworks. [Knockout](https://knockoutjs.com/) becomes a rare choice for JavaScript developers. 
+Knockout uses the [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) function to process templates. This fact opens a possibility of running malicious code on the user's machine if an application developer forgets to sanitize the template code. Such security risks might prevent companies from using Knockout and, therefore, SurveyJS.
 
+### Issue 2: Component as a black box
 
-### Problem: eval() function limitation
-[Knockout](https://knockoutjs.com/) has limitations. And the biggest one is the use of the [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) function in its code. Although it is OK that [Knockout](https://knockoutjs.com/) runs eval() to process templates, it is still quite dangerous to have the `eval()` function in the production code. An incorrect use of the `eval()` by application developers may end up running malicious code on the user's machine. That is why companies usually minimize their security risks (by adding security checks integrated into their DevOps pipelines) and do not allow applications to use the `eval()` function at all. Such security concerns might prevent companies from using third-party JavaScript libraries which have `eval()` function calls inside them.
+Although Survey Creator for Knockout included a rich API, the component was perceived by Angular, Vue, and React developers as a black box that in many cases did not fit well into the application lifecycle. 
 
+### Issue 3: Knockout adoption decline
 
-### Problem: a black box
-Another issue with [Knockout](https://knockoutjs.com/) is that it makes SurveyJS Creator a black box for many of our customers who use other client frameworks to develop their applications. Although [Knockout](https://knockoutjs.com/) is still a JavaScript Library, it might not fit well to such JavaScript applications' life cycles.  
-It appears that we should provide a better solution for [React](https://reactjs.org/), [Angular](https://angular.io/), and [Vue](https://vuejs.org/) developers.  
-
-
+Knockout enriches a pure JavaScript application with features like templates, declarative binding, and automatic UI updates. It was very popular when SurveyJS development started back in 2015. However, with the advent of more powerful front-end frameworks (Angular, Vue, React), Knockout popularity started to decline. Nowadays, JavaScript developers rarely use Knockout in new projects.
 
 ### Solution
-At the current moment, with the release of SurveyJS Creator V2, we have **Creator for Knockout** and a new **Creator for React**. And we are going to develop versions for [Angular](https://angular.io/) and [Vue](https://vuejs.org/) in the near future.
 
-
+The new Survey Creator introduces a native implementation for React (more on this below). Implementations for Angular and Vue are planned for future development. For those customers who still use Knockout in their applications, we also ship an updated Survey Creator for Knockout with new look and feel that matches the React version.
 
 <a id="react-version"></a>
 
-## React version developed
-We are releasing a new platform-specific version of Creator - **SurveyJS Creator for React**. In this version, SurveyJS Creator renders all its elements as React components. You can override the default render of our React components or introduce your own React components.
+## Native Survey Creator for React
 
+New Survey Creator for React is a composition of true React components. The native implementation became possible because we separated the platform-independent model code (now distributed as the [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package) from the platform-specific rendering code (the [`survey-creator-react`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-react) package). You can override the default rendering functions of our React components and integrate your own React components (view the [Override the Property Grid Component](https://surveyjs.io/Examples/Survey-Creator?id=overridepropertygrid&platform=ReactjsV2) example). We implemented the same concept in the SurveyJS Library earlier.
 
-### Creator library goes React relying on the core Library's concept
-We decided to implement the React version of SurveyJS Creator using the same concept that we realized earlier in our main SurveyJS Library. In SurveyJS Library, the main code that implements the Survey Model (we call this code part SurveyJS Core) was for a long time written in a platform-independent way and was separated from the code that renders survey elements in a platform-specific manner (for instance, by using [react components](https://github.com/surveyjs/survey-library/tree/master/src/react) in case of the React version).
-
-We have applied absolutely the same approach in the SurveyJS Creator V2 library. As a result, we now have two code parts in the Creator library: a [platform-independent part](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) (Creator Core that implements the Creator's model) and a [React-specific render part](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-react). This solution has two main benefits: from now on we should never duplicate our efforts for every supported platform when we modify logic of the Creator model; and we now deliver our Creator as a React component that can be used as any other typical React component. Moreover, since our Creator for React internally uses our core SurveyJS Library for React, you receive an ability to programmatically integrate any required external React component into both libraries - the Library and the Creator.  
-The following examples give practical illustrations of how to use a popular [React Select](https://react-select.com/home) component: [React-Select in SurveyJS Library](https://surveyjs.io/Examples/Library?id=custom-widget-react-select) and [React-Select in SurveyJS Creator](https://surveyjs.io/Examples/Survey-Creator?id=react-select). 
-
-
-### Not a black box anymore
-With V2, SurveyJS Creator for React is not anymore a black box for React developers. You can now override Creator elements and change their render and behavior. Refer to the [Override the Property Grid's React component](https://surveyjs.io/Examples/Survey-Creator?id=overridepropertygrid&platform=ReactjsV2) example to see how to add a new element on top of the Creator's Property Grid.
-
-
+Most of the UI elements in the new Survey Creator (Property Grid, Translation and Logic Tabs, modal editors) are stylized surveys from our own SurveyJS Library for React. This feature allows you to integrate any 3rd-party React component into the SurveyJS library and then reuse the same configuration to integrate the component into the Survey Creator. View examples that show how to integrate the [React Select](https://react-select.com/home) component [into a standalone survey](https://surveyjs.io/Examples/Library?id=custom-widget-react-select) or [into the Survey Creator](https://surveyjs.io/Examples/Survey-Creator?id=react-select).
 
 <a id="ui-changes"></a>
 
-## Major changes in UX/UI
-We have introduced a lot of changes in Creator V2. Actually, we have rewritten almost all code from scratch to make Creator's UI cleaner, more intuitive and adaptive.
+## Major UI/UX changes
 
+We redesigned most parts of the Survey Creator to make its UI more adaptive and UX more intuitive. Refer to new feature descriptions in this section for details.
 
-<a id="page-navigation"></a>
+<a id="toolbox-and-property-grid"></a>
 
-### Page navigation improved
-We have completely changed the way a user works with surveys that have multiple pages. Instead of displaying pages in horizontally oriented tabs, we now use a Microsoft Word inspired page layout (all pages, one by one) with a vertically oriented page navigator widget.
+### New Toolbox and Property Grid design
 
-![Page navigator](images/creator-v2-page-navigator.png)  
-_Page navigator_
+Re-designed Toolbox and Property Grid look modern and adapt themselves to different layouts.
 
-<!-- 
-<p align="center">
-  
-![Page navigator](images/creator-v2-page-navigator.png)
-
-_Page navigator_
-</p> 
--->
-
-
-
+<img src="./images/creator-v2-toolbox-and-property-grid.png" alt="Survey Creator - Toolbox and Property Grid" width="75%">
 
 <a id="action-buttons"></a> 
 
-### Action buttons rearranged
+### Action buttons
 
-Action buttons used to be split between different tabs (Designer, Logic, etc.). Now, these actions are displayed within the question that you configure and can also be accessed programmatically.
+We now display action buttons within their corresponding questions (instead of above the questions). Programmatic access to the buttons is now possible.
 
-![Action buttons](images/creator-v2-action-buttons.png)  
-_Action buttons_
+<img src="./images/survey-creator-action-buttons.png" alt="Survey Creator - Action buttons rearranged" width="100%">
 
 If you click the button that changes the question type, you will see a drop-down list of all supported types. In Survey Creator V1, this list was limited to the types that were interchangeable with the current element type. With the full list, you can now add multiple default questions to the survey to specify their types afterwards.
 
-![List of supported question types](images/creator-v2-question-types.png)   
-_Drop-down list of supported question types_
+<img src="./images/survey-creator-question-types.png" alt="Survey Creator - Question types dropdown" width="100%">
 
-If you switch between non-interchangeable question types, the question configuration may be lost. Use Undo and Redo buttons to roll back or reinstate the previous configuration. To revert to old behavior (limit the list to interchangeable types only), use the following code:
+If you switch between non-interchangeable question types, the question configuration may be lost. Use Undo and Redo buttons to roll back or reinstate the previous configuration. Alternatively, you can revert to old behavior. Use the following code to limit the list to interchangeable types only:
 
 ```js
 SurveyCreator.settings.questionConvertMode = 1;
 ```
 
+<a id="page-navigation"></a>
+
+### Page navigation
+
+Previously, users configured each survey page in an individual tab. In the new Survey Creator, pages are displayed one under another. To reach a certain page, users can scroll the design surface or select the page in the page navigator.
+
+<img src="./images/survey-creator-updated-page-navigation.png" alt="Survey Creator - Page navigator update" width="100%">
+
 <a id="adorners"></a>
 
-### Adorners concept enhanced
-We've greatly modified element adorners displayed within pages, panels and questions. Adorners acquire a lot of new functionality.  
+### Adorners
 
-With new adorners, users can edit any string element in a survey by simply clicking on the element.
+Adorners are design-surface controls for survey element manipulation. In the new Survey Creator, adorners allow users to edit text inline.
 
+<img src="./images/creator-v2-adorner-column-title.png" alt="Survey Creator - Element creation" width="75%">
 
-![Column title adorner](images/creator-v2-adorner-column-title.png)  
-_Column title adorner_
+Adorners also implement the capability to change column cell properties directly in the designer.
 
-
-Adorners allow users to setup column cell properties directly in the designer.
-
-![Setup column cell editor](images/creator-v2-adorner-column-setup.png)  
-_Setting up column cell properties_
-
-
+<img src="./images/creator-v2-adorner-column-setup.png" alt="Survey Creator - Element creation" width="75%">
 
 <a id="element-creation"></a>
 
-### Element creation made easier
-In the designer, users can quickly add new survey elements (such as questions or panels) by clicking the "Add Question" button and by using an ellipses button.
+### Survey element creation
 
-![Add new question](images/creator-v2-element-creation.png)  
-_Adding a new question from the designer_
+In the designer, users can click Add Question to quickly add new survey elements. The ellipsis button allows users to select the type of new questions.
 
-
+<img src="./images/creator-v2-element-creation.png" alt="Survey Creator - Element creation" width="75%">
 
 <a id="element-selector"></a>
 
-### Element selector modified
-We have improved the appearance of the survey element selector. In addition, it now displays the filter box only if the element list contains more than a specific number of elements (ten by default).
+### Survey element selector
 
-![Element selector](images/creator-v2-element-selector-2.png)  
-_Element selector_
+The survey element selector now displays the survey structure as a tree. In addition, users can use the search box to filter elements. The search box appears if the element list contains more than 10 items.
 
-
-
-<a id="toolbox-and-property-grid"></a>
-
-### Toolbox and Property Grid re-thought
-We have completely modified the design of Creator's Toolbox and Property Grid composite elements. Now they look more user-friendly and better adapt themselves to different layouts.  
-
-![Toolbox and Property Grid](images/creator-v2-toolbox-and-property-grid.png)  
-_Toolbox and Property Grid_
-
+<img src="./images/creator-v2-element-selector-2.png" alt="Survey Creator - Element selector in the Property Grid" width="75%">
 
 <a id="translation-tab"></a>
 
-### Translation tab improved
-The Translation tab's contents get improvements due to embedding the redesigned Property Grid and incorporating a survey widget with Matrix questions.
+### Translation tab
 
-![Translation tab](images/creator-v2-translation-tab-2.png)  
-_Translation tab_
+Previously, the Translation tab had individually-designed layout and controls. In the new Survey Creator, this tab displays our own survey component with Matrix questions. In addition, the Translation tab now includes a Property Grid that allows users to select required languages.
 
+<img src="./images/creator-v2-translation-tab-2.png" alt="Survey Creator - Translation tab" width="75%">
 
 <a id="logic-tab"></a>
 
-### Logic tab redesigned
-We've fully redesigned the Creator's Logic tab. A logical item can now be created and edited on the same screen.
+### Logic tab
 
-![Logic item editing](images/creator-v2-logic-tab-item-editing.png)  
-_Editing of a logical item_
+Users can now create and edit logic rules within the same view.
 
-A user can filter logical items by questions (to show only items related to a particular question) or by a logical type. Such filtering is useful for complex surveys that have a lot of logical conditions defined.
+<img src="./images/creator-v2-logic-tab-item-editing.png" alt="Survey Creator - Logic tab" width="75%">
 
-![Logic filtering](images/creator-v2-logic-tab-filtering.png)  
-_Filtering of logical items_
+We also added the capability to filter rules by questions or action types. This capability is useful for surveys with complex logic.
 
+<img src="./images/creator-v2-logic-tab-filtering.png" alt="Survey Creator - Question selector in the Logic tab" width="75%">
 
 <a id="test-tab"></a>
 
-### Test tab improved
-We have added a new Device Type setting into the Test tab. With this switch, users can check how the tested survey looks on different devices, including smartphones.
+### Preview survey on different devices
 
-![Test tab's device type](images/creator-v2-device-type.png)  
-_Switching device type_
+We renamed the Test Survey tab to Preview and added a device selector that allows users to preview the created survey on most popular devices.
 
-
+<img src="./images/creator-v2-device-type.png" alt="Survey Creator - Preview tab" width="75%">
 
 <a id="technical-changes"></a>
 
 ## Technical changes
-There are many technical changes that we introduce into our libraries with the release of SurveyJS Creator V2. 
 
+### Survey Creator UI elements are surveys
 
-<a id="modifications-made-evolutionarily"></a>
+In the new Survey Creator, we use our own SurveyJS Library to render most of the UI elements. The main benefit of this approach is that we didn't have to implement native rendering because the SurveyJS Library already supports it for all frameworks.
 
-### Modifications made evolutionarily
-Going with Creator V2 does not require you to use any separate version of SurveyJS Library that is specifically dedicated to Creator V2. A remarkable notion is that both Creator versions - old (Creator V1) and new (Creator V2) - work with the same version of SurveyJS Library. 
+This new internal design also prompted us to extend the Library with new features used in the Survey Creator. For example, question titles can now contain [context actions](https://surveyjs.io/Examples/Library?id=survey-titleactions), and [Comment](https://surveyjs.io/Documentation/Library?id=questioncommentmodel) questions can [automatically grow or shrink](https://surveyjs.io/Documentation/Library?id=questioncommentmodel#autoGrow) the input field to accommodate the content.
 
-Of course, the development of Creator V2 required us to introduce a lot of new functionality and performance improvements into SurveyJS Library. These changes are due to the fact that the most of UI elements in Creator V2 are SurveyJS Library elements. However, we tried to modify SurveyJS Library gradually, in an evolutional manner, instead of making dramatic revolutionary changes.
+Since Survey Creator UI elements are surveys, you can customize them as you would customize surveys. For example, the Property Grid is a one-page survey in which every property is a question. To introduce a new or override an existing property editor, you need to define a custom question JSON configuration and implement functions that survey events call internally.
 
-In Creator V1, we already used UI elements of SurveyJS Library but in just two places: within the Designer tab (on the design surface) and within the Test tab (where an instance of a survey widget is displayed for testing purposes).
+[View Custom Property Editor example](https://surveyjs.io/Examples/Survey-Creator?id=custompropertyeditor&platform=ReactjsV2#content-js)
 
-In Creator V2, we have an improved situation. SurveyJS Library elements are now used in a more extensive way - almost everywhere within a Creator UI.
+### Lazy Rendering
 
+To improve performance on large multi-page surveys, we introduce support for Lazy Rendering to our SurveyJS Library. This feature allows the survey to render questions outside the viewport as skeletons instead of rendering them in full.
 
-<a id="changes-in-surveyjs-library"></a>
+[View Lazy Rendering example](https://surveyjs.io/Examples/Library?id=survey-lazy)
 
-### Changes in SurveyJS Library
-Some evolutionary changes in SurveyJS Library are listed below. 
+### Alternative Rendering for Adorners
 
-
-#### Performance improved for multi-page surveys
-Previously, SurveyJS Library could render up to 100 questions on one page with a good performance. However, when we started to implement support for Microsoft Word page layout in Creator V2 and tried to display all pages at once, we began to encounter performance issues. For instance, it was a problem to render 40 pages at once if each page contained 25 questions (a total of 1000 questions to render).  
-
-Since we do have customers who develop complex surveys containing more than 1000 questions, we had to resolve such performance issues and reduce the render time (by keeping it below 1 second for large surveys).  
-
-To improve performance, we introduced support for [lazy rendering](https://surveyjs.io/Examples/Library?id=survey-lazy&platform=Reactjs) in our SurveyJS Library. This feature forces a survey to render question skeletons for questions that are not visible on the screen. As a result, we dramatically optimized operation performance in the SurveyJS model.
-
-
-#### New customizable render of UI elements 
-Another big step forward is a change to the way we render element adorners on the Creator's design surface. 
-
-In Creator V1, we used the [after render](https://surveyjs.io/Examples/Library?id=survey-lazy&platform=Reactjs) technique for this purpose. However, for Creator V2, we wanted to create a more effective and reliable solution instead of the necessity to modify DOM elements after their render, which actually looked more like a hack for us.
-
-As a result, we have implemented an alternative render mechanism for SurveyJS Library elements. A developer can now register a new render for UI elements in SurveyJS Library and use a custom render code instead of the default one. This allows us to introduce better support for in-place editing within the Creator's designer. 
-For example, to make all our survey strings editable in Creator V2, we just override the default string element rendering with a `DIV` that supports editable content. 
-
-![Rating text adorner](images/creator-v2-rating-text-adorner-2.png)  
-_Rating text adorner_
-
-
-
-#### Creator elements as SurveyJS Library widgets
-In Creator V2, many UI elements are represented by SurveyJS Library elements/widgets, in particular: the Toolbox, Property Grid, element selectors, tabs, a list of logic items in the Logic tab, a list of matrices in the Translation tab, etc. Such Library elements provide out-of-the-box support for better adaptivity and accessibility.  
-
-![Toolbox adaptivity](images/creator-v2-toolbox-adaptivity-2.png)  
-_Toolbox adaptivity_
-
-
-
-#### Property Grid rendered as a survey
-When we started to write code for the Creator's new Property Grid, we realized that we were going to implement one more widget for data entering. But we already had a widget dedicated to entering data  - this is our SurveyJS by itself. We decided to add some missed functionality to our SurveyJS Library and turn all data-entry widgets in Creator V2 into Survey widgets.  
-
-As a result, the Property Grid in Creator V2 is now a one-page survey (with turned-off page navigation) that contains several [expandable panels](https://surveyjs.io/Examples/Library?id=questiontype-panel). Every property editor is a survey question. To introduce a new or override an existing property editor, you just need to define a custom question JSON and optionally realize several functions that are called by survey events. 
-For more details, refer to the [Add a custom property editor for a custom property](https://surveyjs.io/Examples/Survey-Creator?id=custompropertyeditor&platform=ReactjsV2#content-js) example.  
-Note that while developing the Property Grid, we have additionally introduced a lot of small improvements in SurveyJS Library, such as [context actions](https://surveyjs.io/Examples/Library?id=survey-titleactions) in question titles and many others.
-
-![Choices property editor](images/creator-v2-choices-property-editor-2.png)  
-_Context actions in the choices property editor_
-
-
-
-#### Logic tab specificities
-A matrix form in the Logic tab is represented by a survey question of the dynamic matrix type. It uses a new [detail panel](https://surveyjs.io/Examples/Library?id=questiontype-matrixdynamic-detail) functionality. In the detail panel, we use two dynamic  panels: one to edit conditions and another - to edit logic actions.
-
-<!-- 
-<p align="center">
-  
-![Detail panel in logic tab](https://github.com/surveyjs/survey-creator/blob/master/docs/images/creator-v2-logic-item-editing.png?raw=true)
-
-_Displaying a detail panel in the Logic tab_
-</p> 
--->
-
-
-#### Translation tab specificities
-The Translation tab's content is rendered as a survey containing a dropdown matrix question with a column cell type set to comment.
-To create a better layout within the Translation tab, we introduced a new auto grow/shrink functionality into the comment question type. A comment automatically changes the number of its rows (and so its height and the height of the entire row in a matrix) depending upon the content entered by a user.
-
-![Comment auto-grow](images/creator-v2-comment-row-autogrow.png)  
-_Comment auto-grow_
-
-<!-- 
-(#image animated gif) 
--->
-
-
-<a id="benefits"></a>
-
-### Benefits of using SurveyJS elements in Creator
-In V2, we are trying to implement Creator UI with the help of SurveyJS Library UI elements in all possible places. We keep the number of custom UI elements developed for Creator to a minimum. To give an example of a custom UI widget that was specifically designed and implemented for Creator V2, the page navigator can be taken.
-
-The greatest benefit of using SurveyJS Library elements in the Creator UI is that you do not need to write their platform-specific render by yourself in Creator. In SurveyJS Library, we already render these elements for all supported platforms, and their render have been tested in thousands web applications of our clients.
-
-Another benefit is that the SurveyJS Library now supports dozens of new scenarios out of the box due to the Creator-specific demands. The massive changes we are introducing into the SurveyJS Library make it more and more feature-rich and impressive in comparison with other competitive solutions.
-
-
+Previously, we used to render survey elements first, and only then added [adorners](https://surveyjs.io/Documentation/Survey-Creator?id=survey-customization#specify-adorner-availability). This wasn't a very effective solution because we modified the DOM twice. The new version only modifies the DOM once and adds adorners right away. This was made possible because the new Survey Creator allows you to register new element rendering functions that override the default functions. For example, to implement in-place text editing in the Designer, we render an element that supports editable content instead of the default string element.
 
 <a id="platforms-and-plans"></a>
 
-## Platforms and plans
-Currently, we support two platforms in Creator V2: [React](https://reactjs.org/) and [Knockout](https://knockoutjs.com/). If you develop a React application, use Creator for React. For all other platforms, use the Knockout version for the time being. We are working on an [Angular](https://angular.io/) version and we are going to introduce a [Vue](https://vuejs.org/) version later. As soon as we release these versions, you will be able to use them to replace the Knockout version in your Angular and Vue applications.
+## Native Survey Creator for Angular and Vue (Planned)
 
+The new Survey Creator includes native support for React and Knockout. We also plan to develop native versions for Angular and Vue in the future. For now, you can integrate the Knockout version into your Angular or Vue application as described in the following articles:
 
-## How to get Creator V2
-If you purchased a commercial license for the SurveyJS Creator or SurveyJS Pro within a year of the Creator V2 release, you can already start using Creator V2.  
-If your subscription is over, you can continue to use the old version as long as you wish. To get our latest versions (including Creator V2), you will have to [renew your subscription](https://surveyjs.io/Buy#surveyjs-updates).
+- [Get Started with Survey Creator in Angular](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-angular)
+- [Get Started with Survey Creator in Vue](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue)
+
+## Migration to the New Survey Creator
+
+If you already have a [commercial license](https://surveyjs.io/Licenses#SurveyCreator) for the Survey Creator or a [SurveyJS Pro subscription](https://surveyjs.io/Home/Buy?#surveyjs-products), and you purchased them within a year of the new Survey Creator release, then you can migrate to the new version now without additional payment.
+
+If your subscription has ended, you can continue using the old Survey Creator version as long as you wish. To upgrade to the latest SurveyJS releases that include the new Survey Creator, [renew your subscription](https://surveyjs.io/Buy#surveyjs-updates).
+
+Refer to the following help topic for information on how to migrate from Survey Creator V1 to V2: [Migration from Survey Creator V1 to V2](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2).

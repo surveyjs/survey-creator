@@ -226,6 +226,8 @@ export var propertyGridCss = {
     buttonRemove: "spg-matrixdynamic__remove-btn",
     iconAdd: "",
     iconRemove: "",
+    dragElementDecorator: "spg-drag-element__svg",
+    iconDragElement: "#icon-v2dragelement_16x16",
     iconDrag: "spg-matrixdynamic__drag-element",
     dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
@@ -287,5 +289,13 @@ export var propertyGridCss = {
       buttonExpanded: "",
       buttonCollapsed: ""
     }
-  }
+  },
+  actionBar: {
+    root: "spg-action-bar",
+    item: "spg-action-button",
+    itemPressed: "spg-action-button--pressed",
+    itemAsIcon: "spg-action-button--icon",
+    itemIcon: "spg-action-button__icon",
+    itemTitle: "spg-action-button__title",
+  },
 };

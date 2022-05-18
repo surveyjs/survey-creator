@@ -20,17 +20,7 @@
 }
 
 .st-no-strings {
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 400;
-  font-size: calcSize(2);
-  color: $foreground;
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  overflow: hidden;
+  @include centerText;
 }
 
 .st-content {
@@ -90,10 +80,11 @@
 }
 
 .st-table__cell {
-  height: calcSize(5);
+  box-sizing: border-box;
+  vertical-align: top;
   background-color: $primary-bg-color;
   border-bottom: 1px solid $border-light;
-  padding: 0;
+  padding: calcSize(1) 0;
 }
 
 .st-table__cell:first-child {
@@ -120,14 +111,13 @@
 
 .st-comment {
   @include defaultFont;
-
+  display: block;
   width: calc(100% - 3 * #{$base-unit});
   border: unset;
   outline: none;
   background-color: $primary-bg-color;
   resize: none;
   padding: 0;
-  margin-top: calcSize(0.5);
 }
 
 .sd-translation-line-skeleton {

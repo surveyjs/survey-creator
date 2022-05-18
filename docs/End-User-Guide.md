@@ -1,258 +1,430 @@
-# End-User Guide - SurveyJS Creator
+# End-User Documentation for Survey Creator
 
-This page has been prepared as a starting point for documentation aimed at end-users of SurveyJS.
+This document illustrates how to perform basic tasks in the Survey Creator component. The component's UI is organized in multiple tabs. Each section in this document describes an individual tab.
 
-<a id="basics"></a>
-## Basic Overview/Quick Start Guide
+<img src="images/survey-creator-tabs.png" alt="Survey Creator - Tabs" width="100%" usemap="#tabs-map">
 
-The SurveyJS [Survey Creator](https://surveyjs.io/create-survey) page contains the survey design area with the Toolbox to the left and the Properties window to the right.
+<map name="tabs-map">
+    <area alt="Designer Tab" title="Designer Tab" href="#designer-tab" coords="10,67,140,135" shape="rect">
+    <area alt="Preview Tab" title="Preview Tab" href="#preview-tab" coords="152,68,274,135" shape="rect">
+    <area alt="Logic Tab" title="Logic Tab" href="#logic-tab" coords="282,68,392,135" shape="rect">
+    <area alt="JSON Editor Tab" title="JSON Editor Tab" href="#json-editor-tab" coords="398,67,545,135" shape="rect">
+    <area alt="Translation Tab" title="Translation Tab" href="#translation-tab" coords="561,68,713,136" shape="rect">
+</map>
 
-![Overview of the SurveyJS Creator interface](images/survey-editor-overview.png)
+- [Designer Tab](#designer-tab)
+  - [Question and Panel Types](#question-and-panel-types)
+    - [Single Input](#single-input)
+    - [Checkbox](#checkbox)
+    - [Radiogroup](#radiogroup)
+    - [Dropdown](#dropdown)
+    - [Comment](#comment)
+    - [Rating](#rating)
+    - [Ranking](#ranking)
+    - [Image Picker](#image-picker)
+    - [Boolean](#boolean)
+    - [Image](#image)
+    - [HTML](#html)
+    - [Signature Pad](#signature-pad)
+    - [Expression](#expression)
+    - [File](#file)
+    - [Single-Choice Matrix](#single-choice-matrix)
+    - [Multiple-Choice Matrix](#multiple-choice-matrix)
+    - [Dynamic Matrix](#dynamic-matrix)
+    - [Multiple Text](#multiple-text)
+    - [Panel](#panel)
+    - [Dynamic Panel](#dynamic-panel)
+  - [Adorners](#adorners)
+  - [How to: Add a question to the survey](#how-to-add-a-question-to-the-survey)
+  - [How to: Add a page to the survey](#how-to-add-a-page-to-the-survey)
+  - [How to: Change the question type](#how-to-change-the-question-type)
+  - [How to: Clear the survey](#how-to-clear-the-survey)
+- [Preview Tab](#preview-tab)
+  - [How to: Re-run the preview](#how-to-re-run-the-preview)
+  - [How to: Preview the survey on different devices](#how-to-preview-the-survey-on-different-devices)
+- [Logic Tab](#logic-tab)
+  - [How to: Add a new rule](#how-to-add-a-new-rule)
+  - [How to: Edit a rule](#how-to-edit-a-rule)
+  - [How to: Filter rules](#how-to-filter-rules)
+- [JSON Editor Tab](#json-editor-tab)
+- [Translation Tab](#translation-tab)
+  - [How to: Add another language](#how-to-add-another-language)
+  - [How to: Filter translation strings](#how-to-filter-translation-strings)
+  - [How to: Import or export translation strings to CSV](#how-to-import-or-export-translation-strings-to-csv)
 
-Survey elements (such as questions or panels) can be dragged from the toolbox onto the main design page (questions area). Once these elements are in questions area, they can be modified, edited and reordered to suit the needs of a specific survey. You can add pages to your survey by clicking the drop down menu at the top left of the page.
+## Designer Tab
 
-![Add survey page drop-down menu](images/survey-editor-new-page.png)
+The Designer tab allows you to configure your survey. You can drag and drop questions and panels from the Toolbox onto the design surface and then use the Property Grid to change the question, panel, and survey settings.
 
-Detailed properties for the overall survey and each individual element can be accessed and edited by clicking the `Properties` tab to the right of the page. Ordering and reordering of each survey element can be done by dragging the `hamburger` glyph (three horizontal lines) to the top left of each element.
+<img src="images/survey-creator-tabs-designer.png" alt="Survey Creator - Designer tab" width="100%">
 
-Once you have designed your survey you can test it by clicking the `Test Survey` link at the top left of the page. There you will be able to choose the target device for your test (for example, if you are going to deliver the survey via iPad, choose `iPad` from the drop-down list).
+### Question and Panel Types
 
-![Overview of Test Survey Area](images/survey-editor-test-survey.png)
+The Toolbox contains the question and panel types described below.
 
-If you need to develop the survey in more detail via the JSON file format, you can access an editor via the `JSON Editor` link at the top of the page.
+#### Single Input
 
-![Image of JSON viewer/editor](images/survey-editor-json.png)
+Respondents enter their answer into a single-line text editor. Use the Single Input type for open-ended questions that require short answers.
 
+<img src="images/question-types-single-input.png" alt="Question types - Single input" width="50%">
 
-<a id="adorners"></a>
-## Adorners
+See also:
 
-Each toolbox item will have its own configuration panel once it is placed into the Survey Creator. This panel contains a set of ``adorners``. Using adorners, you will be able to move and re-order the item using the ``hamburger`` button (three horizontal lines), delete the item using the ``cross`` button, toggle the item's visibility using the ``eye`` button, ``duplicate`` the item, ``add`` the item to the toolbox, see the item's ``mode`` and edit the items ``properties``. You may also set the item's ``required`` status if the tool allows it.
+- [Comment](#comment)
+- [Multiple Text](#multiple-text)
 
-![picture of adorner configuration panel](images/survey-editor-adorner.png)
+#### Checkbox
 
+Respondents click one or several checkboxes to select answers. Use the Checkbox type for questions that accept multiple answers.
 
-<a id="toolbox"></a>
-## Individual Toolbox Elements
+<img src="images/question-types-checkbox.png" alt="Question types - Checkbox" width="50%">
 
-![Overview of Toolbox](images/survey-editor-toolbox.png)
+#### Radiogroup
 
-### Single Input
+Respondents use radio buttons to select a single answer. Use the Radiogroup type for questions that can have multiple options but accept only one answer.
 
-Single Input allows you to ask a simple question or request a non-predetermined input from a respondent. A single line is presented to the respondent for text input. There are no limits on the possible input so the respondent may enter any text and any amount of text.
+<img src="images/question-types-radiogroup.png" alt="Question types - Radiogroup" width="50%">
 
-### Checkbox
+See also: [Dropdown](#dropdown)
 
-Checkbox allows for multiple questions or items to be asked of a respondent. The Checkbox question presents the survey respondent with a list of items with a checkbox next to each. Ticking the checkbox chooses that item. Multiple items can be checked and only those checked are recorded in the survey.
+#### Dropdown 
 
-### Radiogroup
+Respondents select a single answer from a drop-down list. Like [Radiogroup](#radiogroup), the Dropdown type can be used for questions that have multiple options but accept only one answer. However, the Dropdown UI can display more options while occupying less screen space.
 
-Radiogroup allows for multiple questions or items to be asked of a respondent. The respondent is presented with a list of items with a radio button next to each. Only one item may be selected from this list and only the selected item will be recorded in the survey.
+<img src="images/question-types-dropdown.png" alt="Question types - Dropdown" width="50%">
 
-### Dropdown 
+#### Comment
 
-A respondent is presented with a drop-down list of items. Only one of these items can be selected, and only the selected item will be recorded in the survey.
+Respondents enter their lengthy answer into a resizable multi-line text area. Use the Comment type for open-ended questions that accept multi-line answers.
 
-### Comment
+<img src="images/question-types-comment.png" alt="Question types - Comment" width="50%">
 
-The Comment survey element asks for a non-predetermined input from a respondent. A text box is presented to the respondent. There are no limits on the possible input so the respondent may enter any text and any amount of text.
+See also:
 
-### Rating
+- [Single Input](#single-input)
+- [Multiple Text](#multiple-text)
 
-The Rating survey element asks a respondent to choose a number across the range presented. Only one value may be selected and only the selected value will be recorded in the survey.
+#### Rating
 
-### Ranking 
+Respondents select one number within a range. Use the Rating type when you want respondents to enter a rating.
 
-A respondent is presented with a list of items that can be rearranged according to rank or preference. The items are rearranged by dragging the items on the page. The final rank or order of all items is recorded in the survey.
+<img src="images/question-types-rating.png" alt="Question types - Rating" width="50%">
 
-### Image picker
+#### Ranking 
 
-The survey respondent is presented with a series of images. One of these images can be selected and only the value associated with that image will be recorded in the survey.
-- To provide a numerical output for this element, enter a numeric value for each image in the `Properties` > `choices` > `value` field.
-- Images can be ascribed different values via `Properties` > `Choices` > `Value`
-- Toggle `Properties` > `General` > `Multi select` to allow the survey respondent to choose more than one image
-- Image sizes can be changed via `Properties` > `General` > `Image Height`/`Image Width`
+Respondents drag and drop items from a list to rearrange them according to rank or preference. Use the Ranking type for questions in which respondents must set the order of items.
 
-### Boolean
+<img src="images/question-types-ranking.png" alt="Question types - Ranking" width="50%">
 
-The Boolean survey element presents a respondent with a yes or no answer. The respondent's response will be recorded in the survey as `true` (yes) or `false` (no).
+#### Image Picker
 
-### Image
+Respondents select one or several images or videos from a series. A value associated with this image or video is saved to the survey results.
 
-The Image survey element allows an image to be uploaded or linked into the survey. There is no associated value in relation to the survey.
+<img src="images/question-types-imagepicker.png" alt="Question types - Image Picker" width="50%">
 
-### HTML
+- **How to: Associate values with images or videos**          
+Expand the **Choices** category and enter the values in the **Choices** table:
 
-The HTML tool enables HTML to be added to the survey allowing for diverse formatting for text, paragraphs and the inclusion of links and images. There is no associated value in relation to the survey. 
+    <img src="images/survey-creator-choices-value.png" alt="Survey Creator - Image value" width="40%">
 
-- `HTML` elements allow the use of the HTML programming language within the survey to add images, files for download, text with HTML formatting among other things. They can be used in conjunction with other questions, and included in `panel` elements. `HTML` is a powerful feature and can be used in conjunction with other elements to address many text formatting questions.
-- There may be security issues with `HTML` add ons, especially if they link to external sites
-- `HTML` has a `name` field but not a `title`. It does not need to announce itself to the respondent, however because it has a `name` it can be called within the `conditional logic` of the survey. 
-- The `HTML` field is for the presentation of text and other information directly to the respondent therefore it should not require its own `description` field.
-- actions within the `HTML` field (such as clicking links and downloading files) may not be recorded and tracked directly within the survey. However due to the powerful natue of `HTML` alternative tracking could be applied. The security of any external tracking would need to be considered.
+- **How to: Enable multiple image or video selection**           
+Expand the **General** category and select **Allow multiple selection**:
 
-### Signature Pad
+    <img src="images/survey-creator-allow-multiple-selection.png" alt="Survey Creator - Allow multiple selection" width="40%">
 
-The Signature Pad survey element allows respondent input to be directly drawn on screen in a pre-set box or area. This is typically used to obtain a signature from the respondent, however it could be used to obtain any hand-drawn input. The size of the box presented to the respondent may be changed by clicking on the `Properties` tab. The color of the pen and background can also be changed. The input from the respondent is recorded in the survey in the following file formats: JPEG, PNG or SVG. This file format may be changed in the `Properties` tab.
+#### Boolean
 
-### Expression
+Respondents switch a Boolean editor to Yes or No. The response is saved in the survey results as `true` for Yes or `false` for No.
 
-The Expression survey element allows for data and calculations to be presented to a respondent. For example, this element provides functionality for adding up the scores of previous question responses, showing the current date and time for the respondent. Configuration is available via the ``Properties`` tab; click ``General`` then edit the ``Expression`` text box. Examples are given:
+<img src="images/question-types-boolean.png" alt="Question types - Boolean" width="50%">
 
-- {question1}+{question2}
-- ({price}\*{quantity})\*(100 - {discount})
-- today()
-- age()
-- min()
-- max()
-- count()
-- avg()
-- iif()
+#### Image
 
-### File
+Use the Image type to add an image or video to the survey. This type is used for presentation only and does not produce a value to be saved in the survey results.
 
-The File survey element presents a button to a respondent requesting that a file is uploaded. When the respondent presses the ``Choose File`` button, an upload file dialogue will launch within a web browser. Many details can be specified via the `Properties` tab such as maximum file size, multiple uploads, accepted file formats as well as preview area. The file(s) uploaded via the File element will be recorded/retained in the survey. File formats are restricted by a comma-separated list of file extensions including periods e.g.: `.jpg`,`.pdf`,`.png`. The uploaded file is recorded in the survey. **For security, it is important that you strictly specify the file formats that are allowed to be uploaded into the survey**.
+#### HTML
 
-### Matrix (Single Choice)
+Use the HTML type to format text as needed, include links, and insert media or other custom elements into the survey. This type is used for presentation only and does not produce a value to be saved in the survey results. Be aware that HTML content can be vulnerable to security breaches. Ensure that the links you insert lead to trusted resources.
 
-The Matrix (Single Choice) tool allows for an array of radio buttons to be presented to the survey respondent in rows and columns. The amount of rows and columns can be adjusted, however only one item per row can be selcted. Names of rows and columns can be edited via the `properties` tab: Click `Columns` and then `Fast Entry` to type these in. The order that rows are presented to the respondent can be set to `random` or `initial` (the latter will sort rows aphabetically by the first letter). Only radio buttons that have been selected will be recorded in the survey.
-- `Properties` > `Rows` > `Text` controls what the user sees
-- `Properties` > `Rows` > `Value` controls what is made available as data and within the `conditional logic` of the survey
+#### Signature Pad
 
-### Matrix (Multiple Choice)
+Respondents use mouse or touch gestures to draw their signature within the allocated input area. Use this type to obtain the respondent's signature or any hand-drawn input.
 
-The Matrix (Multiple Choice) survey element presents a survey respondent with an array of columns and rows. Each cell of the array can be configured with a list of selectable items. These selectable items can be presented to the respondent through the following cell types:
+<img src="images/question-types-signature-pad.png" alt="Question types - Signature pad" width="50%">
 
-- Dropdown
-- Checkbox
-- Radiogroup
-- Single Input
-- Comment
-- Boolean
-- Expression
-- Rating
 
-(Please see above for descriptions of these types of interaction)
-Cell type can be changed via the `Properties` tab. The amount of columns and rows, the title of rows and the value of the selectable item can also be edited via the `Properties` tab. Click `Rows` and `Fast Entry` to name each row. Click `Choices` and `Fast Entry` to edit the item/value. To hide the name of each column, click `Layout` and uncheck `Show Header`. Click `Data` to set the `Default Value` for each cell and a `Correct Answer` if desired. The respondent makes a selection and this is recorded in the survey according to three values: Row, Column and Item/value. Only those selected are recorded in the survey.
+- **How to: Resize the allocated area**         
+Expand the **General** category and change the **Width** and **Height** values:
 
-### Matrix (Dynamic Rows)
+    <img src="images/survey-creator-change-size.png" alt="Survey Creator - Change size" width="40%">
 
-The Matrix (Dynamic Rows) survey element contains the same functionality as the Matrix (Multiple Choice) element above, but adds a dynamic element that is controlled by a survey respondent. Respondents can ``add`` or ``remove rows`` according to their needs. Please see the overview for the Matrix (Multiple Choice) element above for more detail about configuring this element. 
+- **How to: Change the image format**        
+The respondent's input is saved as a base64-encoded image in one of the following formats: PNG, JPEG, SVG. To select the desired format, use the **Image format** drop-down menu in the **General** category:
 
-### Multiple Text
+    <img src="images/survey-creator-image-format.png" alt="Survey Creator - Image format" width="40%">
 
-The Multiple Text survey element allows for a respondent to input multiple single line inputs. See 'Single Input' above for a basic description. Multiple Text presents a stacked series of Single Input entries. The `Properties` tab allows for configuration of the default value of each field (is the text field empty or does it have pre-filled text?), the amount of columns used to display the text fields as well as the overall amount of text fields/items. Only the entries that have input from the respondent are recorded in the survey.
+- **How to: Change the pen color**          
+Expand the **General** category and select the desired color from the **Pen color** drop-down menu:
 
-### Panel
+    <img src="images/survey-creator-pen-color.png" alt="Survey Creator - Pen color" width="40%">
 
-The Panel survey element serves as a box or container that can include multiple questions and sub-panels.
+#### Expression
 
-### Panel (Dynamic Panels)
+Use the Expression type to calculate values and present them to respondents. For example, you can sum up the scores of previous responses, display current date and time, or find an average value. The calculated value is saved in the survey results. In the following image, the Expression type concatenates the first and last names to display a full name:
 
-The Panel (Dynamic Panels) tool allows you to create a template box or container element that can include multiple questions and input types. This template is activated when the survey respondent actively clicks `Add New` in the survey. The respondent can activate any number of these templates by repeatedly clicking `Add New`.
+<img src="images/question-types-expression.png" alt="Question types - Expression" width="50%">
 
-### Hiding `Question Number` and `Title` in survey
+To specify an expression, enter it into the **Expression** field in the **General** category. Your expression can reference other survey questions (for example, `{question1} + {question2}`) or use built-in calculation functions. Refer to the following help topics for more information:
 
-The `Question Number` and `Title` can be hidden in the survey output. `Properties` > `layout` > `Hide number` removes the number at the start of the question while retaining your title. You can also remove the whole number and title with `Properties` > `Layout` > `Title location` and set it to `Hidden`. This can be useful if you are planning on using an `HTML` element to ask the question or otherwise direct the survey respondent. 
+- [Boolean Expressions](https://surveyjs.io/Documentation/Library#boolean-expressions)
+- [Built-In Functions](https://surveyjs.io/Documentation/Library#built-in-functions)
 
-### Formatting text within the survey
+#### File
 
-Presenting text within the survey can be partially acheived using the `Title` and `Description` fields of each `Element`. These fields are an easy and direct way to add questions and direction to the survey respondent. While this is easy and direct, there are limitations to using these fields. For instance, the `Description` field of an `Element` does not allow formatting such as *italics* or **bold**. These limitations can be overcome by using an `HTML` element to provide the necessary textual material for your survey.
+Use the File type to allow respondents to upload files. Respondents drag and drop one or several files onto the allocated area or select files in the browser's Upload File dialog window. The uploaded files are saved in the survey results as base64-encoded strings.
 
-### Conditional Logic
+<img src="images/question-types-file.png" alt="Question types - File" width="50%">
 
-Every survey element can be triggered by any question within the survey. This allows the `visibility` or `availability` of each element to be conditional on the responses made elsewhere in the survey. For example, `Conditional Logic` would allow for a `Matrix` to appear if a `Boolean` question was answered `Yes`, and an `Image Picker` to appear if the same `Boolean` was answered `No`. Using `Logic` within your survey makes it dynamic and responsive, and enables you to create separate pathways throughout the survey as a whole.
+- **How to: Restrict uploaded file types**          
+The File type is built upon the standard `<input type="file">` HTML element. To restrict file types, the standard element uses the <a href="https://www.w3schools.com/tags/att_input_accept.asp" target="_blank">`accept`</a> attribute. Enter its value into the **Accepted file types** field in the **General** category:
 
-To define the `logic` for each element, go to `Properties` > `Logic`.
+    <img src="images/survey-creator-accepted-file-types.png" alt="Survey Creator - Accepted file types" width="40%">
 
-![Image of `Logic` dropdown within `Properties` section](images/survey-editor-logic.png)
+> **IMPORTANT**: Always restrict the allowed file types to prevent possible security vulnerabilities. 
 
-- `Visible if` controls whether the element is made `Visible` via `Logic Expressions`. If these `Expressions` are defined, then the element will remain invisible within the survey unless the conditions of the expression are met.
-- `Enable if` controls whether the element is `Enabled` via `Logic Expressions`. The element will be visible, but the responses will disabled until the conditions of the expression are met.
-- `Required if` controls whether the element's `Required` state is determined through `Logic Expressions`. If an element is required, then it becomes compulsory and the survey cannot proceed or be completed unless that element has recorded a response (`Required` status can also be determined manually by toggling `Properties` > `General` > `Is required`).
+- **How to: Enable multiple file selection**           
+Expand the **General** category and select **Allow multiple files**:
 
-### `Naming` an element for use in an `Expression`
+    <img src="images/survey-creator-allow-multiple-files.png" alt="Survey Creator - Allow multiple files" width="40%">
 
-When you add a survey element you are able to give it both a `Title` and a `Name` in the `Properties` > `General` section. Understanding the difference between `Title` and `Name` is important when developing the `Logic` of your survey. In short, `Name` refers to the question as a logical entity that can be refered to within the `Conditional Logic` of the survey without confusion. `Title` refers to text that is directed to the survey respondent and it may be unsuitable for use within the terse structure of the survey's logic.
-    An example of a `Name` might be `Q1vegetables` while the corresponding `Title` might be `Please select your favourites from the following vegetables`. It is clear that the purpose of the `Title` is to direct the survey user, while the `Name` refers to the question within the `Logic` of the survey.  
+#### Single-Choice Matrix
 
-- If there is no `Title` given, the `Name` will be used instead. 
-- Both `Title` and `Name` can be hidden in the survey by setting `Properties` > `Layout` > `Title location` to `Hidden`. This might be useful if you plan on providing a question to the survey user using the `HTML` element, for example.
+The Single-Choice Matrix type displays radio buttons in rows and columns. Respondents can select only one radio button in each row.
 
-![Image comparing `Title` and `Name` properties](images/survey-editor-namevstitle.png)
-![Image comparing `Title` and `Name` properties](images/survey-editor-namevstitle1.png)
+<img src="images/question-types-matrix-single-choice.png" alt="Question types - Single-Choice Matrix" width="50%">
 
-### Building a `Logic` `Expression`
+- **How to: Add new rows**          
+Expand the **Rows** category and click **Add New**:
 
-![Image of the `Logic` `Properties` menu](images/survey-editor-logic-expression.png)
+    <img src="images/survey-creator-add-new-row.png" alt="Survey Creator - Add new row to a matrix question" width="40%">
 
-To build the `Expression` for an element, go to `Properties` > `Logic` and choose how you would like to trigger the element (for example, choose `Visible if` if you would like the element to remain invisible until the conditions of the expresion are met). When you select `Visible if`, you will be directed to `Select question...`. This will open a drop-down dialogue that lists all available questions in the survey. The dialogue will list these by `Name`.
+- **How to: Randomize rows**        
+Expand the **Rows** category, find the **Row order** editor, and switch it to *Random*:
 
-Select the question you would like to use within the `Expression`. Once selected, you will be able to select the `Operator` you would like to apply to your chosen question. Operators could be:
+    <img src="images/survey-creator-row-order.png" alt="Survey Creator - Row order in a matrix question" width="40%">
 
-- `is empty`
-- `is not empty`
-- `equals`
-- `not equals`
-- `contains`
-- `not contains`
-- `any of`
-- `all of`
-- `greater`
-- `less`
-- `greater or equals`
-- `less or equals`
+See also:
 
-Depending on the type of question you have chosen, only some of these `Operators` may be available and others will be grayed out.
+- [Multiple-Choice Matrix](#multiple-choice-matrix)
+- [Dynamic Matrix](#dynamic-matrix)
 
-Once you have chosen the question and the `Operator`, you will be able to select the state that the question must have in order to meet the requirements of the `Expression`. For example, in the following image `Q2` is the question, `equals` is the `Operator` and the state of `item1` as `Selected` fulfils the requirements of the  `Expression`:
+#### Multiple-Choice Matrix
 
-![Image of the `Logic` `Properties` menu](images/survey-editor-logic-expression1.png)
+The Multiple-Choice Matrix type displays rows and columns. At their intersections, the matrix can display the following editors:
 
+- [Dropdown](#dropdown)
+- [Checkbox](#checkbox)
+- [Radiogroup](#radiogroup)
+- [Single Input](#single-input)
+- [Comment](#comment)
+- [Boolean](#boolean)
+- [Expression](#expression)
+- [Rating](#rating)
 
-You can also add more than one condition for your expression to meet in order to be valid. Press `Add condition` to develop the `Expression` further. Multiple conditions can be set and their interrelation is based on the logical `Operators` `And` and `Or`:
+Respondents use these editors to select a desired value in each cell. The following image illustrates the Multiple-Choice Matrix type with the default Dropdown editors: 
 
-- `And` determines that the second `Expression` must also be valid in order for the whole `Expression` to be met. In this example, we are using an expression to determine if an element is `Visible`. Choosing the `And` `Operator` means that the element will not be visible unless the conditions of *both* expressions are met.
-- `Or` determines that the second `Expression` is an alternative to the first: *either* the details of the first `Expression` fulfil the conditions to make the element `Visible`, *or* the details of the second `Expression` can also fulfil the conditions of the `Logic`.
+<img src="images/question-types-matrix-multiple-choices.png" alt="Question types - Multiple-Choice Matrix" width="50%">
 
-![Image of the `Logic` `Properties` menu](images/survey-editor-logic-expression2.png)
+- **How to: Change the editor type**          
+Expand the **General** category and select the desired editor type from the **Cell type** drop-down menu:
 
-### Specific use cases of `Conditional logic`
+    <img src="images/survey-creator-matrix-cell-type.png" alt="Survey Creator - Matrix cell type" width="40%">
 
-In general, `Conditional Logic` will be the same across all survey elements. However there are some interesting and specific use cases.
+See also:
 
-### `Logic` within a `Matrix` element
+- [Single-Choice Matrix](#single-choice-matrix)
+- [Dynamic Matrix](#dynamic-matrix)
 
-Conditional logic can be set within a `Matrix` element on a column-row basis. This means that you can set columns to `Visible` or `Enabled` by setting an `Expression` condition within the same row. This allows each row to have it's own conditional logic. 
+#### Dynamic Matrix
 
-The `Logic` of each specific column is set by editing the column details. Each column can be edited via `Properties` > `Columns` > `Edit`, and within this there is a `Logic` section specific to that column. 
+The Dynamic Matrix type is similar to a [Multiple-Choice Matrix](#multiple-choice-matrix), but respondents can add and remove matrix rows.
 
-![Image of the `Column` > `Edit` properties](images/survey-editor-logic-matrix-column.png)
+<img src="images/question-types-matrix-dynamic-rows.png" alt="Question types - Dynamic Matrix" width="50%">
 
-Once you click `Edit` for a specific column, you will be shown a configuration section for that column:
+#### Multiple Text
 
-![Image of the `Column` > `Edit` properties detail](images/survey-editor-logic-column-detail.png)
+Respondents enter their answers into multiple single-line text editors. Use the Multiple Text type for open-ended questions that require more than one short answer.
 
-- The `Visiblity` or `Availability` of the column can be determined by a single question anywhere within the survey, including the `Matrix` the column belongs to.
-- The column can also be made `Available` or `Visible` relative to a question within the same row of the `Matrix`. For example if you have a `Matrix` with four columns and you would like the `Visibility` of columns 2-4 to be triggered by a `Boolean` in column 1, you will need to set the `Logic` of columns 2, 3 and 4 to be `Visible if`  `row.<columnname>` equals `true`.
-- The question `row.<columnname>` refers to the `row` that is *relative* to the question, then the `Name` that you have given the column. In this instance, `row` means 'in the current row' 
-- It would be necessary to apply this `Logic` to all columns you would like to be affected by the trigger.
+<img src="images/question-types-multiple-text.png" alt="Question types - Multiple text" width="50%">
 
-The end-result of setting logic within a `Matrix` can be seen in the following images. 
+- **How to: Specify default answers**           
+Expand the **Data** category and click **Set Default Answer** to open the Default Answer pop-up window. Enter the default answers into the text editors and click **Apply**:
 
-First, the survey only shows the `Boolean` questions from column one:
+    <img src="images/survey-creator-multiple-text-set-default-answer.png" alt="Survey Creator - Matrix cell type" width="80%">
 
-![Image of the survey output of internal `Matrix Logic`](images/survey-editor-logic-matrix.png)
+#### Panel
 
-Second, the `Boolean` from Column 1/Row 1 is set to `yes/true`, which makes columns 2-4  `Visible`. Notice how this only applies to Row 1.
+The Panel type is a container for other questions and panels. Use this type to group several questions or panels and control them all together.
 
-![Image of the survey output of internal `Matrix Logic`](images/survey-editor-logic-matrix1.png)
+#### Dynamic Panel
 
-Third, the `Boolean` from Column 1/Row 2 is set to `yes/true`, which makes columns 2-4 `Visible` in Row 2 as well as Row 1. Note that Columns 2-4 in Row 3 are still not `Visible`. 
+The Dynamic Panel type is a template panel that can contain multiple questions. Respondents can add and remove panels based on the template.
 
-![Image of the survey output of internal `Matrix Logic`](images/survey-editor-logic-matrix2.png)
+<img src="images/question-types-dynamic-panel.png" alt="Question types - Dynamic panel" width="50%">
 
+### Adorners
 
-## Additional Resources
+Adorners are design-surface controls for survey element manipulation. Use adorners to edit UI text in place, reorder choices, duplicate and delete elements, specify whether an answer is required, and perform other actions on survey elements. Settings that you specify using adorners are synchronized with settings in the Property Grid, and vice versa.
 
-- [SurveyJS Support Forums](https://surveyjs.answerdesk.io/ticket/list) - useful for searching user questions on specific features
+Each element type has an associated set of adorners. The following image highlights adorners for a [Dropdown](#dropdown) question:
+
+<img src="images/survey-creator-dropdown-adorners.png" alt="Survey Creator - Adorners" width="50%">
+
+### How to: Add a question to the survey
+
+Drag and drop the desired question type from the Toolbox onto the design surface. Alternatively, you can click the **Add Question** button to add a [Single Input](#single-input) question. This button also displays an ellipsis icon that allows you to change the type of inserted questions.
+
+<img src="images/survey-creator-add-question-button.png" alt="Survey Creator - Add Question button" width="50%">
+
+### How to: Add a page to the survey
+
+In the Property Grid, select **Survey**, expand the **Pages** category, and click the **Add New** button in the **Pages** editor:
+
+<img src="images/survey-creator-add-new-page.png" alt="Survey Creator - Add new page" width="40%">
+
+Alternatively, you can add a page on the design surface. The surface displays the skeleton of a new page at the bottom. To add a new page, you need to [add a question to it](#how-to-add-a-question-to-the-survey).
+
+### How to: Change the question type
+
+Use the element type selector in the question:
+
+<img src="images/survey-creator-element-type-selector.png" alt="Survey Creator - Element type selector" width="50%">
+
+Some question types are non-interchangeable. For example, a [Dropdown](#dropdown) question supports choices, while [Single Input](#single-input) does not. If you switch the question type from Dropdown to Single Input, your choices will be lost. In this case, you can click the **Undo** button to reinstate the previous configuration:
+
+<img src="images/survey-creator-undo-button.png" alt="Survey Creator - The Undo button" width="50%">
+
+### How to: Clear the survey
+
+Click the **Clear Survey** button on the Toolbar:
+
+<img src="images/survey-creator-clear-survey.png" alt="Survey Creator - The Clear Survey button" width="50%">
+
+## Preview Tab
+
+The Preview tab allows you to view and take the survey as a respondent.
+
+<img src="images/survey-creator-preview-tab.png" alt="Survey Creator - The Preview tab" width="50%">
+
+### How to: Re-run the preview
+
+After you complete the survey, you can see the survey results in the table or JSON format. Click the Preview Survey Again button above the results to preview the survey again:
+
+<img src="images/survey-creator-preview-survey-again.png" alt="Survey Creator - Preview survey again" width="50%">
+
+### How to: Preview the survey on different devices
+
+Click the **Device** icon and select the desired device from the drop-down menu. You can also click the **Orientation** icon to switch between the landscape and portrait orientations:
+
+<img src="images/survey-creator-preview-different-devices.png" alt="Survey Creator - Preview the survey on different devices" width="50%">
+
+## Logic Tab
+
+The Logic tab displays and allows you to edit logical rules that specify the survey flow.
+
+<img src="images/survey-creator-logic-tab.png" alt="Survey Creator - The Logic tab" width="75%">
+
+### How to: Add a new rule
+
+Click **Add New Rule** at the bottom of the Logic tab to display editors that allow you to specify conditions and select actions to perform when these conditions are met.
+
+#### Specify conditions (if-clauses)       
+
+Select a question whose answer should be checked and a logical operation from the corresponding drop-down menus. Then, specify the answer that applies the rule. Some logical operations do not need an answer (for example, Empty or Not empty).
+
+<img src="images/survey-creator-logic-tab-add-new-rule.png" alt="Survey Creator - Add new logical rule" width="50%">
+
+If the rule needs more than one condition, click the **Add Condition** button. You can use the AND or OR logical operator to combine the new and previous conditions.
+
+<img src="images/survey-creator-multiple-conditions.png" alt="Survey Creator - Add new logical rule" width="33%">
+
+Conditions that you specify in the UI are converted to logical expressions. If you prefer to enter the expressions directly, click the **Manual Entry** button on the Toolbar.
+
+<img src="images/survey-creator-logic-tab-manual-entry.png" alt="Survey Creator - Manual entry" width="75%">
+
+#### Specify the action (then-clause)         
+
+Select one of the following actions from the drop-down menu:
+
+- **Show (hide) page**          
+Makes the selected page visible. If you want to hide the page, invert the logic of your condition.
+
+- **Enable (disable) page**         
+Makes the selected page editable. If you want to make the page read-only, invert the logic of your condition.
+
+- **Show (hide) question**          
+Makes the selected question visible. If you want to hide the question, invert the logic of your condition.
+
+- **Enable (disable) question**         
+Makes the selected question editable. If you want to make the question read-only, invert the logic of your condition.
+
+- **Make question required**            
+Requires an answer for the selected question.
+
+- **Complete survey**           
+Completes the survey.
+
+- **Set answer**            
+Sets a specified answer to the selected question.
+
+- **Copy answer**           
+Copies the answer from the selected question to a target question.
+
+- **Skip to question**          
+Navigates the survey to the selected question.
+
+- **Run expression**            
+Runs a custom expression on the selected question.
+
+- **Set "Survey Complete" page markup**         
+Specifies custom HTML markup for the Survey Complete page.
+
+### How to: Edit a rule
+
+Click a rule to expand it and use UI elements to edit the rule. Click **Done** to save your changes.
+
+### How to: Filter rules
+
+Use the Question Filter to filter rules by a specific question. You can also use the Action Type Filter to view only rules for the selected action type:
+
+<img src="images/survey-creator-logic-tab-filter-rules.png" alt="Survey Creator - Filter rules in the Logic tab" width="50%">
+
+## JSON Editor Tab
+
+The JSON Editor tab enables you to preview and edit the resulting survey configuration. In most cases, you do not need to modify the JSON object on this tab. Change survey settings in the Property Grid instead.
+
+<img src="images/survey-creator-json-editor-tab.png" alt="Survey Creator - JSON Editor tab" width="50%">
+
+## Translation Tab
+
+The Translation tab displays survey strings and allows you to translate them into different languages.
+
+<img src="images/survey-creator-translation-tab.png" alt="Survey Creator - Translation tab" width="75%">
+
+### How to: Add another language
+
+In the Language Settings sidebar, click the **Add** icon and select the desired language from the pop-up menu:
+
+<img src="images/survey-creator-translation-tab-language-settings.png" alt="Survey Creator - Language settings in the Translation tab" width="40%">
+
+### How to: Filter translation strings
+
+Use the Page Filter to filter strings by a specific page. You can also use the Used Strings Filter to view only the strings that were changed:
+
+<img src="images/survey-creator-translation-tab-filters.png" alt="Survey Creator - Filter strings in the Translation tab" width="50%">
+
+### How to: Import or export translation strings to CSV
+
+Click the **Import to CSV** or **Export to CSV** button on the Toolbar:
+
+<img src="images/survey-creator-translation-tab-import-export.png" alt="Survey Creator - Filter strings in the Translation tab" width="50%">
