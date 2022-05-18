@@ -261,6 +261,39 @@ test("CreatorResponsivityManager: sidebar expand/collapse on width change", (): 
   expect(creator.sidebar.visible).toEqual(false);
 });
 
+test("CreatorResponsivityManager: override screenSizeBreakpoints", (): any => {
+  const container: SimpleContainer = new SimpleContainer({});
+  const creator = new CreatorTester();
+  const oldValueScreenSizeBreakpoints = Object.assign({}, CreatorResponsivityManager.screenSizeBreakpoints);
+  const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+
+  CreatorResponsivityManager.screenSizeBreakpoints["xl"] = 1650;
+  CreatorResponsivityManager.screenSizeBreakpoints["l"] = 1536;
+
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  creator.sidebar.flyoutMode = true;
+
+  const question = creator.survey.getAllQuestions()[0];
+  const qModel = new QuestionAdornerViewModel(creator, question, undefined);
+
+  container.offsetWidth = 1700;
+  responsivityManager.process();
+  creator.selectElement(question);
+  expect(qModel.getActionById("settings").visible).toBeFalsy();
+
+  container.offsetWidth = 1500;
+  responsivityManager.process();
+  expect(qModel.getActionById("settings").visible).toBeTruthy();
+
+  container.offsetWidth = 1200;
+  responsivityManager.process();
+  expect(qModel.getActionById("settings").visible).toBeTruthy();
+
+  CreatorResponsivityManager.screenSizeBreakpoints = oldValueScreenSizeBreakpoints;
+});
+
 test("CreatorResponsivityManager: Question Settings visibility", (): any => {
   const container: SimpleContainer = new SimpleContainer({});
   const creator = new CreatorTester();
@@ -291,3 +324,4 @@ test("CreatorResponsivityManager: Question Settings visibility", (): any => {
   responsivityManager.process();
   expect(qModel.getActionById("settings").visible).toBeFalsy();
 });
+
