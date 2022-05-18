@@ -222,12 +222,12 @@ test("Question validators name", () => {
 test("Default locale name", () => {
   let survey: SurveyModel = new SurveyModel();
   const translation: Translation = new Translation(survey);
-  expect(translation.getLocaleName("")).toEqual("Default (english)");
+  expect(translation.getLocaleName("")).toEqual("Default (English)");
   surveyLocalization.defaultLocale = "de";
   survey = new SurveyModel();
   survey.locale = "de";
   translation.survey = survey;
-  expect(translation.getLocaleName("")).toEqual("Default (deutsch)");
+  expect(translation.getLocaleName("")).toEqual("Default (Deutsch)");
   surveyLocalization.defaultLocale = "en";
 });
 

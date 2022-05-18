@@ -916,7 +916,7 @@ export class Translation extends Base implements ITranslationLocales {
     return surveyLocalization.defaultLocale;
   }
   public getLocaleName(loc: string) {
-    return capitalize(editorLocalization.getLocaleName(loc, this.defaultLocale));
+    return editorLocalization.getLocaleName(loc, this.defaultLocale);
   }
   public removeLocale(locale: string) {
     if (this.hasLocale(locale)) {

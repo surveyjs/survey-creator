@@ -57,8 +57,8 @@ test("settingsSurvey layout", () => {
   expect(elements[0].getType()).toEqual("checkbox");
   expect(elements[0].name).toEqual("defaultLanguage");
   expect(elements[0].isReadOnly).toBeTruthy();
-  expect(elements[0]["choices"][0].value).toEqual("Default (english)");
-  expect(elements[0]["defaultValue"][0]).toEqual("Default (english)");
+  expect(elements[0]["choices"][0].value).toEqual("Default (English)");
+  expect(elements[0]["defaultValue"][0]).toEqual("Default (English)");
 
   expect(elements[1].getType()).toEqual("checkbox");
   expect(elements[1].name).toEqual("locales");
@@ -170,7 +170,7 @@ test("stringsSurvey - one question in survey", () => {
   expect(question1Props.titleLocation).toEqual("hidden");
   expect(question1Props.columns).toHaveLength(4);
   expect(question1Props.columns[0].name).toEqual("default");
-  expect(question1Props.columns[0].title).toEqual("Default (english)");
+  expect(question1Props.columns[0].title).toEqual("Default (English)");
   expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("title");
   expect(question1Props.rows[0].text).toEqual("Title");
@@ -179,7 +179,7 @@ test("stringsSurvey - one question in survey", () => {
   expect(choicesProps.name).toEqual("question1_choices");
   expect(choicesProps.columns).toHaveLength(4);
   expect(choicesProps.columns[0].name).toEqual("default");
-  expect(choicesProps.columns[0].title).toEqual("Default (english)");
+  expect(choicesProps.columns[0].title).toEqual("Default (English)");
   expect(choicesProps.columns[1].name).toEqual("fr");
   expect(choicesProps.columns[1].title).toEqual("Français");
   expect(choicesProps.rows).toHaveLength(3);
