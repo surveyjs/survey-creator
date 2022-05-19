@@ -1,4 +1,5 @@
 import { enStrings } from "./localization/english";
+import { capitalize } from "./utils/utils";
 import { surveyLocalization, Serializer } from "survey-core";
 
 export class EditorLocalization {
@@ -41,10 +42,10 @@ export class EditorLocalization {
       defaultLocale = surveyLocalization.defaultLocale;
     }
     let res = !!loc
-      ? localeNames[loc]
+      ? capitalize(localeNames[loc])
       : editorLocalization
         .getString("ed.defaultLocale")
-        ["format"](localeNames[defaultLocale]);
+        ["format"](capitalize(localeNames[defaultLocale]));
     return !!res ? res : loc;
   }
   public getPropertyName(strName: string, defaultName: string = null): string {

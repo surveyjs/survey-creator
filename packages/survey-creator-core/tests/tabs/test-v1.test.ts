@@ -136,7 +136,7 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
   expect(testPlugin["languageListModel"].actions).toHaveLength(2);
   expect(testPlugin["languageListModel"].actions[0].id).toEqual("en");
   expect(testPlugin["languageListModel"].actions[1].id).toEqual("de");
-  expect(testPlugin["languageListModel"].actions[1].title).toEqual("deutsch");
+  expect(testPlugin["languageListModel"].actions[1].title).toEqual("Deutsch");
 
   creator.showDefaultLanguageInTestSurveyTab = true;
   testPlugin.update();

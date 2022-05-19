@@ -2621,6 +2621,45 @@ test("SurveyElementAdornerBase setSurveyElement updateActionsProperties", (): an
   expect(count).toBe(1);
 });
 
+test("allowEdit and onElementAllowOperations", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "rating", name: "q1" }] };
+
+  let allowEdit = undefined;
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowEdit = allowEdit;
+  });
+
+  const pageModel = creator.survey.pages[0];
+  const pageAdornerModel = new PageAdorner(creator, pageModel);
+  const question = creator.survey.getQuestionByName("q1");
+  const questionAdornerModel = new QuestionAdornerViewModel(creator, question, undefined);
+
+  creator.sidebar.flyoutMode = true;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeTruthy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeTruthy();
+
+  creator.sidebar.flyoutMode = false;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeFalsy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
+
+  allowEdit = true;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeTruthy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeTruthy();
+
+  allowEdit = false;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeFalsy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
+});
+
 test("isTextInput", (): any => {
   const textarea = document.createElement("textarea");
   expect(isTextInput(textarea)).toBeTruthy();
@@ -2645,7 +2684,7 @@ test("onSurveyPropertyValueChanged event", () => {
   let objType;
   let counter = 0;
   creator.onSurveyPropertyValueChanged.add((sender, options) => {
-    counter ++;
+    counter++;
     objType = options.obj.getType();
     propertyName = options.propertyName;
     propertyValue = options.value;

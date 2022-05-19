@@ -1,4 +1,4 @@
-import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase } from "survey-core";
+import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../settings";
@@ -8,6 +8,7 @@ import "./translation.scss";
 import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
+import { capitalize } from "../../utils/utils";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -88,7 +89,8 @@ export class TranslationItem extends TranslationItemBase {
     return !!this.customText ? this.customText : this.localizableName;
   }
   public get localizableName(): string {
-    return editorLocalization.getPropertyName(this.name);
+    const type = this.context && this.context.getType && this.context.getType();
+    return editorLocalization.getPropertyNameInEditor(type, this.name);
   }
   public getLocText(loc: string): string {
     return this.locString.getLocaleText(loc);
@@ -477,6 +479,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.settingsSurveyValue = this.createSettingsSurvey();
     this.survey = survey;
     this.setupToolbarItems();
+    this.calcIsChooseLanguageEnabled();
   }
   public getType(): string {
     return "translation";
@@ -537,6 +540,7 @@ export class Translation extends Base implements ITranslationLocales {
         const addLanguageAction = new Action({
           id: "svc-translation-choose-language",
           iconName: "icon-add",
+          enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled)),
           component: "sv-action-bar-item-dropdown",
           popupModel: this.chooseLanguagePopupModel,
           action: (language) => {
@@ -548,6 +552,13 @@ export class Translation extends Base implements ITranslationLocales {
     });
     return res;
   }
+
+  @property({ defaultValue: true }) private isChooseLanguageEnabled: boolean;
+
+  private calcIsChooseLanguageEnabled() {
+    this.isChooseLanguageEnabled = this.chooseLanguageActions.filter((item: IAction) => item.visible).length > 0;
+  }
+
   private updateLocales() {
     if (!this.localesQuestion) return;
     var res = [""];
@@ -747,7 +758,6 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
     var locs = this.getSelectedLocales();
-    matrix.rowTitleWidth = "300px";
     matrix.addColumn("default", this.getLocaleName(""));
     for (var i = 0; i < locs.length; i++) {
       matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
@@ -809,7 +819,7 @@ export class Translation extends Base implements ITranslationLocales {
   ) {
     if (!loc || addedLocales[loc]) return;
     addedLocales[loc] = true;
-    choices.push(new ItemValue(loc, editorLocalization.getLocaleName(loc)));
+    choices.push(new ItemValue(loc, this.getLocaleName(loc)));
   }
   private addLocaleIntoValue(loc: string, updateValue: boolean) {
     this.addLocaleIntoValueCore("selLocales", loc);
@@ -834,7 +844,7 @@ export class Translation extends Base implements ITranslationLocales {
       new Action(
         {
           id: locale.value,
-          title: locale.text,
+          title: this.getLocaleName(locale.value),
           data: locale,
           visible: this.isLocaleVisible(locale.value)
         }
@@ -931,7 +941,9 @@ export class Translation extends Base implements ITranslationLocales {
     if (Array.isArray(actions) && actions.length == 1) {
       actions[0].visible = this.isLocaleVisible(locale);
     }
+    this.calcIsChooseLanguageEnabled();
   }
+
   public resetLocales() {
     var locales = [""];
     this.root.fillLocales(locales);
