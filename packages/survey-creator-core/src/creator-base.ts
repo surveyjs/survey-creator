@@ -2938,7 +2938,8 @@ export class CreatorBase extends Base
       allowCopy: true,
       allowDragging: true,
       allowChangeType: true,
-      allowChangeRequired: true
+      allowChangeRequired: true,
+      allowEdit: undefined
     };
     this.onElementAllowOperations.fire(this, options);
     return options;
