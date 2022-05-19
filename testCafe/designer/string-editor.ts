@@ -446,6 +446,5 @@ test("Test styles", async (t) => {
   const svItemSelector = Selector(".sv-string-editor").withText("question1");
 
   await t
-    .expect(svItemSelector.getStyleProperty("-webkit-user-select")).eql("text")
-    .expect(svItemSelector.getStyleProperty("user-select")).eql("text");
+    .expect(await svItemSelector.getStyleProperty("user-select")).eql("text");
 });
