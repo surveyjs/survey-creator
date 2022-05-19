@@ -430,3 +430,21 @@ test("Test selection", async (t) => {
       return window.getSelection().toString();
     })()).eql("");
 });
+
+test("Test styles", async (t) => {
+  let json = {
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("question1");
+
+  await t
+    .expect(await svItemSelector.getStyleProperty("user-select")).eql("text");
+});

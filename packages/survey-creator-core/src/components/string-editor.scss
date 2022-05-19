@@ -1,6 +1,12 @@
 @import "../variables.scss";
 
 .svc-string-editor {
+
+  [contenteditable] {
+    user-select: text;
+    -webkit-user-select: text;
+  }
+  
   position: static;
   .sv-string-editor {
     display: inline-block;
