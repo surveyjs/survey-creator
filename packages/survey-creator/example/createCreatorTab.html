@@ -30,6 +30,9 @@
 
 <body>
   <div id="editorElement"></div>
+  <script type="text/html" id="new-tab-template">
+    <h3 data-bind="text: title"></h3>
+</script>
   <script type="text/javascript">
     var creator = new SurveyCreator.SurveyCreator(
     "editorElement",
@@ -44,9 +47,9 @@
         template: "new-tab-template",
         action: () => null,
         data: {
-        title: "New Tab",
-        surveys: () => null,
-        load: () => null
+            title: "New Tab",
+            surveys: () => null,
+            load: () => null
         }
     });
     creator.render();
