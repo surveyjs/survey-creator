@@ -222,12 +222,12 @@ test("Question validators name", () => {
 test("Default locale name", () => {
   let survey: SurveyModel = new SurveyModel();
   const translation: Translation = new Translation(survey);
-  expect(translation.getLocaleName("")).toEqual("Default (english)");
+  expect(translation.getLocaleName("")).toEqual("Default (English)");
   surveyLocalization.defaultLocale = "de";
   survey = new SurveyModel();
   survey.locale = "de";
   translation.survey = survey;
-  expect(translation.getLocaleName("")).toEqual("Default (deutsch)");
+  expect(translation.getLocaleName("")).toEqual("Default (Deutsch)");
   surveyLocalization.defaultLocale = "en";
 });
 
@@ -466,7 +466,7 @@ test("Merging a locale with default", () => {
   expect(translation.locales).toContain("de");
   expect(translation.canMergeLocaleWithDefault).toBeTruthy();
   expect(translation.mergeLocaleWithDefaultText).toEqual(
-    "Merge deutsch with default locale"
+    "Merge Deutsch with default locale"
   );
   translation.mergeLocaleWithDefault();
   expect(translation.locales).toHaveLength(2);
