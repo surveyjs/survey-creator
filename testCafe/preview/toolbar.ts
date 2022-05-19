@@ -72,13 +72,13 @@ test("Language switcher", async (t) => {
 
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
-    .expect(getBarItemByTitle("english").visible).ok()
+    .expect(getBarItemByTitle("English").visible).ok()
     .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("My Survey")
-    .click(getBarItemByTitle("english"))
-    .expect(getListItemByText("deutsch").visible).ok()
-    .click(getListItemByText("deutsch"))
+    .click(getBarItemByTitle("English"))
+    .expect(getListItemByText("Deutsch").visible).ok()
+    .click(getListItemByText("Deutsch"))
     .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("Meine Umfrage")
-    .expect(getBarItemByTitle("deutsch").visible).ok();
+    .expect(getBarItemByTitle("Deutsch").visible).ok();
 });
 
 test("Page switcher", async (t) => {

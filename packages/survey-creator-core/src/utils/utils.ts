@@ -274,3 +274,12 @@ export function assignDefaultV2Classes(destination: any, questionType: string) {
 export function wrapTextByCurlyBraces(text: string) {
   return settings.logic.openBracket + text + settings.logic.closeBracket;
 }
+
+export function capitalize(str: string): string {
+  if (!str) return str;
+  str = str.replace(/[\s]+/g, " ")
+  str = str.replace(/([\s]|^)(\S)/g, (_, p1, p2) => {
+    return p1 + p2.toUpperCase()
+  })
+  return str;
+}
