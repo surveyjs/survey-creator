@@ -38,6 +38,12 @@ async function setupCategories(t, windowWidth = 1910) {
   await t.resizeWindow(windowWidth, 600);
 }
 
+async function setupToolboxProperty(propertyName: string, propertyValue: any) {
+  ClientFunction(() => {
+    window["creator"].toolbox[propertyName] = propertyValue;
+  })();
+}
+
 test("Categories check hover icons", async (t) => {
   await setupCategories(t);
 
@@ -114,4 +120,71 @@ test.before(async (t) => {
     .expect(Selector(".sv-dots__item").visible).ok()
     .expect(categories.count).eql(0)
     .expect(visibleToolboxItems.count).eql(11);
+});
+
+test("Categories allowExpandMultipleCategories property", async (t) => {
+  await setupCategories(t);
+  await setupToolboxProperty("forceCompact", false);
+  await setupToolboxProperty("allowExpandMultipleCategories", true);
+
+  const categories = Selector(".svc-toolbox__category-header");
+  const collapsedCategories = Selector(".svc-toolbox__category-header--collapsed");
+  const visibleToolboxItems = Selector(".svc-toolbox__tool").filterVisible();
+  await t
+    .expect(categories.count).eql(3)
+    .expect(collapsedCategories.count).eql(3)
+    .expect(visibleToolboxItems.count).eql(0)
+
+    .click(categories.nth(0))
+    .expect(collapsedCategories.count).eql(2)
+    .expect(visibleToolboxItems.count).eql(15)
+
+    .click(categories.nth(1))
+    .expect(collapsedCategories.count).eql(1)
+    .expect(visibleToolboxItems.count).eql(18)
+
+    .click(categories.nth(2))
+    .expect(collapsedCategories.count).eql(0)
+    .expect(visibleToolboxItems.count).eql(20);
+});
+
+test("Categories keepAllCategoriesExpanded property", async (t) => {
+  await setupCategories(t);
+  await setupToolboxProperty("forceCompact", false);
+  await setupToolboxProperty("keepAllCategoriesExpanded", true);
+
+  const categories = Selector(".svc-toolbox__category-header");
+  const collapsedCategories = Selector(".svc-toolbox__category-header--collapsed");
+  const visibleToolboxItems = Selector(".svc-toolbox__tool").filterVisible();
+  await t
+    .expect(categories.count).eql(3)
+    .expect(collapsedCategories.count).eql(0)
+    .expect(visibleToolboxItems.count).eql(20)
+
+    .hover(categories.nth(0), { speed: 0.5 })
+    .expect(categories.nth(0).find(".svc-string-editor__button--collapse").exists).notOk()
+    .expect(categories.nth(0).find(".svc-string-editor__button--expand").exists).notOk()
+
+    .click(categories.nth(0))
+    .expect(categories.count).eql(3)
+    .expect(collapsedCategories.count).eql(0)
+    .expect(visibleToolboxItems.count).eql(20)
+
+    .hover(categories.nth(1), { speed: 0.5 })
+    .expect(categories.nth(1).find(".svc-string-editor__button--collapse").exists).notOk()
+    .expect(categories.nth(1).find(".svc-string-editor__button--expand").exists).notOk()
+
+    .click(categories.nth(1))
+    .expect(categories.count).eql(3)
+    .expect(collapsedCategories.count).eql(0)
+    .expect(visibleToolboxItems.count).eql(20)
+
+    .hover(categories.nth(2), { speed: 0.5 })
+    .expect(categories.nth(2).find(".svc-string-editor__button--collapse").exists).notOk()
+    .expect(categories.nth(2).find(".svc-string-editor__button--expand").exists).notOk()
+
+    .click(categories.nth(2))
+    .expect(categories.count).eql(3)
+    .expect(collapsedCategories.count).eql(0)
+    .expect(visibleToolboxItems.count).eql(20);
 });

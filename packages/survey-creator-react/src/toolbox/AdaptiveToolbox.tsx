@@ -1,7 +1,6 @@
 import React from "react";
 import { VerticalResponsivityManager } from "survey-core";
 import { ReactElementFactory } from "survey-react-ui";
-import { SurveyCreatorToolboxTool } from "./ToolboxItem";
 import { ISurveyCreatorToolboxProps, Toolbox } from "./Toolbox";
 
 export class AdaptiveToolbox extends Toolbox {
@@ -45,20 +44,6 @@ export class AdaptiveToolbox extends Toolbox {
         </div>
       </div>
     );
-  }
-
-  renderItems(items: Array<any>, isCompact?: boolean) {
-    return items.map((item, itemIndex) =>
-      <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={isCompact} key={"item" + itemIndex}></SurveyCreatorToolboxTool>
-    );
-  }
-
-  protected renderCategoryContent(category: any): Array<any> {
-    let items = [];
-    if (!category.collapsed) {
-      items = this.renderItems(category.items, false);
-    }
-    return items;
   }
 }
 

@@ -27,6 +27,7 @@ export * from "../ImageItemValueWrapper";
 export * from "../MatrixCellWrapper";
 export * from "../Results";
 export * from "../toolbox/ToolboxItem";
+export * from "../toolbox/ToolboxCategory";
 export * from "../toolbox/Toolbox";
 export * from "../toolbox/AdaptiveToolbox";
 export * from "../TabbedMenu";
