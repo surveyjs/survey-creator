@@ -120,7 +120,7 @@ export class SidebarModel extends Base {
     return tab;
   }
   public updateHasVisibleTabs() {
-    this.hasVisibleTabs = (this.tabs || []).filter(tab => tab.visible && tab.allowShow).length > 0;
+    this.hasVisibleTabs = (this.tabs || []).filter(tab => tab.visible).length > 0;
   }
   public dispose() {
     if (!!this.creator && !this.isDisposed) {

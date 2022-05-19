@@ -44,8 +44,5 @@ test("Sidebar: hasVisibleTabs test", () => {
   expect(creator.sidebar.hasVisibleTabs).toEqual(false);
 
   creator.makeNewViewActive("translation");
-  creator.sidebar["tabs"][2].allowShow = true;
   expect(creator.sidebar.hasVisibleTabs).toEqual(true);
-  creator.sidebar["tabs"][2].allowShow = false;
-  expect(creator.sidebar.hasVisibleTabs).toEqual(false);
 });
