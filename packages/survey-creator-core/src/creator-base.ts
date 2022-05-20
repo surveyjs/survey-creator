@@ -50,6 +50,7 @@ import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
+import { ICreatorOptions } from "./creator-options";
 
 import "./components/creator.scss";
 import "./components/string-editor.scss";
@@ -60,10 +61,6 @@ export interface IKeyboardShortcut {
   hotKey: { ctrlKey?: boolean, keyCode: number };
   macOsHotkey?: { shiftKey?: boolean, keyCode: number };
   execute: (context: any) => void;
-}
-
-export interface ICreatorOptions {
-  [index: string]: any;
 }
 
 export interface ICreatorPlugin {
@@ -165,16 +162,16 @@ export class CreatorBase extends Base
   /**
    * Set it to true to show "Designer" tab and to false to hide the tab
    */
-  @property({ defaultValue: false }) showDesignerTab: boolean;
+  @property({ defaultValue: true }) showDesignerTab: boolean;
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
    */
-  @property({ defaultValue: false }) showJSONEditorTab: boolean;
+  @property({ defaultValue: true }) showJSONEditorTab: boolean;
   /**
    * Obsolete. Please use showPreviewTab property
    * @see showPreviewTab
    */
-  @property({ defaultValue: false }) showTestSurveyTab: boolean;
+  @property({ defaultValue: true }) showTestSurveyTab: boolean;
   /**
    * Set it to true to show "Preview" tab and to false to hide the tab
    */
@@ -241,8 +238,22 @@ export class CreatorBase extends Base
    * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
    * You can set this option in creator constructor only
    */
-  public get pageEditMode() {
+  public get pageEditMode(): "standard" | "single" | "bypage" {
     return this.pageEditModeValue;
+  }
+  protected set pageEditMode(val: "standard" | "single" | "bypage") {
+    this.pageEditModeValue = val;
+    if (this.pageEditModeValue === "single") {
+      this.setPropertyVisibility("survey", false, "pages");
+      this.setPropertyVisibility("question", false, "page");
+      this.setPropertyVisibility("panel", false, "page");
+      this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
+      Survey.settings.allowShowEmptyTitleInDesignMode = false;
+      Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
+    }
+    if (this.pageEditModeValue === "bypage") {
+      this.showPageNavigator = true;
+    }
   }
 
   @property() surveyValue: SurveyModel;
@@ -621,9 +632,9 @@ export class CreatorBase extends Base
   /**
    * An event that is raised each time a user edits a survey object property.
    * Use this event to correct or validate the property value while the user enters it.
-   * 
+   *
    * The event handler accepts the following arguments:
-   * 
+   *
    * - `sender`- A Survey Creator instance that raised the event.
    * - `options.obj` - A survey object instance (question or panel) whose property is being edited.
    * - `options.propertyName` - The name of the property.
@@ -638,8 +649,8 @@ export class CreatorBase extends Base
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * An event that is raised after a property in a survey object has changed. 
-   * 
+   * An event that is raised after a property in a survey object has changed.
+   *
    * - `sender`- A Survey Creator instance that raised the event.
    * - `options.obj` - A survey object instance (question or panel) whose property has changed.
    * - `options.propertyName` - The name of the property.
@@ -1371,149 +1382,26 @@ export class CreatorBase extends Base
       });
     }
   }
-  public getOptions() {
+  public getOptions(): ICreatorOptions {
     return this.options || {};
   }
-
-  protected setOptions(options: any): void {
+  protected setOptions(options: ICreatorOptions): void {
     if (!options) options = {};
-    if (!options.hasOwnProperty("generateValidJSON"))
-      options.generateValidJSON = true;
+    const obsoleteOptions = {};
+    obsoleteOptions["showTestSurveyTab"] = "showPreviewTab";
+    obsoleteOptions["showDefaultLanguageInTestSurveyTab"] = "showDefaultLanguageInPreviewTab";
+    obsoleteOptions["showInvisibleElementsInPreviewTab"] = "showInvisibleElementsInTestSurveyTab";
+    for(let key in obsoleteOptions) {
+      if(options[key] === undefined) continue;
+      const newKey = obsoleteOptions[key];
+      if(options[newKey] === undefined) {
+        options[newKey] = options[key];
+        delete options[key];
+      }
+    }
     this.options = options;
-    this.showDesignerTab =
-      typeof options.showDesignerTab !== "undefined"
-        ? options.showDesignerTab
-        : true;
-    this.showLogicTab =
-      typeof options.showLogicTab !== "undefined"
-        ? options.showLogicTab
-        : false;
-    this.showJSONEditorTab =
-      typeof options.showJSONEditorTab !== "undefined"
-        ? options.showJSONEditorTab
-        : true;
-    this.showPreviewTab =
-      typeof options.showPreviewTab !== "undefined"
-        ? options.showPreviewTab
-        : (typeof options.showTestSurveyTab !== "undefined"
-          ? options.showTestSurveyTab : true);
-    this.allowEditSurveyTitle =
-      typeof options.allowEditSurveyTitle !== "undefined"
-        ? options.allowEditSurveyTitle
-        : true;
-    this.showEmbeddedSurveyTab =
-      typeof options.showEmbeddedSurveyTab !== "undefined"
-        ? options.showEmbeddedSurveyTab
-        : false;
-    this.showTranslationTab =
-      typeof options.showTranslationTab !== "undefined"
-        ? options.showTranslationTab
-        : false;
-    this.showLogicTab =
-      typeof options.showLogicTab !== "undefined"
-        ? options.showLogicTab
-        : false;
-
-    this.haveCommercialLicense =
-      typeof options.haveCommercialLicense !== "undefined"
-        ? options.haveCommercialLicense
-        : false;
-
-    this.showObjectTitles =
-      typeof options.showObjectTitles !== "undefined"
-        ? options.showObjectTitles
-        : false;
-    this.showTitlesInExpressions =
-      typeof options.showTitlesInExpressions !== "undefined"
-        ? options.showTitlesInExpressions
-        : false;
-    this.allowEditExpressionsInTextEditor =
-      typeof options.allowEditExpressionsInTextEditor !== "undefined"
-        ? options.allowEditExpressionsInTextEditor
-        : true;
-    if (typeof options.maximumColumnsCount !== "undefined") {
-      this.maximumColumnsCount = options.maximumColumnsCount;
-    }
-    if (typeof options.maximumChoicesCount !== "undefined") {
-      this.maximumChoicesCount = options.maximumChoicesCount;
-    }
-    if (typeof options.maximumRowsCount !== "undefined") {
-      this.maximumRowsCount = options.maxiumumRowsCount;
-    }
-    if (typeof options.maximumRateValues !== "undefined") {
-      this.maximumRateValues = options.maximumRateValues;
-    }
-    this.useTabsInElementEditor =
-      typeof options.useTabsInElementEditor !== "undefined"
-        ? options.useTabsInElementEditor
-        : false;
-    this.maxLogicItemsInCondition =
-      typeof options.maxLogicItemsInCondition !== "undefined"
-        ? options.maxLogicItemsInCondition
-        : -1;
-    this.showOptions =
-      typeof options.showOptions !== "undefined" ? options.showOptions : false;
-
-    this.generateValidJSON = this.options.generateValidJSON;
-    this.isAutoSave =
-      typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
-    this.showErrorOnFailedSave =
-      typeof options.showErrorOnFailedSave !== "undefined"
-        ? options.showErrorOnFailedSave
-        : true;
-    this.isRTLValue =
-      typeof options.isRTL !== "undefined" ? options.isRTL : false;
-
-    if (typeof options.readOnly !== "undefined") {
-      this.readOnly = options.readOnly;
-    }
-    if (typeof options.showPagesInTestSurveyTab !== "undefined") {
-      this.showPagesInPreviewTab = options.showPagesInTestSurveyTab;
-    }
-    if (typeof options.showPagesInPreviewTab !== "undefined") {
-      this.showPagesInPreviewTab = options.showPagesInPreviewTab;
-    }
-    if (typeof options.showSimulatorInTestSurveyTab !== "undefined") {
-      this.showSimulatorInPreviewTab = options.showSimulatorInTestSurveyTab;
-    }
-    if (typeof options.themeForPreview !== "undefined") {
-      this.themeForPreview = options.themeForPreview;
-    }
-    if (typeof options.showSimulatorInPreviewTab !== "undefined") {
-      this.showSimulatorInPreviewTab = options.showSimulatorInPreviewTab;
-    }
-    if (typeof options.showDefaultLanguageInTestSurveyTab !== "undefined") {
-      this.showDefaultLanguageInPreviewTab =
-        options.showDefaultLanguageInTestSurveyTab;
-    }
-    if (typeof options.showDefaultLanguageInPreviewTab !== "undefined") {
-      this.showDefaultLanguageInPreviewTab =
-        options.showDefaultLanguageInPreviewTab;
-    }
-    if (typeof options.showInvisibleElementsInTestSurveyTab !== "undefined") {
-      this.showInvisibleElementsInPreviewTab =
-        options.showInvisibleElementsInTestSurveyTab;
-    }
-    if (typeof options.showInvisibleElementsInPreviewTab !== "undefined") {
-      this.showInvisibleElementsInPreviewTab =
-        options.showInvisibleElementsInPreviewTab;
-    }
-    if (typeof options.allowModifyPages !== "undefined") {
-      this.allowModifyPages = options.allowModifyPages;
-    }
-    if (typeof options.pageEditMode !== "undefined") {
-      this.pageEditModeValue = options.pageEditMode;
-      if (this.pageEditModeValue === "single") {
-        this.setPropertyVisibility("survey", false, "pages");
-        this.setPropertyVisibility("question", false, "page");
-        this.setPropertyVisibility("panel", false, "page");
-        this.showJSONEditorTab = (options.showJSONEditorTab === true);
-        Survey.settings.allowShowEmptyTitleInDesignMode = false;
-        Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
-      }
-      if (this.pageEditModeValue === "bypage") {
-        this.showPageNavigator = true;
-      }
+    for(let key in options) {
+      this[key] = options[key];
     }
   }
   private setPropertyPlaceHolder(className: string, propertyName: string, value: string) {
@@ -1800,7 +1688,7 @@ export class CreatorBase extends Base
     var json = (<any>this.survey).toJSON();
     json = this.singlePageJSON(json);
     const indent = settings.jsonEditor.indentation;
-    if (this.options && this.options.generateValidJSON) {
+    if (this.generateValidJSON) {
       return JSON.stringify(json, null, indent);
     }
     return new SurveyJSON5().stringify(json, null, indent);
