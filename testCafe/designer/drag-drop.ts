@@ -38,6 +38,33 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
   await t.expect(ghostPageRowsCount).eql(0);
 });
 
+test.before(async t => {
+  const setOptions = ClientFunction(() => {
+    window["creator"].setOptions({
+      pageEditMode: "bypage"
+    });
+  });
+  await setOptions();
+})("Drag Drop Toolbox Item and Empty Page ({pageEditMode: 'bypage'})", async (t) => {
+  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+  const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 })
+    .click(Selector("[title='page2']"));
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
+
+  const pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(2);
+
+  const questionsLength = await getQuestionsLength();
+  await t.expect(questionsLength).eql(2);
+});
+
 test("Drag Drop Toolbox All Questions", async (t) => {
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
