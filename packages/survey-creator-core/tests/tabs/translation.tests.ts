@@ -1,10 +1,11 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { settings } from "../../src/settings";
 import { CreatorTester } from "../creator-tester";
 
 import "survey-core/survey.i18n";
+import { editorLocalization } from "../../src/editorLocalization";
 export * from "../../src/localization/russian";
 
 test("Fire callback on base objects creation", () => {
@@ -56,8 +57,8 @@ test("settingsSurvey layout", () => {
   expect(elements[0].getType()).toEqual("checkbox");
   expect(elements[0].name).toEqual("defaultLanguage");
   expect(elements[0].isReadOnly).toBeTruthy();
-  expect(elements[0]["choices"][0].value).toEqual("Default (english)");
-  expect(elements[0]["defaultValue"][0]).toEqual("Default (english)");
+  expect(elements[0]["choices"][0].value).toEqual("Default (English)");
+  expect(elements[0]["defaultValue"][0]).toEqual("Default (English)");
 
   expect(elements[1].getType()).toEqual("checkbox");
   expect(elements[1].name).toEqual("locales");
@@ -169,7 +170,7 @@ test("stringsSurvey - one question in survey", () => {
   expect(question1Props.titleLocation).toEqual("hidden");
   expect(question1Props.columns).toHaveLength(4);
   expect(question1Props.columns[0].name).toEqual("default");
-  expect(question1Props.columns[0].title).toEqual("Default (english)");
+  expect(question1Props.columns[0].title).toEqual("Default (English)");
   expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("title");
   expect(question1Props.rows[0].text).toEqual("Title");
@@ -178,9 +179,9 @@ test("stringsSurvey - one question in survey", () => {
   expect(choicesProps.name).toEqual("question1_choices");
   expect(choicesProps.columns).toHaveLength(4);
   expect(choicesProps.columns[0].name).toEqual("default");
-  expect(choicesProps.columns[0].title).toEqual("Default (english)");
+  expect(choicesProps.columns[0].title).toEqual("Default (English)");
   expect(choicesProps.columns[1].name).toEqual("fr");
-  expect(choicesProps.columns[1].title).toEqual("français");
+  expect(choicesProps.columns[1].title).toEqual("Français");
   expect(choicesProps.rows).toHaveLength(3);
   expect(choicesProps.rows[0].value).toEqual("item1");
   expect(choicesProps.rows[0].text).toEqual("Item 1");
@@ -201,6 +202,39 @@ test("stringsSurvey - one question in survey", () => {
   question1Props.visibleRows[0].cells[1].question.value = "changed fr";
   expect(translationItem.getLocText("fr")).toEqual("changed fr");
 });
+
+test("stringsSurvey - check properties text, should use pe. from localization instead of p.", () => {
+  const testLocale = editorLocalization.getLocale("test_locale");
+  testLocale.pe.rating = {
+    title: "test rating title"
+  }
+  testLocale.pe.minRateDescription = "test rating min description";
+  editorLocalization.currentLocale = "test_locale";
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            "type": "rating",
+            "name": "nps_score",
+            "minRateDescription": "(Most unlikely)",
+          },
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  const pagePanel = <PanelModel>page.elements[0];
+  const question = <PanelModel>pagePanel.elements[0];
+  const question1Props = <QuestionMatrixDropdownModel>question.elements[0];
+  expect(question1Props.rows[0].text).toEqual("test rating title");
+  expect(question1Props.rows[1].text).toEqual("test rating min description");
+  editorLocalization.currentLocale = "";
+});
+
 
 test("Add/remove columns on adding/removing locales", () => {
   const survey = new SurveyModel({
@@ -432,17 +466,13 @@ test("StringsHeaderSurvey layout", () => {
   const translation = new Translation(survey);
   const stringsMatrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
   const headerMatrix = <QuestionMatrixDropdownModel>(translation.stringsHeaderSurvey.getAllQuestions()[0]);
-  expect(stringsMatrix.rowTitleWidth).toEqual("300px");
   expect(stringsMatrix.columns).toHaveLength(1);
 
-  expect(headerMatrix.rowTitleWidth).toEqual("300px");
   expect(headerMatrix.columns).toHaveLength(1);
 
   translation.addLocale("de");
-  expect(stringsMatrix.rowTitleWidth).toEqual("300px");
   expect(stringsMatrix.columns).toHaveLength(2);
 
-  expect(headerMatrix.rowTitleWidth).toEqual("300px");
   expect(headerMatrix.columns).toHaveLength(2);
 });
 
@@ -496,6 +526,45 @@ test("Make invisible locales in language selector, that has been already choosen
   expect(list.actions[1].visible).toBeFalsy();
   surveyLocalization.supportedLocales = [];
 });
+
+test("Make add language button disabled if there are no options", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  });
+  surveyLocalization.supportedLocales = ["en"];
+  let translation = new Translation(survey);
+  expect(translation["isChooseLanguageEnabled"]).toEqual(false);
+  surveyLocalization.supportedLocales = ["fr", "de", "se"];
+  translation = new Translation(survey);
+  expect(translation["isChooseLanguageEnabled"]).toEqual(true);
+  translation.addLocale("fr");
+  expect(translation["isChooseLanguageEnabled"]).toEqual(true);
+  translation.addLocale("de");
+  expect(translation["isChooseLanguageEnabled"]).toEqual(true);
+  translation.addLocale("se");
+  expect(translation["isChooseLanguageEnabled"]).toEqual(false);
+  surveyLocalization.supportedLocales = [];
+});
+
 test("stringsSurvey - text question dataList property, default", () => {
   const oldValue = settings.translation.sortByName;
   settings.translation.sortByName = true;
@@ -940,4 +1009,28 @@ test("LogicPlugin: creator.readOnly", () => {
   expect(translationPlugin.model.stringsSurvey.mode).toEqual("display");
   const firstQuestion = translationPlugin.model.stringsSurvey.getAllQuestions()[0];
   expect(firstQuestion.isReadOnly).toBeTruthy();
+});
+test("Translation check all locale name are capitalized", () => {
+  surveyLocalization.locales["test_locale"] = {}
+  surveyLocalization.localeNames["test_locale"] = "test locale name";
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1",
+      }
+    ]
+  });
+
+  const translation = new Translation(survey);
+  const testLocaleAction = translation.chooseLanguageActions.filter((item: IAction) => item.id === "test_locale")[0];
+  expect(testLocaleAction.title).toEqual("Test Locale Name");
+  translation.addLocale("test_locale");
+  const testLocaleChoice = translation.localesQuestion.choices.filter((choice: ItemValue) => choice.value === "test_locale")[0];
+  expect(testLocaleChoice.text).toEqual("Test Locale Name");
+  translation.localesQuestion.value = ["test_locale"];
+  const testLocaleColumn = (<QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getAllQuestions()[0]).columns[1];
+  expect(testLocaleColumn.title).toEqual("Test Locale Name");
+  surveyLocalization.locales["test_locale"] = undefined
+  surveyLocalization.localeNames["test_locale"] = undefined;
 });

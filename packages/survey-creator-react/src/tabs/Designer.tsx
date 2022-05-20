@@ -84,7 +84,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       const page2Display = this.model.pagesController.page2Display;
       let cachedPage = this.renderedPagesCache[page2Display.id];
       if (!cachedPage) {
-        cachedPage = this.createRenderedPage(page2Display, 0);
+        cachedPage = this.createRenderedPage(page2Display, 0, true);
         this.renderedPagesCache[page2Display.id] = cachedPage;
       }
       renderedPages.push(cachedPage);
@@ -92,12 +92,12 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
 
     return renderedPages;
   }
-  protected createRenderedPage(page: PageModel, index: number): any {
+  protected createRenderedPage(page: PageModel, index: number, isGhostPage?: boolean): any {
     return (
       <div
         className={"svc-page"}
         data-sv-drop-target-page={page.name}
-        data-sv-drop-target-survey-element={page.name}
+        data-sv-drop-target-survey-element={isGhostPage ? "newGhostPage" : page.name}
         key={page.id + "-" + index}
       >
         {this.renderPage(page)}

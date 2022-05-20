@@ -81,7 +81,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.allowDragging = operationsAllow && options.allowDragging;
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
-    this.updateActionVisibility("settings", this.creator.sidebar.flyoutMode);
+    const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
+    this.updateActionVisibility("settings", settingsVisibility);
   }
   protected isOperationsAllow(): boolean {
     return !this.creator.readOnly;

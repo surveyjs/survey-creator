@@ -8,7 +8,7 @@ fixture`Property editors: ${title}`.page`${url}`.beforeEach(async (ctx) => {
 
 test(`survey Default language`, async (t) => {
     const getSurveyLocaleValue = ClientFunction(() => {
-        return creator.survey.localeValue;
+        return creator.survey.locale;
     });
 
     const generalAccorditionTabHeader = Selector(
