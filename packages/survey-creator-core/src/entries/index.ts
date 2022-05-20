@@ -5,6 +5,7 @@ export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
 export * from "../settings";
+export { ICreatorOptions } from "../creator-options";
 
 export * from "../creator-base";
 export * from "../creator-responsivity-manager";
