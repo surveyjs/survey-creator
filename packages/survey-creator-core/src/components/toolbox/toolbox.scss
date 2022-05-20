@@ -55,7 +55,11 @@ svc-toolbox {
   border-bottom: 1px solid $border;
   box-sizing: border-box;
   width: 100%;
+  min-width: calcSize(20);
   position: relative;
+}
+
+.svc-toolbox__category-header--collapsed {
   cursor: pointer;
 }
 

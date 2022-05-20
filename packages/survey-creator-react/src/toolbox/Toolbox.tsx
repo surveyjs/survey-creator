@@ -1,8 +1,9 @@
 import React from "react";
+import { Base } from "survey-core";
+import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { CreatorBase } from "survey-creator-core";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";
-import { Base, SurveyModel } from "survey-core";
-import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { SurveyCreatorToolboxCategory } from "./ToolboxCategory";
 
 export interface ISurveyCreatorToolboxProps {
   model: CreatorBase;
@@ -39,38 +40,16 @@ export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> 
     );
   }
 
-  renderItems(items: Array<any>) {
+  renderItems(items: Array<any>, isCompact = false) {
     return items.map((item, itemIndex) =>
-      <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} key={"item" + itemIndex} isCompact={false}></SurveyCreatorToolboxTool>
+      <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} isCompact={isCompact} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>
     );
-  }
-  renderCategories() {
-    return this.toolbox.categories.map((category) => {
-      const header = this.renderCategoryHeader(category);
-      const items = this.renderCategoryContent(category);
-      return (
-        <div className="svc-toolbox__category" key={category.name}>
-          {header}
-          {items}
-        </div>
-      );
-    });
   }
 
-  renderCategoryHeader(category: any): JSX.Element {
-    const iconName = category.collapsed ? "arrow-down" : "arrow-up";
-    const svgIconClassName = "svc-toolbox__category-header__button svc-string-editor__button--" + (category.collapsed ? "expand" : "collapse");
-    return attachKey2click(
-      <div className="svc-toolbox__category-header" onClick={e => category.toggleState()}>
-        <span className="svc-toolbox__category-title">{category.name}</span>
-        <div className="svc-toolbox__category-header__controls">
-          <SvgIcon className={svgIconClassName} iconName={"icon-" + iconName} size={24}></SvgIcon>
-        </div>
-      </div>
-    );
-  }
-  protected renderCategoryContent(category: any): Array<any> {
-    return !category.collapsed ? this.renderItems(category.items) : [];
+  renderCategories() {
+    return this.toolbox.categories.map((category, index) => {
+      return <SurveyCreatorToolboxCategory category={category} toolbox={this.toolbox} key={"item" + index} ></SurveyCreatorToolboxCategory>;
+    });
   }
 }
 
