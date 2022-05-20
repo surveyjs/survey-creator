@@ -55,7 +55,8 @@
     padding-right: calcSize(1.5);
     padding-left: calcSize(2);
     margin-left: 0;
-    margin-right: calcSize(-1.5);
+    margin-right: 0;
+    transform: translateX(calc(1.5 * #{$base-unit}));
     .svc-toolbox__item-title {
       padding-left: calcSize(1);
       padding-right: calcSize(4);
