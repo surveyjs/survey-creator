@@ -207,7 +207,7 @@ test("stringsSurvey - check properties text, should use pe. from localization in
   const testLocale = editorLocalization.getLocale("test_locale");
   testLocale.pe.rating = {
     title: "test rating title"
-  }
+  };
   testLocale.pe.minRateDescription = "test rating min description";
   editorLocalization.currentLocale = "test_locale";
   const survey = new SurveyModel({
@@ -234,7 +234,6 @@ test("stringsSurvey - check properties text, should use pe. from localization in
   expect(question1Props.rows[1].text).toEqual("test rating min description");
   editorLocalization.currentLocale = "";
 });
-
 
 test("Add/remove columns on adding/removing locales", () => {
   const survey = new SurveyModel({
@@ -1011,7 +1010,7 @@ test("LogicPlugin: creator.readOnly", () => {
   expect(firstQuestion.isReadOnly).toBeTruthy();
 });
 test("Translation check all locale name are capitalized", () => {
-  surveyLocalization.locales["test_locale"] = {}
+  surveyLocalization.locales["test_locale"] = {};
   surveyLocalization.localeNames["test_locale"] = "test locale name";
   const survey = new SurveyModel({
     "elements": [
@@ -1031,6 +1030,31 @@ test("Translation check all locale name are capitalized", () => {
   translation.localesQuestion.value = ["test_locale"];
   const testLocaleColumn = (<QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getAllQuestions()[0]).columns[1];
   expect(testLocaleColumn.title).toEqual("Test Locale Name");
-  surveyLocalization.locales["test_locale"] = undefined
+  surveyLocalization.locales["test_locale"] = undefined;
   surveyLocalization.localeNames["test_locale"] = undefined;
+});
+test("Change filterPageAction to all pages on changing survey", () => {
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [{ type: "text", name: "question1" }]
+      },
+      {
+        name: "page2",
+        elements: [{ type: "text", name: "question2" }]
+      }
+    ]
+  };
+  let creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = json;
+  const tabTranslationPlugin = <TabTranslationPlugin>creator.getPlugin("translation");
+  const filterPageAction = tabTranslationPlugin["filterPageAction"];
+  const filterPageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
+  creator.activeTab = "translation";
+  expect(filterPageAction.title).toEqual("All Pages");
+  tabTranslationPlugin.model.filteredPage = creator.survey.pages[0];
+  expect(filterPageAction.title).toEqual("page1");
+  creator.JSON = json;
+  expect(filterPageAction.title).toEqual("All Pages");
 });

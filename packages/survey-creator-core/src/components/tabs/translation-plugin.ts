@@ -81,6 +81,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   public update(): void {
     if (!this.model) return;
     this.model.survey = this.creator.survey;
+    this.model.filteredPage = null;
+    this.updateFilterPageAction(true);
   }
   public deactivate(): boolean {
     this.model = undefined;
