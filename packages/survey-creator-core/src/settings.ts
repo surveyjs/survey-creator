@@ -69,6 +69,36 @@ export var settings = {
     maximumRateValues: 0,
     generalTabName: "general"
   },
+  toolbox: {
+    /**
+     * Use it to change the default question JSON on dropping it into designer or converting questions
+     */
+    defaultJSON: {
+      imagepicker: {
+        choices: [
+          {
+            value: "lion",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          },
+          {
+            value: "giraffe",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+          },
+          {
+            value: "panda",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+          },
+          {
+            value: "camel",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+          }
+        ]
+      },
+      image: {
+        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+      }
+    }
+  },
   /**
    * Notification settings
    */
