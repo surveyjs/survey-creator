@@ -35,6 +35,7 @@ export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuesti
   ): any {
     return {
       type: "propertygrid_restfull",
+      titleLocation: "hidden"
     };
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {

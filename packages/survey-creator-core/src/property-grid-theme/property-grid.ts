@@ -272,6 +272,9 @@ export var propertyGridCss = {
     controls: "sjs_sp_controls",
     clearButton: "sjs_sp_clear"
   },
+  propertygrid_restfull: {
+    content: "spg-question__content spg-question__nopadding"
+  },
   saveData: {
     root: "",
     saving: "",
