@@ -32,7 +32,7 @@ export class ItemValueWrapperViewModel extends Base {
     if (question.noneItem === item) {
     } else if (question.otherItem === item) {
     } else if (
-      question.getType() === "checkbox" &&
+      question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>question).selectAllItem === item
     ) {
     } else if (this.isNew) {
@@ -114,7 +114,7 @@ export class ItemValueWrapperViewModel extends Base {
     } else if (model.question.otherItem === model.item) {
       model.question.hasOther = true;
     } else if (
-      model.question.getType() === "checkbox" &&
+      model.question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>model.question).selectAllItem === model.item
     ) {
       (<any>model.question).hasSelectAll = true;
@@ -132,7 +132,7 @@ export class ItemValueWrapperViewModel extends Base {
     } else if (model.question.otherItem === model.item) {
       model.question.hasOther = false;
     } else if (
-      model.question.getType() === "checkbox" &&
+      model.question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>model.question).selectAllItem === model.item
     ) {
       (<any>model.question).hasSelectAll = false;

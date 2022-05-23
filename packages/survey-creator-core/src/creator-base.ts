@@ -2981,16 +2981,17 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   if (!element.isContentElement) {
     if (element instanceof Question) {
+      const isDropdown = element.isDescendantOf("dropdown");
       if (isPopupEditorContent) {
-        return element.getType() == "dropdown" ? "svc-cell-dropdown-question" : "svc-cell-question";
+        return isDropdown ? "svc-cell-dropdown-question" : "svc-cell-question";
       }
       if (element.customWidget) {
         return "svc-widget-question";
       }
-      if (element.getType() == "dropdown") {
+      if (isDropdown) {
         return "svc-dropdown-question";
       }
-      if (element.getType() == "image") {
+      if (element.isDescendantOf("image")) {
         return "svc-image-question";
       }
       return "svc-question";
@@ -3002,7 +3003,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   return undefined;
 }
 export function getQuestionContentWrapperComponentName(element) {
-  if (element.getType() == "rating" && !element.isContentElement) {
+  if (element.isDescendantOf("rating") && !element.isContentElement) {
     return "svc-rating-question-content";
   }
   return undefined;
@@ -3041,7 +3042,7 @@ export function getItemValueWrapperComponentName(
   if (question.isContentElement) {
     return SurveyModel.TemplateRendererComponentName;
   }
-  if (question.getType() === "imagepicker") {
+  if (question.isDescendantOf("imagepicker")) {
     return "svc-image-item-value";
   }
   return "svc-item-value";
