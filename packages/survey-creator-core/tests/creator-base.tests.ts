@@ -1228,7 +1228,17 @@ test("getElementWrapperComponentName", (): any => {
   const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
   expect(getElementWrapperComponentName(panelDynamictemplateQuestion, "", false)).toEqual("svc-dropdown-question");
 });
+test("getElementWrapperComponentName for new class", (): any => {
+  class QuestionDropdownModel2 extends QuestionDropdownModel {
+    getType() { return "dropdown2"; }
+    getTemplate() { return "dropdown"; }
+    getCssType() { return "dropdown"; }
+  }
+  Serializer.addClass("dropdown2", [], () => new QuestionDropdownModel2(""), "dropdown");
+  expect(getElementWrapperComponentName(new QuestionDropdownModel2(""), "", false)).toEqual("svc-dropdown-question");
 
+  Serializer.removeClass("dropdown2");
+});
 test("getQuestionContentWrapperComponentName", (): any => {
   expect(getQuestionContentWrapperComponentName(new QuestionRatingModel(""))).toEqual("svc-rating-question-content");
 });
