@@ -1003,6 +1003,7 @@ test("restfull property editor", () => {
   );
   expect(restFullQuestion).toBeTruthy();
   expect(restFullQuestion.getType()).toEqual("propertygrid_restfull");
+  expect(restFullQuestion.titleLocation).toEqual("hidden");
   var urlQuestion = restFullQuestion.contentPanel.getQuestionByName("url");
   expect(urlQuestion).toBeTruthy();
   expect(urlQuestion.value).toEqual("myUrl");
