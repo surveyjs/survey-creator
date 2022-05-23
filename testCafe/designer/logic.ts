@@ -500,3 +500,60 @@ test("Bug #2857: check scroll not appear", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(compareWidths()).ok();
 });
+
+test("Availability of items", async (t) => {
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "nps_score",
+            "title": "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+            "isRequired": true,
+            "rateMin": 0,
+            "rateMax": 10,
+            "minRateDescription": "(Most unlikely)",
+            "maxRateDescription": "(Most likely)"
+          },
+          {
+            "type": "comment",
+            "name": "passive_experience",
+            "visibleIf": "{nps_score} > 6  and {nps_score} < 9",
+            "title": "What is the primary reason for your score?"
+          }
+        ],
+        "title": "page1 -- title",
+        "description": "page1 -- description"
+      }
+    ]
+  };
+  const visibleListItems = Selector(".sv-list__item").filterVisible();
+  const visibleDisabledListItems = Selector(".sv-list__item.sv-list__item--disabled").filterVisible();
+  await setJSON(json);
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .hover(tableRulesSelector.nth(0))
+    .click(logicDetailButtonElement)
+
+    .click(logicOperatorSelector.nth(1))
+    .expect(visibleListItems.count).eql(12)
+    .expect(visibleDisabledListItems.count).eql(4)
+    .pressKey("esc")
+
+    .click(logicOperatorSelector.nth(0))
+    .expect(visibleListItems.count).eql(12)
+    .expect(visibleDisabledListItems.count).eql(4)
+    .click(getListItemByText("Greater than or equal to"))
+    .click(logicOperatorSelector.nth(0))
+    .expect(visibleListItems.count).eql(12)
+    .expect(visibleDisabledListItems.count).eql(4)
+    .pressKey("esc")
+
+    .click(logicOperatorSelector.nth(1))
+    .expect(visibleListItems.count).eql(12)
+    .expect(visibleDisabledListItems.count).eql(4);
+
+});
