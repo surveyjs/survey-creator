@@ -17,6 +17,7 @@ import {
 } from "survey-core";
 import { CreatorBase, toolboxLocationType } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
+import { settings } from "./settings";
 
 /**
  * The Toolbox item description.
@@ -106,53 +107,17 @@ export class QuestionToolbox
     "html",
     "signaturepad"
   ];
-
-  public static getQuestionDefaultSettings(questionType: string) {
-    return this._questionDefaultSettings[questionType] && this._questionDefaultSettings[questionType]();
+  public static getQuestionDefaultSettings(questionType: string): any {
+    if(!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
+    return settings.toolbox.defaultJSON[questionType];
   }
-
-  private static _questionDefaultSettings = {
-    imagepicker: () => {
-      return {
-        choices: [
-          {
-            value: "lion",
-            imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-          },
-          {
-            value: "giraffe",
-            imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
-          },
-          {
-            value: "panda",
-            imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
-          },
-          {
-            value: "camel",
-            imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-          }
-        ]
-      };
-    },
-    image: () => {
-      return {
-        imageLink:
-          "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-      };
-    }
-  };
-
   /**
    * Modify this array to change the toolbox items order.
    */
-  public get orderedQuestions() {
+  public get orderedQuestions(): string[] {
     return this._orderedQuestions;
   }
-  public set orderedQuestions(questions) {
+  public set orderedQuestions(questions: string[]) {
     this._orderedQuestions = questions;
     this.reorderItems();
   }

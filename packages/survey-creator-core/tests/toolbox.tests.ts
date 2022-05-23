@@ -9,6 +9,7 @@ import {
   QuestionButtonGroupModel
 } from "survey-core";
 import { QuestionLinkValueModel } from "../src/components/link-value";
+import { settings } from "../src/settings";
 import { QuestionToolbox } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
 
@@ -354,4 +355,14 @@ test("the toolbox gets compact after the sidebar was collapsed/expanded ", (): a
 
   creator.showSidebar = true;
   expect(creator.toolbox.isCompact).toEqual(false);
+});
+test("Set default toolbox JSON by question", (): any => {
+  settings.toolbox.defaultJSON["radiogroup"] = { choices: [1, 2, 3, 4, 5] };
+  const oldImageLink = settings.toolbox.defaultJSON.image.imageLink;
+  settings.toolbox.defaultJSON.image.imageLink = "testLink";
+  const creator = new CreatorTester();
+  expect(creator.toolbox.getItemByName("radiogroup").json["choices"]).toHaveLength(5);
+  expect(creator.toolbox.getItemByName("image").json["imageLink"]).toEqual("testLink");
+  settings.toolbox.defaultJSON.image.imageLink = oldImageLink;
+  delete settings.toolbox.defaultJSON["radiogroup"];
 });
