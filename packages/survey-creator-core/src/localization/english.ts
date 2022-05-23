@@ -391,7 +391,7 @@ export var enStrings = {
     //survey
     showTitle: "Show the title",
     expandCollapseTitle: "Expand/collapse title",
-    locale: "Survey Language",
+    locale: "Survey language",
     simulator: "Choose device",
     landscapeOrientation: "Landscape",
     portraitOrientation: "Portrait",
@@ -560,6 +560,9 @@ export var enStrings = {
     defaultPanelValue: "Default Values",
     cells: "Cell Texts",
     keyName: "Key column",
+    itemvalue: {
+      text: "Alt text"
+    },
 
     // Header  adorner
     logoPosition: "Logo position",
