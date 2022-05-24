@@ -189,7 +189,9 @@ export class QuestionToolbox
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel.title);
     });
     this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
-      this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
+      if(!this.creator.readOnly) {
+        this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
+      }
     };
     this.dotsItemPopupModel.cssClass = "svc-toolbox-popup";
   }

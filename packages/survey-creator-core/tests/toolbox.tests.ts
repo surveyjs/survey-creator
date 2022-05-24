@@ -6,7 +6,8 @@ import {
   QuestionDropdownModel,
   CustomWidgetCollection,
   Question,
-  QuestionButtonGroupModel
+  QuestionButtonGroupModel,
+  DragOrClickHelper
 } from "survey-core";
 import { QuestionLinkValueModel } from "../src/components/link-value";
 import { settings } from "../src/settings";
@@ -365,4 +366,19 @@ test("Set default toolbox JSON by question", (): any => {
   expect(creator.toolbox.getItemByName("image").json["imageLink"]).toEqual("testLink");
   settings.toolbox.defaultJSON.image.imageLink = oldImageLink;
   delete settings.toolbox.defaultJSON["radiogroup"];
+});
+
+test("Check that d&d not working for toobox invisible items in readOnly mode", (): any => {
+  const creator = new CreatorTester();
+  const oldOnPointerDown = DragOrClickHelper.prototype.onPointerDown;
+  let trace = "";
+  DragOrClickHelper.prototype.onPointerDown = () => {
+    trace += "processed->";
+  };
+  creator.toolbox["invisibleItemsListModel"].onPointerDown(undefined, undefined);
+  expect(trace).toBe("processed->");
+  creator.readOnly = true;
+  creator.toolbox["invisibleItemsListModel"].onPointerDown(undefined, undefined);
+  expect(trace).toBe("processed->"); //pointer down should not be processed in readOnlyMode;
+  DragOrClickHelper.prototype.onPointerDown = oldOnPointerDown;
 });
