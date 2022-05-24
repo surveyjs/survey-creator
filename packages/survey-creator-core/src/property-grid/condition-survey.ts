@@ -225,6 +225,30 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!ConditionEditor.canParseExpression(text)) return false;
     return new ConditionEditorItemsBuilder().build(text).length > 0;
   }
+  public static isOperatorEnabled(qType: string, operatorTypes: Array<string>): boolean {
+    if (!qType) return true;
+    if (!operatorTypes || operatorTypes.length == 0) return true;
+    const contains = [];
+    const notContains = [];
+    for (let i = 0; i < operatorTypes.length; i++) {
+      let name = operatorTypes[i];
+      if (name[0] == "!") {
+        notContains.push(name.substring(1));
+      } else {
+        contains.push(name);
+      }
+    }
+    return ConditionEditor.isClassContains(qType, contains, notContains);
+  }
+  public static isClassContains(qType: string, contains: Array<string>, notContains: Array<string>): boolean {
+    let classInfo = Serializer.findClass(qType);
+    while (!!classInfo) {
+      if (contains.indexOf(classInfo.name) > -1) return true;
+      if (notContains.indexOf(classInfo.name) > -1) return false;
+      classInfo = !!classInfo.parentName ? Serializer.findClass(classInfo.parentName) : null;
+    }
+    return contains.length == 0;
+  }
   private objectValue: Base;
   private surveyValue: SurveyModel;
   private contextValue: Question;
@@ -461,20 +485,29 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
   }
   private isSettingPanelValues = false;
-  private setItemToPanel(item: ConditionEditorItem, panel: PanelModel) {
-    this.isSettingPanelValues = true;
-    panel.getQuestionByName("conjunction").value = item.conjunction;
-    (<QuestionDropdownModel>panel.getQuestionByName("operator")).choices = this.getOperators();
-    panel.getQuestionByName("operator").value = item.operator;
-    (<QuestionDropdownModel>panel.getQuestionByName("questionName")).choices = this.getConditionQuestions();
-    panel.getQuestionByName("questionName").titleLocation = this.panel.panels.indexOf(panel) == 0 ? "left" : "hidden";
+  private setupConditionOperator(item: ConditionEditorItem, panel: PanelModel) {
+    const questionOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
+    questionOperator.choices = this.getOperators();
+    questionOperator.value = item.operator;
+    questionOperator.onOpened.add((_, opt) => {
+      const json = this.getQuestionConditionJson(panel.getQuestionByName("questionName").value, "equal");
+      const qType = !!json ? json.type : null;
+
+      opt.choices.forEach((choice, index) => {
+        choice.setIsEnabled(ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]));
+      });
+    });
+  }
+  private setupConditionQuestionName(item: ConditionEditorItem, panel: PanelModel) {
+    const panelQuestionName = <QuestionDropdownModel>panel.getQuestionByName("questionName");
+    panelQuestionName.choices = this.getConditionQuestions();
+    panelQuestionName.titleLocation = this.panel.panels.indexOf(panel) == 0 ? "left" : "hidden";
     const questionName = this.getQuestionNameToPanel(item.questionName);
     if (!!this.getConditionQuestion(questionName)) {
-      panel.getQuestionByName("questionName").value = questionName;
+      panelQuestionName.value = questionName;
     }
-    if (!!panel.getQuestionByName("questionValue")) {
-      panel.getQuestionByName("questionValue").value = item.value;
-    }
+  }
+  private setupRemoveQuestion(panel: PanelModel) {
     const dynamicPanel: QuestionPanelDynamicModel = <QuestionPanelDynamicModel>(panel.getQuestionByName("removeAction").parentQuestion);
     const removeQuestionQuestion: any = panel.getQuestionByName("removeAction");
     removeQuestionQuestion.linkClickCallback = () => {
@@ -484,6 +517,16 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     };
     removeQuestionQuestion.linkValueText = "";
     removeQuestionQuestion.linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
+  }
+  private setItemToPanel(item: ConditionEditorItem, panel: PanelModel) {
+    this.isSettingPanelValues = true;
+    panel.getQuestionByName("conjunction").value = item.conjunction;
+    this.setupConditionOperator(item, panel);
+    this.setupConditionQuestionName(item, panel);
+    if (!!panel.getQuestionByName("questionValue")) {
+      panel.getQuestionByName("questionValue").value = item.value;
+    }
+    this.setupRemoveQuestion(panel);
     this.isSettingPanelValues = false;
   }
   private getConditionQuestions(): Array<ItemValue> {
@@ -708,7 +751,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       json.type = "text";
     }
     if (!!json && operator == "anyof") {
-      if (!this.isClassContains(json.type, ["checkbox"], [])) {
+      if (!ConditionEditor.isClassContains(json.type, ["checkbox"], [])) {
         json.type = "checkbox";
       }
     }
@@ -725,7 +768,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     let isCurrentOperatorEnabled = true;
     const op = questionOperator.value;
     for (let i = 0; i < choices.length; i++) {
-      choices[i].setIsEnabled(this.isOperatorEnabled(qType, settings.operators[choices[i].value]));
+      choices[i].setIsEnabled(ConditionEditor.isOperatorEnabled(qType, settings.operators[choices[i].value]));
       if (choices[i].value == op) {
         isCurrentOperatorEnabled = choices[i].isEnabled;
       }
@@ -764,30 +807,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       }
     }
     return "equal";
-  }
-  private isOperatorEnabled(qType: string, operatorTypes: Array<string>): boolean {
-    if (!qType) return true;
-    if (!operatorTypes || operatorTypes.length == 0) return true;
-    const contains = [];
-    const notContains = [];
-    for (let i = 0; i < operatorTypes.length; i++) {
-      let name = operatorTypes[i];
-      if (name[0] == "!") {
-        notContains.push(name.substring(1));
-      } else {
-        contains.push(name);
-      }
-    }
-    return this.isClassContains(qType, contains, notContains);
-  }
-  private isClassContains(qType: string, contains: Array<string>, notContains: Array<string>): boolean {
-    let classInfo = Serializer.findClass(qType);
-    while (!!classInfo) {
-      if (contains.indexOf(classInfo.name) > -1) return true;
-      if (notContains.indexOf(classInfo.name) > -1) return false;
-      classInfo = !!classInfo.parentName ? Serializer.findClass(classInfo.parentName) : null;
-    }
-    return contains.length == 0;
   }
   private onPanelAdded() {
     this.setItemToPanel(
