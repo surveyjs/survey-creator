@@ -10,7 +10,7 @@ export interface ICreatorOptions {
   //Default is true
   showJSONEditorTab?: boolean;
   //Default is false
-  showLogicTab? : boolean;
+  showLogicTab?: boolean;
   //Default is false
   showEmbeddedSurveyTab?: boolean;
   //Default is false
@@ -53,6 +53,8 @@ export interface ICreatorOptions {
   showInvisibleElementsInPreviewTab?: boolean;
   //Default is false
   showObjectTitles?: boolean;
+  //Default is false
+  showHeaderInEmptySurvey?: boolean;
   //Default is true
   allowModifyPages?: boolean;
   //Default is settings.propertyGrid.maximumColumnsCount
