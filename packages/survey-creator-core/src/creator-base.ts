@@ -88,30 +88,30 @@ export class CreatorAction extends Action implements ICreatorAction {
   onUpdateTitle?: () => string;
   onUpdateTooltip?: () => string;
   public updateTitle(): void {
-    if(!!this.onUpdateTooltip) {
+    if (!!this.onUpdateTooltip) {
       this.setTooltip(this.onUpdateTooltip());
     } else {
-      if(!!this.locTooltipName) {
+      if (!!this.locTooltipName) {
         this.setTooltip(editorLocalization.getString(this.locTooltipName));
       }
     }
-    if(!!this.onUpdateTitle) {
+    if (!!this.onUpdateTitle) {
       this.setTitle(this.onUpdateTitle());
     } else {
-      if(!!this.locTitleName) {
+      if (!!this.locTitleName) {
         this.setTitle(editorLocalization.getString(this.locTitleName));
       }
     }
   }
   private setTitle(newVal: string): void {
     this.title = newVal;
-    if(!!this.innerItem) {
+    if (!!this.innerItem) {
       this.innerItem.title = newVal;
     }
   }
   private setTooltip(newVal: string): void {
     this.tooltip = newVal;
-    if(!!this.innerItem) {
+    if (!!this.innerItem) {
       this.innerItem.tooltip = newVal;
     }
   }
@@ -494,17 +494,17 @@ export class CreatorBase extends Base
    * <br/> options.obj the survey object that is currently editing in the property grid
    * <br/> options.survey the property grid survey
    */
-   public onPropertyGridSurveyCreated: Survey.Event<
-   (sender: CreatorBase, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
- /**
-   * The event is called after a property editor (in fact a survey question) has been created and all it's properties have been assign.
-   * You can use this event to modify the property editor properties or set event handlers to customize it's behavior
-   * <br/> options.obj the survey object that is currently editing in the property grid
-   * <br/> options.property the property that the current property editor is editing
-   * <br/> options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
-   */
+  public onPropertyGridSurveyCreated: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+    * The event is called after a property editor (in fact a survey question) has been created and all it's properties have been assign.
+    * You can use this event to modify the property editor properties or set event handlers to customize it's behavior
+    * <br/> options.obj the survey object that is currently editing in the property grid
+    * <br/> options.property the property that the current property editor is editing
+    * <br/> options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
+    */
   public onPropertyEditorCreated: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
@@ -658,18 +658,18 @@ export class CreatorBase extends Base
    * @see onPropertyValidationCustomError
    * @see onPropertyValueChanging
    */
-   public onSurveyPropertyValueChanged: Survey.Event<
-   (sender: CreatorBase, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
- /**
-   * Use this event to modify the list (name and titles) of the questions available in a condition editor.
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object which property is edited in the Property Editor.
-   * <br/> options.propertyName  the name of the edited property.
-   * <br/> options.editor the instance of Property Editor.
-   * <br/> options.list the list of the questions available for condition
-   */
+  public onSurveyPropertyValueChanged: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+    * Use this event to modify the list (name and titles) of the questions available in a condition editor.
+    * <br/> sender the survey creator object that fires the event
+    * <br/> options.obj the survey object which property is edited in the Property Editor.
+    * <br/> options.propertyName  the name of the edited property.
+    * <br/> options.editor the instance of Property Editor.
+    * <br/> options.list the list of the questions available for condition
+    */
   public onConditionQuestionsGetList: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
@@ -1020,27 +1020,27 @@ export class CreatorBase extends Base
     return editorLocalization.currentLocale;
   }
   public set locale(value: string) {
-    if(editorLocalization.currentLocale === value) return;
+    if (editorLocalization.currentLocale === value) return;
     editorLocalization.currentLocale = value;
     this.toolbox.updateTitles();
     this.refreshPlugin();
     const selEl = this.selectedElement;
-    if(!!selEl) {
+    if (!!selEl) {
       this.selectElement(null);
       this.selectElement(selEl);
     }
     this.locStrsChanged();
     this.tabs.forEach(item => (<TabbedMenuItem>item).updateTitle());
     this.toolbar.actions.forEach(item => {
-      if(!!(<any>item).updateTitle) {
+      if (!!(<any>item).updateTitle) {
         (<any>item).updateTitle();
       }
     });
   }
   private refreshPlugin() {
     const plugin = this.currentPlugin;
-    if(!!plugin) {
-      if(plugin.deactivate) {
+    if (!!plugin) {
+      if (plugin.deactivate) {
         plugin.deactivate();
       }
       const viewType = this.viewType;
@@ -1391,16 +1391,16 @@ export class CreatorBase extends Base
     obsoleteOptions["showTestSurveyTab"] = "showPreviewTab";
     obsoleteOptions["showDefaultLanguageInTestSurveyTab"] = "showDefaultLanguageInPreviewTab";
     obsoleteOptions["showInvisibleElementsInPreviewTab"] = "showInvisibleElementsInTestSurveyTab";
-    for(let key in obsoleteOptions) {
-      if(options[key] === undefined) continue;
+    for (let key in obsoleteOptions) {
+      if (options[key] === undefined) continue;
       const newKey = obsoleteOptions[key];
-      if(options[newKey] === undefined) {
+      if (options[newKey] === undefined) {
         options[newKey] = options[key];
         delete options[key];
       }
     }
     this.options = options;
-    for(let key in options) {
+    for (let key in options) {
       this[key] = options[key];
     }
   }
@@ -1800,7 +1800,7 @@ export class CreatorBase extends Base
     this.isAutoSave && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {
-    if(!this.onSurveyPropertyValueChanged.isEmpty) {
+    if (!this.onSurveyPropertyValueChanged.isEmpty) {
       options.propertyName = options.name;
       options.obj = options.target;
       options.value = options.newValue;
