@@ -385,3 +385,61 @@ test("Check zoom in mobile preview", (): any => {
   simulator.resetZoomParameters();
   expect(simulator.zoomScale).toEqual(1);
 });
+test("Show the start page and apply navigation for it", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1",
+            isRequired: true
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      },
+      {
+        "name": "page3",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ],
+    "firstPageIsStarted": true
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(model.pageListItems).toHaveLength(3);
+  expect(model.activePage.name).toEqual("page1");
+  expect(model.simulator.survey.state).toEqual("starting");
+  expect(model.simulator.survey.activePage.name).toEqual("page1");
+  expect(model.prevPageAction.enabled).toBeFalsy();
+  model.nextPageAction.action();
+  expect(model.simulator.survey.state).toEqual("running");
+  expect(model.simulator.survey.activePage.name).toEqual("page2");
+  model.nextPageAction.action();
+  expect(model.simulator.survey.state).toEqual("running");
+  expect(model.simulator.survey.activePage.name).toEqual("page3");
+  model.prevPageAction.action();
+  expect(model.simulator.survey.state).toEqual("running");
+  expect(model.simulator.survey.activePage.name).toEqual("page2");
+  expect(model.prevPageAction.enabled).toBeTruthy();
+  model.prevPageAction.action();
+  expect(model.simulator.survey.state).toEqual("starting");
+  expect(model.simulator.survey.activePage.name).toEqual("page1");
+  expect(model.prevPageAction.enabled).toBeFalsy();
+});
