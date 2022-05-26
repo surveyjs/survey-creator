@@ -8,9 +8,6 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     return this.props.model;
   }
 
-  constructor(props: any) {
-    super(props);
-  }
   protected getStateElement(): Base {
     return this.model;
   }

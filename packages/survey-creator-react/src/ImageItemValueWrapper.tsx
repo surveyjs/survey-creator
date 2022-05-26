@@ -1,10 +1,11 @@
 import { ImageItemValueWrapperViewModel } from "survey-creator-core";
 import React from "react";
 import { QuestionSelectBase, Base, ImageItemValue, QuestionImagePickerModel } from "survey-core";
-import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { ReactElementFactory, SvgIcon } from "survey-react-ui";
 import {
   attachKey2click,
 } from "survey-react-ui";
+import { CreatorModelElement } from "./ModelElement";
 
 interface ImageItemValueAdornerComponentProps {
   element: JSX.Element;
@@ -13,7 +14,7 @@ interface ImageItemValueAdornerComponentProps {
   item: ImageItemValue;
 }
 
-export class ImageItemValueAdornerComponent extends SurveyElementBase<
+export class ImageItemValueAdornerComponent extends CreatorModelElement<
   ImageItemValueAdornerComponentProps,
   any
 > {
@@ -22,6 +23,9 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
 
   constructor(props: ImageItemValueAdornerComponentProps) {
     super(props);
+    this.rootRef = React.createRef();
+  }
+  protected createModel(): void {
     this.model = new ImageItemValueWrapperViewModel(
       this.props.componentData.creator,
       this.props.question,
@@ -29,7 +33,6 @@ export class ImageItemValueAdornerComponent extends SurveyElementBase<
       null,
       null
     );
-    this.rootRef = React.createRef();
   }
   protected getStateElement(): Base {
     return this.model;

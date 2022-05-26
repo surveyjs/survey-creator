@@ -1,28 +1,26 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
 import { SurveyResultsItemModel, SurveyResultsModel } from "survey-creator-core";
-import { attachKey2click, SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { attachKey2click, SvgIcon } from "survey-react-ui";
 import { ActionButton } from "./ActionButton";
+import { CreatorModelElement } from "./ModelElement";
 
 interface ISurveyResultsProps {
   survey: SurveyModel;
 }
-export class SurveyResults extends SurveyElementBase<
+export class SurveyResults extends CreatorModelElement<
   ISurveyResultsProps,
   any
 > {
   model: SurveyResultsModel;
-  constructor(props: ISurveyResultsProps) {
-    super(props);
-    if (props.survey) {
-      this.model = new SurveyResultsModel(props.survey);
+  protected createModel(): void {
+    if (this.props.survey) {
+      this.model = new SurveyResultsModel(this.props.survey);
     }
   }
-
   protected getStateElement(): Base {
     return this.model;
   }
-
   render(): JSX.Element {
     if (!this.model) {
       return null;
@@ -88,7 +86,7 @@ export class SurveyResults extends SurveyElementBase<
   }
 }
 
-export class SurveyResultsByRow extends SurveyElementBase<any, any> {
+export class SurveyResultsByRow extends CreatorModelElement<any, any> {
   private get row(): SurveyResultsItemModel {
     return this.props.row;
   }

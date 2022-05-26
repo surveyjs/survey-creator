@@ -21,10 +21,6 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     return this.model.creator;
   }
 
-  constructor(props: any) {
-    super(props);
-  }
-
   private denyUpdate = () => {
     this.denyComponentUpdate();
   }

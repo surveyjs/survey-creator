@@ -108,10 +108,6 @@ export class TabbedMenuItemComponent extends SurveyElementBase<
     return this.item;
   }
 
-  constructor(props: any) {
-    super(props);
-  }
-
   render(): JSX.Element {
     const item = this.item;
     let className: string = "svc-tabbed-menu-item";

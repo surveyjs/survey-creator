@@ -7,9 +7,6 @@ interface IObjectSelectorComponentProps {
   model: ObjectSelectorModel;
 }
 class ObjectSelectorComponent extends SurveyElementBase<IObjectSelectorComponentProps, any> {
-  constructor(props: IObjectSelectorComponentProps) {
-    super(props);
-  }
   protected get model(): ObjectSelectorModel {
     return this.props.model;
   }

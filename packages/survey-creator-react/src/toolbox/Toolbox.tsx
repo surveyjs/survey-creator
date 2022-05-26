@@ -10,9 +10,6 @@ export interface ISurveyCreatorToolboxProps {
 }
 
 export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {
-  constructor(props: ISurveyCreatorToolboxProps) {
-    super(props);
-  }
   public get creator() {
     return this.props.model;
   }

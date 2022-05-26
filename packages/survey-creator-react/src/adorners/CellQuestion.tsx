@@ -2,20 +2,19 @@ import React from "react";
 import { Base, Question } from "survey-core";
 import {
   attachKey2click,
-  ReactElementFactory,
-  SurveyElementBase
+  ReactElementFactory
 } from "survey-react-ui";
+import { CreatorModelElement } from "../ModelElement";
 import { QuestionAdornerViewModel, toggleHovered } from "survey-creator-core";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { QuestionAdornerComponentProps } from "./Question";
 
-export class CellQuestionAdornerComponent extends SurveyElementBase<
+export class CellQuestionAdornerComponent extends CreatorModelElement<
   QuestionAdornerComponentProps,
   any
 > {
   model: QuestionAdornerViewModel;
-  constructor(props: QuestionAdornerComponentProps) {
-    super(props);
+  protected createModel(): void {
     this.model = new QuestionAdornerViewModel(
       this.props.componentData,
       this.props.question,

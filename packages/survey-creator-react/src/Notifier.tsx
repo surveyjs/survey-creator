@@ -8,22 +8,13 @@ export interface NotifierComponentProps {
   notifier: Notifier;
 }
 
-export class NotifierComponent extends SurveyElementBase<
-  NotifierComponentProps,
-  any
-> {
-  constructor(props: NotifierComponentProps) {
-    super(props);
-  }
-
+export class NotifierComponent extends SurveyElementBase<NotifierComponentProps, any> {
   get notifier() {
     return this.props.notifier;
   }
-
   protected getStateElement(): Base {
     return this.notifier;
   }
-
   renderElement(): JSX.Element {
     if (!this.notifier.active) {
       return null;

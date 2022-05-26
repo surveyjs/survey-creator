@@ -1,19 +1,22 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
-import { ReactElementFactory, SurveyElementBase, LogoImage, SvgIcon, attachKey2click } from "survey-react-ui";
+import { ReactElementFactory, LogoImage, SvgIcon, attachKey2click } from "survey-react-ui";
 import { CreatorBase, LogoImageViewModel } from "survey-creator-core";
+import { CreatorModelElement } from "./ModelElement";
 
 interface ILogoImageComponentProps {
   data: CreatorBase;
 }
 
-export class LogoImageComponent extends SurveyElementBase<ILogoImageComponentProps, any> {
+export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentProps, any> {
   private model: LogoImageViewModel;
   private rootRef: React.RefObject<HTMLDivElement>;
   constructor(props: ILogoImageComponentProps) {
     super(props);
-    this.model = new LogoImageViewModel(props.data, null);
     this.rootRef = React.createRef();
+  }
+  protected createModel(): void {
+    this.model = new LogoImageViewModel(this.props.data, null);
   }
   protected getStateElement(): Base {
     return this.model;

@@ -7,9 +7,6 @@ import { editorLocalization, QuestionLinkValueModel } from "survey-creator-core"
 import { ActionButton } from "./ActionButton";
 
 export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
-  constructor(props: any) {
-    super(props);
-  }
   protected get question(): QuestionLinkValueModel {
     return this.questionBase as QuestionLinkValueModel;
   }

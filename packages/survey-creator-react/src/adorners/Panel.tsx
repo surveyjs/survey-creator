@@ -14,9 +14,6 @@ import {
 import { QuestionAdornerComponent, QuestionAdornerComponentProps } from "./Question";
 
 export class PanelAdornerComponent extends QuestionAdornerComponent {
-  constructor(props: QuestionAdornerComponentProps) {
-    super(props);
-  }
   renderElementPlaceholder(): JSX.Element {
     if (!this.model.isEmptyElement) {
       return null;
