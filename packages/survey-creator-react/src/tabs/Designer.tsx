@@ -135,8 +135,21 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     );
   }
 
-  renderPlaceHolder(): JSX.Element {
+  renderHeader(condition: boolean): JSX.Element {
+    if (!condition) return null;
+
+    const survey: SurveyModel = this.creator.survey;
     return (<React.Fragment>
+      <div className="svc-designer-header">
+        <SurveyHeader survey={survey}></SurveyHeader>
+      </div>
+    </React.Fragment>);
+  }
+  renderPlaceHolder(): JSX.Element {
+    const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle && this.creator.showHeaderInEmptySurvey);
+
+    return (<React.Fragment>
+      {surveyHeader}
       <div className="svc-designer__placeholder-container" data-sv-drop-target-survey-element={"newGhostPage"}>
         {this.renderPlaceHolderContent()}
         {this.renderNewPage("svc-designer-placeholder-page")}
@@ -148,14 +161,11 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   }
   renderTabContent(): JSX.Element {
     const survey: SurveyModel = this.creator.survey;
+    const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle);
 
     return (<React.Fragment>
       <div className={this.model.getDesignerCss()}>
-        {!this.creator.allowEditSurveyTitle ? null :
-          <div className="svc-designer-header">
-            <SurveyHeader survey={survey}></SurveyHeader>
-          </div>
-        }
+        {surveyHeader}
         <SurveyNavigation survey={survey} location="top" />
         {this.getRenderedPages()}
         <SurveyNavigation

@@ -4,6 +4,12 @@
 <div class="svc-tab-designer" data-bind="css: getRootCss(), click: clickDesigner">
   <div class="svc-tab-designer_content">
     <!-- ko if: showPlaceholder -->
+    <!-- ko if: (creator.showHeaderInEmptySurvey && creator.allowEditSurveyTitle) -->
+    <div class="svc-designer-header">
+      <!-- ko template: { name: 'survey-header', data: survey } -->
+      <!-- /ko -->
+    </div>
+    <!-- /ko -->
     <div class="svc-designer__placeholder-container"
       data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }">
       <span class="svc-designer-placeholder-text svc-text svc-text--normal" data-bind="text: placeholderText"> </span>

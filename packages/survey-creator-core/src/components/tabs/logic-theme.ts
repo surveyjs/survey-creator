@@ -44,8 +44,7 @@ export var logicCss = {
     buttonRemove: "",
     buttonAdd: "svc-logic-operator sl-paneldynamic__add-btn",
     progressTop: "",
-    progressBottom:
-        "",
+    progressBottom: "",
     buttonPrev: "",
     buttonNext: "",
     progressContainer: "",
@@ -184,7 +183,8 @@ export var logicCss = {
     itemDecorator: "",
     controlDisabled: "",
     controlLabel: "",
-    materialDecorator: ""
+    materialDecorator: "",
+    controlValue: "sl-dropdown__value",
   },
   imagepicker: {
     root: "",
