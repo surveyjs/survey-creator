@@ -1162,6 +1162,7 @@ export class CreatorBase extends Base
     !!expandAction && this.toolbar.actions.push(expandAction);
   }
   public updateToolboxIsCompact(newVal?: boolean) {
+    if(!this.toolbox) return;
     const hasValue = newVal != undefined && newVal != null;
     if (this.toolbox.forceCompact !== undefined) {
       this.toolbox.isCompact = this.toolbox.forceCompact;
