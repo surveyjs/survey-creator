@@ -39,6 +39,9 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       this.props.page
     );
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["creator", "page"];
+  }
   protected getStateElement(): Base {
     return this.model;
   }

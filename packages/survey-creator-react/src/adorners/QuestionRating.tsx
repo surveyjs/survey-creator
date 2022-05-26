@@ -18,10 +18,12 @@ export class QuestionRatingAdornerComponent extends CreatorModelElement<Question
       null
     );
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["question", "componentData"];
+  }
   public get ratingModel(): QuestionRatingAdornerViewModel {
     return this.model as QuestionRatingAdornerViewModel;
   }
-
   public get model(): QuestionRatingAdornerViewModel {
     return this.modelValue;
   }

@@ -35,6 +35,9 @@ export class QuestionAdornerComponent extends CreatorModelElement<
       null
     );
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["question", "componentData"];
+  }
   public get model(): QuestionAdornerViewModel {
     return this.modelValue;
   }

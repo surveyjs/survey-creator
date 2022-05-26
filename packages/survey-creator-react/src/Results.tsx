@@ -18,6 +18,9 @@ export class SurveyResults extends CreatorModelElement<
       this.model = new SurveyResultsModel(this.props.survey);
     }
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["survey"];
+  }
   protected getStateElement(): Base {
     return this.model;
   }

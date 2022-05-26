@@ -34,7 +34,9 @@ export class SurveyPageNavigator extends CreatorModelElement<
       this.props.pageEditMode
     );
   }
-
+  protected getUpdatedModelProps(): string[] {
+    return ["pagesController", "pageEditMode"];
+  }
   protected getStateElement(): Base {
     return this.model;
   }

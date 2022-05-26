@@ -30,6 +30,9 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
       data.column,
     );
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["componentData"];
+  }
   componentDidUpdate(prevProps: any, prevState: any) {
     super.componentDidUpdate(prevProps, prevState);
     const data = this.props.componentData;

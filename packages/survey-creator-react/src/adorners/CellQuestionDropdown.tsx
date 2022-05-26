@@ -19,10 +19,12 @@ export class CellQuestionDropdownAdornerComponent extends CreatorModelElement<
       null
     );
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["question", "componentData"];
+  }
   protected getStateElement(): Base {
     return this.model;
   }
-
   render(): JSX.Element {
     if (this.model.isDragged) {
       return null;

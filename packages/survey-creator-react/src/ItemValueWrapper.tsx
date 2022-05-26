@@ -28,6 +28,9 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
       this.props.item
     );
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["question", "item"];
+  }
   protected getStateElement(): Base {
     return this.model;
   }

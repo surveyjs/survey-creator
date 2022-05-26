@@ -34,6 +34,9 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
       null
     );
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["question", "item"];
+  }
   protected getStateElement(): Base {
     return this.model;
   }

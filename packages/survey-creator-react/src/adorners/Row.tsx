@@ -25,6 +25,9 @@ export class RowWrapper extends CreatorModelElement<
       null
     );
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["row", "componentData"];
+  }
   protected getStateElement(): Base {
     return this.model;
   }
