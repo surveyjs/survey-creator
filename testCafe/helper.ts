@@ -63,12 +63,12 @@ export const toolboxItemIcons = Selector(".svc-toolbox__tool .svc-toolbox__item-
 export const toolboxItemTitles = Selector(".svc-toolbox__tool .svc-toolbox__item > .svc-toolbox__item-title").filterVisible();
 
 export const logicAddNewRuleButton = Selector(".svc-logic-tab__content-action").withText("Add New Rule");
-export const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question .sl-dropdown__value").filterVisible();
+export const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-operator--question").filterVisible();
 export const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filterVisible();
-export const logicActionSelector = Selector(".svc-logic-operator--action .sl-dropdown__value").filterVisible();
+export const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
 export const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterVisible();
 export const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
-export const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction .sl-dropdown__value").filterVisible();
+export const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
 export const logicActionTriggerEditorElement = Selector(".svc-logic_trigger-editor").filterVisible();
 export const logicActionTriggerQuestionsElement = Selector(".svc-logic_trigger-questions").filterVisible();
 export const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
