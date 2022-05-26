@@ -309,8 +309,9 @@ export class TestSurveyTabViewModel extends Base {
 
     if (name === "activePage") {
       this.updatePrevPageActionState();
-      this.nextPageAction.css = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1 ? "sv-action-bar-item--secondary" : "";
-      this.nextPageAction.enabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
+      const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
+      this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
+      this.nextPageAction.enabled = isNextEnabled;
       this.selectPageAction.title = this.getSelectPageTitle();
     }
     if (name === "isRunning" || name === "pageListItems" || name === "showPagesInTestSurveyTab") {
