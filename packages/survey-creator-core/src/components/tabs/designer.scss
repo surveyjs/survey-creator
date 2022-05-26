@@ -18,6 +18,10 @@ svc-tab-designer {
   justify-content: center;
 }
 
+.svc-tab-designer--with-place-holder .svc-designer-header {
+  min-width: calcSize(84);
+}
+
 .svc-tab-designer {
   .svc-tab-designer_content {
     width: 100%;
@@ -40,7 +44,8 @@ svc-tab-designer {
     width: 100%;
   }
 
-  .sd-progress, .sd-progress__bar {
+  .sd-progress,
+  .sd-progress__bar {
     background-color: transparent;
   }
 }
