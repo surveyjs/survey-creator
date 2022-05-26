@@ -122,9 +122,9 @@ test("Create logic rule", async (t) => {
     .expect(Selector(".svc-logic-tab__content-empty").exists).notOk()
     .expect(cellRules.innerText).eql(newRuleDisplayText)
     .expect(logicQuestionSelector.count).eql(1)
-    .expect(logicQuestionSelector.textContent).eql(selectQuestionPlaceHolder)
-    .expect(logicOperatorSelector.textContent).eql("Equals")
-    .expect(logicActionSelector.textContent).eql(selectActionTypePlaceHolder)
+    .expect(logicQuestionSelector.textContent).contains(selectQuestionPlaceHolder)
+    .expect(logicOperatorSelector.textContent).contains("Equals")
+    .expect(logicActionSelector.textContent).contains(selectActionTypePlaceHolder)
     .expect(logicQuestionValueSelector.exists).notOk()
     .expect(addButton.count).eql(0)
     .expect(removeButton.count).eql(0)
@@ -148,9 +148,9 @@ test("Create logic rule", async (t) => {
 
     .click(removeButton)
     .expect(logicQuestionSelector.count).eql(1)
-    .expect(logicQuestionSelector.textContent).eql(selectQuestionPlaceHolder)
-    .expect(logicOperatorSelector.textContent).eql("Equals")
-    .expect(logicActionSelector.textContent).eql(selectActionTypePlaceHolder)
+    .expect(logicQuestionSelector.textContent).contains(selectQuestionPlaceHolder)
+    .expect(logicOperatorSelector.textContent).contains("Equals")
+    .expect(logicActionSelector.textContent).contains(selectActionTypePlaceHolder)
     .expect(logicQuestionValueSelector.exists).notOk()
     .expect(addButton.count).eql(0)
     .expect(removeButton.count).eql(0)
@@ -235,14 +235,14 @@ test("Edit Logic rule", async (t) => {
     .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement)
 
-    .expect(logicQuestionSelector.textContent).eql("q1")
-    .expect(logicOperatorSelector.textContent).eql("Equals")
+    .expect(logicQuestionSelector.textContent).contains("q1")
+    .expect(logicOperatorSelector.textContent).contains("Equals")
 
     .expect(logicDropdownValueSelector.value).eql("item1")
     .click(logicDropdownValueSelector)
     .click(getSelectOptionByText("item2"))
 
-    .expect(logicQuestionSelector.nth(-1).textContent).eql("q2")
+    .expect(logicQuestionSelector.nth(-1).textContent).contains("q2")
     .click(logicQuestionSelector.nth(-1))
     .click(getListItemByText("q3"))
 
@@ -364,19 +364,19 @@ test("Availability of the Done button", async (t) => {
 async function check1Rule(t: TestController, ruleCondition: string) {
   await t
     .expect(cellRules.nth(0).innerText).eql(ruleCondition)
-    .expect(logicQuestionSelector.textContent).eql("q3")
-    .expect(logicOperatorSelector.textContent).eql("Equals")
+    .expect(logicQuestionSelector.textContent).contains("q3")
+    .expect(logicOperatorSelector.textContent).contains("Equals")
     .expect(logicQuestionValueSelector.find("input").value).eql("45")
-    .expect(logicActionSelector.textContent).eql("Complete survey");
+    .expect(logicActionSelector.textContent).contains("Complete survey");
 }
 async function check2Rule(t: TestController) {
   await t
     .expect(cellRules.nth(1).innerText).eql(newRuleDisplayText)
-    .expect(logicQuestionSelector.textContent).eql("q1")
-    .expect(logicOperatorSelector.textContent).eql("Equals")
+    .expect(logicQuestionSelector.textContent).contains("q1")
+    .expect(logicOperatorSelector.textContent).contains("Equals")
     .expect(logicDropdownValueSelector.value).eql("item2")
-    .expect(logicActionSelector.textContent).eql("Show (hide) question")
-    .expect(logicQuestionSelector.nth(1).textContent).eql("q3");
+    .expect(logicActionSelector.textContent).contains("Show (hide) question")
+    .expect(logicQuestionSelector.nth(1).textContent).contains("q3");
 }
 
 test("Modified rules without saving", async (t) => {

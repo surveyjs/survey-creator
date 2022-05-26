@@ -2857,6 +2857,7 @@ export class CreatorBase extends Base
       this.responsivityManager = undefined;
     }
   }
+  @property({ defaultValue: false }) showHeaderInEmptySurvey;
   @property({ defaultValue: true }) showPageNavigator;
   @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;

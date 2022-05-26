@@ -90,11 +90,22 @@ test("Choices (Checkbox): Layout", async (t) => {
 test("Placeholder", async (t) => {
   await t.resizeWindow(1767, 900);
   const designerTabContent = Selector(".svc-tab-designer");
-  await ClientFunction(()=> {
+  await ClientFunction(() => {
     (<any>window).creator.toolbox.isCompact = true;
   })();
 
   await checkElementScreenshot("surface-placeholder.png", designerTabContent, t);
+});
+
+test("Placeholder with survey header", async (t) => {
+  await t.resizeWindow(1767, 900);
+  const designerTabContent = Selector(".svc-tab-designer");
+  await ClientFunction(() => {
+    (<any>window).creator.toolbox.isCompact = true;
+    (<any>window).creator.showHeaderInEmptySurvey = true;
+  })();
+
+  await checkElementScreenshot("surface-placeholder-with-header.png", designerTabContent, t);
 });
 
 test("Page and question borders", async (t) => {
@@ -114,7 +125,7 @@ test("Page and question borders", async (t) => {
     ]
   };
   await setJSON(json);
-  await ClientFunction(()=> {
+  await ClientFunction(() => {
     (<any>window).creator.toolbox.isCompact = true;
   })();
   const designerTabContent = Selector(".svc-tab-designer");
