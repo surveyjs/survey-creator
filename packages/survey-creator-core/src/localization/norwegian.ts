@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var nbStrings = {
   //survey templates
@@ -121,7 +121,7 @@ export var nbStrings = {
     chooseElement: "Velg element...",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
-      addNewItem: "", //Verdien er som standard hentet fra pe.addNew 'Add New', du kan for eksempel sette den til  'Legg til ny regel'  .
+      addNewItem: "Legg til ny regel",
       //Logic tab strings
       page_visibilityName: "Sidesynlighet",
       panel_visibilityName: "Panelsynlighet",

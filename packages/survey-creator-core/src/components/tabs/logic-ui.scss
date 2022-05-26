@@ -21,7 +21,7 @@
   flex-wrap: wrap;
 }
 
-.svc-logic-panel-element .sd-row {
+.svc-logic_trigger-editor .sd-row {
   margin-top: 0;
 }
 
@@ -34,7 +34,11 @@
     width: 100%;
   }
 }
+.svc-logic-paneldynamic div.svc-logic-operator {
+  height: calcSize(3);
+}
 .svc-logic-paneldynamic .svc-logic-operator {
+  -webkit-appearance: none;
   appearance: none;
   padding: calcSize(1) calcSize(2);
   border-radius: calcSize(12.5);
@@ -44,6 +48,8 @@
   font-family: $font-family;
   font-size: calcSize(2);
   color: $foreground-light;
+  height: calcSize(5);
+  line-height: calcSize(3);
 
   option {
     background: $background;
@@ -58,21 +64,36 @@
 .svc-logic-question--answered .svc-logic-operator {
   color: $foreground;
 }
-
-.svc-logic-operator.svc-logic-operator--conjunction {
-  background-color: $primary-light;
+.svc-logic-operator.svc-logic-operator {
+  &:hover,
+  &:focus {
+    color: $background;
+    outline: none;
+    box-shadow: none;
+  }
 }
-
 .svc-logic-operator.svc-logic-operator--question {
   background-color: $blue-light;
+  &:hover,
+  &:focus {
+    background-color: $blue;
+  }
 }
-
+.svc-logic-operator.svc-logic-operator--conjunction,
 .svc-logic-operator.svc-logic-operator--operator {
-  background-color: $secondary-light;
+  background-color: $secondary-back-light;
+  &:hover,
+  &:focus {
+    background-color: $secondary;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--action {
   background-color: $red-light;
+  &:hover,
+  &:focus {
+    background-color: $red;
+  }
 }
 
 .svc-logic-operator.svc-logic-operator--error {
@@ -90,43 +111,43 @@
     display: none;
   }
 }
-
-.svc-icon-remove {
+.svc-action-button.svc-logic-condition-remove.svc-icon-remove:focus {
+  outline: none;
+}
+.svc-logic-condition-remove.svc-icon-remove {
   display: block;
-  width: calcSize(2.5);
-  height: 22px;
+  width: calcSize(5);
+  height: calcSize(5);
   background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml,%3Csvg width='20' height='22' viewBox='0 0 20 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 4H18H14V2C14 0.9 13.1 0 12 0H8C6.9 0 6 0.9 6 2V4H2H0V6H2V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V6H20V4ZM8 2H12V4H8V2ZM16 20H4V6H6H14H16V20ZM12 8H14V18H12V8ZM9 8H11V18H9V8ZM6 8H8V18H6V8Z' fill='%23E60A3E'/%3E%3C/svg%3E%0A");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22 4H20H16V2C16 0.9 15.1 0 14 0H10C8.9 0 8 0.9 8 2V4H4H2V6H4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V6H22V4ZM10 2H14V4H10V2ZM18 20H6V6H8H16H18V20ZM14 8H16V18H14V8ZM11 8H13V18H11V8ZM8 8H10V18H8V8Z' fill='%23E60A3E'/%3E%3C/svg%3E%0A");
+  background-size: calcSize(3) calcSize(3);
+  background-position: center;
+}
+.svc-logic-condition-remove.svc-icon-remove:hover,
+.svc-logic-condition-remove.svc-icon-remove:focus {
+  background-color: $red-light;
+}
+.svc-logic-condition-remove-question {
+  height: calcSize(5);
 }
 
-.svc-logic-paneldynamic .svc-logic-paneldynamic__button-remove-text {
+.svc-logic-paneldynamic__button.svc-logic-paneldynamic__remove-btn {
   display: none;
 }
 
-.svc-logic-paneldynamic .svc-logic-paneldynamic__button {
-  background: none;
-  box-shadow: none;
-  appearance: none;
-  border: none;
-  padding: 0;
-  margin: calcSize(0.5);
-}
-
-.svc-question-wrapper {
-  max-width: initial !important;
-  min-width: initial !important;
-  width: initial !important;
-  flex: initial !important;
-}
-.svc-question-wrapper {
-  .sv-title-actions__title {
-    max-width: none;
-  }
+.svc-logic-paneldynamic__button.svc-logic-paneldynamic__remove-btn {
+  display: none;
 }
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
   color: $foreground-light;
+  margin-top: calcSize(2);
+
+  &:hover,
+  &:focus {
+    color: $background;
+  }
 }
 
 .svc-logic-tab__content {
@@ -134,44 +155,33 @@
     flex-direction: column;
     display: flex;
     align-items: center;
-    justify-content: center;
+    position: absolute;
+    top: 35%;
 
     .svc-logic-tab__content-action {
-      width: calcSize(40);
+      width: calcSize(33);
       margin-top: calcSize(4);
     }
   }
 
   .svc-logic-tab__content-action {
-    display: flex;
-    align-items: center;
-    width: 50%;
     margin-left: 25%;
     margin-right: 25%;
-    height: calcSize(7);
-    line-height: calcSize(7);
-    vertical-align: baseline;
-    text-align: center;
-    background-color: $background;
-    box-shadow: 0px 1px 2px $shadow-inner;
-    border-radius: calcSize(0.5);
-    cursor: pointer;
-    user-select: none;
+    margin-bottom: calcSize(8);
   }
+
   .svc-logic-tab__content-action--disabled {
     cursor: default;
-    color: $foreground-disabled;
+    outline: none;
+
     &:hover {
       background-color: $background;
+      box-shadow: 0px 1px 2px $shadow-inner;
     }
   }
 
-  .svc-text {
-    color: $primary;
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: center;
+  .svc-logic-tab__content-action--disabled .svc-text {
+    color: $foreground-disabled;
   }
 
   .sd-paneldynamic__panel-wrapper--in-row {
@@ -190,9 +200,6 @@
     overflow: visible;
   }
   .sd-question__content {
-    margin-top: 0;
-  }
-  .sd-row__question {
     margin-top: 0;
   }
   .sd-row__panel {

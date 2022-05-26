@@ -90,6 +90,7 @@ test("Edit question title", async (t) => {
     .expect(Selector("textarea[aria-label=Title]").value).eql("", "Question title in property grid still empty")
 
     .click(svStringSelector)
+    .click(svStringSelector)
     .typeText(svStringSelector, prefix, { caretPos: 0 })
     .pressKey("enter")
     .expect(Selector("textarea[aria-label=Title]").value).eql(prefix + title, "Question title in property grid is updated")
@@ -112,7 +113,7 @@ test("Check string editor visibility", async (t) => {
 
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).notOk();
 
-  const newJson = json;
+  const newJson = JSON.parse(JSON.stringify(json));
   newJson.questions[0]["description"] = "Desc";
   await setJSON(newJson);
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).ok();
@@ -122,6 +123,75 @@ test("Check string editor visibility", async (t) => {
     window["creator"].JSON = json;
   })(json);
   await t.expect(Selector(".sd-question__description .svc-string-editor").visible).ok();
+});
+
+test("Check string editor visibility on defferent ReadOnly cases", async (t) => {
+  var json_t = {
+    questions: [
+      {
+        type: "checkbox",
+        name: "q1",
+        choices: [
+          "item1",
+          "item2"
+        ]
+      },
+      {
+        type: "radiogroup",
+        name: "q2",
+        choices: [
+          "item3",
+          "item4"
+        ]
+      }
+    ]
+  };
+  await setJSON(json_t);
+
+  await t
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item1").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item2").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item3").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item4").withAttribute("contenteditable", "true").exists).ok();
+
+  await ClientFunction(() => {
+    window["Survey"].Serializer.getProperty("itemvalue", "text").readOnly = true;
+  })();
+  await setJSON(json_t);
+
+  await t
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item1").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item3").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item4").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item2").withAttribute("contenteditable", "false").exists).ok();
+
+  await ClientFunction(() => {
+    window["Survey"].Serializer.getProperty("itemvalue", "text").readOnly = false;
+    window["Survey"].Serializer.getProperty("checkbox", "choices").readOnly = true;
+  })();
+  await setJSON(json_t);
+
+  await t
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item1").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item2").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item3").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item4").withAttribute("contenteditable", "true").exists).ok();
+
+  await ClientFunction(() => {
+    window["Survey"].Serializer.getProperty("checkbox", "choices").readOnly = false;
+    window["creator"].onGetPropertyReadOnly.add(function (editor, options) {
+      if (options.obj.getType() === "radiogroup" && options.propertyName == "choices")
+        options.readOnly = true;
+    });
+  })();
+  await setJSON(json_t);
+
+  await t
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item1").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item2").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item3").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item4").withAttribute("contenteditable", "false").exists).ok();
+
 });
 
 test("Check creator events on string editor", async (t) => {
@@ -138,6 +208,7 @@ test("Check creator events on string editor", async (t) => {
   const svStringSelector = Selector(".sv-string-editor").withText("desc");
 
   await t
+    .click(svStringSelector)
     .click(svStringSelector)
     .typeText(svStringSelector, "1234567890", { caretPos: 0 })
     .pressKey("enter")
@@ -183,4 +254,197 @@ test("Check string editor not loosing focus and selects underlying items", async
     .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("Column 2").visible).ok()
     .pressKey("tab")
     .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("Column 3").visible).ok();
+});
+
+test("Check string editor inplaceEditForValues property", async (t) => {
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("item1");
+
+  await t
+    .click(svItemSelector)
+    .click(svItemSelector)
+    .typeText(svItemSelector, "new", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(ClientFunction(() => {
+      var itemvalue = window["creator"].survey.getQuestionByName("string_editor").choices[0];
+      return { value: itemvalue.value, text: itemvalue.text };
+    })()).eql({ value: "item1", text: "newitem1" });
+
+  await ClientFunction(() => {
+    window["creator"].inplaceEditForValues = true;
+  })();
+
+  await t
+    .click(Selector(".sv-string-editor").withText("newitem1"))
+    .click(Selector(".sv-string-editor").withText("newitem1"))
+    .typeText(Selector(".sv-string-editor").withText("newitem1"), "Ok", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(ClientFunction(() => {
+      var itemvalue = window["creator"].survey.getQuestionByName("string_editor").choices[0];
+      return { value: itemvalue.value, text: itemvalue.text };
+    })()).eql({ value: "Oknewitem1", text: "newitem1" });
+});
+
+test("Check item string editor focus out on near click", async (t) => {
+  let json = {
+    "elements": [
+      {
+        "type": "checkbox",
+        "name": "question1",
+        "choices": ["item1"]
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("item1");
+
+  await t
+    .click(svItemSelector)
+    .expect(svItemSelector.focused).ok()
+    .click(Selector(".svc-item-value-wrapper").withText("item1"), { offsetX: 200 })
+    .expect(svItemSelector.focused).notOk();
+});
+
+test("Check markdown events", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => options.html = options.text.replaceAll("*", "$"));
+    });
+  })();
+
+  await setJSON({
+    "description": "*abc*",
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  });
+
+  await t
+    .click(Selector(".sv-string-editor").withText("$abc$"))
+    .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
+    .click(Selector(".sv-string-editor").withText("*abc*"))
+    .typeText(Selector(".sv-string-editor").withText("*abc*"), "d", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok();
+});
+
+test("Check markdown back events", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => options.html = options.text.replaceAll("*", "$"));
+    });
+    window["creator"].onHtmlToMarkdown.add((survey, options) => options.text = options.html.replaceAll("$", "*"));
+  })();
+  var getValue = ClientFunction(() => {
+    return window["creator"].survey.description;
+  });
+
+  await setJSON({
+    "description": "*abc*",
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  });
+
+  await t
+    .click(Selector(".sv-string-editor").withText("$abc$"))
+    .expect(Selector(".sv-string-editor").withText("$abc$").visible).ok()
+    .click(Selector(".sv-string-editor").withText("$abc$"))
+    .typeText(Selector(".sv-string-editor").withText("$abc$"), "d", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok()
+    .expect(getValue()).eql("d*abc*");
+});
+
+test("Check markdown events with HTML", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => options.html = options.text.replaceAll("*", "$"));
+    });
+  })();
+
+  var getValue = ClientFunction(() => {
+    return window["creator"].survey.description;
+  });
+
+  await setJSON({
+    "description": "*a<b>b</b>c*",
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  });
+
+  await t
+    .expect(getValue()).eql("*a<b>b</b>c*")
+    .click(Selector(".sv-string-editor").withText("$abc$"))
+    .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
+    .click(Selector(".sv-string-editor").withText("*abc*"))
+    .wait(100)
+    .pressKey("esc")
+    .wait(100)
+    .expect(Selector(".sv-string-editor").withText("$abc$").visible).ok()
+    .expect(getValue()).eql("*a<b>b</b>c*")
+    .click(Selector(".sv-string-editor").withText("$abc$"))
+    .expect(Selector(".sv-string-editor").withText("*abc*").visible).ok()
+    .click(Selector(".sv-string-editor").withText("*abc*"))
+    .typeText(Selector(".sv-string-editor").withText("*abc*"), "d", { caretPos: 0 })
+    .pressKey("enter")
+    .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok()
+    .expect(getValue()).eql("d*a<b>b</b>c*");
+});
+
+test("Test selection", async (t) => {
+  let json = {
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("question1");
+
+  await t
+    .click(svItemSelector)
+    .expect(ClientFunction(() => {
+      return window.getSelection().toString();
+    })()).eql("question1")
+    .wait(300)
+    .click(svItemSelector)
+    .expect(ClientFunction(() => {
+      return window.getSelection().toString();
+    })()).eql("");
+});
+
+test("Test styles", async (t) => {
+  let json = {
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("question1");
+
+  await t
+    .expect(await svItemSelector.getStyleProperty("user-select")).eql("text");
 });

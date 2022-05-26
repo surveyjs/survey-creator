@@ -7,7 +7,7 @@
           <!-- ko foreach: {data: $data.koLocales, as: 'item' } -->
           <label data-bind="visible: !!item.locale && item.koEnabled()">
             <svd-property-editor-boolean
-              params="{model: {koValue: item.koVisible, displayName: $parent.getLocaleName($data.locale), isDiplayNameVisible: true, koAfterRender: function(){}}}"
+              params="{model: {koValue: item.koVisible, displayName: $parent.getLocaleName($data.locale), isDisplayNameVisible: true, koAfterRender: function(){}}}"
             ></svd-property-editor-boolean>
           </label>
           <!-- /ko -->

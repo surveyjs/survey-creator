@@ -1,4 +1,4 @@
-import { addQuestionByAddQuestionButton, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
+import { addQuestionByAddQuestionButton, explicitErrorHandler, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Inplace editors";
 
@@ -51,20 +51,20 @@ test("Checkbox question inplace editor", async (t) => {
     .hover(items.nth(4))
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .expect(items.nth(4).find("span").withText("item4").exists).ok()
-    .expect(items.nth(5).hasClass("svc-item-value--new")).ok()
-    .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
-    .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
-    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .hover(items.nth(5))
-    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok()
     .expect(items.nth(6).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(6).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(6).find(".svc-item-value-controls__remove").visible).notOk()
     .expect(items.nth(6).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(6))
     .expect(items.nth(6).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(6).find("span").withText("None").exists).ok()
+    .expect(items.nth(6).find("span").withText("Other (describe)").exists).ok()
+    .expect(items.nth(5).hasClass("svc-item-value--new")).ok()
+    .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
+    .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
+    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .hover(items.nth(5))
+    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .expect(items.nth(5).find("span").withText("None").exists).ok()
 
     .click(items.nth(0).find(".svc-item-value-controls__add"))
     .expect(items.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -105,12 +105,12 @@ test("Checkbox question inplace editor", async (t) => {
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(4))
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
-    .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
-    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .hover(items.nth(5))
-    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok();
+    .expect(items.nth(6).find(".svc-item-value-controls__add").visible).ok()
+    .expect(items.nth(6).find(".svc-item-value-controls__remove").visible).notOk()
+    .expect(items.nth(6).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .hover(items.nth(6))
+    .expect(items.nth(6).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .expect(items.nth(6).find("span").withText("Other (describe)").exists).ok();
 });
 
 test("Radiogroup question inplace editor", async (t) => {
@@ -148,20 +148,20 @@ test("Radiogroup question inplace editor", async (t) => {
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .expect(items.nth(3).find("span").withText("item4").exists).ok()
-    .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
-    .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
-    .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .hover(items.nth(4))
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("Other (describe)").exists).ok()
     .expect(items.nth(5).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(5))
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(5).find("span").withText("None").exists).ok()
+    .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok()
+    .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
+    .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
+    .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
+    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .hover(items.nth(4))
+    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .expect(items.nth(4).find("span").withText("None").exists).ok()
 
     .click(items.nth(5).find(".svc-item-value-controls__add"))
     .expect(items.nth(5).hasClass("svc-item-value--new")).notOk()
@@ -202,12 +202,12 @@ test("Radiogroup question inplace editor", async (t) => {
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
-    .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .hover(items.nth(4))
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("Other (describe)").exists).ok();
+    .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
+    .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
+    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .hover(items.nth(5))
+    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok();
 });
 
 test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
@@ -268,20 +268,20 @@ test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .expect(items.nth(3).find("span").withText("item4").exists).ok()
-    .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
-    .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
-    .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .hover(items.nth(4))
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("Other (describe)").exists).ok()
     .expect(items.nth(5).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(5))
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(5).find("span").withText("None").exists).ok()
+    .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok()
+    .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
+    .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
+    .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
+    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .hover(items.nth(4))
+    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .expect(items.nth(4).find("span").withText("None").exists).ok()
 
     .click(items.nth(5).find(".svc-item-value-controls__add"))
     .expect(items.nth(5).hasClass("svc-item-value--new")).notOk()
@@ -322,12 +322,12 @@ test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
-    .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .hover(items.nth(4))
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("Other (describe)").exists).ok();
+    .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
+    .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
+    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .hover(items.nth(5))
+    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok();
 });
 
 test("Dropdown question inplace editor", async (t) => {
@@ -365,20 +365,20 @@ test("Dropdown question inplace editor", async (t) => {
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .expect(items.nth(3).find("span").withText("item4").exists).ok()
-    .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
-    .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
-    .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .hover(items.nth(4))
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("Other (describe)").exists).ok()
     .expect(items.nth(5).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(5))
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(5).find("span").withText("None").exists).ok()
+    .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok()
+    .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
+    .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
+    .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
+    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .hover(items.nth(4))
+    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .expect(items.nth(4).find("span").withText("None").exists).ok()
 
     .click(items.nth(5).find(".svc-item-value-controls__add"))
     .expect(items.nth(5).hasClass("svc-item-value--new")).notOk()
@@ -419,12 +419,12 @@ test("Dropdown question inplace editor", async (t) => {
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
-    .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .hover(items.nth(4))
-    .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("Other (describe)").exists).ok()
+    .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
+    .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
+    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .hover(items.nth(5))
+    .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
+    .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok()
 
     .hover(getToolboxItemByText("Single Input"), { speed: 0.5 })
     .click(getToolboxItemByText("Single Input"), { speed: 0.5 })
@@ -494,10 +494,11 @@ test("Ranking question inplace editor", async (t) => {
 });
 
 test("Image picker question inplace editor", async (t) => {
+  await explicitErrorHandler();
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Image picker"), { speed: 0.5 })
-    .click(getToolboxItemByText("Image picker"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Image Picker"), { speed: 0.5 })
+    .click(getToolboxItemByText("Image Picker"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
     .expect(imageItems.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -530,10 +531,11 @@ test("Image picker question inplace editor", async (t) => {
 });
 
 test("Image picker question inplace editor - add new item", async (t) => {
+  await explicitErrorHandler();
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Image picker"), { speed: 0.5 })
-    .click(getToolboxItemByText("Image picker"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Image Picker"), { speed: 0.5 })
+    .click(getToolboxItemByText("Image Picker"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
 
@@ -571,7 +573,7 @@ test("Image question inplace editor - choose image via inplace editor", async (t
     .click(getToolboxItemByText("Image"), { speed: 0.5 });
 
   const getImageLink = ClientFunction(() => {
-    return document.querySelectorAll("img.sv_image_image")[0]["src"];
+    return document.querySelectorAll("img.sd-image__image")[0]["src"];
   });
   let imageLink = await getImageLink();
   await t.expect(imageLink).eql("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
@@ -589,7 +591,7 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
   });
   const row1Column1Cell = Selector("tbody .svc-matrix-cell").filterVisible().nth(1);
   await t.expect(Selector(".svc-question__content").exists).notOk();
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .hover(row1Column1Cell, { speed: 0.5 });
@@ -604,4 +606,33 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
 
     .click(Selector(".sv-popup__button--cancel"))
     .expect(Selector(".svc-question__content--selected-no-border").exists).notOk();
+});
+
+test("Rating question inplace editor", async (t) => {
+  await t
+    .expect(getVisibleElement(".svc-question__content").exists).notOk()
+    .hover(getToolboxItemByText("Rating"), { speed: 0.5 })
+    .click(getToolboxItemByText("Rating"), { speed: 0.5 })
+    .click(Selector(".sd-rating__item-text .sv-string-editor").withText("3"))
+    .typeText(Selector(".sd-rating__item-text .sv-string-editor").withText("3"), "abc")
+    .pressKey("Enter")
+    .expect(ClientFunction(() => {
+      return window["creator"].survey.getAllQuestions()[0].rateValues.map(v => v.text);
+    })()).eql(["1", "2", "abc", "4", "5"]);
+
+});
+
+test("Matrix dropdown question inplace row header editor #2553", async (t) => {
+  await t.expect(Selector(".svc-question__content").exists).notOk();
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
+  await t.expect(Selector(".svc-question__content").exists).ok();
+
+  await t
+    // .click(Selector("button[title='ShowPanel']"))
+    .click(Selector(".sv_matrix_row .svc-matrix-cell .sv-string-editor"))
+    .typeText(Selector(".sv_matrix_row .svc-matrix-cell .sv-string-editor"), "Row header")
+    .click(Selector("h4.spg-title[aria-label='Layout']"))
+    .click(Selector("input.spg-input[aria-label='Row header width (in CSS-accepted values)']"))
+    .pressKey("ctrl+a delete 3 0 0 p x")
+    .expect(Selector("input.spg-input[aria-label='Row header width (in CSS-accepted values)']").value).eql("300px");
 });

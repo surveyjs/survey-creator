@@ -1,5 +1,6 @@
 import { SurveyModel, IAction, Base } from "survey-core";
 import { CreatorBase, ICreatorOptions, isStringEditable } from "../src/creator-base";
+import { settings as creatorSetting } from "../src/settings";
 
 class DesignTimeSurveyModel extends SurveyModel {
   constructor(public creator: CreatorTester, jsonObj?: any) {
@@ -13,8 +14,11 @@ class DesignTimeSurveyModel extends SurveyModel {
   }
 }
 
-export class CreatorTester extends CreatorBase<SurveyModel> {
-  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
+export class CreatorTester extends CreatorBase {
+  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
+    if (setOldDefaultNewSurveyJSON) {
+      creatorSetting.defaultNewSurveyJSON = { pages: [{ name: "page1" }] };
+    }
     super(options, options2);
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
@@ -27,6 +31,9 @@ export class CreatorTester extends CreatorBase<SurveyModel> {
     const name = this.selectedElement["name"];
     if (!!name) return name;
     return this.selectedElement.getType();
+  }
+  public get propertyGrid(): SurveyModel {
+    return this.designerPropertyGrid.survey;
   }
   public getActionBarItem(id: string): IAction {
     return this.getActionBarItemByActions(this.toolbarItems, id);

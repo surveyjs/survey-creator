@@ -7,15 +7,12 @@ import {
   QuestionRadiogroupModel,
   QuestionPanelDynamicModel,
   ItemValue,
-  Base,
   QuestionTextModel
 } from "survey-core";
-import {
-  ConditionEditor,
-  ConditionEditorItemsBuilder,
-  ConditionEditorItem
-} from "../../src/property-grid/condition-survey";
+import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/settings";
+
+export * from "../../src/components/link-value";
 
 test("Items Builder, simple test", () => {
   var builder = new ConditionEditorItemsBuilder();
@@ -90,7 +87,7 @@ test("Custom text for condition title", () => {
   });
   const options = new EmptySurveyCreatorOptions();
   options.onConditionGetTitleCallback = (expression: string, title: string): string => {
-    if(!expression) return "Please setup the expression";
+    if (!expression) return "Please setup the expression";
     return "Your expression is: " + title;
   };
   const conditionEditor = new ConditionEditor(survey, survey.getQuestionByName("q1"), options);
@@ -318,10 +315,10 @@ test("allCondtionQuestions for matrix column", () => {
 
   var editor = new ConditionEditor(survey, column);
   expect(
-    editor.allConditionQuestions.filter((e) => e.name === "row.col1").length > 0
+    editor.allConditionQuestions.filter((e) => e.value === "row.col1").length > 0
   ).toBeTruthy();
   expect(
-    editor.allConditionQuestions.filter((e) => e.name === "row.col2").length > 0
+    editor.allConditionQuestions.filter((e) => e.value === "row.col2").length > 0
   ).toBeFalsy();
 });
 test("allCondtionQuestions for panel dynamic", () => {
@@ -338,17 +335,17 @@ test("allCondtionQuestions for panel dynamic", () => {
 
   var editor = new ConditionEditor(survey, panelQuestion);
   expect(
-    editor.allConditionQuestions.filter((e) => e.name === "panel.q1").length > 0
+    editor.allConditionQuestions.filter((e) => e.value === "panel.q1").length > 0
   ).toBeTruthy();
   expect(
-    editor.allConditionQuestions.filter((e) => e.name === "panel.q2").length > 0
+    editor.allConditionQuestions.filter((e) => e.value === "panel.q2").length > 0
   ).toBeFalsy();
 });
 test("Show invisible choices and make all choices enabled, Bug: https://surveyjs.answerdesk.io/ticket/details/T1921", () => {
   var survey = new SurveyModel();
   var page = survey.addNewPage("p");
   var question = page.addNewQuestion("text", "q1");
-  var radioQuestion = page.addNewQuestion("dropdown", "q2");
+  var radioQuestion = <QuestionDropdownModel>page.addNewQuestion("dropdown", "q2");
   radioQuestion.choices = [
     { value: 1, visibleIf: "{a} = 1" },
     { value: 1, enabledIf: "{b} = 1" }
@@ -851,9 +848,9 @@ test("Create expression from scratch", () => {
   expect(panel.getQuestionByName("conjunction").choices[0].value).toEqual(
     "and"
   );
-  expect(panel.getQuestionByName("conjunction").choices[0].text).toEqual("And");
+  expect(panel.getQuestionByName("conjunction").choices[0].text).toEqual("and");
   expect(panel.getQuestionByName("conjunction").choices[1].value).toEqual("or");
-  expect(panel.getQuestionByName("conjunction").choices[1].text).toEqual("Or");
+  expect(panel.getQuestionByName("conjunction").choices[1].text).toEqual("or");
   panel.getQuestionByName("questionName").value = "q2";
   expect(editor.isReady).toBeFalsy();
   panel.getQuestionByName("questionValue").value = 2;
@@ -1075,7 +1072,25 @@ test("getObjectDisplayName", () => {
   expect(questionName.choices[0].value).toEqual("q2");
   expect(questionName.choices[0].text).toEqual("Question 2 [q2]");
 });
-
+test("show calculated values", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "text" }
+    ],
+    calculatedValues: [
+      { name: "val1", expression: "{q2} + 2" }
+    ],
+  });
+  var question = survey.getQuestionByName("q1");
+  var options = new EmptySurveyCreatorOptions();
+  var editor = new ConditionEditor(survey, question, options, "visibleIf");
+  var panel = editor.panel.panels[0];
+  var questionName = panel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(2);
+  expect(questionName.choices[0].value).toEqual("q2");
+  expect(questionName.choices[1].value).toEqual("val1");
+});
 test("options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the value", () => {
   var survey = new SurveyModel({
     elements: [
@@ -1192,7 +1207,7 @@ test("Check text for add panel button", () => {
     new SurveyModel(),
     new QuestionTextModel("q1")
   );
-  expect(editor.panel.panelAddText).toEqual("Add condition");
+  expect(editor.panel.panelAddText).toEqual("Add Condition");
 });
 test("Show rating/ranking in new line", () => {
   var survey = new SurveyModel({
@@ -1207,22 +1222,22 @@ test("Show rating/ranking in new line", () => {
   var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   var questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 
   panel.getQuestionByName("questionName").value = "q3";
   questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 
   panel.getQuestionByName("questionName").value = "q4";
   questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 
   panel.getQuestionByName("questionName").value = "q2";
   questionValue = panel.getQuestionByName("questionValue");
-  expect(questionValue.titleLocation).toEqual("default");
+  expect(questionValue.titleLocation).toEqual("top");
   expect(questionValue.startWithNewLine).toBeTruthy();
 });
 test("Make question value invisible for empty/notempty if they are in the new line", () => {
@@ -1399,4 +1414,140 @@ test("isModified", () => {
   expect(conditionEditor.isModified("{q} > 2")).toBeFalsy();
   conditionEditor.text = "{q} >   2";
   expect(conditionEditor.isModified("{q} > 2")).toBeFalsy();
+});
+test("Set and remove condition editor context based on matrix dynamic", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", choices: [1, 2, 3, 4],
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "matrixdynamic", name: "q3",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+    ]
+  });
+  const conditionEditor = new ConditionEditor(survey);
+  expect(conditionEditor.context).toBeFalsy();
+  const firstPanel = conditionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstPanel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3 * 2);
+  questionName.value = "q1.row.col1";
+  let questionValue = firstPanel.getQuestionByName("questionValue");
+  expect(questionValue.getType()).toEqual("dropdown");
+  expect((<QuestionDropdownModel>questionValue).choices).toHaveLength(4);
+  expect(conditionEditor.context).toBeTruthy();
+  expect(conditionEditor.context.name).toEqual("q1");
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3);
+  questionName.value = "q2";
+  expect(conditionEditor.context).toBeFalsy();
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3 * 2);
+  questionName.value = "q1.row.col1";
+  questionValue = firstPanel.getQuestionByName("questionValue");
+  questionValue.value = 3;
+  expect(conditionEditor.text).toEqual("{row.col1} = 3");
+});
+test("Setup context initially for column", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", choices: [1, 2, 3, 4],
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "matrixdynamic", name: "q3",
+        columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }]
+      },
+    ]
+  });
+  const conditionEditor = new ConditionEditor(survey);
+  conditionEditor.context = survey.getQuestionByName("q1");
+  conditionEditor.text = "{row.col1} = 2";
+  expect(conditionEditor.context).toBeTruthy();
+  expect(conditionEditor.context.name).toEqual("q1");
+  const firstPanel = conditionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstPanel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3);
+  expect(questionName.value).toEqual("q1.row.col1");
+});
+test("Set and remove condition editor context based on panel dynamic", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "paneldynamic", name: "q1",
+        templateElements: [{ type: "text", name: "q1_col1" }, { type: "text", name: "q1_col2" }, { type: "text", name: "q1_col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "paneldynamic", name: "q3",
+        templateElements: [{ type: "text", name: "q2_col1" }, { type: "text", name: "q2_col2" }, { type: "text", name: "q2_col3" }]
+      },
+    ]
+  });
+  const conditionEditor = new ConditionEditor(survey);
+  expect(conditionEditor.context).toBeFalsy();
+  const firstPanel = conditionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstPanel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3 * 2);
+  questionName.value = "q1.panel.q1_col1";
+  let questionValue = firstPanel.getQuestionByName("questionValue");
+  expect(questionValue.getType()).toEqual("text");
+  expect(conditionEditor.context).toBeTruthy();
+  expect(conditionEditor.context.name).toEqual("q1");
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3);
+  questionName.value = "q2";
+  expect(conditionEditor.context).toBeFalsy();
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3 * 2);
+  questionName.value = "q1.panel.q1_col1";
+  questionValue = firstPanel.getQuestionByName("questionValue");
+  questionValue.value = 3;
+  expect(conditionEditor.text).toEqual("{panel.q1_col1} = 3");
+});
+test("Setup context initially for question in panel dynamic", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "paneldynamic", name: "q1",
+        templateElements: [{ type: "text", name: "q1_col1" }, { type: "text", name: "q1_col2" }, { type: "text", name: "q1_col3" }]
+      },
+      { type: "text", name: "q2" },
+      {
+        type: "paneldynamic", name: "q3",
+        templateElements: [{ type: "text", name: "q2_col1" }, { type: "text", name: "q2_col2" }, { type: "text", name: "q2_col3" }]
+      },
+    ]
+  });
+  const conditionEditor = new ConditionEditor(survey);
+  conditionEditor.context = survey.getQuestionByName("q1");
+  conditionEditor.text = "{panel.q1_col1} = 2";
+  expect(conditionEditor.context).toBeTruthy();
+  expect(conditionEditor.context.name).toEqual("q1");
+  const firstPanel = conditionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstPanel.getQuestionByName("questionName");
+  expect(questionName.choices).toHaveLength(3 * 2 + 1 + 3);
+  expect(questionName.value).toEqual("q1.panel.q1_col1");
+});
+test("if conditionEditorItem is not ready then text edit is empty", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+      { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" }
+    ],
+    calculatedValues: [{ name: "val1", expression: "{q1} + {q2}" }]
+  });
+  const question = survey.getQuestionByName("q4");
+  const conditionEditor = new ConditionEditor(survey, question);
+  conditionEditor.text = "{q1} = 'abc' or {q2} = 1 and {q2} = 2";
+
+  expect(conditionEditor["getEditorItems"]()).toHaveLength(3);
+  expect(conditionEditor.text).toEqual("{q1} = 'abc' or {q2} = 1 and {q2} = 2");
+
+  conditionEditor.panel.addPanel();
+  expect(conditionEditor["getEditorItems"]()).toHaveLength(4);
+  expect(conditionEditor.text).toEqual("{q1} = 'abc' or {q2} = 1 and {q2} = 2");
 });

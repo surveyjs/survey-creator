@@ -14,9 +14,11 @@
       <tr>
         <th></th>
         <!-- ko foreach: $data.koLocales -->
+        <!-- ko if: $data.koVisible() -->
         <th
-          data-bind="visible: $data.koVisible, text: $parent.getLocaleName($data.locale), style: {width: $parent.locWidth}"
+          data-bind="text: $parent.getLocaleName($data.locale), style: {width: $parent.locWidth}"
         ></th>
+        <!-- /ko -->
         <!-- /ko -->
       </tr>
     </thead>
@@ -26,12 +28,14 @@
           <span data-bind="text:item.text"></span>
         </td>
         <!-- ko foreach: $parent.koLocales -->
+        <!-- ko if: $data.koVisible() -->
         <td
-          data-bind="visible: $data.koVisible, style: {width: $data.koVisible ? $parent.locWidth : '0px'} "
+          data-bind="style: {width: $data.koVisible ? $parent.locWidth : '0px'} "
         >
           <!-- ko template: { name: 'svd-translation-item', data: $data, afterRender: $parent.afterRender} -->
           <!-- /ko -->
         </td>
+        <!-- /ko -->
         <!-- /ko -->
       </tr>
     </tbody>

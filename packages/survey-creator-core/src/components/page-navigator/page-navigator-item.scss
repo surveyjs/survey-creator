@@ -13,6 +13,10 @@ svc-page-navigator-item,
 .svc-page-navigator-item-content {
   height: 100%;
   width: 100%;
+  &:hover,
+  &:focus {
+    outline: none;
+  }
 }
 
 .svc-page-navigator-item__dot {
@@ -38,16 +42,16 @@ svc-page-navigator-item,
 }
 
 .svc-page-navigator-item__banner {
+  @include textEllipsis;
+
   right: calcSize(0.5);
   display: block;
-  white-space: nowrap;
   line-height: calcSize(4);
-  overflow: hidden;
-  text-overflow: ellipsis;    
   animation: 0.5s ease-in;
   padding: 0;
   opacity: 0;
-  
+  z-index: 20;
+
   .svc-page-navigator-item__dot {
     position: absolute;
     display: inline-block;
@@ -59,7 +63,7 @@ svc-page-navigator-item,
 .svc-creator__toolbox--right {
   .svc-page-navigator-item__banner {
     right: unset;
-    left: calc(0.625 * var(--base-unit, 8px));    
+    left: calc(0.625 * var(--base-unit, 8px));
     .svc-page-navigator-item__dot {
       right: unset;
       left: calcSize(1.75);
@@ -80,8 +84,6 @@ svc-page-navigator-item,
 
 .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover,
 .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):focus {
-  outline: none;
-
   .svc-page-navigator-item__banner {
     padding: 0 calcSize(4.5) 0 calcSize(2.5);
     max-width: calcSize(25);
@@ -92,7 +94,6 @@ svc-page-navigator-item,
 .svc-creator__toolbox--right {
   .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover,
   .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):focus {
-  
     .svc-page-navigator-item__banner {
       padding: 0 calcSize(2.5) 0 calcSize(4.5);
     }

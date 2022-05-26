@@ -1,18 +1,15 @@
-# Survey Creator V1
+# Survey Creator V1 (OBSOLETE)
 
 [![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Creator?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=8&branchName=master)
 <a href="https://www.npmjs.com/package/survey-creator"><img alt="NPM Version" src="https://img.shields.io/npm/v/survey-creator.svg" data-canonical-src="https://img.shields.io/npm/v/survey-creator.svg" style="max-width:100%;"></a>
 
 The Survey Creator is a visual survey designer / form builder for [SurveyJS](https://github.com/surveyjs/survey-library).
 
-- [Live Examples](https://surveyjs.io/Examples/Survey-Creator)
-- [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
-- [Create your Survey or Form now](https://surveyjs.io/create-survey/)
-
-**NOTE**: This package contains Survey Creator V1. For information on Survey Creator V2 (now in Beta), refer to the following directories:
-
-- [survey-creator-react](../survey-creator-react) for React
-- [survey-creator-knockout](../survey-creator-knockout) for Knockout, jQuery, Angular, and Vue
+> **NOTE**: This package contains an obsolete version of Survey Creator. For information on the new Survey Creator, refer to the following directories:
+> - [survey-creator-react](../survey-creator-react) for React
+> - [survey-creator-knockout](../survey-creator-knockout) for Knockout, jQuery, Angular, and Vue
+>
+> Differences between these two versions are described in the following help topic: [SurveyJS Creator V2: What's new](https://surveyjs.io/Documentation/Survey-Creator?id=Creator-V2-Whats-New). For information on how to migrate to the new version, refer to the [Migration Guide for SurveyJS Creator - from V1 to V2](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2).
 
 ## Quick Start
 

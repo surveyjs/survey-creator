@@ -1,5 +1,6 @@
 import * as Survey from "survey-core";
 import { QuestionConvertMode, settings } from "./settings";
+import { IQuestionToolboxItem, QuestionToolbox } from "./toolbox";
 
 export class QuestionConverter {
   public static convertInfo = {};
@@ -30,16 +31,21 @@ export class QuestionConverter {
   }
   public static convertObject(
     obj: Survey.Question,
-    convertToClass: string
+    convertToClass: string,
+    defaultJSON: any = null
   ): Survey.Question {
     if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
     var newQuestion = Survey.QuestionFactory.Instance.createQuestion(convertToClass, obj.name);
+    if(!newQuestion) {
+      newQuestion = Survey.Serializer.createClass(convertToClass, {});
+    }
     newQuestion.name = obj.name;
     const json = newQuestion.toJSON();
     const qJson = obj.toJSON();
     for (var key in qJson) {
       json[key] = qJson[key];
     }
+    QuestionConverter.updateJSON(json, convertToClass, defaultJSON);
     newQuestion.fromJSON(json);
     var panel = <Survey.PanelModelBase>obj.parent;
     var index = panel.elements.indexOf(obj);
@@ -47,6 +53,27 @@ export class QuestionConverter {
     panel.addElement(newQuestion, index);
     newQuestion.onSurveyLoad();
     return <Survey.Question>newQuestion;
+  }
+  private static updateJSON(json: any, convertToClass: string, defaultJSON: any): any {
+    let questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
+    if(questionDefaultSettings) {
+      if(convertToClass === "image" && !json.imageLink) {
+        json.imageLink = questionDefaultSettings.imageLink;
+      }
+      if(convertToClass === "imagepicker" && !json.choices) {
+        json.choices = questionDefaultSettings.choices;
+      }
+    }
+    if(convertToClass === "rating" && json.choices) {
+      if(!defaultJSON || !defaultJSON.choices ||
+        !Survey.Helpers.isArraysEqual(defaultJSON.choices, json.choices)) {
+        json.rateValues = json.choices;
+      }
+    } else {
+      if(json.rateValues) {
+        json.choices = json.rateValues;
+      }
+    }
   }
 }
 
@@ -56,6 +83,12 @@ function getAllQuestionTypes(className: string, includeCurrent: boolean = false)
   for (var i = 0; i < classes.length; i++) {
     if (includeCurrent || classes[i].name !== className) {
       res.push(classes[i].name);
+    }
+  }
+  const widgets = Survey.CustomWidgetCollection.Instance.widgets;
+  for(var i = 0; i < widgets.length; i ++) {
+    if (includeCurrent || widgets[i].name !== className) {
+      res.push(widgets[i].name);
     }
   }
   return res;

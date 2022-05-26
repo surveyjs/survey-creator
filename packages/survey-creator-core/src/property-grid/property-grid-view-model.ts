@@ -7,7 +7,7 @@ import { CreatorBase } from "../creator-base";
 import { settings } from "../settings";
 import { getLocString } from "../editorLocalization";
 
-export class PropertyGridViewModel<T extends SurveyModel> extends Base {
+export class PropertyGridViewModel extends Base {
   public nextSelectionAction: Action;
   public prevSelectionAction: Action;
   public objectSelectionAction: Action;
@@ -18,7 +18,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
   @property() survey: SurveyModel;
   @property() selectedElementName: string;
 
-  constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase<T>) {
+  constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase) {
     super();
     this.selectedElementName = this.getTitle();
     this.propertyGridModel.objValueChangedCallback = () => {
@@ -32,8 +32,8 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
     this.initActions();
 
     this.creator.onPropertyChanged.add((sender, options) => {
-      if (options.name === "sideBarLocation") {
-        this.selectorPopupModel.horizontalPosition = this.creator.sideBarLocation == "right" ? "left" : "right";
+      if (options.name === "sidebarLocation") {
+        this.selectorPopupModel.horizontalPosition = this.creator.sidebarLocation == "right" ? "left" : "right";
       }
     });
     this.onSurveyChanged();
@@ -108,6 +108,7 @@ export class PropertyGridViewModel<T extends SurveyModel> extends Base {
     }
 
     const selectorModel = new ObjectSelectorModel(
+      this.creator,
       (obj: Base, reason: string, displayName: string) => {
         return this.propertyGridModel.options.getObjectDisplayName(obj, reason, displayName);
       }

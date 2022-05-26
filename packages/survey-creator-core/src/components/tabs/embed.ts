@@ -14,7 +14,7 @@ import "./embed.scss";
 
 export class EmbedModel extends Base {
   @property() survey: SurveyModel;
-  constructor(creator: CreatorBase<SurveyModel>) {
+  constructor(creator: CreatorBase) {
     super();
     FunctionFactory.Instance.register(
       "surveyjsEmbedScriptsMarkup",
@@ -97,8 +97,8 @@ export class EmbedModel extends Base {
 
 export class TabEmbedPlugin implements ICreatorPlugin {
   public model: EmbedModel;
-  constructor(private creator: CreatorBase<SurveyModel>) {
-    creator.addPluginTab("embed", this, getLocString("ed.embedSurvey"));
+  constructor(private creator: CreatorBase) {
+    creator.addPluginTab("embed", this, "ed.embedSurvey");
   }
   public activate(): void {
     this.model = new EmbedModel(this.creator);

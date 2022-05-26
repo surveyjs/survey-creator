@@ -12,6 +12,7 @@ const explicitErrorHandler = () => {
 };
 
 fixture`${title}`.page`${url}`.clientScripts({ content: `(${explicitErrorHandler.toString()})()` }).beforeEach(async (t) => {
+  await setJSON({ pages: [{ name: "page1" }] });
   await t.maximizeWindow();
 });
 
@@ -37,6 +38,33 @@ test("Drag Drop Toolbox Item and Empty Page", async (t) => {
   await t.expect(ghostPageRowsCount).eql(0);
 });
 
+test.before(async t => {
+  const setOptions = ClientFunction(() => {
+    window["creator"].setOptions({
+      pageEditMode: "bypage"
+    });
+  });
+  await setOptions();
+})("Drag Drop Toolbox Item and Empty Page ({pageEditMode: 'bypage'})", async (t) => {
+  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+  const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 })
+    .click(Selector("[title='page2']"));
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
+
+  const pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(2);
+
+  const questionsLength = await getQuestionsLength();
+  await t.expect(questionsLength).eql(2);
+});
+
 test("Drag Drop Toolbox All Questions", async (t) => {
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
@@ -48,89 +76,148 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   const CommentItem = Selector("[aria-label='Comment toolbox item']");
   const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
   const RankingItem = Selector("[aria-label='Ranking toolbox item']");
-  const ImagePickerItem = Selector("[aria-label='Image picker toolbox item']");
+  const ImagePickerItem = Selector("[aria-label='Image Picker toolbox item']");
   const BooleanItem = Selector("[aria-label='Boolean toolbox item']");
   const ImageItem = Selector("[aria-label='Image toolbox item']");
-  const HtmlItem = Selector("[aria-label='Html toolbox item']");
-  const SignatureItem = Selector("[aria-label='Signature pad toolbox item']");
+  const HtmlItem = Selector("[aria-label='HTML toolbox item']");
+  const SignatureItem = Selector("[aria-label='Signature Pad toolbox item']");
   const ExpressionItem = Selector("[aria-label='Expression (read-only) toolbox item']");
   const FileItem = Selector("[aria-label='File toolbox item']");
-  const MatrixSingleChoiceItem = Selector("[aria-label='Matrix (single choice) toolbox item']");
-  const MatrixMultipleChoiceItem = Selector("[aria-label='Matrix (multiple choice) toolbox item']");
-  const MatrixDynamicRowsItem = Selector("[aria-label='Matrix (dynamic rows) toolbox item']");
+  const MatrixSingleChoiceItem = Selector("[aria-label='Single-Choice Matrix toolbox item']");
+  const MatrixMultipleChoiceItem = Selector("[aria-label='Multiple-Choice Matrix toolbox item']");
+  const MatrixDynamicRowsItem = Selector("[aria-label='Dynamic Matrix toolbox item']");
   const MultipleTextItem = Selector("[aria-label='Multiple Text toolbox item']");
   const PanelItem = Selector("[aria-label='Panel toolbox item']");
   const PanelDynamicItem = Selector("[aria-label='Panel toolbox item']");
 
+  await t.resizeWindow(2560, 2000);
+
+  let pagesLength;
+
+  await t
+    .hover(ImagePickerItem)
+    .dragToElement(ImagePickerItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(1);
+
+  await t
+    .hover(CheckboxItem)
+    .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(2);
+
+  await t
+    .hover(RadiogroupItem)
+    .dragToElement(RadiogroupItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(3);
+
+  await t
+    .hover(DropdownItem)
+    .dragToElement(DropdownItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(4);
+
+  await t
+    .hover(CommentItem)
+    .dragToElement(CommentItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(5);
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(6);
+
+  await t
+    .hover(RankingItem)
+    .dragToElement(RankingItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(7);
+
   await t
     .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, EmptyPage, { speed: 0.5 }) // first time drag to single Empty page, next times drag to ghost page
+    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(8);
 
-    .hover(CheckboxItem)
-    .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 })
-
-    .hover(RadiogroupItem)
-    .dragToElement(RadiogroupItem, newGhostPagePage, { speed: 0.5 })
-
-    .hover(DropdownItem)
-    .dragToElement(DropdownItem, newGhostPagePage, { speed: 0.5 })
-
-    .hover(CommentItem)
-    .dragToElement(CommentItem, newGhostPagePage, { speed: 0.5 })
-
-    .hover(RatingToolboxItem)
-    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 })
-
-    .hover(RankingItem)
-    .dragToElement(RankingItem, newGhostPagePage, { speed: 0.5 })
-
-    .hover(ImagePickerItem)
-    .dragToElement(ImagePickerItem, newGhostPagePage, { speed: 0.5 })
-
+  await t
     .hover(HtmlItem)
-    .dragToElement(HtmlItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(HtmlItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(9);
 
+  await t
     .hover(SignatureItem)
-    .dragToElement(SignatureItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(SignatureItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(10);
 
+  await t
     .hover(ExpressionItem)
-    .dragToElement(ExpressionItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(ExpressionItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(11);
 
+  await t
     .hover(FileItem)
-    .dragToElement(FileItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(FileItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(12);
 
+  await t
     .hover(MatrixSingleChoiceItem)
-    .dragToElement(MatrixSingleChoiceItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(MatrixSingleChoiceItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(13);
 
+  await t
     .hover(MatrixMultipleChoiceItem)
-    .dragToElement(MatrixMultipleChoiceItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(MatrixMultipleChoiceItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(14);
 
+  await t
     .hover(MatrixDynamicRowsItem)
-    .dragToElement(MatrixDynamicRowsItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(MatrixDynamicRowsItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(15);
 
+  await t
     .hover(MultipleTextItem)
-    .dragToElement(MultipleTextItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(MultipleTextItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(16);
 
+  await t
     .hover(PanelItem)
-    .dragToElement(PanelItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(PanelItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(17);
 
+  await t
     .hover(PanelDynamicItem)
-    .dragToElement(PanelDynamicItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(PanelDynamicItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(18);
 
+  await t
     .hover(BooleanItem)
-    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 });
 
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(19);
+
+  await t
     .hover(ImageItem)
     .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 });
 
-  const pagesLength = await getPagesLength();
+  pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(20);
 });
 
 test("Drag Drop Toolbox Responsivity", async (t) => {
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = false;
-  })();
   const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-child(20)");
   await t
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
@@ -139,7 +226,7 @@ test("Drag Drop Toolbox Responsivity", async (t) => {
     .click(".svc-toolbox__tool.sv-dots");
 
   const PopupSelector = Selector(".sv-popup").filterVisible();
-  const DynamicPanelItem = PopupSelector.find(".sv-list__item").withText("Panel (dynamic panels)");
+  const DynamicPanelItem = PopupSelector.find(".sv-list__item").withText("Dynamic Panel");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
   await t.dragToElement(DynamicPanelItem, EmptyPage, { speed: 0.5 });
@@ -180,7 +267,7 @@ test("Drag Drop Question", async (t) => {
     .dragToElement(DragZoneRating2, Rating1, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -120,
+      destinationOffsetY: 1,
       speed: 0.5
     });
 
@@ -192,13 +279,14 @@ test("Drag Drop Question", async (t) => {
     .dragToElement(DragZoneRating2, Rating1, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 120,
+      destinationOffsetY: -1,
       speed: 0.5
     });
 
   name = await getQuestionNameByIndex(1);
   await t.expect(name).eql(questionName);
 });
+
 test("Drag Drop to Panel", async (t) => {
   await t.resizeWindow(2560, 1440);
   const json = {
@@ -221,43 +309,43 @@ test("Drag Drop to Panel", async (t) => {
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
 
   await t
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -250,
-      speed: 0.5
+      destinationOffsetY: 1,
+      speed: 0.01
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 250,
-      speed: 0.5
+      destinationOffsetY: -1,
+      speed: 0.01
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      speed: 0.5
+      speed: 0.01
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -120,
-      speed: 0.5
+      destinationOffsetY: 1,
+      speed: 0.01
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 120,
-      speed: 0.5
+      destinationOffsetY: -1,
+      speed: 0.01
     });
 
   const expectedJson = {
@@ -683,6 +771,8 @@ test("Animation (choices)", async (t) => {
 });
 
 test("Drag Drop ImagePicker (choices)", async (t) => {
+  await t.resizeWindow(2560, 1440);
+
   const json = {
     pages: [
       {
@@ -716,37 +806,28 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   };
   await setJSON(json);
 
+  const expectedValue = "giraffe";
+  let value;
+
   const Question1 = Selector("[data-name=\"question1\"]");
   const LionItem = Selector("[data-sv-drop-target-item-value=\"lion\"]");
   const GiraffeItem = Selector("[data-sv-drop-target-item-value=\"giraffe\"]");
   const PandaItem = Selector("[data-sv-drop-target-item-value=\"panda\"]");
   const CamelItem = Selector("[data-sv-drop-target-item-value=\"camel\"]");
 
-  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item__drag-element");
+  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item-value-controls__drag-area-indicator").filterVisible();
 
   await t
-    .click(Question1, { speed: 0.5 })
-    .hover(PandaItem).hover(LionItem).hover(CamelItem).hover(GiraffeItem).hover(DragZoneGiraffeItem)
-
-    .dragToElement(DragZoneGiraffeItem, LionItem, {
-      offsetX: 1,
-      offsetY: 1,
-      destinationOffsetY: -40,
-      speed: 0.1
-    });
-
-  let value = await getItemValueByIndex("question1", 0);
-  const expectedValue = "giraffe";
+    .click(Question1, { speed: 0.1 })
+    .hover(PandaItem, { speed: 0.1 }).hover(LionItem, { speed: 0.1 }).hover(CamelItem, { speed: 0.1 }).hover(GiraffeItem, { speed: 0.1 }).hover(DragZoneGiraffeItem, { speed: 0.1 })
+    .dragToElement(DragZoneGiraffeItem, LionItem, { speed: 0.1 });
+  value = await getItemValueByIndex("question1", 0);
   await t.expect(value).eql(expectedValue);
 
-  await t.click(Question1, { speed: 0.5 }).hover(GiraffeItem, { speed: 0.5 });
-
-  await t.dragToElement(DragZoneGiraffeItem, PandaItem, {
-    offsetX: 5,
-    offsetY: 5,
-    destinationOffsetY: 30,
-    speed: 0.1
-  });
+  await t
+    .click(Question1, { speed: 0.1 })
+    .hover(PandaItem, { speed: 0.1 }).hover(LionItem, { speed: 0.1 }).hover(CamelItem, { speed: 0.1 }).hover(GiraffeItem, { speed: 0.1 }).hover(DragZoneGiraffeItem, { speed: 0.1 })
+    .dragToElement(DragZoneGiraffeItem, PandaItem, { speed: 0.1 });
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
 });
@@ -777,7 +858,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   const Item1 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
   const Item2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
   const Item3 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
-  let DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
+  let DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-drag-element__svg");
   await t
     .hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2)
     .dragToElement(DragZoneItem2, Item1, {
@@ -790,7 +871,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   let value = await getItemValueByIndex("question1", 0);
   await t.expect(value).eql(expectedValue);
 
-  DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find(".spg-matrixdynamic__drag-element");
+  DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find(".spg-drag-element__svg");
   await t.dragToElement(DragZoneItem2, Item3, { offsetX: 5, offsetY: 5, speed: 0.5 });
 
   value = await getItemValueByIndex("question1", 2);
@@ -843,7 +924,7 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
   const Page1 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(0);
   const Page2 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1);
   const Page3 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(2);
-  let DragZonePage2 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-matrixdynamic__drag-element");
+  let DragZonePage2 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(1).find(".spg-drag-element__svg");
   await t
     .hover(Page1).hover(Page2).hover(Page3).hover(DragZonePage2)
     .dragToElement(DragZonePage2, Page1, {
@@ -883,43 +964,43 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
 
   await t
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, DynamicPanel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -250,
-      speed: 0.5,
+      destinationOffsetY: 1,
+      speed: 0.5
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, DynamicPanel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 320,
-      speed: 0.5,
+      destinationOffsetY: -1,
+      speed: 0.5
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, DynamicPanel, {
       offsetX: 5,
       offsetY: 5,
-      speed: 0.5,
+      speed: 0.5
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -120,
-      speed: 0.5,
+      destinationOffsetY: 1,
+      speed: 0.5
     })
 
-    .hover(RatingToolboxItem, { speed: 0.5 })
+    .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 120,
-      speed: 0.5,
+      destinationOffsetY: -1,
+      speed: 0.5
     });
 
   let expectedJson = {
@@ -1004,4 +1085,39 @@ test("Drag Drop from Panel Dynamic Question", async (t) => {
 
   const resultJson = await getJSON();
   await t.expect(resultJson).eql(expectedJson);
+});
+
+test("Drag Drop Question: click on drag area should work withot drag start", async (t) => {
+  const getSelectedElementName = ClientFunction(() => {
+    return window["creator"].selectedElement.name;
+  });
+
+  await t.resizeWindow(2560, 1440);
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "rating",
+            name: "rating1"
+          },
+          {
+            type: "rating",
+            name: "rating2"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Rating1 = Selector("[data-sv-drop-target-survey-element=\"rating1\"]");
+  const Rating2 = Selector("[data-sv-drop-target-survey-element=\"rating2\"]");
+  const DragZoneRating2 = Rating2.find(".svc-question__drag-element");
+
+  await t.click(Rating1); // select Rating1
+  await t.expect(getSelectedElementName()).eql("rating1");
+  await t.hover(Rating2).click(DragZoneRating2); // select Rating2 without drag start
+  await t.expect(getSelectedElementName()).eql("rating2");
 });

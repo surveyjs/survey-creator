@@ -1,7 +1,11 @@
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
-import { IAction, ListModel } from "survey-core";
+import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
+import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
+import { SurveySimulatorModel } from "../../src/components/simulator";
+
+import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
@@ -26,18 +30,18 @@ test("Test language Bar Item", (): any => {
   expect(testPlugin["languageListModel"].actions).toHaveLength(2);
   expect(testPlugin["languageListModel"].actions[0].id).toEqual("en");
   expect(testPlugin["languageListModel"].actions[1].id).toEqual("de");
-  expect(testPlugin["languageListModel"].actions[1].title).toEqual("deutsch");
+  expect(testPlugin["languageListModel"].actions[1].title).toEqual("Deutsch");
   expect(model.activeLanguage).toEqual("en");
   let langActions = creator.toolbar.actions.filter((action) => action.id === "languageSelector");
   expect(langActions).toHaveLength(1);
   let langAction = langActions[0];
   expect(langAction).toBeTruthy();
-  expect(langAction.title).toEqual("english");
+  expect(langAction.title).toEqual("English");
   testPlugin["languageListModel"].selectItem(testPlugin["languageListModel"].actions.filter(act => act.id === "de")[0]);
   expect(model.survey.locale).toEqual("de");
-  expect(langAction.title).toEqual("deutsch");
+  expect(langAction.title).toEqual("Deutsch");
 
-  let testAgain = creator.toolbar.actions.filter((action) => action.id === "testSurveyAgain")[0];
+  let testAgain = model.testAgainAction;
   expect(testAgain).toBeTruthy();
   testAgain.action();
   expect(model.survey.locale).toEqual("de");
@@ -59,7 +63,7 @@ test("Test languages dropdown with unknown language", (): any => {
   expect(testPlugin["languageListModel"].actions).toHaveLength(3);
   expect(testPlugin["languageListModel"].actions[0].id).toEqual("en");
   expect(testPlugin["languageListModel"].actions[1].id).toEqual("de");
-  expect(testPlugin["languageListModel"].actions[1].title).toEqual("deutsch");
+  expect(testPlugin["languageListModel"].actions[1].title).toEqual("Deutsch");
   expect(testPlugin["languageListModel"].actions[2].id).toEqual("ff");
   expect(testPlugin["languageListModel"].actions[2].title).toEqual("ff");
   expect(model.activeLanguage).toEqual("en");
@@ -215,10 +219,10 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
   const selectedPage: () => IAction = () => model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
 
   expect(model.pageListItems).toHaveLength(3);
-  expect(model.pageListItems[0].title).toEqual("page1");
-  expect(model.pageListItems[1].title).toEqual("page2");
-  expect(model.pageListItems[2].title).toEqual("page3");
-  expect(selectedPage().title).toEqual("page1");
+  expect(model.pageListItems[0].title).toEqual("Page 1");
+  expect(model.pageListItems[1].title).toEqual("Page 2");
+  expect(model.pageListItems[2].title).toEqual("Page 3");
+  expect(selectedPage().title).toEqual("Page 1");
 
   creator.JSON = {
     pages: [
@@ -230,14 +234,14 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
   creator.getPlugin("test").update();
   expect(model.pageListItems[0].title).toEqual("page title 1");
   expect(model.pageListItems[1].title).toEqual("page title 2");
-  expect(model.pageListItems[2].title).toEqual("page3");
+  expect(model.pageListItems[2].title).toEqual("Page 3");
   expect(selectedPage().title).toEqual("page title 1");
 
   model.survey.nextPage();
   expect(selectedPage().title).toEqual("page title 2");
 
   model.survey.nextPage();
-  expect(selectedPage().title).toEqual("page3");
+  expect(selectedPage().title).toEqual("Page 3");
 });
 
 test("Simulator view switch", (): any => {
@@ -254,4 +258,130 @@ test("Simulator view switch", (): any => {
   expect(model.simulator.simulatorMainCssClass).toEqual("");
   model.simulator.device = "iPhone5";
   expect(model.simulator.simulatorMainCssClass).toEqual("svd-simulator-main--frame");
+});
+test("Simulator in iphone5", (): any => {
+  let creator: CreatorTester = new CreatorTester();
+  let model: TestSurveyTabViewModel = getTestModel(creator);
+  model.simulator.device = "iPhone5";
+  expect(model.simulator.simulatorFrame.deviceWidth).toEqual(568);
+  expect(model.simulator.simulatorFrame.deviceHeight).toEqual(320);
+});
+test("Hide Test Again action on leaving Preview", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  let testAgain = model.testAgainAction;
+  expect(testAgain).toBeTruthy();
+  expect(testAgain.visible).toBeFalsy();
+  model.survey.doComplete();
+  expect(testAgain.visible).toBeTruthy();
+  creator.makeNewViewActive("designer");
+  expect(testAgain.visible).toBeFalsy();
+});
+test("invisibleToggleAction doesn't created, there are no exceptions", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showInvisibleElementsInTestSurveyTab: false });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  expect(model.invisibleToggleAction).toBeFalsy();
+  model.survey.doComplete();
+  expect(model.invisibleToggleAction).toBeFalsy();
+});
+
+test("Test correct survey results node levels", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "matrixdynamic",
+            name: "Question1",
+            defaultValue: [
+              {
+                "Column 1": [
+                  1
+                ]
+              },
+              {
+                "Column 1": [
+                  2
+                ]
+              }
+            ],
+            columns: [
+              {
+                "name": "Column 1"
+              }
+            ],
+            choices: [
+              1,
+              2
+            ],
+            cellType: "checkbox"
+          }
+        ]
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const resultsModel: SurveyResultsModel = new SurveyResultsModel(testPlugin.model.simulator.survey);
+
+  const zeroLvl: SurveyResultsItemModel[] = resultsModel.resultData;
+  expect(zeroLvl.length).toEqual(1);
+  expect(zeroLvl[0].lvl).toEqual(0);
+
+  const firstLvl: SurveyResultsItemModel[] = zeroLvl[0].items;
+  expect(firstLvl.length).toEqual(2);
+  expect(firstLvl[0].lvl).toEqual(1);
+
+  const secondLvl: SurveyResultsItemModel[] = firstLvl[0].items;
+  expect(secondLvl.length).toEqual(1);
+  expect(secondLvl[0].lvl).toEqual(2);
+});
+test("Check zoom in mobile preview", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const simulator: SurveySimulatorModel = testPlugin.model.simulator;
+  simulator.resetZoomParameters();
+
+  expect(simulator.zoomScale).toEqual(1);
+  simulator.changeZoomScale("up");
+  expect(simulator.zoomScale).toEqual(1.01);
+  simulator.changeZoomScale("up");
+  expect(simulator.zoomScale).toEqual(1.0201);
+  simulator.changeZoomScale("down");
+  expect(simulator.zoomScale).toEqual(1.01);
+  simulator.changeZoomScale("up");
+  expect(simulator.zoomScale).toEqual(1.0201);
+  simulator.changeZoomScale("zero");
+  expect(simulator.zoomScale).toEqual(1);
+
+  simulator.changeZoomScale("up");
+  simulator.changeZoomScale("up");
+  expect(simulator.zoomScale).toEqual(1.0201);
+  simulator.resetZoomParameters();
+  expect(simulator.zoomScale).toEqual(1);
 });

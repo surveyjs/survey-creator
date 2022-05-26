@@ -6,11 +6,13 @@ import "./results.scss";
 
 export class SurveyResultsItemModel extends Base {
   @property({ defaultValue: true }) collapsed: boolean;
+  @property({ defaultValue: 0 }) lvl: number;
   @property() items: Array<any>;
 
-  constructor(private _data: any) {
+  constructor(private _data: any, private _lvl: number) {
     super();
-    this.items = addCollapsed(_data.data);
+    this.items = addCollapsed(_data.data, _lvl + 1);
+    this.lvl = _lvl;
   }
 
   get data(): Array<any> {
@@ -38,11 +40,19 @@ export class SurveyResultsItemModel extends Base {
   public getString(data: any): string {
     return this._data.getString(data);
   }
+
+  private markerWidth: number = 16
+  public get markerMargin(): string {
+    return (1.75 + this.lvl) * this.markerWidth + "px";
+  }
+  public get textMargin(): string {
+    return (3 + this.lvl) * this.markerWidth + "px";
+  }
 }
 
-function addCollapsed (items: any[] = []) {
+function addCollapsed(items: any[] = [], initLvl: number) {
   return items.filter((item) => !!item).map((item: any) => {
-    return new SurveyResultsItemModel(item);
+    return new SurveyResultsItemModel(item, initLvl);
   });
 }
 
@@ -51,7 +61,7 @@ export class SurveyResultsModel extends Base {
     super();
     this.resultText = JSON.stringify(survey.data, null, 4);
     var plainData = survey.getPlainData({ includeEmpty: false });
-    this.resultData = addCollapsed(plainData);
+    this.resultData = addCollapsed(plainData, 0);
   }
 
   @property({ defaultValue: "table" }) resultViewType: string;
@@ -76,11 +86,17 @@ export class SurveyResultsModel extends Base {
   public get resultsDisplayValue() {
     return this.getLocString("ed.resultsDisplayValue");
   }
-
-  public selectTableClick(model: SurveyResultsModel) {
-    model.resultViewType = "table";
+  public get isTableSelected() {
+    return this.resultViewType === "table";
   }
-  public selectJsonClick(model: SurveyResultsModel) {
-    model.resultViewType = "text";
+  public get isJsonSelected() {
+    return this.resultViewType === "text";
+  }
+
+  public selectTableClick = () => {
+    this.resultViewType = "table";
+  }
+  public selectJsonClick = () => {
+    this.resultViewType = "text";
   }
 }

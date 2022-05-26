@@ -1,3 +1,4 @@
+import { CreatorBase } from "src/creator-base";
 import { Base, SurveyModel, property, ListModel, IAction, Action } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 
@@ -7,10 +8,10 @@ export class ObjectSelectorItem extends Action {
   constructor(
     id: number,
     public data: Base,
-    public title: string,
+    title: string,
     public level: number
   ) {
-    super({ id: "sv_item_selector_" + id.toString(), title: title});
+    super({ id: "sv_item_selector_" + id.toString(), title: title });
   }
   public hasText(filteredTextInLow: string): boolean {
     if (!filteredTextInLow) return true;
@@ -27,6 +28,7 @@ export class ObjectSelector {
   private filteredTextInLow: string;
   private itemsValue: Array<ObjectSelectorItem>;
   constructor(
+    private creator: CreatorBase,
     survey: SurveyModel,
     private getObjectDisplayName: (
       obj: Base,
@@ -61,9 +63,13 @@ export class ObjectSelector {
     objs.push(root);
     for (var i = 0; i < this.survey.pages.length; i++) {
       var page = this.survey.pages[i];
-      var pageItem = this.createItem(page, root);
-      objs.push(pageItem);
-      this.buildElements(objs, this.getElements(page), pageItem);
+      var itemsParent = root;
+      if (!this.creator || this.creator.pageEditMode !== "single") {
+        var pageItem = this.createItem(page, root);
+        objs.push(pageItem);
+        itemsParent = pageItem;
+      }
+      this.buildElements(objs, this.getElements(page), itemsParent);
     }
     this.itemsValue = objs;
   }
@@ -128,7 +134,7 @@ export class ObjectSelectorModel extends Base {
 
   @property() isVisible: boolean;
 
-  constructor(private getObjectDisplayName: (obj: Base, reason: string, displayName: string) => string = undefined) {
+  constructor(private creator: CreatorBase, private getObjectDisplayName: (obj: Base, reason: string, displayName: string) => string = undefined) {
     super();
   }
   public get list(): ListModel {
@@ -139,7 +145,7 @@ export class ObjectSelectorModel extends Base {
     selectedObj: Base,
     onClose: (obj: Base) => void
   ) {
-    this.selector = new ObjectSelector(survey, this.getObjectDisplayName);
+    this.selector = new ObjectSelector(this.creator, survey, this.getObjectDisplayName);
     const selectedItem = this.selector.getItemByObj(selectedObj);
     if (!this.listModelValue) {
       this.listModelValue = new ListModel(

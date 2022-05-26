@@ -1,6 +1,6 @@
-//import { ButtonViewModel } from "../src/components/button";
+//import { ButtonViewModel } from "../src/button";
 
-beforeEach(() => {});
+beforeEach(() => { });
 
 test("default title", () => {
   //const button = new ButtonViewModel();

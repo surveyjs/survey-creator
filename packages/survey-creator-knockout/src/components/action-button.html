@@ -1,8 +1,0 @@
-<!-- ko if: $data.disabled -->
-<span class="svc-action-button svc-action-button--disabled"
-  data-bind="text:$data.text, css:{[$data.classes]: true}"></span>
-<!-- /ko -->
-<!-- ko ifnot: $data.disabled -->
-<span role="button" class="svc-action-button"
-  data-bind="text:$data.text, click: $data.click, key2click, css:{'svc-action-button--selected':$data.selected, [$data.classes]: true}"></span>
-<!-- /ko -->

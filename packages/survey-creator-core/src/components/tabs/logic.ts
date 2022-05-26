@@ -77,7 +77,11 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   @propertyArray() items: Array<SurveyLogicItem>;
   @propertyArray() logicTypes: Array<SurveyLogicType>;
   @property() errorText: string;
-  @property() readOnly: boolean;
+  @property({
+    onSet: (value, target: SurveyLogic) => {
+      target.onReadOnlyChanged();
+    }
+  }) readOnly: boolean;
   @property() placeholderHtml: string;
 
   public get editableItem(): SurveyLogicItem {
@@ -177,16 +181,18 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     };
     this.onLogicItemValidation.fire(this, options);
     this.errorText = options.error;
-    if (!!this.errorText && !!this.survey.creator)
-      this.survey.creator.notify(this.errorText, "error");
+    const creator = (<any>this.survey).creator;
+    if (!!this.errorText && !!creator)
+      creator.notify(this.errorText, "error");
     return !!this.errorText;
   }
   public getUsedQuestions(): Question[] {
     const names: { [key: string]: Question } = {};
     this.items.forEach(item => {
       item.getQuestionNames().forEach(name => {
-        if (!names[name]) {
-          names[name] = this.survey.getQuestionByName(name);
+        const question = this.survey.getQuestionByName(name);
+        if (!!question && !names[name]) {
+          names[name] = question;
         }
       });
     });
@@ -225,6 +231,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected getEditingActions(): Array<SurveyLogicAction> {
     return [];
   }
+  protected onReadOnlyChanged(): void {}
   private renameQuestionCore(
     oldName: string,
     newName: string,
@@ -332,27 +339,14 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected getAllElements(): Array<Base> {
     var res = [];
     this.AddElements(this.survey.pages, res);
-    this.AddElements(this.survey.getAllQuestions(), res);
+    this.AddElements(SurveyLogicTypes.baseTypes.question.getSelectorChoices(this.survey, null), res);
     this.AddElements(this.survey.getAllPanels(), res);
     this.AddElements(this.survey.triggers, res);
     this.AddElements(this.survey.completedHtmlOnCondition, res);
     this.AddElements(this.survey.calculatedValues, res);
-    this.AddElements(this.getMatrixColumns(), res);
+    this.AddElements(SurveyLogicTypes.baseTypes.matrixdropdowncolumn.getSelectorChoices(this.survey, null), res);
     this.AddElements(this.getValidators(), res);
     this.AddElements(this.getItemValues(), res);
-    return res;
-  }
-  private getMatrixColumns(): Array<Base> {
-    var res = [];
-    var questions = this.survey.getAllQuestions();
-    for (var i = 0; i < questions.length; i++) {
-      var q = questions[i];
-      var columns = q["columns"];
-      if (!columns) continue;
-      var prop = Serializer.findProperty(q.getType(), "columns");
-      if (!prop || prop.className !== "matrixdropdowncolumn") continue;
-      this.AddElements(columns, res);
-    }
     return res;
   }
   private getValidators(): Array<Base> {

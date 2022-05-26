@@ -3,6 +3,7 @@ import {
   JsonObjectProperty,
   ComponentCollection,
   QuestionDropdownModel,
+  Question
 } from "survey-core";
 import {
   PropertyGridEditorCollection,
@@ -12,19 +13,16 @@ import {
 import { ISurveyCreatorOptions } from "../settings";
 
 var json = {
-  panelJSON: null,
   name: "propertygrid_restfull",
   showInToolbox: false,
   createElements: function (panel) {
-    if (!this.panelJSON) {
-      var q = new QuestionDropdownModel("q");
-      this.panelJSON = new PropertyJSONGenerator(q.choicesByUrl).toJSON(true);
-    }
-    panel.fromJSON(this.panelJSON);
-  },
+    //tell ComponentCollection that it is composite question
+  }
 };
 
-ComponentCollection.Instance.add(json);
+if(!ComponentCollection.Instance.getCustomQuestionByName(json.name)) {
+  ComponentCollection.Instance.add(json);
+}
 
 export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuestion {
   public fit(prop: JsonObjectProperty): boolean {
@@ -37,7 +35,11 @@ export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuesti
   ): any {
     return {
       type: "propertygrid_restfull",
+      titleLocation: "hidden"
     };
+  }
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
+    new PropertyJSONGenerator(obj[prop.name], options, obj, prop).setupObjPanel(question["contentPanel"], true);
   }
 }
 

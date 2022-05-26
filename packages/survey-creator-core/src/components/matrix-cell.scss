@@ -69,3 +69,22 @@
   min-width: calcSize(70);
   box-shadow: none;
 }
+
+.svc-matrix-cell__popup {
+  .sv-popup__container {
+    background-color: $background;
+  }
+  .sv-popup__scrolling-content {
+    margin-top: calcSize(2);
+  }
+  .sv-popup_shadow.sv-popup_shadow {
+    filter: unset;
+  }
+}
+.svc-question__content {
+  .sd-table__cell--detail-panel {
+    .svc-question__adorner {
+      z-index: 13;
+    }
+  }
+}

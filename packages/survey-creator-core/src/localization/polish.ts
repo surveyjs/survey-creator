@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 var polishStrings = {
   //survey templates
@@ -192,7 +192,7 @@ var polishStrings = {
       templateTitle: "Template title",
     },
     editProperty: "Edit property '{0}'",
-    items: "[ Items: {0} ]",
+    items: "Items",
 
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",

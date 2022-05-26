@@ -9,6 +9,7 @@ import {
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./settings";
+import { wrapTextByCurlyBraces } from "./utils/utils";
 
 export enum ObjType {
   Unknown,
@@ -88,11 +89,7 @@ export class SurveyHelper {
     if (showObjectTitle && obj["title"]) return obj["title"];
     if (showObjectTitle && obj["text"]) return obj["text"];
     if (obj["name"]) return obj["name"];
-    if (objType != ObjType.Page) return "";
-    var data = <SurveyModel>(<PageModel>obj)["data"];
-    if (!data) data = <SurveyModel>(<PageModel>obj)["survey"]; //TODO
-    var index = data.pages.indexOf(<PageModel>obj);
-    return "[Page " + (index + 1) + "]";
+    return "";
   }
   public static getElements(
     element: any,
@@ -211,8 +208,12 @@ export class SurveyHelper {
   public static canSelectObj(obj: Base) {
     return !obj || obj["disableSelecting"] !== true;
   }
-  public static warnNonSupported(name: string) {
-    SurveyHelper.warnText("'" + name + "'" + " is not supported in V2.");
+  public static warnNonSupported(name: string, newPropertyName?: string) {
+    let outputText = wrapTextByCurlyBraces(name) + " is not supported in V2.";
+    if (!!newPropertyName) {
+      outputText += " Use the '" + newPropertyName + "' property instead";
+    }
+    SurveyHelper.warnText(outputText);
   }
   public static warnText(text: string) {
     // eslint-disable-next-line no-console
@@ -287,22 +288,36 @@ export class SurveyHelper {
     return items;
   }
   public static sortItems(items: Array<any>, propertyName = "text") {
+    const getNumber = (str: string, index): number => {
+      let strNum = "";
+      while(index < str.length && str[index] >= "0" && str[index] <= "9") {
+        strNum += str[index];
+        index ++;
+      }
+      return parseFloat(strNum);
+    };
     items.sort((a: any, b: any): number => {
       const aVal = !!a[propertyName] ? a[propertyName] : "";
       const bVal = !!b[propertyName] ? b[propertyName] : "";
       let index = 0;
-      while(index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
-      if(index < aVal.length && index < bVal.length) {
-        while(index > 0 && (aVal[index-1] >= "0" && aVal[index-1] <= "9")) index --;
-        const aDiv = aVal.substr(index);
-        const bDiv = bVal.substr(index);
-        if(Helpers.isNumber(aDiv) && Helpers.isNumber(bDiv)) {
-          const aNum = parseFloat(aDiv);
-          const bNum = parseFloat(bDiv);
-          return aNum === bNum ? 0 : (aNum < bNum ? -1: 1);
-        }
+      while (index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
+      if (index < aVal.length && index < bVal.length) {
+        while (index > 0 && (aVal[index - 1] >= "0" && aVal[index - 1] <= "9")) index--;
+        const aNum = getNumber(aVal, index);
+        const bNum = getNumber(bVal, index);
+        if(aNum < bNum) return -1;
+        if(aNum > bNum) return 1;
       }
       return aVal.localeCompare(bVal);
     });
+  }
+  public static getQuestionContextIndexInfo(name: string, prefix: string = ""): {index: number, name: string} {
+    const contextStrings = ["row", "panel"];
+    for(var i = 0; i < contextStrings.length; i ++) {
+      const subStr = prefix + contextStrings[i] + ".";
+      const index = name.indexOf(subStr);
+      if(index > -1) return { index: index, name: subStr };
+    }
+    return undefined;
   }
 }

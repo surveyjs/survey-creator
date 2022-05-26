@@ -3,6 +3,7 @@
 svc-toolbox {
   display: flex;
   flex-direction: column;
+  position: absolute;
 }
 
 .svc-toolbox {
@@ -36,6 +37,7 @@ svc-toolbox {
 
 .svc-toolbox__tool .sv-dots__item {
   width: calcSize(6);
+  margin-top: calcSize(0.5);
 }
 
 .svc-toolbox__category-separator {
@@ -53,7 +55,11 @@ svc-toolbox {
   border-bottom: 1px solid $border;
   box-sizing: border-box;
   width: 100%;
+  min-width: calcSize(20);
   position: relative;
+}
+
+.svc-toolbox__category-header--collapsed {
   cursor: pointer;
 }
 
@@ -82,5 +88,6 @@ svc-toolbox {
 .svc-toolbox__tool {
   .sv-action__content {
     display: block;
+    padding-top: calcSize(0.5);
   }
 }

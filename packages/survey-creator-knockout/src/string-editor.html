@@ -1,0 +1,19 @@
+<span data-bind="class: className">
+    <span class="svc-string-editor__content">
+        <div class="svc-string-editor__border">
+            <sv-svg-icon class="svc-string-editor__button svc-string-editor__button--edit" data-bind="click: edit"
+                params="iconName: 'icon-edit', size: 16"></sv-svg-icon>
+        </div>
+        <!-- ko ifnot: koHasHtml -->
+        <span class="sv-string-editor" spellcheck="false"
+            data-bind="text: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown, mouseup: onMouseUp }, click: edit, attr: { 'aria-placeholder': placeholder, contenteditable: contentEditable }"></span>
+        <!-- /ko -->
+        <!-- ko if: koHasHtml -->
+        <span class="sv-string-editor" spellcheck="false"
+            data-bind="html: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown, mouseup: onMouseUp }, click: edit, attr: { 'aria-placeholder': placeholder, contenteditable: contentEditable }"></span>
+        <!-- /ko -->
+    </span>
+    <!-- ko if: errorText -->
+    <span class="svc-string-editor__error" data-bind="text: errorText"></span>
+    <!-- /ko -->
+</span>

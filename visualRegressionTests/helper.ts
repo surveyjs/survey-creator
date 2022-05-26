@@ -1,9 +1,21 @@
-import { Selector, ClientFunction } from "testcafe";
-export { url } from "../testCafe/helper";
+import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
+import { ClientFunction } from "testcafe";
+export * from "../testCafe/helper";
 
 export const getSurveyJSFramework = ClientFunction(() => {
   return window["surveyJSFramework"];
 });
+
+export async function checkElementScreenshot(screenshotName: string, element: Selector, t: TestController) {
+  const comparer = createScreenshotsComparer(t);
+  await t
+    .wait(1000)
+    .expect(element.visible).ok("element is invisible for " + screenshotName);
+  await comparer.takeScreenshot(screenshotName, element, screenshotComparerOptions);
+  await t
+    .expect(comparer.compareResults.isValid())
+    .ok(comparer.compareResults.errorMessages());
+}
 
 //devextreme-screenshot-comparer options
 export const screenshotComparerOptions = {

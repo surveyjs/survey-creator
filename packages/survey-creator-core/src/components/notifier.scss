@@ -18,5 +18,17 @@
 
 .svc-notifier.svc-notifier--error {
   background-color: $red;
-  color: white;
+  color: $background;
+  opacity: 1;
+}
+
+.svc-creator--mobile {
+  .svc-notifier {
+    left: 0;
+    bottom: calcSize(6);
+    width: 100%;
+    box-sizing: border-box;
+    opacity: 1;
+    z-index: 1000;
+  }
 }

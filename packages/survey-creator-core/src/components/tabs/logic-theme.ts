@@ -1,3 +1,5 @@
+import { defaultActionBarCss } from "survey-core";
+
 export var logicCss = {
   root: "",
   container: "",
@@ -88,7 +90,7 @@ export var logicCss = {
     comment: "",
     required: "",
     titleRequired: "",
-    indent: 20,
+    indent: 0,
     footer: "",
     formGroup: "",
     hasError: "",
@@ -240,7 +242,7 @@ export var logicCss = {
     detailIcon: "sl-detail-panel__icon",
     detailIconExpanded: "sl-detail-panel__icon--expanded",
     detailPanelCell: "sl-table__cell--detail-panel",
-    actionsCell: "sl-table__cell st-table__cell--actions",
+    actionsCell: "sl-table__cell sl-table__cell--actions st-table__cell--actions",
     buttonAdd: "sl-matrixdynamic__add-btn",
     buttonRemove: "sl-matrixdynamic__remove-btn",
     iconAdd: "",
@@ -258,7 +260,7 @@ export var logicCss = {
   },
   comment: {
     mainRoot: "",
-    root: "sd-comment sd-input sl-comment",
+    root: "spg-comment sl-comment",
     small: ""
   },
   expression: "",
@@ -307,5 +309,6 @@ export var logicCss = {
   },
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
-  }
+  },
+  actionBar: defaultActionBarCss
 };

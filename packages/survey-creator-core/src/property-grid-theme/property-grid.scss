@@ -1,5 +1,6 @@
 @import "../variables.scss";
 
+@import "blocks/spg-action-bar.scss";
 @import "blocks/spg-question.scss";
 @import "blocks/spg-input.scss";
 @import "blocks/spg-dropdown.scss";
@@ -8,21 +9,26 @@
 @import "blocks/spg-checkbox.scss";
 @import "blocks/spg-matrixdynamic.scss";
 @import "blocks/spg-table.scss";
-@import "blocks/spg-action-button.scss";
 
 .spg-root-modern {
   width: 100%;
+  border-right: 1px solid $border;
+  box-sizing: border-box;
 }
 
 .sv-popup--modal {
   &.sv-property-editor .sv-popup__container {
     background-color: $background-for-editors;
+
+    .sv-popup_shadow {
+      background-color: transparent;
+    }
     .sd-root-modern {
       background-color: transparent;
     }
     .sd-page {
       margin: 0;
-      padding-top: calcSize(1);
+      padding: 0;
     }
   }
   .sv-popup__footer {
@@ -30,49 +36,22 @@
   }
   padding: calcSize(4);
 }
+.sv-popup.sv-property-editor .sd-root-modern{
+  --sd-mobile-width: 0; 
+}
 .sv-popup__container {
   margin-left: calcSize(1);
   margin-right: calcSize(1);
 }
-.spg-root-modern {
-  .sv-action-bar {
-    padding-right: calcSize(0.5);
-  }
-  .sv-action:not(.sv-action--hidden):not(:last-of-type) > .sv-action__content {
-    padding-right: 0;
-  }
-}
 
 .spg-title {
-  .sv-action-bar {
+  .spg-action-bar {
     margin-top: calcSize(-1);
     margin-bottom: calcSize(-1);
+    margin-right: 1px;
   }
 }
 
-survey-creator, .svc-creator {
-  .spg-action-button {
-    .sv-action-bar-item {
-      border-radius: 50%;
-      padding: calcSize(1);
-      cursor: pointer;
-      &:hover, &:focus {
-        outline: none;
-        background-color: $primary-light;
-        use {
-          fill: $primary;
-        }
-      }
-    }
-  }
-  .spg-action-button--danger {
-    .sv-action-bar-item {
-      &:hover, &:focus {
-        background-color: $red-light;
-        use {
-          fill: $red;
-        }
-      }
-    }
-  }
+.spg-body--empty {
+  margin: calcSize(3);
 }

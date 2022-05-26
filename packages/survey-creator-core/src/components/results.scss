@@ -1,32 +1,95 @@
 @import "../variables.scss";
 
-.svd_test_results {
-  padding: 1em;
-  .svd_results_header {
+.svd-test-results {
+  font-family: $font-family;
+  width: 80%;
+  margin: auto;
+  margin-bottom: calcSize(5);
+  background-color: $background;
+  box-shadow: 0px 8px 16px $shadow-medium;
+  border-radius: 10px;
+
+  .svd-test-results__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calcSize(1) calcSize(4);
+    font-size: calcSize(2);
+    color: $foreground-light;
+    border-bottom: 2px solid $background-dim;
+
+    .svd-test-results__header-text {
+      margin: 0;
+    }
+    .svd-test-results__header-types {
+      display: flex;
+
+      .svc-action-button:first-child {
+        margin-right: calcSize(1);
+      }
+    }
   }
-  .svd_results_text {
-    padding: 1em;
+
+  .svd-test-results__text {
+    display: flex;
+    padding: calcSize(2) calcSize(3);
+    width: calc(100% - calcSize(6));
+    overflow: auto;
+    user-select: text;
     white-space: pre-wrap;
-    width: 100%;
-    overflow: auto;
   }
-  .svd_results_table {
-    padding: 1em;
+  .svd-test-results__table {
     width: 100%;
-    overflow: auto;
-
     table {
-      border-collapse: collapse;
       width: 100%;
+      border-collapse: collapse; 
 
-      .survey-result-marker {
+      .svd-test-results__marker {
         position: absolute;
-        left: 1em;
-        top: 0.5em;
-        transition: transform 0.2s ease-in-out;
+        top: calcSize(1.5);
 
-        &.survey-result-marker--expanded {
-          transform: rotate(90deg);
+        .sv-svg-icon {
+          transition: transform 0.2s ease-in-out;
+
+          use {
+            fill: $foreground-light;
+          }
+        }
+
+        &.svd-test-results__marker--expanded .sv-svg-icon {
+          transform-origin: center;
+          transform: rotate(90deg) ;
+        }
+      }
+
+      th {
+        padding: calcSize(1) calcSize(1);
+        background-color: $background-dim;
+        text-align: left;
+        font-weight: 600;
+        font-size: 12px;
+        color: $foreground-light;
+
+        &:nth-child(1) {
+          padding-left: calcSize(4);
+        }
+      }
+
+      td {
+        padding: calcSize(1) calcSize(1);
+        max-width: calcSize(50);
+        overflow: auto;
+        border-top: 2px solid $background-dim;
+        user-select: text;
+
+        &:nth-child(1) {
+          position: relative;
+          width: 50%;
+          font-weight: 600;
+        }
+        &:nth-child(2) {
+          width: 50%;
+          padding-right: calcSize(4);
         }
       }
 
@@ -36,58 +99,11 @@
 
       tr {
         vertical-align: top;
-      }
 
-      th,
-      td {
-        border: 1px solid;
-        padding: 0.5em 1em;
-        max-width: calcSize(50);
-        overflow: auto;
-
-        &:nth-child(1) {
-          position: relative;
-          width: 30%;
-          font-weight: 500;
-          padding-left: 2em;
-        }
-        &:nth-child(2) {
-          width: 20%;
-        }
-        &:nth-child(3) {
-          width: 20%;
-        }
-
-        &:nth-child(4) {
-          width: 30%;
-          font-weight: 500;
+        .svd-test-results__node-value {
+          color: $foreground-light;
         }
       }
     }
-  }
-}
-
-.nav-tabs {
-  margin-bottom: 0;
-  padding: 0; // border-bottom: 1px solid $secondary-border-color;
-  line-height: 2.5em;
-}
-.nav-item {
-  display: inline-block;
-  margin-left: -3px;
-  &:first-child {
-    margin-left: 0;
-  }
-}
-.nav-link {
-  border-radius: 0;
-  border-top-left-radius: calcSize(0.25);
-  border-top-right-radius: calcSize(0.25);
-  padding: 0.5em 1em;
-  text-align: center;
-  &.active {
-    border: calcSize(0.125) solid $border;
-    border-color: $border;
-    border-bottom-color: transparent;
   }
 }

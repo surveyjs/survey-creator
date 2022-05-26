@@ -3,14 +3,14 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-  await t.maximizeWindow();
+  await t.resizeWindow(1920, 1080);
 });
 
 function normalize(str) {
   return str.replace(/\xa0/gi, " ").replace(/(?:\r\n|\r|\n)/g, "");
 }
 
-const requiredActionButton = questionToolbarActions.find('button[title="Is required?"]');
+const requiredActionButton = questionToolbarActions.find('button[title="Required"]');
 const deleteActionButton = questionToolbarActions.find('button[title="Delete"]');
 const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
 const duplicateActionButton = questionToolbarActions.find('button[title="Duplicate"]');
@@ -65,7 +65,7 @@ test("Single input question wrapper action convert", async (t) => {
     .expect(listItems.nth(4).innerText).eql("Comment")
 
     .click(listItems.nth(0))
-    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok();
+    .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
 
 test("Single input question wrapper action duplicate", async (t) => {
@@ -132,16 +132,67 @@ test("Single input question wrapper action delete", async (t) => {
 
 test("Matrix dropdown with vertical layout and and selecting rows", async (t) => {
   await t.expect(questions.exists).notOk()
-    .hover(getToolboxItemByText("Matrix (multiple choice)"))
-    .click(getToolboxItemByText("Matrix (multiple choice)"));
+    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
+    .click(getToolboxItemByText("Multiple-Choice Matrix"));
 
   await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
     window["creator"].survey.getQuestionByName("question1").columnLayout = "vertical";
   })();
 
   await t.click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
-    .expect(Selector("h5.spg-title").withText("Row count").visible).ok();
+    .expect(Selector("h5.spg-title").withText("Rows").visible).ok();
+});
+
+test("Matrix dropdown with detail panel", async (t) => {
+  await t.expect(questions.exists).notOk()
+    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
+    .click(getToolboxItemByText("Multiple-Choice Matrix"));
+
+  await ClientFunction(() => {
+    window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
+  })();
+  const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
+  await t
+    .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
+    .expect((Selector(".sd-question[data-name=question1] .sv_matrix_detail_row #convertTo").withText("Single Input").visible)).ok();
+
+});
+
+test("Matrix dropdown with detail panel - add question button", async (t) => {
+  await t.expect(questions.exists).notOk()
+    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
+    .click(getToolboxItemByText("Multiple-Choice Matrix"));
+
+  await ClientFunction(() => {
+    window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
+  })();
+  const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
+  await t
+    .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
+    .expect(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question").visible).ok()
+    .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
+    .expect((Selector(".sd-question[data-name=question1] .sv_matrix_detail_row #convertTo").withText("Single Input").visible)).ok()
+    .expect(Selector(".sd-question[data-name=question2]").visible).ok()
+    .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
+    .expect(Selector(".sd-question[data-name=question3]").visible).ok();
+});
+
+test("Rating question required property", async (t) => {
+  const isrequiredButton = Selector("#isrequired");
+  await t
+    .expect(questions.exists).notOk()
+
+    .hover(getToolboxItemByText("Rating"))
+    .click(getToolboxItemByText("Rating"))
+    .expect(isrequiredButton.visible).ok()
+    .expect(isrequiredButton.classNames).notContains("sv-action-bar-item--secondary")
+    .expect(isrequiredButton.find("use").getAttribute("xlink:href")).eql("#icon-switch-inactive_16x16")
+
+    .click(isrequiredButton)
+    .expect(isrequiredButton.classNames).contains("sv-action-bar-item--secondary")
+    .expect(isrequiredButton.find("use").getAttribute("xlink:href")).eql("#icon-switch-active_16x16");
 });

@@ -125,6 +125,7 @@ export var enStrings = {
       addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       page_visibilityName: "Page visibility",
+      page_enableName: "Page enable/disable",
       panel_visibilityName: "Panel visibility",
       panel_enableName: "Panel enable/disable",
       question_visibilityName: "Question visibility",
@@ -259,7 +260,7 @@ export var enStrings = {
     value: "Value",
     text: "Text",
     rowid: "Row ID",
-    imageLink: "Image Link",
+    imageLink: "Image (video) link",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
     itemView: "View item: {0}",
@@ -707,6 +708,7 @@ export var enStrings = {
     templateDescription: "templateDescription",
     allowAddPanel: "allowAddPanel",
     allowRemovePanel: "allowRemovePanel",
+    noEntriesText: "Empty entries text",
     panelCount: "panelCount",
     minPanelCount: "minPanelCount",
     maxPanelCount: "maxPanelCount",

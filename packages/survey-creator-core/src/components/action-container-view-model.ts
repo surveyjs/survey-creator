@@ -8,14 +8,15 @@ import {
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 
-export class ActionContainerViewModel<T extends SurveyModel> extends Base {
+export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: AdaptiveActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
+  private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
 
   constructor(
-    public creator: CreatorBase<T>,
-    public surveyElement: SurveyElement
+    public creator: CreatorBase,
+    protected surveyElement: T
   ) {
     super();
     this.selectedPropPageFunc = (sender: Base, options: any) => {
@@ -23,14 +24,40 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
         this.onElementSelectedChanged(options.newValue);
       }
     };
-    this.surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+    this.sidebarFlyoutModeChangedFunc = (sender: Base, options: any) => {
+      if (options.name === "flyoutMode") {
+        this.updateActionsProperties();
+      }
+    };
     this.actionContainer = new AdaptiveActionContainer();
     var actions: Array<Action> = [];
     this.buildActions(actions);
-    this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
-    this.actionContainer.setItems(actions);
+    this.setSurveyElement(surveyElement);
+    if(this.surveyElement) {
+      this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
+      this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
+      this.actionContainer.setItems(actions);
+    }
   }
-  protected checkActionProperties() {
+
+  protected detachElement(surveyElement: T): void {
+    if(surveyElement) {
+      surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+    }
+  }
+  protected attachElement(surveyElement: T): void {
+    if(surveyElement) {
+      surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+    }
+  }
+  protected setSurveyElement(surveyElement: T): void {
+    this.detachElement(this.surveyElement);
+    this.surveyElement = surveyElement;
+    this.attachElement(this.surveyElement);
+    this.updateActionsProperties();
+  }
+
+  protected checkActionProperties(): void {
     if (this.creator.isElementSelected(this.surveyElement)) {
       this.updateActionsProperties();
     }
@@ -38,7 +65,7 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
 
   public dispose() {
     super.dispose();
-    this.surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+    this.detachElement(this.surveyElement);
   }
   protected onElementSelectedChanged(isSelected: boolean) {
     if (!isSelected) return;
@@ -54,7 +81,8 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
     this.allowDragging = operationsAllow && options.allowDragging;
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
-    this.updateActionVisibility("settings", this.creator.sideBar.flyoutMode);
+    const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
+    this.updateActionVisibility("settings", settingsVisibility);
   }
   protected isOperationsAllow(): boolean {
     return !this.creator.readOnly;
@@ -95,7 +123,7 @@ export class ActionContainerViewModel<T extends SurveyModel> extends Base {
         visibleIndex: 20,
         iconSize: 16,
         action: () => {
-          this.creator.showPropertyGrid = true;
+          this.creator.setShowSidebar(true, true);
         }
       })
     );

@@ -1,4 +1,5 @@
 import { defaultV2Css, Serializer } from "survey-core";
+import { settings } from "../settings";
 
 function getNumericFromString(str: string): string {
   if (!str) return "";
@@ -201,7 +202,7 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
   function setClass(className, checkReady = null) {
     const arr = element.className.split(" ");
     if (checkReady) {
-      if(arr.indexOf(checkReady) == -1) {
+      if (arr.indexOf(checkReady) == -1) {
         return;
       }
     }
@@ -211,9 +212,9 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
   }
 
   if (!e[processedFlagName] && e.type === "mouseover") {
-    if(timeout) {
+    if (timeout) {
       setClass(nameReady);
-      setTimeout(()=>{
+      setTimeout(() => {
         setClass(name, nameReady);
       }, timeout);
     }
@@ -232,6 +233,7 @@ export function clearNewLines(text: string) {
 }
 
 export function select(element: any) {
+  if (!window) return;
   var range, selection;
   if (window.getSelection && document.createRange) {
     selection = window.getSelection();
@@ -267,4 +269,17 @@ export function copyCssClasses(dest: any, source: any) {
 export function assignDefaultV2Classes(destination: any, questionType: string) {
   copyCssClasses(destination, defaultV2Css.question);
   copyCssClasses(destination, defaultV2Css[questionType]);
+}
+
+export function wrapTextByCurlyBraces(text: string) {
+  return settings.logic.openBracket + text + settings.logic.closeBracket;
+}
+
+export function capitalize(str: string): string {
+  if (!str) return str;
+  str = str.replace(/[\s]+/g, " ")
+  str = str.replace(/([\s]|^)(\S)/g, (_, p1, p2) => {
+    return p1 + p2.toUpperCase()
+  })
+  return str;
 }

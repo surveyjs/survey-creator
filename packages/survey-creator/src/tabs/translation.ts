@@ -456,7 +456,8 @@ export class Translation implements ITranslationLocales {
     survey: Survey.Survey,
     showAllStrings: boolean = false,
     public koReadOnly = ko.computed(() => false),
-    private onCanShowProperty?: (obj: Survey.Base, prop: Survey.JsonObjectProperty) => boolean
+    private onCanShowProperty?: (obj: Survey.Base, prop: Survey.JsonObjectProperty) => boolean,
+    private onLocaleSelected? : (locale: string) => boolean
   ) {
     this.koLocales = ko.observableArray([
       {
@@ -805,12 +806,13 @@ export class Translation implements ITranslationLocales {
   private setLocales(locs: Array<string>) {
     var locales = this.koLocales();
     for (var i = 0; i < locs.length; i++) {
-      var loc = locs[i];
+      let loc = locs[i];
       if (this.hasLocale(loc)) continue;
-      var enabled = this.isLocaleEnabled(loc);
+      let enabled = this.isLocaleEnabled(loc);
+      let selected = enabled && (!this.onLocaleSelected || this.onLocaleSelected(loc));
       locales.push({
         locale: loc,
-        koVisible: ko.observable(enabled),
+        koVisible: ko.observable(selected),
         koEnabled: ko.observable(enabled),
       });
     }
@@ -865,6 +867,11 @@ export class TranslationViewModel {
       ko.computed(() => creator.readOnly),
       (obj: Survey.Base, prop: Survey.JsonObjectProperty): boolean => {
         return SurveyHelper.isPropertyVisible(obj, prop, creator);
+      },
+      (locale: string): boolean => {
+        let options = { locale: locale, isSelected: true };
+        creator.onTranslationLocaleInitiallySelected.fire(creator, options);
+        return options.isSelected;
       }
     );
     this.model.translationStringVisibilityCallback = (obj: Survey.Base, propertyName: string, visible: boolean) => {

@@ -1,25 +1,27 @@
 import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray } from "survey-core";
 import { settings } from "../../settings";
 import { getLocString } from "../../editorLocalization";
-import { CreatorBase } from "../../creator-base";
-import { SideBarTabModel } from "./side-bar-tab-model";
+import { CreatorBase, CreatorAction } from "../../creator-base";
+import { SidebarTabModel } from "./side-bar-tab-model";
 import { ResizeManager } from "../../utils/resizer";
 
-export class SideBarModel extends Base {
+export class SidebarModel extends Base {
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
   private _expandAction: Action;
   private _collapseAction: Action;
-  private _activeTab: SideBarTabModel;
-  private onPropertyGridVisibilityChanged;
+  private _activeTab: SidebarTabModel;
+  private onSidebarVisibilityChanged;
   private resizeManager: ResizeManager;
 
-  @propertyArray() tabs: Array<SideBarTabModel>;
+  @propertyArray() tabs: Array<SidebarTabModel>;
   @property() headerText: string;
   @property({ defaultValue: true }) visible: boolean;
+  @property({ defaultValue: false }) collapsedManually: boolean;
+  @property({ defaultValue: false }) expandedManually: boolean;
   @property() hasVisibleTabs: boolean;
   @property({ defaultValue: false }) flyoutMode: boolean;
   @property({
-    onSet: (val, target: SideBarModel) => {
+    onSet: (val, target: SidebarModel) => {
       target.tabs.forEach(tab => tab.visible = false);
       target._activeTab = target.tabs.filter(tab => tab.id === val)[0];
       if (target._activeTab) {
@@ -41,35 +43,37 @@ export class SideBarModel extends Base {
   }
 
   private createActions() {
-    if (settings.propertyGrid.allowCollapse) {
-      this._collapseAction = new Action({
+    if (this.creator.allowCollapseSidebar) {
+      this._collapseAction = new CreatorAction({
         id: "svd-grid-hide",
         iconName: "icon-collapse-panel",
         css: "svd-grid-hide",
-        title: getLocString("ed.hidePanel"),
+        locTitleName: "ed.hidePanel",
         showTitle: false,
         visible: <any>new ComputedUpdater<boolean>(() => this.visible),
         action: () => {
-          if (this.collapseAction)
-            this.collapseAction();
-          else
-            this.visible = false;
+          this.collapseSidebar();
+          if (!this.flyoutMode) {
+            this.collapsedManually = true;
+            this.expandedManually = false;
+          }
         }
       });
       this.toolbar.actions.push(this._collapseAction);
 
-      this._expandAction = new Action({
+      this._expandAction = new CreatorAction({
         id: "svd-grid-expand",
         iconName: "icon-expand-panel",
         css: "svd-grid-expand",
         needSeparator: true,
         action: () => {
-          if (this.expandAction)
-            this.expandAction();
-          else
-            this.visible = true;
+          this.expandSidebar();
+          if (!this.flyoutMode) {
+            this.collapsedManually = false;
+            this.expandedManually = this.flyoutMode;
+          }
         },
-        title: getLocString("ed.showPanel"),
+        locTitleName: "ed.showPanel",
         visible: <any>new ComputedUpdater<boolean>(() => {
           const visible = !this.visible;
           return this.hasVisibleTabs && visible;
@@ -79,37 +83,36 @@ export class SideBarModel extends Base {
     }
   }
   private getCurrentHandles(): string {
-    return this.creator.sideBarLocation == "right" ? "w" : "e";
+    return this.creator.sidebarLocation == "right" ? "w" : "e";
   }
 
-  constructor(
-    private creator: CreatorBase,
-    private collapseAction: () => void = () => { this.creator.showPropertyGrid = false; },
-    private expandAction: () => void = () => { this.creator.showPropertyGrid = true; }
-  ) {
+  constructor(private creator: CreatorBase) {
     super();
-    this.onPropertyGridVisibilityChanged = (sender: CreatorBase, options: any) => {
+    this.onSidebarVisibilityChanged = (sender: CreatorBase, options: any) => {
       if (this.isDisposed) return;
       this.visible = options.show;
     };
-    this.creator.onShowPropertyGridVisiblityChanged.add(this.onPropertyGridVisibilityChanged);
+    this.creator.onShowSidebarVisibilityChanged.add(this.onSidebarVisibilityChanged);
     this.creator.onPropertyChanged.add((sender, options) => {
-      if (options.name === "sideBarLocation") {
+      if (options.name === "sidebarLocation" && !!this.resizeManager) {
         this.resizeManager.setHandles(this.getCurrentHandles());
       }
     });
-    this.visible = this.creator.showPropertyGrid;
+    this.visible = this.creator.showSidebar;
     this.createActions();
   }
 
   public getExpandAction() {
     return this._expandAction;
   }
-  public closePropertyGrid() {
-    this._collapseAction.action();
+  public collapseSidebar() {
+    this.creator.setShowSidebar(false);
   }
-  public addTab(id: string, componentName?: string, model?: any, buildActions?: () => Array<Action>): SideBarTabModel {
-    const tab = new SideBarTabModel(id, this, componentName, model);
+  public expandSidebar() {
+    this.creator.setShowSidebar(true);
+  }
+  public addTab(id: string, componentName?: string, model?: any, buildActions?: () => Array<Action>): SidebarTabModel {
+    const tab = new SidebarTabModel(id, this, componentName, model);
     this.tabs.push(tab);
     if (!!buildActions) {
       (buildActions() || []).forEach(action => this.toolbar.actions.push(action));
@@ -121,7 +124,7 @@ export class SideBarModel extends Base {
   }
   public dispose() {
     if (!!this.creator && !this.isDisposed) {
-      this.creator.onShowPropertyGridVisiblityChanged.remove(this.onPropertyGridVisibilityChanged);
+      this.creator.onShowSidebarVisibilityChanged.remove(this.onSidebarVisibilityChanged);
     }
     super.dispose();
   }

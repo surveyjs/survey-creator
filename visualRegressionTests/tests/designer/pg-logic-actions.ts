@@ -1,7 +1,7 @@
-import { Selector, ClientFunction } from "testcafe";
+import { Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, getSurveyJSFramework } from "../../helper";
+import { url, screenshotComparerOptions, setJSON } from "../../helper";
 
 const title = "Actions in Logic section Screenshot";
 
@@ -28,7 +28,7 @@ test("Check states", async (t) => {
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
 
   // await t
   //   .click(Selector(".svd-grid-expand"));
@@ -39,7 +39,7 @@ test("Check states", async (t) => {
   await t
     .click(Selector("h4[aria-label=Logic]"));
 
-  const sectionContentElement=Selector("h4[aria-label=Logic]+div");
+  const sectionContentElement = Selector("h4[aria-label=Logic]").parent().nextSibling();
 
   await t.expect(sectionContentElement.visible).ok();
   await takeScreenshot("logic-button-default.png", sectionContentElement, screenshotComparerOptions);
@@ -48,7 +48,7 @@ test("Check states", async (t) => {
     .ok(compareResults.errorMessages());
 
   await t
-    .hover(sectionContentElement.find(".sv-action-bar-item").nth(1));
+    .hover(sectionContentElement.find(".spg-action-button").nth(1));
   await takeScreenshot("logic-button-hovered.png", sectionContentElement, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())

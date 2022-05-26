@@ -5,10 +5,15 @@ import {
   SurveyTrigger,
   Serializer,
   Helpers,
+  Question,
+  QuestionMatrixDropdownModelBase,
+  SurveyElement,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
 import { ISurveyCreatorOptions } from "../../settings";
+import { wrapTextByCurlyBraces } from "../../utils/utils";
 
 export function getLogicString(name: string) {
   return editorLocalization.getString("ed.lg." + name);
@@ -31,7 +36,10 @@ export interface ISurveyLogicType {
     formatStr: string,
     lt: SurveyLogicType
   ) => string;
-  getDisplayTextName?: (element: Base) => string;
+  getElementName?: (element: Base) => string;
+  getSelectorChoices?: (survey: SurveyModel, context: Question) => Array<SurveyElement>;
+  supportContext?: (question: Base) => boolean;
+  getParentElement?(element: Base): Base;
 }
 
 export class SurveyLogicType {
@@ -48,7 +56,19 @@ export class SurveyLogicType {
     private logicType: ISurveyLogicType,
     public survey: SurveyModel,
     public options: ISurveyCreatorOptions = null
-  ) {}
+  ) {
+    this.mergeWithBaseClass();
+  }
+  private mergeWithBaseClass() {
+    if (!this.logicType.baseClass) return;
+    const baseClass = SurveyLogicTypes.baseTypes[this.logicType.baseClass];
+    if (!baseClass) return;
+    for (var key in baseClass) {
+      if (!this.logicType[key]) {
+        this.logicType[key] = baseClass[key];
+      }
+    }
+  }
   public get name(): string {
     return this.logicType.name;
   }
@@ -88,12 +108,12 @@ export class SurveyLogicType {
     return obj;
   }
   public cloneElement(el: Base): Base {
-    if(this.isTrigger) return this.createNewObj(el);
+    if (this.isTrigger) return this.createNewObj(el);
     return el;
   }
   public areElementsEqual(el1: Base, el2: Base): boolean {
-    if(el1 === el2) return true;
-    if(!this.isTrigger || el1.getType() !== el2.getType()) return false;
+    if (el1 === el2) return true;
+    if (!this.isTrigger || el1.getType() !== el2.getType()) return false;
     return Helpers.isTwoValueEquals(el1.toJSON(), el2.toJSON());
   }
   public saveNewElement(el: Base): void {
@@ -122,31 +142,51 @@ export class SurveyLogicType {
   public get description(): string {
     return getLogicString(this.name + "Description");
   }
+  public getParentElement(element: Base): Base {
+    return !!this.logicType.getParentElement ? this.logicType.getParentElement(element) : null;
+  }
+  public get hasSelectorChoices(): boolean {
+    return !!this.logicType.getSelectorChoices;
+  }
+  public getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+    if (!this.hasSelectorChoices) return null;
+    return this.logicType.getSelectorChoices(survey, context);
+  }
   public getDisplayText(element: Base): string {
     var str = getLogicString(this.name + "Text");
     if (!!this.logicType.getDisplayText)
       return this.logicType.getDisplayText(element, str, this);
-    var name = "";
-    if (!!this.logicType.getDisplayTextName) {
-      name = this.logicType.getDisplayTextName(element);
-    } else {
-      if (!!element && !!element["name"]) {
-        name = element["name"];
-      }
+    if (!!this.logicType.getElementName) {
+      element = this.getElementByName(this.logicType.getElementName(element));
     }
+    const name = this.getElementDisplayName(element);
     if (!!name) {
-      return str["format"](this.formatElName(name));
+      const parentElement = this.getParentElement(element);
+      const parentName = this.getElementDisplayName(parentElement);
+      return str["format"](name, parentName);
     }
     return str;
   }
-  public formatElName(name: string): string {
-    if (this.showTitlesInExpression && !!this.survey) {
-      var question = this.survey.getQuestionByName(name);
-      if (!!question && !!question.title) {
-        name = question.title;
-      }
+  private getElementDisplayName(element: Base): string {
+    if (!element) return "";
+    let res = "";
+    if (this.showTitlesInExpression) {
+      res = element["title"];
     }
-    return "{" + name + "}";
+    if (!res) {
+      res = element["name"] || "";
+    }
+    return wrapTextByCurlyBraces(res);
+  }
+  private getElementByName(name: string): Base {
+    if (!this.survey) return null;
+    const question = this.survey.getQuestionByName(name);
+    if (!!question) return question;
+    return this.survey.getPageByName(name);
+  }
+  public formatElName(name: string): string {
+    const el = this.getElementByName(name);
+    return this.getElementDisplayName(el);
   }
   public formatExpression(expression: string): string {
     return SurveyLogicType.expressionToDisplayText(
@@ -155,83 +195,158 @@ export class SurveyLogicType {
       expression
     );
   }
+  public supportContext(context: Base): boolean {
+    if (!this.logicType.supportContext) return false;
+    return this.logicType.supportContext(context);
+  }
   private get isTrigger(): boolean {
     return !!this.baseClass && this.baseClass.indexOf("trigger") > -1;
   }
 }
 
+function hasMatrixColumns(survey: SurveyModel): boolean {
+  const questions = survey.getAllQuestions();
+  for (var i = 0; i < questions.length; i++) {
+    const q = questions[i];
+    if (q instanceof QuestionMatrixDropdownModelBase) {
+      if ((<QuestionMatrixDropdownModelBase>q).columns.length > 0) return true;
+    }
+  }
+  return false;
+}
+
 export class SurveyLogicTypes {
+  public static baseTypes = {
+    panel: {
+      showIf: function (survey: SurveyModel): boolean {
+        return survey.getAllPanels().length > 0;
+      },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        return <any>survey.getAllPanels();
+      }
+    },
+    question: {
+      showIf: function (survey: SurveyModel): boolean {
+        return survey.getAllQuestions().length > 0;
+      },
+      supportContext(context: Base): boolean {
+        return Array.isArray(context["templateElements"]);
+      },
+      getParentElement(element: Base): Base {
+        return !!element ? (<Question>element).parentQuestion : null;
+      },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        const res = [];
+        const questions = survey.getAllQuestions();
+        for (var i = 0; i < questions.length; i++) {
+          const q = questions[i];
+          if (!context) {
+            res.push(q);
+          }
+          if (q instanceof QuestionPanelDynamicModel && (!context || context === q)) {
+            const templates = q.templateElements;
+            for (var j = 0; j < templates.length; j++) {
+              res.push(templates[j]);
+            }
+          }
+        }
+        return res;
+      }
+    },
+    matrixdropdowncolumn: {
+      showIf: function (survey: SurveyModel): boolean {
+        return hasMatrixColumns(survey);
+      },
+      supportContext(context: Base): boolean {
+        return Array.isArray(context["columns"]);
+      },
+      getParentElement(element: Base): Base {
+        return !!element ? (<any>element).colOwner : null;
+      },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        const res = [];
+        const questions = survey.getAllQuestions();
+        for (var i = 0; i < questions.length; i++) {
+          const question = questions[i];
+          if (question instanceof QuestionMatrixDropdownModelBase &&
+            (!context || context === question)) {
+            const columns = (<QuestionMatrixDropdownModelBase>question).columns;
+            for (var j = 0; j < columns.length; j++) {
+              res.push(columns[j]);
+            }
+          }
+        }
+        return res;
+      }
+    }
+  };
   public static types = [
     {
       name: "page_visibility",
       baseClass: "page",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) {
+      showIf: function (survey: SurveyModel): boolean {
         return survey.pages.length > 1;
       },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        return survey.pages;
+      }
+    },
+    {
+      name: "page_enable",
+      baseClass: "page",
+      propertyName: "enableIf",
+      showIf: function (survey: SurveyModel): boolean {
+        return survey.pages.length > 1;
+      },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+        return survey.pages;
+      }
     },
     {
       name: "panel_visibility",
       baseClass: "panel",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) {
-        return survey.getAllPanels().length > 0;
-      },
     },
     {
       name: "panel_enable",
       baseClass: "panel",
       propertyName: "enableIf",
-      showIf: function (survey: SurveyModel) {
-        return survey.getAllPanels().length > 0;
-      },
     },
     {
       name: "question_visibility",
       baseClass: "question",
       propertyName: "visibleIf",
-      showIf: function (survey: SurveyModel) {
-        return survey.getAllQuestions().length > 0;
-      },
     },
     {
       name: "question_enable",
       baseClass: "question",
       propertyName: "enableIf",
-      showIf: function (survey: SurveyModel) {
-        return survey.getAllQuestions().length > 0;
-      },
     },
     {
       name: "question_require",
       baseClass: "question",
       propertyName: "requiredIf",
-      showIf: function (survey: SurveyModel) {
-        return survey.getAllQuestions().length > 0;
-      },
+    },
+    {
+      name: "column_visibility",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "visibleIf",
+    },
+    {
+      name: "column_enable",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "enableIf",
+    },
+    {
+      name: "column_require",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "requiredIf",
     },
     {
       name: "expression_expression",
       baseClass: "expression",
       propertyName: "expression",
-      showInUI: false,
-    },
-    {
-      name: "matrixdropdowncolumn_visibleIf",
-      baseClass: "matrixdropdowncolumn",
-      propertyName: "visibleIf",
-      showInUI: false,
-    },
-    {
-      name: "matrixdropdowncolumn_enableIf",
-      baseClass: "matrixdropdowncolumn",
-      propertyName: "enableIf",
-      showInUI: false,
-    },
-    {
-      name: "matrixdropdowncolumn_requiredIf",
-      baseClass: "matrixdropdowncolumn",
-      propertyName: "requiredIf",
       showInUI: false,
     },
     {
@@ -287,7 +402,7 @@ export class SurveyLogicTypes {
       propertyName: "expression",
       questionNames: ["gotoName"],
       isUniqueItem: true,
-      getDisplayTextName: function (element: Base): string {
+      getElementName: function (element: Base): string {
         return element["gotoName"];
       },
     },

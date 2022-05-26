@@ -1,13 +1,23 @@
 @import "./variables.scss";
 
 .svc-creator--mobile {
-  .sd-question__content {
-    .sd-selectbase__column {
-      max-width: initial;
-      display: block;
-      .svc-item-value-wrapper {
-        margin-left: calcSize(0);
+  .svc-question__content {
+    .sd-question__content {
+      .sd-selectbase__column {
+        max-width: initial;
+        display: block;
+        margin-left: 0;
       }
+    }
+  }
+
+  .svc-rating-question-controls {
+    bottom: calcSize(5);
+    left: calcSize(3);
+  }
+  .svc-question__content--selected {
+    .svc-rating-question-controls {
+      bottom: calcSize(10);
     }
   }
 

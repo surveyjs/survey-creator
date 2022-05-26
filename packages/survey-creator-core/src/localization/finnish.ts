@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export var fiStrings = {
   //survey templates
@@ -121,7 +121,6 @@ export var fiStrings = {
     chooseElement: "Valitse elementti...",
     //completedHtmlOnConditionItemText: "Näytä jos:",
     lg: {
-      addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       page_visibilityName: "Sivun näkyvyys",
       panel_visibilityName: "Panelin näkyvyys",

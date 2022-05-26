@@ -5,7 +5,6 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const dts = require("dts-bundle");
 const rimraf = require("rimraf");
 const packageJson = require("./package.json");
 const fs = require("fs");
@@ -17,15 +16,6 @@ const banner = [
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator"
-].join("\n");
-
-const dts_banner = [
-  "Type definitions for SurveyJS Creator JavaScript library v" +
-    packageJson.version,
-  "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
-  "Github: https://github.com/surveyjs/survey-creator",
-  "License: https://surveyjs.io/Licenses#SurveyCreator",
-  ""
 ].join("\n");
 
 const buildPlatformJson = {
@@ -45,8 +35,6 @@ const buildPlatformJson = {
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
   license: "https://surveyjs.io/Licenses#SurveyCreator",
   files: [
-    packageJson.name + ".css",
-    packageJson.name + ".min.css",
     packageJson.name + ".js",
     packageJson.name + ".d.ts",
     packageJson.name + ".min.js"
@@ -67,8 +55,9 @@ const buildPlatformJson = {
     //TODO: Return back when release
     // "survey-core": "^" + packageJson.version,
     // "survey-knockout-ui": "^" + packageJson.version,
-    "survey-core": "^1.8.0",
-    "survey-knockout-ui": "^1.8.0",
+    "survey-core": "^1.9.9",
+    "survey-knockout-ui": "^1.9.9",
+    "survey-creator-core": packageJson.version,
     knockout: "^3.5.0"
   },
   devDependencies: {}
@@ -76,37 +65,16 @@ const buildPlatformJson = {
 
 module.exports = function (options) {
   const buildPath = __dirname + "/build/";
-  const isProductionBuild = options.buildType === "prod";
+  const dts_generator = __dirname + "/d_ts_generator.js";
+  const isProductionBuild = options.buildType === "prod";  
 
   const percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
     } else if (1 == percentage) {
       if (isProductionBuild) {
-        dts.bundle({
-          name: "../../" + packageJson.name,
-          main: buildPath + "typings/entries/index.d.ts",
-          outputAsModuleFolder: true,
-          headerText: dts_banner
-        });
-
-        replace.sync(
-          {
-            files: buildPath + packageJson.name + ".d.ts",
-            from: /export let\s+\w+:\s+\w+;/,
-            to: ""
-          },
-          (error, changes) => {
-            if (error) {
-              return console.error("Error occurred:", error);
-            }
-            console.log(
-              "check me :     " + buildPath + packageJson.name + ".d.ts"
-            );
-            console.log("Modified files:", changes.join(", "));
-          }
-        );
-
+        console.log("Generating d.ts file: " + dts_generator);
+        require(dts_generator);
         rimraf.sync(buildPath + "typings");
         fs.createReadStream("./README.md").pipe(
           fs.createWriteStream(buildPath + "README.md")
@@ -219,7 +187,13 @@ module.exports = function (options) {
         commonjs2: "survey-knockout-ui",
         commonjs: "survey-knockout-ui",
         amd: "survey-knockout-ui"
-      }
+      },
+      "survey-creator-core": {
+        root: "SurveyCreatorCore",
+        commonjs2: "survey-creator-core",
+        commonjs: "survey-creator-core",
+        amd: "survey-creator-core"
+      },
     },
     plugins: [
       new webpack.ProgressPlugin(percentage_handler),

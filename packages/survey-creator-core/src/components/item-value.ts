@@ -5,14 +5,14 @@ import {
   QuestionCheckboxModel,
   QuestionSelectBase,
   Serializer,
-  SurveyModel
+  SurveyModel,
+  DragOrClickHelper
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropChoices } from "survey-core";
 import "./item-value.scss";
 import { getLocString } from "../editorLocalization";
 
-import { DragOrClickHelper } from "../utils/dragOrClickHelper";
 import { ICollectionItemAllowOperations } from "../settings";
 
 export class ItemValueWrapperViewModel extends Base {
@@ -23,7 +23,7 @@ export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isDragDropMoveUp: boolean;
   @property({ defaultValue: null }) ghostPosition: string; // need fot image-item-value
   constructor(
-    public creator: CreatorBase<SurveyModel>,
+    public creator: CreatorBase,
     public question: QuestionSelectBase,
     public item: ItemValue
   ) {
@@ -32,7 +32,7 @@ export class ItemValueWrapperViewModel extends Base {
     if (question.noneItem === item) {
     } else if (question.otherItem === item) {
     } else if (
-      question.getType() === "checkbox" &&
+      question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>question).selectAllItem === item
     ) {
     } else if (this.isNew) {
@@ -93,8 +93,8 @@ export class ItemValueWrapperViewModel extends Base {
     this.isDragDropGhost = this.item === this.dragDropHelper.draggedElement;
 
     if (this.item === this.dragDropHelper.prevDropTarget) {
-      this.isDragDropMoveDown = this.item.isDragDropMoveDown;
-      this.isDragDropMoveUp = this.item.isDragDropMoveUp;
+      this.isDragDropMoveDown = (<any>this.item).isDragDropMoveDown;
+      this.isDragDropMoveUp = (<any>this.item).isDragDropMoveUp;
     } else {
       this.isDragDropMoveDown = false;
       this.isDragDropMoveUp = false;
@@ -114,10 +114,10 @@ export class ItemValueWrapperViewModel extends Base {
     } else if (model.question.otherItem === model.item) {
       model.question.hasOther = true;
     } else if (
-      model.question.getType() === "checkbox" &&
+      model.question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>model.question).selectAllItem === model.item
     ) {
-      model.question.hasSelectAll = true;
+      (<any>model.question).hasSelectAll = true;
     } else {
       const itemValue = model.creator.createNewItemValue(model.question);
       model.question.choices.push(itemValue);
@@ -132,10 +132,10 @@ export class ItemValueWrapperViewModel extends Base {
     } else if (model.question.otherItem === model.item) {
       model.question.hasOther = false;
     } else if (
-      model.question.getType() === "checkbox" &&
+      model.question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>model.question).selectAllItem === model.item
     ) {
-      model.question.hasSelectAll = false;
+      (<any>model.question).hasSelectAll = false;
     } else {
       var index = model.question.choices.indexOf(model.item);
       model.question.choices.splice(index, 1);

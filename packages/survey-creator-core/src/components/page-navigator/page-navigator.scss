@@ -24,12 +24,13 @@ svc-page-navigator,
   min-height: calcSize(5.5);
 }
 
-survey-creator, .svc-creator {
+survey-creator,
+.svc-creator {
   .svc-page-navigator__selector {
-  
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       outline: none;
-  
+
       .svc-page-navigator__navigator-icon {
         background-color: $primary-light;
         use {
@@ -38,7 +39,7 @@ survey-creator, .svc-creator {
       }
     }
   }
-  }
+}
 
 .svc-page-navigator__selector--opened {
   opacity: 0.5;
@@ -55,12 +56,14 @@ survey-creator, .svc-creator {
 }
 
 .svc-tab-designer--with-page-navigator {
-  padding-right: calcSize(6.5);
+  .svc-tab-designer_content {
+    margin-right: calcSize(6.5);
+  }
 }
 
 .svc-tab-designer__page-navigator {
   width: calcSize(5.5);
-  height: 100%;
+  height: 0;
   position: absolute;
   padding-top: calcSize(16.5);
   top: 0;
@@ -69,10 +72,12 @@ survey-creator, .svc-creator {
 
 .svc-creator__toolbox--right {
   .svc-tab-designer--with-page-navigator {
-    padding-right: 0;
-    padding-left: calcSize(6.5);
+    .svc-tab-designer_content {
+      margin-right: 0;
+      margin-left: calcSize(6.5);
+    }
   }
-  .svc-tab-designer__page-navigator {  
+  .svc-tab-designer__page-navigator {
     right: unset;
     left: calcSize(1);
   }

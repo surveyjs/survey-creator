@@ -248,13 +248,26 @@ implements ISurveyCreatorOptions {
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
-   * Use this event to modify the list of the strings available in a translation tab.
-   * <br/> sender - the survey creator object that fires the event
-   * <br/> options.obj - the survey object which property translations are edited in the translation tab.
-   * <br/> options.propertyName - the name of the property.
-   * <br/> options.visible - a boolean value. You can change it to hide the property.
+   * Use this event to modify the list of the strings available in the Translation tab.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being edited in the Translation tab.
+   * - `options.propertyName` - The name of a property being translated.
+   * - `options.visible` - A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
    */
   public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Use this event to define is the locale initially selected (default value) and ready for translaion or it is unselected.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.locale` - the locale name, like 'en', 'de' and so on.
+   * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
+   */
+   public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
 
   /**
    * This callback is used internally for providing survey JSON text.

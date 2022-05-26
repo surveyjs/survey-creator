@@ -4,9 +4,6 @@ const title = "Select context object then edit string";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
-  await ClientFunction(() => {
-    window["creator"].showPropertyGrid = true;
-  })();
 });
 
 test("Select questions and survey", async (t) => {
@@ -24,23 +21,57 @@ test("Select questions and survey", async (t) => {
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 });
 
+test("Check page selector does not select survey", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].JSON = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        },
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question2"
+            }
+          ]
+        }
+      ]
+    };
+  })();
+
+  await t
+    .click(Selector(".svc-tab-designer .svc-page .svc-question__content"), { offsetX: 5, offsetY: 50 })
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
+    .click(Selector(".svc-page-navigator-item__dot[title=\"page2\"]"))
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("question1");
+});
+
 test("Matrix question", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Matrix (single choice)");
+  await addQuestionByAddQuestionButton(t, "Single-Choice Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
-    .click(Selector("span[aria-placeholder='Input page title here']"))
+    .click(Selector("span[aria-placeholder='Page 1']"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("page1")
 
     .click(Selector(".sv-string-editor").withText("question1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
-    .click(Selector("span[aria-placeholder='Input survey title here']"))
+    .click(Selector("span[aria-placeholder='Survey Title']"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
     .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
 
@@ -51,7 +82,7 @@ test("Matrix question", async (t) => {
     .click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
-    .expect(Selector("h5.spg-title").withText("Row count").visible).ok();
+    .expect(Selector("h5.spg-title").withText("Rows").visible).ok();
 });
 
 test("Matrix dropdown question", async (t) => {
@@ -59,7 +90,7 @@ test("Matrix dropdown question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -71,7 +102,7 @@ test("Matrix dropdown question", async (t) => {
     .click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
     .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
-    .expect(Selector("h5.spg-title").withText("Row count").visible).ok();
+    .expect(Selector("h5.spg-title").withText("Rows").visible).ok();
 });
 
 test("Matrix dropdown question select column", async (t) => {
@@ -79,7 +110,7 @@ test("Matrix dropdown question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Matrix (multiple choice)");
+  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -97,7 +128,7 @@ test("Matrix dynamic question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Matrix (dynamic rows)");
+  await addQuestionByAddQuestionButton(t, "Dynamic Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -114,7 +145,7 @@ test("Dynamic panel inner panel not selectable", async (t) => {
   await t
     .expect(Selector(".svc-question__content").exists).notOk();
 
-  await addQuestionByAddQuestionButton(t, "Panel (dynamic panels)");
+  await addQuestionByAddQuestionButton(t, "Dynamic Panel");
   await t
     .expect(Selector(".svc-question__adorner").exists).ok()
     .expect(Selector(".svc-question__content").exists).ok()

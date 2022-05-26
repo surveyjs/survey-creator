@@ -63,6 +63,7 @@ export var propertyGridCss = {
   pageTitle: "spg-title spg-page__title",
   pageDescription: "spg-description spg-page__description",
   row: "spg-row spg-clearfix",
+  rowMultiple: "spg-row--multiple",
   question: {
     mainRoot: "spg-question spg-row__question",
     flowRoot: "spg-question spg-row__question spg-row__question--flow",
@@ -73,7 +74,7 @@ export var propertyGridCss = {
     headerBottom: "spg-question__header--location--bottom",
     content: "spg-question__content",
     contentLeft: "spg-question__content--left",
-    titleLeftRoot: "",
+    titleLeftRoot: "spg-question--location--left",
     titleOnAnswer: "spg-question__title--answer",
     titleOnError: "spg-question__title--error",
     title: "spg-title spg-question__title",
@@ -84,7 +85,7 @@ export var propertyGridCss = {
     comment: "spg-comment",
     required: "spg-question--required",
     titleRequired: "spg-question__title--required",
-    indent: 20,
+    indent: 0,
     footer: "spg-question__footer",
     formGroup: "spg-question__form-group",
     hasError: "",
@@ -107,13 +108,14 @@ export var propertyGridCss = {
     itemChecked: "spg-checkbox--checked",
     itemHover: "spg-checkbox--allowhover",
     itemInline: "spg-selectbase__item--inline",
-    //label: "spg-selectbase__label",
-    label: "spg-checkbox",
+    label: "spg-selectbase__label",
+    // label: "spg-checkbox",
+    itemSvgIconId: "#icon-v2check",
     labelChecked: "",
     //itemControl: "spg-visuallyhidden spg-item__control",
     itemControl: "spg-checkbox__control",
-    //itemDecorator: "spg-item__svg spg-checkbox__svg",
-    itemDecorator: "spg-checkbox__hidden",
+    itemDecorator: "spg-checkbox__svg",
+    //itemDecorator: "spg-checkbox__hidden",
     //controlLabel: "spg-item__control-label",
     controlLabel: "spg-checkbox__caption",
     materialDecorator: "spg-checkbox__rectangle",
@@ -146,9 +148,10 @@ export var propertyGridCss = {
     itemChecked: "spg-checkbox--checked",
     itemIndeterminate: "spg-checkbox--indeterminate",
     itemDisabled: "spg-checkbox--disabled",
+    svgIconId: "#icon-v2check",
     label: "spg-checkbox__caption",
     disabledLabel: "spg-checkbox__label--disabled",
-    itemDecorator: "spg-checkbox__hidden",
+    itemDecorator: "spg-checkbox__svg",
     materialDecorator: "spg-checkbox__rectangle"
   },
   text: {
@@ -219,13 +222,17 @@ export var propertyGridCss = {
     detailIconExpanded: "spg-detail-panel__icon--expanded",
     detailPanelCell: "spg-table__cell--detail-panel",
     actionsCell: "spg-table__cell spg-table__cell--actions",
-    buttonAdd: "spg-matrixdynamic__add-btn",
+    buttonAdd: "spg-matrixdynamic__add-btn spg-action-button spg-action-button--large",
     buttonRemove: "spg-matrixdynamic__remove-btn",
     iconAdd: "",
     iconRemove: "",
+    dragElementDecorator: "spg-drag-element__svg",
+    iconDragElement: "#icon-v2dragelement_16x16",
     iconDrag: "spg-matrixdynamic__drag-element",
     dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
+    emptyRowsSection: "spg-matrixdynamic__placeholder",
+    emptyRowsText: "spg-matrixdynamic__placeholder-text"
   },
   rating: {
     root: "spg-rating",
@@ -265,6 +272,9 @@ export var propertyGridCss = {
     controls: "sjs_sp_controls",
     clearButton: "sjs_sp_clear"
   },
+  propertygrid_restfull: {
+    content: "spg-question__content spg-question__nopadding"
+  },
   saveData: {
     root: "",
     saving: "",
@@ -282,5 +292,13 @@ export var propertyGridCss = {
       buttonExpanded: "",
       buttonCollapsed: ""
     }
-  }
+  },
+  actionBar: {
+    root: "spg-action-bar",
+    item: "spg-action-button",
+    itemPressed: "spg-action-button--pressed",
+    itemAsIcon: "spg-action-button--icon",
+    itemIcon: "spg-action-button__icon",
+    itemTitle: "spg-action-button__title",
+  },
 };

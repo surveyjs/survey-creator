@@ -15,16 +15,16 @@ test("Survey/page title/description placeholders text", () => {
       }
     ]
   });
-  const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string) => {
+  const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string, placeholderText?: string) => {
     const locStr: LocalizableString = new LocalizableString(owner, false, propertyName);
     const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr, null);
     const property: JsonObjectProperty = Serializer.findProperty(ownerName, propertyName);
-    const placeholder: string = editorLocalization.getString(property.placeholder);
+    const placeholder: string = placeholderText || editorLocalization.getString((<any>property).placeholder);
     expect(editor.placeholder).toEqual(placeholder);
   };
   checkPlaceholder(survey, "survey", "title");
   checkPlaceholder(survey, "survey", "description");
-  checkPlaceholder(survey.pages[0], "page", "title");
+  checkPlaceholder(survey.pages[0], "page", "title", "Page 1");
   checkPlaceholder(survey.pages[0], "page", "description");
 });
 
@@ -73,7 +73,7 @@ test("StringEditorViewModelBase maxLength", () => {
 
 test("Designer widthMode css test", () => {
   const creator = new CreatorTester();
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  var designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
   creator.survey.widthMode = "static";
@@ -82,15 +82,35 @@ test("Designer widthMode css test", () => {
   expect(designerPlugin.model.getDesignerCss()).toEqual("sd-container-modern sd-container-modern--responsive");
 });
 
-test("Select survey in designer", ()=> {
+test("Select survey in designer", () => {
   const creator = new CreatorTester();
-  var designerPlugin = <TabDesignerPlugin<SurveyModel>>(
+  var designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
-  creator.addNewQuestionInPage(()=>{});
+  creator.JSON = { elements: [{ name: "question1", type: "text" }] };
 
   creator.selectElement(creator.survey.getAllQuestions()[0]);
   expect(creator.selectedElementName).toEqual("question1");
   designerPlugin.model.clickDesigner();
   expect(creator.selectedElementName).toEqual("survey");
+});
+
+test("StringEditorViewModelBase page title placeholder", () => {
+  Serializer.findProperty("page", "title")["placeholder"] = "pe.pageTitlePlaceholder";
+  let survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text" }
+        ]
+      }
+    ]
+  });
+  let page1 = survey.pages[0];
+  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
+  expect(page1.visibleIndex).toBe(0);
+  expect(page1.num).toBe(1);
+  expect(editor.placeholderValue).toBeUndefined();
+  expect(editor.placeholder).toBe("Page 1");
+  expect(editor.placeholderValue).toBe("Page 1");
 });

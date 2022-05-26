@@ -11,6 +11,7 @@ export class SurveyQuestionEditorPropertyDefinition {
   public title: string;
   public category: string;
   public createdFromTabName: boolean;
+  public onSameLine: boolean;
   public get name(): string {
     return !!this.property ? this.property.name : "";
   }
@@ -170,6 +171,7 @@ export class SurveyQuestionProperties {
       !isString && !!defProperty.category ? defProperty.category : "";
     propertyDefinition.title =
       !isString && !!defProperty.title ? defProperty.title : "";
+    propertyDefinition.onSameLine = this.isPropertyOnSameLine(propRes.property.nextToProperty);
     propertyDefinition.createdFromTabName = isTab;
     let tab = this.getTabOrCreate(tabName);
     tab.properties.unshift(propertyDefinition);
@@ -180,11 +182,12 @@ export class SurveyQuestionProperties {
   ) {
     var props = [].concat(properties);
     for (var i = 0; i < props.length; i++) {
-      var newTab = this.getTabByPropertyName(props[i].property.nextToProperty);
+      const nextToProperty = this.getNextToNameProperty(props[i].property);
+      var newTab = this.getTabByPropertyName(nextToProperty);
       if (!!newTab) {
         var prop = this.getPropertyByNameInTab(
           newTab,
-          props[i].property.nextToProperty
+          nextToProperty
         );
         var index = newTab.properties.indexOf(prop);
         newTab.properties.splice(index + 1, 0, props[i]);
@@ -196,11 +199,20 @@ export class SurveyQuestionProperties {
     propName: string
   ): SurveyQuestionEditorTabDefinition {
     if (!propName) return null;
+    if(this.isPropertyOnSameLine(propName)) propName = propName.substr(1);
     for (var i = 0; i < this.tabs.length; i++) {
       if (!!this.getPropertyByNameInTab(this.tabs[i], propName))
         return this.tabs[i];
     }
     return null;
+  }
+  private getNextToNameProperty(property: Survey.JsonObjectProperty): string {
+    if(!property.nextToProperty) return "";
+    if(this.isPropertyOnSameLine(property.nextToProperty)) return property.nextToProperty.substr(1);
+    return property.nextToProperty;
+  }
+  private isPropertyOnSameLine(nextToProperty: string): boolean {
+    return !!nextToProperty && nextToProperty[0] === "*";
   }
   private getPropertyByNameInTab(
     tab: SurveyQuestionEditorTabDefinition,
@@ -224,10 +236,21 @@ export class SurveyQuestionProperties {
     this.tabs.unshift(res);
     return res;
   }
+  private setUsedProperties(res: Array<ISurveyQuestionEditorDefinition>, usedProperties: any): void {
+    for(let i = 0; i < res.length; i ++) {
+      const props = res[i].properties;
+      if(!Array.isArray(props)) continue;
+      for(let j = 0; j < props.length; j ++) {
+        const propName = !!props[j]["name"] ? props[j]["name"] : props[j];
+        usedProperties[propName] = true;
+      }
+    }
+  }
   private getAllDefinitionsByClass(
     className: string
   ): Array<ISurveyQuestionEditorDefinition> {
     var result = [];
+    var usedProperties = {};
     if (
       className.indexOf("@") > -1 &&
       SurveyQuestionEditorDefinition.definition[className]
@@ -241,10 +264,11 @@ export class SurveyQuestionProperties {
         result.push(SurveyQuestionEditorDefinition.definition[defaultName]);
       }
       result.push(SurveyQuestionEditorDefinition.definition[className]);
+      this.setUsedProperties(result, usedProperties);
+      this.addNonTabProperties(result, usedProperties, true);
       return result;
     }
     var curClassName = className;
-    var usedProperties = {};
     var hasNonTabProperties = false;
     while (curClassName) {
       let metaClass = <Survey.JsonMetadataClass>(
@@ -300,13 +324,14 @@ export class SurveyQuestionProperties {
   }
   private addNonTabProperties(
     tabs: Array<ISurveyQuestionEditorDefinition>,
-    usedProperties: any
+    usedProperties: any, isFormMode: boolean = false
   ) {
     let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
     for (var i = 0; i < this.properties.length; i++) {
       let prop = this.properties[i];
-      if (!this.isJSONPropertyVisible(prop) || !!usedProperties[prop.name])
+      if (!this.isJSONPropertyVisible(prop) || !!usedProperties[prop.name] ||
+        (isFormMode && prop.showMode !== "form"))
         continue;
       let propCategory = this.getJsonPropertyCategory(prop);
       let tabName = !!propCategory

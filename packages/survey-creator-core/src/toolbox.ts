@@ -12,11 +12,12 @@ import {
   propertyArray,
   Question,
   Serializer,
-  SurveyModel
+  SurveyModel,
+  DragOrClickHelper
 } from "survey-core";
-import { CreatorBase, toolBoxLocationType } from "./creator-base";
+import { CreatorBase, toolboxLocationType } from "./creator-base";
 import { editorLocalization } from "./editorLocalization";
-import { DragOrClickHelper } from "./utils/dragOrClickHelper";
+import { settings } from "./settings";
 
 /**
  * The Toolbox item description.
@@ -69,15 +70,13 @@ export class QuestionToolboxCategory extends Base {
     }
   }
 }
-export class QuestionToolboxItem
-  extends Action
-  implements IQuestionToolboxItem {
+export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
   constructor(private item: IQuestionToolboxItem) {
     super(item);
   }
+  iconName: string;
   name: string;
   json: any;
-  title: string;
   tooltip: string;
   isCopied: boolean;
   category: string;
@@ -93,6 +92,7 @@ export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey"];
+  static defaultIconName = "icon-default";
   private _orderedQuestions = [
     "text",
     "checkbox",
@@ -107,49 +107,17 @@ export class QuestionToolbox
     "html",
     "signaturepad"
   ];
-
-  private _questionDefaultSettings = {
-    imagepicker: () => {
-      return {
-        choices: [
-          {
-            value: "lion",
-            imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-          },
-          {
-            value: "giraffe",
-            imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
-          },
-          {
-            value: "panda",
-            imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
-          },
-          {
-            value: "camel",
-            imageLink:
-              "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-          }
-        ]
-      };
-    },
-    image: () => {
-      return {
-        imageLink:
-          "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-      };
-    }
-  };
-
+  public static getQuestionDefaultSettings(questionType: string): any {
+    if(!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
+    return settings.toolbox.defaultJSON[questionType];
+  }
   /**
    * Modify this array to change the toolbox items order.
    */
-  public get orderedQuestions() {
+  public get orderedQuestions(): string[] {
     return this._orderedQuestions;
   }
-  public set orderedQuestions(questions) {
+  public set orderedQuestions(questions: string[]) {
     this._orderedQuestions = questions;
     this.reorderItems();
   }
@@ -179,11 +147,37 @@ export class QuestionToolbox
   @property({ defaultValue: false }) hasCategories: boolean;
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
-  @property({ defaultValue: false }) isCompact: boolean;
+  /**
+   * Indicates whether the toolbox is currently in compact mode.
+   * @see forceCompact
+   */
+  @property({
+    defaultValue: false,
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      if (target.hasCategories) {
+        if (val) {
+          target.isResponsivenessDisabled = false;
+          target.raiseUpdate(true);
+        } else {
+          target.isResponsivenessDisabled = true;
+          target.setActionsMode("large");
+        }
+      }
+    }
+  }) isCompact: boolean;
+  /**
+   * Specifies whether the toolbox should be in compact or full mode.
+   * Accepts the following values:
+   * - `true` - Toolbox is always in compact mode.
+   * - `false` - Toolbox is always in full mode.
+   * - `undefined` - Toolbox switches between the full and compact modes automatically based on available width.
+   * @see isCompact
+   */
+  @property() forceCompact: boolean;
 
   constructor(
     supportedQuestions: Array<string> = null,
-    public creator: CreatorBase<SurveyModel> = null
+    public creator: CreatorBase = null
   ) {
     super();
     this.createDefaultItems(supportedQuestions);
@@ -192,22 +186,24 @@ export class QuestionToolbox
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
       const json = this.creator.getJSONForNewElement(itemModel.json);
       this.dotsItemPopupModel.toggleVisibility();
-      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json);
+      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel.title);
     });
     this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
-      this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
+      if(!this.creator.readOnly) {
+        this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
+      }
     };
     this.dotsItemPopupModel.cssClass = "svc-toolbox-popup";
   }
   private onActiveCategoryChanged(newValue: string) {
-    const categories: Array<any> = this.categories;
+    const categories: Array<QuestionToolboxCategory> = this.categories;
     for (var i = 0; i < categories.length; i++) {
       var category = categories[i];
       category.collapsed = category.name !== newValue;
     }
   }
-  public setLocation(toolboxLocation: toolBoxLocationType) {
-    if (toolboxLocation === "insideSideBar") {
+  public setLocation(toolboxLocation: toolboxLocationType) {
+    if (toolboxLocation === "sidebar") {
       this.visibleActions.forEach((item) => (item.mode = "small"));
     } else {
       this.dotsItemPopupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
@@ -294,7 +290,7 @@ export class QuestionToolbox
       title: title,
       tooltip: tooltip,
       isCopied: options.isCopied !== false,
-      iconName: !!options.iconName ? options.iconName : "icon-custom-question",
+      iconName: !!options.iconName ? options.iconName : QuestionToolbox.defaultIconName,
       json: !!options.json ? options.json : this.getQuestionJSON(question),
       category: !!options.category ? options.category : ""
     };
@@ -311,9 +307,13 @@ export class QuestionToolbox
    * @see IQuestionToolboxItem
    */
   private getActionByItem(item: IQuestionToolboxItem) {
-    return item instanceof QuestionToolboxItem
-      ? item
-      : new QuestionToolboxItem(item);
+    if (item instanceof QuestionToolboxItem) {
+      return item;
+    }
+    else {
+      item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
+      return new QuestionToolboxItem(item);
+    }
   }
   public addItem(item: IQuestionToolboxItem, index?: number) {
     this.correctItem(item);
@@ -403,9 +403,17 @@ export class QuestionToolbox
     this.canCollapseCategories = !this.keepAllCategoriesExpanded;
     this.updateCategoriesState();
   }
+  public updateTitles(): void {
+    this.actions.forEach(action => {
+      const newTitle = editorLocalization.getString("qt." + action.name);
+      if (!!newTitle) {
+        action.title = newTitle;
+        action.tooltip = newTitle;
+      }
+    });
+  }
   private updateCategoriesState() {
-    var noActive =
-      this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
+    var noActive = this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
     if (noActive) {
       this.activeCategory = "";
       if (this.keepAllCategoriesExpanded) {
@@ -631,7 +639,7 @@ export class QuestionToolbox
   }
   private addItemFromJSON(json: any) {
     if (json.showInToolbox === false) return;
-    const iconName: string = json.iconName ? json.iconName : "icon-custom-question";
+    const iconName: string = json.iconName ? json.iconName : QuestionToolbox.defaultIconName;
     let title: string = editorLocalization.getString("qt." + json.name);
     if (!title || title == json.name) {
       title = json.title;
@@ -659,8 +667,8 @@ export class QuestionToolbox
   private getQuestionJSON(question: any): any {
     var json = new JsonObject().toJsonObject(question);
     json.type = question.getType();
-    if (!!this._questionDefaultSettings[json.type]) {
-      var defaultSettings = this._questionDefaultSettings[json.type]();
+    let defaultSettings = QuestionToolbox.getQuestionDefaultSettings(json.type);
+    if (defaultSettings) {
       for (var key in defaultSettings) {
         json[key] = defaultSettings[key];
       }

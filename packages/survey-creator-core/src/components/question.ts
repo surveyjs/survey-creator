@@ -12,7 +12,9 @@ import {
   ItemValue,
   Serializer,
   DragTypeOverMeEnum,
-  IAction
+  IAction,
+  ComputedUpdater,
+  DragOrClickHelper
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -24,15 +26,18 @@ import {
   propertyExists,
   toggleHovered
 } from "../utils/utils";
-import { ActionContainerViewModel } from "./action-container-view-model";
+import { SurveyElementAdornerBase } from "./action-container-view-model";
 import "./question.scss";
+import { settings } from "../settings";
 
-export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyModel> {
+export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
 
+  private dragOrClickHelper: DragOrClickHelper;
+
   constructor(
-    creator: CreatorBase<SurveyModel>,
+    creator: CreatorBase,
     surveyElement: SurveyElement,
     public templateData: SurveyTemplateRendererTemplateData
   ) {
@@ -53,7 +58,19 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
       );
     }
     this.checkActionProperties();
+    this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
+    this.dragTypeOverMe = <any>new ComputedUpdater(() => {
+      let element = this.surveyElement.getType() === "paneldynamic" ?
+        (<any>this.surveyElement).template :
+        this.surveyElement;
+      return element.dragTypeOverMe;
+    });
   }
+
+  get element() {
+    return this.surveyElement;
+  }
+
   select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
     if (!model.surveyElement.isInteractiveDesignElement) {
       return;
@@ -108,12 +125,7 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     return this.surveyElement.isDragMe;
   }
 
-  get dragTypeOverMe(): DragTypeOverMeEnum {
-    let element = this.surveyElement.getType() === "paneldynamic" ?
-      (<any>this.surveyElement).template :
-      this.surveyElement;
-    return element.dragTypeOverMe;
-  }
+  @property() dragTypeOverMe: DragTypeOverMeEnum;
 
   dispose() {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged(
@@ -179,7 +191,11 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     (<any>this.surveyElement).isRequired = newVal;
   }
 
-  startDragSurveyElement(event: PointerEvent) {
+  onPointerDown(pointerDownEvent: PointerEvent) {
+    this.dragOrClickHelper.onPointerDown(pointerDownEvent);
+  }
+
+  startDragSurveyElement = (event: PointerEvent) => {
     const element = <any>this.surveyElement;
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
@@ -189,15 +205,21 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
   public get allowEdit() {
     return !this.creator.readOnly;
   }
+  public get showAddQuestionButton(): boolean {
+    return this.allowEdit && settings.designer.showAddQuestionButton;
+  }
   public getConvertToTypesActions(): Array<IAction> {
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
       this.currentType, this.creator.toolbox.itemNames, true
     );
-    return convertClasses.map((className) => {
-      return this.creator.createIActionBarItemByClass(className);
+    const res = [];
+    convertClasses.forEach((className: string) => {
+      const item = this.creator.toolbox.items.filter(item => item.name == className)[0];
+      res.push(this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName));
     });
+    return res;
   }
-  private get currentType() : string {
+  private get currentType(): string {
     return this.surveyElement.getType();
   }
 
@@ -214,17 +236,17 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
           (item: any) => {
             this.creator.convertCurrentQuestion(item.id);
           },
-          true, selectedItems.length > 0 ? selectedItems[0]: undefined
+          true, selectedItems.length > 0 ? selectedItems[0] : undefined
         )
       },
       "bottom",
       "center"
     );
-    let actionTitle = this.creator.getLocString("qt." + this.currentType);
+    let actionTitle = selectedItems.length > 0 ? selectedItems[0].title : this.creator.getLocString("qt." + this.currentType);
     return new Action({
       id: "convertTo",
       css: "sv-action--first sv-action-bar-item--secondary",
-      iconName: "icon-change-question-type_16x16",
+      iconName: "icon-drop-down-arrow",
       iconSize: 16,
       title: actionTitle,
       visibleIndex: 0,
@@ -289,19 +311,19 @@ export class QuestionAdornerViewModel extends ActionContainerViewModel<SurveyMod
     var newElement = this.creator.fastCopyQuestion(this.surveyElement);
     this.creator.selectElement(newElement);
   }
-
-  addNewQuestion() {
-    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase? this.surveyElement:null, this.currentAddQuestionType || "text");
+  addNewQuestion(): void {
+    this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,
+      this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
   questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
     (type) => {
       this.currentAddQuestionType = type;
     },
-    this.surveyElement instanceof PanelModelBase? this.surveyElement:null
+    this.surveyElement instanceof PanelModelBase ? this.surveyElement : null
   );
   public get addNewQuestionText(): string {
-    if(!this.currentAddQuestionType && this.creator)
+    if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
-    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType):"";
+    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType) : "";
   }
 }

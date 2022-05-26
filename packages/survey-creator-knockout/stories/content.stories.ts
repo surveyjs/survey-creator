@@ -2,7 +2,7 @@ import { StylesManager, settings } from "survey-core";
 import { Survey } from "survey-knockout-ui";
 import { SurveyCreator } from "../src/entries";
 // We need import something from the component source code in order the component to be registered in KnockoutJS
-import { TabDesignerViewModel } from "@survey/creator";
+import { TabDesignerViewModel } from "survey-creator-core";
 
 import "../node_modules/survey-core/defaultV2.css";
 settings.lazyRowsRendering = true;

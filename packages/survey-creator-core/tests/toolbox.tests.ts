@@ -6,9 +6,11 @@ import {
   QuestionDropdownModel,
   CustomWidgetCollection,
   Question,
-  QuestionButtonGroupModel
+  QuestionButtonGroupModel,
+  DragOrClickHelper
 } from "survey-core";
-import { QuestionLinkValueModel } from "../src/property-grid/values";
+import { QuestionLinkValueModel } from "../src/components/link-value";
+import { settings } from "../src/settings";
 import { QuestionToolbox } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
 
@@ -319,13 +321,64 @@ test("Creator layout: toolbox location", (): any => {
   const creator = new CreatorTester();
   expect(creator.toolboxLocation).toEqual("left");
   expect(creator.toolbox.isCompact).toEqual(false);
-  expect(creator.showPropertyGrid).toEqual(true);
-  expect(creator.toolbox.dotsItemPopupModel.horizontalPosition).toEqual("right");
+  expect(creator.showSidebar).toEqual(true);
+  expect((<any>creator.toolbox).dotsItemPopupModel.horizontalPosition).toEqual("right");
 
   creator.toolboxLocation = "right";
   expect(creator.toolbox.isCompact).toEqual(true);
-  expect(creator.toolbox.dotsItemPopupModel.horizontalPosition).toEqual("left");
+  expect((<any>creator.toolbox).dotsItemPopupModel.horizontalPosition).toEqual("left");
 
-  creator.showPropertyGrid = false;
+  creator.showSidebar = false;
   expect(creator.toolbox.isCompact).toEqual(false);
+});
+
+test("Toolbox forceCompact property", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.toolbox.forceCompact).toEqual(undefined);
+  expect(creator.toolbox.isCompact).toEqual(false);
+
+  creator.toolbox.forceCompact = true;
+  creator.updateToolboxIsCompact(false);
+  expect(creator.toolbox.isCompact).toEqual(true);
+
+  creator.toolbox.forceCompact = false;
+  creator.updateToolboxIsCompact(true);
+  expect(creator.toolbox.isCompact).toEqual(false);
+});
+
+test("the toolbox gets compact after the sidebar was collapsed/expanded ", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.toolbox.isCompact).toEqual(false);
+  expect(creator.showSidebar).toEqual(true);
+
+  creator.showSidebar = false;
+  expect(creator.toolbox.isCompact).toEqual(false);
+
+  creator.showSidebar = true;
+  expect(creator.toolbox.isCompact).toEqual(false);
+});
+test("Set default toolbox JSON by question", (): any => {
+  settings.toolbox.defaultJSON["radiogroup"] = { choices: [1, 2, 3, 4, 5] };
+  const oldImageLink = settings.toolbox.defaultJSON.image.imageLink;
+  settings.toolbox.defaultJSON.image.imageLink = "testLink";
+  const creator = new CreatorTester();
+  expect(creator.toolbox.getItemByName("radiogroup").json["choices"]).toHaveLength(5);
+  expect(creator.toolbox.getItemByName("image").json["imageLink"]).toEqual("testLink");
+  settings.toolbox.defaultJSON.image.imageLink = oldImageLink;
+  delete settings.toolbox.defaultJSON["radiogroup"];
+});
+
+test("Check that d&d not working for toobox invisible items in readOnly mode", (): any => {
+  const creator = new CreatorTester();
+  const oldOnPointerDown = DragOrClickHelper.prototype.onPointerDown;
+  let trace = "";
+  DragOrClickHelper.prototype.onPointerDown = () => {
+    trace += "processed->";
+  };
+  creator.toolbox["invisibleItemsListModel"].onPointerDown(undefined, undefined);
+  expect(trace).toBe("processed->");
+  creator.readOnly = true;
+  creator.toolbox["invisibleItemsListModel"].onPointerDown(undefined, undefined);
+  expect(trace).toBe("processed->"); //pointer down should not be processed in readOnlyMode;
+  DragOrClickHelper.prototype.onPointerDown = oldOnPointerDown;
 });

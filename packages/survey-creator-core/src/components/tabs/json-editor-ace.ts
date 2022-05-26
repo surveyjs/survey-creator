@@ -14,14 +14,14 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   @property() private aceCanUndo: boolean = false;
   @property() private aceCanRedo: boolean = false;
 
-  constructor(creator: CreatorBase<SurveyModel>) {
+  constructor(creator: CreatorBase) {
     super(creator);
   }
 
-  public get text(): string {
+  protected getText(): string {
     return !!this.aceEditor ? this.aceEditor.getValue() : "";
   }
-  public set text(value: string) {
+  protected setText(value: string): void {
     this.isProcessingImmediately = true;
     this.aceEditor.setValue(value);
     this.aceEditor.renderer.updateFull(true);
@@ -92,7 +92,7 @@ export class TabJsonEditorAcePlugin
   extends TabJsonEditorBasePlugin
   implements ICreatorPlugin
 {
-  constructor(creator: CreatorBase<SurveyModel>) {
+  constructor(creator: CreatorBase) {
     super(creator);
     creator.addPluginTab(
       "editor",
@@ -102,7 +102,7 @@ export class TabJsonEditorAcePlugin
     );
   }
   protected createModel(
-    creator: CreatorBase<SurveyModel>
+    creator: CreatorBase
   ): JsonEditorBaseModel {
     return new AceJsonEditorModel(creator);
   }

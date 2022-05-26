@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export var ruStrings = {
   // strings for survey templates
@@ -95,19 +95,21 @@ export var ruStrings = {
     translationExportToSCVButton: "Экспорт в CSV",
     translationImportFromSCVButton: "Импорт из CSV",
     translationMergeLocaleWithDefault: "Объединить {0} с локалью по умолчанию",
+    translationPlaceHolder: "Перевод...",
     bold: "Жирный",
     italic: "Курсив",
     underline: "Подчеркивание",
     fpAddQuestion: "Добавить вопрос...",
     completedHtmlOnConditionItemText: "Показывать, если:",
     lg: {
+      addNewItem: "Добавить новое правило",
       //Logic tab strings
       page_visibilityName: "Видимость страницы",
       panel_visibilityName: "Видимость панели",
       panel_enableName: "Панель включена/выключена",
       question_visibilityName: "Видимость вопроса",
       question_enableName: "Вопрос включен/выключен",
-      question_requireName: "Вопрос необязательный",
+      question_requireName: "Вопрос обязательный",
       trigger_completeName: "Опрос завершен",
       trigger_setvalueName: "Установить значение вопроса",
       trigger_copyvalueName: "Копировать значение вопроса",

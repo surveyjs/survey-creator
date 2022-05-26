@@ -5,6 +5,7 @@ import {
   settings,
   MatrixDropdownColumn,
   property,
+  QuestionMatrixDropdownModelBase,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { defaultV2Css } from "survey-core";
@@ -13,7 +14,7 @@ import { toggleHovered } from "../utils/utils";
 import "./matrix-cell.scss";
 
 export class MatrixCellWrapperViewModel extends Base {
-  constructor(public creator: CreatorBase<SurveyModel>, public templateData: any, public question: Question, public row: any, public column: any) {
+  constructor(public creator: CreatorBase, public templateData: any, public question: Question, public row: any, public column: any) {
     super();
     // if(!question && !!this.templateData.data) {
     //   this.question = this.templateData.data;
@@ -23,7 +24,7 @@ export class MatrixCellWrapperViewModel extends Base {
   @property() isSelected: boolean;
 
   private onSelectionChanged = (sender, options) => {
-    if(this.context && this.context.getPropertyValue) {
+    if (this.context && this.context.getPropertyValue) {
       this.isSelected = this.creator.isElementSelected(this.context);
     } else {
       this.isSelected = false;
@@ -31,13 +32,13 @@ export class MatrixCellWrapperViewModel extends Base {
   }
 
   public editQuestion(model: MatrixCellWrapperViewModel) {
-    const column: MatrixDropdownColumn = model.question.parentQuestion.getColumnByName(model.question.name);
+    const column: MatrixDropdownColumn = (<any>model.question.parentQuestion).getColumnByName(model.question.name);
     let questionJSON = model.question.toJSON();
     questionJSON.type = model.question.getType();
     const survey = model.creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor");
     survey.css = defaultV2Css;
     survey.setDesignMode(true);
-    survey.isPopupEditorContent = true;
+    (<any>survey).isPopupEditorContent = true;
     survey.showQuestionNumbers = "none";
     survey.questionTitleLocation = "hidden";
     survey.getAllQuestions()[0].setSurveyImpl(survey);
@@ -50,26 +51,27 @@ export class MatrixCellWrapperViewModel extends Base {
       () => {
         questionJSON = survey.getAllQuestions()[0].toJSON();
         column.fromJSON(questionJSON);
-        model.question.parentQuestion.onColumnCellTypeChanged(column);
+        (<QuestionMatrixDropdownModelBase>model.question.parentQuestion).onColumnCellTypeChanged(column);
         return true;
       },
-      undefined, undefined, model.question.name
+      undefined, "svc-matrix-cell__popup", model.question.name,
+      this.creator.isMobileView ? "overlay" : "popup"
     );
   }
   get context() {
     return this.row || this.column || this.templateData;
   }
   public selectContext(model: MatrixCellWrapperViewModel, event: MouseEvent) {
-    if(!!model.row) {
+    if (!!model.row) {
       model.creator.selectElement(model.row.data, "rows", false);
       event.stopPropagation();
       return;
     }
-    if(typeof model.context.getType !== "function") {
+    if (typeof model.context.getType !== "function") {
       return;
     }
     const contextType = model.context.getType();
-    if(contextType === "itemvalue") {
+    if (contextType === "itemvalue") {
       model.creator.selectElement(model.context.locOwner, model.context.ownerPropertyName, false);
     } else {
       model.creator.selectElement(model.context);
@@ -77,7 +79,7 @@ export class MatrixCellWrapperViewModel extends Base {
     event.stopPropagation();
   }
   public hover(event: MouseEvent, element: HTMLElement) {
-    if(!this.row && this.context && this.context.getPropertyValue && this.context.getType && this.context.getType() !== "itemvalue") {
+    if (!this.row && this.context && this.context.getPropertyValue && this.context.getType && this.context.getType() !== "itemvalue") {
       toggleHovered(event, element);
     }
   }

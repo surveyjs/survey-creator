@@ -1,8 +1,7 @@
-import { Selector, ClientFunction } from "testcafe";
+import { Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, getSurveyJSFramework } from "../../helper";
-import { changeToolboxLocation } from "../../utils";
+import { url, screenshotComparerOptions, setJSON, changeToolboxLocation } from "../../helper";
 
 const title = "Page Navigator Screenshot";
 
@@ -35,10 +34,11 @@ const json = {
 
 test("On the right side (default)", async (t) => {
   await t.resizeWindow(1920, 1080);
+  await setJSON({ pages: [{ name: "page1" }] });
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
   const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
 
   await t.expect(pageNavigatorElement.visible).ok();
@@ -59,10 +59,11 @@ test("On the right side (default)", async (t) => {
 
 test("On the left side", async (t) => {
   await t.resizeWindow(1920, 1080);
+  await setJSON({ pages: [{ name: "page1" }] });
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
-  await ClientFunction((json) => { window["creator"].JSON = json; })(json);
+  await setJSON(json);
   const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
   await changeToolboxLocation("right");
 

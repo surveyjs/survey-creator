@@ -22,6 +22,9 @@ import { PropertyGridViewModel } from "../src/property-grid/property-grid-view-m
 import { ObjectSelectorModel } from "../src/property-grid/object-selector";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { PagesController } from "../src/pages-controller";
+
+export * from "../src/components/link-value";
 
 settings.supportCreatorV2 = true;
 
@@ -234,16 +237,20 @@ test("SurveyJSON always return correct data, bug #53", () => {
   expect(JSON.stringify(creator.text).indexOf("q1") > -1).toBeTruthy();
 });
 
-test("onQuestionAdded event", () => {
+test("onQuestionAdded event + undo/redo", () => {
   const creator = new CreatorTester();
   let counter = 0;
   creator.onQuestionAdded.add(function () {
+    if (creator.isProcessingUndoRedo) return;
     counter++;
   });
   expect(counter).toEqual(0);
   creator.JSON = getSurveyJson();
   expect(counter).toEqual(0);
   creator.survey.pages[0].addNewQuestion("text", "q1");
+  expect(counter).toEqual(1);
+  creator.undo();
+  creator.redo();
   expect(counter).toEqual(1);
 });
 
@@ -340,7 +347,7 @@ test("fast copy tests, copy a panel with questions and a nested panel", () => {
   const q1 = p1.addNewQuestion("text", "question1");
   const p2 = p1.addNewPanel("panel2");
   const q2 = p2.addNewQuestion("text", "question2");
-  creator.survey.selectedElement = p1;
+  (<any>creator.survey).selectedElement = p1;
   creator.fastCopyQuestion(p1);
 
   expect(survey.pages[0].elements).toHaveLength(2);
@@ -442,8 +449,10 @@ test("Validate Selected Element Errors", () => {
 });
 test("Update conditions/expressions on changing question.name", () => {
   const creator = new CreatorTester();
-  creator.survey.currentPage.addNewQuestion("text", "question1");
-  creator.survey.currentPage.addNewQuestion("text", "question2");
+  const page = creator.survey.currentPage;
+  page.enableIf = "{question1} = 1";
+  page.addNewQuestion("text", "question1");
+  page.addNewQuestion("text", "question2");
   const q1 = creator.survey.getAllQuestions()[0];
   const q2 = creator.survey.getAllQuestions()[1];
   q2.visibleIf = "{question1} = 1";
@@ -451,6 +460,7 @@ test("Update conditions/expressions on changing question.name", () => {
   const nameQuestion = creator["designerPropertyGrid"].survey.getQuestionByName("name");
   nameQuestion.value = "myUpdatedQuestion1";
   expect(q2.visibleIf).toEqual("{myUpdatedQuestion1} = 1");
+  expect(page.enableIf).toEqual("{myUpdatedQuestion1} = 1");
 });
 
 test("Update conditions/expressions on changing question.valueName", () => {
@@ -746,7 +756,7 @@ test(
     creator.JSON = {
       elements: [{ type: "text", name: "q1", title: "question1", description: "New Title" }],
     };
-    const propertyGrid = creator.sideBar.getTabById("propertyGrid").model as PropertyGridViewModel<SurveyModel>;
+    const propertyGrid = creator.sidebar.getTabById("propertyGrid").model as PropertyGridViewModel;
     expect(propertyGrid).toBeTruthy();
     const selectorBarItem = propertyGrid.objectSelectionAction;
     expect(selectorBarItem).toBeTruthy();
@@ -887,11 +897,13 @@ test("Update expressions in copyElements", () => {
       }
     ]
   };
-  const panel = new PanelModel("panel1");
-  panel.addNewQuestion("text", "question1");
-  panel.addNewQuestion("text", "question2");
+  const panel = <PanelModel>creator.survey.getPanelByName("panel1");
   panel.questions[1].visibleIf = "{question1} = 'a'";
   const newPanel = <PanelModel>creator.copyElement(panel);
+  expect(newPanel.survey).toBeTruthy();
+  expect(newPanel.isDesignMode).toBeTruthy();
+  expect(newPanel.questions[1].survey).toBeTruthy();
+  expect(newPanel.questions[1].isDesignMode).toBeTruthy();
   expect(newPanel.questions[1].visibleIf).toEqual("{question3} = 'a'");
   expect(newPanel.questions[1].visible).toBeTruthy();
 });
@@ -946,7 +958,7 @@ test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () =>
   const creator = new CreatorTester();
   creator.showObjectTitles = true;
   creator.JSON = getSurveyJson();
-  const model = new PageNavigatorViewModel(creator.pagesController);
+  const model = new PageNavigatorViewModel(new PagesController(creator), "");
   expect(model.items[0].title).toEqual("Page 1");
 });
 test(

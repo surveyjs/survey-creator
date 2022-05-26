@@ -185,7 +185,7 @@ QUnit.test("Create correct property editor", function (assert) {
     "html",
     "itemvalue[]",
     "matrixdropdowncolumns",
-    "textitems",
+    "textitem[]",
     "triggers",
     "validators",
     "restfull",
@@ -862,8 +862,8 @@ QUnit.test("SurveyPropertyItemValue override properties", function (assert) {
   Survey.Serializer.addProperty("text", "orderItems:ordergriditem[]");
   var question = new Survey.QuestionText("q1");
   var item = new Survey.ItemValue("item1", null, "ordergriditem");
-  item.price = 20;
-  question.orderItems.push(item);
+  (<any>item).price = 20;
+  (<any>question).orderItems.push(item);
 
   var propertyEditor: SurveyPropertyItemValuesEditor = new SurveyPropertyItemValuesEditorForTests();
   propertyEditor.beforeShow();
@@ -1103,13 +1103,14 @@ QUnit.test(
       true,
       "Allow to show text view with custom properties"
     );
-    assert.equal(question["test"].length, 0, "No items");
+    let questionTest = (<any>question).test;
+    assert.equal(questionTest.length, 0, "No items");
     assert.equal(propertyEditor.koItemsText(), "", "Editor is empty");
 
     propertyEditor.onAddClick();
-    assert.equal(question["test"].length, 1, "One item");
+    assert.equal(questionTest.length, 1, "One item");
 
-    var itemViewModel = propertyEditor.createItemViewModel(question.test[0]);
+    var itemViewModel = propertyEditor.createItemViewModel(questionTest[0]);
     itemViewModel.cells[0].value = "item";
     itemViewModel.cells[1].value = "2nd";
     itemViewModel.cells[2].value = "custom";
@@ -1118,9 +1119,10 @@ QUnit.test(
 
     propertyEditor.koItemsText("item|2nd|custom\nitem2|2nd2|custom2");
     propertyEditor.koActiveView("form");
-    assert.equal(question["test"].length, 2, "Two items");
+    questionTest = (<any>question).test;
+    assert.equal(questionTest.length, 2, "Two items");
 
-    itemViewModel = propertyEditor.createItemViewModel(question.test[1]);
+    itemViewModel = propertyEditor.createItemViewModel(questionTest[1]);
     assert.equal(itemViewModel.cells[0].value, "item2", "Row 1 Col 1");
     assert.equal(itemViewModel.cells[1].value, "2nd2", "Row 1 Col 2");
     assert.equal(itemViewModel.cells[2].value, "custom2", "Row 1 Col 3");
@@ -2978,18 +2980,19 @@ QUnit.test(
     editor.object = question;
     editor.options = new EditorOptionsTests();
     editor.beforeShow();
+    const editorQuestion = <QuestionDropdownModel>editor.survey.getAllQuestions()[0];
     assert.equal(
-      editor.survey.getAllQuestions()[0].choices.length,
+      editorQuestion.choices.length,
       3,
       "choices created correctly"
     );
     assert.equal(
-      editor.survey.getAllQuestions()[0].visibleChoices.length,
+      editorQuestion.visibleChoices.length,
       3,
       "all choices are visible"
     );
     assert.equal(
-      editor.survey.getAllQuestions()[0].choices[0].isEnabled,
+      editorQuestion.choices[0].isEnabled,
       true,
       "choices are enabled"
     );
@@ -3036,7 +3039,7 @@ QUnit.test("SurveyHelper convertMatrixRowsToText", function (assert) {
     ],
   };
 
-  const matrix = survey.getQuestionByName("question1");
+  const matrix = <Survey.QuestionMatrixDynamicModel>survey.getQuestionByName("question1");
   const text = SurveyHelper.convertMatrixRowsToText(matrix.visibleRows);
 
   assert.equal(
@@ -3109,7 +3112,7 @@ QUnit.test("SurveyHelper convertMatrixRowsToText", function (assert) {
     ],
   };
 
-  const matrix = survey.getQuestionByName("question1");
+  const matrix = <Survey.QuestionMatrixDynamicModel>survey.getQuestionByName("question1");
   const text = SurveyHelper.convertMatrixRowsToText(matrix.visibleRows);
 
   assert.equal(
@@ -3145,7 +3148,7 @@ QUnit.test(
     question.width = "1px";
     question.minWidth = "2%";
     question.maxWidth = "102%";
-    question.cellType = "anything";
+    (<any>question).cellType = "anything";
     question.title = "my title";
     question.titleLocation = "default";
     var json = SurveyPropertyDefaultValueEditor.createJsonFromQuestion(
@@ -3156,7 +3159,7 @@ QUnit.test(
     assert.equal(json.minWidth, undefined);
     assert.equal(json.maxWidth, undefined);
     assert.equal(json.cellType, undefined);
-    assert.equal(json.title, "my title");
+    assert.equal(json.title, editorLocalization.getString("pe.defaultValue"));
     assert.equal(json.readOnly, true);
     assert.equal(json.type, "text");
     assert.equal(json.titleLocation, "hidden");
@@ -3169,7 +3172,7 @@ QUnit.test(
     assert.equal(json.minWidth, undefined);
     assert.equal(json.maxWidth, undefined);
     assert.equal(json.cellType, undefined);
-    assert.equal(json.title, "my title");
+    assert.equal(json.title, editorLocalization.getString("pe.defaultValue"));
     assert.equal(json.readOnly, false);
     assert.equal(json.type, "text");
     assert.equal(json.titleLocation, "hidden");
@@ -3259,21 +3262,21 @@ QUnit.test("We should not have 'Others' category in our objects",
     const panel = page.addNewPanel("panel");
     const objToCheck: Array<Survey.Base> = [survey, panel, page];
     const allQuestionTypes = Survey.Serializer.getChildrenClasses("question", true);
-    for(let i = 0; i < allQuestionTypes.length; i ++) {
-      if(allQuestionTypes[i].name === "signaturepad") continue; //TODO
+    for (let i = 0; i < allQuestionTypes.length; i++) {
+      if (allQuestionTypes[i].name === "signaturepad") continue; //TODO
       let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
-      if(!!question && !question.isCompositeQuestion) {
+      if (!!question) {
         objToCheck.push(question);
       }
     }
     assert.ok(true);
-    for(let i = 0; i < objToCheck.length; i ++) {
+    for (let i = 0; i < objToCheck.length; i++) {
       let properties = new SurveyQuestionProperties(objToCheck[i]);
       let tab = properties.getTabByName("others");
-      if(!!tab) {
+      if (!!tab) {
         const props = tab.properties;
         const propNames: Array<string> = [];
-        for(var j = 0; j < props.length; j ++) {
+        for (var j = 0; j < props.length; j++) {
           propNames.push(props[j].name);
         }
         assert.notOk(true, "obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(propNames));

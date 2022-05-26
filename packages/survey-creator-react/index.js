@@ -1,3 +1,5 @@
+Survey.ComponentCollection.Instance.add({ name: "newrating", title: "SuperRating", elementsJSON: [{ "type": "rating", "name": "superrating", "title": "1", "isRequired": true, "rateMin": 0, "rateMax": 10, "minRateDescription": "1", "maxRateDescription": "2" }] });
+
 let json = {
   completedHtml:
     "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
@@ -179,8 +181,17 @@ SurveyReact.ReactElementFactory.Instance.registerElement(
 //   .registerElement("svc-property-grid", (props) => {
 //       return React.createElement(CustomPropertyGridWrapper, props);
 //   });
+/*
+class CreatorSurveyPageComponent2 extends SurveyCreator.CreatorSurveyPageComponent {
+  renderFooter() {
+    return (<div>Some Text {super.renderFooter()}</div>);
+  }
+}
 
-
+SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => {
+  return React.createElement(CreatorSurveyPageComponent2, props);
+});
+*/
 const creator = new SurveyCreator.SurveyCreator(options);
 creator.JSON = json;
 window.creator = creator;

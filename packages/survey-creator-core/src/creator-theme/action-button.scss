@@ -8,14 +8,14 @@
   color: $primary;
   font-weight: 600;
   font-size: calcSize(2);
-  line-height: calcSize(3);  
+  line-height: calcSize(3);
 
   border: calcSize(0.25) solid transparent;
-}
 
-.svc-action-button {
-  &:focus, &:hover {
-    background: rgba(25, 179, 148, 0.1); // $primary-hover-color
+  &:focus,
+  &:hover {
+    background-color: $primary-light;
+    outline: none;
   }
 }
 
@@ -29,5 +29,4 @@
 }
 
 .svc-action-button--pressed {
-  
 }

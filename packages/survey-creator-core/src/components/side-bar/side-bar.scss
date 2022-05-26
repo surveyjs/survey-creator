@@ -5,7 +5,7 @@
   position: relative;
   font-family: $font-family;
   min-width: 370px;
-  max-width: calcSize(118);
+  max-width: calcSize(68);
   width: 450px;
   height: 100%;
 }
@@ -41,6 +41,7 @@
   align-items: flex-start;
   height: calc(100% - calc(8 * #{$base-unit}));
   overflow-y: auto;
+  background-color: $background;
 }
 
 .svc-side-bar__container-container {
@@ -95,7 +96,6 @@
   overflow: visible;
 
   .svc-side-bar__shadow {
-    z-index: 100;
     background-color: $foreground-light;
     opacity: 0.75;
     position: absolute;
@@ -103,6 +103,7 @@
     bottom: 0;
     right: 0;
     left: 0;
+    z-index: 9000;
   }
   .svc-side-bar__wrapper {
     z-index: 10000;

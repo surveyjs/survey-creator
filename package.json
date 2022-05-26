@@ -33,7 +33,7 @@
         "eslint-plugin-surveyjs": "file:eslint-surveyjs",
         "husky": "^7.0.4",
         "lerna": "^3.22.1",
-        "testcafe": "^1.16.0",
+        "testcafe": "1.18.4",
         "testcafe-reporter-dashboard": "^0.2.4-rc.1",
         "typescript": "4.4.4"
     }

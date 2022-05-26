@@ -18,7 +18,9 @@ import {
   IPanel,
   SurveyElement,
   ItemValue,
-  QuestionSelectBase
+  QuestionSelectBase,
+  QuestionRowModel,
+  LocalizableString
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -31,7 +33,6 @@ import { getNextValue } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
-import { PagesController } from "./pages-controller";
 import { SelectionHistory } from "./selection-history";
 
 import { TabEmbedPlugin } from "./components/tabs/embed";
@@ -43,13 +44,13 @@ import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
 import { defaultV2Css } from "survey-core";
 import { Notifier } from "./components/notifier";
-import { updateMatrixRemoveAction } from "./utils/actions";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
 import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/undo-redo";
 import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
-import { SideBarModel } from "./components/side-bar/side-bar-model";
+import { SidebarModel } from "./components/side-bar/side-bar-model";
+import { ICreatorOptions } from "./creator-options";
 
 import "./components/creator.scss";
 import "./components/string-editor.scss";
@@ -62,22 +63,65 @@ export interface IKeyboardShortcut {
   execute: (context: any) => void;
 }
 
-export interface ICreatorOptions {
-  [index: string]: any;
-}
-
 export interface ICreatorPlugin {
   activate: () => void;
   update?: () => void;
   deactivate?: () => boolean;
+  dispose?: () => void;
   model: Base;
 }
 
-export interface ITabbedMenuItem extends IAction {
+export interface ICreatorAction extends IAction {
+  locTitleName?: string;
+  locTooltipName?: string;
+  onUpdateTitle?: () => string;
+  onUpdateTooltip?: () => string;
+}
+
+export class CreatorAction extends Action implements ICreatorAction {
+  constructor(item: ICreatorAction) {
+    super(item);
+    this.updateTitle();
+  }
+  locTitleName?: string;
+  locTooltipName?: string;
+  onUpdateTitle?: () => string;
+  onUpdateTooltip?: () => string;
+  public updateTitle(): void {
+    if(!!this.onUpdateTooltip) {
+      this.setTooltip(this.onUpdateTooltip());
+    } else {
+      if(!!this.locTooltipName) {
+        this.setTooltip(editorLocalization.getString(this.locTooltipName));
+      }
+    }
+    if(!!this.onUpdateTitle) {
+      this.setTitle(this.onUpdateTitle());
+    } else {
+      if(!!this.locTitleName) {
+        this.setTitle(editorLocalization.getString(this.locTitleName));
+      }
+    }
+  }
+  private setTitle(newVal: string): void {
+    this.title = newVal;
+    if(!!this.innerItem) {
+      this.innerItem.title = newVal;
+    }
+  }
+  private setTooltip(newVal: string): void {
+    this.tooltip = newVal;
+    if(!!this.innerItem) {
+      this.innerItem.tooltip = newVal;
+    }
+  }
+}
+
+export interface ITabbedMenuItem extends ICreatorAction {
   componentContent: string;
   renderTab?: () => any;
 }
-export class TabbedMenuItem extends Action implements ITabbedMenuItem {
+export class TabbedMenuItem extends CreatorAction implements ITabbedMenuItem {
   constructor(item: ITabbedMenuItem) {
     super(item);
   }
@@ -98,7 +142,7 @@ export class ToolbarActionContainer extends ActionContainer {
   }
   protected getRenderedActions(): Array<Action> {
     let actions = this.actions;
-    const expandAction = this.creator.sideBar.getExpandAction();
+    const expandAction = this.creator.sidebar.getExpandAction();
     var index = actions.indexOf(expandAction);
     if (index !== -1) {
       actions.splice(index, 1);
@@ -108,27 +152,26 @@ export class ToolbarActionContainer extends ActionContainer {
   }
 }
 
-export type toolBoxLocationType = "left" | "right" | "insideSideBar" | "hidden";
+export type toolboxLocationType = "left" | "right" | "sidebar";
 
 /**
  * Base class for Survey Creator.
  */
-export class CreatorBase<T extends SurveyModel = SurveyModel>
-  extends Survey.Base
+export class CreatorBase extends Base
   implements ISurveyCreatorOptions, ICreatorSelectionOwner {
   /**
    * Set it to true to show "Designer" tab and to false to hide the tab
    */
-  @property({ defaultValue: false }) showDesignerTab: boolean;
+  @property({ defaultValue: true }) showDesignerTab: boolean;
   /**
    * Set it to true to show "JSON Editor" tab and to false to hide the tab
    */
-  @property({ defaultValue: false }) showJSONEditorTab: boolean;
+  @property({ defaultValue: true }) showJSONEditorTab: boolean;
   /**
    * Obsolete. Please use showPreviewTab property
    * @see showPreviewTab
    */
-  @property({ defaultValue: false }) showTestSurveyTab: boolean;
+  @property({ defaultValue: true }) showTestSurveyTab: boolean;
   /**
    * Set it to true to show "Preview" tab and to false to hide the tab
    */
@@ -146,18 +189,23 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * Set it to true to show "Logic" tab and to false to hide the tab
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
+  @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
   /**
    * Set delay for page hover
    */
   @property({ defaultValue: 200 }) pageHoverDelay: number;
   /**
-   * Set it to false to hide survey title and coresponding properties
+   * You need to set this property to true if you want to inplace edit item values instead of texts.
    */
-  get allowEditSurveyTitle() {
+  @property({ defaultValue: false }) inplaceEditForValues: boolean;
+  /**
+  * Set it to false to hide survey title and coresponding properties
+  */
+  get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
   set allowEditSurveyTitle(val: boolean) {
-    ["title", "description", "logo", "showTitle", "logoWidth", "logoHeight", "logoFit"].forEach(propertyName => Serializer.findProperty("survey", propertyName).visible = val);
+    this.setPropertyVisibility("survey", val, "title", "description", "logo", "showTitle", "logoWidth", "logoHeight");
     this.setPropertyValue("allowEditSurveyTitle", val);
     this.designerPropertyGrid && this.designerPropertyGrid.refresh();
   }
@@ -168,7 +216,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * @see haveCommercialLicense
    */
   @property({ defaultValue: false }) haveCommercialLicense: boolean;
-  public get licenseText() {
+  public get licenseText(): string {
     return this.getLocString("survey.license");
   }
   /**
@@ -176,7 +224,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    */
   @property({ defaultValue: false }) isAutoSave: boolean;
   @property() showOptions: boolean;
-  @property({ defaultValue: false }) showState: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
@@ -186,16 +233,30 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private responsivityManager: CreatorResponsivityManager;
   footerToolbar: ActionContainer;
 
-  private pageEditModeValue: "standard" | "single" = "standard";
+  private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
   /**
    * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
    * You can set this option in creator constructor only
    */
-  public get pageEditMode() {
+  public get pageEditMode(): "standard" | "single" | "bypage" {
     return this.pageEditModeValue;
   }
+  protected set pageEditMode(val: "standard" | "single" | "bypage") {
+    this.pageEditModeValue = val;
+    if (this.pageEditModeValue === "single") {
+      this.setPropertyVisibility("survey", false, "pages");
+      this.setPropertyVisibility("question", false, "page");
+      this.setPropertyVisibility("panel", false, "page");
+      this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
+      Survey.settings.allowShowEmptyTitleInDesignMode = false;
+      Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
+    }
+    if (this.pageEditModeValue === "bypage") {
+      this.showPageNavigator = true;
+    }
+  }
 
-  @property() surveyValue: T;
+  @property() surveyValue: SurveyModel;
 
   public get toolbarItems(): Array<Action> {
     return this.toolbarValue.actions;
@@ -210,7 +271,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   private newQuestions: Array<any> = [];
   private newPanels: Array<any> = [];
   private newQuestionChangedNames: {};
-  private pagesControllerValue: PagesController;
   private selectionHistoryControllerValue: SelectionHistory;
 
   private saveSurveyFuncValue: (
@@ -268,9 +328,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     componentContent?: string,
     index?: number
   ) {
-    var tab: TabbedMenuItem = new TabbedMenuItem({
+    const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
+    const tab: TabbedMenuItem = new TabbedMenuItem({
       id: name,
-      title: !!title ? title : editorLocalization.getString("ed." + name),
+      locTitleName: locStrName,
+      title: title,
       componentContent: componentContent ? componentContent : "svc-tab-" + name,
       data: plugin,
       action: () => this.makeNewViewActive(name),
@@ -298,9 +360,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.allowing set it to false to cancel the element deleting
    */
   public onElementDeleting: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
    * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
@@ -313,9 +375,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.parentProperty the parent property (Survey.JsonObjectProperty object). It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is choices, columns, rows, triggers and so on.
    */
   public onGetPropertyReadOnly: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
    * The event is fired when the survey creator creates a survey object (Survey.Survey).
@@ -324,9 +386,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.reason indicates what component of the creator requests the survey. There are several reason types: "designer" - survey for designer survey, "test" - survey for "Preview" tab and "conditionEditor", "defaultValueEditor", "restfulEditor" - surveys for different property editors.
    */
   public onSurveyInstanceCreated: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
    * The event allows to display the custom name for objects: questions, pages and panels. By default the object name is using. You may show object title by setting showObjectTitles property to true.
@@ -344,23 +406,47 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * @see showObjectTitles
    */
   public onGetObjectDisplayName: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
   /**
-   * Use this event to disable some operations for an element (question/panel).
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object question/panel
-   * <br/> options.allowDelete set it to false to disable deleting the object
-   * <br/> options.allowCopy set it to false to disable copying the object
-   * <br/> options.allowDragging set it to false to disable dragging the element
-   * <br/> options.allowChangeType set it to false to disable changing element type
-   * <br/> options.allowChangeRequired set it to false to disable changing isRequired property
+   * This event is raised after a user has edited a text value on the design surface. This value may include HTML markup. You can handle the `onHtmlToMarkdown` event to convert the HTML markup to Markdown.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.element` - The instance of a survey element (survey, page, panel, question) that the user configures.
+   * - `options.name` - The name of a property whose value has been edited.
+   * - `options.html` - HTML content. Pass this field's value to an HTML-to-Markdown converter.
+   * - `options.text` - A text string that may contain Markdown. Assign the result of the HTML-to-Markdown conversion to this field.
+   */
+  public onHtmlToMarkdown: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
+  /**
+   * Use this event to disable user interactions with a question or panel on the design surface.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey element instance (question or panel) for which you can disable user interactions.
+   * - `options.allowAddToToolbox` - Allows users to save the current survey element configuration in the Toolbox.
+   * - `options.allowChangeRequired` - Allows users to make the survey element required.
+   * - `options.allowChangeType` - Allows users to change the survey element type.
+   * - `options.allowCopy` - Allows users to duplicate the survey element.
+   * - `options.allowDelete` - Allows users to delete the survey element.
+   * - `options.allowDragging` - Allows users to drag and drop the survey element.
+   * - `options.allowEdit` - Allows users to edit survey element properties on the design surface. If you disable this property, users can edit the properties only in the Property Grid.
+   *
+   * To disable a user interaction, set the correponding `allow...` property to `false`.
    */
   public onElementAllowOperations: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
    * Use this event to add/remove/modify the element (question/panel) menu items.
@@ -370,9 +456,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * @see onElementAllowOperations
    */
   public onDefineElementMenuItems: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called before showing a property in the Properties Grid or in the Question Editor.
    * <br/> sender the survey creator object that fires the event
@@ -385,9 +471,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> [Example: Hide a category in the Properties Grid](https://surveyjs.io/Examples/Survey-Creator?id=hidecategoryinpropertiesgrid)
    */
   public onShowingProperty: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * @Deprecated Obsolete, please use onShowingProperty event.
    * The event is called before showing a property in the Property Grid or in Question Editor.
@@ -399,10 +485,20 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.parentProperty the parent property (Survey.JsonObjectProperty object). It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is choices, columns, rows, triggers and so on.
    */
   public onCanShowProperty: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
   > = this.onShowingProperty;
   /**
+   * The event is called after a survey that represents the Property Grid is created and all its questions (property editors) are setup.
+   * You can use this event to modify this survey to change the property grid behavior
+   * <br/> options.obj the survey object that is currently editing in the property grid
+   * <br/> options.survey the property grid survey
+   */
+   public onPropertyGridSurveyCreated: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+ /**
    * The event is called after a property editor (in fact a survey question) has been created and all it's properties have been assign.
    * You can use this event to modify the property editor properties or set event handlers to customize it's behavior
    * <br/> options.obj the survey object that is currently editing in the property grid
@@ -410,22 +506,34 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
    */
   public onPropertyEditorCreated: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * The event is called before rendering a delete button in the Property Grid or in Question Editor.
-   * Obsolete, please use onCollectionItemAllowOperations
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey Question
-   * <br/> options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
-   * <br/> options.canDelete a boolean value. It is true by default. Set it false to remove delete button from the Property Grid or in Question Editor
-   * @see onCollectionItemAllowOperations
+   * The event is called after a property editor setups its title actions.
+   * You can use this event to modify the property editor title actions
+   * <br/> options.obj the survey object that is currently editing in the property grid
+   * <br/> options.property the property that the current property editor is editing
+   * <br/> options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
+   * <br/> options.titleActions the list of title actions.
    */
-  public onCanDeleteItem: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+  public onPropertyEditorUpdateTitleActions: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+    * The event is called before rendering a delete button in the Property Grid or in Question Editor.
+    * Obsolete, please use onCollectionItemAllowOperations
+    * <br/> sender the survey creator object that fires the event
+    * <br/> options.obj the survey Question
+    * <br/> options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
+    * <br/> options.canDelete a boolean value. It is true by default. Set it false to remove delete button from the Property Grid or in Question Editor
+    * @see onCollectionItemAllowOperations
+    */
+  public onCanDeleteItem: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called on deleting a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
    * Obsolete, please use onCollectionItemAllowOperations
@@ -439,9 +547,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * @see onCollectionItemAllowOperations
    */
   public onCollectionItemDeleting: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called before rendering a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
    * You can make detail/edit and remove buttons invsible and/or disable editing.
@@ -455,9 +563,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.allowEdit a boolean value. It is true by default. Set it false to disable editing.
    */
   public onCollectionItemAllowOperations: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
     * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
@@ -468,9 +576,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     * <br/> options.itemValues an editing Survey.ItemValue array. newItem object is not added yet into this array.
     */
   public onItemValueAdded: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called when a user adds a new column into MatrixDropdown or MatrixDynamic questions. Use it to set some properties of Survey.MatrixDropdownColumn by default, for example name or a custom property.
    * <br/> sender the survey creator object that fires the event
@@ -479,9 +587,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.columns editable columns objects. They can be different from options.matrix.columns. options.columns and options.matrix.columns are equal after user press Apply or Cancel and options.columns will be set to options.matrix.columns or reset to initial state.
    */
   public onMatrixColumnAdded: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * Use this event to control Property Editors UI.
    * <br/> sender the survey creator object that fires the event
@@ -490,13 +598,13 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.editorOptions  options that can be changed.
    * <br/> options.editorOptions.allowAddRemoveItems a boolean property, true by default. Set it false to disable add/remove items in array properties. For example 'choices', 'columns', 'rows'.
    * <br/> options.editorOptions.allowRemoveAllItems a boolean property, true by default. Set it false to disable remove all items in array properties. For example 'choices', 'columns', 'rows'.
-   * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Fast Entry" tab for "choices" property.
-   * <br/> options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Fast Entry" tab for "choices" property by default.
+   * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Manual Entry" tab for "choices" property.
+   * <br/> options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Manual Entry" tab for "choices" property by default.
    */
   public onSetPropertyEditorOptions: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called on generation a new name for a new created element.
    * <br/> sender the survey creator object that fires the event
@@ -505,9 +613,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.isUnique a boolean property, set this property to false, if you want to ask Creator to generate another name
    */
   public onGenerateNewName: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * Use this event to show a custom error in the Question Editor on pressing Apply or OK buttons, if the values are not set correctly. The error will be displayed under the property editor.
    * <br/> sender the survey creator object that fires the event
@@ -518,24 +626,43 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * @see onPropertyValueChanging
    */
   public onPropertyValidationCustomError: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
-   * <br/> sender the survey creator object that fires the event
-   * <br/> options.obj the survey object which property is edited in the Property Editor.
-   * <br/> options.propertyName  the name of the edited property.
-   * <br/> options.value the property value.
-   * <br/> options.newValue set the corrected value into this property. Leave it null if you are ok with the entered value.
-   * <br/> options.doValidation set the value to true to call the property validation. If there is an error, the user sees it immediately.
+   * An event that is raised each time a user edits a survey object property.
+   * Use this event to correct or validate the property value while the user enters it.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (question or panel) whose property is being edited.
+   * - `options.propertyName` - The name of the property.
+   * - `options.value` - A property value entered by a user.
+   * - `options.newValue` - A corrected property value. Specify this field if you want to override the `options.value`.
+   * - `options.doValidation` - Enable this field to validate the property value while the user enters it.
    * @see onPropertyValidationCustomError
+   * @see onSurveyPropertyValueChanged
    */
   public onPropertyValueChanging: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
+   * An event that is raised after a property in a survey object has changed.
+   *
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (question or panel) whose property has changed.
+   * - `options.propertyName` - The name of the property.
+   * - `options.value` - A new property value.
+   * @see onPropertyValidationCustomError
+   * @see onPropertyValueChanging
+   */
+   public onSurveyPropertyValueChanged: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+ /**
    * Use this event to modify the list (name and titles) of the questions available in a condition editor.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.obj the survey object which property is edited in the Property Editor.
@@ -544,9 +671,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.list the list of the questions available for condition
    */
   public onConditionQuestionsGetList: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * Use this event to modify the title in a condition editor. The title is changing during editing. In case of empty or incorrect expression it tells that expression is incorrect
    * <br/> sender the survey creator object that fires the event.
@@ -554,9 +681,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.title the default value of the title. You can change the default value.
    */
   public onConditionGetTitle: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
    * <br/> sender the survey creator object that fires the event
@@ -605,9 +732,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.type: "JSON_EDITOR"
    */
   public onModified: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called on adding a new question into the survey. Typically, when a user dropped a Question from the Question Toolbox into designer Survey area.
    * <br/> sender the survey creator object that fires the event
@@ -615,9 +742,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.page the survey Page object where question has been added.
    */
   public onQuestionAdded: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called on adding a new panel into the survey.  Typically, when a user dropped a Panel from the Question Toolbox into designer Survey area.
    * <br/> sender the survey creator object that fires the event
@@ -625,42 +752,42 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.page the survey Page object where question has been added.
    */
   public onPanelAdded: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called on adding a new page into the survey.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.page the new survey Page object.
    */
   public onPageAdded: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.survey  the survey object showing in the creator.
    */
   public onDesignerSurveyCreated: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is fired when the survey creator creates survey in Preview tab for testing.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.survey  the survey object showing in the "Preview" tab.
    */
   public onPreviewSurveyCreated: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * Obsolete. Please use onPreviewSurveyCreated event.
     * @see onPreviewSurveyCreated
     */
   public onTestSurveyCreated: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
   > = this.onPreviewSurveyCreated;
   /**
@@ -669,25 +796,25 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.message is a message to show.
    */
   public onNotify: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called on changing the selected element. You may change the new selected element by changing the property options.newSelectedElement to your own
    * <br/> options.newSelectedElement the element that is going to be selected in the survey desiger: question, panel, page or survey.
    */
   public onSelectedElementChanging: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called after the selected element is changed.
    * <br/> options.newSelectedElement the new selected element in the survey desiger: question, panel, page or survey.
    */
   public onSelectedElementChanged: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is fired then one need to choose files.
    * <br/> sender the survey creator object that fires the event
@@ -696,30 +823,59 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * @see uploadFile
    */
   public onOpenFileChooser: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is fired on uploading the files.
    * <br/> sender the survey creator object that fires the event
    * <br/> There are two properties in options:
    * <br/> files the Javascript File objects array
-   * <br/> callback called on upload complete
+   * <br/> callback called on upload complete,
+   * <br/> which takes two string arguments:
+   * <br/> a status and an image link
    * @see uploadFile
    */
   public onUploadFile: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * Use this event to modify the list of the strings available in a translation tab.
-   * <br/> sender - the survey creator object that fires the event
-   * <br/> options.obj - the survey object which property translations are edited in the translation tab.
-   * <br/> options.propertyName - the name of the property.
-   * <br/> options.visible - a boolean value. You can change it to hide the property.
+   * Use this event to modify the list of the strings available in the Translation tab.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being edited in the Translation tab.
+   * - `options.propertyName` - The name of a property being translated.
+   * - `options.visible` - A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
    */
-  public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
-
+  public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+   * Use this event to define is the locale initially selected (default value) and ready for translaion or it is unselected.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.locale` - the locale name, like 'en', 'de' and so on.
+   * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
+   */
+  public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+   * Use this event to control drag&drop operations.
+   * <br/> sender the survey creator object that fires the event.
+   * <br/> options.survey the editing survey object.
+   * <br/> options.allow set it to false to disable dragging.
+   * <br/> options.target a target element that is dragging.
+   * <br/> options.source a source element. It can be null, if it is a new element, dragging from toolbox.
+   * <br/> options.parent a page or panel where target element is dragging.
+   * <br/> options.insertBefore an element before the target element is dragging. It can be null if parent container (page or panel) is empty or dragging an element under the last element of the container.
+   * <br/> options.insertAfter an element after the target element is dragging. It can be null if parent container (page or panel) is empty or dragging element to the top of the parent container.
+   */
+  public onDragDropAllow: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * This callback is used internally for providing survey JSON text.
    */
@@ -793,6 +949,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
 
   /**
+   * Specifies a theme to use for the survey in the Preview tab.
+   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
+   */
+  public themeForPreview: string = "defaultV2";
+
+  /**
    * Set this property to false to disable pages adding, editing and deleting
    */
   public allowModifyPages = true;
@@ -851,6 +1013,43 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   protected onSetReadOnly(newVal: boolean) { }
 
   /**
+   * Gets or sets the survey locale. The default value it is empty, this means the 'en' locale is used.
+   * You can set it to 'de' - German, 'fr' - French and so on.
+   */
+  public get locale(): string {
+    return editorLocalization.currentLocale;
+  }
+  public set locale(value: string) {
+    if(editorLocalization.currentLocale === value) return;
+    editorLocalization.currentLocale = value;
+    this.toolbox.updateTitles();
+    this.refreshPlugin();
+    const selEl = this.selectedElement;
+    if(!!selEl) {
+      this.selectElement(null);
+      this.selectElement(selEl);
+    }
+    this.locStrsChanged();
+    this.tabs.forEach(item => (<TabbedMenuItem>item).updateTitle());
+    this.toolbar.actions.forEach(item => {
+      if(!!(<any>item).updateTitle) {
+        (<any>item).updateTitle();
+      }
+    });
+  }
+  private refreshPlugin() {
+    const plugin = this.currentPlugin;
+    if(!!plugin) {
+      if(plugin.deactivate) {
+        plugin.deactivate();
+      }
+      const viewType = this.viewType;
+      this.viewType = "";
+      plugin.activate();
+      this.viewType = viewType;
+    }
+  }
+  /**
    * A boolean property, false by default. Set it to true to deny editing.
    */
   public get readOnly() {
@@ -873,11 +1072,25 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   public set isRTL(value: boolean) {
     this.isRTLValue = value;
   }
-
-  public onActiveTabChanged: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+  /**
+   * The event is called when creator is going to change the active tab.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.tabName the name of new active tab
+   */
+  public onActiveTabChanging: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
+  /**
+   * The event is called when creator active tab is changed.
+   * <br/> sender the survey creator object that fires the event
+   * <br/> options.tabName the name of new active tab
+   */
+  public onActiveTabChanged: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * Get/set the active tab.
    * The following values are available: "designer", "editor", "test", "embed", "logic" and "translation".
@@ -895,6 +1108,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    */
   public makeNewViewActive(viewName: string): boolean {
     if (viewName == this.viewType) return false;
+    const chaningOptions = { tabName: viewName, allow: true };
+    this.onActiveTabChanging.fire(this, chaningOptions);
+    if (!chaningOptions.allow) return;
     if (!this.canSwitchViewType()) return false;
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
@@ -916,14 +1132,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return this.getPlugin(this.activeTab);
   }
 
-  public static defaultNewSurveyText: string =
-    '{ "pages": [ { "name": "page1"}] }';
-
   public toolbox: QuestionToolbox;
   public get toolboxCategories(): Array<any> {
     return this.toolbox.categories;
   }
-  public sideBar: SideBarModel;
+  public sidebar: SidebarModel;
 
   constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
     super();
@@ -936,61 +1149,91 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     this.toolbarValue = new ToolbarActionContainer(this);
-    this.pagesControllerValue = new PagesController(this);
     this.selectionHistoryControllerValue = new SelectionHistory(this);
-    this.sideBar = new SideBarModel(this);
+    this.sidebar = new SidebarModel(this);
     this.setOptions(this.options);
     this.patchMetadata();
-    this.initSurveyWithJSON(JSON.parse(CreatorBase.defaultNewSurveyText), false);
+    this.initSurveyWithJSON({}, false);
     this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this);
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
-    this.toolbar.actions.push(this.sideBar.getExpandAction());
+    const expandAction = this.sidebar.getExpandAction();
+    !!expandAction && this.toolbar.actions.push(expandAction);
   }
   public updateToolboxIsCompact(newVal?: boolean) {
-    if (this.toolboxLocation == "right" && this.showPropertyGrid) {
-      this.toolbox.isCompact = true;
-      return;
-    } else if (newVal != undefined && newVal != null) {
+    const hasValue = newVal != undefined && newVal != null;
+    if (this.toolbox.forceCompact !== undefined) {
+      this.toolbox.isCompact = this.toolbox.forceCompact;
+    } else if (this.toolboxLocation == "right") {
+      this.toolbox.isCompact = this.showSidebar || (hasValue && newVal);
+    } else if (hasValue) {
       this.toolbox.isCompact = newVal;
     }
   }
 
-  onSurveyElementPropertyValueChanged(property: Survey.JsonObjectProperty, obj: any, newValue: any) {
-    throw new Error("Method not implemented.");
+  @property({ defaultValue: true }) showToolboxValue: boolean;
+  public get showToolbox() {
+    return this.showToolboxValue;
   }
-
-  //#region Obsolete properties and functins
-  public get showToolbox(): string {
-    SurveyHelper.warnNonSupported("showToolbox");
-    return undefined;
+  public set showToolbox(val: boolean) {
+    if (<any>val !== true && <any>val !== false) {
+      SurveyHelper.warnText("showToolbox is a boolean property now.");
+    }
+    if (<any>val === "none" || val === false || <any>val === "top") {
+      this.showToolboxValue = false;
+    } else if (val === true) {
+      this.showToolboxValue = true;
+    } else {
+      this.toolboxLocation = val;
+      this.showToolboxValue = true;
+    }
   }
-  public set showToolbox(val: string) {
-    SurveyHelper.warnNonSupported("showToolbox");
-  }
-  private showPropertyGridValue: boolean = true;
-  public onShowPropertyGridVisiblityChanged: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  private showSidebarValue: boolean = true;
+  public onShowSidebarVisibilityChanged: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * Set this this property grid false to hide the property grid.
    */
-  public get showPropertyGrid(): boolean {
-    return this.showPropertyGridValue;
+  public get showSidebar(): boolean {
+    return this.showSidebarValue;
   }
-  public set showPropertyGrid(val: boolean) {
+  public set showSidebar(val: boolean) {
     if (<any>val !== true && <any>val !== false) {
-      SurveyHelper.warnText(
-        "showPropertyGrid propertry grid is a boolean property now."
-      );
+      SurveyHelper.warnText("showSidebar is a boolean property now.");
       return;
     }
-    if (this.showPropertyGrid === val) return;
-    this.showPropertyGridValue = val;
-    this.updateToolboxIsCompact(val);
-    this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
+    if (this.showSidebar === val) return;
+    this.setShowSidebar(val, true);
+    if (!this.onShowPropertyGridVisiblityChanged.isEmpty) {
+      SurveyHelper.warnNonSupported("onShowPropertyGridVisiblityChanged", "onShowSidebarVisibilityChanged");
+      this.onShowPropertyGridVisiblityChanged.fire(this, { show: val });
+    }
+  }
+  public setShowSidebar(value: boolean, isManualMode = false) {
+    this.showSidebarValue = value;
+    if (isManualMode) {
+      if (value) {
+        this.sidebar.expandedManually = true;
+      } else {
+        this.sidebar.collapsedManually = true;
+      }
+    }
+    this.updateToolboxIsCompact();
+    this.onShowSidebarVisibilityChanged.fire(this, { show: value });
+  }
+  //#region Obsolete properties and functins
+  public onShowPropertyGridVisiblityChanged: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  public get showPropertyGrid(): boolean {
+    SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
+    return this.showSidebar;
+  }
+  public set showPropertyGrid(val: boolean) {
+    SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
+    if (<any>val !== true && <any>val !== false) {
+      SurveyHelper.warnText("showSidebar is a boolean property.");
+      return;
+    }
+    this.showSidebar = val;
   }
   public rightContainerActiveItem(name: string) {
     SurveyHelper.warnNonSupported("rightContainerActiveItem");
@@ -1006,33 +1249,33 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
    * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
   public onBeforeUndo: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called before redo happens.
    * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
    */
   public onBeforeRedo: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called after undo happens.
    * <br/> options.state is an undo/redo item.
    */
   public onAfterUndo: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
    * The event is called after redo happens.
    * <br/> options.state is an undo/redo item.
    */
   public onAfterRedo: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   public get undoRedoManager(): UndoRedoManager {
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
@@ -1055,6 +1298,12 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.undoRedoController && this.undoRedoController.stopTransaction();
   }
   /**
+   * Returns true if Creator is currently doing undo or redo opertaions
+   */
+  public get isProcessingUndoRedo(): boolean {
+    return this.undoRedoManager && this.undoRedoManager.isProcessingUndoRedo;
+  }
+  /**
    * This method performs undo uperation if possible.
    */
   public undo() {
@@ -1068,9 +1317,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   //#endregion Undo/Redo
 
-  public get pagesController(): PagesController {
-    return this.pagesControllerValue;
-  }
   public get selectionHistoryController(): SelectionHistory {
     return this.selectionHistoryControllerValue;
   }
@@ -1101,9 +1347,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
   }
   private initPlugins(): void {
-    this.addPlugin("undoredo", new UndoRedoPlugin<T>(this));
+    this.addPlugin("undoredo", new UndoRedoPlugin(this));
     if (this.showDesignerTab) {
-      new TabDesignerPlugin<T>(this);
+      new TabDesignerPlugin(this);
     }
     if (this.showPreviewTab) {
       new TabTestPlugin(this);
@@ -1136,152 +1382,51 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       });
     }
   }
-  public getOptions() {
+  public getOptions(): ICreatorOptions {
     return this.options || {};
   }
-
-  protected setOptions(options: any): void {
+  protected setOptions(options: ICreatorOptions): void {
     if (!options) options = {};
-    if (!options.hasOwnProperty("generateValidJSON"))
-      options.generateValidJSON = true;
+    const obsoleteOptions = {};
+    obsoleteOptions["showTestSurveyTab"] = "showPreviewTab";
+    obsoleteOptions["showDefaultLanguageInTestSurveyTab"] = "showDefaultLanguageInPreviewTab";
+    obsoleteOptions["showInvisibleElementsInPreviewTab"] = "showInvisibleElementsInTestSurveyTab";
+    for(let key in obsoleteOptions) {
+      if(options[key] === undefined) continue;
+      const newKey = obsoleteOptions[key];
+      if(options[newKey] === undefined) {
+        options[newKey] = options[key];
+        delete options[key];
+      }
+    }
     this.options = options;
-    this.showDesignerTab =
-      typeof options.showDesignerTab !== "undefined"
-        ? options.showDesignerTab
-        : true;
-    this.showLogicTab =
-      typeof options.showLogicTab !== "undefined"
-        ? options.showLogicTab
-        : false;
-    this.showJSONEditorTab =
-      typeof options.showJSONEditorTab !== "undefined"
-        ? options.showJSONEditorTab
-        : true;
-    this.showPreviewTab =
-      typeof options.showPreviewTab !== "undefined"
-        ? options.showPreviewTab
-        : (typeof options.showTestSurveyTab !== "undefined"
-          ? options.showTestSurveyTab : true);
-    this.allowEditSurveyTitle =
-      typeof options.allowEditSurveyTitle !== "undefined"
-        ? options.allowEditSurveyTitle
-        : true;
-    this.showEmbeddedSurveyTab =
-      typeof options.showEmbeddedSurveyTab !== "undefined"
-        ? options.showEmbeddedSurveyTab
-        : false;
-    this.showTranslationTab =
-      typeof options.showTranslationTab !== "undefined"
-        ? options.showTranslationTab
-        : false;
-    this.showLogicTab =
-      typeof options.showLogicTab !== "undefined"
-        ? options.showLogicTab
-        : false;
-
-    this.haveCommercialLicense =
-      typeof options.haveCommercialLicense !== "undefined"
-        ? options.haveCommercialLicense
-        : false;
-
-    this.showObjectTitles =
-      typeof options.showObjectTitles !== "undefined"
-        ? options.showObjectTitles
-        : false;
-    this.showTitlesInExpressions =
-      typeof options.showTitlesInExpressions !== "undefined"
-        ? options.showTitlesInExpressions
-        : false;
-    this.allowEditExpressionsInTextEditor =
-      typeof options.allowEditExpressionsInTextEditor !== "undefined"
-        ? options.allowEditExpressionsInTextEditor
-        : true;
-    if (typeof options.maximumColumnsCount !== "undefined") {
-      this.maximumColumnsCount = options.maximumColumnsCount;
+    for(let key in options) {
+      this[key] = options[key];
     }
-    if (typeof options.maximumChoicesCount !== "undefined") {
-      this.maximumChoicesCount = options.maximumChoicesCount;
+  }
+  private setPropertyPlaceHolder(className: string, propertyName: string, value: string) {
+    const prop: any = Serializer.findProperty(className, propertyName);
+    if (!!prop) {
+      prop.placeholder = value;
     }
-    if (typeof options.maximumRowsCount !== "undefined") {
-      this.maximumRowsCount = options.maxiumumRowsCount;
-    }
-    if (typeof options.maximumRateValues !== "undefined") {
-      this.maximumRateValues = options.maximumRateValues;
-    }
-    this.useTabsInElementEditor =
-      typeof options.useTabsInElementEditor !== "undefined"
-        ? options.useTabsInElementEditor
-        : false;
-    this.maxLogicItemsInCondition =
-      typeof options.maxLogicItemsInCondition !== "undefined"
-        ? options.maxLogicItemsInCondition
-        : -1;
-    this.showState =
-      typeof options.showState !== "undefined" ? options.showState : false;
-    this.showOptions =
-      typeof options.showOptions !== "undefined" ? options.showOptions : false;
-
-    this.generateValidJSON = this.options.generateValidJSON;
-    this.isAutoSave =
-      typeof options.isAutoSave !== "undefined" ? options.isAutoSave : false;
-    this.showErrorOnFailedSave =
-      typeof options.showErrorOnFailedSave !== "undefined"
-        ? options.showErrorOnFailedSave
-        : true;
-    this.isRTLValue =
-      typeof options.isRTL !== "undefined" ? options.isRTL : false;
-
-    if (typeof options.readOnly !== "undefined") {
-      this.readOnly = options.readOnly;
-    }
-    if (typeof options.showPagesInTestSurveyTab !== "undefined") {
-      this.showPagesInPreviewTab = options.showPagesInTestSurveyTab;
-    }
-    if (typeof options.showPagesInPreviewTab !== "undefined") {
-      this.showPagesInPreviewTab = options.showPagesInPreviewTab;
-    }
-    if (typeof options.showSimulatorInTestSurveyTab !== "undefined") {
-      this.showSimulatorInPreviewTab = options.showSimulatorInTestSurveyTab;
-    }
-    if (typeof options.showSimulatorInPreviewTab !== "undefined") {
-      this.showSimulatorInPreviewTab = options.showSimulatorInPreviewTab;
-    }
-    if (typeof options.showDefaultLanguageInTestSurveyTab !== "undefined") {
-      this.showDefaultLanguageInPreviewTab =
-        options.showDefaultLanguageInTestSurveyTab;
-    }
-    if (typeof options.showDefaultLanguageInPreviewTab !== "undefined") {
-      this.showDefaultLanguageInPreviewTab =
-        options.showDefaultLanguageInPreviewTab;
-    }
-    if (typeof options.showInvisibleElementsInTestSurveyTab !== "undefined") {
-      this.showInvisibleElementsInPreviewTab =
-        options.showInvisibleElementsInTestSurveyTab;
-    }
-    if (typeof options.showInvisibleElementsInPreviewTab !== "undefined") {
-      this.showInvisibleElementsInPreviewTab =
-        options.showInvisibleElementsInPreviewTab;
-    }
-    if (typeof options.allowModifyPages !== "undefined") {
-      this.allowModifyPages = options.allowModifyPages;
-    }
-    if (typeof options.pageEditMode !== "undefined") {
-      this.pageEditModeValue = options.pageEditMode;
-      if (this.pageEditModeValue === "single") {
-        Survey.Serializer.findProperty("survey", "pages").visible = false;
-        Survey.Serializer.findProperty("question", "page").visible = false;
-        Survey.Serializer.findProperty("panel", "page").visible = false;
-        this.showJSONEditorTab = false;
+  }
+  private setPropertyVisibility(className: string, visible: boolean, ...properties: string[]) {
+    if (!Array.isArray(properties)) return;
+    for (var i = 0; i < properties.length; i++) {
+      const prop = Serializer.findProperty(className, properties[i]);
+      if (!!prop) {
+        prop.visible = visible;
       }
     }
   }
-
   private patchMetadata(): void {
-    Serializer.findProperty("survey", "title").placeholder = "pe.surveyTitlePlaceholder";
-    Serializer.findProperty("survey", "description").placeholder = "pe.surveyDescriptionPlaceholder";
-    Serializer.findProperty("survey", "logoPosition").visible = false;
-    Serializer.findProperty("page", "title").placeholder = "pe.pageTitlePlaceholder";
-    Serializer.findProperty("page", "description").placeholder = "pe.pageDescriptionPlaceholder";
+    this.setPropertyPlaceHolder("survey", "title", "pe.surveyTitlePlaceholder");
+    this.setPropertyPlaceHolder("survey", "description", "pe.surveyDescriptionPlaceholder");
+    this.setPropertyVisibility("survey", false, "logoPosition");
+    if (this.pageEditMode !== "single") {
+      this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
+      this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
+    }
   }
 
   isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
@@ -1363,7 +1508,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   /**
    * The editing survey object (Survey.Survey)
    */
-  public get survey(): T {
+  public get survey(): SurveyModel {
     return this.surveyValue;
   }
   private existingPages: {};
@@ -1383,13 +1528,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.existingPages[page.id] = true;
     });
     this.onDesignerSurveyCreated.fire(this, { survey: survey });
-    // this.survey.render(this.surveyjs);
-    /*
-    survey.onSelectedElementChanged.add((sender: SurveyModel, options) => {
-      if (this.disableSurveySelectedElementChanging) return;
-      this.selectedElement = sender["selectedElement"];
-    });
-    */
     survey.onQuestionAdded.add((sender: SurveyModel, options) => {
       this.doOnQuestionAdded(options.question, options.parentPanel);
     });
@@ -1401,15 +1539,11 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
-    /*
-    survey.onPanelRemoved.add((sender: SurveyModel, options) => {
-      this.doOnElementRemoved(options.panel);
+    survey.onDragDropAllow.add((sender, options) => {
+      options.survey = sender;
+      this.onDragDropAllow.fire(this, options);
     });
-    survey.onQuestionRemoved.add((sender: SurveyModel, options) => {
-      this.doOnElementRemoved(options.question);
-    });
-    */
-    survey.onGetMatrixRowActions.add((_, opt) => { updateMatrixRemoveAction(opt.question, opt.actions, opt.row); });
+
     this.setSurvey(survey);
     const currentPlugin = this.getPlugin(this.activeTab);
     if (!!currentPlugin && !!currentPlugin.update) {
@@ -1421,16 +1555,20 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
+  public onBeforeDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
+  public onAfterDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
+      this.onBeforeDrop.fire(null, null);
       this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
+      this.onAfterDrop.fire(null, null);
     });
   }
   private initDragDropChoices() {
@@ -1467,11 +1605,6 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       var oldName = !!oldValue ? oldValue : obj["name"];
       var newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
       this.updateConditions(oldName, newName);
-    }
-  }
-  public updatePagesController(sender: Survey.Base, name: string) {
-    if ((name == "name" || name == "title") && this.isObjPage(sender)) {
-      this.pagesController.pageNameChanged(<PageModel>sender);
     }
   }
   private updateConditions(oldName: string, newName: string) {
@@ -1541,21 +1674,21 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return json;
   }
 
-  protected setSurvey(survey: T) {
+  protected setSurvey(survey: SurveyModel) {
     if (!!this.surveyValue) {
       this.surveyValue.dispose();
     }
     this.surveyValue = survey;
     this.selectElement(survey);
-    this.pagesController.onSurveyChanged();
     this.selectionHistoryController.reset();
   }
 
   private getSurveyTextFromDesigner() {
     if (!this.survey) return "";
     var json = (<any>this.survey).toJSON();
+    json = this.singlePageJSON(json);
     const indent = settings.jsonEditor.indentation;
-    if (this.options && this.options.generateValidJSON) {
+    if (this.generateValidJSON) {
       return JSON.stringify(json, null, indent);
     }
     return new SurveyJSON5().stringify(json, null, indent);
@@ -1621,18 +1754,21 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     return options.displayName;
   }
 
-  public createSurvey(json: any = {}, reason: string = "designer"): T {
-    const survey: T = this.createSurveyCore(json, reason); // new surveyType(json);
+  public createSurvey(json: any = {}, reason: string = "designer"): SurveyModel {
+    const survey = this.createSurveyCore(json, reason);
+    survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "test") {
       (<any>survey).locale = editorLocalization.currentLocale;
     }
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;
   }
-  protected createSurveyCore(json: any = {}, reason: string): T {
-    throw new Error("createSurveyCore method should be overridden/implemented");
+  protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
+    if (reason === "designer" || reason === "modal-question-editor")
+      return new DesignTimeSurveyModel(this, json);
+    return new SurveyModel(json);
   }
-  @property() _stateValue: string;
+  private _stateValue: string;
   /**
    * Returns the creator state. It may return empty string or "saving" and "saved".
    */
@@ -1644,19 +1780,34 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     this.onStateChanged.fire(this, { val: value });
     if (!!value) {
       this.notify(this.getLocString("ed." + value));
+      const actions = this.toolbarItems.filter(a => a.id === "svd-save");
+      if (Array.isArray(actions) && actions.length > 0) {
+        actions[0].enabled = this.state === "modified";
+        actions[0].active = this.state === "modified";
+      }
     }
   }
   public onStateChanged: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   notifier = new Notifier();
 
-  public setModified(options: any = null) {
+  public setModified(options: any = null): void {
     this.setState("modified");
     this.onModified.fire(this, options);
     this.isAutoSave && this.doAutoSave();
+  }
+  public notifySurveyPropertyChanged(options: any): void {
+    if(!this.onSurveyPropertyValueChanged.isEmpty) {
+      options.propertyName = options.name;
+      options.obj = options.target;
+      options.value = options.newValue;
+      this.onSurveyPropertyValueChanged.fire(this, options);
+    }
+    options.type = "PROPERTY_CHANGED";
+    this.setModified(options);
   }
   /**
    * This function triggers user notification (via the alert() function if no onNotify event handler added).
@@ -1672,7 +1823,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   protected convertQuestion(obj: Survey.Question, className: string) {
-    var newQuestion = QuestionConverter.convertObject(obj, className);
+    var newQuestion = QuestionConverter.convertObject(obj, className, this.getDefaultElementJSON(obj.getType()));
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -1681,13 +1832,30 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     });
     return newQuestion;
   }
-
+  private getDefaultElementJSON(elType: string): any {
+    if (!this.toolbox) return null;
+    const item = this.toolbox.getItemByName(elType);
+    return !!item ? item.json : null;
+  }
+  private singlePageJSON(json: any) {
+    if (this.pageEditMode === "single") {
+      const pages = json.pages;
+      if (Array.isArray(pages) && pages.length > 0) {
+        if (pages[0].elements !== undefined) {
+          json.elements = pages[0].elements;
+        }
+        delete json.pages;
+      }
+    }
+    return json;
+  }
   /**
    * The Survey JSON. Use it to get Survey JSON or change it.
    * @see text
    */
   public get JSON(): any {
-    return (<any>this.survey).toJSON();
+    const json = (<any>this.survey).toJSON();
+    return this.singlePageJSON(json);
   }
   public set JSON(val: any) {
     if (this.viewType == "editor") {
@@ -1717,14 +1885,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
     var parent: IPanel = this.currentPage;
     var selectedElement = this.getSelectedSurveyElement();
-    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent) {
+    if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
+      (<any>selectedElement !== <any>panel)) {
       parent = selectedElement.parent;
       if (index < 0) {
         index = parent.elements.indexOf(selectedElement);
         if (index > -1) index++;
       }
     }
-    if(panel) {
+    if (panel) {
       parent = panel;
     }
     const currentRow = this.findRowByElement(selectedElement, parent);
@@ -2009,7 +2178,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
 
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
-    const propertyGridTab = this.sideBar.getTabById("propertyGrid");
+    const propertyGridTab = this.sidebar.getTabById("propertyGrid");
     if (!propertyGridTab) return null;
     return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
   }
@@ -2160,7 +2329,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     onFilesChosen: (files: File[]) => void
   ) {
     if (this.onOpenFileChooser.isEmpty) {
-      if (!window["FileReader"]) return;
+      if (!window || !window["FileReader"]) return;
       input.value = "";
       input.onchange = (event) => {
         if (!window["FileReader"]) return;
@@ -2203,10 +2372,14 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
 
   public initKeyboardShortcuts(rootNode: HTMLElement) {
-    rootNode.addEventListener("keydown", this.onKeyDownHandler);
+    if (!!rootNode) {
+      rootNode.addEventListener("keydown", this.onKeyDownHandler);
+    }
   }
   public removeKeyboardShortcuts(rootNode: HTMLElement) {
-    rootNode.removeEventListener("keydown", this.onKeyDownHandler);
+    if (!!rootNode) {
+      rootNode.removeEventListener("keydown", this.onKeyDownHandler);
+    }
   }
   protected onKeyDownHandler = (event: KeyboardEvent) => {
     let shortcut;
@@ -2237,6 +2410,9 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     var objIndex = elements.indexOf(obj);
     if (objIndex == elements.length - 1) {
       objIndex--;
+    }
+    if (this.pageEditMode === "single" && parent.getType() === "page") {
+      parent = this.survey;
     }
     obj["delete"]();
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
@@ -2347,6 +2523,13 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       parentProperty
     );
   }
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
+  ) {
+    const options = { obj: object, survey: survey };
+    this.onPropertyGridSurveyCreated.fire(this, options);
+  }
   onPropertyEditorCreatedCallback(
     object: any,
     property: Survey.JsonObjectProperty,
@@ -2354,6 +2537,15 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   ) {
     const options = { obj: object, property: property, editor: editor };
     this.onPropertyEditorCreated.fire(this, options);
+  }
+  onPropertyEditorUpdateTitleActionsCallback(
+    object: any,
+    property: Survey.JsonObjectProperty,
+    editor: Question,
+    titleActions: IAction[]
+  ) {
+    const options = { obj: object, property: property, editor: editor, titleActions: titleActions };
+    this.onPropertyEditorUpdateTitleActions.fire(this, options);
   }
   onCanDeleteItemCallback(
     object: any,
@@ -2545,14 +2737,14 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   @undoRedoTransaction()
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;
-    if(!el || el.getType() === newType) return;
+    if (!el || el.getType() === newType) return;
     if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
     el = this.convertQuestion(<Survey.Question>el, newType);
     this.selectElement(el);
   }
 
   public getAddNewQuestionText(currentAddQuestionType: string = null) {
-    if(!currentAddQuestionType)
+    if (!currentAddQuestionType)
       currentAddQuestionType = this.currentAddQuestionType;
     if (!!currentAddQuestionType) {
       const str = this.getLocString("ed.addNewTypeQuestion");
@@ -2570,7 +2762,7 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
 
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, panel: IPanel = null) {
     var availableTypes = this.toolbox.items.map((item) => {
-      return this.createIActionBarItemByClass(item.name, item.title);
+      return this.createIActionBarItemByClass(item.name, item.title, item.iconName);
     });
     const popupModel = new PopupModel(
       "sv-list",
@@ -2600,24 +2792,23 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
   }
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
-    if(!type)
+    if (!type)
       type = this.currentAddQuestionType;
+    if (!type) type = settings.designer.defaultAddQuestionType;
     beforeAdd(type);
-    let newElement = Survey.ElementFactory.Instance.createElement(
-      type || "text",
-      "q1"
-    );
-    if (newElement)
-      this.setNewNames(newElement);
-    else
-      newElement = this.createNewElement({ type: type });
+    let json = { type: type };
+    const toolboxItem = this.toolbox.getItemByName(type);
+    if (!!toolboxItem && !!toolboxItem.json) {
+      json = toolboxItem.json;
+    }
+    let newElement = this.createNewElement(json);
     this.clickToolboxItem(newElement, panel);
   }
-  createIActionBarItemByClass(className: string, title: string = null): Action {
+  createIActionBarItemByClass(className: string, title: string, iconName: string): Action {
     return new Action({
-      title: title || this.getLocString("qt." + className),
+      title: title,
       id: className,
-      iconName: "icon-" + className
+      iconName: iconName
     });
   }
 
@@ -2635,7 +2826,8 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
       allowCopy: true,
       allowDragging: true,
       allowChangeType: true,
-      allowChangeRequired: true
+      allowChangeRequired: true,
+      allowEdit: undefined
     };
     this.onElementAllowOperations.fire(this, options);
     return options;
@@ -2666,17 +2858,41 @@ export class CreatorBase<T extends SurveyModel = SurveyModel>
     }
   }
   @property({ defaultValue: true }) showPageNavigator;
-  @property({ defaultValue: settings.layout.showTabs }) showTabs;
-  @property({ defaultValue: settings.layout.showToolbar }) showToolbar;
+  @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
+  @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
+  @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
   @property({ defaultValue: false }) isMobileView;
   @property({
-    defaultValue: "left", onSet: (newValue, target: CreatorBase<T>) => {
+    defaultValue: "left", onSet: (newValue, target: CreatorBase) => {
       target.toolbox.setLocation(newValue);
       target.updateToolboxIsCompact();
     }
-  }) toolboxLocation: toolBoxLocationType;
-  @property({ defaultValue: "right" }) sideBarLocation: "left" | "right";
+  }) toolboxLocation: toolboxLocationType;
+  @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
   selectFromStringEditor: boolean;
+
+  @property({
+    defaultValue: false, onSet: (newValue: boolean, target: CreatorBase) => {
+      if (!newValue) {
+        throw new Error("Creator is disposed");
+      }
+    }
+  }) isCreatorDisposed: boolean;
+
+  dispose(): void {
+    this.isCreatorDisposed = true;
+    this.tabs = [];
+    Object.keys(this.plugins).forEach(pluginName => {
+      const plugin = this.plugins[pluginName];
+      if (typeof plugin.deactivate === "function") {
+        plugin.deactivate();
+      }
+      if (typeof plugin.dispose === "function") {
+        plugin.dispose();
+      }
+    });
+    super.dispose();
+  }
 }
 
 export class StylesManager {
@@ -2692,6 +2908,70 @@ export class StylesManager {
   }
 }
 
+export class DesignTimeSurveyModel extends SurveyModel {
+  constructor(public creator: CreatorBase, jsonObj?: any) {
+    super(jsonObj);
+  }
+  public isPopupEditorContent = false;
+
+  public getElementWrapperComponentName(element: any, reason?: string): string {
+    let componentName = getElementWrapperComponentName(
+      element,
+      reason,
+      this.isPopupEditorContent
+    );
+    return (
+      componentName || super.getElementWrapperComponentName(element, reason)
+    );
+  }
+  public getQuestionContentWrapperComponentName(element: any, reason?: string): string {
+    let componentName = getQuestionContentWrapperComponentName(element);
+    return (
+      componentName || super.getQuestionContentWrapperComponentName(element)
+    );
+  }
+
+  public getElementWrapperComponentData(element: any, reason?: string): any {
+    const data = getElementWrapperComponentData(element, reason, this.creator);
+    return data || super.getElementWrapperComponentData(element);
+  }
+
+  public getRowWrapperComponentName(row: QuestionRowModel): string {
+    return "svc-row";
+  }
+  public getRowWrapperComponentData(row: QuestionRowModel): any {
+    return {
+      creator: this.creator,
+      row
+    };
+  }
+
+  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+    return getItemValueWrapperComponentName(item, question);
+  }
+  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
+    return getItemValueWrapperComponentData(item, question, this.creator);
+  }
+
+  public getRendererForString(element: Base, name: string): string {
+    if (!this.creator.readOnly && isStringEditable(element, name)) {
+      return editableStringRendererName;
+    }
+    return undefined;
+  }
+  public getRendererContextForString(element: Base, locStr: LocalizableString): any {
+    if (!this.creator.readOnly && isStringEditable(element, locStr.name)) {
+      return {
+        creator: this.creator,
+        element,
+        locStr
+      };
+    }
+    return <any>locStr;
+  }
+}
+
+export const editableStringRendererName = "svc-string-editor";
 export function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
   if (reason === "logo-image") {
     return "svc-logo-image";
@@ -2701,20 +2981,18 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   if (!element.isContentElement) {
     if (element instanceof Question) {
+      const isDropdown = element.isDescendantOf("dropdown");
       if (isPopupEditorContent) {
-        return element.getType() == "dropdown" ? "svc-cell-dropdown-question" : "svc-cell-question";
+        return isDropdown ? "svc-cell-dropdown-question" : "svc-cell-question";
       }
       if (element.customWidget) {
         return "svc-widget-question";
       }
-      if (element.getType() == "dropdown") {
+      if (isDropdown) {
         return "svc-dropdown-question";
       }
-      if (element.getType() == "image") {
+      if (element.isDescendantOf("image")) {
         return "svc-image-question";
-      }
-      if (element.getType() == "rating") {
-        return "svc-rating-question";
       }
       return "svc-question";
     }
@@ -2724,10 +3002,16 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   return undefined;
 }
+export function getQuestionContentWrapperComponentName(element) {
+  if (element.isDescendantOf("rating") && !element.isContentElement) {
+    return "svc-rating-question-content";
+  }
+  return undefined;
+}
 export function getElementWrapperComponentData(
   element: any,
   reason: string,
-  creator: CreatorBase<SurveyModel>
+  creator: CreatorBase
 ): any {
   if (reason === "logo-image") return creator;
   if (
@@ -2758,7 +3042,7 @@ export function getItemValueWrapperComponentName(
   if (question.isContentElement) {
     return SurveyModel.TemplateRendererComponentName;
   }
-  if (question.getType() === "imagepicker") {
+  if (question.isDescendantOf("imagepicker")) {
     return "svc-image-item-value";
   }
   return "svc-item-value";
@@ -2766,7 +3050,7 @@ export function getItemValueWrapperComponentName(
 export function getItemValueWrapperComponentData(
   item: ItemValue,
   question: QuestionSelectBase,
-  creator: CreatorBase<SurveyModel>
+  creator: CreatorBase
 ): any {
   if (question.isContentElement) {
     return item;
@@ -2781,11 +3065,11 @@ export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
   return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
-function isTextInput(target: any) {
+export function isTextInput(target: any): boolean {
   if (!target.tagName) return false;
   const tagName = target.tagName.toLowerCase();
   if (["input", "textarea"].indexOf(tagName) !== -1) return true;
-  if (tagName === "span") {
+  if (["span", "div"].indexOf(tagName) !== -1) {
     return target.isContentEditable;
   }
   return false;

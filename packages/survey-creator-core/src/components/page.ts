@@ -1,22 +1,20 @@
-import { PageModel, property, SurveyModel } from "survey-core";
+import { PageModel, property, SurveyElement, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
-import { ActionContainerViewModel } from "./action-container-view-model";
+import { SurveyElementAdornerBase } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
 import "./page.scss";
 import { SurveyHelper } from "../survey-helper";
+import { settings } from "../settings";
 
-export class PageViewModel<
-  T extends SurveyModel
-  > extends ActionContainerViewModel<T> {
+export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
-  private _page: PageModel;
 
-  constructor(creator: CreatorBase<T>, page: PageModel) {
+  constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
       (type) => {
@@ -24,26 +22,34 @@ export class PageViewModel<
         this.addGhostPage();
       }
     );
-
-    this._page = page;
-    page["surveyChangedCallback"] = () => {
-      this.isPageLive = !!page.survey;
-    };
-    if (this.isGhost) {
-      this.updateActionsProperties();
-      this.page.registerFunctionOnPropertiesValueChanged(
-        ["title", "description"],
-        () => {
-          this.addGhostPage();
-        }
-      );
-      this.patchPageForDragDrop(this.page, this.addGhostPage);
-    }
-    this.page.onFirstRendering();
-    this.page.updateCustomWidgets();
-    this.page.setWasShown(true);
-    this.checkActionProperties();
+    this.attachElement(this.page);
   }
+
+  protected attachElement(surveyElement: PageModel): void {
+    super.attachElement(surveyElement);
+
+    if (!!this.page) {
+
+      this.page["surveyChangedCallback"] = () => {
+        this.isPageLive = !!this.page.survey;
+      };
+      if (this.isGhost) {
+        this.updateActionsProperties();
+        this.page.registerFunctionOnPropertiesValueChanged(
+          ["title", "description"],
+          () => {
+            this.addGhostPage();
+          }
+        );
+        this.patchPageForDragDrop(this.page, this.addGhostPage);
+      }
+      this.page.onFirstRendering();
+      this.page.updateCustomWidgets();
+      this.page.setWasShown(true);
+      this.checkActionProperties();
+    }
+  }
+
   protected onElementSelectedChanged(isSelected: boolean) {
     super.onElementSelectedChanged(isSelected);
     this.isSelected = isSelected;
@@ -62,45 +68,56 @@ export class PageViewModel<
   }
   public dispose() {
     super.dispose();
-    this.page.unRegisterFunctionOnPropertiesValueChanged([
-      "title",
-      "description"
-    ]);
+    if (!!this.page) {
+      this.page.unRegisterFunctionOnPropertiesValueChanged([
+        "title",
+        "description"
+      ]);
+    }
     this.onPropertyValueChangedCallback = undefined;
   }
   public get isGhost(): boolean {
     return this.creator.survey.pages.indexOf(this.page) < 0;
   }
   protected isOperationsAllow(): boolean {
-    return super.isOperationsAllow() && !this.isGhost;
+    return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single";
+  }
+  protected getPage(): PageModel {
+    return this.surveyElement as PageModel;
   }
   get page(): PageModel {
-    return this._page;
+    return this.getPage();
   }
 
   public addGhostPage = () => {
+    const currentPage = this.page;
     if (this.isGhost) {
-      this.page.unRegisterFunctionOnPropertiesValueChanged([
+      currentPage.unRegisterFunctionOnPropertiesValueChanged([
         "title",
         "description"
       ]);
-      this.page.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
-      this.creator.survey.addPage(this.page);
+      currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
+      this.creator.survey.addPage(currentPage);
+      this.creator.survey.currentPage = currentPage;
     }
-    this.creator.selectElement(this.page);
-    this.updateActionsProperties();
+    this.creator.selectElement(currentPage);
   }
 
-  addNewQuestion(model: PageViewModel<T>, event: IPortableMouseEvent) {
+  addNewQuestion(model: PageAdorner, event: IPortableMouseEvent) {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage();
-    }, null, this.currentAddQuestionType || "text");
+    }, null, this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
-  select(model: PageViewModel<T>, event: IPortableMouseEvent) {
+  select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {
-      model.creator.selectElement(model.page, undefined, false);
-      if (!!this.onPageSelectedCallback) {
-        this.onPageSelectedCallback();
+      if (model.creator.pageEditMode !== "single") {
+        model.creator.selectElement(model.page, undefined, false);
+        if (!!this.onPageSelectedCallback) {
+          this.onPageSelectedCallback();
+        }
+      }
+      else {
+        model.creator.selectElement(model.creator.survey, undefined, false);
       }
     }
     event.stopPropagation();
@@ -118,6 +135,10 @@ export class PageViewModel<
   public hover(event: MouseEvent, element: HTMLElement) {
     toggleHovered(event, element, this.creator.pageHoverDelay);
   }
+  public hoverStopper(event: MouseEvent, element: HTMLElement) {
+    event["__svc_question_processed"] = true;
+  }
+
   protected duplicate() {
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);
@@ -125,9 +146,12 @@ export class PageViewModel<
   public get allowEdit() {
     return !!this.creator && !this.creator.readOnly;
   }
+  public get showAddQuestionButton(): boolean {
+    return this.allowEdit && settings.designer.showAddQuestionButton;
+  }
   public get addNewQuestionText(): string {
-    if(!this.currentAddQuestionType && this.creator)
+    if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
-    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType):"";
+    return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType) : "";
   }
 }

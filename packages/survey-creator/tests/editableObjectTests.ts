@@ -36,7 +36,10 @@ QUnit.test("editable object, apply function test", function (assert) {
   var edObj = <Survey.QuestionText>editableObj.editableObj;
   assert.equal((<any>edObj).isCopy, true, "Tell that it is a copy");
   (<Survey.NumericValidator>edObj.validators[0]).maxValue = 100;
-  edObj.validators.push(new Survey.TextValidator(5, 10));
+  const textValidator = new Survey.TextValidator;
+  textValidator.minLength = 5;
+  textValidator.maxLength = 5;
+  edObj.validators.push(textValidator);
   edObj.name = "question1";
   edObj.inputType = "color";
   assert.equal(
@@ -174,4 +177,18 @@ QUnit.test("Change page description, Bug#2374", function (assert) {
   obj["pages"][1].description = "Test desc";
   editableObj.applyAll();
   assert.equal(survey.pages[1].description, "Test desc", "Description sets correctly");
+});
+QUnit.test("Change binding property, Bug#2887", function (assert) {
+  const survey = new Survey.Survey({
+    elements: [
+      { type: "dropdown", name: "q1" },
+      { type: "paneldynamic", name: "q2" }
+    ]
+  });
+  const panel = <Survey.QuestionPanelDynamicModel>survey.getQuestionByName("q2");
+  const editableObj = new EditableObject(panel);
+  const obj = <Survey.QuestionPanelDynamicModel>editableObj.editableObj;
+  obj.bindings.setBinding("panelCount", "q1");
+  editableObj.applyAll();
+  assert.equal(panel.bindings.getValueNameByPropertyName("panelCount"), "q1", "Bindings apply correctly");
 });

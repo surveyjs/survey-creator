@@ -1,9 +1,9 @@
 import { Action, ArrayChanges, Base, ComputedUpdater, Event, property, SurveyModel } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { CreatorBase, CreatorAction } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { IUndoRedoChange, UndoRedoManager } from "./undo-redo-manager";
 
-export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Base {
+export class UndoRedoController extends Base {
   private undoAction: Action;
   private redoAction: Action;
 
@@ -27,13 +27,11 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
         sender,
         arrayChanges
       );
-      this.creator.updatePagesController(sender, name);
       this.creator.updateElementsOnLocaleChanged(sender, name);
       this.creator.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
       this.undoRedoManager.stopTransaction();
     } else {
-      this.creator.setModified({
-        type: "PROPERTY_CHANGED",
+      this.creator.notifySurveyPropertyChanged({
         name: name,
         target: sender,
         oldValue: oldValue,
@@ -42,11 +40,11 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
     }
   }
 
-  constructor(private creator: CreatorBase<T>) {
+  constructor(private creator: CreatorBase) {
     super();
     this.undoRedoManager = <any>new ComputedUpdater<UndoRedoManager>(() => {
       const undoRedoManager = new UndoRedoManager();
-      const surveyModel: T = this.creator.survey;
+      const surveyModel = this.creator.survey;
       if (!!surveyModel) {
         surveyModel.onPropertyValueChangedCallback = (
           name: string,
@@ -66,8 +64,7 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
         undoRedoManager.changesFinishedCallback = (
           changes: IUndoRedoChange
         ) => {
-          this.creator.setModified({
-            type: "PROPERTY_CHANGED",
+          this.creator.notifySurveyPropertyChanged({
             name: changes.propertyName,
             target: changes.object,
             oldValue: changes.oldValue,
@@ -130,18 +127,18 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
 
   public createActions() {
     const items: Array<Action> = [];
-    this.undoAction = new Action({
+    this.undoAction = new CreatorAction({
       id: "icon-undo",
       iconName: "icon-undo",
-      title: getLocString("ed.undo"),
+      locTitleName: "ed.undo",
       showTitle: false,
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),
       action: () => this.undo()
     });
-    this.redoAction = new Action({
+    this.redoAction = new CreatorAction({
       id: "icon-redo",
       iconName: "icon-redo",
-      title: getLocString("ed.redo"),
+      locTitleName: "ed.redo",
       showTitle: false,
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),
       action: () => this.redo()
@@ -161,31 +158,31 @@ export class UndoRedoController<T extends SurveyModel = SurveyModel> extends Bas
    * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
   public onBeforeUndo: Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called before redo happens.
     * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
     */
   public onBeforeRedo: Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called after undo happens.
     * <br/> options.state is an undo/redo item.
     */
   public onAfterUndo: Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called after redo happens.
     * <br/> options.state is an undo/redo item.
     */
   public onAfterRedo: Event<
-    (sender: CreatorBase<T>, options: any) => any,
+    (sender: CreatorBase, options: any) => any,
     any
-  > = new Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  > = new Event<(sender: CreatorBase, options: any) => any, any>();
 }

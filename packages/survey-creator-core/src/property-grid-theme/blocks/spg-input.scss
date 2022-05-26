@@ -11,6 +11,7 @@
   padding: calcSize(1.5) calcSize(2);
   outline: none;
   font-size: calcSize(2);
+  font-family: $font-family;
   color: $foreground;
 }
 
@@ -19,10 +20,16 @@
 }
 
 .spg-input:focus {
-  border: 1px solid $primary;
+  border: 2px solid $primary;
 }
 
 .spg-input:disabled,
 .spg-input:disabled::placeholder {
   color: $foreground-disabled;
+}
+
+.spg-input[type="color"] {
+  padding-left: 0;
+  padding-right: 0;
+  min-width: calcSize(8);
 }

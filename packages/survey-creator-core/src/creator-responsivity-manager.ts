@@ -3,8 +3,9 @@ import "./responsivity.scss";
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
-  private prevToolboxLocation;
-  private screenWidth: { [key: string]: number } = {
+  private prevShowToolbox;
+  private prevShowPageNavigator;
+  public static screenSizeBreakpoints: { [key: string]: number } = {
     "xxl": 1800,
     "xl": 1500,
     "l": 1200,
@@ -13,8 +14,9 @@ export class CreatorResponsivityManager {
   }
   private getScreenWidth(): string {
     let res;
-    Object.keys(this.screenWidth).forEach((mode: string) => {
-      if (!res && this.container && !!this.screenWidth[mode] && this.container.offsetWidth >= this.screenWidth[mode]) {
+    Object.keys(CreatorResponsivityManager.screenSizeBreakpoints).forEach((mode: string) => {
+      const breakpoint = CreatorResponsivityManager.screenSizeBreakpoints[mode];
+      if (!res && this.container && !!breakpoint && this.container.offsetWidth >= breakpoint) {
         res = mode;
       }
     });
@@ -30,29 +32,56 @@ export class CreatorResponsivityManager {
     this.creator.showToolbar = undefined;
     this.creator.isMobileView = undefined;
   }
+  private procesShowToolbox(toolboxVisible: boolean) {
+    if (toolboxVisible && !this.creator.showToolbox && this.prevShowToolbox !== undefined) {
+      this.creator.showToolbox = this.prevShowToolbox;
+      this.prevShowToolbox = undefined;
+    } else if (!toolboxVisible && this.creator.showToolbox && this.prevShowToolbox === undefined) {
+      this.prevShowToolbox = this.creator.showToolbox;
+      this.creator.showToolbox = false;
+    }
+  }
+  private procesShowPageNavigator(pageNavigatorVisibility: boolean) {
+    if (this.creator.pageEditMode === "bypage") {
+      this.creator.showPageNavigator = true;
+      return;
+    }
+    if (pageNavigatorVisibility && !this.creator.showPageNavigator && this.prevShowPageNavigator !== undefined) {
+      this.creator.showPageNavigator = this.prevShowPageNavigator;
+      this.prevShowPageNavigator = undefined;
+    } else if (!pageNavigatorVisibility && this.creator.showPageNavigator && this.prevShowPageNavigator === undefined) {
+      this.prevShowPageNavigator = this.creator.showPageNavigator;
+      this.creator.showPageNavigator = false;
+    }
+  }
 
   constructor(protected container: HTMLDivElement, private creator: CreatorBase) {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.container.parentElement);
-      this.prevToolboxLocation = this.creator.toolboxLocation;
       this.process();
       if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
-        this.creator.showPropertyGrid = false;
+        this.creator.setShowSidebar(false);
       }
     }
   }
 
-  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSideBar: boolean) {
+  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean) {
     this.creator.updateToolboxIsCompact(toolboxIsCompact);
-    if (toolboxVisible && this.creator.toolboxLocation === "hidden") {
-      this.creator.toolboxLocation = this.prevToolboxLocation;
-    } else if (!toolboxVisible && this.creator.toolboxLocation !== "hidden") {
-      this.prevToolboxLocation = this.creator.toolboxLocation;
-      this.creator.toolboxLocation = "hidden";
+    this.procesShowToolbox(toolboxVisible);
+    this.procesShowPageNavigator(toolboxVisible);
+    this.creator.sidebar.flyoutMode = flyoutSidebar;
+
+    if (this.creator.sidebar.visible && !flyoutSidebar) {
+      this.creator.sidebar.collapsedManually = false;
     }
-    this.creator.showPageNavigator = toolboxVisible;
-    this.creator.sideBar.flyoutMode = flyoutSideBar;
+    if (this.creator.sidebar.visible && !this.creator.sidebar.expandedManually && flyoutSidebar && this.creator.toolboxLocation != "right") {
+      this.creator.sidebar.collapseSidebar();
+    }
+    if (!this.creator.sidebar.visible && !this.creator.sidebar.collapsedManually && !flyoutSidebar && this.creator.toolboxLocation != "right") {
+      this.creator.sidebar.expandSidebar();
+    }
+
   }
   process() {
     this.currentWidth = this.getScreenWidth();

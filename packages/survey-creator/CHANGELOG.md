@@ -2,6 +2,68 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.32](https://github.com/surveyjs/survey-creator/compare/v1.9.31...v1.9.32) (2022-05-24)
+
+### [1.9.31](https://github.com/surveyjs/survey-creator/compare/v1.9.30...v1.9.31) (2022-05-18)
+
+### [1.9.30](https://github.com/surveyjs/survey-creator/compare/v1.9.29...v1.9.30) (2022-05-17)
+
+### [1.9.29](https://github.com/surveyjs/survey-creator/compare/v1.9.28...v1.9.29) (2022-05-11)
+
+### [1.9.28](https://github.com/surveyjs/survey-creator/compare/v1.9.27...v1.9.28) (2022-05-04)
+
+### [1.9.27](https://github.com/surveyjs/survey-creator/compare/v1.9.26...v1.9.27) (2022-04-27)
+
+### [1.9.26](https://github.com/surveyjs/survey-creator/compare/v1.9.25...v1.9.26) (2022-04-19)
+
+### [1.9.25](https://github.com/surveyjs/survey-creator/compare/v1.9.24...v1.9.25) (2022-04-14)
+
+### [1.9.24](https://github.com/surveyjs/survey-creator/compare/v1.9.23...v1.9.24) (2022-04-12)
+
+### [1.9.23](https://github.com/surveyjs/survey-creator/compare/v1.9.22...v1.9.23) (2022-04-05)
+
+### [1.9.22](https://github.com/surveyjs/survey-creator/compare/v1.9.21...v1.9.22) (2022-03-29)
+
+### [1.9.21](https://github.com/surveyjs/survey-creator/compare/v1.9.20...v1.9.21) (2022-03-24)
+
+### [1.9.20](https://github.com/surveyjs/survey-creator/compare/v1.9.19...v1.9.20) (2022-03-17)
+
+### [1.9.19](https://github.com/surveyjs/survey-creator/compare/v1.9.18...v1.9.19) (2022-03-09)
+
+### [1.9.18](https://github.com/surveyjs/survey-creator/compare/v1.9.17...v1.9.18) (2022-02-24)
+
+### [1.9.17](https://github.com/surveyjs/survey-creator/compare/v1.9.16...v1.9.17) (2022-02-24)
+
+### [1.9.16](https://github.com/surveyjs/survey-creator/compare/v1.9.15...v1.9.16) (2022-02-23)
+
+### [1.9.15](https://github.com/surveyjs/survey-creator/compare/v1.9.14...v1.9.15) (2022-02-22)
+
+### [1.9.14](https://github.com/surveyjs/survey-creator/compare/v1.9.13...v1.9.14) (2022-02-17)
+
+### [1.9.13](https://github.com/surveyjs/survey-creator/compare/v1.9.12...v1.9.13) (2022-02-14)
+
+### [1.9.12](https://github.com/surveyjs/survey-creator/compare/v1.9.11...v1.9.12) (2022-02-10)
+
+### [1.9.11](https://github.com/surveyjs/survey-creator/compare/v1.9.10...v1.9.11) (2022-02-09)
+
+### [1.9.10](https://github.com/surveyjs/survey-creator/compare/v1.9.9...v1.9.10) (2022-02-09)
+
+### [1.9.9](https://github.com/surveyjs/survey-creator/compare/v1.9.8...v1.9.9) (2022-02-09)
+
+### [1.9.8](https://github.com/surveyjs/survey-creator/compare/v1.9.7...v1.9.8) (2022-02-01)
+
+### [1.9.7](https://github.com/surveyjs/survey-creator/compare/v1.9.6...v1.9.7) (2022-01-25)
+
+### [1.9.6](https://github.com/surveyjs/survey-creator/compare/v1.9.5...v1.9.6) (2022-01-18)
+
+### [1.9.5](https://github.com/surveyjs/survey-creator/compare/v1.9.4...v1.9.5) (2022-01-11)
+
+### [1.9.4](https://github.com/surveyjs/survey-creator/compare/v1.9.3...v1.9.4) (2021-12-30)
+
+### [1.9.3](https://github.com/surveyjs/survey-creator/compare/v1.9.2...v1.9.3) (2021-12-21)
+
+### [1.9.2](https://github.com/surveyjs/survey-creator/compare/v1.9.1...v1.9.2) (2021-12-15)
+
 ### [1.9.1](https://github.com/surveyjs/survey-creator/compare/v1.9.0...v1.9.1) (2021-12-08)
 
 ## [1.9.0](https://github.com/surveyjs/survey-creator/compare/v1.8.79...v1.9.0) (2021-12-01)

@@ -2,8 +2,18 @@
 
 .svc-rating-question-controls {
   position: absolute;
-  bottom: calcSize(9);
-  left: calcSize(5);
+}
+
+.svc-question__content--selected-no-border {
+  .svc-rating-question-controls.svc-item-value-controls {
+    display: flex;
+  }
+}
+
+.svc-question__content--selected {
+  .svc-rating-question-controls.svc-item-value-controls {
+    display: flex;
+  }
 }
 
 .svc-question__content {
@@ -12,7 +22,7 @@
     width: calc(100% - 9 * #{$base-unit});
   }
   .svc-rating-question-controls {
-    display: block;
+    display: flex;
     width: calcSize(8);
   }
 }

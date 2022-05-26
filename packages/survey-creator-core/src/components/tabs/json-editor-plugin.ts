@@ -8,12 +8,18 @@ export abstract class JsonEditorBaseModel extends Base {
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
 
-  constructor(protected creator: CreatorBase<SurveyModel>) {
+  constructor(protected creator: CreatorBase) {
     super();
   }
-
-  public abstract text: string;
-  protected onEditorActivated(): void {}
+  public get text(): string {
+    return this.getText();
+  }
+  public set text(val: string) {
+    this.setText(val);
+  }
+  protected abstract getText(): string;
+  protected abstract setText(val: string): void;
+  protected onEditorActivated(): void { }
   public onPluginActivate(): void {
     this.text = this.creator.text;
     this.onEditorActivated();
@@ -27,10 +33,12 @@ export abstract class JsonEditorBaseModel extends Base {
       this.jsonEditorChangedTimeoutId = -1;
     } else {
       const self: JsonEditorBaseModel = this;
-      this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
-        self.jsonEditorChangedTimeoutId = -1;
-        self.processErrors(self.text);
-      }, JsonEditorBaseModel.updateTextTimeout);
+      if(!!window) {
+        this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
+          self.jsonEditorChangedTimeoutId = -1;
+          self.processErrors(self.text);
+        }, JsonEditorBaseModel.updateTextTimeout);
+      }
     }
   }
   protected abstract setErrors(errors: any[]): void;
@@ -45,23 +53,27 @@ export abstract class JsonEditorBaseModel extends Base {
 
 export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   public model: JsonEditorBaseModel;
-  constructor(private creator: CreatorBase<SurveyModel>) {}
+  constructor(private creator: CreatorBase) { }
   public activate(): void {
     this.model = this.createModel(this.creator);
   }
   public deactivate(): boolean {
-    const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
-    if (!textWorker.isJsonCorrect) {
-      return false;
+    if (this.model) {
+      const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
+      if (!textWorker.isJsonCorrect) {
+        return false;
+      }
+      if (!this.model.readOnly && this.model.isJSONChanged) {
+        this.creator.selectedElement = undefined;
+        this.creator.text = this.model.text;
+        this.creator.selectedElement = this.creator.survey;
+        this.creator.setModified({ type: "JSON_EDITOR" });
+      }
+      this.model = undefined;
     }
-    if (!this.model.readOnly && this.model.isJSONChanged) {
-      this.creator.text = this.model.text;
-      this.creator.setModified({ type: "JSON_EDITOR" });
-    }
-    this.model = undefined;
     return true;
   }
   protected abstract createModel(
-    creator: CreatorBase<SurveyModel>
+    creator: CreatorBase
   ): JsonEditorBaseModel;
 }

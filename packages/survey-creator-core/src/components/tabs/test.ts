@@ -1,9 +1,11 @@
 import { SurveySimulatorModel } from "../simulator";
 
 import "./test.scss";
-import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css } from "survey-core";
+import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, modernCss, defaultStandardCss } from "survey-core";
 import { CreatorBase } from "../../creator-base";
-import { getLocString } from "../../editorLocalization";
+import { editorLocalization, getLocString } from "../../editorLocalization";
+import { setSurveyJSONForPropertyGrid } from "../../property-grid";
+import { propertyGridCss } from "../../property-grid-theme/property-grid";
 
 // import template from "./test.html";
 
@@ -21,13 +23,13 @@ export class TestSurveyTabViewModel extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
+  public testAgainAction: Action;
   public nextPageAction: Action;
   private selectPageAction: Action;
   private pagePopupModel: PopupModel;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
-
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: TestSurveyTabViewModel) => {
@@ -67,20 +69,15 @@ export class TestSurveyTabViewModel extends Base {
     return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
   }
 
-  constructor(private surveyProvider: CreatorBase<SurveyModel>) {
+  constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
   }
 
-  public setJSON(json: any) {
-    this.json = json;
-    if (json != null) {
-      if (json.cookieName) {
-        delete json.cookieName;
-      }
-    }
-    this.simulator.survey = this.surveyProvider.createSurvey(json || {}, "test");
-    this.simulator.survey.css = defaultV2Css;
+  public updateSimulatorSurvey(json: any, theme: any) {
+    const newSurvey = this.surveyProvider.createSurvey(json || {}, "test");
+    newSurvey.css = theme;
+    this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -114,8 +111,18 @@ export class TestSurveyTabViewModel extends Base {
     });
   }
 
+  public setJSON(json: any, currTheme: any) {
+    this.json = json;
+    if (json != null) {
+      if (json.cookieName) {
+        delete json.cookieName;
+      }
+    }
+    this.updateSimulatorSurvey(json, currTheme);
+  }
+
   public initialize(json: any, options: any) {
-    this.setJSON(json);
+    this.setJSON(json, this.startTheme);
     this.updatePageList();
 
     if (options.showPagesInTestSurveyTab !== undefined) {
@@ -133,6 +140,17 @@ export class TestSurveyTabViewModel extends Base {
   private getCurrentPageItem(): IAction {
     return this.pageListItems[this.survey.pages.indexOf(this.survey.currentPage)];
   }
+  private getSelectPageTitle(): string {
+    return (this.activePage && this.getPageTitle(this.activePage, "survey-tester-selected")) || getLocString("ts.selectPage");
+  }
+  private getPageTitle(page: PageModel, reason = "survey-tester") {
+    let title = this.surveyProvider.getObjectDisplayName(page, reason, page.title);
+    if (title === page.name && title.indexOf("page") === 0) {
+      const index: number = this.survey.pages.indexOf(page);
+      return editorLocalization.getString("ed.pageTypeName") + " " + (index + 1);
+    }
+    return title;
+  }
   private updatePageList() {
     const pages: Array<IAction> = [];
     for (let i: number = 0; i < this.survey.pages.length; i++) {
@@ -140,7 +158,7 @@ export class TestSurveyTabViewModel extends Base {
       pages.push({
         id: page.name,
         data: page,
-        title: this.surveyProvider.getObjectDisplayName(page, "survey-tester", page.title),
+        title: this.getPageTitle(page),
         enabled: page.isVisible,
         visible: true
       });
@@ -156,7 +174,7 @@ export class TestSurveyTabViewModel extends Base {
   }
 
   public testAgain() {
-    this.setJSON(this.json);
+    this.setJSON(this.json, this.simulator.survey.css);
     this.updatePageList();
     this.show();
   }
@@ -190,6 +208,12 @@ export class TestSurveyTabViewModel extends Base {
         const isTestTabActive = this.surveyProvider.activeTab === "test";
         return this.isRunning && isTestTabActive && pageListItems.length > 1;
       });
+      this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
+        return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
+      });
+      this.prevPageAction.iconSize = <any>new ComputedUpdater<boolean>(() => {
+        return this.surveyProvider.isMobileView ? 24 : 16;
+      });
       this.prevPageAction.enabled = this.survey && !this.survey.isFirstPage;
       this.prevPageAction.action = () => setNearPage(false);
       pageActions.push(this.prevPageAction);
@@ -215,6 +239,12 @@ export class TestSurveyTabViewModel extends Base {
         const isTestTabActive = this.surveyProvider.activeTab === "test";
         return this.isRunning && isTestTabActive && pageListItems.length > 1;
       });
+      this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
+        return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
+      });
+      this.nextPageAction.iconSize = <any>new ComputedUpdater<boolean>(() => {
+        return this.surveyProvider.isMobileView ? 24 : 16;
+      });
       this.nextPageAction.enabled = this.survey && !this.survey.isLastPage;
       this.nextPageAction.action = () => setNearPage(true);
       pageActions.push(this.nextPageAction);
@@ -235,7 +265,26 @@ export class TestSurveyTabViewModel extends Base {
     }
     return null;
   }
-
+  private updateResultsTemplate(theme: any) {
+    this.simulator.survey.css = theme;
+    this.simulator.survey.render();
+  }
+  public setTheme(themeName: string, themeMapper: any): void {
+    const availableThemes = themeMapper.filter(item => item.name === themeName);
+    let theme = <any>defaultV2Css;
+    if (availableThemes.length > 0) {
+      theme = availableThemes[0].theme;
+    }
+    this.isRunning ? this.updateSimulatorSurvey(this.json, theme) : this.updateResultsTemplate(theme);
+  }
+  public getCurrThemeTitle(themeMapper: any): string {
+    const availableThemes = themeMapper.filter(item => item.theme.root === this.simulator.survey.css.root);
+    let themeTitle = this.surveyProvider.getLocString("ed.defaultV2Theme");
+    if (availableThemes.length > 0) {
+      themeTitle = availableThemes[0].title;
+    }
+    return themeTitle;
+  }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
 
@@ -254,8 +303,5 @@ export class TestSurveyTabViewModel extends Base {
       this.selectPageAction.popupModel.contentComponentData.model.selectedItem = this.getCurrentPageItem();
       this.selectPageAction.visible = this.isRunning && this.pageListItems.length > 1 && this.showPagesInTestSurveyTab;
     }
-  }
-  private getSelectPageTitle(): string {
-    return (this.activePage && this.surveyProvider.getObjectDisplayName(this.activePage, "survey-tester-selected", this.activePage.title)) || getLocString("ts.selectPage");
   }
 }

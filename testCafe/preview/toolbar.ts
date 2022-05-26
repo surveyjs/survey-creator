@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON, getBarItemByTitle, getListItemByText, creatorTabPreviewName } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, getBarItemByTitle, getListItemByText, creatorTabPreviewName, explicitErrorHandler } from "../helper";
 import { Selector } from "testcafe";
 const title = "Preview tab";
 
@@ -65,19 +65,20 @@ const json2 = {
 };
 
 const orientationAction = Selector("#orientationSelector .sv-action-bar-item");
+const restartSurveyButtonText = "Preview Survey Again";
 
 test("Language switcher", async (t) => {
   await setJSON(json2);
 
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
-    .expect(getBarItemByTitle("english").visible).ok()
+    .expect(getBarItemByTitle("English").visible).ok()
     .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("My Survey")
-    .click(getBarItemByTitle("english"))
-    .expect(getListItemByText("deutsch").visible).ok()
-    .click(getListItemByText("deutsch"))
+    .click(getBarItemByTitle("English"))
+    .expect(getListItemByText("Deutsch").visible).ok()
+    .click(getListItemByText("Deutsch"))
     .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("Meine Umfrage")
-    .expect(getBarItemByTitle("deutsch").visible).ok();
+    .expect(getBarItemByTitle("Deutsch").visible).ok();
 });
 
 test("Page switcher", async (t) => {
@@ -98,15 +99,15 @@ test("Page switcher", async (t) => {
 
     .click(Selector("#nextPage"))
     .expect(Selector(".sd-question__title").withText("question2").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("page3")
+    .expect(Selector("#pageSelector").textContent).contains("Page 3")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(true)
 
-    .click(getBarItemByTitle("page3"))
+    .click(getBarItemByTitle("Page 3"))
     .expect(getListItemByText("Second page").visible).ok()
     .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
     .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).notOk()
-    .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).ok()
+    .expect(getListItemByText("Page 3").hasClass("sv-list__item--selected")).ok()
     .click(getListItemByText("Second page"))
     .expect(Selector(".sd-question__title").withText("question1").visible).ok()
     .expect(Selector("#pageSelector").textContent).contains("Second page")
@@ -115,11 +116,11 @@ test("Page switcher", async (t) => {
     .click(getBarItemByTitle("Second page"))
     .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
     .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).ok()
-    .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).notOk()
+    .expect(getListItemByText("Page 3").hasClass("sv-list__item--selected")).notOk()
     .click(getListItemByText("Second page"));
 });
 
-test("Test Survey Again", async (t) => {
+test("Preview Survey Again", async (t) => {
   await setJSON(json2);
   const switcher = getBarItemByTitle("Show invisible elements");
 
@@ -129,7 +130,7 @@ test("Test Survey Again", async (t) => {
     .click(Selector("#nextPage"))
     .click(Selector("input[value='Complete']"))
     .expect(Selector("h3").withText("Thank you for completing the survey!").visible).ok()
-    .click(getBarItemByTitle("Test Survey Again"))
+    .click(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText))
     .expect(Selector(".sd-question__title").withText("string_editor").visible).ok();
 });
 
@@ -146,6 +147,7 @@ test("Show invisible elements switcher", async (t) => {
 });
 
 test("Landscape switcher", async (t) => {
+  await explicitErrorHandler();
   await setJSON(json);
 
   await t
@@ -167,6 +169,7 @@ test("Landscape switcher", async (t) => {
     .expect(Selector(".svd-simulator-wrapper").clientHeight).gt(900);
 });
 test("Device selector", async (t) => {
+  await explicitErrorHandler();
   await setJSON(json);
 
   await t
@@ -181,13 +184,13 @@ test("Device selector", async (t) => {
     .click(getListItemByText("iPad"))
     .click(Selector("input[value='Complete']"))
     .expect(orientationAction.hasAttribute("disabled")).notOk()
-    .expect(getBarItemByTitle("Test Survey Again").visible).ok()
+    .expect(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText).visible).ok()
 
     .click(getBarItemByTitle("iPad"))
     .expect(getListItemByText("Desktop").visible).ok()
 
     .click(getListItemByText("Desktop"))
-    .click(getBarItemByTitle("Test Survey Again"))
+    .click(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText))
     .expect(orientationAction.hasAttribute("disabled")).ok()
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 

@@ -1,33 +1,92 @@
 @import "../../variables.scss";
 @import "../../colors.scss";
 
-.sl-table__row:hover .sl-detail-panel__icon:before,
-.sl-table__cell--detail-button:focus .sl-detail-panel__icon:before {
-  content: "";
-  display: block;
-  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%2223%22%20viewBox%3D%220%200%2010%2023%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cg%20clip-path%3D%22url(%23clip0)%22%3E%0A%3Cpath%20d%3D%22M0%204.7L1.4%206.1L3.7%203.8V9.4H5.7V3.8L8%206.1L9.4%204.7L4.7%200L0%204.7Z%22%20fill%3D%22%23909090%22%2F%3E%0A%3Cpath%20d%3D%22M5.7%2018.9999V13.3999H3.7V18.9999L1.4%2016.6999L0%2018.0999L4.7%2022.7999L9.4%2018.0999L8%2016.6999L5.7%2018.9999Z%22%20fill%3D%22%23909090%22%2F%3E%0A%3C%2Fg%3E%0A%3Cdefs%3E%0A%3CclipPath%20id%3D%22clip0%22%3E%0A%3Crect%20width%3D%229.4%22%20height%3D%2222.8%22%20fill%3D%22white%22%2F%3E%0A%3C%2FclipPath%3E%0A%3C%2Fdefs%3E%0A%3C%2Fsvg%3E%0A");
-  background-repeat: no-repeat;
-  background-position: center center;
-  height: calcSize(3);
-  width: calcSize(3);
-  cursor: pointer;
+.sl-table {
+  width: 50%;
+  margin: 0 25%;
 }
-.sl-table__row #remove-row .sv-action-bar-item__icon use {
+.sl-table__row {
+  position: relative;
+}
+
+.sl-table__cell.st-table__cell--actions:first-child .sv-action-bar {
+  margin-top: calcSize(-0.5);
+  padding-right: calcSize(4);
+}
+.sl-table .sl-table__detail-button.sl-table__detail-button {
+  width: calcSize(6);
+  height: calcSize(6);
+
+  box-sizing: border-box;
+  border-radius: calcSize(12.5);
+  padding: 0;
+
+  &:hover,
+  &.sv-focused--by-key {
+    background-color: $primary-light;
+    outline: none;
+
+    use {
+      fill: $primary;
+    }
+  }
+}
+
+.sl-table__remove-button .sv-action-bar-item {
+  border-radius: calcSize(12.5);
+  padding: calcSize(1);
+  cursor: pointer;
+
+  &:hover,
+  &.sv-focused--by-key {
+    background-color: $red-light;
+    outline: none;
+
+    use {
+      fill: $red;
+    }
+  }
+}
+
+.sl-table__cell .sv-action-bar-item__icon {
   display: none;
 }
+.sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
+.sl-table__cell .sv-action-bar-item.sv-focused--by-key .sv-action-bar-item__icon {
+  display: block;
+}
+
 .sl-table__row:hover #remove-row,
 .sl-table__row #remove-row:focus-within {
   .sv-action-bar-item {
-    padding: calcSize(0.25);
     border: none;
+    width: calcSize(5);
+    height: calcSize(5);
   }
   .sv-action-bar-item__icon use {
     fill: $red;
-    display: block;
   }
 }
-.sl-table__row.sl-table__row--additional .sl-table__cell {
+.sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {
   color: $secondary;
+}
+
+.sl-table__cell .svc-action-button,
+.sl-table__cell .svc-action-button:hover,
+.sl-table__cell .svc-action-button:focus {
+  @include mediumBold;
+
+  background: transparent;
+  color: $foreground;
+  outline: none;
+  border: none;
+  box-shadow: none;
+
+  max-height: calcSize(13.5);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .sl-table__cell {
@@ -35,10 +94,22 @@
   font-weight: bold;
   font-size: calcSize(2);
   font-family: $font-family;
-  padding: 0.9375em;
-  padding-left: 0;
-  box-sizing: content-box;
   vertical-align: top;
+  padding: calcSize(2) 0;
+  width: 100%;
+}
+
+.sl-table__cell--actions {
+  position: absolute;
+  width: max-content;
+  &:first-child {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  &:last-child {
+    right: 0;
+    transform: translateX(100%);
+  }
 }
 
 .sl-table__cell--detail-button {
@@ -47,33 +118,49 @@
   outline: none;
   border: none;
   background-color: transparent;
-  padding: calcSize(0.25);
 }
 
 .sl-table {
-  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;
 
+  thead {
+    th:first-child {
+      position: absolute;
+      left: 0;
+      transform: translateX(-100%);
+    }
+
+    th:last-child {
+      position: absolute;
+      right: 0;
+      transform: translateX(100%);
+    }
+
+    .sl-table__cell.st-table__cell--header {
+      text-align: left;
+    }
+  }
+
   tbody {
     tr:last-child {
       .sl-table__cell {
-        padding-bottom: 2.5em;
+        padding-bottom: calcSize(10);
       }
     }
   }
 
   tr:first-child {
     .sl-table__cell {
-      padding-top: 1.875em;
+      padding-top: calcSize(4);
     }
   }
 
   td,
   th {
     &:first-child {
-      padding-left: 1.875em;
+      padding-left: calcSize(4);
 
       .sv-action-bar {
         justify-content: flex-end;
@@ -83,18 +170,15 @@
   td,
   th {
     &:last-child {
-      padding-right: 1.875em;
+      padding-right: calcSize(4);
     }
   }
 }
 
-.sl-panel__footer {
-  padding-left: 0;
+.sl-panel .sl-panel__footer {
+  padding: 0;
 
-  &.sv-action-bar {
-    width: 100%;
-  }
-  #saveDetailPanel {
+  .sv-action {
     width: 100%;
   }
   .sv-action__content {
@@ -102,6 +186,7 @@
   }
   button.sl-panel__done-button {
     width: 100%;
+    margin-top: calcSize(2);
     margin-bottom: calcSize(10);
     background-color: $green-light;
     color: $green;
@@ -138,30 +223,17 @@
 .sl-question {
   display: flex;
   align-items: center;
+  margin-top: calcSize(2);
 }
 .sl-row {
   display: flex;
   align-items: flex-start;
   flex-flow: row wrap;
 }
-.sl-panel {
-  padding-bottom: 16px;
-}
 .sl-row--multiple {
   .sl-panel {
     padding-bottom: 0;
   }
-}
-.sl-row {
-  margin-top: calcSize(-1);
-}
-
-.sl-row > div {
-  margin-top:calcSize(1);
-}
-
-.sl-row:not(:last-child) {
-  margin-bottom: calcSize(2);
 }
 .sl-question__header--left {
   margin-right: calcSize(1);
@@ -170,27 +242,31 @@
   font-size: calcSize(2);
   line-height: calcSize(3);
   margin: 0;
+  font-weight: 600;
+
   span + span {
     display: none;
   }
 }
+.sl-row--multiple .sl-question {
+  padding-right: calcSize(1);
+}
 .svc-logic-question-value {
-  padding-right: calcSize(5) !important;
-} 
-
-.sl-panel-wrapper--in-row {
-  display: flex;
-  align-items: flex-start;
+  padding-right: calcSize(5);
+  margin-top: calcSize(2);
 }
-.sl-comment {
-  margin-bottom: calcSize(2);
+.svc-logic_trigger-editor {
+  margin-top: calcSize(2);
 }
-.svc-logic-paneldynamic .sl-panel { 
-  width: calc(100% - 5 * var(--base-unit, 8px));
+.svc-logic_trigger-editor .svc-logic-question-value {
+  margin-top: 0;
 }
 
 .sv-popup.sv-property-editor {
   .sl-row {
     flex-flow: nowrap;
   }
+}
+.spg-comment.sl-comment {
+  height: calcSize(17);
 }

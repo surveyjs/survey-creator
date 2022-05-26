@@ -4,23 +4,13 @@ import ReactDOM from "react-dom";
 import {
   Base,
   Question,
-  PanelModel,
-  StylesManager,
   SurveyError,
-  unwrap,
-  SurveyModel,
-  SurveyElement,
-  ItemValue,
-  QuestionSelectBase,
-  AdaptiveActionContainer,
-  QuestionRowModel,
-  LocalizableString
+  SurveyModel
 } from "survey-core";
 import {
   SurveyActionBar,
   ReactElementFactory,
   ReactQuestionFactory,
-  Model,
   SurveyElementBase,
   SurveyLocStringViewer,
   Survey
@@ -28,20 +18,15 @@ import {
 import {
   ICreatorOptions,
   CreatorBase,
-  ITabbedMenuItem,
-  getElementWrapperComponentName,
-  isStringEditable,
-  getElementWrapperComponentData,
-  getItemValueWrapperComponentName,
-  getItemValueWrapperComponentData
-} from "@survey/creator";
-import { TabbedMenuComponent } from "./components/TabbedMenu";
-import { editableStringRendererName } from "./components/StringEditor";
-import { NotifierComponent } from "./components/Notifier";
-import { SvgBundleComponent } from "./components/SvgBundle";
+  ITabbedMenuItem
+} from "survey-creator-core";
+import { TabbedMenuComponent } from "./TabbedMenu";
+import { NotifierComponent } from "./Notifier";
+import { SvgBundleComponent } from "./SvgBundle";
 
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;
+  style?: any;
 }
 
 export class SurveyCreatorComponent extends SurveyElementBase<
@@ -52,11 +37,14 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     super(props);
     this.rootNode = React.createRef();
   }
-  get creator(): CreatorBase<SurveyModel> {
+  get creator(): CreatorBase {
     return this.props.creator;
   }
   protected getStateElement(): Base {
     return this.props.creator;
+  }
+  get style(): any {
+    return this.props.style;
   }
   componentDidMount() {
     super.componentDidMount();
@@ -71,10 +59,12 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   private rootNode: React.RefObject<HTMLDivElement>;
 
   renderElement() {
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const creator: CreatorBase = this.props.creator;
+    if (creator.isCreatorDisposed) return null;
     const creatorClassName = "svc-creator" + (this.props.creator.isMobileView ? " svc-creator--mobile" : "");
+    const areaClassName = "svc-full-container svc-creator__area svc-flex-column" + (this.props.creator.haveCommercialLicense ? "" : " svc-creator__area--with-banner");
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
-    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sideBarLocation);
+    const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sidebarLocation);
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
       licenseBanner = (
@@ -89,9 +79,9 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     }
     //AM: width unrecognized by react
     return (
-      <div className={creatorClassName} ref={this.rootNode}>
+      <div className={creatorClassName} ref={this.rootNode} style={this.style}>
         <SvgBundleComponent></SvgBundleComponent>
-        <div className="svc-full-container svc-creator__area svc-flex-column">
+        <div className={areaClassName}>
           <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
               <div className="svc-top-bar">
@@ -118,7 +108,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
                   : null)}
               </div>
             </div>
-            {this.renderSideBar()}
+            {this.renderSidebar()}
           </div>
           {licenseBanner}
           <NotifierComponent
@@ -130,7 +120,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     );
   }
   renderActiveTab() {
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const creator: CreatorBase = this.props.creator;
     for (var i = 0; i < creator.tabs.length; i++) {
       if (creator.tabs[i].id === creator.activeTab) {
         return this.renderCreatorTab(creator.tabs[i]);
@@ -142,7 +132,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     if (tab.visible === false) {
       return null;
     }
-    const creator: CreatorBase<SurveyModel> = this.props.creator;
+    const creator: CreatorBase = this.props.creator;
     const component = !!tab.renderTab
       ? tab.renderTab()
       : ReactElementFactory.Instance.createElement(tab.componentContent, {
@@ -161,12 +151,12 @@ export class SurveyCreatorComponent extends SurveyElementBase<
       </div>
     );
   }
-  renderSideBar() {
-    if (!!this.creator.sideBar) {
+  renderSidebar() {
+    if (!!this.creator.sidebar) {
       const className = this.creator.isMobileView ? "sv-mobile-side-bar" : "";
       return (
         <div className={className}>
-          {ReactElementFactory.Instance.createElement("svc-side-bar", { model: this.creator.sideBar })}
+          {ReactElementFactory.Instance.createElement("svc-side-bar", { model: this.creator.sidebar })}
         </div>);
     } else {
       return null;
@@ -174,71 +164,9 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 }
 
-export class DesignTimeSurveyModel extends Model {
-  constructor(public creator: SurveyCreator, jsonObj?: any) {
-    super(jsonObj);
-  }
-  public isPopupEditorContent = false;
-
-  public getElementWrapperComponentName(element: any, reason?: string): string {
-    let componentName = getElementWrapperComponentName(
-      element,
-      reason,
-      this.isPopupEditorContent
-    );
-    return (
-      componentName || super.getElementWrapperComponentName(element, reason)
-    );
-  }
-  public getElementWrapperComponentData(element: any, reason?: string): any {
-    const data = getElementWrapperComponentData(element, reason, this.creator);
-    return data || super.getElementWrapperComponentData(element);
-  }
-
-  public getRowWrapperComponentName(row: QuestionRowModel): string {
-    return "svc-row";
-  }
-  public getRowWrapperComponentData(row: QuestionRowModel): any {
-    return {
-      creator: this.creator,
-      row
-    };
-  }
-
-  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
-    return getItemValueWrapperComponentName(item, question);
-  }
-  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    return getItemValueWrapperComponentData(item, question, this.creator);
-  }
-
-  public getRendererForString(element: Base, name: string): string {
-    if (!this.creator.readOnly && isStringEditable(element, name)) {
-      return editableStringRendererName;
-    }
-    return undefined;
-  }
-
-  public getRendererContextForString(element: Base, locStr: LocalizableString) {
-    const lStr: any = locStr;
-    if (!this.creator.readOnly && isStringEditable(element, locStr.name)) {
-      return {
-        creator: this.creator,
-        element,
-        locStr
-      };
-    }
-    return lStr;
-  }
-}
-export class SurveyCreator extends CreatorBase<SurveyModel> {
+export class SurveyCreator extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
-  }
-  protected createSurveyCore(json: any = {}, reason: string): Model {
-    if (reason === "designer" || reason === "modal-question-editor")
-      return new DesignTimeSurveyModel(this, json);
-    return new Model(json);
   }
   public render(target: string | HTMLElement) {
     let node: HTMLElement = target as HTMLElement;

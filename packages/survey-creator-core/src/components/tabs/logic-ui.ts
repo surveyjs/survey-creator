@@ -1,13 +1,13 @@
-import { SurveyModel, Action, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
+import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
 import { SurveyLogicAction, SurveyLogicItem } from "./logic-items";
 import { SurveyLogic } from "./logic";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { QuestionEmbeddedSurveyModel } from "../embedded-survey";
-import { updateMatrixRemoveAction } from "../../utils/actions";
+import { updateMatrixLogicRemoveAction, updateMatrixLogicExpandAction } from "../../utils/actions";
 
 import "./logic-ui.scss";
 
@@ -42,10 +42,7 @@ export class SurveyLogicUI extends SurveyLogic {
     options: ISurveyCreatorOptions = null
   ) {
     super.update(survey, options);
-    const newItemsSurveyValue = this.options.createSurvey(
-      this.getLogicItemSurveyJSON(),
-      "logic-items"
-    );
+    const newItemsSurveyValue = this.options.createSurvey(this.getLogicItemSurveyJSON(), "logic-items");
     newItemsSurveyValue.css = logicCss;
     this.itemsSurveyValue = newItemsSurveyValue;
     this.itemsSurvey.onMatrixRowRemoving.add((sender, options) => {
@@ -64,9 +61,11 @@ export class SurveyLogicUI extends SurveyLogic {
     });
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
       if (this.readOnly) return;
-      updateMatrixRemoveAction(options.question, options.actions, options.row);
+      updateMatrixLogicExpandAction(options.question, options.actions, options.row);
+      updateMatrixLogicRemoveAction(options.question, options.actions, options.row);
     });
     this.updateItemsSurveyData();
+    this.onReadOnlyChanged();
   }
   @property({
     onSet: (value, target: SurveyLogicUI) => {
@@ -105,6 +104,10 @@ export class SurveyLogicUI extends SurveyLogic {
       this.updateItemsSurveyData();
     }
   }
+  protected onReadOnlyChanged(): void {
+    if (!this.itemsSurvey) return;
+    this.itemsSurvey.mode = this.readOnly ? "display" : "edit";
+  }
   public get expressionEditor(): ConditionEditor {
     return this.expressionEditorValue;
   }
@@ -120,8 +123,14 @@ export class SurveyLogicUI extends SurveyLogic {
   private getLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
     let res: ILogicItemUI = this.itemUIHash[item.id];
     if (!res) {
+      const context = <Question>item.getContext();
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
+      res.expressionEditor.context = context;
+      res.itemEditor.context = context;
       res.expressionEditor.text = item.expression;
+      res.expressionEditor.onContextChanged = (context: Question): void => {
+        res.itemEditor.context = context;
+      };
       this.itemUIHash[item.id] = res;
     }
     return res;
@@ -174,16 +183,18 @@ export class SurveyLogicUI extends SurveyLogic {
     }
   }
   protected hasErrorInUI(): boolean {
+    const creator = (<any>this.survey).creator;
     if (!this.expressionEditor.isReady) {
+      this.expressionEditor.hasErrors();
       this.errorText = getLogicString("expressionInvalid");
-      !!this.survey.creator &&
-        this.survey.creator.notify(this.errorText, "error");
+      !!creator &&
+        creator.notify(this.errorText, "error");
       return true;
     }
     if (this.itemEditor.hasErrors()) {
       this.errorText = getLogicString("actionInvalid");
-      !!this.survey.creator &&
-        this.survey.creator.notify(this.errorText, "error");
+      !!creator &&
+        creator.notify(this.errorText, "error");
       return true;
     }
     return false;
@@ -194,8 +205,15 @@ export class SurveyLogicUI extends SurveyLogic {
   protected getEditingActions(): Array<SurveyLogicAction> {
     return this.itemEditor.getEditingActions();
   }
+
   protected getLogicItemSurveyJSON(): any {
-    var json = {
+    const creator = (<any>this.survey).creator;
+    const json = (creator && creator.useTableViewInLogicTab) ? this.getTwoColumnsLayout() : this.getOneColumnLayout();
+    setSurveyJSONForPropertyGrid(json);
+    return json;
+  }
+  private getTwoColumnsLayout() {
+    return {
       elements: [
         {
           type: "matrixdynamic",
@@ -205,26 +223,46 @@ export class SurveyLogicUI extends SurveyLogic {
           allowAddRows: false,
           allowAdaptiveActions: false,
           rowCount: 0,
-          showHeader: false,
           columns: [
             {
               cellType: "linkvalue",
               name: "conditions",
-              readOnly: true,
               title: this.getLocString("ed.lg.conditions")
             },
             {
               cellType: "linkvalue",
               name: "actions",
-              readOnly: true,
               title: this.getLocString("ed.lg.actions")
             }
           ]
         }
       ]
     };
-    setSurveyJSONForPropertyGrid(json);
-    return json;
+  }
+  private getOneColumnLayout() {
+    return {
+      elements: [
+        {
+          type: "matrixdynamic",
+          name: "items",
+          titleLocation: "hidden",
+          showColumnHeader: false,
+          detailPanelMode: "underRowSingle",
+          allowAddRows: false,
+          allowAdaptiveActions: false,
+          rowCount: 0,
+          showHeader: false,
+          columns: [
+            {
+              cellType: "linkvalue",
+              name: "rules",
+              showTooltip: true,
+              width: "100%"
+            }
+          ]
+        }
+      ]
+    };
   }
   private createExpressionPropertyEditor(): ConditionEditor {
     const res = new ConditionEditor(
@@ -243,16 +281,25 @@ export class SurveyLogicUI extends SurveyLogic {
   private getVisibleItems(): SurveyLogicItem[] {
     return this.items.filter(item => item.isNew || item.isSuitable(this.questionFilter, this.actionTypeFilter));
   }
+  private getDataFromItem(item: SurveyLogicItem) {
+    const creator = (<any>this.survey).creator;
+    if (creator && creator.useTableViewInLogicTab) {
+      return {
+        conditions: item.expressionText,
+        actions: item.actionsText
+      };
+    } else {
+      return { rules: item.getDisplayText() };
+    }
+  }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
     var data = [];
     this.visibleItems = this.getVisibleItems();
-    for (var i = 0; i < this.visibleItems.length; i++) {
-      data.push({
-        conditions: this.visibleItems[i].expressionText,
-        actions: this.visibleItems[i].actionsText
-      });
-    }
+    this.visibleItems.forEach(item => {
+      data.push(this.getDataFromItem(item));
+    });
+
     this.matrixItems.onHasDetailPanelCallback = (row) => { return true; };
     this.matrixItems.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,
@@ -290,6 +337,17 @@ export class SurveyLogicUI extends SurveyLogic {
         }
       });
     };
+    this.matrixItems.onCellCreatedCallback = (options: any) => {
+      options.cell.question.linkClickCallback = () => {
+        if (options.row.isDetailPanelShowing) {
+          options.row.hideDetailPanel();
+        } else {
+          options.row.showDetailPanel();
+        }
+      };
+      options.cell.question.showClear = false;
+      options.cell.question.allowClear = false;
+    };
     this.matrixItems.value = data;
     this.updateRenderedRows();
   }
@@ -319,8 +377,7 @@ export class SurveyLogicUI extends SurveyLogic {
     });
   }
   public get addNewText(): string {
-    var lgAddNewItem = getLogicString("addNewItem");
-    return !!lgAddNewItem ? lgAddNewItem : this.getLocString("pe.addNew");
+    return getLogicString("addNewItem");
   }
 
   public get emptyTabPlaceHolder(): string {

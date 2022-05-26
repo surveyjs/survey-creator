@@ -1,4 +1,3 @@
-import { CreatorBase } from "../../creator-base";
 import { PagesController } from "../../pages-controller";
 import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
 
@@ -6,29 +5,22 @@ import "./page-navigator.scss";
 import "./page-navigator-item.scss";
 import { getLocString } from "../../editorLocalization";
 
-export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
+export class PageNavigatorViewModel extends Base {
   public icon: string;
   public pageListModel: ListModel;
   public popupModel: PopupModel;
-  private pagesChangedFunc: (sender: PagesController, options: any) => any;
-  private pageNameChangedFunc: (sender: PagesController, options: any) => any;
+  private pagesChangedFunc = (sender: PagesController, options: any) => {
+    this.buildItems();
+  };
+  private currentPagesChangedFunc = (sender: PagesController, options: any) => {
+    this.currentPage = this.pagesController.currentPage;
+  };
 
-  constructor(private pagesController: PagesController) {
+  constructor(private pagesController: PagesController, private pageEditMode: string) {
     super();
     this.icon = "icon-select-page";
-    this.pagesChangedFunc = (sender: PagesController, options: any) => {
-      this.buildItems();
-    };
-    this.pageNameChangedFunc = (sender: PagesController, options: any) => {
-      var page = options.page;
-      if (!page) return;
-      var item = this.getActionBarByPage(page);
-      if (!!item) {
-        item.title = this.pagesController.getDisplayName(page);
-      }
-    };
     this.pagesController.onPagesChanged.add(this.pagesChangedFunc);
-    this.pagesController.onPageNameChanged.add(this.pageNameChangedFunc);
+    this.pagesController.onCurrentPageChanged.add(this.currentPagesChangedFunc);
     this.pageListModel = new ListModel(
       [],
       (item) => {
@@ -47,7 +39,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     if (!!this.pagesController.creator["onPropertyChanged"]) {
       this.pagesController.creator["onPropertyChanged"].add((sender, options) => {
         if (options.name === "toolboxLocation") {
-          if (this.pagesController.creator["toolboxLocation"] == "insideSideBar") {
+          if (this.pagesController.creator["toolboxLocation"] == "sidebar") {
             this.popupModel.horizontalPosition = "right";
           } else {
             this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"];
@@ -60,7 +52,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
   public dispose() {
     super.dispose();
     this.pagesController.onPagesChanged.remove(this.pagesChangedFunc);
-    this.pagesController.onPageNameChanged.add(this.pageNameChangedFunc);
+    this.pagesController.onCurrentPageChanged.remove(this.currentPagesChangedFunc);
   }
 
   @propertyArray() items: Array<IAction>;
@@ -75,7 +67,7 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
   private setItems(items: Array<IAction>) {
     this.items = items;
     this.pageListModel.setItems(items);
-    this.visible = items.length > 1;
+    this.visible = items.length > 1 || this.pageEditMode === "bypage";
   }
   private buildItems() {
     this.currentPage = this.pagesController.currentPage || this.pagesController.pages[0];
@@ -83,6 +75,12 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
     var pages = this.pagesController.pages;
     for (var i = 0; i < pages.length; i++) {
       items.push(this.createActionBarItem(pages[i]));
+    }
+    if(this.pagesController.creator["pageEditMode"] === "bypage") {
+      const newPage = (<any>this.pagesController["creator"]).getPlugin("designer").model.newPage;
+      if(!!newPage) {
+        items.push(this.createActionBarItem(newPage));
+      }
     }
     this.setItems(items);
   }
@@ -98,12 +96,18 @@ export class PageNavigatorViewModel<T extends SurveyModel> extends Base {
   private createActionBarItem(page: PageModel): Action {
     const item: IAction = {
       id: page.id,
-      title: this.pagesController
+      title: <any>new ComputedUpdater<boolean>(() => this.pagesController
         ? this.pagesController.getDisplayName(page)
-        : page.title
+        : page.title)
     };
     item.active = <any>new ComputedUpdater<boolean>(() => page === this.currentPage);
-    item.action = () => {
+    item.action = (item: any) => {
+      if(this.pageEditMode === "bypage") {
+        this.pagesController.currentPage = page;
+        this.currentPage = page;
+        this.pagesController.creator.selectElement(this.pagesController.currentPage);
+        return;
+      }
       const el: any = document.getElementById(page.id);
       if (!!el) {
         el.scrollIntoView({ block: "start" });

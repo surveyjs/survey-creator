@@ -5,6 +5,7 @@ export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
 export * from "../settings";
+export { ICreatorOptions } from "../creator-options";
 
 export * from "../creator-base";
 export * from "../creator-responsivity-manager";
@@ -40,6 +41,7 @@ export * from "../components/results";
 export * from "../components/header/logo-image";
 export * from "../components/string-editor";
 export * from "../components/embedded-survey";
+export * from "../components/link-value";
 export * from "../editorLocalization";
 export * from "../json5";
 export * from "../property-grid";
@@ -76,29 +78,6 @@ import "../components/side-bar/side-bar.scss";
 import "../property-grid-theme/property-grid.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
-
-//localization
-import "../localization/danish";
-import "../localization/french";
-import "../localization/german";
-import "../localization/finnish";
-import "../localization/italian";
-import "../localization/indonesian";
-import "../localization/korean";
-import "../localization/persian";
-import "../localization/polish";
-import "../localization/portuguese";
-import "../localization/simplified-chinese";
-import "../localization/spanish";
-import "../localization/swedish";
-import "../localization/traditional-chinese";
-import "../localization/turkish";
-import "../localization/norwegian";
-import "../localization/hungarian";
-import "../localization/russian";
-import "../localization/tajik";
-import "../localization/dutch";
-import "../localization/croatian";
 
 import { settings } from "survey-core";
 settings.supportCreatorV2 = true;

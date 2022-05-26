@@ -193,10 +193,11 @@ QUnit.test("SurveyJSON always return correct data, bug #53", function (assert) {
   );
 });
 
-QUnit.test("onQuestionAdded event", function (assert) {
+QUnit.test("onQuestionAdded event + undo/redo", function (assert) {
   var editor = new SurveyCreator();
   var counter = 0;
   editor.onQuestionAdded.add(function () {
+    if (editor.isProcessingUndoRedo) return;
     counter++;
   });
   assert.equal(counter, 0, "No question was added");
@@ -204,6 +205,9 @@ QUnit.test("onQuestionAdded event", function (assert) {
   assert.equal(counter, 0, "No question was added");
   editor.survey.pages[0].addNewQuestion("text", "q1");
   assert.equal(counter, 1, "One question was added");
+  editor.undo();
+  editor.redo();
+  assert.equal(counter, 1, "Ignore undo/redo");
 });
 
 QUnit.test("onElementDeleting event", function (assert) {
@@ -1012,6 +1016,7 @@ QUnit.test(
   "Update conditions/expressions on changing question.name",
   function (assert) {
     var editor = new SurveyCreator();
+    editor.survey.currentPage.enableIf = "{question1} = 1";
     editor.survey.currentPage.addNewQuestion("text", "question1");
     editor.survey.currentPage.addNewQuestion("text", "question2");
     var q1 = <Survey.Question>editor.survey.getAllQuestions()[0];
@@ -1028,9 +1033,13 @@ QUnit.test(
       "{myUpdatedQuestion1} = 1",
       "Update the condition accordingly"
     );
+    assert.equal(
+      editor.survey.currentPage.enableIf,
+      "{myUpdatedQuestion1} = 1",
+      "Update the condition accordingly on the page"
+    );
   }
 );
-
 QUnit.test(
   "Update conditions/expressions on changing question.valueName",
   function (assert) {
@@ -2234,9 +2243,7 @@ QUnit.test("Update expressions in copyElements", function (assert) {
       },
     ],
   };
-  var panel = new Survey.Panel("panel1");
-  panel.addNewQuestion("text", "question1");
-  panel.addNewQuestion("text", "question2");
+  const panel = <Survey.PageModel>creator.survey.getPanelByName("panel1");
   panel.questions[1].visibleIf = "{question1} = 'a'";
   var newPanel = <Survey.Panel>creator.copyElement(panel);
   assert.equal(
@@ -2394,8 +2401,8 @@ QUnit.test("isCanModifyProperty", function (assert) {
     "Readonly by Serializer"
   );
   Survey.Serializer.findProperty("text", "title").readOnly = false;
-  creator.onGetPropertyReadOnly.add(function(s, o) {
-    if(o.property.name == "title")
+  creator.onGetPropertyReadOnly.add(function (s, o) {
+    if (o.property.name == "title")
       o.readOnly = true;
   });
   assert.equal(

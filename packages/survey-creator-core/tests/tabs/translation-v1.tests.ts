@@ -19,6 +19,8 @@ import {
 import { parse } from "papaparse";
 import { settings } from "../../src/settings";
 
+import "survey-core/survey.i18n";
+
 test("Text question localization properties", () => {
   const question: QuestionTextModel = new QuestionTextModel("q1");
   const group: TranslationGroup = new TranslationGroup(question.name, question);
@@ -220,12 +222,12 @@ test("Question validators name", () => {
 test("Default locale name", () => {
   let survey: SurveyModel = new SurveyModel();
   const translation: Translation = new Translation(survey);
-  expect(translation.getLocaleName("")).toEqual("Default (english)");
+  expect(translation.getLocaleName("")).toEqual("Default (English)");
   surveyLocalization.defaultLocale = "de";
   survey = new SurveyModel();
   survey.locale = "de";
   translation.survey = survey;
-  expect(translation.getLocaleName("")).toEqual("Default (deutsch)");
+  expect(translation.getLocaleName("")).toEqual("Default (Deutsch)");
   surveyLocalization.defaultLocale = "en";
 });
 
@@ -423,7 +425,7 @@ test("Export settings.translation.prefix", () => {
   });
   var translation = new Translation(survey);
   const exportStr1 = translation.exportToCSV();
-  settings.traslation.exportPrefix = "12345;";
+  settings.translation.exportPrefix = "12345;";
   const exportStr2 = translation.exportToCSV();
   expect(exportStr2).toEqual("12345;" + exportStr1);
 });
@@ -464,7 +466,7 @@ test("Merging a locale with default", () => {
   expect(translation.locales).toContain("de");
   expect(translation.canMergeLocaleWithDefault).toBeTruthy();
   expect(translation.mergeLocaleWithDefaultText).toEqual(
-    "Merge deutsch with default locale"
+    "Merge Deutsch with default locale"
   );
   translation.mergeLocaleWithDefault();
   expect(translation.locales).toHaveLength(2);
@@ -566,6 +568,9 @@ test("Add pages as a custom property, it should not produce the error, Bug#991",
   Serializer.removeProperty("page", "pages");
 });
 test("Show questions as they are in survey. Do not sort them", () => {
+  const oldValue = settings.translation.sortByName;
+  settings.translation.sortByName = true;
+
   const survey: SurveyModel = new SurveyModel({
     elements: [
       {
@@ -588,12 +593,14 @@ test("Show questions as they are in survey. Do not sort them", () => {
   expect(group.items).toHaveLength(2);
   expect(group.items[0].name).toEqual("question1");
   expect(group.items[1].name).toEqual("question2");
-  settings.traslation.sortByName = false;
+  settings.translation.sortByName = false;
   translation = new Translation(survey);
   group = translation.root.groups[0];
   expect(group.items[0].name).toEqual("question2");
   expect(group.items[1].name).toEqual("question1");
-  settings.traslation.sortByName = true;
+  settings.translation.sortByName = true;
+
+  settings.translation.sortByName = oldValue;
 });
 test("Localize the group and item text", () => {
   const question: QuestionCheckboxModel = new QuestionCheckboxModel("q1");

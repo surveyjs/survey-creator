@@ -1,5 +1,6 @@
 import { Selector } from "testcafe";
-import { url } from "../helper";
+import { addQuestionByAddQuestionButton, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
+
 const title = "Add new question";
 
 fixture`${title}`.page`${url}`.beforeEach(
@@ -21,4 +22,15 @@ test("Add New Question", async t => {
     .click(Selector(".sv-popup:not(.sv-popup--overlay) li").withExactText("Panel").filterVisible())
     .click(Selector(".svc-panel__add-new-question > span").withText("Add Question"))
     .expect(Selector("span").withText("question1").visible).ok();
+});
+
+test("No Add New Question in HTML question placeholder", async t => {
+  await t
+    .maximizeWindow()
+    .expect(getVisibleElement(".svc-question__content").exists).notOk()
+    .hover(getToolboxItemByText("HTML"), { speed: 0.5 })
+    .click(getToolboxItemByText("HTML"), { speed: 0.5 })
+    .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
+
+    .expect(Selector(".sd-question--html+.svc-panel__placeholder_frame .svc-panel__add-new-question > span").withText("Add Question").exists).notOk();
 });
