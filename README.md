@@ -1,4 +1,4 @@
-# Survey Creator
+# Survey Creator / Form Builder by SurveyJS
 
 <a href="https://github.com/surveyjs/survey-creator/issues">
 <img alt="Issues" title="Open Issues" src="https://img.shields.io/github/issues/surveyjs/survey-creator.svg">
@@ -7,29 +7,35 @@
 <img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/surveyjs/survey-creator.svg">
 </a>
 
-The Survey Creator is a visual survey designer / form builder for [SurveyJS](https://github.com/surveyjs/survey-library).
+Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in the JSON format. This configuration can be later used by the [SurveyJS Library](https://github.com/surveyjs/survey-library) to display the survey or form in your application.
 
-Two Survey Creator versions are available. Both versions can be used in jQuery, Knockout, Angular, Vue, and React applications. Differences between them are described in the following help topic: [SurveyJS Creator V2: What's new](https://surveyjs.io/Documentation/Survey-Creator?id=Creator-V2-Whats-New).
+[Try Survey Creator / Form Builder](https://surveyjs.io/create-survey)
 
-## Survey Creator V1
+## Features
 
-Survey Creator V1 is the latest RTM version. It is powered by Knockout. You can find its sources in the [survey-creator](./packages/survey-creator) directory.
+- Native support for React and Knockout
+- Integration of the Knockout version into Angular, Vue, and jQuery applications
+- Modern, customizable UI themes
+- TypeScript support
+- [Community-supported UI localization to 25+ languages](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+- [Integration with any backend framework](https://surveyjs.io/Documentation/Survey-Creator?id=integration-with-backend) (examples for PHP, NodeJS, and ASP.NET included)
+- Survey JSON definitions can be stored in any database
+- [Third-party component integration](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
 
+## Get Started
+
+- [Angular](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-angular)
+- [Vue](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue)
+- [React](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-react)
+- [Knockout / jQuery](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-knockout-jquery)
+
+## Resources
+
+- [Website](https://surveyjs.io/)
+- [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
 - [Live Examples](https://surveyjs.io/Examples/Survey-Creator)
-- [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
-- [Create your Survey or Form now](https://surveyjs.io/create-survey/)
+- [What's New](https://surveyjs.io/WhatsNew)
 
-## Survey Creator V2
+## Licensing
 
-Survey Creator V2 is a successor of V1. It has an updated design and separates survey model from the UI.
-
-V2 is also planned to be independent from Knockout. [React version](./packages/survey-creator-react) does not require Knockout already. Versions for other frameworks are scheduled for development. Until then, you can use the [Knockout version](./packages/survey-creator-knockout) with any framework.
-
-- [Live Examples](https://surveyjs.io/Examples/Survey-Creator?platform=KnockoutjsV2)
-- [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
-- [Create your Survey or Form now](https://surveyjs.io/create-survey-v2)
-- [How to Migrate from V1 to V2](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2)
-
-## License
-
-The Survey Creator (Form Builder) is **not available for free commercial usage**. You can find more information about licensing this product on the following page: [Licenses](http://surveyjs.io/Licenses).
+Survey Creator is **not available for free commercial usage**. If you want to integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/Licenses#SurveyCreator). However, you can use [online Survey Creator](https://surveyjs.io/create-survey) to produce JSON survey configurations and use them with SurveyJS in your application free of charge.
