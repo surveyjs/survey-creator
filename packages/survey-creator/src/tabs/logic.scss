@@ -114,7 +114,7 @@ $logic-space: 20px;
     margin-bottom: 0;
   }
   .icon-expression-arrow {
-    margin-right: $logic-space / 2;
+    margin-right: calc($logic-space / 2);
   }
   .svd-propertyeditor-condition {
     border: solid 1px $secondary-border-color;
