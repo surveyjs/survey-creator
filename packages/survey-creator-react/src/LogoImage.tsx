@@ -18,6 +18,9 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
   protected createModel(): void {
     this.model = new LogoImageViewModel(this.props.data, null);
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["data"];
+  }
   protected getStateElement(): Base {
     return this.model;
   }
