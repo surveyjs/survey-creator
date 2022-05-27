@@ -2710,3 +2710,8 @@ test("onSurveyPropertyValueChanged event", () => {
   expect(propertyName).toEqual("title");
   expect(propertyValue).toEqual("New Question");
 });
+test("showPropertyGrid: false generates error", () => {
+  const options = { showPropertyGrid: false };
+  const creator = new CreatorTester(options);
+  expect(creator.sidebar.visible).toBeFalsy();
+});
