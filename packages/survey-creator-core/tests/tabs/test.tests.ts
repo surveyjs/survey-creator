@@ -443,3 +443,76 @@ test("Show the start page and apply navigation for it", (): any => {
   expect(model.simulator.survey.activePage.name).toEqual("page1");
   expect(model.prevPageAction.enabled).toBeFalsy();
 });
+test("Prev/Next actions enabled/disabled", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    title: {
+      default: "My Survey",
+      de: "Meine Umfrage"
+    },
+    pages: [{
+      name: "page1",
+      elements: [{
+        type: "checkbox",
+        name: "string_editor",
+        choices: ["item1", "item2", "item3"]
+      },
+      {
+        type: "text",
+        name: "hidden_question",
+        visible: false
+      }],
+      title: {
+        default: "First page",
+        de: "Erste Seite"
+      }
+    },
+    {
+      name: "page2",
+      elements: [{
+        type: "text",
+        name: "question1"
+      }],
+      title: {
+        default: "Second page",
+        de: "Zweite Seite"
+      }
+    },
+    {
+      name: "page3",
+      elements: [{
+        type: "text",
+        name: "question2"
+      }]
+    }]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(model.pageListItems).toHaveLength(3);
+  expect(model.activePage.name).toEqual("page1");
+  expect(model.simulator.survey.state).toEqual("running");
+  expect(model.simulator.survey.activePage.name).toEqual("page1");
+  expect(model.prevPageAction.enabled).toBeFalsy();
+  expect(model.nextPageAction.enabled).toBeTruthy();
+  model.nextPageAction.action();
+  expect(model.simulator.survey.activePage.name).toEqual("page2");
+  expect(model.prevPageAction.enabled).toBeTruthy();
+  expect(model.nextPageAction.enabled).toBeTruthy();
+  model.nextPageAction.action();
+  expect(model.simulator.survey.activePage.name).toEqual("page3");
+  expect(model.prevPageAction.enabled).toBeTruthy();
+  expect(model.nextPageAction.enabled).toBeFalsy();
+  model.activePage = model.survey.pages[1];
+  expect(model.simulator.survey.activePage.name).toEqual("page2");
+  expect(model.prevPageAction.enabled).toBeTruthy();
+  expect(model.nextPageAction.enabled).toBeTruthy();
+  model.activePage = model.survey.pages[0];
+  expect(model.simulator.survey.activePage.name).toEqual("page1");
+  expect(model.prevPageAction.enabled).toBeFalsy();
+  expect(model.nextPageAction.enabled).toBeTruthy();
+  model.activePage = model.survey.pages[2];
+  expect(model.simulator.survey.activePage.name).toEqual("page3");
+  expect(model.prevPageAction.enabled).toBeTruthy();
+  expect(model.nextPageAction.enabled).toBeFalsy();
+});
