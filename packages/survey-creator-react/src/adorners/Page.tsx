@@ -4,10 +4,10 @@ import {
   Popup,
   SurveyActionBar,
   ReactElementFactory,
-  SurveyElementBase,
   SurveyPage,
   SvgIcon
 } from "survey-react-ui";
+import { CreatorModelElement } from "../ModelElement";
 import {
   CreatorBase,
   PageAdorner,
@@ -23,7 +23,7 @@ interface ICreatorSurveyPageComponentProps {
   page: PageModel;
 }
 
-export class CreatorSurveyPageComponent extends SurveyElementBase<
+export class CreatorSurveyPageComponent extends CreatorModelElement<
   ICreatorSurveyPageComponentProps,
   any
 > {
@@ -31,11 +31,16 @@ export class CreatorSurveyPageComponent extends SurveyElementBase<
   private rootRef: React.RefObject<HTMLDivElement>;
   constructor(props: ICreatorSurveyPageComponentProps) {
     super(props);
+    this.rootRef = React.createRef();
+  }
+  protected createModel(): void {
     this.model = new PageAdorner(
       this.props.creator,
       this.props.page
     );
-    this.rootRef = React.createRef();
+  }
+  protected getUpdatedModelProps(): string[] {
+    return ["creator", "page"];
   }
   protected getStateElement(): Base {
     return this.model;

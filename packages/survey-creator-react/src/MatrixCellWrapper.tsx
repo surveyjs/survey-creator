@@ -4,9 +4,9 @@ import { MatrixCellWrapperViewModel, toggleHovered } from "survey-creator-core";
 import {
   attachKey2click,
   ReactElementFactory,
-  SurveyElementBase,
   SvgIcon
 } from "survey-react-ui";
+import { CreatorModelElement } from "./ModelElement";
 
 interface MatrixCellAdornerComponentProps {
   element: JSX.Element;
@@ -15,13 +15,12 @@ interface MatrixCellAdornerComponentProps {
   cell: any;
 }
 
-export class MatrixCellAdornerComponent extends SurveyElementBase<
+export class MatrixCellAdornerComponent extends CreatorModelElement<
   MatrixCellAdornerComponentProps,
   any
 > {
   model: MatrixCellWrapperViewModel;
-  constructor(props: MatrixCellAdornerComponentProps) {
-    super(props);
+  protected createModel(): void {
     const data = this.props.componentData;
     this.model = new MatrixCellWrapperViewModel(
       data.creator,
@@ -30,6 +29,9 @@ export class MatrixCellAdornerComponent extends SurveyElementBase<
       data.row,
       data.column,
     );
+  }
+  protected getUpdatedModelProps(): string[] {
+    return ["componentData"];
   }
   componentDidUpdate(prevProps: any, prevState: any) {
     super.componentDidUpdate(prevProps, prevState);

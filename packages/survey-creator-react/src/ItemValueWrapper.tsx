@@ -5,9 +5,9 @@ import { QuestionSelectBase, Base, ItemValue } from "survey-core";
 import {
   attachKey2click,
   ReactElementFactory,
-  SurveyElementBase,
   SvgIcon
 } from "survey-react-ui";
+import { CreatorModelElement } from "./ModelElement";
 
 interface ItemValueAdornerComponentProps {
   element: JSX.Element;
@@ -16,18 +16,20 @@ interface ItemValueAdornerComponentProps {
   item: ItemValue;
 }
 
-export class ItemValueAdornerComponent extends SurveyElementBase<
+export class ItemValueAdornerComponent extends CreatorModelElement<
   ItemValueAdornerComponentProps,
   any
 > {
   model: ItemValueWrapperViewModel;
-  constructor(props: ItemValueAdornerComponentProps) {
-    super(props);
+  protected createModel(): void {
     this.model = new ItemValueWrapperViewModel(
       this.props.componentData.creator,
       this.props.question,
       this.props.item
     );
+  }
+  protected getUpdatedModelProps(): string[] {
+    return ["question", "item"];
   }
   protected getStateElement(): Base {
     return this.model;

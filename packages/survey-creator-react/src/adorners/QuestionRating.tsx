@@ -1,14 +1,14 @@
 import React from "react";
 import { Base } from "survey-core";
 import { QuestionRatingAdornerViewModel } from "survey-creator-core";
-import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { attachKey2click, ReactElementFactory, SvgIcon } from "survey-react-ui";
 import { QuestionAdornerComponentProps } from "./Question";
+import { CreatorModelElement } from "../ModelElement";
 
-export class QuestionRatingAdornerComponent extends SurveyElementBase<QuestionAdornerComponentProps, any> {
+export class QuestionRatingAdornerComponent extends CreatorModelElement<QuestionAdornerComponentProps, any> {
   private modelValue: QuestionRatingAdornerViewModel;
 
-  constructor(props: QuestionAdornerComponentProps) {
-    super(props);
+  protected createModel(): void {
     this.modelValue = this.createQuestionViewModel();
   }
   protected createQuestionViewModel(): QuestionRatingAdornerViewModel {
@@ -18,10 +18,12 @@ export class QuestionRatingAdornerComponent extends SurveyElementBase<QuestionAd
       null
     );
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["question", "componentData"];
+  }
   public get ratingModel(): QuestionRatingAdornerViewModel {
     return this.model as QuestionRatingAdornerViewModel;
   }
-
   public get model(): QuestionRatingAdornerViewModel {
     return this.modelValue;
   }

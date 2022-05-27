@@ -5,12 +5,12 @@ import { Base, Question } from "survey-core";
 import {
   SurveyActionBar,
   ReactElementFactory,
-  SurveyElementBase,
   SurveyQuestion,
   attachKey2click,
   SvgIcon,
   Popup
 } from "survey-react-ui";
+import { CreatorModelElement } from "../ModelElement";
 
 export interface QuestionAdornerComponentProps {
   element: JSX.Element;
@@ -18,15 +18,14 @@ export interface QuestionAdornerComponentProps {
   componentData: any;
 }
 
-export class QuestionAdornerComponent extends SurveyElementBase<
+export class QuestionAdornerComponent extends CreatorModelElement<
   QuestionAdornerComponentProps,
   any
 > {
   private modelValue: QuestionAdornerViewModel;
   protected rootRef: React.RefObject<HTMLDivElement>;
 
-  constructor(props: QuestionAdornerComponentProps) {
-    super(props);
+  protected createModel(): void {
     this.modelValue = this.createQuestionViewModel();
   }
   protected createQuestionViewModel(): QuestionAdornerViewModel {
@@ -35,6 +34,9 @@ export class QuestionAdornerComponent extends SurveyElementBase<
       this.props.question,
       null
     );
+  }
+  protected getUpdatedModelProps(): string[] {
+    return ["question", "componentData"];
   }
   public get model(): QuestionAdornerViewModel {
     return this.modelValue;

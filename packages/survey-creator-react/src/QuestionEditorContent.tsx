@@ -12,9 +12,6 @@ export class QuestionEditorContentComponent extends React.Component<
   IQuestionEditorContentComponentProps,
   any
 > implements ISurveyCreator {
-  constructor(props: IQuestionEditorContentComponentProps) {
-    super(props);
-  }
   get survey() {
     return this.props.survey;
   }

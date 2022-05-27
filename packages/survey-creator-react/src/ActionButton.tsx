@@ -2,10 +2,6 @@ import React from "react";
 import { attachKey2click, SurveyElementBase, } from "survey-react-ui";
 
 export class ActionButton extends SurveyElementBase<any, any> {
-  constructor(props: any) {
-    super(props);
-  }
-
   renderElement(): JSX.Element {
     let classes = this.props.classes + " svc-action-button";
     if (this.props.selected) {

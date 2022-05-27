@@ -4,20 +4,20 @@ import {
   unwrap
 } from "survey-core";
 import {
-  SurveyElementBase,
   SvgIcon,
   Popup,
   attachKey2click
 } from "survey-react-ui";
 import { PageNavigatorViewModel, PagesController } from "survey-creator-core";
 import React from "react";
+import { CreatorModelElement } from "./ModelElement";
 
 interface ISurveyPageNavigatorProps {
   pagesController: PagesController;
   pageEditMode: string;
 }
 
-export class SurveyPageNavigator extends SurveyElementBase<
+export class SurveyPageNavigator extends CreatorModelElement<
   ISurveyPageNavigatorProps,
   any
 > {
@@ -27,12 +27,16 @@ export class SurveyPageNavigator extends SurveyElementBase<
   constructor(props: ISurveyPageNavigatorProps) {
     super(props);
     this.containerRef = React.createRef();
+  }
+  protected createModel(): void {
     this.model = new PageNavigatorViewModel(
-      props.pagesController,
-      props.pageEditMode
+      this.props.pagesController,
+      this.props.pageEditMode
     );
   }
-
+  protected getUpdatedModelProps(): string[] {
+    return ["pagesController", "pageEditMode"];
+  }
   protected getStateElement(): Base {
     return this.model;
   }
@@ -88,10 +92,7 @@ export class SurveyPageNavigator extends SurveyElementBase<
     );
   }
 }
-export class SurveyPageNavigatorItem extends SurveyElementBase<any, any> {
-  constructor(props: IAction) {
-    super(props);
-  }
+export class SurveyPageNavigatorItem extends CreatorModelElement<any, any> {
   protected getStateElement(): Base {
     return this.props.item as Base;
   }

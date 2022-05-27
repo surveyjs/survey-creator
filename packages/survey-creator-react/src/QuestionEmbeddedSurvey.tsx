@@ -3,9 +3,6 @@ import { ReactQuestionFactory, SurveyPage, ISurveyCreator, SurveyQuestionElement
 import { QuestionEmbeddedSurveyModel } from "survey-creator-core";
 
 export class SurveyElementEmbeddedSurvey extends SurveyQuestionElementBase {
-  constructor(props: any) {
-    super(props);
-  }
   protected get embeddedSurvey(): QuestionEmbeddedSurveyModel {
     return (this.props.element || this.props.question) as QuestionEmbeddedSurveyModel;
   }

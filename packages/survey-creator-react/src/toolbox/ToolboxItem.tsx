@@ -13,9 +13,9 @@ import {
 import {
   attachKey2click,
   ReactElementFactory,
-  SurveyElementBase,
   SvgIcon
 } from "survey-react-ui";
+import { CreatorModelElement } from "../ModelElement";
 
 export interface ISurveyCreatorToolboxItemProps {
   item: IQuestionToolboxItem;
@@ -23,7 +23,7 @@ export interface ISurveyCreatorToolboxItemProps {
   isCompact: boolean;
 }
 
-export class SurveyCreatorToolboxTool extends SurveyElementBase<
+export class SurveyCreatorToolboxTool extends CreatorModelElement<
   ISurveyCreatorToolboxItemProps,
   any
 > {
@@ -31,7 +31,12 @@ export class SurveyCreatorToolboxTool extends SurveyElementBase<
 
   constructor(props) {
     super(props);
+  }
+  protected createModel(): void {
     this.model = new ToolboxToolViewModel(this.item, this.props.creator);
+  }
+  protected getUpdatedModelProps(): string[] {
+    return ["creator", "item"];
   }
   public get item() {
     return this.props.item;
@@ -76,15 +81,20 @@ export class SurveyCreatorToolboxTool extends SurveyElementBase<
   }
 }
 
-export class SurveyCreatorToolboxItem extends SurveyElementBase<
+export class SurveyCreatorToolboxItem extends CreatorModelElement<
   ISurveyCreatorToolboxItemProps,
   any
 > {
   model: ToolboxToolViewModel;
   constructor(props) {
     super(props);
+  }
+  protected createModel(): void {
     const toolboxItem: IQuestionToolboxItem = this.props.item;
     this.model = new ToolboxToolViewModel(toolboxItem, this.props.creator);
+  }
+  protected getUpdatedModelProps(): string[] {
+    return ["creator", "item"];
   }
   public get item() {
     return this.props.item;
