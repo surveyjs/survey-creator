@@ -2715,3 +2715,25 @@ test("showPropertyGrid: false generates error", () => {
   const creator = new CreatorTester(options);
   expect(creator.sidebar.visible).toBeFalsy();
 });
+test("Test options, setting some of them can generate errors", () => {
+  const options = {
+    isAutoSave: true,
+    showJSONEditorTab: false,
+    showElementEditorAsPropertyGrid: true,
+    showLogicTab: true,
+    showEmbededSurveyTab: false,
+    showSidebar: true,
+    showSimulatorInTestSurveyTab: true,
+    showTestSurveyTab: true,
+    showPropertyGrid: "right",
+    showToolbox: "right",
+    showTranslationTab: false,
+    showPagesToolbox: true,
+    allowControlSurveyTitleVisibility: false,
+    showState: true,
+    showTitle: true,
+    haveCommercialLicense: true
+  };
+  const creator = new CreatorTester(options);
+  expect(creator.sidebar.visible).toBeTruthy();
+});

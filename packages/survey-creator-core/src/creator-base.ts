@@ -2866,6 +2866,7 @@ export class CreatorBase extends Base
   @property({ defaultValue: false }) isMobileView;
   @property({
     defaultValue: "left", onSet: (newValue, target: CreatorBase) => {
+      if(!target.toolbox) return;
       target.toolbox.setLocation(newValue);
       target.updateToolboxIsCompact();
     }
