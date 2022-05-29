@@ -71,10 +71,10 @@ export class SurveyResults extends CreatorModelElement<
         <table>
           <thead>
             <tr className="svd-light-background-color">
-              <th className="svd-dark-border-color">
+              <th key={1} className="svd-dark-border-color">
                 {this.model.resultsTitle}
               </th>
-              <th className="svd-dark-border-color">
+              <th key={2} className="svd-dark-border-color">
                 {this.model.resultsDisplayValue}
               </th>
             </tr>
@@ -85,7 +85,11 @@ export class SurveyResults extends CreatorModelElement<
     );
   }
   static renderRows(data: Array<any>): Array<JSX.Element> {
-    return data.map((item) => <SurveyResultsByRow key={item.id} row={item} />);
+    const rows = [];
+    for(var i = 0; i < data.length; i ++) {
+      rows.push(<SurveyResultsByRow key={i + 1} row={data[i]} />);
+    }
+    return rows;
   }
 }
 
@@ -102,7 +106,7 @@ export class SurveyResultsByRow extends CreatorModelElement<any, any> {
     return (
       <>
         {attachKey2click(<tr onClick={() => this.row.toggle()}>
-          <td
+          <td key={1}
             style={{ paddingLeft: this.row.textMargin }}
             className="svd-dark-border-color">
 
@@ -119,7 +123,7 @@ export class SurveyResultsByRow extends CreatorModelElement<any, any> {
 
             <span>{this.row.title}</span>
           </td>
-          <td className={this.row.isNode ? "svd-test-results__node-value" : "svd-dark-border-color"}>
+          <td key={2} className={this.row.isNode ? "svd-test-results__node-value" : "svd-dark-border-color"}>
             {this.row.getString(this.row.displayValue)}
           </td>
         </tr>)}
