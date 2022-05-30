@@ -195,7 +195,7 @@ export var simulatorDevices = {
   //   cssClass: "svd-simulator-iphone4"
   // },
   iPhone5: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 1.83,
     ppi: 326,
     width: 640,
     height: 1136,
