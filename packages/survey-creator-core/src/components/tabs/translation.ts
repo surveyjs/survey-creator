@@ -289,15 +289,17 @@ export class TranslationGroup extends TranslationItemBase {
       var value = this.obj[property.name];
       //If ItemValue array?
       if (this.isItemValueArray(value)) {
-        var group = new TranslationGroup(
-          property.name,
-          value,
-          this.translation,
-          editorLocalization.getPropertyName(property.name),
-          true
-        );
-        if (group.hasItems) {
-          this.itemValues.push(group);
+        if(this.canShowProperty(property, Array.isArray(value) && value.length > 0)) {
+          const group = new TranslationGroup(
+            property.name,
+            value,
+            this.translation,
+            editorLocalization.getPropertyName(property.name),
+            true
+          );
+          if (group.hasItems) {
+            this.itemValues.push(group);
+          }
         }
       } else {
         this.createGroups(value, property);
@@ -340,12 +342,16 @@ export class TranslationGroup extends TranslationItemBase {
     }
     return res;
   }
+  private canShowProperty(property: JsonObjectProperty, isEmpty: boolean): boolean {
+    if (!!this.translation && !this.translation.canShowProperty(this.obj, property, isEmpty)) return false;
+    return true;
+  }
   private createTranslationItem(obj: any, property: JsonObjectProperty): TranslationItem {
     const defaultValue = this.getDefaultValue(obj, property);
     const locStr = <LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
-    if (!!this.translation && !this.translation.canShowProperty(obj, property, locStr.isEmpty)) return null;
+    if (!this.canShowProperty(property, locStr.isEmpty)) return null;
     return new TranslationItem(
       property.name,
       locStr,
