@@ -779,6 +779,29 @@ test("onTranslationStringVisibility", () => {
   expect(translation.root.groups[0].items[0].name).toEqual("title");
   expect(translation.root.groups[1].name).toEqual("page2");
 });
+test("onTranslationStringVisibility for itemvalues", (): void => {
+  Serializer.addProperty("survey", { name: "surveyItems:itemvalues" });
+  const creator = new CreatorTester();
+  creator.JSON = {
+    title: "Survey title",
+    surveyItems: [
+      { value: 1, text: "Item 1" },
+      { value: 2, text: "Item 2" }
+    ]
+  };
+  creator.onTranslationStringVisibility.add((sender, options) => {
+    if (options.propertyName === "surveyItems") {
+      options.visible = false;
+    }
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+
+  expect(translation.root.items).toHaveLength(1);
+  expect(translation.root.items[0].name).toEqual("title");
+  Serializer.removeProperty("survey", "surveyItems");
+});
 test("empty title placeholders", () => {
   const survey = new SurveyModel({
     "pages": [
