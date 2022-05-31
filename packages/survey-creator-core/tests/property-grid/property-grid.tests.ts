@@ -1417,8 +1417,9 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(choicesQuestion.allowRemoveRows).toEqual(false);
   const actions = choicesQuestion.getTitleActions();
   expect(actions).toHaveLength(2);
+  const updater = getAddItemActionEnableUpdater(choicesQuestion);
   expect(actions[0].enabled).toBeFalsy();
-  expect(actions[1].enabled).toBeFalsy();
+  expect(updater()).toBeFalsy();
 });
 
 test("options.onValueChangingCallback", () => {
