@@ -3,7 +3,9 @@
 .svc-logo-image {
   position: relative;
   justify-content: flex-end;
-  margin-top: calcSize(2);
+  align-items: center;
+  display: flex;
+  padding: calcSize(2);
   .svc-image-item-value-controls {
     display: block;
   }
@@ -16,4 +18,11 @@
   cursor: pointer;
   white-space: nowrap;
   word-break: keep-all;
+  padding: 0;
+  width: calcSize(4);
+  height: calcSize(4);
+  svg {
+    width: calcSize(4);
+    height: calcSize(4);
+  }
 }

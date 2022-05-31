@@ -19,14 +19,14 @@ test("Set logo in property grid and remove it in designer", async (t) => {
     .pressKey("tab")
     .expect(Selector("img").withAttribute("src", base64image).exists).ok()
     .click(Selector(".svc-logo-image .svc-image-item-value-controls__remove"))
-    .expect(Selector("div").withText("[LOGO]").exists).ok();
+    .expect(Selector(".svc-logo-image-placeholder svg").exists).ok();
 });
 
 test("Set logo in designer, change it and check it in test tab", async (t) => {
   await setJSON({ pages: [{ name: "page1" }] });
   await t
     .setFilesToUpload(Selector(".svc-logo-image input[type=file]"), "./image.jpg")
-    .click(Selector(".svc-logo-image-placeholder").withText("[LOGO]"));
+    .click(Selector(".svc-logo-image-placeholder svg"));
 
   const logoImage = await ClientFunction(() => {
     return "img." + window["creator"].survey.css.logoImage;
