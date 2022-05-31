@@ -102,13 +102,9 @@
 .sl-table__cell--actions {
   position: absolute;
   width: max-content;
+
   &:first-child {
-    left: 0;
     transform: translateX(-100%);
-  }
-  &:last-child {
-    right: 0;
-    transform: translateX(100%);
   }
 }
 
