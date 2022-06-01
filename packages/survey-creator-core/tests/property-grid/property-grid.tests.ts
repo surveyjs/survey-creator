@@ -31,7 +31,7 @@ import {
   QuestionMatrixDropdownModel,
   IAction,
   QuestionRatingModel,
-  QuestionCustomModel,
+  ComputedUpdater,
   surveyLocalization,
   AdaptiveActionContainer,
   QuestionCommentModel,
@@ -1417,8 +1417,9 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(choicesQuestion.allowRemoveRows).toEqual(false);
   const actions = choicesQuestion.getTitleActions();
   expect(actions).toHaveLength(2);
+  const updater = getAddItemActionEnableUpdater(choicesQuestion);
   expect(actions[0].enabled).toBeFalsy();
-  expect(actions[1].enabled).toBeFalsy();
+  expect(updater()).toBeFalsy();
 });
 
 test("options.onValueChangingCallback", () => {
@@ -1867,6 +1868,9 @@ function getAddItemAction(question: Question): IAction {
   }
   return addAction;
 }
+function getAddItemActionEnableUpdater(question: Question): () => any {
+  return (<ComputedUpdater><any>getAddItemAction(question).enabled).updater;
+}
 test("Support maximumColumnsCount option", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
@@ -1880,11 +1884,12 @@ test("Support maximumColumnsCount option", () => {
   expect(editQuestion.maxRowCount).toEqual(3);
   const addAction = getAddItemAction(editQuestion);
   expect(addAction).toBeTruthy();
-  expect(addAction.enabled).toBeTruthy();
+  const updater = getAddItemActionEnableUpdater(editQuestion);
+  expect(updater()).toBeTruthy();
   question.addColumn("col3");
-  expect(addAction.enabled).toBeFalsy();
+  expect(updater()).toBeFalsy();
   question.columns.splice(2, 1);
-  expect(addAction.enabled).toBeTruthy();
+  expect(updater()).toBeTruthy();
 });
 test("Support maximumChoicesCount option", () => {
   var question = new QuestionDropdownModel("q1");
@@ -1899,9 +1904,12 @@ test("Support maximumChoicesCount option", () => {
   expect(editQuestion.maxRowCount).toEqual(3);
   const addAction = getAddItemAction(editQuestion);
   expect(addAction).toBeTruthy();
-  expect(addAction.enabled).toBeTruthy();
+  const updater = getAddItemActionEnableUpdater(editQuestion);
+  expect(updater()).toBeTruthy();
   question.choices.push(new ItemValue("item3"));
-  expect(addAction.enabled).toBeFalsy();
+  expect(updater()).toBeFalsy();
+  question.choices.splice(0, 1);
+  expect(updater()).toBeTruthy();
 });
 test("Support maximumRowsCount option", () => {
   const testMaxRows = (question: any) => {
@@ -1916,9 +1924,10 @@ test("Support maximumRowsCount option", () => {
     expect(editQuestion.maxRowCount).toEqual(3);
     const addAction = getAddItemAction(editQuestion);
     expect(addAction).toBeTruthy();
-    expect(addAction.enabled).toBeTruthy();
+    const updater = getAddItemActionEnableUpdater(editQuestion);
+    expect(updater()).toBeTruthy();
     question.rows.push(new ItemValue("row3"));
-    expect(addAction.enabled).toBeFalsy();
+    expect(updater()).toBeFalsy();
   };
   testMaxRows(new QuestionMatrixDropdownModel("q1"));
   testMaxRows(new QuestionMatrixModel("q1"));
@@ -1936,9 +1945,10 @@ test("Support maximumColumnsCount option in single matrix", () => {
   expect(editQuestion.maxRowCount).toEqual(3);
   const addAction = getAddItemAction(editQuestion);
   expect(addAction).toBeTruthy();
-  expect(addAction.enabled).toBeTruthy();
+  const updater = getAddItemActionEnableUpdater(editQuestion);
+  expect(updater()).toBeTruthy();
   question.columns.push(new ItemValue("col3"));
-  expect(addAction.enabled).toBeFalsy();
+  expect(updater()).toBeFalsy();
 });
 test("Support maximumRateValuesCount option", () => {
   var question = new QuestionRatingModel("q1");
@@ -1953,9 +1963,10 @@ test("Support maximumRateValuesCount option", () => {
   expect(editQuestion.maxRowCount).toEqual(3);
   const addAction = getAddItemAction(editQuestion);
   expect(addAction).toBeTruthy();
-  expect(addAction.enabled).toBeTruthy();
+  const updater = getAddItemActionEnableUpdater(editQuestion);
+  expect(updater()).toBeTruthy();
   question.rateValues.push(new ItemValue("item3"));
-  expect(addAction.enabled).toBeFalsy();
+  expect(updater()).toBeFalsy();
 });
 test("Edit columns in property grid", () => {
   var question = new QuestionMatrixDynamicModel("q1");

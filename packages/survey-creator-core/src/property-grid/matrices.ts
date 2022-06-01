@@ -107,23 +107,8 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       action: () => {
         question.addRow();
       },
-      enabled: question.canAddRow
+      enabled: <any>new ComputedUpdater<boolean>(() => (<QuestionMatrixDropdownModelBase>question).canAddRow)
     });
-  }
-  public onValueChanged(
-    obj: Base,
-    prop: JsonObjectProperty,
-    question: Question
-  ) {
-    this.updateTitleActions(question);
-  }
-  protected updateTitleActions(question: Question) {
-    const addAction: IAction = question.titleActions.filter(
-      (item: IAction) => item.id === "add-item"
-    )[0];
-    if (!!addAction) {
-      addAction.enabled = (<QuestionMatrixDropdownModelBase>question).canAddRow;
-    }
   }
   protected createNewItem(
     matrix: QuestionMatrixDynamicModel,
