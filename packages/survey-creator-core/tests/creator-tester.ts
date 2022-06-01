@@ -1,8 +1,8 @@
 import { SurveyModel, IAction, Base } from "survey-core";
-import { CreatorBase, ICreatorOptions, isStringEditable } from "../src/creator-base";
+import { CreatorBase, ICreatorOptions, isStringEditable, DesignTimeSurveyModel as DesignTimeSurveyModelOriginal } from "../src/creator-base";
 import { settings as creatorSetting } from "../src/settings";
 
-class DesignTimeSurveyModel extends SurveyModel {
+class DesignTimeSurveyModel extends DesignTimeSurveyModelOriginal {
   constructor(public creator: CreatorTester, jsonObj?: any) {
     super(jsonObj);
   }
