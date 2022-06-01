@@ -28,7 +28,7 @@ export class ItemValueWrapperViewModel extends Base {
     public item: ItemValue
   ) {
     super();
-    this.isNew = !question.isItemInList(item);
+    this.updateIsNew(question, item);
     if (question.noneItem === item) {
     } else if (question.otherItem === item) {
     } else if (
@@ -119,12 +119,13 @@ export class ItemValueWrapperViewModel extends Base {
     ) {
       (<any>model.question).hasSelectAll = true;
     } else {
+      model.item.value = "newitem";
       const itemValue = model.creator.createNewItemValue(model.question);
       model.question.choices.push(itemValue);
       const nextValue = model.creator.getNextItemValue(model.question);
       model.item.value = nextValue;
     }
-    this.isNew = !model.question.isItemInList(model.item);
+    this.updateIsNew(model.question, model.item);
   }
   public remove(model: ItemValueWrapperViewModel) {
     if (model.question.noneItem === model.item) {
@@ -140,7 +141,10 @@ export class ItemValueWrapperViewModel extends Base {
       var index = model.question.choices.indexOf(model.item);
       model.question.choices.splice(index, 1);
     }
-    this.isNew = !model.question["isItemInList"](model.item);
+    this.updateIsNew(model.question, model.item);
+  }
+  private updateIsNew(question: QuestionSelectBase, item: ItemValue) {
+    this.isNew = !question.isItemInList(item);
   }
 
   get allowRemove() {
