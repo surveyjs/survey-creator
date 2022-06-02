@@ -861,6 +861,7 @@ export class CreatorBase extends Base
    * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
    */
   public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
   /**
    * Use this event to control drag&drop operations.
    * <br/> sender the survey creator object that fires the event.
@@ -876,6 +877,31 @@ export class CreatorBase extends Base
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
+  /**
+   * Use this event to override/disable element adorners - wrapping component name.
+   * <br/> sender the survey creator object that fires the event.
+   * <br/> options.element a survey object to be wrapped.
+   * <br/> options.reason why we need to wrap an element.
+   * <br/> options.conponentName component wrapper name.
+   */
+  public onGetElementWrapperComponentName: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
+  /**
+   * Use this event to override/disable element adorners - wrapping component data.
+   * <br/> sender the survey creator object that fires the event.
+   * <br/> options.element a survey object to be wrapped.
+   * <br/> options.reason why we need to wrap an element.
+   * <br/> options.conponentData component wrapper data.
+   */
+  public onGetElementWrapperComponentData: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+
   /**
    * This callback is used internally for providing survey JSON text.
    */
@@ -2923,9 +2949,15 @@ export class DesignTimeSurveyModel extends SurveyModel {
       reason,
       this.isPopupEditorContent
     );
-    return (
-      componentName || super.getElementWrapperComponentName(element, reason)
-    );
+
+    const options = {
+      element,
+      reason,
+      componentName: componentName || super.getElementWrapperComponentName(element, reason)
+    };
+    this.creator.onGetElementWrapperComponentName.fire(this, options);
+
+    return options.componentName;
   }
   public getQuestionContentWrapperComponentName(element: any, reason?: string): string {
     let componentName = getQuestionContentWrapperComponentName(element);
@@ -2936,7 +2968,15 @@ export class DesignTimeSurveyModel extends SurveyModel {
 
   public getElementWrapperComponentData(element: any, reason?: string): any {
     const data = getElementWrapperComponentData(element, reason, this.creator);
-    return data || super.getElementWrapperComponentData(element);
+
+    const options = {
+      element,
+      reason,
+      componentData: data || super.getElementWrapperComponentData(element)
+    };
+    this.creator.onGetElementWrapperComponentData.fire(this, options);
+
+    return options.componentData;
   }
 
   public getRowWrapperComponentName(row: QuestionRowModel): string {
@@ -3078,3 +3118,9 @@ export function isTextInput(target: any): boolean {
   return false;
 }
 
+export function registerAdorner(name, adorner) {
+  SurveyHelper.warnNonSupported("regsterAdorner", "onGetElementWrapperComponentName and onGetElementWrapperComponentData");
+}
+export function removeAdorners(names: string[] = undefined) {
+  SurveyHelper.warnNonSupported("removeAdorners", "onGetElementWrapperComponentName and onGetElementWrapperComponentData");
+}
