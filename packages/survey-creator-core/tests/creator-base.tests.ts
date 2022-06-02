@@ -1858,7 +1858,9 @@ test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", 
   const q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2 + 4);
   q1.choices.push(new ItemValue("item3"));
+  expect(q1.visibleChoices[4] === q1.newItem).toBeFalsy();
   expect(q1.visibleChoices).toHaveLength(3 + 3);
+  expect(q1.visibleChoices[3].value).toEqual("item3");
 });
 test("QuestionAdornerViewModel for selectbase and creator.readOnly", (): any => {
   const creator = new CreatorTester();

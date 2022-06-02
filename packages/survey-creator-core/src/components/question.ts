@@ -14,7 +14,8 @@ import {
   DragTypeOverMeEnum,
   IAction,
   ComputedUpdater,
-  DragOrClickHelper
+  DragOrClickHelper,
+  QuestionSelectBase
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -49,7 +50,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       (<any>surveyElement).setCanShowOptionItemCallback(
         (item: ItemValue): boolean => {
           if (creator.readOnly) return false;
-          if (item.value !== "newitem") return true;
+          if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
           return (
             creator.maximumChoicesCount < 1 ||
             surveyElement["choices"].length < creator.maximumChoicesCount
