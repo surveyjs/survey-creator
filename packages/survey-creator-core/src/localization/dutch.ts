@@ -115,7 +115,7 @@ export var nlStrings = {
     bold: "Vetgedrukt",
     italic: "Cursief",
     underline: "Onderstrepen",
-    fpAddQuestion: "Vraag toevoegen...",
+    addNewQuestion: "Vraag toevoegen",
     selectPage: "Selecteer pagina...",
     chooseElement: "Kies element...",
     //completedHtmlOnConditionItemText: "Laat zien of:",

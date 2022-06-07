@@ -97,7 +97,7 @@ export var tgStrings = {
     bold: "Ғавс",
     italic: "Қаҷ",
     underline: "Зерхат",
-    fpAddQuestion: "Иловаи савол...",
+    addNewQuestion: "Иловаи савол",
     completedHtmlOnConditionItemText: "Нишон додан, агар:",
     lg: {
       //Logic tab strings

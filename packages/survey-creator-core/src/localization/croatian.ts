@@ -116,7 +116,7 @@ export var hrStrings = {
     bold: "podebljano",
     italic: "kurziv",
     underline: "podcrtavanje",
-    fpAddQuestion: "Dodaj pitanje...",
+    addNewQuestion: "Dodaj pitanje",
     selectPage: "Odaberite stranicu...",
     chooseElement: "Odaberite element...",
     //completedHtmlOnConditionItemText: "Show if:",

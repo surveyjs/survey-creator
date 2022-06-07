@@ -116,7 +116,7 @@ export var nbStrings = {
     bold: "Fet",
     italic: "Kursiv",
     underline: "Underlinjet",
-    fpAddQuestion: "Legg til spørsmål...",
+    addNewQuestion: "Legg til spørsmål",
     selectPage: "Velg side...",
     chooseElement: "Velg element...",
     //completedHtmlOnConditionItemText: "Show if:",

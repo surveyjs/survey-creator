@@ -106,7 +106,7 @@ export var msStrings = {
     bold: "Tebal",
     italic: "Condong",
     underline: "Garis bawah",
-    fpAddQuestion: "Tambahkan soalan...",
+    addNewQuestion: "Tambahkan soalan",
     selectPage: "Pilih halaman...",
     chooseElement: "Pilih elemen...",
     lg: {
