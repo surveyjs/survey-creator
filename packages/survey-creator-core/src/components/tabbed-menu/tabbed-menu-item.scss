@@ -35,9 +35,11 @@
 .svc-tabbed-menu-item--hidden {
   visibility: hidden;
 }
-
-.svc-tabbed-menu-item__text {
-  white-space: nowrap;
+.svc-tabbed-menu-item {
+  .svc-tabbed-menu-item__text {
+    white-space: nowrap;
+    line-height: calcSize(4);
+  }
 }
 
 .svc-tabbed-menu-item-container .sv-dots__item {
