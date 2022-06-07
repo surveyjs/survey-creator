@@ -38,6 +38,22 @@ const jsonComment = {
   ]
 };
 
+const jsonMulti = {
+  "logoPosition": "right",
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "rating",
+          "name": "question1",
+          "rateMax": 20
+        }
+      ]
+    }
+  ]
+};
+
 test("Rating adorners", async (t) => {
   await setJSON(json);
 
@@ -71,6 +87,23 @@ test("Rating adorners with comment", async (t) => {
     .click(question, { offsetY: 40 })
     .expect(Selector(".svc-question__content--selected div[data-name=question1]").visible).ok();
   await takeScreenshot("rating-comment-selected.png", question, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+});
+
+test("Multi row rating adorner", async (t) => {
+  await setJSON(jsonMulti);
+  await t.resizeWindow(1200, 900);
+  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+  const question = Selector("div[data-name=question1]");
+  await takeScreenshot("rating-multiline.png", question, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+
+  await t.resizeWindow(550, 900);
+  await takeScreenshot("rating-multiline-mobile.png", question, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
