@@ -32,6 +32,7 @@ import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import { DesignTimeSurveyModel, isTextInput } from "../src/creator-base";
+import { ItemValueWrapperViewModel } from "../src/components/item-value";
 
 import {
   getElementWrapperComponentData,
@@ -1872,6 +1873,23 @@ test("QuestionAdornerViewModel for selectbase and creator.readOnly", (): any => 
   const q1Model = new QuestionAdornerViewModel(creator, q1, undefined);
   expect(q1.visibleChoices).toHaveLength(2);
 });
+test("QuestionAdornerViewModel for selectbase and creator.onItemValueAdded", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "radiogroup", name: "q1", choices: ["item1", "item2"] }]
+  };
+  creator.onItemValueAdded.add((sender, options) => {
+    options.newItem.text = options.obj.getType() + ":" + options.propertyName + ","
+      + options.newItem.value + "," + options.itemValues.length.toString();
+
+  });
+  const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const newItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.visibleChoices[2]);
+  newItemAdorner.add(newItemAdorner);
+  expect(q1.choices).toHaveLength(3);
+  expect(q1.choices[2].text).toEqual("radiogroup:choices,item3,3");
+});
+
 test("Modify property editor settings on event", (): any => {
   const creator = new CreatorTester();
   creator.onPropertyEditorCreated.add((sender, options) => {

@@ -124,6 +124,7 @@ export class ItemValueWrapperViewModel extends Base {
       model.question.choices.push(itemValue);
       const nextValue = model.creator.getNextItemValue(model.question);
       model.item.value = nextValue;
+      if(this.creator) this.creator.onItemValueAddedCallback(model.question, "choices", itemValue, model.question.choices);
     }
     this.updateIsNew(model.question, model.item);
   }
