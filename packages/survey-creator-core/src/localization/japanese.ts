@@ -16,7 +16,7 @@ export var jaStrings = {
     edit: "編集",
     editPage: "ページを編集する",
     embedSurvey: "アンケートを埋め込む",
-    fpAddQuestion: "質問を追加…",
+    addNewQuestion: "質問を追加",
     generateReadableJSON: "読み取り可能なJSONを生成する",
     generateValidJSON: "有効なJSONを生成する",
     hidePanel: "パネルを非表示にする",

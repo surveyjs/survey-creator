@@ -106,7 +106,7 @@ export var skStrings = {
     bold: "Tučné",
     italic: "Kurzíva",
     underline: "Podčiarknutie",
-    fpAddQuestion: "Pridať otázku...",
+    addNewQuestion: "Pridať otázku",
     selectPage: "Vybrať stránku...",
     chooseElement: "Vybrať prvok...",
     lg: {

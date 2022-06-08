@@ -111,7 +111,7 @@ var persianStrings = {
     "bold": "پررنگ",
     "italic": "مورب",
     "underline": "پایین خط",
-    "fpAddQuestion": "اضافه کردن سوال ...",
+    "addNewQuestion": "اضافه کردن سوال",
     "selectPage": "انتخاب صفحه ...",
     "chooseElement": "انتخاب بخش ...",
     "lg": {

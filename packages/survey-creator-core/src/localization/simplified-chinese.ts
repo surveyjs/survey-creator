@@ -95,7 +95,7 @@ var simplifiedChineseTranslation = {
     bold: "加粗",
     italic: "斜体",
     underline: "下划线",
-    fpAddQuestion: "添加问题",
+    addNewQuestion: "添加问题",
     completedHtmlOnConditionItemText: "显示 if:"
   },
   //Property names in table headers

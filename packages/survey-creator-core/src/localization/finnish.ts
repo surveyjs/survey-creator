@@ -116,7 +116,7 @@ export var fiStrings = {
     bold: "Lihavoitu",
     italic: "Kursiivi",
     underline: "Alleviivaa",
-    fpAddQuestion: "Lisää kysymys...",
+    addNewQuestion: "Lisää kysymys",
     selectPage: "Valitse sivu...",
     chooseElement: "Valitse elementti...",
     //completedHtmlOnConditionItemText: "Näytä jos:",
