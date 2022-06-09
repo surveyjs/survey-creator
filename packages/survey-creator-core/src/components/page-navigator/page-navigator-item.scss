@@ -45,7 +45,8 @@ svc-page-navigator-item,
   @include textEllipsis;
 
   right: calcSize(0.5);
-  display: block;
+  display: flex;
+  align-items: center;
   line-height: calcSize(4);
   animation: 0.5s ease-in;
   padding: 0;
