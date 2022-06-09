@@ -52,12 +52,12 @@
   display: none;
 }
 .sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
+.sl-table__row:focus-within .sl-table__cell .sv-action-bar-item__icon,
 .sl-table__cell .sv-action-bar-item.sv-focused--by-key .sv-action-bar-item__icon {
   display: block;
 }
 
-.sl-table__row:hover #remove-row,
-.sl-table__row #remove-row:focus-within {
+.sl-table__row #remove-row {
   .sv-action-bar-item {
     border: none;
     width: calcSize(5);
