@@ -2161,7 +2161,7 @@ export class CreatorBase extends Base
   }
 
   public selectElement(element: any, propertyName?: string, focus = true) {
-    if(!element || element.isDisposed || ((element.isQuestion || element.isPanel) && !element.parent)) return;
+    if(!!element && (element.isDisposed || ((element.isQuestion || element.isPanel) && !element.parent))) return;
     var oldValue = this.selectedElement;
     if (oldValue !== element) {
       this.selectedElementValue = this.onSelectingElement(element);
