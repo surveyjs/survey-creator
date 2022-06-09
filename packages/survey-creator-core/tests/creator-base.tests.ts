@@ -2763,3 +2763,15 @@ test("onGetElementWrapperComponentName and onGetElementWrapperComponentData even
   creator.survey.getElementWrapperComponentData(element, "test");
   expect(count).toBe(2);
 });
+test("Add and remove question immediately, incorrect selection", (): any => {
+  const creator = new CreatorTester();
+  creator.onQuestionAdded.add((sender, options) => {
+    if (creator.survey.getAllQuestions().length > 1) {
+      options.question.delete();
+    }
+  });
+  creator.addNewQuestionInPage(() => {});
+  creator.addNewQuestionInPage(() => {});
+  expect(creator.survey.currentPage.elements).toHaveLength(1);
+  expect(creator.selectedElementName).toEqual("question1");
+});
