@@ -91,7 +91,7 @@ var frenchTranslation = {
     bold: "Gras",
     italic: "Italique",
     underline: "Souligné",
-    fpAddQuestion: "Ajouter question...",
+    addNewQuestion: "Ajouter question",
     completedHtmlOnConditionItemText: "Afficher si :",
     lg: {
       //Logic tab strings

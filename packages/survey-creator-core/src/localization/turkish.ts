@@ -107,7 +107,7 @@ export var turkishStrings = {
     bold: "Kalın",
     italic: "Italik",
     underline: "Alt Çizgi",
-    fpAddQuestion: "Soru Ekle...",
+    addNewQuestion: "Soru Ekle",
     //completedHtmlOnConditionItemText: "Göster Eğer:",
     lg: {
       //Logic tab strings

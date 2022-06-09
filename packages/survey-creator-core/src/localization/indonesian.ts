@@ -94,7 +94,7 @@ export var indonesianStrings = {
     bold: "Tebal",
     italic: "Miring",
     underline: "Garis Bawah",
-    fpAddQuestion: "Tambah pertanyaan...",
+    addNewQuestion: "Tambah pertanyaan",
     completedHtmlOnConditionItemText: "Tampilkan jika:"
   },
   //Property names in table headers

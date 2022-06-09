@@ -95,7 +95,7 @@ export var huStrings = {
     bold: "Félkövér",
     italic: "Dőlt",
     underline: "Aláhúzott",
-    fpAddQuestion: "Kérdés felvétele...",
+    addNewQuestion: "Kérdés felvétele",
     completedHtmlOnConditionItemText: "Mutatás ha:"
   },
   //Property names in table headers

@@ -99,7 +99,7 @@ export var ruStrings = {
     bold: "Жирный",
     italic: "Курсив",
     underline: "Подчеркивание",
-    fpAddQuestion: "Добавить вопрос...",
+    addNewQuestion: "Добавить вопрос",
     completedHtmlOnConditionItemText: "Показывать, если:",
     lg: {
       addNewItem: "Добавить новое правило",

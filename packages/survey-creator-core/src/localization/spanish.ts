@@ -115,7 +115,7 @@ var spanishTranslation = {
     bold: "Negrita",
     italic: "Itálica",
     underline: "Subrayar",
-    fpAddQuestion: "Añadir pregunta ...",
+    addNewQuestion: "Añadir pregunta",
     selectPage: "Seleccionar página ...",
     chooseElement: "Elige el elemento ...",
     completedHtmlOnConditionItemText: "Mostrar si:",

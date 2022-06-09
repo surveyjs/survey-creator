@@ -45,7 +45,7 @@ export class QuestionConverter {
     for (var key in qJson) {
       json[key] = qJson[key];
     }
-    QuestionConverter.updateJSON(json, convertToClass, defaultJSON);
+    QuestionConverter.updateJSON(json, convertToClass, obj.getType(), defaultJSON);
     newQuestion.fromJSON(json);
     var panel = <Survey.PanelModelBase>obj.parent;
     var index = panel.elements.indexOf(obj);
@@ -54,7 +54,7 @@ export class QuestionConverter {
     newQuestion.onSurveyLoad();
     return <Survey.Question>newQuestion;
   }
-  private static updateJSON(json: any, convertToClass: string, defaultJSON: any): any {
+  private static updateJSON(json: any, convertToClass: string, convertFromClass: string, defaultJSON: any): any {
     let questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
     if(questionDefaultSettings) {
       if(convertToClass === "image" && !json.imageLink) {
@@ -69,7 +69,18 @@ export class QuestionConverter {
         !Survey.Helpers.isArraysEqual(defaultJSON.choices, json.choices)) {
         json.rateValues = json.choices;
       }
-    } else {
+    }
+    if(Survey.Serializer.isDescendantOf(convertToClass, "matrix") &&
+       Survey.Serializer.isDescendantOf(convertFromClass, "matrixdropdown") &&
+       json.columns) {
+      json.columns = json.columns.map(col => col.title ? { value: col.name, text: col.title } : col.name);
+    }
+    if(Survey.Serializer.isDescendantOf(convertToClass, "matrixdropdown") &&
+       Survey.Serializer.isDescendantOf(convertFromClass, "matrix") &&
+       json.columns) {
+      json.columns = json.columns.map(col => <any>{ name: col.value || col, title: col.text });
+    }
+    else {
       if(json.rateValues) {
         json.choices = json.rateValues;
       }
