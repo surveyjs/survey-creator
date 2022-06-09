@@ -8,7 +8,13 @@ import {
   ComponentCollection,
   QuestionRatingModel,
   QuestionImagePickerModel,
-  QuestionImageModel
+  QuestionImageModel,
+  QuestionMatrixDropdownModel,
+  MatrixDropdownColumn,
+  QuestionMatrixModel,
+  Serializer,
+  ElementFactory,
+  QuestionFactory
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
 import { QuestionConvertMode, settings } from "../src/settings";
@@ -148,4 +154,93 @@ test("Convert text and radio question to image picker", () => {
   expect(newQ2.choices).toHaveLength(3);
   expect(newQ2.choices[0].value).toEqual("item1");
   expect(newQ2.choices[0].imageLink).toBeFalsy();
+});
+test("Convert matrix question", () => {
+  var survey = new SurveyModel();
+  var page = survey.addNewPage();
+
+  class QuestionMatrixDropdownModel_New extends QuestionMatrixDropdownModel {
+    getType() { return "matrixdropdown_new"; }
+  }
+  Serializer.addClass("matrixdropdown_new", [], () => {
+    new QuestionMatrixDropdownModel_New("");
+  }, "matrixdropdown");
+  QuestionFactory.Instance.registerQuestion("matrixdropdown_new", (name) => {
+    var q = new QuestionMatrixDropdownModel_New(name);
+    q.choices = [1, 2, 3, 4, 5];
+    q.rows = QuestionFactory.DefaultRows;
+    QuestionMatrixDropdownModel_New.addDefaultColumns(q);
+    return q;
+  });
+
+  class QuestionMatrixModel_New extends QuestionMatrixModel {
+    getType() { return "matrix_new"; }
+  }
+  Serializer.addClass("matrix_new", [], () => {
+    return new QuestionMatrixModel_New("");
+  },
+  "matrix"
+  );
+  QuestionFactory.Instance.registerQuestion("matrix_new", (name) => {
+    var q = new QuestionMatrixModel_New(name);
+    q.rows = QuestionFactory.DefaultRows;
+    q.columns = QuestionFactory.DefaultColums;
+    return q;
+  });
+
+  var q1 = <QuestionMatrixDropdownModel>page.addNewQuestion("matrixdropdown_new");
+  q1.columns[1].title = "Col2";
+  expect(q1.columns[0].title).toEqual("Column 1");
+  expect(q1.columns[0].name).toEqual("Column 1");
+  expect(q1.columns[1].title).toEqual("Col2");
+  expect(q1.columns[1].name).toEqual("Column 2");
+  QuestionConverter.convertObject(q1, "matrix_new");
+  expect((<Base>(<any>page.elements[0])).getType()).toEqual("matrix_new");
+  var newQ1 = <QuestionMatrixModel>page.elements[0];
+  expect(newQ1.columns[0].text).toEqual("Column 1");
+  expect(newQ1.columns[0].value).toEqual("Column 1");
+  expect(newQ1.columns[1].text).toEqual("Col2");
+  expect(newQ1.columns[1].value).toEqual("Column 2");
+
+  var q2 = <QuestionMatrixModel>page.addNewQuestion("matrix_new");
+  q2.columns[1].text = "Col2";
+  expect(q2.columns[0].text).toEqual("Column 1");
+  expect(q2.columns[0].value).toEqual("Column 1");
+  expect(q2.columns[1].text).toEqual("Col2");
+  expect(q2.columns[1].value).toEqual("Column 2");
+  QuestionConverter.convertObject(q2, "matrixdropdown_new");
+  expect((<Base>(<any>page.elements[1])).getType()).toEqual("matrixdropdown_new");
+  var newQ2 = <QuestionMatrixDropdownModel>page.elements[1];
+  expect(newQ2.columns[0].title).toEqual("Column 1");
+  expect(newQ2.columns[0].name).toEqual("Column 1");
+  expect(newQ2.columns[1].title).toEqual("Col2");
+  expect(newQ2.columns[1].name).toEqual("Column 2");
+
+  q1 = <QuestionMatrixDropdownModel>page.addNewQuestion("matrixdropdown");
+  q1.columns[1].title = "Col2";
+  expect(q1.columns[0].title).toEqual("Column 1");
+  expect(q1.columns[0].name).toEqual("Column 1");
+  expect(q1.columns[1].title).toEqual("Col2");
+  expect(q1.columns[1].name).toEqual("Column 2");
+  QuestionConverter.convertObject(q1, "matrix_new");
+  expect((<Base>(<any>page.elements[2])).getType()).toEqual("matrix_new");
+  newQ1 = <QuestionMatrixModel>page.elements[2];
+  expect(newQ1.columns[0].text).toEqual("Column 1");
+  expect(newQ1.columns[0].value).toEqual("Column 1");
+  expect(newQ1.columns[1].text).toEqual("Col2");
+  expect(newQ1.columns[1].value).toEqual("Column 2");
+
+  q2 = <QuestionMatrixModel>page.addNewQuestion("matrix_new");
+  q2.columns[1].text = "Col2";
+  expect(q2.columns[0].text).toEqual("Column 1");
+  expect(q2.columns[0].value).toEqual("Column 1");
+  expect(q2.columns[1].text).toEqual("Col2");
+  expect(q2.columns[1].value).toEqual("Column 2");
+  QuestionConverter.convertObject(q2, "matrixdropdown");
+  expect((<Base>(<any>page.elements[3])).getType()).toEqual("matrixdropdown");
+  newQ2 = <QuestionMatrixDropdownModel>page.elements[3];
+  expect(newQ2.columns[0].title).toEqual("Column 1");
+  expect(newQ2.columns[0].name).toEqual("Column 1");
+  expect(newQ2.columns[1].title).toEqual("Col2");
+  expect(newQ2.columns[1].name).toEqual("Column 2");
 });
