@@ -403,6 +403,7 @@ export class CreatorBase extends Base
    * <br/> "survey-tester-selected" - raised on setting page selector title in "Preview" tab
    * <br/> "survey-translation" - raised from translation tab
    * <br/> "property-grid" - raised from showing object selector for property grid in "Designer" tab.
+   *  <br/> "property-grid-title" - raised on rendering selected object title in property grid in "Designer" tab.
    * @see showObjectTitles
    */
   public onGetObjectDisplayName: Survey.Event<
@@ -2161,6 +2162,7 @@ export class CreatorBase extends Base
   }
 
   public selectElement(element: any, propertyName?: string, focus = true) {
+    if(!!element && (element.isDisposed || ((element.isQuestion || element.isPanel) && !element.parent))) return;
     var oldValue = this.selectedElement;
     if (oldValue !== element) {
       this.selectedElementValue = this.onSelectingElement(element);
