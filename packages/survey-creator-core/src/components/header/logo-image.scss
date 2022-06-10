@@ -26,3 +26,7 @@
     height: calcSize(4);
   }
 }
+
+.svc-logo-image-placeholder use {
+  fill: $foreground-light;
+}
