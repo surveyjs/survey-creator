@@ -206,10 +206,11 @@ test("rule rows", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .hover(Selector(".sl-table__row"))
-    .click(logicDetailButtonElement);
+    .click(logicDetailButtonElement)
+    .hover(Selector(".sv-string-viewer").withText("If"));
   await checkElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t);
 
-  await t.hover(Selector(".sl-dropdown__value").withText("Show (hide) question"));
+  await t.hover(Selector(".sv-string-viewer").withText("then"));
   await checkElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t);
 });
 
