@@ -354,3 +354,36 @@ test("Logo image adorners", async (t) => {
   await setJSON(json);
   await checkElementScreenshot("logo-image-adorners.png", Selector(".svc-logo-image"), t);
 });
+test("Check survey layout in mobile mode", async (t) => {
+  await t.resizeWindow(550, 900);
+  const designerTabContent = Selector(".svc-tab-designer");
+  await setJSON({
+    "title": "Survey title",
+    "description": "Survey description",
+    "showQuestionNumbers": "off",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question11"
+          },
+          {
+            "type": "matrix",
+            "name": "question1",
+            "columns": [
+              "Column 1",
+              "Column 2",
+            ],
+            "rows": [
+              "Row 1",
+              "Row 2"
+            ]
+          }
+        ],
+      }
+    ]
+  });
+  await checkElementScreenshot("designer-survey-layout-mobile.png", designerTabContent, t);
+});
