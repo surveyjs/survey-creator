@@ -99,7 +99,7 @@ const cellRules = Selector(tableRulesSelector.find(".sl-table__cell[data-respons
 const removeRuleButton = Selector(".sl-table__remove-button").filterVisible();
 const disabledClass = "svc-logic-tab__content-action--disabled";
 const addButton = Selector(".sl-paneldynamic__add-btn ").filterVisible();
-const removeButton = Selector(".svc-logic-condition-remove").filterVisible();
+const removeButton = Selector(".svc-logic-condition-remove");
 const doneButton = Selector("button").withExactText("Done").filterVisible();
 
 const errorNotifyBalloonSelector = Selector(".svc-notifier.svc-notifier--error").filterVisible();
@@ -142,10 +142,12 @@ test("Create logic rule", async (t) => {
 
     .click(addButton)
     .expect(removeButton.count).eql(2)
+    .expect(removeButton.filterVisible().count).eql(0)
     .expect(logicOperatorConjuction.count).eql(1)
     .expect(logicQuestionSelector.count).eql(2)
     .expect(logicOperatorSelector.count).eql(2)
 
+    .hover(logicQuestionSelector)
     .click(removeButton)
     .expect(logicQuestionSelector.count).eql(1)
     .expect(logicQuestionSelector.textContent).contains(selectQuestionPlaceHolder)
@@ -188,7 +190,8 @@ test("Create logic rule", async (t) => {
     .expect(errorNotifyBalloonSelector.innerText).eql("Please, fix problems in your action(s).")
     .expect(Selector(".svc-logic-operator.svc-logic-operator--question.svc-logic-operator--error").filterVisible().count).eql(2)
 
-    .click(removeButton)
+    .hover(logicActionSelector)
+    .click(removeButton.filterVisible())
     .expect(removeButton.count).eql(0)
 
     .expect(logicAddNewRuleButton.classNames).contains(disabledClass)
