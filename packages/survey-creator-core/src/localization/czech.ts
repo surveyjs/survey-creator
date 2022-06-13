@@ -16,7 +16,7 @@ export var czStrings = {
     edit: "Upravit",
     editPage: "Upravit stránku",
     embedSurvey: "Vložit průzkum",
-    fpAddQuestion: "Přidat otázku...",
+    addNewQuestion: "Přidat otázku",
     generateReadableJSON: "Generovat čitelný JSON",
     generateValidJSON: "Generovat platný JSON",
     hidePanel: "Skrýt panel",

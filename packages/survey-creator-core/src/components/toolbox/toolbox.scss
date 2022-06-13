@@ -70,6 +70,7 @@ svc-toolbox {
   line-height: calcSize(2);
   color: $foreground;
   vertical-align: middle;
+  display: block;
 }
 
 .svc-toolbox__category-header__controls {
@@ -77,6 +78,10 @@ svc-toolbox {
   right: calcSize(1);
   top: calcSize(1);
   display: none;
+
+}
+.svc-toolbox__category-header__button {
+  fill: $foreground-light;
 }
 
 .svc-toolbox__category-header:hover {

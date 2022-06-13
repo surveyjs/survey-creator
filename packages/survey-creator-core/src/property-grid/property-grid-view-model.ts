@@ -70,16 +70,22 @@ export class PropertyGridViewModel extends Base {
     }
   }
   private updateTitle() {
-    this.selectedElementName = this.getTitle();
+    let titleName = this.getTitle();
+    if(!!this.creator) {
+      titleName = this.creator.getObjectDisplayName(this.getSelectedObj(), "property-grid-title", titleName);
+    }
+    this.selectedElementName = titleName;
     this.objectSelectionAction.title = this.selectedElementName;
   }
   private getTitle(): string {
-    var obj = this.propertyGridModel.obj;
+    var obj = this.getSelectedObj();
     if (!obj) return "";
     var displayName = SurveyHelper.getObjectName(obj, this.propertyGridModel.options.showObjectTitles);
     return this.propertyGridModel.options.getObjectDisplayName(obj, "property-grid", displayName);
   }
-
+  private getSelectedObj(): any {
+    return this.propertyGridModel.obj;
+  }
   private initActions() {
     if (settings.propertyGrid.showNavigationButtons) {
       this.prevSelectionAction = new Action({

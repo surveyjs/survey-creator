@@ -991,7 +991,9 @@ implements ISurveyCreatorOptions {
     // TODO: remove SurveyLogic call here
     var logic = new SurveyLogic(<any>this.survey, <any>this);
     for (var i = 0; i < questions.length; i++) {
-      logic.removeQuestion(questions[i].getValueName());
+      if(questions[i].isQuestion) {
+        logic.removeQuestion(questions[i].getValueName());
+      }
     }
   }
 

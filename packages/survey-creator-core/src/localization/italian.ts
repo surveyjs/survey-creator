@@ -132,14 +132,13 @@ var italianTranslation = {
     bold: "Grassetto",
     italic: "Corsivo",
     underline: "Sottolineato",
-    fpAddQuestion: "Aggiungi domanda...",
+    addNewQuestion: "Aggiungi domanda",
     selectPage: "Seleziona la pagina...",
     chooseElement: "Scegli l'elemento...",
     htmlPlaceHolder: "Il contenuto HTML sarà qui.",
     panelPlaceHolder: "Trascina una domanda dalla toolbox qui.",
     surveyPlaceHolder:
       "Il questionario è vuoto. Trascina un elemento dalla toolbox o clicca sul pulsante sottostante.",
-    addNewQuestion: "Aggiungi domanda",
     addNewTypeQuestion: "Aggiungi {0}",
     chooseLogoPlaceholder: "[LOGO]",
     lg: {
