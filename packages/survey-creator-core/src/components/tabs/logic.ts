@@ -21,7 +21,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
 
   /**
    * The event is called when logic item is saved.
-   * <br/> options.item is the saved logic item.
+   * options.item is the saved logic item.
    */
   public onLogicItemSaved: Event<
     (sender: SurveyLogic, options: any) => any,
@@ -30,10 +30,10 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   /**
    * The event is called before logic item is saved. You can set options.error to non empty string to show error instead of saving the item.
    * You can use options.item.actions to access actions and optionally set errorText to a particular action.
-   * <br/> options.item is the editing logic item. options.item.actions contains the old actions.
-   * <br/> options.actions is the array of  logic actions that user edit and create.
-   * <br/> usedNamesInExpression - the string list of all variables (questions, calculatedValues, and so on) that are used in expression
-   * <br/> error - the error string. It is empty by default. You have to set it to non-empty string to show the error on saving.
+   * options.item is the editing logic item. options.item.actions contains the old actions.
+   * options.actions is the array of  logic actions that user edit and create.
+   * usedNamesInExpression - the string list of all variables (questions, calculatedValues, and so on) that are used in expression
+   * error - the error string. It is empty by default. You have to set it to non-empty string to show the error on saving.
    */
   public onLogicItemValidation: Event<
     (sender: SurveyLogic, options: any) => any,
@@ -41,8 +41,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   > = new Event<(sender: SurveyLogic, options: any) => any, any>();
   /**
    * The event is called before logic item is being removed.
-   * <br/> options.allowRemove is the option you can set to false and prevent removing.
-   * <br/> options.item is the logic item to remove.
+   * options.allowRemove is the option you can set to false and prevent removing.
+   * options.item is the logic item to remove.
    */
   public onLogicItemRemoving: Event<
     (sender: SurveyLogic, options: any) => any,
@@ -50,7 +50,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   > = new Event<(sender: SurveyLogic, options: any) => any, any>();
   /**
    * The event is called when logic item is removed.
-   * <br/> options.item is the removed logic item.
+   * options.item is the removed logic item.
    */
   public onLogicItemRemoved: Event<
     (sender: SurveyLogic, options: any) => any,
