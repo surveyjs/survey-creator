@@ -155,7 +155,7 @@ export class UndoRedoController extends Base {
 
   /**
    * The event is called before undo happens.
-   * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
+   * options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
   public onBeforeUndo: Event<
     (sender: CreatorBase, options: any) => any,
@@ -163,7 +163,7 @@ export class UndoRedoController extends Base {
   > = new Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called before redo happens.
-    * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
+    * options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
     */
   public onBeforeRedo: Event<
     (sender: CreatorBase, options: any) => any,
@@ -171,7 +171,7 @@ export class UndoRedoController extends Base {
   > = new Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called after undo happens.
-    * <br/> options.state is an undo/redo item.
+    * options.state is an undo/redo item.
     */
   public onAfterUndo: Event<
     (sender: CreatorBase, options: any) => any,
@@ -179,7 +179,7 @@ export class UndoRedoController extends Base {
   > = new Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called after redo happens.
-    * <br/> options.state is an undo/redo item.
+    * options.state is an undo/redo item.
     */
   public onAfterRedo: Event<
     (sender: CreatorBase, options: any) => any,
