@@ -914,8 +914,9 @@ export class PropertyGridModel {
   }
   private changeDependedProperties(question: Question, dependedsQuetion: (name: string) => Question,
     dependedsValue: (name: string) => any) {
-    var prop: JsonObjectProperty = (<any>question).property;
-    var properties = prop.getDependedProperties();
+    const prop: JsonObjectProperty = (<any>question).property;
+    if(!prop) return;
+    const properties = prop.getDependedProperties();
     if (!properties) return;
     for (var i = 0; i < properties.length; i++) {
       var name = properties[i];
