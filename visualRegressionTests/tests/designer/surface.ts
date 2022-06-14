@@ -251,6 +251,37 @@ test("Panel gap between items", async (t) => {
   await checkElementScreenshot("surface-panel.png", Selector(".svc-question__content"), t);
 });
 
+test("Panel multi-question row", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              },
+              {
+                "type": "text",
+                "name": "question2",
+                "startWithNewLine": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await checkElementScreenshot("surface-panel-multi-row.png", Selector(".svc-question__content"), t);
+});
+
 test("Matrix dynamic with detail", async (t) => {
   await t.resizeWindow(1920, 900);
   const json = {
