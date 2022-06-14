@@ -746,16 +746,22 @@ test(
   () => {
     const creator = new CreatorTester();
     creator.onGetObjectDisplayName.add(function (sender, options) {
-      if (!!options.obj.title) {
-        options.displayName = options.obj.title;
+      if(options.reason === "property-grid") {
+        if (!!options.obj.title) {
+          options.displayName = options.obj.title;
+        }
+        if (!!options.obj.description) {
+          options.displayName = options.obj.description;
+        }
       }
-      if (!!options.obj.description) {
-        options.displayName = options.obj.description;
+      if(options.reason === "property-grid-title") {
+        options.displayName = options.obj.name + " Properties";
       }
     });
     creator.JSON = {
       elements: [{ type: "text", name: "q1", title: "question1", description: "New Title" }],
     };
+    creator.selectElement(creator.survey.getQuestionByName("q1"));
     const propertyGrid = creator.sidebar.getTabById("propertyGrid").model as PropertyGridViewModel;
     expect(propertyGrid).toBeTruthy();
     const selectorBarItem = propertyGrid.objectSelectionAction;
@@ -773,6 +779,8 @@ test(
     expect(selectorModel.isVisible).toBeTruthy();
     expect(selectorModel.list.actions).toHaveLength(3);
     expect(selectorModel.list.actions[2].title).toEqual("New Title");
+
+    expect(selectorBarItem.title).toEqual("q1 Properties");
   }
 );
 

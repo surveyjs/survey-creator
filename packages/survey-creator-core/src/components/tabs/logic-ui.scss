@@ -67,7 +67,7 @@
 .svc-logic-operator.svc-logic-operator {
   &:hover,
   &:focus {
-    color: $background;
+    color: #ffffff;
     outline: none;
     box-shadow: none;
   }
@@ -81,10 +81,10 @@
 }
 .svc-logic-operator.svc-logic-operator--conjunction,
 .svc-logic-operator.svc-logic-operator--operator {
-  background-color: $secondary-back-light;
+  background-color: $yellow-light;
   &:hover,
   &:focus {
-    background-color: $secondary;
+    background-color: $yellow;
   }
 }
 
@@ -150,7 +150,7 @@
 
   &:hover,
   &:focus {
-    color: $background;
+    color: $primary-foreground;
   }
 }
 
