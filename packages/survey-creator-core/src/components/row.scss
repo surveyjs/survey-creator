@@ -7,6 +7,12 @@
   padding: calcSize(1);
   gap: calcSize(1);
 }
+.sd-panel .svc-row .sd-row--multiple {
+  padding: calcSize(0);
+  box-shadow: none;
+  border-radius: 0;
+}
+
 .svc-row.svc-row--ghost {
   .svc-question__content {
     padding: 0;
