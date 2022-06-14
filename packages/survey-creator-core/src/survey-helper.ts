@@ -43,10 +43,10 @@ export class SurveyHelper {
     while (pos > 0 && name[pos - 1] >= "0" && name[pos - 1] <= "9") {
       pos--;
     }
-    var base = name.substr(0, pos);
+    var base = name.substring(0, pos);
     var num = 0;
     if (pos < name.length) {
-      num = parseInt(name.substr(pos));
+      num = parseInt(name.substring(pos));
     }
     num++;
     return base + num;

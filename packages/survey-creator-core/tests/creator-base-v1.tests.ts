@@ -127,7 +127,7 @@ test("Set Text property", () => {
   expect(creator.survey.getAllQuestions()).toHaveLength(1);
   expect(creator.survey.getAllQuestions()[0].name).toEqual("car");
   let jsonText = JSON.stringify(json);
-  jsonText = jsonText.substr(5);
+  jsonText = jsonText.substring(5);
   creator.text = jsonText;
   expect(creator.isDesignerShowing).toBeFalsy();
 });
