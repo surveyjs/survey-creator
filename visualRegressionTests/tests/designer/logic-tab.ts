@@ -89,7 +89,10 @@ test("Check actions hover states", async (t) => {
   await t.hover(action);
   await checkElementScreenshot("logic-action-hover.png", action, t);
   const conditionRemoveSelector = Selector(".svc-logic-condition-remove.svc-icon-remove");
-  await t.click(Selector(".sl-paneldynamic__add-btn.svc-logic-operator--operator")).hover(conditionRemoveSelector);
+  await t
+    .click(Selector(".sl-paneldynamic__add-btn.svc-logic-operator--operator"))
+    .hover(questionOperator)
+    .hover(conditionRemoveSelector);
   await checkElementScreenshot("logic-condition-remove-hover.png", conditionRemoveSelector, t);
   await t.hover(logicDetailButtonElement);
   await checkElementScreenshot("logic-collapse-hover.png", logicDetailButtonElement, t);
@@ -203,8 +206,11 @@ test("rule rows", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .hover(Selector(".sl-table__row"))
-    .click(logicDetailButtonElement);
+    .click(logicDetailButtonElement)
+    .hover(Selector(".sv-string-viewer").withText("If"));
   await checkElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t);
+
+  await t.hover(Selector(".sv-string-viewer").withText("then"));
   await checkElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t);
 });
 
