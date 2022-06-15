@@ -199,7 +199,7 @@ export class SurveyQuestionProperties {
     propName: string
   ): SurveyQuestionEditorTabDefinition {
     if (!propName) return null;
-    if(this.isPropertyOnSameLine(propName)) propName = propName.substr(1);
+    if(this.isPropertyOnSameLine(propName)) propName = propName.substring(1);
     for (var i = 0; i < this.tabs.length; i++) {
       if (!!this.getPropertyByNameInTab(this.tabs[i], propName))
         return this.tabs[i];
@@ -208,7 +208,7 @@ export class SurveyQuestionProperties {
   }
   private getNextToNameProperty(property: Survey.JsonObjectProperty): string {
     if(!property.nextToProperty) return "";
-    if(this.isPropertyOnSameLine(property.nextToProperty)) return property.nextToProperty.substr(1);
+    if(this.isPropertyOnSameLine(property.nextToProperty)) return property.nextToProperty.substring(1);
     return property.nextToProperty;
   }
   private isPropertyOnSameLine(nextToProperty: string): boolean {

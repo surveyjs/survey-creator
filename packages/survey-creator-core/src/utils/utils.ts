@@ -71,7 +71,7 @@ export function getNextValue(prefix: string, values: any[]): string | number {
         while (numStr.length > newNum.length) {
           newNum = "0" + newNum;
         }
-        newValue = str.substr(0, numStrIndex) + newNum + str.substr(numStrIndex + numStr.length);
+        newValue = str.substring(0, numStrIndex) + newNum + str.substring(numStrIndex + numStr.length);
       }
     } while (hasValueInArray(values, newValue));
     return newValue;
@@ -277,9 +277,9 @@ export function wrapTextByCurlyBraces(text: string) {
 
 export function capitalize(str: string): string {
   if (!str) return str;
-  str = str.replace(/[\s]+/g, " ")
+  str = str.replace(/[\s]+/g, " ");
   str = str.replace(/([\s]|^)(\S)/g, (_, p1, p2) => {
-    return p1 + p2.toUpperCase()
-  })
+    return p1 + p2.toUpperCase();
+  });
   return str;
 }

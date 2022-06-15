@@ -171,15 +171,6 @@ export class SurveyLogicItem {
   public getVisibleLogicTypes(): Array<SurveyLogicType> {
     return this.owner.getVisibleLogicTypes();
   }
-  /*public get title(): string {
-    var res = this.getDisplayText();
-    const maxChars = settings.logic.logicItemTitleMaxChars;
-    if (!!res && res.length > maxChars) {
-      res = res.substr(1, maxChars) + "...";
-    }
-    return res;
-  }*/
-
   public get expressionText() {
     const text = this.getExpressionAsDisplayText();
     if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
@@ -357,7 +348,7 @@ export class SurveyLogicItem {
     newName = wrapTextByCurlyBraces(newName);
     var index = expression.lastIndexOf(oldName, expression.length);
     while (index > -1) {
-      newExpression = newExpression.substring(0, index) + newName + newExpression.substr(index + oldName.length, +newExpression.length);
+      newExpression = newExpression.substring(0, index) + newName + newExpression.substring(index + oldName.length);
       expression = expression.substring(0, index);
       index = expression.lastIndexOf(oldName, expression.length);
     }

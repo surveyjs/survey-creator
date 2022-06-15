@@ -125,7 +125,7 @@ export class EditorLocalization {
     if (obj !== strName) return obj;
     var pos = strName.indexOf("_");
     if (pos < -1) return this.getAutoPropertyName(obj, defaultName);
-    strName = strName.substr(pos + 1);
+    strName = strName.substring(pos + 1);
     obj = this.getString("p." + strName);
     if (obj !== strName) return obj;
     return this.getAutoPropertyName(obj, defaultName);
