@@ -169,7 +169,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
-        this.model.exportToSCVFile("survey_translation.csv");
+        this.model.exportToCSVFileUI();
       }
     });
     items.push(this.exportCsvAction);
