@@ -2160,6 +2160,49 @@ test("DependedOn properties, dynamic choices", () => {
   Serializer.removeProperty("question", "targetEntity");
   Serializer.removeProperty("question", "targetField");
 });
+test("DependedOn properties in matrix detail panel, dynamic choices", () => {
+  Serializer.addProperty("calculatedvalue", "targetEntity");
+  Serializer.addProperty("calculatedvalue", {
+    name: "targetField",
+    dependsOn: "targetEntity",
+    choices: function (obj) {
+      return getChoicesByEntity(obj);
+    }
+  });
+  function getChoicesByEntity(obj: any): Array<any> {
+    const entity = !!obj ? obj["targetEntity"] : null;
+    const choices = [];
+    if (!entity) return choices;
+    choices.push({ value: "entity" });
+    choices.push({ value: entity + " 1", text: entity + " 1" });
+    choices.push({ value: entity + " 2", text: entity + " 2" });
+    return choices;
+  }
+
+  const survey = new SurveyModel({
+    calculatedValues: [{ name: "var1" }]
+  });
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const calculatedValueQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("calculatedValues");
+  expect(calculatedValueQuestion).toBeTruthy();
+  expect(calculatedValueQuestion.visibleRows).toHaveLength(1);
+  const row = calculatedValueQuestion.visibleRows[0];
+  row.showDetailPanel();
+  const detailPanel = row.detailPanel;
+  expect(detailPanel).toBeTruthy();
+
+  var entityQuestion = detailPanel.getQuestionByName("targetEntity");
+  var targetQuestion = <QuestionDropdownModel>detailPanel.getQuestionByName("targetField");
+
+  expect(targetQuestion.visibleChoices).toHaveLength(0);
+  entityQuestion.value = "Account";
+  expect(targetQuestion.visibleChoices).toHaveLength(3);
+  expect(targetQuestion.visibleChoices[1].value).toEqual("Account 1");
+
+  Serializer.removeProperty("calculatedvalue", "targetEntity");
+  Serializer.removeProperty("calculatedvalue", "targetField");
+});
+
 test("DependedOn an array property", () => {
   Serializer.addProperty("dropdown", {
     name: "custProp",

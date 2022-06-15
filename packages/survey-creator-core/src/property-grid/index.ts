@@ -901,7 +901,8 @@ export class PropertyGridModel {
   private onValueChanged(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    this.changeDependedProperties(q);
+    this.changeDependedProperties(q, (name: string): Question => { return this.survey.getQuestionByName(name); },
+      (name: string): any => { return this.survey.getValue(name); });
     PropertyGridEditorCollection.onValueChanged(this.obj, q.property, q);
     if (
       !!this.classNameProperty &&
@@ -911,20 +912,23 @@ export class PropertyGridModel {
       this.setObj(this.obj);
     }
   }
-  private changeDependedProperties(question: Question) {
-    var prop: JsonObjectProperty = (<any>question).property;
-    var properties = prop.getDependedProperties();
+  private changeDependedProperties(question: Question, dependedsQuetion: (name: string) => Question,
+    dependedsValue: (name: string) => any) {
+    const prop: JsonObjectProperty = (<any>question).property;
+    if(!prop) return;
+    const properties = prop.getDependedProperties();
     if (!properties) return;
     for (var i = 0; i < properties.length; i++) {
       var name = properties[i];
-      var q = this.survey.getQuestionByName(name);
+      var q = dependedsQuetion(name);
       if (!q) continue;
       this.updateDependedPropertiesEditor(q);
-      if (!Helpers.isTwoValueEquals(q.value, this.survey.getValue(name))) {
-        q.value = this.survey.getValue(name);
+      const objValue = dependedsValue(name);
+      if (!Helpers.isTwoValueEquals(q.value, objValue)) {
+        q.value = objValue;
       }
       PropertyGridEditorCollection.onMasterValueChanged(
-        this.obj,
+        (<any>question).obj,
         (<any>q).property,
         q
       );
@@ -1025,6 +1029,11 @@ export class PropertyGridModel {
   }
   private onMatrixCellValueChanged(options: any) {
     if (this.isCellCreating) return;
+    const cellQuestion = options.row.getQuestionByName(options.columnName);
+    if(!!cellQuestion) {
+      this.changeDependedProperties(cellQuestion, (name: string): Question => { return options.row.getQuestionByName(name); },
+        (name: string): any => { return options.row.getValue(name); });
+    }
     PropertyGridEditorCollection.onMatrixCellValueChanged(
       this.obj,
       options.question.property,
