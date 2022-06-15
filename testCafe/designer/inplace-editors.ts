@@ -629,8 +629,8 @@ test("Matrix dropdown question inplace row header editor #2553", async (t) => {
 
   await t
     // .click(Selector("button[title='ShowPanel']"))
-    .click(Selector(".sv_matrix_row .svc-matrix-cell .sv-string-editor"))
-    .typeText(Selector(".sv_matrix_row .svc-matrix-cell .sv-string-editor"), "Row header")
+    .click(Selector(".sd-table__row .svc-matrix-cell .sv-string-editor"))
+    .typeText(Selector(".sd-table__row .svc-matrix-cell .sv-string-editor"), "Row header")
     .click(Selector("h4.spg-title[aria-label='Layout']"))
     .click(Selector("input.spg-input[aria-label='Row header width (in CSS-accepted values)']"))
     .pressKey("ctrl+a delete 3 0 0 p x")

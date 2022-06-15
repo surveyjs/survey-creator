@@ -39,7 +39,7 @@ test("Check section", async (t) => {
 test("Matrix column editor", async (t) => {
   await t.resizeWindow(1920, 900);
   await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
-  const row1Column1Cell = Selector(".sv_matrix_row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
+  const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
   const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
 
   const showControl = ClientFunction(() => {
