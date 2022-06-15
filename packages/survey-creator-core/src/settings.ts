@@ -22,7 +22,11 @@ export var settings = {
     /**
      * The maximum number of locales that user can select at once for translation
      */
-    maximumSelectedLocales: 7
+    maximumSelectedLocales: 7,
+    /**
+     * The name of the translation export file in csv format
+     */
+    exportFileName: "survey_translation.csv"
   },
   operators: {
     empty: [],

@@ -475,7 +475,7 @@ export class Translation extends Base implements ITranslationLocales {
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
     var self = this;
     this.exportToCSVFileUI = function () {
-      self.exportToSCVFile("survey_translation.csv");
+      self.exportToSCVFile(settings.translation.exportFileName);
     };
     this.importFromCSVFileUI = function (el) {
       if (el.files.length < 1) return;
