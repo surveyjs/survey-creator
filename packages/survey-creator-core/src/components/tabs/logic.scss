@@ -181,8 +181,7 @@
   }
   button.sl-panel__done-button {
     width: 100%;
-    margin-top: calcSize(2);
-    margin-bottom: calcSize(10);
+    margin: calcSize(2) 0 calcSize(10) 0;
     color: $primary;
     background-color: $primary-light;
 
