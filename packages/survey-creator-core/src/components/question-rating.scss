@@ -18,11 +18,16 @@
 
 .svc-question__content {
   .sd-rating {
-    margin-left: calcSize(9);
     width: calc(100% - 9 * #{$base-unit});
   }
   .svc-rating-question-controls {
     display: flex;
     width: calcSize(8);
+    min-width: calcSize(8);
   }
+}
+
+.svc-rating-question-content .sd-question__content {
+  display: flex;
+  justify-content: flex-end;
 }

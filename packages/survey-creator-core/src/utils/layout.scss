@@ -25,6 +25,17 @@
   flex-direction: column;
 }
 
+.sv-action-bar--default-size-mode .sv-action-bar-separator {
+  height: calcSize(5);
+}
+.sv-action-bar--small-size-mode .sv-action-bar-separator {
+  height: calcSize(4);
+}
+.sv-action-bar--small-size-mode .sv-action-bar-item {
+  font-weight: 600;
+  align-items: center;
+}
+
 .svc-top-bar {
   display: flex;
   background: $background;
@@ -37,10 +48,6 @@
 
     .sv-action-bar {
       justify-content: flex-end;
-
-      .sv-action-bar-separator {
-        height: calcSize(4);
-      }
     }
   }
 }
