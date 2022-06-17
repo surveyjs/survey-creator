@@ -282,7 +282,7 @@ var italianTranslation = {
     propertyIsNoUnique: "Inserisci un valore univoco",
     propertyNameIsNotUnique: "Inserisci un nome univoco",
     listIsEmpty: "Aggiungi una nuova opzione",
-    choicesListIsEmpty: "Non sono state ancora aggiunte scelte",
+    "listIsEmpty@choices": "Non sono state ancora aggiunte scelte",
     "addNew@choices": "Aggiungi una scelta",
     expressionIsEmpty: "Espressione vuota",
     value: "Valore",
