@@ -21,8 +21,8 @@
 
 .svc-image-item-value-controls {
   position: absolute;
-  top: calcSize(2.5);
-  right: calcSize(1.5);
+  top: calcSize(1);
+  right: calcSize(1);
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls {
@@ -113,8 +113,8 @@
 .svc-image-item-value-controls__drag-area-indicator {
   cursor: move;
   position: absolute;
-  top: calcSize(2.5);
-  left: calcSize(0.5);
+  top: calcSize(1);
+  left: calcSize(1);
   display: none;
 }
 
