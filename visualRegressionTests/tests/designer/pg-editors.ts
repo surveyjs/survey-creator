@@ -146,3 +146,24 @@ test("Property grid checkbox - all states", async (t) => {
   await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Description"));
   await checkElementScreenshot("pg-checkbox-checked-focused.png", checkbox, t);
 });
+
+test("Property grid input all states", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  await setJSON({});
+  const setInputProperty = ClientFunction((prop, value) => {
+    window["creator"].designerPropertyGrid.survey.getQuestionByName("title")[prop] = value;
+  });
+
+  const input = Selector("[data-name=\"title\"] .spg-input");
+
+  await checkElementScreenshot("pg-input-default.png", input, t);
+
+  await setInputProperty("value", "Cool title");
+  await checkElementScreenshot("pg-input-with-value.png", input, t);
+
+  await t.click(input);
+  await checkElementScreenshot("pg-input-focused.png", input, t);
+
+  await setInputProperty("readOnly", true);
+  await checkElementScreenshot("pg-input-disabled.png", input, t);
+});
