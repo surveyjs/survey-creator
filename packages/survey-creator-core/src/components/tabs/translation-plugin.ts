@@ -36,6 +36,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       this.creator.onTranslationLocaleInitiallySelected.fire(this.creator, options);
       return options.isSelected;
     };
+    this.model.importItemCallback = (name: string, locale: string, text: string): string => {
+      const options = { locale: locale, name: name, text: text };
+      this.creator.onTranslationImportItem.fire(this.creator, options);
+      return options.text;
+    };
+    this.model.importFinishedCallback = (): void => {
+      this.creator.onTranslationImported.fire(this.creator, {});
+    };
     this.sidebarTab.model = this.model.settingsSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;

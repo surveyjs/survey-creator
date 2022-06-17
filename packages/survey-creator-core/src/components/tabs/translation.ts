@@ -445,6 +445,7 @@ export class Translation extends Base implements ITranslationLocales {
   public static newLineDelimiter = "\n";
   public exportToCSVFileUI: any;
   public importFromCSVFileUI: any;
+  public importItemCallback: (name: string, locale: string, text: string) => string;
   public importFinishedCallback: () => void;
   public translateItemAfterRenderCallback: (
     item: TranslationItem,
@@ -1002,7 +1003,6 @@ export class Translation extends Base implements ITranslationLocales {
   }
 
   public importFromNestedArray(rows: string[][]) {
-    var self = this;
     let locales = rows.shift().slice(1);
     if (locales[0] === "default") {
       locales[0] = "";
@@ -1016,7 +1016,7 @@ export class Translation extends Base implements ITranslationLocales {
       if (!name) return;
       let item = itemsHash[name];
       if (!item) return;
-      self.updateItemWithStrings(item, row, locales);
+      this.updateItemWithStrings(name, item, row, locales);
     });
     this.reset();
     if (this.importFinishedCallback) this.importFinishedCallback();
@@ -1068,6 +1068,7 @@ export class Translation extends Base implements ITranslationLocales {
    * Update a translation item with given values
    */
   private updateItemWithStrings(
+    name: string,
     item: TranslationItem,
     values: Array<string>,
     locales: Array<string>
@@ -1075,7 +1076,12 @@ export class Translation extends Base implements ITranslationLocales {
     for (let i = 0; i < values.length && i < locales.length; i++) {
       let val = values[i].trim();
       if (!val) continue;
-      item.values(locales[i]).text = val;
+      if(this.importItemCallback) {
+        val = this.importItemCallback(name, locales[i], val);
+      }
+      if(!!val) {
+        item.values(locales[i]).text = val;
+      }
     }
   }
   private fillItemsHash(

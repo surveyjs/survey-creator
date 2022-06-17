@@ -1081,3 +1081,44 @@ test("Change filterPageAction to all pages on changing survey", () => {
   creator.JSON = json;
   expect(filterPageAction.title).toEqual("All Pages");
 });
+test("Import from array, onTraslationItemImport", () => {
+  let creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: "q1"
+      }
+    ]
+  };
+  let counter = 0;
+  creator.onTranslationImported.add((sender, options) => {
+    counter ++;
+  });
+  creator.onTranslationImportItem.add((sender, options) => {
+    if(["default", "", "en", "de"].indexOf(options.locale) < 0) options.text = undefined;
+  });
+  creator.onTranslationImportItem.add((sender, options) => {
+    if(["default", "", "en", "de"].indexOf(options.locale) < 0) options.text = undefined;
+  });
+  creator.activeTab = "translation";
+  const tabTranslationPlugin = <TabTranslationPlugin>creator.getPlugin("translation");
+  const translation: Translation = tabTranslationPlugin.model;
+
+  translation.importFromNestedArray([
+    ["description ↓ - language →", "default", "dex", "de"],
+    ["survey.page1.title", "page en", "test", "page de"],
+    ["survey.page1.q1.title", "q1 en", "test", "q1 de"]
+  ]);
+  expect(counter).toEqual(1);
+  expect(translation.localesQuestion.visibleChoices).toHaveLength(1);
+  const page = creator.survey.pages[0];
+  const question = creator.survey.getQuestionByName("q1");
+  expect(page.locTitle.getLocaleText("")).toEqual("page en");
+  expect(page.locTitle.getLocaleText("de")).toEqual("page de");
+  expect(page.locTitle.getLocaleText("dex")).toBeFalsy();
+  expect(question.locTitle.getLocaleText("")).toEqual("q1 en");
+  expect(question.locTitle.getLocaleText("de")).toEqual("q1 de");
+  expect(question.locTitle.getLocaleText("dex")).toBeFalsy();
+});
