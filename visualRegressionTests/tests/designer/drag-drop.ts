@@ -194,3 +194,53 @@ test("Matrix: Property Grid: Choices", async (t) => {
 
   await checkElementScreenshot("drag-drop-matrix-pg-choices.png", Selector("[data-name=\"choices\"]"), t);
 });
+
+// https://github.com/surveyjs/survey-creator/issues/3113
+test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
+
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            "type": "imagepicker",
+            "name": "question1",
+            "choices": [
+              {
+                "value": "lion",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+              },
+              {
+                "value": "giraffe",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+              },
+              {
+                "value": "panda",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+              },
+              {
+                "value": "camel",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Question1 = Selector("[data-name=\"question1\"]");
+  const GiraffeItem = Selector("[data-sv-drop-target-item-value=\"giraffe\"]");
+  const SurveyTitle = Selector("[aria-placeholder='Survey Title']");
+
+  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item-value-controls__drag-area-indicator").filterVisible();
+
+  await t
+    .click(Question1, { speed: 0.1 })
+    .hover(GiraffeItem, { speed: 0.1 }).hover(DragZoneGiraffeItem, { speed: 0.1 })
+    .dragToElement(DragZoneGiraffeItem, SurveyTitle, { speed: 0.1 });
+
+  await checkElementScreenshot("drag-drop-image-picker-invalid-drop-area.png", Selector(GiraffeItem), t);
+});
