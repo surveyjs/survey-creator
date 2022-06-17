@@ -31,6 +31,11 @@
 .sv-action-bar--small-size-mode .sv-action-bar-separator {
   height: calcSize(4);
 }
+.svc-creator--mobile {
+  .sv-action-bar-separator {
+    height: calcSize(3);
+  }
+}
 .sv-action-bar--small-size-mode .sv-action-bar-item {
   font-weight: 600;
   align-items: center;
@@ -47,6 +52,7 @@
     display: flex;
 
     .sv-action-bar {
+      padding: 0 calcSize(2);
       justify-content: flex-end;
     }
   }

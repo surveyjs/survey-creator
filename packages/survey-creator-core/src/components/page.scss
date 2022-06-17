@@ -28,6 +28,7 @@ svc-page {
   display: none;
   top: calcSize(1);
   inset-inline-end: 0; // right
+  padding: 0 calcSize(1.5);
   z-index: 1;
 }
 

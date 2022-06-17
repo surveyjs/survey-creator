@@ -60,14 +60,16 @@
   flex-grow: 1;
   flex-shrink: 0;
   justify-content: flex-end;
-  padding: calcSize(1.5) calcSize(1);
+  padding: calcSize(1.5) calcSize(2);
 }
 
 .svc-side-bar__container-actions {
   width: 100%;
-  padding: calcSize(0.5) 0;
+  padding: calcSize(1.5) calcSize(1);
+
   .sv-action-bar {
     justify-content: flex-end;
+    padding: 0;
   }
 }
 
@@ -121,8 +123,10 @@
   .svc-side-bar__container-header .sv-action-bar {
     flex-direction: row-reverse;
   }
-  .sv-action--last {
+  .sv-action--object-selector {
     justify-content: flex-start;
+    flex: 1;
+    display: flex;
   }
 
   .svd-grid-hide .sv-svg-icon {
@@ -130,13 +134,10 @@
   }
 }
 
-  .svd-grid-hide  {
-    margin-inline-end: auto;
-    
-    .sv-action-bar-item {
-      margin: 0;
-    }
-  }
+.svd-grid-hide {
+  margin-inline-end: auto;
+
+}
 
 .sv-mobile-side-bar {
   .svc-side-bar__container-actions {

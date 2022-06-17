@@ -67,8 +67,8 @@ svc-question {
   position: absolute;
   display: none;
   bottom: calcSize(2);
-  width: calc(100% - 7 * #{$base-unit});
-  left: calcSize(4);
+  inset-inline-start: calcSize(4); // left
+  inset-inline-end: calcSize(3.5); // right
 
   .sv-action--convertTo {
     min-width: calcSize(13);
@@ -84,6 +84,11 @@ svc-question {
 
       display: inline-block;
       justify-content: left;
+    }
+
+    .sv-action-bar-item__title--with-icon {
+      margin-inline-start: 0; // margin-left
+      margin-inline-end: calcSize(0.5); // margin-right
     }
   }
 }
