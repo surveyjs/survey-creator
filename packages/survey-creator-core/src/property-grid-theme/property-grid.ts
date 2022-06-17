@@ -244,7 +244,7 @@ export var propertyGridCss = {
     disabled: "spg-rating--disabled"
   },
   comment: {
-    root: "spg-comment",
+    root: "spg-input spg-comment",
     small: "spg-row__question--small"
   },
   expression: "",
