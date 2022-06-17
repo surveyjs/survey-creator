@@ -24,5 +24,7 @@
   .svc-rating-question-controls {
     display: flex;
     width: calcSize(8);
+    min-width: auto;
+    justify-content: flex-start;
   }
 }
