@@ -145,4 +145,8 @@ test("Property grid checkbox - all states", async (t) => {
   await setCheckboxProperty("readOnly", false);
   await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Description"));
   await checkElementScreenshot("pg-checkbox-checked-focused.png", checkbox, t);
+
+  await ClientFunction(() => { document.body.focus(); })();
+  await setCheckboxProperty("title", "Very very very very very very very very very very long checkbox caption");
+  await checkElementScreenshot("pg-checkbox-long-caption.png", checkbox, t);
 });
