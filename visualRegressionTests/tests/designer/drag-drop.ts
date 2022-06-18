@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, checkElementScreenshot } from "../../helper";
+import { url, setJSON, checkElementScreenshot, explicitErrorHandler } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -197,6 +197,8 @@ test("Matrix: Property Grid: Choices", async (t) => {
 
 // https://github.com/surveyjs/survey-creator/issues/3113
 test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(2560, 1440);
 
   const json = {
     pages: [
