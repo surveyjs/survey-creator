@@ -69,12 +69,13 @@ svc-page {
   border-radius: 2px;
   background-color: transparent;
   cursor: pointer;
-  margin-right: calcSize(1);
+  margin-inline-end: calcSize(1); // margin-right
   outline: none;
   use {
     fill: $foreground-light;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $background-dim;
   }
 }

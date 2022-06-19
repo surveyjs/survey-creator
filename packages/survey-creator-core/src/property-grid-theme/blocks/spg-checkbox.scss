@@ -2,7 +2,7 @@
   cursor: pointer;
   display: flex;
   gap: calcSize(1);
-  align-items: center;
+  align-items: top;
   margin-top: calcSize(2);
 }
 .spg-checkbox--disabled {

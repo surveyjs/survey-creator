@@ -862,6 +862,23 @@ export class CreatorBase extends Base
    * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
    */
   public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+   * Use this event to modify the imported localizable text. To block importing a particular localization text, set the options.text into undefined.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.locale` - the locale name, like 'en', 'de' and so on.
+   * - `options.name` - The full name of the localizable string, it can be: "survey.page1.question2.title"
+   * - `options.text` - The imported text for the locale for this item. Set it to undefined or empty string to block importing for this item
+   */
+   public onTranslationImportItem: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+   /**
+   * The method is called when the translation from csv file is imported.
+   * @see translation
+   * @see showTranslationTab
+   */
+   public onTranslationImported: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
    * Use this event to control drag&drop operations.
