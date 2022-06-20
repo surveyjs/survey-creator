@@ -42,14 +42,19 @@ svc-tab-test {
     border-top: 1px solid $border;
     width: 100%;
     position: absolute;
-    &.sv-action-bar--pages {
-      left: 0;
-      right: 0;
-      justify-content: center;
+  }
 
-      .sv-action:not(:last-child) > .sv-action__content {
-        padding-right: calcSize(1);
-      }
+  .sv-action-bar.sv-action-bar--pages {
+    left: 0;
+    right: 0;
+    justify-content: center;
+    gap: calcSize(1);
+
+    .sv-action__content {
+      padding: 0;
+    }
+    .sv-action-bar-item {
+      margin: 0;
     }
   }
 

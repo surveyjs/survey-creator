@@ -43,6 +43,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super(creator, surveyElement);
+    this.actionContainer.sizeMode = "small";
     if (
       surveyElement.isQuestion &&
       !!surveyElement["setCanShowOptionItemCallback"]
@@ -148,15 +149,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
     super.updateElementAllowOptions(options, operationsAllow);
-    this.updateActionVisibility(
-      "convertTo",
-      operationsAllow && options.allowChangeType
-    );
+    this.updateActionVisibility("convertTo", operationsAllow && options.allowChangeType);
     const prop = Serializer.findProperty(this.surveyElement.getType(), "isRequired");
     const isPropReadOnly = this.creator.onIsPropertyReadOnlyCallback(this.surveyElement, prop, prop.readOnly, null, null);
-    this.updateActionVisibility(
-      "isrequired",
-      operationsAllow && options.allowChangeRequired && !isPropReadOnly);
+    this.updateActionVisibility("isrequired", operationsAllow && options.allowChangeRequired && !isPropReadOnly);
   }
 
   public get isEmptyElement(): boolean {
@@ -246,7 +242,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let actionTitle = selectedItems.length > 0 ? selectedItems[0].title : this.creator.getLocString("qt." + this.currentType);
     return new Action({
       id: "convertTo",
-      css: "sv-action--first sv-action-bar-item--secondary",
+      css: "sv-action--convertTo sv-action-bar-item--secondary",
       iconName: "icon-drop-down-arrow",
       iconSize: 16,
       title: actionTitle,

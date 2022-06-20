@@ -48,9 +48,11 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
               <div className="svc-side-bar__container-actions">
                 <SurveyActionBar model={this.model.toolbar}></SurveyActionBar>
               </div>
-              <div className="svc-side-bar__container-title">
-                {this.model.headerText}
-              </div>
+              {(!!this.model.headerText ?
+                <div className="svc-side-bar__container-title">
+                  {this.model.headerText}
+                </div>
+                : null)}
             </div>
             <div className="svc-side-bar__container-content">
               {items}

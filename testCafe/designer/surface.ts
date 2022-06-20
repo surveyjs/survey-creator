@@ -65,7 +65,8 @@ test("Check scrollbar is not appear when width mode is responsive", async (t) =>
   };
   await setJSON(json);
   const rootSelector = Selector(".svc-tab-designer");
+  const verticalScrollWidth = 12;
   await t
     .resizeWindow(1920, 1080)
-    .expect(await rootSelector.scrollWidth === await rootSelector.offsetWidth).ok();
+    .expect(await rootSelector.offsetWidth - await rootSelector.scrollWidth).lte(verticalScrollWidth);
 });
