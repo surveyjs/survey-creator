@@ -196,6 +196,24 @@ test("PageAdorner - remove page if: it is the last page, there is no elements an
   expect(creator.survey.pages).toHaveLength(3);
 });
 
+test("PageAdorner - do not remove page if it is last and empty but the name has been changed", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(desigerTab.newPage).toBeTruthy();
+  let pageAdorner = new PageAdorner(creator, desigerTab.newPage);
+  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(creator.survey.pages).toHaveLength(2);
+  creator.survey.pages[1].name = "newPage";
+
+  creator.survey.pages[1].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(2);
+});
+
 test("PagesController", (): any => {
   const creator = new CreatorTester();
   const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
