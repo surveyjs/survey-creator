@@ -82,7 +82,7 @@ export var enStrings = {
     defaultTheme: "Default (legacy)",
     testSurveyAgain: "Preview Survey Again",
     testSurveyWidth: "Survey width: ",
-    navigateToMsg: "You had to navigate to:",
+    navigateToMsg: "You had to navigate to",
     logic: "Logic",
     embedSurvey: "Embed Survey",
     translation: "Translation",
@@ -122,7 +122,7 @@ export var enStrings = {
     modified: "Modified",
     saving: "Saving",
     saved: "Saved",
-    propertyEditorError: "Error:",
+    propertyEditorError: "Error",
     saveError: "Error! Editor content is not saved.",
     translationPropertyGridTitle: "Language Settings",
     translationLanguages: "Languages",
@@ -146,7 +146,7 @@ export var enStrings = {
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
-    //completedHtmlOnConditionItemText: "Show if:",
+    //completedHtmlOnConditionItemText: "Show if",
     lg: {
       addNewItem: "Add New Rule",
       //Logic tab strings
@@ -193,7 +193,7 @@ export var enStrings = {
       completedHtmlOnConditionDescription:
         "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
 
-      itemExpressionText: "When expression: '{0}' returns true:", //{0} - the expression
+      itemExpressionText: "When expression: '{0}' returns true", //{0} - the expression
       itemEmptyExpressionText: "New rule",
       page_visibilityText: "make page {0} visible", //{0} page name
       panel_visibilityText: "make panel {0} visible", //{0} panel name
@@ -293,7 +293,7 @@ export var enStrings = {
     showMore: "For more details please check the documentation",
     // conditionShowMoreUrl:
     //   "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
-    assistantTitle: "Available questions:",
+    assistantTitle: "Available questions",
     cellsEmptyRowsColumns: "There is should be at least one column or row",
     showPreviewBeforeComplete: "Preview answers before submitting the survey",
 
@@ -313,9 +313,9 @@ export var enStrings = {
 
     url: "Service URL",
     path: "Path to data within the service",
-    valueName: "Store answers in the following JSON field:",
-    titleName: "Get display texts from the following JSON field:",
-    imageLinkName: "Get image URLs from the following JSON field:",
+    valueName: "Store answers in the following JSON field",
+    titleName: "Get display texts from the following JSON field",
+    imageLinkName: "Get image URLs from the following JSON field",
     allowEmptyResponse: "Allow empty response",
     titlePlaceholder: "Title",
     surveyTitlePlaceholder: "Survey Title",
@@ -546,7 +546,7 @@ export var enStrings = {
     emptyRowsText: "\"No rows\" message",
     size: "Input size (in characters)",
     separateSpecialChoices: "Separate special choices (None, Other, Select All)",
-    choicesFromQuestion: "Copy choices from the following question:",
+    choicesFromQuestion: "Copy choices from the following question",
     choicesFromQuestionMode: "Which choices to copy?",
     hasComment: "Show the comment area",
     commentPlaceHolder: "Comment area placeholder",
@@ -631,16 +631,16 @@ export var enStrings = {
     keyboardAdornerTip:
       "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item",
     triggerOn: "On ",
-    triggerMakePagesVisible: "Make pages visible:",
-    triggerMakeQuestionsVisible: "Make elements visible:",
+    triggerMakePagesVisible: "Make pages visible",
+    triggerMakeQuestionsVisible: "Make elements visible",
     triggerCompleteText: "Complete the survey if succeed.",
     triggerNotSet: "The trigger is not set",
     triggerRunIf: "Run if",
     triggerSetToName: "Change value of: ",
     triggerFromName: "Copy value from: ",
-    triggerRunExpression: "Run this Expression:",
+    triggerRunExpression: "Run this Expression",
     triggerSetValue: "to: ",
-    triggerGotoName: "Go to the question:",
+    triggerGotoName: "Go to the question",
     triggerIsVariable: "Do not put the variable into the survey result.",
     triggerRunExpressionEmpty: "Please enter a valid expression",
     emptyExpressionPlaceHolder: "Type expression here...",
@@ -796,7 +796,7 @@ export var enStrings = {
   },
   //Preview (Survey)
   ts: {
-    selectPage: "Select the page to test it:",
+    selectPage: "Select the page to test it",
     showInvisibleElements: "Show invisible elements"
   },
   validators: {
