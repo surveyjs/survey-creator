@@ -11,8 +11,6 @@
     padding-right: 0;
   }
 }
-
-
 .spg-action-button {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -24,15 +22,14 @@
   border-radius: calcSize(12.5);
   background-color: transparent;
   cursor: pointer;
-  &:not(:disabled) {
-    &:hover,
-    &:focus {
-        outline: none;
-        background-color: $primary-light;
-        use {
-            fill: $primary;
-        }
-    }
+  &:hover,
+  &:focus {
+      opacity: 1;
+      outline: none;
+      background-color: $primary-light;
+      use {
+          fill: $primary;
+      }
   }
 }
 .spg-action-button__icon {
@@ -41,7 +38,7 @@
     fill: $foreground-light;
   }
 }
-.spg-action-button--danger:not(:disabled) {
+.spg-action-button--danger {
   &:hover,
   &:focus {
     background-color: $red-light;
@@ -55,5 +52,12 @@ button.spg-action-button--large {
 }
 .spg-action-button:disabled {
   opacity: 0.25;
+  pointer-events: none;
   cursor: default;
+}
+.spg-action-button--muted {
+  opacity: 0.5;
+}
+.spg-action-button:active {
+  opacity: 0.5;
 }

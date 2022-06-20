@@ -29,6 +29,7 @@ const json = {
 };
 
 test("Dropdown adorners", async (t) => {
+  await t.resizeWindow(1920, 1080);
   await setJSON(json);
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);

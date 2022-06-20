@@ -35,9 +35,6 @@
 .spg-table__cell:not(.spg-table__cell--detail-panel):first-of-type .spg-text {
   padding-left: calcSize(2);
 }
-.spg-table__cell--actions .spg-action-bar {
-  opacity: 0.5;
-}
 .spg-table__cell--actions:first-child {
   width: calcSize(6);
 }
