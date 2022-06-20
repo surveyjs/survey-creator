@@ -118,7 +118,7 @@ test.before(async (t) => {
     .expect(visibleToolboxItems.count).eql(15)
 
     .resizeWindow(1200, 600)
-    .expect(Selector(".sv-dots__item").visible).ok()
+    .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(categoriesHeader.count).eql(0)
     .expect(visibleToolboxItems.count).eql(11);
 });
