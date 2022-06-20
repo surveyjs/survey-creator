@@ -882,7 +882,9 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
-  expect(columnsQuestion.emptyRowsText).toEqual("Add a new item");
+  expect(columnsQuestion.hideColumnsIfEmpty).toBeTruthy();
+  expect(columnsQuestion.emptyRowsText).toEqual("No items have been added yet");
+  expect(columnsQuestion.addRowText).toEqual("Add New");
   expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;
   expect(rows[1].getQuestionByColumnName("name").value).toEqual("column2");

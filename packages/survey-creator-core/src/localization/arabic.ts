@@ -264,7 +264,7 @@ export var arStrings = {
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
-    listIsEmpty: "Add a new item",
+    listIsEmpty: "No items have been added yet",
     expressionIsEmpty: "Expression is empty",
     value: "القيمة",
     text: "النص",

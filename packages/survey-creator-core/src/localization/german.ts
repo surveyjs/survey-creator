@@ -301,7 +301,7 @@ var germanTranslation = {
     propertyIsNoUnique: "Bitte geben Sie einen eindeutigen Wert ein",
     propertyNameIsNotUnique: "Bitte geben Sie einen eindeutigen Wert ein",
     listIsEmpty: "Neues Element hinzufügen",
-    choicesListIsEmpty: "Bisher wurden noch keine Auswahlmöglichkeiten hinzugefügt",
+    "listIsEmpty@choices": "Bisher wurden noch keine Auswahlmöglichkeiten hinzugefügt",
     "addNew@choices": "Auswahlmöglichkeit hinzufügen",
     expressionIsEmpty: "Keinen Ausdruck definiert",
     value: "Wert",

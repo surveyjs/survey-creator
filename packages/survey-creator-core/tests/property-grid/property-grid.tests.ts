@@ -2348,6 +2348,31 @@ test("expression editor in trigger expression", () => {
   conditionEditor.apply();
   expect(survey.triggers[0].expression).toEqual("{q1} = 1");
 });
+test("Show empty rows template if there is no rows", () => {
+  PropertyGridEditorCollection.register(new PropertyGridEditorCondition());
+  var survey = new SurveyModel({
+    elements: [
+      { type: "checkbox", name: "q1" }
+    ]
+  });
+  let propertyGrid = new PropertyGridModelTester(survey);
+  let propEditorQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("triggers")
+  );
+  expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
+  expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
+  expect(propEditorQuestion.emptyRowsText).toEqual("No items have been added yet");
+  expect(propEditorQuestion.addRowText).toEqual("Add New");
+
+  propertyGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
+  propEditorQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
+  expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
+  expect(propEditorQuestion.emptyRowsText).toEqual("No choices have been added yet");
+  expect(propEditorQuestion.addRowText).toEqual("Add a choice");
+});
 test("Different property editors for trigger value", () => {
   const prop = Serializer.findProperty("setvaluetrigger", "setValue");
   expect(prop).toBeTruthy();
