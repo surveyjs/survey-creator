@@ -10,6 +10,7 @@ export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShow
 export class TabDesignerViewModel extends Base {
   private widthUpdater: ComputedUpdater;
   private checkNewPageHandler: (sender: SurveyModel, options: any) => void;
+  private checkRemovePageHandler: (sender: SurveyModel, options: any) => void;
   private surveyOnPropertyChanged: (sender: SurveyModel, options: any) => void;
   private pagesControllerValue: PagesController;
 
@@ -73,6 +74,9 @@ export class TabDesignerViewModel extends Base {
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPageHandler = (sender: SurveyModel, options: any) => {
+      this.checkNewPage();
+    };
+    this.checkRemovePageHandler = (sender: SurveyModel, options: any) => {
       this.checkLastPageToDelete();
       this.checkNewPage();
     };
@@ -86,9 +90,9 @@ export class TabDesignerViewModel extends Base {
     };
     this.survey.onPropertyChanged.add(this.surveyOnPropertyChanged);
     this.survey.onQuestionAdded.add(this.checkNewPageHandler);
-    this.survey.onQuestionRemoved.add(this.checkNewPageHandler);
+    this.survey.onQuestionRemoved.add(this.checkRemovePageHandler);
     this.survey.onPanelAdded.add(this.checkNewPageHandler);
-    this.survey.onPanelRemoved.add(this.checkNewPageHandler);
+    this.survey.onPanelRemoved.add(this.checkRemovePageHandler);
     this.checkNewPage();
     this.widthUpdater && this.widthUpdater.dispose();
     this.widthUpdater = new ComputedUpdater<string>(() => {
@@ -101,9 +105,9 @@ export class TabDesignerViewModel extends Base {
     super.dispose();
     this.survey.onPropertyChanged.remove(this.surveyOnPropertyChanged);
     this.survey.onQuestionAdded.remove(this.checkNewPageHandler);
-    this.survey.onQuestionRemoved.remove(this.checkNewPageHandler);
+    this.survey.onQuestionRemoved.remove(this.checkRemovePageHandler);
     this.survey.onPanelAdded.remove(this.checkNewPageHandler);
-    this.survey.onPanelRemoved.remove(this.checkNewPageHandler);
+    this.survey.onPanelRemoved.remove(this.checkRemovePageHandler);
   }
 
   private checkNewPage() {
@@ -128,10 +132,15 @@ export class TabDesignerViewModel extends Base {
     const lastPage: PageModel = this.survey.pages[this.survey.pageCount - 1];
     if(lastPage.elements.length > 0) return;
     const json = lastPage.toJSON();
+    //check that name is not default.
     delete json["name"];
     //If there is at least one property in page is set, then return
     for(var key in json) return;
+    const lastPageName = lastPage.name;
     lastPage.delete();
+    if(!!this.newPage) {
+      this.newPage.name = lastPageName;
+    }
   }
 
   public clickDesigner() {

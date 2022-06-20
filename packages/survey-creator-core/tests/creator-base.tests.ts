@@ -550,6 +550,7 @@ test("Create new page on creating designer plugin", (): any => {
   expect(designerPlugin.model.showNewPage).toBeFalsy();
 
   creator.survey.pages[1].addNewQuestion("text", "question2");
+  creator.survey.pages[1].title = "New page";
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
 
@@ -740,7 +741,6 @@ test("undo/redo add new page", (): any => {
   expect(creator.survey.pages[2].name).toEqual("page3");
   creator.survey.pages[2].addNewQuestion("text", "question3");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
-  creator.undo();
   creator.undo();
   creator.undo();
   creator.undo();
