@@ -59,7 +59,7 @@ export var ruStrings = {
     newTextItemName: "текст",
     testSurvey: "Тестировать опросник",
     testSurveyAgain: "Тестировать еще раз",
-    testSurveyWidth: "Ширина опросника:",
+    testSurveyWidth: "Ширина опросника",
     logic: "Логика опросника",
     embedSurvey: "Вставить опросник",
     translation: "Перевод",
@@ -77,7 +77,7 @@ export var ruStrings = {
     delSelObject: "Удалить выбранный объект",
     editSelObject: "Редактировать выбранный объект",
     correctJSON: "Пожалуйста, исправьте JSON.",
-    surveyResults: "Результаты обследования:",
+    surveyResults: "Результаты обследования",
     surveyResultsTable: "Как таблица",
     surveyResultsJson: "Как JSON",
     resultsTitle: "Заголовок вопроса",
@@ -100,7 +100,7 @@ export var ruStrings = {
     italic: "Курсив",
     underline: "Подчеркивание",
     addNewQuestion: "Добавить вопрос",
-    completedHtmlOnConditionItemText: "Показывать, если:",
+    completedHtmlOnConditionItemText: "Показывать, если",
     lg: {
       addNewItem: "Добавить новое правило",
       //Logic tab strings
@@ -142,7 +142,7 @@ export var ruStrings = {
       completedHtmlOnConditionDescription:
         "Если логическое выражение возвращает 'true', то текст по умолчанию для 'Страницы благодарности' изменяется на заданный.",
 
-      itemExpressionText: "Когда выражение: '{0}' возвращает 'true':", //{0} - the expression
+      itemExpressionText: "Когда выражение: '{0}' возвращает 'true'", //{0} - the expression
       page_visibilityText: "Сделать страницу {0} видимой", //{0} page name
       panel_visibilityText: "Сделать панель {0} видимой", //{0} panel name
       panel_enableText: "Сделать панель {0} включенной", //{0} panel name
@@ -217,7 +217,7 @@ export var ruStrings = {
     showMore: "Для получения более подробной информации, пожалуйста, перейдите к документации",
     conditionShowMoreUrl:
       "Https://surveyjs.io/Documentation/LibraryParameter?id=Question¶meter=visibleIf",
-    assistantTitle: "Доступные вопросы:",
+    assistantTitle: "Доступные вопросы",
     cellsEmptyRowsColumns: "Должен быть хотя бы один столбец или строка",
 
     propertyIsEmpty: "Пожалуйста, введите значение",
@@ -405,16 +405,16 @@ export var ruStrings = {
     noquestions: "В опроснике нет ни одного вопроса",
     createtrigger: "Пожалуйста, создайте триггер",
     triggerOn: "О",
-    triggerMakePagesVisible: "Сделать страницы видимыми:",
-    triggerMakeQuestionsVisible: "Сделать элементы видимыми:",
+    triggerMakePagesVisible: "Сделать страницы видимыми",
+    triggerMakeQuestionsVisible: "Сделать элементы видимыми",
     triggerCompleteText: "Завершить опрос, если все получися.",
     triggerNotSet: "Тригер не установлен",
     triggerRunIf: "Начать, если",
-    triggerSetToName: "Изменить значение:",
-    triggerFromName: "Скопировать значение из:",
-    triggerRunExpression: "Выполнить это выражение:",
-    triggerSetValue: "в:",
-    triggerGotoName: "Перейти к вопросу:",
+    triggerSetToName: "Изменить значение",
+    triggerFromName: "Скопировать значение из",
+    triggerRunExpression: "Выполнить это выражение",
+    triggerSetValue: "в",
+    triggerGotoName: "Перейти к вопросу",
     triggerIsVariable: "Не помещать переменную в результат опросника.",
     triggerRunExpressionEmpty: "Пожалуйста, введите корректное выражение"
   },
@@ -511,7 +511,7 @@ export var ruStrings = {
   },
   // Опрос Тест
   ts: {
-    selectPage: "Выберите страницу, чтобы проверить это:",
+    selectPage: "Выберите страницу, чтобы проверить это",
     showInvisibleElements: "Показывать скрытые элементы"
   },
   validators: {

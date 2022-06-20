@@ -27,24 +27,9 @@ svc-page {
   position: absolute;
   display: none;
   top: calcSize(1);
-  right: 0;
+  inset-inline-end: 0; // right
+  padding: 0 calcSize(1.5);
   z-index: 1;
-  .sv-action-bar {
-    padding: 0 calcSize(1);
-    .sv-action-bar-item {
-      font-size: calcSize(1.5);
-      font-weight: 600;
-      line-height: calcSize(2);
-      align-items: center;
-      height: calcSize(4);
-    }
-    .sv-action-bar-separator {
-      margin-right: calcSize(1);
-    }
-    .sv-action:not(:last-child) > .sv-action__content {
-      padding-right: calcSize(1);
-    }
-  }
 }
 
 .svc-page__content:not(.svc-page__content--new):focus,
@@ -84,12 +69,13 @@ svc-page {
   border-radius: 2px;
   background-color: transparent;
   cursor: pointer;
-  margin-right: calcSize(1);
+  margin-inline-end: calcSize(1); // margin-right
   outline: none;
   use {
     fill: $foreground-light;
   }
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $background-dim;
   }
 }

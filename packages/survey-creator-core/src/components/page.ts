@@ -16,6 +16,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
+    this.actionContainer.sizeMode = "small";
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
       (type) => {
         this.currentAddQuestionType = type;

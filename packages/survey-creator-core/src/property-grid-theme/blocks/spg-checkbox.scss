@@ -1,6 +1,7 @@
 .spg-checkbox {
   cursor: pointer;
   display: flex;
+  gap: calcSize(1);
   align-items: top;
   margin-top: calcSize(2);
 }
@@ -19,7 +20,6 @@
   font-size: calcSize(2);
   color: $foreground;
   line-height: calcSize(3);
-  margin-left: calcSize(1);
 }
 
 .spg-checkbox__rectangle {
@@ -83,4 +83,5 @@
 .spg-selectbase__label {
   display: flex;
   align-items: center;
+  gap: calcSize(1);
 }
