@@ -215,7 +215,7 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
               },
               {
                 "value": "giraffe",
-                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+                "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
               },
               {
                 "value": "panda",
