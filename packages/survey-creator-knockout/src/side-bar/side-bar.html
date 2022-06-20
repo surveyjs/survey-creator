@@ -8,8 +8,10 @@
           <!-- ko component: { name: 'sv-action-bar', params: { model: toolbar } } -->
           <!-- /ko -->
         </div>
+        <!-- ko if: !!headerText -->
         <div class="svc-side-bar__container-title" data-bind="text: headerText">
         </div>
+        <!-- /ko -->
       </div>
       <div class="svc-side-bar__container-content">
         <!-- ko foreach: tabs -->
