@@ -50,6 +50,7 @@ import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrice
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { PagesController } from "../src/pages-controller";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
+import { IPortableMouseEvent } from "../src/utils/events";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -161,6 +162,38 @@ test("PageAdorner", (): any => {
   expect(counter).toEqual(1);
   pageModel.dispose();
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+});
+test("PageAdorner - remove page if: it is the last page, there is no elements and there is no properties set", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(desigerTab.newPage).toBeTruthy();
+  let pageAdorner = new PageAdorner(creator, desigerTab.newPage);
+  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(creator.survey.pages).toHaveLength(2);
+  creator.survey.pages[1].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(1);
+
+  pageAdorner = new PageAdorner(creator, desigerTab.newPage);
+  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(creator.survey.pages).toHaveLength(2);
+
+  pageAdorner = new PageAdorner(creator, desigerTab.newPage);
+  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(creator.survey.pages).toHaveLength(3);
+  creator.survey.pages[2].title = "New title";
+
+  creator.survey.pages[1].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(3);
+
+  creator.survey.pages[2].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(3);
 });
 
 test("PagesController", (): any => {

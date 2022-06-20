@@ -73,6 +73,7 @@ export class TabDesignerViewModel extends Base {
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPageHandler = (sender: SurveyModel, options: any) => {
+      this.checkLastPageToDelete();
       this.checkNewPage();
     };
     this.surveyOnPropertyChanged = (sender: SurveyModel, options: any) => {
@@ -121,6 +122,16 @@ export class TabDesignerViewModel extends Base {
       this.showNewPage = false;
       this.newPage = undefined;
     }
+  }
+  private checkLastPageToDelete(): void {
+    if(this.survey.pageCount <= 1) return;
+    const lastPage: PageModel = this.survey.pages[this.survey.pageCount - 1];
+    if(lastPage.elements.length > 0) return;
+    const json = lastPage.toJSON();
+    delete json["name"];
+    //If there is at least one property in page is set, then return
+    for(var key in json) return;
+    lastPage.delete();
   }
 
   public clickDesigner() {
