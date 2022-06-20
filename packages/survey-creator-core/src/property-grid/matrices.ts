@@ -53,6 +53,11 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
   }
+  private updateMatixActionsClasses(actions: Array<IAction>) {
+    actions.forEach(action => {
+      action.innerCss = `${action.innerCss || ""} spg-action-button--muted`;
+    });
+  }
   public onGetMatrixRowAction(
     obj: Base,
     options: any,
@@ -93,6 +98,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         showDetailAction.iconName = this.getShowDetailActionIconName(row);
       };
     }
+    this.updateMatixActionsClasses(actions);
   }
   private getShowDetailActionIconName(row: MatrixDynamicRowModel) {
     return row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";
