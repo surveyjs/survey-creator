@@ -242,7 +242,8 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
   await t
     .click(Question1, { speed: 0.1 })
     .hover(GiraffeItem, { speed: 0.1 }).hover(DragZoneGiraffeItem, { speed: 0.1 })
-    .dragToElement(DragZoneGiraffeItem, SurveyTitle, { speed: 0.1 });
+    .dragToElement(DragZoneGiraffeItem, SurveyTitle, { speed: 0.1 })
+    .wait(1000);
 
   await checkElementScreenshot("drag-drop-image-picker-invalid-drop-area.png", Selector(GiraffeItem), t);
 });
