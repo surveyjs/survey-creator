@@ -68,5 +68,5 @@ test("Check scrollbar is not appear when width mode is responsive", async (t) =>
   const verticalScrollWidth = 12;
   await t
     .resizeWindow(1920, 1080)
-    .expect(await rootSelector.scrollWidth - await rootSelector.offsetWidth).eql(verticalScrollWidth);
+    .expect(await rootSelector.offsetWidth - await rootSelector.scrollWidth).lte(verticalScrollWidth);
 });
