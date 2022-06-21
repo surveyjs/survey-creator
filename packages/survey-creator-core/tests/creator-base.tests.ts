@@ -50,6 +50,7 @@ import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrice
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { PagesController } from "../src/pages-controller";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
+import { IPortableMouseEvent } from "../src/utils/events";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -161,6 +162,56 @@ test("PageAdorner", (): any => {
   expect(counter).toEqual(1);
   pageModel.dispose();
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+});
+test("PageAdorner - remove page if: it is the last page, there is no elements and there is no properties set", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(desigerTab.newPage).toBeTruthy();
+  let pageAdorner = new PageAdorner(creator, desigerTab.newPage);
+  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(creator.survey.pages).toHaveLength(2);
+  creator.survey.pages[1].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(1);
+
+  pageAdorner = new PageAdorner(creator, desigerTab.newPage);
+  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(creator.survey.pages).toHaveLength(2);
+
+  pageAdorner = new PageAdorner(creator, desigerTab.newPage);
+  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(creator.survey.pages).toHaveLength(3);
+  creator.survey.pages[2].title = "New title";
+
+  creator.survey.pages[1].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(3);
+
+  creator.survey.pages[2].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(3);
+});
+
+test("PageAdorner - do not remove page if it is last and empty but the name has been changed", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(desigerTab.newPage).toBeTruthy();
+  let pageAdorner = new PageAdorner(creator, desigerTab.newPage);
+  expect(pageAdorner.isGhost).toBeTruthy();
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(creator.survey.pages).toHaveLength(2);
+  creator.survey.pages[1].name = "newPage";
+
+  creator.survey.pages[1].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(2);
 });
 
 test("PagesController", (): any => {
@@ -517,6 +568,7 @@ test("Create new page on creating designer plugin", (): any => {
   expect(designerPlugin.model.showNewPage).toBeFalsy();
 
   creator.survey.pages[1].addNewQuestion("text", "question2");
+  creator.survey.pages[1].title = "New page";
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
 
@@ -707,7 +759,6 @@ test("undo/redo add new page", (): any => {
   expect(creator.survey.pages[2].name).toEqual("page3");
   creator.survey.pages[2].addNewQuestion("text", "question3");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
-  creator.undo();
   creator.undo();
   creator.undo();
   creator.undo();
