@@ -319,6 +319,31 @@ test("Matrix dynamic with detail empty", async (t) => {
   await checkElementScreenshot("surface-matrix-detail-empty.png", Selector(".svc-question__content"), t);
 });
 
+test("Matrix check title editing (https://github.com/surveyjs/survey-creator/issues/3160)", async (t) => {
+  await t.resizeWindow(1920, 900);
+  const json = {
+    elements: [
+      {
+        "type": "matrix",
+        "name": "question1",
+        "columns": [
+          "Column 1",
+          "Column 2",
+          "Column 3"
+        ],
+        "rows": [
+          "Row 1",
+          "Row 2"
+        ],
+        width: "800px"
+      },
+    ],
+  };
+  await setJSON(json);
+  await ClientFunction(() => { (<HTMLElement>document.querySelector("[data-name='question1'] .sv-string-editor")).focus(); })();
+  await checkElementScreenshot("surface-matrix-title-editing.png", Selector(".svc-question__content"), t);
+});
+
 test("Matrix dynamic with detail two questions + select", async (t) => {
   await t.resizeWindow(1920, 1900);
   const json = {
