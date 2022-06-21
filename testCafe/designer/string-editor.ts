@@ -448,3 +448,37 @@ test("Test styles", async (t) => {
   await t
     .expect(await svItemSelector.getStyleProperty("user-select")).eql("text");
 });
+
+test("Test selection after tab", async (t) => {
+  let json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+        "title": "page_title",
+        "description": "page_desc"
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("page_title");
+
+  await t
+    .click(svItemSelector)
+    .expect(ClientFunction(() => {
+      return window.getSelection().toString();
+    })()).eql("page_title")
+    .wait(300)
+    .pressKey("tab")
+    .expect(ClientFunction(() => {
+      return window.getSelection().toString();
+    })()).eql("page_desc");
+});

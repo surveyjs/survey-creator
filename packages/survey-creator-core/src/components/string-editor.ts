@@ -136,6 +136,12 @@ export class StringEditorViewModelBase extends Base {
     this.checkConstraints(event);
     return true;
   }
+  public onKeyUp(event: KeyboardEvent): boolean {
+    if (event.keyCode === 9 && event.target === document.activeElement) {
+      select(event.target);
+    }
+    return true;
+  }
   private justFocused = false;
   public onMouseUp(event: MouseEvent): boolean {
     if (this.justFocused) {
