@@ -63,6 +63,10 @@ export class StringEditorViewModel {
   public onFocus(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onFocus(event);
   }
+  public onKeyUp(sender: StringEditorViewModel, event: KeyboardEvent): boolean {
+    return this.baseModel.onKeyUp(event);
+  }
+
   public onKeyDown(sender: StringEditorViewModel, event: KeyboardEvent): boolean {
     var res = this.baseModel.onKeyDown(event);
     this.errorText(this.baseModel.errorText);

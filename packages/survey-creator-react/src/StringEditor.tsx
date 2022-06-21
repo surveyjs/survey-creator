@@ -73,6 +73,9 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
   private onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
     return this.baseModel.onKeyDown(event.nativeEvent);
   };
+  private onKeyUp = (event: React.KeyboardEvent<HTMLSpanElement>) => {
+    return this.baseModel.onKeyUp(event.nativeEvent);
+  };
   private onMouseUp = (event: React.MouseEvent<HTMLSpanElement>): boolean => {
     return this.baseModel.onMouseUp(event.nativeEvent);
   };
@@ -129,6 +132,7 @@ export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
+          onKeyUp={this.onKeyUp}
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
         >

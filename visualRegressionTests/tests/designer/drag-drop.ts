@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, checkElementScreenshot } from "../../helper";
+import { url, setJSON, checkElementScreenshot, explicitErrorHandler } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -193,4 +193,57 @@ test("Matrix: Property Grid: Choices", async (t) => {
     });
 
   await checkElementScreenshot("drag-drop-matrix-pg-choices.png", Selector("[data-name=\"choices\"]"), t);
+});
+
+// https://github.com/surveyjs/survey-creator/issues/3113
+test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(2560, 1440);
+
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            "type": "imagepicker",
+            "name": "question1",
+            "choices": [
+              {
+                "value": "lion",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+              },
+              {
+                "value": "giraffe",
+                "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+              },
+              {
+                "value": "panda",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+              },
+              {
+                "value": "camel",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Question1 = Selector("[data-name=\"question1\"]");
+  const GiraffeItem = Selector("[data-sv-drop-target-item-value=\"giraffe\"]");
+  const SurveyTitle = Selector("[aria-placeholder='Survey Title']");
+
+  const DragZoneGiraffeItem = GiraffeItem.find(".svc-image-item-value-controls__drag-area-indicator").filterVisible();
+
+  await t
+    .click(Question1, { speed: 0.1 })
+    .hover(GiraffeItem, { speed: 0.1 }).hover(DragZoneGiraffeItem, { speed: 0.1 })
+    .dragToElement(DragZoneGiraffeItem, SurveyTitle, { speed: 0.1 })
+    .wait(1000);
+
+  await checkElementScreenshot("drag-drop-image-picker-invalid-drop-area.png", Selector(GiraffeItem), t);
 });
