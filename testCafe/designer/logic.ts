@@ -599,6 +599,6 @@ test("Could not change 'and' on 'or' in logic tab or in condition editor", async
 
     .click(logicOperatorConjuction)
     .expect(visibleListItems.count).eql(2)
-    .expect(visibleListItems.nth(0).textContent).eql("and")
-    .expect(visibleListItems.nth(1).textContent).eql("or");
+    .expect(visibleListItems.nth(0).textContent).contains("and")
+    .expect(visibleListItems.nth(1).textContent).contains("or");
 });
