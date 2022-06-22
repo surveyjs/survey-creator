@@ -1175,6 +1175,50 @@ test("itemvalue[] property editor + detail panel + options.onIsPropertyReadOnlyC
   row.showDetailPanel();
   expect(row.detailPanel.getQuestionByName("visibleIf").readOnly).toEqual(true);
 });
+test("matrix dropdown rows, enableIf and visibleIf in row", () => {
+  const options = new EmptySurveyCreatorOptions();
+  const question = new QuestionMatrixDropdownModel("q1");
+  question.rows = [1, 2, 3];
+  const propertyGrid = new PropertyGridModelTester(question, options);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rows")
+  );
+  const row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  const visibleIfQuestion = <Question>row.detailPanel.getQuestionByName("visibleIf");
+  const enableIfQuestion = <Question>row.detailPanel.getQuestionByName("enableIf");
+  expect(visibleIfQuestion).toBeTruthy();
+  expect(enableIfQuestion).toBeTruthy();
+  expect(visibleIfQuestion.parent).toEqual(enableIfQuestion.parent);
+});
+test("matrix rows/columns, enableIf and visibleIf in row", () => {
+  const options = new EmptySurveyCreatorOptions();
+  const question = new QuestionMatrixModel("q1");
+  question.rows = [1, 2, 3];
+  question.columns = [1, 2, 3];
+  const propertyGrid = new PropertyGridModelTester(question, options);
+  let choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rows")
+  );
+  let row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  let visibleIfQuestion = <Question>row.detailPanel.getQuestionByName("visibleIf");
+  let enableIfQuestion = <Question>row.detailPanel.getQuestionByName("enableIf");
+  expect(visibleIfQuestion).toBeTruthy();
+  expect(enableIfQuestion).toBeTruthy();
+  expect(visibleIfQuestion.parent).toEqual(enableIfQuestion.parent);
+
+  choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  visibleIfQuestion = <Question>row.detailPanel.getQuestionByName("visibleIf");
+  enableIfQuestion = <Question>row.detailPanel.getQuestionByName("enableIf");
+  expect(visibleIfQuestion).toBeTruthy();
+  expect(enableIfQuestion).toBeTruthy();
+  expect(visibleIfQuestion.parent).toEqual(enableIfQuestion.parent);
+});
 
 test("itemvalue[] property editor + create columns + options.onCanShowPropertyCallback", () => {
   var options = new EmptySurveyCreatorOptions();
