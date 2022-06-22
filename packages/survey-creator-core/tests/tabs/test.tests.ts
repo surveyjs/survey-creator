@@ -516,3 +516,14 @@ test("Prev/Next actions enabled/disabled", (): any => {
   expect(model.prevPageAction.enabled).toBeTruthy();
   expect(model.nextPageAction.enabled).toBeFalsy();
 });
+test("Change theme action hidden", (): any => {
+  TabTestPlugin.prototype["getAvailableThemes"] = () => { return [{ id: 1, value: 1, title: "1" }, { id: 2, value: 2, title: "2" }]; };
+  let creator: CreatorTester = new CreatorTester();
+  let testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  expect(testPlugin["changeThemeAction"]).toBeDefined();
+  creator = new CreatorTester({ allowChangeThemeInPreview: false });
+  testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  expect(testPlugin["changeThemeAction"]).toBeUndefined();
+});
