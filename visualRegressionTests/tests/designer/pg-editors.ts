@@ -53,6 +53,12 @@ test("Properties on the same line", async (t) => {
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
 
+  await t.click(Selector(".spg-panel__content .spg-question__title").withText("Max"));
+  await takeScreenshot("properties-on-one-line-focus.png", Selector(".spg-panel__content").filterVisible(), screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+
 });
 test("Values editors, keep them close", async (t) => {
   const json = {
