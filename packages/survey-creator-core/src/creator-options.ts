@@ -67,4 +67,6 @@ export interface ICreatorOptions {
   maximumRateValues?: number;
   //Defulat is -1 (unlimited)
   maxLogicItemsInCondition?: number;
+  //Default is true
+  allowChangeThemeInPreview?: boolean;
 }

@@ -10,7 +10,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private languageListModel: ListModel;
   private changeThemePopupModel: PopupModel;
   private changeThemeModel: ListModel;
-  private changeThemeAction: Action;
+  protected changeThemeAction: Action;
   private deviceSelectorAction: Action;
   private deviceListModel: ListModel;
   private orientationSelectorAction: Action;
@@ -129,6 +129,17 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
   }
+  protected getAvailableThemes(themeMapper: any) {
+    let availableThemesToItems = [];
+    if (!!document && !!document.body) {
+      const styles = getComputedStyle(document.body);
+      availableThemesToItems = themeMapper
+        .filter(item => item.theme.variables && styles.getPropertyValue(item.theme.variables.themeMark))
+        .map(item => ({ id: item.name + "_themeSwitcher", value: item.name, title: item.title }));
+    }
+
+    return availableThemesToItems;
+  }
   public createActions() {
     const items: Array<Action> = [];
 
@@ -216,16 +227,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       { name: "modern", title: getThemeTitle("modern"), theme: modernCss },
       { name: "default", title: getThemeTitle("default"), theme: defaultStandardCss }
     ];
+    let availableThemesToItems = this.getAvailableThemes(themeMapper);
 
-    let availableThemesToItems = [];
-    if (!!document && !!document.body) {
-      const styles = getComputedStyle(document.body);
-      availableThemesToItems = themeMapper
-        .filter(item => item.theme.variables && styles.getPropertyValue(item.theme.variables.themeMark))
-        .map(item => ({ id: item.name + "_themeSwitcher", value: item.name, title: item.title }));
-    }
-
-    if (availableThemesToItems.length > 1) {
+    if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1) {
       this.changeThemeModel = new ListModel(
         availableThemesToItems,
         (item: any) => {
