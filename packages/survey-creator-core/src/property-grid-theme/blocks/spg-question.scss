@@ -40,6 +40,26 @@
   border: 1px solid $border;
   line-height: calcSize(6);
   vertical-align: middle;
+  align-items: stretch;
+
+  &:focus-within {
+      border-color: $primary;
+      box-shadow: none;
+
+      .spg-question__header--location--left {
+        box-shadow: none;
+        border: 1px solid $primary;
+        border-left: none;
+        border-right: none;
+        box-shadow: inset 1px 0 0 0 $primary;
+      }
+  }
+  .spg-input:focus {
+    border: 1px solid $primary;
+    border-left: none;
+    border-right: none;
+    box-shadow: inset -1px 0 0 0 $primary;
+  }
 }
 
 .spg-question__header--location--left {
@@ -50,6 +70,9 @@
     border-right: 1px solid $border;
     display: inline-block;
   }
+  display: flex;
+  align-items: center;
+  
 }
 
 .spg-question__content--left {

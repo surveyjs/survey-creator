@@ -50,7 +50,7 @@ test("item value isNew isDraggable allowRemove", () => {
   expect(selectAllItemAdorner.allowRemove).toBeFalsy();
 
   question.hasSelectAll = true;
-  expect(selectAllItemAdorner.isNew).toBeTruthy();
+  expect(selectAllItemAdorner.isNew).toBeFalsy();
   expect(selectAllItemAdorner.allowAdd).toBeFalsy();
   expect(selectAllItemAdorner.isDraggable).toBeFalsy();
   expect(selectAllItemAdorner.allowRemove).toBeTruthy();
@@ -63,6 +63,57 @@ test("item value isNew isDraggable allowRemove", () => {
   expect(itemNoneAdorner.allowAdd).toBeFalsy();
   expect(itemNoneAdorner.isDraggable).toBeFalsy();
   expect(itemNoneAdorner.allowRemove).toBeFalsy();
+});
+
+test("item hasNone, hasOther, hasSelectAll change trigger updateIsNew and behave like on click add/remove", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+
+  const noneItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.noneItem
+  );
+  const selectAllItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.selectAllItem
+  );
+  const otherItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.otherItem
+  );
+
+  expect(selectAllItemAdorner.isNew).toBeTruthy();
+  expect(selectAllItemAdorner.allowAdd).toBeTruthy();
+  expect(selectAllItemAdorner.allowRemove).toBeFalsy();
+
+  question.hasSelectAll = true;
+  expect(selectAllItemAdorner.isNew).toBeFalsy();
+  expect(selectAllItemAdorner.allowAdd).toBeFalsy();
+  expect(selectAllItemAdorner.allowRemove).toBeTruthy();
+
+  expect(otherItemAdorner.isNew).toBeTruthy();
+  expect(otherItemAdorner.allowAdd).toBeTruthy();
+  expect(otherItemAdorner.allowRemove).toBeFalsy();
+
+  question.hasOther = true;
+  expect(otherItemAdorner.isNew).toBeFalsy();
+  expect(otherItemAdorner.allowAdd).toBeFalsy();
+  expect(otherItemAdorner.allowRemove).toBeTruthy();
+
+  expect(noneItemAdorner.isNew).toBeTruthy();
+  expect(noneItemAdorner.allowAdd).toBeTruthy();
+  expect(noneItemAdorner.allowRemove).toBeFalsy();
+
+  question.hasNone = true;
+  expect(noneItemAdorner.isNew).toBeFalsy();
+  expect(noneItemAdorner.allowAdd).toBeFalsy();
+  expect(noneItemAdorner.allowRemove).toBeTruthy();
 });
 
 test("item value allowAdd isDraggable allowRemove on events", () => {

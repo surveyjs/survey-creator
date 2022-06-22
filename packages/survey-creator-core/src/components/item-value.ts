@@ -29,12 +29,18 @@ export class ItemValueWrapperViewModel extends Base {
   ) {
     super();
     this.updateIsNew(question, item);
+    const updateFromProperty = () => {
+      this.updateIsNew(question, item);
+    };
     if (question.noneItem === item) {
+      question.registerFunctionOnPropertyValueChanged("hasNone", updateFromProperty);
     } else if (question.otherItem === item) {
+      question.registerFunctionOnPropertyValueChanged("hasOther", updateFromProperty);
     } else if (
       question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>question).selectAllItem === item
     ) {
+      question.registerFunctionOnPropertyValueChanged("hasSelectAll", updateFromProperty);
     } else if (this.isNew) {
       const nextValue = creator.getNextItemValue(question);
       item.value = nextValue;
@@ -111,13 +117,16 @@ export class ItemValueWrapperViewModel extends Base {
   public add(model: ItemValueWrapperViewModel) {
     if (model.question.noneItem === model.item) {
       model.question.hasNone = true;
+      return;
     } else if (model.question.otherItem === model.item) {
       model.question.hasOther = true;
+      return;
     } else if (
       model.question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>model.question).selectAllItem === model.item
     ) {
       (<any>model.question).hasSelectAll = true;
+      return;
     } else {
       model.item.value = "newitem";
       const itemValue = model.creator.createNewItemValue(model.question);
