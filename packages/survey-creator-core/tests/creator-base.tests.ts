@@ -2076,6 +2076,20 @@ test("creator.onActiveTabChaning", (): any => {
   expect(tabName).toEqual("logic");
   expect(creator.activeTab).toEqual("test");
 });
+test("active tab disableHide", (): any => {
+  const creator = new CreatorTester({
+    showTranslationTab: true,
+    showLogicTab: true,
+  });
+  expect(creator.viewType).toEqual("designer");
+  expect(creator.tabs[0].active).toBeTruthy();
+  expect(creator.tabs[0].disableHide).toBeTruthy();
+  creator.makeNewViewActive("test");
+  expect(creator.tabs[1].active).toBeTruthy();
+  expect(creator.tabs[1].disableHide).toBeTruthy();
+  expect(creator.tabs[0].active).toBeFalsy();
+  expect(creator.tabs[0].disableHide).toBeFalsy();
+});
 test("creator.onDragDropAllow", (): any => {
   const creator = new CreatorTester({});
   let fired = false;

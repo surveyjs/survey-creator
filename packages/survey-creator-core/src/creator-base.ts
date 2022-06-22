@@ -335,8 +335,9 @@ export class CreatorBase extends Base
       title: title,
       componentContent: componentContent ? componentContent : "svc-tab-" + name,
       data: plugin,
-      action: () => this.makeNewViewActive(name),
-      active: this.viewType === name
+      action: () => { this.makeNewViewActive(name); },
+      active: this.viewType === name,
+      disableHide: this.viewType === name
     });
     if (index >= 0 && index < this.tabs.length) {
       this.tabs.splice(index, 0, tab);
@@ -2896,7 +2897,11 @@ export class CreatorBase extends Base
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "viewType") {
-      this.tabs.forEach((tab) => (tab.active = this.viewType === tab.id));
+      this.tabs.forEach((tab) => {
+        const isActive = this.viewType === tab.id;
+        tab.active = isActive;
+        tab.disableHide = isActive;
+      });
     }
   }
   public initResponsivityManager(container: HTMLDivElement): void {
