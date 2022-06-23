@@ -1,5 +1,4 @@
-<div class="svc-image-item-value-wrapper"
-  data-bind="event: { pointerdown: function(model, event) { onPointerDown(event); } }, attr: attributes, css: { 'svc-image-item-value--new': isNew, 'svc-image-item-value-wrapper--ghost': isDragDropGhost }">
+<div data-bind="event: { pointerdown: function(model, event) { onPointerDown(event); } }, attr: attributes, css: getRootCss()">
   <div class="svc-image-item-value-wrapper__ghost" data-bind="style: { width: question.renderedImageWidth, height: question.renderedImageHeight }"></div>
 
   <div class="svc-image-item-value-wrapper__content">
@@ -27,7 +26,7 @@
     <!-- /ko -->
 
     <!-- ko if: isNew -->
-    <div class="svc-image-item-value__item">
+    <div class="svc-image-item-value__item" data-bind="event: { dragover: dragover, drop: drop, dragleave: dragleave }">
       <div class="sd-imagepicker__item sd-imagepicker__item--inline">
         <label class="sd-imagepicker__label">
           <div
