@@ -256,11 +256,11 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "general" }]
     },
     "itemvalue[]@rows": {
-      properties: [{ name: "visibleIf" }],
+      properties: [{ name: "visibleIf" }, { name: "enableIf" }],
       tabs: [{ name: "general" }]
     },
     "itemvalue[]@columns": {
-      properties: [{ name: "visibleIf" }],
+      properties: [{ name: "visibleIf" }, { name: "enableIf" }],
       tabs: [{ name: "general" }]
     },
     text: {
