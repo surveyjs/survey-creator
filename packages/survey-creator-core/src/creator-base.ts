@@ -209,6 +209,12 @@ export class CreatorBase extends Base
     this.setPropertyValue("allowEditSurveyTitle", val);
     this.designerPropertyGrid && this.designerPropertyGrid.refresh();
   }
+  get showSurveyTitle(): boolean {
+    return this.allowEditSurveyTitle;
+  }
+  set showSurveyTitle(val: boolean) {
+    this.allowEditSurveyTitle = val;
+  }
   /**
    * You have right to set this property to true if you have bought the commercial licence only.
    * It will remove the text about non-commerical usage on the top of the widget.
@@ -930,10 +936,11 @@ export class CreatorBase extends Base
    */
   public setSurveyJSONTextCallback: (text: string) => void;
 
-  /**
-   * You need to set this property to true if you want to use tabs instead of accordion in the popup element's editor.
-   */
-  public useTabsInElementEditor = false;
+  // /**
+  //  * You need to set this property to true if you want to use tabs instead of accordion in the popup element's editor.
+  //  */
+  // public useTabsInElementEditor = false;
+
   /**
    * You need to set this property to value bigger than 0 to disable adding more logic items in condition than this value.
    */

@@ -326,6 +326,7 @@ QUnit.test("Default locale name", function (assert) {
 QUnit.test("Add properties for columns", function (assert) {
   var question = new Survey.QuestionMatrixDropdown("q1");
   question.addColumn("col1");
+  question.columns[0].cellType = "dropdown";
   question.columns[0]["choices"] = ["1", "2"];
   var group = new TranslationGroup(question.name, question);
   var column0Group = group.groups[0];
