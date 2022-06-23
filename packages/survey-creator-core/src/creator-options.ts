@@ -20,25 +20,30 @@ export interface ICreatorOptions {
   //Default is false
   isAutoSave?: boolean;
   //Default is false
-  isRTLValue?: boolean;
+  isRTL?: boolean;
+  // //Default is false
+  // //Deprecated. Use isRTL instead
+  // isRTLValue?: boolean;
   //Default is true
-  allowEditSurveyTitle?: boolean;
+  showSurveyTitle?: boolean;
+  // //Default is true
+  // allowEditSurveyTitle?: boolean;
   //Default is true
   allowEditExpressionsInTextEditor?: boolean;
-  //Default is false
-  showOptions?: boolean;
+  // //Default is false
+  // showOptions?: boolean;
   //Default is false
   showTitlesInExpressions?: boolean;
-  //Default is false
-  useTabsInElementEditor?: boolean;
+  // //Default is false
+  // useTabsInElementEditor?: boolean;
   //Default is true
   showErrorOnFailedSave?: boolean;
   //Default is true
   generateValidJSON?: boolean;
   //Default is false
   readOnly?: boolean;
-  //Default is true
-  showPagesInTestSurveyTab?: boolean;
+  // //Default is true
+  // showPagesInTestSurveyTab?: boolean;
   //Default is true
   showPagesInPreviewTab?: boolean;
   //Default is true
