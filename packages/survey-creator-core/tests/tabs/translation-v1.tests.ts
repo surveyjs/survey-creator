@@ -236,6 +236,7 @@ test("Add properties for columns", () => {
     "q1"
   );
   question.addColumn("col1");
+  question.columns[0].cellType = "dropdown";
   question.columns[0]["choices"] = ["1", "2"];
   const group: TranslationGroup = new TranslationGroup(question.name, question);
   const column0Group: TranslationGroup = group.groups[0];
