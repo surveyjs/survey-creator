@@ -1,77 +1,209 @@
 /**
- * Creator options that you can pass in Creator constructor
+ * Survey Creator configuration. Pass it as an argument to the `SurveyCreator` constructor:
+ *
+ * ```js
+ * const creator = new SurveyCreator.SurveyCreator(creatorOptions);
+ * ```
  */
 export interface ICreatorOptions {
   [index: string]: any;
-  //Default is true
+  /**
+   * Specifies whether to display the Designer tab.
+   * 
+   * Default value: `true`
+   */
   showDesignerTab?: boolean;
-  //Default is true
+  /**
+   * Specifies whether to display the Preview tab.
+   * 
+   * Default value: `true`
+   */
   showPreviewTab?: boolean;
-  //Default is true
+  /**
+   * Specifies whether to display the JSON Editor tab.
+   * 
+   * Default value: `true`
+   */
   showJSONEditorTab?: boolean;
-  //Default is false
+  /**
+   * Specifies whether to display the Logic tab.
+   * 
+   * Default value: `false`
+   */
   showLogicTab?: boolean;
-  //Default is false
+  /**
+   * Specifies whether to display the Embed Survey tab.
+   * 
+   * Default value: `false`
+   */
   showEmbeddedSurveyTab?: boolean;
-  //Default is false
+  /**
+   * Specifies whether to display the Translation tab.
+   * 
+   * Default value: `false`
+   */
   showTranslationTab?: boolean;
-  //Default is false
+  /**
+   * Removes the Free Trial bar.
+   * 
+   * Default value: `false`
+   * 
+   * **IMPORTANT**: You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
+   */
   haveCommercialLicense?: boolean;
-  //Default is false
+  /**
+   * Specifies whether to call the [saveSurveyFunc](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#saveSurveyFunc) each time survey settings are changed.
+   * 
+   * Default value: `false`
+   */
   isAutoSave?: boolean;
-  //Default is false
+  /**
+   * Specifies whether to enable support for right-to-left languages.
+   * 
+   * Default value: `false`
+   */
   isRTL?: boolean;
-  // //Default is false
-  // //Deprecated. Use isRTL instead
-  // isRTLValue?: boolean;
-  //Default is true
+  /**
+   * Specifies whether users can see and edit the survey title and related survey properties.
+   * 
+   * Default value: `true`
+   */
   showSurveyTitle?: boolean;
-  // //Default is true
-  // allowEditSurveyTitle?: boolean;
-  //Default is true
+  /**
+   * Specifies whether users can edit expressions in the Logic tab as plain text.
+   * 
+   * If you set this property to `false`, users can only use UI elements to edit logical expressions.
+   * 
+   * Default value: `true`
+   * 
+   * @see showLogicTab
+   */
   allowEditExpressionsInTextEditor?: boolean;
-  // //Default is false
-  // showOptions?: boolean;
-  //Default is false
+  /**
+   * Specifies whether to display question titles instead of names when users edit logical expressions.
+   * 
+   * Default value: `false`
+   */
   showTitlesInExpressions?: boolean;
-  // //Default is false
-  // useTabsInElementEditor?: boolean;
-  //Default is true
+  /**
+   * Specifies whether to show an error message if a survey is not saved in the database.
+   * 
+   * Default value: `true`
+   */
   showErrorOnFailedSave?: boolean;
-  //Default is true
+  /**
+   * Specifies whether the Survey Creator generates the survey definition as a valid JSON object or JavaScript object.
+   * 
+   * Default value: `true`
+   * 
+   * Refer to the following MDN topic for information on differences between JSON and JavaScript objects: [JavaScript and JSON Differences](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON#javascript_and_json_differences) 
+   */
   generateValidJSON?: boolean;
-  //Default is false
+  /**
+   * Enable the read-only mode. If you set this property to `true`, users cannot change the initial survey configuration.
+   * 
+   * Default value: `false`
+   */
   readOnly?: boolean;
-  // //Default is true
-  // showPagesInTestSurveyTab?: boolean;
-  //Default is true
+  /**
+   * Specifies whether to show the page selector at the bottom of the Preview tab.
+   *
+   * Default value: `true`
+   */
   showPagesInPreviewTab?: boolean;
-  //Default is true
-  showSimulatorInTestSurveyTab?: boolean; //undefined
-  //Default is "defaultV2"
+  /**
+   * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
+   * 
+   * Default value: `"defaultV2"`
+   */
   themeForPreview?: string;
-  //Default is true
+  /**
+   * Specifies whether the Preview tab displays the Device button that allows users to preview the survey on different device types.
+   * 
+   * Default value: `true`
+   */
   showSimulatorInPreviewTab?: boolean;
-  //Default is "auto"
+  /**
+   * Specifies whether the Preview tab displays the language selector.
+   * 
+   * Accepted values:
+   * 
+   * - `"auto"` (default)      
+   * Display the language selector only if the survey is translated to more than one language.
+   * 
+   * - `true`        
+   * Always display the language selector regardless of how many languages are used in the survey.
+   *  
+   * - `false`        
+   * Never display the language selector.
+   * 
+   * - `"all"`        
+   * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization).
+   * 
+   * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+   */
   showDefaultLanguageInPreviewTab?: boolean | string;
-  //Default is true
+  /**
+   * Specifies whether the Preview tab displays a checkbox that allows users to show or hide invisible survey elements.
+   * 
+   * Default value: `true`
+   */
   showInvisibleElementsInPreviewTab?: boolean;
-  //Default is false
+  /**
+   * Specifies whether UI elements display survey, page, and question titles instead of their names.
+   * 
+   * Default value: `false`
+   */
   showObjectTitles?: boolean;
-  //Default is false
+  /**
+   * Specifies whether the design surface displays the survey title and description when the survey does not contain any elements.
+   * 
+   * Default value: `false`
+   */
   showHeaderInEmptySurvey?: boolean;
-  //Default is true
+  /**
+   * Specifies whether users can add, edit, and delete survey pages.
+   * 
+   * Default value: `true`
+   */
   allowModifyPages?: boolean;
-  //Default is settings.propertyGrid.maximumColumnsCount
+  /**
+   * Limits the number of columns that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel), and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
+   * 
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumColumnsCount`)
+   */
   maximumColumnsCount?: number;
-  //Default is settings.propertyGrid.maximumChoicesCount
+  /**
+   * Limits the number of choices that users can add to [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
+   * 
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumChoicesCount`)
+   */
   maximumChoicesCount?: number;
-  //Default is settings.propertyGrid.maximumRowsCount
+  /**
+   * Limits the number of rows that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
+   * 
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRowsCount`)
+   */
   maximumRowsCount?: number;
-  //Default is settings.propertyGrid.maximumRateValues
+  /**
+   * Limits the number of rate value that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
+   * 
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
+   */
   maximumRateValues?: number;
-  //Defulat is -1 (unlimited)
+  /**
+   * Limits the number of items in a logical expression.
+   * 
+   * Default value: -1 (unlimited)
+   */
   maxLogicItemsInCondition?: number;
   //Default is true
+  /**
+   * Specifies whether users can switch between UI themes in the Preview tab.
+   * 
+   * Default value: `true`
+   * 
+   * [View the "Switch Between Themes" demo](https://surveyjs.io/Examples/Creator?id=theme-switcher)
+   */
   allowChangeThemeInPreview?: boolean;
 }
