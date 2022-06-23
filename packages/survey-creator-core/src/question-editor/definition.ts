@@ -132,6 +132,7 @@ export class SurveyQuestionEditorDefinition {
     matrixdropdown: {
       properties: [
         "totalText",
+        { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "rowsVisibleIf", tab: "logic" },
         { name: "rowTitleWidth", tab: "layout" },
         { name: "keyDuplicationError", tab: "validation" }
