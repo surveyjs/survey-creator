@@ -65,7 +65,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     let content = null;
     if (isNew) {
       content = (<>
-        <div className="svc-image-item-value__item" 
+        <div className="svc-image-item-value__item"
           onDrop={this.model.onDrop} onDragOver={this.model.onDragOver} onDragLeave={this.model.onDragLeave}>
           <div className="sd-imagepicker__item sd-imagepicker__item--inline">
             <label className="sd-imagepicker__label">
