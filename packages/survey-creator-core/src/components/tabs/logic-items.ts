@@ -340,21 +340,29 @@ export class SurveyLogicItem {
   private isSuitableByLogicTypeInActions(logicTypeName: string): boolean {
     return this.actions.some(action => action.isSuitableByLogicType(logicTypeName));
   }
-  private renameQuestionInExpression(oldName: string, newName: string) {
+  private renameQuestionInExpression(oldName: string, newName: string): void {
     if (!this.expression) return;
-    var newExpression = this.expression;
-    var expression = this.expression.toLocaleLowerCase();
-    oldName = wrapTextByCurlyBraces(oldName.toLowerCase());
-    newName = wrapTextByCurlyBraces(newName);
-    var index = expression.lastIndexOf(oldName, expression.length);
-    while (index > -1) {
-      newExpression = newExpression.substring(0, index) + newName + newExpression.substring(index + oldName.length);
-      expression = expression.substring(0, index);
-      index = expression.lastIndexOf(oldName, expression.length);
-    }
+    oldName = oldName.toLowerCase();
+    if(this.expression.toLocaleLowerCase().indexOf(oldName) < 0) return;
+    const ob = settings.logic.openBracket;
+    oldName = ob + oldName;
+    newName = ob + newName;
+    let newExpression = this.expression;
+    [settings.logic.closeBracket, ".", "["].forEach(ch => {
+      newExpression = this.renameQuestionInExpressionCore(newExpression, newExpression.toLocaleLowerCase(), oldName + ch, newName + ch);
+    });
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);
     }
+  }
+  private renameQuestionInExpressionCore(expression: string, lowCaseExpression: string, oldSubStr: string, newSubStr: string): string {
+    var index = lowCaseExpression.lastIndexOf(oldSubStr, lowCaseExpression.length);
+    while (index > -1) {
+      expression = expression.substring(0, index) + newSubStr + expression.substring(index + oldSubStr.length);
+      lowCaseExpression = lowCaseExpression.substring(0, index);
+      index = lowCaseExpression.lastIndexOf(oldSubStr, index);
+    }
+    return expression;
   }
   private removeQuestionInExpression(name: string) {
     if (!this.expression) return;
