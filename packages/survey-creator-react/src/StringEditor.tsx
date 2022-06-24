@@ -2,16 +2,18 @@ import React from "react";
 import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import { CreatorBase, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
+import { CreatorModelElement } from "./ModelElement";
 
-export class SurveyLocStringEditor extends SurveyElementBase<any, any> {
+export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   private baseModel: StringEditorViewModelBase;
   private svStringEditorRef: React.RefObject<HTMLDivElement>;
-  private blurredByEscape: boolean = false;
   constructor(props: any) {
     super(props);
     this.state = { changed: 0 };
-    this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
     this.svStringEditorRef = React.createRef();
+  }
+  protected createModel(): void {
+    this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
     this.baseModel.blurEditor = () => {
       this.svStringEditorRef.current.blur();
       this.svStringEditorRef.current.spellcheck = false;
