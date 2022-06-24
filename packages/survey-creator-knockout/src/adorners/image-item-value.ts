@@ -1,6 +1,7 @@
 import * as ko from "knockout";
 import {
   ImageItemValue,
+  QuestionImagePickerModel,
   QuestionSelectBase,
   SurveyTemplateRendererViewModel,
 } from "survey-core";
@@ -12,7 +13,7 @@ const template = require("./image-item-value.html");
 class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewModel {
   constructor(
     creator: CreatorBase,
-    public question: QuestionSelectBase,
+    public question: QuestionImagePickerModel,
     public item: ImageItemValue,
     public templateData: any,
     itemsRoot: HTMLElement
@@ -46,6 +47,10 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
   }
   dragover = (_, event)=> {
     this.onDragOver(event);
+  }
+  getNewItemStyle() {
+    const needStyle = !this.getIsNewItemSingle();
+    return { width: needStyle ? this.question.renderedImageWidth : undefined, height: needStyle ? this.question.renderedImageHeight : undefined };
   }
 
 }

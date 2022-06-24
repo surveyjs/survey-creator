@@ -140,3 +140,10 @@
   display: none;
   background: $background-dim;
 }
+
+.svc-image-item-value--single {
+  width: 100%;
+  .sd-imagepicker__image {
+    height: calcSize(30);  
+  }
+}
