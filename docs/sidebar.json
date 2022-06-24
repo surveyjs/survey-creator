@@ -93,7 +93,11 @@
       "Items": [
         {
           "Name": "surveycreator",
-          "Title": "Survey Creator"
+          "Title": "SurveyCreator"
+        },
+        {
+          "Name": "ICreatorOptions",
+          "Title": "ICreatorOptions"
         },
         {
           "Name": "questiontoolbox",
