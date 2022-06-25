@@ -19,6 +19,9 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
       this.svStringEditorRef.current.spellcheck = false;
     };
   }
+  protected getUpdatedModelProps(): string[] {
+    return ["creator", "locString"];
+  }
   private get locString(): LocalizableString {
     return this.props.locStr.locStr;
   }
