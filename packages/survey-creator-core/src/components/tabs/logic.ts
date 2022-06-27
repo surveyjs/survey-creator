@@ -57,8 +57,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     any
   > = new Event<(sender: SurveyLogic, options: any) => any, any>();
 
-  koAfterRender: any;
-
   constructor(
     public survey: SurveyModel,
     public options: ISurveyCreatorOptions = null
@@ -67,7 +65,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
     this.readOnly = this.optionsReadOnly;
     this.update();
-    this.koAfterRender = function () { };
   }
   dispose() {
     super.dispose();
