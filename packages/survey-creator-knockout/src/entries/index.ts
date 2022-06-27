@@ -1,5 +1,12 @@
+import ko from "knockout";
+
 export let Version: string;
 Version = `${process.env.VERSION}`;
+
+ko.components.unregister("sv-dropdown");
+ko.components.get("sv-dropdown-select", (definition, config) => {
+  ko.components.register("sv-dropdown", definition);
+});
 
 export * from "../survey-creator";
 export * from "../tabs/designer";

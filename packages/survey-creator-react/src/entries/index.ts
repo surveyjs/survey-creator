@@ -1,7 +1,11 @@
+import { ReactQuestionFactory } from "survey-react-ui";
+
 export let Version: string;
 Version = `${process.env.VERSION}`;
 
 // import "@survey/creator/survey-creator-core.css";
+
+ReactQuestionFactory.Instance.registerQuestion("dropdown", ReactQuestionFactory.Instance["creatorHash"]["dropdown-select"]);
 
 export * from "../SurveyCreator";
 
