@@ -3,8 +3,6 @@ import { CreatorBase } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 
 import "./image-item-value.scss";
-import { appendFile } from "fs";
-
 export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
 
   @property({ defaultValue: false }) isFileDragging: boolean;
