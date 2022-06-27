@@ -3,11 +3,9 @@ import {
   ImageItemValue,
   QuestionSelectBase,
   SurveyTemplateRendererViewModel,
-  SurveyModel
 } from "survey-core";
 import { CreatorBase, ImageItemValueWrapperViewModel } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { KnockoutDragEvent } from "../events";
 
 const template = require("./image-item-value.html");
 
@@ -39,6 +37,17 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
   ) {
     event.stopPropagation();
   }
+
+  dragleave = (_, event)=> {
+    this.onDragLeave(event);
+  }
+  drop = (_, event)=> {
+    this.onDrop(event);
+  }
+  dragover = (_, event)=> {
+    this.onDragOver(event);
+  }
+
 }
 
 ko.components.register("svc-image-item-value", {
