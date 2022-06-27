@@ -42,7 +42,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
   }
   componentDidMount() {
     super.componentDidMount();
-    if(this.props.pageEditMode !== "bypage") {
+    if (this.props.pageEditMode !== "bypage") {
       const el = this.containerRef.current as HTMLDivElement;
       if (!!el) {
         const self = this;
@@ -75,6 +75,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
             className="svc-page-navigator__navigator-icon"
             iconName={this.model.icon}
             size={24}
+            title={this.model.pageSelectorCaption}
           ></SvgIcon>
 
           <Popup

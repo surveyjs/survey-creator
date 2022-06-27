@@ -49,7 +49,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           this.model.isNew = false;
         }}
       >
-        <SvgIcon size={16} iconName={"icon-add_16x16"}></SvgIcon>
+        <SvgIcon size={16} iconName={"icon-add_16x16"} title={this.model.tooltip}></SvgIcon>
       </span>)
     ) : (
       <>
@@ -59,7 +59,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
             className="svc-item-value-controls__button svc-item-value-controls__drag"
             aria-label={this.model.dragTooltip}
           >
-            <SvgIcon className="svc-item-value-controls__drag-icon" size={24} iconName={"icon-drag-area-indicator"}></SvgIcon>
+            <SvgIcon className="svc-item-value-controls__drag-icon" size={24} iconName={"icon-drag-area-indicator"} title={this.model.dragTooltip}></SvgIcon>
           </span>
         ) : null}
         {this.model.allowRemove ? attachKey2click(<span
@@ -67,7 +67,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           aria-label={this.model.tooltip}
           onClick={() => this.model.remove(this.model)}
         >
-          <SvgIcon size={16} iconName={"icon-remove_16x16"}></SvgIcon>
+          <SvgIcon size={16} iconName={"icon-remove_16x16"} title={this.model.tooltip}></SvgIcon>
         </span>) : null}
       </>
     );

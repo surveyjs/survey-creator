@@ -120,6 +120,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
           <SvgIcon
             iconName={questionTypeSelectorModel.iconName}
             size={24}
+            title={this.model.addNewQuestionText}
           ></SvgIcon>
         </span>
         <Popup model={questionTypeSelectorModel.popupModel}></Popup>
