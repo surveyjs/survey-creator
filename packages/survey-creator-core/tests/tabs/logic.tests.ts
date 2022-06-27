@@ -2266,3 +2266,35 @@ test("wrapTextByCurlyBraces", () => {
   settings.logic.closeBracket = "}";
   expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
 });
+test("Rename the name", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q2.row1.col1} > 2 and {q3[0].col1} < 2" },
+      {
+        type: "matrixdropdown",
+        name: "q2",
+        rows: ["row1"],
+        columns: [
+          {
+            name: "col1"
+          }
+        ]
+      },
+      {
+        type: "matrixdynamic",
+        name: "q3",
+        columns: [
+          {
+            name: "col1"
+          }
+        ]
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  var q1 = survey.getQuestionByName("q1");
+  logic.renameQuestion("q2", "question2");
+  expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {q3[0].col1} < 2");
+  logic.renameQuestion("q3", "question3");
+  expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {question3[0].col1} < 2");
+});

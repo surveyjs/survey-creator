@@ -52,7 +52,6 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
     const needStyle = !this.getIsNewItemSingle();
     return { width: needStyle ? this.question.renderedImageWidth : undefined, height: needStyle ? this.question.renderedImageHeight : undefined };
   }
-
 }
 
 ko.components.register("svc-image-item-value", {

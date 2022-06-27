@@ -582,6 +582,10 @@ export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditor
   protected getShowDetailPanelOnAdding(): boolean {
     return true;
   }
+  protected setupMatrixQuestion(obj: Base, matrix: QuestionMatrixDynamicModel, prop: JsonObjectProperty): void {
+    super.setupMatrixQuestion(obj, matrix, prop);
+    matrix.isUniqueCaseSensitive = false;
+  }
 }
 export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
