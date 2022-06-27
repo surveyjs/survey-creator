@@ -2266,7 +2266,7 @@ test("wrapTextByCurlyBraces", () => {
   settings.logic.closeBracket = "}";
   expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
 });
-test("Rename the name", () => {
+test("Rename the name for matrices", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q2.row1.col1} > 2 and {q3[0].col1} < 2" },
@@ -2297,4 +2297,48 @@ test("Rename the name", () => {
   expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {q3[0].col1} < 2");
   logic.renameQuestion("q3", "question3");
   expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {question3[0].col1} < 2");
+});
+test("Do not reacreate logic for updating expressions for every change", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+          { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q2",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q2} = 2",
+        setToName: "q3",
+        fromName: "q4"
+      }
+    ],
+  };
+  expect(creator.logicCreatedId).toEqual(0);
+  creator.survey.getQuestionByName("q1").name = "question1";
+  expect(creator.logicCreatedId).toEqual(1);
+  creator.survey.getQuestionByName("question1").name = "question2";
+  expect(creator.logicCreatedId).toEqual(1);
+  creator.survey.getQuestionByName("q2").visibleIf = "{question2} = 11";
+  creator.survey.getQuestionByName("question2").name = "question3";
+  expect(creator.logicCreatedId).toEqual(2);
+  creator.survey.triggers[0].gotoName = "q4";
+  creator.survey.getQuestionByName("question3").name = "question4";
+  expect(creator.logicCreatedId).toEqual(3);
+  creator.survey.getQuestionByName("question4").name = "question5";
+  expect(creator.logicCreatedId).toEqual(3);
+  creator.survey.triggers.splice(0, 1);
+  creator.survey.getQuestionByName("question5").name = "question6";
+  expect(creator.logicCreatedId).toEqual(4);
 });
