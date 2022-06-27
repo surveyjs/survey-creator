@@ -100,7 +100,7 @@ export interface ICreatorOptions {
    */
   generateValidJSON?: boolean;
   /**
-   * Enable the read-only mode. If you set this property to `true`, users cannot change the initial survey configuration.
+   * Enables the read-only mode. If you set this property to `true`, users cannot change the initial survey configuration.
    * 
    * Default value: `false`
    */
@@ -113,6 +113,8 @@ export interface ICreatorOptions {
   showPagesInPreviewTab?: boolean;
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
+   * 
+   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
    * 
    * Default value: `"defaultV2"`
    */
@@ -197,7 +199,6 @@ export interface ICreatorOptions {
    * Default value: -1 (unlimited)
    */
   maxLogicItemsInCondition?: number;
-  //Default is true
   /**
    * Specifies whether users can switch between UI themes in the Preview tab.
    * 
