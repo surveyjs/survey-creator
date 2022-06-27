@@ -734,6 +734,7 @@ test("calculatedValues property editor", () => {
     propertyGrid.survey.getQuestionByName("calculatedValues")
   );
   expect(calcValuesQuestion).toBeTruthy();
+  expect(calcValuesQuestion.isUniqueCaseSensitive).toEqual(false);
   expect(calcValuesQuestion.visibleRows).toHaveLength(1);
   expect(calcValuesQuestion.columns).toHaveLength(2);
   expect(calcValuesQuestion.columns[0].cellType).toEqual("text");
