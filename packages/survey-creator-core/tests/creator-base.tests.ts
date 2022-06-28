@@ -717,8 +717,8 @@ test("Check survey settings button ", (): any => {
 });
 test("Check survey undo/redo buttons ", (): any => {
   const creator = new CreatorTester();
-  const undoItem = creator.getActionBarItem("icon-undo");
-  const redoItem = creator.getActionBarItem("icon-redo");
+  const undoItem = creator.getActionBarItem("action-undo");
+  const redoItem = creator.getActionBarItem("action-redo");
   expect(undoItem.active).toBeFalsy();
   expect(redoItem.active).toBeFalsy();
   creator.survey.title = "My title";
