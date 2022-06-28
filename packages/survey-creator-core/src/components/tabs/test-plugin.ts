@@ -262,7 +262,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-theme",
         component: "sv-action-bar-item-dropdown",
         mode: "large",
-        title: this.getThemeLocName(filteredThemes[0].name),
+        locTitleName: this.getThemeLocName(filteredThemes[0].name),
         needSeparator: true,
         visible: <any>new ComputedUpdater<boolean>(() => {
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;

@@ -532,6 +532,7 @@ test("Change test themes list actions titles on changing locale", (): any => {
   TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
   const deutschStrings: any = {
     ed: {
+      defaultV2Theme: "Default de",
       modernTheme: "Modern de"
     }
   };
@@ -539,11 +540,14 @@ test("Change test themes list actions titles on changing locale", (): any => {
   const creator = new CreatorTester();
   const themeAction = creator.toolbar.getActionById("themeSwitcher");
   expect(themeAction).toBeTruthy();
+  expect(themeAction.title).toEqual("Default");
   const actions = themeAction.popupModel.contentComponentData.model.actions;
   expect(actions).toHaveLength(3);
   expect(actions[1].title).toEqual("Modern");
   creator.locale = "de";
+  expect(themeAction.title).toEqual("Default de");
   expect(actions[1].title).toEqual("Modern de");
   creator.locale = "";
+  expect(themeAction.title).toEqual("Default");
   expect(actions[1].title).toEqual("Modern");
 });
