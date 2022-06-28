@@ -161,13 +161,13 @@ export class CreatorBase extends Base
   implements ISurveyCreatorOptions, ICreatorSelectionOwner {
   /**
    * Specifies whether to display the Designer tab.
-   * 
+   *
    * Default value: `true`
    */
   @property({ defaultValue: true }) showDesignerTab: boolean;
   /**
    * Specifies whether to display the JSON Editor tab.
-   * 
+   *
    * Default value: `true`
    */
   @property({ defaultValue: true }) showJSONEditorTab: boolean;
@@ -178,26 +178,26 @@ export class CreatorBase extends Base
   @property({ defaultValue: true }) showTestSurveyTab: boolean;
   /**
    * Specifies whether to display the Preview tab.
-   * 
+   *
    * Default value: `true`
    */
   public get showPreviewTab(): boolean { return this.showTestSurveyTab; }
   public set showPreviewTab(val: boolean) { this.showTestSurveyTab = val; }
   /**
    * Specifies whether to display the Embed Survey tab.
-   * 
+   *
    * Default value: `false`
    */
   @property({ defaultValue: false }) showEmbeddedSurveyTab: boolean;
   /**
    * Specifies whether to display the Translation tab.
-   * 
+   *
    * Default value: `false`
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
   /**
    * Specifies whether to display the Logic tab.
-   * 
+   *
    * Default value: `false`
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
@@ -223,7 +223,7 @@ export class CreatorBase extends Base
   }
   /**
    * Specifies whether users can see and edit the survey title and related survey properties.
-   * 
+   *
    * Default value: `true`
    */
   get showSurveyTitle(): boolean {
@@ -234,9 +234,9 @@ export class CreatorBase extends Base
   }
   /**
    * Removes the Free Trial bar.
-   * 
+   *
    * Default value: `false`
-   * 
+   *
    * **IMPORTANT**: You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
    */
   @property({ defaultValue: false }) haveCommercialLicense: boolean;
@@ -245,7 +245,7 @@ export class CreatorBase extends Base
   }
   /**
    * Specifies whether to call the [saveSurveyFunc](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#saveSurveyFunc) each time survey settings are changed.
-   * 
+   *
    * Default value: `false`
    */
   @property({ defaultValue: false }) isAutoSave: boolean;
@@ -964,60 +964,60 @@ export class CreatorBase extends Base
 
   /**
    * Limits the number of items in a logical expression.
-   * 
+   *
    * Default value: -1 (unlimited)
    */
   public maxLogicItemsInCondition: number = -1;
 
   /**
    * Specifies whether UI elements display survey, page, and question titles instead of their names.
-   * 
+   *
    * Default value: `false`
-   * 
+   *
    * @see onGetObjectDisplayName
    */
   public showObjectTitles = false;
 
   /**
    * Specifies whether to display question titles instead of names when users edit logical expressions.
-   * 
+   *
    * Default value: `false`
    */
   public showTitlesInExpressions = false;
   /**
    * Specifies whether users can edit expressions in the Logic tab as plain text.
-   * 
+   *
    * If you set this property to `false`, users can only use UI elements to edit logical expressions.
-   * 
+   *
    * Default value: `true`
-   * 
+   *
    * @see showLogicTab
    */
   public allowEditExpressionsInTextEditor = true;
 
   /**
    * Limits the number of columns that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel), and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
-   * 
+   *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumColumnsCount`)
    */
   public maximumColumnsCount: number =
     settings.propertyGrid.maximumColumnsCount;
   /**
    * Limits the number of choices that users can add to [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
-   * 
+   *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumChoicesCount`)
    */
   public maximumChoicesCount: number =
     settings.propertyGrid.maximumChoicesCount;
   /**
    * Limits the number of rows that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
-   * 
+   *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRowsCount`)
    */
   public maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   /**
    * Limits the number of rate value that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
-   * 
+   *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
    */
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
@@ -1039,7 +1039,7 @@ export class CreatorBase extends Base
   public showSimulatorInTestSurveyTab = true;
   /**
    * Specifies whether the Preview tab displays the Device button that allows users to preview the survey on different device types.
-   * 
+   *
    * Default value: `true`
    */
   public get showSimulatorInPreviewTab(): boolean { return this.showSimulatorInTestSurveyTab; }
@@ -1047,16 +1047,16 @@ export class CreatorBase extends Base
 
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
-   * 
+   *
    * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
-   * 
+   *
    * Default value: `"defaultV2"`
    */
   public themeForPreview: string = "defaultV2";
 
   /**
    * Specifies whether users can add, edit, and delete survey pages.
-   * 
+   *
    * Default value: `true`
    */
   public allowModifyPages = true;
@@ -1067,21 +1067,21 @@ export class CreatorBase extends Base
   public showDefaultLanguageInTestSurveyTab: boolean | string = "auto";
   /**
    * Specifies whether the Preview tab displays the language selector.
-   * 
+   *
    * Accepted values:
-   * 
-   * - `"auto"` (default)      
+   *
+   * - `"auto"` (default)
    * Display the language selector only if the survey is translated to more than one language.
-   * 
-   * - `true`        
+   *
+   * - `true`
    * Always display the language selector regardless of how many languages are used in the survey.
-   *  
-   * - `false`        
+   *
+   * - `false`
    * Never display the language selector.
-   * 
-   * - `"all"`        
+   *
+   * - `"all"`
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization).
-   * 
+   *
    * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
    */
   public get showDefaultLanguageInPreviewTab(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
@@ -1093,7 +1093,7 @@ export class CreatorBase extends Base
   public showInvisibleElementsInTestSurveyTab = true;
   /**
    * Specifies whether the Preview tab displays a checkbox that allows users to show or hide invisible survey elements.
-   * 
+   *
    * Default value: `true`
    */
   public get showInvisibleElementsInPreviewTab(): boolean { return this.showInvisibleElementsInTestSurveyTab; }
@@ -1106,9 +1106,9 @@ export class CreatorBase extends Base
 
   /**
    * Specifies whether users can switch between UI themes in the Preview tab.
-   * 
+   *
    * Default value: `true`
-   * 
+   *
    * [View the "Switch Between Themes" demo](https://surveyjs.io/Examples/Creator?id=theme-switcher)
    */
   public allowChangeThemeInPreview = true;
@@ -1131,7 +1131,7 @@ export class CreatorBase extends Base
 
   /**
    * Specifies whether to show an error message if a survey is not saved in the database.
-   * 
+   *
    * Default value: `true`
    */
   public showErrorOnFailedSave: boolean = true;
@@ -1157,9 +1157,17 @@ export class CreatorBase extends Base
     }
     this.locStrsChanged();
     this.tabs.forEach(item => (<TabbedMenuItem>item).updateTitle());
-    this.toolbar.actions.forEach(item => {
+    this.updateActionsLocale(this.toolbar.actions);
+  }
+  private updateActionsLocale(actions: Array<Action>): void {
+    if(!Array.isArray(actions)) return;
+    actions.forEach(item => {
       if (!!(<any>item).updateTitle) {
         (<any>item).updateTitle();
+      }
+      if(!!item.popupModel && !!item.popupModel.contentComponentData && !!item.popupModel.contentComponentData.model) {
+        const model = item.popupModel.contentComponentData.model;
+        this.updateActionsLocale(model.actions);
       }
     });
   }
@@ -1177,7 +1185,7 @@ export class CreatorBase extends Base
   }
   /**
    * Enables the read-only mode. If you set this property to `true`, users cannot change the initial survey configuration.
-   * 
+   *
    * Default value: `false`
    */
   public get readOnly() {
@@ -1193,7 +1201,7 @@ export class CreatorBase extends Base
 
   /**
    * Specifies whether to enable support for right-to-left languages.
-   * 
+   *
    * Default value: `false`
    */
   public get isRTL() {

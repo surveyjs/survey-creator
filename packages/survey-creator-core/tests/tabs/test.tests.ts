@@ -4,6 +4,7 @@ import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components
 import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel } from "../../src/components/simulator";
+import { editorLocalization } from "../../src/editorLocalization";
 
 import "survey-core/survey.i18n";
 
@@ -517,7 +518,7 @@ test("Prev/Next actions enabled/disabled", (): any => {
   expect(model.nextPageAction.enabled).toBeFalsy();
 });
 test("Change theme action hidden", (): any => {
-  TabTestPlugin.prototype["getAvailableThemes"] = () => { return [{ id: 1, value: 1, title: "1" }, { id: 2, value: 2, title: "2" }]; };
+  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
   let creator: CreatorTester = new CreatorTester();
   let testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
@@ -526,4 +527,23 @@ test("Change theme action hidden", (): any => {
   testPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
   expect(testPlugin["changeThemeAction"]).toBeUndefined();
+});
+test("Change test themes list actions titles on changing locale", (): any => {
+  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
+  const deutschStrings: any = {
+    ed: {
+      modernTheme: "Modern de"
+    }
+  };
+  editorLocalization.locales["de"] = deutschStrings;
+  const creator = new CreatorTester();
+  const themeAction = creator.toolbar.getActionById("themeSwitcher");
+  expect(themeAction).toBeTruthy();
+  const actions = themeAction.popupModel.contentComponentData.model.actions;
+  expect(actions).toHaveLength(3);
+  expect(actions[1].title).toEqual("Modern");
+  creator.locale = "de";
+  expect(actions[1].title).toEqual("Modern de");
+  creator.locale = "";
+  expect(actions[1].title).toEqual("Modern");
 });

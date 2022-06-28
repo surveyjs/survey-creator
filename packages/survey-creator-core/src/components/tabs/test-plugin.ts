@@ -129,18 +129,28 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
   }
-  protected getAvailableThemes(themeMapper: any) {
-    let availableThemesToItems = [];
-    if (!!document && !!document.body) {
-      const styles = getComputedStyle(document.body);
-      availableThemesToItems = themeMapper
-        .filter(item => item.theme.variables && styles.getPropertyValue(item.theme.variables.themeMark))
-        .map(item => ({ id: item.name + "_themeSwitcher", value: item.name, title: item.title }));
+  private getAvailableThemes(themeMapper: Array<any>): Array<CreatorAction> {
+    const availableThemesToItems = [];
+    for(var i = 0; i < themeMapper.length; i ++) {
+      const item = themeMapper[i];
+      const action = new CreatorAction({ id: item.name + "_themeSwitcher", locTitleName: this.getThemeLocName(item.name) });
+      (<any>action).value = item.name;
+      availableThemesToItems.push(action);
     }
-
     return availableThemesToItems;
   }
-  public createActions() {
+  private getThemeLocName(name: string): string {
+    return "ed." + name + "Theme";
+  }
+  protected filterThemeMapper(themeMapper: Array<any>): Array<any> {
+    let res = [];
+    if (!!document && !!document.body) {
+      const styles = getComputedStyle(document.body);
+      res = themeMapper.filter(item => item.theme.variables && styles.getPropertyValue(item.theme.variables.themeMark));
+    }
+    return res;
+  }
+  public createActions(): Array<Action> {
     const items: Array<Action> = [];
 
     this.testAgainAction = new CreatorAction({
@@ -221,13 +231,13 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.invisibleToggleAction);
     }
 
-    const getThemeTitle = name => this.creator.getLocString("ed." + name + "Theme");
     const themeMapper = [
-      { name: "defaultV2", title: getThemeTitle("defaultV2"), theme: defaultV2Css },
-      { name: "modern", title: getThemeTitle("modern"), theme: modernCss },
-      { name: "default", title: getThemeTitle("default"), theme: defaultStandardCss }
+      { name: "defaultV2", theme: defaultV2Css },
+      { name: "modern", theme: modernCss },
+      { name: "default", theme: defaultStandardCss }
     ];
-    let availableThemesToItems = this.getAvailableThemes(themeMapper);
+    const filteredThemes = this.filterThemeMapper(themeMapper);
+    let availableThemesToItems = this.getAvailableThemes(filteredThemes);
 
     if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1) {
       this.changeThemeModel = new ListModel(
@@ -247,21 +257,12 @@ export class TabTestPlugin implements ICreatorPlugin {
         "center"
       );
 
-      const getStartThemeTitle = (): string => {
-        const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
-        let themeTitle = getThemeTitle("defaultV2");
-        if (availableThemes.length > 0) {
-          themeTitle = availableThemes[0].title;
-        }
-        return themeTitle;
-      };
-
-      this.changeThemeAction = new Action({
+      this.changeThemeAction = new CreatorAction({
         id: "themeSwitcher",
         iconName: "icon-theme",
         component: "sv-action-bar-item-dropdown",
         mode: "large",
-        title: getStartThemeTitle(),
+        title: this.getThemeLocName(filteredThemes[0].name),
         needSeparator: true,
         visible: <any>new ComputedUpdater<boolean>(() => {
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
