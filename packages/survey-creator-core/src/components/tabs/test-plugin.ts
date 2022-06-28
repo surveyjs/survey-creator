@@ -259,13 +259,16 @@ export class TabTestPlugin implements ICreatorPlugin {
         "bottom",
         "center"
       );
-
+      const getStartThemeName = (): string => {
+        const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
+        return availableThemes.length > 0 ? availableThemes[0].name : "defaultV2";
+      };
       this.changeThemeAction = new CreatorAction({
         id: "themeSwitcher",
         iconName: "icon-theme",
         component: "sv-action-bar-item-dropdown",
         mode: "large",
-        locTitleName: this.getThemeLocName(filteredThemes[0].name),
+        locTitleName: this.getThemeLocName(getStartThemeName()),
         needSeparator: true,
         visible: <any>new ComputedUpdater<boolean>(() => {
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
