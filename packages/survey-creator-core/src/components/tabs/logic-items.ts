@@ -5,10 +5,13 @@ import {
   propertyArray,
   Serializer,
   SurveyTrigger,
-  ConditionRunner
+  ConditionRunner,
+  Question,
+  ItemValue
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
+import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { settings } from "../../settings";
 import { wrapTextByCurlyBraces } from "../../utils/utils";
@@ -271,6 +274,15 @@ export class SurveyLogicItem {
     var ops = this.actions;
     for (var i = 0; i < ops.length; i++) {
       ops[i].renameQuestion(oldName, newName);
+    }
+  }
+  public renameItemValue(question: Question, item: ItemValue, oldValue: any): void {
+    if (!this.expression || !question.name) return;
+    const name = question.name.toString();
+    if(this.expression.toLocaleLowerCase().indexOf(settings.logic.openBracket + name.toLocaleLowerCase()) < 0) return;
+    const newExpression = updateLogicExpression(this.expression, question.name, oldValue, item.value);
+    if (newExpression != this.expression) {
+      this.applyExpression(newExpression, true);
     }
   }
   public removeQuestion(name: string) {

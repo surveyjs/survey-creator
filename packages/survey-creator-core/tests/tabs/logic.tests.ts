@@ -10,7 +10,8 @@ import {
   SurveyTriggerSetValue,
   QuestionPanelDynamicModel,
   Question,
-  QuestionCommentModel
+  QuestionCommentModel,
+  QuestionRadiogroupModel
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -2341,4 +2342,46 @@ test("Do not reacreate logic for updating expressions for every change", (): any
   creator.survey.triggers.splice(0, 1);
   creator.survey.getQuestionByName("question5").name = "question6";
   expect(creator.logicCreatedId).toEqual(4);
+});
+test("Update logic on chaning choices value", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+          { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+          { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
+          { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
+        ],
+      },
+    ]
+  };
+  (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 1";
+  (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q2")).choices[0].value = "Item 1!";
+  expect(creator.survey.getQuestionByName("q3").visibleIf).toEqual("{q1} == 'Item 1'");
+  expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} == ['Item 1!']");
+});
+test("Rename choices for questions", () => {
+  var survey = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+          { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+          { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
+          { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
+        ],
+      },
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  var q1 = <QuestionRadiogroupModel>survey.getQuestionByName("q1");
+  q1.choices[0].value = "Item 1";
+  logic.renameItemValue(q1.choices[0], "Item 1");
+  var q2 = <QuestionRadiogroupModel>survey.getQuestionByName("q2");
+  q2.choices[0].value = "Item 1!";
+  logic.renameItemValue(q2.choices[0], "Item 1!");
+  expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} == 'Item 1'");
+  expect(survey.getQuestionByName("q4").visibleIf).toEqual("{q2} == ['Item 1!']");
 });

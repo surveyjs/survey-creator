@@ -1684,6 +1684,18 @@ export class CreatorBase extends Base
     const prop = Serializer.findProperty(obj.getType(), propertyName);
     return !!prop && ["expression", "condition", "questionvalue", "question"].indexOf(prop.type) > -1;
   }
+  private updateSurveyLogicValues(obj: Base, propertyName: string, oldValue: any): void {
+    if(!obj || !propertyName || Survey.Helpers.isValueEmpty(oldValue)) return;
+    if(propertyName === "value" && obj.isDescendantOf("itemvalue")) {
+      this.updateSurveyLogicItemValue(<ItemValue>obj, oldValue);
+    }
+  }
+  private updateSurveyLogicItemValue(item: ItemValue, oldValue: any): void {
+    if(!item.locOwner) return;
+    this.surveyLogicRenaming = true;
+    this.getSurveyLogicForUpdate().renameItemValue(item, oldValue);
+    this.surveyLogicRenaming = false;
+  }
   protected createSurveyLogicForUpdate(): SurveyLogic {
     return new SurveyLogic(this.survey, this);
   }
@@ -1882,6 +1894,7 @@ export class CreatorBase extends Base
   }
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
+    this.updateSurveyLogicValues(options.target, options.name, options.oldValue);
     if (!this.onSurveyPropertyValueChanged.isEmpty) {
       options.propertyName = options.name;
       options.obj = options.target;

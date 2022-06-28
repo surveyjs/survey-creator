@@ -1,4 +1,4 @@
-import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray } from "survey-core";
+import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -158,9 +158,20 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       this.onChangedCallback(item, changeType);
     }
   }
-  public renameQuestion(oldName: string, newName: string) {
-    this.renameQuestionCore(oldName, newName, this.items);
-    this.renameQuestionCore(oldName, newName, this.invisibleItems);
+  public renameQuestion(oldName: string, newName: string): void {
+    this.items.forEach(item => item.renameQuestion(oldName, newName));
+    this.invisibleItems.forEach(item => item.renameQuestion(oldName, newName));
+  }
+  public renameItemValue(item: ItemValue, oldValue: any): void {
+    if(!item.locOwner || Helpers.isValueEmpty(oldValue)) return;
+    const question = this.getItemValueQuestion(item);
+    if(!question) return;
+    this.items.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
+    this.invisibleItems.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
+  }
+  private getItemValueQuestion(item: ItemValue): Question {
+    if(!(<any>item.locOwner).isQuestion) return null;
+    return <Question>item.locOwner;
   }
   public removeQuestion(name: string) {
     this.removeQuestionCore(name, this.items);
@@ -229,15 +240,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     return [];
   }
   protected onReadOnlyChanged(): void {}
-  private renameQuestionCore(
-    oldName: string,
-    newName: string,
-    items: Array<SurveyLogicItem>
-  ) {
-    for (var i = 0; i < items.length; i++) {
-      items[i].renameQuestion(oldName, newName);
-    }
-  }
   private removeQuestionCore(name: string, items: Array<SurveyLogicItem>) {
     for (var i = 0; i < items.length; i++) {
       items[i].removeQuestion(name);
