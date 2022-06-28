@@ -3,7 +3,6 @@ import { CreatorBase } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 
 import "./image-item-value.scss";
-
 export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
 
   @property({ defaultValue: false }) isFileDragging: boolean;
@@ -18,7 +17,12 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       .append("svc-image-item-value")
       .append("svc-image-item-value--new", this.isNew)
       .append("svc-image-item-value-wrapper--ghost", this.isDragDropGhost)
-      .append("svc-image-item-value--file-dragging", this.isFileDragging).toString();
+      .append("svc-image-item-value--file-dragging", this.isFileDragging)
+      .append("svc-image-item-value--single", this.getIsNewItemSingle()).toString();
+  }
+
+  public getIsNewItemSingle() {
+    return this.isNew && this.question.choices.length === 0;
   }
 
   chooseFile(model: ImageItemValueWrapperViewModel) {
