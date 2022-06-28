@@ -292,14 +292,6 @@ export class TestSurveyTabViewModel extends Base {
     }
     this.isRunning ? this.updateSimulatorSurvey(this.json, theme) : this.updateResultsTemplate(theme);
   }
-  public getCurrThemeTitle(themeMapper: any): string {
-    const availableThemes = themeMapper.filter(item => item.theme.root === this.simulator.survey.css.root);
-    let themeTitle = this.surveyProvider.getLocString("ed.defaultV2Theme");
-    if (availableThemes.length > 0) {
-      themeTitle = availableThemes[0].title;
-    }
-    return themeTitle;
-  }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
 

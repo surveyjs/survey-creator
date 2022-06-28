@@ -10,7 +10,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private languageListModel: ListModel;
   private changeThemePopupModel: PopupModel;
   private changeThemeModel: ListModel;
-  protected changeThemeAction: Action;
+  protected changeThemeAction: CreatorAction;
   private deviceSelectorAction: Action;
   private deviceListModel: ListModel;
   private orientationSelectorAction: Action;
@@ -243,8 +243,11 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.changeThemeModel = new ListModel(
         availableThemesToItems,
         (item: any) => {
-          this.model.setTheme(item.value, themeMapper);
-          this.changeThemeAction.title = this.model.getCurrThemeTitle(themeMapper);
+          if(!!this.model) {
+            this.model.setTheme(item.value, themeMapper);
+          }
+          this.changeThemeAction.locTitleName = this.getThemeLocName(item.value);
+          this.changeThemeAction.updateTitle();
           this.changeThemePopupModel.toggleVisibility();
         },
         true

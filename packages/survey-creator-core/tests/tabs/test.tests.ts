@@ -5,6 +5,7 @@ import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel } from
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel } from "../../src/components/simulator";
 import { editorLocalization } from "../../src/editorLocalization";
+import { ListModel } from "survey-core";
 
 import "survey-core/survey.i18n";
 
@@ -541,7 +542,8 @@ test("Change test themes list actions titles on changing locale", (): any => {
   const themeAction = creator.toolbar.getActionById("themeSwitcher");
   expect(themeAction).toBeTruthy();
   expect(themeAction.title).toEqual("Default");
-  const actions = themeAction.popupModel.contentComponentData.model.actions;
+  const listModel = <ListModel>themeAction.popupModel.contentComponentData.model;
+  const actions = listModel.actions;
   expect(actions).toHaveLength(3);
   expect(actions[1].title).toEqual("Modern");
   creator.locale = "de";
@@ -550,4 +552,11 @@ test("Change test themes list actions titles on changing locale", (): any => {
   creator.locale = "";
   expect(themeAction.title).toEqual("Default");
   expect(actions[1].title).toEqual("Modern");
+
+  listModel.selectItem(actions[1]);
+  expect(themeAction.title).toEqual("Modern");
+  creator.locale = "de";
+  expect(themeAction.title).toEqual("Modern de");
+  creator.locale = "";
+  expect(themeAction.title).toEqual("Modern");
 });
