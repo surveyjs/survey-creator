@@ -46,15 +46,15 @@
   width: auto;
 }
 
-#icon-undo,
-#icon-redo {
+#action-undo,
+#action-redo {
   .sv-action-bar-item .sv-action-bar-item__icon use {
     opacity: 0.25;
   }
 }
 
-#icon-undo,
-#icon-redo {
+#action-undo,
+#action-redo {
   .sv-action-bar-item--active .sv-action-bar-item__icon use {
     fill: $foreground-light;
     opacity: 1;

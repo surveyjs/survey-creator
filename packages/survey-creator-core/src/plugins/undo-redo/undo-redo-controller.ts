@@ -128,7 +128,7 @@ export class UndoRedoController extends Base {
   public createActions() {
     const items: Array<Action> = [];
     this.undoAction = new CreatorAction({
-      id: "icon-undo",
+      id: "action-undo",
       iconName: "icon-undo",
       locTitleName: "ed.undo",
       showTitle: false,
@@ -136,7 +136,7 @@ export class UndoRedoController extends Base {
       action: () => this.undo()
     });
     this.redoAction = new CreatorAction({
-      id: "icon-redo",
+      id: "action-redo",
       iconName: "icon-redo",
       locTitleName: "ed.redo",
       showTitle: false,

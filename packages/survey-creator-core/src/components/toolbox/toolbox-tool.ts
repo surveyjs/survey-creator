@@ -22,7 +22,7 @@ export class ToolboxToolViewModel extends Base {
 
   public onPointerDown(pointerDownEvent) {
     if (!this.allowAdd) return;
-    if (this.item.id === "dotsItem-id") return true; //toolbox responsive popup
+    if (this.item.id.indexOf("dotsItem-id") === 0) return true; //toolbox responsive popup
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
 
     this._node = pointerDownEvent.currentTarget;

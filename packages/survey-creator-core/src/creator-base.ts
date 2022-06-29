@@ -2923,6 +2923,7 @@ export class CreatorBase extends Base
 
     return {
       iconName: "icon-more",
+      title: this.getLocString("ed.addNewQuestion"),
       action: () => {
         popupModel.displayMode = this.isMobileView ? "overlay" : "popup";
         popupModel.toggleVisibility();

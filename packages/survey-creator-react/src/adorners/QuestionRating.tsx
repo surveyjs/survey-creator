@@ -40,14 +40,14 @@ export class QuestionRatingAdornerComponent extends CreatorModelElement<Question
             aria-label={model.removeTooltip}
             onClick={() => model.removeItem(model)}
           >
-            <SvgIcon size={16} iconName={"icon-remove_16x16"}></SvgIcon>
+            <SvgIcon size={16} iconName={"icon-remove_16x16"} title={model.removeTooltip}></SvgIcon>
           </span>) : null}
           {model.allowAdd ? attachKey2click(<span
             className="svc-item-value-controls__button svc-item-value-controls__add"
             aria-label={model.addTooltip}
             onClick={() => model.addItem(model)}
           >
-            <SvgIcon size={16} iconName={"icon-add_16x16"}></SvgIcon>
+            <SvgIcon size={16} iconName={"icon-add_16x16"} title={model.addTooltip}></SvgIcon>
           </span>) : null}
         </div>
         {this.props.element}

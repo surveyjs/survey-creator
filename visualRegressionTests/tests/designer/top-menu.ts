@@ -23,12 +23,12 @@ test("Top menu on designer tab", async (t) => {
   await checkElementScreenshot("top-menu-undo-active.png", topBarElement, t);
 
   await t
-    .click(Selector("#icon-undo .sv-action-bar-item"))
+    .click(Selector("#action-undo .sv-action-bar-item"))
     .click(Selector(".svc-side-bar .spg-row").nth(1));
   await checkElementScreenshot("top-menu-undo-and-redo-active.png", topBarElement, t);
 
   await t
-    .click(Selector("#icon-undo .sv-action-bar-item"))
+    .click(Selector("#action-undo .sv-action-bar-item"))
     .click(Selector(".svc-side-bar .spg-row").nth(1));
   await checkElementScreenshot("top-menu-redo-active.png", topBarElement, t);
 });

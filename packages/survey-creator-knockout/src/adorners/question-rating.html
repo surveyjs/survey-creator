@@ -3,13 +3,13 @@
     <!-- ko if: allowRemove -->
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__remove"
       data-bind="click: removeItem, key2click, attr: { 'aria-label': removeTooltip }"
-      params="iconName: 'icon-remove_16x16', size: 16">
+      params="iconName: 'icon-remove_16x16', size: 16, title: removeTooltip">
     </sv-svg-icon>
     <!-- /ko -->
     <!-- ko if: allowAdd -->
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__add"
       data-bind="click: addItem, key2click, attr: { 'aria-label': addTooltip }"
-      params="iconName: 'icon-add_16x16', size: 16">
+      params="iconName: 'icon-add_16x16', size: 16, title: addTooltip">
     </sv-svg-icon>
     <!-- /ko -->
   </div>
