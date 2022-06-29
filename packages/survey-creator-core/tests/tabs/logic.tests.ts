@@ -2363,7 +2363,7 @@ test("Update logic on chaning choices value", (): any => {
   expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} == ['Item 1!']");
 });
 test("Rename choices for questions", () => {
-  var survey = new SurveyModel({
+  const survey = new SurveyModel({
     pages: [
       {
         elements: [
@@ -2375,13 +2375,65 @@ test("Rename choices for questions", () => {
       },
     ]
   });
-  var logic = new SurveyLogic(survey);
-  var q1 = <QuestionRadiogroupModel>survey.getQuestionByName("q1");
+  const logic = new SurveyLogic(survey);
+  const q1 = <QuestionRadiogroupModel>survey.getQuestionByName("q1");
   q1.choices[0].value = "Item 1";
   logic.renameItemValue(q1.choices[0], "Item 1");
-  var q2 = <QuestionRadiogroupModel>survey.getQuestionByName("q2");
+  const q2 = <QuestionRadiogroupModel>survey.getQuestionByName("q2");
   q2.choices[0].value = "Item 1!";
   logic.renameItemValue(q2.choices[0], "Item 1!");
   expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} == 'Item 1'");
   expect(survey.getQuestionByName("q4").visibleIf).toEqual("{q2} == ['Item 1!']");
+});
+test("Rename choices for questions in panel dynamic", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "paneldynamic",
+            name: "question1",
+            templateElements: [
+              { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+              { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+              { type: "text", name: "q3", visibleIf: "{panel.q1} = 'item1'" },
+              { type: "text", name: "q4", visibleIf: "{panel.q2} = ['item1']" },
+            ]
+          }
+        ],
+      },
+    ]
+  };
+  const panel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("question1");
+  panel.template.elements[0].choices[0].value = "Item 1";
+  panel.template.elements[1].choices[0].value = "Item 1!";
+  expect(panel.template.elements[2].visibleIf).toEqual("{panel.q1} == 'Item 1'");
+  expect(panel.template.elements[3].visibleIf).toEqual("{panel.q2} == ['Item 1!']");
+});
+test("Rename choices for columns in matrices", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "matrixdynamic",
+            name: "question1",
+            columns: [
+              { cellType: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+              { cellType: "checkbox", name: "q2", choices: ["item1", "item2"] },
+              { cellType: "text", name: "q3", visibleIf: "{row.q1} = 'item1'" },
+              { cellType: "text", name: "q4", visibleIf: "{row.q2} = ['item1']" },
+            ]
+          }
+        ],
+      },
+    ]
+  };
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question1");
+  matrix.columns[0].choices[0].value = "Item 1";
+  matrix.columns[1].choices[0].value = "Item 1!";
+  expect(matrix.columns[2].visibleIf).toEqual("{row.q1} == 'Item 1'");
+  expect(matrix.columns[3].visibleIf).toEqual("{row.q2} == ['Item 1!']");
 });

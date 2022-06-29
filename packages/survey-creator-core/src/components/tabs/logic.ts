@@ -170,8 +170,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.invisibleItems.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
   }
   private getItemValueQuestion(item: ItemValue): Question {
-    if(!(<any>item.locOwner).isQuestion) return null;
-    return <Question>item.locOwner;
+    const owner: any = item.locOwner;
+    return owner.isQuestion ? owner : null;
   }
   public removeQuestion(name: string) {
     this.removeQuestionCore(name, this.items);

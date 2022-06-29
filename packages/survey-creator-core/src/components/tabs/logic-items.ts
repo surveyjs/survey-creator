@@ -278,12 +278,20 @@ export class SurveyLogicItem {
   }
   public renameItemValue(question: Question, item: ItemValue, oldValue: any): void {
     if (!this.expression || !question.name) return;
-    const name = question.name.toString();
-    if(this.expression.toLocaleLowerCase().indexOf(settings.logic.openBracket + name.toLocaleLowerCase()) < 0) return;
-    const newExpression = updateLogicExpression(this.expression, question.name, oldValue, item.value);
+    const questionName = this.getItemValueQuestionName(question).toLocaleLowerCase();
+    if(this.expression.toLocaleLowerCase().indexOf(settings.logic.openBracket + questionName.toLocaleLowerCase()) < 0) return;
+    const newExpression = updateLogicExpression(this.expression, questionName, oldValue, item.value);
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);
     }
+  }
+  private getItemValueQuestionName(question: Question): string {
+    const valName = question.getValueName();
+    if(!!question.parentQuestion) {
+      if(question.parentQuestion.isDescendantOf("paneldynamic")) return "panel." + valName;
+      if(question.parentQuestion.isDescendantOf("matrixdropdownbase")) return "row." + valName;
+    }
+    return valName;
   }
   public removeQuestion(name: string) {
     this.removeQuestionInExpression(name);
