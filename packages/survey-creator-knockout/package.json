@@ -22,6 +22,7 @@
         "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500\"",
         "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/page-edit-modes.ts --reporter minimal --selector-timeout 1500 --debug-mode\"",
         "testcafe:a11y": "concurrently \"http-server --silent\" \"testcafe chrome ./testCafe/accessibility.js --selector-timeout 1500\"",
+        "testcafe:a11y:ci": "testcafe chrome:headless -c 4 -q ./testCafe/accessibility.js --app \"http-server\" --selector-timeout 1500 --reporter minimal",
         "testcafe:ci": "http-server --silent & testcafe -c 4 -q chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal,dashboard",
         "visual-regression-tests": "testcafe chrome --disable-font-subpixel-positioning ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal,dashboard",
         "visual-regression-tests:ci": "testcafe chrome:headless -c 4 -q --disable-font-subpixel-positioning ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal,dashboard",
