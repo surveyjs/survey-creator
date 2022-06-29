@@ -1692,6 +1692,7 @@ export class CreatorBase extends Base
   }
   private updateSurveyLogicItemValue(item: ItemValue, oldValue: any): void {
     if(!item.locOwner || !settings.logic.updateExpressionsOnChanging.choiceValue) return;
+    if(item.ownerPropertyName !== "choices" && item.ownerPropertyName != "rateValues") return;
     this.surveyLogicRenaming = true;
     this.getSurveyLogicForUpdate().renameItemValue(item, oldValue);
     this.surveyLogicRenaming = false;

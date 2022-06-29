@@ -2375,7 +2375,7 @@ test("Do not reacreate logic for updating expressions for every change", (): any
   creator.survey.getQuestionByName("question5").name = "question6";
   expect(creator.logicCreatedId).toEqual(4);
 });
-test("Update logic on chaning choices value", (): any => {
+test("Update logic on changing choices value", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -2387,27 +2387,8 @@ test("Update logic on chaning choices value", (): any => {
   };
   (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 1";
   (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q2")).choices[0].value = "Item 1!";
-  expect(creator.survey.getQuestionByName("q3").visibleIf).toEqual("{q1} == 'Item 1'");
-  expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} == ['Item 1!']");
-});
-test("Rename choices for questions", () => {
-  const survey = new SurveyModel({
-    elements: [
-      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
-      { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
-      { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
-      { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
-    ],
-  });
-  const logic = new SurveyLogic(survey);
-  const q1 = <QuestionRadiogroupModel>survey.getQuestionByName("q1");
-  q1.choices[0].value = "Item 1";
-  logic.renameItemValue(q1.choices[0], "Item 1");
-  const q2 = <QuestionRadiogroupModel>survey.getQuestionByName("q2");
-  q2.choices[0].value = "Item 1!";
-  logic.renameItemValue(q2.choices[0], "Item 1!");
-  expect(survey.getQuestionByName("q3").visibleIf).toEqual("{q1} == 'Item 1'");
-  expect(survey.getQuestionByName("q4").visibleIf).toEqual("{q2} == ['Item 1!']");
+  expect(creator.survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 'Item 1'");
+  expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} = ['Item 1!']");
 });
 test("Rename choices for questions in panel dynamic", (): any => {
   const creator = new CreatorTester();
@@ -2428,8 +2409,8 @@ test("Rename choices for questions in panel dynamic", (): any => {
   const panel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("question1");
   panel.template.elements[0].choices[0].value = "Item 1";
   panel.template.elements[1].choices[0].value = "Item 1!";
-  expect(panel.template.elements[2].visibleIf).toEqual("{panel.q1} == 'Item 1'");
-  expect(panel.template.elements[3].visibleIf).toEqual("{panel.q2} == ['Item 1!']");
+  expect(panel.template.elements[2].visibleIf).toEqual("{panel.q1} = 'Item 1'");
+  expect(panel.template.elements[3].visibleIf).toEqual("{panel.q2} = ['Item 1!']");
 });
 test("Rename choices for columns in matrices", (): any => {
   const creator = new CreatorTester();
@@ -2450,8 +2431,8 @@ test("Rename choices for columns in matrices", (): any => {
   const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question1");
   matrix.columns[0].choices[0].value = "Item 1";
   matrix.columns[1].choices[0].value = "Item 1!";
-  expect(matrix.columns[2].visibleIf).toEqual("{row.q1} == 'Item 1'");
-  expect(matrix.columns[3].visibleIf).toEqual("{row.q2} == ['Item 1!']");
+  expect(matrix.columns[2].visibleIf).toEqual("{row.q1} = 'Item 1'");
+  expect(matrix.columns[3].visibleIf).toEqual("{row.q2} = ['Item 1!']");
 });
 test("Do not rename questions for another matrix", (): any => {
   const creator = new CreatorTester();
@@ -2478,7 +2459,7 @@ test("Do not rename questions for another matrix", (): any => {
   const matrix1 = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question1");
   const matrix2 = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question2");
   matrix1.columns[0].choices[0].value = "Item 1";
-  expect(matrix1.columns[1].visibleIf).toEqual("{row.col1} == 'Item 1'");
+  expect(matrix1.columns[1].visibleIf).toEqual("{row.col1} = 'Item 1'");
   expect(matrix2.columns[1].visibleIf).toEqual("{row.col1} = 'item1'");
 });
 test("Modify choice and question name", (): any => {
@@ -2489,10 +2470,10 @@ test("Modify choice and question name", (): any => {
       { type: "text", name: "q2", visibleIf: "{q1} = 'item1'" }
     ]
   };
-  (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 1";
-  expect(creator.survey.getQuestionByName("q2").visibleIf).toEqual("{q1} == 'Item 1'");
+  (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 11";
+  expect(creator.survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 'Item 11'");
   creator.survey.getQuestionByName("q1").name = "question1";
-  expect(creator.survey.getQuestionByName("q2").visibleIf).toEqual("{question1} == 'Item 1'");
+  expect(creator.survey.getQuestionByName("q2").visibleIf).toEqual("{question1} = 'Item 11'");
 });
 test("Use settings to disable updating expressions on changing name and choices", (): any => {
   settings.logic.updateExpressionsOnChanging.questionName = false;

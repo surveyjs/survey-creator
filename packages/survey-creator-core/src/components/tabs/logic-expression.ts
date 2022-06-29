@@ -1,22 +1,76 @@
 import { ConditionsParser, Operand, BinaryOperand, Variable, Const, ArrayOperand, Helpers } from "survey-core";
-import { ExpressionToDisplayText } from "../../expressionToDisplayText";
 export class SurveyLogicExpressionUpdater {
   private operand: Operand;
-  private isModifiedValue: boolean;
+  private constChanges: Array<{op: Operand, val: any}> = [];
   constructor(expresion: string) {
     this.operand = new ConditionsParser().parseExpression(expresion);
   }
   public update(varName: string, oldValue: any, newValue: any): void {
-    return this.updateOperand(this.operand, varName.toLocaleLowerCase(), oldValue, newValue);
+    this.updateOperand(this.operand, varName.toLocaleLowerCase(), oldValue, newValue);
   }
-  public get isModified(): boolean { return this.isModifiedValue; }
+  public get isModified(): boolean { return this.constChanges.length > 0; }
   public toString(): string {
-    return new ExpressionToDisplayText(null).toExpression(this.operand);
+    var self = this;
+    var isRoot = true;
+    var strFunc = function (op: Operand): string {
+      var locIsRoot = isRoot;
+      isRoot = false;
+      if (op.getType() === "const") {
+        return self.constToString(<Const>op);
+      }
+      if (op.getType() === "binary") {
+        return self.binaryToString(<BinaryOperand>op, locIsRoot, strFunc);
+      }
+      return undefined;
+    };
+    return this.operand.toString(strFunc);
   }
+  private constToString(op: Const): string {
+    for(var i = 0; i < this.constChanges.length; i ++) {
+      if(this.constChanges[i].op === op) return this.constChanges[i].val;
+    }
+    return op.toString();
+  }
+  private binaryToString(
+    op: BinaryOperand,
+    isRoot: boolean,
+    func: (op: Operand) => string
+  ): string {
+    return (
+      (isRoot ? "" : "(") +
+      this.operandToString(op.leftOperand, func) +
+      " " +
+      this.operatorToString(op.operator) +
+      " " +
+      this.operandToString(op.rightOperand, func) +
+      (isRoot ? "" : ")")
+    );
+  }
+  private operandToString(op: any, func: (op: Operand) => string): string {
+    return !!op ? op.toString(func) : "";
+  }
+  private operatorToString(operator: string): string {
+    var res = SurveyLogicExpressionUpdater.operatorText[operator];
+    return !!res ? res : operator;
+  }
+  static operatorText = {
+    less: "<",
+    lessorequal: "<=",
+    greater: ">",
+    greaterorequal: ">=",
+    equal: "=",
+    notequal: "!=",
+    plus: "+",
+    minus: "-",
+    mul: "*",
+    div: "/",
+    power: "^",
+    mod: "%",
+    negate: "!",
+  };
   private updateOperand(op: Operand, varName: string, oldValue: any, newValue: any): void {
     if(op.getType() == "binary") {
       const bOP = <BinaryOperand>op;
-      if(bOP.isArithmetic) return;
       if(bOP.isConjunction) {
         this.updateOperand(bOP.leftOperand, varName, oldValue, newValue);
         this.updateOperand(bOP.rightOperand, varName, oldValue, newValue);
@@ -32,7 +86,7 @@ export class SurveyLogicExpressionUpdater {
     }
   }
   private hasVarName(op: Operand, varName: string): boolean {
-    if(op.getType() !== "variable") return;
+    if(!op || op.getType() !== "variable") return;
     return (<Variable>op).variable.toLowerCase() === varName;
   }
   private updateOperandConst(op: Operand, oldValue: any, newValue: any): void {
@@ -45,9 +99,8 @@ export class SurveyLogicExpressionUpdater {
     if(op.getType() !== "const") return;
     const cOp = <Const>op;
     if(Helpers.isTwoValueEquals(cOp.correctValue, oldValue)) {
-      this.isModifiedValue = true;
       newValue = this.getCorrectNewValue(cOp, newValue);
-      cOp.setValue(newValue);
+      this.constChanges.push({ op: op, val: newValue });
     }
   }
   private getCorrectNewValue(op: Const, newValue: any): any {
