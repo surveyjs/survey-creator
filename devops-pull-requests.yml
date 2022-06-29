@@ -358,7 +358,7 @@ jobs:
     
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-      npm run testcafe:a11y
+      npm run testcafe:a11y:ci
     displayName: 'A11Y Functional test CreatorV2 React'
 
 
@@ -511,5 +511,5 @@ jobs:
   
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-      npm run testcafe:a11y
+      npm run testcafe:a11y:ci
     displayName: 'A11Y Functional test CreatorV2 Knockout'
