@@ -1691,7 +1691,7 @@ export class CreatorBase extends Base
     }
   }
   private updateSurveyLogicItemValue(item: ItemValue, oldValue: any): void {
-    if(!item.locOwner) return;
+    if(!item.locOwner || !settings.logic.updateExpressionsOnChanging.choiceValue) return;
     this.surveyLogicRenaming = true;
     this.getSurveyLogicForUpdate().renameItemValue(item, oldValue);
     this.surveyLogicRenaming = false;
@@ -1700,7 +1700,7 @@ export class CreatorBase extends Base
     return new SurveyLogic(this.survey, this);
   }
   private updateConditions(oldName: string, newName: string) {
-    if (oldName === newName) return;
+    if (oldName === newName || !settings.logic.updateExpressionsOnChanging.questionName) return;
     this.surveyLogicRenaming = true;
     this.getSurveyLogicForUpdate().renameQuestion(oldName, newName);
     this.surveyLogicRenaming = false;
