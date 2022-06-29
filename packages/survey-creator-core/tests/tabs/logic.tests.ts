@@ -1849,6 +1849,38 @@ test("LogicUI: edit matrix column visibleIf. Filter logic types by context initi
   expect(logicTypeName.value).toEqual("column_visibility");
   expect(logicTypeName.choices.length).toEqual(3);
 });
+test("LogicUI: edit matrix column visibleIf. Two matrices with the same expression", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2", visibleIf: "{row.col1} = 1" }, { name: "col3" }]
+      },
+      {
+        type: "matrixdynamic", name: "q2", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2", visibleIf: "{row.col1} = 1" }]
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+  logic.editItem(logic.items[0]);
+  let itemEditor = logic.itemEditor;
+  expect(itemEditor.context).toBeTruthy();
+  expect(itemEditor.context.name).toEqual("q1");
+  let actionPanel = itemEditor.panels[0];
+  let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.value).toEqual("column_visibility");
+  expect(logicTypeName.choices.length).toEqual(3);
+
+  logic.editItem(logic.items[1]);
+  itemEditor = logic.itemEditor;
+  expect(itemEditor.context).toBeTruthy();
+  expect(itemEditor.context.name).toEqual("q2");
+  actionPanel = itemEditor.panels[0];
+  logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.value).toEqual("column_visibility");
+});
 test("LogicUI: edit visibleIf property for panel dynamic question template", () => {
   const survey = new SurveyModel({
     elements: [
@@ -2346,16 +2378,12 @@ test("Do not reacreate logic for updating expressions for every change", (): any
 test("Update logic on chaning choices value", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
-    pages: [
-      {
-        elements: [
-          { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
-          { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
-          { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
-          { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
-        ],
-      },
-    ]
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+      { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+      { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
+      { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
+    ],
   };
   (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 1";
   (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q2")).choices[0].value = "Item 1!";
@@ -2364,16 +2392,12 @@ test("Update logic on chaning choices value", (): any => {
 });
 test("Rename choices for questions", () => {
   const survey = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
-          { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
-          { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
-          { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
-        ],
-      },
-    ]
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+      { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+      { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
+      { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
+    ],
   });
   const logic = new SurveyLogic(survey);
   const q1 = <QuestionRadiogroupModel>survey.getQuestionByName("q1");
@@ -2388,22 +2412,18 @@ test("Rename choices for questions", () => {
 test("Rename choices for questions in panel dynamic", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
-    pages: [
+    elements: [
       {
-        elements: [
-          {
-            type: "paneldynamic",
-            name: "question1",
-            templateElements: [
-              { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
-              { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
-              { type: "text", name: "q3", visibleIf: "{panel.q1} = 'item1'" },
-              { type: "text", name: "q4", visibleIf: "{panel.q2} = ['item1']" },
-            ]
-          }
-        ],
-      },
-    ]
+        type: "paneldynamic",
+        name: "question1",
+        templateElements: [
+          { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+          { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+          { type: "text", name: "q3", visibleIf: "{panel.q1} = 'item1'" },
+          { type: "text", name: "q4", visibleIf: "{panel.q2} = ['item1']" },
+        ]
+      }
+    ],
   };
   const panel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("question1");
   panel.template.elements[0].choices[0].value = "Item 1";
@@ -2414,22 +2434,18 @@ test("Rename choices for questions in panel dynamic", (): any => {
 test("Rename choices for columns in matrices", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
-    pages: [
+    elements: [
       {
-        elements: [
-          {
-            type: "matrixdynamic",
-            name: "question1",
-            columns: [
-              { cellType: "radiogroup", name: "q1", choices: ["item1", "item2"] },
-              { cellType: "checkbox", name: "q2", choices: ["item1", "item2"] },
-              { cellType: "text", name: "q3", visibleIf: "{row.q1} = 'item1'" },
-              { cellType: "text", name: "q4", visibleIf: "{row.q2} = ['item1']" },
-            ]
-          }
-        ],
-      },
-    ]
+        type: "matrixdynamic",
+        name: "question1",
+        columns: [
+          { cellType: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+          { cellType: "checkbox", name: "q2", choices: ["item1", "item2"] },
+          { cellType: "text", name: "q3", visibleIf: "{row.q1} = 'item1'" },
+          { cellType: "text", name: "q4", visibleIf: "{row.q2} = ['item1']" },
+        ]
+      }
+    ],
   };
   const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question1");
   matrix.columns[0].choices[0].value = "Item 1";
@@ -2437,16 +2453,40 @@ test("Rename choices for columns in matrices", (): any => {
   expect(matrix.columns[2].visibleIf).toEqual("{row.q1} == 'Item 1'");
   expect(matrix.columns[3].visibleIf).toEqual("{row.q2} == ['Item 1!']");
 });
+test("Do not rename questions for another matrix", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "question1",
+        columns: [
+          { cellType: "radiogroup", name: "col1", choices: ["item1", "item2"] },
+          { cellType: "text", name: "col2", visibleIf: "{row.col1} = 'item1'" },
+        ]
+      },
+      {
+        type: "matrixdynamic",
+        name: "question2",
+        columns: [
+          { cellType: "radiogroup", name: "col1", choices: ["item1", "item2"] },
+          { cellType: "text", name: "col2", visibleIf: "{row.col1} = 'item1'" },
+        ]
+      }
+    ],
+  };
+  const matrix1 = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question1");
+  const matrix2 = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question2");
+  matrix1.columns[0].choices[0].value = "Item 1";
+  expect(matrix1.columns[1].visibleIf).toEqual("{row.col1} == 'Item 1'");
+  expect(matrix2.columns[1].visibleIf).toEqual("{row.col1} = 'item1'");
+});
 test("Modify choice and question name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
-    pages: [
-      {
-        elements: [
-          { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
-          { type: "text", name: "q2", visibleIf: "{q1} = 'item1'" }
-        ],
-      },
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+      { type: "text", name: "q2", visibleIf: "{q1} = 'item1'" }
     ]
   };
   (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 1";
@@ -2460,23 +2500,19 @@ test("Use settings to disable updating expressions on changing name and choices"
   settings.logic.updateExpressionsOnChanging.choiceValue = false;
   const creator = new CreatorTester();
   creator.JSON = {
-    pages: [
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+      { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+      { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
+      { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
       {
-        elements: [
-          { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
-          { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
-          { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
-          { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
-          {
-            type: "matrixdynamic",
-            name: "matrix",
-            columns: [
-              { name: "col1" },
-              { name: "col2", visibleIf: "{row.col1} = 1" }
-            ]
-          }
-        ],
-      },
+        type: "matrixdynamic",
+        name: "matrix",
+        columns: [
+          { name: "col1" },
+          { name: "col2", visibleIf: "{row.col1} = 1" }
+        ]
+      }
     ]
   };
   (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 1";

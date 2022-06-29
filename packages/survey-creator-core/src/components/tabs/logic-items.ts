@@ -277,7 +277,8 @@ export class SurveyLogicItem {
     }
   }
   public renameItemValue(question: Question, item: ItemValue, oldValue: any): void {
-    if (!this.expression || !question.name) return;
+    if (!this.expression || !question.name || this.actions.length < 1) return;
+    if(!!question.parentQuestion && this.actions[0].parentElement !== question.parentQuestion) return;
     const questionName = this.getItemValueQuestionName(question).toLocaleLowerCase();
     if(this.expression.toLocaleLowerCase().indexOf(settings.logic.openBracket + questionName.toLocaleLowerCase()) < 0) return;
     const newExpression = updateLogicExpression(this.expression, questionName, oldValue, item.value);

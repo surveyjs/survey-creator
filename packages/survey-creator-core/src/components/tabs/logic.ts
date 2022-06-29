@@ -389,7 +389,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
         types.indexOf(lt.baseClass) > -1 &&
         !Helpers.isValueEmpty(expression)
       ) {
-        var key = this.getExpressionHashKey(expression);
+        var key = this.getLogicItemHashKey(expression, element);
         var item = hash[key];
         if (!item) {
           item = new SurveyLogicItem(this, expression);
@@ -401,8 +401,16 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       }
     }
   }
-  private getExpressionHashKey(expression: string): string {
-    return expression.replace(" ", "").toLowerCase();
+  private getLogicItemHashKey(expression: string, element: Base): string {
+    const parentQuestion = this.getParentQuestion(element);
+    const parentName = !!parentQuestion ? "@" + parentQuestion.name : "";
+    return parentName + expression.replace(" ", "").toLowerCase();
+  }
+  private getParentQuestion(element: Base): Question {
+    const parentQuestion = (<any>element).parentQuestion;
+    if(!!parentQuestion) return parentQuestion;
+    if(element.isDescendantOf("matrixdropdowncolumn")) return (<any>element).colOwner;
+    return null;
   }
   private getElementAllTypes(element: Base) {
     var types = [];
