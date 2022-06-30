@@ -2510,3 +2510,27 @@ test("Use settings to disable updating expressions on changing name and choices"
   expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} = ['item1']");
   expect(matrix.columns[1].visibleIf).toEqual("{row.col1} = 1");
 });
+/*
+test("Update expression on changing column name", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+      { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+      { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
+      { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
+      {
+        type: "matrixdynamic",
+        name: "matrix",
+        columns: [
+          { name: "col1" },
+          { name: "col2", visibleIf: "{row.col1} = 1" }
+        ]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+  matrix.columns[0].name = "Column1";
+  expect(matrix.columns[1].visibleIf).toEqual("{row.Column1} = 1");
+});
+*/
