@@ -2875,4 +2875,5 @@ test("Convert question type for a question on the last page with the only questi
   creator.convertCurrentQuestion("comment");
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].questions[0].getType()).toEqual("comment");
+  expect(creator.survey.pages[1].questions[0].name).toEqual("question2");
 });
