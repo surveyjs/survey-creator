@@ -50,8 +50,6 @@ import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrice
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { PagesController } from "../src/pages-controller";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
-import { IPortableMouseEvent } from "../src/utils/events";
-import { assert } from "console";
 
 surveySettings.supportCreatorV2 = true;
 
