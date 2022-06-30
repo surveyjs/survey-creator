@@ -1,5 +1,7 @@
 # Built-In Question Type Customization
 
+This help topic describes how you can use built-in question types to create a custom question type or combine them into a composite question type.
+
 - [Create Custom Question Types](#create-custom-question-types)
 - [Create Composite Question Types](#create-composite-question-types)
   - [Add Custom Properties to Composite Question Types](#add-custom-properties-to-composite-question-types)
