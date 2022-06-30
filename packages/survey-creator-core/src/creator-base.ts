@@ -3223,7 +3223,7 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  const parentIsMatrix = element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
+  const parentIsMatrix = !!element.data && element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
   return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
 }
 export function isTextInput(target: any): boolean {
