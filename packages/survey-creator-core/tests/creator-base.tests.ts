@@ -2877,3 +2877,27 @@ test("Convert question type for a question on the last page with the only questi
   expect(creator.survey.pages[1].questions[0].getType()).toEqual("comment");
   expect(creator.survey.pages[1].questions[0].name).toEqual("question2");
 });
+test("Allow to set survey JSON via text if errors in JSON is not critical", (): any => {
+  const creator = new CreatorTester();
+  creator.text = JSON.stringify({
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text_custom", name: "question2" },
+    ]
+  });
+  expect(creator.activeTab).toEqual("designer");
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+  creator.text = JSON.stringify({
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "matrixdynamic",
+        name: "question2",
+        columns: [
+          { name: "col1", choices: [1, 2, 3] }
+        ]
+      },
+    ]
+  });
+  expect(creator.activeTab).toEqual("designer");
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+});

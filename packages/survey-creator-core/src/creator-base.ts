@@ -1897,7 +1897,7 @@ export class CreatorBase extends Base
   public changeText(value: string, clearState = false) {
     this.setTextValue(value);
     var textWorker = new SurveyTextWorker(value);
-    if (textWorker.isJsonCorrect) {
+    if (textWorker.isJsonCorrect || !!textWorker.survey) {
       this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
     } else {
       this.viewType = "editor";
