@@ -10,6 +10,7 @@ import {
   SurveyTriggerSetValue,
   QuestionPanelDynamicModel,
   Question,
+  QuestionMatrixDropdownModel,
   QuestionMatrixModel,
   QuestionCommentModel,
   QuestionRadiogroupModel
@@ -2435,6 +2436,24 @@ test("Rename choices for columns in matrices", (): any => {
   expect(matrix.columns[2].visibleIf).toEqual("{row.q1} = 'Item 1'");
   expect(matrix.columns[3].visibleIf).toEqual("{row.q2} = ['Item 1!']");
 });
+test("Rename choices for columns in dropdown matrix", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2.col1} = 'item1'" },
+      {
+        type: "matrixdropdown",
+        name: "matrix",
+        columns: [{ name: "col1", cellType: "dropdown", choices: ["item1"] }],
+        rows: ["row1", "row2"]
+      }
+    ],
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  matrix.columns[0].choices[0].value = "Item 1";
+  expect(q1.visibleIf).toEqual("{matrix.row2.col1} = 'Item 1'");
+});
 test("Do not rename questions for another matrix", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -2534,6 +2553,7 @@ test("Update expression on changing column name in matrix dropdown", (): any => 
   creator.JSON = {
     elements: [
       { type: "text", name: "q1", visibleIf: "{matrix.row2.col1} = 'item1'" },
+      { type: "text", name: "q2", visibleIf: "{matrix2.row2.col1} = 'item1'" },
       {
         type: "matrixdropdown",
         name: "matrix",
@@ -2546,10 +2566,12 @@ test("Update expression on changing column name in matrix dropdown", (): any => 
   };
   const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
   const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
   matrix.columns[0].name = "Column1";
   expect(q1.visibleIf).toEqual("{matrix.row2.Column1} = 'item1'");
+  expect(q2.visibleIf).toEqual("{matrix2.row2.col1} = 'item1'");
 });
-test("Update expression on changing column name in simple matrix", (): any => {
+test("Update expression on changing column value in simple matrix", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -2566,4 +2588,40 @@ test("Update expression on changing column name in simple matrix", (): any => {
   const q1 = creator.survey.getQuestionByName("q1");
   matrix.columns[0].value = "Column1";
   expect(q1.visibleIf).toEqual("{matrix.row2} = 'Column1'");
+});
+test("Update expression on changing row value in simple matrix", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2} = 'col1'" },
+      {
+        type: "matrix",
+        name: "matrix",
+        columns: ["col1"],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  matrix.rows[1].value = "Row 2";
+  expect(q1.visibleIf).toEqual("{matrix.Row 2} = 'col1'");
+});
+test("Update expression on changing row value in matrix dropdown", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2.col1} = 'item1'" },
+      {
+        type: "matrixdropdown",
+        name: "matrix",
+        columns: [{ name: "col1" }],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  matrix.rows[1].value = "Row 2";
+  expect(q1.visibleIf).toEqual("{matrix.Row 2.col1} = 'item1'");
 });

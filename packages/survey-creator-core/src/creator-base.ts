@@ -1776,9 +1776,14 @@ export class CreatorBase extends Base
   }
   private updateSurveyLogicItemValue(item: ItemValue, oldValue: any): void {
     if(!item.locOwner || !settings.logic.updateExpressionsOnChanging.choiceValue) return;
-    if(["choices", "rateValues", "columns"].indexOf(item.ownerPropertyName) < 0) return;
+    if(["choices", "rateValues", "columns", "rows"].indexOf(item.ownerPropertyName) < 0) return;
     this.surveyLogicRenaming = true;
-    this.getSurveyLogicForUpdate().renameItemValue(item, oldValue);
+    const logicUpdater = this.getSurveyLogicForUpdate();
+    if(item.ownerPropertyName === "rows") {
+      logicUpdater.renameRowValue(item, oldValue);
+    } else {
+      logicUpdater.renameItemValue(item, oldValue);
+    }
     this.surveyLogicRenaming = false;
   }
   protected createSurveyLogicForUpdate(): SurveyLogic {

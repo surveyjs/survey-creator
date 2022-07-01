@@ -163,11 +163,16 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.invisibleItems.forEach(item => item.renameQuestion(oldName, newName));
   }
   public renameItemValue(item: ItemValue, oldValue: any): void {
-    if(!item.locOwner || Helpers.isValueEmpty(oldValue)) return;
-    const question = this.getItemValueQuestion(item);
+    const question = this.getItemValueQuestion(item, oldValue);
     if(!question) return;
     this.items.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
     this.invisibleItems.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
+  }
+  public renameRowValue(item: ItemValue, oldValue: any): void {
+    const question = this.getItemValueQuestion(item, oldValue);
+    if(!question) return;
+    this.items.forEach(lItem => lItem.renameRowValue(question, item, oldValue));
+    this.invisibleItems.forEach(lItem => lItem.renameRowValue(question, item, oldValue));
   }
   public renameColumn(column: MatrixDropdownColumn, oldName: string): void {
     const question: any = column.colOwner;
@@ -175,7 +180,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.items.forEach(lItem => lItem.renameColumn(question, column, oldName));
     this.invisibleItems.forEach(lItem => lItem.renameColumn(question, column, oldName));
   }
-  private getItemValueQuestion(item: ItemValue): Question {
+  private getItemValueQuestion(item: ItemValue, oldValue: any): Question {
+    if(!item.locOwner || Helpers.isValueEmpty(oldValue) || Helpers.isValueEmpty(item.value)) return null;
     const owner: any = item.locOwner;
     return owner.isQuestion ? owner : null;
   }
