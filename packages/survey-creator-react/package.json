@@ -21,7 +21,7 @@
     "doc:update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
     "testcafe": "concurrently \"http-server --silent\" \"testcafe -c 4 chrome ../../testCafe/ --selector-timeout 1500\"",
     "testcafe:ci": "http-server --silent & testcafe -c 4 -q chrome:headless ../../testCafe/ --selector-timeout 1500 --reporter minimal,dashboard",
-    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/property-grid/test.ts --reporter minimal --debug-mode\"",
+    "testcafe:file": "concurrently \"http-server --silent\" \"testcafe chrome ../../testCafe/designer/page-navigator.ts --reporter minimal --debug-mode\"",
     "testcafe:a11y": "concurrently \"http-server --silent\" \"testcafe chrome ./testCafe/accessibility.js --selector-timeout 1500\"",
     "testcafe:a11y:ci": "testcafe chrome:headless -c 4 -q ./testCafe/accessibility.js --app \"http-server\" --selector-timeout 1500 --reporter minimal",
     "visual-regression-tests": "testcafe chrome --disable-font-subpixel-positioning ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal,dashboard",
