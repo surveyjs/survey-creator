@@ -8,7 +8,8 @@ import {
   ConditionRunner,
   Question,
   ItemValue,
-  MatrixDropdownColumn
+  MatrixDropdownColumn,
+  Helpers
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
@@ -278,8 +279,21 @@ export class SurveyLogicItem {
     }
   }
   public renameColumn(question: Question, column: MatrixDropdownColumn, oldName: string): void {
-    if (!this.expression || !column.name || this.actions.length < 1 || this.actions[0].parentElement !== question) return;
-    this.renameQuestionInExpression("row." + oldName, "row." + column.name, [settings.logic.closeBracket]);
+    if (!this.expression || !column.name || this.actions.length < 1) return;
+    if(this.actions[0].parentElement === question) {
+      this.renameQuestionInExpression("row." + oldName, "row." + column.name, [settings.logic.closeBracket]);
+    }
+    const rows: Array<ItemValue> = question["rows"];
+    if(Array.isArray(rows)) {
+      const questionPrefix = question.name + ".";
+      if(this.expression.toLocaleLowerCase().indexOf(settings.logic.openBracket + questionPrefix.toLocaleLowerCase()) > -1) {
+        for(var i = 0; i < rows.length; i ++) {
+          if(Helpers.isValueEmpty(rows[i].value)) continue;
+          const rowName = rows[i].value.toString() + ".";
+          this.renameQuestionInExpression(questionPrefix + rowName + oldName, questionPrefix + rowName + column.name, [settings.logic.closeBracket]);
+        }
+      }
+    }
   }
   public renameItemValue(question: Question, item: ItemValue, oldValue: any): void {
     if (!this.expression || !question.name || this.actions.length < 1) return;

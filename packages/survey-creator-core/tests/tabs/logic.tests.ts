@@ -2514,10 +2514,6 @@ test("Update expression on changing column name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
-      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
-      { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
-      { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
-      { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
       {
         type: "matrixdynamic",
         name: "matrix",
@@ -2531,4 +2527,24 @@ test("Update expression on changing column name", (): any => {
   const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
   matrix.columns[0].name = "Column1";
   expect(matrix.columns[1].visibleIf).toEqual("{row.Column1} = 1");
+});
+test("Update expression on changing column name for matrix dropdown", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2.col1} = 'item1'" },
+      {
+        type: "matrixdropdown",
+        name: "matrix",
+        columns: [
+          { name: "col1" }
+        ],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  matrix.columns[0].name = "Column1";
+  expect(q1.visibleIf).toEqual("{matrix.row2.Column1} = 'item1'");
 });
