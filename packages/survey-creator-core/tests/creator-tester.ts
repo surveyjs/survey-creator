@@ -1,6 +1,8 @@
 import { SurveyModel, IAction, Base } from "survey-core";
-import { CreatorBase, ICreatorOptions, isStringEditable, DesignTimeSurveyModel as DesignTimeSurveyModelOriginal } from "../src/creator-base";
+import { CreatorBase, isStringEditable, DesignTimeSurveyModel as DesignTimeSurveyModelOriginal } from "../src/creator-base";
 import { settings as creatorSetting } from "../src/settings";
+import { ICreatorOptions } from "../src/creator-options";
+import { SurveyLogic } from "../src/components/tabs/logic";
 
 class DesignTimeSurveyModel extends DesignTimeSurveyModelOriginal {
   constructor(public creator: CreatorTester, jsonObj?: any) {
@@ -47,7 +49,13 @@ export class CreatorTester extends CreatorBase {
     }
     return null;
   }
-  public doSaveFunc() {
+  public doSaveFunc(): void {
     this.doSave();
+  }
+  public logicCreatedId = 0;
+  protected createSurveyLogicForUpdate(): SurveyLogic {
+    const res = super.createSurveyLogicForUpdate();
+    res["createdId"] = ++ this.logicCreatedId;
+    return res;
   }
 }
