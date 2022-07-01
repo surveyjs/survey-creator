@@ -82,3 +82,35 @@ test("Hover", async (t) => {
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
 });
+
+test("dragging file", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(2560, 1440);
+  await setJSON(json);
+  await t.wait(3000);
+  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+  const imagePicker = Selector(".sd-imagepicker");
+  await t.click(imagePicker);
+  //emulate dragging class appear
+  await ClientFunction(() => { document.querySelector(".svc-image-item-value--new")?.classList.add("svc-image-item-value--file-dragging"); })();
+  await takeScreenshot("image-picker-responsive-dragging-file.png", imagePicker, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+});
+
+test("imagepicker check state when new item is signgle", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(2560, 1440);
+  await setJSON(json);
+  await t.wait(3000);
+  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+  const imagePicker = Selector(".sd-imagepicker");
+  await t.click(imagePicker);
+  //emulate dragging class appear
+  await ClientFunction(() => { (<any>window).creator.survey.getAllQuestions()[0].choices = []; })();
+  await takeScreenshot("image-picker-single-new-item.png", imagePicker, screenshotComparerOptions);
+  await t
+    .expect(compareResults.isValid())
+    .ok(compareResults.errorMessages());
+});

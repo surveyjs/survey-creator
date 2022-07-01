@@ -12896,7 +12896,7 @@ if (!window["%hammerhead%"]) {
     window.creator.JSON = counter % 2 == 0 ? json : json3;
     counter++;
   }
-  window.creator.JSON = json3;
+  // window.creator.JSON = json3;
   // creator.toolbarItems.push(new Survey.Action({
   //   id: "toolboxCustomization",
   //   visible: true,

@@ -267,7 +267,7 @@ implements ISurveyCreatorOptions {
    * - `options.locale` - the locale name, like 'en', 'de' and so on.
    * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
    */
-   public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
 
   /**
    * This callback is used internally for providing survey JSON text.
@@ -991,7 +991,7 @@ implements ISurveyCreatorOptions {
     // TODO: remove SurveyLogic call here
     var logic = new SurveyLogic(<any>this.survey, <any>this);
     for (var i = 0; i < questions.length; i++) {
-      if(questions[i].isQuestion) {
+      if (questions[i].isQuestion) {
         logic.removeQuestion(questions[i].getValueName());
       }
     }

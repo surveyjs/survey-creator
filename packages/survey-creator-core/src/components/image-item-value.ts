@@ -1,12 +1,28 @@
-import { ImageItemValue, QuestionSelectBase, SurveyModel } from "survey-core";
+import { CssClassBuilder, ImageItemValue, property, QuestionSelectBase } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 
 import "./image-item-value.scss";
-
 export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
+
+  @property({ defaultValue: false }) isFileDragging: boolean;
+
   constructor(creator: CreatorBase, public question: QuestionSelectBase, public item: ImageItemValue, public templateData: any, public itemsRoot: HTMLElement) {
     super(creator, question, item);
+  }
+
+  getRootCss() {
+    return new CssClassBuilder()
+      .append("svc-image-item-value-wrapper")
+      .append("svc-image-item-value")
+      .append("svc-image-item-value--new", this.isNew)
+      .append("svc-image-item-value-wrapper--ghost", this.isDragDropGhost)
+      .append("svc-image-item-value--file-dragging", this.isFileDragging)
+      .append("svc-image-item-value--single", this.getIsNewItemSingle()).toString();
+  }
+
+  public getIsNewItemSingle() {
+    return this.isNew && this.question.choices.length === 0;
   }
 
   chooseFile(model: ImageItemValueWrapperViewModel) {
@@ -18,17 +34,40 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     });
   }
 
+  public uploadFiles(files) {
+    this.creator.uploadFiles(files, (_, link) => {
+      const itemValue = <ImageItemValue>this.creator.createNewItemValue(this.question);
+      itemValue.imageLink = link;
+      this.question.choices.push(itemValue);
+      const nextValue = this.creator.getNextItemValue(this.question);
+      this.item.value = nextValue;
+    });
+  }
+
   chooseNewFile(model: ImageItemValueWrapperViewModel) {
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
     model.creator.chooseFiles(fileInput, (files: File[]) => {
-      model.creator.uploadFiles(files, (_, link) => {
-        const itemValue = <ImageItemValue>model.creator.createNewItemValue(model.question);
-        itemValue.imageLink = link;
-        model.question.choices.push(itemValue);
-        const nextValue = model.creator.getNextItemValue(model.question);
-        model.item.value = nextValue;
-      });
+      model.uploadFiles(files);
     });
+  }
+  onDragOver = (event: any) => {
+    this.isFileDragging = true;
+    event.dataTransfer.dropEffect = "copy";
+    event.preventDefault();
+  }
+  onDrop = (event: any) => {
+    this.isFileDragging = false;
+    event.preventDefault();
+    let input = event.dataTransfer;
+    if (!input || !input.files || input.files.length < 1) return;
+    let files = [];
+    for (let i = 0; i < input.files.length; i++) {
+      files.push(input.files[i]);
+    }
+    this.uploadFiles(files);
+  }
+  onDragLeave = (event: any) => {
+    this.isFileDragging = false;
   }
 }
 

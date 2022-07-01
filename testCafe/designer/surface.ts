@@ -1,5 +1,5 @@
-import { url, setJSON, collapseButtonSelector, getTabbedMenuItemByText, creatorTabPreviewName } from "../helper";
-import { Selector } from "testcafe";
+import { url, setJSON, collapseButtonSelector, getTabbedMenuItemByText, creatorTabPreviewName, explicitErrorHandler } from "../helper";
+import { ClientFunction, Selector } from "testcafe";
 const title = "Designer surface";
 
 fixture`${title}`.page`${url}`;
@@ -69,4 +69,16 @@ test("Check scrollbar is not appear when width mode is responsive", async (t) =>
   await t
     .resizeWindow(1920, 1080)
     .expect(await rootSelector.offsetWidth - await rootSelector.scrollWidth).lte(verticalScrollWidth);
+});
+
+test("Check imagepicker add/delete items not raises errors and works fine: #3203", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  await setJSON({});
+  await explicitErrorHandler();
+  await t
+    .click(".svc-toolbox__item--icon-imagepicker")
+    .click(".spg-panel__title--expandable[aria-label='Choices']")
+    .click(".spg-action-button[title='Add a choice']")
+    .click(".spg-matrixdynamic tr:last-child .spg-action-button--danger")
+    .expect(Selector(".sd-imagepicker").childElementCount).eql(6);
 });

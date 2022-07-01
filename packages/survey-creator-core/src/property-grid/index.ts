@@ -396,6 +396,7 @@ export class PropertyGridTitleActionsCreator {
     if (!question.description) return null;
     const action = new Action({
       title: "",
+      tooltip: question.description,
       id: "property-grid-help",
       iconName: this.getHelpActionIconName(question),
       showTitle: false,
@@ -915,7 +916,7 @@ export class PropertyGridModel {
   private changeDependedProperties(question: Question, dependedsQuetion: (name: string) => Question,
     dependedsValue: (name: string) => any) {
     const prop: JsonObjectProperty = (<any>question).property;
-    if(!prop) return;
+    if (!prop) return;
     const properties = prop.getDependedProperties();
     if (!properties) return;
     for (var i = 0; i < properties.length; i++) {
@@ -1030,7 +1031,7 @@ export class PropertyGridModel {
   private onMatrixCellValueChanged(options: any) {
     if (this.isCellCreating) return;
     const cellQuestion = options.row.getQuestionByName(options.columnName);
-    if(!!cellQuestion) {
+    if (!!cellQuestion) {
       this.changeDependedProperties(cellQuestion, (name: string): Question => { return options.row.getQuestionByName(name); },
         (name: string): any => { return options.row.getValue(name); });
     }

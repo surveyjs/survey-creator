@@ -5,11 +5,11 @@
                 params="iconName: 'icon-edit', size: 16"></sv-svg-icon>
         </div>
         <!-- ko ifnot: koHasHtml -->
-        <span class="sv-string-editor" spellcheck="false"
+        <span role="textbox" class="sv-string-editor" spellcheck="false"
             data-bind="text: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp }, click: edit, attr: { 'aria-placeholder': placeholder, contenteditable: contentEditable }"></span>
         <!-- /ko -->
         <!-- ko if: koHasHtml -->
-        <span class="sv-string-editor" spellcheck="false"
+        <span role="textbox" class="sv-string-editor" spellcheck="false"
             data-bind="html: editValue, event: { focus: onFocus, blur: onInput, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp }, click: edit, attr: { 'aria-placeholder': placeholder, contenteditable: contentEditable }"></span>
         <!-- /ko -->
     </span>

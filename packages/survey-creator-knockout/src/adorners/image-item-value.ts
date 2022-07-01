@@ -1,20 +1,19 @@
 import * as ko from "knockout";
 import {
   ImageItemValue,
+  QuestionImagePickerModel,
   QuestionSelectBase,
   SurveyTemplateRendererViewModel,
-  SurveyModel
 } from "survey-core";
 import { CreatorBase, ImageItemValueWrapperViewModel } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { KnockoutDragEvent } from "../events";
 
 const template = require("./image-item-value.html");
 
 class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewModel {
   constructor(
     creator: CreatorBase,
-    public question: QuestionSelectBase,
+    public question: QuestionImagePickerModel,
     public item: ImageItemValue,
     public templateData: any,
     itemsRoot: HTMLElement
@@ -38,6 +37,20 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
     event: MouseEvent
   ) {
     event.stopPropagation();
+  }
+
+  dragleave = (_, event)=> {
+    this.onDragLeave(event);
+  }
+  drop = (_, event)=> {
+    this.onDrop(event);
+  }
+  dragover = (_, event)=> {
+    this.onDragOver(event);
+  }
+  getNewItemStyle() {
+    const needStyle = !this.getIsNewItemSingle();
+    return { width: needStyle ? this.question.renderedImageWidth : undefined, height: needStyle ? this.question.renderedImageHeight : undefined };
   }
 }
 

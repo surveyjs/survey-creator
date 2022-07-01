@@ -109,6 +109,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
       const htmlValue = { __html: this.baseModel.focused && this.baseModel.editAsText && this.locString.text || this.locString.renderedHtml };
       control = (
         <span
+          role="textbox"
           ref={this.svStringEditorRef}
           className="sv-string-editor"
           contentEditable={this.contentEditable}
@@ -127,6 +128,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     } else {
       control = (
         <span
+          role="textbox"
           ref={this.svStringEditorRef}
           className="sv-string-editor"
           contentEditable={this.contentEditable}

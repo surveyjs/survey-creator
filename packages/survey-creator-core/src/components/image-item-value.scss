@@ -11,7 +11,16 @@
   .sd-imagepicker__image {
     box-sizing: border-box;
     border: 1px dashed $border;
-    border-radius: 4px;
+  }
+}
+.svc-image-item-value--file-dragging {
+  .sd-imagepicker__image {
+    border: 2px solid $primary;
+    background-color: $primary-light;
+  }
+  .svc-image-item-value__item {
+    position: relative;
+    z-index: 2;
   }
 }
 
@@ -130,4 +139,11 @@
 .svc-image-item-value-wrapper__ghost {
   display: none;
   background: $background-dim;
+}
+
+.svc-image-item-value--single {
+  width: 100%;
+  .sd-imagepicker__image {
+    height: calcSize(30);  
+  }
 }
