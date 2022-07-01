@@ -10,6 +10,7 @@ import {
   SurveyTriggerSetValue,
   QuestionPanelDynamicModel,
   Question,
+  QuestionMatrixModel,
   QuestionCommentModel,
   QuestionRadiogroupModel
 } from "survey-core";
@@ -2528,7 +2529,7 @@ test("Update expression on changing column name", (): any => {
   matrix.columns[0].name = "Column1";
   expect(matrix.columns[1].visibleIf).toEqual("{row.Column1} = 1");
 });
-test("Update expression on changing column name for matrix dropdown", (): any => {
+test("Update expression on changing column name in matrix dropdown", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -2547,4 +2548,22 @@ test("Update expression on changing column name for matrix dropdown", (): any =>
   const q1 = creator.survey.getQuestionByName("q1");
   matrix.columns[0].name = "Column1";
   expect(q1.visibleIf).toEqual("{matrix.row2.Column1} = 'item1'");
+});
+test("Update expression on changing column name in simple matrix", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2} = 'col1'" },
+      {
+        type: "matrix",
+        name: "matrix",
+        columns: ["col1"],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  matrix.columns[0].value = "Column1";
+  expect(q1.visibleIf).toEqual("{matrix.row2} = 'Column1'");
 });

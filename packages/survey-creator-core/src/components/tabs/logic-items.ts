@@ -300,7 +300,17 @@ export class SurveyLogicItem {
     if(!!question.parentQuestion && this.actions[0].parentElement !== question.parentQuestion) return;
     const questionName = this.getItemValueQuestionName(question).toLocaleLowerCase();
     if(this.expression.toLocaleLowerCase().indexOf(settings.logic.openBracket + questionName.toLocaleLowerCase()) < 0) return;
-    const newExpression = updateLogicExpression(this.expression, questionName, oldValue, item.value);
+    const rows: Array<ItemValue> = question["rows"];
+    let newExpression = this.expression;
+    if(!Array.isArray(rows)) {
+      newExpression = updateLogicExpression(newExpression, questionName, oldValue, item.value);
+    } else {
+      for(var i = 0; i < rows.length; i ++) {
+        if(Helpers.isValueEmpty(rows[i].value)) continue;
+        const rowName = "." + rows[i].value.toString();
+        newExpression = updateLogicExpression(newExpression, questionName + rowName, oldValue, item.value);
+      }
+    }
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);
     }
