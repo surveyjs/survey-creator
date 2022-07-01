@@ -71,6 +71,7 @@ export class LogicActionModel extends LogicActionModelBase {
     const question = <QuestionDropdownModel>this.panel.getQuestionByName("elementSelector");
     question.visible = true;
     question.choices = choices;
+    question.allowClear = false;
     question.optionsCaption = this.getSelectorOptionsText(this.logicType);
     this.setInitialElementValue(question, this.initialLogicAction, selectedElement);
   }
