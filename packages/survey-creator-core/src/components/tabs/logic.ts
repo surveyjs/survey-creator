@@ -1,4 +1,4 @@
-import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue } from "survey-core";
+import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -168,6 +168,12 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     if(!question) return;
     this.items.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
     this.invisibleItems.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
+  }
+  public renameColumn(column: MatrixDropdownColumn, oldName: string): void {
+    const question: any = column.colOwner;
+    if(!question || !question.isQuestion) return;
+    this.items.forEach(lItem => lItem.renameColumn(question, column, oldName));
+    this.invisibleItems.forEach(lItem => lItem.renameColumn(question, column, oldName));
   }
   private getItemValueQuestion(item: ItemValue): Question {
     const owner: any = item.locOwner;

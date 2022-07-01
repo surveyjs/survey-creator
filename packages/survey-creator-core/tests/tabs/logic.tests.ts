@@ -2510,7 +2510,6 @@ test("Use settings to disable updating expressions on changing name and choices"
   expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} = ['item1']");
   expect(matrix.columns[1].visibleIf).toEqual("{row.col1} = 1");
 });
-/*
 test("Update expression on changing column name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -2533,4 +2532,3 @@ test("Update expression on changing column name", (): any => {
   matrix.columns[0].name = "Column1";
   expect(matrix.columns[1].visibleIf).toEqual("{row.Column1} = 1");
 });
-*/

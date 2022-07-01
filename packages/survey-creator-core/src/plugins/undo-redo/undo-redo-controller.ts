@@ -28,7 +28,7 @@ export class UndoRedoController extends Base {
         arrayChanges
       );
       this.creator.updateElementsOnLocaleChanged(sender, name);
-      this.creator.updateConditionsOnQuestionNameChanged(sender, name, oldValue);
+      this.creator.updateConditionsOnNameChanged(sender, name, oldValue);
       this.undoRedoManager.stopTransaction();
     } else {
       this.creator.notifySurveyPropertyChanged({

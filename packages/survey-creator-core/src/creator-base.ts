@@ -1729,15 +1729,19 @@ export class CreatorBase extends Base
       pages[i].locStrsChanged();
     }
   }
-  public updateConditionsOnQuestionNameChanged(obj: Base, propertyName: string, oldValue: any): void {
-    if (!this.isObjQuestion(obj)) return;
-    if (propertyName === "name" && !obj["valueName"]) {
-      this.updateConditions(oldValue, obj["name"]);
+  public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
+    if (this.isObjQuestion(obj)) {
+      if (propertyName === "name" && !obj["valueName"]) {
+        this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
+      }
+      if (propertyName === "valueName") {
+        const oldName = !!oldValue ? oldValue : obj["name"];
+        const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
+        this.updateLogicOnQuestionNameChanged(oldName, newName);
+      }
     }
-    if (propertyName === "valueName") {
-      var oldName = !!oldValue ? oldValue : obj["name"];
-      var newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
-      this.updateConditions(oldName, newName);
+    if(propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
+      this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
     }
   }
   private surveyLogicForUpdate: SurveyLogic;
@@ -1753,11 +1757,11 @@ export class CreatorBase extends Base
   }
   private clearSurveyLogicForUpdate(obj: Base, propertyName: string, value: any): void {
     if(this.surveyLogicRenaming || !this.surveyLogicForUpdate || !obj || !propertyName) return;
-    if(this.needClearSurveyLogicFOrUpdate(obj, propertyName, value)) {
+    if(this.needClearSurveyLogicForUpdate(obj, propertyName, value)) {
       this.surveyLogicForUpdate = undefined;
     }
   }
-  private needClearSurveyLogicFOrUpdate(obj: Base, propertyName: string, value: any): boolean {
+  private needClearSurveyLogicForUpdate(obj: Base, propertyName: string, value: any): boolean {
     if(Array.isArray(value)) {
       return true;
     }
@@ -1780,10 +1784,16 @@ export class CreatorBase extends Base
   protected createSurveyLogicForUpdate(): SurveyLogic {
     return new SurveyLogic(this.survey, this);
   }
-  private updateConditions(oldName: string, newName: string) {
+  private updateLogicOnQuestionNameChanged(oldName: string, newName: string) {
     if (oldName === newName || !settings.logic.updateExpressionsOnChanging.questionName) return;
     this.surveyLogicRenaming = true;
     this.getSurveyLogicForUpdate().renameQuestion(oldName, newName);
+    this.surveyLogicRenaming = false;
+  }
+  private updateLogicOnColumnNameChanged(column: Base, oldName: string, newName: string) {
+    if (!oldName || oldName === newName || !settings.logic.updateExpressionsOnChanging.columnName) return;
+    this.surveyLogicRenaming = true;
+    this.getSurveyLogicForUpdate().renameColumn(<Survey.MatrixDropdownColumn>column, oldName);
     this.surveyLogicRenaming = false;
   }
   public isObjQuestion(obj: Base): boolean {

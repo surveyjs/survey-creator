@@ -7,7 +7,8 @@ import {
   SurveyTrigger,
   ConditionRunner,
   Question,
-  ItemValue
+  ItemValue,
+  MatrixDropdownColumn
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
@@ -268,13 +269,17 @@ export class SurveyLogicItem {
     this.removedActions = [];
     this.applyExpression(expression, false);
   }
-  public renameQuestion(oldName: string, newName: string) {
+  public renameQuestion(oldName: string, newName: string): void {
     if (!oldName || !newName) return;
-    this.renameQuestionInExpression(oldName, newName);
+    this.renameQuestionInExpression(oldName, newName, [settings.logic.closeBracket, ".", "["]);
     var ops = this.actions;
     for (var i = 0; i < ops.length; i++) {
       ops[i].renameQuestion(oldName, newName);
     }
+  }
+  public renameColumn(question: Question, column: MatrixDropdownColumn, oldName: string): void {
+    if (!this.expression || !column.name || this.actions.length < 1 || this.actions[0].parentElement !== question) return;
+    this.renameQuestionInExpression("row." + oldName, "row." + column.name, [settings.logic.closeBracket]);
   }
   public renameItemValue(question: Question, item: ItemValue, oldValue: any): void {
     if (!this.expression || !question.name || this.actions.length < 1) return;
@@ -361,7 +366,7 @@ export class SurveyLogicItem {
   private isSuitableByLogicTypeInActions(logicTypeName: string): boolean {
     return this.actions.some(action => action.isSuitableByLogicType(logicTypeName));
   }
-  private renameQuestionInExpression(oldName: string, newName: string): void {
+  private renameQuestionInExpression(oldName: string, newName: string, postFixes: Array<string>): void {
     if (!this.expression) return;
     oldName = oldName.toLowerCase();
     if(this.expression.toLocaleLowerCase().indexOf(oldName) < 0) return;
@@ -369,7 +374,7 @@ export class SurveyLogicItem {
     oldName = ob + oldName;
     newName = ob + newName;
     let newExpression = this.expression;
-    [settings.logic.closeBracket, ".", "["].forEach(ch => {
+    postFixes.forEach(ch => {
       newExpression = this.renameQuestionInExpressionCore(newExpression, newExpression.toLocaleLowerCase(), oldName + ch, newName + ch);
     });
     if (newExpression != this.expression) {
