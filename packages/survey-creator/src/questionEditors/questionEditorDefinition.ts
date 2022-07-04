@@ -85,7 +85,7 @@ export class SurveyQuestionEditorDefinition {
     matrixdropdownbase: {
       properties: [
         "cellType",
-		"optionsCaption",
+        "optionsCaption",
         "detailPanelMode",
         "detailPanelShowOnAdding",
         { name: "showHeader", tab: "layout" },
@@ -117,6 +117,7 @@ export class SurveyQuestionEditorDefinition {
         "removeRowText",
         "confirmDelete",
         "confirmDeleteText",
+        "placeholder",
         { name: "hideColumnsIfEmpty", tab: "columns" },
         { name: "emptyRowsText", tab: "columns" },
         { name: "defaultRowValue", tab: "data" },
@@ -128,6 +129,7 @@ export class SurveyQuestionEditorDefinition {
     matrixdropdown: {
       properties: [
         "totalText",
+        "placeholder",
         { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "rowsVisibleIf", tab: "logic" },
