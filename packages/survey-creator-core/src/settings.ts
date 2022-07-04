@@ -57,7 +57,15 @@ export var settings = {
     visibleActions: [],
     logicItemTitleMaxChars: 50,
     openBracket: "{",
-    closeBracket: "}"
+    closeBracket: "}",
+    /**
+     * Set these properties to false if you don't want to update expressions on changing question and column names and on changing choices values
+     */
+    updateExpressionsOnChanging: {
+      questionName: true,
+      columnName: true,
+      choiceValue: true
+    }
   },
   /**
    * Determines which types of questions the conversion will be available for.

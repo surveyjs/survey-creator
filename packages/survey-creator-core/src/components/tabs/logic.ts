@@ -1,4 +1,4 @@
-import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray } from "survey-core";
+import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -158,9 +158,32 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       this.onChangedCallback(item, changeType);
     }
   }
-  public renameQuestion(oldName: string, newName: string) {
-    this.renameQuestionCore(oldName, newName, this.items);
-    this.renameQuestionCore(oldName, newName, this.invisibleItems);
+  public renameQuestion(oldName: string, newName: string): void {
+    this.items.forEach(item => item.renameQuestion(oldName, newName));
+    this.invisibleItems.forEach(item => item.renameQuestion(oldName, newName));
+  }
+  public renameItemValue(item: ItemValue, oldValue: any): void {
+    const question = this.getItemValueQuestion(item, oldValue);
+    if(!question) return;
+    this.items.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
+    this.invisibleItems.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
+  }
+  public renameRowValue(item: ItemValue, oldValue: any): void {
+    const question = this.getItemValueQuestion(item, oldValue);
+    if(!question) return;
+    this.items.forEach(lItem => lItem.renameRowValue(question, item, oldValue));
+    this.invisibleItems.forEach(lItem => lItem.renameRowValue(question, item, oldValue));
+  }
+  public renameColumn(column: MatrixDropdownColumn, oldName: string): void {
+    const question: any = column.colOwner;
+    if(!question || !question.isQuestion) return;
+    this.items.forEach(lItem => lItem.renameColumn(question, column, oldName));
+    this.invisibleItems.forEach(lItem => lItem.renameColumn(question, column, oldName));
+  }
+  private getItemValueQuestion(item: ItemValue, oldValue: any): Question {
+    if(!item.locOwner || Helpers.isValueEmpty(oldValue) || Helpers.isValueEmpty(item.value)) return null;
+    const owner: any = item.locOwner;
+    return owner.isQuestion ? owner : null;
   }
   public removeQuestion(name: string) {
     this.removeQuestionCore(name, this.items);
@@ -229,15 +252,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     return [];
   }
   protected onReadOnlyChanged(): void {}
-  private renameQuestionCore(
-    oldName: string,
-    newName: string,
-    items: Array<SurveyLogicItem>
-  ) {
-    for (var i = 0; i < items.length; i++) {
-      items[i].renameQuestion(oldName, newName);
-    }
-  }
   private removeQuestionCore(name: string, items: Array<SurveyLogicItem>) {
     for (var i = 0; i < items.length; i++) {
       items[i].removeQuestion(name);
@@ -387,7 +401,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
         types.indexOf(lt.baseClass) > -1 &&
         !Helpers.isValueEmpty(expression)
       ) {
-        var key = this.getExpressionHashKey(expression);
+        var key = this.getLogicItemHashKey(expression, element);
         var item = hash[key];
         if (!item) {
           item = new SurveyLogicItem(this, expression);
@@ -399,8 +413,16 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       }
     }
   }
-  private getExpressionHashKey(expression: string): string {
-    return expression.replace(" ", "").toLowerCase();
+  private getLogicItemHashKey(expression: string, element: Base): string {
+    const parentQuestion = this.getParentQuestion(element);
+    const parentName = !!parentQuestion ? "@" + parentQuestion.name : "";
+    return parentName + expression.replace(" ", "").toLowerCase();
+  }
+  private getParentQuestion(element: Base): Question {
+    const parentQuestion = (<any>element).parentQuestion;
+    if(!!parentQuestion) return parentQuestion;
+    if(element.isDescendantOf("matrixdropdowncolumn")) return (<any>element).colOwner;
+    return null;
   }
   private getElementAllTypes(element: Base) {
     var types = [];
