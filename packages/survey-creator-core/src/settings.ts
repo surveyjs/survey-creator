@@ -1,12 +1,5 @@
-import {
-  Base,
-  IAction,
-  ItemValue,
-  JsonObjectProperty,
-  MatrixDropdownColumn,
-  Question,
-  SurveyModel
-} from "survey-core";
+import { StylesManager, Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, Question, SurveyModel } from "survey-core";
+
 /**
  * List available question convert modes
  */
@@ -274,7 +267,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   onPropertyGridSurveyCreatedCallback(
     object: any,
     survey: SurveyModel
-  ) {}
+  ) { }
   onPropertyEditorCreatedCallback(
     object: any,
     property: JsonObjectProperty,
@@ -367,3 +360,5 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     return title;
   }
 }
+
+StylesManager.applyTheme("defaultV2");

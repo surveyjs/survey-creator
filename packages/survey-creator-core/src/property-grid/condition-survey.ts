@@ -341,6 +341,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               renderAs: "select",
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
+              showOptionsCaption: false,
               startWithNewLine: false,
               isRequired: true
             },
