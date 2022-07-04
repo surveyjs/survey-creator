@@ -51,9 +51,14 @@ test("Check page navigator track scrolling", async (t) => {
     };
   })();
 
+  const firstPageNavigatorItem = "svc-page-navigator-item:nth-child(2) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-child(2) > .svc-page-navigator-item--selected";
+  const lastPageNavigatorItem = "svc-page-navigator-item:nth-child(5) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-child(5) > .svc-page-navigator-item--selected";
+
   await t
-    .expect(Selector("svc-page-navigator-item:nth-child(2) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-child(2) > .svc-page-navigator-item--selected").exists).ok()
+    .expect(Selector(firstPageNavigatorItem).exists).ok()
+    .expect(Selector(lastPageNavigatorItem).exists).notOk()
     .scroll(Selector(".svc-tab-designer--with-page-navigator"), "bottomRight")
     .scroll(Selector(".svc-tab-designer--with-page-navigator"), "bottomRight")
-    .expect(Selector("svc-page-navigator-item:nth-child(5) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-child(5) > .svc-page-navigator-item--selected").exists).ok();
+    .expect(Selector(firstPageNavigatorItem).exists).notOk()
+    .expect(Selector(lastPageNavigatorItem).exists).ok();
 });
