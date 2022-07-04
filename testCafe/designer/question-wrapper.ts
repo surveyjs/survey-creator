@@ -158,7 +158,7 @@ test("Matrix dropdown with detail panel", async (t) => {
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
     .hover(SingleInputItem)
     .dragToElement(SingleInputItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
-    .expect((Selector(".sd-question[data-name=question1] .sv_matrix_detail_row #convertTo").withText("Single Input").visible)).ok();
+    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single Input").visible)).ok();
 
 });
 
@@ -170,12 +170,11 @@ test("Matrix dropdown with detail panel - add question button", async (t) => {
   await ClientFunction(() => {
     window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
   })();
-  const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
   await t
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question").visible).ok()
     .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
-    .expect((Selector(".sd-question[data-name=question1] .sv_matrix_detail_row #convertTo").withText("Single Input").visible)).ok()
+    .expect((Selector(".sd-question[data-name=question1]").nth(1).find("#convertTo").withText("Single Input").visible)).ok()
     .expect(Selector(".sd-question[data-name=question2]").visible).ok()
     .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
     .expect(Selector(".sd-question[data-name=question3]").visible).ok();
