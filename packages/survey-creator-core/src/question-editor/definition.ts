@@ -219,12 +219,12 @@ export class SurveyQuestionEditorDefinition {
     },
     dropdown: {
       properties: [
-        "optionsCaption",
+        "placeholder",
         "autoComplete",
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
-        { name: "showOptionsCaption", tab: "choices" }
+        { name: "allowClear", tab: "choices" }
       ]
     },
     imagepicker: {
