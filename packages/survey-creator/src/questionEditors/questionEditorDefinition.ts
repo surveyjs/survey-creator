@@ -85,7 +85,7 @@ export class SurveyQuestionEditorDefinition {
     matrixdropdownbase: {
       properties: [
         "cellType",
-        "optionsCaption",
+		"optionsCaption",
         "detailPanelMode",
         "detailPanelShowOnAdding",
         { name: "showHeader", tab: "layout" },
@@ -212,12 +212,12 @@ export class SurveyQuestionEditorDefinition {
     },
     dropdown: {
       properties: [
-        "optionsCaption",
+        "placeholder",
         "autoComplete",
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
-        { name: "showOptionsCaption", tab: "choices" },
+        { name: "allowClear", tab: "choices" },
       ],
     },
     imagepicker: {
@@ -360,7 +360,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "hasOther", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
-        { name: "optionsCaption", tab: "choices" },
+        { name: "placeholder", tab: "choices" },
         { name: "hasNone", tab: "choices" },
         { name: "noneText", tab: "choices" },
       ],

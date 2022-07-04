@@ -89,7 +89,7 @@ export class SurveyQuestionEditorDefinition {
     matrixdropdownbase: {
       properties: [
         "cellType",
-        "placeholder",
+        "optionsCaption",
         "detailPanelMode",
         "detailPanelShowOnAdding",
         { name: "showHeader", tab: "layout" },
