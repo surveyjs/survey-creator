@@ -260,21 +260,24 @@ export class CreatorBase extends Base
   private responsivityManager: CreatorResponsivityManager;
   footerToolbar: ActionContainer;
 
-  private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
+  private pageEditModeValue: "standard" | "single" | "bypage" | "readonly" = "standard";
   /**
    * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
    * You can set this option in creator constructor only
    */
-  public get pageEditMode(): "standard" | "single" | "bypage" {
+  public get pageEditMode(): "standard" | "single" | "bypage" | "readonly" {
     return this.pageEditModeValue;
   }
-  protected set pageEditMode(val: "standard" | "single" | "bypage") {
+  protected set pageEditMode(val: "standard" | "single" | "bypage" | "readonly") {
     this.pageEditModeValue = val;
-    if (this.pageEditModeValue === "single") {
+    this._allowModifyPages = val !== "readonly";
+    if (this.pageEditModeValue === "single" || this.pageEditModeValue === "readonly") {
       this.setPropertyVisibility("survey", false, "pages");
       this.setPropertyVisibility("question", false, "page");
       this.setPropertyVisibility("panel", false, "page");
       this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
+    }
+    if (this.pageEditModeValue === "single") {
       Survey.settings.allowShowEmptyTitleInDesignMode = false;
       Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
     }
@@ -1055,12 +1058,19 @@ export class CreatorBase extends Base
    */
   public themeForPreview: string = "defaultV2";
 
+  private _allowModifyPages = true;
   /**
    * Specifies whether users can add, edit, and delete survey pages.
    *
    * Default value: `true`
    */
-  public allowModifyPages = true;
+  public get allowModifyPages() {
+    return this._allowModifyPages;
+  }
+  protected set allowModifyPages(val: boolean) {
+    this._allowModifyPages = val;
+    this.pageEditMode = "readonly";
+  }
 
   /**
    * Obsolete. Use the [`showDefaultLanguageInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showDefaultLanguageInPreviewTab) property instead.
@@ -1161,12 +1171,12 @@ export class CreatorBase extends Base
     this.updateActionsLocale(this.toolbar.actions);
   }
   private updateActionsLocale(actions: Array<Action>): void {
-    if(!Array.isArray(actions)) return;
+    if (!Array.isArray(actions)) return;
     actions.forEach(item => {
       if (!!(<any>item).updateTitle) {
         (<any>item).updateTitle();
       }
-      if(!!item.popupModel && !!item.popupModel.contentComponentData && !!item.popupModel.contentComponentData.model) {
+      if (!!item.popupModel && !!item.popupModel.contentComponentData && !!item.popupModel.contentComponentData.model) {
         const model = item.popupModel.contentComponentData.model;
         this.updateActionsLocale(model.actions);
       }
@@ -1740,46 +1750,46 @@ export class CreatorBase extends Base
         this.updateLogicOnQuestionNameChanged(oldName, newName);
       }
     }
-    if(propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
+    if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
     }
   }
   private surveyLogicForUpdate: SurveyLogic;
   private surveyLogicRenaming: boolean;
   private getSurveyLogicForUpdate(): SurveyLogic {
-    if(!!this.surveyLogicForUpdate && this.surveyLogicForUpdate.survey !== this.survey) {
+    if (!!this.surveyLogicForUpdate && this.surveyLogicForUpdate.survey !== this.survey) {
       this.surveyLogicForUpdate = undefined;
     }
-    if(!this.surveyLogicForUpdate) {
+    if (!this.surveyLogicForUpdate) {
       this.surveyLogicForUpdate = this.createSurveyLogicForUpdate();
     }
     return this.surveyLogicForUpdate;
   }
   private clearSurveyLogicForUpdate(obj: Base, propertyName: string, value: any): void {
-    if(this.surveyLogicRenaming || !this.surveyLogicForUpdate || !obj || !propertyName) return;
-    if(this.needClearSurveyLogicForUpdate(obj, propertyName, value)) {
+    if (this.surveyLogicRenaming || !this.surveyLogicForUpdate || !obj || !propertyName) return;
+    if (this.needClearSurveyLogicForUpdate(obj, propertyName, value)) {
       this.surveyLogicForUpdate = undefined;
     }
   }
   private needClearSurveyLogicForUpdate(obj: Base, propertyName: string, value: any): boolean {
-    if(Array.isArray(value)) {
+    if (Array.isArray(value)) {
       return true;
     }
     const prop = Serializer.findProperty(obj.getType(), propertyName);
     return !!prop && ["expression", "condition", "questionvalue", "question"].indexOf(prop.type) > -1;
   }
   private updateSurveyLogicValues(obj: Base, propertyName: string, oldValue: any): void {
-    if(!obj || !propertyName || Survey.Helpers.isValueEmpty(oldValue)) return;
-    if(propertyName === "value" && obj.isDescendantOf("itemvalue")) {
+    if (!obj || !propertyName || Survey.Helpers.isValueEmpty(oldValue)) return;
+    if (propertyName === "value" && obj.isDescendantOf("itemvalue")) {
       this.updateSurveyLogicItemValue(<ItemValue>obj, oldValue);
     }
   }
   private updateSurveyLogicItemValue(item: ItemValue, oldValue: any): void {
-    if(!item.locOwner || !settings.logic.updateExpressionsOnChanging.choiceValue) return;
-    if(["choices", "rateValues", "columns", "rows"].indexOf(item.ownerPropertyName) < 0) return;
+    if (!item.locOwner || !settings.logic.updateExpressionsOnChanging.choiceValue) return;
+    if (["choices", "rateValues", "columns", "rows"].indexOf(item.ownerPropertyName) < 0) return;
     this.surveyLogicRenaming = true;
     const logicUpdater = this.getSurveyLogicForUpdate();
-    if(item.ownerPropertyName === "rows") {
+    if (item.ownerPropertyName === "rows") {
       logicUpdater.renameRowValue(item, oldValue);
     } else {
       logicUpdater.renameItemValue(item, oldValue);

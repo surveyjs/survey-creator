@@ -1969,7 +1969,7 @@ test("Modify property editor settings on event", (): any => {
 test("Modify property editor via property grid survey", (): any => {
   const creator = new CreatorTester();
   creator.onPropertyGridSurveyCreated.add((sender, options) => {
-    if(options.obj.getType() !== "text") return;
+    if (options.obj.getType() !== "text") return;
     const question = options.survey.getQuestionByName("placeHolder");
     question.textUpdateMode = "onTyping";
     question.dataList = ["item1", "item2"];
@@ -2859,8 +2859,8 @@ test("Add and remove question immediately, incorrect selection", (): any => {
       options.question.delete();
     }
   });
-  creator.addNewQuestionInPage(() => {});
-  creator.addNewQuestionInPage(() => {});
+  creator.addNewQuestionInPage(() => { });
+  creator.addNewQuestionInPage(() => { });
   expect(creator.survey.currentPage.elements).toHaveLength(1);
   expect(creator.selectedElementName).toEqual("question1");
 });
@@ -2890,7 +2890,8 @@ test("Allow to set survey JSON via text if errors in JSON is not critical", (): 
   creator.text = JSON.stringify({
     elements: [
       { type: "text", name: "question1" },
-      { type: "matrixdynamic",
+      {
+        type: "matrixdynamic",
         name: "question2",
         columns: [
           { name: "col1", choices: [1, 2, 3] }
@@ -2900,4 +2901,39 @@ test("Allow to set survey JSON via text if errors in JSON is not critical", (): 
   });
   expect(creator.activeTab).toEqual("designer");
   expect(creator.survey.getAllQuestions()).toHaveLength(2);
+});
+test("allowModifyPages=false", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  expect(creator.viewType).toEqual("designer");
+
+  creator.getPlugin("designer").activate();
+  let designer = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.allowModifyPages).toBeTruthy();
+  expect(creator.pageEditMode).toEqual("standard");
+  expect(designer.showNewPage).toBeTruthy();
+
+  let pageModel = creator.survey.pages[0];
+  let pageAdornerModel = new PageAdorner(creator, pageModel);
+  pageAdornerModel.select(pageAdornerModel, { stopPropagation: () => { } } as any);
+  expect(pageAdornerModel.getActionById("delete").visible).toBeTruthy();
+
+  creator = new CreatorTester({ allowModifyPages: false });
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  expect(creator.viewType).toEqual("designer");
+
+  creator.getPlugin("designer").activate();
+  designer = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.allowModifyPages).toBeFalsy();
+  expect(creator.pageEditMode).toEqual("readonly");
+  expect(designer.showNewPage).toBeFalsy();
+
+  pageModel = creator.survey.pages[0];
+  pageAdornerModel = new PageAdorner(creator, pageModel);
+  pageAdornerModel.select(pageAdornerModel, { stopPropagation: () => { } } as any);
+  expect(pageAdornerModel.getActionById("delete").visible).toBeFalsy();
 });
