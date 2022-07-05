@@ -20,10 +20,16 @@ export class EmbedModel extends Base {
       "surveyjsEmbedScriptsMarkup",
       (params: [string, string]) => {
         const [framework, theme]: [string, string] = params;
-        let result: string = `<!-- Your platform (${framework}) scripts -->\n\n`;
+        let result: string = "";
+        if(framework ==="jquery") {
+          result = "<script src=\"https://unpkg.com/jquery\"></script>";
+        } else {
+          result = `<!-- Your platform (${framework}) scripts -->`;
+        }
+        result +="\n\n";
         if (theme !== "bootstrap") {
           result += `<link href="https://unpkg.com/survey-${framework}@${Version}/${
-            theme === "modern" ? "modern" : "survey"
+            ["defaultV2", "modern"].indexOf(theme) > -1 ? theme : "survey"
           }.css" type="text/css" rel="stylesheet"/>`;
         }
         return (

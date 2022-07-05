@@ -46,6 +46,10 @@ export const json: any = {
           "defaultValue": "modern",
           "choices": [
             {
+              "value": "defaultV2",
+              "text": "DefaultV2 theme"
+            },
+            {
               "value": "modern",
               "text": "Modern theme"
             },
