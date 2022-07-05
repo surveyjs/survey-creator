@@ -66,9 +66,11 @@ test("Check scrollbar is not appear when width mode is responsive", async (t) =>
   await setJSON(json);
   const rootSelector = Selector(".svc-tab-designer");
   const verticalScrollWidth = 12;
+  const rootOffsetWidth = await rootSelector.offsetWidth;
+  const rootScrollWidth = await rootSelector.scrollWidth;
   await t
     .resizeWindow(1920, 1080)
-    .expect(await rootSelector.offsetWidth - await rootSelector.scrollWidth).lte(verticalScrollWidth);
+    .expect(rootOffsetWidth - rootScrollWidth).lte(verticalScrollWidth);
 });
 
 test("Check imagepicker add/delete items not raises errors and works fine: #3203", async (t) => {
