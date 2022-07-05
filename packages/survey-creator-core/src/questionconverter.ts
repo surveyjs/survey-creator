@@ -49,8 +49,10 @@ export class QuestionConverter {
     newQuestion.fromJSON(json);
     var panel = <Survey.PanelModelBase>obj.parent;
     var index = panel.elements.indexOf(obj);
+    (<any>panel).isConverting = true;
     panel.removeElement(obj);
     panel.addElement(newQuestion, index);
+    delete (<any>panel).isConverting;
     newQuestion.onSurveyLoad();
     return <Survey.Question>newQuestion;
   }

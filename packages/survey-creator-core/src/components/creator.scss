@@ -98,6 +98,7 @@ survey-creator,
   line-height: calcSize(4);
   background-color: $secondary;
   text-align: center;
+  overflow: hidden;
 }
 
 .svc-item__banner {

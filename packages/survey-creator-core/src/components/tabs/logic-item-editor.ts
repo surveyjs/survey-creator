@@ -139,7 +139,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "logicTypeName",
               type: "dropdown",
               denySearch: true,
-              dropdownWidthMode: "contentWidth",
+              allowClear: false,
               title: editorLocalization.getString("pe.then"),
               titleLocation: "left",
               isRequired: true,
@@ -155,7 +155,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "elementSelector",
               type: "dropdown",
-              dropdownWidthMode: "contentWidth",
+              allowClear: false,
               titleLocation: "hidden",
               isRequired: true,
               startWithNewLine: false,
@@ -316,6 +316,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     const ltQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
     ltQuestion.title = this.panel.panelCount > 1 ? editorLocalization.getString("pe.and") : editorLocalization.getString("pe.then");
     ltQuestion.choices = this.logicTypeChoices;
+    ltQuestion.allowClear = false;
     if (!!action) {
       const newActionModel = LogicActionModelBase.createActionModel(panel, action, this.getLogicTypeByName(action.logicTypeName), this.selectorElementsHash);
       this.setActionModelByPanel(panel, newActionModel);
@@ -358,10 +359,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private updateSelectorOnContextChanged(panel: PanelModel) {
     const logicTypeQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
     logicTypeQuestion.choices = this.logicTypeChoices;
+    logicTypeQuestion.allowClear = false;
     const logicType = this.getLogicTypeByPanel(panel);
     if (!this.isElementSelectorVisible(logicType)) return;
     const selectorQuestion = <QuestionDropdownModel>panel.getQuestionByName("elementSelector");
     selectorQuestion.choices = this.getSelectorChoices(logicType);
+    selectorQuestion.allowClear = false;
   }
   private getLogicTypeChoices(): Array<ItemValue> {
     const res = [];

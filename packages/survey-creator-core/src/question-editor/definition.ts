@@ -121,6 +121,7 @@ export class SurveyQuestionEditorDefinition {
         "removeRowText",
         "confirmDelete",
         "confirmDeleteText",
+        "placeholder",
         { name: "hideColumnsIfEmpty", tab: "columns" },
         { name: "emptyRowsText", tab: "columns" },
         { name: "defaultRowValue", tab: "data" },
@@ -132,6 +133,7 @@ export class SurveyQuestionEditorDefinition {
     matrixdropdown: {
       properties: [
         "totalText",
+        "placeholder",
         { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "rowsVisibleIf", tab: "logic" },
         { name: "rowTitleWidth", tab: "layout" },
@@ -219,12 +221,12 @@ export class SurveyQuestionEditorDefinition {
     },
     dropdown: {
       properties: [
-        "optionsCaption",
+        "placeholder",
         "autoComplete",
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
-        { name: "showOptionsCaption", tab: "choices" }
+        { name: "allowClear", tab: "choices" }
       ]
     },
     imagepicker: {

@@ -50,7 +50,6 @@ import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrice
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { PagesController } from "../src/pages-controller";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
-import { IPortableMouseEvent } from "../src/utils/events";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -2864,4 +2863,41 @@ test("Add and remove question immediately, incorrect selection", (): any => {
   creator.addNewQuestionInPage(() => {});
   expect(creator.survey.currentPage.elements).toHaveLength(1);
   expect(creator.selectedElementName).toEqual("question1");
+});
+test("Convert question type for a question on the last page with the only question", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const newPage = creator.survey.addNewPage("page2");
+  let newQuestion = newPage.addNewQuestion("text", "question2");
+  creator.selectElement(newQuestion);
+  creator.convertCurrentQuestion("comment");
+  expect(creator.survey.pageCount).toEqual(2);
+  expect(creator.survey.pages[1].questions[0].getType()).toEqual("comment");
+  expect(creator.survey.pages[1].questions[0].name).toEqual("question2");
+});
+test("Allow to set survey JSON via text if errors in JSON is not critical", (): any => {
+  const creator = new CreatorTester();
+  creator.text = JSON.stringify({
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text_custom", name: "question2" },
+    ]
+  });
+  expect(creator.activeTab).toEqual("designer");
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+  creator.text = JSON.stringify({
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "matrixdynamic",
+        name: "question2",
+        columns: [
+          { name: "col1", choices: [1, 2, 3] }
+        ]
+      },
+    ]
+  });
+  expect(creator.activeTab).toEqual("designer");
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
 });

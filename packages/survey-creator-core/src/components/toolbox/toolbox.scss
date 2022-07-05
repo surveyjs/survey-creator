@@ -80,6 +80,7 @@ svc-toolbox {
   display: none;
 
 }
+
 .svc-toolbox__category-header__button {
   fill: $foreground-light;
 }
@@ -91,6 +92,8 @@ svc-toolbox {
 }
 
 .svc-toolbox__tool {
+  cursor: default;
+
   .sv-action__content {
     display: block;
     padding-top: calcSize(0.5);

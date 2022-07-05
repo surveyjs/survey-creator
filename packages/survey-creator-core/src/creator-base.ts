@@ -11,6 +11,7 @@ import {
   propertyArray,
   IElement,
   Serializer,
+  JsonObjectProperty,
   ActionContainer,
   AdaptiveActionContainer,
   IAction,
@@ -1568,12 +1569,12 @@ export class CreatorBase extends Base
     }
   }
 
-  isCanModifyProperty(obj: Survey.Base, propertyName: string): boolean {
-    const property: Survey.JsonObjectProperty = Survey.Serializer.findProperty(
+  isCanModifyProperty(obj: Base, propertyName: string): boolean {
+    const property: JsonObjectProperty = Serializer.findProperty(
       obj.getType(),
       propertyName
     );
-    let parentObj, parentProperty: Survey.JsonObjectProperty;
+    let parentObj, parentProperty: JsonObjectProperty;
     if (obj instanceof ItemValue) {
       parentObj = obj.locOwner;
       parentProperty = Survey.Serializer.findProperty(
@@ -1624,11 +1625,11 @@ export class CreatorBase extends Base
   }
 
   onIsPropertyReadOnlyCallback(
-    obj: Survey.Base,
-    property: Survey.JsonObjectProperty,
+    obj: Base,
+    property: JsonObjectProperty,
     readOnly: boolean,
-    parentObj: Survey.Base,
-    parentProperty: Survey.JsonObjectProperty
+    parentObj: Base,
+    parentProperty: JsonObjectProperty
   ): boolean {
     const proposedValue = this.readOnly || readOnly;
     if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
@@ -1721,43 +1722,92 @@ export class CreatorBase extends Base
     });
   }
 
-  public updateElementsOnLocaleChanged(
-    obj: Survey.Base,
-    propertyName: string
-  ) {
+  public updateElementsOnLocaleChanged(obj: Base, propertyName: string): void {
     if (obj.getType() !== "survey" || propertyName !== "locale") return;
     const pages = this.survey.pages;
     for (var i = 0; i < pages.length; i++) {
       pages[i].locStrsChanged();
     }
   }
-  public updateConditionsOnQuestionNameChanged(
-    obj: Survey.Base,
-    propertyName: string,
-    oldValue: any
-  ) {
-    if (!this.isObjQuestion(obj)) return;
-    if (propertyName === "name" && !obj["valueName"]) {
-      this.updateConditions(oldValue, obj["name"]);
+  public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
+    if (this.isObjQuestion(obj)) {
+      if (propertyName === "name" && !obj["valueName"]) {
+        this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
+      }
+      if (propertyName === "valueName") {
+        const oldName = !!oldValue ? oldValue : obj["name"];
+        const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
+        this.updateLogicOnQuestionNameChanged(oldName, newName);
+      }
     }
-    if (propertyName === "valueName") {
-      var oldName = !!oldValue ? oldValue : obj["name"];
-      var newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
-      this.updateConditions(oldName, newName);
+    if(propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
+      this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
     }
   }
-  private updateConditions(oldName: string, newName: string) {
-    if (oldName === newName) return;
-    new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
+  private surveyLogicForUpdate: SurveyLogic;
+  private surveyLogicRenaming: boolean;
+  private getSurveyLogicForUpdate(): SurveyLogic {
+    if(!!this.surveyLogicForUpdate && this.surveyLogicForUpdate.survey !== this.survey) {
+      this.surveyLogicForUpdate = undefined;
+    }
+    if(!this.surveyLogicForUpdate) {
+      this.surveyLogicForUpdate = this.createSurveyLogicForUpdate();
+    }
+    return this.surveyLogicForUpdate;
   }
-
-  public isObjQuestion(obj: Survey.Base) {
+  private clearSurveyLogicForUpdate(obj: Base, propertyName: string, value: any): void {
+    if(this.surveyLogicRenaming || !this.surveyLogicForUpdate || !obj || !propertyName) return;
+    if(this.needClearSurveyLogicForUpdate(obj, propertyName, value)) {
+      this.surveyLogicForUpdate = undefined;
+    }
+  }
+  private needClearSurveyLogicForUpdate(obj: Base, propertyName: string, value: any): boolean {
+    if(Array.isArray(value)) {
+      return true;
+    }
+    const prop = Serializer.findProperty(obj.getType(), propertyName);
+    return !!prop && ["expression", "condition", "questionvalue", "question"].indexOf(prop.type) > -1;
+  }
+  private updateSurveyLogicValues(obj: Base, propertyName: string, oldValue: any): void {
+    if(!obj || !propertyName || Survey.Helpers.isValueEmpty(oldValue)) return;
+    if(propertyName === "value" && obj.isDescendantOf("itemvalue")) {
+      this.updateSurveyLogicItemValue(<ItemValue>obj, oldValue);
+    }
+  }
+  private updateSurveyLogicItemValue(item: ItemValue, oldValue: any): void {
+    if(!item.locOwner || !settings.logic.updateExpressionsOnChanging.choiceValue) return;
+    if(["choices", "rateValues", "columns", "rows"].indexOf(item.ownerPropertyName) < 0) return;
+    this.surveyLogicRenaming = true;
+    const logicUpdater = this.getSurveyLogicForUpdate();
+    if(item.ownerPropertyName === "rows") {
+      logicUpdater.renameRowValue(item, oldValue);
+    } else {
+      logicUpdater.renameItemValue(item, oldValue);
+    }
+    this.surveyLogicRenaming = false;
+  }
+  protected createSurveyLogicForUpdate(): SurveyLogic {
+    return new SurveyLogic(this.survey, this);
+  }
+  private updateLogicOnQuestionNameChanged(oldName: string, newName: string) {
+    if (oldName === newName || !settings.logic.updateExpressionsOnChanging.questionName) return;
+    this.surveyLogicRenaming = true;
+    this.getSurveyLogicForUpdate().renameQuestion(oldName, newName);
+    this.surveyLogicRenaming = false;
+  }
+  private updateLogicOnColumnNameChanged(column: Base, oldName: string, newName: string) {
+    if (!oldName || oldName === newName || !settings.logic.updateExpressionsOnChanging.columnName) return;
+    this.surveyLogicRenaming = true;
+    this.getSurveyLogicForUpdate().renameColumn(<Survey.MatrixDropdownColumn>column, oldName);
+    this.surveyLogicRenaming = false;
+  }
+  public isObjQuestion(obj: Base): boolean {
     return this.isObjThisType(obj, "question");
   }
-  public isObjPage(obj: Survey.Base) {
+  public isObjPage(obj: Base): boolean {
     return this.isObjThisType(obj, "page");
   }
-  private isObjThisType(obj: Survey.Base, typeName: string) {
+  private isObjThisType(obj: Base, typeName: string): boolean {
     var classInfo = Survey.Serializer.findClass(obj.getType());
 
     while (!!classInfo && !!classInfo.parentName) {
@@ -1847,7 +1897,7 @@ export class CreatorBase extends Base
   public changeText(value: string, clearState = false) {
     this.setTextValue(value);
     var textWorker = new SurveyTextWorker(value);
-    if (textWorker.isJsonCorrect) {
+    if (textWorker.isJsonCorrect || !!textWorker.survey) {
       this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
     } else {
       this.viewType = "editor";
@@ -1881,7 +1931,7 @@ export class CreatorBase extends Base
   }
 
   public getObjectDisplayName(
-    obj: Survey.Base,
+    obj: Base,
     reason: string = undefined,
     displayName: string = undefined
   ): string {
@@ -1939,6 +1989,8 @@ export class CreatorBase extends Base
     this.isAutoSave && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {
+    this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
+    this.updateSurveyLogicValues(options.target, options.name, options.oldValue);
     if (!this.onSurveyPropertyValueChanged.isEmpty) {
       options.propertyName = options.name;
       options.obj = options.target;
@@ -2157,7 +2209,7 @@ export class CreatorBase extends Base
     return newElement;
   }
 
-  public copyElement(element: Survey.Base): IElement {
+  public copyElement(element: Base): IElement {
     var json = new Survey.JsonObject().toJsonObject(element);
     json.type = element.getType();
     return this.createNewElement(json);
@@ -2167,7 +2219,7 @@ export class CreatorBase extends Base
    * Copy a question to the active page
    * @param question A copied Survey.Question
    */
-  public fastCopyQuestion(question: Survey.Base): Survey.IElement {
+  public fastCopyQuestion(question: Base): Survey.IElement {
     var newElement = this.copyElement(question);
     var index = !!question["parent"]
       ? question["parent"].elements.indexOf(question) + 1
@@ -2201,7 +2253,7 @@ export class CreatorBase extends Base
    * Delete an element in the survey. It can be a question, a panel or a page.
    * @param element a survey element.
    */
-  public deleteElement(element: Survey.Base) {
+  public deleteElement(element: Base) {
     this.deleteObject(element);
   }
   /**
@@ -2544,7 +2596,7 @@ export class CreatorBase extends Base
     delete this.shortcuts[name];
   }
 
-  protected deletePanelOrQuestion(obj: Survey.Base): void {
+  protected deletePanelOrQuestion(obj: Base): void {
     var parent = obj["parent"];
     var elements = parent.elements;
     var objIndex = elements.indexOf(obj);
@@ -2559,10 +2611,10 @@ export class CreatorBase extends Base
   }
   protected onCanShowObjectProperty(
     object: any,
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     showMode: string,
     parentObj: any,
-    parentProperty: Survey.JsonObjectProperty
+    parentProperty: JsonObjectProperty
   ): boolean {
     var options = {
       obj: object,
@@ -2577,7 +2629,7 @@ export class CreatorBase extends Base
   }
   protected canDeleteItem(
     object: any,
-    item: Survey.Base,
+    item: Base,
     allowDelete: boolean
   ): boolean {
     var options = { obj: object, item: item, canDelete: allowDelete };
@@ -2585,7 +2637,7 @@ export class CreatorBase extends Base
     return options.canDelete;
   }
   private getErrorOnPropertyChanging(
-    obj: Survey.Base,
+    obj: Base,
     propertyName: string,
     value: any
   ): string {
@@ -2602,7 +2654,7 @@ export class CreatorBase extends Base
 
     return hasError ? this.getLocString("pe.propertyNameIsNotUnique") : null;
   }
-  protected generateUniqueName(el: Survey.Base, newName: string): string {
+  protected generateUniqueName(el: Base, newName: string): string {
     var options = { element: el, name: newName, isUnique: true };
     do {
       if (!options.isUnique) {
@@ -2620,7 +2672,7 @@ export class CreatorBase extends Base
     } while (!options.isUnique);
     return options.name;
   }
-  protected isNameUnique(el: Survey.Base, newName: string): boolean {
+  protected isNameUnique(el: Base, newName: string): boolean {
     if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
     if (!this.isNameUniqueInArray(this.survey.getAllPanels(), el, newName))
       return false;
@@ -2628,7 +2680,7 @@ export class CreatorBase extends Base
   }
   private isNameUniqueInArray(
     elements: Array<any>,
-    el: Survey.Base,
+    el: Base,
     newName: string
   ): boolean {
     if (!Array.isArray(elements)) return true;
@@ -2650,10 +2702,10 @@ export class CreatorBase extends Base
   }
   onCanShowPropertyCallback(
     object: any,
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     showMode: string = null,
     parentObj: any,
-    parentProperty: Survey.JsonObjectProperty
+    parentProperty: JsonObjectProperty
   ): boolean {
     return this.onCanShowObjectProperty(
       object,
@@ -2672,33 +2724,33 @@ export class CreatorBase extends Base
   }
   onPropertyEditorCreatedCallback(
     object: any,
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     editor: Question
-  ) {
+  ): void {
     const options = { obj: object, property: property, editor: editor };
     this.onPropertyEditorCreated.fire(this, options);
   }
   onPropertyEditorUpdateTitleActionsCallback(
     object: any,
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     editor: Question,
     titleActions: IAction[]
-  ) {
+  ): void {
     const options = { obj: object, property: property, editor: editor, titleActions: titleActions };
     this.onPropertyEditorUpdateTitleActions.fire(this, options);
   }
   onCanDeleteItemCallback(
     object: any,
-    item: Survey.Base,
+    item: Base,
     allowDelete: boolean
   ): boolean {
     return this.canDeleteItem(object, item, allowDelete);
   }
   onCollectionItemDeletingCallback(
-    obj: Survey.Base,
-    property: Survey.JsonObjectProperty,
-    collection: Array<Survey.Base>,
-    item: Survey.Base
+    obj: Base,
+    property: JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base
   ): boolean {
     if (this.onCollectionItemDeleting.isEmpty) return true;
     var options = {
@@ -2714,7 +2766,7 @@ export class CreatorBase extends Base
   }
   onCollectionItemAllowingCallback(
     obj: Base,
-    property: Survey.JsonObjectProperty,
+    property: JsonObjectProperty,
     collection: Array<Base>,
     item: Base,
     itemOptions: ICollectionItemAllowOperations
@@ -2734,7 +2786,7 @@ export class CreatorBase extends Base
     itemOptions.allowDelete = options.allowDelete;
   }
   onItemValueAddedCallback(
-    obj: Survey.Base,
+    obj: Base,
     propertyName: string,
     itemValue: Survey.ItemValue,
     itemValues: Array<Survey.ItemValue>
@@ -2757,7 +2809,7 @@ export class CreatorBase extends Base
   }
   onSetPropertyEditorOptionsCallback(
     propertyName: string,
-    obj: Survey.Base,
+    obj: Base,
     editorOptions: any
   ) {
     var options = {
@@ -2769,7 +2821,7 @@ export class CreatorBase extends Base
   }
   onGetErrorTextOnValidationCallback(
     propertyName: string,
-    obj: Survey.Base,
+    obj: Base,
     value: any
   ): string {
     var error = this.getErrorOnPropertyChanging(obj, propertyName, value);
@@ -2786,15 +2838,15 @@ export class CreatorBase extends Base
   onValueChangingCallback(options: any) {
     this.onPropertyValueChanging.fire(this, options);
   }
-  onGetElementEditorTitleCallback(obj: Survey.Base, title: string): string {
+  onGetElementEditorTitleCallback(obj: Base, title: string): string {
     return title;
   }
   onConditionQuestionsGetListCallback(
     propertyName: string,
-    obj: Survey.Base,
+    obj: Base,
     editor: any,
     list: any[]
-  ) {
+  ): void {
     var options = {
       propertyName: propertyName,
       obj: obj,

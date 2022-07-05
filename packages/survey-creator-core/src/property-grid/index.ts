@@ -1502,7 +1502,6 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     return {
       type: "dropdown",
       renderAs: "select",
-      dropdownWidthMode: "contentWidth",
       optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
       choices: this.getChoices(obj, prop, options)
     };

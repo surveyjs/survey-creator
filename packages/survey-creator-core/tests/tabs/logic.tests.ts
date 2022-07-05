@@ -10,7 +10,10 @@ import {
   SurveyTriggerSetValue,
   QuestionPanelDynamicModel,
   Question,
-  QuestionCommentModel
+  QuestionMatrixDropdownModel,
+  QuestionMatrixModel,
+  QuestionCommentModel,
+  QuestionRadiogroupModel
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -1848,6 +1851,38 @@ test("LogicUI: edit matrix column visibleIf. Filter logic types by context initi
   expect(logicTypeName.value).toEqual("column_visibility");
   expect(logicTypeName.choices.length).toEqual(3);
 });
+test("LogicUI: edit matrix column visibleIf. Two matrices with the same expression", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic", name: "q1", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2", visibleIf: "{row.col1} = 1" }, { name: "col3" }]
+      },
+      {
+        type: "matrixdynamic", name: "q2", cellType: "text",
+        columns: [{ name: "col1" }, { name: "col2", visibleIf: "{row.col1} = 1" }]
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+  logic.editItem(logic.items[0]);
+  let itemEditor = logic.itemEditor;
+  expect(itemEditor.context).toBeTruthy();
+  expect(itemEditor.context.name).toEqual("q1");
+  let actionPanel = itemEditor.panels[0];
+  let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.value).toEqual("column_visibility");
+  expect(logicTypeName.choices.length).toEqual(3);
+
+  logic.editItem(logic.items[1]);
+  itemEditor = logic.itemEditor;
+  expect(itemEditor.context).toBeTruthy();
+  expect(itemEditor.context.name).toEqual("q2");
+  actionPanel = itemEditor.panels[0];
+  logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.value).toEqual("column_visibility");
+});
 test("LogicUI: edit visibleIf property for panel dynamic question template", () => {
   const survey = new SurveyModel({
     elements: [
@@ -2266,7 +2301,7 @@ test("wrapTextByCurlyBraces", () => {
   settings.logic.closeBracket = "}";
   expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
 });
-test("Rename the name", () => {
+test("Rename the name for matrices", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1", visibleIf: "{q2.row1.col1} > 2 and {q3[0].col1} < 2" },
@@ -2297,4 +2332,296 @@ test("Rename the name", () => {
   expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {q3[0].col1} < 2");
   logic.renameQuestion("q3", "question3");
   expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {question3[0].col1} < 2");
+});
+test("Do not reacreate logic for updating expressions for every change", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+          { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q2",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q2} = 2",
+        setToName: "q3",
+        fromName: "q4"
+      }
+    ],
+  };
+  expect(creator.logicCreatedId).toEqual(0);
+  creator.survey.getQuestionByName("q1").name = "question1";
+  expect(creator.logicCreatedId).toEqual(1);
+  creator.survey.getQuestionByName("question1").name = "question2";
+  expect(creator.logicCreatedId).toEqual(1);
+  creator.survey.getQuestionByName("q2").visibleIf = "{question2} = 11";
+  creator.survey.getQuestionByName("question2").name = "question3";
+  expect(creator.logicCreatedId).toEqual(2);
+  creator.survey.triggers[0].gotoName = "q4";
+  creator.survey.getQuestionByName("question3").name = "question4";
+  expect(creator.logicCreatedId).toEqual(3);
+  creator.survey.getQuestionByName("question4").name = "question5";
+  expect(creator.logicCreatedId).toEqual(3);
+  creator.survey.triggers.splice(0, 1);
+  creator.survey.getQuestionByName("question5").name = "question6";
+  expect(creator.logicCreatedId).toEqual(4);
+});
+test("Update logic on changing choices value", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+      { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+      { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
+      { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
+    ],
+  };
+  (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 1";
+  (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q2")).choices[0].value = "Item 1!";
+  expect(creator.survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 'Item 1'");
+  expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} = ['Item 1!']");
+});
+test("Rename choices for questions in panel dynamic", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "paneldynamic",
+        name: "question1",
+        templateElements: [
+          { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+          { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+          { type: "text", name: "q3", visibleIf: "{panel.q1} = 'item1'" },
+          { type: "text", name: "q4", visibleIf: "{panel.q2} = ['item1']" },
+        ]
+      }
+    ],
+  };
+  const panel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("question1");
+  panel.template.elements[0].choices[0].value = "Item 1";
+  panel.template.elements[1].choices[0].value = "Item 1!";
+  expect(panel.template.elements[2].visibleIf).toEqual("{panel.q1} = 'Item 1'");
+  expect(panel.template.elements[3].visibleIf).toEqual("{panel.q2} = ['Item 1!']");
+});
+test("Rename choices for columns in matrices", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "question1",
+        columns: [
+          { cellType: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+          { cellType: "checkbox", name: "q2", choices: ["item1", "item2"] },
+          { cellType: "text", name: "q3", visibleIf: "{row.q1} = 'item1'" },
+          { cellType: "text", name: "q4", visibleIf: "{row.q2} = ['item1']" },
+        ]
+      }
+    ],
+  };
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question1");
+  matrix.columns[0].choices[0].value = "Item 1";
+  matrix.columns[1].choices[0].value = "Item 1!";
+  expect(matrix.columns[2].visibleIf).toEqual("{row.q1} = 'Item 1'");
+  expect(matrix.columns[3].visibleIf).toEqual("{row.q2} = ['Item 1!']");
+});
+test("Rename choices for columns in dropdown matrix", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2.col1} = 'item1'" },
+      {
+        type: "matrixdropdown",
+        name: "matrix",
+        columns: [{ name: "col1", cellType: "dropdown", choices: ["item1"] }],
+        rows: ["row1", "row2"]
+      }
+    ],
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  matrix.columns[0].choices[0].value = "Item 1";
+  expect(q1.visibleIf).toEqual("{matrix.row2.col1} = 'Item 1'");
+});
+test("Do not rename questions for another matrix", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "question1",
+        columns: [
+          { cellType: "radiogroup", name: "col1", choices: ["item1", "item2"] },
+          { cellType: "text", name: "col2", visibleIf: "{row.col1} = 'item1'" },
+        ]
+      },
+      {
+        type: "matrixdynamic",
+        name: "question2",
+        columns: [
+          { cellType: "radiogroup", name: "col1", choices: ["item1", "item2"] },
+          { cellType: "text", name: "col2", visibleIf: "{row.col1} = 'item1'" },
+        ]
+      }
+    ],
+  };
+  const matrix1 = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question1");
+  const matrix2 = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question2");
+  matrix1.columns[0].choices[0].value = "Item 1";
+  expect(matrix1.columns[1].visibleIf).toEqual("{row.col1} = 'Item 1'");
+  expect(matrix2.columns[1].visibleIf).toEqual("{row.col1} = 'item1'");
+});
+test("Modify choice and question name", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+      { type: "text", name: "q2", visibleIf: "{q1} = 'item1'" }
+    ]
+  };
+  (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 11";
+  expect(creator.survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 'Item 11'");
+  creator.survey.getQuestionByName("q1").name = "question1";
+  expect(creator.survey.getQuestionByName("q2").visibleIf).toEqual("{question1} = 'Item 11'");
+});
+test("Use settings to disable updating expressions on changing name and choices", (): any => {
+  settings.logic.updateExpressionsOnChanging.questionName = false;
+  settings.logic.updateExpressionsOnChanging.columnName = false;
+  settings.logic.updateExpressionsOnChanging.choiceValue = false;
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+      { type: "checkbox", name: "q2", choices: ["item1", "item2"] },
+      { type: "text", name: "q3", visibleIf: "{q1} = 'item1'" },
+      { type: "text", name: "q4", visibleIf: "{q2} = ['item1']" },
+      {
+        type: "matrixdynamic",
+        name: "matrix",
+        columns: [
+          { name: "col1" },
+          { name: "col2", visibleIf: "{row.col1} = 1" }
+        ]
+      }
+    ]
+  };
+  (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q1")).choices[0].value = "Item 1";
+  (<QuestionRadiogroupModel>creator.survey.getQuestionByName("q2")).choices[0].value = "Item 1!";
+  creator.survey.getQuestionByName("q1").name = "question1";
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+  matrix.columns[0].name = "Column1";
+
+  settings.logic.updateExpressionsOnChanging.questionName = true;
+  settings.logic.updateExpressionsOnChanging.columnName = true;
+  settings.logic.updateExpressionsOnChanging.choiceValue = true;
+
+  expect(creator.survey.getQuestionByName("q3").visibleIf).toEqual("{q1} = 'item1'");
+  expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} = ['item1']");
+  expect(matrix.columns[1].visibleIf).toEqual("{row.col1} = 1");
+});
+test("Update expression on changing column name", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "matrix",
+        columns: [
+          { name: "col1" },
+          { name: "col2", visibleIf: "{row.col1} = 1" }
+        ]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+  matrix.columns[0].name = "Column1";
+  expect(matrix.columns[1].visibleIf).toEqual("{row.Column1} = 1");
+});
+test("Update expression on changing column name in matrix dropdown", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2.col1} = 'item1'" },
+      { type: "text", name: "q2", visibleIf: "{matrix2.row2.col1} = 'item1'" },
+      {
+        type: "matrixdropdown",
+        name: "matrix",
+        columns: [
+          { name: "col1" }
+        ],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  matrix.columns[0].name = "Column1";
+  expect(q1.visibleIf).toEqual("{matrix.row2.Column1} = 'item1'");
+  expect(q2.visibleIf).toEqual("{matrix2.row2.col1} = 'item1'");
+});
+test("Update expression on changing column value in simple matrix", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2} = 'col1'" },
+      {
+        type: "matrix",
+        name: "matrix",
+        columns: ["col1"],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  matrix.columns[0].value = "Column1";
+  expect(q1.visibleIf).toEqual("{matrix.row2} = 'Column1'");
+});
+test("Update expression on changing row value in simple matrix", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2} = 'col1'" },
+      {
+        type: "matrix",
+        name: "matrix",
+        columns: ["col1"],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  matrix.rows[1].value = "Row 2";
+  expect(q1.visibleIf).toEqual("{matrix.Row 2} = 'col1'");
+});
+test("Update expression on changing row value in matrix dropdown", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{matrix.row2.col1} = 'item1'" },
+      {
+        type: "matrixdropdown",
+        name: "matrix",
+        columns: [{ name: "col1" }],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixModel>creator.survey.getQuestionByName("matrix");
+  const q1 = creator.survey.getQuestionByName("q1");
+  matrix.rows[1].value = "Row 2";
+  expect(q1.visibleIf).toEqual("{matrix.Row 2.col1} = 'item1'");
 });
