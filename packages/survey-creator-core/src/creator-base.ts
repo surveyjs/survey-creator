@@ -926,30 +926,6 @@ export class CreatorBase extends Base
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
-   * Use this event to override/disable element adorners - wrapping component name.
-   *- sender the survey creator object that fires the event.
-   *- options.element a survey object to be wrapped.
-   *- options.reason why we need to wrap an element.
-   *- options.conponentName component wrapper name.
-   */
-  public onGetElementWrapperComponentName: Survey.Event<
-    (sender: CreatorBase, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
-
-  /**
-   * Use this event to override/disable element adorners - wrapping component data.
-   *- sender the survey creator object that fires the event.
-   *- options.element a survey object to be wrapped.
-   *- options.reason why we need to wrap an element.
-   *- options.conponentData component wrapper data.
-   */
-  public onGetElementWrapperComponentData: Survey.Event<
-    (sender: CreatorBase, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
-
-  /**
    * This callback is used internally for providing survey JSON text.
    */
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
@@ -3120,14 +3096,7 @@ export class DesignTimeSurveyModel extends SurveyModel {
       this.isPopupEditorContent
     );
 
-    const options = {
-      element,
-      reason,
-      componentName: componentName || super.getElementWrapperComponentName(element, reason)
-    };
-    this.creator.onGetElementWrapperComponentName.fire(this, options);
-
-    return options.componentName;
+    return componentName || super.getElementWrapperComponentName(element, reason);
   }
   public getQuestionContentWrapperComponentName(element: any, reason?: string): string {
     let componentName = getQuestionContentWrapperComponentName(element);
@@ -3139,14 +3108,7 @@ export class DesignTimeSurveyModel extends SurveyModel {
   public getElementWrapperComponentData(element: any, reason?: string): any {
     const data = getElementWrapperComponentData(element, reason, this.creator);
 
-    const options = {
-      element,
-      reason,
-      componentData: data || super.getElementWrapperComponentData(element)
-    };
-    this.creator.onGetElementWrapperComponentData.fire(this, options);
-
-    return options.componentData;
+    return data || super.getElementWrapperComponentData(element);
   }
 
   public getRowWrapperComponentName(row: QuestionRowModel): string {
@@ -3289,8 +3251,8 @@ export function isTextInput(target: any): boolean {
 }
 
 export function registerAdorner(name, adorner) {
-  SurveyHelper.warnNonSupported("regsterAdorner", "onGetElementWrapperComponentName and onGetElementWrapperComponentData");
+  SurveyHelper.warnNonSupported("registerAdorner", "This functionality is no longer supported.");
 }
 export function removeAdorners(names: string[] = undefined) {
-  SurveyHelper.warnNonSupported("removeAdorners", "onGetElementWrapperComponentName and onGetElementWrapperComponentData");
+  SurveyHelper.warnNonSupported("removeAdorners", "This functionality is no longer supported.");
 }
