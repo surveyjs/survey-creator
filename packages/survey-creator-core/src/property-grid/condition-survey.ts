@@ -326,7 +326,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
             {
               name: "conjunction",
               type: "dropdown",
-              renderAs: "select",
               titleLocation: "hidden",
               showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
@@ -338,7 +337,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
             {
               name: "questionName",
               type: "dropdown",
-              renderAs: "select",
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
               showOptionsCaption: false,
@@ -348,7 +346,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
             {
               name: "operator",
               type: "dropdown",
-              renderAs: "select",
               denySearch: true,
               titleLocation: "hidden",
               startWithNewLine: false,

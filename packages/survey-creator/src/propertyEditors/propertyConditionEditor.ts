@@ -41,7 +41,7 @@ export class ConditionEditorItem {
           name: "conjunction",
           type: "dropdown",
           titleLocation: "hidden",
-          showOptionsCaption: false,
+          allowClear: false,
           visible: false,
           choices: ["and", "or"],
         },
@@ -49,6 +49,7 @@ export class ConditionEditorItem {
           name: "questionName",
           type: "dropdown",
           titleLocation: "hidden",
+          allowClear: false,
           startWithNewLine: false,
           isRequired: true,
         },
@@ -57,7 +58,7 @@ export class ConditionEditorItem {
           type: "dropdown",
           titleLocation: "hidden",
           startWithNewLine: false,
-          showOptionsCaption: false,
+          allowClear: false,
           isRequired: true,
           enableIf: "{questionName} notempty",
         },
@@ -66,7 +67,7 @@ export class ConditionEditorItem {
     this.survey = !!owner.options
       ? owner.options.createSurvey(json, "conditionEditor")
       : new Survey.Survey(json);
-    if(owner.readOnly()) {
+    if (owner.readOnly()) {
       this.survey.mode = "display";
     }
     this.survey.onValueChanged.add((sender, options) => {
