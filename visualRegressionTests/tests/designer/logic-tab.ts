@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, getSelectOptionByText, logicActionSelector, tableRulesSelector, logicAddNewRuleButton, getListItemByText } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, logicActionSelector, tableRulesSelector, logicAddNewRuleButton, getListItemByText } from "../../helper";
 
 const title = "Logic tab Screenshot";
 

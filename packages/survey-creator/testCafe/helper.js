@@ -1,4 +1,4 @@
-import { ClientFunction } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 
 export const url = "http://127.0.0.1:7777/example/";
 
@@ -27,3 +27,7 @@ export const init = ClientFunction((creatorOptions) => {
 
   window.creator = creator;
 });
+
+export function getListItemByText(text) {
+  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text).filterVisible();
+}
