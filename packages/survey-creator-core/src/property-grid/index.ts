@@ -1499,12 +1499,15 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     return prop.type == "question";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return {
+    const result = {
       type: "dropdown",
-      renderAs: "select",
       optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
       choices: this.getChoices(obj, prop, options)
     };
+    if (prop.type == "question") {
+      result["allowClear"] = false;
+    }
+    return result;
   }
   private getChoices(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): Array<any> {
     var survey = EditableObject.getSurvey(obj);

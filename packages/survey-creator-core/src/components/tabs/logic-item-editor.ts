@@ -138,7 +138,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "logicTypeName",
               type: "dropdown",
-              renderAs: "select",
               denySearch: true,
               allowClear: false,
               title: editorLocalization.getString("pe.then"),
@@ -156,7 +155,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "elementSelector",
               type: "dropdown",
-              renderAs: "select",
               allowClear: false,
               titleLocation: "hidden",
               isRequired: true,
