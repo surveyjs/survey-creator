@@ -18,8 +18,6 @@
 
 .sv-popup--modal {
   &.sv-property-editor .sv-popup__container {
-    background-color: $background-for-editors;
-
     .sv-popup_shadow {
       background-color: transparent;
     }
@@ -35,6 +33,10 @@
     padding-bottom: 2px;
   }
   padding: calcSize(4);
+
+  .sd-body, .sd-logic-body {
+    min-width: calcSize(78);
+  }
 }
 .sv-popup.sv-property-editor .sd-root-modern{
   --sd-mobile-width: 0; 

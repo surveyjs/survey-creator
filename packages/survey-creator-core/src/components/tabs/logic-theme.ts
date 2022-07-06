@@ -4,7 +4,7 @@ export var logicCss = {
   root: "",
   container: "",
   header: "",
-  body: "",
+  body: "sd-logic-body",
   bodyEmpty: "",
   footer: "",
   title: "",
