@@ -170,7 +170,7 @@ export var logicCss = {
   dropdown: {
     root: "",
     small: "",
-    control: "",
+    control: "sl-dropdown",
     selectWrapper: "",
     other: "",
     onError: "",
