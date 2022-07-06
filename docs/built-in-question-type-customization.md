@@ -1,4 +1,4 @@
-# Built-In Question Type Customization
+# Customize Built-In Question Types
 
 This help topic describes how you can use built-in question types to create a custom question type or combine them into a composite question type.
 
@@ -337,4 +337,3 @@ Survey.ComponentCollection.Instance.add({
 ## Further Reading
 
 - [Integrate Third-Party React Components](/Documentation/Survey-Creator?id=third-party-component-integration-react)
-- [Integrate Third-Party jQuery and Vanilla JS Components](/Documentation/Survey-Creator?id=third-party-component-integration-vanillajs)

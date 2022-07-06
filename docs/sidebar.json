@@ -47,21 +47,21 @@
       "Title": "Integration with Backend"
     },
     {
-      "Name": "built-in-question-type-customization",
-      "Title": "Built-In Question Type Customization"
-    },
-    {
-      "Name": "third-party-component-integration",
-      "Title": "Third-Party Component Integration",
+      "Name": "advanced-customization",
+      "Title": "Advanced Customization",
       "Items": [
         {
-          "Name": "third-party-component-integration-react",
-          "Title": "React"
+          "Name": "built-in-question-type-customization",
+          "Title": "Customize Built-In Question Types"
         },
         {
-          "Name": "third-party-component-integration-vanillajs",
-          "Title": "jQuery / Vanilla JS"
-        }
+          "Name": "Create-Custom-Widget",
+          "Title": "Create Custom Widgets"
+        },
+        {
+          "Name": "third-party-component-integration-react",
+          "Title": "Integrate Third-Party React Components"
+        },
       ]
     },
     {
