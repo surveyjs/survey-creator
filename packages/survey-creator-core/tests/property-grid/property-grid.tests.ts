@@ -2113,8 +2113,6 @@ test("Expand/collapse categories", () => {
   var propertyGrid = new PropertyGridModelTester(question, options);
   var generalPanel = <PanelModel>propertyGrid.survey.getPanelByName("general");
   var logicPanel = <PanelModel>propertyGrid.survey.getPanelByName("logic");
-  expect(generalPanel.isExpanded).toBeTruthy();
-  propertyGrid.collapseCategory("general");
   expect(generalPanel.isExpanded).toBeFalsy();
   propertyGrid.expandCategory("general");
   expect(generalPanel.isExpanded).toBeTruthy();
