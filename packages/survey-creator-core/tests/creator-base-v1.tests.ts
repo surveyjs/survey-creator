@@ -643,14 +643,8 @@ test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab co
   const page = creator.survey.pages[0];
   const q1 = page.addNewQuestion("text", "q1");
   creator.selectElement(q1);
-  const generalPanel = <PanelModel>(
-    creator["designerPropertyGrid"].survey.getPanelByName("general")
-  );
-  const logicPanel = <PanelModel>(
-    creator["designerPropertyGrid"].survey.getPanelByName("logic")
-  );
-  expect(generalPanel.isExpanded).toBeTruthy();
-  creator.collapsePropertyTab("general");
+  const generalPanel = <PanelModel>(creator["designerPropertyGrid"].survey.getPanelByName("general"));
+  const logicPanel = <PanelModel>(creator["designerPropertyGrid"].survey.getPanelByName("logic"));
   expect(generalPanel.isExpanded).toBeFalsy();
   creator.expandPropertyTab("general");
   expect(generalPanel.isExpanded).toBeTruthy();
