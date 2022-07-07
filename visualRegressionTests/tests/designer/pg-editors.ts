@@ -106,6 +106,21 @@ test("Default value popup", async (t) => {
   await checkElementScreenshot("pg-default-value-popup.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t);
 });
 
+test("Logic popup", async (t) => {
+  await t.resizeWindow(1240, 870);
+
+  const generalTab = Selector("h4").withExactText("General");
+  const logicTab = Selector("h4").withExactText("Logic");
+
+  await t
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
+    .click(generalTab)
+    .click(logicTab)
+    .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
+  await checkElementScreenshot("pg-logic-popup.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t);
+});
+
 test("Property grid checkbox - all states", async (t) => {
   await t.resizeWindow(2560, 1440);
   await setJSON({});
