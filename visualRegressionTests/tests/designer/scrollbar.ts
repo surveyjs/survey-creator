@@ -1,4 +1,4 @@
-import { url, checkElementScreenshot, objectSelectorButton, propertyGridSelector, setJSON, creatorContentSelector } from "../../helper";
+import { url, checkElementScreenshot, objectSelectorButton, propertyGridSelector, setJSON, creatorContentSelector, getPropertyGridCategory, generalGroupName } from "../../helper";
 
 const title = "Sidebar Screenshot";
 
@@ -30,6 +30,7 @@ const json = {
 test("check scrollbars", async (t) => {
   await t.resizeWindow(1920, 900);
   await setJSON(json);
+  await t.click(getPropertyGridCategory(generalGroupName));
 
   await checkElementScreenshot("scrollbar-property-grid.png", propertyGridSelector, t);
   //await t.hover(propertyGridSelector, { offsetX: -6, offsetY: 100, speed: 0.5 });
