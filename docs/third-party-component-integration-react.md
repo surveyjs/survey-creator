@@ -250,3 +250,8 @@ PropertyGridEditorCollection.register({
 ```
 
 [View full code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components)
+
+## Further Reading
+
+- [Create Specialized Question Types](/Documentation/Survey-Creator?id=create-specialized-question-types)
+- [Create Composite Question Types](/Documentation/Survey-Creator?id=create-composite-question-types)

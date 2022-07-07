@@ -47,12 +47,16 @@
       "Title": "Integration with Backend"
     },
     {
-      "Name": "advanced-customization",
-      "Title": "Advanced Customization",
+      "Name": "customize-question-types",
+      "Title": "Customize Question Types",
       "Items": [
         {
-          "Name": "built-in-question-type-customization",
-          "Title": "Customize Built-In Question Types"
+          "Name": "create-specialized-question-types",
+          "Title": "Create Specialized Question Types"
+        },
+        {
+          "Name": "create-composite-question-types",
+          "Title": "Create Composite Question Types"
         },
         {
           "Name": "Create-Custom-Widget",

@@ -1,72 +1,13 @@
-# Customize Built-In Question Types
+# Create Composite Question Types
 
-This help topic describes how you can use built-in question types to create a custom question type or combine them into a composite question type.
+This help topic describes how to combine multiple questions into a composite question type.
 
-- [Create Custom Question Types](#create-custom-question-types)
-- [Create Composite Question Types](#create-composite-question-types)
-  - [Add Custom Properties to Composite Question Types](#add-custom-properties-to-composite-question-types)
-  - [Expressions and Triggers in Composite Question Types](#expressions-and-triggers-in-composite-question-types)
-  - [Override Base Question Properties](#override-base-question-properties)
+- [Configure a Composite Question Type](#configure-a-composite-question-type)
+- [Add Custom Properties to Composite Question Types](#add-custom-properties-to-composite-question-types)
+- [Expressions and Triggers in Composite Question Types](#expressions-and-triggers-in-composite-question-types)
+- [Override Base Question Properties](#override-base-question-properties)
 
-## Create Custom Question Types
-
-You can use built-in question types as a base to create custom question types with more specific functionality. For example, you need to populate a [Dropdown](/Documentation/Library?id=questiondropdownmodel) question in advance. You can create a regular Dropdown question and specify its [`choices`](/Documentation/Library?id=questiondropdownmodel#choices) or [`choicesByUrl`](/Documentation/Library?id=questiondropdownmodel#choicesByUrl) property (depending on whether the choices come from a server or not). The following code shows a Country question configured in this manner:
-
-```json
-{
-  "name": "country",
-  "type": "dropdown",
-  "optionsCaption": "Select a country...",
-  "choicesByUrl": {
-    "url": "https://surveyjs.io/api/CountriesExample"
-  }
-}
-```
-
-If you [add this question to the Toolbox](/Documentation/Survey-Creator?id=toolbox#add-a-custom-toolbox-item), end users can use it in their surveys. However, this approach has a number of drawbacks:
-
-- End users can edit the `choicesByUrl` property and break the functionality.
-- If the question needs modifications (for example, if the server URL has changed), end users have to modify every created instance of this question individually.
-- In the JSON definition, your custom question looks like a regular Dropdown question.
-
-To avoid these drawbacks, use a different approach: add your custom question type to the survey's `ComponentCollection`:
-
-```js
-Survey.ComponentCollection.Instance.add({
-  // A unique name; must use lowercase
-  name: "country", 
-  // A display name used in the Toolbox
-  title: "Country", 
-  // A JSON definition for the base question type (Dropdown in this case)
-  questionJSON: {
-    "type": "dropdown",
-    "optionsCaption": "Select a country...",
-    "choicesByUrl": {
-      "url": "https://surveyjs.io/api/CountriesExample",
-    }
-  }
-});
-```
-
-This approach gives you the following advantages:
-
-- A corresponding toolbox item is added automatically.
-- End users cannot break the functionality because the Property Grid hides the `questionJSON` object properties.
-- If you modify the question configuration, the changes automatically apply to every instance of this question.
-- A cleaner JSON definition:
-
-  ```json
-  {
-    "type": "country",
-    "name": "question1"
-  }
-  ```
-
-[View the "Country Component" example](/Examples/Survey-Creator?id=component-country)
-[View the "Order Table Component" example](/Examples/Survey-Creator?id=component-ordertable)
-[View the "Order Grid Component" example](/Examples/Survey-Creator?id=component-ordergrid)
-
-## Create Composite Question Types
+## Configure a Composite Question Type
 
 Composite questions are containers for other questions. They are useful when a group of questions have a specific logic that users should not change. End users cannot customize the nested questions directly. However, they can customize the composite question.
 
@@ -108,7 +49,7 @@ A composite question produces an object for a value:
 
 [View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname)
 
-### Add Custom Properties to Composite Question Types
+## Add Custom Properties to Composite Question Types
 
 If you need to control nested questions, add a custom property to their composite questions. Users can change the custom properties in the [Property Grid](/Documentation/Survey-Creator?id=property-grid).
 
@@ -173,7 +114,7 @@ The steps below summarize how to add a custom property to your composite questio
 
 [View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname)
 
-### Expressions and Triggers in Composite Question Types
+## Expressions and Triggers in Composite Question Types
 
 [Expressions](/Documentation/Library?id=LibraryOverview#conditions) and [triggers](/Documentation/Library?id=LibraryOverview#triggers) help you build conditional logic in a survey. Let us consider a survey example in which respondents should enter their business and shipping addresses. For the case when the addresses are the same, the survey has a "Shipping address same as business address" question that displays a Yes/No toggle switch. When the switch is set to Yes, the Shipping Address field is disabled and its value is copied from the Business Address field:
 
@@ -280,7 +221,7 @@ Users can add the custom question to their survey like they add a built-in quest
 
 [View the "Shipping Address Component" example](https://surveyjs.io/Examples/Survey-Creator?id=component-shippingaddress)
 
-### Override Base Question Properties
+## Override Base Question Properties
 
 Composite questions inherit properties from their base question type ([`Question`](/Documentation/Library?id=Question)). To override a base property, add it to your composite question and specify a new configuration for it. Call the `addProperty(questionType, propertySettings)` method on the `Survey.Serializer` object. You can call it in the [`onInit`]() event handler within the composite question configuration object.
 
@@ -336,4 +277,5 @@ Survey.ComponentCollection.Instance.add({
 
 ## Further Reading
 
+- [Create Specialized Question Types](/Documentation/Survey-Creator?id=create-specialized-question-types)
 - [Integrate Third-Party React Components](/Documentation/Survey-Creator?id=third-party-component-integration-react)
