@@ -68,18 +68,16 @@
   width: calc(100% - 25 * #{$base-unit});
   min-width: calcSize(70);
   box-shadow: none;
+  background-color: inherit;
 }
 
 .svc-matrix-cell__popup {
-  .sv-popup__container {
-    background-color: $background;
-  }
   .sv-popup__scrolling-content {
-    margin-top: calcSize(2);
+    margin-top: calcSize(1);
   }
-  .sv-popup_shadow.sv-popup_shadow {
-    filter: unset;
-  }
+  // .sv-popup_shadow.sv-popup_shadow {
+  //   filter: unset;
+  // }
 }
 .svc-question__content {
   .sd-table__cell--detail-panel {
