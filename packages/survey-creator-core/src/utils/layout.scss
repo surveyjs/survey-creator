@@ -52,8 +52,12 @@
     display: flex;
 
     .sv-action-bar {
-      padding: 0 calcSize(2);
+      padding: 0 calcSize(1);
       justify-content: flex-end;
+    }
+
+    .sv-action .sv-action-bar-item {
+      margin: 0 calcSize(1);
     }
   }
 }

@@ -214,13 +214,13 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
 
     if (options.question.name === "logicTypeName") {
       options.question.allowRootStyle = false;
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--action";
+      options.cssClasses.control += " svc-logic-operator svc-logic-operator--action";
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
     if (options.question.name === "elementSelector" || options.question.name === "setToName" || options.question.name === "fromName" || options.question.name === "gotoName") {
       options.question.allowRootStyle = false;
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
+      options.cssClasses.control += " svc-logic-operator svc-logic-operator--question";
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
