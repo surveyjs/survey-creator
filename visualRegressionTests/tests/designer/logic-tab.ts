@@ -403,3 +403,46 @@ test("logic actions", async (t) => {
   await t.click(tableRulesSelector.nth(1));
   await checkElementScreenshot("logic-question-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t);
 });
+
+test("Texts overflow the controls when showTitlesInExpressions is enabled #3192", async (t) => {
+  await t.resizeWindow(800, 900);
+  await setJSON({
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "q1",
+            "title": "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?"
+          },
+          {
+            "type": "text",
+            "name": "q2",
+            "title": "What do you miss or find disappointing in your experience with our products?",
+            "visibleIf": "{q1} = 1"
+          },
+          {
+            "type": "text",
+            "name": "q3",
+            "title": "What do you miss or find disappointing in your experience with our products?",
+          },
+          {
+            "type": "text",
+            "name": "q4",
+            "title": "how likely are you to recommend our product to a friend or colleague",
+          }
+        ]
+      }
+    ]
+  });
+  await ClientFunction(() => {
+    window["creator"].setOptions({ showTitlesInExpressions: true });
+  })();
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .hover(Selector(".sl-table__row"))
+    .click(logicDetailButtonElement);
+  await checkElementScreenshot("logic-condition-overflow-text.png", ruleContent, t);
+});
