@@ -43,6 +43,7 @@ export const getItemValueByIndex = ClientFunction((questionName, index) => {
 export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
+export const generalGroupName = "General";
 
 export const creatorContentSelector = Selector(".svc-creator__content-holder");
 

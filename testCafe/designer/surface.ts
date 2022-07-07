@@ -1,5 +1,5 @@
-import { url, setJSON, collapseButtonSelector, getTabbedMenuItemByText, creatorTabPreviewName, explicitErrorHandler } from "../helper";
-import { ClientFunction, Selector } from "testcafe";
+import { url, setJSON, collapseButtonSelector, getTabbedMenuItemByText, creatorTabPreviewName, explicitErrorHandler, generalGroupName, getPropertyGridCategory } from "../helper";
+import { Selector } from "testcafe";
 const title = "Designer surface";
 
 fixture`${title}`.page`${url}`;
@@ -30,6 +30,7 @@ test("Image question", async (t) => {
     .expect(imageQuestionSelector.clientHeight).eql(359)
 
     .click(imageQuestionSelector)
+    .click(getPropertyGridCategory(generalGroupName))
     .expect(Selector("div [data-name=\"imageHeight\"] input").value).eql("")
     .expect(Selector("div [data-name=\"imageHeight\"] input").getAttribute("placeholder")).eql("auto")
     .expect(Selector("div [data-name=\"imageWidth\"] input").value).eql("")
