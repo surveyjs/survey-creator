@@ -2828,30 +2828,6 @@ test("Test options, setting some of them can generate errors", () => {
   const creator = new CreatorTester(options);
   expect(creator.sidebar.visible).toBeTruthy();
 });
-test("onGetElementWrapperComponentName and onGetElementWrapperComponentData events", () => {
-  const creator = new CreatorTester();
-  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
-  const element = creator.survey.getAllQuestions()[0];
-  let count = 0;
-
-  creator.onGetElementWrapperComponentName.add((sender, options) => {
-    expect(options.element).toBe(element);
-    expect(options.reason).toBe("test");
-    expect(options.componentName).toBe("svc-question");
-    count++;
-  });
-  creator.survey.getElementWrapperComponentName(element, "test");
-  expect(count).toBe(1);
-
-  creator.onGetElementWrapperComponentData.add((sender, options) => {
-    expect(options.element).toBe(element);
-    expect(options.reason).toBe("test");
-    expect(options.componentData).toBe(creator);
-    count++;
-  });
-  creator.survey.getElementWrapperComponentData(element, "test");
-  expect(count).toBe(2);
-});
 test("Add and remove question immediately, incorrect selection", (): any => {
   const creator = new CreatorTester();
   creator.onQuestionAdded.add((sender, options) => {

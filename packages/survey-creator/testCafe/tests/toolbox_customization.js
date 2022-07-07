@@ -1,4 +1,4 @@
-import { url, init } from "../helper";
+import { url, init, getListItemByText } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = `toolbox customization`;
 
@@ -6,7 +6,7 @@ fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
   await init();
 });
 
-test(`asnwer custom question in test tab`, async t => {
+test(`answer custom question in test tab`, async t => {
   const addItem = ClientFunction(() => {
     const itemAsJson = {
       name: "countries",
@@ -32,13 +32,10 @@ test(`asnwer custom question in test tab`, async t => {
 
   await addItem();
 
-  const dropdown = Selector("#surveyjsExample select").nth(3);
-  const optionCuba = dropdown.find("option[value=Cuba]");
-
   await t
     .click(`[title~=countries]`)
     .click(getTestTab)
     .wait(1000)
-    .click(dropdown)
-    .click(optionCuba);
+    .click(Selector(`div[data-name="question1"]`).filterVisible())
+    .click(getListItemByText("Cuba"));
 });
