@@ -30,9 +30,9 @@ export const screenshotComparerOptions = {
   attemptTimeout: 500,
   looksSameComparisonOptions: {
     strict: false,
-    tolerance: 8,
+    tolerance: 1,
     ignoreAntialiasing: true,
-    antialiasingTolerance: 8,
+    antialiasingTolerance: 3,
     ignoreCaret: true,
   },
   textComparisonOptions: {
@@ -40,6 +40,6 @@ export const screenshotComparerOptions = {
     ignoreAntialiasing: true,
     ignoreCaret: true,
   },
-  generatePatch: false,
+  generatePatch: true,
   highlightColor: { r: 0xff, g: 0, b: 0xff },
 };
