@@ -81,7 +81,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this.creator.survey.pages.indexOf(this.page) < 0;
   }
   protected isOperationsAllow(): boolean {
-    return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single";
+    return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single" && this.creator.allowModifyPages;
   }
   protected getPage(): PageModel {
     return this.surveyElement as PageModel;
