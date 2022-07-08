@@ -101,7 +101,10 @@ export class StringEditorViewModelBase extends Base {
           this.locString.owner.value = clearedText;
         }
         else {
+          const oldStoreDefaultText = this.locString.storeDefaultText;
+          this.locString.storeDefaultText = false;
           this.locString.text = clearedText;
+          this.locString.storeDefaultText = oldStoreDefaultText;
         }
       }
       else {
