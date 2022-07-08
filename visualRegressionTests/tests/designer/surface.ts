@@ -378,7 +378,7 @@ test("Logo image hover", async (t) => {
   await t.hover(".svc-logo-image");
   await checkElementScreenshot("logo-image-hover.png", Selector(".svc-logo-image"), t);
 });
-test.only("Logo image adorners", async (t) => {
+test("Logo image adorners", async (t) => {
   await t.resizeWindow(1920, 1900);
   const json = {
     logo: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
