@@ -40,7 +40,7 @@ Survey.ComponentCollection.Instance.add({
 
 This approach gives you the following advantages:
 
-- A corresponding toolbox item is added automatically.
+- A corresponding toolbox item appears automatically.
 - End users cannot break the functionality because the Property Grid hides the `questionJSON` object properties.
 - If you modify the question configuration, the changes automatically apply to every instance of this question.
 - A cleaner JSON definition:
