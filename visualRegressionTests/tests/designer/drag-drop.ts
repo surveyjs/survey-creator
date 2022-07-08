@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, checkElementScreenshot, explicitErrorHandler } from "../../helper";
+import { url, setJSON, checkElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -169,11 +169,10 @@ test("Matrix: Property Grid: Choices", async (t) => {
   };
   await setJSON(json);
 
-  const Question1 = Selector("[data-name=\"question1\"]");
-  await t.click(Question1, { speed: 0.5 });
-
-  const ChoicesTab = Selector("h4").withExactText("Choices");
-  await t.click(ChoicesTab);
+  await t
+    .click(Selector("[data-name=\"question1\"]"), { speed: 0.5 })
+    .click(getPropertyGridCategory(generalGroupName))
+    .click(getPropertyGridCategory("Choices"));
 
   await patchMatrixDragDropToDisableDrop();
 
