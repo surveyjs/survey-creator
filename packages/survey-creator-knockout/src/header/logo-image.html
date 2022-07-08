@@ -10,15 +10,9 @@
   <!-- /ko -->
   <!-- /ko -->
   <!-- ko if: survey.locLogo.koRenderedHtml -->
+  <div data-bind="css: containerCss, click: chooseFile, key2click">
   <!-- ko component: { name: 'sv-logo-image', params: survey } -->
   <!-- /ko -->
-  <!-- ko if: allowEdit -->
-  <div class="svc-image-item-value-controls">
-    <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
-      data-bind="click: chooseFile, key2click" params="iconName: 'icon-file', size: 24"></sv-svg-icon>
-    <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
-      data-bind="click: remove, key2click" params="iconName: 'icon-delete', size: 24"></sv-svg-icon>
   </div>
-  <!-- /ko -->
   <!-- /ko -->
 </div>

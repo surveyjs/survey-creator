@@ -3,6 +3,7 @@ import { editorLocalization } from "../../src/editorLocalization";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
+import { LogoImageViewModel } from "../../src/components/header/logo-image";
 
 test("Survey/page title/description placeholders text", () => {
   new CreatorTester();
@@ -113,4 +114,21 @@ test("StringEditorViewModelBase page title placeholder", () => {
   expect(editor.placeholderValue).toBeUndefined();
   expect(editor.placeholder).toBe("Page 1");
   expect(editor.placeholderValue).toBe("Page 1");
+});
+
+test("Logo css", () => {
+  const creator = new CreatorTester();
+  var logo = new LogoImageViewModel(creator, null);
+  expect(logo.allowEdit).toBe(true);
+  expect(logo.containerCss).toBe("svc-logo-image-container svc-logo-image-container--editable");
+  creator.readOnly = true;
+  expect(logo.allowEdit).toBe(false);
+  expect(logo.containerCss).toBe("svc-logo-image-container");
+});
+
+test("Logo should be unclickable in readonly mode", () => {
+  const creator = new CreatorTester();
+  var logo = new LogoImageViewModel(creator, null);
+  creator.readOnly = true;
+  logo.chooseFile(logo);
 });
