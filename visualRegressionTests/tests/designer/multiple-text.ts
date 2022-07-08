@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, setJSON } from "../../helper";
+import { url, screenshotComparerOptions, setJSON, getPropertyGridCategory, generalGroupName } from "../../helper";
 
 const title = "MultipleText Screenshot";
 
@@ -40,7 +40,8 @@ test("Multiple text items", async (t) => {
 
   await t
     .click(Selector(".sd-question"))
-    .click(Selector(".svc-side-bar .spg-panel__title").withText("Items"));
+    .click(getPropertyGridCategory(generalGroupName))
+    .click(getPropertyGridCategory("Items"));
   await takeScreenshot("multiple-text-items.png", Selector(".svc-side-bar .spg-panel").nth(1), screenshotComparerOptions);
 
   await t

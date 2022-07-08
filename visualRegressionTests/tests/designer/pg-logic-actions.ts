@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, setJSON } from "../../helper";
+import { url, screenshotComparerOptions, setJSON, getPropertyGridCategory, logicGroupName } from "../../helper";
 
 const title = "Actions in Logic section Screenshot";
 
@@ -32,12 +32,8 @@ test("Check states", async (t) => {
 
   // await t
   //   .click(Selector(".svd-grid-expand"));
-  await t
-    .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
-  await t
-    .click(Selector("h4[aria-label=General]"));
-  await t
-    .click(Selector("h4[aria-label=Logic]"));
+  await t.click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
+  await t.click(getPropertyGridCategory(logicGroupName));
 
   const sectionContentElement = Selector("h4[aria-label=Logic]").parent().nextSibling();
 
