@@ -4,7 +4,7 @@ export var logicCss = {
   root: "",
   container: "",
   header: "",
-  body: "",
+  body: "sl-body",
   bodyEmpty: "",
   footer: "",
   title: "",
@@ -170,7 +170,7 @@ export var logicCss = {
   dropdown: {
     root: "",
     small: "",
-    control: "",
+    control: "sl-dropdown",
     selectWrapper: "",
     other: "",
     onError: "",

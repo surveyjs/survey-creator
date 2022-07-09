@@ -449,7 +449,30 @@ test("column[] property editor", (): any => {
   question.columns[1].title = "Column 2";
   expect(columnsQuestion.visibleRows[1].cells[1].value).toEqual("Column 2"); //"the second cell in second row is correct"
 });
-
+test("column[] property editor, store column title if it was entered an equals to name", (): any => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  expect(columnsQuestion).toBeTruthy();
+  expect(columnsQuestion.columns).toHaveLength(2);
+  const row = columnsQuestion.visibleRows[0];
+  expect(row.cells[0].value).toEqual("col1");
+  expect(row.cells[1].value).toBeFalsy();
+  let json = question.toJSON();
+  expect(json).toEqual({
+    name: "q1",
+    columns: [{ name: "col1" }]
+  });
+  row.cells[1].value = "col1";
+  json = question.toJSON();
+  expect(json).toEqual({
+    name: "q1",
+    columns: [{ name: "col1", title: "col1" }]
+  });
+});
 test("surveypages property editor", () => {
   var survey = new SurveyModel();
   survey.addNewPage("page1");
@@ -2113,8 +2136,6 @@ test("Expand/collapse categories", () => {
   var propertyGrid = new PropertyGridModelTester(question, options);
   var generalPanel = <PanelModel>propertyGrid.survey.getPanelByName("general");
   var logicPanel = <PanelModel>propertyGrid.survey.getPanelByName("logic");
-  expect(generalPanel.isExpanded).toBeTruthy();
-  propertyGrid.collapseCategory("general");
   expect(generalPanel.isExpanded).toBeFalsy();
   propertyGrid.expandCategory("general");
   expect(generalPanel.isExpanded).toBeTruthy();
