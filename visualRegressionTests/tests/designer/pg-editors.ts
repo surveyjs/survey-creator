@@ -1,5 +1,5 @@
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-import { url, setJSON, screenshotComparerOptions, checkElementScreenshot, getToolboxItemByText } from "../../helper";
+import { url, setJSON, screenshotComparerOptions, checkElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -29,14 +29,11 @@ test("Properties on the same line", async (t) => {
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
   const question1 = Selector("[data-name=\"question1\"]");
-  const generalTab = Selector("h4").withExactText("General");
-  const inputTab = Selector("h4").withExactText("Input");
 
   await t
     .click(question1)
     .pressKey("enter")
-    .click(generalTab)
-    .click(inputTab)
+    .click(getPropertyGridCategory("Input"))
     .expect(Selector("span").withExactText("Min").visible).ok()
     .expect(Selector(".spg-panel__content").filterVisible().visible).ok();
 
@@ -74,14 +71,11 @@ test("Values editors, keep them close", async (t) => {
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
 
   const question1 = Selector("[data-name=\"question1\"]");
-  const generalTab = Selector("h4").withExactText("General");
-  const dataTab = Selector("h4").withExactText("Data");
 
   await t
     .click(question1)
     .pressKey("enter")
-    .click(generalTab)
-    .click(dataTab)
+    .click(getPropertyGridCategory("Data"))
     .expect(Selector(".spg-panel__content").filterVisible().visible).ok();
 
   await takeScreenshot("properties-data-tab.png", Selector(".spg-panel__content").filterVisible(), screenshotComparerOptions);
@@ -131,6 +125,7 @@ test("Property grid checkbox - all states", async (t) => {
 
   const checkbox = Selector("[data-name=\"showTitle\"] .spg-checkbox");
 
+  await t.click(getPropertyGridCategory(generalGroupName));
   await setCheckboxProperty("value", false);
   await setCheckboxProperty("readOnly", false);
   await checkElementScreenshot("pg-checkbox-unchecked.png", checkbox, t);
@@ -180,6 +175,7 @@ test("Property grid input all states", async (t) => {
   });
 
   const input = Selector("[data-name=\"title\"] .spg-input");
+  await t.click(getPropertyGridCategory(generalGroupName));
 
   await checkElementScreenshot("pg-input-default.png", input, t);
 

@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
-  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName
 } from "../helper";
 const title = "Responsiveness";
 
@@ -282,13 +282,13 @@ test("Property grid editor popup", async (t) => {
   await setJSON(json);
 
   const question1 = Selector("[data-name=\"question1\"]");
-  const dataTab = Selector("h4").withExactText("Data");
-  const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
   const mobileCloseButton = Selector(".svc-side-bar__container-close");
+
   await t
     .resizeWindow(1920, 900)
     .click(question1)
-    .click(dataTab)
+    .click(getPropertyGridCategory(generalGroupName))
+    .click(getPropertyGridCategory("Data"))
     .click(Selector("span").withExactText("Set Default Answer"))
     .expect(Selector(".sv-popup--modal").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
