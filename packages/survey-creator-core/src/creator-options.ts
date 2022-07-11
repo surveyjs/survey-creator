@@ -215,5 +215,5 @@ export interface ICreatorOptions {
    * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
    * You can set this option in creator constructor only
    */
-  pageEditMode?: "standard" | "single" | "bypage" | "readonly";
+  pageEditMode?: "standard" | "single" | "bypage";
 }
