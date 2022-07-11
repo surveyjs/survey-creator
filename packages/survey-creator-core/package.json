@@ -74,6 +74,11 @@
     "webpack-merge": "^5.8.0",
     "webpack-svgstore-plugin": "4.0.1"
   },
+  "overrides": {
+    "karma-webpack": {
+      "webpack": "^4.43.0"
+    }
+  },
   "standard-version": {
     "skip": {
       "tag": true
