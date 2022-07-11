@@ -131,7 +131,7 @@ export interface ICreatorOptions {
    * Accepted values:
    *
    * - `"auto"` (default)     
-   * Display the language selector only if the survey is translated to more than one language.
+   * Display the language selector only if the survey is translated into more than one language.
    *
    * - `true`     
    * Always display the language selector regardless of how many languages are used in the survey.
