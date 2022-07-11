@@ -130,16 +130,16 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `"auto"` (default)
+   * - `"auto"` (default)     
    * Display the language selector only if the survey is translated to more than one language.
    *
-   * - `true`
+   * - `true`     
    * Always display the language selector regardless of how many languages are used in the survey.
    *
-   * - `false`
+   * - `false`      
    * Never display the language selector.
    *
-   * - `"all"`
+   * - `"all"`        
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization).
    *
    * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
