@@ -262,8 +262,7 @@ export class CreatorBase extends Base
 
   private pageEditModeValue: "standard" | "single" | "bypage" | "readonly" = "standard";
   /**
-   * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
-   * You can set this option in creator constructor only
+   * Contains the value of the [`pageEditMode`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#pageEditMode) property specified in the constructor.
    */
   public get pageEditMode(): "standard" | "single" | "bypage" | "readonly" {
     return this.pageEditModeValue;
@@ -1057,16 +1056,16 @@ export class CreatorBase extends Base
    *
    * Accepted values:
    *
-   * - `"auto"` (default)
-   * Display the language selector only if the survey is translated to more than one language.
+   * - `"auto"` (default)       
+   * Display the language selector only if the survey is translated into more than one language.
    *
-   * - `true`
+   * - `true`       
    * Always display the language selector regardless of how many languages are used in the survey.
    *
-   * - `false`
+   * - `false`        
    * Never display the language selector.
    *
-   * - `"all"`
+   * - `"all"`        
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization).
    *
    * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
