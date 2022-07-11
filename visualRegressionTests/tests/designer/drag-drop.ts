@@ -129,7 +129,7 @@ test("Choices: Ranking", async (t) => {
   await setJSON(json);
   await patchDragDropToDisableDrop();
 
-  const QRoot = Selector(".svc-question__adorner").filterVisible();
+  const QRoot = Selector(".svc-question__adorner .sd-question__content").filterVisible();
   const FirstItem = QRoot.find(".svc-item-value-wrapper").nth(0);
 
   await checkElementScreenshot("drag-drop-item-values-ranking.png", QRoot, t);
