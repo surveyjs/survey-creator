@@ -208,12 +208,24 @@ export interface ICreatorOptions {
    */
   allowChangeThemeInPreview?: boolean;
   /**
-   * Use it to limit questions in the toolbox. For example, by setting this property to ["text", "rating", "dropdown"] will show only three questions on toolbox.
+   * Limits question and panels types available in the Toolbox and Add Question menu.
+   * 
+   * Refer to the [Limit Available Question and Panel Types](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox#limit-available-question-and-panel-types) help topic for more information.
    */
   questionTypes?: Array<string>;
   /**
-   * Set pageEditMode option to "single" to use creator in a single page mode. By default value is "standard".
-   * You can set this option in creator constructor only
+   * Specifies how Survey Creator users edit survey pages.
+   * 
+   * Accepted values:
+   * 
+   * - `"standard"` (default)       
+   * Questions and panels are divided between pages. Users can scroll the design surface to reach a required page.
+   * 
+   * - `"single"`       
+   * All questions and panels belong to a single page. Users cannot add or remove pages.
+   * 
+   * - `"bypage"`       
+   * Questions and panels are divided between pages. Users can use the page navigator to switch to a required page.
    */
   pageEditMode?: "standard" | "single" | "bypage" | "readonly";
 }
