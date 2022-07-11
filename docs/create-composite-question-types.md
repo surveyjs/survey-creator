@@ -27,7 +27,7 @@ Survey.ComponentCollection.Instance.add({
 });
 ```
 
-The Full Name composite question looks in the survey JSON definition as follows:
+The Full Name composite question in the survey JSON definition looks as follows:
 
 ```json
 {
@@ -51,7 +51,7 @@ A composite question produces an object for a value:
 
 ## Add Custom Properties to Composite Question Types
 
-If you need to control nested questions, add a custom property to their composite questions. Users can change the custom properties in the [Property Grid](/Documentation/Survey-Creator?id=property-grid).
+If you need to control nested questions, add a custom property to their composite questions. Users can change custom properties in the [Property Grid](/Documentation/Survey-Creator?id=property-grid).
 
 For example, the Full Name composite question from the previous topic may include an optional Middle Name question. The following code adds a custom `showMiddleName` property that controls the Middle Name question visibility:
 
@@ -108,9 +108,9 @@ In the survey JSON definition, the custom `showMiddleName` property looks as fol
 The steps below summarize how to add a custom property to your composite question:
 
 1. Handle the [`onInit`]() event to add a custom property to your question.
-1. Implement a function that connects your custom property with a nested question's property (`changeMiddleNameVisibility` in the code above).
-1. Call this function from the [`onLoaded`]() event handler to apply the custom property when the survey JSON definition is loaded.
-1. Call the same function from the [`onPropertyChanged`]() event handler to reapply the custom property each time its value changes.
+2. Implement a function that connects your custom property with a nested question's property (`changeMiddleNameVisibility` in the code above).
+3. Call this function from the [`onLoaded`]() event handler to apply the custom property when the survey JSON definition is loaded.
+4. Call the same function from the [`onPropertyChanged`]() event handler to reapply the custom property each time its value changes.
 
 [View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname)
 
@@ -210,7 +210,7 @@ Survey.ComponentCollection.Instance.add({
 });
 ```
 
-Users can add the custom question to their survey like they add a built-in question, and they can use it without any knowledge of expressions and triggers. The resulting survey JSON definition looks as follows:
+Users can add a custom question to their survey like they add a built-in question, and they can use it without any knowledge of expressions and triggers. The resulting survey JSON definition looks as follows:
 
 ```json
 {

@@ -79,10 +79,10 @@ export function SurveyCreatorWidget () {
 
 ## Configure JSON Serialization
 
-For now, our model exists only in JavaScript code, but SurveyJS works with JSON objects. You need to configure how your model should be serialized into JSON. To do this, call the `addClass(name, properties, creator, parentName)` method on the `Serializer` object. This method accepts the following arguments:
+Our model exists only in JavaScript code, but SurveyJS works with JSON objects. You need to configure how your model should be serialized into JSON. To do this, call the `addClass(name, properties, creator, parentName)` method on the `Serializer` object. This method accepts the following arguments:
 
 - `name`      
-A string value that you returned from the model's `getType()` method. Used to associate the JSON object with the model's JavaScript class.
+A string value that you returned from the model's `getType()` method. This property is used to associate the JSON object with the model's JavaScript class.
 
 - `properties`      
 An array of objects used to serialize custom model properties into JSON. This array must include all custom model properties. [Our model](#create-a-model) contains two custom properties (`colorPickerType` and `disableAlpha`), and the code below configures their serialization.
@@ -124,7 +124,7 @@ Serializer.addClass(
 
 ## Render the Third-Party Component
 
-Implement a custom class that extends `SurveyQuestionElementBase` and renders the desired UI elements. Model properties are available through props. In the following example, the custom class uses the `type` property to render different color picker types from the [React Color](https://casesandberg.github.io/react-color/) library:
+Implement a custom class that extends `SurveyQuestionElementBase` and renders the desired UI elements. Model properties are available through props. In the following example, a custom class uses the `type` property to render different color picker types from the [React Color](https://casesandberg.github.io/react-color/) library:
 
 ```js
 import { SurveyQuestionElementBase } from "survey-react-ui";
@@ -189,7 +189,7 @@ export class SurveyQuestionColorPicker extends SurveyQuestionElementBase {
 }
 ```
 
-Register your custom class (`SurveyQuestionColorPicker`) as a class that renders the custom question type (`color-picker`):
+Register your custom class (`SurveyQuestionColorPicker`) as a class that renders a custom question type (`color-picker`):
 
 ```js
 import { ..., ReactQuestionFactory } from "survey-react-ui";

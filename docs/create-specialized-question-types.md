@@ -1,6 +1,6 @@
 # Create Specialized Question Types
 
-Built-in question types are versatile and multi-functional, but in some cases, you need a question type with a more specific functionality. For example, you need to pre-populate a [Dropdown](/Documentation/Library?id=questiondropdownmodel) with a country list. You can use a regular Dropdown and customize it directly or you can create a specialized questions type. The first approach is more straightforward, but the second results in a more reusable solution. Let's consider both. 
+Built-in question types are versatile and multi-functional, but in some cases, you need a question type with a more specific functionality. For example, you need to pre-populate a [Dropdown](/Documentation/Library?id=questiondropdownmodel) with a country list. You can use a regular Dropdown and customize it directly or you can create a specialized question type. The first approach is more straightforward, but the second results in a more reusable solution. Let's consider both. 
 
 The first example pre-populates a standard Dropdown question. You can specify the [`choices`](/Documentation/Library?id=questiondropdownmodel#choices) or [`choicesByUrl`](/Documentation/Library?id=questiondropdownmodel#choicesByUrl) property (depending on whether the choices come from a server or not). The following code shows a Country question configured in this manner:
 
@@ -44,7 +44,7 @@ This approach gives you the following advantages:
 
 - A corresponding toolbox item appears automatically.
 - End users cannot break the functionality because the Property Grid hides the `questionJSON` object properties.
-- If you modify the question configuration, the changes automatically apply to every instance of this question.
+- If you modify the question configuration, changes automatically apply to every instance of this question.
 - A cleaner JSON definition:
 
   ```json
