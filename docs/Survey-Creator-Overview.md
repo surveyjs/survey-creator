@@ -1,6 +1,6 @@
 # Survey Creator / Form Builder Overview
 
-Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in the JSON format. This configuration can be later used by the [SurveyJS Library](/Documentation/Library) to display the survey or form in your application.
+Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Library](/Documentation/Library) to display a survey or form in your application.
 
 ![Survey Creator / Form Builder by SurveyJS](images/survey-creator-overview.png)
 
