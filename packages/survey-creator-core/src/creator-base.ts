@@ -717,6 +717,18 @@ export class CreatorBase extends Base
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
+   * Use this event to modify the display text in a logic viewer.
+   *- sender the survey creator object that fires the event.
+   *- options.expression the item expression. 
+   *- options.expressionText expression as display text. It can show question title instead of question name
+   *- options.logicItem the link to the Logic Item object. It has the array of actions and other properties
+   *- options.text the string property that you can change
+   */
+   public onLogicItemDisplayText: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+ /**
    * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
    *- sender the survey creator object that fires the event
    * options object contains the information about certain modifications
@@ -2856,6 +2868,22 @@ export class CreatorBase extends Base
     };
     this.onConditionGetTitle.fire(this, options);
     return options.title;
+  }
+  onLogicGetTitleCallback(
+    expression: string,
+    expressionText: string,
+    text: string,
+    logicItem: any
+  ): string {
+    if(this.onLogicItemDisplayText.isEmpty) return text;
+    var options = {
+      expression: expression,
+      expressionText: expressionText,
+      text: text,
+      logicItem: logicItem
+    };
+    this.onLogicItemDisplayText.fire(this, options);
+    return options.text;
   }
   /**
    * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
