@@ -369,6 +369,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       if (res[i].cellType == "comment") {
         res[i].cellType = "text";
       }
+      if (res[i].cellType == "text") {
+        res[i].renderAs = "contenteditable";
+      }
     }
     return res;
   }

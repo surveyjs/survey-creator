@@ -57,3 +57,37 @@
 .spg-body--empty {
   margin: calcSize(3);
 }
+
+.spg-table-wrapper {
+  //overflow-x: hidden;
+}
+
+.spg-question__header.spg-question__header--location--top {
+  position: sticky;
+  left: 0;
+}
+
+.spg-table__cell.spg-table__cell--actions {
+  position: sticky;
+  background-color: $primary-foreground;
+  &:first-child {
+    left: 0;
+  }
+  &:last-child {
+    width: 100%;
+    right: 0;
+  }
+}B
+
+span.spg-input {
+  display: block;
+}
+
+span.spg-input[placeholder]:empty::before {
+    content: attr(placeholder);
+    color: $foreground-light; 
+}
+
+span.spg-input--disabled[placeholder]:empty::before {
+  color: $foreground-disabled;
+}

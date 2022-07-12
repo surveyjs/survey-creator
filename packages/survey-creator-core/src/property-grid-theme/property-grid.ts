@@ -211,6 +211,7 @@ export var propertyGridCss = {
     headerCell: "spg-table__cell spg-table__cell--header"
   },
   matrixdynamic: {
+    wrapper: "spg-table-wrapper",
     root: "spg-table spg-matrixdynamic",
     cell: "spg-table__cell",
     headerCell: "spg-table__cell spg-table__cell--header",
