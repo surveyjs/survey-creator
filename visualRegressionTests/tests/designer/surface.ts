@@ -364,7 +364,20 @@ test("Matrix dynamic with detail two questions + select", async (t) => {
     .expect(Selector(".svc-question__content--selected").visible).ok();
   await checkElementScreenshot("surface-matrix-detail-two-questions-select.png", Selector(".svc-question__content"), t);
 });
-
+test("Logo image hover", async (t) => {
+  await t.resizeWindow(1920, 1900);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      },
+    ],
+  };
+  await setJSON(json);
+  await t.hover(".svc-logo-image");
+  await checkElementScreenshot("logo-image-hover.png", Selector(".svc-logo-image"), t);
+});
 test("Logo image adorners", async (t) => {
   await t.resizeWindow(1920, 1900);
   const json = {

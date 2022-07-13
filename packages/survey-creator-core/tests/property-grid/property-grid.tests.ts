@@ -449,7 +449,47 @@ test("column[] property editor", (): any => {
   question.columns[1].title = "Column 2";
   expect(columnsQuestion.visibleRows[1].cells[1].value).toEqual("Column 2"); //"the second cell in second row is correct"
 });
-
+test("column[] property editor, store column title if it was entered an equals to name", (): any => {
+  var question = new QuestionMatrixDynamicModel("q1");
+  question.addColumn("col1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  expect(columnsQuestion).toBeTruthy();
+  expect(columnsQuestion.columns).toHaveLength(2);
+  const row = columnsQuestion.visibleRows[0];
+  expect(row.cells[0].value).toEqual("col1");
+  expect(row.cells[1].value).toBeFalsy();
+  let json = question.toJSON();
+  expect(json).toEqual({
+    name: "q1",
+    columns: [{ name: "col1" }]
+  });
+  row.cells[1].value = "col1";
+  json = question.toJSON();
+  expect(json).toEqual({
+    name: "q1",
+    columns: [{ name: "col1", title: "col1" }]
+  });
+});
+test("column title property editor, set placeholder", (): any => {
+  const question = new QuestionMatrixDynamicModel("q1");
+  const column = question.addColumn("col1");
+  const propertyGrid = new PropertyGridModelTester(column);
+  const titlePropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titlePropertyEditor.placeHolder).toEqual("col1");
+  column.name = "Column1";
+  expect(titlePropertyEditor.placeHolder).toEqual("Column1");
+});
+test("column title property editor, set placeholder", (): any => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const titlePropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titlePropertyEditor.placeHolder).toEqual("q1");
+  question.name = "Question1";
+  expect(titlePropertyEditor.placeHolder).toEqual("Question1");
+});
 test("surveypages property editor", () => {
   var survey = new SurveyModel();
   survey.addNewPage("page1");

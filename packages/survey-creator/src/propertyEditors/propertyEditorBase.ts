@@ -322,9 +322,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       !Array.isArray(this.parentList)
     )
       return false;
+    const val = this.koValue();
     for (var i = 0; i < this.parentList.length; i++) {
       if (this.parentList[i] === this.object) continue;
-      if (this.parentList[i][this.property.name] == this.koValue()) return true;
+      const propVal = this.parentList[i][this.property.name];
+      if(typeof propVal === "string" && typeof val === "string"
+      && propVal.toLocaleLowerCase() === val.toLocaleLowerCase()) return true;
+      if (propVal == this.koValue()) return true;
     }
     return false;
   }

@@ -238,6 +238,12 @@ export interface ISurveyCreatorOptions {
     expression: string,
     title: string
   ): string;
+  onLogicGetTitleCallback(
+    expression: string,
+    displayExpression: string,
+    text: string,
+    logicItem: any
+  ): string;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -359,6 +365,12 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): string {
     return title;
   }
+  onLogicGetTitleCallback(
+    expression: string,
+    displayExpression: string,
+    text: string,
+    logicItem: any
+  ): string { return text; }
 }
 
 StylesManager.applyTheme("defaultV2");

@@ -1560,6 +1560,8 @@ QUnit.test("editor base check for unique property value", function (assert) {
   assert.equal(textEditor.hasError(), false, "name is unique #2");
   textEditor.koValue("column4");
   assert.equal(textEditor.hasError(), false, "name is unique #3");
+  textEditor.koValue("Column3");
+  assert.equal(textEditor.hasError(), true, "name is unique #4");
 });
 
 QUnit.test(
