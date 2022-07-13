@@ -2371,7 +2371,7 @@ test("Use maxLength property attribute", () => {
   Serializer.findProperty("question", "name").maxLength = -1;
   Serializer.findProperty("question", "title").maxLength = -1;
 });
-test("We should not have 'Others' category in our objects", () => {
+test.skip("We should not have 'Others' category in our objects", () => {
   const survey = new SurveyModel();
   const page = survey.addNewPage("page1");
   const panel = page.addNewPanel("panel");
