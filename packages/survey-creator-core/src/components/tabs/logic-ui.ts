@@ -289,8 +289,13 @@ export class SurveyLogicUI extends SurveyLogic {
         actions: item.actionsText
       };
     } else {
-      return { rules: item.getDisplayText() };
+      return { rules: this.getLogicItemDisplayText(item) };
     }
+  }
+  private getLogicItemDisplayText(item: SurveyLogicItem): string {
+    const text = item.getDisplayText();
+    if(!this.options) return text;
+    return this.options.onLogicGetTitleCallback(item.expression, item.expressionText, text, item);
   }
   private updateItemsSurveyData() {
     if (!this.itemsSurvey) return;
