@@ -432,7 +432,7 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", async (t)
   await t.dragToElement(DragZoneQuestion1, Question2, {
     offsetX: 5,
     offsetY: 5,
-    destinationOffsetX: 80,
+    destinationOffsetX: -80,
     speed: 0.5
   });
   questionName = await getQuestionNameByIndex(1);
@@ -449,7 +449,7 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", async (t)
   await t.dragToElement(DragZoneQuestion3, Question1, {
     offsetX: 5,
     offsetY: 5,
-    destinationOffsetX: -80,
+    destinationOffsetX: 80,
     speed: 0.5
   });
   questionName = await getQuestionNameByIndex(1);
