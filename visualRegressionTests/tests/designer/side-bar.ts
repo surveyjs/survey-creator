@@ -7,9 +7,9 @@ fixture`${title}`.page`${url}`;
 test("object selector popup", async (t) => {
   await setJSON({ pages: [{ name: "page1" }] });
   await t
-    .click(getPropertyGridCategory(generalGroupName))
     .resizeWindow(750, 700)
     .click(expandButtonSelector)
+    .click(getPropertyGridCategory(generalGroupName))
     .click(objectSelectorButton);
 
   await checkElementScreenshot("side-bar-object-selector.png", propertyGridSelector, t);
