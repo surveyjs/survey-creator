@@ -2398,7 +2398,7 @@ test("We should not have 'Others' category in our objects", () => {
         questionNames.push(props[j].name);
       }
       if (JSON.stringify(questionNames) !== "[\"width\"]") { // for some reasons in composite questions (paneldynamic) we have the width property here but it doesn't appear in PG UI
-        // expect("obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(questionNames)).toBeFalsy();
+        expect("obj: " + objToCheck[i].getType() + ", properties: " + JSON.stringify(questionNames)).toBeFalsy();
       }
     }
   }
