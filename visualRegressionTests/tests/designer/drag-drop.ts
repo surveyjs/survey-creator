@@ -1,14 +1,9 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, checkElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName } from "../../helper";
+import { url, setJSON, checkElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName, patchDragDropToDisableDrop } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-});
-
-const patchDragDropToDisableDrop = ClientFunction(() => {
-  window["creator"].dragDropSurveyElements.drop = () => { };
-  window["creator"].dragDropChoices.drop = () => { };
 });
 
 test("Ghost Survey Element", async (t) => {
