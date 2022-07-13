@@ -473,6 +473,23 @@ test("column[] property editor, store column title if it was entered an equals t
     columns: [{ name: "col1", title: "col1" }]
   });
 });
+test("column title property editor, set placeholder", (): any => {
+  const question = new QuestionMatrixDynamicModel("q1");
+  const column = question.addColumn("col1");
+  const propertyGrid = new PropertyGridModelTester(column);
+  const titlePropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titlePropertyEditor.placeHolder).toEqual("col1");
+  column.name = "Column1";
+  expect(titlePropertyEditor.placeHolder).toEqual("Column1");
+});
+test("column title property editor, set placeholder", (): any => {
+  const question = new QuestionTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const titlePropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titlePropertyEditor.placeHolder).toEqual("q1");
+  question.name = "Question1";
+  expect(titlePropertyEditor.placeHolder).toEqual("Question1");
+});
 test("surveypages property editor", () => {
   var survey = new SurveyModel();
   survey.addNewPage("page1");
