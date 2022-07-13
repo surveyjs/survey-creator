@@ -50,7 +50,6 @@ import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrice
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { PagesController } from "../src/pages-controller";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
-import { IPortableMouseEvent } from "../src/utils/events";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -1334,6 +1333,13 @@ test("isStringEditable", (): any => {
     )
   ).toBeTruthy();
 });
+test("isStringEditable for matrix dynamic", (): any => {
+  const matrix = new QuestionMatrixDynamicModel("q1");
+  matrix.addColumn("col1");
+  matrix.rowCount = 1;
+  expect(isStringEditable(matrix.columns[0].templateQuestion, "")).toBeTruthy();
+  expect(isStringEditable(matrix.visibleRows[0].cells[0].question, "")).toBeFalsy();
+});
 test("Test plug-ins in creator", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
@@ -1963,7 +1969,7 @@ test("Modify property editor settings on event", (): any => {
 test("Modify property editor via property grid survey", (): any => {
   const creator = new CreatorTester();
   creator.onPropertyGridSurveyCreated.add((sender, options) => {
-    if(options.obj.getType() !== "text") return;
+    if (options.obj.getType() !== "text") return;
     const question = options.survey.getQuestionByName("placeHolder");
     question.textUpdateMode = "onTyping";
     question.dataList = ["item1", "item2"];
@@ -2822,30 +2828,6 @@ test("Test options, setting some of them can generate errors", () => {
   const creator = new CreatorTester(options);
   expect(creator.sidebar.visible).toBeTruthy();
 });
-test("onGetElementWrapperComponentName and onGetElementWrapperComponentData events", () => {
-  const creator = new CreatorTester();
-  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
-  const element = creator.survey.getAllQuestions()[0];
-  let count = 0;
-
-  creator.onGetElementWrapperComponentName.add((sender, options) => {
-    expect(options.element).toBe(element);
-    expect(options.reason).toBe("test");
-    expect(options.componentName).toBe("svc-question");
-    count++;
-  });
-  creator.survey.getElementWrapperComponentName(element, "test");
-  expect(count).toBe(1);
-
-  creator.onGetElementWrapperComponentData.add((sender, options) => {
-    expect(options.element).toBe(element);
-    expect(options.reason).toBe("test");
-    expect(options.componentData).toBe(creator);
-    count++;
-  });
-  creator.survey.getElementWrapperComponentData(element, "test");
-  expect(count).toBe(2);
-});
 test("Add and remove question immediately, incorrect selection", (): any => {
   const creator = new CreatorTester();
   creator.onQuestionAdded.add((sender, options) => {
@@ -2853,8 +2835,81 @@ test("Add and remove question immediately, incorrect selection", (): any => {
       options.question.delete();
     }
   });
-  creator.addNewQuestionInPage(() => {});
-  creator.addNewQuestionInPage(() => {});
+  creator.addNewQuestionInPage(() => { });
+  creator.addNewQuestionInPage(() => { });
   expect(creator.survey.currentPage.elements).toHaveLength(1);
   expect(creator.selectedElementName).toEqual("question1");
+});
+test("Convert question type for a question on the last page with the only question", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const newPage = creator.survey.addNewPage("page2");
+  let newQuestion = newPage.addNewQuestion("text", "question2");
+  creator.selectElement(newQuestion);
+  creator.convertCurrentQuestion("comment");
+  expect(creator.survey.pageCount).toEqual(2);
+  expect(creator.survey.pages[1].questions[0].getType()).toEqual("comment");
+  expect(creator.survey.pages[1].questions[0].name).toEqual("question2");
+});
+test("Allow to set survey JSON via text if errors in JSON is not critical", (): any => {
+  const creator = new CreatorTester();
+  creator.text = JSON.stringify({
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text_custom", name: "question2" },
+    ]
+  });
+  expect(creator.activeTab).toEqual("designer");
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+  creator.text = JSON.stringify({
+    elements: [
+      { type: "text", name: "question1" },
+      {
+        type: "matrixdynamic",
+        name: "question2",
+        columns: [
+          { name: "col1", choices: [1, 2, 3] }
+        ]
+      },
+    ]
+  });
+  expect(creator.activeTab).toEqual("designer");
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+});
+test("allowModifyPages=false", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  expect(creator.viewType).toEqual("designer");
+
+  creator.getPlugin("designer").activate();
+  let designer = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.allowModifyPages).toBeTruthy();
+  expect(creator.pageEditMode).toEqual("standard");
+  expect(designer.showNewPage).toBeTruthy();
+
+  let pageModel = creator.survey.pages[0];
+  let pageAdornerModel = new PageAdorner(creator, pageModel);
+  pageAdornerModel.select(pageAdornerModel, { stopPropagation: () => { } } as any);
+  expect(pageAdornerModel.getActionById("delete").visible).toBeTruthy();
+
+  creator = new CreatorTester({ allowModifyPages: false });
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  expect(creator.viewType).toEqual("designer");
+
+  creator.getPlugin("designer").activate();
+  designer = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.allowModifyPages).toBeFalsy();
+  expect(creator.pageEditMode).toEqual("readonly");
+  expect(designer.showNewPage).toBeFalsy();
+
+  pageModel = creator.survey.pages[0];
+  pageAdornerModel = new PageAdorner(creator, pageModel);
+  pageAdornerModel.select(pageAdornerModel, { stopPropagation: () => { } } as any);
+  expect(pageAdornerModel.getActionById("delete").visible).toBeFalsy();
 });

@@ -168,8 +168,8 @@ export var propertyGridCss = {
   },
   dropdown: {
     root: "",
-    small: "spg-row__question--small",
-    control: "spg-input spg-dropdown",
+    small: "spg-row__question--small sd-row__question--small",
+    control: "spg-input spg-dropdown sd-input sd-dropdown",
     selectWrapper: "",
     other: "spg-comment spg-question__other",
     onError: "spg-input--error"
@@ -229,6 +229,7 @@ export var propertyGridCss = {
     dragElementDecorator: "spg-drag-element__svg",
     iconDragElement: "#icon-v2dragelement_16x16",
     iconDrag: "spg-matrixdynamic__drag-element",
+    footer: "",
     dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
     emptyRowsSection: "spg-matrixdynamic__placeholder",

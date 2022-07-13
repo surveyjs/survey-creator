@@ -538,7 +538,7 @@ export class PropertyJSONGenerator {
     var panels: any = {};
     for (var i = 0; i < tabs.length; i++) {
       if (tabs[i].visible === false) continue;
-      panels[tabs[i].name] = this.createPanelProps(tabs[i], i == 0, context);
+      panels[tabs[i].name] = this.createPanelProps(tabs[i], context);
     }
     var json: any = {
       elements: []
@@ -555,11 +555,8 @@ export class PropertyJSONGenerator {
     }
     return json;
   }
-  private createPanelProps(
-    tab: SurveyQuestionEditorTabDefinition,
-    isFirst: boolean, context: string
-  ): any {
-    var panel = this.createPanelJSON(tab.name, tab.title, isFirst);
+  private createPanelProps(tab: SurveyQuestionEditorTabDefinition, context: string): any {
+    var panel = this.createPanelJSON(tab.name, tab.title);
     for (var i = 0; i < tab.properties.length; i++) {
       var propDef = tab.properties[i];
       var propJSON = this.createQuestionJSON(
@@ -584,16 +581,12 @@ export class PropertyJSONGenerator {
     json.titleLocation = "left";
     json.minWidth = "50px";
   }
-  private createPanelJSON(
-    category: string,
-    title: string,
-    isFirstPanel: boolean
-  ): any {
+  private createPanelJSON(category: string, title: string): any {
     return {
       type: "panel",
       name: category,
       title: this.getPanelTitle(category, title),
-      state: isFirstPanel ? "expanded" : "collapsed",
+      state: "collapsed",
       elements: []
     };
   }
@@ -1499,13 +1492,15 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     return prop.type == "question";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    return {
+    const result = {
       type: "dropdown",
-      renderAs: "select",
-      dropdownWidthMode: "contentWidth",
       optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
       choices: this.getChoices(obj, prop, options)
     };
+    if (prop.type == "question") {
+      result["allowClear"] = false;
+    }
+    return result;
   }
   private getChoices(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): Array<any> {
     var survey = EditableObject.getSurvey(obj);

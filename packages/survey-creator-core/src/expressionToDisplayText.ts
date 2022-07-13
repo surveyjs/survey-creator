@@ -19,6 +19,9 @@ export class ExpressionToDisplayText {
     node.setVariables(variables);
     return this.replaceVariables(expression, variables);
   }
+  public toExpression(node: Survey.Operand): string {
+    return this.toDisplayTextCore(node);
+  }
   private toDisplayTextCore(node: Survey.Operand): string {
     this.currentQuestion = null;
     var self = this;
@@ -49,7 +52,7 @@ export class ExpressionToDisplayText {
   }
   private getQuestionText(op: Survey.Variable): string {
     var question = this.getQuestionByName(op.variable);
-    if (!question || !question.title) return undefined;
+    if (!question || !question.title) return op.variable;
     return wrapTextByCurlyBraces(question.title);
   }
   private getDisplayText(op: Survey.Const): string {
@@ -148,6 +151,7 @@ export class ExpressionToDisplayText {
     return expression.replace(wrapTextByCurlyBraces(variable), wrapTextByCurlyBraces(question.title));
   }
   private getQuestionByName(name: string): Survey.Question {
+    if(!this.survey) return null;
     return <Survey.Question>this.survey.getQuestionByValueName(name);
   }
 }

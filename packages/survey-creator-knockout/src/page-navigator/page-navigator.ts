@@ -27,8 +27,8 @@ ko.components.register("svc-page-navigator", {
     createViewModel: (params: any, componentInfo: any) => {
       const model = new PageNavigatorView(params.controller, params.pageEditMode);
       new ImplementorBase(model);
-      const scrollableViewPort = componentInfo.element.parentElement.parentElement;
-      if(params.pageEditMode !== "bypage") {
+      const scrollableViewPort = componentInfo.element.parentElement.parentElement.parentElement;
+      if (params.pageEditMode !== "bypage") {
         scrollableViewPort.onscroll = function (this: GlobalEventHandlers, ev: Event) {
           return model.onContainerScroll(ev.currentTarget as HTMLDivElement);
         };

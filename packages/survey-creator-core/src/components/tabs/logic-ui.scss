@@ -230,3 +230,12 @@
     margin: 0;
   }
 }
+
+.sl-dropdown {
+  max-width: 45vw;
+}
+.sl-dropdown__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -43,10 +43,13 @@
     .sd-title.sd-container-modern__title {
       padding: calcSize(2);
       flex-direction: column-reverse;
+      align-items: flex-start;
 
       .svc-logo-image {
-        margin-bottom: calcSize(2);
         margin-top: 0;
+      }
+      .svc-logo-image-placeholder {
+        margin-left: calcSize(-2);
       }
 
       h3 {

@@ -7,7 +7,7 @@
 <img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/surveyjs/survey-creator.svg">
 </a>
 
-Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in the JSON format. This configuration can be later used by the [SurveyJS Library](https://github.com/surveyjs/survey-library) to display the survey or form in your application.
+Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Library](https://github.com/surveyjs/survey-library) to display a survey or form in your application.
 
 ![Survey Creator / Form Builder by SurveyJS](docs/images/survey-creator-overview.png)
 

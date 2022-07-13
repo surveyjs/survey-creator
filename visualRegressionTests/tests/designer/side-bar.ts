@@ -1,4 +1,4 @@
-import { url, checkElementScreenshot, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON } from "../../helper";
+import { url, checkElementScreenshot, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, generalGroupName, getPropertyGridCategory } from "../../helper";
 
 const title = "Sidebar Screenshot";
 
@@ -9,6 +9,7 @@ test("object selector popup", async (t) => {
   await t
     .resizeWindow(750, 700)
     .click(expandButtonSelector)
+    .click(getPropertyGridCategory(generalGroupName))
     .click(objectSelectorButton);
 
   await checkElementScreenshot("side-bar-object-selector.png", propertyGridSelector, t);

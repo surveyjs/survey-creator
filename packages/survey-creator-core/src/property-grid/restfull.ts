@@ -20,8 +20,8 @@ var json = {
   }
 };
 
-if(!ComponentCollection.Instance.getCustomQuestionByName(json.name)) {
-  ComponentCollection.Instance.add(json);
+if (!ComponentCollection.Instance.getCustomQuestionByName(json.name)) {
+  ComponentCollection.Instance.add(json as any);
 }
 
 export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuestion {

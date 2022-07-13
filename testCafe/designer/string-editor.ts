@@ -1,4 +1,4 @@
-import { setJSON, url } from "../helper";
+import { generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "String Editor";
 
@@ -84,6 +84,7 @@ test("Edit question title", async (t) => {
   const prefix = "prefix";
 
   await t
+    .click(getPropertyGridCategory(generalGroupName))
     .click(svStringSelector)
     .typeText(svStringSelector, prefix, { caretPos: 0 })
     .pressKey("esc")

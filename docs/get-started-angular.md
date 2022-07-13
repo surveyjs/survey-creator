@@ -56,12 +56,12 @@ Note that although standalone surveys support [multiple predefined themes](https
 [View Customize Theme Using CSS Variables example](https://surveyjs.io/Examples/Survey-Creator?id=editor-custom-theme-css-vars)
 ## Configure Survey Creator
 
-To configure the Survey Creator component, specify [its properties](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator) in a configuration object. In this tutorial, the object enables the following properties:
+To configure the Survey Creator component, specify [its properties](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions) in a configuration object. In this tutorial, the object enables the following properties:
 
-- [`showLogicTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showLogicTab)        
+- [`showLogicTab`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#showLogicTab)        
 Displays the Logic tab in the tab panel.
 
-- [`isAutoSave`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#isAutoSave)        
+- [`isAutoSave`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#isAutoSave)        
 Automatically saves the survey definition JSON on every change.
 
 ```js

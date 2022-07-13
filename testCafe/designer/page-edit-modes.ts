@@ -36,10 +36,7 @@ test("Continious (ordinary) page mode", async (t) => {
     .expect(Selector(".svc-page-navigator-item-content").withText("page2").visible).ok();
 });
 
-fixture`${title}`.page`${urlByPage}`.beforeEach(async (t) => {
-});
-
-test("By page edit mode", async (t) => {
+test.page(urlByPage)("By page edit mode", async (t) => {
   await t
     .maximizeWindow()
 

@@ -1,12 +1,5 @@
-import {
-  Base,
-  IAction,
-  ItemValue,
-  JsonObjectProperty,
-  MatrixDropdownColumn,
-  Question,
-  SurveyModel
-} from "survey-core";
+import { StylesManager, Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, Question, SurveyModel } from "survey-core";
+
 /**
  * List available question convert modes
  */
@@ -57,7 +50,15 @@ export var settings = {
     visibleActions: [],
     logicItemTitleMaxChars: 50,
     openBracket: "{",
-    closeBracket: "}"
+    closeBracket: "}",
+    /**
+     * Set these properties to false if you don't want to update expressions on changing question and column names and on changing choices values
+     */
+    updateExpressionsOnChanging: {
+      questionName: true,
+      columnName: true,
+      choiceValue: true
+    }
   },
   /**
    * Determines which types of questions the conversion will be available for.
@@ -237,6 +238,12 @@ export interface ISurveyCreatorOptions {
     expression: string,
     title: string
   ): string;
+  onLogicGetTitleCallback(
+    expression: string,
+    displayExpression: string,
+    text: string,
+    logicItem: any
+  ): string;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -266,7 +273,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   onPropertyGridSurveyCreatedCallback(
     object: any,
     survey: SurveyModel
-  ) {}
+  ) { }
   onPropertyEditorCreatedCallback(
     object: any,
     property: JsonObjectProperty,
@@ -358,4 +365,12 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): string {
     return title;
   }
+  onLogicGetTitleCallback(
+    expression: string,
+    displayExpression: string,
+    text: string,
+    logicItem: any
+  ): string { return text; }
 }
+
+StylesManager.applyTheme("defaultV2");

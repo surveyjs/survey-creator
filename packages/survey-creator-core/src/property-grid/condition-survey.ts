@@ -326,8 +326,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
             {
               name: "conjunction",
               type: "dropdown",
-              renderAs: "select",
-              dropdownWidthMode: "contentWidth",
               titleLocation: "hidden",
               showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
@@ -339,19 +337,16 @@ export class ConditionEditor extends PropertyEditorSetupValue {
             {
               name: "questionName",
               type: "dropdown",
-              renderAs: "select",
-              dropdownWidthMode: "contentWidth",
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
+              showOptionsCaption: false,
               startWithNewLine: false,
               isRequired: true
             },
             {
               name: "operator",
               type: "dropdown",
-              renderAs: "select",
               denySearch: true,
-              dropdownWidthMode: "contentWidth",
               titleLocation: "hidden",
               startWithNewLine: false,
               showOptionsCaption: false,
@@ -833,17 +828,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
 
     if (options.question.name === "conjunction") {
       options.question.allowRootStyle = false;
-      options.cssClasses.control += "svc-logic-operator svc-logic-operator--conjunction ";
+      options.cssClasses.control += " svc-logic-operator svc-logic-operator--conjunction ";
     }
     if (options.question.name === "questionName") {
       options.question.allowRootStyle = false;
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
+      options.cssClasses.control += " svc-logic-operator svc-logic-operator--question";
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
     if (options.question.name === "operator") {
       options.question.allowRootStyle = false;
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--operator";
+      options.cssClasses.control += " svc-logic-operator svc-logic-operator--operator";
     }
     if (options.question.name === "removeAction") {
       options.question.allowRootStyle = false;

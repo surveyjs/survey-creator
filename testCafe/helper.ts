@@ -43,6 +43,8 @@ export const getItemValueByIndex = ClientFunction((questionName, index) => {
 export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
+export const generalGroupName = "General";
+export const logicGroupName = "Logic";
 
 export const creatorContentSelector = Selector(".svc-creator__content-holder");
 
@@ -67,7 +69,7 @@ export const logicQuestionSelector = Selector(".svc-logic-operator.svc-logic-ope
 export const logicOperatorSelector = Selector(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filterVisible();
 export const logicActionSelector = Selector(".svc-logic-operator--action").filterVisible();
 export const logicQuestionValueSelector = Selector(".svc-logic-question-value").filterVisible();
-export const logicDropdownValueSelector = Selector("select.sd-dropdown").filterVisible();
+export const logicDropdownValueSelector = Selector(".sd-input.sd-dropdown .sd-dropdown__value").filterVisible();
 export const logicOperatorConjuction = Selector(".svc-logic-operator.svc-logic-operator--conjunction").filterVisible();
 export const logicActionTriggerEditorElement = Selector(".svc-logic_trigger-editor").filterVisible();
 export const logicActionTriggerQuestionsElement = Selector(".svc-logic_trigger-questions").filterVisible();

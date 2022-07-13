@@ -31,21 +31,9 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
   render(): JSX.Element {
     let content: JSX.Element = null;
     if (this.model.survey.locLogo.renderedHtml) {
-      content = <>
+      content = attachKey2click(<div className={ this.model.containerCss } onClick={() => this.model.chooseFile(this.model)}>
         <LogoImage data={this.props.data.survey}></LogoImage>
-        {this.model.allowEdit ? <div className="svc-image-item-value-controls">
-          {attachKey2click(
-            <span className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" onClick={() => this.model.chooseFile(this.model)}>
-              <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
-            </span>
-          )}
-          {attachKey2click(
-            <span className="svc-image-item-value-controls__button svc-image-item-value-controls__remove" onClick={() => this.model.remove(this.model)}>
-              <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
-            </span>
-          )}
-        </div> : null}
-      </>;
+      </div>);
     }
     else {
       content = this.model.allowEdit ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}><svg><use xlinkHref="#icon-logo"></use></svg></div>) : null;

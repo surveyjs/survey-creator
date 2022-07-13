@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, checkElementScreenshot, explicitErrorHandler } from "../../helper";
+import { url, setJSON, checkElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -129,7 +129,7 @@ test("Choices: Ranking", async (t) => {
   await setJSON(json);
   await patchDragDropToDisableDrop();
 
-  const QRoot = Selector(".svc-question__adorner").filterVisible();
+  const QRoot = Selector(".svc-question__adorner .sd-question__content").filterVisible();
   const FirstItem = QRoot.find(".svc-item-value-wrapper").nth(0);
 
   await checkElementScreenshot("drag-drop-item-values-ranking.png", QRoot, t);
@@ -169,11 +169,10 @@ test("Matrix: Property Grid: Choices", async (t) => {
   };
   await setJSON(json);
 
-  const Question1 = Selector("[data-name=\"question1\"]");
-  await t.click(Question1, { speed: 0.5 });
-
-  const ChoicesTab = Selector("h4").withExactText("Choices");
-  await t.click(ChoicesTab);
+  await t
+    .click(Selector("[data-name=\"question1\"]"), { speed: 0.5 })
+    .click(getPropertyGridCategory(generalGroupName))
+    .click(getPropertyGridCategory("Choices"));
 
   await patchMatrixDragDropToDisableDrop();
 

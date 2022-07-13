@@ -47,17 +47,25 @@
       "Title": "Integration with Backend"
     },
     {
-      "Name": "advanced-topics",
-      "Title": "Advanced Topics",
+      "Name": "customize-question-types",
+      "Title": "Customize Question Types",
       "Items": [
         {
-          "Name": "Create-Custom-Widget",
-          "Title": "Create a Custom Widget"
+          "Name": "create-specialized-question-types",
+          "Title": "Create Specialized Question Types"
         },
         {
-          "Name": "Build-Component-Questions",
-          "Title": "Create a Custom Question Type"
-        }
+          "Name": "create-composite-question-types",
+          "Title": "Create Composite Question Types"
+        },
+        {
+          "Name": "Create-Custom-Widget",
+          "Title": "Create Custom Widgets"
+        },
+        {
+          "Name": "third-party-component-integration-react",
+          "Title": "Integrate Third-Party React Components"
+        },
       ]
     },
     {
