@@ -107,10 +107,10 @@ In the survey JSON definition, the custom `showMiddleName` property looks as fol
 
 The steps below summarize how to add a custom property to your composite question:
 
-1. Implement the [`onInit`](https://surveyjs.io/Documentation/Survey-Creator?id=ICustomQuestionTypeConfiguration#onInit) function to add a custom property to your question.
+1. Implement the [`onInit`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onInit) function to add a custom property to your question.
 2. Implement a function that connects your custom property with a nested question's property (`changeMiddleNameVisibility` in the code above).
-3. Call this function from the [`onLoaded`](https://surveyjs.io/Documentation/Survey-Creator?id=ICustomQuestionTypeConfiguration#onLoaded) function to apply the custom property when the survey JSON definition is loaded.
-4. Call the same function from the [`onPropertyChanged`](https://surveyjs.io/Documentation/Survey-Creator?id=ICustomQuestionTypeConfiguration#onPropertyChanged) function to reapply the custom property each time its value changes.
+3. Call this function from the [`onLoaded`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onLoaded) function to apply the custom property when the survey JSON definition is loaded.
+4. Call the same function from the [`onPropertyChanged`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onPropertyChanged) function to reapply the custom property each time its value changes.
 
 [View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname)
 
@@ -165,7 +165,7 @@ The following code shows how you can use expressions and triggers to implement t
 }
 ```
 
-Survey Creator users can implement the same UI and logic, but this requires time and basic understanding of expressions and triggers. To help the users with this task, you can create a custom composite question type that already implements this UI and logic. The code below demonstrates this composite question type configuration. Note that the [`enableIf`](/Documentation/Library?id=questioncommentmodel#enableIf) expression uses the `composite` prefix to access a nested question. Instead of triggers, composite questions use the [`onCreated`](https://surveyjs.io/Documentation/Survey-Creator?id=ICustomQuestionTypeConfiguration#onCreated) function to implement the trigger logic.
+Survey Creator users can implement the same UI and logic, but this requires time and basic understanding of expressions and triggers. To help the users with this task, you can create a custom composite question type that already implements this UI and logic. The code below demonstrates this composite question type configuration. Note that the [`enableIf`](/Documentation/Library?id=questioncommentmodel#enableIf) expression uses the `composite` prefix to access a nested question. Instead of triggers, composite questions use the [`onCreated`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onCreated) function to implement the trigger logic.
 
 ```js
 Survey.ComponentCollection.Instance.add({
@@ -223,7 +223,7 @@ Users can add a custom question to their survey like they add a built-in questio
 
 ## Override Base Question Properties
 
-Composite questions inherit properties from their base question type ([`Question`](/Documentation/Library?id=Question)). To override a base property, add it to your composite question and specify a new configuration for it. Call the `addProperty(questionType, propertySettings)` method on the `Survey.Serializer` object. You can call it in the [`onInit`](https://surveyjs.io/Documentation/Survey-Creator?id=ICustomQuestionTypeConfiguration#onInit) function within the composite question configuration object.
+Composite questions inherit properties from their base question type ([`Question`](/Documentation/Library?id=Question)). To override a base property, add it to your composite question and specify a new configuration for it. Call the `addProperty(questionType, propertySettings)` method on the `Survey.Serializer` object. You can call it in the [`onInit`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onInit) function within the composite question configuration object.
 
 The following code shows how to override base question properties. This code hides the properties from the Property Grid (`visible: false`) and excludes them from serialization to JSON. The [`titleLocation`](/Documentation/Library?id=Question#titleLocation) property also gets a new default value.
 
