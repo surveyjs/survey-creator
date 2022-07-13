@@ -717,64 +717,67 @@ export class CreatorBase extends Base
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * Use this event to modify the display text in a logic viewer.
-   *- sender the survey creator object that fires the event.
-   *- options.expression the item expression. 
-   *- options.expressionText expression as display text. It can show question title instead of question name
-   *- options.logicItem the link to the Logic Item object. It has the array of actions and other properties
-   *- options.text the string property that you can change
+   * Use this event to modify the display text of a logic item in the Logic tab.
+   * 
+   * The event handler accepts the following arguments:
+   * 
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.expression` - A logical expression associated with the logic item. 
+   * - `options.expressionText` - The same expression in a user-friendly format. It may contain question titles instead of question names.
+   * - `options.logicItem` - A logic item object. Contains an array of actions and other properties.
+   * - `options.text` - The expression and actions in a user-friendly format. Redefine this property if you want to change the display text.
    */
-   public onLogicItemDisplayText: Survey.Event<
-   (sender: CreatorBase, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
- /**
-   * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
-   *- sender the survey creator object that fires the event
-   * options object contains the information about certain modifications
-   *- options.type contains string constant describing certain modification
-   * Available values:
-   *
-   *- options.type: "ADDED_FROM_TOOLBOX"
-   *- options.question: newly added question
-   *
-   *- options.type: "PAGE_ADDED"
-   *- options.newValue: newly created page
-   *
-   *- options.type: "PAGE_MOVED"
-   *- options.page: page has been moved
-   *- options.indexFrom: pevious index
-   *- options.indexTo: new index
-   *
-   *- options.type: "QUESTION_CONVERTED"
-   *- options.className: the converted class name
-   *- options.oldValue: pevious object
-   *- options.newValue: the new object, converted from oldVale to the given class name
-   *
-   *- options.type: "QUESTION_CHANGED_BY_EDITOR"
-   *- options.question: question has been edited in the popup question editor
-   *
-   *- options.type: "PROPERTY_CHANGED"
-   *- options.name: the name of the property has been changed
-   *- options.target: the object containing the changed property
-   *- options.oldValue: the previous value of the changed property
-   *- options.newValue: the new value of the changed property
-   *
-   *- options.type: "OBJECT_DELETED"
-   *- options.target: deleted object
-   *
-   *- options.type: "VIEW_TYPE_CHANGED"
-   *- options.newType: new type of the creator view: editor or designer
-   *
-   *- options.type: "DO_DROP"
-   *- options.page: the page of the drap/drop operation
-   *- options.source: the source dragged object
-   *- options.target: the drop target
-   *- options.newElement: a new element. It is defined if a user drops question or panel from the toolbox
-   *
-   *- options.type: "TRANSLATIONS_CHANGED"
-   *- options.type: "JSON_EDITOR"
-   */
+  public onLogicItemDisplayText: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+    * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
+    *- sender the survey creator object that fires the event
+    * options object contains the information about certain modifications
+    *- options.type contains string constant describing certain modification
+    * Available values:
+    *
+    *- options.type: "ADDED_FROM_TOOLBOX"
+    *- options.question: newly added question
+    *
+    *- options.type: "PAGE_ADDED"
+    *- options.newValue: newly created page
+    *
+    *- options.type: "PAGE_MOVED"
+    *- options.page: page has been moved
+    *- options.indexFrom: pevious index
+    *- options.indexTo: new index
+    *
+    *- options.type: "QUESTION_CONVERTED"
+    *- options.className: the converted class name
+    *- options.oldValue: pevious object
+    *- options.newValue: the new object, converted from oldVale to the given class name
+    *
+    *- options.type: "QUESTION_CHANGED_BY_EDITOR"
+    *- options.question: question has been edited in the popup question editor
+    *
+    *- options.type: "PROPERTY_CHANGED"
+    *- options.name: the name of the property has been changed
+    *- options.target: the object containing the changed property
+    *- options.oldValue: the previous value of the changed property
+    *- options.newValue: the new value of the changed property
+    *
+    *- options.type: "OBJECT_DELETED"
+    *- options.target: deleted object
+    *
+    *- options.type: "VIEW_TYPE_CHANGED"
+    *- options.newType: new type of the creator view: editor or designer
+    *
+    *- options.type: "DO_DROP"
+    *- options.page: the page of the drap/drop operation
+    *- options.source: the source dragged object
+    *- options.target: the drop target
+    *- options.newElement: a new element. It is defined if a user drops question or panel from the toolbox
+    *
+    *- options.type: "TRANSLATIONS_CHANGED"
+    *- options.type: "JSON_EDITOR"
+    */
   public onModified: Survey.Event<
     (sender: CreatorBase, options: any) => any,
     any
@@ -2875,7 +2878,7 @@ export class CreatorBase extends Base
     text: string,
     logicItem: any
   ): string {
-    if(this.onLogicItemDisplayText.isEmpty) return text;
+    if (this.onLogicItemDisplayText.isEmpty) return text;
     var options = {
       expression: expression,
       expressionText: expressionText,
