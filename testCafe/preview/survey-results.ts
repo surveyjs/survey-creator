@@ -50,7 +50,7 @@ test("Test survey results table expand/collapse", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .click(Selector(".sd-navigation__complete-btn"))
-    .expect(Selector("h3").withText("Thank you for completing the survey!").visible).ok();
+    .expect(Selector("h3").withText("Thank you for completing the survey").visible).ok();
 
   const tableRows = Selector(".svd-test-results__table table tbody tr");
 
