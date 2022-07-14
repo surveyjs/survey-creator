@@ -6,17 +6,17 @@
   margin: auto;
   margin-bottom: calcSize(5);
   background-color: $background;
-  box-shadow: 0px 8px 16px $shadow-medium;
-  border-radius: 10px;
+  box-shadow: 0px 1px 2px $shadow-inner;
+  border-radius: 4px;
 
   .svd-test-results__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: calcSize(1) calcSize(4);
+    padding: calcSize(2) calcSize(3);
     font-size: calcSize(2);
     color: $foreground-light;
-    border-bottom: 2px solid $background-dim;
+    border-bottom: 2px solid $border-light;
 
     .svd-test-results__header-text {
       margin: 0;
@@ -71,7 +71,7 @@
         color: $foreground-light;
 
         &:nth-child(1) {
-          padding-left: calcSize(4);
+          padding-left: calcSize(3);
         }
       }
 
@@ -79,7 +79,7 @@
         padding: calcSize(1) calcSize(1);
         max-width: calcSize(50);
         overflow: auto;
-        border-top: 2px solid $background-dim;
+        border-top: 2px solid $border-light;
         user-select: text;
 
         &:nth-child(1) {
@@ -89,7 +89,7 @@
         }
         &:nth-child(2) {
           width: 50%;
-          padding-right: calcSize(4);
+          padding-right: calcSize(3);
         }
       }
 

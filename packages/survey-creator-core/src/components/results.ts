@@ -43,10 +43,10 @@ export class SurveyResultsItemModel extends Base {
 
   private markerWidth: number = 16
   public get markerMargin(): string {
-    return (1.75 + this.lvl) * this.markerWidth + "px";
+    return (1.5 + this.lvl) * this.markerWidth + "px";
   }
   public get textMargin(): string {
-    return (3 + this.lvl) * this.markerWidth + "px";
+    return (2.75 + this.lvl) * this.markerWidth + "px";
   }
 }
 

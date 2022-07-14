@@ -288,13 +288,13 @@ test("Test string editor inplaceEditForValues", (): any => {
   itemValue = q0.choices[0];
   var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
   expect(itemValue.text).toEqual("item1");
-  seChoice.onInput({ target: { innerText: "newItem", innerHTML: "newItem" } });
+  seChoice.onBlur({ target: { innerText: "newItem", innerHTML: "newItem" } });
   expect(itemValue.locText.text).toEqual("newItem");
   expect(itemValue.value).toEqual("item1");
   expect(itemValue.text).toEqual("newItem");
 
   creator.inplaceEditForValues = true;
-  seChoice.onInput({ target: { innerText: "newItemValue", innerHTML: "newItemValue" } });
+  seChoice.onBlur({ target: { innerText: "newItemValue", innerHTML: "newItemValue" } });
   expect(itemValue.locText.text).toEqual("newItem");
   expect(itemValue.value).toEqual("newItemValue");
   expect(itemValue.text).toEqual("newItem");
