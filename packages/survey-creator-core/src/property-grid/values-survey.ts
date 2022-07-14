@@ -25,12 +25,10 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
   protected getQuestionJSON(): any {
     var json = this.editQuestion.toJSON();
     json.name = "question";
-    json.title = editorLocalization.getString("pe.defaultValue");
     json.type = this.editQuestion.getType();
     if (json.type == "expression") {
       json.type = "text";
     }
-    json.titleLocation = "hidden";
     if (!!json.cellType && json.type == "matrixdropdowncolumn") {
       json.type = json.cellType;
       delete json["cellType"];
