@@ -112,7 +112,7 @@ export var enStrings = {
     //delSelObject: "Delete selected object",
     //editSelObject: "Edit selected object",
     correctJSON: "Please correct JSON.",
-    surveyResults: "Survey Result: ",
+    surveyResults: "Survey Results ",
     surveyResultsTable: "As Table",
     surveyResultsJson: "As JSON",
     resultsTitle: "Question Title",

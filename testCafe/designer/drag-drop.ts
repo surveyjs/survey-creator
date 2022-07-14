@@ -1,4 +1,4 @@
-import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex } from "../helper";
+import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
@@ -432,7 +432,7 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", async (t)
   await t.dragToElement(DragZoneQuestion1, Question2, {
     offsetX: 5,
     offsetY: 5,
-    destinationOffsetX: 80,
+    destinationOffsetX: -80,
     speed: 0.5
   });
   questionName = await getQuestionNameByIndex(1);
@@ -449,7 +449,7 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", async (t)
   await t.dragToElement(DragZoneQuestion3, Question1, {
     offsetX: 5,
     offsetY: 5,
-    destinationOffsetX: -80,
+    destinationOffsetX: 80,
     speed: 0.5
   });
   questionName = await getQuestionNameByIndex(1);
@@ -665,6 +665,45 @@ test("Drag Drop ItemValue (choices)", async (t) => {
   });
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
+});
+
+test("Drag Drop ItemValue (choices): not-allowed cursor", async (t) => {
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "radiogroup",
+            name: "question1",
+            choices: ["item1", "item2"]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+  const Question1 = Selector("[data-name=\"question1\"]");
+  const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
+  const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
+
+  const DnDShortcutControls = Selector("body > div > [data-sv-drop-target-item-value='item2']").find(".svc-item-value-controls__button");
+
+  await patchDragDropToDisableDrop();
+
+  await t
+    .click(Question1, { speed: 0.5 })
+    .hover(Item2).hover(DragZoneItem2)
+
+    .dragToElement(DragZoneItem2, newGhostPagePage, {
+      offsetX: 5,
+      offsetY: 5,
+      speed: 0.1
+    });
+
+  await t.expect(DnDShortcutControls.getStyleProperty("cursor")).eql("not-allowed");
 });
 
 test("Drag Drop Ranking (choices)", async (t) => {

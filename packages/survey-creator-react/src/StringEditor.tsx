@@ -67,8 +67,11 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     this.svStringEditorRef.current.spellcheck = false;
     this.locString["__isEditing"] = false;
     this.justFocused = false;
-    this.baseModel.onInput(event.nativeEvent);
+    this.baseModel.onBlur(event.nativeEvent);
     return this.baseModel.errorText;
+  };
+  private onInput = (event: any) => {
+    this.baseModel.onInput(event.nativeEvent);
   };
   private justFocused = false;
   private onFocus = (event: any) => {
@@ -137,6 +140,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           suppressContentEditableWarning={true}
           // style={this.style}
           onBlur={this.onBlur}
+          onInput={this.onInput}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onKeyUp={this.onKeyUp}

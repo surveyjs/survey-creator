@@ -1839,10 +1839,10 @@ test("SurveyPropertyDefaultValueEditor json properties filtering", () => {
   expect(json.minWidth).toBeFalsy();
   expect(json.maxWidth).toBeFalsy();
   expect(json.cellType).toBeFalsy();
-  expect(json.title).toEqual(editorLocalization.getString("pe.defaultValue"));
+  expect(json.title).toEqual("my title");
   expect(json.readOnly).toBeFalsy();
   expect(defaultValueEditor.question.getType()).toEqual("text");
-  expect(json.titleLocation).toEqual("hidden");
+  expect(json.titleLocation).toEqual(undefined);
 });
 
 test("SurveyPropertyDefaultValueEditor json expression converted to text", () => {

@@ -512,6 +512,32 @@ test("SurveyLogicUI: Test logicItemsSurvey, data content on editing", () => {
   rows = itemsQuestion.visibleRows;
   expect(rows[0].cells[0].value).toEqual("If 'q1' == 3, make question 'q2' visible, make question 'q3' visible");
 });
+test("SurveyLogicUI: Test creator onLogicItemDisplayText event", () => {
+  const creator = new CreatorTester({ showTitlesInExpressions: true });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: "Question 1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" }
+    ]
+  };
+  creator.onLogicItemDisplayText.add((sender, options) => {
+    let text = options.expressionText;
+    text = text.replace(new RegExp("({|})", "gm"), "'");
+    options.text = text;
+  });
+  const logic = new SurveyLogicUI(creator.survey, creator);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(logic.itemsSurvey.getQuestionByName("items"));
+  var rows = itemsQuestion.visibleRows;
+  expect(rows[0].cells[0].value).toEqual("'Question 1' == 1");
+  logic.editItem(logic.items[0]);
+  logic.expressionEditor.text = "{q1}=3";
+  logic.saveEditableItem();
+  rows = itemsQuestion.visibleRows;
+  expect(rows[0].cells[0].value).toEqual("'Question 1' == 3");
+});
 
 test("SurveyLogicUI: Test logicItemEditor", () => {
   var survey = new SurveyModel({

@@ -1,14 +1,9 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, checkElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName } from "../../helper";
+import { url, setJSON, checkElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName, patchDragDropToDisableDrop } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-});
-
-const patchDragDropToDisableDrop = ClientFunction(() => {
-  window["creator"].dragDropSurveyElements.drop = () => { };
-  window["creator"].dragDropChoices.drop = () => { };
 });
 
 test("Ghost Survey Element", async (t) => {
@@ -129,7 +124,7 @@ test("Choices: Ranking", async (t) => {
   await setJSON(json);
   await patchDragDropToDisableDrop();
 
-  const QRoot = Selector(".svc-question__adorner").filterVisible();
+  const QRoot = Selector(".svc-question__adorner .sd-question__content").filterVisible();
   const FirstItem = QRoot.find(".svc-item-value-wrapper").nth(0);
 
   await checkElementScreenshot("drag-drop-item-values-ranking.png", QRoot, t);
@@ -245,4 +240,45 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
     .wait(1000);
 
   await checkElementScreenshot("drag-drop-image-picker-invalid-drop-area.png", Selector(GiraffeItem), t);
+});
+
+// https://github.com/surveyjs/survey-creator/issues/3234
+test("Drag Drop to Multiline from Toolbox", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(2560, 1440);
+
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "name": "question2",
+            "startWithNewLine": false
+          },
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+  const Question2 = Selector("[data-name=\"question2\"]");
+  const Page1 = Selector("[data-sv-drop-target-survey-element='page1']");
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, Question2, { speed: 0.5, destinationOffsetX: -1 });
+
+  await checkElementScreenshot("drag-drop-to-multiline-from-toolbox.png", Page1, t);
 });
