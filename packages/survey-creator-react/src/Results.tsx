@@ -86,7 +86,7 @@ export class SurveyResults extends CreatorModelElement<
   }
   static renderRows(data: Array<any>): Array<JSX.Element> {
     const rows = [];
-    for(var i = 0; i < data.length; i ++) {
+    for (var i = 0; i < data.length; i++) {
       rows.push(<SurveyResultsByRow key={i + 1} row={data[i]} />);
     }
     return rows;
