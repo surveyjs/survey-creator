@@ -241,3 +241,44 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
 
   await checkElementScreenshot("drag-drop-image-picker-invalid-drop-area.png", Selector(GiraffeItem), t);
 });
+
+// https://github.com/surveyjs/survey-creator/issues/3234
+test("Drag Drop to Multiline from Toolbox", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(2560, 1440);
+
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "name": "question2",
+            "startWithNewLine": false
+          },
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+  const Question2 = Selector("[data-name=\"question2\"]");
+  const Page1 = Selector("[data-sv-drop-target-survey-element='page1']");
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, Question2, { speed: 0.5, destinationOffsetX: -1 });
+
+  await checkElementScreenshot("drag-drop-to-multiline-from-toolbox.png", Page1, t);
+});
