@@ -147,6 +147,46 @@ test("Page and question borders", async (t) => {
   await checkElementScreenshot("page-title-click.png", designerTabContent, t);
 
 });
+
+test("Question borders in panels", async (t) => {
+  await t.resizeWindow(1767, 1500);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "panel",
+                "name": "panel2",
+                "elements": [
+                  {
+                    "type": "text",
+                    "name": "question7"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await ClientFunction(() => {
+    (<any>window).creator.toolbox.isCompact = true;
+  })();
+
+  const qContent = Selector("[data-name=question7]");
+  const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+  await t.hover(qContent, { offsetX: 5, offsetY: 5 }).wait(300);
+  await checkElementScreenshot("question-panel-content-hover.png", pageContent, t);
+});
+
 /*
 test("Check question width and position", async (t) => {
   await t.resizeWindow(1920, 1080);

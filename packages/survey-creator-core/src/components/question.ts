@@ -305,8 +305,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
   }
   protected duplicate() {
-    var newElement = this.creator.fastCopyQuestion(this.surveyElement);
-    this.creator.selectElement(newElement);
+    setTimeout(()=>{
+      var newElement = this.creator.fastCopyQuestion(this.surveyElement);
+      this.creator.selectElement(newElement);
+    }, 1);
   }
   addNewQuestion(): void {
     this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,

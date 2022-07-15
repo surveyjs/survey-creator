@@ -104,10 +104,10 @@ svc-question {
 }
 
 .svc-creator .svc-page .svc-question__content--selected:not(.svc-question__content--dragged),
-.svc-creator .svc-page .svc-question__content:hover:not(.svc-question__content--dragged),
-.svc-creator .svc-page .svc-hovered>.svc-question__content--selected:not(.svc-question__content--dragged) {
-  box-shadow: 0 0 0 2px $secondary;
-
+.svc-creator .svc-page .svc-hovered>.svc-question__content:not(.svc-question__content--dragged) {
+  &.svc-question__content--selected {
+    box-shadow: 0 0 0 2px $secondary;
+  }
   &>.svc-question__content-actions {
     display: block;
   }
