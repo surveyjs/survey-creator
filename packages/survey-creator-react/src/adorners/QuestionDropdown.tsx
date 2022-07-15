@@ -1,5 +1,6 @@
 import React from "react";
-import { ItemValue, QuestionSelectBase, SurveyModel } from "survey-core";
+import { QuestionDropdownAdornerViewModel } from "survey-creator-core";
+import { ItemValue, QuestionDropdownModel, QuestionSelectBase, SurveyModel } from "survey-core";
 import { ReactElementFactory, ReactSurveyElementsWrapper } from "survey-react-ui";
 import {
   QuestionAdornerComponent,
@@ -7,36 +8,61 @@ import {
 } from "./Question";
 
 export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
+  constructor(props: QuestionAdornerComponentProps) {
+    super(props);
+  }
+  protected createQuestionViewModel(): QuestionDropdownAdornerViewModel {
+    return new QuestionDropdownAdornerViewModel(
+      this.props.componentData,
+      this.props.question as QuestionDropdownModel,
+      null
+    );
+  }
+  public get dropdownModel(): QuestionDropdownAdornerViewModel {
+    return this.model as QuestionDropdownAdornerViewModel;
+  }
+  public get question(): QuestionSelectBase {
+    return this.dropdownModel.question as QuestionSelectBase;
+  }
+
   renderElementPlaceholder(): JSX.Element {
-    const question = this.props.question as QuestionSelectBase;
-    const textStyle = (this.props.question as any).textStyle;
+    const textStyle = (this.question as any).textStyle;
     return (
-      <div className="svc-question__dropdown-choices">
-        {(question.visibleChoices || []).map(
-          (item: ItemValue, index: number) => (
-            <div
-              className="svc-question__dropdown-choice"
-              key={`editable_choice_${index}`}
-            >
-              {ReactSurveyElementsWrapper.wrapItemValue(question.survey as SurveyModel,
-                ReactElementFactory.Instance.createElement(
-                  "survey-radiogroup-item",
-                  {
-                    question: question,
-                    cssClasses: question.cssClasses,
-                    isDisplayMode: true,
-                    item: item,
-                    textStyle: textStyle,
-                    index: index,
-                    isChecked: question.value === item.value
-                  }
-                ),
-                question,
-                item
-              )}
-            </div>
-          )
-        )}
+      <div>
+        <div className="svc-question__dropdown-choices">
+          {(this.dropdownModel.getRenderedItems() || []).map(
+            (item: ItemValue, index: number) => (
+              <div
+                className="svc-question__dropdown-choice"
+                key={`editable_choice_${index}`}
+              >
+                {ReactSurveyElementsWrapper.wrapItemValue(this.question.survey as SurveyModel,
+                  ReactElementFactory.Instance.createElement(
+                    "survey-radiogroup-item",
+                    {
+                      question: this.question,
+                      cssClasses: this.question.cssClasses,
+                      isDisplayMode: true,
+                      item: item,
+                      textStyle: textStyle,
+                      index: index,
+                      isChecked: this.question.value === item.value
+                    }
+                  ),
+                  this.question,
+                  item
+                )}
+              </div>
+            )
+          )}
+        </div>
+        {this.dropdownModel.needToCollapse() ?
+          <button
+            onClick={() => this.dropdownModel.switchCollapse()}>
+            {this.dropdownModel.getButtonText()}
+          </button> :
+          null
+        }
       </div>
     );
   }

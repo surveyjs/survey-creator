@@ -1,5 +1,6 @@
 import * as ko from "knockout";
-import { SurveyTemplateRendererViewModel } from "survey-core";
+import { QuestionDropdownModel, SurveyTemplateRendererViewModel } from "survey-core";
+import { QuestionDropdownAdornerViewModel } from "survey-creator-core";
 import { createQuestionViewModel } from "./question";
 const template = require("./question-dropdown.html");
 const questionTemplate = require("./question.html");
@@ -10,7 +11,12 @@ ko.components.register("svc-dropdown-question", {
       params: SurveyTemplateRendererViewModel,
       componentInfo: any
     ) => {
-      var model = createQuestionViewModel(params, componentInfo);
+      const model = new QuestionDropdownAdornerViewModel(
+        params.componentData,
+        params.templateData.data as QuestionDropdownModel,
+        params.templateData,
+      );
+      createQuestionViewModel(params, componentInfo, model);
       model["adornerComponent"] = "svc-dropdown-question-adorner";
       return model;
     }
