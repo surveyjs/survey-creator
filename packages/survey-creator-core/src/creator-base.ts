@@ -69,6 +69,7 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   dispose?: () => void;
+  onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
 }
 
@@ -1991,6 +1992,10 @@ export class CreatorBase extends Base
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
     this.updateSurveyLogicValues(options.target, options.name, options.oldValue);
+    const plugin = this.currentPlugin;
+    if(!!plugin && !!plugin.onDesignerSurveyPropertyChanged) {
+      plugin.onDesignerSurveyPropertyChanged(options.target, options.name);
+    }
     if (!this.onSurveyPropertyValueChanged.isEmpty) {
       options.propertyName = options.name;
       options.obj = options.target;
