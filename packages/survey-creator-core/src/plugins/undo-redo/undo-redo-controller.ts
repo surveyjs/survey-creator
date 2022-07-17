@@ -42,43 +42,46 @@ export class UndoRedoController extends Base {
 
   constructor(private creator: CreatorBase) {
     super();
+    this.updateSurvey();
     this.undoRedoManager = <any>new ComputedUpdater<UndoRedoManager>(() => {
       const undoRedoManager = new UndoRedoManager();
-      const surveyModel = this.creator.survey;
-      if (!!surveyModel) {
-        surveyModel.onPropertyValueChangedCallback = (
-          name: string,
-          oldValue: any,
-          newValue: any,
-          sender: Base,
-          arrayChanges: ArrayChanges
-        ) => {
-          this.onSurveyPropertyValueChangedCallback(
-            name,
-            oldValue,
-            newValue,
-            sender,
-            arrayChanges
-          );
-        };
-        undoRedoManager.changesFinishedCallback = (
-          changes: IUndoRedoChange
-        ) => {
-          this.creator.notifySurveyPropertyChanged({
-            name: changes.propertyName,
-            target: changes.object,
-            oldValue: changes.oldValue,
-            newValue: changes.newValue
-          });
-        };
-        undoRedoManager.canUndoRedoCallback = () => {
-          this.updateUndeRedoActions();
-        };
-      }
+      undoRedoManager.changesFinishedCallback = (
+        changes: IUndoRedoChange
+      ) => {
+        this.creator.notifySurveyPropertyChanged({
+          name: changes.propertyName,
+          target: changes.object,
+          oldValue: changes.oldValue,
+          newValue: changes.newValue
+        });
+      };
+      undoRedoManager.canUndoRedoCallback = () => {
+        this.updateUndeRedoActions();
+      };
       return undoRedoManager;
     });
   }
   @property() public undoRedoManager: UndoRedoManager = undefined;
+  public updateSurvey(): void {
+    const surveyModel = this.creator.survey;
+    if (!!surveyModel) {
+      surveyModel.onPropertyValueChangedCallback = (
+        name: string,
+        oldValue: any,
+        newValue: any,
+        sender: Base,
+        arrayChanges: ArrayChanges
+      ) => {
+        this.onSurveyPropertyValueChangedCallback(
+          name,
+          oldValue,
+          newValue,
+          sender,
+          arrayChanges
+        );
+      };
+    }
+  }
   private selectElementAfterUndo() {
     this.selectElementAfterUndoCore(this.creator.selectedElement);
   }

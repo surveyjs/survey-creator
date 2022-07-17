@@ -1686,12 +1686,20 @@ export class CreatorBase extends Base
     });
 
     this.setSurvey(survey);
-    const currentPlugin = this.getPlugin(this.activeTab);
-    if (!!currentPlugin && !!currentPlugin.update) {
-      currentPlugin.update();
+    this.updatePlugin(this.activeTab);
+    if(this.activeTab !== "designer") {
+      this.updatePlugin("designer");
+    }
+    if(!!this.undoRedoController) {
+      this.undoRedoController.updateSurvey();
     }
   }
-
+  private updatePlugin(name: string): void {
+    const plugin = this.getPlugin(this.activeTab);
+    if (!!plugin && !!plugin.update) {
+      plugin.update();
+    }
+  }
   protected initDragDrop() {
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
