@@ -973,8 +973,12 @@ export class CreatorBase extends Base
   public showObjectTitles = false;
 
   /**
-   * count of viewed elems in dropdown
-  */
+   * Limits the number of visible choices. Users can click "Show more..." to view hidden choices.
+   * 
+   * Specify this property if questions with many choices occupy much vertical space on the design surface.
+   * 
+   * Default value: -1 (unlimited)
+   */
   public maxVisibleChoices: number = -1;
 
   /**
