@@ -346,7 +346,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
             {
               name: "operator",
               type: "dropdown",
-              denySearch: true,
+              searchEnabled: false,
               titleLocation: "hidden",
               startWithNewLine: false,
               showOptionsCaption: false,
