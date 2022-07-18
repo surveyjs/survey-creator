@@ -29,12 +29,14 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
   renderElementPlaceholder(): JSX.Element {
     const textStyle = (this.question as any).textStyle;
     return (
-      <div>
+      <div
+        className="svc-question__dropdown-choices--wrapper"
+        onBlur={(e) => this.dropdownModel.leftFocus(e, e)}>
         <div className="svc-question__dropdown-choices">
           {(this.dropdownModel.getRenderedItems() || []).map(
             (item: ItemValue, index: number) => (
               <div
-                className="svc-question__dropdown-choice"
+                className={this.dropdownModel.getChoiceCss()}
                 key={`editable_choice_${index}`}
               >
                 {ReactSurveyElementsWrapper.wrapItemValue(this.question.survey as SurveyModel,
@@ -57,7 +59,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
             )
           )}
         </div>
-        {this.dropdownModel.needToCollapse() ?
+        {this.dropdownModel.needToCollapse ?
           <ActionButton
             click={this.dropdownModel.switchCollapse}
             text={this.dropdownModel.getButtonText()}

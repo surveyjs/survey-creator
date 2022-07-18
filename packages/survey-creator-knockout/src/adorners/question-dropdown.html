@@ -1,13 +1,13 @@
-<div>
+<div class="svc-question__dropdown-choices--wrapper" data-bind="event: { focusout: leftFocus }">
   <div class="svc-question__dropdown-choices">
     <!-- ko foreach: { data: getRenderedItems(), as: 'item' }  -->
-    <div class="svc-question__dropdown-choice">
+    <div data-bind="css: $parent.getChoiceCss()">
       <!-- ko component: { name: question.getItemValueWrapperComponentName(item), params: { componentData:  question.getItemValueWrapperComponentData(item), templateData: { name: 'survey-radiogroup-item', data: item } } } -->
       <!-- /ko -->
     </div>
     <!-- /ko -->
   </div>
-  <!-- ko if: needToCollapse() -->
+  <!-- ko if: needToCollapse -->
   <svc-action-button
      params="text: getButtonText(), click: switchCollapse">
   </svc-action-button>

@@ -2,4 +2,19 @@
 
 .svc-question__dropdown-choices {
   margin-top: calcSize(2);
+
+  .svc-question__dropdown-choice--collapsed:nth-last-child(1) {
+    opacity: 0.25;
+  }
+  
+  
+  .svc-question__dropdown-choice--collapsed:nth-last-child(2) {
+    opacity: 0.5;
+  }
+  
+  
+  .svc-question__dropdown-choice--collapsed:nth-last-child(3) {
+    opacity: 0.75;
+  }
 }
+
