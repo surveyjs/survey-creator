@@ -43,7 +43,7 @@ import {
 } from "../src/creator-base";
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
-import { editorLocalization } from "../src/editorLocalization";
+import { EditorLocalization, editorLocalization } from "../src/editorLocalization";
 import { EmptySurveyCreatorOptions, settings } from "../src/settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
@@ -2956,4 +2956,16 @@ test("allowModifyPages=false", (): any => {
   pageAdornerModel = new PageAdorner(creator, pageModel);
   pageAdornerModel.select(pageAdornerModel, { stopPropagation: () => { } } as any);
   expect(pageAdornerModel.getActionById("delete").visible).toBeFalsy();
+});
+test("allowModifyPages=false", (): any => {
+  const creator = new CreatorTester();
+  creator.survey.pages[0].delete();
+  expect(creator.survey.pages).toHaveLength(0);
+  const enLocale = editorLocalization.getLocale("");
+  const oldPageNewName = enLocale.ed.newPageName;
+  enLocale.ed.newPageName = "MyPage";
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(creator.survey.pages[0].name).toEqual("MyPage1");
+  enLocale.ed.newPageName = oldPageNewName;
 });

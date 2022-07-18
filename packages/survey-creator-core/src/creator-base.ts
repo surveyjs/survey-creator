@@ -1472,13 +1472,16 @@ export class CreatorBase extends Base
   public addPage(pagetoAdd?: PageModel): PageModel {
     let page = pagetoAdd;
     if (!page) {
-      const name: string = SurveyHelper.getNewPageName(this.survey.pages);
-      page = this.survey.addNewPage(name);
+      page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
     }
     this.selectElement(page);
     return page;
+  }
+  private addNewPageIntoSurvey(): PageModel {
+    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
+    return this.survey.addNewPage(name);
   }
   protected initTabs() {
     this.initPlugins();
@@ -2085,7 +2088,7 @@ export class CreatorBase extends Base
     panel: IPanel = null
   ) {
     if (this.survey.pageCount == 0) {
-      this.survey.addNewPage();
+      this.addNewPageIntoSurvey();
     }
     var parent: IPanel = this.currentPage;
     var selectedElement = this.getSelectedSurveyElement();
