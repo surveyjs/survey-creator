@@ -188,3 +188,14 @@ test("Property grid input all states", async (t) => {
   await setInputProperty("readOnly", true);
   await checkElementScreenshot("pg-input-disabled.png", input, t);
 });
+
+test("Dropdown popup in property grid", async (t) => {
+  await t.resizeWindow(1240, 870);
+
+  await t
+    .click(Selector(".svc-page__add-new-question"))
+    .click(getPropertyGridCategory(generalGroupName))
+    .click(Selector(".spg-dropdown[aria-label='Input type']"));
+
+  await checkElementScreenshot("pg-dropdown-editor.png", Selector(".svc-side-bar"), t);
+});
