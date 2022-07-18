@@ -15,7 +15,7 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
     templateData: SurveyTemplateRendererTemplateData,
   ) {
     super(creator, surveyElement, templateData);
-    this.visibleCount = creator.countOfCollapsed;
+    this.visibleCount = creator.maxVisibleChoices;
     this.isCollapsed = this.isCollapsed && this.visibleCount > 0;
   }
 
@@ -34,10 +34,10 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
   }
 
   public getButtonText(): string {
-    return !this.isCollapsed ? "Collapse items" : "Show items";
+    return !this.isCollapsed ? "Show less" : "Show more...";
   }
 
-  public switchCollapse(): void {
+  public switchCollapse = (): void => {
     this.isCollapsed = !this.isCollapsed;
   }
 

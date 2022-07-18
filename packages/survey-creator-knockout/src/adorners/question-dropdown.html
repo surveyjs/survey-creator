@@ -8,7 +8,8 @@
     <!-- /ko -->
   </div>
   <!-- ko if: needToCollapse() -->
-  <button data-bind="click: () => switchCollapse(), text: getButtonText()">
-  </button>
+  <svc-action-button
+     params="text: getButtonText(), click: switchCollapse">
+  </svc-action-button>
   <!-- /ko -->
 </div>

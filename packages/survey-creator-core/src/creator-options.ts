@@ -160,7 +160,7 @@ export interface ICreatorOptions {
   /**
    * count of viewed elems in dropdown
   */
-  countOfCollapsed?: number;
+  maxVisibleChoices?: number;
   /**
    * Specifies whether the design surface displays the survey title and description when the survey does not contain any elements.
    *

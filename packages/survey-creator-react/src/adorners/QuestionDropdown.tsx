@@ -6,6 +6,7 @@ import {
   QuestionAdornerComponent,
   QuestionAdornerComponentProps
 } from "./Question";
+import { ActionButton } from "src/ActionButton";
 
 export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
   constructor(props: QuestionAdornerComponentProps) {
@@ -57,10 +58,10 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
           )}
         </div>
         {this.dropdownModel.needToCollapse() ?
-          <button
-            onClick={() => this.dropdownModel.switchCollapse()}>
-            {this.dropdownModel.getButtonText()}
-          </button> :
+          <ActionButton
+            click={this.dropdownModel.switchCollapse}
+            text={this.dropdownModel.getButtonText()}
+          ></ActionButton> :
           null
         }
       </div>

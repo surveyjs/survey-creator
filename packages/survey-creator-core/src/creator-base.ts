@@ -975,7 +975,7 @@ export class CreatorBase extends Base
   /**
    * count of viewed elems in dropdown
   */
-  public countOfCollapsed: number = -1;
+  public maxVisibleChoices: number = -1;
 
   /**
    * Specifies whether to display question titles instead of names when users edit logical expressions.
