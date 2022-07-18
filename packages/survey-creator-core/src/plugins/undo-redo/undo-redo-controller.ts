@@ -43,23 +43,6 @@ export class UndoRedoController extends Base {
   constructor(private creator: CreatorBase) {
     super();
     this.updateSurvey();
-    this.undoRedoManager = <any>new ComputedUpdater<UndoRedoManager>(() => {
-      const undoRedoManager = new UndoRedoManager();
-      undoRedoManager.changesFinishedCallback = (
-        changes: IUndoRedoChange
-      ) => {
-        this.creator.notifySurveyPropertyChanged({
-          name: changes.propertyName,
-          target: changes.object,
-          oldValue: changes.oldValue,
-          newValue: changes.newValue
-        });
-      };
-      undoRedoManager.canUndoRedoCallback = () => {
-        this.updateUndeRedoActions();
-      };
-      return undoRedoManager;
-    });
   }
   @property() public undoRedoManager: UndoRedoManager = undefined;
   public updateSurvey(): void {
@@ -81,6 +64,20 @@ export class UndoRedoController extends Base {
         );
       };
     }
+    this.undoRedoManager = new UndoRedoManager();
+    this.undoRedoManager.changesFinishedCallback = (
+      changes: IUndoRedoChange
+    ) => {
+      this.creator.notifySurveyPropertyChanged({
+        name: changes.propertyName,
+        target: changes.object,
+        oldValue: changes.oldValue,
+        newValue: changes.newValue
+      });
+    };
+    this.undoRedoManager.canUndoRedoCallback = () => {
+      this.updateUndeRedoActions();
+    };
   }
   private selectElementAfterUndo() {
     this.selectElementAfterUndoCore(this.creator.selectedElement);
