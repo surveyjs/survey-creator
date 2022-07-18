@@ -24,6 +24,7 @@ export class UndoRedoManager {
   ) {
     if (EditableObject.isCopyObject(sender)) return;
     if (this.isIgnoring) return;
+    if (sender["ignoreUndoRedo"] === true) return;
 
     let transaction = this._preparingTransaction;
     let action = arrayChanges

@@ -2,6 +2,8 @@ import { SurveyModel, settings as surveySettings } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { settings as creatorSetting } from "../src/settings";
 import { CreatorTester } from "./creator-tester";
+import { UndoRedoController } from "../src/plugins/undo-redo/undo-redo-controller";
+import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 
 surveySettings.supportCreatorV2 = true;
 creatorSetting.defaultNewSurveyJSON = {};
@@ -81,5 +83,31 @@ test("pageEditMode='single'", (): any => {
   creator = new CreatorTester({ pageEditMode: "single" }, undefined, false);
   designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.showNewPage).toBeTruthy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+});
+test("Create new ghost on adding a question", (): any => {
+  surveySettings.supportCreatorV2 = true;
+  const creator = new CreatorTester();
+  const undoredo = creator.getPlugin("undoredo");
+  expect(undoredo.model).toBeTruthy();
+  expect((<UndoRedoController>undoredo.model).undoRedoManager).toBeTruthy();
+  creatorSetting.defaultNewSurveyJSON = {};
+  creator.JSON = {};
+  expect(creator.survey.pages).toHaveLength(0);
+  creator.clickToolboxItem({ type: "text" });
+  const designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  creator.activeTab = "editor";
+  const editorPlugin = <TabJsonEditorTextareaPlugin>(creator.getPlugin("editor"));
+  expect(editorPlugin.model).toBeTruthy();
+  editorPlugin.model.text = "";
+  creator.activeTab = "designer";
+  expect(creator.survey.pages).toHaveLength(0);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
 });
