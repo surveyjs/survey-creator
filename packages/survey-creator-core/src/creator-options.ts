@@ -158,8 +158,12 @@ export interface ICreatorOptions {
    */
   showObjectTitles?: boolean;
   /**
-   * count of viewed elems in dropdown
-  */
+   * Limits the number of visible choices. Users can click "Show more..." to view hidden choices.
+   * 
+   * Specify this property if questions with many choices occupy much vertical space on the design surface.
+   * 
+   * Default value: -1 (unlimited)
+   */
   maxVisibleChoices?: number;
   /**
    * Specifies whether the design surface displays the survey title and description when the survey does not contain any elements.
