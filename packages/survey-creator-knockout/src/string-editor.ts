@@ -54,9 +54,14 @@ export class StringEditorViewModel {
   public onClick(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onClick(event);
   }
+
   public onInput(sender: StringEditorViewModel, event: any): void {
-    event.currentTarget.spellcheck = false;
     this.baseModel.onInput(event);
+  }
+
+  public onBlur(sender: StringEditorViewModel, event: any): void {
+    event.currentTarget.spellcheck = false;
+    this.baseModel.onBlur(event);
     this.errorText(this.baseModel.errorText);
     this.locString.searchElement = undefined;
   }

@@ -1,3 +1,6 @@
+//TODO accessebility.js is duplicated here and in other frameworks because of  1) Cannot resolve the "boundTestRun" option because its value is not a
+// [1]       test controller. TestCafe Error
+
 import { ClientFunction } from 'testcafe';
 import { axeCheck, createReport } from 'axe-testcafe';
 
@@ -36,7 +39,6 @@ test('Automated accessibility testing', async t => {
     });
     await t.expect(violations.length === 0).ok(createReport(violations));
 });
-
 
 test('Check client function', async t => {
     const boundGetDataFromClient = getDataFromClient.with({ boundTestRun: t });

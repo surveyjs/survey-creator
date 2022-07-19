@@ -136,3 +136,8 @@ export const explicitErrorHandler = ClientFunction(() => {
     }
   });
 });
+
+export const patchDragDropToDisableDrop = ClientFunction(() => {
+  window["creator"].dragDropSurveyElements.drop = () => { };
+  window["creator"].dragDropChoices.drop = () => { };
+});

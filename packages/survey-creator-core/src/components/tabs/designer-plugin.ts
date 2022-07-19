@@ -84,6 +84,11 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.propertyGridTab.visible = false;
     return true;
   }
+  public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
+    if(!!this.model) {
+      this.model.onDesignerSurveyPropertyChanged(obj, propName);
+    }
+  }
   public update(): void {
     if (!this.model) return;
     this.model.initSurvey();

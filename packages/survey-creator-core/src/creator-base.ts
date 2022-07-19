@@ -69,6 +69,7 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   dispose?: () => void;
+  onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
 }
 
@@ -1480,13 +1481,16 @@ export class CreatorBase extends Base
   public addPage(pagetoAdd?: PageModel): PageModel {
     let page = pagetoAdd;
     if (!page) {
-      const name: string = SurveyHelper.getNewPageName(this.survey.pages);
-      page = this.survey.addNewPage(name);
+      page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
     }
     this.selectElement(page);
     return page;
+  }
+  private addNewPageIntoSurvey(): PageModel {
+    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
+    return this.survey.addNewPage(name);
   }
   protected initTabs() {
     this.initPlugins();
@@ -1694,12 +1698,20 @@ export class CreatorBase extends Base
     });
 
     this.setSurvey(survey);
-    const currentPlugin = this.getPlugin(this.activeTab);
-    if (!!currentPlugin && !!currentPlugin.update) {
-      currentPlugin.update();
+    this.updatePlugin(this.activeTab);
+    if(this.activeTab !== "designer") {
+      this.updatePlugin("designer");
+    }
+    if(!!this.undoRedoController) {
+      this.undoRedoController.updateSurvey();
     }
   }
-
+  private updatePlugin(name: string): void {
+    const plugin = this.getPlugin(this.activeTab);
+    if (!!plugin && !!plugin.update) {
+      plugin.update();
+    }
+  }
   protected initDragDrop() {
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
@@ -2000,6 +2012,10 @@ export class CreatorBase extends Base
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
     this.updateSurveyLogicValues(options.target, options.name, options.oldValue);
+    const plugin = this.currentPlugin;
+    if(!!plugin && !!plugin.onDesignerSurveyPropertyChanged) {
+      plugin.onDesignerSurveyPropertyChanged(options.target, options.name);
+    }
     if (!this.onSurveyPropertyValueChanged.isEmpty) {
       options.propertyName = options.name;
       options.obj = options.target;
@@ -2081,7 +2097,7 @@ export class CreatorBase extends Base
     panel: IPanel = null
   ) {
     if (this.survey.pageCount == 0) {
-      this.survey.addNewPage();
+      this.addNewPageIntoSurvey();
     }
     var parent: IPanel = this.currentPage;
     var selectedElement = this.getSelectedSurveyElement();

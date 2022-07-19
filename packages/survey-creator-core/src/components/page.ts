@@ -90,7 +90,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this.getPage();
   }
 
-  public addGhostPage = () => {
+  private addGhostPage = () => {
     const currentPage = this.page;
     if (this.isGhost) {
       currentPage.unRegisterFunctionOnPropertiesValueChanged([

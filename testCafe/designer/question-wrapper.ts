@@ -68,6 +68,41 @@ test("Single input question wrapper action convert", async (t) => {
     .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
 
+test("Single input question wrapper action convert on hover", async (t) => {
+  const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
+  const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
+
+  await t
+    .expect(questions.exists).notOk()
+
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
+    .click(Selector(".svc-tab-designer"), { offsetX: 5, offsetY: 5 })
+    .expect(Selector(".svc-question__content.svc-question__content--selected").exists).notOk()
+    .hover(".svc-question__content", { offsetX: 5, offsetY: 5 })
+    .wait(500)
+    .expect(Selector(".svc-question__content").find("input[aria-label=question1]").visible).ok()
+    .expect(convertActionButton.visible).ok()
+
+    .click(convertActionButton)
+    .expect(listItems.count).eql(19)
+    .expect(listItems.nth(0).innerText).eql("Single Input")
+    .expect(listItems.nth(1).innerText).eql("Checkbox")
+    .expect(listItems.nth(4).innerText).eql("Comment")
+
+    .click(listItems.nth(4))
+    .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
+
+    .click(questionToolbarActions.find('button[title="Comment"]'))
+    .expect(listItems.count).eql(19)
+    .expect(listItems.nth(0).innerText).eql("Single Input")
+    .expect(listItems.nth(1).innerText).eql("Checkbox")
+    .expect(listItems.nth(4).innerText).eql("Comment")
+
+    .click(listItems.nth(0))
+    .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
+});
+
 test("Single input question wrapper action duplicate", async (t) => {
   await t
     .expect(questions.exists).notOk()

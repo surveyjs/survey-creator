@@ -1,4 +1,7 @@
 import { ClientFunction } from 'testcafe';
+//TODO accessebility.js is duplicated here and in other frameworks because of  1) Cannot resolve the "boundTestRun" option because its value is not a
+// [1]       test controller. TestCafe Error
+
 import { axeCheck, createReport } from 'axe-testcafe';
 
 fixture`TestCafe tests with Axe`
