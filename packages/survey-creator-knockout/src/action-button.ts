@@ -2,13 +2,24 @@ import * as ko from "knockout";
 
 const template = require("./action-button.html");
 
+export class ActionButtonViewModel {
+  constructor(public data: any) {
+  }
+  onClick = () => {
+    this.data.click();
+    if (this.data.allowBubble) {
+      return true;
+    }
+  }
+}
+
 ko.components.register("svc-action-button", {
   viewModel: {
     createViewModel: (
       params: any,
       componentInfo: any
     ) => {
-      return params;
+      return new ActionButtonViewModel(params);
     }
   },
   template: template

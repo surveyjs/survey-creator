@@ -6,7 +6,7 @@ import {
   QuestionAdornerComponent,
   QuestionAdornerComponentProps
 } from "./Question";
-import { ActionButton } from "src/ActionButton";
+import { ActionButton } from "../ActionButton";
 
 export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
   constructor(props: QuestionAdornerComponentProps) {
@@ -30,8 +30,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
     const textStyle = (this.question as any).textStyle;
     return (
       <div
-        className="svc-question__dropdown-choices--wrapper"
-        onBlur={(e) => this.dropdownModel.leftFocus(e, e)}>
+        className="svc-question__dropdown-choices--wrapper">
         <div className="svc-question__dropdown-choices">
           {(this.dropdownModel.getRenderedItems() || []).map(
             (item: ItemValue, index: number) => (
@@ -63,6 +62,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
           <ActionButton
             click={this.dropdownModel.switchCollapse}
             text={this.dropdownModel.getButtonText()}
+            allowBubble={true}
           ></ActionButton> :
           null
         }

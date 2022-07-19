@@ -1,4 +1,4 @@
-<div class="svc-question__dropdown-choices--wrapper" data-bind="event: { focusout: leftFocus }">
+<div class="svc-question__dropdown-choices--wrapper">
   <div class="svc-question__dropdown-choices">
     <!-- ko foreach: { data: getRenderedItems(), as: 'item' }  -->
     <div data-bind="css: $parent.getChoiceCss()">
@@ -9,7 +9,7 @@
   </div>
   <!-- ko if: needToCollapse -->
   <svc-action-button
-     params="text: getButtonText(), click: switchCollapse">
+     params="text: getButtonText(), click: switchCollapse, allowBubble: true">
   </svc-action-button>
   <!-- /ko -->
 </div>
