@@ -227,5 +227,5 @@ export interface ICreatorOptions {
    * - `"bypage"`       
    * Questions and panels are divided between pages. Users can use the page navigator to switch to a required page.
    */
-  pageEditMode?: "standard" | "single" | "bypage" | "readonly";
+  pageEditMode?: "standard" | "single" | "bypage";
 }

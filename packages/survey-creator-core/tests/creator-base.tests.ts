@@ -2949,7 +2949,7 @@ test("allowModifyPages=false", (): any => {
   creator.getPlugin("designer").activate();
   designer = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(creator.allowModifyPages).toBeFalsy();
-  expect(creator.pageEditMode).toEqual("readonly");
+  expect(creator.pageEditMode).toEqual("standard");
   expect(designer.showNewPage).toBeFalsy();
 
   pageModel = creator.survey.pages[0];
