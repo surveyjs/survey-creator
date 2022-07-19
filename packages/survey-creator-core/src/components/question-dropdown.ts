@@ -2,6 +2,7 @@
 import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, CssClassBuilder } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
+import { editorLocalization } from "../editorLocalization";
 
 import "./question-dropdown.scss";
 
@@ -31,6 +32,10 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
     return this.visibleCount > 0 && this.question.visibleChoices.length > this.visibleCount;
   }
 
+  get isCollapseView(): boolean {
+    return this.isCollapsed;
+  }
+
   public leftFocus(): void {
     if (!this.creator.isElementSelected(this.surveyElement) && !this.isCollapsed) {
       this.isCollapsed = true;
@@ -51,7 +56,9 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
   }
 
   public getButtonText(): string {
-    return !this.isCollapsed ? "Show less" : "Show more...";
+    return !this.isCollapsed ?
+      editorLocalization.getString("ed.showLessChoices") :
+      editorLocalization.getString("ed.showMoreChoices");
   }
 
   public switchCollapse = (): void => {
