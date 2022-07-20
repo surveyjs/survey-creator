@@ -10,6 +10,7 @@ export class ActionButtonViewModel {
     if (this.data.allowBubble) {
       return true;
     }
+    return false;
   }
 }
 
