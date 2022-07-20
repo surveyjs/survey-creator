@@ -332,6 +332,7 @@ test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
 
 test("Dropdown question inplace editor", async (t) => {
   await t
+    .resizeWindow(1920, 1080)
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Dropdown"), { speed: 0.5 })
     .click(getToolboxItemByText("Dropdown"), { speed: 0.5 })
@@ -425,7 +426,6 @@ test("Dropdown question inplace editor", async (t) => {
     .hover(items.nth(5))
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok()
-
     .hover(getToolboxItemByText("Single Input"), { speed: 0.5 })
     .click(getToolboxItemByText("Single Input"), { speed: 0.5 })
     .expect(items.count).eql(6); // Choice editors are visible if another question is selected
