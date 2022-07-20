@@ -22,6 +22,7 @@ import {
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { QuestionDropdownAdornerViewModel } from "../src/components/question-dropdown";
 import { SurveyElementAdornerBase } from "../src/components/action-container-view-model";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -2968,4 +2969,75 @@ test("allowModifyPages=false", (): any => {
   expect(creator.survey.pages).toHaveLength(1);
   expect(creator.survey.pages[0].name).toEqual("MyPage1");
   enLocale.ed.newPageName = oldPageNewName;
+});
+test("Check QuestionDropdownAdornerViewModel", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.maxVisibleChoices = 1;
+  creator.JSON = {
+    questions: [
+      {
+        type: "dropdown",
+        name: "test_dropdown",
+        choices: [
+          "item1",
+          "item2"
+        ]
+      },
+    ],
+  };
+  const question: QuestionDropdownModel = <QuestionDropdownModel>(creator.survey.getAllQuestions()[0]);
+  const model: QuestionDropdownAdornerViewModel = new QuestionDropdownAdornerViewModel(creator, question, null);
+
+  expect(question.getPropertyValue("isSelectedInDesigner")).toEqual(undefined);
+  expect(model.needToCollapse).toBeTruthy();
+
+  expect(model.getRenderedItems().length).toBe(1);
+  expect(model.getButtonText()).toBe("Show more...");
+  expect(model.isCollapseView).toBeTruthy();
+
+  question.setPropertyValue("isSelectedInDesigner", true);
+  model.switchCollapse();
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.getButtonText()).toBe("Show less");
+  expect(model.isCollapseView).toBeFalsy();
+
+  question.setPropertyValue("isSelectedInDesigner", false);
+  expect(model.getRenderedItems().length).toBe(1);
+  expect(model.getButtonText()).toBe("Show more...");
+  expect(model.isCollapseView).toBeTruthy();
+
+  const propertiesFilter = property => property.name == "isSelectedInDesigner" && property.key == "dropdownCollapseChecker";
+  expect(question["onPropChangeFunctions"].filter(propertiesFilter).length).toBe(1);
+  model.dispose();
+  expect(question["onPropChangeFunctions"].filter(propertiesFilter).length).toBe(0);
+});
+test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "dropdown",
+        name: "test_dropdown",
+        choices: [
+          "item1",
+          "item2"
+        ]
+      },
+    ],
+  };
+  const question: QuestionDropdownModel = <QuestionDropdownModel>(creator.survey.getAllQuestions()[0]);
+  const model: QuestionDropdownAdornerViewModel = new QuestionDropdownAdornerViewModel(creator, question, null);
+
+  expect(question.getPropertyValue("isSelectedInDesigner")).toEqual(undefined);
+  expect(model.needToCollapse).toBeFalsy();
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.isCollapseView).toBeFalsy();
+
+  question.setPropertyValue("isSelectedInDesigner", true);
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.isCollapseView).toBeFalsy();
+
+  question.setPropertyValue("isSelectedInDesigner", false);
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.isCollapseView).toBeFalsy();
 });

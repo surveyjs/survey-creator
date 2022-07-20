@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -229,4 +229,34 @@ test("Rating question required property", async (t) => {
     .click(isrequiredButton)
     .expect(isrequiredButton.classNames).contains("sv-action-bar-item--secondary")
     .expect(isrequiredButton.find("use").getAttribute("xlink:href")).eql("#icon-switch-active_16x16");
+});
+
+fixture`${title}`.page`${urlDropdownCollapseView}`.beforeEach(async (t) => {
+  await t.resizeWindow(1920, 1080);
+});
+
+test("Dropdown question with ability to collapse choices", async (t) => {
+  const buttonSelector = Selector(".svc-question__dropdown-choices--wrapper .svc-action-button");
+
+  await t
+    .expect(questions.exists).notOk()
+
+    .hover(getToolboxItemByText("Dropdown"))
+    .click(getToolboxItemByText("Dropdown"))
+
+    .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
+    .expect(buttonSelector.withText("Show more...").exists).ok()
+
+    .click(buttonSelector)
+    .expect(buttonSelector.withText("Show less").exists).ok()
+
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
+    .expect(buttonSelector.withText("Show more...").exists).ok()
+
+    .click(Selector(".svc-question__dropdown-choice .svc-item-value-controls__remove"))
+    .expect(buttonSelector.exists).notOk()
+
+    .click(Selector(".svc-question__dropdown-choice .svc-item-value-controls__add"))
+    .expect(buttonSelector.exists).ok();
 });

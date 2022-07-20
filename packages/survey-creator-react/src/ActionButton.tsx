@@ -18,7 +18,9 @@ export class ActionButton extends SurveyElementBase<any, any> {
             role="button"
             className={classes}
             onClick={(e) => {
-              e.stopPropagation();
+              if (!this.props.allowBubble) {
+                e.stopPropagation();
+              }
               this.props.click();
             }}
             title={this.props.title}
