@@ -2989,17 +2989,55 @@ test("Check QuestionDropdownAdornerViewModel", (): any => {
   const model: QuestionDropdownAdornerViewModel = new QuestionDropdownAdornerViewModel(creator, question, null);
 
   expect(question.getPropertyValue("isSelectedInDesigner")).toEqual(undefined);
-  expect(model.isCollapseView).toEqual(true);
+  expect(model.needToCollapse).toBeTruthy();
+
+  expect(model.getRenderedItems().length).toBe(1);
+  expect(model.getButtonText()).toBe("Show more...");
+  expect(model.isCollapseView).toBeTruthy();
 
   question.setPropertyValue("isSelectedInDesigner", true);
   model.switchCollapse();
-  expect(model.isCollapseView).toEqual(false);
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.getButtonText()).toBe("Show less");
+  expect(model.isCollapseView).toBeFalsy();
 
   question.setPropertyValue("isSelectedInDesigner", false);
-  expect(model.isCollapseView).toEqual(true);
+  expect(model.getRenderedItems().length).toBe(1);
+  expect(model.getButtonText()).toBe("Show more...");
+  expect(model.isCollapseView).toBeTruthy();
 
   const propertiesFilter = property => property.name == "isSelectedInDesigner" && property.key == "dropdownCollapseChecker";
   expect(question["onPropChangeFunctions"].filter(propertiesFilter).length).toBe(1);
   model.dispose();
   expect(question["onPropChangeFunctions"].filter(propertiesFilter).length).toBe(0);
+});
+test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "dropdown",
+        name: "test_dropdown",
+        choices: [
+          "item1",
+          "item2"
+        ]
+      },
+    ],
+  };
+  const question: QuestionDropdownModel = <QuestionDropdownModel>(creator.survey.getAllQuestions()[0]);
+  const model: QuestionDropdownAdornerViewModel = new QuestionDropdownAdornerViewModel(creator, question, null);
+
+  expect(question.getPropertyValue("isSelectedInDesigner")).toEqual(undefined);
+  expect(model.needToCollapse).toBeFalsy();
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.isCollapseView).toBeFalsy();
+
+  question.setPropertyValue("isSelectedInDesigner", true);
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.isCollapseView).toBeFalsy();
+
+  question.setPropertyValue("isSelectedInDesigner", false);
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.isCollapseView).toBeFalsy();
 });

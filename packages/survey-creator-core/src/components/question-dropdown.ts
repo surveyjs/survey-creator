@@ -38,7 +38,7 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
 
   public leftFocus(): void {
     if (!this.creator.isElementSelected(this.surveyElement) && !this.isCollapsed) {
-      this.isCollapsed = true;
+      this.isCollapsed = this.needToCollapse;
     }
   }
 
