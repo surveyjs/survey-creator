@@ -5,8 +5,8 @@ const template = require("./action-button.html");
 export class ActionButtonViewModel {
   constructor(public data: any) {
   }
-  onClick = () => {
-    this.data.click();
+  onClick = (_, event) => {
+    this.data.click(this.data, event);
     if (this.data.allowBubble) {
       return true;
     }

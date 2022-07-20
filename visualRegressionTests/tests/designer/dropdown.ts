@@ -22,7 +22,7 @@ const json = {
   ]
 };
 
-test("Check the upper part of the page", async (t) => {
+test("Check collapsed dropdown", async (t) => {
   await t.resizeWindow(1920, 1080);
 
   const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
