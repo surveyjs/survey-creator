@@ -261,26 +261,26 @@ export class CreatorBase extends Base
   private responsivityManager: CreatorResponsivityManager;
   footerToolbar: ActionContainer;
 
-  private pageEditModeValue: "standard" | "single" | "bypage" | "readonly" = "standard";
+  private changePageModifications(allow = false) {
+    this.setPropertyVisibility("survey", allow, "pages");
+    this.setPropertyVisibility("question", allow, "page");
+    this.setPropertyVisibility("panel", allow, "page");
+    this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
+  }
+
+  private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
   /**
    * Contains the value of the [`pageEditMode`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#pageEditMode) property specified in the constructor.
    */
-  public get pageEditMode(): "standard" | "single" | "bypage" | "readonly" {
+  public get pageEditMode(): "standard" | "single" | "bypage" {
     return this.pageEditModeValue;
   }
-  protected set pageEditMode(val: "standard" | "single" | "bypage" | "readonly") {
+  protected set pageEditMode(val: "standard" | "single" | "bypage") {
     this.pageEditModeValue = val;
-    this._allowModifyPages = val !== "readonly";
-    if (this.pageEditModeValue === "single" || this.pageEditModeValue === "readonly") {
-      this.setPropertyVisibility("survey", false, "pages");
-      this.setPropertyVisibility("question", false, "page");
-      this.setPropertyVisibility("panel", false, "page");
-      this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
-    }
-    if (this.pageEditModeValue === "single") {
-      Survey.settings.allowShowEmptyTitleInDesignMode = false;
-      Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
-    }
+    const allowModifyPages = this.pageEditModeValue !== "single";
+    this.changePageModifications(allowModifyPages);
+    Survey.settings.allowShowEmptyTitleInDesignMode = allowModifyPages;
+    Survey.settings.allowShowEmptyDescriptionInDesignMode = allowModifyPages;
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
     }
@@ -1069,7 +1069,7 @@ export class CreatorBase extends Base
   }
   protected set allowModifyPages(val: boolean) {
     this._allowModifyPages = val;
-    this.pageEditMode = "readonly";
+    this.changePageModifications(val);
   }
 
   /**
