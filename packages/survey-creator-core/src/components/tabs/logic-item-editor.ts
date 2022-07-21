@@ -138,7 +138,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "logicTypeName",
               type: "dropdown",
-              denySearch: true,
+              searchEnabled: false,
               allowClear: false,
               title: editorLocalization.getString("pe.then"),
               titleLocation: "left",
