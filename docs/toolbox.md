@@ -146,7 +146,7 @@ creator.toolbox.addItem({
   title: "Countries",
   json: {
     type: "dropdown",
-    optionsCaption: "Select a country...",
+    placeholder: "Select a country...",
     choicesByUrl: {
         url: "https://surveyjs.io/api/CountriesExample"
     }

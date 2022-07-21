@@ -8,7 +8,7 @@ The first example pre-populates a standard Dropdown question. You can specify th
 {
   "name": "country",
   "type": "dropdown",
-  "optionsCaption": "Select a country...",
+  "placeholder": "Select a country...",
   "choicesByUrl": {
     "url": "https://surveyjs.io/api/CountriesExample"
   }
@@ -32,7 +32,7 @@ Survey.ComponentCollection.Instance.add({
   // A JSON definition for the base question type (Dropdown in this case)
   questionJSON: {
     "type": "dropdown",
-    "optionsCaption": "Select a country...",
+    "placeholder": "Select a country...",
     "choicesByUrl": {
       "url": "https://surveyjs.io/api/CountriesExample",
     }
