@@ -69,6 +69,7 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   dispose?: () => void;
+  onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
 }
 
@@ -260,26 +261,26 @@ export class CreatorBase extends Base
   private responsivityManager: CreatorResponsivityManager;
   footerToolbar: ActionContainer;
 
-  private pageEditModeValue: "standard" | "single" | "bypage" | "readonly" = "standard";
+  private changePageModifications(allow = false) {
+    this.setPropertyVisibility("survey", allow, "pages");
+    this.setPropertyVisibility("question", allow, "page");
+    this.setPropertyVisibility("panel", allow, "page");
+    this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
+  }
+
+  private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
   /**
    * Contains the value of the [`pageEditMode`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#pageEditMode) property specified in the constructor.
    */
-  public get pageEditMode(): "standard" | "single" | "bypage" | "readonly" {
+  public get pageEditMode(): "standard" | "single" | "bypage" {
     return this.pageEditModeValue;
   }
-  protected set pageEditMode(val: "standard" | "single" | "bypage" | "readonly") {
+  protected set pageEditMode(val: "standard" | "single" | "bypage") {
     this.pageEditModeValue = val;
-    this._allowModifyPages = val !== "readonly";
-    if (this.pageEditModeValue === "single" || this.pageEditModeValue === "readonly") {
-      this.setPropertyVisibility("survey", false, "pages");
-      this.setPropertyVisibility("question", false, "page");
-      this.setPropertyVisibility("panel", false, "page");
-      this.showJSONEditorTab = (this.options.showJSONEditorTab === true);
-    }
-    if (this.pageEditModeValue === "single") {
-      Survey.settings.allowShowEmptyTitleInDesignMode = false;
-      Survey.settings.allowShowEmptyDescriptionInDesignMode = false;
-    }
+    const allowModifyPages = this.pageEditModeValue !== "single";
+    this.changePageModifications(allowModifyPages);
+    Survey.settings.allowShowEmptyTitleInDesignMode = allowModifyPages;
+    Survey.settings.allowShowEmptyDescriptionInDesignMode = allowModifyPages;
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
     }
@@ -973,6 +974,15 @@ export class CreatorBase extends Base
   public showObjectTitles = false;
 
   /**
+   * Limits the number of visible choices. Users can click "Show more..." to view hidden choices.
+   * 
+   * Specify this property if questions with many choices occupy much vertical space on the design surface.
+   * 
+   * Default value: -1 (unlimited)
+   */
+  public maxVisibleChoices: number = -1;
+
+  /**
    * Specifies whether to display question titles instead of names when users edit logical expressions.
    *
    * Default value: `false`
@@ -1059,7 +1069,7 @@ export class CreatorBase extends Base
   }
   protected set allowModifyPages(val: boolean) {
     this._allowModifyPages = val;
-    this.pageEditMode = "readonly";
+    this.changePageModifications(val);
   }
 
   /**
@@ -1471,13 +1481,16 @@ export class CreatorBase extends Base
   public addPage(pagetoAdd?: PageModel): PageModel {
     let page = pagetoAdd;
     if (!page) {
-      const name: string = SurveyHelper.getNewPageName(this.survey.pages);
-      page = this.survey.addNewPage(name);
+      page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
     }
     this.selectElement(page);
     return page;
+  }
+  private addNewPageIntoSurvey(): PageModel {
+    const name: string = SurveyHelper.getNewPageName(this.survey.pages);
+    return this.survey.addNewPage(name);
   }
   protected initTabs() {
     this.initPlugins();
@@ -1685,12 +1698,20 @@ export class CreatorBase extends Base
     });
 
     this.setSurvey(survey);
-    const currentPlugin = this.getPlugin(this.activeTab);
-    if (!!currentPlugin && !!currentPlugin.update) {
-      currentPlugin.update();
+    this.updatePlugin(this.activeTab);
+    if(this.activeTab !== "designer") {
+      this.updatePlugin("designer");
+    }
+    if(!!this.undoRedoController) {
+      this.undoRedoController.updateSurvey();
     }
   }
-
+  private updatePlugin(name: string): void {
+    const plugin = this.getPlugin(this.activeTab);
+    if (!!plugin && !!plugin.update) {
+      plugin.update();
+    }
+  }
   protected initDragDrop() {
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
@@ -1991,6 +2012,10 @@ export class CreatorBase extends Base
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
     this.updateSurveyLogicValues(options.target, options.name, options.oldValue);
+    const plugin = this.currentPlugin;
+    if(!!plugin && !!plugin.onDesignerSurveyPropertyChanged) {
+      plugin.onDesignerSurveyPropertyChanged(options.target, options.name);
+    }
     if (!this.onSurveyPropertyValueChanged.isEmpty) {
       options.propertyName = options.name;
       options.obj = options.target;
@@ -2072,7 +2097,7 @@ export class CreatorBase extends Base
     panel: IPanel = null
   ) {
     if (this.survey.pageCount == 0) {
-      this.survey.addNewPage();
+      this.addNewPageIntoSurvey();
     }
     var parent: IPanel = this.currentPage;
     var selectedElement = this.getSelectedSurveyElement();

@@ -42,43 +42,43 @@ export class UndoRedoController extends Base {
 
   constructor(private creator: CreatorBase) {
     super();
-    this.undoRedoManager = <any>new ComputedUpdater<UndoRedoManager>(() => {
-      const undoRedoManager = new UndoRedoManager();
-      const surveyModel = this.creator.survey;
-      if (!!surveyModel) {
-        surveyModel.onPropertyValueChangedCallback = (
-          name: string,
-          oldValue: any,
-          newValue: any,
-          sender: Base,
-          arrayChanges: ArrayChanges
-        ) => {
-          this.onSurveyPropertyValueChangedCallback(
-            name,
-            oldValue,
-            newValue,
-            sender,
-            arrayChanges
-          );
-        };
-        undoRedoManager.changesFinishedCallback = (
-          changes: IUndoRedoChange
-        ) => {
-          this.creator.notifySurveyPropertyChanged({
-            name: changes.propertyName,
-            target: changes.object,
-            oldValue: changes.oldValue,
-            newValue: changes.newValue
-          });
-        };
-        undoRedoManager.canUndoRedoCallback = () => {
-          this.updateUndeRedoActions();
-        };
-      }
-      return undoRedoManager;
-    });
+    this.updateSurvey();
   }
   @property() public undoRedoManager: UndoRedoManager = undefined;
+  public updateSurvey(): void {
+    const surveyModel = this.creator.survey;
+    if (!!surveyModel) {
+      surveyModel.onPropertyValueChangedCallback = (
+        name: string,
+        oldValue: any,
+        newValue: any,
+        sender: Base,
+        arrayChanges: ArrayChanges
+      ) => {
+        this.onSurveyPropertyValueChangedCallback(
+          name,
+          oldValue,
+          newValue,
+          sender,
+          arrayChanges
+        );
+      };
+    }
+    this.undoRedoManager = new UndoRedoManager();
+    this.undoRedoManager.changesFinishedCallback = (
+      changes: IUndoRedoChange
+    ) => {
+      this.creator.notifySurveyPropertyChanged({
+        name: changes.propertyName,
+        target: changes.object,
+        oldValue: changes.oldValue,
+        newValue: changes.newValue
+      });
+    };
+    this.undoRedoManager.canUndoRedoCallback = () => {
+      this.updateUndeRedoActions();
+    };
+  }
   private selectElementAfterUndo() {
     this.selectElementAfterUndoCore(this.creator.selectedElement);
   }

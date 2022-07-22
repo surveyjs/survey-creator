@@ -22,6 +22,7 @@ import {
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { QuestionDropdownAdornerViewModel } from "../src/components/question-dropdown";
 import { SurveyElementAdornerBase } from "../src/components/action-container-view-model";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -43,7 +44,7 @@ import {
 } from "../src/creator-base";
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
-import { editorLocalization } from "../src/editorLocalization";
+import { EditorLocalization, editorLocalization } from "../src/editorLocalization";
 import { EmptySurveyCreatorOptions, settings } from "../src/settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
@@ -666,7 +667,52 @@ test("Create new page on changing title/description in ghost PageAdorner resets 
   pageWrapperViewModel.addNewQuestion(null, undefined);
   expect(designerPlugin.model.newPage).toBeTruthy();
 });
+test("Create new ghost on moving a question from one page to the ghost page", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  const designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
 
+  let currentNewPage = designerPlugin.model.newPage;
+  let pageWrapperViewModel = new PageAdorner(creator, currentNewPage);
+  expect(pageWrapperViewModel.isGhost).toBeTruthy();
+
+  const question1 = creator.survey.pages[0].questions[0];
+  creator.survey.startMovingQuestion();
+  question1.delete();
+  const question2 = new QuestionTextModel("q1");
+  pageWrapperViewModel.page.elements.push(question2);
+  creator.survey.stopMovingQuestion();
+
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  currentNewPage = designerPlugin.model.newPage;
+  expect(currentNewPage.name).toEqual("page3");
+  pageWrapperViewModel = new PageAdorner(creator, currentNewPage);
+  expect(pageWrapperViewModel.isGhost).toBeTruthy();
+
+  creator.survey.startMovingQuestion();
+  question2.delete();
+  const question3 = new QuestionTextModel("q1");
+  creator.survey.pages[0].elements.push(question3);
+  creator.survey.stopMovingQuestion();
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.newPage.name).toEqual("page2");
+  expect(designerPlugin.model.pagesController.pages).toHaveLength(1);
+});
 test("Create new page, set empty JSON", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {};
@@ -743,20 +789,18 @@ test("undo/redo add new page", (): any => {
   expect(designerPlugin.model.newPage.name).toEqual("page2");
   let newPageModel = new PageAdorner(creator, designerPlugin.model.newPage);
   expect(newPageModel.isGhost).toBeTruthy();
-  newPageModel.addGhostPage();
+  newPageModel.addNewQuestion(newPageModel, null);
   expect(newPageModel.isGhost).toBeFalsy();
   expect(creator.survey.pageCount).toEqual(2);
   expect(creator.survey.pages[1].name).toEqual("page2");
-  creator.survey.pages[1].addNewQuestion("text", "question2");
   expect(designerPlugin.model.newPage.name).toEqual("page3");
 
   newPageModel = new PageAdorner(creator, designerPlugin.model.newPage);
   expect(newPageModel.isGhost).toBeTruthy();
-  newPageModel.addGhostPage();
+  newPageModel.addNewQuestion(newPageModel, null);
   expect(newPageModel.isGhost).toBeFalsy();
   expect(creator.survey.pageCount).toEqual(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
-  creator.survey.pages[2].addNewQuestion("text", "question3");
   expect(designerPlugin.model.newPage.name).toEqual("page4");
   creator.undo();
   creator.undo();
@@ -764,6 +808,7 @@ test("undo/redo add new page", (): any => {
   expect(creator.survey.pageCount).toEqual(1);
   expect(creator.survey.pages[0].name).toEqual("page1");
   expect(designerPlugin.model.newPage.name).toEqual("page2");
+  expect(designerPlugin.model.pagesController.pages).toHaveLength(1);
 });
 test("undo/redo add new page, via page model by adding new question", (): any => {
   const creator = new CreatorTester();
@@ -2905,11 +2950,94 @@ test("allowModifyPages=false", (): any => {
   creator.getPlugin("designer").activate();
   designer = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(creator.allowModifyPages).toBeFalsy();
-  expect(creator.pageEditMode).toEqual("readonly");
+  expect(creator.pageEditMode).toEqual("standard");
   expect(designer.showNewPage).toBeFalsy();
 
   pageModel = creator.survey.pages[0];
   pageAdornerModel = new PageAdorner(creator, pageModel);
   pageAdornerModel.select(pageAdornerModel, { stopPropagation: () => { } } as any);
   expect(pageAdornerModel.getActionById("delete").visible).toBeFalsy();
+});
+test("allowModifyPages=false", (): any => {
+  const creator = new CreatorTester();
+  creator.survey.pages[0].delete();
+  expect(creator.survey.pages).toHaveLength(0);
+  const enLocale = editorLocalization.getLocale("");
+  const oldPageNewName = enLocale.ed.newPageName;
+  enLocale.ed.newPageName = "MyPage";
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(creator.survey.pages[0].name).toEqual("MyPage1");
+  enLocale.ed.newPageName = oldPageNewName;
+});
+test("Check QuestionDropdownAdornerViewModel", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.maxVisibleChoices = 1;
+  creator.JSON = {
+    questions: [
+      {
+        type: "dropdown",
+        name: "test_dropdown",
+        choices: [
+          "item1",
+          "item2"
+        ]
+      },
+    ],
+  };
+  const question: QuestionDropdownModel = <QuestionDropdownModel>(creator.survey.getAllQuestions()[0]);
+  const model: QuestionDropdownAdornerViewModel = new QuestionDropdownAdornerViewModel(creator, question, null);
+
+  expect(question.getPropertyValue("isSelectedInDesigner")).toEqual(undefined);
+  expect(model.needToCollapse).toBeTruthy();
+
+  expect(model.getRenderedItems().length).toBe(1);
+  expect(model.getButtonText()).toBe("Show more...");
+  expect(model.isCollapseView).toBeTruthy();
+
+  question.setPropertyValue("isSelectedInDesigner", true);
+  model.switchCollapse();
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.getButtonText()).toBe("Show less");
+  expect(model.isCollapseView).toBeFalsy();
+
+  question.setPropertyValue("isSelectedInDesigner", false);
+  expect(model.getRenderedItems().length).toBe(1);
+  expect(model.getButtonText()).toBe("Show more...");
+  expect(model.isCollapseView).toBeTruthy();
+
+  const propertiesFilter = property => property.name == "isSelectedInDesigner" && property.key == "dropdownCollapseChecker";
+  expect(question["onPropChangeFunctions"].filter(propertiesFilter).length).toBe(1);
+  model.dispose();
+  expect(question["onPropChangeFunctions"].filter(propertiesFilter).length).toBe(0);
+});
+test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "dropdown",
+        name: "test_dropdown",
+        choices: [
+          "item1",
+          "item2"
+        ]
+      },
+    ],
+  };
+  const question: QuestionDropdownModel = <QuestionDropdownModel>(creator.survey.getAllQuestions()[0]);
+  const model: QuestionDropdownAdornerViewModel = new QuestionDropdownAdornerViewModel(creator, question, null);
+
+  expect(question.getPropertyValue("isSelectedInDesigner")).toEqual(undefined);
+  expect(model.needToCollapse).toBeFalsy();
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.isCollapseView).toBeFalsy();
+
+  question.setPropertyValue("isSelectedInDesigner", true);
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.isCollapseView).toBeFalsy();
+
+  question.setPropertyValue("isSelectedInDesigner", false);
+  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.isCollapseView).toBeFalsy();
 });

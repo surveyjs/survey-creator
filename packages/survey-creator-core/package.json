@@ -1,5 +1,5 @@
 {
-  "version": "1.9.40",
+  "version": "1.9.41",
   "name": "survey-creator-core",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -73,6 +73,11 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.8.0",
     "webpack-svgstore-plugin": "4.0.1"
+  },
+  "overrides": {
+    "karma-webpack": {
+      "webpack": "^4.43.0"
+    }
   },
   "standard-version": {
     "skip": {
