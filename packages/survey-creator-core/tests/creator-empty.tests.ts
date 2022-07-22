@@ -1,6 +1,6 @@
 import { SurveyModel, settings as surveySettings } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
-import { settings as creatorSetting } from "../src/settings";
+import { settings as creatorSetting, settings } from "../src/settings";
 import { CreatorTester } from "./creator-tester";
 import { UndoRedoController } from "../src/plugins/undo-redo/undo-redo-controller";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
@@ -110,4 +110,21 @@ test("Create new ghost on adding a question", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
+});
+test("setting empty JSON into creator do not update undo/redo survey and onModified stopped working", (): any => {
+  settings.defaultNewSurveyJSON = {};
+  const creator = new CreatorTester();
+  let counter = 0;
+  creator.onModified.add((sender, options) => {
+    counter ++;
+  });
+  settings.defaultNewSurveyJSON = {};
+  creator.JSON = {};
+  expect(counter).toEqual(0);
+  creator.survey.title = "title1";
+  expect(counter).toEqual(1);
+  settings.defaultNewSurveyJSON = {};
+  creator.JSON = {};
+  creator.survey.title = "title2";
+  expect(counter).toEqual(2);
 });
