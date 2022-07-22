@@ -158,11 +158,11 @@ export interface ICreatorOptions {
    */
   showObjectTitles?: boolean;
   /**
-   * Limits the number of visible choices. Users can click "Show more..." to view hidden choices.
+   * Limits the number of visible choices. Users can click "Show more" to view hidden choices.
    * 
-   * Specify this property if questions with many choices occupy much vertical space on the design surface.
+   * Set this property to -1 if you do not want any choices to hide.
    * 
-   * Default value: -1 (unlimited)
+   * Default value: 10
    */
   maxVisibleChoices?: number;
   /**

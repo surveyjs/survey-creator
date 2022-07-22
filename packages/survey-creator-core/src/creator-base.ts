@@ -974,13 +974,13 @@ export class CreatorBase extends Base
   public showObjectTitles = false;
 
   /**
-   * Limits the number of visible choices. Users can click "Show more..." to view hidden choices.
+   * Limits the number of visible choices. Users can click "Show more" to view hidden choices.
    * 
-   * Specify this property if questions with many choices occupy much vertical space on the design surface.
+   * Set this property to -1 if you do not want any choices to hide.
    * 
-   * Default value: -1 (unlimited)
+   * Default value: 10
    */
-  public maxVisibleChoices: number = -1;
+  public maxVisibleChoices: number = 10;
 
   /**
    * Specifies whether to display question titles instead of names when users edit logical expressions.
@@ -1699,10 +1699,10 @@ export class CreatorBase extends Base
 
     this.setSurvey(survey);
     this.updatePlugin(this.activeTab);
-    if(this.activeTab !== "designer") {
+    if (this.activeTab !== "designer") {
       this.updatePlugin("designer");
     }
-    if(!!this.undoRedoController) {
+    if (!!this.undoRedoController) {
       this.undoRedoController.updateSurvey();
     }
   }
@@ -2013,7 +2013,7 @@ export class CreatorBase extends Base
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
     this.updateSurveyLogicValues(options.target, options.name, options.oldValue);
     const plugin = this.currentPlugin;
-    if(!!plugin && !!plugin.onDesignerSurveyPropertyChanged) {
+    if (!!plugin && !!plugin.onDesignerSurveyPropertyChanged) {
       plugin.onDesignerSurveyPropertyChanged(options.target, options.name);
     }
     if (!this.onSurveyPropertyValueChanged.isEmpty) {
