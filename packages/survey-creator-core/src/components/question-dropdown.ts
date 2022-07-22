@@ -45,7 +45,7 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
   public getChoiceCss(): string {
     return new CssClassBuilder()
       .append("svc-question__dropdown-choice")
-      .append("svc-question__dropdown-choice--collapsed", this.isCollapsed)
+      .append("svc-question__dropdown-choice--collapsed", this.isCollapsed && this.needToCollapse)
       .toString();
   }
 
