@@ -40,6 +40,6 @@ export const screenshotComparerOptions = {
     ignoreAntialiasing: true,
     ignoreCaret: true,
   },
-  generatePatch: true,
+  generatePatch: false,
   highlightColor: { r: 0xff, g: 0, b: 0xff },
 };
