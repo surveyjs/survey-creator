@@ -604,11 +604,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!this.survey) return [];
     const res = [];
     const questions = this.survey.getAllQuestions();
+    const contextObject = this.getContextObject();
     if (questions.length > 0) {
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i];
-        if (this.object == question) continue;
-        const context = !!this.object ? this.object : (!this.context || this.context === question);
+        if (contextObject == question) continue;
+        const context = contextObject ? contextObject : (!this.context || this.context === question);
         question.addConditionObjectsByContext(res, context);
       }
       this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res);
@@ -629,6 +630,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.addValuesIntoConditionQuestions(this.survey.getVariableNames(), res);
     SurveyHelper.sortItems(res);
     return res;
+  }
+  private getContextObject(): Base {
+    if(this.object && this.object.isDescendantOf("itemvalue")) {
+      const res: any = (<ItemValue>this.object).locOwner;
+      if(!!res && res.getType) {
+        if(!!res.locOwner && res.locOwner.isDescendantOf("matrixdropdowncolumn"))
+          return res.locOwner;
+        return res;
+      }
+    }
+    return this.object;
   }
   private addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>) {
     for (let i = 0; i < values.length; i++) {
