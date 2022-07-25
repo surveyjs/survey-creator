@@ -302,6 +302,21 @@ test("allConditionQuestions", () => {
     { value: "q3", text: "q3" }
   ]);
 });
+test("allCondtionQuestions for choices in a question", () => {
+  const survey = new SurveyModel();
+  const page = survey.addNewPage("p");
+  const question = <QuestionDropdownModel>(
+    page.addNewQuestion("radiogroup", "q1")
+  );
+  question.choices = [1, 2, 3];
+  page.addNewQuestion("text", "q2");
+  question.columns.splice(0, question.columns.length);
+
+  const editor = new ConditionEditor(survey, question.choices[0]);
+  const condQuestions = editor.allConditionQuestions;
+  expect(condQuestions).toHaveLength(1);
+  expect(condQuestions[0].value).toEqual("q2");
+});
 test("allCondtionQuestions for matrix column", () => {
   var survey = new SurveyModel();
   var page = survey.addNewPage("p");
@@ -321,11 +336,32 @@ test("allCondtionQuestions for matrix column", () => {
     editor.allConditionQuestions.filter((e) => e.value === "row.col2").length > 0
   ).toBeFalsy();
 });
+test("allCondtionQuestions for choices in matrix column", () => {
+  var survey = new SurveyModel();
+  var page = survey.addNewPage("p");
+  var question = <QuestionMatrixDropdownModel>(
+    page.addNewQuestion("matrixdropdown", "q1")
+  );
+  question.columns.splice(0, question.columns.length);
+  question.addColumn("col1");
+  const column = question.addColumn("col2");
+  column.cellType = "dropdown";
+  (<any>column).choices = [1, 2, 3];
+  question.addColumn("col3");
+
+  const editor = new ConditionEditor(survey, (<any>column).choices[0]);
+  expect(
+    editor.allConditionQuestions.filter((e) => e.value === "row.col1").length > 0
+  ).toBeTruthy();
+  expect(
+    editor.allConditionQuestions.filter((e) => e.value === "row.col2").length > 0
+  ).toBeFalsy();
+});
 test("allCondtionQuestions for panel dynamic", () => {
   var survey = new SurveyModel();
   var page = survey.addNewPage("p");
   var question = <QuestionPanelDynamicModel>(
-    page.addNewQuestion("paneldynamic", "q1")
+    page.addNewQuestion("paneldynamic", "panel1")
   );
   question.template.addNewQuestion("text", "q1");
   question.template.addNewQuestion("text", "q2");
@@ -334,6 +370,26 @@ test("allCondtionQuestions for panel dynamic", () => {
   var panelQuestion = question.template.questions[1];
 
   var editor = new ConditionEditor(survey, panelQuestion);
+  expect(
+    editor.allConditionQuestions.filter((e) => e.value === "panel.q1").length > 0
+  ).toBeTruthy();
+  expect(
+    editor.allConditionQuestions.filter((e) => e.value === "panel.q2").length > 0
+  ).toBeFalsy();
+});
+test("allCondtionQuestions for choices in question in panel dynamic", () => {
+  var survey = new SurveyModel();
+  var page = survey.addNewPage("p");
+  var question = <QuestionPanelDynamicModel>(
+    page.addNewQuestion("paneldynamic", "panel1")
+  );
+  question.template.addNewQuestion("text", "q1");
+  const panelQuestion = <QuestionDropdownModel>question.template.addNewQuestion("dropdown", "q2");
+  panelQuestion.choices = [1, 2, 3];
+  question.template.addNewQuestion("text", "q3");
+  question.panelCount = 1;
+
+  var editor = new ConditionEditor(survey, panelQuestion.choices[0]);
   expect(
     editor.allConditionQuestions.filter((e) => e.value === "panel.q1").length > 0
   ).toBeTruthy();
