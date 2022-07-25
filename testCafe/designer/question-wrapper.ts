@@ -245,14 +245,14 @@ test("Dropdown question with ability to collapse choices", async (t) => {
     .click(getToolboxItemByText("Dropdown"))
 
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
-    .expect(buttonSelector.withText("Show more...").exists).ok()
+    .expect(buttonSelector.withText("Show more").exists).ok()
 
     .click(buttonSelector)
     .expect(buttonSelector.withText("Show less").exists).ok()
 
     .hover(getToolboxItemByText("Single Input"))
     .click(getToolboxItemByText("Single Input"))
-    .expect(buttonSelector.withText("Show more...").exists).ok()
+    .expect(buttonSelector.withText("Show more").exists).ok()
 
     .click(Selector(".svc-question__dropdown-choice .svc-item-value-controls__remove"))
     .expect(buttonSelector.exists).notOk()

@@ -2992,7 +2992,7 @@ test("Check QuestionDropdownAdornerViewModel", (): any => {
   expect(model.needToCollapse).toBeTruthy();
 
   expect(model.getRenderedItems().length).toBe(1);
-  expect(model.getButtonText()).toBe("Show more...");
+  expect(model.getButtonText()).toBe("Show more");
   expect(model.isCollapseView).toBeTruthy();
 
   question.setPropertyValue("isSelectedInDesigner", true);
@@ -3003,7 +3003,7 @@ test("Check QuestionDropdownAdornerViewModel", (): any => {
 
   question.setPropertyValue("isSelectedInDesigner", false);
   expect(model.getRenderedItems().length).toBe(1);
-  expect(model.getButtonText()).toBe("Show more...");
+  expect(model.getButtonText()).toBe("Show more");
   expect(model.isCollapseView).toBeTruthy();
 
   const propertiesFilter = property => property.name == "isSelectedInDesigner" && property.key == "dropdownCollapseChecker";
@@ -3013,6 +3013,7 @@ test("Check QuestionDropdownAdornerViewModel", (): any => {
 });
 test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): any => {
   const creator: CreatorTester = new CreatorTester();
+  creator.maxVisibleChoices = -1;
   creator.JSON = {
     questions: [
       {

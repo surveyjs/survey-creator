@@ -20,6 +20,9 @@
 }
 
 .svc-question__dropdown-choices--wrapper .svc-action-button {
-  margin-left: calcSize(6.5);
+  margin-left: calcSize(6.75);
+  margin-top: calcSize(1);
+
+  cursor: pointer;
 }
 
