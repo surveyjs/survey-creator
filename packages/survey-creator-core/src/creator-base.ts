@@ -10,7 +10,7 @@ import {
   property,
   propertyArray,
   IElement,
-  Serializer,
+  Serializer, QuestionFactory,
   JsonObjectProperty,
   ActionContainer,
   AdaptiveActionContainer,
@@ -56,6 +56,9 @@ import { ICreatorOptions } from "./creator-options";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
+
+Serializer.removeClass("tagbox"); // remove after tagbox implemented
+QuestionFactory.Instance.unregisterElement("tagbox");
 
 export interface IKeyboardShortcut {
   name?: string;

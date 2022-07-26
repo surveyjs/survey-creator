@@ -26,7 +26,7 @@ import {
   MatrixDropdownColumn,
   SurveyTriggerSetValue,
   QuestionMatrixModel,
-  Serializer,
+  Serializer, QuestionFactory,
   QuestionPanelDynamicModel,
   QuestionMatrixDropdownModel,
   IAction,
@@ -57,6 +57,9 @@ import { editorLocalization } from "../../src/editorLocalization";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
+
+Serializer.removeClass("tagbox"); // remove after tagbox implemented
+QuestionFactory.Instance.unregisterElement("tagbox");
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
