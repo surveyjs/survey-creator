@@ -57,6 +57,9 @@ import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 
+Survey.QuestionFactory.Instance.unregisterElement("tagbox");
+Survey.Serializer.removeClass("tagbox"); // remove after tagbox implemented
+
 export interface IKeyboardShortcut {
   name?: string;
   hotKey: { ctrlKey?: boolean, keyCode: number };
