@@ -1,5 +1,8 @@
 import * as Survey from "survey-knockout";
 
+Survey.QuestionFactory.Instance.unregisterElement("tagbox");
+Survey.Serializer.removeClass("tagbox"); // remove after tagbox implemented
+
 export var settings = {
   traslation: {
     sortByName: true,
