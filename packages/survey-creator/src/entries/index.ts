@@ -9,6 +9,9 @@ import "../../vendor/knockout-sortable.js";
 export let Version: string;
 Version = `${process.env.VERSION}`;
 
+import { Serializer } from "survey-knockout";
+Serializer.removeClass("tagbox"); // remove after tagbox implemented
+
 export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";

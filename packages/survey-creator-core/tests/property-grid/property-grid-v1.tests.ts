@@ -47,6 +47,8 @@ export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/fast-entry";
 export * from "../../src/components/link-value";
 
+Serializer.removeClass("tagbox"); // remove after tagbox implemented
+
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
     PropertyGridEditorCollection.clearHash();

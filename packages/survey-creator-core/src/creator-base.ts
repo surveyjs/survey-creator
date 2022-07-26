@@ -57,6 +57,8 @@ import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 
+Serializer.removeClass("tagbox"); // remove after tagbox implemented
+
 export interface IKeyboardShortcut {
   name?: string;
   hotKey: { ctrlKey?: boolean, keyCode: number };
