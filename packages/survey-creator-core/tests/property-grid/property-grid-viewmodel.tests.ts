@@ -95,7 +95,7 @@ test("Element Selector Bar Item", () => {
   expect(selectorModel.list.actions).toHaveLength(4);
   expect(selectorModel.list.actions[2].title).toEqual("q1");
   expect(creator.selectedElementName).toEqual("survey");
-  selectorModel.list.selectItem(selectorModel.list.actions[2]);
+  selectorModel.list.onItemClick(selectorModel.list.actions[2]);
   expect(creator.selectedElementName).toEqual("q1");
   expect(popupModel.isVisible).toBeFalsy();
 });
@@ -125,7 +125,7 @@ test("Element Selector Bar Item", () => {
   expect(selectorModel.list.actions).toHaveLength(4);
   expect(selectorModel.list.actions[2].title).toEqual("q1");
   expect(creator.selectedElementName).toEqual("survey");
-  selectorModel.list.selectItem(selectorModel.list.actions[2]);
+  selectorModel.list.onItemClick(selectorModel.list.actions[2]);
   expect(creator.selectedElementName).toEqual("q1");
   expect(popupModel.isVisible).toBeFalsy();
 });
