@@ -222,6 +222,15 @@ export class SurveyQuestionEditorDefinition {
         { name: "allowClear", tab: "choices" },
       ],
     },
+    tagbox: {
+      properties: [
+        "placeholder",
+        { name: "searchEnabled", tab: "layout" },
+        { name: "showSelectionControls", tab: "layout" },
+        { name: "hideSelectedItems", tab: "layout" },
+        { name: "allowClear", tab: "choices" }
+      ]
+    },
     imagepicker: {
       properties: [
         "multiSelect",
