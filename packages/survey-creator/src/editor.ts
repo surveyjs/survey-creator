@@ -41,14 +41,16 @@ import { EditableObject } from "./propertyEditors/editableObject";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
 
+Survey.Serializer.removeClass("tagbox"); // remove after tagbox implemented
+Survey.QuestionFactory.Instance.unregisterElement("tagbox");
+
 /**
  * Survey Creator is WYSIWYG editor.
  */
 
 export class SurveyCreator
   extends CreatorBase<SurveyForDesigner>
-  implements ISurveyObjectEditorOptions
-{
+  implements ISurveyObjectEditorOptions {
   public static defaultNewSurveyText: string = "{ pages: [ { name: 'page1'}] }";
   private renderedElement: HTMLElement;
 

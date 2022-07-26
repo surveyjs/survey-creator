@@ -13,6 +13,9 @@ import { SurveyHelper } from "../src/surveyHelper";
 
 export default QUnit.module("surveyEditorTests");
 
+Survey.Serializer.removeClass("tagbox"); // remove after tagbox implemented
+Survey.QuestionFactory.Instance.unregisterElement("tagbox");
+
 class SurveyCreatorTester extends SurveyCreator {
   constructor() {
     super();
