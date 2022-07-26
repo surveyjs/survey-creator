@@ -232,7 +232,7 @@ test("set property editor", () => {
   (<any>question).prop1 = ["item1", "item3"];
   var propertyGrid = new PropertyGridModelTester(question);
   var editQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("prop1");
-  expect(editQuestion.getType()).toEqual("checkbox");
+  expect(editQuestion.getType()).toEqual("tagbox");
   expect(editQuestion.choices.length).toEqual(3);
   expect(editQuestion.value).toHaveLength(2);
   expect(editQuestion.value[0]).toEqual("item1");
