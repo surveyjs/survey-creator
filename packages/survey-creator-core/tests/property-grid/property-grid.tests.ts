@@ -224,6 +224,7 @@ test("dropdown property editor, get choices on callback", () => {
 });
 
 test("set property editor", () => {
+  Serializer.removeClass("tagbox"); // remove after tagbox implemented
   Serializer.addProperty("question", {
     name: "prop1:set",
     choices: ["item1", "item2", "item3"]
@@ -2372,6 +2373,7 @@ test("Use maxLength property attribute", () => {
   Serializer.findProperty("question", "title").maxLength = -1;
 });
 test("We should not have 'Others' category in our objects", () => {
+  Serializer.removeClass("tagbox"); // remove after tagbox implemented
   const survey = new SurveyModel();
   const page = survey.addNewPage("page1");
   const panel = page.addNewPanel("panel");

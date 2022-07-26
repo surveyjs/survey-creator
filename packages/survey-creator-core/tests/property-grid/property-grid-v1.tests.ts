@@ -1293,6 +1293,7 @@ test("Triggers property editor and setvalue trigger", () => {
   expect(survey.triggers[0]["setToName"]).toEqual("question2");
 });
 test("'set' property editor", () => {
+  Serializer.removeClass("tagbox"); // remove after tagbox implemented
   Serializer.addProperty("survey", {
     name: "region:set",
     choices: ["Africa", "Americas", "Asia", "Europe", "Oceania"]
@@ -1308,6 +1309,7 @@ test("'set' property editor", () => {
 });
 
 test("'set' property editor, get choices on callback, Bug#720", () => {
+  Serializer.removeClass("tagbox"); // remove after tagbox implemented
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;
   Serializer.addProperty("survey", {
@@ -1924,6 +1926,7 @@ test("SurveyPropertyDefaultValueEditor for matrixdropdown with cellType equals b
 });
 
 test("SurveyPropertyMultipleValuesEditor", () => {
+  Serializer.removeClass("tagbox"); // remove after tagbox implemented
   Serializer.addProperty("question", {
     name: "multiple:multiplevalues",
     choices: [
