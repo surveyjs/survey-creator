@@ -39,7 +39,7 @@ test("Test language Bar Item", (): any => {
   let langAction = langActions[0];
   expect(langAction).toBeTruthy();
   expect(langAction.title).toEqual("English");
-  testPlugin["languageListModel"].selectItem(testPlugin["languageListModel"].actions.filter(act => act.id === "de")[0]);
+  testPlugin["languageListModel"].onItemClick(testPlugin["languageListModel"].actions.filter(act => act.id === "de")[0]);
   expect(model.survey.locale).toEqual("de");
   expect(langAction.title).toEqual("Deutsch");
 
@@ -553,7 +553,7 @@ test("Change test themes list actions titles on changing locale", (): any => {
   expect(themeAction.title).toEqual("Default");
   expect(actions[1].title).toEqual("Modern");
 
-  listModel.selectItem(actions[1]);
+  listModel.onItemClick(actions[1]);
   expect(themeAction.title).toEqual("Modern");
   creator.locale = "de";
   expect(themeAction.title).toEqual("Modern de");
