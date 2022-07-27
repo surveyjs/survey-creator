@@ -3,7 +3,7 @@ import {
   objectSelectorButton, objectSelectorPopup, propertyGridSelector, url,
   pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation
 } from "../helper";
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 const title = "Side bar";
 
 const json = {
@@ -209,4 +209,25 @@ test("toolboxLocation sidebar: check toolbox items", async (t) => {
     .expect(visibleItemsInToolboxInSidebar.count).eql(toolboxItemCount)
 
     .resizeWindow(1920, 900); // reset window size
+});
+
+test("tablet size click outside", async (t) => {
+  await t.resizeWindow(820, 1180);
+
+  const getSidebarOpen = ClientFunction(() => { return !!window["creator"].sidebar.flyoutPanelMode; });
+
+  const showSidebarButton = Selector("[title='Show Panel']");
+  const shadowArea = Selector(".svc-side-bar__shadow");
+
+  let isSidebarOpen = await getSidebarOpen();
+  await t.expect(isSidebarOpen).notOk;
+
+  await t.click(showSidebarButton);
+  isSidebarOpen = await getSidebarOpen();
+  await t.expect(isSidebarOpen).ok;
+
+  await t.click(shadowArea, { offsetX: 10 });
+
+  isSidebarOpen = await getSidebarOpen();
+  await t.expect(isSidebarOpen).notOk;
 });
