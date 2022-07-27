@@ -211,8 +211,7 @@ test("toolboxLocation sidebar: check toolbox items", async (t) => {
     .resizeWindow(1920, 900); // reset window size
 });
 
-//TODO REMOVE TEST ONLY
-test.only("tablet size click outside", async (t) => {
+test("tablet size click outside", async (t) => {
   await t.resizeWindow(820, 1180);
 
   const isSidebarOpen = ClientFunction(() => { return window["creator"].sidebar.flyoutPanelMode; });
