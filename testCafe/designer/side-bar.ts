@@ -214,17 +214,20 @@ test("toolboxLocation sidebar: check toolbox items", async (t) => {
 test("tablet size click outside", async (t) => {
   await t.resizeWindow(820, 1180);
 
-  const isSidebarOpen = ClientFunction(() => { return window["creator"].sidebar.flyoutPanelMode; });
+  const getSidebarOpen = ClientFunction(() => { return !!window["creator"].sidebar.flyoutPanelMode; });
 
-  const showButton = Selector("[title='Show Panel']");
+  const showSidebarButton = Selector("[title='Show Panel']");
   const shadowArea = Selector(".svc-side-bar__shadow");
 
-  let result = await isSidebarOpen();
-  await t.expect(result).ok;
+  let isSidebarOpen = await getSidebarOpen();
+  await t.expect(isSidebarOpen).notOk;
 
-  await t.click(showButton);
+  await t.click(showSidebarButton);
+  isSidebarOpen = await getSidebarOpen();
+  await t.expect(isSidebarOpen).ok;
+
   await t.click(shadowArea, { offsetX: 10 });
 
-  result = await isSidebarOpen();
-  await t.expect(result).notOk;
+  isSidebarOpen = await getSidebarOpen();
+  await t.expect(isSidebarOpen).notOk;
 });
