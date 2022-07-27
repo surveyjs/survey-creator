@@ -489,7 +489,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const qType = !!json ? json.type : null;
 
       opt.choices.forEach((choice, index) => {
-        choice.setIsEnabled(ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]));
+        const isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
+        choice.setIsEnabled(isOperatorEnabled);
+        choice.setIsVisible(isOperatorEnabled);
       });
     });
   }
@@ -775,7 +777,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     let isCurrentOperatorEnabled = true;
     const op = questionOperator.value;
     for (let i = 0; i < choices.length; i++) {
-      choices[i].setIsEnabled(ConditionEditor.isOperatorEnabled(qType, settings.operators[choices[i].value]));
+      const isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choices[i].value]);
+      choices[i].setIsEnabled(isOperatorEnabled);
+      choices[i].setIsVisible(isOperatorEnabled);
       if (choices[i].value == op) {
         isCurrentOperatorEnabled = choices[i].isEnabled;
       }

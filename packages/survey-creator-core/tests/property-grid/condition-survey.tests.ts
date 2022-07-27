@@ -566,14 +566,13 @@ test("enabled operators", () => {
     panel.getQuestionByName("questionName").value = questionName;
     var choices = panel.getQuestionByName("operator").choices;
     for (var i = 0; i < choices.length; i++) {
-      var isItemEnabled = choices[i].isEnabled;
+      const isItemEnabled = choices[i].isEnabled;
+      const isItemVisible = choices[i].isVisible;
       var operatorName = choices[i].value;
-      expect(
-        isItemEnabled && operatorNames.indexOf(operatorName) < 0
-      ).toBeFalsy();
-      expect(
-        !isItemEnabled && operatorNames.indexOf(operatorName) > -1
-      ).toBeFalsy();
+      expect(isItemEnabled && operatorNames.indexOf(operatorName) < 0).toBeFalsy();
+      expect(!isItemEnabled && operatorNames.indexOf(operatorName) > -1).toBeFalsy();
+      expect(isItemVisible && operatorNames.indexOf(operatorName) < 0).toBeFalsy();
+      expect(!isItemVisible && operatorNames.indexOf(operatorName) > -1).toBeFalsy();
     }
   };
   var checkFunMultiple = function (
@@ -1011,6 +1010,7 @@ test("anyof/allof is enabled on editing, Bug #804", () => {
     "anyof"
   );
   expect(itemValue.isEnabled).toBeFalsy();
+  expect(itemValue.isVisible).toBeFalsy();
 });
 test("remove operators", () => {
   var survey = new SurveyModel({
