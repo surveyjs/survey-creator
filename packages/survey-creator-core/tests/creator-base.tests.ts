@@ -864,6 +864,27 @@ test("undo/redo make sure that the deleting element is not active", (): any => {
   expect(creator.selectedElementName).toEqual("survey");
 });
 
+test("undo/redo with events", (): any => {
+  const creator = new CreatorTester();
+
+  creator.onModified.add(function (sender, options) {
+    // We use the question's name to display in the UI dropdown lists so keep it up to date
+    if (options.type === "PROPERTY_CHANGED" && options.name === "title") {
+      options.target.description = options.newValue;
+    }
+  });
+
+  creator.clickToolboxItem({ type: "text", name: "question1" });
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(creator.survey.getAllQuestions()[0].title).toEqual("question1");
+  creator.survey.getAllQuestions()[0].title = "nt";
+  expect(creator.survey.getAllQuestions()[0].title).toEqual("nt");
+  expect(creator.survey.getAllQuestions()[0].description).toEqual("nt");
+  creator.undo();
+  expect(creator.survey.getAllQuestions()[0].title).toEqual("question1");
+  expect(creator.survey.getAllQuestions()[0].description).toEqual("");
+});
+
 test("fast copy tests, copy a question and check the index", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
