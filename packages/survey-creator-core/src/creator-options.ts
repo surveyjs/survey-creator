@@ -160,7 +160,7 @@ export interface ICreatorOptions {
   /**
    * Limits the number of visible choices. Users can click "Show more" to view hidden choices.
    * 
-   * Set this property to -1 if you do not want any choices to hide.
+   * Set this property to -1 if you do not want to hide any choices.
    * 
    * Default value: 10
    */
