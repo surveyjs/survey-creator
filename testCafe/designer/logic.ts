@@ -542,22 +542,22 @@ test("Availability of items", async (t) => {
     .click(logicDetailButtonElement)
 
     .click(logicOperatorSelector.nth(1))
-    .expect(visibleListItems.count).eql(12)
-    .expect(visibleDisabledListItems.count).eql(4)
+    .expect(visibleListItems.count).eql(8)
+    .expect(visibleDisabledListItems.count).eql(0)
     .pressKey("esc")
 
     .click(logicOperatorSelector.nth(0))
-    .expect(visibleListItems.count).eql(12)
-    .expect(visibleDisabledListItems.count).eql(4)
+    .expect(visibleListItems.count).eql(8)
+    .expect(visibleDisabledListItems.count).eql(0)
     .click(getListItemByText("Greater than or equal to"))
     .click(logicOperatorSelector.nth(0))
-    .expect(visibleListItems.count).eql(12)
-    .expect(visibleDisabledListItems.count).eql(4)
+    .expect(visibleListItems.count).eql(8)
+    .expect(visibleDisabledListItems.count).eql(0)
     .pressKey("esc")
 
     .click(logicOperatorSelector.nth(1))
-    .expect(visibleListItems.count).eql(12)
-    .expect(visibleDisabledListItems.count).eql(4);
+    .expect(visibleListItems.count).eql(8)
+    .expect(visibleDisabledListItems.count).eql(0);
 });
 
 test("Could not change 'and' on 'or' in logic tab or in condition editor", async (t) => {
