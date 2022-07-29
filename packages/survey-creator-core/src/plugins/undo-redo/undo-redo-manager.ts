@@ -87,10 +87,10 @@ export class UndoRedoManager {
     const nextTransaction = this._transactions[index + 1];
     return nextTransaction;
   }
-  private notifyChangesFinished(transaction: Transaction) {
+  private notifyChangesFinished(transaction: Transaction, isUndo: boolean = false) {
     if (transaction.actions.length > 0 && transaction.actions[0]) {
       !!this.changesFinishedCallback &&
-        this.changesFinishedCallback(transaction.actions[0].getChanges());
+        this.changesFinishedCallback(transaction.actions[0].getChanges(isUndo));
     }
   }
   canUndoRedoCallback() { }
@@ -129,7 +129,7 @@ export class UndoRedoManager {
 
     this._currentTransactionIndex--;
     this.canUndoRedoCallback();
-    this.notifyChangesFinished(currentTransaction);
+    this.notifyChangesFinished(currentTransaction, true);
   }
   canRedo() {
     return !!this._getNextTransaction();
@@ -212,12 +212,12 @@ export class UndoRedoAction implements IUndoRedoAction {
     this._sender[this._propertyName] = this._oldValue;
   }
 
-  getChanges(): IUndoRedoChange {
+  getChanges(isUndo: boolean = false): IUndoRedoChange {
     return {
       object: this._sender,
       propertyName: this._propertyName,
-      oldValue: this._oldValue,
-      newValue: this._newValue
+      oldValue: isUndo? this._newValue : this._oldValue,
+      newValue: isUndo? this._oldValue : this._newValue
     };
   }
   tryMerge(sender: Base, propertyName: string, newValue: any): boolean {
