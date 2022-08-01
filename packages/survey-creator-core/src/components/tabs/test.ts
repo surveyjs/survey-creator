@@ -86,7 +86,7 @@ export class TestSurveyTabViewModel extends Base {
 
   public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "test");
-    newSurvey.css = theme;
+    newSurvey.setCss(theme, false);
     this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
@@ -281,7 +281,7 @@ export class TestSurveyTabViewModel extends Base {
     return null;
   }
   private updateResultsTemplate(theme: any) {
-    this.simulator.survey.css = theme;
+    this.simulator.survey.setCss(theme, false);
     this.simulator.survey.render();
   }
   public setTheme(themeName: string, themeMapper: any): void {
