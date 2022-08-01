@@ -147,3 +147,47 @@ test("Bug #2933: empty matrix look", async (t) => {
   await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
   await checkElementScreenshot("matrix-no-columns.png", Selector(".sd-question"), t);
 });
+
+test("Hidden Question Issue: #3298", async (t) => {
+  await t.resizeWindow(1280, 900);
+  await explicitErrorHandler();
+  await setJSON(
+    {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "item1",
+                "item2",
+                "item3"
+              ]
+            },
+            {
+              "type": "checkbox",
+              "name": "question2",
+              "visibleIf": "{question1} notempty",
+              "choices": [
+                "item1",
+                "item2",
+                "item3"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  );
+  await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+
+  const showInvisibleElements = Selector('[title="Show invisible elements"]');
+  await t.click(showInvisibleElements);
+  await checkElementScreenshot("preview-tab-show-invisible-by-creator-button.png", Selector(".sd-page"), t);
+
+  await t.click(showInvisibleElements).click(Selector(".sd-selectbase__item"));
+  await checkElementScreenshot("preview-tab-show-invisible-by-trigger.png", Selector("[data-name='question2']"), t);
+});
