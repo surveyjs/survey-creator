@@ -329,8 +329,8 @@ test("Panel multi-question row", async (t) => {
   );
   const DragZoneQuestion1 = Question1.find(".svc-question__drag-element");
 
-  await t.hover(Question1, { speed: 0.5 });
-  await t.hover(DragZoneQuestion1);
+  await t.hover(Question1, { speed: 0.1 });
+  await t.hover(DragZoneQuestion1, { speed: 0.1 });
   await t.dragToElement(DragZoneQuestion1, Question2, {
     offsetX: 5,
     offsetY: 5,
