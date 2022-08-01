@@ -447,6 +447,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       this.selectorElementsHash[value] = el;
       if (!!el[logicType.propertyName] && !this.isElementInInitialSelection(logicType.name, el)) {
         itemValue.enableIf = "1=2";
+        itemValue.visibleIf = "1=2";
       }
       res.push(itemValue);
     }
