@@ -145,6 +145,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!this.surveyElement.isInteractiveDesignElement) {
       return;
     }
+    this.updateActionsProperties();
     toggleHovered(event, element);
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
