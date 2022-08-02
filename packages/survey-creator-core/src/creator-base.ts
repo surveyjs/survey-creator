@@ -437,6 +437,7 @@ export class CreatorBase extends Base
    *- "survey-tester" - raised from page selector list in "Preview" tab
    *- "survey-tester-selected" - raised on setting page selector title in "Preview" tab
    *- "survey-translation" - raised from translation tab
+   *- "property-editor" - raised on showing question property editor, for example "gotoName". It is raised for all elements (questions) in the dropdown.
    *- "property-grid" - raised from showing object selector for property grid in "Designer" tab.
    *- "property-grid-title" - raised on rendering selected object title in property grid in "Designer" tab.
    * @see showObjectTitles

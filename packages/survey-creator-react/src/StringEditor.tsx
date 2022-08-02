@@ -39,14 +39,15 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   public get errorText(): string {
     return this.baseModel.errorText;
   }
-
+  private onChangedHandler = (sender: any, options: any) => {
+    this.setState({ changed: !!this.state && this.state.changed ? this.state.changed + 1 : 1 });
+  }
   public componentDidMount() {
     super.componentDidMount();
     if (!this.locString) return;
     const self: SurveyLocStringEditor = this;
-    this.locString.onChanged = function () {
-      self.setState({ changed: self.state.changed + 1 });
-    };
+
+    this.locString.onStringChanged.add(this.onChangedHandler);
     if (this.locString["__isEditing"]) {
       this.svStringEditorRef.current.focus();
       // document.execCommand('selectAll', false, null);
@@ -55,7 +56,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   public componentWillUnmount() {
     super.componentWillUnmount();
     if (!this.locString) return;
-    this.locString.onChanged = function () { };
+    this.locString.onStringChanged.remove(this.onChangedHandler);
   }
   private get placeholder(): string {
     return this.baseModel.placeholder;

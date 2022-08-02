@@ -483,3 +483,36 @@ test("Test selection after tab", async (t) => {
       return window.getSelection().toString();
     })()).eql("page_desc");
 });
+
+test("Test string change event", async (t) => {
+  let json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "matrix",
+            "name": "question1",
+            "columns": [
+              "Column 1",
+              "Column 2",
+              "Column 3"
+            ],
+            "rows": [
+              "Row 1",
+              "Row 2"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  await setJSON(json);
+
+  const svItemSelector = Selector(".sv-string-editor").withText("page_title");
+  await ClientFunction(() => {
+    window["creator"].survey.getAllQuestions()[0].columns[0].text = "newTitle";
+  })();
+});

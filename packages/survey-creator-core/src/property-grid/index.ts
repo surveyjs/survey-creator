@@ -1510,6 +1510,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     var showTitles = !!options && options.showTitlesInExpressions;
     var qItems = questions.map((q) => {
       let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
+      if(!!options) text = options.getObjectDisplayName(q, "property-editor", text);
       let value = this.getItemValue(<any>q);
       return { value: value, text: text };
     });
