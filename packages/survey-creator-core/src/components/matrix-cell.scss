@@ -74,8 +74,10 @@
 .svc-matrix-cell__popup {
   .sv-popup__scrolling-content {
     margin-top: calcSize(1);
+    padding-top: 0;
   }
 }
+
 .svc-question__content {
   .sd-table__cell--detail-panel {
     .svc-question__adorner {
