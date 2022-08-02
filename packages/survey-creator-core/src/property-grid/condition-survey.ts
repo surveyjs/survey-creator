@@ -368,6 +368,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "questionValue",
               type: "text",
               visible: false
+            },
+            {
+              name: "placeHolder",
+              type: "html",
+              visibleIf: "{panel.questionName} empty and {panelIndex} == 0",
+              html: `<div class='svc-logic-placeholder'><span class="svc-logic-placeholder__text">${editorLocalization.getString("pe.logicQuestionPlaceholder")}<span></div>`
             }
           ]
         },
@@ -489,9 +495,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const qType = !!json ? json.type : null;
 
       opt.choices.forEach((choice, index) => {
-        const isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
-        choice.setIsEnabled(isOperatorEnabled);
-        choice.setIsVisible(isOperatorEnabled);
+        choice.setIsEnabled(ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]));
       });
     });
   }
@@ -777,9 +781,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     let isCurrentOperatorEnabled = true;
     const op = questionOperator.value;
     for (let i = 0; i < choices.length; i++) {
-      const isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choices[i].value]);
-      choices[i].setIsEnabled(isOperatorEnabled);
-      choices[i].setIsVisible(isOperatorEnabled);
+      choices[i].setIsEnabled(ConditionEditor.isOperatorEnabled(qType, settings.operators[choices[i].value]));
       if (choices[i].value == op) {
         isCurrentOperatorEnabled = choices[i].isEnabled;
       }
