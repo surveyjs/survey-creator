@@ -101,3 +101,29 @@ test("Page navigator hover", async t => {
     .expect(parseInt(zIndex))
     .gte(20);
 });
+test("Question hover and events", async t => {
+  await setJSON(json);
+  await ClientFunction(() => {
+    window["creator"].onElementAllowOperations.add((sender, options) => {
+      options.allowDelete = !window["creator"].__creatorNotAllowDelete;
+    });
+  })();
+  await t
+    .maximizeWindow();
+  const questionTitle = Selector(".svc-string-editor").withText("string_editor");
+  const action = Selector(".svc-tab-designer .svc-question__adorner.svc-hovered .sv-action-bar-item[title=Delete]");
+  await t
+    .hover(questionTitle, { offsetX: 5, offsetY: 5 })
+    .wait(300)
+    .expect(action.visible).ok()
+    .hover(Selector(".svc-toolbox"));
+
+  await ClientFunction(() => {
+    window["creator"].__creatorNotAllowDelete = true;
+  })();
+
+  await t
+    .hover(questionTitle, { offsetX: 5, offsetY: 5 })
+    .wait(300)
+    .expect(action.visible).notOk();
+});
