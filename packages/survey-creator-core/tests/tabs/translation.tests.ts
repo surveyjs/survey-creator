@@ -371,7 +371,7 @@ test("Translation update filterPageActiontitle after activated", () => {
   };
   const tabTranslationPlugin = new TabTranslationPlugin(creator);
   const filterPageAction = tabTranslationPlugin["filterPageAction"];
-  const filterPageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
+  const filterPageList = <ListModel>(filterPageAction.data);
   tabTranslationPlugin.activate();
   expect(filterPageAction.title).toEqual("All Pages");
   expect(filterPageList.selectedItem.title).toEqual("All Pages");
@@ -396,7 +396,7 @@ test("Translation update filterStringsAction after activated", () => {
   };
   const tabTranslationPlugin = new TabTranslationPlugin(creator);
   const filterStringsAction = tabTranslationPlugin["filterStringsAction"];
-  const filterStringsList = <ListModel>tabTranslationPlugin["stringsPopupModel"].contentComponentData.model;
+  const filterStringsList = <ListModel>filterStringsAction.data;
   tabTranslationPlugin.activate();
   expect(filterStringsAction.title).toEqual("Used Strings Only");
   expect(filterStringsList.selectedItem.title).toEqual("Used Strings Only");
@@ -427,8 +427,8 @@ test("Translation filterPage action content and visiblity after activate", () =>
     ]
   };
   const tabTranslationPlugin = new TabTranslationPlugin(creator);
-  const pageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
   const filterPageAction = <Action>tabTranslationPlugin["filterPageAction"];
+  const pageList = <ListModel>filterPageAction.data;
   tabTranslationPlugin.activate();
   expect(pageList.actions.map((action: Action) => action.title)).toEqual(["All Pages", "page1", "page2"]);
   expect(filterPageAction.visible).toBeTruthy();
@@ -512,7 +512,7 @@ test("Make invisible locales in language selector, that has been already choosen
   });
   surveyLocalization.supportedLocales = ["en", "fr", "de", "se"];
   const translation = new Translation(survey);
-  const list = translation["chooseLanguagePopupModel"].contentComponentData.model;
+  const list = translation["addLanguageAction"].data;
   expect(translation.chooseLanguageActions).toHaveLength(4);
   expect(translation.chooseLanguageActions[0].id).toEqual("en");
   expect(translation.chooseLanguageActions[1].id).toEqual("fr");
@@ -1073,7 +1073,6 @@ test("Change filterPageAction to all pages on changing survey", () => {
   creator.JSON = json;
   const tabTranslationPlugin = <TabTranslationPlugin>creator.getPlugin("translation");
   const filterPageAction = tabTranslationPlugin["filterPageAction"];
-  const filterPageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
   creator.activeTab = "translation";
   expect(filterPageAction.title).toEqual("All Pages");
   tabTranslationPlugin.model.filteredPage = creator.survey.pages[0];
