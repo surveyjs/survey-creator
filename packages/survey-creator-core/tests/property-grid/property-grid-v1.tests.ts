@@ -13,7 +13,7 @@ import {
   Question,
   MatrixDropdownColumn,
   SurveyTriggerSetValue,
-  Serializer,
+  Serializer, QuestionFactory,
   QuestionRadiogroupModel,
   SurveyTriggerVisible,
   NumericValidator,
@@ -46,6 +46,9 @@ export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/fast-entry";
 export * from "../../src/components/link-value";
+
+Serializer.removeClass("tagbox"); // remove after tagbox implemented
+QuestionFactory.Instance.unregisterElement("tagbox");
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {

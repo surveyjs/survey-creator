@@ -10,7 +10,7 @@ import {
   property,
   propertyArray,
   IElement,
-  Serializer,
+  Serializer, QuestionFactory,
   JsonObjectProperty,
   ActionContainer,
   AdaptiveActionContainer,
@@ -56,6 +56,9 @@ import { ICreatorOptions } from "./creator-options";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
+
+Serializer.removeClass("tagbox"); // remove after tagbox implemented
+QuestionFactory.Instance.unregisterElement("tagbox");
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -434,6 +437,7 @@ export class CreatorBase extends Base
    *- "survey-tester" - raised from page selector list in "Preview" tab
    *- "survey-tester-selected" - raised on setting page selector title in "Preview" tab
    *- "survey-translation" - raised from translation tab
+   *- "property-editor" - raised on showing question property editor, for example "gotoName". It is raised for all elements (questions) in the dropdown.
    *- "property-grid" - raised from showing object selector for property grid in "Designer" tab.
    *- "property-grid-title" - raised on rendering selected object title in property grid in "Designer" tab.
    * @see showObjectTitles
@@ -976,7 +980,7 @@ export class CreatorBase extends Base
   /**
    * Limits the number of visible choices. Users can click "Show more" to view hidden choices.
    * 
-   * Set this property to -1 if you do not want any choices to hide.
+   * Set this property to -1 if you do not want to hide any choices.
    * 
    * Default value: 10
    */

@@ -127,12 +127,13 @@ test("Add new item", () => {
   expect(logic.editableItem.actions).toHaveLength(0);
   var panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
-  var elSelectorQuestion = <QuestionDropdownModel>(
-    panel.getQuestionByName("elementSelector")
-  );
+  var elSelectorQuestion = <QuestionDropdownModel>(panel.getQuestionByName("elementSelector"));
   expect(elSelectorQuestion.choices[0].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[1].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[2].isEnabled).toBeTruthy();
+  expect(elSelectorQuestion.choices[0].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[1].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[2].isVisible).toBeTruthy();
   elSelectorQuestion.value = "q3";
   logic.expressionEditor.text = "{q1} = 2";
   expect(logic.saveEditableItem()).toBeTruthy();
@@ -171,18 +172,18 @@ test("Use SurveyItemSelector for editing", () => {
   expect(logic.items).toHaveLength(2);
   logic.editItem(logic.items[1]);
   var panel = logic.itemEditor.panels[0];
-  expect(panel.getQuestionByName("logicTypeName").value).toEqual(
-    "question_visibility"
-  );
-  var elSelectorQuestion = <QuestionDropdownModel>(
-    panel.getQuestionByName("elementSelector")
-  );
+  expect(panel.getQuestionByName("logicTypeName").value).toEqual("question_visibility");
+  var elSelectorQuestion = <QuestionDropdownModel>(panel.getQuestionByName("elementSelector"));
   expect(elSelectorQuestion).toBeTruthy();
   expect(elSelectorQuestion.choices).toHaveLength(4);
   expect(elSelectorQuestion.choices[0].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[1].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[2].isEnabled).toBeTruthy();
   expect(elSelectorQuestion.choices[3].isEnabled).toBeTruthy();
+  expect(elSelectorQuestion.choices[0].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[1].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[2].isVisible).toBeTruthy();
+  expect(elSelectorQuestion.choices[3].isVisible).toBeTruthy();
   logic.itemEditor.panel.addPanel();
   panel = logic.itemEditor.panels[1];
   elSelectorQuestion = <QuestionDropdownModel>(
@@ -202,6 +203,10 @@ test("Use SurveyItemSelector for editing", () => {
   expect(elSelectorQuestion.choices[1].isEnabled).toBeTruthy();
   expect(elSelectorQuestion.choices[2].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[3].isEnabled).toBeFalsy();
+  expect(elSelectorQuestion.choices[0].isVisible).toBeTruthy();
+  expect(elSelectorQuestion.choices[1].isVisible).toBeTruthy();
+  expect(elSelectorQuestion.choices[2].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[3].isVisible).toBeFalsy();
 });
 
 test("Remove same actions on save", () => {

@@ -41,7 +41,7 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
     const items = this.model.tabs.map((item) => <SidebarTab item={item} key={item.id} />);
     return (
       <div className={className} style={{ display: !this.model.hasVisibleTabs ? "none" : "" }}>
-        <div className="svc-side-bar__shadow"></div>
+        <div className="svc-side-bar__shadow" onClick={() => this.model.collapseSidebar()}></div>
         <div className="svc-flex-column svc-side-bar__wrapper">
           <div ref={this.containerRef} style={style} className="svc-side-bar__container">
             <div className="svc-side-bar__container-header">

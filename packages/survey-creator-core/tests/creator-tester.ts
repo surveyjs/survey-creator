@@ -1,8 +1,11 @@
-import { SurveyModel, IAction, Base } from "survey-core";
+import { SurveyModel, IAction, Base, Serializer, QuestionFactory } from "survey-core";
 import { CreatorBase, isStringEditable, DesignTimeSurveyModel as DesignTimeSurveyModelOriginal } from "../src/creator-base";
 import { settings as creatorSetting } from "../src/settings";
 import { ICreatorOptions } from "../src/creator-options";
 import { SurveyLogic } from "../src/components/tabs/logic";
+
+Serializer.removeClass("tagbox"); // remove after tagbox implemented
+QuestionFactory.Instance.unregisterElement("tagbox");
 
 class DesignTimeSurveyModel extends DesignTimeSurveyModelOriginal {
   constructor(public creator: CreatorTester, jsonObj?: any) {

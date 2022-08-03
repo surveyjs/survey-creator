@@ -180,7 +180,7 @@ test("Check ObjectSelectorModel", () => {
   expect(model.list.actions[3].visible).toBeFalsy();
   model.list.filteredText = "";
   expect(model.list.actions[3].visible).toBeTruthy();
-  model.list.selectItem(model.list.actions[3]);
+  model.list.onItemClick(model.list.actions[3]);
   expect(selectedItem.title).toEqual("First name");
 
   ListModel.MINELEMENTCOUNT = oldValueMINELEMENTCOUNT;
@@ -210,7 +210,7 @@ test("ObjectSelectorModel, list model selection on show issue", () => {
   });
   expect(model.list.selectedItem).toBeTruthy();
   expect(model.list.selectedItem.data).toEqual(selectedQuestion);
-  model.list.selectItem(model.list.actions[0]);
+  model.list.onItemClick(model.list.actions[0]);
   model.show(survey, selectedQuestion, (obj: Base) => {
     selectedItem = obj;
   });

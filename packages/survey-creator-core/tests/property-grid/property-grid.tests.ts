@@ -26,7 +26,7 @@ import {
   MatrixDropdownColumn,
   SurveyTriggerSetValue,
   QuestionMatrixModel,
-  Serializer,
+  Serializer, QuestionFactory,
   QuestionPanelDynamicModel,
   QuestionMatrixDropdownModel,
   IAction,
@@ -57,6 +57,9 @@ import { editorLocalization } from "../../src/editorLocalization";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
+
+Serializer.removeClass("tagbox"); // remove after tagbox implemented
+QuestionFactory.Instance.unregisterElement("tagbox");
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -597,6 +600,27 @@ test("Support question property editor", () => {
   expect(gotoNamePropEd.choices).toHaveLength(2);
   expect(gotoNamePropEd.choices[0].value).toEqual("q1");
   expect(gotoNamePropEd.value).toEqual("q2");
+});
+test("Question property editor should support getObjectDisplayName", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [{ type: "skiptrigger", gotoName: "q2" }]
+  });
+  const trigger = survey.triggers[0];
+  const options = new EmptySurveyCreatorOptions();
+  options.getObjectDisplayName = (obj: Base, reason: string, displayName: string): string => {
+    if(reason === "property-editor") return (survey.getAllQuestions().indexOf(<Question>obj) + 1).toString() + ". " + displayName;
+    return displayName;
+  };
+  const propertyGrid = new PropertyGridModelTester(trigger, options);
+  const gotoNamePropEd = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("gotoName");
+  expect(gotoNamePropEd).toBeTruthy();
+  expect(gotoNamePropEd.choices).toHaveLength(2);
+  expect(gotoNamePropEd.choices[0].text).toEqual("1. q1");
+  expect(gotoNamePropEd.choices[1].text).toEqual("2. q2");
 });
 
 test("Support select base question property editor", () => {

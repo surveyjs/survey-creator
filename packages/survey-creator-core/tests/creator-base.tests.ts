@@ -864,6 +864,27 @@ test("undo/redo make sure that the deleting element is not active", (): any => {
   expect(creator.selectedElementName).toEqual("survey");
 });
 
+test("undo/redo with events", (): any => {
+  const creator = new CreatorTester();
+
+  creator.onModified.add(function (sender, options) {
+    // We use the question's name to display in the UI dropdown lists so keep it up to date
+    if (options.type === "PROPERTY_CHANGED" && options.name === "title") {
+      options.target.description = options.newValue;
+    }
+  });
+
+  creator.clickToolboxItem({ type: "text", name: "question1" });
+  expect(creator.selectedElementName).toEqual("question1");
+  expect(creator.survey.getAllQuestions()[0].title).toEqual("question1");
+  creator.survey.getAllQuestions()[0].title = "nt";
+  expect(creator.survey.getAllQuestions()[0].title).toEqual("nt");
+  expect(creator.survey.getAllQuestions()[0].description).toEqual("nt");
+  creator.undo();
+  expect(creator.survey.getAllQuestions()[0].title).toEqual("question1");
+  expect(creator.survey.getAllQuestions()[0].description).toEqual("");
+});
+
 test("fast copy tests, copy a question and check the index", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -1207,7 +1228,7 @@ test("Question type selector", (): any => {
   const listModel: ListModel =
     selectorModel.popupModel.contentComponentData.model;
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
-  listModel.selectItem(ratingItem);
+  listModel.onItemClick(ratingItem);
   expect(creator.addNewQuestionText).toEqual("Add Rating");
   expect(survey.getAllQuestions().length).toEqual(1);
   expect(survey.getAllQuestions()[0].getType()).toEqual("rating");
@@ -1250,7 +1271,7 @@ test("Question type custom widgets", (): any => {
   expect(customItem.title).toEqual("Test Widget");
   expect(customItem.iconName).toEqual("icon-editor");
 
-  listModel.selectItem(customItem);
+  listModel.onItemClick(customItem);
   expect(creator.addNewQuestionText).toEqual("Add Test Widget");
   expect(survey.getAllQuestions().length).toEqual(1);
   expect(survey.getAllQuestions()[0].getType()).toEqual("test_widget");
@@ -1273,7 +1294,7 @@ test("Question type selector localization", (): any => {
   const listModel: ListModel =
     selectorModel.popupModel.contentComponentData.model;
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
-  listModel.selectItem(ratingItem);
+  listModel.onItemClick(ratingItem);
   expect(creator.addNewQuestionText).toEqual("Add New Rating");
   locStrings.ed.addNewQuestion = oldAddNewQuestion;
   locStrings.ed.addNewTypeQuestion = oldAddNewTypeQuestion;
@@ -2508,7 +2529,7 @@ test("Add new question to Panel and Page", (): any => {
   const selectorModelPanel = panelModel.questionTypeSelectorModel;
   const listModelPanel: ListModel = selectorModelPanel.popupModel.contentComponentData.model;
   const ratingItem = listModelPanel.actions.filter((item) => item.id == "rating")[0];
-  listModelPanel.selectItem(ratingItem);
+  listModelPanel.onItemClick(ratingItem);
 
   expect(panelModel.addNewQuestionText).toEqual("Add Rating");
   expect(panelModel2.addNewQuestionText).toEqual("Add Question");
@@ -2518,7 +2539,7 @@ test("Add new question to Panel and Page", (): any => {
   const selectorModelPanel2 = panelModel2.questionTypeSelectorModel;
   const listModelPanel2: ListModel = selectorModelPanel2.popupModel.contentComponentData.model;
   const commentItem = listModelPanel2.actions.filter((item) => item.id == "comment")[0];
-  listModelPanel2.selectItem(commentItem);
+  listModelPanel2.onItemClick(commentItem);
 
   expect(panelModel.addNewQuestionText).toEqual("Add Rating");
   expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
@@ -2528,7 +2549,7 @@ test("Add new question to Panel and Page", (): any => {
   const selectorModelPage = pageModel.questionTypeSelectorModel;
   const listModelPage: ListModel = selectorModelPage.popupModel.contentComponentData.model;
   const rankingItem = listModelPage.actions.filter((item) => item.id == "ranking")[0];
-  listModelPage.selectItem(rankingItem);
+  listModelPage.onItemClick(rankingItem);
 
   expect(panelModel.addNewQuestionText).toEqual("Add Rating");
   expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
@@ -2538,7 +2559,7 @@ test("Add new question to Panel and Page", (): any => {
   const selectorModelPage2 = pageModel2.questionTypeSelectorModel;
   const listModelPage2: ListModel = selectorModelPage2.popupModel.contentComponentData.model;
   const htmlItem = listModelPage2.actions.filter((item) => item.id == "html")[0];
-  listModelPage2.selectItem(htmlItem);
+  listModelPage2.onItemClick(htmlItem);
 
   expect(panelModel.addNewQuestionText).toEqual("Add Rating");
   expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
