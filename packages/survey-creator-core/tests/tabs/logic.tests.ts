@@ -2121,7 +2121,7 @@ test("LogicUI: check runExpression question", () => {
   panel.getQuestionByName("logicTypeName").value = "trigger_runExpression";
   const runExpressionQuestion = (<QuestionCommentModel>panel.getQuestionByName("runExpression"));
   expect(runExpressionQuestion.titleLocation).toEqual("hidden");
-  expect(runExpressionQuestion.placeHolder).toEqual("Type expression here...");
+  expect(runExpressionQuestion.placeholder).toEqual("Type expression here...");
 });
 test("logic item editing: action panel content for different trigger logic types", () => {
   const survey = new SurveyModel({

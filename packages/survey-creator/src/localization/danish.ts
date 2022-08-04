@@ -144,7 +144,7 @@ export var danishStrings = {
     isRequired: "Er påkrævet?",
     startWithNewLine: "Skal starte med ny linie?",
     rows: "Antal rækker",
-    placeHolder: "Hint-tekst",
+    placeholder: "Hint-tekst",
     showPreview: "Vises forhåndsvisning af billeder?",
     storeDataAsText: "Gem filindhold i JSON-resultat som tekst",
     maxSize: "Maksimal filstørrelse i bytes",
@@ -408,7 +408,6 @@ export var danishStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
 
     optionsCaption: "optionsCaption",
 

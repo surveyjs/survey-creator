@@ -150,7 +150,7 @@ var portugueseTranslation = {
     isRequired: "É obrigatório?",
     startWithNewLine: "Começa com uma nova linha?",
     rows: "Contagem de linhas",
-    placeHolder: "Texto de referência",
+    placeholder: "Texto de referência",
     showPreview: "Mostra pré-visualização de imagem?",
     storeDataAsText: "Gravar conteúdo de arquivo no resultado JSON como texto",
     maxSize: "Tamanho máximo de arquivo em bytes",
@@ -417,7 +417,6 @@ var portugueseTranslation = {
 
     cols: "Colunas",
     rows: "Linhas",
-    placeHolder: "placeholder",
 
     optionsCaption: "Título das opções",
 

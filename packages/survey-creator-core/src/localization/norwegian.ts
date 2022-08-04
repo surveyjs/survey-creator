@@ -289,7 +289,7 @@ export var nbStrings = {
     startWithNewLine: "Må starte med ny linje?",
     rows: "Antall rader",
     cols: "Antall kolonner",
-    placeHolder: "Hjelpetekst",
+    placeholder: "Hjelpetekst",
     showPreview: "Er forhåndsvisning av bilde vist?",
     storeDataAsText: "Lagre filinnhold i JSON-resultat som tekst",
     maxSize: "Maksimum filstørrelse i bytes",
@@ -635,7 +635,6 @@ export var nbStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
 
     optionsCaption: "optionsCaption",
 

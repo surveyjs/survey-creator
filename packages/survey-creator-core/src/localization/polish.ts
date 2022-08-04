@@ -110,7 +110,7 @@ var polishStrings = {
     isRequired: "Czy wymagalne?",
     startWithNewLine: "Czy rozpoczyna się nową linią?",
     rows: "Liczba wierszy",
-    placeHolder: "Input place holder",
+    placeholder: "Input place holder",
     showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size in bytes",
