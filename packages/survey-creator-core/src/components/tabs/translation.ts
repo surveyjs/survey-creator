@@ -1,4 +1,4 @@
-import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater } from "survey-core";
+import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater, createDropdownActionModel } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../settings";
@@ -464,7 +464,7 @@ export class Translation extends Base implements ITranslationLocales {
   private surveyValue: SurveyModel;
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
-  private chooseLanguagePopupModel: PopupModel;
+  private addLanguageAction: Action;
   public chooseLanguageActions: Array<IAction> = [];
 
   constructor(
@@ -544,17 +544,7 @@ export class Translation extends Base implements ITranslationLocales {
     });
     res.onGetPanelTitleActions.add((sender, options) => {
       if (options.panel.name == "languages") {
-        const addLanguageAction = new Action({
-          id: "svc-translation-choose-language",
-          iconName: "icon-add",
-          enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled)),
-          component: "sv-action-bar-item-dropdown",
-          popupModel: this.chooseLanguagePopupModel,
-          action: (language) => {
-            this.chooseLanguagePopupModel.toggleVisibility();
-          }
-        });
-        options.titleActions = [addLanguageAction];
+        options.titleActions = [this.addLanguageAction];
       }
     });
     return res;
@@ -857,21 +847,18 @@ export class Translation extends Base implements ITranslationLocales {
         }
       )
     ));
-    this.chooseLanguagePopupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          this.chooseLanguageActions,
-          (item: IAction) => {
-            this.addLocale(item.id);
-            this.chooseLanguagePopupModel.toggleVisibility();
-          },
-          false
-        )
-      },
-      "bottom",
-      "left"
-    );
+
+    this.addLanguageAction = createDropdownActionModel({
+      id: "svc-translation-choose-language",
+      iconName: "icon-add",
+      enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled)),
+    }, {
+      items: this.chooseLanguageActions,
+      allowSelection: false,
+      onSelectionChanged: (item: IAction) => {
+        this.addLocale(item.id);
+      }
+    });
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);

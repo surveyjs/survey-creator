@@ -1,7 +1,7 @@
 import { SurveySimulatorModel } from "../simulator";
 
 import "./test.scss";
-import { surveyLocalization, PopupModel, ListModel, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, modernCss, defaultStandardCss } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, modernCss, defaultStandardCss, createDropdownActionModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -26,7 +26,6 @@ export class TestSurveyTabViewModel extends Base {
   public testAgainAction: Action;
   public nextPageAction: Action;
   private selectPageAction: Action;
-  private pagePopupModel: PopupModel;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
@@ -191,16 +190,6 @@ export class TestSurveyTabViewModel extends Base {
 
   public buildActions() {
     const pageActions: Array<Action> = [];
-
-    const pageList: ListModel = new ListModel(
-      this.pageListItems,
-      (item: IAction) => {
-        this.activePage = item.data;
-        this.pagePopupModel.toggleVisibility();
-      },
-      true,
-      this.getCurrentPageItem()
-    );
     const setNearPage: (isNext: boolean) => void = (isNext: boolean) => {
       const currentIndex: number = this.survey.currentPageNo;
       const shift: number = isNext ? 1 : -1;
@@ -215,9 +204,8 @@ export class TestSurveyTabViewModel extends Base {
       }
       const pageIndex: number = this.survey.pages.indexOf(nearPage);
       this.activePage = this.survey.pages[pageIndex];
-      pageList.selectedItem = this.pageListItems[pageIndex];
+      this.selectPageAction.data.selectedItem = this.pageListItems[pageIndex];
     };
-    this.pagePopupModel = new PopupModel("sv-list", { model: pageList }, "top", "center");
 
     if (this.prevPageAction) {
       this.prevPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
@@ -235,16 +223,20 @@ export class TestSurveyTabViewModel extends Base {
       pageActions.push(this.prevPageAction);
     }
 
-    this.selectPageAction = new Action({
+    this.selectPageAction = createDropdownActionModel({
       id: "pageSelector",
       css: "svc-page-selector",
       title: this.getSelectPageTitle(),
-      visible: this.isRunning && this.pageListItems.length > 1 && this.showPagesInTestSurveyTab,
-      component: "sv-action-bar-item-dropdown",
-      popupModel: this.pagePopupModel,
-      action: (newPage) => {
-        this.pagePopupModel.toggleVisibility();
-      }
+      visible: this.isRunning && this.pageListItems.length > 1 && this.showPagesInTestSurveyTab
+    }, {
+      items: this.pageListItems,
+      allowSelection: true,
+      selectedItem: this.getCurrentPageItem(),
+      onSelectionChanged: (item: IAction) => {
+        this.activePage = item.data;
+      },
+      verticalPosition: "top",
+      horizontalPosition: "center"
     });
     pageActions.push(this.selectPageAction);
 

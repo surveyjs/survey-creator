@@ -113,13 +113,16 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
   };
   expect(creator.showDefaultLanguageInTestSurveyTab).toEqual("auto");
   const testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  const languageSelectorAction = testPlugin["languageSelectorAction"];
+  const languageSelectorActionList = languageSelectorAction.data;
+
   testPlugin.activate();
-  expect(testPlugin["languageSelectorAction"].visible).toBeFalsy();
+  expect(languageSelectorAction.visible).toBeFalsy();
 
   creator.showDefaultLanguageInTestSurveyTab = true;
   testPlugin.update();
-  expect(testPlugin["languageSelectorAction"].visible).toBeTruthy();
-  expect(testPlugin["languageListModel"].actions.length > 10).toBeTruthy();
+  expect(languageSelectorAction.visible).toBeTruthy();
+  expect(languageSelectorActionList.actions.length > 10).toBeTruthy();
 
   creator.showDefaultLanguageInTestSurveyTab = "auto";
   creator.JSON = {
@@ -132,24 +135,24 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
     ]
   };
   testPlugin.update();
-  expect(testPlugin["languageSelectorAction"].visible).toBeTruthy();
-  expect(testPlugin["languageListModel"].actions).toHaveLength(2);
-  expect(testPlugin["languageListModel"].actions[0].id).toEqual("en");
-  expect(testPlugin["languageListModel"].actions[1].id).toEqual("de");
-  expect(testPlugin["languageListModel"].actions[1].title).toEqual("Deutsch");
+  expect(languageSelectorAction.visible).toBeTruthy();
+  expect(languageSelectorActionList.actions).toHaveLength(2);
+  expect(languageSelectorActionList.actions[0].id).toEqual("en");
+  expect(languageSelectorActionList.actions[1].id).toEqual("de");
+  expect(languageSelectorActionList.actions[1].title).toEqual("Deutsch");
 
   creator.showDefaultLanguageInTestSurveyTab = true;
   testPlugin.update();
-  expect(testPlugin["languageSelectorAction"].visible).toBeTruthy();
-  expect(testPlugin["languageListModel"].actions).toHaveLength(2);
+  expect(languageSelectorAction.visible).toBeTruthy();
+  expect(languageSelectorActionList.actions).toHaveLength(2);
 
   creator.showDefaultLanguageInTestSurveyTab = false;
   testPlugin.update();
-  expect(testPlugin["languageSelectorAction"].visible).toBeFalsy();
-  expect(testPlugin["languageListModel"].actions).toHaveLength(0);
+  expect(languageSelectorAction.visible).toBeFalsy();
+  expect(languageSelectorActionList.actions).toHaveLength(0);
 
   creator.showDefaultLanguageInTestSurveyTab = "all";
   testPlugin.update();
-  expect(testPlugin["languageSelectorAction"].visible).toBeTruthy();
-  expect(testPlugin["languageListModel"].actions.length > 10).toBeTruthy();
+  expect(languageSelectorAction.visible).toBeTruthy();
+  expect(languageSelectorActionList.actions.length > 10).toBeTruthy();
 });

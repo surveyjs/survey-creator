@@ -181,11 +181,11 @@ export class QuestionToolbox
   ) {
     super();
     this.createDefaultItems(supportedQuestions);
-    this.dotsItemPopupModel.horizontalPosition = "right";
-    this.dotsItemPopupModel.verticalPosition = "top";
+    this.dotsItem.popupModel.horizontalPosition = "right";
+    this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
       const json = this.creator.getJSONForNewElement(itemModel.json);
-      this.dotsItemPopupModel.toggleVisibility();
+      this.dotsItem.popupModel.toggleVisibility();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel.title);
     });
     this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
@@ -193,7 +193,7 @@ export class QuestionToolbox
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
-    this.dotsItemPopupModel.cssClass = "svc-toolbox-popup";
+    this.dotsItem.popupModel.cssClass = "svc-toolbox-popup";
   }
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<QuestionToolboxCategory> = this.categories;
@@ -206,7 +206,7 @@ export class QuestionToolbox
     if (toolboxLocation === "sidebar") {
       this.visibleActions.forEach((item) => (item.mode = "small"));
     } else {
-      this.dotsItemPopupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
+      this.dotsItem.popupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
     }
   }
 
