@@ -18,7 +18,7 @@ var germanTranslation = {
     convertTo: "Konvertieren zu",
     drag: "Element ziehen",
     license:
-        "Bitte erwerben Sie eine Entwicklerlizenz für SurveyJS Creator, um diesen in Ihrer Anwendung verwenden zu können"
+      "Bitte erwerben Sie eine Entwicklerlizenz für SurveyJS Creator, um diesen in Ihrer Anwendung verwenden zu können"
   },
   //questionTypes
   qt: {
@@ -164,32 +164,32 @@ var germanTranslation = {
       trigger_skipName: "Frage überspringen",
       trigger_runExpressionName: "Ausdruck ausführen",
       completedHtmlOnConditionName:
-          "Seite nach Abschluss der Umfrage anzeigen",
+        "Seite nach Abschluss der Umfrage anzeigen",
 
       page_visibilityDescription:
-          "Mache die Seite sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
+        "Mache die Seite sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
       panel_visibilityDescription:
-          "Mache das Panel sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass es unsichtbar.",
+        "Mache das Panel sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass es unsichtbar.",
       panel_enableDescription:
-          "Aktiviere das Panel zusammen mit all seinen Elementen, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie deaktiviert.",
+        "Aktiviere das Panel zusammen mit all seinen Elementen, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie deaktiviert.",
       question_visibilityDescription:
-          "Mache die Frage sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
+        "Mache die Frage sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
       question_enableDescription:
-          "Aktiviere die Frage, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie deaktiviert.",
+        "Aktiviere die Frage, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie deaktiviert.",
       question_requireDescription:
-          "Frage wird erforderlich, wenn der logische Ausdruck wahr ergibt.",
+        "Frage wird erforderlich, wenn der logische Ausdruck wahr ergibt.",
       trigger_completeDescription:
-          "Wenn der logische Ausdruck wahr ergibt, wir die Umfrage abgeschlossen und der Benutzer sieht die Abschlussseite der Umfrage.",
+        "Wenn der logische Ausdruck wahr ergibt, wir die Umfrage abgeschlossen und der Benutzer sieht die Abschlussseite der Umfrage.",
       trigger_setvalueDescription:
-          "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert in die ausgewählte Frage eingesetzt.",
+        "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert in die ausgewählte Frage eingesetzt.",
       trigger_copyvalueDescription:
-          "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert einer ausgewählte Fragen kopiert und in eine andere ausgewählte Frage eingesetzt.",
+        "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert einer ausgewählte Fragen kopiert und in eine andere ausgewählte Frage eingesetzt.",
       trigger_skipDescription:
-          "Wenn der logische Ausdruck wahr ergibt, springt die Umfrage zur ausgewählten Frage.",
+        "Wenn der logische Ausdruck wahr ergibt, springt die Umfrage zur ausgewählten Frage.",
       trigger_runExpressionDescription:
-          "Wenn der logische Ausdruck wahr ergibt, wird die benutzerdefinierte Anweisung ausgeführt. Sie können optional das Ergebnis der Anweisung in die ausgewählte Frage einsetzen.",
+        "Wenn der logische Ausdruck wahr ergibt, wird die benutzerdefinierte Anweisung ausgeführt. Sie können optional das Ergebnis der Anweisung in die ausgewählte Frage einsetzen.",
       completedHtmlOnConditionDescription:
-          "Wenn der logische Ausdruck wahr ergibt, dann wird der Standardtext der Abschlussseite der Umfrage mit dem gegebenen Text ersetzt.",
+        "Wenn der logische Ausdruck wahr ergibt, dann wird der Standardtext der Abschlussseite der Umfrage mit dem gegebenen Text ersetzt.",
 
       itemExpressionText: "Wenn der Ausdruck '{0}' wahr ergibt:", // {0} - the expression
       itemEmptyExpressionText: "Neue Regel",
@@ -209,7 +209,7 @@ var germanTranslation = {
       trigger_runExpressionText1: "Führe folgenden Ausdruck aus: '{0}'", // {0} the expression
       trigger_runExpressionText2: " und setze das Ergebnis in Frage {0} ein", // {0} question name
       completedHtmlOnConditionText:
-          "Zeigen Sie einen benutzerdefinierten Text auf der Abschlussseite der Umfrage an.",
+        "Zeigen Sie einen benutzerdefinierten Text auf der Abschlussseite der Umfrage an.",
 
       showAllQuestions: "Alle Fragen anzeigen",
       showAllActionTypes: "Alle Aktionen anzeigen",
@@ -224,10 +224,10 @@ var germanTranslation = {
       selectedActionCaption: "Aktion zum Hinzufügen auswählen...",
 
       expressionInvalid:
-          "Der logische Ausdruck ist leer oder ungültig. Bitte korrigieren Sie ihn.",
+        "Der logische Ausdruck ist leer oder ungültig. Bitte korrigieren Sie ihn.",
       noActionError: "Bitte fügen Sie mindestens eine Aktion hinzu.",
       actionInvalid:
-          "Bitte beheben Sie die bestehenden Probleme in Ihren Aktionen.",
+        "Bitte beheben Sie die bestehenden Probleme in Ihren Aktionen.",
       expressionSetup: "",
       actionsSetup: "",
     }
@@ -274,7 +274,7 @@ var germanTranslation = {
     fastEntry: "Schnelleintrag",
     fastEntryNonUniqueError: "Wert '{0}' ist nicht eindeutig",
     fastEntryChoicesCountError:
-        "Bitte begrenze die Anzahl der Elemente von {0} bis {1}",
+      "Bitte begrenze die Anzahl der Elemente von {0} bis {1}",
     formEntry: "Formulareintrag",
     testService: "Service testen",
     itemSelectorEmpty: "Bitte ein Element auswählen",
@@ -286,7 +286,7 @@ var germanTranslation = {
     // conditionHelp:
     //   "Bitte geben Sie einen booleschen Ausdruck ein. Dieser muss 'true' zurückgeben, um die Frage/Seite anzuzeigen. Beispiel: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
-        'Bitte geben Sie einen Ausdruck ein. Sie können geschweifte Klammern verwenden, um Zugriff auf die Werte der Fragen zu bekommen: "{question1} + {question2}", "({price} * {quantity}) * (100 - {discount})"',
+      'Bitte geben Sie einen Ausdruck ein. Sie können geschweifte Klammern verwenden, um Zugriff auf die Werte der Fragen zu bekommen: "{question1} + {question2}", "({price} * {quantity}) * (100 - {discount})"',
     aceEditorHelp:
       "Bitte drücken Sie Strg+Leertaste, um Vervollständigungsvorschläge für den Ausdruck zu erhalten",
     aceEditorRowTitle: "Aktuelle Zeile",
@@ -348,7 +348,7 @@ var germanTranslation = {
     displayRateDescriptionsAsExtremeItems: "Beschreibung für minimale und maximale Bewertung als Werte anzeigen",
     rows: "Zeilenanzahl",
     cols: "Spaltenanzahl",
-    placeHolder: "Platzhalter",
+    placeholder: "Platzhalter",
     showPreview: "Wird eine Bildvorschau angezeigt?",
     storeDataAsText: "Speicher Dateininhalt des JSON-Resultats als Text",
     maxSize: "Maximale Dateigröße in Bytes",
@@ -425,7 +425,7 @@ var germanTranslation = {
       'Template für den Fragentitel. Standard ist: "{no}. {require} {title}"',
     questionErrorLocation: "Position der Fehlermeldungen",
     focusFirstQuestionAutomatic:
-        "Fokussiere die erste Frage automatisch",
+      "Fokussiere die erste Frage automatisch",
     questionsOrder: "Reihenfolge der Elemente auf der Seite",
     maxTimeToFinish: "Maximale Zeit, um die Umfrage zu beenden",
     maxTimeToFinishPage: "Maximale Zeit, um eine Seite der Umfrage zu beenden",
@@ -728,7 +728,7 @@ var germanTranslation = {
 
     cols: "Spalten",
     rows: "Zeilen",
-    placeHolder: "Platzhalter",
+    placeholder: "Platzhalter",
 
     optionsCaption: "Auswahlbeschriftung",
 

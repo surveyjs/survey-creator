@@ -283,7 +283,7 @@ var spanishTranslation = {
     startWithNewLine: "¿Empieza con la nueva línea?",
     rows: "Número de filas",
     cols: "Recuento de columnas",
-    placeHolder: "Placeholder de entrada",
+    placeholder: "Placeholder de entrada",
     showPreview: "Mostrar área de vista previa",
     storeDataAsText:
       "Tienda el contenido del archivo en el resultado de JSON como texto",
@@ -628,7 +628,7 @@ var spanishTranslation = {
     valueFalse: "Falso",
     cols: "columnas",
     rows: "filas",
-    placeHolder: "marcador de posición",
+    placeholder: "marcador de posición",
     optionsCaption: "Texto opciones",
     expression: "expresión",
     format: "formato",

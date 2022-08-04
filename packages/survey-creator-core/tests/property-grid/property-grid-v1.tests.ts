@@ -789,16 +789,16 @@ test("SurveyPropertyMatrixDropdownColumns set properties", (): any => {
   expect(columnsQuestion.columns).toHaveLength(2);
   var rows = columnsQuestion.visibleRows;
   expect(rows[0].getQuestionByColumnName("name").value).toEqual("column 1");
-  expect(rows[0].getQuestionByColumnName("title").placeHolder).toEqual("column 1");
+  expect(rows[0].getQuestionByColumnName("title").placeholder).toEqual("column 1");
   columnsQuestion.addRow();
   expect(question.columns).toHaveLength(3);
   rows = columnsQuestion.visibleRows;
   expect(rows[2].getQuestionByColumnName("name").value).toEqual("column 3");
-  expect(rows[2].getQuestionByColumnName("title").placeHolder).toEqual("column 3");
+  expect(rows[2].getQuestionByColumnName("title").placeholder).toEqual("column 3");
   rows[2].getQuestionByColumnName("name").value = "column 5";
   expect(question.columns).toHaveLength(3);
   expect(question.columns[2].name).toEqual("column 5");
-  expect(rows[2].getQuestionByColumnName("title").placeHolder).toEqual("column 5");
+  expect(rows[2].getQuestionByColumnName("title").placeholder).toEqual("column 5");
 });
 test("SurveyPropertyMatrixDropdownColumns change columns", () => {
   var saveProperties =

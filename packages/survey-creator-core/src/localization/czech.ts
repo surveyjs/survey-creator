@@ -286,7 +286,7 @@ export var czStrings = {
     panelAddText: "Přidávání textu na panel",
     panelRemoveText: "Odstraňování textu panelu",
     path: "Cesta",
-    placeHolder: "Vstupní zástupný symbol",
+    placeholder: "Vstupní zástupný symbol",
     previewText: "Text tlačítka náhledu",
     propertyIsEmpty: "Zadejte hodnotu",
     propertyIsNoUnique: "Zadejte jedinečnou hodnotu",

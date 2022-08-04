@@ -481,17 +481,17 @@ test("column title property editor, set placeholder", (): any => {
   const column = question.addColumn("col1");
   const propertyGrid = new PropertyGridModelTester(column);
   const titlePropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("title");
-  expect(titlePropertyEditor.placeHolder).toEqual("col1");
+  expect(titlePropertyEditor.placeholder).toEqual("col1");
   column.name = "Column1";
-  expect(titlePropertyEditor.placeHolder).toEqual("Column1");
+  expect(titlePropertyEditor.placeholder).toEqual("Column1");
 });
 test("column title property editor, set placeholder", (): any => {
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
   const titlePropertyEditor = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("title");
-  expect(titlePropertyEditor.placeHolder).toEqual("q1");
+  expect(titlePropertyEditor.placeholder).toEqual("q1");
   question.name = "Question1";
-  expect(titlePropertyEditor.placeHolder).toEqual("Question1");
+  expect(titlePropertyEditor.placeholder).toEqual("Question1");
 });
 test("surveypages property editor", () => {
   var survey = new SurveyModel();
@@ -612,7 +612,7 @@ test("Question property editor should support getObjectDisplayName", () => {
   const trigger = survey.triggers[0];
   const options = new EmptySurveyCreatorOptions();
   options.getObjectDisplayName = (obj: Base, reason: string, displayName: string): string => {
-    if(reason === "property-editor") return (survey.getAllQuestions().indexOf(<Question>obj) + 1).toString() + ". " + displayName;
+    if (reason === "property-editor") return (survey.getAllQuestions().indexOf(<Question>obj) + 1).toString() + ". " + displayName;
     return displayName;
   };
   const propertyGrid = new PropertyGridModelTester(trigger, options);
@@ -2583,7 +2583,7 @@ test("Check textUpdate mode for question", () => {
   const propertyGrid = new PropertyGridModelTester(question);
   const nameQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("name");
   const titleQuestion = <QuestionCommentModel>propertyGrid.survey.getQuestionByName("title");
-  const placeholderQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("placeHolder");
+  const placeholderQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("placeholder");
   const stepQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("step");
 
   expect(nameQuestion.getType()).toEqual("text");

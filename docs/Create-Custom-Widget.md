@@ -448,7 +448,7 @@ var richCommentWidget = {
     //Hide some properties in comment question
     Survey.Serializer.findProperty(
       "comment",
-      "placeHolder"
+      "placeholder"
     ).visible = false;
     Survey.Serializer.findProperty("comment", "cols").visible = false;
     Survey.Serializer.findProperty("comment", "rows").visible = false;

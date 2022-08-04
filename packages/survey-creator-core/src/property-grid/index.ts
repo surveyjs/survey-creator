@@ -613,7 +613,7 @@ export class PropertyJSONGenerator {
     json.title = this.getQuestionTitle(prop, title);
 
     const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
-    json.placeHolder = typeof propDescr === "object" ? propDescr.placeholder : undefined;
+    json.placeholder = typeof propDescr === "object" ? propDescr.placeholder : undefined;
     return json;
   }
   private getColumnPropertyJSON(className: string, propName: string): any {
@@ -1510,7 +1510,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     var showTitles = !!options && options.showTitlesInExpressions;
     var qItems = questions.map((q) => {
       let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
-      if(!!options) text = options.getObjectDisplayName(q, "property-editor", text);
+      if (!!options) text = options.getObjectDisplayName(q, "property-editor", text);
       let value = this.getItemValue(<any>q);
       return { value: value, text: text };
     });

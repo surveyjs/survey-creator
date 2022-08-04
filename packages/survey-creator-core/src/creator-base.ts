@@ -136,7 +136,7 @@ export class TabbedMenuItem extends CreatorAction implements ITabbedMenuItem {
 export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem> {
   constructor() {
     super();
-    this.dotsItemPopupModel.horizontalPosition = "center";
+    this.dotsItem.popupModel.horizontalPosition = "center";
     this.minVisibleItemsCount = 1;
   }
 }

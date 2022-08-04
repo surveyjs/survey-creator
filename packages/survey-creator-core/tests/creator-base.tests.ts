@@ -1312,14 +1312,14 @@ test("Add question with default choices", (): any => {
 test("Add question based on json in toolbox", (): any => {
   const creator = new CreatorTester();
   const toolboxItem = creator.toolbox.getItemByName("text");
-  toolboxItem.json.placeHolder = "Test holder";
+  toolboxItem.json.placeholder = "Test holder";
   const survey: SurveyModel = creator.survey;
   creator.currentAddQuestionType = "text";
   creator.addNewQuestionInPage(() => { });
   const question = <QuestionTextModel>survey.getAllQuestions()[0];
   expect(question.getType()).toEqual("text");
-  expect(question.placeHolder).toEqual("Test holder");
-  delete toolboxItem.json.placeHolder;
+  expect(question.placeholder).toEqual("Test holder");
+  delete toolboxItem.json.placeholder;
 });
 test("getElementWrapperComponentName", (): any => {
   expect(getElementWrapperComponentName(null, "logo-image", false)).toEqual("svc-logo-image");
@@ -2018,7 +2018,7 @@ test("Modify property editor settings on event", (): any => {
   creator.onPropertyEditorCreated.add((sender, options) => {
     if (
       options.obj.getType() == "text" &&
-      options.property.name === "placeHolder"
+      options.property.name === "placeholder"
     ) {
       options.editor.textUpdateMode = "onTyping";
       options.editor.dataList = ["item1", "item2"];
@@ -2028,15 +2028,15 @@ test("Modify property editor settings on event", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeHolderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
-  expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
-  expect(placeHolderQuestion.dataList).toHaveLength(2);
+  const placeholderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeholder");
+  expect(placeholderQuestion.textUpdateMode).toEqual("onTyping");
+  expect(placeholderQuestion.dataList).toHaveLength(2);
 });
 test("Modify property editor via property grid survey", (): any => {
   const creator = new CreatorTester();
   creator.onPropertyGridSurveyCreated.add((sender, options) => {
     if (options.obj.getType() !== "text") return;
-    const question = options.survey.getQuestionByName("placeHolder");
+    const question = options.survey.getQuestionByName("placeholder");
     question.textUpdateMode = "onTyping";
     question.dataList = ["item1", "item2"];
   });
@@ -2044,9 +2044,9 @@ test("Modify property editor via property grid survey", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeHolderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
-  expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
-  expect(placeHolderQuestion.dataList).toHaveLength(2);
+  const placeholderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeholder");
+  expect(placeholderQuestion.textUpdateMode).toEqual("onTyping");
+  expect(placeholderQuestion.dataList).toHaveLength(2);
 });
 test("Modify property editor titleActions on event", (): any => {
   PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());

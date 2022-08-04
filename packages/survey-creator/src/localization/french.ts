@@ -255,7 +255,7 @@ var frenchTranslation = {
     requiredErrorText: "Message d'erreur lorsque obligatoire",
     startWithNewLine: "Commencer avec une nouvelle ligne ?",
     rows: "Nombre de lignes",
-    placeHolder: "Placeholder (indice dans le champ)",
+    placeholder: "Placeholder (indice dans le champ)",
     showPreview: "L'aperçu d'image est-il affiché ?",
     storeDataAsText:
       "Stocker le contenu du fichier dans le résultat JSON sous forme de texte",
@@ -567,7 +567,7 @@ var frenchTranslation = {
     valueFalse: "Valeur faux",
     cols: "Colonnes",
     rows: "Nombre de lignes",
-    placeHolder: "PlaceHolder (indice dans le champ)",
+    placeholder: "Placeholder (indice dans le champ)",
     optionsCaption: "Texte par défaut",
     expression: "Expression",
     format: "Format",

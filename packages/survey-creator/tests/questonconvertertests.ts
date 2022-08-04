@@ -52,7 +52,7 @@ QUnit.test("Convert question", function (assert) {
   var q1 = <Survey.QuestionRadiogroup>page.addNewQuestion("radiogroup");
   var q2 = <Survey.QuestionComment>panel.addNewQuestion("comment");
   q1.choices = ["myitem1", "myitem2"];
-  q2.placeHolder = "type here";
+  q2.placeholder = "type here";
   QuestionConverter.convertObject(q1, "checkbox");
   QuestionConverter.convertObject(q2, "text");
   assert.equal(
@@ -78,8 +78,8 @@ QUnit.test("Convert question", function (assert) {
     "The choices converted correct - value"
   );
   assert.equal(
-    newQ2.placeHolder,
+    newQ2.placeholder,
     "type here",
-    "The placeHolder converted correct"
+    "The placeholder converted correct"
   );
 });

@@ -338,7 +338,7 @@ var italianTranslation = {
     startWithNewLine: "Visualizza la domanda su una nuova riga",
     rows: "Righe",
     cols: "Colonne",
-    placeHolder: "Testo segnaposto",
+    placeholder: "Testo segnaposto",
     showPreview: "Mostra anteprima",
     storeDataAsText: "Vedi il contenuto JSON come testo",
     maxSize: "Dimensione massima (in bytes)",

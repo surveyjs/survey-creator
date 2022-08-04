@@ -38,10 +38,10 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     const objType = typeof rowObj.getType === "function" && rowObj.getType();
     if (cellQuestion.getType() === "text" && !!objType) {
       if (propertyName === "text" && objType === "itemvalue") {
-        (<any>cellQuestion).placeHolder = new ComputedUpdater<string>(() => rowObj.text);
+        (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => rowObj.text);
       }
       if (propertyName === "title" && objType === "matrixdropdowncolumn") {
-        (<any>cellQuestion).placeHolder = new ComputedUpdater<string>(() => rowObj.title);
+        (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => rowObj.title);
       }
     }
   }
@@ -339,7 +339,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   protected getEmptyRowsText(prop: JsonObjectProperty) {
     let locName = "pe.listIsEmpty";
     const propLocName = locName + "@" + prop.name;
-    if(!!editorLocalization.hasString(propLocName)) {
+    if (!!editorLocalization.hasString(propLocName)) {
       locName = propLocName;
     }
     return editorLocalization.getString(locName);
