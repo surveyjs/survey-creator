@@ -113,6 +113,9 @@ export class UndoRedoManager {
     }
     this._preparingTransaction = null;
   }
+  setUndoCallbackForTransaction(callback: () => void) {
+    this._preparingTransaction.undoCallback = callback;
+  }
   public get isProcessingUndoRedo(): boolean {
     return this._isExecuting === true;
   }
@@ -160,6 +163,8 @@ export class Transaction {
 
   private _actions: UndoRedoAction[] = [];
 
+  public undoCallback: () => void = () => {};
+
   apply() {
     const actions = this._actions;
     for (let index = 0; index < actions.length; index++) {
@@ -174,6 +179,7 @@ export class Transaction {
       const action = actions[index];
       action.rollback();
     }
+    this.undoCallback();
   }
 
   addAction(action: any) {
