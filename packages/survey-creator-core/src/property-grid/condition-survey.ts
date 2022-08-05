@@ -373,7 +373,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "placeHolder",
               type: "html",
               visibleIf: "{panel.questionName} empty and {panelIndex} == 0",
-              html: `<div class='svc-logic-placeholder'><span class="svc-logic-placeholder__text">${editorLocalization.getString("pe.logicQuestionPlaceholder")}<span></div>`
+              html: `<div class='svc-logic-placeholder'><span class="svc-logic-placeholder__text">${editorLocalization.getString("pe.emptyLogicPopupMessage")}<span></div>`
             }
           ]
         },

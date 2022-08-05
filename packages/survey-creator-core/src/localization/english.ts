@@ -381,7 +381,7 @@ export var enStrings = {
     or: "or",
     remove: "Remove",
     addCondition: "Add Condition",
-    logicQuestionPlaceholder: "You have to select a question in order to complete this condition.",
+    emptyLogicPopupMessage: "Select a question to start configuring conditions.",
     if: "If",
     then: "then",
     setToName: "Target question",
