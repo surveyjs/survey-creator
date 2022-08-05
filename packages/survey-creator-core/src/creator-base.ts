@@ -1727,8 +1727,12 @@ export class CreatorBase extends Base
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
+      let panel = sender.dropTarget.parent;
       this.onBeforeDrop.fire(null, null);
       this.startUndoRedoTransaction("drag drop");
+      this.undoRedoManager.setUndoCallbackForTransaction(() => {
+        panel.updateRows();
+      });
     });
     this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
       this.stopUndoRedoTransaction();

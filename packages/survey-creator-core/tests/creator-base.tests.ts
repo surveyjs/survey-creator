@@ -3063,3 +3063,53 @@ test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): 
   expect(model.getRenderedItems().length).toBe(5);
   expect(model.isCollapseView).toBeFalsy();
 });
+
+test("undo/redo DnD ", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "question1",
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          },
+          {
+            "type": "radiogroup",
+            "name": "question2",
+            "startWithNewLine": false,
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  const q1 = creator.survey.pages[0].elements[0];
+  const q2 = creator.survey.pages[0].elements[1];
+  creator.dragDropSurveyElements.onBeforeDrop.fire({ dropTarget: q2 }, null);
+
+  creator.survey.pages[0].removeElement(q1);
+  creator.survey.pages[0].addElement(q1);
+  q2.startWithNewLine = true;
+  q1.startWithNewLine = false;
+
+  expect(creator.survey.pages[0].rows.length).toEqual(1);
+  creator.dragDropSurveyElements.onAfterDrop.fire({ dropTarget: q2 }, { draggedElement: q1 });
+  expect(creator.survey.pages[0].rows.length).toEqual(1);
+  expect(creator.survey.pages[0].elements.map(e => e.name)).toEqual(["question2", "question1"]);
+  creator.undoRedoManager.undo();
+  expect(creator.survey.pages[0].elements.map(e => e.name)).toEqual(["question1", "question2"]);
+  expect(creator.survey.pages[0].rows.length).toEqual(1);
+});
