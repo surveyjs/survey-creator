@@ -3063,7 +3063,6 @@ test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): 
   expect(model.getRenderedItems().length).toBe(5);
   expect(model.isCollapseView).toBeFalsy();
 });
-
 test("undo/redo DnD ", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -3113,3 +3112,25 @@ test("undo/redo DnD ", (): any => {
   expect(creator.survey.pages[0].elements.map(e => e.name)).toEqual(["question1", "question2"]);
   expect(creator.survey.pages[0].rows.length).toEqual(1);
 });
+test("canUndo with events", (): any => {
+  const creator = new CreatorTester();
+
+  creator.onModified.add(function (sender, options) {
+    // We use the question's name to display in the UI dropdown lists so keep it up to date
+    if (options.type === "PROPERTY_CHANGED" && options.name === "title" && options.newValue !== "") {
+      options.target.name = options.newValue;
+    }
+  });
+
+  creator.onQuestionAdded.add(function (sender, options) {
+    options.question.title = "default title";
+  });
+  const survey = creator.survey;
+  const page = survey.addNewPage("page1");
+  page.addNewQuestion("text", "q1");
+  expect(survey.getAllQuestions()[0].title).toBe("default title");
+
+  creator.survey.getAllQuestions()[0].title = "new title";
+
+  creator.undo();
+  expect(creator.undoRedoManager.canRedo()).toBeTruthy();
