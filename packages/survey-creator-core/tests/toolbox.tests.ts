@@ -367,7 +367,25 @@ test("Set default toolbox JSON by question", (): any => {
   settings.toolbox.defaultJSON.image.imageLink = oldImageLink;
   delete settings.toolbox.defaultJSON["radiogroup"];
 });
-
+test("default toolbox JSON by question and converter", (): any => {
+  settings.toolbox.defaultJSON["radiogroup"] = { choices: [1, 2, 3, 4, 5] };
+  const creator = new CreatorTester();
+  const json: any = creator.toolbox.getItemByName("radiogroup").json;
+  creator.clickToolboxItem(json);
+  expect(creator.selectedElementName).toEqual("question1");
+  let question = <Question>creator.selectedElement;
+  expect(question.getType()).toEqual("radiogroup");
+  expect(question.toJSON()["choices"]).toHaveLength(5);
+  creator.convertCurrentQuestion("text");
+  question = <Question>creator.selectedElement;
+  expect(question.getType()).toEqual("text");
+  creator.selectElement(question);
+  creator.convertCurrentQuestion("radiogroup");
+  question = <Question>creator.selectedElement;
+  expect(question.getType()).toEqual("radiogroup");
+  expect(question.toJSON()["choices"]).toHaveLength(5);
+  delete settings.toolbox.defaultJSON["radiogroup"];
+});
 test("Check that d&d not working for toobox invisible items in readOnly mode", (): any => {
   const creator = new CreatorTester();
   const oldOnPointerDown = DragOrClickHelper.prototype.onPointerDown;

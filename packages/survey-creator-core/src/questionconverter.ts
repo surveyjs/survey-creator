@@ -62,8 +62,16 @@ export class QuestionConverter {
       if(convertToClass === "image" && !json.imageLink) {
         json.imageLink = questionDefaultSettings.imageLink;
       }
-      if(convertToClass === "imagepicker" && !json.choices) {
-        json.choices = questionDefaultSettings.choices;
+      if(convertToClass === "imagepicker") {
+        if(!json.choices) {
+          json.choices = questionDefaultSettings.choices;
+        }
+      } else {
+        for(var key in questionDefaultSettings) {
+          if(!defaultJSON || !defaultJSON[key]) {
+            json[key] = questionDefaultSettings[key];
+          }
+        }
       }
     }
     if(convertToClass === "rating" && json.choices) {
