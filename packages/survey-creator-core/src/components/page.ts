@@ -17,6 +17,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
+    this.setShowAddQuestionButton(true);
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
       (type) => {
         this.currentAddQuestionType = type;
@@ -144,11 +145,18 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);
   }
-  public get allowEdit() {
+  protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
+    super.updateElementAllowOptions(options, operationsAllow);
+    this.setShowAddQuestionButton(options.allowEdit !== false);
+  }
+  public get allowEdit(): boolean {
     return !!this.creator && !this.creator.readOnly;
   }
   public get showAddQuestionButton(): boolean {
-    return this.allowEdit && settings.designer.showAddQuestionButton;
+    return this.getPropertyValue("showAddQuestionButton");
+  }
+  protected setShowAddQuestionButton(val: boolean): void {
+    this.setPropertyValue("showAddQuestionButton", val && this.allowEdit && settings.designer.showAddQuestionButton);
   }
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)
