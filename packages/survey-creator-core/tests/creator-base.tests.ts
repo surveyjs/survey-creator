@@ -2634,12 +2634,13 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
   settings.designer.showAddQuestionButton = false;
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
-  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  let pageModel = new PageAdorner(creator, creator.survey.pages[0]);
   let panel = <PanelModel>creator.survey.getAllPanels()[0];
   let panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
   expect(pageModel.showAddQuestionButton).toBeFalsy();
   expect(panelModel.showAddQuestionButton).toBeFalsy();
   settings.designer.showAddQuestionButton = true;
+  pageModel = new PageAdorner(creator, creator.survey.pages[0]);
   panelModel = new QuestionAdornerViewModel(creator, panel, undefined);
   expect(pageModel.showAddQuestionButton).toBeTruthy();
   expect(panelModel.showAddQuestionButton).toBeTruthy();
