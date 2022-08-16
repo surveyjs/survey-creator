@@ -1794,6 +1794,36 @@ test("PageAdorner and onElementAllowOperations", (): any => {
   const pageModel2 = new PageAdorner(creator, creator.survey.pages[0]);
   expect(pageModel2.getActionById("delete").visible).toBeFalsy();
 });
+test("PageAdorner and onElementAllowOperations, allowEdit", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.survey.addNewPage("page2");
+  creator.onElementAllowOperations.add((sender, options) => {
+    let page = null;
+    if(options.obj.isPage) {
+      page = options.obj;
+    } else {
+      page = options.obj.page;
+    }
+    if (!!page) {
+      const isFirstPage = sender.survey.pages.indexOf(page) === 0;
+      if(isFirstPage) {
+        options.allowEdit = false;
+        options.allowCopy = false;
+      }
+    }
+  });
+  const pageModel1 = new PageAdorner(creator, creator.survey.pages[0]);
+  const pageModel2 = new PageAdorner(creator, creator.survey.pages[1]);
+  creator.selectElement(creator.survey.pages[0]);
+  expect(pageModel1.getActionById("duplicate").visible).toBeFalsy();
+  expect(pageModel1.showAddQuestionButton).toBeFalsy();
+  creator.selectElement(creator.survey.pages[1]);
+  expect(pageModel2.getActionById("duplicate").visible).toBeTruthy();
+  expect(pageModel2.showAddQuestionButton).toBeTruthy();
+});
 test("PageAdorner and creator readOnly", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -2604,12 +2634,13 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
   settings.designer.showAddQuestionButton = false;
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
-  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  let pageModel = new PageAdorner(creator, creator.survey.pages[0]);
   let panel = <PanelModel>creator.survey.getAllPanels()[0];
   let panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
   expect(pageModel.showAddQuestionButton).toBeFalsy();
   expect(panelModel.showAddQuestionButton).toBeFalsy();
   settings.designer.showAddQuestionButton = true;
+  pageModel = new PageAdorner(creator, creator.survey.pages[0]);
   panelModel = new QuestionAdornerViewModel(creator, panel, undefined);
   expect(pageModel.showAddQuestionButton).toBeTruthy();
   expect(panelModel.showAddQuestionButton).toBeTruthy();

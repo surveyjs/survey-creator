@@ -198,13 +198,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
     return true;
   }
-
-  public get allowEdit() {
-    return !this.creator.readOnly;
-  }
-  public get showAddQuestionButton(): boolean {
-    return this.allowEdit && settings.designer.showAddQuestionButton;
-  }
   public getConvertToTypesActions(): Array<IAction> {
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
       this.currentType, this.creator.toolbox.itemNames, true
