@@ -578,7 +578,7 @@ export var tgStrings = {
 
     cols: "Сутунҳо",
     rows: "Сатрҳо",
-    placeHolder: "Ҷойдор",
+    placeholder: "Ҷойдор",
 
     optionsCaption: "Танзимотҳои имзо",
 

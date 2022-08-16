@@ -152,7 +152,7 @@ export let svStrings = {
     isRequired: "Nödvändig?",
     startWithNewLine: "Starta på en ny rad?",
     rows: "Antal rader",
-    placeHolder: "Mata in i fältet",
+    placeholder: "Mata in i fältet",
     showPreview: "Förhandsvinsning av bild?",
     storeDataAsText: "Lagra filinnehållet i JSON som text",
     maxSize: "Max filstorlek i bytes",
@@ -418,7 +418,6 @@ export let svStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
 
     optionsCaption: "optionsCaption",
 

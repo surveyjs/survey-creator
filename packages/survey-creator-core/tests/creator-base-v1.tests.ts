@@ -332,12 +332,12 @@ test("fast copy tests, copy a question", () => {
   const q1 = <QuestionTextModel>(
     creator.survey.pages[0].addNewQuestion("text", "question1")
   );
-  q1.placeHolder = "I'm here";
+  q1.placeholder = "I'm here";
   creator.fastCopyQuestion(q1);
   expect(creator.survey.pages[0].questions).toHaveLength(2);
   const q2 = <QuestionTextModel>creator.survey.pages[0].questions[1];
   expect(q2.name).toEqual("question2");
-  expect(q2.placeHolder).toEqual("I'm here");
+  expect(q2.placeholder).toEqual("I'm here");
 });
 
 test("fast copy tests, copy a panel with questions and a nested panel", () => {
@@ -740,7 +740,7 @@ test(
   () => {
     const creator = new CreatorTester();
     creator.onGetObjectDisplayName.add(function (sender, options) {
-      if(options.reason === "property-grid") {
+      if (options.reason === "property-grid") {
         if (!!options.obj.title) {
           options.displayName = options.obj.title;
         }
@@ -748,7 +748,7 @@ test(
           options.displayName = options.obj.description;
         }
       }
-      if(options.reason === "property-grid-title") {
+      if (options.reason === "property-grid-title") {
         options.displayName = options.obj.name + " Properties";
       }
     });

@@ -1,4 +1,4 @@
-import { SurveyModel, PopupModel, ListModel, Action, IAction, Base } from "survey-core";
+import { ListModel, Action, IAction, Base, createDropdownActionModel } from "survey-core";
 import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
@@ -11,8 +11,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private importCsvAction: Action;
   private exportCsvAction: Action;
   private inputFileElement: HTMLInputElement;
-  private pagePopupModel: PopupModel;
-  private stringsPopupModel: PopupModel;
   private sidebarTab: SidebarTabModel;
 
   public model: Translation;
@@ -61,7 +59,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
 
-    this.pagePopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllPagesText }].concat(
+    this.filterPageAction.data.setItems([{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
         id: page.name,
         title: this.creator.getObjectDisplayName(page, "survey-translation", page.title)
@@ -186,59 +184,33 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
 
   private createFilterPageAction() {
-    this.pagePopupModel = new PopupModel<{ model: ListModel }>(
-      "sv-list",
-      {
-        model: new ListModel(
-          [{ id: null, title: this.showAllPagesText }],
-          (item: IAction) => {
-            this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
-            this.pagePopupModel.toggleVisibility();
-          },
-          true
-        )
-      },
-      "bottom",
-      "center"
-    );
-    this.filterPageAction = new Action({
+    this.filterPageAction = createDropdownActionModel({
       id: "svc-translation-filter-page",
       title: this.getFilterPageActionTitle(),
       visible: false,
-      component: "sv-action-bar-item-dropdown",
       mode: "small",
-      popupModel: this.pagePopupModel,
-      action: (newPage) => {
-        this.pagePopupModel.toggleVisibility();
-      }
+    }, {
+      items: [{ id: null, title: this.showAllPagesText }],
+      allowSelection: true,
+      onSelectionChanged: (item: IAction) => {
+        this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
+      },
+      horizontalPosition: "center"
     });
   }
   private createFilterStringsAction() {
-    this.stringsPopupModel = new PopupModel<{ model: ListModel }>(
-      "sv-list",
-      {
-        model: new ListModel(
-          [{ id: "show-all-strings", title: this.showAllStringsText }, { id: "show-used-strings-only", title: this.showUsedStringsOnlyText }],
-          (item: IAction) => {
-            this.model.showAllStrings = item.id === "show-all-strings";
-            this.stringsPopupModel.toggleVisibility();
-          },
-          true
-        )
-      },
-      "bottom",
-      "center"
-    );
-    this.filterStringsAction = new Action({
+    this.filterStringsAction = createDropdownActionModel({
       id: "svc-translation-show-all-strings",
       title: this.getFilterStringsActionTitle(),
       visible: false,
-      component: "sv-action-bar-item-dropdown",
       mode: "small",
-      popupModel: this.stringsPopupModel,
-      action: () => {
-        this.stringsPopupModel.toggleVisibility();
-      }
+    }, {
+      items: [{ id: "show-all-strings", title: this.showAllStringsText }, { id: "show-used-strings-only", title: this.showUsedStringsOnlyText }],
+      allowSelection: true,
+      onSelectionChanged: (item: IAction) => {
+        this.model.showAllStrings = item.id === "show-all-strings";
+      },
+      horizontalPosition: "center"
     });
   }
   private updateFilterStrigsAction(updateSelectedItem: boolean = false) {
@@ -246,14 +218,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterStringsAction.title = title;
     if(updateSelectedItem) {
       this.filterStringsAction.needSeparator = this.filterPageAction.visible;
-      const list = <ListModel>this.stringsPopupModel.contentComponentData.model;
+      const list = <ListModel>this.filterStringsAction.data;
       list.selectedItem = list.actions.filter((el: IAction) => el.title === title)[0];
     }
   }
   private updateFilterPageAction(updateSelectedItem: boolean = false) {
     this.filterPageAction.title = this.getFilterPageActionTitle();
     if(updateSelectedItem) {
-      const list = <ListModel>this.pagePopupModel.contentComponentData.model;
+      const list = <ListModel>this.filterPageAction.data;
       const id = this.model.filteredPage ? this.model.filteredPage.name : null;
       list.selectedItem = list.actions.filter((el: IAction) => el.id === id)[0];
     }

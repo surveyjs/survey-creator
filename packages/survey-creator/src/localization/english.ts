@@ -298,7 +298,7 @@ export var enStrings = {
     startWithNewLine: "Is start with new line?",
     rows: "Row count",
     cols: "Column count",
-    placeHolder: "Input place holder",
+    placeholder: "Input place holder",
     showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size in bytes",
@@ -660,7 +660,7 @@ export var enStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
+    placeholder: "placeholder",
 
     optionsCaption: "optionsCaption",
 

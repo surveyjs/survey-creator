@@ -292,7 +292,7 @@ export var nlStrings = {
     startWithNewLine: "Beginnen met een nieuwe regel?",
     rows: "Aantal rijen",
     cols: "Kolom tellen",
-    placeHolder: "Hulptekst",
+    placeholder: "Hulptekst",
     showPreview: "Toon voorbeeldgebied",
     showPreviewBeforeComplete: "Voorbeeldweergave voor afronden",
     storeDataAsText: "Bewaar bestandsinhoud in JSON-resultaat als tekst",
@@ -668,7 +668,7 @@ export var nlStrings = {
 
     cols: "Kolommen",
     rows: "Rijen",
-    placeHolder: "Tijdelijke aanduiding",
+    placeholder: "Tijdelijke aanduiding",
 
     optionsCaption: "Bijschrift opties",
 

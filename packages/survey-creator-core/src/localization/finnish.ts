@@ -288,7 +288,7 @@ export var fiStrings = {
     startWithNewLine: "Onko aloitus uudella rivillä?",
     rows: "Rivit",
     cols: "Sarakeet",
-    placeHolder: "Syötä paikkamerkintä",
+    placeholder: "Syötä paikkamerkintä",
     showPreview: "Näytä esikatselu",
     storeDataAsText: "Tallenna tiedostosisältö JSON-tulokseen tekstinä",
     maxSize: "Tiedoston enimmäiskoko tavuina",
@@ -642,7 +642,6 @@ export var fiStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
 
     optionsCaption: "optionsCaption",
 

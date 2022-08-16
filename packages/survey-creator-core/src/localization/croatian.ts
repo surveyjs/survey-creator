@@ -294,7 +294,7 @@ export var hrStrings = {
     startWithNewLine: "Počinje li s novom linijom?",
     rows: "Broj redaka",
     cols: "Broj stupaca",
-    placeHolder: "Držač ulaznog mjesta",
+    placeholder: "Držač ulaznog mjesta",
     showPreview: "Prikaz područja pretpregleda",
     storeDataAsText: "Pohranite sadržaj datoteke u rezultat JSON kao tekst",
     maxSize: "Maksimalna veličina datoteke u bytes",
@@ -650,7 +650,6 @@ export var hrStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
 
     optionsCaption: "optionsCaption",
 

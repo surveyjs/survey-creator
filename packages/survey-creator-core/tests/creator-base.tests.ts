@@ -1312,14 +1312,14 @@ test("Add question with default choices", (): any => {
 test("Add question based on json in toolbox", (): any => {
   const creator = new CreatorTester();
   const toolboxItem = creator.toolbox.getItemByName("text");
-  toolboxItem.json.placeHolder = "Test holder";
+  toolboxItem.json.placeholder = "Test holder";
   const survey: SurveyModel = creator.survey;
   creator.currentAddQuestionType = "text";
   creator.addNewQuestionInPage(() => { });
   const question = <QuestionTextModel>survey.getAllQuestions()[0];
   expect(question.getType()).toEqual("text");
-  expect(question.placeHolder).toEqual("Test holder");
-  delete toolboxItem.json.placeHolder;
+  expect(question.placeholder).toEqual("Test holder");
+  delete toolboxItem.json.placeholder;
 });
 test("getElementWrapperComponentName", (): any => {
   expect(getElementWrapperComponentName(null, "logo-image", false)).toEqual("svc-logo-image");
@@ -1794,6 +1794,36 @@ test("PageAdorner and onElementAllowOperations", (): any => {
   const pageModel2 = new PageAdorner(creator, creator.survey.pages[0]);
   expect(pageModel2.getActionById("delete").visible).toBeFalsy();
 });
+test("PageAdorner and onElementAllowOperations, allowEdit", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.survey.addNewPage("page2");
+  creator.onElementAllowOperations.add((sender, options) => {
+    let page = null;
+    if(options.obj.isPage) {
+      page = options.obj;
+    } else {
+      page = options.obj.page;
+    }
+    if (!!page) {
+      const isFirstPage = sender.survey.pages.indexOf(page) === 0;
+      if(isFirstPage) {
+        options.allowEdit = false;
+        options.allowCopy = false;
+      }
+    }
+  });
+  const pageModel1 = new PageAdorner(creator, creator.survey.pages[0]);
+  const pageModel2 = new PageAdorner(creator, creator.survey.pages[1]);
+  creator.selectElement(creator.survey.pages[0]);
+  expect(pageModel1.getActionById("duplicate").visible).toBeFalsy();
+  expect(pageModel1.showAddQuestionButton).toBeFalsy();
+  creator.selectElement(creator.survey.pages[1]);
+  expect(pageModel2.getActionById("duplicate").visible).toBeTruthy();
+  expect(pageModel2.showAddQuestionButton).toBeTruthy();
+});
 test("PageAdorner and creator readOnly", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -2018,7 +2048,7 @@ test("Modify property editor settings on event", (): any => {
   creator.onPropertyEditorCreated.add((sender, options) => {
     if (
       options.obj.getType() == "text" &&
-      options.property.name === "placeHolder"
+      options.property.name === "placeholder"
     ) {
       options.editor.textUpdateMode = "onTyping";
       options.editor.dataList = ["item1", "item2"];
@@ -2028,15 +2058,15 @@ test("Modify property editor settings on event", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeHolderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
-  expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
-  expect(placeHolderQuestion.dataList).toHaveLength(2);
+  const placeholderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeholder");
+  expect(placeholderQuestion.textUpdateMode).toEqual("onTyping");
+  expect(placeholderQuestion.dataList).toHaveLength(2);
 });
 test("Modify property editor via property grid survey", (): any => {
   const creator = new CreatorTester();
   creator.onPropertyGridSurveyCreated.add((sender, options) => {
     if (options.obj.getType() !== "text") return;
-    const question = options.survey.getQuestionByName("placeHolder");
+    const question = options.survey.getQuestionByName("placeholder");
     question.textUpdateMode = "onTyping";
     question.dataList = ["item1", "item2"];
   });
@@ -2044,9 +2074,9 @@ test("Modify property editor via property grid survey", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   creator.selectElement(creator.survey.getAllQuestions()[0]);
-  const placeHolderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeHolder");
-  expect(placeHolderQuestion.textUpdateMode).toEqual("onTyping");
-  expect(placeHolderQuestion.dataList).toHaveLength(2);
+  const placeholderQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("placeholder");
+  expect(placeholderQuestion.textUpdateMode).toEqual("onTyping");
+  expect(placeholderQuestion.dataList).toHaveLength(2);
 });
 test("Modify property editor titleActions on event", (): any => {
   PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
@@ -2604,12 +2634,13 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
   settings.designer.showAddQuestionButton = false;
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
-  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  let pageModel = new PageAdorner(creator, creator.survey.pages[0]);
   let panel = <PanelModel>creator.survey.getAllPanels()[0];
   let panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
   expect(pageModel.showAddQuestionButton).toBeFalsy();
   expect(panelModel.showAddQuestionButton).toBeFalsy();
   settings.designer.showAddQuestionButton = true;
+  pageModel = new PageAdorner(creator, creator.survey.pages[0]);
   panelModel = new QuestionAdornerViewModel(creator, panel, undefined);
   expect(pageModel.showAddQuestionButton).toBeTruthy();
   expect(panelModel.showAddQuestionButton).toBeTruthy();
@@ -3063,3 +3094,74 @@ test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): 
   expect(model.getRenderedItems().length).toBe(5);
   expect(model.isCollapseView).toBeFalsy();
 });
+test("undo/redo DnD ", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "question1",
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          },
+          {
+            "type": "radiogroup",
+            "name": "question2",
+            "startWithNewLine": false,
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  const q1 = creator.survey.pages[0].elements[0];
+  const q2 = creator.survey.pages[0].elements[1];
+  creator.dragDropSurveyElements.onBeforeDrop.fire({ dropTarget: q2 }, null);
+
+  creator.survey.pages[0].removeElement(q1);
+  creator.survey.pages[0].addElement(q1);
+  q2.startWithNewLine = true;
+  q1.startWithNewLine = false;
+
+  expect(creator.survey.pages[0].rows.length).toEqual(1);
+  creator.dragDropSurveyElements.onAfterDrop.fire({ dropTarget: q2 }, { draggedElement: q1 });
+  expect(creator.survey.pages[0].rows.length).toEqual(1);
+  expect(creator.survey.pages[0].elements.map(e => e.name)).toEqual(["question2", "question1"]);
+  creator.undoRedoManager.undo();
+  expect(creator.survey.pages[0].elements.map(e => e.name)).toEqual(["question1", "question2"]);
+  expect(creator.survey.pages[0].rows.length).toEqual(1);
+});
+test("canUndo with events", (): any => {
+  const creator = new CreatorTester();
+
+  creator.onModified.add(function (sender, options) {
+    // We use the question's name to display in the UI dropdown lists so keep it up to date
+    if (options.type === "PROPERTY_CHANGED" && options.name === "title" && options.newValue !== "") {
+      options.target.name = options.newValue;
+    }
+  });
+
+  creator.onQuestionAdded.add(function (sender, options) {
+    options.question.title = "default title";
+  });
+  const survey = creator.survey;
+  const page = survey.addNewPage("page1");
+  page.addNewQuestion("text", "q1");
+  expect(survey.getAllQuestions()[0].title).toBe("default title");
+
+  creator.survey.getAllQuestions()[0].title = "new title";
+
+  creator.undo();
+  expect(creator.undoRedoManager.canRedo()).toBeTruthy();

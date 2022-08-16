@@ -297,7 +297,7 @@ var germanTranslation = {
     startWithNewLine: "In neuer Zeile beginnen?",
     rows: "Zeilenanzahl",
     cols: "Spaltenanzahl",
-    placeHolder: "Platzhalter",
+    placeholder: "Platzhalter",
     showPreview: "Wird eine Bildvorschau angezeigt?",
     storeDataAsText: "Speicher Dateininhalt des JSON-Resultats als Text",
     maxSize: "Maximale Dateigröße in Bytes",
@@ -677,7 +677,7 @@ var germanTranslation = {
 
     cols: "Spalten",
     rows: "Zeilen",
-    placeHolder: "Platzhalter",
+    placeholder: "Platzhalter",
 
     optionsCaption: "Auswahlbeschriftung",
 

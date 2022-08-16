@@ -60,7 +60,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "rows", tab: "layout" },
         { name: "cols", tab: "layout" },
-        "placeHolder",
+        "placeholder",
         { name: "maxLength", tab: "validation" },
         { name: "textUpdateMode", tab: "data" },
         { name: "autoGrow", tab: "layout" },
@@ -272,7 +272,7 @@ export class SurveyQuestionEditorDefinition {
         "min",
         "max",
         "step",
-        "placeHolder",
+        "placeholder",
         "autoComplete",
         "dataList",
         { name: "minValueExpression", tab: "logic" },
@@ -386,13 +386,13 @@ export class SurveyQuestionEditorDefinition {
         "min",
         "max",
         "step",
-        "placeHolder",
+        "placeholder",
         "maxLength"
       ],
       tabs: [{ name: "validators", index: 10 }]
     },
     "matrixdropdowncolumn@comment": {
-      properties: ["rows", "placeHolder", "maxLength"],
+      properties: ["rows", "placeholder", "maxLength"],
       tabs: [{ name: "validators", index: 10 }]
     },
     "matrixdropdowncolumn@boolean": {
@@ -427,7 +427,7 @@ export class SurveyQuestionEditorDefinition {
         "isRequired",
         "maxLength",
         "size",
-        "placeHolder",
+        "placeholder",
         "requiredErrorText",
         "validators"
       ]

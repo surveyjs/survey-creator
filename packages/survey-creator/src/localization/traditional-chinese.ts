@@ -105,7 +105,7 @@ var traditionalChineseTranslation = {
     isRequired: "是否為必填項?",
     startWithNewLine: "問題是否新起一行?",
     rows: "文本框行數",
-    placeHolder: "占位文本",
+    placeholder: "占位文本",
     showPreview: "是否顯示圖像預覽?",
     storeDataAsText: "以 JSON 文本方式存儲文件",
     maxSize: "文件最大尺寸 (Bytes)",

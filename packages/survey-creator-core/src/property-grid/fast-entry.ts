@@ -51,7 +51,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
       this.editSurvey.getQuestionByName("question")
     );
     this.setComment();
-    (this.editSurvey.getQuestionByName("question") as QuestionTextBase).placeHolder = this.getPlaceHolder();
+    (this.editSurvey.getQuestionByName("question") as QuestionTextBase).placeholder = this.getPlaceHolder();
     this.editSurvey.onValidateQuestion.add((sender, options) => {
       const maxChoicesCount = this.options.maximumChoicesCount;
       if (maxChoicesCount > 0) {
