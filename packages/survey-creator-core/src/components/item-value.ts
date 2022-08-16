@@ -42,8 +42,10 @@ export class ItemValueWrapperViewModel extends Base {
     ) {
       question.registerFunctionOnPropertyValueChanged("hasSelectAll", updateFromProperty);
     } else if (this.isNew) {
-      const nextValue = creator.getNextItemValue(question);
-      item.value = nextValue;
+      question.visibleChoicesChangedCallback = () => {
+        this.updateNewItemValue();
+      };
+      this.updateNewItemValue();
     }
     this.dragDropHelper.onGhostPositionChanged.add(
       this.handleDragDropGhostPositionChanged
@@ -74,6 +76,10 @@ export class ItemValueWrapperViewModel extends Base {
   private isBanStartDrag(pointerDownEvent: PointerEvent): boolean {
     const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
     return this.isNew || isContentEditable;
+  }
+  private updateNewItemValue() {
+    if(!this.creator || !this.question || !this.question.newItem) return;
+    this.question.newItem.value = this.creator.getNextItemValue(this.question);
   }
 
   onPointerDown(pointerDownEvent: PointerEvent) {
@@ -131,8 +137,7 @@ export class ItemValueWrapperViewModel extends Base {
       model.item.value = "newitem";
       const itemValue = model.creator.createNewItemValue(model.question);
       model.question.choices.push(itemValue);
-      const nextValue = model.creator.getNextItemValue(model.question);
-      model.item.value = nextValue;
+      this.updateNewItemValue();
       if(this.creator) this.creator.onItemValueAddedCallback(model.question, "choices", itemValue, model.question.choices);
     }
     this.updateIsNew(model.question, model.item);

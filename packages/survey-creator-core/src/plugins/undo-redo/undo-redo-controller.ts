@@ -96,6 +96,7 @@ export class UndoRedoController extends Base {
   }
   public undo() {
     if (!this.undoRedoManager) return;
+    this.undoRedoManager.suspend();
     var options = { canUndo: this.undoRedoManager.canUndo() };
     this.onBeforeUndo.fire(self, options);
     this.creator.onBeforeUndo.fire(self, options);
@@ -105,6 +106,7 @@ export class UndoRedoController extends Base {
       this.creator.onAfterUndo.fire(self, { state: item });
       this.selectElementAfterUndo();
     }
+    this.undoRedoManager.resume();
   }
   public redo() {
     if (!this.undoRedoManager) return;

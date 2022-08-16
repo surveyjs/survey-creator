@@ -17,7 +17,7 @@ var simplifiedChineseTranslation = {
   // strings for question types
   qt: {
     default:
-    "默认",
+      "默认",
     checkbox: "多项选择",
     comment: "多行文本",
     imagepicker: "选图片",
@@ -168,7 +168,7 @@ var simplifiedChineseTranslation = {
     requiredErrorText: "错误文字",
     startWithNewLine: "问题是否新起一行?",
     rows: "文本框行数",
-    placeHolder: "占位文本",
+    placeholder: "占位文本",
     showPreview: "是否显示图像预览?",
     storeDataAsText: "以 JSON 文本方式存储文件",
     maxSize: "文件最大尺寸 (Bytes)",
@@ -288,7 +288,7 @@ var simplifiedChineseTranslation = {
     show: "显示",
     hide: "隐藏",
     default:
-    "默认",
+      "默认",
     initial: "初始化",
     random: "随机",
     collapsed: "折叠",
@@ -436,7 +436,7 @@ var simplifiedChineseTranslation = {
     valueFalse: "不选的值",
     cols: "列",
     rows: "行",
-    placeHolder: "占位",
+    placeholder: "占位",
     optionsCaption: "optionsCaption",
     expression: "公式",
     format: "格式",

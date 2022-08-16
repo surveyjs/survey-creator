@@ -3,14 +3,18 @@
 .svc-row {
   width: 100%;
 }
+
 .svc-row .sd-row--multiple {
   padding: calcSize(1);
   gap: calcSize(1);
 }
+
 .sd-panel .svc-row .sd-row--multiple {
   padding: calcSize(0);
   box-shadow: none;
   border-radius: 0;
+  padding: 2px; //need for the https://github.com/surveyjs/survey-creator/issues/3288
+  margin: -2px; //need for the https://github.com/surveyjs/survey-creator/issues/3288
 }
 
 .svc-row.svc-row--ghost {
@@ -19,6 +23,7 @@
     border: none;
     box-shadow: none;
   }
+
   .sd-row {
     margin-top: calcSize(2);
     margin-bottom: calcSize(2);

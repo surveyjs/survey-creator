@@ -371,7 +371,7 @@ test("Translation update filterPageActiontitle after activated", () => {
   };
   const tabTranslationPlugin = new TabTranslationPlugin(creator);
   const filterPageAction = tabTranslationPlugin["filterPageAction"];
-  const filterPageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
+  const filterPageList = <ListModel>(filterPageAction.data);
   tabTranslationPlugin.activate();
   expect(filterPageAction.title).toEqual("All Pages");
   expect(filterPageList.selectedItem.title).toEqual("All Pages");
@@ -396,7 +396,7 @@ test("Translation update filterStringsAction after activated", () => {
   };
   const tabTranslationPlugin = new TabTranslationPlugin(creator);
   const filterStringsAction = tabTranslationPlugin["filterStringsAction"];
-  const filterStringsList = <ListModel>tabTranslationPlugin["stringsPopupModel"].contentComponentData.model;
+  const filterStringsList = <ListModel>filterStringsAction.data;
   tabTranslationPlugin.activate();
   expect(filterStringsAction.title).toEqual("Used Strings Only");
   expect(filterStringsList.selectedItem.title).toEqual("Used Strings Only");
@@ -427,8 +427,8 @@ test("Translation filterPage action content and visiblity after activate", () =>
     ]
   };
   const tabTranslationPlugin = new TabTranslationPlugin(creator);
-  const pageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
   const filterPageAction = <Action>tabTranslationPlugin["filterPageAction"];
+  const pageList = <ListModel>filterPageAction.data;
   tabTranslationPlugin.activate();
   expect(pageList.actions.map((action: Action) => action.title)).toEqual(["All Pages", "page1", "page2"]);
   expect(filterPageAction.visible).toBeTruthy();
@@ -512,7 +512,7 @@ test("Make invisible locales in language selector, that has been already choosen
   });
   surveyLocalization.supportedLocales = ["en", "fr", "de", "se"];
   const translation = new Translation(survey);
-  const list = translation["chooseLanguagePopupModel"].contentComponentData.model;
+  const list = translation["addLanguageAction"].data;
   expect(translation.chooseLanguageActions).toHaveLength(4);
   expect(translation.chooseLanguageActions[0].id).toEqual("en");
   expect(translation.chooseLanguageActions[1].id).toEqual("fr");
@@ -837,25 +837,25 @@ test("empty title placeholders", () => {
   expect(question1Props.rows[0].value).toEqual("title");
   let cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   let cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
-  expect(cellQuestion1.placeHolder).toEqual("question1");
+  expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual(null);
-  expect(cellQuestion2.placeHolder).toEqual("question1");
+  expect(cellQuestion2.placeholder).toEqual("question1");
   expect(cellQuestion2.value).toEqual("test");
 
   cellQuestion1.value = "Question 1";
   cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
-  expect(cellQuestion1.placeHolder).toEqual("Question 1");
+  expect(cellQuestion1.placeholder).toEqual("Question 1");
   expect(cellQuestion1.value).toEqual("Question 1");
-  expect(cellQuestion2.placeHolder).toEqual("Question 1");
+  expect(cellQuestion2.placeholder).toEqual("Question 1");
   expect(cellQuestion2.value).toEqual("test");
 
   cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
   cellQuestion1.value = "";
-  expect(cellQuestion1.placeHolder).toEqual("question1");
+  expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("");
-  expect(cellQuestion2.placeHolder).toEqual("question1");
+  expect(cellQuestion2.placeholder).toEqual("question1");
   expect(cellQuestion2.value).toEqual("test");
 });
 
@@ -895,15 +895,15 @@ test("init placeholders", () => {
   expect(question1Props.rows[0].value).toEqual("title");
   const cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   const cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
-  expect(cellQuestion1.placeHolder).toEqual("Question 1");
+  expect(cellQuestion1.placeholder).toEqual("Question 1");
   expect(cellQuestion1.value).toEqual("Question 1");
-  expect(cellQuestion2.placeHolder).toEqual("Question 1");
+  expect(cellQuestion2.placeholder).toEqual("Question 1");
   expect(cellQuestion2.value).toEqual("Q 1");
 
   cellQuestion1.value = "";
-  expect(cellQuestion1.placeHolder).toEqual("question1");
+  expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("");
-  expect(cellQuestion2.placeHolder).toEqual("question1");
+  expect(cellQuestion2.placeholder).toEqual("question1");
   expect(cellQuestion2.value).toEqual("Q 1");
 });
 
@@ -944,9 +944,9 @@ test("localize placeholders", () => {
 
   const cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
   const cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
-  expect(cellQuestion1.placeHolder).toEqual("Translation...");
+  expect(cellQuestion1.placeholder).toEqual("Translation...");
   expect(cellQuestion1.value).toEqual(null);
-  expect(cellQuestion2.placeHolder).toEqual("Перевод...");
+  expect(cellQuestion2.placeholder).toEqual("Перевод...");
   expect(cellQuestion2.value).toEqual(null);
 
   const survey_props = <QuestionMatrixDropdownModel>page.elements[0];
@@ -959,9 +959,9 @@ test("localize placeholders", () => {
 
   const surveyCell1 = <QuestionCommentModel>survey_props.visibleRows[11].cells[0].question;
   const surveyCell2 = <QuestionCommentModel>survey_props.visibleRows[11].cells[1].question;
-  expect(surveyCell1.placeHolder).toEqual("Edit");
+  expect(surveyCell1.placeholder).toEqual("Edit");
   expect(surveyCell1.value).toEqual(null);
-  expect(surveyCell2.placeHolder).toEqual("Редактирование");
+  expect(surveyCell2.placeholder).toEqual("Редактирование");
   expect(surveyCell2.value).toEqual(null);
 });
 test("Test settings.translation.maximumSelectedLocales", () => {
@@ -1073,7 +1073,6 @@ test("Change filterPageAction to all pages on changing survey", () => {
   creator.JSON = json;
   const tabTranslationPlugin = <TabTranslationPlugin>creator.getPlugin("translation");
   const filterPageAction = tabTranslationPlugin["filterPageAction"];
-  const filterPageList = <ListModel>tabTranslationPlugin["pagePopupModel"].contentComponentData.model;
   creator.activeTab = "translation";
   expect(filterPageAction.title).toEqual("All Pages");
   tabTranslationPlugin.model.filteredPage = creator.survey.pages[0];
@@ -1094,13 +1093,13 @@ test("Import from array, onTraslationItemImport", () => {
   };
   let counter = 0;
   creator.onTranslationImported.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   creator.onTranslationImportItem.add((sender, options) => {
-    if(["default", "", "en", "de"].indexOf(options.locale) < 0) options.text = undefined;
+    if (["default", "", "en", "de"].indexOf(options.locale) < 0) options.text = undefined;
   });
   creator.onTranslationImportItem.add((sender, options) => {
-    if(["default", "", "en", "de"].indexOf(options.locale) < 0) options.text = undefined;
+    if (["default", "", "en", "de"].indexOf(options.locale) < 0) options.text = undefined;
   });
   creator.activeTab = "translation";
   const tabTranslationPlugin = <TabTranslationPlugin>creator.getPlugin("translation");

@@ -376,7 +376,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           titleLocation: "hidden",
           name: "textEditor",
           textUpdateMode: "onTyping",
-          placeHolder: editorLocalization.getString("pe.emptyExpressionPlaceHolder"),
+          placeholder: editorLocalization.getString("pe.emptyExpressionPlaceHolder"),
           visible: false
         }
       ]
@@ -634,10 +634,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return res;
   }
   private getContextObject(): Base {
-    if(this.object && this.object.isDescendantOf("itemvalue")) {
+    if (this.object && this.object.isDescendantOf("itemvalue")) {
       const res: any = (<ItemValue>this.object).locOwner;
-      if(!!res && res.getType) {
-        if(!!res.locOwner && res.locOwner.isDescendantOf("matrixdropdowncolumn"))
+      if (!!res && res.getType) {
+        if (!!res.locOwner && res.locOwner.isDescendantOf("matrixdropdowncolumn"))
           return res.locOwner;
         return res;
       }

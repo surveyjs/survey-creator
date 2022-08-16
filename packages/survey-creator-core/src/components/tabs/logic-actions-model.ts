@@ -119,7 +119,7 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
   }
   private updateRunExpressionQuestion(question: QuestionCommentModel) {
     question.titleLocation = "hidden";
-    question.placeHolder = editorLocalization.getString("pe.emptyExpressionPlaceHolder");
+    question.placeholder = editorLocalization.getString("pe.emptyExpressionPlaceHolder");
   }
 
   private createElementPanelObj(): Base {

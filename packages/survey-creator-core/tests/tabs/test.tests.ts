@@ -29,17 +29,20 @@ test("Test language Bar Item", (): any => {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
   const model: TestSurveyTabViewModel = testPlugin.model;
-  expect(testPlugin["languageListModel"].actions).toHaveLength(2);
-  expect(testPlugin["languageListModel"].actions[0].id).toEqual("en");
-  expect(testPlugin["languageListModel"].actions[1].id).toEqual("de");
-  expect(testPlugin["languageListModel"].actions[1].title).toEqual("Deutsch");
+  const languageSelectorAction = testPlugin["languageSelectorAction"];
+  const languageSelectorActionList = languageSelectorAction.data;
+
+  expect(languageSelectorActionList.actions).toHaveLength(2);
+  expect(languageSelectorActionList.actions[0].id).toEqual("en");
+  expect(languageSelectorActionList.actions[1].id).toEqual("de");
+  expect(languageSelectorActionList.actions[1].title).toEqual("Deutsch");
   expect(model.activeLanguage).toEqual("en");
   let langActions = creator.toolbar.actions.filter((action) => action.id === "languageSelector");
   expect(langActions).toHaveLength(1);
   let langAction = langActions[0];
   expect(langAction).toBeTruthy();
   expect(langAction.title).toEqual("English");
-  testPlugin["languageListModel"].onItemClick(testPlugin["languageListModel"].actions.filter(act => act.id === "de")[0]);
+  languageSelectorActionList.onItemClick(languageSelectorActionList.actions.filter(act => act.id === "de")[0]);
   expect(model.survey.locale).toEqual("de");
   expect(langAction.title).toEqual("Deutsch");
 
@@ -62,12 +65,15 @@ test("Test languages dropdown with unknown language", (): any => {
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
   const model: TestSurveyTabViewModel = testPlugin.model;
-  expect(testPlugin["languageListModel"].actions).toHaveLength(3);
-  expect(testPlugin["languageListModel"].actions[0].id).toEqual("en");
-  expect(testPlugin["languageListModel"].actions[1].id).toEqual("de");
-  expect(testPlugin["languageListModel"].actions[1].title).toEqual("Deutsch");
-  expect(testPlugin["languageListModel"].actions[2].id).toEqual("ff");
-  expect(testPlugin["languageListModel"].actions[2].title).toEqual("ff");
+  const languageSelectorAction = testPlugin["languageSelectorAction"];
+  const languageSelectorActionList = languageSelectorAction.data;
+
+  expect(languageSelectorActionList.actions).toHaveLength(3);
+  expect(languageSelectorActionList.actions[0].id).toEqual("en");
+  expect(languageSelectorActionList.actions[1].id).toEqual("de");
+  expect(languageSelectorActionList.actions[1].title).toEqual("Deutsch");
+  expect(languageSelectorActionList.actions[2].id).toEqual("ff");
+  expect(languageSelectorActionList.actions[2].title).toEqual("ff");
   expect(model.activeLanguage).toEqual("en");
 });
 test("Check page list state after change page arrows click", (): any => {

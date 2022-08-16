@@ -116,7 +116,7 @@ var italianTranslation = {
     isRequired: "Richiesto",
     startWithNewLine: "Nuova linea",
     rows: "Numero di righe",
-    placeHolder: "Testo di riferimento",
+    placeholder: "Testo di riferimento",
     showPreview: "Mostra anteprima",
     storeDataAsText: "Vedi il contenuto JSON come testo",
     maxSize: "Dimensione massima in bytes",

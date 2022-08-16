@@ -286,7 +286,7 @@ export var jaStrings = {
     panelAddText: "パネルテキストを追加しています",
     panelRemoveText: "パネルテキストを削除しています",
     path: "パス",
-    placeHolder: "プレースホルダの入力",
+    placeholder: "プレースホルダの入力",
     previewText: "「プレビュー」ボタンのテキスト",
     propertyIsEmpty: "値を入力してください",
     propertyIsNoUnique: "固有値を入力してください",
