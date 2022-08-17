@@ -54,9 +54,9 @@ This approach gives you the following advantages:
   }
   ```
 
-[View the "Country Component" example](/Examples/Survey-Creator?id=component-country)
-[View the "Order Table Component" example](/Examples/Survey-Creator?id=component-ordertable)
-[View the "Order Grid Component" example](/Examples/Survey-Creator?id=component-ordergrid)
+[View the "Country Component" example](/Examples/Survey-Creator?id=component-country (linkStyle))
+[View the "Order Table Component" example](/Examples/Survey-Creator?id=component-ordertable (linkStyle))
+[View the "Order Grid Component" example](/Examples/Survey-Creator?id=component-ordergrid (linkStyle))
 
 ## Further Reading
 

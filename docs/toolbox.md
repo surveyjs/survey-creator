@@ -49,7 +49,7 @@ import { SurveyCreator } from "survey-creator-react";
 const creator = new SurveyCreator(creatorOptions);
 ```
 
-[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization)
+[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
 
 ## Group Toolbox Items by Categories
 
@@ -75,7 +75,7 @@ creator.toolbox.changeCategories([
 ]);
 ```
 
-[View Toolbox Categories example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories)
+[View Toolbox Categories example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories (linkStyle))
 
 Ungrouped items fall into the General category. You can use [localization capabilities](#localize-survey-creator-ui) to change its caption. If your application does not employ modules, use the following code:
 
@@ -125,7 +125,7 @@ creator.toolbox
   ];
 ```
 
-[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization)
+[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
 
 ## Add a Custom Toolbox Item
 
@@ -154,7 +154,7 @@ creator.toolbox.addItem({
 }, 0);
 ```
 
-[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization)
+[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
 
 <!--
 

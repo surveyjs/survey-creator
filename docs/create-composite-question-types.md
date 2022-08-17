@@ -47,7 +47,7 @@ A composite question produces an object for a value:
 }
 ```
 
-[View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname)
+[View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname (linkStyle))
 
 ## Add Custom Properties to Composite Question Types
 
@@ -112,7 +112,7 @@ The steps below summarize how to add a custom property to your composite questio
 3. Call this function from the [`onLoaded`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onLoaded) function to apply the custom property when the survey JSON schema is loaded.
 4. Call the same function from the [`onPropertyChanged`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onPropertyChanged) function to reapply the custom property each time its value changes.
 
-[View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname)
+[View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname (linkStyle))
 
 ## Expressions and Triggers in Composite Question Types
 
@@ -219,7 +219,7 @@ Users can add a custom question to their survey like they add a built-in questio
 }
 ```
 
-[View the "Shipping Address Component" example](https://surveyjs.io/Examples/Survey-Creator?id=component-shippingaddress)
+[View the "Shipping Address Component" example](https://surveyjs.io/Examples/Survey-Creator?id=component-shippingaddress (linkStyle))
 
 ## Override Base Question Properties
 

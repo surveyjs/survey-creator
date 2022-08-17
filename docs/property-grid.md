@@ -73,7 +73,7 @@ A string value that specifies the question type to which the property should be 
 - `propertySettings`      
 Settings that configure the property's appearance and behavior. For information about these settings, refer to the [Survey Element Property Settings](#survey-element-property-settings) help section below.
 
-[View Add Properties example](https://surveyjs.io/Examples/Survey-Creator/?id=addproperties)
+[View Add Properties example](https://surveyjs.io/Examples/Survey-Creator/?id=addproperties (linkStyle))
 
 ### Survey Element Property Settings
 
@@ -122,7 +122,7 @@ SurveyCreator.PropertyGridEditorCollection.register({
 });
 ```
 
-[View Custom Property example](https://surveyjs.io/Examples/Survey-Creator/?id=custompropertyeditor)
+[View Custom Property example](https://surveyjs.io/Examples/Survey-Creator/?id=custompropertyeditor (linkStyle))
 
 You can add the type to the `name` property after a colon character as a shortcut:
 
