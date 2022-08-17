@@ -5,7 +5,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 - [Link Resources](#link-resources)
 - [Configure Survey Creator](#configure-survey-creator)
 - [Render Survey Creator](#render-survey-creator)
-- [Save and Load Survey Model Definitions](#save-and-load-survey-model-definitions)
+- [Save and Load Survey Model Schemas](#save-and-load-survey-model-schemas)
 
 Survey Creator is powered by Knockout and does not have an individual implementation for jQuery. However, you can integrate the version for Knockout into your jQuery application by following the same instructions.
 
@@ -43,7 +43,7 @@ To configure the Survey Creator component, specify [its properties](https://surv
 Displays the Logic tab in the tab panel.
 
 - [`isAutoSave`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#isAutoSave)        
-Automatically saves the survey definition JSON on every change.
+Automatically saves the survey JSON schema on every change.
 
 ```js
 const creatorOptions = {
@@ -154,9 +154,9 @@ document.addEventListener("DOMContentLoaded", function() {
 ```
 </details>
 
-## Save and Load Survey Model Definitions
+## Save and Load Survey Model Schemas
 
-Survey Creator produces survey model definitions as JSON objects. You can persist these objects on your server: save updates and restore previously saved definitions. To save a JSON object, implement the `saveSurveyFunc` function. It accepts two arguments:
+Survey Creator produces survey model schemas as JSON objects. You can persist these objects on your server: save updates and restore previously saved schemas. To save a JSON object, implement the `saveSurveyFunc` function. It accepts two arguments:
 
 - `saveNo`      
 An incremental number of the current change. Since web services are asynchronous, you cannot guarantee that the service receives the changes in the same order as the client sends them. For example, change #11 may arrive to the server faster than change #10. In your web service code, update the storage only if you receive changes with a higher `saveNo`.
@@ -164,7 +164,7 @@ An incremental number of the current change. Since web services are asynchronous
 - `callback`        
 A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
-The following code shows how to use the `saveSurveyFunc` function to save a survey model definition in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 
 ```js
@@ -197,7 +197,7 @@ function saveSurveyJson(url, json, saveNo, callback) {
 }
 ```
 
-To load a survey model definition JSON into Survey Creator, assign the definition to Survey Creator's [`JSON`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#JSON) or [`text`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model definition from the `localStorage`. If the definition is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
+To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#JSON) or [`text`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
 
 
 ```js

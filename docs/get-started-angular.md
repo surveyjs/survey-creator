@@ -6,7 +6,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 - [Configure Styles](#configure-styles)
 - [Configure Survey Creator](#configure-survey-creator)
 - [Render Survey Creator](#render-survey-creator)
-- [Save and Load Survey Model Definitions](#save-and-load-survey-model-definitions)
+- [Save and Load Survey Model Schemas](#save-and-load-survey-model-schemas)
 
 You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular" target="_blank">Get Started with Survey Creator / Form Builder - Angular</a>.
 
@@ -54,6 +54,7 @@ Open the `angular.json` file and reference Survey Creator and SurveyJS Library s
 Note that although standalone surveys support [multiple predefined themes](https://surveyjs.io/Documentation/Library?id=get-started-angular#configure-styles), surveys within Survey Creator apply only one theme ("Default V2"). However, you can use the survey configuration (JSON object) produced by Survey Creator to build a standalone survey and apply any theme to it. You can also customize Survey Creator theme colors as shown in the following example:
 
 [View Customize Theme Using CSS Variables example](https://surveyjs.io/Examples/Survey-Creator?id=editor-custom-theme-css-vars)
+
 ## Configure Survey Creator
 
 To configure the Survey Creator component, specify [its properties](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions) in a configuration object. In this tutorial, the object enables the following properties:
@@ -62,7 +63,7 @@ To configure the Survey Creator component, specify [its properties](https://surv
 Displays the Logic tab in the tab panel.
 
 - [`isAutoSave`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#isAutoSave)        
-Automatically saves the survey definition JSON on every change.
+Automatically saves the survey JSON schema on every change.
 
 ```js
 const creatorOptions = {
@@ -181,9 +182,9 @@ export class SurveyCreatorComponent implements OnInit {
 ```
 </details>
 
-## Save and Load Survey Model Definitions
+## Save and Load Survey Model Schemas
 
-Survey Creator produces survey model definitions as JSON objects. You can persist these objects on your server: save updates and restore previously saved definitions. To save a JSON object, implement the `saveSurveyFunc` function. It accepts two arguments:
+Survey Creator produces survey model schemas as JSON objects. You can persist these objects on your server: save updates and restore previously saved schemas. To save a JSON object, implement the `saveSurveyFunc` function. It accepts two arguments:
 
 - `saveNo`      
 An incremental number of the current change. Since web services are asynchronous, you cannot guarantee that the service receives the changes in the same order as the client sends them. For example, change #11 may arrive to the server faster than change #10. In your web service code, update the storage only if you receive changes with a higher `saveNo`.
@@ -191,7 +192,7 @@ An incremental number of the current change. Since web services are asynchronous
 - `callback`        
 A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
-The following code shows how to use the `saveSurveyFunc` function to save a survey model definition in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 
 ```js
@@ -234,7 +235,7 @@ function saveSurveyJson(url, json, saveNo, callback) {
 }
 ```
 
-To load a survey model definition JSON into Survey Creator, assign the definition to Survey Creator's [`JSON`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#JSON) or [`text`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model definition from the `localStorage`. If the definition is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
+To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#JSON) or [`text`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
 
 
 ```js

@@ -19,7 +19,7 @@ If you [add this question to the Toolbox](/Documentation/Survey-Creator?id=toolb
 
 - End users can edit the `choicesByUrl` property and break the functionality.
 - If the question needs modifications (for example, if the server URL has changed), end users have to modify every created instance of this question individually.
-- In the JSON definition, your custom question looks like a regular Dropdown question.
+- In the JSON schema, your custom question looks like a regular Dropdown question.
 
 To avoid these drawbacks, use a different approach: add your custom question type to the survey's `ComponentCollection`:
 
@@ -29,7 +29,7 @@ Survey.ComponentCollection.Instance.add({
   name: "country", 
   // A display name used in the Toolbox
   title: "Country", 
-  // A JSON definition for the base question type (Dropdown in this case)
+  // A JSON schema for the base question type (Dropdown in this case)
   questionJSON: {
     "type": "dropdown",
     "placeholder": "Select a country...",
@@ -45,7 +45,7 @@ This approach gives you the following advantages:
 - A corresponding toolbox item appears automatically.
 - End users cannot break the functionality because the Property Grid hides the `questionJSON` object properties.
 - If you modify the question configuration, changes automatically apply to every instance of this question.
-- A cleaner JSON definition:
+- A cleaner JSON schema:
 
   ```json
   {
