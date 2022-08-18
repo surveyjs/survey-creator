@@ -1,7 +1,6 @@
 import { Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, setJSON } from "../../helper";
+import { url, setJSON, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "SelectBase Screenshot";
 
@@ -29,21 +28,16 @@ const json = {
 };
 
 test("Dropdown adorners", async (t) => {
-  await t.resizeWindow(1920, 1080);
-  await setJSON(json);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON(json);
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-  const question = Selector(".svc-question__content");
-  await takeScreenshot("dropdown-not-selected.png", question, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    const question = Selector(".svc-question__content");
+    await takeElementScreenshot("dropdown-not-selected.png", question, t, comparer);
 
-  await t
-    .click(question, { offsetY: 40 })
-    .expect(Selector(".svc-question__content--selected div[data-name=question1]").visible).ok();
-  await takeScreenshot("dropdown-selected.png", question, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    await t
+      .click(question, { offsetY: 40 })
+      .expect(Selector(".svc-question__content--selected div[data-name=question1]").visible).ok();
+    await takeElementScreenshot("dropdown-selected.png", question, t, comparer);
+  });
 });

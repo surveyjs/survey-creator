@@ -1,7 +1,5 @@
 import { Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-
-import { url, screenshotComparerOptions, setJSON, getPropertyGridCategory, generalGroupName } from "../../helper";
+import { url, setJSON, getPropertyGridCategory, generalGroupName, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "MultipleText Screenshot";
 
@@ -32,19 +30,15 @@ const json = {
 };
 
 test("Multiple text items", async (t) => {
-  await t.resizeWindow(1920, 1080);
-  await setJSON(json);
-  await t.wait(1000);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON(json);
+    await t.wait(1000);
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-
-  await t
-    .click(Selector(".sd-question"))
-    .click(getPropertyGridCategory(generalGroupName))
-    .click(getPropertyGridCategory("Items"));
-  await takeScreenshot("multiple-text-items.png", Selector(".svc-side-bar .spg-panel").nth(1), screenshotComparerOptions);
-
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    await t
+      .click(Selector(".sd-question"))
+      .click(getPropertyGridCategory(generalGroupName))
+      .click(getPropertyGridCategory("Items"));
+    await takeElementScreenshot("multiple-text-items.png", Selector(".svc-side-bar .spg-panel").nth(1), t, comparer);
+  });
 });
