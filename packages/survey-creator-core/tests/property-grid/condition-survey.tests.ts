@@ -1607,3 +1607,20 @@ test("if conditionEditorItem is not ready then text edit is empty", () => {
   expect(conditionEditor["getEditorItems"]()).toHaveLength(4);
   expect(conditionEditor.text).toEqual("{q1} = 'abc' or {q2} = 1 and {q2} = 2");
 });
+test("show placeholder for first empty panel", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "text" },
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  const conditionEditor = new ConditionEditor(survey, question);
+  const firstPlaceholder = conditionEditor.panel.panels[0].getQuestionByName("placeholder");
+  expect(firstPlaceholder.visible).toBe(true);
+  conditionEditor.panel.panels[0].getQuestionByName("questionName").value = "q1";
+  expect(firstPlaceholder.visible).toBe(false);
+  conditionEditor.panel.panels[0].getQuestionByName("questionValue").value = "test_value";
+  conditionEditor.panel.addPanel();
+  expect(conditionEditor.panel.panels[1].getQuestionByName("placeholder").visible).toBe(false);
+});
