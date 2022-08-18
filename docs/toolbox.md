@@ -129,32 +129,10 @@ creator.toolbox
 
 ## Add a Custom Toolbox Item
 
-If you want to extend the predefined Toolbox item collection, call the `addItem(itemConfiguration, [index])` method to add a custom item. This method accepts the following arguments:
+Since the Toolbox is meant to contain question and panel types, to add a new element, you need to create a custom question or panel type. Refer to the following help topics for detailed instructions:
 
-- `itemConfiguration`       
-A [Toolbox item configuration object](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem). The [`name`](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem#name), [`iconName`](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem#iconName), and [`json`](https://surveyjs.io/Documentation/Survey-Creator?id=iquestiontoolboxitem#json) properties are required. When you configure an object for the `json` property, refer to the API help section of your question type for a list of available properties. For example, if you configure a Dropdown question, refer to the [Dropdown API](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel) help section.
-
-- `index`       
-The target index of the item. Use `0` to add the item at the first position, `1` to add it at the second position, and so on. Do not specify `index` if you want to display the item at the end.
-
-The following code adds a custom item that allows users to select a country from a drop-down menu. Since the `index` argument is `0`, the Toolbox displays the item at the beginning.
-
-```js
-creator.toolbox.addItem({
-  name: "countries",
-  iconName: "icon-dropdown",
-  title: "Countries",
-  json: {
-    type: "dropdown",
-    placeholder: "Select a country...",
-    choicesByUrl: {
-        url: "https://surveyjs.io/api/CountriesExample"
-    }
-  }
-}, 0);
-```
-
-[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
+- [Create Specialized Question Types](https://surveyjs.io/Documentation/Survey-Creator?id=create-specialized-question-types)
+- [Create Composite Question Types](https://surveyjs.io/Documentation/Survey-Creator?id=create-composite-question-types)
 
 <!--
 
