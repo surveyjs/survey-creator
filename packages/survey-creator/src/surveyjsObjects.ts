@@ -551,7 +551,7 @@ Survey.Panel.prototype["onSelectedElementChanged"] = function () {
 if (!!Survey["FlowPanel"]) {
   Survey["FlowPanel"].prototype["onCreating"] = function () {
     //TODO
-    this.placeHolder = "Enter here text or drop a question";
+    this.placeholder = "Enter here text or drop a question";
     elementOnCreating(this);
   };
   Survey["FlowPanel"].prototype["onSelectedElementChanged"] = function () {

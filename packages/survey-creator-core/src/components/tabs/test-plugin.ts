@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, defaultStandardCss, defaultV2Css, IAction, ListModel, modernCss, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, defaultStandardCss, defaultV2Css, IAction, ListModel, modernCss, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
 import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
@@ -6,13 +6,10 @@ import { TestSurveyTabViewModel } from "./test";
 
 export class TabTestPlugin implements ICreatorPlugin {
   private languageSelectorAction: Action;
-  private languagePopupModel: PopupModel;
-  private languageListModel: ListModel;
   private changeThemePopupModel: PopupModel;
   private changeThemeModel: ListModel;
   protected changeThemeAction: CreatorAction;
   private deviceSelectorAction: Action;
-  private deviceListModel: ListModel;
   private orientationSelectorAction: Action;
   private invisibleToggleAction: Action;
   private testAgainAction: Action;
@@ -42,8 +39,8 @@ export class TabTestPlugin implements ICreatorPlugin {
     if (vis) {
       languages = this.getLanguages(opt !== "all" ? this.model.survey.getUsedLocales() : null);
     }
-    this.languagePopupModel.contentComponentData.model.setItems(languages);
-    this.languageListModel.selectedItem = languages.filter(lang => lang.id === this.model.activeLanguage)[0];
+    this.languageSelectorAction.popupModel.contentComponentData.model.setItems(languages);
+    this.languageSelectorAction.data.selectedItem = languages.filter(lang => lang.id === this.model.activeLanguage)[0];
   }
   private getLanguages(usedLanguages: Array<string> = null): Array<IAction> {
     const res: Array<IAction> = [];
@@ -60,7 +57,7 @@ export class TabTestPlugin implements ICreatorPlugin {
 
     if (this.creator.showSimulatorInTestSurveyTab) {
       this.setDevice(this.model.simulator.device);
-      this.deviceListModel.selectedItem = { id: this.model.simulator.device };
+      this.deviceSelectorAction.data.selectedItem = { id: this.model.simulator.device };
       this.orientationSelectorAction.title = getLocString("pe.landscapeOrientation");
     }
 
@@ -166,37 +163,23 @@ export class TabTestPlugin implements ICreatorPlugin {
       const deviceSelectorItems = Object.keys(simulatorDevices)
         .filter((key) => !!simulatorDevices[key].title)
         .map((key) => ({ id: key, title: simulatorDevices[key].title }));
-      this.deviceListModel = new ListModel(
-        deviceSelectorItems,
-        (item: any) => {
-          this.setDevice(item.id);
-          devicePopupModel.toggleVisibility();
-        },
-        true
-      );
-      const devicePopupModel: PopupModel = new PopupModel(
-        "sv-list",
-        { model: this.deviceListModel },
-        "bottom",
-        "center"
-      );
-      this.deviceSelectorAction = new Action({
+      this.deviceSelectorAction = createDropdownActionModel({
         id: "deviceSelector",
         iconName: "icon-device-desktop",
-        component: "sv-action-bar-item-dropdown",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
           const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
           return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab;
         }),
-        action: () => {
-          devicePopupModel.toggleVisibility();
-        },
-        popupModel: devicePopupModel
+      }, {
+        items: deviceSelectorItems,
+        allowSelection: true,
+        onSelectionChanged: (item: any) => { this.setDevice(item.id); },
+        horizontalPosition: "center",
+        onHide: () => { this.deviceSelectorAction.enabled = true; },
+        onShow: () => { this.deviceSelectorAction.enabled = false; }
       });
       items.push(this.deviceSelectorAction);
-      devicePopupModel.onHide = () => { this.deviceSelectorAction.enabled = true; };
-      devicePopupModel.onShow = () => { this.deviceSelectorAction.enabled = false; };
 
       this.orientationSelectorAction = new Action({
         id: "orientationSelector",
@@ -283,38 +266,26 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.changeThemeAction);
     }
 
-    this.languageListModel = new ListModel(
-      [],
-      (item: any) => {
-        this.model.activeLanguage = item.id;
-        this.languageSelectorAction.title = editorLocalization.getLocaleName(item.id);
-        this.languagePopupModel.toggleVisibility();
-      },
-      true
-    );
-    this.languagePopupModel = new PopupModel(
-      "sv-list",
-      { model: this.languageListModel },
-      "bottom",
-      "center"
-    );
-    this.languagePopupModel.onHide = () => { this.languageSelectorAction.enabled = true; };
-    this.languagePopupModel.onShow = () => { this.languageSelectorAction.enabled = false; };
-
-    this.languageSelectorAction = new Action({
+    this.languageSelectorAction = createDropdownActionModel({
       id: "languageSelector",
       iconName: "icon-language",
       visible: false,
-      component: "sv-action-bar-item-dropdown",
-      action: () => {
-        this.languagePopupModel.toggleVisibility();
-      },
-      popupModel: this.languagePopupModel,
       mode: <any>new ComputedUpdater<string>(() => {
         return this.creator.isMobileView ? "small" : "large";
       }),
+    }, {
+      items: [],
+      allowSelection: true,
+      onSelectionChanged: (item: any) => {
+        this.model.activeLanguage = item.id;
+        this.languageSelectorAction.title = editorLocalization.getLocaleName(item.id);
+      },
+      horizontalPosition: "center",
+      onHide: () => { this.languageSelectorAction.enabled = true; },
+      onShow: () => { this.languageSelectorAction.enabled = false; }
     });
     items.push(this.languageSelectorAction);
+
     this.designerAction = new CreatorAction({
       id: "svd-designer",
       iconName: "icon-preview",

@@ -320,6 +320,25 @@ test("Panel multi-question row", async (t) => {
   };
   await setJSON(json);
   await checkElementScreenshot("surface-panel-multi-row.png", Selector(".svc-question__content"), t);
+
+  const Question1 = Selector(
+    "[data-sv-drop-target-survey-element=\"question1\"]"
+  );
+  const Question2 = Selector(
+    "[data-sv-drop-target-survey-element=\"question2\"]"
+  );
+  const DragZoneQuestion1 = Question1.find(".svc-question__drag-element");
+
+  await t.click(Question1, { speed: 0.1, offsetY: 20 });
+  await t.hover(DragZoneQuestion1, { speed: 0.1 });
+  await t.dragToElement(DragZoneQuestion1, Question2, {
+    offsetX: 5,
+    offsetY: 5,
+    destinationOffsetX: -80,
+    speed: 0.5
+  });
+
+  await checkElementScreenshot("surface-panel-multi-row-question-selected.png", Selector(".svc-question__content"), t);
 });
 
 test("Matrix dynamic with detail", async (t) => {

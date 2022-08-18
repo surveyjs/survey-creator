@@ -26,6 +26,12 @@ export class StringEditorViewModelBase extends Base {
         event.preventDefault();
       }
     }
+    if (event.ctrlKey || event.metaKey) {
+      if ([89, 90].indexOf(event.keyCode) !== -1) {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+      }
+    }
   }
 
   public blurEditor: () => void;

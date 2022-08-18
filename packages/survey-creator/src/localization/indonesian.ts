@@ -162,7 +162,7 @@ export var indonesianStrings = {
     isRequired: "Wajib?",
     startWithNewLine: "Mulai dengan baris baru?",
     rows: "Jumlah baris",
-    placeHolder: "Masukkan placeholder",
+    placeholder: "Masukkan placeholder",
     showPreview: "Tunjukkan tinjauan gambar?",
     storeDataAsText: "Simpan konten berkas dalam hasil JSON sebagai teks",
     maxSize: "Ukuran maksimum berkas dalam byte",
@@ -448,7 +448,6 @@ export var indonesianStrings = {
 
     cols: "kolom",
     rows: "baris",
-    placeHolder: "placeHolder",
 
     optionsCaption: "keterangan pilihan",
 

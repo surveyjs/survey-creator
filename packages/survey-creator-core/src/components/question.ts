@@ -6,8 +6,6 @@ import {
   QuestionHtmlModel,
   PanelModelBase,
   Action,
-  PopupModel,
-  ListModel,
   Question,
   ItemValue,
   Serializer,
@@ -15,7 +13,8 @@ import {
   IAction,
   ComputedUpdater,
   DragOrClickHelper,
-  QuestionSelectBase
+  QuestionSelectBase,
+  createDropdownActionModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
@@ -145,6 +144,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!this.surveyElement.isInteractiveDesignElement) {
       return;
     }
+    this.updateActionsProperties();
     toggleHovered(event, element);
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
@@ -225,22 +225,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const allowChangeType: boolean = availableTypes.length > 0;
     const curType = this.currentType;
     const selectedItems = availableTypes.filter(item => item.id === curType);
-    const popupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          availableTypes,
-          (item: any) => {
-            this.creator.convertCurrentQuestion(item.id);
-          },
-          true, selectedItems.length > 0 ? selectedItems[0] : undefined
-        )
-      },
-      "bottom",
-      "center"
-    );
     let actionTitle = selectedItems.length > 0 ? selectedItems[0].title : this.creator.getLocString("qt." + this.currentType);
-    return new Action({
+
+    const newAction = createDropdownActionModel({
       id: "convertTo",
       css: "sv-action--convertTo sv-action-bar-item--secondary",
       iconName: "icon-drop-down-arrow_16x16",
@@ -248,14 +235,20 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       title: actionTitle,
       visibleIndex: 0,
       enabled: allowChangeType,
-      component: "sv-action-bar-item-dropdown",
       disableShrink: true,
       action: (newType) => {
-        popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
-        popupModel.toggleVisibility();
+        newAction.popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
       },
-      popupModel: popupModel
+    }, {
+      items: availableTypes,
+      onSelectionChanged: (item: any) => {
+        this.creator.convertCurrentQuestion(item.id);
+      },
+      allowSelection: true,
+      selectedItem: selectedItems.length > 0 ? selectedItems[0] : undefined,
+      horizontalPosition: "center"
     });
+    return newAction;
   }
 
   private createRequiredAction() {

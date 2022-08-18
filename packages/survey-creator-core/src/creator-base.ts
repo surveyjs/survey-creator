@@ -136,7 +136,7 @@ export class TabbedMenuItem extends CreatorAction implements ITabbedMenuItem {
 export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem> {
   constructor() {
     super();
-    this.dotsItemPopupModel.horizontalPosition = "center";
+    this.dotsItem.popupModel.horizontalPosition = "center";
     this.minVisibleItemsCount = 1;
   }
 }
@@ -1727,8 +1727,12 @@ export class CreatorBase extends Base
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
+      let panel = sender.dropTarget.parent;
       this.onBeforeDrop.fire(null, null);
       this.startUndoRedoTransaction("drag drop");
+      this.undoRedoManager.setUndoCallbackForTransaction(() => {
+        panel.updateRows();
+      });
     });
     this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
       this.stopUndoRedoTransaction();

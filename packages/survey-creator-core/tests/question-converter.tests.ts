@@ -61,7 +61,7 @@ test("Convert question", () => {
   var q1 = <QuestionRadiogroupModel>page.addNewQuestion("radiogroup");
   var q2 = <QuestionCommentModel>panel.addNewQuestion("comment");
   q1.choices = ["myitem1", "myitem2"];
-  q2.placeHolder = "type here";
+  q2.placeholder = "type here";
   QuestionConverter.convertObject(q1, "checkbox");
   QuestionConverter.convertObject(q2, "text");
   expect((<Base>(<any>page.elements[1])).getType()).toEqual("checkbox");
@@ -70,7 +70,7 @@ test("Convert question", () => {
   var newQ2 = <QuestionTextModel>panel.elements[0];
   expect(newQ1.choices).toHaveLength(2);
   expect(newQ1.choices[0].value).toEqual("myitem1");
-  expect(newQ2.placeHolder).toEqual("type here");
+  expect(newQ2.placeholder).toEqual("type here");
 });
 test("Allow to convert to all question types", () => {
   var classes = QuestionConverter.getConvertToClasses("text", []);
@@ -179,7 +179,7 @@ test("Convert matrix question", () => {
   Serializer.addClass("matrix_new", [], () => {
     return new QuestionMatrixModel_New("");
   },
-  "matrix"
+    "matrix"
   );
   QuestionFactory.Instance.registerQuestion("matrix_new", (name) => {
     var q = new QuestionMatrixModel_New(name);

@@ -85,3 +85,22 @@ test("Check imagepicker add/delete items not raises errors and works fine: #3203
     .click(".spg-matrixdynamic tr:last-child .spg-action-button--danger")
     .expect(Selector(".sd-imagepicker").childElementCount).eql(6);
 });
+
+test("Check imagepicker add/delete items style", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  await explicitErrorHandler();
+  await setJSON({ elements: [{ type: "imagepicker", name: "q1", choices: [
+    {
+      "value": "lion",
+      "imageLink": "lion.jpg"
+    },
+    {
+      "value": "giraffe",
+      "imageLink": "lion.jpg"
+    }
+  ] }] });
+
+  await t
+    .click(".svc-tab-designer .svc-image-item-value-controls__remove")
+    .expect(Selector(".svc-tab-designer .svc-image-item-value--new").visible).ok();
+});

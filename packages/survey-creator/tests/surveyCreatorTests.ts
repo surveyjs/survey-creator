@@ -315,7 +315,7 @@ QUnit.test("fast copy tests, copy a question", function (assert) {
   var q1 = <Survey.QuestionText>(
     editor.survey.pages[0].addNewQuestion("text", "question1")
   );
-  q1.placeHolder = "I'm here";
+  q1.placeholder = "I'm here";
   editor.fastCopyQuestion(q1);
   assert.equal(
     editor.survey.pages[0].questions.length,
@@ -324,7 +324,7 @@ QUnit.test("fast copy tests, copy a question", function (assert) {
   );
   var q2 = <Survey.QuestionText>editor.survey.pages[0].questions[1];
   assert.equal(q2.name, "question2", "a new correct question name was created");
-  assert.equal(q2.placeHolder, "I'm here", "a property copied correctly");
+  assert.equal(q2.placeholder, "I'm here", "a property copied correctly");
 });
 
 QUnit.test(

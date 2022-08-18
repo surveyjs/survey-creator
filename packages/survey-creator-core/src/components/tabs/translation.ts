@@ -1,4 +1,4 @@
-import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater } from "survey-core";
+import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater, createDropdownActionModel } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../settings";
@@ -289,7 +289,7 @@ export class TranslationGroup extends TranslationItemBase {
       var value = this.obj[property.name];
       //If ItemValue array?
       if (this.isItemValueArray(value)) {
-        if(this.canShowProperty(property, Array.isArray(value) && value.length > 0)) {
+        if (this.canShowProperty(property, Array.isArray(value) && value.length > 0)) {
           const group = new TranslationGroup(
             property.name,
             value,
@@ -464,7 +464,7 @@ export class Translation extends Base implements ITranslationLocales {
   private surveyValue: SurveyModel;
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
-  private chooseLanguagePopupModel: PopupModel;
+  private addLanguageAction: Action;
   public chooseLanguageActions: Array<IAction> = [];
 
   constructor(
@@ -544,17 +544,7 @@ export class Translation extends Base implements ITranslationLocales {
     });
     res.onGetPanelTitleActions.add((sender, options) => {
       if (options.panel.name == "languages") {
-        const addLanguageAction = new Action({
-          id: "svc-translation-choose-language",
-          iconName: "icon-add",
-          enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled)),
-          component: "sv-action-bar-item-dropdown",
-          popupModel: this.chooseLanguagePopupModel,
-          action: (language) => {
-            this.chooseLanguagePopupModel.toggleVisibility();
-          }
-        });
-        options.titleActions = [addLanguageAction];
+        options.titleActions = [this.addLanguageAction];
       }
     });
     return res;
@@ -692,20 +682,20 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
     const itemContext = item["context"];
-    const placeHolderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
+    const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
     if (itemContext instanceof SurveyModel) {
-      cellQuestion.placeHolder = surveyLocalization.getString(item.name, locale) || placeHolderText;
+      cellQuestion.placeholder = surveyLocalization.getString(item.name, locale) || placeholderText;
     } else if (!(itemContext instanceof PageModel) && item.name === "title") {
-      cellQuestion.placeHolder = itemContext[item.name] || itemContext.name;
+      cellQuestion.placeholder = itemContext[item.name] || itemContext.name;
     } else if (itemContext.ownerPropertyName === "choices" && itemContext.typeName === "itemvalue") {
-      cellQuestion.placeHolder = itemContext.text || placeHolderText;
+      cellQuestion.placeholder = itemContext.text || placeholderText;
     } else {
-      cellQuestion.placeHolder = placeHolderText;
+      cellQuestion.placeholder = placeholderText;
     }
   }
   private updateCellPlaceholdersByDefault(cell: MatrixDropdownCell, newValue: string, item: TranslationItem) {
     if (!!newValue) {
-      (<QuestionTextBase>cell.question).placeHolder = newValue;
+      (<QuestionTextBase>cell.question).placeholder = newValue;
     } else {
       this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
     }
@@ -857,21 +847,18 @@ export class Translation extends Base implements ITranslationLocales {
         }
       )
     ));
-    this.chooseLanguagePopupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          this.chooseLanguageActions,
-          (item: IAction) => {
-            this.addLocale(item.id);
-            this.chooseLanguagePopupModel.toggleVisibility();
-          },
-          false
-        )
-      },
-      "bottom",
-      "left"
-    );
+
+    this.addLanguageAction = createDropdownActionModel({
+      id: "svc-translation-choose-language",
+      iconName: "icon-add",
+      enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled)),
+    }, {
+      items: this.chooseLanguageActions,
+      allowSelection: false,
+      onSelectionChanged: (item: IAction) => {
+        this.addLocale(item.id);
+      }
+    });
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
@@ -1076,10 +1063,10 @@ export class Translation extends Base implements ITranslationLocales {
     for (let i = 0; i < values.length && i < locales.length; i++) {
       let val = values[i].trim();
       if (!val) continue;
-      if(this.importItemCallback) {
+      if (this.importItemCallback) {
         val = this.importItemCallback(name, locales[i], val);
       }
-      if(!!val) {
+      if (!!val) {
         item.values(locales[i]).text = val;
       }
     }

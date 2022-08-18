@@ -132,3 +132,33 @@ test("Logo should be unclickable in readonly mode", () => {
   creator.readOnly = true;
   logo.chooseFile(logo);
 });
+
+test("StringEditorViewModelBase skip undo/redo hot keys", () => {
+  let survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text" }
+        ]
+      }
+    ]
+  });
+  let page1 = survey.pages[0];
+  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
+  let result = "";
+  const event = {
+    keyCode: 70,
+    ctrlKey: true,
+    stopImmediatePropagation: () => result+="->ip",
+    preventDefault: () => result+="->pd"
+  };
+  expect(result).toBe("");
+  editor.checkConstraints(event);
+  expect(result).toBe("");
+  event.keyCode = 89;
+  editor.checkConstraints(event);
+  expect(result).toBe("->ip->pd");
+  event.keyCode = 90;
+  editor.checkConstraints(event);
+  expect(result).toBe("->ip->pd->ip->pd");
+});

@@ -89,8 +89,8 @@ A string value that specifies the property type. Accepts one of the values descr
 | ------ | --------------- | ----------- |
 | `"string"` (default) | Text input | Use this type for short string values. |
 | `"boolean"` | Checkbox | Use this type for Boolean values. |
-| `"condition"` | Multi-line text input with an optional dialog window | Use this type for [Boolean expressions](https://surveyjs.io/Documentation/Library?id=LibraryOverview#conditions-expressions) similar to [`visibleIf`](https://surveyjs.io/Documentation/Library?id=Question#visibleIf) or [`enabledIf`](https://surveyjs.io/Documentation/Library?id=Question#enableIf). |
-| `"expression"` | Multi-line text input with a hint icon | Use this type for [non-Boolean expressions](https://surveyjs.io/Documentation/Library?id=LibraryOverview#conditions-functions). |
+| `"condition"` | Multi-line text input with an optional dialog window | Use this type for [Boolean expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#conditional-visibility) similar to [`visibleIf`](https://surveyjs.io/Documentation/Library?id=Question#visibleIf) or [`enabledIf`](https://surveyjs.io/Documentation/Library?id=Question#enableIf). |
+| `"expression"` | Multi-line text input with a hint icon | Use this type for non-Boolean [expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#expressions). |
 | `"number"` | Text input | Use this type for numeric values. |
 | `"text"` | Multi-line text input | Use this type for multi-line text values. |
 | `"html"` | Multi-line text input | Use this type for HTML markup. |

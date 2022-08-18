@@ -579,7 +579,7 @@ export var ruStrings = {
 
     cols: "Столбцы",
     rows: "Строки",
-    placeHolder: "Плейсхолдер",
+    placeholder: "Плейсхолдер",
 
     optionsCaption: "Подпись параметров",
 

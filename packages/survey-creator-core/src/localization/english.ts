@@ -348,7 +348,7 @@ export var enStrings = {
     startWithNewLine: "Display the question on a new line",
     rows: "Rows",
     cols: "Columns",
-    placeHolder: "Input area placeholder",
+    placeholder: "Input area placeholder",
     showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size (in bytes)",
