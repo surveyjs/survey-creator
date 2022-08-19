@@ -1,28 +1,32 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, checkElementScreenshot, logicQuestionSelector, logicActionSelector, tableRulesSelector, logicAddNewRuleButton, getListItemByText } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, takeElementScreenshot, logicQuestionSelector, logicActionSelector, tableRulesSelector, logicAddNewRuleButton, getListItemByText, wrapVisualTest } from "../../helper";
 
 const title = "Logic tab Screenshot";
 
 fixture`${title}`.page`${url}`;
 
 test("empty view", async (t) => {
-  await t.resizeWindow(1920, 900);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
 
-  const tabContent = Selector(".svc-creator-tab__content");
+    const tabContent = Selector(".svc-creator-tab__content");
 
-  await t.click(getTabbedMenuItemByText(creatorTabLogicName));
-  await checkElementScreenshot("logic-tab-empty.png", tabContent, t);
+    await t.click(getTabbedMenuItemByText(creatorTabLogicName));
+    await takeElementScreenshot("logic-tab-empty.png", tabContent, t, comparer);
+  });
 });
 
 test("new rule", async (t) => {
-  await t.resizeWindow(1280, 700);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1280, 700);
 
-  const tabContent = Selector(".svc-creator-tab__content");
+    const tabContent = Selector(".svc-creator-tab__content");
 
-  await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .click(logicAddNewRuleButton);
-  await checkElementScreenshot("logic-tab-new-rule.png", tabContent, t);
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .click(logicAddNewRuleButton);
+    await takeElementScreenshot("logic-tab-new-rule.png", tabContent, t, comparer);
+  });
 });
 
 const jsonOneRule = {
@@ -58,107 +62,115 @@ const addNewRuleSelector = Selector(".svc-logic-tab__content-action");
 const doneButtonSelector = Selector(".sl-panel__done-button");
 
 test("one rule view", async (t) => {
-  await t.resizeWindow(1920, 900);
-  await setJSON(jsonOneRule);
-  await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .hover(Selector(".sl-table__row"))
-    .click(logicDetailButtonElement);
-  const tabContent = Selector(".svc-creator-tab__content");
-  await checkElementScreenshot("logic-tab-one-rule-content.png", tabContent, t);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await setJSON(jsonOneRule);
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .hover(Selector(".sl-table__row"))
+      .click(logicDetailButtonElement);
+    const tabContent = Selector(".svc-creator-tab__content");
+    await takeElementScreenshot("logic-tab-one-rule-content.png", tabContent, t, comparer);
+  });
 });
 
 test("Check actions hover states", async (t) => {
-  await t.resizeWindow(1920, 900);
-  await setJSON(jsonOneRule);
-  await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName));
-  await t.hover(logicDetailButtonElement);
-  await checkElementScreenshot("logic-expand-hover.png", logicDetailButtonElement, t);
-  const removeRuleSelector = Selector("#remove-row .sv-action-bar-item");
-  await t.hover(removeRuleSelector);
-  await checkElementScreenshot("logic-rule-remove-hover.png", removeRuleSelector, t);
-  await t.click(logicDetailButtonElement);
-  const questionOperator = Selector(".svc-logic-operator--question");
-  await t.hover(questionOperator);
-  await checkElementScreenshot("logic-question-action-hover.png", questionOperator, t);
-  const operator = Selector(".svc-logic-operator--operator");
-  await t.hover(operator);
-  await checkElementScreenshot("logic-operator-hover.png", operator, t);
-  const action = Selector(".svc-logic-operator--action");
-  await t.hover(action);
-  await checkElementScreenshot("logic-action-hover.png", action, t);
-  const conditionRemoveSelector = Selector(".svc-logic-condition-remove.svc-icon-remove");
-  await t
-    .click(Selector(".sl-paneldynamic__add-btn.svc-logic-operator--operator"))
-    .hover(questionOperator)
-    .hover(conditionRemoveSelector);
-  await checkElementScreenshot("logic-condition-remove-hover.png", conditionRemoveSelector, t);
-  await t.hover(logicDetailButtonElement);
-  await checkElementScreenshot("logic-collapse-hover.png", logicDetailButtonElement, t);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await setJSON(jsonOneRule);
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName));
+    await t.hover(logicDetailButtonElement);
+    await takeElementScreenshot("logic-expand-hover.png", logicDetailButtonElement, t, comparer);
+    const removeRuleSelector = Selector("#remove-row .sv-action-bar-item");
+    await t.hover(removeRuleSelector);
+    await takeElementScreenshot("logic-rule-remove-hover.png", removeRuleSelector, t, comparer);
+    await t.click(logicDetailButtonElement);
+    const questionOperator = Selector(".svc-logic-operator--question");
+    await t.hover(questionOperator);
+    await takeElementScreenshot("logic-question-action-hover.png", questionOperator, t, comparer);
+    const operator = Selector(".svc-logic-operator--operator");
+    await t.hover(operator);
+    await takeElementScreenshot("logic-operator-hover.png", operator, t, comparer);
+    const action = Selector(".svc-logic-operator--action");
+    await t.hover(action);
+    await takeElementScreenshot("logic-action-hover.png", action, t, comparer);
+    const conditionRemoveSelector = Selector(".svc-logic-condition-remove.svc-icon-remove");
+    await t
+      .click(Selector(".sl-paneldynamic__add-btn.svc-logic-operator--operator"))
+      .hover(questionOperator)
+      .hover(conditionRemoveSelector);
+    await takeElementScreenshot("logic-condition-remove-hover.png", conditionRemoveSelector, t, comparer);
+    await t.hover(logicDetailButtonElement);
+    await takeElementScreenshot("logic-collapse-hover.png", logicDetailButtonElement, t, comparer);
+  });
 });
 
 test("Check logic error notifier", async (t) => {
-  const patchNotifierLifeTime = ClientFunction(() => {
-    window["creator"].notifier.timeout = 30000;
+  await wrapVisualTest(t, async (t, comparer) => {
+    const patchNotifierLifeTime = ClientFunction(() => {
+      window["creator"].notifier.timeout = 30000;
+    });
+    await t.resizeWindow(1920, 900);
+    await patchNotifierLifeTime();
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "q1"
+            },
+            {
+              "type": "text",
+              "name": "q2",
+            },
+          ]
+        }
+      ]
+    });
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .click(addNewRuleSelector)
+      .click(doneButtonSelector);
+    await takeElementScreenshot("logic-error-notifier.png", Selector(".svc-notifier--error"), t, comparer);
   });
-  await t.resizeWindow(1920, 900);
-  await patchNotifierLifeTime();
-  await setJSON({
-    "logoPosition": "right",
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "text",
-            "name": "q1"
-          },
-          {
-            "type": "text",
-            "name": "q2",
-          },
-        ]
-      }
-    ]
-  });
-  await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .click(addNewRuleSelector)
-    .click(doneButtonSelector);
-  await checkElementScreenshot("logic-error-notifier.png", Selector(".svc-notifier--error"), t);
 });
 
 test("Check logic Manual Entry", async (t) => {
-  await t.resizeWindow(1920, 900);
-  await setJSON({
-    "logoPosition": "right",
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "text",
-            "name": "q1"
-          },
-          {
-            "type": "text",
-            "name": "q2",
-            "visibleIf": "{q1} empty"
-          },
-        ]
-      }
-    ]
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "q1"
+            },
+            {
+              "type": "text",
+              "name": "q2",
+              "visibleIf": "{q1} empty"
+            },
+          ]
+        }
+      ]
+    });
+    await t.click(getTabbedMenuItemByText(creatorTabLogicName))
+      .hover(Selector(".sl-table__row"))
+      .click(logicDetailButtonElement)
+      .click("#svc-logic-fast-entry button");
+    const conditionContentSelector = Selector(".sl-table__cell--detail-panel .sl-panel");
+    await takeElementScreenshot("logic-fast-entry.png", conditionContentSelector, t, comparer);
+    await t.click(Selector(".sl-comment")).pressKey("ctrl+a delete");
+    await ClientFunction(() => { document.body.focus(); })();
+    await takeElementScreenshot("logic-fast-entry-empty.png", conditionContentSelector, t, comparer);
   });
-  await t.click(getTabbedMenuItemByText(creatorTabLogicName))
-    .hover(Selector(".sl-table__row"))
-    .click(logicDetailButtonElement)
-    .click("#svc-logic-fast-entry button");
-  const conditionContentSelector = Selector(".sl-table__cell--detail-panel .sl-panel");
-  await checkElementScreenshot("logic-fast-entry.png", conditionContentSelector, t);
-  await t.click(Selector(".sl-comment")).pressKey("ctrl+a delete");
-  await ClientFunction(() => { document.body.focus(); })();
-  await checkElementScreenshot("logic-fast-entry-empty.png", conditionContentSelector, t);
 });
 
 const jsonMultipleConditionsMultipleActions = {
@@ -190,60 +202,65 @@ const jsonMultipleConditionsMultipleActions = {
   ]
 };
 test("rule content", async (t) => {
-  await t.resizeWindow(1920, 900);
-  await setJSON(jsonMultipleConditionsMultipleActions);
-  await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .hover(Selector(".sl-table__row"))
-    .click(logicDetailButtonElement);
-  await checkElementScreenshot("logic-tab-rule-content.png", ruleContent, t);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await setJSON(jsonMultipleConditionsMultipleActions);
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .hover(Selector(".sl-table__row"))
+      .click(logicDetailButtonElement);
+    await takeElementScreenshot("logic-tab-rule-content.png", ruleContent, t, comparer);
+  });
 });
 
 test("rule rows", async (t) => {
-  await t.resizeWindow(1920, 900);
-  const ruleRows = Selector(".sl-table__cell--detail-panel .sl-row.sl-row--multiple");
-  await setJSON(jsonMultipleConditionsMultipleActions);
-  await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .hover(Selector(".sl-table__row"))
-    .click(logicDetailButtonElement)
-    .hover(Selector(".sv-string-viewer").withText("If"));
-  await checkElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const ruleRows = Selector(".sl-table__cell--detail-panel .sl-row.sl-row--multiple");
+    await setJSON(jsonMultipleConditionsMultipleActions);
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .hover(Selector(".sl-table__row"))
+      .click(logicDetailButtonElement)
+      .hover(Selector(".sv-string-viewer").withText("If"));
+    await takeElementScreenshot("logic-tab-rule-condition-row.png", ruleRows.nth(0), t, comparer);
 
-  await t.hover(Selector(".sv-string-viewer").withText("then"));
-  await checkElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t);
+    await t.hover(Selector(".sv-string-viewer").withText("then"));
+    await takeElementScreenshot("logic-tab-rule-action-row.png", ruleRows.nth(2), t, comparer);
+  });
 });
 
 test("unsaved rule", async (t) => {
-  await t.resizeWindow(1920, 900);
-  await setJSON(jsonOneRule);
-  await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .click(addNewRuleSelector)
-    .click(doneButtonSelector);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await setJSON(jsonOneRule);
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .click(addNewRuleSelector)
+      .click(doneButtonSelector);
 
-  await checkElementScreenshot("logic-error-condition-question-name.png", ruleContent, t);
-  await t
-    .click(logicQuestionSelector)
-    .click(getListItemByText("q1"))
-    .click(doneButtonSelector);
+    await takeElementScreenshot("logic-error-condition-question-name.png", ruleContent, t, comparer);
+    await t
+      .click(logicQuestionSelector)
+      .click(getListItemByText("q1"))
+      .click(doneButtonSelector);
 
-  await checkElementScreenshot("logic-error-condition-question-value.png", ruleContent, t);
+    await takeElementScreenshot("logic-error-condition-question-value.png", ruleContent, t, comparer);
 
-  await t
-    .typeText(Selector(".sd-input.sd-input--error"), "test")
-    .click(doneButtonSelector);
+    await t
+      .typeText(Selector(".sd-input.sd-input--error"), "test")
+      .click(doneButtonSelector);
 
-  await checkElementScreenshot("logic-error-action-empty.png", ruleContent, t);
+    await takeElementScreenshot("logic-error-action-empty.png", ruleContent, t, comparer);
 
-  await t
-    .click(logicActionSelector)
-    .click(getListItemByText("Copy answer"))
-    .click(doneButtonSelector);
+    await t
+      .click(logicActionSelector)
+      .click(getListItemByText("Copy answer"))
+      .click(doneButtonSelector);
 
-  await checkElementScreenshot("logic-error-action-questions.png", ruleContent, t);
+    await takeElementScreenshot("logic-error-action-questions.png", ruleContent, t, comparer);
+  });
 });
-
 const jsonAllActionTypes = {
   "logoPosition": "right",
   "completedHtmlOnCondition": [
@@ -393,56 +410,60 @@ const jsonAllActionTypes = {
   ]
 };
 test("logic actions", async (t) => {
-  await t.resizeWindow(2560, 1440);
-  await setJSON(jsonAllActionTypes);
-  await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .click(tableRulesSelector.nth(0));
-  await checkElementScreenshot("logic-panel-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(2560, 1440);
+    await setJSON(jsonAllActionTypes);
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .click(tableRulesSelector.nth(0));
+    await takeElementScreenshot("logic-panel-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t, comparer);
 
-  await t.click(tableRulesSelector.nth(1));
-  await checkElementScreenshot("logic-question-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t);
+    await t.click(tableRulesSelector.nth(1));
+    await takeElementScreenshot("logic-question-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t, comparer);
+  });
 });
 
 test("Texts overflow the controls when showTitlesInExpressions is enabled #3192", async (t) => {
-  await t.resizeWindow(800, 900);
-  await setJSON({
-    "logoPosition": "right",
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "text",
-            "name": "q1",
-            "title": "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?"
-          },
-          {
-            "type": "text",
-            "name": "q2",
-            "title": "What do you miss or find disappointing in your experience with our products?",
-            "visibleIf": "{q1} = 1"
-          },
-          {
-            "type": "text",
-            "name": "q3",
-            "title": "What do you miss or find disappointing in your experience with our products?",
-          },
-          {
-            "type": "text",
-            "name": "q4",
-            "title": "how likely are you to recommend our product to a friend or colleague",
-          }
-        ]
-      }
-    ]
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(800, 900);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "q1",
+              "title": "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?"
+            },
+            {
+              "type": "text",
+              "name": "q2",
+              "title": "What do you miss or find disappointing in your experience with our products?",
+              "visibleIf": "{q1} = 1"
+            },
+            {
+              "type": "text",
+              "name": "q3",
+              "title": "What do you miss or find disappointing in your experience with our products?",
+            },
+            {
+              "type": "text",
+              "name": "q4",
+              "title": "how likely are you to recommend our product to a friend or colleague",
+            }
+          ]
+        }
+      ]
+    });
+    await ClientFunction(() => {
+      window["creator"].setOptions({ showTitlesInExpressions: true });
+    })();
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .hover(Selector(".sl-table__row"))
+      .click(logicDetailButtonElement);
+    await takeElementScreenshot("logic-condition-overflow-text.png", ruleContent, t, comparer);
   });
-  await ClientFunction(() => {
-    window["creator"].setOptions({ showTitlesInExpressions: true });
-  })();
-  await t
-    .click(getTabbedMenuItemByText(creatorTabLogicName))
-    .hover(Selector(".sl-table__row"))
-    .click(logicDetailButtonElement);
-  await checkElementScreenshot("logic-condition-overflow-text.png", ruleContent, t);
 });
