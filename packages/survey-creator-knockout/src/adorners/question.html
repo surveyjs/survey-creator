@@ -4,7 +4,8 @@
   <div class="svc-question__content" data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
     <!-- ko if: allowDragging -->
     <div class="svc-question__drag-area" data-bind="event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
-      <div class="svc-question__drag-element"></div>
+      <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 24 } } -->
+      <!-- /ko -->
     </div>
     <!-- /ko -->
 

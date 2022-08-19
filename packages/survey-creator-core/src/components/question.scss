@@ -287,11 +287,13 @@ svc-question,
 }
 
 .svc-question__drag-element {
-  width: calcSize(3);
-  height: 6px;
-  border: 1px solid $border;
-  border-radius: 10px;
-  box-sizing: border-box;
+  width: 100%;
+  height: calcSize(4);
+  opacity: 0.5;
+
+  use {
+    fill: $foreground-light;
+  }
 }
 
 .sd-panel,
