@@ -7,6 +7,7 @@ import {
   property
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
+import { settings } from "../settings";
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: AdaptiveActionContainer;
@@ -38,6 +39,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
       this.actionContainer.setItems(actions);
     }
+    this.setShowAddQuestionButton(true);
   }
 
   protected detachElement(surveyElement: T): void {
@@ -83,6 +85,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
     const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
     this.updateActionVisibility("settings", settingsVisibility);
+    this.setShowAddQuestionButton(options.allowEdit !== false);
   }
   protected isOperationsAllow(): boolean {
     return !this.creator.readOnly;
@@ -143,6 +146,14 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       })
     );
   }
-
-  protected duplicate() { }
+  public get allowEdit(): boolean {
+    return !!this.creator && !this.creator.readOnly;
+  }
+  public get showAddQuestionButton(): boolean {
+    return this.getPropertyValue("showAddQuestionButton");
+  }
+  protected setShowAddQuestionButton(val: boolean): void {
+    this.setPropertyValue("showAddQuestionButton", val && this.allowEdit && settings.designer.showAddQuestionButton);
+  }
+  protected duplicate(): void { }
 }

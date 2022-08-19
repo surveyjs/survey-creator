@@ -19,7 +19,7 @@ Survey.ComponentCollection.Instance.add({
   name: "fullname", 
   // A display name used in the Toolbox
   title: "Full Name", 
-  // An array of JSON definitions that configure the nested questions
+  // An array of JSON schemas that configure the nested questions
   elementsJSON: [
     { type: "text", name: "firstName", title: "First Name", isRequired: true },
     { type: "text", name: "lastName", title: "Last Name", isRequired: true, startWithNewLine: false }
@@ -27,7 +27,7 @@ Survey.ComponentCollection.Instance.add({
 });
 ```
 
-The Full Name composite question in the survey JSON definition looks as follows:
+The Full Name composite question in the survey JSON schema looks as follows:
 
 ```json
 {
@@ -47,7 +47,7 @@ A composite question produces an object for a value:
 }
 ```
 
-[View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname)
+[View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname (linkStyle))
 
 ## Add Custom Properties to Composite Question Types
 
@@ -95,7 +95,7 @@ Survey.ComponentCollection.Instance.add({
 });
 ```
 
-In the survey JSON definition, the custom `showMiddleName` property looks as follows:
+In the survey JSON schema, the custom `showMiddleName` property looks as follows:
 
 ```json
 {
@@ -109,10 +109,10 @@ The steps below summarize how to add a custom property to your composite questio
 
 1. Implement the [`onInit`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onInit) function to add a custom property to your question.
 2. Implement a function that connects your custom property with a nested question's property (`changeMiddleNameVisibility` in the code above).
-3. Call this function from the [`onLoaded`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onLoaded) function to apply the custom property when the survey JSON definition is loaded.
+3. Call this function from the [`onLoaded`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onLoaded) function to apply the custom property when the survey JSON schema is loaded.
 4. Call the same function from the [`onPropertyChanged`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onPropertyChanged) function to reapply the custom property each time its value changes.
 
-[View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname)
+[View the "Full Name Component" example](/Examples/Survey-Creator?id=component-fullname (linkStyle))
 
 ## Expressions and Triggers in Composite Question Types
 
@@ -210,7 +210,7 @@ Survey.ComponentCollection.Instance.add({
 });
 ```
 
-Users can add a custom question to their survey like they add a built-in question, and they can use it without any knowledge of expressions and triggers. The resulting survey JSON definition looks as follows:
+Users can add a custom question to their survey like they add a built-in question, and they can use it without any knowledge of expressions and triggers. The resulting survey JSON schema looks as follows:
 
 ```json
 {
@@ -219,7 +219,7 @@ Users can add a custom question to their survey like they add a built-in questio
 }
 ```
 
-[View the "Shipping Address Component" example](https://surveyjs.io/Examples/Survey-Creator?id=component-shippingaddress)
+[View the "Shipping Address Component" example](https://surveyjs.io/Examples/Survey-Creator?id=component-shippingaddress (linkStyle))
 
 ## Override Base Question Properties
 

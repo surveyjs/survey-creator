@@ -52,11 +52,8 @@ const buildPlatformJson = {
     "ace-builds": "^1.4.12"
   },
   dependencies: {
-    //TODO: Return back when release
-    // "survey-core": "^" + packageJson.version,
-    // "survey-knockout-ui": "^" + packageJson.version,
-    "survey-core": "^1.9.9",
-    "survey-knockout-ui": "^1.9.9",
+    "survey-core": packageJson.version,
+    "survey-knockout-ui": packageJson.version,
     "survey-creator-core": packageJson.version,
     knockout: "^3.5.0"
   },

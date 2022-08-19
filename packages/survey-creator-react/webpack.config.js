@@ -52,11 +52,8 @@ const buildPlatformJson = {
     "ace-builds": "^1.4.12"
   },
   dependencies: {
-    //TODO: Return back when release
-    // "survey-core": "^" + packageJson.version,
-    // "survey-react-ui": "^" + packageJson.version,
-    "survey-core": "^1.9.9",
-    "survey-react-ui": "^1.9.9",
+    "survey-core": packageJson.version,
+    "survey-react-ui": packageJson.version,
     "survey-creator-core": packageJson.version,
     "react": "^16.5.0 || ^17.0.1 || ^18.1.0",
     "react-dom": "^16.5.0 || ^17.0.1 || ^18.1.0"

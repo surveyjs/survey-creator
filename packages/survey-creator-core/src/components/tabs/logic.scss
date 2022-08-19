@@ -233,6 +233,11 @@
 .sl-question__header--left {
   margin-right: calcSize(1);
 }
+.sl-row {
+  .sd-scrollable-container:not(.sd-scrollable-container--compact) {
+    overflow-x: auto;
+  }
+}
 .sl-question__title {
   color: $foreground;
   font-size: calcSize(2);

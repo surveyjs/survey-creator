@@ -69,8 +69,7 @@ var buildPlatformJson = {
     "ace-builds": "^1.4.12",
   },
   dependencies: {
-    //"survey-core": "^" + packageJson.version,
-    "survey-core": "^1.9.9",
+    "survey-core": packageJson.version
   },
   devDependencies: {},
 };

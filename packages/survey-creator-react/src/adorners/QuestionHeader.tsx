@@ -26,9 +26,7 @@ export class QuestionWrapperHeader extends React.Component<QuestionWrapperHeader
           this.props.model.onPointerDown(event)
         }
       >
-        <div
-          className={"svc-question__drag-element"}
-        ></div>
+        <SvgIcon className="svc-question__drag-element" size={24} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
       </div>
     );
   }

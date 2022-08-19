@@ -163,13 +163,13 @@ This new internal design also prompted us to extend the Library with new feature
 
 Since Survey Creator UI elements are surveys, you can customize them as you would customize surveys. For example, the Property Grid is a one-page survey in which every property is a question. To introduce a new or override an existing property editor, you need to define a custom question JSON configuration and implement functions that survey events call internally.
 
-[View Custom Property Editor example](https://surveyjs.io/Examples/Survey-Creator?id=custompropertyeditor&platform=ReactjsV2#content-js)
+[View Custom Property Editor example](https://surveyjs.io/Examples/Survey-Creator?id=custompropertyeditor&platform=ReactjsV2#content-js (linkStyle))
 
 ### Lazy Rendering
 
 To improve performance on large multi-page surveys, we introduce support for Lazy Rendering to our SurveyJS Library. This feature allows the survey to render questions outside the viewport as skeletons instead of rendering them in full.
 
-[View Lazy Rendering example](https://surveyjs.io/Examples/Library?id=survey-lazy)
+[View Lazy Rendering example](https://surveyjs.io/Examples/Library?id=survey-lazy (linkStyle))
 
 ### Alternative Rendering for Adorners
 

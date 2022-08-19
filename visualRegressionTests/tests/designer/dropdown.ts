@@ -1,7 +1,5 @@
 import { Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-
-import { urlDropdownCollapseView, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, checkElementScreenshot } from "../../helper";
+import { urlDropdownCollapseView, setJSON, takeElementScreenshot, wrapVisualTest } from "../../helper";
 
 const title = "Dropdown question creator test";
 
@@ -23,17 +21,17 @@ const json = {
 };
 
 test("Check collapsed dropdown", async (t) => {
-  await t.resizeWindow(1920, 1080);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-  const questionSelector = Selector(".svc-question__content");
-  const buttonSelector = Selector(".svc-question__dropdown-choices--wrapper .svc-action-button");
+    const questionSelector = Selector(".svc-question__content");
+    const buttonSelector = Selector(".svc-question__dropdown-choices--wrapper .svc-action-button");
 
-  await setJSON(json);
+    await setJSON(json);
 
-  await checkElementScreenshot("collapsed-dropdown.png", questionSelector, t);
+    await takeElementScreenshot("collapsed-dropdown.png", questionSelector, t, comparer);
 
-  await t.click(buttonSelector);
-  await checkElementScreenshot("not-collapsed-dropdown.png", questionSelector, t);
+    await t.click(buttonSelector);
+    await takeElementScreenshot("not-collapsed-dropdown.png", questionSelector, t, comparer);
+  });
 });
-
