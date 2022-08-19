@@ -1,7 +1,5 @@
 import { Selector } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-
-import { url, screenshotComparerOptions, setJSON, getPropertyGridCategory, logicGroupName } from "../../helper";
+import { url, setJSON, getPropertyGridCategory, logicGroupName, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "Actions in Logic section Screenshot";
 
@@ -24,29 +22,23 @@ const json = {
 };
 
 test("Check states", async (t) => {
-  await t.resizeWindow(1920, 1080);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+    await setJSON(json);
 
-  await setJSON(json);
+    // await t
+    //   .click(Selector(".svd-grid-expand"));
+    await t.click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
+    await t.click(getPropertyGridCategory(logicGroupName));
 
-  // await t
-  //   .click(Selector(".svd-grid-expand"));
-  await t.click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
-  await t.click(getPropertyGridCategory(logicGroupName));
+    const sectionContentElement = Selector("h4[aria-label=Logic]").parent().nextSibling();
 
-  const sectionContentElement = Selector("h4[aria-label=Logic]").parent().nextSibling();
+    await t.expect(sectionContentElement.visible).ok();
+    await takeElementScreenshot("logic-button-default.png", sectionContentElement, t, comparer);
 
-  await t.expect(sectionContentElement.visible).ok();
-  await takeScreenshot("logic-button-default.png", sectionContentElement, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
-
-  await t
-    .hover(sectionContentElement.find(".spg-action-button").nth(1));
-  await takeScreenshot("logic-button-hovered.png", sectionContentElement, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    await t
+      .hover(sectionContentElement.find(".spg-action-button").nth(1));
+    await takeElementScreenshot("logic-button-hovered.png", sectionContentElement, t, comparer);
+  });
 });
