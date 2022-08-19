@@ -43,7 +43,7 @@ translations.pe.visible = "Is element visible?";
 translations.ed.jsonEditor = "Edit As Text";
 ```
 
-[View Localization example](https://surveyjs.io/Examples/Survey-Creator/?id=localization)
+[View Localization example](https://surveyjs.io/Examples/Survey-Creator/?id=localization (linkStyle))
 
 Translation dictionaries are supported by the community and may be incomplete. Feel free to add missing translations to existing dictionaries or create new dictionaries for other languages. You can use English as a base dictionary: copy the file, replace English translations in it, and submit a pull request with the resulting file to the [survey-creator](https://github.com/surveyjs/survey-creator) repository.
 
@@ -89,4 +89,4 @@ import { SurveyCreator } from "survey-creator-react";
 const creator = new SurveyCreator(creatorOptions);
 ```
 
-[View Multiple Languages example](https://surveyjs.io/Examples/Survey-Creator/?id=multiplelanguages)
+[View Multiple Languages example](https://surveyjs.io/Examples/Survey-Creator/?id=multiplelanguages (linkStyle))

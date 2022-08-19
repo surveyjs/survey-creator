@@ -14,7 +14,7 @@ Survey Creator / Form Builder is a visual designer that allows users to create s
 - TypeScript support
 - [Community-supported UI localization to 25+ languages](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
 - [Integration with any backend framework](https://surveyjs.io/Documentation/Survey-Creator?id=integration-with-backend) (examples for PHP, NodeJS, and ASP.NET included)
-- Survey JSON definitions can be stored in any database
+- Survey JSON schemas can be stored in any database
 - [Third-party component integration](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
 
 ## Get Started

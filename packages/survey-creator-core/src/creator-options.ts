@@ -212,7 +212,7 @@ export interface ICreatorOptions {
    *
    * Default value: `true`
    *
-   * [View the "Switch Between Themes" demo](https://surveyjs.io/Examples/Creator?id=theme-switcher)
+   * [View the "Switch Between Themes" demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
    */
   allowChangeThemeInPreview?: boolean;
   /**

@@ -160,7 +160,7 @@ In Survey Creator V2, we changed the internal design of the Property Grid. You n
 
 We [changed how adorners are rendered](https://surveyjs.io/Documentation/Survey-Creator?id=Creator-V2-Whats-New#alternative-rendering-for-adorners) on the design surface. We now use native framework techniques to render the adorners (templates in Knockout and React components in React). If you added custom adorners in V1, your code won't work in V2. Replace it with the `onDefineElementMenuItems` event handler. Within this handler, you can add a new action or customize a predefined action. Refer to the following example for more information:
 
-[View Custom Adorner example](https://surveyjs.io/Examples/Survey-Creator/?id=customadorner)
+[View Custom Adorner example](https://surveyjs.io/Examples/Survey-Creator/?id=customadorner (linkStyle))
 
 ## Localization
 

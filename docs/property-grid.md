@@ -63,7 +63,7 @@ creator.onShowingProperty.add(function (_, options) {
 
 ## Add Custom Properties to the Property Grid
 
-Custom properties can be serialized and included in the survey JSON definition. To add a custom property, call the `addProperty(questionType, propertySettings)` method on the `Survey.Serializer` object. This method accepts the following arguments:
+Custom properties can be serialized and included in the survey JSON schema. To add a custom property, call the `addProperty(questionType, propertySettings)` method on the `Survey.Serializer` object. This method accepts the following arguments:
 
 - `questionType`        
 A string value that specifies the question type to which the property should be added. You can use a specific type (see the [getType](https://surveyjs.io/Documentation/Library?id=Question#getType) description) or one of the base types. In the latter case, the new property is added to all question types derived from the base type. Refer to the API of a specific question type for information on its inheritance chain. For example, the following image illustrates the inheritance chain of the [Text](https://surveyjs.io/Documentation/Library?id=questiontextmodel) question type:
@@ -73,7 +73,7 @@ A string value that specifies the question type to which the property should be 
 - `propertySettings`      
 Settings that configure the property's appearance and behavior. For information about these settings, refer to the [Survey Element Property Settings](#survey-element-property-settings) help section below.
 
-[View Add Properties example](https://surveyjs.io/Examples/Survey-Creator/?id=addproperties)
+[View Add Properties example](https://surveyjs.io/Examples/Survey-Creator/?id=addproperties (linkStyle))
 
 ### Survey Element Property Settings
 
@@ -122,7 +122,7 @@ SurveyCreator.PropertyGridEditorCollection.register({
 });
 ```
 
-[View Custom Property example](https://surveyjs.io/Examples/Survey-Creator/?id=custompropertyeditor)
+[View Custom Property example](https://surveyjs.io/Examples/Survey-Creator/?id=custompropertyeditor (linkStyle))
 
 You can add the type to the `name` property after a colon character as a shortcut:
 
@@ -136,7 +136,7 @@ Survey.Serializer.addProperty("question",
 
 #### `default`
 
-A default value for the property. If not specified, `default` equals `""` for string values, 0 for numbers, and `false` for Boolean values. The default value is not serialized into a survey JSON definition.
+A default value for the property. If not specified, `default` equals `""` for string values, 0 for numbers, and `false` for Boolean values. The default value is not serialized into a survey JSON schema.
 
 ```js
 Survey.Serializer.addProperty("dropdown", 
@@ -220,7 +220,7 @@ Survey.Serializer.addProperty("question",
 
 #### `isSerializable`
 
-A Boolean value that specifies whether to include the property in the survey JSON definition. Defaults to `true`.
+A Boolean value that specifies whether to include the property in the survey JSON schema. Defaults to `true`.
 
 #### `isLocalizable`
 
@@ -415,7 +415,7 @@ Survey.Serializer.addProperty("survey", {
 
 #### `onGetValue`
 
-A function that you can use to adjust or exclude the property value from the survey JSON definition.
+A function that you can use to adjust or exclude the property value from the survey JSON schema.
 
 ```js
 Survey.Serializer.addProperty("question", {
