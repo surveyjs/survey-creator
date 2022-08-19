@@ -120,7 +120,6 @@ test("Property grid checkbox - all states", async (t) => {
 
     await t.click(getPropertyGridCategory(generalGroupName));
 
-    await takeElementScreenshot("pg-side-bar.png", Selector(".svc-side-bar"), t, comparer);
     await setCheckboxProperty("value", false);
     await setCheckboxProperty("readOnly", false);
     await takeElementScreenshot("pg-checkbox-unchecked.png", checkbox, t, comparer);
