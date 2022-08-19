@@ -4,6 +4,7 @@ import { PageModel } from "survey-knockout";
 import { editorLocalization } from "./editorLocalization";
 import { findParentNode } from "./utils/utils";
 import { StylesManager } from "./stylesmanager";
+import { SurveyEditor } from "./editor";
 
 export interface ISurveyObjectMenuItem {
   name: string;
@@ -36,12 +37,18 @@ export class SurveyForDesigner extends Survey.Survey {
     any
   > = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
   public onUpdateElementAllowingOptions: (options: any) => any;
+  public getEditor: () => SurveyEditor;
+  public emptyPageTemplate: string;
+  public emptyPageTemplateData: any;
+  public dragDropHelper: any;
+
   constructor(
     jsonObj: any = null,
     renderedElement: any = null,
     css: any = null
   ) {
-    super(jsonObj, renderedElement, css);
+    super(jsonObj, renderedElement);
+    if (!css) this.css = css;
     var self = this;
     this.setDesignMode(true);
     this.onAfterRenderPage.add((sender: Survey.Survey, options) => {
@@ -99,7 +106,7 @@ export class SurveyForDesigner extends Survey.Survey {
     return editorLocalization.getString(value);
   }
   private get _hasLogo() {
-    return !!this.isLogoImageChoosen && this.logoPosition !== "none";
+    return !!this.isLogoImageChoosen() && this.logoPosition !== "none";
   }
   public get _isLogoBefore() {
     return (
@@ -130,12 +137,11 @@ export class SurveyForDesigner extends Survey.Survey {
   }
   public get isLogoAfter() {
     return (
-      (SurveyForDesigner.isTitleLogoEditable() &&
-        ((this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly())) ||
+      (SurveyForDesigner.isTitleLogoEditable() && ((this.isReadOnly() && this._isLogoAfter) || !this.isReadOnly())) ||
       (!SurveyForDesigner.isTitleLogoEditable() && this._isLogoAfter)
     );
   }
-  public get isLogoImageChoosen() {
+  public isLogoImageChoosen() {
     return this.locLogo["koRenderedHtml"]();
   }
   public koShowHeader = ko.observable(true);
@@ -283,6 +289,7 @@ export function createAfterRenderHandler(
         }
       }
     };
+    domElement.onpointerdown = domElement.onclick;
     if (!isPanel) {
       var childs = domElement.childNodes;
       for (var i = 0; i < childs.length; i++) {
@@ -544,7 +551,7 @@ Survey.Panel.prototype["onSelectedElementChanged"] = function () {
 if (!!Survey["FlowPanel"]) {
   Survey["FlowPanel"].prototype["onCreating"] = function () {
     //TODO
-    this.placeHolder = "Enter here text or drop a question";
+    this.placeholder = "Enter here text or drop a question";
     elementOnCreating(this);
   };
   Survey["FlowPanel"].prototype["onSelectedElementChanged"] = function () {

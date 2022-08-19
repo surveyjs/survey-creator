@@ -16,6 +16,7 @@ import {
 import { EditableObject } from "../propertyEditors/editableObject";
 import { SurveyObjectProperty } from "../objectProperty";
 import { ISurveyCreatorOptions } from "../settings";
+import { SurveyCreator } from "../editor";
 
 export class PropertyGridObjectEditorModel {
   private selectedObjectValue: any = null;
@@ -408,23 +409,29 @@ export class SurveyElementEditorTabModel {
       self.afterRender(componentInfo, con);
     };
   }
-  public expand() {
+  public expand(doSetup: boolean = true) {
     if (!!this.onExpand) this.onExpand();
-    this.doOnExpanded();
+    this.doOnExpanded(doSetup);
   }
   public collapse() {
     if (!!this.onCollapse) this.onCollapse();
   }
-  public doOnExpanded() {
-    this.beforeShow();
-    setTimeout(() => {
-      ko.tasks.runEarly();
-      this.focusEditor();
-    }, 1);
+  public doOnExpanded(doSetup: boolean = true) {
+    if(doSetup) {
+      this.beforeShow();
+    }
+    if(this.options && !(this.options as SurveyCreator).selectFromStringEditor) {
+      setTimeout(() => {
+        ko.tasks.runEarly();
+        this.focusEditor();
+      }, 1);
+    }
   }
   private afterRender(elements: HTMLElement[], context) {
     this.htmlElements = elements;
     this.focusEditor();
+    if(this.options)
+      (this.options as SurveyCreator).selectFromStringEditor = false;
   }
   public focusEditor() {
     if (!!this.htmlElements) {
@@ -961,6 +968,9 @@ export class SurveyQuestionEditor extends SurveyElementEditorContentModel {
       self.doCloseWindow(true);
     };
     this.onTabClick = function (tab) {
+      if(!!tab.beforeShow) {
+        tab.beforeShow();
+      }
       self.koActiveTab(tab.name);
     };
     this.koShowApplyButton = ko.observable(
@@ -1015,7 +1025,7 @@ export class SurveyQuestionEditor extends SurveyElementEditorContentModel {
     for (var i = 0; i < tabs.length; i++) {
       var tabRes = tabs[i].hasError();
       if (tabRes) {
-        tabs[i].expand();
+        tabs[i].expand(false);
         if (!isFirstError) {
           this.koActiveTab(tabs[i].name);
           isFirstError = true;

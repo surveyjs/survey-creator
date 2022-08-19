@@ -9,7 +9,7 @@ import "./row.scss";
 
 export class RowViewModel extends Base {
   constructor(
-    public creator: CreatorBase<SurveyModel>,
+    public creator: CreatorBase,
     public row: QuestionRowModel,
     public templateData: SurveyTemplateRendererTemplateData
   ) {

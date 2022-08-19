@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var tgStrings = {
   // strings for survey templates
@@ -97,7 +97,7 @@ export var tgStrings = {
     bold: "Ғавс",
     italic: "Қаҷ",
     underline: "Зерхат",
-    fpAddQuestion: "Иловаи савол...",
+    addNewQuestion: "Иловаи савол",
     completedHtmlOnConditionItemText: "Нишон додан, агар:",
     lg: {
       //Logic tab strings
@@ -578,7 +578,7 @@ export var tgStrings = {
 
     cols: "Сутунҳо",
     rows: "Сатрҳо",
-    placeHolder: "Ҷойдор",
+    placeholder: "Ҷойдор",
 
     optionsCaption: "Танзимотҳои имзо",
 

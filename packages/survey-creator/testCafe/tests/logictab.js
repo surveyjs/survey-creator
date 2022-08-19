@@ -1,4 +1,4 @@
-import { url, init } from "../helper";
+import { url, init, getListItemByText } from "../helper";
 import page from "../page-model";
 import { Selector } from "testcafe";
 const title = `logictab_editor`;
@@ -14,8 +14,7 @@ test(`Create logic: question visibility`, async (t) => {
     .click(page.toolBarQuestion("Checkbox"))
     .click(page.toolBarQuestion("Single Input"))
     .click(page.toolBarQuestion("Single Input"))
-    .expect(page.questions.count)
-    .eql(4);
+    .expect(page.questions.count).eql(4);
 
   await t
     .click(page.creatorTab("Survey Logic"))
@@ -23,34 +22,22 @@ test(`Create logic: question visibility`, async (t) => {
 
   await t
     .click(page.buttonByValue("Save and return"))
-    .expect(
-      Selector("span").withText(
-        "The logic expression is empty or invalid. Please correct it."
-      ).exists
-    )
-    .ok();
+    .expect(Selector("span").withText("The logic expression is empty or invalid. Please correct it.").exists).ok();
 
-  const questionSelect = Selector(`div[name="questionName"]`).find("select");
+  const questionSelect = Selector(`div[data-name="questionName"]`);
   await t
     .click(questionSelect)
-    .click(questionSelect.find("option").withText("question1"));
-  const questionValue = Selector(`div[name="questionValue"]`).find("select");
+    .click(getListItemByText("question1"));
+  const questionValue = Selector(`div[data-name="questionValue"]`);
   await t
     .click(questionValue)
-    .click(questionValue.find("option").withText("item1"));
+    .click(getListItemByText("item1"));
 
   await t
     .click(page.buttonByValue("Save and return"))
-    .expect(
-      Selector("span").withText("Please, fix problems in your action(s).")
-        .exists
-    )
-    .ok();
+    .expect(Selector("span").withText("Please, fix problems in your action(s).").exists).ok();
 
-  const actionSelect = Selector("select").withAttribute(
-    "aria-label",
-    "Select an action to add..."
-  );
+  const actionSelect = Selector("select").withAttribute("aria-label", "Select an action to add...");
   await t
     .click(actionSelect)
     .click(actionSelect.find("option").withText("Question visibility"));
@@ -61,14 +48,8 @@ test(`Create logic: question visibility`, async (t) => {
     .click(visibilitySelect.find("option").withText("question4"));
 
   await t.click(page.buttonByValue("Save and return"));
-  await t
-    .expect(Selector("span").withText("{question1} == 'item1'").exists)
-    .ok();
-  await t
-    .expect(
-      Selector("span").withText("Make question {question4} visible").exists
-    )
-    .ok();
+  await t.expect(Selector("span").withText("{question1} == 'item1'").exists).ok();
+  await t.expect(Selector("span").withText("Make question {question4} visible").exists).ok();
 });
 
 test(`Check all actions`, async (t) => {

@@ -6,7 +6,7 @@
     .sv-btn {
         line-height: $control-height;
         height: $control-height;
-        border-radius: $control-height / 2;
+        border-radius: calc($control-height / 2);
         font-size: 14px;
         padding: 0 1.5em;
         &>* {
@@ -160,7 +160,7 @@
 
     .svd-propertyeditor-condition-wide-table {
         td:last-child {
-          line-height: $control-height;
+            line-height: $control-height;
         }
     }    
 

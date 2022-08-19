@@ -166,7 +166,7 @@ export var huStrings = {
     isRequired: "Kötelező?",
     startWithNewLine: "Új sorban kezdődik?",
     rows: "Sorok száma",
-    placeHolder: "Mező kitöltőszövege",
+    placeholder: "Mező kitöltőszövege",
     showPreview: "A kép előnézete látható?",
     storeDataAsText: "Az állomány tartalmát tárolja a JSON-ben, szövegként",
     maxSize: "Maximális állományméret byte-ban",
@@ -447,7 +447,7 @@ export var huStrings = {
 
     cols: "Oszlopok",
     rows: "Sorok",
-    placeHolder: "Helykitöltő",
+    placeholder: "Helykitöltő",
 
     optionsCaption: "'Beállítások' felirata",
 

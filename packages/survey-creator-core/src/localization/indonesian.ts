@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export var indonesianStrings = {
   //survey templates
@@ -94,7 +94,7 @@ export var indonesianStrings = {
     bold: "Tebal",
     italic: "Miring",
     underline: "Garis Bawah",
-    fpAddQuestion: "Tambah pertanyaan...",
+    addNewQuestion: "Tambah pertanyaan",
     completedHtmlOnConditionItemText: "Tampilkan jika:"
   },
   //Property names in table headers
@@ -162,7 +162,7 @@ export var indonesianStrings = {
     isRequired: "Wajib?",
     startWithNewLine: "Mulai dengan baris baru?",
     rows: "Jumlah baris",
-    placeHolder: "Masukkan placeholder",
+    placeholder: "Masukkan placeholder",
     showPreview: "Tunjukkan tinjauan gambar?",
     storeDataAsText: "Simpan konten berkas dalam hasil JSON sebagai teks",
     maxSize: "Ukuran maksimum berkas dalam byte",
@@ -375,7 +375,7 @@ export var indonesianStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Pilih halaman untuk dicoba:",
     showInvisibleElements: "Tampilkan elemen tak terlihat",
@@ -448,7 +448,6 @@ export var indonesianStrings = {
 
     cols: "kolom",
     rows: "baris",
-    placeHolder: "placeHolder",
 
     optionsCaption: "keterangan pilihan",
 

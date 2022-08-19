@@ -1,11 +1,5 @@
-import {
-  Base,
-  ItemValue,
-  JsonObjectProperty,
-  MatrixDropdownColumn,
-  Question,
-  SurveyModel
-} from "survey-core";
+import { StylesManager, Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, Question, SurveyModel } from "survey-core";
+
 /**
  * List available question convert modes
  */
@@ -14,10 +8,18 @@ export enum QuestionConvertMode {
   CompatibleTypes
 }
 export var settings = {
-  traslation: {
-    sortByName: true,
+  translation: {
+    sortByName: false,
     //Set it to \xef\xbb\xbf; to tell system that it is UTF8 file. You can use other prefix as well
-    exportPrefix: ""
+    exportPrefix: "",
+    /**
+     * The maximum number of locales that user can select at once for translation
+     */
+    maximumSelectedLocales: 7,
+    /**
+     * The name of the translation export file in csv format
+     */
+    exportFileName: "survey_translation.csv"
   },
   operators: {
     empty: [],
@@ -33,17 +35,36 @@ export var settings = {
     greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
     lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
   },
-  defaultNewSurveyJSON: { pages: [{ name: "page1" }] },
+  defaultNewSurveyJSON: {},
+  designer: {
+    /**
+     * The default question type on clicking Add Question button.
+     */
+    defaultAddQuestionType: "text",
+    /**
+     * Set this property to false, to hide "Add Question" button on designer surface
+     */
+    showAddQuestionButton: true
+  },
   logic: {
     visibleActions: [],
-    logicItemTitleMaxChars: 50
+    logicItemTitleMaxChars: 50,
+    openBracket: "{",
+    closeBracket: "}",
+    /**
+     * Set these properties to false if you don't want to update expressions on changing question and column names and on changing choices values
+     */
+    updateExpressionsOnChanging: {
+      questionName: true,
+      columnName: true,
+      choiceValue: true
+    }
   },
   /**
    * Determines which types of questions the conversion will be available for.
    */
   questionConvertMode: QuestionConvertMode.AllTypes,
   propertyGrid: {
-    allowCollapse: true,
     useButtonGroup: true,
     maxCharsInButtonGroup: 25,
     showNavigationButtons: false,
@@ -52,6 +73,36 @@ export var settings = {
     maximumRowsCount: 0,
     maximumRateValues: 0,
     generalTabName: "general"
+  },
+  toolbox: {
+    /**
+     * Use it to change the default question JSON on dropping it into designer or converting questions
+     */
+    defaultJSON: {
+      imagepicker: {
+        choices: [
+          {
+            value: "lion",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          },
+          {
+            value: "giraffe",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+          },
+          {
+            value: "panda",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+          },
+          {
+            value: "camel",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+          }
+        ]
+      },
+      image: {
+        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+      }
+    }
   },
   /**
    * Notification settings
@@ -76,7 +127,11 @@ export var settings = {
    */
   layout: {
     showTabs: true,
-    showToolbar: true
+    showToolbar: true,
+    allowCollapseSidebar: true
+  },
+  jsonEditor: {
+    indentation: 1
   }
 };
 export interface ICollectionItemAllowOperations {
@@ -107,6 +162,16 @@ export interface ISurveyCreatorOptions {
     object: any,
     property: JsonObjectProperty,
     editor: Question
+  );
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
+  );
+  onPropertyEditorUpdateTitleActionsCallback(
+    object: any,
+    property: JsonObjectProperty,
+    editor: Question,
+    titleActions: IAction[]
   );
   onIsPropertyReadOnlyCallback(
     obj: Base,
@@ -173,6 +238,12 @@ export interface ISurveyCreatorOptions {
     expression: string,
     title: string
   ): string;
+  onLogicGetTitleCallback(
+    expression: string,
+    displayExpression: string,
+    text: string,
+    logicItem: any
+  ): string;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -199,10 +270,20 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): boolean {
     return true;
   }
+  onPropertyGridSurveyCreatedCallback(
+    object: any,
+    survey: SurveyModel
+  ) { }
   onPropertyEditorCreatedCallback(
     object: any,
     property: JsonObjectProperty,
     editor: Question
+  ) { }
+  onPropertyEditorUpdateTitleActionsCallback(
+    object: any,
+    property: JsonObjectProperty,
+    editor: Question,
+    titleActions: IAction[]
   ) { }
   onIsPropertyReadOnlyCallback(
     obj: Base,
@@ -284,4 +365,12 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): string {
     return title;
   }
+  onLogicGetTitleCallback(
+    expression: string,
+    displayExpression: string,
+    text: string,
+    logicItem: any
+  ): string { return text; }
 }
+
+StylesManager.applyTheme("defaultV2");

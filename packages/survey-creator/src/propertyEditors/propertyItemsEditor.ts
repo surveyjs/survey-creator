@@ -19,12 +19,15 @@ export class SurveyPropertyItemsEditor extends SurveyPropertyModalEditor {
     self.onDeleteClick = function (item) {
       if (!self.onDeletingItem(item.obj)) return;
       self.deleteItem(item.obj);
+      self.doOnChanged(self.originalValue);
     };
     self.onClearClick = function (item) {
       self.originalValue.splice(0, self.originalValue.length);
+      self.doOnChanged(self.originalValue);
     };
     self.onAddClick = function () {
       self.addItem();
+      self.doOnChanged(self.originalValue);
     };
   }
   private _notifyPropertyValueChanged() {

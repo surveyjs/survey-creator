@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export var ruStrings = {
   // strings for survey templates
@@ -59,7 +59,7 @@ export var ruStrings = {
     newTextItemName: "текст",
     testSurvey: "Тестировать опросник",
     testSurveyAgain: "Тестировать еще раз",
-    testSurveyWidth: "Ширина опросника:",
+    testSurveyWidth: "Ширина опросника",
     logic: "Логика опросника",
     embedSurvey: "Вставить опросник",
     translation: "Перевод",
@@ -77,7 +77,7 @@ export var ruStrings = {
     delSelObject: "Удалить выбранный объект",
     editSelObject: "Редактировать выбранный объект",
     correctJSON: "Пожалуйста, исправьте JSON.",
-    surveyResults: "Результаты обследования:",
+    surveyResults: "Результаты обследования",
     surveyResultsTable: "Как таблица",
     surveyResultsJson: "Как JSON",
     resultsTitle: "Заголовок вопроса",
@@ -95,19 +95,21 @@ export var ruStrings = {
     translationExportToSCVButton: "Экспорт в CSV",
     translationImportFromSCVButton: "Импорт из CSV",
     translationMergeLocaleWithDefault: "Объединить {0} с локалью по умолчанию",
+    translationPlaceHolder: "Перевод...",
     bold: "Жирный",
     italic: "Курсив",
     underline: "Подчеркивание",
-    fpAddQuestion: "Добавить вопрос...",
-    completedHtmlOnConditionItemText: "Показывать, если:",
+    addNewQuestion: "Добавить вопрос",
+    completedHtmlOnConditionItemText: "Показывать, если",
     lg: {
+      addNewItem: "Добавить новое правило",
       //Logic tab strings
       page_visibilityName: "Видимость страницы",
       panel_visibilityName: "Видимость панели",
       panel_enableName: "Панель включена/выключена",
       question_visibilityName: "Видимость вопроса",
       question_enableName: "Вопрос включен/выключен",
-      question_requireName: "Вопрос необязательный",
+      question_requireName: "Вопрос обязательный",
       trigger_completeName: "Опрос завершен",
       trigger_setvalueName: "Установить значение вопроса",
       trigger_copyvalueName: "Копировать значение вопроса",
@@ -140,7 +142,7 @@ export var ruStrings = {
       completedHtmlOnConditionDescription:
         "Если логическое выражение возвращает 'true', то текст по умолчанию для 'Страницы благодарности' изменяется на заданный.",
 
-      itemExpressionText: "Когда выражение: '{0}' возвращает 'true':", //{0} - the expression
+      itemExpressionText: "Когда выражение: '{0}' возвращает 'true'", //{0} - the expression
       page_visibilityText: "Сделать страницу {0} видимой", //{0} page name
       panel_visibilityText: "Сделать панель {0} видимой", //{0} panel name
       panel_enableText: "Сделать панель {0} включенной", //{0} panel name
@@ -215,7 +217,7 @@ export var ruStrings = {
     showMore: "Для получения более подробной информации, пожалуйста, перейдите к документации",
     conditionShowMoreUrl:
       "Https://surveyjs.io/Documentation/LibraryParameter?id=Question¶meter=visibleIf",
-    assistantTitle: "Доступные вопросы:",
+    assistantTitle: "Доступные вопросы",
     cellsEmptyRowsColumns: "Должен быть хотя бы один столбец или строка",
 
     propertyIsEmpty: "Пожалуйста, введите значение",
@@ -403,16 +405,16 @@ export var ruStrings = {
     noquestions: "В опроснике нет ни одного вопроса",
     createtrigger: "Пожалуйста, создайте триггер",
     triggerOn: "О",
-    triggerMakePagesVisible: "Сделать страницы видимыми:",
-    triggerMakeQuestionsVisible: "Сделать элементы видимыми:",
+    triggerMakePagesVisible: "Сделать страницы видимыми",
+    triggerMakeQuestionsVisible: "Сделать элементы видимыми",
     triggerCompleteText: "Завершить опрос, если все получися.",
     triggerNotSet: "Тригер не установлен",
     triggerRunIf: "Начать, если",
-    triggerSetToName: "Изменить значение:",
-    triggerFromName: "Скопировать значение из:",
-    triggerRunExpression: "Выполнить это выражение:",
-    triggerSetValue: "в:",
-    triggerGotoName: "Перейти к вопросу:",
+    triggerSetToName: "Изменить значение",
+    triggerFromName: "Скопировать значение из",
+    triggerRunExpression: "Выполнить это выражение",
+    triggerSetValue: "в",
+    triggerGotoName: "Перейти к вопросу",
     triggerIsVariable: "Не помещать переменную в результат опросника.",
     triggerRunExpressionEmpty: "Пожалуйста, введите корректное выражение"
   },
@@ -509,7 +511,7 @@ export var ruStrings = {
   },
   // Опрос Тест
   ts: {
-    selectPage: "Выберите страницу, чтобы проверить это:",
+    selectPage: "Выберите страницу, чтобы проверить это",
     showInvisibleElements: "Показывать скрытые элементы"
   },
   validators: {
@@ -579,7 +581,7 @@ export var ruStrings = {
 
     cols: "Столбцы",
     rows: "Строки",
-    placeHolder: "Плейсхолдер",
+    placeholder: "Плейсхолдер",
 
     optionsCaption: "Подпись параметров",
 

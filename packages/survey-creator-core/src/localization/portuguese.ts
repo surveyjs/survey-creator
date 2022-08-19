@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 var portugueseTranslation = {
   //survey templates
@@ -150,7 +150,7 @@ var portugueseTranslation = {
     isRequired: "É obrigatório?",
     startWithNewLine: "Começa com uma nova linha?",
     rows: "Contagem de linhas",
-    placeHolder: "Texto de referência",
+    placeholder: "Texto de referência",
     showPreview: "Mostra pré-visualização de imagem?",
     storeDataAsText: "Gravar conteúdo de arquivo no resultado JSON como texto",
     maxSize: "Tamanho máximo de arquivo em bytes",
@@ -239,7 +239,7 @@ var portugueseTranslation = {
       templateTitle: "Título do template"
     },
     editProperty: "Editar propriedade '{0}'",
-    items: "[ Items: {0} ]",
+    items: "Items",
 
     enterNewValue: "Por favor, informe o valor.",
     noquestions: "Não há nenhuma pergunta na pesquisa.",
@@ -345,7 +345,7 @@ var portugueseTranslation = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Selecione a página para testar:",
     showInvisibleElements: "Mostrar elementos invisíveis"
@@ -417,7 +417,6 @@ var portugueseTranslation = {
 
     cols: "Colunas",
     rows: "Linhas",
-    placeHolder: "placeholder",
 
     optionsCaption: "Título das opções",
 

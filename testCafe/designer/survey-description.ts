@@ -1,4 +1,4 @@
-import { url } from "../helper";
+import { url, setJSON, generalGroupName, getPropertyGridCategory } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Survey Description";
 
@@ -14,7 +14,10 @@ test("Edit survey description", async (t) => {
     const property = window["Survey"].Serializer.findProperty("survey", "description");
     return window["creator"].getLocString(property.placeholder);
   })();
+
+  await setJSON({ pages: [{ name: "page1" }] });
   await t
+    .click(getPropertyGridCategory(generalGroupName))
     .click(Selector(`span[aria-placeholder='${placeholder}']`))
     .pressKey(description.split("").join(" "))
     .pressKey("enter")

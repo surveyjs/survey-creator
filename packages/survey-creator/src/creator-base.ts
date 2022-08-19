@@ -6,7 +6,7 @@ import { SurveyTextWorker } from "./textWorker";
 import { SurveyHelper, ObjType } from "./surveyHelper";
 import { SurveyJSON5 } from "./json5";
 import { SurveyLogic } from "./tabs/logic";
-import { ISurveyCreatorOptions } from "./settings";
+import { ISurveyCreatorOptions, settings } from "./settings";
 import { EditableObject } from "./propertyEditors/editableObject";
 
 export interface ICreatorOptions {
@@ -17,8 +17,7 @@ export interface ICreatorOptions {
  * Base class for Survey Creator.
  */
 export class CreatorBase<T extends { [index: string]: any }>
-implements ISurveyCreatorOptions
-{
+implements ISurveyCreatorOptions {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);
@@ -249,6 +248,28 @@ implements ISurveyCreatorOptions
     any
   > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
   /**
+   * Use this event to modify the list of the strings available in the Translation tab.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being edited in the Translation tab.
+   * - `options.propertyName` - The name of a property being translated.
+   * - `options.visible` - A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
+   */
+  public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  /**
+   * Use this event to define is the locale initially selected (default value) and ready for translaion or it is unselected.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.locale` - the locale name, like 'en', 'de' and so on.
+   * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
+   */
+  public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+
+  /**
    * This callback is used internally for providing survey JSON text.
    */
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
@@ -411,7 +432,7 @@ implements ISurveyCreatorOptions
 
   koReadOnly = ko.observable(false);
 
-  protected onSetReadOnly(newVal: boolean) {}
+  protected onSetReadOnly(newVal: boolean) { }
 
   /**
    * A boolean property, false by default. Set it to true to deny editing.
@@ -468,7 +489,7 @@ implements ISurveyCreatorOptions
     return true;
   }
 
-  protected onViewTypeChanged(newType: string) {}
+  protected onViewTypeChanged(newType: string) { }
 
   protected canSwitchViewType(newType: string) {
     return true;
@@ -688,10 +709,11 @@ implements ISurveyCreatorOptions
 
   private getSurveyTextFromDesigner() {
     var json = (<any>this.survey).toJSON();
+    const indent = settings.jsonEditor.indentation;
     if (this.options && this.options.generateValidJSON) {
-      return JSON.stringify(json, null, 1);
+      return JSON.stringify(json, null, indent);
     }
-    return new SurveyJSON5().stringify(json, null, 1);
+    return new SurveyJSON5().stringify(json, null, indent);
   }
 
   protected setTextValue(value: string) {
@@ -761,7 +783,7 @@ implements ISurveyCreatorOptions
     return survey;
   }
 
-  public setModified(options: any = null) {}
+  public setModified(options: any = null) { }
 
   protected convertCurrentObject(obj: Survey.Question, className: string) {
     this.startTransaction("Convert question to: " + className);
@@ -775,7 +797,7 @@ implements ISurveyCreatorOptions
     });
   }
 
-  protected initSurveyWithJSON(json: any, clearState: boolean) {}
+  protected initSurveyWithJSON(json: any, clearState: boolean) { }
 
   /**
    * The Survey JSON. Use it to get Survey JSON or change it.
@@ -969,11 +991,13 @@ implements ISurveyCreatorOptions
     // TODO: remove SurveyLogic call here
     var logic = new SurveyLogic(<any>this.survey, <any>this);
     for (var i = 0; i < questions.length; i++) {
-      logic.removeQuestion(questions[i].getValueName());
+      if (questions[i].isQuestion) {
+        logic.removeQuestion(questions[i].getValueName());
+      }
     }
   }
 
-  public selectElement(element: any) {}
+  public selectElement(element: any) { }
 
   protected deletePanelOrQuestion(obj: Survey.Base, objType: ObjType): void {
     var parent = obj["parent"];
@@ -1060,7 +1084,7 @@ implements ISurveyCreatorOptions
     }
     return true;
   }
-  protected doPropertyGridChanged() {}
+  protected doPropertyGridChanged() { }
 
   //implements ISurveyCreatorOptions
   get alwaySaveTextInPropertyEditors(): boolean {
@@ -1219,5 +1243,5 @@ implements ISurveyCreatorOptions
   protected startTransaction(name: string) {
 
   }
-  protected stopTransation() {}
+  protected stopTransation() { }
 }

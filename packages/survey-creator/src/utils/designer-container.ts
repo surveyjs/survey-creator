@@ -40,6 +40,7 @@ export class DesignerContainerViewModel {
       }
     });
     this._changedSubscription = changed.subscribe(() => {
+      if (componentInfo.element.offsetParent == null) return;
       this.isOpen(componentInfo.element.offsetWidth > 25);
       this.visible(this.isOpen());
     });

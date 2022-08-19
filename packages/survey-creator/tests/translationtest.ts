@@ -1,10 +1,6 @@
 import * as ko from "knockout";
 import * as Survey from "survey-knockout";
-import {
-  TranslationGroup,
-  TranslationItem,
-  Translation,
-} from "../src/tabs/translation";
+import { TranslationGroup, TranslationItem, Translation, TranslationViewModel } from "../src/tabs/translation";
 import { SurveyCreator } from "../src/editor";
 import { unparse, parse } from "papaparse";
 import { settings } from "../src/settings";
@@ -330,6 +326,7 @@ QUnit.test("Default locale name", function (assert) {
 QUnit.test("Add properties for columns", function (assert) {
   var question = new Survey.QuestionMatrixDropdown("q1");
   question.addColumn("col1");
+  question.columns[0].cellType = "dropdown";
   question.columns[0]["choices"] = ["1", "2"];
   var group = new TranslationGroup(question.name, question);
   var column0Group = group.groups[0];
@@ -793,10 +790,9 @@ QUnit.test("Two new functions: expandAll(), collapseAll()", function (assert) {
     "The q1 group  is collapse as well"
   );
 });
-QUnit.test(
-  "Translation show All strings and property visibility",
+QUnit.test("Translation show All strings and property visibility",
   function (assert) {
-    var creator = new SurveyCreator();
+    const creator = new SurveyCreator();
     creator.JSON = {
       completedHtml: "Test",
       pages: [
@@ -809,18 +805,11 @@ QUnit.test(
     creator.onShowingProperty.add((sender, options) => {
       options.canShow = options.property.name == "title";
     });
-    var translation = new Translation(creator.survey);
-    assert.equal(
-      translation.root.locItems.length,
-      1,
-      "There is one item to translate - completedHtml"
-    );
+    let translation = new Translation(creator.survey);
+    assert.equal(translation.root.locItems.length, 1, "There is one item to translate - completedHtml");
     translation.showAllStrings = true;
-    assert.ok(
-      translation.root.locItems.length > 5,
-      "Show a lot of items - completedHtml"
-    );
-    var translation = new Translation(
+    assert.ok(translation.root.locItems.length > 5, "Show a lot of items - completedHtml");
+    translation = new Translation(
       creator.survey,
       true,
       ko.computed(() => creator.readOnly),
@@ -828,13 +817,107 @@ QUnit.test(
         return SurveyHelper.isPropertyVisible(obj, prop, creator);
       }
     );
-    assert.equal(
-      translation.root.locItems.length,
-      2,
-      "There are two items to translate - completedHtml + title"
-    );
+    assert.equal(translation.root.locItems.length, 2, "There are two items to translate - completedHtml + title");
   }
 );
+
+const surveyJson = {
+  "title": "Survey title",
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1"
+        }
+      ],
+      "title": "Page1 title"
+    },
+    {
+      "name": "page2",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question2"
+        }
+      ]
+    }
+  ]
+};
+
+QUnit.test("translationStringVisibilityCallback", (assert) => {
+  const creator = new SurveyCreator();
+  creator.JSON = surveyJson;
+  const translation = new Translation(creator.survey, null, undefined, (obj: Survey.Base, prop: Survey.JsonObjectProperty): boolean => {
+    return SurveyHelper.isPropertyVisible(obj, prop, creator);
+  });
+  assert.equal(translation.root.items.length, 3);
+  assert.equal(translation.root.items[0].name, "title");
+  assert.equal(translation.root.groups.length, 2);
+  assert.equal(translation.root.groups[0].name, "page1");
+  assert.equal(translation.root.groups[0].items.length, 2);
+  assert.equal(translation.root.groups[0].items[0].name, "title");
+  assert.equal(translation.root.groups[0].groups.length, 1);
+  assert.equal(translation.root.groups[0].groups[0].name, "question1");
+  assert.equal(translation.root.groups[0].groups[0].items[0].name, "title");
+  assert.equal(translation.root.groups[1].name, "page2");
+
+  translation.translationStringVisibilityCallback = (obj: Survey.Base, propertyName: string, visible: boolean) => {
+    if (obj.getType() == "survey" && propertyName === "title") return false;
+    if (obj["name"] === "question1" && propertyName === "title") return false;
+    return true;
+  };
+  translation.reset();
+  assert.equal(translation.root.items.length, 2);
+  assert.equal(translation.root.groups.length, 2);
+  assert.equal(translation.root.groups[0].name, "page1");
+  assert.equal(translation.root.groups[0].items.length, 1);
+  assert.equal(translation.root.groups[0].items[0].name, "title");
+  assert.equal(translation.root.groups[1].name, "page2");
+});
+
+QUnit.test("onTranslationStringVisibility", (assert) => {
+  const creator = new SurveyCreator();
+  creator.JSON = surveyJson;
+  creator.onTranslationStringVisibility.add((sender, options) => {
+    if (options.obj.getType() == "survey" && options.propertyName === "title") {
+      options.visible = false;
+    } else if (options.obj["name"] === "question1" && options.propertyName === "title") {
+      options.visible = false;
+    } else {
+      options.visible = true;
+    }
+  });
+  const tabTranslation = new TranslationViewModel(creator);
+  const translation = tabTranslation.model;
+
+  assert.equal(translation.root.items.length, 2);
+  assert.equal(translation.root.groups.length, 2);
+  assert.equal(translation.root.groups[0].name, "page1");
+  assert.equal(translation.root.groups[0].items.length, 1);
+  assert.equal(translation.root.groups[0].items[0].name, "title");
+  assert.equal(translation.root.groups[1].name, "page2");
+});
+
+QUnit.test("onTraslationLocaleSelected", (assert) => {
+  const creator = new SurveyCreator();
+  creator.JSON = {
+    title: {
+      default: "Title",
+      de: "Title de",
+      fr: "Title fr"
+    }
+  };
+  creator.onTranslationLocaleInitiallySelected.add((sender, options) => {
+    options.isSelected = options.locale === "de";
+  });
+  const tabTranslation = new TranslationViewModel(creator);
+  const translation = tabTranslation.model;
+  assert.equal(translation.koLocales().length, 3, "There are 3 locales");
+  assert.equal(translation.getSelectedLocales().length, 2, "There is one selected locales");
+  assert.equal(translation.getSelectedLocales()[1], "de", "The selected locales are default and de");
+});
 
 /* TODO wait for v1.8.29
 QUnit.test("check LocalizableStrings/dataList property", function (assert) {

@@ -281,7 +281,7 @@ export var turkishStrings = {
     startWithNewLine: "Yeni satırla başla?",
     rows: "Satır sayısı",
     cols: "Kolon sayısı",
-    placeHolder: "Giriş varsayılan içeriği",
+    placeholder: "Giriş varsayılan içeriği",
     showPreview: "Resim önizleme gösteriliyor mu?",
     showPreviewBeforeComplete: "Tamamlanmadan önce önizlemeyi göster",
     storeDataAsText: "Dosya içeriğini JSON sonucunda metin olarak depola",
@@ -649,7 +649,7 @@ export var turkishStrings = {
 
     cols: "Sütunlar",
     rows: "Satırlar",
-    placeHolder: "Yer tutucu",
+    placeholder: "Yer tutucu",
 
     optionsCaption: "Seçenek başlığı",
 

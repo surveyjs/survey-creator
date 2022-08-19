@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var nlStrings = {
   //survey templates
@@ -115,12 +115,11 @@ export var nlStrings = {
     bold: "Vetgedrukt",
     italic: "Cursief",
     underline: "Onderstrepen",
-    fpAddQuestion: "Vraag toevoegen...",
+    addNewQuestion: "Vraag toevoegen",
     selectPage: "Selecteer pagina...",
     chooseElement: "Kies element...",
     //completedHtmlOnConditionItemText: "Laat zien of:",
     lg: {
-      addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       page_visibilityName: "Pagina zichtbaarheid",
       panel_visibilityName: "Paneel zichtbaarheid",
@@ -293,7 +292,7 @@ export var nlStrings = {
     startWithNewLine: "Beginnen met een nieuwe regel?",
     rows: "Aantal rijen",
     cols: "Kolom tellen",
-    placeHolder: "Hulptekst",
+    placeholder: "Hulptekst",
     showPreview: "Toon voorbeeldgebied",
     showPreviewBeforeComplete: "Voorbeeldweergave voor afronden",
     storeDataAsText: "Bewaar bestandsinhoud in JSON-resultaat als tekst",
@@ -450,7 +449,7 @@ export var nlStrings = {
       others: "Anderen",
     },
     editProperty: "Eigenschap '{0}' bewerken",
-    items: "[ Items: {0} ]",
+    items: "Items",
 
     enterNewValue: "Voer de waarde in.",
     noquestions: "Er is geen enkele vraag in de enquête.",
@@ -591,7 +590,7 @@ export var nlStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Selecteer de pagina om deze te testen:",
     showInvisibleElements: "Toon onzichtbare elementen",
@@ -669,7 +668,7 @@ export var nlStrings = {
 
     cols: "Kolommen",
     rows: "Rijen",
-    placeHolder: "Tijdelijke aanduiding",
+    placeholder: "Tijdelijke aanduiding",
 
     optionsCaption: "Bijschrift opties",
 

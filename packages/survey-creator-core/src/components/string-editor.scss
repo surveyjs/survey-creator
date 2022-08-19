@@ -1,6 +1,12 @@
 @import "../variables.scss";
 
 .svc-string-editor {
+
+  [contenteditable] {
+    user-select: text;
+    -webkit-user-select: text;
+  }
+  
   position: static;
   .sv-string-editor {
     display: inline-block;
@@ -33,6 +39,12 @@
   align-items: center;
   justify-content: right;
   line-height: 0px;
+}
+.svc-string-editor__error {
+  margin-left: calcSize(1);
+  line-height: calcSize(4);
+  font-size: calcSize(2);
+  color: red;
 }
 
 .svc-string-editor__controls {
@@ -76,40 +88,45 @@
   }
 }
 
-.svc-string-editor:hover {
+.svc-string-editor:hover:not(.svc-string-editor--readonly):not(:focus-within) {
   color: $foreground;
   .svc-string-editor__border {
     display: flex;
-    top: calcSize(-0.5);
-    bottom: calcSize(-0.5);
+    top: calcSize(0);
+    bottom: calcSize(0);
     left: calcSize(-0.5);
     //right: calcSize(-4.5); // if need pencil icon
     right: calcSize(-0.5);
     border: none;
     background-color: $primary-light;
+    border-radius: 3px;
   }
 }
 .svc-string-editor:focus-within {
   color: $foreground;
   .svc-string-editor__border {
     display: flex;
-    top: calcSize(-1);
-    bottom: calcSize(-1);
+    top: calcSize(-0.5);
+    bottom: calcSize(-0.5);
     left: calcSize(-1);
     right: calcSize(-1);
-    border: calcSize(0.25) solid $primary;
-    border-radius: calcSize(0.5);
+    border: 2px solid $primary;
+    border-radius: 5px;
+    box-sizing: content-box;
     background-color: $background;
+    box-shadow: 0px 2px 6px $shadow-medium;
   }
 }
-  
+
 .sd-rating {
   .sd-rating__item:focus-within {
     border: calcSize(0.25) solid $primary;
   }
-  .svc-string-editor:focus-within {
-    .svc-string-editor__border {
-      display: none;
+  &:not(.sd-rating__min-text) {
+    .svc-string-editor:focus-within {
+      .svc-string-editor__border {
+        display: none;
+      }
     }
   }
 }
@@ -132,22 +149,6 @@
     .svc-string-editor__border {
       left: calcSize(-0.7);
       right: calcSize(-0.7);
-    }
-  }
-}
-
-.sd-table__cell:first-child {
-    .svc-string-editor{
-      margin-left: calcSize(1);
-  }
-}
-
-survey-creator,
-.svc-creator,
-.sv-popup {
-  .svc-string-editor{
-    *:not(button):focus {
-      outline: none;
     }
   }
 }

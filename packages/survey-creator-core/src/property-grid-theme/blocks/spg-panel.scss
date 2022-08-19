@@ -10,7 +10,7 @@
   color: $foreground-light;
   cursor: pointer;
   text-align: left;
-  background: $background;
+  background-color: $background;
   box-shadow: inset 0px -1px 0px $border;
   font-family: $font-family;
   font-size: calcSize(2);
@@ -19,27 +19,26 @@
 }
 .spg-panel__title:disabled,
 .spg-panel__title:disabled:hover {
-  background-color: $background;
   color: $foreground-disabled;
   cursor: default;
 }
-.spg-panel__title--expandable:hover {
-  background-color: $background-dim;
-  color: $foreground-light;
-  font-weight: 400;
+.spg-panel__title--expandable:not(.spg-panel__title[aria-expanded=true]) {
+  &:hover, &:focus {
+    background-color: $background-dim;
+  }
 }
-.spg-panel__title--expanded,
-.spg-panel__title--expanded:hover {
+.spg-panel__title[aria-expanded=true],
+.spg-panel__title--expanded {
   color: $foreground;
   font-weight: 600;
-  background-color: $background;
 }
+
 .spg-panel__content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: 0 calcSize(2) calcSize(5);
+  padding: 0 calcSize(4) calcSize(5);
   box-sizing: border-box;
   background: $background-dim;
   box-shadow: inset 0px -1px 0px $border;
@@ -48,5 +47,13 @@
   .spg-row {
     width: 100%;
     margin-top: calcSize(2);
+  }
+  .spg-row--multiple {
+    margin-top: calcSize(1);
+  }
+}
+.sv-mobile-side-bar {
+  .spg-panel__content {
+    padding: 0 calcSize(2) calcSize(5);
   }
 }

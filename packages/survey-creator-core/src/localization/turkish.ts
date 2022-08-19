@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export var turkishStrings = {
   //survey templates
@@ -107,7 +107,7 @@ export var turkishStrings = {
     bold: "Kalın",
     italic: "Italik",
     underline: "Alt Çizgi",
-    fpAddQuestion: "Soru Ekle...",
+    addNewQuestion: "Soru Ekle",
     //completedHtmlOnConditionItemText: "Göster Eğer:",
     lg: {
       //Logic tab strings
@@ -281,7 +281,7 @@ export var turkishStrings = {
     startWithNewLine: "Yeni satırla başla?",
     rows: "Satır sayısı",
     cols: "Kolon sayısı",
-    placeHolder: "Giriş varsayılan içeriği",
+    placeholder: "Giriş varsayılan içeriği",
     showPreview: "Resim önizleme gösteriliyor mu?",
     showPreviewBeforeComplete: "Tamamlanmadan önce önizlemeyi göster",
     storeDataAsText: "Dosya içeriğini JSON sonucunda metin olarak depola",
@@ -564,7 +564,7 @@ export var turkishStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Test edilecek sayfayı seçin:",
     showInvisibleElements: "Görünmez öğeleri göster",
@@ -649,7 +649,7 @@ export var turkishStrings = {
 
     cols: "Sütunlar",
     rows: "Satırlar",
-    placeHolder: "Yer tutucu",
+    placeholder: "Yer tutucu",
 
     optionsCaption: "Seçenek başlığı",
 

@@ -1,7 +1,7 @@
 import { SurveyCreator } from "../src/creator";
-//import { QuestionViewModel } from "../src/components/question";
+//import { QuestionViewModel } from "../src/question";
 
-beforeEach(() => {});
+beforeEach(() => { });
 
 test("context actions", () => {
   /*

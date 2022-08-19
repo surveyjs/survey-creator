@@ -1,9 +1,0 @@
-<div class="svc-toolbox__tool" data-bind="css: { 'sv-action--hidden': !$data.item.isVisible }, class: $data.item.css">
-    <div class="sv-action__content">
-        <!-- ko if: $data.item.needSeparator && $data.isCompact-->
-        <div class="svc-toolbox__category-separator"></div>
-        <!-- /ko -->
-        <!-- ko component: { name: $data.item.component || 'svc-toolbox-item', params: { item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
-        <!-- /ko -->
-    </div>
-</div>

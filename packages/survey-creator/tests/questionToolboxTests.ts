@@ -127,14 +127,14 @@ QUnit.test("toolbox change categories", function (assert) {
 });
 
 QUnit.test("toolbox load custom/composite questions", function (assert) {
-  Survey.ComponentCollection.Instance.add({
+  Survey.ComponentCollection.Instance.add(<any>{
     name: "newquestion",
     questionJSON: {
       type: "dropdown",
       choices: [1, 2, 3, 4, 5],
     },
   });
-  Survey.ComponentCollection.Instance.add({
+  Survey.ComponentCollection.Instance.add(<any>{
     name: "customerinfo",
     elementsJSON: [
       { type: "text", name: "firstName" },
@@ -422,11 +422,11 @@ QUnit.test("Add customWidgets and components into toolbox", function (assert) {
     },
     "customtype"
   );
-  Survey.ComponentCollection.Instance.add({
+  Survey.ComponentCollection.Instance.add(<any>{
     name: "comp1",
     questionJSON: { type: "dropdown", choices: [1, 2, 3, 4, 5] },
   });
-  Survey.ComponentCollection.Instance.add({
+  Survey.ComponentCollection.Instance.add(<any>{
     name: "comp2",
     showInToolbox: false,
     questionJSON: { type: "dropdown", choices: [1, 2, 3, 4, 5] },

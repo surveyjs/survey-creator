@@ -16,7 +16,8 @@ import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 import { EmptySurveyCreatorOptions } from "../../src/settings";
-import { defaultStrings } from "../../src/editorLocalization";
+
+export * from "../../src/components/link-value";
 
 test("Page visibility logic", () => {
   var survey = new SurveyModel({});
@@ -126,12 +127,13 @@ test("Add new item", () => {
   expect(logic.editableItem.actions).toHaveLength(0);
   var panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
-  var elSelectorQuestion = <QuestionDropdownModel>(
-    panel.getQuestionByName("elementSelector")
-  );
+  var elSelectorQuestion = <QuestionDropdownModel>(panel.getQuestionByName("elementSelector"));
   expect(elSelectorQuestion.choices[0].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[1].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[2].isEnabled).toBeTruthy();
+  expect(elSelectorQuestion.choices[0].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[1].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[2].isVisible).toBeTruthy();
   elSelectorQuestion.value = "q3";
   logic.expressionEditor.text = "{q1} = 2";
   expect(logic.saveEditableItem()).toBeTruthy();
@@ -170,18 +172,18 @@ test("Use SurveyItemSelector for editing", () => {
   expect(logic.items).toHaveLength(2);
   logic.editItem(logic.items[1]);
   var panel = logic.itemEditor.panels[0];
-  expect(panel.getQuestionByName("logicTypeName").value).toEqual(
-    "question_visibility"
-  );
-  var elSelectorQuestion = <QuestionDropdownModel>(
-    panel.getQuestionByName("elementSelector")
-  );
+  expect(panel.getQuestionByName("logicTypeName").value).toEqual("question_visibility");
+  var elSelectorQuestion = <QuestionDropdownModel>(panel.getQuestionByName("elementSelector"));
   expect(elSelectorQuestion).toBeTruthy();
   expect(elSelectorQuestion.choices).toHaveLength(4);
   expect(elSelectorQuestion.choices[0].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[1].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[2].isEnabled).toBeTruthy();
   expect(elSelectorQuestion.choices[3].isEnabled).toBeTruthy();
+  expect(elSelectorQuestion.choices[0].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[1].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[2].isVisible).toBeTruthy();
+  expect(elSelectorQuestion.choices[3].isVisible).toBeTruthy();
   logic.itemEditor.panel.addPanel();
   panel = logic.itemEditor.panels[1];
   elSelectorQuestion = <QuestionDropdownModel>(
@@ -201,6 +203,10 @@ test("Use SurveyItemSelector for editing", () => {
   expect(elSelectorQuestion.choices[1].isEnabled).toBeTruthy();
   expect(elSelectorQuestion.choices[2].isEnabled).toBeFalsy();
   expect(elSelectorQuestion.choices[3].isEnabled).toBeFalsy();
+  expect(elSelectorQuestion.choices[0].isVisible).toBeTruthy();
+  expect(elSelectorQuestion.choices[1].isVisible).toBeTruthy();
+  expect(elSelectorQuestion.choices[2].isVisible).toBeFalsy();
+  expect(elSelectorQuestion.choices[3].isVisible).toBeFalsy();
 });
 
 test("Remove same actions on save", () => {
@@ -480,9 +486,10 @@ test("Add new trigger", () => {
   expect(logic.expressionEditor.text).toBeFalsy();
   var panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "trigger_complete";
-  expect(panel.getElementByName("elementPanel").isVisible).toBeFalsy();
+  expect(panel.getElementByName("triggerEditorPanel").isVisible).toBeFalsy();
+  expect(panel.getElementByName("triggerQuestionsPanel").isVisible).toBeFalsy();
   logic.expressionEditor.text = "{q1} = 2";
-  panel.getQuestionByName("elementPanel");
+  panel.getQuestionByName("triggerEditorPanel");
   expect(survey.triggers).toHaveLength(0);
   logic.saveEditableItem();
   expect(survey.triggers).toHaveLength(1);
@@ -515,16 +522,16 @@ test("Edit triggers via trigger editor", () => {
   expect(logic.expressionEditor.text).toEqual("{q1} = 1");
   expect(logic.editableItem.actions).toHaveLength(1);
   logic.expressionEditor.text = "{q1} = 10";
-  var panel = logic.itemEditor.panels[0];
-  var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-  expect(elementPanel.getQuestionByName("setToName").value).toEqual("q2");
-  expect(elementPanel.isVisible).toBeTruthy();
-  expect(elementPanel.getQuestionByName("expression").isVisible).toBeFalsy();
-  elementPanel.getQuestionByName("setToName").value = "q3";
+  const panel = logic.itemEditor.panels[0];
+  const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  const triggerQuestionsPanel = <PanelModel>panel.getElementByName("triggerQuestionsPanel");
+  expect(triggerQuestionsPanel.isVisible).toBeTruthy();
+  expect(triggerQuestionsPanel.getQuestionByName("setToName").value).toEqual("q2");
+  expect(triggerEditorPanel.isVisible).toBeTruthy();
+  expect(triggerEditorPanel.getQuestionByName("expression").isVisible).toBeFalsy();
+  triggerQuestionsPanel.getQuestionByName("setToName").value = "q3";
   logic.saveEditableItem();
-  expect(logic.items[0].actions[0].text).toEqual(
-    "Run expression: '{Question 2} + 1' and set its result into question: {Question 3}"
-  );
+  expect(logic.items[0].actions[0].text).toEqual("run expression: '{Question 2} + 1' and set its result into question: {Question 3}");
   expect(survey.triggers[0]["setToName"]).toEqual("q3");
   expect(survey.triggers[0].expression).toEqual("{q1} = 10");
 });
@@ -542,15 +549,16 @@ test("Edit condition complete via its editor", () => {
   logic.expressionEditor.text = "{q1} = 10";
   var panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "completedHtmlOnCondition";
-  var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-  elementPanel.getQuestionByName("html").value = "Some text";
+  expect(panel.getElementByName("triggerQuestionsPanel").isVisible).toBeFalsy();
+  let triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  triggerEditorPanel.getQuestionByName("html").value = "Some text";
   logic.saveEditableItem();
   expect(survey.completedHtmlOnCondition).toHaveLength(1);
   expect(survey.completedHtmlOnCondition[0].expression).toEqual("{q1} = 10");
   expect(survey.completedHtmlOnCondition[0].html).toEqual("Some text");
   logic.expressionEditor.text = "{q1} = 100";
-  elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-  elementPanel.getQuestionByName("html").value = "Some text 2";
+  triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  triggerEditorPanel.getQuestionByName("html").value = "Some text 2";
   logic.saveEditableItemAndBack();
   expect(survey.completedHtmlOnCondition).toHaveLength(1);
   expect(survey.completedHtmlOnCondition[0].expression).toEqual("{q1} = 100");
@@ -560,8 +568,8 @@ test("Edit condition complete via its editor", () => {
   expect(logic.itemEditor.panels).toHaveLength(1);
   panel = logic.itemEditor.panels[0];
   logic.expressionEditor.text = "{q1} = 1000";
-  elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-  elementPanel.getQuestionByName("html").value = "Some text 3";
+  triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  triggerEditorPanel.getQuestionByName("html").value = "Some text 3";
   logic.saveEditableItemAndBack();
   expect(survey.completedHtmlOnCondition).toHaveLength(1);
   expect(survey.completedHtmlOnCondition[0].expression).toEqual("{q1} = 1000");
@@ -692,36 +700,20 @@ test("Displaying correct text for logic action", () => {
   for (var i = 0; i < logicTypes.length; i++) {
     expect(findOp(logicTypes[i])).toBeTruthy();
   }
-  expect(logic.items[0].expressionText).toEqual("{q1} == 1");
-  expect(findOp("page_visibility").text).toEqual("Make page {page1} visible");
-  expect(findOp("panel_visibility").text).toEqual(
-    "Make panel {panel1} visible"
-  );
-  expect(findOp("panel_enable").text).toEqual("Make panel {panel1} enable");
-  expect(findOp("question_visibility").text).toEqual(
-    "Make question {q2} visible"
-  );
-  expect(findOp("question_enable").text).toEqual("Make question {q3} enable");
-  expect(findOp("question_require").text).toEqual(
-    "Make question {q4} required"
-  );
-  expect(findOp("trigger_complete").text).toEqual("Survey becomes completed");
-  expect(findOp("trigger_setvalue").text).toEqual(
-    "Set into question: {q2} value q2Value"
-  );
-  expect(findOp("trigger_copyvalue").text).toEqual(
-    "Copy into question: {q1} value from question {q2}"
-  );
-  expect(findOp("trigger_skip").text).toEqual(
-    "Survey skip to the question {q2}"
-  );
-  expect(findOp("trigger_runExpression").text).toEqual(
-    "Run expression: '{q2} + 1' and set its result into question: {q3}"
-  );
-  expect(findOp("completedHtmlOnCondition").text).toEqual(
-    "Show custom text for the 'Thank you page'."
-  );
-  expect(findOp("page_visibility").name).toEqual("Page visibility");
+  expect(logic.items[0].getDisplayText()).toEqual("If 'q1' == 1, make page 'page1' visible, make question 'q2' visible, make question 'q3' enable, make question 'q4' required, make panel 'panel1' visible, make panel 'panel1' enable, survey becomes completed, survey skip to the question 'q2', run expression: ''q2' + 1' and set its result into question: 'q3', copy into question: 'q1' value from question 'q2', set into question: 'q2' value q2Value, show custom text for the 'Thank you page'.");
+  expect(findOp("page_visibility").text).toEqual("make page {page1} visible");
+  expect(findOp("panel_visibility").text).toEqual("make panel {panel1} visible");
+  expect(findOp("panel_enable").text).toEqual("make panel {panel1} enable");
+  expect(findOp("question_visibility").text).toEqual("make question {q2} visible");
+  expect(findOp("question_enable").text).toEqual("make question {q3} enable");
+  expect(findOp("question_require").text).toEqual("make question {q4} required");
+  expect(findOp("trigger_complete").text).toEqual("survey becomes completed");
+  expect(findOp("trigger_setvalue").text).toEqual("set into question: {q2} value q2Value");
+  expect(findOp("trigger_copyvalue").text).toEqual("copy into question: {q1} value from question {q2}");
+  expect(findOp("trigger_skip").text).toEqual("survey skip to the question {q2}");
+  expect(findOp("trigger_runExpression").text).toEqual("run expression: '{q2} + 1' and set its result into question: {q3}");
+  expect(findOp("completedHtmlOnCondition").text).toEqual("show custom text for the 'Thank you page'.");
+  expect(findOp("page_visibility").name).toEqual("Show (hide) page");
 });
 
 test("Logic editing errors", () => {
@@ -756,8 +748,8 @@ test("Logic editing errors", () => {
   panel = logic.itemEditor.panel.addPanel();
   panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
   expect(logic.hasError()).toBeTruthy();
-  var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-  elementPanel.getQuestionByName("setToName").value = "q2";
+  const triggerQuestionsPanel = <PanelModel>panel.getElementByName("triggerQuestionsPanel");
+  triggerQuestionsPanel.getQuestionByName("setToName").value = "q2";
   expect(logic.hasError()).toBeFalsy();
   expect(logic.saveEditableItem()).toBeTruthy();
 });
@@ -786,8 +778,8 @@ test("Return without saving", () => {
   item.edit();
   logic.expressionEditor.text = "{q1} = 2";
   var panel = logic.itemEditor.panels[1];
-  var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-  elementPanel.getQuestionByName("gotoName").value = "q3";
+  const triggerQuestionsPanel = <PanelModel>panel.getElementByName("triggerQuestionsPanel");
+  triggerQuestionsPanel.getQuestionByName("gotoName").value = "q3";
   panel = logic.itemEditor.panel.addPanel();
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
   expect(logic.saveEditableItem()).toBeFalsy();
@@ -811,7 +803,7 @@ test("Add existing visible Items", () => {
   options.showTitlesInExpressions = true;
   var logic = new SurveyLogic(survey, options);
   expect(logic.items).toHaveLength(1);
-  expect(logic.items[0].expressionText).toEqual("{My Question 1} == 1");
+  expect(logic.items[0].getDisplayText()).toEqual("If 'My Question 1' == 1, make question 'q2' visible, make question 'q3' visible");
 });
 
 test("Allow logic type to be null and change it", () => {
@@ -975,14 +967,6 @@ test("Logic onLogicItemRemoving/onLogicItemRemoved events", () => {
   expect(removingCallCount).toEqual(2);
   expect(removedCallCount).toEqual(1);
 });
-test("Logic addNewText", () => {
-  var logic = new SurveyLogicUI(new SurveyModel());
-  expect(logic.addNewText).toEqual("Add New");
-  (<any>defaultStrings).ed.lg["addNewItem"] = "Add New Rule";
-  expect(logic.addNewText).toEqual("Add New Rule");
-  (<any>defaultStrings).ed.lg["addNewItem"] = "";
-  expect(logic.addNewText).toEqual("Add New");
-});
 
 test("Hide/show logic types in actions", () => {
   var survey = new SurveyModel({
@@ -995,7 +979,7 @@ test("Hide/show logic types in actions", () => {
   var logic = new SurveyLogicUI(survey);
   logic.addNew();
   var panel1 = logic.itemEditor.panels[0];
-  var ltQuestion1 = panel1.getQuestionByName("logicTypeName");
+  var ltQuestion1 = <QuestionDropdownModel>panel1.getQuestionByName("logicTypeName");
   expect(ltQuestion1).toBeTruthy();
   var lt1Skip = ItemValue.getItemByValue(ltQuestion1.choices, "trigger_skip");
   var lt1Complete = ItemValue.getItemByValue(
@@ -1005,7 +989,7 @@ test("Hide/show logic types in actions", () => {
   expect(lt1Skip).toBeTruthy();
   expect(lt1Complete).toBeTruthy();
   var panel2 = logic.itemEditor.panel.addPanel();
-  var ltQuestion2 = panel2.getQuestionByName("logicTypeName");
+  var ltQuestion2 = <QuestionDropdownModel>panel2.getQuestionByName("logicTypeName");
   expect(ltQuestion2).toBeTruthy();
   var lt2Skip = ItemValue.getItemByValue(ltQuestion2.choices, "trigger_skip");
   var lt2Complete = ItemValue.getItemByValue(
@@ -1047,7 +1031,6 @@ test("Hide/show logic types in actions", () => {
   expect(lt2Skip.isVisible).toBeTruthy();
   expect(lt2Complete.isVisible).toBeTruthy();
 });
-
 //TODO Can not implement these tests yet
 /*
   test("Make Survey Creator modified on changes", () => {
@@ -1087,41 +1070,6 @@ test("Hide/show logic types in actions", () => {
     logic.removeItem(logic.items[0]);
     expect(modifiedCounter, 2, "It was changed two times");
   });
-
-  test(
-    "Hide Expression Header in Condition Property Editor in Logic tab",
-    () => {
-      var creator = new SurveyCreator(null, {
-        hideExpressionHeaderInLogicTab: true,
-      });
-      creator.JSON = {
-        pages: [
-          {
-            elements: [
-              { type: "text", name: "q1" },
-              { type: "text", name: "q2", visibleIf: "{q1} = 1" },
-              { type: "text", name: "q3" },
-            ],
-          },
-        ],
-        triggers: [
-          {
-            type: "skip",
-            expression: "{q1} = 1",
-            gotoName: "q2",
-          },
-        ],
-      };
-      var logic = new SurveyLogic(creator.survey, creator);
-      var item = logic.items[0];
-      item.edit();
-      expect(
-        logic.expressionEditor.koShowExpressionHeader(),
-        false,
-        "Do not show expression header"
-      );
-    }
-  );
   test(
     "SurveyCreator with logictab only, set creator json",
     () => {

@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 var polishStrings = {
   //survey templates
@@ -110,7 +110,7 @@ var polishStrings = {
     isRequired: "Czy wymagalne?",
     startWithNewLine: "Czy rozpoczyna się nową linią?",
     rows: "Liczba wierszy",
-    placeHolder: "Input place holder",
+    placeholder: "Input place holder",
     showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size in bytes",
@@ -192,7 +192,7 @@ var polishStrings = {
       templateTitle: "Template title",
     },
     editProperty: "Edit property '{0}'",
-    items: "[ Items: {0} ]",
+    items: "Items",
 
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",
@@ -241,7 +241,7 @@ var polishStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Wybierz stronę, aby ją przetestować:",
   },

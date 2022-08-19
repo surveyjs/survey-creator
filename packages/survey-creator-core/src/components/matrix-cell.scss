@@ -1,17 +1,29 @@
 @import "../variables.scss";
 
+// .svc-question__content {
+//   .sd-table {
+//     td:empty,
+//     th:empty {
+//       width: initial;
+//     }
+//   }
+// }
 .svc-matrix-cell {
   position: relative;
+}
+
+.sd-table thead tr th .svc-matrix-cell {
+  padding: calcSize(1.5);
 }
 
 .svc-matrix-cell--selected {
   position: absolute;
   border: calcSize(0.25) solid $secondary;
   border-radius: calcSize(0.5);
-  top: calcSize(-1);
+  top: calcSize(0);
   left: calcSize(0);
   right: calcSize(0);
-  bottom: calcSize(-1);
+  bottom: calcSize(0);
   display: none;
   &.svc-visible {
     display: block;
@@ -27,8 +39,8 @@
 .svc-matrix-cell__question-controls {
   display: none;
   position: absolute;
-  top: calc(50% - 24px);
-  left: calc(50% - 24px);
+  top: calc(50% - 3 * #{$base-unit});
+  left: calc(50% - 3 * #{$base-unit});
 }
 
 .svc-matrix-cell__question-controls-button {
@@ -53,7 +65,23 @@
 
 .svc-question__content--selected-no-border {
   padding: 0;
-  width: calc(100% - 200px);
-  min-width: 560px;
+  width: calc(100% - 25 * #{$base-unit});
+  min-width: calcSize(70);
   box-shadow: none;
+  background-color: inherit;
+}
+
+.svc-matrix-cell__popup {
+  .sv-popup__scrolling-content {
+    margin-top: calcSize(1);
+    padding-top: 0;
+  }
+}
+
+.svc-question__content {
+  .sd-table__cell--detail-panel {
+    .svc-question__adorner {
+      z-index: 13;
+    }
+  }
 }

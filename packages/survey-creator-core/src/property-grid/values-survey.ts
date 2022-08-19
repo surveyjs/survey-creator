@@ -2,6 +2,7 @@ import { Question, Base } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../settings";
 import { SurveyHelper } from "../survey-helper";
+import { editorLocalization } from "../editorLocalization";
 
 export class DefaultValueEditor extends PropertyEditorSetupValue {
   constructor(
@@ -28,7 +29,6 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
     if (json.type == "expression") {
       json.type = "text";
     }
-    json.titleLocation = "hidden";
     if (!!json.cellType && json.type == "matrixdropdowncolumn") {
       json.type = json.cellType;
       delete json["cellType"];

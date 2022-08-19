@@ -1,0 +1,132 @@
+import { Selector } from "testcafe";
+import { url, changeToolboxLocation, getTabbedMenuItemByText, checkElementScreenshot, setJSON, collapseButtonSelector } from "../../helper";
+
+const title = "Toolbox Screenshot";
+
+fixture`${title}`.page`${url}`.beforeEach(async (t) => {
+});
+
+const translationTab = getTabbedMenuItemByText("Translation");
+
+test("Left toolbox", async (t) => {
+  const toolboxItem = Selector(".svc-toolbox__item");
+  const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
+  const toolboxElement = Selector(".svc-toolbox");
+
+  await setJSON({ pages: [{ name: "page1" }] });
+  await t.resizeWindow(2560, 1440);
+  await checkElementScreenshot("toolbox-left.png", toolboxElement, t);
+
+  await t.hover(toolboxItem);
+  await checkElementScreenshot("toolbox-left-hover-item.png", toolboxElement, t);
+
+  await t
+    .hover(translationTab) // move cursor from toolboxItem
+    .resizeWindow(1510, 870);
+  await checkElementScreenshot("toolbox-left-adaptive.png", toolboxElement, t);
+
+  await t.hover(toolboxItemDots);
+  await checkElementScreenshot("toolbox-left-hover-dots-item.png", toolboxElement, t);
+
+  await t
+    .hover(translationTab) // move cursor from toolboxItem
+    .resizeWindow(1240, 870);
+  await checkElementScreenshot("toolbox-left-adaptive-compact.png", toolboxElement, t);
+
+  await t.hover(toolboxItem);
+  await checkElementScreenshot("toolbox-left-compact-hover-item.png", toolboxElement, t);
+
+  await t.click(toolboxItemDots);
+  await checkElementScreenshot("toolbox-left-popup.png", Selector(".sv-popup.svc-toolbox-popup"), t);
+
+  await t.resizeWindow(2560, 1440);
+});
+
+test("Right toolbox", async (t) => {
+  const toolboxItem = Selector(".svc-toolbox__item");
+  const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
+
+  await setJSON({ pages: [{ name: "page1" }] });
+  await t
+    .resizeWindow(2560, 1440)
+    .click(collapseButtonSelector);
+  await changeToolboxLocation("right");
+
+  const toolboxElement = Selector(".svc-toolbox");
+  await checkElementScreenshot("toolbox-right.png", toolboxElement, t);
+
+  await t.hover(toolboxItem);
+  await checkElementScreenshot("toolbox-right-hover-item.png", toolboxElement, t);
+
+  await t
+    .hover(translationTab) // move cursor from toolboxItem
+    .resizeWindow(1510, 870);
+  await checkElementScreenshot("toolbox-right-adaptive.png", toolboxElement, t);
+
+  await t.hover(toolboxItemDots);
+  await checkElementScreenshot("toolbox-right-hover-dots-item.png", toolboxElement, t);
+
+  await t
+    .hover(translationTab) // move cursor from toolboxItem
+    .resizeWindow(1240, 870);
+  await checkElementScreenshot("toolbox-right-adaptive-compact.png", toolboxElement, t);
+
+  await t.hover(toolboxItem);
+  await checkElementScreenshot("toolbox-right-compact-hover-item.png", toolboxElement, t);
+
+  await t.click(toolboxItemDots);
+  await checkElementScreenshot("toolbox-right-popup.png", Selector(".sv-popup.svc-toolbox-popup"), t);
+});
+
+test("toolbox inside sidebar", async (t) => {
+  const toolboxItem = Selector(".svc-toolbox__item");
+  const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
+
+  await changeToolboxLocation("sidebar");
+  await t
+    .resizeWindow(1240, 870)
+    .click(toolboxButtonSelector)
+    .resizeWindow(2560, 1440);
+
+  const toolboxElement = Selector(".svc-toolbox");
+  await checkElementScreenshot("toolbox-inside-sidebar.png", toolboxElement, t);
+
+  await t.hover(toolboxItem);
+  await checkElementScreenshot("toolbox-inside-sidebar-hover-item.png", toolboxElement, t);
+});
+
+test("Toolbox tool pressed state", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  const toolboxTool = Selector(".svc-toolbox__tool");
+
+  await t.dispatchEvent(toolboxTool, "pointerdown");
+
+  await checkElementScreenshot("toolbox-tool-pressed-state.png", toolboxTool, t);
+
+  await t.dispatchEvent(toolboxTool, "pointerup");
+  await checkElementScreenshot("toolbox-tool-normal-state.png", toolboxTool, t);
+
+});
+
+test("designer tab view with page navigator", async (t) => {
+  await setJSON({
+    pages: [
+      {
+        "name": "page1",
+        "elements": [{ "type": "text", "name": "question1" }]
+      },
+      {
+        "name": "page2",
+        "elements": [{ "type": "text", "name": "question2" }]
+      }
+    ]
+  });
+  const designerTab = Selector(".svc-creator-tab");
+  await t
+    .click(".sd-page__title")
+    .resizeWindow(1450, 600);
+  await checkElementScreenshot("designer-tab-page-navigator-toolbox-left.png", designerTab, t);
+
+  await changeToolboxLocation("right");
+  await checkElementScreenshot("designer-tab-page-navigator-toolbox-right.png", designerTab, t);
+});

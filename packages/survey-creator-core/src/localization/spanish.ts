@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 var spanishTranslation = {
   survey: {
@@ -115,12 +115,11 @@ var spanishTranslation = {
     bold: "Negrita",
     italic: "Itálica",
     underline: "Subrayar",
-    fpAddQuestion: "Añadir pregunta ...",
+    addNewQuestion: "Añadir pregunta",
     selectPage: "Seleccionar página ...",
     chooseElement: "Elige el elemento ...",
     completedHtmlOnConditionItemText: "Mostrar si:",
     lg: {
-      addNewItem: "",
       page_visibilityName: "Visibilidad de la pagina",
       panel_visibilityName: "Visibilidad del panel",
       panel_enableName: "Panel habilitar / deshabilitar",
@@ -283,7 +282,7 @@ var spanishTranslation = {
     startWithNewLine: "¿Empieza con la nueva línea?",
     rows: "Número de filas",
     cols: "Recuento de columnas",
-    placeHolder: "Placeholder de entrada",
+    placeholder: "Placeholder de entrada",
     showPreview: "Mostrar área de vista previa",
     storeDataAsText:
       "Tienda el contenido del archivo en el resultado de JSON como texto",
@@ -628,7 +627,7 @@ var spanishTranslation = {
     valueFalse: "Falso",
     cols: "columnas",
     rows: "filas",
-    placeHolder: "marcador de posición",
+    placeholder: "marcador de posición",
     optionsCaption: "Texto opciones",
     expression: "expresión",
     format: "formato",

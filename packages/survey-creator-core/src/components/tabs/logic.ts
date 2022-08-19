@@ -1,4 +1,4 @@
-import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray } from "survey-core";
+import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -21,7 +21,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
 
   /**
    * The event is called when logic item is saved.
-   * <br/> options.item is the saved logic item.
+   * options.item is the saved logic item.
    */
   public onLogicItemSaved: Event<
     (sender: SurveyLogic, options: any) => any,
@@ -30,10 +30,10 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   /**
    * The event is called before logic item is saved. You can set options.error to non empty string to show error instead of saving the item.
    * You can use options.item.actions to access actions and optionally set errorText to a particular action.
-   * <br/> options.item is the editing logic item. options.item.actions contains the old actions.
-   * <br/> options.actions is the array of  logic actions that user edit and create.
-   * <br/> usedNamesInExpression - the string list of all variables (questions, calculatedValues, and so on) that are used in expression
-   * <br/> error - the error string. It is empty by default. You have to set it to non-empty string to show the error on saving.
+   * options.item is the editing logic item. options.item.actions contains the old actions.
+   * options.actions is the array of  logic actions that user edit and create.
+   * usedNamesInExpression - the string list of all variables (questions, calculatedValues, and so on) that are used in expression
+   * error - the error string. It is empty by default. You have to set it to non-empty string to show the error on saving.
    */
   public onLogicItemValidation: Event<
     (sender: SurveyLogic, options: any) => any,
@@ -41,8 +41,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   > = new Event<(sender: SurveyLogic, options: any) => any, any>();
   /**
    * The event is called before logic item is being removed.
-   * <br/> options.allowRemove is the option you can set to false and prevent removing.
-   * <br/> options.item is the logic item to remove.
+   * options.allowRemove is the option you can set to false and prevent removing.
+   * options.item is the logic item to remove.
    */
   public onLogicItemRemoving: Event<
     (sender: SurveyLogic, options: any) => any,
@@ -50,14 +50,12 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   > = new Event<(sender: SurveyLogic, options: any) => any, any>();
   /**
    * The event is called when logic item is removed.
-   * <br/> options.item is the removed logic item.
+   * options.item is the removed logic item.
    */
   public onLogicItemRemoved: Event<
     (sender: SurveyLogic, options: any) => any,
     any
   > = new Event<(sender: SurveyLogic, options: any) => any, any>();
-
-  koAfterRender: any;
 
   constructor(
     public survey: SurveyModel,
@@ -67,7 +65,6 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
     this.readOnly = this.optionsReadOnly;
     this.update();
-    this.koAfterRender = function () { };
   }
   dispose() {
     super.dispose();
@@ -77,7 +74,11 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   @propertyArray() items: Array<SurveyLogicItem>;
   @propertyArray() logicTypes: Array<SurveyLogicType>;
   @property() errorText: string;
-  @property() readOnly: boolean;
+  @property({
+    onSet: (value, target: SurveyLogic) => {
+      target.onReadOnlyChanged();
+    }
+  }) readOnly: boolean;
   @property() placeholderHtml: string;
 
   public get editableItem(): SurveyLogicItem {
@@ -157,9 +158,32 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       this.onChangedCallback(item, changeType);
     }
   }
-  public renameQuestion(oldName: string, newName: string) {
-    this.renameQuestionCore(oldName, newName, this.items);
-    this.renameQuestionCore(oldName, newName, this.invisibleItems);
+  public renameQuestion(oldName: string, newName: string): void {
+    this.items.forEach(item => item.renameQuestion(oldName, newName));
+    this.invisibleItems.forEach(item => item.renameQuestion(oldName, newName));
+  }
+  public renameItemValue(item: ItemValue, oldValue: any): void {
+    const question = this.getItemValueQuestion(item, oldValue);
+    if(!question) return;
+    this.items.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
+    this.invisibleItems.forEach(lItem => lItem.renameItemValue(question, item, oldValue));
+  }
+  public renameRowValue(item: ItemValue, oldValue: any): void {
+    const question = this.getItemValueQuestion(item, oldValue);
+    if(!question) return;
+    this.items.forEach(lItem => lItem.renameRowValue(question, item, oldValue));
+    this.invisibleItems.forEach(lItem => lItem.renameRowValue(question, item, oldValue));
+  }
+  public renameColumn(column: MatrixDropdownColumn, oldName: string): void {
+    const question: any = column.colOwner;
+    if(!question || !question.isQuestion) return;
+    this.items.forEach(lItem => lItem.renameColumn(question, column, oldName));
+    this.invisibleItems.forEach(lItem => lItem.renameColumn(question, column, oldName));
+  }
+  private getItemValueQuestion(item: ItemValue, oldValue: any): Question {
+    if(!item.locOwner || Helpers.isValueEmpty(oldValue) || Helpers.isValueEmpty(item.value)) return null;
+    const owner: any = item.locOwner;
+    return owner.isQuestion ? owner : null;
   }
   public removeQuestion(name: string) {
     this.removeQuestionCore(name, this.items);
@@ -177,20 +201,22 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     };
     this.onLogicItemValidation.fire(this, options);
     this.errorText = options.error;
-    if (!!this.errorText && !!this.survey.creator)
-      this.survey.creator.notify(this.errorText, "error");
+    const creator = (<any>this.survey).creator;
+    if (!!this.errorText && !!creator)
+      creator.notify(this.errorText, "error");
     return !!this.errorText;
   }
   public getUsedQuestions(): Question[] {
     const names: { [key: string]: Question } = {};
     this.items.forEach(item => {
       item.getQuestionNames().forEach(name => {
-        if (!names[name]) {
-          names[name] = this.survey.getQuestionByName(name);
+        const question = this.survey.getQuestionByName(name);
+        if (!!question && !names[name]) {
+          names[name] = question;
         }
       });
     });
-    const res: Question[] = [];
+    let res: Question[] = [];
     Object.keys(names).forEach(item => {
       if (!!names[item]) {
         res.push(names[item]);
@@ -208,7 +234,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       });
     });
 
-    const res: SurveyLogicType[] = [];
+    let res: SurveyLogicType[] = [];
     Object.keys(types).forEach(item => {
       if (!!types[item]) {
         res.push(types[item]);
@@ -225,15 +251,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected getEditingActions(): Array<SurveyLogicAction> {
     return [];
   }
-  private renameQuestionCore(
-    oldName: string,
-    newName: string,
-    items: Array<SurveyLogicItem>
-  ) {
-    for (var i = 0; i < items.length; i++) {
-      items[i].renameQuestion(oldName, newName);
-    }
-  }
+  protected onReadOnlyChanged(): void {}
   private removeQuestionCore(name: string, items: Array<SurveyLogicItem>) {
     for (var i = 0; i < items.length; i++) {
       items[i].removeQuestion(name);
@@ -332,27 +350,14 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   protected getAllElements(): Array<Base> {
     var res = [];
     this.AddElements(this.survey.pages, res);
-    this.AddElements(this.survey.getAllQuestions(), res);
+    this.AddElements(SurveyLogicTypes.baseTypes.question.getSelectorChoices(this.survey, null), res);
     this.AddElements(this.survey.getAllPanels(), res);
     this.AddElements(this.survey.triggers, res);
     this.AddElements(this.survey.completedHtmlOnCondition, res);
     this.AddElements(this.survey.calculatedValues, res);
-    this.AddElements(this.getMatrixColumns(), res);
+    this.AddElements(SurveyLogicTypes.baseTypes.matrixdropdowncolumn.getSelectorChoices(this.survey, null), res);
     this.AddElements(this.getValidators(), res);
     this.AddElements(this.getItemValues(), res);
-    return res;
-  }
-  private getMatrixColumns(): Array<Base> {
-    var res = [];
-    var questions = this.survey.getAllQuestions();
-    for (var i = 0; i < questions.length; i++) {
-      var q = questions[i];
-      var columns = q["columns"];
-      if (!columns) continue;
-      var prop = Serializer.findProperty(q.getType(), "columns");
-      if (!prop || prop.className !== "matrixdropdowncolumn") continue;
-      this.AddElements(columns, res);
-    }
     return res;
   }
   private getValidators(): Array<Base> {
@@ -396,7 +401,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
         types.indexOf(lt.baseClass) > -1 &&
         !Helpers.isValueEmpty(expression)
       ) {
-        var key = this.getExpressionHashKey(expression);
+        var key = this.getLogicItemHashKey(expression, element);
         var item = hash[key];
         if (!item) {
           item = new SurveyLogicItem(this, expression);
@@ -408,8 +413,16 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       }
     }
   }
-  private getExpressionHashKey(expression: string): string {
-    return expression.replace(" ", "").toLowerCase();
+  private getLogicItemHashKey(expression: string, element: Base): string {
+    const parentQuestion = this.getParentQuestion(element);
+    const parentName = !!parentQuestion ? "@" + parentQuestion.name : "";
+    return parentName + expression.replace(" ", "").toLowerCase();
+  }
+  private getParentQuestion(element: Base): Question {
+    const parentQuestion = (<any>element).parentQuestion;
+    if(!!parentQuestion) return parentQuestion;
+    if(element.isDescendantOf("matrixdropdowncolumn")) return (<any>element).colOwner;
+    return null;
   }
   private getElementAllTypes(element: Base) {
     var types = [];

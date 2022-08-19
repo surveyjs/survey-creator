@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var nbStrings = {
   //survey templates
@@ -116,12 +116,12 @@ export var nbStrings = {
     bold: "Fet",
     italic: "Kursiv",
     underline: "Underlinjet",
-    fpAddQuestion: "Legg til spørsmål...",
+    addNewQuestion: "Legg til spørsmål",
     selectPage: "Velg side...",
     chooseElement: "Velg element...",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
-      addNewItem: "", //Verdien er som standard hentet fra pe.addNew 'Add New', du kan for eksempel sette den til  'Legg til ny regel'  .
+      addNewItem: "Legg til ny regel",
       //Logic tab strings
       page_visibilityName: "Sidesynlighet",
       panel_visibilityName: "Panelsynlighet",
@@ -289,7 +289,7 @@ export var nbStrings = {
     startWithNewLine: "Må starte med ny linje?",
     rows: "Antall rader",
     cols: "Antall kolonner",
-    placeHolder: "Hjelpetekst",
+    placeholder: "Hjelpetekst",
     showPreview: "Er forhåndsvisning av bilde vist?",
     storeDataAsText: "Lagre filinnhold i JSON-resultat som tekst",
     maxSize: "Maksimum filstørrelse i bytes",
@@ -562,7 +562,7 @@ export var nbStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Velg side:",
     showInvisibleElements: "Vis usynlige elementer",
@@ -635,7 +635,6 @@ export var nbStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
 
     optionsCaption: "optionsCaption",
 

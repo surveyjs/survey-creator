@@ -2,7 +2,8 @@ import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObje
 import { editorLocalization } from "../../src/editorLocalization";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
-import { TabDesignerPlugin } from "../../src/components/tabs/designer";
+import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
+import { LogoImageViewModel } from "../../src/components/header/logo-image";
 
 test("Survey/page title/description placeholders text", () => {
   new CreatorTester();
@@ -15,27 +16,27 @@ test("Survey/page title/description placeholders text", () => {
       }
     ]
   });
-  const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string) => {
+  const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string, placeholderText?: string) => {
     const locStr: LocalizableString = new LocalizableString(owner, false, propertyName);
-    const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr);
+    const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr, null);
     const property: JsonObjectProperty = Serializer.findProperty(ownerName, propertyName);
-    const placeholder: string = editorLocalization.getString(property.placeholder);
+    const placeholder: string = placeholderText || editorLocalization.getString((<any>property).placeholder);
     expect(editor.placeholder).toEqual(placeholder);
   };
   checkPlaceholder(survey, "survey", "title");
   checkPlaceholder(survey, "survey", "description");
-  checkPlaceholder(survey.pages[0], "page", "title");
+  checkPlaceholder(survey.pages[0], "page", "title", "Page 1");
   checkPlaceholder(survey.pages[0], "page", "description");
 });
 
 test("Save survey action properties", () => {
   const creator = new CreatorTester();
-  const action = creator.getActionBarItem("icon-save");
+  const action = creator.getActionBarItem("svd-save");
   expect(action.visible).toBeFalsy();
   expect(action.active).toBeFalsy();
   expect(action.enabled).toBeFalsy();
 
-  creator.saveSurveyFunc = () => {};
+  creator.saveSurveyFunc = () => { };
   expect(action.visible).toBeTruthy();
   expect(action.active).toBeFalsy();
   expect(action.enabled).toBeFalsy();
@@ -57,16 +58,107 @@ test("Save survey action properties", () => {
 });
 
 test("StringEditorViewModelBase maxLength", () => {
-  let survey: SurveyModel = new SurveyModel({ });
-  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle);
+  let survey: SurveyModel = new SurveyModel({});
+  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle, null);
   expect(editor.maxLength).toBe(-1);
-  try{
+  try {
     Serializer.findProperty("survey", "title").maxLength = 4;
-    survey = new SurveyModel({ });
-    editor = new StringEditorViewModelBase(survey.locTitle);
+    survey = new SurveyModel({});
+    editor = new StringEditorViewModelBase(survey.locTitle, null);
     expect(editor.maxLength).toBe(4);
   }
   finally {
     Serializer.findProperty("survey", "title").maxLength = -1;
   }
+});
+
+test("Designer widthMode css test", () => {
+  const creator = new CreatorTester();
+  var designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  creator.survey.widthMode = "static";
+  expect(designerPlugin.model.getDesignerCss()).toEqual("sd-container-modern sd-container-modern--static");
+  creator.survey.widthMode = "responsive";
+  expect(designerPlugin.model.getDesignerCss()).toEqual("sd-container-modern sd-container-modern--responsive");
+});
+
+test("Select survey in designer", () => {
+  const creator = new CreatorTester();
+  var designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  creator.JSON = { elements: [{ name: "question1", type: "text" }] };
+
+  creator.selectElement(creator.survey.getAllQuestions()[0]);
+  expect(creator.selectedElementName).toEqual("question1");
+  designerPlugin.model.clickDesigner();
+  expect(creator.selectedElementName).toEqual("survey");
+});
+
+test("StringEditorViewModelBase page title placeholder", () => {
+  Serializer.findProperty("page", "title")["placeholder"] = "pe.pageTitlePlaceholder";
+  let survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text" }
+        ]
+      }
+    ]
+  });
+  let page1 = survey.pages[0];
+  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
+  expect(page1.visibleIndex).toBe(0);
+  expect(page1.num).toBe(1);
+  expect(editor.placeholderValue).toBeUndefined();
+  expect(editor.placeholder).toBe("Page 1");
+  expect(editor.placeholderValue).toBe("Page 1");
+});
+
+test("Logo css", () => {
+  const creator = new CreatorTester();
+  var logo = new LogoImageViewModel(creator, null);
+  expect(logo.allowEdit).toBe(true);
+  expect(logo.containerCss).toBe("svc-logo-image-container svc-logo-image-container--editable");
+  creator.readOnly = true;
+  expect(logo.allowEdit).toBe(false);
+  expect(logo.containerCss).toBe("svc-logo-image-container");
+});
+
+test("Logo should be unclickable in readonly mode", () => {
+  const creator = new CreatorTester();
+  var logo = new LogoImageViewModel(creator, null);
+  creator.readOnly = true;
+  logo.chooseFile(logo);
+});
+
+test("StringEditorViewModelBase skip undo/redo hot keys", () => {
+  let survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { type: "text" }
+        ]
+      }
+    ]
+  });
+  let page1 = survey.pages[0];
+  let editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
+  let result = "";
+  const event = {
+    keyCode: 70,
+    ctrlKey: true,
+    stopImmediatePropagation: () => result+="->ip",
+    preventDefault: () => result+="->pd"
+  };
+  expect(result).toBe("");
+  editor.checkConstraints(event);
+  expect(result).toBe("");
+  event.keyCode = 89;
+  editor.checkConstraints(event);
+  expect(result).toBe("->ip->pd");
+  event.keyCode = 90;
+  editor.checkConstraints(event);
+  expect(result).toBe("->ip->pd->ip->pd");
 });

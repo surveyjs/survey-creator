@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var koreanStrings = {
   //survey templates
@@ -131,7 +131,7 @@ export var koreanStrings = {
     isRequired: "필수입니까?",
     startWithNewLine: "새 줄로 시작하겠습니까?",
     rows: "행 수",
-    placeHolder: "입력 자리 표시자 ",
+    placeholder: "입력 자리 표시자 ",
     showPreview: "이미지 미리보기가 표시됩니까?",
     storeDataAsText: "파일 내용을 JSON 결과에 텍스트로 저장",
     maxSize: "최대 파일 크기(bytes)",
@@ -320,7 +320,7 @@ export var koreanStrings = {
     titleHtml: "HTML",
     titleJavaScript: "자바스크립트"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "테스트 할 페이지를 선택하십시오:"
   },
@@ -388,7 +388,7 @@ export var koreanStrings = {
 
     cols: "열",
     rows: "행",
-    placeHolder: "자리 표시자",
+    placeholder: "자리 표시자",
 
     optionsCaption: "옵션 캡션",
 

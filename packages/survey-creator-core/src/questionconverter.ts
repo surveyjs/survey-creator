@@ -1,5 +1,6 @@
 import * as Survey from "survey-core";
 import { QuestionConvertMode, settings } from "./settings";
+import { IQuestionToolboxItem, QuestionToolbox } from "./toolbox";
 
 export class QuestionConverter {
   public static convertInfo = {};
@@ -11,10 +12,10 @@ export class QuestionConverter {
   }
   public static getConvertToClasses(
     className: string,
-    availableTypes: Array<string> = null
+    availableTypes: Array<string> = null, includeCurrent: boolean = false
   ): Array<string> {
     var res = settings.questionConvertMode == QuestionConvertMode.AllTypes
-      ? getAllQuestionTypes(className)
+      ? getAllQuestionTypes(className, includeCurrent)
       : QuestionConverter.convertInfo[className];
     if (!res) return [];
     if (
@@ -30,27 +31,85 @@ export class QuestionConverter {
   }
   public static convertObject(
     obj: Survey.Question,
-    convertToClass: string
+    convertToClass: string,
+    defaultJSON: any = null
   ): Survey.Question {
     if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
-    var newQuestion = Survey.Serializer.createClass(convertToClass);
+    var newQuestion = Survey.QuestionFactory.Instance.createQuestion(convertToClass, obj.name);
+    if(!newQuestion) {
+      newQuestion = Survey.Serializer.createClass(convertToClass, {});
+    }
     newQuestion.name = obj.name;
-    newQuestion.fromJSON(obj.toJSON());
+    const json = newQuestion.toJSON();
+    const qJson = obj.toJSON();
+    for (var key in qJson) {
+      json[key] = qJson[key];
+    }
+    QuestionConverter.updateJSON(json, convertToClass, obj.getType(), defaultJSON);
+    newQuestion.fromJSON(json);
     var panel = <Survey.PanelModelBase>obj.parent;
     var index = panel.elements.indexOf(obj);
+    (<any>panel).isConverting = true;
     panel.removeElement(obj);
     panel.addElement(newQuestion, index);
+    delete (<any>panel).isConverting;
     newQuestion.onSurveyLoad();
     return <Survey.Question>newQuestion;
   }
+  private static updateJSON(json: any, convertToClass: string, convertFromClass: string, defaultJSON: any): any {
+    let questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
+    if(questionDefaultSettings) {
+      if(convertToClass === "image" && !json.imageLink) {
+        json.imageLink = questionDefaultSettings.imageLink;
+      }
+      if(convertToClass === "imagepicker") {
+        if(!json.choices) {
+          json.choices = questionDefaultSettings.choices;
+        }
+      } else {
+        for(var key in questionDefaultSettings) {
+          if(!defaultJSON || !defaultJSON[key]) {
+            json[key] = questionDefaultSettings[key];
+          }
+        }
+      }
+    }
+    if(convertToClass === "rating" && json.choices) {
+      if(!defaultJSON || !defaultJSON.choices ||
+        !Survey.Helpers.isArraysEqual(defaultJSON.choices, json.choices)) {
+        json.rateValues = json.choices;
+      }
+    }
+    if(Survey.Serializer.isDescendantOf(convertToClass, "matrix") &&
+       Survey.Serializer.isDescendantOf(convertFromClass, "matrixdropdown") &&
+       json.columns) {
+      json.columns = json.columns.map(col => col.title ? { value: col.name, text: col.title } : col.name);
+    }
+    if(Survey.Serializer.isDescendantOf(convertToClass, "matrixdropdown") &&
+       Survey.Serializer.isDescendantOf(convertFromClass, "matrix") &&
+       json.columns) {
+      json.columns = json.columns.map(col => <any>{ name: col.value || col, title: col.text });
+    }
+    else {
+      if(json.rateValues) {
+        json.choices = json.rateValues;
+      }
+    }
+  }
 }
 
-function getAllQuestionTypes(className: string): Array<string> {
+function getAllQuestionTypes(className: string, includeCurrent: boolean = false): Array<string> {
   var classes = Survey.Serializer.getChildrenClasses("question", true);
   var res = [];
   for (var i = 0; i < classes.length; i++) {
-    if (classes[i].name !== className) {
+    if (includeCurrent || classes[i].name !== className) {
       res.push(classes[i].name);
+    }
+  }
+  const widgets = Survey.CustomWidgetCollection.Instance.widgets;
+  for(var i = 0; i < widgets.length; i ++) {
+    if (includeCurrent || widgets[i].name !== className) {
+      res.push(widgets[i].name);
     }
   }
   return res;

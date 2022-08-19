@@ -1,5 +1,5 @@
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
-import { QuestionRadiogroupModel, Serializer } from "survey-core";
+import { QuestionRadiogroupModel, QuestionTextBase, Serializer } from "survey-core";
 import { EmptySurveyCreatorOptions } from "../../src/settings";
 
 test("Create survey with editingObj", () => {
@@ -62,4 +62,12 @@ test("options.maximumChoicesCount in FastEntry editor", () => {
   var result = fastEntryEditor.apply();
   expect(result).toBeTruthy();
   expect(fastEntryEditor.comment.errors).toHaveLength(0);
+});
+test("Placeholder for FastEntry editor", () => {
+  var originalElement = new QuestionRadiogroupModel("originalElement");
+  const options = new EmptySurveyCreatorOptions();
+  var fastEntryEditor = new FastEntryEditor(originalElement.choices, options);
+  expect((fastEntryEditor.editSurvey.getAllQuestions()[0] as QuestionTextBase).placeholder).toEqual("value 1|text 1\nvalue 2|text 2\nvalue 3");
+  var fastEntryEditor2 = new FastEntryEditor(originalElement.choices, options, "itemvalue", ["item", "string", "column"]);
+  expect((fastEntryEditor2.editSurvey.getAllQuestions()[0] as QuestionTextBase).placeholder).toEqual("item 1|string 1|column 1\nitem 2|string 2|column 2\nitem 3");
 });

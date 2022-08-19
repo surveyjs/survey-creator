@@ -1,5 +1,5 @@
 //Translated by Thomas Borgström
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export let svStrings = {
   //survey templates
@@ -152,7 +152,7 @@ export let svStrings = {
     isRequired: "Nödvändig?",
     startWithNewLine: "Starta på en ny rad?",
     rows: "Antal rader",
-    placeHolder: "Mata in i fältet",
+    placeholder: "Mata in i fältet",
     showPreview: "Förhandsvinsning av bild?",
     storeDataAsText: "Lagra filinnehållet i JSON som text",
     maxSize: "Max filstorlek i bytes",
@@ -347,7 +347,7 @@ export let svStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Välj sida för att testa den:",
     showInvisibleElements: "Visa osynliga element",
@@ -418,7 +418,6 @@ export let svStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
 
     optionsCaption: "optionsCaption",
 

@@ -1,8 +1,4 @@
-export var SvgBundleViewModel: any;
-if (!!document) {
-  var svgTemplate = require("./svgbundle.html");
-  var templateHolder = document.createElement("div");
-  templateHolder.style.display = "none";
-  templateHolder.innerHTML = svgTemplate;
-  document.head.appendChild(templateHolder);
-}
+import { SvgRegistry } from "survey-core";
+export var svgBundle;
+const path = (<any>require).context("./images", false, /\.svg$/);
+SvgRegistry.registerIconsFromFolder(path);

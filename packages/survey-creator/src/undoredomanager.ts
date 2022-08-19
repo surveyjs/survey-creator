@@ -96,6 +96,9 @@ export class UndoRedoManager {
     }
     this._preparingTransaction = null;
   }
+  public get isProcessingUndoRedo(): boolean {
+    return this._ignoreChanges === true;
+  }
   canUndo() {
     return !!this._getCurrentTransaction();
   }

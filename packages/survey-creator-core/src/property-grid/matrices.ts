@@ -1,22 +1,9 @@
-import {
-  Base,
-  IAction,
-  ItemValue,
-  JsonObjectProperty,
-  MatrixDropdownColumn,
-  MatrixDropdownRowModelBase,
-  MatrixDynamicRowModel,
-  PanelModel,
-  Question,
-  QuestionMatrixDropdownRenderedRow,
-  QuestionMatrixDynamicModel,
-  Serializer
-} from "survey-core";
+import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../settings";
 import { getNextValue } from "../utils/utils";
-import { FastEntryEditor } from "./fast-entry";
+import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
   IPropertyEditorSetup,
   PropertyGridEditor,
@@ -25,8 +12,8 @@ import {
 } from "./index";
 import { updateMatrixRemoveAction } from "../utils/actions";
 
-class SurveyHelper {
-  public static getNewColumnName(
+export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
+  static getNewColumnName(
     objs: Array<any>,
     keyPropName: string,
     baseName: string
@@ -39,16 +26,37 @@ class SurveyHelper {
     }
     return getNextValue(baseName, arr);
   }
-}
-
-export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
-    question.onGetValueForNewRowCallBack = (
+    (<any>question).onGetValueForNewRowCallBack = (
       sender: QuestionMatrixDynamicModel
     ): any => {
       return this.createNewItem(sender, prop);
     };
     this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question, prop);
+  }
+  private initializePlaceholder(rowObj: any, cellQuestion: Question, propertyName: string) {
+    const objType = typeof rowObj.getType === "function" && rowObj.getType();
+    if (cellQuestion.getType() === "text" && !!objType) {
+      if (propertyName === "text" && objType === "itemvalue") {
+        (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => rowObj.text);
+      }
+      if (propertyName === "title" && objType === "matrixdropdowncolumn") {
+        (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => rowObj.title);
+      }
+    }
+  }
+  public onMatrixCellCreated(obj: Base, options: any) {
+    const rowObj = options.row.editingObj;
+    if (!rowObj) return;
+    const q = options.cellQuestion;
+    q.obj = rowObj;
+    this.initializePlaceholder(rowObj, q, options.columnName);
+    q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
+  }
+  private updateMatixActionsClasses(actions: Array<IAction>) {
+    actions.forEach(action => {
+      action.innerCss = `${action.innerCss || ""} spg-action-button--muted`;
+    });
   }
   public onGetMatrixRowAction(
     obj: Base,
@@ -61,8 +69,11 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (this.getEditItemAsStandAlone()) {
       actions.push({
         id: "svd-grid-edit-column",
+        iconName: "icon-edit",
         title: editorLocalization.getString("pe.edit"),
-        component: "sv-action-bar-item",
+        visibleIndex: 0,
+        showTitle: false,
+        location: "end",
         action: () => {
           var column = <MatrixDropdownColumn>options.row.editingObj;
           setObjFunc(column);
@@ -80,46 +91,30 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       showDetailAction.location = "end";
       showDetailAction.action = () => {
         row.showHideDetailPanelClick();
-        showDetailAction.iconName = row.isDetailPanelShowing
-          ? "icon-editingfinish"
-          : "icon-edit";
+        showDetailAction.iconName = row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";
       };
       showDetailAction.visibleIndex = 0;
       row.onDetailPanelShowingChanged = () => {
         showDetailAction.iconName = this.getShowDetailActionIconName(row);
       };
     }
+    this.updateMatixActionsClasses(actions);
   }
   private getShowDetailActionIconName(row: MatrixDynamicRowModel) {
-    return row.isDetailPanelShowing ? "icon-editingfinish" : "icon-edit";
+    return row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";
   }
   public onGetQuestionTitleActions(obj: Base, options: any): void {
     const question: QuestionMatrixDynamicModel = options.question;
     options.titleActions.push({
       id: "add-item",
-      iconName: "icon-add(small)",
+      iconName: "icon-add",
       title: question.addRowText,
       showTitle: false,
       action: () => {
         question.addRow();
       },
-      enabled: question.canAddRow
+      enabled: <any>new ComputedUpdater<boolean>(() => (<QuestionMatrixDropdownModelBase>question).canAddRow)
     });
-  }
-  public onValueChanged(
-    obj: Base,
-    prop: JsonObjectProperty,
-    question: Question
-  ) {
-    this.updateTitleActions(question);
-  }
-  protected updateTitleActions(question: Question) {
-    const addAction: IAction = question.titleActions.filter(
-      (item: IAction) => item.id === "add-item"
-    )[0];
-    if (!!addAction) {
-      addAction.enabled = question.canAddRow;
-    }
   }
   protected createNewItem(
     matrix: QuestionMatrixDynamicModel,
@@ -133,7 +128,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     var keyValue = null;
     if (!!baseValue && !!keyPropName) {
-      var newName = SurveyHelper.getNewColumnName(
+      var newName = PropertyGridEditorMatrix.getNewColumnName(
         matrix.value,
         keyPropName,
         baseValue
@@ -147,7 +142,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!!this.getObjTypeName()) {
       item[this.getObjTypeName()] = item.getType();
     }
-    var arr = matrix.obj[prop.name];
+    var arr = (<any>matrix).obj[prop.name];
     arr.push(item);
     if (arr != matrix.value) {
       matrix.value = arr;
@@ -261,23 +256,24 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       renderedRow.cells = [renderedRow.cells[1]];
       renderedRow.cells[0].colSpans += 2;
     };
+    const q: any = matrix;
     matrix.onCreateDetailPanelCallback = (
       row: MatrixDropdownRowModelBase,
       panel: PanelModel
     ) => {
       new PropertyJSONGenerator(
         row.editingObj,
-        matrix.options,
-        matrix.obj,
-        matrix.property
+        q.options,
+        q.obj,
+        q.property
       ).setupObjPanel(panel, true);
     };
-    matrix.allowRowsDragAndDrop = this.getAllowRowDragDrop() && !matrix.isReadOnly;
-    if (!!matrix.options) {
-      this.setupUsingOptions(obj, matrix, matrix.options, prop);
+    matrix.allowRowsDragAndDrop = this.getAllowRowDragDrop(prop) && !matrix.isReadOnly;
+    if (!!q.options) {
+      this.setupUsingOptions(obj, matrix, q.options, prop);
     }
   }
-  protected getAllowRowDragDrop(): boolean { return false; }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return false; }
   private calcHasPropertiesInDetail(
     matrix: QuestionMatrixDynamicModel,
     prop: JsonObjectProperty
@@ -288,8 +284,8 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     var panel = new PanelModel("");
     new PropertyJSONGenerator(
       newObj,
-      matrix.options,
-      matrix.obj,
+      (<any>matrix).options,
+      (<any>matrix).obj,
       prop
     ).setupObjPanel(panel, true);
     return panel.elements.length > 0;
@@ -323,15 +319,14 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       cellType: "text",
       rowCount: 0,
       columns: columns,
+      showHeader: columns.length > 2,
+      hideColumnsIfEmpty: true,
       addRowText: this.getAddRowText(prop),
       keyDuplicationError: editorLocalization.getString(
         "pe.propertyIsNoUnique"
       ),
-      emptyRowsText: editorLocalization.getString("pe.listIsEmpty")
+      emptyRowsText: this.getEmptyRowsText(prop)
     };
-    if (columns.length < 2) {
-      res.showHeader = false;
-    }
     if (this.getShowDetailPanelOnAdding()) {
       res.detailPanelShowOnAdding = true;
     }
@@ -340,6 +335,14 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       res.maxRowCount = maxRowCount;
     }
     return res;
+  }
+  protected getEmptyRowsText(prop: JsonObjectProperty) {
+    let locName = "pe.listIsEmpty";
+    const propLocName = locName + "@" + prop.name;
+    if (!!editorLocalization.hasString(propLocName)) {
+      locName = propLocName;
+    }
+    return editorLocalization.getString(locName);
   }
   protected getMaximumRowCount(
     obj: Base,
@@ -399,6 +402,8 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       matrix.allowAddRows = false;
       matrix.allowRemoveRows = false;
     }
+    (<any>matrix).allowRemoveAllItems = evtOptions.allowRemoveAllItems;
+    (<any>matrix).showTextView = evtOptions.showTextView;
   }
 }
 
@@ -414,6 +419,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     question: Question,
     options: ISurveyCreatorOptions
   ): boolean {
+    if ((<any>question).showTextView === false) return false;
     var matrix = <QuestionMatrixDynamicModel>question;
     var column = matrix.getColumnByName("value");
     var items = question.value;
@@ -425,15 +431,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       !this.hasVisibleIfOrEnableIf(items)
     );
   }
-  public setupMatrixQuestion(
-    obj: Base,
-    matrix: QuestionMatrixDynamicModel,
-    prop: JsonObjectProperty
-  ) {
-    super.setupMatrixQuestion(obj, matrix, prop);
-    matrix.showHeader = false;
-  }
-  protected getAllowRowDragDrop(): boolean { return true; }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
   public createPropertyEditorSetup(
     obj: Base,
     prop: JsonObjectProperty,
@@ -441,10 +439,18 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
     var names = [];
-    question.columns.forEach((col) => {
+    (<any>question).columns.forEach((col) => {
       names.push(col.name);
     });
     return new FastEntryEditor(obj[prop.name], options, prop.className, names);
+  }
+  public canClearPropertyValue(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): boolean {
+    return (<any>question).allowRemoveAllItems !== false;
   }
   public clearPropertyValue(
     obj: Base,
@@ -525,7 +531,7 @@ export class PropertyGridEditorMatrixColumns extends PropertyGridEditorMatrix {
   ): number {
     return options.maximumColumnsCount;
   }
-  protected getAllowRowDragDrop(): boolean { return true; }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
 
 export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
@@ -554,7 +560,7 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "page";
   }
-  protected getAllowRowDragDrop(): boolean { return true; }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
 
 export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditorMatrix {
@@ -575,6 +581,10 @@ export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditor
   }
   protected getShowDetailPanelOnAdding(): boolean {
     return true;
+  }
+  protected setupMatrixQuestion(obj: Base, matrix: QuestionMatrixDynamicModel, prop: JsonObjectProperty): void {
+    super.setupMatrixQuestion(obj, matrix, prop);
+    matrix.isUniqueCaseSensitive = false;
   }
 }
 export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMatrix {
@@ -601,7 +611,7 @@ export class PropertyGridEditorMatrixUrlConditions extends PropertyGridEditorMat
 }
 export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "textitems";
+    return prop.type == "textitem[]";
   }
   /*
   protected getEditItemAsStandAlone(): boolean {
@@ -618,6 +628,32 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
   }
   protected getBaseValue(prop: JsonObjectProperty): string {
     return "item";
+  }
+  protected getAllowRowDragDrop(): boolean {
+    return true;
+  }
+  public createPropertyEditorSetup(
+    obj: Base,
+    prop: JsonObjectProperty,
+    question: Question,
+    options: ISurveyCreatorOptions
+  ): IPropertyEditorSetup {
+    var names = [];
+    (<any>question).columns.forEach((col) => {
+      names.push(col.name);
+    });
+    return new FastEntryEditorBase(obj[prop.name], options, prop.className, names);
+  }
+  public onMatrixCellCreated(obj: Base, options: any): void {
+    super.onMatrixCellCreated(obj, options);
+    const q = options.cellQuestion;
+    if (!options.row.editingObj) return;
+    const editor = options.row.editingObj.editor;
+    if (!!editor && !!q.property) {
+      editor.registerFunctionOnPropertyValueChanged(q.property.name, () => {
+        q.value = editor[q.property.name];
+      });
+    }
   }
 }
 
@@ -639,12 +675,13 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     return res;
   }
   public onMatrixCellCreated(obj: Base, options: any) {
-    if (options.columnName != this.getObjTypeName()) {
-      return;
+    super.onMatrixCellCreated(obj, options);
+    const q = options.cellQuestion;
+    if (options.columnName === this.getObjTypeName()) {
+      q.showOptionsCaption = false;
+      q.choices = this.getChoices(obj);
+      q.value = options.row.editingObj.getType();
     }
-    options.cellQuestion.showOptionsCaption = false;
-    options.cellQuestion.choices = this.getChoices(obj);
-    options.cellQuestion.value = options.row.editingObj.getType();
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
     if (options.columnName != this.getObjTypeName()) {
@@ -713,6 +750,7 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   protected getDefaultClassName(prop: JsonObjectProperty): string {
     return "runexpressiontrigger";
   }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
   protected getChoices(obj: Base): Array<any> {
     var classes = Serializer.getChildrenClasses("surveytrigger", true);
     var res = [];
@@ -729,17 +767,13 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
     return res;
   }
 }
-
 export class PropertyGridEditorBindings extends PropertyGridEditor {
+
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "bindings";
   }
-  public getJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): any {
-    var res = {
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const res = {
       type: "matrixdropdown",
       rows: this.getRows(obj),
       columns: this.getColumns(obj, options)
@@ -747,16 +781,28 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
     return res;
   }
   public onMatrixCellCreated(obj: Base, options: any) {
-    var bindingValue = obj.bindings.getValueNameByPropertyName(
-      options.row.rowName
-    );
+    const bindingValue = obj.bindings.getValueNameByPropertyName(options.row.rowName);
     if (!!bindingValue) {
       options.cellQuestion.value = bindingValue;
     }
   }
-  public onMatrixCellValueChanged(obj: Base, options: any) {
-    obj.bindings.setBinding(options.row.rowName, options.value);
+
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    question.valueFromDataCallback = function (value: any): any {
+      if (!value) return value;
+      let result: any = {};
+      Object.keys(value).forEach(bindingName => result[bindingName] = { value: value[bindingName] });
+      return result;
+    };
+
+    question.valueToDataCallback = function (newValue: any): any {
+      if (!newValue) return newValue;
+      const result: any = {};
+      Object.keys(newValue).forEach(bindingName => result[bindingName] = newValue[bindingName].value);
+      return result;
+    };
   }
+
   private getRows(obj: Base): Array<any> {
     var props = obj.bindings.getProperties();
     var res = [];

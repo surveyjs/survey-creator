@@ -1,5 +1,5 @@
 //Uncomment this line on creating a translation file
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export var fiStrings = {
   //survey templates
@@ -116,12 +116,11 @@ export var fiStrings = {
     bold: "Lihavoitu",
     italic: "Kursiivi",
     underline: "Alleviivaa",
-    fpAddQuestion: "Lisää kysymys...",
+    addNewQuestion: "Lisää kysymys",
     selectPage: "Valitse sivu...",
     chooseElement: "Valitse elementti...",
     //completedHtmlOnConditionItemText: "Näytä jos:",
     lg: {
-      addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       page_visibilityName: "Sivun näkyvyys",
       panel_visibilityName: "Panelin näkyvyys",
@@ -289,7 +288,7 @@ export var fiStrings = {
     startWithNewLine: "Onko aloitus uudella rivillä?",
     rows: "Rivit",
     cols: "Sarakeet",
-    placeHolder: "Syötä paikkamerkintä",
+    placeholder: "Syötä paikkamerkintä",
     showPreview: "Näytä esikatselu",
     storeDataAsText: "Tallenna tiedostosisältö JSON-tulokseen tekstinä",
     maxSize: "Tiedoston enimmäiskoko tavuina",
@@ -567,7 +566,7 @@ export var fiStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Valitse sivu testataksesi sitä:",
     showInvisibleElements: "Näytä näkymätön elementti",
@@ -643,7 +642,6 @@ export var fiStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
 
     optionsCaption: "optionsCaption",
 

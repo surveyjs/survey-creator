@@ -1,10 +1,11 @@
 import * as Survey from "survey-core";
 import { editorLocalization } from "./editorLocalization";
+import { wrapTextByCurlyBraces } from "./utils/utils";
 
 export class ExpressionToDisplayText {
   private currentQuestion: Survey.Question;
   private showTitles: boolean;
-  constructor(public survey: Survey.SurveyModel, private options: any = null) {}
+  constructor(public survey: Survey.SurveyModel, private options: any = null) { }
   public toDisplayText(expression: string): string {
     if (!this.survey) return expression;
     this.showTitles =
@@ -17,6 +18,9 @@ export class ExpressionToDisplayText {
     var variables = [];
     node.setVariables(variables);
     return this.replaceVariables(expression, variables);
+  }
+  public toExpression(node: Survey.Operand): string {
+    return this.toDisplayTextCore(node);
   }
   private toDisplayTextCore(node: Survey.Operand): string {
     this.currentQuestion = null;
@@ -48,8 +52,8 @@ export class ExpressionToDisplayText {
   }
   private getQuestionText(op: Survey.Variable): string {
     var question = this.getQuestionByName(op.variable);
-    if (!question || !question.title) return undefined;
-    return "{" + question.title + "}";
+    if (!question || !question.title) return op.variable;
+    return wrapTextByCurlyBraces(question.title);
   }
   private getDisplayText(op: Survey.Const): string {
     if (!this.currentQuestion) return undefined;
@@ -144,16 +148,17 @@ export class ExpressionToDisplayText {
   private replaceVariable(expression: string, variable: string): string {
     var question = this.getQuestionByName(variable);
     if (!question || !question.title) return expression;
-    return expression.replace("{" + variable + "}", "{" + question.title + "}");
+    return expression.replace(wrapTextByCurlyBraces(variable), wrapTextByCurlyBraces(question.title));
   }
   private getQuestionByName(name: string): Survey.Question {
+    if(!this.survey) return null;
     return <Survey.Question>this.survey.getQuestionByValueName(name);
   }
 }
 
 export class ExpressionRemoveVariable {
   private wasRemoved: boolean;
-  constructor() {}
+  constructor() { }
   public remove(expression: string, variable: string): string {
     var parser = new Survey.ConditionsParser();
     var node = parser.parseExpression(expression);

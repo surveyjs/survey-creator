@@ -3,8 +3,6 @@
 var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-//var TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-var dts = require("dts-bundle");
 var rimraf = require("rimraf");
 var packageJson = require("./package.json");
 var fs = require("fs");
@@ -55,6 +53,8 @@ var buildPlatformJson = {
     packageJson.name + ".js",
     packageJson.name + ".d.ts",
     packageJson.name + ".min.js",
+    "survey-creator-core.i18n.js",
+    "survey-creator-core.i18n.min.js",
   ],
   main: packageJson.name + ".js",
   repository: {
@@ -69,16 +69,14 @@ var buildPlatformJson = {
     "ace-builds": "^1.4.12",
   },
   dependencies: {
-    //"survey-core": "^" + packageJson.version,
-    //"survey-core": "^1.8.23",
-    "survey-core": "^1.8.23",
-    knockout: "^3.5.0",
+    "survey-core": packageJson.version
   },
   devDependencies: {},
 };
 
 module.exports = function (options) {
   var buildPath = __dirname + "/build/";
+  var dts_generator = __dirname + "/d_ts_generator.js";
   var isProductionBuild = options.buildType === "prod";
 
   function createSVGBundle() {
@@ -124,42 +122,10 @@ module.exports = function (options) {
   var percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
       console.log("Build started... good luck!");
-      createSVGBundle();
     } else if (1 == percentage) {
       if (isProductionBuild) {
-        dts.bundle({
-          name: "../../" + packageJson.name,
-          main: buildPath + "typings/entries/index.d.ts",
-          outputAsModuleFolder: true,
-          headerText: dts_banner,
-        });
-        
-        var fileName = buildPath + packageName + ".d.ts";
-
-        //removeLines(
-        //  fileName,
-        //  /^import\s+.*("|')survey-core("|');\s*(\n|\r)?/gm
-        //);
-        //removeLines(fileName, /^import\s+.*("|')\..*("|');\s*(\n|\r)?/gm);
-        removeLines(fileName, /export let\s+\w+:\s+\w+;/g);
-        //removeLines(fileName, /export default\s+\w+;/g);
-        /*replace.sync(
-          {
-            files: buildPath + packageJson.name + ".d.ts",
-            from: /export let\s+\w+:\s+\w+;/,
-            to: "",
-          },
-          (error, changes) => {
-            if (error) {
-              return console.error("Error occurred:", error);
-            }
-            console.log(
-              "check me :     " + buildPath + packageJson.name + ".d.ts"
-            );
-            console.log("Modified files:", changes.join(", "));
-          }
-        );*/
-
+        console.log("Generating d.ts file: " + dts_generator);
+        require(dts_generator);
         rimraf.sync(buildPath + "typings");
         fs.createReadStream("./README.md").pipe(
           fs.createWriteStream(buildPath + "README.md")
@@ -238,11 +204,17 @@ module.exports = function (options) {
           loader: "html-loader",
         },
         {
-          test: /\.(svg|png)$/,
-          use: {
-            loader: "url-loader",
-            options: {},
-          },
+          test: /\.svg$/,
+          oneOf: [
+            {
+              exclude: path.resolve(__dirname, "./src/images/simulator/"),
+              use: "svg-inline-loader"
+            },
+            {
+              include: path.resolve(__dirname, "./src/images/simulator/"),
+              use: "url-loader"
+            },
+          ]
         },
       ],
     },

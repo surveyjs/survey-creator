@@ -1,18 +1,23 @@
 export interface ISurveyQuestionEditorDefinition {
   title?: string;
-  properties?: Array<string | { name: string, title?: string, tab?: string }>;
-  tabs?: Array<{
-    name: string,
-    index?: number,
-    title?: string,
-    visible?: boolean,
-  }>;
+  properties?: Array<string | IPropertyEditorInfo>;
+  tabs?: Array<IPropertyTabInfo>;
+}
+export interface IPropertyEditorInfo {
+  name: string;
+  title?: string;
+  tab?: string;
+  placeholder?: string;
 }
 
+export interface IPropertyTabInfo {
+  name: string;
+  index?: number;
+  title?: string;
+  visible?: boolean;
+}
 export class SurveyQuestionEditorDefinition {
-  public static definition: {
-    [key: string]: ISurveyQuestionEditorDefinition,
-  } = {
+  public static definition: { [key: string]: ISurveyQuestionEditorDefinition } = {
     question: {
       properties: [
         "name",
@@ -40,6 +45,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "defaultValue", tab: "data" },
         { name: "correctAnswer", tab: "data" },
         { name: "useDisplayValuesInTitle", tab: "data" },
+        { name: "clearIfInvisible", tab: "data" },
         { name: "requiredErrorText", tab: "validation" },
         { name: "validators", tab: "validation" }
       ],
@@ -54,18 +60,17 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "rows", tab: "layout" },
         { name: "cols", tab: "layout" },
-        "placeHolder",
+        "placeholder",
         { name: "maxLength", tab: "validation" },
-        { name: "multiLine", tab: "data" },
         { name: "textUpdateMode", tab: "data" },
         { name: "autoGrow", tab: "layout" },
-        { name: "multiLine", tab: "layout" }
       ]
     },
     file: {
       properties: [
         "hasComment",
         "commentText",
+        "commentPlaceHolder",
         "allowMultiple",
         "allowImagesPreview",
         "acceptedTypes",
@@ -88,6 +93,9 @@ export class SurveyQuestionEditorDefinition {
         "detailPanelMode",
         "detailPanelShowOnAdding",
         { name: "showHeader", tab: "layout" },
+        { name: "showColumnHeader", tab: "layout" },
+        { name: "verticalAlign", tab: "layout" },
+        { name: "alternateRows", tab: "layout" },
         { name: "columnsVisibleIf", tab: "logic" },
         { name: "columnLayout", tab: "layout" },
         { name: "horizontalScroll", tab: "layout" },
@@ -113,6 +121,7 @@ export class SurveyQuestionEditorDefinition {
         "removeRowText",
         "confirmDelete",
         "confirmDeleteText",
+        "placeholder",
         { name: "hideColumnsIfEmpty", tab: "columns" },
         { name: "emptyRowsText", tab: "columns" },
         { name: "defaultRowValue", tab: "data" },
@@ -124,6 +133,8 @@ export class SurveyQuestionEditorDefinition {
     matrixdropdown: {
       properties: [
         "totalText",
+        "placeholder",
+        { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "rowsVisibleIf", tab: "logic" },
         { name: "rowTitleWidth", tab: "layout" },
         { name: "keyDuplicationError", tab: "validation" }
@@ -133,6 +144,9 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "isAllRowRequired", tab: "validation" },
         { name: "showHeader", tab: "layout" },
+        { name: "showColumnHeader", tab: "layout" },
+        { name: "verticalAlign", tab: "layout" },
+        { name: "alternateRows", tab: "layout" },
         { name: "rowsOrder", tab: "rows" },
         { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "columnsVisibleIf", tab: "logic" },
@@ -155,11 +169,14 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "hasComment",
         "commentText",
+        "commentPlaceHolder",
+        { name: "useDropdown", tab: "layout" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
         { name: "minRateDescription", tab: "rateValues" },
-        { name: "maxRateDescription", tab: "rateValues" }
+        { name: "maxRateDescription", tab: "rateValues" },
+        { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
       ],
       tabs: [{ name: "rateValues", index: 10 }]
     },
@@ -167,6 +184,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "hasComment",
         "commentText",
+        "commentPlaceHolder",
         { name: "choicesFromQuestion", tab: "choices" },
         { name: "choicesFromQuestionMode", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
@@ -179,7 +197,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "hideIfChoicesEmpty", tab: "logic" },
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
-        { name: "otherErrorText", tab: "validation" }
+        { name: "otherErrorText", tab: "validation" },
+        { name: "separateSpecialChoices", tab: "choices" },
       ],
       tabs: [
         { name: "choices", index: 10 },
@@ -190,30 +209,39 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "hasSelectAll", tab: "choices" },
         { name: "selectAllText", tab: "choices" },
-        { name: "maxSelectedChoices", tab: "choices" }
+        { name: "maxSelectedChoices", tab: "choices" },
+        { name: "separateSpecialChoices", tab: "choices" },
       ]
     },
     radiogroup: {
-      properties: [{ name: "showClearButton", tab: "choices" }]
+      properties: [
+        { name: "showClearButton", tab: "choices" },
+        { name: "separateSpecialChoices", tab: "choices" },
+      ]
     },
     dropdown: {
       properties: [
-        "optionsCaption",
+        "placeholder",
         "autoComplete",
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
-        { name: "showOptionsCaption", tab: "choices" }
+        { name: "allowClear", tab: "choices" }
       ]
     },
     imagepicker: {
       properties: [
-        "multiSelect",
-        "showLabel",
         "contentMode",
         "imageFit",
-        "imageHeight",
-        "imageWidth"
+        "isResponsive",
+        "minImageWidth",
+        "maxImageWidth",
+        "minImageHeight",
+        "maxImageHeight",
+        { name: "imageHeight", placeholder: "auto" },
+        { name: "imageWidth", placeholder: "auto" },
+        "multiSelect",
+        "showLabel",
       ]
     },
     image: {
@@ -221,8 +249,8 @@ export class SurveyQuestionEditorDefinition {
         "imageLink",
         "contentMode",
         "imageFit",
-        "imageHeight",
-        "imageWidth",
+        { name: "imageHeight", placeholder: "auto" },
+        { name: "imageWidth", placeholder: "auto" },
         "text"
       ]
     },
@@ -231,11 +259,11 @@ export class SurveyQuestionEditorDefinition {
       tabs: [{ name: "general" }]
     },
     "itemvalue[]@rows": {
-      properties: [{ name: "visibleIf" }],
+      properties: [{ name: "visibleIf" }, { name: "enableIf" }],
       tabs: [{ name: "general" }]
     },
     "itemvalue[]@columns": {
-      properties: [{ name: "visibleIf" }],
+      properties: [{ name: "visibleIf" }, { name: "enableIf" }],
       tabs: [{ name: "general" }]
     },
     text: {
@@ -244,7 +272,7 @@ export class SurveyQuestionEditorDefinition {
         "min",
         "max",
         "step",
-        "placeHolder",
+        "placeholder",
         "autoComplete",
         "dataList",
         { name: "minValueExpression", tab: "logic" },
@@ -278,7 +306,7 @@ export class SurveyQuestionEditorDefinition {
       ]
     },
     matrixdropdowncolumn: {
-      properties: ["isRequired", "name", "title"]
+      properties: ["name", "title"]
     },
     "matrixdropdowncolumn@default": {
       properties: [
@@ -287,11 +315,14 @@ export class SurveyQuestionEditorDefinition {
         "title",
         "isRequired",
         "readOnly",
+        "isUnique",
         "showInMultipleColumns",
         "width",
+        "minWidth",
         { name: "visibleIf", tab: "logic" },
         { name: "enableIf", tab: "logic" },
         { name: "requiredIf", tab: "logic" },
+        { name: "defaultValueExpression", tab: "logic" },
         { name: "totalType", tab: "totals" },
         { name: "totalDisplayStyle", tab: "totals" },
         { name: "totalCurrency", tab: "totals" },
@@ -355,13 +386,13 @@ export class SurveyQuestionEditorDefinition {
         "min",
         "max",
         "step",
-        "placeHolder",
+        "placeholder",
         "maxLength"
       ],
       tabs: [{ name: "validators", index: 10 }]
     },
     "matrixdropdowncolumn@comment": {
-      properties: ["rows", "placeHolder", "maxLength"],
+      properties: ["rows", "placeholder", "maxLength"],
       tabs: [{ name: "validators", index: 10 }]
     },
     "matrixdropdowncolumn@boolean": {
@@ -396,13 +427,13 @@ export class SurveyQuestionEditorDefinition {
         "isRequired",
         "maxLength",
         "size",
-        "placeHolder",
+        "placeholder",
         "requiredErrorText",
         "validators"
       ]
     },
     "multipletext@items": {
-      properties: ["isRequired", "name", "title"]
+      properties: ["name", "title"]
     },
     calculatedvalue: {
       properties: ["name", "expression", "includeIntoResult"]
@@ -423,6 +454,7 @@ export class SurveyQuestionEditorDefinition {
         "panelRemoveText",
         "templateTitle",
         "templateDescription",
+        "noEntriesText",
         "confirmDelete",
         "confirmDeleteText",
         "panelPrevText",
@@ -469,7 +501,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "width", tab: "layout" },
         { name: "showNumber", tab: "numbering" },
         { name: "showQuestionNumbers", tab: "numbering" },
-        { name: "questionStartIndex", tab: "numbering" }
+        { name: "questionStartIndex", tab: "numbering" },
+        { name: "minWidth", tab: "layout" },
+        { name: "maxWidth", tab: "layout" },
       ],
       tabs: [{ name: "numbering", index: 350 }]
     },
@@ -490,6 +524,8 @@ export class SurveyQuestionEditorDefinition {
         "locale",
         "mode",
         "cookieName",
+        "widthMode",
+        "width",
 
         { name: "showPreviewBeforeComplete", tab: "navigation" },
         { name: "pagePrevText", tab: "navigation" },

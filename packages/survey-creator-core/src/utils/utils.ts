@@ -1,4 +1,5 @@
-import { Serializer } from "survey-core";
+import { defaultV2Css, Serializer } from "survey-core";
+import { settings } from "../settings";
 
 function getNumericFromString(str: string): string {
   if (!str) return "";
@@ -70,7 +71,7 @@ export function getNextValue(prefix: string, values: any[]): string | number {
         while (numStr.length > newNum.length) {
           newNum = "0" + newNum;
         }
-        newValue = str.substr(0, numStrIndex) + newNum + str.substr(numStrIndex + numStr.length);
+        newValue = str.substring(0, numStrIndex) + newNum + str.substring(numStrIndex + numStr.length);
       }
     } while (hasValueInArray(values, newValue));
     return newValue;
@@ -193,25 +194,46 @@ export function isPropertyVisible(obj: any, propertyName: string) {
   return result;
 }
 
-export function toggleHovered(e: MouseEvent, element: HTMLElement) {
+export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) {
   const processedFlagName = "__svc_question_processed";
   const name = "svc-hovered";
-  if (!e[processedFlagName] && e.type === "mouseover") {
+  const nameReady = "svc-hovered-ready";
+
+  function setClass(className, checkReady = null) {
     const arr = element.className.split(" ");
-    if (arr.indexOf(name) == -1) {
-      element.className += " " + name;
+    if (checkReady) {
+      if (arr.indexOf(checkReady) == -1) {
+        return;
+      }
+    }
+    if (arr.indexOf(className) == -1) {
+      element.className += " " + className;
+    }
+  }
+
+  if (!e[processedFlagName] && e.type === "mouseover") {
+    if (timeout) {
+      setClass(nameReady);
+      setTimeout(() => {
+        setClass(name, nameReady);
+      }, timeout);
+    }
+    else {
+      setClass(name);
     }
     e[processedFlagName] = true;
   } else {
+    element.className = element.className.replace(" svc-hovered-ready", "");
     element.className = element.className.replace(" svc-hovered", "");
   }
 }
 
 export function clearNewLines(text: string) {
-  return text.replace(new RegExp("(\r\n|\n|\r)", "gm"), "");
+  return text.replace(new RegExp("(\\r\\n|\\n|\\r)", "gm"), "");
 }
 
 export function select(element: any) {
+  if (!window) return;
   var range, selection;
   if (window.getSelection && document.createRange) {
     selection = window.getSelection();
@@ -224,4 +246,40 @@ export function select(element: any) {
     range.moveToElementText(element);
     range.select();
   }
+}
+export function copyObject(dst: any, src: any) {
+  for (let key in src) {
+    let source = src[key];
+    if (typeof source === "object") {
+      source = {};
+      this.copyObject(source, src[key]);
+    }
+    dst[key] = source;
+  }
+}
+export function copyCssClasses(dest: any, source: any) {
+  if (!source) return;
+  if (typeof source === "string" || source instanceof String) {
+    dest["root"] = source;
+  } else {
+    copyObject(dest, source);
+  }
+}
+
+export function assignDefaultV2Classes(destination: any, questionType: string) {
+  copyCssClasses(destination, defaultV2Css.question);
+  copyCssClasses(destination, defaultV2Css[questionType]);
+}
+
+export function wrapTextByCurlyBraces(text: string) {
+  return settings.logic.openBracket + text + settings.logic.closeBracket;
+}
+
+export function capitalize(str: string): string {
+  if (!str) return str;
+  str = str.replace(/[\s]+/g, " ");
+  str = str.replace(/([\s]|^)(\S)/g, (_, p1, p2) => {
+    return p1 + p2.toUpperCase();
+  });
+  return str;
 }

@@ -3,9 +3,14 @@
 .svc-logo-image {
   position: relative;
   justify-content: flex-end;
-  margin-top: calcSize(2);
+  align-items: center;
+  display: flex;
+  padding: 0;
+  cursor: pointer;
   .svc-image-item-value-controls {
     display: block;
+    top: calcSize(2.5);
+    right: calcSize(1.5);
   }
 }
 
@@ -13,7 +18,29 @@
   font-size: calcSize(4);
   color: $foreground-light;
   opacity: 0.25;
-  cursor: pointer;
   white-space: nowrap;
   word-break: keep-all;
+  padding: 0;
+  width: calcSize(8);
+  height: calcSize(8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: calcSize(-2);
+  border-radius:  calcSize(4);
+  &:hover {
+    background-color: $primary-light;
+    opacity: unset;
+    use {
+      fill: $primary;
+    }
+  }
+  svg {
+    width: calcSize(4);
+    height: calcSize(4);
+  }
+}
+
+.svc-logo-image-placeholder use {
+  fill: $foreground-light;
 }

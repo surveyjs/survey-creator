@@ -1,9 +1,9 @@
 import { SurveyModel } from "survey-core";
 import { CreatorTester } from "../creator-tester";
-import {
-  TabTestPlugin,
-  TestSurveyTabViewModel
-} from "../../src/components/tabs/test";
+import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
+import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
+
+import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   var testPlugin = <TabTestPlugin>creator.getPlugin("test");
@@ -102,7 +102,7 @@ test("Use title for pages", (): any => {
 });
 
 test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
-  var creator = new CreatorTester();
+  const creator = new CreatorTester();
   creator.JSON = {
     questions: [
       {
@@ -112,13 +112,17 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
     ]
   };
   expect(creator.showDefaultLanguageInTestSurveyTab).toEqual("auto");
-  var model = getTestModel(creator);
-  expect(model.showDefaultLanguageInTestSurveyTab).toBeFalsy();
+  const testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  const languageSelectorAction = testPlugin["languageSelectorAction"];
+  const languageSelectorActionList = languageSelectorAction.data;
+
+  testPlugin.activate();
+  expect(languageSelectorAction.visible).toBeFalsy();
 
   creator.showDefaultLanguageInTestSurveyTab = true;
-  model = getTestModel(creator);
-  expect(model.showDefaultLanguageInTestSurveyTab).toBeTruthy();
-  expect(model.languages.length > 10).toBeTruthy();
+  testPlugin.update();
+  expect(languageSelectorAction.visible).toBeTruthy();
+  expect(languageSelectorActionList.actions.length > 10).toBeTruthy();
 
   creator.showDefaultLanguageInTestSurveyTab = "auto";
   creator.JSON = {
@@ -130,24 +134,25 @@ test("showDefaultLanguageInTestSurveyTab: auto, true, false, all", (): any => {
       }
     ]
   };
-  model = getTestModel(creator);
-  expect(model.showDefaultLanguageInTestSurveyTab).toBeTruthy();
-  expect(model.languages).toHaveLength(2);
-  expect(model.languages[0].id).toEqual("en");
-  expect(model.languages[1].id).toEqual("de");
-  expect(model.languages[1].title).toEqual("deutsch");
+  testPlugin.update();
+  expect(languageSelectorAction.visible).toBeTruthy();
+  expect(languageSelectorActionList.actions).toHaveLength(2);
+  expect(languageSelectorActionList.actions[0].id).toEqual("en");
+  expect(languageSelectorActionList.actions[1].id).toEqual("de");
+  expect(languageSelectorActionList.actions[1].title).toEqual("Deutsch");
 
   creator.showDefaultLanguageInTestSurveyTab = true;
-  model = getTestModel(creator);
-  expect(model.showDefaultLanguageInTestSurveyTab).toBeTruthy();
-  expect(model.languages).toHaveLength(2);
+  testPlugin.update();
+  expect(languageSelectorAction.visible).toBeTruthy();
+  expect(languageSelectorActionList.actions).toHaveLength(2);
 
   creator.showDefaultLanguageInTestSurveyTab = false;
-  model = getTestModel(creator);
-  expect(model.showDefaultLanguageInTestSurveyTab).toBeFalsy();
+  testPlugin.update();
+  expect(languageSelectorAction.visible).toBeFalsy();
+  expect(languageSelectorActionList.actions).toHaveLength(0);
 
   creator.showDefaultLanguageInTestSurveyTab = "all";
-  model = getTestModel(creator);
-  expect(model.showDefaultLanguageInTestSurveyTab).toBeTruthy();
-  expect(model.languages.length > 10).toBeTruthy();
+  testPlugin.update();
+  expect(languageSelectorAction.visible).toBeTruthy();
+  expect(languageSelectorActionList.actions.length > 10).toBeTruthy();
 });

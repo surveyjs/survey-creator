@@ -1,0 +1,158 @@
+@import "../../variables.scss";
+
+.svc-toolbox__item {
+  display: flex;
+  position: relative;
+  align-items: center;
+  z-index: 20;
+  outline: none;
+  padding: calcSize(1) calcSize(1.5);
+
+  sv-svg-icon,
+  .sv-svg-icon {
+    display: block;
+    height: calcSize(3);
+  }
+}
+
+// is always visible
+.svc-toolbox__item-container {
+  outline: none;
+
+  .sv-svg-icon use {
+    fill: $foreground-light;
+  }
+}
+
+//is visible only on hover
+.svc-toolbox__item-banner {
+  opacity: 0;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  margin-right: 0;
+  margin-left: calcSize(-1.5);
+
+  .svc-toolbox__item-icon {
+    position: absolute;
+    display: block;
+    left: calcSize(1.5);
+    top: calcSize(1);
+  }
+  
+  .svc-toolbox__item-title {
+    color: $foreground;
+  }
+  .sv-svg-icon use {
+    fill: $primary;
+  }
+}
+
+.svc-creator__toolbox--right {
+  .svc-toolbox__item:hover .svc-toolbox__item-banner,
+  .svc-toolbox__item:focus .svc-toolbox__item-banner {
+    flex-direction: row-reverse;
+    padding-right: calcSize(1.5);
+    padding-left: calcSize(2);
+    margin-left: 0;
+    margin-right: 0;
+    transform: translateX(calc(1.5 * #{$base-unit}));
+    .svc-toolbox__item-title {
+      padding-left: calcSize(1);
+      padding-right: calcSize(4);
+    }
+  }
+
+  .svc-toolbox__item {
+    flex-direction: row-reverse;
+  }
+  .svc-toolbox__tool.sv-dots {
+    place-self: flex-end;
+  }
+  .svc-toolbox__tool {
+    justify-content: flex-end;
+  }
+
+  .svc-toolbox__category {
+    align-items: flex-end;
+  }
+
+  .svc-toolbox__item-banner {
+    .svc-toolbox__item-icon {
+      left: auto;
+      right: calcSize(1.5);
+    }
+  }  
+}
+
+.svc-toolbox__item-title {
+  @include smallBold;
+
+  display: block;
+  padding-left: calcSize(1);
+  padding-right: calcSize(1.5);
+  white-space: nowrap;
+  color: $foreground-light;
+}
+
+.svc-toolbox__item:hover,
+.svc-toolbox__item:focus {
+  .svc-toolbox__item-banner {
+    max-width: calcSize(100);
+    padding-left: calcSize(1.5);
+    padding-right: calcSize(2);
+    opacity: 1;
+    .svc-toolbox__item-title {
+      padding-left: calcSize(4);
+    }
+  }
+}
+
+.svc-toolbox:not(.svc-toolbox--compact) {
+  .svc-toolbox__item:not(.sv-dots):focus,
+  .svc-toolbox__item:not(.sv-dots):hover {
+    overflow: hidden;
+    border-radius: calcSize(12.5);
+    background-color: $background;
+    box-shadow: 0px 2px 6px $shadow-medium;
+    transition: 0.1s ease-in-out;
+
+    .svc-toolbox__item-title {
+      color: $foreground;
+    }
+    .sv-svg-icon use {
+      fill: $primary;
+    }
+  }
+}
+
+.svc-toolbox__tool .sv-dots__item:hover,
+.svc-toolbox__tool .sv-dots__item:focus,
+.svc-toolbox__tool .sv-dots__item.sv-action-bar-item--pressed {
+  background-color: $primary-light;
+  border-radius: calcSize(12.5);
+
+  .sv-svg-icon use {
+    fill: $primary;
+  }
+}
+
+
+.svc-toolbox-popup {
+  .sv-list__item {
+    padding: calcSize(1.5) calcSize(5);
+  }
+}
+
+.svc-toolbox, .svc-toolbox:not(.svc-toolbox--compact) {
+  .svc-toolbox__tool--pressed {
+    .svc-toolbox__item:not(.sv-dots), .svc-toolbox__item:not(.sv-dots):hover {
+      .sv-svg-icon use {
+        fill: $foreground;
+        opacity: 0.5;
+      }
+      color: $foreground;
+      opacity: 0.5;
+    }
+  }
+}

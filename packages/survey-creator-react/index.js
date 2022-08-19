@@ -1,3 +1,5 @@
+Survey.ComponentCollection.Instance.add({ name: "newrating", title: "SuperRating", elementsJSON: [{ "type": "rating", "name": "superrating", "title": "1", "isRequired": true, "rateMin": 0, "rateMax": 10, "minRateDescription": "1", "maxRateDescription": "2" }] });
+
 let json = {
   completedHtml:
     "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
@@ -148,6 +150,48 @@ SurveyReact.ReactElementFactory.Instance.registerElement(
   }
 );
 
+// class CustomPropertyGridWrapper extends React.Component {
+//   constructor(props) {
+//       super(props);
+//       this.btnClick = this
+//           .btnClick
+//           .bind(this);
+//   }
+//   btnClick() {
+//       alert("The Button is clicked");
+//   }
+//   render() {
+//       const model = this.props.model;
+//       if (!model) 
+//           return null;
+//       const btnStyle = {
+//           width: "100%",
+//           height: "32px"
+//       };
+//       return <div>
+//           <button onClick={this.btnClick} style={btnStyle}>Click me...</button>
+//           <SurveyCreator.PropertyGridComponent model={model}></SurveyCreator.PropertyGridComponent>
+//       </div>;
+//   }
+// }
+
+// SurveyReact
+//   .ReactElementFactory
+//   .Instance
+//   .registerElement("svc-property-grid", (props) => {
+//       return React.createElement(CustomPropertyGridWrapper, props);
+//   });
+/*
+class CreatorSurveyPageComponent2 extends SurveyCreator.CreatorSurveyPageComponent {
+  renderFooter() {
+    return (<div>Some Text {super.renderFooter()}</div>);
+  }
+}
+
+SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => {
+  return React.createElement(CreatorSurveyPageComponent2, props);
+});
+*/
 const creator = new SurveyCreator.SurveyCreator(options);
 creator.JSON = json;
 window.creator = creator;
@@ -159,6 +203,7 @@ creator.onElementAllowOperations.add((sender, options) => {
 });
 
 creator.saveSurveyFunc = (no, callback) => {
+  console.log(no);
   setTimeout(function () {
     callback(no, true);
   }, 1000);
@@ -170,15 +215,15 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-creator.toolbarItems.push(
-  new Survey.Action({
-    id: "toolboxCustomization",
-    visible: true,
-    title: "Toolbox Customization",
-    enabled: true,
-    action: function () {
-      alert("Hi!");
-    }
-  })
-);
+// creator.toolbarItems.push(
+//   new Survey.Action({
+//     id: "toolboxCustomization",
+//     visible: true,
+//     title: "Toolbox Customization",
+//     enabled: true,
+//     action: function () {
+//       alert("Hi!");
+//     }
+//   })
+// );
 // creator.toolbox.isCompact = true;

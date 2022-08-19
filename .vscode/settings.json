@@ -7,7 +7,11 @@
         "editor.codeActionsOnSave": {
             "source.fixAll": true,
             //"source.organizeImports": true, // be vare of https://github.com/microsoft/vscode-typescript-tslint-plugin/issues/51
-        }
+        },
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     // "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     // "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
@@ -15,4 +19,7 @@
     // "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     // "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
     "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "eslint.format.enable": true,
+    "editor.accessibilitySupport": "off"
 }

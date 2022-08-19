@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 var germanTranslation = {
   //survey templates
@@ -10,11 +10,15 @@ var germanTranslation = {
     dropQuestion: "Frage bitte hier platzieren.",
     addLogicItem: "Eine Regel erstellen, um den Fluss der Umfrage anzupassen.",
     copy: "Kopieren",
+    duplicate: "Duplizieren",
+    settings: "Einstellungen",
     addToToolbox: "Zur Werkzeugleiste hinzufügen",
     deletePanel: "Panel löschen",
     deleteQuestion: "Frage löschen",
     convertTo: "Konvertieren zu",
     drag: "Element ziehen",
+    license:
+      "Bitte erwerben Sie eine Entwicklerlizenz für SurveyJS Creator, um diesen in Ihrer Anwendung verwenden zu können"
   },
   //questionTypes
   qt: {
@@ -22,6 +26,7 @@ var germanTranslation = {
     checkbox: "Auswahl",
     comment: "Kommentar",
     imagepicker: "Bildauswahl",
+    ranking: "Reihenfolge",
     image: "Bild",
     dropdown: "Dropdown",
     file: "Datei",
@@ -51,7 +56,14 @@ var germanTranslation = {
     hideObjectProperties: "Objekteigenschaften verstecken",
     showPanel: "Panel anzeigen",
     hidePanel: "Panel verstecken",
+    prevSelected: "Vorheriges auswählen",
+    nextSelected: "Nächstes auswählen",
     editSurvey: "Umfrage bearbeiten",
+    surveyTypeName: "Umfrage",
+    pageTypeName: "Seite",
+    panelTypeName: "Panel",
+    questionTypeName: "Frage",
+    columnTypeName: "Spalte",
     addNewPage: "Neue Seite hinzufügen",
     moveRight: "Nach rechts scrollen",
     moveLeft: "Nach links scrollen",
@@ -62,17 +74,19 @@ var germanTranslation = {
     newQuestionName: "Frage",
     newPanelName: "Panel",
     newTextItemName: "Text",
-    testSurvey: "Umfrage testen",
+    testSurvey: "Test",
     testSurveyAgain: "Testumfrage wiederholen",
     testSurveyWidth: "Umfragebreite: ",
     navigateToMsg: "Sie werden weitergeleitet: ",
-    logic: "Umfragelogik",
+    logic: "Logik",
     embedSurvey: "Umfrage einfügen",
-    translation: "Übersetzungen",
+    translation: "Übersetzung",
     saveSurvey: "Umfrage speichern",
     saveSurveyTooltip: "Umfrage speichern",
-    designer: "Umfrage entwerfen",
+    designer: "Designer",
     jsonEditor: "JSON",
+    jsonHideErrors: "Fehler verstecken",
+    jsonShowErrors: "Fehler anzeigen",
     undo: "Rückgängig",
     redo: "Wiederherstellen",
     undoTooltip: "Letzte Änderung rückgängig machen",
@@ -88,6 +102,7 @@ var germanTranslation = {
     generateReadableJSON: "Generiere lesbares JSON",
     toolbox: "Werkzeugleiste",
     "property-grid": "Eigenschaften",
+    propertyGridFilteredTextPlaceholder: "Tippen, um zu suchen ...",
     toolboxGeneralCategory: "Allgemein",
     delSelObject: "Lösche markiertes Objekt",
     editSelObject: "Bearbeite markiertes Objekt",
@@ -104,8 +119,11 @@ var germanTranslation = {
     saved: "Gespeichert",
     propertyEditorError: "Fehler:",
     saveError: "Fehler! Der Inhalt des Editors wurde nicht gespeichert.",
+    translationPropertyGridTitle: "Übersetzungseinstellungen",
+    translationLanguages: "Sprachen",
     translationAddLanguage: "Wählen Sie eine Sprache aus",
     translationShowAllStrings: "Alle Texte anzeigen",
+    translationShowUsedStringsOnly: "Verwendete Texte",
     translationShowAllPages: "Alle Seiten anzeigen",
     translationNoStrings:
       "Keine Texte zum Übersetzen. Bitte den Filter anpassen.",
@@ -113,104 +131,130 @@ var germanTranslation = {
     translationImportFromSCVButton: "Import (CSV)",
     translationMergeLocaleWithDefault:
       "Verschmelze {0} mit der Standardsprache",
+    translationPlaceHolder: "Übersetzung ...",
     bold: "Fett",
     italic: "Kursiv",
     underline: "Unterstrichen",
-    fpAddQuestion: "Frage hinzufügen ...",
+    addNewQuestion: "Frage hinzufügen",
+    selectPage: "Seite auswählen ...",
+    chooseElement: "Element auswählen ...",
+    htmlPlaceHolder: "HTML wird hier dargestellt werden.",
+    panelPlaceHolder: "Ziehe eine Frage aus der Toolbox hier her.",
+    surveyPlaceHolder: "Die Umfrage enthält keine Frage. Ziehe ein Element aus der Toolbox hier her oder drücke den Button unten.",
+    addNewTypeQuestion: "Add {0}", //{0} is localizable question type
+    chooseLogoPlaceholder: "[LOGO]",
     completedHtmlOnConditionItemText: "Zeige wenn:",
-  },
-  lg: {
-    //Logic tab strings
-    ge_visibilityName: "Seitensichtbarkeit",
-    panel_visibilityName: "Panelsichtbarkeit",
-    panel_enableName: "Panel aktivieren/deaktivieren",
-    question_visibilityName: "Fragensichtbarkeit",
-    question_enableName: "Frage aktivieren/deaktivieren",
-    question_requireName: "Frage optional/erforderlich",
-    trigger_completeName: "Umfrage abschließen",
-    trigger_setvalueName: "Setze Fragenwert",
-    trigger_copyvalueName: "Kopiere Fragenwert",
-    trigger_skipName: "Gehe zur nächsten Frage",
-    trigger_runExpressionName: "Benutzerdefinierten Ausdruck ausführen",
-    completedHtmlOnConditionName:
-      "Benutzerdefinierte Seite nach Abschluss der Umfrage",
+    lg: {
+      addNewItem: "Neue Regel hinzufügen",
+      //Logic tab strings
+      empty_tab: "Erstelle eine Regel erstellen, um den Fluss der Umfrage anzupassen.",
+      page_visibilityName: "Seite anzeigen/verstecken",
+      page_enableName: "Seite aktivieren/deaktivieren",
+      panel_visibilityName: "Panel anzeigen/verstecken",
+      panel_enableName: "Panel aktivieren/deaktivieren",
+      question_visibilityName: "Frage anzeigen/verstecken",
+      question_enableName: "Frage aktivieren/deaktivieren",
+      question_requireName: "Frage optional/erforderlich",
+      column_visibilityName: "Spalte anzeigen/verstecken",
+      column_enableName: "Spalte aktivieren/deaktivieren",
+      column_requireName: "Spalte optional/erforderlich",
+      trigger_completeName: "Umfrage abschließen",
+      trigger_setvalueName: "Fragenwert setzen",
+      trigger_copyvalueName: "Fragenwert kopieren",
+      trigger_skipName: "Frage überspringen",
+      trigger_runExpressionName: "Ausdruck ausführen",
+      completedHtmlOnConditionName:
+        "Seite nach Abschluss der Umfrage anzeigen",
 
-    page_visibilityDescription:
-      "Mache die Seite sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
-    panel_visibilityDescription:
-      "Mache das Panel sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass es unsichtbar.",
-    panel_enableDescription:
-      "Aktiviere das Panel zusammen mit all seinen Elementen, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie deaktiviert.",
-    question_visibilityDescription:
-      "Mache die Frage sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
-    question_enableDescription:
-      "Aktiviere die Frage, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie deaktiviert.",
-    question_requireDescription:
-      "Frage wird erforderlich, wenn der logische Ausdruck wahr ergibt.",
-    trigger_completeDescription:
-      "Wenn der logische Ausdruck wahr ergibt, wir die Umfrage abgeschlossen und der Benutzer sieht die Abschlussseite der Umfrage.",
-    trigger_setvalueDescription:
-      "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert in die ausgewählte Frage eingesetzt.",
-    trigger_copyvalueDescription:
-      "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert einer ausgewählte Fragen kopiert und in eine andere ausgewählte Frage eingesetzt.",
-    trigger_skipDescription:
-      "Wenn der logische Ausdruck wahr ergibt, springt die Umfrage zur ausgewählten Frage.",
-    trigger_runExpressionDescription:
-      "Wenn der logische Ausdruck wahr ergibt, wird die benutzerdefinierte Anweisung ausgeführt. Sie können optional das Ergebnis der Anweisung in die ausgewählte Frage einsetzen.",
-    completedHtmlOnConditionDescription:
-      "Wenn der logische Ausdruck wahr ergibt, dann wird der Standardtext der Abschlussseite der Umfrage mit dem gegebenen Text ersetzt.",
+      page_visibilityDescription:
+        "Mache die Seite sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
+      panel_visibilityDescription:
+        "Mache das Panel sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass es unsichtbar.",
+      panel_enableDescription:
+        "Aktiviere das Panel zusammen mit all seinen Elementen, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie deaktiviert.",
+      question_visibilityDescription:
+        "Mache die Frage sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
+      question_enableDescription:
+        "Aktiviere die Frage, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie deaktiviert.",
+      question_requireDescription:
+        "Frage wird erforderlich, wenn der logische Ausdruck wahr ergibt.",
+      trigger_completeDescription:
+        "Wenn der logische Ausdruck wahr ergibt, wir die Umfrage abgeschlossen und der Benutzer sieht die Abschlussseite der Umfrage.",
+      trigger_setvalueDescription:
+        "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert in die ausgewählte Frage eingesetzt.",
+      trigger_copyvalueDescription:
+        "Wenn Werte, die im logischen Ausdruck verwendet werden, geändert werden und der logische Ausdruck wahr ergibt, dann wird der Wert einer ausgewählte Fragen kopiert und in eine andere ausgewählte Frage eingesetzt.",
+      trigger_skipDescription:
+        "Wenn der logische Ausdruck wahr ergibt, springt die Umfrage zur ausgewählten Frage.",
+      trigger_runExpressionDescription:
+        "Wenn der logische Ausdruck wahr ergibt, wird die benutzerdefinierte Anweisung ausgeführt. Sie können optional das Ergebnis der Anweisung in die ausgewählte Frage einsetzen.",
+      completedHtmlOnConditionDescription:
+        "Wenn der logische Ausdruck wahr ergibt, dann wird der Standardtext der Abschlussseite der Umfrage mit dem gegebenen Text ersetzt.",
 
-    itemExpressionText: "Wenn der Ausdruck '{0}' wahr ergibt:", // {0} - the expression
-    page_visibilityText: "Mache die Seite {0} sichtbar", // {0} page name
-    panel_visibilityText: "Mache das Panel {0} sichtbar", // {0} panel name
-    panel_enableText: "Aktiviere das Panel {0}", // {0} panel name
-    question_visibilityText: "Mache die Frage {0} sichtbar", // {0} question name
-    question_enableText: "Aktiviere die Frage {0}", // {0} question name
-    question_requireText: "Mache die Frage {0} erforderlich", // {0} question name
-    trigger_completeText: "Umfrage abschließen",
-    trigger_setvalueText: "Setze in Frage {0} den Wert {1} ein", // {0} question name, {1} setValue
-    trigger_copyvalueText: "Kopiere in Frage {0} den Wert von Frage {1}", // {0} and {1} question names
-    trigger_skipText: "Gehe zu Frage {0}", // {0} question name
-    trigger_runExpressionText1: "Führe folgenden Ausdruck aus: '{0}'", // {0} the expression
-    trigger_runExpressionText2: " und setze das Ergebnis in Frage {0} ein", // {0} question name
-    completedHtmlOnConditionText:
-      "Zeigen Sie einen benutzerdefinierten Text auf der Abschlussseite der Umfrage an.",
+      itemExpressionText: "Wenn der Ausdruck '{0}' wahr ergibt:", // {0} - the expression
+      itemEmptyExpressionText: "Neue Regel",
+      page_visibilityText: "Mache die Seite {0} sichtbar", // {0} page name
+      panel_visibilityText: "Mache das Panel {0} sichtbar", // {0} panel name
+      panel_enableText: "Aktiviere das Panel {0}", // {0} panel name
+      question_visibilityText: "Mache die Frage {0} sichtbar", // {0} question name
+      question_enableText: "Aktiviere die Frage {0}", // {0} question name
+      question_requireText: "Mache die Frage {0} erforderlich", // {0} question name
+      column_visibilityText: "Mache die Spalte {0} von Frage {1} sichtbar", //{0} column name, {1} question name
+      column_enableText: "Aktiviere die Spalte {0} von Frage {1}", //{0} column name, {1} question name
+      column_requireText: "Mache die Spalte {0} von Frage {1} erforderlich", //{0} column name, {1} question name
+      trigger_completeText: "Umfrage abschließen",
+      trigger_setvalueText: "Setze in Frage {0} den Wert {1} ein", // {0} question name, {1} setValue
+      trigger_copyvalueText: "Kopiere in Frage {0} den Wert von Frage {1}", // {0} and {1} question names
+      trigger_skipText: "Gehe zu Frage {0}", // {0} question name
+      trigger_runExpressionText1: "Führe folgenden Ausdruck aus: '{0}'", // {0} the expression
+      trigger_runExpressionText2: " und setze das Ergebnis in Frage {0} ein", // {0} question name
+      completedHtmlOnConditionText:
+        "Zeigen Sie einen benutzerdefinierten Text auf der Abschlussseite der Umfrage an.",
 
-    conditions: "Bedingungen",
-    actions: "Aktionen",
-    expressionEditorTitle: "Definiere Bedingungen",
-    actionsEditorTitle: "Definiere Aktionen",
+      showAllQuestions: "Alle Fragen anzeigen",
+      showAllActionTypes: "Alle Aktionen anzeigen",
 
-    deleteAction: "Aktion löschen",
-    addNewAction: "Aktion hinzufügen",
-    selectedActionCaption: "Aktion zum Hinzufügen auswählen ...",
+      conditions: "Bedingungen",
+      actions: "Aktionen",
+      expressionEditorTitle: "Definiere Bedingungen",
+      actionsEditorTitle: "Definiere Aktionen",
 
-    expressionInvalid:
-      "Der logische Ausdruck ist leer oder ungültig. Bitte korrigieren Sie ihn.",
-    noActionError: "Bitte fügen Sie mindestens eine Aktion hinzu.",
-    actionInvalid:
-      "Bitte beheben Sie die bestehenden Probleme in Ihren Aktionen.",
-    expressionSetup: "",
-    actionsSetup: "",
+      deleteAction: "Aktion löschen",
+      addNewAction: "Aktion hinzufügen",
+      selectedActionCaption: "Aktion zum Hinzufügen auswählen...",
+
+      expressionInvalid:
+        "Der logische Ausdruck ist leer oder ungültig. Bitte korrigieren Sie ihn.",
+      noActionError: "Bitte fügen Sie mindestens eine Aktion hinzu.",
+      actionInvalid:
+        "Bitte beheben Sie die bestehenden Probleme in Ihren Aktionen.",
+      expressionSetup: "",
+      actionsSetup: "",
+    }
   },
   //Property names in table headers
-  pel: {
-    isRequired: "Erforderlich?",
-  },
+  // pel: {
+  //   isRequired: "Erforderlich?",
+  // },
   //Property Editors
   pe: {
     apply: "Anwenden",
     ok: "OK",
     save: "Speichern",
+    clear: "Leeren",
     saveTooltip: "Speichern",
     cancel: "Abbrechen",
+    set: "Setze",
     reset: "Zurücksetzen",
+    change: "Verändern",
     refresh: "Neu laden",
     close: "Schliessen",
     delete: "Löschen",
     add: "Hinzufügen",
     addNew: "Neues Element hinzufügen",
     addItem: "Klicken, um ein Element hinzuzufügen ...",
+    removeItem: "Klicken, um ein Element zu entfernen ...",
+    dragItem: "Ziehe das Element",
     addOther: "Weiteres Element",
     addSelectAll: "Alle Elemente auswählen hinzufügen",
     addNone: "Alle Elemente abwählen hinzufügen",
@@ -220,13 +264,17 @@ var germanTranslation = {
     backTooltip: "Zurück ohne zu speichern",
     saveAndBack: "Speichern und zurück",
     saveAndBackTooltip: "Speichern und zurück",
-    itemValueEdit: "Sichtbar wenn",
+    doneEditing: "Fertig",
+    // itemValueEdit: "Sichtbar wenn",
     editChoices: "Auswahlmöglichkeiten bearbeiten",
     showChoices: "Auswahlmöglichkeiten anzeigen",
     move: "Verschieben",
     empty: "<leer>",
-    notEmpty: "<bearbeiten>",
+    emptyValue: "Wert is leer",
     fastEntry: "Schnelleintrag",
+    fastEntryNonUniqueError: "Wert '{0}' ist nicht eindeutig",
+    fastEntryChoicesCountError:
+      "Bitte begrenze die Anzahl der Elemente von {0} bis {1}",
     formEntry: "Formulareintrag",
     testService: "Service testen",
     itemSelectorEmpty: "Bitte ein Element auswählen",
@@ -235,24 +283,27 @@ var germanTranslation = {
     conditionSelectPage: "Seite auswählen ...",
     conditionSelectPanel: "Panel auswählen ...",
     conditionValueQuestionTitle: "Bitte den Wert eingeben oder auswählen",
-    conditionHelp:
-      "Bitte geben Sie einen booleschen Ausdruck ein. Dieser muss 'true' zurückgeben, um die Frage/Seite anzuzeigen. Beispiel: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
+    // conditionHelp:
+    //   "Bitte geben Sie einen booleschen Ausdruck ein. Dieser muss 'true' zurückgeben, um die Frage/Seite anzuzeigen. Beispiel: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
     expressionHelp:
-      'Bitte geben Sie eine Anweisung ein. Sie können geschweifte Klammern verwenden, um Zugriff auf die Werte der Fragen zu bekommen: "{question1} + {question2}", "({price} * {quantity}) * (100 - {discount})"',
+      'Bitte geben Sie einen Ausdruck ein. Sie können geschweifte Klammern verwenden, um Zugriff auf die Werte der Fragen zu bekommen: "{question1} + {question2}", "({price} * {quantity}) * (100 - {discount})"',
     aceEditorHelp:
       "Bitte drücken Sie Strg+Leertaste, um Vervollständigungsvorschläge für den Ausdruck zu erhalten",
     aceEditorRowTitle: "Aktuelle Zeile",
     aceEditorPanelTitle: "Aktuelles Panel",
     showMore: "Weitere Informationen finden Sie in der Dokumentation",
-    conditionShowMoreUrl:
-      "https://surveyjs.io/Documentation/LibraryParameter?id=QuestionBase&parameter=visibleIf",
+    // conditionShowMoreUrl:
+    //   "https://surveyjs.io/Documentation/LibraryParameter?id=QuestionBase&parameter=visibleIf",
     assistantTitle: "Verfügbare Fragen:",
     cellsEmptyRowsColumns: "Es sollte mindestens eine Spalte oder Zeile geben",
 
     propertyIsEmpty: "Bitte geben Sie einen Wert ein",
+    propertyIsNoUnique: "Bitte geben Sie einen eindeutigen Wert ein",
     propertyNameIsNotUnique: "Bitte geben Sie einen eindeutigen Wert ein",
     listIsEmpty: "Neues Element hinzufügen",
-    expressionIsEmpty: "Ausdruck ist leer",
+    "listIsEmpty@choices": "Bisher wurden noch keine Auswahlmöglichkeiten hinzugefügt",
+    "addNew@choices": "Auswahlmöglichkeit hinzufügen",
+    expressionIsEmpty: "Keinen Ausdruck definiert",
     value: "Wert",
     text: "Text",
     rowid: "Zeilen-ID",
@@ -264,26 +315,25 @@ var germanTranslation = {
     path: "Pfad",
     valueName: "Name der Antwort",
     titleName: "Name des Titels",
+    imageLinkName: "Name des Links zum Bild",
+    allowEmptyResponse: "Keine Antwort erlauben",
     titlePlaceholder: "Titel eingeben",
-    surveyTitlePlaceholder: "Umfragetitel hier eingeben",
-    pageTitlePlaceholder: "Seitenbeschreibung hier eingeben",
+    surveyTitlePlaceholder: "Umfragetitel eingeben",
+    pageTitlePlaceholder: "Seitenbeschreibung eingeben",
     descriptionPlaceholder: "Beschreibung eingeben",
     surveyDescriptionPlaceholder: "Umfragebeschreibung eingeben",
     pageDescriptionPlaceholder: "Seitenbeschreibung eingeben",
 
     hasOther: "Sonstiges auswählbar?",
     otherText: "Text für Sonstiges",
-    otherPlaceHolder: "Platzhalter für Sonstiges",
-    showClearButton: "Button anzeigen, der es erlaubt die Auswahl zu leeren",
-    allowEmptyResponse: "Keine Antwort erlauben",
     hasNone: "Alle Elemente abwählbar?",
     noneText: "Text für die Abwahl aller Elemente",
     hasSelectAll: "Alle Elemente auswählbar?",
+    separateSpecialChoices: "Spezielle Auswahlmöglichkeiten separieren",
     selectAllText: "Text für die Auswahl aller Elemente",
     choicesMin: "Minimaler Wert für automatisch erzeugte Elemente",
     choicesMax: "Maximaler Wert für automatisch erzeugte Elemente",
     choicesStep: "Schrittgröße für automatisch erzeugte Elemente",
-    showOptionsCaption: "Überschrift der Auswahlmöglichkeiten anzeigen",
     name: "Name",
     title: "Titel",
     cellType: "Zellentyp",
@@ -294,10 +344,11 @@ var germanTranslation = {
     isAllRowRequired: "Ist eine Antwort für alle Zeilen erforderlich?",
     requiredErrorText:
       "Fehlermeldung bei nicht beantworteten erforderlichen Fragen",
-    startWithNewLine: "In neuer Zeile beginnen?",
+    startWithNewLine: "Starte mit einer neuen Zeile",
+    displayRateDescriptionsAsExtremeItems: "Beschreibung für minimale und maximale Bewertung als Werte anzeigen",
     rows: "Zeilenanzahl",
     cols: "Spaltenanzahl",
-    placeHolder: "Platzhalter",
+    placeholder: "Platzhalter",
     showPreview: "Wird eine Bildvorschau angezeigt?",
     storeDataAsText: "Speicher Dateininhalt des JSON-Resultats als Text",
     maxSize: "Maximale Dateigröße in Bytes",
@@ -308,13 +359,14 @@ var germanTranslation = {
     addRowLocation: "Zeilenknopfposition hinzufügen",
     addRowText: "Zeilenknopftext hinzufügen",
     removeRowText: "Zeilenknopftext löschen",
-    rateMin: "Minimal",
-    rateMax: "Maximal",
+    rateMin: "Minimum",
+    rateMax: "Maximum",
     rateStep: "Bewertungsschritte",
-    minRateDescription: "Bewertungsbeschreibung für minimale Bewertung",
-    maxRateDescription: "Bewertungsbeschreibung für maximale Bewertung",
+    minRateDescription: "Beschreibung für minimale Bewertung",
+    maxRateDescription: "Beschreibung für maximale Bewertung",
     inputType: "Eingabetyp",
     optionsCaption: "Auswahlbeschriftung",
+    showOptionsCaption: "Überschrift der Auswahlmöglichkeiten anzeigen",
     defaultValue: "Standardantwort",
     cellsDefaultRow: "Standardzellentext",
 
@@ -323,17 +375,25 @@ var germanTranslation = {
 
     maxLength: "Maximale Länge",
 
-    buildExpression: "Baukasten",
-    editExpression: "Bearbeiten",
+    buildExpression: "Einfach",
+    editExpression: "Erweitert",
     and: "und",
     or: "oder",
     remove: "Entfernen",
     addCondition: "Bedingung hinzufügen",
+    if: "Wenn",
+    then: "Dann",
+    setToName: "von",
+    fromName: "bis",
+    ruleIsNotSet: "Regel is nicht korrekt",
 
+    //survey
     showTitle: "Titel anzeigen",
+    expandCollapseTitle: "Titel ausklappen/einklappen",
     locale: "Standardsprache",
     simulator: "Gerät auswählen",
     landscapeOrientation: "Querformat",
+    portraitOrientation: "Hochformat",
     mode: "Modus (editierbar/schreibgeschützt)",
     clearInvisibleValues: "Alle unsichtbaren Werte leeren",
     cookieName:
@@ -361,16 +421,12 @@ var germanTranslation = {
     requiredText: "Symbol für erforderliche Fragen",
     questionStartIndex: 'Startindex der Fragen (bspw. "1", "A", "a", ...)',
     showQuestionNumbers: "Fragennummern anzeigen",
-    textUpdateMode: "Text aktualisieren",
     questionTitleTemplate:
       'Template für den Fragentitel. Standard ist: "{no}. {require} {title}"',
     questionErrorLocation: "Position der Fehlermeldungen",
     focusFirstQuestionAutomatic:
-      "Fokussiere die erste Frage, wenn die Seite verändert wird",
+      "Fokussiere die erste Frage automatisch",
     questionsOrder: "Reihenfolge der Elemente auf der Seite",
-    maxTextLength: "Maximale Textlänge",
-    maxOtherLength: "Maximale weitere Länge",
-    maxOthersLength: "Maximale weitere Länge",
     maxTimeToFinish: "Maximale Zeit, um die Umfrage zu beenden",
     maxTimeToFinishPage: "Maximale Zeit, um eine Seite der Umfrage zu beenden",
     showTimerPanel: "Position des Timers",
@@ -399,6 +455,7 @@ var germanTranslation = {
     totalCurrency: "Währung (total)",
     totalFormat: "Format (total)",
 
+    // Header  adorner
     logoPosition: "Logoposition",
     addLogo: "Logo hinzufügen ...",
     changeLogo: "Logo bearbeiten ...",
@@ -421,10 +478,6 @@ var germanTranslation = {
       visibleIf: "Sichtbar wenn ...",
       enableIf: "Aktiviert wenn ...",
       requiredIf: "Erforderlich wenn ...",
-      hideIfChoicesEmpty: "Verstecken, wenn Auswahlmöglichkeiten leer sind",
-      choicesVisibleIf: "Auswahlmöglichkeiten sichtbar wenn ...",
-      choicesEnableIf: "Auswahlmöglichkeiten aktiviert wenn ...",
-      choicesEnabledIf: "Auswahlmöglichkeiten aktiviert wenn ...",
       rateValues: "Bewertungsskala",
       choicesByUrl: "Auswahlmöglichkeiten aus dem Internet",
       matrixChoices: "Standardauswahl",
@@ -433,6 +486,7 @@ var germanTranslation = {
       validators: "Überprüfung",
       navigation: "Navigation",
       question: "Fragen",
+      pages: "Seiten",
       completedHtml: "Benutzerdefinierte Seite nach Abschluss der Umfrage",
       completedHtmlOnCondition:
         "Bedingung dafür, dass eine benutzerdefiniterte Seite nach Abschluss der Umfrage angezeigt wird",
@@ -449,14 +503,16 @@ var germanTranslation = {
       cells: "Zellen",
       showOnCompleted: "Abschluss",
       logo: "Logo im Umfragetitel",
+      slider: "Slider",
       others: "Weiteres",
     },
     editProperty: "Eigenschaft bearbeiten '{0}'",
-    items: "[ Gegenstand: {0} ]",
+    items: "Gegenstände",
 
     enterNewValue: "Bitte einen Wert eingeben.",
     noquestions: "Die Umfrage enthält keine Frage.",
     createtrigger: "Bitte einen Trigger eingeben.",
+    titleKeyboardAdornerTip: "Bitte drücken Sie ENTER, um bearbeiten zu können",
     keyboardAdornerTip:
       "Drücken Sie ENTER, um das Element zu bearbeiten, ENTFERNEN, um das Element zu entfernen, STRG + PFEIL NACH OBEN/UNTEN, um das Element zu verschieben",
     triggerOn: "Ein",
@@ -465,18 +521,23 @@ var germanTranslation = {
     triggerCompleteText: "Bei Erfolg die Umfrage abschliessen.",
     triggerNotSet: "Trigger ist nicht gesetzt",
     triggerRunIf: "Ausführen wenn ...",
-    setToName: "Setze den Wert von ...",
-    fromName: "als Kopie von ...",
-    runExpression: "Anweisung",
-    setValue: "auf ...",
-    gotoName: "Gehe zu Frage ...",
-    triggerIsVariable: "Variable nicht im Umfrageergebnis einbinden.",
-    runExpressionEmpty: "Bitte geben Sie einen gültigen Ausdruck ein",
+    triggerSetToName: "Ändere den Wert von: ",
+    triggerFromName: "Kopiere den Wert von: ",
+    triggerRunExpression: "Führe diesen Ausdruck aus:",
+    triggerSetValue: "nach: ",
+    triggerGotoName: "Gehe zu Frage:",
+    triggerIsVariable: "Die Variable nicht in das Umfrageergebnis platzieren.",
+    triggerRunExpressionEmpty: "Bitte geben Sie einen gültigen Ausdruck ein",
+    emptyExpressionPlaceHolder: "Tippen Sie hier Ihren Ausdruck ein ...",
+    noFile: "Keine Datei ausgewählt"
   },
   //Property values
   pv: {
     true: "wahr",
     false: "falsch",
+    auto: "automatisch",
+    never: "nie",
+    always: "immer",
     inherit: "vererbt",
     show: "anzeigen",
     hide: "verstecken",
@@ -524,19 +585,14 @@ var germanTranslation = {
     hidden: "versteckt",
     on: "an",
     onPage: "an (unabhängig für jede Seite)",
-    underTitle: "Unterhalb des Titels",
-    underInput: "Unterhalb des Eingabefelds",
     edit: "Bearbeiten",
     display: "Anzeigen",
     onComplete: "Wenn die Umfrage abgeschlossen wurde",
     onHidden: "Wenn die Umfrage versteckt wurde",
-    onBlur: "Wenn das Eingabefeld verlassen wird",
-    onTyping: "Wenn in das Eingabefeld getippt wird",
-    all: "Alle",
+    all: "alle",
+    selected: "ausgewählte",
+    unselected: "unausgewählte",
     page: "Seite",
-    pages: "Seiten",
-    questions: "Fragen",
-    correctQuestions: "Richtig beantwortete Fragen",
     survey: "Umfrage",
     onNextPage: "Wenn die Seite gewechselt wurde",
     onValueChanged: "Wenn ein Wert geändert wurde",
@@ -546,11 +602,13 @@ var germanTranslation = {
     noPreview: "Keine Vorschau",
     showAllQuestions: "Vorschau mit allen Fragen anzeigen",
     showAnsweredQuestions: "Vorschau mit beantworteten Fragen anzeigen",
-    image: "Bild",
-    video: "Video",
-    contain: "beinhalten",
-    cover: "bedecken",
-    fill: "füllen",
+    pages: "Seiten",
+    questions: "Fragen",
+    requiredQuestions: "Erforderliche Fragen",
+    correctQuestions: "Richtig beantwortete Fragen",
+    buttons: "Buttons",
+    underInput: "Unterhalb des Eingabefelds",
+    underTitle: "Unterhalb des Titels"
   },
   //Operators
   op: {
@@ -577,7 +635,14 @@ var germanTranslation = {
     react: "React-Version benutzen",
     vue: "Vue-Version benutzen",
     bootstrap: "Als Bootstrap Framework",
-    standard: "Kein Bootstrap",
+    modern: "Theme: Modern",
+    default: "Theme: Standard",
+    orange: "Theme: Orange",
+    darkblue: "Theme: Dunkelblau",
+    darkrose: "Theme: Dunklerosa",
+    stone: "Theme: Stein",
+    winter: "Theme: Winter",
+    winterstone: "Theme: Winterstein",
     showOnPage: "Umfrage auf Seite anzeigen",
     showInWindow: "Umfrage als Fenster anzeigen",
     loadFromServer: "Lade Umfrage als JSON vom Server",
@@ -585,7 +650,7 @@ var germanTranslation = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Seite:",
     showInvisibleElements: "Unsichtbare Elemente anzeigen",
@@ -606,6 +671,9 @@ var germanTranslation = {
     runexpressiontrigger: "Anweisung ausführen",
     visibletrigger: "Sichtbarkeit ändern (deprecated)",
   },
+  pehelp: {
+    //expression:
+  },
   //Properties
   p: {
     name: "Name",
@@ -621,20 +689,14 @@ var germanTranslation = {
     visible: "Sichtbar",
     visibleIf: "Sichtbar wenn ...",
     questionTitleLocation: "Position der Fragentitel",
-    questionDescriptionLocation: "Position der Fragenbeschreibung",
     description: "Beschreibung",
     state: "Status",
     isRequired: "Ist erforderlich",
     requiredIf: "Erforderlich wenn ...",
-    choicesVisibleIf: "Auswahlmöglichkeiten sichtbar wenn ...",
-    choicesEnableIf: "Auswahlmöglichkeiten aktiviert wenn ...",
-    choicesEnabledIf: "Auswahlmöglichkeiten aktiviert wenn ...",
-    rowsVisibleIf: "Zeilen sichtbar wenn ...",
-    columnsVisibleIf: "Spalten sichtbar wenn ...",
     indent: "Einzug",
     requiredErrorText:
       "Fehlermeldung bei nicht beantworteten erforderlichen Fragen",
-    startWithNewLine: "Starte mit neuer Zeile",
+    startWithNewLine: "In einer neuen Zeile anzeigen?",
     innerIndent: "Innerer Einzug",
     page: "Seite",
 
@@ -642,42 +704,31 @@ var germanTranslation = {
 
     commentText: "Kommentarbeschreibung",
     valueName: "Name der Antwort",
+    clearIfInvisible: "Antworten von Fragen leeren, die nicht mehr sichtbar sind",
     enableIf: "Aktiviert wenn ...",
     defaultValue: "Standardantwort",
     correctAnswer: "Richtige Antwort",
     readOnly: "Schreibgeschützt?",
     validators: "Validierungen",
     titleLocation: "Position des Titels",
-    descriptionLocation: "Position der Beschreibung",
-    useDisplayValuesInTitle: "Verwende Anzeigewerte im Titel",
 
     hasComment: "Kommentare erlaubt?",
     hasOther: "Sonstiges auswählbar?",
-    selectAllText: "Text für die Auswahl aller Elemente",
     choices: "Auswahlmöglichkeiten",
     choicesOrder: "Auswahlreihenfolge",
     choicesByUrl: "Auswahlreihenfolge nach URL",
     otherText: "Text",
-    otherPlaceHolder: "Platzhalter",
     otherErrorText: "Fehlermeldung",
     storeOthersAsComment: "Speichere andere Werte als Kommentar",
 
     label: "Label",
-    labelTrue: 'Anzeigewert für "Ja"',
-    labelFalse: 'Anzeigewert für "Nein"',
     showTitle: "Titel anzeigen",
-    showHeader: "Spaltennamen anzeigen",
     valueTrue: 'Wert für "Ja"',
     valueFalse: 'Wert für "Nein"',
 
-    multiSelect: "Mehrfachauswahl",
-    contentMode: "Modus",
-    imageFit: "Bilddarstellung",
-    showLabel: "Wert anzeigen",
-
     cols: "Spalten",
     rows: "Zeilen",
-    placeHolder: "Platzhalter",
+    placeholder: "Platzhalter",
 
     optionsCaption: "Auswahlbeschriftung",
 
@@ -734,7 +785,6 @@ var germanTranslation = {
     panelPrevText: "Text für die Navigation zum vorherigen Panel",
     panelNextText: "Text für die Navigation zum nächsten Panel",
     showQuestionNumbers: "Fragenummern anzeigen",
-    textUpdateMode: "Text aktualisieren",
     showRangeInProgress: "Fortschrittsbalken anzeigen",
     renderMode: "Anzeigemodus",
     templateTitleLocation: "Template für die Titelposition",
@@ -757,8 +807,6 @@ var germanTranslation = {
       "Inhalt, der vor Abschluss der Umfrage angezeigt wird (HTML)",
     loadingHtml: "Inhalt, der beim Laden der Umfrage angezeigt wird (HTML)",
     triggers: "Trigger",
-    calculatedValues: "Berechnete Werte",
-    includeIntoResult: "Variable im Umfrageergebnis einbinden",
     cookieName: "Cookiename",
     sendResultOnPageNext:
       "Sende Umfrageergebnisse beim Betreten der nächsten Seite",
@@ -766,18 +814,13 @@ var germanTranslation = {
     showPrevButton:
       "Button für die vorherige Seite anzeigen (Benutzer können auf die vorherige Seite zurückkehren)",
     showPageTitles: "Seitenbeschreibung anzeigen",
-    navigateToUrl: "Weiterleitung (URL)",
-    navigateToUrlOnCondition: "Bedingte Weiterleitung (URL)",
     showCompletedPage: "Nach Abschluss die ausgefüllte Umfrage anzeigen",
     showPageNumbers: "Seitennummern anzeigen",
     questionErrorLocation: "Position der Fehlermeldungen",
     showProgressBar: "Fortschrittsbalken anzeigen",
-    progressBarType: "Fortschrittsbalkentyp",
-    questionsOnPageMode: "Aufteilung auf Seiten",
     mode: "Modus (editierbar/schreibgeschützt)",
     goNextPageAutomatic:
       "Wenn alle Fragen auf einer Seite beantwortet sind, gehe automatisch zur nächsten Seiten",
-    focusOnFirstError: "Fokussiere den ersten Fehler",
     checkErrorsMode: "Wann werden Fehler überprüft?",
     clearInvisibleValues: "Alle unsichtbaren Werte leeren",
     startSurveyText: "Text des Startbuttons",
@@ -793,16 +836,100 @@ var germanTranslation = {
     maxTimeToFinishPage: "Maximale Zeit, um eine Seite der Umfrage zu beenden",
     showTimerPanel: "Timerpanelposition",
     showTimerPanelMode: "Timerpanelmodus",
-    hideIfChoicesEmpty: "Verstecken, wenn Auswahlmöglichkeiten leer sind",
 
     defaultPanelValue: "Standardwert für Panels",
     defaultRowValue: "Standardwert für Zeilen",
-    defaultValueFromLastPanel: "Standardwert vom letzten Panel",
     hasNone: "Alle Elemente abwählbar?",
     noneText: "Text",
-    rowsOrder: "Zeilensortierung",
 
     text: "Text",
+    multiSelect: "Mehrfachauswahl",
+    showLabel: "Label anzeigen",
+
+    logo: "Logo",
+    logoWidth: "Breite des Logos",
+    logoHeight: "Höhe des Logos",
+    logoFit: "Passform des Logos",
+    focusOnFirstError: "Fokussiere den ersten Fehler automatisch",
+    completedHtmlOnCondition: "Bedingung dafür, dass eine benutzerdefiniterte Seite nach Abschluss der Umfrage angezeigt wird",
+    pages: "Seiten",
+    calculatedValues: "Berechnete Werte",
+    navigateToUrl: "Weiterleitung (URL)",
+    navigateToUrlOnCondition: "Bedingte Weiterleitung (URL)",
+    questionDescriptionLocation: "Position der Fragenbeschreibung",
+    progressBarType: "Fortschrittsbalkentyp",
+    maxTextLength: "Maximale Textlänge",
+    maxOthersLength: "Maximale weitere Länge",
+    textUpdateMode: "Text aktualisieren",
+    autoGrowComment: "Kommentarfeld autmatisch vergrößern",
+    questionTitlePattern: "Pattern für Fragentitel",
+    questionsOnPageMode: "Aufteilung auf Seiten",
+    showPreviewBeforeComplete: "Vor dem Abschluss der Umfrage eine Vorschau anzeigen",
+    widthMode: "Modus für die Breite",
+    showNumber: "Nummer anzeigen",
+    navigationTitle: "Navigationstitel",
+    navigationDescription: "Navigationsbeschreibung",
+    useDisplayValuesInTitle: "Verwende Anzeigewerte im Titel",
+    minWidth: "Minimale Breite",
+    maxWidth: "Maximale Breite",
+    descriptionLocation: "Position der Beschreibung",
+    hideNumber: "Nummer verstecken",
+    defaultValueExpression: "Ausdruck für Standardwerte",
+    bindings: "Bindings",
+    columnsVisibleIf: "Spalte sichtbar wenn ...",
+    rowsVisibleIf: "Zeile sichtbar wenn ...",
+    showHeader: "Titel anzeigen",
+    detailPanelMode: "Anzeigemodus des Panels für Details",
+    rowTitleWidth: "Breite für Zeilentitel",
+    allowAddRows: "Zeilen hinzufügen erlauben",
+    allowRemoveRows: "Zeilen entfernen erlauben",
+    defaultValueFromLastRow: "Standardwert von der letzten Zeile übernehmen",
+    hideColumnsIfEmpty: "Verstecken, wenn Spalten leer",
+    emptyRowsText: "Text für leere Zeilen",
+    detailPanelShowOnAdding: "Panel für Details beim Hinzufügen anzeigen",
+    allowRowsDragAndDrop: "Drag & Drop von Zeilen erlauben",
+    rowsOrder: "Zeilensortierung",
+    hideIfRowsEmpty: "Verstecken, wenn Zeilen leer",
+    maximumFractionDigits: "Maximale Anzahl an Nachkommastellen",
+    minimumFractionDigits: "Minimale Anzahl an Nachkommastellen",
+    choicesFromQuestion: "Auswahlmöglichkeiten übernehmen von",
+    choicesFromQuestionMode: "Modus für die Übernahme von Auswahlmöglichkeiten",
+    hideIfChoicesEmpty: "Verstecken, wenn Auswahlmöglichkeiten leer",
+    choicesVisibleIf: "Auswahlmöglichkeiten sichtbar, wenn ...",
+    choicesEnableIf: "Auswahlmöglichkeiten aktiviert, wenn ...",
+    otherPlaceHolder: "Platzhalter für Sonstiges",
+    maxSelectedChoices: "Maximale Anzahl an ausgwählten Auswahlmöglichkeiten",
+    showClearButton: "Button anzeigen, der es erlaubt, die Auswahl zu leeren",
+    contentMode: "Inhaltsmodus",
+    imageFit: "Passform des Bildes",
+    autoComplete: "Automatisch abschließen",
+    min: "Minimaler Wert",
+    max: "Maximaler Wert",
+    minValueExpression: "Ausdruck für minimalen Wert",
+    maxValueExpression: "Ausdruck für maximalen Wert",
+    minErrorText: "Fehlertext für minimalen Wert",
+    maxErrorText: "Fehlertext für maximalen Wert",
+    step: "Schritt",
+    dataList: "Datenliste",
+    autoGrow: "Automatisch vergrößern",
+    multiLine: "Mehrzeilig",
+    allowImagesPreview: "Vorschau von Bildern erlauben",
+    acceptedTypes: "Akzeptierte Typen",
+    waitForUpload: "Warte auf Upload",
+    needConfirmRemoveFile: "Bestätigung benötigt, wenn Datei gelöscht werden soll",
+    labelTrue: 'Label für "Ja"',
+    labelFalse: 'Label für "Nein"',
+    height: "Höhe",
+    allowClear: "Erlaube es, die Auswahl zu leeren",
+    penColor: "Stiftfarbe",
+    backgroundColor: "Hintergrundfarbe",
+    dataFormat: "Datenformat",
+    defaultValueFromLastPanel: "Standardwert vom letzten Panel übernehmen",
+    panelRemoveButtonLocation: "Positionierung des Buttons, der ein Panel entfernt",
+    showCaption: "Titel anzeigen",
+    iconName: "Name des Icons",
+    iconSize: "Größe des Icons",
+    useDropdown: "Dropdown verwenden",
   },
 };
 

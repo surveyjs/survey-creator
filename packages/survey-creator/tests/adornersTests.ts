@@ -226,6 +226,39 @@ QUnit.test("TitleInplaceEditor start edit callback", function(assert) {
   assert.equal(callCount, 1, "onTitleInplaceEditorStartEdit has been called");
 });
 
+QUnit.test("TitleInplaceEditor CompositionSession", function(assert) {
+  var target = new Survey.QuestionTextModel("q1");
+  var model = new TitleInplaceEditor(target, "title", {}, "", <any>{
+    onIsPropertyReadOnlyCallback: (
+      obj: Survey.Base,
+      property: Survey.JsonObjectProperty,
+      readOnly: boolean
+    ): boolean => {
+      return property.readOnly;
+    },
+  });
+  var inputElement = {
+    focus: () => {},
+  };
+  model.getInputElement = () => inputElement;
+  model.startEdit(model, null);
+  assert.equal(model.isCompositionSessionOpen, false, "no session");
+  assert.equal(model.shouldCloseCompositionSession, false, "no need to close");
+  model.compositionStart(undefined, undefined);
+  assert.equal(model.isCompositionSessionOpen, true, "composite session is opened");
+  assert.equal(model.shouldCloseCompositionSession, false, "but no need to close");
+  assert.equal(model.nameEditorKeypress(model, { keyCode: 13, target: {} }), true, "skip enter in composite");
+  assert.equal(model.isCompositionSessionOpen, true, "composite session is in process");
+  assert.equal(model.shouldCloseCompositionSession, false, "and no need to close");
+  model.compositionEnd(undefined, undefined);
+  assert.equal(model.isCompositionSessionOpen, true, "composite session still is in process");
+  assert.equal(model.shouldCloseCompositionSession, true, "but need to close");
+  assert.equal(model.nameEditorKeypress(model, { keyCode: 13, target: {} }), true, "skip enter in composite closing");
+  assert.equal(model.isCompositionSessionOpen, false, "composition session has been closed");
+  assert.equal(model.shouldCloseCompositionSession, false, "no need to close");
+  assert.equal(model.nameEditorKeypress(model, { keyCode: 13, target: {}, stopPropagation: () => {} }), false, "skip enter in composite closing");
+});
+
 QUnit.test("TitleInplaceEditor validateSelectedElement", function(assert) {
   var creator = new SurveyCreator();
   var target = new Survey.QuestionTextModel("q1");

@@ -2,38 +2,94 @@
   "Categories": [
     {
       "Name": "Survey-Creator-Overview",
-      "Title": "Survey Creator Overview"
+      "Title": "Survey Creator / Form Builder Overview"
     },
     {
-      "Name": "Add-Survey-Creator-into-your-Web-Page",
-      "Title": "Add Survey Creator into Your Web Page"
+      "Name": "get-started",
+      "Title": "Get Started with Survey Creator / Form Builder",
+      "Items": [
+        {
+          "Name": "get-started-angular",
+          "Title": "Angular"
+        },
+        {
+          "Name": "get-started-vue",
+          "Title": "Vue"
+        },
+        {
+          "Name": "get-started-react",
+          "Title": "React"
+        },
+        {
+          "Name": "get-started-knockout-jquery",
+          "Title": "Knockout / jQuery"
+        }
+      ]
+    },
+    {
+      "Name": "property-grid",
+      "Title": "Property Grid Customization"
+    },
+    {
+      "Name": "toolbox",
+      "Title": "Toolbox Customization"
+    },
+    {
+      "Name": "survey-customization",
+      "Title": "Survey Customization"
+    },
+    {
+      "Name": "localization",
+      "Title": "Localization & Globalization"
+    },
+    {
+      "Name": "integration-with-backend",
+      "Title": "Integration with Backend"
+    },
+    {
+      "Name": "customize-question-types",
+      "Title": "Customize Question Types",
+      "Items": [
+        {
+          "Name": "create-specialized-question-types",
+          "Title": "Create Specialized Question Types"
+        },
+        {
+          "Name": "create-composite-question-types",
+          "Title": "Create Composite Question Types"
+        },
+        {
+          "Name": "Create-Custom-Widget",
+          "Title": "Create Custom Widgets"
+        },
+        {
+          "Name": "third-party-component-integration-react",
+          "Title": "Integrate Third-Party React Components"
+        },
+      ]
+    },
+    {
+      "Name": "migration-from-survey-creator-v1",
+      "Title": "Migration from Survey Creator V1",
+      "Items": [
+        {
+          "Name": "Creator-V2-Whats-New",
+          "Title": "What's New in Survey Creator V2"
+        },
+        {
+          "Name": "Migrate-from-V1-to-V2",
+          "Title": "Migration to Survey Creator V2"
+        }
+      ]
     },
     {
       "Name": "Troubleshooting",
-      "Title": "Troubleshooting",
-      "Items": [
-        {     
-          "Name": "Migrate-from-V1-to-V2",
-          "Title": "Migration Guide - from V1 to V2"
-        },
-        {     
-          "Name": "React-Performance-Problems",
-          "Title": "React: Visualization of drag-and-drop operations is slow for large surveys"
-        }        
-      ] 
-    },    
-    {
-      "Name": "Build-Component-Questions",
-      "Title": "Components: Simplify and Enrich SurveyJS Creator Functionality"
-    },
-    {
-      "Name": "Create-Custom-Widget",
-      "Title": "Create Custom Widget"
+      "Title": "Troubleshooting"
     },
     {
       "Name": "End-User-Guide",
-      "Title": "End-User Guide"
-    },    
+      "Title": "End-User Documentation"
+    },
     {
       "Name": "BuilderOverview",
       "Title": "Overview",
@@ -45,7 +101,11 @@
       "Items": [
         {
           "Name": "surveycreator",
-          "Title": "Survey Creator"
+          "Title": "SurveyCreator"
+        },
+        {
+          "Name": "ICreatorOptions",
+          "Title": "ICreatorOptions"
         },
         {
           "Name": "questiontoolbox",
@@ -54,10 +114,6 @@
         {
           "Name": "iquestiontoolboxitem",
           "Title": "Toolbox Item"
-        },
-        {
-          "Name": "itoolbaritem",
-          "Title": "Toolbar Item"
         }
       ]
     }

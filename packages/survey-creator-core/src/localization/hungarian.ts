@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export var huStrings = {
   //survey templates
@@ -95,7 +95,7 @@ export var huStrings = {
     bold: "Félkövér",
     italic: "Dőlt",
     underline: "Aláhúzott",
-    fpAddQuestion: "Kérdés felvétele...",
+    addNewQuestion: "Kérdés felvétele",
     completedHtmlOnConditionItemText: "Mutatás ha:"
   },
   //Property names in table headers
@@ -166,7 +166,7 @@ export var huStrings = {
     isRequired: "Kötelező?",
     startWithNewLine: "Új sorban kezdődik?",
     rows: "Sorok száma",
-    placeHolder: "Mező kitöltőszövege",
+    placeholder: "Mező kitöltőszövege",
     showPreview: "A kép előnézete látható?",
     storeDataAsText: "Az állomány tartalmát tárolja a JSON-ben, szövegként",
     maxSize: "Maximális állományméret byte-ban",
@@ -375,7 +375,7 @@ export var huStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Válassza ki a tesztelni kívánt lapot:",
     showInvisibleElements: "Nemlátható elemek megjelnítése"
@@ -447,7 +447,7 @@ export var huStrings = {
 
     cols: "Oszlopok",
     rows: "Sorok",
-    placeHolder: "Helykitöltő",
+    placeholder: "Helykitöltő",
 
     optionsCaption: "'Beállítások' felirata",
 

@@ -3,36 +3,41 @@
 .svc-item-value-wrapper {
   position: relative;
   display: flex;
-}
-
-.svc-question__content--selected .svc-item-value-wrapper {
+  gap: calcSize(1);
+  align-items: center;
   margin-left: calcSize(-5);
 }
-
-.sd-selectbase__column:not(:first-of-type) .svc-item-value-wrapper {
-  margin-left: 0;
+.svc-question__dropdown-choice,
+.sd-selectbase {
+  .svc-item-value-wrapper {
+    align-items: flex-start;
+  }
 }
-
+.svc-question__content {
+  .sd-selectbase__column:not(.sd-imagepicker__column):not(:first-of-type) {
+    margin-left: calcSize(5);
+  }
+  .sd-selectbase__column:not(:last-child) {
+    padding-right: 0;
+  }
+}
 .svc-item-value--dragging {
   background: $background;
   box-shadow: 0px calcSize(1) calcSize(2) $shadow-medium;
-  border-radius: 100px;
+  border-radius: calcSize(12.5);
   padding-right: calcSize(3);
   padding-left: calcSize(0.5);
+  @include disableUserSelect;
 }
 
 .svc-item-value-controls {
-  display: none;
+  display: flex;
   margin: calcSize(1) 0;
-  margin-right: calcSize(1);
-  // position: absolute;
-  // left: calcSize(-10);
-  width: calcSize(9);
   height: calcSize(4);
   box-sizing: border-box;
-  // text-align: right;
-  // white-space: nowrap;
   flex-shrink: 0;
+  min-width: 72px;
+  justify-content: flex-end;
 }
 
 .svc-item-value-controls__button {
@@ -40,58 +45,61 @@
   padding: calcSize(1);
   cursor: pointer;
   display: inline-block;
-}
-.svc-item-value-controls__button > span,
-sv-svg-icon.svc-item-value-controls__button {
-  width: calcSize(2);
+  outline: none;
   height: calcSize(2);
   box-sizing: content-box;
   .sv-svg-icon {
     display: block;
   }
 }
+
 .svc-item-value-controls__button > span {
   display: block;
 }
-
+.svc-item-value-controls__drag-icon {
+  display: block;
+}
+.svc-item-value-wrapper:hover:not(.svc-item-value--ghost),
+.svc-item-value-controls__drag:hover:not(.svc-item-value--ghost) {
+  .svc-item-value-controls__drag-icon {
+    visibility: visible;
+  }
+}
 .svc-item-value-controls__drag {
-  padding: calcSize(1) calcSize(1.5);
+  padding: calcSize(0.5) calcSize(1);
   cursor: move;
+  opacity: 0.25;
+  .svc-item-value-controls__drag-icon {
+    visibility: hidden;
+  }
   use {
-    fill: $foreground-light;
-  }
-  &:hover {
-    use {
-      fill: $primary;
-    }
+    fill: $foreground;
   }
 }
 
-.svc-item-value-controls__remove,
+.svc-item-value-controls__remove {
+  use {
+    fill: $red;
+  }
+}
 .svc-item-value-controls__add {
-  float: right;
-}
-
-.svc-item-value-controls__add:hover {
-  background-color: $primary-light;
   use {
     fill: $primary;
   }
 }
 
-.svc-item-value-controls__remove:hover {
-  background-color: $red-light;
-  use {
-    fill: $red;
+.svc-item-value-controls__add {
+  &:hover,
+  &:focus {
+    background-color: $primary-light;
   }
 }
 
-.svc-question__content--selected-no-border .svc-item-value-controls {
-  display: block;
-}
-
-.svc-question__content--selected .svc-item-value-controls {
-  display: block;
+.svc-item-value-controls__remove {
+  &:hover,
+  &:focus {
+    background-color: $red-light;
+  }
 }
 
 .sv-string-editor {
@@ -100,7 +108,16 @@ sv-svg-icon.svc-item-value-controls__button {
 
 .svc-item-value--new {
   .svc-item-value__item {
-    opacity: 0.5;
+    .sd-item__control-label,
+    .sv-ranking-item__text {
+      color: $foreground-light;
+    }
+    .sd-item__decorator {
+      opacity: 0.35;
+    }
+  }
+  .sv-ranking-item__index {
+    background: $background-for-editors;
   }
 }
 .sv-ranking {
@@ -136,8 +153,8 @@ sv-svg-icon.svc-item-value-controls__button {
 
 @keyframes svdragdropmovedown {
   0% {
-    transform: translate(0, -50px);    
-  } 
+    transform: translate(0, -50px);
+  }
   100% {
     transform: translate(0, 0);
   }
@@ -151,13 +168,20 @@ sv-svg-icon.svc-item-value-controls__button {
 
 @keyframes svdragdropmoveup {
   0% {
-    transform: translate(0, 50px);   
+    transform: translate(0, 50px);
   }
   100% {
-    transform: translate(0, 0); 
+    transform: translate(0, 0);
   }
 }
 
 .svc-item-value__ghost {
-  display: none;background: #f3f3f3;border-radius: 100px;width: 200px;height: 55px;z-index: 11;position: absolute;left: 35px;
+  display: none;
+  background: $background-dim;
+  border-radius: calcSize(12.5);
+  width: calcSize(25);
+  height: 55px;
+  z-index: 11;
+  position: absolute;
+  left: 35px;
 }

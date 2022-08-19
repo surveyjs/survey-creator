@@ -3,25 +3,33 @@ import {
   SurveyModel,
   FunctionFactory,
   Version,
+  settings,
   property
 } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
+import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { json } from "./embed-json";
 import "./embed.scss";
 
 export class EmbedModel extends Base {
   @property() survey: SurveyModel;
-  constructor(creator: CreatorBase<SurveyModel>) {
+  constructor(creator: CreatorBase) {
     super();
     FunctionFactory.Instance.register(
       "surveyjsEmbedScriptsMarkup",
       (params: [string, string]) => {
         const [framework, theme]: [string, string] = params;
-        let result: string = `<!-- Your platform (${framework}) scripts -->\n\n`;
+        let result: string = "";
+        if(framework ==="jquery") {
+          result = "<script src=\"https://unpkg.com/jquery\"></script>";
+        } else {
+          result = `<!-- Your platform (${framework}) scripts -->`;
+        }
+        result +="\n\n";
         if (theme !== "bootstrap") {
           result += `<link href="https://unpkg.com/survey-${framework}@${Version}/${
-            theme === "modern" ? "modern" : "survey"
+            ["defaultV2", "modern"].indexOf(theme) > -1 ? theme : "survey"
           }.css" type="text/css" rel="stylesheet"/>`;
         }
         return (
@@ -83,6 +91,8 @@ export class EmbedModel extends Base {
       }
     );
     this.survey = creator.createSurvey(json, "embed");
+    this.survey.css = propertyGridCss;
+    settings.readOnlyCommentRenderMode = "default";
     this.survey.onUpdateQuestionCssClasses.add((_, options) => {
       if (options.question.getType() === "comment") {
         options.cssClasses.title = "sv-question-embed__title";
@@ -93,8 +103,8 @@ export class EmbedModel extends Base {
 
 export class TabEmbedPlugin implements ICreatorPlugin {
   public model: EmbedModel;
-  constructor(private creator: CreatorBase<SurveyModel>) {
-    creator.addPluginTab("embed", this, getLocString("ed.embedSurvey"));
+  constructor(private creator: CreatorBase) {
+    creator.addPluginTab("embed", this, "ed.embedSurvey");
   }
   public activate(): void {
     this.model = new EmbedModel(this.creator);

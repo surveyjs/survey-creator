@@ -75,8 +75,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public onChanged: (newValue: any) => any;
   public onGetLocale: () => string;
   public onValueUpdated: (newValue: any) => any;
-  public setup() {}
-  public beforeShow() {}
+  public setup() { }
+  public beforeShow() { }
   constructor(property: Survey.JsonObjectProperty) {
     this.property_ = property;
     var self = this;
@@ -158,7 +158,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.isInPropertyGridValue = val;
     this.setTitleAndDisplayName();
   }
-  public get isDiplayNameVisible() {
+  public get isDisplayNameVisible() {
     return (
       this.showDisplayName &&
       !this.isInPropertyGrid &&
@@ -181,7 +181,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.showDisplayNameValue = val;
   }
   public get showDisplayNameOnTop(): boolean {
-    return this.isDiplayNameVisible && this.canShowDisplayNameOnTop;
+    return this.isDisplayNameVisible && this.canShowDisplayNameOnTop;
   }
   public get canShowDisplayNameOnTop(): boolean {
     return true;
@@ -308,7 +308,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     ) {
       errorText = this.options.onGetErrorTextOnValidationCallback(
         this.property.name,
-        this.originalObject,
+        this.object,
         this.koValue()
       );
     }
@@ -322,9 +322,13 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
       !Array.isArray(this.parentList)
     )
       return false;
+    const val = this.koValue();
     for (var i = 0; i < this.parentList.length; i++) {
       if (this.parentList[i] === this.object) continue;
-      if (this.parentList[i][this.property.name] == this.koValue()) return true;
+      const propVal = this.parentList[i][this.property.name];
+      if(typeof propVal === "string" && typeof val === "string"
+      && propVal.toLocaleLowerCase() === val.toLocaleLowerCase()) return true;
+      if (propVal == this.koValue()) return true;
     }
     return false;
   }
@@ -365,7 +369,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.performApply();
     return true;
   }
-  protected performApply() {}
+  protected performApply() { }
   public get locale(): string {
     if (this.onGetLocale) return this.onGetLocale();
     return "";
@@ -382,6 +386,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   public getRenderer(name: string): string {
     return undefined;
   }
+  public getRendererContext(locStr: Survey.LocalizableString) {
+    return locStr;
+  }
   public get options(): ISurveyObjectEditorOptions {
     return this.optionsValue;
   }
@@ -389,7 +396,7 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     this.optionsValue = value;
     this.onOptionsChanged();
   }
-  protected onOptionsChanged() {}
+  protected onOptionsChanged() { }
   public setObject(value: any) {
     if (this.options) {
       var editorOptions = this.createEditorOptions();
@@ -404,8 +411,8 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
   protected createEditorOptions(): any {
     return {};
   }
-  protected onSetEditorOptions(editorOptions: any) {}
-  protected onValueChanged() {}
+  protected onSetEditorOptions(editorOptions: any) { }
+  protected onValueChanged() { }
   protected getCorrectedValue(value: any): any {
     if (!this.property) return value;
     if (!this.isValueEmpty(this.property.minValue)) {
@@ -472,6 +479,9 @@ export class SurveyPropertyEditorBase implements Survey.ILocalizableOwner {
     if (this.hasError()) return;
 
     if (this.property && this.object && this.getValue() == newValue) return;
+    this.doOnChanged(newValue);
+  }
+  protected doOnChanged(newValue: any) {
     if (this.onChanged != null) this.onChanged(newValue);
   }
   protected isValueEmpty(val): boolean {

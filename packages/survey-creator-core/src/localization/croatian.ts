@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var hrStrings = {
   //survey templates
@@ -116,12 +116,11 @@ export var hrStrings = {
     bold: "podebljano",
     italic: "kurziv",
     underline: "podcrtavanje",
-    fpAddQuestion: "Dodaj pitanje...",
+    addNewQuestion: "Dodaj pitanje",
     selectPage: "Odaberite stranicu...",
     chooseElement: "Odaberite element...",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
-      addNewItem: "", //By default the value is taken from pe.addNew 'Add New', you can set it to 'Add New Rule' for example.
       //Logic tab strings
       page_visibilityName: "Vidljivost stranice",
       panel_visibilityName: "Vidljivost panela",
@@ -295,7 +294,7 @@ export var hrStrings = {
     startWithNewLine: "Počinje li s novom linijom?",
     rows: "Broj redaka",
     cols: "Broj stupaca",
-    placeHolder: "Držač ulaznog mjesta",
+    placeholder: "Držač ulaznog mjesta",
     showPreview: "Prikaz područja pretpregleda",
     storeDataAsText: "Pohranite sadržaj datoteke u rezultat JSON kao tekst",
     maxSize: "Maksimalna veličina datoteke u bytes",
@@ -575,7 +574,7 @@ export var hrStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Odaberite stranicu da biste je testirali:",
     showInvisibleElements: "Pokaži nevidljive elemente",
@@ -651,7 +650,6 @@ export var hrStrings = {
 
     cols: "cols",
     rows: "rows",
-    placeHolder: "placeHolder",
 
     optionsCaption: "optionsCaption",
 

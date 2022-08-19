@@ -7,18 +7,20 @@
   background-color: $background-dim;
 }
 
+.st-properties {
+  .spg-item.spg-selectbase__label:focus-within {
+    outline: 1px dotted $primary;
+  }
+  .spg-selectbase__label:focus-within {
+    outline: none;
+  }
+  .spg-panel__content .spg-row {
+    margin-top: 0;
+  }
+}
+
 .st-no-strings {
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 400;
-  font-size: calcSize(2);
-  color: $foreground;
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  overflow: hidden;
+  @include centerText;
 }
 
 .st-content {
@@ -52,7 +54,7 @@
 .st-strings-header {
   .st-table__cell {
     background-color: $background-dim;
-    height: calcSize(4);
+    height: auto;
   }
 }
 
@@ -70,25 +72,41 @@
 .st-title.st-panel__title {
   height: calcSize(4);
   line-height: calcSize(4);
-  padding-left: calcSize(4);
+  padding-left: calcSize(3);
   margin: 0;
 
   background-color: $background-for-editors;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid $border-light;
 }
-
+.st-table {
+  tr {
+    display: flex;
+    align-items: stretch;
+  }
+}
 .st-table__cell {
-  height: calcSize(5);
+  display: block;
+  flex: 1 1;
+  box-sizing: border-box;
   background-color: $primary-bg-color;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid $border-light;
+  padding: calcSize(1) 0;
 }
 
 .st-table__cell:first-child {
   @include defaultBold;
   color: $foreground;
-
+  max-width: 300px;
+  padding-right: calcSize(3);
   span {
-    padding-left: calcSize(4);
+    display: inline-block;
+    padding-left: calcSize(3);
+  }
+}
+
+.st-panel-indent .st-table__cell:first-child {
+  span {
+    padding-left: calcSize(6);
   }
 }
 
@@ -101,9 +119,16 @@
 
 .st-comment {
   @include defaultFont;
-
-  width: 100%;
+  display: block;
+  width: calc(100% - 3 * #{$base-unit});
   border: unset;
+  outline: none;
   background-color: $primary-bg-color;
   resize: none;
+  padding: 0;
+}
+
+.sd-translation-line-skeleton {
+  min-height: calcSize(5);
+  background-color: $background-dim;
 }

@@ -1,5 +1,5 @@
-import { url, getTabbedMenuItemByText, setJSON } from "../helper";
-import { ClientFunction, Selector } from "testcafe";
+import { url, getTabbedMenuItemByText, setJSON, getBarItemByTitle, getListItemByText, creatorTabPreviewName, explicitErrorHandler } from "../helper";
+import { Selector } from "testcafe";
 const title = "Preview tab";
 
 fixture`${title}`.page`${url}`.beforeEach(
@@ -64,139 +64,136 @@ const json2 = {
   }]
 };
 
-function getBarItemByText(text) {
-  return Selector(".svc-test-tab__content-actions .sv-action-bar-item .sv-action-bar-item__title").withText(text);
-}
-function getListItemByText(text) {
-  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text);
-}
-
-const visibleBarItems = Selector(".svc-test-tab__content-actions .sv-action").filterVisible();
+const orientationAction = Selector("#orientationSelector .sv-action-bar-item");
+const restartSurveyButtonText = "Preview Survey Again";
 
 test("Language switcher", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
-    .expect(getBarItemByText("english").visible).ok()
-    .expect(Selector(".sv-title .sv-header__text").textContent).contains("My Survey")
-    .click(getBarItemByText("english"))
-    .expect(getListItemByText("deutsch").visible).ok()
-    .click(getListItemByText("deutsch"))
-    .expect(Selector(".sv-title .sv-header__text").textContent).contains("Meine Umfrage")
-    .expect(getBarItemByText("deutsch").visible).ok();
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .expect(getBarItemByTitle("English").visible).ok()
+    .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("My Survey")
+    .click(getBarItemByTitle("English"))
+    .expect(getListItemByText("Deutsch").visible).ok()
+    .click(getListItemByText("Deutsch"))
+    .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("Meine Umfrage")
+    .expect(getBarItemByTitle("Deutsch").visible).ok();
 });
 
 test("Page switcher", async (t) => {
   await setJSON(json2);
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
-    .expect(Selector(".sv-question__title").withText("string_editor").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("page1")
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .expect(Selector(".sd-question__title").withText("string_editor").visible).ok()
+    .expect(Selector("#pageSelector").textContent).contains("First page")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(true)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
 
     .click(Selector("#nextPage"))
-    .expect(Selector(".sv-question__title").withText("question1").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("page2")
+    .expect(Selector(".sd-question__title").withText("question1").visible).ok()
+    .expect(Selector("#pageSelector").textContent).contains("Second page")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
 
     .click(Selector("#nextPage"))
-    .expect(Selector(".sv-question__title").withText("question2").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("page3")
+    .expect(Selector(".sd-question__title").withText("question2").visible).ok()
+    .expect(Selector("#pageSelector").textContent).contains("Page 3")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(true)
 
-    .click(getBarItemByText("page3"))
-    .expect(getListItemByText("page2").visible).ok()
-    .expect(getListItemByText("page1").hasClass("sv-list__item--selected")).notOk()
-    .expect(getListItemByText("page2").hasClass("sv-list__item--selected")).notOk()
-    .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).ok()
-    .click(getListItemByText("page2"))
-    .expect(Selector(".sv-question__title").withText("question1").visible).ok()
-    .expect(Selector("#pageSelector").textContent).contains("page2")
+    .click(getBarItemByTitle("Page 3"))
+    .expect(getListItemByText("Second page").visible).ok()
+    .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
+    .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).notOk()
+    .expect(getListItemByText("Page 3").hasClass("sv-list__item--selected")).ok()
+    .click(getListItemByText("Second page"))
+    .expect(Selector(".sd-question__title").withText("question1").visible).ok()
+    .expect(Selector("#pageSelector").textContent).contains("Second page")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
-    .click(getBarItemByText("page2"))
-    .expect(getListItemByText("page1").hasClass("sv-list__item--selected")).notOk()
-    .expect(getListItemByText("page2").hasClass("sv-list__item--selected")).ok()
-    .expect(getListItemByText("page3").hasClass("sv-list__item--selected")).notOk()
-    .click(getListItemByText("page2"));
+    .click(getBarItemByTitle("Second page"))
+    .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
+    .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).ok()
+    .expect(getListItemByText("Page 3").hasClass("sv-list__item--selected")).notOk()
+    .click(getListItemByText("Second page"));
 });
 
-test("Test Survey Again", async (t) => {
+test("Preview Survey Again", async (t) => {
   await setJSON(json2);
-  const switcher = getBarItemByText("Show invisible elements");
+  const switcher = getBarItemByTitle("Show invisible elements");
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .click(Selector("#nextPage"))
     .click(Selector("#nextPage"))
     .click(Selector("input[value='Complete']"))
-    .expect(Selector("h3").withText("Thank you for completing the survey!").visible).ok()
-    .click(getBarItemByText("Test Survey Again"))
-    .expect(Selector(".sv-question__title").withText("string_editor").visible).ok();
+    .expect(Selector("h3").withText("Thank you for completing the survey").visible).ok()
+    .click(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText))
+    .expect(Selector(".sd-question__title").withText("string_editor").visible).ok();
 });
 
 test("Show invisible elements switcher", async (t) => {
   await setJSON(json2);
-  const switcher = getBarItemByText("Show invisible elements");
+  const switcher = getBarItemByTitle("Show invisible elements");
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
-    .expect(Selector(".sv-question__title").withText("string_editor").visible).ok()
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .expect(Selector(".sd-question__title").withText("string_editor").visible).ok()
     .expect(switcher.visible).ok("Switcher is visible")
     .click(switcher)
-    .expect(Selector(".sv-question__title").withText("hidden_question").visible).ok();
+    .expect(Selector(".sd-question__title").withText("hidden_question").visible).ok();
 });
 
 test("Landscape switcher", async (t) => {
+  await explicitErrorHandler();
   await setJSON(json);
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
-    .expect(Selector("#orientationSelector").visible).notOk()
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .expect(orientationAction.hasAttribute("disabled")).ok()
     .expect(Selector(".svd-simulator-main").hasClass("svd-simulator-main--frame")).notOk()
-    .expect(getBarItemByText("Show invisible elements").visible).ok()
+    .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
-    .click(getBarItemByText("Desktop"))
+    .click(getBarItemByTitle("Desktop"))
     .expect(getListItemByText("iPad").visible).ok()
     .click(getListItemByText("iPad"))
-    .expect(getBarItemByText("Landscape").visible).ok()
+    .expect(orientationAction.hasAttribute("disabled")).notOk()
     .expect(Selector(".svd-simulator-main").hasClass("svd-simulator-main--frame")).ok()
     .expect(Selector(".svd-simulator-wrapper").clientWidth).gt(900)
     .expect(Selector(".svd-simulator-wrapper").clientHeight).lt(800)
-    .click(getBarItemByText("Landscape"))
-    .expect(getBarItemByText("Portrait").visible).ok()
+    .click(getBarItemByTitle("Landscape"))
+    .expect(getBarItemByTitle("Portrait").visible).ok()
     .expect(Selector(".svd-simulator-wrapper").clientWidth).lt(800)
     .expect(Selector(".svd-simulator-wrapper").clientHeight).gt(900);
 });
 test("Device selector", async (t) => {
+  await explicitErrorHandler();
   await setJSON(json);
 
   await t
-    .click(getTabbedMenuItemByText("Test Survey"))
-    .expect(visibleBarItems.count).eql(2)
-    .expect(getBarItemByText("Show invisible elements").visible).ok()
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .expect(Selector(".svc-top-bar .sv-action-bar-item").filterVisible().count).eql(3)
+    .expect(orientationAction.hasAttribute("disabled")).ok()
+    .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
-    .click(getBarItemByText("Desktop"))
+    .click(getBarItemByTitle("Desktop"))
     .expect(getListItemByText("iPad").visible).ok()
 
     .click(getListItemByText("iPad"))
     .click(Selector("input[value='Complete']"))
-    .expect(visibleBarItems.count).eql(3, "Landscape/Portrait switch appeared")
-    .expect(getBarItemByText("Test Survey Again").visible).ok()
+    .expect(orientationAction.hasAttribute("disabled")).notOk()
+    .expect(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText).visible).ok()
 
-    .click(getBarItemByText("iPad"))
+    .click(getBarItemByTitle("iPad"))
     .expect(getListItemByText("Desktop").visible).ok()
 
     .click(getListItemByText("Desktop"))
-    .click(getBarItemByText("Test Survey Again"))
-    .expect(visibleBarItems.count).eql(2)
-    .expect(getBarItemByText("Show invisible elements").visible).ok()
+    .click(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText))
+    .expect(orientationAction.hasAttribute("disabled")).ok()
+    .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
-    .click(getBarItemByText("Desktop"))
+    .click(getBarItemByTitle("Desktop"))
     .expect(getListItemByText("iPad").visible).ok();
 });

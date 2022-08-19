@@ -45,6 +45,62 @@ export class SurveySimulatorModel extends Base {
   @property({ defaultValue: true }) simulatorEnabled: boolean;
   @property({ defaultValue: true }) simulatorScaleEnabled: boolean;
 
+  private currZoomScale: number;
+  public get zoomScale(): number {
+    return this.currZoomScale;
+  }
+  public activateZoom = () => {
+    document.addEventListener("keydown", this.listenTryToZoom);
+    document.addEventListener("wheel", this.listenTryToZoomWithWheel, { passive: false });
+  }
+  public deactivateZoom = () => {
+    document.removeEventListener("keydown", this.listenTryToZoom);
+    document.removeEventListener("wheel", this.listenTryToZoomWithWheel);
+  }
+  private listenTryToZoomWithWheel = e => this.tryToZoomWithWheel(e, e);
+  private tryToZoomWithWheel(data: any, event: any) {
+    const diff: number = event.deltaY;
+    if (event.ctrlKey || event.metaKey) {
+      diff < 0 ? this.zoomSimulator("up", event) : this.zoomSimulator("down", event);
+    }
+    return true;
+  }
+  private listenTryToZoom = e => this.tryToZoom(e, e);
+  public tryToZoom(data: any, event: any) {
+    if (event.ctrlKey || event.metaKey) {
+      if (event.keyCode == 107 || event.keyCode == 187) {
+        this.zoomSimulator("up", event);
+      }
+      if (event.keyCode == 109 || event.keyCode == 189) {
+        this.zoomSimulator("down", event);
+      }
+      if (event.keyCode == 48 || event.keyCode == 96) {
+        this.zoomSimulator("zero", event);
+      }
+    }
+    return true;
+  }
+  private changeZoomScale(type: "up" | "down" | "zero") {
+    const coef: number = 1.01;
+    const multiplier: number = type === "up" ? coef : (type === "down" ? 1 / coef : 1);
+    this.currZoomScale = type === "zero" ? 1 : this.currZoomScale * multiplier;
+  }
+  private zoomSimulator(type: "up" | "down" | "zero", event: any) {
+    event.preventDefault();
+
+    this.changeZoomScale(type);
+
+    const simulator = document.getElementById("svd-simulator-wrapper");
+    if (!!simulator) simulator.style.transform = "scale(" + this.currZoomScale + ")";
+
+    event.stopPropagation();
+  }
+  public resetZoomParameters(): void {
+    this.currZoomScale = 1;
+    const simulator = document.getElementById("svd-simulator-wrapper");
+    if (!!simulator) simulator.style.transform = "";
+  }
+
   public get activeDevice(): string {
     return this.device;
   }
@@ -65,37 +121,31 @@ export class SurveySimulatorModel extends Base {
   }
 
   public get simulatorMainCssClass() {
-    return this.hasFrame?"svd-simulator-main--frame":"";
+    return this.hasFrame ? "svd-simulator-main--frame" : "";
   }
 
   public get simulatorFrame() {
     if (!this.hasFrame) {
       return undefined;
     }
-    var device = simulatorDevices[this.activeDevice];
-    var scale = DEFAULT_MONITOR_DPI / (device.ppi / device.cssPixelRatio);
-    var width =
-      ((this.landscapeOrientation ? device.height : device.width) /
-        device.cssPixelRatio) *
-      scale;
-    var height =
-      ((this.landscapeOrientation ? device.width : device.height) /
-        device.cssPixelRatio) *
-      scale;
-    var frameWidth =
-      ((this.landscapeOrientation ? device.frameHeight : device.frameWidth) /
-        device.cssPixelRatio) *
-      scale;
-    var frameHeight =
-      ((this.landscapeOrientation ? device.frameWidth : device.frameHeight) /
-        device.cssPixelRatio) *
-      scale;
+    const device = simulatorDevices[this.activeDevice];
+    const scale = DEFAULT_MONITOR_DPI / device.ppi;
+
+    const deviceWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
+    const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
+    const deviceLandscapedFrameWidth = (this.landscapeOrientation ? device.frameHeight : device.frameWidth);
+    const deviceLandscapedFrameHeight = (this.landscapeOrientation ? device.frameWidth : device.frameHeight);
+    const frameWidth = deviceLandscapedFrameWidth * scale;
+    const frameHeight = deviceLandscapedFrameHeight * scale;
+
     return {
-      scale: this.simulatorScaleEnabled ? scale * 2 : 1,
-      width: width,
-      height: height,
+      scale: this.simulatorScaleEnabled ? scale * device.cssPixelRatio : 1,
       frameWidth: frameWidth,
       frameHeight: frameHeight,
+      landscapedFrameWidth: this.landscapeOrientation ? frameHeight : frameWidth,
+      landscapedFrameHeight: this.landscapeOrientation ? frameWidth : frameHeight,
+      deviceWidth: deviceWidth,
+      deviceHeight: deviceHeight,
       cssClass:
         device.cssClass +
         (this.landscapeOrientation ? " svd-simulator-frame-landscape" : ""),
@@ -103,7 +153,7 @@ export class SurveySimulatorModel extends Base {
   }
 }
 
-export var DEFAULT_MONITOR_DPI = 102.69;
+export var DEFAULT_MONITOR_DPI = (!!window ? window.devicePixelRatio : 1) * 96;
 export var simulatorDevices = {
   desktop: {
     deviceType: "desktop",
@@ -145,7 +195,7 @@ export var simulatorDevices = {
   //   cssClass: "svd-simulator-iphone4"
   // },
   iPhone5: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 1.83,
     ppi: 326,
     width: 640,
     height: 1136,
@@ -167,7 +217,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-iphone6",
   },
   iPhone6plus: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 2.6,
     ppi: 401,
     width: 1080,
     height: 1920,
@@ -189,7 +239,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-iphone8",
   },
   iPhone8plus: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 3,
     ppi: 401,
     width: 1080,
     height: 1920,
@@ -200,7 +250,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-iphone8plus",
   },
   iPhoneX: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 3,
     ppi: 458,
     width: 1125,
     height: 2436,
@@ -211,7 +261,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-iphonex",
   },
   iPhoneXmax: {
-    cssPixelRatio: 2,
+    cssPixelRatio: 3,
     ppi: 458,
     width: 1242,
     height: 2688,
@@ -233,7 +283,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-ipad",
   },
   iPadMini: {
-    cssPixelRatio: 1,
+    cssPixelRatio: 2,
     ppi: 163,
     width: 768,
     height: 1024,
@@ -244,7 +294,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-ipadmini",
   },
   iPadPro: {
-    cssPixelRatio: 1,
+    cssPixelRatio: 2,
     ppi: 264,
     width: 1688,
     height: 2388,
@@ -255,7 +305,7 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-ipadpro",
   },
   iPadPro13: {
-    cssPixelRatio: 1,
+    cssPixelRatio: 2,
     ppi: 264,
     width: 2048,
     height: 2732,

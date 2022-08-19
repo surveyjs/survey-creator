@@ -5,7 +5,9 @@ $primary-light: var(--primary-light, rgba(25, 179, 148, 0.1));
 $primary-foreground: var(--primary-foreground, #fff);
 
 $secondary: var(--secondary, #ff9814);
-$secondary-light: var(--secondary-light, rgba(255, 152, 20, 0.1));
+$secondary-light: var(--secondary-light, rgba(255, 152, 20, 0.25));
+$secondary-back-light: var(--secondary-back-light, rgba(255, 152, 20, 0.1));
+
 $secondary-foreground: var(--secondary-foreground, #fff);
 
 $background: var(--background, #fff);
@@ -14,25 +16,26 @@ $background-for-editors: var(--background-for-editors, #f9f9f9);
 
 $foreground: var(--foreground, #161616);
 $foreground-light: var(--foreground-light, #909090);
-//todo: discuss this variable
 $foreground-disabled: var(--foreground-disabled, rgba(#161616, 0.16));
-$foreground-disabled-for-editors: var(
-  --foreground-disabled,
-  rgba(#161616, 0.25)
-);
+$foreground-disabled-for-editors: var(--foreground-disabled, rgba(#161616, 0.25));
 
 $border: var(--border, #d6d6d6);
+$border-light: var(--border-light, #eaeaea);
 $border-inside: var(--border-inside, rgba(0, 0, 0, 0.16));
 
 $shadow-medium: rgba(0, 0, 0, 0.1);
 $shadow-inner: rgba(0, 0, 0, 0.15);
 
 $red: var(--red, #e60a3e);
-$red-light: var(--red-light, rgba(230, 10, 62, 0.1));
+$red-light: var(--red-light, rgba(229, 10, 62, 0.1));
 $green: var(--green, #19b394);
 $green-light: var(--green-light, rgba(25, 179, 148, 0.1));
+$blue: var(--blue, #437fd9);
+$blue-light: var(--blue-light, rgba(67, 127, 217, 0.1));
+$yellow: var(--yellow, #ff9814);
+$yellow-light: var(--yellow-light, rgba(255, 152, 20, 0.1));
 
-$font-family: "Open Sans";
+$font-family: var(--font-family);
 
 $base-unit: var(--base-unit, 8px);
 
@@ -41,12 +44,22 @@ $base-unit: var(--base-unit, 8px);
   @return $result;
 }
 
+$tab-min-height: var(--tab-min-height, auto);
+
 @mixin smallBold {
   font-family: $font-family;
   font-style: normal;
   font-weight: 600;
   font-size: calcSize(1.5);
   line-height: calcSize(2);
+}
+
+@mixin mediumBold {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: bold;
+  font-size: calcSize(3);
+  line-height: calcSize(4);
 }
 
 @mixin defaultBold {
@@ -62,4 +75,30 @@ $base-unit: var(--base-unit, 8px);
   font-style: normal;
   font-size: calcSize(2);
   line-height: calcSize(3);
+}
+
+@mixin textEllipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin disableUserSelect {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+@mixin centerText {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calcSize(2);
+  color: $foreground;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  overflow: hidden;
 }

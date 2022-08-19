@@ -112,7 +112,7 @@ export class TitleInplaceEditor {
         this.getLocString("pe.titleKeyboardAdornerTip")
       );
       element.setAttribute("role", "textbox");
-      element.onclick = (e) => {
+      element.onpointerdown = (e) => {
         this.startEdit(this, e);
         e.preventDefault();
       };
@@ -195,6 +195,9 @@ export class TitleInplaceEditor {
     if (this.readOnly) {
       return;
     }
+    this.isCompositionSessionOpen = false;
+    this.shouldCloseCompositionSession = false;
+    this.editor.selectFromStringEditor = true;
     if (this._needSelectTargetOnStartEdit) {
       this.editor.selectedElement = this.target;
     }
@@ -246,19 +249,27 @@ export class TitleInplaceEditor {
     this.hideEditor();
   };
   isCompositionSessionOpen = false;
+  shouldCloseCompositionSession = false;
   cancelEdit = () => {
     this.editingName(this.prevName());
     this.hideEditor();
   };
   compositionStart = (model, event) => {
     this.isCompositionSessionOpen = true;
+    this.shouldCloseCompositionSession = false;
+  };
+  compositionEnd = (model, event) => {
+    this.shouldCloseCompositionSession = true;
   };
   nameEditorKeypress = (model, event) => {
     resizeInput(event.target);
     switch (event.keyCode) {
       case 13:
         if (this.isCompositionSessionOpen) {
-          this.isCompositionSessionOpen = false;
+          if (this.shouldCloseCompositionSession) {
+            this.isCompositionSessionOpen = false;
+            this.shouldCloseCompositionSession = false;
+          }
           return true;
         }
         this.postEdit();
@@ -279,7 +290,7 @@ export class TitleInplaceEditor {
   };
   dispose() {
     this.forNeibours((element) => {
-      element.onclick = undefined;
+      element.onpointerdown = undefined;
       element.onkeyup = undefined;
     });
     this._valueSubscription.dispose();

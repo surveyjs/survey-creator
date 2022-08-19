@@ -1,38 +1,22 @@
-import {
-  SurveyModel,
-  Serializer,
-  QuestionPanelDynamicModel,
-  ItemValue,
-  PanelModel,
-  Helpers,
-  Base,
-  FunctionFactory
-} from "survey-core";
-import {
-  ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions
-} from "../../settings";
-import {
-  PropertyEditorSetupValue,
-  PropertyJSONGenerator,
-  PropertyGridTitleActionsCreator
-} from "../../property-grid/index";
+import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement } from "survey-core";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
+import { PropertyEditorSetupValue } from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
-import {
-  SurveyLogicType,
-  getLogicString
-} from "./logic-types";
+import { SurveyLogicType, getLogicString } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
-import { surveyDesignerCss } from "../../survey-designer-theme/survey-designer";
 import { SurveyHelper } from "../../survey-helper";
+import { logicCss } from "./logic-theme";
+import { assignDefaultV2Classes } from "../../utils/utils";
+import { QuestionLinkValueModel } from "../../components/link-value";
+import { LogicActionModelBase, LogicActionModel, LogicActionTriggerModel } from "./logic-actions-model";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)
     return true;
-  var panels = this.question.parentQuestion.panels;
+  const panels = this.question.parentQuestion.panels;
   if (panels.length < 2) return true;
-  for (var i = 0; i < panels.length; i++) {
-    var q = panels[i].getQuestionByName("logicTypeName");
+  for (let i = 0; i < panels.length; i++) {
+    const q = panels[i].getQuestionByName("logicTypeName");
     if (q == this.question) continue;
     if (q.value == params[0]) return false;
   }
@@ -45,13 +29,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private logicTypeChoices: Array<ItemValue>;
   private editableItemValue: SurveyLogicItem;
   private isBuildingPanels: boolean;
-  private titleActionsCreator: PropertyGridTitleActionsCreator;
   private initialSelectedElements: any = {};
   private isModifiedValue: boolean = false;
-  constructor(
-    editableItem: SurveyLogicItem,
-    protected options: ISurveyCreatorOptions = null
-  ) {
+  private contextValue: Question;
+  private selectorElementsHash = {};
+
+  constructor(editableItem: SurveyLogicItem, protected options: ISurveyCreatorOptions = null) {
     super(options);
     if (!this.options) {
       this.options = new EmptySurveyCreatorOptions();
@@ -60,46 +43,29 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       if (options.name == "logicTypeName") {
         this.onLogicTypeChanged(options.panel);
       }
-      const obj = this.getElementPanelObj(options.panel);
-      if (!!obj) {
-        const panel = options.panel;
-        const panelElement = panel.getElementByName("elementPanel");
-        if (!!panelElement.getQuestionByName(options.name)) {
-          obj[options.name] = options.value;
-        }
-        const logicType = this.getLogicTypeByPanel(panel);
-        if(!!logicType && logicType.dependedOnPropertyName === options.name) {
-          this.recreateQuestion(panel, obj, logicType.dynamicPropertyName);
-        }
-        options.panel.runCondition(this.editSurvey.getAllValues(), {
-          survey: this.editSurvey
-        });
+      const actionModel = this.getActionModelByPanel(options.panel);
+      if (actionModel.isTrigger) {
+        (<LogicActionTriggerModel>actionModel).updatePanel(options.name, options.value, this.options, this.editSurvey);
       }
     });
     this.editSurvey.onDynamicPanelRemoved.add((sender, options) => {
       if (this.isBuildingPanels) return;
-      var action = this.getActionByPanel(options.panel);
-      if (!!action) {
-        this.editableItem.removeAction(action);
+      const actionModel = this.getActionModelByPanel(options.panel);
+      if (!!actionModel && !!actionModel.initialLogicAction) {
+        this.editableItem.removeAction(actionModel.initialLogicAction);
       }
       if (this.panel.panelCount == 0) {
         this.panel.addPanel();
       }
-      if(this.panel.panelCount > 0)
-        this.panel.panels[0].getQuestionByName("logicTypeName").title = editorLocalization.getString("pe.then");
+      if (this.panel.panelCount > 0)
+        this.panels[0].getQuestionByName("logicTypeName").title = editorLocalization.getString("pe.then");
     });
     this.editSurvey.onDynamicPanelAdded.add((sender, options) => {
       if (this.isBuildingPanels) return;
-      var panel = this.panels[this.panel.panelCount - 1];
+      const panel = this.panels[this.panel.panelCount - 1];
       this.onPanelAdded(panel, null);
     });
-    this.editSurvey.onGetQuestionTitleActions.add((sender, options) => {
-      if (!this.titleActionsCreator) return;
-      var q = options.question;
-      if (!!q.parent && q.parent.name === "elementPanel") {
-        this.titleActionsCreator.onGetQuestionTitleActions(options);
-      }
-    });
+    this.editSurvey.css = logicCss;
     this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
@@ -109,10 +75,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editSurvey.onQuestionAdded.add((sender, options) => {
       this.onQuestionAdded(options);
     });
+    this.editSurvey.onGetQuestionTitleActions.add((sender, options) => {
+      this.onGetQuestionTitleActions(options);
+    });
     this.editSurvey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
-    this.editSurvey.css = surveyDesignerCss;
     this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {
@@ -122,7 +90,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     this.editableItemValue = val;
     this.buildInitialSelectedElements();
     this.buildPanels();
-    this.isModifiedValue = false;
+    this.resetModified();
   }
   public get survey(): SurveyModel {
     return this.editableItem.survey;
@@ -131,27 +99,26 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     return this.isModifiedValue;
   }
   public get panel(): QuestionPanelDynamicModel {
-    return <QuestionPanelDynamicModel>(
-      this.editSurvey.getQuestionByName("panel")
-    );
+    return <QuestionPanelDynamicModel>(this.editSurvey.getQuestionByName("panel"));
   }
   public get panels(): Array<PanelModel> {
     return this.panel.panels;
   }
-  public getPanelByAction(action: SurveyLogicAction): PanelModel {
-    var panels = this.panels;
-    for (var i = 0; i < panels.length; i++) {
-      if (panels[i]["action"] == action) return panels[i];
-    }
-    return null;
+  public getActionModelByPanel(panel: PanelModel): LogicActionModelBase {
+    return panel["actionModel"];
   }
-  public getActionByPanel(panel: PanelModel): SurveyLogicAction {
-    return panel["action"];
+  public setActionModelByPanel(panel: PanelModel, actionModel: LogicActionModelBase): void {
+    panel["actionModel"] = actionModel;
+  }
+
+  public get context(): Question { return this.contextValue; }
+  public set context(val: Question) {
+    if (val === this.context) return;
+    this.contextValue = val;
+    this.updatePanelsOnContextChanged();
   }
   private getLogicTypeByPanel(panel: PanelModel): SurveyLogicType {
-    return this.getLogicTypeByName(
-      panel.getQuestionByName("logicTypeName").value
-    );
+    return this.getLogicTypeByName(panel.getQuestionByName("logicTypeName").value);
   }
   protected getSurveyJSON(): any {
     return {
@@ -171,6 +138,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "logicTypeName",
               type: "dropdown",
+              searchEnabled: false,
+              allowClear: false,
               title: editorLocalization.getString("pe.then"),
               titleLocation: "left",
               isRequired: true,
@@ -186,17 +155,34 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "elementSelector",
               type: "dropdown",
+              allowClear: false,
               titleLocation: "hidden",
               isRequired: true,
               startWithNewLine: false,
               visible: false
             },
             {
-              name: "elementPanel",
+              name: "triggerQuestionsPanel",
               type: "panel",
               startWithNewLine: false,
               visible: false
-            }
+            },
+            {
+              name: "removeAction",
+              type: "linkvalue",
+              titleLocation: "hidden",
+              showOptionsCaption: false,
+              visible: false,
+              startWithNewLine: false,
+              showValueInLink: false,
+              allowClear: false,
+              showClear: false
+            },
+            {
+              name: "triggerEditorPanel",
+              type: "panel",
+              visible: false
+            },
           ]
         }
       ]
@@ -205,120 +191,108 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   protected getSurveyCreationReason(): string {
     return "logic-item-editor";
   }
+  public resetModified(): void {
+    this.isModifiedValue = false;
+  }
   public apply(): boolean {
     if (this.editSurvey.hasErrors()) return false;
-    for (var i = 0; i < this.panels.length; i++) {
+    for (let i = 0; i < this.panels.length; i++) {
       this.applyPanel(this.panels[i]);
     }
-    this.isModifiedValue = false;
+    this.resetModified();
     return true;
   }
   public getEditingActions(): Array<SurveyLogicAction> {
-    var res = [];
-    for (var i = 0; i < this.panels.length; i++) {
-      var action = this.getOrCreateActionByPanel(this.panels[i]);
-      if (!!action) {
-        res.push(action);
-      }
-    }
-    return res;
+    return this.panels.map(panel => {
+      const modelAction = this.getActionModelByPanel(panel);
+      modelAction.updateCurrentLogicAction(this.survey);
+      return modelAction.currentLogicAction || modelAction.initialLogicAction;
+    }).filter(action => !!action);
   }
   private onUpdateQuestionCssClasses(options: any) {
     options.cssClasses.answered = "svc-logic-question--answered";
 
     if (options.question.name === "logicTypeName") {
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--action";
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
+      options.question.allowRootStyle = false;
+      options.cssClasses.control += " svc-logic-operator svc-logic-operator--action";
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
-    if(options.question.name === "elementSelector" || options.question.name === "setToName" || options.question.name === "fromName" || options.question.name === "gotoName") {
-      options.cssClasses.control = "svc-logic-operator svc-logic-operator--question";
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
-
+    if (options.question.name === "elementSelector" || options.question.name === "setToName" || options.question.name === "fromName" || options.question.name === "gotoName") {
+      options.question.allowRootStyle = false;
+      options.cssClasses.control += " svc-logic-operator svc-logic-operator--question";
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
-    if(options.question.name === "setToName" || options.question.name === "fromName") {
+    if (options.question.name === "setToName" || options.question.name === "fromName") {
+      options.question.allowRootStyle = false;
       options.question.titleLocation = "left";
       options.question.startWithNewLine = false;
-      options.cssClasses.questionWrapper = "svc-question-wrapper";
-
       options.cssClasses.error.root = "svc-logic-operator__error";
       options.cssClasses.onError = "svc-logic-operator--error";
     }
-    options.cssClasses.mainRoot = "sd-question sd-row__question";
-    if(options.question.name === "panel") {
-      options.cssClasses.root += "svc-logic-paneldynamic";
-      options.cssClasses.buttonAdd += " svc-logic-operator svc-logic-operator--action sd-paneldynamic__add-btn";
+    if (options.question.name === "setValue") {
+      assignDefaultV2Classes(options.cssClasses, options.question.getType());
+      options.cssClasses.mainRoot += " svc-logic-question-value";
+    }
+    if (options.question.name === "removeAction") {
+      options.question.allowRootStyle = false;
+      options.cssClasses.mainRoot += " svc-logic-condition-remove-question";
+    }
+    // options.cssClasses.mainRoot = "sd-question sd-row__question";
+    if (options.question.name === "panel") {
+      options.cssClasses.root += " svc-logic-paneldynamic";
+      options.cssClasses.buttonAdd += " svc-logic-operator--action ";
       options.cssClasses.iconRemove = "svc-icon-remove";
-      options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button";
+      options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
+      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
       options.cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
     }
   }
   private onUpdatePanelCssClasses(options: any) {
-    if(options.panel.name === "elementPanel") {
-      options.cssClasses.panel.container += " svc-logic-panel-element";
+    if (options.panel.name === "triggerEditorPanel") {
+      options.cssClasses.panel.container += " svc-logic_trigger-editor";
+    }
+    if (options.panel.name === "triggerQuestionsPanel") {
+      options.panel.allowRootStyle = false;
+      options.cssClasses.panel.container += " svc-logic_trigger-questions";
     }
   }
   private onValueChanged(options: any) {
     this.isModifiedValue = true;
     options.question.maxPanelCount = (options.value.length === 1 && !options.value[0].logicTypeName) ? 1 : 100;
+    this.panels.forEach(panel => {
+      panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
+    });
   }
   private onQuestionAdded(options: any) {
-    if(options.question.name === "setToName" || options.question.name === "fromName") {
+    if (options.question.name === "setToName" || options.question.name === "fromName") {
       options.question.titleLocation = "left";
       options.question.startWithNewLine = false;
     }
   }
+  private onGetQuestionTitleActions(options: any) {
+    if (options.question.name === "setValue") {
+      options.titleActions = [];
+    }
+  }
 
   private applyPanel(panel: PanelModel) {
-    var action = this.getActionByPanel(panel);
-    var newAction = this.getOrCreateActionByPanel(panel);
-    if (action === newAction) return;
-    this.editableItem.replaceAction(newAction, action);
-    panel["action"] = newAction;
-    this.setElementPanelObj(panel, newAction.element);
-    var elementPanel = this.getElementPanelObj(panel);
-    if (!!elementPanel) {
-      var logicType = this.getLogicTypeByPanel(panel);
-      logicType.saveNewElement(elementPanel);
+    const actionModel = this.getActionModelByPanel(panel);
+    if (!actionModel.updateCurrentLogicAction(this.survey)) {
+      return;
     }
+    this.editableItem.replaceAction(actionModel.currentLogicAction, actionModel.initialLogicAction);
+    actionModel.updateInitialLogicAction();
   }
-  private getOrCreateActionByPanel(panel: PanelModel): SurveyLogicAction {
-    var action = this.getActionByPanel(panel);
-    var logicType = this.getLogicTypeByPanel(panel);
-    var elementPanel = this.getElementPanelObj(panel);
-    var elementSelector = null;
-    if (!elementPanel) {
-      elementSelector = this.getElementBySelectorName(
-        logicType,
-        panel.getQuestionByName("elementSelector").value
-      );
-    }
-    var createNewAction =
-      !action ||
-      action.logicType != logicType ||
-      (!!elementSelector && action.element != elementSelector);
-    if (!createNewAction) {
-      if (!!elementPanel) {
-        action.element.fromJSON(elementPanel.toJSON());
-      }
-      return action;
-    }
-    return new SurveyLogicAction(
-      logicType,
-      !!elementPanel ? elementPanel : elementSelector,
-      this.survey
-    );
-  }
+
   private buildInitialSelectedElements() {
     this.initialSelectedElements = {};
     if (!this.editableItem) return;
-    for (var i = 0; i < this.editableItem.actions.length; i++) {
-      var action = this.editableItem.actions[i];
+    for (let i = 0; i < this.editableItem.actions.length; i++) {
+      const action = this.editableItem.actions[i];
       if (this.isElementSelectorVisible(action.logicType)) {
-        var lgName = action.logicTypeName;
+        const lgName = action.logicTypeName;
         if (!this.initialSelectedElements[lgName]) {
           this.initialSelectedElements[lgName] = [];
         }
@@ -328,34 +302,77 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   }
   private buildPanels() {
     this.panel.panelCount = 0;
+
     if (!this.editableItem) return;
     this.logicTypeChoices = this.getLogicTypeChoices();
-    for (var i = 0; i < this.editableItem.actions.length; i++) {
+    for (let i = 0; i < this.editableItem.actions.length; i++) {
       this.onPanelAdded(this.panel.addPanel(), this.editableItem.actions[i]);
     }
     if (this.panel.panelCount == 0) {
       this.onPanelAdded(this.panel.addPanel(), null);
     }
   }
-  private onPanelAdded(
-    panel: PanelModel,
-    action: SurveyLogicAction
-  ): PanelModel {
-    var ltQuestion = panel.getQuestionByName("logicTypeName");
-    ltQuestion.title = this.panel.panelCount > 1 ? editorLocalization.getString("pe.and").toLowerCase() : editorLocalization.getString("pe.then");
+  private onPanelAdded(panel: PanelModel, action: SurveyLogicAction): PanelModel {
+    const ltQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
+    ltQuestion.title = this.panel.panelCount > 1 ? editorLocalization.getString("pe.and") : editorLocalization.getString("pe.then");
     ltQuestion.choices = this.logicTypeChoices;
+    ltQuestion.allowClear = false;
     if (!!action) {
-      panel["action"] = action;
+      const newActionModel = LogicActionModelBase.createActionModel(panel, action, this.getLogicTypeByName(action.logicTypeName), this.selectorElementsHash);
+      this.setActionModelByPanel(panel, newActionModel);
       ltQuestion.value = action.logicTypeName;
     }
+    const removeActionLinkQuestion: QuestionLinkValueModel = <QuestionLinkValueModel>(panel.getQuestionByName("removeAction"));
+    const dynamicPanel: QuestionPanelDynamicModel = <QuestionPanelDynamicModel>(removeActionLinkQuestion.parentQuestion);
+    removeActionLinkQuestion.linkClickCallback = () => {
+      if (!!dynamicPanel) {
+        dynamicPanel.removePanelUI(panel);
+      }
+    };
+    removeActionLinkQuestion.linkValueText = "";
+    removeActionLinkQuestion.linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
+
     return panel;
   }
+  private updatePanelsOnContextChanged() {
+    this.logicTypeChoices = this.getLogicTypeChoices();
+    if (!!this.context) {
+      for (let i = this.panels.length - 1; i >= 0; i--) {
+        const panel = this.panels[i];
+        if (this.isPanelSupportContext(panel)) continue;
+        if (i === 0 && this.panels.length === 1) {
+          panel.getQuestionByName("logicTypeName").clearValue();
+        }
+        else {
+          this.panel.removePanel(i);
+        }
+      }
+    }
+    for (let i = 0; i < this.panels.length; i++) {
+      this.updateSelectorOnContextChanged(this.panels[i]);
+    }
+  }
+  private isPanelSupportContext(panel: PanelModel): boolean {
+    const logicType = this.getLogicTypeByPanel(panel);
+    return !!logicType ? logicType.supportContext(this.context) : false;
+  }
+  private updateSelectorOnContextChanged(panel: PanelModel) {
+    const logicTypeQuestion = <QuestionDropdownModel>panel.getQuestionByName("logicTypeName");
+    logicTypeQuestion.choices = this.logicTypeChoices;
+    logicTypeQuestion.allowClear = false;
+    const logicType = this.getLogicTypeByPanel(panel);
+    if (!this.isElementSelectorVisible(logicType)) return;
+    const selectorQuestion = <QuestionDropdownModel>panel.getQuestionByName("elementSelector");
+    selectorQuestion.choices = this.getSelectorChoices(logicType);
+    selectorQuestion.allowClear = false;
+  }
   private getLogicTypeChoices(): Array<ItemValue> {
-    var res = [];
-    var logicTypes = this.editableItem.getVisibleLogicTypes();
-    for (var i = 0; i < logicTypes.length; i++) {
-      var lt = logicTypes[i];
-      var item = new ItemValue(lt.name, lt.displayName);
+    const res = [];
+    const logicTypes = this.editableItem.getVisibleLogicTypes();
+    for (let i = 0; i < logicTypes.length; i++) {
+      const lt = logicTypes[i];
+      if (!!this.context && !lt.supportContext(this.context)) continue;
+      let item = new ItemValue(lt.name, lt.displayName);
       if (lt.isUniqueItem) {
         item.visibleIf = "logicTypeVisibleIf({item})";
       }
@@ -364,195 +381,81 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     return res;
   }
   private onLogicTypeChanged(panel: PanelModel) {
-    var logicType = this.getLogicTypeByPanel(panel);
-    panel.getQuestionByName("logicTypeDescription").html = !!logicType
-      ? logicType.description
-      : "";
-    this.setElementPanelObj(panel, null);
-    this.setupElementSelector(panel, logicType);
-    this.setupElementPanel(panel, logicType);
+    const logicType = this.getLogicTypeByPanel(panel);
+    const qTypeDescription = <QuestionHtmlModel>panel.getQuestionByName("logicTypeDescription");
+    qTypeDescription.html = !!logicType ? logicType.description : "";
+
+    const oldActionModel = this.getActionModelByPanel(panel);
+    let prevSelectedQuestion;
+    if (!!oldActionModel) {
+      prevSelectedQuestion = oldActionModel.getSelectedElement();
+      oldActionModel.resetElements();
+    }
+
+    if (!logicType) return;
+
+    const newActionModel = LogicActionModelBase.createActionModel(panel, (oldActionModel ? oldActionModel.initialLogicAction : null), logicType, this.selectorElementsHash);
+    this.setActionModelByPanel(panel, newActionModel);
+    if (newActionModel.isTrigger) {
+      (<LogicActionTriggerModel>newActionModel).updatePanelElements(prevSelectedQuestion, this.options);
+    } else {
+      (<LogicActionModel>newActionModel).updatePanelElements(prevSelectedQuestion, this.getSelectorChoices(newActionModel.logicType));
+    }
   }
   private getLogicTypeByName(ltName: string): SurveyLogicType {
     if (!ltName) return null;
-    var logicTypes = this.editableItem.getVisibleLogicTypes();
-    for (var i = 0; i < logicTypes.length; i++) {
+    const logicTypes = this.editableItem.getVisibleLogicTypes();
+    for (let i = 0; i < logicTypes.length; i++) {
       if (logicTypes[i].name == ltName) return logicTypes[i];
     }
     return null;
   }
-  private setupElementSelector(panel: PanelModel, logicType: SurveyLogicType) {
-    var question = panel.getQuestionByName("elementSelector");
-    question.visible = this.isElementSelectorVisible(logicType);
-    if (!question.visible) return;
-    question.choices = this.getSelectorChoices(logicType);
-    question.optionsCaption = this.getSelectorOptionsText(logicType);
-    var action = this.getActionByPanel(panel);
-    question.value =
-      !!action && !!action.element && action.logicType == logicType
-        ? (<any>action.element).name
-        : undefined;
-  }
-  private setupElementPanel(panel: PanelModel, logicType: SurveyLogicType) {
-    this.titleActionsCreator = null;
-    var elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-    var elementPanelQuestions = elementPanel.questions;
-    for (var i = 0; i < elementPanelQuestions.length; i++) {
-      elementPanelQuestions[i].clearValue();
-    }
-    elementPanel.elements.splice(0, elementPanel.elements.length);
-    if (!this.isElementPanelVisible(logicType)) {
-      elementPanel.visible = false;
-      return;
-    }
-    var obj = this.createElementPanelObj(
-      this.getActionByPanel(panel),
-      logicType
-    );
-    this.setElementPanelObj(panel, obj);
-    elementPanel.visible = logicType.hasVisibleElements;
-    if(!elementPanel.visible) return;
-    this.titleActionsCreator = new PropertyGridTitleActionsCreator(
-      obj,
-      this.options
-    );
-    var propGenerator = new PropertyJSONGenerator(obj, this.options);
-    propGenerator.setupObjPanel(elementPanel, true, "logic");
-    elementPanel.title = "";
-    const runExpressionQuestion = elementPanel.getQuestionByName("runExpression");
-    runExpressionQuestion && (runExpressionQuestion.titleLocation = "top"); // TODO
-    elementPanel.visible = true;
-    elementPanel.getElementByName(logicType.propertyName).visible = false;
-    elementPanel.onSurveyLoad();
-    for (var i = 0; i < elementPanel.questions.length; i++) {
-      var q = elementPanel.questions[i];
-      if (!Helpers.isValueEmpty(obj[q.getValueName()])) {
-        q.value = obj[q.getValueName()];
-      }
-    }
-  }
-  private recreateQuestion(panel: PanelModel, obj: Base, name: string): void {
-    const oldQuestion = !!name ? panel.getQuestionByName(name) : null;
-    if(!oldQuestion) return;
-    const elementPanel = <PanelModel>panel.getElementByName("elementPanel");
-    if(!elementPanel) return;
-    const tempPanel = Serializer.createClass("panel");
-    var propGenerator = new PropertyJSONGenerator(obj, this.options);
-    propGenerator.setupObjPanel(tempPanel, true, "logic");
-    const newQuestion = tempPanel.getQuestionByName(name);
-    if(!!newQuestion) {
-      const index = elementPanel.elements.indexOf(oldQuestion);
-      elementPanel.addElement(newQuestion, index);
-      oldQuestion.delete();
-    }
-    tempPanel.dispose();
-  }
-  private static elementSelectorTypes = ["question", "page", "panel"];
+
   private isElementSelectorVisible(logicType: SurveyLogicType): boolean {
-    if (!logicType) return false;
-    return (
-      LogicItemEditor.elementSelectorTypes.indexOf(logicType.baseClass) > -1
-    );
+    return !!logicType && logicType.hasSelectorChoices;
   }
-  private isElementPanelVisible(logicType: SurveyLogicType): boolean {
-    if (!logicType) return false;
-    return !this.isElementSelectorVisible(logicType);
-  }
-  private getElementPanelObj(panel: PanelModel): Base {
-    return panel["panelObj"];
-  }
-  private setElementPanelObj(panel: PanelModel, obj: Base) {
-    var oldObj = this.getElementPanelObj(panel);
-    if (!!oldObj) {
-      oldObj.onPropertyValueChangedCallback = undefined;
-    }
-    panel["panelObj"] = obj;
-    if (!!obj) {
-      obj.onPropertyValueChangedCallback = (
-        name: string,
-        oldValue: any,
-        newValue: any,
-        sender: Base,
-        arrayChanges: any
-      ) => {
-        if (!panel || panel.isDisposed) {
-          oldObj.onPropertyValueChangedCallback = undefined;
-          return;
-        }
-        const q = panel.getQuestionByName(name);
-        if (!!q) {
-          q.value = newValue;
-        }
-      };
-    }
-  }
-  private createElementPanelObj(
-    action: SurveyLogicAction,
-    logicType: SurveyLogicType
-  ): Base {
-    const srcElement = !!action && action.logicType == logicType ? action.element : null;
-    return logicType.createNewObj(srcElement);
-  }
-  public getLocString(name: string) {
+
+  public getLocString(name: string): string {
     return editorLocalization.getString(name);
   }
+  private getElementText(el: SurveyElement, showTitles: boolean): string {
+    let text = "";
+    if (showTitles) {
+      text = el.locTitle.renderedHtml;
+    }
+    if (!text) text = el.name;
+    return text;
+  }
+
   private getSelectorChoices(logicType: SurveyLogicType): Array<ItemValue> {
-    var elementType = logicType.baseClass;
-    var elements = [];
-    if (elementType == "question") {
-      elements = this.survey.getAllQuestions();
-    }
-    if (elementType == "page") {
-      elements = this.survey.pages;
-    }
-    if (elementType == "panel") {
-      elements = this.survey.getAllPanels();
-    }
-    var res = [];
-    var showTitles = this.options.showTitlesInExpressions;
-    for (var i = 0; i < elements.length; i++) {
-      var el = elements[i];
-      var text = "";
-      if (showTitles) {
-        text = el.locTitle.renderedHtml;
+    if (!logicType.hasSelectorChoices) return [];
+    const elements = logicType.getSelectorChoices(this.survey, this.context);
+    const res = [];
+    const showTitles = this.options.showTitlesInExpressions;
+    for (let i = 0; i < elements.length; i++) {
+      let namePrefix = "";
+      let textPrefix = "";
+      const el = elements[i];
+      const owner = <Question>logicType.getParentElement(el);
+      if (owner) {
+        namePrefix = owner.name + ".";
+        textPrefix = this.getElementText(owner, showTitles) + ".";
       }
-      if (!text) text = el.name;
-      var itemValue = new ItemValue(el.name, text);
-      if (
-        !!el[logicType.propertyName] &&
-        !this.isElementInInitialSelection(logicType.name, el)
-      ) {
+      const text = this.getElementText(el, showTitles);
+      const value = namePrefix + el.name;
+      let itemValue = new ItemValue(value, textPrefix + text);
+      this.selectorElementsHash[value] = el;
+      if (!!el[logicType.propertyName] && !this.isElementInInitialSelection(logicType.name, el)) {
         itemValue.enableIf = "1=2";
+        itemValue.visibleIf = "1=2";
       }
       res.push(itemValue);
     }
     SurveyHelper.sortItems(res);
     return res;
   }
-  private isElementInInitialSelection(
-    logicTypeName: string,
-    el: Base
-  ): boolean {
+  private isElementInInitialSelection(logicTypeName: string, el: Base): boolean {
     if (!this.initialSelectedElements[logicTypeName]) return false;
     return this.initialSelectedElements[logicTypeName].indexOf(el) > -1;
-  }
-  private getSelectorOptionsText(logicType: SurveyLogicType): string {
-    var elementType = logicType.baseClass;
-    var optionsCaptionName =
-      elementType == "page"
-        ? "pe.conditionSelectPage"
-        : elementType == "panel"
-          ? "pe.conditionSelectPanel"
-          : "pe.conditionSelectQuestion";
-    return this.getLocString(optionsCaptionName);
-  }
-  private getElementBySelectorName(
-    logicType: SurveyLogicType,
-    name: string
-  ): Base {
-    if (!name) return null;
-    var elementType = logicType.baseClass;
-    if (elementType == "question") return this.survey.getQuestionByName(name);
-    if (elementType == "page") return this.survey.getPageByName(name);
-    return this.survey.getPageByName(name);
   }
 }

@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 var frenchTranslation = {
   //Survey templates
@@ -91,7 +91,7 @@ var frenchTranslation = {
     bold: "Gras",
     italic: "Italique",
     underline: "Souligné",
-    fpAddQuestion: "Ajouter question...",
+    addNewQuestion: "Ajouter question",
     completedHtmlOnConditionItemText: "Afficher si :",
     lg: {
       //Logic tab strings
@@ -231,10 +231,10 @@ var frenchTranslation = {
     titleName: "Nom du titre",
     titlePlaceholder: "Titre de la page",
     descriptionPlaceholder: "Entrer une description",
-    surveyTitlePlaceholder: "Saisissez le titre de l&apos;enquête",
+    surveyTitlePlaceholder: "Saisissez le titre de l'enquête",
     pageTitlePlaceholder: "Saisissez le titre de la page",
     pageDescriptionPlaceholder: "Entrer une description pour la page",
-    surveyDescriptionPlaceholder: "Entrer une description pour l&apos;enquête",
+    surveyDescriptionPlaceholder: "Entrer une description pour l'enquête",
     hasOther: 'Contient un item "Autre"',
     otherText: 'Texte item "Autre"',
     hasNone: 'Contient un item "Aucun"',
@@ -255,7 +255,7 @@ var frenchTranslation = {
     requiredErrorText: "Message d'erreur lorsque obligatoire",
     startWithNewLine: "Commencer avec une nouvelle ligne ?",
     rows: "Nombre de lignes",
-    placeHolder: "Placeholder (indice dans le champ)",
+    placeholder: "Placeholder (indice dans le champ)",
     showPreview: "L'aperçu d'image est-il affiché ?",
     storeDataAsText:
       "Stocker le contenu du fichier dans le résultat JSON sous forme de texte",
@@ -502,7 +502,7 @@ var frenchTranslation = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript",
   },
-  //Test Survey
+  //Preview (Survey)
   ts: {
     selectPage: "Sélectionner une page pour la tester",
     showInvisibleElements: "Afficher les éléments invisibles",
@@ -567,7 +567,7 @@ var frenchTranslation = {
     valueFalse: "Valeur faux",
     cols: "Colonnes",
     rows: "Nombre de lignes",
-    placeHolder: "PlaceHolder (indice dans le champ)",
+    placeholder: "Placeholder (indice dans le champ)",
     optionsCaption: "Texte par défaut",
     expression: "Expression",
     format: "Format",

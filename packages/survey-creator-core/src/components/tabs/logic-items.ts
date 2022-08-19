@@ -5,12 +5,19 @@ import {
   propertyArray,
   Serializer,
   SurveyTrigger,
-  ConditionRunner
+  ConditionRunner,
+  Question,
+  ItemValue,
+  MatrixDropdownColumn,
+  Helpers
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
+import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { settings } from "../../settings";
+import { wrapTextByCurlyBraces } from "../../utils/utils";
+import { SurveyHelper } from "../../survey-helper";
 
 export class SurveyLogicAction {
   private surveyValue: SurveyModel;
@@ -26,6 +33,10 @@ export class SurveyLogicAction {
   }
   public get element(): Base {
     return this.elementValue;
+  }
+  public get parentElement(): Base {
+    if(!this.element || !this.logicType) return null;
+    return this.logicType.getParentElement(this.element);
   }
   public get survey(): SurveyModel {
     return this.surveyValue;
@@ -92,8 +103,9 @@ export class SurveyLogicAction {
     return logicTypeName === this.logicTypeName;
   }
   public addQuestionNames(names: string[]) {
-    if (!!this.elementName && names.indexOf(this.elementName) === -1) {
-      names.push(this.elementName);
+    const name = this.elementOwnerName;
+    if (!!this.elementName && names.indexOf(name) === -1) {
+      names.push(name);
     }
     this.questionNamesValues.forEach(name => {
       if (!!name && names.indexOf(name) === -1) {
@@ -105,8 +117,23 @@ export class SurveyLogicAction {
     if (!this.logicType || !this.logicType.questionNames) return [];
     return this.logicType.questionNames;
   }
-  private get elementName(): string {
-    return !!this.element && (<any>this.element).name || "";
+  public get elementName(): string {
+    if(!this.element) return "";
+    var prefix = "";
+    const owner = this.getOwnerElement();
+    if(!!owner && owner !== this.element) {
+      prefix = (<any>owner).name + ".";
+    }
+    return (prefix + (<any>this.element).name) || "";
+  }
+  private get elementOwnerName(): string {
+    const owner = this.getOwnerElement();
+    return !!owner ? (<any>owner).name || "" : "";
+  }
+  private getOwnerElement() : Base {
+    if(!this.element) return null;
+    const parentElement = this.parentElement;
+    return !!parentElement ? parentElement : this.element;
   }
   private get questionNamesValues(): Array<string> {
     return this.questionNames.map(name => this.element[name]);
@@ -149,24 +176,30 @@ export class SurveyLogicItem {
   public getVisibleLogicTypes(): Array<SurveyLogicType> {
     return this.owner.getVisibleLogicTypes();
   }
-  public get title(): string {
-    var res = this.getExpressionAsDisplayText();
-    const maxChars = settings.logic.logicItemTitleMaxChars;
-    if (!!res && res.length > maxChars) {
-      res = res.substr(1, maxChars) + "...";
-    }
-    return res;
+  public get expressionText() {
+    const text = this.getExpressionAsDisplayText();
+    if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
+    return text;
   }
-  public get actionsText(): string {
-    var res = "";
-    for (var i = 0; i < this.actions.length; i++) {
-      if (!!res) {
-        res += "<br/>";
-      }
-      res += this.actions[i].text;
-    }
-    return res;
+  public get actionsText() {
+    return this.actions.map(action => action.text).join(", ");
   }
+
+  public getDisplayText() {
+    const conditionText = this.getExpressionAsDisplayText();
+    let actionsText = "";
+    this.actions.forEach(action => {
+      actionsText += (", " + action.text);
+    });
+
+    if (!!conditionText && !!actionsText) {
+      const text = this.ifText + " " + conditionText + actionsText;
+      return text.replace(new RegExp("({|})", "gm"), "'");
+    } else {
+      return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
+    }
+  }
+
   public edit() {
     if (!!this.owner) {
       this.owner.editItem(this);
@@ -237,15 +270,94 @@ export class SurveyLogicItem {
     this.removedActions = [];
     this.applyExpression(expression, false);
   }
-  public renameQuestion(oldName: string, newName: string) {
+  public renameQuestion(oldName: string, newName: string): void {
     if (!oldName || !newName) return;
-    this.renameQuestionInExpression(oldName, newName);
+    this.renameQuestionInExpression(oldName, newName, [settings.logic.closeBracket, ".", "["]);
     var ops = this.actions;
     for (var i = 0; i < ops.length; i++) {
       ops[i].renameQuestion(oldName, newName);
     }
   }
-  public removeQuestion(name: string) {
+  public renameColumn(question: Question, column: MatrixDropdownColumn, oldName: string): void {
+    if (!this.canUpdateExpressionByQuestion(question)) return;
+    if(this.actions[0].parentElement === question) {
+      this.renameQuestionInExpression("row." + oldName, "row." + column.name, [settings.logic.closeBracket]);
+    }
+    const rows: Array<ItemValue> = question["rows"];
+    if(!Array.isArray(rows) || !this.isQuestionInExpression(question)) return;
+    const questionPrefix = this.getItemValueQuestionName(question) + ".";
+    for(var i = 0; i < rows.length; i ++) {
+      if(Helpers.isValueEmpty(rows[i].value)) continue;
+      const rowName = rows[i].value.toString() + ".";
+      this.renameQuestionInExpression(questionPrefix + rowName + oldName, questionPrefix + rowName + column.name, [settings.logic.closeBracket]);
+    }
+  }
+  public renameItemValue(question: Question, item: ItemValue, oldValue: any): void {
+    if (!this.canUpdateExpressionByQuestion(question)) return;
+    if(!!question.parentQuestion) {
+      if(Array.isArray(question.parentQuestion["rows"])) {
+        this.renameDropdownColumnItemValue(question, item, oldValue);
+      }
+      if(this.actions[0].parentElement !== question.parentQuestion) return;
+    }
+    if(!this.isQuestionInExpression(question)) return;
+    const questionName = this.getItemValueQuestionName(question).toLocaleLowerCase();
+    const rows: Array<ItemValue> = question["rows"];
+    let newExpression = this.expression;
+    if(!Array.isArray(rows)) {
+      newExpression = updateLogicExpression(newExpression, questionName, oldValue, item.value);
+    } else {
+      for(var i = 0; i < rows.length; i ++) {
+        if(Helpers.isValueEmpty(rows[i].value)) continue;
+        const rowName = "." + rows[i].value.toString();
+        newExpression = updateLogicExpression(newExpression, questionName + rowName, oldValue, item.value);
+      }
+    }
+    if (newExpression != this.expression) {
+      this.applyExpression(newExpression, true);
+    }
+  }
+  private renameDropdownColumnItemValue(question: Question, item: ItemValue, oldValue: any): void {
+    const matrix: Question = question.parentQuestion;
+    if(!this.isQuestionInExpression(matrix)) return;
+    const columnPostFix = "." + question.getValueName();
+    if(!this.isStrContainsInExpression(columnPostFix + settings.logic.closeBracket)) return;
+    const questionPrefix = matrix.getValueName() + ".";
+    const rows: Array<ItemValue> = matrix["rows"];
+    let newExpression = this.expression;
+    for(var i = 0; i < rows.length; i ++) {
+      if(Helpers.isValueEmpty(rows[i].value)) continue;
+      const rowName = rows[i].value.toString();
+      newExpression = updateLogicExpression(newExpression, questionPrefix + rowName + columnPostFix, oldValue, item.value);
+    }
+    if (newExpression != this.expression) {
+      this.applyExpression(newExpression, true);
+    }
+  }
+  public renameRowValue(question: Question, item: ItemValue, oldValue: any): void {
+    if (!this.canUpdateExpressionByQuestion(question) || !this.isQuestionInExpression(question)) return;
+    const questionName = this.getItemValueQuestionName(question);
+    this.renameQuestionInExpression(questionName + "." + oldValue.toString(), questionName + "." + item.value.toString(), [settings.logic.closeBracket, "."]);
+  }
+  private canUpdateExpressionByQuestion(question: Question): boolean {
+    return !!this.expression && !!question.name && this.actions.length > 0;
+  }
+  private isQuestionInExpression(question: Question): boolean {
+    return this.isStrContainsInExpression(this.getItemValueQuestionName(question).toLocaleLowerCase());
+  }
+  private isStrContainsInExpression(str: string): boolean {
+    if(!str) return false;
+    return this.expression.toLocaleLowerCase().indexOf(str.toLocaleLowerCase()) > -1;
+  }
+  private getItemValueQuestionName(question: Question): string {
+    const valName = question.getValueName();
+    if(!!question.parentQuestion) {
+      if(question.parentQuestion.isDescendantOf("paneldynamic")) return "panel." + valName;
+      if(question.parentQuestion.isDescendantOf("matrixdropdownbase")) return "row." + valName;
+    }
+    return valName;
+  }
+  public removeQuestion(name: string): void {
     this.removeQuestionInExpression(name);
   }
   public getQuestionNames(): string[] {
@@ -257,10 +369,17 @@ export class SurveyLogicItem {
   public getActionTypes(): string[] {
     return this.actions.map(action => action.logicTypeName);
   }
-  public get expressionText(): string {
-    const text = this.getExpressionAsDisplayText();
-    if (!text) return editorLocalization.getString("ed.lg.itemEmptyExpressionText");
-    return text;
+  public getContext(): Base {
+    const exp = this.expression;
+    if(!exp) return null;
+    if(!SurveyHelper.getQuestionContextIndexInfo(exp, "{")) return null;
+    for(var i = 0; i < this.actions.length; i ++) {
+      const parentEl = this.actions[i].parentElement;
+      if(!!parentEl) {
+        return parentEl;
+      }
+    }
+    return null;
   }
   private getQuestionNamesFromExpression(names: string[]) {
     const conditionRunner = new ConditionRunner(this.expression);
@@ -283,6 +402,9 @@ export class SurveyLogicItem {
   public get deleteText(): string {
     return editorLocalization.getString("pe.delete");
   }
+  public get ifText(): string {
+    return editorLocalization.getString("pe.if");
+  }
   public isSuitable(filteredName: string, logicTypeName: string = ""): boolean {
     if (!filteredName && !logicTypeName) return true;
     if (!filteredName) {
@@ -294,7 +416,7 @@ export class SurveyLogicItem {
     return (this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName)) && this.isSuitableByLogicTypeInActions(logicTypeName);
   }
   private isSuitableInExpression(filteredName: string): boolean {
-    return this.expression.indexOf("{" + filteredName + "}") !== -1 || this.expression.indexOf("{" + filteredName + ".") !== -1;
+    return this.expression.indexOf(wrapTextByCurlyBraces(filteredName)) !== -1 || this.expression.indexOf("'" + filteredName + ".") !== -1;
   }
   private isSuitableByNameInActions(filteredName: string): boolean {
     return this.actions.some(action => action.isSuitableByQuestionName(filteredName));
@@ -302,21 +424,29 @@ export class SurveyLogicItem {
   private isSuitableByLogicTypeInActions(logicTypeName: string): boolean {
     return this.actions.some(action => action.isSuitableByLogicType(logicTypeName));
   }
-  private renameQuestionInExpression(oldName: string, newName: string) {
+  private renameQuestionInExpression(oldName: string, newName: string, postFixes: Array<string>): void {
     if (!this.expression) return;
-    var newExpression = this.expression;
-    var expression = this.expression.toLocaleLowerCase();
-    oldName = "{" + oldName.toLowerCase() + "}";
-    newName = "{" + newName + "}";
-    var index = expression.lastIndexOf(oldName, expression.length);
-    while (index > -1) {
-      newExpression = newExpression.substring(0, index) + newName + newExpression.substr(index + oldName.length, +newExpression.length);
-      expression = expression.substring(0, index);
-      index = expression.lastIndexOf(oldName, expression.length);
-    }
+    oldName = oldName.toLowerCase();
+    if(!this.isStrContainsInExpression(oldName)) return;
+    const ob = settings.logic.openBracket;
+    oldName = ob + oldName;
+    newName = ob + newName;
+    let newExpression = this.expression;
+    postFixes.forEach(ch => {
+      newExpression = this.renameQuestionInExpressionCore(newExpression, newExpression.toLocaleLowerCase(), oldName + ch, newName + ch);
+    });
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);
     }
+  }
+  private renameQuestionInExpressionCore(expression: string, lowCaseExpression: string, oldSubStr: string, newSubStr: string): string {
+    var index = lowCaseExpression.lastIndexOf(oldSubStr, lowCaseExpression.length);
+    while (index > -1) {
+      expression = expression.substring(0, index) + newSubStr + expression.substring(index + oldSubStr.length);
+      lowCaseExpression = lowCaseExpression.substring(0, index);
+      index = lowCaseExpression.lastIndexOf(oldSubStr, index);
+    }
+    return expression;
   }
   private removeQuestionInExpression(name: string) {
     if (!this.expression) return;

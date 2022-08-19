@@ -1,4 +1,4 @@
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 var persianStrings = {
   "survey": {
@@ -111,7 +111,7 @@ var persianStrings = {
     "bold": "پررنگ",
     "italic": "مورب",
     "underline": "پایین خط",
-    "fpAddQuestion": "اضافه کردن سوال ...",
+    "addNewQuestion": "اضافه کردن سوال",
     "selectPage": "انتخاب صفحه ...",
     "chooseElement": "انتخاب بخش ...",
     "lg": {
@@ -259,7 +259,7 @@ var persianStrings = {
     "startWithNewLine": "با سطر جدید شروع شود؟",
     "rows": "تعداد سطر",
     "cols": "تعداد ستون",
-    "placeHolder": "نگهدارنده متن",
+    "placeholder": "نگهدارنده متن",
     "showPreview": "پیش نمایش تصویر نشان داده شود؟",
     "storeDataAsText": "ذخیره کردن محتوای فایل در JSON به عنوان متن",
     "maxSize": "حداکثر سایز به بایت",
@@ -593,7 +593,7 @@ var persianStrings = {
     "valueFalse": "مقادیر غلط",
     "cols": "ستون ها",
     "rows": "سطر ها",
-    "placeHolder": "محل نگهدارنده",
+    "placeholder": "محل نگهدارنده",
     "optionsCaption": "زیرنویس گزینه ها",
     "expression": "عبارت",
     "format": "فرمت",

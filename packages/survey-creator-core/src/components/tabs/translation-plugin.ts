@@ -1,67 +1,77 @@
-import {
-  SurveyModel,
-  PopupModel,
-  ListModel,
-  Action,
-  IAction
-} from "survey-core";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
-import { editorLocalization, getLocString } from "../../editorLocalization";
-import { PropertyGridViewModelBase } from "../../property-grid/property-grid-view-model";
-import { settings } from "../../settings";
+import { ListModel, Action, IAction, Base, createDropdownActionModel } from "survey-core";
+import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
+import { editorLocalization } from "../../editorLocalization";
+import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { Translation } from "./translation";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
-  private showAllStringsAction: Action;
+  private filterStringsAction: Action;
   private filterPageAction: Action;
   private mergeLocaleWithDefaultAction: Action;
   private importCsvAction: Action;
   private exportCsvAction: Action;
-  private expandAction: Action;
   private inputFileElement: HTMLInputElement;
-  private pagePopupModel: PopupModel;
+  private sidebarTab: SidebarTabModel;
 
   public model: Translation;
-  public propertyGrid: PropertyGridViewModelBase;
 
-  constructor(private creator: CreatorBase<SurveyModel>) {
+  constructor(private creator: CreatorBase) {
     creator.addPluginTab("translation", this);
-    this.propertyGrid = new PropertyGridViewModelBase();
-    this.propertyGrid.headerText = editorLocalization.getString("ed.translationPropertyGridTitle");
+    this.sidebarTab = this.creator.sidebar.addTab("translation");
+    this.sidebarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
-    this.propertyGrid.survey = this.model.settingsSurvey;
+    this.model.readOnly = this.creator.readOnly;
+    this.model.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean) => {
+      const options = { obj: obj, propertyName: propertyName, visible: visible };
+      !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(self, options);
+      return options.visible;
+    };
+    this.model.localeInitialVisibleCallback = (locale: string): boolean => {
+      let options = { locale: locale, isSelected: true };
+      this.creator.onTranslationLocaleInitiallySelected.fire(this.creator, options);
+      return options.isSelected;
+    };
+    this.model.importItemCallback = (name: string, locale: string, text: string): string => {
+      const options = { locale: locale, name: name, text: text };
+      this.creator.onTranslationImportItem.fire(this.creator, options);
+      return options.text;
+    };
+    this.model.importFinishedCallback = (): void => {
+      this.creator.onTranslationImported.fire(this.creator, {});
+    };
+    this.sidebarTab.model = this.model.settingsSurvey;
+    this.sidebarTab.componentName = "survey-widget";
+    this.creator.sidebar.activeTab = this.sidebarTab.id;
 
     this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
     this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
 
-    this.showAllStringsAction.css = this.model.showAllStrings ? "sv-action-bar-item--secondary" : "";
-    this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
-    this.showAllStringsAction.visible = true;
+    this.filterPageAction.visible = this.creator.survey.pageCount > 1;
+    this.updateFilterPageAction(true);
 
-    this.filterPageAction.title = this.getFilterPageActionTitle();
-    this.filterPageAction.visible = true;
+    this.filterStringsAction.visible = true;
+    this.updateFilterStrigsAction(true);
+
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
-    this.expandAction && (this.expandAction.visible = !this.propertyGrid.visible);
 
-    this.pagePopupModel.contentComponentData.model.items = [{ id: null, title: this.showAllPagesText }].concat(
+    this.filterPageAction.data.setItems([{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
         id: page.name,
-        title: this.creator.getObjectDisplayName(
-          page,
-          "survey-translation",
-          page.title
-        )
+        title: this.creator.getObjectDisplayName(page, "survey-translation", page.title)
       }))
-    );
+    ), false);
 
     this.model.onPropertyChanged.add((sender, options) => {
       if (options.name === "filteredPage") {
-        this.filterPageAction.title = this.getFilterPageActionTitle();
+        this.updateFilterPageAction();
+      }
+      if(options.name === "showAllStrings") {
+        this.updateFilterStrigsAction();
       }
       if (options.name === "canMergeLocaleWithDefault") {
         this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
@@ -71,19 +81,23 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
       }
     });
+
+    this.model.reset();
   }
   public update(): void {
     if (!this.model) return;
     this.model.survey = this.creator.survey;
+    this.model.filteredPage = null;
+    this.updateFilterPageAction(true);
   }
   public deactivate(): boolean {
     this.model = undefined;
-    this.showAllStringsAction.visible = false;
+    this.sidebarTab.visible = false;
+    this.filterStringsAction.visible = false;
     this.filterPageAction.visible = false;
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
-    this.expandAction && (this.expandAction.visible = false);
 
     return true;
   }
@@ -92,6 +106,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public get showAllStringsText(): string {
     return editorLocalization.getString("ed.translationShowAllStrings");
+  }
+  public get showUsedStringsOnlyText(): string {
+    return editorLocalization.getString("ed.translationShowUsedStringsOnly");
   }
   public get showAllPagesText(): string {
     return editorLocalization.getString("ed.translationShowAllPages");
@@ -104,72 +121,36 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public createActions() {
     const items: Array<Action> = [];
-    const translationMergeLocaleWithDefaultStr = editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
-    this.pagePopupModel = new PopupModel<{ model: ListModel }>(
-      "sv-list",
-      {
-        model: new ListModel(
-          [{ id: null, title: this.showAllPagesText }],
-          (item: IAction) => {
-            this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
-            this.pagePopupModel.toggleVisibility();
-          },
-          true
-        )
-      },
-      "bottom",
-      "center"
-    );
-    this.filterPageAction = new Action({
-      id: "svc-translation-filter-page",
-      title: this.getFilterPageActionTitle(),
-      visible: false,
-      component: "sv-action-bar-item-dropdown",
-      mode: "small",
-      popupModel: this.pagePopupModel,
-      action: (newPage) => {
-        this.pagePopupModel.toggleVisibility();
-      }
-    });
+    const translationMergeLocaleWithDefaultStr = (): string => editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
+    this.createFilterPageAction();
     items.push(this.filterPageAction);
+    this.createFilterStringsAction();
+    items.push(this.filterStringsAction);
 
-    this.showAllStringsAction = new Action({
-      id: "svc-translation-show-all-strings",
-      // css: this.model.showAllStrings ? "sv-action-bar-item--secondary" : "",
-      title: this.showAllStringsText,
-      visible: false,
-      // iconName: this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16",
-      mode: "small",
-      action: () => {
-        this.model.showAllStrings = !this.model.showAllStrings;
-        this.showAllStringsAction.css = this.model.showAllStrings ? "sv-action-bar-item--secondary" : "";
-        this.showAllStringsAction.iconName = this.model.showAllStrings ? "icon-switchactive_16x16" : "icon-switchinactive_16x16";
-      }
-    });
-    items.push(this.showAllStringsAction);
-
-    this.mergeLocaleWithDefaultAction = new Action({
+    this.mergeLocaleWithDefaultAction = new CreatorAction({
       id: "svd-translation-merge_locale_withdefault",
       visible: false,
       //visible: this.model.canMergeLocaleWithDefault,
-      title: translationMergeLocaleWithDefaultStr,
-      tooltip: translationMergeLocaleWithDefaultStr,
+      onUpdateTitle: () => { return translationMergeLocaleWithDefaultStr(); },
+      onUpdateTooltip: () => { return translationMergeLocaleWithDefaultStr(); },
       component: "sv-action-bar-item",
       mode: "small",
+      needSeparator: true,
       action: () => {
         this.model.mergeLocaleWithDefault();
       }
     });
     items.push(this.mergeLocaleWithDefaultAction);
 
-    this.importCsvAction = new Action({
+    this.importCsvAction = new CreatorAction({
       id: "svc-translation-import",
-      iconName: "icon-import_20x20",
-      tooltip: this.importFromCSVText,
-      title: this.importFromCSVText,
+      iconName: "icon-load",
+      locTitleName: "ed.translationImportFromSCVButton",
+      locTooltipName: "ed.translationImportFromSCVButton",
       visible: false,
       mode: "small",
       component: "sv-action-bar-item",
+      needSeparator: true,
       action: () => {
         if (!document) return;
         if (!this.inputFileElement) {
@@ -185,29 +166,75 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.importCsvAction);
 
-    this.exportCsvAction = new Action({
+    this.exportCsvAction = new CreatorAction({
       id: "svc-translation-export",
-      iconName: "icon-export_20x20",
-      tooltip: this.exportToCSVText,
-      title: this.exportToCSVText,
+      iconName: "icon-download",
+      locTitleName: "ed.translationExportToSCVButton",
+      locTooltipName: "ed.translationExportToSCVButton",
       visible: false,
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
-        this.model.exportToSCVFile("survey_translation.csv");
+        this.model.exportToCSVFileUI();
       }
     });
     items.push(this.exportCsvAction);
 
-    if (settings.propertyGrid.allowCollapse) {
-      this.expandAction = this.propertyGrid.createExpandAction(!this.creator.showPropertyGrid);
-      items.push(this.expandAction);
-    }
     return items;
   }
 
-  private getFilterPageActionTitle() {
+  private createFilterPageAction() {
+    this.filterPageAction = createDropdownActionModel({
+      id: "svc-translation-filter-page",
+      title: this.getFilterPageActionTitle(),
+      visible: false,
+      mode: "small",
+    }, {
+      items: [{ id: null, title: this.showAllPagesText }],
+      allowSelection: true,
+      onSelectionChanged: (item: IAction) => {
+        this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
+      },
+      horizontalPosition: "center"
+    });
+  }
+  private createFilterStringsAction() {
+    this.filterStringsAction = createDropdownActionModel({
+      id: "svc-translation-show-all-strings",
+      title: this.getFilterStringsActionTitle(),
+      visible: false,
+      mode: "small",
+    }, {
+      items: [{ id: "show-all-strings", title: this.showAllStringsText }, { id: "show-used-strings-only", title: this.showUsedStringsOnlyText }],
+      allowSelection: true,
+      onSelectionChanged: (item: IAction) => {
+        this.model.showAllStrings = item.id === "show-all-strings";
+      },
+      horizontalPosition: "center"
+    });
+  }
+  private updateFilterStrigsAction(updateSelectedItem: boolean = false) {
+    const title = this.getFilterStringsActionTitle();
+    this.filterStringsAction.title = title;
+    if(updateSelectedItem) {
+      this.filterStringsAction.needSeparator = this.filterPageAction.visible;
+      const list = <ListModel>this.filterStringsAction.data;
+      list.selectedItem = list.actions.filter((el: IAction) => el.title === title)[0];
+    }
+  }
+  private updateFilterPageAction(updateSelectedItem: boolean = false) {
+    this.filterPageAction.title = this.getFilterPageActionTitle();
+    if(updateSelectedItem) {
+      const list = <ListModel>this.filterPageAction.data;
+      const id = this.model.filteredPage ? this.model.filteredPage.name : null;
+      list.selectedItem = list.actions.filter((el: IAction) => el.id === id)[0];
+    }
+  }
+  private getFilterPageActionTitle(): string {
     const pageDisplayName = this.model && this.model.filteredPage && this.creator.getObjectDisplayName(this.model.filteredPage, "survey-translation", this.model.filteredPage.title);
     return pageDisplayName || this.showAllPagesText;
+  }
+  private getFilterStringsActionTitle(): string {
+    return (this.model && !this.model.showAllStrings) ? this.showUsedStringsOnlyText: this.showAllStringsText;
   }
 }

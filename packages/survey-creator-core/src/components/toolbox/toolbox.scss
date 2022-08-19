@@ -3,6 +3,7 @@
 svc-toolbox {
   display: flex;
   flex-direction: column;
+  position: absolute;
 }
 
 .svc-toolbox {
@@ -14,7 +15,7 @@ svc-toolbox {
 }
 
 .svc-toolbox--compact {
-  width: 84px;
+  width: calcSize(10.5);
   overflow: visible;
   direction: ltr;
 }
@@ -29,18 +30,14 @@ svc-toolbox {
   align-items: flex-start;
 }
 
-.svc-toolbox__tool > .sv-action__content {
-  padding-right: 0;
-}
-
 .svc-toolbox__tool:not(.sv-dots) {
   display: flex;
-  width: 100%;
-  padding-right: calcSize(1);
+  width: auto;
 }
 
 .svc-toolbox__tool .sv-dots__item {
   width: calcSize(6);
+  margin-top: calcSize(0.5);
 }
 
 .svc-toolbox__category-separator {
@@ -58,24 +55,34 @@ svc-toolbox {
   border-bottom: 1px solid $border;
   box-sizing: border-box;
   width: 100%;
+  min-width: calcSize(20);
   position: relative;
+}
+
+.svc-toolbox__category-header--collapsed {
   cursor: pointer;
 }
 
 .svc-toolbox__category-title {
-  font-family: "Open Sans";
+  font-family: $font-family;
   font-size: calcSize(1.5);
   font-weight: bold;
   line-height: calcSize(2);
   color: $foreground;
   vertical-align: middle;
+  display: block;
 }
 
 .svc-toolbox__category-header__controls {
   position: absolute;
-  right: calcSize(1.2);
-  top: calcSize(1.2);
+  right: calcSize(1);
+  top: calcSize(1);
   display: none;
+
+}
+
+.svc-toolbox__category-header__button {
+  fill: $foreground-light;
 }
 
 .svc-toolbox__category-header:hover {
@@ -85,7 +92,10 @@ svc-toolbox {
 }
 
 .svc-toolbox__tool {
+  cursor: default;
+
   .sv-action__content {
     display: block;
+    padding-top: calcSize(0.5);
   }
 }
