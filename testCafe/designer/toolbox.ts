@@ -183,3 +183,19 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .expect(collapsibleCategories.count).eql(0)
     .expect(visibleToolboxItems.count).eql(20);
 });
+
+test("add question from toolbox popup items", async (t) => {
+  const popup = Selector(".sv-popup__container").filterVisible();
+
+  await t
+    .resizeWindow(970, 632)
+    .expect(Selector(".svc-question__content").exists).notOk()
+    .expect(popup.visible).notOk()
+
+    .click(".svc-toolbox__tool.sv-dots")
+    .expect(popup.visible).ok()
+
+    .click(popup.find(".sv-list__item"))
+    .expect(Selector(".svc-question__content").exists).ok()
+    .resizeWindow(1900, 600);
+});

@@ -108,7 +108,7 @@ export class QuestionToolbox
     "signaturepad"
   ];
   public static getQuestionDefaultSettings(questionType: string): any {
-    if(!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
+    if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
     return settings.toolbox.defaultJSON[questionType];
   }
   /**
@@ -193,8 +193,8 @@ export class QuestionToolbox
       this.dotsItem.popupModel.toggleVisibility();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel.title);
     });
-    this.invisibleItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
-      if(!this.creator.readOnly) {
+    this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
+      if (!this.creator.readOnly) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
@@ -508,7 +508,7 @@ export class QuestionToolbox
   public collapseAllCategories() {
     this.expandCollapseAllCategories(true);
   }
-  public invisibleItemSelected(model: Action): void {
+  public hiddenItemSelected(model: Action): void {
     this.creator.clickToolboxItem((<any>model).json);
   }
   private expandCollapseAllCategories(isCollapsed: boolean) {
