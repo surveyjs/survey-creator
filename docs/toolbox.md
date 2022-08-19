@@ -77,7 +77,7 @@ creator.toolbox.changeCategories([
 
 [View Toolbox Categories example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories (linkStyle))
 
-Ungrouped items fall into the General category. You can use [localization capabilities](#localize-survey-creator-ui) to change its caption. If your application does not employ modules, use the following code:
+Ungrouped items fall into the General category. You can use [localization capabilities](https://surveyjs.io/Documentation/Survey-Creator?id=localization#localize-survey-creator-ui) to change its caption. If your application does not employ modules, use the following code:
 
 ```html
 <script src="https://unpkg.com/survey-creator-core/survey-creator-core.i18n.min.js"></script>

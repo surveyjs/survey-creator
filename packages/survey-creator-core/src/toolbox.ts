@@ -130,6 +130,11 @@ export class QuestionToolbox
   private dragOrClickHelper: DragOrClickHelper;
 
   //koItems = ko.observableArray();
+  /**
+   * Contains toolbox categories and allows you to modify them.
+   * 
+   * [View example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories)
+   */
   @propertyArray() categories: Array<QuestionToolboxCategory>;
   /**
    * Set and get and active category. This property doesn't work if allowExpandMultipleCategories is true. Its default value is empty.
