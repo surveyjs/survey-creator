@@ -9,11 +9,13 @@ var persianStrings = {
     "addLogicItem": "برای شخصی سازی نظرسنجی خود، قانونی را ایجاد کنید",
     "copy": "کپی",
     "duplicate": "کپی کردن",
+    "settings": "تنظیمات",
     "addToToolbox": "افزودن به جعبه ابزار",
     "deletePanel": "حذف پنل",
     "deleteQuestion": "حذف سوال",
     "convertTo": "تبدیل به",
-    "drag": "المان را بکشید"
+    "drag": "المان را بکشید",
+    "license":"برای استفاده از Survey Creator در برنامه خود باید مجوز توسعه دهنده را خریداری کنید"
   },
   "qt": {
     "default": "پیش فرض",
