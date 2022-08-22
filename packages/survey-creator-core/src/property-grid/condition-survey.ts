@@ -5,6 +5,7 @@ import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
 import { assignDefaultV2Classes, wrapTextByCurlyBraces } from "../utils/utils";
 import { logicCss } from "../components/tabs/logic-theme";
+import { getLogicString } from "../components/tabs/logic-types";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";
@@ -472,8 +473,23 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     return true;
   }
+  public errorText: string;
+  public hasErrorInUI(): boolean {
+    const creator = (<any>this.survey).creator;
+    if (!this.isReady) {
+      this.hasErrors();
+      this.errorText = getLogicString("expressionInvalid");
+      !!creator &&
+        creator.notify(this.errorText, "error");
+      return true;
+    }
+    return false;
+  }
+
   public apply(): boolean {
-    if (!this.isReady) return false;
+    if(this.hasErrorInUI()) {
+      return false;
+    }
     if (!this.object || !this.propertyName) return;
     this.object[this.propertyName] = this.text;
     return true;
