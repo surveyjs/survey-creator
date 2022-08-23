@@ -191,3 +191,30 @@ test("Hidden Question Issue: #3298", async (t) => {
   await t.click(showInvisibleElements).click(Selector(".sd-selectbase__item"));
   await checkElementScreenshot("preview-tab-show-invisible-by-trigger.png", Selector("[data-name='question2']"), t);
 });
+
+const json3 = {
+  "width": "755px",
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "matrixdropdown",
+          "name": "question1",
+          "columns": [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
+          "rows": ["row1", "row2", "row3"]
+        }
+      ]
+    }
+  ]
+};
+
+test("survey-width", async (t) => {
+  const simulator = Selector(".svd-simulator-content");
+  await t.resizeWindow(1280, 900);
+
+  await setJSON(json3);
+
+  await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+  await checkElementScreenshot("test-tab-survey-width.png", simulator, t);
+});

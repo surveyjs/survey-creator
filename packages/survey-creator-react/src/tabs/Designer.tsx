@@ -158,9 +158,13 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   renderTabContent(): JSX.Element {
     const survey: SurveyModel = this.creator.survey;
     const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle);
+    const style: any = {};
+    if(!!survey.width) {
+      style.width = survey.width;
+    }
 
     return (<React.Fragment>
-      <div className={this.model.getDesignerCss()}>
+      <div className={this.model.getDesignerCss()} style={style}>
         {surveyHeader}
         <SurveyNavigation survey={survey} location="top" />
         {this.getRenderedPages()}
