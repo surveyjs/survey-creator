@@ -393,10 +393,10 @@ test("Check that d&d not working for toobox invisible items in readOnly mode", (
   DragOrClickHelper.prototype.onPointerDown = () => {
     trace += "processed->";
   };
-  creator.toolbox["invisibleItemsListModel"].onPointerDown(undefined, undefined);
+  creator.toolbox["hiddenItemsListModel"].onPointerDown(undefined, undefined);
   expect(trace).toBe("processed->");
   creator.readOnly = true;
-  creator.toolbox["invisibleItemsListModel"].onPointerDown(undefined, undefined);
+  creator.toolbox["hiddenItemsListModel"].onPointerDown(undefined, undefined);
   expect(trace).toBe("processed->"); //pointer down should not be processed in readOnlyMode;
   DragOrClickHelper.prototype.onPointerDown = oldOnPointerDown;
 });
