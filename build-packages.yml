@@ -260,7 +260,15 @@ jobs:
       ArtifactName: 'SurveyJSCreatorV2BuildCore'
       publishLocation: 'Container'
     displayName: 'publish artifact SurveyJSCreatorV2BuildCore for release'
-      
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: "$(Build.SourcesDirectory)/Temp/"
+      Contents: "package.json"
+      TargetFolder: "$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core"
+      OverWrite: true
+    displayName: "Copy package.json from temp to next jobs buld to avoid problem with npm survey-core version"
+
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core'
