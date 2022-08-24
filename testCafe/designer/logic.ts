@@ -105,7 +105,7 @@ const doneButton = Selector("button").withExactText("Done").filterVisible();
 const errorNotifyBalloonSelector = Selector(".svc-notifier.svc-notifier--error").filterVisible();
 const notifyBalloonSelector = Selector(".svc-notifier").filterVisible();
 
-const selectQuestionPlaceHolder = "Choose...";
+const selectQuestionPlaceHolder = "Select...";
 const selectActionTypePlaceHolder = "Select action...";
 
 test("Create logic rule", async (t) => {

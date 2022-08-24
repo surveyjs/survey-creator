@@ -134,7 +134,6 @@ export var arStrings = {
     underline: "Underline",
     addNewQuestion: "Add Question",
     selectPage: "Select page...",
-    chooseElement: "Choose element...",
     htmlPlaceHolder: "محتوى HTML سيكون هنا",
     signHere: "التوقيع هنا",
     panelPlaceHolder: "قم بإسقاط السؤال من صندوق الأدوات إلى هنا",

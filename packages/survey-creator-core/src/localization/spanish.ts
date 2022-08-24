@@ -117,7 +117,6 @@ var spanishTranslation = {
     underline: "Subrayar",
     addNewQuestion: "Añadir pregunta",
     selectPage: "Seleccionar página ...",
-    chooseElement: "Elige el elemento ...",
     completedHtmlOnConditionItemText: "Mostrar si:",
     lg: {
       page_visibilityName: "Visibilidad de la pagina",
