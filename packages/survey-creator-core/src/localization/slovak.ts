@@ -108,7 +108,6 @@ export var skStrings = {
     underline: "Podčiarknutie",
     addNewQuestion: "Pridať otázku",
     selectPage: "Vybrať stránku...",
-    chooseElement: "Vybrať prvok...",
     lg: {
       addNewItem: "",
       page_visibilityName: "Viditeľnosť strany",

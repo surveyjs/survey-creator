@@ -117,7 +117,6 @@ export var nlStrings = {
     underline: "Onderstrepen",
     addNewQuestion: "Vraag toevoegen",
     selectPage: "Selecteer pagina...",
-    chooseElement: "Kies element...",
     //completedHtmlOnConditionItemText: "Laat zien of:",
     lg: {
       //Logic tab strings

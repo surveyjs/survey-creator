@@ -118,7 +118,6 @@ export var nbStrings = {
     underline: "Underlinjet",
     addNewQuestion: "Legg til spørsmål",
     selectPage: "Velg side...",
-    chooseElement: "Velg element...",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
       addNewItem: "Legg til ny regel",
