@@ -261,13 +261,24 @@ jobs:
       publishLocation: 'Container'
     displayName: 'publish artifact SurveyJSCreatorV2BuildCore for release'
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: "$(Build.SourcesDirectory)/Temp/"
-      Contents: "package.json"
-      TargetFolder: "$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core"
-      OverWrite: true
-    displayName: "Copy package.json from temp to next jobs buld to avoid problem with npm survey-core version"
+  # - task: CopyFiles@2
+  #   inputs:
+  #     SourceFolder: "$(Build.SourcesDirectory)/Temp/"
+  #     Contents: "package.json"
+  #     TargetFolder: "$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core"
+  #     OverWrite: true
+  #   displayName: "Copy package.json from temp to next jobs buld to avoid problem with npm survey-core version"
+
+  # TODO change to Azure File Transform task see the commented tast below
+  # TODO also see https://stackoverflow.com/questions/71849470/azure-pipeline-replace-json-key-value-during-build-process
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build
+      sed -i 's/"survey-core": .*"/"survey-core": "..\/..\/..\/..\/survey-library\/build\/survey-core"/g' package.json
+    displayName: 'Change survey-core dependency version from release next ver to local dependency'
+  # - task: FileTransform@1
+  #   inputs:
+  #     folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
+  #     fileType: 'json'
 
   - task: PublishBuildArtifacts@1
     inputs:
