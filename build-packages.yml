@@ -389,22 +389,6 @@ jobs:
   #     npm run test
   #   displayName: 'Unit tests CreatorV2 Core'
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-core in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-react-ui in case of npm cache'
-
   - task: Npm@1
     displayName: 'Npm install survey-creator-react'
     inputs:
@@ -420,6 +404,22 @@ jobs:
       mkdir -p @survey/creator
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'remove symlinks from node_modules'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-core in case of npm cache'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-react-ui in case of npm cache'
 
   - task: CopyFiles@2
     inputs:
@@ -576,22 +576,6 @@ jobs:
   #     npm run test
   #   displayName: 'Unit tests CreatorV2 Core'
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-core in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-knockout-ui
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-knockout-ui in case of npm cache'
-
   - task: Npm@1
     displayName: 'Npm install survey-creator-knockout'
     inputs:
@@ -607,6 +591,22 @@ jobs:
       mkdir -p @survey/creator
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'remove symlinks from node_modules'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-core in case of npm cache'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-knockout-ui
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-knockout-ui in case of npm cache'
 
   - task: CopyFiles@2
     inputs:
