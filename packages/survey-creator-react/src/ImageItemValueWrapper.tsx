@@ -50,6 +50,11 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     this.model.itemsRoot = this.rootRef.current;
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    super.componentDidUpdate(prevProps, prevState);
+    this.model.itemsRoot = this.rootRef.current;
+  }
+
   preventDragHandler = (e) => {
     e.preventDefault();
   }
