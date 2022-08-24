@@ -394,7 +394,7 @@ jobs:
       SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
       OverWrite: true
-    # condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'copy survey-core in case of npm cache'
 
   - task: CopyFiles@2
@@ -402,7 +402,7 @@ jobs:
       SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
       OverWrite: true
-    # condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'copy survey-react-ui in case of npm cache'
 
   - task: Npm@1
@@ -581,7 +581,7 @@ jobs:
       SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
       OverWrite: true
-    # condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'copy survey-core in case of npm cache'
 
   - task: CopyFiles@2
@@ -589,7 +589,7 @@ jobs:
       SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-knockout-ui
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
       OverWrite: true
-    # condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'copy survey-knockout-ui in case of npm cache'
 
   - task: Npm@1
