@@ -12,7 +12,7 @@
     display: inline-block;
     position: relative;
     outline: none;
-    white-space: normal;
+    white-space: pre-wrap;
     word-break: break-word;
     z-index: 12;
     &[aria-placeholder]:empty:before {
