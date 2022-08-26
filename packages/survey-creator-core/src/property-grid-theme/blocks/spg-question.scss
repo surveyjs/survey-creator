@@ -30,6 +30,7 @@
   font-size: calcSize(2);
   color: $foreground;
   padding-bottom: calcSize(2);
+  white-space: normal;
 }
 .spg-row-narrow__question {
   margin-top: calcSize(-2);
