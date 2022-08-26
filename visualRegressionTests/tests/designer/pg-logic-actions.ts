@@ -42,3 +42,15 @@ test("Check states", async (t) => {
     await takeElementScreenshot("logic-button-hovered.png", sectionContentElement, t, comparer);
   });
 });
+test("Check run expression description", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+
+    await setJSON({});
+    await t.debug();
+    await t.click(getPropertyGridCategory(logicGroupName))
+      .click(Selector("[data-name='triggers'] .spg-action-button").filterVisible())
+      .click(Selector("[data-name='runExpression'] .spg-action-button").filterVisible());
+    await takeElementScreenshot("run-expression-description.png", Selector("[data-name='runExpression']"), t, comparer);
+  });
+});
