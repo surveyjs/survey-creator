@@ -1,5 +1,5 @@
 import { SurveyModel, IAction, Base, Serializer, QuestionFactory } from "survey-core";
-import { CreatorBase, isStringEditable, DesignTimeSurveyModel as DesignTimeSurveyModelOriginal } from "../src/creator-base";
+import { CreatorBase, isStringEditable } from "../src/creator-base";
 import { settings as creatorSetting } from "../src/settings";
 import { ICreatorOptions } from "../src/creator-options";
 import { SurveyLogic } from "../src/components/tabs/logic";
@@ -7,29 +7,20 @@ import { SurveyLogic } from "../src/components/tabs/logic";
 Serializer.removeClass("tagbox"); // remove after tagbox implemented
 QuestionFactory.Instance.unregisterElement("tagbox");
 
-class DesignTimeSurveyModel extends DesignTimeSurveyModelOriginal {
-  constructor(public creator: CreatorTester, jsonObj?: any) {
-    super(jsonObj);
-  }
-  public getRendererForString(element: Base, name: string): string {
-    if (!this.creator.readOnly && isStringEditable(element, name)) {
-      return "editableStringRendererName";
-    }
-    return undefined;
-  }
-}
-
 export class CreatorTester extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
     if (setOldDefaultNewSurveyJSON) {
       creatorSetting.defaultNewSurveyJSON = { pages: [{ name: "page1" }] };
     }
     super(options, options2);
-  }
-  protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
-    if (reason === "designer" || reason === "modal-question-editor")
-      return new DesignTimeSurveyModel(this, json);
-    return new SurveyModel(json);
+    this.onSurveyInstanceCreated.add((creator, options) => {
+      options.survey.getRendererForString = (element: Base, name: string): any => {
+        if (!this.readOnly && isStringEditable(element, name)) {
+          return "editableStringRendererName";
+        }
+        return undefined;
+      };
+    });
   }
   public get selectedElementName(): string {
     if (!this.selectedElement) return "";
