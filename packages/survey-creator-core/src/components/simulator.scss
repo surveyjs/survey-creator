@@ -44,51 +44,67 @@
   &.svd-simulator-iphone4:before {
     background-image: url(../images/simulator/iPhone4.svg);
   }
+
   &.svd-simulator-iphone5:before {
     background-image: url(../images/simulator/iPhone5.svg);
   }
+
   &.svd-simulator-iphone6:before {
     background-image: url(../images/simulator/iPhone6.svg);
   }
+
   &.svd-simulator-iphone6plus:before {
     background-image: url(../images/simulator/iPhone6Plus.svg);
   }
+
   &.svd-simulator-iphone8:before {
     background-image: url(../images/simulator/iPhone8.svg);
   }
+
   &.svd-simulator-iphone8plus:before {
     background-image: url(../images/simulator/iPhone8Plus.svg);
   }
+
   &.svd-simulator-iphonex:before {
     background-image: url(../images/simulator/iPhoneX.svg);
   }
+
   &.svd-simulator-iphonexmax:before {
     background-image: url(../images/simulator/iPhoneXMax.svg);
   }
+
   &.svd-simulator-ipad:before {
     background-image: url(../images/simulator/iPad.svg);
   }
+
   &.svd-simulator-ipadmini:before {
     background-image: url(../images/simulator/iPadMini.svg);
   }
+
   &.svd-simulator-ipadpro:before {
     background-image: url(../images/simulator/iPadPro.svg);
   }
+
   &.svd-simulator-ipadpro13:before {
     background-image: url(../images/simulator/iPadPro13.svg);
   }
+
   &.svd-simulator-androidphone:before {
     background-image: url(../images/simulator/androidPhone.svg);
   }
+
   &.svd-simulator-androidtablet:before {
     background-image: url(../images/simulator/androidTablet.svg);
   }
+
   &.svd-simulator-win10phone:before {
     background-image: url(../images/simulator/win10Phone.svg);
   }
+
   &.svd-simulator-mssurface:before {
     background-image: url(../images/simulator/msSurface.svg);
   }
+
   &.svd-simulator-genphone:before {
     background-image: url(../images/simulator/device-p.svg);
   }
@@ -96,25 +112,29 @@
 
 .svd-simulator-main {
   min-height: 100%;
+
   &.svd-simulator-main--desktop {
     min-height: auto;
   }
+
   &.svd-simulator-main--frame {
     display: flex;
     align-items: center;
   }
+
   &:not(.svd-simulator-main--frame) {
     background-color: transparent;
   }
+
   .sd-root-modern {
     min-height: 100%;
   }
 }
 
 .svd-simulator-content {
-  display: block;
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: $background;
   overflow: auto;
 }

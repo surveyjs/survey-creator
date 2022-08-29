@@ -118,7 +118,6 @@ export var hrStrings = {
     underline: "podcrtavanje",
     addNewQuestion: "Dodaj pitanje",
     selectPage: "Odaberite stranicu...",
-    chooseElement: "Odaberite element...",
     //completedHtmlOnConditionItemText: "Show if:",
     lg: {
       //Logic tab strings

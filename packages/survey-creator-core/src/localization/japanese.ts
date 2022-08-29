@@ -4,7 +4,6 @@ export var jaStrings = {
   ed: {
     addNewPage: "新規ページを追加する",
     bold: "太字",
-    chooseElement: "要素を選択…",
     copy: "コピー",
     copyTooltip: "選択範囲をクリップボードにコピーする",
     correctJSON: "JSONを修正してください。",

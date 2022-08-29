@@ -108,7 +108,6 @@ export var msStrings = {
     underline: "Garis bawah",
     addNewQuestion: "Tambahkan soalan",
     selectPage: "Pilih halaman...",
-    chooseElement: "Pilih elemen...",
     lg: {
       addNewItem: "",
       page_visibilityName: "Kebolehlihatan halaman",

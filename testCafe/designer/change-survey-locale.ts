@@ -25,7 +25,7 @@ fixture`${title}`.page`${url}`.beforeEach(
 test("Change survey locale", async t => {
   await setJSON(json);
 
-  await t.expect(Selector("div").withText("Choose...").visible).ok();
+  await t.expect(Selector("div").withText("Select...").visible).ok();
   await setSurveyProp("locale", "de");
   await t.expect(Selector("div").withText("Bitte auswählen...").visible).ok();
   await setSurveyProp("locale", "es");
@@ -33,5 +33,5 @@ test("Change survey locale", async t => {
   await setSurveyProp("locale", "it");
   await t.expect(Selector("div").withText("Scegli...").visible).ok();
   await setSurveyProp("locale", "");
-  await t.expect(Selector("div").withText("Choose...").visible).ok();
+  await t.expect(Selector("div").withText("Select...").visible).ok();
 });

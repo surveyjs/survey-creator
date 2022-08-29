@@ -12,6 +12,7 @@
   color: $foreground;
   min-width: calcSize(30);
   text-align: center;
+  z-index: 1600; //todo: should overlap popup
 
   @include smallBold;
 }

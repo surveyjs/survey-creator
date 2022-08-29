@@ -1639,3 +1639,29 @@ test("do not show placeholder in logic tab", () => {
   const firstPlaceholder = conditionEditor.panel.panels[0].getQuestionByName("placeholder");
   expect(firstPlaceholder.visible).toBe(false);
 });
+
+test("Check errors for logic popup", () => {
+  let notifierLog = "";
+  const creatorMock = {
+    notify: () => {
+      notifierLog += "->called";
+    }
+  };
+  const survey = new SurveyModel({
+    elements: [{ name: "q1", type: "text" }, { name: "q2", type: "text" }],
+  });
+  (<any>survey).creator = creatorMock;
+
+  const options = new EmptySurveyCreatorOptions();
+  const question = survey.getQuestionByName("q1");
+  const editor = new ConditionEditor(survey, question, options, "visibleIf");
+  const panel = editor.panel.panels[0];
+  expect(editor.apply()).toBe(false);
+  expect(panel.getQuestionByName("questionName").errors.length > 0).toBe(true);
+  expect(notifierLog).toBe("->called");
+  panel.getQuestionByName("questionName").value = "q2";
+  panel.getQuestionByName("questionValue").value = "2";
+  expect(editor.apply()).toBe(true);
+  expect(panel.getQuestionByName("questionName").errors.length > 0).toBe(false);
+  expect(notifierLog).toBe("->called");
+});

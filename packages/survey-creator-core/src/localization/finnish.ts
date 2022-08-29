@@ -118,7 +118,6 @@ export var fiStrings = {
     underline: "Alleviivaa",
     addNewQuestion: "Lisää kysymys",
     selectPage: "Valitse sivu...",
-    chooseElement: "Valitse elementti...",
     //completedHtmlOnConditionItemText: "Näytä jos:",
     lg: {
       //Logic tab strings

@@ -4,7 +4,6 @@ export var czStrings = {
   ed: {
     addNewPage: "Přidat novou stránku",
     bold: "Tučně",
-    chooseElement: "Vybrat dokument...",
     copy: "Kopírovat",
     copyTooltip: "Zkopírovat výběr do schránky",
     correctJSON: "Opravte JSON.",
