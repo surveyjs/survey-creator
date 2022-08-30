@@ -347,20 +347,20 @@ Survey.Serializer.addProperty("question",
 
 An array of property names upon which the current property depends. When one of the listed properties changes, the dependent property reevaluates the [`visibleIf`](#visibleif) and [`choices`](#choices) functions. This allows you to control the property visibility and fill choices conditionally.
 
-The following code declares two custom properties. `dependent-property` fills `choices` depending on the `my-custom-property` value:
+The following code declares two custom properties. `dependent-property` fills `choices` depending on the `myCustomProperty` value:
 
 ```js
 Survey.Serializer.addProperty("question", {
-  name: "my-custom-property",
+  name: "myCustomProperty",
   choices: ["Option 1", "Option 2", "Option 3"],
 });
 
 Survey.Serializer.addProperty("question", {
   name: "dependent-property",
-  dependsOn: [ "my-custom-property" ],
+  dependsOn: [ "myCustomProperty" ],
   choices: function (obj) {
     const choices = [];
-    const targetPropertyValue = !!obj ? obj["my-custom-property"] : null;
+    const targetPropertyValue = !!obj ? obj["myCustomProperty"] : null;
     // If `targetPropertyValue` is empty, return an empty array
     if (!targetPropertyValue) return choices;
     // Make the dependent property nullable
