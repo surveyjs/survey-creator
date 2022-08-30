@@ -4,22 +4,6 @@
   "compilerOptions": {
     "outDir": "../../dist/angular-ui",
     "noImplicitAny": false,
-    "baseUrl": "./",
-    "paths": {
-      "survey-angular-ui": [
-        "./node_modules/survey-angular-ui/survey-angular-ui",
-        "./node_modules/survey-angular-ui",
-      ],
-      "survey-creator-angular": [
-        "../../build/survey-creator-angular"
-      ],
-      "survey-creator-core": [
-        "./node_modules/survey-creator-core"
-      ],
-      "survey-core": [
-        "./node_modules/survey-core"
-      ]
-    }
   },
   "files": [
     "src/main.ts",
