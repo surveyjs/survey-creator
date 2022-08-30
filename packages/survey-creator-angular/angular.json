@@ -54,6 +54,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "preserveSymlinks": true,
             "outputPath": "./dist/angular-ui",
             "index": "./example/angular-ui/src/index.html",
             "main": "./example/angular-ui/src/main.ts",

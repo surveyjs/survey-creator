@@ -3,11 +3,14 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist/angular-ui",
-    "baseUrl": ".",
+    "baseUrl": "./",
+    "skipLibCheck": true,
     "paths": {
       "survey-creator-angular": [
-        "./build",
         "./build/survey-creator-angular"
+      ],
+      "survey-core": [
+        "./node_modules/survey-core"
       ]
     }
   },
