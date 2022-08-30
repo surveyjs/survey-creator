@@ -71,9 +71,6 @@ export class PropertyGridViewModel extends Base {
   }
   private updateTitle() {
     let titleName = this.getTitle();
-    if(!!this.creator) {
-      titleName = this.creator.getObjectDisplayName(this.getSelectedObj(), "property-grid-title", titleName);
-    }
     this.selectedElementName = titleName;
     this.objectSelectionAction.title = this.selectedElementName;
   }
@@ -81,7 +78,7 @@ export class PropertyGridViewModel extends Base {
     var obj = this.getSelectedObj();
     if (!obj) return "";
     var displayName = SurveyHelper.getObjectName(obj, this.propertyGridModel.options.showObjectTitles);
-    return this.propertyGridModel.options.getObjectDisplayName(obj, "property-grid", displayName);
+    return this.propertyGridModel.options.getObjectDisplayName(obj, "property-grid-header:selected-element", "property-grid-title", displayName);
   }
   private getSelectedObj(): any {
     return this.propertyGridModel.obj;
@@ -115,8 +112,8 @@ export class PropertyGridViewModel extends Base {
 
     const selectorModel = new ObjectSelectorModel(
       this.creator,
-      (obj: Base, reason: string, displayName: string) => {
-        return this.propertyGridModel.options.getObjectDisplayName(obj, reason, displayName);
+      (obj: Base, area: string, reason: string, displayName: string) => {
+        return this.propertyGridModel.options.getObjectDisplayName(obj, area, reason, displayName);
       }
     );
     this.selectorPopupModel = new PopupModel(

@@ -192,12 +192,12 @@ test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", ():
     ]
   };
   creator.onGetObjectDisplayName.add((sender, options) => {
-    if (options.reason === "survey-tester") {
+    if (options.reason === "survey-tester" && options.area === "preview-tab:page-list") {
       const survey = options.obj.survey;
       const index = survey.pages.indexOf(options.obj);
       options.displayName = (index + 1).toString() + ". " + options.displayName;
     }
-    if (options.reason === "survey-tester-selected") {
+    if (options.reason === "survey-tester-selected" && options.area === "preview-tab:selected-page") {
       const survey = options.obj.survey;
       const index = survey.pages.indexOf(options.obj);
       options.displayName = "Page " + (index + 1).toString() + " from " + survey.pages.length;
