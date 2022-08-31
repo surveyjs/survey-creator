@@ -10,9 +10,7 @@
         <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
           <div class="svc-top-bar">
             <div class="svc-tabbed-menu-wrapper" [visible]="creator.showTabs">
-              <span>TODO TABBED MENU</span>
-              <!-- ko component: { name: 'svc-tabbed-menu', params: { model: creator.tabbedMenu } } -->
-              <!-- /ko -->
+              <svc-tabbed-menu [model]="creator.tabbedMenu"></svc-tabbed-menu>
             </div>
             <div *ngIf="creator.showToolbar" class="svc-toolbar-wrapper" [visible]="creator.showToolbar">
               <sv-action-bar [model]="creator.toolbar"></sv-action-bar>

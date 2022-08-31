@@ -6,9 +6,12 @@ import { CreatorComponent } from "./creator.component";
 import { SurveyAngularModule } from "survey-angular-ui";
 import { DesignerTabComponent } from "./tabs/designer.component";
 import { SvgBundleComponent } from "./svg-bundle.component";
+import { TabbedMenuItemComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu-item.component";
+import { TabbledMenuComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu.component";
+import { TabbedMenuItemWrapperComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu-item-wrapper.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent],
+  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],
