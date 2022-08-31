@@ -9,9 +9,13 @@ import { SvgBundleComponent } from "./svg-bundle.component";
 import { TabbedMenuItemComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu-item.component";
 import { TabbledMenuComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu.component";
 import { TabbedMenuItemWrapperComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu-item-wrapper.component";
+import { SidebarComponent } from "./side-bar/side-bar.component";
+import { SidebarTabComponent } from "./side-bar/side-bar-tab.component";
+import { ObjectSelectorComponent } from "./property-panel/object-selector.component";
+import { PropertyGridComponent } from "./property-panel/property-grid.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent],
+  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],

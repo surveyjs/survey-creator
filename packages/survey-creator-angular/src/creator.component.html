@@ -34,8 +34,7 @@
           </div>
         </div>
         <div *ngIf="creator.sidebar" [class.sv-mobile-side-bar]="creator.isMobileView">
-          <span>TODO implement sidebar</span>
-          <!-- <svc-side-bar params="model: creator.sidebar"> </svc-side-bar> -->
+          <svc-side-bar [model]="creator.sidebar"></svc-side-bar>
         </div>
       </div>
       <div class="svc-creator__banner" *ngIf="!creator.haveCommercialLicense">
