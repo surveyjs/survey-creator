@@ -1,8 +1,7 @@
 <ng-container *ngIf="!creator.isCreatorDisposed">
   <div class="svc-creator" [class.svc-creator--mobile]="creator.isMobileView">
     <div>
-      <!-- ko component: { name: 'svc-svg-bundle'} -->
-      <!-- /ko -->
+      <svc-svg-bundle></svc-svg-bundle>
     </div>
     <div class="svc-full-container svc-creator__area svc-flex-column"
       [class.svc-creator__area--with-banner]="!creator.haveCommercialLicense">
