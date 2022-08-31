@@ -4,9 +4,10 @@ import { FormsModule } from "@angular/forms";
 
 import { CreatorComponent } from "./creator.component";
 import { SurveyAngularModule } from "survey-angular-ui";
+import { DesignerTabComponent } from "./tabs/designer.component";
 
 @NgModule({
-  declarations: [CreatorComponent],
+  declarations: [CreatorComponent, DesignerTabComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],

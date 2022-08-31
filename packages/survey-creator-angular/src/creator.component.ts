@@ -15,6 +15,10 @@ export class CreatorComponent extends BaseAngular<CreatorBase> {
     return this.model;
   }
 
+  public get creator(): CreatorBase {
+    return this.model;
+  }
+
   public survey = new SurveyModel({
     "logoPosition": "right",
     "completedHtml": "<h3>Thank you for your feedback.</h3><h5>Your thoughts and ideas will help us to create a great product!</h5>",
