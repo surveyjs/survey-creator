@@ -32,7 +32,7 @@ import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
-import { DesignTimeSurveyModel, isTextInput } from "../src/creator-base";
+import { isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 
 import {
@@ -1366,7 +1366,7 @@ test("getQuestionContentWrapperComponentName for component", (): any => {
     elementsJSON: [{ type: "rating", name: "rate1" }]
   });
   const creator = new CreatorTester();
-  const survey = new DesignTimeSurveyModel(creator, { questions: [{ type: "test", name: "q1" }] });
+  const survey = creator.createSurvey({ questions: [{ type: "test", name: "q1" }] });
   const qCustom = <QuestionCompositeModel>survey.getAllQuestions()[0];
   const q = qCustom.panelWrapper.questions[0];
   expect(q.name).toBe("rate1");

@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Survey } from "survey-knockout-ui";
+import { Survey, SurveyModel } from "survey-knockout-ui";
 import {
   ICreatorOptions,
   CreatorBase
@@ -12,6 +12,10 @@ if (!!ko.options) {
 export class SurveyCreator extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
+  }
+
+  protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
+    return new Survey(json);
   }
 
   protected onViewTypeChanged(newType: string) {
