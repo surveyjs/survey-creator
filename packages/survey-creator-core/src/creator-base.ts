@@ -3158,6 +3158,7 @@ export class StylesManager {
 }
 
 export function initializeDesignTimeSurveyModel(model: any, creator: CreatorBase) {
+  model.creator = creator;
   model.isPopupEditorContent = false;
 
   const getElementWrapperComponentNamePrev = model.getElementWrapperComponentName;
