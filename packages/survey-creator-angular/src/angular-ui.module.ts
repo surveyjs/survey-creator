@@ -15,9 +15,13 @@ import { ObjectSelectorComponent } from "./property-panel/object-selector.compon
 import { PropertyGridComponent } from "./property-panel/property-grid.component";
 import { TextareaJsonEditorComponent } from "./tabs/json/json-editor-textarea.component";
 import { AceJsonEditorComponent } from "./tabs/json/json-editor-ace.component";
+import { LogicTabComponent } from "./tabs/logic/logic.component";
+import { LogicAddButtonComponent } from "./tabs/logic/logic-add-btn.component";
+import { ActionButtonComponent } from "./components/action-button.component";
+import { LinkValueQuestionComponent } from "./questions/question-link-value.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent],
+  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],

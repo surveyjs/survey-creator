@@ -79,5 +79,5 @@ export class AppComponent {
     ],
     "showQuestionNumbers": "off"
   });
-  public creator = new CreatorBase({}, {})
+  public creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true })
 }
