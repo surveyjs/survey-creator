@@ -43,7 +43,7 @@ export const json: any = {
           "maxWidth": "284px",
           "startWithNewLine": false,
           "titleLocation": "hidden",
-          "defaultValue": "modern",
+          "defaultValue": "defaultV2",
           "choices": [
             {
               "value": "defaultV2",

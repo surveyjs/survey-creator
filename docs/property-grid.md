@@ -26,6 +26,7 @@ Property Grid displays the properties of a selected survey element and allows a 
     - [`dependsOn`](#dependson)
     - [`onGetValue`](#ongetvalue)
     - [`onSetValue`](#onsetvalue)
+    - [`onExecuteExpression`](#onexecuteexpression)
 
 ## Hide Properties from the Property Grid
 
@@ -89,7 +90,7 @@ A string value that specifies the property type. Accepts one of the values descr
 | ------ | --------------- | ----------- |
 | `"string"` (default) | Text input | Use this type for short string values. |
 | `"boolean"` | Checkbox | Use this type for Boolean values. |
-| `"condition"` | Multi-line text input with an optional dialog window | Use this type for [Boolean expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#conditional-visibility) similar to [`visibleIf`](https://surveyjs.io/Documentation/Library?id=Question#visibleIf) or [`enabledIf`](https://surveyjs.io/Documentation/Library?id=Question#enableIf). |
+| `"condition"` | Multi-line text input with an optional dialog window | Use this type for [Boolean expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#conditional-visibility) similar to [`visibleIf`](https://surveyjs.io/Documentation/Library?id=Question#visibleIf) or [`enableIf`](https://surveyjs.io/Documentation/Library?id=Question#enableIf). |
 | `"expression"` | Multi-line text input with a hint icon | Use this type for non-Boolean [expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#expressions). |
 | `"number"` | Text input | Use this type for numeric values. |
 | `"text"` | Multi-line text input | Use this type for multi-line text values. |
@@ -128,9 +129,9 @@ You can add the type to the `name` property after a colon character as a shortcu
 
 ```js
 Survey.Serializer.addProperty("question", 
-  { name: "my-boolean-property", type: "boolean" }
+  { name: "myBooleanProperty", type: "boolean" }
   // ===== or =====
-  { name: "my-boolean-property:boolean" }
+  { name: "myBooleanProperty:boolean" }
 );
 ```
 
@@ -140,15 +141,15 @@ A default value for the property. If not specified, `default` equals `""` for st
 
 ```js
 Survey.Serializer.addProperty("dropdown", 
-  { name: "my-string-property", default: "custom-default-value" }
+  { name: "myStringProperty", default: "custom-default-value" }
 );
 
 Survey.Serializer.addProperty("checkbox", 
-  { name: "my-numeric-property", type: "number", default: 100 }
+  { name: "myNumericProperty", type: "number", default: 100 }
 );
 
 Survey.Serializer.addProperty("question", 
-  { name: "my-boolean-property", type: "boolean", default: true }
+  { name: "myBooleanProperty", type: "boolean", default: true }
 );
 ```
 #### `displayName`
@@ -157,7 +158,7 @@ A string value that specifies a property caption. If not specified, the [`name`]
 
 ```js
 Survey.Serializer.addProperty("dropdown", 
-  { name: "my-string-property", displayName: "Custom Caption" }
+  { name: "myStringProperty", displayName: "Custom Caption" }
 );
 ```
 
@@ -168,7 +169,7 @@ An array of selection choices or a function that loads the choices from a web se
 ```js
 // Define `choices` locally
 Survey.Serializer.addProperty("question", {
-  name: "my-string-property",
+  name: "myStringProperty",
   choices: [ "option1", "option2", "option3" ],
   // If item captions should be different from item values:
   // choices: [
@@ -212,9 +213,9 @@ A Boolean value that specifies whether the property must have a value. Defaults 
 
 ```js
 Survey.Serializer.addProperty("question", 
-  { name: "my-boolean-property", type: "boolean", isRequired: true }
+  { name: "myBooleanProperty", type: "boolean", isRequired: true }
   // ===== or =====
-  { name: "!my-boolean-property", type: "boolean" }
+  { name: "!myBooleanProperty", type: "boolean" }
 );
 ```
 
@@ -228,7 +229,7 @@ A Boolean value that specifies whether users can translate the property value to
 
 ```js
 Survey.Serializer.addProperty("question", 
-  { name: "my-text-property", type: "text", isLocalizable: true }
+  { name: "myTextProperty", type: "text", isLocalizable: true }
 );
 ```
 
@@ -266,8 +267,8 @@ A number that specifies the property position within its [`category`](#category)
 
 ```js
 Survey.Serializer.addProperty("question", 
-  // Display "my-string-property" at the top in the General category
-  { name: "my-string-property", category: "general", visibleIndex: 0 }
+  // Display "myStringProperty" at the top in the General category
+  { name: "myStringProperty", category: "general", visibleIndex: 0 }
 );
 ```
 
@@ -277,7 +278,7 @@ A Boolean value that specifies whether the property value is read-only. Defaults
 
 ```js
 Survey.Serializer.addProperty("question", 
-  { name: "my-string-property", readOnly: true }
+  { name: "myStringProperty", readOnly: true }
 );
 ```
 
@@ -319,7 +320,7 @@ A number that specifies a category position. If `categoryIndex` is not set, the 
 ```js
 Survey.Serializer.addProperty("question",
   // Display "Custom Category" after the General category
-  { name: "my-string-property", category: "Custom Category", categoryIndex: 1 }
+  { name: "myStringProperty", category: "Custom Category", categoryIndex: 1 }
 );
 ```
 
@@ -329,7 +330,7 @@ A numeric value that specifies the maximum number of characters users can enter 
 
 ```js
 Survey.Serializer.addProperty("question",
-  { name: "my-text-property", type: "text", maxLength: 280 }
+  { name: "myTextProperty", type: "text", maxLength: 280 }
 );
 ```
 
@@ -339,7 +340,7 @@ Numeric values that specify the minimum and maximum numbers users can enter into
 
 ```js
 Survey.Serializer.addProperty("question",
-  { name: "my-numeric-property", type: "number", minValue: 0, maxValue: 100 }
+  { name: "myNumericProperty", type: "number", minValue: 0, maxValue: 100 }
 );
 ```
 
@@ -347,20 +348,20 @@ Survey.Serializer.addProperty("question",
 
 An array of property names upon which the current property depends. When one of the listed properties changes, the dependent property reevaluates the [`visibleIf`](#visibleif) and [`choices`](#choices) functions. This allows you to control the property visibility and fill choices conditionally.
 
-The following code declares two custom properties. `dependent-property` fills `choices` depending on the `my-custom-property` value:
+The following code declares two custom properties. `dependent-property` fills `choices` depending on the `myCustomProperty` value:
 
 ```js
 Survey.Serializer.addProperty("question", {
-  name: "my-custom-property",
+  name: "myCustomProperty",
   choices: ["Option 1", "Option 2", "Option 3"],
 });
 
 Survey.Serializer.addProperty("question", {
   name: "dependent-property",
-  dependsOn: [ "my-custom-property" ],
+  dependsOn: [ "myCustomProperty" ],
   choices: function (obj) {
     const choices = [];
-    const targetPropertyValue = !!obj ? obj["my-custom-property"] : null;
+    const targetPropertyValue = !!obj ? obj["myCustomProperty"] : null;
     // If `targetPropertyValue` is empty, return an empty array
     if (!targetPropertyValue) return choices;
     // Make the dependent property nullable
@@ -434,14 +435,39 @@ A function that you can use to perform actions when the property value is set (f
 
 ```js
 Survey.Serializer.addProperty("question", {
-  name: "my-string-property",
+  name: "myStringProperty",
   onSetValue: function (surveyElement, value) {
     // You can perform required checks or modify the `value` here
     // ...
     // Set the `value`
-    surveyElement.setPropertyValue("my-string-property", value);
+    surveyElement.setPropertyValue("myStringProperty", value);
     // You can perform required actions after the `value` is set
     // ...
   }
 });
+```
+
+#### `onExecuteExpression`
+
+A function that is called when an expression is evaluated.
+
+Define this function for custom properties of the `"condition"` or `"expression"` [`type`](#type). Within it, you can handle the expression evaluation result. For example, the following code adds a custom `showHeaderIf` property to the [Matrix](https://surveyjs.io/Examples/Library?id=questiontype-matrix) question type. This property shows or hides the matrix header based on a condition: the result of the condition evaluation is assigned to the question's [`showHeader`](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel#showHeader) property.
+
+```js
+Survey.Serializer.addProperty("matrix", {
+  name: "showHeaderIf",
+  type: "condition",
+  category: "logic",
+  onExecuteExpression: (obj, res) => {
+    obj.showHeader = res;
+  }
+});
+
+// Usage
+const surveyJson = {
+  "elements": [{
+    "type": "matrix",
+    "showHeaderIf": "{question1} = 'item2'"
+  }]
+}
 ```
