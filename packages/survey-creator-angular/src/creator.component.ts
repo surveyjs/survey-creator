@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input } from "@angular/core";
-import { BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyContentComponent } from "survey-angular-ui";
 import { CreatorBase } from "survey-creator-core";
 
 @Component({
@@ -24,3 +24,5 @@ export class CreatorComponent extends BaseAngular<CreatorBase> {
     this.changeDetectorRef.detectChanges();
   }
 }
+
+AngularComponentFactory.Instance.registerComponent("survey-widget", SurveyContentComponent);

@@ -1,0 +1,17 @@
+<ng-template #template>
+  <div class="svc-creator-tab__content svc-translation-tab">
+    <div class="st-content">
+      <div *ngIf="model.isEmpty" class="st-no-strings">
+        <span>{{model.noStringsText}}</span>
+      </div>
+      <div *ngIf="!model.isEmpty" class="svc-flex-column st-strings-wrapper">
+        <div class="svc-flex-row st-strings-header">
+          <survey-content [model]="model.stringsHeaderSurvey"></survey-content>
+        </div>
+        <div class="svc-flex-row svc-plugin-tab__content st-strings">
+          <survey-content [model]="model.stringsSurvey"></survey-content>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
