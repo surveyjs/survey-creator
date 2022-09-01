@@ -657,7 +657,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           if (!!valueName && name.indexOf(valueName) == 0) {
             name = name.replace(valueName, question.name);
           }
-          res[i].text = this.options.getObjectDisplayName(question, "condition", name);
+          res[i].text = this.options.getObjectDisplayName(question, "condition-editor", "condition", name);
         }
         this.addConditionQuestionsHash[res[i].name] = question;
       }

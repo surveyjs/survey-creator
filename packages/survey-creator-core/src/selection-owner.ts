@@ -4,5 +4,5 @@ export interface ICreatorSelectionOwner {
   survey: SurveyModel;
   selectElement(el: Base, propertyName?: string);
   selectedElement: Base;
-  getObjectDisplayName(el: Base): string;
+  getObjectDisplayName(el: Base, area: string): string;
 }

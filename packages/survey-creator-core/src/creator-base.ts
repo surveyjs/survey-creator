@@ -432,7 +432,18 @@ export class CreatorBase extends Base
    *- options.reason the name of the UI that requests the object display name.
    *- options.displayName change this property to show your custom display name for the object
    *
-   * The list of possible values in options.reason:
+   * The list of possible values in options.area:
+   *- "page-selector" - raised from page selector on designer surface
+   *- "condition-editor" - raised from Condition modal window or on setup condition in a logic tab
+   *- "logic-tab:question-filter" - raised on showing the filter by used questions
+   *- "preview-tab:page-list" - raised from page selector list in "Preview" tab
+   *- "preview-tab:selected-page" - raised on setting page selector title in "Preview" tab
+   *- "property-grid:property-editor" - raised on showing question property editor, for example "gotoName". It is raised for all elements (questions) in the dropdown.
+   *- "property-grid-header:element-list" - raised from showing object selector for property grid in "Designer" tab.
+   *- "property-grid-header:selected-element" - raised on rendering selected object title in property grid in "Designer" tab.
+   *- "translation-tab" - raised from translation tab
+   *
+   * (Obsolete, please use options.area attribute) The list of possible values in options.reason:
    *- "condition" - raised from Condition modal window or on setup condition in a logic tab
    *- "survey-tester" - raised from page selector list in "Preview" tab
    *- "survey-tester-selected" - raised on setting page selector title in "Preview" tab
@@ -1961,13 +1972,14 @@ export class CreatorBase extends Base
 
   public getObjectDisplayName(
     obj: Base,
+    area: string,
     reason: string = undefined,
     displayName: string = undefined
   ): string {
     if (!displayName) {
       displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
     }
-    var options = { obj: obj, displayName: displayName, reason: reason };
+    var options = { obj: obj, displayName: displayName, area: area, reason: reason };
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
   }

@@ -33,6 +33,7 @@ test("Generate and update title correctly", () => {
   expect(model.objectSelectionAction.title).toEqual("Q1");
   propertyGrid.options.getObjectDisplayName = (
     obj: Base,
+    area: string,
     reason: string,
     displayName: string
   ) => {

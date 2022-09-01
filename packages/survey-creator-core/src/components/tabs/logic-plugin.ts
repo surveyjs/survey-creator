@@ -63,7 +63,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public createActions() {
     const items: Array<Action> = [];
     const onQuestionPopupShow = () => {
-      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "condition", question.name) }; });
+      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "logic-tab:question-filter", "condition", question.name) }; });
       SurveyHelper.sortItems(items, "title");
       questionPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
     };

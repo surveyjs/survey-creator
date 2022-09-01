@@ -34,7 +34,7 @@ export class PagesController extends Base {
   }
   public getDisplayName(page: PageModel): string {
     if (!page) return "";
-    return this.creator.getObjectDisplayName(page);
+    return this.creator.getObjectDisplayName(page, "page-selector");
   }
   public raisePagesChanged() {
     this.page2Display = (<any>this.survey).currentPage;

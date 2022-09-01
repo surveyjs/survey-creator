@@ -1,4 +1,4 @@
-import { ListModel, Action, IAction, Base, createDropdownActionModel } from "survey-core";
+import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel } from "survey-core";
 import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
@@ -62,7 +62,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterPageAction.data.setItems([{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
         id: page.name,
-        title: this.creator.getObjectDisplayName(page, "survey-translation", page.title)
+        title: this.getPageDisplayText(page)
       }))
     ), false);
 
@@ -231,10 +231,13 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     }
   }
   private getFilterPageActionTitle(): string {
-    const pageDisplayName = this.model && this.model.filteredPage && this.creator.getObjectDisplayName(this.model.filteredPage, "survey-translation", this.model.filteredPage.title);
+    const pageDisplayName = this.model && this.model.filteredPage && this.getPageDisplayText(this.model.filteredPage);
     return pageDisplayName || this.showAllPagesText;
   }
   private getFilterStringsActionTitle(): string {
     return (this.model && !this.model.showAllStrings) ? this.showUsedStringsOnlyText: this.showAllStringsText;
+  }
+  private getPageDisplayText(page: PageModel): string {
+    return this.creator.getObjectDisplayName(page, "translation-tab", "survey-translation", page.title);
   }
 }
