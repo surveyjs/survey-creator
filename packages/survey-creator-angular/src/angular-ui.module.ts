@@ -19,9 +19,10 @@ import { LogicTabComponent } from "./tabs/logic/logic.component";
 import { LogicAddButtonComponent } from "./tabs/logic/logic-add-btn.component";
 import { ActionButtonComponent } from "./components/action-button.component";
 import { LinkValueQuestionComponent } from "./questions/question-link-value.component";
+import { EmbeddedSurveyQuestionComponent } from "./questions/question-embedded-survey.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent],
+  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],

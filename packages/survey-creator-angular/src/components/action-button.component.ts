@@ -1,12 +1,12 @@
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory } from "survey-angular-ui";
+import { AngularComponentFactory, EmbeddedViewContentComponent } from "survey-angular-ui";
 
 @Component({
   selector: "svc-action-button",
   templateUrl: "./action-button.component.html",
   styles: [":host { display: none; }"]
 })
-export class ActionButtonComponent {
+export class ActionButtonComponent extends EmbeddedViewContentComponent {
 
   @Input() classes: string = "";
   @Input() click!: () => void;
