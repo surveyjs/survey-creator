@@ -13,9 +13,11 @@ import { SidebarComponent } from "./side-bar/side-bar.component";
 import { SidebarTabComponent } from "./side-bar/side-bar-tab.component";
 import { ObjectSelectorComponent } from "./property-panel/object-selector.component";
 import { PropertyGridComponent } from "./property-panel/property-grid.component";
+import { TextareaJsonEditorComponent } from "./tabs/json/json-editor-textarea.component";
+import { AceJsonEditorComponent } from "./tabs/json/json-editor-ace.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent],
+  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],

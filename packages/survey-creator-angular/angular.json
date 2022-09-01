@@ -67,7 +67,8 @@
               "./example/angular-ui/src/testCafe"
             ],
             "styles": [
-              "./example/angular-ui/src/styles.scss"
+              "./example/angular-ui/node_modules/survey-core/defaultV2.css",
+              "./example/angular-ui/node_modules/survey-creator-core/survey-creator-core.css"
             ],
             "scripts": []
           },
