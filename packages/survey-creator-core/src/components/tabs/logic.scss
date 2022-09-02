@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.sl-table__cell.st-table__cell--actions:first-child .sv-action-bar {
+.sl-table__cell.st-table__cell--actions:first-of-type .sv-action-bar {
   margin-top: calcSize(-0.5);
   padding-right: calcSize(4);
 }
@@ -102,7 +102,7 @@
   position: absolute;
   width: max-content;
 
-  &:first-child {
+  &:first-of-type {
     transform: translateX(-100%);
   }
 }
@@ -154,7 +154,7 @@
 
   td,
   th {
-    &:first-child {
+    &:first-of-type {
       padding-left: calcSize(4);
 
       .sv-action-bar {

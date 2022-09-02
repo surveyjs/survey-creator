@@ -1,0 +1,51 @@
+<ng-container *ngIf="!creator.isCreatorDisposed">
+  <div class="svc-creator" [class.svc-creator--mobile]="creator.isMobileView">
+    <div>
+      <svc-svg-bundle></svc-svg-bundle>
+    </div>
+    <div class="svc-full-container svc-creator__area svc-flex-column"
+      [class.svc-creator__area--with-banner]="!creator.haveCommercialLicense">
+      <div class="svc-flex-row svc-full-container"
+        [class.svc-creator__side-bar--left]="creator.sidebarLocation == 'left'">
+        <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
+          <div class="svc-top-bar">
+            <div class="svc-tabbed-menu-wrapper" [visible]="creator.showTabs">
+              <svc-tabbed-menu [model]="creator.tabbedMenu"></svc-tabbed-menu>
+            </div>
+            <div *ngIf="creator.showToolbar" class="svc-toolbar-wrapper" [visible]="creator.showToolbar">
+              <sv-action-bar [model]="creator.toolbar"></sv-action-bar>
+            </div>
+          </div>
+          <div class="svc-creator__content-wrapper svc-flex-row"
+            [class.svc-creator__content-wrapper--footer-toolbar]="creator.isMobileView">
+            <div class="svc-creator__content-holder svc-flex-column">
+              <ng-container *ngFor="let tab of creator.tabs">
+                <div class="svc-creator-tab" *ngIf="creator.viewType == tab.id && tab.visible"
+                  [attr.id]="'scrollableDiv-' + tab.id" [class.svc-creator__toolbox--right]="creator.toolboxLocation == 'right'">
+                  <ng-template [component]="{ name: tab.componentContent, data: { model: tab.data.model } }"></ng-template>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div *ngIf="creator.isMobileView" class="svc-footer-bar">
+            <div class="svc-toolbar-wrapper" [visible]="creator.isMobileView">
+              <sv-action-bar [model: creator.footerToolbar]></sv-action-bar>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="creator.sidebar" [class.sv-mobile-side-bar]="creator.isMobileView">
+          <svc-side-bar [model]="creator.sidebar"></svc-side-bar>
+        </div>
+      </div>
+      <div class="svc-creator__banner" *ngIf="!creator.haveCommercialLicense">
+        <span class="svc-creator__non-commercial-text">
+          <a href="https://surveyjs.io/buy">
+            {{creator.licenseText}}
+          </a>
+        </span>
+      </div>
+      <!-- ko component: { name: 'svc-notifier', params: { creator: creator, notifier: creator.notifier } } -->
+      <!-- /ko -->
+    </div>
+  </div>
+</ng-container>

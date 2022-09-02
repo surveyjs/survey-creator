@@ -16,3 +16,4 @@ ko.components.register("svc-tab-designer", {
   },
   template: template
 });
+

@@ -43,6 +43,7 @@ if (!window["%hammerhead%"]) {
     }, 1000);
   };
 
+
   let json = {
     completedHtml:
       "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
@@ -12896,6 +12897,7 @@ if (!window["%hammerhead%"]) {
     window.creator.JSON = counter % 2 == 0 ? json : json3;
     counter++;
   }
+  setJSON();
   // window.creator.JSON = json3;
   // creator.toolbarItems.push(new Survey.Action({
   //   id: "toolboxCustomization",
