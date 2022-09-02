@@ -22,9 +22,10 @@ import { LinkValueQuestionComponent } from "./questions/question-link-value.comp
 import { EmbeddedSurveyQuestionComponent } from "./questions/question-embedded-survey.component";
 import { TranslationTabComponent } from "./tabs/translation/translation.component";
 import { TranslationSkeletonComponent } from "./tabs/translation/translation-line-skeleton.component";
+import { SimulatorComponent } from "./components/simulator.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent],
+  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],
