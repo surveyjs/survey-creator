@@ -611,8 +611,8 @@ test("Question property editor should support getObjectDisplayName", () => {
   });
   const trigger = survey.triggers[0];
   const options = new EmptySurveyCreatorOptions();
-  options.getObjectDisplayName = (obj: Base, reason: string, displayName: string): string => {
-    if (reason === "property-editor") return (survey.getAllQuestions().indexOf(<Question>obj) + 1).toString() + ". " + displayName;
+  options.getObjectDisplayName = (obj: Base, area: string, reason: string, displayName: string): string => {
+    if (reason === "property-editor" && area === "property-grid:property-editor") return (survey.getAllQuestions().indexOf(<Question>obj) + 1).toString() + ". " + displayName;
     return displayName;
   };
   const propertyGrid = new PropertyGridModelTester(trigger, options);

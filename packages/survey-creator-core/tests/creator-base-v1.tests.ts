@@ -710,8 +710,10 @@ test("creator.onConditionQuestionsGetList, Bug#957", () => {
 test("creator.onGetObjectDisplayName, change visible name for objects", () => {
   const creator = new CreatorTester();
   let reason = "";
+  let area = "";
   creator.onGetObjectDisplayName.add(function (sender, options) {
     reason = options.reason;
+    area = options.area;
     options.displayName = options.obj.title + " [" + options.obj.name + "]";
   });
   creator.JSON = {
@@ -727,6 +729,7 @@ test("creator.onGetObjectDisplayName, change visible name for objects", () => {
   creator.selectElement(question);
   const editor = new ConditionEditor(creator.survey, question, creator);
   expect(editor.panel.panels).toHaveLength(1);
+  expect(area).toEqual("condition-editor");
   const panel = editor.panel.panels[0];
   const questionName = panel.getQuestionByName("questionName");
   expect(questionName).toBeTruthy();
@@ -740,7 +743,7 @@ test(
   () => {
     const creator = new CreatorTester();
     creator.onGetObjectDisplayName.add(function (sender, options) {
-      if (options.reason === "property-grid") {
+      if (options.reason === "property-grid" && options.area === "property-grid-header:element-list") {
         if (!!options.obj.title) {
           options.displayName = options.obj.title;
         }
@@ -748,7 +751,7 @@ test(
           options.displayName = options.obj.description;
         }
       }
-      if (options.reason === "property-grid-title") {
+      if (options.reason === "property-grid-title" && options.area === "property-grid-header:selected-element") {
         options.displayName = options.obj.name + " Properties";
       }
     });

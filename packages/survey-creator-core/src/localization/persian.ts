@@ -15,7 +15,7 @@ var persianStrings = {
     "deleteQuestion": "حذف سوال",
     "convertTo": "تبدیل به",
     "drag": "المان را بکشید",
-    "license":"برای استفاده از Survey Creator در برنامه خود باید مجوز توسعه دهنده را خریداری کنید"
+    "license": "برای استفاده از Survey Creator در برنامه خود باید مجوز توسعه دهنده را خریداری کنید"
   },
   "qt": {
     "default": "پیش فرض",
@@ -130,7 +130,6 @@ var persianStrings = {
     "underline": "پایین خط",
     "addNewQuestion": "اضافه کردن سوال",
     "selectPage": "انتخاب صفحه ...",
-    "chooseElement": "انتخاب بخش ...",
     "htmlPlaceHolder": "محتوای html اینجا خواهد بود",
     "panelPlaceHolder": "سوالی را از داخل جعبه ابزار در اینجا قرار دهید",
     "surveyPlaceHolder": "نظرسنجی خالی است. یک آیتم را از جعبه ابزار انتخاب یا روی دکمه ی زیر کلیک کنید",

@@ -137,7 +137,6 @@ var germanTranslation = {
     underline: "Unterstrichen",
     addNewQuestion: "Frage hinzufügen",
     selectPage: "Seite auswählen ...",
-    chooseElement: "Element auswählen ...",
     htmlPlaceHolder: "HTML wird hier dargestellt werden.",
     panelPlaceHolder: "Ziehe eine Frage aus der Toolbox hier her.",
     surveyPlaceHolder: "Die Umfrage enthält keine Frage. Ziehe ein Element aus der Toolbox hier her oder drücke den Button unten.",

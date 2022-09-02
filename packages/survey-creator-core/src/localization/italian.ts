@@ -134,7 +134,6 @@ var italianTranslation = {
     underline: "Sottolineato",
     fpAddQuestion: "Aggiungi domanda...",
     selectPage: "Seleziona la pagina...",
-    chooseElement: "Scegli l'elemento...",
     htmlPlaceHolder: "Il contenuto HTML sarà qui.",
     panelPlaceHolder: "Trascina una domanda dalla toolbox qui.",
     surveyPlaceHolder:

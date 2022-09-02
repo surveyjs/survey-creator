@@ -432,7 +432,18 @@ export class CreatorBase extends Base
    *- options.reason the name of the UI that requests the object display name.
    *- options.displayName change this property to show your custom display name for the object
    *
-   * The list of possible values in options.reason:
+   * The list of possible values in options.area:
+   *- "page-selector" - raised from page selector on designer surface
+   *- "condition-editor" - raised from Condition modal window or on setup condition in a logic tab
+   *- "logic-tab:question-filter" - raised on showing the filter by used questions
+   *- "preview-tab:page-list" - raised from page selector list in "Preview" tab
+   *- "preview-tab:selected-page" - raised on setting page selector title in "Preview" tab
+   *- "property-grid:property-editor" - raised on showing question property editor, for example "gotoName". It is raised for all elements (questions) in the dropdown.
+   *- "property-grid-header:element-list" - raised from showing object selector for property grid in "Designer" tab.
+   *- "property-grid-header:selected-element" - raised on rendering selected object title in property grid in "Designer" tab.
+   *- "translation-tab" - raised from translation tab
+   *
+   * (Obsolete, please use options.area attribute) The list of possible values in options.reason:
    *- "condition" - raised from Condition modal window or on setup condition in a logic tab
    *- "survey-tester" - raised from page selector list in "Preview" tab
    *- "survey-tester-selected" - raised on setting page selector title in "Preview" tab
@@ -1961,19 +1972,23 @@ export class CreatorBase extends Base
 
   public getObjectDisplayName(
     obj: Base,
+    area: string,
     reason: string = undefined,
     displayName: string = undefined
   ): string {
     if (!displayName) {
       displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
     }
-    var options = { obj: obj, displayName: displayName, reason: reason };
+    var options = { obj: obj, displayName: displayName, area: area, reason: reason };
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
   }
 
   public createSurvey(json: any = {}, reason: string = "designer"): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
+    if (reason === "designer" || reason === "modal-question-editor") {
+      initializeDesignTimeSurveyModel(survey, this);
+    }
     survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "test") {
       (<any>survey).locale = editorLocalization.currentLocale;
@@ -1982,8 +1997,6 @@ export class CreatorBase extends Base
     return survey;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
-    if (reason === "designer" || reason === "modal-question-editor")
-      return new DesignTimeSurveyModel(this, json);
     return new SurveyModel(json);
   }
   private _stateValue: string;
@@ -3156,67 +3169,72 @@ export class StylesManager {
   }
 }
 
-export class DesignTimeSurveyModel extends SurveyModel {
-  constructor(public creator: CreatorBase, jsonObj?: any) {
-    super(jsonObj);
-  }
-  public isPopupEditorContent = false;
+export function initializeDesignTimeSurveyModel(model: any, creator: CreatorBase) {
+  model.creator = creator;
+  model.isPopupEditorContent = false;
 
-  public getElementWrapperComponentName(element: any, reason?: string): string {
+  const getElementWrapperComponentNamePrev = model.getElementWrapperComponentName;
+  model.getElementWrapperComponentName = (element: any, reason?: string): string => {
     let componentName = getElementWrapperComponentName(
       element,
       reason,
-      this.isPopupEditorContent
+      model.isPopupEditorContent
     );
 
-    return componentName || super.getElementWrapperComponentName(element, reason);
-  }
-  public getQuestionContentWrapperComponentName(element: any, reason?: string): string {
+    return componentName || getElementWrapperComponentNamePrev.call(model, element, reason);
+  };
+
+  const getQuestionContentWrapperComponentNamePrev = model.getQuestionContentWrapperComponentName;
+  model.getQuestionContentWrapperComponentName = (element: any, reason?: string): string => {
     let componentName = getQuestionContentWrapperComponentName(element);
     return (
-      componentName || super.getQuestionContentWrapperComponentName(element)
+      componentName || getQuestionContentWrapperComponentNamePrev.call(model, element, reason)
     );
-  }
+  };
 
-  public getElementWrapperComponentData(element: any, reason?: string): any {
-    const data = getElementWrapperComponentData(element, reason, this.creator);
+  const getElementWrapperComponentDataPrev = model.getElementWrapperComponentData;
+  model.getElementWrapperComponentData = (element: any, reason?: string): any => {
+    const data = getElementWrapperComponentData(element, reason, creator);
 
-    return data || super.getElementWrapperComponentData(element);
-  }
+    return data || getElementWrapperComponentDataPrev.call(model, element, reason);
+  };
 
-  public getRowWrapperComponentName(row: QuestionRowModel): string {
+  model.getRowWrapperComponentName = (row: QuestionRowModel): string => {
     return "svc-row";
-  }
-  public getRowWrapperComponentData(row: QuestionRowModel): any {
+  };
+
+  model.getRowWrapperComponentData = (row: QuestionRowModel): any => {
     return {
-      creator: this.creator,
+      creator: creator,
       row
     };
-  }
+  };
 
-  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+  model.getItemValueWrapperComponentName = (item: ItemValue, question: QuestionSelectBase): string => {
     return getItemValueWrapperComponentName(item, question);
-  }
-  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    return getItemValueWrapperComponentData(item, question, this.creator);
-  }
+  };
 
-  public getRendererForString(element: Base, name: string): string {
-    if (!this.creator.readOnly && isStringEditable(element, name)) {
+  model.getItemValueWrapperComponentData = (item: ItemValue, question: QuestionSelectBase): any => {
+    return getItemValueWrapperComponentData(item, question, creator);
+  };
+
+  model.getRendererForString = (element: Base, name: string): string => {
+    if (!creator.readOnly && isStringEditable(element, name)) {
       return editableStringRendererName;
     }
     return undefined;
-  }
-  public getRendererContextForString(element: Base, locStr: LocalizableString): any {
-    if (!this.creator.readOnly && isStringEditable(element, locStr.name)) {
+  };
+
+  model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
+    if (!creator.readOnly && isStringEditable(element, locStr.name)) {
       return {
-        creator: this.creator,
+        creator: creator,
         element,
         locStr
       };
     }
     return <any>locStr;
-  }
+  };
 }
 
 export const editableStringRendererName = "svc-string-editor";
