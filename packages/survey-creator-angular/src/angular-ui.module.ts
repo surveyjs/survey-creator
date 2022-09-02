@@ -22,10 +22,14 @@ import { LinkValueQuestionComponent } from "./questions/question-link-value.comp
 import { EmbeddedSurveyQuestionComponent } from "./questions/question-embedded-survey.component";
 import { TranslationTabComponent } from "./tabs/translation/translation.component";
 import { TranslationSkeletonComponent } from "./tabs/translation/translation-line-skeleton.component";
-import { SimulatorComponent } from "./components/simulator.component";
+import { SimulatorComponent } from "./tabs/preview/simulator.component";
+import { TestAgainActionComponent } from "./tabs/preview/test-again.component";
+import { SurveyResultsComponent } from "./tabs/preview/survey-results.component";
+import { SurveyResultsTableRowComponent } from "./tabs/preview/survey-results-row.component";
+import { TestTabComponent } from "./tabs/preview/test.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent],
+  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],
