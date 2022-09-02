@@ -4,10 +4,10 @@ module.exports = function (config) {
   config.set({
     basePath: "./",
     preprocessors: {
-      "../../tests/markup/snapshots/*.snap.html": ["html2js"]
+      // "../../tests/markup/snapshots/*.snap.html": ["html2js"]
     },
     files: [
-      "../../tests/markup/snapshots/*.snap.html"
+      // "../../tests/markup/snapshots/*.snap.html"
     ],
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
     plugins: [
@@ -17,7 +17,7 @@ module.exports = function (config) {
       require("karma-coverage"),
       require("karma-webpack"),
       require("@angular-devkit/build-angular/plugins/karma"),
-      require('karma-html2js-preprocessor')
+      // require('karma-html2js-preprocessor')
     ],
     html2JsPreprocessor: {
       processPath: function(filePath) {
@@ -37,7 +37,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require("path").join(__dirname, "../../coverage/angular-ui"),
+      dir: require("path").join(__dirname, "../../coverage/survey-creator-angular"),
       subdir: ".",
       reporters: [
         { type: "html" },
