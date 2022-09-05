@@ -1,5 +1,59 @@
 <ng-template #template>
+  <!-- <svc-adaptive-toolbox *ngIf="model.isToolboxVisible" params="model: creator"></svc-adaptive-toolbox> -->
   <div class="svc-tab-designer" [class]="model.getRootCss()" (click)="model.clickDesigner()">
-    TODO implement designer tab
+    <div class="svc-tab-designer_content">
+      <ng-container *ngIf="model.showPlaceholder">
+        <div *ngIf="creator.showHeaderInEmptySurvey && creator.allowEditSurveyTitle" class="svc-designer-header">
+          <!-- ko template: { name: 'survey-header', data: survey } -->
+          <!-- /ko -->
+        </div>
+        <div class="svc-designer__placeholder-container"
+          data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }">
+          <span class="svc-designer-placeholder-text svc-text svc-text--normal" data-bind="text: placeholderText">
+          </span>
+          <svc-page class="svc-designer-placeholder-page" params="survey: survey, creator: creator, page: newPage">
+          </svc-page>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!model.showPlaceholder">
+        <div [class]="model.getDesignerCss()" [style.width]="survey.width">
+          <div *ngIf="creator.allowEditSurveyTitle" class="svc-designer-header">
+            <!-- ko template: { name: 'survey-header', data: survey } -->
+            <!-- /ko -->
+          </div>
+
+          <!-- ko if: survey.isShowProgressBarOnTop -->
+          <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+          <!-- /ko -->
+          <!-- /ko -->
+
+          <ng-container *ngIf="creator.pageEditMode !== 'bypage'">
+            <svc-page *ngFor="let page of survey.pages" class="svc-page"
+              data-bind="attr: { 'data-sv-drop-target-survey-element': page.name, 'data-sv-drop-target-page': page.name }"
+              [model]="page" [survey]="survey" [creator]="creator"></svc-page>
+            <svc-page *ngIf="model.showNewPage && model.newPage" class="svc-page"
+              data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }" [model]="model.newPage"
+              [survey]="survey" [creator]="creator"></svc-page>
+          </ng-container>
+
+          <ng-container *ngIf="model.pagesController.page2Display && creator.pageEditMode === 'bypage'">
+            <svc-page class="svc-page"
+              data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage', 'data-sv-drop-target-page': pagesController.page2Display.name }"
+              [model]="model.pagesController.page2Display" [survey]="survey" [creator]="creator"></svc-page>
+          </ng-container>
+
+          <!-- ko if: survey.isShowProgressBarOnBottom -->
+          <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+          <!-- /ko -->
+          <!-- /ko -->
+        </div>
+
+        <div *ngIf="creator.showPageNavigator" class="svc-tab-designer__page-navigator">
+          <!-- <svc-page-navigator params="controller: pagesController, pageEditMode: creator.pageEditMode">
+          </svc-page-navigator> -->
+        </div>
+      </ng-container>
+    </div>
   </div>
 </ng-template>
