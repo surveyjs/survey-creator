@@ -425,33 +425,34 @@ export class CreatorBase extends Base
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
-   * The event allows to display the custom name for objects: questions, pages and panels. By default the object name is using. You may show object title by setting showObjectTitles property to true.
-   * Use this event, if you want custom display name for objects.
-   *- sender the survey creator object that fires the event
-   *- options.obj the survey object, Survey, Page, Panel or Question
-   *- options.reason the name of the UI that requests the object display name.
-   *- options.displayName change this property to show your custom display name for the object
-   *
-   * The list of possible values in options.area:
-   *- "page-selector" - raised from page selector on designer surface
-   *- "condition-editor" - raised from Condition modal window or on setup condition in a logic tab
-   *- "logic-tab:question-filter" - raised on showing the filter by used questions
-   *- "preview-tab:page-list" - raised from page selector list in "Preview" tab
-   *- "preview-tab:selected-page" - raised on setting page selector title in "Preview" tab
-   *- "property-grid:property-editor" - raised on showing question property editor, for example "gotoName". It is raised for all elements (questions) in the dropdown.
-   *- "property-grid-header:element-list" - raised from showing object selector for property grid in "Designer" tab.
-   *- "property-grid-header:selected-element" - raised on rendering selected object title in property grid in "Designer" tab.
-   *- "translation-tab" - raised from translation tab
-   *
-   * (Obsolete, please use options.area attribute) The list of possible values in options.reason:
-   *- "condition" - raised from Condition modal window or on setup condition in a logic tab
-   *- "survey-tester" - raised from page selector list in "Preview" tab
-   *- "survey-tester-selected" - raised on setting page selector title in "Preview" tab
-   *- "survey-translation" - raised from translation tab
-   *- "property-editor" - raised on showing question property editor, for example "gotoName". It is raised for all elements (questions) in the dropdown.
-   *- "property-grid" - raised from showing object selector for property grid in "Designer" tab.
-   *- "property-grid-title" - raised on rendering selected object title in property grid in "Designer" tab.
-   * @see showObjectTitles
+   * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
+   * 
+   * Handle this event to replace survey element names in the UI with custom display texts.
+   * If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/surveycreator#showObjectTitles) property instead of handling this event.
+   * 
+   * The event handler accepts the following arguments:
+   * 
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - The instance of a survey element (survey, page, question, or panel) whose name has been requested.
+   * - `options.area` - A Survey Creator UI element that requests the display name.
+   *   - `"page-selector"` - Page selector on the design surface
+   *   - `"condition-editor"` - Condition pop-up window or a question drop-down menu in the Logic tab
+   *   - `"logic-tab:question-filter"` - Question filter in the Logic tab
+   *   - `"preview-tab:page-list"` - Page list in the Preview tab
+   *   - `"preview-tab:selected-page"` - Selected page name in the Preview tab
+   *   - `"property-grid:property-editor"` - Property editors in the Property Grid
+   *   - `"property-grid-header:element-list"` - Survey element list in the header of the Property Grid
+   *   - `"property-grid-header:selected-element"` - Selected survey element in the header of the Property Grid
+   *   - `"translation-tab"` - Translation tab
+   * - `options.displayName` - Modify this property to set a custom display text for the survey element.
+   * - `options.reason` - Obsolete. Use the `options.area` property instead.
+   *   - `"condition"` - Use the `"condition-editor"` value of `options.area` instead.
+   *   - `"survey-tester"` - Use the `"preview-tab:page-list"` value of `options.area` instead.
+   *   - `"survey-tester-selected"` - Use the `"preview-tab:selected-page"` value of `options.area` instead.
+   *   - `"survey-translation"` - Use the `"translation-tab"` value of `options.area` instead.
+   *   - `"property-editor"` - Use the `"property-grid:property-editor"` value of `options.area` instead.
+   *   - `"property-grid"` - Use the `"property-grid-header:element-list"` value of `options.area` instead.
+   *   - `"property-grid-title"` - Use the `"property-grid-header:selected-element"` value of `options.area` instead.
    */
   public onGetObjectDisplayName: Survey.Event<
     (sender: CreatorBase, options: any) => any,
