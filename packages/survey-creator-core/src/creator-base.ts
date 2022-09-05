@@ -436,7 +436,7 @@ export class CreatorBase extends Base
    * - `options.obj` - The instance of a survey element (survey, page, question, or panel) whose name has been requested.
    * - `options.area` - A Survey Creator UI element that requests the display name.
    *   - `"page-selector"` - Page selector on the design surface
-   *   - `"condition-editor"` - Condition pop-up window or a question drop-down menu in the Logic tab
+   *   - `"condition-editor"` - Condition pop-up window or drop-down menus that allow users to select questions in the Logic tab
    *   - `"logic-tab:question-filter"` - Question filter in the Logic tab
    *   - `"preview-tab:page-list"` - Page list in the Preview tab
    *   - `"preview-tab:selected-page"` - Selected page name in the Preview tab
