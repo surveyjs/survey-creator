@@ -28,9 +28,14 @@ import { SurveyResultsComponent } from "./tabs/preview/survey-results.component"
 import { SurveyResultsTableRowComponent } from "./tabs/preview/survey-results-row.component";
 import { TestTabComponent } from "./tabs/preview/test.component";
 import { PageDesignerComponent } from "./page.component";
+import { AdaptiveToolboxComponent } from "./toolbox/adaptive-toolbox.component";
+import { ToolboxToolComponent } from "./toolbox/toolbox-tool.component";
+import { ToolboxItemComponent } from "./toolbox/toolbox-item.component";
+import { ToolboxCategoryComponent } from "./toolbox/toolbox-category.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent],
+  declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
+    AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],
