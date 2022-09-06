@@ -1,0 +1,6 @@
+<ng-template #template>
+  <span *ngIf="disabled" class="svc-action-button svc-action-button--disabled"
+    [class]="classes" [attr.title]="title">{{text}}</span>
+  <span *ngIf="!disabled" role="button" class="svc-action-button"
+    (click)="onClick($event)" [key2click] [attr.title]="title" [class.svc-action-button--selected]="selected" [class]="classes">{{text}}</span>
+</ng-template>
