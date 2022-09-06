@@ -1121,3 +1121,74 @@ test("Import from array, onTraslationItemImport", () => {
   expect(question.locTitle.getLocaleText("de")).toEqual("q1 de");
   expect(question.locTitle.getLocaleText("dex")).toBeFalsy();
 });
+const survey = new SurveyModel({
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1",
+          "title": {
+            "default": "Question 1",
+            "ru": "Q 1"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+test("Reset on changing creator.JSON", () => {
+  let creator = new CreatorTester({ showTranslationTab: true });
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: "q1"
+      }
+    ]
+  };
+  creator.JSON = json;
+
+  const tabTranslationPlugin = <TabTranslationPlugin>creator.getPlugin("translation");
+  creator.activeTab = "translation";
+  const translation: Translation = tabTranslationPlugin.model;
+  translation.addLocale("de");
+  translation.showAllStrings = true;
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  let page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(2);
+  let pagePanel = <PanelModel>page.elements[1];
+  expect(pagePanel.elements).toHaveLength(2);
+  expect(pagePanel.elements[0].name).toEqual("page1_props");
+  expect(pagePanel.elements[1].name).toEqual("q1");
+  let page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
+  expect(page1Props.columns).toHaveLength(2);
+
+  let cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
+  let cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
+  expect(cellQuestion1.value).toEqual(null);
+  expect(cellQuestion2.value).toEqual(null);
+  cellQuestion1.value = "Default title";
+  cellQuestion2.value = "De title";
+  let surveyQuestion = creator.survey.pages[0];
+  expect(surveyQuestion.locTitle.text).toEqual("Default title");
+  expect(surveyQuestion.locTitle.getLocaleText("de")).toEqual("De title");
+  creator.JSON = json;
+
+  page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(2);
+  pagePanel = <PanelModel>page.elements[1];
+  expect(pagePanel.elements).toHaveLength(2);
+  expect(pagePanel.elements[0].name).toEqual("page1_props");
+  expect(pagePanel.elements[1].name).toEqual("q1");
+  page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
+  expect(page1Props.columns).toHaveLength(2);
+
+  cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
+  cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
+  expect(cellQuestion1.value).toEqual(null);
+  expect(cellQuestion2.value).toEqual(null);
+});
