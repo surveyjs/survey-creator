@@ -614,19 +614,7 @@ export class Translation extends Base implements ITranslationLocales {
     }
     return [usedLocales, locales];
   }
-  private updateSettingsSurveyLocales(resetSelectedLocales: boolean) {
-    /*
-    if(resetSelectedLocales) {
-      const selLocales = this.settingsSurvey.getValue("selLocales");
-      if(Array.isArray(selLocales)) {
-        let newSelLolales = [];
-        selLocales.forEach(l => { if(this.locales.indexOf(l) > -1) newSelLolales.push(l); });
-        if(newSelLolales.length !== selLocales.length) {
-          this.settingsSurvey.setValue("selLocales", newSelLolales);
-        }
-      }
-    }
-    */
+  private updateSettingsSurveyLocales() {
     let [choices, locales] = this.getSurveyLocales();
     this.localesQuestion.choices = choices;
     const selectedLocales = [];
@@ -894,7 +882,7 @@ export class Translation extends Base implements ITranslationLocales {
   public set survey(val: SurveyModel) {
     this.surveyValue = val;
     this.settingsSurvey.setValue("selLocales", []);
-    this.reset(true);
+    this.reset();
   }
   public reset(resetSelectedLocales: boolean = false): void {
     var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
@@ -904,7 +892,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.root.reset();
     this.resetLocales();
     this.isEmpty = !this.root.hasItems;
-    this.updateSettingsSurveyLocales(resetSelectedLocales);
+    this.updateSettingsSurveyLocales();
     this.updateLocales();
     this.resetStringsSurvey();
   }
