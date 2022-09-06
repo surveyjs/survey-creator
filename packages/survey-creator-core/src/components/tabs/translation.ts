@@ -614,7 +614,19 @@ export class Translation extends Base implements ITranslationLocales {
     }
     return [usedLocales, locales];
   }
-  private updateSettingsSurveyLocales() {
+  private updateSettingsSurveyLocales(resetSelectedLocales: boolean) {
+    /*
+    if(resetSelectedLocales) {
+      const selLocales = this.settingsSurvey.getValue("selLocales");
+      if(Array.isArray(selLocales)) {
+        let newSelLolales = [];
+        selLocales.forEach(l => { if(this.locales.indexOf(l) > -1) newSelLolales.push(l); });
+        if(newSelLolales.length !== selLocales.length) {
+          this.settingsSurvey.setValue("selLocales", newSelLolales);
+        }
+      }
+    }
+    */
     let [choices, locales] = this.getSurveyLocales();
     this.localesQuestion.choices = choices;
     const selectedLocales = [];
@@ -881,9 +893,10 @@ export class Translation extends Base implements ITranslationLocales {
   }
   public set survey(val: SurveyModel) {
     this.surveyValue = val;
-    this.reset();
+    this.settingsSurvey.setValue("selLocales", []);
+    this.reset(true);
   }
-  public reset() {
+  public reset(resetSelectedLocales: boolean = false): void {
     var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
     var rootName = !!this.filteredPage ? rootObj["name"] : "survey";
     this.root = new TranslationGroup(rootName, rootObj, this);
@@ -891,7 +904,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.root.reset();
     this.resetLocales();
     this.isEmpty = !this.root.hasItems;
-    this.updateSettingsSurveyLocales();
+    this.updateSettingsSurveyLocales(resetSelectedLocales);
     this.updateLocales();
     this.resetStringsSurvey();
   }
@@ -937,8 +950,7 @@ export class Translation extends Base implements ITranslationLocales {
     }
     this.calcIsChooseLanguageEnabled();
   }
-
-  public resetLocales() {
+  public resetLocales(): void {
     var locales = [""];
     this.root.fillLocales(locales);
     this.setLocales(locales);

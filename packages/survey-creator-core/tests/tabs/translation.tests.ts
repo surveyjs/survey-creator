@@ -1176,8 +1176,12 @@ test("Reset on changing creator.JSON", () => {
   let surveyQuestion = creator.survey.pages[0];
   expect(surveyQuestion.locTitle.text).toEqual("Default title");
   expect(surveyQuestion.locTitle.getLocaleText("de")).toEqual("De title");
-  creator.JSON = json;
 
+  translation.addLocale("fr");
+  expect(page1Props.columns).toHaveLength(3);
+  translation.removeLocale("fr");
+  creator.JSON = json;
+  expect(translation.localesQuestion.value).toHaveLength(0);
   page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(2);
   pagePanel = <PanelModel>page.elements[1];
@@ -1185,10 +1189,8 @@ test("Reset on changing creator.JSON", () => {
   expect(pagePanel.elements[0].name).toEqual("page1_props");
   expect(pagePanel.elements[1].name).toEqual("q1");
   page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
-  expect(page1Props.columns).toHaveLength(2);
+  expect(page1Props.columns).toHaveLength(1);
 
   cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
-  cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
   expect(cellQuestion1.value).toEqual(null);
-  expect(cellQuestion2.value).toEqual(null);
 });
