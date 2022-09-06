@@ -16,6 +16,9 @@ export class SurveyResultsComponent extends CreatorModelComponent<SurveyResultsM
     }
     return null;
   }
+  public get model() {
+    return this.createdModel;
+  }
   protected getPropertiesToTrack(): string[] {
     return ["survey"];
   }

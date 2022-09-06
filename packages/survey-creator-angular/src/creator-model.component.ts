@@ -6,7 +6,7 @@ import { Base } from "survey-core";
   template: ""
 })
 export abstract class CreatorModelComponent<T extends Base> extends BaseAngular<T> {
-  public model!: T;
+  public createdModel!: T;
   protected abstract createModel(): T;
   protected abstract getPropertiesToTrack(): string[];
 
@@ -25,11 +25,11 @@ export abstract class CreatorModelComponent<T extends Base> extends BaseAngular<
 
   getModel() {
     if (this.needUpdateModel())
-      this.model = this.createModel();
-    return this.model;
+      this.createdModel = this.createModel();
+    return this.createdModel;
   }
   needUpdateModel(): boolean {
-    if (!this.model) return true;
+    if (!this.createdModel) return true;
     if (Object.keys(this.hash).some(key => this.hash[key] != (<any>this)[key])) {
       return true;
     }
