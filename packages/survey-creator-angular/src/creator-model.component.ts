@@ -6,31 +6,30 @@ import { Base } from "survey-core";
   template: ""
 })
 export abstract class CreatorModelComponent<T extends Base> extends BaseAngular<T> {
-  public createdModel!: T;
-  protected abstract createModel(): T;
   protected abstract getPropertiesToTrack(): string[];
+  protected abstract createModel(): void;
 
-  private hash: { [index: string]: any } = {};
+  private hash!: { [index: string]: any };
 
   private createHash() {
+    this.hash = {};
     this.getPropertiesToTrack().forEach((prop: string) => {
       this.hash[prop] = (<any>this)[prop];
     });
   }
 
   override ngOnInit(): void {
-    super.ngOnInit();
+    this.createModel();
     this.createHash();
+    super.ngOnInit();
   }
-
-  getModel() {
+  override ngDoCheck(): void {
     if (this.needUpdateModel())
-      this.createdModel = this.createModel();
-    return this.createdModel;
+      this.createModel();
+    super.ngDoCheck();
   }
   needUpdateModel(): boolean {
-    if (!this.createdModel) return true;
-    if (Object.keys(this.hash).some(key => this.hash[key] != (<any>this)[key])) {
+    if (!this.hash || Object.keys(this.hash).some(key => this.hash[key] != (<any>this)[key])) {
       return true;
     }
     return false;

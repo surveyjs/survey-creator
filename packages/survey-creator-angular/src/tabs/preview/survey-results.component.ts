@@ -10,14 +10,15 @@ import { SurveyResultsModel } from "survey-creator-core";
 })
 export class SurveyResultsComponent extends CreatorModelComponent<SurveyResultsModel> {
   @Input() survey!: SurveyModel;
-  protected createModel(): any {
+  public model!: SurveyResultsModel;
+
+  public createModel(): void {
     if (!!this.survey) {
-      return new SurveyResultsModel(this.survey);
+      this.model = new SurveyResultsModel(this.survey);
     }
-    return null;
   }
-  public get model() {
-    return this.createdModel;
+  protected getModel(): SurveyResultsModel {
+    return this.model;
   }
   protected getPropertiesToTrack(): string[] {
     return ["survey"];
