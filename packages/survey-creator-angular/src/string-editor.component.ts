@@ -1,0 +1,90 @@
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { LocalizableString } from "survey-core";
+import { StringEditorViewModelBase, CreatorBase, editableStringRendererName } from "survey-creator-core";
+import { CreatorModelComponent } from "./creator-model.component";
+import { AngularComponentFactory } from "survey-angular-ui";
+
+@Component({
+  selector: "svc-string-edtior",
+  templateUrl: "./string-editor.component.html",
+  styles: [":host { display: none; }"]
+})
+export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> implements AfterViewInit {
+  public baseModel!: StringEditorViewModelBase;
+  private justFocused: boolean = false;
+  @Input() model!: any;
+  @ViewChild("container") container!: ElementRef<HTMLElement>;
+  public createModel(): void {
+    this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
+  }
+  public get locString(): LocalizableString {
+    return this.model.locStr;
+  }
+  public get creator(): CreatorBase {
+    return this.model.creator;
+  }
+  protected getModel(): StringEditorViewModelBase {
+    return this.baseModel;
+  }
+  protected getPropertiesToTrack(): string[] {
+    return ["creator", "locString"];
+  }
+  public get placeholder(): string {
+    return this.baseModel.placeholder;
+  }
+  public get contentEditable(): boolean {
+    return this.baseModel.contentEditable;
+  }
+  public get className(): string {
+    return this.baseModel.className(this.locString.renderedHtml);
+  }
+  public get errorText(): string {
+    return this.baseModel.errorText;
+  }
+  public get editValue(): string {
+    return this.baseModel.focused && this.baseModel.editAsText && this.locString.text || this.locString.renderedHtml;
+  }
+  onChangeHandler = (): void => {
+    this.detectChanges();
+  }
+  public onBlur(event: any): string {
+    this.container.nativeElement.spellcheck = false;
+    (<any>this.locString).__isEditing = false;
+    this.justFocused = false;
+    this.baseModel.onBlur(event);
+    return this.baseModel.errorText;
+  }
+  public onFocus(event: any): void {
+    this.baseModel.onFocus(event);
+    this.justFocused = true;
+  }
+  public done(event: any): void {
+    this.baseModel.done(event);
+    (<any>this.locString).__isEditing = false;
+  }
+  public edit(event: any): void {
+    this.container.nativeElement.focus();
+    (<any>this.locString).__isEditing = true;
+    this.baseModel.onClick(event);
+  }
+  override ngOnInit(): void {
+    super.ngOnInit();
+    if ((<any>this.locString).__isEditing) {
+      this.container.nativeElement.focus();
+    }
+    this.locString?.onStringChanged.add(this.onChangeHandler);
+  }
+  override ngOnDestroy(): void {
+    this.locString?.onStringChanged.remove(this.onChangeHandler);
+    super.ngOnDestroy();
+  }
+  ngAfterViewInit(): void {
+    this.baseModel.blurEditor = () => {
+      this.container.nativeElement.blur();
+      this.container.nativeElement.spellcheck = false;
+    };
+
+  }
+}
+
+AngularComponentFactory.Instance.registerComponent(editableStringRendererName, StringEditorComponent);
