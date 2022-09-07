@@ -28,6 +28,7 @@ import { SurveyResultsComponent } from "./tabs/preview/survey-results.component"
 import { SurveyResultsTableRowComponent } from "./tabs/preview/survey-results-row.component";
 import { TestTabComponent } from "./tabs/preview/test.component";
 import { PageDesignerComponent } from "./page.component";
+import { QuestionDesignerComponent } from "./question.component";
 import { AdaptiveToolboxComponent } from "./toolbox/adaptive-toolbox.component";
 import { ToolboxToolComponent } from "./toolbox/toolbox-tool.component";
 import { ToolboxItemComponent } from "./toolbox/toolbox-item.component";
