@@ -32,10 +32,11 @@ import { AdaptiveToolboxComponent } from "./toolbox/adaptive-toolbox.component";
 import { ToolboxToolComponent } from "./toolbox/toolbox-tool.component";
 import { ToolboxItemComponent } from "./toolbox/toolbox-item.component";
 import { ToolboxCategoryComponent } from "./toolbox/toolbox-category.component";
+import { StringEditorComponent } from "./string-editor.component";
 
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
-    AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent],
+    AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],
