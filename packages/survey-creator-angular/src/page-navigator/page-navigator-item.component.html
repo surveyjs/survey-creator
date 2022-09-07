@@ -1,0 +1,13 @@
+<ng-template #template>
+  <div class="svc-page-navigator-item">
+    <div class="svc-page-navigator-item-content"
+      (click)="model.action()" [key2click] [class.svc-page-navigator-item--selected]="model.active"  [class.svc-page-navigator-item--disabled]="model.disabled">
+      <div class="svc-page-navigator-item__dot" [attr.title]="model.title"></div>
+  
+      <div class="svc-page-navigator-item__banner svc-item__banner">
+        <span class="svc-text svc-text--small svc-text--bold">{{model.title}}</span>
+        <span class="svc-page-navigator-item__dot"></span>
+      </div>
+    </div>
+  </div>
+</ng-template>

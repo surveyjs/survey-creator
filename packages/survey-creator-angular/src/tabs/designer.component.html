@@ -50,8 +50,8 @@
         </div>
 
         <div *ngIf="creator.showPageNavigator" class="svc-tab-designer__page-navigator">
-          <!-- <svc-page-navigator params="controller: pagesController, pageEditMode: creator.pageEditMode">
-          </svc-page-navigator> -->
+          <svc-page-navigator [pagesController]="model.pagesController" [pageEditMode]="creator.pageEditMode">
+          </svc-page-navigator>
         </div>
       </ng-container>
     </div>
