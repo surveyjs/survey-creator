@@ -1,30 +1,29 @@
 <ng-template #template>
   <div *ngIf="model && adorner" class="svc-question__adorner" [class]="adorner.rootCss()"
+    (mouseover)="adorner.hover($event, $event.target)" (mouseleave)="adorner.hover($event, $event.target)"
+    [attr.data-sv-drop-target-survey-element]="adorner.element.name || null"
     data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
 
     <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content" [class]="adorner.css()"
+      [key2click] (click)="adorner.select(adorner, $event)"
       data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
       <div *ngIf="adorner.allowDragging" class="svc-question__drag-area"
         data-bind="event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
-        <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 24 } } -->
-        <!-- /ko -->
         <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="24"
           sv-ng-svg-icon></svg>
       </div>
 
-      <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
-      <!-- /ko -->
       <ng-template [component]="{ name: 'sv-template-renderer', data: { model: model } }"></ng-template>
 
       <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
-        <!-- ko if: element.isPanel && showAddQuestionButton -->
-        <div class="svc-panel__add-new-question svc-action-button"
+        <div *ngIf="adorner.element.isPanel && adorner.showAddQuestionButton"
+          class="svc-panel__add-new-question svc-action-button" [key2click] (click)="adorner.addNewQuestion()"
           data-bind="click: addNewQuestion, key2click, clickBubble: false">
           <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
+            {{ adorner.addNewQuestionText }}
           </span>
         </div>
-        <!-- /ko -->
       </div>
 
       <!-- ko if: adornerComponent -->
@@ -34,55 +33,56 @@
 
       <div *ngIf="!adorner.isEmptyElement && model.isPanel && adorner.showAddQuestionButton"
         class="svc-panel__add-new-question-container">
-        <div class="svc-panel__add-new-question svc-action-button"
+        <div class="svc-panel__add-new-question svc-action-button" [key2click] (click)="adorner.addNewQuestion()"
           data-bind="click: addNewQuestion, key2click, clickBubble: false">
           <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
+            {{ adorner.addNewQuestionText }}
           </span>
         </div>
         <!-- ko with: questionTypeSelectorModel -->
-        <button type="button"
+        <button type="button" [attr.title]="adorner.addNewQuestionText" [key2click]
+          (click)="adorner.questionTypeSelectorModel.action(adorner.questionTypeSelectorModel, $event)"
           data-bind="click: action, key2click, clickBubble: false, attr: { title: $data.addNewQuestionText }"
           class="svc-panel__question-type-selector">
-          <!-- <sv-svg-icon class="svc-panel__question-type-selector-icon" params="iconName: iconName, size: 24"></sv-svg-icon> -->
+          <svg class="svc-panel__question-type-selector-icon" [iconName]="adorner.questionTypeSelectorModel.iconName"
+            [size]="24" sv-ng-svg-icon></svg>
           <!-- <sv-popup params="model: popupModel"></sv-popup> -->
         </button>
         <!-- /ko -->
       </div>
 
       <div class="svc-question__content-actions">
-        <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer, handleClick: false } } -->
-        <!-- /ko -->
         <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>
       </div>
     </div>
 
     <ng-container *ngIf="!adorner.element.isInteractiveDesignElement">
-      <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
-      <!-- /ko -->
       <ng-template [component]="{ name: 'sv-template-renderer', data: { model: model } }"></ng-template>
 
       <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
-        <!-- ko if: showAddQuestionButton -->
-        <div class="svc-panel__add-new-question svc-action-button"
-          data-bind="click: addNewQuestion, key2click, clickBubble: false">
+        <div *ngIf="adorner.showAddQuestionButton" class="svc-panel__add-new-question svc-action-button" [key2click]
+          (click)="adorner.addNewQuestion()" data-bind="click: addNewQuestion, key2click, clickBubble: false">
           <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
+            {{ adorner.addNewQuestionText }}
           </span>
         </div>
-        <!-- /ko -->
       </div>
 
       <div *ngIf="!adorner.isEmptyElement" class="svc-panel__add-new-question-container">
-        <div class="svc-panel__add-new-question svc-action-button"
+        <div class="svc-panel__add-new-question svc-action-button" [key2click] (click)="adorner.addNewQuestion()"
           data-bind="click: addNewQuestion, key2click, clickBubble: false">
           <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
+            {{ adorner.addNewQuestionText }}
           </span>
         </div>
         <!-- ko with: questionTypeSelectorModel -->
-        <button type="button"
+        <button type="button" [key2click]
+          (click)="adorner.questionTypeSelectorModel.action(adorner.questionTypeSelectorModel, $event)"
           data-bind="click: action, key2click, clickBubble: false, attr: { title: $data.addNewQuestionText }"
           class="svc-panel__question-type-selector">
-          <!-- <sv-svg-icon class="svc-panel__question-type-selector-icon" params="iconName: iconName, size: 24"></sv-svg-icon> -->
+          <svg class="svc-panel__question-type-selector-icon" [iconName]="adorner.questionTypeSelectorModel.iconName"
+            [size]="24" sv-ng-svg-icon></svg>
           <!-- <sv-popup params="model: popupModel"></sv-popup> -->
         </button>
         <!-- /ko -->
