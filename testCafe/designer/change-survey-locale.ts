@@ -1,5 +1,4 @@
-import { Selector } from "testcafe";
-import { setSurveyProp, url, setJSON } from "../helper";
+import { setSurveyProp, url, setJSON, getDropdownValue } from "../helper";
 const title = "Change survey locale";
 
 const json = {
@@ -25,13 +24,13 @@ fixture`${title}`.page`${url}`.beforeEach(
 test("Change survey locale", async t => {
   await setJSON(json);
 
-  await t.expect(Selector("div").withText("Select...").visible).ok();
+  await t.expect(getDropdownValue()).eql("Select...");
   await setSurveyProp("locale", "de");
-  await t.expect(Selector("div").withText("Bitte auswählen...").visible).ok();
+  await t.expect(getDropdownValue()).eql("Bitte auswählen...");
   await setSurveyProp("locale", "es");
-  await t.expect(Selector("div").withText("Seleccione...").visible).ok();
+  await t.expect(getDropdownValue()).eql("Seleccione...");
   await setSurveyProp("locale", "it");
-  await t.expect(Selector("div").withText("Scegli...").visible).ok();
+  await t.expect(getDropdownValue()).eql("Scegli...");
   await setSurveyProp("locale", "");
-  await t.expect(Selector("div").withText("Select...").visible).ok();
+  await t.expect(getDropdownValue()).eql("Select...");
 });
