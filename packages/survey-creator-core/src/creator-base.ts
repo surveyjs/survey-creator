@@ -804,6 +804,7 @@ export class CreatorBase extends Base
    *- sender the survey creator object that fires the event
    *- options.question a new added survey question. Survey.Question object
    *- options.page the survey Page object where question has been added.
+   *- options.reason how question has been added via UI: ADDED_FROM_TOOLBOX, ADDED_FROM_PAGEBUTTON, ELEMENT_COPIED.
    */
   public onQuestionAdded: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -1858,28 +1859,19 @@ export class CreatorBase extends Base
     return !!classInfo && classInfo.name === typeName;
   }
 
+  private addNewElementReason: string;
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
-    var options = { question: question, page: page };
+    var options = { question: question, page: page, reason: this.addNewElementReason };
     this.onQuestionAdded.fire(this, options);
-    /*
-    if (parentPanel.elements.indexOf(question) !== -1) {
-      this.surveyObjects.addElement(question, parentPanel);
-    }
-    */
   }
   @ignoreUndoRedo()
   private doOnPanelAdded(panel: PanelModel, parentPanel: any) {
     var page = this.getPageByElement(panel);
-    var options = { panel: panel, page: page };
+    var options = { panel: panel, page: page, reason: this.addNewElementReason };
     this.onPanelAdded.fire(this, options);
-    /*
-    if (parentPanel.elements.indexOf(panel) !== -1) {
-      this.surveyObjects.addElement(panel, parentPanel);
-    }
-    */
   }
   @ignoreUndoRedo()
   private doOnPageAdded(page: PageModel) {
@@ -2134,13 +2126,14 @@ export class CreatorBase extends Base
     if (panel) {
       parent = panel;
     }
+    this.addNewElementReason = modifiedType;
     const currentRow = this.findRowByElement(selectedElement, parent);
     if (currentRow && this.isRowMultiline(currentRow)) {
       this.addElemenMultiline(parent, element, index, currentRow);
     } else {
       parent.addElement(element, index);
     }
-
+    this.addNewElementReason = "";
     this.setModified({ type: modifiedType, question: element });
   }
 
@@ -2315,6 +2308,11 @@ export class CreatorBase extends Base
     } else {
       this.survey.pages.push(newPage);
     }
+    this.addNewElementReason = "ELEMENT_COPIED";
+    newPage.questions.forEach(q => this.doOnQuestionAdded(q, q.parent));
+    const panels: any = newPage.getPanels();
+    if(Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
+    this.addNewElementReason = "";
     return newPage;
   }
 
@@ -2542,13 +2540,13 @@ export class CreatorBase extends Base
     if (!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
     return undefined;
   }
-  public clickToolboxItem(newElement: any, panel: IPanel = null) {
+  public clickToolboxItem(newElement: any, panel: IPanel = null, modifiedType: string = "ADDED_FROM_TOOLBOX") {
     if (!this.readOnly) {
       if (newElement["getType"] === undefined) {
         newElement = this.createNewElement(newElement);
       }
       this.survey.lazyRendering = false;
-      this.doClickQuestionCore(newElement, "ADDED_FROM_TOOLBOX", -1, panel);
+      this.doClickQuestionCore(newElement, modifiedType, -1, panel);
       this.selectElement(newElement);
     }
   }
@@ -3058,7 +3056,7 @@ export class CreatorBase extends Base
       json = toolboxItem.json;
     }
     let newElement = this.createNewElement(json);
-    this.clickToolboxItem(newElement, panel);
+    this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
   createIActionBarItemByClass(className: string, title: string, iconName: string): Action {
     return new Action({

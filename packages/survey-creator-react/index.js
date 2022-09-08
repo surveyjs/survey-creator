@@ -209,6 +209,10 @@ creator.saveSurveyFunc = (no, callback) => {
   }, 1000);
 };
 
+creator.onQuestionAdded.add(function (sender, options) {
+  console.log(options.question.name);
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <SurveyCreator.SurveyCreatorComponent creator={creator} />
