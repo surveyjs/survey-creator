@@ -71,6 +71,12 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     this.baseModel.onBlur(event.nativeEvent);
     return this.baseModel.errorText;
   };
+  private onCompositionStart = (event: any) => {
+    this.baseModel.onCompositionStart(event.nativeEvent);
+  };
+  private onCompositionEnd = (event: any) => {
+    this.baseModel.onCompositionEnd(event.nativeEvent);
+  };
   private onInput = (event: any) => {
     this.baseModel.onInput(event.nativeEvent);
   };
@@ -142,6 +148,8 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           // style={this.style}
           onBlur={this.onBlur}
           onInput={this.onInput}
+          onCompositionStart={this.onCompositionStart}
+          onCompositionEnd={this.onCompositionEnd}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onKeyUp={this.onKeyUp}
