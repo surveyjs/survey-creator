@@ -142,3 +142,7 @@ export const patchDragDropToDisableDrop = ClientFunction(() => {
   window["creator"].dragDropSurveyElements.drop = () => { };
   window["creator"].dragDropChoices.drop = () => { };
 });
+
+export function getDropdownValue(selector: string | Selector = ".sd-input.sd-dropdown") {
+  return Selector(selector).find("input").getAttribute("placeholder");
+}
