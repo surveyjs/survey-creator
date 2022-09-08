@@ -37,6 +37,7 @@
     "@types/ace": "0.0.44",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.20.43",
+    "http-server": "^14.1.1",
     "jasmine": "^4.1.0",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
@@ -59,6 +60,7 @@
   "scripts": {
     "build": "ng build",
     "serve:example": "ng serve",
+    "serve:example:aot": "http-server ./dist/angular-ui",
     "build:example": "ng build --aot --output-hashing=none angular-ui",
     "test": "ng test survey-creator-angular",
     "test:single": "ng test --watch=false --browsers=ChromeHeadless survey-creator-angular",
