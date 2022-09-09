@@ -7,6 +7,7 @@ export * from "../tabs/embed";
 export * from "../tabs/json-editor-ace";
 export * from "../tabs/json-editor-textarea";
 export * from "../tabs/logic";
+export * from "../tabs/logic-operator";
 export * from "../tabs/translation";
 
 export * from "../page";
