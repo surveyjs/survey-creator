@@ -38,6 +38,7 @@ export * from "../tabs/TranslationLineSkeleton";
 export * from "../ActionButton";
 export * from "../StringEditor";
 
+export * from "../tabs/logic-operator";
 export * from "../tabs/Designer";
 export * from "../tabs/Embed";
 export * from "../tabs/JsonEditorAce";
