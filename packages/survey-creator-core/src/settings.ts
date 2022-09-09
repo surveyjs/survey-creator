@@ -233,7 +233,7 @@ export interface ISurveyCreatorOptions {
     obj: Base,
     editor: any,
     list: any[]
-  );
+  ): string;
   onConditionGetTitleCallback(
     expression: string,
     title: string
@@ -358,7 +358,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     obj: Base,
     editor: any,
     list: any[]
-  ) { }
+  ): string { return "asc"; }
   onConditionGetTitleCallback(
     expression: string,
     title: string

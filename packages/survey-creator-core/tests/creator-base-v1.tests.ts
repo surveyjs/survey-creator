@@ -706,6 +706,35 @@ test("creator.onConditionQuestionsGetList, Bug#957", () => {
   expect(questionValue.choices).toHaveLength(1);
   expect(questionValue.choices[0].value).toEqual("q2");
 });
+test("creator.onConditionQuestionsGetList, sortOrder", () => {
+  const creator = new CreatorTester();
+  creator.onConditionQuestionsGetList.add(function (sender, options) {
+    options.sortOrder = "none";
+    options.list = options.list.filter(
+      (item) => item.question.getType() === "text"
+    );
+    options.list;
+  });
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q3", type: "text" },
+      { name: "q2", type: "text" },
+      { name: "q4", type: "checkbox" },
+      { name: "q5", type: "radiogroup" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const editor = new ConditionEditor(creator.survey, question, creator);
+  expect(editor.panel.panels).toHaveLength(1);
+  const panel = editor.panel.panels[0];
+  const questionValue = panel.getQuestionByName("questionName");
+  expect(questionValue).toBeTruthy();
+  expect(questionValue.choices).toHaveLength(2);
+  expect(questionValue.choices[0].value).toEqual("q3");
+  expect(questionValue.choices[1].value).toEqual("q2");
+});
 
 test("creator.onGetObjectDisplayName, change visible name for objects", () => {
   const creator = new CreatorTester();
