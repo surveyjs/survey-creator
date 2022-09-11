@@ -34,6 +34,7 @@ import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import { isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
+import { ConditionEditor } from "../src/property-grid/condition-survey";
 
 import {
   getElementWrapperComponentData,

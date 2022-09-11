@@ -718,6 +718,7 @@ export class CreatorBase extends Base
     *- options.propertyName  the name of the edited property.
     *- options.editor the instance of Property Editor.
     *- options.list the list of the questions available for condition
+    *- options.sortOrder "asc" (default) | "none". Change it to "none", if you don't want to sort your condition list
     */
   public onConditionQuestionsGetList: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -2891,11 +2892,13 @@ export class CreatorBase extends Base
     obj: Base,
     editor: any,
     list: any[]
-  ): void {
+  ): string {
+    if(this.onConditionQuestionsGetList.isEmpty) return "asc";
     var options = {
       propertyName: propertyName,
       obj: obj,
       editor: editor,
+      sortOrder: "asc",
       list: list
     };
     this.onConditionQuestionsGetList.fire(this, options);
@@ -2905,6 +2908,7 @@ export class CreatorBase extends Base
         list.push(options.list[i]);
       }
     }
+    return options.sortOrder;
   }
   onConditionGetTitleCallback(
     expression: string,
