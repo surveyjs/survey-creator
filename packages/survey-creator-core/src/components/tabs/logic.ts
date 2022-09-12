@@ -1,9 +1,15 @@
-import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn } from "survey-core";
+import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn, QuestionDropdownModel } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import { SurveyLogicTypes, SurveyLogicType } from "./logic-types";
 import "./logic.scss";
+
+export function initLogicOperator(question: QuestionDropdownModel) {
+  question.popupModel.isFocusedContent = true;
+  question.popupModel.setWidthByTarget = false;
+  question.dropdownListModel["listModel"].searchEnabled = question.searchEnabled;
+}
 
 export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   private editableItemValue: SurveyLogicItem;

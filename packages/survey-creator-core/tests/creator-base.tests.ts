@@ -34,6 +34,7 @@ import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import { isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
+import { ConditionEditor } from "../src/property-grid/condition-survey";
 
 import {
   getElementWrapperComponentData,
@@ -3165,3 +3166,30 @@ test("canUndo with events", (): any => {
 
   creator.undo();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
+});
+test("Reason of question Added from toolbox, onclicking add question button, on duplicated question, panel, page", (): any => {
+  const creator = new CreatorTester();
+  const reason = [];
+  creator.onQuestionAdded.add(function (sender, options) {
+    reason.push(options.reason);
+  });
+
+  creator.clickToolboxItem({ type: "text" });
+  expect(reason).toHaveLength(1);
+  expect(reason[0]).toEqual("ADDED_FROM_TOOLBOX");
+
+  creator.fastCopyQuestion(creator.survey.getAllQuestions()[0]);
+  expect(reason).toHaveLength(2);
+  expect(reason[1]).toEqual("ELEMENT_COPIED");
+
+  const pageAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(reason).toHaveLength(3);
+  expect(reason[2]).toEqual("ADDED_FROM_PAGEBUTTON");
+
+  creator.copyPage(creator.survey.pages[0]);
+  expect(reason).toHaveLength(6);
+  expect(reason[3]).toEqual("ELEMENT_COPIED");
+  expect(reason[4]).toEqual("ELEMENT_COPIED");
+  expect(reason[5]).toEqual("ELEMENT_COPIED");
+});

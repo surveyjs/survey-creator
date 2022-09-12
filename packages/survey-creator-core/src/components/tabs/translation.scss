@@ -93,7 +93,7 @@
   padding: calcSize(1) 0;
 }
 
-.st-table__cell:first-of-type {
+td.st-table__cell:first-of-type {
   @include defaultBold;
   color: $foreground;
   max-width: 300px;
