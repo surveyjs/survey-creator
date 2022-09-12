@@ -645,6 +645,8 @@ test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab co
   creator.selectElement(q1);
   const generalPanel = <PanelModel>(creator["designerPropertyGrid"].survey.getPanelByName("general"));
   const logicPanel = <PanelModel>(creator["designerPropertyGrid"].survey.getPanelByName("logic"));
+  expect(generalPanel.isExpanded).toBeTruthy();
+  creator.collapsePropertyTab("general");
   expect(generalPanel.isExpanded).toBeFalsy();
   creator.expandPropertyTab("general");
   expect(generalPanel.isExpanded).toBeTruthy();
