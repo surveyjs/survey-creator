@@ -643,6 +643,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const res = [];
     const questions = this.survey.getAllQuestions();
     const contextObject = this.getContextObject();
+    let sortOrder = "acs";
     if (questions.length > 0) {
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i];
@@ -650,7 +651,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         const context = contextObject ? contextObject : (!this.context || this.context === question);
         question.addConditionObjectsByContext(res, context);
       }
-      this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res);
+      sortOrder = this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res);
       for (let i = 0; i < res.length; i++) {
         res[i].value = res[i].name;
         let question = !!res[i].question ? res[i].question : res[i];
@@ -666,7 +667,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       }
     }
     this.addValuesIntoConditionQuestions(this.survey.getVariableNames(), res);
-    SurveyHelper.sortItems(res);
+    if(sortOrder === "asc") {
+      SurveyHelper.sortItems(res);
+    }
     return res;
   }
   private getContextObject(): Base {
