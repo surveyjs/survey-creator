@@ -1347,8 +1347,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     return json;
   }
   private getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
-    if(!!prop.choicesfunc) return [];
-    return prop.getChoices(obj);
+    return prop.getChoices(obj, (choices: any) => {});
   }
   protected get canRenderAsButtonGroup(): boolean {
     return creatorSettings.propertyGrid.useButtonGroup;

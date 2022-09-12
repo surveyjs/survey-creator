@@ -225,7 +225,9 @@ test("dropdown property editor, get choices on callback", () => {
   expect(setQuestion.choices).toHaveLength(0);
   callback(choices);
   expect(setQuestion.choices).toHaveLength(5);
-  expect(callbackList).toHaveLength(1);
+  expect(callbackList).toHaveLength(2);
+  expect(callbackList[0]).toBeTruthy();
+  expect(callbackList[1]).toBeTruthy();
   Serializer.removeProperty("survey", "region");
 });
 
