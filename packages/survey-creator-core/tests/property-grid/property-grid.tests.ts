@@ -2677,7 +2677,34 @@ test("Using html question in property grid", (): any => {
   panel.expand();
   propertyGrid.survey.whenPanelFocusIn(panel);
   expect(panel.questions).toHaveLength(1);
-  Serializer.removeProperty("survey", "surveyLink");
+  Serializer.removeProperty("question", "nameLink");
+});
+test("Use validation in custom property editor", (): any => {
+  Serializer.addProperty("survey", { name: "sentTo", type: "email" });
+  const propEditor: IPropertyGridEditor = {
+    fit: function (prop) {
+      return prop.type === "email";
+    },
+    getJSON: function (obj, prop, options) {
+      return { type: "text", textUpdateMode: "onBlur" };
+    },
+    validateValue: function(obj, question, prop, value: any): string {
+      if(!value) return "";
+      const valid = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+      return !valid ? "Incorrect email" : "";
+    }
+  };
+  PropertyGridEditorCollection.register(propEditor);
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const emailQuestion = propertyGrid.survey.getQuestionByName("sentTo");
+  expect(emailQuestion.errors).toHaveLength(0);
+  emailQuestion.value = "incorrect@";
+  expect(emailQuestion.errors).toHaveLength(1);
+  expect(emailQuestion.errors[0].text).toEqual("Incorrect email");
+  emailQuestion.value = "abc@abc.com";
+  expect(emailQuestion.errors).toHaveLength(0);
+  Serializer.removeProperty("email", "sentTo");
 });
 test("autoComplate property", () => {
   const question = new QuestionTextModel("q1");

@@ -881,9 +881,10 @@ export class Translation extends Base implements ITranslationLocales {
   }
   public set survey(val: SurveyModel) {
     this.surveyValue = val;
+    this.settingsSurvey.setValue("selLocales", []);
     this.reset();
   }
-  public reset() {
+  public reset(resetSelectedLocales: boolean = false): void {
     var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
     var rootName = !!this.filteredPage ? rootObj["name"] : "survey";
     this.root = new TranslationGroup(rootName, rootObj, this);
@@ -937,8 +938,7 @@ export class Translation extends Base implements ITranslationLocales {
     }
     this.calcIsChooseLanguageEnabled();
   }
-
-  public resetLocales() {
+  public resetLocales(): void {
     var locales = [""];
     this.root.fillLocales(locales);
     this.setLocales(locales);

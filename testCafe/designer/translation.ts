@@ -21,7 +21,7 @@ fixture(title)
   .beforeEach(async (t) => await t.maximizeWindow());
 
 test("add language", async (t) => {
-  const headerColumnSelector = Selector(".st-strings-header table tr").nth(0).find("th");
+  const languageHeaderColumnSelector = Selector(".st-strings-header table tr").nth(0).find("th");
   const stringsColumnSelector = Selector(".st-strings table tr").nth(0).find("td");
   const languagesSelector = Selector(".svc-side-bar__container .spg-item.spg-checkbox");
   const languageCaptionsSelector = languagesSelector.find(".spg-checkbox__caption");
@@ -33,7 +33,7 @@ test("add language", async (t) => {
   await t
     .click(getTabbedMenuItemByText("Translation"))
 
-    .expect(headerColumnSelector.count).eql(2)
+    .expect(languageHeaderColumnSelector.count).eql(1)
     .expect(stringsColumnSelector.count).eql(2)
 
     .expect(languagesSelector.count).eql(1)
@@ -43,7 +43,7 @@ test("add language", async (t) => {
 
     .click(Selector(".spg-panel__title").withText("Languages").find(".spg-action-button"))
     .click(Selector("span").withText("Deutsch"))
-    .expect(headerColumnSelector.count).eql(3)
+    .expect(languageHeaderColumnSelector.count).eql(2)
     .expect(stringsColumnSelector.count).eql(3)
     .expect(languagesSelector.count).eql(2)
     .expect(languagesSelector.nth(0).classNames).contains(disabledClassName)
@@ -53,12 +53,12 @@ test("add language", async (t) => {
     .expect(languageCaptionsSelector.nth(1).innerText).eql("Deutsch")
 
     .click(languageCaptionsSelector.withText("Deutsch"))
-    .expect(headerColumnSelector.count).eql(2)
+    .expect(languageHeaderColumnSelector.count).eql(1)
     .expect(stringsColumnSelector.count).eql(2)
     .expect(languagesSelector.nth(1).classNames).notContains(checkedClassName)
 
     .click(languageCaptionsSelector.withText("Deutsch"))
-    .expect(headerColumnSelector.count).eql(3)
+    .expect(languageHeaderColumnSelector.count).eql(2)
     .expect(stringsColumnSelector.count).eql(3)
     .expect(languagesSelector.nth(1).classNames).contains(checkedClassName);
 });

@@ -425,33 +425,34 @@ export class CreatorBase extends Base
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
-   * The event allows to display the custom name for objects: questions, pages and panels. By default the object name is using. You may show object title by setting showObjectTitles property to true.
-   * Use this event, if you want custom display name for objects.
-   *- sender the survey creator object that fires the event
-   *- options.obj the survey object, Survey, Page, Panel or Question
-   *- options.reason the name of the UI that requests the object display name.
-   *- options.displayName change this property to show your custom display name for the object
-   *
-   * The list of possible values in options.area:
-   *- "page-selector" - raised from page selector on designer surface
-   *- "condition-editor" - raised from Condition modal window or on setup condition in a logic tab
-   *- "logic-tab:question-filter" - raised on showing the filter by used questions
-   *- "preview-tab:page-list" - raised from page selector list in "Preview" tab
-   *- "preview-tab:selected-page" - raised on setting page selector title in "Preview" tab
-   *- "property-grid:property-editor" - raised on showing question property editor, for example "gotoName". It is raised for all elements (questions) in the dropdown.
-   *- "property-grid-header:element-list" - raised from showing object selector for property grid in "Designer" tab.
-   *- "property-grid-header:selected-element" - raised on rendering selected object title in property grid in "Designer" tab.
-   *- "translation-tab" - raised from translation tab
-   *
-   * (Obsolete, please use options.area attribute) The list of possible values in options.reason:
-   *- "condition" - raised from Condition modal window or on setup condition in a logic tab
-   *- "survey-tester" - raised from page selector list in "Preview" tab
-   *- "survey-tester-selected" - raised on setting page selector title in "Preview" tab
-   *- "survey-translation" - raised from translation tab
-   *- "property-editor" - raised on showing question property editor, for example "gotoName". It is raised for all elements (questions) in the dropdown.
-   *- "property-grid" - raised from showing object selector for property grid in "Designer" tab.
-   *- "property-grid-title" - raised on rendering selected object title in property grid in "Designer" tab.
-   * @see showObjectTitles
+   * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
+   * 
+   * Handle this event to replace survey element names in the UI with custom display texts.
+   * If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/surveycreator#showObjectTitles) property instead of handling this event.
+   * 
+   * The event handler accepts the following arguments:
+   * 
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - The instance of a survey element (survey, page, question, or panel) whose name has been requested.
+   * - `options.area` - A Survey Creator UI element that requests the display name.
+   *   - `"page-selector"` - Page selector on the design surface
+   *   - `"condition-editor"` - Condition pop-up window or drop-down menus that allow users to select questions in the Logic tab
+   *   - `"logic-tab:question-filter"` - Question filter in the Logic tab
+   *   - `"preview-tab:page-list"` - Page list in the Preview tab
+   *   - `"preview-tab:selected-page"` - Selected page name in the Preview tab
+   *   - `"property-grid:property-editor"` - Property editors in the Property Grid
+   *   - `"property-grid-header:element-list"` - Survey element list in the header of the Property Grid
+   *   - `"property-grid-header:selected-element"` - Selected survey element in the header of the Property Grid
+   *   - `"translation-tab"` - Translation tab
+   * - `options.displayName` - Modify this property to set a custom display text for the survey element.
+   * - `options.reason` - Obsolete. Use the `options.area` property instead.
+   *   - `"condition"` - Use the `"condition-editor"` value of `options.area` instead.
+   *   - `"survey-tester"` - Use the `"preview-tab:page-list"` value of `options.area` instead.
+   *   - `"survey-tester-selected"` - Use the `"preview-tab:selected-page"` value of `options.area` instead.
+   *   - `"survey-translation"` - Use the `"translation-tab"` value of `options.area` instead.
+   *   - `"property-editor"` - Use the `"property-grid:property-editor"` value of `options.area` instead.
+   *   - `"property-grid"` - Use the `"property-grid-header:element-list"` value of `options.area` instead.
+   *   - `"property-grid-title"` - Use the `"property-grid-header:selected-element"` value of `options.area` instead.
    */
   public onGetObjectDisplayName: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -717,6 +718,7 @@ export class CreatorBase extends Base
     *- options.propertyName  the name of the edited property.
     *- options.editor the instance of Property Editor.
     *- options.list the list of the questions available for condition
+    *- options.sortOrder "asc" (default) | "none". Change it to "none", if you don't want to sort your condition list
     */
   public onConditionQuestionsGetList: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -803,6 +805,7 @@ export class CreatorBase extends Base
    *- sender the survey creator object that fires the event
    *- options.question a new added survey question. Survey.Question object
    *- options.page the survey Page object where question has been added.
+   *- options.reason how question has been added via UI: ADDED_FROM_TOOLBOX, ADDED_FROM_PAGEBUTTON, ELEMENT_COPIED.
    */
   public onQuestionAdded: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -1857,28 +1860,19 @@ export class CreatorBase extends Base
     return !!classInfo && classInfo.name === typeName;
   }
 
+  private addNewElementReason: string;
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
-    var options = { question: question, page: page };
+    var options = { question: question, page: page, reason: this.addNewElementReason };
     this.onQuestionAdded.fire(this, options);
-    /*
-    if (parentPanel.elements.indexOf(question) !== -1) {
-      this.surveyObjects.addElement(question, parentPanel);
-    }
-    */
   }
   @ignoreUndoRedo()
   private doOnPanelAdded(panel: PanelModel, parentPanel: any) {
     var page = this.getPageByElement(panel);
-    var options = { panel: panel, page: page };
+    var options = { panel: panel, page: page, reason: this.addNewElementReason };
     this.onPanelAdded.fire(this, options);
-    /*
-    if (parentPanel.elements.indexOf(panel) !== -1) {
-      this.surveyObjects.addElement(panel, parentPanel);
-    }
-    */
   }
   @ignoreUndoRedo()
   private doOnPageAdded(page: PageModel) {
@@ -2133,13 +2127,14 @@ export class CreatorBase extends Base
     if (panel) {
       parent = panel;
     }
+    this.addNewElementReason = modifiedType;
     const currentRow = this.findRowByElement(selectedElement, parent);
     if (currentRow && this.isRowMultiline(currentRow)) {
       this.addElemenMultiline(parent, element, index, currentRow);
     } else {
       parent.addElement(element, index);
     }
-
+    this.addNewElementReason = "";
     this.setModified({ type: modifiedType, question: element });
   }
 
@@ -2314,6 +2309,11 @@ export class CreatorBase extends Base
     } else {
       this.survey.pages.push(newPage);
     }
+    this.addNewElementReason = "ELEMENT_COPIED";
+    newPage.questions.forEach(q => this.doOnQuestionAdded(q, q.parent));
+    const panels: any = newPage.getPanels();
+    if(Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
+    this.addNewElementReason = "";
     return newPage;
   }
 
@@ -2541,13 +2541,13 @@ export class CreatorBase extends Base
     if (!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
     return undefined;
   }
-  public clickToolboxItem(newElement: any, panel: IPanel = null) {
+  public clickToolboxItem(newElement: any, panel: IPanel = null, modifiedType: string = "ADDED_FROM_TOOLBOX") {
     if (!this.readOnly) {
       if (newElement["getType"] === undefined) {
         newElement = this.createNewElement(newElement);
       }
       this.survey.lazyRendering = false;
-      this.doClickQuestionCore(newElement, "ADDED_FROM_TOOLBOX", -1, panel);
+      this.doClickQuestionCore(newElement, modifiedType, -1, panel);
       this.selectElement(newElement);
     }
   }
@@ -2892,11 +2892,13 @@ export class CreatorBase extends Base
     obj: Base,
     editor: any,
     list: any[]
-  ): void {
+  ): string {
+    if(this.onConditionQuestionsGetList.isEmpty) return "asc";
     var options = {
       propertyName: propertyName,
       obj: obj,
       editor: editor,
+      sortOrder: "asc",
       list: list
     };
     this.onConditionQuestionsGetList.fire(this, options);
@@ -2906,6 +2908,7 @@ export class CreatorBase extends Base
         list.push(options.list[i]);
       }
     }
+    return options.sortOrder;
   }
   onConditionGetTitleCallback(
     expression: string,
@@ -3057,7 +3060,7 @@ export class CreatorBase extends Base
       json = toolboxItem.json;
     }
     let newElement = this.createNewElement(json);
-    this.clickToolboxItem(newElement, panel);
+    this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
   createIActionBarItemByClass(className: string, title: string, iconName: string): Action {
     return new Action({
