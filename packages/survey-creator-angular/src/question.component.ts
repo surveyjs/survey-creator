@@ -2,31 +2,30 @@ import { ChangeDetectorRef, Component, Input, ViewContainerRef } from "@angular/
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { PageModel, Question, SurveyModel } from "survey-core";
 import { CreatorBase, QuestionAdornerViewModel } from "survey-creator-core";
+import { CreatorModelComponent } from "./creator-model.component";
 
 @Component({
   selector: "svc-question",
   templateUrl: "./question.component.html",
   styles: [":host { display: none; }"]
 })
-export class QuestionDesignerComponent extends BaseAngular<Question> {
+export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdornerViewModel> {
   @Input() model!: any;
   @Input() componentData!: CreatorBase;
-  public adorner?: QuestionAdornerViewModel;
+  public adorner!: QuestionAdornerViewModel;
   private get creator() {
     return this.componentData;
   }
-  constructor(changeDetectorRef: ChangeDetectorRef, viewContainerRef?: ViewContainerRef) {
-    super(changeDetectorRef, viewContainerRef);
-    if(this.model) {
+  protected createModel(): void {
+    if (this.model) {
       this.adorner = new QuestionAdornerViewModel(this.creator, this.model, <any>null);
     }
   }
-  protected override onModelChanged(): void {
-    super.onModelChanged();
-    this.adorner = new QuestionAdornerViewModel(this.creator, this.model, <any>null);
+  protected getPropertiesToTrack(): string[] {
+    return ["model", "componentData"];
   }
-  protected getModel(): Question {
-    return this.model;
+  protected getModel(): QuestionAdornerViewModel {
+    return this.adorner;
   }
 }
 
