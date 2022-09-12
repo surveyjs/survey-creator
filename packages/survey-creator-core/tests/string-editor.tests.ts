@@ -1,6 +1,11 @@
 import { StringEditorViewModelBase } from "../src/components/string-editor";
-import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel } from "survey-core";
+import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent } from "survey-core";
 import { CreatorTester } from "./creator-tester";
+
+jest.mock("survey-core", () => ({
+  ...jest["requireActual"]("survey-core"),
+  sanitizeEditableContent: jest.fn(),
+}));
 test("Test css", (): any => {
   let creator = new CreatorTester();
   const survey: SurveyModel = new SurveyModel({
@@ -319,4 +324,24 @@ test("Test string editor onHtmlToMarkdown event", (): any => {
   });
   stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
   expect(stringEditorSurveyTitle.editAsText).toEqual(false);
+});
+test("Sanitizing in compostion input", (): any => {
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({});
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+
+  stringEditorSurveyTitle.onInput({ target: null });
+  stringEditorSurveyTitle.onInput({ target: null });
+  stringEditorSurveyTitle.onInput({ target: null });
+  stringEditorSurveyTitle.onInput({ target: null });
+  expect(sanitizeEditableContent).toBeCalledTimes(4);
+
+  stringEditorSurveyTitle.onCompositionStart({ target: null });
+  stringEditorSurveyTitle.onInput({ target: null });
+  stringEditorSurveyTitle.onInput({ target: null });
+  stringEditorSurveyTitle.onInput({ target: null });
+  stringEditorSurveyTitle.onInput({ target: null });
+  stringEditorSurveyTitle.onCompositionEnd({ target: null });
+  expect(sanitizeEditableContent).toBeCalledTimes(5);
 });
