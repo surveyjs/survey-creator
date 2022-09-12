@@ -15,13 +15,13 @@ class TestBase extends CreatorModelComponent<QuestionTextModel> {
     this.model = new QuestionTextModel("test");
   }
   protected getPropertiesToTrack(): string[] {
-    return ["input1"]
+    return ["input1"];
   }
   protected getModel(): QuestionTextModel {
     return this.model;
   }
   protected override onModelChanged(): void {
-    this.modelChangedLog += "->modelChanged"
+    this.modelChangedLog += "->modelChanged";
   }
 
 }
@@ -40,15 +40,15 @@ describe("base tests", () => {
     expect(component.modelChangedLog).toBe("->modelChanged");
     expect(!!firstModelCreated).toBe(true);
     expect(component.model["__ngImplemented"]).toBe(true);
-    component.input1 = "test"
+    component.input1 = "test";
     fixture.detectChanges();
     let secondModelCreated = component.model;
     expect(component.modelChangedLog).toBe("->modelChanged->modelChanged");
     expect(!!secondModelCreated).toBe(true);
     expect(secondModelCreated !== firstModelCreated).toBe(true);
-    expect(secondModelCreated["__ngImplemented"]).toBe(true)
-    expect(!!firstModelCreated["__ngImplemented"]).toBe(false)
-    component.input1 = "test"
+    expect(secondModelCreated["__ngImplemented"]).toBe(true);
+    expect(!!firstModelCreated["__ngImplemented"]).toBe(false);
+    component.input1 = "test";
     fixture.detectChanges();
     expect(component.modelChangedLog).toBe("->modelChanged->modelChanged");
     expect(!!component.model).toBe(true);
