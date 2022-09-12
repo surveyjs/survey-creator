@@ -1330,7 +1330,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    var choices = prop.getChoices(obj);
+    var choices = this.getChoices(obj, prop);
 
     var json: any = {
       type: this.renderAsButtonGroup(prop, choices)
@@ -1345,6 +1345,10 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       json.optionsCaption = emptyValueItem.text;
     }
     return json;
+  }
+  private getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
+    if(!!prop.choicesfunc) return [];
+    return prop.getChoices(obj);
   }
   protected get canRenderAsButtonGroup(): boolean {
     return creatorSettings.propertyGrid.useButtonGroup;

@@ -208,9 +208,11 @@ test("settings.propertyGrid.useButtonGroup", (): any => {
 test("dropdown property editor, get choices on callback", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;
+  const callbackList = new Array<any>();
   Serializer.addProperty("survey", {
     name: "region",
     choices: function (obj, choicesCallback) {
+      callbackList.push(choicesCallback);
       callback = choicesCallback;
       return [];
     }
@@ -223,6 +225,7 @@ test("dropdown property editor, get choices on callback", () => {
   expect(setQuestion.choices).toHaveLength(0);
   callback(choices);
   expect(setQuestion.choices).toHaveLength(5);
+  expect(callbackList).toHaveLength(1);
   Serializer.removeProperty("survey", "region");
 });
 
