@@ -1,22 +1,20 @@
 <div *ngIf="model && adorner" class="svc-page__content" [class]="adorner.css" [key2click]
-  (click)="adorner.select(adorner, $event)" (mouseover)="adorner.hover($event, $event.target)"
-  (mouseleave)="adorner.hover($event, $event.target)" [id]="adorner.page.id"
-  data-bind="click: select, key2click, clickBubble: false, css: css, attr: { id: page.id }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
+  (click)="adorner.select(adorner, $event)" (mouseover)="adorner.hover($event, $event.currentTarget)"
+  (mouseleave)="adorner.hover($event, $event.target)" [id]="adorner.page.id" data-bind="clickBubble: false">
   <div class="svc-page__content-actions">
     <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>
   </div>
   <page [model]="model" [survey]="survey"></page>
   <div *ngIf="adorner.showAddQuestionButton" class="svc-page__add-new-question svc-btn" [key2click]
-    (click)="adorner.addNewQuestion(adorner, $event)" (mouseover)="adorner.hoverStopper($event, $event.target)"
-    data-bind="click: addNewQuestion, key2click, clickBubble: false, event: { mouseover: function(m, e) { hoverStopper(e, $element); }}">
+    (click)="adorner.addNewQuestion(adorner, $event)" (mouseover)="adorner.hoverStopper($event, $event.currentTarget)"
+    data-bind="clickBubble: false">
     <span class="svc-text svc-text--normal svc-text--bold">
       {{ adorner.addNewQuestionText }}
     </span>
     <!-- ko with: questionTypeSelectorModel -->
     <button type="button" [key2click] (click)="adorner.questionTypeSelectorModel.action()"
       [attr.title]="adorner.questionTypeSelectorModel.title" [attr.aria-label]="adorner.questionTypeSelectorModel.title"
-      data-bind="click: action, key2click, clickBubble: false, attr: { title: title, 'aria-label': title }"
-      class="svc-page__question-type-selector">
+      data-bind="clickBubble: false" class="svc-page__question-type-selector">
       <svg class="svc-page__question-type-selector-icon" [iconName]="adorner.questionTypeSelectorModel.iconName"
         [size]="24" sv-ng-svg-icon></svg>
       <!-- <sv-popup params="model: popupModel"></sv-popup> -->
