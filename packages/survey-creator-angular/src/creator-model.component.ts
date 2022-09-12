@@ -29,9 +29,14 @@ export abstract class CreatorModelComponent<T extends Base> extends BaseAngular<
     super.ngDoCheck();
   }
   needUpdateModel(): boolean {
-    if (!this.hash || Object.keys(this.hash).some(key => this.hash[key] != (<any>this)[key])) {
-      return true;
-    }
-    return false;
+    if (!this.hash) return true;
+    let res = false;
+    Object.keys(this.hash).forEach(key => {
+      if (this.hash[key] != (<any>this)[key]) {
+        this.hash[key] = (<any>this)[key];
+        res = true;
+      }
+    });
+    return res;
   }
 }
