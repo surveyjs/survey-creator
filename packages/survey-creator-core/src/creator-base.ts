@@ -2516,19 +2516,35 @@ export class CreatorBase extends Base
     */
     return isValid;
   }
+  private getPropertyGridExpandedCategory(): string {
+    if(!this.designerPropertyGrid) return undefined;
+    const panels = this.designerPropertyGrid.survey.getAllPanels();
+    for(var i = 0; i < panels.length; i ++) {
+      if((<PanelModel>panels[i]).isExpanded) return panels[i].name;
+    }
+    return "";
+  }
+  private expandCategoryIfNeeded(): void {
+    const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
+    if(!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
+      const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
+      if(!!panel) {
+        panel.expand();
+      }
+    }
+  }
   private selectionChanged(element: Base, propertyName?: string, focus = true) {
     this.survey.currentPage = this.getCurrentPageByElement(element);
     this.selectionHistoryController.onObjSelected(element);
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
-
       if (!propertyName) {
         propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
-
       if (!!propertyName) {
         this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
       }
+      this.expandCategoryIfNeeded();
       this.selectFromStringEditor = false;
     }
     var options = { newSelectedElement: element };
