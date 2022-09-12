@@ -30,6 +30,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "preserveSymlinks": true,
             "main": "./test/test.ts",
             "tsConfig": "./tsconfig.spec.json",
             "karmaConfig": "./karma.conf.js"
