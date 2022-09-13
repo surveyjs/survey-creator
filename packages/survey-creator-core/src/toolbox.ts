@@ -101,18 +101,10 @@ export class QuestionToolbox
     toolboxLayoutCategory: ["image", "panel"]
   }
   private _orderedQuestions = [
-    "text",
-    "checkbox",
-    "radiogroup",
-    "dropdown",
-    "comment",
-    "rating",
-    "ranking",
-    "imagepicker",
-    "boolean",
-    "image",
-    "html",
-    "signaturepad"
+    "radiogroup", "checkbox", "dropdown", "text", "rating", "imagepicker", "ranking",
+    "boolean", "comment", "multipletext", "matrix", "file", "signaturepad",
+    "html", "expression", "matrixdropdown", "matrixdynamic", "paneldynamic",
+    "image", "panel"
   ];
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
@@ -190,12 +182,16 @@ export class QuestionToolbox
 
   constructor(
     private supportedQuestions: Array<string> = null,
-    public creator: CreatorBase = null
+    public creator: CreatorBase = null,
+    useDefaultCategories = false
   ) {
     super();
     this.createDefaultItems(supportedQuestions);
-    let defaultCategories = this.getDefaultCategories();
-    //this.changeCategories(defaultCategories);
+    if(useDefaultCategories) {
+      let defaultCategories = this.getDefaultCategories();
+      this.changeCategories(defaultCategories);
+      this.keepAllCategoriesExpanded = true;
+    }
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
@@ -215,7 +211,7 @@ export class QuestionToolbox
     Object.keys(QuestionToolbox.defaultCategories).forEach((key) =>{
       const cat = QuestionToolbox.defaultCategories[key];
       cat.forEach((name)=>{
-        if(this.supportedQuestions.indexOf(name) != -1) categories.push({ name: name, category: getLocString(key) });
+        if(!this.supportedQuestions || this.supportedQuestions.indexOf(name) != -1) categories.push({ name: name, category: getLocString(key) });
       });
     });
     return categories;
@@ -591,6 +587,13 @@ export class QuestionToolbox
         }
       }
     }
+
+    let newItems = [];
+    this.categories.forEach((cat)=>{
+      newItems = newItems.concat(cat.items);
+    });
+    this.actions = newItems;
+
     this.hasCategories = categories.length > 1;
     this.updateItemSeparators();
   }

@@ -74,7 +74,7 @@ test("toolbox several categories", (): any => {
   expect(toolbox.categories[1].collapsed).toBeFalsy();
 });
 
-test("toolbox default categories", (): any => {
+test("toolbox default categories calculator", (): any => {
   var toolbox = new QuestionToolbox([
     "text",
     "dropdown",
@@ -92,6 +92,32 @@ test("toolbox default categories", (): any => {
     "category": "toolboxSpecialCategory",
     "name": "matrix",
   }]);
+});
+
+test("toolbox default categories actions separator", (): any => {
+  var toolbox = new QuestionToolbox([
+    "text",
+    "dropdown",
+    "matrix",
+    "matrixdropdown"
+  ]);
+  toolbox.changeCategories([
+    { name: "text", category: "simple" },
+    { name: "dropdown", category: "simple" },
+    { name: "matrix", category: "matrix" },
+    { name: "matrixdropdown", category: "matrix" }
+  ]);
+  var needSeparator = toolbox.actions.map(a => [a.name, !!a.needSeparator]);
+  expect(needSeparator).toEqual([["text", false], ["dropdown", false], ["matrix", true], ["matrixdropdown", false]]);
+});
+
+test("toolbox default categories", (): any => {
+  var toolbox = new QuestionToolbox(undefined, undefined, true);
+  expect(toolbox.categories.length).toBe(4);
+  expect(toolbox.categories[0].items.length).toBe(7);
+  expect(toolbox.categories[1].items.length).toBe(6);
+  expect(toolbox.categories[2].items.length).toBe(5);
+  expect(toolbox.categories[3].items.length).toBe(2);
 });
 
 test("toolbox change categories", (): any => {

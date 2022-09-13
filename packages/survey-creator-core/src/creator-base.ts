@@ -1322,7 +1322,7 @@ export class CreatorBase extends Base
     this.setOptions(this.options);
     this.patchMetadata();
     this.initSurveyWithJSON({}, false);
-    this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this);
+    this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this, true);
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
