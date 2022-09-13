@@ -25,6 +25,10 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   protected getPropertiesToTrack(): string[] {
     return ["creator", "model"];
   }
+  public selectQuestionType(event: any) {
+    event.stopPropagation();
+    this.adorner.questionTypeSelectorModel.action();
+  }
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-page", PageDesignerComponent);

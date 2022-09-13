@@ -12,13 +12,13 @@
       {{ adorner.addNewQuestionText }}
     </span>
     <!-- ko with: questionTypeSelectorModel -->
-    <button type="button" [key2click] (click)="adorner.questionTypeSelectorModel.action()"
+    <button type="button" [key2click] (click)="selectQuestionType($event)"
       [attr.title]="adorner.questionTypeSelectorModel.title" [attr.aria-label]="adorner.questionTypeSelectorModel.title"
-      data-bind="clickBubble: false" class="svc-page__question-type-selector">
+      class="svc-page__question-type-selector">
       <svg class="svc-page__question-type-selector-icon" [iconName]="adorner.questionTypeSelectorModel.iconName"
         [size]="24" sv-ng-svg-icon></svg>
-      <!-- <sv-popup params="model: popupModel"></sv-popup> -->
-    </button>
+        <sv-ng-popup [popupModel]="adorner.questionTypeSelectorModel.popupModel"></sv-ng-popup>
+      </button>
     <!-- /ko -->
   </div>
 </div>
