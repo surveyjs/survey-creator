@@ -38,11 +38,10 @@
         </div>
         <!-- ko with: questionTypeSelectorModel -->
         <button type="button" [attr.title]="adorner.addNewQuestionText" [key2click]
-          (click)="adorner.questionTypeSelectorModel.action(adorner.questionTypeSelectorModel, $event)"
-          data-bind="clickBubble: false" class="svc-panel__question-type-selector">
+          (click)="selectQuestionType($event)" class="svc-panel__question-type-selector">
           <svg class="svc-panel__question-type-selector-icon" [iconName]="adorner.questionTypeSelectorModel.iconName"
             [size]="24" sv-ng-svg-icon></svg>
-          <!-- <sv-popup params="model: popupModel"></sv-popup> -->
+            <sv-ng-popup [popupModel]="adorner.questionTypeSelectorModel.popupModel"></sv-ng-popup>
         </button>
         <!-- /ko -->
       </div>
@@ -74,11 +73,10 @@
         </div>
         <!-- ko with: questionTypeSelectorModel -->
         <button type="button" [attr.title]="adorner.addNewQuestionText" [key2click]
-          (click)="adorner.questionTypeSelectorModel.action(adorner.questionTypeSelectorModel, $event)"
-          data-bind="clickBubble: false" class="svc-panel__question-type-selector">
+          (click)="selectQuestionType($event)" class="svc-panel__question-type-selector">
           <svg class="svc-panel__question-type-selector-icon" [iconName]="adorner.questionTypeSelectorModel.iconName"
             [size]="24" sv-ng-svg-icon></svg>
-          <!-- <sv-popup params="model: popupModel"></sv-popup> -->
+          <sv-ng-popup [popupModel]="adorner.questionTypeSelectorModel.popupModel"></sv-ng-popup>
         </button>
         <!-- /ko -->
       </div>

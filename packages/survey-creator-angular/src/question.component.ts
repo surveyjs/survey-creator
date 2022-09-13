@@ -27,6 +27,10 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
   protected getModel(): QuestionAdornerViewModel {
     return this.adorner;
   }
+  public selectQuestionType(event: any) {
+    event.stopPropagation();
+    this.adorner.questionTypeSelectorModel.action(this.adorner.questionTypeSelectorModel, event);
+  }
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-question", QuestionDesignerComponent);
