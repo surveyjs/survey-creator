@@ -16,7 +16,8 @@ import {
   DragOrClickHelper
 } from "survey-core";
 import { CreatorBase, toolboxLocationType } from "./creator-base";
-import { editorLocalization } from "./editorLocalization";
+import { editorLocalization, getLocString } from "./editorLocalization";
+import { localization } from "./entries";
 import { settings } from "./settings";
 
 /**
@@ -93,6 +94,12 @@ export class QuestionToolbox
   implements IQuestionToolbox {
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey"];
   static defaultIconName = "icon-default";
+  static defaultCategories = {
+    toolboxSimpleCategory: ["radiogroup", "checkbox", "dropdown", "text", "rating", "imagepicker", "ranking"],
+    toolboxSpecialCategory: ["boolean", "comment", "multipletext", "matrix", "file", "signaturepad"],
+    toolboxAdvancedCategory: ["html", "expression", "matrixdropdown", "matrixdynamic", "paneldynamic"],
+    toolboxLayoutCategory: ["image", "panel"]
+  }
   private _orderedQuestions = [
     "text",
     "checkbox",
@@ -127,6 +134,7 @@ export class QuestionToolbox
   public copiedItemMaxCount: number = 3;
   private allowExpandMultipleCategoriesValue: boolean = false;
   private keepAllCategoriesExpandedValue: boolean = false;
+  private showCategoryTitleValue: boolean = false;
   private dragOrClickHelper: DragOrClickHelper;
 
   //koItems = ko.observableArray();
@@ -181,11 +189,13 @@ export class QuestionToolbox
   @property() forceCompact: boolean;
 
   constructor(
-    supportedQuestions: Array<string> = null,
+    private supportedQuestions: Array<string> = null,
     public creator: CreatorBase = null
   ) {
     super();
     this.createDefaultItems(supportedQuestions);
+    let defaultCategories = this.getDefaultCategories();
+    //this.changeCategories(defaultCategories);
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
@@ -200,6 +210,17 @@ export class QuestionToolbox
     };
     this.dotsItem.popupModel.cssClass = "svc-toolbox-popup";
   }
+  private getDefaultCategories() {
+    let categories = [];
+    Object.keys(QuestionToolbox.defaultCategories).forEach((key) =>{
+      const cat = QuestionToolbox.defaultCategories[key];
+      cat.forEach((name)=>{
+        if(this.supportedQuestions.indexOf(name) != -1) categories.push({ name: name, category: getLocString(key) });
+      });
+    });
+    return categories;
+  }
+
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<QuestionToolboxCategory> = this.categories;
     for (var i = 0; i < categories.length; i++) {
@@ -406,6 +427,17 @@ export class QuestionToolbox
   public set keepAllCategoriesExpanded(val: boolean) {
     this.keepAllCategoriesExpandedValue = val;
     this.canCollapseCategories = !this.keepAllCategoriesExpanded;
+    this.updateCategoriesState();
+  }
+
+  /**
+   * Set it to true to expand all categories and hide expand/collapse category buttons
+   */
+  public get showCategoryTitle(): boolean {
+    return this.showCategoryTitleValue;
+  }
+  public set showCategoryTitle(val: boolean) {
+    this.showCategoryTitleValue = val;
     this.updateCategoriesState();
   }
   public updateTitles(): void {

@@ -74,6 +74,26 @@ test("toolbox several categories", (): any => {
   expect(toolbox.categories[1].collapsed).toBeFalsy();
 });
 
+test("toolbox default categories", (): any => {
+  var toolbox = new QuestionToolbox([
+    "text",
+    "dropdown",
+    "matrix"
+  ]);
+  expect(toolbox["getDefaultCategories"]()).toEqual([{
+    "category": "toolboxSimpleCategory",
+    "name": "dropdown",
+  },
+  {
+    "category": "toolboxSimpleCategory",
+    "name": "text",
+  },
+  {
+    "category": "toolboxSpecialCategory",
+    "name": "matrix",
+  }]);
+});
+
 test("toolbox change categories", (): any => {
   var toolbox = new QuestionToolbox([
     "text",
