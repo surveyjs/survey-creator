@@ -438,6 +438,7 @@ export class CreatorBase extends Base
    *   - `"page-selector"` - Page selector on the design surface
    *   - `"condition-editor"` - Condition pop-up window or drop-down menus that allow users to select questions in the Logic tab
    *   - `"logic-tab:question-filter"` - Question filter in the Logic tab
+   *   - `"logic-tab:question-selector"` - Question selector on editing actions in the Logic tab
    *   - `"preview-tab:page-list"` - Page list in the Preview tab
    *   - `"preview-tab:selected-page"` - Selected page name in the Preview tab
    *   - `"property-grid:property-editor"` - Property editors in the Property Grid

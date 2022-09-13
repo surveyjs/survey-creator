@@ -2651,3 +2651,33 @@ test("Update expression on changing row value in matrix dropdown", (): any => {
   matrix.rows[1].value = "Row 2";
   expect(q1.visibleIf).toEqual("{matrix.Row 2.col1} = 'item1'");
 });
+test("Use creator.onGetObjectDisplayName for element selector in visibleIf action", () => {
+  const creator = new CreatorTester();
+  creator.onGetObjectDisplayName.add(function (sender, options) {
+    if(options.area === "logic-tab:question-selector") {
+      options.displayName = "# " + options.obj.title;
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { name: "question 1", type: "text" },
+      { name: "question 3", type: "text" },
+      { name: "question 11", type: "text", visibleIf: "{question 3} = 1" },
+      { name: "question 2", type: "text" },
+      { name: "question 10", type: "text" },
+    ]
+  };
+  const logic = new SurveyLogicUI(creator.survey, creator);
+  expect(logic.items).toHaveLength(1);
+  logic.editItem(logic.items[0]);
+  const editor = logic.itemEditor;
+  expect(editor.panels).toHaveLength(1);
+  const qSelector = <QuestionDropdownModel>(
+    editor.panels[0].getQuestionByName("elementSelector")
+  );
+  expect(qSelector).toBeTruthy();
+  const choices = qSelector.choices;
+  expect(choices).toHaveLength(5);
+  expect(choices[0].text).toEqual("# question 1");
+  expect(choices[4].text).toEqual("# question 11");
+});
