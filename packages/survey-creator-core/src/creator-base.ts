@@ -1688,7 +1688,7 @@ export class CreatorBase extends Base
    * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.
    * @returns true if initial survey doesn't have any elements or properties
    */
-  public isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
+  public get isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
     // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};

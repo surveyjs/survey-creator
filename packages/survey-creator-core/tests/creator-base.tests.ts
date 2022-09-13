@@ -1220,6 +1220,7 @@ test("Undo/redo survey properties", (): any => {
 });
 test("Undo/redo question adding/removing", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1", title: "Page 1" }] };
   creator.survey.pages[0].addNewQuestion("text", "q1");
   creator.survey.pages[0].addNewQuestion("text", "q2");
   expect(creator.survey.getAllQuestions()).toHaveLength(2);
@@ -1227,6 +1228,7 @@ test("Undo/redo question adding/removing", (): any => {
   creator.undo();
   expect(creator.survey.getAllQuestions()).toHaveLength(0);
   creator.redo();
+  expect(creator.survey.pages).toHaveLength(1);
   expect(creator.survey.getAllQuestions()).toHaveLength(1);
   creator.redo();
   expect(creator.survey.getAllQuestions()).toHaveLength(2);

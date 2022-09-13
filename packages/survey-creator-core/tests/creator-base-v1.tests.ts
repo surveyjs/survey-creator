@@ -615,11 +615,11 @@ test("deleteElement function", () => {
 
   creator.selectedElement = q2;
   creator.deleteElement(creator.selectedElement);
-  expect(creator.selectedElement["name"]).toEqual("q3");
+  expect(creator.selectedElementName).toEqual("q3");
   creator.deleteElement(creator.selectedElement);
-  expect(creator.selectedElement["name"]).toEqual("q1");
+  expect(creator.selectedElementName).toEqual("q1");
   creator.deleteElement(creator.selectedElement);
-  expect(creator.selectedElement["name"]).toEqual("page1");
+  expect(creator.selectedElementName).toEqual("survey");
 });
 
 test("Do not call onPageAdded on pages move", () => {
