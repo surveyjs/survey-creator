@@ -7,9 +7,9 @@
           <!-- ko template: { name: 'survey-header', data: survey } -->
           <!-- /ko -->
         </div>
-        <div class="svc-designer__placeholder-container"
-          data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }">
-          <span class="svc-designer-placeholder-text svc-text svc-text--normal" data-bind="text: placeholderText">
+        <div class="svc-designer__placeholder-container" [attr.data-sv-drop-target-survey-element]="'newGhostPage'">
+          <span class="svc-designer-placeholder-text svc-text svc-text--normal">
+            {{ model.placeholderText }}
           </span>
           <svc-page class="svc-designer-placeholder-page" params="survey: survey, creator: creator, page: newPage">
           </svc-page>
@@ -30,16 +30,16 @@
 
           <ng-container *ngIf="creator.pageEditMode !== 'bypage'">
             <svc-page *ngFor="let page of survey.pages" class="svc-page"
-              data-bind="attr: { 'data-sv-drop-target-survey-element': page.name, 'data-sv-drop-target-page': page.name }"
+              [attr.data-sv-drop-target-survey-element]="page.name" [attr.data-sv-drop-target-page]="page.name"
               [model]="page" [survey]="survey" [creator]="creator"></svc-page>
             <svc-page *ngIf="model.showNewPage && model.newPage" class="svc-page"
-              data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }" [model]="model.newPage"
-              [survey]="survey" [creator]="creator"></svc-page>
+              [attr.data-sv-drop-target-survey-element]="'newGhostPage'" [model]="model.newPage" [survey]="survey"
+              [creator]="creator"></svc-page>
           </ng-container>
 
           <ng-container *ngIf="model.pagesController.page2Display && creator.pageEditMode === 'bypage'">
-            <svc-page class="svc-page"
-              data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage', 'data-sv-drop-target-page': pagesController.page2Display.name }"
+            <svc-page class="svc-page" [attr.data-sv-drop-target-survey-element]="'newGhostPage'"
+              [attr.data-sv-drop-target-page]="model.pagesController.page2Display.name"
               [model]="model.pagesController.page2Display" [survey]="survey" [creator]="creator"></svc-page>
           </ng-container>
 

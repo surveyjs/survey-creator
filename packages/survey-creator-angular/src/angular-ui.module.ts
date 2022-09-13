@@ -29,6 +29,7 @@ import { SurveyResultsTableRowComponent } from "./tabs/preview/survey-results-ro
 import { TestTabComponent } from "./tabs/preview/test.component";
 import { PageDesignerComponent } from "./page.component";
 import { QuestionDesignerComponent } from "./question.component";
+import { PanelDesignerComponent } from "./panel.component";
 import { AdaptiveToolboxComponent } from "./toolbox/adaptive-toolbox.component";
 import { ToolboxToolComponent } from "./toolbox/toolbox-tool.component";
 import { ToolboxItemComponent } from "./toolbox/toolbox-item.component";
@@ -38,7 +39,7 @@ import { PageNavigatorComponent } from "./page-navigator/page-navigator.componen
 import { PageNavigatorItemComponent } from "./page-navigator/page-navigator-item.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
+  declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
