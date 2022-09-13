@@ -3193,3 +3193,40 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   expect(reason[4]).toEqual("ELEMENT_COPIED");
   expect(reason[5]).toEqual("ELEMENT_COPIED");
 });
+test("Initial Property Grid category expanded state", (): any => {
+  const creator = new CreatorTester();
+  let survey: SurveyModel = undefined;
+  const getCategoryName = (): string => {
+    if(!survey) return "";
+    const panels = survey.getAllPanels();
+    for(var i = 0; i < panels.length; i ++) {
+      const p = <PanelModel>panels[i];
+      if(p.state === "expanded") return p.name;
+    }
+    return "";
+  };
+  creator.onPropertyGridSurveyCreated.add((sender, options) => {
+    survey = options.survey;
+  });
+  const defaultJSON = settings.defaultNewSurveyJSON;
+  settings.defaultNewSurveyJSON = {};
+  creator.JSON = {};
+  expect(getCategoryName()).toBeFalsy();
+  creator.survey.addNewPage("page1");
+  creator.selectElement(creator.survey.getPageByName("page1"));
+  expect(getCategoryName()).toEqual("general");
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(getCategoryName()).toEqual("general");
+  creator.clickToolboxItem({ type: "text" });
+  expect(getCategoryName()).toEqual("general");
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(getCategoryName()).toEqual("general");
+  creator.JSON = {};
+  expect(getCategoryName()).toBeFalsy();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"), "visibleIf");
+  (<PanelModel>(survey.getPanelByName("logic"))).collapse();
+  creator.selectElement(creator.survey.getQuestionByName("q2"));
+  expect(getCategoryName()).toEqual("general");
+  settings.defaultNewSurveyJSON = defaultJSON;
+});

@@ -9,7 +9,6 @@ test("object selector popup", async (t) => {
   await t
     .resizeWindow(750, 700)
     .click(expandButtonSelector)
-    .click(getPropertyGridCategory(generalGroupName))
     .click(objectSelectorButton);
 
   await checkElementScreenshot("side-bar-object-selector.png", propertyGridSelector, t);
