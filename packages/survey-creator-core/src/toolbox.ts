@@ -159,7 +159,7 @@ export class QuestionToolbox
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: QuestionToolbox) => {
-      if (target.hasCategories) {
+      if (target.hasCategories && target.showCategoryTitle) {
         if (val) {
           target.isResponsivenessDisabled = false;
           target.raiseUpdate(true);
