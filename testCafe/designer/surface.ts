@@ -30,7 +30,6 @@ test("Image question", async (t) => {
     .expect(imageQuestionSelector.clientHeight).eql(359)
 
     .click(imageQuestionSelector)
-    .click(getPropertyGridCategory(generalGroupName))
     .expect(Selector("div [data-name=\"imageHeight\"] input").value).eql("")
     .expect(Selector("div [data-name=\"imageHeight\"] input").getAttribute("placeholder")).eql("auto")
     .expect(Selector("div [data-name=\"imageWidth\"] input").value).eql("")
@@ -89,16 +88,20 @@ test("Check imagepicker add/delete items not raises errors and works fine: #3203
 test("Check imagepicker add/delete items style", async (t) => {
   await t.resizeWindow(1920, 1080);
   await explicitErrorHandler();
-  await setJSON({ elements: [{ type: "imagepicker", name: "q1", choices: [
-    {
-      "value": "lion",
-      "imageLink": "lion.jpg"
-    },
-    {
-      "value": "giraffe",
-      "imageLink": "lion.jpg"
-    }
-  ] }] });
+  await setJSON({
+    elements: [{
+      type: "imagepicker", name: "q1", choices: [
+        {
+          "value": "lion",
+          "imageLink": "lion.jpg"
+        },
+        {
+          "value": "giraffe",
+          "imageLink": "lion.jpg"
+        }
+      ]
+    }]
+  });
 
   await t
     .click(".svc-tab-designer .svc-image-item-value-controls__remove")

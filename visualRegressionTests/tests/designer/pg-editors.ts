@@ -49,7 +49,7 @@ test("Properties on the same line", async (t) => {
   });
 });
 
-test("Values editors, keep them close", async (t) => {
+test.only("Values editors, keep them close", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {
       "elements": [
