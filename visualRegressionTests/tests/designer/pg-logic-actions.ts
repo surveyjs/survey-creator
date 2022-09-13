@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, setJSON, getPropertyGridCategory, logicGroupName, wrapVisualTest, takeElementScreenshot } from "../../helper";
+import { url, setJSON, getPropertyGridCategory, logicGroupName, generalGroupName, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "Actions in Logic section Screenshot";
 
@@ -30,6 +30,7 @@ test("Check states", async (t) => {
     // await t
     //   .click(Selector(".svd-grid-expand"));
     await t.click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
+    await t.click(getPropertyGridCategory(generalGroupName));
     await t.click(getPropertyGridCategory(logicGroupName));
 
     const sectionContentElement = Selector("h4[aria-label=Logic]").parent().nextSibling();
