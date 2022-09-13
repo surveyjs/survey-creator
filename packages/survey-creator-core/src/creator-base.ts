@@ -1253,6 +1253,7 @@ export class CreatorBase extends Base
    * The event is called when creator active tab is changed.
    *- sender the survey creator object that fires the event
    *- options.tabName the name of new active tab
+   *- options.model the instance of the model of the new active tab
    */
   public onActiveTabChanged: Survey.Event<
     (sender: CreatorBase, options: any) => any,
