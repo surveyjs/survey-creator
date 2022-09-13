@@ -196,6 +196,20 @@ test("PageAdorner - remove page if: it is the last page, there is no elements an
   creator.survey.pages[2].elements[0].delete();
   expect(creator.survey.pages).toHaveLength(3);
 });
+test("PageAdorner - remove page if: it is the only page, by survey was empty initially", (): any => {
+  const savedNewJSON = settings.defaultNewSurveyJSON;
+  settings.defaultNewSurveyJSON = {};
+  const creator = new CreatorTester(undefined, undefined, false);
+  creator.JSON = {};
+  expect(creator.survey.pages).toHaveLength(0);
+  creator.survey.addNewPage("page1");
+  creator.survey.pages[0].addNewQuestion("text", "q1");
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  creator.survey.pages[0].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(0);
+  expect(creator.selectedElementName).toEqual("survey");
+  settings.defaultNewSurveyJSON = savedNewJSON;
+});
 
 test("PageAdorner - do not remove page if it is last and empty but the name has been changed", (): any => {
   const creator = new CreatorTester();
@@ -1206,6 +1220,7 @@ test("Undo/redo survey properties", (): any => {
 });
 test("Undo/redo question adding/removing", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1", title: "Page 1" }] };
   creator.survey.pages[0].addNewQuestion("text", "q1");
   creator.survey.pages[0].addNewQuestion("text", "q2");
   expect(creator.survey.getAllQuestions()).toHaveLength(2);
@@ -1213,6 +1228,7 @@ test("Undo/redo question adding/removing", (): any => {
   creator.undo();
   expect(creator.survey.getAllQuestions()).toHaveLength(0);
   creator.redo();
+  expect(creator.survey.pages).toHaveLength(1);
   expect(creator.survey.getAllQuestions()).toHaveLength(1);
   creator.redo();
   expect(creator.survey.getAllQuestions()).toHaveLength(2);

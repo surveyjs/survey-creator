@@ -1684,7 +1684,13 @@ export class CreatorBase extends Base
     return this.surveyValue;
   }
   private existingPages: {};
-  protected initSurveyWithJSON(json: any, clearState: boolean) {
+  private isInitialSurveyEmptyValue: boolean;
+  /**
+   * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.
+   * @returns true if initial survey doesn't have any elements or properties
+   */
+  public get isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
+  protected initSurveyWithJSON(json: any, clearState: boolean): void {
     // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};
     const survey = this.createSurvey({});
@@ -1692,6 +1698,7 @@ export class CreatorBase extends Base
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
+    this.isInitialSurveyEmptyValue = survey.isEmpty;
     survey.logoPosition = "right";
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
