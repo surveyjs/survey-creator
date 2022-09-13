@@ -55,6 +55,13 @@ export class StringEditorViewModel {
     this.baseModel.onClick(event);
   }
 
+  public onCompositionStart(sender: StringEditorViewModel, event: any): void {
+    this.baseModel.onCompositionStart(event);
+  }
+  public onCompositionEnd(sender: StringEditorViewModel, event: any): void {
+    this.baseModel.onCompositionStart(event);
+  }
+
   public onInput(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onInput(event);
   }
