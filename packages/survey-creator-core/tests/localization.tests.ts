@@ -136,18 +136,6 @@ test("getPropertyValue and spaces", () => {
   expect(editorLocalization.convertToCamelCase("My First Option")).toEqual("My First Option");
   expect(editorLocalization.getPropertyValue("Another test")).toEqual("Another test");
 });
-test("Update innerItem on changign title, onUpdateTitle", (): any => {
-  const item: any = {
-    id: "test",
-    onUpdateTitle: () => { return "Designer"; },
-    onUpdateTooltip: () => { return "Designer"; }
-  };
-  const action = new CreatorAction(item);
-  expect(action.title).toEqual("Designer");
-  expect(item.title).toEqual("Designer");
-  expect(action.tooltip).toEqual("Designer");
-  expect(item.tooltip).toEqual("Designer");
-});
 test("Update innerItem on changign title", (): any => {
   const item: any = {
     id: "test",
@@ -159,6 +147,18 @@ test("Update innerItem on changign title", (): any => {
   expect(item.title).toEqual("Designer");
   expect(action.tooltip).toEqual("Designer");
   expect(item.tooltip).toEqual("Designer");
+});
+test("Remove format when it is not applied", (): any => {
+  const item: any = {
+    id: "test",
+    locTitleName: "ed.translationMergeLocaleWithDefault",
+    locTooltipName: "ed.translationMergeLocaleWithDefault"
+  };
+  const action = new CreatorAction(item);
+  expect(action.title).toEqual("Merge  with default locale");
+  expect(item.title).toEqual("Merge  with default locale");
+  expect(action.tooltip).toEqual("Merge  with default locale");
+  expect(item.tooltip).toEqual("Merge  with default locale");
 });
 test("Change Creator locale property", (): any => {
   const deutschStrings: any = {

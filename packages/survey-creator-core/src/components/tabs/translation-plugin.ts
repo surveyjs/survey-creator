@@ -119,9 +119,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   public get importFromCSVText(): string {
     return editorLocalization.getString("ed.translationImportFromSCVButton");
   }
-  public createActions() {
+  public createActions(): void {
     const items: Array<Action> = [];
-    const translationMergeLocaleWithDefaultStr = (): string => editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
     this.createFilterPageAction();
     items.push(this.filterPageAction);
     this.createFilterStringsAction();
@@ -130,9 +129,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction = new CreatorAction({
       id: "svd-translation-merge_locale_withdefault",
       visible: false,
-      //visible: this.model.canMergeLocaleWithDefault,
-      onUpdateTitle: () => { return translationMergeLocaleWithDefaultStr(); },
-      onUpdateTooltip: () => { return translationMergeLocaleWithDefaultStr(); },
+      locTitleName: "ed.translationMergeLocaleWithDefault",
+      locTooltipName: "ed.translationMergeLocaleWithDefault",
       component: "sv-action-bar-item",
       mode: "small",
       needSeparator: true,
