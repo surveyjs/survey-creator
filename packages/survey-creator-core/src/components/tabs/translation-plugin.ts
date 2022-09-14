@@ -128,7 +128,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   public get importFromCSVText(): string {
     return editorLocalization.getString("ed.translationImportFromSCVButton");
   }
-  public createActions() {
+  public createActions(): Array<Action> {
     const items: Array<Action> = [];
     this.createFilterPageAction();
     items.push(this.filterPageAction);

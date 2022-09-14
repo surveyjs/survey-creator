@@ -148,18 +148,6 @@ test("Update innerItem on changign title", (): any => {
   expect(action.tooltip).toEqual("Designer");
   expect(item.tooltip).toEqual("Designer");
 });
-test("Remove format when it is not applied", (): any => {
-  const item: any = {
-    id: "test",
-    locTitleName: "ed.translationMergeLocaleWithDefault",
-    locTooltipName: "ed.translationMergeLocaleWithDefault"
-  };
-  const action = new CreatorAction(item);
-  expect(action.title).toEqual("Merge  with default locale");
-  expect(item.title).toEqual("Merge  with default locale");
-  expect(action.tooltip).toEqual("Merge  with default locale");
-  expect(item.tooltip).toEqual("Merge  with default locale");
-});
 test("Change Creator locale property", (): any => {
   const deutschStrings: any = {
     ed: {
