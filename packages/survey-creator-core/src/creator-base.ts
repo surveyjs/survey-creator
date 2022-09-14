@@ -79,8 +79,6 @@ export interface ICreatorPlugin {
 export interface ICreatorAction extends IAction {
   locTitleName?: string;
   locTooltipName?: string;
-  onUpdateTitle?: () => string;
-  onUpdateTooltip?: () => string;
 }
 
 export class CreatorAction extends Action implements ICreatorAction {
@@ -90,23 +88,16 @@ export class CreatorAction extends Action implements ICreatorAction {
   }
   locTitleName?: string;
   locTooltipName?: string;
-  onUpdateTitle?: () => string;
-  onUpdateTooltip?: () => string;
   public updateTitle(): void {
-    if (!!this.onUpdateTooltip) {
-      this.setTooltip(this.onUpdateTooltip());
-    } else {
-      if (!!this.locTooltipName) {
-        this.setTooltip(editorLocalization.getString(this.locTooltipName));
-      }
+    if (!!this.locTooltipName) {
+      this.setTooltip(this.getLocalizationStringCore(this.locTooltipName));
     }
-    if (!!this.onUpdateTitle) {
-      this.setTitle(this.onUpdateTitle());
-    } else {
-      if (!!this.locTitleName) {
-        this.setTitle(editorLocalization.getString(this.locTitleName));
-      }
+    if (!!this.locTitleName) {
+      this.setTitle(this.getLocalizationStringCore(this.locTitleName));
     }
+  }
+  private getLocalizationStringCore(name: string): string {
+    return editorLocalization.getString(name);
   }
   private setTitle(newVal: string): void {
     this.title = newVal;
@@ -1173,11 +1164,12 @@ export class CreatorBase extends Base
    * You can set it to 'de' - German, 'fr' - French and so on.
    */
   public get locale(): string {
-    return editorLocalization.currentLocale;
+    return this.getPropertyValue("locale", editorLocalization.currentLocale);
   }
   public set locale(value: string) {
     if (editorLocalization.currentLocale === value) return;
     editorLocalization.currentLocale = value;
+    this.setPropertyValue("locale", value);
     this.toolbox.updateTitles();
     this.refreshPlugin();
     const selEl = this.selectedElement;
