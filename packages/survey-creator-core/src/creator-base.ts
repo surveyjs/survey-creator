@@ -97,11 +97,7 @@ export class CreatorAction extends Action implements ICreatorAction {
     }
   }
   private getLocalizationStringCore(name: string): string {
-    let res = editorLocalization.getString(name);
-    if(!!res && res.indexOf("{") > -1) {
-      res = res.replace("{0}", "");
-    }
-    return res;
+    return editorLocalization.getString(name);
   }
   private setTitle(newVal: string): void {
     this.title = newVal;
