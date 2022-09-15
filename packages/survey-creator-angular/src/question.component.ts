@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input, ViewContainerRef } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
-import { PageModel, Question, SurveyModel } from "survey-core";
+import { PageModel, PanelModel, Question, SurveyModel } from "survey-core";
 import { CreatorBase, QuestionAdornerViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
 
@@ -10,14 +10,17 @@ import { CreatorModelComponent } from "./creator-model.component";
   styles: [":host { display: none; }"]
 })
 export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdornerViewModel> {
-  @Input() model!: any;
-  @Input() componentData!: CreatorBase;
+  @Input() componentName!: string;
+  @Input() componentData!: any;
   public adorner!: QuestionAdornerViewModel;
-  private get creator() {
-    return this.componentData;
+  private get creator(): CreatorBase {
+    return this.componentData.data;
+  }
+  public get model(): Question | PanelModel {
+    return this.componentData.model;
   }
   protected createModel(): void {
-    if (this.model) {
+    if (this.componentData) {
       this.adorner = new QuestionAdornerViewModel(this.creator, this.model, <any>null);
     }
   }

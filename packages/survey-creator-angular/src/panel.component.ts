@@ -3,35 +3,14 @@ import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } fr
 import { PageModel, Question, SurveyModel } from "survey-core";
 import { CreatorBase, QuestionAdornerViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
+import { QuestionDesignerComponent } from "./question.component";
 
 @Component({
   selector: "svc-panel",
   templateUrl: "./question.component.html",
   styles: [":host { display: none; }"]
 })
-export class PanelDesignerComponent extends CreatorModelComponent<QuestionAdornerViewModel> {
-  @Input() model!: any;
-  @Input() componentData!: CreatorBase;
-  public adorner!: QuestionAdornerViewModel;
-  private get creator() {
-    return this.componentData;
-  }
-  protected createModel(): void {
-    if (this.model) {
-      this.adorner = new QuestionAdornerViewModel(this.creator, this.model, <any>null);
-    }
-  }
-  protected getPropertiesToTrack(): string[] {
-    return ["model", "componentData"];
-  }
-  protected getModel(): QuestionAdornerViewModel {
-    return this.adorner;
-  }
-  public selectQuestionType(event: any) {
-    event.stopPropagation();
-    this.adorner.questionTypeSelectorModel.action(this.adorner.questionTypeSelectorModel, event);
-  }
+export class PanelDesignerComponent extends QuestionDesignerComponent {
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-panel", PanelDesignerComponent);
-
