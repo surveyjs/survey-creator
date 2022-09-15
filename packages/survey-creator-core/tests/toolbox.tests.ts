@@ -30,28 +30,28 @@ test("toolbox support options", (): any => {
 });
 
 test("toolbox reorder items", (): any => {
-  var toolbox = new QuestionToolbox(["text", "dropdown"]);
-  expect(toolbox.items[0].name).toEqual("text");
+  var toolbox = new QuestionToolbox(["radiogroup", "dropdown"]);
+  expect(toolbox.items[0].name).toEqual("radiogroup");
   expect(toolbox.items[1].name).toEqual("dropdown");
-  toolbox.orderedQuestions = ["dropdown", "text"];
+  toolbox.orderedQuestions = ["dropdown", "radiogroup"];
   expect(toolbox.items[0].name).toEqual("dropdown");
-  expect(toolbox.items[1].name).toEqual("text");
+  expect(toolbox.items[1].name).toEqual("radiogroup");
 
   toolbox.addItem(<any>{ name: "countries" });
   expect(toolbox.items[0].name).toEqual("dropdown");
-  expect(toolbox.items[1].name).toEqual("text");
+  expect(toolbox.items[1].name).toEqual("radiogroup");
   expect(toolbox.items[2].name).toEqual("countries");
   expect(toolbox.items[2].title).toEqual("countries");
   expect(toolbox.items[2].tooltip).toEqual("countries");
-  toolbox.orderedQuestions = ["dropdown", "countries", "text"];
+  toolbox.orderedQuestions = ["dropdown", "countries", "radiogroup"];
   expect(toolbox.items[0].name).toEqual("dropdown");
   expect(toolbox.items[1].name).toEqual("countries");
-  expect(toolbox.items[2].name).toEqual("text");
+  expect(toolbox.items[2].name).toEqual("radiogroup");
 });
 
 test("toolbox addItem with index", (): any => {
-  var toolbox = new QuestionToolbox(["text", "dropdown"]);
-  expect(toolbox.items[0].name).toEqual("text");
+  var toolbox = new QuestionToolbox(["radiogroup", "dropdown"]);
+  expect(toolbox.items[0].name).toEqual("radiogroup");
   expect(toolbox.items[1].name).toEqual("dropdown");
 
   toolbox.addItem(<any>{ name: "countries" }, 0);
@@ -76,48 +76,49 @@ test("toolbox several categories", (): any => {
 
 test("toolbox default categories calculator", (): any => {
   var toolbox = new QuestionToolbox([
-    "text",
+    "radiogroup",
     "dropdown",
     "matrix"
   ]);
   expect(toolbox["getDefaultCategories"]()).toEqual([{
-    "category": "toolboxSimpleCategory",
+    "category": "toolboxChoiceCategory",
+    "name": "radiogroup",
+  },
+  {
+    "category": "toolboxChoiceCategory",
     "name": "dropdown",
   },
   {
-    "category": "toolboxSimpleCategory",
-    "name": "text",
-  },
-  {
-    "category": "toolboxSpecialCategory",
+    "category": "toolboxMatrixCategory",
     "name": "matrix",
   }]);
 });
 
 test("toolbox default categories actions separator", (): any => {
   var toolbox = new QuestionToolbox([
-    "text",
+    "radiogroup",
     "dropdown",
     "matrix",
     "matrixdropdown"
   ]);
   toolbox.changeCategories([
-    { name: "text", category: "simple" },
+    { name: "radiogroup", category: "simple" },
     { name: "dropdown", category: "simple" },
     { name: "matrix", category: "matrix" },
     { name: "matrixdropdown", category: "matrix" }
   ]);
   var needSeparator = toolbox.actions.map(a => [a.name, !!a.needSeparator]);
-  expect(needSeparator).toEqual([["text", false], ["dropdown", false], ["matrix", true], ["matrixdropdown", false]]);
+  expect(needSeparator).toEqual([["radiogroup", false], ["dropdown", false], ["matrix", true], ["matrixdropdown", false]]);
 });
 
 test("toolbox default categories", (): any => {
   var toolbox = new QuestionToolbox(undefined, undefined, true);
-  expect(toolbox.categories.length).toBe(4);
-  expect(toolbox.categories[0].items.length).toBe(7);
-  expect(toolbox.categories[1].items.length).toBe(6);
-  expect(toolbox.categories[2].items.length).toBe(5);
-  expect(toolbox.categories[3].items.length).toBe(2);
+  expect(toolbox.categories.length).toBe(5);
+  expect(toolbox.categories[0].items.length).toBe(8);
+  expect(toolbox.categories[1].items.length).toBe(3);
+  expect(toolbox.categories[2].items.length).toBe(2);
+  expect(toolbox.categories[3].items.length).toBe(3);
+  expect(toolbox.categories[4].items.length).toBe(4);
 });
 
 test("toolbox change categories", (): any => {
@@ -352,9 +353,9 @@ test("Add customWidgets into toolbox", (): any => {
     showInToolbox: false,
     questionJSON: { type: "dropdown", choices: [1, 2, 3, 4, 5] }
   });
-  var toolbox = new QuestionToolbox(["text", "dropdown"]);
+  var toolbox = new QuestionToolbox(["radiogroup", "dropdown"]);
   expect(toolbox.items).toHaveLength(5);
-  expect(toolbox.items[0].name).toEqual("text");
+  expect(toolbox.items[0].name).toEqual("radiogroup");
   expect(toolbox.items[1].name).toEqual("dropdown");
   expect(toolbox.items[2].name).toEqual("first");
   expect(toolbox.items[3].name).toEqual("second");

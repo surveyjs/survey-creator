@@ -41,10 +41,10 @@ svc-toolbox {
 }
 
 .svc-toolbox__category-separator {
-  height: calcSize(0.1);
+  height: 1px;
   width: calcSize(6);
   background-color: $border;
-  margin: calcSize(1) 0;
+  margin: calcSize(1) 0 calcSize(1.5);
 }
 
 .svc-toolbox__category-header {

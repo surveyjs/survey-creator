@@ -95,16 +95,18 @@ export class QuestionToolbox
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
-    toolboxSimpleCategory: ["radiogroup", "checkbox", "dropdown", "text", "rating", "imagepicker", "ranking"],
-    toolboxSpecialCategory: ["boolean", "comment", "multipletext", "matrix", "file", "signaturepad"],
-    toolboxAdvancedCategory: ["html", "expression", "matrixdropdown", "matrixdynamic", "paneldynamic"],
-    toolboxLayoutCategory: ["image", "panel"]
+    toolboxChoiceCategory: ["radiogroup", "rating", "checkbox", "dropdown", "boolean", "file", "imagepicker", "ranking"],
+    toolboxTextCategory: ["text", "comment", "multipletext"],
+    toolboxContainersCategory: ["panel", "paneldynamic"],
+    toolboxMatrixCategory: ["matrix", "matrixdropdown", "matrixdynamic"],
+    toolboxMiscCategory: ["html", "expression", "image", "signaturepad"]
   }
   private _orderedQuestions = [
-    "radiogroup", "checkbox", "dropdown", "text", "rating", "imagepicker", "ranking",
-    "boolean", "comment", "multipletext", "matrix", "file", "signaturepad",
-    "html", "expression", "matrixdropdown", "matrixdynamic", "paneldynamic",
-    "image", "panel"
+    "radiogroup", "rating", "checkbox", "dropdown", "boolean", "file", "imagepicker", "ranking",
+    "text", "comment", "multipletext",
+    "panel", "paneldynamic",
+    "matrix", "matrixdropdown", "matrixdynamic",
+    "html", "expression", "image", "signaturepad"
   ];
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
@@ -611,6 +613,7 @@ export class QuestionToolbox
       (category.items || []).forEach((item, index) => {
         if (categoryIndex !== 0 && index == 0) {
           item.needSeparator = true;
+          item.innerItem.needSeparator = true;
         }
       });
     });
