@@ -21,7 +21,8 @@ import {
   ItemValue,
   QuestionSelectBase,
   QuestionRowModel,
-  LocalizableString
+  LocalizableString,
+  ILocalizableOwner
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -75,49 +76,15 @@ export interface ICreatorPlugin {
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
 }
-
-export interface ICreatorAction extends IAction {
-  locTitleName?: string;
-  locTooltipName?: string;
+//Obsolete
+export class CreatorAction extends Action {
 }
 
-export class CreatorAction extends Action implements ICreatorAction {
-  constructor(item: ICreatorAction) {
-    super(item);
-    this.updateTitle();
-  }
-  locTitleName?: string;
-  locTooltipName?: string;
-  public updateTitle(): void {
-    if (!!this.locTooltipName) {
-      this.setTooltip(this.getLocalizationStringCore(this.locTooltipName));
-    }
-    if (!!this.locTitleName) {
-      this.setTitle(this.getLocalizationStringCore(this.locTitleName));
-    }
-  }
-  private getLocalizationStringCore(name: string): string {
-    return editorLocalization.getString(name);
-  }
-  private setTitle(newVal: string): void {
-    this.title = newVal;
-    if (!!this.innerItem) {
-      this.innerItem.title = newVal;
-    }
-  }
-  private setTooltip(newVal: string): void {
-    this.tooltip = newVal;
-    if (!!this.innerItem) {
-      this.innerItem.tooltip = newVal;
-    }
-  }
-}
-
-export interface ITabbedMenuItem extends ICreatorAction {
+export interface ITabbedMenuItem extends IAction {
   componentContent: string;
   renderTab?: () => any;
 }
-export class TabbedMenuItem extends CreatorAction implements ITabbedMenuItem {
+export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   constructor(item: ITabbedMenuItem) {
     super(item);
   }
@@ -154,7 +121,13 @@ export type toolboxLocationType = "left" | "right" | "sidebar";
  * Base class for Survey Creator.
  */
 export class CreatorBase extends Base
-  implements ISurveyCreatorOptions, ICreatorSelectionOwner {
+  implements ISurveyCreatorOptions, ICreatorSelectionOwner, ILocalizableOwner {
+  //ILocalizableOwner
+  public getMarkdownHtml(text: string, name: string): string { return null; }
+  public getRenderer(name: string): string { return null; }
+  public getRendererContext(locStr: LocalizableString): any { return locStr; }
+  public getProcessedText(text: string): string { return text; }
+  public getLocale(): string { return this.locale; }
   /**
    * Specifies whether to display the Designer tab.
    *
@@ -353,6 +326,9 @@ export class CreatorBase extends Base
     index?: number
   ) {
     const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
+    if(!!locStrName) {
+      title = undefined;
+    }
     const tab: TabbedMenuItem = new TabbedMenuItem({
       id: name,
       locTitleName: locStrName,
@@ -1134,7 +1110,7 @@ export class CreatorBase extends Base
    */
   public allowChangeThemeInPreview = true;
 
-  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem> = new TabbedMenuContainer();
+  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem>;
 
   get tabs() {
     return this.tabbedMenu.actions;
@@ -1178,20 +1154,11 @@ export class CreatorBase extends Base
       this.selectElement(selEl);
     }
     this.locStrsChanged();
-    this.tabs.forEach(item => (<TabbedMenuItem>item).updateTitle());
-    this.updateActionsLocale(this.toolbar.actions);
   }
-  private updateActionsLocale(actions: Array<Action>): void {
-    if (!Array.isArray(actions)) return;
-    actions.forEach(item => {
-      if (!!(<any>item).updateTitle) {
-        (<any>item).updateTitle();
-      }
-      if (!!item.popupModel && !!item.popupModel.contentComponentData && !!item.popupModel.contentComponentData.model) {
-        const model = item.popupModel.contentComponentData.model;
-        this.updateActionsLocale(model.actions);
-      }
-    });
+  public locStrsChanged(): void {
+    super.locStrsChanged();
+    this.tabbedMenu.locStrsChanged();
+    this.toolbar.locStrsChanged();
   }
   private refreshPlugin() {
     const plugin = this.currentPlugin;
@@ -1310,6 +1277,9 @@ export class CreatorBase extends Base
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     this.toolbarValue = new ToolbarActionContainer(this);
+    this.toolbarValue.locOwner = this;
+    this.tabbedMenu = new TabbedMenuContainer();
+    this.tabbedMenu.locOwner = this;
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sidebar = new SidebarModel(this);
     this.setOptions(this.options);

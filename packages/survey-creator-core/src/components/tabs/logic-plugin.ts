@@ -1,14 +1,14 @@
 import { SurveyModel, Action, IAction, PopupModel, ListModel, ComputedUpdater } from "survey-core";
 import { getLogicString } from "./logic-types";
-import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
+import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyLogicUI } from "./logic-ui";
 import { SurveyHelper } from "../../survey-helper";
 
 export class TabLogicPlugin implements ICreatorPlugin {
-  private filterQuestionAction: CreatorAction;
-  private filterActionTypeAction: CreatorAction;
-  private fastEntryAction: CreatorAction;
+  private filterQuestionAction: Action;
+  private filterActionTypeAction: Action;
+  private fastEntryAction: Action;
   public model: SurveyLogicUI;
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("logic", this);
@@ -95,7 +95,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
       undefined, undefined, undefined, undefined, undefined, onQuestionPopupShow
     );
 
-    this.filterQuestionAction = new CreatorAction({
+    this.filterQuestionAction = new Action({
       id: "svc-logic-filter-question",
       visible: false,
       component: "sv-action-bar-item-dropdown",
@@ -126,7 +126,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
       undefined, undefined, undefined, undefined, undefined, onActionTypesPopupShow
     );
 
-    this.filterActionTypeAction = new CreatorAction({
+    this.filterActionTypeAction = new Action({
       id: "svc-logic-filter-actiontype",
       visible: false,
       component: "sv-action-bar-item-dropdown",
@@ -136,7 +136,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
     items.push(this.filterActionTypeAction);
 
     if (this.creator.allowEditExpressionsInTextEditor) {
-      this.fastEntryAction = new CreatorAction({
+      this.fastEntryAction = new Action({
         id: "svc-logic-fast-entry",
         iconName: "icon-fast-entry",
         locTitleName: "pe.fastEntry",
