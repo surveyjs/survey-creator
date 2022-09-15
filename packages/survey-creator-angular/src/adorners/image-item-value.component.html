@@ -1,0 +1,47 @@
+<ng-template #template>
+  <div (pointerdown)="adorner.onPointerDown($event)" [class]="adorner.getRootCss()" data-bind="attr: attributes">
+    <div class="svc-image-item-value-wrapper__ghost" [style]="getNewItemStyle()"></div>
+
+    <div class="svc-image-item-value-wrapper__content">
+      <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
+
+      <ng-container *ngIf="!adorner.isNew">
+        <div *ngIf="!adorner.isNew" class="svc-image-item-value__item">
+          <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
+        </div>
+
+        <svg class="svc-image-item-value-controls__button svc-image-item-value-controls__drag-area-indicator"
+          (pointerdown)="adorner.onPointerDown($event)" [iconName]="'icon-drag-area-indicator'" [size]="24"
+          [attr.title]="undefined" [attr.aria-label]="undefined" sv-ng-svg-icon></svg>
+
+        <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
+          <ng-container *ngIf="adorner.allowRemove">
+            <svg class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" [key2click]
+              (click)="adorner.chooseFile(adorner)" [iconName]="'icon-file'" [size]="24" [attr.title]="undefined"
+              [attr.aria-label]="undefined" sv-ng-svg-icon></svg>
+            <svg class="svc-image-item-value-controls__button svc-image-item-value-controls__remove" [key2click]
+              (click)="adorner.remove(adorner)" [iconName]="'icon-delete'" [size]="24" [attr.title]="undefined"
+              [attr.aria-label]="undefined" sv-ng-svg-icon></svg>
+          </ng-container>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="adorner.isNew">
+        <div class="svc-image-item-value__item"
+          data-bind="event: { dragover: dragover, drop: drop, dragleave: dragleave }">
+          <div class="sd-imagepicker__item sd-imagepicker__item--inline">
+            <label class="sd-imagepicker__label">
+              <div [style]="getNewItemStyle()" class="sd-imagepicker__image"></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
+          <svg *ngIf="adorner.allowAdd" class="svc-image-item-value-controls__button svc-image-item-value-controls__add"
+            [key2click] (click)="adorner.chooseNewFile(adorner)" [iconName]="'icon-add-lg'" [size]="24"
+            [attr.title]="undefined" [attr.aria-label]="undefined" sv-ng-svg-icon></svg>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
