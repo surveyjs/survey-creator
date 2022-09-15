@@ -23,6 +23,9 @@
         </div>
       </div>
 
+      <ng-template *ngIf="adornerComponent"
+        [component]="{ name: adornerComponent, data: { adorner: adorner, question: model } }">
+      </ng-template>
       <!-- ko if: adornerComponent -->
       <!-- ko component: { name: adornerComponent, params: { model: $data } } -->
       <!-- /ko -->

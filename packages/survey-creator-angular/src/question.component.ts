@@ -13,7 +13,7 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
   @Input() componentName!: string;
   @Input() componentData!: any;
   public adorner!: QuestionAdornerViewModel;
-  private get creator(): CreatorBase {
+  protected get creator(): CreatorBase {
     return this.componentData.data;
   }
   public get model(): Question | PanelModel {
@@ -34,6 +34,7 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
     event.stopPropagation();
     this.adorner.questionTypeSelectorModel.action(this.adorner.questionTypeSelectorModel, event);
   }
+  adornerComponent = "";
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-question", QuestionDesignerComponent);
