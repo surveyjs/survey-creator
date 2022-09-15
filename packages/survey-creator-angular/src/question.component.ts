@@ -25,7 +25,7 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
     }
   }
   protected getPropertiesToTrack(): string[] {
-    return ["model", "componentData"];
+    return ["model", "creator"];
   }
   protected getModel(): QuestionAdornerViewModel {
     return this.adorner;
