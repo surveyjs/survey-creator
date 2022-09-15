@@ -31,6 +31,7 @@ import { PageDesignerComponent } from "./page.component";
 import { QuestionDesignerComponent } from "./question.component";
 import { ItemValueDesignerComponent } from "./adorners/item-value.component";
 import { QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent } from "./adorners/question-dropdown.component";
+import { QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent } from "./adorners/question-image.component";
 import { PanelDesignerComponent } from "./panel.component";
 import { AdaptiveToolboxComponent } from "./toolbox/adaptive-toolbox.component";
 import { ToolboxToolComponent } from "./toolbox/toolbox-tool.component";
@@ -43,7 +44,7 @@ import { PageNavigatorItemComponent } from "./page-navigator/page-navigator-item
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, ItemValueDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
-    QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent],
+    QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],

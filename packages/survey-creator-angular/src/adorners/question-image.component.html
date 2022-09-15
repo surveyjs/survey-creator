@@ -1,0 +1,10 @@
+<ng-template #template>
+  <div class="svc-image-question-controls">
+    <ng-container *ngIf="adorner.allowEdit">
+      <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
+      <svg class="svc-image-question-controls__button" [iconName]="'icon-file'" [size]="24" [key2click]
+        (click)="adorner.chooseFile(adorner)" [attr.title]="undefined" [attr.aria-label]="undefined"
+        sv-ng-svg-icon></svg>
+    </ng-container>
+  </div>
+</ng-template>
