@@ -41,12 +41,13 @@ import { ToolboxCategoryComponent } from "./toolbox/toolbox-category.component";
 import { StringEditorComponent } from "./string-editor.component";
 import { PageNavigatorComponent } from "./page-navigator/page-navigator.component";
 import { PageNavigatorItemComponent } from "./page-navigator/page-navigator-item.component";
+import { LogicOperatorComponent } from "./questions/logic-operator.component";
 
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
-    ItemValueDesignerComponent, ImageItemValueDesignerComponent],
+    ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],
