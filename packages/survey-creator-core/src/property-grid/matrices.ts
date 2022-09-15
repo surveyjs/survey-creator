@@ -272,6 +272,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!!q.options) {
       this.setupUsingOptions(obj, matrix, q.options, prop);
     }
+    if(!!prop.uniquePropertyName) {
+      const column = matrix.getColumnByName(prop.uniquePropertyName);
+      if(!!column) {
+        column.isUnique = true;
+      }
+    }
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return false; }
   private calcHasPropertiesInDetail(

@@ -208,9 +208,11 @@ test("settings.propertyGrid.useButtonGroup", (): any => {
 test("dropdown property editor, get choices on callback", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;
+  const callbackList = new Array<any>();
   Serializer.addProperty("survey", {
     name: "region",
     choices: function (obj, choicesCallback) {
+      callbackList.push(choicesCallback);
       callback = choicesCallback;
       return [];
     }
@@ -223,6 +225,9 @@ test("dropdown property editor, get choices on callback", () => {
   expect(setQuestion.choices).toHaveLength(0);
   callback(choices);
   expect(setQuestion.choices).toHaveLength(5);
+  expect(callbackList).toHaveLength(2);
+  expect(callbackList[0]).toBeTruthy();
+  expect(callbackList[1]).toBeTruthy();
   Serializer.removeProperty("survey", "region");
 });
 
@@ -1488,14 +1493,26 @@ test("options.onMatrixDropdownColumnAddedCallback", () => {
   expect(question.columns[3].title).toEqual("q1:4");
 });
 test("matrix column has isUnique property", () => {
-  var question = new QuestionMatrixDynamicModel("q1");
+  const question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
-  var propertyGrid = new PropertyGridModelTester(question.columns[0]);
-  var isUniqueQuestion = <QuestionMatrixDynamicModel>(
-    propertyGrid.survey.getQuestionByName("isUnique")
-  );
+  const propertyGrid = new PropertyGridModelTester(question.columns[0]);
+  const isUniqueQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("isUnique");
   expect(isUniqueQuestion).toBeTruthy();
   expect(isUniqueQuestion.getType()).toEqual("boolean");
+});
+test("matrix columns and rows has column value with isUnique property set to true", () => {
+  const question = new QuestionMatrixModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const columnsQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("columns");
+  const rowsQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("rows");
+  expect(columnsQuestion.getColumnByName("value").isUnique).toBeTruthy();
+  expect(rowsQuestion.getColumnByName("value").isUnique).toBeTruthy();
+});
+test("matrix dropdown rows has column value with isUnique property set to true", () => {
+  const question = new QuestionMatrixDropdownModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const rowsQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("rows");
+  expect(rowsQuestion.getColumnByName("value").isUnique).toBeTruthy();
 });
 test("options.onSetPropertyEditorOptionsCallback", () => {
   const options = new EmptySurveyCreatorOptions();

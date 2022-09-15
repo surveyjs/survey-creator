@@ -11,6 +11,7 @@ export class StringEditorViewModelBase extends Base {
   @property() errorText: string;
   @property() focused: boolean;
   @property({ defaultValue: true }) editAsText: boolean;
+  compostionInProgress: boolean;
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
@@ -65,10 +66,18 @@ export class StringEditorViewModelBase extends Base {
     }
   }
 
+  public onCompositionStart(event: any): void {
+    this.compostionInProgress = true;
+  }
+
   public onInput(event: any): void {
-    if(this.editAsText) {
+    if(this.editAsText && !this.compostionInProgress) {
       sanitizeEditableContent(event.target);
     }
+  }
+  public onCompositionEnd(event: any): void {
+    this.compostionInProgress = false;
+    this.onInput(event);
   }
 
   public onBlur(event: any): void {

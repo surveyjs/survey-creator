@@ -37,7 +37,6 @@ test("Multiple text items", async (t) => {
 
     await t
       .click(Selector(".sd-question"))
-      .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Items"));
     await takeElementScreenshot("multiple-text-items.png", Selector(".svc-side-bar .spg-panel").nth(1), t, comparer);
   });

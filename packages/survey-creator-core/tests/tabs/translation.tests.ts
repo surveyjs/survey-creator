@@ -1194,3 +1194,21 @@ test("Reset on changing creator.JSON", () => {
   cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
   expect(cellQuestion1.value).toEqual(null);
 });
+
+test("Reset on changing creator.JSON", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  const action = creator.getActionBarItem("svd-translation-merge_locale_withdefault");
+  expect(action).toBeTruthy();
+  creator.activeTab = "translation";
+  expect(action.title).toEqual("Merge en with default locale");
+  expect(action.tooltip).toEqual("Merge en with default locale");
+  if(!editorLocalization.locales["de"]) {
+    editorLocalization.locales["de"] = {
+      ed: { translationMergeLocaleWithDefault: "Verschmelze {0} mit der Standardsprache" }
+    };
+  }
+  creator.locale = "de";
+  expect(action.title).toEqual("Verschmelze en mit der Standardsprache");
+  expect(action.tooltip).toEqual("Verschmelze en mit der Standardsprache");
+  creator.locale = "";
+});

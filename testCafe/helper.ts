@@ -87,7 +87,7 @@ export function getBarItemByText(text) {
   return Selector(".sv-action-bar-item__title").withText(text).parent(".sv-action-bar-item");
 }
 export function getPropertyGridCategory(categoryName) {
-  return Selector(".spg-title span").withText(categoryName);
+  return Selector(".spg-panel__title span").withText(categoryName);
 }
 
 export function getBarItemByTitle(text: string) {
