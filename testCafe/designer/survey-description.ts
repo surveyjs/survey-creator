@@ -17,7 +17,6 @@ test("Edit survey description", async (t) => {
 
   await setJSON({ pages: [{ name: "page1" }] });
   await t
-    .click(getPropertyGridCategory(generalGroupName))
     .click(Selector(`span[aria-placeholder='${placeholder}']`))
     .pressKey(description.split("").join(" "))
     .pressKey("enter")

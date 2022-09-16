@@ -28,6 +28,7 @@ import { CreatorTester } from "../creator-tester";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { wrapTextByCurlyBraces } from "../../src/utils/utils";
 import { settings } from "../../src/settings";
+import { editorLocalization } from "../../src/editorLocalization";
 
 export * from "../../src/components/link-value";
 
@@ -1431,9 +1432,9 @@ test("LogicPlugin: question & action types are sorted ", () => {
     ],
   };
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
-  const filterActionType = logicPlugin.createActions().filter(action => action.id === "svc-logic-filter-actiontype")[0];
+  const filterActionType = creator.getActionBarItem("svc-logic-filter-actiontype");
   const actionTypes = filterActionType.popupModel.contentComponentData.model.actions;
-  const filterQuestion = logicPlugin.createActions().filter(action => action.id === "svc-logic-filter-question")[0];
+  const filterQuestion = creator.getActionBarItem("svc-logic-filter-question");
   const questions = filterQuestion.popupModel.contentComponentData.model.actions;
 
   logicPlugin.activate();
@@ -1456,6 +1457,64 @@ test("LogicPlugin: question & action types are sorted ", () => {
   expect(questions[2].title).toEqual("q2");
   expect(questions[3].title).toEqual("q4");
   expect(questions[4].title).toEqual("q10");
+
+  expect(filterActionType.title).toEqual("All Action Types");
+  logicPlugin.model.actionTypeFilter = actionTypes[1].id;
+  expect(filterActionType.title).toEqual("Copy answer");
+});
+test("LogicPlugin: actions titles support localization", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+          { type: "text", name: "q10", visibleIf: "{q2} = 2" },
+          { type: "text", name: "q4", visibleIf: "{q1} = 3" },
+        ],
+      },
+    ],
+    triggers: [
+      {
+        type: "skip",
+        expression: "{q1} = 1",
+        gotoName: "q4",
+      },
+      {
+        type: "copyvalue",
+        expression: "{q2} = 2",
+        setToName: "q10",
+        fromName: "q4"
+      }
+    ],
+  };
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+  const filterActionType = creator.getActionBarItem("svc-logic-filter-actiontype");
+  const actionTypes = filterActionType.popupModel.contentComponentData.model.actions;
+  const filterActionQuestion = creator.getActionBarItem("svc-logic-filter-question");
+
+  logicPlugin.activate();
+  filterActionType.action();
+  expect(actionTypes).toHaveLength(4);
+  expect(filterActionType.title).toEqual("All Action Types");
+  logicPlugin.model.actionTypeFilter = actionTypes[1].id;
+  expect(filterActionType.title).toEqual("Copy answer");
+  expect(filterActionQuestion.title).toEqual("All Questions");
+  logicPlugin.model.questionFilter = "q1";
+  expect(filterActionQuestion.title).toEqual("q1");
+  logicPlugin.model.questionFilter = "";
+  expect(filterActionQuestion.title).toEqual("All Questions");
+
+  if(!editorLocalization.locales["de"]) {
+    editorLocalization.locales["de"] = {
+      ed: { lg: { trigger_copyvalueName: "Fragenwert kopieren", showAllQuestions: "Alle Fragen anzeigen" } }
+    };
+  }
+  creator.locale = "de";
+  expect(filterActionType.title).toEqual("Fragenwert kopieren");
+  expect(filterActionQuestion.title).toEqual("Alle Fragen anzeigen");
+  creator.locale = "";
 });
 
 test("LogicPlugin: creator.readOnly", () => {
@@ -2650,4 +2709,34 @@ test("Update expression on changing row value in matrix dropdown", (): any => {
   const q1 = creator.survey.getQuestionByName("q1");
   matrix.rows[1].value = "Row 2";
   expect(q1.visibleIf).toEqual("{matrix.Row 2.col1} = 'item1'");
+});
+test("Use creator.onGetObjectDisplayName for element selector in visibleIf action", () => {
+  const creator = new CreatorTester();
+  creator.onGetObjectDisplayName.add(function (sender, options) {
+    if(options.area === "logic-tab:question-selector") {
+      options.displayName = "# " + options.obj.title;
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { name: "question 1", type: "text" },
+      { name: "question 3", type: "text" },
+      { name: "question 11", type: "text", visibleIf: "{question 3} = 1" },
+      { name: "question 2", type: "text" },
+      { name: "question 10", type: "text" },
+    ]
+  };
+  const logic = new SurveyLogicUI(creator.survey, creator);
+  expect(logic.items).toHaveLength(1);
+  logic.editItem(logic.items[0]);
+  const editor = logic.itemEditor;
+  expect(editor.panels).toHaveLength(1);
+  const qSelector = <QuestionDropdownModel>(
+    editor.panels[0].getQuestionByName("elementSelector")
+  );
+  expect(qSelector).toBeTruthy();
+  const choices = qSelector.choices;
+  expect(choices).toHaveLength(5);
+  expect(choices[0].text).toEqual("# question 1");
+  expect(choices[4].text).toEqual("# question 11");
 });

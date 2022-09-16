@@ -72,7 +72,8 @@ export var settings = {
     maximumChoicesCount: 0,
     maximumRowsCount: 0,
     maximumRateValues: 0,
-    generalTabName: "general"
+    generalTabName: "general",
+    defaultExpandedTabName: "general"
   },
   toolbox: {
     /**

@@ -177,7 +177,6 @@ test("Matrix: Property Grid: Choices", async (t) => {
 
     await t
       .click(Selector("[data-name=\"question1\"]"), { speed: 0.5 })
-      .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Choices"));
 
     await patchMatrixDragDropToDisableDrop();

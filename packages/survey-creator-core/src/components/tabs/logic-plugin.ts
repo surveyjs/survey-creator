@@ -1,4 +1,4 @@
-import { SurveyModel, Action, IAction, PopupModel, ListModel } from "survey-core";
+import { SurveyModel, Action, IAction, PopupModel, ListModel, ComputedUpdater } from "survey-core";
 import { getLogicString } from "./logic-types";
 import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
@@ -17,10 +17,9 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new SurveyLogicUI(this.creator.survey, this.creator);
 
-    this.filterQuestionAction.title = this.showAllQuestionsText;
+    this.filterQuestionAction.title = this.createFilterQuestionTitleUpdater();
     this.filterQuestionAction.visible = true;
-
-    this.filterActionTypeAction.title = this.showAllActionTypesText;
+    this.filterActionTypeAction.title = this.createFilterTypeTitleUpdater();
     this.filterActionTypeAction.visible = true;
 
     if (this.fastEntryAction) {
@@ -30,12 +29,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
     }
 
     this.model.onPropertyChanged.add((sender, options) => {
-      if (options.name === "questionFilter") {
-        this.filterQuestionAction.updateTitle();
-      }
-      if (options.name === "actionTypeFilter") {
-        this.filterActionTypeAction.updateTitle();
-      }
       if (!!this.fastEntryAction && options.name === "expressionEditorIsFastEntry") {
         this.fastEntryAction.active = this.model.expressionEditorIsFastEntry;
       }
@@ -44,11 +37,29 @@ export class TabLogicPlugin implements ICreatorPlugin {
       }
     });
   }
+  private createFilterTypeTitleUpdater(): any {
+    return <any>new ComputedUpdater<string>(() => {
+      let loc = this.creator.locale;
+      if(!loc) loc = "en";
+      const type = this.model.actionTypeFilter;
+      const allType = this.showAllActionTypesText;
+      return !!type ? this.model.getTypeByName(type).displayName : allType; });
+  }
+  private createFilterQuestionTitleUpdater(): any {
+    return <any>new ComputedUpdater<string>(() => {
+      let loc = this.creator.locale;
+      if(!loc) loc = "en";
+      const questionFilter = this.model.questionFilter;
+      const allQuestions = this.showAllQuestionsText;
+      return !!questionFilter ? questionFilter : allQuestions; });
+  }
   public update(): void {
     if (!this.model) return;
     this.model.update(this.creator.survey);
   }
   public deactivate(): boolean {
+    this.filterActionTypeAction.title = undefined;
+    this.filterQuestionAction.title = undefined;
     if (this.model) {
       this.model.dispose();
       this.model = undefined;
@@ -86,7 +97,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
 
     this.filterQuestionAction = new CreatorAction({
       id: "svc-logic-filter-question",
-      onUpdateTitle: () => { return !!this.model && !!this.model.questionFilter ? this.model.questionFilter : this.showAllQuestionsText; },
       visible: false,
       component: "sv-action-bar-item-dropdown",
       popupModel: questionPopupModel,
@@ -118,8 +128,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
 
     this.filterActionTypeAction = new CreatorAction({
       id: "svc-logic-filter-actiontype",
-      onUpdateTitle: () => { return !!this.model && !!this.model.actionTypeFilter ?
-        this.model.getTypeByName(this.model.actionTypeFilter).displayName : this.showAllActionTypesText; },
       visible: false,
       component: "sv-action-bar-item-dropdown",
       popupModel: actionTypesPopupModel,

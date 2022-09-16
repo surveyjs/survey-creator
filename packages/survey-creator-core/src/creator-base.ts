@@ -79,8 +79,6 @@ export interface ICreatorPlugin {
 export interface ICreatorAction extends IAction {
   locTitleName?: string;
   locTooltipName?: string;
-  onUpdateTitle?: () => string;
-  onUpdateTooltip?: () => string;
 }
 
 export class CreatorAction extends Action implements ICreatorAction {
@@ -90,23 +88,16 @@ export class CreatorAction extends Action implements ICreatorAction {
   }
   locTitleName?: string;
   locTooltipName?: string;
-  onUpdateTitle?: () => string;
-  onUpdateTooltip?: () => string;
   public updateTitle(): void {
-    if (!!this.onUpdateTooltip) {
-      this.setTooltip(this.onUpdateTooltip());
-    } else {
-      if (!!this.locTooltipName) {
-        this.setTooltip(editorLocalization.getString(this.locTooltipName));
-      }
+    if (!!this.locTooltipName) {
+      this.setTooltip(this.getLocalizationStringCore(this.locTooltipName));
     }
-    if (!!this.onUpdateTitle) {
-      this.setTitle(this.onUpdateTitle());
-    } else {
-      if (!!this.locTitleName) {
-        this.setTitle(editorLocalization.getString(this.locTitleName));
-      }
+    if (!!this.locTitleName) {
+      this.setTitle(this.getLocalizationStringCore(this.locTitleName));
     }
+  }
+  private getLocalizationStringCore(name: string): string {
+    return editorLocalization.getString(name);
   }
   private setTitle(newVal: string): void {
     this.title = newVal;
@@ -438,6 +429,7 @@ export class CreatorBase extends Base
    *   - `"page-selector"` - Page selector on the design surface
    *   - `"condition-editor"` - Condition pop-up window or drop-down menus that allow users to select questions in the Logic tab
    *   - `"logic-tab:question-filter"` - Question filter in the Logic tab
+   *   - `"logic-tab:question-selector"` - Question selector on editing actions in the Logic tab
    *   - `"preview-tab:page-list"` - Page list in the Preview tab
    *   - `"preview-tab:selected-page"` - Selected page name in the Preview tab
    *   - `"property-grid:property-editor"` - Property editors in the Property Grid
@@ -1172,11 +1164,12 @@ export class CreatorBase extends Base
    * You can set it to 'de' - German, 'fr' - French and so on.
    */
   public get locale(): string {
-    return editorLocalization.currentLocale;
+    return this.getPropertyValue("locale", editorLocalization.currentLocale);
   }
   public set locale(value: string) {
     if (editorLocalization.currentLocale === value) return;
     editorLocalization.currentLocale = value;
+    this.setPropertyValue("locale", value);
     this.toolbox.updateTitles();
     this.refreshPlugin();
     const selEl = this.selectedElement;
@@ -1684,7 +1677,13 @@ export class CreatorBase extends Base
     return this.surveyValue;
   }
   private existingPages: {};
-  protected initSurveyWithJSON(json: any, clearState: boolean) {
+  private isInitialSurveyEmptyValue: boolean;
+  /**
+   * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.
+   * @returns true if initial survey doesn't have any elements or properties
+   */
+  public get isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
+  protected initSurveyWithJSON(json: any, clearState: boolean): void {
     // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};
     const survey = this.createSurvey({});
@@ -1692,6 +1691,7 @@ export class CreatorBase extends Base
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
+    this.isInitialSurveyEmptyValue = survey.isEmpty;
     survey.logoPosition = "right";
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
@@ -2517,19 +2517,35 @@ export class CreatorBase extends Base
     */
     return isValid;
   }
+  private getPropertyGridExpandedCategory(): string {
+    if(!this.designerPropertyGrid) return undefined;
+    const panels = this.designerPropertyGrid.survey.getAllPanels();
+    for(var i = 0; i < panels.length; i ++) {
+      if((<PanelModel>panels[i]).isExpanded) return panels[i].name;
+    }
+    return "";
+  }
+  private expandCategoryIfNeeded(): void {
+    const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
+    if(!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
+      const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
+      if(!!panel) {
+        panel.expand();
+      }
+    }
+  }
   private selectionChanged(element: Base, propertyName?: string, focus = true) {
     this.survey.currentPage = this.getCurrentPageByElement(element);
     this.selectionHistoryController.onObjSelected(element);
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
-
       if (!propertyName) {
         propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
-
       if (!!propertyName) {
         this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
       }
+      this.expandCategoryIfNeeded();
       this.selectFromStringEditor = false;
     }
     var options = { newSelectedElement: element };

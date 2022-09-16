@@ -24,11 +24,9 @@ test("Change survey width", async (t) => {
   };
   await setJSON(json);
 
-  const generalTab = Selector("h4").withExactText("General");
   const widthEditorInput = Selector("[data-name=\"width\"]").find("input");
 
   await t
-    .click(generalTab)
     .click(widthEditorInput)
 
     .typeText(widthEditorInput, "755px", { replace: true })
