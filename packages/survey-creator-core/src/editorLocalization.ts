@@ -204,6 +204,9 @@ export class EditorLocalization {
 }
 
 export var editorLocalization = new EditorLocalization();
+surveyLocalization.onGetExternalString = (name: string, locale: string): string => {
+  return editorLocalization.getString(name, locale);
+};
 
 export function getLocString(strName: string, locale: string = null) {
   return editorLocalization.getString(strName, locale);
