@@ -1,7 +1,7 @@
 import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray } from "survey-core";
 import { settings } from "../../settings";
 import { getLocString } from "../../editorLocalization";
-import { CreatorBase, CreatorAction } from "../../creator-base";
+import { CreatorBase } from "../../creator-base";
 import { SidebarTabModel } from "./side-bar-tab-model";
 import { ResizeManager } from "../../utils/resizer";
 
@@ -44,7 +44,7 @@ export class SidebarModel extends Base {
 
   private createActions() {
     if (this.creator.allowCollapseSidebar) {
-      this._collapseAction = new CreatorAction({
+      this._collapseAction = new Action({
         id: "svd-grid-hide",
         iconName: "icon-collapse-panel",
         css: "svd-grid-hide",
@@ -61,7 +61,7 @@ export class SidebarModel extends Base {
       });
       this.toolbar.actions.push(this._collapseAction);
 
-      this._expandAction = new CreatorAction({
+      this._expandAction = new Action({
         id: "svd-grid-expand",
         iconName: "icon-expand-panel",
         css: "svd-grid-expand",

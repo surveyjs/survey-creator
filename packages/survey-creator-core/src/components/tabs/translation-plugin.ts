@@ -1,5 +1,5 @@
 import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel, ComputedUpdater, surveyLocalization } from "survey-core";
-import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
+import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { Translation } from "./translation";
@@ -135,7 +135,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.createFilterStringsAction();
     items.push(this.filterStringsAction);
 
-    this.mergeLocaleWithDefaultAction = new CreatorAction({
+    this.mergeLocaleWithDefaultAction = new Action({
       id: "svd-translation-merge_locale_withdefault",
       visible: false,
       component: "sv-action-bar-item",
@@ -147,7 +147,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.mergeLocaleWithDefaultAction);
 
-    this.importCsvAction = new CreatorAction({
+    this.importCsvAction = new Action({
       id: "svc-translation-import",
       iconName: "icon-load",
       locTitleName: "ed.translationImportFromSCVButton",
@@ -171,7 +171,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.importCsvAction);
 
-    this.exportCsvAction = new CreatorAction({
+    this.exportCsvAction = new Action({
       id: "svc-translation-export",
       iconName: "icon-download",
       locTitleName: "ed.translationExportToSCVButton",

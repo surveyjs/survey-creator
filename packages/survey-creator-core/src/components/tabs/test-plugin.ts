@@ -1,5 +1,5 @@
 import { Action, ComputedUpdater, createDropdownActionModel, defaultStandardCss, defaultV2Css, IAction, ListModel, modernCss, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
-import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
+import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
@@ -8,7 +8,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private languageSelectorAction: Action;
   private changeThemePopupModel: PopupModel;
   private changeThemeModel: ListModel;
-  protected changeThemeAction: CreatorAction;
+  protected changeThemeAction: Action;
   private deviceSelectorAction: Action;
   private orientationSelectorAction: Action;
   private invisibleToggleAction: Action;
@@ -126,11 +126,11 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
   }
-  private getAvailableThemes(themeMapper: Array<any>): Array<CreatorAction> {
+  private getAvailableThemes(themeMapper: Array<any>): Array<Action> {
     const availableThemesToItems = [];
     for(var i = 0; i < themeMapper.length; i ++) {
       const item = themeMapper[i];
-      const action = new CreatorAction({ id: item.name + "_themeSwitcher", locTitleName: this.getThemeLocName(item.name) });
+      const action = new Action({ id: item.name + "_themeSwitcher", locTitleName: this.getThemeLocName(item.name) });
       (<any>action).value = item.name;
       availableThemesToItems.push(action);
     }
@@ -150,7 +150,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   public createActions(): Array<Action> {
     const items: Array<Action> = [];
 
-    this.testAgainAction = new CreatorAction({
+    this.testAgainAction = new Action({
       id: "testSurveyAgain",
       visible: false,
       locTitleName: "ed.testSurveyAgain",
@@ -197,7 +197,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.orientationSelectorAction);
     }
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction = new CreatorAction({
+      this.invisibleToggleAction = new Action({
         id: "showInvisible",
         iconName: "icon-invisible-items",
         mode: "small",
@@ -230,7 +230,7 @@ export class TabTestPlugin implements ICreatorPlugin {
             this.model.setTheme(item.value, themeMapper);
           }
           this.changeThemeAction.locTitleName = this.getThemeLocName(item.value);
-          this.changeThemeAction.updateTitle();
+          this.changeThemeAction.locStrsChanged();
           this.changeThemePopupModel.toggleVisibility();
         },
         true
@@ -246,7 +246,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
         return availableThemes.length > 0 ? availableThemes[0].name : "defaultV2";
       };
-      this.changeThemeAction = new CreatorAction({
+      this.changeThemeAction = new Action({
         id: "themeSwitcher",
         iconName: "icon-theme",
         component: "sv-action-bar-item-dropdown",
@@ -286,7 +286,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     });
     items.push(this.languageSelectorAction);
 
-    this.designerAction = new CreatorAction({
+    this.designerAction = new Action({
       id: "svd-designer",
       iconName: "icon-preview",
       needSeparator: true,
