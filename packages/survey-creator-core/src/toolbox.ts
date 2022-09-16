@@ -108,6 +108,7 @@ export class QuestionToolbox
     "matrix", "matrixdropdown", "matrixdynamic",
     "html", "expression", "image", "signaturepad"
   ];
+  showTitleOnCategoryChange: boolean = true;
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
     return settings.toolbox.defaultJSON[questionType];
@@ -191,8 +192,9 @@ export class QuestionToolbox
     this.createDefaultItems(supportedQuestions);
     if(useDefaultCategories) {
       let defaultCategories = this.getDefaultCategories();
+      this.showTitleOnCategoryChange = false;
       this.changeCategories(defaultCategories);
-      this.keepAllCategoriesExpanded = true;
+      this.showTitleOnCategoryChange = true;
     }
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
@@ -213,7 +215,7 @@ export class QuestionToolbox
     Object.keys(QuestionToolbox.defaultCategories).forEach((key) =>{
       const cat = QuestionToolbox.defaultCategories[key];
       cat.forEach((name)=>{
-        if(!this.supportedQuestions || this.supportedQuestions.indexOf(name) != -1) categories.push({ name: name, category: getLocString(key) });
+        if(!this.supportedQuestions || this.supportedQuestions.indexOf(name) != -1) categories.push({ name: name, category: getLocString("ed."+key) });
       });
     });
     return categories;
@@ -221,9 +223,11 @@ export class QuestionToolbox
 
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<QuestionToolboxCategory> = this.categories;
-    for (var i = 0; i < categories.length; i++) {
-      var category = categories[i];
-      category.collapsed = category.name !== newValue;
+    if(!this.allowExpandMultipleCategories) {
+      for (var i = 0; i < categories.length; i++) {
+        var category = categories[i];
+        category.collapsed = category.name !== newValue;
+      }
     }
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
@@ -420,7 +424,7 @@ export class QuestionToolbox
    * Set it to true to expand all categories and hide expand/collapse category buttons
    */
   public get keepAllCategoriesExpanded(): boolean {
-    return this.keepAllCategoriesExpandedValue;
+    return this.keepAllCategoriesExpandedValue || !this.showCategoryTitleValue;
   }
   public set keepAllCategoriesExpanded(val: boolean) {
     this.keepAllCategoriesExpandedValue = val;
@@ -451,7 +455,7 @@ export class QuestionToolbox
     var noActive = this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
     if (noActive) {
       this.activeCategory = "";
-      if (this.keepAllCategoriesExpanded) {
+      if (this.keepAllCategoriesExpandedValue) {
         this.expandAllCategories();
       }
     } else {
@@ -481,6 +485,15 @@ export class QuestionToolbox
         toolboxItem.category = item.category;
       }
     }
+    this.onItemsChanged();
+  }
+
+  /**
+   * Clear categories for all toolbox items.
+   */
+  public clearCategories() {
+    const allTypes: string[] = ElementFactory.Instance.getAllTypes();
+    this.changeCategories(allTypes.map(t => ({ name: t, category: null })));
     this.onItemsChanged();
   }
   public toggleCategoryState(categoryName: string) {
@@ -556,6 +569,7 @@ export class QuestionToolbox
     return null;
   }
   protected onItemsChanged() {
+    this.showCategoryTitle = this.showTitleOnCategoryChange;
     var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
@@ -597,6 +611,7 @@ export class QuestionToolbox
     this.actions = newItems;
 
     this.hasCategories = categories.length > 1;
+    this.updateCategoriesState();
     this.updateItemSeparators();
   }
   protected createCategory(): QuestionToolboxCategory {
@@ -609,12 +624,11 @@ export class QuestionToolbox
     return -1;
   }
   private updateItemSeparators() {
-    this.categories.forEach((category: any, categoryIndex) => {
+    const categories = this.hasCategories ? this.categories : [{ items: this.actions }];
+    categories.forEach((category: any, categoryIndex) => {
       (category.items || []).forEach((item, index) => {
-        if (categoryIndex !== 0 && index == 0) {
-          item.needSeparator = true;
-          item.innerItem.needSeparator = true;
-        }
+        item.needSeparator = categoryIndex !== 0 && index == 0;
+        if(item.innerItem) item.innerItem.needSeparator = item.needSeparator;
       });
     });
   }

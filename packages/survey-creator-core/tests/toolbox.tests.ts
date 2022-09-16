@@ -74,6 +74,37 @@ test("toolbox several categories", (): any => {
   expect(toolbox.categories[1].collapsed).toBeFalsy();
 });
 
+test("toolbox clear categories", (): any => {
+  var toolbox = new QuestionToolbox(["text", "dropdown"]);
+  expect(toolbox.hasCategories).toBeFalsy();
+  toolbox.changeCategories([{ name: "text", category: "test" }]);
+  expect(toolbox.hasCategories).toBeTruthy();
+  toolbox.clearCategories();
+  expect(toolbox.hasCategories).toBeFalsy();
+});
+
+test("toolbox keepAllCategoriesExpanded", (): any => {
+  var toolbox = new QuestionToolbox(["text", "dropdown"], undefined, true);
+  expect(toolbox.keepAllCategoriesExpanded).toBeTruthy();
+  toolbox.showCategoryTitle = true;
+  expect(toolbox.keepAllCategoriesExpanded).toBeFalsy();
+  toolbox.keepAllCategoriesExpanded = true;
+  expect(toolbox.keepAllCategoriesExpanded).toBeTruthy();
+  toolbox.showCategoryTitle = false;
+  expect(toolbox.keepAllCategoriesExpanded).toBeTruthy();
+});
+
+test("toolbox check categories separators", (): any => {
+  var toolbox = new QuestionToolbox(["text", "dropdown", "radiogroup"]);
+  expect(toolbox.hasCategories).toBeFalsy();
+  toolbox.changeCategories([{ name: "text", category: "one" }, { name: "dropdown", category: "two" }]);
+  expect(toolbox.hasCategories).toBeTruthy();
+  expect(toolbox.actions.filter(a => a.needSeparator).length).toEqual(2);
+  toolbox.clearCategories();
+  expect(toolbox.hasCategories).toBeFalsy();
+  expect(toolbox.actions.filter(a => a.needSeparator).length).toEqual(0);
+});
+
 test("toolbox default categories calculator", (): any => {
   var toolbox = new QuestionToolbox([
     "radiogroup",
@@ -81,15 +112,15 @@ test("toolbox default categories calculator", (): any => {
     "matrix"
   ]);
   expect(toolbox["getDefaultCategories"]()).toEqual([{
-    "category": "toolboxChoiceCategory",
+    "category": "Choice Questions",
     "name": "radiogroup",
   },
   {
-    "category": "toolboxChoiceCategory",
+    "category": "Choice Questions",
     "name": "dropdown",
   },
   {
-    "category": "toolboxMatrixCategory",
+    "category": "Matrix Questions",
     "name": "matrix",
   }]);
 });
@@ -140,6 +171,14 @@ test("toolbox change categories", (): any => {
   expect(toolbox.categories).toHaveLength(4);
 });
 
+test("toolbox showCategoryTitle shold be set on first category change", (): any => {
+  var toolbox = new QuestionToolbox([], undefined, true);
+  expect(toolbox.showCategoryTitle).toBeFalsy();
+
+  toolbox.changeCategories([]);
+  expect(toolbox.showCategoryTitle).toBeTruthy();
+});
+
 test("toolbox load custom/composite questions", (): any => {
   ComponentCollection.Instance.add({
     name: "newquestion",
@@ -164,10 +203,10 @@ test("toolbox load custom/composite questions", (): any => {
 
 test("toolbox categories + allowExpandMultipleCategories property", (): any => {
   var toolbox = new QuestionToolbox([
-    "text",
-    "dropdown",
-    "checkbox",
     "radiogroup",
+    "checkbox",
+    "dropdown",
+    "text",
     "comment",
     "matrix"
   ]);
