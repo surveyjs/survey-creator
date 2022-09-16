@@ -71,7 +71,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
         }}
       >
         <div className="sv-action__content">
-          {(this.isCompact && item.needSeparator) ? (
+          {(item.needSeparator) ? (
             <div className="svc-toolbox__category-separator"></div>
           ) : null}
           {itemComponent}
