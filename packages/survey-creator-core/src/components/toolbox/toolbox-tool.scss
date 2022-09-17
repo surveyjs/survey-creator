@@ -140,7 +140,17 @@
 
 .svc-toolbox-popup {
   .sv-list__item {
-    padding: calcSize(1.5) calcSize(5);
+    &:first-child {
+      .sv-list__item-separator {
+        display: none;
+      }
+    }
+    .sv-list__item-body {
+      padding-top: calcSize(1.5);
+      padding-bottom: calcSize(1.5);
+      padding-left: calcSize(2);
+      padding-right: calcSize(5);
+    }
   }
 }
 
