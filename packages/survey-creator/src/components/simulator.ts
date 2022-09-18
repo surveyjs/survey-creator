@@ -157,7 +157,7 @@ ko.components.register("survey-simulator", {
   template: templateHtml,
 });
 
-export var DEFAULT_MONITOR_DPI = (!!window ? window.devicePixelRatio : 1) * 96;
+export var DEFAULT_MONITOR_DPI = (window !== "undefined" ? window.devicePixelRatio : 1) * 96;
 export var simulatorDevices = {
   desktop: {
     deviceType: "desktop",
