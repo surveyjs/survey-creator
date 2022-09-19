@@ -98,14 +98,7 @@ svc-toolbox {
     display: flex;
     padding-top: calcSize(0.5);
     flex-direction: column;
-  }
-}
-
-.svc-creator__toolbox--left {
-  .svc-toolbox__tool {
-    .sv-action__content {
-      align-items: flex-start;
-    }
+    align-items: flex-start;
   }
 }
 
