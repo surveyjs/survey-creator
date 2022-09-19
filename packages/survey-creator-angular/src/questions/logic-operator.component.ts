@@ -19,7 +19,7 @@ export class LogicOperatorComponent extends QuestionAngular<QuestionDropdownMode
     this.dropdownListModel?.onClear(event);
   }
   keyup(event: any) {
-    this.dropdownListModel?.onKeyUp(event);
+    this.dropdownListModel?.keyHandler(event);
   }
   override ngOnInit(): void {
     super.ngOnInit();
