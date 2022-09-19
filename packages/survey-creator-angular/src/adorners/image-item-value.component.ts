@@ -29,7 +29,7 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
     }
   }
   protected getPropertiesToTrack(): string[] {
-    return ["componentName", "componentData"];
+    return ["creator", "question", "item"];
   }
   protected getModel(): ImageItemValueWrapperViewModel {
     return this.adorner;

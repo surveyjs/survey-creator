@@ -29,7 +29,7 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
     }
   }
   protected getPropertiesToTrack(): string[] {
-    return ["componentName", "componentData"];
+    return ["creator", "question", "item"];
   }
   protected getModel(): ItemValueWrapperViewModel {
     return this.adorner;
