@@ -42,12 +42,15 @@ import { StringEditorComponent } from "./string-editor.component";
 import { PageNavigatorComponent } from "./page-navigator/page-navigator.component";
 import { PageNavigatorItemComponent } from "./page-navigator/page-navigator-item.component";
 import { LogicOperatorComponent } from "./questions/logic-operator.component";
+import { MatrixCellComponent } from "./adorners/matrix-cell.component";
+import { QuestionEditorComponent } from "./question-editor.component";
+import { CellQuestionDropdownComponent } from "./adorners/cell-question-dropdown.component";
 
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
-    ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent],
+    ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],
