@@ -1,5 +1,5 @@
 <ng-template #template>
-  <div (pointerdown)="adorner.onPointerDown($event)" [class]="adorner.getRootCss()" data-bind="attr: attributes">
+  <div (pointerdown)="adorner.onPointerDown($event)" [class]="adorner.getRootCss()" [attr.data-sv-drop-target-item-value]="adorner.isDraggable ? this.item.value : null" #container>
     <div class="svc-image-item-value-wrapper__ghost" [style]="getNewItemStyle()"></div>
 
     <div class="svc-image-item-value-wrapper__content">

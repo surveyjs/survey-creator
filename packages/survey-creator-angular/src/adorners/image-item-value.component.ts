@@ -1,8 +1,8 @@
 
-import { ChangeDetectorRef, Component, Input, ViewContainerRef } from "@angular/core";
-import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
-import { ImageItemValue, PageModel, PanelModel, Question, QuestionImagePickerModel, QuestionSelectBase, SurveyModel } from "survey-core";
-import { CreatorBase, ImageItemValueWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { AngularComponentFactory } from "survey-angular-ui";
+import { ImageItemValue, QuestionImagePickerModel } from "survey-core";
+import { CreatorBase, ImageItemValueWrapperViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
 
 @Component({
@@ -13,6 +13,7 @@ import { CreatorModelComponent } from "../creator-model.component";
 export class ImageItemValueDesignerComponent extends CreatorModelComponent<ImageItemValueWrapperViewModel> {
   @Input() componentName!: string;
   @Input() componentData!: any;
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef;
   public adorner!: ImageItemValueWrapperViewModel;
   private get creator(): CreatorBase {
     return this.componentData.data.creator;
@@ -25,7 +26,7 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
   }
   protected createModel(): void {
     if (this.componentData) {
-      this.adorner = new ImageItemValueWrapperViewModel(this.creator, this.question, this.item, <any>null, this.viewContainerRef?.element.nativeElement.nextSibling);
+      this.adorner = new ImageItemValueWrapperViewModel(this.creator, this.question, this.item, <any>null, <any>null);
     }
   }
   protected getPropertiesToTrack(): string[] {
@@ -41,11 +42,6 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
   get showDragDropGhostOnBottom(): boolean {
     return this.adorner.ghostPosition === "bottom";
   }
-  get attributes(): any {
-    return this.adorner.isDraggable
-      ? { "data-sv-drop-target-item-value": this.item.value }
-      : null;
-  }
   public blockEvent(event: MouseEvent): void {
     event.stopPropagation();
   }
@@ -53,6 +49,9 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
   getNewItemStyle(): any {
     const needStyle = !this.adorner.getIsNewItemSingle();
     return { width: needStyle ? this.question.renderedImageWidth : undefined, height: needStyle ? this.question.renderedImageHeight : undefined };
+  }
+  public ngAfterViewInit() {
+    this.adorner.itemsRoot = this.container.nativeElement;
   }
 }
 
