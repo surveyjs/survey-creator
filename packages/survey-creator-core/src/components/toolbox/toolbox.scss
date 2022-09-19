@@ -95,7 +95,24 @@ svc-toolbox {
   cursor: default;
 
   .sv-action__content {
-    display: block;
+    display: flex;
     padding-top: calcSize(0.5);
+    flex-direction: column;
+  }
+}
+
+.svc-creator__toolbox--left {
+  .svc-toolbox__tool {
+    .sv-action__content {
+      align-items: flex-start;
+    }
+  }
+}
+
+.svc-creator__toolbox--right {
+  .svc-toolbox__tool {
+    .sv-action__content {
+      align-items: flex-end;
+    }
   }
 }
