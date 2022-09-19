@@ -215,7 +215,9 @@ test("toolbox categories + allowExpandMultipleCategories property", (): any => {
     { name: "matrix", category: "matrix" }
   ]);
   expect(toolbox.activeCategory).toEqual("General");
+  expect(toolbox.categories[0].collapsed).toBeFalsy();
   toolbox.allowExpandMultipleCategories = true;
+  expect(toolbox.categories[0].collapsed).toBeTruthy();
   expect(toolbox.activeCategory).toEqual("");
   toolbox.changeCategory("dropdown", "comment");
   expect(toolbox.activeCategory).toEqual("");
@@ -230,6 +232,24 @@ test("toolbox categories + allowExpandMultipleCategories property", (): any => {
   toolbox.collapseAllCategories();
   expect(toolbox.categories[0].collapsed).toBeTruthy();
 });
+
+test("toolbox allowExpandMultipleCategories + categories property", (): any => {
+  var toolbox = new QuestionToolbox([
+    "radiogroup",
+    "checkbox",
+    "dropdown",
+    "text",
+    "comment",
+    "matrix"
+  ]);
+  toolbox.changeCategories([
+    { name: "comment", category: "comment" },
+    { name: "matrix", category: "matrix" }
+  ]);
+  toolbox.allowExpandMultipleCategories = true;
+  expect(toolbox.categories[0].collapsed).toBeTruthy();
+});
+
 test("toolbox categories + keepAllCategoriesExpanded property", (): any => {
   var toolbox = new QuestionToolbox([
     "text",

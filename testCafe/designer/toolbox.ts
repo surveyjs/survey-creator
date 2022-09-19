@@ -127,8 +127,9 @@ test.before(async (t) => {
 });
 
 test("Categories allowExpandMultipleCategories property", async (t) => {
-  await setupToolboxProperty("allowExpandMultipleCategories", true);
+
   await setupCategories(t);
+  await setupToolboxProperty("allowExpandMultipleCategories", true);
   await setupToolboxProperty("forceCompact", false);
 
   await t

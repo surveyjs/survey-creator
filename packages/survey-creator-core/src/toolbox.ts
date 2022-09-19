@@ -223,12 +223,12 @@ export class QuestionToolbox
 
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<QuestionToolboxCategory> = this.categories;
-    if(!this.allowExpandMultipleCategories) {
-      for (var i = 0; i < categories.length; i++) {
-        var category = categories[i];
-        category.collapsed = category.name !== newValue;
-      }
+    //if(!this.allowExpandMultipleCategories) {
+    for (var i = 0; i < categories.length; i++) {
+      var category = categories[i];
+      category.collapsed = category.name !== newValue;
     }
+    //}
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {
@@ -611,7 +611,7 @@ export class QuestionToolbox
     this.actions = newItems;
 
     this.hasCategories = categories.length > 1;
-    this.updateCategoriesState();
+    //this.updateCategoriesState();
     this.updateItemSeparators();
   }
   protected createCategory(): QuestionToolboxCategory {
