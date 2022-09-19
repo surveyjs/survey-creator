@@ -4,7 +4,7 @@
     <!-- ko foreach: categories -->
     <div class="svc-toolbox__category">
       <div class="svc-toolbox__category-header"
-        data-bind="click: toggleState, key2click, css: { 'svc-toolbox__category-header--collapsed': $data.toolbox.canCollapseCategories">
+        data-bind="click: toggleState, key2click, css: { 'svc-toolbox__category-header--collapsed': $data.toolbox.canCollapseCategories }">
         <span class="svc-toolbox__category-title" data-bind="text: name"></span>
         <!-- ko if: $data.toolbox.canCollapseCategories -->
         <div class="svc-toolbox__category-header__controls">
