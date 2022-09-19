@@ -1,6 +1,5 @@
 import { Action, ArrayChanges, Base, ComputedUpdater, Event, property, SurveyModel } from "survey-core";
-import { CreatorBase, CreatorAction } from "../../creator-base";
-import { getLocString } from "../../editorLocalization";
+import { CreatorBase } from "../../creator-base";
 import { IUndoRedoChange, UndoRedoManager } from "./undo-redo-manager";
 
 export class UndoRedoController extends Base {
@@ -129,7 +128,7 @@ export class UndoRedoController extends Base {
 
   public createActions() {
     const items: Array<Action> = [];
-    this.undoAction = new CreatorAction({
+    this.undoAction = new Action({
       id: "action-undo",
       iconName: "icon-undo",
       locTitleName: "ed.undo",
@@ -137,7 +136,7 @@ export class UndoRedoController extends Base {
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),
       action: () => this.undo()
     });
-    this.redoAction = new CreatorAction({
+    this.redoAction = new Action({
       id: "action-redo",
       iconName: "icon-redo",
       locTitleName: "ed.redo",

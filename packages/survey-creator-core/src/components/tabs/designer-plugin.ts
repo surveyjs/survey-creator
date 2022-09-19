@@ -1,5 +1,5 @@
 import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
-import { ICreatorPlugin, CreatorBase, CreatorAction } from "../../creator-base";
+import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
@@ -135,7 +135,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       showTitle: false
     });
 
-    this.saveSurveyAction = new CreatorAction({
+    this.saveSurveyAction = new Action({
       id: "svd-save",
       iconName: "icon-save",
       action: () => this.creator.doSave(),
@@ -150,7 +150,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       showTitle: false
     });
 
-    this.previewAction = new CreatorAction({
+    this.previewAction = new Action({
       id: "svd-preview",
       iconName: "icon-preview",
       needSeparator: true,

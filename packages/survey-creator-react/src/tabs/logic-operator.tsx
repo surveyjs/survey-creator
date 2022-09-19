@@ -23,7 +23,7 @@ export class SurveyLogicOpertor extends SurveyQuestionDropdown {
       required={this.question.isRequired}
       onChange={this.updateValueOnEvent}
       onInput={this.updateValueOnEvent}
-      onKeyUp={this.keyup}
+      onKeyUp={this.keyhandler}
       role={this.question.ariaRole}
       aria-required={this.question.ariaRequired}
       aria-label={this.question.ariaLabel}
