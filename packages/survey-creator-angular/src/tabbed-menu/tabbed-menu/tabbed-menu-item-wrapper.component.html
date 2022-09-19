@@ -1,0 +1,7 @@
+<ng-template #template>
+  <span class="svc-tabbed-menu-item-container" [class.sv-action--hidden]="!model.isVisible" [class]="model.css">
+    <div class="sv-action__content">
+      <ng-template [component]="{ name: model.component || 'svc-tabbed-menu-item', data: { model } }"></ng-template>
+    </div>
+  </span>
+</ng-template>

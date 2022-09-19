@@ -150,10 +150,10 @@ export class TestSurveyTabViewModel extends Base {
     return this.pageListItems[this.survey.pages.indexOf(this.survey.activePage)];
   }
   private getSelectPageTitle(): string {
-    return (this.activePage && this.getPageTitle(this.activePage, "survey-tester-selected")) || getLocString("ts.selectPage");
+    return (this.activePage && this.getPageTitle(this.activePage, "preview-tab:selected-page", "survey-tester-selected")) || getLocString("ts.selectPage");
   }
-  private getPageTitle(page: PageModel, reason = "survey-tester") {
-    let title = this.surveyProvider.getObjectDisplayName(page, reason, page.title);
+  private getPageTitle(page: PageModel, area = "preview-tab:page-list", reason = "survey-tester") {
+    let title = this.surveyProvider.getObjectDisplayName(page, area, reason, page.title);
     if (title === page.name && title.indexOf("page") === 0) {
       const index: number = this.survey.pages.indexOf(page);
       return editorLocalization.getString("ed.pageTypeName") + " " + (index + 1);

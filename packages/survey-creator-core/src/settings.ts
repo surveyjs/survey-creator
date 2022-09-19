@@ -72,7 +72,8 @@ export var settings = {
     maximumChoicesCount: 0,
     maximumRowsCount: 0,
     maximumRateValues: 0,
-    generalTabName: "general"
+    generalTabName: "general",
+    defaultExpandedTabName: "general"
   },
   toolbox: {
     /**
@@ -150,7 +151,7 @@ export interface ISurveyCreatorOptions {
   maximumChoicesCount: number;
   maximumRowsCount: number;
   maximumRateValues: number;
-  getObjectDisplayName(obj: Base, reason: string, displayName: string): string;
+  getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   onCanShowPropertyCallback(
     object: any,
     property: JsonObjectProperty,
@@ -233,7 +234,7 @@ export interface ISurveyCreatorOptions {
     obj: Base,
     editor: any,
     list: any[]
-  );
+  ): string;
   onConditionGetTitleCallback(
     expression: string,
     title: string
@@ -258,7 +259,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   maximumRateValues: number = settings.propertyGrid.maximumRateValues;
 
-  getObjectDisplayName(obj: Base, reason: string, displayName: string): string {
+  getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;
   }
   onCanShowPropertyCallback(
@@ -358,7 +359,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     obj: Base,
     editor: any,
     list: any[]
-  ) { }
+  ): string { return "asc"; }
   onConditionGetTitleCallback(
     expression: string,
     title: string

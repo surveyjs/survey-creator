@@ -615,11 +615,11 @@ test("deleteElement function", () => {
 
   creator.selectedElement = q2;
   creator.deleteElement(creator.selectedElement);
-  expect(creator.selectedElement["name"]).toEqual("q3");
+  expect(creator.selectedElementName).toEqual("q3");
   creator.deleteElement(creator.selectedElement);
-  expect(creator.selectedElement["name"]).toEqual("q1");
+  expect(creator.selectedElementName).toEqual("q1");
   creator.deleteElement(creator.selectedElement);
-  expect(creator.selectedElement["name"]).toEqual("page1");
+  expect(creator.selectedElementName).toEqual("survey");
 });
 
 test("Do not call onPageAdded on pages move", () => {
@@ -645,6 +645,8 @@ test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab co
   creator.selectElement(q1);
   const generalPanel = <PanelModel>(creator["designerPropertyGrid"].survey.getPanelByName("general"));
   const logicPanel = <PanelModel>(creator["designerPropertyGrid"].survey.getPanelByName("logic"));
+  expect(generalPanel.isExpanded).toBeTruthy();
+  creator.collapsePropertyTab("general");
   expect(generalPanel.isExpanded).toBeFalsy();
   creator.expandPropertyTab("general");
   expect(generalPanel.isExpanded).toBeTruthy();
@@ -706,12 +708,43 @@ test("creator.onConditionQuestionsGetList, Bug#957", () => {
   expect(questionValue.choices).toHaveLength(1);
   expect(questionValue.choices[0].value).toEqual("q2");
 });
+test("creator.onConditionQuestionsGetList, sortOrder", () => {
+  const creator = new CreatorTester();
+  creator.onConditionQuestionsGetList.add(function (sender, options) {
+    options.sortOrder = "none";
+    options.list = options.list.filter(
+      (item) => item.question.getType() === "text"
+    );
+    options.list;
+  });
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q3", type: "text" },
+      { name: "q2", type: "text" },
+      { name: "q4", type: "checkbox" },
+      { name: "q5", type: "radiogroup" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const editor = new ConditionEditor(creator.survey, question, creator);
+  expect(editor.panel.panels).toHaveLength(1);
+  const panel = editor.panel.panels[0];
+  const questionValue = panel.getQuestionByName("questionName");
+  expect(questionValue).toBeTruthy();
+  expect(questionValue.choices).toHaveLength(2);
+  expect(questionValue.choices[0].value).toEqual("q3");
+  expect(questionValue.choices[1].value).toEqual("q2");
+});
 
 test("creator.onGetObjectDisplayName, change visible name for objects", () => {
   const creator = new CreatorTester();
   let reason = "";
+  let area = "";
   creator.onGetObjectDisplayName.add(function (sender, options) {
     reason = options.reason;
+    area = options.area;
     options.displayName = options.obj.title + " [" + options.obj.name + "]";
   });
   creator.JSON = {
@@ -727,6 +760,7 @@ test("creator.onGetObjectDisplayName, change visible name for objects", () => {
   creator.selectElement(question);
   const editor = new ConditionEditor(creator.survey, question, creator);
   expect(editor.panel.panels).toHaveLength(1);
+  expect(area).toEqual("condition-editor");
   const panel = editor.panel.panels[0];
   const questionName = panel.getQuestionByName("questionName");
   expect(questionName).toBeTruthy();
@@ -740,7 +774,7 @@ test(
   () => {
     const creator = new CreatorTester();
     creator.onGetObjectDisplayName.add(function (sender, options) {
-      if (options.reason === "property-grid") {
+      if (options.reason === "property-grid" && options.area === "property-grid-header:element-list") {
         if (!!options.obj.title) {
           options.displayName = options.obj.title;
         }
@@ -748,7 +782,7 @@ test(
           options.displayName = options.obj.description;
         }
       }
-      if (options.reason === "property-grid-title") {
+      if (options.reason === "property-grid-title" && options.area === "property-grid-header:selected-element") {
         options.displayName = options.obj.name + " Properties";
       }
     });

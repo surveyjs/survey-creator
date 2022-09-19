@@ -142,17 +142,17 @@ export var propertyGridCss = {
   },
   boolean: {
     mainRoot: "spg-question spg-row__question spg-question--boolean",
-    root: "",
-    item: "spg-checkbox",
-    itemChecked: "spg-checkbox--checked",
-    itemIndeterminate: "spg-checkbox--indeterminate",
-    itemDisabled: "spg-checkbox--disabled",
+    rootCheckbox: "spg-selectbase",
+    checkboxItem: "spg-checkbox",
+    checkboxItemChecked: "spg-checkbox--checked",
+    checkboxitemIndeterminate: "spg-checkbox--indeterminate",
+    checkboxItemDisabled: "spg-checkbox--disabled",
     svgIconId: "#icon-v2check",
+    checkboxLabel: "spg-selectbase__label",
     controlCheckbox: "spg-checkbox__control",
-    label: "spg-checkbox__caption",
-    disabledLabel: "spg-checkbox__label--disabled",
-    itemDecorator: "spg-checkbox__svg",
-    materialDecorator: "spg-checkbox__rectangle"
+    checkboxControlLabel: "spg-checkbox__caption",
+    checkboxItemDecorator: "spg-checkbox__svg",
+    checkboxMaterialDecorator: "spg-checkbox__rectangle"
   },
   text: {
     root: "spg-input spg-text",
@@ -170,6 +170,7 @@ export var propertyGridCss = {
     root: "",
     small: "spg-row__question--small sd-row__question--small",
     control: "spg-input spg-dropdown sd-input sd-dropdown",
+    filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
     selectWrapper: "",
     other: "spg-comment spg-question__other",
     onError: "spg-input--error"

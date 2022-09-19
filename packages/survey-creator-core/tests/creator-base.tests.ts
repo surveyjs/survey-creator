@@ -32,8 +32,9 @@ import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
-import { DesignTimeSurveyModel, isTextInput } from "../src/creator-base";
+import { isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
+import { ConditionEditor } from "../src/property-grid/condition-survey";
 
 import {
   getElementWrapperComponentData,
@@ -194,6 +195,20 @@ test("PageAdorner - remove page if: it is the last page, there is no elements an
 
   creator.survey.pages[2].elements[0].delete();
   expect(creator.survey.pages).toHaveLength(3);
+});
+test("PageAdorner - remove page if: it is the only page, by survey was empty initially", (): any => {
+  const savedNewJSON = settings.defaultNewSurveyJSON;
+  settings.defaultNewSurveyJSON = {};
+  const creator = new CreatorTester(undefined, undefined, false);
+  creator.JSON = {};
+  expect(creator.survey.pages).toHaveLength(0);
+  creator.survey.addNewPage("page1");
+  creator.survey.pages[0].addNewQuestion("text", "q1");
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  creator.survey.pages[0].elements[0].delete();
+  expect(creator.survey.pages).toHaveLength(0);
+  expect(creator.selectedElementName).toEqual("survey");
+  settings.defaultNewSurveyJSON = savedNewJSON;
 });
 
 test("PageAdorner - do not remove page if it is last and empty but the name has been changed", (): any => {
@@ -1205,6 +1220,7 @@ test("Undo/redo survey properties", (): any => {
 });
 test("Undo/redo question adding/removing", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1", title: "Page 1" }] };
   creator.survey.pages[0].addNewQuestion("text", "q1");
   creator.survey.pages[0].addNewQuestion("text", "q2");
   expect(creator.survey.getAllQuestions()).toHaveLength(2);
@@ -1212,6 +1228,7 @@ test("Undo/redo question adding/removing", (): any => {
   creator.undo();
   expect(creator.survey.getAllQuestions()).toHaveLength(0);
   creator.redo();
+  expect(creator.survey.pages).toHaveLength(1);
   expect(creator.survey.getAllQuestions()).toHaveLength(1);
   creator.redo();
   expect(creator.survey.getAllQuestions()).toHaveLength(2);
@@ -1366,7 +1383,7 @@ test("getQuestionContentWrapperComponentName for component", (): any => {
     elementsJSON: [{ type: "rating", name: "rate1" }]
   });
   const creator = new CreatorTester();
-  const survey = new DesignTimeSurveyModel(creator, { questions: [{ type: "test", name: "q1" }] });
+  const survey = creator.createSurvey({ questions: [{ type: "test", name: "q1" }] });
   const qCustom = <QuestionCompositeModel>survey.getAllQuestions()[0];
   const q = qCustom.panelWrapper.questions[0];
   expect(q.name).toBe("rate1");
@@ -3165,3 +3182,67 @@ test("canUndo with events", (): any => {
 
   creator.undo();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
+});
+test("Reason of question Added from toolbox, onclicking add question button, on duplicated question, panel, page", (): any => {
+  const creator = new CreatorTester();
+  const reason = [];
+  creator.onQuestionAdded.add(function (sender, options) {
+    reason.push(options.reason);
+  });
+
+  creator.clickToolboxItem({ type: "text" });
+  expect(reason).toHaveLength(1);
+  expect(reason[0]).toEqual("ADDED_FROM_TOOLBOX");
+
+  creator.fastCopyQuestion(creator.survey.getAllQuestions()[0]);
+  expect(reason).toHaveLength(2);
+  expect(reason[1]).toEqual("ELEMENT_COPIED");
+
+  const pageAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  pageAdorner.addNewQuestion(pageAdorner, undefined);
+  expect(reason).toHaveLength(3);
+  expect(reason[2]).toEqual("ADDED_FROM_PAGEBUTTON");
+
+  creator.copyPage(creator.survey.pages[0]);
+  expect(reason).toHaveLength(6);
+  expect(reason[3]).toEqual("ELEMENT_COPIED");
+  expect(reason[4]).toEqual("ELEMENT_COPIED");
+  expect(reason[5]).toEqual("ELEMENT_COPIED");
+});
+test("Initial Property Grid category expanded state", (): any => {
+  const creator = new CreatorTester();
+  let survey: SurveyModel = undefined;
+  const getCategoryName = (): string => {
+    if(!survey) return "";
+    const panels = survey.getAllPanels();
+    for(var i = 0; i < panels.length; i ++) {
+      const p = <PanelModel>panels[i];
+      if(p.state === "expanded") return p.name;
+    }
+    return "";
+  };
+  creator.onPropertyGridSurveyCreated.add((sender, options) => {
+    survey = options.survey;
+  });
+  const defaultJSON = settings.defaultNewSurveyJSON;
+  settings.defaultNewSurveyJSON = {};
+  creator.JSON = {};
+  expect(getCategoryName()).toBeFalsy();
+  creator.survey.addNewPage("page1");
+  creator.selectElement(creator.survey.getPageByName("page1"));
+  expect(getCategoryName()).toEqual("general");
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(getCategoryName()).toEqual("general");
+  creator.clickToolboxItem({ type: "text" });
+  expect(getCategoryName()).toEqual("general");
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(getCategoryName()).toEqual("general");
+  creator.JSON = {};
+  expect(getCategoryName()).toBeFalsy();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"), "visibleIf");
+  (<PanelModel>(survey.getPanelByName("logic"))).collapse();
+  creator.selectElement(creator.survey.getQuestionByName("q2"));
+  expect(getCategoryName()).toEqual("general");
+  settings.defaultNewSurveyJSON = defaultJSON;
+});

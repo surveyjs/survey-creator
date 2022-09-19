@@ -1,0 +1,21 @@
+<ng-template #template>
+  <div class="svc-creator-tab__content">
+    <div class="svc-json-editor-tab__content">
+      <textarea class="svc-json-editor-tab__content-area"
+        [attr.aria-label]="model.ariaLabel"
+        [disabled]="model.readOnly"
+        [value]="model.text"
+        (change)="onChange($event)"
+        (keydown)="model.checkKey(model, $event)">
+      </textarea>
+      <button type="button" *ngIf="model.userFriendlyErrors.length !== 0" class="svc-json-editor-tab__errros_button"
+        (click)="model.toggleErrors">{{model.errorButtonText}}</button>
+      <ng-container *ngIf="model.canShowErrors">
+        <div class="svc-json-editor-tab__content-errors" *ngFor="let error of model.userFriendlyErrors">
+          <span><b>Error:</b></span>
+          <span>{{error}}</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

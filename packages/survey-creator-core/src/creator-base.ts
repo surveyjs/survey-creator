@@ -21,7 +21,8 @@ import {
   ItemValue,
   QuestionSelectBase,
   QuestionRowModel,
-  LocalizableString
+  LocalizableString,
+  ILocalizableOwner
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -75,58 +76,15 @@ export interface ICreatorPlugin {
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
 }
-
-export interface ICreatorAction extends IAction {
-  locTitleName?: string;
-  locTooltipName?: string;
-  onUpdateTitle?: () => string;
-  onUpdateTooltip?: () => string;
+//Obsolete
+export class CreatorAction extends Action {
 }
 
-export class CreatorAction extends Action implements ICreatorAction {
-  constructor(item: ICreatorAction) {
-    super(item);
-    this.updateTitle();
-  }
-  locTitleName?: string;
-  locTooltipName?: string;
-  onUpdateTitle?: () => string;
-  onUpdateTooltip?: () => string;
-  public updateTitle(): void {
-    if (!!this.onUpdateTooltip) {
-      this.setTooltip(this.onUpdateTooltip());
-    } else {
-      if (!!this.locTooltipName) {
-        this.setTooltip(editorLocalization.getString(this.locTooltipName));
-      }
-    }
-    if (!!this.onUpdateTitle) {
-      this.setTitle(this.onUpdateTitle());
-    } else {
-      if (!!this.locTitleName) {
-        this.setTitle(editorLocalization.getString(this.locTitleName));
-      }
-    }
-  }
-  private setTitle(newVal: string): void {
-    this.title = newVal;
-    if (!!this.innerItem) {
-      this.innerItem.title = newVal;
-    }
-  }
-  private setTooltip(newVal: string): void {
-    this.tooltip = newVal;
-    if (!!this.innerItem) {
-      this.innerItem.tooltip = newVal;
-    }
-  }
-}
-
-export interface ITabbedMenuItem extends ICreatorAction {
+export interface ITabbedMenuItem extends IAction {
   componentContent: string;
   renderTab?: () => any;
 }
-export class TabbedMenuItem extends CreatorAction implements ITabbedMenuItem {
+export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   constructor(item: ITabbedMenuItem) {
     super(item);
   }
@@ -163,7 +121,13 @@ export type toolboxLocationType = "left" | "right" | "sidebar";
  * Base class for Survey Creator.
  */
 export class CreatorBase extends Base
-  implements ISurveyCreatorOptions, ICreatorSelectionOwner {
+  implements ISurveyCreatorOptions, ICreatorSelectionOwner, ILocalizableOwner {
+  //ILocalizableOwner
+  public getMarkdownHtml(text: string, name: string): string { return null; }
+  public getRenderer(name: string): string { return null; }
+  public getRendererContext(locStr: LocalizableString): any { return locStr; }
+  public getProcessedText(text: string): string { return text; }
+  public getLocale(): string { return this.locale; }
   /**
    * Specifies whether to display the Designer tab.
    *
@@ -362,6 +326,9 @@ export class CreatorBase extends Base
     index?: number
   ) {
     const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
+    if(!!locStrName) {
+      title = undefined;
+    }
     const tab: TabbedMenuItem = new TabbedMenuItem({
       id: name,
       locTitleName: locStrName,
@@ -425,22 +392,35 @@ export class CreatorBase extends Base
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
-   * The event allows to display the custom name for objects: questions, pages and panels. By default the object name is using. You may show object title by setting showObjectTitles property to true.
-   * Use this event, if you want custom display name for objects.
-   *- sender the survey creator object that fires the event
-   *- options.obj the survey object, Survey, Page, Panel or Question
-   *- options.reason the name of the UI that requests the object display name.
-   *- options.displayName change this property to show your custom display name for the object
-   *
-   * The list of possible values in options.reason:
-   *- "condition" - raised from Condition modal window or on setup condition in a logic tab
-   *- "survey-tester" - raised from page selector list in "Preview" tab
-   *- "survey-tester-selected" - raised on setting page selector title in "Preview" tab
-   *- "survey-translation" - raised from translation tab
-   *- "property-editor" - raised on showing question property editor, for example "gotoName". It is raised for all elements (questions) in the dropdown.
-   *- "property-grid" - raised from showing object selector for property grid in "Designer" tab.
-   *- "property-grid-title" - raised on rendering selected object title in property grid in "Designer" tab.
-   * @see showObjectTitles
+   * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
+   * 
+   * Handle this event to replace survey element names in the UI with custom display texts.
+   * If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/surveycreator#showObjectTitles) property instead of handling this event.
+   * 
+   * The event handler accepts the following arguments:
+   * 
+   * - `sender`- A Survey Creator instance that raised the event.
+   * - `options.obj` - The instance of a survey element (survey, page, question, or panel) whose name has been requested.
+   * - `options.area` - A Survey Creator UI element that requests the display name.
+   *   - `"page-selector"` - Page selector on the design surface
+   *   - `"condition-editor"` - Condition pop-up window or drop-down menus that allow users to select questions in the Logic tab
+   *   - `"logic-tab:question-filter"` - Question filter in the Logic tab
+   *   - `"logic-tab:question-selector"` - Question selector on editing actions in the Logic tab
+   *   - `"preview-tab:page-list"` - Page list in the Preview tab
+   *   - `"preview-tab:selected-page"` - Selected page name in the Preview tab
+   *   - `"property-grid:property-editor"` - Property editors in the Property Grid
+   *   - `"property-grid-header:element-list"` - Survey element list in the header of the Property Grid
+   *   - `"property-grid-header:selected-element"` - Selected survey element in the header of the Property Grid
+   *   - `"translation-tab"` - Translation tab
+   * - `options.displayName` - Modify this property to set a custom display text for the survey element.
+   * - `options.reason` - Obsolete. Use the `options.area` property instead.
+   *   - `"condition"` - Use the `"condition-editor"` value of `options.area` instead.
+   *   - `"survey-tester"` - Use the `"preview-tab:page-list"` value of `options.area` instead.
+   *   - `"survey-tester-selected"` - Use the `"preview-tab:selected-page"` value of `options.area` instead.
+   *   - `"survey-translation"` - Use the `"translation-tab"` value of `options.area` instead.
+   *   - `"property-editor"` - Use the `"property-grid:property-editor"` value of `options.area` instead.
+   *   - `"property-grid"` - Use the `"property-grid-header:element-list"` value of `options.area` instead.
+   *   - `"property-grid-title"` - Use the `"property-grid-header:selected-element"` value of `options.area` instead.
    */
   public onGetObjectDisplayName: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -706,6 +686,7 @@ export class CreatorBase extends Base
     *- options.propertyName  the name of the edited property.
     *- options.editor the instance of Property Editor.
     *- options.list the list of the questions available for condition
+    *- options.sortOrder "asc" (default) | "none". Change it to "none", if you don't want to sort your condition list
     */
   public onConditionQuestionsGetList: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -792,6 +773,7 @@ export class CreatorBase extends Base
    *- sender the survey creator object that fires the event
    *- options.question a new added survey question. Survey.Question object
    *- options.page the survey Page object where question has been added.
+   *- options.reason how question has been added via UI: ADDED_FROM_TOOLBOX, ADDED_FROM_PAGEBUTTON, ELEMENT_COPIED.
    */
   public onQuestionAdded: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -1128,7 +1110,7 @@ export class CreatorBase extends Base
    */
   public allowChangeThemeInPreview = true;
 
-  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem> = new TabbedMenuContainer();
+  public tabbedMenu: AdaptiveActionContainer<TabbedMenuItem>;
 
   get tabs() {
     return this.tabbedMenu.actions;
@@ -1158,11 +1140,12 @@ export class CreatorBase extends Base
    * You can set it to 'de' - German, 'fr' - French and so on.
    */
   public get locale(): string {
-    return editorLocalization.currentLocale;
+    return this.getPropertyValue("locale", editorLocalization.currentLocale);
   }
   public set locale(value: string) {
     if (editorLocalization.currentLocale === value) return;
     editorLocalization.currentLocale = value;
+    this.setPropertyValue("locale", value);
     this.toolbox.updateTitles();
     this.refreshPlugin();
     const selEl = this.selectedElement;
@@ -1171,20 +1154,11 @@ export class CreatorBase extends Base
       this.selectElement(selEl);
     }
     this.locStrsChanged();
-    this.tabs.forEach(item => (<TabbedMenuItem>item).updateTitle());
-    this.updateActionsLocale(this.toolbar.actions);
   }
-  private updateActionsLocale(actions: Array<Action>): void {
-    if (!Array.isArray(actions)) return;
-    actions.forEach(item => {
-      if (!!(<any>item).updateTitle) {
-        (<any>item).updateTitle();
-      }
-      if (!!item.popupModel && !!item.popupModel.contentComponentData && !!item.popupModel.contentComponentData.model) {
-        const model = item.popupModel.contentComponentData.model;
-        this.updateActionsLocale(model.actions);
-      }
-    });
+  public locStrsChanged(): void {
+    super.locStrsChanged();
+    this.tabbedMenu.locStrsChanged();
+    this.toolbar.locStrsChanged();
   }
   private refreshPlugin() {
     const plugin = this.currentPlugin;
@@ -1239,6 +1213,7 @@ export class CreatorBase extends Base
    * The event is called when creator active tab is changed.
    *- sender the survey creator object that fires the event
    *- options.tabName the name of new active tab
+   *- options.model the instance of the model of the new active tab
    */
   public onActiveTabChanged: Survey.Event<
     (sender: CreatorBase, options: any) => any,
@@ -1302,6 +1277,9 @@ export class CreatorBase extends Base
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
     this.toolbarValue = new ToolbarActionContainer(this);
+    this.toolbarValue.locOwner = this;
+    this.tabbedMenu = new TabbedMenuContainer();
+    this.tabbedMenu.locOwner = this;
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sidebar = new SidebarModel(this);
     this.setOptions(this.options);
@@ -1669,7 +1647,13 @@ export class CreatorBase extends Base
     return this.surveyValue;
   }
   private existingPages: {};
-  protected initSurveyWithJSON(json: any, clearState: boolean) {
+  private isInitialSurveyEmptyValue: boolean;
+  /**
+   * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.
+   * @returns true if initial survey doesn't have any elements or properties
+   */
+  public get isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
+  protected initSurveyWithJSON(json: any, clearState: boolean): void {
     // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};
     const survey = this.createSurvey({});
@@ -1677,6 +1661,7 @@ export class CreatorBase extends Base
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
+    this.isInitialSurveyEmptyValue = survey.isEmpty;
     survey.logoPosition = "right";
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
@@ -1846,28 +1831,19 @@ export class CreatorBase extends Base
     return !!classInfo && classInfo.name === typeName;
   }
 
+  private addNewElementReason: string;
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
-    var options = { question: question, page: page };
+    var options = { question: question, page: page, reason: this.addNewElementReason };
     this.onQuestionAdded.fire(this, options);
-    /*
-    if (parentPanel.elements.indexOf(question) !== -1) {
-      this.surveyObjects.addElement(question, parentPanel);
-    }
-    */
   }
   @ignoreUndoRedo()
   private doOnPanelAdded(panel: PanelModel, parentPanel: any) {
     var page = this.getPageByElement(panel);
-    var options = { panel: panel, page: page };
+    var options = { panel: panel, page: page, reason: this.addNewElementReason };
     this.onPanelAdded.fire(this, options);
-    /*
-    if (parentPanel.elements.indexOf(panel) !== -1) {
-      this.surveyObjects.addElement(panel, parentPanel);
-    }
-    */
   }
   @ignoreUndoRedo()
   private doOnPageAdded(page: PageModel) {
@@ -1961,19 +1937,23 @@ export class CreatorBase extends Base
 
   public getObjectDisplayName(
     obj: Base,
+    area: string,
     reason: string = undefined,
     displayName: string = undefined
   ): string {
     if (!displayName) {
       displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
     }
-    var options = { obj: obj, displayName: displayName, reason: reason };
+    var options = { obj: obj, displayName: displayName, area: area, reason: reason };
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
   }
 
   public createSurvey(json: any = {}, reason: string = "designer"): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
+    if (reason === "designer" || reason === "modal-question-editor") {
+      initializeDesignTimeSurveyModel(survey, this);
+    }
     survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "test") {
       (<any>survey).locale = editorLocalization.currentLocale;
@@ -1982,8 +1962,6 @@ export class CreatorBase extends Base
     return survey;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
-    if (reason === "designer" || reason === "modal-question-editor")
-      return new DesignTimeSurveyModel(this, json);
     return new SurveyModel(json);
   }
   private _stateValue: string;
@@ -2120,13 +2098,14 @@ export class CreatorBase extends Base
     if (panel) {
       parent = panel;
     }
+    this.addNewElementReason = modifiedType;
     const currentRow = this.findRowByElement(selectedElement, parent);
     if (currentRow && this.isRowMultiline(currentRow)) {
       this.addElemenMultiline(parent, element, index, currentRow);
     } else {
       parent.addElement(element, index);
     }
-
+    this.addNewElementReason = "";
     this.setModified({ type: modifiedType, question: element });
   }
 
@@ -2301,6 +2280,11 @@ export class CreatorBase extends Base
     } else {
       this.survey.pages.push(newPage);
     }
+    this.addNewElementReason = "ELEMENT_COPIED";
+    newPage.questions.forEach(q => this.doOnQuestionAdded(q, q.parent));
+    const panels: any = newPage.getPanels();
+    if(Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
+    this.addNewElementReason = "";
     return newPage;
   }
 
@@ -2503,19 +2487,35 @@ export class CreatorBase extends Base
     */
     return isValid;
   }
+  private getPropertyGridExpandedCategory(): string {
+    if(!this.designerPropertyGrid) return undefined;
+    const panels = this.designerPropertyGrid.survey.getAllPanels();
+    for(var i = 0; i < panels.length; i ++) {
+      if((<PanelModel>panels[i]).isExpanded) return panels[i].name;
+    }
+    return "";
+  }
+  private expandCategoryIfNeeded(): void {
+    const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
+    if(!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
+      const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
+      if(!!panel) {
+        panel.expand();
+      }
+    }
+  }
   private selectionChanged(element: Base, propertyName?: string, focus = true) {
     this.survey.currentPage = this.getCurrentPageByElement(element);
     this.selectionHistoryController.onObjSelected(element);
     if (this.designerPropertyGrid) {
       this.designerPropertyGrid.obj = element;
-
       if (!propertyName) {
         propertyName = this.designerPropertyGrid.currentlySelectedProperty;
       }
-
       if (!!propertyName) {
         this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
       }
+      this.expandCategoryIfNeeded();
       this.selectFromStringEditor = false;
     }
     var options = { newSelectedElement: element };
@@ -2528,13 +2528,13 @@ export class CreatorBase extends Base
     if (!!element["parentQuestion"]) return this.getCurrentPageByElement(element["parentQuestion"]);
     return undefined;
   }
-  public clickToolboxItem(newElement: any, panel: IPanel = null) {
+  public clickToolboxItem(newElement: any, panel: IPanel = null, modifiedType: string = "ADDED_FROM_TOOLBOX") {
     if (!this.readOnly) {
       if (newElement["getType"] === undefined) {
         newElement = this.createNewElement(newElement);
       }
       this.survey.lazyRendering = false;
-      this.doClickQuestionCore(newElement, "ADDED_FROM_TOOLBOX", -1, panel);
+      this.doClickQuestionCore(newElement, modifiedType, -1, panel);
       this.selectElement(newElement);
     }
   }
@@ -2879,11 +2879,13 @@ export class CreatorBase extends Base
     obj: Base,
     editor: any,
     list: any[]
-  ): void {
+  ): string {
+    if(this.onConditionQuestionsGetList.isEmpty) return "asc";
     var options = {
       propertyName: propertyName,
       obj: obj,
       editor: editor,
+      sortOrder: "asc",
       list: list
     };
     this.onConditionQuestionsGetList.fire(this, options);
@@ -2893,6 +2895,7 @@ export class CreatorBase extends Base
         list.push(options.list[i]);
       }
     }
+    return options.sortOrder;
   }
   onConditionGetTitleCallback(
     expression: string,
@@ -3044,7 +3047,7 @@ export class CreatorBase extends Base
       json = toolboxItem.json;
     }
     let newElement = this.createNewElement(json);
-    this.clickToolboxItem(newElement, panel);
+    this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
   createIActionBarItemByClass(className: string, title: string, iconName: string): Action {
     return new Action({
@@ -3156,67 +3159,72 @@ export class StylesManager {
   }
 }
 
-export class DesignTimeSurveyModel extends SurveyModel {
-  constructor(public creator: CreatorBase, jsonObj?: any) {
-    super(jsonObj);
-  }
-  public isPopupEditorContent = false;
+export function initializeDesignTimeSurveyModel(model: any, creator: CreatorBase) {
+  model.creator = creator;
+  model.isPopupEditorContent = false;
 
-  public getElementWrapperComponentName(element: any, reason?: string): string {
+  const getElementWrapperComponentNamePrev = model.getElementWrapperComponentName;
+  model.getElementWrapperComponentName = (element: any, reason?: string): string => {
     let componentName = getElementWrapperComponentName(
       element,
       reason,
-      this.isPopupEditorContent
+      model.isPopupEditorContent
     );
 
-    return componentName || super.getElementWrapperComponentName(element, reason);
-  }
-  public getQuestionContentWrapperComponentName(element: any, reason?: string): string {
+    return componentName || getElementWrapperComponentNamePrev.call(model, element, reason);
+  };
+
+  const getQuestionContentWrapperComponentNamePrev = model.getQuestionContentWrapperComponentName;
+  model.getQuestionContentWrapperComponentName = (element: any, reason?: string): string => {
     let componentName = getQuestionContentWrapperComponentName(element);
     return (
-      componentName || super.getQuestionContentWrapperComponentName(element)
+      componentName || getQuestionContentWrapperComponentNamePrev.call(model, element, reason)
     );
-  }
+  };
 
-  public getElementWrapperComponentData(element: any, reason?: string): any {
-    const data = getElementWrapperComponentData(element, reason, this.creator);
+  const getElementWrapperComponentDataPrev = model.getElementWrapperComponentData;
+  model.getElementWrapperComponentData = (element: any, reason?: string): any => {
+    const data = getElementWrapperComponentData(element, reason, creator);
 
-    return data || super.getElementWrapperComponentData(element);
-  }
+    return data || getElementWrapperComponentDataPrev.call(model, element, reason);
+  };
 
-  public getRowWrapperComponentName(row: QuestionRowModel): string {
+  model.getRowWrapperComponentName = (row: QuestionRowModel): string => {
     return "svc-row";
-  }
-  public getRowWrapperComponentData(row: QuestionRowModel): any {
+  };
+
+  model.getRowWrapperComponentData = (row: QuestionRowModel): any => {
     return {
-      creator: this.creator,
+      creator: creator,
       row
     };
-  }
+  };
 
-  public getItemValueWrapperComponentName(item: ItemValue, question: QuestionSelectBase): string {
+  model.getItemValueWrapperComponentName = (item: ItemValue, question: QuestionSelectBase): string => {
     return getItemValueWrapperComponentName(item, question);
-  }
-  public getItemValueWrapperComponentData(item: ItemValue, question: QuestionSelectBase): any {
-    return getItemValueWrapperComponentData(item, question, this.creator);
-  }
+  };
 
-  public getRendererForString(element: Base, name: string): string {
-    if (!this.creator.readOnly && isStringEditable(element, name)) {
+  model.getItemValueWrapperComponentData = (item: ItemValue, question: QuestionSelectBase): any => {
+    return getItemValueWrapperComponentData(item, question, creator);
+  };
+
+  model.getRendererForString = (element: Base, name: string): string => {
+    if (!creator.readOnly && isStringEditable(element, name)) {
       return editableStringRendererName;
     }
     return undefined;
-  }
-  public getRendererContextForString(element: Base, locStr: LocalizableString): any {
-    if (!this.creator.readOnly && isStringEditable(element, locStr.name)) {
+  };
+
+  model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
+    if (!creator.readOnly && isStringEditable(element, locStr.name)) {
       return {
-        creator: this.creator,
+        creator: creator,
         element,
         locStr
       };
     }
     return <any>locStr;
-  }
+  };
 }
 
 export const editableStringRendererName = "svc-string-editor";

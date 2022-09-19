@@ -93,7 +93,7 @@
   padding: calcSize(1) 0;
 }
 
-.st-table__cell:first-child {
+td.st-table__cell:first-of-type {
   @include defaultBold;
   color: $foreground;
   max-width: 300px;
@@ -104,7 +104,7 @@
   }
 }
 
-.st-panel-indent .st-table__cell:first-child {
+.st-panel-indent .st-table__cell:first-of-type {
   span {
     padding-left: calcSize(6);
   }

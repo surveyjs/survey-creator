@@ -1,0 +1,7 @@
+<ng-template #template>
+  <div class="svc-tabbed-menu" #container>
+    <ng-container *ngFor="let action of model.renderedActions">  
+      <svc-tabbed-menu-item-wrapper [model]="action"></svc-tabbed-menu-item-wrapper>
+    </ng-container>
+  </div>
+</ng-template>

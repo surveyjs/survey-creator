@@ -122,6 +122,7 @@ export interface IPropertyGridEditor {
     options: ISurveyCreatorOptions
   ) => any;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
+  validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any) => string;
   onAfterRenderQuestion?: (
     obj: Base,
     prop: JsonObjectProperty,
@@ -220,6 +221,13 @@ export var PropertyGridEditorCollection = {
     if (!!res && !!res.onCreated) {
       res.onCreated(obj, question, prop, options);
     }
+  },
+  validateValue(obj: Base, question: Question, prop: JsonObjectProperty, value: any): string {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.validateValue) {
+      return res.validateValue(obj, question, prop, value);
+    }
+    return "";
   },
   onAfterRenderQuestion(obj: Base, prop: JsonObjectProperty, evtOptions: any) {
     var res = this.getEditor(prop);
@@ -866,18 +874,17 @@ export class PropertyGridModel {
     setSurveyJSONForPropertyGrid(res, true, false);
     return res;
   }
+  private validateQuestionValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
+    if (question.isRequired && Helpers.isValueEmpty(val))
+      return editorLocalization.getString("pe.propertyIsEmpty");
+    const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val);
+    if(!!editorError) return editorError;
+    return this.options.onGetErrorTextOnValidationCallback(prop.name, obj, val);
+  }
   private onValidateQuestion(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    if (q.isRequired && Helpers.isValueEmpty(options.value)) {
-      options.error = editorLocalization.getString("pe.propertyIsEmpty");
-      return;
-    }
-    options.error = this.options.onGetErrorTextOnValidationCallback(
-      q.property.name,
-      <any>this.obj,
-      options.value
-    );
+    options.error = this.validateQuestionValue(this.obj, q, q.property, options.value);
   }
   private onValueChanging(options: any) {
     var q = options.question;
@@ -985,17 +992,9 @@ export class PropertyGridModel {
   }
   private onMatrixCellValidate(options: any) {
     if (this.isCellCreating) return;
-    var matrix = <QuestionMatrixDynamicModel>options.question;
-    var column = matrix.getColumnByName(options.columnName);
-    if (!!column && column.isRequired && Helpers.isValueEmpty(options.value)) {
-      options.error = editorLocalization.getString("pe.propertyIsEmpty");
-      return;
-    }
-    options.error = this.options.onGetErrorTextOnValidationCallback(
-      options.columnName,
-      <any>options.row.editingObj,
-      options.value
-    );
+    const q = options.row.getQuestionByColumnName(options.columnName);
+    if(!q || !q.property) return;
+    options.error = this.validateQuestionValue(<any>options.row.editingObj, q, q.property, options.value);
   }
   private onGetMatrixRowAction(options: any) {
     PropertyGridEditorCollection.onGetMatrixRowAction(
@@ -1331,7 +1330,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    var choices = prop.getChoices(obj);
+    var choices = this.getChoices(obj, prop);
 
     var json: any = {
       type: this.renderAsButtonGroup(prop, choices)
@@ -1346,6 +1345,9 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       json.optionsCaption = emptyValueItem.text;
     }
     return json;
+  }
+  private getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
+    return prop.getChoices(obj, (choices: any) => {});
   }
   protected get canRenderAsButtonGroup(): boolean {
     return creatorSettings.propertyGrid.useButtonGroup;
@@ -1510,7 +1512,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     var showTitles = !!options && options.showTitlesInExpressions;
     var qItems = questions.map((q) => {
       let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
-      if (!!options) text = options.getObjectDisplayName(q, "property-editor", text);
+      if (!!options) text = options.getObjectDisplayName(q, "property-grid:property-editor", "property-editor", text);
       let value = this.getItemValue(<any>q);
       return { value: value, text: text };
     });

@@ -138,6 +138,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "logicTypeName",
               type: "dropdown",
+              renderAs: "logicoperator",
               searchEnabled: false,
               allowClear: false,
               title: editorLocalization.getString("pe.then"),
@@ -155,6 +156,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
             {
               name: "elementSelector",
               type: "dropdown",
+              renderAs: "logicoperator",
               allowClear: false,
               titleLocation: "hidden",
               isRequired: true,
@@ -424,6 +426,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       text = el.locTitle.renderedHtml;
     }
     if (!text) text = el.name;
+    if(el.isQuestion) {
+      text = this.options.getObjectDisplayName(el, "logic-tab:question-selector", "condition", text);
+    }
     return text;
   }
 

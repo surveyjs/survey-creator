@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionTriggerEditorElement, logicDetailButtonElement, logicDropdownValueSelector, getListItemByText, getBarItemByText, logicActionTriggerQuestionsElement, tableRulesSelector, logicAddNewRuleButton } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionTriggerEditorElement, logicDetailButtonElement, logicDropdownValueSelector, getListItemByText, getBarItemByText, logicActionTriggerQuestionsElement, tableRulesSelector, logicAddNewRuleButton, getDropdownValue } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 
 const title = "Logic tab";
@@ -241,7 +241,7 @@ test("Edit Logic rule", async (t) => {
     .expect(logicQuestionSelector.textContent).contains("q1")
     .expect(logicOperatorSelector.textContent).contains("Equals")
 
-    .expect(logicDropdownValueSelector.textContent).eql("item1")
+    .expect(getDropdownValue(logicDropdownValueSelector)).eql("item1")
     .click(logicDropdownValueSelector)
     .click(getListItemByText("item2"))
 
@@ -377,7 +377,7 @@ async function check2Rule(t: TestController) {
     .expect(cellRules.nth(1).innerText).eql(newRuleDisplayText)
     .expect(logicQuestionSelector.textContent).contains("q1")
     .expect(logicOperatorSelector.textContent).contains("Equals")
-    .expect(logicDropdownValueSelector.textContent).eql("item2")
+    .expect(getDropdownValue(logicDropdownValueSelector)).eql("item2")
     .expect(logicActionSelector.textContent).contains("Show (hide) question")
     .expect(logicQuestionSelector.nth(1).textContent).contains("q3");
 }

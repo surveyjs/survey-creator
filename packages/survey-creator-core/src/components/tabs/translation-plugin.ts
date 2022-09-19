@@ -1,5 +1,5 @@
-import { ListModel, Action, IAction, Base, createDropdownActionModel } from "survey-core";
-import { CreatorBase, ICreatorPlugin, CreatorAction } from "../../creator-base";
+import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel, ComputedUpdater, surveyLocalization } from "survey-core";
+import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { Translation } from "./translation";
@@ -46,8 +46,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;
 
-    this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
-    this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
+    this.mergeLocaleWithDefaultAction.title = this.createMergeLocaleWithDefaultActionTitleUpdater();
+    this.mergeLocaleWithDefaultAction.tooltip = this.createMergeLocaleWithDefaultActionTitleUpdater();
     this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
 
     this.filterPageAction.visible = this.creator.survey.pageCount > 1;
@@ -62,7 +62,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterPageAction.data.setItems([{ id: null, title: this.showAllPagesText }].concat(
       this.creator.survey.pages.map((page) => ({
         id: page.name,
-        title: this.creator.getObjectDisplayName(page, "survey-translation", page.title)
+        title: this.getPageDisplayText(page)
       }))
     ), false);
 
@@ -95,11 +95,20 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.sidebarTab.visible = false;
     this.filterStringsAction.visible = false;
     this.filterPageAction.visible = false;
+    this.mergeLocaleWithDefaultAction.title = undefined;
+    this.mergeLocaleWithDefaultAction.tooltip = undefined;
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
 
     return true;
+  }
+  private createMergeLocaleWithDefaultActionTitleUpdater(): any {
+    return <any>new ComputedUpdater<string>(() => {
+      let loc = this.creator.locale;
+      if(!loc) loc = "en";
+      return editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"](surveyLocalization.defaultLocale);
+    });
   }
   public get selectLanguageOptionsCaption() {
     return editorLocalization.getString("ed.translationAddLanguage");
@@ -119,20 +128,16 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   public get importFromCSVText(): string {
     return editorLocalization.getString("ed.translationImportFromSCVButton");
   }
-  public createActions() {
+  public createActions(): Array<Action> {
     const items: Array<Action> = [];
-    const translationMergeLocaleWithDefaultStr = (): string => editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"]("");
     this.createFilterPageAction();
     items.push(this.filterPageAction);
     this.createFilterStringsAction();
     items.push(this.filterStringsAction);
 
-    this.mergeLocaleWithDefaultAction = new CreatorAction({
+    this.mergeLocaleWithDefaultAction = new Action({
       id: "svd-translation-merge_locale_withdefault",
       visible: false,
-      //visible: this.model.canMergeLocaleWithDefault,
-      onUpdateTitle: () => { return translationMergeLocaleWithDefaultStr(); },
-      onUpdateTooltip: () => { return translationMergeLocaleWithDefaultStr(); },
       component: "sv-action-bar-item",
       mode: "small",
       needSeparator: true,
@@ -142,7 +147,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.mergeLocaleWithDefaultAction);
 
-    this.importCsvAction = new CreatorAction({
+    this.importCsvAction = new Action({
       id: "svc-translation-import",
       iconName: "icon-load",
       locTitleName: "ed.translationImportFromSCVButton",
@@ -166,7 +171,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.importCsvAction);
 
-    this.exportCsvAction = new CreatorAction({
+    this.exportCsvAction = new Action({
       id: "svc-translation-export",
       iconName: "icon-download",
       locTitleName: "ed.translationExportToSCVButton",
@@ -231,10 +236,13 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     }
   }
   private getFilterPageActionTitle(): string {
-    const pageDisplayName = this.model && this.model.filteredPage && this.creator.getObjectDisplayName(this.model.filteredPage, "survey-translation", this.model.filteredPage.title);
+    const pageDisplayName = this.model && this.model.filteredPage && this.getPageDisplayText(this.model.filteredPage);
     return pageDisplayName || this.showAllPagesText;
   }
   private getFilterStringsActionTitle(): string {
     return (this.model && !this.model.showAllStrings) ? this.showUsedStringsOnlyText: this.showAllStringsText;
+  }
+  private getPageDisplayText(page: PageModel): string {
+    return this.creator.getObjectDisplayName(page, "translation-tab", "survey-translation", page.title);
   }
 }

@@ -32,6 +32,7 @@ test("Properties on the same line", async (t) => {
     await t
       .click(question1)
       .pressKey("enter")
+      .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Input"))
       .expect(Selector("span").withExactText("Min").visible).ok()
       .expect(Selector(".spg-panel__content").filterVisible().visible).ok();
@@ -58,7 +59,7 @@ test("Values editors, keep them close", async (t) => {
         }
       ]
     };
-    await t.resizeWindow(2560, 1440);
+    await t.resizeWindow(1560, 1440);
     await setJSON(json);
 
     const question1 = Selector("[data-name=\"question1\"]");
@@ -66,6 +67,7 @@ test("Values editors, keep them close", async (t) => {
     await t
       .click(question1)
       .pressKey("enter")
+      .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Data"))
       .expect(Selector(".spg-panel__content").filterVisible().visible).ok();
 
@@ -192,7 +194,6 @@ test("Dropdown popup in property grid", async (t) => {
 
     await t
       .click(Selector(".svc-page__add-new-question"))
-      .click(getPropertyGridCategory(generalGroupName))
       .click(Selector(".spg-dropdown[aria-label='Input type']"));
 
     await takeElementScreenshot("pg-dropdown-editor.png", Selector(".svc-side-bar"), t, comparer);

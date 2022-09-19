@@ -176,9 +176,9 @@ test("Check ObjectSelectorModel", () => {
   expect(model.list.actions).toHaveLength(1 + 2 + 1 + 2 + 1 + 1);
   expect(model.list.selectedItem.title).toEqual("page1");
   expect(model.list.actions[3].visible).toBeTruthy();
-  model.list.filteredText = "date";
+  model.list.filterString = "date";
   expect(model.list.actions[3].visible).toBeFalsy();
-  model.list.filteredText = "";
+  model.list.filterString = "";
   expect(model.list.actions[3].visible).toBeTruthy();
   model.list.onItemClick(model.list.actions[3]);
   expect(selectedItem.title).toEqual("First name");

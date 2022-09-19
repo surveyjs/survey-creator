@@ -1116,6 +1116,7 @@ test("getObjectDisplayName", () => {
   var options = new EmptySurveyCreatorOptions();
   options.getObjectDisplayName = (
     obj: any,
+    area: string,
     reason: string,
     displayName
   ): string => {
@@ -1159,6 +1160,7 @@ test("options.maxLogicItemsInCondition, hide `Add Condition` on exceeding the va
   options.maxLogicItemsInCondition = 2;
   options.getObjectDisplayName = (
     obj: any,
+    area: string,
     reason: string,
     displayName
   ): string => {
