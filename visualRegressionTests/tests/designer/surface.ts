@@ -345,7 +345,7 @@ test("Panel gap between items", async (t) => {
 
 test("Panel multi-question row", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 900);
+    await t.resizeWindow(1932, 900);
     const json = {
       "logoPosition": "right",
       "pages": [
