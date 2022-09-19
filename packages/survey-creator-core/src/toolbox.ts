@@ -433,7 +433,7 @@ export class QuestionToolbox
   }
 
   /**
-   * Set it to true to expand all categories and hide expand/collapse category buttons
+   * Set it to true to show title for categories
    */
   public get showCategoryTitle(): boolean {
     return this.showCategoryTitleValue;
