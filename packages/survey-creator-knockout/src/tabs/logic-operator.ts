@@ -19,7 +19,7 @@ ko.components.register("sv-logic-operator", {
         q.dropdownListModel?.onClear(e);
       };
       const keyup = (_: any, e: any) => {
-        q.dropdownListModel?.onKeyUp(e);
+        q.dropdownListModel?.keyHandler(e);
       };
       if (!q.dropdownListModel) {
         q.dropdownListModel = new DropdownListModel(params.question);
