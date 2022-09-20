@@ -26,7 +26,7 @@ export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> 
     return (
       <div className="svc-toolbox">
         <div className="svc-toolbox__container">
-          {(this.toolbox.categories.length == 1) ?
+          {(this.toolbox.categories.length == 1 || !this.toolbox.showCategoryTitle) ?
             (<div className="svc-toolbox__category">
               {this.renderItems(this.toolbox.visibleActions)}
             </div>)

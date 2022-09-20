@@ -38,6 +38,37 @@ test("Check section", async (t) => {
   });
 });
 
+test("Test question type selector", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+
+    const surveyJSON = {
+      "showQuestionNumbers": "off",
+      "widthMode": "static",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1",
+              title: "Question 1",
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+
+    await t
+      .click(Selector(".svc-question__content"), { offsetX: 5, offsetY: 5 })
+      .expect(Selector("#convertTo").visible).ok()
+      .click(Selector("#convertTo"))
+      .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
+    await takeElementScreenshot("convert-to-popup.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+  });
+});
+
 test("Matrix column editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
@@ -314,7 +345,7 @@ test("Panel gap between items", async (t) => {
 
 test("Panel multi-question row", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 900);
+    await t.resizeWindow(1932, 900);
     const json = {
       "logoPosition": "right",
       "pages": [

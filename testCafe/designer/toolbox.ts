@@ -15,6 +15,9 @@ test("Simple click", async (t) => {
 
 async function setupCategories(t, windowWidth = 1910) {
   const changeCategories = ClientFunction(() => {
+    window["creator"].toolbox.clearCategories();
+    window["creator"].toolbox.orderedQuestions = ["radiogroup", "matrix", "matrixdropdown", "panel", "panaldynamic"];
+    window["creator"].toolbox.showCategoryTitle = true;
     window["creator"].toolbox.changeCategories([
       {
         name: "panel",
@@ -124,9 +127,10 @@ test.before(async (t) => {
 });
 
 test("Categories allowExpandMultipleCategories property", async (t) => {
+
   await setupCategories(t);
-  await setupToolboxProperty("forceCompact", false);
   await setupToolboxProperty("allowExpandMultipleCategories", true);
+  await setupToolboxProperty("forceCompact", false);
 
   await t
     .expect(categoriesHeader.count).eql(3)
